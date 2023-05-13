@@ -11,7 +11,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfIndentedTextOutput.h"
@@ -64,7 +64,7 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
     ss <<
       "Creating a print layout ";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -139,7 +139,7 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrMusicXMLPrintLayout::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -157,7 +157,7 @@ void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrMusicXMLPrintLayout::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -175,7 +175,7 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrMusicXMLPrintLayout::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -193,7 +193,7 @@ void msrMusicXMLPrintLayout::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrMusicXMLPrintLayout::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

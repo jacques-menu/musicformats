@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrScaling.h"
 
@@ -189,7 +189,7 @@ void msrScaling::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrScaling::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -207,7 +207,7 @@ void msrScaling::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrScaling::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -225,7 +225,7 @@ void msrScaling::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrScaling::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -243,7 +243,7 @@ void msrScaling::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrScaling::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

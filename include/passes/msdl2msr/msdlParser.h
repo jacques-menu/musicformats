@@ -12,7 +12,7 @@
 #ifndef ___msdlParser___
 #define ___msdlParser___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrIdentification.h"
 #include "msrMeasures.h"

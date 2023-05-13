@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfOutputFileOah.h"
 #include "mfStringsHandling.h"
@@ -144,7 +144,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> guidoGenerationOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -162,7 +162,7 @@ void guidoGenerationOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching guidoGenerationOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -180,7 +180,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> guidoGenerationOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -198,7 +198,7 @@ void guidoGenerationOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching guidoGenerationOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -216,7 +216,7 @@ void guidoGenerationOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> guidoGenerationOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -279,7 +279,7 @@ S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
     ss <<
       "Creating global generators insider OAH group";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

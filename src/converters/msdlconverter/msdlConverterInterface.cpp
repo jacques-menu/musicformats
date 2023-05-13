@@ -22,7 +22,7 @@
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfPasses.h"
 #include "mfServices.h"

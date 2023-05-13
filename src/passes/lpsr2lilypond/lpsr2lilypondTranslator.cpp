@@ -13,7 +13,7 @@
 #include <cmath>
 #include <string>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -61,6 +61,7 @@
 namespace MusicFormats
 {
 
+//______________________________________________________________________________
 // for comments highlighting in the generated Lilypond code
 const int commentFieldWidth = 30;
 
@@ -144,7 +145,7 @@ std::ostream& operator << (std::ostream& os, const S_lpsrRepeatDescr& elt)
 lpsr2lilypondTranslator::lpsr2lilypondTranslator (
   const S_msrOahGroup&  msrOpts,
   const S_lpsrOahGroup& lpsrOpts,
-  std::ostream&        lilypondCodeStream)
+  std::ostream&         lilypondCodeStream)
   : fLilypondCodeStream (
       lilypondCodeStream)
 {
@@ -297,15 +298,15 @@ if (false) // JMI
 
   // part group blocks
   fNumberOfPartGroupBlocks = -1;
-  fPartGroupBlocksCounter  =  0;
+  fPartGroupBlocksCounter =  0;
 
   // part blocks
   fNumberOfPartGroupBlockElements = -1;
-  fPartGroupBlockElementsCounter  =  0;
+  fPartGroupBlockElementsCounter =  0;
 
   // staff blocks
   fNumberOfStaffBlocksElements = -1;
-  fStaffBlocksCounter          =  0;
+  fStaffBlocksCounter =  0;
 
   if (fVisitedLpsrScore) {
     // set the parts browsing order
@@ -680,7 +681,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
       referenceAboluteDiatonicOrdinal <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -714,7 +715,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
       ", result: " << ss.str () <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -761,7 +762,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
       ", referenceAbsoluteOctave: " <<
       absoluteOctavesDifference;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -917,7 +918,7 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
           getLpsrQuarterTonesPitchesLanguageKind ()) <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1032,7 +1033,7 @@ std::stringstream ss;
       "% line " <<
       inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1048,7 +1049,7 @@ std::stringstream ss;
             " upon note " << note->asString () <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1071,7 +1072,7 @@ std::stringstream ss;
             "' upon note " << note->asString () <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1306,7 +1307,7 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
       "% line: " <<
       noteInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1618,7 +1619,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
       ", fCurrentStemKind: " <<
       msrStemKindAsString (fCurrentStemKind);
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1647,7 +1648,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
           msrStemKindAsString (stemKind) <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -3407,7 +3408,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
       ", articulation: " << articulation->asString () <<
       ", line " << articulation->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3668,7 +3669,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
       ", articulation: " << articulation->asString () <<
       ", line " << articulation->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4299,7 +4300,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
       ", line " <<
       spanner->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4438,7 +4439,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
       ", line " <<
       spanner->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4535,7 +4536,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
                   fPendingTrillSpannerForStop->getSpannerKind () <<
                   std::endl;
 
-                gWaeHandler->waeTraceWithoutLocationDetails (
+                gWaeHandler->waeTraceWithoutInputLocation (
                   __FILE__, __LINE__,
                   ss.str ());
               }
@@ -4563,7 +4564,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
                   " becomes pending" <<
                   std::endl;
 
-                gWaeHandler->waeTraceWithoutLocationDetails (
+                gWaeHandler->waeTraceWithoutInputLocation (
                   __FILE__, __LINE__,
                   ss.str ());
               }
@@ -4731,7 +4732,7 @@ std::string lpsr2lilypondTranslator::singleTremoloNotesDurationAsLilypondString 
       ", durationToUse: " <<
       durationToUse;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6027,8 +6028,9 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrHeader& elt)
     '}';
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
       " % header";
   }
 
@@ -6099,7 +6101,8 @@ void lpsr2lilypondTranslator::generateGlobalStaffSize ()
         gGlobalLpsr2lilypondOahGroup->
           getGlobalStaffSize ();
 
-    fLilypondCodeStream << std::left <<
+    fLilypondCodeStream <<
+      std::left <<
       "#(set-global-staff-size " <<
       std::setprecision (6) << globalStaffSize <<
       ")" <<
@@ -6152,7 +6155,8 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
   // title
   std::string title = header->getLilypondTitle ();
 
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "title" << " = \"" << title << "\"" <<
     std::endl;
@@ -6164,7 +6168,8 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
     std::string name  = thePair.first;
     std::string value = thePair.second;
 
-    fLilypondCodeStream << std::left <<
+    fLilypondCodeStream <<
+      std::left <<
       std::setw (fieldWidth) <<
       name << "= " <<
       generateStringAsLilypondMarkupOrDoubleQuotedString (
@@ -6175,8 +6180,9 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
-  const S_msrIdentification&          identification,
-  std::list<std::pair<std::string, std::string> >& nameStringValuePairsList)
+  const S_msrIdentification& identification,
+  std::list<std::pair<std::string, std::string> >&
+                             nameStringValuePairsList)
 {
   /*
     the values given through options have precedence
@@ -6503,8 +6509,9 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::createLilypondHeaderStringValuePairs (
-  const S_lpsrHeader&                 header,
-  std::list<std::pair<std::string, std::string> >& nameStringValuePairsList)
+  const S_lpsrHeader& header,
+  std::list<std::pair<std::string, std::string> >&
+                      nameStringValuePairsList)
 {
   /*
     the values given through options have precedence
@@ -7053,8 +7060,9 @@ void lpsr2lilypondTranslator::generatePaper (
     '}';
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
       " % paper";
   }
 
@@ -7064,8 +7072,9 @@ void lpsr2lilypondTranslator::generatePaper (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
-  const S_lpsrPaper&                     paper,
-  std::list<std::pair<std::string, msrLength> >& nameLengthValuePairsList)
+  const S_lpsrPaper& paper,
+  std::list<std::pair<std::string, msrLength> >&
+                     nameLengthValuePairsList)
 {
   Bool
     generateCommentedOutVariables =
@@ -7114,8 +7123,9 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
 }
 
 void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
-  const S_lpsrPaper&                paper,
-  std::list<std::pair<std::string, Bool> >& nameBooleanValuePairsList)
+  const S_lpsrPaper& paper,
+  std::list<std::pair<std::string, Bool> >&
+                     nameBooleanValuePairsList)
 {
   // ragged-last
   if (gLpsrOahGroup->getRaggedLastAtom ()->getSelected ()) {
@@ -7200,9 +7210,9 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaperPageSize (
-  const S_msrPageLayout&   pageLayout,
-  msrLengthUnitKind defaultLengthUnit,
-  int               fieldWidth)
+  const S_msrPageLayout& pageLayout,
+  msrLengthUnitKind      defaultLengthUnit,
+  int                    fieldWidth)
 {
   Bool
     generateCommentedOutVariables =
@@ -7227,7 +7237,8 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
       paperHeight =
         gLpsrOahGroup->getPaperHeight ();
 
-    fLilypondCodeStream << std::left <<
+    fLilypondCodeStream <<
+      std::left <<
       std::setw (fieldWidth) <<
       "paper-height = " <<
       std::setprecision (3) << paperHeight.getLengthValue () <<
@@ -7253,7 +7264,8 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
       paperWidth =
         gLpsrOahGroup->getPaperWidth ();
 
-    fLilypondCodeStream << std::left <<
+    fLilypondCodeStream <<
+      std::left <<
       std::setw (fieldWidth) <<
       "paper-width = " <<
       std::setprecision (3) << paperWidth.getLengthValue () <<
@@ -7264,9 +7276,9 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaperMargins (
-  const S_msrPageLayout&   pageLayout,
-  msrLengthUnitKind defaultLengthUnit,
-  int               fieldWidth)
+  const S_msrPageLayout& pageLayout,
+  msrLengthUnitKind      defaultLengthUnit,
+  int                    fieldWidth)
 {
   Bool
     generateCommentedOutVariables =
@@ -7291,7 +7303,8 @@ void lpsr2lilypondTranslator::generatePaperMargins (
       leftMargin =
         gLpsrOahGroup->getPaperLeftMargin ();
 
-    fLilypondCodeStream << std::left <<
+    fLilypondCodeStream <<
+      std::left <<
       std::setw (fieldWidth) <<
       "left-margin = " <<
       std::setprecision (3) << leftMargin.getLengthValue () <<
@@ -7317,7 +7330,8 @@ void lpsr2lilypondTranslator::generatePaperMargins (
       rightMargin =
         gLpsrOahGroup->getPaperRightMargin ();
 
-    fLilypondCodeStream << std::left <<
+    fLilypondCodeStream <<
+      std::left <<
       std::setw (fieldWidth) <<
       "right-margin = " <<
       std::setprecision (3) << rightMargin.getLengthValue () <<
@@ -7343,7 +7357,8 @@ void lpsr2lilypondTranslator::generatePaperMargins (
       topMargin =
         gLpsrOahGroup->getPaperTopMargin ();
 
-    fLilypondCodeStream << std::left <<
+    fLilypondCodeStream <<
+      std::left <<
       std::setw (fieldWidth) <<
       "top-margin = " <<
       std::setprecision (3) << topMargin.getLengthValue () <<
@@ -7369,7 +7384,8 @@ void lpsr2lilypondTranslator::generatePaperMargins (
       bottomMargin =
         gLpsrOahGroup->getPaperBottomMargin ();
 
-    fLilypondCodeStream << std::left <<
+    fLilypondCodeStream <<
+      std::left <<
       std::setw (fieldWidth) <<
       "bottom-margin = " <<
       std::setprecision (3) << bottomMargin.getLengthValue () <<
@@ -7392,7 +7408,8 @@ void lpsr2lilypondTranslator::generatePaperIndents (
   if (! horizontalShift) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "horizontal-shift = ";
   if (horizontalShift) {
@@ -7415,7 +7432,8 @@ void lpsr2lilypondTranslator::generatePaperIndents (
   if (! indent) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "indent = ";
   if (indent) {
@@ -7438,7 +7456,8 @@ void lpsr2lilypondTranslator::generatePaperIndents (
   if (! shortIndent) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "short-indent = ";
   if (shortIndent) {
@@ -7468,7 +7487,8 @@ void lpsr2lilypondTranslator::generatePaperSpaces (
   if (! markupSystemPpacingPadding) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "markup-system-spacing-padding = ";
   if (markupSystemPpacingPadding) {
@@ -7491,7 +7511,8 @@ void lpsr2lilypondTranslator::generatePaperSpaces (
   if (! betweenSystemSpace) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "between-system-space = ";
   if (betweenSystemSpace) {
@@ -7514,7 +7535,8 @@ void lpsr2lilypondTranslator::generatePaperSpaces (
   if (! pageTopSpace) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "page-top-space = ";
   if (pageTopSpace) {
@@ -7544,7 +7566,8 @@ void lpsr2lilypondTranslator::generatePaperCounts (
   if (pageCount < 0) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "page-count = " <<
     pageCount <<
@@ -7558,7 +7581,8 @@ void lpsr2lilypondTranslator::generatePaperCounts (
   if (systemCount < 0) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "system-count = " <<
     systemCount <<
@@ -7581,7 +7605,8 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
 
     case mfOnOffKind::kMfOnOffOn:
     case mfOnOffKind::kMfOnOffOff:
-      fLilypondCodeStream << std::left <<
+      fLilypondCodeStream <<
+        std::left <<
         std::setw (fieldWidth) <<
         "ragged-last = ";
       if (mfOnOffKindAsBool (raggedLast)) {
@@ -7605,7 +7630,8 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
 
     case mfOnOffKind::kMfOnOffOn:
     case mfOnOffKind::kMfOnOffOff:
-      fLilypondCodeStream << std::left <<
+      fLilypondCodeStream <<
+        std::left <<
         std::setw (fieldWidth) <<
         "ragged-bottom = ";
       if (mfOnOffKindAsBool (raggedBottom)) {
@@ -7629,7 +7655,8 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
 
     case mfOnOffKind::kMfOnOffOn:
     case mfOnOffKind::kMfOnOffOff:
-      fLilypondCodeStream << std::left <<
+      fLilypondCodeStream <<
+        std::left <<
         std::setw (fieldWidth) <<
         "ragged-last-bottom = ";
       if (mfOnOffKindAsBool (raggedLastBottom)) {
@@ -7653,7 +7680,8 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
 
     case mfOnOffKind::kMfOnOffOn:
     case mfOnOffKind::kMfOnOffOff:
-      fLilypondCodeStream << std::left <<
+      fLilypondCodeStream <<
+        std::left <<
         std::setw (fieldWidth) <<
         "ragged-right = ";
       if (mfOnOffKindAsBool (raggedRight)) {
@@ -7677,7 +7705,8 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
   std::string oddHeaderMarkup =
     pagePaper->getOddHeaderMarkup ();
 
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "oddHeaderMarkup = ";
   if (oddHeaderMarkup.size ()) {
@@ -7692,7 +7721,8 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
   std::string evenHeaderMarkup =
     pagePaper->getEvenHeaderMarkup ();
 
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "evenHeaderMarkup = ";
   if (evenHeaderMarkup.size ()) {
@@ -7707,7 +7737,8 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
   std::string oddFooterMarkup =
     pagePaper->getOddFooterMarkup ();
 
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "oddFooterMarkup = ";
   if (oddFooterMarkup.size ()) {
@@ -7722,7 +7753,8 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
   std::string evenFooterMarkup =
     pagePaper->getEvenFooterMarkup ();
 
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "evenFooterMarkup = ";
   if (evenFooterMarkup.size ()) {
@@ -7861,16 +7893,15 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
       std::endl;
 
     // generate the end of the voice definition
+    fLilypondCodeStream << '}';
+
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
-        '}' <<
-        "% score context";
-    }
-    else {
       fLilypondCodeStream <<
-        '}';
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
+        " % end of score context";
     }
+
     fLilypondCodeStream << std::endl;
   }
 
@@ -7896,16 +7927,15 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
   }
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLayoutVoiceContext ()) {
+    fLilypondCodeStream << '}';
+
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
-        '}' <<
-        "% voice context";
-    }
-    else {
       fLilypondCodeStream <<
-        '}';
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
+        " % end of voice context";
     }
+
     fLilypondCodeStream << std::endl;
   }
 
@@ -7963,8 +7993,6 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     fLilypondCodeStream <<
       "\\context {" <<
       std::endl;
-
-    ++gIndenter;
 
     fLilypondCodeStream <<
       "\\Score" <<
@@ -8028,12 +8056,13 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      "}" " % staff context";
+      "} % end of staff context";
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
-        " % layout";
+      fLilypondCodeStream <<
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
+        " % end of layout";
     }
 
     fLilypondCodeStream << std::endl;
@@ -8045,8 +8074,9 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     '}';
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
       " % layout";
   }
 
@@ -8136,16 +8166,16 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
 
   --gIndenter; // incremented in visitStart (S_lpsrBookBlock& elt)
 
+  fLilypondCodeStream << '}';
+
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
-      '}' <<
-      "% book";
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
+      " % end of book";
   }
 
   else {
-    fLilypondCodeStream <<
-      '}';
   }
 
   fLilypondCodeStream << std::endl;
@@ -8227,16 +8257,13 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
 
   --gIndenter; // incremented in visitStart (S_lpsrScoreBlock& elt)
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
-      '}' <<
-      "% score";
-  }
+  fLilypondCodeStream << '}';
 
-  else {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream <<
-      '}';
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
+      " % end of score";
   }
 
   fLilypondCodeStream <<
@@ -8323,8 +8350,9 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
     '}';
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
       " % bookpart";
   }
 
@@ -8371,16 +8399,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
       getParallelMusicBLockPartGroupBlocks ().size ();
 
   if (fNumberOfPartGroupBlocks > 0) {
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
-        "<<" <<
-        "% parallel music";
-    }
+    fLilypondCodeStream << "<<";
 
-    else {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
-        "<<";
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
+        " % start of parallel music";
     }
 
     fLilypondCodeStream << std::endl;
@@ -8427,16 +8452,13 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
   if (fNumberOfPartGroupBlocks > 0) {
     --gIndenter; // incremented in visitStart (S_lpsrParallelMusicBLock& elt)
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
-        ">>" <<
-        "% parallel music";
-    }
+    fLilypondCodeStream << ">>";
 
-    else {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
-        ">>";
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
+        " % end of parallel music";
     }
 
     fLilypondCodeStream << std::endl << std::endl;
@@ -8520,14 +8542,16 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
   // LPNR, page 567 jMI ???
 
   switch (partGroupImplicitKind) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
       // don't generate code for an implicit top-most part group block
       break;
 
-    case msrPartGroupImplicitKind::kPartGroupImplicitNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-        fLilypondCodeStream << std::left <<
-          std::setw (commentFieldWidth);
+        fLilypondCodeStream <<
+//           std::left <<
+//           std::setw (commentFieldWidth) <<
+          "% start of part group block";
       }
 
       switch (partGroupSymbolKind) {
@@ -8600,9 +8624,9 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       // generate the '\with' block
       // if the part group is not implicit
       switch (partGroupImplicitKind) {
-        case msrPartGroupImplicitKind::kPartGroupImplicitYes:
+        case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
           break;
-        case msrPartGroupImplicitKind::kPartGroupImplicitNo:
+        case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
           if (partGroupName.size ()) {
             doGenerateAWithBlock = true;
           }
@@ -8698,15 +8722,14 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           std::endl;
       }
 
+      fLilypondCodeStream << "<<";
+
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-        fLilypondCodeStream << std::left <<
-          std::setw (commentFieldWidth) <<
-          "<<" << "% part group " <<
-          partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
-      }
-      else {
         fLilypondCodeStream <<
-          "<<";
+//           std::left <<
+//           std::setw (commentFieldWidth) <<
+          " % part group " <<
+          partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
       }
 
       fLilypondCodeStream << std::endl;
@@ -8729,9 +8752,9 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
   fLilypondCodeStream << std::endl;
 
-  if (elt->getPartGroupBlockElements ().size () > 1) {
-    ++gIndenter; //  // decremented in visitEnd (S_lpsrPartGroupBlock& elt)
-  }
+//   if (elt->getPartGroupBlockElements ().size () > 1) {
+//     ++gIndenter; //  // decremented in visitEnd (S_lpsrPartGroupBlock& elt)
+//   }
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
@@ -8770,25 +8793,24 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
     partGroup =
       elt->getPartGroup ();
 
-  if (elt->getPartGroupBlockElements ().size () > 1) {
-    --gIndenter; // incremented in visitEnd (S_lpsrPartGroupBlock& elt)
-  }
+//   if (elt->getPartGroupBlockElements ().size () > 1) {
+//     --gIndenter; // incremented in visitEnd (S_lpsrPartGroupBlock& elt)
+//   }
 
   switch (partGroup->getPartGroupImplicitKind ()) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
       // don't generate code for an implicit top-most part group block
       break;
 
-    case msrPartGroupImplicitKind::kPartGroupImplicitNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
+      fLilypondCodeStream << "<<";
+
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-        fLilypondCodeStream << std::left <<
-          std::setw (commentFieldWidth) << ">>" <<
-          "% part group " <<
-          partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
-      }
-      else {
         fLilypondCodeStream <<
-          ">>";
+//         std::left <<
+//           std::setw (commentFieldWidth) << ">>" <<
+          " % end of part group block " <<
+          partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
       }
 
       fLilypondCodeStream << std::endl;
@@ -8804,9 +8826,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
 void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
 {
   // fetch part block's part
-  S_msrPart
-    part =
-      elt->getPart ();
+  S_msrPart part = elt->getPart ();
 
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -8825,7 +8845,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
         "% --> Start visiting lpsrPartBlock for '" <<
         part->asShortString () <<
         ", line " << elt->getInputLineNumber () <<
-      std::endl;
+        std::endl;
 
       if (traceLpsrVisitors) {
         gLog << ss.str ();
@@ -8863,8 +8883,9 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
         */
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
+      fLilypondCodeStream <<
+        std::left <<
+//         std::setw (commentFieldWidth) <<
         "\\new PianoStaff" <<
         " % part " << part->getPartCombinedName ();
     }
@@ -8872,6 +8893,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
       fLilypondCodeStream <<
         "\\new PianoStaff";
     }
+
     fLilypondCodeStream << std::endl;
 
     // generate the 'with' block beginning
@@ -8909,7 +8931,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
       std::endl;
 
     fLilypondCodeStream << // JMI ??? v0.9.62
-      " <<" <<
+      "<<" <<
       std::endl;
   }
 }
@@ -8918,8 +8940,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
 {
   // fetch current part block's part
   S_msrPart
-    part =
-      elt->getPart ();
+    part = elt->getPart ();
 
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -8937,7 +8958,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
       ss <<
         "% --> End visiting lpsrPartBlock" <<
         ", line " << elt->getInputLineNumber () <<
-      std::endl;
+        std::endl;
 
       if (traceLpsrVisitors) {
         gLog << ss.str ();
@@ -8953,7 +8974,8 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
   if (part->getPartStaveNumbersToStavesMap ().size () > 1) {
     // don't generate code for a part with only one stave
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
+      fLilypondCodeStream <<
+        std::left <<
         std::setw (commentFieldWidth) << ">>" <<
         "% part " <<
         part->getPartCombinedName ();
@@ -9008,6 +9030,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
   ++fStaffBlocksCounter;
 
+  // get the staff
   S_msrStaff
     staff =
       elt->getStaff ();
@@ -9285,14 +9308,13 @@ R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
 
   // generate the comment if relevant
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
-        "<<" <<
-        " % staff \"" << staff->getStaffAlphabeticName () << "\"";
-  }
-  else {
+    fLilypondCodeStream << "<<";
+
     fLilypondCodeStream <<
-      "<<";
+//       std::left <<
+//         std::setw (commentFieldWidth) <<
+//         "<<" <<
+        " % start of staff block for \"" << staff->getStaffAlphabeticName () << "\"";
   }
 
   fLilypondCodeStream << std::endl;
@@ -9339,15 +9361,18 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 
   --gIndenter; // incremented in visitStart (S_lpsrStaffBlock& elt)
 
+  fLilypondCodeStream <<  ">>";
+
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) << ">>" <<
-      "% staff " <<
-      elt->getStaff ()->getStaffAlphabeticName ();
-  }
-  else {
+  // get the staff
+    S_msrStaff
+      staff =
+        elt->getStaff ();
+
     fLilypondCodeStream <<
-      ">>";
+//       std::left <<
+//       std::setw (commentFieldWidth) << ">>" <<
+        " % end of staff block for \"" << staff->getStaffAlphabeticName () << "\"";
   }
 
   fLilypondCodeStream << std::endl;
@@ -9661,7 +9686,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
       partName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9734,7 +9759,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
         partID <<
         "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -9791,8 +9816,21 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
   --gIndenter;
 
   fLilypondCodeStream <<
-    ">>" <<
-    std::endl;
+    ">>";
+
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    // get the voice
+    S_msrVoice
+      voice =
+        elt->getVoice ();
+
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
+      " % end of voice command for voice " << voice->getVoiceName ();
+  }
+
+  fLilypondCodeStream << std::endl;
 // } JMI
 }
 
@@ -11193,7 +11231,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
       "<!--=== part \"" << partCombinedName << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11489,7 +11527,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       "<!--=== voice \"" << elt->getVoiceAlphabeticName () << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11642,7 +11680,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
         "Centering boxed LilyPond measure numbers" <<
         ", line " << elt->getInputLineNumber () << " ===-->";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -11786,16 +11824,16 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
   // JMI    '}' <<
       std::endl;
 
-    --g Indenter; // JMI ???
+    --gIndenter; // JMI ???
   */
 
   if (gGlobalLpsr2lilypondOahGroup->getDisplayMusic ()) {
-    fLilypondCodeStream <<
-      '}';
+    fLilypondCodeStream << '}';
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
+      fLilypondCodeStream <<
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
         " % displayMusic";
     }
 
@@ -11805,16 +11843,13 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
   }
 
   // generate the end of the voice definition
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
-      '}' <<
-      "% voice";
-  }
+  fLilypondCodeStream << '}';
 
-  else {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream <<
-      '}';
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
+      " % end of voice " << elt->getVoiceName ();
   }
 
   fLilypondCodeStream << std::endl << std::endl;
@@ -11887,7 +11922,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 //       ", line " << inputLineNumber <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithoutLocationDetails (
+//     gWaeHandler->waeTraceWithoutInputLocation (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -11963,7 +11998,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         elt->asString () <<
         " %}";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -12373,16 +12408,16 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     // generate the end of the voice definition
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
-      "" <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
       "% start of segment " <<
       elt->getSegmentAbsoluteNumber () <<
       ", line " <<
       elt->getInputLineNumber () <<
       std::endl;
 
-    ++gIndenter; // decremented in visitEnd (S_msrSegment& elt)
+//     ++gIndenter; // decremented in visitEnd (S_msrSegment& elt)
   }
 }
 
@@ -12418,12 +12453,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    --gIndenter; // incremented in visitStart (S_msrSegment& elt)
+//     --gIndenter; // incremented in visitStart (S_msrSegment& elt)
 
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
-      "" <<
-      "% end of segment" <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
+      "% end of segment " <<
       elt->getSegmentAbsoluteNumber () <<
       ", line " <<
       elt->getInputLineNumber () <<
@@ -12499,17 +12534,18 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
   // generate measure start comment if relevant
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
-      "" <<
-      "% start of " <<
-      elt->getMeasureKind () <<
-      " measure " <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
+      "% start of measure " <<
       fCurrentMeasureNumber <<
+      " (" <<
+      elt->getMeasureKind () <<
+      ')' <<
       ", line " << inputLineNumber <<
       std::endl;
 
-    ++gIndenter; // decremented in visitEnd (S_msrMeasure& elt)
+//     ++gIndenter; // decremented in visitEnd (S_msrMeasure& elt)
   }
 
   // should we generate a box around this bar number?
@@ -12620,7 +12656,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       ", line " << inputLineNumber <<
       " ===-->";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12751,7 +12787,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
               inputLineNumber,
-              elt->getMeasureCurrentWholeNotesDuration ());
+              elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
 
         fLilypondCodeStream <<
           "\\partial " << upbeatNotesDuration <<
@@ -12770,7 +12806,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
               inputLineNumber,
-              elt->getMeasureCurrentWholeNotesDuration ());
+              elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
 
         fLilypondCodeStream <<
           "\\partial " << upbeatNotesDuration <<
@@ -12789,7 +12825,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
               inputLineNumber,
-              elt->getMeasureCurrentWholeNotesDuration ());
+              elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
 
         fLilypondCodeStream <<
           "\\partial " << upbeatNotesDuration <<
@@ -12805,44 +12841,45 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       {
         msrWholeNotes
-          measureCurrentWholeNotesDuration =
-            elt->getMeasureCurrentWholeNotesDuration ();
+          measureCurrentAccumulatedWholeNotesDuration =
+            elt->getMeasureCurrentAccumulatedWholeNotesDuration ();
 
         msrWholeNotes
-          fullMeasureCurrentWholeNotesDuration =
-            elt->getFullMeasureCurrentWholeNotesDuration ();
+          fullMeasureWholeNotesDuration =
+            elt->getFullMeasureWholeNotesDuration ();
 
         // we should set the score measure whole notes in this case
         mfRational
-          ratioToFullMeasureCurrentWholeNotesDuration =
-            measureCurrentWholeNotesDuration / fullMeasureCurrentWholeNotesDuration;
+          ratioToFullMeasureWholeNotesDuration =
+            measureCurrentAccumulatedWholeNotesDuration / fullMeasureWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceMeasuresDetails ()) {
           int fieldWidth = 27;
 
-          fLilypondCodeStream << std::left <<
+          fLilypondCodeStream <<
+            std::left <<
             "% Setting the measure whole notes for measure " <<
             std::setw (fieldWidth) <<
             fCurrentMeasureNumber <<
             ", line: " << inputLineNumber <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% measureCurrentWholeNotesDuration: " <<
-            measureCurrentWholeNotesDuration.asString () <<
+            "% measureCurrentAccumulatedWholeNotesDuration: " <<
+            measureCurrentAccumulatedWholeNotesDuration.asString () <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% fullMeasureCurrentWholeNotesDuration: " <<
-            fullMeasureCurrentWholeNotesDuration.asString () <<
+            "% fullMeasureWholeNotesDuration: " <<
+            fullMeasureWholeNotesDuration.asString () <<
             std::endl <<
             std::setw (fieldWidth) <<
-            "% ratioToFullMeasureCurrentWholeNotesDuration: " <<
-            ratioToFullMeasureCurrentWholeNotesDuration.asString () <<
+            "% ratioToFullMeasureWholeNotesDuration: " <<
+            ratioToFullMeasureWholeNotesDuration.asString () <<
             std::endl << std::endl;
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        if (ratioToFullMeasureCurrentWholeNotesDuration == msrWholeNotes (1, 1)) {
+        if (ratioToFullMeasureWholeNotesDuration == msrWholeNotes (1, 1)) {
           std::stringstream ss;
 
           ss <<
@@ -12861,7 +12898,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           /* JMI
           fLilypondCodeStream <<
             "\\set Score.measureLength = #(ly:make-moment " <<
-            measureCurrentWholeNotesDuration.toString () <<
+            measureCurrentAccumulatedWholeNotesDuration.toString () <<
             ")" <<
             std::endl;
     */
@@ -12931,7 +12968,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
                 getStaffUpLinkToPart ();
 
         msrWholeNotes
-          measureCurrentWholeNotesDuration =
+          measureCurrentAccumulatedWholeNotesDuration =
             measurePart->
               fetchPartMeasuresWholeNotessVectorAt (
                 inputLineNumber,
@@ -12957,7 +12994,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         fLilypondCodeStream <<
           wholeNotesAsLilypondString (
             inputLineNumber,
-            elt->getFullMeasureCurrentWholeNotesDuration ());
+            elt->getFullMeasureWholeNotesDuration ());
 
         if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
           // generate information and line number as a comment
@@ -13060,7 +13097,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       ", line " << inputLineNumber <<
       " ===-->";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -13079,7 +13116,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         fCurrentMeasureNumber <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -13179,15 +13216,16 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     } // switch
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
- // JMI     --gIn denter; // incremented in visitStart (S_msrMeasure& elt)
+ // JMI     --gIndenter; // incremented in visitStart (S_msrMeasure& elt)
 
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
-        "" <<
-        "% end of " <<
-        elt->getMeasureKind () <<
-        " measure " <<
+      fLilypondCodeStream <<
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
+        "% end of measure " <<
         fCurrentMeasureNumber <<
+        " (" <<
+        elt->getMeasureKind () <<
+        ")" <<
         ", line " << inputLineNumber <<
         std::endl << std::endl;
     }
@@ -13196,13 +13234,13 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       if (
         fCurrentVoiceMeasuresCounter
           %
-        gGlobalLpsr2lilypondOahGroup->getSeparatorLineEveryNMeasures ()
-          ==
-        0)
+        gGlobalLpsr2lilypondOahGroup->getSeparatorLineEveryNMeasures () == 0
+      ) {
         fLilypondCodeStream <<
           std::endl <<
           "% ============================= " <<
           std::endl << std::endl;
+      }
     }
   }
 
@@ -13290,9 +13328,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
  */
   }
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    ++gIndenter; // incremented in visitStart (S_msrMeasure& elt)
-  }
+//   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+// //     ++gIndenter; // incremented in visitStart (S_msrMeasure& elt)
+//   }
 }
 
 //________________________________________________________________________
@@ -17348,7 +17386,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
           note->asShortString () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -17436,7 +17474,7 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
           note->asShortString () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -17483,7 +17521,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           note->asShortString () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -18233,7 +18271,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // register the note as on-going note
-  fOnGoingNotesStack.push (elt); // will be popped in visitEnd (S_msrNote&)
+  fOnGoingNotesStack.push_front (elt); // will be popped in visitEnd (S_msrNote&)
 
   // is this note to be ignored?
   Bool noteIsToBeIgnored (false);
@@ -18481,7 +18519,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       fOnGoingMultipleFullBarRests <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -18806,7 +18844,7 @@ void lpsr2lilypondTranslator::generateNoteScordaturas (
 
   if (noteScordaturas.size ()) {
     fLilypondCodeStream <<
-      " <<" <<
+      "<<" <<
       std::endl;
 
     ++gIndenter;
@@ -19489,7 +19527,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   }
 
   // unregister the note as on-going note
-  fOnGoingNotesStack.pop (); // was pushed in visitStart (S_msrNote&)
+  fOnGoingNotesStack.pop_front (); // was pushed in visitStart (S_msrNote&)
 
   S_msrSingleTremolo
     noteSingleTremolo =
@@ -21764,7 +21802,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
     S_msrTuplet
       containingTuplet =
-        fOnGoingTupletsStack.top ();
+        fOnGoingTupletsStack.front ();
 
     // unapply containing tuplet factor,
     // i.e 3/2 inside 5/4 becomes 15/8 in MusicXML...
@@ -21899,7 +21937,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   }
 
   // push the tuplet on the tuplets stack
-  fOnGoingTupletsStack.push (elt);
+  fOnGoingTupletsStack.push_front (elt);
 
   // force durations to be displayed explicitly
   // at the beginning of the tuplet
@@ -21963,7 +22001,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
   } // switch
 
   // pop the tuplet from the tuplets stack
-  fOnGoingTupletsStack.pop ();
+  fOnGoingTupletsStack.pop_front ();
 
 /* JMI
  ?????? fCurrentOctaveEntryReference = nullptr;
@@ -23138,7 +23176,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
   if (repeatEndingsNumber == 0)
     repeatEndingsNumber = 2; // implicitly JMI ???
 
-  fRepeatDescrsStack.push_back (
+  fRepeatDescrsStack.push_front (
     lpsrRepeatDescr::create (
       elt,
       repeatEndingsNumber));
@@ -23158,9 +23196,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
     " {";
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
-      ss.str () << "% start of repeat";
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
+      ss.str () <<
+      "% start of repeat";
   }
   else {
     fLilypondCodeStream <<
@@ -23220,10 +23260,13 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 
     --gIndenter;
 
+    fLilypondCodeStream << ">>";
+
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
-        '}' << "% end of repeat" <<
+      fLilypondCodeStream <<
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
+        " % end of repeat" <<
         std::endl;
     }
     else {
@@ -23236,7 +23279,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 
   //   --gIndenter; // incremented in visitStart (S_msrRepeat& elt) JMI ???
 
-  fRepeatDescrsStack.pop_back ();
+  fRepeatDescrsStack.pop_front ();
 }
 
 //________________________________________________________________________
@@ -23348,27 +23391,26 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
 
     // first repeat ending is in charge of
     // outputting the end of the repeat
+    fLilypondCodeStream << '}';
+
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
-        std::setw (commentFieldWidth) << std::left <<
-        '}' << "% end of repeat" <<
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
+        " % end of repeat" <<
         std::endl;
     }
-    else {
-      fLilypondCodeStream <<
-        std::endl <<
-        '}' <<
-        std::endl;
-    }
+
     fRepeatDescrsStack.back ()->
       setEndOfRepeatHasBeenGenerated ();
 
     // first repeat ending is in charge of
     // outputting the start of the alternative
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-      fLilypondCodeStream << std::left <<
+      fLilypondCodeStream <<
+//         std::left <<
         std::endl <<
-        std::setw (commentFieldWidth) <<
+//         std::setw (commentFieldWidth) <<
         "\\alternative {" <<
         "% start of alternative" <<
         std::endl;
@@ -23387,9 +23429,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
   switch (elt->getRepeatEndingKind ()) {
     case msrRepeatEndingKind::kRepeatEndingHooked:
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-        fLilypondCodeStream << std::left <<
-          std::setw (commentFieldWidth) <<
-          "{" << "% start of repeat hooked ending" <<
+        fLilypondCodeStream <<
+//           std::left <<
+//           std::setw (commentFieldWidth) <<
+          "{ % start of repeat hooked ending" <<
           std::endl;
       }
       else {
@@ -23401,9 +23444,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
 
     case msrRepeatEndingKind::kRepeatEndingHookless:
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-        fLilypondCodeStream << std::left <<
-          std::setw (commentFieldWidth) <<
-          "{" << "% start of repeat hookless ending" <<
+        fLilypondCodeStream <<
+//           std::left <<
+//           std::setw (commentFieldWidth) <<
+          "{ % start of repeat hookless ending" <<
           std::endl;
       }
       else {
@@ -23480,9 +23524,10 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
   switch (elt->getRepeatEndingKind ()) {
     case msrRepeatEndingKind::kRepeatEndingHooked:
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-        fLilypondCodeStream << std::left <<
-          std::setw (commentFieldWidth) <<
-          '}' << "% end of repeat hooked ending" <<
+        fLilypondCodeStream <<
+//           std::left <<
+//           std::setw (commentFieldWidth) <<
+          "'} % end of repeat hooked ending" <<
           std::endl;
       }
       else {
@@ -23494,14 +23539,10 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 
     case msrRepeatEndingKind::kRepeatEndingHookless:
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ())   {
-        fLilypondCodeStream << std::left <<
-          std::setw (commentFieldWidth) <<
-          '}' << "% end of repeat hookless ending" <<
-          std::endl;
-      }
-      else {
         fLilypondCodeStream <<
-          '}' <<
+//           std::left <<
+//           std::setw (commentFieldWidth) <<
+          "'} % end of repeat hookless ending" <<
           std::endl;
       }
       break;
@@ -23538,9 +23579,10 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
     // last repeat ending is in charge of
     // outputting the end of the alternative
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ())   {
-      fLilypondCodeStream << std::left <<
-        std::setw (commentFieldWidth) <<
-        '}' << "% end of alternative" <<
+      fLilypondCodeStream <<
+//         std::left <<
+//         std::setw (commentFieldWidth) <<
+        "} % end of alternative" <<
         std::endl;
     }
     else {
@@ -23721,7 +23763,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
 
     int fieldWidth = 24;
 
-    fLilypondCodeStream << std::left <<
+    fLilypondCodeStream <<
+      std::left <<
       std::setw (fieldWidth) <<
       "% repeatPatternMeasuresNumber" << ": " << repeatPatternMeasuresNumber <<
       std::endl <<
@@ -23735,9 +23778,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
-      "% start of measures repeat" <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
+      " % start of measures repeat" <<
       mfSingularOrPlural (
         elt->fetchMeasureRepeatReplicasNumber (),
         "replica",
@@ -23900,18 +23944,17 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // output the start of the ending
+  fLilypondCodeStream << "{";
+
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
-      "{" << "% start of measures repeat replicas" <<
-      std::endl;
-  }
-  else {
     fLilypondCodeStream <<
-      std::endl <<
-      "{" <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
+      " % start of measures repeat replicas" <<
       std::endl;
   }
+
+  fLilypondCodeStream << std::endl;
 
   ++gIndenter; // decremented in visitEnd (S_msrMeasureRepeat&)
 }
@@ -23988,8 +24031,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRests& elt)
     elt->getMultipleFullBarRestsNumber ();
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
       "% start of multiple full-bar rests" <<
       mfSingularOrPlural (
         multipleFullBarRestsNumber,
@@ -24069,7 +24113,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       "--> fRemainingMultipleFullBarRestsNumber: " <<
       fRemainingMultipleFullBarRestsNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -24089,7 +24133,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       "--> multipleFullBarRestsMeasureSoundingNotes: " <<
       multipleFullBarRestsMeasureSoundingNotes;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -24112,7 +24156,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       "--> fullBarRestsWholeNoteAsLilypondString: " <<
       fullBarRestsWholeNoteAsLilypondString;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -24158,8 +24202,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     --gIndenter; // incremented in visitStart (S_msrMultipleFullBarRests&)
 
-    fLilypondCodeStream << std::left <<
-      std::setw (commentFieldWidth) <<
+    fLilypondCodeStream <<
+//       std::left <<
+//       std::setw (commentFieldWidth) <<
       "% end of multiple full-bar rests" <<
       mfSingularOrPlural (
         multipleFullBarRestsNumber,
@@ -24320,7 +24365,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   if (commentOutLeftMargin) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "left-margin: " <<
     std::setprecision (3) << leftMarginValue <<
@@ -24357,7 +24403,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   if (commentOutRightMargin) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "right-margin: " <<
     std::setprecision (3) << rightMarginValue <<
@@ -24394,7 +24441,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   if (commentOutTopMargin) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "top-margin: " <<
     std::setprecision (3) << topMarginValue <<
@@ -24431,7 +24479,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
   if (commentOutBottomMargin) {
     fLilypondCodeStream << "% ";
   }
-  fLilypondCodeStream << std::left <<
+  fLilypondCodeStream <<
+    std::left <<
     std::setw (fieldWidth) <<
     "bottom-margin: " <<
     std::setprecision (3) << bottomMarginValue <<

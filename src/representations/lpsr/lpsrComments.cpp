@@ -59,7 +59,7 @@ void lpsrComment::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrComment::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -77,7 +77,7 @@ void lpsrComment::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrComment::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -95,7 +95,7 @@ void lpsrComment::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrComment::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -113,7 +113,7 @@ void lpsrComment::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrComment::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

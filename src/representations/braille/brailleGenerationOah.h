@@ -12,7 +12,7 @@
 #ifndef ___brailleGenerationOah___
 #define ___brailleGenerationOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahBasicTypes.h"
 #include "oahAtomsCollection.h"

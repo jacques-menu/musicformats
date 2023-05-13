@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -76,7 +76,7 @@ S_msrUnsupportedException msrUnsupportedException::create (
 }
 
 //______________________________________________________________________________
-void msrWarning (
+void msrWarningWithoutInputLocation (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message)
@@ -88,14 +88,14 @@ void msrWarning (
     message);
 }
 
-void msrWarningWithLocationDetails (
+void msrWarning (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message)
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)
 {
-  waeWarningWithLocationDetails (
+  waeWarning (
     "MSR",
     inputSourceName,
     inputLineNumber,
@@ -112,42 +112,13 @@ void msrError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "MSR",
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
     message);
-
-  if (! gWaeOahGroup->getDontShowErrors ()) {
-    if (! gWaeOahGroup->getDontQuitOnErrors ()) { // JMI
-      throw msrException (message);
-    }
-    else {
-      throw msrException (message);
-    }
-  }
-}
-
-void msrErrorWithLocationDetails(
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
-{
-  waeErrorWithLocationDetails (
-    "MSR",
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
-//     measureNumber,
-//     scoreMeasuresNumber);
 
   if (! gWaeOahGroup->getDontShowErrors ()) {
     if (! gWaeOahGroup->getDontQuitOnErrors ()) { // JMI
@@ -204,22 +175,6 @@ void msrInternalWarning (
     message);
 }
 
-void msrInternalWarningWithLocationDetails (
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& message)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
-{
-  waeInternalWarningWithLocationDetails (
-    "MSR",
-    inputSourceName,
-    inputLineNumber,
-    message);
-//     measureNumber,
-//     scoreMeasuresNumber);
-}
-
 //______________________________________________________________________________
 void msrInternalError (
   const std::string& inputSourceName,
@@ -231,7 +186,7 @@ void msrInternalError (
   gIndenter.resetToZero ();
 
 //  waeErrorWithoutException ( // JMI
-   waeErrorWithException (
+   waeErrorWithExceptionWithInputLocation (
     "MSR INTERNAL",
     inputSourceName,
     inputLineNumber,
@@ -239,36 +194,6 @@ void msrInternalError (
     sourceCodeLineNumber,
     message,
     msrInternalException::create (message));
-
-#ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
-  abort ();
-#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
-
-  throw msrInternalException (message);
-}
-
-void msrInternalErrorWithLocationDetails (
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
-{
-  gIndenter.resetToZero ();
-
-//  waeErrorWithoutException ( // JMI
-   waeErrorWithExceptionWithLocationDetails (
-    "MSR INTERNAL",
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message,
-    msrInternalException::create (message));
-//     measureNumber,
-//     scoreMeasuresNumber);
 
 #ifdef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
   abort ();

@@ -100,7 +100,7 @@ R"(Write a trace of the MFSL tokens to standard error.)",
 
   fDisplayServiceAndInputAtom =
     oahBooleanAtom::create (
-      "display-service-and-input", "dtai",
+      "display-service-and-input", "dservandinput",
 R"(Write MFSL service and input analysis activity to standard output.)",
       "fDisplayServiceAndInput",
       fDisplayServiceAndInput);
@@ -126,7 +126,7 @@ R"(Write MFSL options analysis activity to standard output.)",
 R"(Analyze the MFSL script, but don't launch the service actually.
 This is useful to check the options gathered by the MFSL interpreter,
 and what command(s) would be launched.
-This option implies the '-display-service-and-input, -ttai' option.)",
+This option implies the '-display-service-and-input, -dservandinput' option.)",
         "fNoLaunch",
         fNoLaunch,
         fDisplayServiceAndInputAtom));

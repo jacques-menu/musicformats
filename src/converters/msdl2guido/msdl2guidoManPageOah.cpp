@@ -14,7 +14,7 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 
 #include "oahEarlyOptions.h"
@@ -69,7 +69,7 @@ void msdl2guidoManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a msdl2guidoManPageGenerateAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -87,7 +87,7 @@ void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2guidoManPageGenerateAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -105,7 +105,7 @@ void msdl2guidoManPageGenerateAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2guidoManPageGenerateAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -123,7 +123,7 @@ void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2guidoManPageGenerateAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -141,7 +141,7 @@ void msdl2guidoManPageGenerateAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2guidoManPageGenerateAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -159,7 +159,7 @@ void msdl2guidoManPageGenerateAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2guidoManPageGenerateAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -337,7 +337,7 @@ void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2guidoManPageOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -355,7 +355,7 @@ void msdl2guidoManPageOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2guidoManPageOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -373,7 +373,7 @@ void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2guidoManPageOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -391,7 +391,7 @@ void msdl2guidoManPageOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2guidoManPageOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -409,7 +409,7 @@ void msdl2guidoManPageOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2guidoManPageOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -453,7 +453,7 @@ S_msdl2guidoManPageOahGroup createGlobalMsdl2gmnManPageOahGroupHandler (
     ss <<
       "Creating global msdl2guidoManPage OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -16,7 +16,7 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfTiming.h"
@@ -75,7 +75,7 @@ Sxmlelement translateMsrToMxsr (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -125,7 +125,7 @@ Sxmlelement translateMsrToMxsr (
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

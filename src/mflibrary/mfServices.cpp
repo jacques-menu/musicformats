@@ -11,7 +11,7 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfConstants.h"
 #include "msrMeasureConstants.h"
@@ -225,7 +225,7 @@ void initializeMusicFormatsServices ()
         "Initializing MusicFormats services" <<
         std::endl;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

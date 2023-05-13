@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -78,7 +78,7 @@ msrHarmonyInterval::msrHarmonyInterval (
       harmonyIntervalAsString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -168,7 +168,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       otherHarmonyInterval->asShortString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -199,7 +199,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       operand2->asShortString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -264,7 +264,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       ", resultRelativeOctave: " <<
       resultRelativeOctave;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1444,7 +1444,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       msrIntervalKindAsString (resultIntervalKind) <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1483,7 +1483,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
       '\'' <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2637,7 +2637,7 @@ void msrHarmonyInterval::acceptIn (basevisitor* v) {
     ss <<
       "% ==> msrHarmonyInterval::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2667,7 +2667,7 @@ void msrHarmonyInterval::acceptOut (basevisitor* v) {
     ss <<
       "% ==> msrHarmonyInterval::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3659,7 +3659,7 @@ msrHarmonyDegree::msrHarmonyDegree (
       asString () <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3754,7 +3754,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrHarmonyDegree::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3772,7 +3772,7 @@ void msrHarmonyDegree::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrHarmonyDegree::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3790,7 +3790,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrHarmonyDegree::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3808,7 +3808,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrHarmonyDegree::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3926,7 +3926,7 @@ msrHarmonyContents::msrHarmonyContents (
       harmonyContentsAsString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4148,7 +4148,7 @@ void msrHarmonyContents::acceptIn (basevisitor* v) {
     ss <<
       "% ==> msrHarmonyContents::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4178,7 +4178,7 @@ void msrHarmonyContents::acceptOut (basevisitor* v) {
     ss <<
       "% ==> msrHarmonyContents::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4420,7 +4420,7 @@ msrHarmony::msrHarmony (
       "Creating harmony " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4442,7 +4442,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
       asShortString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4495,7 +4495,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
       asShortString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4550,7 +4550,7 @@ void msrHarmony::setHarmonySoundingWholeNotes (
       wholeNotes.asString () <<
       ", context: " << context;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4574,7 +4574,7 @@ void msrHarmony::setHarmonyDisplayWholeNotes (
       wholeNotes.asString () <<
       ", context: " << context;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4627,7 +4627,7 @@ void msrHarmony::setHarmonyTupletFactor (
       tupletFactor.asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4648,7 +4648,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
       asString () <<
       " to note " << note->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4759,7 +4759,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
       "Setting harmony " << asShortString ()  <<
       " frame to " << frame->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4798,7 +4798,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 //       "\", line " << inputLineNumber <<
 //       std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //   }
@@ -4830,7 +4830,7 @@ void msrHarmony::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrHarmony::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4848,7 +4848,7 @@ void msrHarmony::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrHarmony::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -4866,7 +4866,7 @@ void msrHarmony::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrHarmony::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4884,7 +4884,7 @@ void msrHarmony::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrHarmony::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5932,7 +5932,7 @@ msrHarmonyStructure::msrHarmonyStructure (
       harmonyStructureAsString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6834,7 +6834,7 @@ void msrHarmonyStructure::acceptIn (basevisitor* v) {
     ss <<
       "% ==> msrHarmonyStructure::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6864,7 +6864,7 @@ void msrHarmonyStructure::acceptOut (basevisitor* v) {
     ss <<
       "% ==> msrHarmonyStructure::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6950,7 +6950,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       ", original harmonyStructureIntervalsSize: " <<
       harmonyStructureIntervalsSize;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6977,7 +6977,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           std::endl;
         --gIndenter;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -7001,7 +7001,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           std::endl;
         --gIndenter;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -7031,7 +7031,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           std::endl;
         --gIndenter;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -7055,7 +7055,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
           std::endl;
         --gIndenter;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }

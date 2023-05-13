@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfIndentedTextOutput.h"
 
@@ -41,7 +41,7 @@ void meiError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "MEI",
     inputSourceName,
     inputLineNumber,
@@ -65,7 +65,7 @@ void meiInternalError (
 {
   gIndenter.resetToZero ();
 
-  waeErrorWithoutException (
+  waeErrorWithoutExceptionWithInputLocation (
     "MEI INTERNAL",
     inputSourceName,
     inputLineNumber,

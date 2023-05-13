@@ -43,17 +43,17 @@ class EXP msrOah2manPage : virtual public oah2manPage,
 
   protected:
 
-    virtual void              visitStart (S_msrRenamePartAtom& elt);
-    virtual void              visitEnd   (S_msrRenamePartAtom& elt);
+    virtual void          visitStart (S_msrRenamePartAtom& elt);
+    virtual void          visitEnd   (S_msrRenamePartAtom& elt);
 
-    virtual void              visitStart (S_msrIgnorePartAtom& elt);
-    virtual void              visitEnd   (S_msrIgnorePartAtom& elt);
+    virtual void          visitStart (S_msrIgnorePartAtom& elt);
+    virtual void          visitEnd   (S_msrIgnorePartAtom& elt);
 
-    virtual void              visitStart (S_msrKeepPartAtom& elt);
-    virtual void              visitEnd   (S_msrKeepPartAtom& elt);
+    virtual void          visitStart (S_msrKeepPartAtom& elt);
+    virtual void          visitEnd   (S_msrKeepPartAtom& elt);
 
-    virtual void              visitStart (S_msrPitchesLanguageAtom& elt);
-    virtual void              visitEnd   (S_msrPitchesLanguageAtom& elt);
+    virtual void          visitStart (S_msrPitchesLanguageAtom& elt);
+    virtual void          visitEnd   (S_msrPitchesLanguageAtom& elt);
 };
 typedef SMARTP<msrOah2manPage> S_msrOah2manPage;
 

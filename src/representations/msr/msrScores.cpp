@@ -19,7 +19,7 @@
 
 #include "msrWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrScores.h"
 
@@ -139,7 +139,7 @@ S_msrScore msrScore::createScoreNewbornClone ()
     ss <<
       "Creating a newborn clone of a score";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -237,6 +237,7 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 
   // register it in this score
   fScorePartGroupsSet.insert (partGroup);
+
   fPartGroupsList.push_back (partGroup);
 }
 
@@ -252,7 +253,7 @@ void msrScore::appendCreditToScore (
       credit->asString () <<
       "' to score";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -279,8 +280,8 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 
     for (
       std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
-        i != fPartGroupsList.end ();
-        ++i
+      i != fPartGroupsList.end ();
+      ++i
     ) {
       std::stringstream ss;
 
@@ -297,7 +298,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
       "<=- fetchPartFromScoreByItsPartID(" << partID << ")" <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -367,7 +368,7 @@ void msrScore::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrScore::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -385,7 +386,7 @@ void msrScore::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrScore::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -403,7 +404,7 @@ void msrScore::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrScore::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -421,7 +422,7 @@ void msrScore::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrScore::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -439,7 +440,7 @@ void msrScore::browseData (basevisitor* v)
     ss <<
       "% ==> msrScore::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -508,7 +509,7 @@ void msrScore::browseData (basevisitor* v)
     ss <<
       "% <== msrScore::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -649,7 +650,7 @@ void msrScore::printFull (std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": [EMPTY]" <<
       std::endl;
   }
   os << std::endl;
@@ -708,7 +709,7 @@ void msrScore::printFull (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrScore::print(std::ostream& os) const
+void msrScore::print (std::ostream& os) const
 {
   os <<
     "MSR Score, short version" <<
@@ -795,7 +796,7 @@ void msrScore::print(std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": [EMPTY]" <<
       std::endl;
   }
   os << std::endl;

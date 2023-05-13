@@ -11,7 +11,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -87,7 +87,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
     ss <<
       "Creating a newborn clone of after grace notes group";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -131,7 +131,7 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrAfterGraceNotesGroupContents::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -149,7 +149,7 @@ void msrAfterGraceNotesGroupContents::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrAfterGraceNotesGroupContents::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -167,7 +167,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrAfterGraceNotesGroupContents::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -185,7 +185,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrAfterGraceNotesGroupContents::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -357,7 +357,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
       asShortString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -404,7 +404,7 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrAfterGraceNotesGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -422,7 +422,7 @@ void msrAfterGraceNotesGroup::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrAfterGraceNotesGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -440,7 +440,7 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrAfterGraceNotesGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -458,7 +458,7 @@ void msrAfterGraceNotesGroup::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrAfterGraceNotesGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

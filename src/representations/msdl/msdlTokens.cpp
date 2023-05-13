@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -306,7 +306,7 @@ std::string msdlTokenKindAsMsdlString (
       ", tokenKind" << ": " << msdlTokenKindAsString (tokenKind) <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind);
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -717,7 +717,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
       "<== createClone()" <<
       ", result:" << result->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -915,7 +915,7 @@ EXP S_msdlTokenKindsSet operator+ (
       "<== S_msdlTokenKindsSet operator+()" <<
       ", result:" << result->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -942,7 +942,7 @@ EXP S_msdlTokenKindsSet operator+ (
       "<== S_msdlTokenKindsSet operator+()" <<
       ", result:" << result->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1631,7 +1631,7 @@ std::string msdlToken::asMsdlString (
       ", tokenKind" << ": " << msdlTokenKindAsString (fTokenKind) <<
       ", languageKind: " << msdlKeywordsLanguageKindAsString (languageKind);
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

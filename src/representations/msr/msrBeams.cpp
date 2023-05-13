@@ -14,7 +14,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrBeams.h"
 
@@ -96,7 +96,7 @@ msrBeam::msrBeam (
       this->asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -115,7 +115,7 @@ void msrBeam::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrBeam::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -133,7 +133,7 @@ void msrBeam::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrBeam::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -151,7 +151,7 @@ void msrBeam::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrBeam::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -169,7 +169,7 @@ void msrBeam::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrBeam::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

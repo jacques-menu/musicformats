@@ -13,7 +13,7 @@
 
 #include "LilyPondIssue34Generator.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrScores.h"
 #include "msrBarLines.h"

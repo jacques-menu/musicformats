@@ -11,7 +11,7 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -100,7 +100,7 @@ void xml2xmlRegularHandler::createRegularHandlerGroups ()
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -178,7 +178,7 @@ void xml2xmlRegularHandler::createRegularHandlerGroups ()
       fHandlerHeader <<
       "\" have been created";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1305,7 +1305,7 @@ void xml2xmlRegularHandler::checkOptionsAndArguments () const
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

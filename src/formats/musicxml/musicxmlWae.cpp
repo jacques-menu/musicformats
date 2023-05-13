@@ -41,7 +41,7 @@ void musicxmlError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "MusicXML",
     inputSourceName,
     inputLineNumber,

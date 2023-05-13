@@ -109,7 +109,7 @@ void lpsrContext::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrContext::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -127,7 +127,7 @@ void lpsrContext::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrContext::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -145,7 +145,7 @@ void lpsrContext::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrContext::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -163,7 +163,7 @@ void lpsrContext::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrContext::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -264,7 +264,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrChordNamesContext::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -282,7 +282,7 @@ void lpsrChordNamesContext::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrChordNamesContext::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -300,7 +300,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrChordNamesContext::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -318,7 +318,7 @@ void lpsrChordNamesContext::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrChordNamesContext::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -447,7 +447,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrFiguredBassContext::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -465,7 +465,7 @@ void lpsrFiguredBassContext::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrFiguredBassContext::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -483,7 +483,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrFiguredBassContext::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -501,7 +501,7 @@ void lpsrFiguredBassContext::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrFiguredBassContext::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

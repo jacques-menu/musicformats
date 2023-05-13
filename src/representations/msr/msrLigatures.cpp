@@ -13,7 +13,7 @@
 #include <sstream>
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "visitor.h"
 
@@ -99,7 +99,7 @@ void msrLigature::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrLigature::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -117,7 +117,7 @@ void msrLigature::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrLigature::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -135,7 +135,7 @@ void msrLigature::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrLigature::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -153,7 +153,7 @@ void msrLigature::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrLigature::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

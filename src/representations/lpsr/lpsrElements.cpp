@@ -51,7 +51,7 @@ void lpsrElement::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrElement::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -69,7 +69,7 @@ void lpsrElement::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrElement::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -87,7 +87,7 @@ void lpsrElement::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrElement::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -105,7 +105,7 @@ void lpsrElement::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrElement::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

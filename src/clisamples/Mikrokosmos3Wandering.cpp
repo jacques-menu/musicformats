@@ -16,7 +16,7 @@
 
 #include "libmusicxml.h" // for mfMusicformatsErrorKind
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 #include "mfPasses.h"
@@ -225,7 +225,7 @@ int main (int argc, char*  argv[])
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -250,7 +250,7 @@ int main (int argc, char*  argv[])
       "==> multiGenerationOutputKind: " <<
       mfMultiGenerationOutputKindAsString (multiGenerationOutputKind);
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -484,7 +484,7 @@ int main (int argc, char*  argv[])
       "==> generationAPIKind: " <<
       msrGenerationAPIKindAsString (theGenerationAPIKind);
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -515,7 +515,7 @@ int main (int argc, char*  argv[])
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

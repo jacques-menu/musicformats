@@ -58,7 +58,7 @@ void msrStem::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrStem::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -76,7 +76,7 @@ void msrStem::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrStem::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -94,7 +94,7 @@ void msrStem::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrStem::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -112,7 +112,7 @@ void msrStem::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrStem::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

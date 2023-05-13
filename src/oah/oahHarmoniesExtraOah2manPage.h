@@ -12,7 +12,7 @@
 #ifndef ___harmoniesExtraOah2manPage___
 #define ___harmoniesExtraOah2manPage___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 
 #include "oahHarmoniesExtraOah.h"
@@ -45,17 +45,17 @@ class EXP harmoniesExtraOah2manPage : virtual public oah2manPage,
 
   protected:
 
-    virtual void              visitStart (S_extraDisplayAllHarmoniesStructuresAtom& elt);
-    virtual void              visitEnd   (S_extraDisplayAllHarmoniesStructuresAtom& elt);
+    virtual void          visitStart (S_extraDisplayAllHarmoniesStructuresAtom& elt);
+    virtual void          visitEnd   (S_extraDisplayAllHarmoniesStructuresAtom& elt);
 
-    virtual void              visitStart (S_extraDisplayAllHarmoniesContentsAtom& elt);
-    virtual void              visitEnd   (S_extraDisplayAllHarmoniesContentsAtom& elt);
+    virtual void          visitStart (S_extraDisplayAllHarmoniesContentsAtom& elt);
+    virtual void          visitEnd   (S_extraDisplayAllHarmoniesContentsAtom& elt);
 
-    virtual void              visitStart (S_extraDisplayHarmonyDetailsAtom& elt);
-    virtual void              visitEnd   (S_extraDisplayHarmonyDetailsAtom& elt);
+    virtual void          visitStart (S_extraDisplayHarmonyDetailsAtom& elt);
+    virtual void          visitEnd   (S_extraDisplayHarmonyDetailsAtom& elt);
 
-    virtual void              visitStart (S_extraDisplayHarmonyAnalysisAtom& elt);
-    virtual void              visitEnd   (S_extraDisplayHarmonyAnalysisAtom& elt);
+    virtual void          visitStart (S_extraDisplayHarmonyAnalysisAtom& elt);
+    virtual void          visitEnd   (S_extraDisplayHarmonyAnalysisAtom& elt);
 };
 typedef SMARTP<harmoniesExtraOah2manPage> S_harmoniesExtraOah2manPage;
 

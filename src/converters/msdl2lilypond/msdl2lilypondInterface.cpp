@@ -13,7 +13,7 @@
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
                         // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfPasses.h"
 #include "mfServices.h"
@@ -106,7 +106,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         separator <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -167,7 +167,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
   if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass1 ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
@@ -207,7 +207,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 
   if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass2b ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
@@ -232,7 +232,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -245,7 +245,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         "msdlStream2lilypond() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -287,7 +287,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -301,7 +301,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         gLanguage->openingLilypondFileForWriting (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -362,7 +362,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         std::endl <<
         gLanguage->closingLilypondFile (outputFileName);
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -430,7 +430,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -538,7 +538,7 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
 //   // open input file
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gEarlyOptions.getEarlyTracePasses ()) {
-//     gWaeHandler->waeTraceToStream (
+//     gWaeHandler->waeTraceToStreamWithoutInputLocation (
 //       err,
 //       __FILE__, __LINE__,
 //       gLanguage->openingLilypondFileForWriting (inputFileName));
@@ -583,7 +583,7 @@ mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   // open input file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->openingLilypondFileForWriting (inputFileName));

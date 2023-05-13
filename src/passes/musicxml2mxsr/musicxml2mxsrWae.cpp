@@ -40,7 +40,7 @@ void musicxml2mxsrError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "musicxml2mxsr",
     inputSourceName,
     inputLineNumber,
@@ -65,7 +65,7 @@ void musicxml2mxsrInternalError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeInternalError (
+  waeInternalErrorWithInputLocation (
     "musicxml2mxsr",
     inputSourceName,
     inputLineNumber,

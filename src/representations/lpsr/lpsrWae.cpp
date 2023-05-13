@@ -43,7 +43,7 @@ void lpsrError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "LPSR",
     inputSourceName,
     inputLineNumber,
@@ -68,7 +68,7 @@ void lpsrInternalError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeInternalError (
+  waeInternalErrorWithInputLocation (
     "LPSR",
     inputSourceName,
     inputLineNumber,

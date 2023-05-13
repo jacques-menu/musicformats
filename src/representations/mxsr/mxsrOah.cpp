@@ -13,7 +13,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 
@@ -200,7 +200,7 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> mxsrOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -218,7 +218,7 @@ void mxsrOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching mxsrOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -236,7 +236,7 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> mxsrOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -254,7 +254,7 @@ void mxsrOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching mxsrOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -272,7 +272,7 @@ void mxsrOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> mxsrOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -348,7 +348,7 @@ S_mxsrOahGroup createGlobalMxsrOahGroup ()
     ss <<
       "Creating global mxsr OAH group";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

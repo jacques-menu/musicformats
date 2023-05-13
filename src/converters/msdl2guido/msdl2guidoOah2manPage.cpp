@@ -13,7 +13,7 @@
 
 #include "msdl2guidoOah2manPage.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 

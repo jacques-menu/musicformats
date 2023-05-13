@@ -75,7 +75,7 @@ msrColorRGB::msrColorRGB (
       "' with std::regex '" << regularExpression <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -117,7 +117,7 @@ msrColorRGB::msrColorRGB (
       "--> GString = \"" << GString << "\"" <<
       "--> BString = \"" << BString << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

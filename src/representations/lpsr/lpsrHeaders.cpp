@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "lpsrHeaders.h"
 
@@ -105,7 +105,7 @@ void lpsrHeader::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrHeader::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -123,7 +123,7 @@ void lpsrHeader::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrHeader::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -141,7 +141,7 @@ void lpsrHeader::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrHeader::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -159,7 +159,7 @@ void lpsrHeader::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrHeader::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -375,7 +375,7 @@ void lpsrHeader::appendRight (
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -398,7 +398,7 @@ void lpsrHeader::appendComposer (
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -421,7 +421,7 @@ void lpsrHeader::appendArranger (
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -444,7 +444,7 @@ void lpsrHeader::appendLyricist (
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -467,7 +467,7 @@ void lpsrHeader::appendPoet (
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -487,7 +487,7 @@ void lpsrHeader::removeAllPoets (
       "Removing all poets from lpsrHeader" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -510,7 +510,7 @@ void lpsrHeader::appendTranslator (
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -533,7 +533,7 @@ void lpsrHeader::appendArtist (
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -556,7 +556,7 @@ void lpsrHeader::appendSoftware (
       "\" to lpsrHeader" <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

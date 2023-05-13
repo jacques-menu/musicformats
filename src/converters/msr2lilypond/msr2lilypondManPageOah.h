@@ -12,7 +12,7 @@
 #ifndef ___msr2lilypondManPageOah___
 #define ___msr2lilypondManPageOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahVisitor.h"
 

@@ -18,7 +18,7 @@
 
 #include "bsrWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfServices.h"
 
@@ -394,7 +394,7 @@ void bsrTempo::acceptIn (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTempo::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -412,7 +412,7 @@ void bsrTempo::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching bsrTempo::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -431,7 +431,7 @@ void bsrTempo::acceptOut (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrTempo::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -449,7 +449,7 @@ void bsrTempo::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching bsrTempo::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

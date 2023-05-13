@@ -13,7 +13,7 @@
 
 #include "mfConstants.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfBool.h"
 
@@ -212,7 +212,7 @@ void initializeMusicFormatsLanguages ()
       ss <<
         "Initializing MusicFormats languages";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

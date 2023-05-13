@@ -12,7 +12,7 @@
 #include <iomanip>      // std::setw, std::setprecision, ...
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -68,7 +68,7 @@ oahRegularHandler::oahRegularHandler (
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -95,7 +95,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -153,7 +153,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -197,7 +197,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -244,7 +244,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
         std::endl;
       --gIndenter;
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

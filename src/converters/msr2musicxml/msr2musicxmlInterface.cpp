@@ -22,7 +22,7 @@
 #include "msr2mxsrWae.h"
 #include "mxsr2musicxmlWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "waeOah.h"
 
@@ -74,7 +74,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
       handler->getHandlerHeader () <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -159,7 +159,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

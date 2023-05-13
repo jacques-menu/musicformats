@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -97,7 +97,7 @@ void msrMeasureElement::doSetSoundingWholeNotes (
 
 //     if (wholeNotes == msrWholeNotes (114, 1)) abort (); // JMI v0.9.67 HARMFUL
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
 
@@ -163,7 +163,7 @@ void msrMeasureElement::setMeasurePosition (
       context <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -242,7 +242,7 @@ void msrMeasureElement::setVoicePosition (
       context <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -276,7 +276,7 @@ void msrMeasureElement::setVoicePosition (
       context <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -309,7 +309,7 @@ void msrMeasureElement::setVoicePosition (
 //       "\"" <<
 //       std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //   }
@@ -337,7 +337,7 @@ void msrMeasureElement::setVoicePosition (
 //       "\"" <<
 //       std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //   }
@@ -363,7 +363,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrMeasureElement::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -381,7 +381,7 @@ void msrMeasureElement::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrMeasureElement::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -399,7 +399,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrMeasureElement::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -417,7 +417,7 @@ void msrMeasureElement::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrMeasureElement::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

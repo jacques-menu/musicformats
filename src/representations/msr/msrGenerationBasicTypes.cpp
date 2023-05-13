@@ -186,7 +186,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
       "==> handling atom '" << fetchNames () << "; which is of type 'msrGenerationAPIKindAtom'" <<
       " with value \"" << theString << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -235,7 +235,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msrGenerationAPIKindAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -253,7 +253,7 @@ void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrGenerationAPIKindAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -271,7 +271,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msrGenerationAPIKindAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -289,7 +289,7 @@ void msrGenerationAPIKindAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrGenerationAPIKindAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -307,7 +307,7 @@ void msrGenerationAPIKindAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msrGenerationAPIKindAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

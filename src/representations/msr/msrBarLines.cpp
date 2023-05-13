@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "msrMeasureConstants.h"
@@ -222,7 +222,7 @@ void msrBarLine::setBarLineCategory (
       " to " <<
       msrBarLineCategoryKindAsString (barLineCategoryKind);
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -268,7 +268,7 @@ void msrBarLine::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrBarLine::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -286,7 +286,7 @@ void msrBarLine::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrBarLine::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -304,7 +304,7 @@ void msrBarLine::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrBarLine::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -322,7 +322,7 @@ void msrBarLine::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrBarLine::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

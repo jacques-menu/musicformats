@@ -30,7 +30,7 @@ S_mfcPassComponent createBsr2brailleComponent ()
       ss <<
         "Creating the bsr2braille pass component";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

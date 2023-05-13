@@ -30,7 +30,7 @@ S_mfcRepresentationComponent createMxsrRepresentationComponent ()
       ss <<
         "Creating the MXSR format component";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

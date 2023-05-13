@@ -14,7 +14,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfInitialization.h"
 #include "mfServices.h"
@@ -89,7 +89,7 @@ Usage: msdl2braille [option]* [MSDLFile] [option]*
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -152,7 +152,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlPrefixes ()
     ss <<
       "Creating the msdl2braille prefixes";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -174,7 +174,7 @@ void msdl2brailleInsiderHandler::createTheMsdl2brlOptionGroups (
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -275,7 +275,7 @@ void msdl2brailleInsiderHandler::checkOptionsAndArguments () const
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -339,7 +339,7 @@ void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2brailleInsiderOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -357,7 +357,7 @@ void msdl2brailleInsiderOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2brailleInsiderOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -375,7 +375,7 @@ void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2brailleInsiderOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -393,7 +393,7 @@ void msdl2brailleInsiderOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2brailleInsiderOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -411,7 +411,7 @@ void msdl2brailleInsiderOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2brailleInsiderOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -654,7 +654,7 @@ S_msdl2brailleInsiderOahGroup createGlobalMsdl2brlOahGroup (
     ss <<
       "Creating global msdl2braille OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

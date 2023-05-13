@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrSlides.h"
 
@@ -103,7 +103,7 @@ S_msrSlide msrSlide::createSlideNewbornClone ()
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -130,7 +130,7 @@ void msrSlide::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSlide::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -148,7 +148,7 @@ void msrSlide::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSlide::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -166,7 +166,7 @@ void msrSlide::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSlide::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -184,7 +184,7 @@ void msrSlide::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSlide::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

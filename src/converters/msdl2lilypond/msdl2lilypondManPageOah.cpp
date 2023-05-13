@@ -14,7 +14,7 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahEarlyOptions.h"
 
@@ -68,7 +68,7 @@ void msdl2lilypondManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a msdl2lilypondManPageGenerateAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -86,7 +86,7 @@ void msdl2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2lilypondManPageGenerateAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -104,7 +104,7 @@ void msdl2lilypondManPageGenerateAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2lilypondManPageGenerateAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -122,7 +122,7 @@ void msdl2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2lilypondManPageGenerateAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -140,7 +140,7 @@ void msdl2lilypondManPageGenerateAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2lilypondManPageGenerateAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -158,7 +158,7 @@ void msdl2lilypondManPageGenerateAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2lilypondManPageGenerateAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -336,7 +336,7 @@ void msdl2lilypondManPageOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2lilypondManPageOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -354,7 +354,7 @@ void msdl2lilypondManPageOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2lilypondManPageOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -372,7 +372,7 @@ void msdl2lilypondManPageOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2lilypondManPageOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -390,7 +390,7 @@ void msdl2lilypondManPageOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2lilypondManPageOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -408,7 +408,7 @@ void msdl2lilypondManPageOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2lilypondManPageOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -452,7 +452,7 @@ S_msdl2lilypondManPageOahGroup createGlobalMsdl2lyManPageOahGroup (
     ss <<
       "Creating global msdl2lilypondManpage OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

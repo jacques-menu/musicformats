@@ -13,7 +13,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfInitialization.h"
 #include "mfServices.h"
@@ -87,7 +87,7 @@ Usage: msr2guido [[option]* [MusicXMLFile|-] [[option]*
       fHandlerHeader <<
       "\" regular options handler";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -147,7 +147,7 @@ void msr2guidoInsiderHandler::createTheMsr2guidoPrefixes ()
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -169,7 +169,7 @@ void msr2guidoInsiderHandler::createTheMsr2guidoOptionGroups (
       fHandlerHeader <<
       "\" insider option groups";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -247,7 +247,7 @@ void msr2guidoInsiderHandler::checkOptionsAndArguments () const
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -268,7 +268,7 @@ std::string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -362,7 +362,7 @@ std::string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -381,7 +381,7 @@ std::string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -474,7 +474,7 @@ void msr2guidoInsiderOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msr2guidoInsiderOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -492,7 +492,7 @@ void msr2guidoInsiderOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2guidoInsiderOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -510,7 +510,7 @@ void msr2guidoInsiderOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msr2guidoInsiderOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -528,7 +528,7 @@ void msr2guidoInsiderOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2guidoInsiderOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -546,7 +546,7 @@ void msr2guidoInsiderOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msr2guidoInsiderOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -714,7 +714,7 @@ S_msr2guidoInsiderOahGroup createGlobalMsr2guidoOahGroup ()
     ss <<
       "Creating global msr2guido OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

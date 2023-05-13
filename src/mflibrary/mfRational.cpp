@@ -15,7 +15,7 @@
 #include <sstream>
 #include <numeric>      // gcd()
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfRational.h"
@@ -87,7 +87,7 @@ mfRational::mfRational (const std::string &theString)
         "--> numerator = \"" << numerator << "\", " <<
         "--> denominator = \"" << denominator << "\"";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

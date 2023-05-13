@@ -13,7 +13,7 @@
 #include <sstream>
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfServices.h"
 #include "mfStringsHandling.h"
@@ -324,7 +324,7 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
       "Creating a shallow copy of measures slice " <<
       this->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -366,7 +366,7 @@ void msrMeasuresSlice::appendMeasureToMeasureSlice (
       " to measures slice " <<
       asShortStringForMeasuresSlices ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -389,7 +389,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
       " to measures slice " <<
       asShortStringForMeasuresSlices ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -449,7 +449,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
       "Collecting the notes from the measures slices in " <<
       asShortStringForMeasuresSlices ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -488,7 +488,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
           note->asShortString () <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -573,7 +573,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
       "Building the simultaneous notes chunks list in " <<
       asShortStringForMeasuresSlices ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -645,7 +645,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
       "Identifying solo notes and rests in measures slice " <<
       asShortStringForMeasuresSlices ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1149,7 +1149,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
       "Creating a shallow copy of measures slices sequence " <<
       this->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1192,7 +1192,7 @@ void msrMeasuresSlicesSequence::appendMeasuresSliceToSequence (
       " to measures slices sequence " <<
       asShortStringForMeasuresSlices ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1220,7 +1220,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       " with " <<
       otherMeasuresSlicesSequence->asShortStringForMeasuresSlices ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1237,7 +1237,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       "---> sequenceSize: " <<
       sequenceSize;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1275,7 +1275,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
         ", otherSequenceSize: " <<
         otherSequenceSize;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1386,7 +1386,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
       std::endl;
 
     ++gIndenter;
-    gLog << this;
+    gLog << std::hex << std::showbase << this << std::dec; // JMI v0.9.69
     --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED

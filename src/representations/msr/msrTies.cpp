@@ -107,7 +107,7 @@ void msrTie::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTie::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -125,7 +125,7 @@ void msrTie::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTie::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -143,7 +143,7 @@ void msrTie::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTie::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -161,7 +161,7 @@ void msrTie::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTie::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

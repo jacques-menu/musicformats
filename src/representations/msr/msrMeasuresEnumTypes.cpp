@@ -285,7 +285,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //     skipNote->
 //       setMeasurePosition (
 //         this,
-//         fMeasureCurrentWholeNotesDuration,
+//         fMeasureCurrentAccumulatedWholeNotesDuration,
 //         "handleASubsequentHarmonyInAHarmoniesMeasure() 2");
 //
 //     // insert skipNote before currentHarmony in the measure's elements list
@@ -303,7 +303,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//           gWaeHandler->waeTraceWithLocationDetails (
+//           gWaeHandler->waeTrace (
 //             __FILE__, __LINE__,
 //             ss.str (),
 //     }
@@ -354,7 +354,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         "\", line " << inputLineNumber <<
 //         std::endl;
 //
-//           gWaeHandler->waeTraceWithLocationDetails (
+//           gWaeHandler->waeTrace (
 //             __FILE__, __LINE__,
 //             ss.str (),
 //     }

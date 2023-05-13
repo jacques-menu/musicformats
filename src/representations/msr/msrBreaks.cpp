@@ -14,7 +14,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -106,7 +106,7 @@ msrLineBreak::msrLineBreak (
         fUserSelectedLineBreakKind) <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -155,7 +155,7 @@ void msrLineBreak::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrLineBreak::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -173,7 +173,7 @@ void msrLineBreak::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrLineBreak::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -191,7 +191,7 @@ void msrLineBreak::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrLineBreak::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -209,7 +209,7 @@ void msrLineBreak::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrLineBreak::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -318,7 +318,7 @@ msrPageBreak::msrPageBreak (
         fUserSelectedPageBreakKind) <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -369,7 +369,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrPageBreak::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -387,7 +387,7 @@ void msrPageBreak::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrPageBreak::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -405,7 +405,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrPageBreak::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -423,7 +423,7 @@ void msrPageBreak::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrPageBreak::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

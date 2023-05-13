@@ -29,14 +29,6 @@ EXP void waeWarning (
   int                inputLineNumber,
   const std::string& message);
 
-EXP void waeWarningWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
-
 //______________________________________________________________________________
 // internal warnings
 
@@ -45,14 +37,6 @@ EXP void waeInternalWarning (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message);
-
-EXP void waeInternalWarningWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 // errors without exceptions
@@ -63,31 +47,13 @@ EXP void waeErrorWithoutException (
   int                sourceCodeLineNumber,
   const std::string& message);
 
-EXP void waeErrorWithoutExceptionWithLocationDetails (
-  const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
-
-EXP void waeErrorWithoutException (
+EXP void waeErrorWithoutExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
-
-EXP void waeErrorWithoutExceptionWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 // errors with exceptions
@@ -99,16 +65,7 @@ EXP void waeErrorWithException (
   const std::string& message,
   S_mfException      except);
 
-EXP void waeErrorWithExceptionWithLocationDetails (
-  const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
-  S_mfException      except);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
-
-EXP void waeErrorWithException (
+EXP void waeErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -116,17 +73,6 @@ EXP void waeErrorWithException (
   int                sourceCodeLineNumber,
   const std::string& message,
   S_mfException      except);
-
-EXP void waeErrorWithExceptionWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
-  S_mfException      except);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 // errors
@@ -137,36 +83,18 @@ EXP void waeError (
   int                sourceCodeLineNumber,
   const std::string& message);
 
-EXP void waeErrorWithLocationDetails (
-  const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
-
-EXP void waeError (
+EXP void waeErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
-
-EXP void waeErrorWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 // internal errors
 
-EXP void waeInternalError (
+EXP void waeInternalErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -174,17 +102,7 @@ EXP void waeInternalError (
   int                sourceCodeLineNumber,
   const std::string& message);
 
-EXP void waeInternalErrorWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
-
-EXP void waeInternalErrorWithException (
+EXP void waeInternalErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -192,17 +110,6 @@ EXP void waeInternalErrorWithException (
   int                sourceCodeLineNumber,
   const std::string& message,
   S_mfException      except);
-
-EXP void waeInternalErrorWithExceptionWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
-  S_mfException      except);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 

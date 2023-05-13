@@ -250,7 +250,7 @@ void initializeMusicFormatsPassIDs ()
         "Initializing MusicFormats passIDs" <<
         std::endl;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

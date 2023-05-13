@@ -12,7 +12,6 @@
 #include <iomanip>      // std::setw, std::setprecision, ...
 
 #include "mfAssert.h"
-
 #include "mfStringsHandling.h"
 
 #include "mfIndentedTextOutput.h"
@@ -22,11 +21,13 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// #define DEBUG_INDENTER
+// uncomment the following definition if indentation debugging is desired
+// #define MF_INDENTATION_DEBUGGING_IS_ENABLED
 
-#ifdef DEBUG_INDENTER
+//______________________________________________________________________________
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
   #include "waeHandlers.h"
-#endif
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
 
 //______________________________________________________________________________
 mfOutputIndenter::mfOutputIndenter (std::string spacer)
@@ -47,19 +48,24 @@ mfOutputIndenter::~mfOutputIndenter ()
 // increase the indentation by 1, prefix operator
 mfOutputIndenter& mfOutputIndenter::operator++ ()
 {
-#ifdef DEBUG_INDENTER
-  gLog <<
-    "% >>>>> Incrementing INDENTER: " << fIndentation <<
-    std::endl;
-#endif // DEBUG_INDENTER
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  std::stringstream ss;
+
+  ss <<
+    "% >>>>> Incrementing INDENTER from " << fIndentation;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
 
   ++fIndentation;
 
-#ifdef DEBUG_INDENTER
-  gLog <<
-    "% ===== INDENTER: " << fIndentation <<
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  ss <<
+    " to " << fIndentation <<
     std::endl;
-#endif // DEBUG_INDENTER
+
+  gLog <<
+    ss.str () <<
+    std::endl << std::endl;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
 
   return *this;
 }
@@ -67,39 +73,31 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
 // decrease the indentation by 1, prefix operator
 mfOutputIndenter& mfOutputIndenter::operator-- ()
 {
-#ifdef DEBUG_INDENTER
-  gLog <<
-    "% <<<<< Decrementing INDENTER: " << fIndentation <<
-    std::endl;
-#endif // DEBUG_INDENTER
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  std::stringstream ss;
+
+  ss <<
+    "% >>>>> Decrementing INDENTER from " << fIndentation;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
 
   --fIndentation;
 
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  ss <<
+    " to " << fIndentation <<
+    std::endl;
+
+  gLog <<
+    ss.str () <<
+    std::endl << std::endl;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
+
   if (fIndentation < 0) {
-    gLog <<
-      std::endl <<
-      "% ### Indentation has become negative: " <<  fIndentation <<
-      std::endl << std::endl;
-
-#ifdef DEBUG_INDENTER
-//     mfAssert (
-//       __FILE__, __LINE__,
-//       false,
-//       "indentation has become negative");
-#endif // DEBUG_INDENTER
+    mfAssert (
+      __FILE__, __LINE__,
+      false,
+      "indentation has become negative at " + std::to_string (fIndentation));
   }
-
-#ifdef DEBUG_INDENTER
-  else {
-    gLog <<
-      "% ===== INDENTER: " << fIndentation <<
-      std::endl;
-
-//     gWaeHandler->waeTraceWithoutLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-  }
-#endif // DEBUG_INDENTER
 
   return *this;
 }
@@ -107,13 +105,24 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 // increase the indentation by 1, postfix operator
 mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
 {
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  std::stringstream ss;
+
+  ss <<
+    "% >>>>> Incrementing INDENTER from " << fIndentation;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
+
   ++fIndentation;
 
-#ifdef DEBUG_INDENTER
-  gLog <<
-    "% INDENTER: " << fIndentation <<
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  ss <<
+    " to " << fIndentation <<
     std::endl;
-#endif // DEBUG_INDENTER
+
+  gLog <<
+    ss.str () <<
+    std::endl << std::endl;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
 
   return *this;
 }
@@ -121,99 +130,93 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
 // decrease the indentation by 1, postfix operator
 mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
 {
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  std::stringstream ss;
+
+  ss <<
+    "% >>>>> Decrementing INDENTER from " << fIndentation;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
+
   --fIndentation;
 
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  ss <<
+    " to " << fIndentation <<
+    std::endl;
+
+  gLog <<
+    ss.str () <<
+    std::endl << std::endl;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
+
   if (fIndentation < 0) {
-    gLog <<
-      std::endl <<
-      "% ### Indentation has become negative: " <<  fIndentation <<
-      std::endl << std::endl;
-
-#ifdef DEBUG_INDENTER
-//     mfAssert (
-//       __FILE__, __LINE__,
-//       false,
-//       "indentation has become negative");
-#endif // DEBUG_INDENTER
+    mfAssert (
+      __FILE__, __LINE__,
+      false,
+      "indentation has become negative at " + std::to_string (fIndentation));
   }
-
-#ifdef DEBUG_INDENTER
-  else {
-    gLog <<
-      "% INDENTER: " << fIndentation <<
-      std::endl;
-
-//     gWaeHandler->waeTraceWithoutLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-  }
-#endif // DEBUG_INDENTER
 
   return *this;
 }
 
 mfOutputIndenter& mfOutputIndenter::increment (int value)
 {
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  std::stringstream ss;
+
+  ss <<
+    "% >>>>> Incrementing INDENTER from " << fIndentation;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
+
   fIndentation += value;
 
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  ss <<
+    " to " << fIndentation <<
+    std::endl;
+
+  gLog <<
+    ss.str () <<
+    std::endl << std::endl;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
+
   if (fIndentation < 0) {
-    gLog <<
-      std::endl <<
-      "% ### Indentation has become negative: " <<  fIndentation <<
-      std::endl << std::endl;
-
-#ifdef DEBUG_INDENTER
-//     mfAssert (
-//       __FILE__, __LINE__,
-//       false,
-//       "indentation has become negative");
-#endif // DEBUG_INDENTER
+    mfAssert (
+      __FILE__, __LINE__,
+      false,
+      "indentation has become negative at " + std::to_string (fIndentation));
   }
-
-#ifdef DEBUG_INDENTER
-  else {
-    gLog <<
-      "% INDENTER: " << fIndentation <<
-      std::endl;
-
-//     gWaeHandler->waeTraceWithoutLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-  }
-#endif // DEBUG_INDENTER
 
   return *this;
 }
 
 mfOutputIndenter& mfOutputIndenter::decrement (int value)
 {
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  std::stringstream ss;
+
+  ss <<
+    "% >>>>> Decrementing INDENTER from " << fIndentation;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
+
   fIndentation -= value;
 
+#ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
+  ss <<
+    " to " << fIndentation <<
+    std::endl;
+
+  gLog <<
+    ss.str () <<
+    std::endl << std::endl;
+#endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
+
   if (fIndentation < 0) {
-    gLog <<
-      std::endl <<
-      "% ### Indentation has become negative: " <<  fIndentation <<
-      std::endl << std::endl;
-
-#ifdef DEBUG_INDENTER
-//     mfAssert (
-//       __FILE__, __LINE__,
-//       false,
-//       "indentation has become negative");
-#endif // DEBUG_INDENTER
+    mfAssert (
+      __FILE__, __LINE__,
+      false,
+      "indentation has become negative at " + std::to_string (fIndentation));
   }
-
-#ifdef DEBUG_INDENTER
-  else {
-    gLog <<
-      "% INDENTER: " << fIndentation <<
-      std::endl;
-
-//     gWaeHandler->waeTraceWithoutLocationDetails (
-//       __FILE__, __LINE__,
-//       ss.str ());
-  }
-#endif // DEBUG_INDENTER
 
   return *this;
 }
@@ -283,9 +286,9 @@ void mfOutputIndenter::printMultiLineStringInATable (
         mfReplicateChar (' ', columnStart);
     }
 
-  int
-    twoBytesWideCharactersInLine =
-      countTwoBytesWideCharactersInString (line); // JMI v0.9.67
+//   int
+//     twoBytesWideCharactersInLine =
+//       countTwoBytesWideCharactersInString (line); // JMI v0.9.67
 //   os << "countTwoBytesWideCharactersInString: " << countTwoBytesWideCharactersInString << std::endl;
 
     os << std::left <<
@@ -307,6 +310,39 @@ std::ostream& operator << (std::ostream& os, const mfOutputIndenter& theIndenter
   theIndenter.printSpacers (os);
   return os;
 }
+
+//______________________________________________________________________________
+S_mfIndentedOstream mfIndentedOstream::create (
+  std::ostream&     theOStream,
+  mfOutputIndenter& theIndenter)
+{
+  mfIndentedOstream* obj =
+    new mfIndentedOstream (
+      theOStream,
+      theIndenter);
+  assert (obj != nullptr);
+
+  return obj;
+}
+
+mfIndentedOstream::mfIndentedOstream (
+  std::ostream&     theOStream,
+  mfOutputIndenter& theIndenter)
+    : std::ostream (
+        & fIndentedOStreamBuf),
+      fIndentedOStreamBuf (
+        theOStream,
+        theIndenter)
+{}
+
+mfIndentedOStreamBuf::mfIndentedOStreamBuf (
+  std::ostream&     outputStream,
+  mfOutputIndenter& theIndenter)
+    : fOutputOStream (
+        outputStream),
+      fOutputIndenter (
+        theIndenter)
+{}
 
 //______________________________________________________________________________
 int mfIndentedOStreamBuf::sync ()
@@ -345,6 +381,16 @@ int mfIndentedOStreamBuf::sync ()
   fOutputOStream.flush ();
 
   return 0;
+}
+
+//______________________________________________________________________________
+S_mfIndentedStringStream mfIndentedStringStream::create ()
+{
+  mfIndentedStringStream* obj =
+    new mfIndentedStringStream ();
+  assert (obj != nullptr);
+
+  return obj;
 }
 
 EXP mfIndentedStringStream& operator << (
@@ -478,16 +524,16 @@ EXP mfOutputIndenter& getGlobalOutputIndenter ()
 }
 
 // the hidden global log and output indented streams
-S_indentedOstream pGlobalOutputIndentedOstream;
+S_mfIndentedOstream pGlobalOutputIndentedOstream;
 
-EXP S_indentedOstream& getGlobalOutputIndentedOstream ()
+EXP S_mfIndentedOstream& getGlobalOutputIndentedOstream ()
 {
   return pGlobalOutputIndentedOstream;
 }
 
-S_indentedOstream pGlobalLogIndentedOstream;
+S_mfIndentedOstream pGlobalLogIndentedOstream;
 
-EXP S_indentedOstream& getGlobalLogIndentedOstream ()
+EXP S_mfIndentedOstream& getGlobalLogIndentedOstream ()
 {
   return pGlobalLogIndentedOstream;
 }
@@ -500,17 +546,16 @@ void createTheGlobalIndentedOstreams (
   pGlobalOutputIndentedOstream =
     mfIndentedOstream::create (
       theOutputStream,
-      gIndenter);
+      pGlobalOutputIndenter);
 
   pGlobalLogIndentedOstream =
     mfIndentedOstream::create (
       theLogStream,
-      gIndenter);
+      pGlobalOutputIndenter);
 }
 
 
 }
-
 
 /*
 //______________________________________________________________________________

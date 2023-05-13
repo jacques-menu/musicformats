@@ -60,7 +60,7 @@ Other data are computed by the MSR private methods. For example, in \msr{msrVoic
 There are also data that varies during the lifetime of the object, while it is being populated for example.
 One such case is \class{msrMeasure}:
 \begin{lstlisting}[language=CPlusPlus]
-    mfRational              fCurrentMeasureCurrentWholeNotesDuration;
+    mfRational              fCurrentMeasureCurrentAccumulatedWholeNotesDuration;
                             // this increases when musical elements
                             // are appended to the measure
 \end{lstlisting}

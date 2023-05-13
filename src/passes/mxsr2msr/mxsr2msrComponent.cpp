@@ -30,7 +30,7 @@ S_mfcPassComponent createMxsr2msrComponent ()
       ss <<
         "Creating the mxsr2msr pass component";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

@@ -15,7 +15,7 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 
@@ -51,7 +51,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleOutputKindAtom& elt)
       ".\\\" --> Start visiting brailleOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -85,7 +85,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleOutputKindAtom& elt)
       ".\\\" --> End visiting brailleOutputKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -104,7 +104,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleUTFKindAtom& elt)
       ".\\\" --> Start visiting brailleUTFKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -138,7 +138,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleUTFKindAtom& elt)
       ".\\\" --> End visiting brailleUTFKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -157,7 +157,7 @@ void brailleGenerationOah2manPage::visitStart (S_brailleByteOrderingKindAtom& el
       ".\\\" --> Start visiting brailleByteOrderingKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -191,7 +191,7 @@ void brailleGenerationOah2manPage::visitEnd (S_brailleByteOrderingKindAtom& elt)
       ".\\\" --> End visiting brailleByteOrderingKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

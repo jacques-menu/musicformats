@@ -16,7 +16,7 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -298,7 +298,7 @@ void mfMultiGenerationOutputKindAtom::setImplicitVariable (std::ostream& os)
       fetchNames () <<
       "; which is of type 'mfMultiGenerationOutputKindAtom'";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -330,7 +330,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -348,7 +348,7 @@ void mfMultiGenerationOutputKindAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -366,7 +366,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -384,7 +384,7 @@ void mfMultiGenerationOutputKindAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching mfMultiGenerationOutputKindAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -402,7 +402,7 @@ void mfMultiGenerationOutputKindAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> mfMultiGenerationOutputKindAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -624,7 +624,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -642,7 +642,7 @@ void mfMultiGenerationOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -660,7 +660,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> mfMultiGenerationOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -678,7 +678,7 @@ void mfMultiGenerationOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching mfMultiGenerationOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -696,7 +696,7 @@ void mfMultiGenerationOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> mfMultiGenerationOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -754,7 +754,7 @@ S_multiGenerationOahGroup createGlobalMultiGenerationOahGroup ()
     ss <<
       "Creating multi generator OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

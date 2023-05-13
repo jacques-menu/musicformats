@@ -137,7 +137,7 @@ EXP int xml2ly (
       serviceName << " xml2ly()" <<
       ", insiderOption: " << insiderOption;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -256,7 +256,7 @@ EXP int xml2ly (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -382,7 +382,7 @@ EXP int xml2ly (
     ss <<
       "The command line options and arguments have been analyzed";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -422,7 +422,7 @@ EXP int xml2ly (
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }

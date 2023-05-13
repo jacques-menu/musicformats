@@ -78,7 +78,7 @@ void bsrLineContentsElement::acceptIn (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrLineContentsElement::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -96,7 +96,7 @@ void bsrLineContentsElement::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching bsrLineContentsElement::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -115,7 +115,7 @@ void bsrLineContentsElement::acceptOut (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrLineContentsElement::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -133,7 +133,7 @@ void bsrLineContentsElement::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching bsrLineContentsElement::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

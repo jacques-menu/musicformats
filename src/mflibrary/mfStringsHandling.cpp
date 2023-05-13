@@ -13,7 +13,7 @@
 #include <string.h>     // strncat
 #include <sstream>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include <map>
 

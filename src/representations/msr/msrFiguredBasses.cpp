@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -193,7 +193,7 @@ msrBassFigure::msrBassFigure (
       "Creating bass figure " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -214,7 +214,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
       "Creating a newborn clone of bass figure " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -251,7 +251,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
       "Creating a deep clone of bass figure " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -298,7 +298,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrBassFigure::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -316,7 +316,7 @@ void msrBassFigure::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrBassFigure::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -334,7 +334,7 @@ void msrBassFigure::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrBassFigure::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -352,7 +352,7 @@ void msrBassFigure::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrBassFigure::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -531,7 +531,7 @@ msrFiguredBass::msrFiguredBass (
       "Creating figuredBass " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -553,7 +553,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
       asShortString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -596,7 +596,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
       asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -639,7 +639,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
       asString () <<
       " to note " << note->asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -699,7 +699,7 @@ void msrFiguredBass::appendFigureToFiguredBass (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -717,7 +717,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrFiguredBass::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -735,7 +735,7 @@ void msrFiguredBass::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrFiguredBass::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -753,7 +753,7 @@ void msrFiguredBass::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrFiguredBass::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -771,7 +771,7 @@ void msrFiguredBass::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrFiguredBass::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

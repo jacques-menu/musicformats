@@ -55,7 +55,7 @@ bsrParallel::~bsrParallel ()
       "', line " <<
       fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -72,7 +72,7 @@ void bsrParallel::acceptIn (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrParallel::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -90,7 +90,7 @@ void bsrParallel::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching bsrParallel::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -109,7 +109,7 @@ void bsrParallel::acceptOut (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrParallel::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -127,7 +127,7 @@ void bsrParallel::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching bsrParallel::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

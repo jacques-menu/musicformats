@@ -16,7 +16,7 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -99,7 +99,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
         "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
         "--> minorNumberValue = \"" << minorNumberValue << "\"";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -144,7 +144,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 
         ss << std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -166,7 +166,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
           "--> majorNumberValue = \"" << majorNumberValue << "\", " <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -368,7 +368,7 @@ mfcVersionNumber::mfcVersionNumber (
       ", patchNumber:" << patchNumber <<
       ", preRelease:" << preRelease;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -430,7 +430,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
     ss << std::endl;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -463,7 +463,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
         "--> patchNumberValue = \"" << patchNumberValue << "\"" <<
         "--> preReleaseValue = \"" << preReleaseValue << "\"";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -834,7 +834,7 @@ S_mfcVersionsHistory mfcVersionsHistory::create ()
     ss <<
       "Creating mfcVersionsHistory";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -856,7 +856,7 @@ mfcVersionsHistory::mfcVersionsHistory ()
     ss <<
       "Constructing mfcVersionsHistory";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -878,7 +878,7 @@ void mfcVersionsHistory::appendVersionDescrToHistory (
       versionDescr <<
       " to history";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -969,7 +969,7 @@ S_mfcComponent mfcComponent::create (
       "Creating mfcComponent" <<
       ", componentName: " << componentName;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -997,7 +997,7 @@ mfcComponent::mfcComponent (
       componentName <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1028,7 +1028,7 @@ void mfcComponent::appendVersionDescrToComponent (
       ' ' <<
       fComponentName;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1144,7 +1144,7 @@ S_mfcOahComponent mfcOahComponent::create (
       "Creating mfcOahComponent" <<
       ", formatName: " << formatName;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1172,7 +1172,7 @@ mfcOahComponent::mfcOahComponent (
       formatName <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1206,7 +1206,7 @@ S_mfcRepresentationComponent mfcRepresentationComponent::create (
       "Creating mfcRepresentationComponent" <<
       ", formatName: " << formatName;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1234,7 +1234,7 @@ mfcRepresentationComponent::mfcRepresentationComponent (
       formatName <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1268,7 +1268,7 @@ S_mfcPassComponent mfcPassComponent::create (
       "Creating mfcPassComponent" <<
       ", passName: " << passName;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1296,7 +1296,7 @@ mfcPassComponent::mfcPassComponent (
       passName <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1371,7 +1371,7 @@ S_mfcMultiComponent mfcMultiComponent::create (
       "Creating mfcMultiComponent" <<
       ", multiComponentName: " << multiComponentName;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1408,7 +1408,7 @@ mfcMultiComponent::mfcMultiComponent (
       multiComponentName <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1444,7 +1444,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
       ' ' <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1512,7 +1512,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
       pass <<
       " to multi-component \"" << fComponentName << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2012,7 +2012,7 @@ S_mfcGeneratorComponent mfcGeneratorComponent::create (
       "Creating mfcGeneratorComponent" <<
       ", generatorName: " << generatorName;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2048,7 +2048,7 @@ mfcGeneratorComponent::mfcGeneratorComponent (
       generatorName <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2086,7 +2086,7 @@ S_mfcConverterComponent mfcConverterComponent::create (
       "Creating mfcConverterComponent" <<
       ", converterName: " << converterName;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2122,7 +2122,7 @@ mfcConverterComponent::mfcConverterComponent (
       converterName <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2160,7 +2160,7 @@ S_mfcLibraryComponent mfcLibraryComponent::create (
       "Creating mfcLibraryComponent" <<
       ", libraryVersionsName: " << libraryVersionsName;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2196,7 +2196,7 @@ mfcLibraryComponent::mfcLibraryComponent (
       libraryVersionsName <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2223,7 +2223,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
       ' ' <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

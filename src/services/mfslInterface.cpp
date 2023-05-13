@@ -134,7 +134,7 @@ EXP int mfsl (
       serviceName << " mfsl()" <<
       ", insiderOption: " << insiderOption;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -254,7 +254,7 @@ EXP int mfsl (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -380,7 +380,7 @@ EXP int mfsl (
     ss <<
       "The command line options and arguments have been analyzed";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -420,7 +420,7 @@ EXP int mfsl (
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }

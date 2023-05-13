@@ -12,7 +12,7 @@
 #ifndef ___msr2bsrOah___
 #define ___msr2bsrOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "bsrOah.h"
 

@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrIdentification.h"
 
@@ -59,7 +59,7 @@ void msrIdentification::setIdentificationWorkNumber (
     ss <<
       "Setting workNumber to \"" << val << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -79,7 +79,7 @@ void msrIdentification::setIdentificationWorkCreditTypeTitle (
     ss <<
       "Setting workCreditTypeTitle to \"" << val << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -99,7 +99,7 @@ void msrIdentification::setIdentificationOpus (
     ss <<
       "Setting opus to \"" << val << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -119,7 +119,7 @@ void msrIdentification::setIdentificationMovementNumber (
     ss <<
       "Setting movementNumber to \"" << val << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -139,7 +139,7 @@ void msrIdentification::setIdentificationMovementTitle (
     ss <<
       "Setting movementTitle to \"" << val << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -159,7 +159,7 @@ void msrIdentification::setIdentificationEncodingDate (
     ss <<
       "Setting encodingDate to \"" << val << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -179,7 +179,7 @@ void msrIdentification::setIdentificationMiscellaneousField (
     ss <<
       "Setting miscellaneousField to \"" << val << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -199,7 +199,7 @@ void msrIdentification::setIdentificationScoreInstrument (
     ss <<
       "Setting scoreInstrument to \"" << val << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -219,7 +219,7 @@ void msrIdentification::appendComposer (
     ss <<
       "Appending composer \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -239,7 +239,7 @@ void msrIdentification::appendLyricist (
     ss <<
       "Appending lyricist \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -259,7 +259,7 @@ void msrIdentification::appendArranger (
     ss <<
       "Appending arranger \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -279,7 +279,7 @@ void msrIdentification::appendPoet (
     ss <<
       "Appending poet \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -299,7 +299,7 @@ void msrIdentification::appendTranslator (
     ss <<
       "Appending translator \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -319,7 +319,7 @@ void msrIdentification::appendArtist (
     ss <<
       "Appending artist \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -339,7 +339,7 @@ void msrIdentification::appendSoftware (
     ss <<
       "Appending software \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -359,7 +359,7 @@ void msrIdentification::appendRight (
     ss <<
       "Appending right \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -379,7 +379,7 @@ void msrIdentification::appendSource (
     ss <<
       "Appendings source \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -399,7 +399,7 @@ void msrIdentification::appendRelation (
     ss <<
       "Appending relation \"" << value << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -566,7 +566,7 @@ void msrIdentification::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrIdentification::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -584,7 +584,7 @@ void msrIdentification::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrIdentification::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -602,7 +602,7 @@ void msrIdentification::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrIdentification::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -620,7 +620,7 @@ void msrIdentification::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrIdentification::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

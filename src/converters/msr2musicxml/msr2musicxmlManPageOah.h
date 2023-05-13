@@ -12,7 +12,7 @@
 #ifndef ___msr2musicxmlManPageOah___
 #define ___msr2musicxmlManPageOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahVisitor.h"
 

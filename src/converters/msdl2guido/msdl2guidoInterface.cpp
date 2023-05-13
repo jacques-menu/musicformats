@@ -13,7 +13,7 @@
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
                         // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfPasses.h"
 #include "mfServices.h"
@@ -103,7 +103,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         separator <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -164,7 +164,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
 
   if (gGlobalMsdl2gmnInsiderOahGroup->getQuitAfterPass1 ()) {
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
@@ -299,7 +299,7 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -406,7 +406,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
   // open input file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->openingGuidoFileForWriting (inputFileName));
@@ -451,7 +451,7 @@ mfMusicformatsErrorKind msdlFile2guidoWithHandler (
   // open input file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->openingGuidoFileForWriting (inputFileName));

@@ -14,7 +14,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "languages.h"
 
@@ -82,7 +82,7 @@ void oahEarlyOptions::setEarlyLanguageKind (
       "Setting fEarlyLanguageKind to " <<
       languageKind;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -106,7 +106,7 @@ void oahEarlyOptions::setEarlyInsiderOption ()
     ss <<
       "Setting fEarlyInsiderOption";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -149,7 +149,7 @@ void oahEarlyOptions::setEarlyQuietOption ()
     ss <<
       "Setting fEarlyQuietOption";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -169,7 +169,7 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
     ss <<
       "Setting fEarlyMultiGenerationOutputKind";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -180,7 +180,7 @@ void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
 
 //______________________________________________________________________________
 const std::string K_INCLUDE_OPTION_LONG_NAME  = "include";
-const std::string K_INCLUDE_OPTION_SHORT_NAME = "inc";
+const std::string K_INCLUDE_OPTION_SHORT_NAME = "incl";
 
 void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
 {
@@ -193,7 +193,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
       includeFileName <<
       ']';
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -206,7 +206,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (std::string includeFileName)
 
 //_______________________________________________________________________________
 const std::string K_TRACE_EARLY_OPTIONS_OPTION_LONG_NAME  ("trace-early-options");
-const std::string K_TRACE_EARLY_OPTIONS_OPTION_SHORT_NAME = "teo";
+const std::string K_TRACE_EARLY_OPTIONS_OPTION_SHORT_NAME = "tearlyopts";
 
 void oahEarlyOptions::setTraceEarlyOptions ()
 {
@@ -221,7 +221,7 @@ void oahEarlyOptions::setTraceEarlyOptions ()
 
 //_______________________________________________________________________________
 const std::string K_OAH_VERBOSE_MODE_OPTION_LONG_NAME  = "oah-verbose-mode";
-const std::string K_OAH_VERBOSE_MODE_OPTION_SHORT_NAME = "ovm";
+const std::string K_OAH_VERBOSE_MODE_OPTION_SHORT_NAME = "oahverbmpde";
 
 void oahEarlyOptions::setEarlyOahVerboseMode ()
 {
@@ -232,7 +232,7 @@ void oahEarlyOptions::setEarlyOahVerboseMode ()
     ss <<
       "Setting fEarlyOahVerboseMode";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -254,7 +254,7 @@ void oahEarlyOptions::setEarlyTraceOah ()
     ss <<
       "Setting fEarlyTraceOah";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -265,7 +265,7 @@ void oahEarlyOptions::setEarlyTraceOah ()
 
 //_______________________________________________________________________________
 const std::string K_TRACE_OAH_DETAILS_OPTION_LONG_NAME  = "trace-oah-details";
-const std::string K_TRACE_OAH_DETAILS_OPTION_SHORT_NAME = "toahd";
+const std::string K_TRACE_OAH_DETAILS_OPTION_SHORT_NAME = "toahdets";
 
 void oahEarlyOptions::setEarlyTraceOahDetails ()
 {
@@ -276,7 +276,7 @@ void oahEarlyOptions::setEarlyTraceOahDetails ()
     ss <<
       "Setting fEarlyTraceOahDetails";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -298,7 +298,7 @@ void oahEarlyOptions::setEarlyTraceComponents ()
     ss <<
       "Setting fEarlyTraceComponents";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -325,7 +325,7 @@ void oahEarlyOptions::setEarlyTracePasses ()
 }
 
 const std::string K_TRACE_ONLY_PASS_OPTION_LONG_NAME  = "trace-only-pass";
-const std::string K_TRACE_ONLY_PASS_OPTION_SHORT_NAME = "topass";
+const std::string K_TRACE_ONLY_PASS_OPTION_SHORT_NAME = "tonlypass";
 
 void oahEarlyOptions::setEarlyTraceOnlyPass (mfPassIDKind passIDKind)
 {
@@ -367,7 +367,7 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
         optionName <<
         "' has been recognized early";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -580,7 +580,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           '\'' <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -631,7 +631,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           '\'' <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -735,7 +735,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
             '\'' <<
             std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -786,7 +786,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           '\'' <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }

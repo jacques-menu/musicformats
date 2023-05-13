@@ -12,7 +12,7 @@
 #ifndef ___LilyPondIssue34Oah___
 #define ___LilyPondIssue34Oah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfMultiGenerationOah.h"
 

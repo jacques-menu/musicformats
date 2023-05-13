@@ -18,7 +18,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -113,7 +113,7 @@ void bsrFacSimileKindAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'bsrFacSimileKindAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -131,7 +131,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> bsrFacSimileKindAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -149,7 +149,7 @@ void bsrFacSimileKindAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching bsrFacSimileKindAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -167,7 +167,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> bsrFacSimileKindAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -185,7 +185,7 @@ void bsrFacSimileKindAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching bsrFacSimileKindAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -203,7 +203,7 @@ void bsrFacSimileKindAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> bsrFacSimileKindAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -351,7 +351,7 @@ void bsrTextsLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'bsrTextsLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -369,7 +369,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> bsrTextsLanguageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -387,7 +387,7 @@ void bsrTextsLanguageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching bsrTextsLanguageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -405,7 +405,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> bsrTextsLanguageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -423,7 +423,7 @@ void bsrTextsLanguageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching bsrTextsLanguageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -441,7 +441,7 @@ void bsrTextsLanguageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> bsrTextsLanguageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -824,7 +824,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> bsrOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -842,7 +842,7 @@ void bsrOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching bsrOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -860,7 +860,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> bsrOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -878,7 +878,7 @@ void bsrOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching bsrOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -896,7 +896,7 @@ void bsrOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> bsrOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1007,7 +1007,7 @@ S_bsrOahGroup createGlobalBsrOahGroup ()
     ss <<
       "Creating global BSR OAH group";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

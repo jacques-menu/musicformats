@@ -20,7 +20,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfInitialization.h"
 #include "mfServices.h"
@@ -98,7 +98,7 @@ Usage: msr2lilypond [[option]* [MusicXMLFile|-] [[option]*
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -189,7 +189,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondPrefixes ()
     ss <<
       "Creating the msr2lilypond prefixes";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -211,7 +211,7 @@ void msr2lilypondInsiderHandler::createTheMsr2lilypondOptionGroups (
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -320,7 +320,7 @@ void msr2lilypondInsiderHandler::checkOptionsAndArguments () const
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -341,7 +341,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -435,7 +435,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -454,7 +454,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -520,7 +520,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msr2lilypondInsiderOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -538,7 +538,7 @@ void msr2lilypondInsiderOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -556,7 +556,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msr2lilypondInsiderOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -574,7 +574,7 @@ void msr2lilypondInsiderOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2lilypondInsiderOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -592,7 +592,7 @@ void msr2lilypondInsiderOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msr2lilypondInsiderOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -738,7 +738,7 @@ S_msr2lilypondInsiderOahGroup createGlobalMsr2lilypondInsiderOahGroup ()
     ss <<
       "Creating global msr2lilypond OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

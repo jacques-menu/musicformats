@@ -12,7 +12,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "visitor.h"
 
@@ -124,7 +124,7 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrRehearsalMark::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -142,7 +142,7 @@ void msrRehearsalMark::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrRehearsalMark::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -160,7 +160,7 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrRehearsalMark::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -178,7 +178,7 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrRehearsalMark::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

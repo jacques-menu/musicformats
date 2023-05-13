@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrGlissandos.h"
 
@@ -103,7 +103,7 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -130,7 +130,7 @@ void msrGlissando::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrGlissando::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -148,7 +148,7 @@ void msrGlissando::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrGlissando::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -166,7 +166,7 @@ void msrGlissando::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrGlissando::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -184,7 +184,7 @@ void msrGlissando::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrGlissando::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

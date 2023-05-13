@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "visitor.h"
 
@@ -61,7 +61,7 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrNewStaffgroupBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -79,7 +79,7 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrNewStaffgroupBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -97,7 +97,7 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrNewStaffgroupBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -115,7 +115,7 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrNewStaffgroupBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -180,7 +180,7 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrNewStaffTuningBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -198,7 +198,7 @@ void lpsrNewStaffTuningBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrNewStaffTuningBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -216,7 +216,7 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrNewStaffTuningBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -234,7 +234,7 @@ void lpsrNewStaffTuningBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrNewStaffTuningBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -292,7 +292,7 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrNewStaffBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -310,7 +310,7 @@ void lpsrNewStaffBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrNewStaffBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -328,7 +328,7 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrNewStaffBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -346,7 +346,7 @@ void lpsrNewStaffBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrNewStaffBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -447,7 +447,7 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrStaffBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -465,7 +465,7 @@ void lpsrStaffBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrStaffBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -483,7 +483,7 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrStaffBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -501,7 +501,7 @@ void lpsrStaffBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrStaffBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -519,7 +519,7 @@ void lpsrStaffBlock::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrStaffBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -542,7 +542,7 @@ void lpsrStaffBlock::browseData (basevisitor* v)
     ss <<
       "% <== lpsrStaffBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

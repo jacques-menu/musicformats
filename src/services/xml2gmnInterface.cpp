@@ -123,7 +123,7 @@ EXP int xml2gmn (
       serviceName << " xml2gmn()" <<
       ", insiderOption: " << insiderOption;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -236,7 +236,7 @@ EXP int xml2gmn (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -361,7 +361,7 @@ EXP int xml2gmn (
     ss <<
       "The command line options and arguments have been analyzed";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -139,7 +139,7 @@ void msrArticulation::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrArticulation::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -157,7 +157,7 @@ void msrArticulation::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrArticulation::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -175,7 +175,7 @@ void msrArticulation::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrArticulation::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -193,7 +193,7 @@ void msrArticulation::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrArticulation::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -276,7 +276,7 @@ void msrFermata::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrFermata::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -294,7 +294,7 @@ void msrFermata::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrFermata::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -312,7 +312,7 @@ void msrFermata::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrFermata::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -330,7 +330,7 @@ void msrFermata::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrFermata::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -475,7 +475,7 @@ void msrArpeggiato::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrArpeggiato::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -493,7 +493,7 @@ void msrArpeggiato::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrArpeggiato::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -511,7 +511,7 @@ void msrArpeggiato::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrArpeggiato::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -529,7 +529,7 @@ void msrArpeggiato::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrArpeggiato::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -643,7 +643,7 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrNonArpeggiato::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -661,7 +661,7 @@ void msrNonArpeggiato::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrNonArpeggiato::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -679,7 +679,7 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrNonArpeggiato::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -696,7 +696,7 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrNonArpeggiato::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

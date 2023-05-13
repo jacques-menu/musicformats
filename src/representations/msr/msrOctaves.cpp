@@ -487,7 +487,7 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -563,7 +563,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
         "--> pitch = \"" << pitch << "\", " <<
         "--> octaveIndication = \"" << octaveIndication << "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -593,7 +593,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
         "--> octaveKind: " <<
         msrOctaveKindAsString (octaveKind);
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -784,7 +784,7 @@ msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -885,7 +885,7 @@ msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -987,7 +987,7 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1063,7 +1063,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
         "--> pitch = \"" << pitch << "\", " <<
         "--> octaveIndication = \"" << octaveIndication << "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1095,7 +1095,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
         "\", " <<
         "--> octaveKind: " << msrOctaveKindAsString (octaveKind);
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

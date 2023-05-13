@@ -21,7 +21,7 @@
 #include "waeInterface.h"
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "libmusicxml.h" // for mfMusicformatsErrorKind
 
@@ -114,7 +114,7 @@ int main (int argc, char* argv[])
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -258,7 +258,7 @@ int main (int argc, char* argv[])
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -366,7 +366,7 @@ int main (int argc, char* argv[])
     ss <<
       "The command line options and arguments have been analyzed";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

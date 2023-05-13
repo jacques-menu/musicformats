@@ -155,7 +155,7 @@ void msrCreditWords::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrCreditWords::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -173,7 +173,7 @@ void msrCreditWords::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrCreditWords::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -191,7 +191,7 @@ void msrCreditWords::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrCreditWords::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -209,7 +209,7 @@ void msrCreditWords::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrCreditWords::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -345,7 +345,7 @@ void msrCredit::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrCredit::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -363,7 +363,7 @@ void msrCredit::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrCredit::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -381,7 +381,7 @@ void msrCredit::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrCredit::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -399,7 +399,7 @@ void msrCredit::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrCredit::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

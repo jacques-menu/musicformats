@@ -152,7 +152,7 @@ void msrPart::finalizePartAndAllItsMeasures (
       getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -167,7 +167,7 @@ void msrPart::finalizePartAndAllItsMeasures (
       getPartCombinedName () <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -210,7 +210,7 @@ void msrPart::finalizePart (
       getPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -282,7 +282,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       getStaffName () << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -300,7 +300,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
       getStaffName () << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -560,7 +560,7 @@ void msrMeasure::finalizeRegularMeasure (
   }
 
   mfRational
-    measureCurrentWholeNotesDurationFromPartMeasuresVector =
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
       regularPart->
         getPartMeasuresWholeNotessVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
@@ -577,11 +577,11 @@ void msrMeasure::finalizeRegularMeasure (
       "' in regular voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
-      ", measureCurrentWholeNotesDurationFromPartMeasuresVector: " <<
-      measureCurrentWholeNotesDurationFromPartMeasuresVector <<
+      ", measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector: " <<
+      measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -599,7 +599,7 @@ void msrMeasure::finalizeRegularMeasure (
 
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureCurrentWholeNotesDurationFromPartMeasuresVector);
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector);
 
   // register this measures's length in the part
   S_msrPart
@@ -610,7 +610,7 @@ void msrMeasure::finalizeRegularMeasure (
     registerOrdinalMeasureNumberWholeNotes (
       inputLineNumber,
       fMeasureOrdinalNumberInVoice,
-      fCurrentMeasureCurrentWholeNotesDuration);
+      fCurrentMeasureCurrentAccumulatedWholeNotesDuration);
 
   // determine the measure kind and purist number
   determineMeasureKindAndPuristNumber (
@@ -652,7 +652,7 @@ void msrMeasure::finalizeRegularMeasure (
     if (
       fMeasureLongestNote->getSoundingWholeNotes ()
         ==
-      fFullMeasureCurrentWholeNotesDuration
+      fFullMeasureWholeNotesDuration
     ) {
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceMeasures ()) {
@@ -668,7 +668,7 @@ void msrMeasure::finalizeRegularMeasure (
           "\", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -733,7 +733,7 @@ void msrMeasure::finalizeHarmonyMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -765,15 +765,15 @@ void msrMeasure::finalizeHarmonyMeasure (
       ", harmoniesPartNumberOfMeasures: \"" <<
       harmoniesPartNumberOfMeasures;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // the measureCurrentWholeNotesDuration has to be computed
+  // the measureCurrentAccumulatedWholeNotesDuration has to be computed
   mfRational
-    measureCurrentWholeNotesDurationFromPartMeasuresVector =
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
       harmoniesPart->
         getPartMeasuresWholeNotessVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
@@ -783,10 +783,10 @@ void msrMeasure::finalizeHarmonyMeasure (
     inputLineNumber,
     context);
 
-  // pad the measure up to measureCurrentWholeNotesDurationFromPartMeasuresVector
+  // pad the measure up to measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureCurrentWholeNotesDurationFromPartMeasuresVector);
+    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector);
 
   // determine the measure kind and purist number
   determineMeasureKindAndPuristNumber (
@@ -847,7 +847,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -879,15 +879,15 @@ void msrMeasure::finalizeFiguredBassMeasure (
       ", figuredBassPartNumberOfMeasures: \"" <<
       figuredBassPartNumberOfMeasures;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // the measureCurrentWholeNotesDuration has to be computed
+  // the measureCurrentAccumulatedWholeNotesDuration has to be computed
   mfRational
-    measureCurrentWholeNotesDuration =
+    measureCurrentAccumulatedWholeNotesDuration =
       figuredBassPart->
         getPartMeasuresWholeNotessVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
@@ -897,10 +897,10 @@ void msrMeasure::finalizeFiguredBassMeasure (
     inputLineNumber,
     context);
 
-  // pad the measure up to fFullMeasureCurrentWholeNotesDuration
+  // pad the measure up to fFullMeasureWholeNotesDuration
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureCurrentWholeNotesDuration);
+    measureCurrentAccumulatedWholeNotesDuration);
 
   // determine the measure kind and purist number
   determineMeasureKindAndPuristNumber (

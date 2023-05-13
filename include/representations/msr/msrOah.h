@@ -12,7 +12,7 @@
 #ifndef ___msrOah___
 #define ___msrOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrPitchesNames.h"
 #include "oahAtomsCollection.h"

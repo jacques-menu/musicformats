@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -116,7 +116,7 @@ void waeHandlerForGUI::waeErrorWithoutException (
   }
 }
 
-void waeHandlerForGUI::waeErrorWithoutException (
+void waeHandlerForGUI::waeErrorWithoutExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -164,7 +164,7 @@ void waeHandlerForGUI::waeError (
   throw mfException (message);
 }
 
-void waeHandlerForGUI::waeError (
+void waeHandlerForGUI::waeErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -172,7 +172,7 @@ void waeHandlerForGUI::waeError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeErrorWithoutException (
+  waeErrorWithoutExceptionWithInputLocation (
     context,
     inputSourceName,
     inputLineNumber,
@@ -201,7 +201,7 @@ abort (); // JMI
   throw *except;
 }
 
-void waeHandlerForGUI::waeErrorWithException (
+void waeHandlerForGUI::waeErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -210,7 +210,7 @@ void waeHandlerForGUI::waeErrorWithException (
   const std::string& message,
   S_mfException      except)
 {
-  waeErrorWithoutException (
+  waeErrorWithoutExceptionWithInputLocation (
     context,
     inputSourceName,
     inputLineNumber,
@@ -224,7 +224,7 @@ abort (); // JMI
 }
 
 //______________________________________________________________________________
-void waeHandlerForGUI::waeInternalError (
+void waeHandlerForGUI::waeInternalErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -232,7 +232,7 @@ void waeHandlerForGUI::waeInternalError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeErrorWithoutException (
+  waeErrorWithoutExceptionWithInputLocation (
     context,
     inputSourceName,
     inputLineNumber,
@@ -243,7 +243,7 @@ void waeHandlerForGUI::waeInternalError (
   throw mfException (message);
 }
 
-void waeHandlerForGUI::waeInternalErrorWithException (
+void waeHandlerForGUI::waeInternalErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -252,7 +252,7 @@ void waeHandlerForGUI::waeInternalErrorWithException (
   const std::string& message,
   S_mfException      except)
 {
-  waeErrorWithoutException (
+  waeErrorWithoutExceptionWithInputLocation (
     context,
     inputSourceName,
     inputLineNumber,

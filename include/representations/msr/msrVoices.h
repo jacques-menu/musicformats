@@ -1434,7 +1434,7 @@ class EXP msrVoice : public msrElement
 
     // beams begin, continue and end check
 
-    std::stack<int>       fVoiceBeamNumbersStack;
+    std::list<int>       fVoiceBeamNumbersStack;
 
     // calls counter (for debug)
     int                   fCallsCounter;

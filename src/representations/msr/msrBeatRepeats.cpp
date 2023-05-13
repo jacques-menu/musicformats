@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -83,7 +83,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
       "' (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -115,7 +115,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
       "' (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -147,7 +147,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
       "' (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -254,7 +254,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeatElement::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -272,7 +272,7 @@ void msrBeatRepeatElement::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrBeatRepeatElement::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -290,7 +290,7 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeatElement::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -308,7 +308,7 @@ void msrBeatRepeatElement::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrBeatRepeatElement::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -523,7 +523,7 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
         "measure",
         "measures");
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -566,7 +566,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeatPattern::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -584,7 +584,7 @@ void msrBeatRepeatPattern::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrBeatRepeatPattern::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -602,7 +602,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeatPattern::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -620,7 +620,7 @@ void msrBeatRepeatPattern::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrBeatRepeatPattern::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -638,7 +638,7 @@ void msrBeatRepeatPattern::browseData (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeatPattern::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -762,7 +762,7 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
         "measure",
         "measures");
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -805,7 +805,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeatReplicas::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -823,7 +823,7 @@ void msrBeatRepeatReplicas::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrBeatRepeatReplicas::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -841,7 +841,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeatReplicas::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -859,7 +859,7 @@ void msrBeatRepeatReplicas::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrBeatRepeatReplicas::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -877,7 +877,7 @@ void msrBeatRepeatReplicas::browseData (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeatReplicas::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1021,7 +1021,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1061,7 +1061,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
         "measure",
         "measures");
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1097,7 +1097,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
         "measure",
         "measures");
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1176,7 +1176,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeat::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1194,7 +1194,7 @@ void msrBeatRepeat::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrBeatRepeat::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1212,7 +1212,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeat::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1230,7 +1230,7 @@ void msrBeatRepeat::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrBeatRepeat::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1248,7 +1248,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
     ss <<
       "% ==> msrBeatRepeat::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1276,7 +1276,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
       gLog <<
         "% ==> visiting measures repeat replicas is inhibited";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

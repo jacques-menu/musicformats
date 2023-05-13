@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -338,7 +338,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
       fPart->getPartCombinedName () << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -411,7 +411,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrPartBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -429,7 +429,7 @@ void lpsrPartBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrPartBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -447,7 +447,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrPartBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -465,7 +465,7 @@ void lpsrPartBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrPartBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -483,7 +483,7 @@ void lpsrPartBlock::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrPartBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -506,7 +506,7 @@ void lpsrPartBlock::browseData (basevisitor* v)
     ss <<
       "% <== lpsrPartBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

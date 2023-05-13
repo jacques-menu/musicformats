@@ -12,7 +12,7 @@
 #ifndef ___mxsr2msrOah___
 #define ___mxsr2msrOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrClefsKeysTimeSignatures.h"
 #include "msrSegnos.h"

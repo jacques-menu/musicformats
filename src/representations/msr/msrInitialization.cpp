@@ -43,7 +43,7 @@ void initializeMSR ()
       ss <<
         "Initializing MSR";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

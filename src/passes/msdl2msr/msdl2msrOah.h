@@ -12,7 +12,7 @@
 #ifndef ___msdl2msrOah___
 #define ___msdl2msrOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrPitchesNames.h"
 

@@ -342,8 +342,8 @@ EXP mfOutputIndenter& getGlobalOutputIndenter ();
 The main indented output streams are \code{gOutput} and \code{gLog}:
 \begin{lstlisting}[language=CPlusPlus]
 // the global log and output indented streams
-EXP extern S_indentedOstream gGlobalOutputIndentedOstream;
-EXP extern S_indentedOstream gGlobalLogIndentedOstream;
+EXP extern S_mfIndentedOstream gGlobalOutputIndentedOstream;
+EXP extern S_mfIndentedOstream gGlobalLogIndentedOstream;
 
 #define gOutput *gGlobalOutputIndentedOstream
 #define gLog    *gGlobalLogIndentedOstream

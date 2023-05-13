@@ -11,7 +11,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -85,7 +85,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
       "Creating a newborn clone of a " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -128,7 +128,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
       "Creating a newborn clone of a " <<
       asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -185,7 +185,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrRepeatCoda::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -203,7 +203,7 @@ void msrRepeatCoda::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrRepeatCoda::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -221,7 +221,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrRepeatCoda::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -239,7 +239,7 @@ void msrRepeatCoda::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrRepeatCoda::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

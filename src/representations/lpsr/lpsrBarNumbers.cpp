@@ -55,7 +55,7 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrBarNumberCheck::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -73,7 +73,7 @@ void lpsrBarNumberCheck::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBarNumberCheck::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -91,7 +91,7 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrBarNumberCheck::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -109,7 +109,7 @@ void lpsrBarNumberCheck::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBarNumberCheck::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -168,7 +168,7 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrBarCommand::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -186,7 +186,7 @@ void lpsrBarCommand::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBarCommand::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -204,7 +204,7 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrBarCommand::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -222,7 +222,7 @@ void lpsrBarCommand::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBarCommand::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

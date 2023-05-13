@@ -17,7 +17,7 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfTiming.h"
 
@@ -71,7 +71,7 @@ EXP void translateMxsrToMusicXML (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       ss.str ());
@@ -86,7 +86,7 @@ EXP void translateMxsrToMusicXML (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -106,7 +106,7 @@ EXP void translateMxsrToMusicXML (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -119,7 +119,7 @@ EXP void translateMxsrToMusicXML (
         "xmlFile2musicxml() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -139,7 +139,7 @@ EXP void translateMxsrToMusicXML (
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -155,7 +155,7 @@ EXP void translateMxsrToMusicXML (
         gLanguage->openingMusicXMLFileForWriting (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -198,7 +198,7 @@ EXP void translateMxsrToMusicXML (
         gLanguage->closingMusicXMLFile (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }

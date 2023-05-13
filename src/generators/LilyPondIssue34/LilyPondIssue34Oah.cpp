@@ -18,7 +18,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 #include "msrOah.h"
@@ -209,7 +209,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> LilyPondIssue34OahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -227,7 +227,7 @@ void LilyPondIssue34OahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -245,7 +245,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> LilyPondIssue34OahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -263,7 +263,7 @@ void LilyPondIssue34OahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching LilyPondIssue34OahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -281,7 +281,7 @@ void LilyPondIssue34OahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> LilyPondIssue34OahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -354,7 +354,7 @@ S_LilyPondIssue34OahGroup createGlobalLilyPondIssue34OahGroup ()
     ss <<
       "Creating global LilyPondIssue34 OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

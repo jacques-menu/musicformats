@@ -13,7 +13,7 @@
 #include <fstream>      // std::ofstream, std::ofstream::open(), std::ofstream::close()
                         // std::ifstream, std::ifstream::open(), std::ifstream::close()
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfPasses.h"
 #include "mfServices.h"
@@ -106,7 +106,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
         separator <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -166,7 +166,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
 
   if (false && gGlobalMsdl2xmlInsiderOahGroup->getQuitAfterPass1 ()) { // JMI
 #ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_1));
@@ -301,7 +301,7 @@ EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
       serviceName << " main()" <<
       ", insiderOption: " << insiderOption;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -408,7 +408,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
   // open input file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->openingMusicXMLFileForWriting (inputFileName));
@@ -453,7 +453,7 @@ EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
   // open input file
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       gLanguage->openingMusicXMLFileForWriting (inputFileName));

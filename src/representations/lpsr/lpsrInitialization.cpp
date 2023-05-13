@@ -39,7 +39,7 @@ void initializeLPSR ()
       ss <<
         "Initializing LPSR";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }

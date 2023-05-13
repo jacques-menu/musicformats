@@ -16,7 +16,7 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -99,7 +99,7 @@ R"(Generate initial comments showing the MusicXML generation informations.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "musicxml-comments", "xmlcom",
+        "musicxml-comments", "xmlcoms",
 R"(Generate comments showing the structure of the score.)",
         "fMusicXMLComments",
         fMusicXMLComments));
@@ -197,7 +197,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msr2mxsrOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -215,7 +215,7 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2mxsrOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -233,7 +233,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msr2mxsrOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -251,7 +251,7 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2mxsrOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -269,7 +269,7 @@ void msr2mxsrOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msr2mxsrOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -341,7 +341,7 @@ S_msr2mxsrOahGroup createGlobalMsr2mxsrOahGroup ()
     ss <<
       "Creating global msr2mxsr OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

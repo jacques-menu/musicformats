@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "visitor.h"
 
@@ -129,7 +129,7 @@ void msrSpanner::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSpanner::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -147,7 +147,7 @@ void msrSpanner::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSpanner::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -165,7 +165,7 @@ void msrSpanner::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSpanner::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -183,7 +183,7 @@ void msrSpanner::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSpanner::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

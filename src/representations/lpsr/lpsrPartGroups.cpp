@@ -56,7 +56,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrPartGroupBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -74,7 +74,7 @@ void lpsrPartGroupBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrPartGroupBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -92,7 +92,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrPartGroupBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -110,7 +110,7 @@ void lpsrPartGroupBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrPartGroupBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -128,7 +128,7 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrPartGroupBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -151,7 +151,7 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
     ss <<
       "% <== lpsrPartGroupBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

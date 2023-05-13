@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfStringsHandling.h"
 
@@ -42,28 +42,6 @@ waeHandler::~waeHandler ()
 // warnings
 
 void waeHandler::waeWarning (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& message)
-{
-  if (! gEarlyOptions.getEarlyQuietOption ()) {
-    int saveIndent = gIndenter.getIndentation ();
-
-    gIndenter.resetToZero ();
-
-    gLog <<
-      "*** " << context << " warning *** " <<
-      message <<
-      std::endl;
-
-    fWarningsInputLineNumbers.insert (inputLineNumber);
-
-    gIndenter.setIndentation (saveIndent);
-  }
-}
-
-void waeHandler::waeWarningWithLocationDetails (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -107,30 +85,6 @@ void waeHandler::waeWarningWithLocationDetails (
 // internal warnings
 
 void waeHandler::waeInternalWarning (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& message)
-{
-  if (! gEarlyOptions.getEarlyQuietOption ()) {
-    int saveIndent = gIndenter.getIndentation ();
-
-    gIndenter.resetToZero ();
-
-    gLog <<
-      "*** " << context << " INTERNAL warning *** " <<
-      mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
-      message <<
-      std::endl;
-
-    fWarningsInputLineNumbers.insert (
-      inputLineNumber);
-
-    gIndenter.setIndentation (saveIndent);
-  }
-}
-
-void waeHandler::waeInternalWarningWithLocationDetails (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -179,35 +133,6 @@ void waeHandler::waeErrorWithoutException (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message)
-{
-  if (! gEarlyOptions.getEarlyQuietOption ()) {
-    int saveIndent = gIndenter.getIndentation ();
-
-    gIndenter.resetToZero ();
-
-    if (gOahOahGroup->getDisplaySourceCodePositions ()) {
-      gLog <<
-        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
-        " --FOO 1 -- " <<
-        ' ';
-    }
-
-    if (! gWaeOahGroup->getDontShowErrors ()) {
-      gLog <<
-        "### " << context << " ERROR ### " <<
-        message <<
-        std::endl;
-    }
-
-    gIndenter.setIndentation (saveIndent);
-  }
-}
-
-void waeHandler::waeErrorWithoutExceptionWithLocationDetails (
-  const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)
 {
@@ -250,42 +175,7 @@ void waeHandler::waeErrorWithoutExceptionWithLocationDetails (
   }
 }
 
-void waeHandler::waeErrorWithoutException (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
-{
-  if (! gEarlyOptions.getEarlyQuietOption ()) {
-    int saveIndent = gIndenter.getIndentation ();
-
-    gIndenter.resetToZero ();
-
-    if (gOahOahGroup->getDisplaySourceCodePositions ()) {
-      gLog <<
-        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
-        " --FOO 3 -- " <<
-        ' ';
-    }
-
-    if (! gWaeOahGroup->getDontShowErrors ()) {
-      gLog <<
-        "### " << context << " ERROR ### " <<
-        mfBaseName (inputSourceName) << ":" << inputLineNumber << ": " <<
-        message <<
-        std::endl;
-
-      fErrorsInputLineNumbers.insert (
-        inputLineNumber);
-    }
-
-    gIndenter.setIndentation (saveIndent);
-  }
-}
-
-void waeHandler::waeErrorWithoutExceptionWithLocationDetails (
+void waeHandler::waeErrorWithoutExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -358,7 +248,7 @@ abort (); // JMI
   throw *except;
 }
 
-void waeHandler::waeErrorWithException (
+void waeHandler::waeErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -367,61 +257,13 @@ void waeHandler::waeErrorWithException (
   const std::string& message,
   S_mfException      except)
 {
-  this->waeErrorWithoutException (
+  this->waeErrorWithoutExceptionWithInputLocation (
     context,
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
     message);
-
-abort (); // JMI
-
-  throw *except;
-}
-
-void waeHandler::waeErrorWithExceptionWithLocationDetails (
-  const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
-  S_mfException      except)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
-{
-  this->waeErrorWithoutExceptionWithLocationDetails (
-    context,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
-//     measureNumber,
-//     scoreMeasuresNumber);
-
-abort (); // JMI
-
-  throw *except;
-}
-
-void waeHandler::waeErrorWithExceptionWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
-  S_mfException      except)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
-{
-  this->waeErrorWithoutExceptionWithLocationDetails (
-    context,
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
-//     measureNumber,
-//     scoreMeasuresNumber);
 
 abort (); // JMI
 
@@ -446,26 +288,7 @@ void waeHandler::waeError (
   throw mfException (message);
 }
 
-void waeHandler::waeErrorWithLocationDetails (
-  const std::string& context,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
-{
-  this->waeErrorWithoutExceptionWithLocationDetails (
-    context,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
-//     measureNumber,
-//     scoreMeasuresNumber);
-
-  throw mfException (message);
-}
-
-void waeHandler::waeError (
+void waeHandler::waeErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -473,36 +296,13 @@ void waeHandler::waeError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  this->waeErrorWithoutException (
+  this->waeErrorWithoutExceptionWithInputLocation (
     context,
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
     message);
-
-  throw mfException (message);
-}
-
-void waeHandler::waeErrorWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
-{
-  this->waeErrorWithoutExceptionWithLocationDetails (
-    context,
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
-//     measureNumber,
-//     scoreMeasuresNumber);
 
   throw mfException (message);
 }
@@ -510,7 +310,7 @@ void waeHandler::waeErrorWithLocationDetails (
 //______________________________________________________________________________
 // internal errors
 
-void waeHandler::waeInternalError (
+void waeHandler::waeInternalErrorWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -518,7 +318,7 @@ void waeHandler::waeInternalError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  this->waeErrorWithoutException (
+  this->waeErrorWithoutExceptionWithInputLocation (
     context,
     inputSourceName,
     inputLineNumber,
@@ -529,30 +329,7 @@ void waeHandler::waeInternalError (
   throw mfException (message);
 }
 
-void waeHandler::waeInternalErrorWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
-{
-  this->waeErrorWithoutExceptionWithLocationDetails (
-    context,
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
-//     measureNumber,
-//     scoreMeasuresNumber);
-
-  throw mfException (message);
-}
-
-void waeHandler::waeInternalErrorWithException (
+void waeHandler::waeInternalErrorWithExceptionWithInputLocation (
   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -561,37 +338,13 @@ void waeHandler::waeInternalErrorWithException (
   const std::string& message,
   S_mfException      except)
 {
-  this->waeErrorWithoutException (
+  this->waeErrorWithoutExceptionWithInputLocation (
     context,
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
     message);
-
-  throw *except;
-}
-
-void waeHandler::waeInternalErrorWithExceptionWithLocationDetails (
-  const std::string& context,
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message,
-  S_mfException      except)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
-{
-  this->waeErrorWithoutExceptionWithLocationDetails (
-    context,
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
-//     measureNumber,
-//     scoreMeasuresNumber);
 
   throw *except;
 }
@@ -599,7 +352,7 @@ void waeHandler::waeInternalErrorWithExceptionWithLocationDetails (
 //______________________________________________________________________________
 #ifdef MF_TRACE_IS_ENABLED
 
-void waeHandler::waeTraceToStream (
+void waeHandler::waeTraceToStreamWithoutInputLocation (
 //   const std::string& context,
   std::ostream&      os,
   const std::string& inputSourceName,
@@ -625,7 +378,7 @@ void waeHandler::waeTraceToStream (
     switch (earlyTraceOnlyPass) {
       case mfPassIDKind::kMfPassID_UNKNOWN_:
         os <<
-          "waeHandler::waeTraceWithoutLocationDetails: " <<
+          "waeHandler::waeTraceWithoutInputLocation: " <<
           "fEarlyTraceOnlyPass = " << earlyTraceOnlyPass <<
           std::endl;
         break;
@@ -706,7 +459,7 @@ void waeHandler::waeTraceToStream (
   }
 }
 
-void waeHandler::waeTraceToStreamWithLocationDetails (
+void waeHandler::waeTraceToStream (
 //    const std::string& context,
   std::ostream&      os,
   const std::string& inputSourceName,
@@ -801,20 +554,20 @@ void waeHandler::waeTraceToStreamWithLocationDetails (
   }
 }
 
-void waeHandler::waeTraceWithoutLocationDetails (
+void waeHandler::waeTraceWithoutInputLocation (
 //   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message)
 {
-  this->waeTraceToStream (
+  this->waeTraceToStreamWithoutInputLocation (
     gLog,
     inputSourceName,
     inputLineNumber,
     message);
 }
 
-void waeHandler::waeTraceWithLocationDetails (
+void waeHandler::waeTrace (
 //   const std::string& context,
   const std::string& inputSourceName,
   int                inputLineNumber,
@@ -822,7 +575,7 @@ void waeHandler::waeTraceWithLocationDetails (
 //   const std::string  measureNumber,
 //   int                scoreMeasuresNumber)
 {
-  this->waeTraceToStreamWithLocationDetails (
+  this->waeTraceToStream (
     gLog,
     inputSourceName,
     inputLineNumber,

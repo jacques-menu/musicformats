@@ -320,7 +320,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
       ", figuredBassVoicesCounter = " << fFiguredBassVoicesCounter <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -355,7 +355,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
           inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -421,7 +421,7 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
       "--> Start visiting S_figured_bass" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -492,7 +492,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
       "--> End visiting S_figured_bass" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -507,7 +507,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
       "Creating a figured bass" <<
       ", line " << inputLineNumber << ":";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -707,7 +707,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %          '\'' <<
 %          std::endl;
 %
-%      gWaeHandler->waeTraceWithoutLocationDetails (
+%      gWaeHandler->waeTraceWithoutInputLocation (
 %        __FILE__, __LINE__,
 %        ss.str ());
 %      }
@@ -775,7 +775,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -849,7 +849,7 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -879,7 +879,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -953,7 +953,7 @@ void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
       '\'' <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -988,7 +988,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
       ", line " << elt->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -95,7 +95,7 @@ msrTransposition::msrTransposition (
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -165,7 +165,7 @@ void msrTransposition::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTransposition::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -183,7 +183,7 @@ void msrTransposition::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTransposition::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -201,7 +201,7 @@ void msrTransposition::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTransposition::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -219,7 +219,7 @@ void msrTransposition::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTransposition::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

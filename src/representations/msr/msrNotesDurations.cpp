@@ -19,7 +19,7 @@
 #include <sstream>
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -234,7 +234,7 @@ EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
       ", (int) notesNotesDurationKind: " << (int) notesNotesDurationKind <<
       ", result: " << result;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -262,7 +262,7 @@ EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
       ", result: " << result <<
       ", increment: " << increment;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -608,7 +608,7 @@ msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
       ", (int) fNotesDurationKind: " << (int) fNotesDurationKind <<
       ", result: " << result;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -636,7 +636,7 @@ msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
       ", result: " << result <<
       ", increment: " << increment;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -670,7 +670,7 @@ msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
       ", result: " << result <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -694,7 +694,7 @@ msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
       ", result: " << result <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -876,7 +876,7 @@ msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes (
       ", (int) fNotesDurationKind: " << (int) fNotesDurationKind <<
       ", result: " << result;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -904,7 +904,7 @@ msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes (
       ", result: " << result <<
       ", increment: " << increment;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -938,7 +938,7 @@ msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO 
       ", result: " << result <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -962,7 +962,7 @@ msrWholeNotes msrDottedNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO 
       ", result: " << result <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1074,7 +1074,7 @@ msrWholeNotes::msrWholeNotes (const std::string &theString)
         "--> numewholeNotesor = \"" << numewholeNotesor << "\", " <<
         "--> denominator = \"" << denominator << "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1449,7 +1449,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       ", wholeNotes: " << wholeNotes.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1469,7 +1469,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       "--> denominator: " << denominator <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1511,7 +1511,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       integralNumberOfWholeNotes.asString () <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1538,7 +1538,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       "--> numeratorDots " << ": " << numeratorDots <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1623,7 +1623,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       denominatorNotesDurationLog <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1642,7 +1642,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
         "--> integralNumberOfWholeNotes,"
         " bringing the faction to be less that 2";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1684,7 +1684,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       numeratorDots <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1702,7 +1702,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       ss <<
         "--> taking the dots into account";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1733,7 +1733,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       ss <<
         "--> setting the multiplying factor";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1801,7 +1801,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       multiplyingFactor <<
       std::endl << std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1860,7 +1860,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
      ", result: \"" << result << "\"" <<
       ", numeratorDots" << ": " << numeratorDots;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

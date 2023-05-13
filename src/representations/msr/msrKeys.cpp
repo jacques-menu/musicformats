@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -91,7 +91,7 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
       "Creating Humdrum/Scot key item" <<
       ", line: " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -133,7 +133,7 @@ void msrHumdrumScotKeyItem::setKeyItemDiatonicPitchKind (
       msrDiatonicPitchKindAsString (diatonicPitchKind) <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -154,7 +154,7 @@ void msrHumdrumScotKeyItem::setKeyItemAlterationKind (
       msrAlterationKindAsString (alterationKind) <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -174,7 +174,7 @@ void msrHumdrumScotKeyItem::setKeyItemOctaveKind (msrOctaveKind keyOctaveKind)
       msrOctaveKindAsString (keyOctaveKind) <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -192,7 +192,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrHumdrumScotKeyItem::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -210,7 +210,7 @@ void msrHumdrumScotKeyItem::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrHumdrumScotKeyItem::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -228,7 +228,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrHumdrumScotKeyItem::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -246,7 +246,7 @@ void msrHumdrumScotKeyItem::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrHumdrumScotKeyItem::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -597,7 +597,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       keyString <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -619,7 +619,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       "regularExpression: " <<
       regularExpression;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -712,7 +712,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       keyModeKind <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -739,7 +739,7 @@ void msrKey::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrKey::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -757,7 +757,7 @@ void msrKey::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrKey::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -775,7 +775,7 @@ void msrKey::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrKey::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -793,7 +793,7 @@ void msrKey::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrKey::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

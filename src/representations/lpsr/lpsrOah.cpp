@@ -19,7 +19,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -93,7 +93,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -109,7 +109,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'lpsrPitchesLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -159,7 +159,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -177,7 +177,7 @@ void lpsrPitchesLanguageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -195,7 +195,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrPitchesLanguageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -213,7 +213,7 @@ void lpsrPitchesLanguageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrPitchesLanguageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -231,7 +231,7 @@ void lpsrPitchesLanguageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrPitchesLanguageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -375,7 +375,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -391,7 +391,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'lpsrChordsLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -439,7 +439,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -457,7 +457,7 @@ void lpsrChordsLanguageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -475,7 +475,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrChordsLanguageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -493,7 +493,7 @@ void lpsrChordsLanguageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrChordsLanguageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -511,7 +511,7 @@ void lpsrChordsLanguageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrChordsLanguageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -656,7 +656,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -672,7 +672,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -701,7 +701,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       "' with std::regex '" << regularExpression <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -744,7 +744,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
       "--> partName = \"" << partName << "\", " <<
       "--> partInstrumentName = \"" << partInstrumentName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -783,7 +783,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -801,7 +801,7 @@ void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -819,7 +819,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -837,7 +837,7 @@ void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -855,7 +855,7 @@ void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrStaffInstrumentNameAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1073,7 +1073,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'lpsrTransposeAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1089,7 +1089,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'lpsrTransposeAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1118,7 +1118,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrTransposeAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1136,7 +1136,7 @@ void lpsrTransposeAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrTransposeAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1154,7 +1154,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrTransposeAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1172,7 +1172,7 @@ void lpsrTransposeAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrTransposeAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1190,7 +1190,7 @@ void lpsrTransposeAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrTransposeAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2183,7 +2183,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2201,7 +2201,7 @@ void lpsrOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2219,7 +2219,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2237,7 +2237,7 @@ void lpsrOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching lpsrOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2255,7 +2255,7 @@ void lpsrOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> lpsrOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2548,7 +2548,7 @@ S_lpsrOahGroup createGlobalLpsrOahGroup ()
     ss <<
       "Creating global LPSR OAH group";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

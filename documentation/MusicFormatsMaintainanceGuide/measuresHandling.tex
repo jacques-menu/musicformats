@@ -130,11 +130,11 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
       " in voice \"" <<
       fetchMeasureUpLinkToVoice ()->
         getVoiceName () <<
-      "\", currentMeasureCurrentWholeNotesDuration: \"" <<
-      fCurrentMeasureCurrentWholeNotesDuration.asString () <<
+      "\", currentMeasureCurrentAccumulatedWholeNotesDuration: \"" <<
+      fCurrentMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -149,14 +149,14 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
   elem->
     setMeasurePosition (
       this,
-      fCurrentMeasureCurrentWholeNotesDuration,
+      fCurrentMeasureCurrentAccumulatedWholeNotesDuration,
       "appendElementToMeasure()");
 
   fMeasureElementsList.push_back (elem);
 
   // take elem's sounding whole notes into account JMI ???
 if (false) // JMI v0.9.67
-  incrementCurrentMeasureCurrentWholeNotesDuration (
+  incrementCurrentMeasureCurrentAccumulatedWholeNotesDuration (
     inputLineNumber,
     elem->
       getSoundingWholeNotes ());
@@ -182,11 +182,11 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", currentMeasureCurrentWholeNotesDuration: \"" <<
-      fCurrentMeasureCurrentWholeNotesDuration.asString () <<
+      "\", currentMeasureCurrentAccumulatedWholeNotesDuration: \"" <<
+      fCurrentMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -210,7 +210,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
         getSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
-  incrementCurrentMeasureCurrentWholeNotesDuration (
+  incrementCurrentMeasureCurrentAccumulatedWholeNotesDuration (
     inputLineNumber,
     harmonySoundingWholeNotes);
 
@@ -238,11 +238,11 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", currentMeasureCurrentWholeNotesDuration: \"" <<
-      fCurrentMeasureCurrentWholeNotesDuration.asString () <<
+      "\", currentMeasureCurrentAccumulatedWholeNotesDuration: \"" <<
+      fCurrentMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -260,7 +260,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
         getSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
-  incrementCurrentMeasureCurrentWholeNotesDuration (
+  incrementCurrentMeasureCurrentAccumulatedWholeNotesDuration (
     inputLineNumber,
     harmonySoundingWholeNotes);
 
@@ -315,7 +315,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "\"" <<
       ", line " << measure->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -432,7 +432,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       "' and appending it to voice \"" << getVoiceName () << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

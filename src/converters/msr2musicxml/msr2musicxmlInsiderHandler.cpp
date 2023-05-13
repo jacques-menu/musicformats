@@ -13,7 +13,7 @@
 
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfInitialization.h"
 #include "mfServices.h"
@@ -86,7 +86,7 @@ Usage: msr2musicxml [[option]* [MusicXMLFile|-] [[option]*
       fHandlerHeader <<
       "\" regular options handler";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -146,7 +146,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlPrefixes ()
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -168,7 +168,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
       fHandlerHeader <<
       "\" insider option groups";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -246,7 +246,7 @@ void msr2musicxmlInsiderHandler::checkOptionsAndArguments () const
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -267,7 +267,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -361,7 +361,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -380,7 +380,7 @@ std::string msr2musicxmlInsiderHandler::fetchOutputFileNameFromTheOptions () con
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -473,7 +473,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -491,7 +491,7 @@ void msr2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -509,7 +509,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -527,7 +527,7 @@ void msr2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msr2musicxmlInsiderOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -545,7 +545,7 @@ void msr2musicxmlInsiderOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msr2musicxmlInsiderOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -691,7 +691,7 @@ S_msr2musicxmlInsiderOahGroup createGlobalMsr2musicxmlOahGroup ()
     ss <<
       "Creating global msr2musicxml OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahBasicTypes.h"
 

@@ -11,7 +11,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -79,7 +79,7 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
       asString () <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -134,7 +134,7 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrVoiceStaffChange::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -152,7 +152,7 @@ void msrVoiceStaffChange::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrVoiceStaffChange::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -170,7 +170,7 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrVoiceStaffChange::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -188,7 +188,7 @@ void msrVoiceStaffChange::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrVoiceStaffChange::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

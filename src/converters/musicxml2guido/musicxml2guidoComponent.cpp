@@ -58,7 +58,7 @@ EXP S_mfcConverterComponent createMusicxml2guidoConverterComponent ()
       ss <<
         "Creating the musicxml2guido component";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

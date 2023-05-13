@@ -14,7 +14,7 @@
 
 #include <regex>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahEarlyOptions.h"
 
@@ -68,7 +68,7 @@ void msdl2musicxmlManPageGenerateAtom::applyValueLessAtom (std::ostream& os)
     ss <<
       "==> option '" << fetchNames () << "' is a msdl2musicxmlManPageGenerateAtom";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -86,7 +86,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -104,7 +104,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -122,7 +122,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2musicxmlManPageGenerateAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -140,7 +140,7 @@ void msdl2musicxmlManPageGenerateAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2musicxmlManPageGenerateAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -158,7 +158,7 @@ void msdl2musicxmlManPageGenerateAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2musicxmlManPageGenerateAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -336,7 +336,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -354,7 +354,7 @@ void msdl2musicxmlManPageOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -372,7 +372,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2musicxmlManPageOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -390,7 +390,7 @@ void msdl2musicxmlManPageOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2musicxmlManPageOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -408,7 +408,7 @@ void msdl2musicxmlManPageOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2musicxmlManPageOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -452,7 +452,7 @@ S_msdl2musicxmlManPageOahGroup createGlobalMsdl2xmlManPageOahGroupHandler (
     ss <<
       "Creating global msdl2musicxmlManPage OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

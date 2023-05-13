@@ -12,7 +12,7 @@
 #ifndef __musicxml2lilypondInsiderHandler___
 #define __musicxml2lilypondInsiderHandler___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahAtomsCollection.h"
 

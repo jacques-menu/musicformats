@@ -12,7 +12,7 @@
 #ifndef ___msrGenerationOah___
 #define ___msrGenerationOah___
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrGenerationBasicTypes.h"
 

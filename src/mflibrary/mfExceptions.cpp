@@ -11,7 +11,7 @@
 
 #include <iostream>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfExceptions.h"
 

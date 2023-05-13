@@ -11,7 +11,7 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfInitialization.h"
 #include "mfServices.h"
@@ -86,7 +86,7 @@ Usage: msdl2musicxml [option]* [MSDLFile] [option]*
       fHandlerHeader <<
       "\" regular options handler";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -146,7 +146,7 @@ void msdl2musicxmlInsiderHandler::createTheMsdl2xmlPrefixes ()
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -168,7 +168,7 @@ void msdl2musicxmlInsiderHandler::createTheMsdl2xmlOptionGroups (
       fHandlerHeader <<
       "\" insider option groups";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -246,7 +246,7 @@ void msdl2musicxmlInsiderHandler::checkOptionsAndArguments () const
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -340,7 +340,7 @@ void msdl2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2musicxmlInsiderOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -358,7 +358,7 @@ void msdl2musicxmlInsiderOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2musicxmlInsiderOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -376,7 +376,7 @@ void msdl2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2musicxmlInsiderOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -394,7 +394,7 @@ void msdl2musicxmlInsiderOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msdl2musicxmlInsiderOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -412,7 +412,7 @@ void msdl2musicxmlInsiderOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msdl2musicxmlInsiderOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -515,7 +515,7 @@ void msdl2musicxmlInsiderOahGroup::initializeMsdl2xmlInsiderOahGroup ()
       fGroupHeader <<
       "\" group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -605,7 +605,7 @@ S_msdl2musicxmlInsiderOahGroup createGlobalMsdl2xmlOahGroup ()
     ss <<
       "Creating global msdl2xm OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

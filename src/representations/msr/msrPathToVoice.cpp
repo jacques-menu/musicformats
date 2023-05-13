@@ -81,7 +81,7 @@ void msrPathToVoice::initializeFromStaff (const S_msrStaff& staff)
         getPartGroupUpLinkToPartGroup ();
 
   // loop to the top-most part group
-//  while (partGroupUpLinkToPartGroup) {
+// while (partGroupUpLinkToPartGroup) { // JMI v0.9.69
     fPartGroupsList.push_front (partGroup);
 
     partGroupUpLinkToPartGroup =

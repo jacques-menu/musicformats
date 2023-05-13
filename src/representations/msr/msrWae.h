@@ -58,17 +58,15 @@ class EXP msrUnsupportedException: public mfException
 typedef SMARTP<msrUnsupportedException> S_msrUnsupportedException;
 
 //______________________________________________________________________________
-EXP void msrWarning (
+EXP void msrWarningWithoutInputLocation (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message);
 
-EXP void msrWarningWithLocationDetails (
+EXP void msrWarning (
   const std::string& inputSourceName,
   int                inputLineNumber,
   const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 EXP void msrError (
@@ -77,15 +75,6 @@ EXP void msrError (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
-
-EXP void msrErrorWithLocationDetails (
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 //______________________________________________________________________________
 EXP void msrUnsupported (
@@ -101,13 +90,6 @@ EXP void msrInternalWarning (
   int                inputLineNumber,
   const std::string& message);
 
-EXP void msrInternalWarningWithLocationDetails (
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
-
 //______________________________________________________________________________
 EXP void msrInternalError (
   const std::string& inputSourceName,
@@ -115,15 +97,6 @@ EXP void msrInternalError (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message);
-
-EXP void msrInternalErrorWithLocationDetails (
-  const std::string& inputSourceName,
-  int                inputLineNumber,
-  const std::string& sourceCodeFileName,
-  int                sourceCodeLineNumber,
-  const std::string& message);
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber);
 
 
 }

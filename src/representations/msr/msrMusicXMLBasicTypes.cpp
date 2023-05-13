@@ -19,7 +19,7 @@
 
 #include "msrWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrBrowsers.h"
 #include "msrMeasureConstants.h"
@@ -488,7 +488,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrPageLayout::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -506,7 +506,7 @@ void msrPageLayout::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrPageLayout::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -524,7 +524,7 @@ void msrPageLayout::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrPageLayout::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -542,7 +542,7 @@ void msrPageLayout::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrPageLayout::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -693,7 +693,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSystemLayout::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -711,7 +711,7 @@ void msrSystemLayout::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSystemLayout::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -729,7 +729,7 @@ void msrSystemLayout::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSystemLayout::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -747,7 +747,7 @@ void msrSystemLayout::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSystemLayout::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -883,7 +883,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrSystemDividers::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -901,7 +901,7 @@ void msrSystemDividers::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrSystemDividers::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -919,7 +919,7 @@ void msrSystemDividers::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrSystemDividers::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -937,7 +937,7 @@ void msrSystemDividers::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrSystemDividers::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1027,7 +1027,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrStaffLayout::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1045,7 +1045,7 @@ void msrStaffLayout::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrStaffLayout::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1063,7 +1063,7 @@ void msrStaffLayout::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrStaffLayout::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1081,7 +1081,7 @@ void msrStaffLayout::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrStaffLayout::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1174,7 +1174,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrMeasureLayout::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1192,7 +1192,7 @@ void msrMeasureLayout::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrMeasureLayout::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1210,7 +1210,7 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrMeasureLayout::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1228,7 +1228,7 @@ void msrMeasureLayout::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrMeasureLayout::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1312,7 +1312,7 @@ msrLineWidth::msrLineWidth (
     ss <<
       "Creating a print layout ";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1334,7 +1334,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrLineWidth::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1352,7 +1352,7 @@ void msrLineWidth::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrLineWidth::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1370,7 +1370,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrLineWidth::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1388,7 +1388,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrLineWidth::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1492,7 +1492,7 @@ msrNoteSize::msrNoteSize (
     ss <<
       "Creating a print layout ";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1514,7 +1514,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrNoteSize::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1532,7 +1532,7 @@ void msrNoteSize::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrNoteSize::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1550,7 +1550,7 @@ void msrNoteSize::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrNoteSize::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1568,7 +1568,7 @@ void msrNoteSize::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrNoteSize::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1659,7 +1659,7 @@ msrDistance::msrDistance (
     ss <<
       "Creating a print layout ";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1681,7 +1681,7 @@ void msrDistance::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrDistance::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1699,7 +1699,7 @@ void msrDistance::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrDistance::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1717,7 +1717,7 @@ void msrDistance::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrDistance::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1735,7 +1735,7 @@ void msrDistance::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrDistance::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1826,7 +1826,7 @@ msrGlyph::msrGlyph (
     ss <<
       "Creating a print layout ";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1848,7 +1848,7 @@ void msrGlyph::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrGlyph::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1866,7 +1866,7 @@ void msrGlyph::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrGlyph::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1884,7 +1884,7 @@ void msrGlyph::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrGlyph::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1902,7 +1902,7 @@ void msrGlyph::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrGlyph::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1993,7 +1993,7 @@ msrOtherAppearance::msrOtherAppearance (
     ss <<
       "Creating a print layout ";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2015,7 +2015,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrOtherAppearance::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2033,7 +2033,7 @@ void msrOtherAppearance::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrOtherAppearance::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2051,7 +2051,7 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrOtherAppearance::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2069,7 +2069,7 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrOtherAppearance::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2154,7 +2154,7 @@ msrAppearance::msrAppearance (
     ss <<
       "Creating an appearance";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2173,7 +2173,7 @@ void msrAppearance::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrAppearance::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2191,7 +2191,7 @@ void msrAppearance::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrAppearance::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2209,7 +2209,7 @@ void msrAppearance::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrAppearance::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2227,7 +2227,7 @@ void msrAppearance::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrAppearance::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

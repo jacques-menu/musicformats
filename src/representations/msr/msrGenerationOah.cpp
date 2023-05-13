@@ -17,7 +17,7 @@
 
 #include "mfConstants.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 #include "msrOah.h"
@@ -133,7 +133,7 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msrGeneratorsOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -151,7 +151,7 @@ void msrGeneratorsOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrGeneratorsOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -169,7 +169,7 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msrGeneratorsOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -187,7 +187,7 @@ void msrGeneratorsOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrGeneratorsOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -205,7 +205,7 @@ void msrGeneratorsOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msrGeneratorsOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -263,7 +263,7 @@ S_msrGeneratorsOahGroup createGlobalMsrGeneratorsOahGroup ()
     ss <<
       "Creating global msrGenerators OAH group";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

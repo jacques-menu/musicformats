@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 
 #ifdef MF_TRACE_IS_ENABLED // encompasses the remainder of this file
@@ -2050,7 +2050,7 @@ R"(Score)",
   S_oahTwoBooleansAtomWithTracePasses
     tracePartGroupsBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
-        "trace-part-groups", "tpgroups",
+        "trace-part-groups", "tpartgroups",
 R"(Part groups)",
         "trafTracePartGroupscePartGroups",
         fTracePartGroups,
@@ -2068,9 +2068,9 @@ R"(Part groups)",
   S_oahThreeBooleansAtom
     tracePartGroupsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-part-groups-details", "tpgroupsdets",
+        "trace-part-groups-details", "tpartgroupsdets",
 R"(Part groups with more details.
-This option implies '-tpgrps, -trace-part-groups'.)",
+This option implies '-trace-part-groups, -tpgrps'.)",
         "fTracePartGroupsDetails",
         fTracePartGroupsDetails,
         tracePartGroupsBooleanAtom,
@@ -2181,7 +2181,7 @@ R"(Voices)",
       oahThreeBooleansAtom::create (
         "trace-voices-details", "tvoicesdets",
 R"(Voices with more details (quite verbose)..
-This option implies '-tvoices, -trace-voices'.)",
+This option implies '-trace-voices, -tvoices'.)",
         "fTraceVoicesDetails",
         fTraceVoicesDetails,
         traceVoicesBooleanAtom,
@@ -2278,7 +2278,7 @@ R"(Notes)",
       oahThreeBooleansAtom::create (
         "trace-notes-details", "tnotesdets",
 R"(Notes with more details, including divisions handling (quite verbose)...
-This option implies '-tnotes, -trace-notes'.)",
+This option implies '-trace-notes, -tnotes'.)",
         "fTraceNotesDetails",
         fTraceNotesDetails,
         traceNotesBooleanAtom,
@@ -2722,7 +2722,7 @@ void traceOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> traceOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2740,7 +2740,7 @@ void traceOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching traceOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2758,7 +2758,7 @@ void traceOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> traceOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2776,7 +2776,7 @@ void traceOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching traceOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -2794,7 +2794,7 @@ void traceOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> traceOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

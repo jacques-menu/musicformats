@@ -30,7 +30,7 @@ S_mfcPassComponent createMxsr2guidoComponent ()
       ss <<
         "Initializing mxsr2guido pass component";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

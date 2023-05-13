@@ -13,7 +13,7 @@
 
 #include "Mikrokosmos3WanderingGenerator.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msrParts.h"
 #include "msrBarLines.h"

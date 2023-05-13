@@ -117,7 +117,7 @@ void bsrPageHeading::acceptIn (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrPageHeading::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -135,7 +135,7 @@ void bsrPageHeading::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching bsrPageHeading::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -154,7 +154,7 @@ void bsrPageHeading::acceptOut (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrPageHeading::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -172,7 +172,7 @@ void bsrPageHeading::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching bsrPageHeading::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -191,7 +191,7 @@ void bsrPageHeading::browseData (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% ==> bsrScore::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -211,7 +211,7 @@ void bsrPageHeading::browseData (basevisitor* v)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% <== bsrScore::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

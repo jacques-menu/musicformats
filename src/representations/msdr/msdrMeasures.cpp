@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "msdrMeasures.h"
 
@@ -53,7 +53,7 @@ msdrMeasure::msdrMeasure (
     ss <<
       "Creating MSDR music \"" << asString () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -88,7 +88,7 @@ void msdrMeasure::acceptIn (basevisitor* v)
     ss <<
       "% ==> msdrMeasure::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -106,7 +106,7 @@ void msdrMeasure::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msdrMeasure::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -124,7 +124,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
     ss <<
       "% ==> msdrMeasure::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -142,7 +142,7 @@ void msdrMeasure::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msdrMeasure::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -160,7 +160,7 @@ void msdrMeasure::browseData (basevisitor* v)
     ss <<
       "% ==> msdrMeasure::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -209,7 +209,7 @@ void msdrMeasure::browseData (basevisitor* v)
     ss <<
       "% <== msdrMeasure::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

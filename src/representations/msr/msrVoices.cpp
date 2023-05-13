@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -349,7 +349,7 @@ msrVoice::msrVoice (
     ss <<
       "Creating voice \"" << asString () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -382,7 +382,7 @@ msrVoice::msrVoice (
     ss <<
       "Creating voice \"" << asString () << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -443,7 +443,7 @@ void msrVoice::setRegularVoiceStaffSequentialNumber (
       fVoiceName <<
       "\" to " << regularVoiceStaffSequentialNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -467,7 +467,7 @@ void msrVoice::setVoiceNamesFromNumber (
       "' voice from voice number '" << voiceNumber <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -523,7 +523,7 @@ void msrVoice::setVoiceNamesFromNumber (
       fVoiceAlphabeticName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -562,7 +562,7 @@ void msrVoice::initializeVoice (
       fVoiceUpLinkToStaff->getStaffName () <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -730,7 +730,7 @@ void msrVoice::changeVoiceIdentity ( // after a deep clone is created
       "\"" <<
       ", number: " << voiceNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -762,7 +762,7 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
       fVoiceName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -815,7 +815,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       containingStaff->getStaffName () << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -844,7 +844,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       std::endl <<
       "****";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -931,7 +931,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         fVoiceName <<
         "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -994,7 +994,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         fVoiceName <<
         "\" to be deep copied";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1023,7 +1023,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
         fVoiceName <<
         "\" to be deep copied";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1065,7 +1065,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       std::endl <<
       "****";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1089,7 +1089,7 @@ void msrVoice::setVoiceLastSegmentInVoiceClone (
       "\"" <<
       ", line " << segment->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1124,7 +1124,7 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
       fVoiceName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1176,7 +1176,7 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
         fVoiceName <<
         "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1213,7 +1213,7 @@ void msrVoice::setVoiceLastAppendedMeasure (
       asString () <<
       ", line " << fInputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1236,7 +1236,7 @@ void msrVoice::setNextMeasureNumberInVoice (
       ", in voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1263,7 +1263,7 @@ void msrVoice::setNextMeasureNumberInVoice (
         "' in voice \"" <<
         fVoiceName << "\"";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1285,7 +1285,7 @@ void msrVoice::setNextMeasureNumberInVoice (
           fVoiceName << "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1329,7 +1329,7 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1349,7 +1349,7 @@ void msrVoice::setVoiceFirstMeasure (
       " is the first measure in  voice \"" << fVoiceName << "\"" <<
       "', line " << measure->getInputLineNumber ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1372,7 +1372,7 @@ void msrVoice::appendMeasureCloneToVoiceClone (
       "' to voice '" << fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1406,7 +1406,7 @@ void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
       " in voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1432,7 +1432,7 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
       " in voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1521,7 +1521,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1574,7 +1574,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       "' and appending it to voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1627,7 +1627,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       "' in voice \"" << fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1658,7 +1658,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       fVoiceName << "\"" <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1740,7 +1740,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
       regularVoiceHarmoniesVoiceNumber <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1875,7 +1875,7 @@ void msrVoice::addStanzaToVoice (const S_msrStanza& stanza)
       " (" << stanzaNumber <<
       ") to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1901,7 +1901,7 @@ void msrVoice::addStanzaToVoiceWithoutCatchUp (const S_msrStanza& stanza)
       " (" << stanzaNumber <<
       ") to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1939,7 +1939,7 @@ S_msrStanza msrVoice::createStanzaInVoiceIfNotYetDone (
         ", line " << inputLineNumber <<
         ", fVoiceStanzasMap.size (): " << fVoiceStanzasMap.size ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -2035,7 +2035,7 @@ void msrVoice::appendMusicXMLPrintLayoutToVoice (
       "Appending print layout '" << musicXMLPrintLayout->asString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2062,7 +2062,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
       clefKeyTimeSignatureGroup->asString () <<
       " to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2129,7 +2129,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //       " to voice \"" << fVoiceName << "\"" <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -2168,7 +2168,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //       " to voice \"" << fVoiceName << "\"" <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -2205,7 +2205,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //       " to voice \"" << fVoiceName << "\"" <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -2234,7 +2234,7 @@ void msrVoice::appendTimeSignatureToVoiceClone (
       "Appending time signature " << timeSignature->asString () <<
       " to voice clone \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2266,7 +2266,7 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
       "' to voice clone \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2388,7 +2388,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 //           "++++++++++ fetchVoiceFirstNonGraceNote(), this voice: ++++++++++" <<
 //           std::endl;
 //         ++gIndenter;
-//         gLog << this;;
+//         gLog << std::hex << std::showbase << this << std::dec; // JMI v0.9.69;
 //         --gIndenter;
 //       }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2423,7 +2423,7 @@ void msrVoice::setVoiceShortestNoteWholeNotes (
         "\" becomes " <<
         wholeNotes.asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -2445,7 +2445,7 @@ void msrVoice::setVoiceShortestNoteTupletFactor (
         "\" becomes " <<
         noteTupletFactor;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -2504,7 +2504,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
         "The new shortest note in voice \"" << fVoiceName << "\"" <<
         " becomes " << note->asString ();
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -2554,7 +2554,7 @@ void msrVoice::appendHarmonyToVoice (
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2621,7 +2621,7 @@ void msrVoice::appendHarmoniesListToVoice (
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2650,7 +2650,7 @@ void msrVoice::appendHarmonyToVoiceClone (
       " to voice clone \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2707,7 +2707,7 @@ void msrVoice::appendFiguredBassToVoice (
       " to voice \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2778,7 +2778,7 @@ void msrVoice::appendFiguredBassesListToVoice (
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2807,7 +2807,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
       " to voice clone \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2866,7 +2866,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //       "\", line " << inputLineNumber <<
 //       std::endl;
 //
-//       gWaeHandler->waeTraceWithLocationDetails (
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str (),
 //   }
@@ -2894,7 +2894,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //       const S_msrStanza& stanza = thePair.second;
 //
 //       stanza->
-//         padUpToMeasureCurrentWholeNotesDurationInStanza (
+//         padUpToMeasureCurrentAccumulatedWholeNotesDurationInStanza (
 //           inputLineNumber,
 //           wholeNotesMeasurePosition);
 //     } // for
@@ -2918,7 +2918,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
       fVoiceName <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2963,7 +2963,7 @@ void msrVoice::appendPaddingNoteToVoice (
       fVoiceName <<
       "\",line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3011,7 +3011,7 @@ void msrVoice::appendTranspositionToVoice (
       transposition->asString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3033,7 +3033,7 @@ void msrVoice::appendStaffDetailsToVoice (
       staffDetails->asShortString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3064,7 +3064,7 @@ void msrVoice::appendTempoToVoice (
       " to voice \"" <<
       fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3087,7 +3087,7 @@ void msrVoice::appendOctaveShiftToVoice (
       "', size: " << octaveShift->getOctaveShiftSize () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3109,7 +3109,7 @@ void msrVoice::appendScordaturaToVoice (
       scordatura->asString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3132,7 +3132,7 @@ void msrVoice::appendAccordionRegistrationToVoice (
       accordionRegistration->asString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3156,7 +3156,7 @@ void msrVoice::appendHarpPedalsTuningToVoice (
       harpPedalsTuning->asString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3178,7 +3178,7 @@ void msrVoice::appendRehearsalMarkToVoice (
       "Appending rehearsalMark '" << rehearsalMark->getRehearsalMarkText () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3207,7 +3207,7 @@ void msrVoice::appendVoiceStaffChangeToVoice (
       "\"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3238,7 +3238,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
       " to voice \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3376,7 +3376,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
       "' to voice clone \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3467,7 +3467,7 @@ void msrVoice::appendDoubleTremoloToVoice (
       doubleTremolo->asShortString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3489,7 +3489,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
       "Appending chord '" << chord->asString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3558,7 +3558,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
       "Appending tuplet " << tuplet->asString () <<
       " to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3597,7 +3597,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
       graceNotesGroup->asString () <<
       " ahead of voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3659,7 +3659,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         firstNoteShortcutUpLinkToChord->asShortString () <<
         "'";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -3700,7 +3700,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         voiceFirstNote->asShortString () <<
         "'";
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -3726,7 +3726,7 @@ void msrVoice::appendAfterGraceNotesToVoice (
       "Appending after grace notes " << // JMI AfterGraceNotes <<
       " to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3749,7 +3749,7 @@ void msrVoice::prependAfterGraceNotesToVoice (
       "Prepending after grace notes " << // JMI AfterGraceNotes <<
       " to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3778,7 +3778,7 @@ void msrVoice::appendSyllableToVoice (
       syllable->asString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3812,7 +3812,7 @@ void msrVoice::appendBarCheckToVoice (
       fVoiceName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3834,7 +3834,7 @@ void msrVoice::appendBarNumberCheckToVoice (
       barNumberCheck->asString () <<
       " to voice \"" << fVoiceName <<  "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3855,7 +3855,7 @@ void msrVoice::appendLineBreakToVoice  (
       "Appending line break '" << lineBreak->asString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3887,7 +3887,7 @@ void msrVoice::appendPageBreakToVoice (
       "Appending page break '" << pageBreak->asString () <<
       "' to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3907,7 +3907,7 @@ void msrVoice::appendPageBreakToVoice (
 //       "' to voice \"" << fVoiceName << "\"" <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -3927,7 +3927,7 @@ void msrVoice::appendPageBreakToVoice (
 //       "' to voice \"" << fVoiceName << "\"" <<
 //       std::endl;
 //
-//     gWaeHandler->waeTraceWithLocationDetails (
+//     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -4017,7 +4017,7 @@ void msrVoice::pushRepeatOntoRepeatDescrsStack (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4091,7 +4091,7 @@ void msrVoice::popRepeatFromRepeatDescrsStack (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4434,7 +4434,7 @@ S_msrRepeat msrVoice::createARepeatAndStackIt (
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4480,7 +4480,7 @@ S_msrRepeat msrVoice::createARepeatCloneAndStackIt (
       " (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4524,7 +4524,7 @@ void msrVoice::moveVoiceInitialElementsToRepeatCommonPart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4580,7 +4580,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatCommonPart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4676,7 +4676,7 @@ void msrVoice::moveVoiceLastSegmentToRepeatEnding (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4712,7 +4712,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4786,7 +4786,7 @@ void msrVoice::appendMeasureRepeatToInitialVoiceElements (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4813,7 +4813,7 @@ void msrVoice::appendVoiceLastSegmentToInitialVoiceElements (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4847,7 +4847,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -4889,7 +4889,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -4910,7 +4910,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
         "\" (" << context << ")" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -4936,7 +4936,7 @@ void msrVoice::appendRepeatCloneToInitialVoiceElements (
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4958,7 +4958,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       fVoiceName <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5014,20 +5014,20 @@ void msrVoice::handleVoiceLevelRepeatStart (
         // the last measure is not empty
 
         msrWholeNotes
-          measureCurrentWholeNotesDuration =
-            lastMeasureInLastSegment->getMeasureCurrentWholeNotesDuration ();
+          measureCurrentAccumulatedWholeNotesDuration =
+            lastMeasureInLastSegment->getMeasureCurrentAccumulatedWholeNotesDuration ();
 
         msrWholeNotes
-          fullMeasureCurrentWholeNotesDuration =
-            lastMeasureInLastSegment->getFullMeasureCurrentWholeNotesDuration ();
+          fullMeasureWholeNotesDuration =
+            lastMeasureInLastSegment->getFullMeasureWholeNotesDuration ();
 
         // is there a measure splitting?
         if ( // JMI better criterion???
-          measureCurrentWholeNotesDuration.getNumerator () > 0
+          measureCurrentAccumulatedWholeNotesDuration.getNumerator () > 0
             &&
-          measureCurrentWholeNotesDuration
+          measureCurrentAccumulatedWholeNotesDuration
             <
-          fullMeasureCurrentWholeNotesDuration
+          fullMeasureWholeNotesDuration
         ) {
           // yes this measure is not yet complete and should be split
 #ifdef MF_TRACE_IS_ENABLED
@@ -5038,10 +5038,10 @@ void msrVoice::handleVoiceLevelRepeatStart (
               "' upon a repeat start in voice \"" <<
               fVoiceName <<
               "\"" <<
-              ", measureCurrentWholeNotesDuration: " <<
-              measureCurrentWholeNotesDuration.asString () <<
-              ", fullMeasureCurrentWholeNotesDuration: " <<
-              fullMeasureCurrentWholeNotesDuration.asString () <<
+              ", measureCurrentAccumulatedWholeNotesDuration: " <<
+              measureCurrentAccumulatedWholeNotesDuration.asString () <<
+              ", fullMeasureWholeNotesDuration: " <<
+              fullMeasureWholeNotesDuration.asString () <<
               ", line " << inputLineNumber <<
               std::endl;
           }
@@ -5112,7 +5112,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
             " (voice level start)" <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5140,7 +5140,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
             fVoiceName << "\"" <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -5176,7 +5176,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5222,7 +5222,7 @@ void msrVoice::handleNestedRepeatStartInVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5250,7 +5250,7 @@ void msrVoice::handleRepeatStartInVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5311,7 +5311,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5335,7 +5335,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       "This repeat end without a start is at the voice-level" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5352,7 +5352,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5378,7 +5378,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5428,7 +5428,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
       "\" to the new voice-level repeat common part" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5482,7 +5482,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5506,7 +5506,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       "This repeat end without a start is at the voice-level" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5523,7 +5523,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5549,7 +5549,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5610,7 +5610,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
       "\" to the new voice-level repeat common part" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5666,7 +5666,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5688,7 +5688,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       "This repeat end with a start is at the voice-level" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5734,7 +5734,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5763,7 +5763,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
       " and forget about it" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5820,7 +5820,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5842,7 +5842,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
       "This repeat is nested" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5856,9 +5856,9 @@ void msrVoice::handleNestedRepeatEndInVoice (
 
   // is there a measure splitting?
   if (
-    voiceLastMeasure->getMeasureCurrentWholeNotesDuration ()
+    voiceLastMeasure->getMeasureCurrentAccumulatedWholeNotesDuration ()
       ==
-    voiceLastMeasure->getFullMeasureCurrentWholeNotesDuration ()
+    voiceLastMeasure->getFullMeasureWholeNotesDuration ()
   ) {
     // this measure is incomplete and should be split
 #ifdef MF_TRACE_IS_ENABLED
@@ -5873,7 +5873,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
         "\"" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6022,7 +6022,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6075,7 +6075,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         "\"" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6103,7 +6103,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6138,7 +6138,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         " (voice level ending without explicit start)" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6175,7 +6175,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         fVoiceName << "\"" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6206,7 +6206,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         fVoiceName << "\"" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6246,7 +6246,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6295,7 +6295,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
       std::endl <<
       lastMeasure->asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6323,7 +6323,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
         " (voice level ending with explicit start)" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6360,7 +6360,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
         fVoiceName << "\"" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6390,7 +6390,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
         fVoiceName << "\"" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6498,7 +6498,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6611,7 +6611,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
             "\"" <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -6751,7 +6751,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
       fVoiceName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7049,7 +7049,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       " (to be repeated) from voice \"" <<
       fVoiceName;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7097,7 +7097,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       fVoiceName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7130,7 +7130,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
       fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7169,7 +7169,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7242,7 +7242,7 @@ void msrVoice::appendMeasureRepeatToVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7389,7 +7389,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       "Creating a measures repeat replicas contents for voice \"" <<
       fVoiceName << "\" is:";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7419,7 +7419,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       fVoiceName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7437,7 +7437,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       "Setting measures repeat segment to voice last segment for voice \"" <<
       fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7467,7 +7467,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7545,7 +7545,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             "\"" <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7569,7 +7569,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             "\"" <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7599,7 +7599,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             fVoiceName <<
             "\"";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7619,7 +7619,7 @@ void msrVoice::createMeasureRepeatAndAppendItToVoiceClone (
             fVoiceName <<
             "\"";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7663,7 +7663,7 @@ void msrVoice::setVoiceContainsMultipleFullBarRests (
       ", line " << inputLineNumber <<
       ", contains multiple full-bar rests";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7686,7 +7686,7 @@ void msrVoice::setVoiceContainsMeasureRepeats (
       ", line " << inputLineNumber <<
       ", contains measure repeats";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7713,7 +7713,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7780,7 +7780,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             "\"" <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7803,7 +7803,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             "\"" <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7829,7 +7829,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             " in voice \"" <<
             fVoiceName << "\"";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7847,7 +7847,7 @@ void msrVoice::appendMultipleFullBarRestsToVoice (
             "' in voice \"" <<
             fVoiceName << "\"";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -7939,7 +7939,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
         lastAppendedMeasureClone->
           getMeasureOrdinalNumberInVoice (),
         lastAppendedMeasureClone->
-          getFullMeasureCurrentWholeNotesDuration ()); // JMI
+          getFullMeasureWholeNotesDuration ()); // JMI
 
     // append it to the voice last segment
     fVoiceLastSegment->
@@ -7972,7 +7972,7 @@ void msrVoice::addEmptyMeasuresToVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7981,9 +7981,9 @@ void msrVoice::addEmptyMeasuresToVoice (
   // get the empty measure whole notes wholeNotes
   // JMI maybe not OK if first measure such as after a repeat segment???
   msrWholeNotes
-    emptyMeasureCurrentWholeNotesDuration =
+    emptyMeasureCurrentAccumulatedWholeNotesDuration =
       fVoiceLastAppendedMeasure->
-        getFullMeasureCurrentWholeNotesDuration ();
+        getFullMeasureWholeNotesDuration ();
 
   for (int i = 1; i <= emptyMeasuresNumber; ++i) {
     // create a measure
@@ -7999,7 +7999,7 @@ void msrVoice::addEmptyMeasuresToVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8022,8 +8022,8 @@ void msrVoice::addEmptyMeasuresToVoice (
 
   // set its whole notes wholeNotes
 //   emptyMeasure->
-//     setFullMeasureCurrentWholeNotesDuration (
-//       emptyMeasureCurrentWholeNotesDuration);
+//     setFullMeasureWholeNotesDuration (
+//       emptyMeasureCurrentAccumulatedWholeNotesDuration);
 
   // create a rest the whole empty measure long
   S_msrNote
@@ -8031,8 +8031,8 @@ void msrVoice::addEmptyMeasuresToVoice (
       msrNote::createRestNote (
         inputLineNumber,
         measureNumber,
-        emptyMeasureCurrentWholeNotesDuration, // soundingWholeNotes
-        emptyMeasureCurrentWholeNotesDuration, // displayWholeNotes
+        emptyMeasureCurrentAccumulatedWholeNotesDuration, // soundingWholeNotes
+        emptyMeasureCurrentAccumulatedWholeNotesDuration, // displayWholeNotes
         0); // dotsNumber
 
    wholeMeasureRestNote->
@@ -8059,7 +8059,7 @@ void msrVoice::addEmptyMeasuresToVoice (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8116,7 +8116,7 @@ void msrVoice::addEmptyMeasuresToVoice (
 //         fVoiceCurrentMultipleFullBarRests =
 //           msrMultipleFullBarRests::create (
 //             inputLineNumber,
-//             firstRestMeasure->getFullMeasureCurrentWholeNotesDuration (),
+//             firstRestMeasure->getFullMeasureWholeNotesDuration (),
 //             multipleFullBarRestsMeasuresNumber,
 //             this);
 // */
@@ -8252,7 +8252,7 @@ void msrVoice::appendPendingMultipleFullBarRestsToVoice (
             "\"" <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8301,7 +8301,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
       fVoiceName <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8409,7 +8409,7 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
       fVoiceName <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8574,7 +8574,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
       "' to voice clone \"" <<
       fVoiceName <<  "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8614,7 +8614,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
             fVoiceName <<
             "\"";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -8660,7 +8660,7 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8746,7 +8746,7 @@ void msrVoice::handleMeasureRepeatEndInVoiceClone (
       fVoiceName <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8819,7 +8819,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
       fVoiceName <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8862,7 +8862,7 @@ void msrVoice::handleMeasureRepeatPatternStartInVoiceClone (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8902,7 +8902,7 @@ void msrVoice::handleMeasureRepeatPatternEndInVoiceClone (
       fVoiceName <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8971,7 +8971,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
       fVoiceName <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9014,7 +9014,7 @@ void msrVoice::handleMeasureRepeatReplicasStartInVoiceClone (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9054,7 +9054,7 @@ void msrVoice::handleMeasureRepeatReplicasEndInVoiceClone (
       fVoiceName <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9215,7 +9215,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
       fVoiceName <<  "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9293,7 +9293,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
       fVoiceName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9405,7 +9405,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
       fVoiceName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9509,7 +9509,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
       fVoiceName <<  "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9558,7 +9558,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9598,7 +9598,7 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
       fVoiceName <<  "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9682,7 +9682,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
       fVoiceName <<  "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9777,7 +9777,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
       fVoiceName <<  "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9912,7 +9912,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9975,7 +9975,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
           ", line " << inputLineNumber <<
           std::endl;
 
-        gWaeHandler->waeTraceWithLocationDetails (
+        gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -10014,7 +10014,7 @@ void msrVoice::handleRepeatEndInVoiceClone (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10157,7 +10157,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
             fVoiceName <<  "\"" <<
             ", line " << inputLineNumber;
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -10165,10 +10165,10 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 
         // fetch last measure's full measure whole notes
         /* JMI
-        int fullMeasureCurrentWholeNotesDuration =
+        int fullMeasureWholeNotesDuration =
           fVoiceLastSegment->
             getSegmentElementsList ().back ()->
-              getFullMeasureCurrentWholeNotesDuration ();
+              getFullMeasureWholeNotesDuration ();
               */
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -10219,7 +10219,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
             fVoiceName <<
             "\"";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -10273,7 +10273,7 @@ void msrVoice::appendMeasureRepeatToVoiceElementsList (
       fVoiceName <<
       "\",";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10384,7 +10384,7 @@ void msrVoice::prependBarLineToVoice (
       "' to voice \"" << fVoiceName << "\"" <<
       ":";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10411,7 +10411,7 @@ void msrVoice::appendBarLineToVoice (
       " to voice \"" << fVoiceName << "\"" <<
       ":";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10441,7 +10441,7 @@ void msrVoice::appendSegnoToVoice (const S_msrSegno& segno)
     ss <<
       "Appending a segno to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10468,7 +10468,7 @@ void msrVoice::appendCodaToVoice (const S_msrCoda& coda)
       "Appending a coda to voice \"" << fVoiceName << "\"" <<
       ":";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10495,7 +10495,7 @@ void msrVoice::appendEyeGlassesToVoice (
     ss <<
       "Appending a eyeGlasses to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10521,7 +10521,7 @@ void msrVoice::appendPedalToVoice (const S_msrPedal& pedal)
     ss <<
       "Appending a pedal to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10548,7 +10548,7 @@ void msrVoice::appendDampToVoice (
     ss <<
       "Appending a damp to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10575,7 +10575,7 @@ void msrVoice::appendDampAllToVoice (
     ss <<
       "Appending a damp all to voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10604,7 +10604,7 @@ S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
       "Removing last note" <<
       " from voice " << fVoiceName;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10629,7 +10629,7 @@ void msrVoice::removeNoteFromVoice (
       note->asShortString () <<
       "' from voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10667,7 +10667,7 @@ void msrVoice::removeElementFromVoice (
       element->asShortString () <<
       "' from voice \"" << fVoiceName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10695,7 +10695,7 @@ S_msrMeasure msrVoice::removeLastMeasureFromVoice (
       fVoiceName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -10828,7 +10828,7 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
         "s measures flat list" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -10847,7 +10847,7 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
         "s measures flat list" <<
         ", line " << inputLineNumber;
 
-      gWaeHandler->waeTraceWithLocationDetails (
+      gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -10923,7 +10923,7 @@ void msrVoice::finalizeVoice (
       ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
       ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11082,7 +11082,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
       ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11192,7 +11192,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       fVoiceName <<
       "\", line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11224,7 +11224,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       note->asString () <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11260,7 +11260,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       if (noteBeamNumbersStackSize) {
         // the stack is not empty
         int voiceBeamNumbersStackTop =
-          fVoiceBeamNumbersStack.top ();
+          fVoiceBeamNumbersStack.front ();
 
         if (beamNumber != voiceBeamNumbersStackTop + 1) {
           std::stringstream ss;
@@ -11282,7 +11282,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
         }
       }
 
-      fVoiceBeamNumbersStack.push (beamNumber);
+      fVoiceBeamNumbersStack.push_front (beamNumber);
       break;
 
     case msrBeamKind::kBeamContinue:
@@ -11308,7 +11308,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       else {
         // the stack is not empty
         int voiceBeamNumbersStackTop =
-          fVoiceBeamNumbersStack.top ();
+          fVoiceBeamNumbersStack.front ();
 
         if (beamNumber != voiceBeamNumbersStackTop) {
           std::stringstream ss;
@@ -11335,7 +11335,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       if (noteBeamNumbersStackSize) {
         // the stack is not empty
         int voiceBeamNumbersStackTop =
-          fVoiceBeamNumbersStack.top ();
+          fVoiceBeamNumbersStack.front ();
 
         if (beamNumber != voiceBeamNumbersStackTop) {
           std::stringstream ss;
@@ -11357,7 +11357,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
         }
       }
 
-      fVoiceBeamNumbersStack.pop ();
+      fVoiceBeamNumbersStack.pop_front ();
       break;
 
     case msrBeamKind::kBeamForwardHook:
@@ -11378,7 +11378,7 @@ void msrVoice::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrVoice::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11396,7 +11396,7 @@ void msrVoice::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrVoice::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11414,7 +11414,7 @@ void msrVoice::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrVoice::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11432,7 +11432,7 @@ void msrVoice::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrVoice::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11450,7 +11450,7 @@ void msrVoice::browseData (basevisitor* v)
     ss <<
       "% ==> msrVoice::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11495,7 +11495,7 @@ void msrVoice::browseData (basevisitor* v)
     ss <<
       "% <== msrVoice::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

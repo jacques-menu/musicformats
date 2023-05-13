@@ -13,7 +13,7 @@
 #include <regex>
 #include <sstream>
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "visitor.h"
 
@@ -425,7 +425,7 @@ S_msrClef msrClef::createClefFromString (
       clefString <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -445,7 +445,7 @@ S_msrClef msrClef::createClefFromString (
       "regularExpression: " <<
       regularExpression;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -516,7 +516,7 @@ S_msrClef msrClef::createClefFromString (
       clefName <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -609,7 +609,7 @@ void msrClef::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrClef::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -627,7 +627,7 @@ void msrClef::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrClef::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -645,7 +645,7 @@ void msrClef::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrClef::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -663,7 +663,7 @@ void msrClef::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrClef::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

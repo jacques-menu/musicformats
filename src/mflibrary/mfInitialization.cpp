@@ -41,7 +41,7 @@ void initializeMusicFormats ()
       ss <<
         "Initializing MusicFormats";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

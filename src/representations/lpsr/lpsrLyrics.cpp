@@ -59,7 +59,7 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrNewLyricsBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -77,7 +77,7 @@ void lpsrNewLyricsBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrNewLyricsBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -95,7 +95,7 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrNewLyricsBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -113,7 +113,7 @@ void lpsrNewLyricsBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrNewLyricsBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

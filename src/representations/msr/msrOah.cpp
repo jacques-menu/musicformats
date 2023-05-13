@@ -18,7 +18,7 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
@@ -93,7 +93,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msrPitchesLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -109,7 +109,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msrPitchesLanguageAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -159,7 +159,7 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msrPitchesLanguageAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -177,7 +177,7 @@ void msrPitchesLanguageAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrPitchesLanguageAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -195,7 +195,7 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msrPitchesLanguageAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -213,7 +213,7 @@ void msrPitchesLanguageAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrPitchesLanguageAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -231,7 +231,7 @@ void msrPitchesLanguageAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msrPitchesLanguageAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -377,7 +377,7 @@ void msrRenamePartAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msrRenamePartAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -393,7 +393,7 @@ void msrRenamePartAtom::applyAtomWithValue (
     ss <<
       "==> oahAtom is of type 'msrRenamePartAtom'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -422,7 +422,7 @@ void msrRenamePartAtom::applyAtomWithValue (
       "' with std::regex '" << regularExpression <<
       "'";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -465,7 +465,7 @@ void msrRenamePartAtom::applyAtomWithValue (
       "--> oldPartName = \"" << oldPartName << "\", " <<
       "--> newPartName = \"" << newPartName << "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -504,7 +504,7 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msrRenamePartAtom::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -522,7 +522,7 @@ void msrRenamePartAtom::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrRenamePartAtom::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -540,7 +540,7 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msrRenamePartAtom::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -558,7 +558,7 @@ void msrRenamePartAtom::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrRenamePartAtom::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -576,7 +576,7 @@ void msrRenamePartAtom::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msrRenamePartAtom::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -810,7 +810,7 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-part-groups", "dpg",
+        "display-part-groups", "dpartgroups",
 R"(Write the structure of the part groups to standard error.)",
         "fDisplayPartGroups",
         fDisplayPartGroups));
@@ -1059,7 +1059,7 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       msrRenamePartAtom::create (
-        "msr-rename-part", "mrp",
+        "msr-rename-part", "mrenamepart",
         regex_replace (
 R"(PART_RENAME_SPEC should be of the form ORIGINAL_NAME:NEW_NAME.
 Rename part ORIGINAL_NAME to NEW_NAME, for example after displaying
@@ -1141,7 +1141,7 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "show-harmony-voices", "shv",
+        "show-harmony-voices", "sharmvoices",
 R"(Show the parts harmonies voices in the MSR data
 even though it does not contain music.)",
         "fShowHarmoniesVoices",
@@ -1166,7 +1166,7 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "show-figured-bass-voices", "sfbv",
+        "show-figured-bass-voices", "sfigbassvoices",
 R"(Show the figured bass voices in the MSR data
 even though they do not contain music.)",
         "fShowFiguredBassVoices",
@@ -1253,7 +1253,7 @@ void msrOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> msrOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1271,7 +1271,7 @@ void msrOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1289,7 +1289,7 @@ void msrOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> msrOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1307,7 +1307,7 @@ void msrOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching msrOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1325,7 +1325,7 @@ void msrOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> msrOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1333,7 +1333,7 @@ void msrOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msrOahGroup::displayMsrOahValues (int valueFieldWidth)
+void msrOahGroup::displayMsrOahValues (int valueFieldWidth) // JMI SUPERFLOUS??? v0.9.69
 {
   gLog <<
     "The MSR options are:" <<
@@ -1544,7 +1544,7 @@ S_msrOahGroup createGlobalMsrOahGroup ()
     ss <<
       "Creating global MSR OAH group";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -17,7 +17,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -177,7 +177,7 @@ msrTimeSignatureItem::msrTimeSignatureItem (
       "Creating time signature item" <<
       ", line: " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -282,7 +282,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTimeSignatureItem::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -300,7 +300,7 @@ void msrTimeSignatureItem::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTimeSignatureItem::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -318,7 +318,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTimeSignatureItem::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -336,7 +336,7 @@ void msrTimeSignatureItem::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTimeSignatureItem::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -867,7 +867,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       timeString <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -891,7 +891,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       "regularExpression: " <<
       regularExpression;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -958,7 +958,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       beatsNotesDuration <<
       "\"";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -989,7 +989,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
       "integerValue: " <<
       integerValue;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1158,7 +1158,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrTimeSignature::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1176,7 +1176,7 @@ void msrTimeSignature::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrTimeSignature::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1194,7 +1194,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrTimeSignature::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1212,7 +1212,7 @@ void msrTimeSignature::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrTimeSignature::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -1354,7 +1354,7 @@ void msrTimeSignature::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 31;
+  const int fieldWidth = 33;
 
   os << std::left <<
     std::setw (fieldWidth) <<

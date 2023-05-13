@@ -58,7 +58,7 @@ S_mfcConverterComponent createMsr2guidoConverterComponent ()
       ss <<
         "Creating the Msr2guido component";
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

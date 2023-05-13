@@ -15,7 +15,7 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfTiming.h"
@@ -72,7 +72,7 @@ void translateMxsrToGuido (
       std::endl <<
       separator;
 
-    gWaeHandler->waeTraceToStream (
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
       ss.str ());
@@ -100,7 +100,7 @@ void translateMxsrToGuido (
       "\"" <<
       std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
   }
@@ -113,7 +113,7 @@ void translateMxsrToGuido (
         "xmlFile2gmn() output goes to standard output" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -134,7 +134,7 @@ void translateMxsrToGuido (
         "\"" <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -150,7 +150,7 @@ void translateMxsrToGuido (
         gLanguage->openingGuidoFileForWriting (outputFileName) <<
         std::endl;
 
-//     gWaeHandler->waeTraceWithoutLocationDetails ( JMI v0.9.67
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
 //       __FILE__, __LINE__,
 //       ss.str ());
     }
@@ -188,7 +188,7 @@ void translateMxsrToGuido (
         std::endl <<
         gLanguage->closingGuidoFile (outputFileName);
 
-      gWaeHandler->waeTraceWithoutLocationDetails (
+      gWaeHandler->waeTraceWithoutInputLocation (
         __FILE__, __LINE__,
         ss.str ());
     }

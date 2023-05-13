@@ -15,7 +15,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 
@@ -118,7 +118,7 @@ void msrOctaveShift::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrOctaveShift::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -136,7 +136,7 @@ void msrOctaveShift::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrOctaveShift::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -154,7 +154,7 @@ void msrOctaveShift::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrOctaveShift::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -172,7 +172,7 @@ void msrOctaveShift::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrOctaveShift::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

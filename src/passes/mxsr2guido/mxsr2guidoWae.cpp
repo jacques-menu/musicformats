@@ -40,7 +40,7 @@ void mxsr2guidoError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeError (
+  waeErrorWithInputLocation (
     "mxsr2guido",
     inputSourceName,
     inputLineNumber,
@@ -65,7 +65,7 @@ void mxsr2guidoInternalError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeInternalError (
+  waeInternalErrorWithInputLocation (
     "mxsr2guido",
     inputSourceName,
     inputLineNumber,

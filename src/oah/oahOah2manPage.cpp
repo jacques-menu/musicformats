@@ -15,7 +15,7 @@
 
 #include "oahOah2manPage.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 
 #include "oahOah.h"
@@ -49,7 +49,7 @@ void oahOah2manPage::visitStart (S_oahOptionalValuesStyleKindAtom& elt)
       ".\\\" --> Start visiting oahOptionalValuesStyleKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -84,7 +84,7 @@ void oahOah2manPage::visitEnd (S_oahOptionalValuesStyleKindAtom& elt)
       ".\\\" --> End visiting oahOptionalValuesStyleKindAtom" <<
       " \"" << elt->fetchNames () << "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

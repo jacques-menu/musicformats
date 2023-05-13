@@ -83,7 +83,7 @@ void msrMidiTempo::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrMidiTempo::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -101,7 +101,7 @@ void msrMidiTempo::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrMidiTempo::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -119,7 +119,7 @@ void msrMidiTempo::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrMidiTempo::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -137,7 +137,7 @@ void msrMidiTempo::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrMidiTempo::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

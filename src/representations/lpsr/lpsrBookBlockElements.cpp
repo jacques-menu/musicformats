@@ -11,7 +11,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 
@@ -61,7 +61,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrBookBlockElement::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -79,7 +79,7 @@ void lpsrBookBlockElement::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBookBlockElement::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -97,7 +97,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrBookBlockElement::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -115,7 +115,7 @@ void lpsrBookBlockElement::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBookBlockElement::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -133,7 +133,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrBookBlockElement::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -164,7 +164,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
     ss <<
       "% <== lpsrBookBlockElement::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -258,7 +258,7 @@ void lpsrScoreBlock::appendPartGroupBlockToScoreBlock (
        " to LPSR score block" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -285,7 +285,7 @@ void lpsrScoreBlock::appendVoiceUseToParallelMusicBLock (
        "\" to LPSR score" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -310,7 +310,7 @@ void lpsrScoreBlock::appendLyricsUseToParallelMusicBLock (
        " to LPSR score" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -330,7 +330,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrScoreBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -348,7 +348,7 @@ void lpsrScoreBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrScoreBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -366,7 +366,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrScoreBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -384,7 +384,7 @@ void lpsrScoreBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrScoreBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -402,7 +402,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrScoreBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -444,7 +444,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
     ss <<
       "% <== lpsrScoreBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -517,7 +517,7 @@ void lpsrBookPartBlock::appendPartGroupBlockToBookPartBlock (
        " to LPSR book part block" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -544,7 +544,7 @@ void lpsrBookPartBlock::appendVoiceUseToParallelMusicBLock (
        "\" to LPSR score" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -569,7 +569,7 @@ void lpsrBookPartBlock::appendLyricsUseToParallelMusicBLock (
        " to LPSR score" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -589,7 +589,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrBookPartBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -607,7 +607,7 @@ void lpsrBookPartBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBookPartBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -625,7 +625,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrBookPartBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -643,7 +643,7 @@ void lpsrBookPartBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBookPartBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -661,7 +661,7 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrBookPartBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -680,7 +680,7 @@ void lpsrBookPartBlock::browseData (basevisitor* v)
     ss <<
       "% <== lpsrBookPartBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -755,7 +755,7 @@ void lpsrBookBlock::appendPartGroupBlockToBlock (
        " to LPSR score" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -783,7 +783,7 @@ void lpsrBookBlock::appendBookBlockElementToBookBlockElementsList (
        " to LPSR book block" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -806,7 +806,7 @@ void lpsrBookBlock::appendLpsrScoreBlockToBookBlockElementsList (
        " to LPSR book block elements list" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -829,7 +829,7 @@ void lpsrBookBlock::appendLpsrBookPartBlockToBookBlockElementsList (
        " to LPSR book block elements list" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -853,7 +853,7 @@ void lpsrBookBlock::appendVoiceUseToParallelMusicBLock (
        "\" to LPSR score" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -878,7 +878,7 @@ void lpsrBookBlock::appendLyricsUseToParallelMusicBLock (
        " to LPSR score" <<
        std::endl;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -898,7 +898,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
     ss <<
       "% ==> lpsrBookBlock::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -916,7 +916,7 @@ void lpsrBookBlock::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBookBlock::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -934,7 +934,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
     ss <<
       "% ==> lpsrBookBlock::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -952,7 +952,7 @@ void lpsrBookBlock::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching lpsrBookBlock::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -970,7 +970,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
     ss <<
       "% ==> lpsrBookBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1005,7 +1005,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
     ss <<
       "% <== lpsrBookBlock::browseData ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }

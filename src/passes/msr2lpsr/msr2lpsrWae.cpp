@@ -76,7 +76,7 @@ void msr2lpsrInternalError (
   int                sourceCodeLineNumber,
   const std::string& message)
 {
-  waeInternalError (
+  waeInternalErrorWithInputLocation (
     "msr2lpsr",
     inputSourceName,
     inputLineNumber,

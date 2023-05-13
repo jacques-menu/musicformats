@@ -13,7 +13,7 @@
 
 #include "visitor.h"
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -170,7 +170,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
     ss <<
       "Creating a newborn clone of a double tremolo";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -345,7 +345,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       " as first element of double tremolo " <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -442,7 +442,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       fDoubleTremoloElementsWholeNotes.asString () << '\'' <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -461,7 +461,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       " as second element of double tremolo " <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -504,7 +504,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       fDoubleTremoloElementsWholeNotes.asString () << '\'' <<
       "', line " << inputLineNumber;
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -558,7 +558,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
       " as first element of double tremolo " <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -630,7 +630,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
       " as second element of double tremolo " <<
       asShortString ();
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -699,7 +699,7 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
     ss <<
       "% ==> msrDoubleTremolo::acceptIn ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -717,7 +717,7 @@ void msrDoubleTremolo::acceptIn (basevisitor* v)
           ss <<
             "% ==> Launching msrDoubleTremolo::visitStart ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -735,7 +735,7 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
     ss <<
       "% ==> msrDoubleTremolo::acceptOut ()";
 
-    gWaeHandler->waeTraceWithLocationDetails (
+    gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -753,7 +753,7 @@ void msrDoubleTremolo::acceptOut (basevisitor* v)
           ss <<
             "% ==> Launching msrDoubleTremolo::visitEnd ()";
 
-          gWaeHandler->waeTraceWithLocationDetails (
+          gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
         }

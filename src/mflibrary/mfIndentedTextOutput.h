@@ -76,8 +76,8 @@ class EXP mfOutputIndenter
     // decrease the indentation by 1, postfix operator
     mfOutputIndenter      operator-- (int);
 
-    mfOutputIndenter&     increment (int value);
-    mfOutputIndenter&     decrement (int value);
+    mfOutputIndenter&     increment (int value = 1);
+    mfOutputIndenter&     decrement (int value = 1);
 
     // reset the indentation
     void                  resetToZero ()
@@ -154,12 +154,7 @@ class EXP mfIndentedOStreamBuf: public std::stringbuf
     // constructor
                           mfIndentedOStreamBuf (
                             std::ostream&     outputStream,
-                            mfOutputIndenter& theIndenter)
-                              : fOutputOStream (
-                                  outputStream),
-                                fOutputIndenter (
-                                  theIndenter)
-                              {}
+                            mfOutputIndenter& theIndenter);
 
     // indentation
     mfOutputIndenter&     getOutputIndenter () const
@@ -204,29 +199,14 @@ Usage:
 
     static SMARTP<mfIndentedOstream> create (
                             std::ostream&     theOStream,
-                            mfOutputIndenter& theIndenter)
-                              {
-                                mfIndentedOstream* obj =
-                                  new mfIndentedOstream (
-                                    theOStream,
-                                    theIndenter);
-                                assert (obj != nullptr);
-
-                                return obj;
-                              }
+                            mfOutputIndenter& theIndenter);
 
     // constructors/destructor
     // ------------------------------------------------------
 
                           mfIndentedOstream (
                             std::ostream&     theOStream,
-                            mfOutputIndenter& theIndenter)
-                              : std::ostream (
-                                  & fIndentedOStreamBuf),
-                                fIndentedOStreamBuf (
-                                  theOStream,
-                                  theIndenter)
-                              {}
+                            mfOutputIndenter& theIndenter);
 
     virtual               ~mfIndentedOstream () {};
 
@@ -258,7 +238,7 @@ Usage:
     mfIndentedOStreamBuf  fIndentedOStreamBuf;
 
 };
-typedef SMARTP<mfIndentedOstream> S_indentedOstream;
+typedef SMARTP<mfIndentedOstream> S_mfIndentedOstream;
 
 //______________________________________________________________________________
 class EXP mfIndentedStringStream: public smartable
@@ -281,14 +261,7 @@ Usage:
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mfIndentedStringStream> create ()
-                              {
-                                mfIndentedStringStream* obj =
-                                  new mfIndentedStringStream ();
-                                assert (obj != nullptr);
-
-                                return obj;
-                              }
+    static SMARTP<mfIndentedStringStream> create ();
 
     // constructors/destructor
     // ------------------------------------------------------
@@ -320,7 +293,7 @@ Usage:
 
     std::stringstream     fStringstream;
 };
-typedef SMARTP<mfIndentedStringStream> S_mfIndentedStringstream;
+typedef SMARTP<mfIndentedStringStream> S_mfIndentedStringStream;
 
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const char theChar);
@@ -363,8 +336,8 @@ EXP mfOutputIndenter& getGlobalOutputIndenter ();
 #define gTab      getGlobalOutputIndenter ().getSpacer ()
 
 // the hidden global log and output indented streams
-EXP S_indentedOstream& getGlobalOutputIndentedOstream ();
-EXP S_indentedOstream& getGlobalLogIndentedOstream ();
+EXP S_mfIndentedOstream& getGlobalOutputIndentedOstream ();
+EXP S_mfIndentedOstream& getGlobalLogIndentedOstream ();
 
 // useful shortcut macros
 #define gOutput *(getGlobalOutputIndentedOstream ())

@@ -11,7 +11,7 @@
 
 #include <iomanip>      // std::setw, std::setprecision, ...
 
-#include "mfStaticSettings.h"
+#include "mfPreprocessorSettings.h"
 
 #include "oahWae.h"
 
@@ -88,7 +88,7 @@ Usage: xml2gmn [[option]* [MusicXMLFile|-] [[option]*
       fHandlerHeader <<
       "\" regular options handler";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -149,7 +149,7 @@ void xml2gmnInsiderHandler::createTheXml2gmnPrefixes ()
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -171,7 +171,7 @@ void xml2gmnInsiderHandler::createTheXml2gmnOptionGroups (
       fHandlerHeader <<
       "\" insider option groups";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -260,7 +260,7 @@ void xml2gmnInsiderHandler::checkOptionsAndArguments () const
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -281,7 +281,7 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
       fHandlerHeader <<
       "\"";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -375,7 +375,7 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -394,7 +394,7 @@ std::string xml2gmnInsiderHandler::fetchOutputFileNameFromTheOptions () const
           "\"" <<
           std::endl;
 
-        gWaeHandler->waeTraceWithoutLocationDetails (
+        gWaeHandler->waeTraceWithoutInputLocation (
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -493,7 +493,7 @@ void xml2gmnInsiderOahGroup::acceptIn (basevisitor* v)
     ss <<
       ".\\\" ==> xml2gmnInsiderOahGroup::acceptIn ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -511,7 +511,7 @@ void xml2gmnInsiderOahGroup::acceptIn (basevisitor* v)
           ss <<
             ".\\\" ==> Launching xml2gmnInsiderOahGroup::visitStart ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -529,7 +529,7 @@ void xml2gmnInsiderOahGroup::acceptOut (basevisitor* v)
     ss <<
       ".\\\" ==> xml2gmnInsiderOahGroup::acceptOut ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -547,7 +547,7 @@ void xml2gmnInsiderOahGroup::acceptOut (basevisitor* v)
           ss <<
             ".\\\" ==> Launching xml2gmnInsiderOahGroup::visitEnd ()";
 
-          gWaeHandler->waeTraceWithoutLocationDetails (
+          gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -565,7 +565,7 @@ void xml2gmnInsiderOahGroup::browseData (basevisitor* v)
     ss <<
       ".\\\" ==> xml2gmnInsiderOahGroup::browseData ()";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -813,7 +813,7 @@ S_xml2gmnInsiderOahGroup createGlobalXml2gmnOahGroup ()
     ss <<
       "Creating global xml2gmn OAH group";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }

@@ -84,7 +84,7 @@ S_mfcConverterComponent createMsdlConverterConverterComponent ()
     ss <<
       "Creating the msdlConverter component";
 
-    gWaeHandler->waeTraceWithoutLocationDetails (
+    gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
       ss.str ());
   }
