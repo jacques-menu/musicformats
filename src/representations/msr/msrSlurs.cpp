@@ -218,7 +218,7 @@ std::string msrSlur::asString () const
     msrPlacementKindAsString (
       fSlurPlacementKind) <<
 
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();

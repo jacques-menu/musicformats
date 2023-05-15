@@ -309,7 +309,7 @@ S_lilypondTransposePartNameAtom lilypondTransposePartNameAtom::create (
   const std::string& valueSpecification,
   const std::string& variableName,
   std::map<std::string, S_msrSemiTonesPitchAndOctave>&
-                stringToMsrSemiTonesPitchAndOctaveMapVariable)
+                     stringToMsrSemiTonesPitchAndOctaveMapVariable)
 {
   lilypondTransposePartNameAtom* obj = new
     lilypondTransposePartNameAtom (
@@ -330,7 +330,7 @@ lilypondTransposePartNameAtom::lilypondTransposePartNameAtom (
   const std::string& valueSpecification,
   const std::string& variableName,
   std::map<std::string, S_msrSemiTonesPitchAndOctave>&
-                stringToMsrSemiTonesPitchAndOctaveMapVariable)
+                     stringToMsrSemiTonesPitchAndOctaveMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -343,6 +343,17 @@ lilypondTransposePartNameAtom::lilypondTransposePartNameAtom (
 
 lilypondTransposePartNameAtom::~lilypondTransposePartNameAtom ()
 {}
+
+void lilypondTransposePartNameAtom::setStringToMsrSemiTonesPitchAndOctaveMapVariable (
+  const std::string& partName,
+  const S_msrSemiTonesPitchAndOctave&
+                     semiTonesPitchAndOctave)
+{
+  fStringToMsrSemiTonesPitchAndOctaveMapVariable [
+    partName
+  ] =
+    semiTonesPitchAndOctave;
+}
 
 void lilypondTransposePartNameAtom::applyAtomWithValue (
   const std::string& theString,
@@ -714,7 +725,7 @@ S_lilypondTransposePartIDAtom lilypondTransposePartIDAtom::create (
   const std::string& valueSpecification,
   const std::string& variableName,
   std::map<std::string, S_msrSemiTonesPitchAndOctave>&
-                stringToMsrSemiTonesPitchAndOctaveMapVariable)
+                     stringToMsrSemiTonesPitchAndOctaveMapVariable)
 {
   lilypondTransposePartIDAtom* obj = new
     lilypondTransposePartIDAtom (
@@ -735,7 +746,7 @@ lilypondTransposePartIDAtom::lilypondTransposePartIDAtom (
   const std::string& valueSpecification,
   const std::string& variableName,
   std::map<std::string, S_msrSemiTonesPitchAndOctave>&
-                stringToMsrSemiTonesPitchAndOctaveMapVariable)
+                     stringToMsrSemiTonesPitchAndOctaveMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -748,6 +759,17 @@ lilypondTransposePartIDAtom::lilypondTransposePartIDAtom (
 
 lilypondTransposePartIDAtom::~lilypondTransposePartIDAtom ()
 {}
+
+void lilypondTransposePartIDAtom::setStringToMsrSemiTonesPitchAndOctaveMapVariable (
+  const std::string& partName,
+  const S_msrSemiTonesPitchAndOctave&
+                     semiTonesPitchAndOctave)
+{
+  fStringToMsrSemiTonesPitchAndOctaveMapVariable [
+    partName
+  ] =
+    semiTonesPitchAndOctave;
+}
 
 void lilypondTransposePartIDAtom::applyAtomWithValue (
   const std::string& theString,
@@ -1110,7 +1132,7 @@ std::ostream& operator << (std::ostream& os, const S_lilypondTransposePartIDAtom
 
 //______________________________________________________________________________
 S_msrOctaveEntryVariable msrOctaveEntryVariable::create (
-  const std::string&      variableName,
+  const std::string& variableName,
   msrOctaveEntryKind octaveEntryKind)
 {
   msrOctaveEntryVariable* obj = new
@@ -1122,7 +1144,7 @@ S_msrOctaveEntryVariable msrOctaveEntryVariable::create (
 }
 
 msrOctaveEntryVariable::msrOctaveEntryVariable (
-  const std::string&      variableName,
+  const std::string& variableName,
   msrOctaveEntryKind octaveEntryKind)
 {
   fVariableName    = variableName;
@@ -1931,7 +1953,7 @@ S_lilypondAccidentalStyleKindAtom lilypondAccidentalStyleKindAtom::create (
   const std::string& valueSpecification,
   const std::string& variableName,
   lpsrAccidentalStyleKind&
-                lilypondAccidentalStyleKindVariable)
+                     lilypondAccidentalStyleKindVariable)
 {
   lilypondAccidentalStyleKindAtom* obj = new
     lilypondAccidentalStyleKindAtom (
@@ -1952,7 +1974,7 @@ lilypondAccidentalStyleKindAtom::lilypondAccidentalStyleKindAtom (
   const std::string& valueSpecification,
   const std::string& variableName,
   lpsrAccidentalStyleKind&
-                lilypondAccidentalStyleKindVariable)
+                     lilypondAccidentalStyleKindVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -2210,13 +2232,13 @@ std::ostream& operator << (std::ostream& os, const S_lilypondAccidentalStyleKind
 
 //______________________________________________________________________________
 S_lilypondChordsDisplayAtom lilypondChordsDisplayAtom::create (
-  const std::string&    shortName,
-  const std::string&    longName,
-  const std::string&    description,
-  const std::string&    valueSpecification,
-  const std::string&    variableName,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   std::list<std::pair<std::string, std::string> >&
-                        lilypondChordsDisplayVariable)
+                     lilypondChordsDisplayVariable)
 {
   lilypondChordsDisplayAtom* obj = new
     lilypondChordsDisplayAtom (
@@ -2231,13 +2253,13 @@ S_lilypondChordsDisplayAtom lilypondChordsDisplayAtom::create (
 }
 
 lilypondChordsDisplayAtom::lilypondChordsDisplayAtom (
-  const std::string&    shortName,
-  const std::string&    longName,
-  const std::string&    description,
-  const std::string&    valueSpecification,
-  const std::string&    variableName,
+  const std::string& shortName,
+  const std::string& longName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   std::list<std::pair<std::string, std::string> >&
-                        lilypondChordsDisplayVariable)
+                     lilypondChordsDisplayVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -2631,13 +2653,13 @@ std::ostream& operator << (std::ostream& os, const S_lilypondChordsDisplayAtom& 
 
 //______________________________________________________________________________
 S_lilypondLyricsNotesDurationsKindAtom lilypondLyricsNotesDurationsKindAtom::create (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   lpsrLyricsNotesDurationsKind&
-                    lilypondLyricsNotesDurationsKindVariable)
+                     lilypondLyricsNotesDurationsKindVariable)
 {
   lilypondLyricsNotesDurationsKindAtom* obj = new
     lilypondLyricsNotesDurationsKindAtom (
@@ -2652,13 +2674,13 @@ S_lilypondLyricsNotesDurationsKindAtom lilypondLyricsNotesDurationsKindAtom::cre
 }
 
 lilypondLyricsNotesDurationsKindAtom::lilypondLyricsNotesDurationsKindAtom (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   lpsrLyricsNotesDurationsKind&
-                    lilypondLyricsNotesDurationsKindVariable)
+                     lilypondLyricsNotesDurationsKindVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -2919,13 +2941,13 @@ std::ostream& operator << (std::ostream& os, const S_lilypondLyricsNotesDuration
 
 //______________________________________________________________________________
 S_lilypondDynamicsTextSpannersStyleKindAtom lilypondDynamicsTextSpannersStyleKindAtom::create (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   lpsrDynamicsTextSpannersStyleKind&
-                    lilypondDynamicsTextSpannersStyleKindVariable)
+                     lilypondDynamicsTextSpannersStyleKindVariable)
 {
   lilypondDynamicsTextSpannersStyleKindAtom* obj = new
     lilypondDynamicsTextSpannersStyleKindAtom (
@@ -2940,13 +2962,13 @@ S_lilypondDynamicsTextSpannersStyleKindAtom lilypondDynamicsTextSpannersStyleKin
 }
 
 lilypondDynamicsTextSpannersStyleKindAtom::lilypondDynamicsTextSpannersStyleKindAtom (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   lpsrDynamicsTextSpannersStyleKind&
-                    lilypondDynamicsTextSpannersStyleKindVariable)
+                     lilypondDynamicsTextSpannersStyleKindVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -4057,8 +4079,8 @@ its MusicXML input line number.
 This is useful when debugging EXECUTABLE.)",
           std::regex ("EXECUTABLE"),
           gOahOahGroup->getOahOahGroupServiceName ()),
-        "fInputLineNumbers",
-        fInputLineNumbers));
+        "fInputStartLineNumbers",
+        fInputStartLineNumbers));
 
   // notes comments
   // --------------------------------------
@@ -5048,7 +5070,7 @@ at the beginning of the LilyPond code.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "generate-commented-out-variables", "gcov",
+        "generate-commented-out-lilypond-variables", "gencomoutlilyvars",
 R"(Generate LilyPond variables as comment,
 to avoid having to add them by hand afterwards.)",
         "fGenerateCommentedOutVariables",
@@ -5730,7 +5752,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   } // switch
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fInputLineNumbers" << ": " <<
+    std::setw (valueFieldWidth) << "fInputStartLineNumbers" << ": " <<
       fAllNotesDurations <<
       std::endl <<
 
@@ -5768,8 +5790,8 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       fMultipleFullBarRestsExpandLimit <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fInputLineNumbers" << ": " <<
-      fInputLineNumbers <<
+    std::setw (valueFieldWidth) << "fInputStartLineNumbers" << ": " <<
+      fInputStartLineNumbers <<
       std::endl <<
     std::setw (valueFieldWidth) << "fNotesComments" << ": " <<
       fNotesComments <<
@@ -6400,8 +6422,8 @@ void lpsr2lilypondOahGroup::displayLilypondGenerationOahValues (int fieldWidth)
       fMultipleFullBarRestsExpandLimit <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fInputLineNumbers" << ": " <<
-      fInputLineNumbers <<
+    std::setw (fieldWidth) << "fInputStartLineNumbers" << ": " <<
+      fInputStartLineNumbers <<
       std::endl <<
     std::setw (fieldWidth) << "fNotesComments" << ": " <<
       fNotesComments <<

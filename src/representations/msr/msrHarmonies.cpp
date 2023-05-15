@@ -2744,7 +2744,7 @@ void msrHarmonyInterval::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "harmonyIntervalRelativeOctave" << ": " << fHarmonyIntervalRelativeOctave <<
   /* JMI
-    ", line: " << fInputLineNumber <<
+    ", line: " << fInputStartLineNumber <<
     */
     std::endl;
 
@@ -3870,7 +3870,7 @@ std::string msrHarmonyDegree::asString () const
     ", alteration: " <<
     msrAlterationKindAsString (
       fHarmonyDegreeAlterationKind) <<
-    ", line: " << fInputLineNumber <<
+    ", line: " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -4209,7 +4209,7 @@ void msrHarmonyContents::print (std::ostream& os) const
   os <<
     "HarmonyContents" <<
   /* JMI
-    ", line: " << fInputLineNumber <<
+    ", line: " << fInputStartLineNumber <<
     */
     std::endl;
 
@@ -4440,7 +4440,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
     ss <<
       "Creating a newborn clone of harmony " <<
       asShortString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4459,7 +4459,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
   S_msrHarmony
     newbornClone =
       msrHarmony::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind,
@@ -4493,7 +4493,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
     ss <<
       "Creating a deep clone of harmony " <<
       asShortString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4512,7 +4512,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
   S_msrHarmony
     deepClone =
       msrHarmony::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind,
@@ -4625,7 +4625,7 @@ void msrHarmony::setHarmonyTupletFactor (
       asShortString () <<
       " to " <<
       tupletFactor.asString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5050,7 +5050,7 @@ std::string msrHarmony::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -5138,7 +5138,7 @@ std::string msrHarmony::asShortStringForMeasuresSlices () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -5148,7 +5148,7 @@ void msrHarmony::print (std::ostream& os) const
 {
   os <<
     "[Harmony" <<
-     ", line " << fInputLineNumber <<
+     ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -7119,7 +7119,7 @@ void msrHarmonyStructure::print (std::ostream& os) const
     mfSingularOrPlural (
       fHarmonyStructureIntervals.size (), "interval", "intervals") <<
   /* JMI
-    ", line: " << fInputLineNumber <<
+    ", line: " << fInputStartLineNumber <<
     */
     std::endl;
 

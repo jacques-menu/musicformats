@@ -98,7 +98,7 @@ void msrSegment::initializeSegment ()
       fSegmentDebugNumber <<
       "', in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\", line " << fInputLineNumber;
+      "\", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -139,7 +139,7 @@ void msrSegment::setSegmentFirstMeasure (
     ss <<
       " in segment " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -175,7 +175,7 @@ void msrSegment::setSegmentLastMeasure (
     ss <<
       " in segment " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -266,7 +266,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
   S_msrSegment
     newbornClone =
       msrSegment::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         containingVoice);
 
   // absolute number, for coherency between passes
@@ -306,7 +306,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
   S_msrSegment
     deepClone =
       msrSegment::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         containingVoice);
 
   // absolute number
@@ -721,7 +721,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      musicXMLPrintLayout->getInputLineNumber (),
+      musicXMLPrintLayout->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -783,7 +783,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-       clefKeyTimeSignatureGroup->getInputLineNumber (),
+       clefKeyTimeSignatureGroup->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -846,7 +846,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
-//        clef->getInputLineNumber (),
+//        clef->getInputStartLineNumber (),
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -910,7 +910,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
-//       clef->getInputLineNumber (),
+//       clef->getInputStartLineNumber (),
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -968,11 +968,11 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //         ", in voice \"" <<
 //         fSegmentUpLinkToVoice->getVoiceName () <<
 //         "\"" <<
-//         "', line " << fInputLineNumber; // JMI v0.9.64
+//         "', line " << fInputStartLineNumber; // JMI v0.9.64
 //
 //       msrInternalError ( // JMI v0.9.64 ???
 //         gServiceRunData->getInputSourceName (),
-//         fInputLineNumber,
+//         fInputStartLineNumber,
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
@@ -992,7 +992,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       ", in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
 //       "\"" <<
-//       "', line " << fInputLineNumber; // JMI v0.9.64
+//       "', line " << fInputStartLineNumber; // JMI v0.9.64
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
@@ -1032,7 +1032,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //
 //     msrInternalError ( // JMI v0.9.64 ???
 //       gServiceRunData->getInputSourceName (),
-//       fInputLineNumber,
+//       fInputStartLineNumber,
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -1067,7 +1067,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   assertSegmentLastMeasureIsNotNull (
-//     key->getInputLineNumber ());
+//     key->getInputStartLineNumber ());
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   ++gIndenter;
@@ -1113,7 +1113,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   assertSegmentLastMeasureIsNotNull (
-//     timeSignature->getInputLineNumber ());
+//     timeSignature->getInputStartLineNumber ());
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   ++gIndenter;
@@ -1159,7 +1159,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    timeSignature->getInputLineNumber ());
+    timeSignature->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append timeSignature to segments's current measure
@@ -1303,7 +1303,7 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    harmony->getInputLineNumber ());
+    harmony->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append harmony to this segment
@@ -1412,7 +1412,7 @@ void msrSegment::appendFiguredBassToSegmentClone (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    figuredBass->getInputLineNumber ());
+    figuredBass->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append figuredBass to this segment
@@ -1442,7 +1442,7 @@ void msrSegment::appendSegnoToSegment (const S_msrSegno& segno)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    segno->getInputLineNumber ());
+    segno->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1476,7 +1476,7 @@ void msrSegment::appendCodaToSegment (const S_msrCoda& coda)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    coda->getInputLineNumber ());
+    coda->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1511,7 +1511,7 @@ void msrSegment::appendEyeGlassesToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    eyeGlasses->getInputLineNumber ());
+    eyeGlasses->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1545,7 +1545,7 @@ void msrSegment::appendPedalToSegment (const S_msrPedal& pedal)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    pedal->getInputLineNumber ());
+    pedal->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1580,7 +1580,7 @@ void msrSegment::appendDampToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    damp->getInputLineNumber ());
+    damp->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1615,7 +1615,7 @@ void msrSegment::appendDampAllToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    dampAll->getInputLineNumber ());
+    dampAll->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1650,7 +1650,7 @@ void msrSegment::appendTranspositionToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    transposition->getInputLineNumber ());
+    transposition->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1667,7 +1667,7 @@ void msrSegment::appendStaffDetailsToSegment (
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    staffDetails->getInputLineNumber ();
+    staffDetails->getInputStartLineNumber ();
 
   if (
     gTraceOahGroup->getTraceStavesDetails ()
@@ -1708,7 +1708,7 @@ void msrSegment::appendStaffDetailsToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    staffDetails->getInputLineNumber ());
+    staffDetails->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append staffDetails to this segment
@@ -1755,7 +1755,7 @@ void msrSegment::appendLineBreakToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    lineBreak->getInputLineNumber ());
+    lineBreak->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1790,7 +1790,7 @@ void msrSegment::appendPageBreakToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    pageBreak->getInputLineNumber ());
+    pageBreak->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1825,7 +1825,7 @@ void msrSegment::appendBarNumberCheckToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    barNumberCheck->getInputLineNumber ());
+    barNumberCheck->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1862,7 +1862,7 @@ void msrSegment::appendTempoToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    tempo->getInputLineNumber ());
+    tempo->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1897,7 +1897,7 @@ void msrSegment::appendRehearsalMarkToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    rehearsalMark->getInputLineNumber ());
+    rehearsalMark->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1933,7 +1933,7 @@ void msrSegment::appendOctaveShiftToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    octaveShift->getInputLineNumber ());
+    octaveShift->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1969,7 +1969,7 @@ void msrSegment::appendScordaturaToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    scordatura->getInputLineNumber ());
+    scordatura->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -2006,7 +2006,7 @@ void msrSegment::appendAccordionRegistrationToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    accordionRegistration->getInputLineNumber ());
+    accordionRegistration->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -2044,7 +2044,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    harpPedalsTuning->getInputLineNumber ());
+    harpPedalsTuning->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -2210,7 +2210,7 @@ void msrSegment::appendPaddingNoteToSegment (
 void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 {
   int inputLineNumber =
-    measure->getInputLineNumber ();
+    measure->getInputStartLineNumber ();
 
   std::string measureNumber =
     measure->getMeasureNumber ();
@@ -2242,7 +2242,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      ", line " << measure->getInputLineNumber ();
+      ", line " << measure->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2308,7 +2308,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 {
   int inputLineNumber =
-    measure->getInputLineNumber ();
+    measure->getInputStartLineNumber ();
 
   std::string measureNumber =
     measure->getMeasureNumber ();
@@ -2344,7 +2344,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"," <<
-      ", line " << measure->getInputLineNumber ();
+      ", line " << measure->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2427,7 +2427,7 @@ void msrSegment::prependBarLineToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentElementsListIsNotEmpty (
-    barLine->getInputLineNumber ());
+    barLine->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // prepend barLine to this segment
@@ -2462,7 +2462,7 @@ void msrSegment::appendBarLineToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    barLine->getInputLineNumber ());
+    barLine->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -2497,7 +2497,7 @@ void msrSegment::appendBarCheckToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    barCheck->getInputLineNumber ());
+    barCheck->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
@@ -2515,7 +2515,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
       "Appending voice staff change " <<
       voiceStaffChange->asString () <<
       " to segment " << asString () <<
-      ", line " << voiceStaffChange->getInputLineNumber ();
+      ", line " << voiceStaffChange->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2526,7 +2526,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    voiceStaffChange->getInputLineNumber ());
+    voiceStaffChange->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -2546,7 +2546,7 @@ void msrSegment::appendNoteToSegment (
   if (gTraceOahGroup->getTraceNotes ()) {
     if (! fSegmentElementsList.size ()) { // JMI
       displaySegment (
-        note->getInputLineNumber (),
+        note->getInputStartLineNumber (),
         "appendNoteToSegment()");
     }
   }
@@ -2555,7 +2555,7 @@ void msrSegment::appendNoteToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    note->getInputLineNumber ());
+    note->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
@@ -2594,7 +2594,7 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    doubleTremolo->getInputLineNumber ());
+    doubleTremolo->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
@@ -2606,7 +2606,7 @@ void msrSegment::appendChordToSegment (const S_msrChord& chord) // JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    chord->getInputLineNumber ());
+    chord->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
@@ -2618,7 +2618,7 @@ void msrSegment::appendTupletToSegment (const S_msrTuplet& tuplet) // JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    tuplet->getInputLineNumber ());
+    tuplet->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
@@ -2633,7 +2633,7 @@ void msrSegment::addGraceNotesGroupAheadOfSegmentIfNeeded (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    graceNotesGroup->getInputLineNumber ());
+    graceNotesGroup->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentMeasuresFlatList.front ()->
@@ -2646,7 +2646,7 @@ void msrSegment::appendAfterGraceNotesToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    afterGraceNotes->getInputLineNumber ());
+    afterGraceNotes->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
@@ -2660,7 +2660,7 @@ void msrSegment::prependAfterGraceNotesToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    afterGraceNotes->getInputLineNumber ());
+    afterGraceNotes->getInputStartLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentMeasuresFlatList.front ()->
@@ -2674,7 +2674,7 @@ void msrSegment::prependAfterGraceNotesToSegment (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   assertSegmentLastMeasureIsNotNull (
-//     elem->getInputLineNumber ());
+//     elem->getInputStartLineNumber ());
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   fSegmentLastMeasure->
@@ -2687,7 +2687,7 @@ void msrSegment::prependAfterGraceNotesToSegment (
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   assertSegmentLastMeasureIsNotNull (
-//     elem->getInputLineNumber ());
+//     elem->getInputStartLineNumber ());
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   fSegmentLastMeasure->
@@ -3296,7 +3296,7 @@ void msrSegment::printFull (std::ostream& os) const
     "', " <<
     mfSingularOrPlural (
       fSegmentElementsList.size (), "measure", "measures") <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -3384,7 +3384,7 @@ void msrSegment::print (std::ostream& os) const
     "', " <<
     mfSingularOrPlural (
       fSegmentElementsList.size (), "measure", "measures") <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

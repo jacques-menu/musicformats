@@ -71,7 +71,7 @@ S_msrPartGroup msrPartGroup::create (
   return obj;
 }
 
-S_msrPartGroup msrPartGroup::createSelfContainedPartGroup (
+S_msrPartGroup msrPartGroup::createSelfContainedPartGroupAndAppendItToScore (
   int                     partGroupNumber,
   int                     partGroupAbsoluteNumber,
   const std::string&      partGroupName,
@@ -99,7 +99,7 @@ S_msrPartGroup msrPartGroup::createSelfContainedPartGroup (
       partGroupUpLinkToScore);
   assert (obj != nullptr);
 
-  // the implicit part group is the outer-most one: JMI v0.9.69
+  // the implicit outer-most part group is the outer-most one: JMI v0.9.69
   // set its group upLink to point to itself
   obj->fPartGroupUpLinkToPartGroup = obj;
 
@@ -219,8 +219,8 @@ msrPartGroup::msrPartGroup (
     : msrPartGroupElement (inputLineNumber)
 {
   // no sanity check on partGroupUpLinkToPartGroup here,
-  // it will be set after all 'real' (i.e. not implicit)
-  // part groups and part have been analyzed
+  // it will be set after all 'real' (i.e. not the implicit outer-most)
+  // part groups and parts have been analyzed
   fPartGroupUpLinkToPartGroup = partGroupUpLinkToPartGroup;
 
 /* JMI
@@ -333,7 +333,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   S_msrPartGroup
     newbornClone =
       msrPartGroup::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fPartGroupNumber,
         fPartGroupAbsoluteNumber,
         fPartGroupName,
@@ -494,7 +494,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //
 //     msrInternalError(
 //       gServiceRunData->getInputSourceName (),
-//       fInputLineNumber, // inputLineNumber // TEMP JMI v0.9.63
+//       fInputStartLineNumber, // inputLineNumber // TEMP JMI v0.9.63
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -1317,7 +1317,7 @@ std::string msrPartGroup::asString () const
   ss <<
     "PartGroup \"" <<
     getPartGroupCombinedName () <<
-    "\", line " << fInputLineNumber;
+    "\", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -1330,7 +1330,7 @@ void msrPartGroup::printFull (std::ostream& os) const
     mfSingularOrPlural (
       fPartGroupPartsMap.size (), "part", "parts") <<
     ")" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1435,7 +1435,7 @@ void msrPartGroup::printFull (std::ostream& os) const
   // print the part group elements if any
 
   printPartGroupElementsList (
-    fInputLineNumber,
+    fInputStartLineNumber,
     gLog);
 
   --gIndenter;
@@ -1449,7 +1449,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   ++simultaneousCalls;
 
-  if (simultaneousCalls == 100) abort (); // JMI v0.9.69 1 for the implicit part group...
+  if (simultaneousCalls == 100) abort (); // JMI v0.9.69 1 for the implicit outer-most part group...
 
   os <<
     "[PartGroup" " \"" << getPartGroupCombinedName () <<
@@ -1457,7 +1457,7 @@ void msrPartGroup::print (std::ostream& os) const
     mfSingularOrPlural (
       fPartGroupPartsMap.size (), "part", "parts") <<
     ")" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1478,7 +1478,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   // print the part group elements if any
   printPartGroupElementsList (
-    fInputLineNumber,
+    fInputStartLineNumber,
     gLog);
 
   --gIndenter;

@@ -1005,7 +1005,7 @@ class EXP lpsr2lilypondTranslator :
 
     // std::string tuning
     std::string           stringTuningAsLilypondString (
-                            int               inputLineNumber,
+                            int                      inputLineNumber,
                             const S_msrStringTuning& stringTuning);
 
     // harp pedals tuning
@@ -1123,36 +1123,43 @@ class EXP lpsr2lilypondTranslator :
     void                  generatePaperPageSize (
                             const S_msrPageLayout& pageLayout,
                             msrLengthUnitKind      defaultLengthUnit,
-                            int                    fieldWidth);
+                            int                    fieldWidth,
+                            Bool&                  outputHasBeenProduced);
 
     void                  generatePaperMargins (
                             const S_msrPageLayout& pageLayout,
                             msrLengthUnitKind      defaultLengthUnit,
-                            int                    fieldWidth);
+                            int                    fieldWidth,
+                            Bool&                  outputHasBeenProduced);
 
     void                  generatePaperIndents (
-                            const S_lpsrPaper&       pagePaper,
-                            msrLengthUnitKind defaultLengthUnit,
-                            int               fieldWidth);
+                            const S_lpsrPaper& pagePaper,
+                            msrLengthUnitKind  defaultLengthUnit,
+                            int                fieldWidth,
+                            Bool&              outputHasBeenProduced);
 
     void                  generatePaperSpaces (
                             const S_lpsrPaper& pagePaper,
                             msrLengthUnitKind  defaultLengthUnit,
-                            int                fieldWidth);
+                            int                fieldWidth,
+                            Bool&              outputHasBeenProduced);
 
     void                  generatePaperCounts (
                             const S_lpsrPaper& pagePaper,
                             msrLengthUnitKind  defaultLengthUnit,
-                            int                fieldWidth);
+                            int                fieldWidth,
+                            Bool&              outputHasBeenProduced);
 
     void                  generatePaperBooleans (
                             const S_lpsrPaper& pagePaper,
-                            int                fieldWidth);
+                            int                fieldWidth,
+                            Bool&              outputHasBeenProduced);
 
     void                  generatePaperHeadersAndFooters (
                             const S_lpsrPaper& pagePaper,
                             msrLengthUnitKind  defaultLengthUnit,
-                            int                fieldWidth);
+                            int                fieldWidth,
+                            Bool&              outputHasBeenProduced);
 
     // score
     // ------------------------------------------------------

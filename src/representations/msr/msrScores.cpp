@@ -148,7 +148,7 @@ S_msrScore msrScore::createScoreNewbornClone ()
   S_msrScore
     newbornClone =
       msrScore::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fScoreName);
 
   // number of measures
@@ -230,7 +230,7 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      partGroup->getInputLineNumber (),
+      partGroup->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -482,24 +482,16 @@ void msrScore::browseData (basevisitor* v)
     browser.browse (*fAppearance);
   }
 
-  for (
-    std::list<S_msrCredit>::const_iterator i = fCreditsList.begin ();
-    i != fCreditsList.end ();
-    ++i
-  ) {
+  for (S_msrCredit credit : fCreditsList) {
     // browse the part credit
     msrBrowser<msrCredit> browser (v);
-    browser.browse (*(*i));
+    browser.browse (*credit);
   } // for
 
-  for (
-    std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
-    i != fPartGroupsList.end ();
-    ++i
-  ) {
+  for (S_msrPartGroup partGroup : fPartGroupsList) {
     // browse the part group
     msrBrowser<msrPartGroup> browser (v);
-    browser.browse (*(*i));
+    browser.browse (*partGroup);
   } // for
 
 #ifdef MF_TRACING_IS_ENABLED
@@ -519,8 +511,8 @@ void msrScore::browseData (basevisitor* v)
 void msrScore::printFull (std::ostream& os) const
 {
   os <<
-    "[MSR Score" <<
-    ", line " << fInputLineNumber <<
+    "[Embedded MSR Score" <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -889,8 +881,8 @@ void msrScore::printSummary (std::ostream& os) const
     std::endl<<
     std::endl;
 
-  // print the implicit part group contents
-  // it is the only element in fPartGroupsList JMI single variable
+  // print the implicit outer-most part group contents
+  // it is the only element in fPartGroupsList JMI single variable JMI v0.9.69
   if (partGroupsListSize) {
     os <<
       "Part groups list:" <<
@@ -900,7 +892,7 @@ void msrScore::printSummary (std::ostream& os) const
 
     fPartGroupsList.front () ->
       printPartGroupElementsList (
-        fInputLineNumber,
+        fInputStartLineNumber,
         os);
 
     --gIndenter;

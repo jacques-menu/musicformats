@@ -126,7 +126,7 @@ std::string msrFrameNote::asString () const
     ", fFrameNoteFretNumber: " << fFrameNoteFretNumber <<
     ", fFrameNoteFingering: " << fFrameNoteFingering <<
     ", fFrameNoteBarreTypeKind: " << fFrameNoteBarreTypeKind <<
-    ", line: " << fInputLineNumber <<
+    ", line: " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -211,7 +211,7 @@ void msrFrameNote::print (std::ostream& os) const
 {
   os <<
     "[FrameNote" <<
-    ", line: " << fInputLineNumber <<
+    ", line: " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -302,7 +302,7 @@ void msrFrame::appendFrameNoteToFrame (
   const S_msrFrameNote& frameNote)
 {
   int inputLineNumber =
-    frameNote->getInputLineNumber ();
+    frameNote->getInputStartLineNumber ();
 
   fFrameFrameNotesList.push_back (
     frameNote);
@@ -492,7 +492,7 @@ void msrFrame::print (std::ostream& os) const
 {
   os <<
     "[Frame" <<
-     ", line " << fInputLineNumber <<
+     ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

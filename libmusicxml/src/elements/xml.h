@@ -95,21 +95,27 @@ class EXP xmlelement : public ctree<xmlelement>, public visitable
 	protected:
 		// the element type
 		int fType;
-		// the input line number for messages to the user
-		int fInputLineNumber;
+		// the input line numbers for messages to the user
+		int fInputStartLineNumber;
+		int fInputEndLineNumber;
 
-				 xmlelement (int inputLineNumber) : fType(0), fInputLineNumber(inputLineNumber) {}
+    xmlelement (int inputStartLineNumber)
+      : fType(0),
+        fInputStartLineNumber (inputStartLineNumber),
+        fInputEndLineNumber (inputStartLineNumber) // default value JMI v0.9.69
+    {}
 		virtual ~xmlelement() {}
 
 	public:
 		typedef ctree<xmlelement>::iterator     iterator;
 
-		static SMARTP<xmlelement> create (int inputLineNumber);
+		static SMARTP<xmlelement> create (int inputStartLineNumber);
 
 		virtual void acceptIn  (basevisitor& visitor);
 		virtual void acceptOut (basevisitor& visitor);
 
-		int getInputLineNumber () { return fInputLineNumber; }
+		int getInputStartLineNumber () { return fInputStartLineNumber; }
+		int getInputEndLineNumber () { return fInputEndLineNumber; }
 
 		void setValue (unsigned long value);
 		void setValue (long value);

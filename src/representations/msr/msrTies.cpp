@@ -179,7 +179,7 @@ std::string msrTie::asString () const
 
   ss <<
     "Tie" << ' ' << msrTieKindAsString (fTieKind) <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }

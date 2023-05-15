@@ -110,7 +110,7 @@ lpsrScore::lpsrScore (
     "multiComponent is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fMsrScore = theMsrScore;
+  fEmbeddedMsrScore = theMsrScore;
 
   fMultiComponent = multiComponent;
 
@@ -292,8 +292,8 @@ lpsrScore::lpsrScore (
   fScorePaper =
     lpsrPaper::create (
       inputLineNumber,
-      fMsrScore->getScaling (),
-      fMsrScore->getPageLayout ());
+      fEmbeddedMsrScore->getScaling (),
+      fEmbeddedMsrScore->getPageLayout ());
 
   // populate the paper
 
@@ -2883,7 +2883,7 @@ void lpsrScore::appendVoiceUseToStoreCommand (const S_msrVoice& voice)
   S_lpsrUseVoiceCommand
     useVoiceCommand =
       lpsrUseVoiceCommand::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         voice);
 
   fScoreBlock->
@@ -2895,7 +2895,7 @@ void lpsrScore::appendLyricsUseToStoreCommand (const S_msrStanza& stanza)
   S_lpsrNewLyricsBlock
     newLyricsCommand =
       lpsrNewLyricsBlock::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         stanza,
         stanza->getStanzaUpLinkToVoice ());
 
@@ -3105,14 +3105,14 @@ void lpsrScore::printFull (std::ostream& os) const
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fMsrScore != nullptr,
-    "fMsrScore is null");
+    fEmbeddedMsrScore != nullptr,
+    "fEmbeddedMsrScore is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
-  // print the MSR structure (without the voices)
-  fMsrScore->
+  // print the embedded MSR score (without the voices)
+  fEmbeddedMsrScore->
     print (os);
   os << std::endl;
 
@@ -3321,14 +3321,14 @@ void lpsrScore::print (std::ostream& os) const
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fMsrScore != nullptr,
-    "fMsrScore is null");
+    fEmbeddedMsrScore != nullptr,
+    "fEmbeddedMsrScore is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
 
-  // print the MSR structure (without the voices)
-  os << fMsrScore;
+  // print the MSR embedded score (without the voices)
+  os << fEmbeddedMsrScore;
   os << std::endl;
 
   os <<

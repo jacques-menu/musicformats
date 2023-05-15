@@ -496,7 +496,7 @@ void xmlpart2guido::checkOctavaEnd() {
         }
         // Check if Direction has been processed and proceed
         if (!fSkipDirection) {
-            int lineNumber = elt->getInputLineNumber();
+            int lineNumber = elt->getInputStartLineNumber();
             auto it = std::find(processedDirections.begin(), processedDirections.end(), lineNumber);
             if (it == processedDirections.end()) {
                 processedDirections.push_back(lineNumber);
@@ -523,7 +523,7 @@ void xmlpart2guido::checkOctavaEnd() {
         
         /// Skip already visited Direction in case of grace notes (GUID-153)
         if ((!fDirectionEraserStack.empty())) {
-            if (fDirectionEraserStack.front() == elt->getInputLineNumber()) {
+            if (fDirectionEraserStack.front() == elt->getInputStartLineNumber()) {
                 fDirectionEraserStack.pop();
                 return;
             }
@@ -1678,7 +1678,7 @@ void xmlpart2guido::parseTime(ctree<xmlelement>::iterator &iter) {
                                 
                 // Skip Slur creation, if the CLOSING Slur is not on the same voice/staff (Guido limitation)
                 if (isSlurClosing(*i)==false) {
-                    //cerr<< "XML Slur at line:"<< (*i)->getInputLineNumber()<<" measure:"<<fMeasNum << " not closing on same voice! Skipping!"<<endl;
+                    //cerr<< "XML Slur at line:"<< (*i)->getInputStartLineNumber()<<" measure:"<<fMeasNum << " not closing on same voice! Skipping!"<<endl;
                     counter++;
                     continue;
                 }
@@ -1706,7 +1706,7 @@ void xmlpart2guido::parseTime(ctree<xmlelement>::iterator &iter) {
 bool xmlpart2guido::isSlurClosing(S_slur elt) {
     int internalXMLSlurNumber = elt->getAttributeIntValue("number", 0);
 
-    //cerr<< "\tSearching Slur Closing for line:"<<elt->getInputLineNumber() <<" with number "<<internalXMLSlurNumber<< " on Measure:"<<fMeasNum<< " on voice:"<<fTargetVoice<<endl;
+    //cerr<< "\tSearching Slur Closing for line:"<<elt->getInputStartLineNumber() <<" with number "<<internalXMLSlurNumber<< " on Measure:"<<fMeasNum<< " on voice:"<<fTargetVoice<<endl;
     ctree<xmlelement>::iterator nextnote = find(fCurrentPart->begin(), fCurrentPart->end(), elt);
     if (nextnote != fCurrentPart->end()) {
         nextnote.forward_up();    // advance one step
@@ -1753,7 +1753,7 @@ bool xmlpart2guido::isSlurClosing(S_slur elt) {
                         (iterSlur->getAttributeIntValue("number", 0) == internalXMLSlurNumber)
                         ) {
                         if (thisNoteVoice == fTargetVoice) {
-                            //cerr<< "\t\t\t FOUND Slur stop line:"<< iterSlur->getInputLineNumber()<< " voice:"<<thisNoteVoice<<" number:"<<iterSlur->getAttributeIntValue("number", 0)<<endl;
+                            //cerr<< "\t\t\t FOUND Slur stop line:"<< iterSlur->getInputStartLineNumber()<< " voice:"<<thisNoteVoice<<" number:"<<iterSlur->getAttributeIntValue("number", 0)<<endl;
 
                             return true;
                         }else {
@@ -1788,7 +1788,7 @@ bool xmlpart2guido::isSlurClosing(S_slur elt) {
 
                 }else {
 #if DEBUG
-                    cerr<< "XML2Guido SlurEnd, measure "<<fMeasNum<<" xmlLine "<<(*i)->getInputLineNumber() <<": Got Slur Stop with number:"<< (*i)->getAttributeIntValue("number", 0)  <<" without a Slur in Stack. Skipping!"<<endl;
+                    cerr<< "XML2Guido SlurEnd, measure "<<fMeasNum<<" xmlLine "<<(*i)->getInputStartLineNumber() <<": Got Slur Stop with number:"<< (*i)->getAttributeIntValue("number", 0)  <<" without a Slur in Stack. Skipping!"<<endl;
 #endif
                     continue;
                 }
@@ -1842,7 +1842,7 @@ std::vector< std::pair<int, int> >::const_iterator xmlpart2guido::findSlur ( con
             if ( (!fInCue) && (!fInGrace)) {
                 fBeamOpened = true;
             }
-            //cerr << "Measure "<< fMeasNum << " beam BEGIN Beam-level="<<(*began)->getAttributeIntValue("number", 0)<< " fBeamOpened?="<<fBeamOpened<< " Grace?"<<fInGrace<< " Line:"<<(*began)->getInputLineNumber()<<endl;
+            //cerr << "Measure "<< fMeasNum << " beam BEGIN Beam-level="<<(*began)->getAttributeIntValue("number", 0)<< " fBeamOpened?="<<fBeamOpened<< " Grace?"<<fInGrace<< " Line:"<<(*began)->getInputStartLineNumber()<<endl;
             /// Check for grouping is one is not already initiated
             if (!fBeamGrouping) {
                 ctree<xmlelement>::iterator nextnote = find(fCurrentMeasure->begin(), fCurrentMeasure->end(), elt);
@@ -1851,13 +1851,13 @@ std::vector< std::pair<int, int> >::const_iterator xmlpart2guido::findSlur ( con
                     if (( (nextnote->getType() == k_note) && (nextnote->getIntValue(k_voice,0) == fTargetVoice) )) {
                         // Check if there is a beam end with a beam Continue, it can be a Grouping candidate!
                         if (nextnote->hasSubElement(k_beam, "end") && nextnote->hasSubElement(k_beam, "continue") ) {
-                            //cerr << " \tNextNote with beam end, line:"<<nextnote->getInputLineNumber()<<" type="<<nextnote->getValue(k_type)<<endl;
+                            //cerr << " \tNextNote with beam end, line:"<<nextnote->getInputStartLineNumber()<<" type="<<nextnote->getValue(k_type)<<endl;
                             // Get its Type
                             string endingType = nextnote->getValue(k_type);
                             // Check if the Next note has a beam Begin and if it has the same "type"
                             ctree<xmlelement>::iterator postnote;
                             if (findNextNote(nextnote, postnote)) {
-                                //cerr << " \tPostnote with beam end, line:"<<postnote->getInputLineNumber()<<" type="<<postnote->getValue(k_type) <<endl;
+                                //cerr << " \tPostnote with beam end, line:"<<postnote->getInputStartLineNumber()<<" type="<<postnote->getValue(k_type) <<endl;
                                 if (postnote->hasSubElement(k_beam, "continue")) {
                                     string postType = postnote->getValue(k_type);
                                     if (postType == endingType) {
@@ -1867,7 +1867,7 @@ std::vector< std::pair<int, int> >::const_iterator xmlpart2guido::findSlur ( con
                                         tag = guidotag::create(tagName2.str());
                                         add (tag);
                                         fBeamGrouping = true;
-                                        //cerr << " \t\t CONTINUITY CREATED! Line:"<<postnote->getInputLineNumber()<<endl;
+                                        //cerr << " \t\t CONTINUITY CREATED! Line:"<<postnote->getInputStartLineNumber()<<endl;
                                         break;
                                     }
                                 }
@@ -2711,7 +2711,7 @@ void xmlpart2guido::checkPostArticulation ( const notevisitor& note )
                             // should parse direction BEFORE grace occurs: visit the element and put in the eraser stack
                             nextnote->acceptIn(*this);
                             nextnote->acceptOut(*this);
-                            fDirectionEraserStack.push(nextnote->getInputLineNumber());
+                            fDirectionEraserStack.push(nextnote->getInputStartLineNumber());
                             nextnote.forward_up(); // forward one element
                         }
                         

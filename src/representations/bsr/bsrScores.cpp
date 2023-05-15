@@ -190,7 +190,7 @@ void bsrScore::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  // print the MSR structure (without the voices)
+  // print the MSR score (without the voices)
   fMsrScore->
     printSummary (os);
   os << std::endl;
@@ -265,7 +265,7 @@ void bsrScore::print (std::ostream& os) const
 
   ++gIndenter;
 
-  // print the MSR structure (without the voices)
+  // print the MSR score (without the voices)
   os << fMsrScore;
   os << std::endl;
 

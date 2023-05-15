@@ -61,7 +61,7 @@ bsrPage::bsrPage (
       "Creating bsrPage '" <<
       asString () <<
       "', line " <<
-      fInputLineNumber;
+      fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -92,7 +92,7 @@ S_bsrPage bsrPage::createPageNewbornClone ()
   S_bsrPage
     newbornClone =
       bsrPage::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fPrintPageNumber,
         fLinesPerPage);
 
@@ -214,7 +214,7 @@ std::string bsrPage::asString () const
     ", braillePageNumber" << ": " << fBraillePageNumber <<
     ", linesPerPage" << ": " << fLinesPerPage <<
     ", elements: " << fPageElementsList.size () <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -225,7 +225,7 @@ void bsrPage::print (std::ostream& os) const
     "Page" <<
     ", printPageNumber: " << fPrintPageNumber <<
     ", lineContentsNumber: " << fetchLineContentsNumber () <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

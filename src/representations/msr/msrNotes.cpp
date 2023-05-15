@@ -226,7 +226,7 @@ void msrNote::initializeNote ()
     else
       ss << fNoteKind;
     ss <<
-      ", line " << fInputLineNumber << ":" <<
+      ", line " << fInputStartLineNumber << ":" <<
       std::endl;
 
     ++gIndenter;
@@ -750,7 +750,7 @@ S_msrNote msrNote::createNoteNewbornClone (
   S_msrNote
     newbornClone =
       msrNote::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //         fNoteUpLinkToMeasure->getMeasureNumber (), // JMI v0.9.66
@@ -962,7 +962,7 @@ S_msrNote msrNote::createNoteDeepClone (
   S_msrNote
     deepClone =
       msrNote::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
 //         fNoteUpLinkToMeasure->getMeasureNumber (), // v0.9.66
@@ -2511,7 +2511,7 @@ std::string msrNote::noteSoundingWholeNotesAsMsrString () const
   else
     result =
       wholeNotesAsMsrString (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fSoundingWholeNotes);
 
   return result;
@@ -2527,7 +2527,7 @@ std::string msrNote::noteDisplayWholeNotesAsMsrString () const
   else {
     result =
       wholeNotesAsMsrString (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fNoteDisplayWholeNotes);
   }
 
@@ -2569,7 +2569,7 @@ void msrNote::setNoteBelongsToAChord ()
       "Setting note " <<
       asShortString () <<
       " to belong to a chord"
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2616,7 +2616,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       asShortString () <<
       ", tuplet factor is '" <<
       actualNotes << '/' << normalNotes <<
-      "', line " << fInputLineNumber;
+      "', line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2758,7 +2758,7 @@ void msrNote::appendTechnicalToNote (
       technical->asString () <<
       " to note " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2782,7 +2782,7 @@ void msrNote::appendTechnicalWithIntegerToNote (
       technicalWithInteger->asString () <<
       " to note " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2807,7 +2807,7 @@ void msrNote::appendTechnicalWithFloatToNote (
       technicalWithFloat->asString () <<
       " to note " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2832,7 +2832,7 @@ void msrNote::appendTechnicalWithStringToNote (
       technicalWithString->asString () <<
       " to note " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2953,7 +2953,7 @@ void msrNote::setNoteGraceNotesGroupBefore (
       graceNotesGroupBefore->asString () <<
       " before note " <<
       asString () <<
-      ", line " << graceNotesGroupBefore->getInputLineNumber ();
+      ", line " << graceNotesGroupBefore->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2982,7 +2982,7 @@ void msrNote::setNoteGraceNotesGroupAfter (
       graceNotesGroupAfter->asString () <<
       " after note " <<
       asString () <<
-      ", line " << graceNotesGroupAfter->getInputLineNumber ();
+      ", line " << graceNotesGroupAfter->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3009,7 +3009,7 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
     ss <<
       "Attaching afterGraceNotesGroup '" << afterGraceNotesGroup->asString () <<
       "' to note '" << asShortString () <<
-      "', line " << afterGraceNotesGroup->getInputLineNumber ();
+      "', line " << afterGraceNotesGroup->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3034,7 +3034,7 @@ void msrNote::setNoteSingleTremolo (
       trem->asString () <<
       " to note " <<
       asString () <<
-      "', line " << trem->getInputLineNumber ();
+      "', line " << trem->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3058,7 +3058,7 @@ void msrNote::appendDynamicToNote (
       dynamic->asString () <<
       " to note " <<
       asString () <<
-      "', line " << dynamic->getInputLineNumber ();
+      "', line " << dynamic->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3136,11 +3136,11 @@ void msrNote::appendLigatureToNote (
           "a 'ligature start' is immediately followed by a 'ligature stop'" <<
           std::endl <<
           "with the same number, ignoring both of them at line " <<
-          ligature->getInputLineNumber ();
+          ligature->getInputStartLineNumber ();
 
         msrWarning (
           gServiceRunData->getInputSourceName (),
-          ligature->getInputLineNumber (),
+          ligature->getInputStartLineNumber (),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -3208,11 +3208,11 @@ void msrNote::appendPedalToNote (
           "a 'pedal start' is immediately followed by a 'pedal stop'" <<
           std::endl <<
           "with the same number, ignoring both of them at line " <<
-          pedal->getInputLineNumber ();
+          pedal->getInputStartLineNumber ();
 
         msrWarning (
           gServiceRunData->getInputSourceName (),
-          pedal->getInputLineNumber (),
+          pedal->getInputStartLineNumber (),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -3515,7 +3515,7 @@ void msrNote::appendHarmonyToNote (
       harmony->asString () <<
       " to the harmonies list of " <<
       asString () <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3550,7 +3550,7 @@ void msrNote::appendHarmonyToNote (
 //       figuredBass->asString () <<
 //       " to the figured bass list of " <<
 //       asString () <<
-//       ", line " << fInputLineNumber <<
+//       ", line " << fInputStartLineNumber <<
 //       std::endl;
 //
 //       gWaeHandler->waeTrace (
@@ -4179,7 +4179,7 @@ std::string msrNote::noteGraphicNotesDurationAsMusicXMLString () const
 // {
 //   return
 //     wholeNotesAsMsrString (
-//       fInputLineNumber,
+//       fInputStartLineNumber,
 //       fSoundingWholeNotes
 //         *
 //       mfRational (actualNotes, normalNotes));
@@ -4192,7 +4192,7 @@ std::string msrNote::noteDiatonicPitchKindAsString (
     msrDiatonicPitchKindAsStringInLanguage (
       gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
       noteDiatonicPitchKind (
-        fInputLineNumber));
+        fInputStartLineNumber));
 }
 
 std::string msrNote::asShortStringWithRawWholeNotes () const
@@ -4416,7 +4416,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -4603,7 +4603,7 @@ std::string msrNote::asShortString () const
         /* JMI v0.9.67
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes.asString (),
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
@@ -4632,7 +4632,7 @@ std::string msrNote::asShortString () const
         /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes.asString (),
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
@@ -4659,7 +4659,7 @@ std::string msrNote::asShortString () const
         /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes.asString (),
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
@@ -4689,7 +4689,7 @@ std::string msrNote::asShortString () const
         /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes.asString (),
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
@@ -4705,7 +4705,7 @@ std::string msrNote::asShortString () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -4929,7 +4929,7 @@ std::string msrNote::asMinimalString () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ""; // JMI v0.9.67
@@ -5136,7 +5136,7 @@ std::string msrNote::asString () const
           "R" <<
           /* JMI
           multipleFullBarRestsWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes.asString ());
             */
           nonSoundingNoteEssentialsAsString ();
@@ -5209,7 +5209,7 @@ std::string msrNote::asString () const
 /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
@@ -5229,7 +5229,7 @@ std::string msrNote::asString () const
 /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
@@ -5246,7 +5246,7 @@ std::string msrNote::asString () const
 /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
@@ -5313,7 +5313,7 @@ std::string msrNote::asString () const
     ", " << fNoteIsACueNoteKind;
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -5340,7 +5340,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
           "R" <<
           /* JMI
           multipleFullBarRestsWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes);
             */
           nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
@@ -5411,7 +5411,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
@@ -5431,7 +5431,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
@@ -5448,7 +5448,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
@@ -5459,7 +5459,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -5553,7 +5553,7 @@ std::string msrNote::noteEssentialsAsSting () const
 /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
@@ -5573,7 +5573,7 @@ std::string msrNote::noteEssentialsAsSting () const
 /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
@@ -5590,7 +5590,7 @@ std::string msrNote::noteEssentialsAsSting () const
 /* JMI
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
@@ -5610,7 +5610,7 @@ void msrNote::print (std::ostream& os) const
   os <<
     "[Note " <<
     noteEssentialsAsSting () <<
-//     ", line " << fInputLineNumber <<
+//     ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -5692,7 +5692,7 @@ void msrNote::print (std::ostream& os) const
         if (fNoteShortcutUpLinkToTuplet) {
           os <<
             wholeNotesAsMsrString (
-              fInputLineNumber,
+              fInputStartLineNumber,
               getNoteShortcutUpLinkToTuplet ()->
                 getSoundingWholeNotes ());
         }
@@ -6450,7 +6450,7 @@ void msrNote::printFull (std::ostream& os) const
   os <<
     "[Note, " <<
     noteEssentialsAsSting () <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -6678,7 +6678,7 @@ void msrNote::printFull (std::ostream& os) const
 // // JMI     msrInternalError (
 //     msrInternalWarning (
 //       gServiceRunData->getInputSourceName (),
-//       fInputLineNumber,
+//       fInputStartLineNumber,
 //       ss.str ());
 //   }
   os << std::endl;
@@ -6812,7 +6812,7 @@ void msrNote::printFull (std::ostream& os) const
         if (fNoteShortcutUpLinkToTuplet) {
           os <<
             wholeNotesAsMsrString (
-              fInputLineNumber,
+              fInputStartLineNumber,
               getNoteShortcutUpLinkToTuplet ()->
                 getSoundingWholeNotes ());
         }
@@ -7196,7 +7196,7 @@ void msrNote::printFull (std::ostream& os) const
         os <<
           "\"" <<
           wholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             getNoteShortcutUpLinkToTuplet ()->
               getSoundingWholeNotes ()) <<
           "\"";
@@ -8105,7 +8105,7 @@ void msrNote::printFull (std::ostream& os) const
         syllable->
           getSyllableUpLinkToStanza ()->
             getStanzaNumber () <<
-        ", line " << syllable->getInputLineNumber () <<
+        ", line " << syllable->getInputStartLineNumber () <<
         ", syllableUpLinkToNote: " <<
         syllable->
           getSyllableUpLinkToNote ()->

@@ -239,7 +239,7 @@ std::string msrMusicXMLPrintLayout::asString () const
 
   ss <<
     "[MusicXMLPrintLayout" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -249,7 +249,7 @@ void msrMusicXMLPrintLayout::printFull (std::ostream& os) const
 {
   os <<
     "[MusicXMLPrintLayout" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -346,7 +346,7 @@ void msrMusicXMLPrintLayout::print (std::ostream& os) const
 {
   os <<
     "[MusicXMLPrintLayout" << // JMI v0.9.66
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']' <<
     std::endl;
 }

@@ -28,7 +28,7 @@ namespace MusicXML2
 template <int elt> class musicxml : public xmlelement
 { 
   protected:  
-    musicxml (int inputLineNumber) : xmlelement (inputLineNumber)	{ fType = elt; }
+    musicxml (int inputStartLineNumber) : xmlelement (inputStartLineNumber)	{ fType = elt; }
 
   public:
   /*
@@ -39,10 +39,10 @@ template <int elt> class musicxml : public xmlelement
       { musicxml<elt>* o = new musicxml<elt>(elts); assert(o!=0); return o; }
   */
   
-	static SMARTP<musicxml<elt> > new_musicxml (int inputLineNumber)  
-		{ musicxml<elt>* o = new musicxml<elt>(inputLineNumber); assert(o!=0); return o; }
-    static SMARTP<musicxml<elt> > new_musicxml ( const std::vector<Sxmlelement>& elts, int inputLineNumber)  
-		{ musicxml<elt>* o = new musicxml<elt>(elts, inputLineNumber); assert(o!=0); return o; }
+	static SMARTP<musicxml<elt> > new_musicxml (int inputStartLineNumber)  
+		{ musicxml<elt>* o = new musicxml<elt>(inputStartLineNumber); assert(o!=0); return o; }
+    static SMARTP<musicxml<elt> > new_musicxml ( const std::vector<Sxmlelement>& elts, int inputStartLineNumber)  
+		{ musicxml<elt>* o = new musicxml<elt>(elts, inputStartLineNumber); assert(o!=0); return o; }
 
     virtual void acceptIn (basevisitor& v) {
 		if (visitor<SMARTP<musicxml<elt> > >* p = dynamic_cast<visitor<SMARTP<musicxml<elt> > >*>(&v)) {

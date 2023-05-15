@@ -121,7 +121,7 @@ void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -169,7 +169,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   S_msrTuplet
     newbornClone =
       msrTuplet::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fBarLineUpLinkToMeasure->getMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
@@ -194,7 +194,7 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 
     ss <<
       "--> Start visiting msrTuplet" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -416,7 +416,7 @@ void msr2msrTranslator::visitStart (S_msrIdentification& elt)
 
     ss <<
       "--> Start visiting msrIdentification" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -451,7 +451,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
 
     ss <<
       "--> End visiting msrIdentification" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,

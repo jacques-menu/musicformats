@@ -32,7 +32,7 @@ and
 Please contact the maintainers of MusicFormats (see option '-c, -contact'):
   either you found a bug in the xml2ly converter,
   or this MusicXML data is the first-ever real-world case
-  of a score exhibiting overlapping part groups.
+  of a score exhibiting overlapping part groups
   std::exception caught: mfException:
 There are overlapping part groups, namely:
   '2' -=> PartGroup_6 ('2', partGroupName "1
@@ -43,7 +43,7 @@ and
 Please contact the maintainers of MusicFormats (see option '-c, -contact'):
   either you found a bug in the xml2ly converter,
   or this MusicXML data is the first-ever real-world case
-  of a score exhibiting overlapping part groups.
+  of a score exhibiting overlapping part groups
 
   Error message(s) were issued for input line 169
   ### xml2ly gIndenter final value: 1 ###
@@ -77,13 +77,13 @@ struct mxmlPartGroupDescr : public smartable
 };
 \end{lstlisting}
 
-Part groups numbers number re-used and they can be nested, so there is an implicit part group at the top of their hierachy, attached to the \class{msrScore}:
+Part groups numbers number re-used and they can be nested, so there is an implicit outer-most part group at the top of their hierachy, attached to the \class{msrScore}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP mxsr2msrSkeletonBuilder :
 	// ... ... ...
 
-    // an implicit part group has to be created to contain everything,
-    // since there can be parts out of any explicit part group
+    // an implicit outer-most part group has to be created to contain everything,
+    // since there can be parts out of any explicit part group in MusicXML
     S_mxmlPartGroupDescr      fImplicitOuterPartGroupDescr;
     S_msrPartGroup            fImplicitOuterPartGroup;
 

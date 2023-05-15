@@ -31,9 +31,9 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrElement::msrElement (
-  int inputLineNumber)
+  int inputStartLineNumber)
 {
-  fInputLineNumber = inputLineNumber;
+  fInputStartLineNumber = inputStartLineNumber;
 }
 
 msrElement::~msrElement ()

@@ -825,7 +825,7 @@ void msr2lilypondRegularHandler::createNotesRegularGroup ()
 
   registerAtomInRegularSubgroup ("generate-stems-directions", subGroup);
 
-  registerAtomInRegularSubgroup ("generate-commented-out-variables", subGroup);
+  registerAtomInRegularSubgroup ("generate-commented-out-lilypond-variables", subGroup);
   registerAtomInRegularSubgroup ("generate-lpsr-visiting-information", subGroup);
 
   registerAtomInRegularSubgroup ("lilypond-accidental-style", subGroup);

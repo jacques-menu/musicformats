@@ -62,8 +62,8 @@ class EXP lpsrScore : public lpsrElement
     // set and get
     // ------------------------------------------------------
 
-    S_msrScore            getMsrScore () const
-                              { return fMsrScore; }
+    S_msrScore            getEmbeddedMsrScore () const
+                              { return fEmbeddedMsrScore; }
 
     S_lpsrHeader          getScoreHeader () const
                               { return fScoreHeader; }
@@ -436,7 +436,7 @@ class EXP lpsrScore : public lpsrElement
     // ------------------------------------------------------
 
     // MSR data
-    S_msrScore            fMsrScore;
+    S_msrScore            fEmbeddedMsrScore;
 
     // the multi-component
     // ------------------------------------------------------

@@ -213,7 +213,7 @@ std::string msrArticulation::asString () const
     "[Articulation " <<
     ", fArticulationKind: " << fArticulationKind <<
     ", fArticulationPlacementKind: " << fArticulationPlacementKind <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -402,7 +402,7 @@ std::string msrFermata::asString () const
     "[Fermata" <<
     ", fFermataShapeKind: " << fFermataShapeKind <<
     ", fFermataTypeKind: " << fFermataTypeKind <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -550,7 +550,7 @@ std::string msrArpeggiato::asString () const
     ", fArticulationPlacementKind: " << fArticulationPlacementKind <<
     ", " << arpeggiatoDirectionKindAsString () <<
     ", fArpeggiatoNumber: " << fArpeggiatoNumber <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -717,7 +717,7 @@ std::string msrNonArpeggiato::asString () const
     ", fArticulationPlacementKind: " << fArticulationPlacementKind <<
     ", fNonArpeggiatoTypeKind: " << fNonArpeggiatoTypeKind <<
     ", fNonArpeggiatoNumber: " << fNonArpeggiatoNumber <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();

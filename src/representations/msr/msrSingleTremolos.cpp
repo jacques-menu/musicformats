@@ -141,7 +141,7 @@ std::string msrSingleTremolo::asString () const
 
   ss <<
     "SingleTremolo" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ", " << fSingleTremoloMarksNumber << " marks" <<
     ", placement" << ": " << singleTremoloPlacementKindAsString ();
 

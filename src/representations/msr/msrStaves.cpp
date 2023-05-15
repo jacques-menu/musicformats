@@ -212,7 +212,7 @@ void msrStaff::initializeStaff ()
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputLineNumber,
+          fInputStartLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -386,7 +386,7 @@ S_msrStaff msrStaff::createStaffNewbornClone (
   S_msrStaff
     newbornClone =
       msrStaff::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fStaffKind,
         fStaffNumber,
         containingPart);
@@ -934,7 +934,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          voice->getInputLineNumber (),
+          voice->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -960,7 +960,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          voice->getInputLineNumber (),
+          voice->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1130,7 +1130,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          regularVoice->getInputLineNumber (),
+          regularVoice->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1156,7 +1156,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          regularVoice->getInputLineNumber (),
+          regularVoice->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1913,7 +1913,7 @@ void msrStaff::appendClefToStaff  (
       // create a new msrClefKeyTimeSignatureGroup
       fCurrentClefKeyTimeSignatureGroup =
         msrClefKeyTimeSignatureGroup::create (
-          clef->getInputLineNumber (),
+          clef->getInputStartLineNumber (),
           groupInputLineNumber);
 
       // cascade clef to all voices
@@ -2017,7 +2017,7 @@ void msrStaff::appendKeyToStaff (
       // create a new msrClefKeyTimeSignatureGroup
       fCurrentClefKeyTimeSignatureGroup =
         msrClefKeyTimeSignatureGroup::create (
-          key->getInputLineNumber (),
+          key->getInputStartLineNumber (),
           groupInputLineNumber);
 
       // cascade it to all voices
@@ -2120,7 +2120,7 @@ void msrStaff::appendTimeSignatureToStaff (
       // create a new msrClefKeyTimeSignatureGroup
       fCurrentClefKeyTimeSignatureGroup =
         msrClefKeyTimeSignatureGroup::create (
-          timeSignature->getInputLineNumber (),
+          timeSignature->getInputStartLineNumber (),
           groupInputLineNumber);
 
       // cascade it to all voices
@@ -2800,7 +2800,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
-      ", line " << repeatEndingClone->getInputLineNumber ();
+      ", line " << repeatEndingClone->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3572,7 +3572,7 @@ void msrStaff::browseData (basevisitor* v)
 
         msrError (
           gServiceRunData->getInputSourceName (),
-          voice->getInputLineNumber (),
+          voice->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -3962,7 +3962,7 @@ void msrStaff::printFull (std::ostream& os) const
         voiceNumber <<
         ": " <<
         "Voice \"" << voice->getVoiceName () <<
-        "\", line " << voice->getInputLineNumber () <<
+        "\", line " << voice->getInputStartLineNumber () <<
         std::endl;
 
       gIndenter.increment (3);

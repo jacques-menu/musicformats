@@ -201,7 +201,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
   S_msrSyllable
     newbornClone =
       msrSyllable::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fSyllableKind,
         fSyllableExtendKind,
@@ -259,7 +259,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   S_msrSyllable
     deepClone =
       msrSyllable::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fSyllableKind,
         fSyllableExtendKind,
@@ -355,7 +355,7 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputLineNumber,
+          fInputStartLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -468,7 +468,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
     gLog <<
       asString () <<
     // JMI    "to '" << note->asString () <<
-      ", line " << note->getInputLineNumber () <<
+      ", line " << note->getInputStartLineNumber () <<
       std::endl;
 
     --gIndenter;
@@ -568,7 +568,7 @@ std::string msrSyllable::syllableWholeNotesAsMsrString () const
       case msrNoteKind::kNoteRegularInChord:
         result =
           wholeNotesAsMsrString (
-            fInputLineNumber,
+            fInputStartLineNumber,
             fSyllableWholeNotes);
         break;
 
@@ -598,7 +598,7 @@ std::string msrSyllable::syllableWholeNotesAsMsrString () const
   else {
     result =
       wholeNotesAsMsrString (
-        fInputLineNumber,
+        fInputStartLineNumber,
           fSyllableWholeNotes);
   }
 
@@ -768,7 +768,7 @@ std::string msrSyllable::asString () const
     ", fSyllableWholeNotes: " << fSyllableWholeNotes.asString () <<
     ", fSyllableTupletFactor: " << fSyllableTupletFactor.asString () <<
     ", fSyllableNextMeasurePuristNumber: " << fSyllableNextMeasurePuristNumber <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   ss <<
     ", " <<
@@ -778,7 +778,7 @@ std::string msrSyllable::asString () const
     case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "syllable type has not been set");
       break;
@@ -827,7 +827,7 @@ void msrSyllable::print (std::ostream& os) const
     "[Syllable" <<
     ", syllableKind: " <<
     msrSyllableKindAsString (fSyllableKind) <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -888,7 +888,7 @@ void msrSyllable::print (std::ostream& os) const
     case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "syllable type has not been set");
       break;
@@ -1034,7 +1034,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
   S_msrStanza
     newbornClone =
       msrStanza::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fStanzaNumber,
         containingVoice);
 
@@ -1090,7 +1090,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
   S_msrStanza
     stanzaDeepClone =
       msrStanza::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fStanzaNumber,
         containingVoice);
 
@@ -1171,7 +1171,7 @@ void msrStanza::appendSyllableToStanza (
     case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "syllable type has not been set");
       break;

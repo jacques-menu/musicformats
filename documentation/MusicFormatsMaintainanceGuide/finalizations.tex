@@ -350,7 +350,7 @@ void msrVoice::finalizeVoice (
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      fInputLineNumber,
+      fInputStartLineNumber,
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -453,7 +453,7 @@ void msrMeasure::finalizeMeasure (
 
     msrInternalWarning (
       gServiceRunData->getInputSourceName (),
-      fInputLineNumber,
+      fInputStartLineNumber,
       ss.str ());
   }
 

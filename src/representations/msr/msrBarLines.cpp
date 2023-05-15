@@ -650,7 +650,7 @@ std::string msrBarLine::asShortString () const
     */
     ", " <<
     fBarLineTimes << " times" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -692,7 +692,7 @@ std::string msrBarLine::asString () const
     msrBarLineHasCodaKindAsString (
       fBarLineHasCodaKind) <<
 
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -705,7 +705,7 @@ void msrBarLine::printFull (std::ostream& os) const
     ", fBarLineCategoryKind: " <<
     msrBarLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -805,7 +805,7 @@ void msrBarLine::print (std::ostream& os) const
     fBarLineCategoryKind <<
     ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
     ", fMeasurePosition: " << fMeasurePosition.asString () <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']' <<
     std::endl;
 }

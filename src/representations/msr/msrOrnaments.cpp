@@ -206,7 +206,7 @@ void msrOrnament::print (std::ostream& os) const
   os <<
     "[Ornament" <<
     ", " << msrPlacementKindAsString (fOrnamentPlacementKind)  <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

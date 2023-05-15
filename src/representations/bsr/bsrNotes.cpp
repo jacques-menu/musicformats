@@ -809,7 +809,7 @@ S_bsrCellsList bsrNote::accidentalKindAsCellsList () const
 {
   return
     accidentalKindAsCellsList (
-      fInputLineNumber,
+      fInputStartLineNumber,
       fAccidentalKind);
 }
 
@@ -817,13 +817,13 @@ S_bsrCellsList bsrNote::buildCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputLineNumber);
+      bsrCellsList::create (fInputStartLineNumber);
 
   // append the note value sign if needed
   if (fNoteValueSizeIsNeeded) {
     result->appendCellsListToCellsList (
       noteValueSizeKindAsCellsList (
-        fInputLineNumber,
+        fInputStartLineNumber,
         bsrNoteValueSizeKindFromNoteValueKind (
           fNoteValueKind)));
   }
@@ -837,7 +837,7 @@ S_bsrCellsList bsrNote::buildCellsList () const
     case bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededYes:
       result->appendCellsListToCellsList (
         noteOctaveKindAsCellsList (
-          fInputLineNumber,
+          fInputStartLineNumber,
           fNoteOctaveKind));
       break;
     case bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededNo:
@@ -847,7 +847,7 @@ S_bsrCellsList bsrNote::buildCellsList () const
   // append note value
   result->appendCellsListToCellsList (
     noteValueKindAsCellsList (
-      fInputLineNumber,
+      fInputStartLineNumber,
       fNoteValueKind));
 
   // append dots if any
@@ -1309,7 +1309,7 @@ std::string bsrNote::asString () const
     ", cellsList (): " <<
     buildCellsList ()->asShortString () <<
     ", fSpacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -1329,7 +1329,7 @@ std::string bsrNote::asShortString () const // finalize this JMI
     ", cellsList (): " <<
     buildCellsList ()->asShortString () <<
     ", fSpacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -1362,7 +1362,7 @@ void bsrNote::print (std::ostream& os) const
 {
   os <<
     "Note" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

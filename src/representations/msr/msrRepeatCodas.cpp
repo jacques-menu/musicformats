@@ -103,7 +103,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
     newbornClone = 0; // JMI
     /*
       msrRepeatCoda::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         containingRepeat->
           getRepeatCoda ()->
             getRepeatCodaSegment (), // JMI
@@ -146,7 +146,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
     deepClone = nullptr; // JMI v0.9.66
     /* JMI
       msrRepeatCoda::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         containingRepeat->
           getRepeatCoda ()->
             getRepeatCodaSegment (), // JMI
@@ -261,7 +261,7 @@ std::string msrRepeatCoda::asString () const
 
   ss <<
     "RepeatCoda" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   return ss.str ();

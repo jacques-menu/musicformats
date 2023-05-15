@@ -66,7 +66,7 @@ S_bsrCellsList bsrPageHeading::buildCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputLineNumber);
+      bsrCellsList::create (fInputStartLineNumber);
 
   // append the pagination to result
   result->appendCellsListToCellsList (
@@ -75,25 +75,25 @@ S_bsrCellsList bsrPageHeading::buildCellsList () const
   // append 3 spaces to result
   result->appendCellsListToCellsList (
     bsrSpaces::create (
-      fInputLineNumber, 3)->
+      fInputStartLineNumber, 3)->
         fetchCellsList ());
 
   // append the title to result
   result->appendCellsListToCellsList (
     bsrWords::create (
-      fInputLineNumber, fPageHeadingTitle)->
+      fInputStartLineNumber, fPageHeadingTitle)->
         fetchCellsList ());
 
   // append 3 spaces to result
   result->appendCellsListToCellsList (
     bsrSpaces::create (
-      fInputLineNumber, 3)->
+      fInputStartLineNumber, 3)->
         fetchCellsList ());
 
   // append the number to result
   result->appendCellsListToCellsList (
     bsrNumber::create (
-      fInputLineNumber,
+      fInputStartLineNumber,
       fPageHeadingNumber,
       bsrNumberSignIsNeededKind::kNumberSignIsNeededYes)->
         fetchCellsList ());
@@ -101,7 +101,7 @@ S_bsrCellsList bsrPageHeading::buildCellsList () const
   // append 1 space to result
   result->appendCellsListToCellsList (
     bsrSpaces::create (
-      fInputLineNumber, 1)->
+      fInputStartLineNumber, 1)->
         fetchCellsList ());
 
   return result;
@@ -238,7 +238,7 @@ std::string bsrPageHeading::asString () const
 
   ss <<
     ", pageHeadingNumber: " << fPageHeadingNumber <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -266,7 +266,7 @@ void bsrPageHeading::print (std::ostream& os) const
 {
   os <<
     "PageHeading" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

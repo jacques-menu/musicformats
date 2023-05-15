@@ -99,7 +99,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createGraceNotesGroupNewbornClone ()
   S_msrGraceNotesGroup
     newbornClone =
       msrGraceNotesGroup::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fGraceNotesGroupKind,
         fGraceNotesGroupIsSlashed,
         fGraceNotesGroupIsBeamed,
@@ -181,7 +181,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
   S_msrGraceNotesGroup
     clone =
       msrGraceNotesGroup::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fGraceNotesGroupKind,
         fGraceNotesGroupIsSlashed,
         fGraceNotesGroupIsBeamed,
@@ -222,7 +222,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
       S_msrNote
         skip =
           msrNote::createGraceSkipNote (
-            note->getInputLineNumber (),
+            note->getInputStartLineNumber (),
             "",                             // will be set afterwards v0.9.67
             note->getSoundingWholeNotes (), // 0/1 JMI v0.9.66
             note->getNoteDisplayWholeNotes (),
@@ -245,7 +245,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
       S_msrNote
         skip =
           msrNote::createGraceSkipNote (
-            chordFirstNote->getInputLineNumber (),
+            chordFirstNote->getInputStartLineNumber (),
             chordFirstNote->getNoteUpLinkToMeasure ()->getMeasureNumber (),
             chordFirstNote->getSoundingWholeNotes (), // 0/1 JMI v0.9.66
             chordFirstNote->getNoteDisplayWholeNotes (),
@@ -259,7 +259,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
     else {
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "grace notes element should be a note or a chord");
     }
@@ -382,7 +382,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
   else {
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      fInputLineNumber,
+      fInputStartLineNumber,
       __FILE__, __LINE__,
       "removeLastNoteFromGraceNotesGroup (): grace notes group element should be a note");
   }
@@ -611,7 +611,7 @@ std::string msrGraceNotesGroup::asShortString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -626,7 +626,7 @@ std::string msrGraceNotesGroup::asString () const
     ", graceNotesGroupKind: " <<
     msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
     ", graceNotesGroupMeasureNumber: \"" << fGraceNotesGroupMeasureNumber <<
-    "\", line " << fInputLineNumber <<
+    "\", line " << fInputStartLineNumber <<
     ", ";
 
   if (fGraceNotesGroupElementsList.size ()) {
@@ -652,7 +652,7 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
     "[GraceNotesGroup" <<
     ", graceNotesGroupKind: " <<
     msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ", " <<
     mfSingularOrPlural (
       fGraceNotesGroupElementsList.size (), "element", "elements") <<
@@ -742,7 +742,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
     "[GraceNotesGroup" <<
     ", graceNotesGroupKind: " <<
     msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ", " <<
     mfSingularOrPlural (
       fGraceNotesGroupElementsList.size (), "element", "elements") <<

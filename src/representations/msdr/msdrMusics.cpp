@@ -59,7 +59,7 @@ msdrMusic::msdrMusic (
 
   fMusicName = musicName;
 
-  fInputLineNumber = inputLineNumber;
+  fInputStartLineNumber = inputLineNumber;
 }
 
 void msdrMusic::initializeMusic ()
@@ -220,7 +220,7 @@ std::string msdrMusic::asShortString () const
 
   ss <<
     "MSDR voice \"" << fMusicName << "\", " <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -231,7 +231,7 @@ std::string msdrMusic::asString () const
 
   ss <<
     "MSDR music \"" << fMusicName << "\", " <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -262,7 +262,7 @@ void msdrMusic::printFull (std::ostream& os) const
 {
   os <<
     "MSDR music \"" << fMusicName <<
-    "\", line " << fInputLineNumber <<
+    "\", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -345,7 +345,7 @@ void msdrMusic::print (std::ostream& os) const
 {
   os <<
     "MSDR music \"" << fMusicName <<
-    "\", line " << fInputLineNumber <<
+    "\", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
