@@ -233,7 +233,7 @@ S_msrNote msrBeatRepeatElement::fetchBeatRepeatElementFirstNonGraceNote () const
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputLineNumber,
+          fInputStartLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -342,7 +342,7 @@ std::string msrBeatRepeatElement::asString () const
     ", beatRepeat upLink: '" <<
     fBeatRepeatElementUpLinkToBeatRepeat->
       asShortString () <<
-    "', line " << fInputLineNumber <<
+    "', line " << fInputStartLineNumber <<
     std::endl;
 
   return ss.str ();
@@ -352,7 +352,7 @@ void msrBeatRepeatElement::printFull (std::ostream& os) const
 {
   os <<
     "BeatRepeatElement" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -409,7 +409,7 @@ void msrBeatRepeatElement::print (std::ostream& os)
 {
   os <<
     "BeatRepeatElement" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -658,7 +658,7 @@ std::string msrBeatRepeatPattern::asString () const
   ss <<
 
     "BeatRepeatPattern" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasuresNumber (),
@@ -897,7 +897,7 @@ std::string msrBeatRepeatReplicas::asString () const
   ss <<
 
     "BeatRepeatReplicas" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasuresNumber (),
@@ -1038,7 +1038,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
   S_msrBeatRepeat
     newbornClone =
       msrBeatRepeat::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fBeatRepeatMeasuresNumber,
         fBeatRepeatSlashesNumber,
         containingVoice);
@@ -1306,7 +1306,7 @@ void msrBeatRepeat:: appendMeasureElementToSegmentElement (
 
   msrInternalError (
     gServiceRunData->getInputSourceName (),
-    fInputLineNumber,
+    fInputStartLineNumber,
     __FILE__, __LINE__,
     ss.str ());
 }
@@ -1373,7 +1373,7 @@ std::string msrBeatRepeat::asString () const
   ss <<
 
     "[BeatRepeat" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchBeatRepeatPatternMeasuresNumber (),
@@ -1438,7 +1438,7 @@ void msrBeatRepeat::print (std::ostream& os) const
         : 0,
       "replica measure",
       "replicas measures") <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

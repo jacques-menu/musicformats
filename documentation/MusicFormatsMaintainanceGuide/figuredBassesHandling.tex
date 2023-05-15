@@ -318,7 +318,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
 		ss <<
       "--> Start visiting S_figured_bass" <<
       ", figuredBassVoicesCounter = " << fFiguredBassVoicesCounter <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -411,7 +411,7 @@ The first visit of \smartPointerType{S_figured_bass} initializes the fields stor
 void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -482,7 +482,7 @@ Upon the second visit of \smartPointerType{S_figured_bass}, the \class{msrFigure
 void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -773,7 +773,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
       elt->asString () <<
       '\'' <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -828,7 +828,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
+      elt->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -847,7 +847,7 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
       "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -877,7 +877,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       elt->asString () <<
       '\'' <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -932,7 +932,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
+      elt->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -951,7 +951,7 @@ void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
       "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -986,7 +986,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
       elt->asString () <<
       '\'' <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -1041,7 +1041,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
+      elt->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }

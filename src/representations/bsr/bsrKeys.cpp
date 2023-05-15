@@ -118,7 +118,7 @@ bsrKey::bsrKey (
       "Creating bsrKey '" <<
       asString () <<
       "', line " <<
-      fInputLineNumber;
+      fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -135,7 +135,7 @@ S_bsrCellsList bsrKey::keyKindAsCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputLineNumber);
+      bsrCellsList::create (fInputStartLineNumber);
 
   switch (fKeyKind) {
     case bsrKeyKind::kKeyKindNone:
@@ -165,7 +165,7 @@ S_bsrCellsList bsrKey::buildCellsList () const
   S_bsrCellsList
     result =
       bsrCellsList::create (
-        fInputLineNumber);
+        fInputStartLineNumber);
 
   switch (fNumberOfAlterations) {
     case 0:
@@ -187,7 +187,7 @@ S_bsrCellsList bsrKey::buildCellsList () const
         S_bsrNumber
           number =
             bsrNumber::create (
-              fInputLineNumber,
+              fInputStartLineNumber,
               fNumberOfAlterations,
               bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
@@ -296,7 +296,7 @@ std::string bsrKey::asString () const
     ", numberOfAlterations: " << fNumberOfAlterations <<
     ", keyCellsList: " << fKeyCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -381,7 +381,7 @@ void bsrKey::print (std::ostream& os) const
 {
   os <<
     "Key" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

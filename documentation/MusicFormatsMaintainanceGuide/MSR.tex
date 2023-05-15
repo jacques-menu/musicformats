@@ -501,7 +501,7 @@ std::string msrTransposition::asString () const
     ", fTranspositionChromatic = " << fTranspositionChromatic <<
     ", fTranspositionOctaveChange = " << fTranspositionOctaveChange <<
     ", fTranspositionDouble = " << fTranspositionDouble <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -516,7 +516,7 @@ void msrTransposition::print (std::ostream& os) const
 
   os <<
     "Transposition" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1291,7 +1291,7 @@ A score in MSR is the usual music score concept. It contains a set and a list of
 Part groups handling is presented at \sectionRef{Part groups handling}.
 
 A part group in MSR contains parts or other part groups. This concept is recursive, as it is in music score: the winds part group can oboes and horns part group, for example.
-An implicit part group exists in MSR if the score does not contain explicit part groups.
+An implicit outer-most part group exists in MSR if the score does not contain explicit part groups.
 
 An \class{msrPartGroup} thus contains parts and part groups in any order, as is found in symphonic music scores:
 \begin{lstlisting}[language=Terminal]

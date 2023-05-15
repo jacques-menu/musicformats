@@ -88,7 +88,7 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
  S_msrVoiceStaffChange
     newbornClone =
       msrVoiceStaffChange::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fStaffToChangeTo);
 
@@ -206,7 +206,7 @@ std::string msrVoiceStaffChange::asString () const
 
   ss <<
     "[VoiceStaffChange" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ", " <<
     "staffToChangeTo: \"" << fStaffToChangeTo->getStaffName () << "\"" <<
     ']';

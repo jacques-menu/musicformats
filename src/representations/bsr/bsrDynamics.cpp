@@ -57,171 +57,171 @@ S_bsrCellsList bsrDynamic::buildCellsList () const
   S_bsrCellsList
     result =
       bsrCellsList::create (
-        fInputLineNumber, kCellWordSign);
+        fInputStartLineNumber, kCellWordSign);
 
   switch (fDynamicKind) {
     case msrDynamicKind::kDynamicF:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellF));
+            fInputStartLineNumber, kCellF));
       break;
     case msrDynamicKind::kDynamicFF:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellF, kCellF));
+            fInputStartLineNumber, kCellF, kCellF));
       break;
     case msrDynamicKind::kDynamicFFF:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellF, kCellF, kCellF));
+            fInputStartLineNumber, kCellF, kCellF, kCellF));
       break;
     case msrDynamicKind::kDynamicFFFF:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellF, kCellF, kCellF, kCellF));
+            fInputStartLineNumber, kCellF, kCellF, kCellF, kCellF));
       break;
     case msrDynamicKind::kDynamicFFFFF:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellF, kCellF, kCellF, kCellF, kCellF));
+            fInputStartLineNumber, kCellF, kCellF, kCellF, kCellF, kCellF));
       break;
     case msrDynamicKind::kDynamicFFFFFF:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellF, kCellF, kCellF, kCellF, kCellF, kCellF));
+            fInputStartLineNumber, kCellF, kCellF, kCellF, kCellF, kCellF, kCellF));
       break;
 
     case msrDynamicKind::kDynamicP:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellP));
+            fInputStartLineNumber, kCellP));
       break;
     case msrDynamicKind::kDynamicPP:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellP, kCellP));
+            fInputStartLineNumber, kCellP, kCellP));
       break;
     case msrDynamicKind::kDynamicPPP:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellP, kCellP, kCellP));
+            fInputStartLineNumber, kCellP, kCellP, kCellP));
       break;
     case msrDynamicKind::kDynamicPPPP:
       result->
         appendCellsListToCellsList (
          bsrCellsList::create (
-            fInputLineNumber, kCellP, kCellP, kCellP, kCellP));
+            fInputStartLineNumber, kCellP, kCellP, kCellP, kCellP));
       break;
     case msrDynamicKind::kDynamicPPPPP:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellP, kCellP, kCellP, kCellP, kCellP));
+            fInputStartLineNumber, kCellP, kCellP, kCellP, kCellP, kCellP));
       break;
     case msrDynamicKind::kDynamicPPPPPP:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellP, kCellP, kCellP, kCellP, kCellP, kCellP));
+            fInputStartLineNumber, kCellP, kCellP, kCellP, kCellP, kCellP, kCellP));
       break;
 
     case msrDynamicKind::kDynamicMF:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellM, kCellF));
+            fInputStartLineNumber, kCellM, kCellF));
       break;
     case msrDynamicKind::kDynamicMP:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellM, kCellP));
+            fInputStartLineNumber, kCellM, kCellP));
       break;
     case msrDynamicKind::kDynamicFP:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellM, kCellF));
+            fInputStartLineNumber, kCellM, kCellF));
       break;
     case msrDynamicKind::kDynamicFZ:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellF, kCellZ));
+            fInputStartLineNumber, kCellF, kCellZ));
       break;
     case msrDynamicKind::kDynamicPF: // JMI
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellF, kCellZ));
+            fInputStartLineNumber, kCellF, kCellZ));
       break;
     case msrDynamicKind::kDynamicRF:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellR, kCellF));
+            fInputStartLineNumber, kCellR, kCellF));
       break;
     case msrDynamicKind::kDynamicSF:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellS, kCellF));
+            fInputStartLineNumber, kCellS, kCellF));
       break;
 
     case msrDynamicKind::kDynamicRFZ:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellR, kCellF, kCellZ));
+            fInputStartLineNumber, kCellR, kCellF, kCellZ));
       break;
     case msrDynamicKind::kDynamicSFZ:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellS, kCellF, kCellZ));
+            fInputStartLineNumber, kCellS, kCellF, kCellZ));
       break;
     case msrDynamicKind::kDynamicSFP:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellS, kCellF, kCellP));
+            fInputStartLineNumber, kCellS, kCellF, kCellP));
       break;
     case msrDynamicKind::kDynamicSFPP:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellS, kCellF, kCellP, kCellP));
+            fInputStartLineNumber, kCellS, kCellF, kCellP, kCellP));
       break;
     case msrDynamicKind::kDynamicSFFZ:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellS, kCellF, kCellF, kCellZ));
+            fInputStartLineNumber, kCellS, kCellF, kCellF, kCellZ));
       break;
     case msrDynamicKind::kDynamicSFZP: // JMI
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellS, kCellF, kCellF, kCellZ));
+            fInputStartLineNumber, kCellS, kCellF, kCellF, kCellZ));
       break;
     case msrDynamicKind::kDynamicN: // JMI
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputLineNumber, kCellS, kCellF, kCellF, kCellZ));
+            fInputStartLineNumber, kCellS, kCellF, kCellF, kCellZ));
       break;
     case msrDynamicKind::kDynamic_UNKNOWN_:
       result =
-        bsrCellsList::create (fInputLineNumber);
+        bsrCellsList::create (fInputStartLineNumber);
   } // switch
 
   return result;
@@ -320,7 +320,7 @@ std::string bsrDynamic::asString () const
     ", dynamicsCellsList: " <<
     fDynamicsCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -336,7 +336,7 @@ std::string bsrDynamic::asDebugString () const
     ", dynamicsCellsList: " <<
     fDynamicsCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -345,7 +345,7 @@ void bsrDynamic::print (std::ostream& os) const
 {
   os <<
     "Dynamics" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

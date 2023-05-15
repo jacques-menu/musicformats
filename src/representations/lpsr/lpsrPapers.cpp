@@ -78,7 +78,7 @@ S_lpsrPaper lpsrPaper::createPaperNewbornClone ()
   S_lpsrPaper
     newbornClone =
       lpsrPaper::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fScaling,
         fPageLayout);
 

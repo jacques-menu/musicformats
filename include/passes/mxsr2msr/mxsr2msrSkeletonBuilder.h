@@ -57,7 +57,7 @@ struct mxmlPartGroupDescr : public smartable
     // set and get
     // ------------------------------------------------------
 
-    int                   getStartInputLineNumber () const
+    int                   getInputStartLineNumber () const
                               { return fStartInputLineNumber; }
 
     int                   getStopInputLineNumber () const
@@ -448,8 +448,8 @@ virtual void              visitEnd   (S_score_partwise& elt);
                           fCurrentPartGroupBarLineKind;
     int                   fCurrentPartGroupSymbolDefaultX;
 
-    // an implicit part group has to be created to contain everything,
-    // since there can be parts out of any explicit part group
+    // an implicit outer-most part group has to be created to contain everything,
+    // since there can be parts out of any explicit part group in MusicXML
     S_mxmlPartGroupDescr  fImplicitOuterPartGroupDescr;
     S_msrPartGroup        fImplicitOuterPartGroup;
 

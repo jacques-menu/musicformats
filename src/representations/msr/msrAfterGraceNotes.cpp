@@ -104,7 +104,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
   S_msrAfterGraceNotesGroupContents
     newbornClone =
       msrAfterGraceNotesGroupContents::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         containingVoice);
 
   return newbornClone;
@@ -243,7 +243,7 @@ void msrAfterGraceNotesGroupContents::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fAfterGraceNotesGroupContentsNotesList.size (), "note", "notes") <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -379,7 +379,7 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
   S_msrAfterGraceNotesGroup
     newbornClone =
       msrAfterGraceNotesGroup::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         noteClone,
         fAfterGraceNotesGroupIsSlashed,
         containingVoice);
@@ -500,7 +500,7 @@ void msrAfterGraceNotesGroup::print (std::ostream& os) const
 {
   os <<
     "[AfterGraceNotesGroup" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

@@ -116,7 +116,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
                             const std::string& valueSpecification,
                             const std::string& variableName,
                             std::map<std::string, S_msrSemiTonesPitchAndOctave>&
-                                          stringToMsrSemiTonesPitchAndOctaveMapVariable);
+                                               stringToMsrSemiTonesPitchAndOctaveMapVariable);
 
   protected:
 
@@ -130,7 +130,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
                             const std::string& valueSpecification,
                             const std::string& variableName,
                             std::map<std::string, S_msrSemiTonesPitchAndOctave>&
-                                          stringToMsrSemiTonesPitchAndOctaveMapVariable);
+                                               stringToMsrSemiTonesPitchAndOctaveMapVariable);
 
     virtual               ~lilypondTransposePartNameAtom ();
 
@@ -142,13 +142,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
     void                  setStringToMsrSemiTonesPitchAndOctaveMapVariable (
                             const std::string& partName,
                             const S_msrSemiTonesPitchAndOctave&
-                                          semiTonesPitchAndOctave)
-                              {
-                                fStringToMsrSemiTonesPitchAndOctaveMapVariable [
-                                  partName
-                                ] =
-                                  semiTonesPitchAndOctave;
-                              }
+                                               semiTonesPitchAndOctave);
 
     const std::map<std::string, S_msrSemiTonesPitchAndOctave>&
                           getStringToMsrSemiTonesPitchAndOctaveMapVariable () const
@@ -216,7 +210,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
                             const std::string& valueSpecification,
                             const std::string& variableName,
                             std::map<std::string, S_msrSemiTonesPitchAndOctave>&
-                                          stringToMsrSemiTonesPitchAndOctaveMapVariable);
+                                               stringToMsrSemiTonesPitchAndOctaveMapVariable);
 
   protected:
 
@@ -230,7 +224,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
                             const std::string& valueSpecification,
                             const std::string& variableName,
                             std::map<std::string, S_msrSemiTonesPitchAndOctave>&
-                                          stringToMsrSemiTonesPitchAndOctaveMapVariable);
+                                               stringToMsrSemiTonesPitchAndOctaveMapVariable);
 
     virtual               ~lilypondTransposePartIDAtom ();
 
@@ -242,13 +236,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
     void                  setStringToMsrSemiTonesPitchAndOctaveMapVariable (
                             const std::string& partName,
                             const S_msrSemiTonesPitchAndOctave&
-                                          semiTonesPitchAndOctave)
-                              {
-                                fStringToMsrSemiTonesPitchAndOctaveMapVariable [
-                                  partName
-                                ] =
-                                  semiTonesPitchAndOctave;
-                              }
+                                               semiTonesPitchAndOctave);
 
     const std::map<std::string, S_msrSemiTonesPitchAndOctave>&
                           getStringToMsrSemiTonesPitchAndOctaveMapVariable () const
@@ -310,7 +298,7 @@ class EXP msrOctaveEntryVariable : public smartable
     // ------------------------------------------------------
 
     static SMARTP<msrOctaveEntryVariable> create (
-                            const std::string&           variableName,
+                            const std::string& variableName,
                             msrOctaveEntryKind octaveEntryKind);
 
   public:
@@ -319,7 +307,7 @@ class EXP msrOctaveEntryVariable : public smartable
     // ------------------------------------------------------
 
                           msrOctaveEntryVariable (
-                            const std::string&           variableName,
+                            const std::string& variableName,
                             msrOctaveEntryKind octaveEntryKind);
 
     virtual               ~msrOctaveEntryVariable ();
@@ -652,7 +640,7 @@ class EXP lilypondAccidentalStyleKindAtom : public oahAtomStoringAValue
                             const std::string& valueSpecification,
                             const std::string& variableName,
                             lpsrAccidentalStyleKind&
-                                          lilypondAccidentalStyleKindVariable);
+                                               lilypondAccidentalStyleKindVariable);
 
   protected:
 
@@ -666,7 +654,7 @@ class EXP lilypondAccidentalStyleKindAtom : public oahAtomStoringAValue
                             const std::string& valueSpecification,
                             const std::string& variableName,
                             lpsrAccidentalStyleKind&
-                                          lilypondAccidentalStyleKindVariable);
+                                               lilypondAccidentalStyleKindVariable);
 
     virtual               ~lilypondAccidentalStyleKindAtom ();
 
@@ -734,13 +722,13 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lilypondChordsDisplayAtom> create (
-                            const std::string&         shortName,
-                            const std::string&         longName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             std::list<std::pair<std::string, std::string> >&
-                                                  lilypondChordsDisplayVariable);
+                                               lilypondChordsDisplayVariable);
 
   protected:
 
@@ -748,13 +736,13 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lilypondChordsDisplayAtom (
-                            const std::string&         shortName,
-                            const std::string&         longName,
-                            const std::string&         description,
-                            const std::string&         valueSpecification,
-                            const std::string&         variableName,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             std::list<std::pair<std::string, std::string> >&
-                                                  lilypondChordsDisplayVariable);
+                                               lilypondChordsDisplayVariable);
 
     virtual               ~lilypondChordsDisplayAtom ();
 
@@ -826,13 +814,13 @@ class EXP lilypondLyricsNotesDurationsKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lilypondLyricsNotesDurationsKindAtom> create (
-                            const std::string&          longName,
-                            const std::string&          shortName,
-                            const std::string&          description,
-                            const std::string&          valueSpecification,
-                            const std::string&          variableName,
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             lpsrLyricsNotesDurationsKind&
-                                              lilypondLyricsNotesDurationsKindVariable);
+                                               lilypondLyricsNotesDurationsKindVariable);
 
   protected:
 
@@ -840,13 +828,13 @@ class EXP lilypondLyricsNotesDurationsKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lilypondLyricsNotesDurationsKindAtom (
-                            const std::string&          longName,
-                            const std::string&          shortName,
-                            const std::string&          description,
-                            const std::string&          valueSpecification,
-                            const std::string&          variableName,
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             lpsrLyricsNotesDurationsKind&
-                                              lilypondLyricsNotesDurationsKindVariable);
+                                               lilypondLyricsNotesDurationsKindVariable);
 
     virtual               ~lilypondLyricsNotesDurationsKindAtom ();
 
@@ -914,13 +902,13 @@ class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValu
     // ------------------------------------------------------
 
     static SMARTP<lilypondDynamicsTextSpannersStyleKindAtom> create (
-                            const std::string&          longName,
-                            const std::string&          shortName,
-                            const std::string&          description,
-                            const std::string&          valueSpecification,
-                            const std::string&          variableName,
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             lpsrDynamicsTextSpannersStyleKind&
-                                              lilypondDynamicsTextSpannersStyleKindVariable);
+                                               lilypondDynamicsTextSpannersStyleKindVariable);
 
   protected:
 
@@ -928,13 +916,13 @@ class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValu
     // ------------------------------------------------------
 
                           lilypondDynamicsTextSpannersStyleKindAtom (
-                            const std::string&          longName,
-                            const std::string&          shortName,
-                            const std::string&          description,
-                            const std::string&          valueSpecification,
-                            const std::string&          variableName,
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             lpsrDynamicsTextSpannersStyleKind&
-                                              lilypondDynamicsTextSpannersStyleKindVariable);
+                                               lilypondDynamicsTextSpannersStyleKindVariable);
 
     virtual               ~lilypondDynamicsTextSpannersStyleKindAtom ();
 
@@ -1315,13 +1303,13 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
                               { return fMergeStaffCommonRests; }
 
     void                  setInputLineNumbers ()
-                              { fInputLineNumbers = true; }
-    Bool                  getInputLineNumbers () const
-                              { return fInputLineNumbers; }
+                              { fInputStartLineNumbers = true; }
+    Bool                  getInputStartLineNumbers () const
+                              { return fInputStartLineNumbers; }
 
     const S_oahBooleanAtom&
-                          getInputLineNumbersAtom () const
-                              { return fInputLineNumbersAtom; }
+                          getInputStartLineNumbersAtom () const
+                              { return fInputStartLineNumbersAtom; }
 
     void                  setNotesComments ()
                               { fNotesComments = true; }
@@ -1380,7 +1368,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahFloatAtom        getBarNumbersSizeAtom () const
                               { return fBarNumbersSizeAtom; }
 
-    const std::set<int>&       getBoxAroundBarNumberSet () const
+    const std::set<int>&  getBoxAroundBarNumberSet () const
                               { return fBoxAroundBarNumberSet; }
 
     // bar number checks
@@ -1409,7 +1397,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     int                   getSeparatorLineEveryNMeasures () const
                               { return fSeparatorLineEveryNMeasures; }
 
-    const std::set<std::string>&    getBreakLineAfterMeasureNumberSet () const
+    const std::set<std::string>&
+                          getBreakLineAfterMeasureNumberSet () const
                               { return fBreakLineAfterMeasureNumberSet; }
 
     // page and line breaks
@@ -1420,7 +1409,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getIgnoreLpsrPageBreaks () const
                               { return fIgnoreLpsrPageBreaks; }
 
-    const std::set<std::string>&    getBreakPageAfterMeasureNumberSet () const
+    const std::set<std::string>&
+                          getBreakPageAfterMeasureNumberSet () const
                               { return fBreakPageAfterMeasureNumberSet; }
 
 
@@ -1903,8 +1893,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // measure numbers
     // --------------------------------------
 
-    std::map<std::string, int>      fResetMeasureElementMeasureNumberMap;
-    std::map<std::string, int>      fAddEmptyMeasuresAfterMeasureNumberMap;
+    std::map<std::string, int>
+                          fResetMeasureElementMeasureNumberMap;
+    std::map<std::string, int>
+                          fAddEmptyMeasuresAfterMeasureNumberMap;
 
     // bar numbers
     // --------------------------------------
@@ -2002,8 +1994,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fMergeStaffCommonRests;
 
-    Bool                  fInputLineNumbers;
-    S_oahBooleanAtom      fInputLineNumbersAtom;
+    Bool                  fInputStartLineNumbers;
+    S_oahBooleanAtom      fInputStartLineNumbersAtom;
 
     Bool                  fNotesComments;
 
@@ -2039,7 +2031,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // ornaments
     // --------------------------------------
 
-    mfRational              fDelayedOrnamentsFraction;
+    mfRational            fDelayedOrnamentsFraction;
 
 
     // chords display

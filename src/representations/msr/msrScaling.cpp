@@ -64,7 +64,7 @@ S_msrScaling msrScaling::createMsrScalingNewbornClone ()
   S_msrScaling
     newbornClone =
       msrScaling::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fMillimeters,
         fTenths);
 
@@ -167,7 +167,7 @@ float msrScaling::fetchGlobalStaffSize () const
 
         musicxmlWarning (
           gServiceRunData->getInputSourceName (),
-          fInputLineNumber,
+          fInputStartLineNumber,
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED

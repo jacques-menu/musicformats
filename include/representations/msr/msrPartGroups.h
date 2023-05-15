@@ -109,7 +109,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const S_msrPartGroup&    partGroupUpLinkToPartGroup,
                             const S_msrScore&        partGroupUpLinkToScore);
 
-    static SMARTP<msrPartGroup> createSelfContainedPartGroup (
+    static SMARTP<msrPartGroup> createSelfContainedPartGroupAndAppendItToScore (
                             int                     partGroupNumber,
                             int                     partGroupAbsoluteNumber,
                             const std::string&      partGroupName,

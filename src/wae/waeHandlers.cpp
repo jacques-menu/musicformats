@@ -387,36 +387,6 @@ void waeHandler::waeTraceToStreamWithoutInputLocation (
         doTraceCurrentPass = true;
         break;
 
-  //     case mfPassIDKind::kMfPassID_OptionsAndArgumentsHandling:
-  //       break;
-  //
-  //     case mfPassIDKind::kMfPassID_1:
-  //       break;
-  //
-  //     case mfPassIDKind::kMfPassID_2:
-  //       break;
-  //     case mfPassIDKind::kMfPassID_2a:
-  //       break;
-  //     case mfPassIDKind::kMfPassID_2b:
-  //       break;
-  //
-  //     case mfPassIDKind::kMfPassID_3:
-  //       break;
-  //     case mfPassIDKind::kMfPassID_3a:
-  //       break;
-  //     case mfPassIDKind::kMfPassID_3b:
-  //       break;
-  //
-  //     case mfPassIDKind::kMfPassID_4:
-  //       break;
-  //     case mfPassIDKind::kMfPassID_4a:
-  //       break;
-  //     case mfPassIDKind::kMfPassID_4b:
-  //       break;
-  //
-  //     case mfPassIDKind::kMfPassID_5:
-  //       break;
-
       default:
         doTraceCurrentPass =
           earlyTraceOnlyPass == globalCurrentPassIDKind;
@@ -446,8 +416,6 @@ void waeHandler::waeTraceToStreamWithoutInputLocation (
     ++gIndenter;
 
 //     '[' << context << "] " << JMI v0.9.68
-    os <<
-      mfBaseName (inputSourceName) << ":" << inputLineNumber << ": ";
 
     // message can be a multi-line string
     gIndenter.indentMultiLineString (

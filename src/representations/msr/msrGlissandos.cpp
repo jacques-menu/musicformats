@@ -112,7 +112,7 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
   S_msrGlissando
     newbornClone =
       msrGlissando::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fGlissandoNumber,
         fGlissandoTypeKind,
         fGlissandoLineTypeKind,
@@ -206,7 +206,7 @@ std::string msrGlissando::asString () const
     ", fGlissandoTypeKind: " << fGlissandoTypeKind <<
     ", fGlissandoLineTypeKind: " << fGlissandoLineTypeKind <<
     ", fGlissandoTextValue: \"" << fGlissandoTextValue << "\"" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -216,7 +216,7 @@ void msrGlissando::print (std::ostream& os) const
 {
   os <<
     "[Glissando" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

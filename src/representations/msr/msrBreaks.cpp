@@ -231,7 +231,7 @@ std::string msrLineBreak::asString () const
     ", fUserSelectedLineBreakKind: " <<
     msrUserSelectedLineBreakKindAsString (
       fUserSelectedLineBreakKind) <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -444,7 +444,7 @@ std::string msrPageBreak::asString () const
     ", fUserSelectedPageBreakKind: " <<
     msrUserSelectedPageBreakKindAsString (
       fUserSelectedPageBreakKind) <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }

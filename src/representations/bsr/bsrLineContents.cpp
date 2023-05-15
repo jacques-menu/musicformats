@@ -86,7 +86,7 @@ S_bsrLineContents bsrLineContents::createLineNewbornClone ()
   S_bsrLineContents
     newbornClone =
       bsrLineContents::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fLineContentsKind);
 
   return newbornClone;
@@ -158,7 +158,7 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
 
     bsrInternalError (
       gServiceRunData->getInputSourceName (),
-      lineElement->getInputLineNumber (),
+      lineElement->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -168,7 +168,7 @@ S_bsrCellsList bsrLineContents::buildLineContentsElementsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputLineNumber);
+      bsrCellsList::create (fInputStartLineNumber);
 
   for (
     std::list<S_bsrLineContentsElement>::const_iterator i =

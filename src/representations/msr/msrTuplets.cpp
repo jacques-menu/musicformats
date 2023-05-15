@@ -165,7 +165,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   S_msrTuplet
     newbornClone =
       msrTuplet::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fTupletUpLinkToMeasure->getMeasureNumber (),
         fTupletNumber,
@@ -513,7 +513,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
   else {
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      fInputLineNumber,
+      fInputStartLineNumber,
       __FILE__, __LINE__,
       "cannot access the first note of an empty tuplet");
   }
@@ -559,7 +559,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "removeFirstNoteFromTuplet () expects a note as the first tuplet element");
     }
@@ -678,7 +678,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "removeLastNoteFromTuplet () expects a note as the last tuplet element");
     }
@@ -863,7 +863,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
     else {
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "tuplet member should be a note, a chord or another tuplet");
     }
@@ -1040,7 +1040,7 @@ std::string msrTuplet::asString () const
     fTupletFactor.asString () <<
     ' ' << fSoundingWholeNotes.asString () << " tupletSoundingWholeNotes" <<
     ", measure ' " <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   ss <<
     ", getMeasureNumber: ";
@@ -1089,7 +1089,7 @@ std::string msrTuplet::asString () const
       else {
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputLineNumber,
+          fInputStartLineNumber,
           __FILE__, __LINE__,
           "tuplet member should be a note, a chord or another tuplet");
       }
@@ -1113,7 +1113,7 @@ void msrTuplet::printFull (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1258,7 +1258,7 @@ void msrTuplet::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

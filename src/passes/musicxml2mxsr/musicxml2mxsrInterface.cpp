@@ -543,6 +543,7 @@ SXMLFile createSXMLFileFromFile (
       separator <<
       std::endl <<
       gTab <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator;
 
@@ -758,7 +759,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
       separator <<
       std::endl <<
       gTab <<
-      passIDKind << ": building the MXSR from \"" << fileNameAsString << "\"" <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator;
 
@@ -867,7 +868,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
       separator <<
       std::endl <<
       gTab <<
-      passIDKind << ": building the MXSR from standard input" <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator;
 
@@ -997,7 +998,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
       separator <<
       std::endl <<
       gTab <<
-      passIDKind << "building the MXSR from a buffer" <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator;
 
@@ -1052,9 +1053,11 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
     std::stringstream ss;
 
     ss <<
-      "convertMusicXMLToMxsr(): " <<
-      "inputSourceName: \"" << inputSourceName << "\"" <<
-      ", passIDKind: \"" << passIDKind << "\"" <<
+      std::endl <<
+      separator <<
+      std::endl <<
+      gTab <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
       std::endl <<
       separator;
 

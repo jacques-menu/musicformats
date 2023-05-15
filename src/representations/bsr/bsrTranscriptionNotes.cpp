@@ -58,7 +58,7 @@ S_bsrCellsList bsrTranscriptionNotesElement::buildCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputLineNumber);
+      bsrCellsList::create (fInputStartLineNumber);
 
   return result;
 }
@@ -148,7 +148,7 @@ std::string bsrTranscriptionNotesElement::asString () const
     "TranscriptionNotesElement" <<
     // JMI ", fTranscriptionNoteText: " <<
     ", \"" << fTranscriptionNoteText << "\"" <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -157,7 +157,7 @@ void bsrTranscriptionNotesElement::print (std::ostream& os) const
 {
   os <<
     "TranscriptionNotesElement" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

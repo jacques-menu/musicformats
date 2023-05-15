@@ -120,7 +120,7 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
   S_msrMultipleFullBarRests
     newbornClone =
       msrMultipleFullBarRests::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fMultipleFullBarRestsNumber,
         containingVoice);
 
@@ -216,7 +216,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
-//       fInputLineNumber,
+//       fInputStartLineNumber,
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -254,7 +254,7 @@ void msrMultipleFullBarRests:: appendMeasureElementToSegmentElement (
 
   msrInternalError (
     gServiceRunData->getInputSourceName (),
-    fInputLineNumber,
+    fInputStartLineNumber,
     __FILE__, __LINE__,
     ss.str ());
 }
@@ -275,7 +275,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
       measure->asShortString () <<
       " to multiple full-bar rests " <<
       asShortString () <<
-      "', line " << fInputLineNumber;
+      "', line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -462,7 +462,7 @@ std::string msrMultipleFullBarRests::asString () const
     fetchMultipleFullBarRestsMeasureSoundingNotes () <<
     ", " <<
 
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -494,7 +494,7 @@ void msrMultipleFullBarRests::print (std::ostream& os) const
 {
   os <<
     "[MultipleFullBarRests" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

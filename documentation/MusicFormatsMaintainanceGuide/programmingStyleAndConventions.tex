@@ -676,7 +676,7 @@ Another one is:
 void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -820,7 +820,7 @@ It is defined in \elements{exports.h} to be empty except on Windows, where it is
 
 The passes and converters in \mf\ convert formats of scores from one format to another. In order to produce helpful warning and error messages, several descriptions contain a field:
 \begin{lstlisting}[language=CPlusPlus]
-    int                   fInputLineNumber;
+    int                   fInputStartLineNumber;
 \end{lstlisting}
 
 An input line number in the {\tt xmlelement} class   is the only thing that has had to be added to \libmusicxml\ for the needs of \mf.
@@ -830,7 +830,7 @@ Also, many methods contain an {\tt int inputLineNumber} parameter, which is alwa
 msrElement::msrElement (
   int inputLineNumber)
 {
-  fInputLineNumber = inputLineNumber;
+  fInputStartLineNumber = inputLineNumber;
 }
 \end{lstlisting}
 
@@ -1871,7 +1871,7 @@ bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
 
 
 %/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:3374:23: error: member access into incomplete type 'MusicFormats::msrTempo'
-%      ", line " << elt->getInputLineNumber () <<
+%      ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
 %                      ^

@@ -118,7 +118,7 @@ bool lpsrPartBlock::compareStaffBlockWithOtherElement (
 
     lpsrInternalError (
       gServiceRunData->getInputSourceName (),
-      otherElement->getInputLineNumber (),
+      otherElement->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -235,7 +235,7 @@ bool lpsrPartBlock::compareChordNamesContextWithOtherElement (
 
     lpsrInternalError (
       gServiceRunData->getInputSourceName (),
-      otherElement->getInputLineNumber (),
+      otherElement->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -307,7 +307,7 @@ bool lpsrPartBlock::compareElementsToHaveHarmoniesAboveCorrespondingStaff (
 
     lpsrInternalError (
       gServiceRunData->getInputSourceName (),
-      first->getInputLineNumber (),
+      first->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }

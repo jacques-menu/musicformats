@@ -331,7 +331,7 @@ std::string bsrTimeSignatureItem::asString () const
     /* JMI
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "time signature item beats numbers vector is empty");
         */
@@ -362,7 +362,7 @@ std::string bsrTimeSignatureItem::asString () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -413,7 +413,7 @@ bsrTimeSignature::bsrTimeSignature (
       "Creating bsrTimeSignatures '" <<
       asString () <<
       "', line " <<
-      fInputLineNumber;
+      fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -437,7 +437,7 @@ void bsrTimeSignature::appendTimeSignatureItem (S_bsrTimeSignatureItem timeSigna
       "' to time '" <<
       asString () <<
       "', line " <<
-      fInputLineNumber;
+      fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -452,7 +452,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputLineNumber);
+      bsrCellsList::create (fInputStartLineNumber);
 
   switch (fTimeKind) {
     case bsrTimeSignatureKind::kTimeSignatureNone:
@@ -497,7 +497,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
             /* JMI
               msrInternalError (
                 gServiceRunData->getInputSourceName (),
-                fInputLineNumber,
+                fInputStartLineNumber,
                 __FILE__, __LINE__,
                 "time signature item beats numbers vector is empty");
                 */
@@ -522,7 +522,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 S_bsrNumber
                   beatsNumber =
                     bsrNumber::create (
-                      fInputLineNumber,
+                      fInputStartLineNumber,
                       beatsNumberToBeUsed,
                       bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
@@ -534,7 +534,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 S_bsrCellsList
                   musicCodeIndicator =
                     bsrCellsList::create (
-                      fInputLineNumber,
+                      fInputStartLineNumber,
                       bsrCellKind::kDots6, bsrCellKind::kDots3);
 
                 // append it to result
@@ -559,55 +559,55 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                   case 1:
                     result->appendCellsListToCellsList (
                       noteValueKindAsCellsList (
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         bsrNoteValueKind::kNoteValueCWhole));
                     break;
                   case 2:
                     result->appendCellsListToCellsList (
                       noteValueKindAsCellsList (
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         bsrNoteValueKind::kNoteValueCHalf));
                     break;
                   case 4:
                     result->appendCellsListToCellsList (
                       noteValueKindAsCellsList (
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         bsrNoteValueKind::kNoteValueCQuarter));
                     break;
                   case 8:
                     result->appendCellsListToCellsList (
                       noteValueKindAsCellsList (
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         bsrNoteValueKind::kNoteValueC8th));
                     break;
                   case 16:
                     result->appendCellsListToCellsList (
                       noteValueKindAsCellsList (
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         bsrNoteValueKind::kNoteValueC16th));
                     break;
                   case 32:
                     result->appendCellsListToCellsList (
                       noteValueKindAsCellsList (
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         bsrNoteValueKind::kNoteValueC32nd));
                     break;
                   case 64:
                     result->appendCellsListToCellsList (
                       noteValueKindAsCellsList (
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         bsrNoteValueKind::kNoteValueC64th));
                     break;
                   case 128:
                     result->appendCellsListToCellsList (
                       noteValueKindAsCellsList (
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         bsrNoteValueKind::kNoteValueC128th));
                     break;
                   case 256:
                     result->appendCellsListToCellsList (
                       noteValueKindAsCellsList (
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         bsrNoteValueKind::kNoteValueC256th));
                     break;
                   default:
@@ -621,7 +621,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
 
                       bsrWarning (
                         gServiceRunData->getInputSourceName (),
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         ss.str ());
                     }
                 } // switch
@@ -689,7 +689,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
             /* JMI
               msrInternalError (
                 gServiceRunData->getInputSourceName (),
-                fInputLineNumber,
+                fInputStartLineNumber,
                 __FILE__, __LINE__,
                 "time signature item beats numbers vector is empty");
                 */
@@ -701,7 +701,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 S_bsrNumber
                   beatsNumber =
                     bsrNumber::create (
-                      fInputLineNumber,
+                      fInputStartLineNumber,
                       timeSignatureBeatsNumbersVector [0],
                       bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
@@ -750,7 +750,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
 
                       bsrWarning (
                         gServiceRunData->getInputSourceName (),
-                        fInputLineNumber,
+                        fInputStartLineNumber,
                         ss.str ());
                     }
                 } // switch
@@ -881,7 +881,7 @@ std::string bsrTimeSignature::asString () const
     bsrTimeSignatureKindAsString (fTimeKind) <<
     ", timeCellsList: " << fetchCellsList ()->asString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -907,7 +907,7 @@ void bsrTimeSignature::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       timeSignatureItemsVectorSize, "item", "items") <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ":" <<
     std::endl;
 

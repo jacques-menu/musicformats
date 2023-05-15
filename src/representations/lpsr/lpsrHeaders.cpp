@@ -373,7 +373,7 @@ void lpsrHeader::appendRight (
       "Appending right \"" <<
       value <<
       "\" to lpsrHeader" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -396,7 +396,7 @@ void lpsrHeader::appendComposer (
       "Appending composer \"" <<
       value <<
       "\" to lpsrHeader" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -419,7 +419,7 @@ void lpsrHeader::appendArranger (
       "Appending arranger \"" <<
       value <<
       "\" to lpsrHeader" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -442,7 +442,7 @@ void lpsrHeader::appendLyricist (
       "Appending lyricist \"" <<
       value <<
       "\" to lpsrHeader" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -465,7 +465,7 @@ void lpsrHeader::appendPoet (
       "Appending poet \"" <<
       value <<
       "\" to lpsrHeader" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -485,7 +485,7 @@ void lpsrHeader::removeAllPoets (
 
     ss <<
       "Removing all poets from lpsrHeader" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -508,7 +508,7 @@ void lpsrHeader::appendTranslator (
       "Appending translator \"" <<
       value <<
       "\" to lpsrHeader" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -531,7 +531,7 @@ void lpsrHeader::appendArtist (
       "Appending artist \"" <<
       value <<
       "\" to lpsrHeader" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -554,7 +554,7 @@ void lpsrHeader::appendSoftware (
       "Appending software \"" <<
       value <<
       "\" to lpsrHeader" <<
-      ", line " << fInputLineNumber;
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

@@ -140,7 +140,7 @@ std::string bsrFootNotesElement::asString () const
     "FootNotesElement" <<
     // JMI ", fFootNoteText: " <<
     ", \"" << fFootNoteText << "\"" <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -149,7 +149,7 @@ void bsrFootNotesElement::print (std::ostream& os) const
 {
   os <<
     "FootNotesElement" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

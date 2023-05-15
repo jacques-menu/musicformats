@@ -201,7 +201,7 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
   fCurrentVoiceMusicXMLNumber = 0;
 
   // create an empty list for part groups starting at 0,
-  // i.e. for the implicit part group
+  // i.e. for the implicit outer-most part group
   fPositionStartingPartGroupDescrsVector.push_back (
     std::list<S_mxmlPartGroupDescr> ());
 
@@ -210,7 +210,7 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
   fPositionStoppingPartGroupDescrsVector.push_back (
     std::list<S_mxmlPartGroupDescr> ());
 
-  // create the implicit part group
+  // create the implicit outer-most part group
   createImplicitOuterPartGroup ();
 }
 
@@ -1223,8 +1223,8 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
 {
-  // an implicit part group has to be created to contain everything,
-  // since there can be parts out of any part group
+  // an implicit outer-most part group has to be created to contain everything,
+  // since there can be parts out of any explicit part group in MusicXML
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1237,7 +1237,7 @@ void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
   int inputLineNumber = 0;
     // this occurs independantly from the MusicXML data
 
-  // create an implicit part group
+  // create an implicit outer-most part group
   fCurrentPartGroupNumber = 0;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1245,7 +1245,7 @@ void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
     std::stringstream ss;
 
     ss <<
-      "Creating an implicit part group with number '" <<
+      "Creating an implicit outer-most part group with number '" <<
       fCurrentPartGroupNumber <<
       ", line " << inputLineNumber;
 
@@ -1258,13 +1258,13 @@ void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
   ++fPartGroupsCounter;
 
   fImplicitOuterPartGroup =
-    msrPartGroup::createSelfContainedPartGroup (
+    msrPartGroup::createSelfContainedPartGroupAndAppendItToScore (
       fCurrentPartGroupNumber,
       fPartGroupsCounter,
-      "*** Implicit Outer PartGroup ***", // partGroupName
-      "",                   			// PartGroupNameDisplayText
-      "",                   			// partGroupAccidentalText
-      "Impl. PartGroup",           			// partGroupAbbreviation
+      "*** Implicit Outer-Most PartGroup ***", // partGroupName
+      "",                   								 	 // PartGroupNameDisplayText
+      "",                   								   // partGroupAccidentalText
+      "Impl. PartGroup",           			       // partGroupAbbreviation
       msrPartGroupBarLineKind::kPartGroupBarLineYes,
       fMsrScore);
 
@@ -1274,7 +1274,7 @@ void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
     std::stringstream ss;
 
     ss <<
-      "Appending implicit part group '" <<
+      "Appending implicit outer-most part group '" <<
       fImplicitOuterPartGroup->getPartGroupNumber () <<
       "' to MSR score" <<
       ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
@@ -1290,7 +1290,7 @@ void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
     addPartGroupToScore (
       fImplicitOuterPartGroup);
 
-  // create the part group descr for the implicit part group
+  // create the part group descr for the implicit outer-most part group
   fImplicitOuterPartGroupDescr =
     mxmlPartGroupDescr::create (
       inputLineNumber,
@@ -1304,7 +1304,7 @@ void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
     std::stringstream ss;
 
     ss <<
-      "Adding implicit part group descr for '" <<
+      "Adding implicit outer-most part group descr for '" <<
       fCurrentPartGroupNumber <<
       "' to the part groups data" <<
       ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
@@ -1475,7 +1475,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
 
             fPartGroupsDescrStack.pop_front ();
 
-            // the implicit part group isn't contained in any other
+            // the implicit outer-most part group isn't contained in any other
             if (partGroupDescr != fImplicitOuterPartGroupDescr) {
               // fetch new current part group
               S_mxmlPartGroupDescr
@@ -1570,7 +1570,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
               ss <<
                 gTab <<
                 part->getPartCombinedName () <<
-                ", line " << part->getInputLineNumber () <<
+                ", line " << part->getInputStartLineNumber () <<
                 std::endl;
             } // for
 */
@@ -1581,7 +1581,7 @@ void mxsr2msrSkeletonBuilder::doPartGroupsNestingAndPartsAllocation (
 R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
   either you found a bug in the EXECUTABLE translator,
   or this MusicXML data is the first-ever real-world case
-  of a score exhibiting overlapping part groups.)",
+  of a score exhibiting overlapping part groups)",
               std::regex ("EXECUTABLE"),
               gOahOahGroup->getOahOahGroupServiceName ()) <<
 							", line " << inputLineNumber;
@@ -1854,7 +1854,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
 
     ss <<
       "--> Start visiting S_score_partwise" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -1882,7 +1882,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -1937,7 +1937,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1962,7 +1962,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1989,7 +1989,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2016,7 +2016,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2041,7 +2041,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2076,7 +2076,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2096,7 +2096,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2115,7 +2115,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2204,7 +2204,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2234,7 +2234,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2265,7 +2265,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2339,7 +2339,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
 
     ss <<
       "--> Start visiting S_encoding" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -2368,7 +2368,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2387,7 +2387,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2413,7 +2413,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2439,7 +2439,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2512,7 +2512,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2539,7 +2539,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2567,7 +2567,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2600,7 +2600,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -2620,7 +2620,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2723,7 +2723,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2756,7 +2756,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2806,7 +2806,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2826,7 +2826,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2846,7 +2846,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2980,7 +2980,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3009,7 +3009,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
 
     ss <<
       "--> Start visiting S_part_list" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3036,7 +3036,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3054,13 +3054,13 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
 
   --gIndenter;
 
-  // set implicit part group descr end position
+  // set implicit outer-most part group descr end position
   fImplicitOuterPartGroupDescr->
     setStopPosition (
       inputLineNumber, // JMI ???
       INT_MAX);
 
-  // register implicit part group descr as stopped
+  // register implicit outer-most part group descr as stopped
   registerPartGroupDescrAsStopped (
     inputLineNumber,
     fImplicitOuterPartGroupDescr);
@@ -3080,7 +3080,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
   if (gMsrOahGroup->getDisplayPartGroups ()) {
     gLog <<
       std::endl <<
-      "The implicit part group contains:" <<
+      "The implicit outer-most part group contains:" <<
       std::endl;
 
     ++gIndenter;
@@ -3109,7 +3109,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
 
     ss <<
       "--> Start visiting S_part_group" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3139,11 +3139,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
       "unknown part group type \"" <<
       partGroupType <<
       "\""<<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     musicxmlError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
+      elt->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3186,7 +3186,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
 
     ss <<
       "--> Start visiting S_group_name" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3200,7 +3200,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3238,7 +3238,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_group_name_display& elt)
 
     ss <<
       "--> End visiting S_group_name_display" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3252,7 +3252,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_group_name_display& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3297,7 +3297,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_accidental_text& elt)
 
     ss <<
       "--> Start visiting S_accidental_text" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3316,7 +3316,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_abbreviation& elt)
 
     ss <<
       "--> Start visiting S_group_abbreviation" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3330,7 +3330,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_abbreviation& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3390,7 +3390,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3437,7 +3437,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
 
     ss <<
       "--> End visiting S_part_group" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3456,7 +3456,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
       msrPartGroupTypeKindAsString (
         fCurrentPartGroupTypeKind) << "\""  <<
       ", fCurrentPartsPosition: " << fCurrentPartsPosition <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3472,13 +3472,13 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
     case msrPartGroupTypeKind::kPartGroupTypeStart:
       // handle the part group start
       handlePartGroupStart (
-        elt->getInputLineNumber ());
+        elt->getInputStartLineNumber ());
       break;
 
     case msrPartGroupTypeKind::kPartGroupTypeStop:
       // handle the part group stop
       handlePartGroupStop (
-        elt->getInputLineNumber ());
+        elt->getInputStartLineNumber ());
       break;
 
     case msrPartGroupTypeKind::kPartGroupTypeNone:
@@ -3493,7 +3493,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3567,7 +3567,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3612,7 +3612,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name_display& elt)
 
     ss <<
       "--> Start visiting S_part_name_display" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3631,7 +3631,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
 
     ss <<
       "--> End visiting S_part_name_display" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3645,7 +3645,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3683,7 +3683,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)
 
     ss <<
       "--> Start visiting S_part_abbreviation_display" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3702,7 +3702,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_abbreviation_display& elt)
 
     ss <<
       "--> End visiting S_part_abbreviation_display" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3721,7 +3721,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_name& elt)
 
     ss <<
       "--> Start visiting S_instrument_name" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3740,7 +3740,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_abbreviation& elt)
 
     ss <<
       "--> Start visiting S_instrument_abbreviation" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -3754,7 +3754,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_abbreviation& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3899,7 +3899,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
 void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4042,7 +4042,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4121,7 +4121,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4195,7 +4195,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4244,7 +4244,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
 
     ss <<
       "--> Start visiting S_voice" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -4260,7 +4260,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
 //       std::endl <<
       "<!--=== "
       "voice \"" << "elt->getVoiceName ()" << "\"" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << elt->getInputStartLineNumber () <<
       " ===-->";
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -4288,7 +4288,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -4362,7 +4362,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 
     ss <<
       "--> End visiting S_measure" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -4378,7 +4378,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -4404,7 +4404,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
 
     ss <<
       "--> End visiting S_print" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -4424,7 +4424,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
 
     ss <<
       "--> Start visiting S_note" <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -4448,7 +4448,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4571,7 +4571,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4682,7 +4682,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
 {
   int inputLineNumber =
-    elt->getInputLineNumber ();
+    elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4766,7 +4766,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
     ss <<
       "--> Start visiting S_harmony" <<
       ", harmoniesVoicesCounter: " << fHarmoniesVoicesCounter <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -4795,7 +4795,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
     ss <<
       "--> Start visiting S_figured_bass" <<
       ", figuredBassVoicesCounter: " << fFiguredBassVoicesCounter <<
-      ", line " << elt->getInputLineNumber ();
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,

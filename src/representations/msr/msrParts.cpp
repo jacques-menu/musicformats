@@ -134,7 +134,7 @@ void msrPart::initializePart ()
 
     msrWarning (
       gServiceRunData->getInputSourceName (),
-      fInputLineNumber,
+      fInputStartLineNumber,
       ss.str ());
 
     fPartMsrName = newMsrPartName;
@@ -228,7 +228,7 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
   S_msrPart
     newbornClone =
       msrPart::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fPartID,
         partGroupClone);
 
@@ -265,7 +265,7 @@ void msrPart::registerStaffInPart (
   const S_msrStaff& staff)
 {
   int inputLineNumber =
-    staff->getInputLineNumber ();
+    staff->getInputStartLineNumber ();
 
   int staffNumber =
     staff->getStaffNumber ();
@@ -2434,7 +2434,7 @@ void msrPart::appendFiguredBassToPart (
       "\" to part " <<
       getPartCombinedName () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
-      ", line " << figuredBass->getInputLineNumber ();
+      ", line " << figuredBass->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2454,7 +2454,7 @@ void msrPart::appendFiguredBassToPart (
 //   const S_msrFiguredBass& figuredBass)
 // {
 //   int inputLineNumber =
-//     figuredBass->getInputLineNumber ();
+//     figuredBass->getInputStartLineNumber ();
 //
 //   ++gIndenter;
 //
@@ -2519,7 +2519,7 @@ void msrPart::appendFiguredBassToPartClone (
   const S_msrFiguredBass& figuredBass)
 {
   int inputLineNumber =
-    figuredBass->getInputLineNumber ();
+    figuredBass->getInputStartLineNumber ();
 
   ++gIndenter;
 
@@ -2663,7 +2663,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    skipGraceNotesGroup->getInputLineNumber ();
+    skipGraceNotesGroup->getInputStartLineNumber ();
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -3189,11 +3189,11 @@ void msrPart::browseData (basevisitor* v)
           "staves browsing order is unknown in score, part: \"" <<
           getPartCombinedName () <<
           "\"" <<
-          ", line " << fInputLineNumber;
+          ", line " << fInputStartLineNumber;
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputLineNumber,
+          fInputStartLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -3287,7 +3287,7 @@ std::string msrPart::asString () const
     "\", fPartMsrName: " << fPartMsrName <<
     fPartName <<
     "\", fPartAllStavesList.size (): " << fPartAllStavesList.size () <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -3334,7 +3334,7 @@ void msrPart::printFull (std::ostream& os) const
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
     ")" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -3776,7 +3776,7 @@ void msrPart::print (std::ostream& os) const
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
     ")" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

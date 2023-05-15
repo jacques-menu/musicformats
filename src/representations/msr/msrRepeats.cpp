@@ -320,7 +320,7 @@ S_msrNote msrRepeatCommonPart::fetchRepeatCommonPartFirstNonGraceNote () const
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputLineNumber,
+          fInputStartLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -429,7 +429,7 @@ std::string msrRepeatCommonPart::asString () const
     ", repeat upLink: '" <<
     fRepeatCommonPartUpLinkToRepeat->
       asShortString () <<
-    "', line " << fInputLineNumber <<
+    "', line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -439,7 +439,7 @@ void msrRepeatCommonPart::printFull (std::ostream& os) const
 {
   os <<
     "[RepeatCommonPart" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -501,7 +501,7 @@ void msrRepeatCommonPart::print (std::ostream& os) const
 //     ", repeat upLink: '" <<
 //     fRepeatCommonPartUpLinkToRepeat->
 //       asShortString () <<
-    "', line " << fInputLineNumber <<
+    "', line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -880,7 +880,7 @@ std::string msrRepeatEnding::asString () const
   ss <<
     ", repeatEndingNumber: " << fRepeatEndingNumber <<
     ", repeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
-    "', line " << fInputLineNumber <<
+    "', line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -894,7 +894,7 @@ void msrRepeatEnding::printFull (std::ostream& os) const
     ", repeatEndingKind" << ": " <<
     msrRepeatEndingKindAsString (
       fRepeatEndingKind) <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -975,7 +975,7 @@ void msrRepeatEnding::print (std::ostream& os) const
     fRepeatEndingKind <<
     ", repeatEndingNumber: " << fRepeatEndingNumber <<
     ", repeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
-    "', line " << fInputLineNumber <<
+    "', line " << fInputStartLineNumber <<
     std::endl;
 
 /*
@@ -1135,7 +1135,7 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
   S_msrRepeat
     newbornClone =
       msrRepeat::create (
-        fInputLineNumber,
+        fInputStartLineNumber,
         fRepeatTimes,
         containingVoice);
 
@@ -1240,7 +1240,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 
             msrError (
               gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
+              fInputStartLineNumber,
               __FILE__, __LINE__,
               ss.str ());
           }
@@ -1263,7 +1263,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 
             msrError (
               gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
+              fInputStartLineNumber,
               __FILE__, __LINE__,
               ss.str ());
           }
@@ -1284,7 +1284,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 
             msrInternalError (
               gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
+              fInputStartLineNumber,
               __FILE__, __LINE__,
               ss.str ());
           }
@@ -1301,7 +1301,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 //             msrInternalError ( JMI v0.9.63
             msrInternalWarning (
               gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
+              fInputStartLineNumber,
 //               __FILE__, __LINE__,
               ss.str ());
           }
@@ -1320,7 +1320,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 
             msrError (
               gServiceRunData->getInputSourceName (),
-              fInputLineNumber,
+              fInputStartLineNumber,
               __FILE__, __LINE__,
               ss.str ());
           }
@@ -1841,7 +1841,7 @@ std::string msrRepeat::asShortString () const
 
   ss <<
     ", repeatEndingsNumber: " << repeatEndingsNumber <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -1906,7 +1906,7 @@ std::string msrRepeat::asString () const
   }
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -1939,7 +1939,7 @@ void msrRepeat::printFull (std::ostream& os) const
   os <<
     "[Repeat" <<
     ", " << fRepeatTimes << " times" <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -2057,7 +2057,7 @@ void msrRepeat::print (std::ostream& os) const
 //     ", fCurrentRepeatBuildPhaseKind: " <<
 //     repeatBuildPhaseKindAsString (
 //       fCurrentRepeatBuildPhaseKind);
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

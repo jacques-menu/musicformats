@@ -114,7 +114,7 @@ class EXP xmlelement : public ctree<xmlelement>, public visitable
 		// the element type
 		int fType;
 		// the input line number for messages to the user
-		int fInputLineNumber;
+		int fInputStartLineNumber;
 
 	// ... ... ...
 
@@ -137,7 +137,7 @@ class EXP xmlelement : public ctree<xmlelement>, public visitable
 
 Type {\tt Sxmlelement} is a \smart\ to an {\tt xmlelement}, so it is an {\tt xmlelement} tree, since {\tt xmlelement} is a recursive type.
 
-{\tt fInputLineNumber} is used for example in warning and error messages, to help the user locate the problem.
+{\tt fInputStartLineNumber} is used for example in warning and error messages, to help the user locate the problem.
 
 {\tt fType} typically contains a value of some \enumType, more on this below.
 

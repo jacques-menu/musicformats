@@ -363,7 +363,7 @@ std::string msrTimeSignatureItem::asString () const
     /* JMI
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "time signature item beats numbers vector is empty");
         */
@@ -395,7 +395,7 @@ std::string msrTimeSignatureItem::asString () const
   } // switch
 
   ss <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -416,7 +416,7 @@ std::string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
     /* JMI
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "time signature item beats numbers vector is empty");
         */
@@ -449,7 +449,7 @@ std::string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
 
 /* JMI
   ss <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 */
 
   return ss.str ();
@@ -1140,7 +1140,7 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
   else {
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      fInputLineNumber,
+      fInputStartLineNumber,
       __FILE__, __LINE__,
       "time signature items vector is empty");
   }
@@ -1239,7 +1239,7 @@ std::string msrTimeSignature::asString () const
       fTimeSignatureItemsVector.size (), "item", "items") <<
     mfSingularOrPlural (
       fTimeSignatureItemsVector.size (), "item", "items") <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   if (fTimeSignatureItemsVector.size ()) {
     ss <<
@@ -1260,7 +1260,7 @@ std::string msrTimeSignature::asString () const
     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "time  items vector is empty");
     }
@@ -1285,7 +1285,7 @@ std::string msrTimeSignature::asShortString () const
     ", " <<
     mfSingularOrPlural (
       fTimeSignatureItemsVector.size (), "item", "items") <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 
   return ss.str ();
   */
@@ -1310,7 +1310,7 @@ std::string msrTimeSignature::asShortStringForMeasuresSlices () const
       fTimeSignatureItemsVector.size (), "item", "items") <<
     mfSingularOrPlural (
       fTimeSignatureItemsVector.size (), "item", "items") <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputStartLineNumber;
 */
 
   if (fTimeSignatureItemsVector.size ()) {
@@ -1334,7 +1334,7 @@ std::string msrTimeSignature::asShortStringForMeasuresSlices () const
     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
+        fInputStartLineNumber,
         __FILE__, __LINE__,
         "time  items vector is empty");
     }
@@ -1349,7 +1349,7 @@ void msrTimeSignature::print (std::ostream& os) const
 {
   os <<
     "[TimeSignatureItem" <<
-    ", line "  << fInputLineNumber <<
+    ", line "  << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;

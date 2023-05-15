@@ -359,7 +359,7 @@ void msrDynamic::print (std::ostream& os) const
     msrDynamicKindAsString (fDynamicKind) <<
     ", dynamicPlacementKind: " <<
     msrPlacementKindAsString (fDynamicPlacementKind) <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 }
 
@@ -490,7 +490,7 @@ std::string msrOtherDynamic::asString () const
     fOtherDynamicsString <<
     ", otherDynamicPlacementKind: " <<
     msrPlacementKindAsString (fOtherDynamicPlacementKind) <<
-    "', line " << fInputLineNumber;
+    "', line " << fInputStartLineNumber;
 
   return ss.str ();
 }
@@ -639,7 +639,7 @@ void msrCrescDecresc::print (std::ostream& os) const
 {
   os <<
     "[CrescDecresc " << fCrescDecrescKind <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   os << ']' << std::endl;
@@ -825,7 +825,7 @@ void msrWedge::print (std::ostream& os) const
 {
   os <<
     "[Wedge " << fWedgeKind <<
-    ", line " << fInputLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
