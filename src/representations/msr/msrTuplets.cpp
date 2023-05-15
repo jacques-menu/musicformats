@@ -566,8 +566,8 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 
 /* JMI
     for (
-      std::list<S_msrElement>::iterator i=fTupletElementsList.begin ();
-      i!=fTupletElementsList.end ();
+      std::list<S_msrElement>::iterator i = fTupletElementsList.begin ();
+      i != fTupletElementsList.end ();
       ++i
     ) {
       if ((*i) == note) {

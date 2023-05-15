@@ -1046,7 +1046,7 @@ S_msrNote msrNote::createNoteDeepClone (
 /* JMI
   {
     std::list<S_msrSyllable>::const_iterator i;
-    for (i=fNoteSyllables.begin (); i!=fNoteSyllables.end (); ++i) {
+    for (i = fNoteSyllables.begin (); i != fNoteSyllables.end (); ++i) {
       // share this data
       deepClone->
         fNoteSyllables.push_back ((*i));
@@ -1066,7 +1066,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrBeam>::const_iterator i;
-    for (i=fNoteBeams.begin (); i!=fNoteBeams.end (); ++i) {
+    for (i = fNoteBeams.begin (); i != fNoteBeams.end (); ++i) {
       // share this data
       deepClone->
         fNoteBeams.push_back ((*i));
@@ -1077,9 +1077,9 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   for (
-    std::list<S_msrArticulation>::const_iterator i=
+    std::list<S_msrArticulation>::const_iterator i = 
       fNoteArticulations.begin ();
-      i!=fNoteArticulations.end ();
+      i != fNoteArticulations.end ();
       ++i
   ) {
     // share this data
@@ -1091,9 +1091,9 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   for (
-    std::list<S_msrSpanner>::const_iterator i=
+    std::list<S_msrSpanner>::const_iterator i = 
       fNoteSpanners.begin ();
-      i!=fNoteSpanners.end ();
+      i != fNoteSpanners.end ();
       ++i
   ) {
     // share this data
@@ -1107,8 +1107,8 @@ S_msrNote msrNote::createNoteDeepClone (
   {
     std::list<S_msrTechnical>::const_iterator i;
     for (
-      i=fNoteTechnicals.begin ();
-      i!=fNoteTechnicals.end ();
+      i = fNoteTechnicals.begin ();
+      i != fNoteTechnicals.end ();
       ++i
   ) {
       // share this data
@@ -1120,8 +1120,8 @@ S_msrNote msrNote::createNoteDeepClone (
   {
     std::list<S_msrTechnicalWithInteger>::const_iterator i;
     for (
-      i=fNoteTechnicalWithIntegers.begin ();
-      i!=fNoteTechnicalWithIntegers.end ();
+      i = fNoteTechnicalWithIntegers.begin ();
+      i != fNoteTechnicalWithIntegers.end ();
       ++i
   ) {
       // share this data
@@ -1133,8 +1133,8 @@ S_msrNote msrNote::createNoteDeepClone (
   {
     std::list<S_msrTechnicalWithString>::const_iterator i;
     for (
-      i=fNoteTechnicalWithStrings.begin ();
-      i!=fNoteTechnicalWithStrings.end ();
+      i = fNoteTechnicalWithStrings.begin ();
+      i != fNoteTechnicalWithStrings.end ();
       ++i
   ) {
       // share this data
@@ -1148,7 +1148,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrOrnament>::const_iterator i;
-    for (i=fNoteOrnaments.begin (); i!=fNoteOrnaments.end (); ++i) {
+    for (i = fNoteOrnaments.begin (); i != fNoteOrnaments.end (); ++i) {
       // share this data
       deepClone->
         fNoteOrnaments.push_back ((*i));
@@ -1160,7 +1160,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrGlissando>::const_iterator i;
-    for (i=fNoteGlissandos.begin (); i!=fNoteGlissandos.end (); ++i) {
+    for (i = fNoteGlissandos.begin (); i != fNoteGlissandos.end (); ++i) {
       // share this data
       deepClone->
         fNoteGlissandos.push_back ((*i));
@@ -1172,7 +1172,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrSlide>::const_iterator i;
-    for (i=fNoteSlides.begin (); i!=fNoteSlides.end (); ++i) {
+    for (i = fNoteSlides.begin (); i != fNoteSlides.end (); ++i) {
       // share this data
       deepClone->
         fNoteSlides.push_back ((*i));
@@ -1213,7 +1213,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrDynamic>::const_iterator i;
-    for (i=fNoteDynamics.begin (); i!=fNoteDynamics.end (); ++i) {
+    for (i = fNoteDynamics.begin (); i != fNoteDynamics.end (); ++i) {
       // share this data
       deepClone->
         fNoteDynamics.push_back ((*i));
@@ -1222,7 +1222,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrOtherDynamic>::const_iterator i;
-    for (i=fNoteOtherDynamics.begin (); i!=fNoteOtherDynamics.end (); ++i) {
+    for (i = fNoteOtherDynamics.begin (); i != fNoteOtherDynamics.end (); ++i) {
       // share this data
       deepClone->
         fNoteOtherDynamics.push_back ((*i));
@@ -1234,7 +1234,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrSlash>::const_iterator i;
-    for (i=fNoteSlashes.begin (); i!=fNoteSlashes.end (); ++i) {
+    for (i = fNoteSlashes.begin (); i != fNoteSlashes.end (); ++i) {
       // share this data
       deepClone->
         fNoteSlashes.push_back ((*i));
@@ -1257,7 +1257,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrWedge>::const_iterator i;
-    for (i=fNoteWedges.begin (); i!=fNoteWedges.end (); ++i) {
+    for (i = fNoteWedges.begin (); i != fNoteWedges.end (); ++i) {
       // share this data
       deepClone->
         fNoteWedges.push_back ((*i));
@@ -1269,7 +1269,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrEyeGlasses>::const_iterator i;
-    for (i=fNoteEyeGlasses.begin (); i!=fNoteEyeGlasses.end (); ++i) {
+    for (i = fNoteEyeGlasses.begin (); i != fNoteEyeGlasses.end (); ++i) {
       // share this data
       deepClone->
         fNoteEyeGlasses.push_back ((*i));
@@ -1281,7 +1281,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrDamp>::const_iterator i;
-    for (i=fNoteDamps.begin (); i!=fNoteDamps.end (); ++i) {
+    for (i = fNoteDamps.begin (); i != fNoteDamps.end (); ++i) {
       // share this data
       deepClone->
         fNoteDamps.push_back ((*i));
@@ -1293,7 +1293,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrDampAll>::const_iterator i;
-    for (i=fNoteDampAlls.begin (); i!=fNoteDampAlls.end (); ++i) {
+    for (i = fNoteDampAlls.begin (); i != fNoteDampAlls.end (); ++i) {
       // share this data
       deepClone->
         fNoteDampAlls.push_back ((*i));
@@ -1305,7 +1305,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrScordatura>::const_iterator i;
-    for (i=fNoteScordaturas.begin (); i!=fNoteScordaturas.end (); ++i) {
+    for (i = fNoteScordaturas.begin (); i != fNoteScordaturas.end (); ++i) {
       // share this data
       deepClone->
         fNoteScordaturas.push_back ((*i));
@@ -1317,7 +1317,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrWords>::const_iterator i;
-    for (i=fNoteWords.begin (); i!=fNoteWords.end (); ++i) {
+    for (i = fNoteWords.begin (); i != fNoteWords.end (); ++i) {
       // share this data
       deepClone->
         fNoteWords.push_back ((*i));
@@ -1329,7 +1329,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrSlur>::const_iterator i;
-    for (i=fNoteSlurs.begin (); i!=fNoteSlurs.end (); ++i) {
+    for (i = fNoteSlurs.begin (); i != fNoteSlurs.end (); ++i) {
       // share this data
       deepClone->
         fNoteSlurs.push_back ((*i));
@@ -1341,7 +1341,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrLigature>::const_iterator i;
-    for (i=fNoteLigatures.begin (); i!=fNoteLigatures.end (); ++i) {
+    for (i = fNoteLigatures.begin (); i != fNoteLigatures.end (); ++i) {
       // share this data
       deepClone->
         fNoteLigatures.push_back ((*i));
@@ -1353,7 +1353,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
   {
     std::list<S_msrPedal>::const_iterator i;
-    for (i=fNotePedals.begin (); i!=fNotePedals.end (); ++i) {
+    for (i = fNotePedals.begin (); i != fNotePedals.end (); ++i) {
       // share this data
       deepClone->
         fNotePedals.push_back ((*i));
@@ -3705,7 +3705,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteBeams.size ()) {
     ++gIndenter;
     std::list<S_msrBeam>::const_iterator i;
-    for (i=fNoteBeams.begin (); i!=fNoteBeams.end (); ++i) {
+    for (i = fNoteBeams.begin (); i != fNoteBeams.end (); ++i) {
       // browse the beam
       msrBrowser<msrBeam> browser (v);
       browser.browse (*(*i));
@@ -3717,7 +3717,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteArticulations.size ()) {
     ++gIndenter;
     std::list<S_msrArticulation>::const_iterator i;
-    for (i=fNoteArticulations.begin (); i!=fNoteArticulations.end (); ++i) {
+    for (i = fNoteArticulations.begin (); i != fNoteArticulations.end (); ++i) {
       // browse the articulation
       msrBrowser<msrArticulation> browser (v);
       browser.browse (*(*i));
@@ -3729,7 +3729,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteSpanners.size ()) {
     ++gIndenter;
     std::list<S_msrSpanner>::const_iterator i;
-    for (i=fNoteSpanners.begin (); i!=fNoteSpanners.end (); ++i) {
+    for (i = fNoteSpanners.begin (); i != fNoteSpanners.end (); ++i) {
       // browse the spanner
       msrBrowser<msrSpanner> browser (v);
       browser.browse (*(*i));
@@ -3742,8 +3742,8 @@ void msrNote::browseData (basevisitor* v)
     ++gIndenter;
     std::list<S_msrTechnical>::const_iterator i;
     for (
-      i=fNoteTechnicals.begin ();
-      i!=fNoteTechnicals.end ();
+      i = fNoteTechnicals.begin ();
+      i != fNoteTechnicals.end ();
       ++i
   ) {
       // browse the technical
@@ -3758,8 +3758,8 @@ void msrNote::browseData (basevisitor* v)
     ++gIndenter;
     std::list<S_msrTechnicalWithInteger>::const_iterator i;
     for (
-      i=fNoteTechnicalWithIntegers.begin ();
-      i!=fNoteTechnicalWithIntegers.end ();
+      i = fNoteTechnicalWithIntegers.begin ();
+      i != fNoteTechnicalWithIntegers.end ();
       ++i
   ) {
       // browse the technical
@@ -3774,8 +3774,8 @@ void msrNote::browseData (basevisitor* v)
     ++gIndenter;
     std::list<S_msrTechnicalWithFloat>::const_iterator i;
     for (
-      i=fNoteTechnicalWithFloats.begin ();
-      i!=fNoteTechnicalWithFloats.end ();
+      i = fNoteTechnicalWithFloats.begin ();
+      i != fNoteTechnicalWithFloats.end ();
       ++i
   ) {
       // browse the technical
@@ -3790,8 +3790,8 @@ void msrNote::browseData (basevisitor* v)
     ++gIndenter;
     std::list<S_msrTechnicalWithString>::const_iterator i;
     for (
-      i=fNoteTechnicalWithStrings.begin ();
-      i!=fNoteTechnicalWithStrings.end ();
+      i = fNoteTechnicalWithStrings.begin ();
+      i != fNoteTechnicalWithStrings.end ();
       ++i
   ) {
       // browse the technical
@@ -3805,7 +3805,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteOrnaments.size ()) {
     ++gIndenter;
     std::list<S_msrOrnament>::const_iterator i;
-    for (i=fNoteOrnaments.begin (); i!=fNoteOrnaments.end (); ++i) {
+    for (i = fNoteOrnaments.begin (); i != fNoteOrnaments.end (); ++i) {
       // browse the ornament
       msrBrowser<msrOrnament> browser (v);
       browser.browse (*(*i));
@@ -3817,7 +3817,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteGlissandos.size ()) {
     ++gIndenter;
     std::list<S_msrGlissando>::const_iterator i;
-    for (i=fNoteGlissandos.begin (); i!=fNoteGlissandos.end (); ++i) {
+    for (i = fNoteGlissandos.begin (); i != fNoteGlissandos.end (); ++i) {
       // browse the glissando
       msrBrowser<msrGlissando> browser (v);
       browser.browse (*(*i));
@@ -3829,7 +3829,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteSlides.size ()) {
     ++gIndenter;
     std::list<S_msrSlide>::const_iterator i;
-    for (i=fNoteSlides.begin (); i!=fNoteSlides.end (); ++i) {
+    for (i = fNoteSlides.begin (); i != fNoteSlides.end (); ++i) {
       // browse the glissando
       msrBrowser<msrSlide> browser (v);
       browser.browse (*(*i));
@@ -3854,7 +3854,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteDynamics.size ()) {
     ++gIndenter;
     std::list<S_msrDynamic>::const_iterator i;
-    for (i=fNoteDynamics.begin (); i!=fNoteDynamics.end (); ++i) {
+    for (i = fNoteDynamics.begin (); i != fNoteDynamics.end (); ++i) {
       // browse the dynamics
       msrBrowser<msrDynamic> browser (v);
       browser.browse (*(*i));
@@ -3866,7 +3866,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteOtherDynamics.size ()) {
     ++gIndenter;
     std::list<S_msrOtherDynamic>::const_iterator i;
-    for (i=fNoteOtherDynamics.begin (); i!=fNoteOtherDynamics.end (); ++i) {
+    for (i = fNoteOtherDynamics.begin (); i != fNoteOtherDynamics.end (); ++i) {
       // browse the other dynamics
       msrBrowser<msrOtherDynamic> browser (v);
       browser.browse (*(*i));
@@ -3878,7 +3878,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteWords.size ()) {
     ++gIndenter;
     std::list<S_msrWords>::const_iterator i;
-    for (i=fNoteWords.begin (); i!=fNoteWords.end (); ++i) {
+    for (i = fNoteWords.begin (); i != fNoteWords.end (); ++i) {
       // browse the words
       msrBrowser<msrWords> browser (v);
       browser.browse (*(*i));
@@ -3890,7 +3890,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteSlurs.size ()) {
     ++gIndenter;
     std::list<S_msrSlur>::const_iterator i;
-    for (i=fNoteSlurs.begin (); i!=fNoteSlurs.end (); ++i) {
+    for (i = fNoteSlurs.begin (); i != fNoteSlurs.end (); ++i) {
       // browse the slur
       msrBrowser<msrSlur> browser (v);
       browser.browse (*(*i));
@@ -3902,7 +3902,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteLigatures.size ()) {
     ++gIndenter;
     std::list<S_msrLigature>::const_iterator i;
-    for (i=fNoteLigatures.begin (); i!=fNoteLigatures.end (); ++i) {
+    for (i = fNoteLigatures.begin (); i != fNoteLigatures.end (); ++i) {
       // browse the ligature
       msrBrowser<msrLigature> browser (v);
       browser.browse (*(*i));
@@ -3914,7 +3914,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNotePedals.size ()) {
     ++gIndenter;
     std::list<S_msrPedal>::const_iterator i;
-    for (i=fNotePedals.begin (); i!=fNotePedals.end (); ++i) {
+    for (i = fNotePedals.begin (); i != fNotePedals.end (); ++i) {
       // browse the pedal
       msrBrowser<msrPedal> browser (v);
       browser.browse (*(*i));
@@ -3959,7 +3959,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteSegnos.size ()) {
     ++gIndenter;
     std::list<S_msrSegno>::const_iterator i;
-    for (i=fNoteSegnos.begin (); i!=fNoteSegnos.end (); ++i) {
+    for (i = fNoteSegnos.begin (); i != fNoteSegnos.end (); ++i) {
       // browse the segno
       msrBrowser<msrSegno> browser (v);
       browser.browse (*(*i));
@@ -3971,7 +3971,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteDalSegnos.size ()) {
     ++gIndenter;
     std::list<S_msrDalSegno>::const_iterator i;
-    for (i=fNoteDalSegnos.begin (); i!=fNoteDalSegnos.end (); ++i) {
+    for (i = fNoteDalSegnos.begin (); i != fNoteDalSegnos.end (); ++i) {
       // browse the dal segno
       msrBrowser<msrDalSegno> browser (v);
       browser.browse (*(*i));
@@ -3983,7 +3983,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteCodas.size ()) {
     ++gIndenter;
     std::list<S_msrCoda>::const_iterator i;
-    for (i=fNoteCodas.begin (); i!=fNoteCodas.end (); ++i) {
+    for (i = fNoteCodas.begin (); i != fNoteCodas.end (); ++i) {
       // browse the coda
       msrBrowser<msrCoda> browser (v);
       browser.browse (*(*i));
@@ -3995,7 +3995,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteEyeGlasses.size ()) {
     ++gIndenter;
     std::list<S_msrEyeGlasses>::const_iterator i;
-    for (i=fNoteEyeGlasses.begin (); i!=fNoteEyeGlasses.end (); ++i) {
+    for (i = fNoteEyeGlasses.begin (); i != fNoteEyeGlasses.end (); ++i) {
       // browse the eyeglasses
       msrBrowser<msrEyeGlasses> browser (v);
       browser.browse (*(*i));
@@ -4007,7 +4007,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteDamps.size ()) {
     ++gIndenter;
     std::list<S_msrDamp>::const_iterator i;
-    for (i=fNoteDamps.begin (); i!=fNoteDamps.end (); ++i) {
+    for (i = fNoteDamps.begin (); i != fNoteDamps.end (); ++i) {
       // browse the damp
       msrBrowser<msrDamp> browser (v);
       browser.browse (*(*i));
@@ -4019,7 +4019,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteDampAlls.size ()) {
     ++gIndenter;
     std::list<S_msrDampAll>::const_iterator i;
-    for (i=fNoteDampAlls.begin (); i!=fNoteDampAlls.end (); ++i) {
+    for (i = fNoteDampAlls.begin (); i != fNoteDampAlls.end (); ++i) {
       // browse the damp all
       msrBrowser<msrDampAll> browser (v);
       browser.browse (*(*i));
@@ -4031,7 +4031,7 @@ void msrNote::browseData (basevisitor* v)
   if (fNoteScordaturas.size ()) {
     ++gIndenter;
     std::list<S_msrScordatura>::const_iterator i;
-    for (i=fNoteScordaturas.begin (); i!=fNoteScordaturas.end (); ++i) {
+    for (i = fNoteScordaturas.begin (); i != fNoteScordaturas.end (); ++i) {
       // browse the scordatura
       msrBrowser<msrScordatura> browser (v);
       browser.browse (*(*i));

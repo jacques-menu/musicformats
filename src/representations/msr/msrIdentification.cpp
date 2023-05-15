@@ -447,7 +447,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationComposersList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationComposersList.begin (); i!=fIdentificationComposersList.end (); ++i) {
+    for (i = fIdentificationComposersList.begin (); i != fIdentificationComposersList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result){
         result = length;
@@ -458,7 +458,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationLyricistsList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationLyricistsList.begin (); i!=fIdentificationLyricistsList.end (); ++i) {
+    for (i = fIdentificationLyricistsList.begin (); i != fIdentificationLyricistsList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result) {
         result = length;
@@ -469,7 +469,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationArrangersList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationArrangersList.begin (); i!=fIdentificationArrangersList.end (); ++i) {
+    for (i = fIdentificationArrangersList.begin (); i != fIdentificationArrangersList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result) {
         result = length;
@@ -480,7 +480,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationPoetsList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationPoetsList.begin (); i!=fIdentificationPoetsList.end (); ++i) {
+    for (i = fIdentificationPoetsList.begin (); i != fIdentificationPoetsList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result) {
         result = length;
@@ -491,7 +491,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationTranslatorsList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationTranslatorsList.begin (); i!=fIdentificationTranslatorsList.end (); ++i) {
+    for (i = fIdentificationTranslatorsList.begin (); i != fIdentificationTranslatorsList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result) {
         result = length;
@@ -502,7 +502,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationArtistsList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationArtistsList.begin (); i!=fIdentificationArtistsList.end (); ++i) {
+    for (i = fIdentificationArtistsList.begin (); i != fIdentificationArtistsList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result) {
         result = length;
@@ -513,7 +513,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationSoftwaresList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationSoftwaresList.begin (); i!=fIdentificationSoftwaresList.end (); ++i) {
+    for (i = fIdentificationSoftwaresList.begin (); i != fIdentificationSoftwaresList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result) {
         result = length;
@@ -524,7 +524,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationRightsList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationRightsList.begin (); i!=fIdentificationRightsList.end (); ++i) {
+    for (i = fIdentificationRightsList.begin (); i != fIdentificationRightsList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result) {
         result = length;
@@ -535,7 +535,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationSourcesList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationSourcesList.begin (); i!=fIdentificationSourcesList.end (); ++i) {
+    for (i = fIdentificationSourcesList.begin (); i != fIdentificationSourcesList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result) {
         result = length;
@@ -546,7 +546,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   if (fIdentificationRelationsList.size ()) {
     std::list<std::string>::const_iterator i;
 
-    for (i=fIdentificationRelationsList.begin (); i!=fIdentificationRelationsList.end (); ++i) {
+    for (i = fIdentificationRelationsList.begin (); i != fIdentificationRelationsList.end (); ++i) {
       size_t length = (*i).size ();
       if (length > result) {
         result = length;

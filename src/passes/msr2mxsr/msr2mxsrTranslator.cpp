@@ -542,7 +542,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
     for (
       std::list<Sxmlelement>::const_iterator i =
         fClefElementsList.begin ();
-      i!=fClefElementsList.end ();
+      i != fClefElementsList.end ();
       ++i
     ) {
       Sxmlelement clefElement = (*i);
@@ -948,7 +948,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
   for (
     std::list<Sxmlelement>::const_iterator i =
       fScoreDefaultsStaffLayoutElementsList.begin ();
-    i!=fScoreDefaultsStaffLayoutElementsList.end ();
+    i != fScoreDefaultsStaffLayoutElementsList.end ();
     ++i
   ) {
     Sxmlelement staffLayoutElement = (*i);
@@ -1000,7 +1000,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
     for (
       std::list<Sxmlelement>::const_iterator i =
         fPendingScoreCreditElementsList.begin ();
-      i!=fPendingScoreCreditElementsList.end ();
+      i != fPendingScoreCreditElementsList.end ();
       ++i
     ) {
       Sxmlelement creditElement = (*i);
@@ -1029,7 +1029,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
   for (
     std::list<Sxmlelement>::const_iterator i =
       fPendingPartElementsList.begin ();
-    i!=fPendingPartElementsList.end ();
+    i != fPendingPartElementsList.end ();
     ++i
   ) {
     Sxmlelement partElement = (*i);
@@ -1242,8 +1242,8 @@ I don't know if any distributed software is currently supporting the opus. Howev
       elt->getIdentificationComposersList ();
 
   for (
-    std::list<std::string>::const_iterator i=composersList.begin ();
-    i!=composersList.end ();
+    std::list<std::string>::const_iterator i = composersList.begin ();
+    i != composersList.end ();
     ++i
   ) {
     std::string variableValue = (*i);
@@ -1264,8 +1264,8 @@ I don't know if any distributed software is currently supporting the opus. Howev
       elt->getIdentificationArrangersList ();
 
   for (
-    std::list<std::string>::const_iterator i=arrangersList.begin ();
-    i!=arrangersList.end ();
+    std::list<std::string>::const_iterator i = arrangersList.begin ();
+    i != arrangersList.end ();
     ++i
   ) {
     std::string variableValue = (*i);
@@ -1286,8 +1286,8 @@ I don't know if any distributed software is currently supporting the opus. Howev
       elt->getIdentificationLyricistsList ();
 
   for (
-    std::list<std::string>::const_iterator i=lyricistsList.begin ();
-    i!=lyricistsList.end ();
+    std::list<std::string>::const_iterator i = lyricistsList.begin ();
+    i != lyricistsList.end ();
     ++i
   ) {
     std::string variableValue = (*i);
@@ -1308,8 +1308,8 @@ I don't know if any distributed software is currently supporting the opus. Howev
       elt->getIdentificationPoetsList ();
 
   for (
-    std::list<std::string>::const_iterator i=poetsList.begin ();
-    i!=poetsList.end ();
+    std::list<std::string>::const_iterator i = poetsList.begin ();
+    i != poetsList.end ();
     ++i
   ) {
     std::string variableValue = (*i);
@@ -1330,8 +1330,8 @@ I don't know if any distributed software is currently supporting the opus. Howev
       elt->getIdentificationTranslatorsList ();
 
   for (
-    std::list<std::string>::const_iterator i=translatorsList.begin ();
-    i!=translatorsList.end ();
+    std::list<std::string>::const_iterator i = translatorsList.begin ();
+    i != translatorsList.end ();
     ++i
   ) {
     std::string variableValue = (*i);
@@ -1352,8 +1352,8 @@ I don't know if any distributed software is currently supporting the opus. Howev
       elt->getIdentificationArtistsList ();
 
   for (
-    std::list<std::string>::const_iterator i=artistsList.begin ();
-    i!=artistsList.end ();
+    std::list<std::string>::const_iterator i = artistsList.begin ();
+    i != artistsList.end ();
     ++i
   ) {
     std::string variableValue = (*i);
@@ -1374,8 +1374,8 @@ I don't know if any distributed software is currently supporting the opus. Howev
       elt->getIdentificationSoftwaresList ();
 
   for (
-    std::list<std::string>::const_iterator i=softwaresList.begin ();
-    i!=softwaresList.end ();
+    std::list<std::string>::const_iterator i = softwaresList.begin ();
+    i != softwaresList.end ();
     ++i
   ) {
     std::string variableValue = (*i);
@@ -1393,8 +1393,8 @@ I don't know if any distributed software is currently supporting the opus. Howev
       elt->getIdentificationRightsList ();
 
   for (
-    std::list<std::string>::const_iterator i=rightsList.begin ();
-    i!=rightsList.end ();
+    std::list<std::string>::const_iterator i = rightsList.begin ();
+    i != rightsList.end ();
     ++i
   ) {
     std::string variableValue = (*i);
@@ -1428,8 +1428,8 @@ void msr2mxsrTranslator::visitEnd (S_msrIdentification& elt)
     std::list<Sxmlelement>::const_iterator i;
 
     for (
-      i=fRightsElementsList.begin ();
-      i!=fRightsElementsList.end ();
+      i = fRightsElementsList.begin ();
+      i != fRightsElementsList.end ();
       ++i) {
       Sxmlelement rightsElement = (*i);
 
@@ -1442,7 +1442,7 @@ void msr2mxsrTranslator::visitEnd (S_msrIdentification& elt)
       // append the software elements to the score identification  encoding element
       for (
         std::list<Sxmlelement>::const_iterator i = fSoftwaresElementsList.begin ();
-        i!=fSoftwaresElementsList.end ();
+        i != fSoftwaresElementsList.end ();
         ++i
       ) {
         Sxmlelement softwareElement = (*i);
@@ -1858,7 +1858,7 @@ void msr2mxsrTranslator::populateAppearanceLineWidths (
   for (
     std::list<S_msrLineWidth>::const_iterator i =
       lineWidthsList.begin ();
-    i!=lineWidthsList.end ();
+    i != lineWidthsList.end ();
     ++i
   ) {
     S_msrLineWidth lineWidth = (*i);
@@ -1961,7 +1961,7 @@ void msr2mxsrTranslator::populateAppearanceNoteSizes (
   for (
     std::list<S_msrNoteSize>::const_iterator i =
       noteSizesList.begin ();
-    i!=noteSizesList.end ();
+    i != noteSizesList.end ();
     ++i
   ) {
     S_msrNoteSize noteSize = (*i);
@@ -2016,7 +2016,7 @@ void msr2mxsrTranslator::populateAppearanceDistances (
   for (
     std::list<S_msrDistance>::const_iterator i =
       distancesList.begin ();
-    i!=distancesList.end ();
+    i != distancesList.end ();
     ++i
   ) {
     S_msrDistance distance = (*i);
@@ -2068,7 +2068,7 @@ void msr2mxsrTranslator::populateAppearanceGlyphs (
   for (
     std::list<S_msrGlyph>::const_iterator i =
       glyphsList.begin ();
-    i!=glyphsList.end ();
+    i != glyphsList.end ();
     ++i
   ) {
     S_msrGlyph glyph = (*i);
@@ -2157,7 +2157,7 @@ void msr2mxsrTranslator::populateAppearanceOtherAppearances (
   for (
     std::list<S_msrOtherAppearance>::const_iterator i =
       otherAppearancesList.begin ();
-    i!=otherAppearancesList.end ();
+    i != otherAppearancesList.end ();
     ++i
   ) {
     S_msrOtherAppearance otherAppearance = (*i);
@@ -2543,11 +2543,11 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getPartGroupImplicitKind ()) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       // this is an MSR concept, ignore this part group
       break;
 
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       {
         if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create a start comment
@@ -2682,11 +2682,11 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   switch (elt->getPartGroupImplicitKind ()) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       // this is an MSR concept, ignore this part group
       break;
 
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       {
         if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create an end comment
@@ -5023,7 +5023,7 @@ void msr2mxsrTranslator:: appendNoteWedges (
   if (noteWedges.size ()) {
     std::list<S_msrWedge>::const_iterator i;
 
-    for (i=noteWedges.begin (); i!=noteWedges.end (); ++i) {
+    for (i = noteWedges.begin (); i != noteWedges.end (); ++i) {
       S_msrWedge wedge = (*i);
 
       msrWedgeKind wedgeKind = wedge->getWedgeKind ();
@@ -5084,7 +5084,7 @@ void msr2mxsrTranslator::appendNoteDynamics (
   if (noteDynamics.size ()) {
     std::list<S_msrDynamic>::const_iterator i;
 
-    for (i=noteDynamics.begin (); i!=noteDynamics.end (); ++i) {
+    for (i = noteDynamics.begin (); i != noteDynamics.end (); ++i) {
       S_msrDynamic dynamic = (*i);
 
       // create the dynamics element
@@ -5786,7 +5786,7 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
   if (noteTechnicals.size ()) {
     std::list<S_msrTechnical>::const_iterator i;
 
-    for (i=noteTechnicals.begin (); i!=noteTechnicals.end (); ++i) {
+    for (i = noteTechnicals.begin (); i != noteTechnicals.end (); ++i) {
       S_msrTechnical
         technical = (*i);
 
@@ -5895,7 +5895,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
   if (noteTechnicalWithIntegers.size ()) {
     std::list<S_msrTechnicalWithInteger>::const_iterator i;
 
-    for (i=noteTechnicalWithIntegers.begin (); i!=noteTechnicalWithIntegers.end (); ++i) {
+    for (i = noteTechnicalWithIntegers.begin (); i != noteTechnicalWithIntegers.end (); ++i) {
       S_msrTechnicalWithInteger
         technicalWithInteger = (*i);
 
@@ -5977,7 +5977,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
   if (noteTechnicalWithFloats.size ()) {
     std::list<S_msrTechnicalWithFloat>::const_iterator i;
 
-    for (i=noteTechnicalWithFloats.begin (); i!=noteTechnicalWithFloats.end (); ++i) {
+    for (i = noteTechnicalWithFloats.begin (); i != noteTechnicalWithFloats.end (); ++i) {
       S_msrTechnicalWithFloat
         technicalWithFloat = (*i);
 
@@ -6051,7 +6051,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
   if (noteTechnicalWithStrings.size ()) {
     std::list<S_msrTechnicalWithString>::const_iterator i;
 
-    for (i=noteTechnicalWithStrings.begin (); i!=noteTechnicalWithStrings.end (); ++i) {
+    for (i = noteTechnicalWithStrings.begin (); i != noteTechnicalWithStrings.end (); ++i) {
       S_msrTechnicalWithString
         technicalWithString = (*i);
 
@@ -6119,7 +6119,7 @@ void msr2mxsrTranslator:: appendNoteArticulations (
   if (noteArticulations.size ()) {
     std::list<S_msrArticulation>::const_iterator i;
 
-    for (i=noteArticulations.begin (); i!=noteArticulations.end (); ++i) {
+    for (i = noteArticulations.begin (); i != noteArticulations.end (); ++i) {
       const S_msrArticulation& articulation = (*i);
 
       msrArticulationKind
@@ -6321,7 +6321,7 @@ void msr2mxsrTranslator:: appendNoteSlursIfAny (
   if (noteSlurs.size ()) {
     std::list<S_msrSlur>::const_iterator i;
 
-    for (i=noteSlurs.begin (); i!=noteSlurs.end (); ++i) {
+    for (i = noteSlurs.begin (); i != noteSlurs.end (); ++i) {
       S_msrSlur
         slur = (*i);
 
@@ -6506,7 +6506,7 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
   if (noteSpanners.size ()) {
     std::list<S_msrSpanner>::const_iterator i;
 
-    for (i=noteSpanners.begin (); i!=noteSpanners.end (); ++i) {
+    for (i = noteSpanners.begin (); i != noteSpanners.end (); ++i) {
       S_msrSpanner spanner = (*i);
 
       msrSpannerTypeKind
@@ -6617,7 +6617,7 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
   if (noteSpanners.size ()) {
     std::list<S_msrSpanner>::const_iterator i;
 
-    for (i=noteSpanners.begin (); i!=noteSpanners.end (); ++i) {
+    for (i = noteSpanners.begin (); i != noteSpanners.end (); ++i) {
       S_msrSpanner spanner = (*i);
 
       msrSpannerTypeKind
@@ -6775,7 +6775,7 @@ void msr2mxsrTranslator::appendBeamsToNote (
   if (noteBeams.size ()) {
     std::list<S_msrBeam>::const_iterator i;
 
-    for (i=noteBeams.begin (); i!=noteBeams.end (); ++i) {
+    for (i = noteBeams.begin (); i != noteBeams.end (); ++i) {
       S_msrBeam beam = (*i);
 
       msrBeamKind
@@ -7036,7 +7036,7 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
   if (noteSyllables.size ()) {
     std::list<S_msrSyllable>::const_iterator i;
 
-    for (i=noteSyllables.begin (); i!=noteSyllables.end (); ++i) {
+    for (i = noteSyllables.begin (); i != noteSyllables.end (); ++i) {
       S_msrSyllable syllable = (*i);
 
       // create and append a lyric element if relevant
@@ -7106,7 +7106,7 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
 
         for (
           std::list<std::string>::const_iterator i = syllableTextsList.begin ();
-          i!=syllableTextsList.end ();
+          i != syllableTextsList.end ();
           ++i
         ) {
           std::string text = (*i);

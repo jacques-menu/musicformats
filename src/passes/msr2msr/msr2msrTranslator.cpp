@@ -868,7 +868,7 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
 
   // is this part group the implicit outer-most one?
   switch (elt->getPartGroupImplicitKind ()) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTracePartGroups ()) {
         std::stringstream ss;
@@ -890,7 +890,7 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
           partGroupClone);
       break;
 
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       break;
   } // switch
 
@@ -940,12 +940,12 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // fetch the current part group at the top of the stack
-  S_msrPartGroup
-    currentPartGroup =
-      fPartGroupsStack.front ();
-
   if (fPartGroupsStack.size () > 0) {
+    // fetch the current part group at the top of the stack
+    S_msrPartGroup
+      currentPartGroup =
+        fPartGroupsStack.front ();
+
     // append the current part group to the one one level higher,
     // i.e. the new current part group
 
@@ -965,9 +965,9 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    currentPartGroup->
-      appendSubPartGroupToPartGroup (
-        elt);
+//     currentPartGroup-> // JMI v0.9.69
+//       appendNestedPartGroupToPartGroup (
+//         elt);
 
   // pop current partGroup from this visitors's stack
 #ifdef MF_TRACE_IS_ENABLED
@@ -7022,8 +7022,8 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
         getPartStaveNumbersToStavesMap ();
 
   for (
-    std::map<int, S_msrStaff>::const_iterator i=partStavesMap.begin ();
-    i!=partStavesMap.end ();
+    std::map<int, S_msrStaff>::const_iterator i = partStavesMap.begin ();
+    i != partStavesMap.end ();
     ++i
   ) {
     std::list<S_msrVoice>

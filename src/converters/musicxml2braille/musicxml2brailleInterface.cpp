@@ -132,7 +132,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         theMxsr,
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2a,
-        gLanguage->createAnMSRSqueletonFromTheMXSR ());
+        gLanguage->convertTheMXSRIntoAnMSRSqueleton ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);

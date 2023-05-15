@@ -336,6 +336,8 @@ class EXP msrScore : public msrBookElement
 
     void                  addPartGroupToScore (
                             const S_msrPartGroup& partGroup);
+    void                  removePartGroupFromScore (
+                            const S_msrPartGroup& partGroup);
 
     void                  appendCreditToScore (
                             const S_msrCredit& credit);
@@ -362,6 +364,9 @@ class EXP msrScore : public msrBookElement
 
     // print
     // ------------------------------------------------------
+
+    void                  displayPartGroupsList (
+                            const std::string context);
 
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;

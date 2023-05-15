@@ -399,9 +399,9 @@ std::string language::createAnMXSRFromAMusicXMLBuffer () const
   return "Create an MXSR (MusicXML tree) from a MusicXML buffer";
 }
 
-std::string language::createAnMSRSqueletonFromTheMXSR () const
+std::string language::convertTheMXSRIntoAnMSRSqueleton () const
 {
-  return "Create an MSR skeleton from the MXSR";
+  return "Convert the MXSR into an MSR skeleton";
 }
 
 std::string language::populateTheMSRSqueletonFromMusicXMLData () const

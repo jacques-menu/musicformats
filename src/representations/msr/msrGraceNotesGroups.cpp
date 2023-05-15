@@ -195,8 +195,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 
   // populating the clone with skips
   for (
-    std::list<S_msrMeasureElement>::const_iterator i=fGraceNotesGroupElementsList.begin ();
-    i!=fGraceNotesGroupElementsList.end ();
+    std::list<S_msrMeasureElement>::const_iterator i = fGraceNotesGroupElementsList.begin ();
+    i != fGraceNotesGroupElementsList.end ();
     ++i
   ) {
     if (
@@ -577,8 +577,8 @@ void msrGraceNotesGroup::browseData (basevisitor* v)
   std::list<S_msrMeasureElement>::const_iterator i;
 
   for (
-    i=fGraceNotesGroupElementsList.begin ();
-    i!=fGraceNotesGroupElementsList.end ();
+    i = fGraceNotesGroupElementsList.begin ();
+    i != fGraceNotesGroupElementsList.end ();
     ++i
   ) {
     // browse the element (note or chord)

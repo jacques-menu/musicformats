@@ -473,8 +473,8 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
         fTempoTupletElements.front ();
 
     for (
-      std::list<S_msrElement>::iterator i=fTempoTupletElements.begin ();
-      i!=fTempoTupletElements.end ();
+      std::list<S_msrElement>::iterator i = fTempoTupletElements.begin ();
+      i != fTempoTupletElements.end ();
       ++i) {
       if ((*i) == tempoNote) {
         // found note, erase it

@@ -186,9 +186,9 @@ std::ostream& operator << (std::ostream& os, const S_languageGerman& elt)
 //   return "Create an MXSR (MusicXML tree) from a MusicXML buffer";
 // }
 //
-// std::string languageGerman::createAnMSRSqueletonFromTheMXSR () const
+// std::string languageGerman::convertTheMXSRIntoAnMSRSqueleton () const
 // {
-//   return "Create an MSR skeleton from the MXSR";
+//   return "Convert the MXSR into an MSR skeleton";
 // }
 //
 // std::string languageGerman::populateTheMSRSqueletonFromMusicXMLData () const

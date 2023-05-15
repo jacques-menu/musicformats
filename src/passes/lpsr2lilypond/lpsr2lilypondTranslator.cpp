@@ -1409,8 +1409,8 @@ void lpsr2lilypondTranslator::generateNoteLigatures (
   if (noteLigatures.size ()) {
     std::list<S_msrLigature>::const_iterator i;
     for (
-      i=noteLigatures.begin ();
-      i!=noteLigatures.end ();
+      i = noteLigatures.begin ();
+      i != noteLigatures.end ();
       ++i
     ) {
       S_msrLigature ligature = (*i);
@@ -1791,7 +1791,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
 
     if (noteCodas.size ()) {
       std::list<S_msrCoda>::const_iterator i;
-      for (i=noteCodas.begin (); i!=noteCodas.end (); ++i) {
+      for (i = noteCodas.begin (); i != noteCodas.end (); ++i) {
         S_msrCoda coda = (*i);
 
         // generate only the second coda before the note
@@ -1813,7 +1813,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
 
     if (noteSegnos.size ()) {
       std::list<S_msrSegno>::const_iterator i;
-      for (i=noteSegnos.begin (); i!=noteSegnos.end (); ++i) {
+      for (i = noteSegnos.begin (); i != noteSegnos.end (); ++i) {
       } // for
     }
   }
@@ -2501,8 +2501,8 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
   if (chordMemberNoteTechnicalsWithIntegers.size ()) {
     std::list<S_msrTechnicalWithInteger>::const_iterator i;
     for (
-      i=chordMemberNoteTechnicalsWithIntegers.begin ();
-      i!=chordMemberNoteTechnicalsWithIntegers.end ();
+      i = chordMemberNoteTechnicalsWithIntegers.begin ();
+      i != chordMemberNoteTechnicalsWithIntegers.end ();
       ++i
     ) {
       S_msrTechnicalWithInteger
@@ -3185,8 +3185,8 @@ void lpsr2lilypondTranslator::generateCodeForNoteWords (
   if (noteWords.size ()) {
     std::list<S_msrWords>::const_iterator i;
     for (
-      i=noteWords.begin ();
-      i!=noteWords.end ();
+      i = noteWords.begin ();
+      i != noteWords.end ();
       ++i
     ) {
       msrPlacementKind
@@ -3356,7 +3356,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
 
     if (noteCodas.size ()) {
       std::list<S_msrCoda>::const_iterator i;
-      for (i=noteCodas.begin (); i!=noteCodas.end (); ++i) {
+      for (i = noteCodas.begin (); i != noteCodas.end (); ++i) {
         S_msrCoda coda = (*i);
 
         // generate only the first coda before the note
@@ -3378,7 +3378,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
 
     if (noteDalSegnos.size ()) {
       std::list<S_msrDalSegno>::const_iterator i;
-      for (i=noteDalSegnos.begin (); i!=noteDalSegnos.end (); ++i) {
+      for (i = noteDalSegnos.begin (); i != noteDalSegnos.end (); ++i) {
         // generate the dal segno
         fLilypondCodeStream <<
           std::endl <<
@@ -8553,11 +8553,11 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
   // LPNR, page 567 jMI ???
 
   switch (partGroupImplicitKind) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       // don't generate code for an implicit outer-most part group block
       break;
 
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream <<
           "% start of part group block";
@@ -8633,9 +8633,9 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       // generate the '\with' block
       // if the part group is not implicit
       switch (partGroupImplicitKind) {
-        case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
+        case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
           break;
-        case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
+        case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
           if (partGroupName.size ()) {
             doGenerateAWithBlock = true;
           }
@@ -8805,11 +8805,11 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
 //   }
 
   switch (partGroup->getPartGroupImplicitKind ()) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       // don't generate code for an implicit outer-most part group block
       break;
 
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       fLilypondCodeStream << "<<";
 
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
@@ -18924,8 +18924,8 @@ void lpsr2lilypondTranslator::generateNoteSlashes (
   if (noteSlashes.size ()) {
     std::list<S_msrSlash>::const_iterator i;
     for (
-      i=noteSlashes.begin ();
-      i!=noteSlashes.end ();
+      i = noteSlashes.begin ();
+      i != noteSlashes.end ();
       ++i
     ) {
       S_msrSlash slash = (*i);
@@ -19000,8 +19000,8 @@ void lpsr2lilypondTranslator::generateNoteWedges (
   if (noteWedges.size ()) {
     std::list<S_msrWedge>::const_iterator i;
     for (
-      i=noteWedges.begin ();
-      i!=noteWedges.end ();
+      i = noteWedges.begin ();
+      i != noteWedges.end ();
       ++i
     ) {
       S_msrWedge wedge = (*i);
@@ -19099,8 +19099,8 @@ void lpsr2lilypondTranslator::generateNoteGlissandoStyles (
   if (noteGlissandos.size ()) {
     std::list<S_msrGlissando>::const_iterator i;
     for (
-      i=noteGlissandos.begin ();
-      i!=noteGlissandos.end ();
+      i = noteGlissandos.begin ();
+      i != noteGlissandos.end ();
       ++i
     ) {
       S_msrGlissando glissando = (*i);
@@ -19152,8 +19152,8 @@ void lpsr2lilypondTranslator::generateNoteGlissandosWithText (
   if (noteGlissandos.size ()) {
     std::list<S_msrGlissando>::const_iterator i;
     for (
-      i=noteGlissandos.begin ();
-      i!=noteGlissandos.end ();
+      i = noteGlissandos.begin ();
+      i != noteGlissandos.end ();
       ++i
     ) {
       S_msrGlissando glissando = (*i);
@@ -19200,8 +19200,8 @@ void lpsr2lilypondTranslator::generateNoteSlideLineStyles (
 
     std::list<S_msrSlide>::const_iterator i;
     for (
-      i=noteSlides.begin ();
-      i!=noteSlides.end ();
+      i = noteSlides.begin ();
+      i != noteSlides.end ();
       ++i
     ) {
       S_msrSlide slide = (*i);
@@ -19253,8 +19253,8 @@ void lpsr2lilypondTranslator::generateNoteSlidesWithText (
   if (noteSlides.size ()) {
     std::list<S_msrSlide>::const_iterator i;
     for (
-      i=noteSlides.begin ();
-      i!=noteSlides.end ();
+      i = noteSlides.begin ();
+      i != noteSlides.end ();
       ++i
     ) {
       S_msrSlide slide = (*i);
@@ -19304,8 +19304,8 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
 
     std::list<S_msrTechnicalWithString>::const_iterator i;
     for (
-      i=noteTechnicalWithStrings.begin ();
-      i!=noteTechnicalWithStrings.end ();
+      i = noteTechnicalWithStrings.begin ();
+      i != noteTechnicalWithStrings.end ();
       ++i
     ) {
       S_msrTechnicalWithString technicalWithString = (*i);
@@ -19556,8 +19556,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     if (noteArticulations.size ()) {
       std::list<S_msrArticulation>::const_iterator i;
       for (
-        i=noteArticulations.begin ();
-        i!=noteArticulations.end ();
+        i = noteArticulations.begin ();
+        i != noteArticulations.end ();
         ++i
       ) {
         const S_msrArticulation& articulation = (*i);
@@ -19628,8 +19628,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   if (noteTechnicals.size ()) {
     std::list<S_msrTechnical>::const_iterator i;
     for (
-      i=noteTechnicals.begin ();
-      i!=noteTechnicals.end ();
+      i = noteTechnicals.begin ();
+      i != noteTechnicals.end ();
       ++i
     ) {
 
@@ -19667,8 +19667,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         if (noteTechnicalWithIntegers.size ()) {
           std::list<S_msrTechnicalWithInteger>::const_iterator i;
           for (
-            i=noteTechnicalWithIntegers.begin ();
-            i!=noteTechnicalWithIntegers.end ();
+            i = noteTechnicalWithIntegers.begin ();
+            i != noteTechnicalWithIntegers.end ();
             ++i
           ) {
 
@@ -19712,8 +19712,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         if (noteTechnicalWithFloats.size ()) {
           std::list<S_msrTechnicalWithFloat>::const_iterator i;
           for (
-            i=noteTechnicalWithFloats.begin ();
-            i!=noteTechnicalWithFloats.end ();
+            i = noteTechnicalWithFloats.begin ();
+            i != noteTechnicalWithFloats.end ();
             ++i
           ) {
 
@@ -19749,8 +19749,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   if (noteTechnicalWithStrings.size ()) {
     std::list<S_msrTechnicalWithString>::const_iterator i;
     for (
-      i=noteTechnicalWithStrings.begin ();
-      i!=noteTechnicalWithStrings.end ();
+      i = noteTechnicalWithStrings.begin ();
+      i != noteTechnicalWithStrings.end ();
       ++i
     ) {
 
@@ -19780,8 +19780,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   if (noteOrnaments.size ()) {
     std::list<S_msrOrnament>::const_iterator i;
     for (
-      i=noteOrnaments.begin ();
-      i!=noteOrnaments.end ();
+      i = noteOrnaments.begin ();
+      i != noteOrnaments.end ();
       ++i
     ) {
       S_msrOrnament
@@ -19800,8 +19800,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     if (noteDynamics.size ()) {
       std::list<S_msrDynamic>::const_iterator i;
       for (
-        i=noteDynamics.begin ();
-        i!=noteDynamics.end ();
+        i = noteDynamics.begin ();
+        i != noteDynamics.end ();
         ++i
       ) {
         S_msrDynamic
@@ -19834,8 +19834,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     if (noteOtherDynamics.size ()) {
       std::list<S_msrOtherDynamic>::const_iterator i;
       for (
-        i=noteOtherDynamics.begin ();
-        i!=noteOtherDynamics.end ();
+        i = noteOtherDynamics.begin ();
+        i != noteOtherDynamics.end ();
         ++i
       ) {
         S_msrOtherDynamic
@@ -19879,8 +19879,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   if (noteLigatures.size ()) {
     std::list<S_msrLigature>::const_iterator i;
     for (
-      i=noteLigatures.begin ();
-      i!=noteLigatures.end ();
+      i = noteLigatures.begin ();
+      i != noteLigatures.end ();
       ++i
     ) {
       switch ((*i)->getLigatureKind ()) {
@@ -19906,8 +19906,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   if (noteWedges.size ()) {
     std::list<S_msrWedge>::const_iterator i;
     for (
-      i=noteWedges.begin ();
-      i!=noteWedges.end ();
+      i = noteWedges.begin ();
+      i != noteWedges.end ();
       ++i
     ) {
       S_msrWedge wedge = (*i);
@@ -19978,8 +19978,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     if (noteArticulations.size ()) {
       std::list<S_msrArticulation>::const_iterator i;
       for (
-        i=noteArticulations.begin ();
-        i!=noteArticulations.end ();
+        i = noteArticulations.begin ();
+        i != noteArticulations.end ();
         ++i
       ) {
         const S_msrArticulation& articulation = (*i);
@@ -20060,8 +20060,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   if (noteGlissandos.size ()) {
     std::list<S_msrGlissando>::const_iterator i;
     for (
-      i=noteGlissandos.begin ();
-      i!=noteGlissandos.end ();
+      i = noteGlissandos.begin ();
+      i != noteGlissandos.end ();
       ++i
     ) {
       S_msrGlissando glissando = (*i);
@@ -20091,8 +20091,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   if (noteSlides.size ()) {
     std::list<S_msrSlide>::const_iterator i;
     for (
-      i=noteSlides.begin ();
-      i!=noteSlides.end ();
+      i = noteSlides.begin ();
+      i != noteSlides.end ();
       ++i
     ) {
       S_msrSlide slide = (*i);
@@ -20575,7 +20575,7 @@ void lpsr2lilypondTranslator::generateCodeAheadOfChordContents (
 
   if (chordCodas.size ()) {
     std::list<S_msrCoda>::const_iterator i;
-    for (i=chordCodas.begin (); i!=chordCodas.end (); ++i) {
+    for (i = chordCodas.begin (); i != chordCodas.end (); ++i) {
       // generate the coda
       S_msrCoda coda = (*i);
 
@@ -20590,7 +20590,7 @@ void lpsr2lilypondTranslator::generateCodeAheadOfChordContents (
 
   if (chordSegnos.size ()) {
     std::list<S_msrSegno>::const_iterator i;
-    for (i=chordSegnos.begin (); i!=chordSegnos.end (); ++i) {
+    for (i = chordSegnos.begin (); i != chordSegnos.end (); ++i) {
       // generate the segno
       generateSegno ((*i));
     } // for
@@ -20644,8 +20644,8 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
   if (chordGlissandos.size ()) {
     std::list<S_msrGlissando>::const_iterator i;
     for (
-      i=chordGlissandos.begin ();
-      i!=chordGlissandos.end ();
+      i = chordGlissandos.begin ();
+      i != chordGlissandos.end ();
       ++i
     ) {
       S_msrGlissando glissando = (*i);
@@ -20689,8 +20689,8 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
   if (chordSlides.size ()) {
     std::list<S_msrSlide>::const_iterator i;
     for (
-      i=chordSlides.begin ();
-      i!=chordSlides.end ();
+      i = chordSlides.begin ();
+      i != chordSlides.end ();
       ++i
     ) {
       S_msrSlide slide = (*i);
@@ -20734,8 +20734,8 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
   if (chordLigatures.size ()) {
     std::list<S_msrLigature>::const_iterator i;
     for (
-      i=chordLigatures.begin ();
-      i!=chordLigatures.end ();
+      i = chordLigatures.begin ();
+      i != chordLigatures.end ();
       ++i
     ) {
 
@@ -20765,8 +20765,8 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
   if (chordArticulations.size ()) {
     std::list<S_msrArticulation>::const_iterator i;
     for (
-      i=chordArticulations.begin ();
-      i!=chordArticulations.end ();
+      i = chordArticulations.begin ();
+      i != chordArticulations.end ();
       ++i
     ) {
       const S_msrArticulation& articulation = (*i);
@@ -21054,8 +21054,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
 //   if (chordArticulations.size ()) {
 //     std::list<S_msrArticulation>::const_iterator i;
 //     for (
-//       i=chordArticulations.begin ();
-//       i!=chordArticulations.end ();
+//       i = chordArticulations.begin ();
+//       i != chordArticulations.end ();
 //       ++i
 //     ) {
 //       generateChordArticulation ((*i));
@@ -21073,8 +21073,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordTechnicals.size ()) {
     std::list<S_msrTechnical>::const_iterator i;
     for (
-      i=chordTechnicals.begin ();
-      i!=chordTechnicals.end ();
+      i = chordTechnicals.begin ();
+      i != chordTechnicals.end ();
       ++i
     ) {
       fLilypondCodeStream <<
@@ -21091,8 +21091,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordTechnicalWithIntegers.size ()) {
     std::list<S_msrTechnicalWithInteger>::const_iterator i;
     for (
-      i=chordTechnicalWithIntegers.begin ();
-      i!=chordTechnicalWithIntegers.end ();
+      i = chordTechnicalWithIntegers.begin ();
+      i != chordTechnicalWithIntegers.end ();
       ++i
     ) {
       fLilypondCodeStream <<
@@ -21109,8 +21109,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordTechnicalWithFloats.size ()) {
     std::list<S_msrTechnicalWithFloat>::const_iterator i;
     for (
-      i=chordTechnicalWithFloats.begin ();
-      i!=chordTechnicalWithFloats.end ();
+      i = chordTechnicalWithFloats.begin ();
+      i != chordTechnicalWithFloats.end ();
       ++i
     ) {
       fLilypondCodeStream <<
@@ -21127,8 +21127,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordTechnicalWithStrings.size ()) {
     std::list<S_msrTechnicalWithString>::const_iterator i;
     for (
-      i=chordTechnicalWithStrings.begin ();
-      i!=chordTechnicalWithStrings.end ();
+      i = chordTechnicalWithStrings.begin ();
+      i != chordTechnicalWithStrings.end ();
       ++i
     ) {
       fLilypondCodeStream <<
@@ -21145,8 +21145,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordOrnaments.size ()) {
     std::list<S_msrOrnament>::const_iterator i;
     for (
-      i=chordOrnaments.begin ();
-      i!=chordOrnaments.end ();
+      i = chordOrnaments.begin ();
+      i != chordOrnaments.end ();
       ++i
     ) {
       S_msrOrnament
@@ -21176,8 +21176,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordDynamics.size ()) {
     std::list<S_msrDynamic>::const_iterator i;
     for (
-      i=chordDynamics.begin ();
-      i!=chordDynamics.end ();
+      i = chordDynamics.begin ();
+      i != chordDynamics.end ();
       ++i
     ) {
       S_msrDynamic
@@ -21208,8 +21208,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordOtherDynamics.size ()) {
     std::list<S_msrOtherDynamic>::const_iterator i;
     for (
-      i=chordOtherDynamics.begin ();
-      i!=chordOtherDynamics.end ();
+      i = chordOtherDynamics.begin ();
+      i != chordOtherDynamics.end ();
       ++i
     ) {
       S_msrOtherDynamic
@@ -21244,8 +21244,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordArticulations.size ()) {
     std::list<S_msrArticulation>::const_iterator i;
     for (
-      i=chordArticulations.begin ();
-      i!=chordArticulations.end ();
+      i = chordArticulations.begin ();
+      i != chordArticulations.end ();
       ++i
     ) {
       generateChordArticulation ((*i));
@@ -21263,8 +21263,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordWords.size ()) {
     std::list<S_msrWords>::const_iterator i;
     for (
-      i=chordWords.begin ();
-      i!=chordWords.end ();
+      i = chordWords.begin ();
+      i != chordWords.end ();
       ++i
     ) {
 
@@ -21302,8 +21302,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordBeamLinks.size ()) {
     std::list<S_msrChordBeamLink>::const_iterator i;
     for (
-      i=chordBeamLinks.begin ();
-      i!=chordBeamLinks.end ();
+      i = chordBeamLinks.begin ();
+      i != chordBeamLinks.end ();
       ++i
     ) {
       S_msrChordBeamLink chordBeamLink = (*i);
@@ -21347,8 +21347,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordSlurLinks.size ()) {
     std::list<S_msrChordSlurLink>::const_iterator i;
     for (
-      i=chordSlurLinks.begin ();
-      i!=chordSlurLinks.end ();
+      i = chordSlurLinks.begin ();
+      i != chordSlurLinks.end ();
       ++i
     ) {
       S_msrChordSlurLink chordSlurLink = (*i);
@@ -21396,8 +21396,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordTies.size ()) {
     std::list<S_msrTie>::const_iterator i;
     for (
-      i=chordTies.begin ();
-      i!=chordTies.end ();
+      i = chordTies.begin ();
+      i != chordTies.end ();
       ++i
     ) {
       fLilypondCodeStream <<
@@ -21431,8 +21431,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordLigatures.size ()) {
     std::list<S_msrLigature>::const_iterator i;
     for (
-      i=chordLigatures.begin ();
-      i!=chordLigatures.end ();
+      i = chordLigatures.begin ();
+      i != chordLigatures.end ();
       ++i
     ) {
       switch ((*i)->getLigatureKind ()) {
@@ -21458,8 +21458,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordWedges.size ()) {
     std::list<S_msrWedge>::const_iterator i;
     for (
-      i=chordWedges.begin ();
-      i!=chordWedges.end ();
+      i = chordWedges.begin ();
+      i != chordWedges.end ();
       ++i
       ) {
       switch ((*i)->getWedgeKind ()) {
@@ -21487,8 +21487,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordGlissandos.size ()) {
     std::list<S_msrGlissando>::const_iterator i;
     for (
-      i=chordGlissandos.begin ();
-      i!=chordGlissandos.end ();
+      i = chordGlissandos.begin ();
+      i != chordGlissandos.end ();
       ++i
     ) {
       S_msrGlissando glissando = (*i);
@@ -21518,8 +21518,8 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   if (chordSlides.size ()) {
     std::list<S_msrSlide>::const_iterator i;
     for (
-      i=chordSlides.begin ();
-      i!=chordSlides.end ();
+      i = chordSlides.begin ();
+      i != chordSlides.end ();
       ++i
     ) {
       S_msrSlide slide = (*i);
@@ -21547,7 +21547,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
 
   if (chordDalSegnos.size ()) {
     std::list<S_msrDalSegno>::const_iterator i;
-    for (i=chordDalSegnos.begin (); i!=chordDalSegnos.end (); ++i) {
+    for (i = chordDalSegnos.begin (); i != chordDalSegnos.end (); ++i) {
       // generate the dal segno
       fLilypondCodeStream <<
         std::endl <<

@@ -67,7 +67,8 @@ EXP msrGenerationAPIKind msrGenerationAPIKindFromString (
 
       mfAssert (
         __FILE__, __LINE__,
-      false, ss.str ());
+				false,
+				ss.str ());
   }
 
   return result;

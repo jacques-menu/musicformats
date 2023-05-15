@@ -656,7 +656,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
 
     xml2lyService->
       appendPassToService (
@@ -757,7 +757,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
 
     xml2brlService->
       appendPassToService (
@@ -817,7 +817,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
 
     xml2xmlService->
       appendPassToService (
@@ -877,7 +877,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
 
     xml2gmnService->
       appendPassToService (
@@ -936,7 +936,7 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->createAnMSRSqueletonFromTheMXSR ()));
+          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
 
     msdlService->
       appendPassToService (

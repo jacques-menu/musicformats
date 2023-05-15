@@ -72,7 +72,7 @@ class EXP languageFrench : public language
     std::string           createAnMXSRFromAMusicXMLDescriptor () const override;
     std::string           createAnMXSRFromAMusicXMLBuffer () const override;
 
-    std::string           createAnMSRSqueletonFromTheMXSR () const override;
+    std::string           convertTheMXSRIntoAnMSRSqueleton () const override;
 
     std::string           populateTheMSRSqueletonFromMusicXMLData () const override;
 

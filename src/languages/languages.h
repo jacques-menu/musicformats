@@ -113,7 +113,7 @@ class EXP language : public smartable
     virtual std::string   createAnMXSRFromAMusicXMLDescriptor () const;
     virtual std::string   createAnMXSRFromAMusicXMLBuffer () const;
 
-    virtual std::string   createAnMSRSqueletonFromTheMXSR () const;
+    virtual std::string   convertTheMXSRIntoAnMSRSqueleton () const;
 
     virtual std::string   populateTheMSRSqueletonFromMusicXMLData () const;
 

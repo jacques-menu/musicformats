@@ -4021,8 +4021,8 @@ void msrMeasure::removeNoteFromMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrMeasureElement>::iterator i=fMeasureElementsList.begin ();
-    i!=fMeasureElementsList.end ();
+    std::list<S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
+    i != fMeasureElementsList.end ();
     ++i
   ) {
     if ((*i) == note) {
@@ -4142,8 +4142,8 @@ void msrMeasure::removeElementFromMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrMeasureElement>::iterator i=fMeasureElementsList.begin ();
-    i!=fMeasureElementsList.end ();
+    std::list<S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
+    i != fMeasureElementsList.end ();
     ++i
   ) {
     if ((*i) == element) {

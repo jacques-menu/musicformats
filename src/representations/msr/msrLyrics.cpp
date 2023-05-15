@@ -213,7 +213,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
   // append the lyric texts to the syllable clone
   for (
     std::list<std::string>::const_iterator i = fSyllableTextsList.begin ();
-    i!=fSyllableTextsList.end ();
+    i != fSyllableTextsList.end ();
     ++i
   ) {
     newbornClone->
@@ -271,7 +271,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   // append the lyric texts to the syllable deep clone
   for (
     std::list<std::string>::const_iterator i = fSyllableTextsList.begin ();
-    i!=fSyllableTextsList.end ();
+    i != fSyllableTextsList.end ();
     ++i
   ) {
     deepClone->
