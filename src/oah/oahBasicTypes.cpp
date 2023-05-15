@@ -167,7 +167,7 @@ EXP void displayStringPairVector (
 //   char*           argv[],
 //   std::vector<std::string>& stringsVector)
 // {
-//   for (int i=1; i<argc; ++i) {
+//   for (int i = 1; i<argc; ++i) {
 //     stringsVector.push_back (argv [i]);
 //   } // for
 // }
@@ -294,7 +294,7 @@ EXP void displayStringPairVector (
 //   char*           argv[],
 //   std::vector<std::string>& stringsVector)
 // {
-//   for (int i=1; i<argc; ++i) {
+//   for (int i = 1; i<argc; ++i) {
 //     stringsVector.push_back (argv [i]);
 //   } // for
 // }
@@ -7610,7 +7610,7 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
   if (optionsMapElementsNamesListSize) {
     for (
       std::map<std::string, S_oahElement>::const_iterator i = fHandlerNamesToElementsMap.begin ();
-      i!= fHandlerNamesToElementsMap.end ();
+      i !=  fHandlerNamesToElementsMap.end ();
       ++i
     ) {
       optionsMapElementsNamesList.push_back ((*i).first);

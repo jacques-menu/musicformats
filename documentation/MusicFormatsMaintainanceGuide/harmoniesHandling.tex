@@ -700,7 +700,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 
   if (noteHarmoniesList.size ()) {
     std::list<S_msrHarmony>::const_iterator i;
-    for (i=noteHarmoniesList.begin (); i!=noteHarmoniesList.end (); ++i) {
+    for (i = noteHarmoniesList.begin (); i != noteHarmoniesList.end (); ++i) {
       S_msrHarmony harmony = (*i);
 
 #ifdef MF_TRACE_IS_ENABLED

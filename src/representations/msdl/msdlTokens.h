@@ -415,7 +415,7 @@ struct myclass  {
   myclass(std::initializer_list<int> args) {
     std::stringstream ss;
     std::initializer_list<int>::iterator it;  // same as: const int* it
-    for ( it=args.begin(); it!=args.end(); ++it) ss << ' ' << *it;
+    for ( it = args.begin(); it != args.end(); ++it) ss << ' ' << *it;
     str = ss.str();
   }
 };

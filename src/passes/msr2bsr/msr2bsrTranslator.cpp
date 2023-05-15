@@ -2043,8 +2043,8 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
       std::list<S_msrWords>::const_iterator i;
 
       for (
-        i=noteWords.begin ();
-        i!=noteWords.end ();
+        i = noteWords.begin ();
+        i != noteWords.end ();
         ++i
       ) {
         msrPlacementKind

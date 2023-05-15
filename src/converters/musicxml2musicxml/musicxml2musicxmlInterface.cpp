@@ -130,7 +130,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
         originalMxsr,
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2a,
-        gLanguage->createAnMSRSqueletonFromTheMXSR ());
+        gLanguage->convertTheMXSRIntoAnMSRSqueleton ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);

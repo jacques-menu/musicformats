@@ -78,7 +78,7 @@ void msrPathToVoice::initializeFromStaff (const S_msrStaff& staff)
   S_msrPartGroup
     partGroupUpLinkToPartGroup =
       partGroup->
-        getPartGroupUpLinkToPartGroup ();
+        getPartGroupUpLinkToContainingPartGroup ();
 
   // loop to the top-most part group
 // while (partGroupUpLinkToPartGroup) { // JMI v0.9.69
@@ -86,7 +86,7 @@ void msrPathToVoice::initializeFromStaff (const S_msrStaff& staff)
 
     partGroupUpLinkToPartGroup =
       partGroup->
-        getPartGroupUpLinkToPartGroup ();
+        getPartGroupUpLinkToContainingPartGroup ();
 //  } // while
 
   fScore =

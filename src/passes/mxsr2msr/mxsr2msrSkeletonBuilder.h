@@ -34,10 +34,10 @@ struct mxmlPartGroupDescr : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mxmlPartGroupDescr> create (
-                            int            startInputLineNumber,
-                            int            partGroupNumber,
+                            int                   startInputLineNumber,
+                            int                   partGroupNumber,
                             const S_msrPartGroup& partGroup,
-                            int            startPosition);
+                            int                   startPosition);
 
   protected:
 
@@ -45,10 +45,10 @@ struct mxmlPartGroupDescr : public smartable
     // ------------------------------------------------------
 
                           mxmlPartGroupDescr (
-                            int            startInputLineNumber,
-                            int            partGroupNumber,
+                            int                   startInputLineNumber,
+                            int                   partGroupNumber,
                             const S_msrPartGroup& partGroup,
-                            int            startPosition);
+                            int                   startPosition);
 
     virtual               ~mxmlPartGroupDescr ();
 
@@ -448,12 +448,15 @@ virtual void              visitEnd   (S_score_partwise& elt);
                           fCurrentPartGroupBarLineKind;
     int                   fCurrentPartGroupSymbolDefaultX;
 
-    // an implicit outer-most part group has to be created to contain everything,
-    // since there can be parts out of any explicit part group in MusicXML
+    // an implicit outer-most part group has to be created
+    // whenever there is explicit part group in MusicXML to contain the parts
+    Bool                  fThereIsAtLeastOnePartGroup;
+
     S_mxmlPartGroupDescr  fImplicitOuterPartGroupDescr;
     S_msrPartGroup        fImplicitOuterPartGroup;
 
-    void                  createImplicitOuterPartGroup ();
+    void                  createImplicitOuterPartGroupAndAddItToScore ();
+    void                  removeImplicitOuterPartGroupFromScore ();
 
     // part groups numbers can be re-used, they're no identifier
     // we use a map to access them by part group number

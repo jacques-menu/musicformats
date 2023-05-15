@@ -48,10 +48,10 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_mxmlPartGroupDescr mxmlPartGroupDescr::create (
-  int            startInputLineNumber,
-  int            partGroupNumber,
-  const S_msrPartGroup& partGroup,
-  int            startPosition)
+	int                   startInputLineNumber,
+	int                   partGroupNumber,
+	const S_msrPartGroup& partGroup,
+	int                   startPosition)
 {
   mxmlPartGroupDescr* obj = new
     mxmlPartGroupDescr (
@@ -64,10 +64,10 @@ S_mxmlPartGroupDescr mxmlPartGroupDescr::create (
 }
 
 mxmlPartGroupDescr::mxmlPartGroupDescr (
-  int            startInputLineNumber,
-  int            partGroupNumber,
-  const S_msrPartGroup& partGroup,
-  int            startPosition)
+	int                   startInputLineNumber,
+	int                   partGroupNumber,
+	const S_msrPartGroup& partGroup,
+	int                   startPosition)
 {
   fStartInputLineNumber   = startInputLineNumber;
   fStopInputLineNumber   = -1;
@@ -211,11 +211,16 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
     std::list<S_mxmlPartGroupDescr> ());
 
   // create the implicit outer-most part group
-  createImplicitOuterPartGroup ();
+  createImplicitOuterPartGroupAndAddItToScore ();
 }
 
 mxsr2msrSkeletonBuilder::~mxsr2msrSkeletonBuilder ()
-{}
+{
+	if (fThereIsAtLeastOnePartGroup) {
+		// the part group is superflous, remove it
+		removeImplicitOuterPartGroupFromScore ();
+	}
+}
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::browseMxsr (
@@ -1044,7 +1049,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
         fCurrentPartGroupAbbreviation,
         fCurrentPartGroupSymbolKind,
         fCurrentPartGroupSymbolDefaultX,
-        msrPartGroupImplicitKind::kPartGroupImplicitOuterNo,
+        msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo,
         fCurrentPartGroupBarLineKind,
         nullptr, // partGroupUpLinkToPartGroup will be set upon 'stop'
         fMsrScore);
@@ -1061,7 +1066,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
         partGroupToBeStarted,
         fCurrentPartsPosition) ;
 
-  // register it in the part groups data
+  // register it in the part descrs data
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     std::stringstream ss;
@@ -1191,7 +1196,7 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
 #endif // MF_TRACE_IS_ENABLED
 
   partGroupToBeStopped->
-    setPartGroupUpLinkToPartGroup (
+    setPartGroupUpLinkToContainingPartGroup (
     	inputLineNumber,
       containingPartGroup);
 
@@ -1216,12 +1221,12 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
 #endif // MF_TRACE_IS_ENABLED
 
   containingPartGroup->
-    appendSubPartGroupToPartGroup (
+    appendNestedPartGroupToPartGroup (
       partGroupToBeStopped);
 }
 
 //________________________________________________________________________
-void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
+void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroupAndAddItToScore ()
 {
   // an implicit outer-most part group has to be created to contain everything,
   // since there can be parts out of any explicit part group in MusicXML
@@ -1258,14 +1263,19 @@ void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
   ++fPartGroupsCounter;
 
   fImplicitOuterPartGroup =
-    msrPartGroup::createSelfContainedPartGroupAndAppendItToScore (
+		msrPartGroup::create (
+      K_MF_INPUT_LINE_UNKNOWN_,
       fCurrentPartGroupNumber,
       fPartGroupsCounter,
-      "*** Implicit Outer-Most PartGroup ***", // partGroupName
-      "",                   								 	 // PartGroupNameDisplayText
-      "",                   								   // partGroupAccidentalText
-      "Impl. PartGroup",           			       // partGroupAbbreviation
+      "*** Implicit Outer-Most PartGroup ***", 			// partGroupName
+      "",                   								 	 			// PartGroupNameDisplayText
+      "",                   								   			// partGroupAccidentalText
+      "Impl. PartGroup",           			       			// partGroupAbbreviation
+      msrPartGroupSymbolKind::kPartGroupSymbolNone, // partGroupSymbolKind
+      0,                                            // partGroupSymbolDefaultX,
+      msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes,
       msrPartGroupBarLineKind::kPartGroupBarLineYes,
+      nullptr,                                      // partGroupUpLinkToPartGroup
       fMsrScore);
 
   // append it to the MSR score
@@ -1327,6 +1337,13 @@ void mxsr2msrSkeletonBuilder::createImplicitOuterPartGroup ()
       "AFTER creating fImplicitOuterPartGroup");
   }
 #endif // MF_TRACE_IS_ENABLED
+}
+
+void mxsr2msrSkeletonBuilder::removeImplicitOuterPartGroupFromScore ()
+{
+  fMsrScore->
+    removePartGroupFromScore (
+      fImplicitOuterPartGroup);
 }
 
 //______________________________________________________________________________
@@ -3117,6 +3134,9 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+	// register that there is at least a part group
+	fThereIsAtLeastOnePartGroup = true;
+
   // part group number
 
   fCurrentPartGroupNumber =
@@ -4224,7 +4244,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
 
       mfAssert (
         __FILE__, __LINE__,
-      false, ss.str ());
+				false,
+				ss.str ());
   }
 
   if (fOnGoingNote) { // JMI

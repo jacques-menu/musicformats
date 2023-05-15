@@ -199,8 +199,8 @@ void msrAfterGraceNotesGroupContents::browseData (basevisitor* v)
   std::list<S_msrMeasureElement>::const_iterator i;
 
   for (
-    i=fAfterGraceNotesGroupContentsNotesList.begin ();
-    i!=fAfterGraceNotesGroupContentsNotesList.end ();
+    i = fAfterGraceNotesGroupContentsNotesList.begin ();
+    i != fAfterGraceNotesGroupContentsNotesList.end ();
     ++i
   ) {
     // browse the note

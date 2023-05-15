@@ -185,7 +185,7 @@ std::string languageFrench::createAnMXSRFromAMusicXMLBuffer () const
   return "Création d'un MXSR (arbre MusicXML) à partir d'un tampon MusicXML";
 }
 
-std::string languageFrench::createAnMSRSqueletonFromTheMXSR () const
+std::string languageFrench::convertTheMXSRIntoAnMSRSqueleton () const
 {
   return "Création d'un squelette de MSR à partir du MXSR";
 }

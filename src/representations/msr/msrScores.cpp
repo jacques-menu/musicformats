@@ -235,10 +235,58 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
       ss.str ());
   }
 
-  // register it in this score
+  // register partGroup in this score
   fScorePartGroupsSet.insert (partGroup);
 
   fPartGroupsList.push_back (partGroup);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTracePartGroups ()) {
+    displayPartGroupsList (
+      "addPartGroupToScore()");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+//   if (fPartGroupsList.size () == 2) abort (); // JMI v0.9.69
+}
+
+void msrScore::removePartGroupFromScore (const S_msrPartGroup& partGroup)
+{
+  if (fScorePartGroupsSet.count (partGroup)) {
+    std::stringstream ss;
+
+    ss <<
+      "part group '" <<
+      partGroup->getPartGroupCombinedName () <<
+      "' is not present in this score";
+
+    msrInternalError (
+      gServiceRunData->getInputSourceName (),
+      partGroup->getInputStartLineNumber (),
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+
+  // unregister partGroup in this score
+  fScorePartGroupsSet.erase (partGroup);
+
+  for (
+    std::list<S_msrPartGroup>::iterator i = fPartGroupsList.begin ();
+    i != fPartGroupsList.end ();
+    ++i
+  ) {
+    if ((*i) == partGroup) {
+      // found partGroup, erase it
+      i = fPartGroupsList.erase (i);
+    }
+  } // for
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTracePartGroups ()) {
+    displayPartGroupsList (
+      "removePartGroupFromScore()");
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void msrScore::appendCreditToScore (
@@ -508,6 +556,59 @@ void msrScore::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
+void msrScore::displayPartGroupsList (
+  const std::string context)
+{
+  size_t partGroupsListSize = fPartGroupsList.size ();
+
+  gLog <<
+    std::endl <<
+    ">>++++++++++++++++ " <<
+    "The part groups list contains " <<
+    mfSingularOrPlural (
+      partGroupsListSize, "element", "elements") <<
+    " (" << context << "):" <<
+    std::endl;
+
+  if (partGroupsListSize) {
+    std::list<S_msrPartGroup>::const_iterator
+      iBegin = fPartGroupsList.begin (),
+      iEnd   = fPartGroupsList.end (),
+      i      = iBegin;
+
+    S_msrPartGroup partGroup = (*i);
+
+    ++gIndenter;
+
+    int n = partGroupsListSize;
+    for ( ; ; ) {
+      gLog <<
+        "v (" << n << ")" <<
+        std::endl;
+
+      ++gIndenter;
+      gLog <<
+        gTab << partGroup->asString () <<
+        std::endl;
+      --gIndenter;
+
+      --n;
+
+      if (++i == iEnd) break;
+
+//       gLog << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+
+  gLog <<
+    " <<++++++++++++++++ " <<
+    std::endl << std::endl;
+
+//   if (partGroupsListSize == 2) abort (); // JMI v0.9.69
+}
+
 void msrScore::printFull (std::ostream& os) const
 {
   os <<
@@ -679,7 +780,13 @@ void msrScore::printFull (std::ostream& os) const
   }
 
   // print the part groups if any
+  os <<
+    "fPartGroupsList contains " <<
+    mfSingularOrPlural (
+      partGroupsListSize, "element", "elements");
   if (partGroupsListSize) {
+    ++gIndenter;
+
     std::list<S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
@@ -687,12 +794,14 @@ void msrScore::printFull (std::ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      // no std::endl here
+      os << std::endl;
     } // for
+
+    --gIndenter;
   }
   else {
     os <<
-      "There are no part groups in the list" <<
+      ": [EMPTY]" <<
       std::endl;
   }
 
@@ -767,7 +876,7 @@ void msrScore::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "CreditsList";
+    "fCreditsList";
   if (creditsListSize) {
     os << std::endl;
     ++gIndenter;
@@ -794,20 +903,30 @@ void msrScore::print (std::ostream& os) const
   os << std::endl;
 
   // print the part groups if any
+  os <<
+    "fPartGroupsList contains " <<
+    mfSingularOrPlural (
+      partGroupsListSize, "element", "elements");
   if (partGroupsListSize) {
+    ++gIndenter;
+
     std::list<S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
     for ( ; ; ) {
+      os << std::endl << "FAA before partGroup" << std::endl;
       os << (*i);
+      os << std::endl << "FOO after partGroup" << std::endl;
       if (++i == iEnd) break;
-      // no std::endl here
+      os << std::endl;
     } // for
+
+    --gIndenter;
   }
   else {
     os <<
-      "There are no part groups in the list" <<
+      ": [EMPTY]" <<
       std::endl;
   }
 

@@ -49,7 +49,7 @@ S_msrPartGroup msrPartGroup::create (
   int                      partGroupSymbolDefaultX,
   msrPartGroupImplicitKind partGroupImplicitKind,
   msrPartGroupBarLineKind  partGroupBarLineKind,
-  const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+  const S_msrPartGroup&    partGroupUpLinkToContainingPartGroup,
   const S_msrScore&        partGroupUpLinkToScore)
 {
   msrPartGroup* obj =
@@ -65,44 +65,9 @@ S_msrPartGroup msrPartGroup::create (
       partGroupSymbolDefaultX,
       partGroupImplicitKind,
       partGroupBarLineKind,
-      partGroupUpLinkToPartGroup,
+      partGroupUpLinkToContainingPartGroup,
       partGroupUpLinkToScore);
   assert (obj != nullptr);
-  return obj;
-}
-
-S_msrPartGroup msrPartGroup::createSelfContainedPartGroupAndAppendItToScore (
-  int                     partGroupNumber,
-  int                     partGroupAbsoluteNumber,
-  const std::string&      partGroupName,
-  const std::string&      partGroupNameDisplayText,
-  const std::string&      partGroupAccidentalText,
-  const std::string&      partGroupAbbreviation,
-  msrPartGroupBarLineKind partGroupBarLineKind,
-  const S_msrScore&       partGroupUpLinkToScore)
-{
-  msrPartGroup* obj =
-    new msrPartGroup (
-      K_MF_INPUT_LINE_UNKNOWN_,
-      partGroupNumber,
-      partGroupAbsoluteNumber,
-      partGroupName,
-      partGroupNameDisplayText,
-      partGroupAccidentalText,
-      partGroupAbbreviation,
-      msrPartGroupSymbolKind::kPartGroupSymbolNone, // partGroupSymbolKind
-      0,                                  // partGroupSymbolDefaultX,
-      msrPartGroupImplicitKind::kPartGroupImplicitOuterYes,
-      partGroupBarLineKind,
-      nullptr,                            // partGroupUpLinkToPartGroup,
-                                          // will be set below
-      partGroupUpLinkToScore);
-  assert (obj != nullptr);
-
-  // the implicit outer-most part group is the outer-most one: JMI v0.9.69
-  // set its group upLink to point to itself
-  obj->fPartGroupUpLinkToPartGroup = obj;
-
   return obj;
 }
 
@@ -111,7 +76,7 @@ S_msrPartGroup msrPartGroup::create (
   int                   partGroupNumber,
   int                   partGroupAbsoluteNumber,
   const std::string&    partGroupName,
-  const S_msrPartGroup& partGroupUpLinkToPartGroup,
+  const S_msrPartGroup& partGroupUpLinkToContainingPartGroup,
   const S_msrScore&     partGroupUpLinkToScore)
 {
   msrPartGroup* obj =
@@ -120,7 +85,7 @@ S_msrPartGroup msrPartGroup::create (
       partGroupNumber,
       partGroupAbsoluteNumber,
       partGroupName,
-      partGroupUpLinkToPartGroup,
+      partGroupUpLinkToContainingPartGroup,
       partGroupUpLinkToScore);
   assert (obj != nullptr);
   return obj;
@@ -138,14 +103,14 @@ msrPartGroup::msrPartGroup (
   int                      partGroupSymbolDefaultX,
   msrPartGroupImplicitKind partGroupImplicitKind,
   msrPartGroupBarLineKind  partGroupBarLineKind,
-  const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+  const S_msrPartGroup&    partGroupUpLinkToContainingPartGroup,
   const S_msrScore&        partGroupUpLinkToScore)
     : msrPartGroupElement (inputLineNumber)
 {
-  // no sanity check on partGroupUpLinkToPartGroup here,
+  // no sanity check on partGroupUpLinkToContainingPartGroup here,
   // it will be set after all 'real' (i.e. not implicit)
-  // part groups and part have been analyzed
-  fPartGroupUpLinkToPartGroup = partGroupUpLinkToPartGroup;
+  // part groups and part have been analyzed JMI v0.9.69
+  fPartGroupUpLinkToContainingPartGroup = partGroupUpLinkToContainingPartGroup;
 
 /* JMI v0.9.69
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -157,13 +122,13 @@ msrPartGroup::msrPartGroup (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
-  fPartGroupUpLinkToScore     = partGroupUpLinkToScore;
+  fPartGroupUpLinkToScore = partGroupUpLinkToScore;
 
   // other fields
-  fPartGroupNumber          = partGroupNumber;
-  fPartGroupAbsoluteNumber  = partGroupAbsoluteNumber;
+  fPartGroupNumber         = partGroupNumber;
+  fPartGroupAbsoluteNumber = partGroupAbsoluteNumber;
 
-  fPartGroupName            = partGroupName;
+  fPartGroupName = partGroupName;
 
   size_t partGroupNameLength =
     fPartGroupName.size ();
@@ -196,10 +161,9 @@ msrPartGroup::msrPartGroup (
     std::stringstream ss;
 
     ss <<
-      "--------------------------------------------" <<
-      std::endl <<
       "Creating part group '" << fPartGroupNumber << '\'' <<
       ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
+      ", nested in part group '" << fPartGroupUpLinkToContainingPartGroup << '\'' <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -214,14 +178,14 @@ msrPartGroup::msrPartGroup (
   int                   partGroupNumber,
   int                   partGroupAbsoluteNumber,
   const std::string&    partGroupName,
-  const S_msrPartGroup& partGroupUpLinkToPartGroup,
+  const S_msrPartGroup& partGroupUpLinkToContainingPartGroup,
   const S_msrScore&     partGroupUpLinkToScore)
     : msrPartGroupElement (inputLineNumber)
 {
-  // no sanity check on partGroupUpLinkToPartGroup here,
+  // no sanity check on partGroupUpLinkToContainingPartGroup here,
   // it will be set after all 'real' (i.e. not the implicit outer-most)
-  // part groups and parts have been analyzed
-  fPartGroupUpLinkToPartGroup = partGroupUpLinkToPartGroup;
+  // part groups and parts have been analyzed JMI v0.9.69
+  fPartGroupUpLinkToContainingPartGroup = partGroupUpLinkToContainingPartGroup;
 
 /* JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -274,10 +238,9 @@ msrPartGroup::msrPartGroup (
     std::stringstream ss;
 
     ss <<
-      "--------------------------------------------" <<
-      std::endl <<
       "Creating part group '" << fPartGroupNumber << '\'' <<
       ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
+      ", nested in part group '" << fPartGroupUpLinkToContainingPartGroup << '\'' <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -291,7 +254,7 @@ msrPartGroup::~msrPartGroup ()
 {}
 
 S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
-  const S_msrPartGroup& partGroupClone,
+  const S_msrPartGroup& containingartGroupClone,
   const S_msrScore&     scoreClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -299,9 +262,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "--------------------------------------------" <<
-      std::endl <<
-      "Creating a newborn clone part group " <<
+      "Creating a part group newborn clone of " <<
       getPartGroupCombinedName ();
 
     gWaeHandler->waeTrace (
@@ -310,15 +271,15 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // don't check partGroupClone against 0, since the partGroup stack JMI
+  // don't check containingartGroupClone against 0, since the partGroup stack JMI
   // that it comes from may be empty
 /* JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    partGroupClone != nullptr,
-    "partGroupClone is null");
+    containingartGroupClone != nullptr,
+    "containingartGroupClone is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
@@ -344,7 +305,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
         fPartGroupSymbolDefaultX,
         fPartGroupImplicitKind,
         fPartGroupBarLineKind,
-        partGroupClone,
+        containingartGroupClone,
         scoreClone);
 
   newbornClone->fPartGroupInstrumentName =
@@ -353,7 +314,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   return newbornClone;
 }
 
-void msrPartGroup::setPartGroupUpLinkToPartGroup (
+void msrPartGroup::setPartGroupUpLinkToContainingPartGroup (
   int                   inputLineNumber,
   const S_msrPartGroup& containingPartGroup)
 {
@@ -389,15 +350,15 @@ void msrPartGroup::setPartGroupUpLinkToPartGroup (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 //     switch (fPartGroupImplicitKind) { JMI v0.9.69
-//       case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
-//         result = "kPartGroupImplicitOuterYes";
+//       case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
+//         result = "kPartGroupImplicitOuterMostYes";
 //         break;
-//       case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
-//         result = "kPartGroupImplicitOuterNo";
+//       case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
+//         result = "kPartGroupImplicitOuterMostNo";
 //         break;
 //     } // switch
 
-  fPartGroupUpLinkToPartGroup =
+  fPartGroupUpLinkToContainingPartGroup =
     containingPartGroup;
 }
 
@@ -501,122 +462,122 @@ void msrPartGroup::setPartGroupInstrumentName (
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 // }
 
-S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
-  int                inputLineNumber,
-  const std::string& partID)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    partID.size () > 0,
-    "partID is empty");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  // has this partID already been added to this part?
-  if (fPartGroupPartsMap.count (partID)) {
-    std::stringstream ss;
-
-    ss <<
-      "partID \"" << partID <<
-      "\" already exists in part group " <<
-      getPartGroupCombinedName ();
-
-    msrWarning ( // JMI
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      ss.str ());
-
-    return fPartGroupPartsMap [partID];
-  }
-
-  // create the part
-  S_msrPart
-    part =
-      msrPart::create (
-        inputLineNumber,
-        partID,
-        this);
-
-  // register it in this part group
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTracePartGroups ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Appending part " <<
-      part->getPartCombinedName () <<
-      " to part group " <<
-      asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // register part in part group
-  fPartGroupPartsMap [partID] = part;
-
-  fPartGroupElementsList.push_back (part);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTracePartGroupsDetails ()) {
-    std::stringstream ss;
-
-    ss <<
-      std::endl <<
-      "After appendPartToPartGroupByItsID, fPartGroupPartsMap contains:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    for (
-      std::map<std::string, S_msrPart>::const_iterator i = fPartGroupPartsMap.begin ();
-      i != fPartGroupPartsMap.end ();
-      ++i
-    ) {
-      std::stringstream ss;
-
-      ss <<
-        "\"" << (*i).first << "\" --% --> " <<
-        (*i).second->
-          getPartCombinedName () <<
-        std::endl;
-    } // for
-
-    --gIndenter;
-
-    ss <<
-      "After appendPartToPartGroupByItsID, fPartGroupElementsList contains:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    if (fPartGroupElementsList.size ()) {
-      std::list<S_msrPartGroupElement>::const_iterator
-        iBegin = fPartGroupElementsList.begin (),
-        iEnd   = fPartGroupElementsList.end (),
-        i      = iBegin;
-
-      for ( ; ; ) {
-        ss << (*i);
-        if (++i == iEnd) break;
-//         gLog << std::endl; // JMI v0.9.69
-      } // for
-    }
-
-    --gIndenter;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // return the part
-  return part;
-}
+// S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
+//   int                inputLineNumber,
+//   const std::string& partID)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     partID.size () > 0,
+//     "partID is empty");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   // has this partID already been added to this part?
+//   if (fPartGroupPartsMap.count (partID)) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "partID \"" << partID <<
+//       "\" already exists in part group " <<
+//       getPartGroupCombinedName ();
+//
+//     msrWarning ( // JMI
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       ss.str ());
+//
+//     return fPartGroupPartsMap [partID];
+//   }
+//
+//   // create the part
+//   S_msrPart
+//     part =
+//       msrPart::create (
+//         inputLineNumber,
+//         partID,
+//         this);
+//
+//   // register it in this part group
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTracePartGroups ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Appending part " <<
+//       part->getPartCombinedName () <<
+//       " to part group " <<
+//       asString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // register part in part group
+//   fPartGroupPartsMap [partID] = part;
+//
+//   fPartGroupElementsList.push_back (part);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTracePartGroupsDetails ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       std::endl <<
+//       "After appendPartToPartGroupByItsID, fPartGroupPartsMap contains:" <<
+//       std::endl;
+//
+//     ++gIndenter;
+//
+//     for (
+//       std::map<std::string, S_msrPart>::const_iterator i = fPartGroupPartsMap.begin ();
+//       i != fPartGroupPartsMap.end ();
+//       ++i
+//     ) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "\"" << (*i).first << "\" --% --> " <<
+//         (*i).second->
+//           getPartCombinedName () <<
+//         std::endl;
+//     } // for
+//
+//     --gIndenter;
+//
+//     ss <<
+//       "After appendPartToPartGroupByItsID, fPartGroupElementsList contains:" <<
+//       std::endl;
+//
+//     ++gIndenter;
+//
+//     if (fPartGroupElementsList.size ()) {
+//       std::list<S_msrPartGroupElement>::const_iterator
+//         iBegin = fPartGroupElementsList.begin (),
+//         iEnd   = fPartGroupElementsList.end (),
+//         i      = iBegin;
+//
+//       for ( ; ; ) {
+//         ss << (*i);
+//         if (++i == iEnd) break;
+// //         gLog << std::endl; // JMI v0.9.69
+//       } // for
+//     }
+//
+//     --gIndenter;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // return the part
+//   return part;
+// }
 
 void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 {
@@ -716,16 +677,16 @@ void msrPartGroup::removePartFromPartGroup (
 }
 
 void msrPartGroup::prependSubPartGroupToPartGroup (
-  const S_msrPartGroup& subPartGroup)
+  const S_msrPartGroup& nestedPartGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     std::stringstream ss;
 
     ss <<
-      "Prepending (sub-)part group " <<
-      subPartGroup->getPartGroupNumber () <<
-      " to part group " << getPartGroupNumber ()  << std::endl;
+      "Prepending nested part group " <<
+      nestedPartGroup->asString () <<
+      " to part group " << asString ()  << std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -746,24 +707,52 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
 
   mfAssert (
     __FILE__, __LINE__,
-    this != subPartGroup,
+    this != nestedPartGroup,
     ss.str ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fPartGroupElementsList.push_front (subPartGroup);
+  fPartGroupElementsList.push_front (nestedPartGroup);
+
+  switch (fPartGroupImplicitKind) {
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
+      switch (nestedPartGroup->getPartGroupImplicitKind ()) {
+        case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
+          {
+            std::stringstream ss;
+
+            ss <<
+              "Prepending implicit outer-most part group " <<
+              nestedPartGroup->asString () <<
+              " to outer-most part group " <<
+              asString () <<
+              ", line " << nestedPartGroup->getInputStartLineNumber ();
+
+              mfAssert (
+                __FILE__, __LINE__,
+                false,
+                ss.str ());
+            }
+          break;
+        case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
+          break;
+      } // switch
+      break;
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
+      break;
+  } // switch
 }
 
-void msrPartGroup::appendSubPartGroupToPartGroup (
-  const S_msrPartGroup& subPartGroup)
+void msrPartGroup::appendNestedPartGroupToPartGroup (
+  const S_msrPartGroup& nestedPartGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending (sub-)part group " <<
-      subPartGroup->getPartGroupNumber () <<
-      " to part group " << getPartGroupNumber ()  << std::endl;
+      "Appending nested part group " <<
+      nestedPartGroup->asString () <<
+      " to part group " << asString ()  << std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -784,21 +773,55 @@ void msrPartGroup::appendSubPartGroupToPartGroup (
 
   mfAssert (
     __FILE__, __LINE__,
-    this != subPartGroup,
+    this != nestedPartGroup,
     ss.str ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fPartGroupElementsList.push_back (subPartGroup);
+  fPartGroupElementsList.push_back (nestedPartGroup);
+
+  switch (fPartGroupImplicitKind) {
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
+      switch (nestedPartGroup->getPartGroupImplicitKind ()) {
+        case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
+          {
+            std::stringstream ss;
+
+            ss <<
+              "Appending implicit outer-most part group " <<
+              nestedPartGroup->asString () <<
+              " to outer-most part group " <<
+              asString () <<
+              ", line " << nestedPartGroup->getInputStartLineNumber ();
+
+              mfAssert (
+                __FILE__, __LINE__,
+                false,
+                ss.str ());
+            }
+          break;
+        case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
+          break;
+      } // switch
+      break;
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
+      break;
+  } // switch
 }
 
 void msrPartGroup::printPartGroupElementsListFull (
   int      inputLineNumber,
   std::ostream& os) const
 {
-  os <<
-    "fPartGroupElementsList";
+  size_t
+    partGroupElementsListSize =
+      fPartGroupElementsList.size ();
 
-  if (fPartGroupElementsList.size ()) {
+  os <<
+    "fPartGroupElementsList contains " <<
+    mfSingularOrPlural (
+      partGroupElementsListSize, "element", "elements");
+
+  if (partGroupElementsListSize) {
     os << std::endl;
 
     std::list<S_msrPartGroupElement>::const_iterator
@@ -874,10 +897,16 @@ void msrPartGroup::printPartGroupElementsList (
   int      inputLineNumber,
   std::ostream& os) const
 {
-  os <<
-    "fPartGroupElementsList";
+  size_t
+    partGroupElementsListSize =
+     fPartGroupElementsList.size ();
 
-  if (fPartGroupElementsList.size ()) {
+  os <<
+    "fPartGroupElementsList contains " <<
+    mfSingularOrPlural (
+      partGroupElementsListSize, "element", "elements");
+
+  if (partGroupElementsListSize) {
     os << std::endl;
 
     std::list<S_msrPartGroupElement>::const_iterator
@@ -889,11 +918,13 @@ void msrPartGroup::printPartGroupElementsList (
       S_msrElement
         element = (*i);
 
+      os << std::endl << "FII before partGroup element" << std::endl;
+
       if (
         S_msrPartGroup
           nestedPartGroup =
             dynamic_cast<msrPartGroup*>(&(*element))
-        ) {
+      ) {
         // this is a part group
 //         gLog << // JMI v0.9.67
 //           nestedPartGroup->
@@ -911,7 +942,7 @@ void msrPartGroup::printPartGroupElementsList (
         S_msrPart
           part =
             dynamic_cast<msrPart*>(&(*element))
-        ) {
+      ) {
         // this is a part
         ++gIndenter;
 
@@ -935,8 +966,11 @@ void msrPartGroup::printPartGroupElementsList (
           ss.str ());
       }
 
+      os << std::endl << "FUU after partGroup element" << std::endl;
+
       if (++i == iEnd) break;
-   // JMI   os << std::endl;
+
+      os << std::endl; // JMI v0.9.69
     } // for
   }
 
@@ -1212,11 +1246,11 @@ std::string msrPartGroupImplicitKindAsString (
   std::string result;
 
   switch (partGroupImplicitKind) {
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterYes:
-      result = "kPartGroupImplicitOuterYes";
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
+      result = "kPartGroupImplicitOuterMostYes";
       break;
-    case msrPartGroupImplicitKind::kPartGroupImplicitOuterNo:
-      result = "kPartGroupImplicitOuterNo";
+    case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
+      result = "kPartGroupImplicitOuterMostNo";
       break;
   } // switch
 
@@ -1346,11 +1380,11 @@ void msrPartGroup::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartGroupUpLinkToPartGroup" << ": ";
-  if (fPartGroupUpLinkToPartGroup) {
+    "fPartGroupUpLinkToContainingPartGroup" << ": ";
+  if (fPartGroupUpLinkToContainingPartGroup) {
     os <<
       "\"" <<
-      fPartGroupUpLinkToPartGroup->
+      fPartGroupUpLinkToContainingPartGroup->
         getPartGroupCombinedName () <<
       "\"";
   }
@@ -1449,7 +1483,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   ++simultaneousCalls;
 
-  if (simultaneousCalls == 100) abort (); // JMI v0.9.69 1 for the implicit outer-most part group...
+//   if (simultaneousCalls == 100) abort (); // JMI v0.9.69 for the implicit outer-most part group...
 
   os <<
     "[PartGroup" " \"" << getPartGroupCombinedName () <<

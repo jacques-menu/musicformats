@@ -28,8 +28,8 @@ namespace MusicFormats
 // data types
 
 enum class msrPartGroupImplicitKind { // an MSR concept, not present in MusicXML
-    kPartGroupImplicitOuterYes,
-    kPartGroupImplicitOuterNo
+    kPartGroupImplicitOuterMostYes,
+    kPartGroupImplicitOuterMostNo
 };
 
 std::string msrPartGroupImplicitKindAsString (
@@ -106,21 +106,11 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
-                            const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+                            const S_msrPartGroup&    partGroupUpLinkToContainingPartGroup,
                             const S_msrScore&        partGroupUpLinkToScore);
 
-    static SMARTP<msrPartGroup> createSelfContainedPartGroupAndAppendItToScore (
-                            int                     partGroupNumber,
-                            int                     partGroupAbsoluteNumber,
-                            const std::string&      partGroupName,
-                            const std::string&      partGroupNameDisplayText,
-                            const std::string&      partGroupAccidentalText,
-                            const std::string&      partGroupAbbreviation,
-                            msrPartGroupBarLineKind partGroupBarLineKind,
-                            const S_msrScore&       partGroupUpLinkToScore);
-
     SMARTP<msrPartGroup> createPartGroupNewbornClone (
-                            const S_msrPartGroup& partGroupClone,
+                            const S_msrPartGroup& containingartGroupClone,
                               // the upLink for nested part groups
                             const S_msrScore&     scoreClon);
 
@@ -132,7 +122,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                   partGroupNumber,
                             int                   partGroupAbsoluteNumber,
                             const std::string&    partGroupName,
-                            const S_msrPartGroup& partGroupUpLinkToPartGroup,
+                            const S_msrPartGroup& partGroupUpLinkToContainingPartGroup,
                             const S_msrScore&     partGroupUpLinkToScore);
 
   protected:
@@ -152,7 +142,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
-                            const S_msrPartGroup&    partGroupUpLinkToPartGroup,
+                            const S_msrPartGroup&    partGroupUpLinkToContainingPartGroup,
                             const S_msrScore&        partGroupUpLinkToScore);
 
                           msrPartGroup (
@@ -160,7 +150,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                   partGroupNumber,
                             int                   partGroupAbsoluteNumber,
                             const std::string&    partGroupName,
-                            const S_msrPartGroup& partGroupUpLinkToPartGroup,
+                            const S_msrPartGroup& partGroupUpLinkToContainingPartGroup,
                             const S_msrScore&     partGroupUpLinkToScore);
 
     virtual               ~msrPartGroup ();
@@ -171,12 +161,12 @@ class EXP msrPartGroup : public msrPartGroupElement
     // ------------------------------------------------------
 
     // upLinks
-    void                  setPartGroupUpLinkToPartGroup (
+    void                  setPartGroupUpLinkToContainingPartGroup (
                             int                   inputLineNumber,
                             const S_msrPartGroup& containingPartGroup);
 
-    S_msrPartGroup        getPartGroupUpLinkToPartGroup () const
-                              { return fPartGroupUpLinkToPartGroup; }
+    S_msrPartGroup        getPartGroupUpLinkToContainingPartGroup () const
+                              { return fPartGroupUpLinkToContainingPartGroup; }
 
     S_msrScore            getPartGroupUpLinkToScore () const
                               { return fPartGroupUpLinkToScore; }
@@ -258,9 +248,9 @@ class EXP msrPartGroup : public msrPartGroupElement
     // public services
     // ------------------------------------------------------
 
-    S_msrPart             appendPartToPartGroupByItsPartID ( // JMI superflous
-                            int                inputLineNumber,
-                            const std::string& partID);
+//     S_msrPart             appendPartToPartGroupByItsPartID ( // JMI superflous v0.9.69
+//                             int                inputLineNumber,
+//                             const std::string& partID);
 
     void                  appendPartToPartGroup (S_msrPart part);
 
@@ -269,10 +259,10 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const S_msrPart& partToBeRemoved);
 
     void                  prependSubPartGroupToPartGroup (
-                            const S_msrPartGroup& subPartGroup);
+                            const S_msrPartGroup& nestedPartGroup);
 
-    void                  appendSubPartGroupToPartGroup (
-                            const S_msrPartGroup& subPartGroup);
+    void                  appendNestedPartGroupToPartGroup (
+                            const S_msrPartGroup& nestedPartGroup);
 
     S_msrPart             fetchPartFromPartGroupByItsPartID (
                             int                inputLineNumber,
@@ -334,7 +324,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // upLinks
 
-    S_msrPartGroup        fPartGroupUpLinkToPartGroup;
+    S_msrPartGroup        fPartGroupUpLinkToContainingPartGroup;
                             // part groups can be nested
 
     S_msrScore            fPartGroupUpLinkToScore;
@@ -381,7 +371,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     std::map<std::string, S_msrPart>
                           fPartGroupPartsMap;
 
-    // allowing for both parts and (sub-)part groups as elements
+    // allowing for both parts and nested part groups as elements
 
     std::list<S_msrPartGroupElement>
                           fPartGroupElementsList;

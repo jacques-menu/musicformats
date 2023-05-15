@@ -672,8 +672,8 @@ S_msrVoice mxsr2msrTranslator::fetchVoiceFromCurrentPart (
       "\"" <<
       ", line " << inputLineNumber;
 
-    gLog << ss.str () << std::endl;
-    abort (); //JMI v0.9.68
+//     gLog << ss.str () << std::endl;
+//     abort (); //JMI v0.9.68
 
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -3635,9 +3635,9 @@ If the cancel attribute is
 
     int counter = 0;
     for (
-      std::vector<S_msrHumdrumScotKeyItem>::const_iterator i=
+      std::vector<S_msrHumdrumScotKeyItem>::const_iterator i =
         fCurrentHumdrumScotKeyItemsVector.begin ();
-      i!=fCurrentHumdrumScotKeyItemsVector.end ();
+      i != fCurrentHumdrumScotKeyItemsVector.end ();
       ++i
   ) {
       gLog <<
@@ -3856,9 +3856,9 @@ S_msrKey mxsr2msrTranslator::handleHumdrumScotKey (
   // populate the key with the Humdrum/Scot items
   if (fCurrentHumdrumScotKeyItemsVector.size ()) {
     for (
-      std::vector<S_msrHumdrumScotKeyItem>::const_iterator i=
+      std::vector<S_msrHumdrumScotKeyItem>::const_iterator i =
         fCurrentHumdrumScotKeyItemsVector.begin ();
-      i!=fCurrentHumdrumScotKeyItemsVector.end ();
+      i != fCurrentHumdrumScotKeyItemsVector.end ();
       ++i
   ) {
       key->
@@ -4238,7 +4238,7 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
     for (
       std::vector<S_msrTimeSignatureItem>::const_iterator i =
         fCurrentTimeSignatureItemsVector.begin ();
-      i!=fCurrentTimeSignatureItemsVector.end ();
+      i != fCurrentTimeSignatureItemsVector.end ();
       ++i
   ) {
       fCurrentTimeSignature->
@@ -9786,7 +9786,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     // append the lyric texts to the syllable
     for (
       std::list<std::string>::const_iterator i = fCurrentLyricTextsList.begin ();
-      i!=fCurrentLyricTextsList.end ();
+      i != fCurrentLyricTextsList.end ();
       ++i
     ) {
       syllable->
@@ -19803,8 +19803,8 @@ void mxsr2msrTranslator::copyNoteDynamicsToChord (
 
   std::list<S_msrDynamic>::const_iterator i;
   for (
-    i=noteDynamics.begin ();
-    i!=noteDynamics.end ();
+    i = noteDynamics.begin ();
+    i != noteDynamics.end ();
     ++i
   ) {
 
@@ -19843,8 +19843,8 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
 
   std::list<S_msrOtherDynamic>::const_iterator i;
   for (
-    i=noteOtherDynamics.begin ();
-    i!=noteOtherDynamics.end ();
+    i = noteOtherDynamics.begin ();
+    i != noteOtherDynamics.end ();
     ++i
   ) {
 
@@ -19883,8 +19883,8 @@ void mxsr2msrTranslator::copyNoteWordsToChord (
 
   std::list<S_msrWords>::const_iterator i;
   for (
-    i=noteWords.begin ();
-    i!=noteWords.end ();
+    i = noteWords.begin ();
+    i != noteWords.end ();
     ++i
   ) {
 
@@ -19958,8 +19958,8 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
 
   std::list<S_msrBeam>::const_iterator i;
   for (
-    i=noteBeams.begin ();
-    i!=noteBeams.end ();
+    i = noteBeams.begin ();
+    i != noteBeams.end ();
     ++i
   ) {
 
@@ -20014,8 +20014,8 @@ void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
 
   std::list<S_msrBeam>::const_iterator i;
   for (
-    i=noteBeams.begin ();
-    i!=noteBeams.end ();
+    i = noteBeams.begin ();
+    i != noteBeams.end ();
     ++i
   ) {
     S_msrBeam beam = (*i);
@@ -20139,8 +20139,8 @@ void mxsr2msrTranslator::copyNoteSlursToChord (
 
   std::list<S_msrSlur>::const_iterator i;
   for (
-    i=noteSlurs.begin ();
-    i!=noteSlurs.end ();
+    i = noteSlurs.begin ();
+    i != noteSlurs.end ();
     ++i
   ) {
 
@@ -20178,8 +20178,8 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 
   std::list<S_msrSlur>::const_iterator i;
   for (
-    i=noteSlurs.begin ();
-    i!=noteSlurs.end ();
+    i = noteSlurs.begin ();
+    i != noteSlurs.end ();
     ++i
   ) {
     S_msrSlur slur = (*i);
@@ -20315,8 +20315,8 @@ void mxsr2msrTranslator::copyNoteSlashesToChord (
 
   std::list<S_msrSlash>::const_iterator i;
   for (
-    i=noteSlashes.begin ();
-    i!=noteSlashes.end ();
+    i = noteSlashes.begin ();
+    i != noteSlashes.end ();
     ++i
   ) {
 
@@ -20355,8 +20355,8 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
 
   std::list<S_msrWedge>::const_iterator i;
   for (
-    i=noteWedges.begin ();
-    i!=noteWedges.end ();
+    i = noteWedges.begin ();
+    i != noteWedges.end ();
     ++i
   ) {
     S_msrWedge wedge = (*i);
@@ -20396,8 +20396,8 @@ void mxsr2msrTranslator::copyNoteSegnosToChord (
 
   std::list<S_msrSegno>::const_iterator i;
   for (
-    i=noteSegnos.begin ();
-    i!=noteSegnos.end ();
+    i = noteSegnos.begin ();
+    i != noteSegnos.end ();
     ++i
   ) {
 
@@ -20436,8 +20436,8 @@ void mxsr2msrTranslator::copyNoteDalSegnosToChord (
 
   std::list<S_msrDalSegno>::const_iterator i;
   for (
-    i=noteDalSegnos.begin ();
-    i!=noteDalSegnos.end ();
+    i = noteDalSegnos.begin ();
+    i != noteDalSegnos.end ();
     ++i
   ) {
 
@@ -20476,8 +20476,8 @@ void mxsr2msrTranslator::copyNoteCodasToChord (
 
   std::list<S_msrCoda>::const_iterator i;
   for (
-    i=noteCodas.begin ();
-    i!=noteCodas.end ();
+    i = noteCodas.begin ();
+    i != noteCodas.end ();
     ++i
   ) {
 
@@ -20692,7 +20692,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 
   if (noteHarmoniesList.size ()) {
     std::list<S_msrHarmony>::const_iterator i;
-    for (i=noteHarmoniesList.begin (); i!=noteHarmoniesList.end (); ++i) {
+    for (i = noteHarmoniesList.begin (); i != noteHarmoniesList.end (); ++i) {
       S_msrHarmony harmony = (*i);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -21524,8 +21524,8 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
 
     std::list<S_msrArticulation>::const_iterator i;
     for (
-      i=fCurrentArticulations.begin ();
-      i!=fCurrentArticulations.end ();
+      i = fCurrentArticulations.begin ();
+      i != fCurrentArticulations.end ();
       ++i
   ) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -21569,8 +21569,8 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
 
     std::list<S_msrOrnament>::const_iterator i;
     for (
-      i=fCurrentOrnamentsList.begin ();
-      i!=fCurrentOrnamentsList.end ();
+      i = fCurrentOrnamentsList.begin ();
+      i != fCurrentOrnamentsList.end ();
       ++i
   ) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -23785,8 +23785,8 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
   // attach the beams if any to the note
   if (fPendingBeamsList.size ()) {
     for (
-      std::list<S_msrBeam>::const_iterator i=fPendingBeamsList.begin ();
-      i!=fPendingBeamsList.end ();
+      std::list<S_msrBeam>::const_iterator i = fPendingBeamsList.begin ();
+      i != fPendingBeamsList.end ();
       ++i
     ) {
       fCurrentNote->
@@ -26155,87 +26155,93 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItfIsHandled ()
     // don't create a skip for chord note members except the first one
     // nor for grace notes
 
-    Bool doCreateASkipSyllable =
-     // ! fASkipSyllableHasBeenGeneratedForcurrentNote; JMI
-      ! fCurrentNoteHasLyrics;
 
-    switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
-      case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
-        break;
-      case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
-        break;
-      case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
-        break;
-      case msrSyllableExtendTypeKind::kSyllableExtendTypeContinue:
- //       doCreateASkipSyllable = true; // JMI
-        break;
-      case msrSyllableExtendTypeKind::kSyllableExtendTypeStop:
-        break;
-    } // switch
 
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceLyrics ()) {
-      std::stringstream ss;
 
-      ss <<
-        "*** ---> handleLyricsForCurrentNoteAfterItfIsHandled()" <<
-        ", doCreateASkipSyllable: " << doCreateASkipSyllable;
+//     Bool doCreateASkipSyllable =
+//      // ! fASkipSyllableHasBeenGeneratedForcurrentNote; JMI
+//       ! fCurrentNoteHasLyrics;
+//
+//     switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
+//       case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
+//         break;
+//       case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
+//         break;
+//       case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
+//         break;
+//       case msrSyllableExtendTypeKind::kSyllableExtendTypeContinue:
+//  //       doCreateASkipSyllable = true; // JMI
+//         break;
+//       case msrSyllableExtendTypeKind::kSyllableExtendTypeStop:
+//         break;
+//     } // switch
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceLyrics ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "*** ---> handleLyricsForCurrentNoteAfterItfIsHandled()" <<
+//         ", doCreateASkipSyllable: " << doCreateASkipSyllable;
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//     if (doCreateASkipSyllable) {
+//       if (
+//         ! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)
+//       ) {
+//         // get the current note voice's stanzas map
+//         const std::map<std::string, S_msrStanza>&
+//           voiceStanzasMap =
+//             fCurrentNoteVoice->
+//               getVoiceStanzasMap ();
+//
+//         for (
+//           std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+//           i != voiceStanzasMap.end ();
+//           ++i
+//         ) {
+//           const S_msrStanza& stanza = (*i).second;
+//
+//           //choose the syllable kind
+//           msrSyllableKind
+//             syllableKind =
+//             fCurrentNoteIsARest
+//               ? msrSyllableKind::kSyllableSkipRestNote
+//               : msrSyllableKind::kSyllableSkipNonRestNote;
+//
+//           // create a skip syllable
+//           S_msrSyllable
+//             syllable =
+//               msrSyllable::create (
+//                 inputLineNumber,
+//                 syllableKind,
+//                 fCurrentSyllableExtendKind,
+//                 fCurrentStanzaNumber,
+//                 fCurrentNoteSoundingWholeNotesFromNotesDuration,
+//                 msrTupletFactor (
+//                   fCurrentNoteActualNotes,
+//                   fCurrentNoteNormalNotes),
+//                 stanza);
+//
+//           // set syllable note upLink to fCurrentNote
+//           syllable->
+//             appendSyllableToNoteAndSetItsUpLinkToNote (
+//             	fCurrentNote);
+//
+//           // append syllable to stanza
+//           stanza->
+//             appendSyllableToStanza (syllable);
+//         } // for
+//       }
+//     }
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
 
-    if (doCreateASkipSyllable) {
-      if (
-        ! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)
-      ) {
-        // get the current note voice's stanzas map
-        const std::map<std::string, S_msrStanza>&
-          voiceStanzasMap =
-            fCurrentNoteVoice->
-              getVoiceStanzasMap ();
 
-        for (
-          std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
-          i != voiceStanzasMap.end ();
-          ++i
-        ) {
-          const S_msrStanza& stanza = (*i).second;
-
-          //choose the syllable kind
-          msrSyllableKind
-            syllableKind =
-            fCurrentNoteIsARest
-              ? msrSyllableKind::kSyllableSkipRestNote
-              : msrSyllableKind::kSyllableSkipNonRestNote;
-
-          // create a skip syllable
-          S_msrSyllable
-            syllable =
-              msrSyllable::create (
-                inputLineNumber,
-                syllableKind,
-                fCurrentSyllableExtendKind,
-                fCurrentStanzaNumber,
-                fCurrentNoteSoundingWholeNotesFromNotesDuration,
-                msrTupletFactor (
-                  fCurrentNoteActualNotes,
-                  fCurrentNoteNormalNotes),
-                stanza);
-
-          // set syllable note upLink to fCurrentNote
-          syllable->
-            appendSyllableToNoteAndSetItsUpLinkToNote (
-            	fCurrentNote);
-
-          // append syllable to stanza
-          stanza->
-            appendSyllableToStanza (syllable);
-        } // for
-      }
-    }
   }
 
   // register whether the new last handled note has lyrics
@@ -30913,8 +30919,8 @@ print-object:
     // attach pending figures to the figured bass
     if (fPendingFiguredBassFiguresList.size ()) {
       for (
-        std::list<S_msrBassFigure>::const_iterator i=fPendingFiguredBassFiguresList.begin ();
-        i!=fPendingFiguredBassFiguresList.end ();
+        std::list<S_msrBassFigure>::const_iterator i = fPendingFiguredBassFiguresList.begin ();
+        i != fPendingFiguredBassFiguresList.end ();
         ++i
       ) {
         figuredBass->
