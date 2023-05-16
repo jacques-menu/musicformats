@@ -600,7 +600,21 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
   // register part into this part group's data
   fPartGroupPartsMap [part->getPartID ()] = part;
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTracePartGroups ()) {
+    displayPartGroupPartsMap (
+      part->getInputStartLineNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   fPartGroupElementsList.push_back (part);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTracePartGroups ()) {
+    displayPartGroupElementsList (
+      part->getInputStartLineNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   // set part's partgroup upLink
   part->setPartUpLinkToPartGroup (this);
@@ -676,7 +690,7 @@ void msrPartGroup::removePartFromPartGroup (
   --gIndenter;
 }
 
-void msrPartGroup::prependSubPartGroupToPartGroup (
+void msrPartGroup::prependNestedGroupToPartGroup (
   const S_msrPartGroup& nestedPartGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -712,6 +726,13 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fPartGroupElementsList.push_front (nestedPartGroup);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTracePartGroups ()) {
+    displayPartGroupElementsList (
+      nestedPartGroup->getInputStartLineNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   switch (fPartGroupImplicitKind) {
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
@@ -779,6 +800,13 @@ void msrPartGroup::appendNestedPartGroupToPartGroup (
 
   fPartGroupElementsList.push_back (nestedPartGroup);
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTracePartGroups ()) {
+    displayPartGroupElementsList (
+      nestedPartGroup->getInputStartLineNumber ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   switch (fPartGroupImplicitKind) {
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       switch (nestedPartGroup->getPartGroupImplicitKind ()) {
@@ -808,21 +836,42 @@ void msrPartGroup::appendNestedPartGroupToPartGroup (
   } // switch
 }
 
-void msrPartGroup::printPartGroupElementsListFull (
-  int      inputLineNumber,
-  std::ostream& os) const
+void msrPartGroup::displayPartGroupPartsMap (
+  int inputLineNumber)
+{
+  gLog <<
+    std::endl <<
+    "fPartGroupPartsMap contains" <<
+    ", line : " << inputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair<std::string, S_msrPart> thePair : fPartGroupPartsMap) {
+    gLog <<
+      "\"" << thePair.first << "\" --% --> " <<
+      thePair.second->getPartCombinedName () <<
+      std::endl;
+  } // for
+
+  --gIndenter;
+}
+
+void msrPartGroup::displayPartGroupElementsListFull (
+  int inputLineNumber) const
 {
   size_t
     partGroupElementsListSize =
       fPartGroupElementsList.size ();
 
-  os <<
+  gLog <<
     "fPartGroupElementsList contains " <<
     mfSingularOrPlural (
-      partGroupElementsListSize, "element", "elements");
+      partGroupElementsListSize, "element", "elements") <<
+    ", line : " << inputLineNumber;
 
   if (partGroupElementsListSize) {
-    os << std::endl;
+    gLog << std::endl;
 
     std::list<S_msrPartGroupElement>::const_iterator
       iBegin = fPartGroupElementsList.begin (),
@@ -884,30 +933,30 @@ void msrPartGroup::printPartGroupElementsListFull (
       }
 
       if (++i == iEnd) break;
-   // JMI   os << std::endl;
+   // JMI   gLog << std::endl;
     } // for
   }
 
   else {
-    os << ": [EMPTY]" << std::endl;
+    gLog << ": [EMPTY]" << std::endl;
   }
 }
 
-void msrPartGroup::printPartGroupElementsList (
-  int      inputLineNumber,
-  std::ostream& os) const
+void msrPartGroup::displayPartGroupElementsList (
+  int inputLineNumber) const
 {
   size_t
     partGroupElementsListSize =
      fPartGroupElementsList.size ();
 
-  os <<
+  gLog <<
     "fPartGroupElementsList contains " <<
     mfSingularOrPlural (
-      partGroupElementsListSize, "element", "elements");
+      partGroupElementsListSize, "element", "elements") <<
+    ", line : " << inputLineNumber;
 
   if (partGroupElementsListSize) {
-    os << std::endl;
+    gLog << std::endl;
 
     std::list<S_msrPartGroupElement>::const_iterator
       iBegin = fPartGroupElementsList.begin (),
@@ -918,7 +967,7 @@ void msrPartGroup::printPartGroupElementsList (
       S_msrElement
         element = (*i);
 
-      os << std::endl << "FII before partGroup element" << std::endl;
+//       gLog << std::endl << "FII before partGroup element" << std::endl;
 
       if (
         S_msrPartGroup
@@ -966,16 +1015,16 @@ void msrPartGroup::printPartGroupElementsList (
           ss.str ());
       }
 
-      os << std::endl << "FUU after partGroup element" << std::endl;
+//       gLog << std::endl << "FUU after partGroup element" << std::endl;
 
       if (++i == iEnd) break;
 
-      os << std::endl; // JMI v0.9.69
+      gLog << std::endl; // JMI v0.9.69
     } // for
   }
 
   else {
-    os << ": [EMPTY]" << std::endl;
+    gLog << ": [EMPTY]" << std::endl;
   }
 }
 
@@ -996,9 +1045,8 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 
     ++gIndenter;
 
-    printPartGroupElementsList (
-      inputLineNumber,
-      ss);
+    displayPartGroupElementsList (
+      inputLineNumber);
 
     --gIndenter;
 
@@ -1360,9 +1408,7 @@ void msrPartGroup::printFull (std::ostream& os) const
 {
   os <<
     "[PartGroup" " \"" << getPartGroupCombinedName () <<
-    "\" (" <<
-    mfSingularOrPlural (
-      fPartGroupPartsMap.size (), "part", "parts") <<
+    "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
     ")" <<
     ", line " << fInputStartLineNumber <<
     std::endl;
@@ -1468,9 +1514,8 @@ void msrPartGroup::printFull (std::ostream& os) const
 
   // print the part group elements if any
 
-  printPartGroupElementsList (
-    fInputStartLineNumber,
-    gLog);
+  displayPartGroupElementsList (
+    fInputStartLineNumber);
 
   --gIndenter;
 
@@ -1487,9 +1532,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   os <<
     "[PartGroup" " \"" << getPartGroupCombinedName () <<
-    "\" (" <<
-    mfSingularOrPlural (
-      fPartGroupPartsMap.size (), "part", "parts") <<
+    "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
     ")" <<
     ", line " << fInputStartLineNumber <<
     std::endl;
@@ -1511,9 +1554,8 @@ void msrPartGroup::print (std::ostream& os) const
     std::endl;
 
   // print the part group elements if any
-  printPartGroupElementsList (
-    fInputStartLineNumber,
-    gLog);
+  displayPartGroupElementsList (
+    fInputStartLineNumber);
 
   --gIndenter;
 
@@ -1526,9 +1568,7 @@ void msrPartGroup::printSummary (std::ostream& os) const
 {
   os <<
     "[PartGroup" " \"" << getPartGroupCombinedName () <<
-    "\" (" <<
-    mfSingularOrPlural (
-      fPartGroupPartsMap.size (), "part", "parts") <<
+    "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
     ")" <<
     std::endl;
 

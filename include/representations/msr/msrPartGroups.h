@@ -258,7 +258,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int              inputLineNumber,
                             const S_msrPart& partToBeRemoved);
 
-    void                  prependSubPartGroupToPartGroup (
+    void                  prependNestedGroupToPartGroup (
                             const S_msrPartGroup& nestedPartGroup);
 
     void                  appendNestedPartGroupToPartGroup (
@@ -292,13 +292,14 @@ class EXP msrPartGroup : public msrPartGroupElement
     // print
     // ------------------------------------------------------
 
-    void                  printPartGroupElementsList (
-                            int           inputLineNumber,
-                            std::ostream& os) const;
+    void                  displayPartGroupPartsMap (
+                            int inputLineNumber);
 
-    void                  printPartGroupElementsListFull (
-                            int           inputLineNumber,
-                            std::ostream& os) const;
+    void                  displayPartGroupElementsList (
+                            int inputLineNumber) const;
+
+    void                  displayPartGroupElementsListFull (
+                            int inputLineNumber) const;
 
     std::string           asString () const override;
 

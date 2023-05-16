@@ -386,25 +386,25 @@ std::string language::handleOptionsAndArgumentsFromArgcArgv () const
 //_______________________________________________________________________________
 // passes
 
-std::string language::createAnMXSRFromAMusicXMLStream () const
+std::string language::convertAMusicXMLStreamIntoAnMXSR () const
 {
-  return "Create an MXSR (MusicXML tree) from a MusicXML text stream";
+  return "Convert a MusicXML text stream into an MXSR (MusicXML tree)";
 }
-std::string language::createAnMXSRFromAMusicXMLDescriptor () const
+std::string language::convertAMusicXMLDescriptorIntoAnMXSR () const
 {
-  return "Create an MXSR (MusicXML tree) from a MusicXML descriptor";
+  return "Convert a MusicXML descriptor into an MXSR (MusicXML tree)";
 }
-std::string language::createAnMXSRFromAMusicXMLBuffer () const
+std::string language::convertAMusicXMLBufferIntoAnMXSR () const
 {
-  return "Create an MXSR (MusicXML tree) from a MusicXML buffer";
+  return "Convert a MusicXML buffer into an MXSR (MusicXML tree)";
 }
 
-std::string language::convertTheMXSRIntoAnMSRSqueleton () const
+std::string language::convertTheMXSRIntoAnMSRSkeleton () const
 {
   return "Convert the MXSR into an MSR skeleton";
 }
 
-std::string language::populateTheMSRSqueletonFromMusicXMLData () const
+std::string language::populateTheMSRSkeletonFromMusicXMLData () const
 {
   return "Populate the MSR skeleton from MusicXML data";
 }

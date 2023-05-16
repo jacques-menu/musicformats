@@ -343,11 +343,11 @@ class EXP msrScore : public msrBookElement
                             const S_msrCredit& credit);
 
     S_msrPart             fetchPartFromScoreByItsPartID (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& partID);
 
     void                  collectScorePartsList (
-                            int    inputLineNumber,
+                            int         inputLineNumber,
                             std::list<S_msrPart>& partsList);
 
   public:
