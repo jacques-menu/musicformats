@@ -12086,35 +12086,23 @@ void msrVoice::print (std::ostream& os) const
   }
   os << std::endl;
 
-  /* JMI
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fVoiceLastSegment != nullptr,
-    "fVoiceLastSegment is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-*/
-
   // print the last segment
-  if (fVoiceLastSegment) {
     os <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fVoiceLastSegment" <<
-      std::endl;
+      "fVoiceLastSegment" << ": ";
+  if (fVoiceLastSegment) {
+    os << std::endl;
 
     ++gIndenter;
     os << fVoiceLastSegment;
-    os << std::endl;
     --gIndenter;
   }
   else {
     os <<
-      "*** voiceLastSegment is null ***" << // JMI
+      "[NULL]" <<
       std::endl;
   }
-  os << std::endl;
 
   // print the stanzas if any
   if (fVoiceStanzasMap.size ()) {

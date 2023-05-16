@@ -130,7 +130,7 @@ static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
         originalMxsr,
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2a,
-        gLanguage->convertTheMXSRIntoAnMSRSqueleton ());
+        gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -460,7 +460,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2musicxml (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLStream ());
+        gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -485,7 +485,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2musicxmlWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLStream ());
+        gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -511,7 +511,7 @@ EXP mfMusicformatsErrorKind musicxmlFd2musicxml (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -536,7 +536,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2musicxmlWithHandler (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -562,7 +562,7 @@ EXP mfMusicformatsErrorKind musicxmlString2musicxml (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->convertAMusicXMLBufferIntoAnMXSR ());
 
   // call xmlFile2musicxml() even if sxmlfile is null,
   // to handle the help options if any
@@ -587,7 +587,7 @@ mfMusicformatsErrorKind convertMusicxmlString2musicxmlWithHandler (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->convertAMusicXMLBufferIntoAnMXSR ());
 
   // call xmlFile2musicxml() even if sxmlfile is null,
   // to handle the help options if any

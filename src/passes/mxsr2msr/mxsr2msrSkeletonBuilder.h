@@ -450,13 +450,13 @@ virtual void              visitEnd   (S_score_partwise& elt);
 
     // an implicit outer-most part group has to be created
     // whenever there is explicit part group in MusicXML to contain the parts
-    Bool                  fThereIsAtLeastOnePartGroup;
+    Bool                  fAPartGroupHasBeenstarted;
 
-    S_mxmlPartGroupDescr  fImplicitOuterPartGroupDescr;
-    S_msrPartGroup        fImplicitOuterPartGroup;
+    S_msrPartGroup        fImplicitOuterMostPartGroup;
+    S_mxmlPartGroupDescr  fImplicitOuterMostPartGroupDescr;
 
-    void                  createImplicitOuterPartGroupAndAddItToScore ();
-    void                  removeImplicitOuterPartGroupFromScore ();
+    void                  createAnImplicitOuterPartGroupAndAddItToScore ();
+//     void                  removeImplicitOuterPartGroupFromScore ();
 
     // part groups numbers can be re-used, they're no identifier
     // we use a map to access them by part group number
@@ -468,13 +468,13 @@ virtual void              visitEnd   (S_score_partwise& elt);
     std::map<int, S_mxmlPartGroupDescr>
                           fStartedPartGroupDescrsMap;
 
-    void                  showPartGroupDescrsVector (
+    void                  displayPartGroupDescrsVector (
                             int inputLineNumber);
 
-    void                  showAllPartGroupDescrsMap (
+    void                  displayAllPartGroupDescrsMap (
                             int inputLineNumber);
 
-    void                  showStartedPartGroupDescrsMap (
+    void                  displayStartedPartGroupDescrsMap (
                             int inputLineNumber);
 
     S_mxmlPartGroupDescr
@@ -488,7 +488,7 @@ virtual void              visitEnd   (S_score_partwise& elt);
 
     // private methods
 
-    void                  showPartGroupsStack (
+    void                  displayPartGroupDescrsStack (
                             int inputLineNumber);
 
     S_mxmlPartGroupDescr
@@ -502,7 +502,7 @@ virtual void              visitEnd   (S_score_partwise& elt);
                             int                         inputLineNumber,
                             const S_mxmlPartGroupDescr& partGroupDescr);
 
-    void                  showPartGroupsData (
+    void                  displayPartGroupsData (
                             int                inputLineNumber,
                             const std::string& context);
 
@@ -517,10 +517,10 @@ virtual void              visitEnd   (S_score_partwise& elt);
     std::vector<std::list<S_mxmlPartGroupDescr> >
                           fPositionStoppingPartGroupDescrsVector;
 
-    void                  showPositionStartingPartGroupDescrsVector (
+    void                  displayPositionStartingPartGroupDescrsVector (
                            int inputLineNumber);
 
-    void                  showPositionStoppingPartGroupDescrsVector (
+    void                  displayPositionStoppingPartGroupDescrsVector (
                             int inputLineNumber);
 
     void                  insertPartGroupDescInStartingList (
@@ -538,6 +538,10 @@ virtual void              visitEnd   (S_score_partwise& elt);
     void                  registerPartGroupDescrAsStoppingAtCurrentPosition (
                             int                         inputLineNumber,
                             const S_mxmlPartGroupDescr& partGroupDescr);
+
+    void                  registerPartGroup (
+                            int                   inputLineNumber,
+                            const S_msrPartGroup& partroup);
 
     void                  registerPart (
                             int              inputLineNumber,
@@ -575,6 +579,9 @@ virtual void              visitEnd   (S_score_partwise& elt);
     std::map<std::string, S_msrPart>
                           fPartsMap;
 
+    void                  displayPartsMap (
+                            int inputLineNumber);
+
     int                   fCurrentNoIDPartNumber;
 
     // handling the part, each one incrementing the 'position'
@@ -583,7 +590,7 @@ virtual void              visitEnd   (S_score_partwise& elt);
     std::vector<S_msrPart>
                           fPartsVector;
 
-    void                  showPartsVector (
+    void                  displayPartsVector (
                             int inputLineNumber);
 
     S_msrPart             fCurrentPart; // used throughout
@@ -657,8 +664,8 @@ virtual void              visitEnd   (S_score_partwise& elt);
 //                             const S_msrVoice& voice);
 
     S_msrVoice            createPartHarmoniesVoiceIfNotYetDone (
-                            int        inputLineNumber,
-                            const S_msrPart&  part);
+                            int              inputLineNumber,
+                            const S_msrPart& part);
 
 
     // figured bass handling
@@ -668,8 +675,8 @@ virtual void              visitEnd   (S_score_partwise& elt);
     int                   fFiguredBassVoicesCounter;
 
     S_msrVoice            createPartFiguredBassVoiceIfNotYetDone (
-                            int        inputLineNumber,
-                            const S_msrPart&  part);
+                            int              inputLineNumber,
+                            const S_msrPart& part);
 };
 
 

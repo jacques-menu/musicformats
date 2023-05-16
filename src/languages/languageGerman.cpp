@@ -173,25 +173,26 @@ std::ostream& operator << (std::ostream& os, const S_languageGerman& elt)
 // //_______________________________________________________________________________
 // // passes
 //
-// std::string languageGerman::createAnMXSRFromAMusicXMLStream () const
+// std::string language::convertAMusicXMLStreamIntoAnMXSR () const
 // {
-//   return "Create an MXSR (MusicXML tree) from a MusicXML file";
+//   return "Convert a MusicXML text stream into an MXSR (MusicXML tree)";
 // }
-// std::string languageGerman::createAnMXSRFromAMusicXMLDescriptor () const
+// std::string language::convertAMusicXMLDescriptorIntoAnMXSR () const
 // {
-//   return "Create an MXSR (MusicXML tree) from a MusicXML descriptor";
+//   return "Convert a MusicXML descriptor into an MXSR (MusicXML tree)";
 // }
-// std::string languageGerman::createAnMXSRFromAMusicXMLBuffer () const
+// std::string language::convertAMusicXMLBufferIntoAnMXSR () const
 // {
-//   return "Create an MXSR (MusicXML tree) from a MusicXML buffer";
+//   return "Convert a MusicXML buffer into an MXSR (MusicXML tree)";
 // }
 //
-// std::string languageGerman::convertTheMXSRIntoAnMSRSqueleton () const
+//
+// std::string languageGerman::convertTheMXSRIntoAnMSRSkeleton () const
 // {
 //   return "Convert the MXSR into an MSR skeleton";
 // }
 //
-// std::string languageGerman::populateTheMSRSqueletonFromMusicXMLData () const
+// std::string languageGerman::populateTheMSRSkeletonFromMusicXMLData () const
 // {
 //   return "Populate the MSR skeleton from MusicXML data";
 // }

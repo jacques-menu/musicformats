@@ -133,7 +133,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
         theMxsr,
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2a,
-        gLanguage->convertTheMXSRIntoAnMSRSqueleton ());
+        gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -166,7 +166,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       theMxsr,
       firstMsrScore,
         mfPassIDKind::kMfPassID_2b,
-        gLanguage->populateTheMSRSqueletonFromMusicXMLData ());
+        gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -621,7 +621,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2lilypond (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLStream ());
+        gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -646,7 +646,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLStream ());
+        gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -672,7 +672,7 @@ EXP mfMusicformatsErrorKind musicxmlFd2lilypond (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -697,7 +697,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2lilypondWithHandler (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -723,7 +723,7 @@ EXP mfMusicformatsErrorKind musicxmlString2lilypond (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->convertAMusicXMLBufferIntoAnMXSR ());
 
   // call xmlFile2lilypond() even if sxmlfile is null,
   // to handle the help options if any
@@ -748,7 +748,7 @@ mfMusicformatsErrorKind convertMusicxmlString2lilypondWithHandler (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->convertAMusicXMLBufferIntoAnMXSR ());
 
   // call xmlFile2lilypond() even if sxmlfile is null,
   // to handle the help options if any

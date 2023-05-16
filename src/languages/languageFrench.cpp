@@ -172,25 +172,25 @@ std::string languageFrench::handleOptionsAndArgumentsFromArgcArgv () const
 //_______________________________________________________________________________
 // passes
 
-std::string languageFrench::createAnMXSRFromAMusicXMLStream () const
+std::string languageFrench::convertAMusicXMLStreamIntoAnMXSR () const
 {
-  return "Création d'un MXSR (arbre MusicXML) à partir d'un flot de texte MusicXML";
+  return "Conversion d'un flot de texte MusicXML en un MXSR (arbre MusicXML)";
 }
-std::string languageFrench::createAnMXSRFromAMusicXMLDescriptor () const
+std::string languageFrench::convertAMusicXMLDescriptorIntoAnMXSR () const
 {
-  return "Création d'un MXSR (arbre MusicXML) à partir d'un descripteor MusicXML";
+  return "Conversion d'un descripteor MusicXML en un MXSR (arbre MusicXML)";
 }
-std::string languageFrench::createAnMXSRFromAMusicXMLBuffer () const
+std::string languageFrench::convertAMusicXMLBufferIntoAnMXSR () const
 {
-  return "Création d'un MXSR (arbre MusicXML) à partir d'un tampon MusicXML";
-}
-
-std::string languageFrench::convertTheMXSRIntoAnMSRSqueleton () const
-{
-  return "Création d'un squelette de MSR à partir du MXSR";
+  return "Conversion d'un tampon MusicXML en un MXSR (arbre MusicXML)";
 }
 
-std::string languageFrench::populateTheMSRSqueletonFromMusicXMLData () const
+std::string languageFrench::convertTheMXSRIntoAnMSRSkeleton () const
+{
+  return "Conversion du MXSR en un squelette de MSR";
+}
+
+std::string languageFrench::populateTheMSRSkeletonFromMusicXMLData () const
 {
   return "Garnissage du squelette de MSR avec les données MusicXML";
 }

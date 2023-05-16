@@ -2517,6 +2517,15 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     else {
       std::stringstream ss;
 
+      fMsrScore->
+        printSummary (gLog); // JMI v0.9.69
+
+      gLog <<
+        fMsrScore; // JMI v0.9.69
+
+      fMsrScore->
+        displayPartGroupsList ("visitStart (S_part& elt)");
+
       ss <<
         "part \"" << partID <<
         "\" not found in score skeleton" <<

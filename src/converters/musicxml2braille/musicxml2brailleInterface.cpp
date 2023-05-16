@@ -132,7 +132,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         theMxsr,
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2a,
-        gLanguage->convertTheMXSRIntoAnMSRSqueleton ());
+        gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -165,7 +165,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       theMxsr,
       firstMsrScore,
         mfPassIDKind::kMfPassID_2b,
-        gLanguage->populateTheMSRSqueletonFromMusicXMLData ());
+        gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -648,7 +648,7 @@ EXP mfMusicformatsErrorKind musicxmlFile2braille (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLStream ());
+        gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -673,7 +673,7 @@ mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
       createSXMLFileFromFile (
         fileName,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLStream ());
+        gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -699,7 +699,7 @@ EXP mfMusicformatsErrorKind musicxmlFd2braille (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -724,7 +724,7 @@ mfMusicformatsErrorKind convertMusicxmlFd2brailleWithHandler (
       createSXMLFileFromFd (
         fd,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLDescriptor ());
+        gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
 
   if (sxmlfile) {
     return
@@ -750,7 +750,7 @@ EXP mfMusicformatsErrorKind musicxmlString2braille (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->convertAMusicXMLBufferIntoAnMXSR ());
 
   // call xmlFile2braille() even if sxmlfile is null,
   // to handle the help options if any
@@ -775,7 +775,7 @@ mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
       createSXMLFileFromString (
         buffer,
         mfPassIDKind::kMfPassID_1,
-        gLanguage->createAnMXSRFromAMusicXMLBuffer ());
+        gLanguage->convertAMusicXMLBufferIntoAnMXSR ());
 
   // call xmlFile2braille() even if sxmlfile is null,
   // to handle the help options if any

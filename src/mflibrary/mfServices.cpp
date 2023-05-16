@@ -650,19 +650,19 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_1,
-          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+          gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     xml2lyService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
+          gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2lyService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2b,
-          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2lyService->
       appendPassToService (
@@ -751,19 +751,19 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_1,
-          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+          gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     xml2brlService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
+          gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2brlService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2b,
-          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2brlService->
       appendPassToService (
@@ -811,19 +811,19 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_1,
-          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+          gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     xml2xmlService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
+          gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2xmlService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2b,
-          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2xmlService->
       appendPassToService (
@@ -871,19 +871,19 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_1,
-          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+          gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     xml2gmnService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
+          gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2gmnService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2b,
-          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2gmnService->
       appendPassToService (
@@ -930,19 +930,19 @@ EXP void initializeServices ()
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_1,
-          gLanguage->createAnMXSRFromAMusicXMLStream ()));
+          gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     msdlService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2a,
-          gLanguage->convertTheMXSRIntoAnMSRSqueleton ()));
+          gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     msdlService->
       appendPassToService (
         mfPassDescription::create (
           mfPassIDKind::kMfPassID_2b,
-          gLanguage->populateTheMSRSqueletonFromMusicXMLData ()));
+          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     msdlService->
       appendPassToService (

@@ -1436,13 +1436,13 @@ class EXP mxsr2msrTranslator :
                                 int inputLineNumber);
 
     void                      populateCurrentNoteBeforeItIsHandled (
-                                int              inputLineNumber);
+                                int inputLineNumber);
 
     // harmonies and figured bass elements need
     // the position of the note  in its measure
     // to be known when they are inserted in their own measure
     void                      populateCurrentNoteAfterItIsHandled (
-                                int              inputLineNumber);
+                                int inputLineNumber);
 
 
     // transpose handling

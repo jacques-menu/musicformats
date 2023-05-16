@@ -311,7 +311,7 @@ void msrScore::appendCreditToScore (
 }
 
 S_msrPart msrScore::fetchPartFromScoreByItsPartID (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& partID)
 {
   S_msrPart result;
@@ -374,7 +374,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 }
 
 void msrScore::collectScorePartsList (
-  int              inputLineNumber,
+  int                   inputLineNumber,
   std::list<S_msrPart>& partsList)
 {
   S_msrPart result;
@@ -587,9 +587,11 @@ void msrScore::displayPartGroupsList (
         std::endl;
 
       ++gIndenter;
-      gLog <<
-        gTab << partGroup->asString () <<
-        std::endl;
+      partGroup->printSummary (gLog);
+//       gLog <<
+//         gTab << partGroup->asString () <<
+//         partGroup <<
+//         std::endl;
       --gIndenter;
 
       --n;
@@ -785,6 +787,8 @@ void msrScore::printFull (std::ostream& os) const
     mfSingularOrPlural (
       partGroupsListSize, "element", "elements");
   if (partGroupsListSize) {
+    os << std::endl;
+
     ++gIndenter;
 
     std::list<S_msrPartGroup>::const_iterator
@@ -908,6 +912,8 @@ void msrScore::print (std::ostream& os) const
     mfSingularOrPlural (
       partGroupsListSize, "element", "elements");
   if (partGroupsListSize) {
+    os << std::endl;
+
     ++gIndenter;
 
     std::list<S_msrPartGroup>::const_iterator
@@ -915,9 +921,9 @@ void msrScore::print (std::ostream& os) const
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << std::endl << "FAA before partGroup" << std::endl;
+//       os << std::endl << "FAA before partGroup" << std::endl;
       os << (*i);
-      os << std::endl << "FOO after partGroup" << std::endl;
+//       os << std::endl << "FOO after partGroup" << std::endl;
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -943,7 +949,7 @@ void msrScore::printSummary (std::ostream& os) const
     os << "MSR full score";
   }
   else {
-    os << "MSR score";
+    os << "MSR score summary";
   }
 #else
   os << "MSR score";
@@ -953,7 +959,7 @@ void msrScore::printSummary (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 38;
+  const int fieldWidth = 39;
 
   size_t partGroupsListSize =
     fPartGroupsList.size ();
@@ -1010,9 +1016,8 @@ void msrScore::printSummary (std::ostream& os) const
     ++gIndenter;
 
     fPartGroupsList.front () ->
-      printPartGroupElementsList (
-        fInputStartLineNumber,
-        os);
+      displayPartGroupElementsList (
+        fInputStartLineNumber);
 
     --gIndenter;
 
