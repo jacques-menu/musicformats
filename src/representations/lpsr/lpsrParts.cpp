@@ -325,7 +325,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
   int                     inputLineNumber,
   const S_lpsrChordNamesContext& chordNamesContext)
 {
-  // appent chordNamesContext to the part block elements list
+  // append chordNamesContext to the part block elements list
   fPartBlockElementsList.push_back (chordNamesContext);
 
   // sort the std::list if necessary

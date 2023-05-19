@@ -31,7 +31,7 @@ class mxsrPartGroup : public smartable
 {
 /*
   positions represent the order in which the parts appear in <part-list />,
-  starting at 0 since vectors are used
+  starting at 0 since std::vectors are used
 */
 
   public:
@@ -131,8 +131,17 @@ class mxsrPartGroup : public smartable
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartGroup& elt);
 
 //______________________________________________________________________________
-class EXP mxsrPartGroupsList {
+class EXP mxsrPartGroupsList : public smartable
+{
   public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mxsrPartGroupsList> create ();
+
+    static SMARTP<mxsrPartGroupsList> create (
+                            const S_mxsrPartGroup& theMxsrPartGroup);
 
     // constructors/destructor
     // ------------------------------------------------------
@@ -158,8 +167,8 @@ class EXP mxsrPartGroupsList {
     // ------------------------------------------------------
 
     const std::list<S_mxsrPartGroup>&
-                          getPartGroupsStdList () const
-                              { return fMxsrPartGroupsList;}
+                          getMxsrPartGroupsStdList () const
+                              { return fMxsrPartGroupsStdList;}
 
   public:
 
@@ -168,27 +177,27 @@ class EXP mxsrPartGroupsList {
 
     // basic list stuff
     size_t                fetchSize () const
-                              { return fMxsrPartGroupsList.size (); }
+                              { return fMxsrPartGroupsStdList.size (); }
 
-    S_mxsrPartGroup       fetchFront () const
-                              { return fMxsrPartGroupsList.front (); }
+    S_mxsrPartGroup&      fetchFront ()
+                              { return fMxsrPartGroupsStdList.front (); }
 
-    S_mxsrPartGroup       fetchBack () const
-                              { return fMxsrPartGroupsList.back (); }
+    S_mxsrPartGroup&      fetchBack ()
+                              { return fMxsrPartGroupsStdList.back (); }
 
     void                  popFront ()
-                              { fMxsrPartGroupsList.pop_front (); }
+                              { fMxsrPartGroupsStdList.pop_front (); }
 
     void                  popBack ()
-                              { fMxsrPartGroupsList.pop_back (); }
+                              { fMxsrPartGroupsStdList.pop_back (); }
 
     void                  pushFront (
                             const S_mxsrPartGroup& theMxsrPartGroup)
-                              { fMxsrPartGroupsList.push_front (theMxsrPartGroup); }
+                              { fMxsrPartGroupsStdList.push_front (theMxsrPartGroup); }
 
     void                  pushBack (
                             const S_mxsrPartGroup& theMxsrPartGroup)
-                              { fMxsrPartGroupsList.push_back (theMxsrPartGroup); }
+                              { fMxsrPartGroupsStdList.push_back (theMxsrPartGroup); }
 
     // add an mxsrPartGroup
     void                  prependMxsrPartGroup (
@@ -227,9 +236,11 @@ class EXP mxsrPartGroupsList {
     std::string           fMxsrPartGroupListName;
 
     std::list<S_mxsrPartGroup>
-                          fMxsrPartGroupsList;
+                          fMxsrPartGroupsStdList;
 };
+typedef SMARTP<mxsrPartGroupsList> S_mxsrPartGroupsList;
 EXP std::ostream& operator << (std::ostream& os, const mxsrPartGroupsList& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartGroupsList& elt);
 
 //________________________________________________________________________
 class EXP mxsr2msrSkeletonBuilder :
@@ -619,21 +630,21 @@ virtual void              visitEnd   (S_score_partwise& elt);
                             int inputLineNumber);
 
     // several MXSR part groups may start and/or stop at the same position JMI ??? v0.9.69
-    std::vector<mxsrPartGroupsList >
-                          fPositionsOfStartingMxsrPartGroupsListsVector;
-    std::vector<mxsrPartGroupsList>
+    std::vector<S_mxsrPartGroupsList>
+                          fPositionsOfStartedMxsrPartGroupsListsVector;
+    std::vector<S_mxsrPartGroupsList>
                           fPositionsOfStoppingMxsrPartGroupsListsVector;
 
-    void                  displayPositionsOfStartingMxsrPartGroupsVector (
+    void                  displayPositionsOfStartedMxsrPartGroupsVector (
                            int inputLineNumber);
 
     void                  displayPositionsOfStoppingMxsrPartGroupsVector (
                             int inputLineNumber);
 
-//     void                  insertMxsrPartGroupInStartingListInPositionDecreasingOrder (
+//     void                  insertMxsrPartGroupInStartedListInPositionDecreasingOrder (
 //                             int                         inputLineNumber,
 //                             const S_mxsrPartGroup&      theMxsrPartGroup,
-//                             std::list<S_mxsrPartGroup>& startingMxsrPartGroupsList);
+//                             std::list<S_mxsrPartGroup>& startedMxsrPartGroupsList);
 //
 //     void                  insertMxsrPartGroupInStoppingListInPositionDecreasingOrder (
 //                             int                         inputLineNumber,
