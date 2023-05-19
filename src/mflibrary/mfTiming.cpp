@@ -76,6 +76,7 @@ mfTimingItem::mfTimingItem (
   fEndClock       = endClock;
 }
 
+//______________________________________________________________________________
 mfTimingItemsList::mfTimingItemsList ()
 {}
 
@@ -438,7 +439,7 @@ void mfTimingItemsList::print (std::ostream& os) const
 }
 
 std::ostream& operator << (std::ostream& os, const mfTimingItemsList& tim) {
-  tim.print(os);
+  tim.print (os);
   return os;
 }
 

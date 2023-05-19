@@ -50,9 +50,9 @@ Please contact the maintainers of MusicFormats (see option '-c, -contact'):
 ### Conversion from MusicXML to LilyPond failed ###
 \end{lstlisting}
 
-class   {\tt mxmlPartGroupDescr} contains:
+class   {\tt mxsrPartGroup} contains:
 \begin{lstlisting}[language=CPlusPlus]
-struct mxmlPartGroupDescr : public smartable
+struct mxsrPartGroup : public smartable
 {
 /*
   positions represent the order in which the parts appear in <part-list />
@@ -84,7 +84,7 @@ class EXP mxsr2msrSkeletonBuilder :
 
     // an implicit outer-most part group has to be created to contain everything,
     // since there can be parts out of any explicit part group in MusicXML
-    S_mxmlPartGroupDescr      fImplicitOuterPartGroupDescr;
+    S_mxsrPartGroup      fImplicitOuterMxsrPartGroup;
     S_msrPartGroup            fImplicitOuterPartGroup;
 
     void                      createImplicitOuterPartGroup ();
@@ -92,12 +92,12 @@ class EXP mxsr2msrSkeletonBuilder :
     // part groups numbers can be re-used, they're no identifier
     // we use a map to access them by part group number
     int                       fPartGroupsCounter;
-    std::vector<S_mxmlPartGroupDescr>
+    std::vector<S_mxsrPartGroup>
                               fPartGroupDescsVector;
-    std::map<int, S_mxmlPartGroupDescr>
-                              fAllPartGroupDescrsMap;
-    std::map<int, S_mxmlPartGroupDescr>
-                              fStartedPartGroupDescrsMap;
+    std::map<int, S_mxsrPartGroup>
+                              fAllMxsrPartGroupsMap;
+    std::map<int, S_mxsrPartGroup>
+                              fStartedMxsrPartGroupsMap;
 
 	// ... ... ...
 \end{lstlisting}
