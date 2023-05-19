@@ -129,7 +129,7 @@ void Bool::print (std::ostream& os) const
 }
 
 std::ostream& operator << (std::ostream& os, const Bool& theBool) {
-  theBool.print(os);
+  theBool.print (os);
   return os;
 }
 

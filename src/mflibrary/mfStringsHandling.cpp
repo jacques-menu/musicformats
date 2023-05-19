@@ -142,7 +142,7 @@ namespace MusicFormats
 // }
 //
 // std::ostream& operator << (std::ostream& os, const mfMultiLineString& theBool) {
-//   theBool.print(os);
+//   theBool.print (os);
 //   return os;
 // }
 

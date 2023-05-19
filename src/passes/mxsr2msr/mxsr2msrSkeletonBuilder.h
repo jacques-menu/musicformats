@@ -22,10 +22,16 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-struct mxmlPartGroupDescr : public smartable
+// pre-declaration
+class   mxsrPartGroup;
+typedef SMARTP<mxsrPartGroup> S_mxsrPartGroup;
+
+//________________________________________________________________________
+class mxsrPartGroup : public smartable
 {
 /*
-  positions represent the order in which the parts appear in <part-list />
+  positions represent the order in which the parts appear in <part-list />,
+  starting at 0 since vectors are used
 */
 
   public:
@@ -33,10 +39,10 @@ struct mxmlPartGroupDescr : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mxmlPartGroupDescr> create (
+    static SMARTP<mxsrPartGroup> create (
                             int                   startInputLineNumber,
                             int                   partGroupNumber,
-                            const S_msrPartGroup& partGroup,
+                            const S_msrPartGroup& theMsrPartGroup,
                             int                   startPosition);
 
   protected:
@@ -44,13 +50,13 @@ struct mxmlPartGroupDescr : public smartable
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mxmlPartGroupDescr (
+                          mxsrPartGroup (
                             int                   startInputLineNumber,
                             int                   partGroupNumber,
-                            const S_msrPartGroup& partGroup,
+                            const S_msrPartGroup& theMsrPartGroup,
                             int                   startPosition);
 
-    virtual               ~mxmlPartGroupDescr ();
+    virtual               ~mxsrPartGroup ();
 
   public:
 
@@ -63,11 +69,11 @@ struct mxmlPartGroupDescr : public smartable
     int                   getStopInputLineNumber () const
                               { return fStopInputLineNumber; }
 
-    int                   getPartGroupNumber () const
-                              { return fPartGroupNumber; }
+    int                   getMxsrPartGroupNumber () const
+                              { return fMxsrPartGroupNumber; }
 
-    S_msrPartGroup        getPartGroup () const
-                              { return fPartGroup; }
+    S_msrPartGroup        getMsrPartGroup () const
+                              { return fMsrPartGroup; }
 
     int                   getStartPosition () const
                               { return fStartPosition; }
@@ -88,18 +94,22 @@ struct mxmlPartGroupDescr : public smartable
     // public services
     // ------------------------------------------------------
 
-    std::string           partGroupDescrAsString () const;
-
-    std::string           getPartGroupDescrCombinedName () const
+    std::string           fetchMxsrPartGroupCombinedName () const
                               {
                                 return
-                                  fPartGroup->getPartGroupCombinedName ();
+                                  fMsrPartGroup->getPartGroupCombinedName ();
                               }
+
+    static bool           compareMxsrPartGroupsByDecreasingPosition (
+                            const S_mxsrPartGroup& first,
+                            const S_mxsrPartGroup& second);
 
   public:
 
     // print
     // ------------------------------------------------------
+
+    std::string           asString () const;
 
     virtual void          print (std::ostream& os) const;
 
@@ -111,15 +121,115 @@ struct mxmlPartGroupDescr : public smartable
     int                   fStartInputLineNumber;
     int                   fStopInputLineNumber;
 
-    int                   fPartGroupNumber; // may be reused later
+    int                   fMxsrPartGroupNumber; // may be reused later
 
-    S_msrPartGroup        fPartGroup;
+    S_msrPartGroup        fMsrPartGroup;
 
     int                   fStartPosition;
     int                   fStopPosition;
 };
-typedef SMARTP<mxmlPartGroupDescr> S_mxmlPartGroupDescr;
-EXP std::ostream& operator << (std::ostream& os, const S_mxmlPartGroupDescr& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartGroup& elt);
+
+//______________________________________________________________________________
+class EXP mxsrPartGroupsList {
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mxsrPartGroupsList ();
+
+                          mxsrPartGroupsList (
+                            const S_mxsrPartGroup& theMxsrPartGroup);
+
+    virtual               ~mxsrPartGroupsList ();
+
+  public:
+
+    // global variable for general use
+    // ------------------------------------------------------
+
+//     static mxsrPartGroupsList
+//                           sGlobalTimingItemsList;
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const std::list<S_mxsrPartGroup>&
+                          getPartGroupsStdList () const
+                              { return fMxsrPartGroupsList;}
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    // basic list stuff
+    size_t                fetchSize () const
+                              { return fMxsrPartGroupsList.size (); }
+
+    S_mxsrPartGroup       fetchFront () const
+                              { return fMxsrPartGroupsList.front (); }
+
+    S_mxsrPartGroup       fetchBack () const
+                              { return fMxsrPartGroupsList.back (); }
+
+    void                  popFront ()
+                              { fMxsrPartGroupsList.pop_front (); }
+
+    void                  popBack ()
+                              { fMxsrPartGroupsList.pop_back (); }
+
+    void                  pushFront (
+                            const S_mxsrPartGroup& theMxsrPartGroup)
+                              { fMxsrPartGroupsList.push_front (theMxsrPartGroup); }
+
+    void                  pushBack (
+                            const S_mxsrPartGroup& theMxsrPartGroup)
+                              { fMxsrPartGroupsList.push_back (theMxsrPartGroup); }
+
+    // add an mxsrPartGroup
+    void                  prependMxsrPartGroup (
+                            const S_mxsrPartGroup& theMxsrPartGroup);
+
+    void                  appendMxsrPartGroup (
+                            const S_mxsrPartGroup& theMxsrPartGroup);
+
+    // sort
+    void                  sortByDecreasingPosition ();
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    void                  print (std::ostream& os) const;
+
+    void                  printWithContext (
+                            const std::string& context,
+                            char               evidencer,
+                            std::ostream&      os) const;
+
+  private:
+
+    // private services
+    // ------------------------------------------------------
+
+    void                  doPrint (std::ostream& os) const;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    std::string           fMxsrPartGroupListName;
+
+    std::list<S_mxsrPartGroup>
+                          fMxsrPartGroupsList;
+};
+EXP std::ostream& operator << (std::ostream& os, const mxsrPartGroupsList& elt);
 
 //________________________________________________________________________
 class EXP mxsr2msrSkeletonBuilder :
@@ -433,7 +543,7 @@ virtual void              visitEnd   (S_score_partwise& elt);
     // part groups handling
     // ------------------------------------------------------
 
-    int                   fCurrentPartGroupNumber;
+    int                   fCurrentMxsrPartGroupNumber;
     msrPartGroupTypeKind  fCurrentPartGroupTypeKind;
     std::string           fCurrentPartGroupName;
     std::string           fCurrentPartGroupAbbreviation;
@@ -448,112 +558,107 @@ virtual void              visitEnd   (S_score_partwise& elt);
                           fCurrentPartGroupBarLineKind;
     int                   fCurrentPartGroupSymbolDefaultX;
 
-    // an implicit outer-most part group has to be created
+    // an implicit outer-most MXSR part group has to be created
     // whenever there is explicit part group in MusicXML to contain the parts
-    Bool                  fAPartGroupHasBeenstarted;
+    Bool                  fAnMxsrPartGroupHasBeenStarted;
 
-    S_msrPartGroup        fImplicitOuterMostPartGroup;
-    S_mxmlPartGroupDescr  fImplicitOuterMostPartGroupDescr;
+    S_mxsrPartGroup       fImplicitOuterMostMxsrPartGroup;
+    S_msrPartGroup        fImplicitOuterMostMsrPartGroup;
 
-    void                  createAnImplicitOuterPartGroupAndAddItToScore ();
-//     void                  removeImplicitOuterPartGroupFromScore ();
+    void                  createAnImplicitOuterMsrPartGroupAndAddItToScore (
+                            int inputLineNumber);
+//     void                  removeImplicitOuterMostMsrPartGroupFromScore ();
 
-    // part groups numbers can be re-used, they're no identifier
-    // we use a map to access them by part group number
-    int                   fPartGroupsCounter;
-    std::vector<S_mxmlPartGroupDescr>
-                          fPartGroupDescsVector;
-    std::map<int, S_mxmlPartGroupDescr>
-                          fAllPartGroupDescrsMap;
-    std::map<int, S_mxmlPartGroupDescr>
-                          fStartedPartGroupDescrsMap;
+    // MXSR part groups numbers can be re-used, and they're no identifier,
+    // so we use a map to access them by MXSR part group number
+    int                   fMxsrPartGroupsCounter;
 
-    void                  displayPartGroupDescrsVector (
+    std::vector<S_mxsrPartGroup>
+                          fMxsrPartGroupsVector;
+
+    std::map<int, S_mxsrPartGroup>
+                          fAllMxsrPartGroupsMap;
+
+    std::map<int, S_mxsrPartGroup>
+                          fStartedMxsrPartGroupsMap;
+
+    void                  displayMxsrPartGroupsVector (
                             int inputLineNumber);
 
-    void                  displayAllPartGroupDescrsMap (
+    void                  displayAllMxsrPartGroupsMap (
                             int inputLineNumber);
 
-    void                  displayStartedPartGroupDescrsMap (
+    void                  displayStartedMxsrPartGroupsMap (
                             int inputLineNumber);
 
-    S_mxmlPartGroupDescr
-                          fetchStartedPartGroupDescr (
+    S_mxsrPartGroup       fetchStartedMxsrPartGroupFromMap (
                             int partGroupNumber);
 
-    std::list<S_mxmlPartGroupDescr>
-                          fPartGroupsDescrStack;
+    mxsrPartGroupsList    fMxsrPartGroupsStack;
 
   private:
 
     // private methods
 
-    void                  displayPartGroupDescrsStack (
-                            int inputLineNumber);
+    void                  registerMxsrPartGroupAsStarted (
+                            int                    inputLineNumber,
+                            const S_mxsrPartGroup& theMxsrPartGroup);
 
-    S_mxmlPartGroupDescr
-                          fetchPartGroupDescrStackTop ();
+    void                  registerMxsrPartGroupAsStopped (
+                            int                    inputLineNumber,
+                            const S_mxsrPartGroup& theMxsrPartGroup);
 
-    void                  registerPartGroupDescrAsStarted (
-                            int                         inputLineNumber,
-                            const S_mxmlPartGroupDescr& partGroupDescr);
-
-    void                  registerPartGroupDescrAsStopped (
-                            int                         inputLineNumber,
-                            const S_mxmlPartGroupDescr& partGroupDescr);
-
-    void                  displayPartGroupsData (
+    void                  displayAllCollectedData (
                             int                inputLineNumber,
                             const std::string& context);
 
-    void                  handlePartGroupStart (
+    void                  handleMxsrPartGroupStart (
                             int inputLineNumber);
 
-    void                  handlePartGroupStop (
+    void                  handleMxsrPartGroupStop (
                             int inputLineNumber);
 
-    std::vector<std::list<S_mxmlPartGroupDescr> >
-                          fPositionStartingPartGroupDescrsVector;
-    std::vector<std::list<S_mxmlPartGroupDescr> >
-                          fPositionStoppingPartGroupDescrsVector;
+    // several MXSR part groups may start and/or stop at the same position JMI ??? v0.9.69
+    std::vector<mxsrPartGroupsList >
+                          fPositionsOfStartingMxsrPartGroupsListsVector;
+    std::vector<mxsrPartGroupsList>
+                          fPositionsOfStoppingMxsrPartGroupsListsVector;
 
-    void                  displayPositionStartingPartGroupDescrsVector (
+    void                  displayPositionsOfStartingMxsrPartGroupsVector (
                            int inputLineNumber);
 
-    void                  displayPositionStoppingPartGroupDescrsVector (
+    void                  displayPositionsOfStoppingMxsrPartGroupsVector (
                             int inputLineNumber);
 
-    void                  insertPartGroupDescInStartingList (
-                            int                         inputLineNumber,
-                            const S_mxmlPartGroupDescr& partGroupDescr,
-                            std::list<S_mxmlPartGroupDescr>&
-                                                            startingPartGroupDescrsList);
+//     void                  insertMxsrPartGroupInStartingListInPositionDecreasingOrder (
+//                             int                         inputLineNumber,
+//                             const S_mxsrPartGroup&      theMxsrPartGroup,
+//                             std::list<S_mxsrPartGroup>& startingMxsrPartGroupsList);
+//
+//     void                  insertMxsrPartGroupInStoppingListInPositionDecreasingOrder (
+//                             int                         inputLineNumber,
+//                             const S_mxsrPartGroup&      theMxsrPartGroup,
+//                             std::list<S_mxsrPartGroup>& stoppingMxsrPartGroupsList);
 
-    void                  insertPartGroupDescInStoppingList (
-                            int                         inputLineNumber,
-                            const S_mxmlPartGroupDescr& partGroupDescr,
-                            std::list<S_mxmlPartGroupDescr>&
-                                                            stoppingPartGroupDescrsList);
+    void                  registerMxsrPartGroupAsStoppingAtCurrentPosition (
+                            int                    inputLineNumber,
+                            const S_mxsrPartGroup& theMxsrPartGroup);
 
-    void                  registerPartGroupDescrAsStoppingAtCurrentPosition (
-                            int                         inputLineNumber,
-                            const S_mxmlPartGroupDescr& partGroupDescr);
+//     void                  registerMsrPartGroup (
+//                             int                   inputLineNumber,
+//                             const S_msrPartGroup& partroup);
 
-    void                  registerPartGroup (
-                            int                   inputLineNumber,
-                            const S_msrPartGroup& partroup);
-
-    void                  registerPart (
+    void                  registerMsrPart (
                             int              inputLineNumber,
                             int              partPosition,
-                            const S_msrPart& part);
+                            const S_msrPart& theMsrPart);
 
-    void                  doNestPartGroupDescrInItsContainer (
-                            int                         inputLineNumber,
-                            const S_mxmlPartGroupDescr& partGroupDescrToBeStopped,
-                            const S_mxmlPartGroupDescr& containingPartGroupDescr);
+    void                  handleMxsrPartGroupNestingInItsContainer (
+                            int                    inputLineNumber,
+                            const S_mxsrPartGroup& theMxsrPartGroupToBeStopped,
+                            const S_mxsrPartGroup& theContainingMxsrPartGroup);
 
-    void                  doPartGroupsNestingAndPartsAllocation (
+    void                  handlePartGroupsNestingAndScorePartsAllocation (
                             int inputLineNumber);
 
 
@@ -577,23 +682,22 @@ virtual void              visitEnd   (S_score_partwise& elt);
     std::string           fCurrentPartInstrumentAbbreviation;
 
     std::map<std::string, S_msrPart>
-                          fPartsMap;
+                          fMsrPartsMap;
 
-    void                  displayPartsMap (
+    void                  displayMsrPartsMap (
                             int inputLineNumber);
 
-    int                   fCurrentNoIDPartNumber;
+    // handling the score part, each one incrementing the current 'position'
+    // of the score parts, used for handling nesting/overlapping
+    int                   fCurrentScorePartPosition;
 
-    // handling the part, each one incrementing the 'position'
-    // of the part groups, used for handling nesting/overlapping
-    int                   fCurrentPartsPosition;
     std::vector<S_msrPart>
-                          fPartsVector;
+                          fMsrPartsVector;
 
-    void                  displayPartsVector (
+    void                  displayMsrPartsVector (
                             int inputLineNumber);
 
-    S_msrPart             fCurrentPart; // used throughout
+    S_msrPart             fCurrentMsrPart; // used throughout
 
 
     // staff handling
@@ -615,10 +719,6 @@ virtual void              visitEnd   (S_score_partwise& elt);
                             int inputLineNumber,
                             int staffNumber,
                             int voiceNumber);
-
-    S_msrVoice            fetchFirstRegularVoiceFromStaff (
-                            int inputLineNumber,
-                            int staffNumber);
 
 
     // measures
@@ -659,13 +759,9 @@ virtual void              visitEnd   (S_score_partwise& elt);
     Bool                  fThereAreHarmoniesToBeAttachedToCurrentNote;
     int                   fHarmoniesVoicesCounter;
 
-//     S_msrVoice            createRegularVoiceHarmoniesVoiceIfNotYetDone ( JMI v0.9.66
-//                             int        inputLineNumber,
-//                             const S_msrVoice& voice);
-
     S_msrVoice            createPartHarmoniesVoiceIfNotYetDone (
                             int              inputLineNumber,
-                            const S_msrPart& part);
+                            const S_msrPart& theMsrPart);
 
 
     // figured bass handling
@@ -676,7 +772,7 @@ virtual void              visitEnd   (S_score_partwise& elt);
 
     S_msrVoice            createPartFiguredBassVoiceIfNotYetDone (
                             int              inputLineNumber,
-                            const S_msrPart& part);
+                            const S_msrPart& theMsrPart);
 };
 
 

@@ -2491,30 +2491,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
         inputLineNumber,
         partsList);
 
-    if (partsList.size () == 1) {
-      // there's only one part in the part list,
-      // assume this is the one
-      fCurrentPart =
-        partsList.front ();
-
-      partID =
-        fCurrentPart->
-          getPartID ();
-
-      std::stringstream ss;
-
-      ss <<
-        "part 'id' is empty, using " <<
-        partID <<
-        " since it is the only part in the <part-list />";
-
-      mxsr2msrWarning (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        ss.str ());
-    }
-
-    else {
+    if (partsList.size () == 0) {
       std::stringstream ss;
 
       fMsrScore->
@@ -2535,6 +2512,29 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
+        ss.str ());
+    }
+
+    else {
+      // there's only one part in the part list,
+      // assume this is the one
+      fCurrentPart =
+        partsList.front ();
+
+      partID =
+        fCurrentPart->
+          getPartID ();
+
+      std::stringstream ss;
+
+      ss <<
+        "part 'id' is empty, using " <<
+        partID <<
+        " since it is the only part in the <part-list />";
+
+      mxsr2msrWarning (
+        gServiceRunData->getInputSourceName (),
+        inputLineNumber,
         ss.str ());
     }
   }

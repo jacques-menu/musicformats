@@ -57,6 +57,11 @@ class EXP msrElement : public smartable
     int                   getInputStartLineNumber () const
                               { return fInputStartLineNumber; }
 
+    void                  setInputEndLineNumber (int value)
+                              { fInputEndLineNumber = value; }
+    int                   getInputEndLineNumber () const
+                              { return fInputEndLineNumber; }
+
   public:
 
     // public services
@@ -98,6 +103,7 @@ class EXP msrElement : public smartable
     // ------------------------------------------------------
 
     int                   fInputStartLineNumber;
+    int                   fInputEndLineNumber;
 };
 typedef SMARTP<msrElement> S_msrElement;
 EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt);
