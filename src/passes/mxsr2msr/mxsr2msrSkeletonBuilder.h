@@ -155,14 +155,6 @@ class EXP mxsrPartGroupsList : public smartable
 
   public:
 
-    // global variable for general use
-    // ------------------------------------------------------
-
-//     static mxsrPartGroupsList
-//                           sGlobalTimingItemsList;
-
-  public:
-
     // set and get
     // ------------------------------------------------------
 
@@ -225,8 +217,6 @@ class EXP mxsrPartGroupsList : public smartable
 
     // private services
     // ------------------------------------------------------
-
-    void                  doPrint (std::ostream& os) const;
 
   private:
 
@@ -606,6 +596,9 @@ virtual void              visitEnd   (S_score_partwise& elt);
                             int partGroupNumber);
 
     mxsrPartGroupsList    fMxsrPartGroupsStack;
+
+    void                  displayMxsrPartGroupsStack (
+                            int inputLineNumber);
 
   private:
 
