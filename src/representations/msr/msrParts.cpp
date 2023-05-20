@@ -3277,7 +3277,7 @@ std::string msrPart::asString () const
   std::stringstream ss;
 
   ss <<
-    "Part" <<
+    "[Part" <<
     ", partID: \"" <<
     fPartID <<
     "\", partName: \"" <<
@@ -3287,7 +3287,8 @@ std::string msrPart::asString () const
     "\", fPartMsrName: " << fPartMsrName <<
     fPartName <<
     "\", fPartAllStavesList.size (): " << fPartAllStavesList.size () <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputStartLineNumber <<
+    ']';
 
   return ss.str ();
 }
