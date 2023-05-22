@@ -94,7 +94,8 @@ class EXP mfTimingItem : public smartable
 typedef SMARTP<mfTimingItem> S_mfTimingItem;
 
 //______________________________________________________________________________
-class EXP mfTimingItemsList {
+class EXP mfTimingItemsList
+{
   public:
 
     // constructors/destructor
