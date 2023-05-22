@@ -634,7 +634,6 @@ virtual void              visitEnd   (S_score_partwise& elt);
 
     void                  registerPart (
                             int              inputLineNumber,
-                            int              partPosition,
                             const S_msrPart& thePart);
 
     void                  handlePartGroupNestingInItsContainer (

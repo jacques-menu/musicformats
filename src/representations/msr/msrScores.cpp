@@ -571,34 +571,23 @@ void msrScore::displayPartGroupsList (
     std::endl;
 
   if (partGroupsListSize) {
-    std::list<S_msrPartGroup>::const_iterator
-      iBegin = fPartGroupsList.begin (),
-      iEnd   = fPartGroupsList.end (),
-      i      = iBegin;
-
-    S_msrPartGroup partGroup = (*i);
-
     ++gIndenter;
 
-    int n = partGroupsListSize;
-    for ( ; ; ) {
+    int counter = 1;
+    for (S_msrPartGroup partGroup : fPartGroupsList) {
       gLog <<
-        "v (" << n << ")" <<
+        counter << " :" <<
         std::endl;
 
       ++gIndenter;
       partGroup->printSummary (gLog);
-//       gLog <<
+//       gLog << // JMI v0.9.69
 //         gTab << partGroup->asString () <<
 //         partGroup <<
 //         std::endl;
       --gIndenter;
 
-      --n;
-
-      if (++i == iEnd) break;
-
-//       gLog << std::endl;
+      ++counter;
     } // for
 
     --gIndenter;

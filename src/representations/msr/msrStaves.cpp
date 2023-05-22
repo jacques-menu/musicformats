@@ -49,9 +49,9 @@ namespace MusicFormats
 int msrStaff::sStaffMaxRegularVoices = 4;
 
 S_msrStaff msrStaff::create (
-  int          inputLineNumber,
-  msrStaffKind staffKind,
-  int          staffNumber,
+  int              inputLineNumber,
+  msrStaffKind     staffKind,
+  int              staffNumber,
   const S_msrPart& staffUpLinkToPart)
 {
   msrStaff* obj =
@@ -65,9 +65,9 @@ S_msrStaff msrStaff::create (
 }
 
 msrStaff::msrStaff (
-  int          inputLineNumber,
-  msrStaffKind staffKind,
-  int          staffNumber,
+  int              inputLineNumber,
+  msrStaffKind     staffKind,
+  int              staffNumber,
   const S_msrPart& staffUpLinkToPart)
     : msrElement (inputLineNumber)
 {
@@ -559,11 +559,11 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 */
 
 void msrStaff::createAMeasureAndAppendItToStaff (
-  int           inputLineNumber,
-  int           previousMeasureEndInputLineNumber,
+  int                inputLineNumber,
+  int                previousMeasureEndInputLineNumber,
   const std::string& measureNumber,
   msrMeasureImplicitKind
-                measureImplicitKind)
+                     measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -658,9 +658,10 @@ void msrStaff::setNextMeasureNumberInStaff (
 }
 
 S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
-  int           inputLineNumber,
-  int           voiceNumber,
-  const std::string& currentMeasureNumber)
+  int                inputLineNumber,
+  int                voiceNumber,
+  const std::string& currentMeasureNumber,
+  S_msrPartGroup     partUpLinkToPartGroup)
 {
   ++fStaffRegularVoicesCounter;
 
