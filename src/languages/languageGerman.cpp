@@ -249,6 +249,10 @@ std::ostream& operator << (std::ostream& os, const S_languageGerman& elt)
 // {
 //   return "Display a summary of the second MSR";
 // }
+// std::string language::displayASummaryOfTheLPSR () const
+// {
+//   return "Display a summary of the LPSR";
+// }
 //
 // //_______________________________________________________________________________
 // // timing

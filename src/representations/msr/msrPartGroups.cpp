@@ -1397,9 +1397,10 @@ std::string msrPartGroup::asString () const
   std::stringstream ss;
 
   ss <<
-    "PartGroup \"" <<
+    "[PartGroup \"" <<
     getPartGroupCombinedName () <<
-    "\", line " << fInputStartLineNumber;
+    ", line " << fInputStartLineNumber <<
+    ']';
 
   return ss.str ();
 }
@@ -1524,9 +1525,9 @@ void msrPartGroup::printFull (std::ostream& os) const
 
 void msrPartGroup::print (std::ostream& os) const
 {
-  static int simultaneousCalls = 0;
-
-  ++simultaneousCalls;
+//   static int simultaneousCalls = 0; // JMI v9.9.69
+//
+//   ++simultaneousCalls;
 
 //   if (simultaneousCalls == 100) abort (); // JMI v0.9.69 for the implicit outer-most part group...
 
@@ -1561,7 +1562,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   os << ']' << std::endl;
 
-  --simultaneousCalls;
+//   --simultaneousCalls;
 }
 
 void msrPartGroup::printSummary (std::ostream& os) const

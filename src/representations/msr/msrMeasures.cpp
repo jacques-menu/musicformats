@@ -2386,7 +2386,7 @@ void msrMeasure::appendNoteToMeasure (
       fMeasureCurrentAccumulatedWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes ()) {
+  if (inputLineNumber == 46 || gTraceOahGroup->getTraceNotes ()) {
     gLog <<
       std::endl << std::endl <<
       "this->print (gLog):" <<
@@ -2491,9 +2491,11 @@ void msrMeasure::appendNoteToMeasure (
   appendNoteOrPaddingToMeasure (note);
 
   // determine whether the note occupies a full measure JMI v0.9.69
-  if (note->getSoundingWholeNotes () == fMeasureCurrentAccumulatedWholeNotesDuration)
+//   if (note->getSoundingWholeNotes () == fMeasureCurrentAccumulatedWholeNotesDuration) {
+  if (note->getSoundingWholeNotes () == fFullMeasureWholeNotesDuration) {
     note->
       setNoteOccupiesAFullMeasure ();
+  }
 
   // is note a multiple full-bar rest? JMI v0.9.69
   if (note->fetchNoteIsAFullNoteRest ()) {

@@ -238,6 +238,10 @@ std::string languageFrench::displayTheNamesInTheSecondMSR () const
 {
   return "Affichage des noms du second MSR";
 }
+std::string languageFrench::displayTheNamesInTheLPSR () const
+{
+  return "Affichage des noms du LPSR";
+}
 
 std::string languageFrench::displayASummaryOfTheFirstMSR () const
 {
@@ -246,6 +250,10 @@ std::string languageFrench::displayASummaryOfTheFirstMSR () const
 std::string languageFrench::displayASummaryOfTheSecondMSR () const
 {
   return "Affichage du résumé du second MSR";
+}
+std::string languageFrench::displayASummaryOfTheLPSR () const
+{
+  return "Affichage du résumé du LPSR";
 }
 
 //_______________________________________________________________________________

@@ -94,7 +94,7 @@ S_bsrCellsList brailleCharacter (
       result->
         appendCellKindToCellsList (kCellN);
       break;
-    case 'obj':
+    case 'o':
       result->
         appendCellKindToCellsList (kCellO);
       break;

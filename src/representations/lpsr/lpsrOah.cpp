@@ -1385,7 +1385,7 @@ R"()",
   // display LPSR
 
   S_oahBooleanAtom
-    DisplayLpsrBooleanAtom =
+    displayLpsrBooleanAtom =
       oahBooleanAtom::create (
         "display-lpsr", "dlpsr",
 R"(Write the contents of the LPSR data to standard error.)",
@@ -1394,7 +1394,7 @@ R"(Write the contents of the LPSR data to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      DisplayLpsrBooleanAtom);
+      displayLpsrBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
@@ -1403,6 +1403,28 @@ R"(Write the contents of the LPSR data to standard error.)",
 R"(Write the contents of the LPSR data with its full MSR component to standard error.)",
         "fDisplayLpsrFull",
         fDisplayLpsrFull));
+
+  // display LPSR names
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-lpsr-names", "dlpsrnames",
+R"(Only write a view of the names in the LPSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrNames",
+        fDisplayLpsrNames));
+
+  // display LPSRR summary
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-lpsr-summary", "dlpsrsum",
+R"(Only write a summary of the fLPSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrSummary",
+        fDisplayLpsrSummary));
 }
 
 void lpsrOahGroup::initializeLpsrPaperOptions ()

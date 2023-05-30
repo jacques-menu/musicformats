@@ -2,7 +2,7 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 1.0 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
-  <movement-title>Overlapping part groups</movement-title>
+  <movement-title>Overlapping Part Groups</movement-title>
   <identification>
     <creator type="composer">In MusicXML groups can overlap (Grp1: #1-4, Grp2: #3-5)</creator>
     <creator type="arranger">In Lilypond, overlaps are not possible: Grp2 ends at #4</creator>

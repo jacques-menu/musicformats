@@ -1120,7 +1120,7 @@ R"(Print help about OPTION_NAME.)",
 
   fFindStringAtom =
     oahFindStringAtom::create (
-      "find", "", // "find-string" ??? JMI v0.9.66
+      "find", "f",
 R"(Find string STRING in the help.
 The search is case insensitive, and a '-' is added in front of options name for clarity.)",
       "STRING",

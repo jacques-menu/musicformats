@@ -175,7 +175,7 @@ void msrPart::initializePart ()
     std::stringstream ss;
 
     ss <<
-      "Created part contains: " << asString ();
+      "The created part contains: " << asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

@@ -3311,6 +3311,442 @@ void lpsrScore::printFull (std::ostream& os) const
   --gIndenter;
 }
 
+void lpsrScore::printSummary (std::ostream& os) const
+{
+  os <<
+    std::string ("LPSR Score")
+      + ", " +
+    gLanguage->fullVersion () <<
+    std::endl << std::endl;
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fEmbeddedMsrScore != nullptr,
+    "fEmbeddedMsrScore is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  ++gIndenter;
+
+  // print the embedded MSR score (without the voices)
+  fEmbeddedMsrScore->
+    printSummary (os);
+  os << std::endl;
+
+  // are there needed things?
+  const int fieldWidth = 42;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fJianpuFileIncludeIsNeeded" << ": " <<
+    fJianpuFileIncludeIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fScmAndAccregSchemeModulesAreNeeded" << ": " <<
+    fScmAndAccregSchemeModulesAreNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTongueSchemeFunctionIsNeeded" << ": " <<
+    fTongueSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCustomShortBarLineSchemeFunctionIsNeeded" << ": " <<
+    fCustomShortBarLineSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fEditorialAccidentalSchemeFunctionIsNeeded" << ": " <<
+    fEditorialAccidentalSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fDynamicsSchemeFunctionIsNeeded" << ": " <<
+    fDynamicsSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTupletsCurvedBracketsSchemeFunctionIsNeeded" << ": " <<
+    fTupletsCurvedBracketsSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fAfterSchemeFunctionIsNeeded" << ": " <<
+    fAfterSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTempoNotesRelationshipSchemeFunctionIsNeeded" << ": " <<
+    fTempoNotesRelationshipSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fGlissandoWithTextSchemeFunctionsIsNeeded" << ": " <<
+    fGlissandoWithTextSchemeFunctionsIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fOtherDynamicSchemeFunctionIsNeeded" << ": " <<
+    fOtherDynamicSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fAutoVoicesSchemeFunctionIsNeeded" << ": " <<
+    fAutoVoicesSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fSchleiferSchemeFunctionIsNeeded" << ": " <<
+    fSchleiferSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fScoopSchemeFunctionIsNeeded" << ": " <<
+    fScoopSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fDampMarkupIsNeeded" << ": " <<
+    fDampMarkupIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fDampAllMarkupIsNeeded" << ": " <<
+    fDampAllMarkupIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fWhiteNoteHeadsIsNeeded" << ": " <<
+    fWhiteNoteHeadsIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fBoxAroundNextBarNumberIsNeeded" << ": " <<
+    fBoxAroundNextBarNumberIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fJazzChordsDisplayIsNeeded" << ": " <<
+    fJazzChordsDisplayIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fColoredLedgerLinesIsNeeded" << ": " <<
+    fColoredLedgerLinesIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fHiddenMeasureAndBarLineIsNeeded" << ": " <<
+    fHiddenMeasureAndBarLineIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMergeStaffCommonRestsIsNeeded" << ": " <<
+    fMergeStaffCommonRestsIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTextSpannerWithCenteredTextIsNeeded" << ": " <<
+    fTextSpannerWithCenteredTextIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMergeMultipleFullBarRestsIsNeeded" << ": " <<
+    fMergeMultipleFullBarRestsIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded" << ": " <<
+    fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded <<
+    std::endl << std::endl;
+
+  os <<
+    "LPSR basic information" <<
+    std::endl << std::endl;
+
+  ++gIndenter;
+
+  // print LPSR basic information
+  fScoreHeader->print (os);
+  os << std::endl;
+
+  fScorePaper->print (os);
+  os << std::endl;
+
+  if (fScoreLayout) {
+    fScoreLayout->print (os);
+    os << std::endl;
+  }
+
+  --gIndenter;
+
+  // print the voices and stanzas
+  if (fScoreElementsList.size ()) {
+    os <<
+      "Voices & Stanzas" <<
+      std::endl << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_msrElement>::const_iterator
+      iBegin = fScoreElementsList.begin (),
+      iEnd   = fScoreElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      (*i)->print (os);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    os << std::endl;
+    --gIndenter;
+  }
+
+  // print the book blocks
+  if (fScoreBookBlocksList.size ()) {
+    os <<
+      "Book blocks" <<
+      std::endl << std::endl;
+    ++gIndenter;
+
+    std::list<S_lpsrBookBlock>::const_iterator
+      iBegin = fScoreBookBlocksList.begin (),
+      iEnd   = fScoreBookBlocksList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      (*i)->print (os);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    os << std::endl;
+    --gIndenter;
+  }
+
+  --gIndenter;
+}
+
+void lpsrScore::printNames (std::ostream& os) const
+{
+  os <<
+    std::string ("LPSR Score")
+      + ", " +
+    gLanguage->fullVersion () <<
+    std::endl << std::endl;
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fEmbeddedMsrScore != nullptr,
+    "fEmbeddedMsrScore is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  ++gIndenter;
+
+  // print the embedded MSR score (without the voices)
+//   fEmbeddedMsrScore->
+//     printNames (os);
+  os << std::endl;
+
+  // are there needed things?
+  const int fieldWidth = 42;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fJianpuFileIncludeIsNeeded" << ": " <<
+    fJianpuFileIncludeIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fScmAndAccregSchemeModulesAreNeeded" << ": " <<
+    fScmAndAccregSchemeModulesAreNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTongueSchemeFunctionIsNeeded" << ": " <<
+    fTongueSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCustomShortBarLineSchemeFunctionIsNeeded" << ": " <<
+    fCustomShortBarLineSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fEditorialAccidentalSchemeFunctionIsNeeded" << ": " <<
+    fEditorialAccidentalSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fDynamicsSchemeFunctionIsNeeded" << ": " <<
+    fDynamicsSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTupletsCurvedBracketsSchemeFunctionIsNeeded" << ": " <<
+    fTupletsCurvedBracketsSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fAfterSchemeFunctionIsNeeded" << ": " <<
+    fAfterSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTempoNotesRelationshipSchemeFunctionIsNeeded" << ": " <<
+    fTempoNotesRelationshipSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fGlissandoWithTextSchemeFunctionsIsNeeded" << ": " <<
+    fGlissandoWithTextSchemeFunctionsIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fOtherDynamicSchemeFunctionIsNeeded" << ": " <<
+    fOtherDynamicSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fAutoVoicesSchemeFunctionIsNeeded" << ": " <<
+    fAutoVoicesSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fSchleiferSchemeFunctionIsNeeded" << ": " <<
+    fSchleiferSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fScoopSchemeFunctionIsNeeded" << ": " <<
+    fScoopSchemeFunctionIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fDampMarkupIsNeeded" << ": " <<
+    fDampMarkupIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fDampAllMarkupIsNeeded" << ": " <<
+    fDampAllMarkupIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fWhiteNoteHeadsIsNeeded" << ": " <<
+    fWhiteNoteHeadsIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fBoxAroundNextBarNumberIsNeeded" << ": " <<
+    fBoxAroundNextBarNumberIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fJazzChordsDisplayIsNeeded" << ": " <<
+    fJazzChordsDisplayIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fColoredLedgerLinesIsNeeded" << ": " <<
+    fColoredLedgerLinesIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fHiddenMeasureAndBarLineIsNeeded" << ": " <<
+    fHiddenMeasureAndBarLineIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMergeStaffCommonRestsIsNeeded" << ": " <<
+    fMergeStaffCommonRestsIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTextSpannerWithCenteredTextIsNeeded" << ": " <<
+    fTextSpannerWithCenteredTextIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMergeMultipleFullBarRestsIsNeeded" << ": " <<
+    fMergeMultipleFullBarRestsIsNeeded <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded" << ": " <<
+    fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded <<
+    std::endl << std::endl;
+
+  os <<
+    "LPSR basic information" <<
+    std::endl << std::endl;
+
+  ++gIndenter;
+
+  // print LPSR basic information
+  fScoreHeader->print (os);
+  os << std::endl;
+
+  fScorePaper->print (os);
+  os << std::endl;
+
+  if (fScoreLayout) {
+    fScoreLayout->print (os);
+    os << std::endl;
+  }
+
+  --gIndenter;
+
+  // print the voices and stanzas
+  if (fScoreElementsList.size ()) {
+    os <<
+      "Voices & Stanzas" <<
+      std::endl << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_msrElement>::const_iterator
+      iBegin = fScoreElementsList.begin (),
+      iEnd   = fScoreElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      (*i)->print (os);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    os << std::endl;
+    --gIndenter;
+  }
+
+  // print the book blocks
+  if (fScoreBookBlocksList.size ()) {
+    os <<
+      "Book blocks" <<
+      std::endl << std::endl;
+    ++gIndenter;
+
+    std::list<S_lpsrBookBlock>::const_iterator
+      iBegin = fScoreBookBlocksList.begin (),
+      iEnd   = fScoreBookBlocksList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      (*i)->print (os);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    os << std::endl;
+    --gIndenter;
+  }
+
+  --gIndenter;
+}
+
 void lpsrScore::print (std::ostream& os) const
 {
   os <<

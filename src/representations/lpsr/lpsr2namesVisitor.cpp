@@ -17,12 +17,15 @@
 
 #include "oahEarlyOptions.h"
 
+#include "msrScores.h"
+
 #include "oahOah.h"
 #include "msrOah.h"
+#include "lpsrOah.h"
 
-#include "msr2namesVisitor.h"
+#include "lpsr2namesVisitor.h"
 
-#include "msrBrowsers.h"
+#include "lpsrBrowsers.h"
 
 #include "waeHandlers.h"
 
@@ -31,10 +34,10 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-msr2namesVisitor::msr2namesVisitor (
-  const S_msrOahGroup& msrOpts)
+lpsr2namesVisitor::lpsr2namesVisitor (
+  const S_lpsrOahGroup& lpsrOpts)
 {
-  fMsrOahGroup = msrOpts;
+  fLpsrOahGroup = lpsrOpts;
 
   // part groups
   fPartGroupsCounter = 0;
@@ -50,21 +53,22 @@ msr2namesVisitor::msr2namesVisitor (
   fVoicesCounter = 0;
 };
 
-msr2namesVisitor::~msr2namesVisitor ()
+lpsr2namesVisitor::~lpsr2namesVisitor ()
 {}
 
 //________________________________________________________________________
-void msr2namesVisitor::printNamesFromMsrScore (
-  const S_msrScore& score)
+void lpsr2namesVisitor::printNamesFromLpsrScore (
+  const S_lpsrScore& score)
 {
   if (score) {
     // set the parts browsing order
     score->
-      setStavesBrowingOrderKind (
-        msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
+      getEmbeddedMsrScore ()->
+        setStavesBrowingOrderKind (
+          msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
 
-    // create a msrScore browser
-    msrBrowser<msrScore> browser (this);
+    // create a lpsrScore browser
+    lpsrBrowser<lpsrScore> browser (this);
 
     // browse the score with the browser
     browser.browse (*score);
@@ -72,14 +76,14 @@ void msr2namesVisitor::printNamesFromMsrScore (
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrScore& elt)
+void lpsr2namesVisitor::visitStart (S_msrScore& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrScore";
+      "--> Start visiting lpsrScore";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -96,7 +100,7 @@ void msr2namesVisitor::visitStart (S_msrScore& elt)
   ++gIndenter;
 }
 
-void msr2namesVisitor::visitEnd (S_msrScore& elt)
+void lpsr2namesVisitor::visitEnd (S_msrScore& elt)
 {
   --gIndenter;
 
@@ -105,7 +109,7 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrScore";
+      "--> End visiting lpsrScore";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -154,14 +158,14 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
+void lpsr2namesVisitor::visitStart (S_msrPartGroup& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrPartGroup";
+      "--> Start visiting lpsrPartGroup";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -210,7 +214,7 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
     std::endl << std::endl;
 }
 
-void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
+void lpsr2namesVisitor::visitEnd (S_msrPartGroup& elt)
 {
   --gIndenter;
 
@@ -219,7 +223,7 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrPartGroup";
+      "--> End visiting lpsrPartGroup";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -229,14 +233,14 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrPart& elt)
+void lpsr2namesVisitor::visitStart (S_msrPart& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrPart";
+      "--> Start visiting lpsrPart";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -289,7 +293,7 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
     std::endl << std::endl;
 }
 
-void msr2namesVisitor::visitEnd (S_msrPart& elt)
+void lpsr2namesVisitor::visitEnd (S_msrPart& elt)
 {
   --gIndenter;
 
@@ -298,7 +302,7 @@ void msr2namesVisitor::visitEnd (S_msrPart& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrPart";
+      "--> End visiting lpsrPart";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -308,14 +312,14 @@ void msr2namesVisitor::visitEnd (S_msrPart& elt)
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrStaff& elt)
+void lpsr2namesVisitor::visitStart (S_msrStaff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrStaff";
+      "--> Start visiting lpsrStaff";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -363,7 +367,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
   fOnGoingStaff = true;
 }
 
-void msr2namesVisitor::visitEnd (S_msrStaff& elt)
+void lpsr2namesVisitor::visitEnd (S_msrStaff& elt)
 {
   --gIndenter;
 
@@ -372,7 +376,7 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrStaff";
+      "--> End visiting lpsrStaff";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -384,14 +388,14 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrVoice& elt)
+void lpsr2namesVisitor::visitStart (S_msrVoice& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrVoice";
+      "--> Start visiting lpsrVoice";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -428,7 +432,7 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
   gLog << std::endl;
 }
 
-void msr2namesVisitor::visitEnd (S_msrVoice& elt)
+void lpsr2namesVisitor::visitEnd (S_msrVoice& elt)
 {
   --gIndenter;
 
@@ -437,7 +441,7 @@ void msr2namesVisitor::visitEnd (S_msrVoice& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrVoice";
+      "--> End visiting lpsrVoice";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

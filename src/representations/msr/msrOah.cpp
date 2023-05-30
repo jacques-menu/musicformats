@@ -828,7 +828,7 @@ R"(Write the contents of the first MSR skeleton data to standard error.)",
   // display first MSR
 
   S_oahBooleanAtomWithTracePasses
-    DisplayFirstMsrBooleanAtom =
+    displayFirstMsrBooleanAtom =
       oahBooleanAtomWithTracePasses::create (
         "display-msr1", "dmsr1",
 R"(Write the contents of the first MSR data to standard error.)",
@@ -837,7 +837,7 @@ R"(Write the contents of the first MSR data to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      DisplayFirstMsrBooleanAtom);
+      displayFirstMsrBooleanAtom);
 
   S_oahBooleanAtomWithTracePasses
     displayFirstMsrFullBooleanAtom =
