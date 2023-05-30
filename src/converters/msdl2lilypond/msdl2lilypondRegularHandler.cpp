@@ -260,6 +260,8 @@ void msdl2lilypondRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("display-lpsr", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
+  registerAtomInRegularSubgroup ("display-lpsr-names", subGroup);
+  registerAtomInRegularSubgroup ("display-lpsr-summary", subGroup);
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_OAH_OPTION_LONG_NAME, subGroup);

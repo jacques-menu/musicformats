@@ -440,6 +440,17 @@ class EXP lpsrOahGroup : public oahGroup
     Bool                  getDisplayLpsrFull () const
                               { return fDisplayLpsrFull; }
 
+    void                  setDisplayLpsrNames ()
+                              { fDisplayLpsrNames = true; }
+
+    Bool                  getDisplayLpsrNames () const
+                              { return fDisplayLpsrNames; }
+
+    void                  setDisplayLpsrSummary ()
+                              { fDisplayLpsrSummary = true; }
+    Bool                  getDisplayLpsrSummary () const
+                              { return fDisplayLpsrSummary; }
+
     // paper
     // --------------------------------------
 
@@ -736,6 +747,10 @@ class EXP lpsrOahGroup : public oahGroup
 
     Bool                  fDisplayLpsr;
     Bool                  fDisplayLpsrFull;
+
+    Bool                  fDisplayLpsrNames;
+
+    Bool                  fDisplayLpsrSummary;
 
     // paper
     // --------------------------------------

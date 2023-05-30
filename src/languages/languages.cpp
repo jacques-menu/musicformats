@@ -452,6 +452,10 @@ std::string language::displayTheNamesInTheSecondMSR () const
 {
   return "Display the names in the second MSR";
 }
+std::string language::displayTheNamesInTheLPSR () const
+{
+  return "Display the names in the LPSR";
+}
 
 std::string language::displayASummaryOfTheFirstMSR () const
 {
@@ -460,6 +464,10 @@ std::string language::displayASummaryOfTheFirstMSR () const
 std::string language::displayASummaryOfTheSecondMSR () const
 {
   return "Display a summary of the second MSR";
+}
+std::string language::displayASummaryOfTheLPSR () const
+{
+  return "Display a summary of the LPSR";
 }
 
 std::string language::displayTheBSRAsText () const

@@ -38,6 +38,20 @@ EXP void displayLpsrScoreFull (
   const S_lpsrOahGroup&  lpsrOpts,
   const std::string&     passDescription);
 
+//______________________________________________________________________________
+EXP void displayLpsrScoreSummary (
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
+  const std::string&     passDescription);
+
+//______________________________________________________________________________
+EXP void displayLpsrScoreNames (
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
+  const std::string&     passDescription);
+
 
 }
 

@@ -1077,7 +1077,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   for (
-    std::list<S_msrArticulation>::const_iterator i = 
+    std::list<S_msrArticulation>::const_iterator i =
       fNoteArticulations.begin ();
       i != fNoteArticulations.end ();
       ++i
@@ -1091,7 +1091,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   for (
-    std::list<S_msrSpanner>::const_iterator i = 
+    std::list<S_msrSpanner>::const_iterator i =
       fNoteSpanners.begin ();
       i != fNoteSpanners.end ();
       ++i
@@ -4210,11 +4210,12 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
         "kNoteRestInMeasure: " <<
-        fNoteOctaveKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
-        ", fNoteDisplayWholeNotes: " <<
-        fNoteDisplayWholeNotes;
+        ", fNoteOccupiesAFullMeasure: " <<
+        fNoteOccupiesAFullMeasure.asString ();
+//         ", fNoteDisplayWholeNotes: " <<
+//         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
         ss << ".";
@@ -4249,8 +4250,6 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
-			// ss << "======> asShortStringWithRawWholeNotes()" << std::endl;
-
       ss <<
         "kNoteRegularInMeasure" <<
         notePitchAsString () <<
@@ -5133,7 +5132,7 @@ std::string msrNote::asString () const
 
       if (fNoteOccupiesAFullMeasure) {
         ss <<
-          "R" <<
+          'R' <<
           /* JMI
           multipleFullBarRestsWholeNotesAsMsrString (
             fInputStartLineNumber,
@@ -5143,7 +5142,7 @@ std::string msrNote::asString () const
       }
       else {
         ss <<
-          "r" <<
+          'r' <<
           nonSoundingNoteEssentialsAsString ();
       }
 
@@ -5337,7 +5336,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
       if (fNoteOccupiesAFullMeasure) {
         ss <<
-          "R" <<
+          'R' <<
           /* JMI
           multipleFullBarRestsWholeNotesAsMsrString (
             fInputStartLineNumber,
@@ -5347,7 +5346,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
       }
       else {
         ss <<
-          "r" <<
+          'r' <<
           nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       }
 
@@ -5357,7 +5356,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
     case msrNoteKind::kNoteSkipInMeasure:
       ss <<
-        "s" <<
+        's' <<
         nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
@@ -5484,12 +5483,12 @@ std::string msrNote::noteEssentialsAsSting () const
 
       if (fNoteOccupiesAFullMeasure) {
         ss <<
-          "R" <<
+          'R' <<
           asShortStringWithRawWholeNotes ();
       }
       else {
         ss <<
-          "r" <<
+          'r' <<
           asShortStringWithRawWholeNotes ();
       }
       ss << std::endl;

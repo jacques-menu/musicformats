@@ -578,6 +578,30 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
       gLanguage->fullVersion ());
   }
 
+  // display the LPSR score summary if requested
+  // ------------------------------------------------------
+
+  if (gLpsrOahGroup->getDisplayLpsrSummary ()) {
+    // display the score summary
+    displayLpsrScoreSummary (
+      fResultingLpsr,
+      gMsrOahGroup,
+      gLpsrOahGroup,
+      gLanguage->displayASummaryOfTheLPSR ());
+  }
+
+  // display the LPSR score names if requested
+  // ------------------------------------------------------
+
+  if (gLpsrOahGroup->getDisplayLpsrNames ()) {
+    // display the score name
+    displayLpsrScoreNames (
+      fResultingLpsr,
+      gMsrOahGroup,
+      gLpsrOahGroup,
+      gLanguage->displayTheNamesInTheLPSR ());
+  }
+
   // forget about the visited MSR score
   fVisitedMsrScore = nullptr;
 

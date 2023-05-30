@@ -91,9 +91,11 @@ class EXP languageFrench : public language
 
     std::string           displayTheNamesInTheFirstMSR () const override;
     std::string           displayTheNamesInTheSecondMSR () const override;
+    std::string           displayTheNamesInTheLPSR () const override;
 
     std::string           displayASummaryOfTheFirstMSR () const override;
     std::string           displayASummaryOfTheSecondMSR () const override;
+    std::string           displayASummaryOfTheLPSR () const override;
 
    // timing
 

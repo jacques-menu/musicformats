@@ -270,23 +270,17 @@ void msr2msrTranslator::displayPartGroupsStack (
     "The part groups stack contains " <<
     mfSingularOrPlural (
       partGroupsStackSize, "element", "elements") <<
-    " (" << context << "):" <<
-    std::endl;
+    " (" << context << "):";
 
   if (partGroupsStackSize) {
-    std::list<S_msrPartGroup>::const_iterator
-      iBegin = fPartGroupsStack.begin (),
-      iEnd   = fPartGroupsStack.end (),
-      i      = iBegin;
-
-    S_msrPartGroup partGroup = (*i);
+    gLog << std::endl;
 
     ++gIndenter;
 
-    int n = partGroupsStackSize;
-    for ( ; ; ) {
+    int counter = partGroupsStackSize - 1;
+    for (S_msrPartGroup partGroup:fPartGroupsStack) {
       gLog <<
-        "v (" << n << ")" <<
+        counter << ": " << 'v' <<
         std::endl;
 
       ++gIndenter;
@@ -295,14 +289,16 @@ void msr2msrTranslator::displayPartGroupsStack (
         std::endl;
       --gIndenter;
 
-      --n;
-
-      if (++i == iEnd) break;
-
-//       gLog << std::endl;
+      --counter;
     } // for
 
     --gIndenter;
+  }
+
+  else {
+    gLog <<
+      " [EMPTY]" <<
+      std::endl;
   }
 
   gLog <<
@@ -941,35 +937,8 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (fPartGroupsStack.size () > 0) {
-    // fetch the current part group at the top of the stack
-    S_msrPartGroup
-      currentPartGroup =
-        fPartGroupsStack.front ();
-
-    // append the current part group to the one one level higher,
-    // i.e. the new current part group
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTracePartGroups ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Appending part group clone " <<
-        currentPartGroup->getPartGroupCombinedName () <<
-        " to the current part group" <<
-        ", line " << elt->getInputStartLineNumber ();
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-//     currentPartGroup-> // JMI v0.9.69
-//       appendNestedPartGroupToPartGroup (
-//         elt);
-
-  // pop current partGroup from this visitors's stack
+    // pop current partGroup from this visitors's stack
+    // since it is elt itself
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTracePartGroups ()) {
       std::stringstream ss;
@@ -987,6 +956,43 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
     fPartGroupsStack.pop_front ();
+
+    // handle part group type
+    switch (elt->getPartGroupImplicitKind ()) {
+      case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
+        // nothing to do here
+        break;
+
+      case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
+        {
+          S_msrPartGroup
+            newPartGroupStackTop =
+              fPartGroupsStack.front ();
+
+          // append elt to its containing part group
+  #ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTracePartGroups ()) {
+            std::stringstream ss;
+
+            ss <<
+              "Appending part group clone " <<
+              elt->getPartGroupCombinedName () <<
+              " to the current part group " <<
+              newPartGroupStackTop->getPartGroupCombinedName () <<
+              ", line " << elt->getInputStartLineNumber ();
+
+            gWaeHandler->waeTrace (
+              __FILE__, __LINE__,
+              ss.str ());
+          }
+  #endif // MF_TRACE_IS_ENABLED
+
+          newPartGroupStackTop-> // JMI v0.9.69
+            appendNestedPartGroupToPartGroup (
+              elt);
+        }
+        break;
+    } // switch
   }
 
 #ifdef MF_TRACE_IS_ENABLED

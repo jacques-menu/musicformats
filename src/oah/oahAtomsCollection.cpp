@@ -7500,22 +7500,22 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
   }
 
   if (fLongSuffixDescriptor != fShortSuffixDescriptor) {
-    int longNamesSuffixesCount = 0;
-
-    {
-      std::list<std::string>::const_iterator
-        iBegin = fLongNamesSuffixes.begin (),
-        iEnd   = fLongNamesSuffixes.end (),
-        i      = iBegin;
-
-      for ( ; ; ) {
-        if ((*i).size ()) {
-          ++longNamesSuffixesCount;
-        }
-
-        if (++i == iEnd) break;
-      } // for
-    }
+//     int longNamesSuffixesCount = 0; // JMI v9.9.69
+//
+//     {
+//       std::list<std::string>::const_iterator
+//         iBegin = fLongNamesSuffixes.begin (),
+//         iEnd   = fLongNamesSuffixes.end (),
+//         i      = iBegin;
+//
+//       for ( ; ; ) {
+//         if ((*i).size ()) {
+//           ++longNamesSuffixesCount;
+//         }
+//
+//         if (++i == iEnd) break;
+//       } // for
+//     }
 
     os <<
       "The " <<

@@ -2181,18 +2181,18 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
 
     // generate the rest name and duration
     if (note->getNoteOccupiesAFullMeasure ()) {
-      // take voice kind into account shouldn't be necessary? JMI v0.9.67
+      // take voice kind into account shouldn't be necessary? JMI v0.9.69
       switch (noteVoice->getVoiceKind ()) {
         case msrVoiceKind::kVoiceKindRegular:
         case msrVoiceKind::kVoiceKindDynamics:
           fLilypondCodeStream <<
-            "R";
+            'r';
           break;
 
         case msrVoiceKind::kVoiceKindHarmonies:
         case msrVoiceKind::kVoiceKindFiguredBass:
           fLilypondCodeStream <<
-            "s";
+            's';
           break;
       } // switch
 
@@ -2224,13 +2224,13 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
 //         case msrVoiceKind::kVoiceKindRegular:
 //         case msrVoiceKind::kVoiceKindDynamics:
 //           fLilypondCodeStream <<
-//             "r";
+//             'r';
 //           break;
 //
 //         case msrVoiceKind::kVoiceKindHarmonies:
 //         case msrVoiceKind::kVoiceKindFiguredBass:
 //           fLilypondCodeStream <<
-//             "s";
+//             's';
 //           break;
 //       } // switch
 
@@ -2241,7 +2241,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
       switch (notePrintObjectKind) {
         case msrPrintObjectKind::kPrintObjectYes:
           fLilypondCodeStream <<
-            "r";
+            'r';
           break;
         case msrPrintObjectKind::kPrintObjectNo:
           fLilypondCodeStream <<
@@ -2335,11 +2335,11 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
 
   if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
     // generate the rest name to help pin-point bugs
-    fLilypondCodeStream << "r";
+    fLilypondCodeStream << 'r';
   }
   else {
     // generate the skip name
-    fLilypondCodeStream << "s";
+    fLilypondCodeStream << 's';
   }
 
   // generate the skip duration
@@ -2654,10 +2654,10 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
 
   // generate the note name
   fLilypondCodeStream <<
-    std::string (
+    char (
       note->getNoteOccupiesAFullMeasure ()
-        ? "s" // JMI ??? "R"
-        : "r");
+        ? 's' // JMI ??? 'R'
+        : 'r');
 
   // generate the note display duration
   fLilypondCodeStream <<
@@ -2885,11 +2885,11 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
   // generate the note name
   if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
     // generate the rest name to help pin-point bugs
-    fLilypondCodeStream << "r";
+    fLilypondCodeStream << 'r';
   }
   else {
     // generate the skip name
-    fLilypondCodeStream << "s";
+    fLilypondCodeStream << 's';
   }
 
   // generate the skip duration
@@ -3041,10 +3041,10 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
   // generate the note name
   if (note->fetchNoteIsARest ()) {
     fLilypondCodeStream <<
-      std::string (
+      char (
         note->getNoteOccupiesAFullMeasure ()
-          ? "R"
-          : "r");
+          ? 'R'
+          : 'r');
   }
   else {
     fLilypondCodeStream <<
@@ -3431,7 +3431,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
       doGeneratePlacement = false;
       break;
     case msrArticulationKind::kArticulationSpiccato:
-      doGeneratePlacement = false;
+      doGeneratePlacement = true; // JMI v0.9.69
       break;
     case msrArticulationKind::kArticulationStaccato:
       doGeneratePlacement = true;
@@ -3537,9 +3537,10 @@ R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.st
         std::endl;
       break;
     case msrArticulationKind::kArticulationSpiccato:
-      // does not exist in LilyPond, generate staccatissimo instead JMI v0.9.64
+      // spiccato does not exist in LilyPond,
+      // generate staccatissimo instead JMI %{ spiccato??? %}
       fLilypondCodeStream <<
-        "! %{ spiccato %}";
+        "!";
       break;
     case msrArticulationKind::kArticulationStaccato:
       fLilypondCodeStream <<
@@ -3980,8 +3981,7 @@ std::string lpsr2lilypondTranslator::technicalWithStringAsLilypondString (
 
   if (stringValue.size ()) {
     result +=
-      std::string (" ") +
-      "-\\markup {\"" + stringValue + "\"}";
+      " -\\markup {\"" + stringValue + "\"}";
   }
 
   return result;
@@ -4048,7 +4048,7 @@ void lpsr2lilypondTranslator::generateOrnament (
             remainingFraction.getDenominator ();
 
         fLilypondCodeStream <<
-          "s" <<
+          's' <<
           upLinkToNoteNotesDuration <<
           "*" <<
             denominator
@@ -4095,7 +4095,7 @@ void lpsr2lilypondTranslator::generateOrnament (
         // c2*2/3 ( s2*1/3\turn
 
         fLilypondCodeStream <<
-          "s" <<
+          's' <<
           upLinkToNoteNotesDuration <<
           "*1/3" "\\reverseturn ";
 
@@ -12966,13 +12966,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           case msrVoiceKind::kVoiceKindRegular:
           case msrVoiceKind::kVoiceKindDynamics:
             fLilypondCodeStream <<
-              "R";
+              'R';
             break;
 
           case msrVoiceKind::kVoiceKindHarmonies:
           case msrVoiceKind::kVoiceKindFiguredBass:
             fLilypondCodeStream <<
-              "R";
+              'R';
             break;
         } // switch
 
@@ -21275,9 +21275,31 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
       std::string wordsContents =
         (*i)->getWordsContents ();
 
+/*
+<!--
+	The words element specifies a standard text direction.
+	Left justification is assumed if not specified.
+	Language is Italian ("it") by default. Enclosure
+	is none by default.
+-->
+<!ELEMENT words (#PCDATA)>
+<!ATTLIST words
+    %text-formatting;
+    %optional-unique-id;
+>
+
+<!--
+	The placement attribute indicates whether something is
+	above or below another element, such as a note or a
+	notation.
+-->
+<!ENTITY % placement
+	"placement %above-below; #IMPLIED">
+*/
+
       switch (wordsPlacementKind) {
         case msrPlacementKind::kPlacement_UNKNOWN_:
-          // should not occur
+          fLilypondCodeStream << "-"; // JMI v0.9.69
           break;
         case msrPlacementKind::kPlacementAbove:
           fLilypondCodeStream << "^";
@@ -24124,7 +24146,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
-    "R" <<
+    'R' <<
     fullBarRestsWholeNoteAsLilypondString;
 
   if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
