@@ -3264,7 +3264,7 @@ R"()",
 
   fLilypondVersionAtom =
     oahStringAtom::create (
-      "lilypond-version", "lpv",
+      "lilypond-version", "lilyv",
       regex_replace (
 R"(Set the Lilypond '\version' to STRING in the Lilypond code.
 The default is the mininum 'MINIMUM_VALUE' value.)",
@@ -4742,7 +4742,7 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "add-lilypond-stanzas-numbers", "asn",
+        "add-lilypond-stanzas-numbers", "alilysn",
 R"(Add stanzas numbers to lyrics in LilyPond.)",
         "fAddLilypondStanzasNumbers",
         fAddLilypondStanzasNumbers));
@@ -4759,7 +4759,7 @@ R"(Add stanzas numbers to lyrics in LilyPond.)",
   subGroup->
     appendAtomToSubGroup (
       lilypondLyricsNotesDurationsKindAtom::create (
-        "lilypond-lyrics-durations-style", "ld", // JMI
+        "lilypond-lyrics-durations-style", "lilylyrdurkind", // JMI
           regex_replace (
             regex_replace (
               regex_replace (
@@ -4827,7 +4827,7 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "lilypond-generation-infos", "lpgi",
+        "lilypond-generation-infos", "lilygeninfo",
 R"(Generate initial comments showing the LilyPond generation informations.)",
         "fXml2lyInfos", // JMI lilyGen ???
         fXml2lyInfos));
@@ -4838,7 +4838,7 @@ R"(Generate initial comments showing the LilyPond generation informations.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "lilypond-comments", "lpcoms",
+        "lilypond-comments", "lilycoms",
 R"(Generate comments showing the structure of the score
 such as '% part P_POne (P1).)",
         "fLilypondComments",
@@ -5003,7 +5003,7 @@ R"(Don't generate any lyrics in the LilyPond code.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "lilypond-conversion-date", "lpcd",
+        "lilypond-conversion-date", "lilyconvdate",
 R"(Generate code to include the conversion date
 when LilyPond creates the score.)",
         "fLilypondRunDate",

@@ -7120,19 +7120,19 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
         Bool doCreateAnExtendElement (true);
 
         switch (syllable->getSyllableExtendKind ()) {
-          case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
+          case msrSyllableExtendKind::kSyllableExtend_NONE:
             doCreateAnExtendElement = false;
             break;
-          case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
+          case msrSyllableExtendKind::kSyllableExtendTypeLess:
             extendTypeString = "single";
             break;
-          case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
+          case msrSyllableExtendKind::kSyllableExtendTypeStart:
             extendTypeString = "start";
             break;
-          case msrSyllableExtendTypeKind::kSyllableExtendTypeContinue:
+          case msrSyllableExtendKind::kSyllableExtendTypeContinue:
             extendTypeString = "continue";
             break;
-          case msrSyllableExtendTypeKind::kSyllableExtendTypeStop:
+          case msrSyllableExtendKind::kSyllableExtendTypeStop:
             extendTypeString = "stop";
             break;
         } // switch

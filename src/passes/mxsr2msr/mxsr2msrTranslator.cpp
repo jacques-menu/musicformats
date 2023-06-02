@@ -209,7 +209,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentSyllabic = "";
 
   fCurrentSyllableKind       = msrSyllableKind::kSyllableNone;
-  fCurrentSyllableExtendKind = msrSyllableExtendTypeKind::kSyllableExtendType_NONE;
+  fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtend_NONE;
 
   fFirstSyllableInSlurKind     = msrSyllableKind::kSyllableNone;
   fFirstSyllableInLigatureKind = msrSyllableKind::kSyllableNone;
@@ -402,7 +402,7 @@ void mxsr2msrTranslator::initializeNoteData ()
 
   // note lyrics
 
-// JMI  fCurrentNoteSyllableExtendKind = kSyllableExtendType_NONE; v0.9.67
+// JMI  fCurrentNoteSyllableExtendKind = kSyllableExtend_NONE; v0.9.67
 }
 
 void mxsr2msrTranslator::displayStaffAndVoiceInformation (
@@ -9395,7 +9395,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
   fCurrentStanzaHasText = false;
 
   // a <text/> markup puts an end to the effect of <extend/> JMI v0.9.67
-  fCurrentSyllableExtendKind = msrSyllableExtendTypeKind::kSyllableExtendType_NONE;
+  fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtend_NONE;
 
   fOnGoingLyric = true;
 }
@@ -9421,7 +9421,7 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
 
   fCurrentSyllabic = elt->getValue();
 
-  fCurrentSyllableKind       = msrSyllableKind::kSyllableNone;
+  fCurrentSyllableKind = msrSyllableKind::kSyllableNone;
 
   if      (fCurrentSyllabic == "single") {
     fCurrentSyllableKind = msrSyllableKind::kSyllableSingle;
@@ -9603,15 +9603,15 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
   if (fOnGoingLyric) {
     if      (extendType == "start") {
       fCurrentSyllableExtendKind =
-        msrSyllableExtendTypeKind::kSyllableExtendTypeStart;
+        msrSyllableExtendKind::kSyllableExtendTypeStart;
     }
     else if (extendType == "continue") {
       fCurrentSyllableExtendKind =
-        msrSyllableExtendTypeKind::kSyllableExtendTypeContinue;
+        msrSyllableExtendKind::kSyllableExtendTypeContinue;
     }
     else if (extendType == "stop") {
       fCurrentSyllableExtendKind =
-        msrSyllableExtendTypeKind::kSyllableExtendTypeStop;
+        msrSyllableExtendKind::kSyllableExtendTypeStop;
     }
     else {
       if (extendType.size ()) {
@@ -9629,7 +9629,7 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
       }
       else {
         fCurrentSyllableExtendKind =
-          msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent;
+          msrSyllableExtendKind::kSyllableExtendTypeLess;
       }
     }
   }
@@ -9753,7 +9753,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         std::endl <<
         std::setw (fieldWidth) <<
         "fCurrentSyllableExtendKind" << ": " <<
-        msrSyllableExtendTypeKindAsString (
+        msrSyllableExtendKindAsString (
           fCurrentSyllableExtendKind) <<
         std::endl <<
         std::setw (fieldWidth) <<
@@ -10859,18 +10859,20 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
       fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationRight;
     }
     else {
-      std::stringstream ss;
+      if (location.size () > 0) {
+        std::stringstream ss;
 
-      ss <<
-        "barLine location \"" << location <<
-        "\" is unknown, using 'right' by default";
+        ss <<
+          "barLine location \"" << location <<
+          "\" is unknown, using 'right' by default";
 
-   // JMI   mxsr2msrError (
-      mxsr2msrWarning (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-   //     __FILE__, __LINE__,
-        ss.str ());
+     // JMI   mxsr2msrError (
+        mxsr2msrWarning (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+     //     __FILE__, __LINE__,
+          ss.str ());
+      }
     }
   }
 
@@ -23193,7 +23195,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToCurrentNote ()
                   msrSyllable::create (
                     inputLineNumber,
                     msrSyllableKind::kSyllableSkipRest,
-                    msrSyllableExtendTypeKind::kSyllableExtendType_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
+                    msrSyllableExtendKind::kSyllableExtend_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
                     fCurrentStanzaNumber,
                     fCurrentNoteSoundingWholeNotesFromNotesDuration,
                     stanza);
@@ -23308,7 +23310,7 @@ void mxsr2msrTranslator::attachPendingSlidesToCurrentNote ()
                   msrSyllable::create (
                     inputLineNumber,
                     msrSyllableKind::kSyllableSkipRest,
-                    msrSyllableExtendTypeKind::kSyllableExtendType_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
+                    msrSyllableExtendKind::kSyllableExtend_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
                     fCurrentStanzaNumber,
                     fCurrentNoteSoundingWholeNotesFromNotesDuration,
                     stanza);
@@ -24021,7 +24023,7 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
   }
 }
 
-void mxsr2msrTranslator::populateCurrentNoteAfterItIsHandled (
+void mxsr2msrTranslator::populateCurrentNoteAfterItHasBeenHandled (
   int inputLineNumber) // JMI v0.9.67
 {
   // attach the regular pending elements (not dal segnos), if any, to fCurrentNote
@@ -24833,7 +24835,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   ////////////////////////////////////////////////////////////////////
 
   // are all fCurrentNote uplinks set alright ??? JMI v0.9.66
-  populateCurrentNoteAfterItIsHandled (inputLineNumber);
+  populateCurrentNoteAfterItHasBeenHandled (inputLineNumber);
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -24951,7 +24953,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   // lyrics if any have to be handled in all cases
   // done only now because attachPendingNoteLevelElementsToNote() // JMI v0.9.67 HARMFUL
   // may append skip syllables to the notes
-  handleLyricsForCurrentNoteAfterItfIsHandled ();
+  handleLyricsForCurrentNoteAfterItHassBeenHandled ();
 
   // remember previous note staff number if relevant
   fPreviousNoteMusicXMLStaffNumber = fCurrentMusicXMLStaffNumber;
@@ -26116,7 +26118,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItfIsHandled ()
+void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
 {
   int inputLineNumber =
     fCurrentNote->getInputStartLineNumber ();
@@ -26149,7 +26151,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItfIsHandled ()
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentSyllableExtendKind" << "" << ": " <<
-      msrSyllableExtendTypeKindAsString (
+      msrSyllableExtendKindAsString (
         fCurrentSyllableExtendKind) <<
       std::endl <<
 
@@ -26230,17 +26232,17 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItfIsHandled ()
 //       ! fCurrentNoteHasLyrics;
 //
 //     switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
-//       case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
+//       case msrSyllableExtendKind::kSyllableExtend_NONE:
 //         break;
-//       case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
+//       case msrSyllableExtendKind::kSyllableExtendTypeLess:
 // //         doCreateASkipSyllable = true; // JMI
 //         break;
-//       case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
+//       case msrSyllableExtendKind::kSyllableExtendTypeStart:
 //         break;
-//       case msrSyllableExtendTypeKind::kSyllableExtendTypeContinue:
+//       case msrSyllableExtendKind::kSyllableExtendTypeContinue:
 //  //        doCreateASkipSyllable = true; // JMI
 //         break;
-//       case msrSyllableExtendTypeKind::kSyllableExtendTypeStop:
+//       case msrSyllableExtendKind::kSyllableExtendTypeStop:
 //         break;
 //     } // switch
 //
@@ -26249,7 +26251,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItfIsHandled ()
 //       std::stringstream ss;
 //
 //       ss <<
-//         "*** ---> handleLyricsForCurrentNoteAfterItfIsHandled()" <<
+//         "*** ---> handleLyricsForCurrentNoteAfterItHassBeenHandled()" <<
 //         ", doCreateASkipSyllable: " << doCreateASkipSyllable <<
 //         std::endl;
 //
@@ -26323,87 +26325,85 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItfIsHandled ()
 
 
 
-//     Bool doCreateASkipSyllable =
-//      // ! fASkipSyllableHasBeenGeneratedForcurrentNote; JMI
-//       ! fCurrentNoteHasLyrics;
-//
-//     switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
-//       case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
-//         break;
-//       case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
-//         break;
-//       case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
-//         break;
-//       case msrSyllableExtendTypeKind::kSyllableExtendTypeContinue:
-//  //       doCreateASkipSyllable = true; // JMI
-//         break;
-//       case msrSyllableExtendTypeKind::kSyllableExtendTypeStop:
-//         break;
-//     } // switch
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceLyrics ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "*** ---> handleLyricsForCurrentNoteAfterItfIsHandled()" <<
-//         ", doCreateASkipSyllable: " << doCreateASkipSyllable;
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     if (doCreateASkipSyllable) {
-//       if (
-//         ! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)
-//       ) {
-//         // get the current note voice's stanzas map
-//         const std::map<std::string, S_msrStanza>&
-//           voiceStanzasMap =
-//             fCurrentNoteVoice->
-//               getVoiceStanzasMap ();
-//
-//         for (
-//           std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
-//           i != voiceStanzasMap.end ();
-//           ++i
-//         ) {
-//           const S_msrStanza& stanza = (*i).second;
-//
-//           //choose the syllable kind
-//           msrSyllableKind
-//             syllableKind =
-//             fCurrentNoteIsARest
-//               ? msrSyllableKind::kSyllableSkipRestNote
-//               : msrSyllableKind::kSyllableSkipNonRestNote;
-//
-//           // create a skip syllable
-//           S_msrSyllable
-//             syllable =
-//               msrSyllable::create (
-//                 inputLineNumber,
-//                 syllableKind,
-//                 fCurrentSyllableExtendKind,
-//                 fCurrentStanzaNumber,
-//                 fCurrentNoteSoundingWholeNotesFromNotesDuration,
-//                 msrTupletFactor (
-//                   fCurrentNoteActualNotes,
-//                   fCurrentNoteNormalNotes),
-//                 stanza);
-//
-//           // set syllable note upLink to fCurrentNote
-//           syllable->
-//             appendSyllableToNoteAndSetItsUpLinkToNote (
-//             	fCurrentNote);
-//
-//           // append syllable to stanza
-//           stanza->
-//             appendSyllableToStanza (syllable);
-//         } // for
-//       }
-//     }
+    Bool doCreateASkipSyllable =
+     // ! fASkipSyllableHasBeenGeneratedForcurrentNote; JMI
+      ! fCurrentNoteHasLyrics;
+
+    switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
+      case msrSyllableExtendKind::kSyllableExtend_NONE:
+        break;
+      case msrSyllableExtendKind::kSyllableExtendTypeLess:
+        break;
+      case msrSyllableExtendKind::kSyllableExtendTypeStart:
+        break;
+      case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+ //       doCreateASkipSyllable = true; // JMI
+        break;
+      case msrSyllableExtendKind::kSyllableExtendTypeStop:
+        break;
+    } // switch
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceLyrics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "*** ---> handleLyricsForCurrentNoteAfterItHassBeenHandled()" <<
+        ", doCreateASkipSyllable: " << doCreateASkipSyllable;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    if (doCreateASkipSyllable) {
+      if (! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)) {
+        // get the current note voice's stanzas map
+        const std::map<std::string, S_msrStanza>&
+          voiceStanzasMap =
+            fCurrentNoteVoice->
+              getVoiceStanzasMap ();
+
+        for (
+          std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+          i != voiceStanzasMap.end ();
+          ++i
+        ) {
+          const S_msrStanza& stanza = (*i).second;
+
+          //choose the syllable kind
+          msrSyllableKind
+            syllableKind =
+            fCurrentNoteIsARest
+              ? msrSyllableKind::kSyllableSkipRestNote
+              : msrSyllableKind::kSyllableSkipNonRestNote;
+
+          // create a skip syllable
+          S_msrSyllable
+            syllable =
+              msrSyllable::create (
+                inputLineNumber,
+                syllableKind,
+                fCurrentSyllableExtendKind,
+                fCurrentStanzaNumber,
+                fCurrentNoteSoundingWholeNotesFromNotesDuration,
+                msrTupletFactor (
+                  fCurrentNoteActualNotes,
+                  fCurrentNoteNormalNotes),
+                stanza);
+
+          // set syllable note upLink to fCurrentNote
+          syllable->
+            appendSyllableToNoteAndSetItsUpLinkToNote (
+            	fCurrentNote);
+
+          // append syllable to stanza
+          stanza->
+            appendSyllableToStanza (syllable);
+        } // for
+      }
+    }
 
 
 

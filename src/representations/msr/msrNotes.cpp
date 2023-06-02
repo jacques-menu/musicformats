@@ -4209,7 +4209,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        "kNoteRestInMeasure: " <<
+        "kNoteRestInMeasure" <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteOccupiesAFullMeasure: " <<
@@ -4224,7 +4224,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
 
     case msrNoteKind::kNoteSkipInMeasure:
       ss <<
-        "kNoteSkipInMeasure: " <<
+        "kNoteSkipInMeasure" <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<

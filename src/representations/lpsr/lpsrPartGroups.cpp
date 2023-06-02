@@ -170,9 +170,13 @@ void lpsrPartGroupBlock::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fPartGroupBlockElements.size (), "element", "elements") <<
-    std::endl << std::endl;
+    std::endl;
 
   ++gIndenter;
+
+  os <<
+    "fPartGroupImplicitKind" << ": " << fPartGroup->getPartGroupImplicitKind () <<
+    std::endl << std::endl;
 
   if (fPartGroupBlockElements.size ()) {
     std::list<S_msrElement>::const_iterator

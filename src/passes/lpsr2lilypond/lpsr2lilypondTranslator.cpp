@@ -2186,7 +2186,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
         case msrVoiceKind::kVoiceKindRegular:
         case msrVoiceKind::kVoiceKindDynamics:
           fLilypondCodeStream <<
-            'r';
+            'R';
           break;
 
         case msrVoiceKind::kVoiceKindHarmonies:
@@ -8554,13 +8554,17 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
   switch (partGroupImplicitKind) {
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
-      // don't generate code for an implicit outer-most part group block
+      // don't generate code for the implicit outer-most part group block
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+        fLilypondCodeStream <<
+          "% start of implicit part group block";
+      }
       break;
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream <<
-          "% start of part group block";
+          "% start of explicit part group block";
       }
 
       switch (partGroupSymbolKind) {
@@ -8735,7 +8739,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream <<
-          " % part group " <<
+          " % start of part group block " <<
           partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
       }
 
@@ -8806,15 +8810,19 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
 
   switch (partGroup->getPartGroupImplicitKind ()) {
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
-      // don't generate code for an implicit outer-most part group block
-      break;
+      // don't generate code for the implicit outer-most part group block
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+        fLilypondCodeStream <<
+          " % end of implicit part group block " <<
+          partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
+      }
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
-      fLilypondCodeStream << "<<";
+//       fLilypondCodeStream << ">>";
 
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream <<
-          " % end of part group block " <<
+          " % end of explicit part group block " <<
           partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
       }
 
@@ -9371,11 +9379,15 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 
     fLilypondCodeStream <<
       " % end of staff block for \"" << staff->getStaffAlphabeticName () << "\"";
+
+    fLilypondCodeStream <<
+      ", fStaffBlocksCounter: " << fStaffBlocksCounter <<
+      ", fNumberOfStaffBlocksElements: " << fNumberOfStaffBlocksElements;
   }
 
   fLilypondCodeStream << std::endl;
 
-  if (fStaffBlocksCounter != fNumberOfStaffBlocksElements) {
+  if (fStaffBlocksCounter < fNumberOfStaffBlocksElements) {
     fLilypondCodeStream << std::endl;
   }
 }
@@ -9927,6 +9939,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
           '}' <<
           std::endl;
         break;
+
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
         // no \lyricsto in that case
         fLilypondCodeStream <<
@@ -13466,12 +13479,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (
-    ! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()
-  ) {
+  if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
     if (fGenerateCodeForOngoingNonEmptyStanza) {
       switch (elt->getSyllableKind ()) {
-        case msrSyllableKind::kSyllableNone: // JMI
+        case msrSyllableKind::kSyllableNone: // JMI v0.9.70
           break;
 
         case msrSyllableKind::kSyllableSingle:
@@ -13483,6 +13494,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
               // don't generate a duration for automatic lyrics durations
               break;
+
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
               fLilypondCodeStream <<
                 elt->syllableWholeNotesAsMsrString ();
@@ -13507,16 +13519,18 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              // don't generate a duration for automatic lyrics durations
+              fLilypondCodeStream <<
+                " -- \\skip1 ";
               break;
+
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
               fLilypondCodeStream <<
                 elt->syllableWholeNotesAsMsrString ();
+
+              fLilypondCodeStream <<
+                " -- ";
               break;
           } // switch
-
-          fLilypondCodeStream <<
-            " -- ";
 
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
@@ -13535,6 +13549,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
               // don't generate a duration for automatic lyrics durations
               break;
+
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
               fLilypondCodeStream <<
                 elt->syllableWholeNotesAsMsrString ();
@@ -13561,6 +13576,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
               // don't generate a duration for automatic lyrics durations
               break;
+
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
               fLilypondCodeStream <<
                 elt->syllableWholeNotesAsMsrString ();
@@ -13598,6 +13614,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
               // LilyPond ignores the skip durations when \lyricsto is used
+//               fLilypondCodeStream << v0.9.70
+//                 "\\skip1" <<
+//                 " %{ ZOU 0 %}" <<
+//                 ' ';
 #ifdef MF_TRACE_IS_ENABLED
               if (gTraceOahGroup->getTraceLyrics ()) {
                 fLilypondCodeStream <<
@@ -13607,10 +13627,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
               }
 #endif // MF_TRACE_IS_ENABLED
               break;
+
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
               fLilypondCodeStream <<
                 "\\skip" <<
                 elt->syllableWholeNotesAsMsrString () <<
+                " %{ ZOU 1 %}" <<
                 ' ';
 #ifdef MF_TRACE_IS_ENABLED
               if (gTraceOahGroup->getTraceLyrics ()) {
@@ -13625,11 +13647,35 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
         case msrSyllableKind::kSyllableSkipNonRestNote:
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              // LilyPond ignores the skip durations when \lyricsto is used
-              fLilypondCodeStream <<
-                "\\skip" <<
-                elt->syllableWholeNotesAsMsrString () <<
-                ' ';
+              {
+                // LilyPond ignores the skip durations when \lyricsto is used,
+                // so let's generate '1' to explicit this fact v0.9.70
+
+                // should a should a \skip1 be generated?
+                Bool doGenerateASkip1 (false); // JMI v0.9.70
+
+                switch (elt->getSyllableExtendKind ()) {
+                  case msrSyllableExtendKind::kSyllableExtend_NONE:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeLess:
+                    // an \skip1 is needed for <extend /> without any type
+  //                     doGenerateASkip1 = true;
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeStart:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeStop:
+                    break;
+                } // switch
+
+                if (doGenerateASkip1) {
+                  // generate a skip1
+                  fLilypondCodeStream <<
+                    "\\skip1 %{ ZOU 2 %} ";
+                }
+              }
+
 #ifdef MF_TRACE_IS_ENABLED
               if (gTraceOahGroup->getTraceLyrics ()) {
                 fLilypondCodeStream <<
@@ -13637,10 +13683,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
               }
 #endif // MF_TRACE_IS_ENABLED
               break;
+
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
               fLilypondCodeStream <<
                 "\\skip" <<
                 elt->syllableWholeNotesAsMsrString () <<
+                " %{ ZOU 3 %}" <<
                 ' ';
 #ifdef MF_TRACE_IS_ENABLED
               if (gTraceOahGroup->getTraceLyrics ()) {
@@ -13693,51 +13741,177 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
       } // switch
 
       switch (elt->getSyllableExtendKind ()) {
-        case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
+        case msrSyllableExtendKind::kSyllableExtend_NONE:
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
-              "%{ kSyllableExtendType_NONE %} ";
+              "%{ kSyllableExtend_NONE %} ";
           }
 #endif // MF_TRACE_IS_ENABLED
           break;
 
-        case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
+        case msrSyllableExtendKind::kSyllableExtendTypeLess:
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              // generate a lyric extender, i.e. a melisma, after this syllable
-              fLilypondCodeStream <<
-                "__ ";
+              {
+                // should a lyric extender and skip be generated?
+                S_msrNote
+                  noteTheSyllableIsAttachedTo =
+                    elt->getSyllableUpLinkToNote ();
+
+                S_msrTie
+                  noteTie =
+                    noteTheSyllableIsAttachedTo->getNoteTie ();
+
+                Bool doGenerateALyricExtenderAndSkip (false); // JMI v0.9.70
+
+                switch (noteTie->getTieKind ()) {
+                  case msrTieKind::kTieNone:
+                    break;
+                  case msrTieKind::kTieStart:
+                    doGenerateALyricExtenderAndSkip = true;
+                    break;
+                  case msrTieKind::kTieContinue:
+                    break;
+                  case msrTieKind::kTieStop:
+  //                   doGenerateALyricExtenderAndSkip = false;
+                    break;
+                } // switch
+
+                switch (elt->getSyllableExtendKind ()) {
+                  case msrSyllableExtendKind::kSyllableExtend_NONE:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeLess:
+                    // an lyric extender is needed for <extend /> without any type
+//                     doGenerateALyricExtenderAndSkip = true;
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeStart:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeStop:
+                    break;
+                } // switch
+
+                if (doGenerateALyricExtenderAndSkip) {
+                  // generate a lyric extender, i.e. a melisma, after this syllable
+                  fLilypondCodeStream <<
+                    "__ %{ FOO 1 %} \\skip1 ";
+                }
+
+                // should a should a \skip1 be generated?
+                Bool doGenerateASkip1 (false); // JMI v0.9.70
+
+                switch (elt->getSyllableExtendKind ()) {
+                  case msrSyllableExtendKind::kSyllableExtend_NONE:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeLess:
+                    // an \skip1 is needed for <extend /> without any type
+//                     doGenerateASkip1 = true;
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeStart:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeStop:
+                    break;
+                } // switch
+
+                if (doGenerateASkip1) {
+                  // generate a skip1
+                  fLilypondCodeStream <<
+                    "\\skip1 %{ ZOU 5 %} ";
+                }
+              }
               break;
+
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-              // generate a lyric extender, i.e. a melisma, after this syllable ??? JMI
-              fLilypondCodeStream <<
-                "__ %{foo 13770%} ";
-//               fLilypondCodeStream <<
-//                 "\\skip4 "; // JMI v0.9.68
+              {
+                // should a lyric extender and skip be generated?
+                Bool doGenerateALyricExtenderAndSkip (false); // JMI v0.9.70
+
+                switch (elt->getSyllableExtendKind ()) {
+                  case msrSyllableExtendKind::kSyllableExtend_NONE:
+                    break;
+
+                  case msrSyllableExtendKind::kSyllableExtendTypeLess:
+                    // is an lyric extender and skip needed for <extend /> without any type
+                    switch (elt->getSyllableKind ()) {
+                      case msrSyllableKind::kSyllableNone:
+                        break;
+
+                      case msrSyllableKind::kSyllableSingle:
+                        doGenerateALyricExtenderAndSkip = true;
+                        break;
+
+                      case msrSyllableKind::kSyllableBegin:
+                        break;
+                      case msrSyllableKind::kSyllableMiddle:
+                        break;
+                      case msrSyllableKind::kSyllableEnd:
+                        break;
+
+                      case msrSyllableKind::kSyllableOnRestNote:
+                        break;
+
+                      case msrSyllableKind::kSyllableSkipRestNote:
+                        break;
+                      case msrSyllableKind::kSyllableSkipNonRestNote:
+                        break;
+
+                      case msrSyllableKind::kSyllableMeasureEnd:
+                        break;
+
+                      case msrSyllableKind::kSyllableLineBreak:
+                        break;
+                      case msrSyllableKind::kSyllablePageBreak:
+                        break;
+                    } // switch
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeStart:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+                    break;
+                  case msrSyllableExtendKind::kSyllableExtendTypeStop:
+                    break;
+                } // switch
+
+                if (doGenerateALyricExtenderAndSkip) {
+                  // generate a lyric extender and skip after this syllable
+                  fLilypondCodeStream <<
+                    "__ %{ FOO 5 %} " <<
+                    "\\skip" <<
+                    elt->syllableWholeNotesAsMsrString () <<
+                    " %{ ZOU 6 %}" <<
+                    ' ';
+                }
+              }
               break;
           } // switch
+
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
-              "%{ kSyllableExtendTypeAbsent %} ";
+              "%{ kSyllableExtendTypeLess %} ";
           }
 #endif // MF_TRACE_IS_ENABLED
           break;
 
-        case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
+        case msrSyllableExtendKind::kSyllableExtendTypeStart:
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
               // generate a lyric extender, i.e. a melisma, after this syllable
               fLilypondCodeStream <<
-                "__ ";
+                "__ %{ FOO 3 %} ";
               break;
+
             case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
               // generate a lyric extender, i.e. a melisma, after this syllable ??? JMI
               fLilypondCodeStream <<
-                "__ ";
+                "__ %{ FOO 4 %} ";
               break;
           } // switch
+
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
@@ -13746,7 +13920,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif // MF_TRACE_IS_ENABLED
           break;
 
-        case msrSyllableExtendTypeKind::kSyllableExtendTypeContinue:
+        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
@@ -13755,7 +13929,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif // MF_TRACE_IS_ENABLED
           break;
 
-        case msrSyllableExtendTypeKind::kSyllableExtendTypeStop:
+        case msrSyllableExtendKind::kSyllableExtendTypeStop:
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
@@ -19421,10 +19595,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       case msrNoteKind::kNoteRestInMeasure:
         // don't handle multiple full-bar restss, that's done in visitEnd (S_msrMultipleFullBarRests&)
         if (elt->getNoteOccupiesAFullMeasure ()) {
-          Bool inhibitMultipleFullBarRestsBrowsing =
-            fVisitedLpsrScore->
-              getEmbeddedMsrScore ()->
-                getInhibitMultipleFullBarRestsBrowsing ();
+          Bool
+            inhibitMultipleFullBarRestsBrowsing =
+              fVisitedLpsrScore->
+                getEmbeddedMsrScore ()->
+                  getInhibitMultipleFullBarRestsBrowsing ();
 
           if (inhibitMultipleFullBarRestsBrowsing) {
 #ifdef MF_TRACE_IS_ENABLED

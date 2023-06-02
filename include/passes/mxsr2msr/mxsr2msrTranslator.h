@@ -1441,7 +1441,7 @@ class EXP mxsr2msrTranslator :
     // harmonies and figured bass elements need
     // the position of the note  in its measure
     // to be known when they are inserted in their own measure
-    void                      populateCurrentNoteAfterItIsHandled (
+    void                      populateCurrentNoteAfterItHasBeenHandled (
                                 int inputLineNumber);
 
 
@@ -1744,7 +1744,7 @@ class EXP mxsr2msrTranslator :
     std::list<std::string>
                               fCurrentLyricTextsList;
 
-    msrSyllableExtendTypeKind
+    msrSyllableExtendKind
                               fCurrentSyllableExtendKind;
 
     std::string               fCurrentStanzaNumber;
@@ -1759,7 +1759,7 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fLastHandledNoteInVoiceHasLyrics;
 
-    void                      handleLyricsForCurrentNoteAfterItfIsHandled ();
+    void                      handleLyricsForCurrentNoteAfterItHassBeenHandled ();
 
 
     // harmonies handling

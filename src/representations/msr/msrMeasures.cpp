@@ -2386,7 +2386,7 @@ void msrMeasure::appendNoteToMeasure (
       fMeasureCurrentAccumulatedWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (inputLineNumber == 46 || gTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotes ()) {
     gLog <<
       std::endl << std::endl <<
       "this->print (gLog):" <<

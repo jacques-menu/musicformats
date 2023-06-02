@@ -42,7 +42,7 @@ S_msrSyllable msrSyllable::create (
   int                       inputLineNumber,
   const S_msrMeasure&       upLinkToMeasure,
   msrSyllableKind           syllableKind,
-  msrSyllableExtendTypeKind syllableExtendKind,
+  msrSyllableExtendKind syllableExtendKind,
   const std::string&        syllableStanzaNumber,
   const msrWholeNotes&      syllableWholeNotes,
   const msrTupletFactor&    syllableTupletFactor,
@@ -65,7 +65,7 @@ S_msrSyllable msrSyllable::create (
 S_msrSyllable msrSyllable::create (
   int                       inputLineNumber,
   msrSyllableKind           syllableKind,
-  msrSyllableExtendTypeKind syllableExtendKind,
+  msrSyllableExtendKind syllableExtendKind,
   const std::string&        syllableStanzaNumber,
   const msrWholeNotes&      syllableWholeNotes,
   const msrTupletFactor&    syllableTupletFactor,
@@ -87,7 +87,7 @@ S_msrSyllable msrSyllable::create (
 //   int                       inputLineNumber,
 //   const S_msrMeasure&       upLinkToMeasure,
 //   msrSyllableKind           syllableKind,
-//   msrSyllableExtendTypeKind syllableExtendKind,
+//   msrSyllableExtendKind syllableExtendKind,
 //   const std::string&        syllableStanzaNumber,
 //   const msrWholeNotes&      syllableWholeNotes,
 //   const msrTupletFactor&    syllableTupletFactor,
@@ -117,7 +117,7 @@ msrSyllable::msrSyllable (
   int                       inputLineNumber,
   const S_msrMeasure&       upLinkToMeasure,
   msrSyllableKind           syllableKind,
-  msrSyllableExtendTypeKind syllableExtendKind,
+  msrSyllableExtendKind syllableExtendKind,
   const std::string&        syllableStanzaNumber,
   const msrWholeNotes&      syllableWholeNotes,
   const msrTupletFactor&    syllableTupletFactor,
@@ -157,14 +157,9 @@ msrSyllable::msrSyllable (
     std::stringstream ss;
 
     ss <<
-      "Creating a syllable containing:" <<
+      "Creating a syllable containing: " <<
+      asString () <<
       std::endl;
-
-    ++gIndenter;
-
-    print (gLog);
-
-    --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -461,17 +456,8 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
 
     ss <<
       "Setting syllable note upLink for:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    gLog <<
       asString () <<
-    // JMI    "to '" << note->asString () <<
-      ", line " << note->getInputStartLineNumber () <<
       std::endl;
-
-    --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -661,25 +647,25 @@ std::ostream& operator << (std::ostream& os, const msrSyllableKind& elt)
   return os;
 }
 
-std::string msrSyllableExtendTypeKindAsString (
-  msrSyllableExtendTypeKind syllableExtendKind)
+std::string msrSyllableExtendKindAsString (
+  msrSyllableExtendKind syllableExtendKind)
 {
   std::string result;
 
   switch (syllableExtendKind) {
-    case msrSyllableExtendTypeKind::kSyllableExtendType_NONE:
-      result = "kSyllableExtendType_NONE";
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+      result = "kSyllableExtend_NONE";
       break;
-    case msrSyllableExtendTypeKind::kSyllableExtendTypeAbsent:
-      result = "kSyllableExtendTypeAbsent";
+    case msrSyllableExtendKind::kSyllableExtendTypeLess:
+      result = "kSyllableExtendTypeLess";
       break;
-    case msrSyllableExtendTypeKind::kSyllableExtendTypeStart:
+    case msrSyllableExtendKind::kSyllableExtendTypeStart:
       result = "kSyllableExtendTypeStart";
       break;
-    case msrSyllableExtendTypeKind::kSyllableExtendTypeContinue:
+    case msrSyllableExtendKind::kSyllableExtendTypeContinue:
       result = "kSyllableExtendTypeContinue";
       break;
-    case msrSyllableExtendTypeKind::kSyllableExtendTypeStop:
+    case msrSyllableExtendKind::kSyllableExtendTypeStop:
       result = "kSyllableExtendTypeStop";
       break;
   } // switch
@@ -687,9 +673,9 @@ std::string msrSyllableExtendTypeKindAsString (
   return result;
 }
 
-std::ostream& operator << (std::ostream& os, const msrSyllableExtendTypeKind& elt)
+std::ostream& operator << (std::ostream& os, const msrSyllableExtendKind& elt)
 {
-  os << msrSyllableExtendTypeKindAsString (elt);
+  os << msrSyllableExtendKindAsString (elt);
   return os;
 }
 
@@ -850,7 +836,7 @@ void msrSyllable::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "syllableExtendKind" << ": " <<
-    msrSyllableExtendTypeKindAsString (
+    msrSyllableExtendKindAsString (
       fSyllableExtendKind) <<
     std::endl <<
 
@@ -1220,7 +1206,7 @@ void msrStanza::appendSyllableToStanza (
 //         inputLineNumber,
 //         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 //         msrSyllableKind::kSyllableSkipRestNote,
-//         msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
+//         msrSyllableExtendKind::kSyllableExtend_NONE,
 //         fStanzaNumber,
 //         wholeNotes,
 //         msrTupletFactor (),
@@ -1265,7 +1251,7 @@ void msrStanza::appendSyllableToStanza (
 //         inputLineNumber,
 //         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 //         msrSyllableKind::kSyllableSkipRestNote,
-//         msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
+//         msrSyllableExtendKind::kSyllableExtend_NONE,
 //         fStanzaNumber,
 //         wholeNotes,
 //         msrTupletFactor (),
@@ -1307,7 +1293,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableMeasureEnd,
-        msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
+        msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
         msrWholeNotes (0, 1),
         msrTupletFactor (),
@@ -1358,7 +1344,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
 //         inputLineNumber,
 //         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 //         syllableKind,
-//         msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
+//         msrSyllableExtendKind::kSyllableExtend_NONE,
 //         fStanzaNumber,
 //         wholeNotes,
 //         msrTupletFactor (),
@@ -1402,7 +1388,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableLineBreak,
-        msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
+        msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
         msrWholeNotes (0, 1),
         msrTupletFactor (),
@@ -1450,7 +1436,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllablePageBreak,
-        msrSyllableExtendTypeKind::kSyllableExtendType_NONE,
+        msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
         msrWholeNotes (0, 1),
         msrTupletFactor (),
