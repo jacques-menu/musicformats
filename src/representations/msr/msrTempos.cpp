@@ -1538,9 +1538,10 @@ std::string msrTempo::tempoWordsListAsString (const std::string& separator) cons
 
 std::string msrTempo::asString () const
 {
-  std::stringstream ss;
+//   std::stringstream ss;
+  mfIndentedStringStream iss;
 
-  ss <<
+  iss <<
     "[Tempo" <<
     ", fTempoKind: " << fTempoKind <<
     ", fTempoWordsList: ";
@@ -1551,23 +1552,23 @@ std::string msrTempo::asString () const
       iEnd   = fTempoWordsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      ss << (*i);
+      iss << (*i);
       if (++i == iEnd) break;
-      ss << ", ";
+      iss << ", ";
     } // for
   }
   else {
-    ss << "\"\"";
+    iss << "\"\"";
   }
 
-  ss <<
+  iss <<
     ", fTempoBeatUnit: " << fTempoBeatUnit.asString () <<
     ", fTempoPerMinute: " << fTempoPerMinute <<
     ", fTempoParenthesizedKind: " << fTempoParenthesizedKind <<
     ", line " << fInputStartLineNumber <<
     ']';
 
-  return ss.str ();
+  return iss.str ();
 }
 
 std::string msrTempo::asShortStringForMeasuresSlices () const

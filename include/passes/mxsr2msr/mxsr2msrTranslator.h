@@ -1741,11 +1741,9 @@ class EXP mxsr2msrTranslator :
     msrSyllableKind           fCurrentSyllableKind;
     msrSyllableKind           fFirstSyllableInSlurKind;
     msrSyllableKind           fFirstSyllableInLigatureKind;
-    std::list<std::string>
-                              fCurrentLyricTextsList;
+    std::list<std::string>    fCurrentLyricTextsList;
 
-    msrSyllableExtendKind
-                              fCurrentSyllableExtendKind;
+    msrSyllableExtendKind     fCurrentSyllableExtendKind;
 
     std::string               fCurrentStanzaNumber;
     std::string               fCurrentStanzaName;

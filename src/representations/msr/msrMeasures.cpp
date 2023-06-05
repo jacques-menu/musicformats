@@ -2379,6 +2379,7 @@ void msrMeasure::appendNoteToMeasure (
   int inputLineNumber =
     note->getInputStartLineNumber ();
 
+  // compute position delta
   msrWholeNotes
     positionsDelta =
       partDrawingMeasurePosition

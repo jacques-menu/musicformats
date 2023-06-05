@@ -2,7 +2,7 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="2.0">
-  <movement-title>越後獅子</movement-title>
+  <movement-title>Extend</movement-title>
   <identification>
     <creator type="arranger">Y. Nagai</creator>
     <creator type="arranger">K. Kobatake</creator>
@@ -61,7 +61,7 @@
     <lyric-language name="verse" xml:lang="ja"/>
   </defaults>
   <credit page="1">
-    <credit-words default-x="607" default-y="1443" font-family="ＭＳ ゴシック" font-size="24" font-weight="bold" justify="center" valign="top" xml:lang="ja">越後獅子</credit-words>
+    <credit-words default-x="607" default-y="1443" font-family="ＭＳ ゴシック" font-size="24" font-weight="bold" justify="center" valign="top" xml:lang="ja">Extend</credit-words>
   </credit>
   <credit page="1">
     <credit-words default-x="1124" default-y="1345" font-size="12" font-weight="bold" justify="right" valign="top">Arr. Y. Nagai , K. Kobatake</credit-words>
@@ -196,7 +196,7 @@ Lyrics added by Karen Tanaka and Michael Good, 2006. See http://www.recordare.co
         <voice>1</voice>
         <type>eighth</type>
         <stem default-y="-45">down</stem>
-        <!--beam number="1">begin</beam-->
+        <beam number="1">begin</beam>
       </note>
       <note default-x="87">
         <pitch>
@@ -207,7 +207,7 @@ Lyrics added by Karen Tanaka and Michael Good, 2006. See http://www.recordare.co
         <voice>1</voice>
         <type>eighth</type>
         <stem default-y="-40">down</stem>
-        <!--beam number="1">end</beam-->
+        <beam number="1">end</beam>
       </note>
     </measure>
     <!--=======================================================-->
@@ -240,7 +240,7 @@ Lyrics added by Karen Tanaka and Michael Good, 2006. See http://www.recordare.co
         <stem default-y="-35">down</stem>
         <lyric default-y="-80" number="1">
           <syllabic>single</syllabic>
-          <text>ニ</text>
+          <text>Beh</text>
           <extend/>
         </lyric>
       </note>

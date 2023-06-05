@@ -741,7 +741,7 @@ std::string msrSyllable::asString () const
 
   ss <<
     "[Syllable " <<
-    ", syllableTextsList: ";
+    ", fSyllableTextsList: ";
 
   writeTextsList (
     fSyllableTextsList,
@@ -783,7 +783,7 @@ std::string msrSyllable::asString () const
   } // switch
 
   ss << // JMI LENK
-    ", attached to note: ";
+    ", fSyllableUpLinkToNote: ";
   if (fSyllableUpLinkToNote) {
     ss <<
       fSyllableUpLinkToNote->asShortString ();
@@ -793,7 +793,7 @@ std::string msrSyllable::asString () const
   }
 
   ss <<
-    ", in stanza: ";
+    ", fSyllableUpLinkToStanza: ";
   if (fSyllableUpLinkToStanza) {
     ss <<
       fSyllableUpLinkToStanza->getStanzaName ();
@@ -811,7 +811,7 @@ void msrSyllable::print (std::ostream& os) const
 {
   os <<
     "[Syllable" <<
-    ", syllableKind: " <<
+    ", fSyllableKind: " <<
     msrSyllableKindAsString (fSyllableKind) <<
     ", line " << fInputStartLineNumber <<
     std::endl;
@@ -822,7 +822,7 @@ void msrSyllable::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "syllableTextsList" << ": ";
+    "fSyllableTextsList" << ": ";
 
   writeTextsList (
     fSyllableTextsList,
@@ -831,11 +831,11 @@ void msrSyllable::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "syllableKind" << ": " <<
+    "fSyllableKind" << ": " <<
     msrSyllableKindAsString (fSyllableKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "syllableExtendKind" << ": " <<
+    "fSyllableExtendKind" << ": " <<
     msrSyllableExtendKindAsString (
       fSyllableExtendKind) <<
     std::endl <<
@@ -1111,6 +1111,146 @@ S_msrStanza msrStanza::createStanzaDeepClone (
 }
 
 void msrStanza::appendSyllableToStanza (
+  const S_msrSyllable& syllable,
+  const msrWholeNotes& partDrawingMeasurePosition)
+{
+  // compute position delta
+  msrWholeNotes
+    positionsDelta =
+      partDrawingMeasurePosition
+        -
+      fStanzaMeasureCurrentAccumulatedWholeNotesDuration;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending syllable " << syllable->asString () <<
+      " to stanza " << getStanzaName () <<
+      ", partDrawingMeasurePosition: " <<
+      partDrawingMeasurePosition.asString () <<
+      ", fStanzaMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fStanzaMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      ", positionsDelta: " <<
+      positionsDelta.asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+//   // should a skip note be appended before note?
+//   if (positionsDelta.getNumerator () > 0) {
+//     // fetch the voice
+//     S_msrVoice
+//       voice =
+//         fStanzaUpLinkToVoice;
+//
+//     // create an empty syllable of duration positionsDelta // JMI v0.9.70
+//     S_msrSyllable
+//       emptySyllable =
+//         msrSyllable::create (
+//           inputLineNumber,
+//           fCurrentSyllableKind,
+//           fCurrentSyllableExtendKind,
+//           fCurrentStanzaNumber,
+//           fCurrentNoteSoundingWholeNotesFromNotesDuration,
+//           msrTupletFactor (
+//             fCurrentNoteActualNotes,
+//             fCurrentNoteNormalNotes),
+//           stanza);
+//
+//     // append syllable to this stanza
+//     fSyllables.push_back (emptySyllable);
+//   }
+//
+//   else if (positionsDelta.getNumerator () < 0) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "partDrawingMeasurePosition " <<
+//       partDrawingMeasurePosition.asString () <<
+//       " is smaller than fStanzaMeasureCurrentAccumulatedWholeNotesDuration " <<
+//       fStanzaMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+//       " in measure " <<
+//       this->asShortString () <<
+//       ", cannot padup in voice \"" <<
+//       fMeasureUpLinkToSegment->
+//         getSegmentUpLinkToVoice ()->
+//           getVoiceName () <<
+//       "\"" <<
+//       ", fStanzaMeasureCurrentAccumulatedWholeNotesDuration: " <<
+//       fStanzaMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+//       ", partDrawingMeasurePosition: " <<
+//       partDrawingMeasurePosition.asString () <<
+//       ", positionsDelta: " << positionsDelta <<
+//       ", line " << inputLineNumber;
+//
+// //     msrInternalError ( // JMI v0.9.68
+//     msrInternalWarning (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+// //      __FILE__, __LINE__,
+//       ss.str ());
+//   }
+//
+//   else {
+//     // this measure is already at the part current measure position,
+//     // nothing to do
+//   }
+
+  // append syllable to this stanza
+  fSyllables.push_back (syllable);
+
+  // set the syllable's stanza uplink
+  syllable->
+    setSyllableUpLinkToStanza (this);
+
+  // does this stanza contain text?
+  switch (syllable->getSyllableKind ()) {
+
+    case msrSyllableKind::kSyllableSingle:
+    case msrSyllableKind::kSyllableBegin:
+    case msrSyllableKind::kSyllableMiddle:
+    case msrSyllableKind::kSyllableEnd:
+      // only now, in case addSyllableToStanza () is called
+      // from LPSR for example
+      fStanzaTextPresent = true;
+      break;
+
+    case msrSyllableKind::kSyllableOnRestNote:
+    case msrSyllableKind::kSyllableSkipRestNote:
+    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableMeasureEnd:
+    case msrSyllableKind::kSyllableLineBreak:
+    case msrSyllableKind::kSyllablePageBreak:
+      break;
+
+    case msrSyllableKind::kSyllableNone:
+      msrInternalError (
+        gServiceRunData->getInputSourceName (),
+        fInputStartLineNumber,
+        __FILE__, __LINE__,
+        "syllable type has not been set");
+      break;
+  } // switch
+
+/*
+  // get the syllable's sounding whole notes JMI v0.9.70
+  msrWholeNotes
+    syllableSoundingWholeNotes =
+      syllable->
+        getSyllableUpLinkToNote ()->
+          getSoundingWholeNotes ();
+*/
+
+//   // update the stanza's measure whole notes
+//   fStanzaMeasureCurrentAccumulatedWholeNotesDuration += syllableSoundingWholeNotes;
+}
+
+void msrStanza::appendSyllableToStanzaClone (
   const S_msrSyllable& syllable)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1119,7 +1259,7 @@ void msrStanza::appendSyllableToStanza (
 
     ss <<
       "Appending syllable " << syllable->asString () <<
-      " to stanza " << getStanzaName ();
+      " to stanza clone " << getStanzaName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1127,7 +1267,7 @@ void msrStanza::appendSyllableToStanza (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // append the syllable to this stanza
+  // append syllable to this stanza
   fSyllables.push_back (syllable);
 
   // set the syllable's stanza uplink
@@ -1220,7 +1360,7 @@ void msrStanza::appendSyllableToStanza (
 //   // and return it
 //   return syllable;
 // }
-//
+
 // S_msrSyllable msrStanza::appendSkipSyllableToStanza (
 //   int             inputLineNumber,
 //   const msrWholeNotes& wholeNotes)
@@ -1300,7 +1440,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
         this);
 
   // append syllable to this stanza
-  appendSyllableToStanza (syllable);
+  appendSyllableToStanzaClone (syllable);
 
   // reset measure whole notes
   fStanzaMeasureCurrentAccumulatedWholeNotesDuration = msrWholeNotes (0, 1);
@@ -1351,7 +1491,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
 //         this);
 //
 //   // append syllable to this stanza
-//   appendSyllableToStanza (syllable);
+//   appendSyllableToStanzaClone (syllable);
 //
 //   --gIndenter;
 //
@@ -1399,7 +1539,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
       nextMeasurePuristNumber);
 
   // append syllable to this stanza
-  appendSyllableToStanza (syllable);
+  appendSyllableToStanzaClone (syllable);
 
   --gIndenter;
 
@@ -1447,7 +1587,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
       nextMeasurePuristNumber);
 
   // append syllable to this stanza
-  appendSyllableToStanza (syllable);
+  appendSyllableToStanzaClone (syllable);
 
   --gIndenter;
 

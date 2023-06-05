@@ -719,13 +719,15 @@ void writeTextsListAsLilypondString (
     } // for
   }
 
-  size_t found = contents.find("\"");
-  if (found != std::string::npos) {
-    os << mfDoubleQuoteString (contents);
-  }
-  else {
-    os << mfDoubleQuoteStringIfNonAlpha (contents); // JMI
-  }
+  os << '\"' << contents << '\"'; // JMI v0.9.70
+
+//   size_t found = contents.find("\"");
+//   if (found != std::string::npos) {
+//     os << mfDoubleQuoteString (contents);
+//   }
+//   else {
+//     os << mfDoubleQuoteStringIfNonAlpha (contents); // JMI
+//   }
 }
 
 // score output kinds

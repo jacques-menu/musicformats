@@ -15,6 +15,8 @@
 #include <string>
 #include <ostream>
 
+#include <mfIndentedTextOutput.h>
+
 
 namespace MusicFormats
 {
@@ -74,6 +76,7 @@ std::string msrTempoBeatUnitsKindAsString (
   msrTempoKBeatUnitsKind tempoKind);
 
 std::ostream& operator << (std::ostream& os, const msrTempoKBeatUnitsKind& elt);
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrTempoKBeatUnitsKind& elt);
 
 enum class msrTempoParenthesizedKind {
   kTempoParenthesizedYes, kTempoParenthesizedNo
@@ -83,6 +86,7 @@ std::string msrTempoParenthesizedKindAsString (
   msrTempoParenthesizedKind tempoParenthesizedKind);
 
 std::ostream& operator << (std::ostream& os, const msrTempoParenthesizedKind& elt);
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrTempoParenthesizedKind& elt);
 
 enum class msrTempoNotesRelationshipKind {
   kTempoNotesRelationshipNone, kTempoNotesRelationshipEquals

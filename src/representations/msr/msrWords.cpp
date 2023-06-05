@@ -217,7 +217,7 @@ std::string msrWords::asString () const
     "Words" <<
     ", line " << fInputStartLineNumber <<
     ' ' <<
-    fWordsContents << ", placement: " <<
+    fWordsContents << ", fWordsPlacementKind: " <<
     msrPlacementKindAsString (fWordsPlacementKind);
 
   return ss.str ();
@@ -238,46 +238,46 @@ void msrWords::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "wordsContents" << ": \"" << fWordsContents << "\"" <<
+    "fWordsContents" << ": \"" << fWordsContents << "\"" <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "placement" << ": " <<
+    "fWordsPlacementKind" << ": " <<
     msrPlacementKindAsString (fWordsPlacementKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "wordsJustifyKind" << ": " <<
+    "fWordsJustifyKind" << ": " <<
     msrJustifyKindAsString (fWordsJustifyKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsHorizontalAlignmentKind" << ": " <<
+    "fWordsHorizontalAlignmentKind" << ": " <<
     msrHorizontalAlignmentKindAsString (fWordsHorizontalAlignmentKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsVerticalAlignmentKind" << ": " <<
+    "fWordsVerticalAlignmentKind" << ": " <<
     msrVerticalAlignmentKindAsString (fWordsVerticalAlignmentKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "wordsFontStyle" << ": " <<
+    "fWordsVerticalAlignmentKind" << ": " <<
     msrFontStyleKindAsString (fWordsFontStyleKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsFontSize" << ": " <<
+    "fWordsFontSize" << ": " <<
     fWordsFontSize->fontSizeAsString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsFontWeight" << ": " <<
+    "fWordsFontWeightKind" << ": " <<
     msrFontWeightKindAsString (fWordsFontWeightKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wordsFontXMLLang" << ": " <<
+    "fWordsXMLLangKind" << ": " <<
     msrXMLLangKindAsString (fWordsXMLLangKind) <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "wordsStaffNumber" << ": " <<
+    "fWordsStaffNumber" << ": " <<
     fWordsStaffNumber <<
     std::endl;
 
@@ -296,6 +296,18 @@ std::ostream& operator << (std::ostream& os, const S_msrWords& elt)
   }
 
   return os;
+}
+
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const S_msrWords& elt)
+{
+  if (elt) {
+    iss.getStringstream () << elt;
+  }
+  else {
+    iss << "[NULL]" << '\n';
+  }
+
+  return iss;
 }
 
 

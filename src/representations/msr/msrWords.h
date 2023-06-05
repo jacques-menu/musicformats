@@ -12,6 +12,8 @@
 #ifndef ___msrWords___
 #define ___msrWords___
 
+#include "mfIndentedTextOutput.h"
+
 #include "msrAlignments.h"
 #include "msrElements.h"
 #include "msrFonts.h"
@@ -184,6 +186,7 @@ class EXP msrWords : public msrElement
 };
 typedef SMARTP<msrWords> S_msrWords;
 EXP std::ostream& operator << (std::ostream& os, const S_msrWords& elt);
+EXP mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const S_msrWords& elt);
 
 
 }

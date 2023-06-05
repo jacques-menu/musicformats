@@ -48,6 +48,12 @@ std::ostream& operator << (std::ostream& os, const msrTempoKBeatUnitsKind& elt)
   return os;
 }
 
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrTempoKBeatUnitsKind& elt)
+{
+  iss << msrTempoBeatUnitsKindAsString (elt);
+  return iss;
+}
+
 std::string msrTempoParenthesizedKindAsString (
   msrTempoParenthesizedKind tempoParenthesizedKind)
 {
@@ -69,6 +75,12 @@ std::ostream& operator << (std::ostream& os, const msrTempoParenthesizedKind& el
 {
   os << msrTempoParenthesizedKindAsString (elt);
   return os;
+}
+
+mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrTempoParenthesizedKind& elt)
+{
+  iss << msrTempoParenthesizedKindAsString (elt);
+  return iss;
 }
 
 std::string msrTempoNotesRelationshipKindAsString (

@@ -9949,13 +9949,9 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
           stanza);
 
     // append the lyric texts to the syllable
-    for (
-      std::list<std::string>::const_iterator i = fCurrentLyricTextsList.begin ();
-      i != fCurrentLyricTextsList.end ();
-      ++i
-    ) {
+    for (std::string lyricText : fCurrentLyricTextsList) {
       syllable->
-        appendLyricTextToSyllable ((*i));
+        appendLyricTextToSyllable (lyricText);
     } // for
 
     // don't forget about fCurrentLyricTextsList here,
@@ -9969,9 +9965,28 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     fCurrentNoteSyllables.push_back (
       syllable);
 
-    // append syllable to stanza
-    stanza->
-      appendSyllableToStanza (syllable);
+    // fetch the voice
+    S_msrVoice
+      voice =
+        stanza->getStanzaUpLinkToVoice ();
+
+    // fetch the part
+    S_msrPart
+      part =
+        voice->
+          fetchVoiceUpLinkToPart ();
+
+    // fetch the part current measure position
+    msrWholeNotes
+      partDrawingMeasurePosition =
+        part->
+          getPartDrawingMeasurePosition ();
+
+      // append syllable to stanza
+      stanza->
+        appendSyllableToStanza (
+          syllable,
+          partDrawingMeasurePosition);
   }
 
   // DON'T register current note as having lyrics,
@@ -24946,14 +24961,18 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
-  // handle the lyrics for the note after the latter itself is handled
+  // handle the lyrics for the note after the latter itself is handled if relevant
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
   // lyrics if any have to be handled in all cases
+  // if they are not to be ignored
+
   // done only now because attachPendingNoteLevelElementsToNote() // JMI v0.9.67 HARMFUL
-  // may append skip syllables to the notes
-  handleLyricsForCurrentNoteAfterItHassBeenHandled ();
+  // may append skip syllables to the notes // JMI v0.9.70
+  if (! gGlobalMxsr2msrOahGroup->getIgnoreLyrics ()) {
+    handleLyricsForCurrentNoteAfterItHassBeenHandled ();
+  }
 
   // remember previous note staff number if relevant
   fPreviousNoteMusicXMLStaffNumber = fCurrentMusicXMLStaffNumber;
@@ -26066,7 +26085,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
       fCurrentNoteVoice->
         appendNoteToVoice (fCurrentNote);
 
-      if (false) { // XXL, syllable sans fSyllableNote assigne JMI
+      if (false) { // XXL, syllable sans fSyllableNote assigne JMI v0.9.70
         gLog <<
           "&&&&&&&&&&&&&&&&&& fCurrentNoteVoice (" <<
           fCurrentNoteVoice->getVoiceName () <<
@@ -26185,6 +26204,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
 
   if (fCurrentNoteHasLyrics) {
     // fCurrentNote has lyrics attached to it
+
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyricsDetails ()) {
       std::stringstream ss;
@@ -26317,7 +26337,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
   }
 
   else {
-    // fCurrentNote has no lyrics attached to it:
+    // fCurrentNote has no lyrics attached to it
 
     // don't create a skip for chord note members except the first one
     // nor for grace notes
@@ -26325,23 +26345,23 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
 
 
 
-    Bool doCreateASkipSyllable =
+    Bool doCreateASkipSyllable (true);
      // ! fASkipSyllableHasBeenGeneratedForcurrentNote; JMI
-      ! fCurrentNoteHasLyrics;
+//       ! fCurrentNoteHasLyrics;
 
-    switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
-      case msrSyllableExtendKind::kSyllableExtend_NONE:
-        break;
-      case msrSyllableExtendKind::kSyllableExtendTypeLess:
-        break;
-      case msrSyllableExtendKind::kSyllableExtendTypeStart:
-        break;
-      case msrSyllableExtendKind::kSyllableExtendTypeContinue:
- //       doCreateASkipSyllable = true; // JMI
-        break;
-      case msrSyllableExtendKind::kSyllableExtendTypeStop:
-        break;
-    } // switch
+//     switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
+//       case msrSyllableExtendKind::kSyllableExtend_NONE:
+//         break;
+//       case msrSyllableExtendKind::kSyllableExtendTypeLess:
+//         break;
+//       case msrSyllableExtendKind::kSyllableExtendTypeStart:
+//         break;
+//       case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+//  //       doCreateASkipSyllable = true; // JMI
+//         break;
+//       case msrSyllableExtendKind::kSyllableExtendTypeStop:
+//         break;
+//     } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
@@ -26372,7 +26392,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
         ) {
           const S_msrStanza& stanza = (*i).second;
 
-          //choose the syllable kind
+          // choose the syllable kind
           msrSyllableKind
             syllableKind =
             fCurrentNoteIsARest
@@ -26381,7 +26401,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
 
           // create a skip syllable
           S_msrSyllable
-            syllable =
+            skipSyllable =
               msrSyllable::create (
                 inputLineNumber,
                 syllableKind,
@@ -26394,19 +26414,40 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
                 stanza);
 
           // set syllable note upLink to fCurrentNote
-          syllable->
+          skipSyllable->
             appendSyllableToNoteAndSetItsUpLinkToNote (
             	fCurrentNote);
 
+
+
+
+          // fetch the voice
+          S_msrVoice
+            voice =
+              stanza->getStanzaUpLinkToVoice ();
+
+          // fetch the part
+          S_msrPart
+            part =
+              voice->
+                fetchVoiceUpLinkToPart ();
+
+          // fetch the part current measure position
+          msrWholeNotes
+            partDrawingMeasurePosition =
+              part->
+                getPartDrawingMeasurePosition ();
+
+
+
           // append syllable to stanza
           stanza->
-            appendSyllableToStanza (syllable);
+            appendSyllableToStanza (
+              skipSyllable,
+              partDrawingMeasurePosition);
         } // for
       }
     }
-
-
-
   }
 
   // register whether the new last handled note has lyrics

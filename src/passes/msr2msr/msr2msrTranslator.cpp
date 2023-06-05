@@ -2366,7 +2366,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
   if (fOnGoingStanza) { // fCurrentStanzaClone JMI
     // visiting a syllable as a stanza member
     fCurrentStanzaClone->
-      appendSyllableToStanza (
+      appendSyllableToStanzaClone (
         fCurrentSyllableClone);
   }
 

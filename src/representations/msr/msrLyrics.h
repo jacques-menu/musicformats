@@ -254,7 +254,7 @@ class EXP msrSyllable : public msrMeasureElement
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;
 
-    // syllable complementary measure number
+    // syllable complementary next measure purist number
     // for kSyllableMeasureEnd, kSyllableLineBreak and kSyllablePageBreak
     int                   fSyllableNextMeasurePuristNumber;
 };
@@ -344,6 +344,10 @@ class EXP msrStanza : public msrElement
     // ------------------------------------------------------
 
     void                  appendSyllableToStanza (
+                            const S_msrSyllable& syllable,
+                            const msrWholeNotes& partDrawingMeasurePosition);
+
+    void                  appendSyllableToStanzaClone (
                             const S_msrSyllable& syllable);
 
 //     S_msrSyllable         appendRestSyllableToStanza (

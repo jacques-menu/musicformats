@@ -551,7 +551,8 @@ class EXP msrTempo : public msrMeasureElement
 
     std::list<S_msrWords> fTempoWordsList;
 
-    msrDottedNotesDuration     fTempoBeatUnit;
+    msrDottedNotesDuration
+                          fTempoBeatUnit;
 
     msrTempoParenthesizedKind
                           fTempoParenthesizedKind;
@@ -566,7 +567,8 @@ class EXP msrTempo : public msrMeasureElement
 
     // kTempoBeatUnitsEquivalence
 
-    msrDottedNotesDuration     fTempoEquivalentBeatUnit; // unused ??? JMI
+    msrDottedNotesDuration
+                          fTempoEquivalentBeatUnit; // unused ??? JMI
 
     // kTempoNotesRelationship
 

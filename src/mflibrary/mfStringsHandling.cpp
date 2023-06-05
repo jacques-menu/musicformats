@@ -948,28 +948,40 @@ std::string mfDoubleQuoteStringIfNonAlpha (
 {
   std::string result;
 
-  Bool   stringShouldBeDoubleQuoted (false);
+  Bool stringShouldBeDoubleQuoted (false);
 
   if (theString.size ()) {
+    Bool stringContainsNotPrintableCharacters (false);
+
     for (char theChar : theString) {
-      if (
-        (theChar >= 'a' && theChar <= 'z')
-          ||
-        (theChar >= 'A' && theChar <= 'Z')
-      ) {
-        // theChar is a letter
-        result += theChar;
-      }
-
-      else {
-        // theChar is not a letter
-        if (theChar == ' ')
-          result += ' '; // TEMP JMI
-        else
-          result += theChar;
-
+      // is theChar printable?
+      if (! isprint (theChar)) {
         stringShouldBeDoubleQuoted = true;
       }
+
+      // append the result to result // JMI v0.9.70
+      result += theChar;
+
+//       if (
+//         (theChar >= 'a' && theChar <= 'z')
+//           ||
+//         (theChar >= 'A' && theChar <= 'Z')
+//       ) {
+//         // theChar is a letter
+//         result += theChar;
+//       }
+//
+//       else {
+//         // theChar is not a letter
+//         if (theChar == ' ')
+//           result += ' '; // TEMP JMI
+//         else if (theChar == '\t')
+//           result += ' '; // TEMP JMI
+//         else
+//           result += theChar;
+//
+//         stringShouldBeDoubleQuoted = true;
+//       }
     } // for
   }
 

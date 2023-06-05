@@ -2539,7 +2539,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 }
 
 void msrSegment::appendNoteToSegment (
-  const S_msrNote&       note,
+  const S_msrNote&     note,
   const msrWholeNotes& partDrawingMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED

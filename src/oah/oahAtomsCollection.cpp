@@ -3104,6 +3104,10 @@ void oahOnOffAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
+    "fValueSpecification" << ": " <<
+    fValueSpecification <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fOnOffKindVariable" << ": " <<
     fOnOffKindVariable <<
     std::endl <<

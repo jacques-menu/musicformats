@@ -3794,8 +3794,7 @@ void msrVoice::appendSyllableToVoice (
 
   // add the syllable to the stanza
   stanza->
-    appendSyllableToStanza (
-      syllable);
+    appendSyllableToStanzaClone (syllable);
 }
 
 void msrVoice::appendBarCheckToVoice (
