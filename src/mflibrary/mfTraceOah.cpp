@@ -1854,6 +1854,20 @@ R"(Measure positions)",
     addBooleanAtom (
       traceMeasurePositionsBooleanAtom);
 
+  S_oahThreeBooleansAtom
+    traceMeasurePositionsDetailsBooleanAtom =
+      oahThreeBooleansAtom::create (
+        "trace-measure-positions-details", "tmeasposdets",
+R"(Measure positions details)",
+        "fTraceMeasurePositionsDetails",
+        fTraceMeasurePositionsDetails,
+        traceMeasurePositionsBooleanAtom,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceMeasurePositionsDetailsBooleanAtom);
+
   // voice positions
 
   S_oahTwoBooleansAtom
@@ -2911,6 +2925,10 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::setw (fieldWidth) << "fTraceMeasurePositions" << ": " <<
     fTraceMeasurePositions <<
     std::endl <<
+    std::setw (fieldWidth) << "fTraceMeasurePositionsDetails" << ": " <<
+    fTraceMeasurePositionsDetails <<
+    std::endl <<
+
     std::setw (fieldWidth) << "fTraceVoicePositions" << ": " <<
     fTraceVoicePositions <<
     std::endl <<

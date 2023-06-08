@@ -6732,8 +6732,8 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "Appending note clone '" <<
-          fCurrentNonGraceNoteClone->asShortString () << "'' to voice clone " <<
+          "Appending note clone " <<
+          fCurrentNonGraceNoteClone->asShortString () << " to voice clone " <<
           fCurrentVoiceClone->getVoiceName () <<
           std::endl;
 

@@ -1222,6 +1222,18 @@ class EXP lpsr2lilypondTranslator :
     Bool                  fOnGoingStanza;
     S_msrStanza           fCurrentStanza;
 
+    void                  generateLilypondCodeForSyllable (
+                            S_msrSyllable& syllable);
+
+    void                  generateLyricExtenderAndOrSkipIfRelevant (
+                            S_msrSyllable& syllable);
+
+    void                  generateLyricExtenderAndOrSkipWithImplicitDurations (
+                            S_msrSyllable& syllable);
+
+    void                  generateLyricExtenderAndOrSkipWithExplicitDurations (
+                            S_msrSyllable& syllable);
+
     // octaves entry
     // ------------------------------------------------------
     /* this reference is:

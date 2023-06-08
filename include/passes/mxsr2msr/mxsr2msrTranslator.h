@@ -2375,18 +2375,33 @@ class EXP mxsr2msrTranslator :
                                 const std::string& context);
 
     // the tuplets stop are not always in first-in/first-out order, so:
-    std::set<int>             fPendingTupletsStopNumbersSet;
+    std::set<int>             fExpectedTupletsStopNumbersSet;
 
     Bool                      fCurrentATupletStopIsPending;
 
-    void                      createAndPushTupletUponItsFirstNote (
-																const S_msrNote& firstNote);
+//     void                      createAndPushTupletUponItsFirstNote (
+// 																const S_msrNote& firstNote);
+
+    S_msrTuplet               createTupletUponItsFirstNote (
+                                const S_msrNote& firstNote);
+
+    void                      handleTupletStart (
+                                S_msrTuplet tuplet,
+                                S_msrVoice  currentNoteVoice);
+
+    void                      handleTupletContinue (
+                                S_msrNote   note,
+                                S_msrVoice  currentNoteVoice);
+
+    void                      handleTupletStop (
+                                S_msrNote   note,
+                                S_msrVoice  currentNoteVoice);
 
     void                      handlePendingTupletStops (
                                 int              inputLineNumber,
                                 const S_msrNote& note);
 
-    void                      finalizeTupletAndPopItFromTupletsStack (
+    void                      finalizeTupletStackTopAndPopItFromTupletsStack (
                                 int         inputLineNumber,
                                 std::string context);
 

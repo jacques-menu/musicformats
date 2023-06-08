@@ -120,7 +120,7 @@ msrTuplet::msrTuplet (
   fTupletFactor = tupletFactor;
 
   fMemberNotesSoundingWholeNotes = memberNotesSoundingWholeNotes;
-  fMemberNotesDisplayWholeNotes  = memberNotesDisplayWholeNotes;
+  fMemberNotesDisplayWholeNotes = memberNotesDisplayWholeNotes;
 
   doSetSoundingWholeNotes (
     msrWholeNotes (0, 1),
@@ -888,7 +888,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
     ++gIndenter;
 
     gLog <<
-      "% fTupletFactor: " << fTupletFactor.asString () <<
+      "% fTupletFactor: " << fTupletFactor.asFractionString () <<
       std::endl <<
       "% containingTupletFactor: " << containingTupletFactor.asString () <<
       std::endl;
@@ -1036,10 +1036,10 @@ std::string msrTuplet::asString () const
 
   ss <<
     "[Tuplet" <<
-    ", tupletKind: " << fTupletKind <<
-    fTupletFactor.asString () <<
-    ' ' << fSoundingWholeNotes.asString () << " tupletSoundingWholeNotes" <<
-    ", measure ' " <<
+    ", fTupletNumber: " << fTupletNumber <<
+    ", fTupletFactor: " << fTupletFactor.asFractionString () <<
+    ", fTupletKind: " << fTupletKind <<
+    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes.asString () <<
     ", line " << fInputStartLineNumber;
 
   ss <<
@@ -1105,11 +1105,88 @@ std::string msrTuplet::asString () const
   return ss.str ();
 }
 
+std::string msrTuplet::asShortString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Tuplet" <<
+    ", fTupletNumber: " << fTupletNumber <<
+    ", fTupletFactor: " << fTupletFactor.asFractionString () <<
+    ", fTupletKind: " << fTupletKind <<
+    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes.asString () <<
+    ", line " << fInputStartLineNumber;
+
+  ss <<
+    ", getMeasureNumber: ";
+  if (fTupletUpLinkToMeasure) {
+    ss <<
+      fTupletUpLinkToMeasure->getMeasureNumber ();
+  }
+  else {
+    ss << "[UNKNOWN_MEASURE_NUMBER]";
+  }
+
+  ss <<
+    ", fMeasurePosition: " <<
+    fMeasurePosition.asString ();
+
+  ss << '[';
+
+  if (fTupletElementsList.size ()) {
+    std::list<S_msrTupletElement>::const_iterator
+      iBegin = fTupletElementsList.begin (),
+      iEnd   = fTupletElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+
+      if (
+        S_msrNote note = dynamic_cast<msrNote*>(&(*(*i)))
+        ) {
+        ss <<
+          note->asShortString ();
+      }
+
+      else if (
+        S_msrChord chord = dynamic_cast<msrChord*>(&(*(*i)))
+        ) {
+        ss <<
+          chord->asShortString ();
+      }
+
+      else if (
+        S_msrTuplet tuplet = dynamic_cast<msrTuplet*>(&(*(*i)))
+        ) {
+        ss <<
+          tuplet->asShortString ();
+      }
+
+      else {
+        msrInternalError (
+          gServiceRunData->getInputSourceName (),
+          fInputStartLineNumber,
+          __FILE__, __LINE__,
+          "tuplet member should be a note, a chord or another tuplet");
+      }
+
+      if (++i == iEnd) break;
+      ss << ' ';
+    } // for
+  }
+
+  ss << ']' << ']';
+
+  return ss.str ();
+}
+
 void msrTuplet::printFull (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
+    ", fTupletNumber: " << fTupletNumber <<
+    ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
+    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes.asString () <<
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
@@ -1131,11 +1208,6 @@ void msrTuplet::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMemberNotesSoundingWholeNotes" << ": " <<
-    fMemberNotesSoundingWholeNotes.asString () <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
     "fMemberNotesDisplayWholeNotes" << ": " <<
     fMemberNotesDisplayWholeNotes.asString () <<
     std::endl <<
@@ -1143,15 +1215,6 @@ void msrTuplet::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fTupletDisplayWholeNotes" << ": " <<
     fTupletDisplayWholeNotes.asString () <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fTupletFactor" << ": " <<
-    fTupletFactor <<
-
-    std::setw (fieldWidth) <<
-    "fTupletNumber" << ": " <<
-    fTupletNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1254,7 +1317,10 @@ void msrTuplet::print (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
+    ", fTupletNumber: " << fTupletNumber <<
+    ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
+    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes.asString () <<
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
@@ -1282,21 +1348,8 @@ void msrTuplet::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMemberNotesSoundingWholeNotes" << ": " <<
-    fMemberNotesSoundingWholeNotes.asString () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
     "fMemberNotesDisplayWholeNotes" << ": " <<
     fMemberNotesDisplayWholeNotes.asString () <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fTupletFactor" << ": " <<
-    fTupletFactor <<
-
-    std::setw (fieldWidth) <<
-    "fTupletNumber" << ": " <<
-    fTupletNumber <<
     std::endl;
 
   os << std::left <<

@@ -129,8 +129,8 @@
           <normal-notes>8</normal-notes>
         </time-modification>
         <notations>
-          <tuplet number="1" type="stop" />
           <tuplet number="2" type="stop" />
+          <tuplet number="1" type="stop" />
         </notations>
       </note>
       <note>

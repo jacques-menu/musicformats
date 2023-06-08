@@ -471,10 +471,11 @@ void msrPart::decrementPartDrawingMeasurePosition (
       ", which is negative " <<
       ", line " << inputLineNumber;
 
-    msrInternalError (
+//     msrInternalError (
+    msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+//       __FILE__, __LINE__,
       ss.str ());
   }
 
@@ -768,7 +769,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
   if (
     gTraceOahGroup->getTraceWholeNoteDurations ()
       ||
-    gTraceOahGroup->getTraceMeasurePositions ()
+    gTraceOahGroup->getTraceMeasurePositionsDetails ()
   ) {
     std::stringstream ss;
 
@@ -824,7 +825,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
   if (
     gTraceOahGroup->getTraceWholeNoteDurations ()
       ||
-    gTraceOahGroup->getTraceMeasurePositions ()
+    gTraceOahGroup->getTraceMeasurePositionsDetails ()
   ) {
     std::stringstream ss;
 
@@ -1060,7 +1061,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
   if (
     gTraceOahGroup->getTraceWholeNoteDurations ()
       ||
-    gTraceOahGroup->getTraceMeasurePositions ()
+    gTraceOahGroup->getTraceMeasurePositionsDetails ()
   ) {
     printPartMeasuresWholeNotessVector (
       gLog,

@@ -4199,7 +4199,10 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
 {
   std::stringstream ss;
 
-  ss << "[Note, ";
+  ss <<
+  	"[Note" <<
+    ", line " << fInputStartLineNumber <<
+    ", ";
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
@@ -4425,7 +4428,9 @@ std::string msrNote::asShortString () const
 {
   std::stringstream ss;
 
-  ss << "[Note, ";
+  ss << "[Note" <<
+    ", line " << fInputStartLineNumber <<
+    ", ";
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
@@ -4714,7 +4719,9 @@ std::string msrNote::asMinimalString () const
 {
   std::stringstream ss;
 
-  ss << "[Note, ";
+  ss << "[Note" <<
+    ", line " << fInputStartLineNumber <<
+    ", ";
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
@@ -5117,8 +5124,9 @@ std::string msrNote::asString () const
 // 	ss << "======> msrNote::asString()" << std::endl;
 
   ss <<
-    "[Note, ";
-//     "fNoteKind: "; // JMI v0.9.67
+    "[Note" <<
+    ", line " << fInputStartLineNumber <<
+    ", ";
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
@@ -5322,7 +5330,9 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 {
   std::stringstream ss;
 
-  ss << "[Note, ";
+  ss << "[Note" <<
+    ", line " << fInputStartLineNumber <<
+    ", ";
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
@@ -5609,7 +5619,7 @@ void msrNote::print (std::ostream& os) const
   os <<
     "[Note " <<
     noteEssentialsAsSting () <<
-//     ", line " << fInputStartLineNumber <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -6447,7 +6457,7 @@ void msrNote::printFull (std::ostream& os) const
 	os << "======> msrNote::printFull()" << std::endl;
 
   os <<
-    "[Note, " <<
+    "[Note " <<
     noteEssentialsAsSting () <<
     ", line " << fInputStartLineNumber <<
     std::endl;
@@ -8095,7 +8105,7 @@ void msrNote::printFull (std::ostream& os) const
           syllable->getSyllableExtendKind () <<
         ": ";
 
-      msrSyllable::writeTextsList (
+      msrSyllable::printTextsList (
         syllable->getSyllableTextsList (),
         os);
 

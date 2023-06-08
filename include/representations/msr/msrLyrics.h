@@ -216,7 +216,7 @@ class EXP msrSyllable : public msrMeasureElement
 
     std::string           syllableTextsListAsString () const;
 
-    static void           writeTextsList (
+    static void           printTextsList (
                             const std::list<std::string>& textsList,
                             std::ostream&                 os);
 

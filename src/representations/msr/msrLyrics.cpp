@@ -206,13 +206,9 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
         fSyllableUpLinkToStanza);
 
   // append the lyric texts to the syllable clone
-  for (
-    std::list<std::string>::const_iterator i = fSyllableTextsList.begin ();
-    i != fSyllableTextsList.end ();
-    ++i
-  ) {
+  for (std::string text : fSyllableTextsList) {
     newbornClone->
-      appendLyricTextToSyllable ((*i));
+      appendLyricTextToSyllable (text);
   } // for
 
   // don't set 'newbornClone->fSyllableUpLinkToStanza'
@@ -264,13 +260,9 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
         fSyllableUpLinkToStanza);
 
   // append the lyric texts to the syllable deep clone
-  for (
-    std::list<std::string>::const_iterator i = fSyllableTextsList.begin ();
-    i != fSyllableTextsList.end ();
-    ++i
-  ) {
+  for (std::string text : fSyllableTextsList) {
     deepClone->
-      appendLyricTextToSyllable ((*i));
+      appendLyricTextToSyllable (text);
   } // for
 
   // don't set 'newbornClone->fSyllableUpLinkToStanza'
@@ -697,6 +689,8 @@ std::string msrSyllable::syllableTextsListAsString () const
 {
   std::stringstream ss;
 
+  ss << "[syllableTextsList: \"";
+
   if (fSyllableTextsList.size ()) {
     std::list<std::string>::const_iterator
       iBegin = fSyllableTextsList.begin (),
@@ -710,14 +704,16 @@ std::string msrSyllable::syllableTextsListAsString () const
     } // for
   }
 
+  ss << "\"]";
+
   return ss.str ();
 }
 
-void msrSyllable::writeTextsList (
+void msrSyllable::printTextsList (
   const std::list<std::string>& textsList,
   std::ostream&                 os)
 {
-  os << '[';
+  os << "[syllableTextsList: \" ";
 
   if (textsList.size ()) {
     std::list<std::string>::const_iterator
@@ -732,7 +728,8 @@ void msrSyllable::writeTextsList (
     } // for
   }
 
-  os << ']';
+  os << "\"]";
+
 }
 
 std::string msrSyllable::asString () const
@@ -743,7 +740,7 @@ std::string msrSyllable::asString () const
     "[Syllable " <<
     ", fSyllableTextsList: ";
 
-  writeTextsList (
+  printTextsList (
     fSyllableTextsList,
     ss);
 
@@ -824,7 +821,7 @@ void msrSyllable::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fSyllableTextsList" << ": ";
 
-  writeTextsList (
+  printTextsList (
     fSyllableTextsList,
     os);
   os << std::endl;

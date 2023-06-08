@@ -57,8 +57,8 @@
     <lyric-font font-family="ＭＳ ゴシック" font-size="10.25" name="verse"/>
     <lyric-language name="verse" xml:lang="ja"/>
   </defaults>
-  <!--credit page="1">
-    <credit-words default-x="607" default-y="1443" font-family="ＭＳ ゴシック" font-size="24" font-weight="bold" justify="center" valign="top" xml:lang="ja">越後獅子</credit-words>
+  <credit page="1">
+    <credit-words default-x="607" default-y="1443" font-family="ＭＳ ゴシック" font-size="24" font-weight="bold" justify="center" valign="top" xml:lang="ja">Syllable on rest</credit-words>
   </credit>
   <credit page="1">
     <credit-words default-x="1124" default-y="1345" font-size="12" font-weight="bold" justify="right" valign="top">Arr. Y. Nagai , K. Kobatake</credit-words>
@@ -75,7 +75,7 @@ Lyrics added by Karen Tanaka and Michael Good, 2006. See http://www.recordare.co
   </credit>
   <credit page="1">
     <credit-words default-x="607" default-y="1395" font-size="24" font-weight="bold" halign="center" valign="top">Echigo-Jishi</credit-words>
-  </credit-->
+  </credit>
   <part-list>
     <score-part id="P1">
       <part-name print-object="no">MusicXML Part</part-name>

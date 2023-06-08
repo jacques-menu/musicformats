@@ -700,34 +700,38 @@ std::string multipleFullBarRestsWholeNoteAsLilypondString (
 }
 
 //_______________________________________________________________________________
-void writeTextsListAsLilypondString (
+std::string textsListAsString (
+  const std::list<std::string>& textsList)
+{
+  std::stringstream ss;
+
+  ss << '\"';
+
+  if (textsList.size ()) {
+    for (std::string text : textsList) {
+      ss << text;
+    } // for
+  }
+
+  ss << '\"';
+
+  return ss.str ();
+}
+
+void printTextsListAsLilypondString (
   const std::list<std::string>& textsList,
   std::ostream&                 os)
 {
   std::string contents;
 
   if (textsList.size ()) {
-    std::list<std::string>::const_iterator
-      iBegin = textsList.begin (),
-      iEnd   = textsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      contents += (*i);
-      if (++i == iEnd) break;
+    for (std::string text : textsList) {
+      contents += text; // JMI v0.9.70
   // JMI    os << ", ";
     } // for
   }
 
   os << '\"' << contents << '\"'; // JMI v0.9.70
-
-//   size_t found = contents.find("\"");
-//   if (found != std::string::npos) {
-//     os << mfDoubleQuoteString (contents);
-//   }
-//   else {
-//     os << mfDoubleQuoteStringIfNonAlpha (contents); // JMI
-//   }
 }
 
 // score output kinds

@@ -146,7 +146,10 @@ std::string multipleFullBarRestsWholeNoteAsLilypondString (
 
 // texts lists
 //______________________________________________________________________________
-EXP void writeTextsListAsLilypondString (
+EXP std::string textsListAsString (
+  const std::list<std::string>& textsList);
+
+EXP void printTextsListAsLilypondString (
   const std::list<std::string>& textsList,
   std::ostream&                 os);
 

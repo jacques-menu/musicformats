@@ -1407,14 +1407,7 @@ void lpsr2lilypondTranslator::generateNoteLigatures (
       note->getNoteLigatures ();
 
   if (noteLigatures.size ()) {
-    std::list<S_msrLigature>::const_iterator i;
-    for (
-      i = noteLigatures.begin ();
-      i != noteLigatures.end ();
-      ++i
-    ) {
-      S_msrLigature ligature = (*i);
-
+    for (S_msrLigature ligature : noteLigatures) {
       switch (ligature->getLigatureKind ()) {
         case msrLigatureKind::kLigatureNone:
           break;
@@ -1791,9 +1784,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
 
     if (noteCodas.size ()) {
       std::list<S_msrCoda>::const_iterator i;
-      for (i = noteCodas.begin (); i != noteCodas.end (); ++i) {
-        S_msrCoda coda = (*i);
-
+      for (S_msrCoda coda : noteCodas) {
         // generate only the second coda before the note
         switch (coda->getCodaKind ()) {
           case msrCodaKind::kCodaFirst:
@@ -2499,15 +2490,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
       note->getNoteTechnicalWithIntegers ();
 
   if (chordMemberNoteTechnicalsWithIntegers.size ()) {
-    std::list<S_msrTechnicalWithInteger>::const_iterator i;
-    for (
-      i = chordMemberNoteTechnicalsWithIntegers.begin ();
-      i != chordMemberNoteTechnicalsWithIntegers.end ();
-      ++i
-    ) {
-      S_msrTechnicalWithInteger
-        technicalWithInteger = (*i);
-
+    for (S_msrTechnicalWithInteger technicalWithInteger : chordMemberNoteTechnicalsWithIntegers ) {
       switch (technicalWithInteger->getTechnicalWithIntegerKind ()) {
         case msrTechnicalWithIntegerKind::kFingering:
           break;
@@ -3184,29 +3167,25 @@ void lpsr2lilypondTranslator::generateCodeForNoteWords (
 {
   if (noteWords.size ()) {
     std::list<S_msrWords>::const_iterator i;
-    for (
-      i = noteWords.begin ();
-      i != noteWords.end ();
-      ++i
-    ) {
+    for (S_msrWords word : noteWords) {
       msrPlacementKind
         wordsPlacementKind =
-          (*i)->getWordsPlacementKind ();
+          word->getWordsPlacementKind ();
 
       std::string wordsContents =
-        (*i)->getWordsContents ();
+        word->getWordsContents ();
 
       msrFontStyleKind
         wordsFontStyleKind =
-          (*i)->getWordsFontStyleKind ();
+          word->getWordsFontStyleKind ();
 
       S_msrFontSize
         wordsFontSize =
-          (*i)->getWordsFontSize ();
+          word->getWordsFontSize ();
 
       msrFontWeightKind
         wordsFontWeightKind =
-          (*i)->getWordsFontWeightKind ();
+          word->getWordsFontWeightKind ();
 
       std::string markup;
 
@@ -3356,9 +3335,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
 
     if (noteCodas.size ()) {
       std::list<S_msrCoda>::const_iterator i;
-      for (i = noteCodas.begin (); i != noteCodas.end (); ++i) {
-        S_msrCoda coda = (*i);
-
+      for (S_msrCoda coda : noteCodas) {
         // generate only the first coda before the note
         switch (coda->getCodaKind ()) {
           case msrCodaKind::kCodaFirst:
@@ -3378,7 +3355,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
 
     if (noteDalSegnos.size ()) {
       std::list<S_msrDalSegno>::const_iterator i;
-      for (i = noteDalSegnos.begin (); i != noteDalSegnos.end (); ++i) {
+      for (S_msrDalSegno dalSegno : noteDalSegnos) {
         // generate the dal segno
         fLilypondCodeStream <<
           std::endl <<
@@ -3387,7 +3364,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
           "\\tweak self-alignment-X #RIGHT" <<
           std::endl <<
           "\\mark \\markup { " <<
-          (*i)->getDalSegnoString () <<
+          dalSegno->getDalSegnoString () <<
           " }" <<
           std::endl;
       } // for
@@ -5068,15 +5045,8 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
       ss << "^";
 
 //       int counter = 0; // JMI v0.9.67
-      for (
-        std::list<S_msrHarmonyDegree>::const_iterator i = harmonyDegreesList.begin ();
-        i != harmonyDegreesList.end ();
-        ++i
-      ) {
+      for (S_msrHarmonyDegree harmonyDegree: harmonyDegreesList) {
 //         ++counter;
-
-        S_msrHarmonyDegree
-          harmonyDegree = (*i);
 
         // get harmony degree information
         int
@@ -13481,622 +13451,644 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
     if (fGenerateCodeForOngoingNonEmptyStanza) {
-      switch (elt->getSyllableKind ()) {
-        case msrSyllableKind::kSyllableNone: // JMI v0.9.70
+      generateLilypondCodeForSyllable (elt);
+    }
+  }
+}
+
+void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
+  S_msrSyllable& syllable)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceLyrics ()) {
+  // get the note the syllable is attached to
+    S_msrNote
+      noteTheSyllableIsAttachedTo =
+        syllable->getSyllableUpLinkToNote ();
+
+    const int fieldWidth = 29;
+
+    fLilypondCodeStream <<
+      std::endl <<
+      std::endl <<
+      "%{" <<
+      std::endl;
+
+    gIndenter++;
+
+    fLilypondCodeStream << std::left <<
+      std::setw (fieldWidth) <<
+      "getSyllableKind" << ": " <<
+      syllable->getSyllableKind () <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "getSyllableExtendKind" << ": " <<
+      syllable->getSyllableExtendKind () <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "syllableTextsListAsString" << ": " <<
+      syllable->syllableTextsListAsString () <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "getLyricsNotesDurationsKind" << ": " <<
+      gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind () <<
+      std::endl;
+
+    fLilypondCodeStream << std::left <<
+      std::setw (fieldWidth) <<
+      "noteTheSyllableIsAttachedTo" << ": ";
+
+    if (noteTheSyllableIsAttachedTo) {
+      fLilypondCodeStream <<
+        noteTheSyllableIsAttachedTo->asShortString ();
+    }
+    else {
+      fLilypondCodeStream << " [NULL]";
+    }
+
+    fLilypondCodeStream << std::left <<
+      std::endl <<
+      "line" << ": " << syllable->getInputStartLineNumber () <<
+      std::endl;
+
+    gIndenter--;
+
+    fLilypondCodeStream <<
+       "%}" <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  switch (syllable->getSyllableKind ()) {
+    case msrSyllableKind::kSyllableNone: // JMI v0.9.70
+      break;
+
+    case msrSyllableKind::kSyllableSingle:
+      printTextsListAsLilypondString (
+        syllable->getSyllableTextsList (),
+        fLilypondCodeStream);
+
+      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          // don't generate a duration for automatic lyrics durations
           break;
 
-        case msrSyllableKind::kSyllableSingle:
-          writeTextsListAsLilypondString (
-            elt->getSyllableTextsList (),
-            fLilypondCodeStream);
-
-          switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              // don't generate a duration for automatic lyrics durations
-              break;
-
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-              fLilypondCodeStream <<
-                elt->syllableWholeNotesAsMsrString ();
-              break;
-          } // switch
-
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
           fLilypondCodeStream <<
-            ' ';
-
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ kSyllableSingle %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
-          break;
-
-        case msrSyllableKind::kSyllableBegin:
-          writeTextsListAsLilypondString (
-            elt->getSyllableTextsList (),
-            fLilypondCodeStream);
-
-          switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              fLilypondCodeStream <<
-                " -- \\skip1 ";
-              break;
-
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-              fLilypondCodeStream <<
-                elt->syllableWholeNotesAsMsrString ();
-
-              fLilypondCodeStream <<
-                " -- ";
-              break;
-          } // switch
-
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ kSyllableBegin %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
-          break;
-
-        case msrSyllableKind::kSyllableMiddle:
-          writeTextsListAsLilypondString (
-            elt->getSyllableTextsList (),
-            fLilypondCodeStream);
-
-          switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              // don't generate a duration for automatic lyrics durations
-              break;
-
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-              fLilypondCodeStream <<
-                elt->syllableWholeNotesAsMsrString ();
-              break;
-          } // switch
-
-          fLilypondCodeStream <<
-            " -- ";
-
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ kSyllableMiddle %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
-          break;
-
-        case msrSyllableKind::kSyllableEnd:
-          writeTextsListAsLilypondString (
-            elt->getSyllableTextsList (),
-            fLilypondCodeStream);
-
-          switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              // don't generate a duration for automatic lyrics durations
-              break;
-
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-              fLilypondCodeStream <<
-                elt->syllableWholeNotesAsMsrString ();
-              break;
-          } // switch
-
-          fLilypondCodeStream <<
-            ' ';
-
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ kSyllableEnd %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
-          break;
-
-        case msrSyllableKind::kSyllableOnRestNote:
-          // generate the syllable in lyrics for rests with syllables
-          writeTextsListAsLilypondString (
-            elt->getSyllableTextsList (),
-            fLilypondCodeStream);
-          fLilypondCodeStream <<
-            elt->syllableWholeNotesAsMsrString () <<
-            ' ';
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-            " %{ kSyllableOnRestNote %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
-          break;
-
-        case msrSyllableKind::kSyllableSkipRestNote:
-          switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              // LilyPond ignores the skip durations when \lyricsto is used
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream <<
-                  " %{ NOTHING for kSyllableSkipRestNote " <<
-                  elt->syllableWholeNotesAsMsrString () <<
-                  " %} ";
-              }
-#endif // MF_TRACE_IS_ENABLED
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream << std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-              break;
-
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-              fLilypondCodeStream <<
-                "\\skip" <<
-                elt->syllableWholeNotesAsMsrString () <<
-                ' ';
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream <<
-                  "%{ ZOU 1 %}" <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream <<
-                " %{ lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit %} ";
-              }
-#endif // MF_TRACE_IS_ENABLED
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream << std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-              break;
-          } // switch
-          break;
-
-        case msrSyllableKind::kSyllableSkipNonRestNote:
-          switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              {
-                // LilyPond ignores the skip durations when \lyricsto is used,
-                // so let's generate '1' to explicit this fact v0.9.70
-
-                fLilypondCodeStream <<
-                  "\\skip1 ";
-#ifdef MF_TRACE_IS_ENABLED
-                if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream <<
-                  "%{ ZOU 2 %}" <<
-                  std::endl;
-                }
-#endif // MF_TRACE_IS_ENABLED
-              }
-
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream <<
-                  " %{ syllableSkipNonRestNote lyricsNotesDurationsImplicit %} ";
-              }
-#endif // MF_TRACE_IS_ENABLED
-              break;
-
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-              fLilypondCodeStream <<
-                "\\skip" <<
-                elt->syllableWholeNotesAsMsrString () <<
-                ' ';
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream <<
-                  "%{ ZOU 3 %}" <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream <<
-                " %{ syllableSkipNonRestNote lyricsNotesDurationsExplicit %} ";
-              }
-#endif // MF_TRACE_IS_ENABLED
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream << std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-              break;
-          } // switch
-          break;
-
-        case msrSyllableKind::kSyllableMeasureEnd:
-      // JMI      "| " <<
-          if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
-            // generate information and line number as a comment
-            fLilypondCodeStream <<
-              " %{ line " <<
-              elt->getInputStartLineNumber () <<
-              " %}";
-          }
-
-          if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
-            // generate information and line number as a comment
-            fLilypondCodeStream <<
-              "%{ kSyllableMeasureEnd %}";
-          }
-
-      // JMI    fLilypondCodeStream << std::endl;
-          break;
-
-        case msrSyllableKind::kSyllableLineBreak:
-          // generate information and line number as a comment
-          fLilypondCodeStream <<
-            "%{ syllableLineBreak, line " <<
-            elt->getInputStartLineNumber () <<
-            " %} " <<
-            "%| % " << // JMI BLARK TO BE FIXED
-            elt->getSyllableNextMeasurePuristNumber () <<
-            std::endl;
-          break;
-
-        case msrSyllableKind::kSyllablePageBreak:
-          // generate information and line number as a comment
-          fLilypondCodeStream <<
-            "%{ kSyllablePageBreak, line " <<
-            elt->getInputStartLineNumber () <<
-            " %}" <<
-            std::endl;
+            syllable->syllableWholeNotesAsMsrString ();
           break;
       } // switch
 
-      switch (elt->getSyllableExtendKind ()) {
-        case msrSyllableExtendKind::kSyllableExtend_NONE:
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ kSyllableExtend_NONE %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
+      fLilypondCodeStream <<
+        ' ';
+      break;
+
+    case msrSyllableKind::kSyllableBegin:
+      printTextsListAsLilypondString (
+        syllable->getSyllableTextsList (),
+        fLilypondCodeStream);
+
+      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          fLilypondCodeStream <<
+            "-- \\skip1 ";
           break;
 
-        case msrSyllableExtendKind::kSyllableExtendTypeLess:
-          switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              {
-                // should a lyric extender and skip be generated?
-                S_msrNote
-                  noteTheSyllableIsAttachedTo =
-                    elt->getSyllableUpLinkToNote ();
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+          fLilypondCodeStream <<
+            syllable->syllableWholeNotesAsMsrString ();
 
-                Bool doGenerateALyricExtenderAndSkip (false); // JMI v0.9.70
-
-                S_msrTie
-                  noteTie =
-                    noteTheSyllableIsAttachedTo->getNoteTie ();
-
-                if (noteTie) {
-                  switch (noteTie->getTieKind ()) {
-                    case msrTieKind::kTieNone:
-                      break;
-                    case msrTieKind::kTieStart:
-                      doGenerateALyricExtenderAndSkip = true;
-                      break;
-                    case msrTieKind::kTieContinue:
-                      break;
-                    case msrTieKind::kTieStop:
-    //                   doGenerateALyricExtenderAndSkip = false;
-                      break;
-                  } // switch
-                }
-
-//                 switch (elt->getSyllableExtendKind ()) {
-//                   case msrSyllableExtendKind::kSyllableExtend_NONE:
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//                     // an lyric extender is needed for <extend /> without any type
-// //                     doGenerateALyricExtenderAndSkip = true;
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//                     break;
-//                 } // switch
-
-
-
-                 switch (elt->getSyllableExtendKind ()) {
-                  case msrSyllableExtendKind::kSyllableExtend_NONE:
-                    break;
-
-                  case msrSyllableExtendKind::kSyllableExtendTypeLess:
-                    // is an lyric extender and skip needed for <extend /> without any type
-                    switch (elt->getSyllableKind ()) {
-                      case msrSyllableKind::kSyllableNone:
-                        break;
-
-                      case msrSyllableKind::kSyllableSingle:
-                        doGenerateALyricExtenderAndSkip = true;
-                        break;
-
-                      case msrSyllableKind::kSyllableBegin:
-                        break;
-                      case msrSyllableKind::kSyllableMiddle:
-                        break;
-                      case msrSyllableKind::kSyllableEnd:
-                        break;
-
-                      case msrSyllableKind::kSyllableOnRestNote:
-                        break;
-
-                      case msrSyllableKind::kSyllableSkipRestNote:
-                        break;
-                      case msrSyllableKind::kSyllableSkipNonRestNote:
-                        break;
-
-                      case msrSyllableKind::kSyllableMeasureEnd:
-                        break;
-
-                      case msrSyllableKind::kSyllableLineBreak:
-                        break;
-                      case msrSyllableKind::kSyllablePageBreak:
-                        break;
-                    } // switch
-                    break;
-                  case msrSyllableExtendKind::kSyllableExtendTypeStart:
-                    break;
-                  case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-                    break;
-                  case msrSyllableExtendKind::kSyllableExtendTypeStop:
-                    break;
-                } // switch
-
-               if (doGenerateALyricExtenderAndSkip) {
-                  // generate a lyric extender, i.e. a melisma, after this syllable
-                  fLilypondCodeStream <<
-//                     "__ \\skip1 ";
-                    "__ ";
-#ifdef MF_TRACE_IS_ENABLED
-                  if (gTraceOahGroup->getTraceLyrics ()) {
-                    fLilypondCodeStream <<
-                      "%{ ZOU 4 %}" <<
-                      std::endl;
-                  }
-#endif // MF_TRACE_IS_ENABLED
-                }
-
-//                 // should a should a \skip1 be generated?
-//                 Bool doGenerateASkip1 (false); // JMI v0.9.70
-//
-//                 switch (elt->getSyllableExtendKind ()) {
-//                   case msrSyllableExtendKind::kSyllableExtend_NONE:
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//                     // an \skip1 is needed for <extend /> without any type
-// //                     doGenerateASkip1 = true;
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//                     break;
-//                 } // switch
-
-
-
-//                 switch (elt->getSyllableExtendKind ()) {
-//                   case msrSyllableExtendKind::kSyllableExtend_NONE:
-//                     break;
-//
-//                   case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//                     // is an lyric extender and skip needed for <extend /> without any type
-//                     switch (elt->getSyllableKind ()) {
-//                       case msrSyllableKind::kSyllableNone:
-//                         break;
-//
-//                       case msrSyllableKind::kSyllableSingle:
-//                         doGenerateASkip1 = true;
-//                         break;
-//
-//                       case msrSyllableKind::kSyllableBegin:
-//                         break;
-//                       case msrSyllableKind::kSyllableMiddle:
-//                         break;
-//                       case msrSyllableKind::kSyllableEnd:
-//                         break;
-//
-//                       case msrSyllableKind::kSyllableOnRestNote:
-//                         break;
-//
-//                       case msrSyllableKind::kSyllableSkipRestNote:
-//                         break;
-//                       case msrSyllableKind::kSyllableSkipNonRestNote:
-//                         break;
-//
-//                       case msrSyllableKind::kSyllableMeasureEnd:
-//                         break;
-//
-//                       case msrSyllableKind::kSyllableLineBreak:
-//                         break;
-//                       case msrSyllableKind::kSyllablePageBreak:
-//                         break;
-//                     } // switch
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//                     break;
-//                   case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//                     break;
-//                 } // switch
-//
-//                 if (doGenerateASkip1) {
-//                   // generate a skip1
-//                   fLilypondCodeStream <<
-//                     "\\skip1 ";
-// #ifdef MF_TRACE_IS_ENABLED
-//                 if (gTraceOahGroup->getTraceLyrics ()) {
-//                   fLilypondCodeStream <<
-//                     "%{ ZOU 999 %}" <<
-//                     std::endl;
-//                 }
-// #endif // MF_TRACE_IS_ENABLED
-              }
-              break;
-
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-              {
-                // should a lyric extender and skip be generated?
-                Bool doGenerateALyricExtenderAndSkip (false); // JMI v0.9.70
-
-                switch (elt->getSyllableExtendKind ()) {
-                  case msrSyllableExtendKind::kSyllableExtend_NONE:
-                    break;
-
-                  case msrSyllableExtendKind::kSyllableExtendTypeLess:
-                    // is an lyric extender and skip needed for <extend /> without any type
-                    switch (elt->getSyllableKind ()) {
-                      case msrSyllableKind::kSyllableNone:
-                        break;
-
-                      case msrSyllableKind::kSyllableSingle:
-                        doGenerateALyricExtenderAndSkip = true;
-                        break;
-
-                      case msrSyllableKind::kSyllableBegin:
-                        break;
-                      case msrSyllableKind::kSyllableMiddle:
-                        break;
-                      case msrSyllableKind::kSyllableEnd:
-                        break;
-
-                      case msrSyllableKind::kSyllableOnRestNote:
-                        break;
-
-                      case msrSyllableKind::kSyllableSkipRestNote:
-                        break;
-                      case msrSyllableKind::kSyllableSkipNonRestNote:
-                        break;
-
-                      case msrSyllableKind::kSyllableMeasureEnd:
-                        break;
-
-                      case msrSyllableKind::kSyllableLineBreak:
-                        break;
-                      case msrSyllableKind::kSyllablePageBreak:
-                        break;
-                    } // switch
-                    break;
-                  case msrSyllableExtendKind::kSyllableExtendTypeStart:
-                    break;
-                  case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-                    break;
-                  case msrSyllableExtendKind::kSyllableExtendTypeStop:
-                    break;
-                } // switch
-
-                if (doGenerateALyricExtenderAndSkip) {
-                  // generate a lyric extender and skip after this syllable
-                  fLilypondCodeStream <<
-//                     "__ \\skip" <<
-                    "__ " <<
-//                     elt->syllableWholeNotesAsMsrString () <<
-                    ' ';
-#ifdef MF_TRACE_IS_ENABLED
-                  if (gTraceOahGroup->getTraceLyrics ()) {
-                    fLilypondCodeStream <<
-                      "%{ ZOU 5 %}" <<
-                      std::endl;
-                  }
-#endif // MF_TRACE_IS_ENABLED
-                }
-              }
-              break;
-          } // switch
-
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ kSyllableExtendTypeLess %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
-          break;
-
-        case msrSyllableExtendKind::kSyllableExtendTypeStart:
-          switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-              // generate a lyric extender, i.e. a melisma, after this syllable
-              fLilypondCodeStream <<
-                "__ ";
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream <<
-                  "%{ ZOU 6 %}" <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-              break;
-
-            case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-              // generate a lyric extender, i.e. a melisma, after this syllable ??? JMI
-              fLilypondCodeStream <<
-                "__ ";
-#ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceLyrics ()) {
-                fLilypondCodeStream <<
-                  "%{ ZOU 7 %}" <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-              break;
-          } // switch
-
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ kSyllableExtendTypeStart %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
-          break;
-
-        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ kSyllableExtendTypeContinue %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
-          break;
-
-        case msrSyllableExtendKind::kSyllableExtendTypeStop:
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ kSyllableExtendTypeStop %} ";
-          }
-#endif // MF_TRACE_IS_ENABLED
+          fLilypondCodeStream <<
+            "-- ";
           break;
       } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceLyrics ()) {
-        fLilypondCodeStream << std::endl;
+        fLilypondCodeStream <<
+          "%{ kSyllableBegin %} ";
       }
 #endif // MF_TRACE_IS_ENABLED
+      break;
 
-    // generate the input line number as comment if relevant
-    if (
-      gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()
-        ||
-      gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
-    ) {
-      generateInputLineNumberAndOrMeasurePositionAsAComment (
-        elt);
+    case msrSyllableKind::kSyllableMiddle:
+      printTextsListAsLilypondString (
+        syllable->getSyllableTextsList (),
+        fLilypondCodeStream);
+
+      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          // don't generate a duration for automatic lyrics durations
+          break;
+
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+          fLilypondCodeStream <<
+            syllable->syllableWholeNotesAsMsrString ();
+          break;
+      } // switch
+
+      fLilypondCodeStream <<
+        "-- ";
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceLyrics ()) {
+        fLilypondCodeStream <<
+          "%{ kSyllableMiddle %} ";
       }
-    }
+#endif // MF_TRACE_IS_ENABLED
+      break;
+
+    case msrSyllableKind::kSyllableEnd:
+      printTextsListAsLilypondString (
+        syllable->getSyllableTextsList (),
+        fLilypondCodeStream);
+
+      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          // don't generate a duration for automatic lyrics durations
+          break;
+
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+          fLilypondCodeStream <<
+            syllable->syllableWholeNotesAsMsrString ();
+          break;
+      } // switch
+
+      fLilypondCodeStream <<
+        ' ';
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceLyrics ()) {
+        fLilypondCodeStream <<
+          "%{ kSyllableEnd %} ";
+      }
+#endif // MF_TRACE_IS_ENABLED
+      break;
+
+    case msrSyllableKind::kSyllableOnRestNote:
+      // generate the syllable in lyrics for rests with syllables
+      printTextsListAsLilypondString (
+        syllable->getSyllableTextsList (),
+        fLilypondCodeStream);
+      fLilypondCodeStream <<
+        syllable->syllableWholeNotesAsMsrString () <<
+        ' ';
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceLyrics ()) {
+        fLilypondCodeStream <<
+        " %{ kSyllableOnRestNote %} ";
+      }
+#endif // MF_TRACE_IS_ENABLED
+      break;
+
+    case msrSyllableKind::kSyllableSkipRestNote:
+      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          // LilyPond ignores the skip durations when \lyricsto is used
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              " %{ NOTHING for kSyllableSkipRestNote " <<
+              syllable->syllableWholeNotesAsMsrString () <<
+              " %} ";
+          }
+#endif // MF_TRACE_IS_ENABLED
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream << std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
+          break;
+
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              "%{ ZOU_1" <<
+              ", line " << syllable->getInputStartLineNumber () <<
+              " %}" <<
+              std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
+
+          fLilypondCodeStream <<
+            "\\skip" <<
+            syllable->syllableWholeNotesAsMsrString () <<
+            ' ';
+
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream << std::endl;
+          }
+          break;
+      } // switch
+      break;
+
+    case msrSyllableKind::kSyllableSkipNonRestNote:
+      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          {
+            // LilyPond ignores the skip durations when \lyricsto is used,
+            // so let's generate '1' to explicit this fact v0.9.70
+
+#ifdef MF_TRACE_IS_ENABLED
+            if (gTraceOahGroup->getTraceLyrics ()) {
+              fLilypondCodeStream <<
+                "%{ ZOU_2" <<
+                ", line " << syllable->getInputStartLineNumber () <<
+                " %}" <<
+                std::endl;
+            }
+#endif // MF_TRACE_IS_ENABLED
+
+            fLilypondCodeStream <<
+              "\\skip1 ";
+          }
+          break;
+
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              "%{ ZOU_3" <<
+              ", line " << syllable->getInputStartLineNumber () <<
+              " %}" <<
+              std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
+
+          fLilypondCodeStream <<
+            "\\skip" <<
+            syllable->syllableWholeNotesAsMsrString () <<
+            ' ';
+          break;
+      } // switch
+      break;
+
+    case msrSyllableKind::kSyllableMeasureEnd:
+  // JMI      "| " <<
+      if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+        // generate information and line number as a comment
+        fLilypondCodeStream <<
+          " %{ line " <<
+          syllable->getInputStartLineNumber () <<
+          " %}";
+      }
+
+      if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
+        // generate information and line number as a comment
+        fLilypondCodeStream <<
+          "%{ kSyllableMeasureEnd %}";
+      }
+
+  // JMI    fLilypondCodeStream << std::endl;
+      break;
+
+    case msrSyllableKind::kSyllableLineBreak:
+      // generate information and line number as a comment
+      fLilypondCodeStream <<
+        "%{ syllableLineBreak, line " <<
+        syllable->getInputStartLineNumber () <<
+        " %} " <<
+        "%| % " << // JMI BLARK TO BE FIXED
+        syllable->getSyllableNextMeasurePuristNumber () <<
+        std::endl;
+      break;
+
+    case msrSyllableKind::kSyllablePageBreak:
+      // generate information and line number as a comment
+      fLilypondCodeStream <<
+        "%{ kSyllablePageBreak, line " <<
+        syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+      break;
+  } // switch
+
+  generateLyricExtenderAndOrSkipIfRelevant (syllable);
+}
+
+void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithImplicitDurations (
+  S_msrSyllable& syllable)
+{
+  // should a lyric extender and/or skip be generated?
+  Bool doGenerateALyricExtender (false); // JMI v0.9.70
+  Bool doGenerateASkip (false); // JMI v0.9.70
+
+//   // get the note the syllable is attached to
+//   S_msrNote
+//     noteTheSyllableIsAttachedTo =
+//       syllable->getSyllableUpLinkToNote ();
+//
+//   S_msrTie
+//     noteTie =
+//       noteTheSyllableIsAttachedTo->getNoteTie ();
+//
+//   // take note tie into account if any
+//   if (noteTie) {
+//     switch (noteTie->getTieKind ()) {
+//       case msrTieKind::kTieNone:
+//         break;
+//       case msrTieKind::kTieStart:
+//          doGenerateALyricExtender = true;
+//         break;
+//       case msrTieKind::kTieContinue:
+//         break;
+//       case msrTieKind::kTieStop:
+// //                   doGenerateALyricExtender = false;
+//         break;
+//     } // switch
+//   }
+
+  // what is the syllable extend kind?
+  switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeLess:
+      // is a lyric extender and skip needed for <extend /> without any type
+
+      // what is the syllable kind?
+      switch (syllable->getSyllableKind ()) {
+        case msrSyllableKind::kSyllableNone:
+          break;
+
+        case msrSyllableKind::kSyllableSingle:
+          doGenerateALyricExtender = true;
+//           doGenerateASkip = true;
+          break;
+
+        case msrSyllableKind::kSyllableBegin:
+          break;
+        case msrSyllableKind::kSyllableMiddle:
+          break;
+        case msrSyllableKind::kSyllableEnd:
+          break;
+
+        case msrSyllableKind::kSyllableOnRestNote:
+          break;
+
+        case msrSyllableKind::kSyllableSkipRestNote:
+          break;
+        case msrSyllableKind::kSyllableSkipNonRestNote:
+          break;
+
+        case msrSyllableKind::kSyllableMeasureEnd:
+          break;
+
+        case msrSyllableKind::kSyllableLineBreak:
+          break;
+        case msrSyllableKind::kSyllablePageBreak:
+          break;
+      } // switch
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStart:
+       doGenerateALyricExtender = true;
+      break;
+    case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+      break;
+    case msrSyllableExtendKind::kSyllableExtendTypeStop:
+      break;
+  } // switch
+
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    fLilypondCodeStream <<
+      std::endl <<
+      std::endl <<
+      "%{ =======> syllable \""<< syllable->syllableTextsListAsString () << "\"" <<
+      ", doGenerateALyricExtender: " << doGenerateALyricExtender <<
+      ", doGenerateASkip: " << doGenerateASkip <<
+      ", line " << syllable->getInputStartLineNumber () <<
+      " %}" <<
+      std::endl;
   }
+
+  if (doGenerateALyricExtender) {
+    // generate a lyric extender after this syllable
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceLyrics ()) {
+      fLilypondCodeStream <<
+        "%{ ZOU_4" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    fLilypondCodeStream <<
+      "__ ";
+  }
+
+  if (doGenerateASkip) {
+    // generate a skip after this syllable
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceLyrics ()) {
+      fLilypondCodeStream <<
+        "%{ ZOU_5" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    fLilypondCodeStream <<
+      "\\skip1 ";
+  }
+}
+
+void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithExplicitDurations (
+  S_msrSyllable& syllable)
+{
+  // should a lyric extender and/or skip be generated?
+  Bool doGenerateALyricExtender (false); // JMI v0.9.70
+  Bool doGenerateASkip (false); // JMI v0.9.70
+
+  // get the note the syllable is attached to
+  S_msrNote
+    noteTheSyllableIsAttachedTo =
+      syllable->getSyllableUpLinkToNote ();
+
+  // what is the syllable extend kind?
+  switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeLess:
+      // is a lyric extender and skip needed for <extend /> without any type
+
+      // what is the syllable kind?
+      switch (syllable->getSyllableKind ()) {
+        case msrSyllableKind::kSyllableNone:
+          break;
+
+        case msrSyllableKind::kSyllableSingle:
+          doGenerateALyricExtender = true;
+//           doGenerateASkip = true;
+          break;
+
+        case msrSyllableKind::kSyllableBegin:
+          break;
+        case msrSyllableKind::kSyllableMiddle:
+          break;
+        case msrSyllableKind::kSyllableEnd:
+          break;
+
+        case msrSyllableKind::kSyllableOnRestNote:
+          break;
+
+        case msrSyllableKind::kSyllableSkipRestNote:
+          break;
+        case msrSyllableKind::kSyllableSkipNonRestNote:
+          break;
+
+        case msrSyllableKind::kSyllableMeasureEnd:
+          break;
+
+        case msrSyllableKind::kSyllableLineBreak:
+          break;
+        case msrSyllableKind::kSyllablePageBreak:
+          break;
+      } // switch
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStart:
+      doGenerateALyricExtender = true;
+      break;
+    case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+      break;
+    case msrSyllableExtendKind::kSyllableExtendTypeStop:
+      break;
+  } // switch
+
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    fLilypondCodeStream <<
+      std::endl <<
+      std::endl <<
+      "%{ =======> syllable \"" << syllable->syllableTextsListAsString () << "\"" <<
+      ", doGenerateALyricExtender: " << doGenerateALyricExtender <<
+      ", doGenerateASkip: " << doGenerateASkip <<
+      ", line " << syllable->getInputStartLineNumber () <<
+      " %}" <<
+      std::endl;
+  }
+
+  if (doGenerateALyricExtender) {
+    // generate a lyric extender after this syllable
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceLyrics ()) {
+      fLilypondCodeStream <<
+        "%{ ZOU_6" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    fLilypondCodeStream <<
+      "__ ";
+  }
+
+  if (doGenerateASkip) {
+    // generate a skip after this syllable
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceLyrics ()) {
+      fLilypondCodeStream <<
+        "%{ ZOU_7" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    fLilypondCodeStream <<
+      "\\skip" <<
+      syllable->syllableWholeNotesAsMsrString () <<
+      ' ';
+  }
+}
+
+void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipIfRelevant (
+  S_msrSyllable& syllable)
+{
+//   // should a lyric extender and/or skip be generated?
+//   Bool doGenerateALyricExtender (false); // JMI v0.9.70
+//   Bool doGenerateASkip (false); // JMI v0.9.70
+
+  switch (syllable->getSyllableExtendKind ()) {
+    case msrSyllableExtendKind::kSyllableExtend_NONE:
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeLess:
+      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          generateLyricExtenderAndOrSkipWithImplicitDurations (
+            syllable);
+          break;
+
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+          generateLyricExtenderAndOrSkipWithExplicitDurations (
+            syllable);
+          break;
+      } // switch
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStart:
+      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+//           if (doGenerateALyricExtender) {
+// #ifdef MF_TRACE_IS_ENABLED
+//             if (gTraceOahGroup->getTraceLyrics ()) {
+//               fLilypondCodeStream <<
+//                 "%{ ZOU_8" <<
+//                 ", line " << syllable->getInputStartLineNumber () <<
+//                 " %}" <<
+//                 std::endl;
+//             }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//             // generate a lyric extender after this syllable
+//             fLilypondCodeStream <<
+//               "__ ";
+//           }
+          generateLyricExtenderAndOrSkipWithImplicitDurations (
+            syllable);
+          break;
+
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+//           if (doGenerateALyricExtender) {
+// #ifdef MF_TRACE_IS_ENABLED
+//             if (gTraceOahGroup->getTraceLyrics ()) {
+//               fLilypondCodeStream <<
+//                 "%{ ZOU_9" <<
+//                 ", line " << syllable->getInputStartLineNumber () <<
+//                 " %}" <<
+//                 std::endl;
+//             }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//             // generate a lyric extender after this syllable
+//             fLilypondCodeStream <<
+//               "__ ";
+//           }
+          generateLyricExtenderAndOrSkipWithExplicitDurations (
+            syllable);
+          break;
+      } // switch
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+      break;
+
+    case msrSyllableExtendKind::kSyllableExtendTypeStop:
+      break;
+  } // switch
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
