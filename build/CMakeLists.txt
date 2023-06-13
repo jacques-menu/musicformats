@@ -93,7 +93,7 @@ set (LIBDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 # CXX
 #===============================================================
 
-set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD 20)
 message (STATUS "-----> CMAKE_CXX_STANDARD: ${CMAKE_CXX_STANDARD}")
 
 message (STATUS "-----> UNIX: ${UNIX}")
@@ -181,7 +181,7 @@ message (STATUS "-----> MF_CLI_SAMPLES_DIR: ${MF_CLI_SAMPLES_DIR}")
 # message (STATUS "-----> MF_CLI_SERVICES_DIR: ${MF_CLI_SERVICES_DIR}")
 
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mflibrary mflibrary/mfFind components languages oah wae manpage services)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mflibrary mflibrary/mfFilter components languages oah wae manpage services)
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} interpreters/mfslinterpreter interpreters/ischemeinterpreter)
 

@@ -15,7 +15,7 @@
   place any include you need here...
 */
 
-#include "mfFindBasicTypes.h"
+#include "mfFilterBasicTypes.h"
 
 
 namespace MusicFormats

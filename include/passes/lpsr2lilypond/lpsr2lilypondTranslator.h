@@ -34,6 +34,8 @@
 #include "lpsrOah.h"
 
 
+using namespace MusicXML2;
+
 namespace MusicFormats
 {
 

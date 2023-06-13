@@ -57,7 +57,6 @@ mfStack<ELEMENT_TYPE>::~mfStack<ELEMENT_TYPE> ()
 {}
 
 //______________________________________________________________________________
-//______________________________________________________________________________
 template <typename ELEMENT_TYPE>
 Bool mfStack<ELEMENT_TYPE>::contains (
 	const ELEMENT_TYPE& value) const

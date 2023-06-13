@@ -76,7 +76,7 @@ namespace MusicFormats
 //     }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//     if (currentOption.empty ()) {  // wait for option
+//     if (currentOption.size () == 0) {  // wait for option
 //       if (currString [0] == '-') {
 //         currentOption = currString;
 //       }
@@ -218,7 +218,7 @@ EXP void displayStringPairVector (
 //       }
 //   #endif // MF_TRACE_IS_ENABLED
 //
-//       if (curOption.empty ()) {  // wait for option
+//       if (curOption.size () == 0) {  // wait for option
 //         if (str [0] == '-') {
 //           curOption = str;
 //         }
@@ -359,7 +359,7 @@ EXP void displayStringPairVector (
 //       }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//       if (currentOption.empty ()) {  // wait for option
+//       if (currentOption.size () == 0) {  // wait for option
 //         if (currString [0] == '-') {
 //           currentOption = currString;
 //         }

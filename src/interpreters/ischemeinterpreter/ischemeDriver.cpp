@@ -514,7 +514,7 @@ int ischemeDriver::parseInput_Pass1 ()
   // begin scan
   scanBegin ();
 
-  if (fScriptName.empty () || fScriptName == "-") {
+  if (fScriptName.size () == 0 || fScriptName == "-") {
     fScriptName = "stdin"; // nicer for warning and error messages
   }
 

@@ -81,20 +81,20 @@ class mfslDriver
                             // due to constraints in the Flex-generated code
                               { return fScannerLocation; }
 
-    bool                  getDisplayServiceAndInput () const
+    Bool                  getDisplayServiceAndInput () const
                               { return fDisplayServiceAndInput; }
 
     bool                  getTraceParsing () const
                               { return fTraceParsing; }
 
-    bool                  getDisplayOptions () const
+    Bool                  getDisplayOptions () const
                               { return fDisplayOptions; }
 
     // choices
-    bool                  getTraceChoices () const
+    Bool                  getTraceChoices () const
                               { return fTraceChoices; }
 
-    bool                  getTraceCaseChoiceStatements () const
+    Bool                  getTraceCaseChoiceStatements () const
                               { return fTraceCaseChoiceStatements; }
 
     S_mfslChoicesTable    getChoicesTable () const
@@ -107,10 +107,10 @@ class mfslDriver
                               { return fCurrentChoiceChoice; }
 
     // inputs
-    bool                  getTraceInputs () const
+    Bool                  getTraceInputs () const
                               { return fTraceInputs; }
 
-    bool                  getTraceCaseInputStatements () const
+    Bool                  getTraceCaseInputStatements () const
                               { return fTraceCaseInputStatements; }
 
     S_mfslInputsTable     getInputsTable () const
@@ -118,13 +118,13 @@ class mfslDriver
 
     void                  setTraceOptionsBlocks () // TEMP JMI
                               { fTraceOptionsBlocks = true; }
-    bool                  getTraceOptionsBlocks () const
+    Bool                  getTraceOptionsBlocks () const
                               { return fTraceOptionsBlocks; }
 
-    bool                  getDisplayTokens () const
+    Bool                  getDisplayTokens () const
                               { return fDisplayTokens; }
 
-    bool                  getNoLaunch () const
+    Bool                  getNoLaunch () const
                               { return fNoLaunch; }
 
   public:
@@ -149,7 +149,10 @@ class mfslDriver
     void                  optionsBlocksStackPop (
                             const std::string& context);
 
-    // options
+     void                 displayOptionsBlocksStack (
+                            const std::string& context) const;
+
+   // options
     void                  registerOptionInCurrentOptionsBlock (
                             S_oahOption option,
                             mfslDriver& drv);
@@ -158,9 +161,6 @@ class mfslDriver
                             const std::string& choiceName);
     void                  registerOptionsSuppliedChoicesAsUnused (
                             const std::string& choiceName);
-
-    void                  displayOptionsBlocksStack (
-                            const std::string& context) const;
 
     // case choice statements
     void                  caseChoiceStatementsStackPush (
@@ -196,6 +196,7 @@ class mfslDriver
                             const std::string& label,
                             Bool               allLabelSelected);
 
+    // launch the service
     mfMusicformatsErrorKind   launchMfslService_Pass2 ();
 
   private:
@@ -235,34 +236,34 @@ class mfslDriver
     list<std::string>     fInputSoucesList;
 
     // scanning
-    bool                  fTraceScanning;
+    bool                  fTraceScanning; // this interacts with the scanner
     mfsl::location        fScannerLocation;
 
     // parsing
-    bool                  fDisplayServiceAndInput;
+    Bool                  fDisplayServiceAndInput;
 
-    bool                  fTraceParsing;
+    bool                  fTraceParsing; // this interacts with the scanner
 
-    bool                  fDisplayOptions;
+    Bool                  fDisplayOptions;
 
     // tokens
-    bool                  fDisplayTokens;
+    Bool                  fDisplayTokens;
 
     // choices
-    bool                  fTraceChoices;
+    Bool                  fTraceChoices;
 
-    bool                  fTraceCaseChoiceStatements;
+    Bool                  fTraceCaseChoiceStatements;
 
     // inputs
-    bool                  fTraceInputs;
+    Bool                  fTraceInputs;
 
-    bool                  fTraceCaseInputStatements;
+    Bool                  fTraceCaseInputStatements;
 
     // options
-    bool                  fTraceOptionsBlocks;
+    Bool                  fTraceOptionsBlocks;
 
     // launching
-    bool                  fNoLaunch;
+    Bool                  fNoLaunch;
 
     // known service names
     std::set<std::string> fKnownNames;

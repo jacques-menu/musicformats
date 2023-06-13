@@ -15,7 +15,10 @@
 #include <list>
 
 #include "exports.h"
+#include "smartpointer.h"
 
+
+using namespace MusicXML2;
 
 namespace MusicFormats
 {
@@ -86,7 +89,7 @@ class EXP mfStack : public smartable
                             const ELEMENT_TYPE& element)
                               { fElementsStdList.push_front (element); }
 
-    ELEMENT_TYPE&              top ()
+    ELEMENT_TYPE&         top ()
                               { return fElementsStdList.front (); }
 
     void                  pop ()

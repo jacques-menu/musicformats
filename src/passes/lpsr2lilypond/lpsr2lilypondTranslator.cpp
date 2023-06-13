@@ -12848,7 +12848,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        if (ratioToFullMeasureWholeNotesDuration == msrWholeNotes (1, 1)) {
+        if (ratioToFullMeasureWholeNotesDuration == mfRational (1, 1)) {
           std::stringstream ss;
 
           ss <<
@@ -23731,7 +23731,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 
     --gIndenter;
 
-    fLilypondCodeStream << ">>";
+    fLilypondCodeStream << "}";
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<

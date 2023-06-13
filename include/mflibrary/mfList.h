@@ -15,7 +15,10 @@
 #include <list>
 
 #include "exports.h"
+#include "smartpointer.h"
 
+
+using namespace MusicXML2;
 
 namespace MusicFormats
 {

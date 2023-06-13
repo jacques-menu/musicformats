@@ -24,14 +24,14 @@
 
 #include "oahBasicTypes.h"
 
-#include "mfslDriver.h"
-#include "mfslParser.h"
+#include "mfFilterDriver.h"
+#include "mfFilterParser.h"
 
-#include "mfslWae.h"
+#include "mfFilterWae.h"
 
-#include "mfslInterpreterOah.h"
+#include "mfFilterInterpreterOah.h"
 
-#include "mfslInterpreterInterface.h"
+#include "mfFilterInterpreterInterface.h"
 
 #ifdef WIN32
   #include "mfSystemInterface.h" // for isatty()
@@ -56,7 +56,7 @@
 /* flex options */
 /* ---------------------------------------------------------------------- */
 
-%option prefix="mfsl"
+%option prefix="mfFilter"
 
 %option yylineno
 
@@ -66,8 +66,8 @@
 
 
 %{
-//   mfsl::parser::symbol_type JMI
-//   make_NAME (const std::string &s, const mfsl::parser::location_type& loc);
+//   mfFilter::parser::symbol_type JMI
+//   make_NAME (const std::string &s, const mfFilter::parser::location_type& loc);
 %}
 
 
@@ -99,15 +99,13 @@ backSlash                 [\\]
 %}
 
 
+
 /* ---------------------------------------------------------------------- */
 /* exclusive modes */
 /* ---------------------------------------------------------------------- */
 
 %x                        SINGLE_QUOTED_STRING_MODE
 %x                        DOUBLE_QUOTED_STRING_MODE
-
-%x                        COMMENT_TO_END_OF_LINE_MODE
-%x                        PARENTHESIZED_COMMENT_MODE
 
 
 
@@ -127,8 +125,8 @@ backSlash                 [\\]
 #define                   STRING_BUFFER_SIZE 1024
 char                      pStringBuffer [STRING_BUFFER_SIZE];
 
-// A handy shortcut to the location held by the mfslDriver
-mfsl::location& loc = drv.getScannerLocationNonConst ();
+// A handy shortcut to the location held by the mfFilterDriver
+mfFilter::location& loc = drv.getScannerLocationNonConst ();
 
 // Code run each time yylex() is called
 loc.step ();
@@ -139,48 +137,6 @@ loc.step ();
 {blank} {
   loc.step ();
 }
-
-{endOfLine} {
-  loc.lines (yyleng); loc.step ();
-}
-
-
-
-"#" { // comment
-  loc.step ();
-  BEGIN COMMENT_TO_END_OF_LINE_MODE;
-}
-
-<COMMENT_TO_END_OF_LINE_MODE>{endOfLine} {
-  loc.lines (yyleng); loc.step ();
-  BEGIN INITIAL;
-}
-
-<COMMENT_TO_END_OF_LINE_MODE>. {
-  /* accepting any character other than {endOfLine} */
-  loc.step ();
-}
-
-
-"###" {
-  loc.step ();
-  BEGIN PARENTHESIZED_COMMENT_MODE;
-}
-
-<PARENTHESIZED_COMMENT_MODE>{endOfLine} {
-  loc.lines (yyleng); loc.step ();
-}
-
-<PARENTHESIZED_COMMENT_MODE>"###" {
-  BEGIN INITIAL;
-}
-
-<PARENTHESIZED_COMMENT_MODE>. {
-  /* accepting any character other than {endOfLine} */
-  loc.step ();
-}
-
-
 
 {singleleQuote} {
   pStringBuffer [0] = '\0';
@@ -198,7 +154,7 @@ loc.step ();
   BEGIN INITIAL;
 
   return
-    mfsl::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
+    mfFilter::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
 }
 
 <SINGLE_QUOTED_STRING_MODE>{backSlash}{singleleQuote} {
@@ -237,14 +193,14 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog <<
       "--> " << drv.getScannerLocation () <<
-      ": double quoted std::string [" << pStringBuffer << ']' <<
+      ": double quoted string [" << pStringBuffer << ']' <<
       endl;
   }
 
   loc.step ();
   BEGIN INITIAL;
   return
-    mfsl::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
+    mfFilter::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{backSlash}{doubleQuote} {
@@ -274,213 +230,6 @@ loc.step ();
 }
 
 
-
-{integer}"."{integer}({exponent})? |
-{integer}{exponent} {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    " double: " << yytext <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_DOUBLE (yytext, loc);
-}
-
-{integer} {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    " integer: " << yytext <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_INTEGER (yytext, loc);
-}
-
-
-
-
-"service" {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_SERVICE (loc);
-}
-
-"input" {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_INPUT (loc);
-}
-
-"choice" {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_CHOICE (loc);
-}
-
-"default" {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_DEFAULT (loc);
-}
-
-"case" {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_CASE (loc);
-}
-
-"select" {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_SELECT (loc);
-}
-
-"all" {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_ALL (loc);
-}
-
-
-
-{name} {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": name [" << yytext << ']' <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_NAME (yytext, loc);
-}
-
-
-
-"--"{name} |
-"-"{name} {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": option [" << yytext << ']' <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-
-  return
-    mfsl::parser::make_OPTION (yytext, loc);
-}
-
-
-
-"," {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": '" << yytext << '\'' <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_COMMA (loc);
-}
-
-":" {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": '" << yytext << '\'' <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_COLON (loc);
-}
-
-";" {
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": '" << yytext << '\'' <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    mfsl::parser::make_SEMICOLON (loc);
-}
-
 "|" {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -492,7 +241,22 @@ loc.step ();
   loc.step ();
 
   return
-    mfsl::parser::make_BAR (loc);
+    mfFilter::parser::make_OR (loc);
+}
+
+"||" {
+  if (drv.getDisplayTokens ()) {
+    gLog << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+//     mfFilter::parser::make_OROR (loc);
+    mfFilter::parser::make_OR (loc);
 }
 
 "&" {
@@ -506,10 +270,10 @@ loc.step ();
   loc.step ();
 
   return
-    mfsl::parser::make_AMPERSAND (loc);
+    mfFilter::parser::make_AND (loc);
 }
 
-"=" {
+"&&" {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
@@ -520,12 +284,54 @@ loc.step ();
   loc.step ();
 
   return
-    mfsl::parser::make_EQUAL (loc);
+//     mfFilter::parser::make_ANDAND (loc);
+    mfFilter::parser::make_AND (loc);
 }
 
+"!" {
+  if (drv.getDisplayTokens ()) {
+    gLog << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    mfFilter::parser::make_NOT (loc);
+}
+
+"(" {
+  if (drv.getDisplayTokens ()) {
+    gLog << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    mfFilter::parser::make_LEFT_PARENTHESIS (loc);
+}
+
+")" {
+  if (drv.getDisplayTokens ()) {
+    gLog << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    mfFilter::parser::make_RIGHT_PARENTHESIS (loc);
+}
 
 . {
-   throw mfsl::parser::syntax_error (
+   throw mfFilter::parser::syntax_error (
      loc,
      "### invalid character: " + std::string (yytext));
 }
@@ -534,7 +340,7 @@ loc.step ();
 
 <<EOF>> {
   return
-    mfsl::parser::make_YYEOF (loc);
+    mfFilter::parser::make_YYEOF (loc);
 }
 
 
@@ -547,7 +353,7 @@ loc.step ();
 /* service code */
 /* ---------------------------------------------------------------------- */
 
-void mfslDriver::scanBegin ()
+void mfFilterDriver::scanBegin ()
 {
   yy_flex_debug = fTraceScanning;
 
@@ -570,27 +376,28 @@ void mfslDriver::scanBegin ()
           errorString <<
           endl;
 
-        mfslFileError (
+        mfFilterFileError (
           fScriptName,
           s.str ());
       }
     }
 }
 
-void mfslDriver::scanEnd ()
+void mfFilterDriver::scanEnd ()
 {
   fclose (yyin);
 }
 
 //_______________________________________________________________________________
-mfMusicformatsErrorKind launchMfslInterpreter ()
+mfMusicformatsErrorKind executeMfFilter (
+  const std::string& inputString)
 {
   mfMusicformatsErrorKind
     result =
       mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   // the driver
-  mfslDriver
+  mfFilterDriver
     theDriver;
 
   // parse the script
@@ -606,7 +413,7 @@ mfMusicformatsErrorKind launchMfslInterpreter ()
 
   else {
     result =
-      theDriver.launchMfslService_Pass2 ();
+      theDriver.launchmfFilterService_Pass2 ();
   }
 
   return result;

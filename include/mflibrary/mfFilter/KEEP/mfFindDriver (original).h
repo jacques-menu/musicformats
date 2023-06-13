@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfslDriver___
-#define ___mfslDriver___
+#ifndef ___mfFilterDriver___
+#define ___mfFilterDriver___
 
 #include <string>
 
@@ -19,11 +19,11 @@
 
 #include "oahAtomsCollection.h"
 
-#include "mfslBasicTypes.h"
+#include "mfFilterBasicTypes.h"
 
 #include "location.hh"
 
-#include "mfslParser.h"
+#include "mfFilterParser.h"
 
 using namespace std;
 
@@ -31,8 +31,8 @@ using namespace MusicFormats;
 
 
 //______________________________________________________________________________
-// Conducting the whole scanning and parsing of MFSL
-class mfslDriver
+// Conducting the whole scanning and parsing of mfFilter
+class mfFilterDriver
 {
   public:
 
@@ -44,9 +44,9 @@ class mfslDriver
     // // constructor/destructor
     // ------------------------------------------------------
 
-                          mfslDriver ();
+                          mfFilterDriver ();
 
-    virtual               ~mfslDriver ();
+    virtual               ~mfFilterDriver ();
 
   public:
 
@@ -73,58 +73,58 @@ class mfslDriver
     bool                  getTraceScanning () const
                               { return fTraceScanning; }
 
-    const mfsl::location& getScannerLocation () const
+    const mfFilter::location& getScannerLocation () const
                               { return fScannerLocation; }
 
-    mfsl::location&       getScannerLocationNonConst ()
+    mfFilter::location&       getScannerLocationNonConst ()
                             // no const here
                             // due to constraints in the Flex-generated code
                               { return fScannerLocation; }
 
-    Bool                  getDisplayServiceAndInput () const
+    bool                  getDisplayServiceAndInput () const
                               { return fDisplayServiceAndInput; }
 
     bool                  getTraceParsing () const
                               { return fTraceParsing; }
 
-    Bool                  getDisplayOptions () const
+    bool                  getDisplayOptions () const
                               { return fDisplayOptions; }
 
     // choices
-    Bool                  getTraceChoices () const
+    bool                  getTraceChoices () const
                               { return fTraceChoices; }
 
-    Bool                  getTraceCaseChoiceStatements () const
+    bool                  getTraceCaseChoiceStatements () const
                               { return fTraceCaseChoiceStatements; }
 
-    S_mfslChoicesTable    getChoicesTable () const
+    S_mfFilterChoicesTable    getChoicesTable () const
                               { return fChoicesTable; }
 
-    void                  setCurrentChoiceChoice ( S_mfslChoice choice)
+    void                  setCurrentChoiceChoice ( S_mfFilterChoice choice)
                               { fCurrentChoiceChoice = choice; }
 
-    S_mfslChoice          getCurrentChoiceChoice () const
+    S_mfFilterChoice          getCurrentChoiceChoice () const
                               { return fCurrentChoiceChoice; }
 
     // inputs
-    Bool                  getTraceInputs () const
+    bool                  getTraceInputs () const
                               { return fTraceInputs; }
 
-    Bool                  getTraceCaseInputStatements () const
+    bool                  getTraceCaseInputStatements () const
                               { return fTraceCaseInputStatements; }
 
-    S_mfslInputsTable     getInputsTable () const
+    S_mfFilterInputsTable     getInputsTable () const
                               { return fInputsTable; }
 
     void                  setTraceOptionsBlocks () // TEMP JMI
                               { fTraceOptionsBlocks = true; }
-    Bool                  getTraceOptionsBlocks () const
+    bool                  getTraceOptionsBlocks () const
                               { return fTraceOptionsBlocks; }
 
-    Bool                  getDisplayTokens () const
+    bool                  getDisplayTokens () const
                               { return fDisplayTokens; }
 
-    Bool                  getNoLaunch () const
+    bool                  getNoLaunch () const
                               { return fNoLaunch; }
 
   public:
@@ -141,32 +141,32 @@ class mfslDriver
 
     // options blocks
     void                  optionsBlocksStackPush (
-                            S_mfslOptionsBlock optionsBlock,
+                            S_mfFilterOptionsBlock optionsBlock,
                             const std::string& context);
 
-    S_mfslOptionsBlock    optionsBlocksStackTop () const;
+    S_mfFilterOptionsBlock    optionsBlocksStackTop () const;
 
     void                  optionsBlocksStackPop (
                             const std::string& context);
 
-     void                 displayOptionsBlocksStack (
-                            const std::string& context) const;
-
-   // options
+    // options
     void                  registerOptionInCurrentOptionsBlock (
                             S_oahOption option,
-                            mfslDriver& drv);
+                            mfFilterDriver& drv);
 
     void                  registerOptionsSuppliedChoicesAsUsed (
                             const std::string& choiceName);
     void                  registerOptionsSuppliedChoicesAsUnused (
                             const std::string& choiceName);
 
+    void                  displayOptionsBlocksStack (
+                            const std::string& context) const;
+
     // case choice statements
     void                  caseChoiceStatementsStackPush (
-                            S_mfslCaseChoiceStatement caseChoiceStatement);
+                            S_mfFilterCaseChoiceStatement caseChoiceStatement);
 
-    S_mfslCaseChoiceStatement
+    S_mfFilterCaseChoiceStatement
                           caseChoiceStatementsStackTop () const;
 
     void                  caseChoiceStatementsStackPop ();
@@ -176,9 +176,9 @@ class mfslDriver
 
     // case input statements
     void                  caseInputStatementsStackPush (
-                            S_mfslCaseInputStatement caseInputStatement);
+                            S_mfFilterCaseInputStatement caseInputStatement);
 
-    S_mfslCaseInputStatement
+    S_mfFilterCaseInputStatement
                           caseInputStatementsStackTop () const;
 
     void                  caseInputStatementsStackPop ();
@@ -186,18 +186,17 @@ class mfslDriver
     void                  displayCaseInputStatementsStack (
                             const std::string& context) const;
 
-    // launching the MFSL service
+    // launching the mfFilter service
     void                  handleSelectLabel (
                             const std::string& choiceName,
                             const std::string& label);
 
     void                  appendSelectLabelForServiceLaunching (
-                            const S_mfslChoice choice,
+                            const S_mfFilterChoice choice,
                             const std::string& label,
                             Bool               allLabelSelected);
 
-    // launch the service
-    mfMusicformatsErrorKind   launchMfslService_Pass2 ();
+    mfMusicformatsErrorKind   launchmfFilterService_Pass2 ();
 
   private:
 
@@ -206,13 +205,13 @@ class mfslDriver
 
     // 'select' statements
 //     Bool                  applySelectOptionIfPresent (
-//                             const S_mfslChoice choice,
+//                             const S_mfFilterChoice choice,
 //                             const std::string&      label);
 
     Bool                  applySelectOptionsFinally ();
 
     Bool                  applySelectOption (
-                            const S_mfslChoice choice,
+                            const S_mfFilterChoice choice,
                             const std::string& label);
 
     // final semantics check
@@ -236,40 +235,40 @@ class mfslDriver
     list<std::string>     fInputSoucesList;
 
     // scanning
-    bool                  fTraceScanning; // this interacts with the scanner
-    mfsl::location        fScannerLocation;
+    bool                  fTraceScanning;
+    mfFilter::location        fScannerLocation;
 
     // parsing
-    Bool                  fDisplayServiceAndInput;
+    bool                  fDisplayServiceAndInput;
 
-    bool                  fTraceParsing; // this interacts with the scanner
+    bool                  fTraceParsing;
 
-    Bool                  fDisplayOptions;
+    bool                  fDisplayOptions;
 
     // tokens
-    Bool                  fDisplayTokens;
+    bool                  fDisplayTokens;
 
     // choices
-    Bool                  fTraceChoices;
+    bool                  fTraceChoices;
 
-    Bool                  fTraceCaseChoiceStatements;
+    bool                  fTraceCaseChoiceStatements;
 
     // inputs
-    Bool                  fTraceInputs;
+    bool                  fTraceInputs;
 
-    Bool                  fTraceCaseInputStatements;
+    bool                  fTraceCaseInputStatements;
 
     // options
-    Bool                  fTraceOptionsBlocks;
+    bool                  fTraceOptionsBlocks;
 
     // launching
-    Bool                  fNoLaunch;
+    bool                  fNoLaunch;
 
     // known service names
     std::set<std::string> fKnownNames;
 
     // choices handling
-    S_mfslChoicesTable    fChoicesTable;
+    S_mfFilterChoicesTable    fChoicesTable;
 
     std::multimap<std::string, std::string>
                           fOptionsSuppliedChoicesLabelsMultiMap;
@@ -277,13 +276,13 @@ class mfslDriver
 
     // case choice statements
     int                   fCaseChoiceStatementsNumber;
-    list<S_mfslCaseChoiceStatement>
+    list<S_mfFilterCaseChoiceStatement>
                           fCaseChoiceStatementsStack;
 
-    S_mfslChoice          fCurrentChoiceChoice;
+    S_mfFilterChoice          fCurrentChoiceChoice;
 
     // inputs handling
-    S_mfslInputsTable     fInputsTable;
+    S_mfFilterInputsTable     fInputsTable;
 
     std::multimap<std::string, std::string>
                           fOptionsSuppliedInputsLabelsMultiMap;
@@ -291,17 +290,17 @@ class mfslDriver
 
     // case input statements
     int                   fCaseInputStatementsNumber;
-    list<S_mfslCaseInputStatement>
+    list<S_mfFilterCaseInputStatement>
                           fCaseInputStatementsStack;
 
     // options blocks
-    list<S_mfslOptionsBlock>
+    list<S_mfFilterOptionsBlock>
                           fOptionsBlocksStack;
 
-    S_mfslOptionsBlock    fMainOptionsBlock;
+    S_mfFilterOptionsBlock    fMainOptionsBlock;
 
     // service launching
-    list<S_mfslOptionsBlock>
+    list<S_mfFilterOptionsBlock>
                           fSelectedOptionsBlocksList;
 
     // commands list
@@ -311,9 +310,9 @@ class mfslDriver
 //______________________________________________________________________________
 // Give Flex the prototype of yylex() we want ...
 # define YY_DECL \
-  mfsl::parser::symbol_type yylex (mfslDriver& drv)
+  mfFilter::parser::symbol_type yylex (mfFilterDriver& drv)
 // ... and declare it for the parser's sake
 YY_DECL;
 
 
-#endif // ___mfslDriver___
+#endif // ___mfFilterDriver___
