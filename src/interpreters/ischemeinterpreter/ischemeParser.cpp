@@ -488,9 +488,9 @@ namespace iscm {
   }
 
   void
-  parser::set_debug_stream (std::ostream& obj)
+  parser::set_debug_stream (std::ostream& o)
   {
-    yycdebug_ = &obj;
+    yycdebug_ = &o;
   }
 
 

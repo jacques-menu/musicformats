@@ -371,7 +371,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -386,7 +386,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
       oahError (ss.str ());
     }
     else {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -396,7 +396,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
@@ -462,7 +462,7 @@ std::string msr2lilypondInsiderHandler::fetchOutputFileNameFromTheOptions () con
     }
 
     else {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }

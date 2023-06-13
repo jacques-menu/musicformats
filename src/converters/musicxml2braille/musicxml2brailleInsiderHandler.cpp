@@ -349,7 +349,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -364,7 +364,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       oahError (ss.str ());
     }
     else {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -374,7 +374,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
@@ -519,7 +519,7 @@ std::string xml2brlInsiderHandler::fetchOutputFileNameFromTheOptions () const
     }
 
     else {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }

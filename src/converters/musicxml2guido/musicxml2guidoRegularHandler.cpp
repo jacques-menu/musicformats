@@ -212,12 +212,18 @@ void xml2gmnRegularHandler::createInformationsRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("about", subGroup);
+  
   registerAtomInRegularSubgroup ("version", subGroup);
   registerAtomInRegularSubgroup ("version-full", subGroup);
+  
   registerAtomInRegularSubgroup ("history", subGroup);
+  
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
+  
   registerAtomInRegularSubgroup ("contact", subGroup);
+  
+  registerAtomInRegularSubgroup ("music-formats-test", subGroup);
 }
 
 void xml2gmnRegularHandler::createDisplayRegularGroup ()

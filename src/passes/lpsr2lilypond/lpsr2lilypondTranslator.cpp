@@ -9271,7 +9271,7 @@ if (true)
   if (fVisitedLpsrScore->getColoredLedgerLinesIsNeeded ()) {
     gIndenter.indentMultiLineString (
 R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
-  \override LedgerLineSpanner.after-line-breaking = #grob::display-objects)",
+  \override LedgerLineSpanner.after-line-breaking = #grob::display-oects)",
       fLilypondCodeStream);
   }
 
@@ -13466,11 +13466,16 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
       noteTheSyllableIsAttachedTo =
         syllable->getSyllableUpLinkToNote ();
 
+    fLilypondCodeStream <<
+      std::endl << std::endl <<
+      "%{ -------------------------- ZOU_0 --------------------------"  <<
+      ", line" << ": " << syllable->getInputStartLineNumber () <<
+      " %}" <<
+      std::endl;
+
     const int fieldWidth = 29;
 
     fLilypondCodeStream <<
-      std::endl <<
-      std::endl <<
       "%{" <<
       std::endl;
 
@@ -13503,14 +13508,15 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
 
     if (noteTheSyllableIsAttachedTo) {
       fLilypondCodeStream <<
-        noteTheSyllableIsAttachedTo->asShortString ();
+        noteTheSyllableIsAttachedTo->asMsrString ();
     }
     else {
-      fLilypondCodeStream << " [NULL]";
+      fLilypondCodeStream << "[NULL]";
     }
 
     fLilypondCodeStream << std::left <<
       std::endl <<
+      std::setw (fieldWidth) <<
       "line" << ": " << syllable->getInputStartLineNumber () <<
       std::endl;
 
@@ -13527,37 +13533,85 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
       break;
 
     case msrSyllableKind::kSyllableSingle:
-      printTextsListAsLilypondString (
-        syllable->getSyllableTextsList (),
-        fLilypondCodeStream);
-
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          fLilypondCodeStream <<
+            std::endl <<
+            "%{ MEH_1" <<
+            ", line " << syllable->getInputStartLineNumber () <<
+            " %}" <<
+            std::endl;
+
+          printTextsListAsLilypondString (
+            syllable->getSyllableTextsList (),
+            fLilypondCodeStream);
+
           // don't generate a duration for automatic lyrics durations
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+          fLilypondCodeStream <<
+            std::endl <<
+            "%{ MEH_2" <<
+            ", line " << syllable->getInputStartLineNumber () <<
+            " %}" <<
+            std::endl;
+
+          printTextsListAsLilypondString (
+            syllable->getSyllableTextsList (),
+            fLilypondCodeStream);
+
           fLilypondCodeStream <<
             syllable->syllableWholeNotesAsMsrString ();
           break;
       } // switch
 
       fLilypondCodeStream <<
+        "%{ ZOU_1" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+
+      fLilypondCodeStream <<
         ' ';
       break;
 
     case msrSyllableKind::kSyllableBegin:
-      printTextsListAsLilypondString (
-        syllable->getSyllableTextsList (),
-        fLilypondCodeStream);
+      fLilypondCodeStream <<
+        "%{ ZOU_2" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          fLilypondCodeStream <<
+            std::endl <<
+            "%{ MEH_3" <<
+            ", line " << syllable->getInputStartLineNumber () <<
+            " %}" <<
+            std::endl;
+
+          printTextsListAsLilypondString (
+            syllable->getSyllableTextsList (),
+            fLilypondCodeStream);
+
           fLilypondCodeStream <<
             "-- \\skip1 ";
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+          fLilypondCodeStream <<
+            std::endl <<
+            "%{ MEH_4" <<
+            ", line " << syllable->getInputStartLineNumber () <<
+            " %}" <<
+            std::endl;
+
+          printTextsListAsLilypondString (
+            syllable->getSyllableTextsList (),
+            fLilypondCodeStream);
+
           fLilypondCodeStream <<
             syllable->syllableWholeNotesAsMsrString ();
 
@@ -13565,26 +13619,43 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
             "-- ";
           break;
       } // switch
-
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
-        fLilypondCodeStream <<
-          "%{ kSyllableBegin %} ";
-      }
-#endif // MF_TRACE_IS_ENABLED
       break;
 
     case msrSyllableKind::kSyllableMiddle:
-      printTextsListAsLilypondString (
-        syllable->getSyllableTextsList (),
-        fLilypondCodeStream);
+      fLilypondCodeStream <<
+        "%{ ZOU_3" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          fLilypondCodeStream <<
+            std::endl <<
+            "%{ MEH_5" <<
+            ", line " << syllable->getInputStartLineNumber () <<
+            " %}" <<
+            std::endl;
+
+          printTextsListAsLilypondString (
+            syllable->getSyllableTextsList (),
+            fLilypondCodeStream);
+
           // don't generate a duration for automatic lyrics durations
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+          fLilypondCodeStream <<
+            std::endl <<
+            "%{ MEH_6" <<
+            ", line " << syllable->getInputStartLineNumber () <<
+            " %}" <<
+            std::endl;
+
+          printTextsListAsLilypondString (
+            syllable->getSyllableTextsList (),
+            fLilypondCodeStream);
+
           fLilypondCodeStream <<
             syllable->syllableWholeNotesAsMsrString ();
           break;
@@ -13602,16 +13673,26 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
       break;
 
     case msrSyllableKind::kSyllableEnd:
-      printTextsListAsLilypondString (
-        syllable->getSyllableTextsList (),
-        fLilypondCodeStream);
+      fLilypondCodeStream <<
+        "%{ ZOU_4" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          printTextsListAsLilypondString (
+            syllable->getSyllableTextsList (),
+            fLilypondCodeStream);
+
           // don't generate a duration for automatic lyrics durations
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+          printTextsListAsLilypondString (
+            syllable->getSyllableTextsList (),
+            fLilypondCodeStream);
+
           fLilypondCodeStream <<
             syllable->syllableWholeNotesAsMsrString ();
           break;
@@ -13629,22 +13710,29 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
       break;
 
     case msrSyllableKind::kSyllableOnRestNote:
+      fLilypondCodeStream <<
+        "%{ ZOU_5" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+
       // generate the syllable in lyrics for rests with syllables
       printTextsListAsLilypondString (
         syllable->getSyllableTextsList (),
         fLilypondCodeStream);
+
       fLilypondCodeStream <<
         syllable->syllableWholeNotesAsMsrString () <<
         ' ';
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
-        fLilypondCodeStream <<
-        " %{ kSyllableOnRestNote %} ";
-      }
-#endif // MF_TRACE_IS_ENABLED
       break;
 
     case msrSyllableKind::kSyllableSkipRestNote:
+      fLilypondCodeStream <<
+        "%{ ZOU_6" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
           // LilyPond ignores the skip durations when \lyricsto is used
@@ -13667,7 +13755,7 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
-              "%{ ZOU_1" <<
+              "%{ MEH_7" <<
               ", line " << syllable->getInputStartLineNumber () <<
               " %}" <<
               std::endl;
@@ -13687,6 +13775,12 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
       break;
 
     case msrSyllableKind::kSyllableSkipNonRestNote:
+      fLilypondCodeStream <<
+        "%{ ZOU_7" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
           {
@@ -13696,7 +13790,7 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
 #ifdef MF_TRACE_IS_ENABLED
             if (gTraceOahGroup->getTraceLyrics ()) {
               fLilypondCodeStream <<
-                "%{ ZOU_2" <<
+                "%{ MEH_8" <<
                 ", line " << syllable->getInputStartLineNumber () <<
                 " %}" <<
                 std::endl;
@@ -13704,7 +13798,7 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
 #endif // MF_TRACE_IS_ENABLED
 
             fLilypondCodeStream <<
-              "\\skip1 ";
+              "_ ";
           }
           break;
 
@@ -13712,7 +13806,7 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
-              "%{ ZOU_3" <<
+              "%{ MEH_9" <<
               ", line " << syllable->getInputStartLineNumber () <<
               " %}" <<
               std::endl;
@@ -13720,15 +13814,22 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            "\\skip" <<
-            syllable->syllableWholeNotesAsMsrString () <<
-            ' ';
+//             "\\skip" <<
+//             syllable->syllableWholeNotesAsMsrString () <<
+//             ' ';
+            "_ ";
           break;
       } // switch
       break;
 
     case msrSyllableKind::kSyllableMeasureEnd:
   // JMI      "| " <<
+      fLilypondCodeStream <<
+        "%{ ZOU_8" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+
       if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
         // generate information and line number as a comment
         fLilypondCodeStream <<
@@ -13747,6 +13848,12 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
       break;
 
     case msrSyllableKind::kSyllableLineBreak:
+      fLilypondCodeStream <<
+        "%{ ZOU_9" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+
       // generate information and line number as a comment
       fLilypondCodeStream <<
         "%{ syllableLineBreak, line " <<
@@ -13758,6 +13865,12 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
       break;
 
     case msrSyllableKind::kSyllablePageBreak:
+      fLilypondCodeStream <<
+        "%{ ZOU_10" <<
+        ", line " << syllable->getInputStartLineNumber () <<
+        " %}" <<
+        std::endl;
+
       // generate information and line number as a comment
       fLilypondCodeStream <<
         "%{ kSyllablePageBreak, line " <<
@@ -13855,14 +13968,34 @@ void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithImplicitDuration
   } // switch
 
   if (gTraceOahGroup->getTraceLyrics ()) {
+    const int fieldWidth = 29;
+
     fLilypondCodeStream <<
       std::endl <<
       std::endl <<
-      "%{ =======> syllable \""<< syllable->syllableTextsListAsString () << "\"" <<
-      ", doGenerateALyricExtender: " << doGenerateALyricExtender <<
-      ", doGenerateASkip: " << doGenerateASkip <<
-      ", line " << syllable->getInputStartLineNumber () <<
-      " %}" <<
+      "%{" <<
+      std::endl;
+
+    gIndenter++;
+
+    fLilypondCodeStream << std::left <<
+      std::setw (fieldWidth) <<
+      "=======> syllable \"" << syllable->syllableTextsListAsString () << "\"" <<
+      std::endl <<
+      std::setw (fieldWidth) <<
+      "doGenerateALyricExtender: " << doGenerateALyricExtender <<
+      std::endl <<
+      std::setw (fieldWidth) <<
+      "doGenerateASkip: " << doGenerateASkip <<
+      std::endl <<
+      std::setw (fieldWidth) <<
+      "line " << syllable->getInputStartLineNumber () <<
+      std::endl;
+
+    gIndenter--;
+
+    fLilypondCodeStream <<
+      "%}" <<
       std::endl;
   }
 
@@ -13872,7 +14005,7 @@ void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithImplicitDuration
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
       fLilypondCodeStream <<
-        "%{ ZOU_4" <<
+        "%{ MEH_10" <<
         ", line " << syllable->getInputStartLineNumber () <<
         " %}" <<
         std::endl;
@@ -13889,7 +14022,7 @@ void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithImplicitDuration
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
       fLilypondCodeStream <<
-        "%{ ZOU_5" <<
+        "%{ MEH_11" <<
         ", line " << syllable->getInputStartLineNumber () <<
         " %}" <<
         std::endl;
@@ -13966,14 +14099,34 @@ void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithExplicitDuration
   } // switch
 
   if (gTraceOahGroup->getTraceLyrics ()) {
+    const int fieldWidth = 29;
+
     fLilypondCodeStream <<
       std::endl <<
       std::endl <<
-      "%{ =======> syllable \"" << syllable->syllableTextsListAsString () << "\"" <<
-      ", doGenerateALyricExtender: " << doGenerateALyricExtender <<
-      ", doGenerateASkip: " << doGenerateASkip <<
-      ", line " << syllable->getInputStartLineNumber () <<
-      " %}" <<
+      "%{" <<
+      std::endl;
+
+    gIndenter++;
+
+    fLilypondCodeStream << std::left <<
+      std::setw (fieldWidth) <<
+      "=======> syllable \"" << syllable->syllableTextsListAsString () << "\"" <<
+      std::endl <<
+      std::setw (fieldWidth) <<
+      "doGenerateALyricExtender: " << doGenerateALyricExtender <<
+      std::endl <<
+      std::setw (fieldWidth) <<
+      "doGenerateASkip: " << doGenerateASkip <<
+      std::endl <<
+      std::setw (fieldWidth) <<
+      "line " << syllable->getInputStartLineNumber () <<
+      std::endl;
+
+    gIndenter--;
+
+    fLilypondCodeStream <<
+      "%}" <<
       std::endl;
   }
 
@@ -13983,7 +14136,7 @@ void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithExplicitDuration
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
       fLilypondCodeStream <<
-        "%{ ZOU_6" <<
+        "%{ MEH_12" <<
         ", line " << syllable->getInputStartLineNumber () <<
         " %}" <<
         std::endl;
@@ -14000,7 +14153,7 @@ void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithExplicitDuration
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
       fLilypondCodeStream <<
-        "%{ ZOU_7" <<
+        "%{ MEH_13" <<
         ", line " << syllable->getInputStartLineNumber () <<
         " %}" <<
         std::endl;
@@ -14046,7 +14199,7 @@ void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipIfRelevant (
 // #ifdef MF_TRACE_IS_ENABLED
 //             if (gTraceOahGroup->getTraceLyrics ()) {
 //               fLilypondCodeStream <<
-//                 "%{ ZOU_8" <<
+//                 "%{ MEH_14" <<
 //                 ", line " << syllable->getInputStartLineNumber () <<
 //                 " %}" <<
 //                 std::endl;
@@ -14066,7 +14219,7 @@ void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipIfRelevant (
 // #ifdef MF_TRACE_IS_ENABLED
 //             if (gTraceOahGroup->getTraceLyrics ()) {
 //               fLilypondCodeStream <<
-//                 "%{ ZOU_9" <<
+//                 "%{ MEH_15" <<
 //                 ", line " << syllable->getInputStartLineNumber () <<
 //                 " %}" <<
 //                 std::endl;

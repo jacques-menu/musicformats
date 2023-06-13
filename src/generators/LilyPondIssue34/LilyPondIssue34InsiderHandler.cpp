@@ -584,7 +584,7 @@ std::string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () 
   std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
-    // '-obj, -output-file-name' has been selected
+    // '-o, -output-file-name' has been selected
     outputFileName =
       outputFileNameStringAtom->
         getStringVariable ();
@@ -758,7 +758,7 @@ void LilyPondIssue34InsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "LilyPondIssue34InsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
+      "LilyPondIssue34InsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
     oahError (ss.str ());
   }

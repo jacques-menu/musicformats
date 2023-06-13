@@ -83,7 +83,7 @@ using namespace MusicFormats;
   COLON       ":"
   COMMA       ","
 
-  SERVICE        "service"
+  SERVICE     "service"
   INPUT       "input"
 
   CHOICE      "choice"

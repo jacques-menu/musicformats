@@ -689,7 +689,7 @@ std::string msrSyllable::syllableTextsListAsString () const
 {
   std::stringstream ss;
 
-  ss << "[syllableTextsList: \"";
+  ss << "[syllableTextsList: ";
 
   if (fSyllableTextsList.size ()) {
     std::list<std::string>::const_iterator
@@ -704,7 +704,7 @@ std::string msrSyllable::syllableTextsListAsString () const
     } // for
   }
 
-  ss << "\"]";
+  ss << ']';
 
   return ss.str ();
 }
@@ -713,7 +713,7 @@ void msrSyllable::printTextsList (
   const std::list<std::string>& textsList,
   std::ostream&                 os)
 {
-  os << "[syllableTextsList: \" ";
+  os << "[syllableTextsList: ";
 
   if (textsList.size ()) {
     std::list<std::string>::const_iterator
@@ -728,7 +728,7 @@ void msrSyllable::printTextsList (
     } // for
   }
 
-  os << "\"]";
+  os << ']';
 
 }
 

@@ -328,7 +328,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -343,7 +343,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
       oahError (ss.str ());
     }
     else {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -353,7 +353,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
@@ -498,7 +498,7 @@ std::string msr2brailleInsiderHandler::fetchOutputFileNameFromTheOptions () cons
     }
 
     else {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }

@@ -305,7 +305,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -320,7 +320,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
       oahError (ss.str ());
     }
     else {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -330,7 +330,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::string
         inputSourceName =
@@ -396,7 +396,7 @@ std::string xml2xmlInsiderHandler::fetchOutputFileNameFromTheOptions () const
     }
 
     else {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       // nothing to do
     }
@@ -461,7 +461,7 @@ void xml2xmlInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "xml2xmlInsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
+      "xml2xmlInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
     oahError (ss.str ());
   }

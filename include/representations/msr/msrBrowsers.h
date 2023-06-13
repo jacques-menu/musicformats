@@ -23,7 +23,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-template <typename T> class   msrBrowser : public browser <T>
+template <typename T> class msrBrowser : public browser <T>
 {
   public:
 
@@ -60,7 +60,7 @@ template <typename T> class   msrBrowser : public browser <T>
 };
 
 //______________________________________________________________________________
-template <typename T> class   msrBrowserAlongPathToVoice : public browser <T>
+template <typename T> class msrBrowserAlongPathToVoice : public browser <T>
 {
   public:
 

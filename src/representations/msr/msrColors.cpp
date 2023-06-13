@@ -238,7 +238,7 @@ std::string msrColorAlphaRGB::asString () const
     "[ColorAlphaRGB" <<
     ", fColorRGB: \"" << fColorRGB <<
     "\", fColorAlpha: \"" << fColorAlpha <<
-    "\"]";
+    ']';
 
   return ss.str ();
 }

@@ -655,7 +655,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 
   if (outputFileNameHasBeenSet) {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has been selected
       std::stringstream ss;
 
@@ -670,7 +670,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       oahError (ss.str ());
     }
     else {
-      // '-obj, -output-file-name' has been selected
+      // '-o, -output-file-name' has been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName =
         outputFileNameStringAtom->
@@ -680,7 +680,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
 
   else {
     if (autoOutputFileNameHasBeenSet) {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has been selected
       // determine output file base name
       if (inputSourceName == "-") {
@@ -739,7 +739,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
     }
 
     else {
-      // '-obj, -output-file-name' has NOT been selected
+      // '-o, -output-file-name' has NOT been selected
       // '-aofn, -auto-output-file-name' has NOT been selected
       outputFileName = inputSourceName; // will augmented below
     }
@@ -900,7 +900,7 @@ void msdlConverterInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "msdlConverterInsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
+      "msdlConverterInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
     oahError (ss.str ());
   }

@@ -8262,6 +8262,75 @@ void mxsr2msrTranslator::displaySlurStartsStack (
     std::endl << std::endl;
 }
 
+//________________________________________________________________________
+Bool mxsr2msrTranslator::tupletsStopNumberIsExpected (
+  int tupletNumber)
+{
+  Bool result;
+
+  size_t tupletsStackSize = fTupletsStack.size ();
+
+  if (tupletsStackSize) {
+    for (S_msrTuplet tuplet : fTupletsStack) {
+      if (tuplet->getTupletNumber () == tupletNumber) {
+        result = true;
+        break;
+      }
+    } // for
+  }
+
+  return result;
+}
+
+//________________________________________________________________________
+void mxsr2msrTranslator::displayTupletsStack (
+  const std::string& context)
+{
+  size_t tupletsStackSize = fTupletsStack.size ();
+
+  gLog <<
+    std::endl <<
+    ">>++++++++++++++ The tuplets stack contains " <<
+    mfSingularOrPlural (
+      tupletsStackSize, "element", "elements") <<
+    ':' <<
+    std::endl;
+
+  if (tupletsStackSize) {
+    std::list<S_msrTuplet>::const_iterator
+      iBegin = fTupletsStack.begin (),
+      iEnd   = fTupletsStack.end (),
+      i      = iBegin;
+
+    S_msrTuplet tuplet = (*i);
+
+    ++gIndenter;
+
+    int n = tupletsStackSize;
+    for ( ; ; ) {
+      gLog <<
+        "v (" << n << ")" <<
+        std::endl;
+
+      ++gIndenter;
+      gLog << tuplet;
+      --gIndenter;
+
+      --n;
+
+      if (++i == iEnd) break;
+
+      gLog << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+
+  gLog <<
+    " <<++++++++++++++++ " <<
+    std::endl << std::endl;
+}
+
 //______________________________________________________________________________
 void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
   int         inputLineNumber,
@@ -8440,9 +8509,6 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
     // forget about the current outermost tuplet and its first note // JMI v0.9.68 HARMFUL
 //     fCurrentOuterMostTupletFirstNote = nullptr;
 //     fCurrentOuterMostTuplet = nullptr;
-
- // JMI v0.9.67   // the tuplet stop is not to be handled later
- //   fCurrentATupletStopIsPending = false;
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -8451,55 +8517,6 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
   }
 #endif // MF_TRACE_IS_ENABLED
-}
-
-//________________________________________________________________________
-void mxsr2msrTranslator::displayTupletsStack (
-  const std::string& context)
-{
-  size_t tupletsStackSize = fTupletsStack.size ();
-
-  gLog <<
-    std::endl <<
-    ">>++++++++++++++ The tuplets stack contains " <<
-    mfSingularOrPlural (
-      tupletsStackSize, "element", "elements") <<
-    ':' <<
-    std::endl;
-
-  if (tupletsStackSize) {
-    std::list<S_msrTuplet>::const_iterator
-      iBegin = fTupletsStack.begin (),
-      iEnd   = fTupletsStack.end (),
-      i      = iBegin;
-
-    S_msrTuplet tuplet = (*i);
-
-    ++gIndenter;
-
-    int n = tupletsStackSize;
-    for ( ; ; ) {
-      gLog <<
-        "v (" << n << ")" <<
-        std::endl;
-
-      ++gIndenter;
-      gLog << tuplet;
-      --gIndenter;
-
-      --n;
-
-      if (++i == iEnd) break;
-
-      gLog << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-
-  gLog <<
-    " <<++++++++++++++++ " <<
-    std::endl << std::endl;
 }
 
 //________________________________________________________________________
@@ -10329,7 +10346,6 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       fOnGoingChord = false;
     }
 
-//     if (fExpectedTupletsStopNumbersSet.size ()) {
       if (fTupletsStack.size ()) { // JMI v0.9.70
         // finalize the tuplet, only now
         // in case the last element is actually a chord
@@ -10337,9 +10353,6 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
           inputLineNumber,
           "visitEnd (S_measure& elt)");
       }
-//
-// //       fCurrentATupletStopIsPending = false;
-//     }
 
     // attach the spanners to the note
     if (fCurrentSpannersList.size ()) {
@@ -21132,201 +21145,6 @@ void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
   }
 }
 
-//______________________________________________________________________________
-// void mxsr2msrTranslator::createAndPushTupletUponItsFirstNote (
-//   const S_msrNote& firstNote)
-// {
-//   // firstNote is the first tuplet note,
-//   // and is currently at the end of the voice
-//
-//   int firstNoteInputLineNumber =
-//     firstNote->getInputStartLineNumber ();
-//
-//   // account for note duration
-//   msrWholeNotes
-//     memberNotesSoundingWholeNotes =
-//       firstNote->getSoundingWholeNotes ();
-//
-//   msrWholeNotes
-//     memberNotesDisplayWholeNotes =
-//       firstNote->getNoteDisplayWholeNotes ();
-//
-//   // create a tuplet
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Creating a tuplet of " <<
-//       fCurrentNoteActualNotes <<
-//       '/' <<
-//       fCurrentNoteNormalNotes <<
-//       " with first note " <<
-//       firstNote->
-//         asShortString ();
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   S_msrTuplet
-//     tuplet =
-//       msrTuplet::create (
-//         firstNoteInputLineNumber,
-//         fCurrentMeasureNumber,
-//         fCurrentTupletNumber,
-//         fCurrentTupletBracketKind,
-//         fCurrentTupletLineShapeKind,
-//         fCurrentTupletShowNumberKind,
-//         fCurrentTupletShowTypeKind,
-//         msrTupletFactor (
-//           fCurrentNoteActualNotes,
-//           fCurrentNoteNormalNotes),
-//         memberNotesSoundingWholeNotes,
-//         memberNotesDisplayWholeNotes);
-//
-//   // fetch the current note's voice
-//   S_msrVoice
-//     currentNoteVoice =
-//       fetchVoiceFromCurrentPart ( // JMI v0.9.67
-//         firstNoteInputLineNumber,
-//         fCurrentMusicXMLStaffNumber,
-//         fCurrentMusicXMLVoiceNumber);
-//
-//   // add note as first note of the stack top tuplet
-//   tuplet->
-//     appendNoteToTuplet (
-//       firstNote,
-//       currentNoteVoice);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     // only after appendNoteToTuplet() has set the note's uplink to tuplet
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Adding first note " <<
-//       firstNote->
-//         asShortString () <<
-//       " to tuplet " <<
-//       tuplet->asString ();
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   if (fTupletsStack.size () == 0) {
-//     // this tuplet is the current outermost one, that will go to the bottom of the stack
-//
-//     fCurrentOuterMostTuplet = tuplet;
-//     fCurrentOuterMostTupletFirstNote = firstNote;
-//
-//     fCurrentOuterMostTupletRelativeOffset = msrWholeNotes (0, 1);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceTuplets ()) {
-//       // only after appendNoteToTuplet() has set the note's uplink to tuplet // JMI HARMFUL
-//       std::stringstream ss;
-//
-//       ss <<
-//         "==> fCurrentOuterMostTupletFirstNote: " <<
-//         fCurrentOuterMostTupletFirstNote->asString () <<
-//         std::endl <<
-//         "==> fCurrentOuterMostTuplet: " <<
-//         fCurrentOuterMostTuplet->asString ();
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//   }
-//
-//   else {
-//     // this tuplet is nested in the one at the top of the stack
-//
-//     // set tuplet's uplink to the latter
-//     if (fTupletsStack.size ()) {
-//       tuplet->
-//         setTupletShortcutUpLinkToTuplet (
-//           fTupletsStack.front ());
-//     }
-//   }
-//
-//   // register tuplet by pushing it onto the tuplet stack
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Pushing tuplet:" <<
-//       std::endl;
-//     ++gIndenter;
-//     ss <<
-//       tuplet;
-//     --gIndenter;
-//     ss <<
-//       " onto the tuplets stack";
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fTupletsStack.push_front (tuplet);
-//
-//   // register the 'started' tuplet number in the set
-//   fExpectedTupletsStopNumbersSet.insert (fCurrentTupletNumber);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     displayTupletsStack (
-//       "############## createAndPushTupletUponItsFirstNote() 1");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // append outermost tuplet to the part at once,
-//   // so that we know the measure position of a harmony if any
-//   // before it is append to the part's harmonies voice
-//   currentNoteVoice->
-//     appendTupletToVoice (tuplet);
-//
-// //
-// /* JMI v0.9.67
-//   // set note displayed divisions
-//   firstNote->
-//     applyTupletMemberDisplayFactor (
-//       fCurrentNoteActualNotes,
-//       fCurrentNoteNormalNotes);
-//   */
-//
-//   // keep track of current tuplet in the current voice,
-//   // in case we learn later by <chord/> in the next note
-//   // that it is actually the first note of a chord ?? JMI XXL v0.9.77
-//
-//   // register tuplet as last one found in this voice
-//   // for chords in tuplets handling
-// // JMI  fLastHandledTupletInVoiceMap [currentNoteVoice] = tuplet;
-//   fLastHandledTupletInVoiceMap [
-//     std::make_pair (
-//       fCurrentMusicXMLStaffNumber,
-//       fCurrentMusicXMLVoiceNumber)
-//     ] =
-//     tuplet;
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//     displayLastHandledTupletInVoiceMap (
-//       "############## createAndPushTupletUponItsFirstNote() 2");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-
 S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
   const S_msrNote& firstNote)
 {
@@ -21630,9 +21448,6 @@ void mxsr2msrTranslator::handleTupletStop (
           finalizeTupletStackTopAndPopItFromTupletsStack (
             note->getInputStartLineNumber (),
             "handleNoteBelongingToATuplet() 4");
-
-          // the tuplet stop is not to be handled later
-//                 fCurrentATupletStopIsPending = false;
         }
 
         else {
@@ -21653,8 +21468,6 @@ void mxsr2msrTranslator::handleTupletStop (
 //*/
 
         // don't pop the inner-most tuplet from the stack yet
-
-  //      fCurrentATupletStopIsPending = true;
       }
       break;
 
@@ -21685,9 +21498,6 @@ void mxsr2msrTranslator::handleTupletStop (
           finalizeTupletStackTopAndPopItFromTupletsStack (
             note->getInputStartLineNumber (),
             "handleNoteBelongingToATuplet() 888");
-
-          // the tuplet stop is not to be handled later
-//                 fCurrentATupletStopIsPending = false;
         }
         */
 
@@ -21736,7 +21546,6 @@ void mxsr2msrTranslator::handleTupletStop (
   // is the first one of a chord in a tuplet JMI XXL ???
 
   // the tuplet stop hast to be handled later
-//         fCurrentATupletStopIsPending = false; // JMI ???
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -24678,9 +24487,6 @@ void mxsr2msrTranslator::handlePendingTupletStops (
       inputLineNumber,
       "handlePendingTupletStops()");
   }
-
-  // the tuplet stop is not to be handled later
-  //     fCurrentATupletStopIsPending = false;
 }
 
 //______________________________________________________________________________
@@ -25508,10 +25314,11 @@ void  mxsr2msrTranslator:: handleTupletStopNumbersForNote (
 #endif // MF_TRACE_IS_ENABLED
 
   // the tuplets stop numbers may not be in first-in, last-out order,
-  // for example when exporting from Finale JMI v0.9.68
+  // for example when exporting from Finale JMI v0.9.70
   for (size_t i = 1; i < fTupletsStack.size (); ++i) {
-    S_msrTuplet tupletsStackTop =
-      fTupletsStack.front ();
+    S_msrTuplet
+      tupletsStackTop =
+        fTupletsStack.front ();
 
     // has the 'started' tupletsStackTop found its stop? JMI v0.9.70
     std::set<int>::iterator it =
@@ -27554,9 +27361,6 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           finalizeTupletStackTopAndPopItFromTupletsStack (
             inputLineNumber,
             "handleNoteBelongingToATuplet() 999");
-
-          // the tuplet stop is not to be handled later
-//           fCurrentATupletStopIsPending = false;
         }
         */
 
@@ -27654,9 +27458,6 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             createTupletUponItsFirstNote (note);
 
         // push it onto tuplets stack VOFVOFVOF
-
-        // the tuplet stop is not to be handled later
- //       fCurrentATupletStopIsPending = false; // JMI
 
         // finalize it
         finalizeTupletStackTopAndPopItFromTupletsStack (

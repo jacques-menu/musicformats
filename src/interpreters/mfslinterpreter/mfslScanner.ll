@@ -191,7 +191,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog <<
       "--> " << drv.getScannerLocation () <<
-      ": single quoted std::string [" << pStringBuffer << "]" <<
+      ": single quoted std::string [" << pStringBuffer << ']' <<
       endl;
   }
 
@@ -237,7 +237,7 @@ loc.step ();
   if (drv.getDisplayTokens ()) {
     gLog <<
       "--> " << drv.getScannerLocation () <<
-      ": double quoted std::string [" << pStringBuffer << "]" <<
+      ": double quoted std::string [" << pStringBuffer << ']' <<
       endl;
   }
 
@@ -410,7 +410,7 @@ loc.step ();
 {name} {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
-    ": name [" << yytext << "]" <<
+    ": name [" << yytext << ']' <<
     endl;
   }
 
@@ -427,7 +427,7 @@ loc.step ();
 "-"{name} {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
-    ": option [" << yytext << "]" <<
+    ": option [" << yytext << ']' <<
     endl;
   }
 

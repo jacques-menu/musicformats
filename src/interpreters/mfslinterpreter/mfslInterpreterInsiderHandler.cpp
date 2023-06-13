@@ -274,7 +274,7 @@ void mfslInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
     stringstream s;
 
     s <<
-      "mfslInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-obj, -output-file-name";
+      "mfslInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
 
     oahError (s.str ());
   }

@@ -966,6 +966,8 @@ class EXP msrNote : public msrTupletElement
 
     std::string           noteComplementsAsString () const;
 
+    std::string           asMsrString () const;
+
     std::string           asString () const override;
     std::string           asShortStringForMeasuresSlices () const override;
 

@@ -1505,7 +1505,7 @@ et al."
 % When we later hear another event, we have to revert
 % that setting by applying \voiceOne or such.
 
-#(set-object-property! 'globalVoiceNumber 'translation-type? integer?)
+#(set-oect-property! 'globalVoiceNumber 'translation-type? integer?)
 
 
 
@@ -1570,7 +1570,7 @@ voiceFour = #(make-self-telling-voice-props-set 3)
 
 % Maintained on Staff level, to decide whether to change
 % grob directions at a given point.
-#(set-object-property! 'busyEvents 'translation-type? list?)
+#(set-oect-property! 'busyEvents 'translation-type? list?)
 
 % Nonexistent?
 #(define (event-is-of-type? event type)
@@ -2226,7 +2226,7 @@ R"###(% there is ony one ledger line spanner/grob/stencil
     ((stil (ly:ledger-line-spanner::print grob))
      ; (ifaces (ly:grob-interfaces grob))
 
-     (noteheads (ly:grob-object grob 'note-heads))
+     (noteheads (ly:grob-oect grob 'note-heads))
      (new-stil (box-stencil (stencil-with-color stil  (rgb-color )###";
 
   ss <<
@@ -2399,22 +2399,22 @@ R"###(%% http://lsr.di.unimi.it/LSR/Item?id=336
 
 #(define (merge-rests-on-positioning grob)
    (let* ((can-merge #f)
-          (elts (ly:grob-object grob 'elements))
+          (elts (ly:grob-oect grob 'elements))
           (num-elts (and (ly:grob-array? elts)
                          (ly:grob-array-length elts)))
           (two-voice? (= num-elts 2)))
      (if two-voice?
          (let* ((v1-grob (ly:grob-array-ref elts 0))
                 (v2-grob (ly:grob-array-ref elts 1))
-                (v1-rest (ly:grob-object v1-grob 'rest))
-                (v2-rest (ly:grob-object v2-grob 'rest)))
+                (v1-rest (ly:grob-oect v1-grob 'rest))
+                (v2-rest (ly:grob-oect v2-grob 'rest)))
            (and
             (ly:grob? v1-rest)
             (ly:grob? v2-rest)
             (let* ((v1-duration-log (ly:grob-property v1-rest 'duration-log))
                    (v2-duration-log (ly:grob-property v2-rest 'duration-log))
-                   (v1-dot (ly:grob-object v1-rest 'dot))
-                   (v2-dot (ly:grob-object v2-rest 'dot))
+                   (v1-dot (ly:grob-oect v1-rest 'dot))
+                   (v2-dot (ly:grob-oect v2-rest 'dot))
                    (v1-dot-count (and (ly:grob? v1-dot)
                                       (ly:grob-property v1-dot 'dot-count -1)))
                    (v2-dot-count (and (ly:grob? v2-dot)

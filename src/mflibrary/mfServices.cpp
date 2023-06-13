@@ -335,7 +335,7 @@ void mfService::print (std::ostream& os) const
 
   --gIndenter;
 
-  os << "]" << std::endl;
+  os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_mfService& elt)

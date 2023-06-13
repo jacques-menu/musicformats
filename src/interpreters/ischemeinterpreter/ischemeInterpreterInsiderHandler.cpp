@@ -276,7 +276,7 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
     stringstream s;
 
     s <<
-      "ischemeInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-obj, -output-file-name";
+      "ischemeInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
 
     oahError (s.str ());
   }

@@ -131,7 +131,7 @@ using namespace MusicFormats;
 // Enable debugging if requested.
 #if MFSLDEBUG
 
-// A pseudo std::ostream that takes yydebug_ into account.
+// A pseudo ostream that takes yydebug_ into account.
 # define YYCDEBUG if (yydebug_) (*yycdebug_)
 
 # define YY_SYMBOL_PRINT(Title, Symbol)         \
@@ -486,9 +486,9 @@ namespace mfsl {
   }
 
   void
-  parser::set_debug_stream (std::ostream& obj)
+  parser::set_debug_stream (std::ostream& o)
   {
-    yycdebug_ = &obj;
+    yycdebug_ = &o;
   }
 
 

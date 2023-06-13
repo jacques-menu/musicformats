@@ -20,6 +20,7 @@
 #include "mfAssert.h"
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
+#include "mfTest.h"
 
 #include "oahOah.h"
 #include "oahWae.h"
@@ -813,7 +814,7 @@ such as '-t=voices,meas' for '-tvoices, -tmeas'.
 The options can be placed in any order,
 provided the values immediately follow the atoms that need them.
 
-Using options that attempt to create files, such as '-output-file-name, -obj',
+Using options that attempt to create files, such as '-output-file-name, -o',
 leads to an error if the environment is read-only access,
 as is the case of https://libmusicxml.grame.fr .)",
         std::regex ("OPTION_NAME_HELP_NAMES"),
@@ -936,6 +937,204 @@ void oahOptionsUsageAtom::print (std::ostream& os) const
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahOptionsUsageAtom& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
+S_oahMusicFormatsTestAtom oahMusicFormatsTestAtom::create (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& serviceName)
+{
+  oahMusicFormatsTestAtom* obj = new
+    oahMusicFormatsTestAtom (
+      longName,
+      shortName,
+      description,
+      serviceName);
+  assert (obj != nullptr);
+  return obj;
+}
+
+oahMusicFormatsTestAtom::oahMusicFormatsTestAtom (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& serviceName)
+  : oahPureHelpValueLessAtom (
+      longName,
+      shortName,
+      description,
+      serviceName)
+{}
+
+oahMusicFormatsTestAtom::~oahMusicFormatsTestAtom ()
+{}
+
+void oahMusicFormatsTestAtom::applyValueLessAtom (std::ostream& os)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahMusicFormatsTestAtom";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  mfTest (os);
+
+  fSelected = true;
+}
+
+void oahMusicFormatsTestAtom::printOptionsMfTest (std::ostream& os) const
+{
+  int saveIndent = gIndenter.getIndentation ();
+
+  gIndenter.resetToZero ();
+
+  os <<
+    fHelpValueLessAtomServiceName <<
+    " MfTest:" <<
+    std::endl;
+
+  ++gIndenter;
+
+//   gIndenter.indentMultiLineString (
+//     foundString,
+//     os);
+  gIndenter.indentMultiLineString (
+R"(This option is meant for developpers/maintainer.
+It executes function mfTest() in src/mflibrary/mftest.cpp,
+in which they can do anything they need for their purposes.
+Such code is not supposed to be long-term living.)",
+			os);
+
+  --gIndenter;
+
+  gIndenter.setIndentation (saveIndent);
+}
+
+void oahMusicFormatsTestAtom::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahMusicFormatsTestAtom::acceptIn ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahMusicFormatsTestAtom>*
+    p =
+      dynamic_cast<visitor<S_oahMusicFormatsTestAtom>*> (v)) {
+        S_oahMusicFormatsTestAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahMusicFormatsTestAtom::visitStart ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitStart (elem);
+  }
+}
+
+void oahMusicFormatsTestAtom::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahMusicFormatsTestAtom::acceptOut ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahMusicFormatsTestAtom>*
+    p =
+      dynamic_cast<visitor<S_oahMusicFormatsTestAtom>*> (v)) {
+        S_oahMusicFormatsTestAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahMusicFormatsTestAtom::visitEnd ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitEnd (elem);
+  }
+}
+
+void oahMusicFormatsTestAtom::browseData (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahMusicFormatsTestAtom::browseData ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+void oahMusicFormatsTestAtom::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "OptionsMusicFormatsTestAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  --gIndenter;
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahMusicFormatsTestAtom& elt)
 {
   if (elt) {
     elt->print (os);

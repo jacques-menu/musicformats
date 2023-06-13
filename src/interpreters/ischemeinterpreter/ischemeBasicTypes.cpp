@@ -76,7 +76,7 @@ std::string ischemeOptionsBlock::asString () const
   s <<
     "ischemeOptionsBlock [" <<
     "fOptionsBlockName: " << fOptionsBlockName <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -136,7 +136,7 @@ void ischemeOptionsBlock::print (std::ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 std::ostream& operator<< (std::ostream& os, const S_ischemeOptionsBlock& elt)
@@ -627,8 +627,8 @@ std::string ischemeInput::asString () const
     "fInputName: " << fInputName <<
     ", " <<
 
-    "fInputName: [" << fInputName << "]" <<
-    "]";
+    "fInputName: [" << fInputName << ']' <<
+    ']';
 
   return s.str ();
 }
@@ -667,7 +667,7 @@ void ischemeInput::displayInputNamesToOptionsBlocksMap (std::ostream& os) const
 //       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void ischemeInput::print (std::ostream& os) const
@@ -710,7 +710,7 @@ void ischemeInput::print (std::ostream& os) const
       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 
   size_t
     inputNamesToOptionsBlocksMapSize =
@@ -747,11 +747,11 @@ void ischemeInput::print (std::ostream& os) const
 //       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 std::ostream& operator<< (std::ostream& os, const S_ischemeInput& elt)
@@ -912,7 +912,7 @@ std::string ischemeInputsTable::asString () const
 
   s <<
     "ischemeInputsTable [" <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -936,7 +936,7 @@ void ischemeInputsTable::displayInputsMap (std::ostream& os) const // useless ??
     --gIndenter;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void ischemeInputsTable::print (std::ostream& os) const
@@ -957,7 +957,7 @@ void ischemeInputsTable::print (std::ostream& os) const
     --gIndenter;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 std::ostream& operator<< (std::ostream& os, const S_ischemeInputsTable& elt)
@@ -1485,8 +1485,8 @@ std::string ischemeChoice::asString () const
     "fChoiceName: " << fChoiceName <<
     ", " <<
 
-    "fChoiceLabel: [" << fChoiceLabel << "]" <<
-    "]";
+    "fChoiceLabel: [" << fChoiceLabel << ']' <<
+    ']';
 
   return s.str ();
 }
@@ -1525,7 +1525,7 @@ void ischemeChoice::displayChoiceLabelsToOptionsBlocksMap (std::ostream& os) con
 //       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void ischemeChoice::print (std::ostream& os) const
@@ -1568,7 +1568,7 @@ void ischemeChoice::print (std::ostream& os) const
       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 
   os << left <<
     setw (fieldWidth) <<
@@ -1610,11 +1610,11 @@ void ischemeChoice::print (std::ostream& os) const
 //       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 std::ostream& operator<< (std::ostream& os, const S_ischemeChoice& elt)
@@ -1775,7 +1775,7 @@ std::string ischemeChoicesTable::asString () const
 
   s <<
     "ischemeChoicesTable [" <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1799,7 +1799,7 @@ void ischemeChoicesTable::displayChoicesMap (std::ostream& os) const // useless 
     --gIndenter;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void ischemeChoicesTable::print (std::ostream& os) const
@@ -1820,7 +1820,7 @@ void ischemeChoicesTable::print (std::ostream& os) const
     --gIndenter;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 std::ostream& operator<< (std::ostream& os, const S_ischemeChoicesTable& elt)
@@ -1865,7 +1865,7 @@ ischemeCaseChoiceStatement::ischemeCaseChoiceStatement (
       "====> Creating case statement" <<
       ", caseChoice: [" <<
       fCaseChoice->asString () <<
-      "]" <<
+      ']' <<
       ", line " << drv.getScannerLocation () <<
       endl;
   }
@@ -1889,7 +1889,7 @@ void ischemeCaseChoiceStatement::registerCaseChoiceLabel (
       label <<
       "\" in case statement: [" <<
       asString () <<
-      "]" <<
+      ']' <<
       ", line " << drv.getScannerLocation () <<
       endl;
   }
@@ -1970,7 +1970,7 @@ std::string ischemeCaseChoiceStatement::asString () const
   s <<
     "ischemeCaseChoiceStatement [" <<
     fCaseChoice->asString () <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -2023,7 +2023,7 @@ void ischemeCaseChoiceStatement::print (std::ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 std::ostream& operator<< (std::ostream& os, const S_ischemeCaseChoiceStatement& elt)
@@ -2068,7 +2068,7 @@ ischemeCaseInputStatement::ischemeCaseInputStatement (
       "====> Creating case statement" <<
       ", caseInput: [" <<
       fCaseInputInput->asString () <<
-      "]" <<
+      ']' <<
       ", line " << drv.getScannerLocation () <<
       endl;
   }
@@ -2092,7 +2092,7 @@ void ischemeCaseInputStatement::registerCaseInputName (
       name <<
       "\" in case statement: [" <<
       asString () <<
-      "]" <<
+      ']' <<
       ", line " << drv.getScannerLocation () <<
       endl;
   }
@@ -2173,7 +2173,7 @@ std::string ischemeCaseInputStatement::asString () const
   s <<
     "ischemeCaseInputStatement [" <<
     fCaseInputInput->asString () <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -2226,7 +2226,7 @@ void ischemeCaseInputStatement::print (std::ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 std::ostream& operator<< (std::ostream& os, const S_ischemeCaseInputStatement& elt)

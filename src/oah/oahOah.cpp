@@ -1056,6 +1056,16 @@ R"(Display information about how to contact the maintainers of EXECUTABLE_NAME.)
           serviceName),
         serviceName));
 
+  // MusicFormats test
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahMusicFormatsTestAtom::create (
+        "music-formats-test", "mftest",
+R"(Execute mfTest().
+This option is meant for developpers/maintainers for their own purposes.)",
+        serviceName));
+
   // display prefixes
 
   subGroup->

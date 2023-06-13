@@ -566,7 +566,7 @@ int mfslDriver::parseInput_Pass1 ()
 
     --gIndenter;
 
-    gLog;
+    gLog << std::endl;
   }
 
   // print the choices table if relevant
@@ -843,7 +843,7 @@ mfMusicformatsErrorKind mfslDriver::launchMfslService_Pass2 ()
     for (std::string command : fCommandsList) {
       if (fDisplayServiceAndInput) {
         gLog <<
-          "====> Running the service with command: [" << command << "]" <<
+          "====> Running the service with command: [" << command << ']' <<
           endl;
       }
 

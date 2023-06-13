@@ -582,7 +582,7 @@ std::string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptio
   std::string outputFileName;
 
   if (outputFileNameHasBeenSet) {
-    // '-obj, -output-file-name' has been selected
+    // '-o, -output-file-name' has been selected
     outputFileName =
       outputFileNameStringAtom->
         getStringVariable ();
@@ -756,7 +756,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::checkGroupOptionsConsistency ()
     std::stringstream ss;
 
     ss <<
-      "Mikrokosmos3WanderingInsiderOahGroup: a MusicXML output file name must be selected with '-obj, -output-file-name";
+      "Mikrokosmos3WanderingInsiderOahGroup: a MusicXML output file name must be selected with '-o, -output-file-name";
 
     oahError (ss.str ());
   }

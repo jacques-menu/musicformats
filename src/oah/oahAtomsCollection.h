@@ -897,6 +897,62 @@ typedef SMARTP<oahDisplaySingleCharacterOptions> S_oahDisplaySingleCharacterOpti
 EXP std::ostream& operator << (std::ostream& os, const S_oahDisplaySingleCharacterOptions& elt);
 
 //______________________________________________________________________________
+class EXP oahMusicFormatsTestAtom : public oahPureHelpValueLessAtom
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahMusicFormatsTestAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& serviceName);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahMusicFormatsTestAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& serviceName);
+
+    virtual               ~oahMusicFormatsTestAtom ();
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyValueLessAtom (std::ostream& os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    void                  printOptionsMfTest (std::ostream& os) const;
+
+    void                  print (std::ostream& os) const override;
+};
+typedef SMARTP<oahMusicFormatsTestAtom> S_oahMusicFormatsTestAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahMusicFormatsTestAtom& elt);
+
+//______________________________________________________________________________
 class EXP oahOnOffAtom : public oahAtomStoringAValue
 {
 /*

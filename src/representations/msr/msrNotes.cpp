@@ -220,12 +220,8 @@ void msrNote::initializeNote ()
       std::endl <<
       "Initializing a note" <<
       ", kind: ";
-    if (fNoteKind == msrNoteKind::kNote_UNKNOWN_)
-      ss <<
-        "kNote_UNKNOWN_";
-    else
-      ss << fNoteKind;
-    ss <<
+		ss <<
+			fNoteKind <<
       ", line " << fInputStartLineNumber << ":" <<
       std::endl;
 
@@ -4195,6 +4191,27 @@ std::string msrNote::noteDiatonicPitchKindAsString (
         fInputStartLineNumber));
 }
 
+std::string msrNote::asMsrString () const
+{
+  std::stringstream ss;
+
+  ss <<
+		msrQuarterTonesPitchKindAsStringInLanguage (
+			fNoteQuarterTonesPitchKind,
+			gMsrOahGroup->
+				getMsrQuarterTonesPitchesLanguageKind ());
+
+	for (int i = 0; i < fNoteDotsNumber; ++i) {
+		ss << '.';
+	} // for
+
+	ss <<
+		'-' <<
+		fNoteOctaveKind;
+
+  return ss.str ();
+}
+
 std::string msrNote::asShortStringWithRawWholeNotes () const
 {
   std::stringstream ss;
@@ -4207,72 +4224,59 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
       ss <<
-        "***noNote***";
+				fNoteKind;
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        "kNoteRestInMeasure" <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteOccupiesAFullMeasure: " <<
         fNoteOccupiesAFullMeasure.asString ();
-//         ", fNoteDisplayWholeNotes: " <<
-//         fNoteDisplayWholeNotes;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
       ss <<
-        "kNoteSkipInMeasure" <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
+      	", " <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       ss <<
-        "kNoteUnpitchedInMeasure: " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
       ss <<
-        "kNoteRegularInMeasure" <<
-        notePitchAsString () <<
-        fNoteOctaveKind <<
+        asMsrString () <<
+        ", " <<
+				fNoteKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       ss <<
-        "kNoteInDoubleTremolo" <<
-        ", " <<
-        notePitchAsString () <<
-        fNoteOctaveKind <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes, " <<
@@ -4281,67 +4285,51 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       ss <<
-        "kNoteRegularInGraceNotesGroup" <<
-        ", " <<
-        notePitchAsString () <<
-        fNoteGraphicNotesDurationKind <<
-        ", " <<
-        fNoteOctaveKind;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
+        ", fNoteGraphicNotesDurationKind: " <<
+        fNoteGraphicNotesDurationKind;
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
-        "kNoteSkipInGraceNotesGroup" <<
-        ":" <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       ss <<
-        "kNoteInChordInGraceNotesGroup" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
+        ", fNoteGraphicNotesDurationKind: " <<
         fNoteGraphicNotesDurationKind <<
-        ", " <<
-        fNoteOctaveKind;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << "."; // JMI
-      } // for
+				fNoteKind;
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       ss <<
-        "kNoteRegularInChord" <<
-        ", " <<
-        notePitchAsString () <<
-        fNoteOctaveKind <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ", fSoundingWholeNotes: " <<
-        fSoundingWholeNotes.asString () <<
+        fSoundingWholeNotes.asString ();      ss <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       ss <<
-        "kNoteRegularInTuplet" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
+				", " <<
         fNoteGraphicNotesDurationKind <<
         ", " <<
         fNoteOctaveKind <<
@@ -4349,10 +4337,6 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
 
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor;
@@ -4360,18 +4344,14 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
 
     case msrNoteKind::kNoteRestInTuplet:
       ss <<
-        "kNoteRestInTuplet" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
 
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor;
@@ -4379,9 +4359,9 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       ss <<
-        "kNoteInTupletInGraceNotesGroup" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind;
 
       if (! fetchNoteIsARest ()) {
@@ -4395,17 +4375,13 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
-
       ss <<
         ", fNoteTupletFactor " << fNoteTupletFactor;
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       ss <<
-        "kNoteUnpitchedInTuplet " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
@@ -4434,64 +4410,45 @@ std::string msrNote::asShortString () const
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
-      ss <<
-        "kNote_UNKNOWN_" <<
+			ss <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ":" <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        "kNoteRestInMeasure" <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ":" <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
       ss <<
-        "kNoteSkipInMeasure: " <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       ss <<
-        "kNoteUnpitchedInMeasure: " <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
       {
-			// ss << "======> asShortString()" << std::endl;
-
         ss <<
-          "kNoteRegularInMeasure" <<
-          ", " <<
-          notePitchAsString () <<
-          noteSoundingWholeNotesAsMsrString ();
-
-        for (int i = 0; i < fNoteDotsNumber; ++i) {
-          ss << ".";
-        } // for
-
-        ss <<
-          ", " <<
-          fNoteOctaveKind;
+					asMsrString () <<
+					", " <<
+					fNoteKind;
 
         S_msrVoice
           noteVoiceUpLink =
@@ -4530,45 +4487,35 @@ std::string msrNote::asShortString () const
 
     case msrNoteKind::kNoteInDoubleTremolo:
       ss <<
-        "kNoteInDoubleTremolo " <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString () <<
         ", " <<
         fNoteOctaveKind;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       ss <<
-        "kNoteRegularInGraceNotesGroup" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", " <<
         fNoteOctaveKind;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
-        "kNoteSkipInGraceNotesGroup: " <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
    case msrNoteKind::kNoteInChordInGraceNotesGroup:
       ss <<
-        "kNoteInChordInGraceNotesGroup " <<
+				fNoteKind <<
         ", " <<
         notePitchAsString () <<
         fNoteGraphicNotesDurationKind <<
@@ -4576,34 +4523,30 @@ std::string msrNote::asShortString () const
         fNoteOctaveKind;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << "."; // JMI
+        ss << '.'; // JMI
       } // for
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       ss <<
-        "kNoteRegularInChord " <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString () <<
         ", " <<
         fNoteOctaveKind;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       ss <<
-        "kNoteRegularInTuplet" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
-        fNoteDisplayWholeNotes.asString () <<
+        fNoteDisplayWholeNotes.asString ();
         /* JMI v0.9.67
         noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
@@ -4612,12 +4555,6 @@ std::string msrNote::asShortString () const
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
-        ", " <<
-        fNoteOctaveKind;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
 
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
@@ -4625,9 +4562,9 @@ std::string msrNote::asShortString () const
 
     case msrNoteKind::kNoteRestInTuplet:
       ss <<
-        "kNoteRestInTuplet" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
@@ -4642,19 +4579,15 @@ std::string msrNote::asShortString () const
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
 
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
-
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       ss <<
-        "kNoteInTupletInGraceNotesGroup" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
@@ -4675,17 +4608,15 @@ std::string msrNote::asShortString () const
           fNoteOctaveKind;
       }
 
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
-
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       ss <<
-        "kNoteUnpitchedInTuplet" <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
@@ -4698,10 +4629,6 @@ std::string msrNote::asShortString () const
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
 
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
@@ -4726,107 +4653,76 @@ std::string msrNote::asMinimalString () const
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
       ss <<
-        "kNote_UNKNOWN_" <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ":" <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        "kNoteRestInMeasure" <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ":" <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
       ss <<
-        "kNoteSkipInMeasure: " <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       ss <<
-        "kNoteUnpitchedInMeasure: " <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
-      {
-				// ss << "======> asMinimalString()" << std::endl;
-
-        ss <<
-          "kNoteRegularInMeasure" <<
-          ", " <<
-          notePitchAsString () <<
-          noteSoundingWholeNotesAsMsrString ();
-
-        for (int i = 0; i < fNoteDotsNumber; ++i) {
-          ss << ".";
-        } // for
-
-        ss <<
-          ", " <<
-          fNoteOctaveKind;
-      }
+			ss <<
+				asMsrString () <<
+				", " <<
+				fNoteOctaveKind;
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       ss <<
-        "kNoteInDoubleTremolo " <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString () <<
         ", " <<
         fNoteOctaveKind;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       ss <<
-        "kNoteRegularInGraceNotesGroup" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", " <<
         fNoteOctaveKind;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
-        "kNoteSkipInGraceNotesGroup: " <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
    case msrNoteKind::kNoteInChordInGraceNotesGroup:
       ss <<
-        "kNoteInChordInGraceNotesGroup " <<
+				fNoteKind <<
         ", " <<
         notePitchAsString () <<
         fNoteGraphicNotesDurationKind <<
@@ -4834,29 +4730,25 @@ std::string msrNote::asMinimalString () const
         fNoteOctaveKind;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << "."; // JMI
+        ss << '.'; // JMI
       } // for
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       ss <<
-        "kNoteRegularInChord " <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         noteSoundingWholeNotesAsMsrString () <<
         ", " <<
         fNoteOctaveKind;
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       ss <<
-        "kNoteRegularInTuplet" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
@@ -4865,28 +4757,20 @@ std::string msrNote::asMinimalString () const
         ", " <<
         fNoteOctaveKind;
 
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
-
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteRestInTuplet:
       ss <<
-        "kNoteRestInTuplet" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes.asString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
 
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
@@ -4894,9 +4778,9 @@ std::string msrNote::asMinimalString () const
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       ss <<
-        "kNoteInTupletInGraceNotesGroup" <<
-        ", " <<
-        notePitchAsString () <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         fNoteGraphicNotesDurationKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
@@ -4909,25 +4793,19 @@ std::string msrNote::asMinimalString () const
           fNoteOctaveKind;
       }
 
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
-
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       ss <<
-        "kNoteUnpitchedInTuplet" <<
+      	asMsrString () <<
+      	", " <<
+				fNoteKind <<
         ", fSoundingWholeNotes: " <<
         fSoundingWholeNotes.asString () <<
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes.asString ();
-
-      for (int i = 0; i < fNoteDotsNumber; ++i) {
-        ss << ".";
-      } // for
 
       ss <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
@@ -5024,7 +4902,7 @@ std::string msrNote::soundingNoteEssentialsAsString () const
     noteSoundingWholeNotesAsMsrString ();
 
   for (int i = 0; i < fNoteDotsNumber; ++i) {
-    ss << ".";
+    ss << '.';
   } // for
 
   ss <<
@@ -5048,7 +4926,7 @@ std::string msrNote::soundingNoteEssentialsAsStringForMeasuresSlices () const //
     noteSoundingWholeNotesAsMsrString ();
 
   for (int i = 0; i < fNoteDotsNumber; ++i) {
-    ss << ".";
+    ss << '.';
   } // for
 
   ss <<
@@ -5083,7 +4961,7 @@ std::string msrNote::nonSoundingNoteEssentialsAsString () const
     noteDisplayWholeNotesAsMsrString ();
 
   for (int i = 0; i < fNoteDotsNumber; ++i) {
-    ss << ".";
+    ss << '.';
   } // for
 
   ss <<
@@ -5106,7 +4984,7 @@ std::string msrNote::nonSoundingNoteEssentialsAsStringForMeasuresSlices () const
     noteDisplayWholeNotesAsMsrString ();
 
   for (int i = 0; i < fNoteDotsNumber; ++i) {
-    ss << ".";
+    ss << '.';
   } // for
 
 //   ss << JMI
@@ -5131,7 +5009,7 @@ std::string msrNote::asString () const
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
       ss <<
-        "*noNote*";
+				fNoteKind;
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -5171,11 +5049,8 @@ std::string msrNote::asString () const
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
-// 			ss << "======> msrNote::asString() - " << std::endl;
-
       ss <<
-        "kNoteRegularInMeasure, " <<
-        soundingNoteEssentialsAsString ();
+				asMsrString ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
@@ -5337,12 +5212,13 @@ std::string msrNote::asShortStringForMeasuresSlices () const
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
       ss <<
-        "*noNote*";
+				fNoteKind;
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        "kNoteRestInMeasure, ";
+        asMsrString () <<
+        ", ";
 
       if (fNoteOccupiesAFullMeasure) {
         ss <<
@@ -5372,19 +5248,22 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       ss <<
-        "unpitched, " <<
+        asMsrString () <<
+        ", " <<
         nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
       ss <<
-       "kNoteRegularInMeasure, " <<
-        soundingNoteEssentialsAsStringForMeasuresSlices ();
+        soundingNoteEssentialsAsStringForMeasuresSlices () <<
+        ", " <<
+        fNoteOctaveKind;
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       ss <<
-        "kNoteInDoubleTremolo, " <<
+				asMsrString () <<
+        fNoteKind <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
       break;
 
@@ -5484,12 +5363,12 @@ std::string msrNote::noteEssentialsAsSting () const
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
       ss <<
-        "[kNote_UNKNOWN_]";
+        fNoteKind;
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        "kNoteRestInMeasure, ";
+        fNoteKind;
 
       if (fNoteOccupiesAFullMeasure) {
         ss <<
@@ -5502,62 +5381,62 @@ std::string msrNote::noteEssentialsAsSting () const
           asShortStringWithRawWholeNotes ();
       }
       ss << std::endl;
-        break;
+			break;
 
     case msrNoteKind::kNoteSkipInMeasure:
       ss <<
-        "kNoteSkipInMeasure, " <<
+        fNoteKind <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       ss <<
-        "kNoteUnpitchedInMeasure, " <<
+        fNoteKind <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
-			// ss << "======> noteEssentialsAsSting()" << std::endl;
-
       ss <<
-        "kNoteRegularInMeasure, " <<
-        soundingNoteEssentialsAsString ();
+				asMsrString () <<
+        soundingNoteEssentialsAsString () <<
+				", " <<
+				fNoteOctaveKind;
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       ss <<
-        "kNoteInDoubleTremolo, " <<
+        fNoteKind <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       ss <<
-        "kNoteRegularInGraceNotesGroup, " <<
+        fNoteKind <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
-        "kNoteSkipInGraceNotesGroup, " <<
+        fNoteKind <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       ss <<
-        "kNoteInChordInGraceNotesGroup, " <<
+        fNoteKind <<
         nonSoundingNoteEssentialsAsString () <<
         ", fNoteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       ss <<
-        "kNoteRegularInChord, " <<
+        fNoteKind <<
         soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       ss <<
-        "kNoteRegularInTuplet, " <<
+        fNoteKind <<
         soundingNoteEssentialsAsString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5571,13 +5450,13 @@ std::string msrNote::noteEssentialsAsSting () const
 
     case msrNoteKind::kNoteRestInTuplet:
       ss <<
-        "kNoteRestInTuplet, " <<
+        fNoteKind <<
         nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       ss <<
-        "kNoteInTupletInGraceNotesGroup, " <<
+        fNoteKind <<
         nonSoundingNoteEssentialsAsString ();
 /* JMI
         noteUpLinkToPart ()->
@@ -5594,7 +5473,7 @@ std::string msrNote::noteEssentialsAsSting () const
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       ss <<
-        "kNoteUnpitchedInTuplet, " <<
+        fNoteKind <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
         noteUpLinkToPart ()->
