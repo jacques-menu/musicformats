@@ -737,10 +737,10 @@ S_msrOahGroup msrOahGroup::create ()
 
 msrOahGroup::msrOahGroup ()
   : oahGroup (
-    "MSR",
-    "help-msr", "hmsr",
+      "MSR",
+      "help-msr", "hmsr",
 R"(These options control the way MSR data is handled.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsrOahGroup ();
 }

@@ -23,7 +23,7 @@
 #include "waeInterface.h"
 #include "oahWae.h"
 
-#include "libmusicxml.h" // for mfMusicformatsErrorKind
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "oahOah.h"
 #include "waeOah.h"

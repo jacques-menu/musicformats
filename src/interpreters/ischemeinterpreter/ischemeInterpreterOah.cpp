@@ -42,10 +42,10 @@ S_ischemeInterpreterOahGroup ischemeInterpreterOahGroup::create ()
 
 ischemeInterpreterOahGroup::ischemeInterpreterOahGroup ()
   : oahGroup (
-    "ischeme",
-     "help-ischeme-interpreter-group", "hmi-group",
+      "ischeme",
+      "help-ischeme-interpreter-group", "hmi-group",
 R"(These options control the way iScheme interpreter works.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   // initialize it
   initializeIschemeInterpreterOahGroup ();

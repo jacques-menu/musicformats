@@ -44,10 +44,10 @@ S_waeOahGroup waeOahGroup::create ()
 
 waeOahGroup::waeOahGroup ()
   : oahGroup (
-    "Wae",
-    "help-wae", "hg",
+      "WAE",
+      "help-wae", "hg",
 R"()",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeWaeOah ();
 }

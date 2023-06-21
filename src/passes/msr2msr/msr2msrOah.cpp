@@ -706,10 +706,10 @@ S_msr2msrOahGroup msr2msrOahGroup::create ()
 
 msr2msrOahGroup::msr2msrOahGroup ()
   : oahGroup (
-    "Msr2lpsr",
-    "help-msr2msr-to-msr", "hmsr2msr",
+      "msr2lpsr",
+      "help-msr2msr-to-msr", "hmsr2msr",
 R"(These options control the way MSR data is translated to another MSR.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsr2msrOahGroup ();
 }

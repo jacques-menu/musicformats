@@ -70,8 +70,8 @@ S_mfcConverterComponent createMsr2musicxmlConverterComponent ()
 
     // populate the converter's own history
     pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
           std::list<std::string> {
@@ -80,8 +80,8 @@ S_mfcConverterComponent createMsr2musicxmlConverterComponent ()
       ));
 
     pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "October 6, 2021",
           std::list<std::string> {

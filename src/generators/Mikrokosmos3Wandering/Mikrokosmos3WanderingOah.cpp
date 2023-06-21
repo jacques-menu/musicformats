@@ -50,10 +50,10 @@ S_Mikrokosmos3WanderingOahGroup Mikrokosmos3WanderingOahGroup::create ()
 
 Mikrokosmos3WanderingOahGroup::Mikrokosmos3WanderingOahGroup ()
   : oahGroup (
-    "Mikrokosmos3Wandering",
-    "help-mikrokosmos-group", "hmkk-group",
+      "Mikrokosmos3Wandering",
+      "help-mikrokosmos-group", "hmkk-group",
 R"(These options control the way Mikrokosmos3Wandering works.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   fGenerationAPIKind =
     msrGenerationAPIKind::kMsrFunctionsAPIKind;

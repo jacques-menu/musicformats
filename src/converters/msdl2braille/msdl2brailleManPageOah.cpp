@@ -227,10 +227,10 @@ S_msdl2brailleManPageOahGroup msdl2brailleManPageOahGroup::create (
 msdl2brailleManPageOahGroup::msdl2brailleManPageOahGroup (
   const S_oahVisitor& theOah2manPage)
   : oahGroup (
-    "Man page",
-    "hmp", "help-man-page",
+      "Man page",
+      "hmp", "help-man-page",
 R"(These options control the way the man page is generated.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsdl2brlManPageOahGroup (
     theOah2manPage);

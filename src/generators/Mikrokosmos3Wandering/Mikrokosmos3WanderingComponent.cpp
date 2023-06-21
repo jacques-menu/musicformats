@@ -105,8 +105,8 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
 
     // populate the generators's own history
     pGeneratorComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
           std::list<std::string> {
@@ -115,8 +115,8 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
       ));
 
     pGeneratorComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.6"),
           "October 23, 2021",
           std::list<std::string> {

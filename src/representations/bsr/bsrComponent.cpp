@@ -47,8 +47,8 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
 
     // populate it
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
           std::list<std::string> {
@@ -58,8 +58,8 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
 
     // populate it
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "October 6, 2021",
           std::list<std::string> {

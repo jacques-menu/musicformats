@@ -35,6 +35,8 @@ enum class mfServiceKind {
   kMfService_xml2xml,
   kMfService_xml2gmn,
 
+  kMfService_stringfilter,
+
   kMfService_msdl,
   kMfService_mfsl,
 
@@ -92,9 +94,9 @@ class EXP mfService : public smartable
                               { return fServiceName; }
 
     // service pass descriptions
-    const std::list<S_mfPassDescription>&
-                          getServicePassDescriptionsList () const
-                              { return fServicePassDescriptionsList; }
+    const std::list<S_mfPass>&
+                          getServicePassesList () const
+                              { return fServicePassesList; }
 
   public:
 
@@ -102,10 +104,9 @@ class EXP mfService : public smartable
     // ------------------------------------------------------
 
     void                  appendPassToService (
-                            S_mfPassDescription passDescription)
+                            S_mfPass pass)
                               {
-                                fServicePassDescriptionsList.push_back (
-                                  passDescription);
+                                fServicePassesList.push_back (pass);
                               }
 
 
@@ -139,8 +140,7 @@ class EXP mfService : public smartable
     std::string           fServiceName;
 
     // service pass descriptions
-    std::list<S_mfPassDescription>
-                          fServicePassDescriptionsList;
+    std::list<S_mfPass>   fServicePassesList;
 
   private:
 

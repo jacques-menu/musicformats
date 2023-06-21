@@ -23,7 +23,7 @@
 
 #include "mfPreprocessorSettings.h"
 
-#include "libmusicxml.h" // for mfMusicformatsErrorKind
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "oahDisplayOah.h"
 

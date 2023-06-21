@@ -1660,10 +1660,10 @@ S_msdlInputOahGroup msdlInputOahGroup::create (
 msdlInputOahGroup::msdlInputOahGroup (
   const std::string& serviceName)
   : oahGroup (
-    "MSDR",
-    "help-msdl", "hmsdl",
+      "MSDR",
+      "help-msdl", "hmsdl",
 R"(These options control the way MSDR data is handled.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsdlInputOahGroup (
     serviceName);

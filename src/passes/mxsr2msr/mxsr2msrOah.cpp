@@ -468,10 +468,10 @@ S_mxsr2msrOahGroup mxsr2msrOahGroup::create (
 mxsr2msrOahGroup::mxsr2msrOahGroup (
   const S_oahHandler& handler)
   : oahGroup (
-    "mxsr2msr",
-    "help-mxsr-to-msr", "hmxsr2msr",
+      "mxsr2msr",
+      "help-mxsr-to-msr", "hmxsr2msr",
 R"(These options control the way MXSRs are translated to MSR.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   createTheMxsr2msrPrefixes (handler);
 

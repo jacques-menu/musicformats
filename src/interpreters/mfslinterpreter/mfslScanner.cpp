@@ -722,13 +722,13 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[103] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-       47,   45,    1,    2,   18,    3,   43,   10,   39,   45,
+       47,   45,    1,    2,   18,    7,   43,   10,   39,   45,
        28,   40,   41,   44,   36,   36,   36,   36,   36,   36,
-       42,   17,   13,   11,   17,   25,   21,   19,   25,    5,
-        4,    9,    7,    9,    0,    0,   38,    0,   28,    0,
+       42,   17,   13,   11,   17,   25,   21,   19,   25,    9,
+        8,    6,    4,    6,    0,    0,   38,    0,   28,    0,
        36,   36,   36,   36,   36,   36,   36,   12,   16,   14,
-       15,   20,   24,   22,   23,    0,    6,   37,   38,   26,
-        0,   27,   35,   36,   36,   36,   36,   36,   36,    8,
+       15,   20,   24,   22,   23,    0,    3,   37,   38,   26,
+        0,   27,   35,   36,   36,   36,   36,   36,   36,    5,
        37,    0,   33,   36,   36,   36,   36,   36,    0,   26,
        36,   36,   30,   36,   36,   31,   36,   34,   36,   32,
 
@@ -860,7 +860,7 @@ static const flex_int16_t yy_chk[186] =
 /* Table of booleans, true if rule could match eol. */
 static const flex_int32_t yy_rule_can_match_eol[47] =
     {   0,
-0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 
+0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 
     0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0,     };
 
@@ -872,7 +872,7 @@ int yy_flex_debug = 1;
 
 static const flex_int16_t yy_rule_linenum[46] =
     {   0,
-      140,  144,  150,  155,  160,  166,  171,  175,  179,  186,
+      140,  144,  150,  155,  159,  163,  169,  174,  179,  186,
       191,  205,  210,  215,  219,  223,  227,  232,  237,  251,
       256,  261,  265,  269,  273,  279,  280,  294,  311,  325,
       339,  353,  367,  381,  395,  411,  427,  428,  443,  457,
@@ -1376,9 +1376,9 @@ YY_RULE_SETUP
 case 3:
 YY_RULE_SETUP
 #line 150 "mfslScanner.ll"
-{ // comment
+{
   loc.step ();
-  BEGIN COMMENT_TO_END_OF_LINE_MODE;
+  BEGIN PARENTHESIZED_COMMENT_MODE;
 }
 	YY_BREAK
 case 4:
@@ -1387,37 +1387,37 @@ YY_RULE_SETUP
 #line 155 "mfslScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
-  BEGIN INITIAL;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 160 "mfslScanner.ll"
+#line 159 "mfslScanner.ll"
+{
+  BEGIN INITIAL;
+}
+	YY_BREAK
+case 6:
+YY_RULE_SETUP
+#line 163 "mfslScanner.ll"
 {
   /* accepting any character other than {endOfLine} */
   loc.step ();
 }
 	YY_BREAK
-case 6:
-YY_RULE_SETUP
-#line 166 "mfslScanner.ll"
-{
-  loc.step ();
-  BEGIN PARENTHESIZED_COMMENT_MODE;
-}
-	YY_BREAK
 case 7:
-/* rule 7 can match eol */
 YY_RULE_SETUP
-#line 171 "mfslScanner.ll"
-{
-  loc.lines (yyleng); loc.step ();
+#line 169 "mfslScanner.ll"
+{ // comment
+  loc.step ();
+  BEGIN COMMENT_TO_END_OF_LINE_MODE;
 }
 	YY_BREAK
 case 8:
+/* rule 8 can match eol */
 YY_RULE_SETUP
-#line 175 "mfslScanner.ll"
+#line 174 "mfslScanner.ll"
 {
+  loc.lines (yyleng); loc.step ();
   BEGIN INITIAL;
 }
 	YY_BREAK
@@ -3010,7 +3010,7 @@ void mfslDriver::scanBegin ()
 {
   yy_flex_debug = fTraceScanning;
 
-  if (fScriptName.empty () || fScriptName == "-") {
+  if (fScriptName.size () == 0 || fScriptName == "-") {
     yyin = stdin;
   }
 

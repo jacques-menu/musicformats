@@ -68,22 +68,22 @@ void initializeMusicFormatsPassIDKindsMap ();
 void initializeMusicFormatsPassIDs ();
 
 //______________________________________________________________________________
-class EXP mfPassDescription : public smartable
+class EXP mfPass : public smartable
 {
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-    static SMARTP<mfPassDescription> create (
+    static SMARTP<mfPass> create (
                             mfPassIDKind passIDKind,
                             std::string  passDescription);
 
-                          mfPassDescription (
+                          mfPass (
                             mfPassIDKind passIDKind,
                             std::string  passDescription);
 
-    virtual               ~mfPassDescription ();
+    virtual               ~mfPass ();
 
 public:
 
@@ -120,8 +120,8 @@ public:
     mfPassIDKind          fPassIDKind;
     std::string           fPassDescription;
 };
-typedef SMARTP<mfPassDescription> S_mfPassDescription;
-EXP std::ostream& operator << (std::ostream& os, const S_mfPassDescription& elt);
+typedef SMARTP<mfPass> S_mfPass;
+EXP std::ostream& operator << (std::ostream& os, const S_mfPass& elt);
 
 //________________________________________________________________________
 // hidden global PassIDKind variable

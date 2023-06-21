@@ -40,7 +40,7 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-struct lpsrRepeatDescr : public smartable
+struct lpsrRepeat : public smartable
 {
 /*
  * positions represent the order in which the parts appear in <part-list />
@@ -51,20 +51,20 @@ struct lpsrRepeatDescr : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<lpsrRepeatDescr> create (
+    static SMARTP<lpsrRepeat> create (
                             const S_msrRepeat& repeat,
-                            int         repeatEndingsNumber);
+                            int                repeatEndingsNumber);
 
   protected:
 
     //ructors/destructor
     // ------------------------------------------------------
 
-                          lpsrRepeatDescr (
+                          lpsrRepeat (
                             const S_msrRepeat& repeat,
-                            int         repeatEndingsNumber);
+                            int                repeatEndingsNumber);
 
-    virtual               ~lpsrRepeatDescr ();
+    virtual               ~lpsrRepeat ();
 
   public:
 
@@ -113,8 +113,8 @@ struct lpsrRepeatDescr : public smartable
 
     Bool                  fEndOfRepeatHasBeenGenerated;
 };
-typedef SMARTP<lpsrRepeatDescr> S_lpsrRepeatDescr;
-EXP std::ostream& operator << (std::ostream& os, const S_lpsrRepeatDescr& elt);
+typedef SMARTP<lpsrRepeat> S_lpsrRepeat;
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrRepeat& elt);
 
 //________________________________________________________________________
 enum class lilypondMarkupColumnKind { // JMI v0.9.66
@@ -1253,7 +1253,7 @@ class EXP lpsr2lilypondTranslator :
 
     // repeats
     // ------------------------------------------------------
-    std::list<S_lpsrRepeatDescr>
+    std::list<S_lpsrRepeat>
                           fRepeatDescrsStack;
 
     // multiple full-bar rests

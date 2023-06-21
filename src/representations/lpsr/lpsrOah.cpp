@@ -1292,10 +1292,10 @@ S_lpsrOahGroup lpsrOahGroup::create ()
 
 lpsrOahGroup::lpsrOahGroup ()
   : oahGroup (
-    "LPSR",
-    "help-lpsr", "hlpsr",
+      "LPSR",
+      "help-lpsr", "hlpsr",
 R"(These options control the way LPSR data is handled.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeLpsrOahGroup ();
 }

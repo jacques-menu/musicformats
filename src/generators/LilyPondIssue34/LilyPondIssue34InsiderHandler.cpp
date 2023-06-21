@@ -935,10 +935,10 @@ S_LilyPondIssue34InsiderOahGroup LilyPondIssue34InsiderOahGroup::create ()
 
 LilyPondIssue34InsiderOahGroup::LilyPondIssue34InsiderOahGroup ()
   : oahGroup (
-    "LilyPondIssue34",
-    "help-LilyPondIssue34", "hlpi34",
+      "LilyPondIssue34",
+      "help-LilyPondIssue34", "hlpi34",
 R"(Options that are used by LilyPondIssue34 are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
 // JMI  fGenerationAPIKind = msrGenerationAPIKind::kMsrFunctionsAPIKind; // default value
   fGenerationAPIKind = msrGenerationAPIKind::kMsrStringsAPIKind; // default value

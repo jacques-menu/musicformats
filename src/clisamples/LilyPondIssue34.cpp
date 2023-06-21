@@ -14,7 +14,7 @@
 
 #include <fstream>
 
-#include "libmusicxml.h" // for mfMusicformatsErrorKind
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "mfPreprocessorSettings.h"
 

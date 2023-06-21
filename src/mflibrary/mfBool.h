@@ -69,7 +69,7 @@ public:
     // copy assignment operator
     // ------------------------------------------------------
 
-    Bool&                 operator= (const Bool& theBool);
+    Bool&                 operator = (const Bool& theBool);
 
 /*
     // Declare prefix and postfix decrement operators.
@@ -78,11 +78,12 @@ public:
 */
 
     // negation, prefix operator
-    Bool                  operator! () const;
+    Bool                  operator ! () const;
 
     // dyadic operators
-    Bool                  operator&& (const Bool& otherBool) const;
-    Bool                  operator|| (const Bool& otherBool) const;
+    Bool                  operator && (const Bool& otherBool) const;
+    Bool                  operator || (const Bool& otherBool) const;
+    Bool                  operator ^  (const Bool& otherBool) const;
 
     // compare value JMI ???
     Bool                  operator == (const Bool &otherBool) const
@@ -109,12 +110,16 @@ public:
 };
 
 //EXP Bool operator&& (const Bool& leftBool, const Bool& rightBool);
-EXP Bool operator&& (const Bool& leftBool, const bool& theBool);
-EXP Bool operator&& (const bool& theBool, const Bool& rightBool);
+EXP Bool operator && (const Bool& leftBool, const bool& theBool);
+EXP Bool operator && (const bool& theBool, const Bool& rightBool);
 
-//EXP Bool operator|| (const Bool& leftBool, const Bool& rightBool);
-EXP Bool operator|| (const Bool& leftBool, const bool& theBool);
-EXP Bool operator|| (const bool& theBool, const Bool& rightBool);
+//EXP Bool operator || (const Bool& leftBool, const Bool& rightBool);
+EXP Bool operator || (const Bool& leftBool, const bool& theBool);
+EXP Bool operator || (const bool& theBool, const Bool& rightBool);
+
+//EXP Bool operator ^ (const Bool& leftBool, const Bool& rightBool);
+EXP Bool operator ^ (const Bool& leftBool, const bool& theBool);
+EXP Bool operator ^ (const bool& theBool, const Bool& rightBool);
 
 EXP std::ostream& operator << (std::ostream& os, const Bool& theBool);
 

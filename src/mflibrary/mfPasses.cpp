@@ -266,19 +266,19 @@ void initializeMusicFormatsPassIDs ()
 }
 
 //______________________________________________________________________________
-S_mfPassDescription mfPassDescription::create (
+S_mfPass mfPass::create (
   mfPassIDKind passIDKind,
   std::string  passDescription)
 {
-  mfPassDescription* obj =
-    new mfPassDescription (
+  mfPass* obj =
+    new mfPass (
       passIDKind,
       passDescription);
   assert (obj != nullptr);
   return obj;
 }
 
-mfPassDescription::mfPassDescription (
+mfPass::mfPass (
   mfPassIDKind passIDKind,
   std::string  passDescription)
 {
@@ -286,10 +286,10 @@ mfPassDescription::mfPassDescription (
   fPassDescription = passDescription;
 }
 
-mfPassDescription::~mfPassDescription ()
+mfPass::~mfPass ()
 {}
 
-std::string mfPassDescription::asString () const
+std::string mfPass::asString () const
 {
   std::stringstream ss;
 
@@ -300,12 +300,12 @@ std::string mfPassDescription::asString () const
   return ss.str ();
 }
 
-void mfPassDescription::print (std::ostream& os) const
+void mfPass::print (std::ostream& os) const
 {
   os << asString ();
 }
 
-std::ostream& operator << (std::ostream& os, const S_mfPassDescription& elt) {
+std::ostream& operator << (std::ostream& os, const S_mfPass& elt) {
   os << elt->asString ();
   return os;
 }

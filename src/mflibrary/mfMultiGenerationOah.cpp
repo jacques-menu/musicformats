@@ -512,10 +512,10 @@ S_multiGenerationOahGroup mfMultiGenerationOahGroup::create ()
 
 mfMultiGenerationOahGroup::mfMultiGenerationOahGroup ()
   : oahGroup (
-    "Multi generator",
-    "help-multi-generator", "hmg",
+      "Multi generator",
+      "help-multi-generator", "hmg",
 R"()",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMultiGenerationOahGroup ();
 }

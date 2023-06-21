@@ -933,10 +933,10 @@ S_Mikrokosmos3WanderingInsiderOahGroup Mikrokosmos3WanderingInsiderOahGroup::cre
 
 Mikrokosmos3WanderingInsiderOahGroup::Mikrokosmos3WanderingInsiderOahGroup ()
   : oahGroup (
-    "Mikrokosmos3Wandering",
-    "help-Mikrokosmos3Wandering", "hmkk3w",
+      "Mikrokosmos3Wandering",
+      "help-Mikrokosmos3Wandering", "hmkk3w",
 R"(Options that are used by Mikrokosmos3Wandering are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
 // JMI  fGenerationAPIKind = msrGenerationAPIKind::kMsrFunctionsAPIKind; // default value
   fGenerationAPIKind = msrGenerationAPIKind::kMsrStringsAPIKind; // default value

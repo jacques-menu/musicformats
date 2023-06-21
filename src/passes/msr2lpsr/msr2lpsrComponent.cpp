@@ -43,8 +43,8 @@ S_mfcPassComponent createMsr2lpsrComponent ()
 
     // populate it
     pPassComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
           std::list<std::string> {

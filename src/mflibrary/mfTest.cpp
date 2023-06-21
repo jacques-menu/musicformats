@@ -15,7 +15,7 @@
   place any include you need here...
 */
 
-#include "mfFilterBasicTypes.h"
+#include "stringFilterBasicTypes.h"
 
 
 namespace MusicFormats
@@ -28,7 +28,7 @@ void mfTest (std::ostream& os)
   place any code you need here...
 */
 
-  testMfFind (os);
+  testFilter (os);
 }
 
 

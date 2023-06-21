@@ -840,10 +840,10 @@ S_brailleGenerationOahGroup brailleGenerationOahGroup::create ()
 
 brailleGenerationOahGroup::brailleGenerationOahGroup ()
   : oahGroup (
-    "Braille generation",
-    "help-braille-generation", "hbg",
+      "Braille generation",
+      "help-braille-generation", "hbg",
 R"(These options control the way BSR data is translated to Braille.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   fBrailleOutputKind =
     bsrBrailleOutputKind::kBrailleOutputAscii; // default value

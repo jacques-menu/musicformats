@@ -146,22 +146,6 @@ loc.step ();
 
 
 
-"#" { // comment
-  loc.step ();
-  BEGIN COMMENT_TO_END_OF_LINE_MODE;
-}
-
-<COMMENT_TO_END_OF_LINE_MODE>{endOfLine} {
-  loc.lines (yyleng); loc.step ();
-  BEGIN INITIAL;
-}
-
-<COMMENT_TO_END_OF_LINE_MODE>. {
-  /* accepting any character other than {endOfLine} */
-  loc.step ();
-}
-
-
 "###" {
   loc.step ();
   BEGIN PARENTHESIZED_COMMENT_MODE;
@@ -176,6 +160,22 @@ loc.step ();
 }
 
 <PARENTHESIZED_COMMENT_MODE>. {
+  /* accepting any character other than {endOfLine} */
+  loc.step ();
+}
+
+
+"#" { // comment
+  loc.step ();
+  BEGIN COMMENT_TO_END_OF_LINE_MODE;
+}
+
+<COMMENT_TO_END_OF_LINE_MODE>{endOfLine} {
+  loc.lines (yyleng); loc.step ();
+  BEGIN INITIAL;
+}
+
+<COMMENT_TO_END_OF_LINE_MODE>. {
   /* accepting any character other than {endOfLine} */
   loc.step ();
 }

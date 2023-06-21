@@ -96,8 +96,8 @@ S_mfcConverterComponent createMfslInterpreterComponent ()
 
     // populate the interpreter's own history
     pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.62"),
           "March 9, 2022",
           list<std::string> {
@@ -107,8 +107,8 @@ S_mfcConverterComponent createMfslInterpreterComponent ()
 
     // populate the interpreter's own history
     pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.63"),
           "March 9, 2022",
           list<std::string> {

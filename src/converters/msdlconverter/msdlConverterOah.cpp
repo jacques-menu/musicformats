@@ -48,10 +48,10 @@ S_msdlConverterOahGroup msdlConverterOahGroup::create ()
 
 msdlConverterOahGroup::msdlConverterOahGroup ()
   : oahGroup (
-    "msdlConverter",
-     "help-msdl-converter-group", "hmc-group",
+      "msdlConverter",
+      "help-msdl-converter-group", "hmc-group",
 R"(These options control the way MSDL converter works.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
 /*
   fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;

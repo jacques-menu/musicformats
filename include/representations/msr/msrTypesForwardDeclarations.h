@@ -261,9 +261,6 @@ typedef SMARTP<msrRepeat> S_msrRepeat;
 class   msrRepeatCommonPart;
 typedef SMARTP<msrRepeatCommonPart> S_msrRepeatCommonPart;
 
-class   msrRepeatDescr;
-typedef SMARTP<msrRepeatDescr> S_msrRepeatDescr;
-
 class   msrRepeatEnding;
 typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
 

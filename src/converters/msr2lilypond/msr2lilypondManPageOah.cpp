@@ -226,10 +226,10 @@ S_msr2lilypondManPageOahGroup msr2lilypondManPageOahGroup::create (
 msr2lilypondManPageOahGroup::msr2lilypondManPageOahGroup (
   const S_oahVisitor& theOah2manPage)
   : oahGroup (
-    "Man page",
-    "hmp", "help-man-page",
+      "Man page",
+      "hmp", "help-man-page",
 R"(These options control the way the man page is generated.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsr2lilypondManPageOahGroup (
     theOah2manPage);

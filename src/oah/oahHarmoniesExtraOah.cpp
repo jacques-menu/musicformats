@@ -1236,8 +1236,8 @@ S_harmoniesExtraOahGroup harmoniesExtraOahGroup::create ()
 
 harmoniesExtraOahGroup::harmoniesExtraOahGroup ()
   : oahGroup (
-    "Extra",
-    "help-extra", "he",
+      "Extra",
+      "help-extra", "he",
 R"(These extra provide features not related to conversion from MusicXML to other formats.
 In the text below:
   - ROOT_DIATONIC_PITCH should belong to the names available in
@@ -1255,7 +1255,7 @@ In the text below:
         "dommin9", "domaug9dim5", "domaug9aug5", "domaug11", "maj7aug11"
 The single or double quotes are used to allow spaces in the names
 and around the '=' sign, otherwise they can be dispensed with.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeHarmoniesExtraOahGroup ();
 }

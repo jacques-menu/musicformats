@@ -714,10 +714,10 @@ msr2brailleInsiderOahGroup::msr2brailleInsiderOahGroup (
   const std::string& serviceName,
   const std::string& handlerHeader)
   : oahGroup (
-    serviceName,
-    "hx2b", "help-msr2braille",
+      serviceName,
+      "hx2b", "help-msr2braille",
 R"(Options that are used by msr2braille are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeXml2brailleInsiderOahGroup ();
 }

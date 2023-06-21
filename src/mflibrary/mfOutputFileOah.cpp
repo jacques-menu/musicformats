@@ -44,10 +44,10 @@ S_outputFileOahGroup outputFileOahGroup::create ()
 
 outputFileOahGroup::outputFileOahGroup ()
   : oahGroup (
-    "OutputFile",
-    "help-output-file-group", "hofg",
+      "OutputFile",
+      "help-output-file-group", "hofg",
 R"()",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeOutputFileOah ();
 }

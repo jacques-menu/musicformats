@@ -169,7 +169,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrScore& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrScore" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -218,7 +218,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrSpaces& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrSpaces" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -277,7 +277,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotes& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting S_bsrTranscriptionNotes" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -316,7 +316,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTranscriptionNotesElement& elt)
 
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -357,7 +357,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPage& elt)
       "% --> End visiting bsrPage '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -401,7 +401,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageElement& elt)
       "% --> End visiting bsrPageElement '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -445,7 +445,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPagination& elt)
       "% --> End visiting bsrPagination '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -489,7 +489,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrPageHeading& elt)
       "% --> End visiting bsrPageHeading '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -553,7 +553,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrMusicHeading& elt)
       "% --> End visiting bsrMusicHeading '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -616,7 +616,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrFootNotes& elt)
       "% --> End visiting bsrFootNotes '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -657,7 +657,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLine& elt)
       "% --> End visiting bsrLine '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -701,7 +701,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrLineContents& elt)
       "% --> End visiting bsrLineContents '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -806,7 +806,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNumber& elt)
       "% --> End visiting bsrNumber '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -850,7 +850,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrWords& elt)
       "% --> End visiting bsrWords '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -894,7 +894,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrClef& elt)
       "% --> End visiting bsrClef '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -938,7 +938,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrKey& elt)
       "% --> End visiting bsrKey '" <<
       elt->asString () <<
       "'"  <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -980,7 +980,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTimeSignature& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrTimeSignature " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1022,7 +1022,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrTempo& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrTempo " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1064,7 +1064,7 @@ void bsr2brailleTranslator::visitEnd (S_bsrNote& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrNote " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

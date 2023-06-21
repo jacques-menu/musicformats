@@ -626,10 +626,10 @@ S_msr2guidoInsiderOahGroup msr2guidoInsiderOahGroup::create ()
 
 msr2guidoInsiderOahGroup::msr2guidoInsiderOahGroup ()
   : oahGroup (
-    "msr2guido",
-    "hm2g", "help-msr2guido",
+      "msr2guido",
+      "hm2g", "help-msr2guido",
 R"(Options that are used by msr2guido are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsr2guidoInsiderOahGroup ();
 }

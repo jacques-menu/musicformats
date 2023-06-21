@@ -115,6 +115,8 @@ class EXP xmlelement : public ctree<xmlelement>, public visitable
 		virtual void acceptOut (basevisitor& visitor);
 
 		int getInputStartLineNumber () { return fInputStartLineNumber; }
+
+		void setInputEndLineNumber (int inputEndLineNumber) { fInputEndLineNumber = inputEndLineNumber; }
 		int getInputEndLineNumber () { return fInputEndLineNumber; }
 
 		void setValue (unsigned long value);

@@ -42,10 +42,10 @@ S_mfslInterpreterOahGroup mfslInterpreterOahGroup::create ()
 
 mfslInterpreterOahGroup::mfslInterpreterOahGroup ()
   : oahGroup (
-    "mfsl",
-     "help-mfsl-interpreter-group", "hmi-group",
+      "mfsl",
+      "help-mfsl-interpreter-group", "hmi-group",
 R"(These options control the way MFSL interpreter works.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   // initialize it
   initializeMfslInterpreterOahGroup ();

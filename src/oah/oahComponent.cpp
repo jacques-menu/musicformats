@@ -47,8 +47,8 @@ S_mfcOahComponent createOahComponent ()
 
     // populate it
     pOahComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.65"),
           "August 16, 2022",
           std::list<std::string> {
@@ -58,8 +58,8 @@ S_mfcOahComponent createOahComponent ()
       ));
 
     pOahComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "October 4, 2022",
           std::list<std::string> {
@@ -68,8 +68,8 @@ S_mfcOahComponent createOahComponent ()
       ));
 
     pOahComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "January 3, 2023",
           std::list<std::string> {
@@ -78,8 +78,8 @@ S_mfcOahComponent createOahComponent ()
       ));
 
     pOahComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.67"),
           "February 5, 2023",
           std::list<std::string> {

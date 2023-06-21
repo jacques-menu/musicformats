@@ -92,76 +92,6 @@ extern std::string msrVoiceFinalizationStatusKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrVoiceCreateInitialLastSegmentKind& elt);
 
-//________________________________________________________________________
-class EXP msrRepeatDescr : public smartable
-{
-  public:
-
-    // creation
-    // ------------------------------------------------------
-
-    static SMARTP<msrRepeatDescr> create (
-                            int                repeatDescrStartInputLineNumber,
-                            const S_msrRepeat& repeatDescrRepeat);
-
-  protected:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          msrRepeatDescr (
-                            int                repeatDescrStartInputLineNumber,
-                            const S_msrRepeat& repeatDescrRepeat);
-
-    virtual               ~msrRepeatDescr ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-    S_msrRepeat           getRepeatDescrRepeat () const
-                              { return fRepeatDescrRepeat; }
-
-    void                  setRepeatDescrStartInputLineNumber (
-                            int inputLineNumber)
-                              {
-                                fRepeatDescrStartInputLineNumber =
-                                  inputLineNumber;
-                              }
-
-    int                   getRepeatDescrStartInputLineNumber () const
-                              {
-                                return
-                                  fRepeatDescrStartInputLineNumber;
-                              }
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-    // print
-    // ------------------------------------------------------
-
-    std::string           asString () const;
-
-    virtual void          print (std::ostream& os) const;
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    // the repeat
-    S_msrRepeat           fRepeatDescrRepeat;
-
-    // its start input line number
-    int                   fRepeatDescrStartInputLineNumber;
-};
-typedef SMARTP<msrRepeatDescr> S_msrRepeatDescr;
-EXP std::ostream& operator << (std::ostream& os, const S_msrRepeatDescr& elt);
-
 //______________________________________________________________________________
 class EXP msrVoice : public msrElement
 {
@@ -966,12 +896,12 @@ class EXP msrVoice : public msrElement
                             const S_msrRepeat& repeat,
                             const std::string& context);
 
-    void                  popRepeatFromRepeatDescrsStack (
+    void                  popRepeatFromRepeatsStack (
                             int                inputLineNumber,
                             const S_msrRepeat& repeat,
                             const std::string& context);
 
-    void                  pushRepeatOntoRepeatDescrsStack (
+    void                  pushRepeatOntoRepeatsStack (
                             int                inputLineNumber,
                             const S_msrRepeat& repeat,
                             const std::string& context);
@@ -1394,8 +1324,8 @@ class EXP msrVoice : public msrElement
 // JMI    int                   fVoiceLastMeasurePuristNumber;
 
     // a stack is needed to handle pending repeats, which can be nested
-    std::list<S_msrRepeatDescr>
-                          fVoicePendingRepeatDescrsStack;
+    std::list<S_msrRepeat>
+                          fVoicePendingRepeatsStack;
 
     // multiple full-bar rests
 

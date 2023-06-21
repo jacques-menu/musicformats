@@ -227,10 +227,10 @@ S_msdl2guidoManPageOahGroup msdl2guidoManPageOahGroup::create (
 msdl2guidoManPageOahGroup::msdl2guidoManPageOahGroup (
   const S_oahVisitor& theOah2manPage)
   : oahGroup (
-    "Man page",
-    "hmp", "help-man-page",
+      "Man page",
+      "hmp", "help-man-page",
 R"(These options control the way the man page is generated.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsdl2gmnManPageOahGroup (
     theOah2manPage);

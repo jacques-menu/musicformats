@@ -43,8 +43,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
 
     // populate it
     pPassComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
           std::list<std::string> {
@@ -53,8 +53,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
       ));
 
     pPassComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "November 23, 2021",
           std::list<std::string> {
@@ -63,8 +63,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
       ));
 
     pPassComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "December 16, 2021",
           std::list<std::string> {
@@ -74,8 +74,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
       ));
 
     pPassComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.60"),
           "February 21, 2022",
           std::list<std::string> {
@@ -84,8 +84,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
       ));
 
     pPassComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.63"),
           "May 31, 2022",
           std::list<std::string> {
@@ -96,8 +96,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
       ));
 
     pPassComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.64"),
           "May 31, 2022",
           std::list<std::string> {
@@ -106,8 +106,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
       ));
 
     pPassComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.65"),
           "August 2, 2022",
           std::list<std::string> {
@@ -117,8 +117,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
       ));
 
     pPassComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "December 18, 2022",
           std::list<std::string> {

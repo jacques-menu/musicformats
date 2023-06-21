@@ -490,10 +490,10 @@ S_msdl2guidoInsiderOahGroup msdl2guidoInsiderOahGroup::create ()
 
 msdl2guidoInsiderOahGroup::msdl2guidoInsiderOahGroup ()
   : oahGroup (
-    "msdl2guido",
-    "hmsdl2g", "help-msdl2guido",
+      "msdl2guido",
+      "hmsdl2g", "help-msdl2guido",
 R"(Options that are used by msdl2guido are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsdl2gmnInsiderOahGroup ();
 }

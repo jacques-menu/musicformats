@@ -49,8 +49,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
 
     // populate it
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
           std::list<std::string> {
@@ -59,8 +59,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
       ));
 
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 14, 2021",
           std::list<std::string> {
@@ -69,8 +69,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
       ));
 
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "November 27, 2021",
           std::list<std::string> {
@@ -79,8 +79,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
       ));
 
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.61"),
           "November 27, 2021",
           std::list<std::string> {
@@ -89,8 +89,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
       ));
 
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.62"),
           "November 27, 2021",
           std::list<std::string> {
@@ -99,8 +99,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
       ));
 
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.63"),
           "May 17, 2022",
           std::list<std::string> {
@@ -109,8 +109,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
       ));
 
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.64"),
           "July 22, 2022",
           std::list<std::string> {
@@ -120,8 +120,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
       ));
 
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "October 6, 2022",
           std::list<std::string> {
@@ -131,8 +131,8 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
       ));
 
     pRepresentationComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.67"),
           "October 6, 2022",
           std::list<std::string> {

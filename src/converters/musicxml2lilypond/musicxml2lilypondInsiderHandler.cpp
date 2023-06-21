@@ -710,10 +710,10 @@ S_xml2lyInsiderOahGroup xml2lyInsiderOahGroup::create ()
 
 xml2lyInsiderOahGroup::xml2lyInsiderOahGroup ()
   : oahGroup (
-    "xml2ly",
-    "help-xml2ly", "hx2l",
+      "xml2ly",
+      "help-xml2ly", "hx2l",
 R"(Options that are used by xml2ly are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeXml2lyInsiderOahGroup ();
 }

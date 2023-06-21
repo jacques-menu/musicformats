@@ -473,7 +473,7 @@ void msr2msrTranslator::visitEnd (S_msrScore& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -531,7 +531,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
 
     ss <<
       "--> End visiting msrIdentification" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -580,7 +580,7 @@ void msr2msrTranslator::visitEnd (S_msrScaling& elt)
 
     ss <<
       "--> End visiting msrScaling" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -620,7 +620,7 @@ void msr2msrTranslator::visitEnd (S_msrSystemLayout& elt)
 
     ss <<
       "--> End visiting msrSystemLayout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -660,7 +660,7 @@ void msr2msrTranslator::visitEnd (S_msrStaffLayout& elt)
 
     ss <<
       "--> End visiting msrStaffLayout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -700,7 +700,7 @@ void msr2msrTranslator::visitEnd (S_msrAppearance& elt)
 
     ss <<
       "--> End visiting msrAppearance" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -740,7 +740,7 @@ void msr2msrTranslator::visitEnd (S_msrPageLayout& elt)
 
     ss <<
       "--> End visiting msrPageLayout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -781,7 +781,7 @@ void msr2msrTranslator::visitEnd (S_msrCredit& elt)
 
     ss <<
       "--> End visiting msrCredit" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -824,7 +824,7 @@ void msr2msrTranslator::visitEnd (S_msrCreditWords& elt)
 
     ss <<
       "--> End visiting msrCreditWords" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -928,7 +928,7 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
     ss <<
       "--> End visiting msrPartGroup " <<
       elt->getPartGroupCombinedName () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -947,7 +947,7 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
         "Popping part group clone " <<
         fPartGroupsStack.front ()->getPartGroupCombinedName () <<
         " from the stack" <<
-        ", line " << elt->getInputStartLineNumber ();
+        ", line " << elt->getInputEndLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -979,7 +979,7 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
               elt->getPartGroupCombinedName () <<
               " to the current part group " <<
               newPartGroupStackTop->getPartGroupCombinedName () <<
-              ", line " << elt->getInputStartLineNumber ();
+              ", line " << elt->getInputEndLineNumber ();
 
             gWaeHandler->waeTrace (
               __FILE__, __LINE__,
@@ -1082,7 +1082,7 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
 void msr2msrTranslator::visitEnd (S_msrPart& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
   --gIndenter;
 
@@ -1220,7 +1220,7 @@ void msr2msrTranslator::visitEnd (S_msrStaffDetails& elt)
 
     ss <<
       "--> End visiting msrStaffDetails" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1333,7 +1333,7 @@ void msr2msrTranslator::visitEnd (S_msrStaff& elt)
     ss <<
       "--> End visiting S_msrStaff \"" <<
       elt->getStaffName () << "\"" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1525,7 +1525,7 @@ void msr2msrTranslator::visitEnd (S_msrVoice& elt)
     ss <<
       "--> End visiting msrVoice \"" <<
       elt->getVoiceName () << "\"" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1616,7 +1616,7 @@ void msr2msrTranslator::visitStart (S_msrSegment& elt)
 void msr2msrTranslator::visitEnd (S_msrSegment& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1754,7 +1754,7 @@ void msr2msrTranslator::visitEnd (S_msrHarmony& elt)
       "--> End visiting msrHarmony '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1919,7 +1919,7 @@ void msr2msrTranslator::visitEnd (S_msrFiguredBass& elt)
       "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2098,7 +2098,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
   std::string
     nextMeasureNumber =
@@ -2323,7 +2323,7 @@ void msr2msrTranslator::visitEnd (S_msrStanza& elt)
       "--> End visiting msrStanza \"" <<
       elt->getStanzaName () <<
       "\"" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2485,7 +2485,7 @@ void msr2msrTranslator::visitEnd (S_msrSyllable& elt)
 
     ss <<
       "--> End visiting msrSyllable" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2534,7 +2534,7 @@ void msr2msrTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
 
     ss <<
       "--> End visiting msrClefKeyTimeSignatureGroup" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2579,7 +2579,7 @@ void msr2msrTranslator::visitEnd (S_msrClef& elt)
 
     ss <<
       "--> End visiting msrClef" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2624,7 +2624,7 @@ void msr2msrTranslator::visitEnd (S_msrKey& elt)
 
     ss <<
       "--> End visiting msrKey" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2669,7 +2669,7 @@ void msr2msrTranslator::visitEnd (S_msrTimeSignature& elt)
 
     ss <<
       "--> End visiting msrTimeSignature" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2708,7 +2708,7 @@ void msr2msrTranslator::visitEnd (S_msrTransposition& elt)
 
     ss <<
       "--> End visiting msrTransposition" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2779,7 +2779,7 @@ void msr2msrTranslator::visitEnd (S_msrTempo& elt)
 
     ss <<
       "--> End visiting msrTempo" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2817,7 +2817,7 @@ void msr2msrTranslator::visitEnd (S_msrRehearsalMark& elt)
 
     ss <<
       "--> End visiting msrRehearsalMark" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2874,7 +2874,7 @@ void msr2msrTranslator::visitEnd (S_msrArticulation& elt)
 
     ss <<
       "--> End visiting msrArticulation" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3057,7 +3057,7 @@ void msr2msrTranslator::visitEnd (S_msrTechnical& elt)
 
     ss <<
       "--> End visiting msrTechnical" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3114,7 +3114,7 @@ void msr2msrTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
 
     ss <<
       "--> End visiting msrTechnicalWithInteger" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3171,7 +3171,7 @@ void msr2msrTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
 
     ss <<
       "--> End visiting msrTechnicalWithFloat" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3228,7 +3228,7 @@ void msr2msrTranslator::visitEnd (S_msrTechnicalWithString& elt)
 
     ss <<
       "--> End visiting msrTechnicalWithString" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3293,7 +3293,7 @@ void msr2msrTranslator::visitEnd (S_msrOrnament& elt)
     ss <<
       "--> End visiting msrOrnament " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3362,7 +3362,7 @@ void msr2msrTranslator::visitEnd (S_msrSpanner& elt)
 
     ss <<
       "--> End visiting msrSpanner" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3419,7 +3419,7 @@ void msr2msrTranslator::visitEnd (S_msrGlissando& elt)
 
     ss <<
       "--> End visiting msrGlissando" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3476,7 +3476,7 @@ void msr2msrTranslator::visitEnd (S_msrSlide& elt)
 
     ss <<
       "--> End visiting msrSlide" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3533,7 +3533,7 @@ void msr2msrTranslator::visitEnd (S_msrSingleTremolo& elt)
 
     ss <<
       "--> End visiting msrSingleTremolo" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3580,7 +3580,7 @@ void msr2msrTranslator::visitEnd (S_msrDoubleTremolo& elt)
 
     ss <<
       "--> End visiting msrSingleTremolo" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3649,7 +3649,7 @@ void msr2msrTranslator::visitEnd (S_msrDynamic& elt)
 
     ss <<
       "--> End visiting msrDynamic" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3706,7 +3706,7 @@ void msr2msrTranslator::visitEnd (S_msrOtherDynamic& elt)
 
     ss <<
       "--> End visiting msrOtherDynamic" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3821,7 +3821,7 @@ void msr2msrTranslator::visitEnd (S_msrWords& elt)
 
     ss <<
       "--> End visiting msrWords" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3930,7 +3930,7 @@ void msr2msrTranslator::visitEnd (S_msrSlur& elt)
     ss <<
       "--> End visiting msrSlur " <<
       elt->asShortString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4015,7 +4015,7 @@ void msr2msrTranslator::visitEnd (S_msrChordSlurLink& elt)
     ss <<
       "--> End visiting msrChordSlurLink " <<
       elt->asShortString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4074,7 +4074,7 @@ void msr2msrTranslator::visitEnd (S_msrLigature& elt)
 
     ss <<
       "--> End visiting msrLigature" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4171,7 +4171,7 @@ void msr2msrTranslator::visitEnd (S_msrCrescDecresc& elt)
 
     ss <<
       "--> End visiting msrCrescDecresc" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4228,7 +4228,7 @@ void msr2msrTranslator::visitEnd (S_msrWedge& elt)
 
     ss <<
       "--> End visiting msrWedge" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4497,7 +4497,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingChordGraceNotesGroupLink: " <<
         fOnGoingChordGraceNotesGroupLink <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4553,7 +4553,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 
     fCurrentVoiceClone->
       removeElementFromVoice (
-        elt->getInputStartLineNumber (),
+        elt->getInputEndLineNumber (),
         fCurrentAfterGraceNotesGroupElement);
 
     // forget about the current after grace notes element
@@ -4671,7 +4671,7 @@ void msr2msrTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
       ", fOnGoingNotesStack.size (): " << fOnGoingNotesStack.size () <<
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingChordGraceNotesGroupLink: " << fOnGoingChordGraceNotesGroupLink <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4845,7 +4845,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
 void msr2msrTranslator::visitEnd (S_msrNote& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
   msrNoteKind
     noteKind = elt->getNoteKind ();
@@ -5006,7 +5006,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             ss <<
               "Setting note '" <<
               fCurrentNonGraceNoteClone->asString () <<
-              "', line " << fCurrentNonGraceNoteClone->getInputStartLineNumber () <<
+              "', line " << fCurrentNonGraceNoteClone->getInputEndLineNumber () <<
               ", as double tremolo first element" <<
               " in voice \"" <<
               fCurrentVoiceClone->getVoiceName () <<
@@ -5032,7 +5032,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             ss <<
               "Setting note '" <<
               fCurrentNonGraceNoteClone->asString () <<
-              "', line " << fCurrentNonGraceNoteClone->getInputStartLineNumber () <<
+              "', line " << fCurrentNonGraceNoteClone->getInputEndLineNumber () <<
               ", as double tremolo second element" <<
               " in voice \"" <<
               fCurrentVoiceClone->getVoiceName () <<
@@ -5372,7 +5372,7 @@ void msr2msrTranslator::visitEnd (S_msrOctaveShift& elt)
 
     ss <<
       "--> End visiting msrOctaveShift" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5474,7 +5474,7 @@ void msr2msrTranslator::visitEnd (S_msrStem& elt)
 
     ss <<
       "--> End visiting msrStem" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5544,7 +5544,7 @@ void msr2msrTranslator::visitEnd (S_msrBeam& elt)
 
     ss <<
       "--> End visiting msrBeam" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5629,7 +5629,7 @@ void msr2msrTranslator::visitEnd (S_msrChordBeamLink& elt)
     ss <<
       "--> End visiting msrChordBeamLink " <<
       elt->asShortString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5728,7 +5728,7 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
 void msr2msrTranslator::visitEnd (S_msrChord& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -5804,7 +5804,7 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
 
     ss <<
       "--> End visiting msrTuplet" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5924,7 +5924,7 @@ void msr2msrTranslator::visitEnd (S_msrTie& elt)
 
     ss <<
       "--> End visiting msrTie" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6219,7 +6219,7 @@ void msr2msrTranslator::visitEnd (S_msrBarCheck& elt)
 
     ss <<
       "--> End visiting msrBarCheck" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6257,7 +6257,7 @@ void msr2msrTranslator::visitEnd (S_msrBarNumberCheck& elt)
 
     ss <<
       "--> End visiting msrBarNumberCheck" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6295,7 +6295,7 @@ void msr2msrTranslator::visitEnd (S_msrLineBreak& elt)
 
     ss <<
       "--> End visiting msrLineBreak" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6333,7 +6333,7 @@ void msr2msrTranslator::visitEnd (S_msrPageBreak& elt)
 
     ss <<
       "--> End visiting msrPageBreak" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6386,7 +6386,7 @@ void msr2msrTranslator::visitStart (S_msrRepeat& elt)
 void msr2msrTranslator::visitEnd (S_msrRepeat& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -6452,7 +6452,7 @@ void msr2msrTranslator::visitStart (S_msrRepeatCommonPart& elt)
 void msr2msrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -6519,7 +6519,7 @@ void msr2msrTranslator::visitStart (S_msrRepeatEnding& elt)
 void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -6614,7 +6614,7 @@ void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -6698,7 +6698,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeat& elt)
 void msr2msrTranslator::visitEnd (S_msrMeasureRepeat& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -6793,7 +6793,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
 void msr2msrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -6864,7 +6864,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
 void msr2msrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -6949,7 +6949,7 @@ void msr2msrTranslator::visitEnd (S_msrBarLine& elt)
 
     ss <<
       "--> End visiting msrBarLine" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6984,7 +6984,7 @@ void msr2msrTranslator::visitEnd (S_msrMidiTempo& elt)
 
     ss <<
       "--> End visiting msrMidiTempo" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

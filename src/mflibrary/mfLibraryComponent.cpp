@@ -43,7 +43,6 @@ EXP extern std::string getGlobalMusicFormatsVersionNumberAndDate ()
   std::string result;
 
   return
-    "v" +
     pMusicFormatsVersionNumber +
     " (" +
     pMusicFormatsVersionDate +
@@ -187,8 +186,8 @@ S_mfcLibraryComponent createLibraryComponent ()
 
     // populate the library's own history
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
           std::list<std::string> {
@@ -197,8 +196,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 12, 2021",
           std::list<std::string> {
@@ -208,8 +207,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "October 12, 2021",
           std::list<std::string> {
@@ -218,8 +217,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.53"),
           "October 22, 2021",
           std::list<std::string> {
@@ -229,8 +228,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.54"),
           "Novermber 6, 2021",
           std::list<std::string> {
@@ -240,8 +239,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.55"),
           "Novermber 6, 2021",
           std::list<std::string> {
@@ -250,8 +249,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.56"),
           "Novermber 6, 2021",
           std::list<std::string> {
@@ -260,8 +259,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.57"),
           "December 12, 2021",
           std::list<std::string> {
@@ -274,8 +273,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.58"),
           "January 2, 2022",
           std::list<std::string> {
@@ -288,8 +287,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.59"),
           "January 4, 2022",
           std::list<std::string> {
@@ -300,8 +299,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.60"),
           "February 14, 2022",
           std::list<std::string> {
@@ -314,8 +313,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.61"),
           "February 18, 2022",
           std::list<std::string> {
@@ -324,8 +323,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.62"),
           "March 28, 2022",
           std::list<std::string> {
@@ -334,8 +333,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.65"),
           "August 24, 2022",
           std::list<std::string> {
@@ -346,8 +345,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.66"),
           "January 31, 2023",
           std::list<std::string> {
@@ -362,8 +361,8 @@ S_mfcLibraryComponent createLibraryComponent ()
       ));
 
     pLibraryComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.67"),
           "February 6, 2023",
           std::list<std::string> {

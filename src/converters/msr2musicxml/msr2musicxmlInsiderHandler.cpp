@@ -625,10 +625,10 @@ S_msr2musicxmlInsiderOahGroup msr2musicxmlInsiderOahGroup::create ()
 
 msr2musicxmlInsiderOahGroup::msr2musicxmlInsiderOahGroup ()
   : oahGroup (
-    "msr2musicxml",
-    "hm2m", "help-msr2musicxml",
+      "msr2musicxml",
+      "hm2m", "help-msr2musicxml",
 R"(Options that are used by msr2musicxml are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsr2musicxmlInsiderOahGroup ();
 }

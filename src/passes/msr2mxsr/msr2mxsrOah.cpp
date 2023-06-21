@@ -47,10 +47,10 @@ S_msr2mxsrOahGroup msr2mxsrOahGroup::create ()
 
 msr2mxsrOahGroup::msr2mxsrOahGroup ()
   : oahGroup (
-    "Msr2mxsr",
-    "help-msr2mxsr-to-msr", "hmsr2mxsr",
+      "msr2mxsr",
+      "help-msr2mxsr-to-msr", "hmsr2mxsr",
 R"(These options control the way MSR data is translated to an MXSR.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsr2mxsrOahGroup ();
 }

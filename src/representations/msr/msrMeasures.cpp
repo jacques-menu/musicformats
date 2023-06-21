@@ -6749,7 +6749,7 @@ void msrMeasure::finalizeMeasure (
     std::stringstream ss;
 
     ss <<
-      "Attempting to finalize measure " <<
+      "Attempt at finalizing measure " <<
       this->asShortString () <<
       " more than once in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
@@ -6778,6 +6778,7 @@ void msrMeasure::finalizeMeasure (
       ss <<
         "staff:" <<
         std::endl;
+
       ++gIndenter;
       ss << staff;
       ss << std::endl;
@@ -6789,9 +6790,11 @@ void msrMeasure::finalizeMeasure (
     }
 #endif // MF_TRACE_IS_ENABLED
 
+//     msrInternalError ( // JMI v0.9.70
     msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       fInputStartLineNumber,
+//       __FILE__, __LINE__,
       ss.str ());
   }
 
@@ -6971,7 +6974,7 @@ void msrMeasure::finalizeMeasureClone (
     std::stringstream ss;
 
     ss <<
-      "Attempting to finalize measure clone \"" <<
+      "Attempt at finalizing measure clone " <<
       asShortString () <<
       "\" more than once";
 

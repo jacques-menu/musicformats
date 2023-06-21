@@ -728,7 +728,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
     std::stringstream ss;
 
     ss <<
-      "attempting to create a voice anew by number" <<
+      "attempt at creating a voice anew by number" <<
       ", voiceNumber: " << voiceNumber <<
       ", currentMeasureNumber: " << currentMeasureNumber <<
       " ' in staff \"" <<

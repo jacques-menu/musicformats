@@ -65,42 +65,49 @@ Bool& Bool::operator= (const Bool& theBool)
   return *this;
 }
 
-Bool Bool::operator! () const
+Bool Bool::operator ! () const
 {
   Bool result (! fValue);
 
   return result;
 }
 
-Bool Bool::operator&&(const Bool& otherBool) const
+Bool Bool::operator && (const Bool& otherBool) const
 {
   Bool result (fValue && otherBool.fValue);
 
   return result;
 }
 
-Bool Bool::operator||(const Bool& otherBool) const
+Bool Bool::operator || (const Bool& otherBool) const
 {
   Bool result (fValue || otherBool.fValue);
 
   return result;
 }
 
-EXP Bool operator&& (const Bool& leftBool, const bool& theBool)
+Bool Bool::operator ^ (const Bool& otherBool) const
+{
+  Bool result (fValue ^ otherBool.fValue);
+
+  return result;
+}
+
+EXP Bool operator && (const Bool& leftBool, const bool& theBool)
 {
   Bool result (leftBool.getValue () && theBool);
 
   return result;
 }
 
-EXP Bool operator&& (const bool& theBool, const Bool& rightBool)
+EXP Bool operator && (const bool& theBool, const Bool& rightBool)
 {
   Bool result (theBool && rightBool.getValue ());
 
   return result;
 }
 
-EXP Bool operator|| (const Bool& leftBool, const bool& theBool)
+EXP Bool operator || (const Bool& leftBool, const bool& theBool)
 {
 
   Bool result (leftBool.getValue () || theBool);
@@ -108,9 +115,24 @@ EXP Bool operator|| (const Bool& leftBool, const bool& theBool)
   return result;
 }
 
-EXP Bool operator|| (const bool& theBool, const Bool& rightBool)
+EXP Bool operator || (const bool& theBool, const Bool& rightBool)
 {
   Bool result (theBool || rightBool.getValue ());
+
+  return result;
+}
+
+EXP Bool operator ^ (const Bool& leftBool, const bool& theBool)
+{
+
+  Bool result (leftBool.getValue () ^ theBool);
+
+  return result;
+}
+
+EXP Bool operator ^ (const bool& theBool, const Bool& rightBool)
+{
+  Bool result (theBool ^ rightBool.getValue ());
 
   return result;
 }
@@ -146,21 +168,23 @@ Bool nor (Bool p, Bool q)
 Bool xorr (Bool p, Bool q)
 {
   // see https://en.wikipedia.org/wiki/XOR_gate
-  Bool
-    inter =
-      nand (
-        p,
-        q);
+//   Bool
+//     inter =
+//       nand (
+//         p,
+//         q);
+//
+//   return
+//     nand (
+//       nand (
+//         p,
+//         inter),
+//       nand (
+//         q,
+//         inter)
+//       );
 
-  return
-    nand (
-      nand (
-        p,
-        inter),
-      nand (
-        q,
-        inter)
-      );
+  return p ^ q;
 }
 
 Bool implies (Bool p, Bool q)

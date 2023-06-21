@@ -61,6 +61,10 @@ std::string mfServiceKindAsString (
       result = "kMfService_xml2gmn";
       break;
 
+    case mfServiceKind::kMfService_stringfilter:
+      result = "kMfService_stringfilter";
+      break;
+
     case mfServiceKind::kMfService_msdl:
       result = "kMfService_msdl";
       break;
@@ -194,6 +198,9 @@ void initializeMusicFormatsServiceKindsMap ()
     gGlobalMusicFormatsServiceKindsMap ["xml2gmn"] =
       mfServiceKind::kMfService_xml2gmn;
 
+    gGlobalMusicFormatsServiceKindsMap ["filter"] =
+      mfServiceKind::kMfService_stringfilter;
+
     gGlobalMusicFormatsServiceKindsMap ["msdl"] =
       mfServiceKind::kMfService_msdl;
 
@@ -264,9 +271,9 @@ mfService::~mfService ()
 void mfService::fetchPassIDKindList (
   std::list<mfPassIDKind>& passIDKindList) const
 {
-  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+  for (S_mfPass pass : fServicePassesList) {
     passIDKindList.push_back (
-      passDescription-> getPassIDKind());
+      pass-> getPassIDKind());
   } // for
 }
 
@@ -274,11 +281,11 @@ size_t mfService::fetchMaxPassIDKindAsStringLength () const
 {
   size_t result = 0;
 
-  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+  for (S_mfPass pass : fServicePassesList) {
     std::string
       passIDKindAsString =
         mfPassIDKindAsString (
-          passDescription->getPassIDKind ());
+          pass->getPassIDKind ());
 
     size_t
       passIDKindAsStringSize =
@@ -306,7 +313,7 @@ void mfService::print (std::ostream& os) const
 
   const int fieldWidth = fetchMaxPassIDKindAsStringLength ();
 
-  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+  for (S_mfPass pass : fServicePassesList) {
     os << std::left <<
       std::setw (fieldWidth) <<
       "passIDKind:" <<
@@ -316,19 +323,19 @@ void mfService::print (std::ostream& os) const
     os <<
       gLanguage->
         passIDKindAsString (
-          passDescription->getPassIDKind ()) <<
+          pass->getPassIDKind ()) <<
           std::endl;
     --gIndenter;
 
     os <<
       std::setw (fieldWidth) <<
-      "passDescription " << ": " <<
+      "pass " << ": " <<
       std::endl;
 
     ++gIndenter;
     os <<
       gIndenter.indentMultiLineStringWithCurrentOffset (
-        passDescription->getPassDescription ()) <<
+        pass->getPassDescription ()) <<
       std::endl;
     --gIndenter;
   } // for
@@ -356,7 +363,7 @@ std::string mfService::fetchServicePassDescriptionsAsString () const
 
   iss <<
     "This multi-pass converter basically performs " <<
-    fServicePassDescriptionsList.size () <<
+    fServicePassesList.size () <<
     " passes:" <<
     '\n';
 
@@ -364,11 +371,11 @@ std::string mfService::fetchServicePassDescriptionsAsString () const
 
 //   const int fieldWidth = 10;
 
-  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+  for (S_mfPass pass : fServicePassesList) {
     iss << // JMI std::left <<
 //       std::setw (fieldWidth) <<
-      passDescription->getPassIDKind () << ": " <<
-      passDescription->getPassDescription () <<
+      pass->getPassIDKind () << ": " <<
+      pass->getPassDescription () <<
       '\n';
   } // for
 
@@ -399,7 +406,7 @@ void mfService::printServiceForAboutOption (std::ostream& os) const
   os <<
     "This multi-pass converter basically performs " <<
     mfSingularOrPlural (
-      fServicePassDescriptionsList.size (),
+      fServicePassesList.size (),
       "pass", "passes") <<
     ':' <<
     std::endl;
@@ -408,20 +415,20 @@ void mfService::printServiceForAboutOption (std::ostream& os) const
 
 //   const int fieldWidth = 21;
 
-  for (S_mfPassDescription passDescription : fServicePassDescriptionsList) {
+  for (S_mfPass pass : fServicePassesList) {
     os << // std::left <<
 //       std::setw (fieldWidth) <<
       gLanguage->
         passIDKindAsString (
-          passDescription->getPassIDKind ()) <<
+          pass->getPassIDKind ()) <<
       ":" <<
       std::endl;
 
 //       ++gIndenter;
       os <<
 //         gIndenter.indentMultiLineStringWithCurrentOffset (
-//           passDescription->getPassDescription ()) <<
-        passDescription->getPassDescription () <<
+//           pass->getPassDescription ()) <<
+        pass->getPassDescription () <<
         std::endl;
 //       --gIndenter;
   } // for
@@ -648,37 +655,37 @@ EXP void initializeServices ()
 
     xml2lyService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_1,
           gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     xml2lyService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2a,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2lyService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2b,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2lyService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_3,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     xml2lyService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     xml2lyService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
@@ -749,37 +756,37 @@ EXP void initializeServices ()
 
     xml2brlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_1,
           gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     xml2brlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2a,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2brlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2b,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2brlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_3,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     xml2brlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     xml2brlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
@@ -809,37 +816,37 @@ EXP void initializeServices ()
 
     xml2xmlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_1,
           gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     xml2xmlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2a,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2xmlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2b,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2xmlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_3,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     xml2xmlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     xml2xmlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
@@ -869,41 +876,100 @@ EXP void initializeServices ()
 
     xml2gmnService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_1,
           gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     xml2gmnService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2a,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2gmnService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2b,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2gmnService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_3,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     xml2gmnService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     xml2gmnService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
     pGlobalServicesMap [mfServiceKind::kMfService_xml2gmn] = xml2gmnService;
+  }
+
+  // filter
+  // ------------------------------
+
+  {
+    std::string serviceName = "filter";
+
+// What stringFilterInterpreter does:
+//
+//     This multi-pass converter performs various passes depending on the output generated,
+//     which should be specified by an option
+//
+//     Other passes are performed according to the options, such as
+//     displaying views of the internal data or printing a summary of the score.
+//
+//     The activity log and warning/error messages go to standard error.
+
+    S_mfService
+      filterService =
+        mfService::create (serviceName);
+
+    filterService->
+      appendPassToService (
+        mfPass::create (
+          mfPassIDKind::kMfPassID_1,
+          gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
+
+    filterService->
+      appendPassToService (
+        mfPass::create (
+          mfPassIDKind::kMfPassID_2a,
+          gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
+
+    filterService->
+      appendPassToService (
+        mfPass::create (
+          mfPassIDKind::kMfPassID_2b,
+          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
+
+    filterService->
+      appendPassToService (
+        mfPass::create (
+          mfPassIDKind::kMfPassID_3,
+          gLanguage->convertTheFirstMSRIntoASecondMSR ()));
+
+    filterService->
+      appendPassToService (
+        mfPass::create (
+          mfPassIDKind::kMfPassID_4,
+          gLanguage->convertTheSecondMSRIntoAnLPSR ()));
+
+    filterService->
+      appendPassToService (
+        mfPass::create (
+          mfPassIDKind::kMfPassID_5,
+          gLanguage->convertTheLPSRIntoLilyPondCode ()));
+
+    pGlobalServicesMap [mfServiceKind::kMfService_stringfilter] = filterService;
   }
 
   // msdl
@@ -928,37 +994,37 @@ EXP void initializeServices ()
 
     msdlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_1,
           gLanguage->convertAMusicXMLStreamIntoAnMXSR ()));
 
     msdlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2a,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     msdlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_2b,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     msdlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_3,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     msdlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     msdlService->
       appendPassToService (
-        mfPassDescription::create (
+        mfPass::create (
           mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 

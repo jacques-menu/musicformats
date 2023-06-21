@@ -741,10 +741,10 @@ xml2brlInsiderOahGroup::xml2brlInsiderOahGroup (
   const std::string& serviceName,
   const std::string& handlerHeader)
   : oahGroup (
-    serviceName,
-    "help-xml2brl", "hx2b",
+      serviceName,
+      "help-xml2brl", "hx2b",
 R"(Options that are used by xml2brl are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeXml2brlInsiderOahGroup ();
 }

@@ -226,10 +226,10 @@ S_msdl2musicxmlManPageOahGroup msdl2musicxmlManPageOahGroup::create (
 msdl2musicxmlManPageOahGroup::msdl2musicxmlManPageOahGroup (
   const S_oahVisitor& theOah2manPage)
   : oahGroup (
-    "Man page",
-    "hmp", "help-man-page",
+      "Man page",
+      "hmp", "help-man-page",
 R"(These options control the way the man page is generated.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsdl2xmlManPageOahGroup (
     theOah2manPage);

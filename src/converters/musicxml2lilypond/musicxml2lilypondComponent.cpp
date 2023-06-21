@@ -79,8 +79,8 @@ EXP S_mfcConverterComponent createMusicxml2lilypondConverterComponent ()
 
     // populate the converter's own history
     pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 12, 2021",
           std::list<std::string> {
@@ -89,8 +89,8 @@ EXP S_mfcConverterComponent createMusicxml2lilypondConverterComponent ()
       ));
 
     pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "November 29, 2021",
           std::list<std::string> {
@@ -99,8 +99,8 @@ EXP S_mfcConverterComponent createMusicxml2lilypondConverterComponent ()
       ));
 
     pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.60"),
           "February 21, 2022",
           std::list<std::string> {

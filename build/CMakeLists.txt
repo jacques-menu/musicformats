@@ -93,7 +93,7 @@ set (LIBDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 # CXX
 #===============================================================
 
-set (CMAKE_CXX_STANDARD 20)
+set (CMAKE_CXX_STANDARD 17)
 message (STATUS "-----> CMAKE_CXX_STANDARD: ${CMAKE_CXX_STANDARD}")
 
 message (STATUS "-----> UNIX: ${UNIX}")
@@ -181,9 +181,9 @@ message (STATUS "-----> MF_CLI_SAMPLES_DIR: ${MF_CLI_SAMPLES_DIR}")
 # message (STATUS "-----> MF_CLI_SERVICES_DIR: ${MF_CLI_SERVICES_DIR}")
 
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mflibrary mflibrary/mfFilter components languages oah wae manpage services)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mflibrary components languages oah wae manpage services)
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} interpreters/mfslinterpreter interpreters/ischemeinterpreter)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} interpreters/stringfilterinterpreter interpreters/mfslinterpreter interpreters/ischemeinterpreter)
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} passes/musicxml2mxsr representations/mxsr passes/mxsr2msr representations/msr passes/msr2msr generators/Mikrokosmos3Wandering generators/LilyPondIssue34)
 
@@ -359,7 +359,7 @@ endif ()
 set (LXML_CLI_SAMPLES xmlversion RandomMusic RandomChords xmlfactory partsummary xml2guido xmliter countnotes readunrolled xml2midi xmlread xmltranspose xmlclone)
 message (STATUS "-----> LXML_CLI_SAMPLES: ${LXML_CLI_SAMPLES}")
 
-set (MF_CLI_SAMPLES displayMusicformatsVersion displayMusicformatsHistory MusicAndHarmonies Mikrokosmos3Wandering LilyPondIssue34 xml2ly xml2brl xml2xml xml2gmn msdl mfsl ischeme)
+set (MF_CLI_SAMPLES displayMusicformatsVersion displayMusicformatsHistory MusicAndHarmonies Mikrokosmos3Wandering LilyPondIssue34 xml2ly xml2brl xml2xml xml2gmn msdl stringfilter mfsl ischeme)
 message (STATUS "-----> MF_CLI_SAMPLES: ${MF_CLI_SAMPLES}")
 
 if (APPLE)

@@ -53,10 +53,10 @@ S_msdl2msrOahGroup msdl2msrOahGroup::create ()
 
 msdl2msrOahGroup::msdl2msrOahGroup ()
   : oahGroup (
-    "Msdl2msr",
-    "help-msdl-to-msdr", "hmsdl2msr",
+			"msdl2msr",
+			"help-msdl-to-msdr", "hmsdl2msr",
 R"(These options control the way xmlelement are translated to MSDR.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+			oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsdl2msrGroup ();
 }

@@ -672,10 +672,10 @@ S_msr2lilypondInsiderOahGroup msr2lilypondInsiderOahGroup::create ()
 
 msr2lilypondInsiderOahGroup::msr2lilypondInsiderOahGroup ()
   : oahGroup (
-    "msr2lilypond",
-    "hx2l", "help-msr2lilypond",
+      "msr2lilypond",
+      "hx2l", "help-msr2lilypond",
 R"(Options that are used by msr2lilypond are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMsr2lilypondInsiderOahGroup ();
 }

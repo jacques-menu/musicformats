@@ -645,10 +645,10 @@ S_xml2gmnInsiderOahGroup xml2gmnInsiderOahGroup::create ()
 
 xml2gmnInsiderOahGroup::xml2gmnInsiderOahGroup ()
   : oahGroup (
-    "xml2gmn",
-     "help-xml2gmn", "hx2g",
+      "xml2gmn",
+      "help-xml2gmn", "hx2g",
 R"(Options that are used by xml2gmn are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeXml2gmnInsiderOahGroup ();
 }

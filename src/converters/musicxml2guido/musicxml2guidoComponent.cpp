@@ -73,8 +73,8 @@ EXP S_mfcConverterComponent createMusicxml2guidoConverterComponent ()
 
     // populate the converter's own history
     pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
           std::list<std::string> {
@@ -83,8 +83,8 @@ EXP S_mfcConverterComponent createMusicxml2guidoConverterComponent ()
       ));
 
     pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
+      appendVersionToComponent (
+        mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 12, 2021",
           std::list<std::string> {

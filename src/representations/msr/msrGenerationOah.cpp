@@ -45,10 +45,10 @@ S_msrGeneratorsOahGroup msrGeneratorsOahGroup::create ()
 
 msrGeneratorsOahGroup::msrGeneratorsOahGroup ()
   : oahGroup (
-    "MSR generators",
-    "help-msr generators", "hmsrgen",
+      "MSR generators",
+      "help-msr generators", "hmsrgen",
 R"(These options control the way the translators to MSR work.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   fGenerationAPIKind = msrGenerationAPIKind::kMsrFunctionsAPIKind;
 

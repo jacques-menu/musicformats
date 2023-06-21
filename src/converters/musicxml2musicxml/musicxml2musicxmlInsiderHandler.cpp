@@ -639,10 +639,10 @@ S_xml2xmlInsiderOahGroup xml2xmlInsiderOahGroup::create ()
 
 xml2xmlInsiderOahGroup::xml2xmlInsiderOahGroup ()
   : oahGroup (
-    "xml2xml",
-   "help-xml2xml", "hm2x",
+      "xml2xml",
+      "help-xml2xml", "hm2x",
 R"(Options that are used by xml2xml are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeXml2xmlInsiderOahGroup ();
 }

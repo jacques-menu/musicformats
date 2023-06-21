@@ -44,10 +44,10 @@ S_mxsrOahGroup mxsrOahGroup::create ()
 
 mxsrOahGroup::mxsrOahGroup ()
   : oahGroup (
-    "Mxsr",
-    "help-mxsr", "hmxsr",
+      "MXSR",
+      "help-mxsr", "hmxsr",
 R"(These options control the way MXSR data are handled.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMxsrOah ();
 }

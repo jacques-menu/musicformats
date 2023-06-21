@@ -132,29 +132,29 @@ typedef SMARTP<mfcVersionNumber> S_mfcVersionNumber;
 EXP std::ostream& operator << (std::ostream& os, const S_mfcVersionNumber& elt);
 
 //______________________________________________________________________________
-class EXP mfcVersionDescr : public smartable
+class EXP mfcVersion : public smartable
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mfcVersionDescr> create (
+    static SMARTP<mfcVersion> create (
                             const S_mfcVersionNumber&     versionNumber,
                             const std::string&            versionDate,
-                            const std::list<std::string>& versionDescriptionItems);
+                            const std::list<std::string>& versioniptionItems);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mfcVersionDescr (
+                          mfcVersion (
                             const S_mfcVersionNumber&     versionNumber,
                             const std::string&            versionDate,
-                            const std::list<std::string>& versionDescriptionItems);
+                            const std::list<std::string>& versioniptionItems);
 
-    virtual               ~mfcVersionDescr ();
+    virtual               ~mfcVersion ();
 
   public:
 
@@ -169,8 +169,8 @@ class EXP mfcVersionDescr : public smartable
 
     const std::list<std::string>&
 
-                          getVersionDescriptionItems () const
-                              { return fVersionDescriptionItems; }
+                          getVersioniptionItems () const
+                              { return fVersioniptionItems; }
 
   public:
 
@@ -189,10 +189,10 @@ class EXP mfcVersionDescr : public smartable
     S_mfcVersionNumber    fVersionNumber;
     std::string           fVersionDate;
     std::list<std::string>
-                          fVersionDescriptionItems;
+                          fVersioniptionItems;
 };
-typedef SMARTP<mfcVersionDescr> S_mfcVersionDescr;
-EXP std::ostream& operator << (std::ostream& os, const S_mfcVersionDescr& elt);
+typedef SMARTP<mfcVersion> S_mfcVersion;
+EXP std::ostream& operator << (std::ostream& os, const S_mfcVersion& elt);
 
 //______________________________________________________________________________
 class EXP mfcVersionsHistory : public smartable
@@ -218,7 +218,7 @@ class EXP mfcVersionsHistory : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_mfcVersionDescr>&
+    const std::list<S_mfcVersion>&
                           getVersionsList () const
                               { return fVersionsList; }
 
@@ -227,10 +227,10 @@ class EXP mfcVersionsHistory : public smartable
     // public services
     // ------------------------------------------------------
 
-    void                  appendVersionDescrToHistory (
-                            const S_mfcVersionDescr& versionDescr);
+    void                  appendVersionToHistory (
+                            const S_mfcVersion& version);
 
-    S_mfcVersionDescr     fetchMostRecentVersion () const;
+    S_mfcVersion     fetchMostRecentVersion () const;
 
     S_mfcVersionNumber    fetchMostRecentVersionNumber () const;
 
@@ -246,7 +246,7 @@ class EXP mfcVersionsHistory : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::list<S_mfcVersionDescr>
+    std::list<S_mfcVersion>
                           fVersionsList;
 };
 typedef SMARTP<mfcVersionsHistory> S_mfcVersionsHistory;
@@ -299,7 +299,7 @@ class EXP mfcComponent : public smartable
     std::string           getComponentName () const
                               { return fComponentName; }
 
-    mfcComponentKind       getComponentKind () const
+    mfcComponentKind      getComponentKind () const
                               { return fComponentKind; }
 
   public:
@@ -307,7 +307,7 @@ class EXP mfcComponent : public smartable
     // public services
     // ------------------------------------------------------
 
-    S_mfcVersionDescr     fetchComponentMostRecentVersion () const
+    S_mfcVersion     fetchComponentMostRecentVersion () const
                               {
                                 return
                                   fVersionsHistory->
@@ -322,8 +322,8 @@ class EXP mfcComponent : public smartable
                                         getVersionNumber ();
                               }
 
-    void                  appendVersionDescrToComponent (
-                            const S_mfcVersionDescr& versionDescr);
+    void                  appendVersionToComponent (
+                            const S_mfcVersion& version);
 
   public:
 
@@ -348,7 +348,7 @@ class EXP mfcComponent : public smartable
 
     std::string           fComponentName;
 
-    mfcComponentKind       fComponentKind;
+    mfcComponentKind      fComponentKind;
 
     S_mfcVersionsHistory  fVersionsHistory;
 };

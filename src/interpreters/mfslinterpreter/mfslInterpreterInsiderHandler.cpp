@@ -428,10 +428,10 @@ S_mfslInterpreterInsiderOahGroup mfslInterpreterInsiderOahGroup::create ()
 
 mfslInterpreterInsiderOahGroup::mfslInterpreterInsiderOahGroup ()
   : oahGroup (
-    "mfsl",
-    "help-mfsl-group", "hmfslg",
+      "mfsl",
+      "help-mfsl-group", "hmfslg",
 R"(Options that are used by mfsl are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeMfslInterpreterInsiderOahGroup ();
 }

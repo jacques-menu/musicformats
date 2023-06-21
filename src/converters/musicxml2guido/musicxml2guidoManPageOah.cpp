@@ -226,10 +226,10 @@ S_xml2gmnManPageOahGroup xml2gmnManPageOahGroup::create (
 xml2gmnManPageOahGroup::xml2gmnManPageOahGroup (
   const S_oahVisitor& theOah2manPage)
   : oahGroup (
-    "Man page",
-    "hmp", "help-man-page",
+      "Man page",
+      "hmp", "help-man-page",
 R"(These options control the way the man page is generated.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeXml2gmnManPageOahGroup (
     theOah2manPage);

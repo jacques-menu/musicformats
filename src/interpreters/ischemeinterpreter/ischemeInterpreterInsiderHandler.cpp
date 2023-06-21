@@ -430,10 +430,10 @@ S_ischemeInterpreterInsiderOahGroup ischemeInterpreterInsiderOahGroup::create ()
 
 ischemeInterpreterInsiderOahGroup::ischemeInterpreterInsiderOahGroup ()
   : oahGroup (
-    "ischeme",
-    "help-ischeme-group", "hischemeg",
+      "ischeme",
+      "help-ischeme-group", "hischemeg",
 R"(Options that are used by ischeme are grouped here.)",
-    oahElementVisibilityKind::kElementVisibilityWhole)
+      oahElementVisibilityKind::kElementVisibilityWhole)
 {
   initializeIschemeInterpreterInsiderOahGroup ();
 }
