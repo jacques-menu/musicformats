@@ -303,7 +303,7 @@ EXP int stringfilter (
       std::endl;
 
     gLog <<
-      "Launching the conversion of ";
+      "Launching the filtering of ";
 
     if (inputSourceName == "-") {
       gLog <<
@@ -315,7 +315,8 @@ EXP int stringfilter (
     }
 
     gLog <<
-      " to LilyPond" <<
+      " with expression " <<
+      "???EXPRESSION???" <<
       std::endl;
 
     gLog <<
@@ -357,7 +358,7 @@ EXP int stringfilter (
     --gIndenter;
 
     gLog <<
-      "LilyPond code will be written to ";
+      "stringfilter output will be written to ";
     if (outputFileNameSize) {
       gLog <<
         outputFileName;
@@ -389,7 +390,9 @@ EXP int stringfilter (
   // do the conversion
   // ------------------------------------------------------
 
-  mfMusicformatsErrorKind err;
+  mfMusicformatsErrorKind
+    err =
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   try {
     if (inputSourceName == "-") {
@@ -400,12 +403,12 @@ EXP int stringfilter (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      err =
-        convertMusicxmlFd2lilypondWithHandler (
-          stdin,
-          gOutput,
-          gLog,
-          handler);
+//       err =
+//         convertMusicxmlFd2lilypondWithHandler (
+//           stdin,
+//           gOutput,
+//           gLog,
+//           handler);
     }
 
     else {
@@ -426,12 +429,12 @@ EXP int stringfilter (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      err =
-        convertMusicxmlFile2lilypondWithHandler (
-          inputSourceName.c_str(),
-          gOutput,
-          gLog,
-          handler);
+//       err =
+//         convertMusicxmlFile2lilypondWithHandler (
+//           inputSourceName.c_str(),
+//           gOutput,
+//           gLog,
+//           handler);
     }
   }
   catch (mfException& e) {
@@ -474,7 +477,7 @@ EXP int stringfilter (
 
   if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
     gLog <<
-      "### Conversion from MusicXML to LilyPond failed ###" <<
+      "### stringfilter interpreter failed ###" <<
       std::endl;
 
     return 1;

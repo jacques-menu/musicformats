@@ -355,11 +355,15 @@ class EXP oahOahGroup : public oahGroup
                           getQueryOptionNameAtom () const
                               { return fQueryOptionNameAtom; }
 
-    // find std::string
-//     std::string           getStringToBeFound () const
+    // find string
+//     std::string           getStringToBeFound () const // JMI v0.9.70
 //                               { return fStringToBeFound; }
     S_oahFindStringAtom   getFindStringAtom () const
                               { return fFindStringAtom; }
+
+    // filter string
+    S_oahFilterStringAtom getFilterStringAtom () const
+                              { return fFilterStringAtom; }
 
     // include options file
     S_oahIncludeOptionsAndArgumentsFileAtom
@@ -464,6 +468,9 @@ class EXP oahOahGroup : public oahGroup
     // find std::string
 //     std::string           fStringToBeFound; JMI ??? v0.9.66
     S_oahFindStringAtom   fFindStringAtom;
+
+    // find std::string
+    S_oahFilterStringAtom fFilterStringAtom;
 
     // include options file
     S_oahIncludeOptionsAndArgumentsFileAtom

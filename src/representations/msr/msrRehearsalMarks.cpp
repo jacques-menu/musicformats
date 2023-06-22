@@ -200,22 +200,43 @@ std::string msrRrehearsalKindAsString (
       result = "kNone";
       break;
     case msrRehearsalMarkKind::kRehearsalMarkRectangle:
-      result = "kRectangle";
+      result = "kRehearsalMarkRectangle";
+      break;
+    case msrRehearsalMarkKind::kRehearsalMarkSquare:
+      result = "kRehearsalMarkSquare";
       break;
     case msrRehearsalMarkKind::kRehearsalMarkOval:
-      result = "kOval";
+      result = "kRehearsalMarkOval";
       break;
     case msrRehearsalMarkKind::kRehearsalMarkCircle:
-      result = "kCircle";
+      result = "kRehearsalMarkCircle";
       break;
     case msrRehearsalMarkKind::kRehearsalMarkBracket:
-      result = "kBracket";
+      result = "kRehearsalMarkBracket";
       break;
     case msrRehearsalMarkKind::kRehearsalMarkTriangle:
-      result = "kTriangle";
+      result = "kRehearsalMarkTriangle";
       break;
     case msrRehearsalMarkKind::kRehearsalMarkDiamond:
-      result = "kDiamond";
+      result = "kRehearsalMarkDiamond";
+      break;
+    case msrRehearsalMarkKind::kRehearsalMarkPentagon:
+      result = "kRehearsalMarkPentagon";
+      break;
+    case msrRehearsalMarkKind::kRehearsalMarkHexagon:
+      result = "kRehearsalMarkHexagon";
+      break;
+    case msrRehearsalMarkKind::kRehearsalMarkHeptagon:
+      result = "kRehearsalMarkHeptagon";
+      break;
+    case msrRehearsalMarkKind::kRehearsalMarkOctagon:
+      result = "kRehearsalMarkOctagon";
+      break;
+    case msrRehearsalMarkKind::kRehearsalMarkNonagon:
+      result = "kRehearsalMarkNonagon";
+      break;
+    case msrRehearsalMarkKind::kRehearsalMarkDecagon:
+      result = "kRehearsalMarkDecagon";
       break;
   } // switch
 

@@ -5613,7 +5613,7 @@ void msr2mxsrTranslator:: populateNoteDirections (
 <!ELEMENT direction-type (rehearsalMark+ | segno+ | coda+ |
   (words | symbol)+ | wedge | dynamics+ | dashes |
   bracket | pedal | metronome | octave-shift | harp-pedals |
-  damp | damp-all | eyeglasses | std::string-mute |
+  damp | damp-all | eyeglasses | string-mute |
   scordatura | image | principal-voice | percussion+ |
   accordion-registration | staff-divide | other-direction)>
 <!ATTLIST direction-type

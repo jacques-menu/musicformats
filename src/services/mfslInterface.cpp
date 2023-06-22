@@ -389,7 +389,9 @@ EXP int mfsl (
   // do the conversion
   // ------------------------------------------------------
 
-  mfMusicformatsErrorKind err;
+  mfMusicformatsErrorKind
+    err =
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   try {
     if (inputSourceName == "-") {
@@ -474,7 +476,7 @@ EXP int mfsl (
 
   if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
     gLog <<
-      "### Conversion from MusicXML to LilyPond failed ###" <<
+      "### mfsl interpreter failed ###" <<
       std::endl;
 
     return 1;

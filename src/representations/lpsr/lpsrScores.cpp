@@ -444,7 +444,7 @@ R"(\markup {
     \tiny
     \column {
       \fill-line {
-        #(std::string-append
+        #(string-append
 )"
       <<
       "\"Music generated from MusicXML by " <<
@@ -1082,7 +1082,7 @@ tempoNotesRelationshipStaffReduce = #-3
 
 tempoNotesRelationship =
 #(define-music-function (parser location label parenthesized musicI musicII)
-   (std::string? boolean? ly:music? ly:music?)
+   (string? boolean? ly:music? ly:music?)
    (let* (
            (left-paren (if parenthesized "(" ""))
            (right-paren (if parenthesized ")" ""))
@@ -1391,19 +1391,19 @@ R"(
 
     schemeFunctionCode =
 R"(
-#(use-modules (ice-9 std::regex))
+#(use-modules (ice-9 regex))
 
 otherDynamic =
 #(define-event-function (parser location text) (markup?)
-   (if (std::string? text)
+   (if (string? text)
        (let* ((underscores-replaced
-               (std::string-map
+               (string-map
                 (lambda (x) (if (eq? x #\_) #\space x))
                 text))
-              (split-text (std::string-split underscores-replaced #\space))
+              (split-text (string-split underscores-replaced #\space))
               (formatted (map
                           (lambda (word)
-                            (if (std::string-match "^[mrzfps]*$" word)
+                            (if (string-match "^[mrzfps]*$" word)
                                 (markup #:dynamic word)
                                 (markup #:normal-text #:italic word)))
                           split-text)))
@@ -2501,7 +2501,7 @@ R"###(
 % Andrew Bernard and Thomas Morley
 
 TextSpannerWithCenteredText =
-#(define-music-function (text) (std::string?)
+#(define-music-function (text) (string?)
    "Use TextSpanner semantics to create spanner brackets with centred text"
    #{
      \once \override TextSpanner.after-line-breaking =
@@ -2796,8 +2796,8 @@ R"(
     schemeFunctionCode =
 R"(
 #(define comml           (object->std::string (command-line)))
-#(define loc             (+ (std::string-rindex comml #\space ) 2))
-#(define commllen        (- (std::string-length comml) 2))
+#(define loc             (+ (string-rindex comml #\space ) 2))
+#(define commllen        (- (string-length comml) 2))
 #(define filen           (substring comml loc commllen))
 #(define siz             (object->std::string (stat:size (stat filen))))
 #(define ver             (object->std::string (lilypond-version)))

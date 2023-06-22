@@ -222,10 +222,10 @@ void stringFilterInterpreterInsiderHandler::checkOptionsAndArguments () const
 #endif // MF_TRACE_IS_ENABLED
 
   if (MSDR_STANDARD_INPUT_NAME == std::string ("-")) {
-    checkSingleInputSourceInArgumentsVector ();
+    checkOneArgumentInArgumentsVector ();
   }
   else if (MSDR_STANDARD_INPUT_NAME == std::string ("")) {
-    checkNoOrOneInputSourceInArgumentsVector ();
+    checkOneArgumentAndNoOrOneInputSourceInArgumentsVector ();
   }
   else {
     oahInternalError (

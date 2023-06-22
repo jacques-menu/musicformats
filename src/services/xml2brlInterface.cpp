@@ -369,7 +369,9 @@ EXP int xml2brl (
   // do the conversion
   // ------------------------------------------------------
 
-  mfMusicformatsErrorKind err;
+  mfMusicformatsErrorKind
+    err =
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   try {
     if (inputSourceName == "-") {

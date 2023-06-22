@@ -53,19 +53,93 @@ std::ostream& operator<< (std::ostream& os, const S_stringFilterNode& elt)
 }
 
 //_______________________________________________________________________________
-S_stringFilterOr stringFilterOr::create (
+/* this class if purely virtual
+S_stringFilterMonadicOperator stringFilterMonadicOperator::create (
+  const S_stringFilterNode& operand)
+{
+  stringFilterMonadicOperator* obj =
+    new stringFilterMonadicOperator (
+      operand);
+  assert (obj != nullptr);
+  return obj;
+}
+*/
+
+stringFilterMonadicOperator::stringFilterMonadicOperator (
+  const S_stringFilterNode& operand)
+{
+  fOperand = operand;
+}
+
+stringFilterMonadicOperator::~stringFilterMonadicOperator ()
+{}
+
+// std::string stringFilterMonadicOperator::asString () const
+// {
+//   stringstream ss;
+//
+//   ss <<
+//     " ! " <<
+//     fOperand->asString ();
+//
+//   return ss.str ();
+// }
+//
+// std::string stringFilterMonadicOperator::asStringWithFullParentheses () const
+// {
+//   stringstream ss;
+//
+//   ss <<
+//     "( ! " <<
+//     fOperand->asStringWithFullParentheses () <<
+//     ')';
+//
+//   return ss.str ();
+// }
+//
+// void stringFilterMonadicOperator::print (std::ostream& os) const
+// {
+//   os <<
+//     "Not" <<
+//     endl;
+//
+//   ++gIndenter;
+//
+//   os <<
+//     fOperand <<
+//     std::endl;
+//
+//   --gIndenter;
+// }
+
+std::ostream& operator<< (std::ostream& os, const S_stringFilterMonadicOperator& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NULL ***" << endl;
+  }
+
+  return os;
+}
+
+//_______________________________________________________________________________
+/* this class if purely virtual
+S_stringFilterOr stringFilterDyadicOperator::create (
   const S_stringFilterNode& leftOperand,
   const S_stringFilterNode& rightOperand)
 {
-  stringFilterOr* obj =
-    new stringFilterOr (
+  stringFilterDyadicOperator* obj =
+    new stringFilterDyadicOperator (
       leftOperand,
       rightOperand);
   assert (obj != nullptr);
   return obj;
 }
+*/
 
-stringFilterOr::stringFilterOr (
+stringFilterDyadicOperator::stringFilterDyadicOperator (
   const S_stringFilterNode& leftOperand,
   const S_stringFilterNode& rightOperand)
 {
@@ -73,241 +147,63 @@ stringFilterOr::stringFilterOr (
   fRightOperand = rightOperand;
 }
 
-stringFilterOr::~stringFilterOr ()
+stringFilterDyadicOperator::~stringFilterDyadicOperator ()
 {}
 
-Bool stringFilterOr::stringMatches (const std::string& theString) const
-{
-  return
-    fLeftOperand->stringMatches (theString)
-      ||
-    fRightOperand->stringMatches (theString);
-}
+// Bool stringFilterDyadicOperator::stringMatches (const std::string& theString) const
+// {
+//   return
+//     fLeftOperand->stringMatches (theString)
+//       ||
+//     fRightOperand->stringMatches (theString);
+// }
 
-std::string stringFilterOr::asString () const
-{
-  stringstream ss;
+// std::string stringFilterDyadicOperator::asString () const
+// {
+//   stringstream ss;
+//
+//   ss <<
+//     fLeftOperand->asString () <<
+//     " | " <<
+//     fRightOperand->asString ();
+//
+//   return ss.str ();
+// }
 
-  ss <<
-    fLeftOperand->asString () <<
-    " | " <<
-    fRightOperand->asString ();
+// std::string stringFilterDyadicOperator::asStringWithFullParentheses () const
+// {
+//   stringstream ss;
+//
+//   ss <<
+//     '(' <<
+//     fLeftOperand->asStringWithFullParentheses () <<
+//     " | " <<
+//     fRightOperand->asStringWithFullParentheses () <<
+//     ')';
+//
+//   return ss.str ();
+// }
 
-  return ss.str ();
-}
-
-std::string stringFilterOr::asStringWithFullParentheses () const
-{
-  stringstream ss;
-
-  ss <<
-    '(' <<
-    fLeftOperand->asString () <<
-    " | " <<
-    fRightOperand->asString () <<
-    ')';
-
-  return ss.str ();
-}
-
-void stringFilterOr::print (std::ostream& os) const
-{
-  os <<
-    "Or" <<
-    endl;
-
-  ++gIndenter;
-
-  os <<
-    fLeftOperand <<
-    std::endl <<
-    "|" <<
-    std::endl <<
-    fLeftOperand <<
-    std::endl;
-
-  --gIndenter;
-}
+// void stringFilterDyadicOperator::print (std::ostream& os) const
+// {
+//   os <<
+//     "Or" <<
+//     endl;
+//
+//   ++gIndenter;
+//
+//   os <<
+//     fLeftOperand <<
+//     std::endl <<
+//     "|" <<
+//     std::endl <<
+//     fLeftOperand <<
+//     std::endl;
+//
+//   --gIndenter;
+// }
 
 std::ostream& operator<< (std::ostream& os, const S_stringFilterOr& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "*** NULL ***" << endl;
-  }
-
-  return os;
-}
-
-//_______________________________________________________________________________
-S_stringFilterXor stringFilterXor::create (
-  const S_stringFilterNode& leftOperand,
-  const S_stringFilterNode& rightOperand)
-{
-  stringFilterXor* obj =
-    new stringFilterXor (
-      leftOperand,
-      rightOperand);
-  assert (obj != nullptr);
-  return obj;
-}
-
-stringFilterXor::stringFilterXor (
-  const S_stringFilterNode& leftOperand,
-  const S_stringFilterNode& rightOperand)
-{
-  fLeftOperand = leftOperand;
-  fRightOperand = rightOperand;
-}
-
-stringFilterXor::~stringFilterXor ()
-{}
-
-Bool stringFilterXor::stringMatches (const std::string& theString) const
-{
-  return
-    fLeftOperand->stringMatches (theString)
-      ^
-    fRightOperand->stringMatches (theString);
-}
-
-std::string stringFilterXor::asString () const
-{
-  stringstream ss;
-
-  ss <<
-    fLeftOperand->asString () <<
-    " ^ " <<
-    fRightOperand->asString ();
-
-  return ss.str ();
-}
-
-std::string stringFilterXor::asStringWithFullParentheses () const
-{
-  stringstream ss;
-
-  ss <<
-    '(' <<
-    fLeftOperand->asString () <<
-    " ^ " <<
-    fRightOperand->asString () <<
-    ')';
-
-  return ss.str ();
-}
-
-void stringFilterXor::print (std::ostream& os) const
-{
-  os <<
-    "Xor" <<
-    endl;
-
-  ++gIndenter;
-
-  os <<
-    fLeftOperand <<
-    std::endl <<
-    "^" <<
-    std::endl <<
-    fLeftOperand <<
-    std::endl;
-
-  --gIndenter;
-}
-
-std::ostream& operator<< (std::ostream& os, const S_stringFilterXor& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "*** NULL ***" << endl;
-  }
-
-  return os;
-}
-
-//_______________________________________________________________________________
-S_stringFilterAnd stringFilterAnd::create (
-  const S_stringFilterNode& leftOperand,
-  const S_stringFilterNode& rightOperand)
-{
-  stringFilterAnd* obj =
-    new stringFilterAnd (
-      leftOperand,
-      rightOperand);
-  assert (obj != nullptr);
-  return obj;
-}
-
-stringFilterAnd::stringFilterAnd (
-  const S_stringFilterNode& leftOperand,
-  const S_stringFilterNode& rightOperand)
-{
-  fLeftOperand = leftOperand;
-  fRightOperand = rightOperand;
-}
-
-stringFilterAnd::~stringFilterAnd ()
-{}
-
-Bool stringFilterAnd::stringMatches (const std::string& theString) const
-{
-  return
-    fLeftOperand->stringMatches (theString)
-      &&
-    fRightOperand->stringMatches (theString);
-}
-
-std::string stringFilterAnd::asString () const
-{
-  stringstream ss;
-
-  ss <<
-    fLeftOperand->asString () <<
-    " & " <<
-    fRightOperand->asString ();
-
-  return ss.str ();
-}
-
-std::string stringFilterAnd::asStringWithFullParentheses () const
-{
-  stringstream ss;
-
-  ss <<
-    '(' <<
-    fLeftOperand->asString () <<
-    " & " <<
-    fRightOperand->asString () <<
-    ')';
-
-  return ss.str ();
-}
-
-void stringFilterAnd::print (std::ostream& os) const
-{
-  os <<
-    "And" <<
-    endl;
-
-  ++gIndenter;
-
-  os <<
-    fLeftOperand <<
-    std::endl <<
-    "|" <<
-    std::endl <<
-    fLeftOperand <<
-    std::endl;
-
-  --gIndenter;
-}
-
-std::ostream& operator<< (std::ostream& os, const S_stringFilterAnd& elt)
 {
   if (elt) {
     elt->print (os);
@@ -332,9 +228,9 @@ S_stringFilterNot stringFilterNot::create (
 
 stringFilterNot::stringFilterNot (
   const S_stringFilterNode& operand)
-{
-  fOperand = operand;
-}
+  : stringFilterMonadicOperator (
+      operand)
+{}
 
 stringFilterNot::~stringFilterNot ()
 {}
@@ -350,7 +246,7 @@ std::string stringFilterNot::asString () const
   stringstream ss;
 
   ss <<
-    " ! " <<
+    "! " <<
     fOperand->asString ();
 
   return ss.str ();
@@ -362,7 +258,7 @@ std::string stringFilterNot::asStringWithFullParentheses () const
 
   ss <<
     "( ! " <<
-    fOperand->asString () <<
+    fOperand->asStringWithFullParentheses () <<
     ')';
 
   return ss.str ();
@@ -395,106 +291,84 @@ std::ostream& operator<< (std::ostream& os, const S_stringFilterNot& elt)
   return os;
 }
 
-// //_______________________________________________________________________________
-// S_stringFilterExpression stringFilterExpression::create ()
-// {
-//   stringFilterExpression* obj =
-//     new stringFilterExpression ();
-//   assert (obj != nullptr);
-//   return obj;
-// }
-//
-// stringFilterExpression::stringFilterExpression ()
-// {}
-//
-// stringFilterExpression::~stringFilterExpression ()
-// {}
-//
-// Bool stringFilterExpression::stringMatches (const std::string& theString) const
-// {
-//   Bool result;
-//
-//   for (S_stringFilterTerm term : fORedTermsList) {
-//     if (term->stringMatches (theString)) {
-//       result = true;
-//       break;
-//     }
-//   } // for
-//
-//   return result;
-// }
-//
-// std::string stringFilterExpression::asString () const
-// {
-//   stringstream ss;
-//
-//   int theORedTermsListSize = fORedTermsList.size ();
-//   int counter = 0;
-//
-//   for (S_stringFilterTerm term : fORedTermsList) {
-//     counter++;
-//
-//     ss << term->asString ();
-//
-//     if (counter < theORedTermsListSize) {
-//       ss << " | ";
-//     }
-//   } // for
-//
-//   return ss.str ();
-// }
-//
-// std::string stringFilterExpression::asStringWithFullParentheses () const
-// {
-//   stringstream ss;
-//
-//   int theORedTermsListSize = fORedTermsList.size ();
-//   int counter = 0;
-//
-//   ss << '(';
-//
-//   for (S_stringFilterTerm term : fORedTermsList) {
-//     counter++;
-//
-//     ss << term->asStringWithFullParentheses ();
-//
-//     if (counter < theORedTermsListSize) {
-//       ss << " | ";
-//     }
-//   } // for
-//
-//   ss << ')';
-//
-//   return ss.str ();
-// }
-//
-// void stringFilterExpression::print (std::ostream& os) const
-// {
-//   os <<
-//     "Expression" <<
-//     endl;
-//
-//   int theORedFactorsListSize = fORedTermsList.size ();
-//   int counter = 0;
-//
-//   ++gIndenter;
-//
-//   for (S_stringFilterTerm term : fORedTermsList) {
-//     counter++;
-//
-//     os << term;
-//
-//     if (counter < theORedFactorsListSize) {
-//       os <<
-//         '|' <<
-//         std::endl;
-//     }
-//   } // for
-//
-//   --gIndenter;
-// }
-//
-// std::ostream& operator<< (std::ostream& os, const S_stringFilterExpression& elt)
+//_______________________________________________________________________________
+S_stringFilterOr stringFilterOr::create (
+  const S_stringFilterNode& leftOperand,
+  const S_stringFilterNode& rightOperand)
+{
+  stringFilterOr* obj =
+    new stringFilterOr (
+      leftOperand,
+      rightOperand);
+  assert (obj != nullptr);
+  return obj;
+}
+
+stringFilterOr::stringFilterOr (
+  const S_stringFilterNode& leftOperand,
+  const S_stringFilterNode& rightOperand)
+  : stringFilterDyadicOperator (
+      leftOperand,
+      rightOperand)
+{}
+
+stringFilterOr::~stringFilterOr ()
+{}
+
+Bool stringFilterOr::stringMatches (const std::string& theString) const
+{
+  return
+    fLeftOperand->stringMatches (theString)
+      ||
+    fRightOperand->stringMatches (theString);
+}
+
+std::string stringFilterOr::asString () const
+{
+  stringstream ss;
+
+  ss <<
+    fLeftOperand->asString () <<
+    " | " <<
+    fRightOperand->asString ();
+
+  return ss.str ();
+}
+
+std::string stringFilterOr::asStringWithFullParentheses () const
+{
+  stringstream ss;
+
+  ss <<
+    '(' <<
+    fLeftOperand->asStringWithFullParentheses () <<
+    " | " <<
+    fRightOperand->asStringWithFullParentheses () <<
+    ')';
+
+  return ss.str ();
+}
+
+void stringFilterOr::print (std::ostream& os) const
+{
+  os <<
+    "Or" <<
+    endl;
+
+  ++gIndenter;
+
+  os <<
+    fLeftOperand <<
+    std::endl <<
+    "|" <<
+    std::endl <<
+    fLeftOperand <<
+    std::endl;
+
+  --gIndenter;
+}
+
+// std::ostream& operator<< (std::ostream& os, const S_stringFilterOr& elt)
 // {
 //   if (elt) {
 //     elt->print (os);
@@ -505,107 +379,85 @@ std::ostream& operator<< (std::ostream& os, const S_stringFilterNot& elt)
 //
 //   return os;
 // }
-//
-// //_______________________________________________________________________________
-// S_stringFilterTerm stringFilterTerm::create ()
-// {
-//   stringFilterTerm* obj =
-//     new stringFilterTerm ();
-//   assert (obj != nullptr);
-//   return obj;
-// }
-//
-// stringFilterTerm::stringFilterTerm ()
-// {}
-//
-// stringFilterTerm::~stringFilterTerm ()
-// {}
-//
-// Bool stringFilterTerm::stringMatches (const std::string& theString) const
-// {
-//   Bool result;
-//
-//   for (S_stringFilterFactor factor : fANDedFactorsList) {
-//     if (factor->stringMatches (theString)) {
-//       result = true;
-//       break;
-//     }
-//   } // for
-//
-//   return result;
-// }
-//
-// std::string stringFilterTerm::asString () const
-// {
-//   stringstream ss;
-//
-//   int theANDedFactorsListSize = fANDedFactorsList.size ();
-//   int counter = 0;
-//
-//   for (S_stringFilterFactor factor : fANDedFactorsList) {
-//     counter++;
-//
-//     ss << factor->asString ();
-//
-//     if (counter < theANDedFactorsListSize) {
-//       ss << " & ";
-//     }
-//   } // for
-//
-//   return ss.str ();
-// }
-//
-// std::string stringFilterTerm::asStringWithFullParentheses () const
-// {
-//   stringstream ss;
-//
-//   int theANDedFactorsListSize = fANDedFactorsList.size ();
-//   int counter = 0;
-//
-//   ss << '(';
-//
-//   for (S_stringFilterFactor factor : fANDedFactorsList) {
-//     counter++;
-//
-//     ss << factor->asStringWithFullParentheses ();
-//
-//     if (counter < theANDedFactorsListSize) {
-//       ss << " & ";
-//     }
-//   } // for
-//
-//   ss << ')';
-//
-//   return ss.str ();
-// }
-//
-// void stringFilterTerm::print (std::ostream& os) const
-// {
-//   os <<
-//     "Term" <<
-//     endl;
-//
-//   int theAndedFactorsListSize = fANDedFactorsList.size ();
-//   int counter = 0;
-//
-//   ++gIndenter;
-//
-//   for (S_stringFilterFactor factor : fANDedFactorsList) {
-//     counter++;
-//
-//     os << factor;
-//
-//     if (counter < theAndedFactorsListSize) {
-//       os <<
-//         '&' <<
-//         std::endl;
-//     }
-//   } // for
-//
-//   --gIndenter;
-// }
-//
-// std::ostream& operator<< (std::ostream& os, const S_stringFilterTerm& elt)
+
+//_______________________________________________________________________________
+S_stringFilterXor stringFilterXor::create (
+  const S_stringFilterNode& leftOperand,
+  const S_stringFilterNode& rightOperand)
+{
+  stringFilterXor* obj =
+    new stringFilterXor (
+      leftOperand,
+      rightOperand);
+  assert (obj != nullptr);
+  return obj;
+}
+
+stringFilterXor::stringFilterXor (
+  const S_stringFilterNode& leftOperand,
+  const S_stringFilterNode& rightOperand)
+  : stringFilterDyadicOperator (
+      leftOperand,
+      rightOperand)
+{}
+
+stringFilterXor::~stringFilterXor ()
+{}
+
+Bool stringFilterXor::stringMatches (const std::string& theString) const
+{
+  return
+    fLeftOperand->stringMatches (theString)
+      ^
+    fRightOperand->stringMatches (theString);
+}
+
+std::string stringFilterXor::asString () const
+{
+  stringstream ss;
+
+  ss <<
+    fLeftOperand->asString () <<
+    " ^ " <<
+    fRightOperand->asString ();
+
+  return ss.str ();
+}
+
+std::string stringFilterXor::asStringWithFullParentheses () const
+{
+  stringstream ss;
+
+  ss <<
+    '(' <<
+    fLeftOperand->asStringWithFullParentheses () <<
+    " ^ " <<
+    fRightOperand->asStringWithFullParentheses () <<
+    ')';
+
+  return ss.str ();
+}
+
+void stringFilterXor::print (std::ostream& os) const
+{
+  os <<
+    "Xor" <<
+    endl;
+
+  ++gIndenter;
+
+  os <<
+    fLeftOperand <<
+    std::endl <<
+    "^" <<
+    std::endl <<
+    fLeftOperand <<
+    std::endl;
+
+  --gIndenter;
+}
+
+// std::ostream& operator<< (std::ostream& os, const S_stringFilterXor& elt)
 // {
 //   if (elt) {
 //     elt->print (os);
@@ -616,15 +468,85 @@ std::ostream& operator<< (std::ostream& os, const S_stringFilterNot& elt)
 //
 //   return os;
 // }
-//
-// //_______________________________________________________________________________
-// stringFilterFactor::stringFilterFactor ()
-// {}
-//
-// stringFilterFactor::~stringFilterFactor ()
-// {}
-//
-// EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterFactor& elt)
+
+//_______________________________________________________________________________
+S_stringFilterAnd stringFilterAnd::create (
+  const S_stringFilterNode& leftOperand,
+  const S_stringFilterNode& rightOperand)
+{
+  stringFilterAnd* obj =
+    new stringFilterAnd (
+      leftOperand,
+      rightOperand);
+  assert (obj != nullptr);
+  return obj;
+}
+
+stringFilterAnd::stringFilterAnd (
+  const S_stringFilterNode& leftOperand,
+  const S_stringFilterNode& rightOperand)
+  : stringFilterDyadicOperator (
+      leftOperand,
+      rightOperand)
+{}
+
+stringFilterAnd::~stringFilterAnd ()
+{}
+
+Bool stringFilterAnd::stringMatches (const std::string& theString) const
+{
+  return
+    fLeftOperand->stringMatches (theString)
+      &&
+    fRightOperand->stringMatches (theString);
+}
+
+std::string stringFilterAnd::asString () const
+{
+  stringstream ss;
+
+  ss <<
+    fLeftOperand->asString () <<
+    " & " <<
+    fRightOperand->asString ();
+
+  return ss.str ();
+}
+
+std::string stringFilterAnd::asStringWithFullParentheses () const
+{
+  stringstream ss;
+
+  ss <<
+    '(' <<
+    fLeftOperand->asStringWithFullParentheses () <<
+    " & " <<
+    fRightOperand->asStringWithFullParentheses () <<
+    ')';
+
+  return ss.str ();
+}
+
+void stringFilterAnd::print (std::ostream& os) const
+{
+  os <<
+    "And" <<
+    endl;
+
+  ++gIndenter;
+
+  os <<
+    fLeftOperand <<
+    std::endl <<
+    "|" <<
+    std::endl <<
+    fLeftOperand <<
+    std::endl;
+
+  --gIndenter;
+}
+
+// std::ostream& operator<< (std::ostream& os, const S_stringFilterAnd& elt)
 // {
 //   if (elt) {
 //     elt->print (os);
@@ -781,7 +703,7 @@ std::string stringFilterString::asStringWithFullParentheses () const
 void stringFilterString::print (std::ostream& os) const
 {
   os <<
-    "SimpleFactor:" <<
+    "stringFilterString:" <<
     std::endl;
 
   ++gIndenter;
@@ -791,76 +713,7 @@ void stringFilterString::print (std::ostream& os) const
   --gIndenter;
 }
 
-std::ostream& operator<< (std::ostream& os, const S_stringFilterString& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "*** NULL ***" << endl;
-  }
-
-  return os;
-}
-
-// //_______________________________________________________________________________
-// S_stringFilterSubExpression stringFilterSubExpression::create (
-//   S_stringFilterExpression expression)
-// {
-//   stringFilterSubExpression* obj =
-//     new stringFilterSubExpression (
-//       expression);
-//   assert (obj != nullptr);
-//   return obj;
-// }
-//
-// stringFilterSubExpression::stringFilterSubExpression (
-//   S_stringFilterExpression expression)
-// {
-//   fExpression = expression;
-// }
-//
-// stringFilterSubExpression::~stringFilterSubExpression ()
-// {}
-//
-// Bool stringFilterSubExpression::stringMatches (const std::string& theString) const
-// {
-//   return
-//     fExpression->
-//       stringMatches (theString);
-// }
-//
-// std::string stringFilterSubExpression::asString () const
-// {
-//   stringstream ss;
-//
-//   ss <<
-//     '(' <<
-//     fExpression->asString () <<
-//     ')';
-//
-//   return ss.str ();
-// }
-//
-// std::string stringFilterSubExpression::asStringWithFullParentheses () const
-// {
-//   return asString ();
-// }
-//
-// void stringFilterSubExpression::print (std::ostream& os) const
-// {
-//   os <<
-//     "SubExpression:" <<
-//     std::endl;
-//
-//   ++gIndenter;
-//   os <<
-//     fExpression <<
-//     std::endl;
-//   --gIndenter;
-// }
-//
-// std::ostream& operator<< (std::ostream& os, const S_stringFilterSubExpression& elt)
+// std::ostream& operator<< (std::ostream& os, const S_stringFilterString& elt)
 // {
 //   if (elt) {
 //     elt->print (os);
@@ -875,86 +728,50 @@ std::ostream& operator<< (std::ostream& os, const S_stringFilterString& elt)
 //______________________________________________________________________________
 void testFilter (std::ostream& os)
 {
-//   S_stringFilterNode
-//     theExpression =
-//       stringFilterAnd::create ();
-//
-//   {
-//     S_stringFilterNode
-//       term =
-//         stringFilterNode::create ();
-//
-//     {
-//       S_stringFilterNode
-//         simpleFactor =
-//           stringFilterString::create (
-//             "xml");
-//
-//     }
-//
-//     {
-//       S_stringFilterNode
-//         simpleFactor =
-//           stringFilterString::create (
-//             "lilypond");
-//
-//     }
-//
-//   }
-//
-//   {
-//     S_stringFilterNode
-//       term =
-//         stringFilterNode::create ();
-//
-//     {
-//       S_stringFilterNode
-//         simpleFactor =
-//           stringFilterString::create (
-//             "ignore");
-//
-//     }
-//
-//     {
-//       S_stringFilterNode
-//         simpleFactor =
-//           stringFilterString::create (
-//             "msr");
-//
-//     }
-//
-//   }
-//
-//   os <<
-//     "theExpression:" <<
-//     std::endl;
-//
-//   ++gIndenter;
-//   os <<
-//     theExpression <<
-//     std::endl;
-//   --gIndenter;
-//
-//   os <<
-//     "as string:" <<
-//     std::endl;
-//
-//   ++gIndenter;
-//   os <<
-//     theExpression->asString () <<
-//     std::endl <<
-//     std::endl;
-//   --gIndenter;
-//
-//   os <<
-//     "as string with full parentheses:" <<
-//     std::endl;
-//
-//   ++gIndenter;
-//   os <<
-//     theExpression->asStringWithFullParentheses () <<
-//     std::endl;
-//   --gIndenter;
+  S_stringFilterNode
+    theExpression =
+
+      stringFilterAnd::create (
+
+        stringFilterString::create (
+          "xml"),
+
+        stringFilterNot::create (
+          stringFilterString::create (
+            "lilypond")
+          )
+        );
+
+  os <<
+    "theExpression:" <<
+    std::endl;
+
+  ++gIndenter;
+  os <<
+    theExpression <<
+    std::endl;
+  --gIndenter;
+
+  os <<
+    "as string:" <<
+    std::endl;
+
+  ++gIndenter;
+  os <<
+    theExpression->asString () <<
+    std::endl <<
+    std::endl;
+  --gIndenter;
+
+  os <<
+    "as string with full parentheses:" <<
+    std::endl;
+
+  ++gIndenter;
+  os <<
+    theExpression->asStringWithFullParentheses () <<
+    std::endl;
+  --gIndenter;
 }
 
 // //______________________________________________________________________________

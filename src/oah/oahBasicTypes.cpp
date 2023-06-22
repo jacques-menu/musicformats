@@ -5572,7 +5572,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
     std::stringstream ss;
 
     ss <<
-      "Checking no input source in argument vector in \"" <<
+      "Checking that there is no input source in argument vector in \"" <<
       fHandlerHeader <<
       "\"";
 
@@ -5665,7 +5665,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
     std::stringstream ss;
 
     ss <<
-      "Checking no or one input source in argument vector in \"" <<
+      "Checking that there is  no or one input source in argument vector in \"" <<
       fHandlerHeader <<
       "\"";
 
@@ -5744,11 +5744,11 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
         std::stringstream ss;
 
         ss <<
-          "Several input file names supplied to " <<
+          "Several input file names are supplied to " <<
           fHandlerServiceName <<
           ", only the first one, \"" <<
           argumentsVector [0] <<
-          "\", will be converted "; //JMI
+          "\", will be used "; //JMI
 
         std::string message = ss.str ();
 
@@ -5785,7 +5785,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
     std::stringstream ss;
 
     ss <<
-      "Checking single input source in argument vector in \"" <<
+      "Checking that there is  single input source in argument vector in \"" <<
       fHandlerHeader <<
       "\"";
 
@@ -5868,7 +5868,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
         std::stringstream ss;
 
         ss <<
-          "Several input file names supplied to " <<
+          "Several input file names are supplied to " <<
           fHandlerServiceName <<
           ", only one can be used";
 
@@ -5887,6 +5887,161 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
       }
       break;
   } //  switch
+}
+
+void oahHandler::checkOneArgumentInArgumentsVector () const
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Checking that there is  one argument in argument vector in \"" <<
+      fHandlerHeader <<
+      "\"";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // JMI v0.9.70
+}
+
+void oahHandler::checkOneArgumentAndNoOrOneInputSourceInArgumentsVector () const
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Checking that there is  no or one input source in argument vector in \"" <<
+      fHandlerHeader <<
+      "\"";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  const std::vector<std::string>&
+    argumentsVector =
+      fOptionsAndArguments.getArgumentsVector ();
+
+  size_t argumentsNumber =
+    argumentsVector.size ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (
+    gEarlyOptions.getTraceEarlyOptions  ()
+      &&
+    ! gEarlyOptions.getEarlyQuietOption ()
+  ) {
+    if (argumentsNumber > 0) {
+      gLog <<
+        mfSingularOrPluralWithoutNumber (
+          argumentsNumber, "There is", "There are") <<
+        ' ' <<
+        argumentsNumber <<
+        ' ' <<
+        mfSingularOrPluralWithoutNumber (
+          argumentsNumber, "argument", "arguments") <<
+        " in handler arguments vector for " <<
+        fHandlerServiceName <<
+        ":" <<
+        std::endl;
+
+      ++gIndenter;
+
+      for (size_t i = 0; i < argumentsNumber; ++i) {
+        gLog <<
+          i << " : FUU " << argumentsVector [i] <<
+            std::endl;
+      } // for
+
+      gLog << std::endl;
+
+      --gIndenter;
+    }
+    else {
+      gLog <<
+        "There are no arguments to " <<
+        fHandlerServiceName <<
+        std::endl;
+    }
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // get input source name
+  // ------------------------------------------------------
+
+  switch (argumentsNumber) {
+    case 1:
+      // fine, use standard input
+      gServiceRunData->setInputSourceName (
+        "-");
+      break;
+
+    case 2:
+      // register intput file name
+      gServiceRunData->setInputSourceName (
+        argumentsVector [1]);
+      break;
+
+    default:
+      {
+        std::stringstream ss;
+
+        ss <<
+          "Several input file names are supplied to " <<
+          fHandlerServiceName <<
+          ", only the first one, \"" <<
+          argumentsVector [0] <<
+          "\", will be used ";
+
+        std::string message = ss.str ();
+
+        for (size_t i = 1; i < argumentsNumber; ++i) {
+          gLog <<
+            argumentsVector [i];
+
+          if (i == argumentsNumber - 1) {
+            gLog << " and ";
+          }
+          else {
+            gLog << ", ";
+          }
+        } // for
+
+        gLog <<
+          message <<
+          " ignored" <<
+          std::endl << std::endl;
+
+        // register intput file name
+        gServiceRunData->setInputSourceName (
+          argumentsVector [0]);
+      }
+      break;
+  } //  switch
+
+  // get stringfilter expression
+  std::string stringFilterExpression = argumentsVector [0];
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (
+    gEarlyOptions.getTraceEarlyOptions  ()
+      &&
+    ! gEarlyOptions.getEarlyQuietOption ()
+  ) {
+    gLog <<
+      "The stringFilterExpression is " <<
+      stringFilterExpression <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void oahHandler::setOahHandlerFoundAHelpOption (

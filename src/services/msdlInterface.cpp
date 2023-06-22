@@ -390,7 +390,9 @@ EXP int msdl (
   // do the conversion
   // ------------------------------------------------------
 
-  mfMusicformatsErrorKind err;
+  mfMusicformatsErrorKind
+    err =
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   try {
     if (inputSourceName == "-") {
@@ -475,7 +477,7 @@ EXP int msdl (
 
   if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
     gLog <<
-      "### Conversion from MusicXML to LilyPond failed ###" <<
+      "### msdl interpreter failed ###" <<
       std::endl;
 
     return 1;

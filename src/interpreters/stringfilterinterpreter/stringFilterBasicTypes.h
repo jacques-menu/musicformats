@@ -95,7 +95,180 @@ typedef SMARTP<stringFilterNode> S_stringFilterNode;
 EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterNode& elt);
 
 //______________________________________________________________________________
-class EXP stringFilterOr : public stringFilterNode
+class EXP stringFilterMonadicOperator : public stringFilterNode
+{
+/* this class is purely virtual
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<stringFilterMonadicOperator> create (
+                            const S_stringFilterNode&  operand);
+*/
+
+//   protected:
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          stringFilterMonadicOperator (
+                            const S_stringFilterNode&  operand);
+
+    virtual               ~stringFilterMonadicOperator ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+//     Bool                  stringMatches (
+//                             const std::string& theString) const override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+//     std::string           asString () const override;
+//     std::string           asStringWithFullParentheses () const override;
+//
+//     void                  print (std::ostream& os) const override;
+
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    S_stringFilterNode    fOperand;
+};
+typedef SMARTP<stringFilterMonadicOperator> S_stringFilterMonadicOperator;
+EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterMonadicOperator& elt);
+
+//______________________________________________________________________________
+class EXP stringFilterDyadicOperator : public stringFilterNode
+{
+/* this class is purely virtual
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<stringFilterDyadicOperator> create (
+                            const S_stringFilterNode& leftOperand,
+                            const S_stringFilterNode& rightOperand);
+*/
+
+//   protected:
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          stringFilterDyadicOperator (
+                            const S_stringFilterNode& leftOperand,
+                            const S_stringFilterNode& rightOperand);
+
+    virtual               ~stringFilterDyadicOperator ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+//     Bool                  stringMatches (
+//                             const std::string& theString) const override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+//     std::string           asString () const override;;
+//     std::string           asStringWithFullParentheses () const override;
+
+//     void                  print (std::ostream& os) const override;
+
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    S_stringFilterNode    fLeftOperand;
+    S_stringFilterNode    fRightOperand;
+};
+typedef SMARTP<stringFilterDyadicOperator> S_stringFilterDyadicOperator;
+EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterDyadicOperator& elt);
+
+//______________________________________________________________________________
+class EXP stringFilterNot : public stringFilterMonadicOperator
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<stringFilterNot> create (
+                            const S_stringFilterNode&  operand);
+
+//   protected:
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          stringFilterNot (
+                            const S_stringFilterNode&  operand);
+
+    virtual               ~stringFilterNot ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    Bool                  stringMatches (
+                            const std::string& theString) const override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const override;
+    std::string           asStringWithFullParentheses () const override;
+
+    void                  print (std::ostream& os) const override;
+
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+};
+typedef SMARTP<stringFilterNot> S_stringFilterNot;
+EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterNot& elt);
+
+//______________________________________________________________________________
+class EXP stringFilterOr : public stringFilterDyadicOperator
 {
   public:
 
@@ -146,15 +319,12 @@ class EXP stringFilterOr : public stringFilterNode
 
     // private fields
     // ------------------------------------------------------
-
-    S_stringFilterNode    fLeftOperand;
-    S_stringFilterNode    fRightOperand;
 };
 typedef SMARTP<stringFilterOr> S_stringFilterOr;
 EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterOr& elt);
 
 //______________________________________________________________________________
-class EXP stringFilterXor : public stringFilterNode
+class EXP stringFilterXor : public stringFilterDyadicOperator
 {
   public:
 
@@ -205,15 +375,12 @@ class EXP stringFilterXor : public stringFilterNode
 
     // private fields
     // ------------------------------------------------------
-
-    S_stringFilterNode    fLeftOperand;
-    S_stringFilterNode    fRightOperand;
 };
 typedef SMARTP<stringFilterXor> S_stringFilterXor;
 EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterXor& elt);
 
 //______________________________________________________________________________
-class EXP stringFilterAnd : public stringFilterNode
+class EXP stringFilterAnd : public stringFilterDyadicOperator
 {
   public:
 
@@ -264,225 +431,9 @@ class EXP stringFilterAnd : public stringFilterNode
 
     // private fields
     // ------------------------------------------------------
-
-    S_stringFilterNode    fLeftOperand;
-    S_stringFilterNode    fRightOperand;
 };
 typedef SMARTP<stringFilterAnd> S_stringFilterAnd;
 EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterAnd& elt);
-
-//______________________________________________________________________________
-class EXP stringFilterNot : public stringFilterNode
-{
-  public:
-
-    // creation
-    // ------------------------------------------------------
-
-    static SMARTP<stringFilterNot> create (
-                            const S_stringFilterNode&  operand);
-
-//   protected:
-  public:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          stringFilterNot (
-                            const S_stringFilterNode&  operand);
-
-    virtual               ~stringFilterNot ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-    Bool                  stringMatches (
-                            const std::string& theString) const override;
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    std::string           asString () const override;
-    std::string           asStringWithFullParentheses () const override;
-
-    void                  print (std::ostream& os) const override;
-
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    S_stringFilterNode    fOperand;
-};
-typedef SMARTP<stringFilterNot> S_stringFilterNot;
-EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterNot& elt);
-
-// //______________________________________________________________________________
-// class EXP stringFilterExpression : public stringFilterNode
-// {
-//   public:
-//
-//     // creation
-//     // ------------------------------------------------------
-//
-//     static SMARTP<stringFilterExpression> create ();
-//
-// //   protected:
-//   public:
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           stringFilterExpression ();
-//
-//     virtual               ~stringFilterExpression ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//   public:
-//
-//     // public services
-//     // ------------------------------------------------------
-//
-//     Bool                  stringMatches (
-//                             const std::string& theString) const override;
-//
-//   public:
-//
-//     // print
-//     // ------------------------------------------------------
-//
-//     std::string           asString () const override;
-//     std::string           asStringWithFullParentheses () const override;
-//
-//     void                  print (std::ostream& os) const override;
-//
-//
-//   private:
-//
-//     // private fields
-//     // ------------------------------------------------------
-// };
-// typedef SMARTP<stringFilterExpression> S_stringFilterExpression;
-// EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterExpression& elt);
-
-// //______________________________________________________________________________
-// class EXP stringFilterTerm : public stringFilterNode
-// {
-//   public:
-//
-//     // creation
-//     // ------------------------------------------------------
-//
-//     static SMARTP<stringFilterTerm> create ();
-//
-//   protected:
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           stringFilterTerm ();
-//
-//     virtual               ~stringFilterTerm ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//   public:
-//
-//     // public services
-//     // ------------------------------------------------------
-//
-//     Bool                  stringMatches (
-//                             const std::string& theString) const override;
-//
-//   public:
-//
-//     // print
-//     // ------------------------------------------------------
-//
-//     std::string           asString () const override;
-//     std::string           asStringWithFullParentheses () const override;
-//
-//     void                  print (std::ostream& os) const override;
-//
-//
-//   private:
-//
-//     // private fields
-//     // ------------------------------------------------------
-// };
-// typedef SMARTP<stringFilterTerm> S_stringFilterTerm;
-// EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterTerm& elt);
-
-//______________________________________________________________________________
-/*
-  purely virtual base class for stringFilterString and stringFilterSubExpression
-*/
-// class EXP stringFilterFactor : public stringFilterNode
-// {
-//   public:
-//
-//     // creation
-//     // ------------------------------------------------------
-//
-// //     static SMARTP<stringFilterFactor> create ();
-//
-//   protected:
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           stringFilterFactor ();
-//
-//     virtual               ~stringFilterFactor ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//   public:
-//
-//     // public services
-//     // ------------------------------------------------------
-//
-//     virtual Bool          stringMatches (
-//                             const std::string& theString) const override;
-//
-//   public:
-//
-//     // print
-//     // ------------------------------------------------------
-//
-//     virtual std::string   asString () const override;
-//     virtual std::string   asStringWithFullParentheses () const override;
-//
-//     virtual void          print (std::ostream& os) const override;
-//
-//
-//   private:
-//
-//     // private fields
-//     // ------------------------------------------------------
-// };
-// typedef SMARTP<stringFilterFactor> S_stringFilterFactor;
-// EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterFactor& elt);
 
 //______________________________________________________________________________
 class EXP stringFilterString : public stringFilterNode

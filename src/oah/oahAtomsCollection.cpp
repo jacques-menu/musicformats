@@ -13277,6 +13277,305 @@ std::ostream& operator << (std::ostream& os, const S_oahFindStringAtom& elt)
 }
 
 //______________________________________________________________________________
+S_oahFilterStringAtom oahFilterStringAtom::create (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& serviceName)
+{
+  oahFilterStringAtom* obj = new
+    oahFilterStringAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      serviceName);
+  assert (obj != nullptr);
+  return obj;
+}
+
+oahFilterStringAtom::oahFilterStringAtom (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& serviceName)
+  : oahPureHelpValueFittedAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      serviceName)
+{
+  this->setMultipleOccurrencesAllowed ();
+}
+
+oahFilterStringAtom::~oahFilterStringAtom ()
+{}
+
+void oahFilterStringAtom::applyAtomWithValue (
+  const std::string& theString,
+  std::ostream&      os)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahFilterStringAtom";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // a strings list to collect the results
+  std::list<S_oahFindStringMatch> foundMatchesList; // JMI v0.9.70
+
+  // delegate this to the handler // JMI v0.9.70
+  fetchAtomUpLinkToHandler ()->
+    findStringInFindableElement (
+      mfStringToLowerCase (theString),
+      foundMatchesList,
+      os);
+
+  //  print the found strings
+  size_t foundMatchesListSize =
+    foundMatchesList.size ();
+
+  int saveIndent = gIndenter.getIndentation ();
+
+  gIndenter.resetToZero ();
+
+  os <<
+    mfSingularOrPlural (
+      foundMatchesListSize, "occurrence", "occurrences") <<
+    " of string \"" <<
+    theString <<
+    "\" " <<
+    mfSingularOrPluralWithoutNumber (
+      foundMatchesListSize, "has", "have") <<
+    " been found";
+
+  if (foundMatchesListSize) {
+    os <<
+      ":" <<
+      std::endl;
+
+    ++gIndenter;
+
+    std::list<S_oahFindStringMatch>::const_iterator // JMI v0.9.70
+      iBegin = foundMatchesList.begin (),
+      iEnd   = foundMatchesList.end (),
+      i      = iBegin;
+
+    int counter = 0;
+
+    for ( ; ; ) {
+      oahFindStringMatch* theFilterStringMatch = (*i); // JMI v0.9.70
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check
+      mfAssert (
+        __FILE__, __LINE__,
+        theFilterStringMatch != nullptr,
+        "theFilterStringMatch is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+      std::string
+        elementName =
+          theFilterStringMatch->
+            getElementName (),
+        foundString =
+          theFilterStringMatch->
+            getFoundString (),
+        containingFilterableElementInfo =
+          theFilterStringMatch->
+            getContainingFindableElementInfo ();
+
+      ++counter;
+
+      os << std::right <<
+        std::setw (2) << counter << ": " << containingFilterableElementInfo <<
+        std::endl;
+
+      ++gIndenter;
+
+      os << elementName << std::endl;
+
+      // indent a bit more for readability
+      gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
+
+      gIndenter.indentMultiLineString (
+        foundString,
+        os);
+
+      // unindent a bit more for readability
+      gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+      --gIndenter;
+
+      if (++i == iEnd) break;
+
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << std::endl;
+  }
+
+  gIndenter.setIndentation (saveIndent);
+}
+
+void oahFilterStringAtom::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahFilterStringAtom::acceptIn ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahFilterStringAtom>*
+    p =
+      dynamic_cast<visitor<S_oahFilterStringAtom>*> (v)) {
+        S_oahFilterStringAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahFilterStringAtom::visitStart ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitStart (elem);
+  }
+}
+
+void oahFilterStringAtom::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahFilterStringAtom::acceptOut ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahFilterStringAtom>*
+    p =
+      dynamic_cast<visitor<S_oahFilterStringAtom>*> (v)) {
+        S_oahFilterStringAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahFilterStringAtom::visitEnd ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitEnd (elem);
+  }
+}
+
+void oahFilterStringAtom::browseData (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahFilterStringAtom::browseData ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+std::string oahFilterStringAtom::asShortNamedOptionString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    '-' << fShortName;
+
+  return ss.str ();
+}
+
+std::string oahFilterStringAtom::asActualLongNamedOptionString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    '-' << fLongName;
+
+  return ss.str ();
+}
+
+void oahFilterStringAtom::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "FilterStringAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  printOahElementEssentials (
+    gLog, fieldWidth);
+
+  --gIndenter;
+}
+
+void oahFilterStringAtom::displayAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  // nothing to print here
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahFilterStringAtom& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahIncludeOptionsAndArgumentsFileAtom oahIncludeOptionsAndArgumentsFileAtom::create (
   const std::string& longName,
   const std::string& shortName,

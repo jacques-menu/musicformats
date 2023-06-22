@@ -233,6 +233,7 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("name-help", subGroup);
   registerAtomInRegularSubgroup ("query", subGroup);
   registerAtomInRegularSubgroup ("find", subGroup);
+  registerAtomInRegularSubgroup ("filter", subGroup);
   registerAtomInRegularSubgroup (K_INCLUDE_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup ("reverse-names-display-order", subGroup);
@@ -343,17 +344,17 @@ void xml2lyRegularHandler::createInformationsRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("about", subGroup);
-  
+
   registerAtomInRegularSubgroup ("version", subGroup);
   registerAtomInRegularSubgroup ("version-full", subGroup);
-  
+
   registerAtomInRegularSubgroup ("history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("contact", subGroup);
-  
+
   registerAtomInRegularSubgroup ("music-formats-test", subGroup);
 }
 
@@ -1308,7 +1309,7 @@ void xml2lyRegularHandler::createStringsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("roman-std::string-numbers", subGroup);
+  registerAtomInRegularSubgroup ("roman-string-numbers", subGroup);
   registerAtomInRegularSubgroup ("avoid-open-strings", subGroup);
 }
 

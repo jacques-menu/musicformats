@@ -3976,7 +3976,7 @@ This is handy when the MusicXML data contains beam in vocal voices)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "roman-std::string-numbers", "rsn",
+        "roman-string-numbers", "rsn",
 R"(Generate '\romanStringNumbers' in each voice
 for LilyPond to generate roman instead of arabic string numbers.)",
         "fRomanStringNumbers",

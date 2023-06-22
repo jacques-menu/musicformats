@@ -382,7 +382,9 @@ EXP int xml2gmn (
   // do the conversion
   // ------------------------------------------------------
 
-  mfMusicformatsErrorKind err;
+  mfMusicformatsErrorKind
+    err =
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   try {
     if (inputSourceName == "-") {

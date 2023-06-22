@@ -342,6 +342,7 @@ void xml2xmlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("name-help", subGroup);
   registerAtomInRegularSubgroup ("query", subGroup);
   registerAtomInRegularSubgroup ("find", subGroup);
+  registerAtomInRegularSubgroup ("filter", subGroup);
   registerAtomInRegularSubgroup (K_INCLUDE_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup ("reverse-names-display-order", subGroup);

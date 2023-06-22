@@ -15,6 +15,8 @@
   place any include you need here...
 */
 
+// #include <regex>
+
 #include "stringFilterBasicTypes.h"
 
 

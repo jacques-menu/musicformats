@@ -25,12 +25,20 @@ namespace MusicFormats
 
 enum class msrRehearsalMarkKind {
   kRehearsalMarkNone,
+
   kRehearsalMarkRectangle,
+  kRehearsalMarkSquare,
   kRehearsalMarkOval,
   kRehearsalMarkCircle,
   kRehearsalMarkBracket,
   kRehearsalMarkTriangle,
-  kRehearsalMarkDiamond
+  kRehearsalMarkDiamond,
+  kRehearsalMarkPentagon,
+  kRehearsalMarkHexagon,
+  kRehearsalMarkHeptagon,
+  kRehearsalMarkOctagon,
+  kRehearsalMarkNonagon,
+  kRehearsalMarkDecagon
 };
 
 std::string msrRrehearsalKindAsString (

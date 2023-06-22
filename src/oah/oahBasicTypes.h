@@ -1834,6 +1834,10 @@ class EXP oahHandler : public oahFindableElement
 
     void                  checkSingleInputSourceInArgumentsVector () const;
 
+    void                  checkOneArgumentInArgumentsVector () const;
+
+    void                  checkOneArgumentAndNoOrOneInputSourceInArgumentsVector () const;
+
   private:
 
     // private services

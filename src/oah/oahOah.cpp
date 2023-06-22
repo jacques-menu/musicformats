@@ -1140,6 +1140,20 @@ The search is case insensitive, and a '-' is added in front of options name for 
     appendAtomToSubGroup (
       fFindStringAtom);
 
+  // filter string
+
+  fFilterStringAtom =
+    oahFilterStringAtom::create (
+      "filter", "filt",
+R"(Filter the help with string.
+The search is case insensitive, and a '-' is added in front of options name for clarity.)",
+      "STRING",
+      serviceName);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fFilterStringAtom);
+
   // include options file
 
   fIncludeOptionsAndArgumentsFileAtom =

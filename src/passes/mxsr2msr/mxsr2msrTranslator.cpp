@@ -4797,7 +4797,7 @@ void mxsr2msrTranslator::visitStart (S_direction_type& elt)
 <!ELEMENT direction-type (rehearsalMark+ | segno+ | coda+ |
   (words | symbol)+ | wedge | dynamics+ | dashes |
   bracket | pedal | metronome | octave-shift | harp-pedals |
-  damp | damp-all | eyeglasses | std::string-mute |
+  damp | damp-all | eyeglasses | string-mute |
   scordatura | image | principal-voice | percussion+ |
   accordion-registration | staff-divide | other-direction)>
 <!ATTLIST direction-type
@@ -28299,6 +28299,9 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
   else if (rehearsalEnclosure == "rectangle") {
     rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkRectangle;
   }
+  else if (rehearsalEnclosure == "square") {
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkSquare;
+  }
   else if (rehearsalEnclosure == "oval") {
     rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkOval;
   }
@@ -28314,13 +28317,31 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
   else if (rehearsalEnclosure == "diamond") {
     rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkDiamond;
   }
+  else if (rehearsalEnclosure == "pentagon") {
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkPentagon;
+  }
+  else if (rehearsalEnclosure == "hexagon") {
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkHexagon;
+  }
+  else if (rehearsalEnclosure == "heptagon") {
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkHeptagon;
+  }
+  else if (rehearsalEnclosure == "octagon") {
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkOctagon;
+  }
+  else if (rehearsalEnclosure == "nonagon") {
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkNonagon;
+  }
+  else if (rehearsalEnclosure == "decagon") {
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkDecagon;
+  }
   else {
     if (rehearsalEnclosure.size ()) {
       std::stringstream ss;
 
       ss <<
         "rehearsalMark enclosure \"" << rehearsalEnclosure <<
-        "\"" << " is not handled, ignored";
+        "\"" << " is unknown, ignored";
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),

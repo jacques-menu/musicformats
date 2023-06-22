@@ -14,7 +14,7 @@
 
 #include <list>
 #include <map>
-#include "set"
+#include <set>
 
 #include "mfRational.h"
 
@@ -3856,6 +3856,84 @@ class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
 };
 typedef SMARTP<oahFindStringAtom> S_oahFindStringAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahFindStringAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahFilterStringAtom : public oahPureHelpValueFittedAtom
+{
+/*
+  This is where OAH is introspective too
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahFilterStringAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& serviceName);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahFilterStringAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& serviceName);
+
+    virtual               ~oahFilterStringAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const std::string& theString,
+                            std::ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+    virtual void          displayAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+};
+typedef SMARTP<oahFilterStringAtom> S_oahFilterStringAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahFilterStringAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahIncludeOptionsAndArgumentsFileAtom : public oahValueFittedAtom

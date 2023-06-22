@@ -389,7 +389,9 @@ EXP int ischeme (
   // do the conversion
   // ------------------------------------------------------
 
-  mfMusicformatsErrorKind err;
+  mfMusicformatsErrorKind
+    err =
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
 
   try {
     if (inputSourceName == "-") {
@@ -474,7 +476,7 @@ EXP int ischeme (
 
   if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
     gLog <<
-      "### Conversion from MusicXML to LilyPond failed ###" <<
+      "### iScheme interpreter failed ###" <<
       std::endl;
 
     return 1;
