@@ -152,15 +152,15 @@ class EXP msrBook : public msrElement
     int                   getBookNumberOfMeasures () const
                               { return fBookNumberOfMeasures; }
 
-    void                  setStaffContainsMultipleFullBarRests (
-                            Bool staffContainsMultipleFullBarRests)
+    void                  setStaffContainsMultiMeasureRests (
+                            Bool staffContainsMultiMeasureRests)
                               {
-                                fStaffContainsMultipleFullBarRests =
-                                  staffContainsMultipleFullBarRests;
+                                fStaffContainsMultiMeasureRests =
+                                  staffContainsMultiMeasureRests;
                               }
 
-    Bool                  getStaffContainsMultipleFullBarRests () const
-                              { return fStaffContainsMultipleFullBarRests; }
+    Bool                  getStaffContainsMultiMeasureRests () const
+                              { return fStaffContainsMultiMeasureRests; }
 
     // book element names max length
     void                  setBookElementNamesMaxLength (int value)
@@ -238,15 +238,15 @@ class EXP msrBook : public msrElement
                                   fInhibitMeasureRepeatReplicasBrowsing;
                               };
 
-    void                  setInhibitMultipleFullBarRestsBrowsing ()
+    void                  setInhibitMultiMeasureRestsBrowsing ()
                               {
-                                fInhibitMultipleFullBarRestsBrowsing = true;
+                                fInhibitMultiMeasureRestsBrowsing = true;
                               }
 
-    Bool                  getInhibitMultipleFullBarRestsBrowsing () const
+    Bool                  getInhibitMultiMeasureRestsBrowsing () const
                               {
                                 return
-                                  fInhibitMultipleFullBarRestsBrowsing;
+                                  fInhibitMultiMeasureRestsBrowsing;
                               };
 
     // voices
@@ -338,9 +338,9 @@ class EXP msrBook : public msrElement
 
     int                   fBookNumberOfMeasures;
 
-    // multiple full-bar rests
+    // multi-measure rests
 
-    Bool                  fStaffContainsMultipleFullBarRests;
+    Bool                  fStaffContainsMultiMeasureRests;
 
     // book element names max length
 
@@ -367,9 +367,9 @@ class EXP msrBook : public msrElement
     // whereas LilyPond only needs the repeated measure
     Bool                  fInhibitMeasureRepeatReplicasBrowsing;
 
-    // in <multiple-rest/>, the multiple full-bar rests are explicit,
-    // whereas LilyPond only needs the number of multiple full-bar rests
-    Bool                  fInhibitMultipleFullBarRestsBrowsing;
+    // in <multiple-rest/>, the multi-measure rests are explicit,
+    // whereas LilyPond only needs the number of multi-measure rests
+    Bool                  fInhibitMultiMeasureRestsBrowsing;
 
     // voices
 

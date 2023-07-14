@@ -96,7 +96,7 @@
 #include "msrRepeats.h"
 #include "msrRepeatCodas.h"
 
-#include "msrMultipleFullBarRests.h"
+#include "msrMultiMeasureRests.h"
 #include "msrMeasureRepeats.h"
 #include "msrBeatRepeats.h"
 #include "msrSlashes.h"

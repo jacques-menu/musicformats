@@ -1070,8 +1070,8 @@ class EXP msrNote : public msrTupletElement
     // multiple rest member?
     // ------------------------------------------------------
 
-    Bool                  fNoteBelongsToAMultipleFullBarRests; // JMI
-    int                   fNoteMultipleFullBarRestsSequenceNumber; // JMI
+    Bool                  fNoteBelongsToAMultiMeasureRests; // JMI
+    int                   fNoteMultiMeasureRestsSequenceNumber; // JMI
 
     // note lyrics
     // ------------------------------------------------------

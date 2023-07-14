@@ -1292,10 +1292,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
                           getAccidentalStyleKind () const
                               { return fAccidentalStyleKind; }
 
-    void                  setCompressFullBarRestsInLilypond ()
-                              { fCompressFullBarRestsInLilypond = true; }
-    Bool                  getCompressFullBarRestsInLilypond () const
-                              { return fCompressFullBarRestsInLilypond; }
+    void                  setCompressMeasureRestsInLilypond ()
+                              { fCompressMeasureRestsInLilypond = true; }
+    Bool                  getCompressMeasureRestsInLilypond () const
+                              { return fCompressMeasureRestsInLilypond; }
 
     void                  setMergeStaffCommonRests ()
                               { fMergeStaffCommonRests = true; }
@@ -1437,16 +1437,16 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahColorRGBAtom     getLedgerLinesColorRGBAtom () const
                               { return fLedgerLinesColorRGBAtom; }
 
-    // multiple full-bar rests
+    // multi-measure rests
     // --------------------------------------
 
-    void                  setMultipleFullBarRestsExpandLimit ()
-                              { fMultipleFullBarRestsExpandLimit = true; }
+    void                  setMultiMeasureRestsExpandLimit ()
+                              { fMultiMeasureRestsExpandLimit = true; }
 
-    Bool                  getMultipleFullBarRestsExpandLimit () const
-                              { return fMultipleFullBarRestsExpandLimit; }
-    S_oahIntegerAtom      getMultipleFullBarRestsExpandLimitAtom () const
-                              { return fMultipleFullBarRestsExpandLimitAtom; }
+    Bool                  getMultiMeasureRestsExpandLimit () const
+                              { return fMultiMeasureRestsExpandLimit; }
+    S_oahIntegerAtom      getMultiMeasureRestsExpandLimitAtom () const
+                              { return fMultiMeasureRestsExpandLimitAtom; }
 
     // chords
     // --------------------------------------
@@ -1955,11 +1955,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahColorRGBAtom     fLedgerLinesColorRGBAtom;
 
 
-    // multiple full-bar rests
+    // multi-measure rests
     // --------------------------------------
 
-    int                   fMultipleFullBarRestsExpandLimit;
-    S_oahIntegerAtom      fMultipleFullBarRestsExpandLimitAtom;
+    int                   fMultiMeasureRestsExpandLimit;
+    S_oahIntegerAtom      fMultiMeasureRestsExpandLimitAtom;
 
     // notes
     // --------------------------------------
@@ -1990,7 +1990,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     lpsrAccidentalStyleKind
                           fAccidentalStyleKind;
 
-    Bool                  fCompressFullBarRestsInLilypond;
+    Bool                  fCompressMeasureRestsInLilypond;
 
     Bool                  fMergeStaffCommonRests;
 

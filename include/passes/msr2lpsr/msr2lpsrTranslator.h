@@ -28,7 +28,7 @@
 #include "msrHarmonies.h"
 #include "msrIdentification.h"
 #include "msrLyrics.h"
-#include "msrMultipleFullBarRests.h"
+#include "msrMultiMeasureRests.h"
 #include "msrNotes.h"
 #include "msrParts.h"
 #include "msrPartGroups.h"
@@ -288,7 +288,7 @@ class EXP msr2lpsrTranslator :
   public visitor<S_msrMeasureRepeatPattern>,
   public visitor<S_msrMeasureRepeatReplicas>,
 
-  public visitor<S_msrMultipleFullBarRests>,
+  public visitor<S_msrMultiMeasureRest>,
 
   // midi
 
@@ -536,9 +536,9 @@ class EXP msr2lpsrTranslator :
     virtual void          visitStart (S_msrMeasureRepeatReplicas& elt);
     virtual void          visitEnd   (S_msrMeasureRepeatReplicas& elt);
 
-    // multiple full-bar rests
-    virtual void          visitStart (S_msrMultipleFullBarRests& elt);
-    virtual void          visitEnd   (S_msrMultipleFullBarRests& elt);
+    // multi-measure rests
+    virtual void          visitStart (S_msrMultiMeasureRest& elt);
+    virtual void          visitEnd   (S_msrMultiMeasureRest& elt);
 
     // scaling
     virtual void          visitStart (S_msrScaling& elt);
@@ -716,11 +716,11 @@ class EXP msr2lpsrTranslator :
     std::string               fCurrentMeasureNumber;
     S_msrMeasure              fCurrentMeasureClone;
 
-    // multiple full-bar rests compression
+    // multi-measure rests compression
 //     S_msrMeasure              fCurrentRestMeasure;
 
-    S_msrMultipleFullBarRests fCurrentMultipleFullBarRestsClone;
-    Bool                      fOnGoingMultipleFullBarRests;
+    S_msrMultiMeasureRest fCurrentMultiMeasureRestsClone;
+    Bool                      fOnGoingMultiMeasureRests;
 
     // bar checks
     // ------------------------------------------------------

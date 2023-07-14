@@ -429,10 +429,6 @@ class EXP mxsr2msrSkeletonBuilder :
   // ------------------------------------------------------
 
   public visitor<S_lyric>,
-  public visitor<S_syllabic>,
-  public visitor<S_text>,
-  public visitor<S_elision>,
-  public visitor<S_extend>,
 
   // harmonies
   // ------------------------------------------------------

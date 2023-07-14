@@ -137,4 +137,11 @@ EXP std::ostream& operator << (std::ostream& os, const SMARTP<mfStack<ELEMENT_TY
 }
 
 
+// //________________________________________________________________________
+// using namespace std;
+//
+// template <typename ELEMENT_TYPE>
+// pair<int, MusicFormats::mfStack<ELEMENT_TYPE> >::~pair<int, MusicFormats::mfStack<ELEMENT_TYPE> > () {};
+
+
 #endif // ___mfStack___

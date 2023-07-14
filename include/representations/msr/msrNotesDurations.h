@@ -230,7 +230,7 @@ std::string wholeNotesAsMsrString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes);
 
-std::string multipleFullBarRestsWholeNotesAsMsrString (
+std::string multiMeasureRestsWholeNotesAsMsrString (
   int                  inputLineNumber, // JMI v0.9.67
   const msrWholeNotes& wholeNotes);
 

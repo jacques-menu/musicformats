@@ -205,12 +205,12 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   // should we return now?
   // ------------------------------------------------------
 
-  if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass2b ()) {
+  if (gGlobalMsdl2lyInsiderOahGroup->getQuitAfterPass2 ()) {
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
-      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2));
 #endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;

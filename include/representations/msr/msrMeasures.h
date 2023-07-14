@@ -180,11 +180,11 @@ class EXP msrMeasure : public msrSegmentElement
     // single-measure rest?
 
 
-    void                  setMeasureIsAFullBarRest ()
-                              { fMeasureIsAFullBarRest = true; }
+    void                  setMeasureIsAMeasureRest ()
+                              { fMeasureIsAMeasureRest = true; }
 
-    Bool                  getMeasureIsAFullBarRest () const
-                             { return fMeasureIsAFullBarRest; }
+    Bool                  getMeasureIsAMeasureRest () const
+                             { return fMeasureIsAMeasureRest; }
 
 /* JMI
     // measure shortest note
@@ -749,9 +749,9 @@ class EXP msrMeasure : public msrSegmentElement
     msrMeasureFirstInSegmentKind
                           fMeasureFirstInSegmentKind;
 
-    // multiple full-bar rest?
+    // multi-measure rest?
 
-    Bool                  fMeasureIsAFullBarRest;
+    Bool                  fMeasureIsAMeasureRest;
 
     // chords handling
 

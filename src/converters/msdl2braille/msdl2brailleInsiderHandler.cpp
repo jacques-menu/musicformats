@@ -553,7 +553,7 @@ R"()",
   // quit after pass 1
 
   S_oahBooleanAtom
-    quit2aOahBooleanAtom =
+    quit1OahBooleanAtom =
       oahBooleanAtom::create (
         "quit-after-pass-1", "qap1",
 R"(Quit after pass 1, i.e. after creation of the first MSR.)",

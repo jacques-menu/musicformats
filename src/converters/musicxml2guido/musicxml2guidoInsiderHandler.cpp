@@ -120,16 +120,16 @@ std::string xml2gmnInsiderHandler::handlerServiceAboutInformation () const
 R"(What xml2gmn does:
 
     This multi-pass converter basically performs 6 passes:
-        Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
-                 and converts it to a first MusicXML tree;
-        Pass 2a: converts that MusicXML tree into
-                 a first Music Score Representation (MSR) skeleton;
-        Pass 2b: populates the MSR skeleton from the MusicXML tree
-                 to get a full MSR;
-        Pass 3:  converts the first MSR a second MSR, to apply options;
-        Pass 4:  converts the second MSR into a second MusicXML tree;
-        Pass 5:  converts the second MusicXML tree to Guido code
-                 and writes it to standard output.
+        Pass 1: reads the contents of MusicXMLFile or stdin ('-')
+                and converts it to a first MusicXML tree;
+        Pass 2: converts that MusicXML tree into
+                a first Music Score Representation (MSR) skeleton;
+        Pass 3: populates the MSR skeleton from the MusicXML tree
+                to get a full MSR;
+        Pass 4: converts the first MSR a second MSR, to apply options;
+        Pass 5: converts the second MSR into a second MusicXML tree;
+        Pass 6: converts the second MusicXML tree to Guido code
+                and writes it to standard output.
 
     Other passes are performed according to the options, such as
     displaying views of the internal data or printing a summary of the score.
@@ -704,38 +704,38 @@ R"()",
   S_oahBooleanAtom
     quit2aOahBooleanAtom =
       oahBooleanAtom::create (
-        "quit-after-pass-2a", "qap2a",
-R"(Quit after pass 2a, i.e. after conversion
+        "quit-after-pass-2", "qap2",
+R"(Quit after pass 2, i.e. after conversion
 of the MusicXML tree to an MSR skeleton.)",
-        "fQuitAfterPass2a",
-        fQuitAfterPass2a);
+        "fQuitAfterPass2",
+        fQuitAfterPass2);
 
   subGroup->
     appendAtomToSubGroup (
       quit2aOahBooleanAtom);
 
-  // quit after pass 2b
+  // quit after pass 3
 
   S_oahBooleanAtom
     quit2bOahBooleanAtom =
       oahBooleanAtom::create (
-        "quit-after-pass-2b", "qap2b",
-R"(Quit after pass 2b, i.e. after conversion
+        "quit-after-pass-3", "qap3",
+R"(Quit after pass 3, i.e. after conversion
 of the MusicXML tree to MSR.)",
-        "fQuitAfterPass2b",
-        fQuitAfterPass2b);
+        "fQuitAfterPass3",
+        fQuitAfterPass3);
 
   subGroup->
     appendAtomToSubGroup (
       quit2bOahBooleanAtom);
 
-  // quit after pass 3
+  // quit after pass 4
 
   S_oahBooleanAtom
     quit3OahBooleanAtom =
       oahBooleanAtom::create (
-        "quit-after-pass-3", "qap3",
-R"(Quit after pass 3, i.e. after conversion
+        "quit-after-pass-4", "qap4",
+R"(Quit after pass 4, i.e. after conversion
 of the first MSR to the second one.)",
         "fQuitAfterPass3",
         fQuitAfterPass3);
@@ -788,11 +788,11 @@ void xml2gmnInsiderOahGroup::printXml2gmnInsiderOahGroupValues (int fieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
-    fQuitAfterPass2a <<
+    std::setw (fieldWidth) << "fQuitAfterPass2" << ": " <<
+    fQuitAfterPass2 <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2b" << ": " <<
-    fQuitAfterPass2b <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
+    fQuitAfterPass3 <<
     std::endl <<
     std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
     fQuitAfterPass3 <<

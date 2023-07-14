@@ -662,14 +662,8 @@ EXP void initializeServices ()
     xml2lyService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2a,
+          mfPassIDKind::kMfPassID_2,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
-
-    xml2lyService->
-      appendPassToService (
-        mfPass::create (
-          mfPassIDKind::kMfPassID_2b,
-          gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2lyService->
       appendPassToService (
@@ -687,6 +681,12 @@ EXP void initializeServices ()
       appendPassToService (
         mfPass::create (
           mfPassIDKind::kMfPassID_5,
+          gLanguage->convertTheLPSRIntoLilyPondCode ()));
+
+    xml2lyService->
+      appendPassToService (
+        mfPass::create (
+          mfPassIDKind::kMfPassID_6,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
     pGlobalServicesMap [mfServiceKind::kMfService_xml2ly] = xml2lyService;
@@ -763,31 +763,31 @@ EXP void initializeServices ()
     xml2brlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2a,
+          mfPassIDKind::kMfPassID_2,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2brlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2b,
+          mfPassIDKind::kMfPassID_3,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2brlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_3,
+          mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     xml2brlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_4,
+          mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     xml2brlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_5,
+          mfPassIDKind::kMfPassID_6,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
     pGlobalServicesMap [mfServiceKind::kMfService_xml2brl] = xml2brlService;
@@ -823,31 +823,31 @@ EXP void initializeServices ()
     xml2xmlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2a,
+          mfPassIDKind::kMfPassID_2,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2xmlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2b,
+          mfPassIDKind::kMfPassID_3,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2xmlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_3,
+          mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     xml2xmlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_4,
+          mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     xml2xmlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_5,
+          mfPassIDKind::kMfPassID_6,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
     pGlobalServicesMap [mfServiceKind::kMfService_xml2xml] = xml2xmlService;
@@ -883,31 +883,31 @@ EXP void initializeServices ()
     xml2gmnService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2a,
+          mfPassIDKind::kMfPassID_2,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     xml2gmnService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2b,
+          mfPassIDKind::kMfPassID_3,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     xml2gmnService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_3,
+          mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     xml2gmnService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_4,
+          mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     xml2gmnService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_5,
+          mfPassIDKind::kMfPassID_6,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
     pGlobalServicesMap [mfServiceKind::kMfService_xml2gmn] = xml2gmnService;
@@ -942,31 +942,31 @@ EXP void initializeServices ()
     filterService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2a,
+          mfPassIDKind::kMfPassID_2,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     filterService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2b,
+          mfPassIDKind::kMfPassID_3,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     filterService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_3,
+          mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     filterService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_4,
+          mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     filterService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_5,
+          mfPassIDKind::kMfPassID_6,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
     pGlobalServicesMap [mfServiceKind::kMfService_stringfilter] = filterService;
@@ -1001,31 +1001,31 @@ EXP void initializeServices ()
     msdlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2a,
+          mfPassIDKind::kMfPassID_2,
           gLanguage->convertTheMXSRIntoAnMSRSkeleton ()));
 
     msdlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_2b,
+          mfPassIDKind::kMfPassID_3,
           gLanguage->populateTheMSRSkeletonFromMusicXMLData ()));
 
     msdlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_3,
+          mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheFirstMSRIntoASecondMSR ()));
 
     msdlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_4,
+          mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheSecondMSRIntoAnLPSR ()));
 
     msdlService->
       appendPassToService (
         mfPass::create (
-          mfPassIDKind::kMfPassID_5,
+          mfPassIDKind::kMfPassID_6,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
     pGlobalServicesMap [mfServiceKind::kMfService_msdl] = msdlService;

@@ -58,8 +58,7 @@
     <lyric-language name="verse" xml:lang="ja"/>
   </defaults>
   <credit page="1">
-    <credit-words default-x="607" default-y="1443" font-family="ＭＳ ゴシック" font-size="24" font-weight="bold" justify="center" valign="top" xml:lang="ja">Absent Extend Type</movement-title>
-  <identification></credit-words>
+    <credit-words default-x="607" default-y="1443" font-family="ＭＳ ゴシック" font-size="24" font-weight="bold" justify="center" valign="top" xml:lang="ja">Absent Extend Type</credit-words>
   </credit>
   <credit page="1">
     <credit-words default-x="1124" default-y="1345" font-size="12" font-weight="bold" justify="right" valign="top">Arr. Y. Nagai , K. Kobatake</credit-words>

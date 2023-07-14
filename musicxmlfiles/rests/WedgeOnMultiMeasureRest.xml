@@ -446,7 +446,7 @@
         <stem>down</stem>
         </note>
       </measure>
-    <measure number="14" width="152.16">
+    <!--measure number="14" width="152.16">
       <note default-x="12.00" default-y="-20.00">
         <pitch>
           <step>B</step>
@@ -624,6 +624,6 @@
       <barline location="right">
         <bar-style>light-heavy</bar-style>
         </barline>
-      </measure>
+      </measure-->
     </part>
   </score-partwise>

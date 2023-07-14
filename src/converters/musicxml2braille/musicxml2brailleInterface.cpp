@@ -123,7 +123,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
 
   S_msrScore firstMsrScore;
 
-  // create the MSR skeleton from the MXSR (pass 2a)
+  // create the MSR skeleton from the MXSR (pass 2)
   // ------------------------------------------------------
 
   try {
@@ -131,7 +131,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
       translateMxsrToMsrSkeleton (
         theMxsr,
         gMsrOahGroup,
-        mfPassIDKind::kMfPassID_2a,
+        mfPassIDKind::kMfPassID_2,
         gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
   }
   catch (mxsr2msrException& e) {
@@ -146,63 +146,26 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   // should we return now?
   // ------------------------------------------------------
 
-  if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass2a ()) {
+  if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass2 ()) {
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
-      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2));
 #endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
-  // populate the MSR skeleton from MusicXML data (pass 2b)
+  // populate the MSR skeleton from MusicXML data (pass 3)
   // ------------------------------------------------------
 
   try {
     populateMsrSkeletonFromMxsr (
       theMxsr,
       firstMsrScore,
-        mfPassIDKind::kMfPassID_2b,
-        gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
-  }
-  catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutput);
-    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-  }
-  catch (std::exception& e) {
-    mfDisplayException (e, gOutput);
-    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-  }
-
-  // should we return now?
-  // ------------------------------------------------------
-
-  if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass2b ()) {
-#ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStreamWithoutInputLocation (
-      err,
-      __FILE__, __LINE__,
-      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
-#endif // MF_TRACE_IS_ENABLED
-
-    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
-  }
-
-  // convert the first MSR score into a second MSR (pass 3)
-  // ------------------------------------------------------
-
-  S_msrScore secondMsrScore;
-
-  try {
-    secondMsrScore =
-      translateMsrToMsr (
-        firstMsrScore,
-        gMsrOahGroup,
-        gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_3,
-        gLanguage->convertTheFirstMSRIntoASecondMSR ());
+        gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -227,13 +190,50 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
+  // convert the first MSR score into a second MSR (pass 4)
+  // ------------------------------------------------------
+
+  S_msrScore secondMsrScore;
+
+  try {
+    secondMsrScore =
+      translateMsrToMsr (
+        firstMsrScore,
+        gMsrOahGroup,
+        gGlobalMsr2msrOahGroup,
+        mfPassIDKind::kMfPassID_4,
+        gLanguage->convertTheFirstMSRIntoASecondMSR ());
+  }
+  catch (mxsr2msrException& e) {
+    mfDisplayException (e, gOutput);
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+  }
+  catch (std::exception& e) {
+    mfDisplayException (e, gOutput);
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+  }
+
+  // should we return now?
+  // ------------------------------------------------------
+
+  if (gGlobalXml2brlInsiderOahGroup->getQuitAfterPass4 ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
+      err,
+      __FILE__, __LINE__,
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
+#endif // MF_TRACE_IS_ENABLED
+
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
+  }
+
   // the first BSR score
   // ------------------------------------------------------
 
   S_bsrScore firstBsrScore;
 
   {
-    // create the first BSR from the MSR (pass 4a)
+    // create the first BSR from the MSR (pass 5)
     // ------------------------------------------------------
 
     try {
@@ -242,7 +242,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
           secondMsrScore,
           gMsrOahGroup,
           gBsrOahGroup,
-          mfPassIDKind::kMfPassID_4a,
+          mfPassIDKind::kMfPassID_5,
           "Create a first BSR from the MSR");
     }
     catch (msr2bsrException& e) {
@@ -278,7 +278,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   S_bsrScore finalizedBsrScore;
 
   {
-    // create the finalized BSR from the first BSR (pass 4b)
+    // create the finalized BSR from the first BSR (pass 6)
     // ------------------------------------------------------
 
     try {
@@ -286,7 +286,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         translateBsrToFinalizedBsr (
           firstBsrScore,
           gBsrOahGroup,
-          mfPassIDKind::kMfPassID_4b,
+          mfPassIDKind::kMfPassID_6,
           "Create the finalized BSR from the first BSR");
     }
     catch (bsr2finalizedBsrException& e) {
@@ -319,7 +319,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   }
 
   {
-    // convert the BSR to Braille text (pass 5)
+    // convert the BSR to Braille text (pass 7)
     // ------------------------------------------------------
 
     std::string
@@ -359,7 +359,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gBsrOahGroup,
-          mfPassIDKind::kMfPassID_5,
+          mfPassIDKind::kMfPassID_7,
           "Convert the finalized BSR into braille",
           out);
       }

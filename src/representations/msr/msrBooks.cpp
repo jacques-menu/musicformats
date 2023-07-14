@@ -78,8 +78,8 @@ msrBook::msrBook (
   // measure repeats replicas should be browsed by default
   fInhibitMeasureRepeatReplicasBrowsing = false;
 
-  // multiple full-bar rests should be browsed by default
-  fInhibitMultipleFullBarRestsBrowsing = false;
+  // multi-measure rests should be browsed by default
+  fInhibitMultiMeasureRestsBrowsing = false;
 }
 
 msrBook::~msrBook ()
@@ -138,8 +138,8 @@ S_msrBook msrBook::createBookNewbornClone ()
   newbornClone->fInhibitMeasureRepeatReplicasBrowsing =
     fInhibitMeasureRepeatReplicasBrowsing;
 
-  newbornClone->fInhibitMultipleFullBarRestsBrowsing =
-    fInhibitMultipleFullBarRestsBrowsing;
+  newbornClone->fInhibitMultiMeasureRestsBrowsing =
+    fInhibitMultiMeasureRestsBrowsing;
 
   return newbornClone;
 }
@@ -609,8 +609,8 @@ void msrBook::printFull (std::ostream& os) const
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMultipleFullBarRestsBrowsing" <<  ": " <<
-    fInhibitMultipleFullBarRestsBrowsing <<
+    "fInhibitMultiMeasureRestsBrowsing" <<  ": " <<
+    fInhibitMultiMeasureRestsBrowsing <<
     std::endl<<
     std::endl;
 
@@ -803,8 +803,8 @@ void msrBook::print (std::ostream& os) const
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMultipleFullBarRestsBrowsing" <<  ": " <<
-    fInhibitMultipleFullBarRestsBrowsing <<
+    "fInhibitMultiMeasureRestsBrowsing" <<  ": " <<
+    fInhibitMultiMeasureRestsBrowsing <<
     std::endl<<
     std::endl;
 
@@ -989,8 +989,8 @@ void msrBook::printSummary (std::ostream& os) const
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMultipleFullBarRestsBrowsing" <<  ": " <<
-    fInhibitMultipleFullBarRestsBrowsing <<
+    "fInhibitMultiMeasureRestsBrowsing" <<  ": " <<
+    fInhibitMultiMeasureRestsBrowsing <<
     std::endl<<
     std::endl;
 

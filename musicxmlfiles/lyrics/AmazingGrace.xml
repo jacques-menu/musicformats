@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
+  <movement-title>Amazing Grace</movement-title>
   <identification>
     <encoding>
       <software>MuseScore 2.1.0</software>
@@ -131,7 +132,7 @@
           </lyric>
         <lyric number="3">
           <syllabic>single</syllabic>
-          <text font-family="FreeSerif" font-size="11">3. Throug</text>
+          <text font-family="FreeSerif" font-size="11">3. Through</text>
           <extend/>
           </lyric>
         <lyric number="4">
@@ -1914,7 +1915,7 @@
           </lyric>
         <lyric number="7">
           <syllabic>begin</syllabic>
-          <text font-family="FreeSerif" font-size="11">vor</text>
+          <text font-family="FreeSerif" font-size="11">for</text>
           </lyric>
         <lyric number="8">
           <syllabic>single</syllabic>

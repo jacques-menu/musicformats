@@ -118,15 +118,15 @@ std::string msdl2guidoInsiderHandler::handlerServiceAboutInformation () const
 R"(What msdl2guido does:
 
     This multi-pass converter basically performs 6 passes:
-        Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
-                 and converts it to a first MusicXML tree;
-        Pass 2a: converts that MusicXML tree into
-                 a Music Score Representation (MSR) skeleton;
+        Pass 1: reads the contents of MusicXMLFile or stdin ('-')
+                and converts it to a first MusicXML tree;
+        Pass 2: converts that MusicXML tree into
+                a Music Score Representation (MSR) skeleton;
         Pass 2b: populates the MSR skeleton from the MusicXML tree
-                 to get a full MSR;
-        Pass 3:  converts the MSR into a second MSR, to apply options;
-        Pass 4:  converts the second MSR into a second MusicXML tree;
-        Pass 5:  converts the second MusicXML tree to Guido code
+                to get a full MSR;
+        Pass 3: converts the MSR into a second MSR, to apply options;
+        Pass 4: converts the second MSR into a second MusicXML tree;
+        Pass 5: converts the second MusicXML tree to Guido code
                  and writes it to standard output.
 
     Other passes are performed according to the options, such as
@@ -546,7 +546,7 @@ R"()",
   // quit after pass 1
 
   S_oahBooleanAtom
-    quit2aOahBooleanAtom =
+    quit1OahBooleanAtom =
       oahBooleanAtom::create (
         "quit-after-pass-1", "qap1",
 R"(Quit after pass 1, i.e. after conversion
@@ -556,7 +556,7 @@ of the MusicXML tree to an MSR skeleton.)",
 
   subGroup->
     appendAtomToSubGroup (
-      quit2aOahBooleanAtom);
+      quit1OahBooleanAtom);
 }
 
 //______________________________________________________________________________

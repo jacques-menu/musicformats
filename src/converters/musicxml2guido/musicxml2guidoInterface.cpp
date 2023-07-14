@@ -117,7 +117,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
 
   S_msrScore firstMsrScore;
 
-  // create the skeleton of the first MSR from the originalMxsr (pass 2a)
+  // create the skeleton of the first MSR from the originalMxsr (pass 2)
   // ------------------------------------------------------
 
   try {
@@ -125,7 +125,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       translateMxsrToMsrSkeleton (
         originalMxsr,
         gMsrOahGroup,
-        mfPassIDKind::kMfPassID_2a,
+        mfPassIDKind::kMfPassID_2,
         "Create the skeleton of the first MSR from the originalMxsr");
   }
   catch (mxsr2msrException& e) {
@@ -140,64 +140,27 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // should we return now?
   // ------------------------------------------------------
 
-  if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2a ()) {
+  if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2 ()) {
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
-      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2));
 #endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
 
-  // populate the MSR skeleton from MusicXML data (pass 2b)
+  // populate the MSR skeleton from MusicXML data (pass 3)
   // ------------------------------------------------------
 
   try {
     populateMsrSkeletonFromMxsr (
       originalMxsr,
       firstMsrScore,
-        mfPassIDKind::kMfPassID_2b,
-        gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
-  }
-  catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutput);
-    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-  }
-  catch (std::exception& e) {
-    mfDisplayException (e, gOutput);
-    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-  }
-
-  // should we return now?
-  // ------------------------------------------------------
-
-  if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass2b ()) {
-#ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStreamWithoutInputLocation (
-      err,
-      __FILE__, __LINE__,
-      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
-#endif // MF_TRACE_IS_ENABLED
-
-    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
-  }
-
-  // convert the first MSR score into a second MSR (pass 3)
-  // ------------------------------------------------------
-
-  S_msrScore secondMsrScore;
-
-  try {
-    secondMsrScore =
-      translateMsrToMsr (
-        firstMsrScore,
-        gMsrOahGroup,
-        gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_3,
-        gLanguage->convertTheFirstMSRIntoASecondMSR ());
+        gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
@@ -222,7 +185,44 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
-  // convert the second MSR into an MXSR (pass 4)
+  // convert the first MSR score into a second MSR (pass 4)
+  // ------------------------------------------------------
+
+  S_msrScore secondMsrScore;
+
+  try {
+    secondMsrScore =
+      translateMsrToMsr (
+        firstMsrScore,
+        gMsrOahGroup,
+        gGlobalMsr2msrOahGroup,
+        mfPassIDKind::kMfPassID_4,
+        gLanguage->convertTheFirstMSRIntoASecondMSR ());
+  }
+  catch (mxsr2msrException& e) {
+    mfDisplayException (e, gOutput);
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+  }
+  catch (std::exception& e) {
+    mfDisplayException (e, gOutput);
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+  }
+
+  // should we return now?
+  // ------------------------------------------------------
+
+  if (gGlobalXml2gmnInsiderOahGroup->getQuitAfterPass4 ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    gWaeHandler->waeTraceToStreamWithoutInputLocation (
+      err,
+      __FILE__, __LINE__,
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
+#endif // MF_TRACE_IS_ENABLED
+
+    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
+  }
+
+  // convert the second MSR into an MXSR (pass 5)
   // ------------------------------------------------------
 
   Sxmlelement secondMxsr;
@@ -232,7 +232,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       translateMsrToMxsr (
         secondMsrScore,
         gMsrOahGroup,
-        mfPassIDKind::kMfPassID_4,
+        mfPassIDKind::kMfPassID_5,
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
   }
@@ -245,7 +245,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  // convert the MXSR to Guido (pass 5)
+  // convert the MXSR to Guido (pass 6)
   // ------------------------------------------------------
 
   std::string
@@ -258,7 +258,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
       secondMxsr,
       outputFileName,
       err,
-      mfPassIDKind::kMfPassID_5,
+      mfPassIDKind::kMfPassID_6,
       "Convert the MXSR into Guido text");
   }
   catch (mxsr2msrException& e) {

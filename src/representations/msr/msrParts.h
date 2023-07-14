@@ -425,27 +425,27 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendRepeatEndingCloneToPart (
                             const S_msrRepeatEnding& repeatEndingClone);
 
-    // multiple full-bar rests
+    // multi-measure rests
 
-    void                  appendMultipleFullBarRestsToPart (
+    void                  appendMultiMeasureRestToPart (
                             int inputLineNumber,
-                            int multipleFullBarRestsNumber);
+                            int measureRestsNumber);
 
-    void                  appendPendingMultipleFullBarRestsToPart (
+    void                  appendPendingMultiMeasureRestsToPart (
                             int inputLineNumber);
 
     void                  replicateLastAppendedMeasureInPart (
                             int inputLineNumber,
                             int replicatasNumber);
 
-    void                  addEmptyMeasuresToPart (
+    void                  appendEmptyMeasuresToPart (
                             int                inputLineNumber,
                             const std::string& previousMeasureNumber,
-                            int                multipleFullBarRestsNumber);
+                            int                measureRestsNumber);
 
-    void                  appendMultipleFullBarRestsCloneToPart (
+    void                  appendMultiMeasureRestCloneToPart (
                             int                              inputLineNumber,
-                            const S_msrMultipleFullBarRests& multipleFullBarRests);
+                            const S_msrMultiMeasureRest& multiMeasureRests);
 
     // measure repeats
 
@@ -459,7 +459,7 @@ class EXP msrPart : public msrPartGroupElement
 
 //     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED v0.9.66
 //                             int                              inputLineNumber,
-//                             const S_msrMultipleFullBarRests& multipleFullBarRests);
+//                             const S_msrMultiMeasureRest& multiMeasureRests);
 
     // staves
 
@@ -679,9 +679,9 @@ class EXP msrPart : public msrPartGroupElement
 
     static int            sPartsCounter;
 
-    // multiple full-bar rests
+    // multi-measure rests
 
-    Bool                  fPartContainsMultipleFullBarRests;
+    Bool                  fPartContainsMultiMeasureRests;
 
     // measures slices sequence
 

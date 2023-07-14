@@ -292,13 +292,13 @@ class EXP lpsrScore : public lpsrElement
                                   fTextSpannerWithCenteredTextIsNeeded;
                               }
 
-    // multiple full-bar rests
-    void                  setMergeMultipleFullBarRestsIsNeeded ();
+    // multi-measure rests
+    void                  setMergeMultiMeasureRestsIsNeeded ();
 
-    Bool                  getMergeMultipleFullBarRestsIsNeeded () const
+    Bool                  getMergeMultiMeasureRestsIsNeeded () const
                               {
                                 return
-                                  fMergeMultipleFullBarRestsIsNeeded;
+                                  fMergeMultiMeasureRestsIsNeeded;
                               }
 
     // bar number every N and at the beginning of lines
@@ -405,9 +405,9 @@ class EXP lpsrScore : public lpsrElement
 
     void                  addTextSpannerWithCenteredTextToScore ();
 
-    // multiple full-bar rests
+    // multi-measure rests
 
-    void                  addMergeMultipleFullBarRestsToScore ();
+    void                  addMergeMultiMeasureRestsToScore ();
 
     // bar number every N and at the beginning of lines
     void                  addBarNumberEveryNAndAtTheBeginningOfLinesToScore ();
@@ -530,8 +530,8 @@ class EXP lpsrScore : public lpsrElement
     // spanners with centered text
     Bool                  fTextSpannerWithCenteredTextIsNeeded;
 
-    // multiple full-bar rests
-    Bool                  fMergeMultipleFullBarRestsIsNeeded;
+    // multi-measure rests
+    Bool                  fMergeMultiMeasureRestsIsNeeded;
 
     // bar number every N and at the beginning of lines
     Bool                  fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded;

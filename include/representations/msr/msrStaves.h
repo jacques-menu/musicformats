@@ -294,25 +294,25 @@ class EXP msrStaff : public msrElement
     void                  appendPendingMeasureRepeatToStaff (
                             int inputLineNumber);
 
-    void                  appendMultipleFullBarRestsToStaff ( // JMI UNUSED
+    void                  appendMultiMeasureRestToStaff ( // JMI UNUSED
                             int inputLineNumber,
-                            int multipleFullBarRestsMeasuresNumber);
+                            int multiMeasureRestsMeasuresNumber);
 
-    void                  appendPendingMultipleFullBarRestsToStaff (
+    void                  appendPendingMultiMeasureRestsToStaff (
                             int inputLineNumber);
 
     void                  replicateLastAppendedMeasureInStaff (
                             int inputLineNumber,
                             int replicatasNumber);
 
-    void                  addEmptyMeasuresToStaff (
+    void                  appendEmptyMeasuresToStaff (
                             int                inputLineNumber,
                             const std::string& previousMeasureNumber,
                             int                emptyMeasuresNumber);
 
-    void                  appendMultipleFullBarRestsCloneToStaff (
+    void                  appendMultiMeasureRestCloneToStaff (
                             int                              inputLineNumber,
-                            const S_msrMultipleFullBarRests& multipleFullBarRests);
+                            const S_msrMultiMeasureRest& multiMeasureRests);
 
     void                  createBeatRepeatFromItsFirstMeasuresInStaff (
                             int inputLineNumber,
@@ -444,9 +444,9 @@ class EXP msrStaff : public msrElement
     std::vector<std::list<S_msrMeasure> >
                           fStaffMeasuresFlatListsVector;
 
-    // multiple full-bar rests
+    // multi-measure rests
 
-    Bool                  fStaffContainsMultipleFullBarRests;
+    Bool                  fStaffContainsMultiMeasureRests;
 
     // measures slices sequence
 

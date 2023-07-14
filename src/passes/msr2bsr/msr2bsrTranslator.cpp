@@ -3547,14 +3547,14 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
     if (gBsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
       // get the syllable texts list
       const std::list<std::string>&
-        syllableTextsList =
-          elt->getSyllableTextsList ();
+        syllableElementsList =
+          elt->getSyllableElementsList ();
 
-      if (syllableTextsList.size ()) {
+      if (syllableElementsList.size ()) {
         // build a single words value from the texts list
         // JMI create an msrWords instance for each???
         std::string wordsValue =
-          elt->syllableTextsListAsString();
+          elt->syllableElementsListAsString();
 
         // create the words
 #ifdef MF_TRACE_IS_ENABLED
@@ -6895,7 +6895,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -6911,7 +6911,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultiMeasureRests ()
       ||
     gTraceOahGroup->getTraceVoicesDetails ()
   ) {
@@ -6941,7 +6941,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultiMeasureRests ()
       ||
     gTraceOahGroup->getTraceVoicesDetails ()
   ) {
@@ -6988,7 +6988,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
   // create the multiple rest clone
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultiMeasureRests ()
       ||
     gTraceOahGroup->getTraceSegments ()
       ||
@@ -7028,7 +7028,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
   // containing the next, yet incomplete, measure
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultiMeasureRests ()
       ||
     gTraceOahGroup->getTraceSegments ()
       ||
@@ -7061,7 +7061,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultiMeasureRests ()
       ||
     gTraceOahGroup->getTraceVoicesDetails ()
   ) {
@@ -7110,7 +7110,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRestContents& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultiMeasureRests ()
       ||
     gTraceOahGroup->getTraceVoicesDetails ()
   ) {
@@ -7163,7 +7163,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
 
   // set last segment as the multiple rest contents segment
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -7184,7 +7184,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceMultipleFullBarRests ()
+    gTraceOahGroup->getTraceMultiMeasureRests ()
       ||
     gTraceOahGroup->getTraceVoicesDetails ()
   ) {

@@ -2001,10 +2001,10 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
       createMeasureNewbornClone (
         fCurrentSegmentClone);
 
-  if (fOnGoingMultipleFullBarRests) {
-    // append current measure clone to the current multiple full-bar rests clone
-    fCurrentMultipleFullBarRestsClone->
-      appendMeasureToMultipleFullBarRests (
+  if (fOnGoingMultiMeasureRests) {
+    // append current measure clone to the current multi-measure rests clone
+    fCurrentMultiMeasureRestsClone->
+      appendMeasureToMultiMeasureRest (
         fCurrentMeasureClone);
   }
   else {
@@ -2015,71 +2015,6 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
         fCurrentMeasureClone);
   }
 
-  // is this a full-bar rest? JMI v0.9.67
-//   if (elt->getMeasureIsAFullBarRest ()) {
-//     // yes
-//
-    // should we compress full-bar rests?
-//     if (gGlobalMsr2msrOahGroup->getCompressFullBarRests ()) {//
-//       // yes
-//
-//       if (! fCurrentRestMeasure) {
-//         // this is the first multiple full-bar rest in the sequence
-//
-//         // create a multiple full-bar rests  containing fCurrentMeasureClone
-//         fCurrentMultipleFullBarRests =
-//           msrMultipleFullBarRests::create (
-//             inputLineNumber,
-//             fCurrentMeasureClone,
-//             fCurrentVoiceClone);
-//
-// /* JMI
-//         // append the current multiple full-bar rests to the current voice clone
-//         fCurrentVoiceClone->
-//           appendMultipleFullBarRestsToVoice (
-//             inputLineNumber,
-//             fCurrentMultipleFullBarRests);
-//             */
-//       }
-//
-//       else {
-//         // this is a subsequent multiple full-bar rest, merely append it
-//         fCurrentMultipleFullBarRests->
-//           appendMeasureCloneToMultipleFullBarRests (
-//             fCurrentMeasureClone);
-//       }
-//
-//       fCurrentRestMeasure = fCurrentMeasureClone;
-//     }
-//
-//     else {
-//       // no
-//
-//       // append current measure clone to the current voice clone
-//       fCurrentVoiceClone->
-//         appendMeasureCloneToVoiceClone (
-//           inputLineNumber,
-//           fCurrentMeasureClone);
-// //     }
-//   }
-//
-//   else {
-//     // no
-//
-//     // append current measure clone to the current voice clone
-//     fCurrentVoiceClone->
-//       appendMeasureCloneToVoiceClone (
-//         inputLineNumber,
-//         fCurrentMeasureClone);
-//   }
-
-/* JMI
-  // append current measure clone to the current voice clone
-  fCurrentVoiceClone->
-    appendMeasureCloneToVoiceClone (
-      inputLineNumber,
-      fCurrentMeasureClone);
-*/
   // JMI superflous ???
   fCurrentPartClone->
     setPartCurrentMeasureNumber (
@@ -2198,37 +2133,37 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
       break;
   } // switch
 
-  // is this a full-bar rest?
-  if (elt->getMeasureIsAFullBarRest ()) {
+  // is this a measure rest?
+  if (elt->getMeasureIsAMeasureRest ()) {
     // yes JMI
   }
 
   else {
     // no
 
-    // should we compress full-bar rests?
-//    if (gGlobalMsr2msrOahGroup->getTraceMultipleFullBarRests ()) {
+    // should we compress measure rests?
+//    if (gGlobalMsr2msrOahGroup->getTraceMultiMeasureRests ()) {
 //       // yes
 //
-//       if (fCurrentMultipleFullBarRests) {
-//         // append the current multiple full-bar rests to the current voice clone
+//       if (fCurrentMultiMeasureRests) {
+//         // append the current multi-measure rests to the current voice clone
 //         fCurrentVoiceClone->
-//           appendMultipleFullBarRestsToVoice (
+//           appendMultiMeasureRestToVoice (
 //             inputLineNumber,
-//             fCurrentMultipleFullBarRests);
+//             fCurrentMultiMeasureRests);
 //
 //         // forget about the current rest measure
 //         fCurrentRestMeasure = nullptr;
 //
-//         // forget about the current multiple full-bar rests
-//         fCurrentMultipleFullBarRests = nullptr;
+//         // forget about the current multi-measure rests
+//         fCurrentMultiMeasureRests = nullptr;
 //       }
 //
 //       else {
 //         std::stringstream ss;
 //
 //         ss <<
-//           "fCurrentMultipleFullBarRests is null upon multiple full-bar rest end" <<
+//           "fCurrentMultiMeasureRests is null upon multi-measure rest end" <<
 //           fCurrentMeasureNumber <<
 //           "', measurePuristNumber: '" <<
 //           measurePuristNumber <<
@@ -2379,14 +2314,14 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //     if (gGlobalMsr2msrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) { JMI ???
 //       // get the syllable texts list
 //       const std::list<std::string>&
-//         syllableTextsList =
-//           elt->getSyllableTextsList ();
+//         syllableElementsList =
+//           elt->getSyllableElementsList ();
 //
-//       if (syllableTextsList.size ()) {
+//       if (syllableElementsList.size ()) {
 //         // build a single words value from the texts list
 //         // JMI create an msrWords instance for each???
 //         std::string wordsValue =
-//           elt->syllableTextsListAsString();
+//           elt->syllableElementsListAsString();
 //
 //         // create the words
 // #ifdef MF_TRACE_IS_ENABLED
@@ -6559,7 +6494,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeatEnding& elt)
 }
 
 //________________________________________________________________________
-void msr2msrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
+void msr2msrTranslator::visitStart (S_msrMultiMeasureRest& elt)
 {
   int inputLineNumber =
     elt->getInputStartLineNumber ();
@@ -6569,7 +6504,7 @@ void msr2msrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrMultipleFullBarRests" <<
+      "--> Start visiting msrMultiMeasureRest" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -6581,7 +6516,7 @@ void msr2msrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -6595,22 +6530,22 @@ void msr2msrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // create a multiple full-bar rests clone
-  fCurrentMultipleFullBarRestsClone =
+  // create a multi-measure rests clone
+  fCurrentMultiMeasureRestsClone =
     elt->
-      createMultipleFullBarRestsNewbornClone (
+      createMultiMeasureRestNewbornClone (
         fCurrentSegmentClone);
 
   // append it to the current voice clone
   fCurrentVoiceClone->
-    appendMultipleFullBarRestsToVoice (
+    appendMultiMeasureRestToVoice (
       inputLineNumber,
-      fCurrentMultipleFullBarRestsClone);
+      fCurrentMultiMeasureRestsClone);
 
-  fOnGoingMultipleFullBarRests = true;
+  fOnGoingMultiMeasureRests = true;
 }
 
-void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
+void msr2msrTranslator::visitEnd (S_msrMultiMeasureRest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputLineNumber =
@@ -6620,7 +6555,7 @@ void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrMultipleFullBarRests" <<
+      "--> End visiting msrMultiMeasureRest" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -6632,7 +6567,7 @@ void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -6646,10 +6581,10 @@ void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // forget about the current multiple full-bar rests
-  fCurrentMultipleFullBarRestsClone = nullptr;
+  // forget about the current multi-measure rests
+  fCurrentMultiMeasureRestsClone = nullptr;
 
-  fOnGoingMultipleFullBarRests = false;
+  fOnGoingMultiMeasureRests = false;
 }
 
 //________________________________________________________________________
@@ -7142,4 +7077,71 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //
 //       wordsHasBeenHandled = true;
 //       }
+*/
+
+
+  // is this a measure rest? JMI v0.9.67
+//   if (elt->getMeasureIsAMeasureRest ()) {
+//     // yes
+//
+    // should we compress measure rests?
+//     if (gGlobalMsr2msrOahGroup->getCompressMeasureRests ()) {//
+//       // yes
+//
+//       if (! fCurrentRestMeasure) {
+//         // this is the first multi-measure rest in the sequence
+//
+//         // create a multi-measure rests  containing fCurrentMeasureClone
+//         fCurrentMultiMeasureRests =
+//           msrMultiMeasureRest::create (
+//             inputLineNumber,
+//             fCurrentMeasureClone,
+//             fCurrentVoiceClone);
+//
+// /* JMI
+//         // append the current multi-measure rests to the current voice clone
+//         fCurrentVoiceClone->
+//           appendMultiMeasureRestToVoice (
+//             inputLineNumber,
+//             fCurrentMultiMeasureRests);
+//             */
+//       }
+//
+//       else {
+//         // this is a subsequent multi-measure rest, merely append it
+//         fCurrentMultiMeasureRests->
+//           appendMeasureCloneToMultiMeasureRests (
+//             fCurrentMeasureClone);
+//       }
+//
+//       fCurrentRestMeasure = fCurrentMeasureClone;
+//     }
+//
+//     else {
+//       // no
+//
+//       // append current measure clone to the current voice clone
+//       fCurrentVoiceClone->
+//         appendMeasureCloneToVoiceClone (
+//           inputLineNumber,
+//           fCurrentMeasureClone);
+// //     }
+//   }
+//
+//   else {
+//     // no
+//
+//     // append current measure clone to the current voice clone
+//     fCurrentVoiceClone->
+//       appendMeasureCloneToVoiceClone (
+//         inputLineNumber,
+//         fCurrentMeasureClone);
+//   }
+
+/* JMI
+  // append current measure clone to the current voice clone
+  fCurrentVoiceClone->
+    appendMeasureCloneToVoiceClone (
+      inputLineNumber,
+      fCurrentMeasureClone);
 */

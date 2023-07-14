@@ -124,7 +124,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 
   S_msrScore firstMsrScore;
 
-  // create the skeleton of the first MSR from the originalMxsr (pass 2a)
+  // create the skeleton of the first MSR from the originalMxsr (pass 2)
   // ------------------------------------------------------
 
   try {
@@ -132,7 +132,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       translateMxsrToMsrSkeleton (
         theMxsr,
         gMsrOahGroup,
-        mfPassIDKind::kMfPassID_2a,
+        mfPassIDKind::kMfPassID_2,
         gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
   }
   catch (mxsr2msrException& e) {
@@ -147,25 +147,25 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   // should we return now?
   // ------------------------------------------------------
 
-  if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass2a ()) {
+  if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass2 ()) {
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
-      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2a));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2));
 #endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
-  // populate the MSR skeleton from MusicXML data (pass 2b)
+  // populate the MSR skeleton from MusicXML data (pass 3)
   // ------------------------------------------------------
 
   try {
     populateMsrSkeletonFromMxsr (
       theMxsr,
       firstMsrScore,
-        mfPassIDKind::kMfPassID_2b,
+        mfPassIDKind::kMfPassID_3,
         gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   }
   catch (mxsr2msrException& e) {
@@ -180,18 +180,18 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   // should we return now?
   // ------------------------------------------------------
 
-  if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass2b ()) {
+  if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass3 ()) {
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
-      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_2b));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
 #endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
-  // convert the first MSR score into a second MSR (pass 3)
+  // convert the first MSR score into a second MSR (pass 4)
   // ------------------------------------------------------
 
   S_msrScore secondMsrScore;
@@ -213,7 +213,7 @@ if (false) { // JMI v0.9.67
           firstMsrScore,
           gMsrOahGroup,
           gGlobalMsr2msrOahGroup,
-          mfPassIDKind::kMfPassID_3,
+          mfPassIDKind::kMfPassID_4,
           gLanguage->convertTheFirstMSRIntoASecondMSR (),
           pathToVoice);
     } // for
@@ -240,12 +240,12 @@ else {
   // should we return now?
   // ------------------------------------------------------
 
-  if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass3 ()) {
+  if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass4 ()) {
 #ifdef MF_TRACE_IS_ENABLED
     gWaeHandler->waeTraceToStreamWithoutInputLocation (
       err,
       __FILE__, __LINE__,
-      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_3));
+      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_4));
 #endif // MF_TRACE_IS_ENABLED
 
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
@@ -256,7 +256,7 @@ else {
 
   S_lpsrScore theLpsrScore;
 
-  // create the LPSR from the MSR (pass 4)
+  // create the LPSR from the MSR (pass 5)
   // ------------------------------------------------------
 
   try {
@@ -265,7 +265,7 @@ else {
         secondMsrScore,
         gMsrOahGroup,
         gLpsrOahGroup,
-        mfPassIDKind::kMfPassID_4,
+        mfPassIDKind::kMfPassID_5,
         gLanguage->convertTheSecondMSRIntoAnLPSR (),
         createMusicxml2lilypondConverterComponent ());
   }
@@ -278,7 +278,7 @@ else {
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  // convert the LPSR to LilyPond code (pass 5)
+  // convert the LPSR to LilyPond code (pass 6)
   // ------------------------------------------------------
 
   std::string
@@ -326,7 +326,7 @@ else {
         theLpsrScore,
         gMsrOahGroup,
         gLpsrOahGroup,
-        mfPassIDKind::kMfPassID_5,
+        mfPassIDKind::kMfPassID_6,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
     }

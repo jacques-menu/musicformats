@@ -41,10 +41,12 @@ enum class mfPassIDKind {
   kMfPassID_DisplayPass,
 
   kMfPassID_1,
-  kMfPassID_2, kMfPassID_2a, kMfPassID_2b,
-  kMfPassID_3, kMfPassID_3a, kMfPassID_3b,
-  kMfPassID_4, kMfPassID_4a, kMfPassID_4b,
-  kMfPassID_5
+  kMfPassID_2,
+  kMfPassID_3,
+  kMfPassID_4,
+  kMfPassID_5,
+  kMfPassID_6,
+  kMfPassID_7
 };
 
 std::string mfPassIDKindAsString (

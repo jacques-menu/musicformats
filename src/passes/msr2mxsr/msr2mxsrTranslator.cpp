@@ -7100,19 +7100,26 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
         }
 
         // append a text elements to the lyric element if relevant
-        const std::list<std::string>&
-          syllableTextsList =
-            syllable->getSyllableTextsList ();
+        const std::list<msrSyllableElement>&
+          syllableElementsList =
+            syllable->getSyllableElementsList ();
 
-        for (
-          std::list<std::string>::const_iterator i = syllableTextsList.begin ();
-          i != syllableTextsList.end ();
-          ++i
-        ) {
-          std::string text = (*i);
+        for (msrSyllableElement syllableElement : syllableElementsList) {
+          switch (syllableElement.getSyllableElementKind ()) {
+            case msrSyllableElementKind::kSyllableElementText:
+              lyricElement->push (
+                createMxmlelement (
+                  k_text,
+                  syllableElement.getSyllableElementContents ()));
+              break;
 
-          lyricElement->push (
-            createMxmlelement (k_text, text));
+            case msrSyllableElementKind::kSyllableElementElision:
+              lyricElement->push (
+                createMxmlelement (
+                  k_elision,
+                  syllableElement.getSyllableElementContents ()));
+              break;
+          } // switch
         } // for
 
         // append the extend element to the lyric element if relevant
@@ -8722,15 +8729,15 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
 
     if (gLpsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
       // get the syllable texts list
-      const std::list<std::string>&
-        syllableTextsList =
-          elt->getSyllableTextsList ();
+      const std::list<msrSyllableElement>&
+        syllableElementsList =
+          elt->getSyllableElementsList ();
 
-      if (syllableTextsList.size ()) {
+      if (syllableElementsList.size ()) {
         // build a single words value from the texts list
         // JMI create an msrWords instance for each???
         std::string wordsValue =
-          elt->syllableTextsListAsString();
+          elt->syllableElementsListAsString();
 
         // create the words
 #ifdef MF_TRACE_IS_ENABLED
@@ -11172,7 +11179,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
+void msr2mxsrTranslator::visitStart (S_msrMultiMeasureRest& elt)
 {
   int inputLineNumber =
     elt->getInputStartLineNumber ();
@@ -11182,7 +11189,7 @@ void msr2mxsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrMultipleFullBarRests" <<
+      "--> Start visiting msrMultiMeasureRest" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -11194,7 +11201,7 @@ void msr2mxsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -11209,12 +11216,12 @@ void msr2mxsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
-    handleMultipleFullBarRestsStartInVoiceClone (
+    handleMultiMeasureRestsStartInVoiceClone (
       inputLineNumber,
       elt);
 }
 
-void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
+void msr2mxsrTranslator::visitEnd (S_msrMultiMeasureRest& elt)
 {
   int inputLineNumber =
     elt->getInputEndLineNumber ();
@@ -11224,7 +11231,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrMultipleFullBarRests" <<
+      "--> End visiting msrMultiMeasureRest" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -11236,7 +11243,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -11251,7 +11258,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
-    handleMultipleFullBarRestsEndInVoiceClone (
+    handleMultiMeasureRestsEndInVoiceClone (
       inputLineNumber);
 }
 

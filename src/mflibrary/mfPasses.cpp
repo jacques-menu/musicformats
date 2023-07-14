@@ -55,35 +55,25 @@ std::string mfPassIDKindAsString (
     case mfPassIDKind::kMfPassID_2:
       result = "2";
       break;
-    case mfPassIDKind::kMfPassID_2a:
-      result = "2a";
-      break;
-    case mfPassIDKind::kMfPassID_2b:
-      result = "2b";
-      break;
 
     case mfPassIDKind::kMfPassID_3:
       result = "3";
-      break;
-    case mfPassIDKind::kMfPassID_3a:
-      result = "3a";
-      break;
-    case mfPassIDKind::kMfPassID_3b:
-      result = "3b";
       break;
 
     case mfPassIDKind::kMfPassID_4:
       result = "4";
       break;
-    case mfPassIDKind::kMfPassID_4a:
-      result = "4a";
-      break;
-    case mfPassIDKind::kMfPassID_4b:
-      result = "4b";
-      break;
 
     case mfPassIDKind::kMfPassID_5:
       result = "5";
+      break;
+
+    case mfPassIDKind::kMfPassID_6:
+      result = "6";
+      break;
+
+    case mfPassIDKind::kMfPassID_7:
+      result = "7";
       break;
   } // switch
 
@@ -206,27 +196,21 @@ void initializeMusicFormatsPassIDKindsMap ()
 
     gGlobalMusicFormatsPassIDKindsMap ["2"] =
       mfPassIDKind::kMfPassID_2;
-    gGlobalMusicFormatsPassIDKindsMap ["2a"] =
-      mfPassIDKind::kMfPassID_2a;
-    gGlobalMusicFormatsPassIDKindsMap ["2b"] =
-      mfPassIDKind::kMfPassID_2b;
 
     gGlobalMusicFormatsPassIDKindsMap ["3"] =
       mfPassIDKind::kMfPassID_3;
-    gGlobalMusicFormatsPassIDKindsMap ["3a"] =
-      mfPassIDKind::kMfPassID_3a;
-    gGlobalMusicFormatsPassIDKindsMap ["3b"] =
-      mfPassIDKind::kMfPassID_3b;
 
     gGlobalMusicFormatsPassIDKindsMap ["4"] =
       mfPassIDKind::kMfPassID_4;
-    gGlobalMusicFormatsPassIDKindsMap ["4a"] =
-      mfPassIDKind::kMfPassID_4a;
-    gGlobalMusicFormatsPassIDKindsMap ["4b"] =
-      mfPassIDKind::kMfPassID_4b;
 
     gGlobalMusicFormatsPassIDKindsMap ["5"] =
       mfPassIDKind::kMfPassID_5;
+
+    gGlobalMusicFormatsPassIDKindsMap ["6"] =
+      mfPassIDKind::kMfPassID_6;
+
+    gGlobalMusicFormatsPassIDKindsMap ["7"] =
+      mfPassIDKind::kMfPassID_7;
 
     pPrivateThisMethodHasBeenRun = true;
   }

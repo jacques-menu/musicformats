@@ -205,7 +205,7 @@ void msrNote::initializeNote ()
   // note context
   // ------------------------------------------------------
 
-  fNoteMultipleFullBarRestsSequenceNumber = -1;
+  fNoteMultiMeasureRestsSequenceNumber = -1;
 
 //   fNoteColorAlphaRGBHasBenSet = false; JMI v0.9.64
 
@@ -817,12 +817,12 @@ S_msrNote msrNote::createNoteNewbornClone (
   // ------------------------------------------------------
 
   newbornClone->
-    fNoteBelongsToAMultipleFullBarRests =
-      fNoteBelongsToAMultipleFullBarRests;
+    fNoteBelongsToAMultiMeasureRests =
+      fNoteBelongsToAMultiMeasureRests;
 
   newbornClone->
-    fNoteMultipleFullBarRestsSequenceNumber =
-      fNoteMultipleFullBarRestsSequenceNumber;
+    fNoteMultiMeasureRestsSequenceNumber =
+      fNoteMultiMeasureRestsSequenceNumber;
 
   // note lyrics
   // ------------------------------------------------------
@@ -1029,12 +1029,12 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   deepClone->
-    fNoteBelongsToAMultipleFullBarRests =
-      fNoteBelongsToAMultipleFullBarRests;
+    fNoteBelongsToAMultiMeasureRests =
+      fNoteBelongsToAMultiMeasureRests;
 
   deepClone->
-    fNoteMultipleFullBarRestsSequenceNumber =
-      fNoteMultipleFullBarRestsSequenceNumber;
+    fNoteMultiMeasureRestsSequenceNumber =
+      fNoteMultiMeasureRestsSequenceNumber;
 
   // note lyrics
   // ------------------------------------------------------
@@ -3485,9 +3485,9 @@ void msrNote::appendSyllableToNote (
     std::stringstream ss;
 
     ss <<
-      "Appending syllable " <<
+      "Appending syllable \"" <<
       syllable->asString () <<
-      " to note " <<
+      "\" to note " <<
       asString ();
 
     gWaeHandler->waeTrace (
@@ -4404,7 +4404,8 @@ std::string msrNote::asShortString () const
 {
   std::stringstream ss;
 
-  ss << "[Note" <<
+  ss <<
+  	"[Note" <<
     ", line " << fInputStartLineNumber <<
     ", ";
 
@@ -4646,7 +4647,8 @@ std::string msrNote::asMinimalString () const
 {
   std::stringstream ss;
 
-  ss << "[Note" <<
+  ss <<
+  	"[Note" <<
     ", line " << fInputStartLineNumber <<
     ", ";
 
@@ -5020,7 +5022,7 @@ std::string msrNote::asString () const
         ss <<
           'R' <<
           /* JMI
-          multipleFullBarRestsWholeNotesAsMsrString (
+          multiMeasureRestsWholeNotesAsMsrString (
             fInputStartLineNumber,
             fSoundingWholeNotes.asString ());
             */
@@ -5031,6 +5033,7 @@ std::string msrNote::asString () const
           'r' <<
           nonSoundingNoteEssentialsAsString ();
       }
+			ss << ", ";
 
       ss <<
         nonSoundingNoteEssentialsAsString ();
@@ -5205,7 +5208,8 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 {
   std::stringstream ss;
 
-  ss << "[Note" <<
+  ss <<
+  	"[Note" <<
     ", line " << fInputStartLineNumber <<
     ", ";
 
@@ -5224,7 +5228,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
         ss <<
           'R' <<
           /* JMI
-          multipleFullBarRestsWholeNotesAsMsrString (
+          multiMeasureRestsWholeNotesAsMsrString (
             fInputStartLineNumber,
             fSoundingWholeNotes);
             */
@@ -5497,8 +5501,9 @@ void msrNote::print (std::ostream& os) const
 
   os <<
     "[Note " <<
-    noteEssentialsAsSting () <<
     ", line " << fInputStartLineNumber <<
+    ", " <<
+    noteEssentialsAsSting () <<
     std::endl;
 
   ++gIndenter;
@@ -6337,8 +6342,9 @@ void msrNote::printFull (std::ostream& os) const
 
   os <<
     "[Note " <<
-    noteEssentialsAsSting () <<
     ", line " << fInputStartLineNumber <<
+    ", " <<
+    noteEssentialsAsSting () <<
     std::endl;
 
   ++gIndenter;
@@ -6439,14 +6445,14 @@ void msrNote::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToAMultipleFullBarRests" << ": " <<
-    fNoteBelongsToAMultipleFullBarRests <<
+    "fNoteBelongsToAMultiMeasureRests" << ": " <<
+    fNoteBelongsToAMultiMeasureRests <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteMultipleFullBarRestsSequenceNumber" << ": " <<
-    fNoteMultipleFullBarRestsSequenceNumber <<
+    "fNoteMultiMeasureRestsSequenceNumber" << ": " <<
+    fNoteMultiMeasureRestsSequenceNumber <<
     std::endl;
 
   os << std::left <<
@@ -6762,12 +6768,12 @@ void msrNote::printFull (std::ostream& os) const
   // multiple rest member?
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToAMultipleFullBarRests" << ": " <<
-    fNoteBelongsToAMultipleFullBarRests <<
+    "fNoteBelongsToAMultiMeasureRests" << ": " <<
+    fNoteBelongsToAMultiMeasureRests <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteMultipleFullBarRestsSequenceNumber" << ": " <<
-    fNoteMultipleFullBarRestsSequenceNumber <<
+    "fNoteMultiMeasureRestsSequenceNumber" << ": " <<
+    fNoteMultiMeasureRestsSequenceNumber <<
     std::endl;
 
   // print the grace notes group before if any
@@ -7984,8 +7990,8 @@ void msrNote::printFull (std::ostream& os) const
           syllable->getSyllableExtendKind () <<
         ": ";
 
-      msrSyllable::printTextsList (
-        syllable->getSyllableTextsList (),
+      syllableElementsListAsString (
+        syllable->getSyllableElementsList (),
         os);
 
       os <<

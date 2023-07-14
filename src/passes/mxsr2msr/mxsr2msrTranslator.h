@@ -16,6 +16,8 @@
 
 #include "visitor.h"
 
+#include "mfStack.h"
+
 #include "msrArticulations.h"
 #include "msrBarLines.h"
 #include "msrBreaks.h"
@@ -891,6 +893,7 @@ class EXP mxsr2msrTranslator :
     virtual void          visitStart (S_beat_repeat& elt);
     virtual void          visitStart (S_measure_repeat& elt);
     virtual void          visitStart (S_multiple_rest& elt);
+    virtual void          visitEnd (S_multiple_rest& elt);
     virtual void          visitStart (S_slash& elt);
     virtual void          visitEnd   (S_slash& elt);
     virtual void          visitStart (S_slash_type& elt);
@@ -1295,18 +1298,14 @@ class EXP mxsr2msrTranslator :
     // beats repeats
     int                       fCurrentBeatRepeatSlashes;
 
-    // multiple full-bar rests
-    int                       fCurrentMultipleFullBarRestsNumber;
-    int                       fRemainingExpectedMultipleFullBarRests;
+    // multi-measure rests
+    int                       fCurrentMeasureRestsNumber;
+    int                       fRemainingMeasureRestsCounter;
 
-    Bool                      fCurrentMultipleFullBarRestsHasBeenCreated;
+    Bool                      fMultiMeasureRestsUseSymbols;
 
-    Bool                      fMultipleFullBarRestsUseSymbols;
-
-    Bool                      fOnGoingMultipleFullBarRests;
-
-    void                      handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
-                                int inputLineNumber);
+//     void                      handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
+//                                 int inputLineNumber);
 
     // measure repeats
     msrMeasureRepeatKind      fCurrentMeasureRepeatKind;
@@ -1683,7 +1682,7 @@ class EXP mxsr2msrTranslator :
 //     void                      attachLineBreaksToVoice ( //JMI UNUSED??? v0.9.68
 //                                 const S_msrVoice& voice);
 
-    void                      attachLineBreaksToPart (
+    void                      attachPendingLineBreaksToPart (
                                 const S_msrPart& part);
 
 
@@ -1695,7 +1694,7 @@ class EXP mxsr2msrTranslator :
 //     void                      attachPageBreaksToVoice ( //JMI UNUSED??? v0.9.68
 //                                 const S_msrVoice& voice);
 
-    void                      attachPageBreaksToPart (
+    void                      attachPendingPageBreaksToPart (
                                 const S_msrPart& part);
 
 
@@ -1737,21 +1736,20 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     Bool                      fOnGoingLyric;
+
     std::string               fCurrentSyllabic;
     msrSyllableKind           fCurrentSyllableKind;
     msrSyllableKind           fFirstSyllableInSlurKind;
     msrSyllableKind           fFirstSyllableInLigatureKind;
-    std::list<std::string>    fCurrentLyricTextsList;
+
+    std::list<msrSyllableElement>
+                              fCurrentSyllableElementsList;
 
     msrSyllableExtendKind     fCurrentSyllableExtendKind;
+    std::string               fCurrentSyllableElision;
 
     std::string               fCurrentStanzaNumber;
     std::string               fCurrentStanzaName;
-
-    Bool                      fCurrentNoteHasLyrics;
-    Bool                      fASkipSyllableHasBeenGeneratedForcurrentNote;
-
-    Bool                      fCurrentStanzaHasText;
 
     std::list<S_msrSyllable>  fCurrentNoteSyllables;
 
@@ -2373,6 +2371,10 @@ class EXP mxsr2msrTranslator :
     std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (
                                 const std::string& context);
+
+    // https://www.toptal.com/c-plus-plus/top-10-common-c-plus-plus-developer-mistakes
+//     std::map<int, mfStack<S_msrTuplet> >
+//                               fTupletsStacksMap;
 
     // the tuplets stop are not always in first-in/first-out order, so:
     std::set<int>             fExpectedTupletsStopNumbersSet;

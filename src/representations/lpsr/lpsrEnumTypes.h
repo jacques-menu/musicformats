@@ -17,6 +17,7 @@
 
 #include "smartpointer.h"
 
+#include "msrLyrics.h"
 #include "msrNotesDurations.h"
 #include "msrOctaves.h"
 #include "msrPitchesNames.h"
@@ -140,18 +141,15 @@ std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
 
 // rests measures
 //______________________________________________________________________________
-std::string multipleFullBarRestsWholeNoteAsLilypondString (
+std::string multiMeasureRestsWholeNoteAsLilypondString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes);
 
-// texts lists
+// syllable elements lists
 //______________________________________________________________________________
-EXP std::string textsListAsString (
-  const std::list<std::string>& textsList);
-
-EXP void printTextsListAsLilypondString (
-  const std::list<std::string>& textsList,
-  std::ostream&                 os);
+EXP void printSyllableElementsListAsLilypondString (
+  const std::list<msrSyllableElement>& syllableElementsList,
+  std::ostream&                        os);
 
 // pitches and octaves
 //______________________________________________________________________________

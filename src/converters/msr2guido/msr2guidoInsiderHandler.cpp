@@ -692,11 +692,11 @@ void msr2guidoInsiderOahGroup::printMsr2guidoInsiderOahGroupValues (int fieldWid
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
-    fQuitAfterPass2a <<
+    std::setw (fieldWidth) << "fQuitAfterPass2" << ": " <<
+    fQuitAfterPass2 <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2b" << ": " <<
-    fQuitAfterPass2b <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
+    fQuitAfterPass3 <<
     std::endl;
 
   --gIndenter;

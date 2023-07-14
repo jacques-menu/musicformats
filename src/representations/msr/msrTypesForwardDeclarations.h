@@ -201,8 +201,8 @@ typedef SMARTP<msrMeasureRepeatReplicas> S_msrMeasureRepeatReplicas;
 class   msrMeasuresSlicesSequence;
 typedef SMARTP<msrMeasuresSlicesSequence> S_msrMeasuresSlicesSequence;
 
-class   msrMultipleFullBarRests;
-typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
+class   msrMultiMeasureRest;
+typedef SMARTP<msrMultiMeasureRest> S_msrMultiMeasureRest;
 
 class   msrNonArpeggiato;
 typedef SMARTP<msrNonArpeggiato> S_msrNonArpeggiato;

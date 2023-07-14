@@ -59,8 +59,8 @@
         <stem default-y="-55">down</stem>
         <lyric default-y="-80" number="1">
           <syllabic>single</syllabic>
-          <text>Ahh</text>
-          <text>Beh</text>
+          <text>A</text>
+          <text>B</text>
           <extend type="start"/>
         </lyric>
       </note>
@@ -120,13 +120,13 @@
         <stem default-y="-35">down</stem>
         <lyric default-y="-80" number="1">
           <syllabic>single</syllabic>
-          <text>Cee</text>
+          <text>C</text>
           <extend type="start"/>
         </lyric>
       </note>
       <note default-x="111">
         <pitch>
-          <step>E</step>
+          <step>A</step>
           <octave>5</octave>
         </pitch>
         <duration>4</duration>

@@ -575,11 +575,11 @@ int main (int argc, char*  argv[])
       err =
         msrScore2brailleWithHandler (
           theMsrScore,
-          mfPassIDKind::kMfPassID_2a,
+          mfPassIDKind::kMfPassID_2,
           "Create the first BSR from the MSR",
-          mfPassIDKind::kMfPassID_2b,
-          "Create the finalized BSR from the first BSR",
           mfPassIDKind::kMfPassID_3,
+          "Create the finalized BSR from the first BSR",
+          mfPassIDKind::kMfPassID_4,
           "Convert the BSR into Braille text",
           gOutput,
           gLog,

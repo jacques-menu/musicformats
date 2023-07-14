@@ -131,7 +131,7 @@ The calls to \method{msrVoice}{createNewLastSegmentForVoice} are in:
 \item \method{msrVoice}{handleVoiceLevelRepeatEndingStartWithoutExplicitStart}
 \item \method{msrVoice}{handleVoiceLevelRepeatEndingStartWithExplicitStart}\\[-0.5ex]
 
-\item \method{msrVoice}{handleMultipleFullBarRestsStartInVoiceClone}\\[-0.5ex]
+\item \method{msrVoice}{handleMultiMeasureRestsStartInVoiceClone}\\[-0.5ex]
 
 \item \method{msrVoice}{handleHooklessRepeatEndingEndInVoice}\\[-0.5ex]
 
@@ -189,7 +189,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
 }
 \end{lstlisting}
 
-All the uses of this method concern repeats (\sectionRef{Repeats handling}), measure repeats (\sectionRef{Measure repeats handling}) and multiple full-bar rests(\sectionRef{Full-bar rests handling}).
+All the uses of this method concern repeats (\sectionRef{Repeats handling}), measure repeats (\sectionRef{Measure repeats handling}) and multi-measure rests(\sectionRef{Multi-measure rests handling}).
 
 
 % -------------------------------------------------------------------------
@@ -211,7 +211,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
     gTraceOahGroup->getTraceRepeatsDetails ()
   ) {
     fSegmentUpLinkToVoice->
-      displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "assertSegmentElementsListIsNotEmpty()");
   }

@@ -671,7 +671,7 @@ std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
 }
 
 //_______________________________________________________________________________
-std::string multipleFullBarRestsWholeNoteAsLilypondString (
+std::string multiMeasureRestsWholeNoteAsLilypondString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
@@ -700,33 +700,15 @@ std::string multipleFullBarRestsWholeNoteAsLilypondString (
 }
 
 //_______________________________________________________________________________
-std::string textsListAsString (
-  const std::list<std::string>& textsList)
-{
-  std::stringstream ss;
-
-  ss << '\"';
-
-  if (textsList.size ()) {
-    for (std::string text : textsList) {
-      ss << text;
-    } // for
-  }
-
-  ss << '\"';
-
-  return ss.str ();
-}
-
-void printTextsListAsLilypondString (
-  const std::list<std::string>& textsList,
-  std::ostream&                 os)
+void printSyllableElementsListAsLilypondString (
+  const std::list<msrSyllableElement>& syllableElementsList,
+  std::ostream&                        os)
 {
   std::string contents;
 
-  if (textsList.size ()) {
-    for (std::string text : textsList) {
-      contents += text; // JMI v0.9.70
+  if (syllableElementsList.size ()) {
+    for (msrSyllableElement syllableElement : syllableElementsList) {
+      contents += syllableElement.asString (); // JMI v0.9.70
   // JMI    os << ", ";
     } // for
   }

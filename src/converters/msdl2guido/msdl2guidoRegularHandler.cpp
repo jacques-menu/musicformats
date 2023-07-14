@@ -32,10 +32,10 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msdl2guidoRegularHandler msdl2guidoRegularHandler::create (
-  const std::string&     serviceName,
-  const std::string&     handlerHeader,
+  const std::string& serviceName,
+  const std::string& handlerHeader,
   const S_msdl2guidoInsiderHandler&
-                    insiderOahHandler)
+                     insiderOahHandler)
 {
   // create the regular handler
   msdl2guidoRegularHandler* obj = new
@@ -49,10 +49,10 @@ S_msdl2guidoRegularHandler msdl2guidoRegularHandler::create (
 }
 
 msdl2guidoRegularHandler::msdl2guidoRegularHandler (
-  const std::string&     serviceName,
-  const std::string&     handlerHeader,
+  const std::string& serviceName,
+  const std::string& handlerHeader,
   const S_msdl2guidoInsiderHandler&
-                    insiderOahHandler)
+                     insiderOahHandler)
   : oahRegularHandler (
       serviceName,
       handlerHeader,
@@ -205,17 +205,17 @@ void msdl2guidoRegularHandler::createInformationsRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("about", subGroup);
-  
+
   registerAtomInRegularSubgroup ("version", subGroup);
   registerAtomInRegularSubgroup ("version-full", subGroup);
-  
+
   registerAtomInRegularSubgroup ("history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("contact", subGroup);
-  
+
   registerAtomInRegularSubgroup ("music-formats-test", subGroup);
 }
 

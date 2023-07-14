@@ -60,6 +60,163 @@
 namespace MusicFormats
 {
 
+//_______________________________________________________________________________
+EXP mfMusicformatsErrorKind msdlFile2lilypond (
+  const char*             fileName,
+  oahOptionsAndArguments& handlerOptionsAndArguments,
+  std::ostream&           out,
+  std::ostream&           err)
+{
+//   SXMLFile
+//     sxmlfile =
+//       createSXMLFileFromFile (
+//         fileName,
+    //     mfPassIDKind::kMfPassID_1,
+//         gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
+//
+//   if (sxmlfile) {
+//     return
+//       xmlFile2lilypondWithOptionsAndArguments (
+//         sxmlfile,
+//         handlerOptionsAndArguments,
+//         out,
+//         err);
+//   }
+
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+}
+
+mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI ??? v0.9.66
+  const char*         fileName,
+  std::ostream&       out,
+  std::ostream&       err,
+  const S_oahHandler& handler)
+{
+//   SXMLFile
+//     sxmlfile =
+//       createSXMLFileFromFile (
+//         fileName,
+    //     mfPassIDKind::kMfPassID_1,
+//         gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
+//
+//   if (sxmlfile) {
+//     return
+//       sxmlFile2lilypondWithHandler (
+//         sxmlfile,
+//         out,
+//         err,
+//         handler);
+//   }
+
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+}
+
+//_______________________________________________________________________________
+EXP mfMusicformatsErrorKind msdlFd2lilypond (
+  FILE*                   fd,
+  oahOptionsAndArguments& handlerOptionsAndArguments,
+  std::ostream&           out,
+  std::ostream&           err)
+{
+//   SXMLFile
+//     sxmlfile =
+//       createSXMLFileFromFd (
+//         fd,
+    //     mfPassIDKind::kMfPassID_1,
+//         gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
+//
+//   if (sxmlfile) {
+//     return
+//       xmlFile2lilypondWithOptionsAndArguments (
+//         sxmlfile,
+//         handlerOptionsAndArguments,
+//         out,
+//         err);
+//   }
+
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+}
+
+mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
+  FILE*               fd,
+  std::ostream&       out,
+  std::ostream&       err,
+  const S_oahHandler& handler)
+{
+//   SXMLFile
+//     sxmlfile =
+//       createSXMLFileFromFd (
+//         fd,
+    //     mfPassIDKind::kMfPassID_1,
+//         gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
+//
+//   if (sxmlfile) {
+//     return
+//       sxmlFile2lilypondWithHandler (
+//         sxmlfile,
+//         out,
+//         err,
+//         handler);
+//   }
+
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+}
+
+//_______________________________________________________________________________
+EXP mfMusicformatsErrorKind msdlString2lilypond (
+  const char*             buffer,
+  oahOptionsAndArguments& handlerOptionsAndArguments,
+  std::ostream&           out,
+  std::ostream&           err)
+{
+//   SXMLFile
+//     sxmlfile =
+//       createSXMLFileFromString (
+//         buffer,
+    //     mfPassIDKind::kMfPassID_1,
+//         gLanguage->convertAMusicXMLBufferIntoAnMXSR ());
+//
+//   // call xmlFile2lilypond() even if sxmlfile is null,
+//   // to handle the help options if any
+//   return
+//     xmlFile2lilypondWithOptionsAndArguments (
+//       sxmlfile,
+//       handlerOptionsAndArguments,
+//       out,
+//       err);
+
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+}
+
+mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
+  const char*         buffer,
+  std::ostream&       out,
+  std::ostream&       err,
+  const S_oahHandler& handler)
+{
+//   SXMLFile
+//     sxmlfile =
+//       createSXMLFileFromString (
+//         buffer,
+    //     mfPassIDKind::kMfPassID_1,
+//         "Create an MXSR from a MusicXML buffer");
+//
+//   // call xmlFile2lilypond() even if sxmlfile is null,
+//   // to handle the help options if any
+//   return
+//     sxmlFile2lilypondWithHandler (
+//       sxmlfile,
+//       out,
+//       err,
+//       handler);
+
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+}
+
+
+}
+
+
 // //_______________________________________________________________________________
 // static mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI UNUSED v0.9.66
 //   SXMLFile&           sxmlfile,
@@ -589,158 +746,3 @@ namespace MusicFormats
 //   return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 // }
 
-//_______________________________________________________________________________
-EXP mfMusicformatsErrorKind msdlFile2lilypond (
-  const char*             fileName,
-  oahOptionsAndArguments& handlerOptionsAndArguments,
-  std::ostream&           out,
-  std::ostream&           err)
-{
-//   SXMLFile
-//     sxmlfile =
-//       createSXMLFileFromFile (
-//         fileName,
-    //     mfPassIDKind::kMfPassID_1,
-//         gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
-//
-//   if (sxmlfile) {
-//     return
-//       xmlFile2lilypondWithOptionsAndArguments (
-//         sxmlfile,
-//         handlerOptionsAndArguments,
-//         out,
-//         err);
-//   }
-
-  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-}
-
-mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI ??? v0.9.66
-  const char*         fileName,
-  std::ostream&       out,
-  std::ostream&       err,
-  const S_oahHandler& handler)
-{
-//   SXMLFile
-//     sxmlfile =
-//       createSXMLFileFromFile (
-//         fileName,
-    //     mfPassIDKind::kMfPassID_1,
-//         gLanguage->convertAMusicXMLStreamIntoAnMXSR ());
-//
-//   if (sxmlfile) {
-//     return
-//       sxmlFile2lilypondWithHandler (
-//         sxmlfile,
-//         out,
-//         err,
-//         handler);
-//   }
-
-  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-}
-
-//_______________________________________________________________________________
-EXP mfMusicformatsErrorKind msdlFd2lilypond (
-  FILE*                   fd,
-  oahOptionsAndArguments& handlerOptionsAndArguments,
-  std::ostream&           out,
-  std::ostream&           err)
-{
-//   SXMLFile
-//     sxmlfile =
-//       createSXMLFileFromFd (
-//         fd,
-    //     mfPassIDKind::kMfPassID_1,
-//         gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
-//
-//   if (sxmlfile) {
-//     return
-//       xmlFile2lilypondWithOptionsAndArguments (
-//         sxmlfile,
-//         handlerOptionsAndArguments,
-//         out,
-//         err);
-//   }
-
-  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-}
-
-mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
-  FILE*               fd,
-  std::ostream&       out,
-  std::ostream&       err,
-  const S_oahHandler& handler)
-{
-//   SXMLFile
-//     sxmlfile =
-//       createSXMLFileFromFd (
-//         fd,
-    //     mfPassIDKind::kMfPassID_1,
-//         gLanguage->convertAMusicXMLDescriptorIntoAnMXSR ());
-//
-//   if (sxmlfile) {
-//     return
-//       sxmlFile2lilypondWithHandler (
-//         sxmlfile,
-//         out,
-//         err,
-//         handler);
-//   }
-
-  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-}
-
-//_______________________________________________________________________________
-EXP mfMusicformatsErrorKind msdlString2lilypond (
-  const char*             buffer,
-  oahOptionsAndArguments& handlerOptionsAndArguments,
-  std::ostream&           out,
-  std::ostream&           err)
-{
-//   SXMLFile
-//     sxmlfile =
-//       createSXMLFileFromString (
-//         buffer,
-    //     mfPassIDKind::kMfPassID_1,
-//         gLanguage->convertAMusicXMLBufferIntoAnMXSR ());
-//
-//   // call xmlFile2lilypond() even if sxmlfile is null,
-//   // to handle the help options if any
-//   return
-//     xmlFile2lilypondWithOptionsAndArguments (
-//       sxmlfile,
-//       handlerOptionsAndArguments,
-//       out,
-//       err);
-
-  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-}
-
-mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
-  const char*         buffer,
-  std::ostream&       out,
-  std::ostream&       err,
-  const S_oahHandler& handler)
-{
-//   SXMLFile
-//     sxmlfile =
-//       createSXMLFileFromString (
-//         buffer,
-    //     mfPassIDKind::kMfPassID_1,
-//         "Create an MXSR from a MusicXML buffer");
-//
-//   // call xmlFile2lilypond() even if sxmlfile is null,
-//   // to handle the help options if any
-//   return
-//     sxmlFile2lilypondWithHandler (
-//       sxmlfile,
-//       out,
-//       err,
-//       handler);
-
-  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-}
-
-
-}

@@ -1885,7 +1885,7 @@ std::string wholeNotesAsMsrString (
       dotsNumber);
 }
 
-std::string multipleFullBarRestsWholeNotesAsMsrString (
+std::string multiMeasureRestsWholeNotesAsMsrString (
   int                  inputLineNumber, // JMI
   const msrWholeNotes& wholeNotes)
 {

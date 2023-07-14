@@ -397,16 +397,16 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceMeasureRepeatsDetails () const
                               { return fTraceMeasureRepeatsDetails; }
 
-    // multiple full-bar rests
-    void                  setTraceMultipleFullBarRests ()
-                              { fTraceMultipleFullBarRests = true; }
-    Bool                  getTraceMultipleFullBarRests () const
-                              { return fTraceMultipleFullBarRests; }
+    // multi-measure rests
+    void                  setTraceMultiMeasureRests ()
+                              { fTraceMultiMeasureRests = true; }
+    Bool                  getTraceMultiMeasureRests () const
+                              { return fTraceMultiMeasureRests; }
 
-    void                  setTraceMultipleFullBarRestsDetails ()
-                              { fTraceMultipleFullBarRestsDetails = true; }
-    Bool                  getTraceMultipleFullBarRestsDetails () const
-                              { return fTraceMultipleFullBarRestsDetails; }
+    void                  setTraceMultiMeasureRestsDetails ()
+                              { fTraceMultiMeasureRestsDetails = true; }
+    Bool                  getTraceMultiMeasureRestsDetails () const
+                              { return fTraceMultiMeasureRestsDetails; }
     // beats repeats
     void                  setTraceBeatRepeats ()
                               { fTraceBeatRepeats = true; }
@@ -967,9 +967,9 @@ class EXP traceOahGroup : public oahGroup
     // measure repeats
     Bool                  fTraceMeasureRepeats;
     Bool                  fTraceMeasureRepeatsDetails;
-    // multiple full-bar rests
-    Bool                  fTraceMultipleFullBarRests;
-    Bool                  fTraceMultipleFullBarRestsDetails;
+    // multi-measure rests
+    Bool                  fTraceMultiMeasureRests;
+    Bool                  fTraceMultiMeasureRestsDetails;
     // beats repeats
     Bool                  fTraceBeatRepeats;
     // slashes

@@ -83,8 +83,8 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentMeasureRepeatMeasuresNumber = -1;
   fCurrentMeasureRepeatSlashesNumber  = -1;
 
-  fCurrentMultipleFullBarRestsNumber  = 0;
-  fRemainingExpectedMultipleFullBarRests = 0;
+  fCurrentMeasureRestsNumber  = 0;
+  fRemainingMeasureRestsCounter = 0;
 
   fCurrentSlashDotsNumber = -1;
   fCurrentSlashGraphicNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
@@ -9277,7 +9277,7 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
     }
   }
 
-  // color JMI ???
+  // color JMI ??? v0.9.70
 
   // should the placement be forced to 'below'?
   if (gGlobalMxsr2msrOahGroup->getAllWedgesBelow ()) {
@@ -9415,11 +9415,8 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
 
   // color JMI
 
-  // forget about any previous texts found,
-  // in case there are <text> occurrences without <syllabic> around them
-  fCurrentLyricTextsList.clear ();
-
-  fCurrentStanzaHasText = false;
+  // forget about any previous texts and elisions found if any
+  fCurrentSyllableElementsList.clear ();
 
   // a <text/> markup puts an end to the effect of <extend/> JMI v0.9.67
   fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtend_NONE;
@@ -9477,7 +9474,7 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
   }
 
   // forget about any previous texts found
-  fCurrentLyricTextsList.clear ();
+  fCurrentSyllableElementsList.clear ();
 }
 
 void mxsr2msrTranslator::visitStart (S_text& elt)
@@ -9506,7 +9503,11 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
   // color JMI
 
   // there can be several <text/>'s and <elision/> in a row, hence the list
-  fCurrentLyricTextsList.push_back (textValue);
+  fCurrentSyllableElementsList.push_back (
+    msrSyllableElement (
+      elt->getInputStartLineNumber (),
+      msrSyllableElementKind::kSyllableElementText,
+      textValue));
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -9521,9 +9522,6 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-  fCurrentNoteHasLyrics = true;
-  fCurrentStanzaHasText = true;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -9545,13 +9543,9 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
       "fCurrentSyllabic" << ": " << fCurrentSyllabic <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentLyricTextsList" << " = ";
-
-    msrSyllable::printTextsList (
-      fCurrentLyricTextsList,
-      gLog);
-
-    gLog << std::endl;
+      "fCurrentSyllableElementsList" << ": " <<
+      syllableElementsListAsString (fCurrentSyllableElementsList) <<
+      std::endl;
 
     --gIndenter;
   }
@@ -9574,18 +9568,23 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::string elisionValue = elt->getValue ();
+  std::string elision = elt->getValue ();
 
-  if (! elisionValue.size ()) {
-    elisionValue = ' ';
-  }
+/*
+  Multiple syllables on a single note are separated by elision elements.
+  A hyphen in the
+    text element should only be used for an actual hyphenated
+    word.
+  Two text elements that are not separated by an
+    elision element are part of the same syllable, but may have
+    different text formatting.
+*/
 
-  // color JMI
-
-  // there can be several <text/>'s and <elision/> in a row, hence the list
-  fCurrentLyricTextsList.push_back (elisionValue);
-
-  fCurrentStanzaHasText = true;
+  fCurrentSyllableElementsList.push_back (
+    msrSyllableElement (
+      elt->getInputStartLineNumber (),
+      msrSyllableElementKind::kSyllableElementElision,
+      elision));
 }
 
 void mxsr2msrTranslator::visitStart (S_extend& elt)
@@ -9627,6 +9626,9 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
   std::string extendType =
     elt->getAttributeValue ("type");
 
+  fCurrentSyllableExtendKind =
+    msrSyllableExtendKind::kSyllableExtend_NONE; // default value
+
   if (fOnGoingLyric) {
     if      (extendType == "start") {
       fCurrentSyllableExtendKind =
@@ -9640,24 +9642,22 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
       fCurrentSyllableExtendKind =
         msrSyllableExtendKind::kSyllableExtendTypeStop;
     }
+    else if (! extendType.size ()) {
+      fCurrentSyllableExtendKind =
+        msrSyllableExtendKind::kSyllableExtendTypeLess;
+    }
     else {
-      if (extendType.size ()) {
-        std::stringstream ss;
+      std::stringstream ss;
 
-        ss <<
-          "extend type \"" << extendType <<
-          "\" is unknown";
+      ss <<
+        "extend type \"" << extendType <<
+        "\" is unknown";
 
-        mxsr2msrError (
-          gServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-      else {
-        fCurrentSyllableExtendKind =
-          msrSyllableExtendKind::kSyllableExtend_NONE;
-      }
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
     }
   }
 
@@ -9711,13 +9711,8 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       std::stringstream ss;
 
       ss <<
-        "syllable ";
-
-     msrSyllable::printTextsList (
-      fCurrentLyricTextsList,
-      ss);
-
-      ss <<
+        "syllable " <<
+        syllableElementsListAsString (fCurrentSyllableElementsList) <<
         " is attached to a rest";
 
       mxsr2msrWarning (
@@ -9727,7 +9722,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    if (fCurrentLyricTextsList.size ()) {
+    if (fCurrentSyllableElementsList.size ()) {
       // register a skip in lyrics for rests with syllables
       fCurrentSyllableKind =
         msrSyllableKind::kSyllableOnRestNote;
@@ -9770,19 +9765,15 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fCurrentLyricTextsList" << " = ";
-
-      msrSyllable::printTextsList (
-        fCurrentLyricTextsList,
-        gLog);
-
-      gLog << std::left <<
+        "fCurrentSyllableElementsList" << "  " <<
+        syllableElementsListAsString (fCurrentSyllableElementsList) <<
         std::endl <<
+
         std::setw (fieldWidth) <<
         "fCurrentSyllableExtendKind" << ": " <<
-        msrSyllableExtendKindAsString (
-          fCurrentSyllableExtendKind) <<
+        fCurrentSyllableExtendKind <<
         std::endl <<
+
         std::setw (fieldWidth) <<
         "fCurrentNoteIsARest" << ": " <<
         fCurrentNoteIsARest <<
@@ -9897,11 +9888,8 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
         std::endl <<
         std::setw (fieldWidth) <<
-        "fCurrentLyricTextsList" << " = ";
-
-      msrSyllable::printTextsList (
-        fCurrentLyricTextsList,
-        gLog);
+        "fCurrentSyllableElementsList" << ": " <<
+        syllableElementsListAsString (fCurrentSyllableElementsList);
 
       --gIndenter;
     }
@@ -9936,13 +9924,8 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         "Creating a syllable \"" <<
         msrSyllableKindAsString (
           fCurrentSyllableKind) <<
-        "\", fCurrentLyricTextsList = \"";
-
-      msrSyllable::printTextsList (
-        fCurrentLyricTextsList,
-        gLog);
-
-      ss <<
+        "\", fCurrentSyllableElementsList = \"" <<
+        syllableElementsListAsString (fCurrentSyllableElementsList) <<
         "\"" <<
         ", whole notes: " <<
         fCurrentNoteSoundingWholeNotesFromNotesDuration <<
@@ -9976,12 +9959,12 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
           stanza);
 
     // append the lyric texts to the syllable
-    for (std::string lyricText : fCurrentLyricTextsList) {
+    for (msrSyllableElement syllableElement : fCurrentSyllableElementsList) {
       syllable->
-        appendLyricTextToSyllable (lyricText);
+        appendSyllableElementToSyllable (syllableElement);
     } // for
 
-    // don't forget about fCurrentLyricTextsList here,
+    // don't forget about fCurrentSyllableElementsList here,
     // this will be done in visitStart (S_syllabic& )
 
     // appendSyllableToNoteAndSetItsUpLinkToNote()
@@ -10197,6 +10180,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
   // create a new measure and append it to the current part
   fCurrentPart->
     createAMeasureAndAppendItToPart (
@@ -10250,7 +10234,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // take finalization action if relevant v0.9.68
+  // take finalization action if relevant v0.9.70
   if (
     fCurrentMusicXMLStaffNumber != K_STAFF_NUMBER_UNKNOWN_
       &&
@@ -10372,7 +10356,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       measuresToBeReplicatedStringToIntMap =
         gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedStringToIntMap ();
 
-    if (measuresToBeReplicatedStringToIntMap.size ()) {
+    if (measuresToBeReplicatedStringToIntMap.size ()) { // JMI v0.9.70
       // should we add empty measures after current measures?
       std::map<std::string,int>::const_iterator
         it =
@@ -10382,7 +10366,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       if (it != measuresToBeReplicatedStringToIntMap.end ()) {
         // fCurrentMeasureNumber is to be replicated,
   #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
+        if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
           std::stringstream ss;
 
           ss <<
@@ -10406,7 +10390,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
             measureReplicatesNumber);
       }
       else {
-        // fRemainingExpectedMultipleFullBarRests JMI ???
+        // fRemainingMeasureRestsCounter JMI ???
       }
     }
   }
@@ -10435,7 +10419,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       ss >> measuresToBeAdded;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
+      if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
         std::stringstream ss;
 
         ss <<
@@ -10454,126 +10438,88 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
       fCurrentPart->
-        addEmptyMeasuresToPart (
+        appendEmptyMeasuresToPart (
           inputLineNumber,
           fCurrentMeasureNumber,
           measuresToBeAdded);
     }
     else {
-      // fRemainingExpectedMultipleFullBarRests JMI ???
+      // fRemainingMeasureRestsCounter JMI ???
     }
   }
-
-//   // handle an on-going multiple full-bar rests if any only now,
-//   // JMI do it before???
-//   if (fOnGoingMultipleFullBarRests) {
-//     handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
-//       inputLineNumber);
-//   }
 }
 
-void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
-  int inputLineNumber)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-    const int fieldWidth = 37;
-
-    gLog <<
-      "--> handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure()" <<
-      std::endl;
-
-    ++gIndenter;
-
-    gLog <<
-      std::setw (fieldWidth) <<
-      "fCurrentMultipleFullBarRestsHasBeenCreated " << ": " <<
-      fCurrentMultipleFullBarRestsHasBeenCreated <<
-      std::endl <<
-      std::setw (fieldWidth) <<
-      "fRemainingExpectedMultipleFullBarRests" << ": " <<
-      fRemainingExpectedMultipleFullBarRests <<
-      std::endl << std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  //  if (! fOnGoingMultipleFullBarRests) { JMI
-  //   }
-
-//   if (! fCurrentMultipleFullBarRestsHasBeenCreated) {
-//     // create a pending  multiple full-bar rests,
-//     // that will be handled when fRemainingExpectedMultipleFullBarRests
-//     // comes down to 0 later in this very method
-//     fCurrentPart->
-//       appendMultipleFullBarRestsToPart (
-//         inputLineNumber,
-//         fCurrentMultipleFullBarRestsNumber);
+// void mxsr2msrTranslator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
+//   int inputLineNumber)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+//     const int fieldWidth = 37;
 //
-//     fCurrentMultipleFullBarRestsHasBeenCreated = true;
+//     gLog <<
+//       "--> handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
+//       std::endl;
+//
+//     ++gIndenter;
+//
+//     gLog <<
+//       std::setw (fieldWidth) <<
+//       "fRemainingMeasureRestsCounter" << ": " <<
+//       fRemainingMeasureRestsCounter <<
+//       std::endl << std::endl;
+//
+//     --gIndenter;
 //   }
-
-  if (fRemainingExpectedMultipleFullBarRests <= 0) {
-    mxsr2msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      "remainingMultipleFullBarRestsMeasuresNumber problem");
-  }
-
-  // account for one more full-bar rest measure in the multiple full-bar rests
-  --fRemainingExpectedMultipleFullBarRests;
-
-  if (fRemainingExpectedMultipleFullBarRests == 0) {
-    // all multiple full-bar rests have been handled,
-    // the current one is the first after the  multiple full-bar rests
-    fCurrentPart->
-      appendPendingMultipleFullBarRestsToPart (
-        inputLineNumber);
-
-    if (fRemainingExpectedMultipleFullBarRests == 1) {
-      fCurrentPart-> // JMI ??? BOF
-        setNextMeasureNumberInPart (
-          inputLineNumber,
-          fCurrentMeasureNumber);
-    }
-
-    // forget about and  multiple full-bar rests having been created
-    fCurrentMultipleFullBarRestsHasBeenCreated = false;
-
-    fOnGoingMultipleFullBarRests = false;
-  }
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
-    const int fieldWidth = 37;
-
-    gLog <<
-      "--> handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure()" <<
-      ", onGoingMultipleFullBarRests:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    gLog <<
-      std::setw (fieldWidth) <<
-      "fCurrentMultipleFullBarRestsHasBeenCreated " << ": " <<
-      fCurrentMultipleFullBarRestsHasBeenCreated <<
-      std::endl <<
-      std::setw (fieldWidth) <<
-      "fRemainingExpectedMultipleFullBarRests" << ": " <<
-      fRemainingExpectedMultipleFullBarRests <<
-      std::endl <<
-      std::setw (fieldWidth) <<
-      "fOnGoingMultipleFullBarRests " << ": " <<
-      fOnGoingMultipleFullBarRests <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (fRemainingMeasureRestsCounter <= 0) {
+//     mxsr2msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       "fRemainingMeasureRestsCounter problem");
+//   }
+//
+//   // account for one more measure rest in the multi-measure rests
+//   --fRemainingMeasureRestsCounter;
+//
+//   if (fRemainingMeasureRestsCounter == 0) {
+//     // all multi-measure rests have been handled,
+//     // the current one is the first after the  multi-measure rests
+//     fCurrentPart->
+//       appendPendingMultiMeasureRestsToPart (
+//         inputLineNumber);
+//
+//     if (fRemainingMeasureRestsCounter == 1) {
+//       fCurrentPart-> // JMI ??? BOF
+//         setNextMeasureNumberInPart (
+//           inputLineNumber,
+//           fCurrentMeasureNumber);
+//     }
+//   }
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+//     const int fieldWidth = 37;
+//
+//     gLog <<
+//       "--> handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
+//       ", onGoingMultiMeasureRests:" <<
+//       std::endl;
+//
+//     ++gIndenter;
+//
+//     gLog <<
+//       std::setw (fieldWidth) <<
+//       "fRemainingMeasureRestsCounter" << ": " <<
+//       fRemainingMeasureRestsCounter <<
+//       std::endl <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+// }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::visitStart (S_print& elt)
@@ -10806,6 +10752,16 @@ void mxsr2msrTranslator::visitEnd (S_print& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // attach pending line breaks if any to the current part
+  if (fPendingLineBreaksList.size ()) {
+    attachPendingLineBreaksToPart (fCurrentPart);
+  }
+
+  // attach pending page breaks if any to the current part
+  if (fPendingPageBreaksList.size ()) {
+    attachPendingPageBreaksToPart (fCurrentPart);
+  }
 
   // append the current print layout to voice 1 in staff 1 of the current part
   // it's not worth using specific 'layout voices' for such part-level stuff
@@ -11843,10 +11799,6 @@ Controls whether or not spacing is left for an invisible note or object. It is u
   // transpose handling
 //    fCurrentTransposeDouble = false; NO ??? JMI
 
-  // lyrics handling
-  fCurrentNoteHasLyrics = false;
-
-  // rests
   fCurrentNoteIsARest = false;
 
   // unpitched notes
@@ -11902,7 +11854,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
   fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN_;
 
   fCurrentSyllabic = "";
-  // don't forget about fCurrentLyricTextsList here,
+  // don't forget about fCurrentSyllableElementsList here,
   // this will be done in visitStart (S_syllabic& )
   fCurrentSyllableKind = msrSyllableKind::kSyllableNone;
 
@@ -13046,9 +12998,9 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
 /*
 <!--
   A measure-style indicates a special way to print partial
-  to multiple measures within a part. This includes multiple
+  to multi-measures within a part. This includes multiple
   rests over several measures, repeats of beats, single, or
-  multiple measures, and use of slash notation.
+  multi-measures, and use of slash notation.
 
   The multiple-rest and measure-repeat elements indicate the
   number of measures covered in the element content. The
@@ -13126,16 +13078,16 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentMultipleFullBarRestsNumber = (int)(*elt);
+  fCurrentMeasureRestsNumber = (int)(*elt);
 
   std::string useSymbols = elt->getAttributeValue ("use-symbols");
 
-  // what do we do with fMultipleFullBarRestsUseSymbols ??? JMI v0.9.63
+  // what do we do with fMultiMeasureRestsUseSymbols ??? JMI v0.9.63
   if      (useSymbols == "yes") {
-    fMultipleFullBarRestsUseSymbols = true;
+    fMultiMeasureRestsUseSymbols = true;
   }
   else if (useSymbols == "no") {
-    fMultipleFullBarRestsUseSymbols = false;
+    fMultiMeasureRestsUseSymbols = false;
   }
   else {
     if (useSymbols.size ()) {
@@ -13154,22 +13106,35 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
       }
   }
 
-  // create a multiple full-bar rests
+  // create a multi-measure rests
   fCurrentPart->
-    appendMultipleFullBarRestsToPart (
+    appendMultiMeasureRestToPart (
       inputLineNumber,
-      fCurrentMultipleFullBarRestsNumber);
+      fCurrentMeasureRestsNumber);
 
-  fCurrentMultipleFullBarRestsHasBeenCreated = true;
+  // set remaining multi-measure rests counter
+  fRemainingMeasureRestsCounter =
+    fCurrentMeasureRestsNumber;
+}
 
-  // register number of remeaining expected multiple full-bar rests
-  fRemainingExpectedMultipleFullBarRests =
-    fCurrentMultipleFullBarRestsNumber;
+void mxsr2msrTranslator::visitEnd (S_multiple_rest& elt)
+{
+  int inputLineNumber =
+    elt->getInputEndLineNumber ();
 
-  // the  multiple full-bar rests will created at the end of its first measure,
-  // so that the needed staves/voices have been created
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
 
-  fOnGoingMultipleFullBarRests = true;
+    ss <<
+      "--> End visiting S_multiple_rest" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_slash& elt)
@@ -21018,6 +20983,19 @@ void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    note != nullptr, // JMI v0.9.70
+    "chord is null");
+
+  mfAssert (
+    __FILE__, __LINE__,
+    chord != nullptr, // JMI v0.9.70
+    "chord is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   // copy note's articulations if any to the chord
   if (note->getNoteArticulations ().size ()) {
     copyNoteArticulationsToChord (note, chord);
@@ -22276,40 +22254,7 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
   } // while
 }
 
-// void mxsr2msrTranslator::attachLineBreaksToVoice (
-//   const S_msrVoice& voice)
-// {
-//  // attach the pending line breaks to the note
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceLineBreaks ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "Attaching pending line breaks to voice \""  <<
-//         voice->getVoiceName () <<
-//         "\"";
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     while (fPendingLineBreaksList.size ()) {
-//       S_msrLineBreak
-//         lineBreak =
-//           fPendingLineBreaksList.front ();
-//
-//       // append it to the voice
-//       voice->
-//         appendLineBreakToVoice (lineBreak);
-//
-//       // remove it from the list
-//       fPendingLineBreaksList.pop_front ();
-//     } // while
-// }
-
-void mxsr2msrTranslator::attachLineBreaksToPart (
+void mxsr2msrTranslator::attachPendingLineBreaksToPart (
   const S_msrPart& part)
 {
  // attach the pending line breaks to the note
@@ -22342,40 +22287,7 @@ void mxsr2msrTranslator::attachLineBreaksToPart (
   } // while
 }
 
-// void mxsr2msrTranslator::attachPageBreaksToVoice (
-//   const S_msrVoice& voice)
-// {
-//  // attach the pending page breaks to the note
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTracePageBreaks ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Attaching pending page breaks to voice \""  <<
-//       voice->getVoiceName () <<
-//       "\"";
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   while (fPendingPageBreaksList.size ()) {
-//     S_msrPageBreak
-//       pageBreak =
-//         fPendingPageBreaksList.front ();
-//
-//     // append it to the voice
-//     voice->
-//       appendPageBreakToVoice (pageBreak);
-//
-//     // remove it from the list
-//     fPendingPageBreaksList.pop_front ();
-//   } // while
-// }
-
-void mxsr2msrTranslator::attachPageBreaksToPart (
+void mxsr2msrTranslator::attachPendingPageBreaksToPart (
   const S_msrPart& part)
 {
  // attach the pending page breaks to the note
@@ -23479,59 +23391,10 @@ void mxsr2msrTranslator::attachPendingGlissandosToCurrentNote ()
                 "--> attachPendingGlissandosToNote ()"
                 ", voiceStanzasMap.size (): " <<
                 voiceStanzasMap.size () <<
-                ", fCurrentNoteHasLyrics: " <<
-                fCurrentNoteHasLyrics <<
                 ", line " << inputLineNumber <<
                 std::endl;
             }
 #endif // MF_TRACE_IS_ENABLED
-
-        if (voiceStanzasMap.size ()) {
-          // there are lyrics in this voice
-          /* JMI
-          if (! fCurrentNoteHasLyrics) {
-            // append a skip to lyrics the same duration as the note
-#ifdef MF_TRACE_IS_ENABLED
-            if (gTraceOahGroup->getTraceGlissandos ()) {
-              gLog <<
-                "Attaching a skip syllable to note " <<
-                fCurrentNote->asString () <<
-                " that has a glissando stop and no lyrics " <<
-                ", line " << inputLineNumber <<
-                std::endl;
-            }
-#endif // MF_TRACE_IS_ENABLED
-
-            for (
-              std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
-              i != voiceStanzasMap.end ();
-              ++i
-            ) {
-              const S_msrStanza& stanza = (*i).second;
-              // create a skip syllable
-              S_msrSyllable
-                syllable =
-                  msrSyllable::create (
-                    inputLineNumber,
-                    msrSyllableKind::kSyllableSkipRest,
-                    msrSyllableExtendKind::kSyllableExtend_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
-                    fCurrentStanzaNumber,
-                    fCurrentNoteSoundingWholeNotesFromNotesDuration,
-                    stanza);
-
-              // append syllable to current note's syllables list
-              fCurrentNoteSyllables.push_back (
-                syllable);
-
-              // append syllable to stanza
-              stanza->
-                appendSyllableToStanza (syllable);
-            } // for
-
-            fASkipSyllableHasBeenGeneratedForcurrentNote = true;
-          }
-          */
-        }
         break;
     } // switch
 
@@ -23594,8 +23457,6 @@ void mxsr2msrTranslator::attachPendingSlidesToCurrentNote ()
                 "--> attachPendingSlidesToNote ()"
                 ", voiceStanzasMap.size (): " <<
                 voiceStanzasMap.size () <<
-                ", fCurrentNoteHasLyrics: " <<
-                fCurrentNoteHasLyrics <<
                 ", line " << inputLineNumber <<
                 std::endl;
             }
@@ -23604,7 +23465,7 @@ void mxsr2msrTranslator::attachPendingSlidesToCurrentNote ()
         if (voiceStanzasMap.size ()) {
           // there are lyrics in this voice
           /* JMI
-          if (! fCurrentNoteHasLyrics) {
+          if (! fCurrentSyllableElementsList.size ()) {
             // append a skip to lyrics the same duration as the note
 #ifdef MF_TRACE_IS_ENABLED
             if (gTraceOahGroup->getTraceSlides ()) {
@@ -23725,16 +23586,6 @@ void mxsr2msrTranslator::attachPendingPartLevelElementsIfAnyToPart ( // JMI v0.9
   // attach pending tempos if any to part
   if (fPendingTemposList.size ()) {
     attachPendingTemposToPart (part);
-  }
-
-  // attach pending line breaks if any to part
-  if (fPendingLineBreaksList.size ()) {
-    attachLineBreaksToPart (part);
-  }
-
-  // attach pending page breaks if any to part
-  if (fPendingPageBreaksList.size ()) {
-    attachPageBreaksToPart (part);
   }
 }
 
@@ -26453,17 +26304,17 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
 {
-  int inputLineNumber =
+  int currentNoteInputLineNumber =
     fCurrentNote->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
+  if (gTraceOahGroup->getTraceLyricsDetails ()) {
     std::stringstream ss;
 
     ss <<
       "Handling lyrics for note " <<
       fCurrentNote->asShortString () <<
-      ", line " << inputLineNumber <<
+      ", line " << currentNoteInputLineNumber <<
       std::endl;
 
     ++gIndenter;
@@ -26484,17 +26335,12 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentSyllableExtendKind" << "" << ": " <<
-      msrSyllableExtendKindAsString (
-        fCurrentSyllableExtendKind) <<
+      fCurrentSyllableExtendKind <<
       std::endl <<
 
       std::setw (fieldWidth) <<
-      "fCurrentNoteHasLyrics" << ": " <<
-      fCurrentNoteHasLyrics <<
-      std::endl <<
-      std::setw (fieldWidth) <<
-      "fASkipSyllableHasBeenGeneratedForcurrentNote" << ": " <<
-      fASkipSyllableHasBeenGeneratedForcurrentNote <<
+      "fCurrentSyllableElementsList.size ()" << ": " <<
+      fCurrentSyllableElementsList.size () <<
       std::endl <<
 
       std::setw (fieldWidth) <<
@@ -26504,19 +26350,15 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
       "fCurrentStanzaName" << ": " << fCurrentStanzaName << "\"" <<
       std::endl <<
       std::setw (fieldWidth) <<
-      "fCurrentLyricTextsList" << " = ";
-
-    msrSyllable::printTextsList (
-      fCurrentLyricTextsList,
-      gLog);
-
-    gLog << std::endl;
+      "fCurrentSyllableElementsList" << ": " <<
+      syllableElementsListAsString (fCurrentSyllableElementsList) <<
+      std::endl << std::endl;
 
     --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fCurrentNoteHasLyrics) {
+  if (fCurrentSyllableElementsList.size ()) {
     // fCurrentNote has lyrics attached to it
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -26557,223 +26399,92 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
 
     // forget about all of fCurrentNote's syllables
     fCurrentNoteSyllables.clear ();
-
-
-
-
-//     Bool doCreateASkipSyllable =
-//      // ! fASkipSyllableHasBeenGeneratedForcurrentNote; JMI
-//       ! fCurrentNoteHasLyrics;
-//
-//     switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
-//       case msrSyllableExtendKind::kSyllableExtend_NONE:
-//         break;
-//       case msrSyllableExtendKind::kSyllableExtendTypeLess:
-// //         doCreateASkipSyllable = true; // JMI
-//         break;
-//       case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//         break;
-//       case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//  //        doCreateASkipSyllable = true; // JMI
-//         break;
-//       case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//         break;
-//     } // switch
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceLyrics ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "*** ---> handleLyricsForCurrentNoteAfterItHassBeenHandled()" <<
-//         ", doCreateASkipSyllable: " << doCreateASkipSyllable <<
-//         std::endl;
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     if (doCreateASkipSyllable) {
-//       if (
-//         ! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)
-//       ) {
-//         // get the current note voice's stanzas map
-//         const std::map<std::string, S_msrStanza>&
-//           voiceStanzasMap =
-//             fCurrentNoteVoice->
-//               getVoiceStanzasMap ();
-//
-//         for (
-//           std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
-//           i != voiceStanzasMap.end ();
-//           ++i
-//         ) {
-//           const S_msrStanza& stanza = (*i).second;
-//
-//           //choose the syllable kind
-//           msrSyllableKind
-//             syllableKind =
-//             fCurrentNoteIsARest
-//               ? msrSyllableKind::kSyllableSkipRestNote
-//               : msrSyllableKind::kSyllableSkipNonRestNote;
-//
-//           // create a skip syllable
-//           S_msrSyllable
-//             syllable =
-//               msrSyllable::create (
-//                 inputLineNumber,
-//                 syllableKind,
-//                 fCurrentSyllableExtendKind,
-//                 fCurrentStanzaNumber,
-//                 fCurrentNoteSoundingWholeNotesFromNotesDuration,
-//                 msrTupletFactor (
-//                   fCurrentNoteActualNotes,
-//                   fCurrentNoteNormalNotes),
-//                 stanza);
-//
-//           // set syllable note upLink to fCurrentNote
-//           syllable->
-//             appendSyllableToNoteAndSetItsUpLinkToNote (
-//             	fCurrentNote);
-//
-//           // append syllable to stanza
-//           stanza->
-//             appendSyllableToStanza (syllable);
-//         } // for
-//       }
-//     }
-
-
-
-
   }
 
   else {
     // fCurrentNote has no lyrics attached to it
 
     // don't create a skip for chord note members except the first one
-    // nor for grace notes
+    // nor for grace notes JMI ??? v0.9.70
+
+    if (! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)) {
+      // get the current note voice's stanzas map
+      const std::map<std::string, S_msrStanza>&
+        voiceStanzasMap =
+          fCurrentNoteVoice->
+            getVoiceStanzasMap ();
+
+      for (
+        std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+        i != voiceStanzasMap.end ();
+        ++i
+      ) {
+        const S_msrStanza& stanza = (*i).second;
+
+        // choose the syllable kind
+        msrSyllableKind
+          syllableKind =
+          fCurrentNoteIsARest
+            ? msrSyllableKind::kSyllableSkipRestNote
+            : msrSyllableKind::kSyllableSkipNonRestNote;
+
+        // create a skip syllable
+        S_msrSyllable
+          skipSyllable =
+            msrSyllable::create (
+              currentNoteInputLineNumber,
+              syllableKind,
+              fCurrentSyllableExtendKind,
+              fCurrentStanzaNumber,
+              fCurrentNoteSoundingWholeNotesFromNotesDuration,
+              msrTupletFactor (
+                fCurrentNoteActualNotes,
+                fCurrentNoteNormalNotes),
+              stanza);
+
+        // set syllable note upLink to fCurrentNote
+        skipSyllable->
+          appendSyllableToNoteAndSetItsUpLinkToNote (
+            fCurrentNote);
+
+        // fetch the voice
+        S_msrVoice
+          voice =
+            stanza->getStanzaUpLinkToVoice ();
+
+        // fetch the part
+        S_msrPart
+          part =
+            voice->
+              fetchVoiceUpLinkToPart ();
+
+        // fetch the part current measure position
+        msrWholeNotes
+          partDrawingMeasurePosition =
+            part->
+              getPartDrawingMeasurePosition ();
 
 
 
-
-    Bool doCreateASkipSyllable (true);
-     // ! fASkipSyllableHasBeenGeneratedForcurrentNote; JMI
-//       ! fCurrentNoteHasLyrics;
-
-//     switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
-//       case msrSyllableExtendKind::kSyllableExtend_NONE:
-//         break;
-//       case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//         break;
-//       case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//         break;
-//       case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//  //       doCreateASkipSyllable = true; // JMI
-//         break;
-//       case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//         break;
-//     } // switch
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceLyrics ()) {
-      std::stringstream ss;
-
-      ss <<
-        "*** ---> handleLyricsForCurrentNoteAfterItHassBeenHandled()" <<
-        ", doCreateASkipSyllable: " << doCreateASkipSyllable;
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    if (doCreateASkipSyllable) {
-      if (! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)) {
-        // get the current note voice's stanzas map
-        const std::map<std::string, S_msrStanza>&
-          voiceStanzasMap =
-            fCurrentNoteVoice->
-              getVoiceStanzasMap ();
-
-        for (
-          std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
-          i != voiceStanzasMap.end ();
-          ++i
-        ) {
-          const S_msrStanza& stanza = (*i).second;
-
-          // choose the syllable kind
-          msrSyllableKind
-            syllableKind =
-            fCurrentNoteIsARest
-              ? msrSyllableKind::kSyllableSkipRestNote
-              : msrSyllableKind::kSyllableSkipNonRestNote;
-
-          // create a skip syllable
-          S_msrSyllable
-            skipSyllable =
-              msrSyllable::create (
-                inputLineNumber,
-                syllableKind,
-                fCurrentSyllableExtendKind,
-                fCurrentStanzaNumber,
-                fCurrentNoteSoundingWholeNotesFromNotesDuration,
-                msrTupletFactor (
-                  fCurrentNoteActualNotes,
-                  fCurrentNoteNormalNotes),
-                stanza);
-
-          // set syllable note upLink to fCurrentNote
-          skipSyllable->
-            appendSyllableToNoteAndSetItsUpLinkToNote (
-            	fCurrentNote);
-
-
-
-
-          // fetch the voice
-          S_msrVoice
-            voice =
-              stanza->getStanzaUpLinkToVoice ();
-
-          // fetch the part
-          S_msrPart
-            part =
-              voice->
-                fetchVoiceUpLinkToPart ();
-
-          // fetch the part current measure position
-          msrWholeNotes
-            partDrawingMeasurePosition =
-              part->
-                getPartDrawingMeasurePosition ();
-
-
-
-          // append syllable to stanza
-          stanza->
-            appendSyllableToStanza (
-              skipSyllable,
-              partDrawingMeasurePosition);
-        } // for
-      }
+        // append syllable to stanza
+        stanza->
+          appendSyllableToStanza (
+            skipSyllable,
+            partDrawingMeasurePosition);
+      } // for
     }
   }
 
   // register whether the new last handled note has lyrics
   fLastHandledNoteInVoiceHasLyrics =
-    fCurrentNoteHasLyrics;
+    fCurrentSyllableElementsList.size ();
 }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::handleNoteBelongingToAChord (
   const S_msrNote& newChordNote)
 {
-  int inputLineNumber =
+  int newChodeNoteInputLineNumber =
     newChordNote->getInputStartLineNumber ();
 
   // set newChordNote kind as a chord member
@@ -26802,7 +26513,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
   if (fCurrentNoteIsARest) {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber,
+      newChodeNoteInputLineNumber,
       __FILE__, __LINE__,
       "a rest cannot belong to a chord");
   }
@@ -26849,7 +26560,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       fCurrentMusicXMLStaffNumber <<
 //       ", staffNumberToUse: " <<
 //       staffNumberToUse <<
-      ", line " << inputLineNumber;
+      ", line " << newChodeNoteInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26875,7 +26586,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       fCurrentNoteVoice->getVoiceName () <<
       "\", fOnGoingChord: " <<
       fOnGoingChord <<
-      ", line " << inputLineNumber;
+      ", line " << newChodeNoteInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26888,7 +26599,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
     gLog <<
       std::endl <<
       "======================= handleNoteBelongingToAChord" <<
-      ", line " << inputLineNumber <<
+      ", line " << newChodeNoteInputLineNumber <<
       std::endl;
     fCurrentPart->print (gLog);
     gLog <<
@@ -26920,7 +26631,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceChords ()) {
       printVoicesLastMetNoteMap (
-        inputLineNumber,
+        newChodeNoteInputLineNumber,
         "handleNoteBelongingToAChord()");
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -26950,11 +26661,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         "fCurrentMusicXMLStaffNumber: " << fCurrentMusicXMLStaffNumber <<
         std::endl <<
         "fCurrentMusicXMLVoiceNumber: " << fCurrentMusicXMLVoiceNumber <<
-        ", line " << inputLineNumber;
+        ", line " << newChodeNoteInputLineNumber;
 
       mxsr2msrInternalError (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        newChodeNoteInputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -27003,7 +26714,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
     // create the current chord from its first note
     fCurrentChord =
       createChordFromItsFirstNote (
-        inputLineNumber,
+        newChodeNoteInputLineNumber,
         chordFirstNote,
         msrNoteKind::kNoteRegularInChord);
 
@@ -27027,9 +26738,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           ss <<
             "Removing chord first note " <<
             chordFirstNote->asShortString () <<
-            ", line " << inputLineNumber <<
+            ", line " << newChodeNoteInputLineNumber <<
             ", from voice \"" << fCurrentNoteVoice->getVoiceName () << "\"" <<
-            ", line " << inputLineNumber;
+            ", line " << newChodeNoteInputLineNumber;
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -27058,7 +26769,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
             fPreviousNoteMusicXMLStaffNumber <<
             ", fCurrentMusicXMLStaffNumber: " <<
             fCurrentMusicXMLStaffNumber <<
-            ", line " << inputLineNumber;
+            ", line " << newChodeNoteInputLineNumber;
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -27068,7 +26779,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
         fCurrentNoteVoice->
           removeNoteFromVoice (
-            inputLineNumber,
+            newChodeNoteInputLineNumber,
             chordFirstNote);
 
         // add chord to the voice instead
@@ -27144,11 +26855,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
               "chord first note " <<
               chordFirstNote->asShortString () <<
               " belongs to a double tremolo, but is not marked as such" <<
-              ", line " << inputLineNumber;
+              ", line " << newChodeNoteInputLineNumber;
 
             mxsr2msrInternalError (
               gServiceRunData->getInputSourceName (),
-              inputLineNumber,
+              newChodeNoteInputLineNumber,
               __FILE__, __LINE__,
               ss.str ());
           }
@@ -27167,9 +26878,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           ss <<
             "Removing chord first note " <<
             chordFirstNote->asShortString () <<
-            ", line " << inputLineNumber <<
+            ", line " << newChodeNoteInputLineNumber <<
             ", from voice \"" << fCurrentNoteVoice->getVoiceName () << "\"" <<
-            ", line " << inputLineNumber;
+            ", line " << newChodeNoteInputLineNumber;
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -27179,7 +26890,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 
         fCurrentNoteVoice->
           removeNoteFromVoice (
-            inputLineNumber,
+            newChodeNoteInputLineNumber,
             chordFirstNote);
 */
         break;
@@ -27228,7 +26939,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       ss <<
         "Adding another note " <<
         newChordNote->asString() <<
-        ", line " << inputLineNumber <<
+        ", line " << newChodeNoteInputLineNumber <<
         " to current chord in voice " <<
         fCurrentNoteVoice->getVoiceName ();
 
@@ -27260,7 +26971,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 void mxsr2msrTranslator::handleNoteBelongingToATuplet (
   const S_msrNote& note)
 {
-  int inputLineNumber =
+  int noteInputLineNumber =
     note->getInputStartLineNumber ();
 
  // register note as a tuplet member
@@ -27295,7 +27006,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       ", note: " <<
       note->
         asShortString () <<
-      ", line " << inputLineNumber;
+      ", line " << noteInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27327,7 +27038,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           ss <<
             "--> handleNoteBelongingToATuplet(), kTupletTypeStart: note: " <<
             note->asShortString () <<
-            ", line " << inputLineNumber;
+            ", line " << noteInputLineNumber;
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -27337,10 +27048,10 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
 
 //         if (fTupletsStack.size ()) {
 // //           handlePendingTupletStops (
-// //             inputLineNumber,
+// //             noteInputLineNumber,
 // //             note);
 //           finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.70
-//             inputLineNumber,
+//             noteInputLineNumber,
 //             "handleNoteBelongingToATuplet() 1");
 //         }
 
@@ -27353,13 +27064,13 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             gLog <<
               "--> handleNoteBelongingToATuplet(), kTupletTypeStart: handling pending tuplet stop, note " <<
               note->asShortString () <<
-              ", line " << inputLineNumber <<
+              ", line " << noteInputLineNumber <<
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
 
           finalizeTupletStackTopAndPopItFromTupletsStack (
-            inputLineNumber,
+            noteInputLineNumber,
             "handleNoteBelongingToATuplet() 999");
         }
         */
@@ -27427,7 +27138,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
           ss <<
             "--> handleNoteBelongingToATuplet(), kTupletTypeStartAndStopInARow: note: " <<
             note->asShortString () <<
-            ", line " << inputLineNumber;
+            ", line " << noteInputLineNumber;
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -27447,7 +27158,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
      // JMI     mxsr2msrError (
           mxsr2msrWarning (
             gServiceRunData->getInputSourceName (),
-            inputLineNumber,
+            noteInputLineNumber,
        //     __FILE__, __LINE__,
             ss.str ());
         }
@@ -27461,7 +27172,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
 
         // finalize it
         finalizeTupletStackTopAndPopItFromTupletsStack (
-          inputLineNumber,
+          noteInputLineNumber,
           "handleNoteBelongingToATuplet() 7");
       }
       break;
@@ -27489,7 +27200,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
    and the following ones are marked as both a tuplet and a chord member
   */
 
-  int inputLineNumber =
+  int newChordNoteInputLineNumber =
     newChordNote->getInputStartLineNumber ();
 
   // set new note kind as a chord or grace chord member JMI ???
@@ -27526,7 +27237,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
   if (fCurrentNoteIsARest) {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber,
+      newChordNoteInputLineNumber,
       __FILE__, __LINE__,
       "a rest cannot belong to a chord in a tuplet");
   }
@@ -27551,11 +27262,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         std::endl <<
         " a tuplet member chord " <<
         "cannot be added, tuplets stack is empty" <<
-        ", line " << inputLineNumber;
+        ", line " << newChordNoteInputLineNumber;
 
       mxsr2msrInternalError (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        newChordNoteInputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -27574,7 +27285,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       tupletLastNote =
         currentTuplet->
           removeLastNoteFromTuplet (
-            inputLineNumber);
+            newChordNoteInputLineNumber);
 
 /* JMI
     S_msrNote
@@ -27586,7 +27297,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 
     fCurrentNoteVoice->
       removeNoteFromVoice (
-        inputLineNumber,
+        newChordNoteInputLineNumber,
         tupletLastNote);
 */
 
@@ -27600,7 +27311,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
     // create the current chord from its first note
     fCurrentChord =
       createChordFromItsFirstNote (
-        inputLineNumber,
+        newChordNoteInputLineNumber,
         tupletLastNote,
         msrNoteKind::kNoteRegularInChord);
 
@@ -27631,7 +27342,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         fCurrentChord->asString () <<
         " to stack top tuplet " <<
         currentTuplet->asString () <<
-        ", line " << inputLineNumber;
+        ", line " << newChordNoteInputLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -27664,7 +27375,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
       "Adding another note " <<
       newChordNote->
         asShortString () <<
-      ", line " << inputLineNumber <<
+      ", line " << newChordNoteInputLineNumber <<
       " to current chord in voice " <<
       fCurrentNoteVoice->getVoiceName ();
 
@@ -27703,7 +27414,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
    and the following ones are marked as both a tuplet and a chord member
   */
 
-  int inputLineNumber =
+  int newChordNoteInputLineNumber =
     newChordNote->getInputStartLineNumber ();
 
   // set new note kind as a grace chord member
@@ -27729,7 +27440,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
   if (fCurrentNoteIsARest) {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber,
+      newChordNoteInputLineNumber,
       __FILE__, __LINE__,
       "a rest cannot belong to a chord in a grace notes group");
   }
@@ -27745,7 +27456,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       chordFirstNote =
         fPendingGraceNotesGroup->
           removeLastNoteFromGraceNotesGroup (
-            inputLineNumber);
+            newChordNoteInputLineNumber);
     }
 
     else {
@@ -27765,11 +27476,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
           std::endl <<
           "chordFirstNote is null on " <<
           newChordNote->asString () <<
-          ", line " << inputLineNumber;
+          ", line " << newChordNoteInputLineNumber;
 
         mxsr2msrInternalError (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          newChordNoteInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -27798,7 +27509,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
     // create the current chord from its first note
     fCurrentChord =
       createChordFromItsFirstNote (
-        inputLineNumber,
+        newChordNoteInputLineNumber,
         chordFirstNote,
         msrNoteKind::kNoteInChordInGraceNotesGroup);
 
@@ -27835,11 +27546,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
         std::endl <<
         "tuplet member chord " << chord->asString () <<
         "cannot be added, tuplets stack is empty" <<
-        ", line " << inputLineNumber;
+        ", line " << newChordNoteInputLineNumber;
 
       mxsr2msrInternalError (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        newChordNoteInputLineNumber,
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -27858,7 +27569,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       "Adding another note " <<
       newChordNote->
         asShortString () <<
-      ", line " << inputLineNumber <<
+      ", line " << newChordNoteInputLineNumber <<
       " to current chord in voice " <<
       fCurrentNoteVoice->getVoiceName ();
 
@@ -31724,3 +31435,91 @@ The discontinue value is typically used for the last ending in a set, where ther
 //               default:
 //                 ;
 //             } // switch
+
+
+
+
+
+//     Bool doCreateASkipSyllable =
+//      // ! fASkipSyllableHasBeenGeneratedForcurrentNote; JMI
+//       ! fCurrentSyllableElementsList.size ();
+//
+//     switch (fCurrentSyllableExtendKind) { // JMI v0.9.68
+//       case msrSyllableExtendKind::kSyllableExtend_NONE:
+//         break;
+//       case msrSyllableExtendKind::kSyllableExtendTypeLess:
+// //         doCreateASkipSyllable = true; // JMI
+//         break;
+//       case msrSyllableExtendKind::kSyllableExtendTypeStart:
+//         break;
+//       case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+//  //        doCreateASkipSyllable = true; // JMI
+//         break;
+//       case msrSyllableExtendKind::kSyllableExtendTypeStop:
+//         break;
+//     } // switch
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceLyrics ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "*** ---> handleLyricsForCurrentNoteAfterItHassBeenHandled()" <<
+//         ", doCreateASkipSyllable: " << doCreateASkipSyllable <<
+//         std::endl;
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//     if (doCreateASkipSyllable) {
+//       if (
+//         ! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)
+//       ) {
+//         // get the current note voice's stanzas map
+//         const std::map<std::string, S_msrStanza>&
+//           voiceStanzasMap =
+//             fCurrentNoteVoice->
+//               getVoiceStanzasMap ();
+//
+//         for (
+//           std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+//           i != voiceStanzasMap.end ();
+//           ++i
+//         ) {
+//           const S_msrStanza& stanza = (*i).second;
+//
+//           //choose the syllable kind
+//           msrSyllableKind
+//             syllableKind =
+//             fCurrentNoteIsARest
+//               ? msrSyllableKind::kSyllableSkipRestNote
+//               : msrSyllableKind::kSyllableSkipNonRestNote;
+//
+//           // create a skip syllable
+//           S_msrSyllable
+//             syllable =
+//               msrSyllable::create (
+//                 currentInputLineNumber,
+//                 syllableKind,
+//                 fCurrentSyllableExtendKind,
+//                 fCurrentStanzaNumber,
+//                 fCurrentNoteSoundingWholeNotesFromNotesDuration,
+//                 msrTupletFactor (
+//                   fCurrentNoteActualNotes,
+//                   fCurrentNoteNormalNotes),
+//                 stanza);
+//
+//           // set syllable note upLink to fCurrentNote
+//           syllable->
+//             appendSyllableToNoteAndSetItsUpLinkToNote (
+//             	fCurrentNote);
+//
+//           // append syllable to stanza
+//           stanza->
+//             appendSyllableToStanza (syllable);
+//         } // for
+//       }
+//     }

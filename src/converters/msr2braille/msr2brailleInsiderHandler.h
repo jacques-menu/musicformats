@@ -135,20 +135,25 @@ class EXP msr2brailleInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 
     // quit after some passes
-    void                  setQuit2a ()
-                              { fQuitAfterPass2a = true; }
-    Bool                  getQuitAfterPass2a () const
-                              { return fQuitAfterPass2a; }
+    void                  setQuitAfterPass2 ()
+                              { fQuitAfterPass2 = true; }
+    Bool                  getQuitAfterPass2 () const
+                              { return fQuitAfterPass2; }
 
-    void                  setQuit2b ()
-                              { fQuitAfterPass2b = true; }
-    Bool                  getQuitAfterPass2b () const
-                              { return fQuitAfterPass2a; }
-
-    void                  setQuit3 ()
+    void                  setQuitAfterPass3 ()
                               { fQuitAfterPass3 = true; }
     Bool                  getQuitAfterPass3 () const
                               { return fQuitAfterPass3; }
+
+    void                  setQuitAfterPasss4 ()
+                              { fQuitAfterPass4 = true; }
+    Bool                  getQuitAfterPass4 () const
+                              { return fQuitAfterPass4; }
+
+    void                  setQuitAfterPasss5 ()
+                              { fQuitAfterPass5 = true; }
+    Bool                  getQuitAfterPass5 () const
+                              { return fQuitAfterPass5; }
 
   public:
 
@@ -191,9 +196,10 @@ class EXP msr2brailleInsiderOahGroup : public oahGroup
     // --------------------------------------
 
     // quit after some passes
-    Bool                  fQuitAfterPass2a;
-    Bool                  fQuitAfterPass2b;
+    Bool                  fQuitAfterPass2;
     Bool                  fQuitAfterPass3;
+    Bool                  fQuitAfterPass4;
+    Bool                  fQuitAfterPass5;
 };
 typedef SMARTP<msr2brailleInsiderOahGroup> S_msr2brailleInsiderOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_msr2brailleInsiderOahGroup& elt);

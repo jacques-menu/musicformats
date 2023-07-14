@@ -185,18 +185,18 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 // JMI v0.9.67  fRepeatCommonPartElementsList.push_back (measureRepeat); JMI v0.9.66
 }
 
-void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
+void msrRepeatCommonPart::appendMultiMeasureRestToRepeatCommonPart (
   int                   inputLineNumber,
-  const S_msrMultipleFullBarRests& multipleFullBarRests,
+  const S_msrMultiMeasureRest& multiMeasureRests,
   const std::string&    context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultipleFullBarRests ()) {
+  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending multiple full-bar rests " <<
-      multipleFullBarRests->asString () <<
+      "Appending multi-measure rest " <<
+      multiMeasureRests->asString () <<
       " to repeat common part " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
@@ -211,11 +211,11 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    multipleFullBarRests != nullptr,
-    "multipleFullBarRests is null");
+    multiMeasureRests != nullptr,
+    "multiMeasureRests is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//  JMI v0.9.67 fRepeatCommonPartElementsList.push_back (multipleFullBarRests);
+//  JMI v0.9.67 fRepeatCommonPartElementsList.push_back (multiMeasureRests);
 }
 
 void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
@@ -704,9 +704,9 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 // JMI v0.9.67  fRepeatEndingElementsList.push_back (measureRepeat);
 }
 
-void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
+void msrRepeatEnding::appendMultiMeasureRestToRepeatEnding (
   int                   inputLineNumber,
-  const S_msrMultipleFullBarRests& multipleFullBarRests,
+  const S_msrMultiMeasureRest& multiMeasureRests,
   const std::string&    context)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -714,8 +714,8 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
     std::stringstream ss;
 
     ss <<
-      "Appending multiple full-bar rests " <<
-      multipleFullBarRests->asShortString () <<
+      "Appending multi-measure rest " <<
+      multiMeasureRests->asShortString () <<
       " to repeat ending " << asString () <<
       " (" << context << ")" <<
       ", line " << inputLineNumber;
@@ -730,11 +730,11 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    multipleFullBarRests != nullptr,
-    "multipleFullBarRests is null");
+    multiMeasureRests != nullptr,
+    "multiMeasureRests is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//  JMI v0.9.67 fRepeatEndingElementsList.push_back (multipleFullBarRests);
+//  JMI v0.9.67 fRepeatEndingElementsList.push_back (multiMeasureRests);
 }
 
 void msrRepeatEnding::appendVoiceElementToRepeatEnding (
@@ -1602,9 +1602,9 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrRepeat::appendMultipleFullBarRestsToRepeat (
+void msrRepeat::appendMultiMeasureRestToRepeat (
   int                   inputLineNumber,
-  const S_msrMultipleFullBarRests& multipleFullBarRests,
+  const S_msrMultiMeasureRest& multiMeasureRests,
   const std::string&    context)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1612,15 +1612,15 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
     std::stringstream ss;
 
     ss <<
-      "Appending multiple full-bar rests " <<
-      multipleFullBarRests->asString () <<
+      "Appending multi-measure rest " <<
+      multiMeasureRests->asString () <<
       " to repeat " <<
       asShortString () <<
       std::endl;
 
     displayRepeat (
       inputLineNumber,
-      "appendMultipleFullBarRestsToRepeat() 1");
+      "appendMultiMeasureRestToRepeat() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1630,8 +1630,8 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
         std::stringstream ss;
 
         ss <<
-          "multiple full-bar rests '" <<
-          multipleFullBarRests->asShortString () <<
+          "multi-measure rests '" <<
+          multiMeasureRests->asShortString () <<
           "'cannot be added to a just created repeat" <<
           " (" << context << ")";
 
@@ -1645,17 +1645,17 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
       fRepeatCommonPart->
-        appendMultipleFullBarRestsToRepeatCommonPart (
+        appendMultiMeasureRestToRepeatCommonPart (
           inputLineNumber,
-          multipleFullBarRests,
+          multiMeasureRests,
           context);
       break;
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
       fRepeatEndings.back ()->
-        appendMultipleFullBarRestsToRepeatEnding (
+        appendMultiMeasureRestToRepeatEnding (
           inputLineNumber,
-          multipleFullBarRests,
+          multiMeasureRests,
           context);
       break;
 
@@ -1664,8 +1664,8 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
         std::stringstream ss;
 
         ss <<
-          "multiple full-bar rests '" <<
-          multipleFullBarRests->asShortString () <<
+          "multi-measure rests '" <<
+          multiMeasureRests->asShortString () <<
           "'cannot be added to a completed repeat" <<
           '(' << context << ")";
 
@@ -1682,7 +1682,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
   if (gTraceOahGroup->getTraceRepeats ()) {
     displayRepeat (
       inputLineNumber,
-      "appendMultipleFullBarRestsToRepeat() 2");
+      "appendMultiMeasureRestToRepeat() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
 }

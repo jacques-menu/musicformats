@@ -310,21 +310,21 @@ There are cases where the data should be sorted prior to being browsed, such as 
 
 In some cases, it is desirable not to browse part of the data. This is the case when a given class   contains non-normalized data, i.e. data that occurs elsewhere and will be browsed in another class   instance.
 
-For example, \class{msrMultipleFullBarRests} contains \class{msrMeasure} instances. \class{msrScore} contains:
+For example, \class{msrMultiMeasureRest} contains \class{msrMeasure} instances. \class{msrScore} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    // in <multiple-rest/>, the multiple full-bar rests are explicit,
-    // whereas LilyPond only needs the number of multiple full-bar rests
-    Bool                  fInhibitMultipleFullBarRestsBrowsing;
+    // in <multiple-rest/>, the multi-measure rests are explicit,
+    // whereas LilyPond only needs the number of multi-measure rests
+    Bool                  fInhibitMultiMeasureRestsBrowsing;
 
-    void                  setInhibitMultipleFullBarRestsBrowsing ()
+    void                  setInhibitMultiMeasureRestsBrowsing ()
                               {
-                                fInhibitMultipleFullBarRestsBrowsing = true;
+                                fInhibitMultiMeasureRestsBrowsing = true;
                               }
 
-    Bool                  getInhibitMultipleFullBarRestsBrowsing () const
+    Bool                  getInhibitMultiMeasureRestsBrowsing () const
                               {
                                 return
-                                  fInhibitMultipleFullBarRestsBrowsing;
+                                  fInhibitMultiMeasureRestsBrowsing;
                               };
 \end{lstlisting}
 
@@ -334,25 +334,25 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 {
   // ... ... ...
 
-  if (fOnGoingMultipleFullBarRests) {
+  if (fOnGoingMultiMeasureRests) {
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
-        // don't handle multiple full-bar restss, that's done in visitEnd (S_msrMultipleFullBarRests&)
+        // don't handle multi-measure restss, that's done in visitEnd (S_msrMultiMeasureRest&)
           if (elt->getNoteOccupiesAFullMeasure ()) {
-            Bool inhibitMultipleFullBarRestsBrowsing =
+            Bool inhibitMultiMeasureRestsBrowsing =
               fVisitedLpsrScore->
                 getMsrScore ()->
-                  getInhibitMultipleFullBarRestsBrowsing ();
+                  getInhibitMultiMeasureRestsBrowsing ();
 
-            if (inhibitMultipleFullBarRestsBrowsing) {
+            if (inhibitMultiMeasureRestsBrowsing) {
 #ifdef MF_TRACE_IS_ENABLED
               if (
                 gTraceOahGroup->getTraceNotes ()
                   ||
-                gTraceOahGroup->getTraceMultipleFullBarRests ()
+                gTraceOahGroup->getTraceMultiMeasureRests ()
               ) {
                 gLog <<
-                  "% ==> end visiting multiple full-bar rests is ignored" <<
+                  "% ==> end visiting multi-measure rests is ignored" <<
                   std::endl;
               }
 #endif // MF_TRACE_IS_ENABLED

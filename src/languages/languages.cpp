@@ -304,35 +304,21 @@ std::string language::passIDKindAsString (mfPassIDKind passIDKind) const
     case mfPassIDKind::kMfPassID_2:
      result = "Pass 2";
       break;
-    case mfPassIDKind::kMfPassID_2a:
-     result = "Pass 2a";
-      break;
-    case mfPassIDKind::kMfPassID_2b:
-     result = "Pass 2b";
-      break;
 
     case mfPassIDKind::kMfPassID_3:
      result = "Pass 3";
-      break;
-    case mfPassIDKind::kMfPassID_3a:
-     result = "Pass 3a";
-      break;
-    case mfPassIDKind::kMfPassID_3b:
-     result = "Pass 3b";
       break;
 
     case mfPassIDKind::kMfPassID_4:
      result = "Pass 4";
       break;
-    case mfPassIDKind::kMfPassID_4a:
-     result = "Pass 4a";
-      break;
-    case mfPassIDKind::kMfPassID_4b:
-     result = "Pass 4b";
-      break;
 
     case mfPassIDKind::kMfPassID_5:
      result = "Pass 5";
+      break;
+
+    case mfPassIDKind::kMfPassID_6:
+     result = "Pass 6";
       break;
   } // switch
 

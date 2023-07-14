@@ -115,7 +115,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
           "July 22, 2022",
           std::list<std::string> {
             "Fixed unchechecked smart pointers in msrNotes.cpp",
-            "Finalized the representation of full-bar rests"
+            "Finalized the representation of measure rests"
           }
       ));
 

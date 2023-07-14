@@ -119,8 +119,8 @@ msrScore::msrScore (
   // measure repeats replicas should be browsed by default
   fInhibitMeasureRepeatReplicasBrowsing = false;
 
-  // multiple full-bar rests should be browsed by default
-  fInhibitMultipleFullBarRestsBrowsing = false;
+  // multi-measure rests should be browsed by default
+  fInhibitMultiMeasureRestsBrowsing = false;
 
    // staves browsing order
   fStavesBrowingOrderKind =
@@ -183,8 +183,8 @@ S_msrScore msrScore::createScoreNewbornClone ()
   newbornClone->fInhibitMeasureRepeatReplicasBrowsing =
     fInhibitMeasureRepeatReplicasBrowsing;
 
-  newbornClone->fInhibitMultipleFullBarRestsBrowsing =
-    fInhibitMultipleFullBarRestsBrowsing;
+  newbornClone->fInhibitMultiMeasureRestsBrowsing =
+    fInhibitMultiMeasureRestsBrowsing;
 
   return newbornClone;
 }
@@ -660,8 +660,8 @@ void msrScore::printFull (std::ostream& os) const
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fIinhibitMultipleFullBarRestsBrowsing" <<  ": " <<
-    fInhibitMultipleFullBarRestsBrowsing <<
+    "fIinhibitMultiMeasureRestsBrowsing" <<  ": " <<
+    fInhibitMultiMeasureRestsBrowsing <<
     std::endl<<
     std::endl;
 
@@ -990,8 +990,8 @@ void msrScore::printSummary (std::ostream& os) const
     std::endl<<
 
     std::setw (fieldWidth) <<
-    "fInhibitMultipleFullBarRestsBrowsing" <<  ": " <<
-    fInhibitMultipleFullBarRestsBrowsing <<
+    "fInhibitMultiMeasureRestsBrowsing" <<  ": " <<
+    fInhibitMultiMeasureRestsBrowsing <<
     std::endl<<
     std::endl;
 

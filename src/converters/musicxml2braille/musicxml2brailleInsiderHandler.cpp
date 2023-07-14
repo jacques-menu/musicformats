@@ -126,21 +126,21 @@ std::string xml2brlInsiderHandler::handlerServiceAboutInformation () const
 R"(What xml2brl does:
 
     This multi-pass converter basically performs 6 passes:
-        Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
-                 and converts it to a MusicXML tree;
-        Pass 2a: converts that MusicXML tree into
-                 a first Music Score Representation (MSR) skeleton;
-        Pass 2b: populates the MSR skeleton from the MusicXML tree
-                 to get a full MSR;
-        Pass 3:  converts the first MSR into a second MSR, to apply options
-        Pass 4:  converts the second MSR into
-                 a first Braille Score Representation (BSR)
-                 containing one Braille page per MusicXML page;
-        Pass 5:  converts the first BSR into a second BSR
-                 with as many Braille pages as needed
-                 to fit the line and page lengthes;
-        Pass 6:  converts the BSR to Braille text
-                 and writes it to standard output.
+        Pass 1: reads the contents of MusicXMLFile or stdin ('-')
+                and converts it to a MusicXML tree;
+        Pass 2: converts that MusicXML tree into
+                a first Music Score Representation (MSR) skeleton;
+        Pass 3: populates the MSR skeleton from the MusicXML tree
+                to get a full MSR;
+        Pass 4: converts the first MSR into a second MSR, to apply options
+        Pass 5: converts the second MSR into
+                a first Braille Score Representation (BSR)
+                containing one Braille page per MusicXML page;
+        Pass 6: converts the first BSR into a second BSR
+                with as many Braille pages as needed
+                to fit the line and page lengthes;
+        Pass 7: converts the BSR to Braille text
+                and writes it to standard output.
 
     In this preliminary version, pass 3 merely clones the MSR it receives.
 
@@ -805,46 +805,46 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // quit after pass 2a
+  // quit after pass 2
 
   S_oahBooleanAtom
     quit2aOahBooleanAtom =
       oahBooleanAtom::create (
-        "quit-after-pass-2a", "qap2a",
-R"(Quit after pass 2a, i.e. after conversion
+        "quit-after-pass-2", "qap2",
+R"(Quit after pass 2, i.e. after conversion
 of the MusicXML tree to an MSR skeleton.)",
-        "fQuitAfterPass2a",
-        fQuitAfterPass2a);
+        "fQuitAfterPass2",
+        fQuitAfterPass2);
 
   subGroup->
     appendAtomToSubGroup (
       quit2aOahBooleanAtom);
 
-  // quit after pass 2b
+  // quit after pass 3
 
   S_oahBooleanAtom
     quit2bOahBooleanAtom =
       oahBooleanAtom::create (
-        "quit-after-pass-2b", "qap2b",
-R"(Quit after pass 2b, i.e. after conversion
+        "quit-after-pass-3", "qap3",
+R"(Quit after pass 3, i.e. after conversion
 of the MusicXML tree to MSR.)",
-        "fQuitAfterPass2b",
-        fQuitAfterPass2b);
+        "fQuitAfterPass3",
+        fQuitAfterPass3);
 
   subGroup->
     appendAtomToSubGroup (
       quit2bOahBooleanAtom);
 
-  // quit after pass 3
+  // quit after pass 4
 
   S_oahBooleanAtom
     quit3OahBooleanAtom =
       oahBooleanAtom::create (
-        "quit-after-pass-3", "qap3",
-R"(Quit after pass 3, i.e. after conversion
+        "quit-after-pass-4", "qap4",
+R"(Quit after pass 4, i.e. after conversion
 of the first MSR to a second MSR.)",
-        "fQuitAfterPass3",
-        fQuitAfterPass3);
+        "fQuitAfterPass4",
+        fQuitAfterPass4);
 
   subGroup->
     appendAtomToSubGroup (
@@ -870,11 +870,11 @@ void xml2brlInsiderOahGroup::printXml2brlInsiderOahGroupValues (int fieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
-    fQuitAfterPass2a <<
+    std::setw (fieldWidth) << "fQuitAfterPass2" << ": " <<
+    fQuitAfterPass2 <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2b" << ": " <<
-    fQuitAfterPass2b <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
+    fQuitAfterPass3 <<
     std::endl <<
     std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
     fQuitAfterPass3 <<

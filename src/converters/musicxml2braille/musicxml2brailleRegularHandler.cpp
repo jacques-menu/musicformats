@@ -286,9 +286,9 @@ void xml2brlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("trace-bsr-visitors", subGroup);
 #endif // MF_TRACE_IS_ENABLED
 
-  registerAtomInRegularSubgroup ("quit-after-pass-2a", subGroup);
-  registerAtomInRegularSubgroup ("quit-after-pass-2b", subGroup);
+  registerAtomInRegularSubgroup ("quit-after-pass-2", subGroup);
   registerAtomInRegularSubgroup ("quit-after-pass-3", subGroup);
+  registerAtomInRegularSubgroup ("quit-after-pass-4", subGroup);
 }
 
 void xml2brlRegularHandler::createInformationsRegularGroup ()
@@ -320,17 +320,17 @@ void xml2brlRegularHandler::createInformationsRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("about", subGroup);
-  
+
   registerAtomInRegularSubgroup ("version", subGroup);
   registerAtomInRegularSubgroup ("version-full", subGroup);
-  
+
   registerAtomInRegularSubgroup ("history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("contact", subGroup);
-  
+
   registerAtomInRegularSubgroup ("music-formats-test", subGroup);
 }
 

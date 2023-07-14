@@ -133,7 +133,7 @@ void msrMeasure::initializeMeasure ()
   fMeasureIsFirstInVoice = false; // default value
 
   // single-measure rest?
-  fMeasureIsAFullBarRest = false;
+  fMeasureIsAMeasureRest = false;
 
   // fetch the staff
   S_msrStaff
@@ -339,8 +339,8 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
 
 /* JMI
   // single-measure rest?
-  newbornClone->fMeasureIsAFullBarRest =
-    fMeasureIsAFullBarRest;
+  newbornClone->fMeasureIsAMeasureRest =
+    fMeasureIsAMeasureRest;
 
   // regular measure ends detection // JMI TEMP
   newbornClone->fMeasureEndRegularKind =
@@ -438,10 +438,10 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   deepClone->fMeasureFirstInSegmentKind =
     fMeasureFirstInSegmentKind;
 
-    // multiple full-bar rest?
+    // multi-measure rest?
 
-  deepClone->fMeasureIsAFullBarRest =
-    fMeasureIsAFullBarRest;
+  deepClone->fMeasureIsAMeasureRest =
+    fMeasureIsAMeasureRest;
 
   // elements
 
@@ -2498,9 +2498,9 @@ void msrMeasure::appendNoteToMeasure (
       setNoteOccupiesAFullMeasure ();
   }
 
-  // is note a multiple full-bar rest? JMI v0.9.69
+  // is note a multi-measure rest? JMI v0.9.69
   if (note->fetchNoteIsAFullNoteRest ()) {
-    setMeasureIsAFullBarRest ();
+    setMeasureIsAMeasureRest ();
   }
 
   // set grace notes group 'before' elements measure position in relevant
@@ -4413,7 +4413,7 @@ void msrMeasure::handleEmptyMeasure (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     voice->
-      displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "handleEmptyMeasure 2 measure has 0 measure whole notes");
 
@@ -7727,8 +7727,8 @@ void msrMeasure::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureIsAFullBarRest" << ": " <<
-    fMeasureIsAFullBarRest <<
+    "fMeasureIsAMeasureRest" << ": " <<
+    fMeasureIsAMeasureRest <<
     std::endl;
 
   os <<

@@ -1412,7 +1412,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep 'public msrVo
 msrBeatRepeats.h:class EXP msrBeatRepeat : public msrVoiceElement
 msrMeasureRepeats.h:class EXP msrMeasureRepeat : public msrVoiceElement
 msrRepeats.h:class EXP msrRepeat : public msrVoiceElement
-msrMultipleFullBarRests.h:class EXP msrMultipleFullBarRests : public msrVoiceElement
+msrMultiMeasureRests.h:class EXP msrMultiMeasureRest : public msrVoiceElement
 msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \end{lstlisting}
 
@@ -1430,7 +1430,7 @@ A voice is conceptually a sequence of {\tt S_msrVoiceElement}, that may be:
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r 'public msrVoiceElement' *
 formats/msr/msrMeasureRepeats.h:class EXP msrMeasureRepeat : public msrVoiceElement
 formats/msr/msrRepeats.h:class EXP msrRepeat : public msrVoiceElement
-formats/msr/msrMultipleFullBarRests.h:class EXP msrMultipleFullBarRests : public msrVoiceElement
+formats/msr/msrMultiMeasureRests.h:class EXP msrMultiMeasureRest : public msrVoiceElement
 formats/msr/msrBeatRepeats.h:class EXP msrBeatRepeat : public msrVoiceElement
 formats/msr/msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \end{lstlisting}
@@ -1762,14 +1762,14 @@ class EXP msrMeasureRepeatReplicas : public msrElement
 
 
 % -------------------------------------------------------------------------
-\section{Multiple full-bar rests}\label{Multiple full-bar rests}
+\section{Multi-measure rests}\label{Multi-measure rests}
 % -------------------------------------------------------------------------
 
-Full-bar rests handling is presented at \sectionRef{Multiple full-bar rests handling}.
+Multi-measure rests handling is presented at \sectionRef{Multi-measure rests handling}.
 
-\Class{msrMultipleFullBarRests}, defined in \msrBoth{msrMultipleFullBarRests}, essentially contains a liste of \class{_msrMeasure} instances and a multiple full-bar rests number:
+\Class{msrMultiMeasureRest}, defined in \msrBoth{msrMultiMeasureRest}, essentially contains a liste of \class{_msrMeasure} instances and a multi-measure rests number:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrMultipleFullBarRests : public msrSegmentElement
+class EXP msrMultiMeasureRest : public msrSegmentElement
 {
 	// ... ... ...
 
@@ -1778,15 +1778,15 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrSegment          fMultipleFullBarRestsUpLinkToSegment;
+    S_msrSegment          fMultiMeasureRestUpLinkToSegment;
 
-    int                   fMultipleFullBarRestsNumber; // supplied by MusicXML
+    int                   fMeasureRestsNumber; // supplied by MusicXML
     std::list<S_msrMeasure>
-                          fFullBarRestsMeasuresList;
+                          fMeasureRestsList;
 
-    int                   fMultipleFullBarRestsLastMeasurePuristNumber;
+    int                   fLastMeasureRestPuristNumber;
 
-    std::string           fMultipleFullBarRestsNextMeasureNumber;
+    std::string           fNextMeasureNumber;
 };
 \end{lstlisting}
 
@@ -1808,7 +1808,7 @@ The following classes are defined in \msrBoth{msrRepeats}, contains:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep class   msrRepeats.h
 class   msrRepeat;
-class   msrMultipleFullBarRests;
+class   msrMultiMeasureRest;
 class   msrMeasureRepeat;
 class   msrNote;
 class EXP msrRepeatCommonPart : public msrElement
@@ -2253,7 +2253,7 @@ Extensions are described by enumeration type {\tt }:
 
     // texts list
     std::list<std::string>
-                          fSyllableTextsList;
+                          fSyllableElementsList;
 
     // extend kind
     msrSyllableExtendKind fSyllableExtendKind;

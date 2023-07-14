@@ -286,9 +286,9 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("trace-lpsr-visitors", subGroup);
 #endif // MF_TRACE_IS_ENABLED
 
-  registerAtomInRegularSubgroup ("quit-after-pass-2a", subGroup);
-  registerAtomInRegularSubgroup ("quit-after-pass-2b", subGroup);
+  registerAtomInRegularSubgroup ("quit-after-pass-2", subGroup);
   registerAtomInRegularSubgroup ("quit-after-pass-3", subGroup);
+  registerAtomInRegularSubgroup ("quit-after-pass-4", subGroup);
 
   registerAtomInRegularSubgroup ("debug", subGroup);
 
@@ -913,7 +913,7 @@ void xml2lyRegularHandler::createNotesRegularGroup ()
 
   registerAtomInRegularSubgroup ("merge-rests-in-msr", subGroup);
   registerAtomInRegularSubgroup ("merge-staff-common-rests-in-lilypond", subGroup);
-  registerAtomInRegularSubgroup ("multiple full-bar-rests-expand-limit", subGroup);
+  registerAtomInRegularSubgroup ("multi-measure-rests-expand-limit", subGroup);
 }
 
 void xml2lyRegularHandler::creatBeamsRegularGroup ()

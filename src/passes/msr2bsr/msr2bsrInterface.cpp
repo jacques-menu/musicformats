@@ -113,7 +113,7 @@ S_bsrScore translateMsrToBsr (
       std::stringstream ss;
 
       ss <<
-        "gIndenter value after pass 3a: " <<
+        "gIndenter value after pass 3: " <<
         gIndenter.getIndentation ();
 
       msr2bsrWarning (

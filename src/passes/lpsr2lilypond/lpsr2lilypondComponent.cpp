@@ -90,7 +90,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
           "May 31, 2022",
           std::list<std::string> {
             "Fixed an issue in octave shift handling",
-            "Replace \\fermataMarkup by \\fermata in R* multiple full-bar rests",
+            "Replace \\fermataMarkup by \\fermata in R* multi-measure rests",
             "Fixed bug in absolute and relative octaves generation"
           }
       ));
@@ -101,7 +101,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
           mfcVersionNumber::createFromString ("0.9.64"),
           "May 31, 2022",
           std::list<std::string> {
-            "Finalized the generation of LilyPond code for full-bar rests"
+            "Finalized the generation of LilyPond code for measure rests"
           }
       ));
 

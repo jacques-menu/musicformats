@@ -121,22 +121,22 @@ std::string msr2brailleInsiderHandler::handlerServiceAboutInformation () const
 R"(What msr2braille does:
 
     This multi-pass converter basically performs 6 passes:
-        Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
-                 and converts it to a MusicXML tree;
-        Pass 2a: converts that MusicXML tree into
-                 a Music Score Representation (MSR) skeleton;
-        Pass 2b: populates the MSR skeleton from the MusicXML tree
-                 to get a full MSR;
-        Pass 3a: converts the MSR into a
-                 Braille Score Representation (BSR)
-                 containing one Braille page per MusicXML page;
-        Pass 3b: converts the BSRinto another BSR
-                 with as many Braille pages as needed
-                 to fit the line and page lengthes;
-        Pass 4:  converts the BSR to Unicode text
-                 and writes it to standard output.
+        Pass 1: reads the contents of MusicXMLFile or stdin ('-')
+                and converts it to a MusicXML tree;
+        Pass 2: converts that MusicXML tree into
+                a Music Score Representation (MSR) skeleton;
+        Pass 3: populates the MSR skeleton from the MusicXML tree
+                to get a full MSR;
+        Pass 4: converts the MSR into a
+                Braille Score Representation (BSR)
+                containing one Braille page per MusicXML page;
+        Pass 5: converts the BSRinto another BSR
+                with as many Braille pages as needed
+                to fit the line and page lengthes;
+        Pass 6: converts the BSR to Unicode text
+                and writes it to standard output.
 
-    In this preliminary version, pass 3b merely clones the BSR it receives.
+    In this preliminary version, pass 4 merely clones the BSR it receives.
 
     Other passes are performed according to the options, such as
     displaying views of the internal data or printing a summary of the score.
@@ -763,11 +763,11 @@ void msr2brailleInsiderOahGroup::printXml2brailleInsiderOahGroupValues (int fiel
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (fieldWidth) << "fQuitAfterPass2a" << ": " <<
-    fQuitAfterPass2a <<
+    std::setw (fieldWidth) << "fQuitAfterPass2" << ": " <<
+    fQuitAfterPass2 <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass2b" << ": " <<
-    fQuitAfterPass2b <<
+    std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
+    fQuitAfterPass3 <<
     std::endl;
 
   --gIndenter;

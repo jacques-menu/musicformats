@@ -4024,7 +4024,7 @@ The default is 'DEFAULT_VALUE'.)",
         "fAccidentalStyleKind",
         fAccidentalStyleKind));
 
-  // multiple full-bar rests
+  // multi-measure rests
   // --------------------------------------
 
   subGroup->
@@ -4032,9 +4032,9 @@ The default is 'DEFAULT_VALUE'.)",
       oahBooleanAtom::create (
         "compress-empty-measures-in-lilypond", "cemil",
 R"(Compress empty measures in the LilyPond output. TEMP !!! JMI
-This causes a \compressFullBarRests command to be generated.)",
-        "fCompressFullBarRestsInLilypond",
-        fCompressFullBarRestsInLilypond));
+This causes a \compressMeasureRests command to be generated.)",
+        "fCompressMeasureRestsInLilypond",
+        fCompressMeasureRestsInLilypond));
 
   // merge rests
   // --------------------------------------
@@ -4045,26 +4045,26 @@ This causes a \compressFullBarRests command to be generated.)",
         "merge-staff-common-rests-in-lilypond", "mscril",
 R"(Merge common rests in LilyPond staves to obtain better looking scores.
 Limitations: this only handles two voices
-and does not handle multiple full-bar rests.)",
+and does not handle multi-measure rests.)",
         "fMergeStaffCommonRests",
         fMergeStaffCommonRests));
 
-  // multiple full-bar rests
+  // multi-measure rests
   // --------------------------------------
 
-  fMultipleFullBarRestsExpandLimitAtom =
+  fMultiMeasureRestsExpandLimitAtom =
       oahIntegerAtom::create (
-        "multiple full-bar-rests-expand-limit", "fbrel",
+        "multi-measure-rests-expand-limit", "fbrel",
 R"(Set the maximum number of measures expanded in church rests to N,
 where N is a positive integer.
 The default value is 10.)",
         "N",
-        "fMultipleFullBarRestsExpandLimit",
-        fMultipleFullBarRestsExpandLimit);
+        "fMultiMeasureRestsExpandLimit",
+        fMultiMeasureRestsExpandLimit);
 
   subGroup->
     appendAtomToSubGroup (
-      fMultipleFullBarRestsExpandLimitAtom);
+      fMultiMeasureRestsExpandLimitAtom);
 
   // input line numbers
   // --------------------------------------
@@ -5778,16 +5778,16 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       lpsrLyricsNotesDurationsKindAsString (fLyricsNotesDurationsKind) <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fCompressFullBarRestsInLilypond" << ": " <<
-      fCompressFullBarRestsInLilypond <<
+    std::setw (valueFieldWidth) << "fCompressMeasureRestsInLilypond" << ": " <<
+      fCompressMeasureRestsInLilypond <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fMergeStaffCommonRests" << ": " <<
       fMergeStaffCommonRests <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fMultipleFullBarRestsExpandLimit" << ": " <<
-      fMultipleFullBarRestsExpandLimit <<
+    std::setw (valueFieldWidth) << "fMultiMeasureRestsExpandLimit" << ": " <<
+      fMultiMeasureRestsExpandLimit <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fInputStartLineNumbers" << ": " <<
@@ -6410,16 +6410,16 @@ void lpsr2lilypondOahGroup::displayLilypondGenerationOahValues (int fieldWidth)
       lpsrLyricsNotesDurationsKindAsString (fLyricsNotesDurationsKind) <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fCompressFullBarRestsInLilypond" << ": " <<
-      fCompressFullBarRestsInLilypond <<
+    std::setw (fieldWidth) << "fCompressMeasureRestsInLilypond" << ": " <<
+      fCompressMeasureRestsInLilypond <<
       std::endl <<
 
     std::setw (fieldWidth) << "fMergeStaffCommonRests" << ": " <<
       fMergeStaffCommonRests <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fMultipleFullBarRestsExpandLimit" << ": " <<
-      fMultipleFullBarRestsExpandLimit <<
+    std::setw (fieldWidth) << "fMultiMeasureRestsExpandLimit" << ": " <<
+      fMultiMeasureRestsExpandLimit <<
       std::endl <<
 
     std::setw (fieldWidth) << "fInputStartLineNumbers" << ": " <<

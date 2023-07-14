@@ -131,15 +131,15 @@ std::string msdl2lilypondInsiderHandler::handlerServiceAboutInformation () const
 R"(What msdl2lilypond does:
 
     This multi-pass converter basically performs 5 passes:
-        Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
-                 and converts it to a MusicXML tree;
-        Pass 2a: converts that MusicXML tree into
-                 a Music Score Representation (MSR) skeleton;
+        Pass 1: reads the contents of MusicXMLFile or stdin ('-')
+                and converts it to a MusicXML tree;
+        Pass 2: converts that MusicXML tree into
+                a Music Score Representation (MSR) skeleton;
         Pass 2b: populates the MSR skeleton from the MusicXML tree
-                 to get a full MSR;
-        Pass 3:  converts the MSR into a
-                 LilyPond Score Representation (LPSR);
-        Pass 4:  converts the LPSR to LilyPond code
+                to get a full MSR;
+        Pass 3: converts the MSR into a
+                LilyPond Score Representation (LPSR);
+        Pass 4: converts the LPSR to LilyPond code
                  and writes it to standard output.
 
     Other passes are performed according to the options, such as
@@ -586,7 +586,7 @@ R"()",
   // quit after pass 1
 
   S_oahBooleanAtom
-    quit2aOahBooleanAtom =
+    quit1OahBooleanAtom =
       oahBooleanAtom::create (
         "quit-after-pass-1", "qap1",
 R"(Quit after pass 1, i.e. after conversion
@@ -596,7 +596,7 @@ of the MusicXML tree to an MSR skeleton.)",
 
   subGroup->
     appendAtomToSubGroup (
-      quit2aOahBooleanAtom);
+      quit1OahBooleanAtom);
 }
 
 void msdl2lilypondInsiderOahGroup::printMsdl2lyInsiderOahGroupValues (

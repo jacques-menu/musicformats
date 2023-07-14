@@ -438,7 +438,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
     gTraceOahGroup->getTraceRepeatsDetails ()
   ) {
     fSegmentUpLinkToVoice->
-      displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "assertSegmentLastMeasureIsNotNull()");
   }
@@ -476,7 +476,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
     gTraceOahGroup->getTraceRepeatsDetails ()
   ) {
     fSegmentUpLinkToVoice->
-      displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "assertSegmentElementsListIsNotEmpty()");
   }
@@ -935,24 +935,24 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //   }
 //
 //   else if (
-//     // full-bar rest?
+//     // measure rest?
 //
-//     S_msrMultipleFullBarRests
-//       multipleFullBarRests =
-//         dynamic_cast<msrMultipleFullBarRests*>(&(*segmentElementsListFirstElement))
+//     S_msrMultiMeasureRest
+//       multiMeasureRest =
+//         dynamic_cast<msrMultiMeasureRest*>(&(*segmentElementsListFirstElement))
 //   ) {
 //     const std::list<S_msrMeasure>&
-//       fullBarRestsMeasuresList =
-//         multipleFullBarRests->
-//           getFullBarRestsMeasuresList ();
+//       measureRestsList =
+//         multiMeasureRest->
+//           getMeasureRestsList ();
 //
-//     if (fullBarRestsMeasuresList.size ()) {
+//     if (measureRestsList.size ()) {
 //       S_msrMeasure
-//         fullBarRestsMeasuresListFirstMeasure = // JMI v0.9.64 ???
-//           fullBarRestsMeasuresList.front ();
+//         measureRestsListFirstMeasure = // JMI v0.9.64 ???
+//           measureRestsList.front ();
 //
-//       // prepend the clef to the full-bar rest first measure
-//       fullBarRestsMeasuresListFirstMeasure->
+//       // prepend the clef to the measure rest first measure
+//       measureRestsListFirstMeasure->
 //         appendClefToMeasure (clef);
 //     }
 //
@@ -964,7 +964,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //         clef->asShortString () <<
 //         " to segment " <<
 //         this->asString () <<
-//         " which is not a measure nor a full-bar rest" <<
+//         " which is not a measure nor a measure rest" <<
 //         ", in voice \"" <<
 //         fSegmentUpLinkToVoice->getVoiceName () <<
 //         "\"" <<
@@ -988,7 +988,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       clef->asShortString () <<
 //       " to segment " <<
 //       this->asString () <<
-//       " which is not a measure nor a full-bar rest" <<
+//       " which is not a measure nor a measure rest" <<
 //       ", in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
 //       "\"" <<
@@ -2207,6 +2207,34 @@ void msrSegment::appendPaddingNoteToSegment (
   --gIndenter;
 }
 
+void msrSegment::appendMultiMeasureRestToSegment (
+  const S_msrMultiMeasureRest& multiMeasureRest)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceBarLines ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending multi-measure rest " << multiMeasureRest->asString () <<
+      " to segment " << asString () <<
+      " in voice \"" <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
+      "\"";
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // append multiMeasureRest to the segment
+  fSegmentElementsList.push_back (multiMeasureRest);
+
+  fCurrentMultiMeasureRest = multiMeasureRest;
+
+  fOnGoingMultiMeasureRest = true;
+}
+
 void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 {
   int inputLineNumber =
@@ -2295,9 +2323,18 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       setMeasureIsFirstInVoice ();
   }
 
-  // append measure to the segment
-  fSegmentElementsList.push_back (measure);
+  if (fOnGoingMultiMeasureRest) {
+    // append measure to the current multi-measure rests
+    fCurrentMultiMeasureRest->
+      appendMeasureToMultiMeasureRest (
+        measure);
+  }
+  else {
+    // append measure to the segment
+    fSegmentElementsList.push_back (measure);
+  }
 
+  // append measure to the segment measures flat list
   fSegmentMeasuresFlatList.push_back (measure);
 
   // register measure as the last one in the segment
@@ -2378,30 +2415,6 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
   fSegmentElementsList.push_front (measure);
 
   fSegmentMeasuresFlatList.push_front (measure);
-}
-
-void msrSegment::appendMultipleFullBarRestsToSegment (
-  const S_msrMultipleFullBarRests& multipleFullBarRests)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceBarLines ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Appending multiple full-bar rests " << multipleFullBarRests->asString () <<
-      " to segment " << asString () <<
-      " in voice \"" <<
-      fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // append multipleFullBarRests to the segment
-  fSegmentElementsList.push_back (multipleFullBarRests);
 }
 
 void msrSegment::prependBarLineToSegment (
@@ -2907,7 +2920,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     fSegmentUpLinkToVoice->
-      displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "removeLastMeasureFromSegment() 1");
   }
@@ -2964,7 +2977,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     fSegmentUpLinkToVoice->
-      displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "removeLastMeasureFromSegment() 2");
   }

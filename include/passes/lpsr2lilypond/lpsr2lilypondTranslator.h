@@ -383,7 +383,7 @@ class EXP lpsr2lilypondTranslator :
   public visitor<S_msrMeasureRepeatPattern>,
   public visitor<S_msrMeasureRepeatReplicas>,
 
-  public visitor<S_msrMultipleFullBarRests>,
+  public visitor<S_msrMultiMeasureRest>,
 
   // rehearsal mark
 
@@ -746,9 +746,9 @@ class EXP lpsr2lilypondTranslator :
     virtual void          visitStart (S_msrMeasureRepeatReplicas& elt);
     virtual void          visitEnd   (S_msrMeasureRepeatReplicas& elt);
 
-    // multiple full-bar rests
-    virtual void          visitStart (S_msrMultipleFullBarRests& elt);
-    virtual void          visitEnd   (S_msrMultipleFullBarRests& elt);
+    // multi-measure rests
+    virtual void          visitStart (S_msrMultiMeasureRest& elt);
+    virtual void          visitEnd   (S_msrMultiMeasureRest& elt);
 
     // rehearsal marks
     virtual void          visitStart (S_msrRehearsalMark& elt);
@@ -1224,10 +1224,18 @@ class EXP lpsr2lilypondTranslator :
     Bool                  fOnGoingStanza;
     S_msrStanza           fCurrentStanza;
 
+    Bool                  fOnGoingExtend;
+
+    void                  generateSyllableDescripionAsComment (
+                            S_msrSyllable& syllable);
+
     void                  generateLilypondCodeForSyllable (
                             S_msrSyllable& syllable);
 
-    void                  generateLyricExtenderAndOrSkipIfRelevant (
+    void                  generateCodeBeforeSyllableIfRelevant (
+                            S_msrSyllable& syllable);
+
+    void                  generateCodeAfterSyllableIfRelevant (
                             S_msrSyllable& syllable);
 
     void                  generateLyricExtenderAndOrSkipWithImplicitDurations (
@@ -1256,10 +1264,10 @@ class EXP lpsr2lilypondTranslator :
     std::list<S_lpsrRepeat>
                           fRepeatDescrsStack;
 
-    // multiple full-bar rests
+    // multi-measure rests
     // ------------------------------------------------------
-    int                   fRemainingMultipleFullBarRestsNumber;
-    Bool                  fOnGoingMultipleFullBarRests;
+    int                   fRemainingMeasureRestsNumber;
+    Bool                  fOnGoingMultiMeasureRests;
 
     // segments
     // ------------------------------------------------------

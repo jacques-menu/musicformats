@@ -47,7 +47,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src > grep 'public msrVoiceElement' 
 formats/msr/msrBeatRepeats.h:class EXP msrBeatRepeat : public msrVoiceElement
 formats/msr/msrMeasureRepeats.h:class EXP msrMeasureRepeat : public msrVoiceElement
 formats/msr/msrRepeats.h:class EXP msrRepeat : public msrVoiceElement
-formats/msr/msrMultipleFullBarRests.h:class EXP msrMultipleFullBarRests : public msrVoiceElement
+formats/msr/msrMultiMeasureRests.h:class EXP msrMultiMeasureRest : public msrVoiceElement
 formats/msr/msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \end{lstlisting}
 
@@ -381,7 +381,7 @@ Calls to \method{msrSegment}{appendMeasureToSegment} occur in:
 			\indentedBox{
 			}
 
-\item \method{msrMultipleFullBarRests}{appendMeasureCloneToMultipleFullBarRests} called from:\bigskip\\%%% \\visitorMethod{msr2lpsrTranslator}{visitStart (S_msrMeasure\& elt) commented
+\item \method{msrMultiMeasureRest}{appendMeasureCloneToMultiMeasureRests} called from:\bigskip\\%%% \\visitorMethod{msr2lpsrTranslator}{visitStart (S_msrMeasure\& elt) commented
 			\indentedBox{
   			\visitorMethod{msr2msrTranslator}{visitStart (S_msrMeasure\& elt)}
 			}
@@ -391,14 +391,14 @@ Calls to \method{msrSegment}{appendMeasureToSegment} occur in:
   			\visitorMethod{msr2lpsrTranslator}{visitStart (S_msrMeasure\& elt)}
 			}
 
-\item \method{msrVoice}{createNewLastSegmentFromItsFirstMeasureForVoice} called from:\bigskip\\%%%JMI \method{msrVoice}{addEmptyMeasuresToVoice} commented
+\item \method{msrVoice}{createNewLastSegmentFromItsFirstMeasureForVoice} called from:\bigskip\\%%%JMI \method{msrVoice}{appendEmptyMeasuresToVoice} commented
 			\indentedBox{
   			\method{msrVoice}{handleVoiceLevelRepeatStart},\\
   			\method{msrVoice}{handleVoiceLevelRepeatEndingStartWithoutExplicitStart},\\
   			\method{msrVoice}{handleVoiceLevelRepeatEndingStartWithExplicitStart},\\
   			\method{msrVoice}{createMeasureRepeatFromItsFirstMeasures},\\
   			\method{msrVoice}{appendPendingMeasureRepeatToVoice},\\
-  			\method{msrVoice}{appendMultipleFullBarRestsToVoice}
+  			\method{msrVoice}{appendMultiMeasureRestToVoice}
 			}
 
 \end{itemize}

@@ -924,7 +924,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // compress multiple full-bar rests
+  // compress multi-measure rests
   // --------------------------------------
 
   subGroup->
@@ -946,7 +946,7 @@ in the MSR score JMI ???.)",
 R"(Merge rests in the MSR to obtain better looking scores.
 This works only when there are 2 voices per staves.
 Limitations: this only handles two voices
-and does not handle multiple full-bar rests.)",
+and does not handle multi-measure rests.)",
         "fMergeStaffCommonRests",
         fMergeStaffCommonRests));
 }

@@ -134,20 +134,25 @@ class EXP msdl2musicxmlInsiderOahGroup : public oahGroup
     Bool                  getQuitAfterPass1 () const
                               { return fQuitAfterPass1; }
 
-    void                  setQuitAfterPass2a ()
-                              { fQuitAfterPass2a = true; }
-    Bool                  getQuitAfterPass2a () const
-                              { return fQuitAfterPass2a; }
+    void                  setQuitAfterPass2 ()
+                              { fQuitAfterPass2 = true; }
+    Bool                  getQuitAfterPass2 () const
+                              { return fQuitAfterPass2; }
 
-    void                  setQuitAfterPass2b ()
-                              { fQuitAfterPass2b = true; }
-    Bool                  getQuitAfterPass2b () const
-                              { return fQuitAfterPass2b; }
-
-    void                  setQuit3 ()
+    void                  setQuitAfterPass3 ()
                               { fQuitAfterPass3 = true; }
     Bool                  getQuitAfterPass3 () const
                               { return fQuitAfterPass3; }
+
+    void                  setQuitAfterPasss4 ()
+                              { fQuitAfterPass4 = true; }
+    Bool                  getQuitAfterPass4 () const
+                              { return fQuitAfterPass4; }
+
+    void                  setQuitAfterPasss5 ()
+                              { fQuitAfterPass5 = true; }
+    Bool                  getQuitAfterPass5 () const
+                              { return fQuitAfterPass5; }
 
   public:
 
@@ -194,9 +199,10 @@ class EXP msdl2musicxmlInsiderOahGroup : public oahGroup
 
     // quit after some passes
     Bool                  fQuitAfterPass1;
-    Bool                  fQuitAfterPass2a;
-    Bool                  fQuitAfterPass2b;
+    Bool                  fQuitAfterPass2;
     Bool                  fQuitAfterPass3;
+    Bool                  fQuitAfterPass4;
+    Bool                  fQuitAfterPass5;
 };
 typedef SMARTP<msdl2musicxmlInsiderOahGroup> S_msdl2musicxmlInsiderOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_msdl2musicxmlInsiderOahGroup& elt);

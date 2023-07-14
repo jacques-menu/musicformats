@@ -22,7 +22,7 @@
 #include "msrLyrics.h"
 #include "msrMeasures.h"
 #include "msrMoments.h"
-#include "msrMultipleFullBarRests.h"
+#include "msrMultiMeasureRests.h"
 // #include "msrClefsKeysTimeSignatures.h"
 
 
@@ -187,8 +187,14 @@ class EXP msrSegment : public msrVoiceElement
     void                  prependMeasureToSegment (
                             const S_msrMeasure& measure);
 
-    void                  appendMultipleFullBarRestsToSegment (
-                            const S_msrMultipleFullBarRests& multipleFullBarRests);
+    // multi-measure rests
+
+    Bool                  fOnGoingMultiMeasureRest;
+    S_msrMultiMeasureRest
+                          fCurrentMultiMeasureRest;
+
+    void                  appendMultiMeasureRestToSegment (
+                            const S_msrMultiMeasureRest& multiMeasureRest);
 
     // clef, key, time signature
 

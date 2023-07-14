@@ -152,10 +152,10 @@ Reverting to \mf\ previous versions show that:
 \item v0.9.61 exhibits the bug:
 
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/Desktop > lldb -- xml2ly  fullbarrests/FullBarRestWithoutBarLine.xml -display-lpsr-short -aofn
+jacquesmenu@macmini: ~/Desktop > lldb -- xml2ly  fullbarrests/MeasureRestWithoutBarLine.xml -display-lpsr-short -aofn
 (lldb) target create "xml2ly"
 Current executable set to 'xml2ly' (x86_64).
-(lldb) settings set -- target.run-args  "fullbarrests/FullBarRestWithoutBarLine.xml" "-display-lpsr" "-aofn"
+(lldb) settings set -- target.run-args  "fullbarrests/MeasureRestWithoutBarLine.xml" "-display-lpsr" "-aofn"
 (lldb) r
 Process 28676 launched: '/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2ly' (x86_64)
         The measure with ordinal number 3 is now registered with a duration of 1/1 in part Part_POne (partID "P1", partName "Soprano"), fPartMeasuresWholeNotessVector.size () = 2
@@ -379,7 +379,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev > ls -sal patch_662454a.txt
 256 -rw-r--r--@ 1 jacquesmenu  staff  80782 May  4 10:59 patch_662454a.txt
 \end{lstlisting}
 
-The bug shows up with \mfFiles{musicxmlfiles/fullbarrests/FullBarRestWithoutBarLine.xml}, but not with others such as \mfFiles{musicxmlfiles/multistaff/SATBExample.xml}.
+The bug shows up with \mfFiles{musicxmlfiles/fullbarrests/MeasureRestWithoutBarLine.xml}, but not with others such as \mfFiles{musicxmlfiles/multistaff/SATBExample.xml}.
 
 Analysing the patch description in \fileName{patch_662454a.txt}, we find that nothing in the differences between those two successive patches can explain  the crash. The problem thus lies elsewhere\dots
 

@@ -37,7 +37,7 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
                             const std::string& serviceName,
                             const std::string& handlerHeader,
                             const S_msdl2guidoInsiderHandler&
-                                              insiderOahHandler);
+                                               insiderOahHandler);
 
   protected:
 
@@ -48,7 +48,7 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
                             const std::string& serviceName,
                             const std::string& handlerHeader,
                             const S_msdl2guidoInsiderHandler&
-                                              insiderOahHandler);
+                                               insiderOahHandler);
 
     virtual               ~msdl2guidoRegularHandler ();
 

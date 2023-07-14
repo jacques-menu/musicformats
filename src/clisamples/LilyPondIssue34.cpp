@@ -570,15 +570,15 @@ int main (int argc, char*  argv[])
           handler);
       break;
 
-    case mfMultiGenerationOutputKind::kGenerationBraille: // (pass 2a, pass 2b and pass 3)
+    case mfMultiGenerationOutputKind::kGenerationBraille: // (pass 2, pass 3 and pass 4)
       err =
         msrScore2brailleWithHandler (
           theMsrScore,
-          mfPassIDKind::kMfPassID_2a,
+          mfPassIDKind::kMfPassID_2,
           "Create the first BSR from the MSR",
-          mfPassIDKind::kMfPassID_2b,
-          "Create the finalized BSR from the first BSR",
           mfPassIDKind::kMfPassID_3,
+          "Create the finalized BSR from the first BSR",
+          mfPassIDKind::kMfPassID_4,
           "Convert the BSR into Braille text",
           gOutput,
           gLog,
