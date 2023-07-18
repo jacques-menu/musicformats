@@ -1082,14 +1082,14 @@ void mfslDriver::finalSemanticsCheck ()
 void mfslDriver::populateTheCommandsList ()
 {
   for (std::string inputSouce : fInputSoucesList ) {
-    // the service and input file source as std::string
+    // the service and input file source as string
     std::string
       serviceAndInputAsString =
         fService +
         ' ' +
         inputSouce;
 
-    // the main options block options as std::string
+    // the main options block options as string
     std::string
       mainOptionsAsString;
 
@@ -1118,7 +1118,7 @@ void mfslDriver::populateTheCommandsList ()
         // either in the script or by an option
 
         for (S_mfslOptionsBlock optionsBlock :fSelectedOptionsBlocksList ) {
-          // the 'select' choice options block options as std::string
+          // the 'select' choice options block options as string
           std::string
             selectChoiceOptionsAsString =
               optionsBlock->

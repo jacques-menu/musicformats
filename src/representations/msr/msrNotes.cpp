@@ -5500,7 +5500,7 @@ void msrNote::print (std::ostream& os) const
 // 	os << "======> msrNote::print ()" << std::endl;
 
   os <<
-    "[Note " <<
+    "[Note" <<
     ", line " << fInputStartLineNumber <<
     ", " <<
     noteEssentialsAsSting () <<
@@ -6341,7 +6341,7 @@ void msrNote::printFull (std::ostream& os) const
 	os << "======> msrNote::printFull()" << std::endl;
 
   os <<
-    "[Note " <<
+    "[Note" <<
     ", line " << fInputStartLineNumber <<
     ", " <<
     noteEssentialsAsSting () <<

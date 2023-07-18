@@ -2876,7 +2876,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
 }
 
 void msrVoice::appendPaddingNoteToVoice (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -10591,9 +10591,21 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
         for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
           const S_msrStanza& stanza = thePair.second;
 
-          stanza->
+          // fetch the part
+          S_msrPart
+            part =
+              fetchVoiceUpLinkToPart ();
+
+           // fetch the part current measure position
+          msrWholeNotes
+            partDrawingMeasurePosition =
+              part->
+                getPartDrawingMeasurePosition ();
+
+         stanza->
             appendMeasureEndSyllableToStanza (
-              inputLineNumber);
+              inputLineNumber,
+              partDrawingMeasurePosition);
         } // for
       }
 
@@ -11925,6 +11937,7 @@ void msrVoice::print (std::ostream& os) const
   // print the stanzas if any
   if (fVoiceStanzasMap.size ()) {
     os <<
+      std::endl <<
       "Stanzas:" <<
       std::endl;
 

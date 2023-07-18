@@ -708,7 +708,7 @@ void printSyllableElementsListAsLilypondString (
 
   if (syllableElementsList.size ()) {
     for (msrSyllableElement syllableElement : syllableElementsList) {
-      contents += syllableElement.asString (); // JMI v0.9.70
+      contents += syllableElement.getSyllableElementContents (); // JMI v0.9.70
   // JMI    os << ", ";
     } // for
   }

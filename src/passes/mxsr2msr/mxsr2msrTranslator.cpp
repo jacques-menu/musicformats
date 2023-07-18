@@ -9473,14 +9473,14 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
       ss.str ());
   }
 
-  // forget about any previous texts found
-  fCurrentSyllableElementsList.clear ();
+//   // forget about any previous texts found
+//   fCurrentSyllableElementsList.clear ();
 }
 
 void mxsr2msrTranslator::visitStart (S_text& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
+  int inputStartLineNumber =
     elt->getInputStartLineNumber ();
 
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -9488,7 +9488,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 
     ss <<
       "--> Start visiting S_text" <<
-      ", line " << inputLineNumber;
+      ", line " << inputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9498,7 +9498,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 
   std::string textValue = elt->getValue();
 
-  mfConvertHTMLEntitiesToPlainCharacters (textValue); // JMI ???
+  mfConvertHTMLEntitiesToPlainCharacters (textValue); // JMI v0.9.70 ???
 
   // color JMI
 
@@ -9514,8 +9514,8 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
     std::stringstream ss;
 
     ss <<
-      "textValue = \"" << textValue << "\"" <<
-      ", line " << inputLineNumber;
+      "visitStart (S_text& elt), textValue = \"" << textValue << "\"" <<
+      ", line " << inputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9531,7 +9531,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
-      "line " << ": " << inputLineNumber <<
+      "line " << ": " << inputStartLineNumber <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
@@ -9568,7 +9568,7 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::string elision = elt->getValue ();
+  std::string elisionValue = elt->getValue ();
 
 /*
   Multiple syllables on a single note are separated by elision elements.
@@ -9584,7 +9584,21 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
     msrSyllableElement (
       elt->getInputStartLineNumber (),
       msrSyllableElementKind::kSyllableElementElision,
-      elision));
+      elisionValue));
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "visitStart (S_elision& elt), elisionValue = \"" << elisionValue << "\"" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrTranslator::visitStart (S_extend& elt)
@@ -9604,7 +9618,7 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
 >
 */
 
-  int inputLineNumber =
+  int inputStartLineNumber =
     elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -9613,7 +9627,7 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
 
     ss <<
       "--> Start visiting S_extend" <<
-      ", line " << inputLineNumber;
+      ", line " << inputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9655,7 +9669,7 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        inputStartLineNumber,
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -9669,7 +9683,7 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
 
 void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 {
-  int inputLineNumber =
+  int inputStartLineNumber =
     elt->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -9678,7 +9692,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
     ss <<
       "--> End visiting S_lyric" <<
-      ", line " << inputLineNumber;
+      ", line " << inputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9697,7 +9711,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        inputStartLineNumber,
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -9717,7 +9731,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        inputStartLineNumber,
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -9739,7 +9753,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     gLog <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       msrSyllableKindAsString (fCurrentSyllableKind) <<
-      ", line " << inputLineNumber <<
+      ", line " << inputStartLineNumber <<
       ", with:" <<
       std::endl;
 
@@ -9758,12 +9772,14 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         std::setw (fieldWidth) <<
         "fCurrentMusicXMLStaffNumber" << ": " << fCurrentMusicXMLStaffNumber <<
         std::endl <<
+
         std::setw (fieldWidth) <<
         "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
         std::endl <<
         std::setw (fieldWidth) <<
         "fCurrentStanzaName" << " = \"" << fCurrentStanzaName << "\"" <<
         std::endl <<
+
         std::setw (fieldWidth) <<
         "fCurrentSyllableElementsList" << "  " <<
         syllableElementsListAsString (fCurrentSyllableElementsList) <<
@@ -9862,7 +9878,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     ss <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       msrSyllableKindAsString (fCurrentSyllableKind) <<
-      ", line: " << inputLineNumber <<
+      ", line: " << inputStartLineNumber <<
       ", with:" <<
       std::endl;
 
@@ -9889,7 +9905,8 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         std::endl <<
         std::setw (fieldWidth) <<
         "fCurrentSyllableElementsList" << ": " <<
-        syllableElementsListAsString (fCurrentSyllableElementsList);
+        syllableElementsListAsString (fCurrentSyllableElementsList) <<
+        std::endl;
 
       --gIndenter;
     }
@@ -9903,7 +9920,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     S_msrVoice
       currentNoteVoice =
         fetchVoiceFromCurrentPart (
-          inputLineNumber,
+          inputStartLineNumber,
           fCurrentMusicXMLStaffNumber,
           fCurrentMusicXMLVoiceNumber);
 
@@ -9912,7 +9929,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       stanza =
         currentNoteVoice->
           fetchStanzaInVoice (
-            inputLineNumber,
+            inputStartLineNumber,
             fCurrentStanzaNumber,
             fCurrentStanzaName);
 
@@ -9936,7 +9953,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         msrSyllableKindAsString (
           fCurrentSyllableKind) << "\"" <<
         ", in stanza " << stanza->getStanzaName () <<
-        ", line " << inputLineNumber;
+        ", line " << inputStartLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -9948,7 +9965,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     S_msrSyllable
       syllable =
         msrSyllable::create (
-          inputLineNumber,
+          inputStartLineNumber,
           fCurrentSyllableKind,
           fCurrentSyllableExtendKind,
           fCurrentStanzaNumber,
@@ -9992,11 +10009,11 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         part->
           getPartDrawingMeasurePosition ();
 
-      // append syllable to stanza
-      stanza->
-        appendSyllableToStanza (
-          syllable,
-          partDrawingMeasurePosition);
+    // append syllable to stanza
+    stanza->
+      appendSyllableToStanza (
+        syllable,
+        partDrawingMeasurePosition);
   }
 
   // DON'T register current note as having lyrics,

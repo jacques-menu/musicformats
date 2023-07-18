@@ -949,7 +949,7 @@ class EXP msrNote : public msrTupletElement
 //     std::string           tupletNoteGraphicNotesDurationAsMsrString ( // JMI v0.9.66
 //                             int actualNotes, int normalNotes) const;
 
-    // note as std::string
+    // note as string
     std::string           notePitchAndSoundingWholeNotesAsString () const
                               {
                                 return

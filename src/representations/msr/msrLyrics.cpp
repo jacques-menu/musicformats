@@ -198,7 +198,7 @@ std::string msrSyllableElement::asString () const
   std::stringstream ss;
 
   ss <<
-    "[SyllableElement " <<
+    "[SyllableElement" <<
     ", fSyllableElementKind: " << fSyllableElementKind <<
     ", fSyllableElementContents: \"" << fSyllableElementContents << "\"" <<
     ", line " << fInputStartLineNumber <<
@@ -212,7 +212,7 @@ std::string msrSyllableElement::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[SyllableElement " <<
+    "[SyllableElement" <<
     ", " << fSyllableElementKind <<
     ", \"" << fSyllableElementContents << "\"" <<
     ", line " << fInputStartLineNumber <<
@@ -1218,7 +1218,8 @@ void msrStanza::appendSyllableToStanza (
       ", fStanzaMeasureCurrentAccumulatedWholeNotesDuration: " <<
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", positionsDelta: " <<
-      positionsDelta.asString ();
+      positionsDelta.asString () <<
+      ", line " << syllable->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1226,8 +1227,34 @@ void msrStanza::appendSyllableToStanza (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // pad up stanza if relevant
+  if (positionsDelta.getNumerator () != 0) {
+    // create a skip rest notes syllable
+    S_msrSyllable
+      skipRestNoteSyllable =
+        msrSyllable::create (
+          syllable->getInputStartLineNumber (),
+          msrSyllableKind::kSyllableSkipRestNote,
+          msrSyllableExtendKind::kSyllableExtend_NONE,
+          fStanzaNumber,
+          positionsDelta,
+          msrTupletFactor (1, 1),
+          this);
+
+    // append it to this stanza
+    fSyllables.push_back (skipRestNoteSyllable);
+
+    // account for syllable length
+    fStanzaMeasureCurrentAccumulatedWholeNotesDuration +=
+      skipRestNoteSyllable->getSyllableWholeNotes ();
+  }
+
   // append syllable to this stanza
   fSyllables.push_back (syllable);
+
+  // account for syllable length
+  fStanzaMeasureCurrentAccumulatedWholeNotesDuration +=
+    syllable->getSyllableWholeNotes ();
 
   // set the syllable's stanza uplink
   syllable->
@@ -1283,6 +1310,10 @@ void msrStanza::appendSyllableToStanzaClone (
   // append syllable to this stanza
   fSyllables.push_back (syllable);
 
+  // account for syllable length
+  fStanzaMeasureCurrentAccumulatedWholeNotesDuration +=
+    syllable->getSyllableWholeNotes ();
+
   // set the syllable's stanza uplink
   syllable->
     setSyllableUpLinkToStanza (this);
@@ -1317,18 +1348,26 @@ void msrStanza::appendSyllableToStanzaClone (
   } // switch
 }
 
-S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
-  int inputLineNumber)
+void msrStanza::appendMeasureEndSyllableToStanza (
+  int                  inputLineNumber,
+  const msrWholeNotes& partDrawingMeasurePosition)
 {
+  // compute position delta
+  msrWholeNotes
+    positionsDelta =
+      partDrawingMeasurePosition
+        -
+      fStanzaMeasureCurrentAccumulatedWholeNotesDuration;
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending 'Measure end' syllable " <<
+      "Appending a measure end syllable " <<
       " to stanza " << getStanzaName () <<
-      ", line " << inputLineNumber;
-
+      ", positionsDelta: " <<
+      positionsDelta.asString ();
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
@@ -1337,29 +1376,48 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
 
   ++gIndenter;
 
-  // create stanza skip syllable
+  // pad up stanza if relevant
+  if (positionsDelta.getNumerator () != 0) {
+    // create a skip rest notes syllable
+    S_msrSyllable
+      skipRestNoteSyllable =
+        msrSyllable::create (
+          inputLineNumber,
+          msrSyllableKind::kSyllableSkipRestNote,
+          msrSyllableExtendKind::kSyllableExtend_NONE,
+          fStanzaNumber,
+          positionsDelta,
+          msrTupletFactor (1, 1),
+          this);
+
+    // append it to this stanza
+    fSyllables.push_back (skipRestNoteSyllable);
+
+    // account for syllable length
+    fStanzaMeasureCurrentAccumulatedWholeNotesDuration +=
+      skipRestNoteSyllable->getSyllableWholeNotes ();
+  }
+
+  // create measure end syllable
   S_msrSyllable
-    syllable =
+    measureEndSyllable =
       msrSyllable::create (
         inputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         msrSyllableKind::kSyllableMeasureEnd,
         msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
-        msrWholeNotes (0, 1),
-        msrTupletFactor (),
+        positionsDelta,
+        msrTupletFactor (1, 1),
         this);
 
   // append syllable to this stanza
-  appendSyllableToStanzaClone (syllable);
+  appendSyllableToStanzaClone (measureEndSyllable);
 
   // reset measure whole notes
   fStanzaMeasureCurrentAccumulatedWholeNotesDuration = msrWholeNotes (0, 1);
 
   --gIndenter;
-
-  // and return it
-  return syllable;
 }
 
 S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (

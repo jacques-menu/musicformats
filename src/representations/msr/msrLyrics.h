@@ -179,7 +179,7 @@ class EXP msrSyllable : public msrMeasureElement
                             const S_msrStanza&     syllableUpLinkToStanza);
 
     SMARTP<msrSyllable> createSyllableNewbornClone (
-                            const S_msrPart& containingPart); // JMI
+                            const S_msrPart& containingPart); // JMI v0.9.67
 
     SMARTP<msrSyllable> createSyllableDeepClone (
                             const S_msrPart& containingPart);
@@ -253,6 +253,10 @@ class EXP msrSyllable : public msrMeasureElement
                               { return fSyllableStanzaNumber; }
 
     // syllable whole notes
+    void                  setSyllableWholeNotes (
+                            msrWholeNotes wholeNotes)
+                              { fSyllableWholeNotes = wholeNotes; }
+
     msrWholeNotes         getSyllableWholeNotes () const
                               { return fSyllableWholeNotes; }
 
@@ -437,8 +441,9 @@ class EXP msrStanza : public msrElement
 //                             int             inputLineNumber,
 //                             const msrWholeNotes& wholeNotes);
 
-    S_msrSyllable         appendMeasureEndSyllableToStanza (
-                            int inputLineNumber);
+    void                  appendMeasureEndSyllableToStanza (
+                            int                  inputLineNumber,
+                            const msrWholeNotes& partDrawingMeasurePosition);
 
 //     S_msrSyllable         appendMelismaSyllableToStanza (
 //                             int             inputLineNumber,

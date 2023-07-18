@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <!DOCTYPE score-partwise PUBLIC '-//Recordare//DTD MusicXML 3.0 Partwise//EN' 'http://www.musicxml.org/dtds/partwise.dtd'>
 <score-partwise version='3.0'>
+  <movement-title>Single Elision</movement-title>
 	<part-list>
 		<score-part id='P1'>
 			<part-name print-object='no'>[Unnamed (treble staff)]</part-name>
@@ -127,9 +128,10 @@
 					<step>G</step>
 					<octave>4</octave>
 				</pitch>
-				<duration>384</duration>
+				<duration>576</duration>
 				<voice>1</voice>
 				<type>eighth</type>
+				<dot/>
 				<stem>up</stem>
 				<beam number='1'>begin</beam>
 				<notations>
@@ -149,9 +151,9 @@
 					<step>A</step>
 					<octave>4</octave>
 				</pitch>
-				<duration>384</duration>
+				<duration>192</duration>
 				<voice>1</voice>
-				<type>eighth</type>
+				<type>16th</type>
 				<stem>up</stem>
 				<beam number='1'>end</beam>
 				<notations>
@@ -167,9 +169,10 @@
 					<alter>-1</alter>
 					<octave>4</octave>
 				</pitch>
-				<duration>768</duration>
+				<duration>1152</duration>
 				<voice>1</voice>
 				<type>quarter</type>
+				<dot/>
 				<stem>down</stem>
 				<notations>
 					<slur type='start' number='1'/>
@@ -185,9 +188,9 @@
 					<step>C</step>
 					<octave>5</octave>
 				</pitch>
-				<duration>768</duration>
+				<duration>384</duration>
 				<voice>1</voice>
-				<type>quarter</type>
+				<type>eighth</type>
 				<stem>down</stem>
 				<notations>
 					<slur type='stop' number='1'/>
