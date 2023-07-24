@@ -56,9 +56,8 @@ class EXP msrEyeGlasses : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setEyeGlassesUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                              { upLinkToMeasure = getEyeGlassesUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getEyeGlassesUpLinkToMeasure (); }
 
     void                  setEyeGlassesUpLinkToMeasure (
                             const S_msrMeasure& measure);

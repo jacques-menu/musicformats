@@ -44,7 +44,7 @@ class EXP msrSegment : public msrVoiceElement
     // ------------------------------------------------------
 
     static SMARTP<msrSegment> create (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrVoice& segmentUpLinkToVoice);
 
     SMARTP<msrSegment> createSegmentNewbornClone (
@@ -59,7 +59,7 @@ class EXP msrSegment : public msrVoiceElement
     // ------------------------------------------------------
 
                           msrSegment (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrVoice& segmentUpLinkToVoice);
 
     virtual               ~msrSegment ();
@@ -209,9 +209,9 @@ class EXP msrSegment : public msrVoiceElement
 //
 //     void                  appendKeyToSegment (
 //                             const S_msrKey& key);
-//
-//     void                  appendTimeSignatureToSegment (
-//                             const S_msrTimeSignature& timeSignature);
+
+    void                  appendTimeSignatureToSegment (
+                            const S_msrTimeSignature& timeSignature);
 
     void                  appendTimeSignatureToSegmentClone (
                             const S_msrTimeSignature& timeSignature);

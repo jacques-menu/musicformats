@@ -106,8 +106,7 @@ class EXP msrChord : public msrTupletElement
     void                  setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure) override;
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override;
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
 
     void                  setChordUpLinkToMeasure (
                             const S_msrMeasure& measure);
@@ -120,7 +119,7 @@ class EXP msrChord : public msrTupletElement
                               { fChordShortcutUpLinkToTuplet = tuplet; }
 
     S_msrTuplet           getChordShortcutUpLinkToTuplet () const
-                            { return fChordShortcutUpLinkToTuplet; }
+                              { return fChordShortcutUpLinkToTuplet; }
 
     // uplink to grace notes group
     void                  setChordShortcutUpLinkToGraceNotesGroup (
@@ -131,7 +130,7 @@ class EXP msrChord : public msrTupletElement
                               }
 
     S_msrGraceNotesGroup  getChordShortcutUpLinkToGraceNotesGroup () const
-                            { return fChordShortcutUpLinkToGraceNotesGroup; }
+                              { return fChordShortcutUpLinkToGraceNotesGroup; }
 
     // chord kind
     void                  setChordKind (
@@ -146,7 +145,7 @@ class EXP msrChord : public msrTupletElement
                             const msrWholeNotes& wholeNotes);
 
     msrWholeNotes         getChordDisplayWholeNotes () const
-                             { return fChordDisplayWholeNotes; }
+                              { return fChordDisplayWholeNotes; }
 
     // graphic duration
     msrNotesDurationKind  getChordGraphicNotesDurationKind () const
@@ -351,7 +350,7 @@ class EXP msrChord : public msrTupletElement
                               { fChordOctaveShift = octaveShift; }
 
     S_msrOctaveShift      getChordOctaveShift () const
-                            { return fChordOctaveShift; }
+                              { return fChordOctaveShift; }
 
     // measure positions
     // this override calls setChordMembersMeasurePosition()

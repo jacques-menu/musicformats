@@ -63,15 +63,14 @@ class EXP msrBarNumberCheck : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setBarNumberCheckUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getBarNumberCheckUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getBarNumberCheckUpLinkToMeasure (); }
 
     void                  setBarNumberCheckUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getBarNumberCheckUpLinkToMeasure () const
-                            { return fBarNumberCheckUpLinkToMeasure; }
+                              { return fBarNumberCheckUpLinkToMeasure; }
 
     std::string           getNextBarOriginalNumber () const
                               { return fNextBarOriginalNumber; }

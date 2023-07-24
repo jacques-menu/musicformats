@@ -31,10 +31,10 @@ template <typename T> class lpsrBrowser : public browser<T>
     {}
 
     virtual void          set (basevisitor* v)
-                            { fVisitor = v; }
+                              { fVisitor = v; }
 
     virtual               void browse (T& t)
-                            {
+                              {
                               enter (t);
 
                               t.browseData (fVisitor);

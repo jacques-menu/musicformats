@@ -4315,7 +4315,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       fPartNumberOfMeasures);
 
 /* JMI v0.9.69
-  // are there more staves in <staves/> that specified with <stave/>?
+  // are there more staves in <staves/> that specified with <staff/>?
   fCurrentPart->
     addAVoiceToStavesThatHaveNone (
       inputLineNumber);

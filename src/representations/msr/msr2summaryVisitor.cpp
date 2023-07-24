@@ -158,7 +158,7 @@ void msr2summaryVisitor::visitEnd (S_msrScore& elt)
     std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fStavesCounter,
-      "stave",
+      "staff",
       "staves") <<
     std::endl <<
 

@@ -1344,7 +1344,7 @@ A part in MSR is composed of voices, stored in:
 
 Staves handling is presented at \sectionRef{Staves handling}.
 
-A stave contains at most 4 numbered voices, stored in:
+A staff contains at most 4 numbered voices, stored in:
 \begin{lstlisting}[language=CPlusPlus]
     // the mapping of all the voices in the staff,
     // including harmonies and figured bass voices
@@ -2071,7 +2071,7 @@ class EXP msrTupletFactor
                               }
 
     mfRational              asRational () const
-                            {
+                              {
                               return
                                 mfRational (
                                   fTupletActualNotes,

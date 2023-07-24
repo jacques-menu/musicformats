@@ -373,10 +373,10 @@ void msrPart::setPartDrawingMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "Setting part drawing measure position to " <<
-      measurePosition.asString () <<
-      " in part " <<
+      "Setting the drawing measure position in part " <<
       getPartCombinedName () <<
+      " to " <<
+      measurePosition <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -390,7 +390,7 @@ void msrPart::setPartDrawingMeasurePosition (
 
     ss <<
       "cannot set part current measure position to " <<
-      measurePosition.asString () <<
+      measurePosition <<
       " in part " <<
       getPartCombinedName () <<
       " since it is negative" <<
@@ -403,14 +403,51 @@ void msrPart::setPartDrawingMeasurePosition (
       ss.str ());
   }
 
-  fPartDrawingMeasurePosition =
-    measurePosition;
+  fPartDrawingMeasurePosition = measurePosition;
+}
+
+void msrPart::resetPartDrawingMeasurePosition (
+  int inputLineNumber)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Resetting part drawing measure position to 0 in part " <<
+      getPartCombinedName () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fPartDrawingMeasurePosition = msrWholeNotes (0, 1);
 }
 
 void msrPart::incrementPartDrawingMeasurePosition (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotesDelta)
 {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Incrementing the drawing measure position in part " <<
+      getPartCombinedName () <<
+      " by " <<
+      wholeNotesDelta <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   fPartDrawingMeasurePosition += wholeNotesDelta;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -418,13 +455,10 @@ void msrPart::incrementPartDrawingMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "Incrementing part drawing measure position by " <<
-      wholeNotesDelta.asString () <<
+      "The new part drawing measure position is " <<
+      fPartDrawingMeasurePosition <<
       " in part " <<
-      getPartCombinedName () <<
-      ", thus setting it to " <<
-      fPartDrawingMeasurePosition.asString () <<
-      ", line " << inputLineNumber;
+      getPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -437,19 +471,15 @@ void msrPart::decrementPartDrawingMeasurePosition (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotesDelta)
 {
-  fPartDrawingMeasurePosition -= wholeNotesDelta;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
     std::stringstream ss;
 
     ss <<
-      "Decrementing part drawing measure position by " <<
-      wholeNotesDelta.asString () <<
-      " in part " <<
+      "Decrementing the drawing measure position in part " <<
       getPartCombinedName () <<
-      ", thus setting it to " <<
-      fPartDrawingMeasurePosition.asString () <<
+      " by " <<
+      wholeNotesDelta <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -463,11 +493,11 @@ void msrPart::decrementPartDrawingMeasurePosition (
 
     ss <<
       "cannot decrement part current measure position by " <<
-      wholeNotesDelta.asString () <<
+      wholeNotesDelta <<
       " in part " <<
       getPartCombinedName () <<
       " since that sets it to " <<
-      fPartDrawingMeasurePosition.asString () <<
+      fPartDrawingMeasurePosition <<
       ", which is negative " <<
       ", line " << inputLineNumber;
 
@@ -479,13 +509,15 @@ void msrPart::decrementPartDrawingMeasurePosition (
       ss.str ());
   }
 
+  fPartDrawingMeasurePosition -= wholeNotesDelta;
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
     std::stringstream ss;
 
     ss <<
       "The new part drawing measure position is " <<
-      fPartDrawingMeasurePosition.asString () <<
+      fPartDrawingMeasurePosition <<
       " in part " <<
       getPartCombinedName ();
 
@@ -970,12 +1002,8 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceWholeNoteDurations ()
-      ||
-    gTraceOahGroup->getTraceMeasurePositions ()
-  ) {
-    printPartMeasuresWholeNotessVector (
+  if (gTraceOahGroup->getTraceMeasuresWholeNotesVectors ()) {
+    printPartMeasuresWholeNotesVector (
       gLog,
       40,
       ", registerOrdinalMeasureNumberWholeNotes() 1");
@@ -985,11 +1013,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
   size_t index = measureOrdinalNumber - 1;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceWholeNoteDurations ()
-      ||
-    gTraceOahGroup->getTraceMeasurePositions ()
-  ) {
+  if (gTraceOahGroup->getTraceMeasuresWholeNotesVectors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1063,7 +1087,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
       ||
     gTraceOahGroup->getTraceMeasurePositionsDetails ()
   ) {
-    printPartMeasuresWholeNotessVector (
+    printPartMeasuresWholeNotesVector (
       gLog,
       40,
       ", registerOrdinalMeasureNumberWholeNotes() 2");
@@ -2736,9 +2760,6 @@ void msrPart::finalizeLastAppendedMeasureInPart (
 
   ++gIndenter;
 
-  // reset drawing measure position
-  fPartDrawingMeasurePosition = msrWholeNotes (0, 1);
-
   // finalize current measure in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
@@ -2832,7 +2853,7 @@ void msrPart::finalizePart (
     ss <<
       "Part " <<
       getPartCombinedName () <<
-      " appears in the part list, but doesn't contain any stave";
+      " appears in the part list, but doesn't contain any staff";
 
     msrWarning (
       gServiceRunData->getInputSourceName (),
@@ -3293,7 +3314,7 @@ std::string msrPart::asString () const
   return ss.str ();
 }
 
-void msrPart::printPartMeasuresWholeNotessVector (
+void msrPart::printPartMeasuresWholeNotesVector (
   std::ostream&      os,
   int                fieldWidth,
   const std::string& context) const
@@ -3415,7 +3436,7 @@ void msrPart::printFull (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fPartDrawingMeasurePosition" << ": " <<
-    fPartDrawingMeasurePosition.asString () <<
+    fPartDrawingMeasurePosition <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -3677,12 +3698,8 @@ void msrPart::printFull (std::ostream& os) const
 
   // print the part measures whole notes durations vector
 #ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceWholeNoteDurations ()
-      ||
-    gTraceOahGroup->getTraceMeasurePositions ()
-  ) {
-    printPartMeasuresWholeNotessVector (
+  if (gTraceOahGroup->getTraceMeasuresWholeNotesVectors ()) {
+    printPartMeasuresWholeNotesVector (
       os,
       fieldWidth,
       "msrPart::printFull()");
@@ -3874,12 +3891,8 @@ void msrPart::print (std::ostream& os) const
 
   // print the part measure' whole notes durations vector
 #ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceWholeNoteDurations ()
-      ||
-    gTraceOahGroup->getTraceMeasurePositions ()
-  ) {
-    printPartMeasuresWholeNotessVector (
+  if (gTraceOahGroup->getTraceMeasuresWholeNotesVectors ()) {
+    printPartMeasuresWholeNotesVector (
       os,
       fieldWidth,
       ", msrPart::print ()");
@@ -4025,7 +4038,7 @@ void msrPart::printSummary (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fPartDrawingMeasurePosition" << ": " <<
-    fPartDrawingMeasurePosition.asString () <<
+    fPartDrawingMeasurePosition <<
     std::endl;
 
   // print all the staves

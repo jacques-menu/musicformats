@@ -139,7 +139,7 @@ msrWholeNotes msrMultiMeasureRest::fetchMultiMeasureRestMeasureSoundingNotes () 
 
   for (S_msrMeasure measure : fMeasureRestsList) {
     result +=
-      measure->getFullMeasureWholeNotesDuration ();
+      measure->fetchFullMeasureWholeNotesDuration ();
   } // for
 
   return result;

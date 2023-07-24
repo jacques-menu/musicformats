@@ -87,7 +87,7 @@ void traceOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
 
   fLongTracePrefix =
     oahPrefix::create (
-      "trace-", "trace",
+      "trace", "trace-",
       "'-trace=abc,yz' is equivalent to '-trace-abc, -trace-yz'");
   handler->
     registerPrefixInHandler (
@@ -106,7 +106,7 @@ void traceOahGroup::createTheTracePrefixes (const S_oahHandler& handler)
 //
 //   fLongDisplayPrefix =
 //     oahPrefix::create (
-//       "trace-", "trace",
+//       "trace", "trace-",
 //       "'-trace=abc,yz' is equivalent to '-trace-abc, -trace-yz'");
 //   handler->
 //     registerPrefixInHandler (
@@ -2342,6 +2342,21 @@ R"(Whole notes computations details (event more verbose)...)",
     addBooleanAtom (
       traceWholeNoteDurationsDetailsBooleanAtom);
 
+  // measures whole notes vectors
+
+  S_oahTwoBooleansAtom
+    traceMeasuresWholeNotesVectorsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-measures-whole-notes-vectors", "tmeaswhnvects",
+R"(Meaures whole notes vectors)",
+        "fTraceMeasuresWholeNotesVectors",
+        fTraceMeasuresWholeNotesVectors,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceMeasuresWholeNotesVectorsBooleanAtom);
+
   // rest notes
 
   S_oahTwoBooleansAtomWithTracePasses
@@ -3082,18 +3097,29 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::setw (fieldWidth) << "fTraceNotesDetails" << ": " <<
     fTraceNotesDetails <<
     std::endl <<
+
+    // whole notes
     std::setw (fieldWidth) << "fTraceWholeNoteDurations" << ": " <<
     fTraceWholeNoteDurations <<
     std::endl <<
     std::setw (fieldWidth) << "fTraceWholeNoteDurationsDetails" << ": " <<
     fTraceWholeNoteDurationsDetails <<
     std::endl <<
+
+    // measures whole notes durations
+    std::setw (fieldWidth) << "fTraceMeasuresWholeNotesVectors" << ": " <<
+    fTraceMeasuresWholeNotesVectors <<
+    std::endl <<
+
+    // rest and skip notes
     std::setw (fieldWidth) << "fTraceRestNotes" << ": " <<
     fTraceRestNotes <<
     std::endl <<
     std::setw (fieldWidth) << "fTraceSkipNotes" << ": " <<
     fTraceSkipNotes <<
     std::endl <<
+
+    // notes octave entry
     std::setw (fieldWidth) << "fTraceNotesOctaveEntry" << ": " <<
     fTraceNotesOctaveEntry <<
     std::endl <<

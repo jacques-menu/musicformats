@@ -91,15 +91,14 @@ class EXP msrRehearsalMark : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setRehearsalMarkUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getRehearsalMarkUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getRehearsalMarkUpLinkToMeasure (); }
 
     void                  setRehearsalMarkUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getRehearsalMarkUpLinkToMeasure () const
-                            { return fRehearsalMarkUpLinkToMeasure; }
+                              { return fRehearsalMarkUpLinkToMeasure; }
 
     msrRehearsalMarkKind  getRehearsalMarkKind () const
                               { return fRehearsalMarkKind; }

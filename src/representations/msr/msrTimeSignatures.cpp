@@ -474,10 +474,9 @@ std::ostream& operator << (std::ostream& os, const S_msrTimeSignatureItem& elt)
 
 //______________________________________________________________________________
 S_msrTimeSignature msrTimeSignature::create (
-  int            inputLineNumber,
-  const S_msrMeasure&  upLinkToMeasure,
-  msrTimeSignatureSymbolKind
-                 timeSignatureSymbolKind)
+  int                        inputLineNumber,
+  const S_msrMeasure&        upLinkToMeasure,
+  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
 {
   msrTimeSignature* obj =
     new msrTimeSignature (
@@ -489,9 +488,8 @@ S_msrTimeSignature msrTimeSignature::create (
 }
 
 S_msrTimeSignature msrTimeSignature::create (
-  int            inputLineNumber,
-  msrTimeSignatureSymbolKind
-                 timeSignatureSymbolKind)
+  int                        inputLineNumber,
+  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
 {
   return
     msrTimeSignature::create (
@@ -501,10 +499,9 @@ S_msrTimeSignature msrTimeSignature::create (
 }
 
 msrTimeSignature::msrTimeSignature (
-  int                 inputLineNumber,
-  const S_msrMeasure& upLinkToMeasure,
-  msrTimeSignatureSymbolKind
-                timeSignatureSymbolKind)
+  int                        inputLineNumber,
+  const S_msrMeasure&        upLinkToMeasure,
+  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
     : msrMeasureElement (
       inputLineNumber)
 {

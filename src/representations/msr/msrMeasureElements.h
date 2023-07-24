@@ -49,8 +49,7 @@ class EXP msrMeasureElement : public msrElement
                             const S_msrMeasure& measure) = 0;
 
     // the overrides call a class-specific method that can be called directly
-    virtual void          getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const = 0;
+    virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const = 0;
 
     void                  setSoundingWholeNotes (
                             const msrWholeNotes& wholeNotes,

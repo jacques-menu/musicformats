@@ -68,15 +68,14 @@ class EXP msrSegno : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setSegnoUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getSegnoUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getSegnoUpLinkToMeasure (); }
 
     void                  setSegnoUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getSegnoUpLinkToMeasure () const
-                            { return fSegnoUpLinkToMeasure; }
+                              { return fSegnoUpLinkToMeasure; }
 
     int                   getStaffNumber () const
                               { return fStaffNumber; }
@@ -162,15 +161,14 @@ class EXP msrDalSegno : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setDalSegnoUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getDalSegnoUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getDalSegnoUpLinkToMeasure (); }
 
     void                  setDalSegnoUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getDalSegnoUpLinkToMeasure () const
-                            { return fDalSegnoUpLinkToMeasure; }
+                              { return fDalSegnoUpLinkToMeasure; }
 
     msrDalSegnoKind       getDalSegnoKind () const
                               { return fDalSegnoKind; }

@@ -313,7 +313,7 @@ class EXP oahOptionsAndArguments : public smartable
                             const std::string& optionValue);
 
     void                  appendArgument (const std::string& argument)
-                            {
+                              {
                               fArgumentsVector.push_back (argument);
                             }
 

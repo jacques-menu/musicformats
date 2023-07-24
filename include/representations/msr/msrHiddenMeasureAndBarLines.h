@@ -54,15 +54,14 @@ class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setHiddenMeasureAndBarLineUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getHiddenMeasureAndBarLineUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getHiddenMeasureAndBarLineUpLinkToMeasure (); }
 
     void                  setHiddenMeasureAndBarLineUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getHiddenMeasureAndBarLineUpLinkToMeasure () const
-                            { return fHiddenMeasureAndBarLineUpLinkToMeasure; }
+                              { return fHiddenMeasureAndBarLineUpLinkToMeasure; }
 
   public:
 

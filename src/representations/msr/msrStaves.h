@@ -104,7 +104,7 @@ class EXP msrStaff : public msrElement
     // staff details
 
     S_msrStaffDetails     getCurrentStaffStaffDetails () const
-                            { return fCurrentStaffStaffDetails; }
+                              { return fCurrentStaffStaffDetails; }
 
     // staff voices
 
@@ -213,7 +213,7 @@ class EXP msrStaff : public msrElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInStaffClone (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& measurePosition);
 
     // transposition

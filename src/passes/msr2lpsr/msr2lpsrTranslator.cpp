@@ -3328,7 +3328,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         msrWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
-              getFullMeasureWholeNotesDuration ();
+              fetchFullMeasureWholeNotesDuration ();
 
         S_msrTimeSignature
           voiceCurrentTimeSignature =
@@ -3379,7 +3379,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         msrWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
-              getFullMeasureWholeNotesDuration ();
+              fetchFullMeasureWholeNotesDuration ();
 
         S_msrTimeSignature
           voiceCurrentTimeSignature =

@@ -970,7 +970,7 @@ R"()",
     appendAtomToSubGroup (
       oahBooleanAtom::create (
         "create-implicit-initial-repeat-barline-in-msr", "ciirbim",
-R"(Create an implicit repeat barLine at the beginning of the stave
+R"(Create an implicit repeat barLine at the beginning of the staff
 in the MSR in case there is none, as is usual in scores.
 By default, no such barLine is added.)",
         "fCreateImplicitInitialRepeatBarLine",

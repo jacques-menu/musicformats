@@ -179,7 +179,7 @@ class EXP msrVoice : public msrElement
     // voice kind
 
     void                  setVoiceKind (msrVoiceKind voiceKind)
-                            { fVoiceKind = voiceKind; }
+                              { fVoiceKind = voiceKind; }
 
     msrVoiceKind          getVoiceKind () const
                               { return fVoiceKind; }
@@ -400,9 +400,9 @@ class EXP msrVoice : public msrElement
 //
 //     void                  appendKeyToVoice  (
 //                             const S_msrKey&  key);
-//
-//     void                  appendTimeSignatureToVoice (
-//                             const S_msrTimeSignature& timeSignature);
+
+    void                  appendTimeSignatureToVoice (
+                            const S_msrTimeSignature& timeSignature);
 
     void                  appendTimeSignatureToVoiceClone (
                             const S_msrTimeSignature& timeSignature);
@@ -1364,7 +1364,7 @@ class EXP msrVoice : public msrElement
 
     // beams begin, continue and end check
 
-    std::list<int>       fVoiceBeamNumbersStack;
+    std::list<int>        fVoiceBeamNumbersStack;
 
     // calls counter (for debug)
     int                   fCallsCounter;

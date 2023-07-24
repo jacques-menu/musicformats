@@ -125,11 +125,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-    void                  setFullMeasureWholeNotesDuration (
-                            const msrWholeNotes& wholeNotes);
-
-    msrWholeNotes         getFullMeasureWholeNotesDuration () const
-                              {  return fFullMeasureWholeNotesDuration; }
+//     void                  setFullMeasureWholeNotesDuration (
+//                             const msrWholeNotes& wholeNotes);
+//
+//     msrWholeNotes         getFullMeasureWholeNotesDuration () () const
+//                               { return fFullMeasureWholeNotesDuration; }
 
     void                  setMeasureCurrentAccumulatedWholeNotesDuration (
                             int                  inputLineNumber,
@@ -153,10 +153,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  setMeasureImplicitKind (
                             msrMeasureImplicitKind measureImplicitKind)
-                              {
-                                fMeasureImplicitKind =
-                                  measureImplicitKind;
-                              }
+                              { fMeasureImplicitKind = measureImplicitKind; }
 
     msrMeasureImplicitKind
                           getMeasureImplicitKind () const
@@ -282,6 +279,10 @@ class EXP msrMeasure : public msrSegmentElement
 
     S_msrScore            fetchMeasureUpLinkToScore () const;
 
+    // measure lengthes, in whole notes
+
+    msrWholeNotes         fetchFullMeasureWholeNotesDuration () const;
+
   public:
 
     // public services
@@ -354,8 +355,8 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendTimeSignatureToMeasure (
                             const S_msrTimeSignature& timeSignature);
 
-    void                  setFullMeasureWholeNotesDurationFromTimeSignature (
-                            const S_msrTimeSignature& timeSignature);
+//     void                  setFullMeasureWholeNotesDurationFromTimeSignature (
+//                             const S_msrTimeSignature& timeSignature);
 
     void                  appendTimeSignatureToMeasureClone (
                             const S_msrTimeSignature& timeSignature);
@@ -678,9 +679,9 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-    msrWholeNotes         fFullMeasureWholeNotesDuration;
-                            // meaningfull only
-                            // when there is a time signature,
+//     msrWholeNotes         fFullMeasureWholeNotesDuration;
+                            // denormalization from msrStaff, for efficiency
+                            // meaningfull only when there is a time signature,
                             // but not for cadenzas
 
     // measure numbers

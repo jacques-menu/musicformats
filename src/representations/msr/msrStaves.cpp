@@ -507,8 +507,9 @@ void msrStaff::setStaffCurrentKey (
 };
 
 void msrStaff::setStaffCurrentTimeSignature (
-  const S_msrTimeSignature& timeSignature){
-  fStaffCurrentTimeSignature = time;
+  const S_msrTimeSignature& timeSignature)
+{
+  fStaffCurrentTimeSignature = timeSignature;
 };
 
 std::string msrStaff::staffNumberAsString () const
@@ -1916,18 +1917,21 @@ void msrStaff::appendClefToStaff  (
         msrClefKeyTimeSignatureGroup::create (
           clef->getInputStartLineNumber (),
           groupInputLineNumber);
+    }
 
-      // cascade clef to all voices
+    // register clef in fCurrentClefKeyTimeSignatureGroup
+    // before the latter is cascaded to the voices if just created JMI v0.9.70
+    fCurrentClefKeyTimeSignatureGroup->
+      setClef (clef);
+
+    if (doCreateAClefKeyTimeSignatureGroup) {
+      // cascade fCurrentClefKeyTimeSignatureGroup to all voices
       for (const S_msrVoice& voice : fStaffAllVoicesList) {
         voice->
           appendClefKeyTimeSignatureGroupToVoice (
             fCurrentClefKeyTimeSignatureGroup);
       } // for
     }
-
-    // register clef in fCurrentClefKeyTimeSignatureGroup
-    fCurrentClefKeyTimeSignatureGroup->
-      setClef (clef);
 
     // register clef as current staff clef
     fStaffCurrentClef = clef; // JMI v0.9.67
@@ -2020,18 +2024,21 @@ void msrStaff::appendKeyToStaff (
         msrClefKeyTimeSignatureGroup::create (
           key->getInputStartLineNumber (),
           groupInputLineNumber);
+    }
 
-      // cascade it to all voices
+    // register key in fCurrentClefKeyTimeSignatureGroup
+    // before the latter is cascaded to the voices if just created JMI v0.9.70
+    fCurrentClefKeyTimeSignatureGroup->
+      setKey (key);
+
+    if (doCreateAClefKeyTimeSignatureGroup) {
+      // cascade fCurrentClefKeyTimeSignatureGroup to all voices
       for (const S_msrVoice& voice : fStaffAllVoicesList) {
         voice->
           appendClefKeyTimeSignatureGroupToVoice (
             fCurrentClefKeyTimeSignatureGroup);
       } // for
     }
-
-    // register key in fCurrentClefKeyTimeSignatureGroup
-    fCurrentClefKeyTimeSignatureGroup->
-      setKey (key);
 
     // register key as current staff key
     fStaffCurrentKey = key;
@@ -2049,7 +2056,7 @@ void msrStaff::appendTimeSignatureToStaff (
     std::stringstream ss;
 
     ss <<
-      "Appending time '" << timeSignature->asString () <<
+      "Appending time signature '" << timeSignature->asString () <<
       "' to staff \"" <<
       fStaffName <<
       "\"";
@@ -2062,7 +2069,7 @@ void msrStaff::appendTimeSignatureToStaff (
 
   ++gIndenter;
 
-  // append time to staff?
+  // append time signature to staff?
   Bool doAppendTimeToStaff (true);
 
   if (fStaffCurrentTimeSignature) {
@@ -2123,8 +2130,10 @@ void msrStaff::appendTimeSignatureToStaff (
         msrClefKeyTimeSignatureGroup::create (
           timeSignature->getInputStartLineNumber (),
           groupInputLineNumber);
+    }
 
-      // cascade it to all voices
+    if (doCreateAClefKeyTimeSignatureGroup) {
+      // cascade fCurrentClefKeyTimeSignatureGroup to all voices
       for (const S_msrVoice& voice : fStaffAllVoicesList) {
         voice->
           appendClefKeyTimeSignatureGroupToVoice (
@@ -2132,12 +2141,20 @@ void msrStaff::appendTimeSignatureToStaff (
       } // for
     }
 
-    // register time signature in fCurrentClefKeyTimeSignatureGroup
+    // register timeSignature in fCurrentClefKeyTimeSignatureGroup
+    // before the latter is cascaded to the voices if just created JMI v0.9.70
     fCurrentClefKeyTimeSignatureGroup->
       setTimeSignature (timeSignature);
 
     // register timeSignature as current staff time signature
     fStaffCurrentTimeSignature = timeSignature;
+
+    // cascade timeSignature to all voices
+    for (const S_msrVoice& voice : fStaffAllVoicesList) {
+      voice->
+        appendTimeSignatureToVoice (
+          timeSignature);
+    } // for
   }
 
   --gIndenter;
@@ -2185,7 +2202,7 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Appending time '" << timeSignature->asString () <<
+//       "Appending time signature '" << timeSignature->asString () <<
 //       "' to staff clone \"" <<
 //       fStaffName <<
 //       "\" in part " <<
@@ -2316,7 +2333,7 @@ void msrStaff::appendPageBreakToStaff (
 }
 
 void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& measurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3782,7 +3799,7 @@ void msrStaff::printFull (std::ostream& os) const
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // print the current staff time if any
+  // print the current staff time signature if any
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTimeSignatures ()) {
     os << std::left <<

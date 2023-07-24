@@ -89,10 +89,9 @@ void msrMusicXMLPrintLayout::setMeasureElementUpLinkToMeasure (
   setMusicXMLPrintLayoutUpLinkToMeasure (measure);
 }
 
-void msrMusicXMLPrintLayout::getMeasureElementUpLinkToMeasure (
-  S_msrMeasure& upLinkToMeasure) const
+S_msrMeasure msrMusicXMLPrintLayout::getMeasureElementUpLinkToMeasure () const
 {
-  upLinkToMeasure = getMusicXMLPrintLayoutUpLinkToMeasure ();
+  return getMusicXMLPrintLayoutUpLinkToMeasure ();
 }
 
 void msrMusicXMLPrintLayout::setMusicXMLPrintLayoutUpLinkToMeasure (

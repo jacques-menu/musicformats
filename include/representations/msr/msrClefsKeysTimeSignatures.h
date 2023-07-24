@@ -136,9 +136,8 @@ class EXP msrClef : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setClefUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                              { upLinkToMeasure = getClefUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getClefUpLinkToMeasure (); }
 
     void                  setClefUpLinkToMeasure (
                             const S_msrMeasure& measure);
@@ -390,15 +389,14 @@ class EXP msrKey : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setKeyUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getKeyUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getKeyUpLinkToMeasure (); }
 
     void                  setKeyUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getKeyUpLinkToMeasure () const
-                            { return fKeyUpLinkToMeasure; }
+                              { return fKeyUpLinkToMeasure; }
 
     msrKeyKind            getKeyKind () const
                               { return fKeyKind; }
@@ -617,15 +615,13 @@ class EXP msrTimeSignature : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrTimeSignature> create (
-                            int            inputLineNumber,
-                            const S_msrMeasure&   upLinkToMeasure,
-                            msrTimeSignatureSymbolKind
-                                           timeSignatureSymbolKind);
+                            int                        inputLineNumber,
+                            const S_msrMeasure&        upLinkToMeasure,
+                            msrTimeSignatureSymbolKind timeSignatureSymbolKind);
 
     static SMARTP<msrTimeSignature> create (
-                            int            inputLineNumber,
-                            msrTimeSignatureSymbolKind
-                                           timeSignatureSymbolKind);
+                            int                        inputLineNumber,
+                            msrTimeSignatureSymbolKind timeSignatureSymbolKind);
 
     // creation from the applications
     // ------------------------------------------------------
@@ -673,10 +669,9 @@ class EXP msrTimeSignature : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrTimeSignature (
-                            int                 inputLineNumber,
-                            const S_msrMeasure& upLinkToMeasure,
-                            msrTimeSignatureSymbolKind
-                                          timeSignatureSymbolKind);
+                            int                        inputLineNumber,
+                            const S_msrMeasure&        upLinkToMeasure,
+                            msrTimeSignatureSymbolKind timeSignatureSymbolKind);
 
     virtual               ~msrTimeSignature ();
 
@@ -690,15 +685,14 @@ class EXP msrTimeSignature : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setTimeSignatureUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getTimeSignatureUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getTimeSignatureUpLinkToMeasure (); }
 
     void                  setTimeSignatureUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getTimeSignatureUpLinkToMeasure () const
-                            { return fTimeSignatureUpLinkToMeasure; }
+                              { return fTimeSignatureUpLinkToMeasure; }
 
     msrTimeSignatureSymbolKind
                           getTimeSignatureSymbolKind () const
@@ -759,7 +753,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     std::vector<S_msrTimeSignatureItem>
                           fTimeSignatureItemsVector;
 
-    // a time is compound if it contains several items
+    // a time signature is compound if it contains several items
     // or if the only one has several beats numbers
     // i.e. 3/4 is not, (3+4)/8 is, and 2/4+3/4 is too
     Bool                  fTimeIsCompound;
@@ -838,12 +832,14 @@ class EXP msrClefKeyTimeSignatureGroup : public msrMeasureElement
     // uplink to measure
     void                  setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure) override
-                              { setClefKeyTimeSignatureGroupUpLinkToMeasure (measure); }
-
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
                               {
-                                upLinkToMeasure =
+                                setClefKeyTimeSignatureGroupUpLinkToMeasure (
+                                  measure);
+                              }
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              {
+                                return
                                   getClefKeyTimeSignatureGroupUpLinkToMeasure ();
                               }
 

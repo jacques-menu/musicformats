@@ -129,7 +129,7 @@ class EXP lpsrScoreBlock : public lpsrBookBlockElement
     // ------------------------------------------------------
 
     S_lpsrLayout          getScoreBlockLayout () const
-                            { return fScoreBlockLayout; }
+                              { return fScoreBlockLayout; }
 
     S_msrMidiTempo        getScoreBlockMidiTempo () const
                               { return fScoreBlockMidiTempo; }

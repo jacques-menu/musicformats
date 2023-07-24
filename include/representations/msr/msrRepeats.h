@@ -453,7 +453,7 @@ class EXP msrRepeat : public msrVoiceElement
 
     msrRepeatBuildPhaseKind
                           getCurrentRepeatBuildPhaseKind () const
-                            { return fCurrentRepeatBuildPhaseKind; }
+                              { return fCurrentRepeatBuildPhaseKind; }
 
   private:
 

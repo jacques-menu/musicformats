@@ -445,6 +445,10 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceWholeNoteDurationsDetails () const
                               { return fTraceWholeNoteDurationsDetails; }
 
+    // measures whole notes vectors
+    Bool                  getTraceMeasuresWholeNotesVectors () const
+                              { return fTraceMeasuresWholeNotesVectors; }
+
     // skip notes
     void                  setTraceSkipNotes ()
                               { fTraceSkipNotes = true; }
@@ -992,6 +996,8 @@ class EXP traceOahGroup : public oahGroup
     // whole notes
     Bool                  fTraceWholeNoteDurations;
     Bool                  fTraceWholeNoteDurationsDetails;
+    // measures whole notes vectors
+    Bool                  fTraceMeasuresWholeNotesVectors;
     // skip notes
     Bool                  fTraceSkipNotes;
     // rest notes

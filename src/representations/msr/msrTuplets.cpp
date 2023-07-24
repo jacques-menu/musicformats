@@ -243,10 +243,9 @@ void msrTuplet::setMeasureElementUpLinkToMeasure (
   setTupletUpLinkToMeasure (measure);
 }
 
-void msrTuplet::getMeasureElementUpLinkToMeasure (
-  S_msrMeasure& upLinkToMeasure) const
+S_msrMeasure msrTuplet::getMeasureElementUpLinkToMeasure () const
 {
-  upLinkToMeasure = getTupletUpLinkToMeasure ();
+  return getTupletUpLinkToMeasure ();
 }
 
 void msrTuplet::setTupletUpLinkToMeasure (
@@ -728,10 +727,9 @@ void msrTuplet::setMeasurePosition (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-    S_msrMeasure upLinkToMeasure;
-
-    getMeasureElementUpLinkToMeasure (
-      upLinkToMeasure);
+    S_msrMeasure
+      upLinkToMeasure =
+        getMeasureElementUpLinkToMeasure ();
 
     std::stringstream ss;
 

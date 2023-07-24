@@ -914,15 +914,15 @@ Abort trap: 6 (core dumped)
 % -------------------------------------------------------------------------
 
 In \mxml, a part is composed of one or more staves, each composed of one or more voices.
-There are no structured staves nor voices as such in \mxml\ however -- that is, not the way parts and measures are. The '{\tt <stave>}' and '{\tt voice}' element only contain a number.
+There are no structured staves nor voices as such in \mxml\ however -- that is, not the way parts and measures are. The '{\tt <staff>}' and '{\tt voice}' element only contain a number.
 
 \sep
 
 To be more precise:
 \begin{itemize}
-\item stave numbers start at '{\tt 1}' in every part, which refers to the top-most staff in the part;
+\item staff numbers start at '{\tt 1}' in every part, which refers to the top-most staff in the part;
 
-\item a staff number of '{\tt 1}' is implied by default, i.e. when an optional '{\tt <stave>}' element is missing, as can happen in notes descriptions;
+\item a staff number of '{\tt 1}' is implied by default, i.e. when an optional '{\tt <staff>}' element is missing, as can happen in notes descriptions;
 
 \item voice numbers start at '{\tt 1}' in every staff, and a voice number of '{\tt 1}' is implied by default, i.e. when an optional '{\tt <voice>}' element is missing;
 \end{itemize}

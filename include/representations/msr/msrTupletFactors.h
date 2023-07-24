@@ -69,7 +69,7 @@ class EXP msrTupletFactor
     msrTupletFactor       inverse () const;
 
     mfRational            asRational () const
-                            {
+                              {
                               return
                                 mfRational (
                                   fTupletActualNotes,

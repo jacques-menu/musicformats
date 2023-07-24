@@ -65,7 +65,7 @@ class EXP msrMultiMeasureRest : public msrSegmentElement
     // ------------------------------------------------------
 
     S_msrSegment          getMultiMeasureRestUpLinkToSegment () const
-                            { return fMultiMeasureRestUpLinkToSegment; }
+                              { return fMultiMeasureRestUpLinkToSegment; }
 
     int                   getMeasureRestsNumber () const
                               { return fMeasureRestsNumber; }

@@ -61,8 +61,7 @@ namespace MusicFormats
 // //     void                  setMeasureElementUpLinkToMeasure (
 // //                             const S_msrMeasure& measure) override;
 // //
-// //     void                  getMeasureElementUpLinkToMeasure (
-// //                             S_msrMeasure& upLinkToMeasure) const override;
+// //     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
 // //
 // //     void                  setTupletElementUpLinkToMeasure (
 // //                             const S_msrMeasure& measure);

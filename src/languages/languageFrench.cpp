@@ -84,31 +84,31 @@ std::string languageFrench::passIDKindAsString (mfPassIDKind passIDKind) const
       break;
 
     case mfPassIDKind::kMfPassID_1:
-     result = "Passe 1";
+      result = "Passe 1";
       break;
 
     case mfPassIDKind::kMfPassID_2:
-     result = "Passe 2";
+      result = "Passe 2";
       break;
 
     case mfPassIDKind::kMfPassID_3:
-     result = "Passe 3";
+      result = "Passe 3";
       break;
 
     case mfPassIDKind::kMfPassID_4:
-     result = "Passe 4";
+      result = "Passe 4";
       break;
 
     case mfPassIDKind::kMfPassID_5:
-     result = "Passe 5";
+      result = "Passe 5";
       break;
 
     case mfPassIDKind::kMfPassID_6:
-     result = "Passe 6";
+      result = "Passe 6";
       break;
 
     case mfPassIDKind::kMfPassID_7:
-     result = "Passe 7";
+      result = "Passe 7";
       break;
   } // switch
 

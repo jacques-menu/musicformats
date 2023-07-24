@@ -98,15 +98,14 @@ class EXP msrDoubleTremolo : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setDoubleTremoloUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getDoubleTremoloUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getDoubleTremoloUpLinkToMeasure (); }
 
     void                  setDoubleTremoloUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getDoubleTremoloUpLinkToMeasure () const
-                            { return fDoubleTremoloUpLinkToMeasure; }
+                              { return fDoubleTremoloUpLinkToMeasure; }
 
     // double tremolo kind
 

@@ -47,7 +47,7 @@ int msrSegment::sSegmentsCounter = 0;
 int msrSegment::sSegmentDebugNumber = 0;
 
 S_msrSegment msrSegment::create (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& segmentUpLinkToVoice)
 {
   msrSegment* obj =
@@ -59,7 +59,7 @@ S_msrSegment msrSegment::create (
 }
 
 msrSegment::msrSegment (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& segmentUpLinkToVoice)
     : msrVoiceElement (inputLineNumber)
 {
@@ -1078,52 +1078,52 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //
 //   --gIndenter;
 // }
-//
-// void msrSegment::appendTimeSignatureToSegment (
-//   const S_msrTimeSignature& timeSignature)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTimeSignatures ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Appending time signature:" <<
-//       std::endl;
-//
-//     ++gIndenter;
-//
-//     gLog <<
-//       timeSignature;
-//
-//     --gIndenter;
-//
-//     gLog <<
-//       "to segment " << asString () <<
-//       ", in voice \"" <<
-//       fSegmentUpLinkToVoice->getVoiceName () <<
-//       "\"" <<
-//       std::endl;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-//   assertSegmentLastMeasureIsNotNull (
-//     timeSignature->getInputStartLineNumber ());
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-//   ++gIndenter;
-//
-//   // append timeSignature to segments's current measure
-//   fSegmentLastMeasure->
-//     appendTimeSignatureToMeasure (timeSignature);
-//
-//   --gIndenter;
-// }
+
+void msrSegment::appendTimeSignatureToSegment (
+  const S_msrTimeSignature& timeSignature)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTimeSignatures ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending time signature:" <<
+      std::endl;
+
+    ++gIndenter;
+
+    gLog <<
+      timeSignature;
+
+    --gIndenter;
+
+    gLog <<
+      "to segment " << asString () <<
+      ", in voice \"" <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
+      "\"" <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  assertSegmentLastMeasureIsNotNull (
+    timeSignature->getInputStartLineNumber ());
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  ++gIndenter;
+
+  // append timeSignature to segments's current measure
+  fSegmentLastMeasure->
+    appendTimeSignatureToMeasure (timeSignature);
+
+  --gIndenter;
+}
 
 void msrSegment::appendTimeSignatureToSegmentClone (
   const S_msrTimeSignature& timeSignature){
@@ -2332,6 +2332,13 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
   else {
     // append measure to the segment
     fSegmentElementsList.push_back (measure);
+
+//     // set the measure full measure whole notes duration JMI v0.9.70
+//     measure->
+//       setFullMeasureWholeNotesDuration (
+//         fetchSegmentUpLinkToStaff ()->
+//           getStaffCurrentTimeSignature ()->
+//             timeSignatureWholeNotesPerMeasure ());
   }
 
   // append measure to the segment measures flat list

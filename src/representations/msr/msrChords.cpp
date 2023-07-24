@@ -297,10 +297,9 @@ void  msrChord::setMeasureElementUpLinkToMeasure (
   setChordUpLinkToMeasure (measure);
 }
 
-void msrChord::getMeasureElementUpLinkToMeasure (
-  S_msrMeasure& upLinkToMeasure) const
+S_msrMeasure msrChord::getMeasureElementUpLinkToMeasure () const
 {
-  upLinkToMeasure = getChordUpLinkToMeasure ();
+  return getChordUpLinkToMeasure ();
 }
 
 void msrChord::setChordUpLinkToMeasure (
@@ -493,10 +492,9 @@ void msrChord::setMeasurePosition (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-    S_msrMeasure upLinkToMeasure;
-
-    getMeasureElementUpLinkToMeasure (
-      upLinkToMeasure);
+    S_msrMeasure
+      upLinkToMeasure =
+        getMeasureElementUpLinkToMeasure ();
 
     std::stringstream ss;
 
@@ -1736,7 +1734,7 @@ void msrChord::printFull (std::ostream& os) const
     chordMeasureFullLength =
       fChordUpLinkToMeasure
         ? fChordUpLinkToMeasure->
-            getFullMeasureWholeNotesDuration ()
+            fetchFullMeasureWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI
 
   os <<
@@ -2531,7 +2529,7 @@ void msrChord::print (std::ostream& os) const
     chordMeasureFullLength =
       fChordUpLinkToMeasure
         ? fChordUpLinkToMeasure->
-            getFullMeasureWholeNotesDuration ()
+            fetchFullMeasureWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI
 
   os <<

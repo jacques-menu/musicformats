@@ -484,7 +484,7 @@ mfServiceRunData::mfServiceRunData (
   initializeRunDate ();
 
   // parts
-  fCurrentPartIDAndName = "???";
+  fCurrentPartIDAndName = "PartIDAndName_???";
 
   // staves
   fCurrentStaveNumber = K_STAFF_NUMBER_UNKNOWN_;

@@ -72,15 +72,14 @@ class EXP msrTransposition : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setTranspositionUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getTranspositionUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getTranspositionUpLinkToMeasure (); }
 
     void                  setTranspositionUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getTranspositionUpLinkToMeasure () const
-                            { return fTranspositionUpLinkToMeasure; }
+                              { return fTranspositionUpLinkToMeasure; }
 
     int                   getTranspositionDiatonic () const
                               { return fTranspositionDiatonic; }

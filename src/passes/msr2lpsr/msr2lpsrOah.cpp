@@ -415,7 +415,7 @@ R"()",
     appendAtomToSubGroup (
       oahBooleanAtom::create (
         "create-implicit-initial-repeat-barline-in-lpsr", "ciirbil",
-R"(Create an implicit repeat barLine at the beginning of the stave
+R"(Create an implicit repeat barLine at the beginning of the staff
 in the LPSR in case there is none, as is usual in scores.
 By default, no such barLine is added.)",
         "createImplicitInitialRepeatBarLine",

@@ -341,11 +341,39 @@ msrSyllable::msrSyllable (
         inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
+  // sanity checks
   mfAssert (
     __FILE__, __LINE__,
     syllableUpLinkToStanza != nullptr,
     "syllableUpLinkToStanza is null");
+
+  switch (syllableKind) {
+    case msrSyllableKind::kSyllableNone:
+    case msrSyllableKind::kSyllableSingle:
+    case msrSyllableKind::kSyllableBegin:
+    case msrSyllableKind::kSyllableMiddle:
+    case msrSyllableKind::kSyllableEnd:
+    case msrSyllableKind::kSyllableOnRestNote:
+    case msrSyllableKind::kSyllableSkipRestNote:
+    case msrSyllableKind::kSyllableSkipNonRestNote:
+      mfAssert (
+        __FILE__, __LINE__,
+        syllableWholeNotes.getNumerator () > 0,
+        "syllableWholeNotes "
+          +
+        std::to_string (syllableWholeNotes.getNumerator ())
+          +
+        " is not positive");
+      break;
+
+    case msrSyllableKind::kSyllableMeasureEnd:
+      break;
+
+    case msrSyllableKind::kSyllableLineBreak:
+      break;
+    case msrSyllableKind::kSyllablePageBreak:
+      break;
+  } // switch
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set syllable's stanza upLink
@@ -358,8 +386,8 @@ msrSyllable::msrSyllable (
 
   fSyllableStanzaNumber = syllableStanzaNumber;
 
-  // fSyllableUpLinkToNote will be set
-  // by appendSyllableToNoteAndSetItsUpLinkToNote () later
+  // fSyllableUpLinkToNote will be set later
+  // by appendSyllableToNoteAndSetItsUpLinkToNote ()
 
   fSyllableWholeNotes = syllableWholeNotes;
 
@@ -754,7 +782,7 @@ std::string msrSyllable::syllableWholeNotesAsMsrString () const
     result =
       wholeNotesAsMsrString (
         fInputStartLineNumber,
-          fSyllableWholeNotes);
+        fSyllableWholeNotes);
   }
 
   return result;
@@ -1366,8 +1394,14 @@ void msrStanza::appendMeasureEndSyllableToStanza (
     ss <<
       "Appending a measure end syllable " <<
       " to stanza " << getStanzaName () <<
+      ", partDrawingMeasurePosition: " <<
+      partDrawingMeasurePosition <<
+      ", fStanzaMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fStanzaMeasureCurrentAccumulatedWholeNotesDuration <<
       ", positionsDelta: " <<
-      positionsDelta.asString ();
+      positionsDelta.asString () <<
+      ", line " << inputLineNumber;
+
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
@@ -1377,7 +1411,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
   ++gIndenter;
 
   // pad up stanza if relevant
-  if (positionsDelta.getNumerator () != 0) {
+  if (positionsDelta.getNumerator () > 0) { // JMI v0.9.70 it may be negative...
     // create a skip rest notes syllable
     S_msrSyllable
       skipRestNoteSyllable =
@@ -1407,7 +1441,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
         msrSyllableKind::kSyllableMeasureEnd,
         msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
-        positionsDelta,
+        msrWholeNotes (0, 1),
         msrTupletFactor (1, 1),
         this);
 

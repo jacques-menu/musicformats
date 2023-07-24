@@ -45,10 +45,9 @@ msrTupletElement::~msrTupletElement ()
 //   setTupletElementUpLinkToMeasure (measure);
 // }
 //
-// void msrTupletElement::getMeasureElementUpLinkToMeasure (
-//   S_msrMeasure& upLinkToMeasure) const
+// S_msrMeasure msrTupletElement::getMeasureElementUpLinkToMeasure () const
 // {
-//   upLinkToMeasure = getTupletElementUpLinkToMeasure ();
+//   return getTupletElementUpLinkToMeasure ();
 // }
 //
 // void msrTupletElement::setTupletElementUpLinkToMeasure (

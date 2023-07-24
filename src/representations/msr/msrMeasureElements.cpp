@@ -76,10 +76,9 @@ void msrMeasureElement::doSetSoundingWholeNotes (
   if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
     ++gIndenter;
 
-    S_msrMeasure upLinkToMeasure;
-
-    getMeasureElementUpLinkToMeasure (
-      upLinkToMeasure);
+    S_msrMeasure
+      upLinkToMeasure =
+        getMeasureElementUpLinkToMeasure ();
 
     std::stringstream ss;
 
@@ -131,10 +130,9 @@ void msrMeasureElement::setMeasurePosition (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-    S_msrMeasure upLinkToMeasure;
-
-    getMeasureElementUpLinkToMeasure (
-      upLinkToMeasure);
+    S_msrMeasure
+      upLinkToMeasure =
+        getMeasureElementUpLinkToMeasure ();
 
     std::stringstream ss;
 
@@ -225,10 +223,9 @@ void msrMeasureElement::setVoicePosition (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoicePositions ()) {
-    S_msrMeasure upLinkToMeasure;
-
-    getMeasureElementUpLinkToMeasure (
-      upLinkToMeasure);
+    S_msrMeasure
+      upLinkToMeasure =
+        getMeasureElementUpLinkToMeasure ();
 
     std::stringstream ss;
 
@@ -259,10 +256,9 @@ void msrMeasureElement::setVoicePosition (
   // set measure element voice position
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoicePositions ()) {
-    S_msrMeasure upLinkToMeasure;
-
-    getMeasureElementUpLinkToMeasure (
-      upLinkToMeasure);
+    S_msrMeasure
+      upLinkToMeasure =
+        getMeasureElementUpLinkToMeasure ();
 
     std::stringstream ss;
 

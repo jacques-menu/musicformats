@@ -375,10 +375,9 @@ void msrNote::setMeasureElementUpLinkToMeasure (
   setNoteUpLinkToMeasure (measure);
 }
 
-void msrNote::getMeasureElementUpLinkToMeasure (
-  S_msrMeasure& upLinkToMeasure) const
+S_msrMeasure msrNote::getMeasureElementUpLinkToMeasure () const
 {
-  upLinkToMeasure = getNoteUpLinkToMeasure ();
+  return getNoteUpLinkToMeasure ();
 }
 
 void msrNote::setNoteUpLinkToMeasure (
@@ -586,15 +585,10 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
       if (fNoteShortcutUpLinkToTuplet) {
-        S_msrMeasure upLinkToMeasure;
-
-        fNoteShortcutUpLinkToTuplet->
-          getMeasureElementUpLinkToMeasure (
-            upLinkToMeasure);
-
-        S_msrMeasure
-          tupletShortcutUpLinkToMeasure =
-            upLinkToMeasure;
+				S_msrMeasure
+					tupletShortcutUpLinkToMeasure =
+						fNoteShortcutUpLinkToTuplet->
+							getMeasureElementUpLinkToMeasure ();
 
         if (tupletShortcutUpLinkToMeasure) {
           result =
@@ -2374,10 +2368,9 @@ void msrNote::setMeasurePosition (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
-    S_msrMeasure upLinkToMeasure;
-
-    getMeasureElementUpLinkToMeasure (
-      upLinkToMeasure);
+    S_msrMeasure
+      upLinkToMeasure =
+        getMeasureElementUpLinkToMeasure ();
 
     std::stringstream ss;
 
@@ -6735,7 +6728,7 @@ void msrNote::printFull (std::ostream& os) const
       fNoteUpLinkToMeasure
         ?
           fNoteUpLinkToMeasure->
-            getFullMeasureWholeNotesDuration ()
+            fetchFullMeasureWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI v0.9.67
 
   os << std::left <<

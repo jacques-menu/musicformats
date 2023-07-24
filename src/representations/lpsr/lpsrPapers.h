@@ -62,13 +62,13 @@ class EXP lpsrPaper : public lpsrElement
     void                  setScaling (S_msrScaling value)
                               { fScaling = value; }
     S_msrScaling          getScaling () const
-                            { return fScaling; }
+                              { return fScaling; }
 
     // MSR page layout
     void                  setPageLayout (S_msrPageLayout value)
                               { fPageLayout = value; }
     S_msrPageLayout       getPageLayout () const
-                            { return fPageLayout; }
+                              { return fPageLayout; }
 
     // indents
     void                  setHorizontalShift (const S_msrLength& value)

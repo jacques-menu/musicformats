@@ -255,6 +255,9 @@ class EXP msrPart : public msrPartGroupElement
                             int                  inputLineNumber,
                             const msrWholeNotes& measurePosition);
 
+    void                  resetPartDrawingMeasurePosition (
+                            int inputLineNumber);
+
     void                  incrementPartDrawingMeasurePosition (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta);
@@ -574,7 +577,7 @@ class EXP msrPart : public msrPartGroupElement
 
     std::string           asString () const override;
 
-    void                  printPartMeasuresWholeNotessVector (
+    void                  printPartMeasuresWholeNotesVector (
                             std::ostream&      os,
                             int                fieldWidth, // USEFUL ??? JMI v0.9.67
                             const std::string& context) const;

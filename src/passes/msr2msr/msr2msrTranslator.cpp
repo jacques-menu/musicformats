@@ -2449,7 +2449,8 @@ void msr2msrTranslator::visitStart (S_msrClefKeyTimeSignatureGroup& elt)
 
   // create an msrClefKeyTimeSignatureGroup clone
   fCurrentClefKeyTimeSignatureGroup =
-    elt->createClefKeyTimeSignatureGroupNewbornClone ();
+    elt->
+      createClefKeyTimeSignatureGroupNewbornClone ();
 
   // append it to the current voice clone
   fCurrentVoiceClone->

@@ -143,7 +143,7 @@ void lpsr2namesVisitor::visitEnd (S_msrScore& elt)
     std::setw (fieldWidth) <<
     mfSingularOrPlural (
       fStavesCounter,
-      "stave",
+      "staff",
       "staves") <<
     std::endl <<
 

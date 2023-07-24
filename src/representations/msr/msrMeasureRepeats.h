@@ -65,7 +65,7 @@ class EXP msrMeasureRepeatPattern : public msrElement
 
     // upLinks
     S_msrMeasureRepeat    getUpLinkToMeasureRepeat () const
-                            { return fUpLinkToMeasureRepeat; }
+                              { return fUpLinkToMeasureRepeat; }
 
   public:
 
@@ -146,7 +146,7 @@ class EXP msrMeasureRepeatReplicas : public msrElement
 
     // upLinks
     S_msrMeasureRepeat    getUpLinkToMeasureRepeat () const
-                            { return fUpLinkToMeasureRepeat; }
+                              { return fUpLinkToMeasureRepeat; }
     // segment
     void                  setMeasureRepeatReplicasSegment (
                             const S_msrSegment& measureRepeatReplicasSegment);
@@ -264,7 +264,7 @@ class EXP msrMeasureRepeat : public msrSegmentElement
 
     // upLinks
     S_msrVoice            getUpLinkToMeasureRepeatToVoice () const
-                            { return fUpLinkToMeasureRepeatToVoice; }
+                              { return fUpLinkToMeasureRepeatToVoice; }
 
     // numbers
     int                   getMeasureRepeatMeasuresNumber () const
@@ -302,7 +302,7 @@ class EXP msrMeasureRepeat : public msrSegmentElement
 
     msrMeasureRepeatBuildPhaseKind
                           getCurrentMeasureRepeatBuildPhaseKind () const
-                            { return fCurrentMeasureRepeatBuildPhaseKind; }
+                              { return fCurrentMeasureRepeatBuildPhaseKind; }
 
   public:
 

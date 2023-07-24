@@ -276,7 +276,7 @@ Usage:
     // ------------------------------------------------------
 
     std::stringstream&    getStringstream ()
-                            { return fStringstream; }
+                              { return fStringstream; }
 
   public:
 

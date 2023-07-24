@@ -1488,14 +1488,14 @@ std::string wholeNotesAndDotsNumberAsMsrString (
       "numerator is not positive in wholeNotesAndDotsNumberAsMsrString()" <<
       ", wholeNotes: " << wholeNotes;
 
- //   msrError ( JMI
-    msrWarning (
+   msrError ( // JMI v0.9.70
+//     msrWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-  //    __FILE__, __LINE__,
+     __FILE__, __LINE__,
       ss.str ());
 
-    return "???";
+    return "WholeNotesAndDotsNumber_???";
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
   }
 

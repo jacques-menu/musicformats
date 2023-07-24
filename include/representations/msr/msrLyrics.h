@@ -211,15 +211,14 @@ class EXP msrSyllable : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setSyllableUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getSyllableUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getSyllableUpLinkToMeasure (); }
 
     void                  setSyllableUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getSyllableUpLinkToMeasure () const
-                            { return fSyllableUpLinkToMeasure; }
+                              { return fSyllableUpLinkToMeasure; }
 
     // upLinks
     void                  setSyllableUpLinkToNote (const S_msrNote& note)

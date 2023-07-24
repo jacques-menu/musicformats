@@ -61,7 +61,7 @@ class EXP oahRegularHandler : public oahHandler
     void                  initializeOahRegularHandler ();
 
     void                  initializeHandlerMultiComponent () override
-                            {
+                              {
                               fHandlerMultiComponent =
                                 fInsiderHandler->
                                   getHandlerMultiComponent ();

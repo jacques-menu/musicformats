@@ -65,7 +65,7 @@ class EXP msrBeatRepeatPattern : public msrElement
 
     // upLinks
     S_msrBeatRepeat       getUpLinkToBeatRepeat () const
-                            { return fUpLinkToBeatRepeat; }
+                              { return fUpLinkToBeatRepeat; }
 
   public:
 
@@ -146,7 +146,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
 
     // upLinks
     S_msrBeatRepeat       getUpLinkToBeatRepeat () const
-                            { return fUpLinkToBeatRepeat; }
+                              { return fUpLinkToBeatRepeat; }
     // segment
     void                  setBeatRepeatReplicasSegment (
                             const S_msrSegment& beatRepeatReplicasSegment);
@@ -263,7 +263,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
 
     // upLinks
     S_msrVoice            getUpLinkToBeatRepeatToVoice () const
-                            { return fUpLinkToBeatRepeatToVoice; }
+                              { return fUpLinkToBeatRepeatToVoice; }
 
     // numbers
     int                   getBeatRepeatMeasuresNumber () const
@@ -301,7 +301,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
 
     msrBeatRepeatBuildPhaseKind
                           getCurrentBeatRepeatBuildPhaseKind () const
-                            { return fCurrentBeatRepeatBuildPhaseKind; }
+                              { return fCurrentBeatRepeatBuildPhaseKind; }
 
   public:
 

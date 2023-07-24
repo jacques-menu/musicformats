@@ -107,8 +107,7 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
     void                  setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure) override;
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override;
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
 
     void                  setMusicXMLPrintLayoutUpLinkToMeasure (
                             const S_msrMeasure& measure);

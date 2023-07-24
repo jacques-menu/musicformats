@@ -285,16 +285,16 @@ S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSi
 
   // JMI ??? v0.9.67
   if (fClef)
-  newbornClone->
-    setClef (fClef);
+    newbornClone->
+      setClef (fClef);
 
   if (fKey)
-  newbornClone->
-    setKey (fKey);
+    newbornClone->
+      setKey (fKey);
 
   if (fTimeSignature)
-  newbornClone->
-    setTimeSignature (fTimeSignature);
+    newbornClone->
+      setTimeSignature (fTimeSignature);
 
   return newbornClone;
 }
@@ -443,6 +443,30 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
   if (timeSignature) {
     ++fGroupItemsNumber;
   }
+
+  // get the measure
+  S_msrMeasure
+    upLinkToMeasure =
+      getMeasureElementUpLinkToMeasure ();
+
+  if (upLinkToMeasure) {
+    // set the current time signature of the staff if any
+    S_msrStaff
+      staff =
+        upLinkToMeasure->
+          fetchMeasureUpLinkToStaff ();
+
+    if (staff) {
+      staff->
+        setStaffCurrentTimeSignature (fTimeSignature);
+    }
+  }
+
+//   // set the measure full measure whole notes duration JMI v0.9.70
+//   measure->
+//     setFullMeasureWholeNotesDuration (
+//       fTimeSignature->
+//         timeSignatureWholeNotesPerMeasure ());
 }
 
 S_msrTimeSignature msrClefKeyTimeSignatureGroup::getTimeSignature () const

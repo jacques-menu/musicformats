@@ -73,15 +73,14 @@ class EXP msrCoda : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setCodaUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                              { upLinkToMeasure = getCodaUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getCodaUpLinkToMeasure (); }
 
     void                  setCodaUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getCodaUpLinkToMeasure () const
-                            { return fCodaUpLinkToMeasure; }
+                              { return fCodaUpLinkToMeasure; }
 
     int                   getStaffNumber () const
                               { return fStaffNumber; }

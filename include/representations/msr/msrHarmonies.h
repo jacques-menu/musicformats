@@ -335,29 +335,28 @@ class EXP msrHarmony : public msrMeasureElement
                             const S_msrMeasure& measure) override
                               { setHarmonyUpLinkToMeasure (measure); }
 
-    void                  getMeasureElementUpLinkToMeasure (
-                            S_msrMeasure& upLinkToMeasure) const override
-                            { upLinkToMeasure = getHarmonyUpLinkToMeasure (); }
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+                              { return getHarmonyUpLinkToMeasure (); }
 
     void                  setHarmonyUpLinkToMeasure (
                             const S_msrMeasure& measure);
 
     S_msrMeasure          getHarmonyUpLinkToMeasure () const
-                            { return fHarmonyUpLinkToMeasure; }
+                              { return fHarmonyUpLinkToMeasure; }
 
     // uplinks
     void                  setHarmonyUpLinkToNote (
                             const S_msrNote& note);
 
     S_msrNote             getHarmonyUpLinkToNote () const
-                             { return fHarmonyUpLinkToNote; }
+                              { return fHarmonyUpLinkToNote; }
 
     void                  setHarmoniesUpLinkToVoice (
                             const S_msrVoice& voice)
                               { fHarmoniesUpLinkToVoice = voice; }
 
     S_msrVoice            getHarmoniesUpLinkToVoice () const
-                             { return fHarmoniesUpLinkToVoice; }
+                              { return fHarmoniesUpLinkToVoice; }
 
     // whole notes
     void                  setHarmonySoundingWholeNotes (

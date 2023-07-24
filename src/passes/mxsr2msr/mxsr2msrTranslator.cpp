@@ -128,7 +128,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fPartMeasuresCounter = 0;
   fScoreFirstMeasureNumber = "";
   fPartFirstMeasureNumber = "";
-  fCurrentMeasureNumber = "???";
+  fCurrentMeasureNumber = "MeasureNumber_???";
 
   fPreviousMeasureEndInputLineNumber = -1;
 
@@ -154,7 +154,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 //   // we cannot stay without any,
 //   // and there may be none in the MusicXML data
 //
-//   // create the default 4/4 time
+//   // create the default 4/4 time JMI v0.9.70
 //   fCurrentTimeSignature =
 //     msrTimeSignature::createFourQuartersTime (
 //       0); // inputLineNumber
@@ -2611,7 +2611,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   fPartMeasuresCounter = 0;
   fScoreFirstMeasureNumber = "";
   fPartFirstMeasureNumber = "";
-  fCurrentMeasureNumber = "???";
+  fCurrentMeasureNumber = "MeasureNumber_???";
 
   fPreviousMeasureEndInputLineNumber = -1;
 
@@ -4238,13 +4238,13 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // create the time
+  // create the time signature
   fCurrentTimeSignature =
     msrTimeSignature::create (
       inputLineNumber,
       fCurrentTimeSignatureSymbolKind);
 
-  // populate the time with the time signature items
+  // populate the time signature with the time signature items
   if (fCurrentTimeSignatureItemsVector.size ()) {
     for (
       std::vector<S_msrTimeSignatureItem>::const_iterator i =
@@ -4270,7 +4270,7 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
     }
   }
 
-  // register time in part or staff
+  // register time signature in part or staff
 /*
   The optional number attribute refers to staff
 	numbers within the part, from top to bottom on the system.
@@ -10230,6 +10230,11 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
   */
+
+  // reset the drawing measure position in the current part
+  fCurrentPart->
+    resetPartDrawingMeasurePosition (
+      inputLineNumber);
 }
 
 void mxsr2msrTranslator::visitEnd (S_measure& elt)
