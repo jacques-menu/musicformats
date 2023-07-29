@@ -155,6 +155,9 @@ void msrPart::initializePart ()
     msrTimeSignature::createFourQuartersTime (
       0); // inputLineNumber
 
+  // initialize part's number of regular voices
+  fPartRegularVoicesCounter = 0;
+
   // initialize part's number of measures
   fPartNumberOfMeasures = 0;
 
@@ -2168,8 +2171,14 @@ S_msrStaff msrPart::fetchStaffFromPart (
 void msrPart::registerVoiceInPartAllVoicesList (
   const S_msrVoice& voice)
 {
-  // register voice in this staff
+  // register voice in this part
   fPartAllVoicesList.push_back (voice);
+
+  // set its regular voice ordinal number
+  ++fPartRegularVoicesCounter;
+  voice->
+    setRegularVoiceOrdinalNumberInPart (
+      fPartRegularVoicesCounter);
 
   // register it in the partgroup uplink
   fPartUpLinkToPartGroup->

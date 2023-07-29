@@ -44,8 +44,8 @@ enum class msrSyllableKind {
   kSyllableBegin, kSyllableMiddle, kSyllableEnd,
 
   kSyllableOnRestNote,
-  kSyllableSkipRestNote,
-  kSyllableSkipNonRestNote,
+  kSyllableSkipOnRestNote,
+  kSyllableSkipOnNonRestNote,
 
   kSyllableMeasureEnd,
   kSyllableLineBreak, kSyllablePageBreak

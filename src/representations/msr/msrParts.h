@@ -145,6 +145,15 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  setPartInstrumentNamesMaxLengthes ();
 
+    // regular voices counter
+
+
+    void                  incrementPartRegularVoicesCounter ()
+                              { ++fPartRegularVoicesCounter; }
+
+    int                   getPartRegularVoicesCounter () const
+                              { return fPartRegularVoicesCounter; }
+
     // instrument name
 
     void                  setPartInstrumentName (
@@ -624,6 +633,10 @@ class EXP msrPart : public msrPartGroupElement
     std::string           fPartInstrumentName;
     std::string           fPartInstrumentAbbreviation;
 
+    // parts counter
+
+    static int            sPartsCounter;
+
     // staves
 
     std::list<S_msrStaff> fPartAllStavesList;
@@ -648,6 +661,8 @@ class EXP msrPart : public msrPartGroupElement
     // voices
 
     std::list<S_msrVoice> fPartAllVoicesList;
+    int                   fPartRegularVoicesCounter;
+
 
     // measures
 
@@ -677,10 +692,6 @@ class EXP msrPart : public msrPartGroupElement
     // transposition
 
     S_msrTransposition    fPartCurrentTransposition;
-
-    // counter
-
-    static int            sPartsCounter;
 
     // multi-measure rests
 

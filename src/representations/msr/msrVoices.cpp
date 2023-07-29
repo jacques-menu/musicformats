@@ -271,6 +271,9 @@ msrVoice::msrVoice (
   // set voice number
   fVoiceNumber = voiceNumber;
 
+  // set regular voice ordinal number in part
+  fRegularVoiceOrdinalNumberInPart = 0;
+
   // do other initializations
   initializeVoice (
     voiceCreateInitialLastSegmentKind);
@@ -723,6 +726,9 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
   newbornClone->fRegularVoiceStaffSequentialNumber =
     fRegularVoiceStaffSequentialNumber;
 
+  newbornClone->fRegularVoiceOrdinalNumberInPart =
+    fRegularVoiceOrdinalNumberInPart;
+
   // voice name
   newbornClone->fVoiceName =
     fVoiceName;
@@ -797,6 +803,9 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   // voice numbers
   deepClone->fRegularVoiceStaffSequentialNumber =
     fRegularVoiceStaffSequentialNumber;
+
+  deepClone->fRegularVoiceOrdinalNumberInPart =
+    fRegularVoiceOrdinalNumberInPart;
 
   // voice name
   if (false) { // JMI
@@ -3706,9 +3715,9 @@ void msrVoice::appendSyllableToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending syllable \"" <<
-      syllable->asString () <<
-      "\" to voice \"" << fVoiceName << "\"";
+      "Appending syllable " <<
+      syllable <<
+      " to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11376,6 +11385,8 @@ std::string msrVoice::asShortString () const
     " voice \"" << fVoiceName <<
     "\", fVoiceNumber '" <<
     fVoiceNumber <<
+    ", fRegularVoiceOrdinalNumberInPart " <<
+    fRegularVoiceOrdinalNumberInPart <<
     ", line " << fInputStartLineNumber <<
     ']';
 
@@ -11455,8 +11466,10 @@ void msrVoice::printFull (std::ostream& os) const
 //     msrVoiceKindAsStringForPrint (fVoiceKind) <<
     "\", \"" <<
     fVoiceAlphabeticName <<
-    "\", fVoiceNumber '" <<
+    "\", fVoiceNumber " <<
     fVoiceNumber <<
+    ", fRegularVoiceOrdinalNumberInPart " <<
+    fRegularVoiceOrdinalNumberInPart <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
@@ -11818,9 +11831,10 @@ void msrVoice::print (std::ostream& os) const
 //     msrVoiceKindAsStringForPrint (fVoiceKind) <<
     "\", \"" <<
     fVoiceAlphabeticName <<
-    "\", fVoiceNumber '" <<
+    "\", fVoiceNumber " <<
     fVoiceNumber <<
-    '\'' <<
+    ", fRegularVoiceOrdinalNumberInPart " <<
+    fRegularVoiceOrdinalNumberInPart <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 

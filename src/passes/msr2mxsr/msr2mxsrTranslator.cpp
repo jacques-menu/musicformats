@@ -7069,9 +7069,9 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
         case msrSyllableKind::kSyllableOnRestNote:
           break;
 
-        case msrSyllableKind::kSyllableSkipRestNote:
+        case msrSyllableKind::kSyllableSkipOnRestNote:
           break;
-        case msrSyllableKind::kSyllableSkipNonRestNote:
+        case msrSyllableKind::kSyllableSkipOnNonRestNote:
           break;
 
         case msrSyllableKind::kSyllableMeasureEnd:

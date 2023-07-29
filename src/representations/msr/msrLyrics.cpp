@@ -91,11 +91,11 @@ std::string msrSyllableKindAsString (
       result = "kSyllableOnRestNote";
       break;
 
-    case msrSyllableKind::kSyllableSkipRestNote:
-      result = "kSyllableSkipRestNote";
+    case msrSyllableKind::kSyllableSkipOnRestNote:
+      result = "kSyllableSkipOnRestNote";
       break;
-    case msrSyllableKind::kSyllableSkipNonRestNote:
-      result = "kSyllableSkipNonRestNote";
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
+      result = "kSyllableSkipOnNonRestNote";
       break;
 
     case msrSyllableKind::kSyllableMeasureEnd:
@@ -354,8 +354,8 @@ msrSyllable::msrSyllable (
     case msrSyllableKind::kSyllableMiddle:
     case msrSyllableKind::kSyllableEnd:
     case msrSyllableKind::kSyllableOnRestNote:
-    case msrSyllableKind::kSyllableSkipRestNote:
-    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
       mfAssert (
         __FILE__, __LINE__,
         syllableWholeNotes.getNumerator () > 0,
@@ -570,8 +570,8 @@ void msrSyllable:: setSyllableMeasureNumber (
     case msrSyllableKind::kSyllableMiddle:
     case msrSyllableKind::kSyllableEnd:
     case msrSyllableKind::kSyllableOnRestNote:
-    case msrSyllableKind::kSyllableSkipRestNote:
-    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
     case msrSyllableKind::kSyllableMeasureEnd:
       {
         std::stringstream ss;
@@ -870,8 +870,8 @@ std::string msrSyllable::asString () const
     case msrSyllableKind::kSyllableMiddle:
     case msrSyllableKind::kSyllableEnd:
     case msrSyllableKind::kSyllableOnRestNote:
-    case msrSyllableKind::kSyllableSkipRestNote:
-    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
     case msrSyllableKind::kSyllableMeasureEnd:
     case msrSyllableKind::kSyllableLineBreak:
     case msrSyllableKind::kSyllablePageBreak:
@@ -997,8 +997,8 @@ void msrSyllable::print (std::ostream& os) const
     case msrSyllableKind::kSyllableMiddle:
     case msrSyllableKind::kSyllableEnd:
     case msrSyllableKind::kSyllableOnRestNote:
-    case msrSyllableKind::kSyllableSkipRestNote:
-    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
     case msrSyllableKind::kSyllableMeasureEnd:
     case msrSyllableKind::kSyllableLineBreak:
     case msrSyllableKind::kSyllablePageBreak:
@@ -1239,8 +1239,8 @@ void msrStanza::appendSyllableToStanza (
     std::stringstream ss;
 
     ss <<
-      "Appending syllable \"" << syllable->asString () <<
-      "\" to stanza " << getStanzaName () <<
+      "Appending syllable " << syllable <<
+      " to stanza " << getStanzaName () <<
       ", partDrawingMeasurePosition: " <<
       partDrawingMeasurePosition.asString () <<
       ", fStanzaMeasureCurrentAccumulatedWholeNotesDuration: " <<
@@ -1257,12 +1257,12 @@ void msrStanza::appendSyllableToStanza (
 
   // pad up stanza if relevant
   if (positionsDelta.getNumerator () != 0) {
-    // create a skip rest notes syllable
+    // create a skip on rest note syllable
     S_msrSyllable
       skipRestNoteSyllable =
         msrSyllable::create (
           syllable->getInputStartLineNumber (),
-          msrSyllableKind::kSyllableSkipRestNote,
+          msrSyllableKind::kSyllableSkipOnRestNote,
           msrSyllableExtendKind::kSyllableExtend_NONE,
           fStanzaNumber,
           positionsDelta,
@@ -1301,8 +1301,8 @@ void msrStanza::appendSyllableToStanza (
       break;
 
     case msrSyllableKind::kSyllableOnRestNote:
-    case msrSyllableKind::kSyllableSkipRestNote:
-    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
     case msrSyllableKind::kSyllableMeasureEnd:
     case msrSyllableKind::kSyllableLineBreak:
     case msrSyllableKind::kSyllablePageBreak:
@@ -1326,8 +1326,8 @@ void msrStanza::appendSyllableToStanzaClone (
     std::stringstream ss;
 
     ss <<
-      "Appending syllable \"" << syllable->asString () <<
-      "\" to stanza clone " << getStanzaName ();
+      "Appending syllable " << syllable <<
+      " to stanza clone " << getStanzaName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1359,8 +1359,8 @@ void msrStanza::appendSyllableToStanzaClone (
       break;
 
     case msrSyllableKind::kSyllableOnRestNote:
-    case msrSyllableKind::kSyllableSkipRestNote:
-    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
     case msrSyllableKind::kSyllableMeasureEnd:
     case msrSyllableKind::kSyllableLineBreak:
     case msrSyllableKind::kSyllablePageBreak:
@@ -1412,12 +1412,12 @@ void msrStanza::appendMeasureEndSyllableToStanza (
 
   // pad up stanza if relevant
   if (positionsDelta.getNumerator () > 0) { // JMI v0.9.70 it may be negative...
-    // create a skip rest notes syllable
+    // create a skip on rest note syllable
     S_msrSyllable
       skipRestNoteSyllable =
         msrSyllable::create (
           inputLineNumber,
-          msrSyllableKind::kSyllableSkipRestNote,
+          msrSyllableKind::kSyllableSkipOnRestNote,
           msrSyllableExtendKind::kSyllableExtend_NONE,
           fStanzaNumber,
           positionsDelta,

@@ -192,6 +192,12 @@ class EXP msrVoice : public msrElement
     int                   getVoiceNumber () const
                               { return fVoiceNumber; }
 
+    void                  setRegularVoiceOrdinalNumberInPart (int voiceOrdinalNumber)
+                              { fRegularVoiceOrdinalNumberInPart = voiceOrdinalNumber; }
+
+    int                   getRegularVoiceOrdinalNumberInPart () const
+                              { return fRegularVoiceOrdinalNumberInPart; }
+
     void                  setRegularVoiceStaffSequentialNumber (
                             int regularVoiceStaffSequentialNumber);
 
@@ -1124,9 +1130,17 @@ class EXP msrVoice : public msrElement
     // and there can be holes
     int                   fVoiceNumber;
 
+
+    // the handling of tuplets in mxsr2msrTranslator.cpp
+    // need to store the yet incomplete tuplets
+    // due to the order in which their elements are present in the MusicXML data,
+    // see mxsr2msrTranslator.h
+    int                   fRegularVoiceOrdinalNumberInPart;
+
     // there can only be 4 regular voices in a staff
     // (those that can contain beamed notes)
     // and we need a number for the orientation of beams
+    // for use by regular voices only (i.e. not harmonies nor figures basses voices)
     int                   fRegularVoiceStaffSequentialNumber;
 
     // voice name

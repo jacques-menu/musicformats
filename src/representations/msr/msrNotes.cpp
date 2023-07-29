@@ -3478,9 +3478,9 @@ void msrNote::appendSyllableToNote (
     std::stringstream ss;
 
     ss <<
-      "Appending syllable \"" <<
-      syllable->asString () <<
-      "\" to note " <<
+      "Appending syllable " <<
+      syllable <<
+      " to note " <<
       asString ();
 
     gWaeHandler->waeTrace (

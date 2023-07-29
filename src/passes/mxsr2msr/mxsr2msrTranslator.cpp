@@ -15,6 +15,7 @@
 
 #include <set>
 
+#include "smartpointer.h"
 #include "xml_tree_browser.h"
 
 #include "mfPreprocessorSettings.h"
@@ -46,6 +47,127 @@
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+S_mxsrTuplet mxsrTuplet::create (
+	int                   startInputLineNumber,
+	int                   TupletNumber,
+	const S_msrTuplet& theMsrTuplet,
+	int                   identity)
+{
+  mxsrTuplet* obj = new
+    mxsrTuplet (
+      startInputLineNumber,
+      TupletNumber,
+      theMsrTuplet,
+      identity);
+  assert (obj != nullptr);
+  return obj;
+}
+
+mxsrTuplet::mxsrTuplet (
+	int                   startInputLineNumber,
+	int                   TupletNumber,
+	const S_msrTuplet& theMsrTuplet,
+	int                   identity)
+{
+  fTupletNumber = TupletNumber;
+
+  fTupletIdentity = identity;
+
+  fStartInputLineNumber = startInputLineNumber;
+  fStopInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
+
+  fMsrTuplet = theMsrTuplet;
+}
+
+mxsrTuplet::~mxsrTuplet ()
+{}
+
+std::string mxsrTuplet::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    '\'' <<
+    fTupletNumber <<
+    "' -=> " <<
+    " FOO ";
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    ss <<
+      ", fTupletIdentity " << fTupletIdentity;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  ss <<
+    ", lines " <<
+    fStartInputLineNumber << ".." << fStopInputLineNumber;
+
+  return ss.str ();
+}
+
+void mxsrTuplet::print (std::ostream& os) const
+{
+  const int fieldWidth = 14;
+
+	os <<
+		"[mxsrTuplet" <<
+    ", fTupletNumber" << ": " <<
+    fTupletNumber <<
+		std::endl;
+
+	++gIndenter;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fStartInputLineNumber" << ": " <<
+    fStartInputLineNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fStopInputLineNumber" << ": " <<
+    fStopInputLineNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTupletIdentity" << ": " <<
+    fTupletIdentity <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMsrTuplet" << ": " <<
+    std::endl;
+
+	++gIndenter;
+  os <<
+    fMsrTuplet <<
+    std::endl;
+  --gIndenter;
+
+	os << ']' << std::endl;
+
+  --gIndenter;
+}
+
+std::ostream& operator << (std::ostream& os, const mxsrTuplet& elt)
+{
+  elt.print (os);
+  return os;
+}
+
+std::ostream& operator << (std::ostream& os, const S_mxsrTuplet& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
 
 //________________________________________________________________________
 mxsr2msrTranslator::mxsr2msrTranslator (
@@ -2614,6 +2736,15 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   fCurrentMeasureNumber = "MeasureNumber_???";
 
   fPreviousMeasureEndInputLineNumber = -1;
+
+  // initialize tuplets vector to
+  int
+    partRegularVoicesCounter =
+      fCurrentPart->
+        getPartRegularVoicesCounter ();
+
+//   fMxsrTupletsVector.clear ();
+//   fMxsrTupletsVector.resize (partRegularVoicesCounter);
 
   ++gIndenter;
 }
@@ -8331,6 +8462,137 @@ void mxsr2msrTranslator::displayTupletsStack (
     std::endl << std::endl;
 }
 
+// //________________________________________________________________________
+// void mxsr2msrTranslator::displayMxsrTupletsVector (
+//   const std::string& context)
+// {
+//   size_t mxsrTupletsVectorSize = fMxsrTupletsVector.size ();
+//
+//   gLog <<
+//     std::endl <<
+//     ">>++++++++++++++ The tuplets vector contains " <<
+//     mfSingularOrPlural (
+//       mxsrTupletsVectorSize, "element", "elements") <<
+//     ':' <<
+//     std::endl;
+//
+//   if (mxsrTupletsVectorSize) {
+//     std::vector<S_msrTuplet>::const_iterator
+//       iBegin = fMxsrTupletsVector.begin (),
+//       iEnd   = fMxsrTupletsVectorfMxsrTupletsVector.end (),
+//       i      = iBegin;
+//
+//     S_msrTuplet tuplet = (*i);
+//
+//     ++gIndenter;
+//
+//     int n = mxsrTupletsVectorSize;
+//     for ( ; ; ) {
+//       gLog <<
+//         "v (" << n << ")" <<
+//         std::endl;
+//
+//       ++gIndenter;
+//       gLog << tuplet;
+//       --gIndenter;
+//
+//       --n;
+//
+//       if (++i == iEnd) break;
+//
+//       gLog << std::endl;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   gLog <<
+//     " <<++++++++++++++++ " <<
+//     std::endl << std::endl;
+// }
+
+//________________________________________________________________________
+void mxsr2msrTranslator::displayMsrTupletsStacksMapMap (
+  const std::string& context)
+{
+  for (std::pair<int, msrTupletsStacksMap> thePair : fTupletsStacksMapMap) {
+    int mapMapIndex = thePair.first;
+    msrTupletsStacksMap tupletsStacksMap = thePair.second;
+
+    size_t tupletsStacksMapSize = tupletsStacksMap.size ();
+
+    gLog <<
+      std::endl <<
+      ">>++++++++++++++ The tuplets stacks map map contains " <<
+      mfSingularOrPlural (
+        tupletsStacksMapSize, "element", "elements") <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+
+    for (std::pair<int, msrTupletsStack> thePair : tupletsStacksMap) {
+      int mapIndex = thePair.first;
+      msrTupletsStack tupletsStack = thePair.second;
+
+      size_t tupletsStackSize = tupletsStack.size ();
+
+      gLog <<
+        std::endl <<
+        ">>++++++++++++++ The tuplets stacks map contains " <<
+        mfSingularOrPlural (
+          tupletsStackSize, "element", "elements") <<
+        ':' <<
+        std::endl;
+
+      ++gIndenter;
+
+//     if (tupletsStacksMapSize) {
+//       std::list<S_msrTuplet>::const_iterator
+//         iBegin = tupletsStacksMapMap.begin (),
+//         iEnd   = tupletsStacksMapMap.end (),
+//         i      = iBegin;
+//
+//       S_msrTuplet tuplet = (*i);
+//
+//       ++gIndenter;
+//
+//       int n = tupletsStacksMapSize;
+//       for ( ; ; ) {
+//         gLog <<
+//           "v (" << n << ")" <<
+//           std::endl;
+//
+//         ++gIndenter;
+//         gLog << tuplet;
+//         --gIndenter;
+//
+//         --n;
+//
+//         if (++i == iEnd) break;
+//
+//         gLog << std::endl;
+//       } // for
+//
+//       --gIndenter;
+//     }
+
+      --gIndenter;
+    } // for
+
+
+    gLog <<
+      " <<++++++++++++++++ " <<
+      std::endl << std::endl;
+
+    --gIndenter;
+  } // for
+
+  gLog <<
+    " <<++++++++++++++++ " <<
+    std::endl << std::endl;
+}
+
 //______________________________________________________________________________
 void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
   int         inputLineNumber,
@@ -8367,6 +8629,10 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
     displayTupletsStack (
+      "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 2");
+  }
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    displayMsrTupletsStacksMapMap (
       "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -8439,6 +8705,10 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
     displayTupletsStack (
       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 3");
   }
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    displayMsrTupletsStacksMapMap (
+      "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 3");
+  }
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -8456,6 +8726,10 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
     displayTupletsStack (
       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 4");
   }
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    displayMsrTupletsStacksMapMap (
+      "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 4");
+  }
 #endif // MF_TRACE_IS_ENABLED
 
 //   abort ();
@@ -8466,7 +8740,7 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
     if (gTraceOahGroup->getTraceTuplets ()) {
       gLog <<
         "=== adding nested tuplet " <<
-      tuplet->asString () <<
+      tuplet <<
         " to current stack top tuplet " <<
       fTupletsStack.front ()->asString () <<
       ", line " << inputLineNumber <<
@@ -8484,7 +8758,7 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
     if (gTraceOahGroup->getTraceTuplets ()) {
       gLog <<
         "Appending top level tuplet " <<
-      tuplet->asString () <<
+      tuplet <<
       " to voice \"" <<
       currentNoteVoice->getVoiceName () <<
       "\"" <<
@@ -8514,6 +8788,10 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
     displayTupletsStack (
+      "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
+  }
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    displayMsrTupletsStacksMapMap (
       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -9744,7 +10022,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     else {
       // don't register a skip in lyrics for rests without syllables
       fCurrentSyllableKind =
-        msrSyllableKind::kSyllableSkipRestNote;
+        msrSyllableKind::kSyllableSkipOnRestNote;
     }
   }
 
@@ -21237,6 +21515,10 @@ void mxsr2msrTranslator::handleTupletStart (
     displayTupletsStack (
       "############## handleTupletStart() 1");
   }
+  if (gTraceOahGroup->getTraceTupletsDetails ()) {
+    displayMsrTupletsStacksMapMap (
+      "############## handleTupletStart() 1");
+  }
 #endif // MF_TRACE_IS_ENABLED
 
   // append outermost tuplet to the part at once,
@@ -21329,6 +21611,10 @@ void mxsr2msrTranslator::handleTupletContinue (
       displayTupletsStack (
         "############## kTupletTypeContinue");
     }
+    if (gTraceOahGroup->getTraceTuplets ()) {
+      displayMsrTupletsStacksMapMap (
+        "############## kTupletTypeContinue");
+    }
 #endif // MF_TRACE_IS_ENABLED
 
 /* JMI
@@ -21374,6 +21660,10 @@ void mxsr2msrTranslator::handleTupletStop (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
+      "############## handleTupletStop() 1");
+  }
+  if (gTraceOahGroup->getTraceTupletsDetails ()) {
+    displayMsrTupletsStacksMapMap (
       "############## handleTupletStop() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -21429,6 +21719,10 @@ void mxsr2msrTranslator::handleTupletStop (
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTuplets ()) {
           displayTupletsStack (
+            "############## kTupletTypeStop, outer-most");
+        }
+        if (gTraceOahGroup->getTraceTuplets ()) {
+          displayMsrTupletsStacksMapMap (
             "############## kTupletTypeStop, outer-most");
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -21527,6 +21821,10 @@ void mxsr2msrTranslator::handleTupletStop (
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTuplets ()) {
           displayTupletsStack (
+            "############## kTupletTypeStop, nested");
+        }
+        if (gTraceOahGroup->getTraceTuplets ()) {
+          displayMsrTupletsStacksMapMap (
             "############## kTupletTypeStop, nested");
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -26330,7 +26628,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
     fCurrentNote->getInputEndLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyricsDetails ()) {
+  if (gTraceOahGroup->getTraceLyrics ()) {
     std::stringstream ss;
 
     ss <<
@@ -26341,7 +26639,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
 
     ++gIndenter;
 
-    const int fieldWidth = 33;
+    const int fieldWidth = 37;
 
     gLog <<
       std::setw (fieldWidth) <<
@@ -26446,9 +26744,9 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
         // choose the syllable kind
         msrSyllableKind
           syllableKind =
-          fCurrentNoteIsARest
-            ? msrSyllableKind::kSyllableSkipRestNote
-            : msrSyllableKind::kSyllableSkipNonRestNote;
+            fCurrentNoteIsARest
+              ? msrSyllableKind::kSyllableSkipOnRestNote
+              : msrSyllableKind::kSyllableSkipOnNonRestNote;
 
         // create a skip syllable
         S_msrSyllable
@@ -26485,8 +26783,6 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
           partDrawingMeasurePosition =
             part->
               getPartDrawingMeasurePosition ();
-
-
 
         // append syllable to stanza
         stanza->
@@ -27117,7 +27413,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             "Adding first note " <<
             note->asShortString () <<
             " to tuplet " <<
-            tuplet->asString ();
+            tuplet;
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -27326,6 +27622,10 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
       displayTupletsStack (
+        "############## After removeLastNoteFromTuplet()");
+    }
+    if (gTraceOahGroup->getTraceTuplets ()) {
+      displayMsrTupletsStacksMapMap (
         "############## After removeLastNoteFromTuplet()");
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -27638,6 +27938,10 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
     displayTupletsStack (
       "############## Before handleTupletsPendingOnTupletsStack()");
   }
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    displayMsrTupletsStacksMapMap (
+      "############## Before handleTupletsPendingOnTupletsStack()");
+  }
 #endif // MF_TRACE_IS_ENABLED
 
   // handle tuplets pending on the tuplet stack
@@ -27655,6 +27959,10 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
     displayTupletsStack (
+      "############## Before handleTupletsPendingOnTupletsStack()");
+  }
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    displayMsrTupletsStacksMapMap (
       "############## Before handleTupletsPendingOnTupletsStack()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -31517,8 +31825,8 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           msrSyllableKind
 //             syllableKind =
 //             fCurrentNoteIsARest
-//               ? msrSyllableKind::kSyllableSkipRestNote
-//               : msrSyllableKind::kSyllableSkipNonRestNote;
+//               ? msrSyllableKind::kSyllableSkipOnRestNote
+//               : msrSyllableKind::kSyllableSkipOnNonRestNote;
 //
 //           // create a skip syllable
 //           S_msrSyllable
@@ -31545,3 +31853,268 @@ The discontinue value is typically used for the last ending in a set, where ther
 //         } // for
 //       }
 //     }
+
+
+
+
+// //______________________________________________________________________________
+// S_mxsrTupletsList mxsrTupletsList::create ()
+// {
+//   mxsrTupletsList* obj = new
+//     mxsrTupletsList ();
+//   assert (obj != nullptr);
+//   return obj;
+// }
+//
+// S_mxsrTupletsList mxsrTupletsList::create (
+// 	const S_mxsrTuplet& tuplet)
+// {
+//   mxsrTupletsList* obj = new
+//     mxsrTupletsList (
+//     	tuplet);
+//   assert (obj != nullptr);
+//   return obj;
+// }
+//
+// mxsrTupletsList::mxsrTupletsList ()
+// {}
+//
+// mxsrTupletsList::mxsrTupletsList (
+// 	const S_mxsrTuplet& tuplet)
+// {
+//   fmxsrTupletsStdList.push_back (tuplet);
+// }
+//
+// mxsrTupletsList::~mxsrTupletsList ()
+// {}
+//
+// void mxsrTupletsList::prependTuplet (
+// 	const S_mxsrTuplet& tuplet)
+// {
+//   fmxsrTupletsStdList.push_front (tuplet);
+// }
+//
+// void mxsrTupletsList::appendTuplet (
+// 	const S_mxsrTuplet& tuplet)
+// {
+//   fmxsrTupletsStdList.push_back (tuplet);
+// }
+//
+// void mxsrTupletsList::sortByDecreasingIdentity()
+// {
+//   fmxsrTupletsStdList.sort (
+//   	mxsrTuplet::compareTupletsByDecreasingIdentity);
+// }
+//
+// void mxsrTupletsList::print (std::ostream& os) const
+// {
+//   os <<
+//     "[mxsrTupletsList" <<
+//     ", fmxsrTupletListName: " << fmxsrTupletListName << ':';
+//
+//   if (fmxsrTupletsStdList.size ()) {
+//   	os << std::endl;
+//
+//     ++gIndenter;
+//
+// 		for (S_mxsrTuplet tuplet : fmxsrTupletsStdList) {
+// 			os <<
+// 				tuplet <<
+// 				std::endl;
+// 		} // for
+//
+//     --gIndenter;
+//   }
+//
+//   else {
+//     os <<
+//       " [EMPTY]" <<
+//       std::endl;
+//   }
+//
+// 	os << ']' << std::endl;
+// }
+//
+// void mxsrTupletsList::printWithContext (
+//   const std::string& context,
+// 	char               evidencer,
+//   std::ostream&      os) const
+// {
+// 	size_t
+// 		theTupletsStdListSize =
+// 			fmxsrTupletsStdList.size ();
+//
+//   os <<
+//     "[mxsrTupletsList" <<
+//     ", fmxsrTupletListName: \"" << fmxsrTupletListName << "\"" <<
+//     ", " <<
+//     mfSingularOrPlural (
+//     	theTupletsStdListSize, "element", "elements") <<
+//     " -- " <<
+//     context <<
+//     ':';
+//
+//   if (fmxsrTupletsStdList.size ()) {
+//   	os << std::endl;
+//
+//     ++gIndenter;
+//
+// 		int counter = theTupletsStdListSize - 1;
+//     for (S_mxsrTuplet tuplet : fmxsrTupletsStdList) {
+//       os <<
+//         counter << ": " << evidencer <<
+//         std::endl;
+//
+// 			++gIndenter;
+//       os <<
+//         tuplet <<
+//         std::endl;
+// 			--gIndenter;
+//
+//       --counter;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   else {
+//     os <<
+//       " [EMPTY]" <<
+//       std::endl;
+//   }
+//
+//   os << ']' << std::endl;
+// }
+//
+// std::ostream& operator << (std::ostream& os, const mxsrTupletsList& elt) {
+//   elt.print (os);
+//   return os;
+// }
+//
+// std::ostream& operator << (std::ostream& os, const S_mxsrTupletsList& elt) {
+//   elt->print (os);
+//   return os;
+// }
+
+// //______________________________________________________________________________
+// S_mxsrTupletsStack mxsrTupletsStack::create ()
+// {
+//   mxsrTupletsStack* obj = new
+//     mxsrTupletsStack ();
+//   assert (obj != nullptr);
+//   return obj;
+// }
+//
+// S_mxsrTupletsStack mxsrTupletsStack::create (
+// 	const S_msrTuplet& tuplet)
+// {
+//   mxsrTupletsStack* obj = new
+//     mxsrTupletsStack (
+//     	tuplet);
+//   assert (obj != nullptr);
+//   return obj;
+// }
+//
+// mxsrTupletsStack::mxsrTupletsStack ()
+// {}
+//
+// mxsrTupletsStack::mxsrTupletsStack (
+// 	const S_msrTuplet& tuplet)
+// {
+//   fmxsrTupletsStdList.push_back (tuplet);
+// }
+//
+// mxsrTupletsStack::~mxsrTupletsStack ()
+// {}
+//
+// void mxsrTupletsStack::print (std::ostream& os) const
+// {
+//   os <<
+//     "[mxsrTupletsStack" <<
+//     ", fmxsrTupletStackName: " << fmxsrTupletStackName << ':';
+//
+//   if (fmxsrTupletsStdList.size ()) {
+//   	os << std::endl;
+//
+//     ++gIndenter;
+//
+// 		for (S_msrTuplet tuplet : fmxsrTupletsStdList) {
+// 			os <<
+// 				tuplet <<
+// 				std::endl;
+// 		} // for
+//
+//     --gIndenter;
+//   }
+//
+//   else {
+//     os <<
+//       " [EMPTY]" <<
+//       std::endl;
+//   }
+//
+// 	os << ']' << std::endl;
+// }
+//
+// void mxsrTupletsStack::printWithContext (
+//   const std::string& context,
+// 	char               evidencer,
+//   std::ostream&      os) const
+// {
+// 	size_t
+// 		theTupletsStdListSize =
+// 			fmxsrTupletsStdList.size ();
+//
+//   os <<
+//     "The part groups stack contains " <<
+//     "[mxsrTupletsStack" <<
+//     ", fmxsrTupletStackName: \"" << fmxsrTupletStackName << "\"" <<
+//     ", " <<
+//     mfSingularOrPlural (
+//     	theTupletsStdListSize, "element", "elements") <<
+//     " -- " <<
+//     context <<
+//     ':';
+//
+//   if (fmxsrTupletsStdList.size ()) {
+//   	os << std::endl;
+//
+//     ++gIndenter;
+//
+// 		int counter = theTupletsStdListSize - 1;
+//     for (S_msrTuplet tuplet : fmxsrTupletsStdList) {
+//       os <<
+//         counter << ": " << evidencer <<
+//         std::endl;
+//
+// 			++gIndenter;
+//       os <<
+//         tuplet <<
+//         std::endl;
+// 			--gIndenter;
+//
+//       --counter;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   else {
+//     os <<
+//       " [EMPTY]" <<
+//       std::endl;
+//   }
+//
+//   os << ']' << std::endl;
+// }
+//
+// std::ostream& operator << (std::ostream& os, const mxsrTupletsStack& elt) {
+//   elt.print (os);
+//   return os;
+// }
+//
+// std::ostream& operator << (std::ostream& os, const S_mxsrTupletsStack& elt) {
+//   elt->print (os);
+//   return os;
+// }
+

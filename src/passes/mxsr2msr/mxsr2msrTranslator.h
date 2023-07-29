@@ -36,6 +36,99 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
+class mxsrTuplet : public smartable
+{
+/*
+  positions represent the order in which the parts appear in <part-list />,
+  starting at 0 since std::vectors are used
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mxsrTuplet> create (
+                            int                   startInputLineNumber,
+                            int                   TupletNumber,
+                            const S_msrTuplet& theMsrTuplet,
+                            int                   identity);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mxsrTuplet (
+                            int                   startInputLineNumber,
+                            int                   TupletNumber,
+                            const S_msrTuplet& theMsrTuplet,
+                            int                   identity);
+
+    virtual               ~mxsrTuplet ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    int                   getTupletNumber () const
+                              { return fTupletNumber; }
+
+    void                  setTupletIdentity (int identity)
+                              { fTupletIdentity= identity; }
+
+    int                   getTupletIdentity () const
+                              { return fTupletIdentity; }
+
+    int                   getInputStartLineNumber () const
+                              { return fStartInputLineNumber; }
+
+    int                   getStopInputLineNumber () const
+                              { return fStopInputLineNumber; }
+
+    S_msrTuplet           getMsrTuplet () const
+                              { return fMsrTuplet; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const;
+
+    virtual void          print (std::ostream& os) const;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    int                   fTupletNumber; // may be reused later
+
+    int                   fTupletIdentity; // set upon part group start
+
+    int                   fStartInputLineNumber;
+    int                   fStopInputLineNumber;
+
+
+    S_msrTuplet           fMsrTuplet;
+
+    S_msrNote             fCurrentOuterMostTupletFirstNote;
+    S_msrTuplet           fCurrentOuterMostTuplet;
+
+    msrWholeNotes         fCurrentOuterMostTupletRelativeOffset;
+};
+typedef SMARTP<mxsrTuplet> S_mxsrTuplet;
+EXP std::ostream& operator << (std::ostream& os, const mxsrTuplet& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrTuplet& elt);
+
+//________________________________________________________________________
 class EXP mxsr2msrTranslator :
 
   // MXSR score partwise
@@ -2368,15 +2461,42 @@ class EXP mxsr2msrTranslator :
 
     msrWholeNotes             fCurrentOuterMostTupletRelativeOffset;
 
+    /*
+      the order in which a tuplet'members are present in a MusicXML file
+      is up to the exporter that created it,
+      and there may backups to other voices before all of them are seen
+
+      we therefore need to store tuplets internally until they are complete.
+
+      this is done with a vector, whose indices are the voices sequential, ordinal numbers
+    */
     std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (
+                                const std::string& context);
+
+//     std::vector<S_msxrTuplet> fMxsrTupletsVector;
+//     void                      displayMxsrTupletsVector (
+//                                 const std::string& context);
+
+
+//     mfStack<S_msxrTuplet>     fMsrTupletssMfStack;
+
+
+//     S_mxsrTuplet              fCurrentMxsrTuplet; // held in fMxsrTupletsVector
+
+    typedef std::list<S_msrTuplet>             msrTupletsStack;
+    typedef std::map<int, msrTupletsStack>     msrTupletsStacksMap;
+    typedef std::map<int, msrTupletsStacksMap> msrTupletsStacksMapMap;
+
+    msrTupletsStacksMapMap    fTupletsStacksMapMap;
+    void                      displayMsrTupletsStacksMapMap (
                                 const std::string& context);
 
     // https://www.toptal.com/c-plus-plus/top-10-common-c-plus-plus-developer-mistakes
 //     std::map<int, mfStack<S_msrTuplet> >
 //                               fTupletsStacksMap;
 
-    // the tuplets stop are not always in first-in/first-out order, so:
+    // the tuplets stops are not always in first-in/first-out order, so:
     std::set<int>             fExpectedTupletsStopNumbersSet;
 
     Bool                      tupletsStopNumberIsExpected (
@@ -2516,3 +2636,191 @@ class EXP mxsr2msrTranslator :
 
 
 #endif // ___mxsr2msrTranslator___
+
+
+// //______________________________________________________________________________
+// class EXP mxsrTupletsList : public smartable
+// {
+//   public:
+//
+//     // creation
+//     // ------------------------------------------------------
+//
+//     static SMARTP<mxsrTupletsList> create ();
+//
+//     static SMARTP<mxsrTupletsList> create (
+//                             const S_mxsrTuplet& tuplet);
+//
+//     // constructors/destructor
+//     // ------------------------------------------------------
+//
+//                           mxsrTupletsList ();
+//
+//                           mxsrTupletsList (
+//                             const S_mxsrTuplet& tuplet);
+//
+//     virtual               ~mxsrTupletsList ();
+//
+//   public:
+//
+//     // set and get
+//     // ------------------------------------------------------
+//
+//     const std::list<S_mxsrTuplet>&
+//                           getmxsrTupletsStdList () const
+//                               { return fmxsrTupletsStdList;}
+//
+//   public:
+//
+//     // public services
+//     // ------------------------------------------------------
+//
+//     // basic list stuff
+//     size_t                size () const
+//                               { return fmxsrTupletsStdList.size (); }
+//
+//     S_mxsrTuplet&         front ()
+//                               { return fmxsrTupletsStdList.front (); }
+//
+//     S_mxsrTuplet&         back ()
+//                               { return fmxsrTupletsStdList.back (); }
+//
+//     void                  pop_front ()
+//                               { fmxsrTupletsStdList.pop_front (); }
+//
+//     void                  pop_back ()
+//                               { fmxsrTupletsStdList.pop_back (); }
+//
+//     void                  push_front (
+//                             const S_mxsrTuplet& tuplet)
+//                               { fmxsrTupletsStdList.push_front (tuplet); }
+//
+//     void                  push_back (
+//                             const S_mxsrTuplet& tuplet)
+//                               { fmxsrTupletsStdList.push_back (tuplet); }
+//
+//     // sort
+//     void                  sortByDecreasingIdentity();
+//
+//   public:
+//
+//     // print
+//     // ------------------------------------------------------
+//
+//     void                  print (std::ostream& os) const;
+//
+//     void                  printWithContext (
+//                             const std::string& context,
+//                             char               evidencer,
+//                             std::ostream&      os) const;
+//
+//   private:
+//
+//     // private services
+//     // ------------------------------------------------------
+//
+//
+//     // add an mxsrTuplet
+//     void                  prependTuplet (
+//                             const S_mxsrTuplet& theTuplet);
+//
+//     void                  appendTuplet (
+//                             const S_mxsrTuplet& theTuplet);
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//     std::string           fmxsrTupletListName;
+//
+//     std::list<S_mxsrTuplet>
+//                           fmxsrTupletsStdList;
+// };
+// typedef SMARTP<mxsrTupletsList> S_mxsrTupletsList;
+// EXP std::ostream& operator << (std::ostream& os, const mxsrTupletsList& elt);
+// EXP std::ostream& operator << (std::ostream& os, const S_mxsrTupletsList& elt);
+
+// //______________________________________________________________________________
+// class EXP mxsrTupletsStack : public smartable
+// /*
+//   C++ std::stack cannot be traversed, so we use std::list instead
+// */
+// {
+//   public:
+//
+//     // creation
+//     // ------------------------------------------------------
+//
+//     static SMARTP<mxsrTupletsStack> create ();
+//
+//     static SMARTP<mxsrTupletsStack> create (
+//                             const S_msrTuplet& tuplet);
+//
+//     // constructors/destructor
+//     // ------------------------------------------------------
+//
+//                           mxsrTupletsStack ();
+//
+//                           mxsrTupletsStack (
+//                             const S_msrTuplet& tuplet);
+//
+//     virtual               ~mxsrTupletsStack ();
+//
+//   public:
+//
+//     // set and get
+//     // ------------------------------------------------------
+//
+//     const std::list<S_msrTuplet>&
+//                           getmxsrTupletsStdList () const
+//                               { return fmxsrTupletsStdList;}
+//
+//   public:
+//
+//     // public services
+//     // ------------------------------------------------------
+//
+//     // basic list stuff
+//     size_t                size () const
+//                               { return fmxsrTupletsStdList.size (); }
+//
+//     void                  push (
+//                             const S_msrTuplet& tuplet)
+//                               { fmxsrTupletsStdList.push_front (tuplet); }
+//
+//     S_msrTuplet&          top ()
+//                               { return fmxsrTupletsStdList.front (); }
+//
+//     void                  pop ()
+//                               { fmxsrTupletsStdList.pop_front (); }
+//
+//   public:
+//
+//     // print
+//     // ------------------------------------------------------
+//
+//     void                  print (std::ostream& os) const;
+//
+//     void                  printWithContext (
+//                             const std::string& context,
+//                             char               evidencer,
+//                             std::ostream&      os) const;
+//
+//   private:
+//
+//     // private services
+//     // ------------------------------------------------------
+//
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//     std::string           fmxsrTupletStackName;
+//
+//     std::list<S_msrTuplet>
+//                           fmxsrTupletsStdList;
+// };
+// typedef SMARTP<mxsrTupletsStack> S_mxsrTupletsStack;
+// EXP std::ostream& operator << (std::ostream& os, const mxsrTupletsStack& elt);
+// EXP std::ostream& operator << (std::ostream& os, const S_mxsrTupletsStack& elt);
+
