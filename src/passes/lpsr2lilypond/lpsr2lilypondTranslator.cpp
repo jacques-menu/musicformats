@@ -1143,21 +1143,30 @@ std::string lpsr2lilypondTranslator::durationAsLilypondStringIfItShouldBeGenerat
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
-  std::string result; // JMI v0.9.66
+  std::string result; // JMI v0.9.70
 
-  Bool generateExplicitNotesDuration;
+  Bool doGenerateExplicitNotesDuration (false);
 
-  if (wholeNotes != fLastMetWholeNotes) {
-    generateExplicitNotesDuration = true;
-    fLastMetWholeNotes = wholeNotes;
+  // should the duration be generated in all cases?
+  if (gGlobalLpsr2lilypondOahGroup->getAllNotesDurations ()) {
+    // yes
+    doGenerateExplicitNotesDuration = true;
   }
+
   else {
-    generateExplicitNotesDuration =
-      gGlobalLpsr2lilypondOahGroup->
-        getAllNotesDurations ();
+    // let's see...
+    Bool
+      wholeNotesIsANewDuration =
+        wholeNotes != fLastMetWholeNotes;
+
+    if (wholeNotesIsANewDuration) {
+      doGenerateExplicitNotesDuration = true;
+      fLastMetWholeNotes = wholeNotes;
+    }
+    // else don't generate the duration
   }
 
-  if (generateExplicitNotesDuration) {
+  if (doGenerateExplicitNotesDuration) {
     result =
       wholeNotesAsLilypondString (
         inputLineNumber,
@@ -1167,7 +1176,58 @@ std::string lpsr2lilypondTranslator::durationAsLilypondStringIfItShouldBeGenerat
   return result;
 }
 
-std::string lpsr2lilypondTranslator::msrNotesDurationKindAsLilypondString (
+Bool lpsr2lilypondTranslator::wholeNotesDurationShouldBeGenerated (
+  const msrWholeNotes& wholeNotes)
+{
+  Bool result;
+
+  result =
+    gGlobalLpsr2lilypondOahGroup->getAllNotesDurations ()
+      ||
+    wholeNotes != fLastMetWholeNotes;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceNotesDurations ()) {
+    fLilypondCodeStream <<
+      std::endl <<
+      "%{ " <<
+      "fLastMetWholeNotes: " << fLastMetWholeNotes <<
+      ", wholeNotes: " << wholeNotes <<
+      ", wholeNotesDurationShouldBeGenerated(): " << result <<
+      " %}" <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return result;
+}
+
+void lpsr2lilypondTranslator::generateWholeNotesDuration (
+  int                  inputLineNumber,
+  const msrWholeNotes& wholeNotes)
+{
+  fLilypondCodeStream <<
+    wholeNotesAsLilypondString (
+      inputLineNumber,
+      wholeNotes);
+
+  fLastMetWholeNotes = wholeNotes;
+}
+
+void lpsr2lilypondTranslator::generateWholeNotesDurationOnStream (
+  int                  inputLineNumber,
+  const msrWholeNotes& wholeNotes,
+  std::ostream&        os)
+{
+  os <<
+    wholeNotesAsLilypondString (
+      inputLineNumber,
+      wholeNotes);
+
+  fLastMetWholeNotes = wholeNotes;
+}
+
+std::string lpsr2lilypondTranslator::notesDurationKindAsLilypondString (
   msrNotesDurationKind notesNotesDurationKind)
 {
   std::string result;
@@ -1333,12 +1393,22 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
       break;
   } // switch
 
-  // generate the skip duration
-  ss <<
-    durationAsLilypondStringIfItShouldBeGenerated (
-      noteInputLineNumber,
-      note->
-        getSoundingWholeNotes ());
+  // generate the skip duration if relevant
+
+//   ss <<
+//     durationAsLilypondStringIfItShouldBeGenerated (
+//       noteInputLineNumber,
+//       note->getSoundingWholeNotes ());
+    msrWholeNotes
+      pitchedRestSoundingWholeNotes =
+        note->getSoundingWholeNotes ();
+
+    if (wholeNotesDurationShouldBeGenerated (pitchedRestSoundingWholeNotes)) {
+      generateWholeNotesDurationOnStream (
+        noteInputLineNumber,
+        pitchedRestSoundingWholeNotes,
+        ss);
+    }
 
   // generate the '\rest'
   ss <<
@@ -1930,19 +2000,19 @@ void lpsr2lilypondTranslator::generateCodeForNote (
 
     // in measures
     case msrNoteKind::kNoteRegularInMeasure:
-      generateCodeForNoteRegularInMeasure (note);
+      generateCodeForNoteInMeasure (note);
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
-      generateCodeForNoteRestInMeasure (note);
+      generateCodeForRestInMeasure (note);
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
-      generateCodeForNoteSkipInMeasure (note);
+      generateCodeForSkipInMeasure (note);
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
-      generateCodeForNoteUnpitchedInMeasure (note);
+      generateCodeForUnpitchedNoteInMeasure (note);
       break;
 
     // in chords
@@ -1953,15 +2023,15 @@ void lpsr2lilypondTranslator::generateCodeForNote (
 
     // in tuplets
     case msrNoteKind::kNoteRegularInTuplet:
-      generateCodeForNoteRegularInTuplet (note);
+      generateCodeForNoteInTuplet (note);
       break;
 
     case msrNoteKind::kNoteRestInTuplet:
-      generateCodeForNoteRestInTuplet (note);
+      generateCodeForRestInTuplet (note);
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
-      generateCodeForNoteUnpitchedInTuplet (note);
+      generateCodeForUnpitchedNoteInTuplet (note);
       break;
 
     // in grace notes groups
@@ -1970,7 +2040,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
-      generateCodeForNoteSkipInGraceNotesGroup (note);
+      generateCodeForSkipInGraceNotesGroup (note);
       break;
 
     // in chords in grace notes groups
@@ -1992,7 +2062,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
   fLilypondCodeStream << ' ';
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
+void lpsr2lilypondTranslator::generateCodeForNoteInMeasure (
   const S_msrNote& note)
 {
   int inputLineNumber =
@@ -2033,16 +2103,16 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
   fLilypondCodeStream <<
     notePitchAsLilypondString (note);
 
+  // generate the note duration if relevant
   msrWholeNotes
     noteSoundingWholeNotes =
-      note->
-        getSoundingWholeNotes ();
+      note->getSoundingWholeNotes ();
 
-  // generate the note duration
-  fLilypondCodeStream <<
-    wholeNotesAsLilypondString (
+  if (wholeNotesDurationShouldBeGenerated (noteSoundingWholeNotes)) {
+    generateWholeNotesDuration (
       inputLineNumber,
       noteSoundingWholeNotes);
+  }
 
   // handle delayed ornaments if any
   if (note->getNoteDelayedTurnOrnament ()) {
@@ -2082,7 +2152,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
   } // switch
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
+void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
   const S_msrNote& note)
 {
   int inputLineNumber =
@@ -2162,7 +2232,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
     // unpitched rest
     // get the note sounding whole notes
     msrWholeNotes
-      noteSoundingWholeNotes =
+      unpitchedRestSoundingWholeNotes =
         note->getSoundingWholeNotes ();
 
     // get note's voice
@@ -2171,8 +2241,9 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
         note->
           fetchNoteUpLinkToVoice ();
 
-    // generate the rest name and duration
     if (note->getNoteOccupiesAFullMeasure ()) {
+      // rest occupies a full measure
+      // generate the rest name and its whole notes duration if relevant
       // take voice kind into account shouldn't be necessary? JMI v0.9.69
       switch (noteVoice->getVoiceKind ()) {
         case msrVoiceKind::kVoiceKindRegular:
@@ -2188,10 +2259,16 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
           break;
       } // switch
 
-      fLilypondCodeStream <<
-        durationAsLilypondStringIfItShouldBeGenerated (
+      // generate its whole notes duration if relevant JMI ALWAYS ??? v0.9.70
+//       fLilypondCodeStream <<
+//         durationAsLilypondStringIfItShouldBeGenerated (
+//           inputLineNumber,
+//           unpitchedRestSoundingWholeNotes);
+      if (wholeNotesDurationShouldBeGenerated (unpitchedRestSoundingWholeNotes)) {
+        generateWholeNotesDuration (
           inputLineNumber,
-          noteSoundingWholeNotes);
+          unpitchedRestSoundingWholeNotes);
+      }
 
       if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
         // generate information and line number as a comment
@@ -2209,27 +2286,13 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
     }
 
     else {
-      // note does not occupy a full measure
-      // take voice kind into account JMI shouldn't be necessary?
-
-//       switch (noteVoice->getVoiceKind ()) {
-//         case msrVoiceKind::kVoiceKindRegular:
-//         case msrVoiceKind::kVoiceKindDynamics:
-//           fLilypondCodeStream <<
-//             'r';
-//           break;
-//
-//         case msrVoiceKind::kVoiceKindHarmonies:
-//         case msrVoiceKind::kVoiceKindFiguredBass:
-//           fLilypondCodeStream <<
-//             's';
-//           break;
-//       } // switch
-
+      // rest does not occupy a full measure
+      // take voice kind into account JMI shouldn't be necessary? JMI v0.9.70
       msrPrintObjectKind
         notePrintObjectKind =
           note->getNotePrintObjectKind ();
 
+      // generate the rest name and its whole notes duration if relevant
       switch (notePrintObjectKind) {
         case msrPrintObjectKind::kPrintObjectYes:
           fLilypondCodeStream <<
@@ -2241,10 +2304,20 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
           break;
       } // switch
 
-      fLilypondCodeStream <<
-        durationAsLilypondStringIfItShouldBeGenerated (
+      // generate the rest whole notes duration if relevant
+//       fLilypondCodeStream <<
+//         durationAsLilypondStringIfItShouldBeGenerated (
+//           inputLineNumber,
+//           unpitchedRestSoundingWholeNotes);
+      msrWholeNotes
+        restSoundingWholeNotes =
+          note->getSoundingWholeNotes ();
+
+      if (wholeNotesDurationShouldBeGenerated (restSoundingWholeNotes)) {
+        generateWholeNotesDuration (
           inputLineNumber,
-          noteSoundingWholeNotes);
+          restSoundingWholeNotes);
+      }
 
       if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
         // generate information and line number as a comment
@@ -2288,7 +2361,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
   }
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
+void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
   const S_msrNote& note)
 {
   int inputLineNumber =
@@ -2334,12 +2407,20 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
     fLilypondCodeStream << 's';
   }
 
-  // generate the skip duration
-  fLilypondCodeStream <<
-    durationAsLilypondStringIfItShouldBeGenerated (
+  // generate the skip duration if relevant
+//   fLilypondCodeStream <<
+//     durationAsLilypondStringIfItShouldBeGenerated (
+//       inputLineNumber,
+//       note->getSoundingWholeNotes ());
+  msrWholeNotes
+    skipSoundingWholeNotes =
+      note->getSoundingWholeNotes ();
+
+  if (wholeNotesDurationShouldBeGenerated (skipSoundingWholeNotes)) {
+    generateWholeNotesDuration (
       inputLineNumber,
-      note->
-        getSoundingWholeNotes ());
+      skipSoundingWholeNotes);
+  }
 
   if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
     // generate information and line number as a comment
@@ -2359,7 +2440,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
   // the preceding one is kept
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
+void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInMeasure (
   const S_msrNote& note)
 {
   int inputLineNumber =
@@ -2402,14 +2483,18 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
 
   msrWholeNotes
     noteSoundingWholeNotes =
-      note->
-        getSoundingWholeNotes ();
+      note->getSoundingWholeNotes ();
 
-  // generate the note duration
-  fLilypondCodeStream <<
-    durationAsLilypondStringIfItShouldBeGenerated (
+  // generate the unpitched note duration if relevant
+//   fLilypondCodeStream <<
+//     durationAsLilypondStringIfItShouldBeGenerated (
+//       inputLineNumber,
+//       noteSoundingWholeNotes);
+  if (wholeNotesDurationShouldBeGenerated (noteSoundingWholeNotes)) {
+    generateWholeNotesDuration (
       inputLineNumber,
       noteSoundingWholeNotes);
+  }
 
   // handle delayed ornaments if any
   if (note->getNoteDelayedTurnOrnament ()) {
@@ -2520,7 +2605,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
   } // switch
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
+void lpsr2lilypondTranslator::generateCodeForNoteInTuplet (
   const S_msrNote& note)
 {
   int inputLineNumber =
@@ -2561,12 +2646,20 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
   fLilypondCodeStream <<
     notePitchAsLilypondString (note);
 
-  // generate the note display duration
-  fLilypondCodeStream <<
-    durationAsLilypondStringIfItShouldBeGenerated (
+  // generate the note display duration if relevant
+//   fLilypondCodeStream <<
+//     durationAsLilypondStringIfItShouldBeGenerated (
+//       inputLineNumber,
+//       note->getNoteDisplayWholeNotes ());
+  msrWholeNotes
+    noteDisplayWholeNotes =
+      note->getNoteDisplayWholeNotes ();
+
+  if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
+    generateWholeNotesDuration (
       inputLineNumber,
-      note->
-        getNoteDisplayWholeNotes ());
+      noteDisplayWholeNotes);
+  }
 
 /* JMI
   // generate the tie if any
@@ -2595,7 +2688,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
   } // switch
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
+void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
   const S_msrNote& note)
 {
   int inputLineNumber =
@@ -2643,12 +2736,20 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
         ? 's' // JMI ??? 'R'
         : 'r');
 
-  // generate the note display duration
-  fLilypondCodeStream <<
-    durationAsLilypondStringIfItShouldBeGenerated (
+  // generate the note display duration if relevant
+//   fLilypondCodeStream <<
+//     durationAsLilypondStringIfItShouldBeGenerated (
+//       inputLineNumber,
+//       note-> getNoteDisplayWholeNotes ());
+  msrWholeNotes
+    noteDisplayWholeNotes =
+      note->getNoteDisplayWholeNotes ();
+
+  if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
+    generateWholeNotesDuration (
       inputLineNumber,
-      note->
-        getNoteDisplayWholeNotes ());
+      noteDisplayWholeNotes);
+  }
 
   if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
     // generate information and line number as a comment
@@ -2682,7 +2783,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
   // a rest is no relative octave reference,
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
+void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInTuplet (
   const S_msrNote& note)
 {
   int inputLineNumber =
@@ -2727,12 +2828,20 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
   fLilypondCodeStream <<
     "e"; // by convention JMI v0.9.67
 
-  // generate the note (display) duration
-  fLilypondCodeStream <<
-    durationAsLilypondStringIfItShouldBeGenerated (
+  // generate the note display duration if relevant
+//   fLilypondCodeStream <<
+//     durationAsLilypondStringIfItShouldBeGenerated (
+//       inputLineNumber,
+//       note-> getNoteDisplayWholeNotes ());
+  msrWholeNotes
+    noteDisplayWholeNotes =
+      note->getNoteDisplayWholeNotes ();
+
+  if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
+    generateWholeNotesDuration (
       inputLineNumber,
-      note->
-        getNoteDisplayWholeNotes ());
+      noteDisplayWholeNotes);
+  }
 
 /* JMI
   // generate the tie if any
@@ -2793,7 +2902,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
 
   // generate the grace note's graphic duration
   fLilypondCodeStream <<
-    msrNotesDurationKindAsLilypondString (
+    notesDurationKindAsLilypondString (
       note->
         getNoteGraphicNotesDurationKind ());
 
@@ -2829,7 +2938,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
   } // switch
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
+void lpsr2lilypondTranslator::generateCodeForSkipInGraceNotesGroup (
   const S_msrNote& note)
 {
   int inputLineNumber =
@@ -2876,12 +2985,20 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
     fLilypondCodeStream << 's';
   }
 
-  // generate the skip duration
-  fLilypondCodeStream <<
-    durationAsLilypondStringIfItShouldBeGenerated (
+  // generate the skip duration if relevant
+//   fLilypondCodeStream <<
+//     durationAsLilypondStringIfItShouldBeGenerated (
+//       inputLineNumber,
+//       note->getNoteDisplayWholeNotes ());
+  msrWholeNotes
+    noteDisplayWholeNotes =
+      note->getNoteDisplayWholeNotes ();
+
+  if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
+    generateWholeNotesDuration (
       inputLineNumber,
-      note->
-        getNoteDisplayWholeNotes ());
+      noteDisplayWholeNotes);
+  }
 
   if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
     // generate information and line number as a comment
@@ -3035,12 +3152,20 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
       notePitchAsLilypondString (note);
   }
 
-  // generate the note display duration
-  fLilypondCodeStream <<
-    durationAsLilypondStringIfItShouldBeGenerated (
+  // generate the note display duration if relevant
+//   fLilypondCodeStream <<
+//     durationAsLilypondStringIfItShouldBeGenerated (
+//       inputLineNumber,
+//       note->getNoteDisplayWholeNotes ());
+  msrWholeNotes
+    noteDisplayWholeNotes =
+      note->getNoteDisplayWholeNotes ();
+
+  if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
+    generateWholeNotesDuration (
       inputLineNumber,
-      note->
-        getNoteDisplayWholeNotes ());
+      noteDisplayWholeNotes);
+  }
 
   // generate the tie if any
   {
@@ -3122,11 +3247,20 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
   fLilypondCodeStream <<
     notePitchAsLilypondString (note);
 
-  // generate the note duration
-  fLilypondCodeStream <<
-    durationAsLilypondStringIfItShouldBeGenerated (
+  // generate the note duration if relevant
+//   fLilypondCodeStream <<
+//     durationAsLilypondStringIfItShouldBeGenerated (
+//       inputLineNumber,
+//       note->getSoundingWholeNotes ());
+  msrWholeNotes
+    noteSoundingWholeNotes =
+      note->getSoundingWholeNotes ();
+
+  if (wholeNotesDurationShouldBeGenerated (noteSoundingWholeNotes)) {
+    generateWholeNotesDuration (
       inputLineNumber,
-      note->getSoundingWholeNotes ());
+      noteSoundingWholeNotes);
+  }
 
   // handle delayed ornaments if any
   if (note->getNoteDelayedTurnOrnament ()) {
@@ -4052,7 +4186,7 @@ void lpsr2lilypondTranslator::generateOrnament (
 
         // forget about the last found whole notes duration,
         // since the latter has been multipled by fDelayedOrnamentsFraction
-        fLastMetWholeNotes = msrWholeNotes (0, 1);
+        fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_;
       }
       break;
 
@@ -4809,20 +4943,39 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
       harmony->getHarmonyTupletFactor ();
 
   if (harmonyTupletFactor.isEqualToOne ()) {
-    // use harmony sounding whole notes
-    ss <<
-      durationAsLilypondStringIfItShouldBeGenerated (
+    // generate harmony sounding whole notes if relevant
+//     ss <<
+//       durationAsLilypondStringIfItShouldBeGenerated (
+//         inputLineNumber,
+//         harmony->getSoundingWholeNotes ());
+    msrWholeNotes
+      harmonySoundingWholeNotes =
+        harmony->getSoundingWholeNotes ();
+
+    if (wholeNotesDurationShouldBeGenerated (harmonySoundingWholeNotes)) {
+      generateWholeNotesDurationOnStream (
         inputLineNumber,
-        harmony->
-          getSoundingWholeNotes ());
+        harmonySoundingWholeNotes,
+        ss);
+    }
   }
   else {
-    // use harmony display whole notes and tuplet factor
-    ss <<
-      durationAsLilypondStringIfItShouldBeGenerated (
+    // generate harmony display whole notes if relevant and tuplet factor
+//     ss <<
+//       durationAsLilypondStringIfItShouldBeGenerated (
+//         inputLineNumber,
+//         harmony->getHarmonyDisplayWholeNotes ()) <<
+    msrWholeNotes
+      harmonyDisplayWholeNotes =
+        harmony->getHarmonyDisplayWholeNotes ();
+
+    if (wholeNotesDurationShouldBeGenerated (harmonyDisplayWholeNotes)) {
+      generateWholeNotesDurationOnStream (
         inputLineNumber,
-        harmony->
-          getHarmonyDisplayWholeNotes ()) <<
+        harmonyDisplayWholeNotes,
+        ss);
+    }
+    ss <<
       "*" <<
       harmonyTupletFactor.inverse ().asFractionString ();
   }
@@ -5251,20 +5404,40 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
       figuredBass->getFiguredBassTupletFactor ();
 
   if (figuredBassTupletFactor.isEqualToOne ()) { // JMI ???
-    // use figured bass element sounding whole notes
-    ss <<
-      durationAsLilypondStringIfItShouldBeGenerated (
+    // generate figured bass element sounding whole notes if relevant
+//     ss <<
+//       durationAsLilypondStringIfItShouldBeGenerated (
+//         inputLineNumber,
+//         figuredBass->getSoundingWholeNotes ());
+    msrWholeNotes
+      figuredBassSoundingWholeNotes =
+        figuredBass->getSoundingWholeNotes ();
+
+    if (wholeNotesDurationShouldBeGenerated (figuredBassSoundingWholeNotes)) {
+      generateWholeNotesDurationOnStream (
         inputLineNumber,
-        figuredBass->
-          getSoundingWholeNotes ());
+        figuredBassSoundingWholeNotes,
+        ss);
+    }
   }
   else {
-    // use figured bass element display whole notes and tuplet factor
-    ss <<
-      durationAsLilypondStringIfItShouldBeGenerated (
+    // generate figured bass element display whole notes if relevant and tuplet factor
+//     ss <<
+//       durationAsLilypondStringIfItShouldBeGenerated (
+//         inputLineNumber,
+//         figuredBass->getFiguredBassDisplayWholeNotes ()) <<
+    msrWholeNotes
+      figuredBassDisplayWholeNotes =
+        figuredBass->getFiguredBassDisplayWholeNotes ();
+
+    if (wholeNotesDurationShouldBeGenerated (figuredBassDisplayWholeNotes)) {
+      generateWholeNotesDurationOnStream (
         inputLineNumber,
-        figuredBass->
-          getFiguredBassDisplayWholeNotes ()) <<
+        figuredBassDisplayWholeNotes,
+        ss);
+    }
+
+    ss <<
       "*" <<
       figuredBassTupletFactor.asRational ();
   }
@@ -11769,7 +11942,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
   // force durations to be displayed explicitly
   // at the beginning of the voice
-  fLastMetWholeNotes = msrWholeNotes (0, 1);
+  fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_;
 
   // reset current stem kind
   fCurrentStemKind = msrStemKind::kStemNeutral; // default value
@@ -12342,20 +12515,32 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
         elt->getFiguredBassTupletFactor ();
 
     if (figuredBassTupletFactor.isEqualToOne ()) {
-      // use figured bass sounding whole notes
+      // generate figured bass sounding whole notes if relevant
       fLilypondCodeStream <<
         durationAsLilypondStringIfItShouldBeGenerated (
           inputLineNumber,
-          elt->
-            getFiguredBassSoundingWholeNotes ());
+          elt->getFiguredBassSoundingWholeNotes ());
+      if (wholeNotesDurationShouldBeGenerated ( elt->getFiguredBassSoundingWholeNotes ())) {
+        generateWholeNotesDurationOnStream (
+          inputLineNumber,
+           elt->getFiguredBassSoundingWholeNotes (),
+          ss);
+      }
     }
     else {
-      // use figured bass display whole notes and tuplet factor
+      // generate figured bass display whole notes if relevant and tuplet factor
       fLilypondCodeStream <<
         durationAsLilypondStringIfItShouldBeGenerated (
           inputLineNumber,
-          elt->
-            getFiguredBassDisplayWholeNotes ()) <<
+          elt->getFiguredBassDisplayWholeNotes ()) <<
+      if (wholeNotesDurationShouldBeGenerated (elt->getFiguredBassDisplayWholeNotes ())) {
+        generateWholeNotesDurationOnStream (
+          inputLineNumber,
+          elt->getFiguredBassDisplayWholeNotes (),
+          ss);
+      }
+
+      ss <<
         "*" <<
         figuredBassTupletFactor.asRational ();
     }
@@ -12711,7 +12896,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
   // force durations to be displayed explicitly
   // for the notes at the beginning of the measure
-  fLastMetWholeNotes = msrWholeNotes (0, 1);
+  fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_;
 
   // is this the end of a cadenza?
   if (
@@ -17055,7 +17240,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fLilypondCodeStream <<
-    "b" <<
+    "b" << // JMI convention v0.9.70
     wholeNotesAsLilypondString (
       elt->getInputStartLineNumber (),
       elt->getTempoNoteWholeNotes ()) <<
@@ -19072,7 +19257,7 @@ slash = \tweak Flag.stroke-style grace \etc
 
   // force durations to be displayed explicitly
   // at the beginning of the grace notes
-  fLastMetWholeNotes = msrWholeNotes (0, 1);
+  fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_;
 
   // generate the notes in the grace notes group
   const std::list<S_msrMeasureElement>&
@@ -19212,7 +19397,7 @@ slash = \tweak Flag.stroke-style grace \etc
 
   // force durations to be displayed explicitly
   // at the end of the grace notes
-  fLastMetWholeNotes = msrWholeNotes (0, 1);
+  fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_;
 }
 
 //________________________________________________________________________
@@ -19439,7 +19624,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroupContents& elt
 
   // force durations to be displayed explicitly
   // at the beginning of the after grace notes contents
-  fLastMetWholeNotes = msrWholeNotes (0, 1);
+  fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_;
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
@@ -22303,12 +22488,16 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
     int chordInputLineNumber =
       chord->getInputStartLineNumber ();
 
-    // generate the chord duration
-    fLilypondCodeStream <<
-      wholeNotesAsLilypondString (
+    // generate the chord duration if relevant
+    msrWholeNotes
+      chordSoundingWholeNotes =
+        chord->getChordDisplayWholeNotes (); // JMI test wether chord is in a tuplet? v0.9.70
+
+    if (wholeNotesDurationShouldBeGenerated (chordSoundingWholeNotes)) {
+      generateWholeNotesDuration (
         chordInputLineNumber,
-        chord->
-          getChordDisplayWholeNotes ()); // JMI test wether chord is in a tuplet?
+        chordSoundingWholeNotes);
+    }
   }
 
 /* JMI
@@ -23283,7 +23472,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
   // force durations to be displayed explicitly
   // at the beginning of the tuplet
-  fLastMetWholeNotes = msrWholeNotes (0, 1);
+  fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_;
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)

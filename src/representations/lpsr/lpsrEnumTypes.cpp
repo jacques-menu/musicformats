@@ -1446,6 +1446,100 @@ std::string availableLpsrDynamicsTextSpannersStyleKinds (
   return ss.str ();
 }
 
+// notes durations generation
+//______________________________________________________________________________
+
+std::map<std::string, lilypondDurationsGenerationKind>
+  gGlobalLilypondDurationsGenerationKindsMap;
+
+std::string lilypondDurationsGenerationKindAsString (
+  lilypondDurationsGenerationKind lilypondDurationsGenerationKind)
+{
+  std::string result;
+
+  // no CamelCase here, these strings are used in the command line options
+
+  switch (lilypondDurationsGenerationKind) {
+    case lilypondDurationsGenerationKind::kLilypondDurationsGenerationImplicit:
+      result = "implicit";
+      break;
+    case lilypondDurationsGenerationKind::kLilypondDurationsGenerationExplicit:
+      result = "explicit";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const lilypondDurationsGenerationKind& elt)
+{
+  os << lilypondDurationsGenerationKindAsString (elt);
+  return os;
+}
+
+void initializeLilypondDurationsGenerationKindsMap ()
+{
+  // register the LilyPond score output kinds
+  // --------------------------------------
+
+  // no CamelCase here, these strings are used in the command line options
+
+  gGlobalLilypondDurationsGenerationKindsMap ["implicit"] =
+    lilypondDurationsGenerationKind::kLilypondDurationsGenerationImplicit;
+  gGlobalLilypondDurationsGenerationKindsMap ["explicit"] =
+    lilypondDurationsGenerationKind::kLilypondDurationsGenerationExplicit;
+}
+
+std::string availableLilypondDurationsGenerationKinds (size_t namesListMaxLength)
+{
+  std::stringstream ss;
+
+  size_t
+    lilypondDurationsGenerationKindsMapSize =
+      gGlobalLilypondDurationsGenerationKindsMap.size ();
+
+  if (lilypondDurationsGenerationKindsMapSize) {
+    size_t
+      nextToLast =
+        lilypondDurationsGenerationKindsMapSize - 1;
+
+    size_t count = 0;
+    size_t cumulatedLength = 0;
+
+    for (
+      std::map<std::string, lilypondDurationsGenerationKind>::const_iterator i =
+        gGlobalLilypondDurationsGenerationKindsMap.begin ();
+      i != gGlobalLilypondDurationsGenerationKindsMap.end ();
+      ++i
+    ) {
+      std::string theString = (*i).first;
+
+      ++count;
+
+      cumulatedLength += theString.size ();
+      if (cumulatedLength >= namesListMaxLength) {
+        ss << std::endl << gIndenter.getSpacer ();
+        cumulatedLength = 0;
+        break;
+      }
+
+      if (count == 1) {
+        ss << gIndenter.getSpacer ();
+      }
+      ss << theString;
+
+      if (count == nextToLast) {
+        ss << " and ";
+      }
+      else if (count != lilypondDurationsGenerationKindsMapSize) {
+        ss << ", ";
+      }
+    } // for
+  }
+
+  return ss.str ();
+}
+
 // lyrics durations
 //______________________________________________________________________________
 

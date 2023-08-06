@@ -626,6 +626,100 @@ typedef SMARTP<lilypondFixedOctaveEntryAtom> S_lilypondFixedOctaveEntryAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_lilypondFixedOctaveEntryAtom& elt);
 
 //______________________________________________________________________________
+class EXP lilypondDurationsGenerationKindAtom : public oahAtomImplicitlySettingAVariable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<lilypondDurationsGenerationKindAtom> create (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& variableName,
+                            lilypondDurationsGenerationKind&
+                                               lilypondDurationsGenerationKindVariable,
+                            lilypondDurationsGenerationKind
+                                               lilypondDurationsGenerationKindValue);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          lilypondDurationsGenerationKindAtom (
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& variableName,
+                            lilypondDurationsGenerationKind&
+                                               lilypondDurationsGenerationKindVariable,
+                            lilypondDurationsGenerationKind
+                                               lilypondDurationsGenerationKindValue);
+
+    virtual               ~lilypondDurationsGenerationKindAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    lilypondDurationsGenerationKind&
+                          getLilypondDurationsGenerationKindVariable () const
+                              { return fLilypondDurationsGenerationKindVariable; }
+    lilypondDurationsGenerationKind
+                          getLilypondDurationsGenerationKindValue () const
+                              { return fLilypondDurationsGenerationKindValue; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyValueLessAtom (std::ostream& os) override
+                              { setImplicitVariable (os); }
+
+    void                  setImplicitVariable (std::ostream& os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+    void                  displayAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    lilypondDurationsGenerationKind&
+                          fLilypondDurationsGenerationKindVariable;
+    lilypondDurationsGenerationKind
+                          fLilypondDurationsGenerationKindValue;
+};
+typedef SMARTP<lilypondDurationsGenerationKindAtom> S_lilypondDurationsGenerationKindAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_lilypondDurationsGenerationKindAtom& elt);
+
+//______________________________________________________________________________
 class EXP lilypondAccidentalStyleKindAtom : public oahAtomStoringAValue
 {
   public:

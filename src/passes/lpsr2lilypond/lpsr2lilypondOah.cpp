@@ -1946,6 +1946,268 @@ std::ostream& operator << (std::ostream& os, const S_lilypondFixedOctaveEntryAto
 }
 
 //______________________________________________________________________________
+S_lilypondDurationsGenerationKindAtom lilypondDurationsGenerationKindAtom::create (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& variableName,
+  lilypondDurationsGenerationKind&
+                     lilypondDurationsGenerationKindVariable,
+  lilypondDurationsGenerationKind
+                     lilypondDurationsGenerationKindValue)
+{
+  lilypondDurationsGenerationKindAtom* obj = new
+    lilypondDurationsGenerationKindAtom (
+      longName,
+      shortName,
+      description,
+      variableName,
+      lilypondDurationsGenerationKindVariable,
+      lilypondDurationsGenerationKindValue);
+  assert (obj != nullptr);
+  return obj;
+}
+
+lilypondDurationsGenerationKindAtom::lilypondDurationsGenerationKindAtom (
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& variableName,
+  lilypondDurationsGenerationKind&
+                     lilypondDurationsGenerationKindVariable,
+  lilypondDurationsGenerationKind
+                     lilypondDurationsGenerationKindValue)
+  : oahAtomImplicitlySettingAVariable (
+      longName,
+      shortName,
+      description,
+      variableName),
+    fLilypondDurationsGenerationKindVariable (
+      lilypondDurationsGenerationKindVariable),
+    fLilypondDurationsGenerationKindValue ( // this is where the value is supplied
+      lilypondDurationsGenerationKindValue)
+{
+  fLilypondDurationsGenerationKindVariable =
+    lilypondDurationsGenerationKind::kLilypondDurationsGenerationImplicit; // default value;
+}
+
+lilypondDurationsGenerationKindAtom::~lilypondDurationsGenerationKindAtom ()
+{}
+
+void lilypondDurationsGenerationKindAtom::setImplicitVariable (std::ostream& os)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "==> handling atom '" <<
+      fetchNames () <<
+      "; which is of type 'lilypondDurationsGenerationKindAtom'";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (fSelected) {
+    std::stringstream ss;
+
+    ss <<
+      "lilypondDurationsGenerationKindAtom generated output kind" << // JMI ???
+      " set more than once" <<
+      std::endl;
+
+    oahError (ss.str ());
+  }
+  else {
+    fLilypondDurationsGenerationKindVariable = fLilypondDurationsGenerationKindValue;
+  }
+
+  fSelected = true;
+}
+
+void lilypondDurationsGenerationKindAtom::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> lilypondDurationsGenerationKindAtom::acceptIn ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_lilypondDurationsGenerationKindAtom>*
+    p =
+      dynamic_cast<visitor<S_lilypondDurationsGenerationKindAtom>*> (v)) {
+        S_lilypondDurationsGenerationKindAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching lilypondDurationsGenerationKindAtom::visitStart ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitStart (elem);
+  }
+}
+
+void lilypondDurationsGenerationKindAtom::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> lilypondDurationsGenerationKindAtom::acceptOut ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_lilypondDurationsGenerationKindAtom>*
+    p =
+      dynamic_cast<visitor<S_lilypondDurationsGenerationKindAtom>*> (v)) {
+        S_lilypondDurationsGenerationKindAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching lilypondDurationsGenerationKindAtom::visitEnd ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitEnd (elem);
+  }
+}
+
+void lilypondDurationsGenerationKindAtom::browseData (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> lilypondDurationsGenerationKindAtom::browseData ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+std::string lilypondDurationsGenerationKindAtom::asShortNamedOptionString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    '-' << fShortName << ' ' <<
+    lilypondDurationsGenerationKindAsString (
+      fLilypondDurationsGenerationKindVariable);
+
+  return ss.str ();
+}
+
+std::string lilypondDurationsGenerationKindAtom::asActualLongNamedOptionString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    '-' << fLongName << ' ' <<
+    lilypondDurationsGenerationKindAsString (
+      fLilypondDurationsGenerationKindVariable);
+
+  return ss.str ();
+}
+
+void lilypondDurationsGenerationKindAtom::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "LilypondDurationsGenerationKindAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  printAtomWithVariableEssentials (
+    os, fieldWidth);
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fVariableName" << ": " <<
+    fVariableName <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fLilypondDurationsGenerationKindVariable" << ": " <<
+    lilypondDurationsGenerationKindAsString (
+      fLilypondDurationsGenerationKindVariable) <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fLilypondDurationsGenerationKindValue" << ": " <<
+    lilypondDurationsGenerationKindAsString (
+      fLilypondDurationsGenerationKindValue) <<
+    std::endl;
+
+  --gIndenter;
+}
+
+void lilypondDurationsGenerationKindAtom::displayAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    fVariableName <<
+    ": " <<
+    fLilypondDurationsGenerationKindVariable;
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+      os <<
+        ", early";
+      break;
+  } // switch
+  if (fSelected) {
+    os << ", selected";
+  }
+  os << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_lilypondDurationsGenerationKindAtom& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
 S_lilypondAccidentalStyleKindAtom lilypondAccidentalStyleKindAtom::create (
   const std::string& longName,
   const std::string& shortName,
@@ -3942,7 +4204,7 @@ It should be placed between double quotes if it contains single quotes, such as:
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "generate-all-lilypond-durations", "gald",
+        "generate-all-lilypond-durations", "genalllilydurs",
 R"(Generate all LilyPond durations.
 The LilyPond default is for them is to be a quarter note,
 or the last duration specified in the current voice if relevant.)",
@@ -4759,7 +5021,7 @@ R"(Add stanzas numbers to lyrics in LilyPond.)",
   subGroup->
     appendAtomToSubGroup (
       lilypondLyricsNotesDurationsKindAtom::create (
-        "lilypond-lyrics-durations-style", "lilylyrdurkind", // JMI
+        "lilypond-lyrics-durations-style", "lilylyrdurkind", // JMI v0.9.70
           regex_replace (
             regex_replace (
               regex_replace (

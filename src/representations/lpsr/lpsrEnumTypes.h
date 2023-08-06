@@ -187,6 +187,25 @@ std::string availableLpsrDynamicsTextSpannersStyleKinds (
 
 void initializeLpsrDynamicsTextSpannersStyleKindsMap ();
 
+// notes durations generation
+//______________________________________________________________________________
+enum class lilypondDurationsGenerationKind {
+  kLilypondDurationsGenerationImplicit, // default value
+  kLilypondDurationsGenerationExplicit
+};
+
+std::string lilypondDurationsGenerationKindAsString (
+  lilypondDurationsGenerationKind lilypondDurationsGenerationKind);
+
+std::ostream& operator << (std::ostream& os, const lilypondDurationsGenerationKind& elt);
+
+extern std::map<std::string, lilypondDurationsGenerationKind>
+  gGlobalLilypondDurationsGenerationKindsMap;
+
+std::string availableLilypondDurationsGenerationKinds (size_t namesListMaxLength);
+
+void initializeLilypondDurationsGenerationKindsMap ();
+
 // lyrics durations
 //______________________________________________________________________________
 enum class lpsrLyricsNotesDurationsKind {
