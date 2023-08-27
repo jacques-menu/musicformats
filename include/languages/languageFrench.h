@@ -97,6 +97,14 @@ class EXP languageFrench : public language
     std::string           displayASummaryOfTheSecondMSR () const override;
     std::string           displayASummaryOfTheLPSR () const override;
 
+    std::string           displayAFlatViewOfTheFirstMSR () const override;
+    std::string           displayAFlatViewOfTheSecondMSR () const override;
+    std::string           displayAFlatViewOfTheLPSR () const override;
+
+    std::string           displayTheSlicesOfTheFirstMSR () const override;
+    std::string           displayTheSlicesOfTheSecondMSR () const override;
+    std::string           displayTheSlicesOfTheLPSR () const override;
+
    // timing
 
     std::string           timingInformation () const override;

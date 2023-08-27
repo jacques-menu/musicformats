@@ -372,6 +372,8 @@ class EXP msrMeasuresSlicesSequence : public smartable
 
     void                  print (std::ostream& os) const;
 
+    void                  printMeasuresSlicesVector (std::ostream& os) const;
+
   private:
 
     // private fields

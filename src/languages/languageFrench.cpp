@@ -246,6 +246,32 @@ std::string languageFrench::displayASummaryOfTheLPSR () const
   return "Affichage du résumé du LPSR";
 }
 
+std::string languageFrench::displayAFlatViewOfTheFirstMSR () const
+{
+  return "Affichage d'une vue plate des voix du premier MSR";
+}
+std::string languageFrench::displayAFlatViewOfTheSecondMSR () const
+{
+  return "Affichage d'une vue plate des voix du second MSR";
+}
+std::string languageFrench::displayAFlatViewOfTheLPSR () const
+{
+  return "Affichage d'une vue plate des voix du LPSR";
+}
+
+std::string languageFrench::displayTheSlicesOfTheFirstMSR () const
+{
+  return "Affichage des tranches de mesures du premier MSR";
+}
+std::string languageFrench::displayTheSlicesOfTheSecondMSR () const
+{
+  return "Affichage des tranches de mesures du second MSR";
+}
+std::string languageFrench::displayTheSlicesOfTheLPSR () const
+{
+  return "Affichage des tranches de mesures du LPSR";
+}
+
 //_______________________________________________________________________________
 // timing
 

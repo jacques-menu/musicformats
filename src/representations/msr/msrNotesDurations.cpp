@@ -533,7 +533,7 @@ std::string msrNotesDurationKindAsString (
       result = "64";
       break;
     case msrNotesDurationKind::kNotesDuration32nd:
-      result = "32nd";
+      result = "32";
       break;
     case msrNotesDurationKind::kNotesDuration16th:
       result = "16";

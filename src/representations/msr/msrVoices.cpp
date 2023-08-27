@@ -2921,7 +2921,7 @@ void msrVoice::appendPaddingNoteToVoice (
   // account for padding note's wholeNotes in the part drawing measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartDrawingMeasurePosition (
+      incrementPartCurrentDrawingMeasurePosition (
         inputLineNumber,
         forwardStepLength);
 
@@ -3194,9 +3194,9 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 
   // fetch the part current measure position
   msrWholeNotes
-    partDrawingMeasurePosition =
+    partCurrentDrawingMeasurePosition =
       part->
-        getPartDrawingMeasurePosition ();
+        getPartCurrentDrawingMeasurePosition ();
 
   if (! fVoiceLastSegment) {
     std::stringstream ss;
@@ -3223,7 +3223,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   fVoiceLastSegment->
     appendNoteToSegment (
       note,
-      partDrawingMeasurePosition);
+      partCurrentDrawingMeasurePosition);
 
   // is this note the shortest one in this voice?
   this->
@@ -3235,7 +3235,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 
   // account for note's wholeNotes in the part drawing measure position
   part->
-    incrementPartDrawingMeasurePosition (
+    incrementPartCurrentDrawingMeasurePosition (
       inputLineNumber,
       note->getSoundingWholeNotes ());
 
@@ -3443,7 +3443,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
   // account for chord's wholeNotes in the part drawing measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartDrawingMeasurePosition (
+      incrementPartCurrentDrawingMeasurePosition (
         chord->getInputStartLineNumber (),
         chord->getSoundingWholeNotes ());
 
@@ -3514,7 +3514,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
   // account for tuplet's wholeNotes in the part's drawing measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartDrawingMeasurePosition (
+      incrementPartCurrentDrawingMeasurePosition (
         tuplet->getInputStartLineNumber (),
         tuplet->getSoundingWholeNotes ());
 
@@ -7977,12 +7977,12 @@ void msrVoice::appendEmptyMeasuresToVoice (
     setNoteOccupiesAFullMeasure ();
 
   // append it to emptyMeasure
-  msrWholeNotes partDrawingMeasurePosition; // needs to be supplied ??? JMI v0.9.70
+  msrWholeNotes partCurrentDrawingMeasurePosition; // needs to be supplied ??? JMI v0.9.70
 
   emptyMeasure->
     appendNoteToMeasure (
       wholeMeasureRestNote,
-      partDrawingMeasurePosition);
+      partCurrentDrawingMeasurePosition);
 
   // append emptyMeasure to the voice last segment
 #ifdef MF_TRACE_IS_ENABLED
@@ -10475,7 +10475,7 @@ void msrVoice::removeNoteFromVoice (
   // update the part current measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      decrementPartDrawingMeasurePosition (
+      decrementPartCurrentDrawingMeasurePosition (
         inputLineNumber,
         note->
           getSoundingWholeNotes ());
@@ -10609,14 +10609,14 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
 
            // fetch the part current measure position
           msrWholeNotes
-            partDrawingMeasurePosition =
+            partCurrentDrawingMeasurePosition =
               part->
-                getPartDrawingMeasurePosition ();
+                getPartCurrentDrawingMeasurePosition ();
 
          stanza->
             appendMeasureEndSyllableToStanza (
               inputLineNumber,
-              partDrawingMeasurePosition);
+              partCurrentDrawingMeasurePosition);
         } // for
       }
 

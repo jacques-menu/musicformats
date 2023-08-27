@@ -471,7 +471,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
     ++gIndenter;
 
-    // append the measure's notes to the slices sequence notes flat list
+    // append the measure's notes to the measures slices sequence notes flat list
     for (
       std::list<S_msrNote>::const_iterator i = measureNotesFlatList.begin ();
       i != measureNotesFlatList.end ();
@@ -1029,7 +1029,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
     for ( ; ; ) {
       S_msrNoteEvent noteEvent = (*i);
 
-      // print the measure
+      // print the note event
       os <<
         noteEvent->
           asString();
@@ -1460,7 +1460,7 @@ void msrMeasuresSlicesSequence::print (std::ostream& os) const
     for ( ; ; ) {
       S_msrMeasuresSlice measuresSlice = (*i);
 
-      // print the measure
+      // print the measures slice
       os <<
         measuresSlice;
 
@@ -1473,6 +1473,52 @@ void msrMeasuresSlicesSequence::print (std::ostream& os) const
   }
 
   os << ']' << std::endl;
+}
+
+void msrMeasuresSlicesSequence::printMeasuresSlicesVector (std::ostream& os) const
+{
+  size_t measuresSlicesVectorSize =
+    fMeasuresSlicesVector.size ();
+
+  gLog <<
+    "MeasuresSlicesSequence contains " <<
+    mfSingularOrPlural (
+      measuresSlicesVectorSize,
+      "slice", "slices") <<
+    std::endl;
+
+  ++gIndenter;
+
+  os <<
+    "measuresOrigin: " << fMeasuresOrigin <<
+    std::endl;
+  --gIndenter;
+
+  if (measuresSlicesVectorSize) {
+    os << std::endl;
+    ++gIndenter;
+
+    std::vector<S_msrMeasuresSlice>::const_iterator
+      iBegin = fMeasuresSlicesVector.begin (),
+      iEnd   = fMeasuresSlicesVector.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      S_msrMeasuresSlice measuresSlice = (*i);
+
+      // print the measures slice
+      os <<
+        measuresSlice;
+
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    os << std::endl;
+    --gIndenter;
+  }
+
+  os << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlicesSequence& elt)

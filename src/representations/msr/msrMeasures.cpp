@@ -2411,7 +2411,7 @@ void msrMeasure::appendVoiceStaffChangeToMeasure (
 
 void msrMeasure::appendNoteToMeasure (
   const S_msrNote&     note,
-  const msrWholeNotes& partDrawingMeasurePosition)
+  const msrWholeNotes& partCurrentDrawingMeasurePosition)
 {
   int inputLineNumber =
     note->getInputStartLineNumber ();
@@ -2419,7 +2419,7 @@ void msrMeasure::appendNoteToMeasure (
   // compute position delta
   msrWholeNotes
     positionsDelta =
-      partDrawingMeasurePosition
+      partCurrentDrawingMeasurePosition
         -
       fMeasureCurrentAccumulatedWholeNotesDuration;
 
@@ -2443,8 +2443,8 @@ void msrMeasure::appendNoteToMeasure (
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
-      ", partDrawingMeasurePosition: " <<
-      partDrawingMeasurePosition.asString () <<
+      ", partCurrentDrawingMeasurePosition: " <<
+      partCurrentDrawingMeasurePosition.asString () <<
       ", fetchFullMeasureWholeNotesDuration (): " <<
       fetchFullMeasureWholeNotesDuration ().asString () <<
       ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
@@ -2494,8 +2494,8 @@ void msrMeasure::appendNoteToMeasure (
     std::stringstream ss;
 
     ss <<
-      "partDrawingMeasurePosition " <<
-      partDrawingMeasurePosition.asString () <<
+      "partCurrentDrawingMeasurePosition " <<
+      partCurrentDrawingMeasurePosition.asString () <<
       " is smaller than fMeasureCurrentAccumulatedWholeNotesDuration " <<
       fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       " in measure " <<
@@ -2507,8 +2507,8 @@ void msrMeasure::appendNoteToMeasure (
       "\"" <<
       ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
       fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
-      ", partDrawingMeasurePosition: " <<
-      partDrawingMeasurePosition.asString () <<
+      ", partCurrentDrawingMeasurePosition: " <<
+      partCurrentDrawingMeasurePosition.asString () <<
       ", positionsDelta: " << positionsDelta <<
       ", line " << inputLineNumber;
 

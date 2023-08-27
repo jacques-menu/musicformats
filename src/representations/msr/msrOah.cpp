@@ -856,10 +856,10 @@ R"(Write the contents of the first MSR data, full version, to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-msr1-slices", "dmsr1slices",
+        "display-msr1-measures-slices", "dmsr1measslices",
 R"(Write the contents of the first MSR data slices to standard error.)",
-        "fDisplayFirstMsrSlices",
-        fDisplayFirstMsrSlices));
+        "fDisplayFirstMsrMeasuresSlices",
+        fDisplayFirstMsrMeasuresSlices));
 
   // display second MSR
 
@@ -888,10 +888,10 @@ R"(Write the contents of the second MSR data, full version, to standard error.)"
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-msr2-slices", "dmsr2slices",
+        "display-msr2-measures-slices", "dmsr2measslices",
 R"(Write the contents of the second MSR data slices to standard error.)",
-        "fDisplaySecondMsrSlices",
-        fDisplaySecondMsrSlices));
+        "fDisplaySecondMsrMeasuresSlices",
+        fDisplaySecondMsrMeasuresSlices));
 
   // display first MSR names
 
@@ -936,6 +936,28 @@ R"(Only write a summary of the second MSR to standard error.
 This implies that no LilyPond code is generated.)",
         "fDisplaySecondMsrSummary",
         fDisplaySecondMsrSummary));
+
+  // display first MSR flat
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-msr1-voices-flat-view", "dmsr1voicesflatview",
+R"(Only write a voices flat view of the first MSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayFirstMsrFlatView",
+        fDisplayFirstMsrFlatView));
+
+  // display second MSR flat
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-msr2-voices-flat-view", "dmsr2voicesflatview",
+R"(Only write a voices flat view of the second MSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplaySecondMsrFlatView",
+        fDisplaySecondMsrFlatView));
 }
 
 void msrOahGroup::initializeMsrLanguagesOptions ()
@@ -1390,6 +1412,14 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth) // JMI SUPERFLOUS???
 
     std::setw (valueFieldWidth) << "fDisplaySecondMsrSummary" << ": " <<
     fDisplaySecondMsrSummary <<
+    std::endl <<
+
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrFlatView" << ": " <<
+    fDisplayFirstMsrFlatView <<
+    std::endl <<
+
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrFlatView" << ": " <<
+    fDisplaySecondMsrFlatView <<
     std::endl;
 
   --gIndenter;

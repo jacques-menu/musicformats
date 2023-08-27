@@ -20,7 +20,7 @@
 
 #include "lpsrScores.h"
 
-#include "lpsr2summaryVisitor.h"
+#include "displayLpsrSummaryVisitor.h"
 
 #include "lpsrWae.h"
 
@@ -65,6 +65,7 @@ void displayLpsrScore (
     gLanguage->passOptional () << ": "<< passDescription <<
     std::endl <<
     separator <<
+    std::endl <<
     std::endl << std::endl <<
 
     theLpsrScore <<
@@ -168,8 +169,8 @@ void displayLpsrScoreSummary (
     separator <<
     std::endl << std::endl;
 
-  // create an lpsr2summaryVisitor visitor
-  lpsr2summaryVisitor
+  // create an displayLpsrSummaryVisitor visitor
+  displayLpsrSummaryVisitor
     summaryVisitor (
       lpsrOpts);
 
@@ -224,6 +225,114 @@ void displayLpsrScoreNames (
 
 
   theLpsrScore->printNames (gLog);
+
+  gLog <<
+    separator <<
+    std::endl << std::endl;
+
+  // register time spent
+  clock_t endClock = clock ();
+
+  gGlobalTimingItemsList.appendTimingItem (
+    mfPassIDKind::kMfPassID_DisplayPass,
+    gLanguage->displayTheLPSRAsText ()
+      + ", " +
+    gLanguage->fullVersion (),
+    mfTimingItemKind::kOptional,
+    startClock,
+    endClock);
+}
+
+//_______________________________________________________________________________
+void displayLpsrScoreFlatView (
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
+  const std::string&     passDescription)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    theLpsrScore != nullptr,
+    "theLpsrScore is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // start the clock
+  clock_t startClock = clock ();
+
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
+
+  std::string separator =
+    "%--------------------------------------------------------------";
+
+  gLog <<
+    separator <<
+    std::endl <<
+    gTab <<
+    gLanguage->passOptional () << ": "<< passDescription <<
+    ", " << gLanguage->fullVersion () <<
+    std::endl <<
+    separator <<
+    std::endl << std::endl;
+
+
+  theLpsrScore->printFlatView (gLog);
+
+  gLog <<
+    separator <<
+    std::endl << std::endl;
+
+  // register time spent
+  clock_t endClock = clock ();
+
+  gGlobalTimingItemsList.appendTimingItem (
+    mfPassIDKind::kMfPassID_DisplayPass,
+    gLanguage->displayTheLPSRAsText ()
+      + ", " +
+    gLanguage->fullVersion (),
+    mfTimingItemKind::kOptional,
+    startClock,
+    endClock);
+}
+
+//_______________________________________________________________________________
+void displayLpsrScoreSlices (
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
+  const std::string&     passDescription)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    theLpsrScore != nullptr,
+    "theLpsrScore is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // start the clock
+  clock_t startClock = clock ();
+
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
+
+  std::string separator =
+    "%--------------------------------------------------------------";
+
+  gLog <<
+    separator <<
+    std::endl <<
+    gTab <<
+    gLanguage->passOptional () << ": "<< passDescription <<
+    ", " << gLanguage->fullVersion () <<
+    std::endl <<
+    separator <<
+    std::endl << std::endl;
+
+
+  gLog << // JMI v0.9.70
+    "theLpsrScore->printSlices (gLog);" <<
+    std::endl;
 
   gLog <<
     separator <<

@@ -27,7 +27,7 @@
 
 #include "msrMeasureConstants.h"
 
-#include "msr2summaryVisitor.h"
+#include "displayMsrSummaryVisitor.h"
 
 #include "oahOah.h"
 

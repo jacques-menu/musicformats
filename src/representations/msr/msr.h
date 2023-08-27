@@ -126,8 +126,8 @@
 
 #include "msrMidi.h"
 
-#include "msr2namesVisitor.h"
-#include "msr2summaryVisitor.h"
+#include "displayMsrNamesVisitor.h"
+#include "displayMsrSummaryVisitor.h"
 
 #include "msrPathToVoice.h"
 

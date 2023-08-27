@@ -354,14 +354,17 @@ void msr2musicxmlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr2", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
-  registerAtomInRegularSubgroup ("display-msr1-slices", subGroup);
-  registerAtomInRegularSubgroup ("display-msr2-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-measures-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-measures-slices", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-names", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-names", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-summary", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
+
+  registerAtomInRegularSubgroup ("display-msr1-voices-flat-view", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-voices-flat-view", subGroup);
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_OAH_OPTION_LONG_NAME, subGroup);

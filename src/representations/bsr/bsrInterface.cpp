@@ -109,6 +109,7 @@ void displayBsrScoreFull (
     ", " << gLanguage->fullVersion () <<
     std::endl <<
     separator <<
+    std::endl <<
     std::endl << std::endl;
 
     bsrScore->printFull (gLog);

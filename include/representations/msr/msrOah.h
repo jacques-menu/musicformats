@@ -270,10 +270,10 @@ class EXP msrOahGroup : public oahGroup
     Bool                  getDisplayFirstMsrFull () const
                               { return fDisplayFirstMsrFull; }
 
-    void                  setDisplayFirstMsrSlices ()
-                              { fDisplayFirstMsrSlices = true; }
-    Bool                  getDisplayFirstMsrSlices () const
-                              { return fDisplayFirstMsrSlices; }
+    void                  setDisplayFirstMsrMeasuresSlices ()
+                              { fDisplayFirstMsrMeasuresSlices = true; }
+    Bool                  getDisplayFirstMsrMeasuresSlices () const
+                              { return fDisplayFirstMsrMeasuresSlices; }
 
     void                  setDisplaySecondMsr ()
                               { fDisplaySecondMsr = true; }
@@ -291,10 +291,10 @@ class EXP msrOahGroup : public oahGroup
                                   fDisplayFirstMsr || fDisplaySecondMsrFull;
                               }
 
-    void                  setDisplaySecondMsrSlices ()
-                              { fDisplaySecondMsrSlices = true; }
-    Bool                  getDisplaySecondMsrSlices () const
-                              { return fDisplaySecondMsrSlices; }
+    void                  setDisplaySecondMsrMeasuresSlices ()
+                              { fDisplaySecondMsrMeasuresSlices = true; }
+    Bool                  getDisplaySecondMsrMeasuresSlices () const
+                              { return fDisplaySecondMsrMeasuresSlices; }
 
     Bool                  getDisplayMsrFull () const // JMI ???
                               {
@@ -321,6 +321,16 @@ class EXP msrOahGroup : public oahGroup
                               { fDisplaySecondMsrSummary = true; }
     Bool                  getDisplaySecondMsrSummary () const
                               { return fDisplaySecondMsrSummary; }
+
+    void                  setDisplayFirstMsrFlatView ()
+                              { fDisplayFirstMsrFlatView = true; }
+    Bool                  getDisplayFirstMsrFlatView () const
+                              { return fDisplayFirstMsrFlatView; }
+
+    void                  setDisplaySecondMsrFlatView ()
+                              { fDisplaySecondMsrFlatView = true; }
+    Bool                  getDisplaySecondMsrFlatView () const
+                              { return fDisplaySecondMsrFlatView; }
 
 
     // languages
@@ -455,14 +465,17 @@ class EXP msrOahGroup : public oahGroup
     Bool                  fDisplaySecondMsr;
     Bool                  fDisplaySecondMsrFull;
 
-    Bool                  fDisplayFirstMsrSlices;
-    Bool                  fDisplaySecondMsrSlices;
+    Bool                  fDisplayFirstMsrMeasuresSlices;
+    Bool                  fDisplaySecondMsrMeasuresSlices;
 
     Bool                  fDisplayFirstMsrNames;
     Bool                  fDisplaySecondMsrNames;
 
     Bool                  fDisplayFirstMsrSummary;
     Bool                  fDisplaySecondMsrSummary;
+
+    Bool                  fDisplayFirstMsrFlatView;
+    Bool                  fDisplaySecondMsrFlatView;
 
     // languages
     msrQuarterTonesPitchesLanguageKind

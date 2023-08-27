@@ -184,6 +184,8 @@ class EXP msrWholeNotes
 
     std::string           asString () const;
 
+    std::string           asMsrString () const;
+
 //     std::string           asFractionString () const;
 
     void                  print (std::ostream& os) const;

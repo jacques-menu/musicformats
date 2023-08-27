@@ -9,14 +9,12 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___lpsr2summaryVisitor___
-#define ___lpsr2summaryVisitor___
+#ifndef ___displayMsrMeasuresSlicesVisitor___
+#define ___displayMsrMeasuresSlicesVisitor___
 
 #include "visitor.h"
 
-#include "lpsrOah.h"
-
-#include "lpsrScores.h"
+#include "msrOah.h"
 
 #include "oahBasicTypes.h"
 
@@ -25,7 +23,7 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-class EXP lpsr2summaryVisitor :
+class EXP displayMsrMeasuresSlicesVisitor :
 
   public visitor<S_msrScore>,
 
@@ -41,38 +39,21 @@ class EXP lpsr2summaryVisitor :
 
   public visitor<S_msrVoice>,
 
-  // lyrics
-
-  public visitor<S_msrStanza>,
-  public visitor<S_msrSyllable>,
+  // clef, key, time signature
 
   public visitor<S_msrClef>,
   public visitor<S_msrKey>,
   public visitor<S_msrTimeSignature>,
-  public visitor<S_msrTempo>,
 
   public visitor<S_msrSegment>,
 
-  public visitor<S_msrArticulation>,
-
-  public visitor<S_msrDynamic>,
-
-  public visitor<S_msrCrescDecresc>,
-
-  public visitor<S_msrWedge>,
-
-  public visitor<S_msrGraceNotesGroup>,
+  public visitor<S_msrMeasure>,
 
   public visitor<S_msrNote>,
-
-  public visitor<S_msrStem>,
-  public visitor<S_msrBeam>,
 
   public visitor<S_msrChord>,
 
   public visitor<S_msrTuplet>,
-
-  public visitor<S_msrSlur>,
 
   public visitor<S_msrBarLine>,
   public visitor<S_msrBarNumberCheck>,
@@ -81,9 +62,7 @@ class EXP lpsr2summaryVisitor :
   public visitor<S_msrRepeat>,
 
   public visitor<S_msrScaling>,
-  public visitor<S_msrPageLayout>,
-
-  public visitor<S_msrMidiTempo>
+  public visitor<S_msrPageLayout>
 
 {
   public:
@@ -91,10 +70,10 @@ class EXP lpsr2summaryVisitor :
     // constructors/destructor
     // ------------------------------------------------------
 
-                          lpsr2summaryVisitor (
-                            const S_lpsrOahGroup& lpsrOpts);
+                          displayMsrMeasuresSlicesVisitor (
+                            const S_msrOahGroup& msrOpts);
 
-    virtual               ~lpsr2summaryVisitor ();
+    virtual               ~displayMsrMeasuresSlicesVisitor ();
 
   protected:
 
@@ -116,12 +95,6 @@ class EXP lpsr2summaryVisitor :
     virtual void          visitStart (S_msrVoice& elt);
     virtual void          visitEnd   (S_msrVoice& elt);
 
-    virtual void          visitStart (S_msrStanza& elt);
-    virtual void          visitEnd   (S_msrStanza& elt);
-
-    virtual void          visitStart (S_msrSyllable& elt);
-    virtual void          visitEnd   (S_msrSyllable& elt);
-
     virtual void          visitStart (S_msrClef& elt);
     virtual void          visitEnd   (S_msrClef& elt);
 
@@ -131,44 +104,20 @@ class EXP lpsr2summaryVisitor :
     virtual void          visitStart (S_msrTimeSignature& elt);
     virtual void          visitEnd   (S_msrTimeSignature& elt);
 
-    virtual void          visitStart (S_msrTempo& elt);
-    virtual void          visitEnd   (S_msrTempo& elt);
-
     virtual void          visitStart (S_msrSegment& elt);
     virtual void          visitEnd   (S_msrSegment& elt);
 
-    virtual void          visitStart (S_msrArticulation& elt);
-    virtual void          visitEnd   (S_msrArticulation& elt);
-
-    virtual void          visitStart (S_msrDynamic& elt);
-    virtual void          visitEnd   (S_msrDynamic& elt);
-
-    virtual void          visitStart (S_msrCrescDecresc& elt);
-    virtual void          visitEnd   (S_msrCrescDecresc& elt);
-
-    virtual void          visitStart (S_msrWedge& elt);
-    virtual void          visitEnd   (S_msrWedge& elt);
-
-    virtual void          visitStart (S_msrGraceNotesGroup& elt);
-    virtual void          visitEnd   (S_msrGraceNotesGroup& elt);
+    virtual void          visitStart (S_msrMeasure& elt);
+    virtual void          visitEnd   (S_msrMeasure& elt);
 
     virtual void          visitStart (S_msrNote& elt);
     virtual void          visitEnd   (S_msrNote& elt);
-
-    virtual void          visitStart (S_msrStem& elt);
-    virtual void          visitEnd   (S_msrStem& elt);
-
-    virtual void          visitStart (S_msrBeam& elt);
-    virtual void          visitEnd   (S_msrBeam& elt);
 
     virtual void          visitStart (S_msrChord& elt);
     virtual void          visitEnd   (S_msrChord& elt);
 
     virtual void          visitStart (S_msrTuplet& elt);
     virtual void          visitEnd   (S_msrTuplet& elt);
-
-    virtual void          visitStart (S_msrSlur& elt);
-    virtual void          visitEnd   (S_msrSlur& elt);
 
     virtual void          visitStart (S_msrBarLine& elt);
     virtual void          visitEnd   (S_msrBarLine& elt);
@@ -182,29 +131,20 @@ class EXP lpsr2summaryVisitor :
     virtual void          visitStart (S_msrRepeat& elt);
     virtual void          visitEnd   (S_msrRepeat& elt);
 
-    virtual void          visitStart (S_msrScaling& elt);
-    virtual void          visitEnd   (S_msrScaling& elt);
-
-    virtual void          visitStart (S_msrPageLayout& elt);
-    virtual void          visitEnd   (S_msrPageLayout& elt);
-
-    virtual void          visitStart (S_msrMidiTempo& elt);
-    virtual void          visitEnd   (S_msrMidiTempo& elt);
-
   public:
 
     // print
     // ------------------------------------------------------
 
-    void                  printSummaryFromLpsrScore (
-                            const S_lpsrScore& score);
+    void                  printMsrScoreMeasuresSlices (
+                            const S_msrScore& score);
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    S_lpsrOahGroup         fLpsrOahGroup;
+    S_msrOahGroup         fMsrOahGroup;
 
     // score
     // ------------------------------------------------------
@@ -212,56 +152,56 @@ class EXP lpsr2summaryVisitor :
     // part groups
     // ------------------------------------------------------
 
-    int                   fPartGroupsCounter;
+//     int                   fPartGroupsCounter;
 
     // parts
     // ------------------------------------------------------
 
-    int                   fPartsCounter;
+//     int                   fPartsCounter;
 
     // staves
     // ------------------------------------------------------
 
-    int                   fStavesCounter;
+//     int                   fStavesCounter;
 
     // prevent clef, key and time signature from being handled twice
-    Bool                  fOnGoingStaff;
+//     Bool                  fOnGoingStaff;
 
     // voices
     // ------------------------------------------------------
 
-    int                   fVoicesCounter;
+//     int                   fVoicesCounter;
 
     // stanzas
     // ------------------------------------------------------
 
-    int                   fStanzasCounter;
+//     int                   fStanzasCounter;
 
     // notes
     // ------------------------------------------------------
 
-    int                   fScoreUnpitchedNotesCounter;
-    int                   fScoreRegularNotesCounter;
-    int                   fScoreRestNotesCounter;
-    int                   fScoreSkipNotesCounter;
-    int                   fScoreDoubleTremoloNotesCounter;
-    int                   fScoreGraceNotesGroupCounter;
+//     int                   fScoreUnpitchedNotesCounter;
+//     int                   fScoreRegularNotesCounter;
+//     int                   fScoreRestNotesCounter;
+//     int                   fScoreSkipNotesCounter;
+//     int                   fScoreDoubleTremoloNotesCounter;
+//     int                   fScoreGraceNotesGroupCounter;
 
     // chords
     // ------------------------------------------------------
 
-    int                   fScoreChordNotesCounter;
-    int                   fScoreChordsCounter;
+//     int                   fScoreChordNotesCounter;
+//     int                   fScoreChordsCounter;
 
     // tuplets
     // ------------------------------------------------------
 
-    int                   fScoreTupletNotesCounter;
-    int                   fScoreTupletsCounter;
+//     int                   fScoreTupletNotesCounter;
+//     int                   fScoreTupletsCounter;
 };
 
 
 }
 
 
-#endif // ___lpsr2summaryVisitor___
+#endif // ___displayMsrMeasuresSlicesVisitor___

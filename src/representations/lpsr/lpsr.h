@@ -39,8 +39,8 @@
 
 #include "lpsrBookBlockElements.h"
 
-#include "lpsr2namesVisitor.h"
-#include "lpsr2summaryVisitor.h"
+#include "displayLpsrNamesVisitor.h"
+#include "displayLpsrSummaryVisitor.h"
 
 
 #endif // ___lpsr___

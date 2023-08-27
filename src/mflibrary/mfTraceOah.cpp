@@ -1931,7 +1931,7 @@ void traceOahGroup::initializeMeasuresSlicesTraceOah ()
     subGroup =
       oahSubGroup::create (
         "Measures slices",
-        "help-trace-measures-slices", "htslices",
+        "help-trace-measures-slices", "htmeasslices",
 R"()",
       oahElementVisibilityKind::kElementVisibilityWhole,
       this);
@@ -1944,7 +1944,7 @@ R"()",
   S_oahCommonPrefixBooleansAtom
     measuresSlicesMultiplexBooleansAtom =
       oahCommonPrefixBooleansAtom::create (
-        "tislices", "trace-in-measures-slices",
+        "trace-in-measures-slices", "tinmeasslices", // JMI v0.9.70
         "Trace SHORT_NAME/LONG_NAME in segments.",
         "SHORT_NAME",
         "LONG_NAME",
@@ -1961,7 +1961,7 @@ R"()",
   S_oahTwoBooleansAtomWithTracePasses
     traceMeasuresSlicesBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
-        "trace-measures-slices", "tslices",
+        "trace-measures-slices", "tmeasslices",
 R"(Measures slices)",
         "fTraceMeasuresSlices",
         fTraceMeasuresSlices,
@@ -1979,7 +1979,7 @@ R"(Measures slices)",
   S_oahThreeBooleansAtom
     traceMeasuresSlicesDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-measures-slices-details", "tslicesdets",
+        "trace-measures-slices-details", "tmeasslicesdets",
 R"(Measures slices details)",
         "fTraceMeasuresSlicesDetails",
         fTraceMeasuresSlicesDetails,

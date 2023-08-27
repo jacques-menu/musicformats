@@ -12436,7 +12436,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
       case msrBassFigureSuffixKind::kBassFigureSuffixFlat:
         fLilypondCodeStream << "flat";
         break;
-      case msrBassFigureSuffixKind::kBassFigureSuffixFlatFlat:
+      case msrBassFigureSuffixKind::kBassFigureSuffixFlat:
         fLilypondCodeStream << "flat flat";
         break;
       case msrBassFigureSuffixKind::kBassFigureSuffixNatural:
@@ -13834,57 +13834,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             result.append(r'\skip1 ')
 
     lyrics_dict[lyric_key].extend(result)
-
-
-def musicxml_lyrics_to_text(lyrics, ignoremelismata):
-    # TODO: Implement text styles for lyrics syllables
-    continued = False
-    extended = False
-    text = ''
-    for e in lyrics.get_all_children():
-        if isinstance(e, musicxml.Syllabic):
-            continued = e.continued()
-        elif isinstance(e, musicxml.Text):
-            # We need to convert soft hyphens to -, otherwise the ascii codec as well
-            # as lilypond will barf on that character
-            text += e.get_text().replace('\xad', '-')
-        elif isinstance(e, musicxml.Elision):
-            if text:
-                text += " "
-            continued = False
-            extended = False
-        elif isinstance(e, musicxml.Extend):
-            if text:
-                text += " "
-            extended = True
-
-    if text == "-" and continued:
-        return "--"
-    elif text == "_" and extended:
-        return "__"
-    elif continued and text:
-        if options.convert_beaming:
-            if ignoremelismata == "on":
-                return r" \set ignoreMelismata = ##t " + utilities.escape_ly_output_string(text)
-            elif ignoremelismata == "off":
-                return " " + utilities.escape_ly_output_string(text) + " -- \\unset ignoreMelismata"
-            else:
-                return " " + utilities.escape_ly_output_string(text) + " --"
-        else:
-            return " " + utilities.escape_ly_output_string(text) + " -- "
-    elif continued:
-        return "--"
-    elif extended and text:
-        return " " + utilities.escape_ly_output_string(text) + " __"
-    elif extended:
-        return "__"
-    elif text:
-        return " " + utilities.escape_ly_output_string(text)
-    else:
-        return ""
 */
-
-
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -14085,6 +14035,7 @@ def musicxml_lyrics_to_text(lyrics, ignoremelismata):
 
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
     // ----------------------------------------------------
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14113,37 +14064,37 @@ def musicxml_lyrics_to_text(lyrics, ignoremelismata):
       } // switch
       break;
 
-    // ----------------------------------------------------
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
-    // ----------------------------------------------------
-      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
-          {
-#ifdef MF_TRACE_IS_ENABLED
-            if (gTraceOahGroup->getTraceLyrics ()) {
-              fLilypondCodeStream <<
-                "%{ CODE_FOR_SYLLABLE_DURATION_KIND_IMPLICIT_kSyllableSkipOnNonRestNote" <<
-                ", line " << syllable->getInputStartLineNumber () <<
-                " %}" <<
-                std::endl;
-            }
-#endif // MF_TRACE_IS_ENABLED
-          }
-          break;
-
-        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableSkipOnNonRestNote" <<
-              ", line " << syllable->getInputStartLineNumber () <<
-              " %}" <<
-              std::endl;
-          }
-#endif // MF_TRACE_IS_ENABLED
-          break;
-      } // switch
-      break;
+//     // ----------------------------------------------------
+//     case msrSyllableKind::kSyllableSkipOnNonRestNote:
+//     // ----------------------------------------------------
+//       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+//         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+//           {
+// #ifdef MF_TRACE_IS_ENABLED
+//             if (gTraceOahGroup->getTraceLyrics ()) {
+//               fLilypondCodeStream <<
+//                 "%{ CODE_FOR_SYLLABLE_DURATION_KIND_IMPLICIT_kSyllableSkipOnNonRestNote" <<
+//                 ", line " << syllable->getInputStartLineNumber () <<
+//                 " %}" <<
+//                 std::endl;
+//             }
+// #endif // MF_TRACE_IS_ENABLED
+//           }
+//           break;
+//
+//         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+// #ifdef MF_TRACE_IS_ENABLED
+//           if (gTraceOahGroup->getTraceLyrics ()) {
+//             fLilypondCodeStream <<
+//               "%{ CODE_FOR_SYLLABLE_DURATION_KIND_EXPLICIT_kSyllableSkipOnNonRestNote" <<
+//               ", line " << syllable->getInputStartLineNumber () <<
+//               " %}" <<
+//               std::endl;
+//           }
+// #endif // MF_TRACE_IS_ENABLED
+//           break;
+//       } // switch
+//       break;
 
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableMeasureEnd:
@@ -14294,6 +14245,55 @@ void lpsr2lilypondTranslator::generateCodeBeforeSyllableIfRelevant (
 void lpsr2lilypondTranslator::generateCodeAfterSyllableIfRelevant (
   S_msrSyllable& syllable)
 {
+/*
+def musicxml_lyrics_to_text(lyrics, ignoremelismata):
+    # TODO: Implement text styles for lyrics syllables
+    continued = False
+    extended = False
+    text = ''
+    for e in lyrics.get_all_children():
+        if isinstance(e, musicxml.Syllabic):
+            continued = e.continued()
+        elif isinstance(e, musicxml.Text):
+            # We need to convert soft hyphens to -, otherwise the ascii codec as well
+            # as lilypond will barf on that character
+            text += e.get_text().replace('\xad', '-')
+        elif isinstance(e, musicxml.Elision):
+            if text:
+                text += " "
+            continued = False
+            extended = False
+        elif isinstance(e, musicxml.Extend):
+            if text:
+                text += " "
+            extended = True
+
+    if text == "-" and continued:
+        return "--"
+    elif text == "_" and extended:
+        return "__"
+    elif continued and text:
+        if options.convert_beaming:
+            if ignoremelismata == "on":
+                return r" \set ignoreMelismata = ##t " + utilities.escape_ly_output_string(text)
+            elif ignoremelismata == "off":
+                return " " + utilities.escape_ly_output_string(text) + " -- \\unset ignoreMelismata"
+            else:
+                return " " + utilities.escape_ly_output_string(text) + " --"
+        else:
+            return " " + utilities.escape_ly_output_string(text) + " -- "
+    elif continued:
+        return "--"
+    elif extended and text:
+        return " " + utilities.escape_ly_output_string(text) + " __"
+    elif extended:
+        return "__"
+    elif text:
+        return " " + utilities.escape_ly_output_string(text)
+    else:
+        return ""
+*/
+
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceLyrics ()) {
 //     fLilypondCodeStream <<
@@ -14366,18 +14366,18 @@ void lpsr2lilypondTranslator::generateCodeAfterSyllableIfRelevant (
       break;
 
     case msrSyllableExtendKind::kSyllableExtendTypeLess:
-      doGenerateADoubleUnderscore = true;
+//       doGenerateADoubleUnderscore = true;
       break;
 
     case msrSyllableExtendKind::kSyllableExtendTypeStart:
-      doGenerateADoubleUnderscore = true;
+//       doGenerateADoubleUnderscore = true;
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
-          doGenerateASingleUnderscore = true;
+//           doGenerateASingleUnderscore = true;
           break;
       } // switch
 
@@ -14385,8 +14385,8 @@ void lpsr2lilypondTranslator::generateCodeAfterSyllableIfRelevant (
       break;
 
     case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-      doGenerateADoubleUnderscore = true;
-      doGenerateASingleUnderscore = true;
+//       doGenerateADoubleUnderscore = true;
+//       doGenerateASingleUnderscore = true;
       break;
 
     case msrSyllableExtendKind::kSyllableExtendTypeStop:
@@ -14612,22 +14612,24 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      {
-        // take note's tie into account if any
-        if (noteTie) {
-          switch (noteTie->getTieKind ()) {
-            case msrTieKind::kTieNone:
-              break;
-            case msrTieKind::kTieStart:
-               doGenerateASkip = true;
-              break;
-            case msrTieKind::kTieContinue:
-              break;
-            case msrTieKind::kTieStop:
-              break;
-          } // switch
-        }
-      }
+       doGenerateASingleHyphen = true;
+
+//       {
+//         // take note's tie into account if any
+//         if (noteTie) {
+//           switch (noteTie->getTieKind ()) {
+//             case msrTieKind::kTieNone:
+//               break;
+//             case msrTieKind::kTieStart:
+//                doGenerateASingleHyphen = true;
+//               break;
+//             case msrTieKind::kTieContinue:
+//               break;
+//             case msrTieKind::kTieStop:
+//               break;
+//           } // switch
+//         }
+//       }
 
 //         {
 //           // get the note slurs
@@ -14716,6 +14718,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceLyrics ()) {
@@ -14752,43 +14755,43 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 //       doGenerateASkip = true;
       break;
 
-    // ----------------------------------------------------
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
-    // ----------------------------------------------------
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
-        fLilypondCodeStream <<
-          std::endl <<
-          "%{ IMPLICIT_DURATIONS_kSyllableSkipOnNonRestNote" <<
-          ", line " << syllable->getInputStartLineNumber () <<
-          " %}" <<
-          std::endl;
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      {
-//         // take note's tie into account if any
-//         if (noteTie) {
-//           switch (noteTie->getTieKind ()) {
-//             case msrTieKind::kTieNone:
-//               break;
-//             case msrTieKind::kTieStart:
-//                doGenerateASkip = true;
-//               break;
-//             case msrTieKind::kTieContinue:
-//               break;
-//             case msrTieKind::kTieStop:
-//               break;
-//           } // switch
-//         }
-      }
-
-      if (fOnGoingExtend) {
-        doGenerateASingleUnderscore = true;
-      }
-
-//       doGenerateASkip = true;
-      break;
+//     // ----------------------------------------------------
+//     case msrSyllableKind::kSyllableSkipOnNonRestNote:
+//     // ----------------------------------------------------
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceLyrics ()) {
+//         fLilypondCodeStream <<
+//           std::endl <<
+//           "%{ IMPLICIT_DURATIONS_kSyllableSkipOnNonRestNote" <<
+//           ", line " << syllable->getInputStartLineNumber () <<
+//           " %}" <<
+//           std::endl;
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       {
+// //         // take note's tie into account if any
+// //         if (noteTie) {
+// //           switch (noteTie->getTieKind ()) {
+// //             case msrTieKind::kTieNone:
+// //               break;
+// //             case msrTieKind::kTieStart:
+// //                doGenerateASkip = true;
+// //               break;
+// //             case msrTieKind::kTieContinue:
+// //               break;
+// //             case msrTieKind::kTieStop:
+// //               break;
+// //           } // switch
+// //         }
+//       }
+//
+//       if (fOnGoingExtend) {
+//         doGenerateASingleUnderscore = true;
+//       }
+//
+// //       doGenerateASkip = true;
+//       break;
 
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableMeasureEnd:
@@ -15014,7 +15017,28 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       }
 #endif // MF_TRACE_IS_ENABLED
 
-        doGenerateADoubleHyphen = true;
+        // doGenerateADoubleHyphen = true;
+
+        {
+          // take note's tie into account if any
+          S_msrTie
+            noteTie =
+              noteTheSyllableIsAttachedTo->getNoteTie ();
+
+          if (noteTie) {
+            switch (noteTie->getTieKind ()) {
+              case msrTieKind::kTieNone:
+                break;
+              case msrTieKind::kTieStart:
+                 doGenerateASingleHyphen = true;
+                break;
+              case msrTieKind::kTieContinue:
+                break;
+              case msrTieKind::kTieStop:
+                break;
+            } // switch
+          }
+        }
 
 //         {
 //           // get the note slurs
@@ -15028,28 +15052,28 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 //           }
 //         }
 
-//       // what it the syllable's extend kind?
-//       switch (syllable->getSyllableExtendKind ()) {
-//         case msrSyllableExtendKind::kSyllableExtend_NONE:
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//           fOnGoingExtend = true;
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//           fOnGoingExtend = false;
-//           break;
-//       } // switch
+      // what it the syllable's extend kind?
+      switch (syllable->getSyllableExtendKind ()) {
+        case msrSyllableExtendKind::kSyllableExtend_NONE:
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeLess:
+          doGenerateADoubleHyphen = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStart:
+          fOnGoingExtend = true;
+//           doGenerateASingleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+//           doGenerateASingleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStop:
+          fOnGoingExtend = false;
+          break;
+      } // switch
       break;
 
     // ----------------------------------------------------
@@ -15066,6 +15090,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       }
 #endif // MF_TRACE_IS_ENABLED
 
+//        doGenerateASingleHyphen = true;
 //         {
 //           // get the note slurs
 //           const std::list<S_msrSlur>&
@@ -15074,41 +15099,42 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 //
 //           // take note's tie into account if any
 //           if (noteSlurs.size ()) {
-// //             doGenerateASkip = true;
+//             doGenerateASingleHyphen = true;
 //           }
 //         }
 
       // what it the syllable's extend kind?
-//       switch (syllable->getSyllableExtendKind ()) {
-//         case msrSyllableExtendKind::kSyllableExtend_NONE:
-//           break;
+      switch (syllable->getSyllableExtendKind ()) {
+        case msrSyllableExtendKind::kSyllableExtend_NONE:
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeLess:
+          {
+//             // get the note slurs
+//             const std::list<S_msrSlur>&
+//               noteSlurs =
+//                 noteTheSyllableIsAttachedTo->getNoteSlurs ();
 //
-//         case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//           {
-// //             // get the note slurs
-// //             const std::list<S_msrSlur>&
-// //               noteSlurs =
-// //                 noteTheSyllableIsAttachedTo->getNoteSlurs ();
-// //
-// //             // take note's tie into account if any
-// //             if (noteSlurs.size ()) {
-// //               doGenerateADoubleHyphen = true;
-// //             }
-//           }
-// //           doGenerateASkip = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStart:
+//             // take note's tie into account if any
+//             if (noteSlurs.size ()) {
+//               doGenerateADoubleHyphen = true;
+//             }
+          }
+
+          doGenerateASingleHyphen = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStart:
 //           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
 //           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//           break;
-//       } // switch
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStop:
+          break;
+      } // switch
       break;
 
     // ----------------------------------------------------
@@ -15164,6 +15190,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableSkipOnRestNote:
+    case msrSyllableKind::kSyllableSkipOnNonRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceLyrics ()) {
@@ -15176,25 +15203,25 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       }
 #endif // MF_TRACE_IS_ENABLED
 
-        doGenerateASkip = true;
-      break;
-
-    // ----------------------------------------------------
-    case msrSyllableKind::kSyllableSkipOnNonRestNote:
-    // ----------------------------------------------------
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceLyrics ()) {
-        fLilypondCodeStream <<
-          std::endl <<
-          "%{ EXPLICIT_DURATIONS_kSyllableSkipOnNonRestNote" <<
-          ", line " << syllable->getInputStartLineNumber () <<
-          " %}" <<
-          std::endl;
-      }
-#endif // MF_TRACE_IS_ENABLED
-
 //         doGenerateASkip = true;
       break;
+
+//     // ----------------------------------------------------
+//     case msrSyllableKind::kSyllableSkipOnNonRestNote:
+//     // ----------------------------------------------------
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceLyrics ()) {
+//         fLilypondCodeStream <<
+//           std::endl <<
+//           "%{ EXPLICIT_DURATIONS_kSyllableSkipOnNonRestNote" <<
+//           ", line " << syllable->getInputStartLineNumber () <<
+//           " %}" <<
+//           std::endl;
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// //         doGenerateASkip = true;
+//       break;
 
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableMeasureEnd:

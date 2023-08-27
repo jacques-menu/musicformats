@@ -2560,7 +2560,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 
 void msrSegment::appendNoteToSegment (
   const S_msrNote&     note,
-  const msrWholeNotes& partDrawingMeasurePosition)
+  const msrWholeNotes& partCurrentDrawingMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
@@ -2581,7 +2581,7 @@ void msrSegment::appendNoteToSegment (
   fSegmentLastMeasure->
     appendNoteToMeasure (
       note,
-      partDrawingMeasurePosition);
+      partCurrentDrawingMeasurePosition);
 }
 
 void msrSegment::appendNoteToSegmentClone (const S_msrNote& note)

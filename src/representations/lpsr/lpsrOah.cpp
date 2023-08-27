@@ -1415,7 +1415,7 @@ This implies that no LilyPond code is generated.)",
         "fDisplayLpsrNames",
         fDisplayLpsrNames));
 
-  // display LPSRR summary
+  // display LPSR summary
 
   subGroup->
     appendAtomToSubGroup (
@@ -1425,6 +1425,28 @@ R"(Only write a summary of the fLPSR to standard error.
 This implies that no LilyPond code is generated.)",
         "fDisplayLpsrSummary",
         fDisplayLpsrSummary));
+
+  // display LPSR flat view
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-lpsr-voices-flat-view", "dlpsrvoicesflatview",
+R"(Only write a voices flat view of the fLPSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrFlatView",
+        fDisplayLpsrFlatView));
+
+  // display LPSR slices
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-lpsr-measures-slices", "dlpsrmeasslices",
+R"(Only write the measures slices of the fLPSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrMeasuresSlices",
+        fDisplayLpsrMeasuresSlices));
 }
 
 void lpsrOahGroup::initializeLpsrPaperOptions ()
@@ -2184,9 +2206,6 @@ void lpsrOahGroup::enforceGroupQuietness ()
   fTraceLpsrBlocks = false;
   fTraceSchemeFunctions = false;
 #endif // MF_TRACE_IS_ENABLED
-
-  fDisplayLpsr = false;
-  fDisplayLpsrFull = false;
 }
 
 //______________________________________________________________________________
@@ -2340,6 +2359,22 @@ void lpsrOahGroup::displayLpsrOahValues (int fieldWidth)
     std::endl <<
     std::setw (fieldWidth) << "fDisplayLpsrFull" << ": " <<
     fDisplayLpsrFull <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fDisplayLpsrNames" << ": " <<
+    fDisplayLpsrNames <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fDisplayLpsrSummary" << ": " <<
+    fDisplayLpsrSummary <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fDisplayLpsrFlatView" << ": " <<
+    fDisplayLpsrFlatView <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fDisplayLpsrMeasuresSlices" << ": " <<
+    fDisplayLpsrMeasuresSlices <<
     std::endl;
 
   --gIndenter;

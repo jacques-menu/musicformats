@@ -4192,11 +4192,12 @@ std::string msrNote::asMsrString () const
 		msrQuarterTonesPitchKindAsStringInLanguage (
 			fNoteQuarterTonesPitchKind,
 			gMsrOahGroup->
-				getMsrQuarterTonesPitchesLanguageKind ());
+				getMsrQuarterTonesPitchesLanguageKind ()) <<
+		noteSoundingWholeNotesAsMsrString ();
 
-	for (int i = 0; i < fNoteDotsNumber; ++i) {
-		ss << '.';
-	} // for
+// 	for (int i = 0; i < fNoteDotsNumber; ++i) {
+// 		ss << '.';
+// 	} // for
 
 	ss <<
 		'-' <<
@@ -4211,7 +4212,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
 
   ss <<
   	"[Note" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
     ", ";
 
   switch (fNoteKind) {
@@ -4399,7 +4400,7 @@ std::string msrNote::asShortString () const
 
   ss <<
   	"[Note" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
     ", ";
 
   switch (fNoteKind) {
@@ -4642,7 +4643,7 @@ std::string msrNote::asMinimalString () const
 
   ss <<
   	"[Note" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
     ", ";
 
   switch (fNoteKind) {
@@ -4892,13 +4893,13 @@ std::string msrNote::soundingNoteEssentialsAsString () const
 // 	print (gLog);
 
   ss <<
-    "sounding: " <<
+//     "sounding: " <<
     notePitchAsString () <<
     noteSoundingWholeNotesAsMsrString ();
 
-  for (int i = 0; i < fNoteDotsNumber; ++i) {
-    ss << '.';
-  } // for
+//   for (int i = 0; i < fNoteDotsNumber; ++i) {
+//     ss << '.';
+//   } // for
 
   ss <<
     '-' <<
@@ -4998,7 +4999,7 @@ std::string msrNote::asString () const
 
   ss <<
     "[Note" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
     ", ";
 
   switch (fNoteKind) {
@@ -5009,7 +5010,7 @@ std::string msrNote::asString () const
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        "kNoteRestInMeasure, ";
+				fNoteKind;
 
       if (fNoteOccupiesAFullMeasure) {
         ss <<
@@ -5023,7 +5024,7 @@ std::string msrNote::asString () const
       }
       else {
         ss <<
-          'r' <<
+          'r' << " FOO " <<
           nonSoundingNoteEssentialsAsString ();
       }
 			ss << ", ";
@@ -5203,7 +5204,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 
   ss <<
   	"[Note" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
     ", ";
 
   switch (fNoteKind) {
@@ -5229,7 +5230,7 @@ std::string msrNote::asShortStringForMeasuresSlices () const
       }
       else {
         ss <<
-          'r' <<
+          'r' << " FII " <<
           nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
       }
 
@@ -5365,7 +5366,8 @@ std::string msrNote::noteEssentialsAsSting () const
 
     case msrNoteKind::kNoteRestInMeasure:
       ss <<
-        fNoteKind;
+        fNoteKind <<
+        ", ";
 
       if (fNoteOccupiesAFullMeasure) {
         ss <<
@@ -5374,7 +5376,7 @@ std::string msrNote::noteEssentialsAsSting () const
       }
       else {
         ss <<
-          'r' <<
+          'r' << " FEE " <<
           asShortStringWithRawWholeNotes ();
       }
       ss << std::endl;
@@ -5494,7 +5496,7 @@ void msrNote::print (std::ostream& os) const
 
   os <<
     "[Note" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
     ", " <<
     noteEssentialsAsSting () <<
     std::endl;
@@ -6335,7 +6337,7 @@ void msrNote::printFull (std::ostream& os) const
 
   os <<
     "[Note" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
     ", " <<
     noteEssentialsAsSting () <<
     std::endl;

@@ -35,7 +35,7 @@
 
 #include "mxsr2msrSkeletonBuilder.h"
 
-#include "msr2summaryVisitor.h"
+#include "displayMsrSummaryVisitor.h"
 
 #include "waeHandlers.h"
 

@@ -804,11 +804,23 @@ class EXP lpsr2lilypondTranslator :
 
     msrWholeNotes         fLastMetWholeNotes;
 
+    Bool                  wholeNotesDurationShouldBeGenerated (
+                            const msrWholeNotes& wholeNotes);
+
+    void                  generateWholeNotesDuration (
+                            int                  inputLineNumber,
+                            const msrWholeNotes& wholeNotes);
+
+    void                  generateWholeNotesDurationOnStream (
+                            int                  inputLineNumber,
+                            const msrWholeNotes& wholeNotes,
+                            std::ostream&        os);
+
     std::string           durationAsLilypondStringIfItShouldBeGenerated (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotes);
 
-    std::string           msrNotesDurationKindAsLilypondString (
+    std::string           notesDurationKindAsLilypondString (
                             msrNotesDurationKind notesNotesDurationKind);
 
     // notes
@@ -851,29 +863,29 @@ class EXP lpsr2lilypondTranslator :
     void                  generateCodeForNote (
                             const S_msrNote& note);
 
-    void                  generateCodeForNoteRegularInMeasure (
+    void                  generateCodeForNoteInMeasure (
                             const S_msrNote& note);
 
-    void                  generateCodeForNoteRestInMeasure (
+    void                  generateCodeForRestInMeasure (
                             const S_msrNote& note);
-    void                  generateCodeForNoteSkipInMeasure (
+    void                  generateCodeForSkipInMeasure (
                             const S_msrNote& note);
-    void                  generateCodeForNoteUnpitchedInMeasure (
+    void                  generateCodeForUnpitchedNoteInMeasure (
                             const S_msrNote& note);
 
     void                  generateCodeForNoteRegularInChord (
                             const S_msrNote& note);
 
-    void                  generateCodeForNoteRegularInTuplet (
+    void                  generateCodeForNoteInTuplet (
                             const S_msrNote& note);
-    void                  generateCodeForNoteRestInTuplet (
+    void                  generateCodeForRestInTuplet (
                             const S_msrNote& note);
-    void                  generateCodeForNoteUnpitchedInTuplet (
+    void                  generateCodeForUnpitchedNoteInTuplet (
                             const S_msrNote& note);
 
     void                  generateCodeForNoteRegularInGraceNotesGroup (
                             const S_msrNote& note);
-    void                  generateCodeForNoteSkipInGraceNotesGroup (
+    void                  generateCodeForSkipInGraceNotesGroup (
                             const S_msrNote& note);
 
     void                  generateCodeForNoteInChordInGraceNotesGroup (

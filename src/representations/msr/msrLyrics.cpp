@@ -1225,12 +1225,12 @@ S_msrStanza msrStanza::createStanzaDeepClone (
 
 void msrStanza::appendSyllableToStanza (
   const S_msrSyllable& syllable,
-  const msrWholeNotes& partDrawingMeasurePosition)
+  const msrWholeNotes& partCurrentDrawingMeasurePosition)
 {
   // compute position delta
   msrWholeNotes
     positionsDelta =
-      partDrawingMeasurePosition
+      partCurrentDrawingMeasurePosition
         -
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration;
 
@@ -1241,8 +1241,8 @@ void msrStanza::appendSyllableToStanza (
     ss <<
       "Appending syllable " << syllable <<
       " to stanza " << getStanzaName () <<
-      ", partDrawingMeasurePosition: " <<
-      partDrawingMeasurePosition.asString () <<
+      ", partCurrentDrawingMeasurePosition: " <<
+      partCurrentDrawingMeasurePosition.asString () <<
       ", fStanzaMeasureCurrentAccumulatedWholeNotesDuration: " <<
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", positionsDelta: " <<
@@ -1378,12 +1378,12 @@ void msrStanza::appendSyllableToStanzaClone (
 
 void msrStanza::appendMeasureEndSyllableToStanza (
   int                  inputLineNumber,
-  const msrWholeNotes& partDrawingMeasurePosition)
+  const msrWholeNotes& partCurrentDrawingMeasurePosition)
 {
   // compute position delta
   msrWholeNotes
     positionsDelta =
-      partDrawingMeasurePosition
+      partCurrentDrawingMeasurePosition
         -
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration;
 
@@ -1394,8 +1394,8 @@ void msrStanza::appendMeasureEndSyllableToStanza (
     ss <<
       "Appending a measure end syllable " <<
       " to stanza " << getStanzaName () <<
-      ", partDrawingMeasurePosition: " <<
-      partDrawingMeasurePosition <<
+      ", partCurrentDrawingMeasurePosition: " <<
+      partCurrentDrawingMeasurePosition <<
       ", fStanzaMeasureCurrentAccumulatedWholeNotesDuration: " <<
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration <<
       ", positionsDelta: " <<

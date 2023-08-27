@@ -48,10 +48,17 @@ EXP void displayMsrScoreNames (
   const S_msrOahGroup& msrOpts,
   const std::string&   passDescription);
 
+//______________________________________________________________________________
+EXP void displayMsrScoreVoicesFlatView (
+  S_msrScore           theMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const std::string&   passDescription);
+
 //_______________________________________________________________________________
-void displayMsrScoreSlices (
-  const S_msrScore&  theMsrScore,
-  const std::string& passDescription);
+void displayMsrScoreMeasuresSlices (
+  const S_msrScore&    theMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const std::string&   passDescription);
 
 // parts
 // ------------------------------------------------------

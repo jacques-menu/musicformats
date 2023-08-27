@@ -165,7 +165,7 @@ void msrPart::initializePart ()
   fPartContainsMultiMeasureRests = false;
 
   // drawing measure position
-  fPartDrawingMeasurePosition = msrWholeNotes (0, 1);
+  fPartCurrentDrawingMeasurePosition = msrWholeNotes (0, 1);
 
   // part shortest note wholeNotes
   fPartShortestNoteWholeNotes = msrWholeNotes (INT_MAX, 1);
@@ -367,7 +367,7 @@ void msrPart::registerStaffInPart (
   } // switch
 }
 
-void msrPart::setPartDrawingMeasurePosition (
+void msrPart::setPartCurrentDrawingMeasurePosition (
   int                  inputLineNumber,
   const msrWholeNotes& measurePosition)
 {
@@ -406,10 +406,10 @@ void msrPart::setPartDrawingMeasurePosition (
       ss.str ());
   }
 
-  fPartDrawingMeasurePosition = measurePosition;
+  fPartCurrentDrawingMeasurePosition = measurePosition;
 }
 
-void msrPart::resetPartDrawingMeasurePosition (
+void msrPart::resetPartCurrentDrawingMeasurePosition (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -427,10 +427,10 @@ void msrPart::resetPartDrawingMeasurePosition (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fPartDrawingMeasurePosition = msrWholeNotes (0, 1);
+  fPartCurrentDrawingMeasurePosition = msrWholeNotes (0, 1);
 }
 
-void msrPart::incrementPartDrawingMeasurePosition (
+void msrPart::incrementPartCurrentDrawingMeasurePosition (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotesDelta)
 {
@@ -451,7 +451,7 @@ void msrPart::incrementPartDrawingMeasurePosition (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fPartDrawingMeasurePosition += wholeNotesDelta;
+  fPartCurrentDrawingMeasurePosition += wholeNotesDelta;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
@@ -459,7 +459,7 @@ void msrPart::incrementPartDrawingMeasurePosition (
 
     ss <<
       "The new part drawing measure position is " <<
-      fPartDrawingMeasurePosition <<
+      fPartCurrentDrawingMeasurePosition <<
       " in part " <<
       getPartCombinedName ();
 
@@ -470,7 +470,7 @@ void msrPart::incrementPartDrawingMeasurePosition (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrPart::decrementPartDrawingMeasurePosition (
+void msrPart::decrementPartCurrentDrawingMeasurePosition (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotesDelta)
 {
@@ -491,7 +491,7 @@ void msrPart::decrementPartDrawingMeasurePosition (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fPartDrawingMeasurePosition.getNumerator () < 0) {
+  if (fPartCurrentDrawingMeasurePosition.getNumerator () < 0) {
     std::stringstream ss;
 
     ss <<
@@ -500,7 +500,7 @@ void msrPart::decrementPartDrawingMeasurePosition (
       " in part " <<
       getPartCombinedName () <<
       " since that sets it to " <<
-      fPartDrawingMeasurePosition <<
+      fPartCurrentDrawingMeasurePosition <<
       ", which is negative " <<
       ", line " << inputLineNumber;
 
@@ -512,7 +512,7 @@ void msrPart::decrementPartDrawingMeasurePosition (
       ss.str ());
   }
 
-  fPartDrawingMeasurePosition -= wholeNotesDelta;
+  fPartCurrentDrawingMeasurePosition -= wholeNotesDelta;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
@@ -520,7 +520,7 @@ void msrPart::decrementPartDrawingMeasurePosition (
 
     ss <<
       "The new part drawing measure position is " <<
-      fPartDrawingMeasurePosition <<
+      fPartCurrentDrawingMeasurePosition <<
       " in part " <<
       getPartCombinedName ();
 
@@ -2744,7 +2744,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 //   const msrWholeNotes& backupStepLength)
 // {
 //   // account for backup in part
-//   decrementPartDrawingMeasurePosition (
+//   decrementPartCurrentDrawingMeasurePosition (
 //     inputLineNumber,
 //     backupStepLength);
 // }
@@ -3444,8 +3444,8 @@ void msrPart::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartDrawingMeasurePosition" << ": " <<
-    fPartDrawingMeasurePosition <<
+    "fPartCurrentDrawingMeasurePosition" << ": " <<
+    fPartCurrentDrawingMeasurePosition <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -4046,8 +4046,8 @@ void msrPart::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartDrawingMeasurePosition" << ": " <<
-    fPartDrawingMeasurePosition <<
+    "fPartCurrentDrawingMeasurePosition" << ": " <<
+    fPartCurrentDrawingMeasurePosition <<
     std::endl;
 
   // print all the staves

@@ -138,6 +138,14 @@ class EXP language : public smartable
     virtual std::string   displayASummaryOfTheSecondMSR () const;
     virtual std::string   displayASummaryOfTheLPSR () const;
 
+    virtual std::string   displayAFlatViewOfTheFirstMSR () const;
+    virtual std::string   displayAFlatViewOfTheSecondMSR () const;
+    virtual std::string   displayAFlatViewOfTheLPSR () const;
+
+    virtual std::string   displayTheSlicesOfTheFirstMSR () const;
+    virtual std::string   displayTheSlicesOfTheSecondMSR () const;
+    virtual std::string   displayTheSlicesOfTheLPSR () const;
+
     virtual std::string   displayTheBSRAsText () const;
     virtual std::string   displayTheFirstBSRAsText () const;
     virtual std::string   displayTheFinalizedBSRAsText () const;

@@ -31,8 +31,8 @@
 
 #include "mxsr2msrTranslator.h"
 
-#include "msr2summaryVisitor.h"
-#include "msr2namesVisitor.h"
+#include "displayMsrSummaryVisitor.h"
+#include "displayMsrNamesVisitor.h"
 
 #include "waeHandlers.h"
 
@@ -153,6 +153,28 @@ void populateMsrSkeletonFromMxsr (
       scoreSkeletonToBePopulated,
       gMsrOahGroup,
       gLanguage->displayTheNamesInTheFirstMSR ());
+  }
+
+  // display the populated MSR score flat view if requested
+  // ------------------------------------------------------
+
+  if (gMsrOahGroup->getDisplayFirstMsrFlatView ()) {
+    // display the score name
+    displayMsrScoreVoicesFlatView (
+      scoreSkeletonToBePopulated,
+      gMsrOahGroup,
+      gLanguage->displayAFlatViewOfTheFirstMSR ());
+  }
+
+  // display the populated MSR score slices if requested
+  // ------------------------------------------------------
+
+  if (gMsrOahGroup->getDisplayFirstMsrMeasuresSlices ()) {
+    // display the score name
+    displayMsrScoreMeasuresSlices (
+      scoreSkeletonToBePopulated,
+      gMsrOahGroup,
+      gLanguage->displayTheSlicesOfTheFirstMSR ());
   }
 }
 

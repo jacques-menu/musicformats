@@ -602,6 +602,30 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
       gLanguage->displayTheNamesInTheLPSR ());
   }
 
+  // display the LPSR flat view if requested
+  // ------------------------------------------------------
+
+  if (gLpsrOahGroup->getDisplayLpsrFlatView ()) {
+    // display the score name
+    displayLpsrScoreFlatView (
+      fResultingLpsr,
+      gMsrOahGroup,
+      gLpsrOahGroup,
+      gLanguage->displayAFlatViewOfTheLPSR ());
+  }
+
+  // display the LPSR slices if requested
+  // ------------------------------------------------------
+
+  if (gLpsrOahGroup->getDisplayLpsrMeasuresSlices ()) {
+    // display the score name
+    displayLpsrScoreSlices (
+      fResultingLpsr,
+      gMsrOahGroup,
+      gLpsrOahGroup,
+      gLanguage->displayTheSlicesOfTheLPSR ());
+  }
+
   // forget about the visited MSR score
   fVisitedMsrScore = nullptr;
 

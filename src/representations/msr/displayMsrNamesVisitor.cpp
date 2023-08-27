@@ -20,7 +20,7 @@
 #include "oahOah.h"
 #include "msrOah.h"
 
-#include "msr2namesVisitor.h"
+#include "displayMsrNamesVisitor.h"
 
 #include "msrBrowsers.h"
 
@@ -31,7 +31,7 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-msr2namesVisitor::msr2namesVisitor (
+displayMsrNamesVisitor::displayMsrNamesVisitor (
   const S_msrOahGroup& msrOpts)
 {
   fMsrOahGroup = msrOpts;
@@ -50,11 +50,11 @@ msr2namesVisitor::msr2namesVisitor (
   fVoicesCounter = 0;
 };
 
-msr2namesVisitor::~msr2namesVisitor ()
+displayMsrNamesVisitor::~displayMsrNamesVisitor ()
 {}
 
 //________________________________________________________________________
-void msr2namesVisitor::printNamesFromMsrScore (
+void displayMsrNamesVisitor::printMsrScoreNames (
   const S_msrScore& score)
 {
   if (score) {
@@ -72,7 +72,7 @@ void msr2namesVisitor::printNamesFromMsrScore (
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrScore& elt)
+void displayMsrNamesVisitor::visitStart (S_msrScore& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -96,7 +96,7 @@ void msr2namesVisitor::visitStart (S_msrScore& elt)
   ++gIndenter;
 }
 
-void msr2namesVisitor::visitEnd (S_msrScore& elt)
+void displayMsrNamesVisitor::visitEnd (S_msrScore& elt)
 {
   --gIndenter;
 
@@ -154,7 +154,7 @@ void msr2namesVisitor::visitEnd (S_msrScore& elt)
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
+void displayMsrNamesVisitor::visitStart (S_msrPartGroup& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -210,7 +210,7 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
     std::endl << std::endl;
 }
 
-void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
+void displayMsrNamesVisitor::visitEnd (S_msrPartGroup& elt)
 {
   --gIndenter;
 
@@ -229,7 +229,7 @@ void msr2namesVisitor::visitEnd (S_msrPartGroup& elt)
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrPart& elt)
+void displayMsrNamesVisitor::visitStart (S_msrPart& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -289,7 +289,7 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
     std::endl << std::endl;
 }
 
-void msr2namesVisitor::visitEnd (S_msrPart& elt)
+void displayMsrNamesVisitor::visitEnd (S_msrPart& elt)
 {
   --gIndenter;
 
@@ -308,7 +308,7 @@ void msr2namesVisitor::visitEnd (S_msrPart& elt)
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrStaff& elt)
+void displayMsrNamesVisitor::visitStart (S_msrStaff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -363,7 +363,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
   fOnGoingStaff = true;
 }
 
-void msr2namesVisitor::visitEnd (S_msrStaff& elt)
+void displayMsrNamesVisitor::visitEnd (S_msrStaff& elt)
 {
   --gIndenter;
 
@@ -384,7 +384,7 @@ void msr2namesVisitor::visitEnd (S_msrStaff& elt)
 }
 
 //________________________________________________________________________
-void msr2namesVisitor::visitStart (S_msrVoice& elt)
+void displayMsrNamesVisitor::visitStart (S_msrVoice& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -428,7 +428,7 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
   gLog << std::endl;
 }
 
-void msr2namesVisitor::visitEnd (S_msrVoice& elt)
+void displayMsrNamesVisitor::visitEnd (S_msrVoice& elt)
 {
   --gIndenter;
 

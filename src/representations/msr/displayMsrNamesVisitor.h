@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msr2namesVisitor___
-#define ___msr2namesVisitor___
+#ifndef ___displayMsrNamesVisitor___
+#define ___displayMsrNamesVisitor___
 
 #include "visitor.h"
 
@@ -23,7 +23,7 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-class EXP msr2namesVisitor :
+class EXP displayMsrNamesVisitor :
 
   public visitor<S_msrScore>,
 
@@ -47,10 +47,10 @@ class EXP msr2namesVisitor :
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msr2namesVisitor (
+                          displayMsrNamesVisitor (
                             const S_msrOahGroup& msrOpts);
 
-    virtual               ~msr2namesVisitor ();
+    virtual               ~displayMsrNamesVisitor ();
 
   public:
 
@@ -58,7 +58,7 @@ class EXP msr2namesVisitor :
     // ------------------------------------------------------
 
 
-    void                  printNamesFromMsrScore (
+    void                  printMsrScoreNames (
                             const S_msrScore& score);
 
   protected:
@@ -114,4 +114,4 @@ class EXP msr2namesVisitor :
 }
 
 
-#endif // ___msr2namesVisitor___
+#endif // ___displayMsrNamesVisitor___

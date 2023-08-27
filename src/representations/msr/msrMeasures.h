@@ -442,7 +442,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendNoteToMeasure (
                             const S_msrNote&     note,
-                            const msrWholeNotes& partDrawingMeasurePosition);
+                            const msrWholeNotes& partCurrentDrawingMeasurePosition);
 
     void                  appendNoteOrPaddingToMeasure (
                             const S_msrNote& note);

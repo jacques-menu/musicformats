@@ -427,7 +427,7 @@ class EXP msrStanza : public msrElement
 
     void                  appendSyllableToStanza (
                             const S_msrSyllable& syllable,
-                            const msrWholeNotes& partDrawingMeasurePosition);
+                            const msrWholeNotes& partCurrentDrawingMeasurePosition);
 
     void                  appendSyllableToStanzaClone (
                             const S_msrSyllable& syllable);
@@ -442,7 +442,7 @@ class EXP msrStanza : public msrElement
 
     void                  appendMeasureEndSyllableToStanza (
                             int                  inputLineNumber,
-                            const msrWholeNotes& partDrawingMeasurePosition);
+                            const msrWholeNotes& partCurrentDrawingMeasurePosition);
 
 //     S_msrSyllable         appendMelismaSyllableToStanza (
 //                             int             inputLineNumber,

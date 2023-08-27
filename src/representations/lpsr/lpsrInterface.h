@@ -52,6 +52,20 @@ EXP void displayLpsrScoreNames (
   const S_lpsrOahGroup&  lpsrOpts,
   const std::string&     passDescription);
 
+//______________________________________________________________________________
+EXP void displayLpsrScoreFlatView (
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
+  const std::string&     passDescription);
+
+//______________________________________________________________________________
+EXP void displayLpsrScoreSlices (
+  const S_lpsrScore&     theLpsrScore,
+  const S_msrOahGroup&   msrOpts,
+  const S_lpsrOahGroup&  lpsrOpts,
+  const std::string&     passDescription);
+
 
 }
 

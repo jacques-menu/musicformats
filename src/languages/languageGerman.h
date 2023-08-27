@@ -95,6 +95,14 @@ class EXP languageGerman : public language
 //     virtual std::string   displayASummaryOfTheFirstMSR () const override;
 //     virtual std::string   displayASummaryOfTheSecondMSR () const override;
 //
+//     virtual std::string   displayAFlatViewOfTheFirstMSR () const override;
+//     virtual std::string   displayAFlatViewOfTheSecondMSR () const override;
+//     virtual std::string   displayAFlatViewOfTheLPSR () const override;
+
+//     virtual std::string   displayTheSlicesOfTheFirstMSR () const override;
+//     virtual std::string   displayTheSlicesOfTheSecondMSR () const override;
+//     virtual std::string   displayTheSlicesOfTheLPSR () const override;
+
 //     // timing
 //
 //     virtual std::string   timingInformation () const override;

@@ -260,23 +260,23 @@ class EXP msrPart : public msrPartGroupElement
 
     // part drawing measure position
 
-    void                  setPartDrawingMeasurePosition (
+    void                  setPartCurrentDrawingMeasurePosition (
                             int                  inputLineNumber,
                             const msrWholeNotes& measurePosition);
 
-    void                  resetPartDrawingMeasurePosition (
+    void                  resetPartCurrentDrawingMeasurePosition (
                             int inputLineNumber);
 
-    void                  incrementPartDrawingMeasurePosition (
+    void                  incrementPartCurrentDrawingMeasurePosition (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta);
 
-    void                  decrementPartDrawingMeasurePosition (
+    void                  decrementPartCurrentDrawingMeasurePosition (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta);
 
-    msrWholeNotes         getPartDrawingMeasurePosition () const
-                              { return fPartDrawingMeasurePosition; }
+    msrWholeNotes         getPartCurrentDrawingMeasurePosition () const
+                              { return fPartCurrentDrawingMeasurePosition; }
 
     // part shortest note
 
@@ -749,9 +749,9 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrStaffDetails     fCurrentPartStaffDetails;
 
-    // drawing measure position, for mxsr2msr
+    // current drawing measure position, for mxsr2msr
 
-    msrWholeNotes         fPartDrawingMeasurePosition;
+    msrWholeNotes         fPartCurrentDrawingMeasurePosition;
 };
 typedef SMARTP<msrPart> S_msrPart;
 EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);

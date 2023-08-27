@@ -20,7 +20,7 @@
 #include "oahOah.h"
 #include "msrOah.h"
 
-#include "msr2summaryVisitor.h"
+#include "displayMsrSummaryVisitor.h"
 
 #include "msrBrowsers.h"
 
@@ -31,7 +31,7 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-msr2summaryVisitor::msr2summaryVisitor (
+displayMsrSummaryVisitor::displayMsrSummaryVisitor (
   const S_msrOahGroup& msrOpts)
 {
   fMsrOahGroup = msrOpts;
@@ -54,7 +54,7 @@ msr2summaryVisitor::msr2summaryVisitor (
 
   // notes
   fScoreUnpitchedNotesCounter     = 0;
-  fScoreRegularNotesCounter    = 0;
+  fScoreRegularNotesCounter       = 0;
   fScoreRestNotesCounter          = 0;
   fScoreSkipNotesCounter          = 0;
   fScoreDoubleTremoloNotesCounter = 0;
@@ -69,11 +69,11 @@ msr2summaryVisitor::msr2summaryVisitor (
   fScoreTupletsCounter            = 0;
 };
 
-msr2summaryVisitor::~msr2summaryVisitor ()
+displayMsrSummaryVisitor::~displayMsrSummaryVisitor ()
 {}
 
 //________________________________________________________________________
-void msr2summaryVisitor::printSummaryFromMsrScore (
+void displayMsrSummaryVisitor::printMsrScoreSummary (
   const S_msrScore& score)
 {
   if (score) {
@@ -91,7 +91,7 @@ void msr2summaryVisitor::printSummaryFromMsrScore (
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrScore& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrScore& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -107,7 +107,7 @@ void msr2summaryVisitor::visitStart (S_msrScore& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   gLog <<
-    "MSR contents summary of \"" <<
+    "MSR summary of \"" <<
     gServiceRunData->getInputSourceName () <<
     "\":" <<
     std::endl << std::endl;
@@ -115,7 +115,7 @@ void msr2summaryVisitor::visitStart (S_msrScore& elt)
   ++gIndenter;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrScore& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrScore& elt)
 {
   --gIndenter;
 
@@ -265,7 +265,7 @@ void msr2summaryVisitor::visitEnd (S_msrScore& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrPartGroup& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -347,7 +347,7 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
     std::endl << std::endl;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrPartGroup& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrPartGroup& elt)
 {
   --gIndenter;
 
@@ -366,7 +366,7 @@ void msr2summaryVisitor::visitEnd (S_msrPartGroup& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrPart& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrPart& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -434,7 +434,7 @@ void msr2summaryVisitor::visitStart (S_msrPart& elt)
     std::endl << std::endl;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrPart& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrPart& elt)
 {
   --gIndenter;
 
@@ -453,7 +453,7 @@ void msr2summaryVisitor::visitEnd (S_msrPart& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrStaff& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrStaff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -508,7 +508,7 @@ void msr2summaryVisitor::visitStart (S_msrStaff& elt)
   fOnGoingStaff = true;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrStaff& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrStaff& elt)
 {
   --gIndenter;
 
@@ -529,7 +529,7 @@ void msr2summaryVisitor::visitEnd (S_msrStaff& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrVoice& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrVoice& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -587,7 +587,7 @@ void msr2summaryVisitor::visitStart (S_msrVoice& elt)
   // don't show fVoiceMuteStanza in the summary
 }
 
-void msr2summaryVisitor::visitEnd (S_msrVoice& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrVoice& elt)
 {
   --gIndenter;
 
@@ -606,7 +606,7 @@ void msr2summaryVisitor::visitEnd (S_msrVoice& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrStanza& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrStanza& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -641,7 +641,7 @@ void msr2summaryVisitor::visitStart (S_msrStanza& elt)
     std::endl << std::endl;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrStanza& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrStanza& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -658,7 +658,7 @@ void msr2summaryVisitor::visitEnd (S_msrStanza& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrSyllable& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrSyllable& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -674,7 +674,7 @@ void msr2summaryVisitor::visitStart (S_msrSyllable& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrSyllable& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrSyllable& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -691,7 +691,7 @@ void msr2summaryVisitor::visitEnd (S_msrSyllable& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrClef& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrClef& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -713,7 +713,7 @@ void msr2summaryVisitor::visitStart (S_msrClef& elt)
   }
 }
 
-void msr2summaryVisitor::visitEnd (S_msrClef& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrClef& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -730,7 +730,7 @@ void msr2summaryVisitor::visitEnd (S_msrClef& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrKey& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrKey& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -752,7 +752,7 @@ void msr2summaryVisitor::visitStart (S_msrKey& elt)
   }
 }
 
-void msr2summaryVisitor::visitEnd (S_msrKey& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrKey& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -769,7 +769,7 @@ void msr2summaryVisitor::visitEnd (S_msrKey& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrTimeSignature& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrTimeSignature& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -791,7 +791,7 @@ void msr2summaryVisitor::visitStart (S_msrTimeSignature& elt)
   }
 }
 
-void msr2summaryVisitor::visitEnd (S_msrTimeSignature& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrTimeSignature& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -809,7 +809,7 @@ void msr2summaryVisitor::visitEnd (S_msrTimeSignature& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrTempo& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrTempo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -831,7 +831,7 @@ void msr2summaryVisitor::visitStart (S_msrTempo& elt)
     std::endl;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrTempo& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrTempo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -849,7 +849,7 @@ void msr2summaryVisitor::visitEnd (S_msrTempo& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrSegment& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrSegment& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -865,7 +865,7 @@ void msr2summaryVisitor::visitStart (S_msrSegment& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrSegment& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrSegment& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -882,7 +882,7 @@ void msr2summaryVisitor::visitEnd (S_msrSegment& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrArticulation& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrArticulation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -898,7 +898,7 @@ void msr2summaryVisitor::visitStart (S_msrArticulation& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrArticulation& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrArticulation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -915,7 +915,7 @@ void msr2summaryVisitor::visitEnd (S_msrArticulation& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrDynamic& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrDynamic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -931,7 +931,7 @@ void msr2summaryVisitor::visitStart (S_msrDynamic& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrDynamic& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrDynamic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -948,7 +948,7 @@ void msr2summaryVisitor::visitEnd (S_msrDynamic& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrCrescDecresc& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrCrescDecresc& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -964,7 +964,7 @@ void msr2summaryVisitor::visitStart (S_msrCrescDecresc& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrCrescDecresc& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrCrescDecresc& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -981,7 +981,7 @@ void msr2summaryVisitor::visitEnd (S_msrCrescDecresc& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrWedge& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrWedge& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -997,7 +997,7 @@ void msr2summaryVisitor::visitStart (S_msrWedge& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrWedge& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrWedge& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1014,7 +1014,7 @@ void msr2summaryVisitor::visitEnd (S_msrWedge& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrGraceNotesGroup& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrGraceNotesGroup& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1030,7 +1030,7 @@ void msr2summaryVisitor::visitStart (S_msrGraceNotesGroup& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1047,7 +1047,7 @@ void msr2summaryVisitor::visitEnd (S_msrGraceNotesGroup& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrNote& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrNote& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1100,7 +1100,7 @@ void msr2summaryVisitor::visitStart (S_msrNote& elt)
   } // switch
 }
 
-void msr2summaryVisitor::visitEnd (S_msrNote& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrNote& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1146,7 +1146,7 @@ void msr2summaryVisitor::visitEnd (S_msrNote& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrStem& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrStem& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1162,7 +1162,7 @@ void msr2summaryVisitor::visitStart (S_msrStem& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrStem& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrStem& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1179,7 +1179,7 @@ void msr2summaryVisitor::visitEnd (S_msrStem& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrBeam& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrBeam& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1195,7 +1195,7 @@ void msr2summaryVisitor::visitStart (S_msrBeam& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrBeam& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrBeam& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1212,7 +1212,7 @@ void msr2summaryVisitor::visitEnd (S_msrBeam& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrChord& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrChord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1230,7 +1230,7 @@ void msr2summaryVisitor::visitStart (S_msrChord& elt)
   ++fScoreChordsCounter;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrChord& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrChord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1247,7 +1247,7 @@ void msr2summaryVisitor::visitEnd (S_msrChord& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrTuplet& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrTuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1265,7 +1265,7 @@ void msr2summaryVisitor::visitStart (S_msrTuplet& elt)
   ++fScoreTupletsCounter;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrTuplet& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrTuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1282,7 +1282,7 @@ void msr2summaryVisitor::visitEnd (S_msrTuplet& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrSlur& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrSlur& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1298,7 +1298,7 @@ void msr2summaryVisitor::visitStart (S_msrSlur& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrSlur& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrSlur& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1315,7 +1315,7 @@ void msr2summaryVisitor::visitEnd (S_msrSlur& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrBarLine& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrBarLine& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1331,7 +1331,7 @@ void msr2summaryVisitor::visitStart (S_msrBarLine& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrBarLine& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrBarLine& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1348,7 +1348,7 @@ void msr2summaryVisitor::visitEnd (S_msrBarLine& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrBarNumberCheck& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrBarNumberCheck& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1364,7 +1364,7 @@ void msr2summaryVisitor::visitStart (S_msrBarNumberCheck& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1381,7 +1381,7 @@ void msr2summaryVisitor::visitEnd (S_msrBarNumberCheck& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrLineBreak& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrLineBreak& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1397,7 +1397,7 @@ void msr2summaryVisitor::visitStart (S_msrLineBreak& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrLineBreak& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrLineBreak& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1414,7 +1414,7 @@ void msr2summaryVisitor::visitEnd (S_msrLineBreak& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrRepeat& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrRepeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1430,7 +1430,7 @@ void msr2summaryVisitor::visitStart (S_msrRepeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrRepeat& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrRepeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1447,7 +1447,7 @@ void msr2summaryVisitor::visitEnd (S_msrRepeat& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrScaling& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrScaling& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1466,7 +1466,7 @@ void msr2summaryVisitor::visitStart (S_msrScaling& elt)
     elt;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrScaling& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrScaling& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1483,7 +1483,7 @@ void msr2summaryVisitor::visitEnd (S_msrScaling& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrPageLayout& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrPageLayout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1501,7 +1501,7 @@ void msr2summaryVisitor::visitStart (S_msrPageLayout& elt)
   gLog << elt << std::endl;
 }
 
-void msr2summaryVisitor::visitEnd (S_msrPageLayout& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrPageLayout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1518,7 +1518,7 @@ void msr2summaryVisitor::visitEnd (S_msrPageLayout& elt)
 }
 
 //________________________________________________________________________
-void msr2summaryVisitor::visitStart (S_msrMidiTempo& elt)
+void displayMsrSummaryVisitor::visitStart (S_msrMidiTempo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1534,7 +1534,7 @@ void msr2summaryVisitor::visitStart (S_msrMidiTempo& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msr2summaryVisitor::visitEnd (S_msrMidiTempo& elt)
+void displayMsrSummaryVisitor::visitEnd (S_msrMidiTempo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {

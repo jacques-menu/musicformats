@@ -438,6 +438,54 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //            +
 //        gLanguage->fullVersion ());
 //     }
+//
+// 		// display the LPSR score summary if requested
+// 		// ------------------------------------------------------
+//
+// 		if (gLpsrOahGroup->getDisplayLpsrSummary ()) {
+// 			// display the score summary
+// 			displayLpsrScoreSummary (
+// 				fResultingLpsr,
+// 				gMsrOahGroup,
+// 				gLpsrOahGroup,
+// 				gLanguage->displayASummaryOfTheLPSR ());
+// 		}
+//
+// 		// display the LPSR score names if requested
+// 		// ------------------------------------------------------
+//
+// 		if (gLpsrOahGroup->getDisplayLpsrNames ()) {
+// 			// display the score name
+// 			displayLpsrScoreNames (
+// 				fResultingLpsr,
+// 				gMsrOahGroup,
+// 				gLpsrOahGroup,
+// 				gLanguage->displayTheNamesInTheLPSR ());
+// 		}
+//
+// 		// display the LPSR flat view if requested
+// 		// ------------------------------------------------------
+//
+// 		if (gLpsrOahGroup->getDisplayLpsrFlatView ()) {
+// 			// display the score name
+// 			displayLpsrScoreFlatView (
+// 				fResultingLpsr,
+// 				gMsrOahGroup,
+// 				gLpsrOahGroup,
+// 				gLanguage->displayAFlatViewOfTheLPSR ());
+// 		}
+//
+// 		// display the LPSR slices if requested
+// 		// ------------------------------------------------------
+//
+// 		if (gLpsrOahGroup->getDisplayLpsrMeasuresSlices ()) {
+// 			// display the score name
+// 			displayLpsrScoreSlices (
+// 				fResultingLpsr,
+// 				gMsrOahGroup,
+// 				gLpsrOahGroup,
+// 				gLanguage->displayTheSlicesOfTheLPSR ());
+// 		}
 //   }
 //
 //   {

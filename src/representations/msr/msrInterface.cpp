@@ -18,8 +18,10 @@
 #include "mfServices.h"
 #include "mfTiming.h"
 
-#include "msr2namesVisitor.h"
-#include "msr2summaryVisitor.h"
+#include "displayMsrVoicesFlatViewVisitor.h"
+#include "displayMsrNamesVisitor.h"
+#include "displayMsrMeasuresSlicesVisitor.h"
+#include "displayMsrSummaryVisitor.h"
 
 #include "msrWae.h"
 
@@ -251,18 +253,16 @@ void displayMsrScoreSummary (
     std::endl <<
     gTab <<
     gLanguage->passOptional () << ": "<< passDescription <<
-    ", " <<
-    gLanguage->summary () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
 
-  // create an msr2summaryVisitor visitor
-  msr2summaryVisitor
+  // create an displayMsrSummaryVisitor visitor
+  displayMsrSummaryVisitor
     summaryVisitor (
       msrOpts);
 
-  summaryVisitor.printSummaryFromMsrScore (
+  summaryVisitor.printMsrScoreSummary (
     theMsrScore);
 
   // register time spent
@@ -308,12 +308,12 @@ void displayMsrScoreNames (
     separator <<
     std::endl << std::endl;
 
-  // create an msr2namesVisitor visitor
-  msr2namesVisitor
+  // create an displayMsrNamesVisitor visitor
+  displayMsrNamesVisitor
     namesVisitor (
       msrOpts);
 
-  namesVisitor.printNamesFromMsrScore (
+  namesVisitor.printMsrScoreNames (
     theMsrScore);
 
   // register time spent
@@ -328,9 +328,10 @@ void displayMsrScoreNames (
 }
 
 //_______________________________________________________________________________
-void displayMsrScoreSlices (
-  const S_msrScore&  theMsrScore,
-  const std::string& passDescription)
+void displayMsrScoreVoicesFlatView (
+  S_msrScore           theMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const std::string&   passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -354,16 +355,68 @@ void displayMsrScoreSlices (
     std::endl <<
     gTab <<
     gLanguage->passOptional () << ": "<< passDescription <<
-    ", " <<
-    gLanguage->slices () <<
     std::endl <<
     separator <<
     std::endl << std::endl;
 
-  theMsrScore->printSlices (gLog);
+  // create an displayMsrVoicesFlatViewVisitor visitor
+  displayMsrVoicesFlatViewVisitor
+    voicesFlatViewVisitor (
+      msrOpts);
+
+  voicesFlatViewVisitor.printMsrScoreVoicesFlatView (
+    theMsrScore);
+
+  // register time spent
+  clock_t endClock = clock ();
+
+  gGlobalTimingItemsList.appendTimingItem (
+    mfPassIDKind::kMfPassID_DisplayPass,
+    passDescription,
+    mfTimingItemKind::kOptional,
+    startClock,
+    endClock);
+}
+
+//_______________________________________________________________________________
+void displayMsrScoreMeasuresSlices (
+  const S_msrScore&    theMsrScore,
+  const S_msrOahGroup& msrOpts,
+  const std::string&   passDescription)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    theMsrScore != nullptr,
+    "theMsrScore is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // start the clock
+  clock_t startClock = clock ();
+
+  setGlobalCurrentPassIDKind (mfPassIDKind::kMfPassID_DisplayPass);
+
+  std::string separator =
+    "%--------------------------------------------------------------";
 
   gLog <<
+    std::endl <<
+    separator <<
+    std::endl <<
+    gTab <<
+    gLanguage->passOptional () << ": "<< passDescription <<
+    std::endl <<
+    separator <<
     std::endl << std::endl;
+
+  // create an displayMsrMeasuresSlicesVisitor visitor
+  displayMsrMeasuresSlicesVisitor
+    measuresSlicesVisitor (
+      msrOpts);
+
+  measuresSlicesVisitor.printMsrScoreMeasuresSlices (
+    theMsrScore);
 
   // register time spent
   clock_t endClock = clock ();

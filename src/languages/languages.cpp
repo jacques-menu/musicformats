@@ -460,6 +460,32 @@ std::string language::displayASummaryOfTheLPSR () const
   return "Display a summary of the LPSR";
 }
 
+std::string language::displayAFlatViewOfTheFirstMSR () const
+{
+  return "Display a voices flat view of the first MSR";
+}
+std::string language::displayAFlatViewOfTheSecondMSR () const
+{
+  return "Display  a voices flat view of the second MSR";
+}
+std::string language::displayAFlatViewOfTheLPSR () const
+{
+  return "Display  a voices flat view of the LPSR";
+}
+
+std::string language::displayTheSlicesOfTheFirstMSR () const
+{
+  return "Display the measures slices of the first MSR";
+}
+std::string language::displayTheSlicesOfTheSecondMSR () const
+{
+  return "Display the measures slices of the second MSR";
+}
+std::string language::displayTheSlicesOfTheLPSR () const
+{
+  return "Display the measures slices of the LPSR";
+}
+
 std::string language::displayTheBSRAsText () const
 {
   return "Display the BSR as text";

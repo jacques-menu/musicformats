@@ -435,6 +435,10 @@ class EXP lpsrScore : public lpsrElement
 
     void                  printNames (std::ostream& os) const;
 
+    void                  printFlatView (std::ostream& os) const;
+
+    void                  printSlices (std::ostream& os) const;
+
   private:
 
     // private fields

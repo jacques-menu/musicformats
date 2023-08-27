@@ -139,10 +139,10 @@
 				</notations>
 				<lyric number='1' name='verse' default-y='-80'>
 					<syllabic>end</syllabic>
-					<text>ro</text>
+					<text>r</text>
 					<elision>‿</elision>
 					<syllabic>begin</syllabic>
-					<text>in</text>
+					<text>n</text>
 					<extend/>
 				</lyric>
 			</note>

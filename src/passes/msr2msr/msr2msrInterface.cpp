@@ -179,6 +179,28 @@ S_msrScore translateMsrToMsr (
       gLanguage->displayTheNamesInTheSecondMSR ());
   }
   return resultingNewMsrScore;
+
+  // display the populated MSR score flat view if requested
+  // ------------------------------------------------------
+
+  if (gMsrOahGroup->getDisplaySecondMsrFlatView ()) {
+    // display the score name
+    displayMsrScoreVoicesFlatView (
+      resultingNewMsrScore,
+      gMsrOahGroup,
+      gLanguage->displayAFlatViewOfTheSecondMSR ());
+  }
+
+  // display the populated MSR score slices if requested
+  // ------------------------------------------------------
+
+  if (gMsrOahGroup->getDisplaySecondMsrMeasuresSlices ()) {
+    // display the score name
+    displayMsrScoreMeasuresSlices (
+      resultingNewMsrScore,
+      gMsrOahGroup,
+      gLanguage->displayTheSlicesOfTheSecondMSR ());
+  }
 }
 
 //_______________________________________________________________________________

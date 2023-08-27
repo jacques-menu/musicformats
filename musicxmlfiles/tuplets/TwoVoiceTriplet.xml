@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<!DOCTYPE score-partwise PUBLIC '-//Recordare//DTD MusicXML 3.0 Partwise//EN' 'http://www.musicxml.org/dtds/partwise.dtd'>
+<score-partwise version='3.0'>
+  <work>
+    <work-title>Two Voice Triplet</work-title>
+    </work>
+  <movement-title>Two Voice Triplet</movement-title>
+	<part-list>
+		<score-part id='P1'>
+			<part-name print-object='no'>[Unnamed (treble staff)]</part-name>
+			<score-instrument id='P1-I1'>
+				<instrument-name></instrument-name>
+				<instrument-sound>keyboard.piano.grand</instrument-sound>
+			</score-instrument>
+			<midi-instrument id='P1-I1'>
+				<volume>79</volume>
+				<pan>0</pan>
+			</midi-instrument>
+		</score-part>
+	</part-list>
+<!--=========================================================-->
+	<part id='P1'>
+		<measure number='1'>
+			<print>
+				<system-layout>
+					<top-system-distance>181.5625</top-system-distance>
+				</system-layout>
+				<staff-layout>
+					<?DoletSibelius ExtraSpacesAbove=3?>
+				</staff-layout>
+				<measure-layout>
+					<measure-distance>50</measure-distance>
+				</measure-layout>
+			</print>
+			<attributes>
+				<divisions>768</divisions>
+				<key>
+					<fifths>0</fifths>
+					<mode>major</mode>
+				</key>
+				<time>
+					<beats>2</beats>
+					<beat-type>4</beat-type>
+				</time>
+				<clef>
+					<sign>G</sign>
+					<line>2</line>
+				</clef>
+			</attributes>
+			<note>
+				<pitch>
+					<step>D</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>256</duration>
+				<voice>1</voice>
+				<type>eighth</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>up</stem>
+				<beam number='1'>begin</beam>
+				<notations>
+					<tuplet number='1' type='start'/>
+				</notations>
+			</note>
+			<backup>
+				<duration>256</duration> <!-- back to where D was drawn -->
+			</backup>
+			<note>
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>2</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+			<backup>
+				<duration>512</duration> <!-- back to the right of where D was drawn -->
+			</backup>
+			<note>
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>256</duration>
+				<voice>1</voice>
+				<type>eighth</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>up</stem>
+				<beam number='1'>continue</beam>
+			</note>
+			<note>
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>256</duration>
+				<voice>1</voice>
+				<type>eighth</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>up</stem>
+				<beam number='1'>end</beam>
+				<notations>
+					<tuplet number='1' type='stop'/>
+				</notations>
+			</note>
+			<note>
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+			</note>
+			<backup>
+				<duration>768</duration><!-- back to where E was drawn -->
+			</backup>
+			<note>
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>2</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+			<barline location='right'>
+				<bar-style>light-heavy</bar-style>
+			</barline>
+		</measure>
+	</part>
+<!--=========================================================-->
+</score-partwise>

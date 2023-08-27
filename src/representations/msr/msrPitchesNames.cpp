@@ -94,7 +94,7 @@ std::map<msrQuarterTonesPitchKind, std::string> pArabicPitchesNamesMap;
 void initializeNederlandsPitchesNamesMap ()
 {
   // nederlands
-  pNederlandsPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pNederlandsPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pNederlandsPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pNederlandsPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -173,7 +173,7 @@ void initializeNederlandsPitchesNamesMap ()
 void initializeCatalanPitchesNamesMap ()
 {
   // catalan
-  pCatalanPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pCatalanPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pCatalanPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pCatalanPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -252,7 +252,7 @@ void initializeCatalanPitchesNamesMap ()
 void initializeDeutschPitchesNamesMap ()
 {
   // deutsch
-  pDeutschPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pDeutschPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pDeutschPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pDeutschPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -331,7 +331,7 @@ void initializeDeutschPitchesNamesMap ()
 void initializeEnglishPitchesNamesMap ()
 {
   // english
-  pEnglishPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pEnglishPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pEnglishPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pEnglishPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -410,7 +410,7 @@ void initializeEnglishPitchesNamesMap ()
 void initializeEspanolPitchesNamesMap ()
 {
   // espanol
-  pEspanolPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pEspanolPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pEspanolPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pEspanolPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -489,7 +489,7 @@ void initializeEspanolPitchesNamesMap ()
 void initializeFrancaisPitchesNamesMap ()
 {
   // francais
-  pFrancaisPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pFrancaisPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pFrancaisPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pFrancaisPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -568,7 +568,7 @@ void initializeFrancaisPitchesNamesMap ()
 void initializeItalianoPitchesNamesMap ()
 {
   // italiano
-  pItalianoPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pItalianoPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pItalianoPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pItalianoPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -769,7 +769,7 @@ void initializeNorskPitchesNamesMap ()
 */
 
   // norsk
-  pNorskPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pNorskPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pNorskPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pNorskPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -848,7 +848,7 @@ void initializeNorskPitchesNamesMap ()
 void initializePortuguesPitchesNamesMap ()
 {
   // portugues
-  pPortuguesPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pPortuguesPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pPortuguesPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pPortuguesPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -1004,7 +1004,7 @@ void initializeSuomiPitchesNamesMap ()
               ))
 */
   // suomi
-  pSuomiPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pSuomiPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pSuomiPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pSuomiPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -1156,7 +1156,7 @@ void initializeSvenskaPitchesNamesMap ()
                 ))
 */
   // svenska
-  pSvenskaPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pSvenskaPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pSvenskaPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pSvenskaPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -1308,7 +1308,7 @@ void initializeVlaamsPitchesNamesMap ()
                ))
 */
   // vlaams
-  pVlaamsPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pVlaamsPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pVlaamsPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pVlaamsPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
@@ -1479,7 +1479,7 @@ void initializeArabicPitchesNamesMap ()
     ))
 */
   // arabic
-  pArabicPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]       = "kQTP_UNKNOWN_"; // JMI
+  pArabicPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_UNKNOWN_]      = "kQTP_UNKNOWN_"; // JMI
   pArabicPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Rest]          = "r";
   pArabicPitchesNamesMap [msrQuarterTonesPitchKind::kQTP_Skip]          = "s";
 
