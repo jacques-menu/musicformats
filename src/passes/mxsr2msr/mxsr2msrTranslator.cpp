@@ -24515,11 +24515,17 @@ S_msrNote mxsr2msrTranslator::createNote (
   int inputLineNumber)
 {
   // determine quarter tones note pitch
-  fCurrentNoteQuarterTonesPitchKind =
-    quarterTonesPitchKindFromDiatonicPitchAndAlteration (
-      inputLineNumber,
-      fCurrentNoteDiatonicPitchKind,
-      fCurrentNoteAlterationKind);
+  if (fCurrentNoteIsARest) { // JMI v0.9.70
+    fCurrentNoteQuarterTonesPitchKind =
+      msrQuarterTonesPitchKind::kQTP_Skip;
+  }
+  else {
+    fCurrentNoteQuarterTonesPitchKind =
+      quarterTonesPitchKindFromDiatonicPitchAndAlteration (
+        inputLineNumber,
+        fCurrentNoteDiatonicPitchKind,
+        fCurrentNoteAlterationKind);
+  }
 
   // determine quarter tones note display pitch
   fCurrentNoteQuarterTonesDisplayPitchKind =
@@ -25126,7 +25132,7 @@ Bool mxsr2msrTranslator::isThereAStaffChange (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handlePendingTupletStops (
+void mxsr2msrTranslator::handlePendingTupletStops ( // UNUSED JMI v0.9.70
   int              inputLineNumber,
   const S_msrNote& note)
 {
@@ -27246,7 +27252,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
         // choose the syllable kind
         msrSyllableKind
           syllableKind =
-            fCurrentNoteIsARest
+            fCurrentNoteIsARest // JMI ??? v0.9.70
               ? msrSyllableKind::kSyllableSkipOnRestNote
               : msrSyllableKind::kSyllableSkipOnNonRestNote;
 

@@ -184,7 +184,7 @@ class EXP msrWholeNotes
 
     std::string           asString () const;
 
-    std::string           asMsrString () const;
+    std::string           pitchAndOctaveAsString () const;
 
 //     std::string           asFractionString () const;
 
@@ -223,16 +223,16 @@ EXP msrNotesDurationKind wholeNotesAsNotesDurationKind (msrWholeNotes wholeNotes
 EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_;
 
 //______________________________________________________________________________
-std::string wholeNotesAndDotsNumberAsMsrString ( // JMI v0.9.67
+std::string wholeNotesAndDotsNumberpitchAndOctaveAsString ( // JMI v0.9.67
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes,
   int&                 dotsNumber);
 
-std::string wholeNotesAsMsrString (
+std::string wholeNotespitchAndOctaveAsString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes);
 
-std::string multiMeasureRestsWholeNotesAsMsrString (
+std::string multiMeasureRestsWholeNotespitchAndOctaveAsString (
   int                  inputLineNumber, // JMI v0.9.67
   const msrWholeNotes& wholeNotes);
 

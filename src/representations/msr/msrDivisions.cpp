@@ -263,7 +263,7 @@ void msrDivisions::printNotesDurationKindsDivisions (std::ostream& os)
   --gIndenter;
 }
 
-std::string msrDivisions::divisionsAsMsrString (
+std::string msrDivisions::divisionspitchAndOctaveAsString (
   int  inputLineNumber,
   int  divisions,
   int& numberOfDotsNeeded)
@@ -280,7 +280,7 @@ std::string msrDivisions::divisionsAsMsrString (
     std::stringstream ss;
 
     ss <<
-     "--> divisionsAsMsrString ():" <<
+     "--> divisionspitchAndOctaveAsString ():" <<
       std::endl <<
       gTab << std::setw (fieldWidth) <<
       "inputLineNumber" << ": " << inputLineNumber <<
@@ -309,7 +309,7 @@ std::string msrDivisions::divisionsAsMsrString (
 
       ss <<
         "divisions " << divisions <<
-        " could not be handled by divisionsAsMsrString () with:" <<
+        " could not be handled by divisionspitchAndOctaveAsString () with:" <<
         std::endl;
 
       printNotesDurationKindsDivisions (gLog);
@@ -487,7 +487,7 @@ std::string msrDivisions::divisionsAsMsrString (
     std::stringstream ss;
 
     ss <<
-      "<-- divisionsAsMsrString (): returns " << result <<
+      "<-- divisionspitchAndOctaveAsString (): returns " << result <<
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
@@ -499,39 +499,39 @@ std::string msrDivisions::divisionsAsMsrString (
   return result;
 }
 
-std::string msrDivisions::divisionsAsMsrString (
+std::string msrDivisions::divisionspitchAndOctaveAsString (
   int  inputLineNumber,
   int  divisions)
 {
   int numberOfDots; // to be ignored
 
   return
-    divisionsAsMsrString (
+    divisionspitchAndOctaveAsString (
       inputLineNumber,
       divisions,
       numberOfDots);
 }
 
-std::string msrDivisions::tupletDivisionsAsMsrString (
+std::string msrDivisions::tupletDivisionspitchAndOctaveAsString (
   int inputLineNumber,
   int divisions,
   int actualNotes,
   int normalNotes)
 {
   return
-    divisionsAsMsrString (
+    divisionspitchAndOctaveAsString (
       inputLineNumber,
       divisions * actualNotes / normalNotes);
 }
 
-std::string tupletWholeNotesAsMsrString (
+std::string tupletWholeNotespitchAndOctaveAsString (
   int             inputLineNumber,
   const msrWholeNotes& wholeNotes,
   int             actualNotes,
   int             normalNotes)
 {
   return
-    wholeNotesAsMsrString (
+    wholeNotespitchAndOctaveAsString (
       inputLineNumber,
       wholeNotes
         *

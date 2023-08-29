@@ -685,9 +685,9 @@ void msrChord::addAnotherNoteToChord (
   note->setNoteBelongsToAChord ();
 
   // append the note to the measure's notes flat list
-  if (false) // JMI v0.9.66
-  fChordUpLinkToMeasure->
-    appendNoteToMeasureNotesFlatList (note);
+//   if (false) // JMI v0.9.70
+//   fChordUpLinkToMeasure->
+//     appendNoteToMeasureNotesFlatList (note);
 
 /* JMI
   // register note as the last appended one into this voice
@@ -1635,7 +1635,7 @@ std::string msrChord::asStringwithRawDivisions () const
       ss <<
       /* JMI
         note->notePitchAsString () <<
-        note->noteSoundingWholeNotesAsMsrString () <<
+        note->noteSoundingWholeNotespitchAndOctaveAsString () <<
         '[' << note->getNoteOctave () << ']'
         */
 

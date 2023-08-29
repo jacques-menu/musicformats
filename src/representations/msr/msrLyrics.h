@@ -299,7 +299,7 @@ class EXP msrSyllable : public msrMeasureElement
     std::string           syllableUpLinkToNoteAsString () const;
     std::string           syllableUpLinkToNoteAsShortString () const;
 
-    std::string           syllableWholeNotesAsMsrString () const;
+    std::string           syllableWholeNotespitchAndOctaveAsString () const;
 
     std::string           syllableElementsListAsString () const;
 

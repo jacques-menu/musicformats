@@ -81,22 +81,22 @@ class EXP msrDivisions : public msrElement
     void                  printNotesDurationKindsDivisions (std::ostream& os);
 
     // MSR strings
-    std::string           divisionsAsMsrString (
+    std::string           divisionspitchAndOctaveAsString (
                             int  inputLineNumber,
                             int  divisions,
                             int& numberOfDotsNeeded);
 
-    std::string           divisionsAsMsrString (
+    std::string           divisionspitchAndOctaveAsString (
                             int  inputLineNumber,
                             int  divisions);
 
-    std::string           tupletDivisionsAsMsrString (
+    std::string           tupletDivisionspitchAndOctaveAsString (
                             int inputLineNumber,
                             int divisions,
                             int actualNotes,
                             int normalNotes);
 
-    std::string           tupletWholeNotesAsMsrString (
+    std::string           tupletWholeNotespitchAndOctaveAsString (
                             int             inputLineNumber,
                             const msrWholeNotes& wholeNotes,
                             int             actualNotes,

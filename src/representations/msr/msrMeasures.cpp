@@ -1568,10 +1568,10 @@ msrWholeNotes msrMeasure::fetchFullMeasureWholeNotesDuration () const
   return result;
 }
 
-std::string msrMeasure::fullMeasureWholeNotesDurationAsMsrString ()
+std::string msrMeasure::fullMeasureWholeNotesDurationpitchAndOctaveAsString ()
 {
   return
-    wholeNotesAsMsrString (
+    wholeNotespitchAndOctaveAsString (
       fInputStartLineNumber,
       fetchFullMeasureWholeNotesDuration ());
 }
@@ -1682,10 +1682,10 @@ void msrMeasure::incrementMeasureCurrentAccumulatedWholeNotesDuration (
     newMeasureCurrentAccumulatedWholeNotesDuration);
 }
 
-std::string msrMeasure::measureCurrentAccumulatedWholeNotesDurationAsMsrString ()
+std::string msrMeasure::measureCurrentAccumulatedWholeNotesDurationpitchAndOctaveAsString ()
 {
   return
-    wholeNotesAsMsrString (
+    wholeNotespitchAndOctaveAsString (
       fInputStartLineNumber,
       fMeasureCurrentAccumulatedWholeNotesDuration);
 }
@@ -2617,14 +2617,72 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
   appendMeasureElementToMeasure (note);
 
   // append it to the measure notes flat list if relevant
+  Bool doAppendNoteToMeasureNotesFlatList (false);
+
   switch (note->getNoteKind ()) {
-    case msrNoteKind::kNoteSkipInMeasure:
-    case msrNoteKind::kNoteSkipInGraceNotesGroup:
+    case msrNoteKind::kNote_UNKNOWN_:
       break;
 
-    default:
-      appendNoteToMeasureNotesFlatList (note);
+    case msrNoteKind::kNoteRegularInMeasure:
+    case msrNoteKind::kNoteRestInMeasure:
+    case msrNoteKind::kNoteSkipInMeasure:
+      doAppendNoteToMeasureNotesFlatList = true;
+      break;
+
+    case msrNoteKind::kNoteRegularInChord:
+      // the chord itself will be appended to the list
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInMeasure:
+      doAppendNoteToMeasureNotesFlatList = true;
+      break;
+
+    case msrNoteKind::kNoteRegularInTuplet:
+    case msrNoteKind::kNoteRestInTuplet:
+      if (note->getNoteShortcutUpLinkToTuplet ()) {
+      /* JMI
+        result =
+          fNoteShortcutUpLinkToTuplet->
+            fMeasureElementUpLinkToMeasure ()->
+              fetchMeasureUpLinkToVoice ();
+      */
+      }
+
+      doAppendNoteToMeasureNotesFlatList = true;
+      break;
+
+    case msrNoteKind::kNoteInDoubleTremolo:
+      break;
+
+    case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteSkipInGraceNotesGroup:
+    /* JMI
+      if (fNoteShortcutUpLinkToGraceNotesGroup) {
+        result =
+          fNoteShortcutUpLinkToGraceNotesGroup->
+            getGraceNotesGroupUpLinkToVoice ();
+              / * JMI
+              getGraceNotesGroupUpLinkToNote ()->
+              fetchNoteUpLinkToVoice ();
+              * /
+      }
+    */
+      break;
+
+    case msrNoteKind::kNoteInChordInGraceNotesGroup:
+      break;
+
+    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInTuplet:
+      doAppendNoteToMeasureNotesFlatList = true;
+      break;
   } // switch
+
+  if (doAppendNoteToMeasureNotesFlatList) {
+    appendNoteToMeasureNotesFlatList (note);
+  }
 
   // register note as the last one in this measure
   fMeasureLastHandledNote = note;
@@ -6886,35 +6944,35 @@ void msrMeasure::finalizeMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
-    if (fMeasureCurrentAccumulatedWholeNotesDuration.getNumerator () == 0) {
-      std::stringstream ss;
+    if (gTraceOahGroup->getTraceMeasures ()) {
+      if (fMeasureCurrentAccumulatedWholeNotesDuration.getNumerator () == 0) {
+        std::stringstream ss;
 
-      ss <<
-        "Measure " <<
-        this->asShortString () <<
-        " in segment '" <<
-        fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-        "' in voice \"" <<
-        voice->getVoiceName () <<
-        "\", line " << inputLineNumber <<
-        ", doesn't contain any music" <<
-        std::endl;
+        ss <<
+          "Measure " <<
+          this->asShortString () <<
+          " in segment '" <<
+          fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+          "' in voice \"" <<
+          voice->getVoiceName () <<
+          "\", line " << inputLineNumber <<
+          ", doesn't contain any music" <<
+          std::endl;
 
-      msrWarning (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        ss.str ());
+        msrWarning (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          ss.str ());
+      }
     }
-  }
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresDetails ()) {
-    displayMeasure (
-      inputLineNumber,
-      "finalizeMeasureClone() 1");
-  }
+    if (gTraceOahGroup->getTraceMeasuresDetails ()) {
+      displayMeasure (
+        inputLineNumber,
+        "finalizeMeasure() 1");
+    }
 #endif // MF_TRACE_IS_ENABLED
 
     // delegate finalization to voice kind specific methods
@@ -6958,11 +7016,53 @@ void msrMeasure::finalizeMeasure (
     ) {
       S_msrMeasureElement measureElement = (*i);
 
-//       measureElement->
-//         setVoicePosition ( // JMI v0.9.66
-//           voicePosition,
-//           "finalizeMeasure()");
+  //       measureElement->
+  //         setVoicePosition ( // JMI v0.9.66
+  //           voicePosition,
+  //           "finalizeMeasure()");
     } // for
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceVoicesFlatView ()) {
+      // print measure notes flat list // JMI v0.9.70
+      size_t
+        measureNotesFlatListSize =
+          fMeasureNotesFlatList.size ();
+
+      gLog <<
+        "Finalizing measure" <<
+        ", fetchMeasureUpLinkToVoice: " <<
+        fetchMeasureUpLinkToVoice ()->getVoiceName () <<
+        ", fMeasureNumber: " <<
+        fMeasureNumber <<
+        ", fMeasureNotesFlatList: " <<
+        mfSingularOrPlural (
+          measureNotesFlatListSize, "note", "notes") <<
+        ':' <<
+        std::endl;
+
+      if (measureNotesFlatListSize) {
+        ++gIndenter;
+
+        std::list<S_msrNote>::const_iterator
+          iBegin = fMeasureNotesFlatList.begin (),
+          iEnd   = fMeasureNotesFlatList.end (),
+          i      = iBegin;
+        for ( ; ; ) {
+          S_msrNote note = (*i);
+
+          gLog <<
+            note->pitchAndOctaveAsString ();
+
+          if (++i == iEnd) break;
+          gLog << ' ';
+        } // for
+        gLog << std::endl << std::endl;
+
+        --gIndenter;
+      }
+    }
+#endif // MF_TRACE_IS_ENABLED
 
     // register finalization
     fMeasureHasBeenFinalized = true;
@@ -7721,12 +7821,12 @@ void msrMeasure::printFull (std::ostream& os) const
     /* JMI
 
     std::setw (fieldWidth) <<
-    "measureCurrentAccumulatedWholeNotesDurationAsMsrString" << ": " <<
-    measureCurrentAccumulatedWholeNotesDurationAsMsrString () <<
+    "measureCurrentAccumulatedWholeNotesDurationpitchAndOctaveAsString" << ": " <<
+    measureCurrentAccumulatedWholeNotesDurationpitchAndOctaveAsString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fullMeasureWholeNotesDurationAsMsrString" << ": " <<
-    fullMeasureWholeNotesDurationAsMsrString () <<
+    "fullMeasureWholeNotesDurationpitchAndOctaveAsString" << ": " <<
+    fullMeasureWholeNotesDurationpitchAndOctaveAsString () <<
     std::endl <<
       */
 
@@ -7839,6 +7939,8 @@ void msrMeasure::printFull (std::ostream& os) const
     "fMeasureNotesFlatList: " <<
     mfSingularOrPlural (
       measureNotesFlatListSize, "note", "notes") <<
+    ", fetchMeasureUpLinkToVoice: " << fetchMeasureUpLinkToVoice ()->getVoiceName () <<
+    ", fMeasureNumber:" << fMeasureNumber <<
     std::endl;
 
   if (measureNotesFlatListSize) {
@@ -7852,7 +7954,7 @@ void msrMeasure::printFull (std::ostream& os) const
       S_msrNote note = (*i);
 
       os <<
-        note->asShortStringForTimeView ();
+        note->pitchAndOctaveAsString ();
 
       if (++i == iEnd) break;
       os << ' ';

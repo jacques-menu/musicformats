@@ -1435,7 +1435,7 @@ EXP mfIndentedStringStream& operator << (
 }
 
 //_______________________________________________________________________________
-std::string wholeNotesAndDotsNumberAsMsrString (
+std::string wholeNotesAndDotsNumberpitchAndOctaveAsString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes,
   int&                 dotsNumber)
@@ -1445,7 +1445,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     std::stringstream ss;
 
     ss <<
-      "--> wholeNotesAndDotsNumberAsMsrString() 1 -------------------------------------" <<
+      "--> wholeNotesAndDotsNumberpitchAndOctaveAsString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes.asString () <<
       ", line " << inputLineNumber;
 
@@ -1485,7 +1485,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     std::stringstream ss;
 
     ss <<
-      "numerator is not positive in wholeNotesAndDotsNumberAsMsrString()" <<
+      "numerator is not positive in wholeNotesAndDotsNumberpitchAndOctaveAsString()" <<
       ", wholeNotes: " << wholeNotes;
 
    msrError ( // JMI v0.9.70
@@ -1856,7 +1856,7 @@ std::string wholeNotesAndDotsNumberAsMsrString (
     std::stringstream ss;
 
     ss <<
-      "--> wholeNotesAndDotsNumberAsMsrString() 2 -------------------------------------" <<
+      "--> wholeNotesAndDotsNumberpitchAndOctaveAsString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
       ", numeratorDots" << ": " << numeratorDots;
 
@@ -1872,20 +1872,20 @@ std::string wholeNotesAndDotsNumberAsMsrString (
   return result;
 }
 
-std::string wholeNotesAsMsrString (
+std::string wholeNotespitchAndOctaveAsString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
   int dotsNumber; // not used
 
   return
-    wholeNotesAndDotsNumberAsMsrString (
+    wholeNotesAndDotsNumberpitchAndOctaveAsString (
       inputLineNumber,
       wholeNotes,
       dotsNumber);
 }
 
-std::string multiMeasureRestsWholeNotesAsMsrString (
+std::string multiMeasureRestsWholeNotespitchAndOctaveAsString (
   int                  inputLineNumber, // JMI
   const msrWholeNotes& wholeNotes)
 {
@@ -1901,7 +1901,7 @@ std::string multiMeasureRestsWholeNotesAsMsrString (
     wholeNotes.getNumerator ();
 
   ss <<
-    wholeNotesAsMsrString ( // JMI ??? v0.9.66
+    wholeNotespitchAndOctaveAsString ( // JMI ??? v0.9.66
       inputLineNumber,
       wholeNotesUnit);
 

@@ -389,7 +389,7 @@ void msrBassFigure::print (std::ostream& os) const
   if (fFigureUpLinkToPart) { // JMI ???
     ss <<
       ":" <<
-      wholeNotesAsMsrString (
+      wholeNotespitchAndOctaveAsString (
         fInputStartLineNumber,
         fFigureSoundingWholeNotes);
   }
@@ -799,11 +799,11 @@ std::string msrFiguredBass::asString () const
     ", fMeasurePosition: " <<
     fMeasurePosition.asString () <<
     ", fSoundingWholeNotes: " <<
-    wholeNotesAsMsrString (
+    wholeNotespitchAndOctaveAsString (
       fInputStartLineNumber,
       fSoundingWholeNotes) <<
     ", fFiguredBassDisplayWholeNotes: " <<
-    wholeNotesAsMsrString (
+    wholeNotespitchAndOctaveAsString (
       fInputStartLineNumber,
       fFiguredBassDisplayWholeNotes);
 
@@ -868,7 +868,7 @@ std::string msrFiguredBass::asString () const
   if (fFiguredBassUpLinkToPart) { // JMI ???
     ss <<
       ":" <<
-      wholeNotesAsMsrString (
+      wholeNotespitchAndOctaveAsString (
         fInputStartLineNumber,
         fFiguredBassSoundingWholeNotes);
   }
@@ -895,11 +895,11 @@ std::string msrFiguredBass::asShortStringForMeasuresSlices () const
     ", fMeasurePosition: " <<
     fMeasurePosition.asString () <<
     ", fSoundingWholeNotes: " <<
-    wholeNotesAsMsrString (
+    wholeNotespitchAndOctaveAsString (
       fInputStartLineNumber,
       fSoundingWholeNotes) <<
     ", fFiguredBassDisplayWholeNotes: " <<
-    wholeNotesAsMsrString (
+    wholeNotespitchAndOctaveAsString (
       fInputStartLineNumber,
       fFiguredBassDisplayWholeNotes);
 
@@ -963,7 +963,7 @@ std::string msrFiguredBass::asShortStringForMeasuresSlices () const
   if (fFiguredBassUpLinkToPart) { // JMI ???
     ss <<
       ":" <<
-      wholeNotesAsMsrString (
+      wholeNotespitchAndOctaveAsString (
         fInputStartLineNumber,
         fFiguredBassSoundingWholeNotes);
   }

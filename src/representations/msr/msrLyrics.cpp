@@ -734,7 +734,7 @@ void msrSyllable::acceptOut (basevisitor* v)
 void msrSyllable::browseData (basevisitor* v)
 {}
 
-std::string msrSyllable::syllableWholeNotesAsMsrString () const
+std::string msrSyllable::syllableWholeNotespitchAndOctaveAsString () const
 {
   std::string result;
 
@@ -750,7 +750,7 @@ std::string msrSyllable::syllableWholeNotesAsMsrString () const
       case msrNoteKind::kNoteInChordInGraceNotesGroup:
       case msrNoteKind::kNoteRegularInChord:
         result =
-          wholeNotesAsMsrString (
+          wholeNotespitchAndOctaveAsString (
             fInputStartLineNumber,
             fSyllableWholeNotes);
         break;
@@ -765,8 +765,8 @@ std::string msrSyllable::syllableWholeNotesAsMsrString () const
 
           ss <<
             fSyllableUpLinkToNote->
-      // JMI        noteSoundingWholeNotesAsMsrString () <<
-              noteDisplayWholeNotesAsMsrString () <<
+      // JMI        noteSoundingWholeNotespitchAndOctaveAsString () <<
+              noteDisplayWholeNotespitchAndOctaveAsString () <<
             "*" <<
             fSyllableTupletFactor.getTupletNormalNotes () <<
             '/' <<
@@ -780,7 +780,7 @@ std::string msrSyllable::syllableWholeNotesAsMsrString () const
 
   else {
     result =
-      wholeNotesAsMsrString (
+      wholeNotespitchAndOctaveAsString (
         fInputStartLineNumber,
         fSyllableWholeNotes);
   }

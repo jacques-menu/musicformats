@@ -296,7 +296,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // lengthes
 
-    std::string           fullMeasureWholeNotesDurationAsMsrString ();
+    std::string           fullMeasureWholeNotesDurationpitchAndOctaveAsString ();
 
     // backup and padding
 
@@ -711,7 +711,7 @@ class EXP msrMeasure : public msrSegmentElement
                             // this increases when musical elements
                             // are appended to the measure
 
-    std::string           measureCurrentAccumulatedWholeNotesDurationAsMsrString ();
+    std::string           measureCurrentAccumulatedWholeNotesDurationpitchAndOctaveAsString ();
 
     // first measure in voice?
 

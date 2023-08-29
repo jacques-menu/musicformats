@@ -892,7 +892,7 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrNote& elt)
 
   if (noteIsToBeDisplayed) {
     gLog <<
-      elt->asMsrString () << ' ';
+      elt->pitchAndOctaveAsString () << ' ';
   }
 }
 

@@ -72,6 +72,8 @@ class EXP traceOahGroup : public oahGroup
 
     void                  initializeMeasuresTraceOah ();
 
+    void                  initializeVoicesFlatViewTraceOah ();
+
     void                  initializeMeasuresSlicesTraceOah ();
 
     void                  initializeInstrumentsTraceOah ();
@@ -264,6 +266,10 @@ class EXP traceOahGroup : public oahGroup
                               { return fTraceVoiceMoments; }
     void                  setTraceVoiceMoments ()
                               { fTraceVoiceMoments = true; }
+
+    // voices flat view
+    Bool                  getTraceVoicesFlatView () const
+                              { return fTraceVoicesFlatView; }
 
     // measures slices
     Bool                  getTraceMeasuresSlices () const
@@ -906,6 +912,10 @@ class EXP traceOahGroup : public oahGroup
     Bool                  fTraceMeasureMoments;
     Bool                  fTraceVoiceMoments;
 
+    // voices flat view
+    // --------------------------------------
+
+    Bool                  fTraceVoicesFlatView;
 
     // measures slices
     // --------------------------------------

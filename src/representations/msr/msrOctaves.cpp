@@ -319,7 +319,7 @@ std::string msrOctaveKindAsString (msrOctaveKind octaveKind)
 
   switch (octaveKind) {
     case msrOctaveKind::kOctave_UNKNOWN_:
-      result = "*** noOctave ***]";
+      result = "o?";
       break;
     case msrOctaveKind::kOctave0:
       result = "o0";

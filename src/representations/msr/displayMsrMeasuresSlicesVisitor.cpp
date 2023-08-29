@@ -106,31 +106,33 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrScore& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  gLog <<
-    "MSR measures slices of \"" <<
-    gServiceRunData->getInputSourceName () <<
-    "\":" <<
-    std::endl << std::endl;
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    gLog <<
+      "MSR measures slices of \"" <<
+      gServiceRunData->getInputSourceName () <<
+      "\":" <<
+      std::endl << std::endl;
 
-  ++gIndenter;
+    ++gIndenter;
 
-  S_msrMeasuresSlicesSequence
-    scoreMeasuresSlicesSequence =
-      elt->getScoreMeasuresSlicesSequence ();
+    S_msrMeasuresSlicesSequence
+      scoreMeasuresSlicesSequence =
+        elt->getScoreMeasuresSlicesSequence ();
 
-  if (scoreMeasuresSlicesSequence) {
-    scoreMeasuresSlicesSequence->
-      printMeasuresSlicesVector (gLog);
+    if (scoreMeasuresSlicesSequence) {
+      scoreMeasuresSlicesSequence->
+        printMeasuresSlicesVector (gLog);
+    }
+    else {
+      gLog << "[NONE]" << std::endl;
+    }
   }
-  else {
-    gLog << "[NONE]" << std::endl;
-  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrScore& elt)
 {
-  --gIndenter;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -144,12 +146,12 @@ void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrScore& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   gLog <<
-//     "The score contains:" <<
-//     std::endl;
-//
-//   ++gIndenter;
-//
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    --gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
 //   const int fieldWidth = 3;
 //
 //   gLog <<
@@ -292,21 +294,27 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPartGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    size_t partGroupElementsSize =
+      elt->getPartGroupElementsList ().size ();
+
+    gLog <<
+      "PartGroup" << ' ' << elt->getPartGroupCombinedName () <<
+      " contains " <<
+      mfSingularOrPlural (
+        partGroupElementsSize,
+        " part or sub part group",
+        " parts or sub part groups") <<
+      std::endl;
+
+    ++gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
 //   ++fPartGroupsCounter;
 
-//   size_t partGroupElementsSize = elt->getPartGroupElementsList ().size ();
 //
-//   gLog <<
-//     "PartGroup" << ' ' << elt->getPartGroupCombinedName () <<
-//     " contains " <<
-//     mfSingularOrPlural (
-//       partGroupElementsSize,
-//       " part or sub part group",
-//       " parts or sub part groups") <<
-//     std::endl;
-//
-//   ++gIndenter;
-
 //   const int fieldWidth = 24;
 //
 //   gLog << std::left <<
@@ -361,8 +369,6 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPartGroup& elt)
 
 void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrPartGroup& elt)
 {
-//   --gIndenter;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -373,6 +379,12 @@ void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrPartGroup& elt)
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -393,20 +405,25 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    size_t partStavesMapSize =
+      elt->getPartStaveNumbersToStavesMap ().size ();
+
+    gLog <<
+      "Part " << elt->getPartCombinedName () <<
+      " contains " <<
+      mfSingularOrPlural (
+        partStavesMapSize,
+        "staff", "staves") <<
+      std::endl;
+
+    ++gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
 //   ++fPartsCounter;
 
-//   size_t partStavesMapSize = elt->getPartStaveNumbersToStavesMap ().size ();
-//
-//   gLog <<
-//     "Part " << elt->getPartCombinedName () <<
-//     " contains " <<
-//     mfSingularOrPlural (
-//       partStavesMapSize,
-//       "staff", "staves") <<
-//     std::endl;
-//
-//   ++gIndenter;
-//
 //   const int fieldWidth = 28;
 //
 //   gLog << std::left <<
@@ -448,8 +465,6 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPart& elt)
 
 void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrPart& elt)
 {
-//   --gIndenter;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -460,6 +475,12 @@ void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrPart& elt)
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -480,21 +501,26 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrStaff& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    size_t staffAllVoicesVectorSize =
+      elt->getStaffAllVoicesVector ().size ();
+
+    gLog <<
+      "Staff" << ' ' << elt->getStaffName () <<
+      " contains " <<
+      mfSingularOrPlural (
+        staffAllVoicesVectorSize,
+        "voice", "voices") <<
+      std::endl;
+
+    ++gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
 //   ++fStavesCounter;
 
-//   size_t staffAllVoicesVectorSize =
-//     elt->getStaffAllVoicesVector ().size ();
 //
-//   gLog <<
-//     "Staff" << ' ' << elt->getStaffName () <<
-//     " contains " <<
-//     mfSingularOrPlural (
-//       staffAllVoicesVectorSize,
-//       "voice", "voices") <<
-//     std::endl;
-//
-//   ++gIndenter;
-
 //   const int fieldWidth = 27;
 //
 //   // print the staff number
@@ -521,8 +547,6 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrStaff& elt)
 
 void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrStaff& elt)
 {
-//   --gIndenter;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -533,6 +557,12 @@ void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrStaff& elt)
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -555,13 +585,17 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrVoice& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   gLog <<
-//     "Voice " << elt->getVoiceNumber () << ":" <<
-//     std::endl;
-//
-//   ++gIndenter;
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    gLog <<
+      "Voice " << elt->getVoiceNumber () << ":" <<
+      std::endl;
 
-//   ++fVoicesCounter;
+    ++gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+//     ++fVoicesCounter;
 //
 //   size_t voiceStanzasMapSize = elt->getVoiceStanzasMap ().size ();
 //
@@ -613,8 +647,6 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrVoice& elt)
 
 void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrVoice& elt)
 {
-//   --gIndenter;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -625,6 +657,12 @@ void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrVoice& elt)
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    --gIndenter;
   }
 #endif // MF_TRACE_IS_ENABLED
 }
@@ -796,14 +834,18 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrMeasure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   gLog <<
-//     "Measure " << elt->getMeasureNumber () << ":" <<
-//     std::endl;
-//
-//   ++gIndenter;
-//
-//   gLog << gTab;
-//
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    gLog <<
+      "Measure " << elt->getMeasureNumber () << ":" <<
+      std::endl;
+
+    ++gIndenter;
+
+    gLog << gTab;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
 // //   const std::list<S_msrMeasureElement>&
 // //     measureElementsList =
 // //       elt->getMeasureElementsList ();
@@ -827,9 +869,13 @@ void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrMeasure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   --gIndenter;
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+    --gIndenter;
 
-//   gLog << std::endl;
+    gLog << std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -865,7 +911,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrNote& elt)
 //
 //     case msrNoteKind::kNoteRegularInMeasure:
 //       gLog <<
-//         elt->asMsrString () << ' ';
+//         elt->pitchAndOctaveAsString () << ' ';
 //       break;
 //
 //     case msrNoteKind::kNoteInDoubleTremolo:
@@ -878,13 +924,13 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrNote& elt)
 //
 //     case msrNoteKind::kNoteRegularInChord:
 //       gLog <<
-//         elt->asMsrString () << ' ';
+//         elt->pitchAndOctaveAsString () << ' ';
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInTuplet:
 //     case msrNoteKind::kNoteRestInTuplet:
 //       gLog <<
-//         elt->asMsrString () << ' ';
+//         elt->pitchAndOctaveAsString () << ' ';
 //      break;
 //
 //     case msrNoteKind::kNoteInTupletInGraceNotesGroup:

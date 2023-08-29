@@ -917,35 +917,36 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // pitch kind
+    std::string           noteDiatonicPitchKindAsString (
+                            int inputLineNumber) const;
+
     std::string           notePitchAsString () const;
 
     std::string           noteDisplayPitchKindAsString () const;
 
-    // octave kind
-    std::string           bsrNoteOctaveKindAsString () const
-                              {
-                                return
-                                  msrOctaveKindAsString (fNoteOctaveKind);
-                              }
+    // whole notes
+    std::string           noteSoundingWholeNotespitchAndOctaveAsString () const;
+    std::string           noteDisplayWholeNotespitchAndOctaveAsString () const;
 
+    // octave kind
     std::string           noteDisplayOctaveKindAsString () const
                               {
                                 return
                                   msrOctaveKindAsString (fNoteDisplayOctaveKind);
                               }
 
-    // note head
-    std::string           noteDiatonicPitchKindAsString (
-                            int inputLineNumber) const;
+    std::string           bsrNoteOctaveKindAsString () const
+                              {
+                                return
+                                  msrOctaveKindAsString (fNoteOctaveKind);
+                              }
 
-    // whole notes
-    std::string           noteSoundingWholeNotesAsMsrString () const;
-    std::string           noteDisplayWholeNotesAsMsrString () const;
+    // note head
 
     // graphic duration
     std::string           noteGraphicNotesDurationAsMusicXMLString () const;
 
-//     std::string           tupletNoteGraphicNotesDurationAsMsrString ( // JMI v0.9.66
+//     std::string           tupletNoteGraphicNotesDurationpitchAndOctaveAsString ( // JMI v0.9.66
 //                             int actualNotes, int normalNotes) const;
 
     // note as string
@@ -954,7 +955,7 @@ class EXP msrNote : public msrTupletElement
                                 return
                                   notePitchAsString ()
                                     +
-                                noteSoundingWholeNotesAsMsrString ();
+                                noteSoundingWholeNotespitchAndOctaveAsString ();
                               }
 
     std::string           soundingNoteEssentialsAsString () const;
@@ -965,7 +966,7 @@ class EXP msrNote : public msrTupletElement
 
     std::string           noteComplementsAsString () const;
 
-    std::string           asMsrString () const;
+    std::string           pitchAndOctaveAsString () const;
 
     std::string           asString () const override;
     std::string           asShortStringForMeasuresSlices () const override;
@@ -977,7 +978,7 @@ class EXP msrNote : public msrTupletElement
 
     std::string           asMinimalString () const;
 
-    std::string           noteEssentialsAsSting () const;
+    std::string           noteForPrintAsSting () const;
 
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;

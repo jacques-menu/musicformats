@@ -1925,6 +1925,51 @@ R"(Voice moments)",
   // fTraceDetailedMeasureNumbersSet is empty
 }
 
+void traceOahGroup::initializeVoicesFlatViewTraceOah ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Voices flat view",
+        "help-trace-voices-flat-view", "htvoicesflatview",
+R"()",
+      oahElementVisibilityKind::kElementVisibilityWhole,
+      this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // voices flat view
+
+  S_oahTwoBooleansAtomWithTracePasses
+    traceVoicesFlatViewBooleanAtom =
+      oahTwoBooleansAtomWithTracePasses::create (
+        "trace-voices-flat-view", "tvoicesflatview",
+R"(Voices flat view)",
+        "fTraceVoicesFlatView",
+        fTraceVoicesFlatView,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceVoicesFlatViewBooleanAtom);
+
+//   // voices flat view details
+//
+//   S_oahThreeBooleansAtom
+//     traceVoicesFlatViewDetailsBooleanAtom =
+//       oahThreeBooleansAtom::create (
+//         "trace-voices-flat-view-details", "tvoicesflatviewdets",
+// R"(Measures slices details)",
+//         "fTraceVoicesFlatViewDetails",
+//         fTraceVoicesFlatViewDetails,
+//         traceVoicesFlatViewBooleanAtom,
+//         fTracePassesBooleanAtom);
+//
+//   subGroup->
+//     appendAtomToSubGroup (
+//       traceVoicesFlatViewDetailsBooleanAtom);
+}
+
 void traceOahGroup::initializeMeasuresSlicesTraceOah ()
 {
   S_oahSubGroup
@@ -1970,9 +2015,6 @@ R"(Measures slices)",
   subGroup->
     appendAtomToSubGroup (
       traceMeasuresSlicesBooleanAtom);
-//   measuresSlicesMultiplexBooleansAtom->
-//     addBooleanAtom (
-//       traceMeasuresSlicesBooleanAtom);
 
   // measures slices details
 
@@ -1989,12 +2031,9 @@ R"(Measures slices details)",
   subGroup->
     appendAtomToSubGroup (
       traceMeasuresSlicesDetailsBooleanAtom);
-//   measuresSlicesMultiplexBooleansAtom->
-//     addBooleanAtom (
-//       traceMeasuresSlicesDetailsBooleanAtom);
 }
 
-void traceOahGroup::initializeBooksToVoicesTraceOah ()
+void traceOahGroup::initializeBooksToVoicesTraceOah () // RENAME for books and stores? JMI v0.9.70
 {
   S_oahSubGroup
     subGroup =
@@ -2684,6 +2723,9 @@ void traceOahGroup::initializeTraceOahGroup ()
 
   // measures slices
   initializeMeasuresSlicesTraceOah ();
+
+  // voices flat view
+  initializeVoicesFlatViewTraceOah ();
 
   // durations
   initializeNotesDurationsTraceOah ();

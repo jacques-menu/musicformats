@@ -4111,7 +4111,7 @@ void lpsr2lilypondTranslator::generateOrnament (
   std::string
     upLinkToNoteNotesDuration =
       ornamentUpLinkToNote->
-        noteSoundingWholeNotesAsMsrString ();
+        noteSoundingWholeNotespitchAndOctaveAsString ();
 
   switch (ornament->getOrnamentKind ()) {
     case msrOrnamentKind::kOrnamentTrill:
@@ -13692,7 +13692,7 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
 
     std::setw (fieldWidth) <<
     "wholeNotes" << ": " <<
-    syllable->syllableWholeNotesAsMsrString () <<
+    syllable->syllableWholeNotespitchAndOctaveAsString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -13899,7 +13899,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             fLilypondCodeStream);
 
           fLilypondCodeStream <<
-            syllable->syllableWholeNotesAsMsrString ();
+            syllable->syllableWholeNotespitchAndOctaveAsString ();
           break;
       } // switch
 
@@ -13943,7 +13943,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             fLilypondCodeStream);
 
           fLilypondCodeStream <<
-            syllable->syllableWholeNotesAsMsrString ();
+            syllable->syllableWholeNotespitchAndOctaveAsString ();
           break;
       } // switch
       break;
@@ -13984,7 +13984,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             fLilypondCodeStream);
 
           fLilypondCodeStream <<
-            syllable->syllableWholeNotesAsMsrString ();
+            syllable->syllableWholeNotespitchAndOctaveAsString ();
           break;
       } // switch
       break;
@@ -14029,7 +14029,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
         fLilypondCodeStream);
 
       fLilypondCodeStream <<
-        syllable->syllableWholeNotesAsMsrString () <<
+        syllable->syllableWholeNotespitchAndOctaveAsString () <<
         ' ';
       break;
 
@@ -14882,7 +14882,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   if (doGenerateASkip) {
     fLilypondCodeStream <<
       " \\skip" <<
-      syllable->syllableWholeNotesAsMsrString () <<
+      syllable->syllableWholeNotespitchAndOctaveAsString () <<
       ' ';
   }
 
@@ -15313,7 +15313,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   if (doGenerateASkip) {
     fLilypondCodeStream <<
       " \\skip" <<
-      syllable->syllableWholeNotesAsMsrString () <<
+      syllable->syllableWholeNotespitchAndOctaveAsString () <<
       ' ';
   }
 
