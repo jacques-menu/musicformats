@@ -1944,7 +1944,7 @@ R"()",
     traceVoicesFlatViewBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
         "trace-voices-flat-view", "tvoicesflatview",
-R"(Voices flat view)",
+R"(Trace the voices flat view gathering activity)",
         "fTraceVoicesFlatView",
         fTraceVoicesFlatView,
         fTracePassesBooleanAtom);
@@ -2007,7 +2007,7 @@ R"()",
     traceMeasuresSlicesBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
         "trace-measures-slices", "tmeasslices",
-R"(Measures slices)",
+R"(Trace the measures slices gathering activity)",
         "fTraceMeasuresSlices",
         fTraceMeasuresSlices,
         fTracePassesBooleanAtom);
@@ -2022,7 +2022,7 @@ R"(Measures slices)",
     traceMeasuresSlicesDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
         "trace-measures-slices-details", "tmeasslicesdets",
-R"(Measures slices details)",
+R"(Trace the measures slices gathering activity details)",
         "fTraceMeasuresSlicesDetails",
         fTraceMeasuresSlicesDetails,
         traceMeasuresSlicesBooleanAtom,
