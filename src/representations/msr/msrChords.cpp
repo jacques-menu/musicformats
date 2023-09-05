@@ -86,8 +86,8 @@ S_msrChord msrChord::create (
 
     ss <<
       "Creating a chord" <<
-      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asString () <<
-      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asString () <<
+      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes <<
+      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes <<
       ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
 
@@ -119,8 +119,8 @@ S_msrChord msrChord::create (
 
     ss <<
       "Creating a chord" <<
-      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asString () <<
-      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asString () <<
+      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes <<
+      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes <<
       ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
 
@@ -1617,7 +1617,7 @@ void msrChord::applyTupletMemberDisplayFactorToChordMembers (
 #endif // MF_TRACE_IS_ENABLED
 */
 
-std::string msrChord::asStringwithRawDivisions () const
+std::string msrChord::asStringwithRawDivisions () const // SUPERFLOUS??? JMI v0.9.70
 {
   std::stringstream ss;
 
@@ -1754,10 +1754,10 @@ void msrChord::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMeasurePosition" << ": " << fMeasurePosition.asString () <<
     std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes.asString () <<
+    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes.asString () <<
+    "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "getMeasureNumber()" << ": " <<
@@ -2546,11 +2546,11 @@ void msrChord::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
- // JMI   "chordSoundingWholeNotes" << ": " << fChordSoundingWholeNotes.asString () <<
-    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes.asString () <<
+ // JMI   "chordSoundingWholeNotes" << ": " << fChordSoundingWholeNotes <<
+    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes.asString () <<
+    "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
     std::endl;
 
   os << std::left <<
@@ -2595,8 +2595,10 @@ void msrChord::print (std::ostream& os) const
       "===> fChordGraceNotesGroupLinkBefore ===>";
 
     if (fChordGraceNotesGroupLinkBefore) {
-      os << std::endl;
-      os << gTab << fChordGraceNotesGroupLinkBefore->asShortString ();
+      os <<
+        std::endl <<
+        gTab <<
+        fChordGraceNotesGroupLinkBefore->asShortString ();
     }
     else {
       os << ": " << "[NONE]";
@@ -3290,8 +3292,10 @@ void msrChord::print (std::ostream& os) const
       "===> fChordGraceNotesGroupLinkAfter ===>";
 
     if (fChordGraceNotesGroupLinkAfter) {
-      os << std::endl;
-      os << gTab << fChordGraceNotesGroupLinkAfter->asShortString ();
+      os <<
+        std::endl <<
+        gTab <<
+        fChordGraceNotesGroupLinkAfter->asShortString ();
     }
     else {
       os << ": " << "[NULL]";
@@ -3499,7 +3503,7 @@ std::string msrChordBeamLink::asString () const
     ", fOriginalBeam \"" <<
     fOriginalBeam->asString () <<
     ", fUpLinkToChord \"" <<
-    fUpLinkToChord->asString () <<
+    fUpLinkToChord <<
     ", line " << fInputStartLineNumber <<
     ']';
 
@@ -3756,7 +3760,7 @@ std::string msrChordSlurLink::asString () const
     ", originalSlur \"" <<
     fOriginalSlur->asString () <<
     ", upLinkToChord \"" <<
-    fUpLinkToChord->asString () <<
+    fUpLinkToChord <<
     ", line " << fInputStartLineNumber <<
     ']';
 
@@ -3987,7 +3991,7 @@ std::string msrChordGraceNotesGroupLink::asString () const
     ", fOriginalGraceNotesGroup \"" <<
     fOriginalGraceNotesGroup->asString () <<
     ", fUpLinkToChord \"" <<
-    fUpLinkToChord->asString () <<
+    fUpLinkToChord <<
     ", line " << fInputStartLineNumber <<
     ']';
 
@@ -4013,7 +4017,7 @@ void msrChordGraceNotesGroupLink::print (std::ostream& os) const
   ++gIndenter;
   os <<
     fOriginalGraceNotesGroup <<
-    fUpLinkToChord->asString () <<
+    fUpLinkToChord <<
     std::endl;
   --gIndenter;
 

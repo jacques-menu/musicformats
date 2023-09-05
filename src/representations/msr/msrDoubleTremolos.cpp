@@ -412,10 +412,10 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       numberOfRepeatsAsRational <<
       std::endl <<
       "fDoubleTremoloSoundingWholeNotes: '" <<
-      fDoubleTremoloSoundingWholeNotes.asString () << '\'' <<
+      fDoubleTremoloSoundingWholeNotes << '\'' <<
       std::endl <<
       "fDoubleTremoloElementsWholeNotes: '" <<
-      fDoubleTremoloElementsWholeNotes.asString () << '\'' <<
+      fDoubleTremoloElementsWholeNotes << '\'' <<
       std::endl <<
       "line " << inputLineNumber;
 
@@ -437,9 +437,9 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       "Setting notes double tremolo number of repeats to '" <<
       fDoubleTremoloNumberOfRepeats <<
       "', fDoubleTremoloSoundingWholeNotes: '" <<
-      fDoubleTremoloSoundingWholeNotes.asString () << '\'' <<
+      fDoubleTremoloSoundingWholeNotes << '\'' <<
       ", fDoubleTremoloElementsWholeNotes: '" <<
-      fDoubleTremoloElementsWholeNotes.asString () << '\'' <<
+      fDoubleTremoloElementsWholeNotes << '\'' <<
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -499,9 +499,9 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       ", doubleTremoloNumberOfRepeats: '" <<
       fDoubleTremoloNumberOfRepeats <<
       "', doubleTremoloSoundingWholeNotes: '" <<
-      fDoubleTremoloSoundingWholeNotes.asString () <<
+      fDoubleTremoloSoundingWholeNotes <<
       "', doubleTremoloElementsNotesDuration: '" <<
-      fDoubleTremoloElementsWholeNotes.asString () << '\'' <<
+      fDoubleTremoloElementsWholeNotes << '\'' <<
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -518,9 +518,9 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
     ss <<
       "attempt to set notes double tremolo whole notes both to " <<
-      fDoubleTremoloSoundingWholeNotes.asString () << " (existing)" <<
+      fDoubleTremoloSoundingWholeNotes << " (existing)" <<
       " and " <<
-      expectedDoubleTremoloSoundingWholeNotes.asString () <<
+      expectedDoubleTremoloSoundingWholeNotes <<
       " on note second element:" <<
       std::endl;
 
@@ -554,7 +554,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
     std::stringstream ss;
 
     ss <<
-      "Setting chord " << chord->asString () <<
+      "Setting chord " << chord <<
       " as first element of double tremolo " <<
       asShortString ();
 
@@ -593,16 +593,16 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
 
       ss <<
         "attempt to set chord double tremolo sounding whole notes both to " <<
-        fDoubleTremoloSoundingWholeNotes.asString () << " (existing)" <<
+        fDoubleTremoloSoundingWholeNotes << " (existing)" <<
         " and " <<
-        expectedDoubleTremoloSoundingWholeNotes.asString () <<
+        expectedDoubleTremoloSoundingWholeNotes <<
         " on chord first element:" <<
         std::endl;
 
       ++gIndenter;
 
       ss <<
-        chord->asString () <<
+        chord <<
         std::endl;
 
       --gIndenter;
@@ -626,7 +626,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
     std::stringstream ss;
 
     ss <<
-      "Setting chord " << chord->asString () <<
+      "Setting chord " << chord <<
       " as second element of double tremolo " <<
       asShortString ();
 
@@ -656,9 +656,9 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
 
      ss <<
         "attempt to set double tremolo whole notes both to " <<
-        fDoubleTremoloSoundingWholeNotes.asString () << " (existing)" <<
+        fDoubleTremoloSoundingWholeNotes << " (existing)" <<
         " and " <<
-        chordDisplayWholeNotes.asString () <<
+        chordDisplayWholeNotes <<
         " on chord second element:" << " (chord)" <<
         std::endl;
 
@@ -833,7 +833,7 @@ std::string msrDoubleTremolo::asString () const
     ", fDoubleDoubleTremoloTypeKind: " << fDoubleDoubleTremoloTypeKind <<
     ", fDoubleTremoloMarksNumber: " <<fDoubleTremoloMarksNumber <<
     ", placement: " << doubleTremoloPlacementKindAsString () <<
-    ",fDoubleTremoloSoundingWholeNotes: " << fDoubleTremoloSoundingWholeNotes.asString () <<
+    ",fDoubleTremoloSoundingWholeNotes: " << fDoubleTremoloSoundingWholeNotes <<
     ", line " << fInputStartLineNumber;
 
   if (fDoubleTremoloFirstElement) { // it may not be set yet
@@ -939,7 +939,7 @@ void msrDoubleTremolo::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "doubleTremoloSoundingWholeNotes" << ": " <<
-    fDoubleTremoloSoundingWholeNotes.asString () <<
+    fDoubleTremoloSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -949,7 +949,7 @@ void msrDoubleTremolo::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "doubleTremoloElementsNotesDuration" << ": " <<
-    fDoubleTremoloElementsWholeNotes.asString () <<
+    fDoubleTremoloElementsWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<

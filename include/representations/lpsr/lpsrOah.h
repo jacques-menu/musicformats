@@ -763,6 +763,7 @@ class EXP lpsrOahGroup : public oahGroup
     Bool                  fDisplayLpsrSummary;
 
     Bool                  fDisplayLpsrFlatView;
+    Bool                  fDisplayLpsrFlatViewDetails;
 
     Bool                  fDisplayLpsrMeasuresSlices;
 

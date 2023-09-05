@@ -1508,7 +1508,7 @@ std::string wholeNotesAndDotsNumberpitchAndOctaveAsString (
 
     ss <<
       "--> integralNumberOfWholeNotes: " <<
-      integralNumberOfWholeNotes.asString () <<
+      integralNumberOfWholeNotes <<
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (

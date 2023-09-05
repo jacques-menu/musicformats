@@ -2900,14 +2900,14 @@ if (false) // JMI
 
     ss <<
       "--> partShortestNoteWholeNotes: " <<
-      fPartShortestNoteWholeNotes.asString () <<
+      fPartShortestNoteWholeNotes <<
       std::endl <<
       "--> divisionsPerQuarterNoteAsRational: " <<
       divisionsPerQuarterNoteAsRational <<
       std::endl <<
       /* JMI
       "--> partShortestNoteTupletFactor: " <<
-      fPartShortestNoteTupletFactor.asString () <<
+      fPartShortestNoteTupletFactor <<
       std::endl <<
       "--> partShortestNoteTupletFactorAsRational: " <<
       partShortestNoteTupletFactorAsRational <<
@@ -5238,12 +5238,12 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       ", previousNoteMeasurePosition: " <<
       previousNoteMeasurePosition.asString () <<
       ", previousNoteSoundingWholeNotes: " <<
-      previousNoteSoundingWholeNotes.asString () <<
+      previousNoteSoundingWholeNotes <<
 
       ", theMsrNoteMeasurePosition: " <<
       theMsrNoteMeasurePosition.asString () <<
       ", theMsrNoteSoundingWholeNotes: " <<
-      theMsrNoteSoundingWholeNotes.asString () <<
+      theMsrNoteSoundingWholeNotes <<
 
       ", backupNotesDuration: " << backupNotesDuration <<
       ", backupNotesDurationDivisions: " << backupNotesDurationDivisions <<
@@ -5279,12 +5279,12 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       ", previousNoteMeasurePosition: " <<
       previousNoteMeasurePosition.asString () <<
       ", previousNoteSoundingWholeNotes: " <<
-      previousNoteSoundingWholeNotes.asString () <<
+      previousNoteSoundingWholeNotes <<
 
       ", theMsrNoteMeasurePosition: " <<
       theMsrNoteMeasurePosition.asString () <<
       ", theMsrNoteSoundingWholeNotes: " <<
-      theMsrNoteSoundingWholeNotes.asString () <<
+      theMsrNoteSoundingWholeNotes <<
 
       ", backupNotesDuration: " << backupNotesDuration <<
       ", backupNotesDurationDivisions: " << backupNotesDurationDivisions <<
@@ -6727,16 +6727,19 @@ void msr2mxsrTranslator:: appendStemToNote (
     std::string stemString;
 
     switch (stemKind) {
-      case msrStemKind::kStemNeutral:
+      case msrStemKind::kStemKind_NONE:
+        stemString = "[kStemKind_NONE]"; // JMI v0.9.70
+        break;
+      case msrStemKind::kStemKindNeutral:
         stemString = "[NULL]";
         break;
-      case msrStemKind::kStemUp:
+      case msrStemKind::kStemKindUp:
         stemString = "up";
         break;
-      case msrStemKind::kStemDown:
+      case msrStemKind::kStemKindDown:
         stemString = "down";
         break;
-      case msrStemKind::kStemDouble:
+      case msrStemKind::kStemKindDouble:
         stemString = "double";
         break;
     } // switch
@@ -7393,11 +7396,11 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
 
     ss <<
       "---> noteKind: " << msrNoteKindAsString (noteKind) <<
-      ", noteSoundingWholeNotes: " << noteSoundingWholeNotes.asString () <<
-      ", noteDisplayWholeNotes: " << noteDisplayWholeNotes.asString () <<
+      ", noteSoundingWholeNotes: " << noteSoundingWholeNotes <<
+      ", noteDisplayWholeNotes: " << noteDisplayWholeNotes <<
       ", noteTupletFactor: " << theMsrNote->getNoteTupletFactor ().asRational () <<
       ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
-      ", partShortestNoteWholeNotes: " << fPartShortestNoteWholeNotes.asString () <<
+      ", partShortestNoteWholeNotes: " << fPartShortestNoteWholeNotes <<
       ", fDivisionsMultiplyingFactor: " << fDivisionsMultiplyingFactor <<
       ", line " << inputLineNumber;
 
@@ -7807,7 +7810,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
         ss <<
           " ===== " <<
           "Note " <<
-          theMsrNote->notePitchAndSoundingWholeNotesAsString () <<
+          theMsrNote->noteCoreAsString () <<
           ", staffNumber: " <<
             noteVoice->getVoiceUpLinkToStaff ()->getStaffNumber () <<
           ", voiceNumber: " <<

@@ -3417,7 +3417,7 @@ void mxsr2msrTranslator::visitEnd (S_attributes& elt)
         fCurrentDivisionsPerQuarterNote);
   }
 
-  fOnGoingClefKeyTimeSignatureGroup = true;
+  fOnGoingClefKeyTimeSignatureGroup = false;
 }
 
 //______________________________________________________________________________
@@ -4839,16 +4839,12 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
 
   // populate the time signature with the time signature items
   if (fCurrentTimeSignatureItemsVector.size ()) {
-    for (
-      std::vector<S_msrTimeSignatureItem>::const_iterator i =
-        fCurrentTimeSignatureItemsVector.begin ();
-      i != fCurrentTimeSignatureItemsVector.end ();
-      ++i
-  ) {
+    for (S_msrTimeSignatureItem timeSignatureItem : fCurrentTimeSignatureItemsVector) {
       fCurrentTimeSignature->
-        appendTimeSignatureItem ((*i));
+        appendTimeSignatureItem (timeSignatureItem);
     } // for
 
+    // forget about the current time signature items
     fCurrentTimeSignatureItemsVector.clear ();
   }
 
@@ -12958,7 +12954,7 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
       ss <<
         "fCurrentFiguredBassSoundingWholeNotes: " <<
-        fCurrentFiguredBassSoundingWholeNotes.asString ();
+        fCurrentFiguredBassSoundingWholeNotes;
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -13477,22 +13473,22 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
 >
 */
 
-  std::string        stem = elt->getValue();
+  std::string stem = elt->getValue();
 
   // kind
-  msrStemKind stemKind = msrStemKind::kStemNeutral;
+  msrStemKind stemKind = msrStemKind::kStemKind_NONE; // default value JMI v0.9.70
 
   if      (stem == "up")
-    stemKind = msrStemKind::kStemUp;
+    stemKind = msrStemKind::kStemKindUp;
 
   else if (stem == "down")
-    stemKind = msrStemKind::kStemDown;
+    stemKind = msrStemKind::kStemKindDown;
 
   else if (stem == "none")
-    stemKind = msrStemKind::kStemNeutral;
+    stemKind = msrStemKind::kStemKindNeutral;
 
   else if (stem == "double")
-    stemKind = msrStemKind::kStemDouble;
+    stemKind = msrStemKind::kStemKindDouble;
 
   else {
     std::stringstream ss;
@@ -20381,7 +20377,7 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
 
     ss <<
       "Registering chord " <<
-      chord->asString () <<
+      chord <<
       " as current chord in voice \"" <<
       voice->getVoiceName () <<
       "\", line " << inputLineNumber;
@@ -21634,7 +21630,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
         "Adding grace notes group link before " <<
         graceNotesGroupBefore->asShortString () <<
         " from note " << note->asString () <<
-        " to chord " << chord->asString () <<
+        " to chord " << chord <<
         "";
 
       gWaeHandler->waeTrace (
@@ -26067,8 +26063,8 @@ void mxsr2msrTranslator::handlePendingSingleHarmony (
       harmony->asString () <<
       " for note " <<
       fCurrentNote->asShortString () <<
-      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asString () <<
-      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asString () <<
+      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
+      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes <<
       ", currentNoteMeasurePosition: " << currentNoteMeasurePosition.asString () <<
       ", line " << fCurrentNote->getInputEndLineNumber () <<
       std::endl;
@@ -26234,8 +26230,8 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
       fPendingHarmoniesList.size () <<
       " pending harmonies for note " <<
       fCurrentNote->asShortString () <<
-      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asString () <<
-      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asString () <<
+      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
+      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes <<
       ", currentNoteMeasurePosition: " << currentNoteMeasurePosition.asString () <<
       ", line " << fCurrentNote->getInputEndLineNumber () <<
       std::endl;
@@ -26359,11 +26355,11 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
 
         ss <<
           "--> handlePendingHarmony, " <<
-          ", currentHarmonySoundingWholeNotes: " << currentHarmonySoundingWholeNotes.asString () <<
+          ", currentHarmonySoundingWholeNotes: " << currentHarmonySoundingWholeNotes <<
           ", currentHarmonyWholeNotesOffset: " << currentHarmonyWholeNotesOffset <<
           ", previousWholeNotesOffsetInTheLoop: " << previousWholeNotesOffsetInTheLoop <<
           ", offsetDelta: " << offsetDelta <<
-          ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asString () <<
+          ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
           ", fraction: " << fraction <<
           ", line " << currentHarmony->getInputEndLineNumber ();
 
@@ -26455,10 +26451,10 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
 
     ss <<
       "--> handlePendingHarmony, LAST HARMONY OF THE LIST" <<
-      ", lastHarmonySoundingWholeNotes: " << lastHarmonySoundingWholeNotes.asString () <<
+      ", lastHarmonySoundingWholeNotes: " << lastHarmonySoundingWholeNotes <<
       ", lastHarmonyWholeNotesOffset: " << lastHarmonyWholeNotesOffset <<
       ", previousWholeNotesOffsetInTheLoop: " << previousWholeNotesOffsetInTheLoop <<
-      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asString () <<
+      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
       ", offsetDelta: " << offsetDelta <<
       ", fraction: " << fraction <<
       ", line " << lastHarmony->getInputEndLineNumber ();
@@ -26613,8 +26609,8 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses ()
       fPendingHarmoniesList.size () <<
       " pending figured basses for note " <<
       fCurrentNote->asShortString () <<
-      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asString () <<
-      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asString () <<
+      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
+      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -26644,7 +26640,7 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses ()
 
       ss <<
         "handlePendingFiguredBass, " <<
-        ", figuredBassSoundingWholeNotes: " << figuredBassSoundingWholeNotes.asString () <<
+        ", figuredBassSoundingWholeNotes: " << figuredBassSoundingWholeNotes <<
         ", figuredBassWholeNotesDuration: " << figuredBassWholeNotesDuration <<
         ", line " << currentFiguredBass->getInputEndLineNumber ();
 
@@ -27614,7 +27610,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           std::stringstream ss;
 
           ss <<
-            "Appending chord " << fCurrentChord->asString () <<
+            "Appending chord " << fCurrentChord <<
             " to voice \"" <<
             fCurrentNoteVoice->getVoiceName () <<
             "\"";
@@ -27645,8 +27641,8 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceChords ()) {
             gLog <<
               "Updating sounding divisions for double tremolo chord " <<
-              " " << chord->asString () <<
-              " to " << chordFirstNoteSoundingWholeNotes.asString () <<
+              " " << chord <<
+              " to " << chordFirstNoteSoundingWholeNotes <<
               " in voice \"" <<
               fCurrentNoteVoice->getVoiceName () <<
               "\"" <<
@@ -28169,9 +28165,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 
       ss <<
         "Adding chord " <<
-        fCurrentChord->asString () <<
+        fCurrentChord <<
         " to stack top tuplet " <<
-        currentTuplet->asString () <<
+        currentTuplet <<
         ", line " << newChordNoteInputLineNumber;
 
       gWaeHandler->waeTrace (
@@ -28374,7 +28370,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
       ss <<
         "handleNoteBelongingToAChordInGraceNotes():" <<
         std::endl <<
-        "tuplet member chord " << chord->asString () <<
+        "tuplet member chord " << chord <<
         "cannot be added, tuplets stack is empty" <<
         ", line " << newChordNoteInputLineNumber;
 
@@ -29762,7 +29758,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
         std::endl <<
 
         std::setw (fieldWidth) << "fCurrentNoteSoundingWholeNotes" << ": " <<
-        fCurrentNoteSoundingWholeNotes.asString () <<
+        fCurrentNoteSoundingWholeNotes <<
         std::endl <<
 
         std::setw (fieldWidth) << "fCurrentHarmoniesStaffNumber" << ": " <<
@@ -31789,7 +31785,7 @@ print-object:
         fCurrentPart->getPartCombinedName () <<
         std::endl <<
         std::setw (fieldWidth) << "fCurrentFiguredBassSoundingWholeNotes" << ": " <<
-        fCurrentFiguredBassSoundingWholeNotes.asString () <<
+        fCurrentFiguredBassSoundingWholeNotes <<
         std::endl;
 
       --gIndenter;

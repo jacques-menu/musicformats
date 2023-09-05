@@ -4788,9 +4788,9 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 //       "Extending the sounding whole notes of harmony " <<
 //       asString () <<
 //       " from " <<
-//       fSoundingWholeNotes.asString () <<
+//       fSoundingWholeNotes <<
 //       " to " <<
-//       augmentedSoundingWholeNotes.asString () <<
+//       augmentedSoundingWholeNotes <<
 //       " to fill measure " <<
 //       this->asShortString () <<
 //       " in voice \"" <<
@@ -4953,9 +4953,9 @@ std::string msrHarmony::asString () const
 //     std::endl;
 
     ", fSoundingWholeNotes: " <<
-    fSoundingWholeNotes.asString () <<
+    fSoundingWholeNotes <<
     ", fHarmonyDisplayWholeNotes: " <<
-    fHarmonyDisplayWholeNotes.asString () <<
+    fHarmonyDisplayWholeNotes <<
 
     ", fMeasurePosition: " <<
     fMeasurePosition.asString ();
@@ -5038,7 +5038,7 @@ std::string msrHarmony::asString () const
   // print the harmony tuplet factor
   ss <<
     ", fHarmonyTupletFactor: " <<
-    fHarmonyTupletFactor.asString ();
+    fHarmonyTupletFactor;
 
   // print the harmony frame
   ss << ", fHarmonyFrame: ";
@@ -5103,7 +5103,7 @@ std::string msrHarmony::asShortStringForMeasuresSlices () const
 
   ss <<
     ", fSoundingWholeNotes: " <<
-    fSoundingWholeNotes.asString () <<
+    fSoundingWholeNotes <<
     ", fHarmonyDisplayWholeNotes: " <<
     fHarmonyDisplayWholeNotes;
 
@@ -5187,11 +5187,11 @@ void msrHarmony::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes.asString () <<
+    fSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fHarmonyDisplayWholeNotes" << ": " <<
-    fHarmonyDisplayWholeNotes.asString () <<
+    fHarmonyDisplayWholeNotes <<
     std::endl;
 
   // print the harmony measure position
@@ -5275,7 +5275,7 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony tuplet factor
   os <<
     std::setw (fieldWidth) <<
-    "fHarmonyTupletFactor" << ": " << fHarmonyTupletFactor.asString () <<
+    "fHarmonyTupletFactor" << ": " << fHarmonyTupletFactor <<
     std::endl;
 
   // print the harmony frame

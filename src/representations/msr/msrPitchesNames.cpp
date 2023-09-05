@@ -1768,7 +1768,7 @@ std::string msrQuarterTonesPitchKindAsStringInLanguage (
       break;
   } // switch
 
-// 	gLog << "<====== msrNote::soundingNoteEssentialsAsString(), result " << result << std::endl;
+// 	gLog << "<====== msrNote::noteCoreAndComplementAsString(), result " << result << std::endl;
 
   return result;
 }

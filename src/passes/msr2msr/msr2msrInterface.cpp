@@ -54,24 +54,6 @@ S_msrScore translateMsrToMsr (
   mfPassIDKind             passIDKind,
   const std::string&       passDescription)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    originalMsrScore != nullptr,
-    "originalMsrScore is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  if (gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) { // for TESTS ONLY ???
-    return originalMsrScore;
-  }
-
-  // start the clock
-  clock_t startClock = clock ();
-
-  // set the global current passID
-  setGlobalCurrentPassIDKind (passIDKind);
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTracePasses ()) {
     std::string separator =
@@ -93,6 +75,42 @@ S_msrScore translateMsrToMsr (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    originalMsrScore != nullptr,
+    "originalMsrScore is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // this test is done here instead of not calling translateMsrToMsr(),
+  // since that simplifies the caller's code
+  // and avoiding this pass is essentially for tests
+  if (gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTracePasses ()) {
+      std::stringstream ss;
+
+      ss <<
+        gLanguage->passIDKindAsString (passIDKind) << ": '" << passDescription << '\'' <<
+        " merely returns the original MSR score, since this pass is being avoided";
+
+      msr2msrWarning (
+        gServiceRunData->getInputSourceName (),
+        1, // JMI inputLineNumber,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    return originalMsrScore;
+  }
+
+  // start the clock
+  clock_t startClock = clock ();
+
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
 
   // the msr2msrTranslator
   msr2msrTranslator
@@ -188,7 +206,20 @@ S_msrScore translateMsrToMsr (
     displayMsrScoreVoicesFlatView (
       resultingNewMsrScore,
       gMsrOahGroup,
-      gLanguage->displayAFlatViewOfTheSecondMSR ());
+      gLanguage->displayAFlatViewOfTheSecondMSR (),
+      msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindNo);
+  }
+
+  // display the populated MSR score flat view details if requested
+  // ------------------------------------------------------
+
+  if (gMsrOahGroup->getDisplaySecondMsrFlatViewDetails ()) {
+    // display the score name
+    displayMsrScoreVoicesFlatView (
+      resultingNewMsrScore,
+      gMsrOahGroup,
+      gLanguage->displayAFlatViewOfTheSecondMSR (),
+      msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindYes);
   }
 
   // display the populated MSR score slices if requested

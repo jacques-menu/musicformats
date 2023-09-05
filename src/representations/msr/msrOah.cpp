@@ -937,27 +937,71 @@ This implies that no LilyPond code is generated.)",
         "fDisplaySecondMsrSummary",
         fDisplaySecondMsrSummary));
 
-  // display first MSR flat
+  // display first MSR flat view
 
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
         "display-msr1-voices-flat-view", "dmsr1voicesflatview",
 R"(Only write a voices flat view of the first MSR to standard error.
-This implies that no LilyPond code is generated.)",
+The output looks like:
+  fis4-o:4 gis4-o:4 gis4-o:4 ais4-o:4
+where the number after ':' is the octave number,
+or
+  s2.-unpitched
+This option implies that no LilyPond code is generated.)",
         "fDisplayFirstMsrFlatView",
         fDisplayFirstMsrFlatView));
 
-  // display second MSR flat
+  // display first MSR flat view details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-msr1-voices-flat-view-details", "dmsr1voicesflatviewdets",
+R"(Only write a voices flat view of the first MSR to standard error,
+with more details.
+The output looks like:
+  fis4-o:4 gis4-o:4 gis4-o:4 ais4-o:4
+where the number after ':' is the octave number,
+or
+  s2.-unpitched
+This option implies that no LilyPond code is generated.)",
+        "fDisplayFirstMsrFlatViewDetails",
+        fDisplayFirstMsrFlatViewDetails));
+
+  // display second MSR flat view
 
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
         "display-msr2-voices-flat-view", "dmsr2voicesflatview",
 R"(Only write a voices flat view of the second MSR to standard error.
-This implies that no LilyPond code is generated.)",
+The output looks like:
+  fis4-o:4 gis4-o:4 gis4-o:4 ais4-o:4
+where the number after ':' is the octave number,
+or
+  s2.-unpitched
+This option implies that no LilyPond code is generated.)",
         "fDisplaySecondMsrFlatView",
         fDisplaySecondMsrFlatView));
+
+  // display second MSR flat view details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-msr2-voices-flat-view-details", "dmsr2voicesflatviewdets",
+R"(Only write a voices flat view of the second MSR to standard error,
+with more details.
+The output looks like:
+  fis4-o:4 gis4-o:4 gis4-o:4 ais4-o:4
+where the number after ':' is the octave number,
+or
+  s2.-unpitched
+This option implies that no LilyPond code is generated.)",
+        "fDisplaySecondMsrFlatViewDetails",
+        fDisplaySecondMsrFlatViewDetails));
 }
 
 void msrOahGroup::initializeMsrLanguagesOptions ()
@@ -1417,9 +1461,15 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth) // JMI SUPERFLOUS???
     std::setw (valueFieldWidth) << "fDisplayFirstMsrFlatView" << ": " <<
     fDisplayFirstMsrFlatView <<
     std::endl <<
+    std::setw (valueFieldWidth) << "fDisplayFirstMsrFlatViewDetails" << ": " <<
+    fDisplayFirstMsrFlatViewDetails <<
+    std::endl <<
 
     std::setw (valueFieldWidth) << "fDisplaySecondMsrFlatView" << ": " <<
     fDisplaySecondMsrFlatView <<
+    std::endl <<
+    std::setw (valueFieldWidth) << "fDisplaySecondMsrFlatViewDetails" << ": " <<
+    fDisplaySecondMsrFlatViewDetails <<
     std::endl;
 
   --gIndenter;

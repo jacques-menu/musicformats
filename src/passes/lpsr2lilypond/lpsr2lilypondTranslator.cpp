@@ -290,7 +290,7 @@ if (false) // JMI
     msrDirectionKind::kDirectionNone;
 
   // stems
-  fCurrentStemKind = msrStemKind::kStemNeutral; // default value
+  fCurrentStemKind = msrStemKind::kStemKind_NONE; // default value
 
   // spanners
   fCurrentSpannerPlacementKind =
@@ -1394,7 +1394,6 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
   } // switch
 
   // generate the skip duration if relevant
-
 //   ss <<
 //     durationAsLilypondStringIfItShouldBeGenerated (
 //       noteInputLineNumber,
@@ -1652,16 +1651,19 @@ std::string lpsr2lilypondTranslator::stemAsLilypondString (
   std::string result;
 
   switch (stemKind) {
-    case msrStemKind::kStemNeutral:
+    case msrStemKind::kStemKind_NONE:
+      result = " %{ \\kStemKind_NONE %} ";
+      break;
+    case msrStemKind::kStemKindNeutral:
       result = "\\stemNeutral ";
       break;
-    case msrStemKind::kStemUp:
+    case msrStemKind::kStemKindUp:
       result = "\\stemUp ";
       break;
-    case msrStemKind::kStemDown:
+    case msrStemKind::kStemKindDown:
       result = "\\stemDown ";
       break;
-    case msrStemKind::kStemDouble: // JMI ???
+    case msrStemKind::kStemKindDouble: // JMI ???
       break;
   } // switch
 
@@ -1689,17 +1691,26 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
 #endif // MF_TRACE_IS_ENABLED
 
   if (stem) {
+    // should a stem direction command be generated?
+    // otherwise, leave stems management to LilyPond
     msrStemKind
       stemKind =
         stem->getStemKind ();
 
-    // should a stem direction command be generated?
+    Bool doGenerateAStemDirection (false);
+
     if (
-      stemKind != fCurrentStemKind
-        &&
       gGlobalLpsr2lilypondOahGroup->getGenerateStemsDirections ()
-       // JMI msrStemKind::kStemNeutral ???
     ) {
+      doGenerateAStemDirection = true;
+    }
+    else {
+      doGenerateAStemDirection =
+        stemKind != fCurrentStemKind;
+    }
+
+    if (doGenerateAStemDirection) {
+      // JMI msrStemKind::kStemKindNeutral ??? JMI v0.9.70
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceStems ()) {
         std::stringstream ss;
@@ -1719,9 +1730,9 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
 
       fLilypondCodeStream <<
         stemAsLilypondString (stemKind);
-
-      fCurrentStemKind = stemKind;
     }
+
+    fCurrentStemKind = stemKind;
   }
 }
 
@@ -1977,7 +1988,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
 
         ss <<
           "note " <<
-          note->asShortStringForTimeView () <<
+          note->asShortStringForMeasuresSlices () <<
           "' has been finalized as being partially a solo note or rest, not supported yet" <<
           ", line " << inputLineNumber;
 
@@ -2349,7 +2360,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
           // generate the multiplying factor
           fLilypondCodeStream << // JMI
             "*" <<
-            noteSoundingWholeNotes.asString () <<
+            noteSoundingWholeNotes <<
             "";
         }
       }
@@ -2399,12 +2410,14 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
-    // generate the rest name to help pin-point bugs
+    // generate a rest to help pin-point bugs
     fLilypondCodeStream << 'r';
+    fLilypondCodeStream << " %{ FROC 1 %} ";
   }
   else {
-    // generate the skip name
+    // generate a skip
     fLilypondCodeStream << 's';
+    fLilypondCodeStream << " %{ FROC 2 %} ";
   }
 
   // generate the skip duration if relevant
@@ -2433,11 +2446,11 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
   if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
     // generate information and line number as a comment
     fLilypondCodeStream <<
-      " %{ note skip in measure %}";
+      " %{ skip note in measure %}";
   }
 
   // a skip is no relative octave reference,
-  // the preceding one is kept
+  // thus the preceding one is kept
 }
 
 void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInMeasure (
@@ -3452,9 +3465,9 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
           noteStem->getStemKind ();
 
       // should a stem neutral direction command be generated?
-      if (noteStemKind != msrStemKind::kStemNeutral) {
+      if (noteStemKind != msrStemKind::kStemKindNeutral) { JMI switch v0.9.70
         fLilypondCodeStream <<
-          stemAsLilypondString (msrStemKind::kStemNeutral);
+          stemAsLilypondString (msrStemKind::kStemKindNeutral);
 
   // JMI      fCurrentStemKind = stemKind;
       }
@@ -9804,8 +9817,12 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
             voice->
               getRegularVoiceStaffSequentialNumber ();
 
-        if (staffRegularVoicesCounter > 1) {
-          switch (regularVoiceStaffSequentialNumber) {
+        Bool doGenerateVoiceCommands (false);
+
+        doGenerateVoiceCommands = staffRegularVoicesCounter > 1; // JMI SURE??? v0.9.70
+
+        if (doGenerateVoiceCommands) {
+          switch (regularVoiceStaffSequentialNumber) { // JMI v0.9.70
             case 1:
               fLilypondCodeStream << "\\voiceOne ";
               break;
@@ -11945,7 +11962,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_;
 
   // reset current stem kind
-  fCurrentStemKind = msrStemKind::kStemNeutral; // default value
+  fCurrentStemKind = msrStemKind::kStemKind_NONE; // default value
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
@@ -13151,13 +13168,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           case msrVoiceKind::kVoiceKindRegular:
           case msrVoiceKind::kVoiceKindDynamics:
             fLilypondCodeStream <<
-              'R';
+//               'R';
+              's';
             break;
 
           case msrVoiceKind::kVoiceKindHarmonies:
           case msrVoiceKind::kVoiceKindFiguredBass:
             fLilypondCodeStream <<
-              'R';
+//               'R';
+              's';
             break;
         } // switch
 
@@ -13718,7 +13737,7 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
   if (noteTheSyllableIsAttachedTo) {
     fLilypondCodeStream <<
       noteTheSyllableIsAttachedTo->
-        notePitchAndSoundingWholeNotesAsString () <<
+        noteCoreAsString () <<
         ", measure '" <<
       noteTheSyllableIsAttachedTo->
         getNoteUpLinkToMeasure ()->
@@ -15864,6 +15883,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
       traceLpsrVisitors =
         gLpsrOahGroup->
           getTraceLpsrVisitors (),
+
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -22149,13 +22169,14 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
   const S_msrChord& chord)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    fLilypondCodeStream <<
-      "% --> generateCodeRightBeforeChordContents() for chord " <<
-      chord->asShortString () <<
-      ", line " << chord->getInputStartLineNumber () <<
-      std::endl;
-  }
+//   if (gTraceOahGroup->getTraceChords ()) { // JMI v0.9.67
+//     gLog <<
+//       "%{ --> generateCodeRightBeforeChordContents() for chord " <<
+//       chord->asShortString () <<
+//       ", line " << chord->getInputStartLineNumber () <<
+//       " %}" <<
+//       std::endl;
+//   }
 #endif // MF_TRACE_IS_ENABLED
 
 /* JMI

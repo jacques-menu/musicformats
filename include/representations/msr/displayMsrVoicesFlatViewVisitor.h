@@ -22,6 +22,18 @@
 namespace MusicFormats
 {
 
+// voices
+//______________________________________________________________________________
+enum class msrVoicesFlatViewDetailedKind {
+  kVoicesFlatViewDetailedKindYes,
+  kVoicesFlatViewDetailedKindNo
+};
+
+std::string msrVoicesFlatViewDetailedKindAsString (
+  msrVoicesFlatViewDetailedKind voicesFlatViewDetailedKind);
+
+std::ostream& operator << (std::ostream& os, const msrVoicesFlatViewDetailedKind& elt);
+
 //________________________________________________________________________
 class EXP displayMsrVoicesFlatViewVisitor :
 
@@ -71,7 +83,8 @@ class EXP displayMsrVoicesFlatViewVisitor :
     // ------------------------------------------------------
 
                           displayMsrVoicesFlatViewVisitor (
-                            const S_msrOahGroup& msrOpts);
+                            const                         S_msrOahGroup& msrOpts,
+                            msrVoicesFlatViewDetailedKind voicesFlatViewDetailedKind);
 
     virtual               ~displayMsrVoicesFlatViewVisitor ();
 
@@ -146,6 +159,8 @@ class EXP displayMsrVoicesFlatViewVisitor :
 
     S_msrOahGroup         fMsrOahGroup;
 
+    msrVoicesFlatViewDetailedKind
+                          fVoicesFlatViewDetailedKind;
     // score
     // ------------------------------------------------------
 

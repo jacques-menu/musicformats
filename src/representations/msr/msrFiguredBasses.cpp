@@ -842,7 +842,7 @@ std::string msrFiguredBass::asString () const
     fFiguredBassParenthesesKind <<
 
     ", fFiguredBassTupletFactor: " <<
-    fFiguredBassTupletFactor.asString ();
+    fFiguredBassTupletFactor;
 
   if (fFiguredBassFiguresList.size ()) {
     ss << ", fFiguredBassFiguresList: [";
@@ -938,7 +938,7 @@ std::string msrFiguredBass::asShortStringForMeasuresSlices () const
     fFiguredBassParenthesesKind <<
 
     ", fFiguredBassTupletFactor: " <<
-    fFiguredBassTupletFactor.asString ();
+    fFiguredBassTupletFactor;
 
   if (fFiguredBassFiguresList.size ()) {
     ss << ", fFiguredBassFiguresList: [";
@@ -999,12 +999,12 @@ void msrFiguredBass::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes.asString () <<
+    fSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fFiguredBassDisplayWholeNotes" << ": " <<
-    fFiguredBassDisplayWholeNotes.asString () <<
+    fFiguredBassDisplayWholeNotes <<
     std::endl;
 
   os <<
@@ -1048,7 +1048,7 @@ void msrFiguredBass::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fFiguredBassTupletFactor" << ": " <<
-    fFiguredBassTupletFactor.asString () <<
+    fFiguredBassTupletFactor <<
     std::endl;
 
   os << std::left <<

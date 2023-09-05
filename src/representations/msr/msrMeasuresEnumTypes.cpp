@@ -346,9 +346,9 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //         "Reducing the sounding whole notes of harmony " <<
 //         previousHarmony->asString () <<
 //         " from " <<
-//         previousHarmonySoundingWholeNotes.asString () <<
+//         previousHarmonySoundingWholeNotes <<
 //         " to " <<
-//         reducedSoundingWholeNotes.asString () <<
+//         reducedSoundingWholeNotes <<
 //         " in voice \"" <<
 //         voice->getVoiceName () <<
 //         "\", line " << inputLineNumber <<

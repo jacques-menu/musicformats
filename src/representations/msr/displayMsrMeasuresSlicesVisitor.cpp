@@ -152,6 +152,14 @@ void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrScore& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  gLog <<
+    "fMeasuresSlicesSequence:" <<
+    std::endl;
+
+  ++gIndenter;
+  gLog << fMeasuresSlicesSequence;
+  --gIndenter;
+
 //   const int fieldWidth = 3;
 //
 //   gLog <<
@@ -911,7 +919,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrNote& elt)
 //
 //     case msrNoteKind::kNoteRegularInMeasure:
 //       gLog <<
-//         elt->pitchAndOctaveAsString () << ' ';
+//         elt->noteCoreAsString () << ' ';
 //       break;
 //
 //     case msrNoteKind::kNoteInDoubleTremolo:
@@ -924,13 +932,13 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrNote& elt)
 //
 //     case msrNoteKind::kNoteRegularInChord:
 //       gLog <<
-//         elt->pitchAndOctaveAsString () << ' ';
+//         elt->noteCoreAsString () << ' ';
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInTuplet:
 //     case msrNoteKind::kNoteRestInTuplet:
 //       gLog <<
-//         elt->pitchAndOctaveAsString () << ' ';
+//         elt->noteCoreAsString () << ' ';
 //      break;
 //
 //     case msrNoteKind::kNoteInTupletInGraceNotesGroup:

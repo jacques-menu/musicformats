@@ -260,7 +260,10 @@ void msdl2lilypondRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-voices-flat-view", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-voices-flat-view-details", subGroup);
+  
   registerAtomInRegularSubgroup ("display-msr2-voices-flat-view", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-voices-flat-viewdetails", subGroup);
 
   registerAtomInRegularSubgroup ("display-lpsr", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);

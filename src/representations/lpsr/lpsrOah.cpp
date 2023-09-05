@@ -1437,6 +1437,18 @@ This implies that no LilyPond code is generated.)",
         "fDisplayLpsrFlatView",
         fDisplayLpsrFlatView));
 
+  // display LPSR flat view Details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-lpsr-voices-flat-view-details", "dlpsrvoicesflatviewdetails",
+R"(Only write a voices flat view of the fLPSR to standard error
+with more details.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrFlatViewDetails",
+        fDisplayLpsrFlatViewDetails));
+
   // display LPSR slices
 
   subGroup->

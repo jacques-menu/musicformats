@@ -49,7 +49,7 @@
 namespace MusicFormats
 {
 
-// voices
+// voice kinds
 //______________________________________________________________________________
 std::string msrVoiceKindAsString (
   msrVoiceKind voiceKind)
@@ -2066,7 +2066,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Appending clef " << clef->asString () <<
+//       "Appending clef " << clef
 //       " to voice \"" << fVoiceName << "\"" <<
 //       std::endl;
 //
@@ -2105,7 +2105,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Appending key " << key->asString () <<
+//       "Appending key " << key
 //       " to voice \"" << fVoiceName << "\"" <<
 //       std::endl;
 //
@@ -2142,7 +2142,8 @@ void msrVoice::appendTimeSignatureToVoice (
     std::stringstream ss;
 
     ss <<
-      "Appending time signature " << timeSignature->asString () <<
+      "Appending time signature " <<
+      timeSignature->asString () <<
       " to voice \"" << fVoiceName << "\"" <<
       std::endl;
 
@@ -2172,7 +2173,8 @@ void msrVoice::appendTimeSignatureToVoiceClone (
     std::stringstream ss;
 
     ss <<
-      "Appending time signature " << timeSignature->asString () <<
+      "Appending time signature " <<
+      timeSignature->asString () <<
       " to voice clone \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTrace (
@@ -3427,7 +3429,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
     std::stringstream ss;
 
     ss <<
-      "Appending chord '" << chord->asString () <<
+      "Appending chord '" << chord <<
       "' to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTrace (
@@ -3496,7 +3498,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
     std::stringstream ss;
 
     ss <<
-      "Appending tuplet " << tuplet->asString () <<
+      "Appending tuplet " << tuplet <<
       " to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTrace (
@@ -10761,8 +10763,8 @@ void msrVoice::finalizeVoice (
       "--> in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
-      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString ();
+      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes <<
+      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -10837,7 +10839,7 @@ void msrVoice::finalizeVoice (
       ss.str ());
   }
 
-  // collect the voice measures into the flat list
+  // collect the voice measures into the measures flat list
   collectVoiceMeasuresIntoFlatList (
     inputLineNumber);
 
@@ -10920,8 +10922,8 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       "--> in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asString () <<
-      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asString ();
+      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes <<
+      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11618,7 +11620,7 @@ void msrVoice::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) << "fVoiceShortestNoteWholeNotes" << ": " <<
-    fVoiceShortestNoteWholeNotes.asString () <<
+    fVoiceShortestNoteWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) << "fVoiceShortestNoteTupletFactor" << ": " <<
     std::endl;

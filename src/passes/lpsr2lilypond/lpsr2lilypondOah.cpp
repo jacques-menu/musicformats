@@ -5308,7 +5308,7 @@ to reduce the size of the resulting PDF file.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "generate-stems-directions", "gsd",
+        "generate-stems-directions", "gstemsdir",
 R"(Generate \stem* commands in the LilyPond code.
 The default is to leave it to LilyPond itself to choose the orientation of stems.)",
         "fGenerateStemsDirections",

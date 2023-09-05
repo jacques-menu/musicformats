@@ -254,7 +254,10 @@ void msdl2brailleRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-voices-flat-view", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-voices-flat-view-details", subGroup);
+
   registerAtomInRegularSubgroup ("display-msr2-voices-flat-view", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-voices-flat-viewdetails", subGroup);
 
   registerAtomInRegularSubgroup ("display-bsr1", subGroup);
   registerAtomInRegularSubgroup ("display-bsr1-full", subGroup);

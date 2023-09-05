@@ -163,7 +163,20 @@ void populateMsrSkeletonFromMxsr (
     displayMsrScoreVoicesFlatView (
       scoreSkeletonToBePopulated,
       gMsrOahGroup,
-      gLanguage->displayAFlatViewOfTheFirstMSR ());
+      gLanguage->displayAFlatViewOfTheFirstMSR (),
+      msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindNo);
+  }
+
+  // display the populated MSR score flat view details if requested
+  // ------------------------------------------------------
+
+  if (gMsrOahGroup->getDisplayFirstMsrFlatViewDetails ()) {
+    // display the score name
+    displayMsrScoreVoicesFlatView (
+      scoreSkeletonToBePopulated,
+      gMsrOahGroup,
+      gLanguage->displayAFlatViewOfTheFirstMSR (),
+      msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindYes);
   }
 
   // display the populated MSR score slices if requested
@@ -176,6 +189,17 @@ void populateMsrSkeletonFromMxsr (
       gMsrOahGroup,
       gLanguage->displayTheSlicesOfTheFirstMSR ());
   }
+
+//   // display the populated MSR score slices details if requested
+//   // ------------------------------------------------------
+//
+//   if (gMsrOahGroup->getDisplayFirstMsrMeasuresSlicesDetails()) {
+//     // display the score name
+//     displayMsrScoreMeasuresSlices (
+//       scoreSkeletonToBePopulated,
+//       gMsrOahGroup,
+//       gLanguage->displayTheSlicesOfTheFirstMSR ());
+//   }
 }
 
 

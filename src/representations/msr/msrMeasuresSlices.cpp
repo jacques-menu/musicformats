@@ -260,7 +260,7 @@ std::string msrSimultaneousNotesChunk::asString () const
 
       // print the measure
       ss <<
-        note->asShortStringForTimeView ();
+        note->asShortStringForMeasuresSlices ();
 
       if (++i == iEnd) break;
       ss << ", ";
@@ -694,7 +694,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
           if (gTraceOahGroup->getTraceMeasuresSlices ()) {
             gLog <<
               "Solo note or rest " <<
-              note->asShortStringForTimeView ();
+              note->asShortStringForMeasuresSlices ();
 
             S_msrVoice
               voice =
@@ -722,7 +722,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
             if (gTraceOahGroup->getTraceMeasuresSlices ()) {
               gLog <<
                 "Forget about solo note or rest candidate " <<
-                soloCandidate->asShortStringForTimeView ();
+                soloCandidate->asShortStringForMeasuresSlices ();
 
               S_msrVoice
                 voice =
@@ -777,7 +777,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
                     gLog <<
                       "Solo note or rest? " <<
-                      note->asShortStringForTimeView ();
+                      note->asShortStringForMeasuresSlices ();
                   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -791,7 +791,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                     if (gTraceOahGroup->getTraceMeasuresSlices ()) {
                       gLog <<
                         "Solo note or rest " <<
-                        note->asShortStringForTimeView ();
+                        note->asShortStringForMeasuresSlices ();
 
                       S_msrVoice
                         voice =
@@ -1000,7 +1000,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
       // print the measure
       os <<
         note->
-          asShortStringForTimeView ();
+          asShortStringForMeasuresSlices ();
 
       if (++i == iEnd) break;
       os << ' ';

@@ -38,7 +38,7 @@ namespace MusicFormats
 class   msrClefKeyTimeSignatureGroup;
 typedef SMARTP<msrClefKeyTimeSignatureGroup> S_msrClefKeyTimeSignatureGroup;
 
-// voices
+// voice kinds
 //______________________________________________________________________________
 enum class msrVoiceKind {
   kVoiceKindRegular,

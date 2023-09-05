@@ -1944,7 +1944,7 @@ R"()",
     traceVoicesFlatViewBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
         "trace-voices-flat-view", "tvoicesflatview",
-R"(Trace the voices flat view gathering activity)",
+R"(Trace the voices flat view gathering activity.)",
         "fTraceVoicesFlatView",
         fTraceVoicesFlatView,
         fTracePassesBooleanAtom);
@@ -1953,21 +1953,21 @@ R"(Trace the voices flat view gathering activity)",
     appendAtomToSubGroup (
       traceVoicesFlatViewBooleanAtom);
 
-//   // voices flat view details
-//
-//   S_oahThreeBooleansAtom
-//     traceVoicesFlatViewDetailsBooleanAtom =
-//       oahThreeBooleansAtom::create (
-//         "trace-voices-flat-view-details", "tvoicesflatviewdets",
-// R"(Measures slices details)",
-//         "fTraceVoicesFlatViewDetails",
-//         fTraceVoicesFlatViewDetails,
-//         traceVoicesFlatViewBooleanAtom,
-//         fTracePassesBooleanAtom);
-//
-//   subGroup->
-//     appendAtomToSubGroup (
-//       traceVoicesFlatViewDetailsBooleanAtom);
+  // voices flat view details
+
+  S_oahThreeBooleansAtom
+    traceVoicesFlatViewDetailsBooleanAtom =
+      oahThreeBooleansAtom::create (
+        "trace-voices-flat-view-details", "tvoicesflatviewdets",
+R"(Trace the voices flat view gathering activity with more details.)",
+        "fTraceVoicesFlatViewDetails",
+        fTraceVoicesFlatViewDetails,
+        traceVoicesFlatViewBooleanAtom,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceVoicesFlatViewDetailsBooleanAtom);
 }
 
 void traceOahGroup::initializeMeasuresSlicesTraceOah ()
@@ -2007,7 +2007,7 @@ R"()",
     traceMeasuresSlicesBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
         "trace-measures-slices", "tmeasslices",
-R"(Trace the measures slices gathering activity)",
+R"(Trace the measures slices gathering activity.)",
         "fTraceMeasuresSlices",
         fTraceMeasuresSlices,
         fTracePassesBooleanAtom);
@@ -2022,7 +2022,7 @@ R"(Trace the measures slices gathering activity)",
     traceMeasuresSlicesDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
         "trace-measures-slices-details", "tmeasslicesdets",
-R"(Trace the measures slices gathering activity details)",
+R"(Trace the measures slices gathering activity details.)",
         "fTraceMeasuresSlicesDetails",
         fTraceMeasuresSlicesDetails,
         traceMeasuresSlicesBooleanAtom,
@@ -2995,6 +2995,13 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
     std::setw (fieldWidth) << "fTraceVoiceMoments" << ": " <<
     fTraceVoiceMoments <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fTraceVoicesFlatView" << ": " <<
+    fTraceVoicesFlatView <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceVoicesFlatViewDetails" << ": " <<
+    fTraceVoicesFlatViewDetails <<
     std::endl;
 
   gLog << std::left <<

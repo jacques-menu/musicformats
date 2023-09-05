@@ -22,8 +22,12 @@ namespace MusicFormats
 // data types
 
 enum class msrStemKind {
-  kStemNeutral,
-  kStemUp, kStemDown, kStemDouble
+  kStemKind_NONE,
+
+  kStemKindNeutral,
+  kStemKindUp, kStemKindDown,
+
+  kStemKindDouble
 };
 
 std::string msrStemKindAsString (

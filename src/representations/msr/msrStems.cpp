@@ -116,7 +116,7 @@ void msrStem::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -130,17 +130,20 @@ std::string msrStemKindAsString (
   std::string result;
 
   switch (stemKind) {
-    case msrStemKind::kStemNeutral:
-      result = "kStemNeutral";
+    case msrStemKind::kStemKind_NONE:
+      result = "kStemKind_NONE";
       break;
-    case msrStemKind::kStemUp:
-      result = "kStemUp";
+    case msrStemKind::kStemKindNeutral:
+      result = "kStemKindNeutral";
       break;
-    case msrStemKind::kStemDown:
-      result = "kStemDown";
+    case msrStemKind::kStemKindUp:
+      result = "kStemKindUp";
       break;
-    case msrStemKind::kStemDouble:
-      result = "kStemDouble";
+    case msrStemKind::kStemKindDown:
+      result = "kStemKindDown";
+      break;
+    case msrStemKind::kStemKindDouble:
+      result = "kStemKindDouble";
       break;
   } // switch
 

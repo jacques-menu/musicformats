@@ -146,6 +146,9 @@ class EXP displayMsrMeasuresSlicesVisitor :
 
     S_msrOahGroup         fMsrOahGroup;
 
+    S_msrMeasuresSlicesSequence
+                          fMeasuresSlicesSequence;
+
     // score
     // ------------------------------------------------------
 

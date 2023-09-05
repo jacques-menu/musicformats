@@ -908,7 +908,7 @@ class EXP msrClefKeyTimeSignatureGroup : public msrMeasureElement
 
     S_msrMeasure          fClefKeyTimeSignatureGroupUpLinkToMeasure;
 
-    int                   fGroupInputLineNumber;
+    int                   fGroupInputLineNumber; // start/end line numbers??? JMI v0.9.70
 
     // clef
     S_msrClef             fClef;

@@ -271,6 +271,9 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceVoicesFlatView () const
                               { return fTraceVoicesFlatView; }
 
+    Bool                  getTraceVoicesFlatViewDetails () const
+                              { return fTraceVoicesFlatViewDetails; }
+
     // measures slices
     Bool                  getTraceMeasuresSlices () const
                               { return fTraceMeasuresSlices; }
@@ -916,6 +919,7 @@ class EXP traceOahGroup : public oahGroup
     // --------------------------------------
 
     Bool                  fTraceVoicesFlatView;
+    Bool                  fTraceVoicesFlatViewDetails;
 
     // measures slices
     // --------------------------------------

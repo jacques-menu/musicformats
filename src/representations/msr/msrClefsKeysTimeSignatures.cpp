@@ -666,7 +666,7 @@ std::string msrClefKeyTimeSignatureGroup::asString () const
   ss <<
     ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
     ", fGroupItemsNumber: " << fGroupItemsNumber <<
-    ", line " << fInputStartLineNumber <<
+//     ", line " << fInputStartLineNumber << // JMI v0.9.70
     ']';
 
   return ss.str ();
@@ -678,9 +678,9 @@ std::string msrClefKeyTimeSignatureGroup::asShortStringForMeasuresSlices () cons
 
   ss <<
     '[' <<
-    "msrClefKeyTimeSignatureGroup: " << fClef->asString () <<
-    ", fKey: " << fKey->asString () <<
-    ", fTimeSignature: " << fTimeSignature->asString () <<
+    "msrClefKeyTimeSignatureGroup: " << fClef <<
+    ", fKey: " << fKey <<
+    ", fTimeSignature: " << fTimeSignature <<
     ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
     ", fGroupItemsNumber: " << fGroupItemsNumber <<
     ']';
@@ -691,8 +691,9 @@ std::string msrClefKeyTimeSignatureGroup::asShortStringForMeasuresSlices () cons
 void msrClefKeyTimeSignatureGroup::print (std::ostream& os) const
 {
   os <<
-    "[msrClefKeyTimeSignatureGroup" <<
+    "[ClefKeyTimeSignatureGroup" <<
     std::endl;
+
   ++gIndenter;
 
   const int fieldWidth = 22;
@@ -703,9 +704,9 @@ void msrClefKeyTimeSignatureGroup::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fGroupItemsNumber" << ": " << fGroupItemsNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "line" << ": " << fInputStartLineNumber <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
+//     "line" << ": " << fInputStartLineNumber << // JMI v0.9.70
     std::endl;
 
   os <<

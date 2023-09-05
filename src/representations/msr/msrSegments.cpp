@@ -805,7 +805,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Appending clef " << clef->asString () <<
+//       "Appending clef " << clef
 //       " to segment " << asString () <<
 //       ", in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -867,7 +867,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Prepending clef " << clef->asString () <<
+//       "Prepending clef " << clef
 //       " to segment " << asString () <<
 //       ", in voice \"" <<
 //       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1051,7 +1051,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Appending key " << key->asString () <<
+//       "Appending key " << key
 //       " to segment " << asString () <<
 //     ", in voice \"" <<
 //     fSegmentUpLinkToVoice->getVoiceName () <<
@@ -3335,7 +3335,7 @@ void msrSegment::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fSegmentShortestNoteWholeNotes" << ": " <<
-    fSegmentShortestNoteWholeNotes.asString () <<
+    fSegmentShortestNoteWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fSegmentShortestNoteTupletFactor" << ": " <<

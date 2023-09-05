@@ -12,6 +12,8 @@
 #ifndef ___msrInterface___
 #define ___msrInterface___
 
+#include "displayMsrVoicesFlatViewVisitor.h"
+
 #include "msrOah.h"
 
 
@@ -50,9 +52,10 @@ EXP void displayMsrScoreNames (
 
 //______________________________________________________________________________
 EXP void displayMsrScoreVoicesFlatView (
-  S_msrScore           theMsrScore,
-  const S_msrOahGroup& msrOpts,
-  const std::string&   passDescription);
+  S_msrScore                    theMsrScore,
+  const S_msrOahGroup&          msrOpts,
+  const std::string&            passDescription,
+  msrVoicesFlatViewDetailedKind displayVoicesFlatViewDetailsKind);
 
 //_______________________________________________________________________________
 void displayMsrScoreMeasuresSlices (

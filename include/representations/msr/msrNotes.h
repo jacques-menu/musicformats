@@ -950,35 +950,21 @@ class EXP msrNote : public msrTupletElement
 //                             int actualNotes, int normalNotes) const;
 
     // note as string
-    std::string           notePitchAndSoundingWholeNotesAsString () const
-                              {
-                                return
-                                  notePitchAsString ()
-                                    +
-                                noteSoundingWholeNotespitchAndOctaveAsString ();
-                              }
-
-    std::string           soundingNoteEssentialsAsString () const;
-    std::string           soundingNoteEssentialsAsStringForMeasuresSlices () const;
-
-    std::string           nonSoundingNoteEssentialsAsString () const;
-    std::string           nonSoundingNoteEssentialsAsStringForMeasuresSlices () const;
-
+    std::string           noteCoreAsString () const;
     std::string           noteComplementsAsString () const;
 
-    std::string           pitchAndOctaveAsString () const;
+    std::string           noteCoreAndComplementAsString () const;
 
     std::string           asString () const override;
-    std::string           asShortStringForMeasuresSlices () const override;
-
     std::string           asShortString () const override;
+
     std::string           asShortStringWithRawWholeNotes () const;
 
-    std::string           asShortStringForTimeView () const;
+    std::string           asShortStringForMeasuresSlices () const override;
 
-    std::string           asMinimalString () const;
+//     std::string           asMinimalString () const;
 
-    std::string           noteForPrintAsSting () const;
+//     std::string           noteForPrintAsString () const;
 
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;

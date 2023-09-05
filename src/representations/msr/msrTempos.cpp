@@ -164,7 +164,7 @@ std::string msrTempoNote::asString () const
 
   ss <<
     "Tempo note" <<
-    ", tempoNoteWholeNotes: " << fTempoNoteWholeNotes.asString () <<
+    ", tempoNoteWholeNotes: " << fTempoNoteWholeNotes <<
     ", tempoNoteBelongsToATuplet: " <<
     fTempoNoteBelongsToATuplet;
 
@@ -184,7 +184,7 @@ void msrTempoNote::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "tempoNoteWholeNotes" << ": " << fTempoNoteWholeNotes.asString () <<
+    "tempoNoteWholeNotes" << ": " << fTempoNoteWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "tempoNoteBelongsToATuplet" << ": " <<
@@ -411,7 +411,7 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
 
     ss <<
       "Adding tempoTuplet '" <<
-      tempoTuplet->asString () <<
+      tempoTuplet <<
       "' to tempoTuplet '" <<
       asString () <<
       "'";
@@ -672,7 +672,7 @@ std::string msrTempoTuplet::asString () const
   ss <<
     "TempoTuplet " <<
     fTempoTupletFactor <<
-    ' ' << fTempoTupletDisplayWholeNotes.asString () << " display whole notes" <<
+    ' ' << fTempoTupletDisplayWholeNotes << " display whole notes" <<
     ":";
 
   ss << '[';
@@ -725,7 +725,7 @@ std::string msrTempoTuplet::asString () const
   ss <<
     "TempoTuplet " <<
     fTempoTupletFactor <<
-    ' ' << fTempoTupletSoundingWholeNotes.asString () << " tempo tuplet sounding whole notes" <<
+    ' ' << fTempoTupletSoundingWholeNotes << " tempo tuplet sounding whole notes" <<
     " measure '" <<
     fTempoTupletMeasureNumber <<
     "':";
@@ -795,7 +795,7 @@ void msrTempoTuplet::print (std::ostream& os) const
     mfSingularOrPlural (
       fTempoTupletElements.size (), "element", "elements") <<
     ", display whole notes: " <<
-    fTempoTupletDisplayWholeNotes.asString () <<
+    fTempoTupletDisplayWholeNotes <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
@@ -815,7 +815,7 @@ void msrTempoTuplet::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "MemberNotesDisplayWholeNotes" << ": " <<
-    fMemberNotesDisplayWholeNotes.asString () <<
+    fMemberNotesDisplayWholeNotes <<
     std::endl << std::endl;
 
 /* JMI ???

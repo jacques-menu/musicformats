@@ -1323,7 +1323,7 @@ void msrPart::appendTimeSignatureToPart (
 //
 //     ss <<
 //       "Appending time signature " <<
-//       timeSignature->asString () <<
+//       timeSignature
 //       " to part clone " << getPartCombinedName () <<
 //       std::endl;
 //
@@ -3568,7 +3568,7 @@ void msrPart::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) << "fPartShortestNoteWholeNotes" << ": " <<
-    fPartShortestNoteWholeNotes.asString () <<
+    fPartShortestNoteWholeNotes <<
     std::endl;
 
   os << std::left <<

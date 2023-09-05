@@ -525,7 +525,10 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr2-summary", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-voices-flat-view", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-voices-flat-view-details", subGroup);
+  
   registerAtomInRegularSubgroup ("display-msr2-voices-flat-view", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-voices-flat-viewdetails", subGroup);
 
   // atoms from the insider handler depending on the generated output kind
   switch (fMultiGenerationOutputKind) {

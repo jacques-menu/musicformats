@@ -230,7 +230,7 @@ std::string wholeNotesAsLilypondString (
 //      rationalHasBeenSimplified <<
 //       std::endl <<
       "--> integralNumberOfWholeNotes: " <<
-      integralNumberOfWholeNotes.asString () <<
+      integralNumberOfWholeNotes <<
       std::endl << std::endl;
 
 //     gWaeHandler->waeTrace (

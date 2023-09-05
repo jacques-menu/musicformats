@@ -329,9 +329,10 @@ void displayMsrScoreNames (
 
 //_______________________________________________________________________________
 void displayMsrScoreVoicesFlatView (
-  S_msrScore           theMsrScore,
-  const S_msrOahGroup& msrOpts,
-  const std::string&   passDescription)
+  S_msrScore                    theMsrScore,
+  const S_msrOahGroup&          msrOpts,
+  const std::string&            passDescription,
+  msrVoicesFlatViewDetailedKind displayVoicesFlatViewDetailsKind)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -362,7 +363,8 @@ void displayMsrScoreVoicesFlatView (
   // create an displayMsrVoicesFlatViewVisitor visitor
   displayMsrVoicesFlatViewVisitor
     voicesFlatViewVisitor (
-      msrOpts);
+      msrOpts,
+      displayVoicesFlatViewDetailsKind);
 
   voicesFlatViewVisitor.printMsrScoreVoicesFlatView (
     theMsrScore);

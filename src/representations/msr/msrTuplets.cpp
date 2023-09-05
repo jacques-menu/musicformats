@@ -367,7 +367,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 
     ss <<
       "Appending chord " <<
-      chord->asString () <<
+      chord <<
       " to tuplet " <<
       asString ();
 
@@ -412,7 +412,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 
     ss <<
       "Appending tuplet " <<
-      tuplet->asString () <<
+      tuplet <<
       " to tuplet " <<
       asString ();
 
@@ -457,7 +457,7 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 
     ss <<
       "Appending tuplet " <<
-      tuplet->asString () <<
+      tuplet <<
       " to tuplet clone " <<
       asString ();
 
@@ -888,7 +888,7 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
     gLog <<
       "% fTupletFactor: " << fTupletFactor.asFractionString () <<
       std::endl <<
-      "% containingTupletFactor: " << containingTupletFactor.asString () <<
+      "% containingTupletFactor: " << containingTupletFactor <<
       std::endl;
 
     --gIndenter;
@@ -1037,7 +1037,7 @@ std::string msrTuplet::asString () const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes.asString () <<
+    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes <<
     ", line " << fInputStartLineNumber;
 
   ss <<
@@ -1112,7 +1112,7 @@ std::string msrTuplet::asShortString () const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes.asString () <<
+    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes <<
     ", line " << fInputStartLineNumber;
 
   ss <<
@@ -1184,7 +1184,7 @@ void msrTuplet::printFull (std::ostream& os) const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes.asString () <<
+    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes <<
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
@@ -1202,17 +1202,17 @@ void msrTuplet::printFull (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes.asString () <<
+    fSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fMemberNotesDisplayWholeNotes" << ": " <<
-    fMemberNotesDisplayWholeNotes.asString () <<
+    fMemberNotesDisplayWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fTupletDisplayWholeNotes" << ": " <<
-    fTupletDisplayWholeNotes.asString () <<
+    fTupletDisplayWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1318,7 +1318,7 @@ void msrTuplet::print (std::ostream& os) const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes.asString () <<
+    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes <<
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
@@ -1337,17 +1337,17 @@ void msrTuplet::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes.asString () <<
+    fSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fTupletDisplayWholeNotes" << ": " <<
-    fTupletDisplayWholeNotes.asString () <<
+    fTupletDisplayWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fMemberNotesDisplayWholeNotes" << ": " <<
-    fMemberNotesDisplayWholeNotes.asString () <<
+    fMemberNotesDisplayWholeNotes <<
     std::endl;
 
   os << std::left <<

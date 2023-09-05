@@ -327,10 +327,20 @@ class EXP msrOahGroup : public oahGroup
     Bool                  getDisplayFirstMsrFlatView () const
                               { return fDisplayFirstMsrFlatView; }
 
+    void                  setDisplayFirstMsrFlatViewDetails ()
+                              { fDisplayFirstMsrFlatViewDetails = true; }
+    Bool                  getDisplayFirstMsrFlatViewDetails () const
+                              { return fDisplayFirstMsrFlatViewDetails; }
+
     void                  setDisplaySecondMsrFlatView ()
                               { fDisplaySecondMsrFlatView = true; }
     Bool                  getDisplaySecondMsrFlatView () const
                               { return fDisplaySecondMsrFlatView; }
+
+    void                  setDisplaySecondMsrFlatViewDetails ()
+                              { fDisplaySecondMsrFlatViewDetails = true; }
+    Bool                  getDisplaySecondMsrFlatViewDetails () const
+                              { return fDisplaySecondMsrFlatViewDetails; }
 
 
     // languages
@@ -475,7 +485,10 @@ class EXP msrOahGroup : public oahGroup
     Bool                  fDisplaySecondMsrSummary;
 
     Bool                  fDisplayFirstMsrFlatView;
+    Bool                  fDisplayFirstMsrFlatViewDetails;
+
     Bool                  fDisplaySecondMsrFlatView;
+    Bool                  fDisplaySecondMsrFlatViewDetails;
 
     // languages
     msrQuarterTonesPitchesLanguageKind

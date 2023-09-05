@@ -256,7 +256,8 @@ void msrStaff::initializeStaff ()
         std::stringstream ss;
 
         ss <<
-          "Appending part clef " << clef->asString () <<
+          "Appending part clef " <<
+          clef->asString () <<
           " as initial clef to staff \"" <<
           fStaffName <<
           "\" in part " <<
@@ -289,7 +290,8 @@ void msrStaff::initializeStaff ()
         std::stringstream ss;
 
         ss <<
-          "Appending part key '" << key->asString () <<
+          "Appending part key '" <<
+          key->asString () <<
           "' as initial key to staff \"" <<
           fStaffName <<
           "\" in part " <<
@@ -1838,7 +1840,7 @@ void msrStaff::registerVoiceInStaffClone (
 //
 //       ss <<
 //         "Clef " <<
-//         clef->asString () <<
+//         clef
 //         " ignored because it is already present in staff " <<
 //         fStaffName <<
 //         "\" in part " <<
@@ -1864,7 +1866,8 @@ void msrStaff::appendClefToStaff  (
     std::stringstream ss;
 
     ss <<
-      "Appending clef " << clef->asString () <<
+      "Appending clef " <<
+      clef->asString () <<
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
@@ -1949,7 +1952,8 @@ void msrStaff::appendKeyToStaff (
     std::stringstream ss;
 
     ss <<
-      "Appending key " << key->asString () <<
+      "Appending key " <<
+      key->asString () <<
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
@@ -2056,8 +2060,9 @@ void msrStaff::appendTimeSignatureToStaff (
     std::stringstream ss;
 
     ss <<
-      "Appending time signature '" << timeSignature->asString () <<
-      "' to staff \"" <<
+      "Appending time signature " <<
+      timeSignature->asString () <<
+      " to staff \"" <<
       fStaffName <<
       "\"";
 
@@ -2149,12 +2154,12 @@ void msrStaff::appendTimeSignatureToStaff (
     // register timeSignature as current staff time signature
     fStaffCurrentTimeSignature = timeSignature;
 
-    // cascade timeSignature to all voices
-    for (const S_msrVoice& voice : fStaffAllVoicesList) {
-      voice->
-        appendTimeSignatureToVoice (
-          timeSignature);
-    } // for
+//     // cascade timeSignature to all voices
+//     for (const S_msrVoice& voice : fStaffAllVoicesList) {
+//       voice->
+//         appendTimeSignatureToVoice (
+//           timeSignature);
+//     } // for
   }
 
   --gIndenter;
@@ -2202,8 +2207,8 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Appending time signature '" << timeSignature->asString () <<
-//       "' to staff clone \"" <<
+//       "Appending time signature " << timeSignature
+//       " to staff clone \"" <<
 //       fStaffName <<
 //       "\" in part " <<
 //       fStaffUpLinkToPart->getPartCombinedName () <<
@@ -3750,7 +3755,7 @@ void msrStaff::printFull (std::ostream& os) const
   // staff shortest note
   os << std::left <<
     std::setw (fieldWidth) << "fStaffShortestNoteWholeNotes" << ": " <<
-    fStaffShortestNoteWholeNotes.asString () <<
+    fStaffShortestNoteWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) << "fStaffShortestNoteTupletFactor" << ": " <<
     fStaffShortestNoteTupletFactor <<

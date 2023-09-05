@@ -30,11 +30,39 @@
 namespace MusicFormats
 {
 
+// voice kinds
+//______________________________________________________________________________
+std::string msrVoicesFlatViewDetailedKindAsString (
+  msrVoicesFlatViewDetailedKind voicesFlatViewDetailedKind)
+{
+  std::string result;
+
+  switch (voicesFlatViewDetailedKind) {
+    case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindYes:
+      result = "kVoicesFlatViewDetailedKindYes";
+      break;
+    case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindNo:
+      result = "kVoicesFlatViewDetailedKindNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrVoicesFlatViewDetailedKind& elt)
+{
+  os << msrVoicesFlatViewDetailedKindAsString (elt);
+  return os;
+}
+
 //________________________________________________________________________
 displayMsrVoicesFlatViewVisitor::displayMsrVoicesFlatViewVisitor (
-  const S_msrOahGroup& msrOpts)
+  const                         S_msrOahGroup& msrOpts,
+  msrVoicesFlatViewDetailedKind voicesFlatViewDetailedKind)
 {
   fMsrOahGroup = msrOpts;
+
+  fVoicesFlatViewDetailedKind = voicesFlatViewDetailedKind;
 
 //   // part groups
 //   fPartGroupsCounter = 0;
@@ -794,8 +822,6 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrMeasure& elt)
 
   ++gIndenter;
 
-  gLog << gTab;
-
 //   const std::list<S_msrMeasureElement>&
 //     measureElementsList =
 //       elt->getMeasureElementsList ();
@@ -891,8 +917,24 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrNote& elt)
   } // switch
 
   if (noteIsToBeDisplayed) {
-    gLog <<
-      elt->pitchAndOctaveAsString () << ' ';
+    switch (fVoicesFlatViewDetailedKind) {
+      case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindYes:
+        gLog <<
+          elt->asString () <<
+          std::endl <<
+          elt->asShortString () <<
+          std::endl <<
+          elt->noteCoreAndComplementAsString () <<
+          std::endl <<
+//           elt->asMinimalString () <<
+//           std::endl <<
+          std::endl;
+        break;
+      case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindNo:
+        gLog <<
+          elt->noteCoreAsString () << ' ';
+        break;
+    } // switch
   }
 }
 

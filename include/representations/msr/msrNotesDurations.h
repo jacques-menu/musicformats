@@ -184,7 +184,7 @@ class EXP msrWholeNotes
 
     std::string           asString () const;
 
-    std::string           pitchAndOctaveAsString () const;
+    std::string           noteCoreAsString () const;
 
 //     std::string           asFractionString () const;
 

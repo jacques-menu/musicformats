@@ -319,37 +319,37 @@ std::string msrOctaveKindAsString (msrOctaveKind octaveKind)
 
   switch (octaveKind) {
     case msrOctaveKind::kOctave_UNKNOWN_:
-      result = "o?";
+      result = "unpitched"; // JMI v0.9.70
       break;
     case msrOctaveKind::kOctave0:
-      result = "o0";
+      result = "o:0";
       break;
     case msrOctaveKind::kOctave1:
-      result = "o1";
+      result = "o:1";
       break;
     case msrOctaveKind::kOctave2:
-      result = "o2";
+      result = "o:2";
       break;
     case msrOctaveKind::kOctave3:
-      result = "o3";
+      result = "o:3";
       break;
     case msrOctaveKind::kOctave4:
-      result = "o4";
+      result = "o:4";
       break;
     case msrOctaveKind::kOctave5:
-      result = "o5";
+      result = "o:5";
       break;
     case msrOctaveKind::kOctave6:
-      result = "o6";
+      result = "o:6";
       break;
     case msrOctaveKind::kOctave7:
-      result = "o7";
+      result = "o:7";
       break;
     case msrOctaveKind::kOctave8:
-      result = "o8";
+      result = "o:8";
       break;
     case msrOctaveKind::kOctave9:
-      result = "o9";
+      result = "o:9";
       break;
   } // switch
 
