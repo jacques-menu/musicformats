@@ -150,59 +150,6 @@ stringFilterDyadicOperator::stringFilterDyadicOperator (
 stringFilterDyadicOperator::~stringFilterDyadicOperator ()
 {}
 
-// Bool stringFilterDyadicOperator::stringMatches (const std::string& theString) const
-// {
-//   return
-//     fLeftOperand->stringMatches (theString)
-//       ||
-//     fRightOperand->stringMatches (theString);
-// }
-
-// std::string stringFilterDyadicOperator::asString () const
-// {
-//   stringstream ss;
-//
-//   ss <<
-//     fLeftOperand->asString () <<
-//     " | " <<
-//     fRightOperand->asString ();
-//
-//   return ss.str ();
-// }
-
-// std::string stringFilterDyadicOperator::asStringWithFullParentheses () const
-// {
-//   stringstream ss;
-//
-//   ss <<
-//     '(' <<
-//     fLeftOperand->asStringWithFullParentheses () <<
-//     " | " <<
-//     fRightOperand->asStringWithFullParentheses () <<
-//     ')';
-//
-//   return ss.str ();
-// }
-
-// void stringFilterDyadicOperator::print (std::ostream& os) const
-// {
-//   os <<
-//     "Or" <<
-//     endl;
-//
-//   ++gIndenter;
-//
-//   os <<
-//     fLeftOperand <<
-//     std::endl <<
-//     "|" <<
-//     std::endl <<
-//     fLeftOperand <<
-//     std::endl;
-//
-//   --gIndenter;
-// }
-
 std::ostream& operator<< (std::ostream& os, const S_stringFilterOr& elt)
 {
   if (elt) {
@@ -238,7 +185,7 @@ stringFilterNot::~stringFilterNot ()
 Bool stringFilterNot::stringMatches (const std::string& theString) const
 {
   return
-    fOperand->stringMatches (theString);
+    ! fOperand->stringMatches (theString);
 }
 
 std::string stringFilterNot::asString () const
@@ -724,55 +671,6 @@ void stringFilterString::print (std::ostream& os) const
 //
 //   return os;
 // }
-
-//______________________________________________________________________________
-void testFilter (std::ostream& os)
-{
-  S_stringFilterNode
-    theExpression =
-
-      stringFilterAnd::create (
-
-        stringFilterString::create (
-          "xml"),
-
-        stringFilterNot::create (
-          stringFilterString::create (
-            "lilypond")
-          )
-        );
-
-  os <<
-    "theExpression:" <<
-    std::endl;
-
-  ++gIndenter;
-  os <<
-    theExpression <<
-    std::endl;
-  --gIndenter;
-
-  os <<
-    "as string:" <<
-    std::endl;
-
-  ++gIndenter;
-  os <<
-    theExpression->asString () <<
-    std::endl <<
-    std::endl;
-  --gIndenter;
-
-  os <<
-    "as string with full parentheses:" <<
-    std::endl;
-
-  ++gIndenter;
-  os <<
-    theExpression->asStringWithFullParentheses () <<
-    std::endl;
-  --gIndenter;
-}
 
 // //______________________________________________________________________________
 // // explicit mfStack template specializations definitions

@@ -213,7 +213,7 @@ std::string msrSegno::asString () const
 
   ss <<
     "Segno" <<
-    ", staffNumber :" << fStaffNumber <<
+    ", fDalSegnoString :" << fStaffNumber <<
     ", line " << fInputStartLineNumber;
 
   return ss.str ();
@@ -400,10 +400,10 @@ std::string msrDalSegno::asString () const
 
   ss <<
     "[DalSegno" <<
-    ", dalSegnoKind: " << msrDalSegnoKindAsString (fDalSegnoKind) <<
-    ", dalSegnoString: \"" << fDalSegnoString << "\"" <<
-    ", staffNumber: " << fStaffNumber <<
-    ", measurePosition: " << fMeasurePosition.asString () <<
+    ", fDalSegnoKind: " << fDalSegnoKind <<
+    ", fDalSegnoString: \"" << fDalSegnoString << "\"" <<
+    ", fDalSegnoString: " << fStaffNumber <<
+    ", fMeasurePosition: " << fMeasurePosition <<
     ", line " << fInputStartLineNumber <<
     ']';
 
@@ -422,16 +422,16 @@ void msrDalSegno::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "dalSegnoKind" << ": " << msrDalSegnoKindAsString (fDalSegnoKind) <<
+    "fDalSegnoKind" << ": " << fDalSegnoKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "dalSegnoString" << ": \"" << fDalSegnoString << "\"" <<
+    "fDalSegnoString" << ": \"" << fDalSegnoString << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "staffNumber" << ": " << fStaffNumber <<
+    "fDalSegnoString" << ": " << fStaffNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "measurePosition" << ": " << fMeasurePosition.asString () <<
+    "fMeasurePosition" << ": " << fMeasurePosition <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "voicePosition" << ": " << fVoicePosition <<

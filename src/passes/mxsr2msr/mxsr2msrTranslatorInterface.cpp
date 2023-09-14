@@ -192,14 +192,14 @@ void populateMsrSkeletonFromMxsr (
 
 //   // display the populated MSR score slices details if requested
 //   // ------------------------------------------------------
-//
-//   if (gMsrOahGroup->getDisplayFirstMsrMeasuresSlicesDetails()) {
-//     // display the score name
-//     displayMsrScoreMeasuresSlices (
-//       scoreSkeletonToBePopulated,
-//       gMsrOahGroup,
-//       gLanguage->displayTheSlicesOfTheFirstMSR ());
-//   }
+
+  if (gMsrOahGroup->getDisplayFirstMsrMeasuresSlicesDetails()) {
+    // display the score name
+    displayMsrScoreMeasuresSlices (
+      scoreSkeletonToBePopulated,
+      gMsrOahGroup,
+      gLanguage->displayTheSlicesOfTheFirstMSR ());
+  }
 }
 
 

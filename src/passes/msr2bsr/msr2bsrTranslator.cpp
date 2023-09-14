@@ -115,7 +115,12 @@ S_bsrScore msr2bsrTranslator::translateMsrToBsr (
   // create a msrScore browser
   msrBrowser<msrScore> browser (this);
 
-  // browse the score with the browser
+  // set the parts browsing order
+  theMsrScore->
+    setStavesBrowingOrderKind (
+      msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
+
+  // browse the visited MSR score
   browser.browse (*fVisitedMsrScore);
 
   // forget about the visited MSR score

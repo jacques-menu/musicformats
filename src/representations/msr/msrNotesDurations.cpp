@@ -574,7 +574,7 @@ std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt)
 msrNotesDuration::msrNotesDuration ()
 {
   fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
-  fDotsNumber   = 0;
+  fDotsNumber = 0;
 }
 
 msrNotesDuration::msrNotesDuration (
@@ -712,7 +712,7 @@ std::string msrNotesDuration::asString () const
   std::stringstream ss;
 
   ss <<
-     msrNotesDurationKindAsString (fNotesDurationKind);
+     fNotesDurationKind;
 
   for (int i = 1; i <= fDotsNumber; ++i) {
     ss << ".";
@@ -727,8 +727,8 @@ void msrNotesDuration::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "notesNotesDurationKind" << ": " <<
-    msrNotesDurationKindAsString (fNotesDurationKind) <<
+    "fNotesDurationKind" << ": " <<
+    fNotesDurationKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "dotsNumber" << ": " << fDotsNumber <<
@@ -842,7 +842,7 @@ int msrNumberOfDots (int n)
 msrDottedNotesDuration::msrDottedNotesDuration ()
 {
   fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
-  fDotsNumber   = 0;
+  fDotsNumber = 0;
 }
 
 msrDottedNotesDuration::msrDottedNotesDuration (
@@ -980,7 +980,7 @@ std::string msrDottedNotesDuration::asString () const
   std::stringstream ss;
 
   ss <<
-     msrNotesDurationKindAsString (fNotesDurationKind);
+     fNotesDurationKind;
 
   for (int i = 1; i <= fDotsNumber; ++i) {
     ss << ".";
@@ -995,11 +995,11 @@ void msrDottedNotesDuration::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "notesNotesDurationKind" << ": " <<
-    msrNotesDurationKindAsString (fNotesDurationKind) <<
+    "fNotesDurationKind" << ": " <<
+    fNotesDurationKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "dotsNumber" << ": " << fDotsNumber <<
+    "fDotsNumber" << ": " << fDotsNumber <<
     std::endl;
 };
 
@@ -1405,14 +1405,14 @@ std::string msrWholeNotes::asString () const
   return ss.str ();
 }
 
-// std::string msrWholeNotes::asFractionString () const
-// {
-//   std::stringstream ss;
-//
-//   ss << fNumerator << '/' << fDenominator;
-//
-//   return ss.str ();
-// }
+std::string msrWholeNotes::asFractionString () const
+{
+  std::stringstream ss;
+
+  ss << fNumerator << '/' << fDenominator;
+
+  return ss.str ();
+}
 
 void msrWholeNotes::print (std::ostream& os) const
 {

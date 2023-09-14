@@ -66,7 +66,7 @@ void displayMsrNamesVisitor::printMsrScoreNames (
     // create a msrScore browser
     msrBrowser<msrScore> browser (this);
 
-    // browse the score with the browser
+    // browse the score
     browser.browse (*score);
   }
 }

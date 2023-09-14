@@ -255,7 +255,10 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-measures-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-measures-slices-details", subGroup);
+
   registerAtomInRegularSubgroup ("display-msr2-measures-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-measures-slices-details", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-names", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-names", subGroup);
@@ -265,7 +268,7 @@ void xml2lyRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("display-msr1-voices-flat-view", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-voices-flat-view-details", subGroup);
-  
+
   registerAtomInRegularSubgroup ("display-msr2-voices-flat-view", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-voices-flat-viewdetails", subGroup);
 
@@ -273,7 +276,12 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-names", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-summary", subGroup);
+
   registerAtomInRegularSubgroup ("display-lpsr-voices-flat-view", subGroup);
+  registerAtomInRegularSubgroup ("display-lpsr-voices-flat-view-details", subGroup);
+
+  registerAtomInRegularSubgroup ("display-lpsr-measures-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-lpsr-measures-slices-details", subGroup);
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-mxsr", subGroup);

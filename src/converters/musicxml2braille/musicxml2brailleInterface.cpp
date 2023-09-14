@@ -427,7 +427,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         translateBsrToBraille (
           finalizedBsrScore,
           gBsrOahGroup,
-          mfPassIDKind::kMfPassID_4,
+          mfPassIDKind::kMfPassID_7,
           "Convert the finalized BSR into braille",
           brailleCodeFileOutputStream);
       }

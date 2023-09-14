@@ -29,7 +29,7 @@ using namespace MusicFormats;
     there would be no way to 'see' them from outside stringFilterScanner.cpp
 */
 
-EXP extern mfMusicformatsErrorKind launchstringFilterInterpreter (
+EXP extern mfMusicformatsErrorKind launchStringFilterInterpreter (
   const std::string& inputString);
 
 

@@ -240,7 +240,10 @@ void msr2brailleRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr2-full", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-measures-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-measures-slices-details", subGroup);
+
   registerAtomInRegularSubgroup ("display-msr2-measures-slices", subGroup);
+  registerAtomInRegularSubgroup ("display-msr2-measures-slices-details", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-names", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-names", subGroup);

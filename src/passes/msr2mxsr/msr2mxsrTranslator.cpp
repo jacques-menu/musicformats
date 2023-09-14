@@ -92,7 +92,12 @@ Sxmlelement msr2mxsrTranslator::translateMsrToMxsr ()
   // create a msrScore browser
   msrBrowser<msrScore> browser (this);
 
-  // browse the visited score with the browser
+  // set the parts browsing order
+  fVisitedMsrScore->
+    setStavesBrowingOrderKind (
+      msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
+
+  // browse the visited MSR score
   browser.browse (*fVisitedMsrScore);
 
   return fResultingMusicxmlelement;

@@ -109,8 +109,9 @@ std::string msrHarmonyInterval::harmonyIntervalAsString () const
     "HarmonyInterval" <<
     ": " <<
     std::setw (fieldWidth) <<
-    msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
-    "harmonyIntervalRelativeOctave: " << fHarmonyIntervalRelativeOctave;
+    fHarmonyIntervalIntervalKind <<
+    "fHarmonyIntervalIntervalKind: " <<
+    fHarmonyIntervalRelativeOctave;
 
   return ss.str ();
 }
@@ -2699,7 +2700,7 @@ std::string msrHarmonyInterval::asString () const
 
   ss <<
     "[HarmonyInterval " <<
-    msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
+    fHarmonyIntervalIntervalKind <<
     ", fHarmonyIntervalRelativeOctave: " <<
     fHarmonyIntervalRelativeOctave <<
     ']';
@@ -2713,7 +2714,7 @@ std::string msrHarmonyInterval::asShortString () const
 
   ss <<
     '[' <<
-    msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
+    fHarmonyIntervalIntervalKind <<
     ", rel.oct. " <<
     fHarmonyIntervalRelativeOctave <<
     ']';
@@ -2738,11 +2739,12 @@ void msrHarmonyInterval::print (std::ostream& os) const
     std::endl <<
     */
     std::setw (fieldWidth) <<
-    "harmonyIntervalIntervalKind" << ": " <<
-      msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
+    "fHarmonyIntervalIntervalKind" << ": " <<
+      fHarmonyIntervalIntervalKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "harmonyIntervalRelativeOctave" << ": " << fHarmonyIntervalRelativeOctave <<
+    "fHarmonyIntervalIntervalKind" << ": " <<
+    fHarmonyIntervalRelativeOctave <<
   /* JMI
     ", line: " << fInputStartLineNumber <<
     */
@@ -5056,93 +5058,93 @@ std::string msrHarmony::asString () const
   return ss.str ();
 }
 
-std::string msrHarmony::asShortStringForMeasuresSlices () const
-{
-  std::stringstream ss;
-
-  ss <<
-    "[Harmony" <<
-//     ", " << std::hex << std::showbase << this << std::dec << // JMI HEX ADDRESS
-    ", fMeasurePosition: " <<
-    fMeasurePosition.asString () <<
-    ", fHarmonyRootQuarterTonesPitchKind: " <<
-    msrQuarterTonesPitchKindAsStringInLanguage (
-      fHarmonyRootQuarterTonesPitchKind,
-      gMsrOahGroup->
-        getMsrQuarterTonesPitchesLanguageKind ()) <<
-    ", fHarmonyKind: " <<
-    fHarmonyKind;
-
-  // print the harmony uplink to note
-  ss <<
-    ", fHarmonyUpLinkToNote: ";
-  if (fHarmonyUpLinkToNote) {
-    ss <<
-      fHarmonyUpLinkToNote->asString ();
-  }
-  else {
-    ss << "[NULL]";
-  }
-
-//   ss << JMI v0.9.67
-//     ", fHarmonyUpLinkToVoice: ";
-//     if (fHarmonyUpLinkToVoice) {
-//       ss <<
-//         fHarmonyUpLinkToVoice->asString ();
-//     }
-//     else {
-//       ss << "[NULL]";
-//     }
-
-  // print the harmony bass voice position
+// std::string msrHarmony::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
+//
 //   ss <<
-//     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " <<
-//     fVoicePosition <<
-//     std::endl;
-
-  ss <<
-    ", fSoundingWholeNotes: " <<
-    fSoundingWholeNotes <<
-    ", fHarmonyDisplayWholeNotes: " <<
-    fHarmonyDisplayWholeNotes;
-
-  ss <<
-    ", fHarmonyWholeNotesOffset: " <<
-    fHarmonyWholeNotesOffset;
-
-  ss <<
-    ", fMeasurePosition: " <<
-    fMeasurePosition;
-
-  ss <<
-    ", fHarmonyKindText: \"" <<
-    fHarmonyKindText << "\"";
-
-  ss <<
-    ", fHarmonyUpLinkToMeasure: ";
-  if (fHarmonyUpLinkToMeasure) {
-    ss <<
-      fHarmonyUpLinkToMeasure->asString ();
-  }
-  else {
-    ss << "[NULL]";
-  }
-
-  ss << ", fHarmonyInversion: ";
-  if (fHarmonyInversion == K_HARMONY_INVERSION_NONE) {
-    ss << "[NONE]";
-  }
-  else {
-    ss << fHarmonyInversion;
-  }
-
-  ss <<
-    ", line " << fInputStartLineNumber <<
-    ']';
-
-  return ss.str ();
-}
+//     "[Harmony" <<
+// //     ", " << std::hex << std::showbase << this << std::dec << // JMI HEX ADDRESS
+//     ", fMeasurePosition: " <<
+//     fMeasurePosition.asString () <<
+//     ", fHarmonyRootQuarterTonesPitchKind: " <<
+//     msrQuarterTonesPitchKindAsStringInLanguage (
+//       fHarmonyRootQuarterTonesPitchKind,
+//       gMsrOahGroup->
+//         getMsrQuarterTonesPitchesLanguageKind ()) <<
+//     ", fHarmonyKind: " <<
+//     fHarmonyKind;
+//
+//   // print the harmony uplink to note
+//   ss <<
+//     ", fHarmonyUpLinkToNote: ";
+//   if (fHarmonyUpLinkToNote) {
+//     ss <<
+//       fHarmonyUpLinkToNote->asString ();
+//   }
+//   else {
+//     ss << "[NULL]";
+//   }
+//
+// //   ss << JMI v0.9.67
+// //     ", fHarmonyUpLinkToVoice: ";
+// //     if (fHarmonyUpLinkToVoice) {
+// //       ss <<
+// //         fHarmonyUpLinkToVoice->asString ();
+// //     }
+// //     else {
+// //       ss << "[NULL]";
+// //     }
+//
+//   // print the harmony bass voice position
+// //   ss <<
+// //     std::setw (fieldWidth) <<
+// //     "fVoicePosition" << ": " <<
+// //     fVoicePosition <<
+// //     std::endl;
+//
+//   ss <<
+//     ", fSoundingWholeNotes: " <<
+//     fSoundingWholeNotes <<
+//     ", fHarmonyDisplayWholeNotes: " <<
+//     fHarmonyDisplayWholeNotes;
+//
+//   ss <<
+//     ", fHarmonyWholeNotesOffset: " <<
+//     fHarmonyWholeNotesOffset;
+//
+//   ss <<
+//     ", fMeasurePosition: " <<
+//     fMeasurePosition;
+//
+//   ss <<
+//     ", fHarmonyKindText: \"" <<
+//     fHarmonyKindText << "\"";
+//
+//   ss <<
+//     ", fHarmonyUpLinkToMeasure: ";
+//   if (fHarmonyUpLinkToMeasure) {
+//     ss <<
+//       fHarmonyUpLinkToMeasure->asString ();
+//   }
+//   else {
+//     ss << "[NULL]";
+//   }
+//
+//   ss << ", fHarmonyInversion: ";
+//   if (fHarmonyInversion == K_HARMONY_INVERSION_NONE) {
+//     ss << "[NONE]";
+//   }
+//   else {
+//     ss << fHarmonyInversion;
+//   }
+//
+//   ss <<
+//     ", line " << fInputStartLineNumber <<
+//     ']';
+//
+//   return ss.str ();
+// }
 
 void msrHarmony::print (std::ostream& os) const
 {
@@ -7236,7 +7238,7 @@ void printHarmonyStructuresMap ()
     }
     else {
       gLog <<
-        "no intervals" <<
+        "[EMPTY]" <<
         std::endl;
     }
 

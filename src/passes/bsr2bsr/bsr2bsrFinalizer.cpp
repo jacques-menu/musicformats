@@ -46,7 +46,12 @@ bsr2bsrFinalizer::~bsr2bsrFinalizer ()
 void bsr2bsrFinalizer::translateBsrToFinalizedBsr ()
 {
   if (fVisitedBsrScore) {
-    // browse a bsrScore browser
+    // set the parts browsing order
+    fBaseMsrScore->
+      setStavesBrowingOrderKind (
+        msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
+
+    // browse the visited BSR score
     bsrBrowser<bsrScore> browser (this);
     browser.browse (*fVisitedBsrScore);
   }

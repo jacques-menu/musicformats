@@ -224,7 +224,7 @@ else {
         firstMsrScore,
         gMsrOahGroup,
         gGlobalMsr2msrOahGroup,
-        mfPassIDKind::kMfPassID_3,
+        mfPassIDKind::kMfPassID_4,
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
 }
   }
@@ -402,7 +402,7 @@ else {
         theLpsrScore,
         gMsrOahGroup,
         gLpsrOahGroup,
-        mfPassIDKind::kMfPassID_5,
+        mfPassIDKind::kMfPassID_6,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
     }

@@ -10092,9 +10092,15 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
           wedgeKind,
           wedgeNienteKind,
           wedgeLineTypeKind,
-          fCurrentDirectionPlacementKind);
+          fCurrentDirectionPlacementKind,
+          fCurrentMusicXMLVoiceNumber);
 
     fPendingWedgesList.push_back (wedge);
+
+    fPendingVoiceWedgesList.push_back (
+      std::make_pair (
+        fCurrentMusicXMLVoiceNumber,
+        wedge));
   }
 }
 
@@ -11085,7 +11091,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
             fCurrentMusicXMLVoiceNumber)
           ];
       */
-        voice->getVoiceLastAppendedNote (); // ??? JMI
+        voice->getVoiceLastAppendedNote (); // ??? JMI v0.9.70
 
     // is there a pending grace notes group?
     if (fPendingGraceNotesGroup) {
@@ -11155,20 +11161,42 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       fOnGoingChord = false;
     }
 
-      if (fTupletsStack.size ()) { // JMI v0.9.70
-        // finalize the tuplet, only now
-        // in case the last element is actually a chord
-        finalizeTupletStackTopAndPopItFromTupletsStack (
-          inputLineNumber,
-          "visitEnd (S_measure& elt)");
-      }
+    // are there a tuplets to be finalized?
+    if (fTupletsStack.size ()) { // JMI v0.9.70
+      // finalize the tuplet, only now
+      // in case the last element is actually a chord
+      finalizeTupletStackTopAndPopItFromTupletsStack (
+        inputLineNumber,
+        "visitEnd (S_measure& elt)");
+    }
 
-    // attach the spanners to the note
+    // attach the spanners if any to the note
     if (fCurrentSpannersList.size ()) {
       attachCurrentSpannersToNote (
         noteToAttachTo,
         "mxsr2msrTranslator::visitEnd (S_measure& elt)");
     }
+
+    // are there pending voices wedges?
+#ifdef MF_TRACE_IS_ENABLED
+    if (true || gTraceOahGroup->getTraceWedges ()) {
+      std::stringstream ss;
+
+      int numberOfPendingVoicesWedges = fPendingVoiceWedgesList.size ();
+
+      if (numberOfPendingVoicesWedges > 0) {
+        ss <<
+          "fPendingVoiceWedgesList contains PENDING " <<
+          mfSingularOrPlural (
+            numberOfPendingVoicesWedges, "element", "elements");
+
+        mxsr2msrWarning (
+          gServiceRunData->getInputSourceName (),
+          fCurrentNote->getInputStartLineNumber (),
+          ss.str ());
+      }
+    }
+#endif // MF_TRACE_IS_ENABLED
 
     // finalize current measure in the part,
     // to add skips if necessary and set measure kind
@@ -24122,15 +24150,10 @@ void mxsr2msrTranslator::attachPendingWedgesToCurrentNote ()
 
         int numberOfWedges = fPendingWedgesList.size ();
 
-        if (numberOfWedges > 1) {
-          ss <<
-            "there are " << numberOfWedges << " wedges";
-        }
-        else {
-          ss <<
-            "there is 1 wedge";
-        }
         ss <<
+          "fPendingWedgesList contains " <<
+          mfSingularOrPlural (
+            numberOfWedges, "element", "elements") <<
           " attached to a rest";
 
         mxsr2msrWarning (
@@ -24149,7 +24172,83 @@ void mxsr2msrTranslator::attachPendingWedgesToCurrentNote ()
           fPendingWedgesList.front ();
 
       fCurrentNote->appendWedgeToNote (wedge);
+
       fPendingWedgesList.pop_front ();
+    } // while
+  }
+}
+
+//______________________________________________________________________________
+void mxsr2msrTranslator::attachPendingVoicesWedgesToCurrentNoteIfRelevant (
+  int theVoiceNumber)
+{
+  // attach the pending wedges to the note
+  Bool delayAttachment (false);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceWedges ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching pending voice wedges to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (fCurrentNoteIsARest) {
+    if (gGlobalMxsr2msrOahGroup->getDelayRestsWedges ()) {
+      gLog <<
+        "Delaying voice wedge attached to a rest until next note" <<
+    std::endl;
+
+      delayAttachment = true;
+    }
+
+    else {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceWedges ()) {
+        std::stringstream ss;
+
+        int numberOfWedges = fPendingVoiceWedgesList.size ();
+
+        ss <<
+          "fPendingVoiceWedgesList contains " <<
+          mfSingularOrPlural (
+            numberOfWedges, "element", "elements");
+
+        mxsr2msrWarning (
+          gServiceRunData->getInputSourceName (),
+          fCurrentNote->getInputStartLineNumber (),
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+    }
+  }
+
+  if (! delayAttachment) {
+    while (fPendingVoiceWedgesList.size ()) {
+      // grab voiceWedgePair
+      std::pair<int, S_msrWedge>
+        voiceWedgePair =
+          fPendingVoiceWedgesList.front ();
+
+      int
+        voiceNumber =
+          voiceWedgePair.first;
+
+      S_msrWedge
+        wedge =
+          voiceWedgePair.second;
+
+      if (theVoiceNumber == voiceNumber) {
+        fCurrentNote->appendWedgeToNote (wedge);
+      }
+
+      fPendingVoiceWedgesList.pop_front ();
     } // while
   }
 }
@@ -24407,7 +24506,6 @@ void mxsr2msrTranslator::attachPendingPartLevelElementsIfAnyToPart ( // JMI v0.9
   }
 }
 
-
 void mxsr2msrTranslator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
 {
   // attach the pending segnos, if any, to the note
@@ -24494,6 +24592,12 @@ void mxsr2msrTranslator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
   if (fPendingWedgesList.size ()) {
     attachPendingWedgesToCurrentNote ();
   }
+
+  // attach the pending wedges, if any and relevant, to the note
+//   if (fPendingVoiceWedgesList.size ()) {
+//     attachPendingVoicesWedgesToCurrentNoteIfRelevant (
+//       fCurrentMusicXMLVoiceNumber);
+//   }
 
   // attach the pending glissandos, if any, to the note
   if (fPendingGlissandosList.size ()) {
@@ -25839,6 +25943,13 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
   // are all fCurrentNote uplinks set alright ??? JMI v0.9.66
   populateCurrentNoteAfterItHasBeenHandled (inputLineNumber);
+
+
+//   // attach the pending wedges, if any and relevant, to the note
+//   if (fPendingVoiceWedgesList.size ()) {
+//     attachPendingVoicesWedgesToCurrentNoteIfRelevant (
+//       fCurrentMusicXMLVoiceNumber);
+//   }
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////

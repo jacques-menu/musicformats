@@ -36,6 +36,11 @@ displayMsrMeasuresSlicesVisitor::displayMsrMeasuresSlicesVisitor (
 {
   fMsrOahGroup = msrOpts;
 
+  // create the
+  fMeasuresSlicesSequence =
+    msrMeasuresSlicesSequence::create (
+      "measuresOrigin");
+
 //   // part groups
 //   fPartGroupsCounter = 0;
 //
@@ -85,7 +90,7 @@ void displayMsrMeasuresSlicesVisitor::printMsrScoreMeasuresSlices (
     // create a msrScore browser
     msrBrowser<msrScore> browser (this);
 
-    // browse the score with the browser
+    // browse the score
     browser.browse (*score);
   }
 }
@@ -854,12 +859,21 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrMeasure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// //   const std::list<S_msrMeasureElement>&
-// //     measureElementsList =
-// //       elt->getMeasureElementsList ();
-// //
-// //   for (S_msrMeasureElement measure : measureElementsList) {
-// //   } // for
+  // create a msrMeasuresSlice
+  fCurrentMeasuresSlice =
+    msrMeasuresSlice::create (
+      elt->getMeasureNumber (),
+      elt->getMeasurePuristNumber ());
+
+  // add it to fMeasuresSlicesSequence
+  fMeasuresSlicesSequence->
+    appendMeasuresSliceToSequence (
+      fCurrentMeasuresSlice);
+
+  // append elt to fCurrentMeasuresSlice
+  fCurrentMeasuresSlice->
+    appendMeasureToMeasureSlice (
+      elt);
 }
 
 void displayMsrMeasuresSlicesVisitor::visitEnd (S_msrMeasure& elt)

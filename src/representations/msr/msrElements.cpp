@@ -147,10 +147,17 @@ std::string msrElement::asShortString () const
   return asString ();
 }
 
-std::string msrElement::asShortStringForMeasuresSlices () const
+std::string msrElement::asStringForMeasuresSlices () const
 {
   // this can be overriden in actual elements
-  return asShortString ();
+  std::stringstream ss;
+
+  ss <<
+    '[' <<
+    asShortString () <<
+    ']';
+
+  return ss.str ();
 }
 
 void msrElement::print (std::ostream& os) const

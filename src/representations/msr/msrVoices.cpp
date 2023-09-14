@@ -399,7 +399,7 @@ void msrVoice::setVoiceNamesFromNumber (
 
     ss <<
       "Setting the names of '" <<
-      msrVoiceKindAsString (fVoiceKind) <<
+      fVoiceKind <<
       "' voice from voice number '" << voiceNumber <<
       "'";
 
@@ -2517,7 +2517,7 @@ void msrVoice::appendHarmonyToVoice (
 
         ss <<
           "cannot append a harmony to " <<
-          msrVoiceKindAsString (fVoiceKind) <<
+          fVoiceKind <<
           " voice \"" <<
           fVoiceName <<
           "\"";
@@ -2619,7 +2619,7 @@ void msrVoice::appendHarmonyToVoiceClone (
 
         ss <<
           "cannot append a harmony to " <<
-          msrVoiceKindAsString (fVoiceKind) <<
+          fVoiceKind <<
           " voice clone \"" <<
           fVoiceName <<
           "\"";
@@ -2672,7 +2672,7 @@ void msrVoice::appendFiguredBassToVoice (
 
         ss <<
           "cannot append a figured bass to " <<
-          msrVoiceKindAsString (fVoiceKind) <<
+          fVoiceKind <<
           " voice \"" <<
           fVoiceName <<
           "\"";
@@ -2776,7 +2776,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
         ss <<
           "cannot append a figured bass to " <<
-          msrVoiceKindAsString (fVoiceKind) <<
+          fVoiceKind <<
           " voice clone \"" <<
           fVoiceName <<
           "\"";
@@ -4256,7 +4256,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 //       // print the measure
 //       if (gTraceOahGroup->getTraceMeasures ()) {
 //         os <<
-//           measure->asShortStringForMeasuresSlices ();
+//           measure->asStringForMeasuresSlices ();
 //       }
 //       else {
 //         os <<
@@ -4295,7 +4295,7 @@ void msrVoice::displayVoiceMeasuresFlatList (
 // #ifdef MF_TRACE_IS_ENABLED
 //      if (gTraceOahGroup->getTraceMeasures ()) { // JMI v0.9.67
         gLog <<
-          measure->asShortStringForMeasuresSlices ();
+          measure->asStringForMeasuresSlices (); // JMI ??? v0.9.70
 //      }
 //      else {
 //        gLog << measure->getMeasureNumber ();
@@ -11382,7 +11382,7 @@ std::string msrVoice::asShortString () const
 
   ss <<
     "[Voice \"" << fVoiceName << "\", " <<
-    msrVoiceKindAsString (fVoiceKind) <<
+    fVoiceKind <<
 //     msrVoiceKindAsStringForPrint (fVoiceKind) << // JMI
     " voice \"" << fVoiceName <<
     "\", fVoiceNumber '" <<
@@ -11405,7 +11405,7 @@ std::string msrVoice::asString () const
     "\", \"" <<
     fVoiceAlphabeticName <<
     ", " <<
-    msrVoiceKindAsString (fVoiceKind) <<
+    fVoiceKind <<
      ", " <<
     mfSingularOrPlural (
       fVoiceActualNotesCounter, "actual note", "actual notes") <<
@@ -11464,7 +11464,7 @@ void msrVoice::displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
 void msrVoice::printFull (std::ostream& os) const
 {
   os <<
-    "[Voice \"" << fVoiceName <<
+    "[Voice printfull()\"" << fVoiceName <<
 //     msrVoiceKindAsStringForPrint (fVoiceKind) <<
     "\", \"" <<
     fVoiceAlphabeticName <<
@@ -11784,8 +11784,9 @@ void msrVoice::printFull (std::ostream& os) const
     ++gIndenter;
 
     os <<
-      std::endl <<
-      fVoiceLastSegment;
+      std::endl;
+
+    fVoiceLastSegment->printFull (os);
 
     --gIndenter;
   }

@@ -255,6 +255,7 @@ namespace stringfilter {
         value.YY_MOVE_OR_COPY< S_stringFilterNode > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_WORD: // "word"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
       case symbol_kind::S_SingleString: // SingleString
@@ -286,6 +287,7 @@ namespace stringfilter {
         value.move< S_stringFilterNode > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_WORD: // "word"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
       case symbol_kind::S_SingleString: // SingleString
@@ -317,6 +319,7 @@ namespace stringfilter {
         value.copy< S_stringFilterNode > (that.value);
         break;
 
+      case symbol_kind::S_WORD: // "word"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
       case symbol_kind::S_SingleString: // SingleString
@@ -347,6 +350,7 @@ namespace stringfilter {
         value.move< S_stringFilterNode > (that.value);
         break;
 
+      case symbol_kind::S_WORD: // "word"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
       case symbol_kind::S_SingleString: // SingleString
@@ -390,64 +394,70 @@ namespace stringfilter {
             << yysym.location << ": ";
         switch (yykind)
     {
+      case symbol_kind::S_WORD: // "word"
+#line 67 "stringFilterParser.yy"
+                 { yyo << yysym.value.template as < std::string > (); }
+#line 401 "stringFilterParser.cpp"
+        break;
+
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 397 "stringFilterParser.cpp"
+#line 407 "stringFilterParser.cpp"
         break;
 
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 403 "stringFilterParser.cpp"
+#line 413 "stringFilterParser.cpp"
         break;
 
       case symbol_kind::S_StringFilterSpecification: // StringFilterSpecification
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < S_stringFilterNode > (); }
-#line 409 "stringFilterParser.cpp"
+#line 419 "stringFilterParser.cpp"
         break;
 
       case symbol_kind::S_Expression: // Expression
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < S_stringFilterNode > (); }
-#line 415 "stringFilterParser.cpp"
+#line 425 "stringFilterParser.cpp"
         break;
 
       case symbol_kind::S_Term: // Term
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < S_stringFilterNode > (); }
-#line 421 "stringFilterParser.cpp"
+#line 431 "stringFilterParser.cpp"
         break;
 
       case symbol_kind::S_Factor: // Factor
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < S_stringFilterNode > (); }
-#line 427 "stringFilterParser.cpp"
+#line 437 "stringFilterParser.cpp"
         break;
 
       case symbol_kind::S_BasicFactor: // BasicFactor
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < S_stringFilterNode > (); }
-#line 433 "stringFilterParser.cpp"
+#line 443 "stringFilterParser.cpp"
         break;
 
       case symbol_kind::S_SubExpression: // SubExpression
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < S_stringFilterNode > (); }
-#line 439 "stringFilterParser.cpp"
+#line 449 "stringFilterParser.cpp"
         break;
 
       case symbol_kind::S_SingleString: // SingleString
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 445 "stringFilterParser.cpp"
+#line 455 "stringFilterParser.cpp"
         break;
 
       case symbol_kind::S_String: // String
 #line 67 "stringFilterParser.yy"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 451 "stringFilterParser.cpp"
+#line 461 "stringFilterParser.cpp"
         break;
 
       default:
@@ -696,6 +706,7 @@ namespace stringfilter {
         yylhs.value.emplace< S_stringFilterNode > ();
         break;
 
+      case symbol_kind::S_WORD: // "word"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
       case symbol_kind::S_SingleString: // SingleString
@@ -724,138 +735,148 @@ namespace stringfilter {
           switch (yyn)
             {
   case 2: // $@1: %empty
-#line 140 "stringFilterParser.yy"
+#line 142 "stringFilterParser.yy"
       {
       }
-#line 731 "stringFilterParser.cpp"
+#line 742 "stringFilterParser.cpp"
     break;
 
   case 3: // StringFilterSpecification: $@1 Expression
-#line 145 "stringFilterParser.yy"
+#line 147 "stringFilterParser.yy"
       {
         yylhs.value.as < S_stringFilterNode > () = yystack_[0].value.as < S_stringFilterNode > ();
       }
-#line 739 "stringFilterParser.cpp"
+#line 750 "stringFilterParser.cpp"
     break;
 
   case 4: // Expression: Term
-#line 156 "stringFilterParser.yy"
+#line 158 "stringFilterParser.yy"
       {
       }
-#line 746 "stringFilterParser.cpp"
+#line 757 "stringFilterParser.cpp"
     break;
 
   case 5: // Expression: Expression "&" Term
-#line 160 "stringFilterParser.yy"
+#line 162 "stringFilterParser.yy"
       {
         yylhs.value.as < S_stringFilterNode > () =
           stringFilterOr::create (
             yystack_[2].value.as < S_stringFilterNode > (),
             yystack_[0].value.as < S_stringFilterNode > ());
       }
-#line 757 "stringFilterParser.cpp"
+#line 768 "stringFilterParser.cpp"
     break;
 
   case 6: // Expression: Expression "^" Term
-#line 168 "stringFilterParser.yy"
+#line 170 "stringFilterParser.yy"
       {
         yylhs.value.as < S_stringFilterNode > () =
           stringFilterXor::create (
             yystack_[2].value.as < S_stringFilterNode > (),
             yystack_[0].value.as < S_stringFilterNode > ());
       }
-#line 768 "stringFilterParser.cpp"
+#line 779 "stringFilterParser.cpp"
     break;
 
   case 7: // Term: Factor
-#line 182 "stringFilterParser.yy"
+#line 184 "stringFilterParser.yy"
       {
       }
-#line 775 "stringFilterParser.cpp"
+#line 786 "stringFilterParser.cpp"
     break;
 
   case 8: // Term: Term "|" Factor
-#line 186 "stringFilterParser.yy"
+#line 188 "stringFilterParser.yy"
       {
         yylhs.value.as < S_stringFilterNode > () =
           stringFilterAnd::create (
             yystack_[2].value.as < S_stringFilterNode > (),
             yystack_[0].value.as < S_stringFilterNode > ());
       }
-#line 786 "stringFilterParser.cpp"
+#line 797 "stringFilterParser.cpp"
     break;
 
   case 9: // Factor: BasicFactor
-#line 200 "stringFilterParser.yy"
+#line 202 "stringFilterParser.yy"
       {
       }
-#line 793 "stringFilterParser.cpp"
+#line 804 "stringFilterParser.cpp"
     break;
 
   case 10: // Factor: "=" BasicFactor
-#line 204 "stringFilterParser.yy"
+#line 206 "stringFilterParser.yy"
       {
         yylhs.value.as < S_stringFilterNode > () =
           stringFilterNot::create (
             yystack_[0].value.as < S_stringFilterNode > ());
       }
-#line 803 "stringFilterParser.cpp"
+#line 814 "stringFilterParser.cpp"
     break;
 
-  case 11: // BasicFactor: String
-#line 217 "stringFilterParser.yy"
+  case 11: // BasicFactor: "word"
+#line 219 "stringFilterParser.yy"
       {
         yylhs.value.as < S_stringFilterNode > () =
           stringFilterString::create (
             yystack_[0].value.as < std::string > ());
       }
-#line 813 "stringFilterParser.cpp"
+#line 824 "stringFilterParser.cpp"
     break;
 
-  case 12: // BasicFactor: SubExpression
-#line 224 "stringFilterParser.yy"
+  case 12: // BasicFactor: String
+#line 225 "stringFilterParser.yy"
       {
+        yylhs.value.as < S_stringFilterNode > () =
+          stringFilterString::create (
+            yystack_[0].value.as < std::string > ());
       }
-#line 820 "stringFilterParser.cpp"
-    break;
-
-  case 13: // SubExpression: "(" Expression ")"
-#line 234 "stringFilterParser.yy"
-      {
-        yylhs.value.as < S_stringFilterNode > () = yystack_[1].value.as < S_stringFilterNode > ();
-      }
-#line 828 "stringFilterParser.cpp"
-    break;
-
-  case 14: // SingleString: "single quoted string"
-#line 244 "stringFilterParser.yy"
-    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
 #line 834 "stringFilterParser.cpp"
     break;
 
-  case 15: // SingleString: "double quoted string"
-#line 245 "stringFilterParser.yy"
+  case 13: // BasicFactor: SubExpression
+#line 232 "stringFilterParser.yy"
+      {
+      }
+#line 841 "stringFilterParser.cpp"
+    break;
+
+  case 14: // SubExpression: "(" Expression ")"
+#line 242 "stringFilterParser.yy"
+      {
+        yylhs.value.as < S_stringFilterNode > () = yystack_[1].value.as < S_stringFilterNode > ();
+      }
+#line 849 "stringFilterParser.cpp"
+    break;
+
+  case 15: // SingleString: "single quoted string"
+#line 252 "stringFilterParser.yy"
     { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
-#line 840 "stringFilterParser.cpp"
-    break;
-
-  case 16: // String: SingleString
-#line 250 "stringFilterParser.yy"
-      {
-      }
-#line 847 "stringFilterParser.cpp"
-    break;
-
-  case 17: // String: String SingleString
-#line 253 "stringFilterParser.yy"
-      {
-        yylhs.value.as < std::string > () = yystack_[1].value.as < std::string > () + yystack_[0].value.as < std::string > ();
-      }
 #line 855 "stringFilterParser.cpp"
     break;
 
+  case 16: // SingleString: "double quoted string"
+#line 253 "stringFilterParser.yy"
+    { yylhs.value.as < std::string > () = yystack_[0].value.as < std::string > (); }
+#line 861 "stringFilterParser.cpp"
+    break;
 
-#line 859 "stringFilterParser.cpp"
+  case 17: // String: SingleString
+#line 258 "stringFilterParser.yy"
+      {
+      }
+#line 868 "stringFilterParser.cpp"
+    break;
+
+  case 18: // String: String SingleString
+#line 261 "stringFilterParser.yy"
+      {
+        yylhs.value.as < std::string > () = yystack_[1].value.as < std::string > () + yystack_[0].value.as < std::string > ();
+      }
+#line 876 "stringFilterParser.cpp"
+    break;
+
+
+#line 880 "stringFilterParser.cpp"
 
             default:
               break;
@@ -1040,7 +1061,7 @@ namespace stringfilter {
     static const char *const yy_sname[] =
     {
     "end of file", "error", "invalid token", "&", "^", "|", "=", "(", ")",
-  "single quoted string", "double quoted string", "$accept",
+  "word", "single quoted string", "double quoted string", "$accept",
   "StringFilterSpecification", "$@1", "Expression", "Term", "Factor",
   "BasicFactor", "SubExpression", "SingleString", "String", YY_NULLPTR
     };
@@ -1311,85 +1332,85 @@ namespace stringfilter {
   }
 
 
-  const signed char parser::yypact_ninf_ = -16;
+  const signed char parser::yypact_ninf_ = -13;
 
   const signed char parser::yytable_ninf_ = -1;
 
   const signed char
   parser::yypact_[] =
   {
-     -16,     8,     0,   -16,     4,     0,   -16,   -16,    -1,     7,
-     -16,   -16,   -16,   -16,     6,   -16,    -3,     0,     0,     0,
-     -16,   -16,     7,     7,   -16
+     -13,     2,    -6,   -13,     5,    -6,   -13,   -13,   -13,     6,
+       8,   -13,   -13,   -13,   -13,     7,   -13,     3,    -6,    -6,
+      -6,   -13,   -13,     8,     8,   -13
   };
 
   const signed char
   parser::yydefact_[] =
   {
-       2,     0,     0,     1,     0,     0,    14,    15,     3,     4,
-       7,     9,    12,    16,    11,    10,     0,     0,     0,     0,
-      17,    13,     5,     6,     8
+       2,     0,     0,     1,     0,     0,    11,    15,    16,     3,
+       4,     7,     9,    13,    17,    12,    10,     0,     0,     0,
+       0,    18,    14,     5,     6,     8
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -16,   -16,   -16,    12,     1,   -15,    16,   -16,     9,   -16
+     -13,   -13,   -13,    16,     1,   -12,    18,   -13,     9,   -13
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-       0,     1,     2,     8,     9,    10,    11,    12,    13,    14
+       0,     1,     2,     9,    10,    11,    12,    13,    14,    15
   };
 
   const signed char
   parser::yytable_[] =
   {
-      17,    18,    17,    18,    24,    21,     4,     5,     3,     6,
-       7,     5,    19,     6,     7,     6,     7,    16,    22,    23,
-      15,     0,     0,    20
+       4,     5,     3,     6,     7,     8,    18,    19,    25,    18,
+      19,    22,     5,    20,     6,     7,     8,     7,     8,    23,
+      24,    17,    16,     0,    21
   };
 
   const signed char
   parser::yycheck_[] =
   {
-       3,     4,     3,     4,    19,     8,     6,     7,     0,     9,
-      10,     7,     5,     9,    10,     9,    10,     5,    17,    18,
-       4,    -1,    -1,    14
+       6,     7,     0,     9,    10,    11,     3,     4,    20,     3,
+       4,     8,     7,     5,     9,    10,    11,    10,    11,    18,
+      19,     5,     4,    -1,    15
   };
 
   const signed char
   parser::yystos_[] =
   {
-       0,    12,    13,     0,     6,     7,     9,    10,    14,    15,
-      16,    17,    18,    19,    20,    17,    14,     3,     4,     5,
-      19,     8,    15,    15,    16
+       0,    13,    14,     0,     6,     7,     9,    10,    11,    15,
+      16,    17,    18,    19,    20,    21,    18,    15,     3,     4,
+       5,    20,     8,    16,    16,    17
   };
 
   const signed char
   parser::yyr1_[] =
   {
-       0,    11,    13,    12,    14,    14,    14,    15,    15,    16,
-      16,    17,    17,    18,    19,    19,    20,    20
+       0,    12,    14,    13,    15,    15,    15,    16,    16,    17,
+      17,    18,    18,    18,    19,    20,    20,    21,    21
   };
 
   const signed char
   parser::yyr2_[] =
   {
        0,     2,     0,     2,     1,     3,     3,     1,     3,     1,
-       2,     1,     1,     3,     1,     1,     1,     2
+       2,     1,     1,     1,     3,     1,     1,     1,     2
   };
 
 
 
 
 #if STRINGFILTERDEBUG
-  const unsigned char
+  const short
   parser::yyrline_[] =
   {
-       0,   140,   140,   140,   155,   159,   167,   181,   185,   199,
-     203,   216,   223,   233,   244,   245,   249,   252
+       0,   142,   142,   142,   157,   161,   169,   183,   187,   201,
+     205,   218,   224,   231,   241,   252,   253,   257,   260
   };
 
   void
@@ -1421,9 +1442,9 @@ namespace stringfilter {
 
 
 } // stringfilter
-#line 1425 "stringFilterParser.cpp"
+#line 1446 "stringFilterParser.cpp"
 
-#line 260 "stringFilterParser.yy"
+#line 268 "stringFilterParser.yy"
 
 //_______________________________________________________________________________
 

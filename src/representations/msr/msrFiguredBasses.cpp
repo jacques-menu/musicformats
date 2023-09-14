@@ -885,100 +885,100 @@ std::string msrFiguredBass::asString () const
   return ss.str ();
 }
 
-std::string msrFiguredBass::asShortStringForMeasuresSlices () const
-{
-  std::stringstream ss;
-
-  ss <<
-    "[FiguredBass" <<
-    ", " << std::hex << std::showbase << this << std::dec <<
-    ", fMeasurePosition: " <<
-    fMeasurePosition.asString () <<
-    ", fSoundingWholeNotes: " <<
-    wholeNotespitchAndOctaveAsString (
-      fInputStartLineNumber,
-      fSoundingWholeNotes) <<
-    ", fFiguredBassDisplayWholeNotes: " <<
-    wholeNotespitchAndOctaveAsString (
-      fInputStartLineNumber,
-      fFiguredBassDisplayWholeNotes);
-
-  ss <<
-    ", fFiguredBassUpLinkToNote: ";
-    if (fFiguredBassUpLinkToNote) {
-      ss <<
-        fFiguredBassUpLinkToNote->asString ();
-    }
-    else {
-      ss << "[NULL]";
-    }
-
-  ss <<
-    ", fFiguredBassUpLinkToMeasure: ";
-    if (fFiguredBassUpLinkToMeasure) {
-      ss <<
-        fFiguredBassUpLinkToMeasure->getMeasureNumber ();
-    }
-    else {
-      ss << "[NULL]";
-    }
-
-  ss <<
-    ", fFiguredBassUpLinkToVoice" << ": ";
-  if (fFiguredBassUpLinkToVoice) {
-    ss << fFiguredBassUpLinkToVoice->asString ();
-  }
-  else {
-    ss << "[NULL]";
-  }
-  ss << std::endl;
-
-  ss <<
-    ", fFiguredBassParenthesesKind: " <<
-    fFiguredBassParenthesesKind <<
-
-    ", fFiguredBassTupletFactor: " <<
-    fFiguredBassTupletFactor;
-
-  if (fFiguredBassFiguresList.size ()) {
-    ss << ", fFiguredBassFiguresList: [";
-
-    std::list<S_msrBassFigure>::const_iterator
-      iBegin = fFiguredBassFiguresList.begin (),
-      iEnd   = fFiguredBassFiguresList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      ss << (*i)->asString ();
-      if (++i == iEnd) break;
-      ss << ' ';
-    } // for
-  }
-
-  // print the figured bass measure position
-  ss <<
-    ", measurePosition: " << fMeasurePosition;
-
-/* JMI
-  if (fFiguredBassUpLinkToPart) { // JMI ???
-    ss <<
-      ":" <<
-      wholeNotespitchAndOctaveAsString (
-        fInputStartLineNumber,
-        fFiguredBassSoundingWholeNotes);
-  }
-*/
-
-  // print the figured bass voice position
+// std::string msrFiguredBass::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
+//
 //   ss <<
-//     ", voicePosition: " << fVoicePosition;
-
-  ss <<
-    ", line " << fInputStartLineNumber <<
-    ']';
-
-  return ss.str ();
-}
+//     "[FiguredBass" <<
+//     ", " << std::hex << std::showbase << this << std::dec <<
+//     ", fMeasurePosition: " <<
+//     fMeasurePosition.asString () <<
+//     ", fSoundingWholeNotes: " <<
+//     wholeNotespitchAndOctaveAsString (
+//       fInputStartLineNumber,
+//       fSoundingWholeNotes) <<
+//     ", fFiguredBassDisplayWholeNotes: " <<
+//     wholeNotespitchAndOctaveAsString (
+//       fInputStartLineNumber,
+//       fFiguredBassDisplayWholeNotes);
+//
+//   ss <<
+//     ", fFiguredBassUpLinkToNote: ";
+//     if (fFiguredBassUpLinkToNote) {
+//       ss <<
+//         fFiguredBassUpLinkToNote->asString ();
+//     }
+//     else {
+//       ss << "[NULL]";
+//     }
+//
+//   ss <<
+//     ", fFiguredBassUpLinkToMeasure: ";
+//     if (fFiguredBassUpLinkToMeasure) {
+//       ss <<
+//         fFiguredBassUpLinkToMeasure->getMeasureNumber ();
+//     }
+//     else {
+//       ss << "[NULL]";
+//     }
+//
+//   ss <<
+//     ", fFiguredBassUpLinkToVoice" << ": ";
+//   if (fFiguredBassUpLinkToVoice) {
+//     ss << fFiguredBassUpLinkToVoice->asString ();
+//   }
+//   else {
+//     ss << "[NULL]";
+//   }
+//   ss << std::endl;
+//
+//   ss <<
+//     ", fFiguredBassParenthesesKind: " <<
+//     fFiguredBassParenthesesKind <<
+//
+//     ", fFiguredBassTupletFactor: " <<
+//     fFiguredBassTupletFactor;
+//
+//   if (fFiguredBassFiguresList.size ()) {
+//     ss << ", fFiguredBassFiguresList: [";
+//
+//     std::list<S_msrBassFigure>::const_iterator
+//       iBegin = fFiguredBassFiguresList.begin (),
+//       iEnd   = fFiguredBassFiguresList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       ss << (*i)->asString ();
+//       if (++i == iEnd) break;
+//       ss << ' ';
+//     } // for
+//   }
+//
+//   // print the figured bass measure position
+//   ss <<
+//     ", measurePosition: " << fMeasurePosition;
+//
+// /* JMI
+//   if (fFiguredBassUpLinkToPart) { // JMI ???
+//     ss <<
+//       ":" <<
+//       wholeNotespitchAndOctaveAsString (
+//         fInputStartLineNumber,
+//         fFiguredBassSoundingWholeNotes);
+//   }
+// */
+//
+//   // print the figured bass voice position
+// //   ss <<
+// //     ", voicePosition: " << fVoicePosition;
+//
+//   ss <<
+//     ", line " << fInputStartLineNumber <<
+//     ']';
+//
+//   return ss.str ();
+// }
 
 void msrFiguredBass::print (std::ostream& os) const
 {

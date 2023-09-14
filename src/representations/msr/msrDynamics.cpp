@@ -343,7 +343,7 @@ void msrDynamic::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -356,9 +356,9 @@ void msrDynamic::print (std::ostream& os) const
 {
   os <<
     "Dynamics " <<
-    msrDynamicKindAsString (fDynamicKind) <<
-    ", dynamicPlacementKind: " <<
-    msrPlacementKindAsString (fDynamicPlacementKind) <<
+    fDynamicKind <<
+    ", fDynamicPlacementKind: " <<
+    fDynamicPlacementKind <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 }
@@ -471,7 +471,7 @@ void msrOtherDynamic::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -486,10 +486,10 @@ std::string msrOtherDynamic::asString () const
 
   ss <<
     "OtherDynamics '" <<
-    ", otherDynamicString: " <<
+    ", fOtherDynamicsString: " <<
     fOtherDynamicsString <<
-    ", otherDynamicPlacementKind: " <<
-    msrPlacementKindAsString (fOtherDynamicPlacementKind) <<
+    ", fOtherDynamicPlacementKind: " <<
+    fOtherDynamicPlacementKind <<
     "', line " << fInputStartLineNumber;
 
   return ss.str ();
@@ -627,7 +627,7 @@ void msrCrescDecresc::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -716,7 +716,8 @@ S_msrWedge msrWedge::create (
   msrWedgeKind       wedgeKind,
   msrWedgeNienteKind wedgeNienteKind,
   msrLineTypeKind    wedgeLineTypeKind,
-  msrPlacementKind   wedgePlacementKind)
+  msrPlacementKind   wedgePlacementKind,
+  int                wedgeVoiceNumber)
 {
   msrWedge* obj =
     new msrWedge (
@@ -724,7 +725,8 @@ S_msrWedge msrWedge::create (
       wedgeKind,
       wedgeNienteKind,
       wedgeLineTypeKind,
-      wedgePlacementKind);
+      wedgePlacementKind,
+      wedgeVoiceNumber);
   assert (obj != nullptr);
   return obj;
 }
@@ -734,13 +736,17 @@ msrWedge::msrWedge (
   msrWedgeKind       wedgeKind,
   msrWedgeNienteKind wedgeNienteKind,
   msrLineTypeKind    wedgeLineTypeKind,
-  msrPlacementKind   wedgePlacementKind)
+  msrPlacementKind   wedgePlacementKind,
+  int                wedgeVoiceNumber)
     : msrElement (inputLineNumber)
 {
   fWedgeKind          = wedgeKind;
+
   fWedgeNienteKind    = wedgeNienteKind;
   fWedgeLineTypeKind  = wedgeLineTypeKind;
   fWedgePlacementKind = wedgePlacementKind;
+
+  fWedgeVoiceNumber   = wedgeVoiceNumber;
 }
 
 msrWedge::~msrWedge ()
@@ -813,7 +819,7 @@ void msrWedge::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -825,6 +831,7 @@ void msrWedge::print (std::ostream& os) const
 {
   os <<
     "[Wedge " << fWedgeKind <<
+    ", fWedgeVoiceNumber: " << fWedgeVoiceNumber <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
@@ -834,19 +841,16 @@ void msrWedge::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "wedgeNienteKind" << ": " <<
-    msrWedgeNienteKindAsString (
-      fWedgeNienteKind) <<
+    "fWedgeNienteKind" << ": " <<
+    fWedgeNienteKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wedgeLineTypeKind" << ": " <<
-    msrLineTypeKindAsString (
-      fWedgeLineTypeKind) <<
+    "fWedgeLineTypeKind" << ": " <<
+    fWedgeLineTypeKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "wedgePlacementKind" << ": " <<
-    msrPlacementKindAsString (
-      fWedgePlacementKind) <<
+    "fWedgePlacementKind" << ": " <<
+    fWedgePlacementKind <<
     std::endl;
 
   --gIndenter;

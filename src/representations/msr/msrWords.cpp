@@ -218,7 +218,7 @@ std::string msrWords::asString () const
     ", line " << fInputStartLineNumber <<
     ' ' <<
     fWordsContents << ", fWordsPlacementKind: " <<
-    msrPlacementKindAsString (fWordsPlacementKind);
+    fWordsPlacementKind;
 
   return ss.str ();
 }
@@ -243,7 +243,7 @@ void msrWords::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fWordsPlacementKind" << ": " <<
-    msrPlacementKindAsString (fWordsPlacementKind) <<
+    fWordsPlacementKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -261,7 +261,7 @@ void msrWords::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fWordsVerticalAlignmentKind" << ": " <<
-    msrFontStyleKindAsString (fWordsFontStyleKind) <<
+    fWordsFontStyleKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fWordsFontSize" << ": " <<
@@ -269,11 +269,11 @@ void msrWords::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fWordsFontWeightKind" << ": " <<
-    msrFontWeightKindAsString (fWordsFontWeightKind) <<
+    fWordsFontWeightKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fWordsXMLLangKind" << ": " <<
-    msrXMLLangKindAsString (fWordsXMLLangKind) <<
+    fWordsXMLLangKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<

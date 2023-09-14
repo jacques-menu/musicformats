@@ -315,11 +315,11 @@ std::string bsrDynamic::asString () const
 
   ss <<
     "Dynamics" <<
-    ", dynamicKind: " <<
-    msrDynamicKindAsString (fDynamicKind) <<
-    ", dynamicsCellsList: " <<
+    ", fDynamicKind: " <<
+    fDynamicKind <<
+    ", fDynamicsCellsList: " <<
     fDynamicsCellsList->asShortString () <<
-    ", spacesBefore: " << fSpacesBefore <<
+    ", fSpacesBefore: " << fSpacesBefore <<
     ", line " << fInputStartLineNumber;
 
   return ss.str ();
@@ -331,11 +331,11 @@ std::string bsrDynamic::asDebugString () const
 
   ss <<
     "Dyn" <<
-    ", dynamicKind: " <<
-    msrDynamicKindAsString (fDynamicKind) <<
-    ", dynamicsCellsList: " <<
+    ", fDynamicKind: " <<
+    fDynamicKind <<
+    ", fDynamicsCellsList: " <<
     fDynamicsCellsList->asShortString () <<
-    ", spacesBefore: " << fSpacesBefore <<
+    ", fSpacesBefore: " << fSpacesBefore <<
     ", line " << fInputStartLineNumber;
 
   return ss.str ();
@@ -354,15 +354,15 @@ void bsrDynamic::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "dynamicKind" << ": " <<
-    msrDynamicKindAsString (fDynamicKind) <<
+    "fDynamicKind" << ": " <<
+    fDynamicKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "noteCellsList" << ": " <<
+    "fDynamicsCellsList" << ": " <<
     fDynamicsCellsList->asShortString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "spacesBefore" << ": " << fSpacesBefore <<
+    "fSpacesBefore" << ": " << fSpacesBefore <<
     std::endl;
 
   --gIndenter;

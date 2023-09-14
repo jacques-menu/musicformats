@@ -603,7 +603,7 @@ void msrScore::displayPartGroupsList (
 void msrScore::printFull (std::ostream& os) const
 {
   os <<
-    "[Embedded MSR Score" <<
+    "[MSR Score printfull()" <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
@@ -785,7 +785,11 @@ void msrScore::printFull (std::ostream& os) const
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      S_msrPartGroup
+        partGroup = (*i);
+
+      partGroup->printFull (os);
+
       if (++i == iEnd) break;
       os << std::endl;
     } // for

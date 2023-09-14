@@ -684,7 +684,7 @@ std::string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () co
       // '-aofn, -auto-output-file-name' has been selected
       // determine output file base name
       if (inputSourceName == "-") {
-        outputFileName = "stdin";
+        outputFileName = "stdin"; // JMI ??? v0.9.70
       }
 
       else {

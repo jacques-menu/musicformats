@@ -14,6 +14,8 @@
 
 #include "visitor.h"
 
+#include "msrMeasuresSlices.h"
+
 #include "msrOah.h"
 
 #include "oahBasicTypes.h"
@@ -148,6 +150,8 @@ class EXP displayMsrMeasuresSlicesVisitor :
 
     S_msrMeasuresSlicesSequence
                           fMeasuresSlicesSequence;
+
+    S_msrMeasuresSlice    fCurrentMeasuresSlice;
 
     // score
     // ------------------------------------------------------

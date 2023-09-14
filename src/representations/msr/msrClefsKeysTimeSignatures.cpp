@@ -672,21 +672,21 @@ std::string msrClefKeyTimeSignatureGroup::asString () const
   return ss.str ();
 }
 
-std::string msrClefKeyTimeSignatureGroup::asShortStringForMeasuresSlices () const
-{
-  std::stringstream ss;
-
-  ss <<
-    '[' <<
-    "msrClefKeyTimeSignatureGroup: " << fClef <<
-    ", fKey: " << fKey <<
-    ", fTimeSignature: " << fTimeSignature <<
-    ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
-    ", fGroupItemsNumber: " << fGroupItemsNumber <<
-    ']';
-
-  return ss.str ();
-}
+// std::string msrClefKeyTimeSignatureGroup::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     '[' <<
+//     "msrClefKeyTimeSignatureGroup: " << fClef <<
+//     ", fKey: " << fKey <<
+//     ", fTimeSignature: " << fTimeSignature <<
+//     ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
+//     ", fGroupItemsNumber: " << fGroupItemsNumber <<
+//     ']';
+//
+//   return ss.str ();
+// }
 
 void msrClefKeyTimeSignatureGroup::print (std::ostream& os) const
 {

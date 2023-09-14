@@ -16,9 +16,16 @@
 
 #include "exports.h"
 
+#include "mfMusicformatsErrors.h"
+
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+mfMusicformatsErrorKind executeStringFilter (
+  const std::string& stringFilterExpressionString,
+  const std::string& stringFilterInputString);
 
 //_______________________________________________________________________________
 EXP int stringfilter (
@@ -36,6 +43,9 @@ EXP int stringfilter (
   const char*   buffer,
   std::ostream& out,
   std::ostream& err);
+
+//______________________________________________________________________________
+void testStringFilter (std::ostream& os);
 
 
 }

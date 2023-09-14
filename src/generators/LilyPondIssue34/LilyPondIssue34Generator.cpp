@@ -756,7 +756,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
             msrWedgeKind::kWedgeCrescendo,
             msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
-            msrPlacementKind::kPlacementBelow));
+            msrPlacementKind::kPlacementBelow,
+            3));
 
       // append the spanner start to the note
       S_msrSpanner
@@ -901,7 +902,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
             msrWedgeKind::kWedgeStop,
             msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
-            msrPlacementKind::kPlacementBelow));
+            msrPlacementKind::kPlacementBelow,
+            3));
 
       // append the first beam end to the note
       note5->
@@ -963,7 +965,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
             msrWedgeKind::kWedgeDecrescendo,
             msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
-            msrPlacementKind::kPlacementBelow));
+            msrPlacementKind::kPlacementBelow,
+            4));
 
       // append the note to the measure
       measure4->
@@ -1025,7 +1028,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
             msrWedgeKind::kWedgeStop,
             msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
-            msrPlacementKind::kPlacementBelow));
+            msrPlacementKind::kPlacementBelow,
+            5));
 
       // append the spanner start to the note
       note1->

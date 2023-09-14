@@ -401,59 +401,59 @@ std::string msrTimeSignatureItem::asString () const
   return ss.str ();
 }
 
-std::string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
-{
-  std::stringstream ss;
-
+// std::string msrTimeSignatureItem::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
+//
+// //   ss <<
+// //     "TimeSignatureItem ";
+//
+//   size_t vectorSize =
+//     fTimeSignatureBeatsNumbersVector.size ();
+//
+//   switch (vectorSize) {
+//     case 0:
+//     /* JMI
+//       msrInternalError (
+//         gServiceRunData->getInputSourceName (),
+//         fInputStartLineNumber,
+//         __FILE__, __LINE__,
+//         "time signature item beats numbers vector is empty");
+//         */
+//       ss <<
+//         "beats numbers: [NONE]";
+//       break;
+//
+//     case 1:
+//       ss <<
+//         fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
+//       break;
+//
+//     default:
+//       ss <<
+//         "beats numbers: ";
+//
+//       for (size_t i = 0; i < vectorSize; ++i) {
+//         ss <<
+//           fTimeSignatureBeatsNumbersVector [i];
+//
+//         if (i != vectorSize - 1) {
+//           ss <<
+//             ' ';
+//         }
+//       } // for
+//
+//       ss <<
+//         ", beat value: " << fTimeSignatureBeatValue;
+//   } // switch
+//
+// /* JMI
 //   ss <<
-//     "TimeSignatureItem ";
-
-  size_t vectorSize =
-    fTimeSignatureBeatsNumbersVector.size ();
-
-  switch (vectorSize) {
-    case 0:
-    /* JMI
-      msrInternalError (
-        gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
-        __FILE__, __LINE__,
-        "time signature item beats numbers vector is empty");
-        */
-      ss <<
-        "beats numbers: [NONE]";
-      break;
-
-    case 1:
-      ss <<
-        fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
-      break;
-
-    default:
-      ss <<
-        "beats numbers: ";
-
-      for (size_t i = 0; i < vectorSize; ++i) {
-        ss <<
-          fTimeSignatureBeatsNumbersVector [i];
-
-        if (i != vectorSize - 1) {
-          ss <<
-            ' ';
-        }
-      } // for
-
-      ss <<
-        ", beat value: " << fTimeSignatureBeatValue;
-  } // switch
-
-/* JMI
-  ss <<
-    ", line " << fInputStartLineNumber;
-*/
-
-  return ss.str ();
-}
+//     ", line " << fInputStartLineNumber;
+// */
+//
+//   return ss.str ();
+// }
 
 void msrTimeSignatureItem::print (std::ostream& os) const
 {
@@ -1227,8 +1227,8 @@ std::string msrTimeSignature::asString () const
 
   ss <<
     "[TimeSignatureItem" <<
-    ", timeSignatureSymbolKind: " <<
-    msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
+    ", fTimeSignatureSymbolKind: " <<
+    fTimeSignatureSymbolKind <<
     ", fTimeIsCompound: " <<
     fTimeIsCompound <<
     ", fTimeSignatureItemsVector.size(): " <<
@@ -1275,8 +1275,8 @@ std::string msrTimeSignature::asShortString () const
 
   ss <<
     "TimeSignature, " <<
-    ", timeSignatureSymbolKind: " <<
-    msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
+    ", fTimeSignatureSymbolKind: " <<
+    fTimeSignatureSymbolKind <<
     ", fTimeIsCompound " <<
     fTimeIsCompound <<
     ", " <<
@@ -1290,57 +1290,57 @@ std::string msrTimeSignature::asShortString () const
   return asString ();
 }
 
-std::string msrTimeSignature::asShortStringForMeasuresSlices () const
-{
-  std::stringstream ss;
-
-  ss <<
-    '[';
-
-/* JMI
-    ", timeSignatureSymbolKind: " <<
-    msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
-    ", fTimeIsCompound: " <<
-    fTimeIsCompound;
-    ", fTimeSignatureItemsVector.size(): " <<
-    mfSingularOrPlural (
-      fTimeSignatureItemsVector.size (), "item", "items") <<
-    mfSingularOrPlural (
-      fTimeSignatureItemsVector.size (), "item", "items") <<
-    ", line " << fInputStartLineNumber;
-*/
-
-  if (fTimeSignatureItemsVector.size ()) {
-//     ss <<
-//       ", ";
-
-    std::vector<S_msrTimeSignatureItem>::const_iterator
-      iBegin = fTimeSignatureItemsVector.begin (),
-      iEnd   = fTimeSignatureItemsVector.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_msrTimeSignatureItem timeSignatureItem = (*i);
-
-      ss << timeSignatureItem->asShortStringForMeasuresSlices ();
-      if (++i == iEnd) break;
-      ss << ", ";
-    } // for
-  }
-  else {
-    if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
-      msrInternalError (
-        gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
-        __FILE__, __LINE__,
-        "time  items vector is empty");
-    }
-  }
-
-  ss << ']';
-
-  return ss.str ();
-}
+// std::string msrTimeSignature::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     '[';
+//
+// /* JMI
+//     ", fTimeSignatureSymbolKind: " <<
+//     fTimeSignatureSymbolKind <<
+//     ", fTimeIsCompound: " <<
+//     fTimeIsCompound;
+//     ", fTimeSignatureItemsVector.size(): " <<
+//     mfSingularOrPlural (
+//       fTimeSignatureItemsVector.size (), "item", "items") <<
+//     mfSingularOrPlural (
+//       fTimeSignatureItemsVector.size (), "item", "items") <<
+//     ", line " << fInputStartLineNumber;
+// */
+//
+//   if (fTimeSignatureItemsVector.size ()) {
+// //     ss <<
+// //       ", ";
+//
+//     std::vector<S_msrTimeSignatureItem>::const_iterator
+//       iBegin = fTimeSignatureItemsVector.begin (),
+//       iEnd   = fTimeSignatureItemsVector.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       S_msrTimeSignatureItem timeSignatureItem = (*i);
+//
+//       ss << timeSignatureItem->asStringForMeasuresSlices ();
+//       if (++i == iEnd) break;
+//       ss << ", ";
+//     } // for
+//   }
+//   else {
+//     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
+//       msrInternalError (
+//         gServiceRunData->getInputSourceName (),
+//         fInputStartLineNumber,
+//         __FILE__, __LINE__,
+//         "time  items vector is empty");
+//     }
+//   }
+//
+//   ss << ']';
+//
+//   return ss.str ();
+// }
 
 void msrTimeSignature::print (std::ostream& os) const
 {
@@ -1356,7 +1356,7 @@ void msrTimeSignature::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fTimeSignatureSymbolKind" << ": " <<
-    msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
+    fTimeSignatureSymbolKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fTimeIsCompound" << ": " <<

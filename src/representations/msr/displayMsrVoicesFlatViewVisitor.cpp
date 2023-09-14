@@ -113,7 +113,7 @@ void displayMsrVoicesFlatViewVisitor::printMsrScoreVoicesFlatView (
     // create a msrScore browser
     msrBrowser<msrScore> browser (this);
 
-    // browse the score with the browser
+    // browse the score
     browser.browse (*score);
   }
 }
@@ -574,7 +574,7 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrVoice& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   gLog <<
-    "Voice " << elt->getVoiceNumber () << ":" <<
+    "Voice " << elt->getVoiceNumber () << " contains:" <<
     std::endl;
 
   ++gIndenter;
@@ -820,14 +820,19 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrMeasure& elt)
     "Measure " << elt->getMeasureNumber () << ":" <<
     std::endl;
 
-  ++gIndenter;
+  switch (fVoicesFlatViewDetailedKind) {
+    case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindYes:
+      ++gIndenter;
+      break;
 
-//   const std::list<S_msrMeasureElement>&
-//     measureElementsList =
-//       elt->getMeasureElementsList ();
-//
-//   for (S_msrMeasureElement measure : measureElementsList) {
-//   } // for
+    case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindNo:
+      // the notes are displayed on one and a single line,
+      // hence indentation does not actually work
+      // since this occurs at the next end of line
+      gLog <<
+        gTab;
+      break;
+  } // switch
 }
 
 void displayMsrVoicesFlatViewVisitor::visitEnd (S_msrMeasure& elt)
@@ -845,7 +850,14 @@ void displayMsrVoicesFlatViewVisitor::visitEnd (S_msrMeasure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  --gIndenter;
+  switch (fVoicesFlatViewDetailedKind) {
+    case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindYes:
+      --gIndenter;
+      break;
+
+    case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindNo:
+      break;
+  } // switch
 
   gLog << std::endl;
 }
@@ -920,16 +932,10 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrNote& elt)
     switch (fVoicesFlatViewDetailedKind) {
       case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindYes:
         gLog <<
-          elt->asString () <<
-          std::endl <<
-          elt->asShortString () <<
-          std::endl <<
-          elt->noteCoreAndComplementAsString () <<
-          std::endl <<
-//           elt->asMinimalString () <<
-//           std::endl <<
+          elt->asStringForVoicesFlatView () <<
           std::endl;
         break;
+
       case msrVoicesFlatViewDetailedKind::kVoicesFlatViewDetailedKindNo:
         gLog <<
           elt->noteCoreAsString () << ' ';

@@ -15,9 +15,8 @@
   place any include you need here...
 */
 
-// #include <regex>
 
-#include "stringFilterBasicTypes.h"
+#include "stringFilterInterface.h"
 
 
 namespace MusicFormats
@@ -30,7 +29,7 @@ void mfTest (std::ostream& os)
   place any code you need here...
 */
 
-  testFilter (os);
+  testStringFilter (os);
 }
 
 

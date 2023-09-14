@@ -185,7 +185,7 @@ class EXP msrMeasuresSlice : public smartable
 
     static SMARTP<msrMeasuresSlice> create (
                             const std::string& measureNumber,
-                            int           puristMeasureNumber);
+                            int                puristMeasureNumber);
 
     SMARTP<msrMeasuresSlice> createMeasuresSliceShallowCopy ();
 
@@ -196,7 +196,7 @@ class EXP msrMeasuresSlice : public smartable
 
                           msrMeasuresSlice (
                             const std::string& measureNumber,
-                            int           puristMeasureNumber);
+                            int                puristMeasureNumber);
 
     virtual               ~msrMeasuresSlice ();
 
@@ -242,11 +242,9 @@ class EXP msrMeasuresSlice : public smartable
     // ------------------------------------------------------
 
     void                  appendMeasureToMeasureSlice (
-                            int          inputLineNumber,
                             const S_msrMeasure& measure);
 
     void                  appendSliceMeasuresFrom (
-                            int                inputLineNumber,
                             const S_msrMeasuresSlice& otherSlice);
 
     void                  collectNonSkipNotesFromMeasuresSliceMeasures ();
@@ -262,7 +260,8 @@ class EXP msrMeasuresSlice : public smartable
 
     virtual std::string   asShortString () const;
     virtual std::string   asString () const;
-    virtual std::string   asShortStringForMeasuresSlices () const;
+
+    virtual std::string   asStringForMeasuresSlices () const;
 
     virtual void          print (std::ostream& os) const;
 
@@ -368,7 +367,8 @@ class EXP msrMeasuresSlicesSequence : public smartable
 
     virtual std::string   asShortString () const;
     std::string           asString () const;
-    virtual std::string   asShortStringForMeasuresSlices () const;
+
+    virtual std::string   asStringForMeasuresSlices () const;
 
     void                  print (std::ostream& os) const;
 

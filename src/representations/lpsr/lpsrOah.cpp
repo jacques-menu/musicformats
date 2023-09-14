@@ -1421,7 +1421,7 @@ This implies that no LilyPond code is generated.)",
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
         "display-lpsr-summary", "dlpsrsum",
-R"(Only write a summary of the fLPSR to standard error.
+R"(Only write a summary of the LPSR to standard error.
 This implies that no LilyPond code is generated.)",
         "fDisplayLpsrSummary",
         fDisplayLpsrSummary));
@@ -1432,7 +1432,10 @@ This implies that no LilyPond code is generated.)",
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
         "display-lpsr-voices-flat-view", "dlpsrvoicesflatview",
-R"(Only write a voices flat view of the fLPSR to standard error.
+R"(Only write a voices flat view of the LPSR to standard error.
+The output looks like:
+  s4-unpitched c4-o:5 d4-o:5 e4-o:5
+where the number after ':' is the octave number.
 This implies that no LilyPond code is generated.)",
         "fDisplayLpsrFlatView",
         fDisplayLpsrFlatView));
@@ -1442,9 +1445,15 @@ This implies that no LilyPond code is generated.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-lpsr-voices-flat-view-details", "dlpsrvoicesflatviewdetails",
-R"(Only write a voices flat view of the fLPSR to standard error
+        "display-lpsr-voices-flat-view-details", "dlpsrvoicesflatviewdets",
+R"(Only write a voices flat view of the LPSR to standard error
 with more details.
+The output looks like:
+  @0/1: s4-unpitched, line 52
+  @1/4: c4-o:5, line 62
+  @1/2: d4-o:5, line 72
+  @3/4: e4-o:5, line 82
+where the number after ':' is the octave number.
 This implies that no LilyPond code is generated.)",
         "fDisplayLpsrFlatViewDetails",
         fDisplayLpsrFlatViewDetails));
@@ -1455,10 +1464,22 @@ This implies that no LilyPond code is generated.)",
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
         "display-lpsr-measures-slices", "dlpsrmeasslices",
-R"(Only write the measures slices of the fLPSR to standard error.
+R"(Only write the measures slices of the LPSR to standard error.
 This implies that no LilyPond code is generated.)",
         "fDisplayLpsrMeasuresSlices",
         fDisplayLpsrMeasuresSlices));
+
+  // display LPSR slices details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-lpsr-measures-slices-details", "dlpsrmeasslicesdets",
+R"(Only write the measures slices of the LPSR to standard error
+with more details.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrMeasuresSlicesDetails",
+        fDisplayLpsrMeasuresSlicesDetails));
 }
 
 void lpsrOahGroup::initializeLpsrPaperOptions ()

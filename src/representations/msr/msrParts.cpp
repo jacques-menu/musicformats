@@ -3360,7 +3360,7 @@ void msrPart::printPartMeasuresWholeNotesVector (
 void msrPart::printFull (std::ostream& os) const
 {
   os <<
-    "[Part" << ' ' << fPartMsrName <<
+    "[Part printfull()" << ' ' << fPartMsrName <<
     " (" <<
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
@@ -3446,11 +3446,6 @@ void msrPart::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fPartCurrentDrawingMeasurePosition" << ": " <<
     fPartCurrentDrawingMeasurePosition <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fPartHarmoniesStaff" << ": \"" <<
-    fPartHarmoniesStaff->asShortString () << "\"" <<
     std::endl;
 
   os << std::left <<
@@ -3741,29 +3736,29 @@ void msrPart::printFull (std::ostream& os) const
 
       switch (staffKind) { // JMI
         case msrStaffKind::kStaffKindRegular:
-          os << staff;
+          staff->printFull (os);
           break;
 
         case msrStaffKind::kStaffKindTablature:
-          os << staff;
+          staff->printFull (os);
           break;
 
         case msrStaffKind::kStaffKindHarmonies:
     // JMI      if (gMsrOahGroup->getShowHarmoniesVoices ()) {}
-          os << staff;
+          staff->printFull (os);
           break;
 
         case msrStaffKind::kStaffKindFiguredBass:
     // JMI      if (gMsrOahGroup->getShowFiguredBassVoices ()) {}
-          os << staff;
+          staff->printFull (os);
           break;
 
         case msrStaffKind::kStaffKindDrum:
-          os << staff;
+          staff->printFull (os);
           break;
 
         case msrStaffKind::kStaffKindRythmic:
-          os << staff;
+          staff->printFull (os);
           break;
       } // switch
 

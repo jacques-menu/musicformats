@@ -16,16 +16,17 @@ Grammar
     8 Factor: BasicFactor
     9       | "=" BasicFactor
 
-   10 BasicFactor: String
-   11            | SubExpression
+   10 BasicFactor: "word"
+   11            | String
+   12            | SubExpression
 
-   12 SubExpression: "(" Expression ")"
+   13 SubExpression: "(" Expression ")"
 
-   13 SingleString: "single quoted string"
-   14             | "double quoted string"
+   14 SingleString: "single quoted string"
+   15             | "double quoted string"
 
-   15 String: SingleString
-   16       | String SingleString
+   16 String: SingleString
+   17       | String SingleString
 
 
 Terminals, with rules where they appear
@@ -36,43 +37,44 @@ Terminals, with rules where they appear
     "^" (259) 5
     "|" (260) 7
     "=" (261) 9
-    "(" (262) 12
-    ")" (263) 12
-    "single quoted string" <std::string> (264) 13
-    "double quoted string" <std::string> (265) 14
+    "(" (262) 13
+    ")" (263) 13
+    "word" <std::string> (264) 10
+    "single quoted string" <std::string> (265) 14
+    "double quoted string" <std::string> (266) 15
 
 
 Nonterminals, with rules where they appear
 
-    $accept (11)
+    $accept (12)
         on left: 0
-    StringFilterSpecification <S_stringFilterNode> (12)
+    StringFilterSpecification <S_stringFilterNode> (13)
         on left: 2
         on right: 0
-    $@1 (13)
+    $@1 (14)
         on left: 1
         on right: 2
-    Expression <S_stringFilterNode> (14)
+    Expression <S_stringFilterNode> (15)
         on left: 3 4 5
-        on right: 2 4 5 12
-    Term <S_stringFilterNode> (15)
+        on right: 2 4 5 13
+    Term <S_stringFilterNode> (16)
         on left: 6 7
         on right: 3 4 5 7
-    Factor <S_stringFilterNode> (16)
+    Factor <S_stringFilterNode> (17)
         on left: 8 9
         on right: 6 7
-    BasicFactor <S_stringFilterNode> (17)
-        on left: 10 11
+    BasicFactor <S_stringFilterNode> (18)
+        on left: 10 11 12
         on right: 8 9
-    SubExpression <S_stringFilterNode> (18)
-        on left: 12
-        on right: 11
-    SingleString <std::string> (19)
-        on left: 13 14
-        on right: 15 16
-    String <std::string> (20)
-        on left: 15 16
-        on right: 10 16
+    SubExpression <S_stringFilterNode> (19)
+        on left: 13
+        on right: 12
+    SingleString <std::string> (20)
+        on left: 14 15
+        on right: 16 17
+    String <std::string> (21)
+        on left: 16 17
+        on right: 11 17
 
 
 State 0
@@ -98,16 +100,17 @@ State 2
 
     "="                     shift, and go to state 4
     "("                     shift, and go to state 5
-    "single quoted string"  shift, and go to state 6
-    "double quoted string"  shift, and go to state 7
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
 
-    Expression     go to state 8
-    Term           go to state 9
-    Factor         go to state 10
-    BasicFactor    go to state 11
-    SubExpression  go to state 12
-    SingleString   go to state 13
-    String         go to state 14
+    Expression     go to state 9
+    Term           go to state 10
+    Factor         go to state 11
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
 
 
 State 3
@@ -122,213 +125,225 @@ State 4
     9 Factor: "=" • BasicFactor
 
     "("                     shift, and go to state 5
-    "single quoted string"  shift, and go to state 6
-    "double quoted string"  shift, and go to state 7
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
 
-    BasicFactor    go to state 15
-    SubExpression  go to state 12
-    SingleString   go to state 13
-    String         go to state 14
+    BasicFactor    go to state 16
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
 
 
 State 5
 
-   12 SubExpression: "(" • Expression ")"
+   13 SubExpression: "(" • Expression ")"
 
     "="                     shift, and go to state 4
     "("                     shift, and go to state 5
-    "single quoted string"  shift, and go to state 6
-    "double quoted string"  shift, and go to state 7
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
 
-    Expression     go to state 16
-    Term           go to state 9
-    Factor         go to state 10
-    BasicFactor    go to state 11
-    SubExpression  go to state 12
-    SingleString   go to state 13
-    String         go to state 14
+    Expression     go to state 17
+    Term           go to state 10
+    Factor         go to state 11
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
 
 
 State 6
 
-   13 SingleString: "single quoted string" •
+   10 BasicFactor: "word" •
 
-    $default  reduce using rule 13 (SingleString)
+    $default  reduce using rule 10 (BasicFactor)
 
 
 State 7
 
-   14 SingleString: "double quoted string" •
+   14 SingleString: "single quoted string" •
 
     $default  reduce using rule 14 (SingleString)
 
 
 State 8
 
-    2 StringFilterSpecification: $@1 Expression •
-    4 Expression: Expression • "&" Term
-    5           | Expression • "^" Term
+   15 SingleString: "double quoted string" •
 
-    "&"  shift, and go to state 17
-    "^"  shift, and go to state 18
-
-    $default  reduce using rule 2 (StringFilterSpecification)
+    $default  reduce using rule 15 (SingleString)
 
 
 State 9
 
+    2 StringFilterSpecification: $@1 Expression •
+    4 Expression: Expression • "&" Term
+    5           | Expression • "^" Term
+
+    "&"  shift, and go to state 18
+    "^"  shift, and go to state 19
+
+    $default  reduce using rule 2 (StringFilterSpecification)
+
+
+State 10
+
     3 Expression: Term •
     7 Term: Term • "|" Factor
 
-    "|"  shift, and go to state 19
+    "|"  shift, and go to state 20
 
     $default  reduce using rule 3 (Expression)
 
 
-State 10
+State 11
 
     6 Term: Factor •
 
     $default  reduce using rule 6 (Term)
 
 
-State 11
+State 12
 
     8 Factor: BasicFactor •
 
     $default  reduce using rule 8 (Factor)
 
 
-State 12
-
-   11 BasicFactor: SubExpression •
-
-    $default  reduce using rule 11 (BasicFactor)
-
-
 State 13
 
-   15 String: SingleString •
+   12 BasicFactor: SubExpression •
 
-    $default  reduce using rule 15 (String)
+    $default  reduce using rule 12 (BasicFactor)
 
 
 State 14
 
-   10 BasicFactor: String •
-   16 String: String • SingleString
+   16 String: SingleString •
 
-    "single quoted string"  shift, and go to state 6
-    "double quoted string"  shift, and go to state 7
-
-    $default  reduce using rule 10 (BasicFactor)
-
-    SingleString  go to state 20
+    $default  reduce using rule 16 (String)
 
 
 State 15
+
+   11 BasicFactor: String •
+   17 String: String • SingleString
+
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
+
+    $default  reduce using rule 11 (BasicFactor)
+
+    SingleString  go to state 21
+
+
+State 16
 
     9 Factor: "=" BasicFactor •
 
     $default  reduce using rule 9 (Factor)
 
 
-State 16
+State 17
 
     4 Expression: Expression • "&" Term
     5           | Expression • "^" Term
-   12 SubExpression: "(" Expression • ")"
+   13 SubExpression: "(" Expression • ")"
 
-    "&"  shift, and go to state 17
-    "^"  shift, and go to state 18
-    ")"  shift, and go to state 21
+    "&"  shift, and go to state 18
+    "^"  shift, and go to state 19
+    ")"  shift, and go to state 22
 
 
-State 17
+State 18
 
     4 Expression: Expression "&" • Term
 
     "="                     shift, and go to state 4
     "("                     shift, and go to state 5
-    "single quoted string"  shift, and go to state 6
-    "double quoted string"  shift, and go to state 7
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
 
-    Term           go to state 22
-    Factor         go to state 10
-    BasicFactor    go to state 11
-    SubExpression  go to state 12
-    SingleString   go to state 13
-    String         go to state 14
+    Term           go to state 23
+    Factor         go to state 11
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
 
 
-State 18
+State 19
 
     5 Expression: Expression "^" • Term
 
     "="                     shift, and go to state 4
     "("                     shift, and go to state 5
-    "single quoted string"  shift, and go to state 6
-    "double quoted string"  shift, and go to state 7
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
 
-    Term           go to state 23
-    Factor         go to state 10
-    BasicFactor    go to state 11
-    SubExpression  go to state 12
-    SingleString   go to state 13
-    String         go to state 14
+    Term           go to state 24
+    Factor         go to state 11
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
 
 
-State 19
+State 20
 
     7 Term: Term "|" • Factor
 
     "="                     shift, and go to state 4
     "("                     shift, and go to state 5
-    "single quoted string"  shift, and go to state 6
-    "double quoted string"  shift, and go to state 7
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
 
-    Factor         go to state 24
-    BasicFactor    go to state 11
-    SubExpression  go to state 12
-    SingleString   go to state 13
-    String         go to state 14
-
-
-State 20
-
-   16 String: String SingleString •
-
-    $default  reduce using rule 16 (String)
+    Factor         go to state 25
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
 
 
 State 21
 
-   12 SubExpression: "(" Expression ")" •
+   17 String: String SingleString •
 
-    $default  reduce using rule 12 (SubExpression)
+    $default  reduce using rule 17 (String)
 
 
 State 22
 
-    4 Expression: Expression "&" Term •
-    7 Term: Term • "|" Factor
+   13 SubExpression: "(" Expression ")" •
 
-    "|"  shift, and go to state 19
-
-    $default  reduce using rule 4 (Expression)
+    $default  reduce using rule 13 (SubExpression)
 
 
 State 23
 
+    4 Expression: Expression "&" Term •
+    7 Term: Term • "|" Factor
+
+    "|"  shift, and go to state 20
+
+    $default  reduce using rule 4 (Expression)
+
+
+State 24
+
     5 Expression: Expression "^" Term •
     7 Term: Term • "|" Factor
 
-    "|"  shift, and go to state 19
+    "|"  shift, and go to state 20
 
     $default  reduce using rule 5 (Expression)
 
 
-State 24
+State 25
 
     7 Term: Term "|" Factor •
 

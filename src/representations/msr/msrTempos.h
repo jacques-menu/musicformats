@@ -531,7 +531,8 @@ class EXP msrTempo : public msrMeasureElement
     // ------------------------------------------------------
 
     std::string           asString () const override;
-    std::string           asShortStringForMeasuresSlices () const override;
+
+//     std::string           asStringForMeasuresSlices () const override;
 
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;

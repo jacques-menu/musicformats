@@ -275,6 +275,11 @@ class EXP msrOahGroup : public oahGroup
     Bool                  getDisplayFirstMsrMeasuresSlices () const
                               { return fDisplayFirstMsrMeasuresSlices; }
 
+    void                  setDisplayFirstMsrMeasuresSlicesDetails ()
+                              { fDisplayFirstMsrMeasuresSlicesDetails = true; }
+    Bool                  getDisplayFirstMsrMeasuresSlicesDetails () const
+                              { return fDisplayFirstMsrMeasuresSlicesDetails; }
+
     void                  setDisplaySecondMsr ()
                               { fDisplaySecondMsr = true; }
     Bool                  getDisplaySecondMsr () const
@@ -295,6 +300,11 @@ class EXP msrOahGroup : public oahGroup
                               { fDisplaySecondMsrMeasuresSlices = true; }
     Bool                  getDisplaySecondMsrMeasuresSlices () const
                               { return fDisplaySecondMsrMeasuresSlices; }
+
+    void                  setDisplaySecondMsrMeasuresSlicesDetails ()
+                              { fDisplaySecondMsrMeasuresSlicesDetails = true; }
+    Bool                  getDisplaySecondMsrMeasuresSlicesDetails () const
+                              { return fDisplaySecondMsrMeasuresSlicesDetails; }
 
     Bool                  getDisplayMsrFull () const // JMI ???
                               {
@@ -476,7 +486,10 @@ class EXP msrOahGroup : public oahGroup
     Bool                  fDisplaySecondMsrFull;
 
     Bool                  fDisplayFirstMsrMeasuresSlices;
+    Bool                  fDisplayFirstMsrMeasuresSlicesDetails;
+
     Bool                  fDisplaySecondMsrMeasuresSlices;
+    Bool                  fDisplaySecondMsrMeasuresSlicesDetails;
 
     Bool                  fDisplayFirstMsrNames;
     Bool                  fDisplaySecondMsrNames;

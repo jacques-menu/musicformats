@@ -593,9 +593,10 @@ std::string msrGraceNotesGroup::asShortString () const
 
   ss <<
     "[GraceNotesGroup" <<
-    ", graceNotesGroupKind: " <<
-    msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
-    ", graceNotesGroupMeasureNumber: \"" << fGraceNotesGroupMeasureNumber <<
+    ", fGraceNotesGroupKind: " <<
+    fGraceNotesGroupKind <<
+    ", fGraceNotesGroupMeasureNumber: \"" <<
+    fGraceNotesGroupMeasureNumber <<
     "\", ";
 
   if (fGraceNotesGroupElementsList.size ()) {
@@ -623,9 +624,10 @@ std::string msrGraceNotesGroup::asString () const
 
   ss <<
     "[GraceNotesGroup" <<
-    ", graceNotesGroupKind: " <<
-    msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
-    ", graceNotesGroupMeasureNumber: \"" << fGraceNotesGroupMeasureNumber <<
+    ", fGraceNotesGroupKind: " <<
+    fGraceNotesGroupKind <<
+    ", fGraceNotesGroupMeasureNumber: \"" <<
+    fGraceNotesGroupMeasureNumber <<
     "\", line " << fInputStartLineNumber <<
     ", ";
 
@@ -650,8 +652,8 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
 {
   os <<
     "[GraceNotesGroup" <<
-    ", graceNotesGroupKind: " <<
-    msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
+    ", fGraceNotesGroupKind: " <<
+    fGraceNotesGroupKind <<
     ", line " << fInputStartLineNumber <<
     ", " <<
     mfSingularOrPlural (
@@ -740,8 +742,8 @@ void msrGraceNotesGroup::print (std::ostream& os) const
 {
   os <<
     "[GraceNotesGroup" <<
-    ", graceNotesGroupKind: " <<
-    msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
+    ", fGraceNotesGroupKind: " <<
+    fGraceNotesGroupKind <<
     ", line " << fInputStartLineNumber <<
     ", " <<
     mfSingularOrPlural (

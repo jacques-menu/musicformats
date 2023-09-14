@@ -552,7 +552,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
     setStavesBrowingOrderKind (
       msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
 
-  // browse the visited score with the browser
+  // browse the visited MSR score
   browser.browse (*fVisitedMsrScore);
 
   // display the LPSR score if requested

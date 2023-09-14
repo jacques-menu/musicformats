@@ -461,6 +461,11 @@ class EXP lpsrOahGroup : public oahGroup
     Bool                  getDisplayLpsrMeasuresSlices () const
                               { return fDisplayLpsrMeasuresSlices; }
 
+    void                  setDisplayLpsrMeasuresSlicesDetails ()
+                              { fDisplayLpsrMeasuresSlicesDetails = true; }
+    Bool                  getDisplayLpsrMeasuresSlicesDetails () const
+                              { return fDisplayLpsrMeasuresSlicesDetails; }
+
     // paper
     // --------------------------------------
 
@@ -766,6 +771,7 @@ class EXP lpsrOahGroup : public oahGroup
     Bool                  fDisplayLpsrFlatViewDetails;
 
     Bool                  fDisplayLpsrMeasuresSlices;
+    Bool                  fDisplayLpsrMeasuresSlicesDetails;
 
     // paper
     // --------------------------------------

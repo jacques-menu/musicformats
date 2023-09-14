@@ -3855,11 +3855,11 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       "\"," <<
       " since the latter has already been overtaken";
 
-    msrInternalError (
-//     msrInternalWarning ( // JMI v0.9.68
+//     msrInternalError (
+    msrInternalWarning ( // JMI v0.9.70
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+//       __FILE__, __LINE__,
       ss.str ());
   }
 
@@ -4312,12 +4312,13 @@ void msrMeasure::appendNoteToMeasureNotesFlatList (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+  if (gTraceOahGroup->getTraceVoicesFlatView ()) {
     std::stringstream ss;
 
     ss <<
       "Appending note " <<
-      note->asShortStringForMeasuresSlices () <<
+//       note->asStringForMeasuresSlices () << // JMI v0.9.70
+      note->asShortString () <<
       " to the notes flat list of measure " <<
       this->asShortString ();
 
@@ -7570,7 +7571,7 @@ std::string msrMeasure::asShortString () const
   return ss.str ();
 }
 
-std::string msrMeasure::asShortStringForMeasuresSlices () const
+std::string msrMeasure::asStringForMeasuresSlices () const
 {
   // fetch the voice
   S_msrVoice
@@ -7633,7 +7634,7 @@ std::string msrMeasure::asShortStringForMeasuresSlices () const
       S_msrMeasureElement measureElement = (*i);
 
       ss <<
-        measureElement->asShortStringForMeasuresSlices ();
+        measureElement->asStringForMeasuresSlices ();
       if (++i == iEnd) break;
       ss << ", ";
     } // for
@@ -7940,7 +7941,8 @@ void msrMeasure::printFull (std::ostream& os) const
     for ( ; ; ) {
       S_msrMeasureElement measureElement = (*i);
 
-      os << measureElement;
+      measureElement->printFull (os);
+
       if (++i == iEnd) break;
       os << std::endl;
     } // for

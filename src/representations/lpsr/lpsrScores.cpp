@@ -3096,7 +3096,7 @@ void lpsrScore::browseData (basevisitor* v)
 void lpsrScore::printFull (std::ostream& os) const
 {
   os <<
-    std::string ("LPSR Score")
+    std::string ("LPSR Score printfull()")
       + ", " +
     gLanguage->fullVersion () <<
     std::endl << std::endl;

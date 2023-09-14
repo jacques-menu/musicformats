@@ -165,7 +165,7 @@ void msrTie::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -178,7 +178,8 @@ std::string msrTie::asString () const
   std::stringstream ss;
 
   ss <<
-    "Tie" << ' ' << msrTieKindAsString (fTieKind) <<
+    "Tie" << ' ' <<
+    fTieKind <<
     ", line " << fInputStartLineNumber;
 
   return ss.str ();

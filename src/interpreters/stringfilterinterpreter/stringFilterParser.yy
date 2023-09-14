@@ -92,6 +92,8 @@ using namespace MusicFormats;
   #include "stringFilterDriver.h"
 }
 
+%token <std::string> WORD "word"
+
 %token <std::string> SINGLE_QUOTED_STRING "single quoted string"
 %token <std::string> DOUBLE_QUOTED_STRING "double quoted string"
 
@@ -213,7 +215,13 @@ Factor
 //_______________________________________________________________________________
 
 BasicFactor
-  : String
+  : WORD
+      {
+        $$ =
+          stringFilterString::create (
+            $1);
+      }
+  | String
       {
         $$ =
           stringFilterString::create (

@@ -4216,176 +4216,16 @@ std::string msrNote::noteCoreAsString () const
   return ss.str ();
 }
 
-std::string msrNote::asShortString () const
+std::string msrNote::noteCoreAndInputLineNumbersAsString () const
 {
   std::stringstream ss;
 
   ss <<
-  	"[Note" <<
-    ", ";
-
-  switch (fNoteKind) {
-    case msrNoteKind::kNote_UNKNOWN_:
-			ss <<
-      	noteCoreAsString ();
-      break;
-
-    case msrNoteKind::kNoteRestInMeasure:
-      ss <<
-      	noteCoreAsString ();
-      break;
-
-    case msrNoteKind::kNoteSkipInMeasure:
-      ss <<
-      	noteCoreAsString ();
-      break;
-
-    case msrNoteKind::kNoteUnpitchedInMeasure:
-      ss <<
-      	noteCoreAsString ();
-      break;
-
-    case msrNoteKind::kNoteRegularInMeasure:
-      {
-        ss <<
-	      	noteCoreAsString ();
-
-        S_msrVoice
-          noteVoiceUpLink =
-            fetchNoteUpLinkToVoice ();
-
-        S_msrStaff
-          noteStaffUpLink;
-
-        if (noteVoiceUpLink) {
-          noteStaffUpLink =
-            noteVoiceUpLink->
-              getVoiceUpLinkToStaff ();
-        }
-
-        ss <<
-          ", noteStaffUpLink: ";
-        if (noteStaffUpLink) {
-          ss <<
-            noteStaffUpLink->getStaffName ();
-        }
-        else {
-          ss << "[NULL]";
-        }
-
-        ss <<
-          ", noteVoiceUpLink: ";
-        if (noteVoiceUpLink) {
-          ss <<
-            noteVoiceUpLink->getVoiceName ();
-        }
-        else {
-          ss << "[NULL]";
-        }
-      }
-      break;
-
-    case msrNoteKind::kNoteInDoubleTremolo:
-      ss <<
-      	noteCoreAsString ();
-      break;
-
-    case msrNoteKind::kNoteRegularInGraceNotesGroup:
-      ss <<
-      	noteCoreAsString ();
-      break;
-
-    case msrNoteKind::kNoteSkipInGraceNotesGroup:
-      ss <<
-      	noteCoreAsString ();
-      break;
-
-   case msrNoteKind::kNoteInChordInGraceNotesGroup:
-      ss <<
-      	noteCoreAsString () <<
-        ", fNoteGraphicNotesDurationKind: " <<
-        fNoteGraphicNotesDurationKind;
-      break;
-
-    case msrNoteKind::kNoteRegularInChord:
-      ss <<
-      	noteCoreAsString ();
-      break;
-
-    case msrNoteKind::kNoteRegularInTuplet:
-      ss <<
-      	noteCoreAsString () <<
-        ", fNoteGraphicNotesDurationKind: " <<
-        fNoteGraphicNotesDurationKind <<
-        ", fNoteDisplayWholeNotes: " <<
-        fNoteDisplayWholeNotes <<
-        /* JMI v0.9.67
-        noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
-            fInputStartLineNumber,
-            fSoundingWholeNotes,
-            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
-            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
-            */
-        ", noteTupletFactor " << fNoteTupletFactor;
-      break;
-
-    case msrNoteKind::kNoteRestInTuplet:
-      ss <<
-      	noteCoreAsString () <<
-        ", fNoteGraphicNotesDurationKind: " <<
-        fNoteGraphicNotesDurationKind <<
-        ", fNoteDisplayWholeNotes: " <<
-        fNoteDisplayWholeNotes <<
-        /* JMI
-        noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
-            fInputStartLineNumber,
-            fSoundingWholeNotes,
-            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
-            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
-            */
-        ", noteTupletFactor " << fNoteTupletFactor;
-      break;
-
-    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-      ss <<
-      	noteCoreAsString () <<
-        ", fNoteGraphicNotesDurationKind: " <<
-        fNoteGraphicNotesDurationKind <<
-        ", fNoteDisplayWholeNotes: " <<
-        fNoteDisplayWholeNotes <<
-        /* JMI
-        noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
-            fInputStartLineNumber,
-            fSoundingWholeNotes,
-            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
-            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
-            */
-        ", noteTupletFactor " << fNoteTupletFactor;
-      break;
-
-    case msrNoteKind::kNoteUnpitchedInTuplet:
-      ss <<
-      	noteCoreAsString () <<
-        ", fNoteDisplayWholeNotes: " <<
-        fNoteDisplayWholeNotes <<
-        /* JMI
-        noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
-            fInputStartLineNumber,
-            fSoundingWholeNotes,
-            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
-            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
-            */
-        ", noteTupletFactor " << fNoteTupletFactor;
-      break;
-  } // switch
-
-  ss <<
-    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
-    ']';
+		noteCoreAsString () <<
+    ", " <<
+    mfInputLineNumbersAsString (
+    	fInputStartLineNumber,
+    	fInputEndLineNumber);
 
   return ss.str ();
 }
@@ -4396,7 +4236,10 @@ std::string msrNote::asShortString () const
 //
 //   ss <<
 //   	"[Note" <<
-//     ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
+//     ", " <<
+//     mfInputLineNumbersAsString (
+//     	fInputStartLineNumber,
+//     	fInputEndLineNumber) <<
 //     ", ";
 //
 //   switch (fNoteKind) {
@@ -4573,7 +4416,7 @@ std::string msrNote::noteCoreAndComplementAsString () const
   return ss.str ();
 }
 
-std::string msrNote::asString () const
+std::string msrNote::asShortString () const
 {
   std::stringstream ss;
 
@@ -4770,7 +4613,10 @@ std::string msrNote::asString () const
     ", " << fNoteIsACueNoteKind;
 
   ss <<
-    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
+    ", " <<
+    mfInputLineNumbersAsString (
+    	fInputStartLineNumber,
+    	fInputEndLineNumber) <<
     ']';
 
   return ss.str ();
@@ -4782,7 +4628,10 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
 
   ss <<
   	"[Note" <<
-    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
+    ", " <<
+    mfInputLineNumbersAsString (
+    	fInputStartLineNumber,
+    	fInputEndLineNumber) <<
     ", ";
 
   switch (fNoteKind) {
@@ -4903,26 +4752,42 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
   return ss.str ();
 }
 
-std::string msrNote::asShortStringForMeasuresSlices () const
+std::string msrNote::asStringForVoicesFlatView () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "@" <<
+    fMeasurePosition.asFractionString () <<
+    ": " <<
+    noteCoreAndInputLineNumbersAsString ();
+
+  return ss.str ();
+}
+
+std::string msrNote::asStringForMeasuresSlices () const
 {
   std::stringstream ss;
 
   ss <<
     "@:" <<
-    fMeasurePosition.asString () <<
+    fMeasurePosition.asFractionString () <<
     ' ' <<
-    noteCoreAsString ();
+    noteCoreAndComplementAsString ();
 
   return ss.str ();
 }
 
-// std::string msrNote::asShortStringForMeasuresSlices () const
+// std::string msrNote::asStringForMeasuresSlices () const
 // {
 //   std::stringstream ss;
 //
 //   ss <<
 //   	"[Note" <<
-//     ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
+//     ", " <<
+//     mfInputLineNumbersAsString (
+//     	fInputStartLineNumber,
+//     	fInputEndLineNumber) <<
 //     ", ";
 //
 //   switch (fNoteKind) {
@@ -5193,14 +5058,194 @@ std::string msrNote::asShortStringForMeasuresSlices () const
 //
 //   return ss.str ();
 // }
-//
+
+std::string msrNote::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+  	"[Note" <<
+    ", ";
+
+  switch (fNoteKind) {
+    case msrNoteKind::kNote_UNKNOWN_:
+			ss <<
+      	noteCoreAsString ();
+      break;
+
+    case msrNoteKind::kNoteRestInMeasure:
+      ss <<
+      	noteCoreAsString ();
+      break;
+
+    case msrNoteKind::kNoteSkipInMeasure:
+      ss <<
+      	noteCoreAsString ();
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInMeasure:
+      ss <<
+      	noteCoreAsString ();
+      break;
+
+    case msrNoteKind::kNoteRegularInMeasure:
+      {
+        ss <<
+	      	noteCoreAsString ();
+
+        S_msrVoice
+          noteVoiceUpLink =
+            fetchNoteUpLinkToVoice ();
+
+        S_msrStaff
+          noteStaffUpLink;
+
+        if (noteVoiceUpLink) {
+          noteStaffUpLink =
+            noteVoiceUpLink->
+              getVoiceUpLinkToStaff ();
+        }
+
+        ss <<
+          ", noteStaffUpLink: ";
+        if (noteStaffUpLink) {
+          ss <<
+            noteStaffUpLink->getStaffName ();
+        }
+        else {
+          ss << "[NULL]";
+        }
+
+        ss <<
+          ", noteVoiceUpLink: ";
+        if (noteVoiceUpLink) {
+          ss <<
+            noteVoiceUpLink->getVoiceName ();
+        }
+        else {
+          ss << "[NULL]";
+        }
+      }
+      break;
+
+    case msrNoteKind::kNoteInDoubleTremolo:
+      ss <<
+      	noteCoreAsString ();
+      break;
+
+    case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      ss <<
+      	noteCoreAsString ();
+      break;
+
+    case msrNoteKind::kNoteSkipInGraceNotesGroup:
+      ss <<
+      	noteCoreAsString ();
+      break;
+
+   case msrNoteKind::kNoteInChordInGraceNotesGroup:
+      ss <<
+      	noteCoreAsString () <<
+        ", fNoteGraphicNotesDurationKind: " <<
+        fNoteGraphicNotesDurationKind;
+      break;
+
+    case msrNoteKind::kNoteRegularInChord:
+      ss <<
+      	noteCoreAsString ();
+      break;
+
+    case msrNoteKind::kNoteRegularInTuplet:
+      ss <<
+      	noteCoreAsString () <<
+        ", fNoteGraphicNotesDurationKind: " <<
+        fNoteGraphicNotesDurationKind <<
+        ", fNoteDisplayWholeNotes: " <<
+        fNoteDisplayWholeNotes <<
+        /* JMI v0.9.67
+        noteUpLinkToPart ()->
+          tupletSoundingWholeNotespitchAndOctaveAsString (
+            fInputStartLineNumber,
+            fSoundingWholeNotes,
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
+            */
+        ", noteTupletFactor " << fNoteTupletFactor;
+      break;
+
+    case msrNoteKind::kNoteRestInTuplet:
+      ss <<
+      	noteCoreAsString () <<
+        ", fNoteGraphicNotesDurationKind: " <<
+        fNoteGraphicNotesDurationKind <<
+        ", fNoteDisplayWholeNotes: " <<
+        fNoteDisplayWholeNotes <<
+        /* JMI
+        noteUpLinkToPart ()->
+          tupletSoundingWholeNotespitchAndOctaveAsString (
+            fInputStartLineNumber,
+            fSoundingWholeNotes,
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
+            */
+        ", noteTupletFactor " << fNoteTupletFactor;
+      break;
+
+    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+      ss <<
+      	noteCoreAsString () <<
+        ", fNoteGraphicNotesDurationKind: " <<
+        fNoteGraphicNotesDurationKind <<
+        ", fNoteDisplayWholeNotes: " <<
+        fNoteDisplayWholeNotes <<
+        /* JMI
+        noteUpLinkToPart ()->
+          tupletSoundingWholeNotespitchAndOctaveAsString (
+            fInputStartLineNumber,
+            fSoundingWholeNotes,
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
+            */
+        ", noteTupletFactor " << fNoteTupletFactor;
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInTuplet:
+      ss <<
+      	noteCoreAsString () <<
+        ", fNoteDisplayWholeNotes: " <<
+        fNoteDisplayWholeNotes <<
+        /* JMI
+        noteUpLinkToPart ()->
+          tupletSoundingWholeNotespitchAndOctaveAsString (
+            fInputStartLineNumber,
+            fSoundingWholeNotes,
+            fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
+            fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
+            */
+        ", noteTupletFactor " << fNoteTupletFactor;
+      break;
+  } // switch
+
+  ss <<
+    ", " <<
+    mfInputLineNumbersAsString (
+    	fInputStartLineNumber,
+    	fInputEndLineNumber) <<
+    ']';
+
+  return ss.str ();
+}
+
 void msrNote::print (std::ostream& os) const
 {
 // 	os << "======> msrNote::print ()" << std::endl;
 
   os <<
     "[Note" <<
-    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
+    ", " <<
+    mfInputLineNumbersAsString (
+    	fInputStartLineNumber,
+    	fInputEndLineNumber) <<
     ", " <<
 //     noteForPrintAsString () <<
     asString () <<
@@ -6042,7 +6087,10 @@ void msrNote::printFull (std::ostream& os) const
 
   os <<
     "[Note" <<
-    ", line " << fInputStartLineNumber << '-' << fInputEndLineNumber <<
+    ", " <<
+    mfInputLineNumbersAsString (
+    	fInputStartLineNumber,
+    	fInputEndLineNumber) <<
     ", " <<
 //     noteForPrintAsString () <<
     asString () <<

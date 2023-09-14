@@ -15,6 +15,8 @@
 #include <signal.h>
 #endif // WIN32
 
+#include <fstream>
+
 #include "mfBool.h"
 #include "mfInitialization.h"
 #include "mfMusicformatsErrors.h"
@@ -29,12 +31,13 @@
 
 #include "oahEarlyOptions.h"
 
-#include "musicxml2lilypondInterface.h" // JMI OUT_OF_CONTEXT v0.9.63
+#include "stringFilterBasicTypes.h"
 
 #include "stringFilterInterpreterInsiderHandler.h"
 #include "stringFilterInterpreterRegularHandler.h"
 
 #include "stringFilterInterface.h"
+#include "stringFilterDriver.h"
 
 #include "waeHandlers.h"
 
@@ -42,34 +45,66 @@
 namespace MusicFormats
 {
 
+// //_______________________________________________________________________________
+// #ifndef WIN32
+//
+// static void _sigaction (int signal, siginfo_t *si, void *arg)
+// {
+//   std::cerr << "Signal #" << signal << " catched!" << std::endl;
+//   exit (-2);
+// }
+//
+// static void catchSignals ()
+// {
+//   struct sigaction sa;
+//
+//   memset (&sa, 0, sizeof(struct sigaction));
+//
+//   sigemptyset (&sa.sa_mask);
+//
+//   sa.sa_sigaction = _sigaction;
+//   sa.sa_flags     = SA_SIGINFO;
+//
+//   sigaction (SIGSEGV, &sa, NULL);
+//   sigaction (SIGILL, &sa, NULL);
+//   sigaction (SIGFPE, &sa, NULL);
+// }
+//
+// #else
+// static void catchSignals ()  {}
+// #endif // WIN32
+//
 //_______________________________________________________________________________
-#ifndef WIN32
-
-static void _sigaction (int signal, siginfo_t *si, void *arg)
+mfMusicformatsErrorKind executeStringFilter (
+  const std::string& stringFilterExpressionString,
+  const std::string& stringFilterInputString)
 {
-  std::cerr << "Signal #" << signal << " catched!" << std::endl;
-  exit (-2);
+  mfMusicformatsErrorKind
+    result =
+      mfMusicformatsErrorKind::kMusicformatsError_NONE;
+
+  // the driver
+  stringFilterDriver
+    theDriver;
+
+  // parse the script
+  int
+    parseResult =
+      theDriver.parseInput_Pass1 ();
+
+  // launch the service
+  if (parseResult != 0) {
+    result =
+      mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+  }
+
+  else {
+    result =
+      theDriver.launchstringFilterService_Pass2 ();
+  }
+
+  return result;
 }
-
-static void catchSignals ()
-{
-  struct sigaction sa;
-
-  memset (&sa, 0, sizeof(struct sigaction));
-
-  sigemptyset (&sa.sa_mask);
-
-  sa.sa_sigaction = _sigaction;
-  sa.sa_flags     = SA_SIGINFO;
-
-  sigaction (SIGSEGV, &sa, NULL);
-  sigaction (SIGILL, &sa, NULL);
-  sigaction (SIGFPE, &sa, NULL);
-}
-
-#else
-static void catchSignals ()  {}
-#endif // WIN32
 
 //_______________________________________________________________________________
 EXP int stringfilter (
@@ -387,7 +422,7 @@ EXP int stringfilter (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // do the conversion
+  // do the filtering
   // ------------------------------------------------------
 
   mfMusicformatsErrorKind
@@ -403,12 +438,17 @@ EXP int stringfilter (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-//       err =
-//         convertMusicxmlFd2lilypondWithHandler (
-//           stdin,
-//           gOutput,
-//           gLog,
-//           handler);
+      // the std::istringstream to read lines from theString
+//       std::istringstream inputStream (theString);
+      std::string        line;
+
+      // print theString line by line
+//       while (getline (inputStream, line)) {
+      while (getline (std::cin, line)) {
+        gOutput << line << std::endl;
+      } // while
+
+//       executeStringFilter (line);
     }
 
     else {
@@ -429,12 +469,47 @@ EXP int stringfilter (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-//       err =
-//         convertMusicxmlFile2lilypondWithHandler (
-//           inputSourceName.c_str(),
-//           gOutput,
-//           gLog,
-//           handler);
+      std::ifstream
+        inputStream (
+          inputSourceName.c_str (),
+          std::ifstream::in);
+
+      if (! inputStream.is_open ()) {
+        std::stringstream ss;
+
+        ss <<
+          gLanguage->cannotOpenOptionsFileForReading (inputSourceName);
+
+        std::string message = ss.str ();
+
+        gLog <<
+          message <<
+          std::endl;
+
+        throw mfOahException (message);
+      }
+
+      // filter inputStream line by line
+      while (true) {
+        std::string currentLine;
+
+        getline (inputStream, currentLine);
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
+          std::stringstream ss;
+
+          ss <<
+            "==> currentLine: [" << currentLine << ']';
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+
+//         executeStringFilter (currentLine);
+      } // while
     }
   }
   catch (mfException& e) {
@@ -484,6 +559,65 @@ EXP int stringfilter (
   }
 
   return 0;
+}
+
+//______________________________________________________________________________
+void testStringFilter (std::ostream& os)
+{
+  S_stringFilterNode
+    theExpression =
+
+      stringFilterAnd::create (
+
+        stringFilterString::create (
+          "xml"),
+
+        stringFilterNot::create (
+          stringFilterString::create (
+            "lilypond")
+          )
+        );
+
+  os <<
+    "theExpression:" <<
+    std::endl;
+
+  ++gIndenter;
+  os <<
+    theExpression <<
+    std::endl;
+  --gIndenter;
+
+  os <<
+    "as string:" <<
+    std::endl;
+
+  ++gIndenter;
+  os <<
+    theExpression->asString () <<
+    std::endl <<
+    std::endl;
+  --gIndenter;
+
+  os <<
+    "as string with full parentheses:" <<
+    std::endl;
+
+  ++gIndenter;
+  os <<
+    theExpression->asStringWithFullParentheses () <<
+    std::endl;
+  --gIndenter;
+
+  std::string
+    data1 =
+      "xml lilypond";
+
+  gLog <<
+    "data1 = " << data1 <<
+    std::endl;
+
+//   executeStringFilter (data1);
 }
 
 

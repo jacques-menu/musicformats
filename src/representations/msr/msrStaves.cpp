@@ -3719,7 +3719,7 @@ std::string msrStaff::asString () const
 void msrStaff::printFull (std::ostream& os) const
 {
   os <<
-    "[Staff \"" << fStaffName <<
+    "[Staff printfull()\"" << fStaffName <<
     "\", fStaffAlphabeticName: " << fStaffAlphabeticName <<
     "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
@@ -4045,7 +4045,7 @@ void msrStaff::printFull (std::ostream& os) const
             measure = (*i);
 
           // print the measure
-          os << (*i)->asShortStringForMeasuresSlices ();
+          os << (*i)->asStringForMeasuresSlices ();
 
           if (++i == iEnd) break;
           os << std::endl;
@@ -4094,7 +4094,7 @@ void msrStaff::printFull (std::ostream& os) const
     for ( ; ; ) {
       const S_msrVoice& voice = (*i).second;
 
-      os << voice;
+      voice->printFull (os);
 
       if (++i == iEnd) break;
 

@@ -83,7 +83,7 @@ character                 .
 letter                    [A-Za-zˆ‰˜™”]
 digit                     [0-9]
 
-name                      {letter}(_|-|\.|{letter}|{digit})*
+word                      {letter}(_|-|\.|{letter}|{digit})*
 integer                   {digit}+
 exponent                  [eE][+-]?{integer}
 
@@ -136,6 +136,20 @@ loc.step ();
 
 {blank} {
   loc.step ();
+}
+
+{word} {
+  if (drv.getDisplayTokens ()) {
+    gLog << "--> " << drv.getScannerLocation () <<
+    ": word [" << yytext << ']' <<
+    endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    iscm::parser::make_WORD (yytext, loc);
 }
 
 {singleleQuote} {
@@ -374,35 +388,4 @@ void stringFilterDriver::scanBegin ()
 void stringFilterDriver::scanEnd ()
 {
   fclose (yyin);
-}
-
-//_______________________________________________________________________________
-mfMusicformatsErrorKind executeFilter (
-  const std::string& inputString)
-{
-  mfMusicformatsErrorKind
-    result =
-      mfMusicformatsErrorKind::kMusicformatsError_NONE;
-
-  // the driver
-  stringFilterDriver
-    theDriver;
-
-  // parse the script
-  int
-    parseResult =
-      theDriver.parseInput_Pass1 ();
-
-  // launch the service
-  if (parseResult != 0) {
-    result =
-      mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-  }
-
-  else {
-    result =
-      theDriver.launchstringFilterService_Pass2 ();
-  }
-
-  return result;
 }

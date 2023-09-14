@@ -426,6 +426,7 @@ namespace stringfilter {
       // SubExpression
       char dummy1[sizeof (S_stringFilterNode)];
 
+      // "word"
       // "single quoted string"
       // "double quoted string"
       // SingleString
@@ -489,8 +490,9 @@ namespace stringfilter {
     stringFilter_TOK_NOT = 6,      // "="
     stringFilter_TOK_LEFT_PARENTHESIS = 7, // "("
     stringFilter_TOK_RIGHT_PARENTHESIS = 8, // ")"
-    stringFilter_TOK_SINGLE_QUOTED_STRING = 9, // "single quoted string"
-    stringFilter_TOK_DOUBLE_QUOTED_STRING = 10 // "double quoted string"
+    stringFilter_TOK_WORD = 9,     // "word"
+    stringFilter_TOK_SINGLE_QUOTED_STRING = 10, // "single quoted string"
+    stringFilter_TOK_DOUBLE_QUOTED_STRING = 11 // "double quoted string"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -507,7 +509,7 @@ namespace stringfilter {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 11, ///< Number of tokens.
+        YYNTOKENS = 12, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -518,18 +520,19 @@ namespace stringfilter {
         S_NOT = 6,                               // "="
         S_LEFT_PARENTHESIS = 7,                  // "("
         S_RIGHT_PARENTHESIS = 8,                 // ")"
-        S_SINGLE_QUOTED_STRING = 9,              // "single quoted string"
-        S_DOUBLE_QUOTED_STRING = 10,             // "double quoted string"
-        S_YYACCEPT = 11,                         // $accept
-        S_StringFilterSpecification = 12,        // StringFilterSpecification
-        S_13_1 = 13,                             // $@1
-        S_Expression = 14,                       // Expression
-        S_Term = 15,                             // Term
-        S_Factor = 16,                           // Factor
-        S_BasicFactor = 17,                      // BasicFactor
-        S_SubExpression = 18,                    // SubExpression
-        S_SingleString = 19,                     // SingleString
-        S_String = 20                            // String
+        S_WORD = 9,                              // "word"
+        S_SINGLE_QUOTED_STRING = 10,             // "single quoted string"
+        S_DOUBLE_QUOTED_STRING = 11,             // "double quoted string"
+        S_YYACCEPT = 12,                         // $accept
+        S_StringFilterSpecification = 13,        // StringFilterSpecification
+        S_14_1 = 14,                             // $@1
+        S_Expression = 15,                       // Expression
+        S_Term = 16,                             // Term
+        S_Factor = 17,                           // Factor
+        S_BasicFactor = 18,                      // BasicFactor
+        S_SubExpression = 19,                    // SubExpression
+        S_SingleString = 20,                     // SingleString
+        S_String = 21                            // String
       };
     };
 
@@ -575,6 +578,7 @@ namespace stringfilter {
         value.move< S_stringFilterNode > (std::move (that.value));
         break;
 
+      case symbol_kind::S_WORD: // "word"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
       case symbol_kind::S_SingleString: // SingleString
@@ -666,6 +670,7 @@ switch (yykind)
         value.template destroy< S_stringFilterNode > ();
         break;
 
+      case symbol_kind::S_WORD: // "word"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
       case symbol_kind::S_SingleString: // SingleString
@@ -783,7 +788,7 @@ switch (yykind)
 #endif
       {
 #if !defined _MSC_VER || defined __clang__
-        STRINGFILTER_ASSERT ((token::stringFilter_TOK_SINGLE_QUOTED_STRING <= tok && tok <= token::stringFilter_TOK_DOUBLE_QUOTED_STRING));
+        STRINGFILTER_ASSERT ((token::stringFilter_TOK_WORD <= tok && tok <= token::stringFilter_TOK_DOUBLE_QUOTED_STRING));
 #endif
       }
     };
@@ -972,6 +977,21 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
+      make_WORD (std::string v, location_type l)
+      {
+        return symbol_type (token::stringFilter_TOK_WORD, std::move (v), std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_WORD (const std::string& v, const location_type& l)
+      {
+        return symbol_type (token::stringFilter_TOK_WORD, v, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
       make_SINGLE_QUOTED_STRING (std::string v, location_type l)
       {
         return symbol_type (token::stringFilter_TOK_SINGLE_QUOTED_STRING, std::move (v), std::move (l));
@@ -1107,7 +1127,7 @@ switch (yykind)
 
 #if STRINGFILTERDEBUG
     // YYRLINE[YYN] -- Source line where rule number YYN was defined.
-    static const unsigned char yyrline_[];
+    static const short yyrline_[];
     /// Report on the debug stream that the rule \a r is going to be reduced.
     virtual void yy_reduce_print_ (int r) const;
     /// Print the state stack on the debug stream.
@@ -1343,7 +1363,7 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 23,     ///< Last index in yytable_.
+      yylast_ = 24,     ///< Last index in yytable_.
       yynnts_ = 10,  ///< Number of nonterminal symbols.
       yyfinal_ = 3 ///< Termination state number.
     };
@@ -1379,6 +1399,7 @@ switch (yykind)
         value.copy< S_stringFilterNode > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_WORD: // "word"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
       case symbol_kind::S_SingleString: // SingleString
@@ -1426,6 +1447,7 @@ switch (yykind)
         value.move< S_stringFilterNode > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_WORD: // "word"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted string"
       case symbol_kind::S_SingleString: // SingleString
@@ -1499,7 +1521,7 @@ switch (yykind)
 
 
 } // stringfilter
-#line 1503 "stringFilterParser.h"
+#line 1525 "stringFilterParser.h"
 
 
 

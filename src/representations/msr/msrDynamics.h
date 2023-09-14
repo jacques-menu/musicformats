@@ -304,7 +304,8 @@ class EXP msrWedge : public msrElement
                             msrWedgeKind       wedgeKind,
                             msrWedgeNienteKind wedgeNienteKind,
                             msrLineTypeKind    wedgeLineTypeKind,
-                            msrPlacementKind   wedgePlacementKind);
+                            msrPlacementKind   wedgePlacementKind,
+                            int                wedgeVoiceNumber);
 
   protected:
 
@@ -316,7 +317,8 @@ class EXP msrWedge : public msrElement
                             msrWedgeKind       wedgeKind,
                             msrWedgeNienteKind wedgeNienteKind,
                             msrLineTypeKind    wedgeLineTypeKind,
-                            msrPlacementKind   wedgePlacementKind);
+                            msrPlacementKind   wedgePlacementKind,
+                            int                wedgeVoiceNumber);
 
     virtual               ~msrWedge ();
 
@@ -336,6 +338,9 @@ class EXP msrWedge : public msrElement
 
     msrPlacementKind      getWedgePlacementKind () const
                               { return fWedgePlacementKind; }
+
+    int                   getWedgeVoiceNumber () const
+                              { return fWedgeVoiceNumber; }
 
   public:
 
@@ -367,10 +372,11 @@ class EXP msrWedge : public msrElement
     msrWedgeKind          fWedgeKind;
 
     msrWedgeNienteKind    fWedgeNienteKind;
-
     msrLineTypeKind       fWedgeLineTypeKind;
 
     msrPlacementKind      fWedgePlacementKind;
+
+    int                   fWedgeVoiceNumber;
 };
 typedef SMARTP<msrWedge> S_msrWedge;
 EXP std::ostream& operator << (std::ostream& os, const S_msrWedge& elt);

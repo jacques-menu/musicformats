@@ -709,10 +709,10 @@ std::string msrSemiTonesPitchAndOctave::asString () const
   ss << std::left <<
     "[SemiTonesPitchAndOctave" <<
     ": " <<
-    "semiTonesPitchKind: " <<
-    msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
-    ", octave: " <<
-    msrOctaveKindAsString (fOctaveKind) <<
+    "fSemiTonesPitchKind: " <<
+    fSemiTonesPitchKind <<
+    ", fOctaveKind: " <<
+    fOctaveKind <<
     ']';
 
   return ss.str ();
@@ -731,11 +731,11 @@ void msrSemiTonesPitchAndOctave::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fSemiTonesPitchKind" << ": " <<
-      msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
+    fSemiTonesPitchKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fOctaveKind: " << ": " <<
-    msrOctaveKindAsString (fOctaveKind) <<
+    fOctaveKind <<
     std::endl;
 
   --gIndenter;
@@ -815,7 +815,7 @@ std::string msrSemiTonesPitchAndAbsoluteOctave::asString () const
     "SemiTonesPitchAndAbsoluteOctave" <<
     ": " <<
     std::setw (fieldWidth) <<
-    msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
+    fSemiTonesPitchKind <<
     ", absoluteOctave: " << fAbsoluteOctave;
 
   return ss.str ();
@@ -833,8 +833,8 @@ void msrSemiTonesPitchAndAbsoluteOctave::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "semiTonesPitchKind" << ": " <<
-      msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
+    "fSemiTonesPitchKind" << ": " <<
+    fSemiTonesPitchKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "absoluteOctave" << ": " << fAbsoluteOctave <<
@@ -916,8 +916,9 @@ std::string msrSemiTonesPitchAndRelativeOctave::asString () const
     "SemiTonesPitchAndRelativeOctave" <<
     ": " <<
     std::setw (fieldWidth) <<
-    msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
-    ", relativeOctave: " << fRelativeOctave;
+    fSemiTonesPitchKind <<
+    ", fSemiTonesPitchKind: " <<
+    fRelativeOctave;
 
   return ss.str ();
 }
@@ -935,10 +936,11 @@ void msrSemiTonesPitchAndRelativeOctave::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "semiTonesPitchKind" << ": " <<
-      msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
+    fSemiTonesPitchKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "relativeOctave" << ": " << fRelativeOctave <<
+    "fSemiTonesPitchKind" << ": " <<
+    fRelativeOctave <<
     std::endl;
 
   --gIndenter;
@@ -1212,9 +1214,9 @@ std::string msrQuarterTonesPitchAndOctave::asString () const
     "[QuarterTonesPitchAndOctave" <<
     ": " <<
     "fQuarterTonesPitchKind: " <<
-    msrQuarterTonesPitchKindAsString (
-      fQuarterTonesPitchKind) <<
-    ", fOctaveKind: " << msrOctaveKindAsString (fOctaveKind) <<
+    fQuarterTonesPitchKind <<
+    ", fOctaveKind: " <<
+    fOctaveKind <<
     ']';
 
   return ss.str ();
@@ -1232,12 +1234,12 @@ void msrQuarterTonesPitchAndOctave::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "quarterTonesPitchKind" << ": " <<
-      msrQuarterTonesPitchKindAsString (fQuarterTonesPitchKind) <<
+    "fQuarterTonesPitchKind" << ": " <<
+    fQuarterTonesPitchKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "octave: " << ": " <<
-    msrOctaveKindAsString (fOctaveKind) <<
+    "fOctaveKind: " << ": " <<
+    fOctaveKind <<
     std::endl;
 
   --gIndenter;

@@ -222,7 +222,7 @@ class EXP stringFilterNot : public stringFilterMonadicOperator
     // ------------------------------------------------------
 
     static SMARTP<stringFilterNot> create (
-                            const S_stringFilterNode&  operand);
+                            const S_stringFilterNode& operand);
 
 //   protected:
   public:
@@ -231,7 +231,7 @@ class EXP stringFilterNot : public stringFilterMonadicOperator
     // ------------------------------------------------------
 
                           stringFilterNot (
-                            const S_stringFilterNode&  operand);
+                            const S_stringFilterNode& operand);
 
     virtual               ~stringFilterNot ();
 
@@ -332,8 +332,8 @@ class EXP stringFilterXor : public stringFilterDyadicOperator
     // ------------------------------------------------------
 
     static SMARTP<stringFilterXor> create (
-                            const S_stringFilterNode&  leftOperand,
-                            const S_stringFilterNode&  rightOperand);
+                            const S_stringFilterNode& leftOperand,
+                            const S_stringFilterNode& rightOperand);
 
 //   protected:
   public:
@@ -342,8 +342,8 @@ class EXP stringFilterXor : public stringFilterDyadicOperator
     // ------------------------------------------------------
 
                           stringFilterXor (
-                            const S_stringFilterNode&  leftOperand,
-                            const S_stringFilterNode&  rightOperand);
+                            const S_stringFilterNode& leftOperand,
+                            const S_stringFilterNode& rightOperand);
 
     virtual               ~stringFilterXor ();
 
@@ -388,8 +388,8 @@ class EXP stringFilterAnd : public stringFilterDyadicOperator
     // ------------------------------------------------------
 
     static SMARTP<stringFilterAnd> create (
-                            const S_stringFilterNode&  leftOperand,
-                            const S_stringFilterNode&  rightOperand);
+                            const S_stringFilterNode& leftOperand,
+                            const S_stringFilterNode& rightOperand);
 
 //   protected:
   public:
@@ -398,8 +398,8 @@ class EXP stringFilterAnd : public stringFilterDyadicOperator
     // ------------------------------------------------------
 
                           stringFilterAnd (
-                            const S_stringFilterNode&  leftOperand,
-                            const S_stringFilterNode&  rightOperand);
+                            const S_stringFilterNode& leftOperand,
+                            const S_stringFilterNode& rightOperand);
 
     virtual               ~stringFilterAnd ();
 
@@ -544,9 +544,6 @@ EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterString& elt)
 // };
 // typedef SMARTP<stringFilterSubExpression> S_stringFilterSubExpression;
 // EXP std::ostream& operator<< (std::ostream& os, const S_stringFilterSubExpression& elt);
-
-//______________________________________________________________________________
-void testFilter (std::ostream& os);
 
 // // initialization
 // //______________________________________________________________________________

@@ -318,7 +318,7 @@ if (false) // JMI
     setClefKeyTimeSignatureOrderKind (
         msrClefKeyTimeSignatureOrderKind::kClefKeyTimeSignatureOrderClefKeyTimeSignature);
 
-    // browse a msrScore browser
+    // browse the visited LPSR score
     lpsrBrowser<lpsrScore> browser (this);
     browser.browse (*fVisitedLpsrScore);
   }
@@ -756,9 +756,9 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
 
     ss <<
       "% noteAbsoluteOctave: " <<
-      msrOctaveKindAsString (noteAbsoluteOctave) <<
+      noteAbsoluteOctave <<
       ", referenceAbsoluteOctave: " <<
-      msrOctaveKindAsString (referenceAbsoluteOctave) <<
+      referenceAbsoluteOctave <<
       ", referenceAbsoluteOctave: " <<
       absoluteOctavesDifference;
 
@@ -1988,7 +1988,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
 
         ss <<
           "note " <<
-          note->asShortStringForMeasuresSlices () <<
+          note->asShortString () <<
           "' has been finalized as being partially a solo note or rest, not supported yet" <<
           ", line " << inputLineNumber;
 

@@ -315,7 +315,7 @@
 #if defined (__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 
 /* C99 says to define __STDC_LIMIT_MACROS before including stdint.h,
- * if you want the limit (max/min) macros for int types. 
+ * if you want the limit (max/min) macros for int types.
  */
 #ifndef __STDC_LIMIT_MACROS
 #define __STDC_LIMIT_MACROS 1
@@ -332,7 +332,7 @@ typedef uint32_t flex_uint32_t;
 typedef signed char flex_int8_t;
 typedef short int flex_int16_t;
 typedef int flex_int32_t;
-typedef unsigned char flex_uint8_t; 
+typedef unsigned char flex_uint8_t;
 typedef unsigned short int flex_uint16_t;
 typedef unsigned int flex_uint32_t;
 
@@ -464,7 +464,7 @@ extern FILE *yyin, *yyout;
 #define EOB_ACT_CONTINUE_SCAN 0
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
-    
+
     /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
      *       access to the local variable yy_act. Since yyless() is a macro, it would break
      *       existing scanners that call yyless() from OUTSIDE yylex.
@@ -486,7 +486,7 @@ extern FILE *yyin, *yyout;
                     if ( *p == '\n' )\
                         --yylineno;\
             }while(0)
-    
+
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
 	do \
@@ -710,8 +710,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 /* %% [3.0] code to copy yytext_ptr to yytext[] goes here, if %array \ */\
 	(yy_c_buf_p) = yy_cp;
 /* %% [4.0] data tables for the DFA and the user's section 1 definitions go here */
-#define YY_NUM_RULES 25
-#define YY_END_OF_BUFFER 26
+#define YY_NUM_RULES 26
+#define YY_END_OF_BUFFER 27
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -719,12 +719,12 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[36] =
+static const flex_int16_t yy_accept[38] =
     {   0,
-        0,    0,    0,    0,    0,    0,   26,   24,    1,   25,
-       21,   10,   20,    2,   22,   23,   19,   18,    9,    5,
-        3,    9,   17,   13,   11,   17,    4,    8,    6,    7,
-       12,   16,   14,   15,    0
+        0,    0,    0,    0,    0,    0,   27,   25,    1,   26,
+       22,   11,   21,    3,   23,   24,    2,   20,   19,   10,
+        6,    4,   10,   18,   14,   12,   18,    2,    5,    9,
+        7,    8,   13,   17,   15,   16,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -733,19 +733,19 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    2,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    2,    4,    5,    1,    1,    1,    6,    7,    8,
-        9,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,   10,    1,   11,    1,    1,    1,    1,    1,    1,
+        9,    1,    1,    1,   10,   11,    1,   12,   12,   12,
+       12,   12,   12,   12,   12,   12,   12,    1,    1,    1,
+        1,    1,    1,    1,   13,   13,   13,   13,   13,   13,
+       13,   13,   13,   13,   13,   13,   13,   13,   13,   13,
+       13,   13,   13,   13,   13,   13,   13,   13,   13,   13,
+        1,   14,    1,   15,   16,    1,   13,   13,   13,   13,
 
-        1,    1,    1,    1,    1,    1,    1,    1,    1,   12,
-        1,    1,    1,    1,    1,   13,    1,    1,    1,    1,
-        1,    1,    1,   14,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+       13,   13,   13,   13,   13,   13,   13,   13,   13,   17,
+       13,   13,   13,   13,   13,   18,   13,   13,   13,   13,
+       13,   13,    1,   19,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,   13,   13,    1,    1,    1,
+        1,   13,   13,   13,    1,    1,    1,   13,    1,    1,
+        1,   13,   13,    1,    1,    1,   13,   13,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -759,57 +759,69 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[15] =
+static const YY_CHAR yy_meta[20] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1
+        1,    1,    1,    1,    1,    1,    1,    1,    1
     } ;
 
-static const flex_int16_t yy_base[38] =
+static const flex_int16_t yy_base[40] =
     {   0,
-        0,    0,   12,   20,   28,   36,   18,   63,   63,   63,
-       63,   63,   63,   63,   63,   63,   63,   63,   63,   63,
-       63,   40,   63,   63,   63,   49,   63,   63,   63,   63,
-       63,   63,   63,   63,   63,   16,   15
+        0,    0,   17,   29,   41,   53,   23,  103,  103,  103,
+      103,  103,  103,  103,  103,  103,   58,  103,  103,  103,
+      103,  103,   70,  103,  103,  103,   84,    0,  103,  103,
+      103,  103,  103,  103,  103,  103,  103,   21,   20
     } ;
 
-static const flex_int16_t yy_def[38] =
+static const flex_int16_t yy_def[40] =
     {   0,
-       35,    1,   36,   36,   37,   37,   35,   35,   35,   35,
-       35,   35,   35,   35,   35,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,   35,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,    0,   35,   35
+       37,    1,   38,   38,   39,   39,   37,   37,   37,   37,
+       37,   37,   37,   37,   37,   37,   37,   37,   37,   37,
+       37,   37,   37,   37,   37,   37,   37,   17,   37,   37,
+       37,   37,   37,   37,   37,   37,    0,   37,   37
     } ;
 
-static const flex_int16_t yy_nxt[78] =
+static const flex_int16_t yy_nxt[123] =
     {   0,
         8,    9,   10,   11,   12,   13,   14,   15,   16,    8,
-       17,    8,    8,   18,   20,   23,   19,   35,   21,   35,
-       35,   22,   20,   35,   35,   35,   21,   35,   35,   22,
-       24,   35,   25,   35,   35,   35,   35,   26,   24,   35,
-       25,   35,   35,   35,   35,   26,   27,   35,   35,   28,
-       35,   29,   30,   31,   35,   35,   35,   35,   32,   35,
-       33,   34,    7,   35,   35,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,   35,   35,   35
+        8,    8,   17,    8,   18,    8,   17,   17,   19,   21,
+       24,   20,   37,   22,   37,   37,   37,   37,   37,   37,
+       23,   21,   37,   37,   37,   22,   37,   37,   37,   37,
+       37,   37,   23,   25,   37,   26,   37,   37,   37,   37,
+       37,   37,   37,   37,   27,   25,   37,   26,   37,   37,
+       37,   37,   37,   37,   37,   37,   27,   28,   28,   28,
+       28,   37,   37,   28,   28,   28,   29,   37,   37,   37,
+       37,   37,   37,   30,   37,   37,   31,   32,   33,   37,
+       37,   37,   37,   37,   37,   37,   37,   34,   37,   37,
+
+       35,   36,    7,   37,   37,   37,   37,   37,   37,   37,
+       37,   37,   37,   37,   37,   37,   37,   37,   37,   37,
+       37,   37
     } ;
 
-static const flex_int16_t yy_chk[78] =
+static const flex_int16_t yy_chk[123] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    3,   37,   36,    7,    3,    0,
-        0,    3,    4,    0,    0,    0,    4,    0,    0,    4,
-        5,    0,    5,    0,    0,    0,    0,    5,    6,    0,
-        6,    0,    0,    0,    0,    6,   22,    0,    0,   22,
-        0,   22,   22,   26,    0,    0,    0,    0,   26,    0,
-       26,   26,   35,   35,   35,   35,   35,   35,   35,   35,
-       35,   35,   35,   35,   35,   35,   35
+        1,    1,    1,    1,    1,    1,    1,    1,    1,    3,
+       39,   38,    7,    3,    0,    0,    0,    0,    0,    0,
+        3,    4,    0,    0,    0,    4,    0,    0,    0,    0,
+        0,    0,    4,    5,    0,    5,    0,    0,    0,    0,
+        0,    0,    0,    0,    5,    6,    0,    6,    0,    0,
+        0,    0,    0,    0,    0,    0,    6,   17,   17,   17,
+       17,    0,    0,   17,   17,   17,   23,    0,    0,    0,
+        0,    0,    0,   23,    0,    0,   23,   23,   27,    0,
+        0,    0,    0,    0,    0,    0,    0,   27,    0,    0,
+
+       27,   27,   37,   37,   37,   37,   37,   37,   37,   37,
+       37,   37,   37,   37,   37,   37,   37,   37,   37,   37,
+       37,   37
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[26] =
+static const flex_int32_t yy_rule_can_match_eol[27] =
     {   0,
-0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0,     };
+0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -817,11 +829,11 @@ static char *yy_last_accepting_cpos;
 extern int yy_flex_debug;
 int yy_flex_debug = 1;
 
-static const flex_int16_t yy_rule_linenum[25] =
+static const flex_int16_t yy_rule_linenum[26] =
     {   0,
-      138,  142,  147,  161,  166,  171,  175,  179,  183,  188,
-      193,  207,  212,  217,  221,  225,  229,  234,  249,  264,
-      279,  294,  308,  322
+      138,  142,  156,  161,  175,  180,  185,  189,  193,  197,
+      202,  207,  221,  226,  231,  235,  239,  243,  248,  263,
+      278,  293,  308,  322,  336
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -884,7 +896,7 @@ char *yytext;
 /* functions */
 /* ---------------------------------------------------------------------- */
 
-#line 887 "stringFilterScanner.cpp"
+#line 899 "stringFilterScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* flex options */
 /* ---------------------------------------------------------------------- */
@@ -892,19 +904,19 @@ char *yytext;
 #line 69 "stringFilterScanner.ll"
 //   stringfilter::parser::symbol_type JMI
 //   make_NAME (const std::string &s, const stringfilter::parser::location_type& loc);
-#line 895 "stringFilterScanner.cpp"
+#line 907 "stringFilterScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* regular expressions */
 /* ---------------------------------------------------------------------- */
 #line 97 "stringFilterScanner.ll"
   // Code run each time a pattern is matched.
   # define YY_USER_ACTION  loc.columns (yyleng);
-#line 902 "stringFilterScanner.cpp"
+#line 914 "stringFilterScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* exclusive modes */
 /* ---------------------------------------------------------------------- */
 
-#line 907 "stringFilterScanner.cpp"
+#line 919 "stringFilterScanner.cpp"
 
 #define INITIAL 0
 #define SINGLE_QUOTED_STRING_MODE 1
@@ -983,7 +995,7 @@ extern int yywrap ( void );
 
 /* %not-for-header */
 #ifndef YY_NO_UNPUT
-    
+
 #endif
 /* %ok-for-header */
 
@@ -1147,7 +1159,7 @@ YY_DECL
 	yy_state_type yy_current_state;
 	char *yy_cp, *yy_bp;
 	int yy_act;
-    
+
 	if ( !(yy_init) )
 		{
 		(yy_init) = 1;
@@ -1211,7 +1223,7 @@ loc.step ();
 
 
 
-#line 1214 "stringFilterScanner.cpp"
+#line 1226 "stringFilterScanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1240,13 +1252,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 36 )
+				if ( yy_current_state >= 38 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 63 );
+		while ( yy_base[yy_current_state] != 103 );
 
 yy_find_action:
 /* %% [10.0] code to find the action number goes here */
@@ -1267,7 +1279,7 @@ yy_find_action:
 			int yyl;
 			for ( yyl = 0; yyl < yyleng; ++yyl )
 				if ( yytext[yyl] == '\n' )
-					
+
     yylineno++;
 ;
 			}
@@ -1279,13 +1291,13 @@ do_action:	/* This label is used only to access EOF actions. */
 			{
 			if ( yy_act == 0 )
 				fprintf( stderr, "--scanner backing up\n" );
-			else if ( yy_act < 25 )
+			else if ( yy_act < 26 )
 				fprintf( stderr, "--accepting rule at line %ld (\"%s\")\n",
 				         (long)yy_rule_linenum[yy_act], yytext );
-			else if ( yy_act == 25 )
+			else if ( yy_act == 26 )
 				fprintf( stderr, "--accepting default rule (\"%s\")\n",
 				         yytext );
-			else if ( yy_act == 26 )
+			else if ( yy_act == 27 )
 				fprintf( stderr, "--(end of buffer or a NUL)\n" );
 			else
 				fprintf( stderr, "--EOF (start condition %d)\n", YY_START );
@@ -1312,13 +1324,30 @@ case 2:
 YY_RULE_SETUP
 #line 142 "stringFilterScanner.ll"
 {
-  pStringBuffer [0] = '\0';
-  BEGIN SINGLE_QUOTED_STRING_MODE;
+  if (drv.getDisplayTokens ()) {
+    gLog << "--> " << drv.getScannerLocation () <<
+    ": word [" << yytext << ']' <<
+    endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    stringfilter::parser::make_WORD (yytext, loc);
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 147 "stringFilterScanner.ll"
+#line 156 "stringFilterScanner.ll"
+{
+  pStringBuffer [0] = '\0';
+  BEGIN SINGLE_QUOTED_STRING_MODE;
+}
+	YY_BREAK
+case 4:
+YY_RULE_SETUP
+#line 161 "stringFilterScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog <<
@@ -1333,62 +1362,62 @@ YY_RULE_SETUP
     stringfilter::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
 }
 	YY_BREAK
-case 4:
+case 5:
 YY_RULE_SETUP
-#line 161 "stringFilterScanner.ll"
+#line 175 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "'", STRING_BUFFER_SIZE);
   loc.step ();
 }
 	YY_BREAK
-case 5:
-/* rule 5 can match eol */
+case 6:
+/* rule 6 can match eol */
 YY_RULE_SETUP
-#line 166 "stringFilterScanner.ll"
+#line 180 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
   loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
-case 6:
+case 7:
 YY_RULE_SETUP
-#line 171 "stringFilterScanner.ll"
+#line 185 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
-case 7:
+case 8:
 YY_RULE_SETUP
-#line 175 "stringFilterScanner.ll"
+#line 189 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
-case 8:
+case 9:
 YY_RULE_SETUP
-#line 179 "stringFilterScanner.ll"
+#line 193 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
-case 9:
+case 10:
 YY_RULE_SETUP
-#line 183 "stringFilterScanner.ll"
+#line 197 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
-case 10:
+case 11:
 YY_RULE_SETUP
-#line 188 "stringFilterScanner.ll"
+#line 202 "stringFilterScanner.ll"
 {
   pStringBuffer [0] = '\0';
   BEGIN DOUBLE_QUOTED_STRING_MODE;
 }
 	YY_BREAK
-case 11:
+case 12:
 YY_RULE_SETUP
-#line 193 "stringFilterScanner.ll"
+#line 207 "stringFilterScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog <<
@@ -1403,54 +1432,54 @@ YY_RULE_SETUP
     stringfilter::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
 }
 	YY_BREAK
-case 12:
+case 13:
 YY_RULE_SETUP
-#line 207 "stringFilterScanner.ll"
+#line 221 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\"", STRING_BUFFER_SIZE);
   loc.step ();
 }
 	YY_BREAK
-case 13:
-/* rule 13 can match eol */
+case 14:
+/* rule 14 can match eol */
 YY_RULE_SETUP
-#line 212 "stringFilterScanner.ll"
+#line 226 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
   loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
-case 14:
+case 15:
 YY_RULE_SETUP
-#line 217 "stringFilterScanner.ll"
+#line 231 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
-case 15:
+case 16:
 YY_RULE_SETUP
-#line 221 "stringFilterScanner.ll"
+#line 235 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
-case 16:
+case 17:
 YY_RULE_SETUP
-#line 225 "stringFilterScanner.ll"
+#line 239 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
-case 17:
+case 18:
 YY_RULE_SETUP
-#line 229 "stringFilterScanner.ll"
+#line 243 "stringFilterScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
-case 18:
+case 19:
 YY_RULE_SETUP
-#line 234 "stringFilterScanner.ll"
+#line 248 "stringFilterScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1465,9 +1494,9 @@ YY_RULE_SETUP
     stringfilter::parser::make_OR (loc);
 }
 	YY_BREAK
-case 19:
+case 20:
 YY_RULE_SETUP
-#line 249 "stringFilterScanner.ll"
+#line 263 "stringFilterScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1482,9 +1511,9 @@ YY_RULE_SETUP
     stringfilter::parser::make_XOR (loc);
 }
 	YY_BREAK
-case 20:
+case 21:
 YY_RULE_SETUP
-#line 264 "stringFilterScanner.ll"
+#line 278 "stringFilterScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1499,9 +1528,9 @@ YY_RULE_SETUP
     stringfilter::parser::make_AND (loc);
 }
 	YY_BREAK
-case 21:
+case 22:
 YY_RULE_SETUP
-#line 279 "stringFilterScanner.ll"
+#line 293 "stringFilterScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLog << "--> " << drv.getScannerLocation () <<
@@ -1514,23 +1543,6 @@ YY_RULE_SETUP
 
   return
     stringfilter::parser::make_NOT (loc);
-}
-	YY_BREAK
-case 22:
-YY_RULE_SETUP
-#line 294 "stringFilterScanner.ll"
-{
-  if (drv.getDisplayTokens ()) {
-    gLog << "--> " << drv.getScannerLocation () <<
-    ": '" << yytext << '\'' <<
-    endl;
-  }
-
-  loc.begin.column += yyleng;
-  loc.step ();
-
-  return
-    stringfilter::parser::make_LEFT_PARENTHESIS (loc);
 }
 	YY_BREAK
 case 23:
@@ -1547,12 +1559,29 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    stringfilter::parser::make_RIGHT_PARENTHESIS (loc);
+    stringfilter::parser::make_LEFT_PARENTHESIS (loc);
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
 #line 322 "stringFilterScanner.ll"
+{
+  if (drv.getDisplayTokens ()) {
+    gLog << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    stringfilter::parser::make_RIGHT_PARENTHESIS (loc);
+}
+	YY_BREAK
+case 25:
+YY_RULE_SETUP
+#line 336 "stringFilterScanner.ll"
 {
    throw stringfilter::parser::syntax_error (
      loc,
@@ -1562,18 +1591,18 @@ YY_RULE_SETUP
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(SINGLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(DOUBLE_QUOTED_STRING_MODE):
-#line 330 "stringFilterScanner.ll"
+#line 344 "stringFilterScanner.ll"
 {
   return
     stringfilter::parser::make_YYEOF (loc);
 }
 	YY_BREAK
-case 25:
+case 26:
 YY_RULE_SETUP
-#line 337 "stringFilterScanner.ll"
+#line 351 "stringFilterScanner.ll"
 ECHO;
 	YY_BREAK
-#line 1576 "stringFilterScanner.cpp"
+#line 1605 "stringFilterScanner.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1875,7 +1904,7 @@ static int yy_get_next_buffer (void)
 {
 	yy_state_type yy_current_state;
 	char *yy_cp;
-    
+
 /* %% [15.0] code to get the start state into yy_current_state goes here */
 	yy_current_state = (yy_start);
 
@@ -1891,7 +1920,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 36 )
+			if ( yy_current_state >= 38 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1924,11 +1953,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 36 )
+		if ( yy_current_state >= 38 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 35);
+	yy_is_jam = (yy_current_state == 37);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -1952,7 +1981,7 @@ static int yy_get_next_buffer (void)
 /* %endif */
 {
 	int c;
-    
+
 	*(yy_c_buf_p) = (yy_hold_char);
 
 	if ( *(yy_c_buf_p) == YY_END_OF_BUFFER_CHAR )
@@ -2015,7 +2044,7 @@ static int yy_get_next_buffer (void)
 
 /* %% [19.0] update BOL and yylineno */
 	if ( c == '\n' )
-		
+
     yylineno++;
 ;
 
@@ -2027,7 +2056,7 @@ static int yy_get_next_buffer (void)
 
 /** Immediately switch to a different input stream.
  * @param input_file A readable stream.
- * 
+ *
  * @note This function does not reset the start condition to @c INITIAL .
  */
 /* %if-c-only */
@@ -2036,7 +2065,7 @@ static int yy_get_next_buffer (void)
 /* %if-c++-only */
 /* %endif */
 {
-    
+
 	if ( ! YY_CURRENT_BUFFER ){
         yyensure_buffer_stack ();
 		YY_CURRENT_BUFFER_LVALUE =
@@ -2052,7 +2081,7 @@ static int yy_get_next_buffer (void)
 
 /** Switch to a different input buffer.
  * @param new_buffer The new input buffer.
- * 
+ *
  */
 /* %if-c-only */
     void yy_switch_to_buffer  (YY_BUFFER_STATE  new_buffer )
@@ -2060,7 +2089,7 @@ static int yy_get_next_buffer (void)
 /* %if-c++-only */
 /* %endif */
 {
-    
+
 	/* TODO. We should be able to replace this entire function body
 	 * with
 	 *		yypop_buffer_state();
@@ -2108,7 +2137,7 @@ static void yy_load_buffer_state  (void)
 /** Allocate and initialize an input buffer state.
  * @param file A readable stream.
  * @param size The character buffer size in bytes. When in doubt, use @c YY_BUF_SIZE.
- * 
+ *
  * @return the allocated buffer state.
  */
 /* %if-c-only */
@@ -2118,7 +2147,7 @@ static void yy_load_buffer_state  (void)
 /* %endif */
 {
 	YY_BUFFER_STATE b;
-    
+
 	b = (YY_BUFFER_STATE) yyalloc( sizeof( struct yy_buffer_state )  );
 	if ( ! b )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
@@ -2144,7 +2173,7 @@ static void yy_load_buffer_state  (void)
 
 /** Destroy the buffer.
  * @param b a buffer created with yy_create_buffer()
- * 
+ *
  */
 /* %if-c-only */
     void yy_delete_buffer (YY_BUFFER_STATE  b )
@@ -2152,7 +2181,7 @@ static void yy_load_buffer_state  (void)
 /* %if-c++-only */
 /* %endif */
 {
-    
+
 	if ( ! b )
 		return;
 
@@ -2177,7 +2206,7 @@ static void yy_load_buffer_state  (void)
 
 {
 	int oerrno = errno;
-    
+
 	yy_flush_buffer( b );
 
 /* %if-c-only */
@@ -2199,7 +2228,7 @@ static void yy_load_buffer_state  (void)
 /* %if-c-only */
 
         b->yy_is_interactive = file ? (isatty( fileno(file) ) > 0) : 0;
-    
+
 /* %endif */
 /* %if-c++-only */
 /* %endif */
@@ -2208,7 +2237,7 @@ static void yy_load_buffer_state  (void)
 
 /** Discard all buffered characters. On the next scan, YY_INPUT will be called.
  * @param b the buffer state to be flushed, usually @c YY_CURRENT_BUFFER.
- * 
+ *
  */
 /* %if-c-only */
     void yy_flush_buffer (YY_BUFFER_STATE  b )
@@ -2242,7 +2271,7 @@ static void yy_load_buffer_state  (void)
  *  the current state. This function will allocate the stack
  *  if necessary.
  *  @param new_buffer The new state.
- *  
+ *
  */
 /* %if-c-only */
 void yypush_buffer_state (YY_BUFFER_STATE new_buffer )
@@ -2278,7 +2307,7 @@ void yypush_buffer_state (YY_BUFFER_STATE new_buffer )
 /* %if-c-or-c++ */
 /** Removes and deletes the top of the stack, if present.
  *  The next element becomes the new top.
- *  
+ *
  */
 /* %if-c-only */
 void yypop_buffer_state (void)
@@ -2312,7 +2341,7 @@ static void yyensure_buffer_stack (void)
 /* %endif */
 {
 	yy_size_t num_to_alloc;
-    
+
 	if (!(yy_buffer_stack)) {
 
 		/* First allocation is just for 2 elements, since we don't know if this
@@ -2357,13 +2386,13 @@ static void yyensure_buffer_stack (void)
 /** Setup the input buffer state to scan directly from a user-specified character buffer.
  * @param base the character buffer
  * @param size the size in bytes of the character buffer
- * 
+ *
  * @return the newly allocated buffer state object.
  */
 YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size )
 {
 	YY_BUFFER_STATE b;
-    
+
 	if ( size < 2 ||
 	     base[size-2] != YY_END_OF_BUFFER_CHAR ||
 	     base[size-1] != YY_END_OF_BUFFER_CHAR )
@@ -2394,14 +2423,14 @@ YY_BUFFER_STATE yy_scan_buffer  (char * base, yy_size_t  size )
 /** Setup the input buffer state to scan a string. The next call to yylex() will
  * scan from a @e copy of @a str.
  * @param yystr a NUL-terminated string to scan
- * 
+ *
  * @return the newly allocated buffer state object.
  * @note If you want to scan bytes that may contain NUL values, then use
  *       yy_scan_bytes() instead.
  */
 YY_BUFFER_STATE yy_scan_string (const char * yystr )
 {
-    
+
 	return yy_scan_bytes( yystr, (int) strlen(yystr) );
 }
 /* %endif */
@@ -2411,7 +2440,7 @@ YY_BUFFER_STATE yy_scan_string (const char * yystr )
  * scan from a @e copy of @a bytes.
  * @param yybytes the byte buffer to scan
  * @param _yybytes_len the number of bytes in the buffer pointed to by @a bytes.
- * 
+ *
  * @return the newly allocated buffer state object.
  */
 YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len )
@@ -2420,7 +2449,7 @@ YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len )
 	char *buf;
 	yy_size_t n;
 	int i;
-    
+
 	/* Get memory for full buffer, including space for trailing EOB's. */
 	n = (yy_size_t) (_yybytes_len + 2);
 	buf = (char *) yyalloc( n  );
@@ -2483,16 +2512,16 @@ static void yynoreturn yy_fatal_error (const char* msg )
 /* %endif */
 
 /** Get the current line number.
- * 
+ *
  */
 int yyget_lineno  (void)
 {
-    
+
     return yylineno;
 }
 
 /** Get the input stream.
- * 
+ *
  */
 FILE *yyget_in  (void)
 {
@@ -2500,7 +2529,7 @@ FILE *yyget_in  (void)
 }
 
 /** Get the output stream.
- * 
+ *
  */
 FILE *yyget_out  (void)
 {
@@ -2508,7 +2537,7 @@ FILE *yyget_out  (void)
 }
 
 /** Get the length of the current token.
- * 
+ *
  */
 int yyget_leng  (void)
 {
@@ -2516,7 +2545,7 @@ int yyget_leng  (void)
 }
 
 /** Get the current token.
- * 
+ *
  */
 
 char *yyget_text  (void)
@@ -2529,18 +2558,18 @@ char *yyget_text  (void)
 
 /** Set the current line number.
  * @param _line_number line number
- * 
+ *
  */
 void yyset_lineno (int  _line_number )
 {
-    
+
     yylineno = _line_number;
 }
 
 /** Set the input stream. This does not discard the current
  * input buffer.
  * @param _in_str A readable stream.
- * 
+ *
  * @see yy_switch_to_buffer
  */
 void yyset_in (FILE *  _in_str )
@@ -2579,7 +2608,7 @@ static int yy_init_globals (void)
 
     /* We do not touch yylineno unless the option is enabled. */
     yylineno =  1;
-    
+
     (yy_buffer_stack) = NULL;
     (yy_buffer_stack_top) = 0;
     (yy_buffer_stack_max) = 0;
@@ -2607,7 +2636,7 @@ static int yy_init_globals (void)
 /* yylex_destroy is for both reentrant and non-reentrant scanners. */
 int yylex_destroy  (void)
 {
-    
+
     /* Pop the buffer stack, destroying each element. */
 	while(YY_CURRENT_BUFFER){
 		yy_delete_buffer( YY_CURRENT_BUFFER  );
@@ -2636,7 +2665,7 @@ int yylex_destroy  (void)
 #ifndef yytext_ptr
 static void yy_flex_strncpy (char* s1, const char * s2, int n )
 {
-		
+
 	int i;
 	for ( i = 0; i < n; ++i )
 		s1[i] = s2[i];
@@ -2661,7 +2690,7 @@ void *yyalloc (yy_size_t  size )
 
 void *yyrealloc  (void * ptr, yy_size_t  size )
 {
-		
+
 	/* The cast to (char *) in the following accommodates both
 	 * implementations that use char* generic pointers, and those
 	 * that use void* generic pointers.  It works with the latter
@@ -2684,7 +2713,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 337 "stringFilterScanner.ll"
+#line 351 "stringFilterScanner.ll"
 
 
 
@@ -2727,35 +2756,3 @@ void stringFilterDriver::scanEnd ()
 {
   fclose (yyin);
 }
-
-//_______________________________________________________________________________
-mfMusicformatsErrorKind executeFilter (
-  const std::string& inputString)
-{
-  mfMusicformatsErrorKind
-    result =
-      mfMusicformatsErrorKind::kMusicformatsError_NONE;
-
-  // the driver
-  stringFilterDriver
-    theDriver;
-
-  // parse the script
-  int
-    parseResult =
-      theDriver.parseInput_Pass1 ();
-
-  // launch the service
-  if (parseResult != 0) {
-    result =
-      mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-  }
-
-  else {
-    result =
-      theDriver.launchstringFilterService_Pass2 ();
-  }
-
-  return result;
-}
-

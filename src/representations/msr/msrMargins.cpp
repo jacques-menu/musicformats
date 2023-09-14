@@ -209,7 +209,7 @@ void msrMarginsGroup::setLeftMargin (
       "setting a " <<
       msrMarginTypeKindAsString (marginTypeKind) <<
       " left margin in a " <<
-      msrMarginTypeKindAsString (fMarginsGroupTypeKind) <<
+      fMarginsGroupTypeKind <<
       " margins group";
 
     msrInternalError (
@@ -237,7 +237,7 @@ void msrMarginsGroup::setRightMargin (
       "setting a " <<
       msrMarginTypeKindAsString (marginTypeKind) <<
       " right margin in a " <<
-      msrMarginTypeKindAsString (fMarginsGroupTypeKind) <<
+      fMarginsGroupTypeKind <<
       " margins group";
 
     msrInternalError (
@@ -265,7 +265,7 @@ void msrMarginsGroup::setTopMargin (
       "setting a " <<
       msrMarginTypeKindAsString (marginTypeKind) <<
       " top margin in a " <<
-      msrMarginTypeKindAsString (fMarginsGroupTypeKind) <<
+      fMarginsGroupTypeKind <<
       " margins group";
 
     msrInternalError (
@@ -293,7 +293,7 @@ void msrMarginsGroup::setBottomMargin (
       "setting a " <<
       msrMarginTypeKindAsString (marginTypeKind) <<
       " bottom margin in a " <<
-      msrMarginTypeKindAsString (fMarginsGroupTypeKind) <<
+      fMarginsGroupTypeKind <<
       " margins group";
 
     msrInternalError (
@@ -377,11 +377,11 @@ std::string msrMarginsGroup::asString () const
 
   ss <<
     "[MarginsGroup, " <<
-    msrMarginTypeKindAsString (fMarginsGroupTypeKind) <<
-    ", leftMargin: " << fLeftMargin->asString () <<
-    ", rightMargin: " << fRightMargin->asString () <<
-    ", topMargin: " << fTopMargin->asString () <<
-    ", bottomMargin: " << fBottomMargin->asString () <<
+    fMarginsGroupTypeKind <<
+    ", fLeftMargin: " << fLeftMargin <<
+    ", fRightMargin: " << fRightMargin <<
+    ", fTopMargin: " << fTopMargin <<
+    ", fBottomMargin: " << fBottomMargin <<
     ']';
 
   return ss.str ();
@@ -392,8 +392,8 @@ void msrMarginsGroup::print (std::ostream& os) const
 
   os <<
     "MarginsGroup" <<
-    ", marginsGroupTypeKind: " <<
-    msrMarginTypeKindAsString (fMarginsGroupTypeKind) <<
+    ", fMarginsGroupTypeKind: " <<
+    fMarginsGroupTypeKind <<
     std::endl;
 
   const int fieldWidth = 13;
@@ -403,7 +403,7 @@ void msrMarginsGroup::print (std::ostream& os) const
   // margins
   os << std::left <<
     std::setw (fieldWidth) <<
-    "leftMargin" << ": ";
+    "leftMargfLeftMarginin" << ": ";
     if (fLeftMargin) {
       os << fLeftMargin;
     }
@@ -414,7 +414,7 @@ void msrMarginsGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "rightMargin" << ": ";
+    "fRightMargin" << ": ";
     if (fRightMargin) {
       os << fRightMargin;
     }
@@ -425,7 +425,7 @@ void msrMarginsGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "topMargin" << ": ";
+    "fTopMargin" << ": ";
     if (fTopMargin) {
       os << fTopMargin;
     }
@@ -436,7 +436,7 @@ void msrMarginsGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "bottomMargin" << ": ";
+    "fBottomMargin" << ": ";
     if (fBottomMargin) {
       os << fBottomMargin;
     }

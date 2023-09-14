@@ -895,8 +895,9 @@ void msrPartGroup::displayPartGroupElementsListFull (
 
         ++gIndenter;
 
+        nestedPartGroup->
+          printFull (gLog);
         gLog <<
-          nestedPartGroup <<
           std::endl;
 
         --gIndenter;
@@ -910,8 +911,9 @@ void msrPartGroup::displayPartGroupElementsListFull (
         // this is a part
         ++gIndenter;
 
+        part->
+          printFull (gLog);
         gLog <<
-          part <<
           std::endl;
 
         --gIndenter;
@@ -1515,7 +1517,7 @@ void msrPartGroup::printFull (std::ostream& os) const
 
   // print the part group elements if any
 
-  displayPartGroupElementsList (
+  displayPartGroupElementsListFull (
     fInputStartLineNumber);
 
   --gIndenter;

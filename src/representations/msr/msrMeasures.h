@@ -649,7 +649,7 @@ class EXP msrMeasure : public msrSegmentElement
     std::string           asShortString () const override;
     std::string           asString () const override;
 
-    std::string           asShortStringForMeasuresSlices () const override;
+    std::string           asStringForMeasuresSlices () const override;
 
     void                  displayMeasure (
                             int                inputLineNumber,

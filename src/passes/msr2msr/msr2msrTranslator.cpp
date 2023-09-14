@@ -156,7 +156,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
     setStavesBrowingOrderKind (
       msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesRegularsFiguredBasses);
 
-  // browse the visited score with the browser
+  // browse the visited MSR score
   browser.browse (*fVisitedMsrScore);
 
   // forget about the visited MSR score
@@ -197,7 +197,12 @@ S_msrScore msr2msrTranslator::translateMsrToMsrAlongPathToVoice (
     this,
     pathToVoice);
 
-  // browse the visited score with the browser
+  // set the parts browsing order
+  theMsrScore->
+    setStavesBrowingOrderKind (
+      msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
+
+  // browse the visited MSR score
   browser.browse (*fVisitedMsrScore);
 
   // forget about the visited MSR score

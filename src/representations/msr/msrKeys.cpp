@@ -264,34 +264,34 @@ std::string msrHumdrumScotKeyItem::asString () const
 
   ss <<
     "[HumdrumScotKeyItem" <<
-    ", keyDiatonicPitch" << ": " <<
-    msrDiatonicPitchKindAsString (fKeyDiatonicPitchKind) <<
-    ", keyAlteration" << ": " <<
-    msrAlterationKindAsString (fKeyAlterationKind) <<
-    ", keyOctaveKind" << ": " <<
-    msrOctaveKindAsString (fKeyOctaveKind) <<
+    ", fKeyDiatonicPitchKind" << ": " <<
+    fKeyDiatonicPitchKind <<
+    ", fKeyAlterationKind" << ": " <<
+    fKeyAlterationKind <<
+    ", fKeyOctaveKind" << ": " <<
+    fKeyOctaveKind <<
     ", line " << fInputStartLineNumber <<
     ']';
 
   return ss.str ();
 }
 
-std::string msrHumdrumScotKeyItem::asShortStringForMeasuresSlices () const
-{
-  std::stringstream ss;
-
-  ss <<
-    "HumdrumScotKeyItem" <<
-    ", keyDiatonicPitch" << ": " <<
-    msrDiatonicPitchKindAsString (fKeyDiatonicPitchKind) <<
-    ", keyAlteration" << ": " <<
-    msrAlterationKindAsString (fKeyAlterationKind) <<
-    ", keyOctaveKind" << ": " <<
-    msrOctaveKindAsString (fKeyOctaveKind) <<
-    ", line " << fInputStartLineNumber;
-
-  return ss.str ();
-}
+// std::string msrHumdrumScotKeyItem::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     "HumdrumScotKeyItem" <<
+//     ", keyDiatonicPitch" << ": " <<
+//     fKeyDiatonicPitchKind <<
+//     ", fKeyAlterationKind" << ": " <<
+//     fKeyAlterationKind <<
+//     ", fKeyOctaveKind" << ": " <<
+//     fKeyOctaveKind <<
+//     ", line " << fInputStartLineNumber;
+//
+//   return ss.str ();
+// }
 
 void msrHumdrumScotKeyItem::print (std::ostream& os) const
 {
@@ -840,38 +840,38 @@ std::string msrKey::asString () const
   return ss.str ();
 }
 
-std::string msrKey::asShortStringForMeasuresSlices () const
-{
-  std::stringstream ss;
-
-  ss <<
-    '[';
-
-  switch (fKeyKind) {
-    case msrKeyKind::kKeyTraditional:
-      ss <<
-        msrQuarterTonesPitchKindAsStringInLanguage (
-          fKeyTonicQuarterTonesPitchKind,
-          gMsrOahGroup->
-            getMsrQuarterTonesPitchesLanguageKind ()) <<
-        ' ' <<
-        fModeKind;
-      break;
-
-    case msrKeyKind::kKeyHumdrumScot:
-      ss <<
-        fHumdrumScotKeyItemsVector.size () << "items" <<
-        ", keyItemsOctavesAreSpecified: " <<
-        fKeyItemsOctavesAreSpecified;
-      break;
-  } // switch
-
-  ss <<
-// JMI    ", line " << fInputStartLineNumber <<
-    ']';
-
-  return ss.str ();
-}
+// std::string msrKey::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     '[';
+//
+//   switch (fKeyKind) {
+//     case msrKeyKind::kKeyTraditional:
+//       ss <<
+//         msrQuarterTonesPitchKindAsStringInLanguage (
+//           fKeyTonicQuarterTonesPitchKind,
+//           gMsrOahGroup->
+//             getMsrQuarterTonesPitchesLanguageKind ()) <<
+//         ' ' <<
+//         fModeKind;
+//       break;
+//
+//     case msrKeyKind::kKeyHumdrumScot:
+//       ss <<
+//         fHumdrumScotKeyItemsVector.size () << "items" <<
+//         ", keyItemsOctavesAreSpecified: " <<
+//         fKeyItemsOctavesAreSpecified;
+//       break;
+//   } // switch
+//
+//   ss <<
+// // JMI    ", line " << fInputStartLineNumber <<
+//     ']';
+//
+//   return ss.str ();
+// }
 
 void msrKey::print (std::ostream& os) const
 {

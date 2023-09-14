@@ -689,19 +689,17 @@ std::string msrClef::asString () const
   return ss.str ();
 }
 
-std::string msrClef::asShortStringForMeasuresSlices () const
-{
-  std::stringstream ss;
-
-  ss <<
-    '[' <<
-    msrClefKindAsString (fClefKind) <<
-// JMI    ", fClefStaffNumber: " << fClefStaffNumber <<
-// JMI    ", " << fClefStaffNumber <<
-    ']';
-
-  return ss.str ();
-}
+// std::string msrClef::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     '[' <<
+//     asShortString () <<
+//     ']';
+//
+//   return ss.str ();
+// }
 
 void msrClef::print (std::ostream& os) const
 {

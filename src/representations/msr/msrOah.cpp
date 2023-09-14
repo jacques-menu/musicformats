@@ -861,6 +861,16 @@ R"(Write the contents of the first MSR data slices to standard error.)",
         "fDisplayFirstMsrMeasuresSlices",
         fDisplayFirstMsrMeasuresSlices));
 
+  // display first MSR slices details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-msr1-measures-slices-details", "dmsr1measslicesdets",
+R"(Write the contents of the first MSR data slices to standard error.)",
+        "fDisplayFirstMsrMeasuresSlicesDetails",
+        fDisplayFirstMsrMeasuresSlicesDetails));
+
   // display second MSR
 
   S_oahBooleanAtomWithTracePasses
@@ -874,6 +884,8 @@ R"(Write the contents of the second MSR data to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       displaySecondMsrBooleanAtom);
+
+  // display second MSR full
 
   subGroup->
     appendAtomToSubGroup (
@@ -892,6 +904,16 @@ R"(Write the contents of the second MSR data, full version, to standard error.)"
 R"(Write the contents of the second MSR data slices to standard error.)",
         "fDisplaySecondMsrMeasuresSlices",
         fDisplaySecondMsrMeasuresSlices));
+
+  // display second MSR slices details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-msr2-measures-slices-details", "dmsr2measslicesdets",
+R"(Write the contents of the second MSR data slices to standard error.)",
+        "fDisplaySecondMsrMeasuresSlicesDetails",
+        fDisplaySecondMsrMeasuresSlicesDetails));
 
   // display first MSR names
 
@@ -945,10 +967,8 @@ This implies that no LilyPond code is generated.)",
         "display-msr1-voices-flat-view", "dmsr1voicesflatview",
 R"(Only write a voices flat view of the first MSR to standard error.
 The output looks like:
-  fis4-o:4 gis4-o:4 gis4-o:4 ais4-o:4
-where the number after ':' is the octave number,
-or
-  s2.-unpitched
+  s4-unpitched c4-o:5 d4-o:5 e4-o:5
+where the number after ':' is the octave number.
 This option implies that no LilyPond code is generated.)",
         "fDisplayFirstMsrFlatView",
         fDisplayFirstMsrFlatView));
@@ -962,10 +982,12 @@ This option implies that no LilyPond code is generated.)",
 R"(Only write a voices flat view of the first MSR to standard error,
 with more details.
 The output looks like:
-  fis4-o:4 gis4-o:4 gis4-o:4 ais4-o:4
-where the number after ':' is the octave number,
-or
-  s2.-unpitched
+  @0/1: s4-unpitched, line 52
+  @1/4: c4-o:5, line 62
+  @1/2: d4-o:5, line 72
+  @3/4: e4-o:5, line 82
+where '@' indicates the position in the measure
+and the number after ':' is the octave number.
 This option implies that no LilyPond code is generated.)",
         "fDisplayFirstMsrFlatViewDetails",
         fDisplayFirstMsrFlatViewDetails));
@@ -978,10 +1000,8 @@ This option implies that no LilyPond code is generated.)",
         "display-msr2-voices-flat-view", "dmsr2voicesflatview",
 R"(Only write a voices flat view of the second MSR to standard error.
 The output looks like:
-  fis4-o:4 gis4-o:4 gis4-o:4 ais4-o:4
-where the number after ':' is the octave number,
-or
-  s2.-unpitched
+  s4-unpitched c4-o:5 d4-o:5 e4-o:5
+where the number after ':' is the octave number.
 This option implies that no LilyPond code is generated.)",
         "fDisplaySecondMsrFlatView",
         fDisplaySecondMsrFlatView));
@@ -995,10 +1015,12 @@ This option implies that no LilyPond code is generated.)",
 R"(Only write a voices flat view of the second MSR to standard error,
 with more details.
 The output looks like:
-  fis4-o:4 gis4-o:4 gis4-o:4 ais4-o:4
-where the number after ':' is the octave number,
-or
-  s2.-unpitched
+  @0/1: s4-unpitched, line 52
+  @1/4: c4-o:5, line 62
+  @1/2: d4-o:5, line 72
+  @3/4: e4-o:5, line 82
+where '@' indicates the position in the measure
+and the number after ':' is the octave number.
 This option implies that no LilyPond code is generated.)",
         "fDisplaySecondMsrFlatViewDetails",
         fDisplaySecondMsrFlatViewDetails));

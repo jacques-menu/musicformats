@@ -1571,42 +1571,42 @@ std::string msrTempo::asString () const
   return iss.str ();
 }
 
-std::string msrTempo::asShortStringForMeasuresSlices () const
-{
-  std::stringstream ss;
-
-  ss <<
-    '[';
-//     ", tempoKind: " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
-//     ", tempoWordsList: ";
+// std::string msrTempo::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
 //
-//   if (fTempoWordsList.size ()) {
-//     std::list<S_msrWords>::const_iterator
-//       iBegin = fTempoWordsList.begin (),
-//       iEnd   = fTempoWordsList.end (),
-//       i      = iBegin;
-//     for ( ; ; ) {
-//       ss << (*i);
-//       if (++i == iEnd) break;
-//       ss << ", ";
-//     } // for
-//   }
-//   else {
-//     ss << "\"\"";
-//   }
-
-  ss <<
-    fTempoBeatUnit.asString () <<
-    ": " <<
-    fTempoPerMinute;
-//     ", tempoParenthesizedKind: "  <<
-//     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
-//     ", line " << fInputStartLineNumber;
-
-  ss << ']';
-
-  return ss.str ();
-}
+//   ss <<
+//     '[';
+// //     ", tempoKind: " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
+// //     ", tempoWordsList: ";
+// //
+// //   if (fTempoWordsList.size ()) {
+// //     std::list<S_msrWords>::const_iterator
+// //       iBegin = fTempoWordsList.begin (),
+// //       iEnd   = fTempoWordsList.end (),
+// //       i      = iBegin;
+// //     for ( ; ; ) {
+// //       ss << (*i);
+// //       if (++i == iEnd) break;
+// //       ss << ", ";
+// //     } // for
+// //   }
+// //   else {
+// //     ss << "\"\"";
+// //   }
+//
+//   ss <<
+//     fTempoBeatUnit.asString () <<
+//     ": " <<
+//     fTempoPerMinute;
+// //     ", tempoParenthesizedKind: "  <<
+// //     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
+// //     ", line " << fInputStartLineNumber;
+//
+//   ss << ']';
+//
+//   return ss.str ();
+// }
 
 void msrTempo::printFull (std::ostream& os) const
 {

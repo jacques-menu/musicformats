@@ -710,7 +710,7 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
 % -------------------------------------------------------------------------
 
 \begin{itemize}
-\item each option short name and non-empty long name must be unique in a given handler,
+\item each option long name and non-empty short name must be unique in a given handler,
     to avoid ambiguities;
 
 \item an service \mainFunction\ calls \method{oahHandler}{handleOptionsAndArgumentsFromArgcArgv}, in which:
@@ -818,7 +818,7 @@ class   {\tt oahHandler} in \oahBoth{oahBasicTypes} contains:
     // options and arguments handling
     oahElementHelpOnlyKind
                           handleOptionsFromOptionsAndArguments (
-                            std::string        serviceName,
+                            std::string             serviceName,
                             const oahOptionsVector& theOptionsVector);
 
     oahElementHelpOnlyKind

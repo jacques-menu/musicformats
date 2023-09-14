@@ -87,7 +87,7 @@ void displayLpsrSummaryVisitor::printSummaryFromLpsrScore (
     // create a lpsrScore browser
     lpsrBrowser<lpsrScore> browser (this);
 
-    // browse the score with the browser
+    // browse the score
     browser.browse (*score);
   }
 }

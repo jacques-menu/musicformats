@@ -2188,13 +2188,20 @@ class EXP mxsr2msrTranslator :
                               fPendingDynamicxList;
     std::list<S_msrOtherDynamic>
                               fPendingOtherDynamicxList;
+
     std::list<S_msrWords>     fPendingWordsList;
+
     std::list<S_msrSlur>      fPendingSlursList;
-    std::list<S_msrLigature>
-                              fPendingLigaturesList;
-    std::list<S_msrWedge>     fPendingWedgesList;
+
+    std::list<S_msrLigature>  fPendingLigaturesList;
+
     std::list<S_msrSlash>     fPendingSlashesList;
 
+    // wedges are 'floating' in MusicXML,
+    // but LilyPond needs wedges stops on the note to the right
+    std::list<S_msrWedge>     fPendingWedgesList;
+    std::list<std::pair<int, S_msrWedge> >
+                              fPendingVoiceWedgesList;
 
     // attaching elements to notes
     // ------------------------------------------------------
@@ -2207,8 +2214,11 @@ class EXP mxsr2msrTranslator :
     void                      attachPendingSlursToCurrentNote ();
     void                      attachPendingLigaturesToCurrentNote ();
     void                      attachPendingPedalsToCurrentNote ();
-    void                      attachPendingWedgesToCurrentNote ();
     void                      attachPendingSlashesToCurrentNote ();
+
+    void                      attachPendingWedgesToCurrentNote ();
+    void                      attachPendingVoicesWedgesToCurrentNoteIfRelevant (
+                                int theVoiceNumber);
 
     void                      attachPendingGlissandosToCurrentNote ();
     void                      attachPendingSlidesToCurrentNote ();

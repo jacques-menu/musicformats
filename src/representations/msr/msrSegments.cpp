@@ -3309,7 +3309,7 @@ void msrSegment::displaySegment (
 void msrSegment::printFull (std::ostream& os) const
 {
   os <<
-    "[Segment '" <<
+    "[Segment printfull()'" <<
     fSegmentAbsoluteNumber <<
     "', fSegmentDebugNumber: '" <<
     fSegmentDebugNumber <<
@@ -3383,7 +3383,11 @@ void msrSegment::printFull (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      os << (*i);
+      S_msrSegmentElement
+        segmentElement = (*i);
+
+      segmentElement->printFull (os);
+
       if (++i == iEnd) break;
       os << std::endl;
     } // for
