@@ -1,0 +1,2254 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Programming style and conventions}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Files naming conventions}
+% -------------------------------------------------------------------------
+
+Most file names start with an identification of the component they belong to, such as '\fileName{\tt oah}', '\fileName{mxsr}', '\fileName{msr}', '\fileName{lpsr}', '\fileName{lilypond}', '\fileName{bsr}', '\fileName{braille}', '\fileName{xml2ly}', '\fileName{xml2brl}' and \fileName{msdl}.\\
+The ancillary files such as \mfutilitiesBoth{mfIndentedTextOutput} follow this rule too, with an \code{mf} prefix.
+
+The '{\tt *Oah.*}' files handle the options and help for the corresponding component, such as\\ '\msrToMsrBoth{msr2msrOah}'.
+
+The '\oahBoth{\tt traceOah}', \oahBoth{musicxmlOah}\, '{\tt extra}' and '{\tt general}' prefixes are about the corresponding help groups.
+
+There are a couple of 'globlal' files not related to any particular component, placed in \mfutilities{} with an \code{mf} name prefix:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll mfutilities/
+total 200
+ 0 drwxr-xr-x  15 jacquesmenu  staff    480 Oct 22 06:25:57 2021 ./
+ 0 drwxr-xr-x  19 jacquesmenu  staff    608 Oct 22 05:29:29 2021 ../
+ 8 -rw-r--r--@  1 jacquesmenu  staff   3255 Oct 18 20:22:16 2021 mfBool.cpp
+16 -rw-r--r--@  1 jacquesmenu  staff   4917 Oct 18 19:56:51 2021 mfBool.h
+ 8 -rw-r--r--@  1 jacquesmenu  staff   1336 Oct 15 18:48:10 2021 mfEnumAll.h
+16 -rw-r--r--@  1 jacquesmenu  staff   7182 Nov  8 13:08:51 2021 mfIndentedTextOutput.cpp
+16 -rw-r--r--@  1 jacquesmenu  staff   7715 Nov  8 13:08:40 2021 mfIndentedTextOutput.h
+ 8 -rw-r--r--@  1 jacquesmenu  staff    889 Oct 15 20:34:47 2021 mfMusicformatsErrorKind.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff    629 Oct 15 20:34:47 2021 mfMusicformatsErrors.h
+ 8 -rw-r--r--@  1 jacquesmenu  staff   2541 Nov  5 11:29:25 2021 oahOptionsVector.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff    972 Oct 15 20:16:51 2021 oahBasicTypes.h
+64 -rw-r--r--@  1 jacquesmenu  staff  29773 Oct 15 18:48:10 2021 mfStringsHandling.cpp
+16 -rw-r--r--@  1 jacquesmenu  staff   6269 Oct 15 18:55:46 2021 mfStringsHandling.h
+16 -rw-r--r--@  1 jacquesmenu  staff   5028 Oct  7 20:03:27 2021 mfTiming.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff   3726 Oct  8 08:21:09 2021 mfTiming.h
+\end{lstlisting}
+
+The files {\tt *Elements.h/.cpp} contain base classes to variants, such as \lpsrBoth{lpsrElements}, whose {\tt lpsrElement} class   is used in a number of other files:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r 'public lpsrElement' *
+formats/lpsr/lpsrStaves.h:29:class EXP lpsrNewStaffgroupBlock : public lpsrElement
+formats/lpsr/lpsrStaves.h:87:class EXP lpsrNewStaffTuningBlock : public lpsrElement
+formats/lpsr/lpsrStaves.h:150:class EXP lpsrNewStaffBlock : public lpsrElement
+formats/lpsr/lpsrStaves.h:208:class EXP lpsrStaffBlock : public lpsrElement
+formats/lpsr/lpsrVariables.h:27:class EXP lpsrVariableUseCommand : public lpsrElement
+formats/lpsr/lpsrScores.h:35:class EXP lpsrScore : public lpsrElement
+formats/lpsr/lpsrBarNumbers.h:26:class EXP lpsrBarNumberCheck : public lpsrElement
+formats/lpsr/lpsrBarNumbers.h:85:class EXP lpsrBarCommand : public lpsrElement
+formats/lpsr/lpsrLyrics.h:31:class EXP lpsrNewLyricsBlock : public lpsrElement
+formats/lpsr/lpsrComments.h:25:class EXP lpsrComment : public lpsrElement
+formats/lpsr/lpsrVoices.h:29:class EXP lpsrUseVoiceCommand : public lpsrElement
+formats/lpsr/lpsrParts.h:27:class EXP lpsrPartBlock : public lpsrElement
+formats/lpsr/lpsrPapers.h:32:class EXP lpsrPaper : public lpsrElement
+formats/lpsr/lpsrPartGroups.h:29:class EXP lpsrPartGroupBlock : public lpsrElement
+formats/lpsr/lpsrParallelMusic.h:28:class EXP lpsrParallelMusicBLock : public lpsrElement
+formats/lpsr/lpsrLayouts.h:23:class EXP lpsrLayout : public lpsrElement
+formats/lpsr/lpsrHeaders.h:27:class EXP lpsrHeader : public lpsrElement
+formats/lpsr/lpsrScheme.h:29:class EXP lpsrSchemeVariable : public lpsrElement
+formats/lpsr/lpsrScheme.h:140:class EXP lpsrSchemeFunction : public lpsrElement
+formats/lpsr/lpsrBookBlockElements.h:35:class EXP lpsrBookBlockElement : public lpsrElement
+formats/lpsr/lpsrBookBlockElements.h:237:class EXP lpsrBookBlock : public lpsrElement
+formats/lpsr/lpsrContexts.h:30:class EXP lpsrContext : public lpsrElement
+\end{lstlisting}
+
+\newpage
+
+There are a number of self-explaning {\tt *BasicTypes.h/.cpp} file names:%%%JMI
+\begin{lstlisting}[language=Terminal]
+./formats/msdl/msdlEnumTypes.h
+./formats/msdl/msdlEnumTypes.cpp
+./formats/msr/msrBasicTypes.cpp
+./formats/msr/msrBasicTypes.h
+./formats/lpsr/lpsrEnumTypes.cpp
+./formats/lpsr/lpsrEnumTypes.h
+./formats/bsr/bsrEnumTypes.h
+./formats/bsr/bsrEnumTypes.cpp
+./oah/oahBasicTypes.h
+./oah/oahBasicTypes.cpp
+./formatsgeneration/msrGeneration/msrGenerationBasicTypes.cpp
+./formatsgeneration/msrGeneration/msrGenerationBasicTypes.h
+\end{lstlisting}
+
+The files are grouped in the {\tt src} folder according to the component they belong to:
+\begin{itemize}
+\item {\tt converters}
+\item {\tt generators}
+\item {\tt interfaces}
+\item {\tt oah}
+\item {\tt formatsgeneration}
+\item {\tt passes}
+\item {\tt formats}
+\item {\tt utilities}
+\item {\tt wae}
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{Adding C++ files}
+% -------------------------------------------------------------------------
+
+Building \mf\ relies on {\tt build/CMakeLists.txt} to find the C++ files that should be compiled.
+
+When building \mf\ with:
+\begin{lstlisting}[language=Terminal]
+cd build
+make
+\end{lstlisting}
+a \cmake\ \cache\ is created in file {\tt build/libdir/CMakeCache.txt}, containing the list of all the C++ files in the library, including those of the embedded \libmusicxml.
+
+Adding individual files in fine, but adding new folders in the {\tt src} hierarchy implies to update variable {\tt SRC_FOLDERS} in {\tt build/CMakeLists.txt} accordingly and to remove the {\tt build/libdir/CMakeCache.txt} \cache.
+
+Care must be taken when adding a new file on a case insensitive file system: the type case in its name should be what is needed in the first place.
+
+For example, renaming \msr{msrBarlines.h} to \msr{msrBarLines.h} (this author's experience) leads \mf\ not to build successfully on Linux if you develop on Windows or MacOS:
+\begin{itemize}
+\item the latter two usually use case insensitive file names (even though one may choose to format as disk to be case-sensitive), but Linux does not;
+\item the renaming above is not pushed to the repository by {\tt git push} on case insensitive file systems.
+\end{itemize}
+
+The best solution here, both for files and folders names, is to use '{\tt git mv}' to do the renaming instead of the \OS\ tools:
+\begin{itemize}
+\item {\tt git mv oldName newName}
+\item {\tt git commit "..." -a}
+\item {\tt git push}
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{Renaming C++ files}
+% -------------------------------------------------------------------------
+
+Renaming a C++ file causes {\tt build/libdir/CMakeCache.txt} to be obsolete: it then has to be removed, and the library should be built anew.
+
+For example, this author uses the \code{rmcache} bash alias to remove the \cache:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > type rmcache
+rmcache is aliased to `rm /Users/jacquesmenu/musicformats-git-dev/build/libdir/CMakeCache.txt'
+\end{lstlisting}
+
+Running \make\ will re-create this \cache\ with the new file name.
+
+Caution has to be taken when a file name case is changed in a case-insensitive development environment such as Windows or MacOS. Cloning \mf\ in Linux will then fail to find the file under its new name.
+
+In such a case, the following \Main{Git} command has to be used to actually change the file name in \mf\ repository:
+\begin{lstlisting}[language=Terminal]
+git mv -f <old name> <new name>
+\end{lstlisting}
+
+Changing the name of a directory in \src\ should be propagated to \build{CMakeLists.txt}, since this is where the set of files to be compiled is determined, as in:
+\begin{lstlisting}[language=Terminal]
+if (MSR)
+	set (SRC_FOLDERS ${SRC_FOLDERS} passes/musicxml2mxsr formats/mxsr passes/mxsr2msr formats/msr passes/msr2msr formatsgeneration/multiGeneration formatsgeneration/msrGeneration generators/Mikrokosmos3Wandering generators/LilyPondIssue34)
+endif()
+\end{lstlisting}
+In such a case, the \cache\ should be removed before building, see \code{rmcache} above.
+
+
+% -------------------------------------------------------------------------
+\section{Source code layout}
+% -------------------------------------------------------------------------
+
+The following text-editing conventions are used:
+\begin{itemize}
+\item tabs are not used before the first non-space character in a line, two spaces are used instead;
+
+\item the code is not tightly packed: declarations in classes have the members' names aligned vertically, with many spaces before them if needed, and empty lines are used to separate successive activities in methods.
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{Defensive programming}
+% -------------------------------------------------------------------------
+
+The code base of \xmlToLy\ is \MainIt{defensive programming} oriented, which means that:
+\begin{itemize}
+\item identifiers are explicit and long if needed -- only very local ones are short, such as iteration loops indexes;
+
+\item the code is organized in sections, with an initial comment documenting what the code does;
+
+\item the \CPlusplus 's {\tt auto} declaration feature is used only for \enumType s, see below. Writing the explicit types in a large code base helps the maintainer mastering the code;
+
+\item \function{mfAssert} is used to perform sanity checks, such as detect a null pointer prior to using it.
+\end{itemize}
+
+The few uses of {\tt auto} declarations are in range-based {\tt for} loops over \enumType s. There the type of the index is explicit from the {\tt Enum*} being enumerated over. For example, in \msr{msrBasicTypes.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+    for (auto e : mfEnumAll<msrHarmonyKind> ()) {
+      // create the harmony structure
+      S_msrHarmonyStructure
+        harmonyStructure =
+          msrHarmonyStructure::create (
+            e);
+
+      // register it in the map
+      gGlobalHarmonyStructuresMap [e] =
+        harmonyStructure;
+    } // for
+\end{lstlisting}
+
+\newpage
+
+\Class{mfEnumAll} is defined in \mfutilities{mfEnumAll.h} as:
+\begin{lstlisting}[language=CPlusPlus]
+template< typename T >
+class   mfEnumAll
+{
+  public:
+
+    class   Iterator
+    {
+      public:
+
+        Iterator (int value)
+          : fIterationIndex (value)
+            {}
+
+        T operator* (void) const
+            { return (T) fIterationIndex; }
+
+        void operator++ (void)
+            {  ++fIterationIndex; }
+
+        Bool operator != (Iterator rhs)
+            {  return fIterationIndex != rhs.fIterationIndex; }
+
+      private:
+
+        int fIterationIndex;
+     };
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Sanity checks}
+% -------------------------------------------------------------------------
+
+They are performed to ensure that the formats in \mf\ are consistent, to avoid ugly crashes. An example is:
+\begin{lstlisting}[language=CPlusPlus]
+    // get voice to insert harmonies into
+    S_msrVoice
+      voiceToInsertHarmoniesInto =
+        fCurrentPart->
+          getPartHarmoniesVoice ();
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  	// sanity check
+		mfAssert (
+			__FILE__, __LINE__,
+			voiceToInsertHarmoniesInto != nullptr,
+			"voiceToInsertHarmoniesInto is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{{\tt JMI} comments}
+% -------------------------------------------------------------------------
+
+Comments containg {\tt JMI} indicates that the code may have to be reconsidered in the future, should a problem arise. They are removed when it becomes obvious that the code is fine. JMI was the acronym for the author's activity as a software contractor long time ago.
+
+
+% -------------------------------------------------------------------------
+\section{Exported symbols}
+% -------------------------------------------------------------------------
+
+The classes and functions\index{functions} that need to be exported from the \mf\ library in the Windows meaning are marked as such with an {\tt EXP} specification:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP smartable {
+	// ... ... ...
+};
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+EXP S_mxsrOahGroup createGlobalMxsrOahGroup ();
+\end{lstlisting}
+
+\code{EXP} is defined in \interface{exports.h} and is non-blank only when building on \Windows:
+\begin{lstlisting}[language=CPlusPlus]
+#if defined(WIN32) // && !defined (GCC)
+
+# ifdef MSVC
+#  pragma warning (disable : 4267)
+#  pragma warning (disable : 4275)
+#  pragma warning (disable : 4251)
+#  pragma warning (disable : 4786)
+#  pragma warning (disable : 4251)
+#  pragma warning (disable : 4275)
+# endif
+
+# ifdef LIBMUSICXML_EXPORTS
+#  define EXP __declspec(dllexport)
+
+# elif defined(LIBMUSICXML_STATIC)
+#  define EXP
+
+# else
+#  define EXP __declspec(dllimport)
+# endif
+
+#else
+
+# ifdef LIBMUSICXML_EXPORTS
+#  define EXP	__attribute__ ((visibility("default")))
+# else
+#  define EXP
+# endif
+
+#endif
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Smart pointers}
+% -------------------------------------------------------------------------
+
+\libmusicxml\ provides what \fober\ named smart pointers, because:
+\begin{itemize}
+\item a smart pointer is an instance of a class   that contains the actual pointer in the usual C++ sense;
+\item the actual pointer is guaranteed to be initialized to {\tt nullptr};
+\item garbage collection is implicit, using reference counts.
+\end{itemize}
+The definitions are in \lib{smartpointer.h}.
+
+The reference counting is done in class   {\tt smartable}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP smartable {
+	private:
+		unsigned 	refCount;
+	public:
+		//! gives the reference count of the object
+		unsigned refs() const         { return refCount; }
+		//! addReference increments the ref count and checks for refCount overflow
+		void addReference()           { refCount++; assert(refCount != 0); }
+		//! removeReference delete the object when refCount is zero
+		void removeReference()		  { if (--refCount == 0) delete this; }
+
+	protected:
+		smartable() : refCount(0) {}
+		smartable(const smartable&): refCount(0) {}
+		//! destructor checks for non-zero refCount
+		virtual ~smartable()    { assert (refCount == 0); }
+		smartable& operator=(const smartable&) { return *this; }
+};
+
+A smart pointer type is created with template class   {\tt SMARTP}, for example:
+template<class   T> class   SMARTP {
+class EXP msrElement : public smartable
+{
+	// ... ... ...
+};
+typedef SMARTP<msrElement> S_msrElement;
+
+\end{lstlisting}
+
+Smart pointer type name belonging to \fober's work can be told from those of \mf\ by their prefix:
+\begin{itemize}
+\item  in \libmusicxml, smart pointer type names start with an '{\tt S}', such as {\tt \$xmlelement};
+\item in \mf, they start with '{\tt S_}', such as {\tt S_oahHandler}.
+\end{itemize}
+
+Inheriting from class   {\tt smartable} is used to create smart pointer types, as in \wae{waeHandlers.h}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP waeHandler : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<waeHandler> create ();
+
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          waeHandler ();
+
+    virtual               ~waeHandler ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const;
+
+    void                  print (std::ostream& os) const;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+};
+typedef SMARTP<waeHandler> S_waeHandler;
+EXP std::ostream& operator << (std::ostream& os, const S_waeHandler& elt);
+\end{lstlisting}
+
+The creation of the instances in \wae{waeHandlers.cpp} is done with:
+\begin{lstlisting}[language=CPlusPlus]
+S_waeHandler waeHandler::create ()
+{
+  waeHandler* obj =
+    new waeHandler ();
+  assert (obj != nullptr);
+  return obj;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Files contents layout}
+% -------------------------------------------------------------------------
+
+Indentation is done by two spaces, avoiding TAB characters.
+
+In {\tt *.h} files, the classes declarations contain all of part of the following:
+\begin{itemize}
+\item public data types, usually \enumType s, if any;
+\item public static class   \methodName{create*} methods, except for pure virtual classes, in which case they are commented out;
+\item constructors ad destructor;
+\item public \methodName{set*} and \methodName{get*} methods;
+\item public services if any;
+\item public visiting methods, i.e. \methodName{acceptIn}, \methodName{acceptOut} and \methodName{browseData}, if the class   contains browsable data such as STL lists, vectors, maps and sets;
+\item public print methods, such as \methodName{asString} and \methodName{print};
+\item private methods if any;
+\item private fields.
+\item private work methods if any;%%%JMI
+\item private work fields.
+\end{itemize}
+
+A work method is used internally by the class, while a work field is one that evolves as the class   contents is populated.
+
+Most class   declarations are followed by a smart pointer type and a {\tt operator <<}, such as:
+\begin{lstlisting}[language=CPlusPlus]
+typedef SMARTP<msrHarmonyDegree> S_msrHarmonyDegree;
+EXP std::ostream& operator << (std::ostream& os, const S_msrHarmonyDegree& elt);
+\end{lstlisting}
+
+The same order for constructors, destructor and methods is followed in most {\tt .cpp} files.
+
+
+% -------------------------------------------------------------------------
+\section{{\tt \#define DEBUG*} code sections}
+% -------------------------------------------------------------------------
+
+Some sections of code in \starFileName{.cpp} are controlled by such definitions:
+\begin{itemize}
+\item \constantName{//\#define DEBUG_EARLY_OPTIONS} in \oah{oahEarlyOptions.cpp};
+\item \constantName{//\#define DEBUG_INDENTER} in \oah{mfIndentedTextOutput.cpp};
+\item \constantName{//\#define DEBUG_SPLITTING} in \mfutilities{mfStringsHandling.cpp}
+\end{itemize}
+
+These can be uncommented to obtain development-time trace information, without there being a need for such in \mf\ library regular use.
+
+
+% -------------------------------------------------------------------------
+\section{Identifiers choice conventions}
+% -------------------------------------------------------------------------
+
+The following rules apply:
+\begin{itemize}
+
+\item all enumeration type names describing variants in classes end in '{\tt Kind}';%%%JMI
+\item all enumeration constants start with '{\tt k}'. common prefixes are used to help locate all occurences of constants of the given type in a text editor, as:
+\begin{lstlisting}[language=CPlusPlus]
+enum class msrBassFigurePrefixKind {
+  kBassFigurePrefix_UNKNOWN_,
+  kBassFigurePrefixDoubleFlat, kBassFigurePrefixFlat, kBassFigurePrefixFlat,
+  kBassFigurePrefixNatural,
+  kBassFigurePrefixSharpSharp, kBassFigurePrefixSharp, kBassFigurePrefixDoubleSharp
+};
+\end{lstlisting}
+
+\item all classes names have a prefix indicating which part of \mf\ there belong to, such as \class{msrTimeSignature}, {\tt oahAtomStoringAValue} and {\tt msdlKeywordsLanguageAtom};
+
+\item all classes member fields start with '{\tt f}';
+
+\item all class static fields start with '{\tt s}';
+
+\item all global variables start with '{\tt pGlobal}', in which case there are {\code set\dots} and {\code get\dots} macros to access them, starting with '{\tt g}' -- this is to facilitate typing and names completion in code editors;
+\item some (all? JMI) start with '{\tt g}';
+
+\item all variables private to methods start with '{\tt pPrivate}';
+
+\item some {\tt K_*} constants are declared as static class constant members, such as in \msr{msrParts.h}:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+class EXP msrPart : public msrPartGroupElement
+{
+  public:
+
+    // constants
+    // ------------------------------------------------------
+
+    static const int K_PART_HARMONIES_STAFF_NUMBER;
+    static const int K_PART_HARMONIES_VOICE_NUMBER;
+
+    static const int K_PART_FIGURED_BASS_STAFF_NUMBER;
+    static const int K_PART_FIGURED_BASS_VOICE_NUMBER;
+
+   // ... ... ...
+};
+\end{lstlisting}
+
+with the definition in \msr{msrParts.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+// constants
+const int msrPart::K_PART_HARMONIES_STAFF_NUMBER = 10;
+const int msrPart::K_PART_HARMONIES_VOICE_NUMBER = 11;
+
+const int msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
+const int msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
+\end{lstlisting}
+
+\end{itemize}
+
+When a field is an STL container, such a {\tt vector}, {\tt list}, {\tt map} or {\tt set}, this in indicated as part of the identifier, such as:
+\begin{lstlisting}[language=CPlusPlus]
+    std::map<std::string, std::string>
+                          fPartsRenamingMap;
+\end{lstlisting}
+or
+\begin{lstlisting}[language=CPlusPlus]
+                          fStringToDalSegnoKindMapVariable;
+\end{lstlisting}
+or
+\begin{lstlisting}[language=CPlusPlus]
+    std::map<std::string, Sxmlelement>  fPartMeasureNumbersToElementsMap;
+\end{lstlisting}
+
+All \methodName{create*} methods create class   instances, and are paired with an explicit constructor with the same parameters:
+\begin{lstlisting}[language=CPlusPlus]
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static SMARTP<msrHarmonyDegree> create (
+                            int                      inputLineNumber,
+                            int                      harmonyDegreeValue,
+                            msrAlterationKind        harmonyDegreeAlterationKind,
+                            msrHarmonyDegreeTypeKind harmonyDegreeTypeKind);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          msrHarmonyDegree (
+                            int                      inputLineNumber,
+                            int                      harmonyDegreeValue,
+                            msrAlterationKind        harmonyDegreeAlterationKind,
+                            msrHarmonyDegreeTypeKind harmonyDegreeTypeKind);
+
+    virtual               ~msrHarmonyDegree ();
+\end{lstlisting}
+
+Some classes use private fields and methods for their internal working. A field in the form {\tt fCurrent*} denotes something whose value is not permanent once set. Fields named {\tt fPending*} contain values gathered to be used later, such as {\tt fPendingHarmoniesList} in \mxsrToMsrBoth{mxsr2msrTranslator}.
+
+
+% -------------------------------------------------------------------------
+\section{Exceptions and warnings/errors reporting}
+% -------------------------------------------------------------------------
+
+\mf\ defines exceptions for its needs in \waeBoth{waeExceptions}. These exceptions can be related to a format, a pass or a converter. Exceptions named {\tt *Internal*} are raised when something that should not happen occurs: this to avoid ugly crashes later in the execution.
+
+All the std::exception classes are derived from {\tt }, that contains:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP mfException: public std::exception
+{
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfException (
+                            std::string const& exceptionDescription = "",
+                            int           exceptionNumber = 0,
+                            int           exceptionLevel = 0
+                          ) throw ()
+                            : fExceptionDescription (
+                                "mfException: " + exceptionDescription),
+                              fExceptionNumber (exceptionNumber),
+                              fExceptionLevel (exceptionLevel)
+                          {}
+
+  // ... ... ...
+
+  private:
+
+    std::string           fExceptionDescription;
+
+    int                   fExceptionNumber;
+    int                   fExceptionLevel;
+};
+\end{lstlisting}
+
+An example of std::exception is:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP mxsr2msrException: public mfException
+{
+  public:
+    mxsr2msrException (std::string const& exceptionDescription) throw ()
+      : mfException (exceptionDescription)
+    {}
+};
+typedef SMARTP<musicxmlException> S_musicxmlException;
+\end{lstlisting}
+
+There are warning and error reporting functions\index{functions} in \waeBoth{waeInterface.h}.
+Examples are:
+\begin{lstlisting}[language=CPlusPlus]
+void oahValueFittedAtom::applyValueLessAtom (std::ostream& os)
+{
+  std::stringstream ss;
+
+  ss <<
+    "Applying value-fitted atom '" <<
+    fetchNames () <<
+    "' without a value";
+
+  oahInternalError (ss.str ());
+}
+
+	fSelected = true;
+\end{lstlisting}
+
+and:
+\begin{lstlisting}[language=CPlusPlus]
+    case msrPedalTypeKind::kPedalType_UNKNOWN_:
+      {
+        // should not occur
+
+        std::stringstream ss;
+
+        ss <<
+          "msrPedal '" <<
+          elt->asShortString () <<
+          "' has no pedal type";
+
+        msrInternalError (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+      break;
+\end{lstlisting}
+
+Another one is:
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
+{
+  int inputLineNumber =
+    elt->getInputStartLineNumber ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+		std::stringstream ss;
+
+		ss <<
+      "--> End visiting S_accordion_registration" <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // An accordion-registration element needs to have
+  // at least one of the child elements present
+
+  if (fCurrentAccordionNumbersCounter == 0) {
+    musicxmlWarning (
+      gServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      "accordion-registration has 0 child element, ignoring it");
+  }
+
+  else {
+    // create the accordion registration
+    S_msrAccordionRegistration
+      accordionRegistration =
+        msrAccordionRegistration::create (
+          inputLineNumber,
+          fCurrentAccordionHigh,
+          fCurrentAccordionMiddle,
+          fCurrentAccordionLow);
+
+    // append it to the current part
+    fCurrentPart->
+      appendAccordionRegistrationToPart (
+        accordionRegistration);
+  }
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Exporting symbols for Windows DLLs}
+% -------------------------------------------------------------------------
+
+\Main{Windows} needs export specifications for the symbols used by clients of a \Main{DLL}.
+
+\url{https://docs.microsoft.com/en-us/cpp/build/exporting-from-a-dll-using-declspec-dllexport?view=msvc-160} is titled "Exporting from a DLL Using \code{__declspec(dllexport)}". It states that:
+\begin{itemize}
+\item to export functions, the \code{__declspec(dllexport)} keyword must appear to the left of the calling-convention keyword, if a keyword is specified. For example:
+\begin{lstlisting}[language=CPlusPlus]
+__declspec(dllexport) void __cdecl Function1(void);
+\end{lstlisting}
+
+\item to export all of the public data members and member functions in a class, the keyword must appear to the left of the class   name as follows:
+\begin{lstlisting}[language=CPlusPlus]
+class   __declspec(dllexport) CExampleExport : public CObject
+{ ... class   definition ... };
+\end{lstlisting}
+
+\end{itemize}
+
+\mf\ uses symbol \code{EXP}, supplied by \libmusicxmlSamples. \\
+It is defined in \elements{exports.h} to be empty except on Windows, where it is a default visibility attribute:
+\begin{lstlisting}[language=CPlusPlus]
+#ifndef __exports__
+#define __exports__
+
+#if defined(WIN32) // && !defined (GCC)
+
+# ifdef MSVC
+#  pragma warning (disable : 4267)
+#  pragma warning (disable : 4275)
+#  pragma warning (disable : 4251)
+#  pragma warning (disable : 4786)
+#  pragma warning (disable : 4251)
+#  pragma warning (disable : 4275)
+# endif
+
+# ifdef LIBMUSICXML_EXPORTS
+#  define EXP __declspec(dllexport)
+
+# elif defined(LIBMUSICXML_STATIC)
+#  define EXP
+
+# else
+#  define EXP __declspec(dllimport)
+# endif
+
+#else
+
+# ifdef LIBMUSICXML_EXPORTS
+#  define EXP	__attribute__ ((visibility("default")))
+# else
+#  define EXP
+# endif
+
+#endif
+
+#endif
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Dynamic type checking}
+% -------------------------------------------------------------------------
+
+\EnumType s are not ideal to distinguish variants when inheritance is used, mainly because adding new derived types imposes the addition of new constants, thus impacting other areas in the code base.
+
+\code{dynamic_cast} is used in those cases, such as:
+\begin{lstlisting}[language=CPlusPlus]
+  // handle the option
+  if (
+    // options group?
+    S_oahGroup
+      group =
+        dynamic_cast<oahGroup*>(&(*element))
+  ) {
+    registerOahElementUse (
+      group, optionNameUsed, ""); // "===group==="); // JMI to debug
+  }
+
+  else if (
+    // options subgroup?
+    S_oahSubGroup
+      subGroup =
+        dynamic_cast<oahSubGroup*>(&(*element))
+  ) {
+    registerOahElementUse (
+      subGroup, optionNameUsed, ""); // "===subGroup==="); // JMI to debug
+  }
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Input line numbers}
+% -------------------------------------------------------------------------
+
+The passes and converters in \mf\ convert formats of scores from one format to another. In order to produce helpful warning and error messages, several descriptions contain a field:
+\begin{lstlisting}[language=CPlusPlus]
+    int                   fInputStartLineNumber;
+\end{lstlisting}
+
+An input line number in the {\tt xmlelement} class   is the only thing that has had to be added to \libmusicxml\ for the needs of \mf.
+
+Also, many methods contain an {\tt int inputLineNumber} parameter, which is always the first one:
+\begin{lstlisting}[language=CPlusPlus]
+msrElement::msrElement (
+  int inputLineNumber)
+{
+  fInputStartLineNumber = inputLineNumber;
+}
+\end{lstlisting}
+
+Such input line numbers can be present in the output of the converters, such as:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/files > xml2ly -query input-line-numbers
+--- Help for atom "input-line-numbers" in subgroup "Output"
+    -iln, -input-line-numbers
+          Generate after each note and barLine a comment containing
+          its MusicXML input line number.
+          This is useful when debugging xml2ly.
+\end{lstlisting}
+
+Generators such as {\tt Mikrokosmos3Wandering} don't read any input, and the input line numbers the use are the ones in the source code, which is helpful for debugging. For example:
+\begin{lstlisting}[language=CPlusPlus]
+S_msrStaff Mikrokosmos3WanderingGenerator::createStaffInPart (
+  int              staffNumber,
+  const S_msrPart& part)
+{
+  // create the staff
+  S_msrStaff
+    staff =
+      msrStaff::create (
+        __LINE__, msrStaffKind::kStaffKindRegular, staffNumber, part);
+
+  // append it to the part
+  part ->
+    addStaffToPartCloneByItsNumber ( // JMI NOT clone???
+      staff);
+
+  return staff;
+}
+\end{lstlisting}
+
+In all output produced by \mf\ services, including trace informations and comments in the generated output refering to the input data, line numbers appear as:
+\begin{lstlisting}[language=Terminal]
+	line <number>
+\end{lstlisting}
+with a single space before the number, as in:
+\begin{lstlisting}[language=Lilypond]
+	e16 %{ line 153 %} ] %{ line 163 kBeamEnd %}
+\end{lstlisting}
+
+This helps locating such occurrences in the debug process.
+
+
+% -------------------------------------------------------------------------
+\section{Static declarations}
+% -------------------------------------------------------------------------
+
+They are used for:
+\begin{itemize}
+\item classes methods such as \method{msrTie}{create}, \method{msrTempo}{createTempoPerMinute} and \method{msrTemp}{msrTempoBeatUnitsKindAsString};
+
+\item classes constant fields such as \constant{msrStanza}{K_STANZA_NUMBER_UNKNOWN_}, to be prefered to C-style {\tt \#define} preprocessor specifications for type safety;
+
+\item functions of methods remanent variables such as \functionPrivateVariable{pPrivateThisMethodHasBeenRun} in \function{initializeMsrGenerationAPI};
+
+\item library-wide variables such as \globalVariable{gGlobalOStreamIndenter} and \globalVariable{sGlobalTimingItemsList}, that would be too cumbersome to pass to each and every method or function that uses them.
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{Avoiding MusicFormats multiple initializations}
+% -------------------------------------------------------------------------
+
+Such behaviour would create data structures several times, the result being unnecessary activities being performed. Avoiding it is done with \functionPrivateVariable{pPrivateThisMethodHasBeenRun}, here in \\
+\bsr{bsr.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+void initializeBSR ()
+{
+  // protect library against multiple initializations
+  static Bool pPrivateThisMethodHasBeenRun (false);
+
+  if (! pPrivateThisMethodHasBeenRun) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getTraceEarlyOptions () && ! gEarlyOptions.getEarlyQuietOption ()) {
+      gLog <<
+        "Initializing BSR basic types handling";
+
+      gWaeHandler->waeTraceWithoutInputLocation (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // BSR braille output kinds handling
+    // ------------------------------------------------------
+
+    initializeBsrBrailleOutputKindsMap ();
+
+    // BSR texts languages handling
+    // ------------------------------------------------------
+
+    initializeBsrTextsLanguageKindsMap ();
+
+    pPrivateThisMethodHasBeenRun = true;
+  }
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Enumeration types}
+% -------------------------------------------------------------------------
+
+All \enumType s use the \CPlusplus\ '{\tt enum class}' feature, such as:
+
+\begin{lstlisting}[language=CPlusPlus]
+enum class msrSlurTypeKind {
+  kSlurType_UNKNOWN_,
+
+  kSlurTypeRegularStart, kSlurTypePhrasingStart,
+  kSlurTypeContinue,
+  kSlurTypeRegularStop, kSlurTypePhrasingStop
+};
+\end{lstlisting}
+
+This prevents enumeration constants name conflicts across \enumType s, and qualified names such as \constant{msrSlurTypeKind}{kSlurTypeRegularStart} are quite explicit.
+
+Many enumerations names end in '{\tt Kind}', which is a way distinguish them from rather similar classes names in some cases.
+
+Enumeration constants in the form {\tt k*_UNKNOWN_} are used to indicate a value that \MainIt{has not been set yet}. There are always the first on in the corresponding enumeration, to benefit from the the \CPlusplus\ implicit \initialization\  to the the equivalent of 0.
+
+An enumeration constant may end in '{\tt None}', meaning that {\tt "none"} is actually a possible value for the corresponding type:
+\begin{lstlisting}[language=CPlusPlus]
+    // repeat winged
+    enum class msrBarLineRepeatWingedKind {
+      kBarLineRepeatWingedNone,
+
+      kBarLineRepeatWingedStraight, kBarLineRepeatWingedCurved,
+      kBarLineRepeatWingedDoubleStraight, kBarLineRepeatWingedDoubleCurved
+    };
+\end{lstlisting}
+
+Here how the {\tt "winged"} \mxml\ attribute of \musicXmlMarkup{repeat} is analysed in {\tt }:%%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrTranslator::visitStart ( S_repeat& elt )
+{
+    // ... ... ...
+
+    std::string winged = elt->getAttributeValue ("winged");
+
+    fCurrentBarLineRepeatWingedKind =
+      msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone; // default value
+
+    if (winged.size ()) {
+      if       (winged == "none") {
+        fCurrentBarLineRepeatWingedKind =
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone;
+      }
+      else if (winged == "straight") {
+        fCurrentBarLineRepeatWingedKind =
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedStraight;
+      }
+      else  if (winged == "curved") {
+        fCurrentBarLineRepeatWingedKind =
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedCurved;
+      }
+      else  if (winged == "double-straight") {
+        fCurrentBarLineRepeatWingedKind =
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleStraight;
+      }
+      else  if (winged == "double-curved") {
+        fCurrentBarLineRepeatWingedKind =
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleCurved;
+      }
+      else {
+        std::stringstream ss;
+
+        ss <<
+          "repeat winged \"" << winged <<
+          "\" is unknown";
+
+        musicxmlError (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+    }
+
+    // ... ... ...
+\end{lstlisting}
+
+The \mf\ \enumType s come with a \code{$<$$<$} operator to display their values in a user friendly way, such as \type{msrChordInKind} in \msrBoth{msrBasicTypes}:
+\begin{lstlisting}[language=CPlusPlus]
+enum class msrChordInKind {
+  kChordIn_UNKNOWN_,
+
+  kChordInMeasure,
+  kChordInTuplet,
+  kChordInGraceNotesGroup
+};
+
+EXP std::string msrChordInKindAsString (
+  msrChordInKind chordInKind);
+
+std::ostream& operator << (std::ostream& os, const msrChordInKind& elt);
+\end{lstlisting}
+
+The implementation is:
+\begin{lstlisting}[language=CPlusPlus]
+std::string msrChordInKindAsString (
+  msrChordInKind chordInKind)
+{
+  std::string result;
+
+  switch (chordInKind) {
+    case msrChordInKind::kChordIn_UNKNOWN_:
+      result = "kChordIn_UNKNOWN_";
+      break;
+    case msrChordInKind::kChordInMeasure:
+      result = "kChordInMeasure";
+      break;
+    case msrChordInKind::kChordInTuplet:
+      result = "kChordInTuplet";
+      break;
+    case msrChordInKind::kChordInGraceNotesGroup:
+      result = "kChordInGraceNotesGroup";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrChordInKind& elt)
+{
+  os << msrChordInKindAsString (elt);
+  return os;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{yes/no enumerations types}
+% -------------------------------------------------------------------------
+
+Boolean argument to methods calls are fine in simple cases such as:
+\begin{lstlisting}[language=CPlusPlus]
+    void                  setCombinedBooleanVariables (Bool value);
+\end{lstlisting}
+
+But when there are multiple arguments, the semantics of the {\tt true} or {\tt false} constants if far from obvious.
+
+This is why we use enum classes such as:
+\begin{lstlisting}[language=CPlusPlus]
+enum class msrVoiceCreateInitialLastSegmentKind {
+  kCreateInitialLastSegmentYes,
+  kCreateInitialLastSegmentNo
+};
+\end{lstlisting}
+
+in such cases, so that the arguments bare a clear semantics:
+\begin{lstlisting}[language=CPlusPlus]
+  fPartHarmoniesVoice =
+    msrVoice::create (
+      inputLineNumber,
+      msrVoiceKind::kVoiceKindHarmonies,
+      partHarmoniesVoiceNumber,
+      msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
+      fPartHarmoniesStaff);
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Boolean values anyway}
+% -------------------------------------------------------------------------
+
+Defining a yes/no enumeration type for 'true' boolean values such as the variables containing the OAH options would be cumbersome. The C++ \code{bool} type suffers from the C heritage, in which integers and even pointers can be mixed in and considered as boolean values.
+
+Moreover, a \code{bool} variable not explicitly initialized in the developper's code can lead to hard to fix bugs, in particular when the \mf\ library is used on various hardware and \OS s.
+
+For these reasons, \mf\ features a \class{Bool} defined in \mfutilitiesBoth{mfBool}. It \Main{encapsulates} the actual \code{bool} value, enforcing that its initial value is not random, but known to the developper, through constructors. This also avoids in particular long sequences of initializations in the passes constructors.
+
+
+% -------------------------------------------------------------------------
+\section{On/off values}
+% -------------------------------------------------------------------------
+
+Some elements in \mf\ are represented by a \MainIt{three-state} value.
+
+\OnOff values are handled by \enumType{mfOnOffKind}, declared in \mflibrary{mfOnOff.h}:
+\begin{lstlisting}[language=Terminal]
+//______________________________________________________________________________
+enum class mfOnOffKind {
+  kMfOnOffUnknown,
+  kMfOnOffOn, kMfOnOffOff
+};
+
+Bool mfOnOffKindAsBool (
+  mfOnOffKind onOffKind);
+
+std::string mfOnOffKindAsString (
+  mfOnOffKind onOffKind);
+
+std::ostream& operator << (std::ostream& os, const mfOnOffKind elt);
+\end{lstlisting}
+
+This is the case for example of page ragging information in \lpsr{lpsr/lpsrPapers.h}:
+\begin{lstlisting}[language=Terminal]
+    // on/off values
+    mfOnOffKind           fRaggedBottom;
+    S_oahOnOffAtom        fRaggedBottomAtom;
+
+    mfOnOffKind           fRaggedLast;
+    S_oahOnOffAtom        fRaggedLastAtom;
+
+    mfOnOffKind           fRaggedLastBottom;
+    S_oahOnOffAtom        fRaggedLastBottomAtom;
+
+    mfOnOffKind           fRaggedRight;
+    S_oahOnOffAtom        fRaggedRightAtom;
+\end{lstlisting}
+
+Care must be taken in \mflibrary{mfOnOff.cpp} when converting an \enumType{mfOnOffKind} value to \type{Bool}:
+\begin{lstlisting}[language=Terminal]
+Bool mfOnOffKindAsBool (
+  mfOnOffKind onOffKind)
+{
+  Bool result;
+
+  switch (onOffKind) {
+    case mfOnOffKind::kMfOnOffUnknown:
+      {
+        mfError (
+          __FILE__, __LINE__,
+          "mfOnOffKind::kMfOnOffUnknown cannot be converted to Bool");
+      }
+      break;
+    case mfOnOffKind::kMfOnOffOn:
+      result = true;
+      break;
+    case mfOnOffKind::kMfOnOffOff:
+      result = false;
+      break;
+  } // switch
+
+  return result;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Iterating over numeration types}
+% -------------------------------------------------------------------------
+
+Such iterations rely on template classes. For this to work, the enumeration type should provide specific {\tt AllFirst} and {\tt AllLast} 'aliases' for the first and last constants in the type.
+
+This is done for \enumType{msrHarmonyKind} in \msr{msrBasicTypes.h}:
+\begin{lstlisting}[language=CPlusPlus]
+// harmonies
+//______________________________________________________________________________
+enum class msrHarmonyKind {
+  kHarmony_UNKNOWN_,
+
+  // MusicXML harmonies
+
+  kHarmonyMajor, kHarmonyMinor,
+  kHarmonyAugmented, kHarmonyDiminished,
+
+	// ... ... ...
+
+  // other
+
+  kHarmonyOther,
+
+  kHarmonyNone,
+
+  // aliases
+  // ------------------------------------
+
+  AllFirst = kHarmony_UNKNOWN_,
+  AllLast  = kHarmonyNone,
+
+	// ... ... ...
+};
+\end{lstlisting}
+
+class   {\tt mfEnumAll} is defined in \mfutilities{mfEnumAll.h}:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+/*
+  https://stackoverflow.com/questions/8498300/allow-for-range-based-for-with-enum-classes
+*/
+template< typename T >
+class   mfEnumAll
+{
+  public:
+
+    class   Iterator
+    {
+      public:
+
+        Iterator (int value)
+          : fIterationIndex (value)
+            {}
+
+        T operator* (void) const
+            { return (T) fIterationIndex; }
+
+        void operator++ (void)
+            {  ++fIterationIndex; }
+
+        Bool operator != (Iterator rhs)
+            {  return fIterationIndex != rhs.fIterationIndex; }
+
+      private:
+
+        int fIterationIndex;
+     };
+};
+
+template< typename T >
+typename mfEnumAll<T>::Iterator begin (mfEnumAll<T>)
+{
+  return typename mfEnumAll<T>::Iterator ((int)T::AllFirst);
+}
+
+template< typename T >
+typename mfEnumAll<T>::Iterator end (mfEnumAll<T>)
+{
+  return typename mfEnumAll<T>::Iterator (((int)T::AllLast) + 1);
+}
+\end{lstlisting}
+
+The {\tt mfEnumAll} template class, defined in \mfutilities{mfEnumAll.h} can then be used to iterate from \constant{msrHarmonyKind}{AllFirst} to \constant{msrHarmonyKind}{AllLast}, here in \msr{msrBasicTypes.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+void initializeHarmonyStructuresMap ()
+{
+  // protect library against multiple initializations
+  static Bool pPrivateThisMethodHasBeenRun (false);
+
+  if (! pPrivateThisMethodHasBeenRun) {
+    for (auto e : mfEnumAll<msrHarmonyKind> ()) {
+      // create the harmony structure
+      S_msrHarmonyStructure
+        harmonyStructure =
+          msrHarmonyStructure::create (
+            e);
+
+      // register it in the map
+      gGlobalHarmonyStructuresMap [e] =
+        harmonyStructure;
+    } // for
+
+    pPrivateThisMethodHasBeenRun = true;
+  }
+}
+\end{lstlisting}
+
+The {\tt mfEnumAll} template class, defined in \mfutilities{mfEnumAll.h} can then be used to iterate from \constant{msdlTokenKind}{AllFirst} to \constant{msdlTokenKind}{AllLast}, here in \msdl{msdlTokens.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+    for (auto e : EnumNonSeparators<msdlTokenKind> ()) {
+      std::string
+        nonSeparatorTokenAsMsdlString  =
+          msdlTokenKindAsMsdlString (
+            e,
+            keywordsLanguageKind);
+
+			// ... ... ...
+    } // for
+\end{lstlisting}
+
+All such \class{Enum*} classes in \mf\ are:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r 'class   Enum' *
+formats/msdl/msdlTokens.h:class   EnumNonSeparators
+formats/msdl/msdlTokens.h:class   EnumLanguageIndependent
+formats/msdl/msdlTokens.h:class   EnumLanguageDependent
+formats/msr/msrBasicTypes.h:class   EnumTrueHarmonies
+utilities/mfutilities.h:class   mfEnumAll
+\end{lstlisting}
+
+For example \class{EnumTrueHarmonies}, that relies on \constant{msrHarmonyKind}{TrueHarmoniesFirst} and\\
+ \constant{msrHarmonyKind}{TrueHarmoniesLast}:
+\begin{lstlisting}[language=CPlusPlus]
+void msrHarmonyStructure::printAllHarmoniesStructures (std::ostream& os)
+{
+  os <<
+    "All the known harmonies structures are:" <<
+    std::endl << std::endl;
+
+  ++gIndenter;
+
+  for (auto e : EnumTrueHarmonies<msrHarmonyKind> ()) {
+    // create the harmony intervals
+    S_msrHarmonyStructure
+      harmonyStructure =
+        msrHarmonyStructure::create (
+          e);
+
+    // print it
+    os <<
+      harmonyStructure <<
+      std::endl;
+  } // for
+
+  --gIndenter;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{mfRational numbers}
+% -------------------------------------------------------------------------
+
+\mf\ uses rationals for notes sounding and display whole notes and measure positionss, among others.
+\Class {mfRational} is defined by \libmusicxml\ in \libBoth{mfRational}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP mfRational {
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    long int              fNumerator;
+    long int              fDenominator;
+
+    // used by rationalise()
+//    long int              gcd(long int a, long int b);
+
+	// ... ... ...
+};
+\end{lstlisting}
+
+Rationals are not used, however, for tuplets factors, see .
+
+
+% -------------------------------------------------------------------------
+\section{Don't mix pure and typed scalar types}
+% -------------------------------------------------------------------------
+
+A whole notes value is described by \class{msrWholeNotes}, defined in \msrBoth{msrNotesDurations}. It contains a numerator and denominator, as \class{msrRational} does, but those types are distinct, since an \className{msrWholeNotes} instance is a fraction of a whole note, note a mere typeless fraction.
+
+\mf\ uses \className{msrWholeNotes} instances for notes sounding and display whole notes values;
+
+For the same reason, \class{msrTupletFactor}, defined in \msrBoth{msrTupletFactors}, is used with specifically named fields:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrTupletFactor
+{
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    int                   fTupletActualNotes;
+    int                   fTupletNormalNotes;
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Default values}
+% -------------------------------------------------------------------------
+
+The guide lines for \mf\ in this matter are:
+\begin{itemize}
+\item smart pointers are initialized to {\tt nullptr} in the \class{SMARTP} constructor (they're smart after all), defined by \libmusicxml\ in \lib{smartpointer.h}:
+\begin{lstlisting}[language=CPlusPlus]
+template<class   T> class   SMARTP {
+	private:
+		//! the actual pointer to the class
+		T* fSmartPtr;
+
+	public:
+		//! an empty constructor - points to null
+		SMARTP()	: fSmartPtr(0) {}
+
+	// ... ... ...
+\end{lstlisting}
+
+\item all variables and classes fields of non-class   types, such as {\tt int}, {\tt float} and \enumType s, are to be initialized explicitly;
+
+\item \mf\ functions\index{functions} and methods parameters never have default values: overloading is used instead.
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{{\tt create*} methods}%%%JMI
+% -------------------------------------------------------------------------
+
+All concrete classes, i.e. those that are not pure virtual, have \methodName{create*} methods paired with a constructor with the exact same parameters.
+
+In most cases, there are justs named \methodName{create*}, but a couple of them have more explicit names.
+
+One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to them would be hard to distinguish at first glance otherwise:
+\begin{lstlisting}[language=CPlusPlus]
+ class EXP msrTempo : public msrMeasureElement
+{
+ 		// ... ... ...
+
+	  static SMARTP<msrTempo> createTempoWordsOnly (
+      int               inputLineNumber,
+      S_msrWords        tempoWords);
+
+    static SMARTP<msrTempo> createTempoPerMinute (
+      int               inputLineNumber,
+      msrDottedNotesDuration tempoBeatUnit,
+      std::string       tempoPerMinute,
+      msrTempoParenthesizedKind
+                        tempoParenthesizedKind,
+      msrPlacementKind  tempoPlacementKind);
+
+    static SMARTP<msrTempo> createTempoBeatUnitEquivalent (
+      int               inputLineNumber,
+      msrDottedNotesDuration tempoBeatUnit,
+      msrDottedNotesDuration tempoEquivalentBeatUnit,
+      msrTempoParenthesizedKind
+                        tempoParenthesizedKind,
+      msrPlacementKind  tempoPlacementKind);
+
+    static SMARTP<msrTempo> createTempoNotesRelationship (
+      int               inputLineNumber,
+      S_msrTempoNotesRelationshipElements
+                        tempoNotesRelationshipLeftElements,
+      msrTempoNotesRelationshipKind
+                        tempoNotesRelationshipKind,
+      S_msrTempoNotesRelationshipElements
+                        tempoNotesRelationshipRightElements,
+      msrTempoParenthesizedKind
+                        tempoParenthesizedKind,
+      msrPlacementKind  tempoPlacementKind);
+
+		// ... ... ...
+};
+\end{lstlisting}
+
+Another case is that of \class{msrKey} in \msrBoth{msrKeys}, in which the variant selected is made explicit:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrKey : public msrMeasureElement
+{
+		// ... ... ...
+
+    static SMARTP<msrKey> createTraditional (
+                            int                      inputLineNumber,
+                            msrQuarterTonesPitchKind keyTonicPitchKind,
+                            msrModeKind              modeKind,
+                            int                      keyCancel);
+
+    static SMARTP<msrKey> createHumdrumScot (
+      int                  inputLineNumber);
+
+		// ... ... ...
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{{\tt get*()}, {\tt set*()} and {\tt fetch*()} methods}
+% -------------------------------------------------------------------------
+
+As is usual, classes privates member variables are accessed through \methodName{set*()} and \methodName{get*()} methods. The name of these methods is obtained by replacing the '\code{f}' in the field name by '\code{set}' and '\code{get}', respectively. In \msr{msrTies.h}, one finds:
+\begin{lstlisting}[language=CPlusPlus]
+    // set and get
+    // ------------------------------------------------------
+
+    void                  setTieKind (msrTieKind tieKind)
+                              { fTieKind = tieKind; }
+
+    msrTieKind            getTieKind () const
+                              { return fTieKind; }
+
+    void                  setTiePlacementKind (msrPlacementKind placementKind)
+                              { fTiePlacementKind = placementKind; }
+
+    msrPlacementKind      getTiePlacementKind () const
+                              { return fTiePlacementKind; }
+\end{lstlisting}
+
+
+\code{fetch} is used when the result is not store in a variable, but has to computed in some way. \msr{msrSegment.cpp} contains:
+\begin{lstlisting}[language=CPlusPlus]
+S_msrStaff msrSegment::fetchSegmentUpLinkToStaff () const
+{
+  S_msrStaff result;
+
+  if (fSegmentUpLinkToVoice) {
+    result =
+      fSegmentUpLinkToVoice->
+        getVoiceUpLinkToStaff ();
+  }
+
+  return result;
+}
+\end{lstlisting}
+
+Some methods exist in two versions, the second one with a \code{NonConst} suffix in the name. This can be the case if a private class   field is to be modified outside the class, or if there are specific needs.
+
+This happens for example in \msrBoth{mfslNotes}:
+\begin{lstlisting}[language=CPlusPlus]
+    // articulations
+    const std::list<S_msrArticulation>&
+                          getNoteArticulations () const
+                              { return fNoteArticulations; }
+
+    std::list<S_msrArticulation>&
+                          getNoteArticulationsNonConst ()
+                              { return fNoteArticulations; }
+\end{lstlisting}
+
+Another case is in \mfslBoth{mfslDriver}:
+\begin{lstlisting}[language=CPlusPlus]
+    const yy::location&   getScannerLocation () const
+                              { return fScannerLocation; }
+
+    yy::location&         getScannerLocationNonConst ()
+                            // no const here
+                            // due to constraints in the Flex-generated code
+                              { return fScannerLocation; }
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{{\tt initialize*()} and {\tt finalize*()} methods}
+% -------------------------------------------------------------------------
+
+When a description contains many fields, the ones initialized by the values of the constructor's parameters are initialized in the latter, and the others are in an \methodName{initialize*()} method, such as:
+\begin{lstlisting}[language=CPlusPlus]
+msrPart::msrPart (
+  int            inputLineNumber,
+  std::string         partID,
+  S_msrPartGroup partUpLinkToPartGroup)
+    : msrPartGroupElement (inputLineNumber)
+{
+  // replace spaces in partID to set fPartID
+  for_each (
+    partID.begin (),
+    partID.end (),
+    mfStringSpaceReplacer (fPartID, '_'));
+
+/* JMI
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    partUpLinkToPartGroup != nullptr,
+    "partUpLinkToPartGroup is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // set part number
+  fPartAbsoluteNumber = ++sPartsCounter;
+
+  // set part's part group upLink
+  fPartUpLinkToPartGroup = partUpLinkToPartGroup;
+
+  // do other initializations
+  initializePart ();
+}
+\end{lstlisting}
+
+Some \methodName{finalize*()} methods exist. %%%JMI
+
+
+% -------------------------------------------------------------------------
+\section{{\tt *asString()} and {\tt *fromString()} functions\index{functions}}
+% -------------------------------------------------------------------------
+
+Each \enumType comes with an \functionName{*AsString()} function\index{functions}, to display the constant values as strings. Some also have a \functionName{fromString} function\index{functions} to convert strings to the corresponding constant. For example, one finds in \msrBoth{msrBasicTypes}:
+\begin{lstlisting}[language=CPlusPlus]
+// placement
+//______________________________________________________________________________
+enum class msrPlacementKind {
+  kPlacement_UNKNOWN_,
+
+  kPlacementAbove, kPlacementBelow
+};
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+// placement
+//______________________________________________________________________________
+msrPlacementKind msrPlacementKindFromString (
+  int    inputLineNumber,
+  std::string placementString)
+{
+  msrPlacementKind result = msrPlacementKind::kPlacement_UNKNOWN_; // default value
+
+  if      (placementString == "above")
+    result = msrPlacementKind::kPlacementAbove;
+  else if (placementString == "below")
+    result = msrPlacementKind::kPlacementBelow;
+  else {
+    if (placementString.size ()) {
+      std::stringstream ss;
+
+      ss <<
+        "placement \"" << placementString <<
+        "\" should be 'above' or 'below'";
+
+      musicxmlError (
+        gServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+  }
+
+  return result;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+std::string msrPlacementKindAsString (
+  msrPlacementKind placementKind)
+{
+  std::string result;
+
+  switch (placementKind) {
+    case msrPlacementKind::kPlacement_UNKNOWN_:
+      result = "noPlacement";
+      break;
+    case msrPlacementKind::kPlacementAbove:
+      result = "placementAbove";
+      break;
+    case msrPlacementKind::kPlacementBelow:
+      result = "placementBelow";
+      break;
+  } // switch
+
+  return result;
+}
+\end{lstlisting}
+
+Many classes have \methodName{asStringShort()} methods to provide more compact a description as the one provided by the corresponding \methodName{asString()} method.%%%JMI
+
+
+% -------------------------------------------------------------------------
+\section{{\tt translate*()} methods\index{methods} and {\tt convert*() functions\index{functions}}}
+% -------------------------------------------------------------------------
+
+To translate and to convert are aliass in the context of \mf.
+
+For semantic clearness, \methodName{translate*()} methods are supplied by the individual translators, as in \msrToMsrBoth{msr2msrTranslator}:
+\begin{lstlisting}[language=CPlusPlus]
+//________________________________________________________________________
+class EXP msr2msrTranslator :
+
+  // MSR score
+
+  public visitor<S_msrScore>,
+
+	// ... ... ...
+
+{
+  public:
+
+                          msr2msrTranslator ();
+
+    virtual               ~msr2msrTranslator ();
+
+    S_msrScore            translateMsrToMsr (
+                            const S_msrScore& theMsrScore);
+	// ... ... ...
+
+};
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+S_msrScore msr2msrTranslator::translateMsrToMsr (
+  const S_msrScore& theMsrScore)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    theMsrScore != nullptr,
+    "theMsrScore is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // the MSR score we're visiting
+  fVisitedMsrScore = theMsrScore;
+
+  // create the resulting MSR score
+  fResultingNewMsrScore =
+    msrScore::create (
+      K_MF_INPUT_LINE_UNKNOWN_,
+      "msrScore::create()");
+
+  // create a msrScore browser
+  msrBrowser<msrScore> browser (this);
+
+  // set the parts browsing order
+  theMsrScore->
+    setStavesBrowingOrderKind (
+      msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
+
+  // browse the visited MSR score
+  browser.browse (*fVisitedMsrScore);
+
+  // forget about the visited MSR score
+  fVisitedMsrScore = nullptr;
+
+  return fResultingNewMsrScore;
+}
+\end{lstlisting}
+
+The \functionName{convert*()} functions are the interfaces to the translators, for example in \msrToMsrBoth{msr2msrInterface}:
+\begin{lstlisting}[language=CPlusPlus]
+S_msrScore translateMsrToMsr (
+  S_msrScore        originalMsrScore,
+  const S_msrOahGroup&     msrOpts,
+  S_msr2msrOahGroup msr2msrOpts,
+  mfPassIDKind          passIDKind,
+  const std::string&     passDescription)
+{
+	// ... ... ...
+
+  // the msr2msrTranslator
+  msr2msrTranslator
+    translator;
+
+  // build the resulting MSR score
+  S_msrScore
+    resultingNewMsrScore =
+      translator.translateMsrToMsr (
+        originalMsrScore);
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{{\tt context} arguments}
+% -------------------------------------------------------------------------
+
+Some methods have such an argument, a std::string, to provide helpful information to the maintainer of \mf. An exemple is \method{msrMeasureRepeat}{displayMeasureRepeat}, defined in \msrBoth{msrMeasureRepeats}:
+\begin{lstlisting}[language=CPlusPlus]
+void msrMeasureRepeat::displayMeasureRepeat (
+  int    inputLineNumber,
+  const std::string& context)
+{
+  gLog <<
+    std::endl <<
+    "*********>> MeasureRepeat " <<
+    ", measureRepeatMeasuresNumber: '" <<
+    fMeasureRepeatMeasuresNumber <<
+    ", measureRepeatSlashesNumber: '" <<
+    fMeasureRepeatSlashesNumber <<
+    "', voice:" <<
+    std::endl <<
+    fUpLinkToMeasureRepeatToVoice->getVoiceName () <<
+    " (" << context << ")" <<
+    ", line " << inputLineNumber <<
+    " contains:" <<
+    std::endl;
+
+  ++gIndenter;
+  print (gLog);
+  --gIndenter;
+
+  gLog <<
+    " <<*********" <<
+    std::endl << std::endl;
+\end{lstlisting}
+
+An call example in \msr{msrVoices.h} is:
+\begin{lstlisting}[language=CPlusPlus]
+    displayVoiceMeasureRepeatAndVoice (
+      inputLineNumber,
+      "createMeasureRepeatFromItsFirstMeasures() 1");
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Sorting and {\tt compare*()} methods}
+% -------------------------------------------------------------------------
+
+\mf\ sometimes needs to sort some data structures:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r '\.sort (' *
+oah/oahBasicTypes.cpp:  optionsMapElementsNamesList.sort ();
+passes/lpsr2lilypond/lpsr2lilypondTranslator.cpp:    frameFrameNotesList.sort (
+formats/msr/msrMeasuresSlices.cpp:  fSliceNotesFlatList.sort (
+formats/msr/msrMeasuresSlices.cpp:  fSliceNoteEventsList.sort (
+formats/msr/msrStaves.cpp:        fStaffAllVoicesList.sort (
+formats/msr/msrStaves.cpp:        fStaffAllVoicesList.sort (
+formats/msr/msrStaves.cpp:  fStaffRegularVoicesList.sort (
+formats/msr/msrMeasures.cpp:    fMeasureElementsList.sort (
+formats/msr/msrMeasures.cpp:    fMeasureElementsList.sort (
+formats/msr/msrParts.cpp:    fPartAllStavesList.sort (
+formats/msr/msrParts.cpp:    fPartAllStavesList.sort (
+formats/lpsr/lpsrParts.cpp:    fPartBlockElementsList.sort (
+\end{lstlisting}
+
+There are thus a number of \methodName{compare*} methods according to the needs:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r compare * | grep '\.h'
+oah/oahBasicTypes.h:    const std::multiset<S_oahElement, compareOahElements>&
+oah/oahBasicTypes.h:    std::multiset<S_oahElement, compareOahElements>
+oah/oahElements.h:struct compareOahElements {
+formats/msr/msrParts.h:    static bool           compareStavesToHaveFiguredBassesBelowCorrespondingPart (
+formats/msr/msrNotes.h:    static bool           compareNotesByIncreasingMeasurePosition (
+formats/msr/msrMeasureElementsWithoutUpLinkToMeasure.h:    static bool           compareMeasureElementsByIncreasingMeasurePosition (
+formats/msr/msrStaves.h:    static bool           compareVoicesByIncreasingNumber (
+formats/msr/msrStaves.h:    static bool           compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
+formats/msr/msrStaves.h:    static bool           compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
+formats/msr/msrMeasuresSlices.h:    static bool           compareNotesEventsByIncreasingMeasurePosition (
+formats/msr/msrMeasuresSlices.h:    static bool           compareSimultaneousNotesChunksByIncreasingMeasurePosition (
+formats/lpsr/lpsrParts.h:    static bool           compareElementsToHaveHarmoniesAboveCorrespondingStaff (
+formats/lpsr/lpsrParts.h:    static bool           compareStaffBlockWithOtherElement (
+formats/lpsr/lpsrParts.h:    static bool           compareChordNamesContextWithOtherElement (
+utilities/mfutilities.h:    // compare indentation value
+\end{lstlisting}
+
+An example is:
+\begin{lstlisting}[language=Terminal]
+bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
+  const S_msrStaff& first,
+  const S_msrStaff& second)
+{
+  int
+    firstStaffNumber =
+      first->getStaffNumber (),
+    secondStaffNumber =
+      second->getStaffNumber ();
+
+  if (firstStaffNumber > msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
+    firstStaffNumber -= msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
+  }
+  if (secondStaffNumber > msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
+    secondStaffNumber -= msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
+  }
+
+  bool result =
+    firstStaffNumber > secondStaffNumber;
+
+  return result;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Mutually dependent classes}
+% -------------------------------------------------------------------------
+
+\CPlusplus\ has some constraints on how such classes can be defined, see for example \url{https://cplusplus.com/forum/articles/10627/}. \mf\ sticks to having one header file per important class, with one exception.
+
+
+%/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:3374:23: error: member access into incomplete type 'MusicFormats::msrTempo'
+%      ", line " << elt->getInputStartLineNumber () <<
+      std::endl;
+
+%                      ^
+%/Users/jacquesmenu/musicformats-git-dev/src/representations/msr/msrTypesForwardDeclarations.h:307:9: note: forward declaration of 'MusicFormats::msrTempo'
+%class   msrTempo;
+%        ^
+%
+%
+%/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:5319:7: error: incomplete type 'MusicFormats::msrAfterGraceNotesGroup' named in nested name specifier
+%      msrAfterGraceNotesGroup::create (
+%      ^~~~~~~~~~~~~~~~~~~~~~~~~
+%/Users/jacquesmenu/musicformats-git-dev/src/representations/msr/msrTypesForwardDeclarations.h:31:9: note: forward declaration of 'MusicFormats::msrAfterGraceNotesGroup'
+%class   msrAfterGraceNotesGroup;
+%        ^
+
+
+%If, for example, class A uses class B, then class B is one of class A's dependencies. Whether it can be forward declared or needs to be included depends on how B is used within A:
+%
+%
+%- do nothing if: A makes no references at all to B
+%- do nothing if: The only reference to B is in a friend declaration
+%- forward declare B if: A contains a B pointer or reference: B* myb;
+%- forward declare B if: one or more functions has a B object/pointer/reference
+%as a parementer, or as a return type: B MyFunction(B myb);
+%- #include "b.h" if: B is a parent class of A
+%- #include "b.h" if: A contains a B object: B myb;
+%
+%A circular dependency is when two (or more) classes depend on each other. For example, class A depends on class B, and class B depends on class A. If you stick to "the right way" and forward declare when you can instead of #including needlessly, this usually isn't a problem. As long as the circle is broken with a forward declaration at some point, you're fine.
+
+
+%https://learn.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2027?view=msvc-170
+%
+%
+%It is possible to declare a pointer to a declared but undefined type. But C++ does not allow a reference to an undefined type.
+%The following sample generates C2027.
+%C++
+%
+%Copy
+%// C2027_b.cpp
+%class A;
+%A& CreateA();
+%
+%class B;
+%B* CreateB();
+%
+%int main() {
+%   CreateA();   // C2027
+%   CreateB();   // OK
+%}
+
+
+
+In some cases, two classes have to know about each other, such as \className{msrPartGroup} and \className{msrPartGroupElement}. This is because \Main{part group}s can be nested: a part group contains part group element, which can be staves as well as other part groups. This loop can be seen in red in \figureRef{The MSR classes hierarchy}.
+
+
+% -------------------------------------------------------------------------
+\subsection{Pre-declarations}
+% -------------------------------------------------------------------------
+
+Handling such a \Main{mutual dependency} in C++ is rather easy if both classes are declared in one and the same \code{.h} file, with a \Main{pre-declaration} of one of them before the other one is declared, such as:
+\begin{lstlisting}[language=CPlusPlus]
+class   msrPartGroup;
+typedef SMARTP<msrPartGroup> S_msrPartGroup;
+\end{lstlisting}
+
+All one can do with a forward declared type is to declare a {\it pointer} or {\it reference} to said type. In particular, this precludes a forward declared type to be that of a class member or the return type of a class method.
+
+%%%JMI I had a similar error message which i resolved by moving the #includes lower down the header file so that the class definition and method definition that the other #includes desire come earlier than the other header includes.
+
+As a matter of taste, \mf\ follows \libmusicxml\ by declaring the \functionName{create} static class methods this way:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+class EXP msrBarLine : public msrMeasureElement
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static SMARTP<msrBarLine> create (
+\end{lstlisting}
+
+As an alternative, the same could be written as follows, at the cost of an extra pre-declaration for each class:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrBarLine;
+typedef   SMARTP<msrBarLine> S_msrBarLine;
+
+class EXP msrBarLine : public msrMeasureElement
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static S_msrBarLine create (...)
+
+  // ... ... ...
+};
+\end{lstlisting}
+
+
+There are many classes pre-declations in \mf. We thus use a couple of \fileName{*EnumTypes*} files to contain most of them, in order to avoid numerous header files includes:
+\begin{lstlisting}[language=CPlusPlus]
+jacquesmenu@macstudio-1:~/JMI_Developpement/musicformats-git-dev/src > look EnumTypes
+./representations/msdl/msdlEnumTypes.h
+./representations/msdl/msdlEnumTypes.cpp
+./representations/msr/msrTupletsEnumTypes.h
+./representations/msr/msrTemposEnumTypes.h
+./representations/msr/msrTupletsEnumTypes.cpp
+./representations/msr/msrMeasuresEnumTypes.cpp
+./representations/msr/msrTemposEnumTypes.cpp
+./representations/msr/msrStavesEnumTypes.h
+./representations/msr/msrNotesEnumTypes.h
+./representations/msr/msrNotesEnumTypes.cpp
+./representations/msr/msrStavesEnumTypes.cpp
+./representations/msr/msrMeasuresEnumTypes.h
+./representations/msr/msrRepeatsEnumTypes.cpp
+./representations/msr/msrRepeatsEnumTypes.h
+./representations/lpsr/lpsrEnumTypes.cpp
+./representations/lpsr/lpsrEnumTypes.h
+./representations/bsr/bsrEnumTypes.cpp
+./representations/bsr/bsrEnumTypes.h
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Simple mutual dependency using separate header files}
+% -------------------------------------------------------------------------
+
+A \className{msrPartGroupElement} is either a \className{msrPart} or another \className{msrPartGroupElement}, since the latter can be nested.
+
+A \className{msrPartGroupElement} cannot contain an uplink to an instance of \className{S_msrPartGroup}: pre-declaring \type{S_msrPartGroup}:
+\begin{lstlisting}[language=CPlusPlus]
+class   msrPartGroup;
+typedef SMARTP<msrPartGroup> S_msrPartGroup;
+\end{lstlisting}
+
+and using it as the type of a class member common to all \className{msrPartGroupElement} \subClass es leads to the following error:
+\begin{lstlisting}[language=Terminal]
+error: member access into incomplete type 'MusicFormats::msrPartGroup'
+\end{lstlisting}
+
+So \msr{msrPartGroupsElements.h} contains only:
+\begin{lstlisting}[language=CPlusPlus]
+/*
+  Parts and part groups can be found in part groups,
+  hence class   msrPartGroupElement
+*/
+
+class EXP msrPartGroupElement : public msrElement
+/*
+  a purely virtual common ancestor to the msrPartGroup and msrPart classes,
+  which can be inside an msrPartGroup
+*/
+{
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    /*
+      The part group uplink is declared in the sub-classes,
+      i.e. msrPart and msrPartGroup,
+      to allow for separate *.h files, C++ constraint
+    */
+};
+\end{lstlisting}
+
+Then a \className{msrPartGroup}, a \subClass\ of \className{msrPartGroupElement} declared in \msr{msrPartGroups.h}, can contain such an uplink to a \className{msrPartGroup} instance:
+\begin{lstlisting}[language=CPlusPlus]
+#include "msrPartGroupElements.h"
+
+// ... ... ...
+
+class   msrPartGroup;
+typedef SMARTP<msrPartGroup> S_msrPartGroup;
+
+// ... ... ...
+
+class EXP msrPartGroup : public msrPartGroupElement
+{
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    // upLinks
+
+    S_msrPartGroup        fPartGroupUpLinkToPartGroup;
+                            // part groups can be nested
+
+		// ... ... ...
+
+    // allowing for both parts and nested part groups as elements
+
+    std::list<S_msrPartGroupElement>
+                          fPartGroupElementsList;
+};
+\end{lstlisting}
+
+\Type{S_msrPartGroup} is used in the declaration of field \fieldName{fPartGroupElementsList}, hence its pre-declaration.
+
+\Class{msrPart}, another \subClass of \className{msrPartGroupElement}, in defined in \msr{msrParts.h} this way:
+\begin{lstlisting}[language=CPlusPlus]
+#include "msrPartGroupElements.h"
+
+// ... ... ...
+
+class EXP msrPart : public msrPartGroupElement
+{
+	// ... ... ...
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    // upLinks
+
+    void                  setPartUpLinkToPartGroup (
+                            const S_msrPartGroup& partGroup)
+                              { fPartUpLinkToPartGroup = partGroup; }
+
+    S_msrPartGroup        getPartUpLinkToPartGroup () const
+                              { return fPartUpLinkToPartGroup; }
+		// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    // upLinks
+
+    S_msrPartGroup        fPartUpLinkToPartGroup;
+
+		// ... ... ...
+};
+\end{lstlisting}
+
+%This works fine since \field{msrPart}{fPartUpLinkToPartGroup} is defined in \msr{msrParts.h} itself. %%% JMI
+This rather complex situation is depicted at the top of \figureRef{The MSR classes hierarchy}.
+
+
+% -------------------------------------------------------------------------
+\subsection{More complex mutual dependencies}
+% -------------------------------------------------------------------------
+
+The case of notes, chords, tuplets and grace notes groups is more intricate:
+\begin{itemize}
+\item a note can be standalone in a measure;
+\item a note can be part of:
+  \begin{itemize}
+  \item a chord;
+  \item a tuplet;
+  \item a grace notes group;
+  \item a double tremolo;
+  \end{itemize}
+
+\item a chord can be standalone in a measure;
+\item a chord can be part of:
+  \begin{itemize}
+  \item a tuplet;
+  \item a grace notes group;
+  \end{itemize}
+
+\item a tuplet can be standalone in a measure;
+\item a tuplet can be part of:
+  \begin{itemize}
+  \item another tuplet;
+  \end{itemize}
+
+\item a grace notes group is attached to:
+  \begin{itemize}
+  \item a note;
+  \end{itemize}
+
+\item a double tremolo is standalone in a measure.
+\end{itemize}
+
+\Class{msrDoubleTremolo} is a \subClass\ of \className{msrMeasureElement}.
+
+Regarding classes \className{msrNote}, \className{msrChord} and \className{msrTuplet}:
+\begin{itemize}
+\item they have to be sub-classes of \class{msrMeasureElement} in some way, since they can be standalone in a \className{msrMeasure} instance;
+
+\item they should be sub-classes of \className{msrTupletElement}, since they can be members of a \className{msrTuplet} instance.
+\end{itemize}
+
+This leads to the following hierarchy:
+\begin{itemize}
+\item \className{msrNote}, \className{msrChord} and \className{msrTuplet} are direct sub-classes of \class{msrTupletElement}
+
+\item \class{msrTupletElement} is a direct \subClass\ of \className{msrMeasureElement}.
+\end{itemize}
+
+This rather complex situation is depicted at the bottom of \figureRef{The MSR classes hierarchy}.
+
+But then, the mutual dependency of need a more complex representation.
+
+
+% -------------------------------------------------------------------------
+\section{Templates and functional programming usage}
+% -------------------------------------------------------------------------
+
+There are currently few templates in the \mf\ code base, namely:
+\begin{itemize}
+\item some are used by the two-phase visitors pattern, see \chapterRef{The two-phase visitors pattern};
+
+\item some exist for enumeration types, such as:
+\begin{lstlisting}[language=CPlusPlus]
+template< typename T >
+class   EnumNonSeparators
+{
+  public:
+
+    class   Iterator
+    {
+      public:
+
+        Iterator (int value)
+          : fIterationIndex (value)
+            {}
+
+        T operator* (void) const
+            { return (T) fIterationIndex; }
+
+        void operator++ (void)
+            {  ++fIterationIndex; }
+
+        Bool operator != (Iterator rhs)
+            {  return fIterationIndex != rhs.fIterationIndex; }
+
+      private:
+
+        int fIterationIndex;
+     };
+};
+
+template< typename T >
+typename EnumNonSeparators<T>::Iterator begin (EnumNonSeparators<T>)
+{
+  return typename EnumNonSeparators<T>::Iterator ((int)T::NonSeparatorsFirst);
+}
+
+template< typename T >
+typename EnumNonSeparators<T>::Iterator end (EnumNonSeparators<T>)
+{
+  return typename EnumNonSeparators<T>::Iterator (((int)T::NonSeparatorsLast) + 1);
+}
+\end{lstlisting}
+
+
+\item some are used by the code created by \bison, like:
+\begin{lstlisting}[language=CPlusPlus]
+    /// Construct and fill.
+    template <typename T>
+    value_type (YY_RVREF (T) t)
+      : yytypeid_ (&typeid (T))
+    {
+      ISCM_ASSERT (sizeof (T) <= size);
+      new (yyas_<T> ()) T (YY_MOVE (t));
+    }
+\end{lstlisting}
+
+\end{itemize}
+
+There could be more templates use once \mf\ reaches a rather stable code base and it is clear what parts of it can be restructured with generic code.
+
+In the same vein, there is little use as of this writing of higher-level facilities such as \code{lambda} and \Main{functor}s.
+

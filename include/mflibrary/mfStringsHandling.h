@@ -261,6 +261,11 @@ std::string mfIntToEnglishWord (int n);
 std::string mfStringNumbersToEnglishWords (std::string str);
 
 //______________________________________________________________________________
+std::string mfInputLineNumbersAsString (
+  int inputStartLineNumber,
+  int inputEndLineNumber);
+
+//______________________________________________________________________________
 std::set<int> mfDecipherNaturalNumbersSetSpecification (
   const std::string& theSpecification,
   Bool               debugMode = false);

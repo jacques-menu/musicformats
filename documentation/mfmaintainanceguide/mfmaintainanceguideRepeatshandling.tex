@@ -1,0 +1,408 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Repeats handling}\label{Repeats handling}
+% -------------------------------------------------------------------------
+
+Repeats are presented at \sectionRef{Repeats}.
+
+
+% -------------------------------------------------------------------------
+\section{Translating repeats from MXSR to MSR}
+% -------------------------------------------------------------------------
+
+This is done in \mxsrToMsr{}.
+
+The tough part is to handle \mxml\ \musicXmlMarkup{barLine} markups, since they are meant for \drawing, and do not structure repeats as such.
+
+Recognizing the structure of repeat relies on the attributes of the barLines. The following \enumType s are defined in \msr{msrBarLines.h} local to \class{msrBarLine}:
+\begin{lstlisting}[language=CPlusPlus]
+    // location
+    enum class msrBarLineLocationKind {
+      kBarLineLocationNone,
+
+      kBarLineLocationLeft,
+      kBarLineLocationMiddle,
+      kBarLineLocationRight // by default
+    };
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+    // style
+    enum class msrBarLineStyleKind {
+      kBarLineStyleNone,
+
+      kBarLineStyleRegular,  // by default
+
+      kBarLineStyleDotted, kBarLineStyleDashed, kBarLineStyleHeavy,
+      kBarLineStyleLightLight, kBarLineStyleLightHeavy,
+      kBarLineStyleHeavyLight, kBarLineStyleHeavyHeavy,
+      kBarLineStyleTick, kBarLineStyleShort
+    };
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+    // repeat direction
+    enum class msrBarLineRepeatDirectionKind {
+      kBarLineRepeatDirectionNone,
+      kBarLineRepeatDirectionForward, kBarLineRepeatDirectionBackward
+    };
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+    // ending type
+    enum class msrBarLineEndingTypeKind {
+      kBarLineEndingTypeNone,
+
+      msrBarLineEndingTypeKind::kBarLineEndingTypeStart,
+      msrBarLineEndingTypeKind::kBarLineEndingTypeStop,
+      msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue
+    };
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+    // category
+    enum class msrBarLineCategoryKind {
+      kBarLineCategory_UNKNOWN_,
+
+      kBarLineCategoryStandalone,
+
+      kBarLineCategoryRepeatStart, kBarLineCategoryRepeatEnd,
+
+      kBarLineCategoryHookedEndingStart, kBarLineCategoryHookedEndingEnd,
+      kBarLineCategoryHooklessEndingStart, kBarLineCategoryHooklessEndingEnd
+    };
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+    // segno
+    enum class msrBarLineHasSegnoKind {
+      kBarLineHasSegnoYes, kBarLineHasSegnoNo
+    };
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+    // coda
+    enum class msrBarLineHasCodaKind {
+      kBarLineHasCodaYes, kBarLineHasCodaNo
+    };
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+    // repeat winged
+    enum class msrBarLineRepeatWingedKind {
+      kBarLineRepeatWingedNone,
+
+      kBarLineRepeatWingedStraight, kBarLineRepeatWingedCurved,
+      kBarLineRepeatWingedDoubleStraight, kBarLineRepeatWingedDoubleCurved
+    };
+\end{lstlisting}
+
+The attributes of \musicXmlMarkup{barline} are deciphered upon the first visit of {\tt S_barline} in\\
+\mxsrToMsr{mxsr2msrTranslator.cpp}:%%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrTranslator::visitStart ( S_barline& elt )
+{
+	// ... ... ...
+
+  // location
+
+  {
+    std::string
+      location =
+        elt->getAttributeValue ("location");
+
+    fCurrentBarLineLocationKind =
+      msrBarLineLocationKind::kBarLineLocationRight; // by default
+
+    if       (location == "left") {
+      fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationLeft;
+    }
+    else  if (location == "middle") {
+      fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationMiddle;
+    }
+    else if  (location == "right") {
+      fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationRight;
+    }
+    else {
+      std::stringstream ss;
+
+      ss <<
+        "barLine location \"" << location <<
+        "\" is unknown, using 'right' by default";
+
+   // JMI   musicxmlError (
+      musicxmlWarning (
+        gServiceRunData->getInputSourceName (),
+        inputLineNumber,
+   //     __FILE__, __LINE__,
+        ss.str ());
+    }
+  }
+
+  fOnGoingBarLine = true;
+}
+\end{lstlisting}
+
+Then the \class{msrBarLine} instance is created upon the second visit of {\tt S_barline}:%%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrTranslator::visitEnd ( S_barline& elt )
+{
+	// ... ... ...
+
+  // create the barLine
+  S_msrBarLine
+    barLine =
+      msrBarLine::create (
+        inputLineNumber,
+        fCurrentBarLineLocationKind,
+        fCurrentBarLineStyleKind,
+        fCurrentBarLineRepeatDirectionKind,
+        fCurrentBarLineEndingTypeKind,
+        fCurrentBarLineEndingNumber,
+        fCurrentBarLineTimes,
+        msrBarLineCategoryKind::kBarLineCategory_UNKNOWN_, // will be set afterwards
+        fCurrentBarLineHasSegnoKind,
+        fCurrentBarLineHasCodaKind,
+        fCurrentBarLineRepeatWingedKind);
+
+	// ... ... ...
+
+  // wait until its category is defined
+  // to append the barLine to the current segment
+
+  // handle the barLine according to: JMI
+  // http://www.musicxml.com/tutorial/the-midi-compatible-part/repeats/
+
+  Bool barLineHasBeenHandled = false;
+
+  switch (fCurrentBarLineLocationKind) {
+    case msrBarLineLocationKind::kBarLineLocationNone:
+      // should not occur
+      break;
+
+    case msrBarLineLocationKind::kBarLineLocationLeft:
+      if (
+        fCurrentBarLineEndingTypeKind
+          ==
+        msrBarLineEndingTypeKind::kBarLineEndingTypeStart
+      ) {
+        // ending start, don't know yet whether it's hooked or hookless
+        // ------------------------------------------------------
+        if (! fCurrentBarLineEndingNumber.size ()) {
+          musicxmlWarning (
+            gServiceRunData->getInputSourceName (),
+            inputLineNumber,
+            "mandatory ending number is missing, assuming \"1\"");
+
+          fCurrentBarLineEndingNumber = "1";
+        }
+
+        // don't know yet whether repeat ending start barLine is hooked or hookless
+        // remember it in fCurrentRepeatEndingStartBarLine,
+        fCurrentRepeatEndingStartBarLine = barLine;
+
+        // handle the repeat ending start
+        handleRepeatEndingStart (barLine);
+
+        barLineHasBeenHandled = true;
+      }
+
+      else if (
+        fCurrentBarLineRepeatDirectionKind
+          ==
+        msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionForward
+      ) {
+        // repeat start
+        // ------------------------------------------------------
+        // set the barLine category
+        barLine->
+          setBarLineCategory (
+            msrBarLineCategoryKind::kBarLineCategoryRepeatStart);
+
+        // handle the repeat start
+        handleRepeatStart (barLine);
+
+        barLineHasBeenHandled = true;
+      }
+      break;
+
+    case msrBarLineLocationKind::kBarLineLocationMiddle:
+      // JMI ???
+      break;
+
+    case msrBarLineLocationKind::kBarLineLocationRight:
+      {
+        if (
+          fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeStop
+            &&
+          fCurrentBarLineEndingNumber.size () != 0
+        ) {
+          // hooked ending end
+          // ------------------------------------------------------
+          // set current barLine ending start category
+          fCurrentRepeatEndingStartBarLine->
+            setBarLineCategory (
+              msrBarLineCategoryKind::kBarLineCategoryHookedEndingStart);
+
+          // set this barLine's category
+          barLine->
+            setBarLineCategory (
+              msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd);
+
+          // handle the repeat hooked ending end
+          handleRepeatHookedEndingEnd (barLine);
+
+          barLineHasBeenHandled = true;
+        }
+
+        else if (
+          fCurrentBarLineRepeatDirectionKind
+            ==
+          msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionBackward
+        ) {
+          // repeat end
+          // ------------------------------------------------------
+
+          // set this barLine's category
+          barLine->
+            setBarLineCategory (
+              msrBarLineCategoryKind::kBarLineCategoryRepeatEnd);
+
+          // handle the repeat end
+          handleRepeatEnd (barLine);
+
+          barLineHasBeenHandled = true;
+        }
+
+        else if (
+          fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue
+            &&
+          fCurrentBarLineEndingNumber.size () != 0
+        ) {
+          // hookless ending end
+          // ------------------------------------------------------
+          // set current barLine ending start category
+          fCurrentRepeatEndingStartBarLine->
+            setBarLineCategory (
+              msrBarLineCategoryKind::kBarLineCategoryHooklessEndingStart);
+
+          // set this barLine's category
+          barLine->
+            setBarLineCategory (
+              msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd);
+
+          // handle the repeat hookless ending end
+          handleRepeatHooklessEndingEnd (barLine);
+
+          barLineHasBeenHandled = true;
+        }
+
+        // forget about current repeat ending start barLine
+        fCurrentRepeatEndingStartBarLine = nullptr;
+      }
+      break;
+  } // switch
+
+  // set the barLine category to stand alone if not yet handled
+  if (! barLineHasBeenHandled) {
+    switch (fCurrentBarLineStyleKind) {
+      case msrBarLineStyleKind::kBarLineStyleRegular:
+      case msrBarLineStyleKind::kBarLineStyleDotted:
+      case msrBarLineStyleKind::kBarLineStyleDashed:
+      case msrBarLineStyleKind::kBarLineStyleHeavy:
+      case msrBarLineStyleKind::kBarLineStyleLightLight:
+      case msrBarLineStyleKind::kBarLineStyleLightHeavy:
+      case msrBarLineStyleKind::kBarLineStyleHeavyLight:
+      case msrBarLineStyleKind::kBarLineStyleHeavyHeavy:
+      case msrBarLineStyleKind::kBarLineStyleTick:
+      case msrBarLineStyleKind::kBarLineStyleShort:
+        barLine->
+          setBarLineCategory (
+            msrBarLineCategoryKind::kBarLineCategoryStandalone);
+
+        // append the bar line to the current part
+				// ... ... ...
+
+        fCurrentPart->
+          appendBarLineToPart (barLine);
+
+        barLineHasBeenHandled = true;
+        break;
+
+      case msrBarLineStyleKind::kBarLineStyleNone:
+        std::stringstream ss;
+
+        ss <<
+          "barLine " <<
+          barLine->asString () <<
+          " has no barLine style";
+
+        musicxmlWarning (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+     //     __FILE__, __LINE__,
+          ss.str ());
+        break;
+    } // switch
+  }
+
+  // has this barLine been handled?
+  if (! barLineHasBeenHandled) {
+    std::stringstream ss;
+
+    ss << std::left <<
+      "cannot handle a barLine containing: " <<
+      barLine->asString ();
+
+    msrInternalWarning (
+      gServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      ss.str ());
+  }
+
+  fOnGoingBarLine = false;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Translating repeats from MXSR to MSR}
+% -------------------------------------------------------------------------
+
+This is done in \mxsrToMsr{}.
+
+
+% -------------------------------------------------------------------------
+\section{Translating repeats from MSR to MSR}
+% -------------------------------------------------------------------------
+
+This is done in \msrToMsr{}.
+
+
+% -------------------------------------------------------------------------
+\section{Translating repeats from MSR to LPSR}
+% -------------------------------------------------------------------------
+
+This is done in \msrToLpsr{}.
+
+
+% -------------------------------------------------------------------------
+\section{Translating repeats from LPSR to LilyPond}
+% -------------------------------------------------------------------------
+
+This is done in \lpsrToLilypond{}.
+
+

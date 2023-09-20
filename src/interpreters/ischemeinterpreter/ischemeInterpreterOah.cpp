@@ -72,7 +72,7 @@ void ischemeInterpreterOahGroup::initializeIschemeInterpreterOahGroup ()
 }
 //     void                  initializeIschemeUserOptions ();
 //
-//     void                  initializeIschemeMaintenanceOptions ();
+//     void                  initializeIschemeMaintainanceOptions ();
 
 void ischemeInterpreterOahGroup::initializeIschemeOptions ()
 {

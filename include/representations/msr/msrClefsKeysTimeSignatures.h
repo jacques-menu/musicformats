@@ -183,7 +183,8 @@ class EXP msrClef : public msrMeasureElement
     // ------------------------------------------------------
 
     std::string           asString () const override;
-    std::string           asShortStringForMeasuresSlices () const override;
+
+//     std::string           asStringForMeasuresSlices () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -304,7 +305,8 @@ class EXP msrHumdrumScotKeyItem : public msrElement
     // ------------------------------------------------------
 
     std::string           asString () const override;
-    std::string           asShortStringForMeasuresSlices () const override;
+
+//     std::string           asStringForMeasuresSlices () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -451,7 +453,8 @@ class EXP msrKey : public msrMeasureElement
     // ------------------------------------------------------
 
     std::string           asString () const override;
-    std::string           asShortStringForMeasuresSlices () const override;
+
+//     std::string           asStringForMeasuresSlices () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -591,7 +594,8 @@ class EXP msrTimeSignatureItem : public msrElement
     // ------------------------------------------------------
 
     std::string           asString () const override;
-    std::string           asShortStringForMeasuresSlices () const override;
+
+//     std::string           asStringForMeasuresSlices () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -736,7 +740,8 @@ class EXP msrTimeSignature : public msrMeasureElement
     std::string           asString () const override;
 
     std::string           asShortString () const override;
-    std::string           asShortStringForMeasuresSlices () const override;
+
+//     std::string           asStringForMeasuresSlices () const override;
 
     void                  print (std::ostream& os) const override;
 
@@ -895,7 +900,8 @@ class EXP msrClefKeyTimeSignatureGroup : public msrMeasureElement
     // ------------------------------------------------------
 
     std::string           asString () const override;
-    std::string           asShortStringForMeasuresSlices () const override;
+
+//     std::string           asStringForMeasuresSlices () const override;
 
     void                  print (std::ostream& os) const override;
 

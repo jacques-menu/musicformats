@@ -1,0 +1,1150 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{MusicFormats components (MFC)}\label{MusicFormats components (MFC)}
+% -------------------------------------------------------------------------
+
+\mf\ supports keeping the history of its \component s versions using a dedicated representation, as an alternative to separate \Main{release notes}. The source files are in \mfc.
+
+
+% -------------------------------------------------------------------------
+\section{Versions numbers}\label{Versions numbers}
+% -------------------------------------------------------------------------
+
+The basic data structure is \class{mfcVersionNumber}:
+\begin{lstlisting}[language=CPlusPlus]
+class   mfcVersionNumber: public smartable
+{
+	// ... ... ...
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    Bool                  operator== (const mfcVersionNumber& other) const;
+
+    Bool                  operator!= (const mfcVersionNumber& other) const;
+
+    Bool                  operator<  (const mfcVersionNumber& other) const;
+
+    Bool                  operator>= (const mfcVersionNumber& other) const;
+
+    Bool                  operator>  (const mfcVersionNumber& other) const;
+
+    Bool                  operator<= (const mfcVersionNumber& other) const;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const;
+
+    void                  print (std::ostream& os) const;
+
+  private:
+
+    // fields
+    // ------------------------------------------------------
+
+    int                   fMajorNumber;
+    int                   fMinorNumber;
+    int                   fPatchNumber;
+    std::string           fPreRelease;
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Versions descriptions}\label{Versions descriptions}
+% -------------------------------------------------------------------------
+
+Each component version is described by a \class{mfcVersionDescr} instance:
+\begin{lstlisting}[language=CPlusPlus]
+class   mfcVersionDescr : public smartable
+{
+	// ... ... ...
+
+  private:
+
+    // fields
+    // ------------------------------------------------------
+
+    S_mfcVersionNumber    fVersionNumber;
+    std::string           fVersionDate;
+    std::list<std::string>
+                          fVersionDescriptionItems;
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Versions histories}\label{Versions histories}
+% -------------------------------------------------------------------------
+
+An instance of \className{mfcVersionsHistory} is essentially a list of \className{mfcVersionsHistory} instances:
+\begin{lstlisting}[language=CPlusPlus]
+class   mfcVersionsHistory : public smartable
+{
+	// ... ... ...
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  appendVersionDescrToHistory (
+                            const S_mfcVersionDescr& versionDescr);
+
+    S_mfcVersionDescr     fetchMostRecentVersion () const;
+
+    S_mfcVersionNumber    fetchMostRecentVersionNumber () const;
+
+	// ... ... ...
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    std::list<S_mfcVersionDescr>
+                          fVersionsList;
+};
+\end{lstlisting}
+
+The current version of a component is the last one appended to \fieldName{fVersionsList}:
+\begin{lstlisting}[language=CPlusPlus]
+S_mfcVersionDescr mfcVersionsHistory::fetchMostRecentVersion () const
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fVersionsList.size () > 0,
+    "fVersionsList is empty");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  return fVersionsList.back ();
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Components descriptions}\label{Components descriptions}
+% -------------------------------------------------------------------------
+
+The \component s of \mf\ are described by \enumType{mfcComponentKind}:
+\begin{lstlisting}[language=CPlusPlus]
+enum class mfcComponentKind {
+  kComponentRepresentation,
+  kComponentPass,
+  kComponentGenerator,
+  kComponentConverter,
+  kComponentLibrary
+};
+\end{lstlisting}
+
+The \purelyVirtualClass{mfcComponent} is a superclass  to the ones describing formats, passes, generators, converters and the \mf\ library itself:
+\begin{lstlisting}[language=CPlusPlus]
+class   mfcComponent : public smartable
+{
+	// ... ... ...
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    S_mfcVersionDescr     fetchComponentMostRecentVersion () const
+                              {
+                                return
+                                  fVersionsHistory->
+                                     fetchMostRecentVersion ();
+                              }
+
+	// ... ... ...
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const;
+
+    std::string           mostRecentVersionNumberAndDateAsString () const;
+
+    virtual void          print (std::ostream& os) const;
+
+    virtual void          printVersion (std::ostream& os) const;
+    virtual void          printHistory (std::ostream& os) const;
+
+  protected:
+
+    // protected services
+    // ------------------------------------------------------
+
+    virtual void          printOwnHistory (std::ostream& os) const;
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    std::string           fComponentName;
+
+    mfcComponentKind       fComponentKind;
+
+    S_mfcVersionsHistory  fVersionsHistory;
+};
+\end{lstlisting}
+
+The virtual \methodName{printVersion} and \methodName{printHistory} methods are called by the \optionNameBoth{-v}{-version} and \optionNameBoth{-hist}{-history} options to the various generators and converters.
+
+
+Representations and passes have a single, linear history, whereas the generators, the converters and \mf\ itself use several of them, each with its own history. This leads to a hierarchy of classes:
+\begin{itemize}
+\item \class{mfcRepresentationComponent} for formats;
+\item \class{mfcPassComponent} for passes;
+\item \purelyVirtualClass{mfcMultiComponent} for the generators, converters and \mf\ library, itself the superclass  of:
+
+
+\begin{itemize}
+	\item \class{mfcGeneratorComponent};
+	\item \class{mfcConverterComponent};
+	\item \class{mfcLibraryComponent}.
+	\end{itemize}
+
+\end{itemize}
+
+Multi-components have their own history, hence field \method{mfcComponent}{printOwnHistory}.
+\Class{mfcMultiComponent} is described below.
+
+
+% -------------------------------------------------------------------------
+\section{Multi-components}\label{Multi-components}
+% -------------------------------------------------------------------------
+
+\Class{mfcMultiComponent} contains lists of the formats and passes used:
+\begin{lstlisting}[language=CPlusPlus]
+class   mfcMultiComponent : public mfcComponent
+{
+	// ... ... ...
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    std::list<S_mfcRepresentationComponent>
+                          fRepresentationComponentsList;
+    std::list<S_mfcPassComponent>
+                          fPassComponentsList;
+
+    // should the version number be at least equal to
+    // the ones of the components?
+    mfcMultiComponentEntropicityKind
+                          fComponentEntropicityKind;
+
+    mfcMultiComponentUsedFromTheCLIKind
+                          fComponentUsedFromTheCLIKind;
+};
+\end{lstlisting}
+
+\EnumType{mfcMultiComponentEntropicityKind} is used to check that the version number of a \className{mfcMultiComponent} instance is at least equal to the version numbers of the formats and passes it uses:
+\begin{lstlisting}[language=CPlusPlus]
+enum class mfcMultiComponentEntropicityKind {
+  kComponentEntropicityYes,
+  kComponentEntropicityNo
+};
+\end{lstlisting}
+
+\EnumType{mfcMultiComponentUsedFromTheCLIKind} is used to display context sensitive output with the \optionNameBoth{version}{v} and \optionNameBoth{history}{hist} options when the library is used from \CLI\ services or through the functional \API:
+\begin{lstlisting}[language=CPlusPlus]
+enum class mfcMultiComponentUsedFromTheCLIKind {
+  kComponentUsedFromTheCLIYes,
+  kComponentUsedFromTheCLINo
+};
+\end{lstlisting}
+
+This allows for the maintainers of little used tools not to worry about using components with version numbers greater than their own. \\
+Only \constant{mfcMultiComponentUsedFromTheCLIKind}{kComponentUsedFromTheCLIYes} is used at the time of this writing.
+
+\Method{mfcMultiComponent}{print} displays the regular version numbers:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~ > xml2ly -version
+Command line version of musicxml2lilypond converter v0.9.51 (October 12 2021)
+
+Representations versions:
+  MXSR
+    v0.9.5 (October 6 2021)
+  MSR
+    v0.9.51 (October 14 2021)
+  LPSR
+    v0.9.5 (October 6 2021)
+
+Passes versions:
+  mxsr2msr
+    v0.9.5 (October 6 2021)
+  msr2msr
+    v0.9.5 (October 6 2021)
+  msr2lpsr
+    v0.9.5 (October 6 2021)
+  lpsr2lilypond
+    v0.9.5 (October 6 2021)
+\end{lstlisting}
+
+\Method{mfcMultiComponent}{printHistory} displays information analogous to \Main{release notes}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~ > xml2brl -history
+Command line version of musicxml2braille converter v0.9.51 (October 12 2021)
+
+Own history:
+  v0.9.5 (October 6 2021):
+    Start of sequential versions numbering
+
+  v0.9.51 (October 12 2021):
+    Fixed trace OAH issue
+
+Representations history:
+  MXSR
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+  MSR
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+    v0.9.51 (October 14 2021):
+      Refined MSR names and summary display options
+
+  BSR
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+Passes history:
+  mxsr2msr
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+  msr2msr
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+  msr2bsr
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+  bsr2bsr
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+  bsr2braille
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+\end{lstlisting}
+
+% -------------------------------------------------------------------------
+\section{Versions history creation}\label{Versions history creation}
+% -------------------------------------------------------------------------
+
+\mf\ uses \MainIt{semantic} version numbering, such as \code{v0.9.61}:%%%JMI
+\begin{itemize}
+\item the library itself gets a new number right after a new branch as been created for it. Branching to "v0.9.61" causes the library to be numbered "v0.9.61" with \code{SetMusicFormatsVersionNumber.bash};
+
+\item each representation, converter or pass that is modified this new branch has been created gets a new history element with the same number as the library.
+\end{itemize}
+
+The versions history must exist before the \optionNameBoth{version}{v} and \optionNameBoth{history}{hist} options are handled. They are thus created early by specific functions, placed in \starFileNameBoth{Component} files.
+
+The functions that create them ensure than that is done at most once.
+
+
+% -------------------------------------------------------------------------
+\subsection{Representations and passes components creation}\label{Representations and passes components creation}
+% -------------------------------------------------------------------------
+
+This is done in \functionName{create*RepresentationComponent} and \functionName{create*PassComponent} functions, respectively.
+
+For example, \msrRepr\ versions are handled by \function{createMsrRepresentationComponent} \\
+in \msrBoth{msrHistory}:
+\begin{lstlisting}[language=CPlusPlus]
+S_mfcRepresentationComponent EXP createMsrRepresentationComponent ()
+{
+  static S_mfcRepresentationComponent pRepresentationComponent;
+
+  // protect library against multiple initializations
+  if (! pRepresentationComponent) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
+	  	std::stringstream ss;
+
+      ss <<
+        "Initializing MSR format component";
+
+      gWaeHandler->waeTraceWithoutInputLocation (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // create the format component
+    pRepresentationComponent =
+      mfcRepresentationComponent::create (
+        "MSR");
+
+    // populate it
+    pRepresentationComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.50"),
+          "October 6, 2021",
+          std::list<std::string> {
+            "Start of sequential versions numbering"
+          }
+      ));
+
+    pRepresentationComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.51"), // JMI
+          "October 14, 2021",
+          std::list<std::string> {
+            "Refined MSR names and summary display options"
+          }
+      ));
+  }
+
+  return pRepresentationComponent;
+}
+\end{lstlisting}
+
+The conversion of \mxml\ to \mxsrRepr does not belong to \mf\, since it is provided by \libmusicxml.
+
+
+% -------------------------------------------------------------------------
+\subsection{Generators and converters components creation}\label{Generators and converters components creation}
+% -------------------------------------------------------------------------
+
+In that case, the formats and passes components used by the multi-component should be created as well.
+
+For example, the formats and passes used by the \fileName{musicxml2braille} converter are appended to the atoms versions list in its history in \function{createMusicxml2brailleConverterComponent} in \\
+\musicxmlToBraille{musicxml2brailleConverterComponent.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
+{
+  static S_mfcConverterComponent pConverterComponent;
+
+  // protect library against multiple initializations
+  if (! pConverterComponent) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTraceComponents ()) {
+	  	std::stringstream ss;
+
+      ss <<
+        "Creating the musicxml2braille component";
+
+      gWaeHandler->waeTraceWithoutInputLocation (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // create the converter component
+    pConverterComponent =
+      mfcConverterComponent::create (
+        "musicxml2braille",
+        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
+
+    // populate the converter's own history
+    pConverterComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.50"),
+          "October 6, 2021",
+          std::list<std::string> {
+            "Start of sequential versions numbering"
+          }
+      ));
+
+    pConverterComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.51"),
+          "October 12, 2021",
+          std::list<std::string> {
+            "Fixed trace OAH issue"
+          }
+      ));
+
+    // populate the converter's formats list
+    pConverterComponent->
+      appendRepresentationToMultiComponent (
+        createMxsrRepresentationComponent ());
+    pConverterComponent->
+      appendRepresentationToMultiComponent (
+        createMsrRepresentationComponent ());
+    pConverterComponent->
+      appendRepresentationToMultiComponent (
+        createBsrRepresentationComponent ());
+
+    pConverterComponent->
+      appendPassToMultiComponent (
+        createMxsr2msrComponent ());
+
+    pConverterComponent->
+      appendPassToMultiComponent (
+        createMsr2msrComponent ());
+
+    pConverterComponent->
+      appendPassToMultiComponent (
+        createMsr2bsrComponent ());
+
+    pConverterComponent->
+      appendPassToMultiComponent (
+        createBsr2bsrComponent ());
+
+    pConverterComponent->
+      appendPassToMultiComponent (
+        createBsr2brailleComponent ());
+  }
+
+  return pConverterComponent;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{MusicFormats library component creation}\label{MusicFormats library component creation}
+% -------------------------------------------------------------------------
+
+This is done in \function{createLibraryComponent} in \mfcBoth{mfcLibraryComponent}:
+\begin{lstlisting}[language=CPlusPlus]
+S_mfcLibraryComponent EXP createLibraryComponent ()
+{
+  static S_mfcLibraryComponent pLibraryComponent;
+
+  // protect library against multiple initializations
+  if (! pLibraryComponent) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getTraceEarlyOptions ()) {
+	  	std::stringstream ss;
+
+      ss <<
+        "Creating the  MFC library component";
+
+      gWaeHandler->waeTraceWithoutInputLocation (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // create the library's history
+    pLibraryComponent =
+      mfcLibraryComponent::create (
+        "musicformats",
+        mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
+        mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
+
+    // populate the library's own history
+    pLibraryComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.50"),
+          "October 6, 2021",
+          std::list<std::string> {
+            "Start of sequential versions numbering"
+          }
+      ));
+
+    pLibraryComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.51"),
+          "October 12, 2021",
+          std::list<std::string> {
+            "Adding a version number to the MusicFormats library",
+            "Fixed trace OAH issue in the musicxml2* converters)"
+          }
+      ));
+
+    pLibraryComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.52"),
+          "October 12, 2021",
+          std::list<std::string> {
+            "Added MusicFormats library versions history to '-hist, -history'"
+          }
+      ));
+
+    pLibraryComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.53"),
+          "October 22, 2021",
+          std::list<std::string> {
+            "Replaced bool by class   Bool in variables and fields",
+            "Created MFC (MusicFormats components)"
+          }
+      ));
+
+    pLibraryComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.54"),
+          "Novermber 6, 2021",
+          std::list<std::string> {
+            "Replaced std::cout and std::cerr by gOutput and gLog respectively in the CLI samples",
+            "Finalized components numbering (MFC)"
+          }
+      ));
+
+    // populate the library's components history
+    pLibraryComponent->
+      appendRepresentationToMultiComponent (
+        createMsrRepresentationComponent ());
+    pLibraryComponent->
+      appendRepresentationToMultiComponent (
+        createLpsrRepresentationComponent ());
+    pLibraryComponent->
+      appendRepresentationToMultiComponent (
+        createBsrRepresentationComponent ());
+    pLibraryComponent->
+      appendRepresentationToMultiComponent (
+        createMxsrRepresentationComponent ());
+
+    pLibraryComponent->
+      appendPassToMultiComponent (
+        createMsr2msrComponent ());
+
+    pLibraryComponent->
+      appendPassToMultiComponent (
+        createMsr2lpsrComponent ());
+    pLibraryComponent->
+      appendPassToMultiComponent (
+        createLpsr2lilypondComponent ());
+
+    pLibraryComponent->
+      appendPassToMultiComponent (
+        createMsr2bsrComponent ());
+    pLibraryComponent->
+      appendPassToMultiComponent (
+        createBsr2bsrComponent ());
+    pLibraryComponent->
+      appendPassToMultiComponent (
+        createBsr2brailleComponent ());
+
+    pLibraryComponent->
+      appendPassToMultiComponent (
+        createMsr2mxsrComponent ());
+
+    pLibraryComponent->
+      appendPassToMultiComponent (
+        createMxsr2musicxmlComponent ());
+
+    pLibraryComponent->
+      appendPassToMultiComponent (
+        createMxsr2guidoComponent ());
+  }
+
+  return pLibraryComponent;
+}
+\end{lstlisting}
+
+\Function{createLibraryComponent} is called in \clisamples{displayMusicformatsVersion.cpp} and \clisamples{displayMusicformatsHistory.cpp}.
+
+
+% -------------------------------------------------------------------------
+\subsection{Version and history options handling}\label{Version and history options handling}
+% -------------------------------------------------------------------------
+
+In order to be able to execute the \optionNameBoth{version}{v} and \optionNameBoth{history}{hist} options of a generator or converter, a \className{oahHandler} instance must be supplied with a \className{mfcMultiComponent} instance.
+
+\Field{oahHandler}{fHandlerMultiComponent} is used for this purpose:
+\begin{lstlisting}[language=CPlusPlus]
+//_______________________________________________________________________________
+class EXP oahHandler : public smartable
+{
+	// ... ... ...
+
+  protected:
+
+    // protected initialization
+    // ------------------------------------------------------
+
+    virtual void          initializeHandlerMultiComponent () = 0;
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+		// ... ... ...
+
+    S_mfcMultiComponent   getHandlerMultiComponent () const
+                              { return fHandlerMultiComponent; }
+
+	// ... ... ...
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+		// ... ... ...
+
+    // compound versions
+    S_mfcMultiComponent   fHandlerMultiComponent;
+};
+\end{lstlisting}
+
+\Field{oahHandler}{fHandlerMultiComponent} is set in the \className{oahHandler} sub-classes constructors by a call to the overriden \methodName{initializeHandlerMultiComponent}.
+
+For example in \constructor{xml2xmlInsiderHandler}:
+\begin{lstlisting}[language=CPlusPlus]
+xml2xmlInsiderHandler::xml2xmlInsiderHandler (
+  const std::string& serviceName,
+  std::string handlerHeader)
+  : oahInsiderHandler (
+      serviceName,
+      handlerHeader,
+R"(
+          Welcome to the MusicXML to MusicXML converter
+          delivered as part of the MusicFormats library.
+
+      --- https://github.com/jacques-menu/musicformats ---
+)",
+R"(
+Usage: xml2xml [[option]* [MusicXMLFile|-] [[option]*
+)")
+{
+	// ... ... ...
+
+  // initialize the multi-component
+  initializeHandlerMultiComponent ();
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+The overriden \methodName{initializeHandlerMultiComponent} methods merely get the atom or compound versions to assign it to \field{oahHandler}{fHandlerMultiComponent}.
+
+For example, for \fileName{Mikrokosmos3Wandering}, the compound versions is simply set in the corresponding \insider\ class   \className{Mikrokosmos3WanderingInsiderHandler}:
+\begin{lstlisting}[language=CPlusPlus]
+void Mikrokosmos3WanderingInsiderHandler::initializeHandlerMultiComponent ()
+{
+  fHandlerMultiComponent =
+    createMikrokosmos3WanderingGeneratorComponent ();
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Accessing versions in regular handlers}\label{Accessing versions in regular handlers}
+% -------------------------------------------------------------------------
+
+A \regular\ handler merely gets the compound versions of the \insider\ handler it relies upon in its overriden \methodName{initializeHandlerMultiComponent} method:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP oahRegularHandler : public oahHandler
+/*
+  A regular OAH handler relies on the existence of so-called 'insider' handler,
+  that contains all the options values gathered from the user,
+  grouped according to the internal representations and passes used.
+
+  The variables containing the values of the options selected by the user
+  are actually held by the insider handler.
+*/
+{
+	// ... ... ... ...
+
+  protected:
+
+    // protected initialization
+    // ------------------------------------------------------
+
+	// ... ... ... ...
+
+    void                  initializeHandlerMultiComponent () override
+                              {
+                              fHandlerMultiComponent =
+                                fInsiderHandler->
+                                  getHandlerMultiComponent ();
+                            }
+
+	// ... ... ... ...
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Getting current version numbers}\label{Getting current version numbers}
+% -------------------------------------------------------------------------
+
+Apart from the version and history options, such current version numbers may be used in the output from generators and converters, depending on the options. A component description is the way to achieve that in the latter two cases.
+
+
+% -------------------------------------------------------------------------
+\subsection{Current version numbers in options}\label{Current version numbers in options}
+% -------------------------------------------------------------------------
+
+\OptionBoth{version}{v} displays the versions of generators and converters:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2xml -version
+Command line version of musicxml2musicxml converter v0.9.51 (October 12 2021)
+
+Representations versions:
+  MXSR
+    v0.9.5 (October 6 2021)
+  MSR
+    v0.9.51 (October 14 2021)
+
+Passes versions:
+  mxsr2msr
+    v0.9.5 (October 6 2021)
+  msr2msr
+    v0.9.5 (October 6 2021)
+  msr2mxsr
+    v0.9.5 (October 6 2021)
+  mxsr2musicxml
+    v0.9.5 (October 6 2021)
+\end{lstlisting}
+
+\OptionBoth{history}{hist} display the versions history of generators and converters:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2gmn -history
+Command line version of musicxml2guido converter v0.9.51 (October 12 2021)
+
+Own history:
+  v0.9.5 (October 6 2021):
+    Start of sequential versions numbering
+
+  v0.9.51 (October 12 2021):
+    Fixed trace OAH issue
+
+Representations history:
+  MXSR
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+  MSR
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+    v0.9.51 (October 14 2021):
+      Refined MSR names and summary display options
+
+Passes history:
+  mxsr2msr
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+  msr2msr
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+  msr2mxsr
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+
+  mxsr2guido
+    v0.9.5 (October 6 2021):
+      Start of sequential versions numbering
+\end{lstlisting}
+
+
+In \oahBoth{oahAtomsCollection}, \class{oahVersionAtom} contains method \methodName{printVersion}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP oahVersionAtom : public oahPureHelpValueLessAtom
+{
+	// ... ... ...
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyValueLessAtom (std::ostream& os) override;
+
+	// ... ... ...
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+		// ... ... ...
+
+    void                  printVersion (std::ostream& os) const;
+};
+\end{lstlisting}
+
+The option is applied by \method{oahVersionAtom}{applyElement}:
+\begin{lstlisting}[language=CPlusPlus]
+void oahVersionAtom::applyValueLessAtom (std::ostream& os)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+		std::stringstream ss;
+
+    ss <<
+      "==> option '" << fetchNames () << "' is a oahVersionAtom";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  int saveIndent = gIndenter.getIndent ();
+
+  gIndenter.resetToZero ();
+
+  printVersion (os);
+
+  gIndenter.setIndent (saveIndent);
+
+	fSelected = true;
+}
+\end{lstlisting}
+
+The work is done by \method{oahVersionAtom}{printVersion}:
+\begin{lstlisting}[language=CPlusPlus]
+void oahVersionAtom::printVersion (std::ostream& os) const
+{
+  // get the handler version
+  S_mfcMultiComponent
+    handlerMultiComponent =
+      fetchAtomUpLinkToHandler ()->
+        getHandlerMultiComponent ();
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    handlerMultiComponent != nullptr,
+    "handlerMultiComponent is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  handlerMultiComponent->
+    printVersion (os);
+}
+\end{lstlisting}
+
+The situation is analog for histories with \methodName{printVersion} replaced by \methodName{printHistory}.
+
+
+% -------------------------------------------------------------------------
+\subsection{Current version numbers in formats}\label{Current version numbers in formats}
+% -------------------------------------------------------------------------
+
+When creating \lily\ output, the current version number of the converter used is indicated as a comment when the \optionBoth{lilypond-generation-infos}{lpgi} option is used:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2ly --lilypond-generation-infos basic/HelloWorld.xml
+\version "2.24.0"
+
+% Pick your choice from the next two lines as needed
+%myBreak = { \break }
+myBreak = {}
+
+% Pick your choice from the next two lines as needed
+%myPageBreak = { \pageBreak }
+myPageBreak = {}
+
+% Generated by xml2ly v0.9.51 (October 12 2021)
+% on Thursday 2021-11-11 @ 11:15:56 CET
+% from "basic/HelloWorld.xml"
+
+% ... ... ...
+\end{lstlisting}
+
+\Class{lpsrScore} contains an \mfcRepr\ component field:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP lpsrScore : public lpsrElement
+{
+ 	// ... ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+	 	// ... ... ... ...
+
+    // the multi-component
+    // ------------------------------------------------------
+    S_mfcMultiComponent   fMultiComponent;
+
+ 	// ... ... ... ...
+};
+\end{lstlisting}
+
+In \lpsr{lpsrScores.cpp}, \constructor{lpsrScore} stores the multi-component value and uses it to create an \className{lpsrComment} instance:
+\begin{lstlisting}[language=CPlusPlus]
+lpsrScore::lpsrScore (
+  int                 inputLineNumber,
+  const S_msrScore&   theMsrScore,
+  const S_mfcMultiComponent& multiComponent)
+    : lpsrElement (inputLineNumber)
+{
+	// ... ... ... ...
+
+  fMsrScore = theMsrScore;
+
+  fMultiComponent = multiComponent;
+
+  // should the initial comments about the service and the options used
+  // be generated?
+  if (gGlobalLpsr2lilypondOahGroup->getXml2lyInfos ()) {
+    // create the 'input source name and translation date' comment
+    {
+      std::stringstream ss;
+
+      ss <<
+        "Generated by " <<
+        gOahOahGroup->getOahOahGroupServiceName () <<
+        ' ' <<
+        fMultiComponent->
+          mostRecentVersionNumberAndDateAsString () <<
+        std::endl <<
+
+        "% on " <<
+        gServiceRunData->getTranslationDateFull () <<
+        std::endl <<
+
+        "% from ";
+
+      if (gServiceRunData->getInputSourceName () == "-") {
+        ss << "standard input";
+      }
+      else {
+        ss << "\"" << gServiceRunData->getInputSourceName () << "\"";
+      }
+
+      fInputSourceNameComment =
+        lpsrComment::create (
+          inputLineNumber,
+          ss.str (),
+          lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
+    }
+
+	 	// ... ... ... ...
+ 	}
+
+ 	// ... ... ... ...
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Current version numbers in passes}\label{Current version numbers in passes}
+% -------------------------------------------------------------------------
+
+Another case is that of the generation of \mxml\ output:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2xml -musicxml-generation-infos basic/HelloWorld.xml
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN"
+			"http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="3.1">
+    <!--
+==================================================
+Created by xml2xml v0.9.5 (October 6 2021)
+on Thursday 2021-11-11 @ 11:04:06 CET
+from basic/HelloWorld.xml
+==================================================
+-->
+    <work>
+        <work-number/>
+        <work-title>Hello World!</work-title>
+    </work>
+    <movement-number/>
+    <movement-title/>
+    <identification>
+        <encoding>
+            <software>xml2xml v0.9.5 (October 6 2021), https://github.com/jacques-menu/musicformats</software>
+            <encoding-date>2021-11-10</encoding-date>
+        </encoding>
+        <miscellaneous>
+            <miscellaneous-field name="description"/>
+        </miscellaneous>
+    </identification>
+
+ <!-- ... ... ... -->
+\end{lstlisting}
+
+In \msrToMxsr{msr2mxsrTranslator.cpp}, the start visitor of \className{msrScore} instances does that this way:
+\begin{lstlisting}[language=CPlusPlus]
+void msr2mxsrTranslator::visitStart (S_msrScore& elt)
+{
+ 	// ... ... ... ...
+
+  // get the pass component
+  S_mfcPassComponent
+    passComponent =
+      createMsr2mxsrComponent ();
+
+  // get the pass component current version number and date
+  std::string
+    passComponentMostRecentVersionNumberAndDateAsString =
+      passComponent->
+        mostRecentVersionNumberAndDateAsString ();
+
+  // create the initial creation comment
+  std::stringstream ss;
+  ss <<
+    std::endl <<
+    "==================================================" <<
+    std::endl <<
+    "Created by " <<
+    gOahOahGroup->getOahOahGroupServiceName () <<
+    ' ' <<
+    passComponentMostRecentVersionNumberAndDateAsString <<
+    std::endl <<
+
+    "on " <<
+    gServiceRunData->getTranslationDateFull () <<
+    std::endl <<
+
+    "from " <<
+    gServiceRunData->getInputSourceName () <<
+    std::endl <<
+
+    "==================================================" <<
+    std::endl;
+
+  // append the initial creation comment to the score part wise element
+  fResultingMusicxmlelement->push (createMxmlelement (kComment, ss.str ()));
+
+  // create a software element
+  Sxmlelement
+    softwareElement =
+      createMxmlelement (
+        k_software,
+        gOahOahGroup->getOahOahGroupServiceName ()
+          + ' '
+          + passComponentMostRecentVersionNumberAndDateAsString +
+          ", https://github.com/jacques-menu/musicformats");
+
+  // append it to the identification encoding
+  appendToScoreIdentificationEncoding (softwareElement);
+
+ 	// ... ... ... ...
+}
+\end{lstlisting}
+

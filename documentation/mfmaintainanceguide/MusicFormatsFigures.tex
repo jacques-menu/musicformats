@@ -1,0 +1,140 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% MusicFormats maintainance guide
+
+\documentclass[11pt,a4paper]{report}
+
+
+% -------------------------------------------------------------------------
+% import common LaTeX settings
+% -------------------------------------------------------------------------
+
+\usepackage{import}
+
+\subimport{../mflatexlib}{mflatexlibCommonSettings.tex}
+
+\subimport{../mflatexlib}{mflatexlibDivisionsCommands.tex}
+
+\subimport{../mflatexlib}{mflatexlibIndexing.tex}
+
+\subimport{../mflatexlib}{mflatexlibFontsAndColors.tex}
+
+\subimport{../mflatexlib}{mflatexlibReferencing.tex}
+
+\subimport{../mflatexlib}{mflatexlibBoxes.tex}
+
+\subimport{../mflatexlib}{mflatexlibGraphicsAndPictures.tex}
+
+\subimport{../mflatexlib}{mflatexlibMusicFormatsCommands.tex}
+
+\subimport{../mflatexlib}{mflatexlibMusicFormatsFilesAndFolders.tex}
+
+\subimport{../mflatexlib}{mflatexlibMusicFormatsNames.tex}
+
+\subimport{../mflatexlib}{mflatexlibShortcuts.tex}
+
+\subimport{../mflatexlib}{mflatexlibListings.tex}
+
+\subimport{../mflatexlib}{mflatexlibTablesAndLists.tex}
+
+
+% -------------------------------------------------------------------------
+% indexing (specific to this document)
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\begin{document}
+% -------------------------------------------------------------------------
+
+\useFirstPageHeadersAndFooters
+
+% defeat headwidth not being equal to \textwidth %%%JMI should not be necessary ???
+\setlength{\headwidth}{\textwidth}
+
+% use the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
+
+
+\begin{titlepage}
+  \begin{center}
+    \vspace*{2cm}
+
+    \textbf{
+      \LARGE{\mf\ figures} \\[10pt]
+			\Large{\url{https://github.com/jacques-menu/musicformats}}
+			}
+
+    \vspace{0.25cm}
+
+    \large{
+    	\input{../../MusicFormatsVersionNumber.txt}%
+			-- %
+    	\input{../../MusicFormatsVersionDate.txt}
+		}
+
+    \vspace{0.75cm}
+
+    \large{\textbf{Jacques Menu}}
+
+  \end{center}
+
+  \vspace{1cm}
+
+This document contains the main figures describing \mf.
+It is part of the \mf\ documentation, to be found at\\
+\url{https://github.com/jacques-menu/musicformats/tree/dev/documentation}.
+
+Contents:
+\begin{itemize}
+\item \quotedFigureRef{The MusicFormats architecture}
+
+\item \quotedFigureRef{The MSR music score representation}
+
+\item \quotedFigureRef{The OAH classes hierarchy}
+\end{itemize}
+
+\end{titlepage}
+
+{
+	% reduce font size for tables and lists
+	\small
+
+	% reduce vertical size of tables and lists
+  \setlength {\parskip} {0.3ex plus \baselineskip minus 2pt}
+
+%  \listoffigures
+
+}
+
+
+% now we can switch to the regular headers and footers
+\useRegularPagesHeadersAndFooters
+
+\subimport{../mflatexlib}{mflatexlibMusicFormatsArchitecturePicture}
+
+\subimport{../mflatexlib}{mflatexlibMSRScoreRepresentation.tex}
+
+\subimport{../mflatexlib}{mflatexlibOAHClassesHierarchyPicture}
+
+
+% -------------------------------------------------------------------------
+% postamble
+% -------------------------------------------------------------------------
+
+% back to the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
+
+
+% -------------------------------------------------------------------------
+\end{document}
+% -------------------------------------------------------------------------

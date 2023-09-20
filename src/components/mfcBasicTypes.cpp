@@ -936,7 +936,7 @@ std::string mfcComponentKindAsString (
 
   switch (componentKind) {
     case mfcComponentKind::kComponentRepresentation:
-      result = "format";
+      result = "representation";
       break;
     case mfcComponentKind::kComponentPass:
       result = "pass";
@@ -953,6 +953,12 @@ std::string mfcComponentKindAsString (
   } // switch
 
   return result;
+}
+
+std::ostream& operator << (std::ostream& os, const mfcComponentKind& elt)
+{
+  os << mfcComponentKindAsString (elt);
+  return os;
 }
 
 //______________________________________________________________________________

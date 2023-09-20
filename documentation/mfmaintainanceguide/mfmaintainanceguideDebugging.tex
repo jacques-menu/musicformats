@@ -1,0 +1,388 @@
+% !TEX root = mfmaintainanceguide.tex
+
+
+% -------------------------------------------------------------------------
+\chapter{Debugging}
+% -------------------------------------------------------------------------
+
+Debugging \mf\ can be quite time-consuming. The trace options available have been designed to provide fine-grained trace information to help locate issues.
+
+\Function{catchSignals} at the beginning of the \functionName {main} function can be commented out in order to run a service under a debugger.
+
+File \mflibrary{mfPreprocessorSettings.h} contains:
+\begin{lstlisting}[language=CPlusPlus]
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2023
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
+#ifndef ___mfPreprocessorSettings___
+#define ___mfPreprocessorSettings___
+
+/*
+  This file groups several build-time setting that influence
+  code security and speed, as well as a couple of facilities
+*/
+
+//______________________________________________________________________________
+// uncomment the following definition if no exceptions display is desired
+#define MF_CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
+
+//______________________________________________________________________________
+// comment the following definition if abort on internal errors is desired
+// CAUTION: DON'T USE THIS IN PRODUCTION CODE,
+// since that could kill a session on a web server, for example
+#define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+
+//______________________________________________________________________________
+// uncomment the following definition if abort on internal errors is desired
+#define MF_SANITY_CHECKS_ARE_ENABLED
+
+//______________________________________________________________________________
+// uncomment the following definition if harmonies extra options are desired
+#define MF_HARMONIES_EXTRA_IS_ENABLED
+
+  #include "oahHarmoniesExtraOah.h"
+
+//______________________________________________________________________________
+// comment the following definition if no trace is desired
+#define MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  #include "mfTraceOah.h"
+#endif // MF_TRACE_IS_ENABLED
+
+
+#endif // ___mfPreprocessorSettings___
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Useful options}
+% -------------------------------------------------------------------------
+
+Here are the most basing options used when debugging:
+\begin{itemize}
+\item \optionBoth{trace-passes}{tpasses}
+	this is the first option to use, to locate in which pass the problem arises
+
+\item \optionBoth{input-line-numbers}{iln}
+	this option produces the music elements input-line numbers in the output files
+
+\item the \optionName{display*} options
+
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{Removing the results of a build}
+% -------------------------------------------------------------------------
+
+The contents of \distrib\ after a build is:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > ll build/
+total 80
+ 0 drwxr-xr-x  10 jacquesmenu  staff    320 May  2 18:18:50 2022 ./
+ 0 drwxr-xr-x  39 jacquesmenu  staff   1248 May  2 18:18:51 2022 ../
+16 -rw-r--r--@  1 jacquesmenu  staff   6148 May  2 15:45:10 2022 .DS_Store
+ 8 -rw-r--r--@  1 jacquesmenu  staff   1815 Jun 29 09:10:50 2021 Building.md
+32 -rw-r--r--   1 jacquesmenu  staff  14849 May  2 18:18:50 2022 CMakeLists.txt
+ 8 -rw-r--r--   1 jacquesmenu  staff    291 Jun 29 09:10:50 2021 MakePkg.bat
+16 -rw-r--r--   1 jacquesmenu  staff   7463 May  2 18:18:50 2022 Makefile
+ 0 drwxr-xr-x@ 27 jacquesmenu  staff    864 May  2 18:21:17 2022 bin/
+ 0 drwxr-xr-x@  7 jacquesmenu  staff    224 May  2 18:21:11 2022 lib/
+ 0 drwxr-xr-x  12 jacquesmenu  staff    384 May  2 18:19:25 2022 libdir/
+\end{lstlisting}
+
+The built files are in \distrib{bin}, \distrib{lib} and \distrib{libdir}. There is no \code{clean} target in \Makefile. They can be removed in a single step with this alias:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > type rmbuild
+rmbuild is aliased to `cd ${MUSIC_FORMATS_DEV}/build ; rm -r bin lib libdir; ls -sal'
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Reverting to a previous MusicFormats version}
+% -------------------------------------------------------------------------
+
+The \github\ \mf\ \repo\ keeps a number of recents releases, such as:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git branch
+* master
+  v0.9.60
+  v0.9.61
+  v0.9.62
+\end{lstlisting}
+
+Then \code{master} branch contains the development version. To switch back to another version, one should check it out:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git checkout v0.9.61
+Switched to branch 'v0.9.61'
+Your branch is up to date with 'master/v0.9.61'.
+jacquesmenu@macmini: ~/musicformats-git-dev > git branch
+  master
+  v0.9.60
+* v0.9.61
+  v0.9.62
+\end{lstlisting}
+
+Now building this version with \code{make}, we get:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/build > xml2ly -version
+Command line version of musicxml2lilypond converter v0.9.61 (March 3, 2022)
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\chapter{Locating a bug with Git's bisection}
+% -------------------------------------------------------------------------
+
+A bug appeared in v0.9.63, in which the \optionNameBoth{display-lpsr-short}{dlpsrshort} option causes \xmlToLy\ to crash.
+The symptom varies with the \OS, pointing to a probable memory corruption.
+
+Reverting to \mf\ previous versions show that:
+\begin{itemize}
+\item v0.9.60 behaves alright;
+\item v0.9.61 exhibits the bug:
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/Desktop > lldb -- xml2ly  fullbarrests/MeasureRestWithoutBarLine.xml -display-lpsr-short -aofn
+(lldb) target create "xml2ly"
+Current executable set to 'xml2ly' (x86_64).
+(lldb) settings set -- target.run-args  "fullbarrests/MeasureRestWithoutBarLine.xml" "-display-lpsr" "-aofn"
+(lldb) r
+Process 28676 launched: '/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2ly' (x86_64)
+        The measure with ordinal number 3 is now registered with a duration of 1/1 in part Part_POne (partID "P1", partName "Soprano"), fPartMeasuresWholeNotessVector.size () = 2
+        The measure with ordinal number 4 is now registered with a duration of 1/1 in part Part_POne (partID "P1", partName "Soprano"), fPartMeasuresWholeNotessVector.size () = 2
+%--------------------------------------------------------------
+  Pass (ptional): displaying the LPSR as text
+%--------------------------------------------------------------
+
+... ... ...
+
+    [PartGroup "PartGroup_1 ('0', fPartGroupName "Implicit")" (1 part), line 0
+      fPartGroupName            : "Implicit"
+
+Process 28676 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x1)
+    frame #0: 0x00000001007b879a xml2ly`MusicFormats::msrPartGroup::print (this=0x0000600003e08100, os=0x000000010ca04650) const at msrPartGroups.cpp:1185:13
+   1182	      i      = iBegin;
+   1183
+   1184	    for ( ; ; ) {
+-> 1185	      os << (*i);
+   1186	      if (++i == iEnd) break;
+   1187	      os << std::endl;
+   1188	    } // for
+Target 0: (xml2ly) stopped.
+(lldb)
+\end{lstlisting}
+
+\end{itemize}
+
+This bug has thus been introduced between v0.9.60 and v0.9.61.
+Three have been several \code{git push} occurrences leading from v0.9.60 to v0.9.61.
+
+
+% -------------------------------------------------------------------------
+\section{Locating a bug at random in the Git log}
+% -------------------------------------------------------------------------
+
+\git\ provides various ways to display the commits history of the \repo\ through \code{git log} options, for example:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git log --pretty=format:"%h - %ad : %s"
+ea338fd - Tue May 3 10:09:04 2022 +0200 : Complement to the Makefile
+083db8a - Tue May 3 07:43:09 2022 +0200 : Before reverting to v0.9.60
+12b6d93 - Mon May 2 09:41:37 2022 +0200 : Prior to bisecting
+03d98be - Tue Apr 26 11:15:23 2022 +0200 : Finalized sone trace options
+3dd7b72 - Tue Apr 26 10:10:38 2022 +0200 : Finalized sone trace options
+7f7507c - Thu Apr 14 17:01:14 2022 +0200 : Finalized MFSL symtax and semantics, fixed a couple of issues
+06109d3 - Thu Apr 14 17:00:50 2022 +0200 : Finalized MFSL symtax and semantics, fixed a couple of issues
+62aa64c - Thu Apr 7 07:18:44 2022 +0200 : v0.9.62
+671ffa4 - Thu Apr 7 06:26:34 2022 +0200 : Pre v0.9.62
+bf9eb63 - Wed Apr 6 23:42:44 2022 +0200 : Pre v0.9.62
+db4397c - Wed Apr 6 22:14:43 2022 +0200 : Pre v0.9.62
+9a80b24 - Mon Apr 4 13:06:12 2022 +0200 : Added MFSL (MusicFormats Script Language)
+2ef1150 - Mon Apr 4 12:07:07 2022 +0200 : Added MFSL (MusicFormats Script Language)
+3f56d52 - Tue Mar 29 16:34:23 2022 +0200 : Added MFSL (MusicFormats Script Language)
+fc1ea21 - Tue Mar 29 08:58:34 2022 +0200 : Added MFSL (MusicFormats Script Language)
+737b996 - Mon Mar 28 23:42:03 2022 +0200 : Added MFSL (MusicFormats Script Language)
+8c91155 - Sat Mar 26 08:35:55 2022 +0100 : Added MFSL (MusicFormats Script Language)
+fc68a93 - Fri Mar 18 15:11:19 2022 +0100 : Added MFSL (MusicFormats Script Language)
+01430a9 - Fri Mar 18 15:11:12 2022 +0100 : Added MFSL (MusicFormats Script Language)
+4082813 - Thu Mar 17 18:50:02 2022 +0100 : Added MFSL (MusicFormats Script Language)
+2696628 - Sun Mar 13 00:48:05 2022 +0100 : Added MFSL (MusicFormats Script Language)
+a828231 - Thu Mar 10 14:28:11 2022 +0100 : Added MFSL (MusicFormats Script Language)
+bf04937 - Wed Mar 9 12:53:17 2022 +0100 : Added MFSL (MusicFormats Script Language)
+a855ee4 - Tue Mar 8 16:39:28 2022 +0100 : Added MFSL (MusicFormats Script Language)
+b636816 - Mon Mar 7 14:49:54 2022 +0100 : Added MFSL (MusicFormats Script Language)
+ecd5eaa - Sun Mar 6 00:11:05 2022 +0100 : Added 'keep-msr-voice, kmv' option
+ec1c8ef - Sat Mar 5 08:48:39 2022 +0100 : Added 'ignore-msr-voice, imv' option
+8246467 - Thu Mar 3 16:11:37 2022 +0100 : v0.9.61
+603e19c - Thu Mar 3 13:43:48 2022 +0100 : Switched from C++11 to C++17 for <filesystem>
+77d3d29 - Thu Mar 3 07:56:00 2022 +0100 : Switched from C++11 to C++17 for <filesystem>
+a880063 - Thu Mar 3 07:44:08 2022 +0100 : Switched from C++11 to C++17 for <filesystem>
+38b584f - Wed Mar 2 12:44:22 2022 +0100 : Switched from C++11 to C++17 for <filesystem>
+662454a - Tue Mar 1 17:14:47 2022 +0100 : Pre-v0.9.61
+2cb4d5f - Mon Feb 28 11:53:04 2022 +0100 : Renamed some documentation folders and files
+c7839a8 - Mon Feb 28 09:56:46 2022 +0100 : Renamed some documentation folders and files
+0e85f99 - Mon Feb 28 09:06:16 2022 +0100 : Renames some documentation folders and files
+c5a43d9 - Fri Feb 25 17:48:29 2022 +0100 : Finalized files/musicxmlfiles/Makefile
+21e3898 - Thu Feb 24 21:54:28 2022 +0100 : Added '-replicate-msr-measure'  option
+9738598 - Thu Feb 24 21:53:00 2022 +0100 : Added '-replicate-msr-measure'  option
+ae751c3 - Mon Feb 21 09:58:35 2022 +0100 : Added various options
+f2d2f57 - Sat Feb 19 08:09:02 2022 +0100 : Workflow to publish Mac OS release
+ac5ad6b - Sat Feb 19 08:00:57 2022 +0100 : Initializa npm package
+29de34d - Fri Feb 18 11:00:42 2022 +0100 : v0.9.60
+7c067d6 - Fri Feb 18 10:56:17 2022 +0100 : v0.9.60
+5e3ba90 - Fri Feb 18 09:57:50 2022 +0100 : Pre v0.9.60
+dfeb7be - Fri Feb 18 09:56:07 2022 +0100 : Pre v0.9.60
+c31dde3 - Wed Feb 16 11:50:42 2022 +0100 : Updates to the make and cmake configuration
+fd6fef0 - Wed Feb 16 09:45:44 2022 +0100 : Complements to the installation doc
+b7ad2af - Tue Feb 15 17:40:53 2022 +0100 : Distrib test 17
+50a904c - Tue Feb 15 17:37:53 2022 +0100 : Distrib test 16
+cf65bd3 - Tue Feb 15 08:41:14 2022 +0100 : Distrib test 15
+9cda15e - Tue Feb 15 08:38:57 2022 +0100 : Distrib test 14
+74a2b7f - Tue Feb 15 08:30:21 2022 +0100 : Distrib test 13
+ee011e9 - Mon Feb 14 15:06:59 2022 +0100 : Distrib test 13
+4d6f9cb - Mon Feb 14 08:54:23 2022 +0100 : Distrib test 12
+7692b7b - Mon Feb 14 08:52:50 2022 +0100 : Distrib test 12
+d9e943d - Sat Feb 12 09:30:45 2022 +0100 : Distrib test 11
+3dde810 - Sat Feb 12 09:29:51 2022 +0100 : Distrib test 11
+f07b02a - Fri Feb 11 17:55:34 2022 +0100 : Distrib test 10
+5113824 - Fri Feb 11 16:47:17 2022 +0100 : Distrib test 9
+7f0fa8e - Fri Feb 11 16:45:21 2022 +0100 : Distrib test 8
+93f72f4 - Fri Feb 11 16:32:33 2022 +0100 : Distrib test 6
+121aa64 - Fri Feb 11 14:35:38 2022 +0100 : Distrib test 5
+547556f - Fri Feb 11 11:30:17 2022 +0100 : Creation of MusicFormats repository
+\end{lstlisting}
+
+One can pick one of the commits, revert to it and check wether the bug is present in it.
+
+
+% -------------------------------------------------------------------------
+\section{Locating a bug in the commits with Git's bisection}
+% -------------------------------------------------------------------------
+
+Locating the particular push that introduced the bug can be facilitated by \git 's \MainIt{bisect} facility.
+Here is how it works:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git bisect start
+
+jacquesmenu@macmini: ~/musicformats-git-dev > git bisect good v0.9.60
+
+jacquesmenu@macmini: ~/musicformats-git-dev > git bisect bad v0.9.61
+Bisecting: 7 revisions left to test after this (roughly 3 steps)
+[0e85f994ab00ea2dd94ddcb1895cbae5a32f072a] Renames some documentation folders and files
+
+jacquesmenu@macmini: ~/musicformats-git-dev > git branch
+* (no branch, bisect started on v0.9.61)
+  master
+  v0.9.60
+  v0.9.61
+  v0.9.62
+\end{lstlisting}
+
+The bisection proposes commit \code{0e85f994ab00ea2dd94ddcb1895cbae5a32f072a} as a middle point between v0.9.60 and v0.9.61.
+So let us check it out:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git checkout 0e85f994ab00ea2dd94ddcb1895cbae5a32f072a
+HEAD is now at 0e85f99 Renames some documentation folders and files
+
+jacquesmenu@macmini: ~/musicformats-git-dev > git branch
+* (no branch, bisect started on v0.9.61)
+  master
+  v0.9.60
+  v0.9.61
+  v0.9.62
+\end{lstlisting}
+
+Then, building this intermediate development version leads to:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/build > make
+make macos
+cd libdir && cmake .. -G Xcode   -Wno-dev
+-- VERSION: v0.9.61
+
+-- Configuring version v0
+.v9
+.v61
+
+... ... ...
+
+/Users/jacquesmenu/musicformats-git-dev/src/components/mfcLibraryComponent.cpp:12:10: fatal error:
+      '../../../MusicFormatsVersionNumber.h' file not found
+#include "../../../MusicFormatsVersionNumber.h"
+         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+
+... ... ...
+
+** BUILD FAILED **
+\end{lstlisting}
+
+Well, this dev version had been pushed to have new files and/or contents saved on the \mf\ \repo\ \dots and we should try other commits around it.
+
+A first possibility is to use \code{git bisect skip}, that moves to :
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git bisect skip
+Bisecting: 7 revisions left to test after this (roughly 3 steps)
+[c7839a87549660963a8b1ef0898d5cbcce8305aa] Renamed some documentation folders and files
+\end{lstlisting}
+
+Checking commit c7839a87549660963a8b1ef0898d5cbcce8305aa out, we get:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git checkout c7839a87549660963a8b1ef0898d5cbcce8305aa
+HEAD is now at c7839a8 Renamed some documentation folders and files
+\end{lstlisting}
+
+Building that leads to the same error as above. Let us skip one again:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git bisect skip
+Bisecting: 7 revisions left to test after this (roughly 3 steps)
+[a880063c134a7ba49b31f5fb52b47f682058f64a] Switched from C++11 to C++17 for <filesystem>
+\end{lstlisting}
+
+It turns out the commit \code{a880063c134a7ba49b31f5fb52b47f682058f64a} does not build either. Let us skip to the next commit:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git bisect skip
+Bisecting: 7 revisions left to test after this (roughly 3 steps)
+[2cb4d5f2133d34a19fea8f47d9ed2ccfb24d0fad] Renamed some documentation folders and files
+
+jacquesmenu@macmini: ~/musicformats-git-dev > git checkout 2cb4d5f2133d34a19fea8f47d9ed2ccfb24d0fad
+HEAD is now at 2cb4d5f Renamed some documentation folders and files
+\end{lstlisting}
+
+Here the code base builds alright, and bug does not show up, so we should continue skipping.
+
+
+% -------------------------------------------------------------------------
+\section{Locating the bug in the code base}
+% -------------------------------------------------------------------------
+
+The bug we're after is found to have been introduced at this point:
+\begin{itemize}
+\item commit \code{2cb4d5f}, does not exhibit the bug;
+\item the next one, commit \code{662454a}, does.
+\end{itemize}
+
+The changes brought by commit \code{} can be shown with: %%% git show 662454a   git show --stat 662454a
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git log --patch -1 662454a > patch_662454a.txt
+
+jacquesmenu@macmini: ~/musicformats-git-dev > ls -sal patch_662454a.txt
+256 -rw-r--r--@ 1 jacquesmenu  staff  80782 May  4 10:59 patch_662454a.txt
+\end{lstlisting}
+
+The bug shows up with \mfFiles{musicxmlfiles/fullbarrests/MeasureRestWithoutBarLine.xml}, but not with others such as \mfFiles{musicxmlfiles/multistaff/SATBExample.xml}.
+
+Analysing the patch description in \fileName{patch_662454a.txt}, we find that nothing in the differences between those two successive patches can explain  the crash. The problem thus lies elsewhere\dots
+
+%%%JMI
+
+

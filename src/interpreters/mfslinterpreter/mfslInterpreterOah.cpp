@@ -72,7 +72,7 @@ void mfslInterpreterOahGroup::initializeMfslInterpreterOahGroup ()
 }
 //     void                  initializeMfslUserOptions ();
 //
-//     void                  initializeMfslMaintenanceOptions ();
+//     void                  initializeMfslMaintainanceOptions ();
 
 void mfslInterpreterOahGroup::initializeMfslOptions ()
 {

@@ -353,6 +353,17 @@ endif ()
 
 
 #===============================================================
+# documentation
+#===============================================================
+
+set (MUSICFORMATS_DOC_DIR ${ROOT_DIR}/documentation)
+message (STATUS "-----> MUSICFORMATS_DOC_DIR: ${MUSICFORMATS_DOC_DIR}")
+
+set (MUSICFORMATS_PDF_DOCS IntroductionToMusicXML/IntroductionToMusicXML.pdf libmusicxml2Presentation/libmusicxml2.pdf mfuserguide/MusicFormatsUserGuide.pdf mfmaintenanceguide/MusicFormatsMaintanceGuide.pdf mfapiguide/MusicFormatsAPIGuide.pdf   )
+message (STATUS "-----> MUSICFORMATS_PDF_DOCS: ${MUSICFORMATS_PDF_DOCS}")
+
+
+#===============================================================
 # set sample targets
 #===============================================================
 
@@ -400,7 +411,7 @@ if (PACK)
 	set (CMAKE_INSTALL_PREFIX .)
 endif ()
 
-set (DOCDIR  ${CMAKE_INSTALL_PREFIX}/share/libmusicformats)
+set (INSTALL_DOC_DIR  ${CMAKE_INSTALL_PREFIX}/share/libmusicformats)
 
 if (APPLE)
   set (BINDEST bin)
@@ -408,7 +419,7 @@ if (APPLE)
 elseif (WIN32)
   set (BINDEST bin)
   set (LIBDEST bin)
-  set (DOCDIR  .)
+  set (INSTALL_DOC_DIR  .)
 else ()
   set (LIBDEST lib)
   set (BINDEST bin)
@@ -456,7 +467,7 @@ if (NOT IOS)
   #===============================================================
 
   install (
-      DIRECTORY ${MXML_SCHEMAS_DIR} DESTINATION ${DOCDIR}/schema
+      DIRECTORY ${MXML_SCHEMAS_DIR} DESTINATION ${INSTALL_DOC_DIR}/schema
       FILE_PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
       DIRECTORY_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE
@@ -464,7 +475,7 @@ if (NOT IOS)
   )
 
   install (
-      FILES ${LXML_DOC} DESTINATION ${DOCDIR}/doc
+      FILES ${LXML_DOC} DESTINATION ${INSTALL_DOC_DIR}/doc
       PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
   )
 

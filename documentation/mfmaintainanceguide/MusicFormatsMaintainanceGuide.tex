@@ -1,0 +1,460 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% MusicFormats maintainance guide
+
+\documentclass[11pt,a4paper]{report}
+
+
+% -------------------------------------------------------------------------
+% import common LaTeX settings
+% -------------------------------------------------------------------------
+
+\usepackage{import}
+
+
+\subimport{../mflatexlib}{mflatexlibCommonSettings.tex} 
+
+\subimport{../mflatexlib}{mflatexlibDivisionsCommands.tex}
+
+\subimport{../mflatexlib}{mflatexlibIndexing.tex}
+
+\subimport{../mflatexlib}{mflatexlibFontsAndColors.tex}
+
+\subimport{../mflatexlib}{mflatexlibReferencing.tex}
+
+\subimport{../mflatexlib}{mflatexlibBoxes.tex}
+
+\subimport{../mflatexlib}{mflatexlibGraphicsAndPictures.tex}
+
+\subimport{../mflatexlib}{mflatexlibMusicFormatsCommands.tex}
+
+\subimport{../mflatexlib}{mflatexlibMusicFormatsFilesAndFolders.tex}
+
+\subimport{../mflatexlib}{mflatexlibMusicFormatsNames.tex}
+
+\subimport{../mflatexlib}{mflatexlibShortcuts.tex}
+
+\subimport{../mflatexlib}{mflatexlibListings.tex}
+
+\subimport{../mflatexlib}{mflatexlibTablesAndLists.tex}
+
+
+% -------------------------------------------------------------------------
+% indexing (specific to this document)
+% -------------------------------------------------------------------------
+
+\makeindex[name=Main, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Main index, intoc]
+%\makeindex[columns=2, title=Index, intoc]
+% typically, \printindex is placed at the end of the document
+% https://mirror.foobar.to/CTAN/macros/latex/contrib/imakeidx/imakeidx.pdf
+% https://fr.overleaf.com/learn/latex/Indices
+% https://fr.overleaf.com/learn/latex/Indices#Reference_guide
+
+% JMI don't create too many indexes, this causes idxlayout not to produce any indexes at all!
+
+\makeindex[name=Files, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Files index, intoc]
+
+\makeindex[name=Types, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Types index, intoc]
+
+\makeindex[name=MethodsAndFields, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Methods and fields index, intoc]
+
+\makeindex[name=ConstantsFunctionsAndVariables, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title={Constants, functions and variables index}, intoc]
+
+\makeindex[name=Options, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Options, intoc]
+
+\makeindex[name=MusicXML, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=MusicXML index, intoc]
+
+\indexsetup{level=\section}
+
+
+%\usepackage{cleveref}
+	% http://tug.ctan.org/tex-archive/macros/latex/contrib/cleveref/cleveref.pdf
+
+
+% -------------------------------------------------------------------------
+\begin{document}
+% -------------------------------------------------------------------------
+
+\useFirstPageHeadersAndFooters
+
+% defeat headwidth not being equal to \textwidth %%%JMI should not be necessary ???
+\setlength{\headwidth}{\textwidth}
+
+% use the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
+
+
+\begin{titlepage}
+  \begin{center}
+    \vspace*{2cm}
+
+    \textbf{
+      \LARGE{\mf\ maintainance guide} \\[10pt]
+			\Large{\url{https://github.com/jacques-menu/musicformats}}
+			}
+
+    \vspace{0.25cm}
+
+    \large{
+    	\input{../../MusicFormatsVersionNumber.txt}%
+			-- %
+    	\input{../../MusicFormatsVersionDate.txt}
+		}
+
+    \vspace{0.75cm}
+
+    \large{\textbf{Jacques Menu}}
+
+  \end{center}
+
+  \vspace{1cm}
+
+This document presents the internal working of \mf. It is part of the \mf\ documentation, to be found at \url{https://github.com/jacques-menu/musicformats/tree/dev/documentation}.
+
+\begin{center}
+\begin{turn}{1}
+\maxsizebox{0.9\linewidth}{5cm}{
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Terminal]
+void msrSegment::browseData (basevisitor* v)
+{
+	// ... ... ...
+
+  for (
+    std::list<S_msrMeasure>::const_iterator i = fSegmentElementsList.begin ();
+    i != fSegmentElementsList.end ();
+    ++i
+  ) {
+    // browse the element
+    msrBrowser<msrMeasure> browser (v);
+    browser.browse (*(*i));
+  } // for
+
+	// ... ... ...
+}\end{lstlisting} % no line break here
+\end{minipage}
+}
+\end{turn}
+
+    \vspace{1.5cm}
+
+\begin{turn}{-1}
+\maxsizebox{0.9\linewidth}{5cm}{
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Terminal]
+void msr2msrTranslator::visitStart (S_msrClef& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+		std::stringstream ss;
+
+    ss <<
+      "--> Start visiting msrClef" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fCurrentVoiceClone->
+    appendClefToVoice (elt);
+}\end{lstlisting} % no line break here
+\end{minipage}
+}
+\end{turn}
+
+  \vfill
+
+  \end{center}
+\end{titlepage}
+
+{
+	% reduce font size for tables and lists
+	\small
+
+	% reduce vertical size of tables and lists
+  \setlength {\parskip} {0.3ex plus \baselineskip minus 2pt}
+
+  \listoffigures
+
+  \lstlistoflistings
+
+  \tableofcontents
+}
+
+
+% -------------------------------------------------------------------------
+\part{Overview of MusicFormats}
+% -------------------------------------------------------------------------
+
+
+% now we can switch to the regular headers and footers
+\useRegularPagesHeadersAndFooters
+
+
+\subimport{./}{mfmaintainanceguideIntroduction.tex}
+
+\subimport{./}{mfmaintainanceguideDocumentation.tex}
+
+\subimport{./}{mfmaintainanceguideBuildingMusicFormats.tex}
+
+\subimport{./}{mfmaintainanceguideCodeBaseStructure.tex}
+
+\subimport{./}{mfmaintainanceguideComponents.tex}
+
+\subimport{./}{mfmaintainanceguideClisamples.tex}
+
+\subimport{./}{mfmaintainanceguideWAE.tex}
+
+\subimport{./}{mfmaintainanceguideTraceFacility.tex}
+
+\subimport{./}{mfmaintainanceguideMultiLingualSupport.tex}
+
+\subimport{./}{mfmaintainanceguideTextualInputAndOutput.tex}
+
+\subimport{./}{mfmaintainanceguideBinaryDataOutput.tex}
+
+\subimport{./}{mfmaintainanceguideCPUMeasurements.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Programming style and conventions}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideProgrammingStyleAndConventions.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Maintainance tools}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideMaintainanceTools.tex}
+
+
+% -------------------------------------------------------------------------
+\part{The two-phase visitors pattern}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideTwoPhaseVisitorsPattern.tex}
+
+
+% -------------------------------------------------------------------------
+\part{MusicFormats components}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideMFC.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Options and help}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideOAH.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Representations}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideRepresentationsGeneralPrinciples.tex}
+
+\subimport{./}{mfmaintainanceguideDisplayingRepresentations.tex}
+
+\subimport{./}{mfmaintainanceguideMSR.tex}
+
+\subimport{./}{mfmaintainanceguideMsrTimeOrientedRepresentation.tex}
+
+\subimport{./}{mfmaintainanceguidePathToVoice.tex}
+
+\subimport{./}{mfmaintainanceguideLPSR.tex}
+
+\subimport{./}{mfmaintainanceguideBSR.tex}
+
+\subimport{./}{mfmaintainanceguideMXSR.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Passes}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguidePasses.tex}
+
+\subimport{./}{mfmaintainanceguideLilypondGeneration.tex}
+
+\subimport{./}{mfmaintainanceguideBrailleGeneration.tex}
+
+\subimport{./}{mfmaintainanceguideMusicxmlGeneration.tex}
+
+\subimport{./}{mfmaintainanceguideGuidoGeneration.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Generators}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideGenerators.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Converters}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideConverters.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Interfaces}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideLibraryInterfaces.tex}
+
+\subimport{./}{mfmaintainanceguideRepresentationsInterfaces.tex}
+
+\subimport{./}{mfmaintainanceguidePassesInterfaces.tex}
+
+\subimport{./}{mfmaintainanceguideConvertersInterfaces.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Releases}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideCreatingReleases.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Selected topics}
+% -------------------------------------------------------------------------
+
+% initializations
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideInitializations.tex}
+
+
+% the OAH atoms collection
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideTheOAHAtomsCollection.tex}
+
+
+% MSR
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideMeasuresHandling.tex}
+
+\subimport{./}{mfmaintainanceguideFinalizations.tex}
+
+\subimport{./}{mfmaintainanceguideTemposHandling.tex}
+
+\subimport{./}{mfmaintainanceguideNotesHandling.tex}
+
+\subimport{./}{mfmaintainanceguideSegmentsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideBeatRepeatsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideMeasureRepeatsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideMultiMeasureRestsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideRepeatsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideVoicesHandling.tex}
+
+\subimport{./}{mfmaintainanceguideStavesHandling.tex}
+
+\subimport{./}{mfmaintainanceguidePartsHandling.tex}
+
+\subimport{./}{mfmaintainanceguidePartGroupsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideScoresHandling.tex}
+
+\subimport{./}{mfmaintainanceguideBooksHandling.tex}
+
+\subimport{./}{mfmaintainanceguideOrnamentsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideTiesHandling.tex}
+
+\subimport{./}{mfmaintainanceguideDynamicsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideBeamsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideSlursHandling.tex}
+
+\subimport{./}{mfmaintainanceguideGraceNotesGroupsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideChordsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideTupletsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideHarmoniesHandling.tex}
+
+\subimport{./}{mfmaintainanceguideFiguredBassesHandling.tex}
+
+\subimport{./}{mfmaintainanceguideLyricsHandling.tex}
+
+\subimport{./}{mfmaintainanceguideMIDIHandling.tex}
+
+
+% -------------------------------------------------------------------------
+\part{MusicFormats Scripting Language (MFSL)}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideMFSL.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Music Scores Description Language (MSDL)}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideMSDL.tex}
+
+
+% -------------------------------------------------------------------------
+\part{Debugging}
+% -------------------------------------------------------------------------
+
+\subimport{./}{mfmaintainanceguideDebugging.tex}
+
+
+% -------------------------------------------------------------------------
+% postamble
+% -------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------
+\part{Indexes}
+% -------------------------------------------------------------------------
+
+%%%JMI There are several thematic indexes apart from the main, alphabetical one, to provide rich cross-indexing in this document.
+
+% back to the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
+
+\printindex[Files]
+
+\printindex[Types]
+\printindex[MethodsAndFields]
+
+\printindex[ConstantsFunctionsAndVariables]
+
+\printindex[Options]
+
+\printindex[MusicXML]
+
+\printindex[Main]
+
+
+% -------------------------------------------------------------------------
+\end{document}
+% -------------------------------------------------------------------------

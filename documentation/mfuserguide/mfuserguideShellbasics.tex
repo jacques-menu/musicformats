@@ -1,0 +1,438 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfuserguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Shell basics}
+% -------------------------------------------------------------------------
+
+Since this document is about using \mf\ from the \CLI\ by musicians, let's start by a short presentation of shell usage. This chapter can be skipped of course by shell-savvy users.
+
+A \shell\ is an application that reads commands and executes them. In the early ages of physical \MainIt{terminal}s, they were typically typed on a keyboard. With \GUI\ nowadays, they can be typed in a so-called terminal window.
+A
+
+The syntax of shell commands is meant to be simple, without complex structuring features such as those found in programming languages.
+
+A number of shells have been used over the years. Most of the ones used at the time of this writing belong to the \code{sh} family, among then \bash\ and \zsh\ (\code{zsh}). \\
+The commands we use in this document can be run on any shell in this family.
+
+A shell maintains a so-called {\it \currentWorkingDirectory}, which a directory in the files system.
+
+A so-called \MainIt{prompt} is displayed by a shell when is it ready to read a command and execute it. This document uses two kinds of prompts:
+\begin{itemize}
+\item one contains only the user name and machine name, such as:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~ >
+\end{lstlisting}
+
+\item the other one displays the \currentWorkingDirectory: it is used when the latter has to be set at a specific value for the command:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles >
+\end{lstlisting}
+
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{Basic shell builtins}
+% -------------------------------------------------------------------------
+
+Many builtins have very short names for ease of interactive use. Many vowels were left out to minimize typing. For example, there are:
+\begin{itemize}
+\item \code{pwd} to show the \currentWorkingDirectory;
+\item \code{cd} to change directory;
+\item \code{echo} to produce output in the terminal window.
+\end{itemize}
+
+When a shell is launched, a directory is selected as the \currentWorkingDirectory, usually the user's \MainIt{home directory}.
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~ > pwd
+/Users/jacquesmenu
+
+jacquesmenu@macmini: ~ > cd musicformats-git-dev
+
+jacquesmenu@macmini: ~/musicformats-git-dev > pwd
+/Users/jacquesmenu/musicformats-git-dev
+jacquesmenu@macmini: ~/musicformats-git-dev >
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Commands}
+% -------------------------------------------------------------------------
+
+A command name is either provided by the shell itself, a so-called \MainIt{builtin}, or the name of a piece of software that can be executed.
+
+In this example, the command name is xml2lyy:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2lyy +sdf 45
+-bash: xml2lyy: command not found
+\end{lstlisting}
+
+The shell can be queried about a command name:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > type cd
+cd is a shell builtin
+
+jacquesmenu@macmini > type xml2lyy
+-bash: type: xml2lyy: not found
+
+jacquesmenu@macmini > type xml2ly
+xml2ly is hashed (/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2ly)
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Obtaining help about the shell commands}
+% -------------------------------------------------------------------------
+
+The \code{man} command (Manual page) can be used for that:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > man
+What manual page do you want?
+\end{lstlisting}
+
+It can be used to obtain help about itself, too:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > man man
+\end{lstlisting}
+
+produces:
+\begin{lstlisting}[language=Terminal]
+man(1)                                          General Commands Manual                                         man(1)
+
+NAME
+       man - format and display the on-line manual pages
+
+SYNOPSIS
+       man [-acdfFhkKtwW] [--path] [-m system] [-p std::string] [-C config_file] [-M pathlist] [-P pager] [-B browser] [-H
+       htmlpager] [-S section_list] [section] name ...
+
+DESCRIPTION
+       man formats and displays the on-line manual pages.  If you specify section, man only looks in that section of
+       the manual.  name is normally the name of the manual page, which is typically the name of a command, function,
+       or file.  However, if name contains a slash (/) then man interprets it as a file specification, so that you can
+       do man ./foo.5 or even man /cd/foo/bar.1.gz.
+
+       See below for a description of where man looks for the manual page files.
+
+... ...
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Multiple commands in a line}
+% -------------------------------------------------------------------------
+
+One can submit several commands in a single line,  separating them with a \code{;}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cd Clefs; ls -sal
+total 88
+ 0 drwxr-xr-x    8 jacquesmenu  staff    256 Feb 26 09:03 .
+ 0 drwxr-xr-x  108 jacquesmenu  staff   3456 Feb 25 07:46 ..
+16 -rw-r--r--@   1 jacquesmenu  staff   6148 Feb 26 00:23 .DS_Store
+ 8 -rw-r--r--    1 jacquesmenu  staff   3168 Feb 26 00:19 ClefChange.ly
+24 -rw-r--r--@   1 jacquesmenu  staff  12286 Jan  2 17:01 ClefChange.xml
+ 8 -rw-r--r--    1 jacquesmenu  staff   1662 Apr 22  2021 ClefChanges.xml
+ 8 -rw-r--r--    1 jacquesmenu  staff   3045 Feb 26 00:19 Clefs.ly
+24 -rw-r--r--@   1 jacquesmenu  staff   9120 Jan  2 17:02 Clefs.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/Clefs >
+\end{lstlisting}
+
+This is handy for interactive use, which avoids the use of multi-line commands, presented at \sectionRef{Multi-line commands}.
+
+
+% -------------------------------------------------------------------------
+\section{Paths}
+% -------------------------------------------------------------------------
+
+The files on a computer are organized as file-systems. A \fspath\ is a way to access a file on a file system:
+\begin{itemize}
+\item on \Unix\-like system, there is a single tree of so-called \MainIt{directories}, the root being named \code{/}. A sub-directory is preceded by \code{/} in the paths;
+
+\item on \Windows\ systems, there is a set of trees, their roots being the physical or virtual drives, such as \code{C:}. A \code{\textbackslash} is used to indicate a sub-directory.
+
+\item \code{.} is the \currentWorkingDirectory;
+
+\item \code{..} is the directory containing the \currentWorkingDirectory, i.e. one level up in the directories hierarchy;
+\end{itemize}
+
+This document uses \Unix\-like \path s.
+
+
+% -------------------------------------------------------------------------
+\section{Quoting, variables and aliases}\label{Quoting, variables and aliases}
+% -------------------------------------------------------------------------
+
+Shell commands are submitted as a sequence of words separated by spaces. If a word, such a file name, contains \MainIt{space}s, it has to be surrounded by \quotes\ or \doubleQuotes\ in order to be seen by the shell as a single word:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly Nice file.xml
+Several input file names supplied, only one can be used
+The arguments vector contains 2 elements:
+   0: "Nice"
+   1: "file.xml"
+
+jacquesmenu@macmini > xml2ly 'Nice file.xml'
+can't open file Nice file.xml
+### Conversion from MusicXML to LilyPond failed ###
+
+jacquesmenu@macmini > xml2ly "Nice file.xml"
+can't open file Nice file.xml
+### Conversion from MusicXML to LilyPond failed ###
+\end{lstlisting}
+
+Note that if a quote or double quote is part of word, the word should be inclosed by the other such:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -find "tuplet's"
+0 occurrence of string "tuplet's" has been found
+
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles >
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -find 'tuplet"s'
+0 occurrence of string "tuplet"s" has been found
+\end{lstlisting}
+
+A shell \MainIt{variable} is a name for a piece of text, called its \MainIt{value}, that can be used instead of that text in commands. The value of the variable can be seen in the terminal with the \code{echo} command:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > DOC_DIR=documentation
+
+jacquesmenu@macmini: ~/musicformats-git-dev > echo $DOC_DIR
+documentation
+\end{lstlisting}
+
+Variables can be used surrounded by curly brackets, too:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/documentation > echo ${DOC_DIR}
+documentation
+\end{lstlisting}
+This notation provides further possibilities such as string replacement, which are out of the scope of this document.
+
+Using variables is interesting when there are several uses of its value: changing the value at one place causing the new value to be used at every such use:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > ls $DOC_DIR
+CommonLaTeXFiles		mfuserguide	presentation
+IntroductionToMusicXML		mfmaintainanceguide
+mfapiguide	graphics
+
+jacquesmenu@macmini: ~/musicformats-git-dev > cd $DOC_DIR
+
+jacquesmenu@macmini: ~/musicformats-git-dev/documentation > pwd
+/Users/jacquesmenu/musicformats-git-dev/documentation
+\end{lstlisting}
+
+The difference between \quotes\ and \doubleQuotes\ is how variables are handled:
+\begin{itemize}
+\item the characters between quotes are used literally;
+\item variables occurring between \doubleQuotes\ are replaced by their value.
+\end{itemize}
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > DOC_DIR=documentation
+
+jacquesmenu@macmini: ~/musicformats-git-dev > cd '$DOC_DIR'
+-bash: cd: $DOC_DIR: No such file or directory
+
+jacquesmenu@macmini: ~/musicformats-git-dev > cd "$DOC_DIR"
+
+jacquesmenu@macmini: ~/musicformats-git-dev/documentation > pwd
+/Users/jacquesmenu/musicformats-git-dev/documentation
+\end{lstlisting}
+
+Here is an example combining quotes and \doubleQuotes:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > DOC_DIR=documentation
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > echo "DOC_DIR's value is: ${DOC_DIR}"
+DOC_DIR's value is: documentation
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Input/Output redirection and pipes}
+% -------------------------------------------------------------------------
+
+Shells can read commands from text files named \MainIt{script}s through \inputRedirection, \outputRedirection\ and \pipe s.
+%%%JMI
+
+
+% -------------------------------------------------------------------------
+\section{Functions}
+% -------------------------------------------------------------------------
+
+The shells allow the creation of \MainIt{functions}, that contain several commands under a single name. An example is \function{checkVersions}, which displays the versions of the main \mf\ \service s:
+\begin{lstlisting}[language=Terminal]
+function checkVersions ()
+{
+#  set -x
+
+  xml2ly -v
+  xml2brl -v
+  xml2xml -v
+  xml2gmn -v
+
+  Mikrokosmos3Wandering -v
+
+  msdlconverter -v
+#  set +x
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{MusicFormatsBashDefinitions.bash}
+% -------------------------------------------------------------------------
+
+\fileName{MusicFormatsBashDefinitions.bash} contains a set of variables, aliases and function definitions used by this author. One of them is \function{checkVersions} above.
+
+Feel free to use them, adapt them or ignore them depending on your taste.
+
+Some settings we use in this document are:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > type ll
+ll is a function
+ll ()
+{
+    ls -salGTF $*
+}
+\end{lstlisting}
+The options to \code{ls} may vary depending the on the \OS.
+
+% -------------------------------------------------------------------------
+\section{Scripts}
+% -------------------------------------------------------------------------
+
+A \shell\ script is a text file that can be executed using its name as a command. The first line tells which shell should be used to execute the commands in the remainder of the file, \code{sh} by default.
+
+This author uses scripts as the one below as handy interactive short-cuts. It groups commands to copy a \mxml\ file exported after scanning a PDF file to another file, convert the latter to \lily\ with \xmlToLy\ and open the result with \fresco\ to produce the PDF score:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > cat doBethena_SaxTenor.bash
+#/bin/bash
+
+cp -p Bethena_SaxTenor_original.xml Bethena_SaxTenor.xml
+
+xml2ly -include  Bethena_SaxTenor_OptionsAndArguments.txt
+
+open Bethena_SaxTenor.ly
+\end{lstlisting}
+
+After creating the script file, make it executable:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > chmod +x doBethena_SaxTenor.bash
+
+jacquesmenu@macmini > ls -sal doBethena_SaxTenor.bash
+8 -rwxr-xr-x@ 1 jacquesmenu  staff  154 Feb 20 07:46 doBethena_SaxTenor.bash
+\end{lstlisting}
+
+The script can then be executed with:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > ./doBethena_SaxTenor.bash
+\end{lstlisting}
+
+There is another script example at \sectionRef{Using the MFSL interpreter in shell scripts}.
+
+
+% -------------------------------------------------------------------------
+\section{Multi-line commands}\label{Multi-line commands}
+% -------------------------------------------------------------------------
+
+A command can be split into several lines if it is long or to enhance readability. A \code{\textbackslash} character is used for that:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2brl \
+> -trace-passes \
+> foo.xml
+
+%--------------------------------------------------------------
+  Handle the options and arguments from argc/argv
+%--------------------------------------------------------------
+This is xml2brl v0.9.51 (October 12, 2021) from MusicFormats v0.9.61 (February 18, 2022)
+Launching the conversion of "foo.xml" to Braille
+Time is Saturday 2022-02-26 @ 09:53:43 CET
+The command line is:
+  xml2brl -trace-passes foo.xml
+or with options long names:
+  xml2brl -trace-passes foo.xml
+or with options short names:
+   -tpasses foo.xml
+Braille will be written to standard output
+The command line options and arguments have been analyzed
+
+%--------------------------------------------------------------
+  Pass 1: Create an MXSR from a MusicXML file
+%--------------------------------------------------------------
+can't open file foo.xml
+### Conversion from MusicXML to Braille failed ###
+\end{lstlisting}
+
+This feature is most useful in scripts.
+
+
+% -------------------------------------------------------------------------
+\section{Some useful shell commands}
+% -------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------
+\subsection{{\tt for}}
+% -------------------------------------------------------------------------
+
+The \code{for} command is analoguous to the same in programming languages, with features specific to shell usage.
+
+For example, \mf\ comes with some \mxml\ files whose name contains '\code{Stanza}':
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/lyrics > for FILE in $(ls *Stanza*.xml); do echo ${FILE}; done
+MultipleStanzas.xml
+StanzaMaster.xml
+\end{lstlisting}
+
+They can be converted to \lily\ with this \code{for} command. Note the use of \code{\$(ls *Stanza*.xml)} to execute the \code{ls} command to obtain the files names to be handled:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/lyrics > for FILE in $(ls *Stanza*.xml); do echo "---> converting ${FILE} to LilyPond"; xml2ly -auto-output-file-name ${FILE}; done
+---> converting MultipleStanzas.xml to LilyPond
+---> converting StanzaMaster.xml to LilyPond
+\end{lstlisting}
+
+The resulting files are:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/lyrics > ls -sal *Stanza*.ly
+8 -rw-r--r--  1 jacquesmenu  staff  3659 Feb 26 10:38 MultipleStanzas.ly
+8 -rw-r--r--  1 jacquesmenu  staff  2236 Feb 26 10:38 StanzaMaster.ly
+\end{lstlisting}
+
+Such long \code{for} commands are not easy to type as a single line interactively.
+
+
+% -------------------------------------------------------------------------
+\subsection{{\tt find}}
+% -------------------------------------------------------------------------
+
+The \code{find} command looks for files in directory satisfying some criterion. One of them is a name pattern:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > find . -name *Mozart*.xml
+./xmlsamples3.1/MozartTrio.xml
+./challenging/MozartPianoSonata.xml
+./multistaff/MozartAnChloeK524Sample.xml
+./multistaff/MozartAdagioKV410.xml
+./multistaff/MozartSecondTrio.xml
+\end{lstlisting}
+
+\code{find} applies actions to the files that mach the criterion, \code{-print} by default. There are other actions, such as \code{-exec}.
+
+Each file found in turn is designated by '\code{\{\}}', and the command must be terminated by '\code{\textbackslash};':
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > find . -name *Mozart*.xml -exec ls -sal {} \;
+184 -rw-r--r--  1 jacquesmenu  staff  92127 Apr 22  2021 ./xmlsamples3.1/MozartTrio.xml
+56 -rw-r--r--@ 1 jacquesmenu  staff  25664 Apr 22  2021 ./challenging/MozartPianoSonata.xml
+152 -rw-r--r--  1 jacquesmenu  staff  76231 Apr 22  2021 ./multistaff/MozartAnChloeK524Sample.xml
+320 -rw-r--r--  1 jacquesmenu  staff  163503 Apr 22  2021 ./multistaff/MozartAdagioKV410.xml
+120 -rw-r--r--  1 jacquesmenu  staff  60833 Apr 22  2021 ./multistaff/MozartSecondTrio.xml
+\end{lstlisting}
+
+Note that, as can be seen above, \code{find} searches the whose set of files contained in its first argument, including in sub-directories.
+
+More informations is available with \code{man find}.

@@ -1,0 +1,297 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Documentation}
+% -------------------------------------------------------------------------
+
+The \mf\ documentation is written in \LaTeX, the pictures being created with the \tikzpgf\ package, see \url{https://www.bu.edu/math/2013/08/tikzpgfmanual.pdf}.
+
+All the \LaTeX\ files have an initial '\code{!~TEX root}' comment. This is a \texshop\ specific feature, allowing a documentation to be composed from any of the files that it imports, such as:
+\begin{lstlisting}[language=Latex]
+% !TEX root = mfmaintainanceguide.tex
+\end{lstlisting}
+
+The \directoryName{documentation} directory contains:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/documentation > ls -sal
+total 48
+ 0 drwxr-xr-x@  10 jacquesmenu  staff    320 Feb 28 07:42 .
+ 0 drwxr-xr-x   38 jacquesmenu  staff   1216 Feb 27 12:14 ..
+48 -rw-r--r--@   1 jacquesmenu  staff  22532 Feb 28 07:49 .DS_Store
+ 0 drwxr-xr-x   18 jacquesmenu  staff    576 Feb 28 08:27 CommonLaTeXFiles
+ 0 drwxr-xr-x   38 jacquesmenu  staff   1216 Feb 18 08:39 IntroductionToMusicXML
+ 0 drwxr-xr-x   57 jacquesmenu  staff   1824 Feb 28 10:08 mfapiguide
+ 0 drwxr-xr-x  116 jacquesmenu  staff   3712 Feb 28 10:22 mfmaintainanceguide
+ 0 drwxr-xr-x   53 jacquesmenu  staff   1696 Feb 28 10:07 mfuserguide
+ 0 drwxr-xr-x   27 jacquesmenu  staff    864 Feb 14 08:54 graphics
+ 0 drwxr-xr-x    5 jacquesmenu  staff    160 Jan 23 16:33 presentation
+\end{lstlisting}
+
+The \directoryName{CommonLaTeXFiles} directory contains \LaTeX\ settings used by the various documentation files and the code for pictures:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini:~/musicformats-git-dev/documentation/CommonLaTeXFiles > ls -sal *.tex
+ 8 -rwxr--r--@  1 jacquesmenu  staff    241 Aug 17 14:21 CreateMSRScoreRepresentation.zsh
+ 8 -rw-r--r--   1 jacquesmenu  staff    507 Jun 28 20:52 LaTeXBoxes.tex
+16 -rw-r--r--   1 jacquesmenu  staff   6494 Jun 28 20:52 LaTeXCommonSettings.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1907 Jun 28 20:52 LaTeXDivisionsCommands.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff    957 Jun 28 20:52 LaTeXFontsAndColors.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff    604 Jun 28 20:52 LaTeXGraphicsAndPictures.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1128 Jun 28 20:52 LaTeXIndexing.tex
+24 -rw-r--r--   1 jacquesmenu  staff  10728 Jun 28 20:52 LaTeXListings.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1527 Jun 28 20:52 LaTeXMusicFormatsCommands.tex
+24 -rw-r--r--   1 jacquesmenu  staff  11735 Aug 14 16:50 LaTeXMusicFormatsFilesAndFolders.tex
+ 8 -rw-r--r--@  1 jacquesmenu  staff   2151 Jun 28 20:52 LaTeXMusicFormatsNames.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff    441 Jun 28 20:52 LaTeXMusicNotation.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1535 Jun 28 20:52 LaTeXReferencing.tex
+32 -rw-r--r--   1 jacquesmenu  staff  15145 Aug 14 16:50 LaTeXShortcuts.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   2171 Jun 28 20:52 LaTeXTablesAndLists.tex
+40 -rw-r--r--@  1 jacquesmenu  staff  17746 Jun 28 20:52 MSRClassesHierarchyPicture.tex
+40 -rw-r--r--@  1 jacquesmenu  staff  16711 Aug 17 14:21 MSRScoreRepresentation.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff    321 Jun 28 20:52 MusicFormats.ist
+48 -rw-r--r--   1 jacquesmenu  staff  21749 Jun 28 20:52 MusicFormatsArchitecturePicture.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1558 Aug 15 23:36 OAHClassesHierarchyPicture.log
+16 -rw-r--r--@  1 jacquesmenu  staff   5906 Aug 16 08:02 OAHClassesHierarchyPicture.tex
+\end{lstlisting}
+
+It is to be noted that \doc{CommonLaTeXFiles/MSRScoreRepresentation.tex} is generated from \doc{CommonLaTeXFiles/MSRClassesHierarchyPicture.tex} with this script, which should be run only if there is any change in the \msrRepr\ classes hierarchy:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1:~/musicformats-git-dev/documentation/CommonLaTeXFiles > cat CreateMSRScoreRepresentation.zsh
+#!/bin/zsh
+
+# create a LaTeX file for the user guide from the maintainance one
+
+sed 's/msr//g' MSRClassesHierarchyPicture.tex \
+  | \
+sed 's/The MSR classes hierarchy/The MSR music score representation/g' \
+  > \
+MSRScoreRepresentation.tex
+\end{lstlisting}
+
+\Directory{graphics} contains \Main{PNG} files showing screenshots of the results of using the \mf\ tools. % JMI ??? v0.9.67
+
+\Directory{libmusicxml2Presentation} contains a presentation of \libmusicxml\ written by \fober.
+
+\Directory{IntroductionToMusicxml} contains a presentation done by this author at the \\
+'MUSIC ENGRAVING IN THE 21ST CENTURY -- DEVELOPMENTS AND PERSPECTIVES' conference at Mozarteum in Salzburg in January 2020 (https://www.uni-mozarteum.at/en/kunst/music-engraving-conference.php).
+
+%\begin{itemize} JMI v0.9.66
+%%\item \doc{LaTeXCommonSettings.tex}: a set of commands and settings used by all the documentation \LaTeX\ files;
+%\item ;
+%\item \doc{libmusicxml2Presentation/}: Dom Fober's original documentation describing \libmusicxml;
+%\item \doc{MusicFormatsArchitecture.tex}: the image describing the architecture of \mf, used in other documents;
+%\item \doc{mfuserguide/}: the user guide;
+%\item \doc{maintainersGuideToMusicFormats/}: this maintiainer's guide.
+%\end{itemize}
+
+\LaTeX\ needs to be run {\it three} times when the chapter/section/subsection hierarchy is modified. Check that the last page number, at the bottom of any page, is not less than the one before.
+
+The following files contain the current \mf\ version number and date:
+\begin{itemize}
+\item the \src{MusicFormatsVersionNumber.h} and \src{MusicFormatsVersionDate.h} files are used by the C++ code base;
+\item \file{MusicFormatsVersionNumber.txt} and \file{MusicFormatsVersionDate.txt} are used by the \LaTeX\ source files
+\end{itemize}
+Those files should be re-generated when a new version of \mf\ is created, for example:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/SetMusicFormatsVersionNumber.bash "0.9.61"
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev
+
+==> Writing MusicFormats version number 0.9.61 to MusicFormatsVersionNumber.txt
+
+8 -rw-r--r--@ 1 jacquesmenu  staff  6 Mar  2 13:43:04 2022 MusicFormatsVersionNumber.txt
+0.9.61
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev/src
+
+==> Writing MusicFormats version number 0.9.61 to MusicFormatsVersionNumber.h
+
+8 -rw-r--r--@ 1 jacquesmenu  staff  45 Mar  2 13:43:04 2022 MusicFormatsVersionNumber.h
+#define MUSICFORMATS_VERSION_NUMBER "0.9.61"
+\end{lstlisting}
+
+and:
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/SetMusicFormatsVersionDate.bash "March 2, 2022"
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev
+
+==> Writing MusicFormats version date March 2, 2022 to MusicFormatsVersionDate.txt
+
+8 -rw-r--r--@ 1 jacquesmenu  staff  14 Mar  2 13:43:32 2022 MusicFormatsVersionDate.txt
+March 2, 2022
+
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev/src
+
+==> Writing MusicFormats version date March 2, 2022 to MusicFormatsVersionDate.h
+
+8 -rw-r--r--@ 1 jacquesmenu  staff  50 Mar  2 13:43:32 2022 MusicFormatsVersionDate.h
+#define MUSICFORMATS_VERSION_DATE "March 2, 2022"
+\end{lstlisting}
+
+Avoid editing these files manually. In particular, \fileName{MusicFormatsVersionNumber.txt} should {\bf NOT} be terminated by an end of line, since its contents is used in the name of library files generated in \build{lib}.
+
+
+% -------------------------------------------------------------------------
+\section{\LaTeX\ macros}
+% -------------------------------------------------------------------------
+
+The \mf\ documentation uses a number of macros both to simplify formatting of frequent texts and to feed the many indexes at the end. All of them are grouped in \doc{CommonLaTeXFiles}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/documentation/CommonLaTeXFiles > ls -sal LaTeX*.tex
+ 8 -rw-r--r--  1 jacquesmenu  staff    507 Jun 28 20:52 LaTeXBoxes.tex
+16 -rw-r--r--  1 jacquesmenu  staff   6494 Jun 28 20:52 LaTeXCommonSettings.tex
+ 8 -rw-r--r--  1 jacquesmenu  staff   1907 Jun 28 20:52 LaTeXDivisionsCommands.tex
+ 8 -rw-r--r--  1 jacquesmenu  staff    957 Jun 28 20:52 LaTeXFontsAndColors.tex
+ 8 -rw-r--r--  1 jacquesmenu  staff    604 Jun 28 20:52 LaTeXGraphicsAndPictures.tex
+ 8 -rw-r--r--  1 jacquesmenu  staff   1128 Jun 28 20:52 LaTeXIndexing.tex
+24 -rw-r--r--  1 jacquesmenu  staff  10728 Jun 28 20:52 LaTeXListings.tex
+ 8 -rw-r--r--  1 jacquesmenu  staff   1527 Jun 28 20:52 LaTeXMusicFormatsCommands.tex
+24 -rw-r--r--@ 1 jacquesmenu  staff  11735 Jul 29 09:02 LaTeXMusicFormatsFilesAndFolders.tex
+ 8 -rw-r--r--@ 1 jacquesmenu  staff   2151 Jun 28 20:52 LaTeXMusicFormatsNames.tex
+ 8 -rw-r--r--  1 jacquesmenu  staff    441 Jun 28 20:52 LaTeXMusicNotation.tex
+ 8 -rw-r--r--  1 jacquesmenu  staff   1535 Jun 28 20:52 LaTeXReferencing.tex
+32 -rw-r--r--@ 1 jacquesmenu  staff  14665 Jun 28 20:52 LaTeXShortcuts.tex
+ 8 -rw-r--r--  1 jacquesmenu  staff   2171 Jun 28 20:52 LaTeXTablesAndLists.tex
+\end{lstlisting}
+
+For example:
+\begin{lstlisting}[language=Latex]
+\newcommand{\CLI}{command line\index[Main]{command line}}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Latex]
+\newcommand{\musicXmlMarkup}[1]{%
+{\tt <#1/>}\index[Main]{{\tt $<$#1 /$>$}}\index[MusicXML]{{\tt #1 $<$/$>$}}%
+}
+\newcommand{\musicXmlAttribute}[1]{%
+{\tt "#1"}\index[Main]{{\tt $<$#1 /$>$}}\index[MusicXML]{{\tt #1 ""}}%
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Latex]
+\newcommand{\Main}[1]{%
+#1\index[Main]{#1}%
+}
+\newcommand{\MainName}[1]{%
+\index[Main]{#1}%
+}
+
+\newcommand{\code}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}%
+}
+\end{lstlisting}
+
+Some command exist in two forms, differing in the capitalization of the first character:
+\begin{lstlisting}[language=Latex]
+\newcommand{\enumType}{enumeration type\index[Main]{enumeration type}}
+\newcommand{\EnumType}{Enumeration type\index[Main]{enumeration type}}
+\end{lstlisting}
+
+Some command names are of the form \code{*Both*}:
+\begin{lstlisting}[language=Latex]
+\newcommand{\fileName}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+\newcommand{\fileNameBoth}[1]{%
+{\textcolor{brown}{\tt *#1.h/.cpp}}\index[Main]{#1.h/.cpp@{{tt *#1.h/.cpp}}}\index[Files]{#1.h/.cpp@{{tt *#1.h/.cpp}}}%
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Latex]
+\newcommand{\msrToMsr}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2msr/#1}}%
+}
+\newcommand{\msrToMsrBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2msr/#1.h/.cpp}}%
+}
+\end{lstlisting}
+
+Some command names are of the form \code{star*}:
+\begin{lstlisting}[language=Latex]
+\newcommand{\methodName}[1]{%
+{\tt #1~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+\newcommand{\starMethodName}[1]{%
+{\tt *#1~()}\index[Main]{#1~()@{\tt *#1}}\index[MethodsAndFields]{*#1~()@{\tt *#1~()}}%
+}
+\end{lstlisting}
+
+Some commands have a variant of the form \code{*Name*} to produce only their arguments, with no additional text:
+\begin{lstlisting}[language=Latex]
+\newcommand{\file}[1]{%
+file {\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+\newcommand{\File}[1]{%
+File {\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+
+\newcommand{\fileName}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+\newcommand{\fileNameBoth}[1]{%
+{\textcolor{brown}{\tt *#1.h/.cpp}}\index[Main]{#1.h/.cpp@{{tt *#1.h/.cpp}}}\index[Files]{#1.h/.cpp@{{tt *#1.h/.cpp}}}%
+}
+\end{lstlisting}
+
+Some commands are in the form \code{*Repr} : the designate the name of a representation, such as:
+\begin{lstlisting}[language=Latex]
+\newcommand{\msrRepr}{MSR\index[Main]{MSR}}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{About this document}
+% -------------------------------------------------------------------------
+
+This document provides cross views of the information needed for \mf\ maintainance. It is organized in a number of parts:
+\begin{itemize}
+\item the first part provides an overview of the library, together with the concepts is uses;
+\item then the two-phase visitors pattern, which is central to \mf, is presented;
+\item the third part is dedicated to the programming style and conventions used throughout the code base;
+\item the OAH (Options and help), a pervasive feature in \mf, is detailed;
+\item the fifth part details the formats provided by the library;
+\item the following parts are dedicated to passes, generators and converters, respectively;
+\item the ninth part presents the interfaces to the formats, passes and converters;
+\item the tenth part provides a longitudinal view of the handling of selected music score contents elements, grouped by such elements such as staves, tuplets and harmonies;
+\item and finally, the last part is dedicated to the implementation of the MSDL language.
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{The MusicFormats architecture}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{User guide}
+% -------------------------------------------------------------------------
+
+\doc{mfuserguide/mfuserguide.pdf} is the usual user guide. It presents the use of \mf\ with the \CLI\ for the time being.
+
+
+% -------------------------------------------------------------------------
+\section{API guide}
+% -------------------------------------------------------------------------
+
+\doc{mfapiguide/mfapiguide.pdf} presents the use of \mf\ through the \API s. The latter are used internally by the \CLI\ services, and can be used from applications at will, such as in a \Web\ site.
+
+
+% -------------------------------------------------------------------------
+\section{Maintainance guide}
+% -------------------------------------------------------------------------
+
+\doc{mfmaintainanceguide/mfmaintainanceguide.pdf} describes the internals of \mf\ from a maintainer's point of view. It contains a detailed presentation of the various types used, and a part dedicated to selected topics: this is to have a longitudinal view of how various music elements are handled in the various passes.
+

@@ -72,7 +72,7 @@ void stringFilterInterpreterOahGroup::initializestringFilterInterpreterOahGroup 
 }
 //     void                  initializestringFilterUserOptions ();
 //
-//     void                  initializestringFilterMaintenanceOptions ();
+//     void                  initializestringFilterMaintainanceOptions ();
 
 void stringFilterInterpreterOahGroup::initializestringFilterOptions ()
 {

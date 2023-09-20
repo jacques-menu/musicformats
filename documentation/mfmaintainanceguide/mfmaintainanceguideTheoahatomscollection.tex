@@ -1,0 +1,285 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{The OAH atoms collection}\label{The OAH atoms collection}
+% -------------------------------------------------------------------------
+
+These handly general-purpose OAH atoms are used in \mf\ itself. They are defined in \oahBoth{oahAtomsCollection}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/oah > grep class   oahAtomsCollection.h
+class EXP oahValueLessAtomAlias : public oahAtom
+class EXP oahMacroAtom : public oahAtom
+class EXP oahOptionsUsageAtom : public oahPureHelpValueLessAtom
+class EXP oahHelpAtom : public oahPureHelpValueLessAtom
+class EXP oahHelpSummaryAtom : public oahPureHelpValueLessAtom
+class EXP oahAboutAtom : public oahPureHelpValueLessAtom
+class EXP oahVersionAtom : public oahPureHelpValueLessAtom
+class EXP oahContactAtom : public oahPureHelpValueLessAtom
+class EXP oahBooleanAtom : public oahAtom
+class EXP oahTwoBooleansAtom : public oahBooleanAtom
+class EXP oahThreeBooleansAtom : public oahBooleanAtom
+class EXP oahCombinedBooleansAtom : public oahAtom
+class EXP oahCommonPrefixBooleansAtom : public oahAtom
+class EXP oahIntegerAtom : public oahAtomStoringAValue
+class EXP oahTwoIntegersAtom : public oahIntegerAtom
+class EXP oahFloatAtom : public oahAtomStoringAValue
+class EXP oahStringAtom : public oahAtomStoringAValue
+class EXP oahFactorizedStringAtom : public oahAtom
+class EXP oahDefaultedStringAtom : public oahStringAtom
+class EXP oahRationalAtom : public oahAtomStoringAValue
+class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
+class EXP oahColorRGBAtom : public oahAtomStoringAValue
+class EXP oahIntSetElementAtom : public oahAtomStoringAValue
+class EXP oahStringSetElementAtom : public oahAtomStoringAValue
+class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
+class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
+class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
+class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
+class EXP oahLengthAtom : public oahAtomStoringAValue
+class EXP oahMidiTempoAtom : public oahAtomStoringAValue
+class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
+class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
+class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{OAH macro atoms}
+% -------------------------------------------------------------------------
+
+A OAH macro atom is a combination, a list of several options under a single name. The \className{oahMacroAtom} class   is defined in \oahBoth{oahAtomsCollection}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP oahMacroAtom : public oahAtom
+{
+/*
+  a list of atoms
+*/
+
+	// ... ... ...
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  oahValueLessAtomAlias (S_oahAtom atom);
+
+    void                  applyValueLessAtom (std::ostream& os) override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+     std::list<S_oahAtom> fMacroValueLessAtomsList;
+};
+\end{lstlisting}
+
+Populating \field{oahMacroAtom}{fMacroValueLessAtomsList} is straightfoward:
+\begin{lstlisting}[language=CPlusPlus]
+void oahMacroAtom::oahValueLessAtomAlias (S_oahAtom atom)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    atom != nullptr,
+    "atom is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  fMacroValueLessAtomsList.push_back (atom);
+}
+\end{lstlisting}
+
+Applying the macro atom is done in \method{oahMacroAtom}{applyElement}:
+\begin{lstlisting}[language=CPlusPlus]
+void oahMacroAtom::applyValueLessAtom (std::ostream& os)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+		std::stringstream ss;
+
+    ss <<
+      "==> option '" << fetchNames () << "' is a oahMacroAtom";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  for (
+    std::list<S_oahAtom>::const_iterator i =
+      fMacroValueLessAtomsList.begin ();
+    i != fMacroValueLessAtomsList.end ();
+    ++i
+  ) {
+    S_oahAtom atom = (*i);
+
+    if (
+      // oahAtomStoringAValue?
+      S_oahAtomStoringAValue
+        atomWithVariable =
+          dynamic_cast<oahAtomStoringAValue*>(&(*atom))
+    ) {
+//       atomWithVariable-> JMI ???
+//         applyAtomWithValue (theString, os);
+    }
+    else {
+      // value-less atom
+      atom->
+        applyValueLessAtom (os);
+    }
+  } // for
+}
+
+	fSelected = true;
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{A OAH macro atom example}
+% -------------------------------------------------------------------------
+
+\xmlToBrl\ has the \optionNameBoth{auto-utf8}{au8d} option:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2brl -query auto-utf8d
+--- Help for atom "auto-utf8d" in subgroup "Files"
+    -auto-utf8d, -au8d
+          Combines -auto-output-file-name, -utf8d and -use-encoding-in-file-name
+\end{lstlisting}
+
+This macro options is defined in \brailleGeneration{brailleGenerationOah.cpp} the following way:
+\begin{lstlisting}[language=CPlusPlus]
+void brailleGenerationOahGroup::initializeMacroOptions ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Macros",
+        "help-braille-generation-macros", "hbgm",
+R"()",
+      oahElementVisibilityKind::kElementVisibilityWhole,
+      this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // create the auto utfd8 macro
+
+  S_oahMacroAtom
+    autoUTFd8MacroAtom =
+      oahMacroAtom::create (
+        "auto-utf8d", "au8d",
+        "Combines -auto-output-file-name, -utf8d and -use-encoding-in-file-name");
+
+  subGroup->
+    appendAtomToSubGroup (
+      autoUTFd8MacroAtom);
+
+  // populate it
+  autoUTFd8MacroAtom->
+    oahValueLessAtomAlias (
+      gGlobalOutputFileOahGroup->getAutoOutputFileNameAtom ());
+
+  fBrailleOutputKindAtom->
+    applyAtomWithValue (
+      "utf8d",
+      gLog);
+  autoUTFd8MacroAtom->
+    oahValueLessAtomAlias (
+      fBrailleOutputKindAtom);
+
+  autoUTFd8MacroAtom->
+    oahValueLessAtomAlias (
+      fUseEncodingInFileNameAtom);
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{LilyPond octave entry}
+% -------------------------------------------------------------------------
+
+Pass {\tt lpsr2lilypond} has three options to choose this, all controlling one and the same variable:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly -query absolute
+--- Help for atom "absolute" in subgroup "Notes"
+    -abs, -absolute
+          Use absolute octave entry in the generated LilyPond code.
+\end{lstlisting}
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly -query relative
+--- Help for atom "relative" in subgroup "Notes"
+    -rel, -relative
+          Use relative octave entry reference PITCH_AND_OCTAVE in the generated LilyPond code.
+          PITCH_AND_OCTAVE is made of a diatonic pitch and
+          an optional sequence of commas or single quotes.
+          It should be placed between double quotes if it contains single quotes, such as:
+            -rel "c''".
+          The default is to use LilyPond's implicit reference 'f'.
+\end{lstlisting}
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly -query fixed
+--- Help for atom "fixed" in subgroup "Notes"
+    -fixed
+          Use fixed octave entry reference PITCH_AND_OCTAVE in the generated LilyPond code.
+          PITCH_AND_OCTAVE is made of a diatonic pitch and
+          an optional sequence of commas or single quotes.
+          It should be placed between double quotes if it contains single quotes, such as:
+            -fixed "c''"
+\end{lstlisting}
+
+This is done in \lilypondGenerationBoth{lpsr2lilypondOah} using a single instance of \class{msrOctaveEntryVariable}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrOctaveEntryVariable : public smartable
+{
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    std::string           fVariableName;
+    msrOctaveEntryKind    fOctaveEntryKind;
+};
+
+\end{lstlisting}
+
+The three classes:
+\begin{itemize}
+\item  {\tt lilypondAbsoluteOctaveEntryAtom}
+\item  {\tt lilypondRelativeOctaveEntryAtom}
+\item  {\tt lilypondFixedOctaveEntryAtom}
+\end{itemize}
+all contain an alias for an \class{msrOctaveEntryVariable} variable:
+\begin{lstlisting}[language=CPlusPlus]
+    // private fields
+    // ------------------------------------------------------
+
+    msrOctaveEntryVariable&
+                          fOctaveEntryKindVariable;
+\end{lstlisting}
+
+The {\tt fOctaveEntryVariable} filed of class   {\tt lpsr2lilypondOahGroup} shared be all three options atoms is:
+\begin{lstlisting}[language=CPlusPlus]
+    // notes
+    // --------------------------------------
+
+    msrOctaveEntryVariable
+                          fOctaveEntryVariable;
+\end{lstlisting}
+
