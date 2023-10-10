@@ -34,32 +34,32 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-S_lpsrNewStaffgroupBlock lpsrNewStaffgroupBlock::create (
+S_lpsrNewStaffGroupBlock lpsrNewStaffGroupBlock::create (
   int inputLineNumber)
 {
-  lpsrNewStaffgroupBlock* obj =
-    new lpsrNewStaffgroupBlock (
+  lpsrNewStaffGroupBlock* obj =
+    new lpsrNewStaffGroupBlock (
       inputLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
-lpsrNewStaffgroupBlock::lpsrNewStaffgroupBlock (
+lpsrNewStaffGroupBlock::lpsrNewStaffGroupBlock (
   int inputLineNumber)
     : lpsrElement (inputLineNumber)
 {}
 
-lpsrNewStaffgroupBlock::~lpsrNewStaffgroupBlock ()
+lpsrNewStaffGroupBlock::~lpsrNewStaffGroupBlock ()
 {}
 
-void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
+void lpsrNewStaffGroupBlock::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrNewStaffgroupBlock::acceptIn ()";
+      "% ==> lpsrNewStaffGroupBlock::acceptIn ()";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -67,17 +67,17 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_lpsrNewStaffgroupBlock>*
+  if (visitor<S_lpsrNewStaffGroupBlock>*
     p =
-      dynamic_cast<visitor<S_lpsrNewStaffgroupBlock>*> (v)) {
-        S_lpsrNewStaffgroupBlock elem = this;
+      dynamic_cast<visitor<S_lpsrNewStaffGroupBlock>*> (v)) {
+        S_lpsrNewStaffGroupBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrNewStaffgroupBlock::visitStart ()";
+            "% ==> Launching lpsrNewStaffGroupBlock::visitStart ()";
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -88,14 +88,14 @@ void lpsrNewStaffgroupBlock::acceptIn (basevisitor* v)
   }
 }
 
-void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
+void lpsrNewStaffGroupBlock::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "% ==> lpsrNewStaffgroupBlock::acceptOut ()";
+      "% ==> lpsrNewStaffGroupBlock::acceptOut ()";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -103,17 +103,17 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_lpsrNewStaffgroupBlock>*
+  if (visitor<S_lpsrNewStaffGroupBlock>*
     p =
-      dynamic_cast<visitor<S_lpsrNewStaffgroupBlock>*> (v)) {
-        S_lpsrNewStaffgroupBlock elem = this;
+      dynamic_cast<visitor<S_lpsrNewStaffGroupBlock>*> (v)) {
+        S_lpsrNewStaffGroupBlock elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gLpsrOahGroup->getTraceLpsrVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            "% ==> Launching lpsrNewStaffgroupBlock::visitEnd ()";
+            "% ==> Launching lpsrNewStaffGroupBlock::visitEnd ()";
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -124,25 +124,25 @@ void lpsrNewStaffgroupBlock::acceptOut (basevisitor* v)
   }
 }
 
-void lpsrNewStaffgroupBlock::browseData (basevisitor* v)
+void lpsrNewStaffGroupBlock::browseData (basevisitor* v)
 {}
 
-void lpsrNewStaffgroupBlock::print (std::ostream& os) const
+void lpsrNewStaffGroupBlock::print (std::ostream& os) const
 {
-  os << "NewStaffgroupBlock" << std::endl;
+  os << "NewStaffGroupBlock" << std::endl;
 
   ++gIndenter;
 
-  int size = fNewStaffgroupElements.size ();
+  int size = fNewStaffGroupElementsVector.size ();
 
   for (int i = 0; i < size; ++i ) {
-    os << fNewStaffgroupElements[i];
+    os << fNewStaffGroupElementsVector[i];
   } // for
 
   --gIndenter;
 }
 
-std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffgroupBlock& nstf)
+std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffGroupBlock& nstf)
 {
   nstf->print (os);
   return os;
@@ -364,10 +364,10 @@ void lpsrNewStaffBlock::print (std::ostream& os) const
 
   ++gIndenter;
 
-  int size = fNewStaffElements.size ();
+  int size = fNewStaffElementsVector.size ();
 
   for (int i = 0; i < size; ++i ) {
-    os << fNewStaffElements[i];
+    os << fNewStaffElementsVector[i];
   } // for
 
   --gIndenter;

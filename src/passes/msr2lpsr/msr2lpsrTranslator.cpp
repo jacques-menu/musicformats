@@ -571,11 +571,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
       fResultingLpsr,
       gMsrOahGroup,
       gLpsrOahGroup,
-      gLanguage->displayTheLPSRAsText ()
-        +
-      ", "
-        +
-      gLanguage->fullVersion ());
+      gLanguage->displayTheLPSRAsText ());
   }
 
   // display the LPSR score summary if requested
@@ -3095,7 +3091,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   else if (fOnGoingChord) {
     // register the figured bass element clone in the current chord clone
     fCurrentChordClone->
-      setChordFiguredBass (
+      setChordFiguredBassesList (
         fCurrentFiguredBassClone); // JMI v0.9.66
   }
 

@@ -103,6 +103,9 @@ function addDoc ()
   git add ${DOC_DIR}/*/*/*.pdf
   git add ${DOC_DIR}/*/*.png
 #  git add ${DOC_DIR}/*/*.odg
+
+  # copy PDF documentation files to musicformats-documentation-git
+  cp -p ${DOC_DIR}/*/*.pdf ../musicformats-documentation-git
 }
 
 function addFxml ()

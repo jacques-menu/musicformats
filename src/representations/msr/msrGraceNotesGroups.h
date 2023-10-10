@@ -46,6 +46,8 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
+                            Bool                   graceNotesGroupIsTied,
+                            Bool                   graceNotesGroupIsSlurred,
                             const std::string&     graceNotesGroupMeasureNumber);
 
     SMARTP<msrGraceNotesGroup> createGraceNotesGroupNewbornClone ();
@@ -64,6 +66,8 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind,
                             Bool                   graceNotesGroupIsSlashed,
                             Bool                   graceNotesGroupIsBeamed,
+                            Bool                   graceNotesGroupIsTied,
+                            Bool                   graceNotesGroupIsSlurred,
                             const std::string&     graceNotesGroupMeasureNumber);
 
     virtual               ~msrGraceNotesGroup ();
@@ -100,6 +104,12 @@ class EXP msrGraceNotesGroup : public msrElement
 
     Bool                  getGraceNotesGroupIsTied () const
                               { return fGraceNotesGroupIsTied; }
+
+    void                  setGraceNotesGroupIsSlurred ()
+                              { fGraceNotesGroupIsSlurred = true; }
+
+    Bool                  getGraceNotesGroupIsSlurred () const
+                              { return fGraceNotesGroupIsSlurred; }
 
     void                  setGraceNotesGroupIsBeamed ()
                               { fGraceNotesGroupIsBeamed = true; }
@@ -180,6 +190,7 @@ class EXP msrGraceNotesGroup : public msrElement
 
     Bool                  fGraceNotesGroupIsSlashed;
     Bool                  fGraceNotesGroupIsTied;
+    Bool                  fGraceNotesGroupIsSlurred;
     Bool                  fGraceNotesGroupIsBeamed;
 
     Bool                  fGraceNotesGroupIsFollowedByNotes;

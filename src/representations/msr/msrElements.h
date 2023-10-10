@@ -67,6 +67,9 @@ class EXP msrElement : public smartable
     // public services
     // ------------------------------------------------------
 
+    operator std::string() const
+                              { return asString (); }
+
   public:
 
     // visitors

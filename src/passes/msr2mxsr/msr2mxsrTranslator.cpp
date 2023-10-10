@@ -642,7 +642,7 @@ void msr2mxsrTranslator::appendNoteToMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   // append the 'before spanner' elements if any
-  appendNoteSpannersBeforeNote (theMsrNote);
+  appendNoteSpannersListBeforeNote (theMsrNote);
 
   // append note to the current measure element
   fCurrentMeasureElement->push (note);
@@ -653,7 +653,7 @@ void msr2mxsrTranslator::appendNoteToMeasure (
       getSoundingWholeNotes ();
 
   // append the 'after spanner' elements if any
-  appendNoteSpannersAfterNote (theMsrNote);
+  appendNoteSpannersListAfterNote (theMsrNote);
 }
 
 void msr2mxsrTranslator::appendOtherMusicXMLElementToMeasure (
@@ -5004,7 +5004,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTuplet& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteWedges (
+void msr2mxsrTranslator:: appendNoteWedgesList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5012,7 +5012,7 @@ void msr2mxsrTranslator:: appendNoteWedges (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteWedges, theMsrNote: " <<
+      "--> appendNoteWedgesList, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -5022,13 +5022,13 @@ void msr2mxsrTranslator:: appendNoteWedges (
 #endif // MF_TRACE_IS_ENABLED
 
   const std::list<S_msrWedge>&
-    noteWedges =
-      theMsrNote->getNoteWedges () ;
+    noteWedgesList =
+      theMsrNote->getNoteWedgesList () ;
 
-  if (noteWedges.size ()) {
+  if (noteWedgesList.size ()) {
     std::list<S_msrWedge>::const_iterator i;
 
-    for (i = noteWedges.begin (); i != noteWedges.end (); ++i) {
+    for (i = noteWedgesList.begin (); i != noteWedgesList.end (); ++i) {
       S_msrWedge wedge = (*i);
 
       msrWedgeKind wedgeKind = wedge->getWedgeKind ();
@@ -5065,7 +5065,7 @@ void msr2mxsrTranslator:: appendNoteWedges (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::appendNoteDynamics (
+void msr2mxsrTranslator::appendNoteDynamicsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5073,7 +5073,7 @@ void msr2mxsrTranslator::appendNoteDynamics (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteDynamics, theMsrNote: " <<
+      "--> appendNoteDynamicsList, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -5083,13 +5083,13 @@ void msr2mxsrTranslator::appendNoteDynamics (
 #endif // MF_TRACE_IS_ENABLED
 
   const std::list<S_msrDynamic>&
-    noteDynamics =
-      theMsrNote->getNoteDynamics () ;
+    noteDynamicsList =
+      theMsrNote->getNoteDynamicsList () ;
 
-  if (noteDynamics.size ()) {
+  if (noteDynamicsList.size ()) {
     std::list<S_msrDynamic>::const_iterator i;
 
-    for (i = noteDynamics.begin (); i != noteDynamics.end (); ++i) {
+    for (i = noteDynamicsList.begin (); i != noteDynamicsList.end (); ++i) {
       S_msrDynamic dynamic = (*i);
 
       // create the dynamics element
@@ -5627,14 +5627,14 @@ void msr2mxsrTranslator:: populateNoteDirections (
 */
 
   // append the wedges elements if any
-  appendNoteWedges (theMsrNote);
+  appendNoteWedgesList (theMsrNote);
 
   // append the dynamics elements if any
-  appendNoteDynamics (theMsrNote);
+  appendNoteDynamicsList (theMsrNote);
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteOrnaments (
+void msr2mxsrTranslator:: appendNoteOrnamentsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5642,7 +5642,7 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteOrnaments, theMsrNote: " <<
+      "--> appendNoteOrnamentsList, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -5672,11 +5672,11 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
 
   // append the ornament elements if any
   const std::list<S_msrOrnament>&
-    noteOrnaments =
-      theMsrNote->getNoteOrnaments () ;
+    noteOrnamentsList =
+      theMsrNote->getNoteOrnamentsList () ;
 
-  if (noteOrnaments.size ()) {
-    for (S_msrOrnament ornament : noteOrnaments) {
+  if (noteOrnamentsList.size ()) {
+    for (S_msrOrnament ornament : noteOrnamentsList) {
       msrOrnamentKind
         ornamentKind =
           ornament->getOrnamentKind ();
@@ -5752,7 +5752,7 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTechnicals (
+void msr2mxsrTranslator:: appendNoteTechnicalsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5760,7 +5760,7 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTechnicals, theMsrNote: " <<
+      "--> appendNoteTechnicalsList, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -5785,13 +5785,13 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
 
   // append the technical elements if any
   const std::list<S_msrTechnical>&
-    noteTechnicals =
-      theMsrNote->getNoteTechnicals () ;
+    noteTechnicalsList =
+      theMsrNote->getNoteTechnicalsList () ;
 
-  if (noteTechnicals.size ()) {
+  if (noteTechnicalsList.size ()) {
     std::list<S_msrTechnical>::const_iterator i;
 
-    for (i = noteTechnicals.begin (); i != noteTechnicals.end (); ++i) {
+    for (i = noteTechnicalsList.begin (); i != noteTechnicalsList.end (); ++i) {
       S_msrTechnical
         technical = (*i);
 
@@ -5861,7 +5861,7 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
+void msr2mxsrTranslator:: appendNoteTechnicalWithIntegersList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5869,7 +5869,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTechnicalWithIntegers, theMsrNote: " <<
+      "--> appendNoteTechnicalWithIntegersList, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -5894,13 +5894,13 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
 
   // append the technicalWithInteger elements if any
   const std::list<S_msrTechnicalWithInteger>&
-    noteTechnicalWithIntegers =
-      theMsrNote->getNoteTechnicalWithIntegers () ;
+    noteTechnicalWithIntegersList =
+      theMsrNote->getNoteTechnicalWithIntegersList () ;
 
-  if (noteTechnicalWithIntegers.size ()) {
+  if (noteTechnicalWithIntegersList.size ()) {
     std::list<S_msrTechnicalWithInteger>::const_iterator i;
 
-    for (i = noteTechnicalWithIntegers.begin (); i != noteTechnicalWithIntegers.end (); ++i) {
+    for (i = noteTechnicalWithIntegersList.begin (); i != noteTechnicalWithIntegersList.end (); ++i) {
       S_msrTechnicalWithInteger
         technicalWithInteger = (*i);
 
@@ -5944,7 +5944,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
+void msr2mxsrTranslator:: appendNoteTechnicalWithFloatsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5952,7 +5952,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTechnicalWithFloats, theMsrNote: " <<
+      "--> appendNoteTechnicalWithFloatsList, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -5976,13 +5976,13 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
 
   // append the technicalWithFloat elements if any
   const std::list<S_msrTechnicalWithFloat>&
-    noteTechnicalWithFloats =
-      theMsrNote->getNoteTechnicalWithFloats () ;
+    noteTechnicalWithFloatsList =
+      theMsrNote->getNoteTechnicalWithFloatsList () ;
 
-  if (noteTechnicalWithFloats.size ()) {
+  if (noteTechnicalWithFloatsList.size ()) {
     std::list<S_msrTechnicalWithFloat>::const_iterator i;
 
-    for (i = noteTechnicalWithFloats.begin (); i != noteTechnicalWithFloats.end (); ++i) {
+    for (i = noteTechnicalWithFloatsList.begin (); i != noteTechnicalWithFloatsList.end (); ++i) {
       S_msrTechnicalWithFloat
         technicalWithFloat = (*i);
 
@@ -6017,7 +6017,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
+void msr2mxsrTranslator:: appendNoteTechnicalWithStringsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6025,7 +6025,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteTechnicalWithStrings, theMsrNote: " <<
+      "--> appendNoteTechnicalWithStringsList, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -6050,13 +6050,13 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
 
   // append the technicalWithString elements if any
   const std::list<S_msrTechnicalWithString>&
-    noteTechnicalWithStrings =
-      theMsrNote->getNoteTechnicalWithStrings () ;
+    noteTechnicalWithStringsList =
+      theMsrNote->getNoteTechnicalWithStringsList () ;
 
-  if (noteTechnicalWithStrings.size ()) {
+  if (noteTechnicalWithStringsList.size ()) {
     std::list<S_msrTechnicalWithString>::const_iterator i;
 
-    for (i = noteTechnicalWithStrings.begin (); i != noteTechnicalWithStrings.end (); ++i) {
+    for (i = noteTechnicalWithStringsList.begin (); i != noteTechnicalWithStringsList.end (); ++i) {
       S_msrTechnicalWithString
         technicalWithString = (*i);
 
@@ -6099,7 +6099,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteArticulations (
+void msr2mxsrTranslator:: appendNoteArticulationsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6107,7 +6107,7 @@ void msr2mxsrTranslator:: appendNoteArticulations (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteArticulations, theMsrNote: " <<
+      "--> appendNoteArticulationsList, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -6118,13 +6118,13 @@ void msr2mxsrTranslator:: appendNoteArticulations (
 
   // append the articulation elements if any
   const std::list<S_msrArticulation>&
-    noteArticulations =
-      theMsrNote->getNoteArticulations () ;
+    noteArticulationsList =
+      theMsrNote->getNoteArticulationsList () ;
 
-  if (noteArticulations.size ()) {
+  if (noteArticulationsList.size ()) {
     std::list<S_msrArticulation>::const_iterator i;
 
-    for (i = noteArticulations.begin (); i != noteArticulations.end (); ++i) {
+    for (i = noteArticulationsList.begin (); i != noteArticulationsList.end (); ++i) {
       const S_msrArticulation& articulation = (*i);
 
       msrArticulationKind
@@ -6301,7 +6301,7 @@ void msr2mxsrTranslator:: appendNoteTieIfAny (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteSlursIfAny (
+void msr2mxsrTranslator:: appendNoteSlursListIfAny (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6309,7 +6309,7 @@ void msr2mxsrTranslator:: appendNoteSlursIfAny (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteSlursIfAny, theMsrNote: " <<
+      "--> appendNoteSlursListIfAny, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -6320,13 +6320,13 @@ void msr2mxsrTranslator:: appendNoteSlursIfAny (
 
   // append the slur elements if any
   const std::list<S_msrSlur>&
-    noteSlurs =
-      theMsrNote->getNoteSlurs () ;
+    noteSlursList =
+      theMsrNote->getNoteSlursList () ;
 
-  if (noteSlurs.size ()) {
+  if (noteSlursList.size ()) {
     std::list<S_msrSlur>::const_iterator i;
 
-    for (i = noteSlurs.begin (); i != noteSlurs.end (); ++i) {
+    for (i = noteSlursList.begin (); i != noteSlursList.end (); ++i) {
       S_msrSlur
         slur = (*i);
 
@@ -6485,7 +6485,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
+void msr2mxsrTranslator:: appendNoteSpannersListBeforeNote (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6493,7 +6493,7 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteSpannersBeforeNote, theMsrNote: " <<
+      "--> appendNoteSpannersListBeforeNote, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -6504,14 +6504,14 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
 
   // append the spanner elements if any
   const std::list<S_msrSpanner>&
-    noteSpanners =
+    noteSpannersList =
       theMsrNote->
-        getNoteSpanners () ;
+        getNoteSpannersList () ;
 
-  if (noteSpanners.size ()) {
+  if (noteSpannersList.size ()) {
     std::list<S_msrSpanner>::const_iterator i;
 
-    for (i = noteSpanners.begin (); i != noteSpanners.end (); ++i) {
+    for (i = noteSpannersList.begin (); i != noteSpannersList.end (); ++i) {
       S_msrSpanner spanner = (*i);
 
       msrSpannerTypeKind
@@ -6597,7 +6597,7 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
+void msr2mxsrTranslator:: appendNoteSpannersListAfterNote (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6605,7 +6605,7 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
     std::stringstream ss;
 
     ss <<
-      "--> appendNoteSpannersAfterNote, theMsrNote: " <<
+      "--> appendNoteSpannersListAfterNote, theMsrNote: " <<
       theMsrNote->asShortString ();
 
     gWaeHandler->waeTrace (
@@ -6616,13 +6616,13 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
 
   // append the spanner elements if any
   const std::list<S_msrSpanner>&
-    noteSpanners =
-      theMsrNote->getNoteSpanners () ;
+    noteSpannersList =
+      theMsrNote->getNoteSpannersList () ;
 
-  if (noteSpanners.size ()) {
+  if (noteSpannersList.size ()) {
     std::list<S_msrSpanner>::const_iterator i;
 
-    for (i = noteSpanners.begin (); i != noteSpanners.end (); ++i) {
+    for (i = noteSpannersList.begin (); i != noteSpannersList.end (); ++i) {
       S_msrSpanner spanner = (*i);
 
       msrSpannerTypeKind
@@ -6777,13 +6777,13 @@ void msr2mxsrTranslator::appendBeamsToNote (
 
   // append the beam elements if any
   const std::list<S_msrBeam>&
-    noteBeams =
-      theMsrNote->getNoteBeams () ;
+    noteBeamsList =
+      theMsrNote->getNoteBeamsList () ;
 
-  if (noteBeams.size ()) {
+  if (noteBeamsList.size ()) {
     std::list<S_msrBeam>::const_iterator i;
 
-    for (i = noteBeams.begin (); i != noteBeams.end (); ++i) {
+    for (i = noteBeamsList.begin (); i != noteBeamsList.end (); ++i) {
       S_msrBeam beam = (*i);
 
       msrBeamKind
@@ -6980,22 +6980,22 @@ void msr2mxsrTranslator:: appendNoteNotationsToNote (
 */
 
   // append the ornaments elements if any
-  appendNoteOrnaments (theMsrNote);
+  appendNoteOrnamentsList (theMsrNote);
 
   // append the articulation elements if any
-  appendNoteArticulations (theMsrNote);
+  appendNoteArticulationsList (theMsrNote);
 
   // append the technical elements if any
-  appendNoteTechnicals (theMsrNote);
-  appendNoteTechnicalWithIntegers (theMsrNote);
-  appendNoteTechnicalWithFloats (theMsrNote);
-  appendNoteTechnicalWithStrings (theMsrNote);
+  appendNoteTechnicalsList (theMsrNote);
+  appendNoteTechnicalWithIntegersList (theMsrNote);
+  appendNoteTechnicalWithFloatsList (theMsrNote);
+  appendNoteTechnicalWithStringsList (theMsrNote);
 
   // append the tie element if any
   appendNoteTieIfAny (theMsrNote);
 
   // append the slur elements if any
-  appendNoteSlursIfAny (theMsrNote);
+  appendNoteSlursListIfAny (theMsrNote);
 
   // append the tuplet elements if relevant
   appendNoteTupletIfRelevant (theMsrNote);
@@ -7038,13 +7038,13 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
 
   // append the lyric elements if any
   const std::list<S_msrSyllable>&
-    noteSyllables =
-      theMsrNote->getNoteSyllables () ;
+    noteSyllablesList =
+      theMsrNote->getNoteSyllablesList () ;
 
-  if (noteSyllables.size ()) {
+  if (noteSyllablesList.size ()) {
     std::list<S_msrSyllable>::const_iterator i;
 
-    for (i = noteSyllables.begin (); i != noteSyllables.end (); ++i) {
+    for (i = noteSyllablesList.begin (); i != noteSyllablesList.end (); ++i) {
       S_msrSyllable syllable = (*i);
 
       // create and append a lyric element if relevant

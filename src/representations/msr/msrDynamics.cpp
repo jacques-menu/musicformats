@@ -713,6 +713,7 @@ std::ostream& operator << (std::ostream& os, const msrWedgeNienteKind& elt)
 //______________________________________________________________________________
 S_msrWedge msrWedge::create (
   int                inputLineNumber,
+  int                wedgeNumber,
   msrWedgeKind       wedgeKind,
   msrWedgeNienteKind wedgeNienteKind,
   msrLineTypeKind    wedgeLineTypeKind,
@@ -722,6 +723,7 @@ S_msrWedge msrWedge::create (
   msrWedge* obj =
     new msrWedge (
       inputLineNumber,
+      wedgeNumber,
       wedgeKind,
       wedgeNienteKind,
       wedgeLineTypeKind,
@@ -733,6 +735,7 @@ S_msrWedge msrWedge::create (
 
 msrWedge::msrWedge (
   int                inputLineNumber,
+  int                wedgeNumber,
   msrWedgeKind       wedgeKind,
   msrWedgeNienteKind wedgeNienteKind,
   msrLineTypeKind    wedgeLineTypeKind,
@@ -740,6 +743,8 @@ msrWedge::msrWedge (
   int                wedgeVoiceNumber)
     : msrElement (inputLineNumber)
 {
+  fWedgeNumber        = wedgeNumber;
+
   fWedgeKind          = wedgeKind;
 
   fWedgeNienteKind    = wedgeNienteKind;
@@ -827,12 +832,24 @@ void msrWedge::acceptOut (basevisitor* v)
 void msrWedge::browseData (basevisitor* v)
 {}
 
+std::string msrWedge::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Wedge " <<
+    ", fWedgeNumber: " << fWedgeNumber <<
+    ", fWedgeKind: " << fWedgeKind <<
+    ", fWedgeVoiceNumber: " << fWedgeVoiceNumber <<
+    ", line " << fInputStartLineNumber;
+
+  return ss.str ();
+}
+
 void msrWedge::print (std::ostream& os) const
 {
   os <<
-    "[Wedge " << fWedgeKind <<
-    ", fWedgeVoiceNumber: " << fWedgeVoiceNumber <<
-    ", line " << fInputStartLineNumber <<
+    asString () <<
     std::endl;
 
   ++gIndenter;

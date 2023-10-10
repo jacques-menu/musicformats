@@ -7714,7 +7714,7 @@ void msrMeasure::displayMeasure (
 void msrMeasure::printFull (std::ostream& os) const
 {
   os <<
-    "[Measure '" <<
+    "[Measure FULL'" <<
     fMeasureNumber <<
     "', " << fMeasureKind <<
     ", " <<

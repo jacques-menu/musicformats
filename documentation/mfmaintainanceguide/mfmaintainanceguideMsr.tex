@@ -319,7 +319,7 @@ In the case of a solo rests, such detection allows for better output, in particu
 An example is at \figureRef{The solo rests problem} : the eighth rests in the second measure of voice 1 of the first staff should be be placed on the middle line of the staff, as \mscore\ does.
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{../mfgraphics/TheSoloRestsProblem.png}
+\includegraphics{../mfgraphics/mfgraphicsTheSoloRestsProblem.png}
 
 \caption{The solo rests problem}
 \label{The solo rests problem}
@@ -852,7 +852,7 @@ class EXP msrTempoNote : public msrElement
 
     mfRational              fTempoNoteWholeNotes;
 
-    std::list<S_msrBeam>  fTempoNoteBeams;
+    std::list<S_msrBeam>  fTempoNoteBeamsList;
 
     Bool                  fTempoNoteBelongsToATuplet;
 };
@@ -939,7 +939,7 @@ class EXP msrTempoTuplet : public msrElement
     mfRational              fTempoTupletDisplayWholeNotes;
 
     std::list<S_msrElement>
-                          fTempoTupletElements;
+                          fTempoTupletElementsList;
 };
 \end{lstlisting}
 
@@ -1052,7 +1052,7 @@ xml2ly -auto-output-file-name keys/HumdrumScotKeys.xml
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{../mfgraphics/HumdrumScotKeys.png}
+\includegraphics{../mfgraphics/mfgraphicsHumdrumScotKeys.png}
 
 \caption{Humdrum-Scot keys}
 \label{Humdrum-Scot keys}
@@ -1916,7 +1916,7 @@ For example, at \figureRef{Three segments in a voice}, there are three segments:
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics{../mfgraphics/RepeatFollowedByANoteAndARepeat.png}
+\includegraphics{../mfgraphics/mfgraphicsRepeatFollowedByANoteAndARepeat.png}
 
 \caption{Three segments in a voice}
 \label{Three segments in a voice}

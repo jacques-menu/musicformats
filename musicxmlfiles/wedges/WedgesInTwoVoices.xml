@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--MusicXML 2.0 file created by CapToMusic.py CapXML to MusicXML converter version 2.13-->
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="2.0">
+  <work>
+    <work-title>Wedges In Two Voices</work-title>
+    </work>
+	<identification>
+		<encoding>
+			<encoding-date>2023-08-18</encoding-date>
+			<software>CapToMusic.py CapXML to MusicXML converter version 2.13</software>
+			<encoding-description>Options: FinaleDolet33=1, ChordCaseMatters=1, ExportToSibelius=0</encoding-description>
+		</encoding>
+	</identification>
+	<defaults>
+		<scaling>
+			<millimeters>1.8</millimeters>
+			<tenths>10.0</tenths>
+		</scaling>
+		<page-layout>
+			<page-height>1650</page-height>
+			<page-width>1166</page-width>
+			<page-margins type="both">
+				<left-margin>111</left-margin>
+				<right-margin>111</right-margin>
+				<top-margin>111</top-margin>
+				<bottom-margin>111</bottom-margin>
+			</page-margins>
+		</page-layout>
+		<system-layout>
+			<system-margins>
+				<left-margin>0</left-margin>
+				<right-margin>0</right-margin>
+			</system-margins>
+			<system-distance>40</system-distance>
+			<top-system-distance>80</top-system-distance>
+		</system-layout>
+	</defaults>
+	<credit>
+		<credit-words default-x="582" default-y="1485" font-family="Times New Roman" font-size="18" justify="center">Dynamic_S Two Voices</credit-words>
+	</credit>
+	<part-list>
+		<score-part id="P1">
+			<part-name></part-name>
+			<part-abbreviation></part-abbreviation>
+			<score-instrument id="P1-I1">
+				<instrument-name>Midi_1</instrument-name>
+			</score-instrument>
+			<midi-instrument id="P1-I1">
+				<midi-channel>1</midi-channel>
+				<midi-program>1</midi-program>
+			</midi-instrument>
+		</score-part>
+	</part-list>
+	<part id="P1">
+		<measure number="1">
+			<direction>
+				<direction-type>
+					<other-direction/>
+				</direction-type>
+				<sound tempo="120"/>
+			</direction>
+			<print>
+				<system-layout>
+					<system-margins>
+						<left-margin>0</left-margin>
+						<right-margin>0</right-margin>
+					</system-margins>
+					<top-system-distance>180</top-system-distance>
+				</system-layout>
+			</print>
+			<attributes>
+				<divisions>480</divisions>
+				<key>
+					<fifths>0</fifths>
+					<mode>major</mode>
+				</key>
+				<time>
+					<beats>4</beats>
+					<beat-type>4</beat-type>
+				</time>
+				<clef>
+					<sign>G</sign>
+					<line>2</line>
+				</clef>
+			</attributes>
+			<direction placement="below">
+				<direction-type>
+					<wedge number="1" default-y="-65" type="crescendo"/>
+				</direction-type>
+			</direction>
+			<note>
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>480</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+			</note>
+			<direction placement="above">
+				<direction-type>
+					<wedge number="2" default-y="43" type="crescendo"/>
+				</direction-type>
+			</direction>
+			<note>
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>480</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge number="1" default-y="-65" type="stop" spread="10"/>
+				</direction-type>
+			</direction>
+			<note>
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>480</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+			</note>
+			<note>
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>480</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge number="2" default-y="43" type="stop" spread="10"/>
+				</direction-type>
+			</direction>
+			<backup>
+				<duration>1920</duration>
+			</backup>
+			<note>
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>480</duration>
+				<voice>2</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+			<note>
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>960</duration>
+				<voice>2</voice>
+				<type>half</type>
+				<stem>down</stem>
+			</note>
+			<note>
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>480</duration>
+				<voice>2</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+		</measure>
+		<measure number="2">
+			<direction placement="below">
+				<direction-type>
+					<wedge number="1" default-y="-65" type="diminuendo" spread="10"/>
+				</direction-type>
+			</direction>
+			<note>
+				<pitch>
+					<step>D</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>960</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>up</stem>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge number="1" default-y="-65" type="stop"/>
+				</direction-type>
+			</direction>
+			<direction placement="above">
+				<direction-type>
+					<wedge number="1" default-y="40" type="diminuendo" spread="10"/>
+				</direction-type>
+			</direction>
+			<note>
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>960</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>up</stem>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge number="1" default-y="40" type="stop"/>
+				</direction-type>
+			</direction>
+			<backup>
+				<duration>1920</duration>
+			</backup>
+			<note>
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>480</duration>
+				<voice>2</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+			<note>
+				<pitch>
+					<step>G</step>
+					<octave>3</octave>
+				</pitch>
+				<duration>480</duration>
+				<voice>2</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+			<note>
+				<pitch>
+					<step>C</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>960</duration>
+				<voice>2</voice>
+				<type>half</type>
+				<stem>down</stem>
+			</note>
+			<barline>
+				<bar-style>light-heavy</bar-style>
+			</barline>
+		</measure>
+	</part>
+</score-partwise>

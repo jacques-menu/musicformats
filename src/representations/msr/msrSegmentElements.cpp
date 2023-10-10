@@ -175,6 +175,12 @@ void msrSegmentElement::print (std::ostream& os) const
   os << asString () << std::endl;
 }
 
+void msrSegmentElement::printFull (std::ostream& os) const
+{
+  printFull (os);
+  os << std::endl;
+}
+
 std::ostream& operator << (std::ostream& os, const S_msrSegmentElement& elt)
 {
   if (elt) {

@@ -1033,7 +1033,7 @@ std::string msrTuplet::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Tuplet" <<
+    "[Tuplet asString ()" <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
@@ -1108,7 +1108,7 @@ std::string msrTuplet::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Tuplet" <<
+    "[Tuplet asShortString ()" <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<

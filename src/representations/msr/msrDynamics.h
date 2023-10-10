@@ -301,6 +301,7 @@ class EXP msrWedge : public msrElement
 
     static SMARTP<msrWedge> create (
                             int                inputLineNumber,
+                            int                wedgeNumber,
                             msrWedgeKind       wedgeKind,
                             msrWedgeNienteKind wedgeNienteKind,
                             msrLineTypeKind    wedgeLineTypeKind,
@@ -314,6 +315,7 @@ class EXP msrWedge : public msrElement
 
                           msrWedge (
                             int                inputLineNumber,
+                            int                wedgeNumber,
                             msrWedgeKind       wedgeKind,
                             msrWedgeNienteKind wedgeNienteKind,
                             msrLineTypeKind    wedgeLineTypeKind,
@@ -362,12 +364,16 @@ class EXP msrWedge : public msrElement
     // print
     // ------------------------------------------------------
 
+    std::string           asString () const override;
+
     void                  print (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
+
+    int                   fWedgeNumber;
 
     msrWedgeKind          fWedgeKind;
 

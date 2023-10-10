@@ -881,16 +881,16 @@ class EXP msr2mxsrTranslator :
     // ------------------------------------------------------
     void                      populateNoteDirections (
                                 const S_msrNote& theMsrNote);
-    void                      appendNoteWedges (
+    void                      appendNoteWedgesList (
                                 const S_msrNote& theMsrNote);
-    void                      appendNoteDynamics (
+    void                      appendNoteDynamicsList (
                                 const S_msrNote& theMsrNote);
 
     // spanners
     // ------------------------------------------------------
-    void                      appendNoteSpannersBeforeNote (
+    void                      appendNoteSpannersListBeforeNote (
                                 const S_msrNote& theMsrNote);
-    void                      appendNoteSpannersAfterNote (
+    void                      appendNoteSpannersListAfterNote (
                                 const S_msrNote& theMsrNote);
 
     void                      appendBasicsToNote (
@@ -969,7 +969,7 @@ class EXP msr2mxsrTranslator :
     // ------------------------------------------------------
     Sxmlelement               fCurrentNoteNotationsOrnamentsElement;
 
-    void                      appendNoteOrnaments (
+    void                      appendNoteOrnamentsList (
                                 const S_msrNote& theMsrNote);
 
     void                      appendToNoteNotationsOrnaments (
@@ -980,7 +980,7 @@ class EXP msr2mxsrTranslator :
     // ------------------------------------------------------
     Sxmlelement               fCurrentNoteNotationsArticulationsElement;
 
-    void                      appendNoteArticulations (
+    void                      appendNoteArticulationsList (
                                 const S_msrNote& theMsrNote);
 
     void                      appendToNoteNotationsArticulations (
@@ -992,13 +992,13 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fCurrentNoteNotationsTechnicalsElement;
 
-    void                      appendNoteTechnicals (
+    void                      appendNoteTechnicalsList (
                                 const S_msrNote& theMsrNote);
-    void                      appendNoteTechnicalWithIntegers (
+    void                      appendNoteTechnicalWithIntegersList (
                                 const S_msrNote& theMsrNote);
-    void                      appendNoteTechnicalWithFloats (
+    void                      appendNoteTechnicalWithFloatsList (
                                 const S_msrNote& theMsrNote);
-    void                      appendNoteTechnicalWithStrings (
+    void                      appendNoteTechnicalWithStringsList (
                                 const S_msrNote& theMsrNote);
 
     void                      appendToNoteNotationsTechnicals (
@@ -1014,7 +1014,7 @@ class EXP msr2mxsrTranslator :
     //note slurs
     // ------------------------------------------------------
 
-    void                      appendNoteSlursIfAny (
+    void                      appendNoteSlursListIfAny (
                                 const S_msrNote& theMsrNote);
 
 /*

@@ -483,8 +483,8 @@ class EXP msrNote : public msrTupletElement
     // -------------------------------
 
     std::list<S_msrSyllable>
-                          getNoteSyllables () const
-                              { return fNoteSyllables; }
+                          getNoteSyllablesList () const
+                              { return fNoteSyllablesList; }
 
     // elements attached to the note
     // -------------------------------
@@ -497,58 +497,58 @@ class EXP msrNote : public msrTupletElement
 
     // beams
     const std::list<S_msrBeam>&
-                          getNoteBeams () const
-                              { return fNoteBeams; }
+                          getNoteBeamsList () const
+                              { return fNoteBeamsList; }
 
     // articulations
     const std::list<S_msrArticulation>&
-                          getNoteArticulations () const
-                              { return fNoteArticulations; }
+                          getNoteArticulationsList () const
+                              { return fNoteArticulationsList; }
 
     std::list<S_msrArticulation>&
-                          getNoteArticulationsNonConst ()
-                              { return fNoteArticulations; }
+                          getNoteArticulationsListNonConst ()
+                              { return fNoteArticulationsList; }
 
     // spanners
     const std::list<S_msrSpanner>&
-                          getNoteSpanners () const
-                              { return fNoteSpanners; }
+                          getNoteSpannersList () const
+                              { return fNoteSpannersList; }
 
     std::list<S_msrSpanner>&
-                          getNoteSpannersNonConst ()
-                              { return fNoteSpanners; }
+                          getNoteSpannersListNonConst ()
+                              { return fNoteSpannersList; }
 
     // technicals
     const std::list<S_msrTechnical>&
-                          getNoteTechnicals () const
-                              { return fNoteTechnicals; }
+                          getNoteTechnicalsList () const
+                              { return fNoteTechnicalsList; }
 
     const std::list<S_msrTechnicalWithInteger>&
-                          getNoteTechnicalWithIntegers () const
-                              { return fNoteTechnicalWithIntegers; }
+                          getNoteTechnicalWithIntegersList () const
+                              { return fNoteTechnicalWithIntegersList; }
 
     const std::list<S_msrTechnicalWithFloat>&
-                          getNoteTechnicalWithFloats () const
-                              { return fNoteTechnicalWithFloats; }
+                          getNoteTechnicalWithFloatsList () const
+                              { return fNoteTechnicalWithFloatsList; }
 
     const std::list<S_msrTechnicalWithString>&
-                          getNoteTechnicalWithStrings () const
-                              { return fNoteTechnicalWithStrings; }
+                          getNoteTechnicalWithStringsList () const
+                              { return fNoteTechnicalWithStringsList; }
 
     // ornaments
     const std::list<S_msrOrnament>&
-                          getNoteOrnaments () const
-                              { return fNoteOrnaments; }
+                          getNoteOrnamentsList () const
+                              { return fNoteOrnamentsList; }
 
     // glissandos
     const std::list<S_msrGlissando>&
-                          getNoteGlissandos () const
-                              { return fNoteGlissandos; }
+                          getNoteGlissandosList () const
+                              { return fNoteGlissandosList; }
 
     // slides
     const std::list<S_msrSlide>&
-                          getNoteSlides () const
-                              { return fNoteSlides; }
+                          getNoteSlidesList () const
+                              { return fNoteSlidesList; }
 
     // grace notes
     void                  setNoteGraceNotesGroupBefore (
@@ -588,88 +588,88 @@ class EXP msrNote : public msrTupletElement
 
     // dynamics
     const std::list<S_msrDynamic>&
-                          getNoteDynamics () const
-                              { return fNoteDynamics; }
+                          getNoteDynamicsList () const
+                              { return fNoteDynamicsList; }
     const std::list<S_msrOtherDynamic>&
-                          getNoteOtherDynamics () const
-                              { return fNoteOtherDynamics; }
+                          getNoteOtherDynamicsList () const
+                              { return fNoteOtherDynamicsList; }
 
     // words
     const std::list<S_msrWords>&
-                          getNoteWords () const
-                              { return fNoteWords; }
+                          getNoteWordsList () const
+                              { return fNoteWordsList; }
 
-    std::list<S_msrWords>&     getNoteWordsNonConst ()
-                              { return fNoteWords; }
+    std::list<S_msrWords>&     getNoteWordsListNonConst ()
+                              { return fNoteWordsList; }
 
     // slashes
     const std::list<S_msrSlash>&
-                          getNoteSlashes () const
-                              { return fNoteSlashes; }
+                          getNoteSlashesList () const
+                              { return fNoteSlashesList; }
 
     // wedges
     const std::list<S_msrCrescDecresc>&
-                          getNoteCrescDecrescs () const
-                              { return fNoteCrescDecrescs; }
+                          getNoteCrescDecrescsList () const
+                              { return fNoteCrescDecrescsList; }
 
     // wedges
     const std::list<S_msrWedge>&
-                          getNoteWedges () const
-                              { return fNoteWedges; }
+                          getNoteWedgesList () const
+                              { return fNoteWedgesList; }
 
     std::list<S_msrWedge>&
-                          getNoteWedgesNonConst ()
-                              { return fNoteWedges; }
+                          getNoteWedgesListNonConst ()
+                              { return fNoteWedgesList; }
 
     // segnos
     const std::list<S_msrSegno>&
-                          getNoteSegnos () const
-                              { return fNoteSegnos; }
+                          getNoteSegnosList () const
+                              { return fNoteSegnosList; }
 
     // dal segnos
     const std::list<S_msrDalSegno>&
-                          getNoteDalSegnos () const
-                              { return fNoteDalSegnos; }
+                          getNoteDalSegnosList () const
+                              { return fNoteDalSegnosList; }
 
     // coda
     const std::list<S_msrCoda>&
-                          getNoteCodas () const
-                              { return fNoteCodas; }
+                          getNoteCodasList () const
+                              { return fNoteCodasList; }
 
     // eyeglasses
     const std::list<S_msrEyeGlasses>&
-                          getNoteEyeGlasses () const
-                              { return fNoteEyeGlasses; }
+                          getNoteEyeGlassesList () const
+                              { return fNoteEyeGlassesList; }
 
     // damps
     const std::list<S_msrDamp>&
-                          getNoteDamps () const
-                              { return fNoteDamps; }
+                          getNoteDampsList () const
+                              { return fNoteDampsList; }
 
     // damp alls
     const std::list<S_msrDampAll>&
-                          getNoteDampAlls () const
-                              { return fNoteDampAlls; }
+                          getNoteDampAllsList () const
+                              { return fNoteDampAllsList; }
 
     // scordaturas
     const std::list<S_msrScordatura>&
-                          getNoteScordaturas () const
-                              { return fNoteScordaturas; }
+                          getNoteScordaturasList () const
+                              { return fNoteScordaturasList; }
 
     // slurs
     const std::list<S_msrSlur>&
-                          getNoteSlurs () const
-                              { return fNoteSlurs; }
+                          getNoteSlursList () const
+                              { return fNoteSlursList; }
 
     // ligatures
     const std::list<S_msrLigature>&
-                          getNoteLigatures () const
-                              { return fNoteLigatures; }
+                          getNoteLigaturesList () const
+                              { return fNoteLigaturesList; }
 
     // pedals
     const std::list<S_msrPedal>&
-                          getNotePedals () const
-                              { return fNotePedals; }
+                          getNotePedalsList () const
+                              { return fNotePedalsList; }
 
     // note measure information
     // -------------------------------
@@ -1067,7 +1067,7 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     std::list<S_msrSyllable>
-                          fNoteSyllables;
+                          fNoteSyllablesList;
 
     // stem
     // ------------------------------------------------------
@@ -1077,51 +1077,51 @@ class EXP msrNote : public msrTupletElement
     // beams
     // ------------------------------------------------------
 
-    std::list<S_msrBeam>  fNoteBeams;
+    std::list<S_msrBeam>  fNoteBeamsList;
 
     // articulations
     // ------------------------------------------------------
 
     std::list<S_msrArticulation>
-                          fNoteArticulations;
+                          fNoteArticulationsList;
 
     // spanners
     // ------------------------------------------------------
 
     std::list<S_msrSpanner>
-                          fNoteSpanners;
+                          fNoteSpannersList;
 
     // technicals
     // ------------------------------------------------------
 
     std::list<S_msrTechnical>
-                          fNoteTechnicals;
+                          fNoteTechnicalsList;
 
     std::list<S_msrTechnicalWithInteger>
-                          fNoteTechnicalWithIntegers;
+                          fNoteTechnicalWithIntegersList;
 
     std::list<S_msrTechnicalWithFloat>
-                          fNoteTechnicalWithFloats;
+                          fNoteTechnicalWithFloatsList;
 
     std::list<S_msrTechnicalWithString>
-                          fNoteTechnicalWithStrings;
+                          fNoteTechnicalWithStringsList;
 
     // ornaments
     // ------------------------------------------------------
 
     std::list<S_msrOrnament>
-                          fNoteOrnaments;
+                          fNoteOrnamentsList;
 
     // glissandos
     // ------------------------------------------------------
 
     std::list<S_msrGlissando>
-                          fNoteGlissandos;
+                          fNoteGlissandosList;
 
     // slides
     // ------------------------------------------------------
 
-    std::list<S_msrSlide> fNoteSlides;
+    std::list<S_msrSlide> fNoteSlidesList;
 
     // grace notes
     // ------------------------------------------------------
@@ -1145,85 +1145,85 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     std::list<S_msrDynamic>
-                          fNoteDynamics;
+                          fNoteDynamicsList;
     std::list<S_msrOtherDynamic>
-                          fNoteOtherDynamics;
+                          fNoteOtherDynamicsList;
 
     // slashes
     // ------------------------------------------------------
 
-    std::list<S_msrSlash> fNoteSlashes;
+    std::list<S_msrSlash> fNoteSlashesList;
 
     // cresc/decresc
     // ------------------------------------------------------
 
     std::list<S_msrCrescDecresc>
-                          fNoteCrescDecrescs;
+                          fNoteCrescDecrescsList;
 
     // wedges
     // ------------------------------------------------------
 
-    std::list<S_msrWedge> fNoteWedges;
+    std::list<S_msrWedge> fNoteWedgesList;
 
     // segnos
     // ------------------------------------------------------
 
-    std::list<S_msrSegno> fNoteSegnos;
+    std::list<S_msrSegno> fNoteSegnosList;
 
     // dal segnos
     // ------------------------------------------------------
 
     std::list<S_msrDalSegno>
-                          fNoteDalSegnos;
+                          fNoteDalSegnosList;
 
     // coda
     // ------------------------------------------------------
 
-    std::list<S_msrCoda>  fNoteCodas;
+    std::list<S_msrCoda>  fNoteCodasList;
 
     // eyeglasses
     // ------------------------------------------------------
 
     std::list<S_msrEyeGlasses>
-                          fNoteEyeGlasses;
+                          fNoteEyeGlassesList;
 
     // damps
     // ------------------------------------------------------
 
-    std::list<S_msrDamp>  fNoteDamps;
+    std::list<S_msrDamp>  fNoteDampsList;
 
     // damp alls
     // ------------------------------------------------------
 
     std::list<S_msrDampAll>
-                          fNoteDampAlls;
+                          fNoteDampAllsList;
 
     // scordaturas
     // ------------------------------------------------------
 
     std::list<S_msrScordatura>
-                          fNoteScordaturas;
+                          fNoteScordaturasList;
 
     // words
     // ------------------------------------------------------
 
-    std::list<S_msrWords> fNoteWords;
+    std::list<S_msrWords> fNoteWordsList;
 
     // slurs
     // ------------------------------------------------------
 
-    std::list<S_msrSlur>  fNoteSlurs;
+    std::list<S_msrSlur>  fNoteSlursList;
 
     // ligatures
     // ------------------------------------------------------
 
     std::list<S_msrLigature>
-                          fNoteLigatures;
+                          fNoteLigaturesList;
 
     // pedals
     // ------------------------------------------------------
 
-    std::list<S_msrPedal> fNotePedals;
+    std::list<S_msrPedal> fNotePedalsList;
 
     // harmonies
     // ------------------------------------------------------

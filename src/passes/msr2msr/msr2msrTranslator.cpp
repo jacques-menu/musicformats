@@ -1862,7 +1862,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
   else if (fOnGoingChord) {
     // register the figured bass clone in the current chord clone
     fCurrentChordClone->
-      setChordFiguredBass (
+      setChordFiguredBassesList (
         fCurrentFiguredBassClone); // JMI ??? v0.9.66
   }
 

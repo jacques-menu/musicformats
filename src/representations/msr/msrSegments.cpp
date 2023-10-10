@@ -3309,7 +3309,7 @@ void msrSegment::displaySegment (
 void msrSegment::printFull (std::ostream& os) const
 {
   os <<
-    "[Segment printfull()'" <<
+    "[Segment FULL'" <<
     fSegmentAbsoluteNumber <<
     "', fSegmentDebugNumber: '" <<
     fSegmentDebugNumber <<
@@ -3348,7 +3348,7 @@ void msrSegment::printFull (std::ostream& os) const
   if (fSegmentFirstMeasure) {
     os << std::endl;
     ++gIndenter;
-    os << fSegmentFirstMeasure;
+    fSegmentFirstMeasure->printFull (os);
     --gIndenter;
   }
   else {
@@ -3360,7 +3360,7 @@ void msrSegment::printFull (std::ostream& os) const
   if (fSegmentLastMeasure) {
     os << std::endl;
     ++gIndenter;
-    os << fSegmentLastMeasure;
+    fSegmentLastMeasure->printFull (os);
     --gIndenter;
   }
   else {

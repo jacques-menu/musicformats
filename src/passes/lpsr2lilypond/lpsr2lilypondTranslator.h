@@ -839,17 +839,17 @@ class EXP lpsr2lilypondTranslator :
     std::string           pitchedRestAsLilypondString (
                             const S_msrNote& note);
 
-    void                  generateNoteBeams (
+    void                  generateNoteBeamsList (
                             const S_msrNote& note);
 
     void                  generateNoteSlurDirection (
                             const S_msrNote& note);
-    void                  generateNoteSlurs (
+    void                  generateNoteSlursList (
                             const S_msrNote& note);
 
     void                  generateNoteHeadColor (
                             const S_msrNote& note);
-    void                  generateNoteLigatures (
+    void                  generateNoteLigaturesList (
                             const S_msrNote& note);
     void                  generateNoteHead (
                             const S_msrNote& note);
@@ -897,13 +897,13 @@ class EXP lpsr2lilypondTranslator :
     void                  generateCodeForNoteInDoubleTremolo (
                             const S_msrNote& note);
 
-    void                  generateNoteScordaturas (
+    void                  generateNoteScordaturasList (
                             const S_msrNote& note);
 
-    void                  generateNoteSlashes (
+    void                  generateNoteSlashesList (
                             const S_msrNote& note);
 
-    void                  generateNoteWedges (
+    void                  generateNoteWedgesList (
                             const S_msrNote& note);
 
     void                  generateNoteSlurLineTypes (
@@ -911,19 +911,19 @@ class EXP lpsr2lilypondTranslator :
 
     void                  generateNoteGlissandoStyles (
                             const S_msrNote& note);
-    void                  generateNoteGlissandosWithText (
+    void                  generateNoteGlissandosListWithText (
                             const S_msrNote& note);
 
     void                  generateNoteSlideLineStyles (
                             const S_msrNote& note);
-    void                  generateNoteSlidesWithText (
+    void                  generateNoteSlidesListWithText (
                             const S_msrNote& note);
 
-    void                  generateNoteTechnicalsWithStrings (
+    void                  generateNoteTechnicalsListWithStrings (
                             const S_msrNote& note);
 
-    void                  generateCodeForNoteWords (
-                            const std::list<S_msrWords>& noteWords);
+    void                  generateCodeForNoteWordsList (
+                            const std::list<S_msrWords>& noteWordsList);
 
     void                  generateCodeRightAfterNote (
                             const S_msrNote& note);
@@ -980,10 +980,10 @@ class EXP lpsr2lilypondTranslator :
 
     msrPlacementKind      fCurrentSpannerPlacementKind;
 
-    void                  generateBeforeNoteSpannersIfAny (
+    void                  generateBeforeNoteSpannersListIfAny (
                             const S_msrNote& note);
 
-    void                  generateAfterNoteSpannersIfAny (
+    void                  generateAfterNoteSpannersListIfAny (
                             const S_msrNote& note);
 
     void                  generateCodeForSpannerBeforeNote (

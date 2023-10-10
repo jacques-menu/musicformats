@@ -41,6 +41,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::create (
   msrGraceNotesGroupKind graceNotesGroupKind,
   Bool                   graceNotesGroupIsSlashed,
   Bool                   graceNotesGroupIsBeamed,
+  Bool                   graceNotesGroupIsTied,
+  Bool                   graceNotesGroupIsSlurred,
   const std::string&     graceNotesGroupMeasureNumber)
 {
   msrGraceNotesGroup* obj =
@@ -49,6 +51,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::create (
       graceNotesGroupKind,
       graceNotesGroupIsSlashed,
       graceNotesGroupIsBeamed,
+      graceNotesGroupIsTied,
+      graceNotesGroupIsSlurred,
       graceNotesGroupMeasureNumber);
   assert (obj != nullptr);
   return obj;
@@ -59,18 +63,35 @@ msrGraceNotesGroup::msrGraceNotesGroup (
   msrGraceNotesGroupKind graceNotesGroupKind,
   Bool                   graceNotesGroupIsSlashed,
   Bool                   graceNotesGroupIsBeamed,
+  Bool                   graceNotesGroupIsTied,
+  Bool                   graceNotesGroupIsSlurred,
   const std::string&     graceNotesGroupMeasureNumber)
     : msrElement (inputLineNumber)
 {
 
   fGraceNotesGroupKind = graceNotesGroupKind;
 
-  fGraceNotesGroupIsTied = false;
-
   fGraceNotesGroupIsSlashed = graceNotesGroupIsSlashed;
   fGraceNotesGroupIsBeamed = graceNotesGroupIsBeamed;
 
+  fGraceNotesGroupIsTied = graceNotesGroupIsTied;
+  fGraceNotesGroupIsSlurred = graceNotesGroupIsSlurred;
+
   fGraceNotesGroupMeasureNumber = graceNotesGroupMeasureNumber;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceGraceNotes ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a grace notes group: " <<
+      asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   // grace notes are followed by notes
   // unless they are last in a measure
@@ -103,10 +124,14 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createGraceNotesGroupNewbornClone ()
         fGraceNotesGroupKind,
         fGraceNotesGroupIsSlashed,
         fGraceNotesGroupIsBeamed,
+        fGraceNotesGroupIsTied,
+        fGraceNotesGroupIsSlurred,
         fGraceNotesGroupMeasureNumber);
 
   newbornClone->fGraceNotesGroupIsTied =
     fGraceNotesGroupIsTied;
+  newbornClone->fGraceNotesGroupIsSlurred =
+    fGraceNotesGroupIsSlurred;
 
   newbornClone->fGraceNotesGroupIsFollowedByNotes =
     fGraceNotesGroupIsFollowedByNotes;
@@ -185,10 +210,14 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         fGraceNotesGroupKind,
         fGraceNotesGroupIsSlashed,
         fGraceNotesGroupIsBeamed,
+        fGraceNotesGroupIsTied,
+        fGraceNotesGroupIsSlurred,
         fGraceNotesGroupMeasureNumber);
 
   clone->fGraceNotesGroupIsTied =
     fGraceNotesGroupIsTied;
+  clone->fGraceNotesGroupIsSlurred =
+    fGraceNotesGroupIsSlurred;
 
   clone->fGraceNotesGroupIsFollowedByNotes =
     fGraceNotesGroupIsFollowedByNotes;
@@ -276,7 +305,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 
     ss <<
       "Appending note " <<
-      note->asShortString () <<
+      note->asString () <<
       " to grace notes group " <<
       asShortString ();
 //      " in voice \"" <<
@@ -298,6 +327,11 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
   // is this grace note tied?
   if (note->getNoteTie ()) {
     fGraceNotesGroupIsTied = true;
+  }
+
+  // is this grace note slurred?
+  if (note->getNoteSlursList ().size () != 0) {
+    fGraceNotesGroupIsSlurred = true;
   }
 }
 
@@ -592,7 +626,7 @@ std::string msrGraceNotesGroup::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[GraceNotesGroup" <<
+    "[GraceNotesGroup asShortString ()" <<
     ", fGraceNotesGroupKind: " <<
     fGraceNotesGroupKind <<
     ", fGraceNotesGroupMeasureNumber: \"" <<
@@ -623,9 +657,23 @@ std::string msrGraceNotesGroup::asString () const
   std::stringstream ss;
 
   ss <<
-    "[GraceNotesGroup" <<
+    "[GraceNotesGroup asString ()" <<
     ", fGraceNotesGroupKind: " <<
     fGraceNotesGroupKind <<
+
+    ", fGraceNotesGroupIsSlashed" << ": " <<
+    fGraceNotesGroupIsSlashed <<
+    ", fGraceNotesGroupIsBeamed" << ": " <<
+    fGraceNotesGroupIsBeamed <<
+
+    ", fGraceNotesGroupIsTied" << ": " <<
+    fGraceNotesGroupIsTied <<
+    ", fGraceNotesGroupIsSlurred" << ": " <<
+    fGraceNotesGroupIsSlurred <<
+
+    ", fGraceNotesGroupIsFollowedByNotes" << ": " <<
+    fGraceNotesGroupIsFollowedByNotes <<
+
     ", fGraceNotesGroupMeasureNumber: \"" <<
     fGraceNotesGroupMeasureNumber <<
     "\", line " << fInputStartLineNumber <<
@@ -651,7 +699,7 @@ std::string msrGraceNotesGroup::asString () const
 void msrGraceNotesGroup::printFull (std::ostream& os) const
 {
   os <<
-    "[GraceNotesGroup" <<
+    "[GraceNotesGroup FULL" <<
     ", fGraceNotesGroupKind: " <<
     fGraceNotesGroupKind <<
     ", line " << fInputStartLineNumber <<
@@ -666,16 +714,19 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "upLinkToGraceNotesGroupToNote" << ": ";
-    if (fGraceNotesGroupUpLinkToNote) {
-      os <<
-        fGraceNotesGroupUpLinkToNote->asShortString ();
-    }
-    else {
-      os <<
-        "[NULL]";
-    }
-  os << std::endl;
+    "fGraceNotesGroupUpLinkToNote";
+  if (fGraceNotesGroupUpLinkToNote) {
+    os << std::endl;
+    ++gIndenter;
+    os <<
+      fGraceNotesGroupUpLinkToNote;
+    --gIndenter;
+  }
+  else {
+    os <<
+      ": [NULL]" <<
+      std::endl;
+  }
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -684,13 +735,17 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsTied" << ": " <<
-    fGraceNotesGroupIsTied <<
+    "fGraceNotesGroupIsBeamed" << ": " <<
+    fGraceNotesGroupIsBeamed <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsBeamed" << ": " <<
-    fGraceNotesGroupIsBeamed <<
+    "fGraceNotesGroupIsTied" << ": " <<
+    fGraceNotesGroupIsTied <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fGraceNotesGroupIsSlurred" << ": " <<
+    fGraceNotesGroupIsSlurred <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -707,7 +762,7 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "graceNotesGroupElementsList:";
+    "fGraceNotesGroupElementsList:";
   if (fGraceNotesGroupElementsList.size ()) {
     os << std::endl;
 
@@ -719,7 +774,7 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      os << (*i);
+      (*i)->printFull (os);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -729,7 +784,7 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
   else {
     os <<
        ": " <<
-       "[NONE]" <<
+       "[EMPTY]" <<
       std::endl;
   }
 
@@ -754,17 +809,19 @@ void msrGraceNotesGroup::print (std::ostream& os) const
 
   const int fieldWidth = 33;
 
-  os <<
+  os << std::left <<
     std::setw (fieldWidth) <<
-    "upLinkToGraceNotesGroupToNote" << ": ";
-    if (fGraceNotesGroupUpLinkToNote) {
-      os <<
-        fGraceNotesGroupUpLinkToNote->asShortString ();
-    }
-    else {
-      os <<
-        "[NULL]";
-    }
+    "fGraceNotesGroupUpLinkToNote";
+  if (fGraceNotesGroupUpLinkToNote) {
+    os << std::endl;
+    ++gIndenter;
+    os <<
+      fGraceNotesGroupUpLinkToNote;
+    --gIndenter;
+  }
+  else {
+    os << ": [NULL]" ;
+  }
   os << std::endl;
 
   os <<
@@ -774,13 +831,17 @@ void msrGraceNotesGroup::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsTied" << ": " <<
-    fGraceNotesGroupIsTied <<
+    "fGraceNotesGroupIsBeamed" << ": " <<
+    fGraceNotesGroupIsBeamed <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupIsBeamed" << ": " <<
-    fGraceNotesGroupIsBeamed <<
+    "fGraceNotesGroupIsTied" << ": " <<
+    fGraceNotesGroupIsTied <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fGraceNotesGroupIsSlurred" << ": " <<
+    fGraceNotesGroupIsSlurred <<
     std::endl;
 
 /*
@@ -798,7 +859,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "graceNotesGroupElementsList";
+    "fGraceNotesGroupElementsList";
   if (fGraceNotesGroupElementsList.size ()) {
     os << std::endl;
 
@@ -824,9 +885,9 @@ void msrGraceNotesGroup::print (std::ostream& os) const
       std::endl;
   }
 
-  os << ']' << std::endl;
-
   --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrGraceNotesGroup& elt)

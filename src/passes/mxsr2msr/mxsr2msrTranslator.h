@@ -1879,7 +1879,7 @@ class EXP mxsr2msrTranslator :
     std::string               fCurrentStanzaNumber;
     std::string               fCurrentStanzaName;
 
-    std::list<S_msrSyllable>  fCurrentNoteSyllables;
+    std::list<S_msrSyllable>  fCurrentNoteSyllablesList;
 
     Bool                      fLastHandledNoteInVoiceHasLyrics;
 
@@ -2140,6 +2140,7 @@ class EXP mxsr2msrTranslator :
 
     // grace notes
     Bool                      fCurrentNoteIsAGraceNote;
+
     std::string               fCurrentStealTimeFollowing;
     std::string               fCurrentStealTimePrevious;
     std::string               fCurrentMakeTimeSignature;
@@ -2156,11 +2157,14 @@ class EXP mxsr2msrTranslator :
     void                      initializeNoteData ();
 
 
-    // grace notes handling
+    // grace notes groups handling
     // ------------------------------------------------------
 
-    Bool                      fCurrentGraceIsSlashed;
-    Bool                      fCurrentGraceIsBeamed;
+    Bool                      fCurrentGraceGroupIsSlashed;
+    Bool                      fCurrentGraceGroupIsBeamed;
+
+    Bool                      fCurrentGraceGroupIsTied;
+    Bool                      fCurrentGraceGroupIsSlurred;
 
     S_msrGraceNotesGroup      fPendingGraceNotesGroup;
 
@@ -2178,7 +2182,7 @@ class EXP mxsr2msrTranslator :
                                 const S_msrChord& chord);
                                 */
 
-    void                      copyNoteArticulationsToChord (
+    void                      copyNoteArticulationsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
@@ -2231,48 +2235,48 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
-    void                      copyNoteDynamicsToChord (
+    void                      copyNoteDynamicsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
-    void                      copyNoteOtherDynamicsToChord (
+    void                      copyNoteOtherDynamicsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
-    void                      copyNoteWordsToChord (
+    void                      copyNoteWordsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
     void                      copyNoteTieToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
-//    void                      copyNoteSlursToChord (
+//    void                      copyNoteSlursListToChord (
 //                                const S_msrNote& note, S_msrChord chord);
-    void                      appendNoteSlursLinksToChord (
+    void                      appendNoteSlursListLinksToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
-    void                      copyNoteLigaturesToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNotePedalsToChord (
+    void                      copyNoteLigaturesListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
-    void                      copyNoteSlashesToChord (
+    void                      copyNotePedalsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
-    void                      copyNoteWedgesToChord (
+    void                      copyNoteSlashesListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
-    void                      copyNoteSegnosToChord (
+    void                      copyNoteWedgesListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
-    void                      copyNoteDalSegnosToChord (
+
+    void                      copyNoteSegnosListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
-    void                      copyNoteCodasToChord (
+    void                      copyNoteDalSegnosListToChord (
+                                const S_msrNote&  note,
+                                const S_msrChord& chord);
+    void                      copyNoteCodasListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
@@ -2314,16 +2318,16 @@ class EXP mxsr2msrTranslator :
 //    void                      attachCurrentTechnicalsToChord ( // JMI
  //                               const S_msrChord& chord);
 
-    void                      copyNoteTechnicalsToChord (
+    void                      copyNoteTechnicalsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
-    void                      copyNoteTechnicalWithIntegersToChord (
+    void                      copyNoteTechnicalWithIntegersListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
-    void                      copyNoteTechnicalWithFloatsToChord (
+    void                      copyNoteTechnicalWithFloatsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
-    void                      copyNoteTechnicalWithStringsToChord (
+    void                      copyNoteTechnicalWithStringsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
@@ -2339,7 +2343,7 @@ class EXP mxsr2msrTranslator :
 //    void                      attachCurrentOrnamentsToChord ( // JMI
  //                               const S_msrChord& chord);
 
-    void                      copyNoteOrnamentsToChord (
+    void                      copyNoteOrnamentsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
@@ -2355,7 +2359,7 @@ class EXP mxsr2msrTranslator :
 																const S_msrNote&   note,
                                 const std::string& context);
 
-    void                      copyNoteSpannersToChord (
+    void                      copyNoteSpannersListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
@@ -2377,11 +2381,11 @@ class EXP mxsr2msrTranslator :
 
     void                      attachPendingBeamsToCurrentNote ();
                                 /*
-    void                      copyNoteBeamsToChord (
+    void                      copyNoteBeamsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
                                 */
-    void                      appendNoteBeamsLinksToChord (
+    void                      appendNoteBeamsListLinksToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 

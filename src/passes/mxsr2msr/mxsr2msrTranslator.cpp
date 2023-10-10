@@ -638,6 +638,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 
   // voice handling
   fCurrentMusicXMLVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
+//   fCurrentMusicXMLVoiceNumber = 1; // default value, useful for wedges ??? JMI v0.9.70
 
   // measures handling
   fPartMeasuresCounter = 0;
@@ -8807,15 +8808,28 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
 
   }
 
-  // color JMI
+  // color JMI ??? v0.9.70
 
-  if (fCurrentTieKind != msrTieKind::kTieNone) {
-    if (! gGlobalMxsr2msrOahGroup->getIgnoreTies ()) {
-      fCurrentTie =
-        msrTie::create (
-          inputLineNumber,
-          fCurrentTieKind);
-    }
+  // should the tie kind be ignored?
+  switch (fCurrentTieKind) {
+    case msrTieKind::kTieNone:
+      break;
+
+    case msrTieKind::kTieStart:
+    case msrTieKind::kTieContinue:
+    case msrTieKind::kTieStop:
+      if (! gGlobalMxsr2msrOahGroup->getIgnoreTies ()) {
+        fCurrentTie =
+          msrTie::create (
+            inputLineNumber,
+            fCurrentTieKind);
+      }
+      break;
+  } // switch
+
+  // is the current note a grace note?
+  if (fCurrentNoteIsAGraceNote) {
+    fCurrentGraceGroupIsTied = true;
   }
 }
 
@@ -9666,6 +9680,11 @@ The values of start, stop, and continue refer to how an
     }
   }
 
+  // is the current note a grace note?
+  if (fCurrentNoteIsAGraceNote) {
+    fCurrentGraceGroupIsSlurred = true;
+  }
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSlursDetails ()) {
     displaySlurStartsStack ("AFTER handling slur");
@@ -9986,6 +10005,11 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // number
+
+  int wedgeNumber =
+    elt->getAttributeIntValue ("number", -1); // number is mandatory
+
   // type
 
   std::string type = elt->getAttributeValue("type");
@@ -10085,10 +10109,28 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
   }
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreWedges ()) {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceWedges ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating wedge" <<
+      ", wedgeKind: " << wedgeKind <<
+      ", fCurrentDirectionPlacementKind: " << fCurrentDirectionPlacementKind <<
+      ", fCurrentMusicXMLVoiceNumber: " << fCurrentMusicXMLVoiceNumber <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
     S_msrWedge
       wedge =
         msrWedge::create (
           inputLineNumber,
+          wedgeNumber,
           wedgeKind,
           wedgeNienteKind,
           wedgeLineTypeKind,
@@ -10798,7 +10840,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     // after the note has been created
 
     // append syllable to current note's syllables list
-    fCurrentNoteSyllables.push_back (
+    fCurrentNoteSyllablesList.push_back (
       syllable);
 
     // fetch the voice
@@ -11101,7 +11143,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
         ss <<
           std::endl <<
-          "fCurrentGraceNotes IS NOT NULL at the end of measure " << // JMI
+          "fCurrentGraceGroupNotes IS NOT NULL at the end of measure " << // JMI
           elt->getAttributeValue ("number") <<
           std::endl;
 
@@ -11184,9 +11226,9 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
       int numberOfPendingVoicesWedges = fPendingVoiceWedgesList.size ();
 
-      if (numberOfPendingVoicesWedges > 0) {
+      if (true || numberOfPendingVoicesWedges > 0) {
         ss <<
-          "fPendingVoiceWedgesList contains PENDING " <<
+          "fPendingVoiceWedgesList contains PENDING voice wedges ZOU: " << // ZOU
           mfSingularOrPlural (
             numberOfPendingVoicesWedges, "element", "elements");
 
@@ -18920,39 +18962,40 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentNoteIsAGraceNote = true;
-
   // slash
 
-  std::string slash = elt->getAttributeValue ("slash");
+  std::string slashString = elt->getAttributeValue ("slash");
 
-  fCurrentGraceIsSlashed = false; // default value
+  fCurrentGraceGroupIsSlashed = false; // default value
+//   fCurrentGraceGroupIsBeamed = false; // default value
+//
+//   fCurrentGraceGroupIsTied = false; // default value
+//   fCurrentGraceGroupIsSlurred = false; // default value
 
-  // check part group barLine
-  if      (slash == "yes")
-    fCurrentGraceIsSlashed = true;
+  if      (slashString == "yes")
+    fCurrentGraceGroupIsSlashed = true;
 
-  else if (slash == "no")
-    fCurrentGraceIsSlashed = false;
+  else if (slashString == "no")
+    fCurrentGraceGroupIsSlashed = false;
 
   else {
-    if (slash.size ()) {
+    if (slashString.size ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
         inputLineNumber,
         __FILE__, __LINE__,
-        "grace slash \"" + slash + "\" unknown, should be 'yes' or 'no'");
+        "grace slash \"" + slashString + "\" unknown, should be 'yes' or 'no'");
     }
   }
 
   // should all grace notes be slashed?
   if (gGlobalMxsr2msrOahGroup->getSlashAllGraceNotes ()) {
-    fCurrentGraceIsSlashed = true;
+    fCurrentGraceGroupIsSlashed = true;
   }
 
   // should all grace notes be beamed?
   if (gGlobalMxsr2msrOahGroup->getBeamAllGraceNotes ()) {
-    fCurrentGraceIsBeamed = true;
+    fCurrentGraceGroupIsBeamed = true;
   }
 
   fCurrentStealTimeFollowing =
@@ -18963,6 +19006,8 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
 
   fCurrentMakeTimeSignature =
     elt->getAttributeValue ("make-time");
+
+  fCurrentNoteIsAGraceNote = true;
 }
 
 //______________________________________________________________________________
@@ -20572,18 +20617,18 @@ void mxsr2msrTranslator::printCurrentChord ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteArticulationsToChord (
+void mxsr2msrTranslator::copyNoteArticulationsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's articulations if any from the first note to chord
 
   std::list<S_msrArticulation>
-    noteArticulations =
+    noteArticulationsList =
       note->
-        getNoteArticulations ();
+        getNoteArticulationsList ();
 
-  for (const S_msrArticulation& articulation : noteArticulations) {
+  for (const S_msrArticulation& articulation : noteArticulationsList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceArticulations ()) {
       std::stringstream ss;
@@ -20605,18 +20650,18 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTechnicalsToChord (
+void mxsr2msrTranslator::copyNoteTechnicalsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's technicals if any from the first note to chord
 
   std::list<S_msrTechnical>
-    noteTechnicals =
+    noteTechnicalsList =
       note->
-        getNoteTechnicals ();
+        getNoteTechnicalsList ();
 
-  for (S_msrTechnical technical : noteTechnicals) {
+  for (S_msrTechnical technical : noteTechnicalsList) {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTechnicals ()) {
     std::stringstream ss;
@@ -20635,18 +20680,18 @@ void mxsr2msrTranslator::copyNoteTechnicalsToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
+void mxsr2msrTranslator::copyNoteTechnicalWithIntegersListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's technicals if any from the first note to chord
 
   std::list<S_msrTechnicalWithInteger>
-    noteTechnicalWithIntegers =
+    noteTechnicalWithIntegersList =
       note->
-        getNoteTechnicalWithIntegers ();
+        getNoteTechnicalWithIntegersList ();
 
-  for (S_msrTechnicalWithInteger technicalWithInteger : noteTechnicalWithIntegers) {
+  for (S_msrTechnicalWithInteger technicalWithInteger : noteTechnicalWithIntegersList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       gLog <<
@@ -20663,18 +20708,18 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
+void mxsr2msrTranslator::copyNoteTechnicalWithFloatsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's technicals if any from the first note to chord
 
   std::list<S_msrTechnicalWithFloat>
-    noteTechnicalWithFloats =
+    noteTechnicalWithFloatsList =
       note->
-        getNoteTechnicalWithFloats ();
+        getNoteTechnicalWithFloatsList ();
 
-  for (S_msrTechnicalWithFloat technicalWithFloat : noteTechnicalWithFloats) {
+  for (S_msrTechnicalWithFloat technicalWithFloat : noteTechnicalWithFloatsList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       std::stringstream ss;
@@ -20696,18 +20741,18 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
+void mxsr2msrTranslator::copyNoteTechnicalWithStringsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's technicals if any from the first note to chord
 
   std::list<S_msrTechnicalWithString>
-    noteTechnicalWithStrings =
+    noteTechnicalWithStringsList =
       note->
-        getNoteTechnicalWithStrings ();
+        getNoteTechnicalWithStringsList ();
 
-  for (S_msrTechnicalWithString technicalWithString : noteTechnicalWithStrings) {
+  for (S_msrTechnicalWithString technicalWithString : noteTechnicalWithStringsList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       std::stringstream ss;
@@ -20729,18 +20774,18 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteOrnamentsToChord (
+void mxsr2msrTranslator::copyNoteOrnamentsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's ornaments if any from the first note to chord
 
   std::list<S_msrOrnament>
-    noteOrnaments =
+    noteOrnamentsList =
       note->
-        getNoteOrnaments ();
+        getNoteOrnamentsList ();
 
-  for (S_msrOrnament ornament : noteOrnaments) {
+  for (S_msrOrnament ornament : noteOrnamentsList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceOrnaments ()) {
       std::stringstream ss;
@@ -20763,18 +20808,18 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteSpannersToChord (
+void mxsr2msrTranslator::copyNoteSpannersListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's spanners if any from the first note to chord
 
   std::list<S_msrSpanner>
-    noteSpanners =
+    noteSpannersList =
       note->
-        getNoteSpanners ();
+        getNoteSpannersList ();
 
-  for (S_msrSpanner spanner : noteSpanners) {
+  for (S_msrSpanner spanner : noteSpannersList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSpanners ()) {
       std::stringstream ss;
@@ -20831,21 +20876,21 @@ void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteDynamicsToChord (
+void mxsr2msrTranslator::copyNoteDynamicsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's dynamics if any from the first note to chord
 
   std::list<S_msrDynamic>
-    noteDynamics =
+    noteDynamicsList =
       note->
-        getNoteDynamics ();
+        getNoteDynamicsList ();
 
   std::list<S_msrDynamic>::const_iterator i;
   for (
-    i = noteDynamics.begin ();
-    i != noteDynamics.end ();
+    i = noteDynamicsList.begin ();
+    i != noteDynamicsList.end ();
     ++i
   ) {
 
@@ -20871,21 +20916,21 @@ void mxsr2msrTranslator::copyNoteDynamicsToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
+void mxsr2msrTranslator::copyNoteOtherDynamicsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's other dynamics if any from the first note to chord
 
   std::list<S_msrOtherDynamic>
-    noteOtherDynamics =
+    noteOtherDynamicsList =
       note->
-        getNoteOtherDynamics ();
+        getNoteOtherDynamicsList ();
 
   std::list<S_msrOtherDynamic>::const_iterator i;
   for (
-    i = noteOtherDynamics.begin ();
-    i != noteOtherDynamics.end ();
+    i = noteOtherDynamicsList.begin ();
+    i != noteOtherDynamicsList.end ();
     ++i
   ) {
 
@@ -20911,21 +20956,21 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteWordsToChord (
+void mxsr2msrTranslator::copyNoteWordsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's words if any from the first note to chord
 
   std::list<S_msrWords>
-    noteWords =
+    noteWordsList =
       note->
-        getNoteWords ();
+        getNoteWordsList ();
 
   std::list<S_msrWords>::const_iterator i;
   for (
-    i = noteWords.begin ();
-    i != noteWords.end ();
+    i = noteWordsList.begin ();
+    i != noteWordsList.end ();
     ++i
   ) {
 
@@ -20986,21 +21031,21 @@ void mxsr2msrTranslator::copyNoteStemToChord (
 
 /*
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteBeamsToChord (
+void mxsr2msrTranslator::copyNoteBeamsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's beams if any from the first note to chord
 
   std::list<S_msrBeam>
-    noteBeams =
+    noteBeamsList =
       note->
-        getNoteBeams ();
+        getNoteBeamsList ();
 
   std::list<S_msrBeam>::const_iterator i;
   for (
-    i = noteBeams.begin ();
-    i != noteBeams.end ();
+    i = noteBeamsList.begin ();
+    i != noteBeamsList.end ();
     ++i
   ) {
 
@@ -21042,21 +21087,21 @@ void mxsr2msrTranslator::copyNoteBeamsToChord (
 }
 */
 
-void mxsr2msrTranslator::appendNoteBeamsLinksToChord (
+void mxsr2msrTranslator::appendNoteBeamsListLinksToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // append link of note's beams if any from the first note to chord
 
   std::list<S_msrBeam>
-    noteBeams =
+    noteBeamsList =
       note->
-        getNoteBeams ();
+        getNoteBeamsList ();
 
   std::list<S_msrBeam>::const_iterator i;
   for (
-    i = noteBeams.begin ();
-    i != noteBeams.end ();
+    i = noteBeamsList.begin ();
+    i != noteBeamsList.end ();
     ++i
   ) {
     S_msrBeam beam = (*i);
@@ -21130,7 +21175,7 @@ void mxsr2msrTranslator::copyNoteTieToChord (
         "Appending tie " <<
         noteTie->asString () <<
         " from note " << note->asString () <<
-        " to chord";
+        " to chord" << chord->asString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -21167,21 +21212,21 @@ void mxsr2msrTranslator::copyNoteTieToChord (
 
 /*
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteSlursToChord (
+void mxsr2msrTranslator::copyNoteSlursListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's slurs if any from the first note to chord
 
   std::list<S_msrSlur>
-    noteSlurs =
+    noteSlursList =
       note->
-        getNoteSlurs ();
+        getNoteSlursList ();
 
   std::list<S_msrSlur>::const_iterator i;
   for (
-    i = noteSlurs.begin ();
-    i != noteSlurs.end ();
+    i = noteSlursList.begin ();
+    i != noteSlursList.end ();
     ++i
   ) {
 
@@ -21206,21 +21251,21 @@ void mxsr2msrTranslator::copyNoteSlursToChord (
 */
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::appendNoteSlursLinksToChord (
+void mxsr2msrTranslator::appendNoteSlursListLinksToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // append link of note's slurs if any from the first note to chord
 
   std::list<S_msrSlur>
-    noteSlurs =
+    noteSlursList =
       note->
-        getNoteSlurs ();
+        getNoteSlursList ();
 
   std::list<S_msrSlur>::const_iterator i;
   for (
-    i = noteSlurs.begin ();
-    i != noteSlurs.end ();
+    i = noteSlursList.begin ();
+    i != noteSlursList.end ();
     ++i
   ) {
     S_msrSlur slur = (*i);
@@ -21274,18 +21319,18 @@ void mxsr2msrTranslator::appendNoteSlursLinksToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteLigaturesToChord (
+void mxsr2msrTranslator::copyNoteLigaturesListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's ligatures if any from the first note to chord
 
   std::list<S_msrLigature>
-    noteLigatures =
+    noteLigaturesList =
       note->
-        getNoteLigatures ();
+        getNoteLigaturesList ();
 
-  for (S_msrLigature ligature : noteLigatures) {
+  for (S_msrLigature ligature : noteLigaturesList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLigatures ()) {
       std::stringstream ss;
@@ -21308,19 +21353,19 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNotePedalsToChord (
+void mxsr2msrTranslator::copyNotePedalsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's pedals if any from the first note to chord
 
   std::list<S_msrPedal>
-    notePedals =
+    notePedalsList =
       note->
-        getNotePedals ();
+        getNotePedalsList ();
 
   std::list<S_msrPedal>::const_iterator i;
-  for (S_msrPedal pedal : notePedals) {
+  for (S_msrPedal pedal : notePedalsList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTracePedals ()) {
       std::stringstream ss;
@@ -21343,21 +21388,21 @@ void mxsr2msrTranslator::copyNotePedalsToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteSlashesToChord (
+void mxsr2msrTranslator::copyNoteSlashesListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's slashes if any from the first note to chord
 
   std::list<S_msrSlash>
-    noteSlashes =
+    noteSlashesList =
       note->
-        getNoteSlashes ();
+        getNoteSlashesList ();
 
   std::list<S_msrSlash>::const_iterator i;
   for (
-    i = noteSlashes.begin ();
-    i != noteSlashes.end ();
+    i = noteSlashesList.begin ();
+    i != noteSlashesList.end ();
     ++i
   ) {
 
@@ -21383,21 +21428,21 @@ void mxsr2msrTranslator::copyNoteSlashesToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteWedgesToChord (
+void mxsr2msrTranslator::copyNoteWedgesListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's wedges if any from the first note to chord
 
   std::list<S_msrWedge>
-    noteWedges =
+    noteWedgesList =
       note->
-        getNoteWedges ();
+        getNoteWedgesList ();
 
   std::list<S_msrWedge>::const_iterator i;
   for (
-    i = noteWedges.begin ();
-    i != noteWedges.end ();
+    i = noteWedgesList.begin ();
+    i != noteWedgesList.end ();
     ++i
   ) {
     S_msrWedge wedge = (*i);
@@ -21424,21 +21469,21 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteSegnosToChord (
+void mxsr2msrTranslator::copyNoteSegnosListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's segnos if any from the first note to chord
 
   std::list<S_msrSegno>
-    noteSegnos =
+    noteSegnosList =
       note->
-        getNoteSegnos ();
+        getNoteSegnosList ();
 
   std::list<S_msrSegno>::const_iterator i;
   for (
-    i = noteSegnos.begin ();
-    i != noteSegnos.end ();
+    i = noteSegnosList.begin ();
+    i != noteSegnosList.end ();
     ++i
   ) {
 
@@ -21464,21 +21509,21 @@ void mxsr2msrTranslator::copyNoteSegnosToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteDalSegnosToChord (
+void mxsr2msrTranslator::copyNoteDalSegnosListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's dal segnos if any from the first note to chord
 
   std::list<S_msrDalSegno>
-    noteDalSegnos =
+    noteDalSegnosList =
       note->
-        getNoteDalSegnos ();
+        getNoteDalSegnosList ();
 
   std::list<S_msrDalSegno>::const_iterator i;
   for (
-    i = noteDalSegnos.begin ();
-    i != noteDalSegnos.end ();
+    i = noteDalSegnosList.begin ();
+    i != noteDalSegnosList.end ();
     ++i
   ) {
 
@@ -21504,21 +21549,21 @@ void mxsr2msrTranslator::copyNoteDalSegnosToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteCodasToChord (
+void mxsr2msrTranslator::copyNoteCodasListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's codas if any from the first note to chord
 
   std::list<S_msrCoda>
-    noteCodas =
+    noteCodasList =
       note->
-        getNoteCodas ();
+        getNoteCodasList ();
 
   std::list<S_msrCoda>::const_iterator i;
   for (
-    i = noteCodas.begin ();
-    i != noteCodas.end ();
+    i = noteCodasList.begin ();
+    i != noteCodasList.end ();
     ++i
   ) {
 
@@ -21802,32 +21847,32 @@ void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // copy note's articulations if any to the chord
-  if (note->getNoteArticulations ().size ()) {
-    copyNoteArticulationsToChord (note, chord);
+  if (note->getNoteArticulationsList ().size ()) {
+    copyNoteArticulationsListToChord (note, chord);
   }
 
   // copy note's technicals if any to the chord
-  if (note->getNoteTechnicals ().size ()) {
-      copyNoteTechnicalsToChord (note, chord);
+  if (note->getNoteTechnicalsList ().size ()) {
+      copyNoteTechnicalsListToChord (note, chord);
   }
-  if (note->getNoteTechnicalWithIntegers ().size ()) {
-      copyNoteTechnicalWithIntegersToChord (note, chord);
+  if (note->getNoteTechnicalWithIntegersList ().size ()) {
+      copyNoteTechnicalWithIntegersListToChord (note, chord);
   }
-  if (note->getNoteTechnicalWithFloats ().size ()) {
-      copyNoteTechnicalWithFloatsToChord (note, chord);
+  if (note->getNoteTechnicalWithFloatsList ().size ()) {
+      copyNoteTechnicalWithFloatsListToChord (note, chord);
   }
-  if (note->getNoteTechnicalWithStrings ().size ()) {
-      copyNoteTechnicalWithStringsToChord (note, chord);
+  if (note->getNoteTechnicalWithStringsList ().size ()) {
+      copyNoteTechnicalWithStringsListToChord (note, chord);
   }
 
   // copy note's ornaments if any to the chord
-  if (note->getNoteOrnaments ().size ()) {
-    copyNoteOrnamentsToChord (note, chord);
+  if (note->getNoteOrnamentsList ().size ()) {
+    copyNoteOrnamentsListToChord (note, chord);
   }
 
   // copy note's spanners if any to the chord
-  if (note->getNoteSpanners ().size ()) {
-    copyNoteSpannersToChord (note, chord);
+  if (note->getNoteSpannersList ().size ()) {
+    copyNoteSpannersListToChord (note, chord);
   }
 
   // copy note's single tremolo if any to the chord
@@ -21836,18 +21881,18 @@ void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
   }
 
   // copy note's dynamics if any to the chord
-  if (note->getNoteDynamics ().size ()) {
-    copyNoteDynamicsToChord (note, chord);
+  if (note->getNoteDynamicsList ().size ()) {
+    copyNoteDynamicsListToChord (note, chord);
   }
 
   // copy note's other dynamics if any to the chord
-  if (note->getNoteOtherDynamics ().size ()) {
-    copyNoteOtherDynamicsToChord (note, chord);
+  if (note->getNoteOtherDynamicsList ().size ()) {
+    copyNoteOtherDynamicsListToChord (note, chord);
   }
 
   // copy note's words if any to the chord
-  if (note->getNoteWords ().size ()) {
-    copyNoteWordsToChord (note, chord);
+  if (note->getNoteWordsList ().size ()) {
+    copyNoteWordsListToChord (note, chord);
   }
 
   // copy note's stem if any to the chord
@@ -21856,55 +21901,55 @@ void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
   }
 
   // copy note's beams if any to the chord
-//  copyNoteBeamsToChord (note, chord);
-  if (note->getNoteBeams ().size ()) {
-    appendNoteBeamsLinksToChord (note, chord);
+//  copyNoteBeamsListToChord (note, chord);
+  if (note->getNoteBeamsList ().size ()) {
+    appendNoteBeamsListLinksToChord (note, chord);
   }
 
-  // copy note's ties if any to the chord
-  if (note->getNoteTie ()) {
-    copyNoteTieToChord (note, chord);
-  }
+  // copy note's ties if any to the chord // JMI v0.9.70
+//   if (note->getNoteTie ()) {
+//     copyNoteTieToChord (note, chord);
+//   }
 
   // copy note's slurs if any to the chord
-// JMI  copyNoteSlursToChord (note, chord);
-  if (note->getNoteSlurs ().size ()) {
-    appendNoteSlursLinksToChord (note, chord);
+// JMI  copyNoteSlursListToChord (note, chord);
+  if (note->getNoteSlursList ().size ()) {
+    appendNoteSlursListLinksToChord (note, chord);
   }
 
   // copy note's ligatures if any to the chord
-  if (note->getNoteLigatures ().size ()) {
-    copyNoteLigaturesToChord (note, chord);
+  if (note->getNoteLigaturesList ().size ()) {
+    copyNoteLigaturesListToChord (note, chord);
   }
 
   // copy note's pedals if any to the chord
-  if (note->getNotePedals ().size ()) {
-    copyNotePedalsToChord (note, chord);
+  if (note->getNotePedalsList ().size ()) {
+    copyNotePedalsListToChord (note, chord);
   }
 
   // copy note's slashes if any to the chord
-  if (note->getNoteSlashes ().size ()) {
-    copyNoteSlashesToChord (note, chord);
+  if (note->getNoteSlashesList ().size ()) {
+    copyNoteSlashesListToChord (note, chord);
   }
 
   // copy note's wedges if any to the chord
-  if (note->getNoteWedges ().size ()) {
-    copyNoteWedgesToChord (note, chord);
+  if (note->getNoteWedgesList ().size ()) {
+    copyNoteWedgesListToChord (note, chord);
   }
 
   // copy note's segnos if any to the chord
-  if (note->getNoteSegnos ().size ()) {
-    copyNoteSegnosToChord (note, chord);
+  if (note->getNoteSegnosList ().size ()) {
+    copyNoteSegnosListToChord (note, chord);
   }
 
   // copy note's del segnos if any to the chord
-  if (note->getNoteDalSegnos ().size ()) {
-    copyNoteDalSegnosToChord (note, chord);
+  if (note->getNoteDalSegnosList ().size ()) {
+    copyNoteDalSegnosListToChord (note, chord);
   }
 
   // copy note's codas if any to the chord
-  if (note->getNoteCodas ().size ()) {
-    copyNoteCodasToChord (note, chord);
+  if (note->getNoteCodasList ().size ()) {
+    copyNoteCodasListToChord (note, chord);
   }
 
   // copy note's octave shift if any to the chord
@@ -24413,7 +24458,7 @@ void mxsr2msrTranslator::attachPendingSlidesToCurrentNote ()
                     stanza);
 
               // append syllable to current note's syllables list
-              fCurrentNoteSyllables.push_back (
+              fCurrentNoteSyllablesList.push_back (
                 syllable);
 
               // append syllable to stanza
@@ -24594,10 +24639,10 @@ void mxsr2msrTranslator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
   }
 
   // attach the pending wedges, if any and relevant, to the note
-//   if (fPendingVoiceWedgesList.size ()) {
-//     attachPendingVoicesWedgesToCurrentNoteIfRelevant (
-//       fCurrentMusicXMLVoiceNumber);
-//   }
+  if (fPendingVoiceWedgesList.size ()) {
+    attachPendingVoicesWedgesToCurrentNoteIfRelevant (
+      fCurrentMusicXMLVoiceNumber);
+  }
 
   // attach the pending glissandos, if any, to the note
   if (fPendingGlissandosList.size ()) {
@@ -25038,12 +25083,18 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
   if (fCurrentTie) {
     fCurrentNote->
       setNoteTie (fCurrentTie);
+
+    // forget about this tie
+    fCurrentTie = nullptr;
   }
 
   // set its stem if any
   if (fCurrentStem) {
     fCurrentNote->
       setNoteStem (fCurrentStem);
+
+    // forget about this stem
+    fCurrentStem = nullptr;
   }
 
 /* JMI
@@ -25343,9 +25394,10 @@ void mxsr2msrTranslator::populateCurrentNoteAndAppendItToCurrentRecipientVoice (
       // fCurrentNote is the first note after the chord in the current voice
 
       // finalize the current chord
-      if (false && ! fCurrentNoteIsAGraceNote) // JMI v0.9.67
-      finalizeCurrentChord (
-        inputLineNumber);
+      if (false && ! fCurrentNoteIsAGraceNote) { // JMI v0.9.67
+        finalizeCurrentChord (
+          inputLineNumber);
+      }
 
       fOnGoingChord = false;
     }
@@ -25418,7 +25470,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 
       ss <<
         std::endl <<
-        "fCurrentGraceNotes IS NOT NULL upon <backup/>" << // JMI
+        "fCurrentGraceGroupNotes IS NOT NULL upon <backup/>" << // JMI
         ", line " << inputLineNumber <<
         std::endl;
 
@@ -26942,7 +26994,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
       }
       else {
  //       gLog <<
- //         "fCurrentGraceNotes is NULL"; // JMI
+ //         "fCurrentGraceGroupNotes is NULL"; // JMI
       }
 
       gLog << std::endl;
@@ -26964,7 +27016,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
 
   if (fCurrentNoteIsAGraceNote) {
     if (! fPendingGraceNotesGroup) {
-      // this is the first grace note in grace notes
+      // this is the first grace note in a grace notes group
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceGraceNotes ()) {
@@ -26988,8 +27040,10 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
         msrGraceNotesGroup::create (
           inputLineNumber,
           msrGraceNotesGroupKind::kGraceNotesGroupBefore, // default value
-          fCurrentGraceIsSlashed,
-          fCurrentGraceIsBeamed,
+          fCurrentGraceGroupIsSlashed,
+          fCurrentGraceGroupIsBeamed,
+          fCurrentGraceGroupIsTied,
+          fCurrentGraceGroupIsSlurred,
           fCurrentMeasureNumber);
 
       // should all grace notes be slurred?
@@ -27015,7 +27069,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
       /*
       fCurrentNoteVoice->
         appendGraceNotesToVoice (
-          fCurrentGraceNotes);
+          fCurrentGraceGroupNotes);
         //  */
     }
 
@@ -27311,14 +27365,14 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    for (S_msrSyllable syllable : fCurrentNoteSyllables) {
+    for (S_msrSyllable syllable : fCurrentNoteSyllablesList) {
       // append syllable to currentNote and set upLink to it
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLyrics ()) {
       std::stringstream ss;
 
       ss <<
-        "*** ---> for (S_msrSyllable syllable : fCurrentNoteSyllables) {" <<
+        "*** ---> for (S_msrSyllable syllable : fCurrentNoteSyllablesList) {" <<
         ", syllable: " << syllable;
 
       gWaeHandler->waeTrace (
@@ -27333,7 +27387,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
     } // for
 
     // forget about all of fCurrentNote's syllables
-    fCurrentNoteSyllables.clear ();
+    fCurrentNoteSyllablesList.clear ();
   }
 
   else {
@@ -27540,13 +27594,13 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       std::endl << std::endl;
 
 /* JMI
-    if (fCurrentGraceNotes) {
+    if (fCurrentGraceGroupNotes) {
       gLog <<
-        fCurrentGraceNotes;
+        fCurrentGraceGroupNotes;
     }
     else {
 //       gLog <<
-//         "fCurrentGraceNotes is NULL"; // JMI
+//         "fCurrentGraceGroupNotes is NULL"; // JMI
     }
 */
 

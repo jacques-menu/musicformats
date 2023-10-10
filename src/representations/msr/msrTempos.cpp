@@ -71,7 +71,7 @@ msrTempoNote::~msrTempoNote ()
 
 void msrTempoNote::appendBeamToTempoNote (const S_msrBeam& beam)
 {
-  fTempoNoteBeams.push_back (beam);
+  fTempoNoteBeamsList.push_back (beam);
 }
 
 void msrTempoNote::acceptIn (basevisitor* v)
@@ -149,8 +149,8 @@ void msrTempoNote::acceptOut (basevisitor* v)
 void msrTempoNote::browseData (basevisitor* v)
 {
   for (
-    std::list<S_msrBeam>::const_iterator i = fTempoNoteBeams.begin ();
-    i != fTempoNoteBeams.end ();
+    std::list<S_msrBeam>::const_iterator i = fTempoNoteBeamsList.begin ();
+    i != fTempoNoteBeamsList.end ();
     ++i ) {
     // browse tempoTuplet element
     msrBrowser<msrBeam> browser (v);
@@ -191,16 +191,16 @@ void msrTempoNote::print (std::ostream& os) const
     fTempoNoteBelongsToATuplet <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "tempoNoteBeams";
+    "tempoNoteBeamsList";
 
-    if (fTempoNoteBeams.size ()) {
+    if (fTempoNoteBeamsList.size ()) {
       os << std::endl;
 
       ++gIndenter;
 
       std::list<S_msrBeam>::const_iterator
-        iBegin = fTempoNoteBeams.begin (),
-        iEnd   = fTempoNoteBeams.end (),
+        iBegin = fTempoNoteBeamsList.begin (),
+        iEnd   = fTempoNoteBeamsList.end (),
         i      = iBegin;
       for ( ; ; ) {
         os << (*i);
@@ -389,7 +389,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fTempoTupletElements.push_back (tempoNote);
+  fTempoTupletElementsList.push_back (tempoNote);
 
 /* JMI
   // register note's tempoTuplet upLink
@@ -423,7 +423,7 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
 #endif // MF_TRACE_IS_ENABLED
 
   // register tempoTuplet in elements list
-  fTempoTupletElements.push_back (tempoTuplet);
+  fTempoTupletElementsList.push_back (tempoTuplet);
 
   // account for tempoTuplet duration
   fTempoTupletDisplayWholeNotes += // JMI
@@ -467,18 +467,18 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fTempoTupletElements.size ()) {
+  if (fTempoTupletElementsList.size ()) {
     S_msrElement
       firstTempoTupletElement =
-        fTempoTupletElements.front ();
+        fTempoTupletElementsList.front ();
 
     for (
-      std::list<S_msrElement>::iterator i = fTempoTupletElements.begin ();
-      i != fTempoTupletElements.end ();
+      std::list<S_msrElement>::iterator i = fTempoTupletElementsList.begin ();
+      i != fTempoTupletElementsList.end ();
       ++i) {
       if ((*i) == tempoNote) {
         // found note, erase it
-        i = fTempoTupletElements.erase (i);
+        i = fTempoTupletElementsList.erase (i);
 
         // account for note duration
         fTempoTupletDisplayWholeNotes -= // JMI
@@ -498,7 +498,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
       "cannot remove tempoNote " <<
       tempoNote <<
       " from tempoTuplet " << asString () <<
-      " since this note has not been found in fTempoTupletElements";
+      " since this note has not been found in fTempoTupletElementsList";
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -514,7 +514,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
       "cannot remove tempoNote " <<
       tempoNote <<
       " from empty tempoTuplet " <<
-      " since this note cannot be found in empty fTempoTupletElements";
+      " since this note cannot be found in empty fTempoTupletElementsList";
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
@@ -656,8 +656,8 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
 void msrTempoTuplet::browseData (basevisitor* v)
 {
   for (
-    std::list<S_msrElement>::const_iterator i = fTempoTupletElements.begin ();
-    i != fTempoTupletElements.end ();
+    std::list<S_msrElement>::const_iterator i = fTempoTupletElementsList.begin ();
+    i != fTempoTupletElementsList.end ();
     ++i ) {
     // browse tempoTuplet element
     msrBrowser<msrElement> browser (v);
@@ -677,10 +677,10 @@ std::string msrTempoTuplet::asString () const
 
   ss << '[';
 
-  if (fTempoTupletElements.size ()) {
+  if (fTempoTupletElementsList.size ()) {
     std::list<S_msrElement>::const_iterator
-      iBegin = fTempoTupletElements.begin (),
-      iEnd   = fTempoTupletElements.end (),
+      iBegin = fTempoTupletElementsList.begin (),
+      iEnd   = fTempoTupletElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
 
@@ -739,10 +739,10 @@ std::string msrTempoTuplet::asString () const
 
   ss << '[';
 
-  if (fTempoTupletElements.size ()) {
+  if (fTempoTupletElementsList.size ()) {
     std::list<S_msrElement>::const_iterator
-      iBegin = fTempoTupletElements.begin (),
-      iEnd   = fTempoTupletElements.end (),
+      iBegin = fTempoTupletElementsList.begin (),
+      iEnd   = fTempoTupletElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
 
@@ -793,7 +793,7 @@ void msrTempoTuplet::print (std::ostream& os) const
     fTempoTupletFactor <<
     ", " <<
     mfSingularOrPlural (
-      fTempoTupletElements.size (), "element", "elements") <<
+      fTempoTupletElementsList.size (), "element", "elements") <<
     ", display whole notes: " <<
     fTempoTupletDisplayWholeNotes <<
     ", line " << fInputStartLineNumber <<
@@ -832,14 +832,14 @@ void msrTempoTuplet::print (std::ostream& os) const
     */
 
   os <<
-    "fTempoTupletElements";
+    "fTempoTupletElementsList";
 
-  if (fTempoTupletElements.size ()) {
+  if (fTempoTupletElementsList.size ()) {
     ++gIndenter;
 
     std::list<S_msrElement>::const_iterator
-      iBegin = fTempoTupletElements.begin (),
-      iEnd   = fTempoTupletElements.end (),
+      iBegin = fTempoTupletElementsList.begin (),
+      iEnd   = fTempoTupletElementsList.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);

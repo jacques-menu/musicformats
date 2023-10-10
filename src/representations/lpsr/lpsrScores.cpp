@@ -3113,11 +3113,11 @@ void lpsrScore::printFull (std::ostream& os) const
 
   // print the embedded MSR score (without the voices)
   fEmbeddedMsrScore->
-    print (os);
+    printFull (os);
   os << std::endl;
 
   // are there needed things?
-  const int fieldWidth = 42;
+  const int fieldWidth = 49;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -3335,7 +3335,7 @@ void lpsrScore::printSummary (std::ostream& os) const
   os << std::endl;
 
   // are there needed things?
-  const int fieldWidth = 42;
+  const int fieldWidth = 49;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -3553,7 +3553,7 @@ void lpsrScore::printNames (std::ostream& os) const
   os << std::endl;
 
   // are there needed things?
-  const int fieldWidth = 42;
+  const int fieldWidth = 49;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -3771,7 +3771,7 @@ void lpsrScore::printFlatView (std::ostream& os) const
   os << std::endl;
 
   // are there needed things?
-  const int fieldWidth = 42;
+  const int fieldWidth = 49;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -3989,7 +3989,7 @@ void lpsrScore::printSlices (std::ostream& os) const
   os << std::endl;
 
   // are there needed things?
-  const int fieldWidth = 42;
+//   const int fieldWidth = 49;
 
 //   os << std::left <<
 //     std::setw (fieldWidth) <<

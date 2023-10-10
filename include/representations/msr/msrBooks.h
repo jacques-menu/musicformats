@@ -322,12 +322,15 @@ class EXP msrBook : public msrElement
     S_msrAppearance       fAppearance;
 
     // credits
-    std::list<S_msrCredit>     fCreditsList;
+    std::list<S_msrCredit>
+                          fCreditsList;
 
     // book elements
-    std::set<S_msrBookElement> fBookElementsSet;
+    std::set<S_msrBookElement>
+                          fBookElementsSet;
 
-    std::list<S_msrBookElement>fBookElementsList;
+    std::list<S_msrBookElement>
+                          fBookElementsList;
 
     // master voice
 

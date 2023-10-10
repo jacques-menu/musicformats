@@ -63,8 +63,8 @@ class EXP msrTempoNote : public msrElement
                               { return fTempoNoteWholeNotes; }
 
     const std::list<S_msrBeam>&
-                          getTempoNoteBeams () const
-                              { return fTempoNoteBeams; }
+                          getTempoNoteBeamsList () const
+                              { return fTempoNoteBeamsList; }
 
   public:
 
@@ -99,7 +99,7 @@ class EXP msrTempoNote : public msrElement
 
     msrWholeNotes         fTempoNoteWholeNotes;
 
-    std::list<S_msrBeam>  fTempoNoteBeams;
+    std::list<S_msrBeam>  fTempoNoteBeamsList;
 
     Bool                  fTempoNoteBelongsToATuplet;
 };
@@ -161,8 +161,8 @@ class EXP msrTempoTuplet : public msrElement
                               { return fMemberNotesDisplayWholeNotes; }
 
     const std::list<S_msrElement>&
-                          getTempoTupletElements () const
-                              { return fTempoTupletElements; }
+                          getTempoTupletElementsList () const
+                              { return fTempoTupletElementsList; }
 
     msrWholeNotes         getTempoTupletDisplayWholeNotes () const
                               { return fTempoTupletDisplayWholeNotes; }
@@ -230,7 +230,7 @@ class EXP msrTempoTuplet : public msrElement
     msrWholeNotes         fTempoTupletDisplayWholeNotes;
 
     std::list<S_msrElement>
-                          fTempoTupletElements;
+                          fTempoTupletElementsList;
 };
 typedef SMARTP<msrTempoTuplet> S_msrTempoTuplet;
 EXP std::ostream& operator << (std::ostream& os, const S_msrTempoTuplet& elt);

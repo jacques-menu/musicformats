@@ -754,6 +754,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
         appendWedgeToNote (
           msrWedge::create (
             __LINE__,
+            1, // wedgeNumber
             msrWedgeKind::kWedgeCrescendo,
             msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
@@ -900,6 +901,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
         appendWedgeToNote (
           msrWedge::create (
             __LINE__,
+            1, // wedgeNumber
             msrWedgeKind::kWedgeStop,
             msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
@@ -963,6 +965,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
         appendWedgeToNote (
           msrWedge::create (
             __LINE__,
+            2, // wedgeNumber
             msrWedgeKind::kWedgeDecrescendo,
             msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
@@ -1026,6 +1029,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
         appendWedgeToNote (
           msrWedge::create (
             __LINE__,
+            2, // wedgeNumber
             msrWedgeKind::kWedgeStop,
             msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,

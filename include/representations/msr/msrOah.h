@@ -306,11 +306,11 @@ class EXP msrOahGroup : public oahGroup
     Bool                  getDisplaySecondMsrMeasuresSlicesDetails () const
                               { return fDisplaySecondMsrMeasuresSlicesDetails; }
 
-    Bool                  getDisplayMsrFull () const // JMI ???
-                              {
-                                return
-                                  fDisplayFirstMsr || fDisplaySecondMsrFull;
-                              }
+//     Bool                  getDisplayMsrFull () const // JMI ???
+//                               {
+//                                 return
+//                                   fDisplayFirstMsr || fDisplaySecondMsrFull;
+//                               }
 
     void                  setDisplayFirstMsrNames ()
                               { fDisplayFirstMsrNames = true; }

@@ -718,7 +718,7 @@ void msrBarLine::printFull (std::ostream& os) const
       os <<  std::endl;
       ++gIndenter;
       os <<
-        fBarLineUpLinkToMeasure;
+        fBarLineUpLinkToMeasure->asShortString ();
       --gIndenter;
     }
     else {
@@ -803,7 +803,8 @@ void msrBarLine::print (std::ostream& os) const
     "[BarLine" <<
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
     fBarLineCategoryKind <<
-    ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
+    ", measureElementMeasureNumber: " <<
+    fBarLineUpLinkToMeasure->getMeasureNumber () <<
     ", fMeasurePosition: " << fMeasurePosition.asString () <<
     ", line " << fInputStartLineNumber <<
     ']' <<

@@ -801,7 +801,7 @@ void msr2msrTranslator::visitStart (S_msrFiguredBass& elt)
   else if (fOnGoingChord) {
     // register the figured bass in the current chord clone
     fCurrentChordClone->
-      setChordFiguredBass (fCurrentFiguredBassClone); // JMI
+      setChordFiguredBassesList (fCurrentFiguredBassClone); // JMI
   }
   */
 
@@ -905,7 +905,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   else if (fOnGoingChord) {
     // register the figured bass in the current chord clone
     fCurrentChordClone->
-      setChordFiguredBass (fCurrentFiguredBassClone); // JMI
+      setChordFiguredBassesList (fCurrentFiguredBassClone); // JMI
   }
   */
 
@@ -1014,7 +1014,7 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
   else if (fOnGoingChord) {
     // register the figured bass in the current chord clone
     fCurrentChordClone->
-      setChordFiguredBass (fCurrentFiguredBassClone); // JMI
+      setChordFiguredBassesList (fCurrentFiguredBassClone); // JMI
   }
   */
 

@@ -2041,15 +2041,15 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
   // otherwise it will be generated for the chord itself
   if (! note->getNoteBelongsToAChord ()) {
     const std::list<S_msrWords>&
-      noteWords =
-        note->getNoteWords ();
+      noteWordsList =
+        note->getNoteWordsList ();
 
-    if (noteWords.size ()) {
+    if (noteWordsList.size ()) {
       std::list<S_msrWords>::const_iterator i;
 
       for (
-        i = noteWords.begin ();
-        i != noteWords.end ();
+        i = noteWordsList.begin ();
+        i != noteWordsList.end ();
         ++i
       ) {
         msrPlacementKind
@@ -3164,7 +3164,7 @@ void msr2bsrTranslator::visitStart (S_msrFiguredBass& elt)
   else if (fOnGoingChord) {
     // register the figured bass in the current chord clone
     fCurrentChordClone->
-      setChordFiguredBass (fCurrentFiguredBass); // JMI
+      setChordFiguredBassesList (fCurrentFiguredBass); // JMI
   }
 
   else if (fOnGoingFiguredBassVoice) { // JMI

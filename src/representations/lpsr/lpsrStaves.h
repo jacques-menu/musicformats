@@ -26,14 +26,14 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP lpsrNewStaffgroupBlock : public lpsrElement
+class EXP lpsrNewStaffGroupBlock : public lpsrElement
 {
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<lpsrNewStaffgroupBlock> create (
+    static SMARTP<lpsrNewStaffGroupBlock> create (
                             int inputLineNumber);
 
   protected:
@@ -41,10 +41,10 @@ class EXP lpsrNewStaffgroupBlock : public lpsrElement
     // constructors/destructor
     // ------------------------------------------------------
 
-                          lpsrNewStaffgroupBlock (
+                          lpsrNewStaffGroupBlock (
                             int inputLineNumber);
 
-    virtual               ~lpsrNewStaffgroupBlock ();
+    virtual               ~lpsrNewStaffGroupBlock ();
 
   public:
 
@@ -78,10 +78,10 @@ class EXP lpsrNewStaffgroupBlock : public lpsrElement
     // fields
     // ------------------------------------------------------
 
-    std::vector<S_msrElement> fNewStaffgroupElements;
+    std::vector<S_msrElement> fNewStaffGroupElementsVector;
 };
-typedef SMARTP<lpsrNewStaffgroupBlock> S_lpsrNewStaffgroupBlock;
-EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffgroupBlock& elt);
+typedef SMARTP<lpsrNewStaffGroupBlock> S_lpsrNewStaffGroupBlock;
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffGroupBlock& elt);
 
 //______________________________________________________________________________
 class EXP lpsrNewStaffTuningBlock : public lpsrElement
@@ -199,7 +199,7 @@ class EXP lpsrNewStaffBlock : public lpsrElement
     // fields
     // ------------------------------------------------------
 
-    std::vector<S_msrElement> fNewStaffElements;
+    std::vector<S_msrElement> fNewStaffElementsVector;
 };
 typedef SMARTP<lpsrNewStaffBlock> S_lpsrNewStaffBlock;
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffBlock& elt);

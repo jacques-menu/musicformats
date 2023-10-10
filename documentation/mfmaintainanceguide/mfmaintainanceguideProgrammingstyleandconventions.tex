@@ -51,7 +51,7 @@ total 200
 The files {\tt *Elements.h/.cpp} contain base classes to variants, such as \lpsrBoth{lpsrElements}, whose {\tt lpsrElement} class   is used in a number of other files:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r 'public lpsrElement' *
-formats/lpsr/lpsrStaves.h:29:class EXP lpsrNewStaffgroupBlock : public lpsrElement
+formats/lpsr/lpsrStaves.h:29:class EXP lpsrNewStaffGroupBlock : public lpsrElement
 formats/lpsr/lpsrStaves.h:87:class EXP lpsrNewStaffTuningBlock : public lpsrElement
 formats/lpsr/lpsrStaves.h:150:class EXP lpsrNewStaffBlock : public lpsrElement
 formats/lpsr/lpsrStaves.h:208:class EXP lpsrStaffBlock : public lpsrElement
@@ -1528,12 +1528,12 @@ This happens for example in \msrBoth{mfslNotes}:
 \begin{lstlisting}[language=CPlusPlus]
     // articulations
     const std::list<S_msrArticulation>&
-                          getNoteArticulations () const
-                              { return fNoteArticulations; }
+                          getNoteArticulationsList () const
+                              { return fNoteArticulationsList; }
 
     std::list<S_msrArticulation>&
-                          getNoteArticulationsNonConst ()
-                              { return fNoteArticulations; }
+                          getNoteArticulationsListNonConst ()
+                              { return fNoteArticulationsList; }
 \end{lstlisting}
 
 Another case is in \mfslBoth{mfslDriver}:
