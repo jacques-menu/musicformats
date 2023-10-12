@@ -935,8 +935,8 @@ S_LilyPondIssue34InsiderOahGroup LilyPondIssue34InsiderOahGroup::create ()
 
 LilyPondIssue34InsiderOahGroup::LilyPondIssue34InsiderOahGroup ()
   : oahGroup (
-      "LilyPondIssue34",
-      "help-LilyPondIssue34", "hlpi34",
+      "LilyPond_Issue_34",
+      "help-LilyPond_Issue_34", "hlpi34",
 R"(Options that are used by LilyPondIssue34 are grouped here.)",
       oahElementVisibilityKind::kElementVisibilityWhole)
 {

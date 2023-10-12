@@ -195,6 +195,11 @@ std::string languageFrench::convertTheSecondMSRIntoAnLPSR () const
   return "Conversion du second MSR en un LPSR";
 }
 
+std::string languageFrench::convertTheFirstMSRIntoAnLPSR () const
+{
+  return "Conversion du premier MSR en un LPSR";
+}
+
 std::string languageFrench::convertTheLPSRIntoLilyPondCode () const
 {
   return "Conversion du LPSR en du code LilyPond";

@@ -93,7 +93,7 @@ S_msrScore translateMsrToMsr (
       std::stringstream ss;
 
       ss <<
-        gLanguage->passIDKindAsString (passIDKind) << ": '" << passDescription << '\'' <<
+        gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription << '\'' <<
         " merely returns the original MSR score, since this pass is being avoided";
 
       msr2msrWarning (

@@ -4741,12 +4741,12 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     switch (elt->getGraceNotesGroupKind ()) {
       case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
         fCurrentNonGraceNoteClone->
-          setNoteGraceNotesGroupBefore (
+          setGraceNotesGroupBeforeNote (
             fCurrentGraceNotesGroupClone);
         break;
       case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
         fCurrentNonGraceNoteClone->
-          setNoteGraceNotesGroupAfter (
+          setGraceNotesGroupAfterNote (
             fCurrentGraceNotesGroupClone);
         break;
     } // switch
@@ -4888,7 +4888,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           ss <<
             "Creating a skip clone of grace notes group " <<
             elt->asShortString () <<
-            " to work around LilyPond issue #34";
+            " to work around LilyPond_Issue_34";
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -4974,7 +4974,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
         gLog <<
           "Creating a skip clone of grace notes '" <<
           elt->asShortString () <<
-          "' to work around LilyPond issue #34" <<
+          "' to work around LilyPond_Issue_34" <<
           std::endl;
 
         gWaeHandler->waeTrace (

@@ -406,8 +406,8 @@ The test for browsing inhibition is done in \msr{msrNotes.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 void msrNote::browseData (basevisitor* v)
 {
-  // browse the grace notes group before if any
-  if (fNoteGraceNotesGroupBefore) {
+  // browse the grace notes group before note if any
+  if (fGraceNotesGroupBeforeNote) {
     // fetch the score
     S_msrScore
       score =
@@ -431,7 +431,7 @@ void msrNote::browseData (basevisitor* v)
           std::stringstream ss;
 
           ss <<
-            "% ==> visiting grace notes groups 'before' is inhibited";
+            "% ==> visiting grace notes groups before notes is inhibited";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -440,9 +440,9 @@ void msrNote::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
       }
       else {
-        // browse the grace notes group before
+        // browse the grace notes group before note
         msrBrowser<msrGraceNotesGroup> browser (v);
-        browser.browse (*fNoteGraceNotesGroupBefore);
+        browser.browse (*fGraceNotesGroupBeforeNote);
       }
     }
   }

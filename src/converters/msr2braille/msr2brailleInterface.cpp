@@ -104,11 +104,13 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           gBsrOahGroup,
           passID_A,
           passDescription_A);
-    }
+    } // try
+
     catch (msr2bsrException& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-    }
+    } // try
+
     catch (std::exception& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
@@ -148,11 +150,13 @@ EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
           gBsrOahGroup,
           passID_B,
           passDescription_B);
-    }
+    } // try
+
     catch (bsr2finalizedBsrException& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-    }
+    } // try
+
     catch (std::exception& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;

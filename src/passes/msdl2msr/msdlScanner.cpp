@@ -1600,7 +1600,8 @@ void msdlScanner::scanAllTheInputAtOnce (
 #endif // MF_TRACE_IS_ENABLED
       }
       while (tokenKind != msdlTokenKind::k_TokenEOF); // do
-    }
+    } // try
+
     catch (std::out_of_range& e) {
       mfDisplayException (e, gOutput);
     }
@@ -1743,11 +1744,12 @@ void msdlScanner::translateAllTheInputToKeywordsLanguage (
           commentsTypeKind);
     }
     while (tokenKind != msdlTokenKind::k_TokenEOF); // do
-  }
-  catch (std::out_of_range& e) {
+  } // try
+
+  catch ( std::out_of_range& e) {
     mfDisplayException (e, gOutput);
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
   }
 

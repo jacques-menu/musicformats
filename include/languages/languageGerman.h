@@ -79,6 +79,7 @@ class EXP languageGerman : public language
 //     virtual std::string   convertTheFirstMSRIntoASecondMSR () const override;
 //
 //     virtual std::string   convertTheSecondMSRIntoAnLPSR () const override;
+//     virtual std::string   convertTheFirstMSRIntoAnLPSR () const override;
 //
 //     virtual std::string   convertTheLPSRIntoLilyPondCode () const override;
 //

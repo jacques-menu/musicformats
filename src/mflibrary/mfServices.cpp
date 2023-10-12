@@ -680,6 +680,12 @@ EXP void initializeServices ()
     xml2lyService->
       appendPassToService (
         mfPass::create (
+          mfPassIDKind::kMfPassID_4,
+          gLanguage->convertTheFirstMSRIntoAnLPSR ())); // JMI ??? v0.9.70
+
+    xml2lyService->
+      appendPassToService (
+        mfPass::create (
           mfPassIDKind::kMfPassID_5,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 

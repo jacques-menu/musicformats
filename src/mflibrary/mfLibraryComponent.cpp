@@ -280,7 +280,7 @@ S_mfcLibraryComponent createLibraryComponent ()
           std::list<std::string> {
             "Finalized the OAH documentation and macros handling",
             "Fixed an issue in options and argumentss handling",
-            "Fixed generated output options handling in Mikrokosmos3Wandering and LilyPondIssue34",
+            "Fixed generated output options handling in Mikrokosmos3Wandering and LilyPond_Issue_34",
             "Finalized the class   names in oahAtomsCollection.h/.cpp",
             "Moved from compiler writing terminology to more musicians-friendly terms"
           }

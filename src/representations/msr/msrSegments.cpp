@@ -174,7 +174,7 @@ void msrSegment::setSegmentLastMeasure (
 
     ss <<
       " in segment " <<
-      asString () <<
+      asShortString () << // avoid loop
       ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (

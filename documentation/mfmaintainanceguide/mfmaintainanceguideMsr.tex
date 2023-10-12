@@ -1452,7 +1452,7 @@ More precisely and for technical reasons, an \class{msrVoice} contains:
     // because it is not a mere S_msrElement, but a S_msrSegment
     S_msrSegment          fVoiceLastSegment;
 
-    // fVoiceFirstSegment is used to work around LilyPond issue #34
+    // fVoiceFirstSegment is used to work around LilyPond_Issue_34
     S_msrSegment          fVoiceFirstSegment;
 \end{lstlisting}
 
@@ -1959,7 +1959,7 @@ enum class msrNoteKind {
 
   // in grace notes groups
   kNoteRegularInGraceNotesGroup,
-  kNoteSkipInGraceNotesGroup, // used to circumvent LilyPond issue #34
+  kNoteSkipInGraceNotesGroup, // used to circumvent LilyPond_Issue_34
 
   // in chords in grace notes groups
   kNoteInChordInGraceNotesGroup,

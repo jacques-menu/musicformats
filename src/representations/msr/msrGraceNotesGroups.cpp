@@ -333,6 +333,8 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
   if (note->getNoteSlursList ().size () != 0) {
     fGraceNotesGroupIsSlurred = true;
   }
+
+  if (note->getNoteKind () == msrNoteKind::kNoteSkipInGraceNotesGroup) abort ();
 }
 
 void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)

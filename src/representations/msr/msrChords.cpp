@@ -1306,8 +1306,7 @@ void msrChord::browseData (basevisitor* v)
         std::stringstream ss;
 
         ss <<
-          "% ==> visiting grace notes groups 'before' is inhibited" <<
-          std::endl;
+          "% ==> visiting grace notes groups before notes is inhibited";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -1320,7 +1319,7 @@ void msrChord::browseData (basevisitor* v)
   }
 
   if (fChordGraceNotesGroupLinkBefore) {
-    // browse the grace notes group before
+    // browse the grace notes group before note
     msrBrowser<msrChordGraceNotesGroupLink> browser (v);
     browser.browse (*fChordGraceNotesGroupLinkBefore);
   }
@@ -1572,19 +1571,19 @@ void msrChord::browseData (basevisitor* v)
 
 /*
   if (fChordGraceNotesGroupBefore) {
-    // browse the grace notes group before
+    // browse the grace notes group before note
     msrBrowser<msrGraceNotesGroup> browser (v);
     browser.browse (*fChordGraceNotesGroupBefore);
   }
   if (fChordGraceNotesGroupAfter) {
-    // browse the grace notes group after
+    // browse the grace notes group after note
     msrBrowser<msrGraceNotesGroup> browser (v);
     browser.browse (*fChordGraceNotesGroupAfter);
   }
 */
 
   if (fChordGraceNotesGroupLinkAfter) {
-    // browse the grace notes group after
+    // browse the grace notes group after note
     msrBrowser<msrChordGraceNotesGroupLink> browser (v);
     browser.browse (*fChordGraceNotesGroupLinkAfter);
   }
@@ -1635,7 +1634,7 @@ std::string msrChord::asStringwithRawDivisions () const // SUPERFLOUS??? JMI v0.
       ss <<
       /* JMI
         note->notePitchAsString () <<
-        note->noteSoundingWholeNotespitchAndOctaveAsString () <<
+        note->noteSoundingWholeNotesPitchAndOctaveAsString () <<
         '[' << note->getNoteOctave () << ']'
         */
 

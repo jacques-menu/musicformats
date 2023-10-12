@@ -341,12 +341,13 @@ int main (int argc, char*  argv[])
         // go ahead
         break;
     } // switch
-  }
+  } // try
+
   catch (mfOahException& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

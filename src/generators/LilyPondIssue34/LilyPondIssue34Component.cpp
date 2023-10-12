@@ -101,7 +101,7 @@ S_mfcGeneratorComponent createLilyPondIssue34GeneratorComponent ()
     // create the generator component
     pGeneratorComponent =
       mfcGeneratorComponent::create (
-        "LilyPondIssue34",
+        "LilyPond_Issue_34",
         mfcMultiComponentEntropicityKind::kComponentEntropicityYes,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 

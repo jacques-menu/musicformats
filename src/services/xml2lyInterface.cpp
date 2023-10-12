@@ -203,12 +203,13 @@ EXP int xml2ly (
         // go ahead
         break;
     } // switch
-  }
-  catch (mfOahException& e) {
+  } // try
+
+  catch ( mfOahException& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -437,12 +438,13 @@ EXP int xml2ly (
           gLog,
           handler);
     }
-  }
-  catch (mfException& e) {
+  } // try
+
+  catch ( mfException& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

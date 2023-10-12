@@ -178,12 +178,13 @@ int main (int argc, char* argv[])
         // go ahead
         break;
     } // switch
-  }
+  } // try
+
   catch (mfOahException& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -382,12 +383,13 @@ int main (int argc, char* argv[])
   try {
     err =
       launchMfslInterpreter ();
-  }
+  } // try
+
   catch (mfException& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

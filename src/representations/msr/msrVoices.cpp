@@ -3650,7 +3650,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
 #endif // MF_TRACE_IS_ENABLED
 
     voiceFirstNote->
-      setNoteGraceNotesGroupBefore (
+      setGraceNotesGroupBeforeNote (
         graceNotesGroup);
   }
 

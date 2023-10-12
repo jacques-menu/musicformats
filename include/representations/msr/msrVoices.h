@@ -1295,7 +1295,7 @@ class EXP msrVoice : public msrElement
     // because it is not a mere S_msrElement, but a S_msrSegment
     S_msrSegment          fVoiceLastSegment;
 
-    // fVoiceFirstSegment is used to work around LilyPond issue #34
+    // fVoiceFirstSegment is used to work around LilyPond_Issue_34
     S_msrSegment          fVoiceFirstSegment;
 
     // counters

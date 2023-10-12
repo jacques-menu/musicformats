@@ -149,12 +149,13 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       throw msdlException (message);
     }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
-  }
-  catch (msdl2msrException& e) {
+  } // try
+
+  catch ( msdl2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -186,12 +187,13 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_2,
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
-  }
-  catch (msr2msrException& e) {
+  } // try
+
+  catch ( msr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -209,12 +211,13 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
         mfPassIDKind::kMfPassID_3,
         "Convert the second MSR into an MXSR",
         mfTimingItemKind::kMandatory);
-  }
-  catch (msr2mxsrException& e) {
+  } // try
+
+  catch ( msr2mxsrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -234,12 +237,13 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
       err,
       mfPassIDKind::kMfPassID_4,
       "Convert  the MXSR into Guido text");
-  }
-  catch (mxsr2guidoException& e) {
+  } // try
+
+  catch ( mxsr2guidoException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -360,12 +364,13 @@ mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
         // go ahead
         break;
     } // switch
-  }
-  catch (mfOahException& e) {
+  } // try
+
+  catch ( mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

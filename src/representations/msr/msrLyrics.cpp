@@ -765,8 +765,8 @@ std::string msrSyllable::syllableWholeNotespitchAndOctaveAsString () const
 
           ss <<
             fSyllableUpLinkToNote->
-      // JMI        noteSoundingWholeNotespitchAndOctaveAsString () <<
-              noteDisplayWholeNotespitchAndOctaveAsString () <<
+      // JMI        noteSoundingWholeNotesPitchAndOctaveAsString () <<
+              noteDisplayWholeNotesPitchAndOctaveAsString () <<
             "*" <<
             fSyllableTupletFactor.getTupletNormalNotes () <<
             '/' <<

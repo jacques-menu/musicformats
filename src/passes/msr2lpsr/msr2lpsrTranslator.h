@@ -666,6 +666,7 @@ class EXP msr2lpsrTranslator :
     // ------------------------------------------------------
     S_msrVoice                fCurrentVoiceClone;
     S_msrVoice                fCurrentVoiceOriginal;
+
     std::map<S_msrNote, S_msrNote>
                               fVoiceNotesMap; // JMI
 
@@ -743,7 +744,7 @@ class EXP msr2lpsrTranslator :
     // is being visited too
     S_msrNote                 fCurrentNonGraceNoteClone;
 
-    // to help workaround LilyPond issue #34
+    // to help workaround LilyPond_Issue_34
     S_msrNote                 fFirstNoteCloneInVoice;
 
     S_msrGraceNotesGroup      fCurrentSkipGraceNotesGroup;

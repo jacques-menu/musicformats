@@ -1435,7 +1435,7 @@ EXP mfIndentedStringStream& operator << (
 }
 
 //_______________________________________________________________________________
-std::string wholeNotesAndDotsNumberpitchAndOctaveAsString (
+std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes,
   int&                 dotsNumber)
@@ -1445,7 +1445,7 @@ std::string wholeNotesAndDotsNumberpitchAndOctaveAsString (
     std::stringstream ss;
 
     ss <<
-      "--> wholeNotesAndDotsNumberpitchAndOctaveAsString() 1 -------------------------------------" <<
+      "--> wholeNotesAndDotsNumberPitchAndOctaveAsString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes.asString () <<
       ", line " << inputLineNumber;
 
@@ -1475,17 +1475,24 @@ std::string wholeNotesAndDotsNumberpitchAndOctaveAsString (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (numerator == 0) { // JMI TEMP
+  if (numerator == 0) { // JMI TEMP v0.9.70
     dotsNumber = 0;
-    return "zero";
+    return "ZERO";
   }
+
+  else if (numerator == msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ ) {
+    return "K_WHOLE_NOTES_NUMERATOR_UNKNOWN_";
+  }
+
   else if (numerator < 0) {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     std::stringstream ss;
 
     ss <<
-      "numerator is not positive in wholeNotesAndDotsNumberpitchAndOctaveAsString()" <<
+      "numerator " <<
+      numerator <<
+      " is not positive in wholeNotesAndDotsNumberPitchAndOctaveAsString()" <<
       ", wholeNotes: " << wholeNotes;
 
    msrError ( // JMI v0.9.70
@@ -1498,6 +1505,8 @@ std::string wholeNotesAndDotsNumberpitchAndOctaveAsString (
     return "WholeNotesAndDotsNumber_???";
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
   }
+
+  // here, numerator > 0
 
   Bool
     integralNumberOfWholeNotes = denominator == 1;
@@ -1856,7 +1865,7 @@ std::string wholeNotesAndDotsNumberpitchAndOctaveAsString (
     std::stringstream ss;
 
     ss <<
-      "--> wholeNotesAndDotsNumberpitchAndOctaveAsString() 2 -------------------------------------" <<
+      "--> wholeNotesAndDotsNumberPitchAndOctaveAsString() 2 -------------------------------------" <<
      ", result: \"" << result << "\"" <<
       ", numeratorDots" << ": " << numeratorDots;
 
@@ -1879,7 +1888,7 @@ std::string wholeNotespitchAndOctaveAsString (
   int dotsNumber; // not used
 
   return
-    wholeNotesAndDotsNumberpitchAndOctaveAsString (
+    wholeNotesAndDotsNumberPitchAndOctaveAsString (
       inputLineNumber,
       wholeNotes,
       dotsNumber);

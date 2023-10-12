@@ -924,13 +924,17 @@ void mxsr2msrTranslator::initializeNoteData ()
 
   // sounding whole notes
 
-  fCurrentNoteSoundingWholeNotes                  = msrWholeNotes (-13, 1);
-  fCurrentNoteSoundingWholeNotesFromNotesDuration = msrWholeNotes (-17, 1);
+  fCurrentNoteSoundingWholeNotes =
+    msrWholeNotes (msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+  fCurrentNoteSoundingWholeNotesFromNotesDuration =
+    msrWholeNotes (msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
   // display whole notes
 
-  fCurrentNoteDisplayWholeNotes         = msrWholeNotes (-25, 1);
-  fCurrentNoteDisplayWholeNotesFromType = msrWholeNotes (-29, 1);
+  fCurrentNoteDisplayWholeNotes =
+    msrWholeNotes (msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+  fCurrentNoteDisplayWholeNotesFromType =
+    msrWholeNotes (msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
   // display
 
@@ -4218,8 +4222,9 @@ If the cancel attribute is
   try {
     // indices start at 0
     item = fCurrentHumdrumScotKeyItemsVector [number - 1];
-  }
-  catch (int e) {
+  } // try
+
+  catch ( int e) {
     std::stringstream ss;
 
     ss <<
@@ -8829,7 +8834,7 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
 
   // is the current note a grace note?
   if (fCurrentNoteIsAGraceNote) {
-    fCurrentGraceGroupIsTied = true;
+    fCurrentGraceNotesGroupIsTied = true;
   }
 }
 
@@ -9682,7 +9687,7 @@ The values of start, stop, and continue refer to how an
 
   // is the current note a grace note?
   if (fCurrentNoteIsAGraceNote) {
-    fCurrentGraceGroupIsSlurred = true;
+    fCurrentGraceNotesGroupIsSlurred = true;
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -11143,7 +11148,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
         ss <<
           std::endl <<
-          "fCurrentGraceGroupNotes IS NOT NULL at the end of measure " << // JMI
+          "fCurrentGraceNotesGroupNotes IS NOT NULL at the end of measure " << // JMI
           elt->getAttributeValue ("number") <<
           std::endl;
 
@@ -11187,7 +11192,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
       // attach it to the note
       noteToAttachTo->
-        setNoteGraceNotesGroupAfter (
+        setGraceNotesGroupAfterNote (
           fPendingGraceNotesGroup);
 
       // forget about this grace notes group
@@ -13651,6 +13656,11 @@ void mxsr2msrTranslator::visitStart (S_beam& elt)
   // color JMI ???
 
   fPendingBeamsList.push_back (beam);
+
+  // is the current note a grace note?
+  if (fCurrentNoteIsAGraceNote) {
+    fCurrentGraceNotesGroupIsBeamed = true;
+  }
 }
 
 //______________________________________________________________________________
@@ -18966,17 +18976,17 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
 
   std::string slashString = elt->getAttributeValue ("slash");
 
-  fCurrentGraceGroupIsSlashed = false; // default value
-//   fCurrentGraceGroupIsBeamed = false; // default value
-//
-//   fCurrentGraceGroupIsTied = false; // default value
-//   fCurrentGraceGroupIsSlurred = false; // default value
+  fCurrentGraceNotesGroupIsSlashed = false; // default value
+  fCurrentGraceNotesGroupIsBeamed = false; // default value
+
+  fCurrentGraceNotesGroupIsTied = false; // default value
+  fCurrentGraceNotesGroupIsSlurred = false; // default value
 
   if      (slashString == "yes")
-    fCurrentGraceGroupIsSlashed = true;
+    fCurrentGraceNotesGroupIsSlashed = true;
 
   else if (slashString == "no")
-    fCurrentGraceGroupIsSlashed = false;
+    fCurrentGraceNotesGroupIsSlashed = false;
 
   else {
     if (slashString.size ()) {
@@ -18990,12 +19000,12 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
 
   // should all grace notes be slashed?
   if (gGlobalMxsr2msrOahGroup->getSlashAllGraceNotes ()) {
-    fCurrentGraceGroupIsSlashed = true;
+    fCurrentGraceNotesGroupIsSlashed = true;
   }
 
   // should all grace notes be beamed?
   if (gGlobalMxsr2msrOahGroup->getBeamAllGraceNotes ()) {
-    fCurrentGraceGroupIsBeamed = true;
+    fCurrentGraceNotesGroupIsBeamed = true;
   }
 
   fCurrentStealTimeFollowing =
@@ -21631,7 +21641,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
   S_msrGraceNotesGroup
     graceNotesGroupBefore =
       note->
-        getNoteGraceNotesGroupBefore ();
+        getGraceNotesGroupBeforeNote ();
 
   if (graceNotesGroupBefore) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -21639,7 +21649,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying grace notes group before " <<
+        "Copying grace notes group before note " <<
         graceNotesGroupBefore->asShortString () <<
         " from note " << note->asString () <<
         " to chord " << chord->asString ();
@@ -21657,7 +21667,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
   S_msrGraceNotesGroup
     graceNotesGroupAfter =
       note->
-        getNoteGraceNotesGroupAfter ();
+        getGraceNotesGroupAfterNote ();
 
   if (graceNotesGroupAfter) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -21665,7 +21675,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
       std::stringstream ss;
 
       ss <<
-        "Copying grace notes group after " <<
+        "Copying grace notes group after note " <<
         graceNotesGroupAfter->asShortString () <<
         " from note " << note->asString () <<
         " to chord " << chord->asString ();
@@ -21692,7 +21702,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
   S_msrGraceNotesGroup
     graceNotesGroupBefore =
       note->
-        getNoteGraceNotesGroupBefore ();
+        getGraceNotesGroupBeforeNote ();
 
   if (graceNotesGroupBefore) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -21730,7 +21740,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
   S_msrGraceNotesGroup
     graceNotesGroupAfter =
       note->
-        getNoteGraceNotesGroupAfter ();
+        getGraceNotesGroupAfterNote ();
 
   if (graceNotesGroupAfter) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -21960,9 +21970,9 @@ void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
   // copy note's grace notes groups if any to the chord
 //  copyNoteGraceNotesGroupsToChord (note, chord);
   if (
-    note->getNoteGraceNotesGroupBefore ()
+    note->getGraceNotesGroupBeforeNote ()
       ||
-    note->getNoteGraceNotesGroupAfter ()
+    note->getGraceNotesGroupAfterNote ()
   ) {
     addNoteGraceNotesGroupsLinksToChord (note, chord);
   }
@@ -25157,12 +25167,12 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
     switch (fPendingGraceNotesGroup->getGraceNotesGroupKind ()) {
       case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
         fCurrentNote->
-          setNoteGraceNotesGroupBefore (
+          setGraceNotesGroupBeforeNote (
             fPendingGraceNotesGroup);
         break;
       case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
         fCurrentNote->
-          setNoteGraceNotesGroupAfter (
+          setGraceNotesGroupAfterNote (
             fPendingGraceNotesGroup);
         break;
     } // switch
@@ -25470,7 +25480,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 
       ss <<
         std::endl <<
-        "fCurrentGraceGroupNotes IS NOT NULL upon <backup/>" << // JMI
+        "fCurrentGraceNotesGroupNotes IS NOT NULL upon <backup/>" << // JMI
         ", line " << inputLineNumber <<
         std::endl;
 
@@ -25516,7 +25526,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 
       // attach it to fCurrentNonGraceNote
       fCurrentNonGraceNote->
-        setNoteGraceNotesGroupAfter (
+        setGraceNotesGroupAfterNote (
           fPendingGraceNotesGroup);
     }
 
@@ -26994,7 +27004,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
       }
       else {
  //       gLog <<
- //         "fCurrentGraceGroupNotes is NULL"; // JMI
+ //         "fCurrentGraceNotesGroupNotes is NULL"; // JMI
       }
 
       gLog << std::endl;
@@ -27040,10 +27050,10 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
         msrGraceNotesGroup::create (
           inputLineNumber,
           msrGraceNotesGroupKind::kGraceNotesGroupBefore, // default value
-          fCurrentGraceGroupIsSlashed,
-          fCurrentGraceGroupIsBeamed,
-          fCurrentGraceGroupIsTied,
-          fCurrentGraceGroupIsSlurred,
+          fCurrentGraceNotesGroupIsSlashed,
+          fCurrentGraceNotesGroupIsBeamed,
+          fCurrentGraceNotesGroupIsTied,
+          fCurrentGraceNotesGroupIsSlurred,
           fCurrentMeasureNumber);
 
       // should all grace notes be slurred?
@@ -27069,7 +27079,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
       /*
       fCurrentNoteVoice->
         appendGraceNotesToVoice (
-          fCurrentGraceGroupNotes);
+          fCurrentGraceNotesGroupNotes);
         //  */
     }
 
@@ -27594,13 +27604,13 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       std::endl << std::endl;
 
 /* JMI
-    if (fCurrentGraceGroupNotes) {
+    if (fCurrentGraceNotesGroupNotes) {
       gLog <<
-        fCurrentGraceGroupNotes;
+        fCurrentGraceNotesGroupNotes;
     }
     else {
 //       gLog <<
-//         "fCurrentGraceGroupNotes is NULL"; // JMI
+//         "fCurrentGraceNotesGroupNotes is NULL"; // JMI
     }
 */
 

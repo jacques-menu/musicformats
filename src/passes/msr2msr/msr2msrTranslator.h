@@ -763,7 +763,7 @@ class EXP msr2msrTranslator :
     // is being visited too
     S_msrNote                 fCurrentNonGraceNoteClone;
 
-    // to help workaround LilyPond issue #34 JMI ???
+    // to help workaround LilyPond_Issue_34 JMI ??? v0.9.70
     S_msrNote                 fFirstNoteCloneInVoice;
 
     S_msrGraceNotesGroup      fCurrentSkipGraceNotesGroup;
@@ -795,6 +795,7 @@ class EXP msr2msrTranslator :
     // grace notes
     // ------------------------------------------------------
     S_msrGraceNotesGroup      fCurrentGraceNotesGroupClone;
+
     S_msrNote                 fCurrentGraceNoteClone;
     Bool                      fOnGoingGraceNotesGroup;
 

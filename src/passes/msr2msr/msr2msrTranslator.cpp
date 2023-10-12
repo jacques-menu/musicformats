@@ -4255,13 +4255,13 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
         case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
       //    fCurrentNonGraceNoteClone-> JMI v0.9.67
           fOnGoingNotesStack.front ()->
-            setNoteGraceNotesGroupBefore (
+            setGraceNotesGroupBeforeNote (
               fCurrentGraceNotesGroupClone);
           break;
         case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
       //    fCurrentNonGraceNoteClone-> JMI v0.9.67
           fOnGoingNotesStack.front ()->
-            setNoteGraceNotesGroupAfter (
+            setGraceNotesGroupAfterNote (
               fCurrentGraceNotesGroupClone);
           break;
       } // switch
@@ -4395,7 +4395,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     if (noteNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote) {
     // don't createSkipGraceNotesGroupClone() is there's only a single voice JMI ??? v0.9.67
 
-      // issue #34 in LilyPond should be worked around by creating
+      //  LilyPond_Issue_34 should be worked around by creating
       // skip grace notes in the other voices of the part
 
       // create the skip grace notes group
@@ -4406,7 +4406,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
           ss <<
             "Creating a skip clone of grace notes group " <<
             elt->asShortString () <<
-            " to work around LilyPond issue #34" << // JMI ??? v0.9.67
+            " to work around LilyPond_Issue_34" << // JMI ??? v0.9.67
             std::endl;
 
           gWaeHandler->waeTrace (

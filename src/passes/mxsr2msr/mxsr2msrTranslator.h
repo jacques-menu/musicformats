@@ -2160,11 +2160,11 @@ class EXP mxsr2msrTranslator :
     // grace notes groups handling
     // ------------------------------------------------------
 
-    Bool                      fCurrentGraceGroupIsSlashed;
-    Bool                      fCurrentGraceGroupIsBeamed;
+    Bool                      fCurrentGraceNotesGroupIsSlashed;
+    Bool                      fCurrentGraceNotesGroupIsBeamed;
 
-    Bool                      fCurrentGraceGroupIsTied;
-    Bool                      fCurrentGraceGroupIsSlurred;
+    Bool                      fCurrentGraceNotesGroupIsTied;
+    Bool                      fCurrentGraceNotesGroupIsSlurred;
 
     S_msrGraceNotesGroup      fPendingGraceNotesGroup;
 

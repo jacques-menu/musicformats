@@ -120,6 +120,7 @@ class EXP language : public smartable
     virtual std::string   convertTheFirstMSRIntoASecondMSR () const;
 
     virtual std::string   convertTheSecondMSRIntoAnLPSR () const;
+    virtual std::string   convertTheFirstMSRIntoAnLPSR () const;
 
     virtual std::string   convertTheLPSRIntoLilyPondCode () const;
 

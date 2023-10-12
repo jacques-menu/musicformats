@@ -34,6 +34,7 @@
         </pitch>
         <voice>1</voice>
         <type>32nd</type>
+        <stem default-y="-50">down</stem>
       </note>
       <note>
         <grace />
@@ -43,6 +44,7 @@
         </pitch>
         <voice>1</voice>
         <type>32nd</type>
+        <stem default-y="-50">down</stem>
       </note>
       <note>
         <grace />
@@ -52,6 +54,7 @@
         </pitch>
         <voice>1</voice>
         <type>32nd</type>
+        <stem default-y="-50">down</stem>
       </note>
       <note>
         <pitch>

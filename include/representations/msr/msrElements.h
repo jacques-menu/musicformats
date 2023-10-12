@@ -42,6 +42,10 @@ class EXP msrElement : public smartable
                           msrElement (
                             int inputStartLineNumber);
 
+                          msrElement (
+                            int inputStartLineNumber,
+                            int inputEndLineNumber);
+
     virtual               ~msrElement ();
 
     virtual SMARTP<msrElement>

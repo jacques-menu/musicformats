@@ -6380,7 +6380,7 @@ void msr2mxsrTranslator:: appendNoteSlursListIfAny (
         slurPlacementKind =
           slur->getSlurPlacementKind ();
 
-      // append the slur element to the current note note notations element
+      // append the slur element to the current note notations element
       appendToNoteNotations (
         slurElement,
         slurPlacementKind);
@@ -7797,14 +7797,14 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
     // append theMsrNote element to the current measure element right now,
     // unless it contains a grace notes group
     S_msrGraceNotesGroup
-      noteGraceNotesGroupBefore =
+      graceNotesGroupBeforeNote =
         theMsrNote->
-          getNoteGraceNotesGroupBefore (),
-      noteGraceNotesGroupAfter =
+          getGraceNotesGroupBeforeNote (),
+      graceNotesGroupAfterNote =
         theMsrNote->
-          getNoteGraceNotesGroupAfter ();
+          getGraceNotesGroupAfterNote ();
 
-    if (! (noteGraceNotesGroupBefore || noteGraceNotesGroupAfter)) {
+    if (! (graceNotesGroupBeforeNote || graceNotesGroupAfterNote)) {
       if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
         // create a note comment
         S_msrVoice
@@ -7921,10 +7921,10 @@ void msr2mxsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
   // if it contains a grace notes group
   /*
   S_msrGraceNotesGroup
-    noteGraceNotesGroupBefore =
-      theMsrNote->getNoteGraceNotesGroupBefore (),
-    noteGraceNotesGroupAfter =
-      theMsrNote->getNoteGraceNotesGroupAfter ();
+    graceNotesGroupBeforeNote =
+      theMsrNote->getGraceNotesGroupBeforeNote (),
+    graceNotesGroupAfterNote =
+      theMsrNote->getGraceNotesGroupAfterNote ();
 */
   if (fCurrentNoteAwaitsGraceNotes) {
     appendNoteToMeasure (

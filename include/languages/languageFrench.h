@@ -79,6 +79,7 @@ class EXP languageFrench : public language
     std::string           convertTheFirstMSRIntoASecondMSR () const override;
 
     std::string           convertTheSecondMSRIntoAnLPSR () const override;
+    std::string           convertTheFirstMSRIntoAnLPSR () const override;
 
     std::string           convertTheLPSRIntoLilyPondCode () const override;
 

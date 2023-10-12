@@ -153,12 +153,13 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
       throw msdl2msrException (message);
     }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
-  }
+  } // try
+
   catch (msdl2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -190,12 +191,13 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
         gGlobalMsr2msrOahGroup,
         mfPassIDKind::kMfPassID_2,
         gLanguage->convertTheFirstMSRIntoASecondMSR ());
-  }
-  catch (msr2msrException& e) {
+  } // try
+
+  catch ( msr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -231,7 +233,8 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           gBsrOahGroup,
           mfPassIDKind::kMfPassID_3,
           "Create a first BSR from the MSR");
-    }
+    } // try
+
     catch (msr2bsrException& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
@@ -291,7 +294,8 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
           gBsrOahGroup,
           mfPassIDKind::kMfPassID_4,
           "Create the finalized BSR from the first BSR");
-    }
+    } // try
+
     catch (bsr2finalizedBsrException& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
@@ -591,12 +595,13 @@ mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
         // go ahead
         break;
     } // switch
-  }
-  catch (mfOahException& e) {
+  } // try
+
+  catch ( mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

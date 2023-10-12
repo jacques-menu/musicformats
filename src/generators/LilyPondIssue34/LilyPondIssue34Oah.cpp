@@ -50,7 +50,7 @@ S_LilyPondIssue34OahGroup LilyPondIssue34OahGroup::create ()
 
 LilyPondIssue34OahGroup::LilyPondIssue34OahGroup ()
   : oahGroup (
-      "LilyPondIssue34",
+      "LilyPond_Issue_34",
       "help-lilypond-issue-34-group", "hli34-group",
 R"(These options control the way LilyPondIssue34 works.)",
       oahElementVisibilityKind::kElementVisibilityWhole)

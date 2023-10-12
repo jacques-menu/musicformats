@@ -170,7 +170,8 @@ EXP void translateLpsrToLilypondWithHandler (
         passIDKind,
         passDescription,
         lilypondStandardOutputStream);
-    }
+    } // try
+
     catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutput);
       return;
@@ -243,7 +244,8 @@ EXP void translateLpsrToLilypondWithHandler (
         passIDKind,
         passDescription,
         lilypondFileOutputStream);
-    }
+    } // try
+
     catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutput);
       return;

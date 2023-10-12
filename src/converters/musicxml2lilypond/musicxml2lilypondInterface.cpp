@@ -134,12 +134,13 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2,
         gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
-  }
-  catch (mxsr2msrException& e) {
+  } // try
+
+  catch ( mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -167,12 +168,13 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
       firstMsrScore,
         mfPassIDKind::kMfPassID_3,
         gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
-  }
-  catch (mxsr2msrException& e) {
+  } // try
+
+  catch ( mxsr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -191,64 +193,88 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
-  // convert the first MSR score into a second MSR (pass 4)
+  // convert the first MSR score into a second MSR if needed (pass 4)
   // ------------------------------------------------------
 
   S_msrScore secondMsrScore;
 
-  try {
-if (false) { // JMI v0.9.67
-    for (const S_msrVoice& voice: firstMsrScore->getScoreAllVoicesList ()) {
-      gLog <<
-        "===> firstMsrScore voice: " << voice->getVoiceName () <<
-        std::endl;
+  if (gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gEarlyOptions.getEarlyTracePasses ()) {
+      std::stringstream ss;
 
-      S_msrPathToVoice
-        pathToVoice =
-          msrPathToVoice::createFromVoice (
-            voice);
+      ss <<
+        gLanguage->passIDKindAsString (mfPassIDKind::kMfPassID_4) <<
+        ": " <<
+        gLanguage->convertTheFirstMSRIntoASecondMSR () <<
+        " not run, since this pass is being avoided";
+
+      msr2msrWarning (
+        gServiceRunData->getInputSourceName (),
+        1, // JMI inputLineNumber,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    secondMsrScore = firstMsrScore;
+  }
+
+  else {
+    try {
+//       for (const S_msrVoice& voice: firstMsrScore->getScoreAllVoicesList ()) {
+//         gLog <<
+//           "===> firstMsrScore voice: " << voice->getVoiceName () <<
+//           std::endl;
+//
+//         S_msrPathToVoice
+//           pathToVoice =
+//             msrPathToVoice::createFromVoice (
+//               voice);
+//
+//         secondMsrScore =
+//           translateMsrToMsrAlongPathToVoice ( JMI ??? v0.9.70
+//             firstMsrScore,
+//             gMsrOahGroup,
+//             gGlobalMsr2msrOahGroup,
+//             mfPassIDKind::kMfPassID_4,
+//             gLanguage->convertTheFirstMSRIntoASecondMSR (),
+//             pathToVoice);
+//       } // for
 
       secondMsrScore =
-        translateMsrToMsrAlongPathToVoice (
+        translateMsrToMsr (
           firstMsrScore,
           gMsrOahGroup,
           gGlobalMsr2msrOahGroup,
           mfPassIDKind::kMfPassID_4,
-          gLanguage->convertTheFirstMSRIntoASecondMSR (),
-          pathToVoice);
-    } // for
-}
-else {
-    secondMsrScore =
-      translateMsrToMsr (
-        firstMsrScore,
-        gMsrOahGroup,
-        gGlobalMsr2msrOahGroup,
-        mfPassIDKind::kMfPassID_4,
-        gLanguage->convertTheFirstMSRIntoASecondMSR ());
-}
-  }
-  catch (mxsr2msrException& e) {
-    mfDisplayException (e, gOutput);
-    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-  }
-  catch (std::exception& e) {
-    mfDisplayException (e, gOutput);
-    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
-  }
+          gLanguage->convertTheFirstMSRIntoASecondMSR ());
+    } // try
 
-  // should we return now?
-  // ------------------------------------------------------
 
-  if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass4 ()) {
-#ifdef MF_TRACE_IS_ENABLED
-    gWaeHandler->waeTraceToStreamWithoutInputLocation (
-      err,
-      __FILE__, __LINE__,
-      gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_4));
-#endif // MF_TRACE_IS_ENABLED
+    catch (mxsr2msrException& e) {
+      mfDisplayException (e, gOutput);
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
+    }
 
-    return mfMusicformatsErrorKind::kMusicformatsError_NONE;
+    // should we return now?
+    // ------------------------------------------------------
+
+    if (! gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) {
+      if (gGlobalXml2lyInsiderOahGroup->getQuitAfterPass4 ()) { // JMI v0.9.70 meaningless if msr2smr is avoided
+    #ifdef MF_TRACE_IS_ENABLED
+        gWaeHandler->waeTraceToStreamWithoutInputLocation (
+          err,
+          __FILE__, __LINE__,
+          gLanguage->quittingAfterPass (mfPassIDKind::kMfPassID_4));
+    #endif // MF_TRACE_IS_ENABLED
+
+        return mfMusicformatsErrorKind::kMusicformatsError_NONE;
+      }
+    }
   }
 
   // the LPSR score
@@ -260,20 +286,33 @@ else {
   // ------------------------------------------------------
 
   try {
-    theLpsrScore =
-      translateMsrToLpsr (
-        secondMsrScore,
-        gMsrOahGroup,
-        gLpsrOahGroup,
-        mfPassIDKind::kMfPassID_5,
-        gLanguage->convertTheSecondMSRIntoAnLPSR (),
-        createMusicxml2lilypondConverterComponent ());
-  }
-  catch (msr2lpsrException& e) {
+    if (gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) {
+      theLpsrScore =
+        translateMsrToLpsr (
+          secondMsrScore,
+          gMsrOahGroup,
+          gLpsrOahGroup,
+          mfPassIDKind::kMfPassID_5,
+          gLanguage->convertTheFirstMSRIntoAnLPSR (),
+          createMusicxml2lilypondConverterComponent ());
+    }
+    else {
+      theLpsrScore =
+        translateMsrToLpsr (
+          secondMsrScore,
+          gMsrOahGroup,
+          gLpsrOahGroup,
+          mfPassIDKind::kMfPassID_5,
+          gLanguage->convertTheSecondMSRIntoAnLPSR (),
+          createMusicxml2lilypondConverterComponent ());
+    }
+  } // try
+
+  catch ( msr2lpsrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -329,7 +368,8 @@ else {
         mfPassIDKind::kMfPassID_6,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
-    }
+    } // try
+
     catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
@@ -405,7 +445,8 @@ else {
         mfPassIDKind::kMfPassID_6,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
-    }
+    } // try
+
     catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
@@ -574,12 +615,13 @@ static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
         // go ahead
         break;
     } // switch
-  }
-  catch (mfOahException& e) {
+  } // try
+
+  catch ( mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

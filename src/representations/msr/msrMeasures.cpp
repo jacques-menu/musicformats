@@ -2531,12 +2531,12 @@ void msrMeasure::appendNoteToMeasure (
 
   // set grace notes group 'before' elements measure position in relevant
   S_msrGraceNotesGroup
-    noteGraceNotesGroupBefore =
+    graceNotesGroupBeforeNote =
       note->
-        getNoteGraceNotesGroupBefore ();
+        getGraceNotesGroupBeforeNote ();
 
-  if (noteGraceNotesGroupBefore) {
-    noteGraceNotesGroupBefore->
+  if (graceNotesGroupBeforeNote) {
+    graceNotesGroupBeforeNote->
       setGraceNotesGroupElementsMeasurePositions (
         this,
         note->getMeasurePosition ());
@@ -2544,12 +2544,12 @@ void msrMeasure::appendNoteToMeasure (
 
   // set grace notes group 'after' elements measure position in relevant
   S_msrGraceNotesGroup
-    noteGraceNotesGroupAfter =
+    graceNotesGroupAfterNote =
       note->
-        getNoteGraceNotesGroupAfter ();
+        getGraceNotesGroupAfterNote ();
 
-  if (noteGraceNotesGroupAfter) {
-    noteGraceNotesGroupAfter->
+  if (graceNotesGroupAfterNote) {
+    graceNotesGroupAfterNote->
       setGraceNotesGroupElementsMeasurePositions (
         this,
         note->getMeasurePosition ()

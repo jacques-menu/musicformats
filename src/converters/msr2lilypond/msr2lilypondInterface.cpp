@@ -101,7 +101,8 @@ EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
           passID_A,
           passDescription_A,
           createMsr2lilypondConverterComponent ());
-    }
+    } // try
+
     catch (msr2lpsrException& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;

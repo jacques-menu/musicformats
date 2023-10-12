@@ -34,6 +34,15 @@ msrElement::msrElement (
   int inputStartLineNumber)
 {
   fInputStartLineNumber = inputStartLineNumber;
+  fInputEndLineNumber = fInputStartLineNumber;
+}
+
+msrElement::msrElement (
+  int inputStartLineNumber,
+  int inputEndLineNumber)
+{
+  fInputStartLineNumber = inputStartLineNumber;
+  fInputEndLineNumber = inputEndLineNumber;
 }
 
 msrElement::~msrElement ()

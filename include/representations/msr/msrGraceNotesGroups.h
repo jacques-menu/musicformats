@@ -195,7 +195,7 @@ class EXP msrGraceNotesGroup : public msrElement
 
     Bool                  fGraceNotesGroupIsFollowedByNotes;
 
-    // LilyPond issue #34 may lead to add skip grace notes to voices
+    // LilyPond_Issue_34 may lead to add skip grace notes to voices
     // other than the one containing these grace notes:
     // the measure number is needed to create the first measure
     // in case the grace notes are at the beginning of the voice

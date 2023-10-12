@@ -152,12 +152,13 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
       throw msdl2msrException (message);
     }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
-  }
-  catch (msdl2msrException& e) {
+  } // try
+
+  catch ( msdl2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -192,12 +193,13 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         mfPassIDKind::kMfPassID_2,
         "Convert the MSR into an LPSR",
         createMsdl2lilypondConverterComponent ());
-  }
-  catch (msr2lpsrException& e) {
+  } // try
+
+  catch ( msr2lpsrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -267,7 +269,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         mfPassIDKind::kMfPassID_3,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondStandardOutputStream);
-    }
+    } // try
+
     catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
@@ -343,7 +346,8 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         mfPassIDKind::kMfPassID_4,
         gLanguage->convertTheLPSRIntoLilyPondCode (),
         lilypondFileOutputStream);
-    }
+    } // try
+
     catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutput);
       return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
@@ -492,12 +496,13 @@ mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
         // go ahead
         break;
     } // switch
-  }
-  catch (mfOahException& e) {
+  } // try
+
+  catch ( mfOahException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

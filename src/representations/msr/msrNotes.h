@@ -551,17 +551,17 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteSlidesList; }
 
     // grace notes
-    void                  setNoteGraceNotesGroupBefore (
+    void                  setGraceNotesGroupBeforeNote (
                             const S_msrGraceNotesGroup& graceNotesGroupBefore);
 
-    S_msrGraceNotesGroup  getNoteGraceNotesGroupBefore () const
-                              { return fNoteGraceNotesGroupBefore; }
+    S_msrGraceNotesGroup  getGraceNotesGroupBeforeNote () const
+                              { return fGraceNotesGroupBeforeNote; }
 
-    void                  setNoteGraceNotesGroupAfter (
+    void                  setGraceNotesGroupAfterNote (
                             const S_msrGraceNotesGroup& graceNotesGroupAfter);
 
-    S_msrGraceNotesGroup  getNoteGraceNotesGroupAfter () const
-                              { return fNoteGraceNotesGroupAfter; }
+    S_msrGraceNotesGroup  getGraceNotesGroupAfterNote () const
+                              { return fGraceNotesGroupAfterNote; }
 
     // after grace notes
     /* JMI
@@ -925,8 +925,8 @@ class EXP msrNote : public msrTupletElement
     std::string           noteDisplayPitchKindAsString () const;
 
     // whole notes
-    std::string           noteSoundingWholeNotespitchAndOctaveAsString () const;
-    std::string           noteDisplayWholeNotespitchAndOctaveAsString () const;
+    std::string           noteSoundingWholeNotesPitchAndOctaveAsString () const;
+    std::string           noteDisplayWholeNotesPitchAndOctaveAsString () const;
 
     // octave kind
     std::string           noteDisplayOctaveKindAsString () const
@@ -1126,10 +1126,10 @@ class EXP msrNote : public msrTupletElement
     // grace notes
     // ------------------------------------------------------
 
-    S_msrGraceNotesGroup  fNoteGraceNotesGroupBefore;
+    S_msrGraceNotesGroup  fGraceNotesGroupBeforeNote;
   // JMI  S_msrAfterGraceNotesGroup ??? v0.9.64
     S_msrGraceNotesGroup
-                          fNoteGraceNotesGroupAfter;
+                          fGraceNotesGroupAfterNote;
 
     // single tremolo
     // ------------------------------------------------------

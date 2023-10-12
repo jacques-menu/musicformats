@@ -102,12 +102,13 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
         gGlobalMsr2msrOahGroup,
         passID_A,
         passDescription_A);
-  }
-  catch (msr2msrException& e) {
+  } // try
+
+  catch ( msr2msrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -125,12 +126,13 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
         passID_B,
         passDescription_B,
         mfTimingItemKind::kMandatory);
-  }
-  catch (msr2mxsrException& e) {
+  } // try
+
+  catch ( msr2mxsrException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
@@ -180,12 +182,13 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
       err,
       passID_C,
       passDescription_C);
-  }
-  catch (mxsr2musicxmlException& e) {
+  } // try
+
+  catch ( mxsr2musicxmlException& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
-  catch (std::exception& e) {
+  catch ( std::exception& e) {
     mfDisplayException (e, gOutput);
     return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }

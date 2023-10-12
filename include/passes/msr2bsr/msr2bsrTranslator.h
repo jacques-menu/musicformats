@@ -381,7 +381,7 @@ class EXP msr2bsrTranslator :
     // is being visited too
     S_msrNote                 fCurrentNonGraceNoteClone;
 
-    // to help workaround LilyPond issue #34
+    // to help workaround LilyPond_Issue_34
     S_msrNote                 fFirstNoteCloneInVoice;
 
     S_msrGraceNotesGroup      fCurrentSkipGraceNotesGroup;

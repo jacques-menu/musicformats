@@ -122,7 +122,7 @@ S_msrScore LilyPondIssue34Generator::createTheScore (
     theMsrScore =
       msrScore::create (
         __LINE__,
-        "LilyPondIssue34");
+        "LilyPond_Issue_34");
 
   // create its identification
   S_msrIdentification
@@ -139,7 +139,7 @@ S_msrScore LilyPondIssue34Generator::createTheScore (
   identification->
     setIdentificationWorkCreditTypeTitle (
       __LINE__,
-      "LilyPondIssue34");
+      "LilyPond_Issue_34");
 
   // append the identification's composer
   identification->

@@ -73,7 +73,7 @@ enum class msrNoteKind {
 
   // in grace notes groups
   kNoteRegularInGraceNotesGroup,
-  kNoteSkipInGraceNotesGroup, // used to circumvent LilyPond issue #34
+  kNoteSkipInGraceNotesGroup, // used to circumvent LilyPond_Issue_34
 
   // in chords in grace notes groups
   kNoteInChordInGraceNotesGroup,

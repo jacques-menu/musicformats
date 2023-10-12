@@ -42,7 +42,8 @@ A typical use of exceptions in \lpsrToLilypond{lpsr2lilypondInterface.cpp} is:
         passIDKind,
         passDescription,
         lilypondStandardOutputStream);
-    }
+    } // try
+
     catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutput);
       return;

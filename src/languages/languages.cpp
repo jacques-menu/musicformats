@@ -409,6 +409,11 @@ std::string language::convertTheSecondMSRIntoAnLPSR () const
   return "Convert the second MSR into an LPSR";
 }
 
+std::string language::convertTheFirstMSRIntoAnLPSR () const
+{
+  return "Convert the first MSR into an LPSR";
+}
+
 std::string language::convertTheLPSRIntoLilyPondCode () const
 {
   return "Convert the LPSR into LilyPond code";

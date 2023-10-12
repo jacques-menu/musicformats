@@ -557,7 +557,7 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrHarpPedalsTuning&
                               harpPedalsTuning);
 
-    // work around LilyPond issue #34
+    // work around LilyPond_Issue_34
 
     void                  addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
                             const S_msrVoice&           graceNotesGroupOriginVoice,

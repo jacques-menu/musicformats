@@ -4124,7 +4124,7 @@ void lpsr2lilypondTranslator::generateOrnament (
   std::string
     upLinkToNoteNotesDuration =
       ornamentUpLinkToNote->
-        noteSoundingWholeNotespitchAndOctaveAsString ();
+        noteSoundingWholeNotesPitchAndOctaveAsString ();
 
   switch (ornament->getOrnamentKind ()) {
     case msrOrnamentKind::kOrnamentTrill:
@@ -18943,61 +18943,61 @@ void lpsr2lilypondTranslator::generateNoteBeamsList (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      // LilyPond will take care of multiple beams automatically,
-      // so we need only generate code for the first number (level)
-      switch (beam->getBeamKind ()) {
-
-        case msrBeamKind::kBeamBegin:
-          if (beam->getBeamNumber () == 1) {
-            if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
- #ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceBeams ()) {
-                gLog <<
-                  "Generating LilyPond code for beam " <<
-                  beam->asShortString () <<
-                  " in note " <<
-                  note->asShortString () <<
-                  std::endl;
-              }
-#endif // MF_TRACE_IS_ENABLED
-
-              fLilypondCodeStream << "[ ";
-
-              if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
-                // generate the input line number as a comment
-                fLilypondCodeStream <<
-                  " %{ line " << beam->getInputStartLineNumber () << " kBeamBegin %} ";
-              }
-            }
-          }
-          break;
-
-        case msrBeamKind::kBeamContinue:
-          break;
-
-        case msrBeamKind::kBeamEnd:
-          if (beam->getBeamNumber () == 1) {
-            if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
-              fLilypondCodeStream << "] ";
-
-              if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
-                // generate the input line number as a comment
-                fLilypondCodeStream <<
-                  " %{ line " << beam->getInputStartLineNumber () << " kBeamEnd %} ";
-              }
-            }
-          }
-          break;
-
-        case msrBeamKind::kBeamForwardHook:
-          break;
-
-        case msrBeamKind::kBeamBackwardHook:
-          break;
-
-        case msrBeamKind::kBeam_UNKNOWN_:
-          break;
-      } // switch
+//       // LilyPond will take care of multiple beams automatically,
+//       // so we need only generate code for the first number (level) JMI v0.9.70
+//       switch (beam->getBeamKind ()) {
+//
+//         case msrBeamKind::kBeamBegin:
+//           if (beam->getBeamNumber () == 1) {
+//             if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
+//  #ifdef MF_TRACE_IS_ENABLED
+//               if (gTraceOahGroup->getTraceBeams ()) {
+//                 gLog <<
+//                   "Generating LilyPond code for beam " <<
+//                   beam->asShortString () <<
+//                   " in note " <<
+//                   note->asShortString () <<
+//                   std::endl;
+//               }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//               fLilypondCodeStream << "[ ";
+//
+//               if (true || gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+//                 // generate the input line number as a comment
+//                 fLilypondCodeStream <<
+//                   " %{ line " << beam->getInputStartLineNumber () << " kBeamBegin %} ";
+//               }
+//             }
+//           }
+//           break;
+//
+//         case msrBeamKind::kBeamContinue:
+//           break;
+//
+//         case msrBeamKind::kBeamEnd:
+//           if (beam->getBeamNumber () == 1) {
+//             if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
+//               fLilypondCodeStream << "] ";
+//
+//               if (true || gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+//                 // generate the input line number as a comment
+//                 fLilypondCodeStream <<
+//                   " %{ line " << beam->getInputStartLineNumber () << " kBeamEnd %} ";
+//               }
+//             }
+//           }
+//           break;
+//
+//         case msrBeamKind::kBeamForwardHook:
+//           break;
+//
+//         case msrBeamKind::kBeamBackwardHook:
+//           break;
+//
+//         case msrBeamKind::kBeam_UNKNOWN_:
+//           break;
+//       } // switch
     } // for
   }
 }
@@ -19218,6 +19218,7 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGraceNotes ()) {
     fLilypondCodeStream <<
+      std::endl <<
       "% --> generating code for grace notes group " <<
       graceNotesGroup->asString () <<
       ", line " << graceNotesGroup->getInputStartLineNumber () <<
@@ -19232,6 +19233,9 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
   Bool
     graceNotesGroupIsSlashed =
       graceNotesGroup->getGraceNotesGroupIsSlashed (),
+    graceNotesGroupIsBeamed =
+      graceNotesGroup->getGraceNotesGroupIsBeamed (),
+
     graceNotesGroupIsTied =
       graceNotesGroup->getGraceNotesGroupIsTied (),
     graceNotesGroupIsSlurred =
@@ -19243,6 +19247,7 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
       "% --> generateGraceNotesGroup()" <<
       ", graceNotesGroupKind: " << graceNotesGroupKind <<
       ", graceNotesGroupIsSlashed: " << graceNotesGroupIsSlashed <<
+      ", graceNotesGroupIsBeamed: " << graceNotesGroupIsBeamed <<
       ", graceNotesGroupIsTied: " << graceNotesGroupIsTied <<
       ", graceNotesGroupIsSlurred: " << graceNotesGroupIsSlurred <<
       std::endl;
@@ -19253,6 +19258,9 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
 
   switch (graceNotesGroupKind) {
     case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
+      if (graceNotesGroupIsBeamed) {
+      }
+
       if (graceNotesGroupIsSlashed) {
         if (graceNotesGroupIsTied || graceNotesGroupIsSlurred) {
           fLilypondCodeStream <<
@@ -19392,13 +19400,17 @@ slash = \tweak Flag.stroke-style grace \etc
             generateNoteBeamsList (graceNotesGroupNote);
           }
 
-          if (graceNotesGroup->getGraceNotesGroupIsBeamed ()) {
+          if (graceNotesGroupIsBeamed) {
             if (elementNumber == 1) {
               fLilypondCodeStream << "[ ";
             }
             else if (elementNumber == graceNotesGroupElementsListSize) {
               fLilypondCodeStream << "] ";
             }
+
+            fLilypondCodeStream <<
+              " %{ line " << graceNotesGroupNote->getInputStartLineNumber () <<
+              ", elementNumber: " << elementNumber << " %} "; // JMI v0.9.70
           }
 
           // generate the graceNotesGroupNote slurs if any,
@@ -19887,7 +19899,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         case msrNoteKind::kNoteSkipInGraceNotesGroup:
           {
           // don't generate code for the grace notes here, that's done thru
-          // the note's noteGraceNotesGroupBefore and noteGraceNotesGroupAfter fields
+          // the note's graceNotesGroupBeforeNote and graceNotesGroupAfterNote fields
             noteIsToBeIgnored = true;
 /* JMI
             S_msrNote
@@ -19898,9 +19910,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
             // don't generate note if the notes it's grace notes group is attached to
             // has a ??? JMI
             if (
-              noteTheGraceNotesGroupIsAttachedTo->getNoteGraceNotesGroupBefore ()
+              noteTheGraceNotesGroupIsAttachedTo->getGraceNotesGroupBeforeNote ()
                 ||
-              noteTheGraceNotesGroupIsAttachedTo->getNoteGraceNotesGroupAfter ()
+              noteTheGraceNotesGroupIsAttachedTo->getGraceNotesGroupAfterNote ()
             ) {
               noteIsToBeIgnored = true;
             }
@@ -20100,33 +20112,33 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // get the note's grace notes group after
+  // get the grace notes group after note
   S_msrGraceNotesGroup
-    noteGraceNotesGroupAfter =
-      elt->getNoteGraceNotesGroupAfter ();
+    graceNotesGroupAfterNote =
+      elt->getGraceNotesGroupAfterNote ();
 
-  // generate the note's grace notes group after opener if any
-  if (noteGraceNotesGroupAfter) {
+  // generate the grace notes group after note opener if any
+  if (graceNotesGroupAfterNote) {
     fLilypondCodeStream <<
       "\\afterGrace { ";
   }
 
-  // generate the note's grace notes group before if any,
+  // generate the grace notes group before note if any,
   // unless the note belongs to a chord
-  Bool doGenerateNoteGraceNotesGroupBefore (true);
+  Bool doGenerateGraceNotesGroupBeforeNote (true);
 
   if (fOnGoingChord && fOnGoingGraceNotesGroup) {
-    doGenerateNoteGraceNotesGroupBefore = false;
+    doGenerateGraceNotesGroupBeforeNote = false;
   }
 
-  if (doGenerateNoteGraceNotesGroupBefore) {
+  if (doGenerateGraceNotesGroupBeforeNote) {
     S_msrGraceNotesGroup
-      noteGraceNotesGroupBefore =
-        elt->getNoteGraceNotesGroupBefore ();
+      graceNotesGroupBeforeNote =
+        elt->getGraceNotesGroupBeforeNote ();
 
-    if (noteGraceNotesGroupBefore) {
+    if (graceNotesGroupBeforeNote) {
       generateGraceNotesGroup (
-        noteGraceNotesGroupBefore);
+        graceNotesGroupBeforeNote);
     }
   }
 
@@ -20384,13 +20396,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
   }
 
 /* JMI
-  // get the note's grace notes group after ??? JMI
+  // get the grace notes group after note ??? JMI
   S_msrGraceNotesGroup
-    noteGraceNotesGroupAfter =
-      elt->getNoteGraceNotesGroupAfter ();
+    graceNotesGroupAfterNote =
+      elt->getGraceNotesGroupAfterNote ();
 
-  // generate the note's grace notes group after opener if any
-  if (noteGraceNotesGroupAfter) {
+  // generate the grace notes group after note opener if any
+  if (graceNotesGroupAfterNote) {
     fLilypondCodeStream <<
       "\\afterGrace { ";
   }
@@ -21740,15 +21752,15 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   // unless the note belongs to a grace notes group link
   if (! fOnGoingChordGraceNotesGroupLink) {
     S_msrGraceNotesGroup
-      noteGraceNotesGroupAfter =
-        elt->getNoteGraceNotesGroupAfter ();
+      graceNotesGroupAfterNote =
+        elt->getGraceNotesGroupAfterNote ();
 
     // generate the note's grace notes after group closer if any
-    if (noteGraceNotesGroupAfter) {
+    if (graceNotesGroupAfterNote) {
       fLilypondCodeStream <<
         "} ";
       generateGraceNotesGroup (
-        noteGraceNotesGroupAfter);
+        graceNotesGroupAfterNote);
     }
   }
 }
@@ -23647,8 +23659,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// if (false)
-  switch (elt->getTieKind ()) {
+   switch (elt->getTieKind ()) {
     case msrTieKind::kTieNone:
       break;
     case msrTieKind::kTieStart:
