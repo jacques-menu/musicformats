@@ -87,7 +87,9 @@ class EXP msrTupletFactor
 
     // ------------------------------------------------------
 
-    std::string           asString () const;
+    std::string           asShortString () const;
+    std::string           asString () const
+                              { return asShortString (); };
 
     virtual void          print (std::ostream& os) const;
 

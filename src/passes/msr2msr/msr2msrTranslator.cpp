@@ -4203,26 +4203,26 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  Bool doCreateAGraceNoteClone (true); // JMI
-
-  if (doCreateAGraceNoteClone) {
-    // create a clone of this graceNotesGroup
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceGraceNotes ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Creating a clone of grace notes group " <<
-        elt->asString () <<
-        " and attaching it to clone note " <<
-        fCurrentNonGraceNoteClone->asShortString () <<
-        std::endl;
-
-        gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
-          ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
+//   Bool doCreateAGraceNoteClone (true); // JMI
+//
+//   if (doCreateAGraceNoteClone) {
+//     // create a clone of this graceNotesGroup
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceGraceNotes ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "Creating a clone of grace notes group " <<
+//         elt->asString () <<
+//         " and attaching it to clone note " <<
+//         fCurrentNonGraceNoteClone->asShortString () <<
+//         std::endl;
+//
+//         gWaeHandler->waeTrace (
+//           __FILE__, __LINE__,
+//           ss.str ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
 
     fCurrentGraceNotesGroupClone =
       elt->
@@ -4284,146 +4284,146 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
         __FILE__, __LINE__,
         ss.str ());
     }
-  }
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceGraceNotes ()) {
-    std::stringstream ss;
-
-    ss <<
-      "+++++++++++++++++++++++++ visitStart (S_msrGraceNotesGroup&)" <<
-      std::endl <<
-      "fCurrentNonGraceNoteClone: ";
-
-    if (fCurrentNonGraceNoteClone) {
-      ss << fCurrentNonGraceNoteClone;
-    }
-    else {
-      ss <<
-        "[NONE]";
-    }
-    ss << std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // get the note this grace notes group is attached to
-  S_msrNote
-    noteNotesGroupIsAttachedTo =
-      elt->
-        getGraceNotesGroupUpLinkToNote ();
-
-  if (! noteNotesGroupIsAttachedTo) {
-    std::stringstream ss;
-
-    ss <<
-      "grace notes group '" << elt->asShortString () <<
-      "' has an empty note upLink";
-
-    msr2msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-
-  fOnGoingGraceNotesGroup = true;
-
-  // is noteNotesGroupIsAttachedTo the first one in its voice?
-#ifdef MF_TRACE_IS_ENABLED
-  if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI
-    std::stringstream ss;
-
-    ss <<
-      "The noteNotesGroupIsAttachedTo voice clone FIRST_ONE??? '" <<
-      fCurrentVoiceClone->getVoiceName () <<
-      "' is '";
-
-    if (noteNotesGroupIsAttachedTo) {
-      gLog <<
-        noteNotesGroupIsAttachedTo->asShortString ();
-    }
-    else {
-      gLog <<
-        "[NONE]";
-    }
-    gLog <<
-       "'";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI v0.9.67
-    std::stringstream ss;
-
-    ss <<
-      "The first note of voice clone KLJWLPOEF '" <<
-      fCurrentVoiceClone->getVoiceName () <<
-      "' is '";
-
-    if (fFirstNoteCloneInVoice) {
-      gLog <<
-        fFirstNoteCloneInVoice->asShortString ();
-    }
-    else {
-      gLog <<
-        "[NONE]";
-    }
-    gLog <<
-       "'";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // fetch the original voice first non grace note
-  S_msrNote
-    originalVoiceFirstNonGraceNote =
-      fCurrentVoiceOriginal->
-        fetchVoiceFirstNonGraceNote ();
-
-  if (originalVoiceFirstNonGraceNote) { // JMI
-    if (noteNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote) {
-    // don't createSkipGraceNotesGroupClone() is there's only a single voice JMI ??? v0.9.67
-
-      //  LilyPond_Issue_34 should be worked around by creating
-      // skip grace notes in the other voices of the part
-
-      // create the skip grace notes group
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceGraceNotes ()) {
-          std::stringstream ss;
-
-          ss <<
-            "Creating a skip clone of grace notes group " <<
-            elt->asShortString () <<
-            " to work around LilyPond_Issue_34" << // JMI ??? v0.9.67
-            std::endl;
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-
-      fCurrentSkipGraceNotesGroup =
-        elt->
-          createSkipGraceNotesGroupClone ();
-    }
-  }
-
-  // addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded() will
-  // append the same skip grace notes to the ofhter voices if needed
-  // in visitEnd (S_msrPart&)
+//   }
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceGraceNotes ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "+++++++++++++++++++++++++ visitStart (S_msrGraceNotesGroup&)" <<
+//       std::endl <<
+//       "fCurrentNonGraceNoteClone: ";
+//
+//     if (fCurrentNonGraceNoteClone) {
+//       ss << fCurrentNonGraceNoteClone;
+//     }
+//     else {
+//       ss <<
+//         "[NONE]";
+//     }
+//     ss << std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // get the note this grace notes group is attached to
+//   S_msrNote
+//     noteNotesGroupIsAttachedTo =
+//       elt->
+//         getGraceNotesGroupUpLinkToNote ();
+//
+//   if (! noteNotesGroupIsAttachedTo) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "grace notes group '" << elt->asShortString () <<
+//       "' has an empty note upLink";
+//
+//     msr2msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+//
+//   fOnGoingGraceNotesGroup = true;
+//
+//   // is noteNotesGroupIsAttachedTo the first one in its voice?
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI
+//     std::stringstream ss;
+//
+//     ss <<
+//       "The noteNotesGroupIsAttachedTo voice clone FIRST_ONE??? '" <<
+//       fCurrentVoiceClone->getVoiceName () <<
+//       "' is '";
+//
+//     if (noteNotesGroupIsAttachedTo) {
+//       gLog <<
+//         noteNotesGroupIsAttachedTo->asShortString ();
+//     }
+//     else {
+//       gLog <<
+//         "[NONE]";
+//     }
+//     gLog <<
+//        "'";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI v0.9.67
+//     std::stringstream ss;
+//
+//     ss <<
+//       "The first note of voice clone KLJWLPOEF '" <<
+//       fCurrentVoiceClone->getVoiceName () <<
+//       "' is '";
+//
+//     if (fFirstNoteCloneInVoice) {
+//       gLog <<
+//         fFirstNoteCloneInVoice->asShortString ();
+//     }
+//     else {
+//       gLog <<
+//         "[NONE]";
+//     }
+//     gLog <<
+//        "'";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // fetch the original voice first non grace note
+//   S_msrNote
+//     originalVoiceFirstNonGraceNote =
+//       fCurrentVoiceOriginal->
+//         fetchVoiceFirstNonGraceNote ();
+//
+//   if (originalVoiceFirstNonGraceNote) { // JMI
+//     if (noteNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote) {
+//     // don't createSkipGraceNotesGroupClone() is there's only a single voice JMI ??? v0.9.67
+//
+//       //  LilyPond_Issue_34 should be worked around by creating
+//       // skip grace notes in the other voices of the part
+//
+//       // create the skip grace notes group
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gTraceOahGroup->getTraceGraceNotes ()) {
+//           std::stringstream ss;
+//
+//           ss <<
+//             "Creating a skip clone of grace notes group " <<
+//             elt->asShortString () <<
+//             " to work around LilyPond_Issue_34" << // JMI ??? v0.9.67
+//             std::endl;
+//
+//           gWaeHandler->waeTrace (
+//             __FILE__, __LINE__,
+//             ss.str ());
+//         }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       fCurrentSkipGraceNotesGroup =
+//         elt->
+//           createSkipGraceNotesGroupClone ();
+//     }
+//   }
+//
+//   // addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded() will
+//   // append the same skip grace notes to the ofhter voices if needed
+//   // in visitEnd (S_msrPart&)
 }
 
 void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
@@ -5030,7 +5030,8 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::endl;
         */
 
-      if (fOnGoingGraceNotesGroup) { // JMI v0.9.66
+//       if (fOnGoingGraceNotesGroup) { // JMI v0.9.66
+      if (fCurrentGraceNotesGroupClone) { // JMI v0.9.66
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceGraceNotes ()) {
           std::stringstream ss;
@@ -5163,6 +5164,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       if (fOnGoingChord) {
+        // append fCurrentGraceNoteClone to fCurrentVoiceClone
         fCurrentChordClone->
           addAnotherNoteToChord (
             fCurrentGraceNoteClone,

@@ -6643,6 +6643,14 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
           addAnotherNoteToChord (
             fCurrentNonGraceNoteClone,
             fCurrentVoiceClone);
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check
+        mfAssert (
+          __FILE__, __LINE__,
+          fCurrentNonGraceNoteClone != nullptr,
+          "fCurrentNonGraceNoteClone is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
       }
 
       else {
@@ -6663,7 +6671,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       if (fOnGoingChord) {
-        // append fCurrentNonGraceNoteClone to fCurrentVoiceClone
+        // append fCurrentGraceNoteClone to fCurrentVoiceClone
         fCurrentChordClone->
           addAnotherNoteToChord (
             fCurrentGraceNoteClone,
@@ -6713,7 +6721,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       break;
   } // switch
 
-  if (fCurrentNonGraceNoteClone) { // JMI
+  if (fCurrentNonGraceNoteClone) { // JMI v0.9.70
     // handle editorial accidentals
     switch (fCurrentNonGraceNoteClone->getNoteEditorialAccidentalKind ()) {
       case msrEditorialAccidentalKind::kEditorialAccidentalYes:

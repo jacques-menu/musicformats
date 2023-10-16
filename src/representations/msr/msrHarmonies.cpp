@@ -4790,9 +4790,9 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 //       "Extending the sounding whole notes of harmony " <<
 //       asString () <<
 //       " from " <<
-//       fSoundingWholeNotes <<
+//       fSoundingWholeNotes.asFractionString () <<
 //       " to " <<
-//       augmentedSoundingWholeNotes <<
+//       augmentedSoundingWholeNotes.asFractionString () <<
 //       " to fill measure " <<
 //       this->asShortString () <<
 //       " in voice \"" <<
@@ -4955,9 +4955,9 @@ std::string msrHarmony::asString () const
 //     std::endl;
 
     ", fSoundingWholeNotes: " <<
-    fSoundingWholeNotes <<
+    fSoundingWholeNotes.asFractionString () <<
     ", fHarmonyDisplayWholeNotes: " <<
-    fHarmonyDisplayWholeNotes <<
+    fHarmonyDisplayWholeNotes.asFractionString () <<
 
     ", fMeasurePosition: " <<
     fMeasurePosition.asString ();
@@ -5105,7 +5105,7 @@ std::string msrHarmony::asString () const
 //
 //   ss <<
 //     ", fSoundingWholeNotes: " <<
-//     fSoundingWholeNotes <<
+//     fSoundingWholeNotes.asFractionString () <<
 //     ", fHarmonyDisplayWholeNotes: " <<
 //     fHarmonyDisplayWholeNotes;
 //
@@ -5189,11 +5189,11 @@ void msrHarmony::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes <<
+    fSoundingWholeNotes.asFractionString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fHarmonyDisplayWholeNotes" << ": " <<
-    fHarmonyDisplayWholeNotes <<
+    fHarmonyDisplayWholeNotes.asFractionString () <<
     std::endl;
 
   // print the harmony measure position

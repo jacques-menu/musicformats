@@ -3499,13 +3499,13 @@ R"(These options control which LilyPond code is generated.)",
       "fOctaveEntryVariable ???", // JMI
       msrOctaveEntryKind::kOctaveEntryAbsolute)
 {
-  initializeLilypondGenerationOahGroup ();
+  initializeLpsr2LilypondOahGroup ();
 }
 
 lpsr2lilypondOahGroup::~lpsr2lilypondOahGroup ()
 {}
 
-void lpsr2lilypondOahGroup::initializeLilypondVersionOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondLilypondVersionOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -3541,7 +3541,7 @@ The default is the mininum 'MINIMUM_VALUE' value.)",
       fLilypondVersionAtom);
 }
 
-void lpsr2lilypondOahGroup::initializeScoreNotationOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondScoreNotationOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -3592,7 +3592,7 @@ R"(Generate lyLuaTeX code arout the LilyPond code to produce a '.tex' file.
         fLyLuaTexOutput));
 }
 
-void lpsr2lilypondOahGroup::initializeGlobalStaffSizeOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondGlobalStaffSizeOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -3629,7 +3629,7 @@ The default is 'DEFAULT_VALUE'.)",
       fGlobalStaffSizeAtom);
 }
 
-void lpsr2lilypondOahGroup::initializeIdentificationOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondIdentificationOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -3930,7 +3930,7 @@ R"(Set 'copyright' to STRING in the LilyPond code \header.)",
       copyrightAtom);
 }
 
-void lpsr2lilypondOahGroup::initializePartsOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondPartsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -3997,7 +3997,7 @@ There can be several occurrences of this option.)",
         transposePartIDAtom);
 }
 
-void lpsr2lilypondOahGroup::initializeVoicesOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondVoicesOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4024,7 +4024,7 @@ This is a temporary option for experimenting with rests code generation.)###",
         fAutoVoices));
 }
 
-void lpsr2lilypondOahGroup::initializeEngraversOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondEngraversOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4060,7 +4060,7 @@ R"(Generate custos at the end of the lines.)",
         fCustosEngraver));
 }
 
-void lpsr2lilypondOahGroup::initializeClefsKeysTimesOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondClefsKeysTimesOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4124,7 +4124,7 @@ R"(Generate numerical time signatures, such as '4/4' instead of 'C'.)",
         fNumericalTimeSignature));
 }
 
-void lpsr2lilypondOahGroup::initializeNotesOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondNotesOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4369,8 +4369,8 @@ This is useful when debugging EXECUTABLE.)",
         regex_replace (
 R"(Generate after each end of measure a comment
 containing its original MusicXML measure number.
-This is useful to locate where to add line breaks and page breaks,
-and when debugging EXECUTABLE.)",
+This is useful to locate where to add line breaks and page breaks
+when debugging EXECUTABLE.)",
           std::regex ("EXECUTABLE"),
           gOahOahGroup->getOahOahGroupServiceName ()),
         "fOriginalMeasureNumbers",
@@ -4430,7 +4430,7 @@ with r, g and b being float numbers between 0.0 and 1.0 inclusive.)",
       fNonPrintNotesHeadColorRGBAtom);
 }
 
-void lpsr2lilypondOahGroup::initializeBarsOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondBarsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4572,7 +4572,7 @@ R"(Don't generate bar number checks in the LilyPond code.)",
       fNoBarNumberChecksAtom);
 }
 
-void lpsr2lilypondOahGroup::initializePageAndLineBreaksOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondPageAndLineBreaksOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4670,7 +4670,7 @@ There can be several occurrences of this option.)",
         */
 }
 
-void lpsr2lilypondOahGroup::initializeStavesOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondStavesOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4735,7 +4735,7 @@ with r, g and b being float numbers between 0.0 and 1.0 inclusive.)",
       fLedgerLinesColorRGBAtom);
 }
 
-void lpsr2lilypondOahGroup::initializeChordsOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondChordsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4760,7 +4760,7 @@ R"(Connect arpeggios across piano staves.)",
         fConnectArpeggios));
 }
 
-void lpsr2lilypondOahGroup::initializeTupletsOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondTupletsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4786,7 +4786,7 @@ instead of keeping the on one and the same line.)",
         fIndentTuplets));
 }
 
-void lpsr2lilypondOahGroup::initializeRepeatOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondRepeatOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4827,7 +4827,7 @@ R"(Ignore repeats numbers and let LilyPond determine them.)",
         fIgnoreRepeatNumbers));
 }
 
-void lpsr2lilypondOahGroup::initializeOrnamentsOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondOrnamentsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4865,7 +4865,7 @@ The default is 'DEFAULT_VALUE'.)",
         fDelayedOrnamentsFraction));
 }
 
-void lpsr2lilypondOahGroup::initializeChordsDisplayOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondChordsDisplayOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4938,7 +4938,7 @@ LILYPOND_CODE)",
         fJazzChordsDisplay));
 }
 
-void lpsr2lilypondOahGroup::initializeDynamicsOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondDynamicsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -4985,7 +4985,7 @@ The default is 'DEFAULT_VALUE'.)",
       fDynamicsTextSpannersStyleKindAtom);
 }
 
-void lpsr2lilypondOahGroup::initializeLyricsOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondLyricsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -5042,7 +5042,7 @@ The default is 'DEFAULT_VALUE'.)",
         fLyricsNotesDurationsKind));
 }
 
-void lpsr2lilypondOahGroup::initializeFontsOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondFontsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -5070,7 +5070,7 @@ https://github.com/OpenLilyPondFonts/lilyjazz/blob/master/LilyPond-Fonts-Install
         fJazzFonts));
 }
 
-void lpsr2lilypondOahGroup::initializeCodeGenerationOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondCodeGenerationOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -5361,7 +5361,7 @@ R"(Generate LPSR visiting information as comment..)",
         fGenerateLpsrVisitingInformation));
 }
 
-void lpsr2lilypondOahGroup::initializeMidiOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondMidiOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -5420,7 +5420,7 @@ R"(Generate the '\midi' block as a comment instead of active code.)",
         fNoMidi));
 }
 
-void lpsr2lilypondOahGroup::initializeCombinedOptionsOptions ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondCombinedOptionsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -5490,99 +5490,99 @@ meant to facilitate manual editing and completion of the result.)");
       fIgnoreLpsrPageBreaksAtom);
 }
 
-void lpsr2lilypondOahGroup::initializeLilypondGenerationOahGroup ()
+void lpsr2lilypondOahGroup::initializeLpsr2LilypondOahGroup ()
 {
   // LilyPond version
   // --------------------------------------
-  initializeLilypondVersionOptions ();
+  initializeLpsr2LilypondLilypondVersionOptions ();
 
   // score notation
   // --------------------------------------
-  initializeScoreNotationOptions ();
+  initializeLpsr2LilypondScoreNotationOptions ();
 
   // global staff size
   // --------------------------------------
-  initializeGlobalStaffSizeOptions ();
+  initializeLpsr2LilypondGlobalStaffSizeOptions ();
 
   // identification
   // --------------------------------------
-  initializeIdentificationOptions ();
+  initializeLpsr2LilypondIdentificationOptions ();
 
   // parts
   // --------------------------------------
-  initializePartsOptions ();
+  initializeLpsr2LilypondPartsOptions ();
 
   // voices
   // --------------------------------------
-  initializeVoicesOptions ();
+  initializeLpsr2LilypondVoicesOptions ();
 
   // engravers
   // --------------------------------------
-  initializeEngraversOptions ();
+  initializeLpsr2LilypondEngraversOptions ();
 
   // time
   // --------------------------------------
-  initializeClefsKeysTimesOptions ();
+  initializeLpsr2LilypondClefsKeysTimesOptions ();
 
   // notes
   // --------------------------------------
-  initializeNotesOptions ();
+  initializeLpsr2LilypondNotesOptions ();
 
   // bars
   // --------------------------------------
-  initializeBarsOptions ();
+  initializeLpsr2LilypondBarsOptions ();
 
   // page and line breaks
   // --------------------------------------
-  initializePageAndLineBreaksOptions ();
+  initializeLpsr2LilypondPageAndLineBreaksOptions ();
 
   // staves
   // --------------------------------------
-  initializeStavesOptions ();
+  initializeLpsr2LilypondStavesOptions ();
 
   // chords
   // --------------------------------------
-  initializeChordsOptions ();
+  initializeLpsr2LilypondChordsOptions ();
 
   // tuplets
   // --------------------------------------
-  initializeTupletsOptions ();
+  initializeLpsr2LilypondTupletsOptions ();
 
   // repeats
   // --------------------------------------
-  initializeRepeatOptions ();
+  initializeLpsr2LilypondRepeatOptions ();
 
   // ornaments
   // --------------------------------------
-  initializeOrnamentsOptions ();
+  initializeLpsr2LilypondOrnamentsOptions ();
 
   // chords display
   // --------------------------------------
-  initializeChordsDisplayOptions ();
+  initializeLpsr2LilypondChordsDisplayOptions ();
 
   // lyrics
   // --------------------------------------
-  initializeLyricsOptions ();
+  initializeLpsr2LilypondLyricsOptions ();
 
   // dynamics
   // --------------------------------------
-  initializeDynamicsOptions ();
+  initializeLpsr2LilypondDynamicsOptions ();
 
   // fonts
   // --------------------------------------
-  initializeFontsOptions ();
+  initializeLpsr2LilypondFontsOptions ();
 
   // code generation
   // --------------------------------------
-  initializeCodeGenerationOptions ();
+  initializeLpsr2LilypondCodeGenerationOptions ();
 
   // midi
   // --------------------------------------
-  initializeMidiOptions ();
+  initializeLpsr2LilypondMidiOptions ();
 
   // combined options
   // --------------------------------------
-  initializeCombinedOptionsOptions ();
+  initializeLpsr2LilypondCombinedOptionsOptions ();
 }
 
 /* JMI
@@ -5708,7 +5708,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   int           valueFieldWidth) const
 {
   os <<
-    "The LilyPond lilypond are:" <<
+    "The LPSR to LilyPond options values are:" <<
     std::endl;
 
   ++gIndenter;
@@ -5895,6 +5895,9 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
+    std::setw (valueFieldWidth) << "fNoInitialTrebleClef" << ": " <<
+      fNoInitialTrebleClef <<
+      std::endl <<
     std::setw (valueFieldWidth) << "fCommentClefChanges" << ": " <<
       fCommentClefChanges <<
       std::endl;
@@ -5905,14 +5908,14 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   // keys
   // --------------------------------------
   os <<
-    "Clefs:" <<
+    "Keys:" <<
     std::endl;
 
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fCommentClefChanges" << ": " <<
-      fCommentClefChanges <<
+    std::setw (valueFieldWidth) << "fNoInitialCMajorKey" << ": " <<
+      fNoInitialCMajorKey <<
       std::endl;
 
   --gIndenter;
@@ -5921,12 +5924,15 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   // time signatures
   // --------------------------------------
   os <<
-    "Times:" <<
+    "Time signatures:" <<
     std::endl;
 
   ++gIndenter;
 
   os << std::left <<
+    std::setw (valueFieldWidth) << "fNoInitialCommonTimeSignature" << ": " <<
+      fNoInitialCommonTimeSignature <<
+      std::endl <<
     std::setw (valueFieldWidth) << "fNumericalTimeSignature" << ": " <<
       fNumericalTimeSignature <<
       std::endl;
@@ -6462,7 +6468,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   --gIndenter;
 }
 
-void lpsr2lilypondOahGroup::displayLilypondGenerationOahValues (int fieldWidth)
+void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
 {
   gLog <<
     "The LilyPond lilypond are:" <<

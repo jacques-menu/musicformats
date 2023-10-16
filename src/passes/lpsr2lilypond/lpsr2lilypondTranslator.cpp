@@ -1191,8 +1191,8 @@ Bool lpsr2lilypondTranslator::wholeNotesDurationShouldBeGenerated (
     fLilypondCodeStream <<
       std::endl <<
       "%{ " <<
-      "fLastMetWholeNotes: " << fLastMetWholeNotes <<
-      ", wholeNotes: " << wholeNotes <<
+      "fLastMetWholeNotes: " << fLastMetWholeNotes.asFractionString () <<
+      ", wholeNotes: " << wholeNotes.asFractionString () <<
       ", wholeNotesDurationShouldBeGenerated(): " << result <<
       " %}" <<
       std::endl;
@@ -15709,9 +15709,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
   if (! fCurrentVoiceKey) {
     // this is the first clef in this voice
     if (
-// add Bool msrKey::isCMajor () method JM or create an CMajorKey variable
-//      keyKind == kCommonKey
-//        &&
+// add Bool msrKey::isCMajor () method JM or create an CMajorKey variable // JMI v0.9.70
+//       keyKind == kCommonKey
+//         &&
       gGlobalLpsr2lilypondOahGroup->getNoInitialCMajorKey ()
     ) {
       doGenerateKey = false;
@@ -15912,16 +15912,18 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
     timeSignatureSymbolKind =
       elt->getTimeSignatureSymbolKind ();
 
+  gLog <<
+    "---> timeSignatureSymbolKind: " << timeSignatureSymbolKind <<
+    std::endl;
+
   Bool doGenerateTimeSignature (true);
 
-  if (! fCurrentVoiceTimeSignature) {
+  if (! fCurrentVoiceTimeSignature) { // JMI  0.9.70
     // this is the first clef in this voice
     if (
-      timeSignatureSymbolKind == msrTimeSignatureSymbolKind::kTimeSignatureSymbolCommon
-        &&
       gGlobalLpsr2lilypondOahGroup->getNoInitialCommonTime ()
     ) {
-      doGenerateTimeSignature = false;
+//       doGenerateTimeSignature = false;
     }
   }
 
@@ -15950,7 +15952,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
         std::endl;
   */
 
-      fVoiceIsCurrentlySenzaMisura = true;
+//       fVoiceIsCurrentlySenzaMisura = true; // JMI  0.9.70
     }
 
     else {
@@ -18311,7 +18313,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
 
     fLilypondCodeStream <<
       "% doubleTremoloSoundingWholeNotes: " <<
-      elt->getSoundingWholeNotes () <<
+      elt->getSoundingWholeNotes ().asFractionString () <<
       std::endl <<
 
       "% gdoubleTremoloElementsNotesDuration: " <<
@@ -18943,61 +18945,61 @@ void lpsr2lilypondTranslator::generateNoteBeamsList (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-//       // LilyPond will take care of multiple beams automatically,
-//       // so we need only generate code for the first number (level) JMI v0.9.70
-//       switch (beam->getBeamKind ()) {
-//
-//         case msrBeamKind::kBeamBegin:
-//           if (beam->getBeamNumber () == 1) {
-//             if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
-//  #ifdef MF_TRACE_IS_ENABLED
-//               if (gTraceOahGroup->getTraceBeams ()) {
-//                 gLog <<
-//                   "Generating LilyPond code for beam " <<
-//                   beam->asShortString () <<
-//                   " in note " <<
-//                   note->asShortString () <<
-//                   std::endl;
-//               }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//               fLilypondCodeStream << "[ ";
-//
-//               if (true || gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
-//                 // generate the input line number as a comment
-//                 fLilypondCodeStream <<
-//                   " %{ line " << beam->getInputStartLineNumber () << " kBeamBegin %} ";
-//               }
-//             }
-//           }
-//           break;
-//
-//         case msrBeamKind::kBeamContinue:
-//           break;
-//
-//         case msrBeamKind::kBeamEnd:
-//           if (beam->getBeamNumber () == 1) {
-//             if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
-//               fLilypondCodeStream << "] ";
-//
-//               if (true || gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
-//                 // generate the input line number as a comment
-//                 fLilypondCodeStream <<
-//                   " %{ line " << beam->getInputStartLineNumber () << " kBeamEnd %} ";
-//               }
-//             }
-//           }
-//           break;
-//
-//         case msrBeamKind::kBeamForwardHook:
-//           break;
-//
-//         case msrBeamKind::kBeamBackwardHook:
-//           break;
-//
-//         case msrBeamKind::kBeam_UNKNOWN_:
-//           break;
-//       } // switch
+      // LilyPond will take care of multiple beams automatically,
+      // so we need only generate code for the first number (level) JMI v0.9.70
+      switch (beam->getBeamKind ()) {
+
+        case msrBeamKind::kBeamBegin:
+          if (beam->getBeamNumber () == 1) {
+            if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
+ #ifdef MF_TRACE_IS_ENABLED
+              if (gTraceOahGroup->getTraceBeams ()) {
+                gLog <<
+                  "Generating LilyPond code for beam " <<
+                  beam->asShortString () <<
+                  " in note " <<
+                  note->asShortString () <<
+                  std::endl;
+              }
+#endif // MF_TRACE_IS_ENABLED
+
+              fLilypondCodeStream << "[ ";
+
+              if (true || gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+                // generate the input line number as a comment
+                fLilypondCodeStream <<
+                  " %{ line " << beam->getInputStartLineNumber () << " kBeamBegin %} ";
+              }
+            }
+          }
+          break;
+
+        case msrBeamKind::kBeamContinue:
+          break;
+
+        case msrBeamKind::kBeamEnd:
+          if (beam->getBeamNumber () == 1) {
+            if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
+              fLilypondCodeStream << "] ";
+
+              if (true || gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+                // generate the input line number as a comment
+                fLilypondCodeStream <<
+                  " %{ line " << beam->getInputStartLineNumber () << " kBeamEnd %} ";
+              }
+            }
+          }
+          break;
+
+        case msrBeamKind::kBeamForwardHook:
+          break;
+
+        case msrBeamKind::kBeamBackwardHook:
+          break;
+
+        case msrBeamKind::kBeam_UNKNOWN_:
+          break;
+      } // switch
     } // for
   }
 }

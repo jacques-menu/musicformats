@@ -143,7 +143,7 @@ std::string wholeNotesAsLilypondString (
 
     ss <<
       "--> wholeNotesAsLilypondString() 1 -------------------------------------" <<
-      ", wholeNotes: " << wholeNotes.asString () <<
+      ", wholeNotes: " << wholeNotes.asFractionString () <<
       ", dotsNumber: " << dotsNumber <<
       ", line " << inputLineNumber;
 
@@ -195,7 +195,7 @@ std::string wholeNotesAsLilypondString (
 
     s1 <<
       "numerator is not positive in wholeNotesAsLilypondString()" <<
-      ", wholeNotes: " << wholeNotes.asString ();
+      ", wholeNotes: " << wholeNotes.asFractionString ();
 
     std::string message = s1.str ();
 

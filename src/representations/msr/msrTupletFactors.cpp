@@ -54,7 +54,7 @@ msrTupletFactor msrTupletFactor::inverse () const
   return result;
 }
 
-std::string msrTupletFactor::asString () const
+std::string msrTupletFactor::asShortString () const
 {
   std::stringstream ss;
 

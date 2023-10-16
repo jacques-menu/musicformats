@@ -238,8 +238,8 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 
         ss <<
           "Creating a skip grace note" <<
-          ", soundingWholeNotes: " << note->getSoundingWholeNotes () <<
-          ", displayWholeNotes: " << note->getNoteDisplayWholeNotes () <<
+          ", soundingWholeNotes: " << note->getSoundingWholeNotes ().asFractionString () <<
+          ", displayWholeNotes: " << note->getNoteDisplayWholeNotes ().asFractionString () <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -334,7 +334,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
     fGraceNotesGroupIsSlurred = true;
   }
 
-  if (note->getNoteKind () == msrNoteKind::kNoteSkipInGraceNotesGroup) abort ();
+//   if (note->getNoteKind () == msrNoteKind::kNoteSkipInGraceNotesGroup) abort ();
 }
 
 void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)

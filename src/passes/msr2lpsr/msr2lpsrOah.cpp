@@ -347,7 +347,7 @@ void msr2lpsrOahGroup::initializMsr2lpsrTraceOptions ()
 {}
 #endif // MF_TRACE_IS_ENABLED
 
-void msr2lpsrOahGroup::initializeScoreOutputOptions ()
+void msr2lpsrOahGroup::initializMsr2lpsrScoreOutputOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -396,7 +396,7 @@ The default is 'DEFAULT_VALUE'.)",
         fScoreOutputKind));
 }
 
-void msr2lpsrOahGroup::initializeRepeatsOptions ()
+void msr2lpsrOahGroup::initializMsr2lpsrRepeatsOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -422,7 +422,7 @@ By default, no such barLine is added.)",
         fCreateImplicitInitialRepeatBarLine));
 }
 
-void msr2lpsrOahGroup::initializeNotesOptions ()
+void msr2lpsrOahGroup::initializMsr2lpsrNotesOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -435,7 +435,7 @@ R"()",
   appendSubGroupToGroup (subGroup);
 }
 
-void msr2lpsrOahGroup::initializeLyricsOptions ()
+void msr2lpsrOahGroup::initializMsr2lpsrLyricsOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -458,19 +458,19 @@ void msr2lpsrOahGroup::initializeMsr2lpsrOahGroup ()
 
   // score output kind
   // --------------------------------------
-  initializeScoreOutputOptions ();
+  initializMsr2lpsrScoreOutputOptions ();
 
   // repeats
   // --------------------------------------
-  initializeRepeatsOptions ();
+  initializMsr2lpsrRepeatsOptions ();
 
   // notes
   // --------------------------------------
-  initializeNotesOptions ();
+  initializMsr2lpsrNotesOptions ();
 
   // lyrics
   // --------------------------------------
-  initializeLyricsOptions ();
+  initializMsr2lpsrLyricsOptions ();
 }
 
 //______________________________________________________________________________

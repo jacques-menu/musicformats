@@ -847,7 +847,7 @@ std::string msrSyllable::asString () const
     ", fSyllableKind: " << fSyllableKind <<
     ", fSyllableExtendKind: " << fSyllableExtendKind <<
     ", fSyllableStanzaNumber: \"" << fSyllableStanzaNumber << "\"" <<
-    ", fSyllableWholeNotes: " << fSyllableWholeNotes <<
+    ", fSyllableWholeNotes: " << fSyllableWholeNotes.asFractionString () <<
     ", fSyllableTupletFactor: " << fSyllableTupletFactor <<
     ", fSyllableMeasureNumber: " << fSyllableMeasureNumber <<
     ", line " << fInputStartLineNumber;
@@ -914,7 +914,7 @@ std::string msrSyllable::asShortString () const
     "\", " << fSyllableKind <<
     ", " << fSyllableExtendKind <<
     ", \"" << fSyllableStanzaNumber << "\"" <<
-    ", " << fSyllableWholeNotes <<
+    ", " << fSyllableWholeNotes.asFractionString () <<
     ", " << fSyllableTupletFactor <<
     ", fSyllableMeasureNumber: " << fSyllableMeasureNumber <<
     ", line " << fInputStartLineNumber;
@@ -961,7 +961,7 @@ void msrSyllable::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fSyllableWholeNotes" << ": " <<
-    fSyllableWholeNotes <<
+    fSyllableWholeNotes.asFractionString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<

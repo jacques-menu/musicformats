@@ -99,10 +99,10 @@ R"(Write the selected options values to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "display-options-values-all", "dova",
-R"(Write all the options values to standard error.)",
-        "fDisplayOptionsValuesAll",
-        fDisplayOptionsValuesAll));
+        "display-options-values-full", "dovf",
+R"(Write the full set of options values to standard error.)",
+        "fDisplayOptionsValuesFull",
+        fDisplayOptionsValuesFull));
 
   // display options handler
 
@@ -271,8 +271,8 @@ void displayOahGroup::displayAtomWithVariableOptionsValues (
     std::setw (valueFieldWidth) << "fDisplayOptionsValues" << ": " <<
     fDisplayOptionsValues <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << ": " <<
-    fDisplayOptionsValuesAll <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValuesFull" << ": " <<
+    fDisplayOptionsValuesFull <<
     std::endl <<
 
     std::setw (valueFieldWidth) << "fDisplayOahHandler" << ": " <<
@@ -320,8 +320,8 @@ void displayOahGroup::displayDisplayOptionsValues (int valueFieldWidth)
     std::setw (valueFieldWidth) << "fDisplayOptionsValues" << ": " <<
     fDisplayOptionsValues <<
     std::endl <<
-    std::setw (valueFieldWidth) << "fDisplayOptionsValuesAll" << ": " <<
-    fDisplayOptionsValuesAll <<
+    std::setw (valueFieldWidth) << "fDisplayOptionsValuesFull" << ": " <<
+    fDisplayOptionsValuesFull <<
     std::endl <<
 
     std::setw (valueFieldWidth) << "fDisplayOahHandler" << ": " <<

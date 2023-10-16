@@ -66,10 +66,10 @@ class EXP displayOahGroup : public oahGroup
     Bool                  getDisplayOptionsValues () const
                               { return fDisplayOptionsValues; }
 
-    void                  setDisplayOptionsValuesAll ()
-                              { fDisplayOptionsValuesAll = true; }
-    Bool                  getDisplayOptionsValuesAll () const
-                              { return fDisplayOptionsValuesAll; }
+    void                  setDisplayOptionsValuesFull ()
+                              { fDisplayOptionsValuesFull = true; }
+    Bool                  getDisplayOptionsValuesFull () const
+                              { return fDisplayOptionsValuesFull; }
 
     void                  setDisplayOahHandler ()
                               { fDisplayOahHandler = true; }
@@ -152,7 +152,7 @@ class EXP displayOahGroup : public oahGroup
     Bool                  fDisplayEarlyOptionsValues;
 
     Bool                  fDisplayOptionsValues;
-    Bool                  fDisplayOptionsValuesAll;
+    Bool                  fDisplayOptionsValuesFull;
 
     Bool                  fDisplayOahHandler;
     Bool                  fDisplayOahHandlerSummary;

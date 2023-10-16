@@ -301,7 +301,7 @@ void msrTuplet::appendNoteToTuplet (
     ss <<
       "Appending note " <<
       note->asShortString () <<
-      // the information is missing to display it the normal way
+      // the information is missing to display it the normal way JMI v0.9.70
       " to tuplet " <<
       asString ();
 
@@ -329,6 +329,9 @@ void msrTuplet::appendNoteToTuplet (
 //     setMeasureElementUpLinkToMeasure (
 //       fTupletUpLinkToMeasure);
 
+  // mark note as belonging to a tuplet
+  note->setNoteBelongsToATuplet ();
+
   // account for note duration in tuplet sounding duration
   fSoundingWholeNotes +=
     note->getSoundingWholeNotes ();
@@ -346,15 +349,15 @@ void msrTuplet::appendNoteToTuplet (
     registerShortestNoteInVoiceIfRelevant (note);
 
   // fetch voice last measure
-//   S_msrMeasure
-//     voiceLastMeasure =
-//       voice->fetchVoiceLastMeasure (
-//         inputLineNumber);
-//
-//   // account for the duration of note in voice last measure
-//   voiceLastMeasure->
-//     accountForTupletMemberNoteNotesDurationInMeasure (
-//       note);
+  S_msrMeasure
+    voiceLastMeasure =
+      voice->fetchVoiceLastMeasure (
+        note->getInputStartLineNumber ());
+
+  // account for the duration of note in voice last measure
+  voiceLastMeasure->
+    accountForTupletMemberNoteNotesDurationInMeasure (
+      note);
 
   --gIndenter;
 }
@@ -412,7 +415,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 
     ss <<
       "Appending tuplet " <<
-      tuplet <<
+      tuplet->asString () <<
       " to tuplet " <<
       asString ();
 
@@ -457,7 +460,7 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 
     ss <<
       "Appending tuplet " <<
-      tuplet <<
+      tuplet->asString () <<
       " to tuplet clone " <<
       asString ();
 
@@ -1037,7 +1040,8 @@ std::string msrTuplet::asString () const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes <<
+    ", fMemberNotesSoundingWholeNotes: " <<
+    fMemberNotesSoundingWholeNotes.asFractionString () <<
     ", line " << fInputStartLineNumber;
 
   ss <<
@@ -1112,7 +1116,8 @@ std::string msrTuplet::asShortString () const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes <<
+    ", fMemberNotesSoundingWholeNotes: " <<
+    fMemberNotesSoundingWholeNotes.asFractionString () <<
     ", line " << fInputStartLineNumber;
 
   ss <<
@@ -1184,7 +1189,8 @@ void msrTuplet::printFull (std::ostream& os) const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes <<
+    ", fMemberNotesSoundingWholeNotes: " <<
+    fMemberNotesSoundingWholeNotes.asFractionString () <<
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
@@ -1264,7 +1270,7 @@ void msrTuplet::printFull (std::ostream& os) const
     for ( ; ; ) {
       S_msrTupletElement tupletElement = (*i);
 
-      os << tupletElement;
+      tupletElement->printFull (os);
 
       if (++i == iEnd) break;
       os << std::endl;
@@ -1318,7 +1324,8 @@ void msrTuplet::print (std::ostream& os) const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMemberNotesSoundingWholeNotes: " << fMemberNotesSoundingWholeNotes <<
+    ", fMemberNotesSoundingWholeNotes: " <<
+    fMemberNotesSoundingWholeNotes.asFractionString () <<
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
@@ -1379,7 +1386,7 @@ void msrTuplet::print (std::ostream& os) const
     for ( ; ; ) {
       S_msrTupletElement tupletElement = (*i);
 
-      os << tupletElement;
+     tupletElement->print (os);
 
       if (++i == iEnd) break;
       os << std::endl;

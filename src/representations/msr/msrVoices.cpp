@@ -3498,7 +3498,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
     std::stringstream ss;
 
     ss <<
-      "Appending tuplet " << tuplet <<
+      "Appending tuplet " << tuplet->asString () <<
       " to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTrace (
@@ -10763,7 +10763,7 @@ void msrVoice::finalizeVoice (
       "--> in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes <<
+      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asFractionString () <<
       ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes;
 
     gWaeHandler->waeTrace (
@@ -10922,8 +10922,8 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
       "--> in voice \"" <<
       fVoiceName <<
       "\"" <<
-      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes <<
-      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes;
+      ", fVoiceShortestNoteWholeNotes: " << fVoiceShortestNoteWholeNotes.asFractionString () <<
+      ", partShortestNoteWholeNotes: " << partShortestNoteWholeNotes.asFractionString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11620,7 +11620,7 @@ void msrVoice::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) << "fVoiceShortestNoteWholeNotes" << ": " <<
-    fVoiceShortestNoteWholeNotes <<
+    fVoiceShortestNoteWholeNotes.asFractionString () <<
     std::endl <<
     std::setw (fieldWidth) << "fVoiceShortestNoteTupletFactor" << ": " <<
     std::endl;

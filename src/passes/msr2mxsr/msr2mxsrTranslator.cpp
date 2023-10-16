@@ -2905,7 +2905,7 @@ if (false) // JMI
 
     ss <<
       "--> partShortestNoteWholeNotes: " <<
-      fPartShortestNoteWholeNotes <<
+      fPartShortestNoteWholeNotes.asFractionString () <<
       std::endl <<
       "--> divisionsPerQuarterNoteAsRational: " <<
       divisionsPerQuarterNoteAsRational <<
@@ -4867,7 +4867,7 @@ void msr2mxsrTranslator::visitStart (S_msrChord& elt)
       " ===== " <<
       "Chord start " <<
       ", chordSoundingWholeNotes: " <<
-      elt->getSoundingWholeNotes () <<
+      elt->getSoundingWholeNotes ().asFractionString () <<
       ", " <<
       elt->getChordNotesVector ().size () <<
       " elements" <<
@@ -4908,7 +4908,7 @@ void msr2mxsrTranslator::visitEnd (S_msrChord& elt)
       " ===== " <<
       "Chord end " <<
       ", chordSoundingWholeNotes: " <<
-      elt->getSoundingWholeNotes () <<
+      elt->getSoundingWholeNotes ().asFractionString () <<
       ", " <<
       elt->getChordNotesVector ().size () <<
       " elements" <<
@@ -5243,12 +5243,12 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       ", previousNoteMeasurePosition: " <<
       previousNoteMeasurePosition.asString () <<
       ", previousNoteSoundingWholeNotes: " <<
-      previousNoteSoundingWholeNotes <<
+      previousNoteSoundingWholeNotes.asFractionString () <<
 
       ", theMsrNoteMeasurePosition: " <<
       theMsrNoteMeasurePosition.asString () <<
       ", theMsrNoteSoundingWholeNotes: " <<
-      theMsrNoteSoundingWholeNotes <<
+      theMsrNoteSoundingWholeNotes.asFractionString () <<
 
       ", backupNotesDuration: " << backupNotesDuration <<
       ", backupNotesDurationDivisions: " << backupNotesDurationDivisions <<
@@ -5284,12 +5284,12 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       ", previousNoteMeasurePosition: " <<
       previousNoteMeasurePosition.asString () <<
       ", previousNoteSoundingWholeNotes: " <<
-      previousNoteSoundingWholeNotes <<
+      previousNoteSoundingWholeNotes.asFractionString () <<
 
       ", theMsrNoteMeasurePosition: " <<
       theMsrNoteMeasurePosition.asString () <<
       ", theMsrNoteSoundingWholeNotes: " <<
-      theMsrNoteSoundingWholeNotes <<
+      theMsrNoteSoundingWholeNotes.asFractionString () <<
 
       ", backupNotesDuration: " << backupNotesDuration <<
       ", backupNotesDurationDivisions: " << backupNotesDurationDivisions <<
@@ -7401,11 +7401,11 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
 
     ss <<
       "---> noteKind: " << msrNoteKindAsString (noteKind) <<
-      ", noteSoundingWholeNotes: " << noteSoundingWholeNotes <<
-      ", noteDisplayWholeNotes: " << noteDisplayWholeNotes <<
+      ", noteSoundingWholeNotes: " << noteSoundingWholeNotes.asFractionString () <<
+      ", noteDisplayWholeNotes: " << noteDisplayWholeNotes.asFractionString () <<
       ", noteTupletFactor: " << theMsrNote->getNoteTupletFactor ().asRational () <<
       ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
-      ", partShortestNoteWholeNotes: " << fPartShortestNoteWholeNotes <<
+      ", partShortestNoteWholeNotes: " << fPartShortestNoteWholeNotes.asFractionString () <<
       ", fDivisionsMultiplyingFactor: " << fDivisionsMultiplyingFactor <<
       ", line " << inputLineNumber;
 

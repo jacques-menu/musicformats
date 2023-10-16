@@ -724,7 +724,7 @@ void msr2msrOahGroup::initializMsr2msrTraceOptions ()
 }
 #endif // MF_TRACE_IS_ENABLED
 
-void msr2msrOahGroup::initializeBookOptions ()
+void msr2msrOahGroup::initializMsr2msrBookOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -759,7 +759,7 @@ R"(Expand the book to as many scores as needed for a harmony band.)",
         fExpandToHarmonyBandBook));
 }
 
-void msr2msrOahGroup::initializeStavesOptions ()
+void msr2msrOahGroup::initializMsr2msrStavesOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -812,7 +812,7 @@ with this option.)", // JMI
       fKeepMsrStavesSetAtom);
 }
 
-void msr2msrOahGroup::initializeVoicesOptions ()
+void msr2msrOahGroup::initializMsr2msrVoicesOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -865,7 +865,7 @@ with this option.)", // JMI
       fKeepMsrVoicesSetAtom);
 }
 
-void msr2msrOahGroup::initializeBreakOptions ()
+void msr2msrOahGroup::initializMsr2msrBreakOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -912,7 +912,7 @@ There can be several occurrences of this option.)",
       fInserLineBreakAfterMeasureAtom);
 }
 
-void msr2msrOahGroup::initializeCompressOptions ()
+void msr2msrOahGroup::initializMsr2msrCompressOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -951,7 +951,7 @@ and does not handle multi-measure rests.)",
         fMergeStaffCommonRests));
 }
 
-void msr2msrOahGroup::initializeRepeatsOptions ()
+void msr2msrOahGroup::initializMsr2msrRepeatsOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -977,7 +977,7 @@ By default, no such barLine is added.)",
         fCreateImplicitInitialRepeatBarLine));
 }
 
-void msr2msrOahGroup::initializeNotesOptions ()
+void msr2msrOahGroup::initializMsr2msrNotesOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -990,7 +990,7 @@ R"()",
   appendSubGroupToGroup (subGroup);
 }
 
-void msr2msrOahGroup::initializeLyricsOptions ()
+void msr2msrOahGroup::initializMsr2msrLyricsOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -1013,32 +1013,32 @@ void msr2msrOahGroup::initializeMsr2msrOahGroup ()
 
   // book
   // --------------------------------------
-  initializeBookOptions ();
+  initializMsr2msrBookOptions ();
 
   // staves
-  initializeStavesOptions ();
+  initializMsr2msrStavesOptions ();
 
   // voices
-  initializeVoicesOptions ();
+  initializMsr2msrVoicesOptions ();
 
   // breaks
-  initializeBreakOptions ();
+  initializMsr2msrBreakOptions ();
 
   // compress
   // --------------------------------------
-  initializeCompressOptions ();
+  initializMsr2msrCompressOptions ();
 
   // repeats
   // --------------------------------------
-  initializeRepeatsOptions ();
+  initializMsr2msrRepeatsOptions ();
 
   // notes
   // --------------------------------------
-  initializeNotesOptions ();
+  initializMsr2msrNotesOptions ();
 
   // lyrics
   // --------------------------------------
-  initializeLyricsOptions ();
+  initializMsr2msrLyricsOptions ();
 }
 
 //______________________________________________________________________________

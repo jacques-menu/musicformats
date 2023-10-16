@@ -1109,7 +1109,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // initialisation
     // ------------------------------------------------------
 
-    void                  initializeLilypondGenerationOahGroup ();
+    void                  initializeLpsr2LilypondOahGroup ();
 
   public:
 
@@ -1766,51 +1766,51 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
-    void                  initializeLilypondVersionOptions ();
+    void                  initializeLpsr2LilypondLilypondVersionOptions ();
 
-    void                  initializeScoreNotationOptions ();
+    void                  initializeLpsr2LilypondScoreNotationOptions ();
 
-    void                  initializeGlobalStaffSizeOptions ();
+    void                  initializeLpsr2LilypondGlobalStaffSizeOptions ();
 
-    void                  initializeIdentificationOptions ();
+    void                  initializeLpsr2LilypondIdentificationOptions ();
 
-    void                  initializeVoicesOptions ();
+    void                  initializeLpsr2LilypondVoicesOptions ();
 
-    void                  initializePartsOptions ();
+    void                  initializeLpsr2LilypondPartsOptions ();
 
-    void                  initializeEngraversOptions ();
+    void                  initializeLpsr2LilypondEngraversOptions ();
 
-    void                  initializeClefsKeysTimesOptions ();
+    void                  initializeLpsr2LilypondClefsKeysTimesOptions ();
 
-    void                  initializeNotesOptions ();
+    void                  initializeLpsr2LilypondNotesOptions ();
 
-    void                  initializeBarsOptions ();
+    void                  initializeLpsr2LilypondBarsOptions ();
 
-    void                  initializePageAndLineBreaksOptions ();
+    void                  initializeLpsr2LilypondPageAndLineBreaksOptions ();
 
-    void                  initializeStavesOptions ();
+    void                  initializeLpsr2LilypondStavesOptions ();
 
-    void                  initializeChordsOptions ();
+    void                  initializeLpsr2LilypondChordsOptions ();
 
-    void                  initializeTupletsOptions ();
+    void                  initializeLpsr2LilypondTupletsOptions ();
 
-    void                  initializeRepeatOptions ();
+    void                  initializeLpsr2LilypondRepeatOptions ();
 
-    void                  initializeOrnamentsOptions ();
+    void                  initializeLpsr2LilypondOrnamentsOptions ();
 
-    void                  initializeChordsDisplayOptions ();
+    void                  initializeLpsr2LilypondChordsDisplayOptions ();
 
-    void                  initializeLyricsOptions ();
+    void                  initializeLpsr2LilypondLyricsOptions ();
 
-    void                  initializeDynamicsOptions ();
+    void                  initializeLpsr2LilypondDynamicsOptions ();
 
-    void                  initializeFontsOptions ();
+    void                  initializeLpsr2LilypondFontsOptions ();
 
-    void                  initializeCodeGenerationOptions ();
+    void                  initializeLpsr2LilypondCodeGenerationOptions ();
 
-    void                  initializeMidiOptions ();
+    void                  initializeLpsr2LilypondMidiOptions ();
 
-    void                  initializeCombinedOptionsOptions ();
+    void                  initializeLpsr2LilypondCombinedOptionsOptions ();
 
   public:
 
@@ -1829,7 +1829,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     void                  printLilypondGenerationOahHelp ();
 
-    void                  displayLilypondGenerationOahValues (int fieldWidth);
+    void                  displayLpsr2LilypondOahValues (int fieldWidth);
 
     virtual void          displayAtomWithVariableOptionsValues (
                             std::ostream& os,

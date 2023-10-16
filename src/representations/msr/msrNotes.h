@@ -446,6 +446,12 @@ class EXP msrNote : public msrTupletElement
     Bool                  getNoteBelongsToAChord () const
                               { return fNoteBelongsToAChord; }
 
+    // tuplet members
+    void                  setNoteBelongsToATuplet ();
+
+    Bool                  getNoteBelongsToATuplet () const
+                              { return fNoteBelongsToATuplet; }
+
     // grace notes
     Bool                  getNoteIsAGraceNote () const
                               {

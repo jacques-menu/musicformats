@@ -133,10 +133,13 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  setMeasureCurrentAccumulatedWholeNotesDuration (
                             int                  inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+                            const msrWholeNotes& wholeNotes,
+                            std::string          context);
+
     void                  incrementMeasureCurrentAccumulatedWholeNotesDuration (
                             int                  inputLineNumber,
-                            const msrWholeNotes& wholeNotesDelta);
+                            const msrWholeNotes& wholeNotesDelta,
+                            std::string          context);
 
     msrWholeNotes         getMeasureCurrentAccumulatedWholeNotesDuration () const
                               { return fMeasureCurrentAccumulatedWholeNotesDuration; }

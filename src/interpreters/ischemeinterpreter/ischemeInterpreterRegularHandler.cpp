@@ -321,7 +321,7 @@ void ischemeInterpreterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-options-and-arguments", subGroup);
   registerAtomInRegularSubgroup ("display-early-options-values", subGroup);
   registerAtomInRegularSubgroup ("display-options-values", subGroup);
-  registerAtomInRegularSubgroup ("display-options-values-all", subGroup);
+  registerAtomInRegularSubgroup ("display-options-values-full", subGroup);
   registerAtomInRegularSubgroup ("show-options-and-arguments", subGroup);
 
 

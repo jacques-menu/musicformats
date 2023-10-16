@@ -172,13 +172,13 @@ class EXP msr2lpsrOahGroup : public oahGroup
     void                  initializMsr2lpsrTraceOptions ();
 #endif // MF_TRACE_IS_ENABLED
 
-    void                  initializeScoreOutputOptions ();
+    void                  initializMsr2lpsrScoreOutputOptions ();
 
-    void                  initializeRepeatsOptions ();
+    void                  initializMsr2lpsrRepeatsOptions ();
 
-    void                  initializeNotesOptions ();
+    void                  initializMsr2lpsrNotesOptions ();
 
-    void                  initializeLyricsOptions ();
+    void                  initializMsr2lpsrLyricsOptions ();
 
   public:
 

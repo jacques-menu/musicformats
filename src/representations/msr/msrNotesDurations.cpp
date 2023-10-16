@@ -1387,7 +1387,7 @@ msrWholeNotes::operator int () const
   return ((int) floor (x + 0.5f));
 }
 
-std::string msrWholeNotes::asString () const
+std::string msrWholeNotes::asShortString () const
 {
   std::stringstream ss;
 
@@ -1493,7 +1493,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
       "numerator " <<
       numerator <<
       " is not positive in wholeNotesAndDotsNumberPitchAndOctaveAsString()" <<
-      ", wholeNotes: " << wholeNotes;
+      ", wholeNotes: " << wholeNotes.asFractionString ();
 
    msrError ( // JMI v0.9.70
 //     msrWarning (

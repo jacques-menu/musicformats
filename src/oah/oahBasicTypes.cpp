@@ -9937,7 +9937,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalDisplayOahGroup->getDisplayOptionsValuesAll ()) {
+  if (gGlobalDisplayOahGroup->getDisplayOptionsValuesFull ()) {
     printHandlerOptionsValuesAll (
       gLog);
     gLog << std::endl;

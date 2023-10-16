@@ -182,7 +182,9 @@ class EXP msrWholeNotes
     // print
     // ------------------------------------------------------
 
-    std::string           asString () const;
+    std::string           asShortString () const;
+    std::string           asString () const
+                              { return asShortString (); }
 
     std::string           asFractionString () const;
 

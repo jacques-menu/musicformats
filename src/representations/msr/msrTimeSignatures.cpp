@@ -1226,7 +1226,7 @@ std::string msrTimeSignature::asString () const
   std::stringstream ss;
 
   ss <<
-    "[TimeSignatureItem" <<
+    "[TimeSignature" <<
     ", fTimeSignatureSymbolKind: " <<
     fTimeSignatureSymbolKind <<
     ", fTimeIsCompound: " <<
@@ -1345,7 +1345,7 @@ std::string msrTimeSignature::asShortString () const
 void msrTimeSignature::print (std::ostream& os) const
 {
   os <<
-    "[TimeSignatureItem" <<
+    "[TimeSignature" <<
     ", line "  << fInputStartLineNumber <<
     std::endl;
 

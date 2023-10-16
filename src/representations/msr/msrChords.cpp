@@ -86,8 +86,8 @@ S_msrChord msrChord::create (
 
     ss <<
       "Creating a chord" <<
-      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes <<
-      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes <<
+      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asFractionString () <<
+      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asFractionString () <<
       ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
 
@@ -119,8 +119,8 @@ S_msrChord msrChord::create (
 
     ss <<
       "Creating a chord" <<
-      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes <<
-      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes <<
+      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asFractionString () <<
+      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asFractionString () <<
       ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
 

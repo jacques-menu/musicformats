@@ -492,25 +492,25 @@ class EXP mxsr2msrOahGroup : public oahGroup
     void                  initializeMxsr2msrTraceOptions ();
 #endif // MF_TRACE_IS_ENABLED
 
-    void                  initializePartsOptions ();
+    void                  initializeMxsr2msrPartsOptions ();
 
-    void                  initializeStavesOptions ();
+    void                  initializeMxsr2msrStavesOptions ();
 
-    void                  initializeVoiceOptions ();
+    void                  initializeMxsr2msrVoiceOptions ();
 
-    void                  initializeClefsKeysTimesOptions ();
+    void                  initializeMxsr2msrClefsKeysTimesOptions ();
 
-    void                  initializePageAndLineBreaksOptions ();
+    void                  initializeMxsr2msrPageAndLineBreaksOptions ();
 
-    void                  initializeMeasuresOptions ();
+    void                  initializeMxsr2msrMeasuresOptions ();
 
-    void                  initializeNotesOptions ();
+    void                  initializeMxsr2msrNotesOptions ();
 
-    void                  initializeDynamicsAndWedgesOptions ();
+    void                  initializeMxsr2msrDynamicsAndWedgesOptions ();
 
-    void                  initializeWordsOptions ();
+    void                  initializeMxsr2msrWordsOptions ();
 
-    void                  initializeCombinedOptionsOptions ();
+    void                  initializeMxsr2msrCombinedOptionsOptions ();
 
   public:
 

@@ -3980,8 +3980,8 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 
     ss <<
       "<-- NoteNotesDuration()" <<
-      ", fCurrentNoteSoundingWholeNotes: " << fCurrentNoteSoundingWholeNotes <<
-      ", fCurrentNoteDisplayWholeNotes: " << fCurrentNoteDisplayWholeNotes <<
+      ", fCurrentNoteSoundingWholeNotes: " << fCurrentNoteSoundingWholeNotes .asFractionString ()<<
+      ", fCurrentNoteDisplayWholeNotes: " << fCurrentNoteDisplayWholeNotes.asFractionString () <<
       ", fCurrentNoteDotsNumber: " << fCurrentNoteDotsNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (

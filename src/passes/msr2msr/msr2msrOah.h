@@ -294,21 +294,21 @@ class EXP msr2msrOahGroup : public oahGroup
     void                  initializMsr2msrTraceOptions ();
 #endif // MF_TRACE_IS_ENABLED
 
-    void                  initializeBookOptions ();
+    void                  initializMsr2msrBookOptions ();
 
-    void                  initializeStavesOptions ();
+    void                  initializMsr2msrStavesOptions ();
 
-    void                  initializeVoicesOptions ();
+    void                  initializMsr2msrVoicesOptions ();
 
-    void                  initializeBreakOptions ();
+    void                  initializMsr2msrBreakOptions ();
 
-    void                  initializeCompressOptions ();
+    void                  initializMsr2msrCompressOptions ();
 
-    void                  initializeRepeatsOptions ();
+    void                  initializMsr2msrRepeatsOptions ();
 
-    void                  initializeNotesOptions ();
+    void                  initializMsr2msrNotesOptions ();
 
-    void                  initializeLyricsOptions ();
+    void                  initializMsr2msrLyricsOptions ();
 
   public:
 

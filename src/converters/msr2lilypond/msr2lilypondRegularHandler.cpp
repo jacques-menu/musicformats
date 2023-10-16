@@ -232,7 +232,7 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-options-and-arguments", subGroup);
   registerAtomInRegularSubgroup ("display-early-options-values", subGroup);
   registerAtomInRegularSubgroup ("display-options-values", subGroup);
-  registerAtomInRegularSubgroup ("display-options-values-all", subGroup);
+  registerAtomInRegularSubgroup ("display-options-values-full", subGroup);
 
   registerAtomInRegularSubgroup ("show-options-and-arguments", subGroup);
 
@@ -695,8 +695,16 @@ void msr2lilypondRegularHandler::createTimesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-redundant-times", subGroup);
+  registerAtomInRegularSubgroup ("no-initial-treble-clef", subGroup);
+  registerAtomInRegularSubgroup ("comment-clef-changes", subGroup);
+  registerAtomInRegularSubgroup ("no-initial-c-major-key", subGroup);
+  registerAtomInRegularSubgroup ("no-initial-common-time", subGroup);
   registerAtomInRegularSubgroup ("numerical-time-signatures", subGroup);
+
+  registerAtomInRegularSubgroup ("ignore-same-elements", subGroup);
+  registerAtomInRegularSubgroup ("ignore-redundant-clefs", subGroup);
+  registerAtomInRegularSubgroup ("ignore-redundant-keys", subGroup);
+  registerAtomInRegularSubgroup ("ignore-redundant-times", subGroup);
 }
 
 void msr2lilypondRegularHandler::createRepeatsRegularGroup ()

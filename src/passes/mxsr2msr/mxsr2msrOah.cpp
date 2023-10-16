@@ -533,43 +533,43 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
 
   // parts
   // --------------------------------------
-  initializePartsOptions ();
+  initializeMxsr2msrPartsOptions ();
 
   // staves
   // --------------------------------------
-  initializeStavesOptions ();
+  initializeMxsr2msrStavesOptions ();
 
   // voices
   // --------------------------------------
-  initializeVoiceOptions ();
+  initializeMxsr2msrVoiceOptions ();
 
   // clefs, keys, time signatures
   // --------------------------------------
-  initializeClefsKeysTimesOptions ();
+  initializeMxsr2msrClefsKeysTimesOptions ();
 
   // page and line breaks
   // --------------------------------------
-  initializePageAndLineBreaksOptions ();
+  initializeMxsr2msrPageAndLineBreaksOptions ();
 
   // measures
   // --------------------------------------
-  initializeMeasuresOptions ();
+  initializeMxsr2msrMeasuresOptions ();
 
   // notes
   // --------------------------------------
-  initializeNotesOptions ();
+  initializeMxsr2msrNotesOptions ();
 
   // dynamics and wedges
   // --------------------------------------
-  initializeDynamicsAndWedgesOptions ();
+  initializeMxsr2msrDynamicsAndWedgesOptions ();
 
   // words
   // --------------------------------------
-  initializeWordsOptions ();
+  initializeMxsr2msrWordsOptions ();
 
   // combined options
   // --------------------------------------
-  initializeCombinedOptionsOptions ();
+  initializeMxsr2msrCombinedOptionsOptions ();
 }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -588,7 +588,7 @@ R"()",
 }
 #endif // MF_TRACE_IS_ENABLED
 
-void mxsr2msrOahGroup::initializePartsOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrPartsOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -673,7 +673,7 @@ This option is incompatible with '-mopn, -msr-ignore-musicxml-part-name'.)",
       fKeepMusicXMLPartNameAtom);
 }
 
-void mxsr2msrOahGroup::initializeStavesOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrStavesOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -722,7 +722,7 @@ This option is incompatible with '-mopn, -msr-ignore-musicxml-staff-number'.)",
       fKeepStaffNumberAtom);
 }
 
-void mxsr2msrOahGroup::initializeVoiceOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrVoiceOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -771,7 +771,7 @@ This option is incompatible with '-mopn, -msr-ignore-musicxml-voice-number'.)",
       fKeepMusicXMLPartNameAtom);
 }
 
-void mxsr2msrOahGroup::initializeClefsKeysTimesOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrClefsKeysTimesOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -885,7 +885,7 @@ R"(Ignore times that are the same as the current one.)",
       fIgnoreRedundantTimesAtom);
 }
 
-void mxsr2msrOahGroup::initializePageAndLineBreaksOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrPageAndLineBreaksOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -921,7 +921,7 @@ R"(Ignore line breaks in MusicXML data.)",
         fIgnoreMusicXMLLineBreaks));
 }
 
-void mxsr2msrOahGroup::initializeMeasuresOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrMeasuresOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -978,7 +978,7 @@ This option can be used any number of times.)###",
         fAddEmptyMeasuresStringToIntMap));
 }
 
-void mxsr2msrOahGroup::initializeNotesOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrNotesOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -1319,7 +1319,7 @@ R"('<wedge/>' in MusicXML, '<!' in LilyPond)",
       delayRestsWedgesAtom);
 }
 
-void mxsr2msrOahGroup::initializeDynamicsAndWedgesOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrDynamicsAndWedgesOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -1355,7 +1355,7 @@ R"(Ignore wedges placement and set it to 'below'.)",
         fAllWedgesBelow));
 }
 
-void mxsr2msrOahGroup::initializeWordsOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrWordsOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -1575,7 +1575,7 @@ This may come in handy when MusicXML data has been obtained from scanned images.
         fAddMsrWordsFromTheMusicXMLLyrics));
 }
 
-void mxsr2msrOahGroup::initializeCombinedOptionsOptions ()
+void mxsr2msrOahGroup::initializeMxsr2msrCombinedOptionsOptions ()
 {
   S_oahSubGroup
     subGroup =

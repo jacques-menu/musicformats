@@ -166,17 +166,17 @@ void stringFilterInterpreterRegularHandler::createInformationsRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("about", subGroup);
-  
+
   registerAtomInRegularSubgroup ("version", subGroup);
   registerAtomInRegularSubgroup ("version-full", subGroup);
-  
+
   registerAtomInRegularSubgroup ("history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("contact", subGroup);
-  
+
   registerAtomInRegularSubgroup ("music-formats-test", subGroup);
   registerAtomInRegularSubgroup ("display-prefixes", subGroup);
   registerAtomInRegularSubgroup ("display-single-character-options", subGroup);
@@ -321,7 +321,7 @@ void stringFilterInterpreterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-options-and-arguments", subGroup);
   registerAtomInRegularSubgroup ("display-early-options-values", subGroup);
   registerAtomInRegularSubgroup ("display-options-values", subGroup);
-  registerAtomInRegularSubgroup ("display-options-values-all", subGroup);
+  registerAtomInRegularSubgroup ("display-options-values-full", subGroup);
   registerAtomInRegularSubgroup ("show-options-and-arguments", subGroup);
 
 

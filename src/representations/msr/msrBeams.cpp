@@ -92,9 +92,8 @@ msrBeam::msrBeam (
     std::stringstream ss;
 
     ss <<
-      "Creating beam '" <<
-      this->asString () <<
-      "'";
+      "Creating beam " <<
+      this->asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -173,7 +172,7 @@ void msrBeam::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }

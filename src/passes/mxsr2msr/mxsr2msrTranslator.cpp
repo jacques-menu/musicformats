@@ -104,7 +104,7 @@ void mxsrVoiceTupletHandler::handleTupletStart (
       std::endl;
     ++gIndenter;
     ss <<
-      tuplet;
+      tuplet->asString ();
     --gIndenter;
     ss <<
       " in voice" <<
@@ -192,7 +192,7 @@ void mxsrVoiceTupletHandler::handleTupletContinue (
 //         std::endl;
 //       ++gIndenter;
 //       ss <<
-//         tupletStackTop;
+//         tupletStackTop->asString ();
 //       --gIndenter;
 //       ss <<
 //         " in voice" <<
@@ -9228,7 +9228,7 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
       std::endl;
     ++gIndenter;
     ss <<
-      tuplet;
+      tuplet->asString ();
     --gIndenter;
     ss <<
       " from the tuplets stack" <<
@@ -10926,20 +10926,77 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   fCurrentMeasureNumber =
     elt->getAttributeValue ("number");
 
+  // implicit
+/*
+  Measures with an implicit attribute set to "yes"
+  never display a measure number,
+  regardless of the measure-numbering setting.
+  *
+  The implicit attribute is set to "yes" for measures where
+  the measure number should never appear, such as pickup
+  measures and the last half of mid-measure repeats. The
+  value is "no" if not specified.
+*/
+
+  std::string
+    implicitString =
+      elt->getAttributeValue ("implicit");
+
+  msrMeasureImplicitKind
+    measureImplicitKind =
+      msrMeasureImplicitKind::kMeasureImplicitKindNo; // default value
+
+  if       (implicitString == "yes") {
+    measureImplicitKind =
+      msrMeasureImplicitKind::kMeasureImplicitKindYes;
+  }
+  else  if (implicitString == "no") {
+    measureImplicitKind =
+      msrMeasureImplicitKind::kMeasureImplicitKindNo;
+  }
+  else {
+    if (implicitString.size ()) {
+      std::stringstream ss;
+
+      ss <<
+        "implicit \"" << implicitString <<
+        "\" is unknown";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+  }
+
+  // non-controlling
+  std::string
+    nonControllingString =
+      elt->getAttributeValue ("non-controlling");
+
+  // width
+  int
+    widthValue =
+      elt->getAttributeIntValue ("width", 0);
+
 #ifdef MF_TRACE_IS_ENABLED
   if (
     gTraceOahGroup->getTraceMeasures ()
       ||
     gEarlyOptions.getEarlyTracePasses ()
   ) {
-      std::stringstream ss;
+    std::stringstream ss;
 
-      ss <<
+    ss <<
 //       std::endl <<
       "<!--=== " <<
       "part \"" << fCurrentPart->getPartName () << "\"" <<
       " (partID \"" << fCurrentPart->getPartID () << "\")" <<
-      ", measure \"" << fCurrentMeasureNumber << "\"" <<
+      ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
+      ", measureImplicitKind " << measureImplicitKind <<
+      ", nonControllingString \"" << nonControllingString << "\"" <<
+      ", widthValue" << widthValue <<
       ", line " << inputLineNumber <<
       " ===-->";
 
@@ -10995,50 +11052,6 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
-    }
-  }
-
-  // implicit
-/*
-  Measures with an implicit attribute set to "yes"
-  never display a measure number,
-  regardless of the measure-numbering setting.
-  *
-  The implicit attribute is set to "yes" for measures where
-  the measure number should never appear, such as pickup
-  measures and the last half of mid-measure repeats. The
-  value is "no" if not specified.
-*/
-
-  std::string
-    implicit =
-      elt->getAttributeValue ("implicit");
-
-  msrMeasureImplicitKind
-    measureImplicitKind =
-      msrMeasureImplicitKind::kMeasureImplicitKindNo; // default value
-
-  if       (implicit == "yes") {
-    measureImplicitKind =
-      msrMeasureImplicitKind::kMeasureImplicitKindYes;
-  }
-  else  if (implicit == "no") {
-    measureImplicitKind =
-      msrMeasureImplicitKind::kMeasureImplicitKindNo;
-  }
-  else {
-    if (implicit.size ()) {
-      std::stringstream ss;
-
-      ss <<
-        "implicit \"" << implicit <<
-        "\" is unknown";
-
-      mxsr2msrError (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        __FILE__, __LINE__,
-        ss.str ());
     }
   }
 
@@ -21988,6 +22001,7 @@ S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
 {
   // firstNote is the first tuplet note,
   // and is currently at the end of the voice
+  // it defines the tuplets sounding and display whole notes
 
   int firstNoteInputLineNumber =
     firstNote->getInputStartLineNumber ();
@@ -22056,7 +22070,7 @@ void mxsr2msrTranslator::handleTupletStart (
       std::endl;
     ++gIndenter;
     ss <<
-      tuplet;
+      tuplet->asString ();
     --gIndenter;
     ss <<
       " in voice" <<
@@ -22149,7 +22163,7 @@ void mxsr2msrTranslator::handleTupletContinue (
         std::endl;
       ++gIndenter;
       ss <<
-        tupletStackTop;
+        tupletStackTop->asString ();
       --gIndenter;
       ss <<
         " in voice" <<
@@ -26236,8 +26250,8 @@ void mxsr2msrTranslator::handlePendingSingleHarmony (
       harmony->asString () <<
       " for note " <<
       fCurrentNote->asShortString () <<
-      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
-      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes <<
+      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
+      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asFractionString () <<
       ", currentNoteMeasurePosition: " << currentNoteMeasurePosition.asString () <<
       ", line " << fCurrentNote->getInputEndLineNumber () <<
       std::endl;
@@ -26403,8 +26417,8 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
       fPendingHarmoniesList.size () <<
       " pending harmonies for note " <<
       fCurrentNote->asShortString () <<
-      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
-      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes <<
+      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
+      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asFractionString () <<
       ", currentNoteMeasurePosition: " << currentNoteMeasurePosition.asString () <<
       ", line " << fCurrentNote->getInputEndLineNumber () <<
       std::endl;
@@ -26528,11 +26542,11 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
 
         ss <<
           "--> handlePendingHarmony, " <<
-          ", currentHarmonySoundingWholeNotes: " << currentHarmonySoundingWholeNotes <<
+          ", currentHarmonySoundingWholeNotes: " << currentHarmonySoundingWholeNotes.asFractionString () <<
           ", currentHarmonyWholeNotesOffset: " << currentHarmonyWholeNotesOffset <<
           ", previousWholeNotesOffsetInTheLoop: " << previousWholeNotesOffsetInTheLoop <<
           ", offsetDelta: " << offsetDelta <<
-          ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
+          ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
           ", fraction: " << fraction <<
           ", line " << currentHarmony->getInputEndLineNumber ();
 
@@ -26624,10 +26638,10 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
 
     ss <<
       "--> handlePendingHarmony, LAST HARMONY OF THE LIST" <<
-      ", lastHarmonySoundingWholeNotes: " << lastHarmonySoundingWholeNotes <<
+      ", lastHarmonySoundingWholeNotes: " << lastHarmonySoundingWholeNotes.asFractionString () <<
       ", lastHarmonyWholeNotesOffset: " << lastHarmonyWholeNotesOffset <<
       ", previousWholeNotesOffsetInTheLoop: " << previousWholeNotesOffsetInTheLoop <<
-      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
+      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
       ", offsetDelta: " << offsetDelta <<
       ", fraction: " << fraction <<
       ", line " << lastHarmony->getInputEndLineNumber ();
@@ -26782,8 +26796,8 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses ()
       fPendingHarmoniesList.size () <<
       " pending figured basses for note " <<
       fCurrentNote->asShortString () <<
-      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes <<
-      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes <<
+      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
+      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -26813,7 +26827,7 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses ()
 
       ss <<
         "handlePendingFiguredBass, " <<
-        ", figuredBassSoundingWholeNotes: " << figuredBassSoundingWholeNotes <<
+        ", figuredBassSoundingWholeNotes: " << figuredBassSoundingWholeNotes.asFractionString () <<
         ", figuredBassWholeNotesDuration: " << figuredBassWholeNotesDuration <<
         ", line " << currentFiguredBass->getInputEndLineNumber ();
 
@@ -28092,7 +28106,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
             "Adding first note " <<
             note->asShortString () <<
             " to tuplet " <<
-            tuplet;
+            tuplet->asString ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
