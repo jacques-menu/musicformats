@@ -2267,7 +2267,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       ", after measure number '" << currentMeasureNumber << "'";
 
     gLog <<
-      "' in voice \"" <<
+      " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << measure->getInputStartLineNumber ();

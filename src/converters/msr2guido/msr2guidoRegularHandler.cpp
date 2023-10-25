@@ -419,6 +419,8 @@ void msr2guidoRegularHandler::createWarningAndErrorsRegularGroup ()
 
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
+
+  registerAtomInRegularSubgroup ("maintainance", subGroup);
 }
 
 void msr2guidoRegularHandler::createPresentationRegularGroup ()

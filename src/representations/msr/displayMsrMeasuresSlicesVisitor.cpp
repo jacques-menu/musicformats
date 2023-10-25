@@ -642,8 +642,8 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrVoice& elt)
 //     elt->getVoiceActualHarmoniesCounter () <<
 //     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "musicHasBeenInsertedInVoice" << ": " <<
-//     elt->getMusicHasBeenInsertedInVoice () <<
+//     "measureIsMusicallyEmpty" << ": " <<
+//     elt->getMeasureIsMusicallyEmpty () <<
 //     std::endl;
 //
 //   gLog << std::endl;

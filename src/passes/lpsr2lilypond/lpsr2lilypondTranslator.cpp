@@ -2266,7 +2266,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
         case msrVoiceKind::kVoiceKindHarmonies:
         case msrVoiceKind::kVoiceKindFiguredBass:
           fLilypondCodeStream <<
-            's';
+            's' << " ${ s111 %}";
           break;
       } // switch
 
@@ -2416,7 +2416,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
   }
   else {
     // generate a skip
-    fLilypondCodeStream << 's';
+    fLilypondCodeStream << 's' << " ${ s222 %}";
     fLilypondCodeStream << " %{ FROC 2 %} ";
   }
 
@@ -2747,7 +2747,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
     char (
       note->getNoteOccupiesAFullMeasure ()
         ? 's' // JMI ??? 'R'
-        : 'r');
+        : 'r') << " ${ sr333 %}";
 
   // generate the note display duration if relevant
 //   fLilypondCodeStream <<
@@ -2995,7 +2995,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInGraceNotesGroup (
   }
   else {
     // generate the skip name
-    fLilypondCodeStream << 's';
+    fLilypondCodeStream << 's' << " ${ s444 %}";
   }
 
   // generate the skip duration if relevant
@@ -4173,7 +4173,7 @@ void lpsr2lilypondTranslator::generateOrnament (
             remainingFraction.getDenominator ();
 
         fLilypondCodeStream <<
-          's' <<
+          's' << " ${ s555 %}" <<
           upLinkToNoteNotesDuration <<
           "*" <<
             denominator
@@ -4220,7 +4220,7 @@ void lpsr2lilypondTranslator::generateOrnament (
         // c2*2/3 ( s2*1/3\turn
 
         fLilypondCodeStream <<
-          's' <<
+          's' << " ${ s666 %}" <<
           upLinkToNoteNotesDuration <<
           "*1/3" "\\reverseturn ";
 
@@ -12898,7 +12898,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       ++fCurrentVoiceMeasuresCounter;
       break;
 
-    case msrMeasureKind::kMeasureKindOvercomplete:
+    case msrMeasureKind::kMeasureKindOverFlowing:
       ++fCurrentVoiceMeasuresCounter;
       break;
 
@@ -12919,7 +12919,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
   if (
     fOnGoingVoiceCadenza
       &&
-    measureKind != msrMeasureKind::kMeasureKindOvercomplete
+    measureKind != msrMeasureKind::kMeasureKindOverFlowing
   ) {
   /* JMI
     fLilypondCodeStream <<
@@ -12933,7 +12933,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
-        " % msrMeasureKind::kMeasureKindOvercomplete End";
+        " % msrMeasureKind::kMeasureKindOverFlowing End";
     }
 
     fLilypondCodeStream <<
@@ -13101,7 +13101,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       }
       break;
 
-    case msrMeasureKind::kMeasureKindOvercomplete:
+    case msrMeasureKind::kMeasureKindOverFlowing:
       if (! fOnGoingVoiceCadenza) {
         fLilypondCodeStream <<
           std::endl <<
@@ -13110,7 +13110,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           "\\omit Staff.TimeSignature";
 
         if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-          fLilypondCodeStream << " % msrMeasureKind::kMeasureKindOvercomplete Start";
+          fLilypondCodeStream << " % msrMeasureKind::kMeasureKindOverFlowing Start";
         }
 
         fLilypondCodeStream << std::endl;
@@ -13169,14 +13169,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           case msrVoiceKind::kVoiceKindDynamics:
             fLilypondCodeStream <<
 //               'R';
-              's';
+              's' << " ${ s777 %}";
             break;
 
           case msrVoiceKind::kVoiceKindHarmonies:
           case msrVoiceKind::kVoiceKindFiguredBass:
             fLilypondCodeStream <<
 //               'R';
-              's';
+              's' << " ${ s888 %}";
             break;
         } // switch
 
@@ -13371,7 +13371,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
         break;
 
-      case msrMeasureKind::kMeasureKindOvercomplete:
+      case msrMeasureKind::kMeasureKindOverFlowing:
         fLilypondCodeStream <<
           std::endl <<
           "\\undo \\omit Staff.TimeSignature |" <<

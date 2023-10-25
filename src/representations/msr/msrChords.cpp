@@ -1751,14 +1751,14 @@ void msrChord::print (std::ostream& os) const
     std::setw (fieldWidth) <<
  // JMI   "chordSoundingWholeNotes" << ": " << fChordSoundingWholeNotes <<
     "fSoundingWholeNotes" << ": " << fSoundingWholeNotes <<
-    std::endl <<
+//     std::endl <<
     std::setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << ": ";
+    "chordUpLinkToMeasureMeasureNumber" << ": ";
     if (fChordUpLinkToMeasure) {
       os <<
         fChordUpLinkToMeasure->getMeasureNumber ();

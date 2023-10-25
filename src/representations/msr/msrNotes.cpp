@@ -4732,14 +4732,9 @@ std::string msrNote::asShortString () const
   return ss.str ();
 }
 
-std::string msrNote::asString () const
+std::string msrNote::asHeaderLessString () const
 {
   std::stringstream ss;
-
-  ss <<
-    "[Note " <<
-    fNoteKind <<
-    ' ';
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
@@ -4904,7 +4899,18 @@ std::string msrNote::asString () const
     ", " <<
     mfInputLineNumbersAsString (
     	fInputStartLineNumber,
-    	fInputEndLineNumber) <<
+    	fInputEndLineNumber);
+
+  return ss.str ();
+}
+
+std::string msrNote::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Note " <<
+    asHeaderLessString () <<
     ']';
 
   return ss.str ();
@@ -4915,14 +4921,14 @@ void msrNote::print (std::ostream& os) const
 // 	os << "======> msrNote::print ()" << std::endl;
 
   os <<
-//     "[Note " <<
+    "[Note " <<
 //     ", " <<
 //     mfInputLineNumbersAsString (
 //     	fInputStartLineNumber,
 //     	fInputEndLineNumber) <<
 //     ", " <<
 //     noteForPrintAsString () <<
-    asString () <<
+    asHeaderLessString () <<
     std::endl;
 
   ++gIndenter;
@@ -5773,14 +5779,14 @@ void msrNote::print (std::ostream& os) const
 void msrNote::printFull (std::ostream& os) const
 {
   os <<
-//     "[Note FULL " <<
+    "[Note FULL " <<
 //     ", " <<
 //     mfInputLineNumbersAsString (
 //     	fInputStartLineNumber,
 //     	fInputEndLineNumber) <<
 //     ", " <<
 //     noteForPrintAsString () <<
-    asString () <<
+    asHeaderLessString () <<
     std::endl;
 
   ++gIndenter;
@@ -5801,7 +5807,6 @@ void msrNote::printFull (std::ostream& os) const
     "fNoteOccupiesAFullMeasure" << ": " <<
     fNoteOccupiesAFullMeasure <<
     std::endl;
-
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -5969,7 +5974,7 @@ void msrNote::printFull (std::ostream& os) const
   // print measure number
   os << std::left <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << ": ";
+    "fNoteUpLinkToMeasureMeasureNumber" << ": ";
   if (fNoteUpLinkToMeasure) {
     std::string
       measureNumber =

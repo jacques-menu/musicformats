@@ -964,6 +964,8 @@ class EXP msrNote : public msrTupletElement
     std::string           noteCoreAndComplementAsString () const;
 
     std::string           asString () const override;
+    std::string           asHeaderLessString () const;
+
     std::string           asShortString () const override;
 
     std::string           asShortStringWithRawWholeNotes () const;

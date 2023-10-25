@@ -267,7 +267,7 @@ R"(Identification)",
     addBooleanAtom (
       traceIdentificationBooleanAtom);
 
-  // '-tft, -trace-for-tests' is hidden... JMI
+  // '-trace-for-tests, -tft' is hidden... JMI
 
   S_oahBooleanAtom
     traceForTestsOahBooleanAtom =
@@ -2105,7 +2105,7 @@ R"(Score)",
       oahTwoBooleansAtomWithTracePasses::create (
         "trace-part-groups", "tpartgroups",
 R"(Part groups)",
-        "trafTracePartGroupscePartGroups",
+        "fTracePartGroups",
         fTracePartGroups,
         fTracePassesBooleanAtom);
 

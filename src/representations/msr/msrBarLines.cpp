@@ -786,7 +786,7 @@ void msrBarLine::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << ": " <<
+    "barLineUpLinkToMeasureMeasureNumber" << ": " <<
     fBarLineUpLinkToMeasure->getMeasureNumber () <<
     std::endl;
 

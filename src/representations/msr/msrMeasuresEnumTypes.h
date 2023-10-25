@@ -34,7 +34,7 @@ enum class msrMeasureKind {
   kMeasureKindIncompleteNextMeasureAfterCommonPart,
   kMeasureKindIncompleteNextMeasureAfterHookedEnding,
   kMeasureKindIncompleteNextMeasureAfterHooklessEnding,
-  kMeasureKindOvercomplete,
+  kMeasureKindOverFlowing,
   kMeasureKindCadenza,
   kMeasureKindMusicallyEmpty
 };

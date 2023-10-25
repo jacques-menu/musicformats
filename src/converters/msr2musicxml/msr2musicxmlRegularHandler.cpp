@@ -424,6 +424,8 @@ void msr2musicxmlRegularHandler::createWarningAndErrorsRegularGroup ()
 
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
+
+  registerAtomInRegularSubgroup ("maintainance", subGroup);
 }
 
 void msr2musicxmlRegularHandler::createPresentationRegularGroup ()

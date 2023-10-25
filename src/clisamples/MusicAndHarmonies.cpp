@@ -139,11 +139,11 @@ static Sxmlelement makemeasure(unsigned long num) {
 
     Sxmlelement note = factory::instance().create(k_note);    // creates the note
     Sxmlelement pitch = factory::instance().create(k_pitch);  // creates a pitch
-    pitch->push (newElement(k_step, randomNote()));        // sets the pitch to a random value
+    pitch->push (newElement(k_step, randomNote()));           // sets the pitch to a random value
     pitch->push (newElementI(k_octave, 4 + getrandom(2)));    // sets the octave to a random value
-    note->push (pitch);                      // adds the pitch to the note
-    note->push (newElementI(k_duration, kDivision));        // sets the note duration to a quarter note
-    note->push (newElement(k_type, "quarter"));          // creates the graphic elements of the note
+    note->push (pitch);                                       // adds the pitch to the note
+    note->push (newElementI(k_duration, kDivision));          // sets the note duration to a quarter note
+    note->push (newElement(k_type, "quarter"));               // creates the graphic elements of the note
     measure->push (note);    // and finally adds the note to the measure
   } // for
 

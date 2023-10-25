@@ -434,6 +434,8 @@ void xml2xmlRegularHandler::createWarningAndErrorsRegularGroup ()
 
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
+
+  registerAtomInRegularSubgroup ("maintainance", subGroup);
 }
 
 void xml2xmlRegularHandler::createInputRegularGroup ()

@@ -101,6 +101,24 @@ This may be useful when debugging EXECUTABLE.)",
           gOahOahGroup->getOahOahGroupServiceName ()),
         "fDontQuitOnErrors",
         fDontQuitOnErrors));
+
+  // '-maintainance, -maint' is hidden... JMI
+
+  S_oahBooleanAtom
+    traceForTestsOahBooleanAtom =
+      oahBooleanAtom::create (
+        "maintainance", "maint",
+R"(Write trace information for use by the developpers/maintainers of MusicFormats to standard error.)",
+        "fMaintainance",
+        fMaintainance);
+
+  traceForTestsOahBooleanAtom->
+    setElementVisibilityKind (
+      oahElementVisibilityKind::kElementVisibilityHidden);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceForTestsOahBooleanAtom);
 }
 
 void waeOahGroup::initializeWaeOah ()

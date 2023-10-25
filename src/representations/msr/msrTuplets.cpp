@@ -37,7 +37,7 @@ namespace MusicFormats
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
   const S_msrMeasure&     upLinkToMeasure,
-  const std::string&      tupletMeasureNumber,
+//   const std::string&      tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
@@ -51,7 +51,7 @@ S_msrTuplet msrTuplet::create (
     new msrTuplet (
       inputLineNumber,
       upLinkToMeasure,
-      tupletMeasureNumber,
+      // tupletMeasureNumber,
       tupletNumber,
       tupletBracketKind,
       tupletLineShapeKind,
@@ -66,7 +66,7 @@ S_msrTuplet msrTuplet::create (
 
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
-  const std::string&      tupletMeasureNumber,
+//   const std::string&      tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
@@ -80,7 +80,7 @@ S_msrTuplet msrTuplet::create (
     msrTuplet::create (
       inputLineNumber,
       gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-      tupletMeasureNumber,
+      // tupletMeasureNumber,
       tupletNumber,
       tupletBracketKind,
       tupletLineShapeKind,
@@ -94,7 +94,7 @@ S_msrTuplet msrTuplet::create (
 msrTuplet::msrTuplet (
   int                     inputLineNumber,
   const S_msrMeasure&     upLinkToMeasure,
-  const std::string&      tupletMeasureNumber,
+//   const std::string&      tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
@@ -167,7 +167,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
       msrTuplet::create (
         fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fTupletUpLinkToMeasure->getMeasureNumber (),
+//         fTupletUpLinkToMeasure->getMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
         fTupletLineShapeKind,
@@ -193,49 +193,6 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 
   return newbornClone;
 }
-
-// S_msrMeasure msrTuplet::fetchMeasureElementUpLinkToMeasure () const
-// {
-//   S_msrMeasure result;
-//
-//   switch (fTupletKind) {
-//     case msrTupletInKind::kTupletIn_UNKNOWN_:
-//       break;
-//
-//     case msrTupletInKind::kTupletInMeasure:
-//       result = fTupletUpLinkToMeasure;
-//       break;
-//
-//     case msrTupletInKind::kTupletInTuplet:
-//       if (fTupletShortcutUpLinkToTuplet) {
-//         result =
-//           fTupletShortcutUpLinkToTuplet->
-//             fetchMeasureElementUpLinkToMeasure ();
-//       }
-//       break;
-//   } // switch
-//
-//   return result;
-// }
-
-// S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
-// {
-//   S_msrTuplet result;
-//
-//   switch (fTupletKind) {
-//     case msrTupletInKind::kTupletIn_UNKNOWN_:
-//       break;
-//
-//     case msrTupletInKind::kTupletInMeasure:
-//       break;
-//
-//     case msrTupletInKind::kTupletInTuplet:
-//       result = fTupletShortcutUpLinkToTuplet;
-//       break;
-//   } // switch
-//
-//   return result;
-// }
 
 void msrTuplet::setMeasureElementUpLinkToMeasure (
   const S_msrMeasure& measure)
@@ -883,18 +840,9 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
     std::stringstream ss;
 
     ss <<
-      "unapplySoundingFactorToTupletMembers ()" <<
-      std::endl;
-
-    ++gIndenter;
-
-    gLog <<
-      "% fTupletFactor: " << fTupletFactor.asFractionString () <<
-      std::endl <<
-      "% containingTupletFactor: " << containingTupletFactor <<
-      std::endl;
-
-    --gIndenter;
+      "unapplySoundingFactorToTupletMembers()" <<
+      ", fTupletFactor: " << fTupletFactor.asFractionString () <<
+      ", containingTupletFactor: " << containingTupletFactor.asFractionString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -918,33 +866,6 @@ void msrTuplet::unapplySoundingFactorToTupletMembers (
     containingTupletFactor.fTupletNormalNotes;
   */
 }
-
-/* JMI ???
-void msrTuplet::finalizeTuplet (
-  int inputLineNumber)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Finalizing tuplet " <<
-      asString () <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-/ * JMI v0.9.66
-  // we can now set the measure position for all the tuplet members
-  setTupletMembersMeasurePositions (
-    fMeasurePosition);
-  * /
-}
-*/
 
 void msrTuplet::acceptIn (basevisitor* v)
 {
@@ -1245,42 +1166,15 @@ void msrTuplet::printFull (std::ostream& os) const
       fTupletShowTypeKind) <<
     std::endl <<
 
-    std::setw (fieldWidth) <<
-    "fTupletMeasureNumber" << ": " <<
-    fTupletUpLinkToMeasure->getMeasureNumber () <<
-    std::endl <<
+//     std::setw (fieldWidth) <<
+//     "fTupletMeasureNumber" << ": " <<
+//     fTupletUpLinkToMeasure->getMeasureNumber () <<
+//     std::endl <<
 
     std::setw (fieldWidth) <<
     "fVoicePosition" << ": " <<
     fVoicePosition <<
     std::endl << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fTupletElementsList" << ": ";
-  if (fTupletElementsList.size ()) {
-    os << std::endl;
-
-    ++gIndenter;
-
-    std::list<S_msrTupletElement>::const_iterator
-      iBegin = fTupletElementsList.begin (),
-      iEnd   = fTupletElementsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_msrTupletElement tupletElement = (*i);
-
-      tupletElement->printFull (os);
-
-      if (++i == iEnd) break;
-      os << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-  else {
-    os << "[EMPTY]" << std::endl;
-  }
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1311,6 +1205,33 @@ void msrTuplet::printFull (std::ostream& os) const
     "fPositionInTuplet" << ": " <<
     fPositionInTuplet <<
     std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTupletElementsList" << ": ";
+  if (fTupletElementsList.size ()) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_msrTupletElement>::const_iterator
+      iBegin = fTupletElementsList.begin (),
+      iEnd   = fTupletElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrTupletElement tupletElement = (*i);
+
+      tupletElement->printFull (os);
+
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << "[EMPTY]" << std::endl;
+  }
 
   os << ']' << std::endl;
 
@@ -1357,16 +1278,42 @@ void msrTuplet::print (std::ostream& os) const
     fMemberNotesDisplayWholeNotes <<
     std::endl;
 
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fTupletMeasureNumber" << ": ";
+//     if (fTupletUpLinkToMeasure) {
+//       os <<
+//         fTupletUpLinkToMeasure->getMeasureNumber ();
+//     }
+//     else {
+//       os << "[UNKNOWN_MEASURE_NUMBER]";
+//     }
+//   os << std::endl;
+
+  os << std::endl;
+
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletMeasureNumber" << ": ";
-    if (fTupletUpLinkToMeasure) {
-      os <<
-        fTupletUpLinkToMeasure->getMeasureNumber ();
-    }
-    else {
-      os << "[UNKNOWN_MEASURE_NUMBER]";
-    }
+    "fTupletUpLinkToMeasure" << ": ";
+  if (fTupletUpLinkToMeasure) {
+    os <<
+      fTupletUpLinkToMeasure->asShortString ();
+  }
+  else {
+    os << "[NULL]";
+  }
+  os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTupletShortcutUpLinkToTuplet" << ": ";
+  if (fTupletShortcutUpLinkToTuplet) {
+    os <<
+      fTupletShortcutUpLinkToTuplet->asShortString ();
+  }
+  else {
+    os << "[NULL]";
+  }
   os << std::endl;
 
   os << std::endl;
@@ -1398,32 +1345,6 @@ void msrTuplet::print (std::ostream& os) const
     os << "[EMPTY]" << std::endl;
   }
 
-  os << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fTupletUpLinkToMeasure" << ": ";
-  if (fTupletUpLinkToMeasure) {
-    os <<
-      fTupletUpLinkToMeasure->asShortString ();
-  }
-  else {
-    os << "[NULL]";
-  }
-  os << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fTupletShortcutUpLinkToTuplet" << ": ";
-  if (fTupletShortcutUpLinkToTuplet) {
-    os <<
-      fTupletShortcutUpLinkToTuplet->asShortString ();
-  }
-  else {
-    os << "[NULL]";
-  }
-  os << std::endl;
-
   --gIndenter;
 
   os << ']' << std::endl;
@@ -1443,3 +1364,75 @@ std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt)
 
 
 }
+
+
+// S_msrMeasure msrTuplet::fetchMeasureElementUpLinkToMeasure () const
+// {
+//   S_msrMeasure result;
+//
+//   switch (fTupletKind) {
+//     case msrTupletInKind::kTupletIn_UNKNOWN_:
+//       break;
+//
+//     case msrTupletInKind::kTupletInMeasure:
+//       result = fTupletUpLinkToMeasure;
+//       break;
+//
+//     case msrTupletInKind::kTupletInTuplet:
+//       if (fTupletShortcutUpLinkToTuplet) {
+//         result =
+//           fTupletShortcutUpLinkToTuplet->
+//             fetchMeasureElementUpLinkToMeasure ();
+//       }
+//       break;
+//   } // switch
+//
+//   return result;
+// }
+
+// S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
+// {
+//   S_msrTuplet result;
+//
+//   switch (fTupletKind) {
+//     case msrTupletInKind::kTupletIn_UNKNOWN_:
+//       break;
+//
+//     case msrTupletInKind::kTupletInMeasure:
+//       break;
+//
+//     case msrTupletInKind::kTupletInTuplet:
+//       result = fTupletShortcutUpLinkToTuplet;
+//       break;
+//   } // switch
+//
+//   return result;
+// }
+
+/* JMI ???
+void msrTuplet::finalizeTuplet (
+  int inputLineNumber)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Finalizing tuplet " <<
+      asString () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+/ * JMI v0.9.66
+  // we can now set the measure position for all the tuplet members
+  setTupletMembersMeasurePositions (
+    fMeasurePosition);
+  * /
+}
+*/
+

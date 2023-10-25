@@ -32,6 +32,8 @@
 
 #include "oahOah.h"
 
+#include "waeOah.h"
+
 #include "msrOah.h"
 
 #include "msrWae.h"
@@ -187,7 +189,7 @@ void msrMeasure::initializeMeasure ()
 
   // measure finalization
   fMeasureHasBeenFinalized = false;
-  fMeasureKindAndPuristNumberHaveBeenDetermined = false;
+  fMeasureKindHasBeenDetermined = false;
 }
 
 msrMeasure::~msrMeasure ()
@@ -320,14 +322,14 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
   newbornClone->fNextMeasureNumber =
     fNextMeasureNumber;
 
-    /* JMI
+    /* JMI v0.9.70 SHOULDE BE RE-COMPUTEDFOR THE MEASURE CLONE  d
   // measure ordinal number in voice
   newbornClone->fMeasureOrdinalNumberInVoice =
     fMeasureOrdinalNumberInVoice;
 
   // lengthes
-  newbornClone->fFullMeasureWholeNotesDuration =
-    fFullMeasureWholeNotesDuration;
+  newbornClone->setFullMeasureWholeNotesDuration (
+    fFullMeasureWholeNotesDuration);
 
   // measure purist number
   newbornClone->fMeasurePuristNumber = // JMI don't compute that again for clones ???
@@ -336,9 +338,9 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
   // measure 'first in segment' kind
   newbornClone->fMeasureFirstInSegmentKind =
     fMeasureFirstInSegmentKind;
-    */
+    / * * /
 
-/* JMI
+/ * JMI
   // single-measure rest?
   newbornClone->fMeasureIsAMeasureRest =
     fMeasureIsAMeasureRest;
@@ -826,7 +828,7 @@ void msrMeasure::setMeasureEndRegularKind (
       std::stringstream ss;
 
       ss <<
-        "Setting regular kind of measure '" <<
+        "Setting end regular kind of measure '" <<
         fMeasureNumber <<
         "' to '" <<
         msrMeasureEndRegularKindAsString (measureEndRegularKind) <<
@@ -942,27 +944,27 @@ void msrMeasure::setMeasurePuristNumber (
   int measurePuristNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMeasures ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceMeasures ()) {
+    std::stringstream ss;
 
-      ss <<
-        "Setting purist number of measure '" <<
-        fMeasureNumber <<
-        "' to '" <<
-        measurePuristNumber <<
-        "' in segment " <<
-        fMeasureUpLinkToSegment->asString () <<
-        " in voice \"" <<
-        fMeasureUpLinkToSegment->
-          getSegmentUpLinkToVoice ()->
-            getVoiceName () <<
-        "\"" <<
-        ", line " << fInputStartLineNumber;
+    ss <<
+      "Setting purist number of measure '" <<
+      fMeasureNumber <<
+      "' to '" <<
+      measurePuristNumber <<
+      "' in segment " <<
+      fMeasureUpLinkToSegment->asString () <<
+      " in voice \"" <<
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
+          getVoiceName () <<
+      "\"" <<
+      ", line " << fInputStartLineNumber;
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
   fMeasurePuristNumber = measurePuristNumber;
@@ -1022,7 +1024,7 @@ void msrMeasure::appendMeasureElementToMeasure (
 //         getVoiceName () <<
 //       "\"" <<
       ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1052,21 +1054,22 @@ void msrMeasure::appendMeasureElementToMeasure (
   // append elem to the measure elements list
   fMeasureElementsList.push_back (elem);
 
-  // DON'T account for tuplets sounding whole notes, // JMI v0.9.70
-  // this is done one member note at a time
-//   // take elem's sounding whole notes into account if relevant
-//   msrWholeNotes
-//     elemWholeNotes =
-//       elem->getSoundingWholeNotes ();
-//
-//   if (elemWholeNotes.getNumerator () != 0 ) {
-//     incrementMeasureCurrentAccumulatedWholeNotesDuration (
-//       inputLineNumber,
-//       elemWholeNotes,
-//       "appendMeasureElementToMeasure(): "
-//         +
-//       elem->asShortString ());
-//   }
+//   DON'T account for tuplets sounding whole notes, // JMI v0.9.70
+//   this is done one member note at a time
+
+  // take elem's sounding whole notes into account if relevant
+  msrWholeNotes
+    elemWholeNotes =
+      elem->getSoundingWholeNotes ();
+
+  if (elemWholeNotes.getNumerator () != 0 ) {
+    incrementMeasureCurrentAccumulatedWholeNotesDuration (
+      inputLineNumber,
+      elemWholeNotes,
+      "appendMeasureElementToMeasure(): "
+        +
+      elem->asShortString ());
+  }
 }
 
 void msrMeasure::insertElementInMeasureBeforeIterator (
@@ -1089,8 +1092,8 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
-      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1163,7 +1166,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       "\", has measure position '" <<
       elem->getMeasurePosition () <<
       ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1390,8 +1393,8 @@ void msrMeasure::insertElementAtMeasurePosition (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
-      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1437,8 +1440,8 @@ void msrMeasure::insertElementAtMeasurePosition (
           fMeasureUpLinkToSegment->
             getSegmentUpLinkToVoice ()
               ->getVoiceName () <<
-          "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-          fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+          "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+          fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
           " since there's no element at this exact position " <<
           ", line " << inputLineNumber;
 
@@ -1467,8 +1470,8 @@ void msrMeasure::insertElementAtMeasurePosition (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
-      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       " since it is empty" <<
       ", line " << inputLineNumber;
 
@@ -1548,7 +1551,7 @@ void msrMeasure::setMeasureIsFirstInVoice ()
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
-      "' in segment " <<
+      " in segment " <<
       fMeasureUpLinkToSegment-> asString () <<
       ", line " << fInputStartLineNumber;
 
@@ -1593,27 +1596,34 @@ std::string msrMeasure::fullMeasureWholeNotesDurationpitchAndOctaveAsString ()
       fetchFullMeasureWholeNotesDuration ());
 }
 
-// void msrMeasure::setFullMeasureWholeNotesDuration (
-//   const msrWholeNotes& wholeNotes)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Setting full whole notes duration of measure " <<
-//       this->asShortString () <<
-//       " to "  <<
-//       wholeNotes.asString ();
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fFullMeasureWholeNotesDuration = wholeNotes;
-// }
+void msrMeasure::setFullMeasureWholeNotesDuration (
+  const msrWholeNotes& wholeNotes)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (
+//     true ||
+    gTraceOahGroup->getTraceMeasures ()
+      ||
+    gTraceOahGroup->getTraceNotesDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting the full whole notes duration of measure " <<
+      this->asShortString () <<
+      " to "  <<
+      wholeNotes.asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fFullMeasureWholeNotesDuration = wholeNotes;
+}
 
 void msrMeasure::setMeasureCurrentAccumulatedWholeNotesDuration (
   int                  inputLineNumber,
@@ -1621,7 +1631,14 @@ void msrMeasure::setMeasureCurrentAccumulatedWholeNotesDuration (
   std::string          context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasuresWholeNotesVectors ()) {
+//   if (gTraceOahGroup->getTraceMeasuresWholeNotesVectors ()) {
+  if (
+    gTraceOahGroup->getTraceMeasures ()
+      ||
+    gTraceOahGroup->getTraceNotesDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
     std::stringstream ss;
 
     ss <<
@@ -1668,6 +1685,8 @@ void msrMeasure::incrementMeasureCurrentAccumulatedWholeNotesDuration (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
+    gTraceOahGroup->getTraceMeasures ()
+      ||
     gTraceOahGroup->getTraceNotesDurations ()
       ||
     gTraceOahGroup->getTraceMeasurePositions ()
@@ -1718,11 +1737,18 @@ void msrMeasure::setMeasureKind (
   msrMeasureKind measureKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (
+//     true ||
+    gTraceOahGroup->getTraceMeasures ()
+      ||
+    gTraceOahGroup->getTraceNotesDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
     std::stringstream ss;
 
     ss <<
-      "Setting measure kind of measure " <<
+      "Setting the measure kind of measure " <<
       this->asShortString ()<<
       " to " <<
       measureKind <<
@@ -1765,7 +1791,7 @@ void msrMeasure::setMeasureKind (
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       break;
 
-    case msrMeasureKind::kMeasureKindOvercomplete:
+    case msrMeasureKind::kMeasureKindOverFlowing:
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceMeasuresDetails ()) {
         mfIndentedStringStream iss;
@@ -2113,156 +2139,6 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
     */
 }
 
-// void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
-//   const S_msrTimeSignature& timeSignature)
-// {
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     timeSignature != nullptr,
-//     "timeSignature is null");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if ( // JMI
-//     gTraceOahGroup->getTraceWholeNoteDurations ()
-//       ||
-//     gTraceOahGroup->getTraceTimeSignatures ()
-//   ) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Setting the full measure whole notes of measure " <<
-//       this->asShortString () <<
-//       " from time signature " <<
-//       timeSignature
-//       " in voice \"" <<
-//       fMeasureUpLinkToSegment->
-//         getSegmentUpLinkToVoice ()->
-//           getVoiceName () <<
-//       "\"" <<
-//       ", line " << fInputStartLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   ++gIndenter;
-//
-//   switch (timeSignature->getTimeSignatureSymbolKind ()) {
-//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCommon:
-//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCut:
-//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNote:
-//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolDottedNote:
-//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSingleNumber:
-//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
-//       {
-//         // this measure is con misura
-//
-//         msrWholeNotes
-//           wholeNotesPerMeasure =
-//             timeSignature->
-//               timeSignatureWholeNotesPerMeasure ();
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceTimeSignatures ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "There are " <<
-//             wholeNotesPerMeasure <<
-//             " whole note(s) per measure in time signature:" <<
-//             std::endl;
-//
-//           ++gIndenter;
-//
-//           ss <<
-//             timeSignature;
-//
-//           --gIndenter;
-//
-//           ss <<
-//             "in measure " <<
-//             this->asShortString () <<
-//             " in voice \"" <<
-//             fMeasureUpLinkToSegment->
-//               getSegmentUpLinkToVoice ()->
-//                 getVoiceName () <<
-//             "\"" <<
-//             ", line " << fInputStartLineNumber;
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//         // set full measure whole notes
-//         setFullMeasureWholeNotesDuration (
-//           wholeNotesPerMeasure);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceTimeSignatures ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "Measure " <<
-//             this->asShortString () <<
-//             "'in voice \"" <<
-//             fMeasureUpLinkToSegment->
-//               getSegmentUpLinkToVoice ()->
-//                 getVoiceName () <<
-//             "\"" <<
-//             " has " <<
-//             fetchFullMeasureWholeNotesDuration ().asString () <<
-//             " full measure whole notes ";
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//       }
-//       break;
-//
-//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
-//
-//       // this measure is senza misura
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//       if (gTraceOahGroup->getTraceTimeSignatures ()) {
-//         std::stringstream ss;
-//
-//         ss <<
-//           "Measure " <<
-//           this->asShortString () <<
-//            " in voice \"" <<
-//           fMeasureUpLinkToSegment->
-//             getSegmentUpLinkToVoice ()->
-//               getVoiceName () <<
-//           "\"" <<
-//           " is senza misura" <<
-//           std::endl;
-//
-//         gWaeHandler->waeTrace (
-//           __FILE__, __LINE__,
-//           ss.str ());
-//       }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//       setMeasureKind (msrMeasureKind::kMeasureKindCadenza);
-//
-//       setFullMeasureWholeNotesDuration (
-//         msrWholeNotes (INT_MAX, 1));
-//       break;
-//   } // switch
-//
-//   --gIndenter;
-// }
-
 void msrMeasure::appendTranspositionToMeasure (
   const S_msrTransposition& transposition)
 {
@@ -2461,7 +2337,7 @@ void msrMeasure::appendNoteToMeasure (
       ", fetchFullMeasureWholeNotesDuration (): " <<
       fetchFullMeasureWholeNotesDuration ().asString () <<
       ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", positionsDelta: " <<
       positionsDelta.asString () <<
       ", line " << inputLineNumber;
@@ -2510,7 +2386,7 @@ void msrMeasure::appendNoteToMeasure (
       "partCurrentDrawingMeasurePosition " <<
       partCurrentDrawingMeasurePosition.asString () <<
       " is smaller than fMeasureCurrentAccumulatedWholeNotesDuration " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       " in measure " <<
       this->asShortString () <<
       ", cannot padup in voice \"" <<
@@ -2519,7 +2395,7 @@ void msrMeasure::appendNoteToMeasure (
           getVoiceName () <<
       "\"" <<
       ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", partCurrentDrawingMeasurePosition: " <<
       partCurrentDrawingMeasurePosition.asString () <<
       ", positionsDelta: " << positionsDelta <<
@@ -2614,8 +2490,8 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
       " in voice \"" <<
        voice->getVoiceName () <<
       "\"" <<
-      ", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", noteSoundingWholeNotes: " << noteSoundingWholeNotes.asFractionString () <<
       ", line " << inputLineNumber;
 
@@ -3092,8 +2968,8 @@ void msrMeasure::appendHarmonyToMeasureWithoutPadUp (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -3132,8 +3008,8 @@ void msrMeasure::appendHarmonyToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
@@ -3186,8 +3062,8 @@ void msrMeasure::appendHarmoniesListToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
@@ -3236,7 +3112,7 @@ void msrMeasure::appendHarmonyToMeasureClone (
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -3272,8 +3148,8 @@ void msrMeasure::appendFiguredBassToMeasureWithoutPadUp (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -3310,8 +3186,8 @@ void msrMeasure::appendFiguredBassToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
@@ -3355,8 +3231,8 @@ void msrMeasure::appendFiguredBassesListToMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", measureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
       ", line " << inputLineNumber;
 
@@ -3404,7 +3280,7 @@ void msrMeasure::appendFiguredBassToMeasureClone (
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -3490,7 +3366,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //
 //     ss <<
 //       "Padding from measure whole notes '" <<
-//       fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+//       fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
 //       "' to '" <<measurePositionToPadUpTo.asString () <<
 //       "' in measure " <<
 //       this->asShortString () <<
@@ -3535,7 +3411,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //         "Appending skip " << paddingNote->asString () <<
 //         " (missingNotesDuration " << missingNotesDuration <<
 //         " whole notes) to skip from measure position " <<
-//         fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+//         fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
 //         " to measure position '" <<measurePositionToPadUpTo.asString () << "'"
 //         " in measure " <<
 //         this->asShortString () <<
@@ -3568,7 +3444,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //
 //     ss <<
 //         "No need to pad from measure whole notes '" <<
-//         fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+//         fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
 //         " to " <<
 //         measurePositionToPadUpTo.asString () <<
 //         " since they are equal in measure " <<
@@ -3591,7 +3467,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //
 //     ss <<
 //         "Cannot pad from measure whole notes '" <<
-//         fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+//         fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
 //         "' to '" <<
 //         measurePositionToPadUpTo <<
 //         "' since the former is larger than the latter in measure " <<
@@ -3683,8 +3559,8 @@ void msrMeasure::padUpToMeasurePosition (
         " in voice \"" << measureVoice->getVoiceName () <<
         "\", measure: " <<
         this->asShortString () <<
-        ", measureCurrentAccumulatedWholeNotesDuration: " <<
-        fMeasureCurrentAccumulatedWholeNotesDuration.asString ();
+        ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+        fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -3710,8 +3586,8 @@ void msrMeasure::padUpToMeasurePosition (
         " to finalize \"" << measureVoice->getVoiceName () <<
         "\" measure: " <<
         this->asShortString () <<
-        ", measureCurrentAccumulatedWholeNotesDuration: " <<
-        fMeasureCurrentAccumulatedWholeNotesDuration.asString ();
+        ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+        fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -3750,6 +3626,8 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
+    gTraceOahGroup->getTraceMeasures ()
+      ||
     gTraceOahGroup->getTraceMeasurePositions ()
       ||
     gTraceOahGroup->getTraceMeasures ()
@@ -3758,9 +3636,9 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
 
     ss <<
       "Padding up from measure position " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       " to " <<
-      measurePositionToPadUpTo.asString () <<
+      measurePositionToPadUpTo.asFractionString () <<
       " at the end of measure " <<
       this->asString () <<
       " in segment " <<
@@ -3806,8 +3684,8 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         ", at the end of measure " <<
         this->asString () <<
         " in voice \"" << measureVoice->getVoiceName () << "\",  " <<
-        ", measureCurrentAccumulatedWholeNotesDuration: " <<
-        fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+        ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+        fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
         ", line " << inputLineNumber;
 
       gWaeHandler->waeTrace (
@@ -3850,7 +3728,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         "\" measure: " <<
         this->asShortString () <<
         " measureCurrentAccumulatedWholeNotesDuration: " <<
-        fMeasureCurrentAccumulatedWholeNotesDuration.asString ();
+        fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -3874,7 +3752,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       "Cannot padup measure " <<
       this->asShortString () <<
       " from " <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       " to " <<
       measurePositionToPadUpTo.asString () <<
       " in voice \"" <<
@@ -3900,7 +3778,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         "There is nothing to do to padup measure " <<
         this->asShortString () <<
         " from " <<
-        fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+        fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
         " to " <<
         measurePositionToPadUpTo.asString () <<
         " in voice \"" <<
@@ -3959,8 +3837,8 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ??? v0.9
       backupTargetMeasurePosition.asString () <<
       "' whole notes step length in measure " <<
       this->asShortString () <<
-      ", measureCurrentAccumulatedWholeNotesDuration: '" <<
-      fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      ", fMeasureCurrentAccumulatedWholeNotesDuration: '" <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", fullMeasureWholeNotesDuration: '" <<
       fetchFullMeasureWholeNotesDuration ().asString () <<
       "' in segment " <<
@@ -4285,7 +4163,7 @@ void msrMeasure::removeElementFromMeasure (
     ss <<
       "fMeasureLastHandledNote:" <<
       std::endl <<
-      fMeasureLastHandledNote <<
+      fMeasureLastHandledNote->asString () <<
       std::endl;
     --gIndenter;
   }
@@ -4364,38 +4242,44 @@ void msrMeasure::appendNoteToMeasureNotesFlatList (
   fMeasureNotesFlatList.push_back (note);
 }
 
-void msrMeasure::determineMeasureKindAndPuristNumber (
+void msrMeasure::setMeasurePuristNumberFromVoice ()
+{
+  // fetch the voice
+  S_msrVoice
+    voice =
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
+
+  // set measure purist number
+  setMeasurePuristNumber (
+    voice->
+      getVoiceCurrentMeasurePuristNumber ());
+}
+
+void msrMeasure::determineMeasureKind (
   int                         inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind)
 {
-  if (fMeasureKindAndPuristNumberHaveBeenDetermined) {
-    std::stringstream ss;
+  if (fMeasureKindHasBeenDetermined) {
+    if (gWaeOahGroup->getMaintainance ()) { // JMI v0.9.70
+      std::stringstream ss;
 
-    ss <<
-      "Attempting to determine kind and purist number for measure \"" <<
-      asShortString () <<
-      "\" more than once";
+      ss <<
+        "### MAINTAINANCE ### -- " <<
+        "Attempting to determine measure kind for measure \"" <<
+        asShortString () <<
+        "\" more than once";
 
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      fInputStartLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-
-/*
- // JMI   msrInternalError (
-    msrInternalWarning (
-      gServiceRunData->getInputSourceName (),
-      fInputStartLineNumber,
-  //    __FILE__, __LINE__,
-      ss.str ());
-
-    return;
-    */
+      msrInternalError (
+        gServiceRunData->getInputSourceName (),
+        fInputStartLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
+    }
   }
 
   // register measureRepeatContextKind
-// JMI ???
+// JMI ??? v0.9.70
   setMeasureRepeatContextKind (measureRepeatContextKind);
 
   // fetch the voice
@@ -4422,65 +4306,60 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         +
       fMeasureCurrentAccumulatedWholeNotesDuration;
 
+  msrWholeNotes
+    fullMeasureWholeNotesDuration =
+      fetchFullMeasureWholeNotesDuration ();
+
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (
+//     true ||
+    gTraceOahGroup->getTraceMeasures ()
+      ||
+    gTraceOahGroup->getTraceNotesDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
     std::stringstream ss;
 
     ss <<
-      "Determining the measure kind and purist number of measure " <<
+      "Determining the measure kind of measure " <<
       this->asShortString () <<
-      ", fetchFullMeasureWholeNotesDuration (): " << fetchFullMeasureWholeNotesDuration ().asString () <<
-      "', measureCurrentAccumulatedWholeNotesDuration: " << fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
-      ", wholeNotesSinceLastRegularMeasureEnd: " << wholeNotesSinceLastRegularMeasureEnd <<
-      ", newWholeNotesSinceLastRegularMeasureEnd: " << newWholeNotesSinceLastRegularMeasureEnd <<
-      ", currentVoiceRepeatPhaseKind: " << currentVoiceRepeatPhaseKind <<
-    "' in voice \"" << voice->getVoiceName () <<
-    ", line " << inputLineNumber <<
-    std::endl;
+      ", fullMeasureWholeNotesDuration: " <<
+      fullMeasureWholeNotesDuration.asFractionString () <<
+      "', fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
+      ", wholeNotesSinceLastRegularMeasureEnd: " <<
+      wholeNotesSinceLastRegularMeasureEnd <<
+      ", newWholeNotesSinceLastRegularMeasureEnd: " <<
+      newWholeNotesSinceLastRegularMeasureEnd <<
+      ", currentVoiceRepeatPhaseKind: " <<
+      currentVoiceRepeatPhaseKind <<
+      "' in voice \"" << voice->getVoiceName () <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "determineMeasureKindAndPuristNumber() 1");
+      "determineMeasureKind() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
   ++gIndenter;
 
-  // set measure purist number
-  setMeasurePuristNumber (
-    voice->
-      getVoiceCurrentMeasurePuristNumber ());
-
   // determine the measure kind
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMeasures ()) {
-      std::stringstream ss;
-
-      ss <<
-        "--> determineMeasureKindAndPuristNumber() 2" <<
-        ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-        fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
-        ", fetchFullMeasureWholeNotesDuration (): " <<
-        fetchFullMeasureWholeNotesDuration ().asString () <<
-        ", fMeasureEndRegularKind: " <<
-        fMeasureEndRegularKind;
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
   if (fMeasureCurrentAccumulatedWholeNotesDuration.getNumerator () == 0) {
     // empty measure
       handleEmptyMeasure (
         inputLineNumber,
         voice);
- }
+  }
 
-  else if (fMeasureCurrentAccumulatedWholeNotesDuration == fetchFullMeasureWholeNotesDuration ()) {
+  else if (fMeasureCurrentAccumulatedWholeNotesDuration == fullMeasureWholeNotesDuration) {
     // this is a regular measure
       handleRegularMeasure (
         inputLineNumber,
@@ -4488,7 +4367,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
   }
 
   else {
-    // this measure is incomplete or overfull
+    // this measure is incomplete or overflowing
 
     // increment voice whole notes since last regular measure end
     voice->
@@ -4497,7 +4376,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         newWholeNotesSinceLastRegularMeasureEnd);
 
     // set measure kind
-    if (fMeasureCurrentAccumulatedWholeNotesDuration < fetchFullMeasureWholeNotesDuration ()) {
+    if (fMeasureCurrentAccumulatedWholeNotesDuration < fullMeasureWholeNotesDuration) {
       //  this is an incomplete measure
       handleIncompleteMeasure (
         inputLineNumber,
@@ -4506,9 +4385,9 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         newWholeNotesSinceLastRegularMeasureEnd);
     }
 
-    else { // fMeasureCurrentAccumulatedWholeNotesDuration > fetchFullMeasureWholeNotesDuration ()
-      // this is an overfull measure
-      handleOverFullMeasure (
+    else { // fMeasureCurrentAccumulatedWholeNotesDuration > fullMeasureWholeNotesDuration
+      // this is an overflowing measure
+      handleOverflowingMeasure (
         inputLineNumber,
         voice);
     }
@@ -4530,13 +4409,13 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
       break;
   } // switch
 
-  fMeasureKindAndPuristNumberHaveBeenDetermined = true;
+  fMeasureKindHasBeenDetermined = true;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "determineMeasureKindAndPuristNumber() 3");
+      "determineMeasureKind() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4691,7 +4570,6 @@ void msrMeasure::handleIncompleteMeasure (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-
     if (scoreMeasuresNumber == 1) {
       setMeasureKind (msrMeasureKind::kMeasureKindIncompleteLastMeasure);
     }
@@ -4821,16 +4699,22 @@ void msrMeasure::handleIncompleteMeasure (
   }
 }
 
-void msrMeasure::handleOverFullMeasure (
+void msrMeasure::handleOverflowingMeasure (
   int               inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (
+    gTraceOahGroup->getTraceMeasures ()
+      ||
+    gTraceOahGroup->getTraceNotesDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
     std::stringstream ss;
 
     ss <<
-      "--> handleOverFullMeasure()" <<
+      "--> handleOverflowingMeasure()" <<
       ", fMeasureEndRegularKind: " << fMeasureEndRegularKind;
 
     gWaeHandler->waeTrace (
@@ -4840,7 +4724,7 @@ void msrMeasure::handleOverFullMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   // set it's measure kind
-  setMeasureKind (msrMeasureKind::kMeasureKindOvercomplete);
+  setMeasureKind (msrMeasureKind::kMeasureKindOverFlowing);
 
   // this is a regular measure end
   setMeasureEndRegularKind (kMeasureEndRegularKindYes);
@@ -4849,7 +4733,7 @@ void msrMeasure::handleOverFullMeasure (
   voice->
     incrementVoiceCurrentMeasurePuristNumber (
       inputLineNumber,
-      "handleOverFullMeasure(), msrMeasureKind::kMeasureKindOvercomplete");
+      "handleOverflowingMeasure(), msrMeasureKind::kMeasureKindOverFlowing");
 
   // reset voice whole notes since last regular measure end
   voice->
@@ -4896,6 +4780,10 @@ void msrMeasure::finalizeRegularMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  msrWholeNotes
+    fullMeasureWholeNotesDuration =
+      fetchFullMeasureWholeNotesDuration ();
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
     std::stringstream ss;
@@ -4910,6 +4798,10 @@ void msrMeasure::finalizeRegularMeasure (
       "\" (" << context << ")" <<
       ", fMeasureOrdinalNumberInVoice: " <<
       fMeasureOrdinalNumberInVoice <<
+      ", fullMeasureWholeNotesDuration: " <<
+      fullMeasureWholeNotesDuration.asFractionString () <<
+      ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+      fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -4943,17 +4835,21 @@ void msrMeasure::finalizeRegularMeasure (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 
-  // pad up to the end of this measure
+  // pad up to the end of this measure if relevant
 //* JMI v0.9.66 USELESS ??? harmonies problem
-  padUpToPositionAtTheEndOfTheMeasure (
-    inputLineNumber,
-//     measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector,
-    fetchFullMeasureWholeNotesDuration (),
-    "finalizeRegularMeasure()");
-//*/
+  if (fMeasureCurrentAccumulatedWholeNotesDuration != fullMeasureWholeNotesDuration) {
+    padUpToPositionAtTheEndOfTheMeasure (
+      inputLineNumber,
+  //     measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector,
+      fetchFullMeasureWholeNotesDuration (),
+      "finalizeRegularMeasure()");
+  }
 
-  // determine the measure kind and purist number
-  determineMeasureKindAndPuristNumber (
+  // determine the measure purist number from the voice
+  setMeasurePuristNumberFromVoice ();
+
+  // determine the measure kind v0.9.70
+  determineMeasureKind (
     inputLineNumber,
     measureRepeatContextKind);
 
@@ -4977,48 +4873,6 @@ void msrMeasure::finalizeRegularMeasure (
       "finalizeRegularMeasure() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
-
-// //* JMI v0.9.66 USELESS ??? harmonies problem
-//   padUpToPositionAtTheEndOfTheMeasure (
-//     inputLineNumber,
-//     measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector,
-//     "finalizeRegularMeasure()");
-// //*/
-//
-//   // determine the measure kind and purist number
-//   determineMeasureKindAndPuristNumber (
-//     inputLineNumber,
-//     measureRepeatContextKind);
-
-//   // pad measure up to whole measure whole notes high tide JMI ???
-//   switch (fMeasureKind) {
-//     case msrMeasureKind::kMeasureKindCadenza:
-//       break;
-//
-//     case msrMeasureKind::kMeasureKindOvercomplete:
-//     case msrMeasureKind::kMeasureKindAnacrusis:
-//     case msrMeasureKind::kMeasureKindRegular:
-//     case msrMeasureKind::kMeasureKindIncompleteStandalone: // JMI
-//     case msrMeasureKind::kMeasureKindIncompleteLastMeasure: // JMI
-//     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart: // JMI
-//     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHookedEnding: // JMI
-//     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHooklessEnding: // JMI
-//     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterCommonPart: // JMI
-//     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHookedEnding: // JMI
-//     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding: // JMI
-//       break;
-//
-//     case msrMeasureKind::kMeasureKindUnknown:
-//       // JMI ???
-//       break;
-//
-//     case msrMeasureKind::kMeasureKindMusicallyEmpty:
-//       {
-//       /* JMI
-//           */
-//       }
-//       break;
-//   } // switch
 
 //   // is there a single note or rest occupying the full measure?
 //   if (fMeasureLongestNote) {
@@ -6780,8 +6634,11 @@ void msrMeasure::finalizeHarmonyMeasure (
     measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector,
     "finalizeHarmonyMeasure()");
 
-  // determine the measure kind and purist number
-  determineMeasureKindAndPuristNumber (
+  // determine the measure purist number from the voice
+  setMeasurePuristNumberFromVoice ();
+
+  // determine the measure kind
+  determineMeasureKind (
     inputLineNumber,
     measureRepeatContextKind);
 
@@ -6893,8 +6750,11 @@ void msrMeasure::finalizeFiguredBassMeasure (
     measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector,
     "finalizeFiguredBassMeasure()");
 
-  // determine the measure kind and purist number
-  determineMeasureKindAndPuristNumber (
+  // determine the measure purist number from the voice
+  setMeasurePuristNumberFromVoice ();
+
+  // determine the measure kind
+  determineMeasureKind (
     inputLineNumber,
     measureRepeatContextKind);
 
@@ -6916,56 +6776,59 @@ void msrMeasure::finalizeMeasure (
 {
   // sanity check
   if (fMeasureHasBeenFinalized) {
-    std::stringstream ss;
-
-    ss <<
-      "Attempt at finalizing measure " <<
-      this->asShortString () <<
-      " more than once in segment '" <<
-      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-      "', context: " << context <<
-      "', measureFinalizationContext: " << fMeasureFinalizationContext <<
-      " in voice \"" <<
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\" (" << context << ")" <<
-      ", line " << inputLineNumber;
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceMeasuresDetails ()) {
+    if (gWaeOahGroup->getMaintainance ()) { // JMI v0.9.70
       std::stringstream ss;
 
       ss <<
-        std::endl <<
-        ss.str () <<
-        std::endl << std::endl;
+        "### MAINTAINANCE ### -- " <<
+        "Attempt at finalizing measure " <<
+        this->asShortString () <<
+        " more than once in segment '" <<
+        fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+        "', context: " << context <<
+        "', measureFinalizationContext: " << fMeasureFinalizationContext <<
+        " in voice \"" <<
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ()->
+            getVoiceName () <<
+        "\" (" << context << ")" <<
+        ", line " << inputLineNumber;
 
-      S_msrStaff
-        staff =
-          fetchMeasureUpLinkToStaff ();
+  #ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceMeasuresDetails ()) {
+        std::stringstream ss;
 
-      ss <<
-        "staff:" <<
-        std::endl;
+        ss <<
+          std::endl <<
+          ss.str () <<
+          std::endl << std::endl;
 
-      ++gIndenter;
-      ss << staff;
-      ss << std::endl;
-      --gIndenter;
+        S_msrStaff
+          staff =
+            fetchMeasureUpLinkToStaff ();
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-    }
+        ss <<
+          "staff:" <<
+          std::endl;
+
+        ++gIndenter;
+        ss << staff;
+        ss << std::endl;
+        --gIndenter;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
 
-//     msrInternalError ( // JMI v0.9.70
-    msrInternalWarning (
-      gServiceRunData->getInputSourceName (),
-      fInputStartLineNumber,
-//       __FILE__, __LINE__,
-      ss.str ());
+  //     msrInternalError ( // JMI v0.9.70
+      msrInternalWarning (
+        gServiceRunData->getInputSourceName (),
+        fInputStartLineNumber,
+  //       __FILE__, __LINE__,
+        ss.str ());
+    }
   }
 
   else {
@@ -6996,6 +6859,11 @@ void msrMeasure::finalizeMeasure (
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
+
+//     gLog <<
+//       std::endl <<
+//       this <<
+//       std::endl;
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasures ()) {
@@ -7183,18 +7051,21 @@ void msrMeasure::finalizeMeasureClone (
 #endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureHasBeenFinalized) {
-    std::stringstream ss;
+    if (gWaeOahGroup->getMaintainance ()) { // JMI v0.9.70
+      std::stringstream ss;
 
-    ss <<
-      "Attempt at finalizing measure clone " <<
-      asShortString () <<
-      "\" more than once";
+      ss <<
+        "### MAINTAINANCE ### -- " <<
+        "Attempt at finalizing measure clone " <<
+        asShortString () <<
+        "\" more than once";
 
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
+      msrInternalError (
+        gServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
+    }
   }
 
   ++gIndenter;
@@ -7246,8 +7117,11 @@ void msrMeasure::finalizeMeasureClone (
       fMeasureOrdinalNumberInVoice,
       fMeasureCurrentAccumulatedWholeNotesDuration);
 
-  // determine the measure kind and purist number
-  determineMeasureKindAndPuristNumber (
+  // determine the measure purist number from the voice
+  setMeasurePuristNumberFromVoice ();
+
+  // determine the measure kind JMI v0.9.70
+  determineMeasureKind (
     inputLineNumber,
     originalMeasure->getMeasureRepeatContextKind ());
 
@@ -7313,33 +7187,33 @@ void msrMeasure::finalizeMeasureClone (
 
   // JMI v0.9.66 BOFF quick quirk, repeat context kinds will probably be thrown away in the future
   // JMI v0.9.66 BOFF quick quirk
-//   const std::string context = "????? finalizeMeasureClone context?????";
-//
-//   switch (voiceClone->getVoiceKind ()) { // JMI v0.9.66 NEEDED ???
-//     case msrVoiceKind::kVoiceKindRegular:
-//       finalizeRegularMeasure (
-//         inputLineNumber,
-//         fMeasureRepeatContextKind,
-//         context);
-//       break;
-//
-//     case msrVoiceKind::kVoiceKindDynamics:
-//       break;
-//
-//     case msrVoiceKind::kVoiceKindHarmonies:
-//       finalizeHarmonyMeasure (
-//         inputLineNumber,
-//         fMeasureRepeatContextKind,
-//         context);
-//       break;
-//
-//     case msrVoiceKind::kVoiceKindFiguredBass:
-//       finalizeFiguredBassMeasure (
-//         inputLineNumber,
-//         fMeasureRepeatContextKind,
-//         context);
-//       break;
-//   } // switch
+  const std::string context = "????? finalizeMeasureClone context?????";
+
+  switch (voiceClone->getVoiceKind ()) { // JMI v0.9.66 NEEDED ???
+    case msrVoiceKind::kVoiceKindRegular:
+      finalizeRegularMeasure (
+        inputLineNumber,
+        fMeasureRepeatContextKind,
+        context);
+      break;
+
+    case msrVoiceKind::kVoiceKindDynamics:
+      break;
+
+    case msrVoiceKind::kVoiceKindHarmonies:
+      finalizeHarmonyMeasure (
+        inputLineNumber,
+        fMeasureRepeatContextKind,
+        context);
+      break;
+
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      finalizeFiguredBassMeasure (
+        inputLineNumber,
+        fMeasureRepeatContextKind,
+        context);
+      break;
+  } // switch
 
   // voice position
   msrWholeNotes
@@ -7591,9 +7465,9 @@ std::string msrMeasure::asShortString () const
     */
 /* JMI
     ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
     ", fetchFullMeasureWholeNotesDuration (): " <<
-    fetchFullMeasureWholeNotesDuration ().asString () <<
+    fetchFullMeasureWholeNotesDuration ().asFractionString () <<
     */
     ", " <<
     mfSingularOrPlural (
@@ -7632,9 +7506,9 @@ std::string msrMeasure::asStringForMeasuresSlices () const
     ", fMeasureDebugNumber: '" <<
     fMeasureDebugNumber <<
     ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
     ", fetchFullMeasureWholeNotesDuration (): " <<
-    fetchFullMeasureWholeNotesDuration ().asString () <<
+    fetchFullMeasureWholeNotesDuration ().asFractionString () <<
     ", ";
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
@@ -7704,9 +7578,9 @@ std::string msrMeasure::asString () const
     ", fMeasureDebugNumber: '" <<
     fMeasureDebugNumber <<
     ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
     ", fetchFullMeasureWholeNotesDuration (): " <<
-    fetchFullMeasureWholeNotesDuration ().asString () <<
+    fetchFullMeasureWholeNotesDuration ().asFractionString () <<
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
@@ -7754,7 +7628,7 @@ void msrMeasure::printFull (std::ostream& os) const
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
     ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
@@ -7916,8 +7790,8 @@ void msrMeasure::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureKindAndPuristNumberHaveBeenDetermined" << ": " <<
-    fMeasureKindAndPuristNumberHaveBeenDetermined <<
+    "fMeasureKindHasBeenDetermined" << ": " <<
+    fMeasureKindHasBeenDetermined <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -8034,7 +7908,7 @@ void msrMeasure::print (std::ostream& os) const
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
     ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-    fMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
@@ -8237,4 +8111,159 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasure& elt)
 //           reducedSoundingWholeNotes);
 //     }
 //   }
+
+
+// void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
+//   const S_msrTimeSignature& timeSignature)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     timeSignature != nullptr,
+//     "timeSignature is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if ( // JMI
+//     gTraceOahGroup->getTraceWholeNoteDurations ()
+//       ||
+//     gTraceOahGroup->getTraceTimeSignatures ()
+//   ) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting the full measure whole notes of measure " <<
+//       this->asShortString () <<
+//       " from time signature " <<
+//       timeSignature
+//       " in voice \"" <<
+//       fMeasureUpLinkToSegment->
+//         getSegmentUpLinkToVoice ()->
+//           getVoiceName () <<
+//       "\"" <<
+//       ", line " << fInputStartLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   switch (timeSignature->getTimeSignatureSymbolKind ()) {
+//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCommon:
+//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCut:
+//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNote:
+//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolDottedNote:
+//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSingleNumber:
+//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
+//       {
+//         // this measure is con misura
+//
+//         msrWholeNotes
+//           wholeNotesPerMeasure =
+//             timeSignature->
+//               timeSignatureWholeNotesPerMeasure ();
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gTraceOahGroup->getTraceTimeSignatures ()) {
+//           std::stringstream ss;
+//
+//           ss <<
+//             "There are " <<
+//             wholeNotesPerMeasure <<
+//             " whole note(s) per measure in time signature:" <<
+//             std::endl;
+//
+//           ++gIndenter;
+//
+//           ss <<
+//             timeSignature;
+//
+//           --gIndenter;
+//
+//           ss <<
+//             "in measure " <<
+//             this->asShortString () <<
+//             " in voice \"" <<
+//             fMeasureUpLinkToSegment->
+//               getSegmentUpLinkToVoice ()->
+//                 getVoiceName () <<
+//             "\"" <<
+//             ", line " << fInputStartLineNumber;
+//
+//           gWaeHandler->waeTrace (
+//             __FILE__, __LINE__,
+//             ss.str ());
+//         }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//         // set full measure whole notes
+//         setFullMeasureWholeNotesDuration (
+//           wholeNotesPerMeasure);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gTraceOahGroup->getTraceTimeSignatures ()) {
+//           std::stringstream ss;
+//
+//           ss <<
+//             "Measure " <<
+//             this->asShortString () <<
+//             "'in voice \"" <<
+//             fMeasureUpLinkToSegment->
+//               getSegmentUpLinkToVoice ()->
+//                 getVoiceName () <<
+//             "\"" <<
+//             " has " <<
+//             fetchFullMeasureWholeNotesDuration ().asString () <<
+//             " full measure whole notes ";
+//
+//           gWaeHandler->waeTrace (
+//             __FILE__, __LINE__,
+//             ss.str ());
+//         }
+// #endif // MF_TRACE_IS_ENABLED
+//       }
+//       break;
+//
+//     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
+//
+//       // this measure is senza misura
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceTimeSignatures ()) {
+//         std::stringstream ss;
+//
+//         ss <<
+//           "Measure " <<
+//           this->asShortString () <<
+//            " in voice \"" <<
+//           fMeasureUpLinkToSegment->
+//             getSegmentUpLinkToVoice ()->
+//               getVoiceName () <<
+//           "\"" <<
+//           " is senza misura" <<
+//           std::endl;
+//
+//         gWaeHandler->waeTrace (
+//           __FILE__, __LINE__,
+//           ss.str ());
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       setMeasureKind (msrMeasureKind::kMeasureKindCadenza);
+//
+//       setFullMeasureWholeNotesDuration (
+//         msrWholeNotes (INT_MAX, 1));
+//       break;
+//   } // switch
+//
+//   --gIndenter;
+// }
+
+
+
+
 */

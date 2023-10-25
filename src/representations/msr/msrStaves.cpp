@@ -540,7 +540,7 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
     voice->
       switch (voice->getVoiceKind ()) {
         case msrVoiceKind::kVoiceKindRegular:
-          if (voice->getMusicHasBeenInsertedInVoice ()) {
+          if (voice->getMeasureIsMusicallyEmpty ()) {
             ++result;
           }
           break;

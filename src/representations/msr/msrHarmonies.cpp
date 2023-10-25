@@ -5335,7 +5335,7 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony measure number
   os <<
     std::setw (fieldWidth) <<
-    "measureElementMeasureNumber" << ": ";
+    "harmonyUpLinkToMeasureMeasureNumber" << ": ";
   if (fHarmonyUpLinkToMeasure) {
     os <<
       fHarmonyUpLinkToMeasure->getMeasureNumber ();

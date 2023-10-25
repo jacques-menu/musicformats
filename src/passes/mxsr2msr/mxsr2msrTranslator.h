@@ -97,15 +97,15 @@ class mxsrVoiceTupletHandler : public smartable
     // public services
     // ------------------------------------------------------
 
-    void                  handleTupletStart (
+    void                  handleTupletStartByHandler (
                             S_msrTuplet tuplet,
                             S_msrVoice  currentNoteVoice);
 
-    void                  handleTupletContinue (
+    void                  handleTupletContinueByHandler (
                             S_msrNote   note,
                             S_msrVoice  currentNoteVoice);
 
-    void                  handleTupletStop (
+    void                  handleTupletStopByHandler (
                             S_msrNote   note,
                             S_msrVoice  currentNoteVoice);
 
@@ -2553,12 +2553,12 @@ class EXP mxsr2msrTranslator :
                                 S_msrVoice  currentNoteVoice);
 
     void                      handleTupletContinue (
-                                S_msrNote   note,
-                                S_msrVoice  currentNoteVoice);
+                                S_msrNote  note,
+                                S_msrVoice currentNoteVoice);
 
     void                      handleTupletStop (
-                                S_msrNote   note,
-                                S_msrVoice  currentNoteVoice);
+                                S_msrNote  note,
+                                S_msrVoice currentNoteVoice);
 //
     void                      handlePendingTupletStops (
                                 int              inputLineNumber,

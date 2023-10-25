@@ -2531,13 +2531,15 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  std::string voiceName = elt->getVoiceName ();
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
     std::stringstream ss;
 
     ss <<
       std::endl <<
-      "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
+      "<!--=== voice \"" << voiceName << "\"" <<
       ", line " << elt->getInputStartLineNumber () << " ===-->";
 
     gWaeHandler->waeTrace (
@@ -2596,7 +2598,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          true || fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI v0.9.67
+          true || fCurrentVoiceOriginal->getMeasureIsMusicallyEmpty () // superfluous test ??? JMI v0.9.70
         ) {
           // append the voice clone to the LPSR score elements list
           fResultingLpsr ->
@@ -2673,7 +2675,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI
+          fCurrentVoiceOriginal->getMeasureIsMusicallyEmpty () // superfluous test ??? JMI
           ) {
           // append the voice clone to the LPSR score elements list
           fResultingLpsr ->
@@ -3310,6 +3312,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // finalize the current measure clone
   fCurrentMeasureClone->
     finalizeMeasureClone (
       inputLineNumber,
@@ -3345,11 +3348,13 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         // don't create a bar check for the last measure of the score
         // if it is not full time-signature wise
 
+        // fetch the measure whole notes duration from the current measure clone
         msrWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
               fetchFullMeasureWholeNotesDuration ();
 
+        // get the current voice clone time signature
         S_msrTimeSignature
           voiceCurrentTimeSignature =
             fCurrentVoiceClone->
@@ -3390,17 +3395,19 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
         doCreateABarCheckAndABarNumberCheck =
-          fullMeasureWholeNotesDuration  == wholeNotesPerMeasure;
+          fullMeasureWholeNotesDuration == wholeNotesPerMeasure;
       }
       break;
 
     case msrMeasureKind::kMeasureKindAnacrusis:
       {
+        // fetch the measure whole notes duration from the current measure clone
         msrWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
               fetchFullMeasureWholeNotesDuration ();
 
+        // get the current voice clone time signature
         S_msrTimeSignature
           voiceCurrentTimeSignature =
             fCurrentVoiceClone->
@@ -3466,7 +3473,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteLastMeasure:
       break;
 
-    case msrMeasureKind::kMeasureKindOvercomplete:
+    case msrMeasureKind::kMeasureKindOverFlowing:
       doCreateABarCheckAndABarNumberCheck = true;
       break;
 

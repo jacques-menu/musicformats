@@ -123,13 +123,13 @@ class EXP msrMeasure : public msrSegmentElement
     int                   getMeasureEndInputLineNumber () const
                               { return fMeasureEndInputLineNumber; }
 
-    // measure lengthes, in whole notes
+    // measure whole notes durations, in whole notes
 
-//     void                  setFullMeasureWholeNotesDuration (
-//                             const msrWholeNotes& wholeNotes);
-//
-//     msrWholeNotes         getFullMeasureWholeNotesDuration () () const
-//                               { return fFullMeasureWholeNotesDuration; }
+    void                  setFullMeasureWholeNotesDuration (
+                            const msrWholeNotes& wholeNotes);
+
+    const msrWholeNotes&  getFullMeasureWholeNotesDuration () const
+                              { return fFullMeasureWholeNotesDuration; }
 
     void                  setMeasureCurrentAccumulatedWholeNotesDuration (
                             int                  inputLineNumber,
@@ -597,7 +597,9 @@ class EXP msrMeasure : public msrSegmentElement
 
     // finalization
 
-    void                  determineMeasureKindAndPuristNumber (
+    void                  setMeasurePuristNumberFromVoice ();
+
+    void                  determineMeasureKind (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind);
 
@@ -682,7 +684,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-//     msrWholeNotes         fFullMeasureWholeNotesDuration;
+    msrWholeNotes         fFullMeasureWholeNotesDuration;
                             // denormalization from msrStaff, for efficiency
                             // meaningfull only when there is a time signature,
                             // but not for cadenzas
@@ -873,7 +875,7 @@ class EXP msrMeasure : public msrSegmentElement
                                                  measureRepeatContextKind,
                             const msrWholeNotes& newWholeNotesSinceLastRegularMeasureEnd);
 
-    void                  handleOverFullMeasure (
+    void                  handleOverflowingMeasure (
                             int               inputLineNumber,
                             const S_msrVoice& voice);
 
@@ -891,7 +893,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure finalization
     Bool                  fMeasureHasBeenFinalized;
-    Bool                  fMeasureKindAndPuristNumberHaveBeenDetermined;
+    Bool                  fMeasureKindHasBeenDetermined;
 
     std::string           fMeasureFinalizationContext;
 };

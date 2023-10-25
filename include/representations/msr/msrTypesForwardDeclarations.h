@@ -210,8 +210,8 @@ typedef SMARTP<msrNonArpeggiato> S_msrNonArpeggiato;
 class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
-class   msrNotesDuration;
-typedef SMARTP<msrNotesDuration> S_msrNotesDuration;
+// class   msrNotesDuration;
+// typedef SMARTP<msrNotesDuration> S_msrNotesDuration;
 
 class   msrNoteSize;
 typedef SMARTP<msrNoteSize> S_msrNoteSize;

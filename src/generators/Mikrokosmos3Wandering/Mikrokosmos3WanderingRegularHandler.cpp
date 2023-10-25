@@ -620,6 +620,8 @@ void Mikrokosmos3WanderingRegularHandler::createWarningAndErrorsRegularGroup ()
 
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
+
+  registerAtomInRegularSubgroup ("maintainance", subGroup);
 }
 
 void Mikrokosmos3WanderingRegularHandler::createGenerateCodeRegularGroup ()

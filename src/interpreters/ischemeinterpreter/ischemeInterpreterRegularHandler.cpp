@@ -367,6 +367,8 @@ void ischemeInterpreterRegularHandler::createWarningAndErrorsRegularGroup ()
 
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
+
+  registerAtomInRegularSubgroup ("maintainance", subGroup);
 }
 
 //______________________________________________________________________________

@@ -3386,9 +3386,9 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
   }
 
   else if (measureCurrentAccumulatedWholeNotesDuration > measureFullLength) {
-    // this measure is overfull
+    // this measure is overflowing
     measureKind =
-      msrMeasure::kOverfullMeasure;
+      msrMeasure::kOverflowingMeasure;
   }
 
   if (false && / * JMI * / measureKind != originalMeasure->getMeasureKind ()) { // JMI

@@ -1390,13 +1390,15 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  std::string voiceName = elt->getVoiceName ();
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
     std::stringstream ss;
 
     ss <<
 //       std::endl <<
-      "<!--=== voice \"" << elt->getVoiceName () << "\"" <<
+      "<!--=== voice \"" << voiceName << "\"" <<
       ", line " << elt->getInputStartLineNumber () << " ===-->";
 
     gWaeHandler->waeTrace (
@@ -1418,8 +1420,6 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
       fCurrentVoiceOriginal->getVoiceNumber ());
 
   ++gIndenter;
-
-  std::string voiceName = elt->getVoiceName ();
 
   // create a voice clone
   fCurrentVoiceClone =
@@ -1448,28 +1448,28 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI
-          ) {
-          // create a ChordNames context
-          std::string partCombinedName =
-            fCurrentVoiceOriginal->
-              fetchVoiceUpLinkToPart ()->
-                getPartCombinedName ();
-
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceHarmonies ()) {
-            std::stringstream ss;
-
-            ss <<
-              "Creating a ChordNames context for \"" << voiceName <<
-              "\" in part " << partCombinedName <<
-              std::endl;
-
-            gWaeHandler->waeTraceWithoutInputLocation (
-              __FILE__, __LINE__,
-              ss.str ());
-          }
-#endif // MF_TRACE_IS_ENABLED
+          fCurrentVoiceOriginal->getMeasureIsMusicallyEmpty () // superfluous test ??? JMI v0.9.70
+        ) {
+//           // create a ChordNames context
+//           std::string partCombinedName =
+//             fCurrentVoiceOriginal->
+//               fetchVoiceUpLinkToPart ()->
+//                 getPartCombinedName ();
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//           if (gTraceOahGroup->getTraceHarmonies ()) {
+//             std::stringstream ss;
+//
+//             ss <<
+//               "Creating a ChordNames context for \"" << voiceName <<
+//               "\" in part " << partCombinedName <<
+//               std::endl;
+//
+//             gWaeHandler->waeTraceWithoutInputLocation (
+//               __FILE__, __LINE__,
+//               ss.str ());
+//           }
+// #endif // MF_TRACE_IS_ENABLED
 
           fOnGoingHarmoniesVoice = true;
         }
@@ -1484,28 +1484,28 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI
-          ) {
-          // create a FiguredBass context
-          std::string partCombinedName =
-            fCurrentVoiceOriginal->
-              fetchVoiceUpLinkToPart ()->
-                getPartCombinedName ();
-
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceHarmonies ()) {
-            std::stringstream ss;
-
-            ss <<
-              "Creating a FiguredBass context for \"" << voiceName <<
-              "\" in part " << partCombinedName <<
-              std::endl;
-
-            gWaeHandler->waeTraceWithoutInputLocation (
-              __FILE__, __LINE__,
-              ss.str ());
-          }
-#endif // MF_TRACE_IS_ENABLED
+          fCurrentVoiceOriginal->getMeasureIsMusicallyEmpty () // superfluous test ??? JMI v0.9.70
+        ) {
+//           // create a FiguredBass context
+//           std::string partCombinedName =
+//             fCurrentVoiceOriginal->
+//               fetchVoiceUpLinkToPart ()->
+//                 getPartCombinedName ();
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//           if (gTraceOahGroup->getTraceHarmonies ()) {
+//             std::stringstream ss;
+//
+//             ss <<
+//               "Creating a FiguredBass context for \"" << voiceName <<
+//               "\" in part " << partCombinedName <<
+//               std::endl;
+//
+//             gWaeHandler->waeTraceWithoutInputLocation (
+//               __FILE__, __LINE__,
+//               ss.str ());
+//           }
+// #endif // MF_TRACE_IS_ENABLED
 
           fOnGoingFiguredBassVoice = true;
         }
@@ -2067,13 +2067,14 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // finalize the current measure clone
   fCurrentMeasureClone->
     finalizeMeasureClone (
       inputLineNumber,
       elt, // original measure
       fCurrentVoiceClone);
 
-  Bool doCreateABarCheck (false);
+  Bool doCreateABarCheck (false); // JMI ??? v0.9.70
 
   switch (elt->getMeasureKind ()) {
     case msrMeasureKind::kMeasureKindUnknown:
@@ -2098,6 +2099,54 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindRegular:
+      {
+        // fetch the measure whole notes duration from the current measure clone
+        msrWholeNotes
+          fullMeasureWholeNotesDuration =
+            fCurrentMeasureClone->
+              fetchFullMeasureWholeNotesDuration ();
+
+        // get the current voice clone time signature
+        S_msrTimeSignature
+          voiceCurrentTimeSignature =
+            fCurrentVoiceClone->
+              getVoiceCurrentTimeSignature ();
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+        // sanity check
+        mfAssert (
+          __FILE__, __LINE__,
+          voiceCurrentTimeSignature != nullptr,
+          "voiceCurrentTimeSignature is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+        msrWholeNotes
+          wholeNotesPerMeasure =
+            voiceCurrentTimeSignature->
+              timeSignatureWholeNotesPerMeasure ();
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (
+          gTraceOahGroup->getTraceBarChecks ()
+            ||
+          gTraceOahGroup->getTraceBarNumberChecks ()
+        ) {
+          std::stringstream ss;
+
+          ss <<
+            "--> kMeasureKindRegular" <<
+            ", fullMeasureWholeNotesDuration: " <<
+            fullMeasureWholeNotesDuration.asString () <<
+            "', wholeNotesPerMeasure: " <<
+            wholeNotesPerMeasure;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+      }
+
       doCreateABarCheck = true;
       break;
 
@@ -2125,7 +2174,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
       } // switch
       break;
 
-    case msrMeasureKind::kMeasureKindOvercomplete:
+    case msrMeasureKind::kMeasureKindOverFlowing:
       doCreateABarCheck = true;
       break;
 
@@ -2192,7 +2241,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
         gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().find (
           fCurrentMeasureNumber);
 
-    if (it != gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().end ()) {
+    if (it != gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().end ()) { // JMI v0.9.70
       gLog <<
         "==> adding a page break after measureNumber: \"" <<
         fCurrentMeasureNumber <<

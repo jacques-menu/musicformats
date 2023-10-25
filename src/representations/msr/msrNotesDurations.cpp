@@ -570,176 +570,176 @@ std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt)
   return os;
 }
 
-//______________________________________________________________________________
-msrNotesDuration::msrNotesDuration ()
-{
-  fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
-  fDotsNumber = 0;
-}
-
-msrNotesDuration::msrNotesDuration (
-  msrNotesDurationKind notesNotesDurationKind,
-  int                  dotsNumber)
-{
-  fNotesDurationKind = notesNotesDurationKind;
-  fDotsNumber        = dotsNumber;
-}
-
-msrNotesDuration::~msrNotesDuration ()
-{}
-
-msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
-  int inputLineNumber) const
-{
-  // convert duration into whole notes
-  msrWholeNotes
-    result =
-      msrNotesDurationKindAsWholeNotes (
-        fNotesDurationKind);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDurations ()) {
-    print (gLog);
-
-    std::stringstream ss;
-
-    ss <<
-      "=== dottedNotesDurationAsWholeNotes()" <<
-      ", (int) fNotesDurationKind: " << (int) fNotesDurationKind <<
-      ", result: " << result;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // take dots into account if any
-  if (fDotsNumber > 0) {
-    msrWholeNotes
-      increment = result * mfRational (1,2);
-
-    int dots = fDotsNumber;
-
-    while (dots > 0) {
-      result += increment;
-
-      increment *= mfRational (1,2);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDurations ()) {
-    std::stringstream ss;
-
-    ss <<
-      "=== dottedNotesDurationAsWholeNotes()" <<
-      ", dots: " << dots <<
-      ", result: " << result <<
-      ", increment: " << increment;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-      --dots;
-    } // while
-  }
-
-  return result;
-}
-
-msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
-  // used in lpsrEnumTypes, dottedNotesDurationAsLilypondStringWithoutBackSlash(),
-  // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
-  // JMI BUGGY, NEVER TESTED TEMP??? v0.9.67
-  int inputLineNumber) const
-{
-  // convert duration into whole notes
-  msrWholeNotes
-    result =
-      msrNotesDurationKindAsWholeNotes (
-        fNotesDurationKind);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDurations ()) {
-    std::stringstream ss;
-
-    ss <<
-      "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
-      ", result: " << result <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // take dots into account if any
-  if (fDotsNumber > 0) {
-    int dots = fDotsNumber;
-
-    while (dots > 0) {
-      result *=
-        mfRational (3, 2);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDurations ()) {
-    std::stringstream ss;
-
-    ss <<
-      "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
-      ", dots: " << dots <<
-      ", result: " << result <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-      --dots;
-    } // while
-  }
-
-  return result;
-}
-
-std::string msrNotesDuration::asString () const
-{
-  std::stringstream ss;
-
-  ss <<
-     fNotesDurationKind;
-
-  for (int i = 1; i <= fDotsNumber; ++i) {
-    ss << ".";
-  } // for
-
-  return ss.str ();
-}
-
-void msrNotesDuration::print (std::ostream& os) const
-{
-  const int fieldWidth = 11;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fNotesDurationKind" << ": " <<
-    fNotesDurationKind <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "dotsNumber" << ": " << fDotsNumber <<
-    std::endl;
-};
-
-std::ostream& operator << (std::ostream& os, const msrNotesDuration& elt)
-{
-  os << elt.asString ();
-  return os;
-}
+// //______________________________________________________________________________
+// msrNotesDuration::msrNotesDuration ()
+// {
+//   fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+//   fDotsNumber = 0;
+// }
+//
+// msrNotesDuration::msrNotesDuration (
+//   msrNotesDurationKind notesNotesDurationKind,
+//   int                  dotsNumber)
+// {
+//   fNotesDurationKind = notesNotesDurationKind;
+//   fDotsNumber        = dotsNumber;
+// }
+//
+// msrNotesDuration::~msrNotesDuration ()
+// {}
+//
+// msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes (
+//   int inputLineNumber) const
+// {
+//   // convert duration into whole notes
+//   msrWholeNotes
+//     result =
+//       msrNotesDurationKindAsWholeNotes (
+//         fNotesDurationKind);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceNotesDurations ()) {
+//     print (gLog);
+//
+//     std::stringstream ss;
+//
+//     ss <<
+//       "=== dottedNotesDurationAsWholeNotes()" <<
+//       ", (int) fNotesDurationKind: " << (int) fNotesDurationKind <<
+//       ", result: " << result;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // take dots into account if any
+//   if (fDotsNumber > 0) {
+//     msrWholeNotes
+//       increment = result * mfRational (1,2);
+//
+//     int dots = fDotsNumber;
+//
+//     while (dots > 0) {
+//       result += increment;
+//
+//       increment *= mfRational (1,2);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceNotesDurations ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "=== dottedNotesDurationAsWholeNotes()" <<
+//       ", dots: " << dots <<
+//       ", result: " << result <<
+//       ", increment: " << increment;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       --dots;
+//     } // while
+//   }
+//
+//   return result;
+// }
+//
+// msrWholeNotes msrNotesDuration::dottedNotesDurationAsWholeNotes_FOR_TEMPO (
+//   // used in lpsrEnumTypes, dottedNotesDurationAsLilypondStringWithoutBackSlash(),
+//   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
+//   // JMI BUGGY, NEVER TESTED TEMP??? v0.9.67
+//   int inputLineNumber) const
+// {
+//   // convert duration into whole notes
+//   msrWholeNotes
+//     result =
+//       msrNotesDurationKindAsWholeNotes (
+//         fNotesDurationKind);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceNotesDurations ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
+//       ", result: " << result <<
+//       "\"";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // take dots into account if any
+//   if (fDotsNumber > 0) {
+//     int dots = fDotsNumber;
+//
+//     while (dots > 0) {
+//       result *=
+//         mfRational (3, 2);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceNotesDurations ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "=== dottedNotesDurationAsWholeNotes_FOR_TEMPO()" <<
+//       ", dots: " << dots <<
+//       ", result: " << result <<
+//       "\"";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       --dots;
+//     } // while
+//   }
+//
+//   return result;
+// }
+//
+// std::string msrNotesDuration::asString () const
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//      fNotesDurationKind;
+//
+//   for (int i = 1; i <= fDotsNumber; ++i) {
+//     ss << ".";
+//   } // for
+//
+//   return ss.str ();
+// }
+//
+// void msrNotesDuration::print (std::ostream& os) const
+// {
+//   const int fieldWidth = 11;
+//
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fNotesDurationKind" << ": " <<
+//     fNotesDurationKind <<
+//     std::endl <<
+//     std::setw (fieldWidth) <<
+//     "dotsNumber" << ": " << fDotsNumber <<
+//     std::endl;
+// };
+//
+// std::ostream& operator << (std::ostream& os, const msrNotesDuration& elt)
+// {
+//   os << elt.asString ();
+//   return os;
+// }
 
 //_______________________________________________________________________________
 int msrNotesDurationBinaryLogarithm (int duration)

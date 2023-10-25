@@ -239,83 +239,83 @@ std::string multiMeasureRestsWholeNotespitchAndOctaveAsString (
 //______________________________________________________________________________
 EXP void testWholeNotes ();
 
-//______________________________________________________________________________
-class EXP msrNotesDuration
-{
-  public:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          msrNotesDuration ();
-
-                          msrNotesDuration (
-                            msrNotesDurationKind notesNotesDurationKind,
-                            int                  dotsNumber);
-
-    virtual               ~msrNotesDuration ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-    void                  setNotesDurationKind (
-                            msrNotesDurationKind notesNotesDurationKind)
-                              { fNotesDurationKind = notesNotesDurationKind; }
-
-    msrNotesDurationKind  getNotesDurationKind () const
-                              { return fNotesDurationKind; }
-
-    void                  setDotsNumber (int dotsNumber)
-                              { fDotsNumber = dotsNumber; }
-
-    int                   getDotsNumber () const
-                              { return fDotsNumber; }
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-    void                  incrDotsNumber ()
-                              { ++fDotsNumber; }
-
-    msrWholeNotes         dottedNotesDurationAsWholeNotes_FOR_TEMPO (
-                            int inputLineNumber) const;
-
-    msrWholeNotes         dottedNotesDurationAsWholeNotes (
-                            int inputLineNumber) const;
-
-  public:
-
-    // visitors
-    // ------------------------------------------------------
-
-/* JMI
-    void                  acceptIn  (basevisitor* v) override;
-    void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
-*/
-
-  public:
-
-    // ------------------------------------------------------
-
-    std::string           asString () const;
-
-    void                  print (std::ostream& os) const;
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    msrNotesDurationKind  fNotesDurationKind;
-    int                   fDotsNumber;
-};
-EXP std::ostream& operator << (std::ostream& os, const msrNotesDuration& elt);
+// //______________________________________________________________________________
+// class EXP msrNotesDuration
+// {
+//   public:
+//
+//     // constructors/destructor
+//     // ------------------------------------------------------
+//
+//                           msrNotesDuration ();
+//
+//                           msrNotesDuration (
+//                             msrNotesDurationKind notesNotesDurationKind,
+//                             int                  dotsNumber);
+//
+//     virtual               ~msrNotesDuration ();
+//
+//   public:
+//
+//     // set and get
+//     // ------------------------------------------------------
+//
+//     void                  setNotesDurationKind (
+//                             msrNotesDurationKind notesNotesDurationKind)
+//                               { fNotesDurationKind = notesNotesDurationKind; }
+//
+//     msrNotesDurationKind  getNotesDurationKind () const
+//                               { return fNotesDurationKind; }
+//
+//     void                  setDotsNumber (int dotsNumber)
+//                               { fDotsNumber = dotsNumber; }
+//
+//     int                   getDotsNumber () const
+//                               { return fDotsNumber; }
+//
+//   public:
+//
+//     // public services
+//     // ------------------------------------------------------
+//
+//     void                  incrDotsNumber ()
+//                               { ++fDotsNumber; }
+//
+//     msrWholeNotes         dottedNotesDurationAsWholeNotes_FOR_TEMPO (
+//                             int inputLineNumber) const;
+//
+//     msrWholeNotes         dottedNotesDurationAsWholeNotes (
+//                             int inputLineNumber) const;
+//
+//   public:
+//
+//     // visitors
+//     // ------------------------------------------------------
+//
+// /* JMI
+//     void                  acceptIn  (basevisitor* v) override;
+//     void                  acceptOut (basevisitor* v) override;
+//
+//     void                  browseData (basevisitor* v) override;
+// */
+//
+//   public:
+//
+//     // ------------------------------------------------------
+//
+//     std::string           asString () const;
+//
+//     void                  print (std::ostream& os) const;
+//
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//     msrNotesDurationKind  fNotesDurationKind;
+//     int                   fDotsNumber;
+// };
+// EXP std::ostream& operator << (std::ostream& os, const msrNotesDuration& elt);
 
 //______________________________________________________________________________
 class EXP msrDottedNotesDuration

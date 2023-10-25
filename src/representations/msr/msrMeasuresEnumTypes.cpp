@@ -58,8 +58,8 @@ std::string msrMeasureKindAsString (
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       result = "kMeasureKindIncompleteNextMeasureAfterHooklessEnding";
       break;
-    case msrMeasureKind::kMeasureKindOvercomplete:
-      result = "kMeasureKindOvercomplete";
+    case msrMeasureKind::kMeasureKindOverFlowing:
+      result = "kMeasureKindOverFlowing";
       break;
     case msrMeasureKind::kMeasureKindCadenza:
       result = "kMeasureKindCadenza";
@@ -125,8 +125,8 @@ std::string msrMeasureKindasShortStringForMeasuresSlices (
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       result = "kMeasureKindIncompleteNextMeasureAfterHooklessEnding";
       break;
-    case msrMeasureKind::kMeasureKindOvercomplete:
-      result = "kMeasureKindOvercomplete";
+    case msrMeasureKind::kMeasureKindOverFlowing:
+      result = "kMeasureKindOverFlowing";
       break;
     case msrMeasureKind::kMeasureKindCadenza:
       result = "kMeasureKindCadenza";
