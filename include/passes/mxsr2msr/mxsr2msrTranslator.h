@@ -109,6 +109,9 @@ class mxsrVoiceTupletHandler : public smartable
                             S_msrNote   note,
                             S_msrVoice  currentNoteVoice);
 
+    void                  finalizeTupletStackTopAndPopItFromTupletsStack (
+                            int         inputLineNumber,
+                            std::string context);
   public:
 
     // print
@@ -122,6 +125,9 @@ class mxsrVoiceTupletHandler : public smartable
 
     // private fields
     // ------------------------------------------------------
+
+    std::list<S_msrTuplet>
+                          fTupletsStack;
 
     int                   fTupletNumber; // may be reused later
 
@@ -152,8 +158,8 @@ class mxsrVoiceTupletHandler : public smartable
     // private methods
     // ------------------------------------------------------
 
-//     void                  displayTupletsStack (
-//                             const std::string& context);
+    void                  displayTupletsStack (
+                            const std::string& context);
 };
 typedef SMARTP<mxsrVoiceTupletHandler> S_mxsrVoiceTupletHandler;
 EXP std::ostream& operator << (std::ostream& os, const mxsrVoiceTupletHandler& elt);
@@ -2519,6 +2525,9 @@ class EXP mxsr2msrTranslator :
 
       this is done with a vector, whose indices are the voices sequential, ordinal numbers
     */
+
+    S_mxsrVoiceTupletHandler  fVoiceTupletHandler; // JMI v0.9.70
+
     std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (
                                 const std::string& context);

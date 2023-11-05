@@ -354,7 +354,7 @@ class EXP msrChord : public msrTupletElement
 
     // measure positions
     // this override calls setChordMembersMeasurePosition()
-    void                  setMeasurePosition (
+    void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure&  measure,
                             const msrWholeNotes& measurePosition,
                             const std::string&   context) override;

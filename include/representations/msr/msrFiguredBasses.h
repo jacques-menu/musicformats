@@ -249,7 +249,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     void                  setFiguredBassSoundingWholeNotes (
                             const msrWholeNotes& wholeNotes,
                             const std::string&   context)
-                              { setSoundingWholeNotes (wholeNotes, context); }
+                              { setMeasureElementSoundingWholeNotes (wholeNotes, context); }
 
     void                  setFiguredBassDisplayWholeNotes (
                             const msrWholeNotes& wholeNotes)

@@ -219,7 +219,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   return newbornClone;
 }
 
-// void msrDoubleTremolo::setMeasurePosition (
+// void msrDoubleTremolo::setMeasureElementMeasurePosition (
 //   const S_msrMeasure& measure,
 //   const msrWholeNotes&     measurePosition,
 //   const std::string&  context)
@@ -234,7 +234,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       " to " <<
 //       measurePosition.asString () <<
 //       " (was " <<
-//       fMeasurePosition.asString () <<
+//       fMeasureElementMeasurePosition.asString () <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -257,16 +257,16 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set double tremolo's measure position
-//   fMeasurePosition = measurePosition;
+//   fMeasureElementMeasurePosition = measurePosition;
 // }
 
-// void msrDoubleTremolo::setMeasurePosition ( ??? JMI v0.9.66
+// void msrDoubleTremolo::setMeasureElementMeasurePosition ( ??? JMI v0.9.66
 //   const msrWholeNotes& measurePosition)
 // {
 //   std::string context =
-//     "setMeasurePosition()";
+//     "setMeasureElementMeasurePosition()";
 //
-//   setMeasurePosition ( // JMI v0.9.66 CLEAN THAT!!!
+//   setMeasureElementMeasurePosition ( // JMI v0.9.66 CLEAN THAT!!!
 //     measurePosition,
 //     context);
 //
@@ -279,7 +279,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       measurePosition;
 //
 //   // set double tremolo's voice position
-//   setVoicePosition (
+//   setMeasureElementVoicePosition (
 //     voicePosition,
 //     context);
 // }
@@ -301,7 +301,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //         voice->
 //           incrementCurrentVoicePosition (
 //             note->
-//               getSoundingWholeNotes ());
+//               getMeasureElementSoundingWholeNotes ());
 //       }
 //       else {
 //         msrInternalError (
@@ -321,7 +321,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //         voice->
 //           incrementCurrentVoicePosition (
 //             chord->
-//               getSoundingWholeNotes ());
+//               getMeasureElementSoundingWholeNotes ());
 //       }
 //       else {
 //         msrInternalError (
@@ -389,7 +389,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
 
   // set note's sounding whole notes
   note->
-    setSoundingWholeNotes (
+    setMeasureElementSoundingWholeNotes (
       fDoubleTremoloElementsWholeNotes,
       "msrDoubleTremolo::setDoubleTremoloNoteFirstElement()");
 
@@ -541,7 +541,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
   // set note's sounding whole notes
   note->
-    setSoundingWholeNotes (
+    setMeasureElementSoundingWholeNotes (
       fDoubleTremoloElementsWholeNotes,
       "msrDoubleTremolo::setDoubleTremoloNoteSecondElement()");
 }

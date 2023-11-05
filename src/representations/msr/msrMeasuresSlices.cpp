@@ -509,7 +509,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
         msrWholeNotes
           noteMeasurePosition =
             note->
-              getMeasurePosition ();
+              getMeasureElementMeasurePosition ();
 
         // append note to the slice notes flat list
         fSliceNotesFlatList.push_back (note);
@@ -530,7 +530,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
             noteMeasurePosition
               +
             note->
-              getSoundingWholeNotes ();
+              getMeasureElementSoundingWholeNotes ();
 
         S_msrNoteEvent
           noteStopEvent =

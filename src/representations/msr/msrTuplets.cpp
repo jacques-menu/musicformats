@@ -119,10 +119,10 @@ msrTuplet::msrTuplet (
 
   fTupletFactor = tupletFactor;
 
-  fMemberNotesSoundingWholeNotes = memberNotesSoundingWholeNotes;
+  fMemberNotesSoundingWholeNotes = memberNotesSoundingWholeNotes; // JMI v0.9.70
   fMemberNotesDisplayWholeNotes = memberNotesDisplayWholeNotes;
 
-  doSetSoundingWholeNotes (
+  setMeasureElementSoundingWholeNotes (
     msrWholeNotes (0, 1),
     "msrTuplet::msrTuplet()");
 
@@ -178,8 +178,8 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
         fMemberNotesDisplayWholeNotes);
 
 /* JMI ???
-  newbornClone->fSoundingWholeNotes =
-    fSoundingWholeNotes;
+  newbornClone->fMeasureElementSoundingWholeNotes =
+    fMeasureElementSoundingWholeNotes;
 
   newbornClone->fTupletDisplayWholeNotes =
     fTupletDisplayWholeNotes;
@@ -187,8 +187,8 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   newbornClone->fTupletUpLinkToMeasure->getMeasureNumber () =
     fTupletUpLinkToMeasure->getMeasureNumber ();
 
-  newbornClone->fMeasurePosition =
-    fMeasurePosition;
+  newbornClone->fMeasureElementMeasurePosition =
+    fMeasureElementMeasurePosition;
 */
 
   return newbornClone;
@@ -290,8 +290,8 @@ void msrTuplet::appendNoteToTuplet (
   note->setNoteBelongsToATuplet ();
 
   // account for note duration in tuplet sounding duration
-  fSoundingWholeNotes +=
-    note->getSoundingWholeNotes ();
+//   fMeasureElementSoundingWholeNotes +=
+//     note->getMeasureElementSoundingWholeNotes ();
 
   // account for note duration in tuplet displaly duration
   fTupletDisplayWholeNotes += // JMI
@@ -348,11 +348,11 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
     fTupletElementsList.size ());
 
   // DO NOT account for the chord duration,
-  // since its first note has been accounted for already
-  /* JMI
-  fSoundingWholeNotes +=
-    chord->getSoundingWholeNotes ();
-*/
+  // since its first note has been accounted for already JMI v0.9.70
+  /*
+  fMeasureElementSoundingWholeNotes +=
+    chord->getMeasureElementSoundingWholeNotes ();
+  */
 
   fTupletDisplayWholeNotes += // JMI
     chord->getChordDisplayWholeNotes ();
@@ -401,9 +401,9 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
   tuplet->setPositionInTuplet (
     fTupletElementsList.size ());
 
-  // account for tuplet duration
-  fSoundingWholeNotes +=
-    tuplet->getSoundingWholeNotes ();
+  // account for tuplet duration JMI v0.9.70 ???
+  fMeasureElementSoundingWholeNotes +=
+    tuplet->getMeasureElementSoundingWholeNotes ();
 
   fTupletDisplayWholeNotes += // JMI
     tuplet->getTupletDisplayWholeNotes ();
@@ -437,9 +437,9 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
   tuplet->setPositionInTuplet (
     fTupletElementsList.size ());
 
-  // account for tuplet duration
-  fSoundingWholeNotes +=
-    tuplet->getSoundingWholeNotes ();
+  // account for tuplet duration // JMI v0.9.70 ???
+  fMeasureElementSoundingWholeNotes +=
+    tuplet->getMeasureElementSoundingWholeNotes ();
 
   fTupletDisplayWholeNotes +=
     tuplet->getTupletDisplayWholeNotes ();
@@ -534,9 +534,9 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
         i = fTupletElementsList.erase (i);
 
         // account for note duration
-        fSoundingWholeNotes -=
-          note->getSoundingWholeNotes ();
-        fSoundingWholeNotes.rationalis ();
+        fMeasureElementSoundingWholeNotes -=
+          note->getMeasureElementSoundingWholeNotes ();
+        fMeasureElementSoundingWholeNotes.rationalis ();
 
         fTupletDisplayWholeNotes -= // JMI
           note->getNoteDisplayWholeNotes ();
@@ -623,8 +623,8 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 
 /*
       // decrement the tuplet sounding whole notes accordingly ??? JMI BAD???
-      fSoundingWholeNotes +=
-        note->getSoundingWholeNotes ();
+      fMeasureElementSoundingWholeNotes +=
+        note->getMeasureElementSoundingWholeNotes ();
 */
 
       result = note;
@@ -680,7 +680,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
   return result;
 }
 
-void msrTuplet::setMeasurePosition (
+void msrTuplet::setMeasureElementMeasurePosition (
   const S_msrMeasure& measure,
   const msrWholeNotes&     measurePosition,
   const std::string&  context)
@@ -699,7 +699,7 @@ void msrTuplet::setMeasurePosition (
       " to " <<
       measurePosition.asString () <<
       " (was '" <<
-      fMeasurePosition.asString () <<
+      fMeasureElementMeasurePosition.asString () <<
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
@@ -715,7 +715,7 @@ void msrTuplet::setMeasurePosition (
 #endif // MF_TRACE_IS_ENABLED
 
   // handle the chord itself
-  msrMeasureElement::setMeasurePosition (
+  msrMeasureElement::setMeasureElementMeasurePosition (
     measure,
     measurePosition,
     context);
@@ -757,7 +757,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set tuplet's measure position
-  fMeasurePosition = measurePosition;
+  fMeasureElementMeasurePosition = measurePosition;
 
   // current position
   msrWholeNotes currentPosition = measurePosition;
@@ -779,14 +779,14 @@ void msrTuplet::setTupletMembersMeasurePositions (
           measure);
 
       note->
-        setMeasurePosition (
+        setMeasureElementMeasurePosition (
           measure,
           currentPosition,
           "msrTuplet::setTupletMembersMeasurePositions()");
 
       currentPosition +=
         note->
-          getSoundingWholeNotes ();
+          getMeasureElementSoundingWholeNotes ();
     }
 
     else if (
@@ -800,7 +800,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
 
       currentPosition +=
         chord->
-          getSoundingWholeNotes ();
+          getMeasureElementSoundingWholeNotes ();
     }
 
     else if (
@@ -815,7 +815,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
 
       currentPosition +=
         tuplet->
-          getSoundingWholeNotes ();
+          getMeasureElementSoundingWholeNotes ();
     }
 
     else {
@@ -961,6 +961,8 @@ std::string msrTuplet::asString () const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
     ", fMemberNotesSoundingWholeNotes: " <<
     fMemberNotesSoundingWholeNotes.asFractionString () <<
     ", line " << fInputStartLineNumber;
@@ -976,8 +978,8 @@ std::string msrTuplet::asString () const
   }
 
   ss <<
-    ", fMeasurePosition: " <<
-    fMeasurePosition.asString ();
+    ", fMeasureElementMeasurePosition: " <<
+    fMeasureElementMeasurePosition.asString ();
 
   ss << '[';
 
@@ -1037,6 +1039,8 @@ std::string msrTuplet::asShortString () const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
     ", fMemberNotesSoundingWholeNotes: " <<
     fMemberNotesSoundingWholeNotes.asFractionString () <<
     ", line " << fInputStartLineNumber;
@@ -1052,8 +1056,8 @@ std::string msrTuplet::asShortString () const
   }
 
   ss <<
-    ", fMeasurePosition: " <<
-    fMeasurePosition.asString ();
+    ", fMeasureElementMeasurePosition: " <<
+    fMeasureElementMeasurePosition.asString ();
 
   ss << '[';
 
@@ -1124,12 +1128,12 @@ void msrTuplet::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " <<
-    fMeasurePosition.asString () <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1172,8 +1176,8 @@ void msrTuplet::printFull (std::ostream& os) const
 //     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fVoicePosition" << ": " <<
-    fVoicePosition <<
+    "fMeasureElementVoicePosition" << ": " <<
+    fMeasureElementVoicePosition <<
     std::endl << std::endl;
 
   os << std::left <<
@@ -1245,8 +1249,6 @@ void msrTuplet::print (std::ostream& os) const
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
-    ", fMemberNotesSoundingWholeNotes: " <<
-    fMemberNotesSoundingWholeNotes.asFractionString () <<
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
@@ -1259,15 +1261,23 @@ void msrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " <<
-    fMeasurePosition.asString () <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes <<
+    "fTupletBracketKind" << ": " <<
+    fTupletBracketKind <<
     std::endl <<
 
+    std::setw (fieldWidth) <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition.asString () <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMemberNotesSoundingWholeNotes" << ": " <<
+    fMemberNotesSoundingWholeNotes <<
+    std::endl <<
     std::setw (fieldWidth) <<
     "fTupletDisplayWholeNotes" << ": " <<
     fTupletDisplayWholeNotes <<
@@ -1431,7 +1441,7 @@ void msrTuplet::finalizeTuplet (
 / * JMI v0.9.66
   // we can now set the measure position for all the tuplet members
   setTupletMembersMeasurePositions (
-    fMeasurePosition);
+    fMeasureElementMeasurePosition);
   * /
 }
 */

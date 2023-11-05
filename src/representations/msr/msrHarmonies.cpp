@@ -4338,7 +4338,7 @@ msrHarmony::msrHarmony (
   fHarmonyBassQuarterTonesPitchKind =
     harmonyBassQuarterTonesPitchKind;
 
-  doSetSoundingWholeNotes (
+  setMeasureElementSoundingWholeNotes (
     harmonySoundingWholeNotes,
     "msrHarmony::msrHarmony()");
 
@@ -4347,7 +4347,7 @@ msrHarmony::msrHarmony (
 
   // a harmony is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeHarmonyInAHarmoniesMeasure()
-  fMeasurePosition = msrWholeNotes (0, 1);
+  fMeasureElementMeasurePosition = msrWholeNotes (0, 1);
 
   fHarmoniesStaffNumber = harmoniesStaffNumber;
 
@@ -4469,7 +4469,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
         fHarmonyFunctionText,
         fHarmonyInversion,
         fHarmonyBassQuarterTonesPitchKind,
-        fSoundingWholeNotes,
+        fMeasureElementSoundingWholeNotes,
         fHarmonyDisplayWholeNotes,
         fHarmoniesStaffNumber,
         fHarmonyTupletFactor,
@@ -4523,7 +4523,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
         fHarmonyInversion,
         fHarmonyBassQuarterTonesPitchKind,
 // JMI        fHarmonySoundingWholeNotes,
-        fSoundingWholeNotes,
+        fMeasureElementSoundingWholeNotes,
         fHarmonyDisplayWholeNotes,
         fHarmoniesStaffNumber,
         fHarmonyTupletFactor,
@@ -4558,7 +4558,7 @@ void msrHarmony::setHarmonySoundingWholeNotes (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  setSoundingWholeNotes (wholeNotes, context);
+  setMeasureElementSoundingWholeNotes (wholeNotes, context);
 }
 
 void msrHarmony::setHarmonyDisplayWholeNotes (
@@ -4667,7 +4667,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
   fHarmonyUpLinkToNote = note;
 }
 
-// void msrHarmony::setMeasurePosition (
+// void msrHarmony::setMeasureElementMeasurePosition (
 //   const S_msrMeasure measure,
 //   const msrWholeNotes&    measurePosition,
 //   const std::string&      context)
@@ -4679,7 +4679,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//      "setMeasurePosition(): measure is null");
+//      "setMeasureElementMeasurePosition(): measure is null");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // the offset can be negative, so we merely add it to measurePosition
@@ -4698,7 +4698,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //       " to " <<
 //       measurePosition.asString () <<
 //       " (was " <<
-//       fMeasurePosition.asString () <<
+//       fMeasureElementMeasurePosition.asString () <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -4737,7 +4737,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set harmony's measure position
-//   fMeasurePosition = measurePosition;
+//   fMeasureElementMeasurePosition = measurePosition;
 //
 //   // update current voice position
 //   S_msrVoice
@@ -4748,7 +4748,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //   voice->
 //     incrementCurrentVoicePosition (
 //       fHarmonyUpLinkToNote->
-//         getSoundingWholeNotes ());
+//         getMeasureElementSoundingWholeNotes ());
 // }
 
 void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
@@ -4777,7 +4777,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 //   // compute currentHarmony's future sounding whole notes
 //   msrWholeNotes
 //     augmentedSoundingWholeNotes =
-//       fSoundingWholeNotes
+//       fMeasureElementSoundingWholeNotes
 //         +
 //       wholeNotesDelta;
 //
@@ -4790,7 +4790,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 //       "Extending the sounding whole notes of harmony " <<
 //       asString () <<
 //       " from " <<
-//       fSoundingWholeNotes.asFractionString () <<
+//       fMeasureElementSoundingWholeNotes.asFractionString () <<
 //       " to " <<
 //       augmentedSoundingWholeNotes.asFractionString () <<
 //       " to fill measure " <<
@@ -4806,7 +4806,7 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   setSoundingWholeNotes (
+//   setMeasureElementSoundingWholeNotes (
 //     augmentedSoundingWholeNotes,
 //     "incrementHarmonySoundingWholeNotes()");
 // }
@@ -4950,17 +4950,17 @@ std::string msrHarmony::asString () const
   // print the harmony bass voice position
 //   os <<
 //     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " <<
-//     fVoicePosition <<
+//     "fMeasureElementVoicePosition" << ": " <<
+//     fMeasureElementVoicePosition <<
 //     std::endl;
 
-    ", fSoundingWholeNotes: " <<
-    fSoundingWholeNotes.asFractionString () <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
     ", fHarmonyDisplayWholeNotes: " <<
     fHarmonyDisplayWholeNotes.asFractionString () <<
 
-    ", fMeasurePosition: " <<
-    fMeasurePosition.asString ();
+    ", fMeasureElementMeasurePosition: " <<
+    fMeasureElementMeasurePosition.asString ();
 
   // print the harmony uplink to note
   ss <<
@@ -5065,8 +5065,8 @@ std::string msrHarmony::asString () const
 //   ss <<
 //     "[Harmony" <<
 // //     ", " << std::hex << std::showbase << this << std::dec << // JMI HEX ADDRESS
-//     ", fMeasurePosition: " <<
-//     fMeasurePosition.asString () <<
+//     ", fMeasureElementMeasurePosition: " <<
+//     fMeasureElementMeasurePosition.asString () <<
 //     ", fHarmonyRootQuarterTonesPitchKind: " <<
 //     msrQuarterTonesPitchKindAsStringInLanguage (
 //       fHarmonyRootQuarterTonesPitchKind,
@@ -5099,13 +5099,13 @@ std::string msrHarmony::asString () const
 //   // print the harmony bass voice position
 // //   ss <<
 // //     std::setw (fieldWidth) <<
-// //     "fVoicePosition" << ": " <<
-// //     fVoicePosition <<
+// //     "fMeasureElementVoicePosition" << ": " <<
+// //     fMeasureElementVoicePosition <<
 // //     std::endl;
 //
 //   ss <<
-//     ", fSoundingWholeNotes: " <<
-//     fSoundingWholeNotes.asFractionString () <<
+//     ", fMeasureElementSoundingWholeNotes: " <<
+//     fMeasureElementSoundingWholeNotes.asFractionString () <<
 //     ", fHarmonyDisplayWholeNotes: " <<
 //     fHarmonyDisplayWholeNotes;
 //
@@ -5114,8 +5114,8 @@ std::string msrHarmony::asString () const
 //     fHarmonyWholeNotesOffset;
 //
 //   ss <<
-//     ", fMeasurePosition: " <<
-//     fMeasurePosition;
+//     ", fMeasureElementMeasurePosition: " <<
+//     fMeasureElementMeasurePosition;
 //
 //   ss <<
 //     ", fHarmonyKindText: \"" <<
@@ -5188,8 +5188,8 @@ void msrHarmony::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes.asFractionString () <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fHarmonyDisplayWholeNotes" << ": " <<
@@ -5199,8 +5199,8 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony measure position
   os <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " <<
-    fMeasurePosition.asString () <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition.asString () <<
     std::endl;
 
   os << std::left <<
@@ -5348,8 +5348,8 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony bass voice position
 //   os <<
 //     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " <<
-//     fVoicePosition <<
+//     "fMeasureElementVoicePosition" << ": " <<
+//     fMeasureElementVoicePosition <<
 //     std::endl;
 
   --gIndenter;

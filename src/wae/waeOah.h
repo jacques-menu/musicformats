@@ -61,8 +61,8 @@ class EXP waeOahGroup : public oahGroup
     Bool                  getDontQuitOnErrors () const
                               { return fDontQuitOnErrors;  }
 
-    Bool                  getMaintainance () const
-                              { return fMaintainance;  }
+    Bool                  getMaintainanceRun () const
+                              { return fMaintainanceRun;  }
 
   public:
 
@@ -109,7 +109,7 @@ class EXP waeOahGroup : public oahGroup
     Bool                  fDontShowErrors;
     Bool                  fDontQuitOnErrors;
 
-    Bool                  fMaintainance;
+    Bool                  fMaintainanceRun;
 };
 typedef SMARTP<waeOahGroup> S_waeOahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_waeOahGroup& elt);

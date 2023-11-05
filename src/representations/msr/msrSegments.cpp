@@ -2132,7 +2132,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 void msrSegment::backupByWholeNotesStepLengthInSegment (
   int     inputLineNumber,
   const msrWholeNotes&
-          backupTargetMeasurePosition)
+          backupTargetMeasureElementMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -2144,7 +2144,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
 
     ss <<
       "Backup by a '" <<
-      backupTargetMeasurePosition.asString () <<
+      backupTargetMeasureElementMeasurePosition.asString () <<
       "' whole notes step length in segment '" <<
       fSegmentAbsoluteNumber <<
       ", segmentDebugNumber: '" <<
@@ -2164,7 +2164,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
     fSegmentLastMeasure->
       backupByWholeNotesStepLengthInMeasure (
         inputLineNumber,
-        backupTargetMeasurePosition);
+        backupTargetMeasureElementMeasurePosition);
   }
 }
 

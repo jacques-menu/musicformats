@@ -224,7 +224,7 @@ All durations are represented by mfRational numbers whose denominators are power
 
 This information is a field of \class{msrMeasureElement}:
 \begin{lstlisting}[language=CPlusPlus]
-    mfRational              fSoundingWholeNotes;
+    mfRational              fMeasureElementSoundingWholeNotes;
 \end{lstlisting}
 
 In a tuplet, the sounding durations are different than the written durations, so we store the written duration in \class{msrNote}:
@@ -266,7 +266,7 @@ enum class msrNotesDurationKind {
 
 Measure positions are represented by \code{mfRational} numbers such as {\tt 3/8}, {\tt 1/1} being a whole note.
 
-Measure positions are stored in \field{msrMeasureElement}{fMeasurePosition} in \class{msrMeasureElement}, defined in \msrBoth{msrMeasureElement}:
+Measure positions are stored in \field{msrMeasureElement}{fMeasureElementMeasurePosition} in \class{msrMeasureElement}, defined in \msrBoth{msrMeasureElement}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP msrMeasureElement : public msrElement
 {
@@ -282,12 +282,12 @@ class EXP msrMeasureElement : public msrElement
       to allow for separate *.h files, C++ constraint
     */
 
-    mfRational              fSoundingWholeNotes;
+    mfRational              fMeasureElementSoundingWholeNotes;
 
     std::string           fBarLineUpLinkToMeasure->getMeasureNumber ();
 
-    mfRational              fMeasurePosition;
-    mfRational              fVoicePosition;
+    mfRational              fMeasureElementMeasurePosition;
+    mfRational              fMeasureElementVoicePosition;
 };
 \end{lstlisting}
 

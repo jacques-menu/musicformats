@@ -442,7 +442,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
   msrWholeNotes
     noteSoundingWholeNotes =
       note->
-        getSoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
       /* JMI
   msrWholeNotes

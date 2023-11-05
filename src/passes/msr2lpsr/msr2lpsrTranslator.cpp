@@ -867,7 +867,7 @@ void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
       fCurrentPartClone->
         insertHiddenMeasureAndBarLineInPartClone (
           hiddenMeasureAndBarLineDescr->getInputStartLineNumber (),
-          dalSegno->getMeasurePosition ());
+          dalSegno->getMeasureElementMeasurePosition ());
 
       if (++i == iEnd) break;
     } // for
@@ -6997,20 +6997,20 @@ void msr2lpsrTranslator::visitStart (S_msrBeam& elt)
       appendBeamToNote (elt);
   }
 
-  if (fOnGoingChord) { // else ??? JMI
-    // don't append a beam if we're inside a beam link JMI ???
-    if (fOnGoingNonGraceNote) {
-      S_msrChordBeamLink
-        chordBeamLink =
-          msrChordBeamLink::create (
-            fCurrentChordClone->getInputStartLineNumber (),
-            elt,
-            fCurrentChordClone);
-
-      fCurrentChordClone->
-        appendChordBeamLinkToChord (chordBeamLink);
-    }
-  }
+//   if (fOnGoingChord) { // else ??? JMI
+//     // don't append a beam if we're inside a beam link JMI ???
+//     if (fOnGoingNonGraceNote) {
+//       S_msrChordBeamLink
+//         chordBeamLink =
+//           msrChordBeamLink::create (
+//             fCurrentChordClone->getInputStartLineNumber (),
+//             elt,
+//             fCurrentChordClone);
+//
+//       fCurrentChordClone->
+//         appendChordBeamLinkToChord (chordBeamLink);
+//     }
+//   }
 /* JMI
     fCurrentChordClone->
       appendBeamToChord (elt);
@@ -7536,7 +7536,7 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
   fCurrentPartClone->
     insertHiddenMeasureAndBarLineInPartClone (
       inputLineNumber,
-      elt->getMeasurePosition ());
+      elt->getMeasureElementMeasurePosition ());
      // */
 }
 

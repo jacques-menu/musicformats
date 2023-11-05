@@ -389,7 +389,7 @@ void msrBassFigure::print (std::ostream& os) const
   if (fFigureUpLinkToPart) { // JMI ???
     ss <<
       ":" <<
-      wholeNotespitchAndOctaveAsString (
+      wholeNotesPitchAndOctaveAsString (
         fInputStartLineNumber,
         fFigureSoundingWholeNotes);
   }
@@ -506,7 +506,7 @@ msrFiguredBass::msrFiguredBass (
     figuredBassUpLinkToPart;
     */
 
-  doSetSoundingWholeNotes (
+  setMeasureElementSoundingWholeNotes (
     figuredBassSoundingWholeNotes,
     "msrFiguredBass::msrFiguredBass()");
 
@@ -521,7 +521,7 @@ msrFiguredBass::msrFiguredBass (
 
   // a figured bass element is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure()
-  fMeasurePosition = msrWholeNotes (0, 1);
+  fMeasureElementMeasurePosition = msrWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -572,7 +572,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
       msrFiguredBass::create (
         fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fSoundingWholeNotes, // JMI v0.9.67
+        fMeasureElementSoundingWholeNotes, // JMI v0.9.67
         fFiguredBassDisplayWholeNotes,
 //         fFiguredBassWholeNotesDuration,
         fFiguredBassParenthesesKind,
@@ -615,7 +615,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
       msrFiguredBass::create (
         fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fSoundingWholeNotes, // JMI v0.9.67
+        fMeasureElementSoundingWholeNotes, // JMI v0.9.67
         fFiguredBassDisplayWholeNotes,
 //         fFiguredBassWholeNotesDuration,
         fFiguredBassParenthesesKind,
@@ -796,14 +796,14 @@ std::string msrFiguredBass::asString () const
   ss <<
     "[FiguredBass" <<
     ", " << std::hex << std::showbase << this << std::dec <<
-    ", fMeasurePosition: " <<
-    fMeasurePosition.asString () <<
-    ", fSoundingWholeNotes: " <<
-    wholeNotespitchAndOctaveAsString (
+    ", fMeasureElementMeasurePosition: " <<
+    fMeasureElementMeasurePosition.asString () <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    wholeNotesPitchAndOctaveAsString (
       fInputStartLineNumber,
-      fSoundingWholeNotes) <<
+      fMeasureElementSoundingWholeNotes) <<
     ", fFiguredBassDisplayWholeNotes: " <<
-    wholeNotespitchAndOctaveAsString (
+    wholeNotesPitchAndOctaveAsString (
       fInputStartLineNumber,
       fFiguredBassDisplayWholeNotes);
 
@@ -862,13 +862,13 @@ std::string msrFiguredBass::asString () const
 
   // print the figured bass measure position
   ss <<
-    ", measurePosition: " << fMeasurePosition;
+    ", measurePosition: " << fMeasureElementMeasurePosition;
 
 /* JMI
   if (fFiguredBassUpLinkToPart) { // JMI ???
     ss <<
       ":" <<
-      wholeNotespitchAndOctaveAsString (
+      wholeNotesPitchAndOctaveAsString (
         fInputStartLineNumber,
         fFiguredBassSoundingWholeNotes);
   }
@@ -876,7 +876,7 @@ std::string msrFiguredBass::asString () const
 
   // print the figured bass voice position
 //   ss <<
-//     ", voicePosition: " << fVoicePosition;
+//     ", voicePosition: " << fMeasureElementVoicePosition;
 
   ss <<
     ", line " << fInputStartLineNumber <<
@@ -892,14 +892,14 @@ std::string msrFiguredBass::asString () const
 //   ss <<
 //     "[FiguredBass" <<
 //     ", " << std::hex << std::showbase << this << std::dec <<
-//     ", fMeasurePosition: " <<
-//     fMeasurePosition.asString () <<
-//     ", fSoundingWholeNotes: " <<
-//     wholeNotespitchAndOctaveAsString (
+//     ", fMeasureElementMeasurePosition: " <<
+//     fMeasureElementMeasurePosition.asString () <<
+//     ", fMeasureElementSoundingWholeNotes: " <<
+//     wholeNotesPitchAndOctaveAsString (
 //       fInputStartLineNumber,
-//       fSoundingWholeNotes) <<
+//       fMeasureElementSoundingWholeNotes) <<
 //     ", fFiguredBassDisplayWholeNotes: " <<
-//     wholeNotespitchAndOctaveAsString (
+//     wholeNotesPitchAndOctaveAsString (
 //       fInputStartLineNumber,
 //       fFiguredBassDisplayWholeNotes);
 //
@@ -957,13 +957,13 @@ std::string msrFiguredBass::asString () const
 //
 //   // print the figured bass measure position
 //   ss <<
-//     ", measurePosition: " << fMeasurePosition;
+//     ", measurePosition: " << fMeasureElementMeasurePosition;
 //
 // /* JMI
 //   if (fFiguredBassUpLinkToPart) { // JMI ???
 //     ss <<
 //       ":" <<
-//       wholeNotespitchAndOctaveAsString (
+//       wholeNotesPitchAndOctaveAsString (
 //         fInputStartLineNumber,
 //         fFiguredBassSoundingWholeNotes);
 //   }
@@ -971,7 +971,7 @@ std::string msrFiguredBass::asString () const
 //
 //   // print the figured bass voice position
 // //   ss <<
-// //     ", voicePosition: " << fVoicePosition;
+// //     ", voicePosition: " << fMeasureElementVoicePosition;
 //
 //   ss <<
 //     ", line " << fInputStartLineNumber <<
@@ -993,13 +993,13 @@ void msrFiguredBass::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " <<
-    fMeasurePosition.asString () <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1071,13 +1071,13 @@ void msrFiguredBass::print (std::ostream& os) const
   // print the figured bass measure position
   os <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " << fMeasurePosition.asString () <<
+    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition.asString () <<
     std::endl;
 
 //   // print the figured bass voice position
 //   os <<
 //     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " << fVoicePosition <<
+//     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<
 //     std::endl;
 
   --gIndenter;

@@ -169,7 +169,7 @@ msrNote::msrNote (
   fNoteDisplayWholeNotes  = noteDisplayWholeNotes;
 
   // only now, to be able to display the note as a string
-  doSetSoundingWholeNotes (
+  setMeasureElementSoundingWholeNotes (
     noteSoundingWholeNotes,
     "msrNote::msrNote()");
 
@@ -242,8 +242,8 @@ void msrNote::initializeNote ()
     ss <<
       std::left <<
         std::setw (fieldWidth) <<
-        "fSoundingWholeNotes" << ": " <<
-        fSoundingWholeNotes.asFractionString () <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
+        fMeasureElementSoundingWholeNotes.asFractionString () <<
         std::endl <<
       std::left <<
         std::setw (fieldWidth) <<
@@ -751,7 +751,7 @@ S_msrNote msrNote::createNoteNewbornClone (
         fNoteQuarterTonesPitchKind,
         fNoteOctaveKind,
 
-        fSoundingWholeNotes,
+        fMeasureElementSoundingWholeNotes,
         fNoteDisplayWholeNotes,
 
         fNoteDotsNumber,
@@ -963,7 +963,7 @@ S_msrNote msrNote::createNoteDeepClone (
         fNoteQuarterTonesPitchKind,
         fNoteOctaveKind,
 
-        fSoundingWholeNotes,
+        fMeasureElementSoundingWholeNotes,
         fNoteDisplayWholeNotes,
 
         fNoteDotsNumber,
@@ -1370,11 +1370,11 @@ S_msrNote msrNote::createNoteDeepClone (
     fNoteUpLinkToMeasure->getMeasureNumber () =
       fNoteUpLinkToMeasure->getMeasureNumber ();
   deepClone->
-    fMeasurePosition =
-      fMeasurePosition;
+    fMeasureElementMeasurePosition =
+      fMeasureElementMeasurePosition;
   deepClone->
-    fVoicePosition =
-      fVoicePosition;
+    fMeasureElementVoicePosition =
+      fMeasureElementVoicePosition;
 
   // note redundant information (for speed)
   // ------------------------------------------------------
@@ -2362,7 +2362,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 }
 
 //________________________________________________________________________
-void msrNote::setMeasurePosition (
+void msrNote::setMeasureElementMeasurePosition (
   const S_msrMeasure& measure,
   const msrWholeNotes&     measurePosition,
   const std::string&  context)
@@ -2381,7 +2381,7 @@ void msrNote::setMeasurePosition (
       " to " <<
       measurePosition.asString () <<
       " (was '" <<
-      fMeasurePosition.asString () <<
+      fMeasureElementMeasurePosition.asString () <<
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
@@ -2405,7 +2405,7 @@ void msrNote::setMeasurePosition (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // handle the chord itself
-  msrMeasureElement::setMeasurePosition (
+  msrMeasureElement::setMeasureElementMeasurePosition (
     measure,
     measurePosition,
     context);
@@ -2440,10 +2440,10 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 //     for (S_msrHarmony harmony : fNoteHarmoniesList) {
 //       // set the harmony measure position, taking it's offset into account
 //       harmony->
-//         setMeasurePosition (
+//         setMeasureElementMeasurePosition (
 //           measure,
 //           measurePosition,
-//           "msrNote::setMeasurePosition()");
+//           "msrNote::setMeasureElementMeasurePosition()");
 //     } // for
 //   }
 
@@ -2467,10 +2467,10 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 //     for (S_msrFiguredBass figuredBass : fNoteFiguredBassesList) {
 //       // set the figured bass element measure position
 //       figuredBass->
-//         setMeasurePosition (
+//         setMeasureElementMeasurePosition (
 //           measure,
 //           measurePosition,
-//           "msrNote::setMeasurePosition()");
+//           "msrNote::setMeasureElementMeasurePosition()");
 //     } // for
 //   }
 
@@ -2482,7 +2482,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 //         setDalSegnoMeasurePosition (
 //           measure,
 //           measurePosition,
-//           "msrNote::setMeasurePosition()");
+//           "msrNote::setMeasureElementMeasurePosition()");
 //     } // for
 //   }
 }
@@ -2617,7 +2617,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
 #endif // MF_TRACE_IS_ENABLED
 
   // the display whole notes are known, compute the sounding ones
-  doSetSoundingWholeNotes (
+  setMeasureElementSoundingWholeNotes (
     fNoteDisplayWholeNotes
       *
     normalNotes
@@ -3330,7 +3330,7 @@ void msrNote::appendScordaturaToNote (
 }
 
 // this 'override' NOT NEEXDED??? JMI v0.9.66
-// void msrNote::setVoicePosition (
+// void msrNote::setMeasureElementVoicePosition (
 //   msrWholeNotes&     voicePosition,
 //   const std::string& context)
 // {
@@ -3377,11 +3377,11 @@ void msrNote::appendScordaturaToNote (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   fVoicePosition = voicePosition;
+//   fMeasureElementVoicePosition = voicePosition;
 //
 //   // account for it in voicePosition
 //   voicePosition +=
-//     fSoundingWholeNotes;
+//     fMeasureElementSoundingWholeNotes;
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMeasurePositions ()) {
@@ -3408,9 +3408,9 @@ bool msrNote::compareNotesByIncreasingMeasurePosition (
 {
   return
     bool (
-      first->fMeasurePosition
+      first->fMeasureElementMeasurePosition
         <
-      second->fMeasurePosition
+      second->fMeasureElementMeasurePosition
     );
 }
 
@@ -3519,8 +3519,8 @@ void msrNote::appendHarmonyToNote (
   // change the harmony whole notes if it belongs to a tuplet ??? utf8.xml JMI v0.9.66
   // JMI v0.9.67 NOT if there are several harmonies with offsets on the same note -- HARMFUL!
 //   harmony->
-//     setSoundingWholeNotes (
-//       fSoundingWholeNotes,
+//     setMeasureElementSoundingWholeNotes (
+//       fMeasureElementSoundingWholeNotes,
 //       "appendHarmonyToNote()");
 
   fNoteHarmoniesList.push_back (harmony);
@@ -3555,8 +3555,8 @@ void msrNote::appendHarmonyToNote (
 //   // change the figured bass whole notes if it belongs to a tuplet ??? utf8.xml JMI v0.9.66
 //   // JMI v0.9.67 NOT if there are several figured basses with offsets on the same note -- HARMFUL!
 //   figuredBass->
-//     setSoundingWholeNotes (
-//       fSoundingWholeNotes,
+//     setMeasureElementSoundingWholeNotes (
+//       fMeasureElementSoundingWholeNotes,
 //       "appendFiguredBassToNote()");
 //
 //   fNoteFiguredBassesList.push_back (figuredBass);
@@ -4170,13 +4170,13 @@ std::string msrNote::noteSoundingWholeNotesPitchAndOctaveAsString () const
 {
   std::string result;
 
-  if (fSoundingWholeNotes.getNumerator () == 0)
+  if (fMeasureElementSoundingWholeNotes.getNumerator () == 0)
     result = "[0 WHOLE NOTES]";
   else
     result =
-      wholeNotespitchAndOctaveAsString (
+      wholeNotesPitchAndOctaveAsString (
         fInputStartLineNumber,
-        fSoundingWholeNotes);
+        fMeasureElementSoundingWholeNotes);
 
   return result;
 }
@@ -4190,7 +4190,7 @@ std::string msrNote::noteDisplayWholeNotesPitchAndOctaveAsString () const
   }
   else {
     result =
-      wholeNotespitchAndOctaveAsString (
+      wholeNotesPitchAndOctaveAsString (
         fInputStartLineNumber,
         fNoteDisplayWholeNotes);
   }
@@ -4212,9 +4212,9 @@ std::string msrNote::noteGraphicNotesDurationAsMusicXMLString () const
 //   int actualNotes, int normalNotes) const
 // {
 //   return
-//     wholeNotespitchAndOctaveAsString (
+//     wholeNotesPitchAndOctaveAsString (
 //       fInputStartLineNumber,
-//       fSoundingWholeNotes
+//       fMeasureElementSoundingWholeNotes
 //         *
 //       mfRational (actualNotes, normalNotes));
 // }
@@ -4550,81 +4550,73 @@ std::string msrNote::asShortString () const
         ss <<
           'R' <<
           /* JMI
-          multiMeasureRestsWholeNotespitchAndOctaveAsString (
+          multiMeasureRestsWholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
-            fSoundingWholeNotes);
+            fMeasureElementSoundingWholeNotes);
             */
           noteCoreAndComplementAsString ();
       }
       else {
         ss <<
-      	noteCoreAsString () <<
-          'r' << " %{ FOO !fNoteOccupiesAFullMeasure %} " <<
+      		noteCoreAsString () <<
+          'r' << " %{ FOO !fNoteOccupiesAFullMeasure %} " << // JMI v0.9.70
           noteCoreAndComplementAsString ();
       }
 			ss << ", ";
 
-      ss <<
-        noteCoreAndComplementAsString ();
+//       ss <<
+//         noteCoreAndComplementAsString ();
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
       ss <<
-				noteCoreAsString ();
+        noteCoreAndComplementAsString ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString ();
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString ();
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString () <<
         ", fNoteTupletFactor: " << fNoteTupletFactor.asShortString ();
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString ();
 /* JMI
         noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
+          tupletSoundingWholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
-            fSoundingWholeNotes,
+            fMeasureElementSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
@@ -4632,19 +4624,17 @@ std::string msrNote::asShortString () const
 
     case msrNoteKind::kNoteRestInTuplet:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString ();
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       ss <<
-      	noteCoreAsString () <<
         noteCoreAndComplementAsString () <<
 /* JMI
         noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
+          tupletSoundingWholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
-            fSoundingWholeNotes,
+            fMeasureElementSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
@@ -4653,12 +4643,12 @@ std::string msrNote::asShortString () const
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       ss <<
-      	noteCoreAsString () <<
+        noteCoreAndComplementAsString () <<
 /* JMI
         noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
+          tupletSoundingWholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
-            fSoundingWholeNotes,
+            fMeasureElementSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
             */
@@ -4670,18 +4660,18 @@ std::string msrNote::asShortString () const
   ss << std::left <<
     ", measurePosition: ";
     / * JMI
-  if (fMeasurePosition == K_MEASURE_POSITION_UNKNOWN__MEASURE_NUMBER) {
-    ss << "unknown (" << fMeasurePosition.asString () << ")";
+  if (fMeasureElementMeasurePosition == K_MEASURE_POSITION_UNKNOWN__MEASURE_NUMBER) {
+    ss << "unknown (" << fMeasureElementMeasurePosition.asString () << ")";
   }
   else {
-    ss << fMeasurePosition;
+    ss << fMeasureElementMeasurePosition;
   }
   * /
-  ss << fMeasurePosition;
+  ss << fMeasureElementMeasurePosition;
 
   ss <<
     ", voicePosition: " <<
-    fVoicePosition;
+    fMeasureElementVoicePosition;
 */
 
   if (fNoteOccupiesAFullMeasure) {
@@ -4833,9 +4823,9 @@ std::string msrNote::asHeaderLessString () const
         fNoteDisplayWholeNotes.asFractionString () <<
         /* JMI v0.9.67
         noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
+          tupletSoundingWholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
-            fSoundingWholeNotes,
+            fMeasureElementSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
@@ -4851,9 +4841,9 @@ std::string msrNote::asHeaderLessString () const
         fNoteDisplayWholeNotes.asFractionString () <<
         /* JMI
         noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
+          tupletSoundingWholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
-            fSoundingWholeNotes,
+            fMeasureElementSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
@@ -4869,9 +4859,9 @@ std::string msrNote::asHeaderLessString () const
         fNoteDisplayWholeNotes.asFractionString () <<
         /* JMI
         noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
+          tupletSoundingWholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
-            fSoundingWholeNotes,
+            fMeasureElementSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
@@ -4885,9 +4875,9 @@ std::string msrNote::asHeaderLessString () const
         fNoteDisplayWholeNotes.asFractionString () <<
         /* JMI
         noteUpLinkToPart ()->
-          tupletSoundingWholeNotespitchAndOctaveAsString (
+          tupletSoundingWholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
-            fSoundingWholeNotes,
+            fMeasureElementSoundingWholeNotes,
             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ());
             */
@@ -4938,12 +4928,12 @@ void msrNote::print (std::ostream& os) const
   // print measure position and sounding whole notes
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " <<
-    fMeasurePosition.asString () <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes.asFractionString () <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fNoteOccupiesAFullMeasure" << ": " <<
@@ -4953,8 +4943,8 @@ void msrNote::print (std::ostream& os) const
   // print position from beginning of voice
 //   os << std::left <<
 //     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " <<
-//     fVoicePosition <<
+//     "fMeasureElementVoicePosition" << ": " <<
+//     fMeasureElementVoicePosition <<
 //     std::endl;
 
   // print sounding and displayed whole notes
@@ -5008,10 +4998,10 @@ void msrNote::print (std::ostream& os) const
 
         if (fNoteShortcutUpLinkToTuplet) {
           os <<
-            wholeNotespitchAndOctaveAsString (
+            wholeNotesPitchAndOctaveAsString (
               fInputStartLineNumber,
               getNoteShortcutUpLinkToTuplet ()->
-                getSoundingWholeNotes ());
+                getMeasureElementSoundingWholeNotes ());
         }
         else {
           os <<
@@ -5796,12 +5786,12 @@ void msrNote::printFull (std::ostream& os) const
   // print measure position and sounding whole notes
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " <<
-    fMeasurePosition.asString () <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " <<
-    fSoundingWholeNotes.asFractionString () <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fNoteOccupiesAFullMeasure" << ": " <<
@@ -6020,8 +6010,8 @@ void msrNote::printFull (std::ostream& os) const
   // print position from beginning of voice
 //   os << std::left <<
 //     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " <<
-//     fVoicePosition <<
+//     "fMeasureElementVoicePosition" << ": " <<
+//     fMeasureElementVoicePosition <<
 //     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fVoiceMoment" << ": " <<
@@ -6109,8 +6099,8 @@ void msrNote::printFull (std::ostream& os) const
     case msrNoteKind::kNoteRegularInChord:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fSoundingWholeNotes" << ": " <<
-        fSoundingWholeNotes.asFractionString () <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
+        fMeasureElementSoundingWholeNotes.asFractionString () <<
         std::endl <<
         std::setw (fieldWidth) <<
         "fNoteDisplayWholeNotes" << ": " <<
@@ -6133,8 +6123,8 @@ void msrNote::printFull (std::ostream& os) const
     case msrNoteKind::kNoteUnpitchedInTuplet:
       os <<
         std::setw (fieldWidth) <<
-        "fSoundingWholeNotes" << ": " <<
-        fSoundingWholeNotes.asFractionString () <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
+        fMeasureElementSoundingWholeNotes.asFractionString () <<
         std::endl <<
         std::setw (fieldWidth) <<
         "fNoteDisplayWholeNotes" << ": " <<
@@ -6145,10 +6135,10 @@ void msrNote::printFull (std::ostream& os) const
 
         if (fNoteShortcutUpLinkToTuplet) {
           os <<
-            wholeNotespitchAndOctaveAsString (
+            wholeNotesPitchAndOctaveAsString (
               fInputStartLineNumber,
               getNoteShortcutUpLinkToTuplet ()->
-                getSoundingWholeNotes ());
+                getMeasureElementSoundingWholeNotes ());
         }
         else {
           os <<
@@ -6487,8 +6477,8 @@ void msrNote::printFull (std::ostream& os) const
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       os << std::left <<
         std::setw (fieldWidth) <<
-        "fSoundingWholeNotes" << ": " <<
-        fSoundingWholeNotes.asFractionString () <<
+        "fMeasureElementSoundingWholeNotes" << ": " <<
+        fMeasureElementSoundingWholeNotes.asFractionString () <<
         std::endl <<
         std::setw (fieldWidth) <<
         "fNoteDisplayWholeNotes" << ": " <<
@@ -6522,10 +6512,10 @@ void msrNote::printFull (std::ostream& os) const
       if (fNoteShortcutUpLinkToTuplet) {
         os <<
           "\"" <<
-          wholeNotespitchAndOctaveAsString (
+          wholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
             getNoteShortcutUpLinkToTuplet ()->
-              getSoundingWholeNotes ()) <<
+              getMeasureElementSoundingWholeNotes ()) <<
           "\"";
       }
       else {
@@ -7601,7 +7591,7 @@ std::string msrNote::asStringForVoicesFlatView () const
 
   ss <<
     "@" <<
-    fMeasurePosition.asFractionString () <<
+    fMeasureElementMeasurePosition.asFractionString () <<
     ": " <<
     noteCoreAndInputLineNumbersAsString ();
 
@@ -7614,7 +7604,7 @@ std::string msrNote::asStringForMeasuresSlices () const
 
   ss <<
     "@:" <<
-    fMeasurePosition.asFractionString () <<
+    fMeasureElementMeasurePosition.asFractionString () <<
     ' ' <<
     noteCoreAndComplementAsString ();
 
@@ -7743,9 +7733,9 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //         ss <<
 //           'R' <<
 //           / * JMI
-//           multiMeasureRestsWholeNotespitchAndOctaveAsString (
+//           multiMeasureRestsWholeNotesPitchAndOctaveAsString (
 //             fInputStartLineNumber,
-//             fSoundingWholeNotes);
+//             fMeasureElementSoundingWholeNotes);
 //             */
 //           noteCoreAsString ();
 //       }
@@ -7807,9 +7797,9 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //         soundingNoteEssentialsAsStringForMeasuresSlices ();
 // /* JMI
 //         noteUpLinkToPart ()->
-//           tupletSoundingWholeNotespitchAndOctaveAsString (
+//           tupletSoundingWholeNotesPitchAndOctaveAsString (
 //             fInputStartLineNumber,
-//             fSoundingWholeNotes,
+//             fMeasureElementSoundingWholeNotes,
 //             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
 //             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
 //             */
@@ -7825,9 +7815,9 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //         noteCoreAsString () <<
 // /* JMI
 //         noteUpLinkToPart ()->
-//           tupletSoundingWholeNotespitchAndOctaveAsString (
+//           tupletSoundingWholeNotesPitchAndOctaveAsString (
 //             fInputStartLineNumber,
-//             fSoundingWholeNotes,
+//             fMeasureElementSoundingWholeNotes,
 //             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
 //             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
 //             */
@@ -7840,9 +7830,9 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //         noteSoundingWholeNotesPitchAndOctaveAsString ();
 // /* JMI
 //         noteUpLinkToPart ()->
-//           tupletSoundingWholeNotespitchAndOctaveAsString (
+//           tupletSoundingWholeNotesPitchAndOctaveAsString (
 //             fInputStartLineNumber,
-//             fSoundingWholeNotes,
+//             fMeasureElementSoundingWholeNotes,
 //             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
 //             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
 //             */
@@ -7891,64 +7881,55 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //
 //     case msrNoteKind::kNoteSkipInMeasure:
 //       ss <<
-//         fNoteKind <<
 //         noteCoreAndComplementAsString ();
 //       break;
 //
 //     case msrNoteKind::kNoteUnpitchedInMeasure:
 //       ss <<
-//         fNoteKind <<
 //         noteCoreAndComplementAsString ();
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInMeasure:
 //       ss <<
-// 				noteCoreAsString () <<
-//         noteCoreAndComplementAsString () <<
-// 				", " <<
-// 				fNoteOctaveKind;
+//         noteCoreAndComplementAsString ();
+// 				 ", " <<
+// 				 fNoteOctaveKind;
 //       break;
 //
 //     case msrNoteKind::kNoteInDoubleTremolo:
 //       ss <<
-//         fNoteKind <<
 //         noteCoreAndComplementAsString ();
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInGraceNotesGroup:
 //       ss <<
-//         fNoteKind <<
 //         noteCoreAndComplementAsString ();
 //       break;
 //
 //     case msrNoteKind::kNoteSkipInGraceNotesGroup:
 //       ss <<
-//         fNoteKind <<
 //         noteCoreAndComplementAsString ();
 //       break;
 //
 //     case msrNoteKind::kNoteInChordInGraceNotesGroup:
 //       ss <<
-//         fNoteKind <<
-//         noteCoreAndComplementAsString () <<
+//         noteCoreAndComplementAsString ()
 //         ", fNoteTupletFactor " << fNoteTupletFactor.asString ();
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInChord:
 //       ss <<
-//         fNoteKind <<
 //         noteCoreAndComplementAsString ();
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInTuplet:
 //       ss <<
-//         fNoteKind <<
 //         noteCoreAndComplementAsString ();
 // /* JMI
 //         noteUpLinkToPart ()->
-//           tupletSoundingWholeNotespitchAndOctaveAsString (
+//           tupletSoundingWholeNotesPitchAndOctaveAsString (
 //             fInputStartLineNumber,
-//             fSoundingWholeNotes,
+//             fMeasureElementSoundingWholeNotes,
 //             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
 //             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
 //             */
@@ -7956,19 +7937,17 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //
 //     case msrNoteKind::kNoteRestInTuplet:
 //       ss <<
-//         fNoteKind <<
 //         noteCoreAndComplementAsString ();
 //       break;
 //
 //     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
 //       ss <<
-//         fNoteKind <<
 //         noteCoreAndComplementAsString ();
 // /* JMI
 //         noteUpLinkToPart ()->
-//           tupletSoundingWholeNotespitchAndOctaveAsString (
+//           tupletSoundingWholeNotesPitchAndOctaveAsString (
 //             fInputStartLineNumber,
-//             fSoundingWholeNotes,
+//             fMeasureElementSoundingWholeNotes,
 //             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
 //             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
 //             */
@@ -7983,9 +7962,9 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //         noteSoundingWholeNotesPitchAndOctaveAsString ();
 // /* JMI
 //         noteUpLinkToPart ()->
-//           tupletSoundingWholeNotespitchAndOctaveAsString (
+//           tupletSoundingWholeNotesPitchAndOctaveAsString (
 //             fInputStartLineNumber,
-//             fSoundingWholeNotes,
+//             fMeasureElementSoundingWholeNotes,
 //             fNoteShortcutUpLinkToTuplet->getTupletActualNotes (),
 //             fNoteShortcutUpLinkToTuplet->getTupletNormalNotes ())
 //             */

@@ -295,7 +295,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     virtual void          appendMeasureElementToSegmentElement (
                             const S_msrMeasureElement& elem) override
-                              { appendMeasureElementToMeasure (elem); } // JMI v0.9.66 ???
+                              {
+                                appendMeasureElementToMeasure (
+                                  elem,
+                                  "appendMeasureElementToSegmentElement()");
+                              } // JMI v0.9.66 ???
 
     // lengthes
 
@@ -323,7 +327,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  backupByWholeNotesStepLengthInMeasure (
                             int                  inputLineNumber,
-                            const msrWholeNotes& backupTargetMeasurePosition);
+                            const msrWholeNotes& backupTargetMeasureElementMeasurePosition);
 
     void                  appendPaddingSkipNoteToMeasure (
                             int                  inputLineNumber,
@@ -619,7 +623,8 @@ class EXP msrMeasure : public msrSegmentElement
     // ------------------------------------------------------
 
     void                  appendMeasureElementToMeasure (
-                            const S_msrMeasureElement& elem);
+                            const S_msrMeasureElement& elem,
+                            const std::string&         context);
 
     void                  finalizeRegularMeasure (
                             int                         inputLineNumber,

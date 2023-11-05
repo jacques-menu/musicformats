@@ -857,30 +857,61 @@ class EXP traceOahGroup : public oahGroup
     Bool                  fTraceForTests;
 
 
+    // credits
+    // --------------------------------------
+
+    Bool                  fTraceCredits;
+
+
     // scores to voices
     // --------------------------------------
 
     // books
+    // --------------------------------------
+
     Bool                  fTraceBooks;
+
+
     // scores
+    // --------------------------------------
+
     Bool                  fTraceScores;
+
+
     // part groups
+    // --------------------------------------
+
     Bool                  fTracePartGroups;
     Bool                  fTracePartGroupsDetails;
+
+
     // parts
+    // --------------------------------------
+
     Bool                  fTraceParts;
+
+
     // staves
+    // --------------------------------------
+
     Bool                  fTraceStaves;
-    // staff details
     Bool                  fTraceStavesDetails;
+
+
     // staff changes
+    // --------------------------------------
+
     Bool                  fTraceStaffChanges;
+
+
     // voices
+    // --------------------------------------
+
     Bool                  fTraceVoices;
     Bool                  fTraceVoicesDetails;
 
 
-    // print layouts
+    // MusicXML print layouts
     // --------------------------------------
 
     Bool                  fTraceMusicXMLPrintLayouts;
@@ -900,7 +931,7 @@ class EXP traceOahGroup : public oahGroup
     Bool                  fTraceMeasuresDetails;
 
     S_oahStringAtom       fTraceOnlyMeasurerNumbeOahAtom;
-    std::string           fTraceOnlyMeasureNumber;
+    std::string           fTraceOnlyMeasure;
 
     std::set<int>         fTraceDetailedMeasureNumbersSet; // JMI v0.9.67
 
@@ -928,30 +959,42 @@ class EXP traceOahGroup : public oahGroup
     Bool                  fTraceMeasuresSlicesDetails;
 
 
-    // clefs to tempos
+    // clefs
     // --------------------------------------
 
-    // clefs
     Bool                  fTraceClefs;
+
+
     // keys
+    // --------------------------------------
+
     Bool                  fTraceKeys;
     Bool                  fTraceKeysDetails;
+
+
     // time signatures
+    // --------------------------------------
+
     Bool                  fTraceTimeSignatures;
+
+
     // tempos
+    // --------------------------------------
+
     Bool                  fTraceTempos;
 
 
-    // breaks and barLines
+    // breaks
     // --------------------------------------
 
-    // line breaks
     Bool                  fTraceLineBreaks;
-    // page and line breaks
     Bool                  fTracePageBreaks;
+
+
     // bar lines
+    // --------------------------------------
+
     Bool                  fTraceBarLines;
-    // bar lines details
     Bool                  fTraceBarLinesDetails;
 
 
@@ -970,31 +1013,46 @@ class EXP traceOahGroup : public oahGroup
     // transpositions
     // --------------------------------------
 
-    // transpositions
     Bool                  fTraceTranspositions;
+
     // octave shifts
+    // --------------------------------------
+
     Bool                  fTraceOctaveShifts;
 
 
-    // repeats to slashes
+    // repeats
     // --------------------------------------
 
-    // repeats
     Bool                  fTraceRepeats;
     Bool                  fTraceRepeatsDetails;
+
+
     // measure repeats
+    // --------------------------------------
+
     Bool                  fTraceMeasureRepeats;
     Bool                  fTraceMeasureRepeatsDetails;
+
+
     // multi-measure rests
+    // --------------------------------------
+
     Bool                  fTraceMultiMeasureRests;
     Bool                  fTraceMultiMeasureRestsDetails;
+
+
     // beats repeats
+    // --------------------------------------
+
     Bool                  fTraceBeatRepeats;
+
+
     // slashes
     Bool                  fTraceSlashes;
 
 
-    // notes
+    // notes durations
     // --------------------------------------
 
     Bool                  fTraceNotesDurations;
@@ -1003,108 +1061,179 @@ class EXP traceOahGroup : public oahGroup
     // notes
     // --------------------------------------
 
-    // notes
     Bool                  fTraceNotes;
-    // notes details
     Bool                  fTraceNotesDetails;
-    // whole notes
+
+
+    // whole notes durations
+    // --------------------------------------
+
     Bool                  fTraceWholeNoteDurations;
     Bool                  fTraceWholeNoteDurationsDetails;
+
+
     // measures whole notes vectors
+    // --------------------------------------
+
     Bool                  fTraceMeasuresWholeNotesVectors;
-    // skip notes
-    Bool                  fTraceSkipNotes;
-    // rest notes
+
+
+    // rest and skip notes
+    // --------------------------------------
+
     Bool                  fTraceRestNotes;
+    Bool                  fTraceSkipNotes;
+
+
     // notes octave entry
+    // --------------------------------------
     Bool                  fTraceNotesOctaveEntry;
+
+
     // grace notes
+    // --------------------------------------
+
     Bool                  fTraceGraceNotes;
+
+
     // tremolos
+    // --------------------------------------
+
     Bool                  fTraceTremolos;
 
 
-    // note attachments
+    // stems
+    // --------------------------------------
+    Bool                  fTraceStems;
+
+
+    // beams
+    // --------------------------------------
+    Bool                  fTraceBeams;
+
+
+    // articulations
     // --------------------------------------
 
-    // stems
-    Bool                  fTraceStems;
-    // beams
-    Bool                  fTraceBeams;
-    // articulations
     Bool                  fTraceArticulations;
-    // technicals
-    Bool                  fTraceTechnicals;
-    // ornaments
-    Bool                  fTraceOrnaments;
 
+
+    // technicals
+    // --------------------------------------
+
+    Bool                  fTraceTechnicals;
+
+
+    // ornaments
+    // --------------------------------------
+
+    Bool                  fTraceOrnaments;
     Bool                  fTraceOrnamentsDetails;
+
+
     // dynamics
+    // --------------------------------------
+
     Bool                  fTraceDynamics;
 
 
     // spanners
     // --------------------------------------
 
-    // spanners
-    Bool                  fTraceSpanners; // ???
+    Bool                  fTraceSpanners;
+
+
     // cresc/decresc
+    // --------------------------------------
+
     Bool                  fTraceCrescDecrescs;
+
+
     // wedges
+    // --------------------------------------
+
     Bool                  fTraceWedges;
-    // spanners
+
+
     // slurs
+    // --------------------------------------
+
     Bool                  fTraceSlurs;
     Bool                  fTraceSlursDetails;
+
+
     // ligatures
+    // --------------------------------------
+
     Bool                  fTraceLigatures;
 
 
-    // credits to words
+    // lyrics
     // --------------------------------------
 
-    // credits
-    Bool                  fTraceCredits;
-    // lyrics
     Bool                  fTraceLyrics;
     Bool                  fTraceLyricsDetails;
+
+
     // words
+    // --------------------------------------
+
     Bool                  fTraceWords;
 
 
-    // chords and tuplets
+    // chords
     // --------------------------------------
 
-    // chords
     Bool                  fTraceChords;
     Bool                  fTraceChordsDetails;
+
+
     // tuplets
+    // --------------------------------------
 
     Bool                  fTraceTuplets;
     Bool                  fTraceTupletsDetails;
 
-//     Bool                  fDisplayTuplets;
-
-    // inter-notes
-    // --------------------------------------
 
     // ties
-    Bool                  fTraceTies;
-    // glissandos
-    Bool                  fTraceGlissandos;
-
-    // above staff
     // --------------------------------------
 
+    Bool                  fTraceTies;
+
+
+    // glissandos
+    // --------------------------------------
+
+    Bool                  fTraceGlissandos;
+
+
     // rehearsal marks
+    // --------------------------------------
+
     Bool                  fTraceRehearsalMarks;
+
+
     // segnos
+    // --------------------------------------
+
     Bool                  fTraceSegnos;
+
+
     // dal segnos
+    // --------------------------------------
+
     Bool                  fTraceDalSegnos;
+
+
     // codas
+    // --------------------------------------
+
     Bool                  fTraceCodas;
+
+
     // eyeglases
+    // --------------------------------------
+
     Bool                  fTraceEyeGlasses;
 
     // harmonies
@@ -1117,7 +1246,7 @@ class EXP traceOahGroup : public oahGroup
 
     Bool                  fTraceExtraHarmonies;
 
-    // figured bass elements
+    // figured bass
     // --------------------------------------
 
     Bool                  fTraceFiguredBasses;
@@ -1130,26 +1259,57 @@ class EXP traceOahGroup : public oahGroup
 
     // instruments
     Bool                  fTraceInstruments;
+
+
     // frames
+    // --------------------------------------
+
     Bool                  fTraceFrames;
+
+
     // scordaturas
+    // --------------------------------------
+
     Bool                  fTraceScordaturas;
+
+
     // slides
+    // --------------------------------------
+
     Bool                  fTraceSlides;
+
+
     // pedals
+    // --------------------------------------
+
     Bool                  fTracePedals;
+
+
     // accordion registrations
+    // --------------------------------------
+
     Bool                  fTraceAccordionRegistrations;
+
+
     // harp pedals
+    // --------------------------------------
+
     Bool                  fTraceHarpPedals;
-    // harp pedals tuning
     Bool                  fTraceHarpPedalsTunings;
+
+
     // damps
+    // --------------------------------------
+
     Bool                  fTraceDamps;
-    // dampalls
     Bool                  fTraceDampAlls;
+
+
     // midi
+    // --------------------------------------
+
     Bool                  fTraceMidi;
+
 
 /* JMI
     // msrStreams

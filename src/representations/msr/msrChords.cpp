@@ -151,7 +151,7 @@ msrChord::msrChord (
 
   fChordUpLinkToMeasure = upLinkToMeasure;
 
-  doSetSoundingWholeNotes (
+  setMeasureElementSoundingWholeNotes (
     chordSoundingWholeNotes,
     "msrChord::msrChord()");
 
@@ -197,7 +197,7 @@ S_msrChord msrChord::createChordNewbornClone (
       msrChord::create (
         fInputStartLineNumber,
         gNullMeasure, // set later in setChordUpLinkToMeasure()
-        fSoundingWholeNotes,
+        fMeasureElementSoundingWholeNotes,
         fChordDisplayWholeNotes,
         fChordGraphicNotesDurationKind);
 
@@ -233,7 +233,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       " to " <<
 //       measurePosition.asString () <<
 //       " (was " <<
-//       fMeasurePosition.asString () <<
+//       fMeasureElementMeasurePosition.asString () <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -254,7 +254,7 @@ S_msrChord msrChord::createChordNewbornClone (
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set chord's measure position
-//   fMeasurePosition = measurePosition;
+//   fMeasureElementMeasurePosition = measurePosition;
 // }
 
 // uplink to measure
@@ -485,7 +485,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
     chordChordGraceNotesGroupLinkAfter;
 }
 
-void msrChord::setMeasurePosition (
+void msrChord::setMeasureElementMeasurePosition (
   const S_msrMeasure& measure,
   const msrWholeNotes&     measurePosition,
   const std::string&  context)
@@ -504,7 +504,7 @@ void msrChord::setMeasurePosition (
       " to " <<
       measurePosition.asString () <<
       " (was '" <<
-      fMeasurePosition.asString () <<
+      fMeasureElementMeasurePosition.asString () <<
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
@@ -520,7 +520,7 @@ void msrChord::setMeasurePosition (
 #endif // MF_TRACE_IS_ENABLED
 
   // handle the chord itself
-  msrMeasureElement::setMeasurePosition (
+  msrMeasureElement::setMeasureElementMeasurePosition (
     measure,
     measurePosition,
     context);
@@ -563,14 +563,14 @@ void msrChord::setChordMembersMeasurePosition (
 
     // set note's measure position // JMI v0.9.66
     note->
-      setMeasurePosition (
+      setMeasureElementMeasurePosition (
         measure,
         measurePosition, // they all share the same one
         "setChordMembersMeasurePosition()");
 
 //    // set note's voice position JMI v0.9.66
 //       note->
-//         setVoicePosition (
+//         setMeasureElementVoicePosition (
 //           voicePosition,
 //           context); // they all share the same one
   } // for
@@ -1155,7 +1155,7 @@ void msrChord::appendBeamToChord (const S_msrBeam& beam)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fChordBeams.push_back (beam);
+  fChordBeamsList.push_back (beam);
 }
 */
 
@@ -1167,8 +1167,8 @@ void msrChord::appendChordBeamLinkToChord (
     std::stringstream ss;
 
     ss <<
-      "Adding beam link '" << chordBeamLink->asString() <<
-      "' to chord '" << asString () << "'";
+      "Adding beam link " << chordBeamLink->asString() <<
+      " to chord " << asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1191,9 +1191,9 @@ void msrChord::finalizeChord (
       asString () <<
       "', line " << inputLineNumber <<
       std::endl <<
-      "fMeasurePosition: " <<
+      "fMeasureElementMeasurePosition: " <<
       std::endl <<
-      fMeasurePosition.asString ();
+      fMeasureElementMeasurePosition.asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1205,7 +1205,7 @@ void msrChord::finalizeChord (
   if (false) // JMI v0.9.67 MERDUM
   setChordMembersMeasurePosition (
     fChordUpLinkToMeasure,
-    fMeasurePosition);
+    fMeasureElementMeasurePosition);
 }
 
 void msrChord::acceptIn (basevisitor* v)
@@ -1347,8 +1347,8 @@ void msrChord::browseData (basevisitor* v)
 
 /* JMI
   for (
-    std::list<S_msrBeam>::const_iterator i = fChordBeams.begin ();
-    i != fChordBeams.end ();
+    std::list<S_msrBeam>::const_iterator i = fChordBeamsList.begin ();
+    i != fChordBeamsList.end ();
     ++i
   ) {
     // browse chord beams
@@ -1671,11 +1671,11 @@ std::string msrChord::asString () const
       ss <<
         note->notePitchAsString () <<
         " sounding: " <<
-        note->getSoundingWholeNotes () <<
+        note->getMeasureElementSoundingWholeNotes ().asFractionString () <<
         ", display: " <<
-        note->getNoteDisplayWholeNotes () <<
+        note->getNoteDisplayWholeNotes ().asFractionString () <<
         ", octave: " <<
-        msrOctaveKindAsString (note->getNoteOctaveKind ()) <<
+        note->getNoteOctaveKind () <<
         ']';
 
       if (++i == iEnd) break;
@@ -1710,11 +1710,11 @@ std::string msrChord::asShortString () const
       ss <<
         note->notePitchAsString () <<
         " sounding: " <<
-        note->getSoundingWholeNotes () <<
+        note->getMeasureElementSoundingWholeNotes ().asFractionString () <<
         ", display: " <<
-        note->getNoteDisplayWholeNotes () <<
+        note->getNoteDisplayWholeNotes ().asFractionString () <<
         ", octave: " <<
-        msrOctaveKindAsString (note->getNoteOctaveKind ());
+        note->getNoteOctaveKind ();
 
       if (++i == iEnd) break;
       ss << ", ";
@@ -1750,7 +1750,7 @@ void msrChord::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
  // JMI   "chordSoundingWholeNotes" << ": " << fChordSoundingWholeNotes <<
-    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes <<
+    "fMeasureElementSoundingWholeNotes" << ": " << fMeasureElementSoundingWholeNotes <<
 //     std::endl <<
     std::setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
@@ -1770,10 +1770,10 @@ void msrChord::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " << fMeasurePosition.asString () <<
+    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition.asString () <<
     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " << fVoicePosition <<
+//     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<
 //     std::endl <<
     std::setw (fieldWidth) <<
     "chordMeasureFullLength" << ": " << chordMeasureFullLength <<
@@ -2006,59 +2006,55 @@ void msrChord::print (std::ostream& os) const
       std::endl;
     }
   }
+*/
 
   // print the stems if any
   size_t chordStemsListSize = fChordStemsList.size ();
 
+  os <<
+    std::setw (fieldWidth) <<
+    "fChordStemsList";
   if (chordStemsListSize) {
-    os <<
-      std::setw (fieldWidth) <<
-      "fChordStemsList";
-    if (chordStemsListSize) {
-      os << std::endl;
-      ++gIndenter;
+    os << std::endl;
+    ++gIndenter;
 
-      std::list<S_msrStem>::const_iterator i;
-      for (i = fChordStemsList.begin (); i != fChordStemsList.end (); ++i) {
-        os << (*i);
-      } // for
+    std::list<S_msrStem>::const_iterator i;
+    for (i = fChordStemsList.begin (); i != fChordStemsList.end (); ++i) {
+      os << (*i);
+    } // for
 
-      --gIndenter;
-    }
-    else {
-      os <<
-        ": " << "[NONE]" <<
-      std::endl;
-    }
+    --gIndenter;
   }
-*/
-
-/*
-  // print the beams if any
-  size_t chordBeamsSize = fChordBeams.size ();
-
-  if (chordBeamsSize) {
+  else {
     os <<
-      std::setw (fieldWidth) <<
-      "fChordBeams";
-    if (chordBeamsSize) {
-      os << std::endl;
-      ++gIndenter;
-
-      std::list<S_msrBeam>::const_iterator i;
-      for (i = fChordBeams.begin (); i != fChordBeams.end (); ++i) {
-        os << (*i);
-      } // for
-
-      --gIndenter;
-    }
-    else {
-      os <<
-        ": " << "[NONE]" <<
-      std::endl;
-    }
+      ": " << "[NONE]" <<
+    std::endl;
   }
-*/
+
+//   // print the beams if any
+//   size_t chordBeamsListSize = fChordBeamsList.size ();
+//
+//   if (chordBeamsListSize) {
+//     os <<
+//       std::setw (fieldWidth) <<
+//       "fChordBeamsList";
+//     if (chordBeamsListSize) {
+//       os << std::endl;
+//       ++gIndenter;
+//
+//       std::list<S_msrBeam>::const_iterator i;
+//       for (i = fChordBeamsList.begin (); i != fChordBeamsList.end (); ++i) {
+//         os << (*i);
+//       } // for
+//
+//       --gIndenter;
+//     }
+//     else {
+//       os <<
+//         ": " << "[NONE]" <<
+//       std::endl;
+//     }
+//   }
 
 #ifdef MF_TRACE_IS_ENABLED
   // print the beam links if any
@@ -2432,7 +2428,9 @@ void msrChord::print (std::ostream& os) const
         i      = iBegin;
 
       for ( ; ; ) {
-        os << (*i);
+        S_msrNote note = (*i);
+
+        note->print (os);
         if (++i == iEnd) break;
         os << std::endl;
       } // for
@@ -2528,9 +2526,9 @@ void msrChord::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasurePosition" << ": " << fMeasurePosition.asString () <<
+    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition.asString () <<
     std::setw (fieldWidth) <<
-    "fSoundingWholeNotes" << ": " << fSoundingWholeNotes <<
+    "fMeasureElementSoundingWholeNotes" << ": " << fMeasureElementSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
@@ -2540,7 +2538,7 @@ void msrChord::printFull (std::ostream& os) const
     fChordUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "fVoicePosition" << ": " << fVoicePosition <<
+//     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<
 //     std::endl <<
     std::setw (fieldWidth) <<
     "chordMeasureFullLength" << ": " << chordMeasureFullLength <<
@@ -2799,18 +2797,17 @@ void msrChord::printFull (std::ostream& os) const
     std::endl;
   }
 
-// // JMI
 //   // print the beams if any
-//   size_t chordBeamsSize = fChordBeams.size ();
+//   size_t chordBeamsListSize = fChordBeamsList.size ();
 //
 //   os <<
 //     std::setw (fieldWidth) <<
-//     "fChordBeams";
-//   if (chordBeamsSize) {
+//     "fChordBeamsList";
+//   if (chordBeamsListSize) {
 //     os << std::endl;
 //     ++gIndenter;
 //
-//     for (S_msrBeam beam : fChordBeams) {
+//     for (S_msrBeam beam : fChordBeamsList) {
 //       beam->printFull (os);
 //     } // for
 //
@@ -2821,7 +2818,6 @@ void msrChord::printFull (std::ostream& os) const
 //       ": " << "[NONE]" <<
 //     std::endl;
 //   }
-// /**/
 
 // #ifdef MF_TRACE_IS_ENABLED
   // print the beam links if any
@@ -3117,7 +3113,9 @@ void msrChord::printFull (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      (*i)->printFull (os);
+      S_msrNote note = (*i);
+
+      note->printFull (os);
       if (++i == iEnd) break;
       os << std::endl;
     } // for
@@ -3389,9 +3387,9 @@ std::string msrChordBeamLink::asShortString () const
 
   ss <<
     "[ChordBeamLink" <<
-    ", fOriginalBeam \"" <<
+    ", fOriginalBeam: " <<
     fOriginalBeam->asShortString () <<
-    ", fUpLinkToChord \"" <<
+    ", fUpLinkToChord:" <<
     fUpLinkToChord->asShortString () <<
     ", line " << fInputStartLineNumber <<
     ']';
@@ -3405,10 +3403,10 @@ std::string msrChordBeamLink::asString () const
 
   ss <<
     "[ChordBeamLink" <<
-    ", fOriginalBeam \"" <<
+    ", fOriginalBeam: " <<
     fOriginalBeam->asString () <<
-    ", fUpLinkToChord \"" <<
-    fUpLinkToChord <<
+    ", fUpLinkToChord: " <<
+    fUpLinkToChord->asString () <<
     ", line " << fInputStartLineNumber <<
     ']';
 
@@ -3432,9 +3430,10 @@ void msrChordBeamLink::printFull (std::ostream& os) const
     std::endl;
 
   ++gIndenter;
+  fOriginalBeam->printFull(os);
   os <<
-    fOriginalBeam; // <<
-    fUpLinkToChord->asString ();
+    fUpLinkToChord->asString () <<
+    std::endl;
   --gIndenter;
 
   --gIndenter;
@@ -3455,11 +3454,11 @@ void msrChordBeamLink::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "originalBfOriginalBeameam:" <<
+    "fOriginalBeam:" <<
     std::endl;
 
   ++gIndenter;
-  os << fOriginalBeam;
+  fOriginalBeam->print (os);
   os <<
     fUpLinkToChord->asShortString () <<
     std::endl;

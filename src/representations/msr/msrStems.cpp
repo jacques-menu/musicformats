@@ -27,6 +27,39 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+std::string msrStemKindAsString (
+  msrStemKind stemKind)
+{
+  std::string result;
+
+  switch (stemKind) {
+    case msrStemKind::kStemKind_NONE:
+      result = "kStemKind_NONE";
+      break;
+    case msrStemKind::kStemKindNeutral:
+      result = "kStemKindNeutral";
+      break;
+    case msrStemKind::kStemKindUp:
+      result = "kStemKindUp";
+      break;
+    case msrStemKind::kStemKindDown:
+      result = "kStemKindDown";
+      break;
+    case msrStemKind::kStemKindDouble:
+      result = "kStemKindDouble";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrStemKind& elt)
+{
+  os << msrStemKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrStem msrStem::create (
   int         inputLineNumber,
   msrStemKind stemKind)
@@ -124,32 +157,6 @@ void msrStem::acceptOut (basevisitor* v)
 void msrStem::browseData (basevisitor* v)
 {}
 
-std::string msrStemKindAsString (
-  msrStemKind stemKind)
-{
-  std::string result;
-
-  switch (stemKind) {
-    case msrStemKind::kStemKind_NONE:
-      result = "kStemKind_NONE";
-      break;
-    case msrStemKind::kStemKindNeutral:
-      result = "kStemKindNeutral";
-      break;
-    case msrStemKind::kStemKindUp:
-      result = "kStemKindUp";
-      break;
-    case msrStemKind::kStemKindDown:
-      result = "kStemKindDown";
-      break;
-    case msrStemKind::kStemKindDouble:
-      result = "kStemKindDouble";
-      break;
-  } // switch
-
-  return result;
-}
-
 std::string msrStem::asString () const
 {
   std::stringstream ss;
@@ -157,7 +164,7 @@ std::string msrStem::asString () const
   ss <<
     "[Stem" <<
     ", fStemKind: " <<
-    msrStemKindAsString (fStemKind) <<
+    fStemKind <<
     ", line " << fInputStartLineNumber <<
     ']';
 

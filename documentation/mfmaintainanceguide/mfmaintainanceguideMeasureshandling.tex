@@ -123,7 +123,7 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
 		std::stringstream ss;
 
     ss <<
-      "Appending element " <<
+      "Appending measure element " <<
       elem->asShortString () <<
       " to measure " <<
       asShortString () <<
@@ -147,7 +147,7 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
 
   // set elem's measure position
   elem->
-    setMeasurePosition (
+    setMeasureElementMeasurePosition (
       this,
       fCurrentMeasureCurrentAccumulatedWholeNotesDuration,
       "appendElementToMeasure()");
@@ -159,7 +159,7 @@ if (false) // JMI v0.9.67
   incrementCurrentMeasureCurrentAccumulatedWholeNotesDuration (
     inputLineNumber,
     elem->
-      getSoundingWholeNotes ());
+      getMeasureElementSoundingWholeNotes ());
 }
 \end{lstlisting}
 
@@ -207,7 +207,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
   mfRational
     harmonySoundingWholeNotes =
       harmony->
-        getSoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
   incrementCurrentMeasureCurrentAccumulatedWholeNotesDuration (
@@ -257,7 +257,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
   mfRational
     harmonySoundingWholeNotes =
       harmony->
-        getSoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
   incrementCurrentMeasureCurrentAccumulatedWholeNotesDuration (

@@ -1163,7 +1163,7 @@ msrWholeNotes msrWholeNotes::operator - (const msrWholeNotes &wholeNotes) const
   msrWholeNotes
     result (
       fNumerator * wholeNotes.fDenominator - wholeNotes.fNumerator * fDenominator,
-       fDenominator * wholeNotes.fDenominator);
+      fDenominator * wholeNotes.fDenominator);
 
   result.rationalise ();
 
@@ -1306,7 +1306,7 @@ Bool msrWholeNotes::operator < (const msrWholeNotes &wholeNotes) const
 
 Bool msrWholeNotes::operator == (const msrWholeNotes &wholeNotes) const
 {
-  // a/b < c/d if and only if a * d < b * c.
+  // a/b == c/d if and only if a * d == b * c.
   return
     ((fNumerator * wholeNotes.fDenominator) == (fDenominator * wholeNotes.fNumerator));
 }
@@ -1881,7 +1881,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
   return result;
 }
 
-std::string wholeNotespitchAndOctaveAsString (
+std::string wholeNotesPitchAndOctaveAsString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
@@ -1894,7 +1894,7 @@ std::string wholeNotespitchAndOctaveAsString (
       dotsNumber);
 }
 
-std::string multiMeasureRestsWholeNotespitchAndOctaveAsString (
+std::string multiMeasureRestsWholeNotesPitchAndOctaveAsString (
   int                  inputLineNumber, // JMI
   const msrWholeNotes& wholeNotes)
 {
@@ -1910,7 +1910,7 @@ std::string multiMeasureRestsWholeNotespitchAndOctaveAsString (
     wholeNotes.getNumerator ();
 
   ss <<
-    wholeNotespitchAndOctaveAsString ( // JMI ??? v0.9.66
+    wholeNotesPitchAndOctaveAsString ( // JMI ??? v0.9.66
       inputLineNumber,
       wholeNotesUnit);
 

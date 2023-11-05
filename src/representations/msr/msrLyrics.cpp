@@ -734,7 +734,7 @@ void msrSyllable::acceptOut (basevisitor* v)
 void msrSyllable::browseData (basevisitor* v)
 {}
 
-std::string msrSyllable::syllableWholeNotespitchAndOctaveAsString () const
+std::string msrSyllable::syllableWholeNotesPitchAndOctaveAsString () const
 {
   std::string result;
 
@@ -750,7 +750,7 @@ std::string msrSyllable::syllableWholeNotespitchAndOctaveAsString () const
       case msrNoteKind::kNoteInChordInGraceNotesGroup:
       case msrNoteKind::kNoteRegularInChord:
         result =
-          wholeNotespitchAndOctaveAsString (
+          wholeNotesPitchAndOctaveAsString (
             fInputStartLineNumber,
             fSyllableWholeNotes);
         break;
@@ -780,7 +780,7 @@ std::string msrSyllable::syllableWholeNotespitchAndOctaveAsString () const
 
   else {
     result =
-      wholeNotespitchAndOctaveAsString (
+      wholeNotesPitchAndOctaveAsString (
         fInputStartLineNumber,
         fSyllableWholeNotes);
   }

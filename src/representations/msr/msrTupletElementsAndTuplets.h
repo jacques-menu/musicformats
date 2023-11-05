@@ -159,7 +159,7 @@ class EXP msrTuplet : public msrTupletElement
 
     // measure positions
     // this override calls setTupletMembersMeasurePositions()
-    void                  setMeasurePosition (
+    void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure& measure,
                             const msrWholeNotes&     measurePosition,
                             const std::string&  context) override;
@@ -234,7 +234,7 @@ class EXP msrTuplet : public msrTupletElement
 
  // JMI   void                  applyDisplayFactorToTupletMembers ();
 
-    void                  unapplySoundingFactorToTupletMembers (
+    void                  unapplySoundingFactorToTupletMembers ( // JMI v0.9.70 ???
                             const msrTupletFactor& containingTupletFactor);
 
     // finalization

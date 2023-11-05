@@ -107,10 +107,10 @@ This may be useful when debugging EXECUTABLE.)",
   S_oahBooleanAtom
     traceForTestsOahBooleanAtom =
       oahBooleanAtom::create (
-        "maintainance", "maint",
-R"(Write trace information for use by the developpers/maintainers of MusicFormats to standard error.)",
-        "fMaintainance",
-        fMaintainance);
+        "maintainance-run", "maint",
+R"(Write information for use by the developpers/maintainers of MusicFormats to standard error.)",
+        "fMaintainanceRun",
+        fMaintainanceRun);
 
   traceForTestsOahBooleanAtom->
     setElementVisibilityKind (

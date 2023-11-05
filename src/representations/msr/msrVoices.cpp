@@ -2405,7 +2405,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
   msrWholeNotes
     noteSoundingWholeNotes =
       note->
-        getSoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
       /* JMI
   msrWholeNotes
@@ -2471,7 +2471,7 @@ void msrVoice::registerNoteAsVoiceLastAppendedNote (const S_msrNote& note)
   msrWholeNotes
     noteSoundingWholeNotes =
       note->
-        getSoundingWholeNotes (),
+        getMeasureElementSoundingWholeNotes (),
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes (); // JMI
@@ -2850,7 +2850,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
 void msrVoice::backupByWholeNotesStepLengthInVoice (
   int             inputLineNumber,
-  const msrWholeNotes& backupTargetMeasurePosition)
+  const msrWholeNotes& backupTargetMeasureElementMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
@@ -2858,7 +2858,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
 
     ss <<
       "Backup by a '" <<
-      backupTargetMeasurePosition.asString () <<
+      backupTargetMeasureElementMeasurePosition.asString () <<
       "' whole notes step length in voice \"" <<
       fVoiceName <<
       "\", line " << inputLineNumber;
@@ -2883,7 +2883,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   fVoiceLastSegment->
     backupByWholeNotesStepLengthInSegment (
       inputLineNumber,
-      backupTargetMeasurePosition);
+      backupTargetMeasureElementMeasurePosition);
 
   --gIndenter;
 }
@@ -3241,7 +3241,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   part->
     incrementPartCurrentDrawingMeasurePosition (
       inputLineNumber,
-      note->getSoundingWholeNotes ());
+      note->getMeasureElementSoundingWholeNotes ());
 
   // register whether music (i.e. not just skips)
   // has been inserted into the voice
@@ -3449,7 +3449,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
     getStaffUpLinkToPart ()->
       incrementPartCurrentDrawingMeasurePosition (
         chord->getInputStartLineNumber (),
-        chord->getSoundingWholeNotes ());
+        chord->getMeasureElementSoundingWholeNotes ());
 
   // get the chord's notes vector
   const std::vector<S_msrNote>&
@@ -3520,7 +3520,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
     getStaffUpLinkToPart ()->
       incrementPartCurrentDrawingMeasurePosition (
         tuplet->getInputStartLineNumber (),
-        tuplet->getSoundingWholeNotes ());
+        tuplet->getMeasureElementSoundingWholeNotes ());
 
   --gIndenter;
 
@@ -10482,7 +10482,7 @@ void msrVoice::removeNoteFromVoice (
       decrementPartCurrentDrawingMeasurePosition (
         inputLineNumber,
         note->
-          getSoundingWholeNotes ());
+          getMeasureElementSoundingWholeNotes ());
 
   --gIndenter;
 }
@@ -10733,7 +10733,7 @@ void msrVoice::finalizeVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceHasBeenFinalized) {
-    if (gWaeOahGroup->getMaintainance ()) { // JMI v0.9.70
+    if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
       std::stringstream ss;
 
       ss <<
@@ -10895,7 +10895,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 #endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceHasBeenFinalized) {
-    if (gWaeOahGroup->getMaintainance ()) { // JMI v0.9.70
+    if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
       std::stringstream ss;
 
       ss <<

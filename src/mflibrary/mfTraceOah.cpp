@@ -128,7 +128,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // print layouts
+  // MusicXML print layouts
 
   S_oahTwoBooleansAtom
     traceMusicXMLPrintLayoutsAtom =
@@ -1826,11 +1826,11 @@ R"(Measures details)",
 
   fTraceOnlyMeasurerNumbeOahAtom =
     oahStringAtom::create (
-      "trace-only-measure-number", "tomeanum",
+      "trace-only-measure", "tonlymea",
 R"(Restrict the production of trace information to measure NUMBER)",
       "NUMBER",
-      "fTraceOnlyMeasureNumber",
-      fTraceOnlyMeasureNumber);
+      "fTraceOnlyMeasure",
+      fTraceOnlyMeasure);
 
   subGroup->
     appendAtomToSubGroup (
@@ -1841,7 +1841,7 @@ R"(Restrict the production of trace information to measure NUMBER)",
   S_oahTwoBooleansAtomWithTracePasses
     traceMeasurePositionsBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
-        "trace-measure-positions", "tmeaspos",
+        "trace-measure-positions", "tmeapos",
 R"(Measure positions)",
         "fTraceMeasurePositions",
         fTraceMeasurePositions,
@@ -1857,7 +1857,7 @@ R"(Measure positions)",
   S_oahThreeBooleansAtom
     traceMeasurePositionsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-measure-positions-details", "tmeasposdets",
+        "trace-measure-positions-details", "tmeaposdets",
 R"(Measure positions details)",
         "fTraceMeasurePositionsDetails",
         fTraceMeasurePositionsDetails,
@@ -2903,28 +2903,9 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceOahDetails <<
     std::endl <<
 
-    // components
-//     std::setw (fieldWidth) << "fTracecomponents" << ": " <<
-//     fTraceComponents <<
-//     std::endl <<
-
-    // passes
-//     std::setw (fieldWidth) << "fTracePasses" << ": " <<
-//     fTracePasses <<
-//     std::endl <<
-//
-//     std::setw (fieldWidth) << "fTraceOnlyPassIDKind" << ": " <<
-//     fTraceOnlyPassIDKind <<
-//     std::endl <<
-
-    // for tests, hidden
-    std::setw (fieldWidth) << "fTraceForTests" << ": " <<
-    fTraceForTests <<
-    std::endl <<
-
-    // score
-    std::setw (fieldWidth) << "fTraceScores" << ": " <<
-    fTraceScores <<
+    // geometry
+    std::setw (fieldWidth) << "fTraceGeometry" << ": " <<
+    fTraceGeometry <<
     std::endl <<
 
     // identification
@@ -2932,14 +2913,24 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceIdentification <<
     std::endl <<
 
+    // for tests, hidden
+    std::setw (fieldWidth) << "fTraceForTests" << ": " <<
+    fTraceForTests <<
+    std::endl <<
+
     // credits
     std::setw (fieldWidth) << "fTraceCredits" << ": " <<
     fTraceCredits <<
     std::endl <<
 
-    // scaling
-    std::setw (fieldWidth) << "fTraceGeometry" << ": " <<
-    fTraceGeometry <<
+    // books
+    std::setw (fieldWidth) << "fTraceBooks" << ": " <<
+    fTraceBooks <<
+    std::endl <<
+
+    // scores
+    std::setw (fieldWidth) << "fTraceScores" << ": " <<
+    fTraceScores <<
     std::endl <<
 
     // part groups
@@ -2959,6 +2950,14 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::setw (fieldWidth) << "fTraceStaves" << ": " <<
     fTraceStaves <<
     std::endl <<
+    std::setw (fieldWidth) << "fTraceStavesDetails" << ": " <<
+    fTraceStavesDetails <<
+    std::endl <<
+
+    // staff changes
+    std::setw (fieldWidth) << "fTraceStaffChanges" << ": " <<
+    fTraceStaffChanges <<
+    std::endl <<
 
     // voices
     std::setw (fieldWidth) << "fTraceVoices" << ": " <<
@@ -2968,10 +2967,24 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceVoicesDetails <<
     std::endl <<
 
+    // MusicXML print layouts
+    std::setw (fieldWidth) << "fTraceMusicXMLPrintLayouts" << ": " <<
+    fTraceMusicXMLPrintLayouts <<
+    std::endl <<
+
+    // segments
+    std::setw (fieldWidth) << "fTraceSegments" << ": " <<
+    fTraceSegments <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceSegmentsDetails" << ": " <<
+    fTraceSegmentsDetails <<
+    std::endl <<
+
     // measures
     std::setw (fieldWidth) << "fTraceMeasuresNumbers" << ": " <<
     fTraceMeasuresNumbers <<
     std::endl <<
+
     std::setw (fieldWidth) << "fTraceMeasures" << ": " <<
     fTraceMeasures <<
     std::endl <<
@@ -2979,29 +2992,8 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceMeasuresDetails <<
     std::endl <<
 
-    std::setw (fieldWidth) << "fTraceMeasurePositions" << ": " <<
-    fTraceMeasurePositions <<
-    std::endl <<
-    std::setw (fieldWidth) << "fTraceMeasurePositionsDetails" << ": " <<
-    fTraceMeasurePositionsDetails <<
-    std::endl <<
-
-    std::setw (fieldWidth) << "fTraceVoicePositions" << ": " <<
-    fTraceVoicePositions <<
-    std::endl <<
-
-    std::setw (fieldWidth) << "fTraceMeasureMoments" << ": " <<
-    fTraceMeasureMoments <<
-    std::endl <<
-    std::setw (fieldWidth) << "fTraceVoiceMoments" << ": " <<
-    fTraceVoiceMoments <<
-    std::endl <<
-
-    std::setw (fieldWidth) << "fTraceVoicesFlatView" << ": " <<
-    fTraceVoicesFlatView <<
-    std::endl <<
-    std::setw (fieldWidth) << "fTraceVoicesFlatViewDetails" << ": " <<
-    fTraceVoicesFlatViewDetails <<
+    std::setw (fieldWidth) << "fTraceOnlyMeasure" << ": " <<
+    fTraceOnlyMeasure <<
     std::endl;
 
   gLog << std::left <<
@@ -3030,13 +3022,39 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
   }
   gLog << std::endl;
 
-    // segments
   gLog << std::left <<
-    std::setw (fieldWidth) << "fTraceSegments" << ": " <<
-    fTraceSegments <<
+    std::setw (fieldWidth) << "fTraceMeasurePositions" << ": " <<
+    fTraceMeasurePositions <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceSegmentsDetails" << ": " <<
-    fTraceSegmentsDetails <<
+    std::setw (fieldWidth) << "fTraceMeasurePositionsDetails" << ": " <<
+    fTraceMeasurePositionsDetails <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fTraceVoicePositions" << ": " <<
+    fTraceVoicePositions <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fTraceMeasureMoments" << ": " <<
+    fTraceMeasureMoments <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceVoiceMoments" << ": " <<
+    fTraceVoiceMoments <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fTraceVoicesFlatView" << ": " <<
+    fTraceVoicesFlatView <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceVoicesFlatViewDetails" << ": " <<
+    fTraceVoicesFlatViewDetails <<
+    std::endl <<
+
+    // measures slices
+
+    std::setw (fieldWidth) << "fTraceMeasuresSlices" << ": " <<
+    fTraceMeasuresSlices <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceMeasuresSlicesDetails" << ": " <<
+    fTraceMeasuresSlicesDetails <<
     std::endl <<
 
     // clefs
@@ -3062,34 +3080,12 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceTempos <<
     std::endl <<
 
-    // rehearsal marks
-    std::setw (fieldWidth) << "fTraceRehearsals" << ": " <<
-    fTraceRehearsalMarks <<
-    std::endl <<
-
-    // line breaks
+    // breaks
     std::setw (fieldWidth) << "fTraceLineBreaks" << ": " <<
     fTraceLineBreaks <<
     std::endl <<
-
-    // page and line breaks
     std::setw (fieldWidth) << "fTracePageBreaks" << ": " <<
     fTracePageBreaks <<
-    std::endl <<
-
-    // staff changes
-    std::setw (fieldWidth) << "fTraceStaffChanges" << ": " <<
-    fTraceStaffChanges <<
-    std::endl <<
-
-    // transpositions
-    std::setw (fieldWidth) << "fTraceTranspositions" << ": " <<
-    fTraceTranspositions <<
-    std::endl <<
-
-    // octave shifts
-    std::setw (fieldWidth) << "fTraceOctaveShifts" << ": " <<
-    fTraceOctaveShifts <<
     std::endl <<
 
     // bar lines
@@ -3108,6 +3104,16 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     // bar number checks
     std::setw (fieldWidth) << "fTraceBarNumberChecks" << ": " <<
     fTraceBarNumberChecks <<
+    std::endl <<
+
+    // transpositions
+    std::setw (fieldWidth) << "fTraceTranspositions" << ": " <<
+    fTraceTranspositions <<
+    std::endl <<
+
+    // octave shifts
+    std::setw (fieldWidth) << "fTraceOctaveShifts" << ": " <<
+    fTraceOctaveShifts <<
     std::endl <<
 
     // repeats
@@ -3134,9 +3140,19 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceMultiMeasureRestsDetails <<
     std::endl <<
 
+    // beats repeats
+    std::setw (fieldWidth) << "fTraceBeatRepeats" << ": " <<
+    fTraceBeatRepeats <<
+    std::endl <<
+
     // slashes
     std::setw (fieldWidth) << "fTraceSlashes" << ": " <<
     fTraceSlashes <<
+    std::endl <<
+
+    // notes durations
+    std::setw (fieldWidth) << "fTraceNotesDurations" << ": " <<
+    fTraceNotesDurations <<
     std::endl <<
 
     // notes
@@ -3147,7 +3163,7 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceNotesDetails <<
     std::endl <<
 
-    // whole notes
+    // whole notes durations
     std::setw (fieldWidth) << "fTraceWholeNoteDurations" << ": " <<
     fTraceWholeNoteDurations <<
     std::endl <<
@@ -3155,7 +3171,7 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceWholeNoteDurationsDetails <<
     std::endl <<
 
-    // measures whole notes durations
+    // measures whole notes vectors
     std::setw (fieldWidth) << "fTraceMeasuresWholeNotesVectors" << ": " <<
     fTraceMeasuresWholeNotesVectors <<
     std::endl <<
@@ -3171,6 +3187,16 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     // notes octave entry
     std::setw (fieldWidth) << "fTraceNotesOctaveEntry" << ": " <<
     fTraceNotesOctaveEntry <<
+    std::endl <<
+
+    // grace notes
+    std::setw (fieldWidth) << "fTraceGraceNotes" << ": " <<
+    fTraceGraceNotes <<
+    std::endl <<
+
+    // tremolos
+    std::setw (fieldWidth) << "fTraceTremolos" << ": " <<
+    fTraceTremolos <<
     std::endl <<
 
     // stems
@@ -3202,7 +3228,7 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // dynamics
-    std::setw (fieldWidth) << "fTraceGraceDynamics" << ": " <<
+    std::setw (fieldWidth) << "fTraceDynamics" << ": " <<
     fTraceDynamics <<
     std::endl <<
 
@@ -3211,14 +3237,43 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceSpanners <<
     std::endl <<
 
+    // cresc/decresc
+    std::setw (fieldWidth) << "fTraceCrescDecrescs" << ": " <<
+    fTraceCrescDecrescs <<
+    std::endl <<
+
+    // wedges
+    std::setw (fieldWidth) << "fTraceWedges" << ": " <<
+    fTraceWedges <<
+    std::endl <<
+
+    // slurs
+    std::setw (fieldWidth) << "fTraceSlurs" << ": " <<
+    fTraceSlurs <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceSlursDetails" << ": " <<
+    fTraceSlursDetails <<
+    std::endl <<
+
+    // ligatures
+    std::setw (fieldWidth) << "fTraceLigatures" << ": " <<
+    fTraceLigatures <<
+    std::endl <<
+
+    // lyrics
+    std::setw (fieldWidth) << "fTraceLyrics" << ": " <<
+    fTraceLyrics <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceLyricsDetails" << ": " <<
+    fTraceLyricsDetails <<
+    std::endl <<
+
     // words
     std::setw (fieldWidth) << "fTraceWords" << ": " <<
     fTraceWords <<
     std::endl <<
-
-    // tremolos
-    std::setw (fieldWidth) << "fTraceTremolos" << ": " <<
-    fTraceTremolos <<
+    std::setw (fieldWidth) << "fTraceChordsDetails" << ": " <<
+    fTraceChordsDetails <<
     std::endl <<
 
     // chords
@@ -3237,13 +3292,34 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceTupletsDetails <<
     std::endl <<
 
-//     std::setw (fieldWidth) << "fDisplayTuplets" << ": " <<
-//     fDisplayTuplets <<
-//     std::endl <<
+    // ties
+    std::setw (fieldWidth) << "fTraceTies" << ": " <<
+    fTraceTies <<
+    std::endl <<
 
     // glissandos
     std::setw (fieldWidth) << "fTraceGlissandos" << ": " <<
     fTraceGlissandos <<
+    std::endl <<
+
+    // rehearsal marks
+    std::setw (fieldWidth) << "fTraceRehearsalMarks" << ": " <<
+    fTraceRehearsalMarks <<
+    std::endl <<
+
+    // segnos
+    std::setw (fieldWidth) << "fTraceSegnos" << ": " <<
+    fTraceSegnos <<
+    std::endl <<
+
+    // dal segnos
+    std::setw (fieldWidth) << "fTraceDalSegnos" << ": " <<
+    fTraceDalSegnos <<
+    std::endl <<
+
+    // codas
+    std::setw (fieldWidth) << "fTraceCodas" << ": " <<
+    fTraceCodas <<
     std::endl <<
 
     // eyeglases
@@ -3251,35 +3327,7 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceEyeGlasses <<
     std::endl <<
 
-    // damps
-    std::setw (fieldWidth) << "fTraceDamps" << ": " <<
-    fTraceDamps <<
-    std::endl <<
-
-    // dampalls
-    std::setw (fieldWidth) << "fTraceDampAlls" << ": " <<
-    fTraceDampAlls <<
-    std::endl <<
-
-    // slides
-    std::setw (fieldWidth) << "fTraceSlides" << ": " <<
-    fTraceSlides <<
-    std::endl <<
-
-    // grace notes
-    std::setw (fieldWidth) << "fTraceGraceNotes" << ": " <<
-    fTraceGraceNotes <<
-    std::endl <<
-
-    // lyrics
-    std::setw (fieldWidth) << "fTraceLyrics" << ": " <<
-    fTraceLyrics <<
-    std::endl <<
-    std::setw (fieldWidth) << "fTraceLyricsDetails" << ": " <<
-    fTraceLyricsDetails <<
-    std::endl <<
-
-    // harmonies
+     // harmonies
     std::setw (fieldWidth) << "fTraceHarmonies" << ": " <<
     fTraceHarmonies <<
     std::endl <<
@@ -3308,59 +3356,19 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceFrames <<
     std::endl <<
 
-    // ties
-    std::setw (fieldWidth) << "fTraceTies" << ": " <<
-    fTraceTies <<
-    std::endl <<
-
-    // slurs
-    std::setw (fieldWidth) << "fTraceSlurs" << ": " <<
-    fTraceSlurs <<
-    std::endl <<
-
-    // ligatures
-    std::setw (fieldWidth) << "fTraceLigatures" << ": " <<
-    fTraceLigatures <<
-    std::endl <<
-
-    // pedals
-    std::setw (fieldWidth) << "fTracePedals" << ": " <<
-    fTracePedals <<
-    std::endl <<
-
-    // cresc/decresc
-    std::setw (fieldWidth) << "fTraceCrescDecrescs" << ": " <<
-    fTraceCrescDecrescs <<
-    std::endl <<
-
-    // wedges
-    std::setw (fieldWidth) << "fTraceWedges" << ": " <<
-    fTraceWedges <<
-    std::endl <<
-
-    // staff details
-    std::setw (fieldWidth) << "fTraceStavesDetails" << ": " <<
-    fTraceStavesDetails <<
-    std::endl <<
-
     // scordaturas
     std::setw (fieldWidth) << "fTraceScordaturas" << ": " <<
     fTraceScordaturas <<
     std::endl <<
 
-    // segnos
-    std::setw (fieldWidth) << "fTraceSegnos" << ": " <<
-    fTraceSegnos <<
+    // slides
+    std::setw (fieldWidth) << "fTraceSlides" << ": " <<
+    fTraceSlides <<
     std::endl <<
 
-    // dal segnos
-    std::setw (fieldWidth) << "ftraceDalSegnos" << ": " <<
-    fTraceDalSegnos <<
-    std::endl <<
-
-    // codas
-    std::setw (fieldWidth) << "fTraceCodas" << ": " <<
-    fTraceCodas <<
+    // pedals
+    std::setw (fieldWidth) << "fTracePedals" << ": " <<
+    fTracePedals <<
     std::endl <<
 
     // accordion registrations
@@ -3372,16 +3380,18 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::setw (fieldWidth) << "fTraceHarpPedals" << ": " <<
     fTraceHarpPedals <<
     std::endl <<
-
-    // harp pedals tuning
     std::setw (fieldWidth) << "fTraceHarpPedalsTunings" << ": " <<
     fTraceHarpPedalsTunings <<
     std::endl <<
 
-    // extra harmonies
-    std::setw (fieldWidth) << "fTraceExtraHarmonies" << ": " <<
-    fTraceExtraHarmonies <<
+    // damps
+    std::setw (fieldWidth) << "fTraceDamps" << ": " <<
+    fTraceDamps <<
     std::endl <<
+    std::setw (fieldWidth) << "fTraceDampAlls" << ": " <<
+    fTraceDampAlls <<
+    std::endl <<
+
 
 /* JMI
     // msrStreams
@@ -3490,4 +3500,5 @@ debugging information to standard error for the specified measures.)",
           fTraceDetailedMeasureNumbersSet));
   }
 */
+
 

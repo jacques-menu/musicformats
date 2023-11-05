@@ -96,7 +96,7 @@ class EXP msrDivisions : public msrElement
                             int actualNotes,
                             int normalNotes);
 
-    std::string           tupletWholeNotespitchAndOctaveAsString (
+    std::string           tupletWholeNotesPitchAndOctaveAsString (
                             int             inputLineNumber,
                             const msrWholeNotes& wholeNotes,
                             int             actualNotes,

@@ -524,14 +524,14 @@ std::string msrDivisions::tupletDivisionspitchAndOctaveAsString (
       divisions * actualNotes / normalNotes);
 }
 
-std::string tupletWholeNotespitchAndOctaveAsString (
+std::string tupletWholeNotesPitchAndOctaveAsString (
   int             inputLineNumber,
   const msrWholeNotes& wholeNotes,
   int             actualNotes,
   int             normalNotes)
 {
   return
-    wholeNotespitchAndOctaveAsString (
+    wholeNotesPitchAndOctaveAsString (
       inputLineNumber,
       wholeNotes
         *

@@ -35,6 +35,7 @@ std::string msrStemKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrStemKind& elt);
 
+//______________________________________________________________________________
 class EXP msrStem : public msrElement
 {
   public:

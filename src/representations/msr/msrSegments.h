@@ -158,7 +158,7 @@ class EXP msrSegment : public msrVoiceElement
     void                  backupByWholeNotesStepLengthInSegment (
                             int     inputLineNumber,
                             const msrWholeNotes&
-                                    backupTargetMeasurePosition);
+                                    backupTargetMeasureElementMeasurePosition);
 
     void                  appendPaddingNoteToSegment (
                             int             inputLineNumber,
