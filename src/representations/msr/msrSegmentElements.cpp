@@ -177,7 +177,7 @@ void msrSegmentElement::print (std::ostream& os) const
 
 void msrSegmentElement::printFull (std::ostream& os) const
 {
-  printFull (os);
+  print (os); // JMI v0.9.70
   os << std::endl;
 }
 

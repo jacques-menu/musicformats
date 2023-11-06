@@ -5708,9 +5708,6 @@ void msr2lpsrTranslator::visitEnd (S_msrWedge& elt)
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 {
-  int inputLineNumber =
-    elt->getInputStartLineNumber () ;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -5722,7 +5719,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingChordGraceNotesGroupLink: " <<
       fOnGoingChordGraceNotesGroupLink <<
-      ", line " << inputLineNumber;
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

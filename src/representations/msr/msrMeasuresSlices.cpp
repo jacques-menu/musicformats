@@ -1224,7 +1224,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  size_t sequenceSize =
+  size_t slicesSequenceSize =
     getSlicesSequenceSize ();
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1232,8 +1232,8 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
     std::stringstream ss;
 
     ss <<
-      "---> sequenceSize: " <<
-      sequenceSize;
+      "---> slicesSequenceSize: " <<
+      slicesSequenceSize;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1241,7 +1241,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (sequenceSize == 0) {
+  if (slicesSequenceSize == 0) {
     // merge an empty measures slices sequence with another
 
     // create the result as a shallow copy of the other sequence
@@ -1261,17 +1261,18 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       msrMeasuresSlicesSequence::create (
         measuresOrigin);
 
-    size_t otherSequenceSize =
-      otherMeasuresSlicesSequence->getSlicesSequenceSize ();
-
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasuresSlices ()) {
+      size_t
+        otherMeasuresSlicesSequenceSize =
+          otherMeasuresSlicesSequence->getSlicesSequenceSize ();
+
       std::stringstream ss;
 
       ss <<
-        "mergeWithMeasuresSlicesSequence()" <<
-        ", otherSequenceSize: " <<
-        otherSequenceSize;
+        "msrMeasuresSlicesSequence()" <<
+        ", otherMeasuresSlicesSequenceSize: " <<
+        otherMeasuresSlicesSequenceSize;
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -1280,8 +1281,12 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-    if (otherSequenceSize != sequenceSize) {
+    // sanity check
+    size_t
+      otherMeasuresSlicesSequenceSize =
+        otherMeasuresSlicesSequence->getSlicesSequenceSize ();
+
+    if (otherMeasuresSlicesSequenceSize != slicesSequenceSize) {
       std::stringstream ss;
 
       ss <<
@@ -1307,7 +1312,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
 
     else {
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
-      if (sequenceSize) {
+      if (slicesSequenceSize) {
         // the two measures slices sequences have the same non null size
 
         // get the other sequence's measures slices vector
@@ -1317,7 +1322,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
               getMeasuresSlicesVector ();
 
         // iterate over the measures slices
-        for (size_t i = 0; i < sequenceSize; ++i) {
+        for (size_t i = 0; i < slicesSequenceSize; ++i) {
           S_msrMeasuresSlice
             currentSlice =
               fMeasuresSlicesVector [i];

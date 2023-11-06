@@ -266,15 +266,6 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
 void msrPart::registerStaffInPart (
   const S_msrStaff& staff)
 {
-  int inputLineNumber =
-    staff->getInputStartLineNumber ();
-
-  int staffNumber =
-    staff->getStaffNumber ();
-
-  msrStaffKind staffKind =
-    staff->getStaffKind ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
     std::stringstream ss;
@@ -283,9 +274,9 @@ void msrPart::registerStaffInPart (
       "Registering staff \"" <<
       staff->getStaffName () <<
       ", \"" <<
-      msrStaffKindAsString (staffKind) <<
+      staff->getStaffKind () <<
       "\" under number " <<
-      staffNumber <<
+      staff->getStaffNumber () <<
       " in part " <<
       getPartCombinedName ();
 
@@ -299,9 +290,9 @@ void msrPart::registerStaffInPart (
   fPartAllStavesList.push_back (staff);
 
   // register its number in the staves numbers to staves map
-  fPartStaveNumbersToStavesMap [staffNumber] = staff;
+  fPartStaveNumbersToStavesMap [staff->getStaffNumber ()] = staff;
 
-  switch (staffKind) {
+  switch (staff->getStaffKind ()) {
     case msrStaffKind::kStaffKindRegular:
       // register staff in the regular staves list
       fPartRegularStavesList.push_back (staff);
@@ -328,11 +319,11 @@ void msrPart::registerStaffInPart (
         ss <<
           "a harmonies staff already exists in part " <<
           getPartCombinedName () <<
-          ", line " << inputLineNumber;
+          ", line " << staff->getInputStartLineNumber ();
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          staff->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -351,11 +342,11 @@ void msrPart::registerStaffInPart (
         ss <<
           "a figured bass staff already exists in part " <<
           getPartCombinedName () <<
-          ", line " << inputLineNumber;
+          ", line " << staff->getInputStartLineNumber ();
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          staff->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }

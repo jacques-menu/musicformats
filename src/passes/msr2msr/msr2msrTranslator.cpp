@@ -1804,11 +1804,11 @@ void msr2msrTranslator::visitStart (S_msrFrame& elt)
       "frame is out of context, cannot be handled: " <<
       elt->asShortString ();
 
-//     msr2msrInternalError ( // JMI v0.9.67
-    msr2msrInternalWarning (
+    msr2msrInternalError ( // JMI v0.9.67
+//     msr2msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       elt->getInputStartLineNumber (),
-//       __FILE__, __LINE__,
+      __FILE__, __LINE__,
       ss.str ());
   }
 }
@@ -2089,11 +2089,11 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
               getVoiceName () <<
           "\" is of unknown kind in msr2msrTranslator";
 
-      // JMI  msr2msrInternalError (
-        msr2msrInternalWarning (
+        msr2msrInternalError (
+//         msr2msrInternalWarning (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
-  //        __FILE__, __LINE__,
+         __FILE__, __LINE__,
           ss.str ());
       }
       break;
@@ -4230,9 +4230,6 @@ void msr2msrTranslator::visitEnd (S_msrWedge& elt)
 //________________________________________________________________________
 void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 {
-  int inputLineNumber =
-    elt->getInputStartLineNumber () ;
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -4244,7 +4241,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingChordGraceNotesGroupLink: " <<
         fOnGoingChordGraceNotesGroupLink <<
-      ", line " << inputLineNumber;
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

@@ -10733,6 +10733,8 @@ void msrVoice::finalizeVoice (
 #endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceHasBeenFinalized) {
+#ifdef MF_TRACE_IS_ENABLED
+    // maintainance check
     if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
       std::stringstream ss;
 
@@ -10748,6 +10750,7 @@ void msrVoice::finalizeVoice (
         __FILE__, __LINE__,
         ss.str ());
     }
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // set part shortest note wholeNotes if relevant
@@ -10895,6 +10898,8 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 #endif // MF_TRACE_IS_ENABLED
 
   if (fVoiceHasBeenFinalized) {
+#ifdef MF_TRACE_IS_ENABLED
+    // maintainance check
     if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
       std::stringstream ss;
 
@@ -10910,6 +10915,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
         __FILE__, __LINE__,
         ss.str ());
     }
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // set part shortest note wholeNotes if relevant

@@ -309,9 +309,6 @@ void mxsrVoiceTupletHandler::handleTupletStartByHandler (
   S_msrTuplet tuplet,
   S_msrVoice  currentNoteVoice)
 {
-  int voiceNumber =
-    currentNoteVoice->getVoiceNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
     std::stringstream ss;
@@ -325,7 +322,7 @@ void mxsrVoiceTupletHandler::handleTupletStartByHandler (
     --gIndenter;
     ss <<
       " in voice" <<
-      voiceNumber;
+      currentNoteVoice->getVoiceNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -391,9 +388,6 @@ void mxsrVoiceTupletHandler::handleTupletContinueByHandler (
   S_msrNote   note,
   S_msrVoice  currentNoteVoice)
 {
-  int voiceNumber =
-    currentNoteVoice->getVoiceNumber ();
-
   if (fTupletsStack.size ()) {
     S_msrTuplet
       tupletStackTop =
@@ -412,7 +406,7 @@ void mxsrVoiceTupletHandler::handleTupletContinueByHandler (
       --gIndenter;
       ss <<
         " in voice" <<
-        voiceNumber;
+        currentNoteVoice->getVoiceNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -429,7 +423,7 @@ void mxsrVoiceTupletHandler::handleTupletContinueByHandler (
         " to stack top tuplet " <<
         tupletStackTop->asString () <<
         " in voice" <<
-        voiceNumber <<
+        currentNoteVoice->getVoiceNumber () <<
         ", line " << note->getInputEndLineNumber () <<
         std::endl;
     }
@@ -484,9 +478,6 @@ void mxsrVoiceTupletHandler::handleTupletStopByHandler (
   S_msrNote   note,
   S_msrVoice  currentNoteVoice)
 {
-  int voiceNumber =
-    currentNoteVoice->getVoiceNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
@@ -536,7 +527,7 @@ void mxsrVoiceTupletHandler::handleTupletStopByHandler (
             " to stack top tuplet " <<
             tupletStackTop->asString () <<
             " in voice" <<
-            voiceNumber <<
+            currentNoteVoice->getVoiceNumber () <<
             ", line " << note->getInputEndLineNumber () <<
             std::endl;
         }
@@ -10924,17 +10915,17 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
     nonControllingString =
       elt->getAttributeValue ("non-controlling");
 
-  // width
-  int
-    widthValue =
-      elt->getAttributeIntValue ("width", 0);
-
 #ifdef MF_TRACE_IS_ENABLED
   if (
     gTraceOahGroup->getTraceMeasures ()
       ||
     gEarlyOptions.getEarlyTracePasses ()
   ) {
+    // width
+    int
+      widthValue =
+        elt->getAttributeIntValue ("width", 0);
+
     std::stringstream ss;
 
     ss <<
@@ -11189,12 +11180,13 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
     // are there pending voices wedges?
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceWedges ()) {
+      // maintainance check
       if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
         std::stringstream ss;
 
         int numberOfPendingVoicesWedges = fPendingVoiceWedgesList.size ();
 
-      if (numberOfPendingVoicesWedges > 0) {
+        if (numberOfPendingVoicesWedges > 0) {
           ss <<
             "fPendingVoiceWedgesList contains PENDING voice wedges ZOU: " << // ZOU
             mfSingularOrPlural (
@@ -12578,9 +12570,11 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
       "cannot handle a barLine containing: " <<
       barLine->asString ();
 
-    mxsr2msrInternalWarning (
+//     mxsr2msrInternalWarning (
+    mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
+      __FILE__, __LINE__,
       ss.str ());
   }
 
@@ -13940,16 +13934,13 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
 
 void mxsr2msrTranslator::visitEnd (S_multiple_rest& elt)
 {
-  int inputLineNumber =
-    elt->getInputEndLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
       "--> End visiting S_multiple_rest" <<
-      ", line " << inputLineNumber;
+      ", line " << elt->getInputEndLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -22000,9 +21991,6 @@ void mxsr2msrTranslator::handleTupletStart (
   S_msrTuplet tuplet,
   S_msrVoice  currentNoteVoice)
 {
-  int voiceNumber =
-    currentNoteVoice->getVoiceNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
     std::stringstream ss;
@@ -22016,7 +22004,7 @@ void mxsr2msrTranslator::handleTupletStart (
     --gIndenter;
     ss <<
       " in voice" <<
-      voiceNumber;
+      currentNoteVoice->getVoiceNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -22081,9 +22069,6 @@ void mxsr2msrTranslator::handleTupletContinue (
   S_msrNote  note,
   S_msrVoice currentNoteVoice)
 {
-  int voiceNumber =
-    currentNoteVoice->getVoiceNumber ();
-
   if (fTupletsStack.size ()) {
     S_msrTuplet
       tupletStackTop =
@@ -22102,7 +22087,7 @@ void mxsr2msrTranslator::handleTupletContinue (
       --gIndenter;
       ss <<
         " in voice" <<
-        voiceNumber;
+        currentNoteVoice->getVoiceNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -22119,7 +22104,7 @@ void mxsr2msrTranslator::handleTupletContinue (
         " to stack top tuplet " <<
         tupletStackTop->asString () <<
         " in voice" <<
-        voiceNumber <<
+        currentNoteVoice->getVoiceNumber () <<
         ", line " << note->getInputEndLineNumber () <<
         std::endl;
     }
@@ -22174,9 +22159,6 @@ void mxsr2msrTranslator::handleTupletStop (
   S_msrNote  note,
   S_msrVoice currentNoteVoice)
 {
-  int voiceNumber =
-    currentNoteVoice->getVoiceNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
@@ -22226,7 +22208,7 @@ void mxsr2msrTranslator::handleTupletStop (
             " to stack top tuplet " <<
             tupletStackTop->asString () <<
             " in voice" <<
-            voiceNumber <<
+            currentNoteVoice->getVoiceNumber () <<
             ", line " << note->getInputEndLineNumber () <<
             std::endl;
         }
@@ -24237,21 +24219,21 @@ void mxsr2msrTranslator::attachPendingGlissandosToCurrentNote ()
               fCurrentMusicXMLStaffNumber,
               fCurrentMusicXMLVoiceNumber);
 
+#ifdef MF_TRACE_IS_ENABLED
         // get the voice's stanzas map
         const std::map<std::string, S_msrStanza>&
           voiceStanzasMap =
             voice->
               getVoiceStanzasMap ();
 
-#ifdef MF_TRACE_IS_ENABLED
-            if (gTraceOahGroup->getTraceGlissandos ()) {
-              gLog <<
-                "--> attachPendingGlissandosToNote ()"
-                ", voiceStanzasMap.size (): " <<
-                voiceStanzasMap.size () <<
-                ", line " << inputLineNumber <<
-                std::endl;
-            }
+        if (gTraceOahGroup->getTraceGlissandos ()) {
+          gLog <<
+            "--> attachPendingGlissandosToNote ()"
+            ", voiceStanzasMap.size (): " <<
+            voiceStanzasMap.size () <<
+            ", line " << inputLineNumber <<
+            std::endl;
+        }
 #endif // MF_TRACE_IS_ENABLED
         break;
     } // switch
@@ -24838,6 +24820,7 @@ S_msrNote mxsr2msrTranslator::createNote (
     }
   }
 
+#ifdef MF_TRACE_IS_ENABLED
   // maintainance check
   if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
     std::stringstream ss;
@@ -24879,6 +24862,7 @@ S_msrNote mxsr2msrTranslator::createNote (
         ss.str ());
     }
   }
+#endif // MF_TRACE_IS_ENABLED
 
   // create the note
   S_msrNote

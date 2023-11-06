@@ -14867,6 +14867,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       break;
   } // switch
 
+#ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
     fLilypondCodeStream <<
       "%{ =======>" <<
@@ -14906,6 +14907,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       "%}" <<
       std::endl;
   }
+#endif // MF_TRACE_IS_ENABLED
 
   // should a double underscore be generated? (before a single underscore if relevant)
   // ----------------------------------------------------
@@ -15297,6 +15299,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       break;
   } // switch
 
+#ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
     fLilypondCodeStream <<
       "%{ =======>" <<
@@ -15336,6 +15339,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       "%}" <<
       std::endl;
   }
+#endif // MF_TRACE_IS_ENABLED
 
   // should a single underscore be generated?
   // ----------------------------------------------------
@@ -19857,9 +19861,6 @@ void lpsr2lilypondTranslator::generateAfterNoteSpannersListIfAny (
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 {
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -19884,7 +19885,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         fOnGoingChordGraceNotesGroupLink <<
         ", fOnGoingMultiMeasureRests: " <<
         fOnGoingMultiMeasureRests <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -20122,7 +20123,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
       lpsr2lilypondInternalWarning (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        elt->getInputStartLineNumber (),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -20145,7 +20146,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       fOnGoingChordGraceNotesGroupLink <<
       ", fOnGoingMultiMeasureRests: " <<
       fOnGoingMultiMeasureRests <<
-      ", line " << inputLineNumber;
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

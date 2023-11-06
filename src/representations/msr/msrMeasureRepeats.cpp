@@ -1370,7 +1370,7 @@ std::string msrMeasureRepeat::asString () const
 }
 
 void msrMeasureRepeat::displayMeasureRepeat (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& context)
 {
   gLog <<
