@@ -15951,9 +15951,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
     timeSignatureSymbolKind =
       elt->getTimeSignatureSymbolKind ();
 
-  gLog <<
-    "---> timeSignatureSymbolKind: " << timeSignatureSymbolKind <<
-    std::endl;
+//   gLog <<
+//     "---> timeSignatureSymbolKind: " << timeSignatureSymbolKind << // JMI  0.9.70
+//     std::endl;
 
   Bool doGenerateTimeSignature (true);
 
