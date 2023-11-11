@@ -351,9 +351,6 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
   // register note as first element of this double tremolo
   fDoubleTremoloFirstElement = note;
 
@@ -417,11 +414,11 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       "fDoubleTremoloElementsWholeNotes: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
       std::endl <<
-      "line " << inputLineNumber;
+      "line " << note->getInputStartLineNumber ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -440,7 +437,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       fDoubleTremoloSoundingWholeNotes.asFractionString () << '\'' <<
       ", fDoubleTremoloElementsWholeNotes: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
-      "', line " << inputLineNumber;
+      "', line " << note->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -466,9 +463,6 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
 
   // register note as second element of this double tremolo
   fDoubleTremoloSecondElement = note;
@@ -502,7 +496,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       fDoubleTremoloSoundingWholeNotes.asFractionString () <<
       "', doubleTremoloElementsNotesDuration: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
-      "', line " << inputLineNumber;
+      "', line " << note->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -534,7 +528,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }

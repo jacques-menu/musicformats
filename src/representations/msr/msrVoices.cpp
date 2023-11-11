@@ -1074,9 +1074,6 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int inputLineNumber =
-    segment->getInputStartLineNumber ();
-
   // does segment belong to a repeat?
   if (fVoicePendingRepeatsStack.size ()) {
     // yes
@@ -1090,7 +1087,7 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
 
     currentRepeat->
       appendSegmentToRepeat (
-        inputLineNumber,
+        segment->getInputStartLineNumber (),
         segment,
         "appendSegmentToVoiceClone()");
   }
@@ -1103,7 +1100,7 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
 /* JMI
     // move fVoiceLastSegment to the initial voice elements list
     moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
-      inputLineNumber,
+      segment->getInputStartLineNumber (),
       "appendSegmentToVoiceClone()");
       */
 
@@ -1261,7 +1258,7 @@ void msrVoice::incrementVoiceCurrentMeasurePuristNumber (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresNumbers ()) {
     std::stringstream ss;
 
     ss <<
@@ -1302,7 +1299,7 @@ void msrVoice::setVoiceFirstMeasure (
 }
 
 void msrVoice::appendMeasureCloneToVoiceClone (
-  int          inputLineNumber,
+  int                 inputLineNumber,
   const S_msrMeasure& measureClone)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1335,7 +1332,7 @@ void msrVoice::appendMeasureCloneToVoiceClone (
 }
 
 void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2583,9 +2580,6 @@ void msrVoice::appendHarmoniesListToVoice (
 void msrVoice::appendHarmonyToVoiceClone (
   const S_msrHarmony& harmony)
 {
-  int inputLineNumber =
-    harmony->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
@@ -2593,7 +2587,7 @@ void msrVoice::appendHarmonyToVoiceClone (
     ss <<
       "Appending harmony " << harmony->asString () <<
       " to voice clone \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber;
+      ", line " << harmony->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2628,7 +2622,7 @@ void msrVoice::appendHarmonyToVoiceClone (
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          harmony->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2710,7 +2704,6 @@ void msrVoice::appendFiguredBassesListToVoice (
   const std::list<S_msrFiguredBass>& figuredBasssesList,
   const msrWholeNotes&               measurePositionToAppendAt)
 {
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
     std::stringstream ss;
@@ -2741,16 +2734,13 @@ void msrVoice::appendFiguredBassToVoiceClone (
   const S_msrFiguredBass& figuredBass)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    figuredBass->getInputStartLineNumber ();
-
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
     std::stringstream ss;
 
     ss <<
       "Appending figured bass " << figuredBass->asString () <<
       " to voice clone \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber;
+      ", line " << figuredBass->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2796,7 +2786,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 }
 
 // void msrVoice::padUpToMeasurePositionInVoice (
-//   int             inputLineNumber,
+//   int                  inputLineNumber,
 //   const msrWholeNotes& wholeNotesMeasurePosition)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -2849,7 +2839,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 // }
 
 void msrVoice::backupByWholeNotesStepLengthInVoice (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& backupTargetMeasureElementMeasurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3137,11 +3127,6 @@ void msrVoice::appendVoiceStaffChangeToVoice (
   const S_msrVoiceStaffChange& voiceStaffChange)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    voiceStaffChange->getInputStartLineNumber ();
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaffChanges ()) {
     std::stringstream ss;
 
@@ -3150,7 +3135,7 @@ void msrVoice::appendVoiceStaffChangeToVoice (
       voiceStaffChange->asString () <<
       " to voice " <<
       "\"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber;
+      ", line " << voiceStaffChange->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3170,9 +3155,6 @@ void msrVoice::appendVoiceStaffChangeToVoice (
 
 void msrVoice::appendNoteToVoice (const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
     std::stringstream ss;
@@ -3181,7 +3163,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
       "Appending note " <<
       note->asShortString () <<
       " to voice \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber;
+      ", line " << note->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3210,14 +3192,14 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotesDetails ()) {
       this->displayVoice (
-        inputLineNumber,
+        note->getInputStartLineNumber (),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -3240,7 +3222,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   // account for note's wholeNotes in the part drawing measure position
   part->
     incrementPartCurrentDrawingMeasurePosition (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       note->getMeasureElementSoundingWholeNotes ());
 
   // register whether music (i.e. not just skips)
@@ -3307,11 +3289,6 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 
 void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
     std::stringstream ss;
 
@@ -3319,7 +3296,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
       "Appending note '" <<
       note->asShortString () <<
       "' to voice clone \"" << fVoiceName << "\"" <<
-      ", line " << inputLineNumber;
+      ", line " << note->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3530,9 +3507,6 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
 void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
   const S_msrGraceNotesGroup& graceNotesGroup)
 {
-  int inputLineNumber =
-    graceNotesGroup->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGraceNotes ()) {
     std::stringstream ss;
@@ -3563,14 +3537,14 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     // these graceNotesGroup appears at the beginning of the voice:
     // create a first segment
     createNewLastSegmentForVoice (
-      inputLineNumber,
+      graceNotesGroup->getInputStartLineNumber (),
       "addGraceNotesGroupBeforeAheadOfVoiceIfNeeded()");
 
     fVoiceFirstSegment = fVoiceLastSegment;
 
     // then create the first measure
     createAMeasureAndAppendItToVoice (
-      inputLineNumber,
+      graceNotesGroup->getInputStartLineNumber (),
       333, //         previousMeasureEndInputLineNumber, v0.9.62
       graceNotesGroup->
         getGraceNotesGroupMeasureNumber (),
@@ -3627,9 +3601,8 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     // register it in the chord
     firstNoteShortcutUpLinkToChord->
       setChordGraceNotesGroupLinkBefore (
-        inputLineNumber,
+        graceNotesGroup->getInputStartLineNumber (),
         chordChordGraceNotesGroupLink);
-
   }
 
   else {
@@ -3708,9 +3681,9 @@ void msrVoice::prependAfterGraceNotesToVoice (
 */
 
 void msrVoice::appendSyllableToVoice (
-  int                inputLineNumber,
-  const std::string& stanzaNumber,
-  const std::string& stanzaName,
+  int                  inputLineNumber,
+  const std::string&   stanzaNumber,
+  const std::string&   stanzaName,
   const S_msrSyllable& syllable)
 {
   // append syllable to this voice
@@ -10127,11 +10100,6 @@ void msrVoice::appendMeasureRepeatToVoiceElementsList (
 void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
   const S_msrRepeatEnding& repeatEndingClone)
 {
-#ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    repeatEndingClone->getInputStartLineNumber (); // JMI
-#endif // MF_TRACE_IS_ENABLED
-
   ++gIndenter;
 
   switch (fVoiceKind) {
@@ -10155,7 +10123,7 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
             std::endl;
 
           displayVoiceRepeatsStackSummary (
-            inputLineNumber,
+            repeatEndingClone->getInputStartLineNumber (),
             "appendRepeatEndingCloneToVoice() 1");
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -10193,7 +10161,7 @@ void msrVoice:: appendRepeatEndingCloneToVoice ( // JMI
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceRepeats ()) {
           displayVoiceRepeatsStackSummary (
-            inputLineNumber,
+            repeatEndingClone->getInputStartLineNumber (),
             "appendRepeatEndingCloneToVoice() 2");
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -10589,7 +10557,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
 
   fVoiceLastAppendedMeasure->
     finalizeMeasure (
-      fVoiceLastAppendedMeasure->getInputEndLineNumber (),
+      fVoiceLastAppendedMeasure->getInputStartLineNumber (),
       measureRepeatContextKind,
       "finalizeLastAppendedMeasureInVoice() 2");
 
@@ -11058,7 +11026,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
   for (S_msrMeasure measure : fVoiceMeasuresFlatList) {
     measure->
       finalizeMeasure (
-        measure->getInputEndLineNumber (),
+        measure->getInputStartLineNumber (),
         msrMeasureRepeatContextKind::kMeasureRepeatContextNone,
         "finalizeVoiceAndAllItsMeasures()");
   } // for
@@ -11066,9 +11034,6 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 
 void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
 {
-  int inputLineNumber =
-    beam->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeams ()) {
     std::stringstream ss;
@@ -11079,7 +11044,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       beam->asShortString () <<
       "' and note '" <<
       note->asString () <<
-      "', line " << inputLineNumber;
+      "', line " << beam->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11107,7 +11072,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
 
         msrError (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          beam->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -11133,7 +11098,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
 
           msrError (
             gServiceRunData->getInputSourceName (),
-            inputLineNumber,
+            beam->getInputStartLineNumber (),
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11208,7 +11173,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
 
           msrError (
             gServiceRunData->getInputSourceName (),
-            inputLineNumber,
+            beam->getInputStartLineNumber (),
             __FILE__, __LINE__,
             ss.str ());
         }

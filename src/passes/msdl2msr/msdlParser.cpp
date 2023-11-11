@@ -1116,9 +1116,6 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
   const S_msrNote& note)
 {
 /*
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
   // generate LilyPond octave relative to fCurrentOctaveEntryReference
 
   // in MusicXML, octave number is 4 for the octave starting with middle C
@@ -1130,19 +1127,19 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
     noteDiatonicPitchKind =
       note->
         noteDiatonicPitchKind (
-          inputLineNumber);
+          note->getInputStartLineNumber ());
 
   msrDiatonicPitchKind
     referenceDiatonicPitchKind =
       fCurrentOctaveEntryReference->
         noteDiatonicPitchKind (
-          inputLineNumber);
+          note->getInputStartLineNumber ());
 
   std::string
     referenceDiatonicPitchKindAsString =
       fCurrentOctaveEntryReference->
         noteDiatonicPitchKindAsString (
-          inputLineNumber);
+          note->getInputStartLineNumber ());
 
   msrOctaveKind
     referenceAbsoluteOctave =
@@ -3447,10 +3444,6 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
   ++gIndenter;
 
-  // get the note pitch input line number
-  int inputLineNumber =
-    fCurrentToken.getTokenLineNumber ();
-
   // there should be a pitch name
   msrQuarterTonesPitchKind
     noteQuarterTonesPitchKind = msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
@@ -3567,7 +3560,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
   S_msrNote
     note =
       msrNote::createRegularNote (
-        inputLineNumber,
+        fCurrentToken.getTokenLineNumber (),
         currentMeasureNumberAsString,
         noteQuarterTonesPitchKind,
         noteOctaveKind,

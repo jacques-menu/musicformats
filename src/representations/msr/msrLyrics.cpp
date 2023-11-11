@@ -27,6 +27,8 @@
 
 #include "oahOah.h"
 
+#include "waeOah.h"
+
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
@@ -356,14 +358,18 @@ msrSyllable::msrSyllable (
     case msrSyllableKind::kSyllableOnRestNote:
     case msrSyllableKind::kSyllableSkipOnRestNote:
     case msrSyllableKind::kSyllableSkipOnNonRestNote:
-      mfAssert (
-        __FILE__, __LINE__,
-        syllableWholeNotes.getNumerator () > 0,
-        "syllableWholeNotes "
-          +
-        std::to_string (syllableWholeNotes.getNumerator ())
-          +
-        " is not positive");
+#ifdef MF_TRACE_IS_ENABLED
+      if (gWaeOahGroup->getMaintainanceRun ()) {
+        mfAssert ( // JMI v0.9.70 BABASSE
+          __FILE__, __LINE__,
+          syllableWholeNotes.getNumerator () > 0,
+          "syllableWholeNotes "
+            +
+          std::to_string (syllableWholeNotes.getNumerator ())
+            +
+          " is not positive");
+        }
+#endif // MF_TRACE_IS_ENABLED
       break;
 
     case msrSyllableKind::kSyllableMeasureEnd:

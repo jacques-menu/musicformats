@@ -120,11 +120,6 @@ For example, in \msrToLpsr{}, the \smartPointerType{S_msrBarLine} values found i
 void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
 		std::stringstream ss;
 

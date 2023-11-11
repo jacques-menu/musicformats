@@ -1772,7 +1772,7 @@ R"()",
   S_oahTwoBooleansAtomWithTracePasses
     traceMeasuresNumbersBooleanAtom =
       oahTwoBooleansAtomWithTracePasses::create (
-        "trace-measure-numbers", "tmneasnums",
+        "trace-measures-numbers", "tmneasnums",
 R"(Measure numberss)",
         "fTraceMeasuresNumbers",
         fTraceMeasuresNumbers,

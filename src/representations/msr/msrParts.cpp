@@ -122,22 +122,27 @@ void msrPart::initializePart ()
     // yes, rename the part accordinglingly
     std::string newMsrPartName = (*it).second;
 
-    std::stringstream ss;
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceParts ()) {
+      std::stringstream ss;
 
-    ss <<
-      "Renaming MSR part " <<
-      getPartCombinedName () <<
-      " to \"" <<
-      newMsrPartName <<
-      "\"";
+      ss <<
+        "Renaming MSR part " <<
+        getPartCombinedName () <<
+        " to \"" <<
+        newMsrPartName <<
+        "\"";
 
-    msrWarning (
-      gServiceRunData->getInputSourceName (),
-      fInputStartLineNumber,
-      ss.str ());
+      msrWarning (
+        gServiceRunData->getInputSourceName (),
+        fInputStartLineNumber,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
 
     fPartMsrName = newMsrPartName;
   }
+
   else {
     // coin the names from the argument
     fPartMsrName =
@@ -2477,9 +2482,6 @@ void msrPart::appendFiguredBassToPart (
 //   const S_msrVoice&       figuredBassSupplierVoice,
 //   const S_msrFiguredBass& figuredBass)
 // {
-//   int inputLineNumber =
-//     figuredBass->getInputStartLineNumber ();
-//
 //   ++gIndenter;
 //
 //   switch (figuredBassSupplierVoice->getVoiceKind ()) {
@@ -2494,7 +2496,7 @@ void msrPart::appendFiguredBassToPart (
 //           figuredBass->asString () <<
 //           " to part " <<
 //           getPartCombinedName () <<
-//           ", line " << inputLineNumber <<
+//           ", line " << figuredBass->getInputStartLineNumber () <<
 //           std::endl;
 //
 //           gWaeHandler->waeTrace (
@@ -2505,7 +2507,7 @@ void msrPart::appendFiguredBassToPart (
 //
 //       fPartFiguredBassVoice->
 //         appendFiguredBassToVoice (
-//           inputLineNumber,
+//           figuredBass->getInputStartLineNumber (),
 //           figuredBass);
 //       break;
 //
@@ -2524,11 +2526,11 @@ void msrPart::appendFiguredBassToPart (
 //           " voice \" " <<
 //           figuredBassSupplierVoice->getVoiceName () <<
 //           "\"" <<
-//           ", line " << inputLineNumber;
+//           ", line " << figuredBass->getInputStartLineNumber ();
 //
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
-//           inputLineNumber,
+//           figuredBass->getInputStartLineNumber (),
 //           __FILE__, __LINE__,
 //           ss.str ());
 //       }
@@ -2542,9 +2544,6 @@ void msrPart::appendFiguredBassToPartClone (
   const S_msrVoice&       figuredBassSupplierVoice,
   const S_msrFiguredBass& figuredBass)
 {
-  int inputLineNumber =
-    figuredBass->getInputStartLineNumber ();
-
   ++gIndenter;
 
   switch (figuredBassSupplierVoice->getVoiceKind ()) {
@@ -2559,7 +2558,7 @@ void msrPart::appendFiguredBassToPartClone (
           figuredBass->asString () <<
           " to part clone " <<
           getPartCombinedName () <<
-          ", line " << inputLineNumber <<
+          ", line " << figuredBass->getInputStartLineNumber () <<
           std::endl;
 
         gWaeHandler->waeTrace (
@@ -2587,11 +2586,11 @@ void msrPart::appendFiguredBassToPartClone (
           " voice \" " <<
           figuredBassSupplierVoice->getVoiceName () <<
           "\"" <<
-          ", line " << inputLineNumber;
+          ", line " << figuredBass->getInputStartLineNumber ();
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          figuredBass->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2686,11 +2685,6 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
   const S_msrGraceNotesGroup& skipGraceNotesGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    skipGraceNotesGroup->getInputStartLineNumber ();
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
   if (
     gTraceOahGroup->getTraceMeasures ()
       ||
@@ -2703,7 +2697,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
     ss <<
       "addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded () in " <<
       getPartCombinedName () <<
-      ", line " << inputLineNumber;
+      ", line " << skipGraceNotesGroup->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2731,7 +2725,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 }
 
 // void msrPart::handleBackupInPart (
-//   int             inputLineNumber,
+//   int                  inputLineNumber,
 //   const msrWholeNotes& backupStepLength)
 // {
 //   // account for backup in part

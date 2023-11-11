@@ -626,17 +626,17 @@ class EXP msrMeasure : public msrSegmentElement
                             const S_msrMeasureElement& elem,
                             const std::string&         context);
 
-    void                  finalizeRegularMeasure (
+    void                  finalizeMeasureInRegularVoice (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
                             const std::string&          context);
 
-    void                  finalizeHarmonyMeasure (
+    void                  finalizeMeasureInHarmonyVoice (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
                             const std::string&          context);
 
-    void                  finalizeFiguredBassMeasure (
+    void                  finalizeMeasureInFiguredBassVoice (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
                             const std::string&          context);

@@ -40,7 +40,7 @@ void msrMeasure::finalizeMeasure (
     // delegate to voice kind specific methods
     switch (voice->getVoiceKind ()) {
       case msrVoiceKind::kVoiceKindRegular:
-        finalizeRegularMeasure (
+        finalizeMeasureInRegularVoice (
           inputLineNumber,
           measureRepeatContextKind,
           context);
@@ -50,14 +50,14 @@ void msrMeasure::finalizeMeasure (
         break;
 
       case msrVoiceKind::kVoiceKindHarmonies:
-        finalizeHarmonyMeasure (
+        finalizeMeasureInHarmonyVoice (
           inputLineNumber,
           measureRepeatContextKind,
           context);
         break;
 
       case msrVoiceKind::kVoiceKindFiguredBass:
-        finalizeFiguredBassMeasure (
+        finalizeMeasureInFiguredBassVoice (
           inputLineNumber,
           measureRepeatContextKind,
           context);
@@ -87,7 +87,7 @@ There is a set of \virtualMethod{finalize*} methods in \mf. There basic ones are
 \item \method{msrSegment}{finalizeAllTheMeasuresOfSegment},\\
 		  defined in \msrBoth{msrSegments}\\[-0.5ex]
 
-\item \method{msrMeasure}{finalizeMeasure}, \method{msrMeasure}{finalizeMeasureClone} and \method{msrMeasure}{finalizeRegularMeasure},\\
+\item \method{msrMeasure}{finalizeMeasure}, \method{msrMeasure}{finalizeMeasureClone} and \method{msrMeasure}{finalizeMeasureInRegularVoice},\\
 		  defined in \msrBoth{msrMeasures}\\[-0.5ex]
 
 \item \method{msrChord}{finalizeChord},\\
@@ -98,9 +98,9 @@ There is a set of \virtualMethod{finalize*} methods in \mf. There basic ones are
 \item \method{mxsr2msrTranslator}{finalizeTupletAndPopItFromTupletsStack}, \\
       defined in \mxsrToMsrBoth{mxsr2msrTranslator.h}\\[-0.5ex]
 
-\item \method{msrMeasure}{finalizeFiguredBassMeasure},\\
+\item \method{msrMeasure}{finalizeMeasureInFiguredBassVoice},\\
 		  defined in \msrBoth{msrMeasures}
-\item \method{msrMeasure}{finalizeHarmonyMeasure},\\
+\item \method{msrMeasure}{finalizeMeasureInHarmonyVoice},\\
 		  defined in \msrBoth{msrMeasures}\\[-0.5ex]
 
 
@@ -468,7 +468,7 @@ void msrMeasure::finalizeMeasure (
     // delegate to voice kind specific methods
     switch (voice->getVoiceKind ()) {
       case msrVoiceKind::kVoiceKindRegular:
-        finalizeRegularMeasure (
+        finalizeMeasureInRegularVoice (
           inputLineNumber,
           measureRepeatContextKind,
           context);
@@ -478,13 +478,13 @@ void msrMeasure::finalizeMeasure (
         break;
 
       case msrVoiceKind::kVoiceKindHarmonies:
-        finalizeHarmonyMeasure (
+        finalizeMeasureInHarmonyVoice (
           inputLineNumber,
           measureRepeatContextKind,
           context);
         break;
       case msrVoiceKind::kVoiceKindFiguredBass:
-        finalizeFiguredBassMeasure (
+        finalizeMeasureInFiguredBassVoice (
           inputLineNumber,
           measureRepeatContextKind,
           context);
@@ -524,7 +524,7 @@ void msrMeasure::finalizeMeasure (
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=CPlusPlus]
-void msrMeasure::finalizeRegularMeasure (
+void msrMeasure::finalizeMeasureInRegularVoice (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
   std::string        context)
@@ -593,7 +593,7 @@ void msrMeasure::finalizeRegularMeasure (
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "finalizeRegularMeasure() 1");
+      "finalizeMeasureInRegularVoice() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -683,7 +683,7 @@ void msrMeasure::finalizeRegularMeasure (
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "finalizeRegularMeasure() 2");
+      "finalizeMeasureInRegularVoice() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -697,7 +697,7 @@ void msrMeasure::finalizeRegularMeasure (
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=CPlusPlus]
-void msrMeasure::finalizeHarmonyMeasure (
+void msrMeasure::finalizeMeasureInHarmonyVoice (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
   std::string        context)
@@ -745,7 +745,7 @@ void msrMeasure::finalizeHarmonyMeasure (
   if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "finalizeHarmonyMeasure() 1");
+      "finalizeMeasureInHarmonyVoice() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -797,7 +797,7 @@ void msrMeasure::finalizeHarmonyMeasure (
   if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "finalizeHarmonyMeasure() 2");
+      "finalizeMeasureInHarmonyVoice() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -811,7 +811,7 @@ void msrMeasure::finalizeHarmonyMeasure (
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=CPlusPlus]
-void msrMeasure::finalizeFiguredBassMeasure (
+void msrMeasure::finalizeMeasureInFiguredBassVoice (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
   std::string        context)
@@ -859,7 +859,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
   if (gTraceOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "finalizeFiguredBassMeasure() 1");
+      "finalizeMeasureInFiguredBassVoice() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -911,7 +911,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
   if (gTraceOahGroup->getTraceFiguredBassesDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "finalizeFiguredBassMeasure() 2");
+      "finalizeMeasureInFiguredBassVoice() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
 

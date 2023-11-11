@@ -301,8 +301,6 @@ msrFrame::~msrFrame ()
 void msrFrame::appendFrameNoteToFrame (
   const S_msrFrameNote& frameNote)
 {
-  int inputLineNumber =
-    frameNote->getInputStartLineNumber ();
 
   fFrameFrameNotesList.push_back (
     frameNote);
@@ -328,7 +326,7 @@ void msrFrame::appendFrameNoteToFrame (
 
           msrError (
             gServiceRunData->getInputSourceName (),
-            inputLineNumber,
+            frameNote->getInputStartLineNumber (),
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -357,7 +355,7 @@ void msrFrame::appendFrameNoteToFrame (
 
             msrError                                                   (
               gServiceRunData->getInputSourceName (),
-              inputLineNumber,
+              frameNote->getInputStartLineNumber (),
               __FILE__, __LINE__,
               ss.str ());
           }

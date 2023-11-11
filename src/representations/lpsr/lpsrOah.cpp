@@ -1932,7 +1932,9 @@ R"()",
 R"(STAFF_INSTRUMENT_NAME_SPEC should be of the form STAFF:NAME.
 Set the instrument name of staff STAFF to NAME, for example after displaying
 the names in the score or a summary of the latter in a first run with options
-'-dmsrnames, -display-msr-names' or 'dmsrsum, -display-msr-summary'.
+'-display-msr1-names, -dmsr1names', '-display-msr2-names, -dmsr2names',
+'-display-msr1-summary, -dmsr1sum' or '-display-msr2-summary, -dmsr2sum'.
+'-display-lpsr-summary, -dlpsrsum' or '-display-lpsr-summary, -dlpsrsum'.
 There can be spaces around the ':', in which case quoting is needed.
 There can be several occurrences of this option.)",
         std::regex ("EXECUTABLE"),

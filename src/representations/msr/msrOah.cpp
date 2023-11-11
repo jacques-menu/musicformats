@@ -822,8 +822,16 @@ R"(Write the structure of the part groups to standard error.)",
       oahBooleanAtomWithTracePasses::create (
         "display-msr1-skeleton", "dmsr1skel",
 R"(Write the contents of the first MSR skeleton data to standard error.)",
-        "fDisplayMsrSkeleton",
+        "fDisplayMsrSkeletonFull",
         fDisplayMsrSkeleton));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-msr1-skeleton-full", "dmsr1skelfull",
+R"(Write the contents of the first MSR skeleton data, full version, to standard error.)",
+        "fDisplayMsrSkeletonFull",
+        fDisplayMsrSkeletonFull));
 
   // display first MSR
 

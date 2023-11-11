@@ -93,13 +93,15 @@ class EXP msrPart : public msrPartGroupElement
     int                   getPartAbsoluteNumber () const
                               { return fPartAbsoluteNumber; }
 
-    // part ID and names
+    // part ID
 
     void                  setPartID (const std::string& partID)
                               { fPartID = partID; }
 
     std::string           getPartID () const
                               { return fPartID; }
+
+    // part names
 
     void                  setPartMsrName (const std::string& partMsrName);
 
@@ -612,8 +614,7 @@ class EXP msrPart : public msrPartGroupElement
     std::string           fPartID; // native
 
     std::string           fPartMsrName;
-                            // may be different than fPartID
-                            // if renamed,
+                            // may be different than fPartID if renamed,
                             // coined in constructor
 
     std::string           fPartName; // from '<part-name/>'

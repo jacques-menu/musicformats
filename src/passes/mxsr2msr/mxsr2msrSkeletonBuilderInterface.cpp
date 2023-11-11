@@ -107,6 +107,12 @@ S_msrScore translateMxsrToMsrSkeleton (
       gLanguage->displayTheFirstMSRSkeletonAsText ());
   }
 
+  if (gMsrOahGroup->getDisplayMsrSkeletonFull ()) {
+    displayMsrScoreFull(
+      scoreSkeleton,
+      gLanguage->displayTheFirstMSRSkeletonAsText ());
+  }
+
   // register time spent
   clock_t endClock = clock ();
 

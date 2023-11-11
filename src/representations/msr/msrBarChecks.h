@@ -35,7 +35,7 @@ class EXP msrBarCheck : public msrMeasureElement
                             const S_msrMeasure& upLinkToMeasure);
 
     static SMARTP<msrBarCheck> create (
-                            int                 inputLineNumber);
+                            int inputLineNumber);
 
     static SMARTP<msrBarCheck> createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
                             int                 inputLineNumber,
@@ -58,10 +58,10 @@ class EXP msrBarCheck : public msrMeasureElement
                             const S_msrMeasure& upLinkToMeasure);
 
                           msrBarCheck (
-                            int                inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const std::string& nextBarOriginalNumber,
-                            int                nextBarPuristNumber);
+                            const std::string&  nextBarOriginalNumber,
+                            int                 nextBarPuristNumber);
 
     virtual               ~msrBarCheck ();
 

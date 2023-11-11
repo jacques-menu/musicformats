@@ -85,7 +85,7 @@
         </attributes>
       <note default-x="78.29" default-y="-30.00">
         <pitch>
-          <step>G</step>
+          <step>E</step>
           <octave>4</octave>
           </pitch>
         <duration>1</duration>
@@ -96,7 +96,7 @@
         </note>
       <note default-x="103.08" default-y="-30.00">
         <pitch>
-          <step>G</step>
+          <step>F</step>
           <octave>4</octave>
           </pitch>
         <duration>1</duration>

@@ -164,7 +164,7 @@ class EXP msr2bsrTranslator :
     // ------------------------------------------------------
 
     void                      notSupportedMessage (
-                                int           inputLineNumber,
+                                int                inputLineNumber,
                                 const std::string& message);
 
     // the MSR score we're visiting

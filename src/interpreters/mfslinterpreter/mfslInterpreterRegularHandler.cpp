@@ -166,17 +166,17 @@ void mfslInterpreterRegularHandler::createInformationsRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("about", subGroup);
-  
+
   registerAtomInRegularSubgroup ("version", subGroup);
   registerAtomInRegularSubgroup ("version-full", subGroup);
-  
+
   registerAtomInRegularSubgroup ("history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("contact", subGroup);
-  
+
   registerAtomInRegularSubgroup ("music-formats-test", subGroup);
   registerAtomInRegularSubgroup ("display-prefixes", subGroup);
   registerAtomInRegularSubgroup ("display-single-character-options", subGroup);
@@ -368,7 +368,7 @@ void mfslInterpreterRegularHandler::createWarningAndErrorsRegularGroup ()
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
 
-  registerAtomInRegularSubgroup ("maintainance", subGroup);
+  registerAtomInRegularSubgroup ("maintainance-run", subGroup);
 }
 
 //______________________________________________________________________________

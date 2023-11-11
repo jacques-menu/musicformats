@@ -49,6 +49,8 @@
 
 #include "oahOah.h"
 
+#include "waeOah.h"
+
 #include "lpsr2lilypondOah.h"
 
 #include "lpsrBrowsers.h"
@@ -603,9 +605,6 @@ std::string lpsr2lilypondTranslator::alterationKindAsLilypondString (
 std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
   // generate LilyPond octave relative to fCurrentOctaveEntryReference
 
   // in MusicXML, octave number is 4 for the octave starting with middle C
@@ -617,19 +616,19 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInRelativeEntryMode (
     noteDiatonicPitchKind =
       note->
         noteDiatonicPitchKind (
-          inputLineNumber);
+          note->getInputStartLineNumber ());
 
   msrDiatonicPitchKind
     referenceDiatonicPitchKind =
       fCurrentOctaveEntryReference->
         noteDiatonicPitchKind (
-          inputLineNumber);
+          note->getInputStartLineNumber ());
 
   std::string
     referenceDiatonicPitchKindAsString =
       fCurrentOctaveEntryReference->
         noteDiatonicPitchKindAsString (
-          inputLineNumber);
+          note->getInputStartLineNumber ());
 
   msrOctaveKind
     referenceAbsoluteOctave =
@@ -857,7 +856,7 @@ std::string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
 
 //________________________________________________________________________
 std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
-  int               inputLineNumber,
+  int                      inputLineNumber,
   const S_msrStringTuning& stringTuning)
 {
   msrDiatonicPitchKind
@@ -943,10 +942,7 @@ std::string lpsr2lilypondTranslator::stringTuningAsLilypondString (
 std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
-std::stringstream ss;
+  std::stringstream ss;
 
   // should an editorial accidental be generated?
   switch (note->getNoteEditorialAccidentalKind ()) {
@@ -1031,7 +1027,7 @@ std::stringstream ss;
 
       std::setw (fieldWidth) <<
       "% line " <<
-      inputLineNumber;
+      note->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1047,7 +1043,7 @@ std::stringstream ss;
           gLog <<
             "notePitchAsLilypondString() 2: fCurrentOctaveEntryReference is null" <<
             " upon note " << note->asString () <<
-            ", line " << inputLineNumber;
+            ", line " << note->getInputStartLineNumber ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -1058,7 +1054,7 @@ std::stringstream ss;
         // generate absolute octave
         ss <<
           absoluteOctaveAsLilypondString (
-            inputLineNumber,
+            note->getInputStartLineNumber (),
             noteAbsoluteOctave);
 
         // fCurrentOctaveEntryReference will be set to note later
@@ -1070,7 +1066,7 @@ std::stringstream ss;
             "notePitchAsLilypondString() 3: fCurrentOctaveEntryReference is '" <<
             fCurrentOctaveEntryReference->asString () <<
             "' upon note " << note->asString () <<
-            ", line " << inputLineNumber;
+            ", line " << note->getInputStartLineNumber ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -1088,7 +1084,7 @@ std::stringstream ss;
       // generate LilyPond absolute octave
       ss <<
         absoluteOctaveAsLilypondString (
-          inputLineNumber,
+          note->getInputStartLineNumber (),
           noteAbsoluteOctave);
       break;
 
@@ -1419,9 +1415,6 @@ std::string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
 void lpsr2lilypondTranslator::generateNoteHeadColor (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
   // has the note alpha RGB color been set?
  if (note->getNoteColorAlphaRGBHasBenSet ()) {
     // get note alpha RGB color
@@ -1457,11 +1450,11 @@ void lpsr2lilypondTranslator::generateNoteHeadColor (
         "note RGB color '" <<
         noteRGB <<
         "' is ill-formed" <<
-        ", line " << inputLineNumber;
+        ", line " << note->getInputStartLineNumber ();
 
       lpsr2lilypondInternalError (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        note->getInputStartLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1867,12 +1860,25 @@ void lpsr2lilypondTranslator::generateCoda (const S_msrCoda& coda)
     case msrCodaKind::kCodaFirst:
       // generate the coda
       fLilypondCodeStream <<
-        "\\mark \\markup { \\musicglyph #\"scripts.coda\" }%{ first %}";
+        "\\mark \\markup { \\musicglyph #\"scripts.coda\" }";
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gWaeOahGroup->getMaintainanceRun ()) {
+        fLilypondCodeStream << " %{ kCodaFirst %} ";
+      }
+#endif // MF_TRACE_IS_ENABLED
       break;
+
     case msrCodaKind::kCodaSecond:
       // generate the coda
       fLilypondCodeStream <<
-        "\\mark \\markup { \\musicglyph #\"scripts.coda\" }%{ second %}";
+        "\\mark \\markup { \\musicglyph #\"scripts.coda\" }";
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gWaeOahGroup->getMaintainanceRun ()) {
+        fLilypondCodeStream << " %{ kCodaSecond %} ";
+      }
+#endif // MF_TRACE_IS_ENABLED
       break;
   } // switch
   fLilypondCodeStream << std::endl;
@@ -1966,9 +1972,6 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
 void lpsr2lilypondTranslator::generateCodeForNote (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -1986,7 +1989,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
         std::endl <<
         "% --> generating code for note " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
         if (traceNotes) {
@@ -2022,11 +2025,11 @@ void lpsr2lilypondTranslator::generateCodeForNote (
           "note " <<
           note->asShortString () <<
           "' has been finalized as being partially a solo note or rest, not supported yet" <<
-          ", line " << inputLineNumber;
+          ", line " << note->getInputStartLineNumber ();
 
         lpsr2lilypondInternalError (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          note->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2108,9 +2111,6 @@ void lpsr2lilypondTranslator::generateCodeForNote (
 void lpsr2lilypondTranslator::generateCodeForNoteInMeasure (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -2128,7 +2128,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInMeasure (
         std::endl <<
         "% --> generating code for noteRegularInMeasure " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
       if (traceNotes) {
@@ -2153,7 +2153,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInMeasure (
 
   if (wholeNotesDurationShouldBeGenerated (noteSoundingWholeNotes)) {
     generateWholeNotesDuration (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       noteSoundingWholeNotes);
   }
 
@@ -2165,7 +2165,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInMeasure (
     fLilypondCodeStream <<
     //* JMI TOO MUCH
       wholeNotesAsLilypondString (
-        inputLineNumber,
+        note->getInputStartLineNumber (),
         noteSoundingWholeNotes) <<
         //*/
       "*" <<
@@ -2198,9 +2198,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteInMeasure (
 void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -2218,7 +2215,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
         std::endl <<
         "% --> generating code for noteRestInMeasure " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
         if (traceNotes) {
@@ -2305,11 +2302,11 @@ void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
       // generate its whole notes duration if relevant JMI ALWAYS ??? v0.9.70
 //       fLilypondCodeStream <<
 //         durationAsLilypondStringIfItShouldBeGenerated (
-//           inputLineNumber,
+//           note->getInputStartLineNumber (),
 //           unpitchedRestSoundingWholeNotes);
       if (wholeNotesDurationShouldBeGenerated (unpitchedRestSoundingWholeNotes)) {
         generateWholeNotesDuration (
-          inputLineNumber,
+          note->getInputStartLineNumber (),
           unpitchedRestSoundingWholeNotes);
       }
 
@@ -2350,7 +2347,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
       // generate the rest whole notes duration if relevant
 //       fLilypondCodeStream <<
 //         durationAsLilypondStringIfItShouldBeGenerated (
-//           inputLineNumber,
+//           note->getInputStartLineNumber (),
 //           unpitchedRestSoundingWholeNotes);
       msrWholeNotes
         restSoundingWholeNotes =
@@ -2358,7 +2355,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
 
       if (wholeNotesDurationShouldBeGenerated (restSoundingWholeNotes)) {
         generateWholeNotesDuration (
-          inputLineNumber,
+          note->getInputStartLineNumber (),
           restSoundingWholeNotes);
       }
 
@@ -2384,7 +2381,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
           if (! gGlobalLpsr2lilypondOahGroup->getAllNotesDurations ()) {
             fLilypondCodeStream << // JMI
               wholeNotesAsLilypondString (
-                inputLineNumber,
+                note->getInputStartLineNumber (),
                 noteSoundingWholeNotes);
           }
           * /
@@ -2407,9 +2404,6 @@ void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
 void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -2427,7 +2421,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
         std::endl <<
         "% --> generating code for noteSkipInMeasure " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
       if (traceNotes) {
@@ -2444,18 +2438,28 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
   if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
     // generate a rest to help pin-point bugs
     fLilypondCodeStream << 'r';
-    fLilypondCodeStream << " %{ FROC 1 %} ";
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gWaeOahGroup->getMaintainanceRun ()) {
+      fLilypondCodeStream << " %{ r222 %} ";
+    }
+#endif // MF_TRACE_IS_ENABLED
   }
   else {
     // generate a skip
-    fLilypondCodeStream << 's' << " %{ s222 %}";
-    fLilypondCodeStream << " %{ FROC 2 %} ";
+    fLilypondCodeStream << 's';
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gWaeOahGroup->getMaintainanceRun ()) {
+      fLilypondCodeStream << " %{ s222 %} ";
+    }
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // generate the skip duration if relevant
 //   fLilypondCodeStream <<
 //     durationAsLilypondStringIfItShouldBeGenerated (
-//       inputLineNumber,
+//       note->getInputStartLineNumber (),
 //       note->getMeasureElementSoundingWholeNotes ());
   msrWholeNotes
     skipSoundingWholeNotes =
@@ -2463,7 +2467,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
 
   if (wholeNotesDurationShouldBeGenerated (skipSoundingWholeNotes)) {
     generateWholeNotesDuration (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       skipSoundingWholeNotes);
   }
 
@@ -2488,9 +2492,6 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
 void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInMeasure (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -2508,7 +2509,7 @@ void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInMeasure (
       std::endl <<
       "% --> generating code for noteUnpitchedInMeasure " <<
       note->asString () <<
-      ", line " << inputLineNumber <<
+      ", line " << note->getInputStartLineNumber () <<
       std::endl;
 
       if (traceNotes) {
@@ -2533,11 +2534,11 @@ void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInMeasure (
   // generate the unpitched note duration if relevant
 //   fLilypondCodeStream <<
 //     durationAsLilypondStringIfItShouldBeGenerated (
-//       inputLineNumber,
+//       note->getInputStartLineNumber (),
 //       noteSoundingWholeNotes);
   if (wholeNotesDurationShouldBeGenerated (noteSoundingWholeNotes)) {
     generateWholeNotesDuration (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       noteSoundingWholeNotes);
   }
 
@@ -2548,7 +2549,7 @@ void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInMeasure (
     // regardless of gServiceRunData->getAllNotesDurations ()
     fLilypondCodeStream <<
       wholeNotesAsLilypondString (
-        inputLineNumber,
+        note->getInputStartLineNumber (),
         noteSoundingWholeNotes) <<
       "*" <<
       gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsFraction ();
@@ -2562,7 +2563,7 @@ void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInMeasure (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          " %{ line " << inputLineNumber << "%}" <<
+          " %{ line " << note->getInputStartLineNumber () << "%}" <<
           " ~  %{ kUnpitchedNote %}"; // JMI spaces???
       }
     }
@@ -2574,9 +2575,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
   {
     Bool
       traceNotes =
@@ -2593,7 +2591,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
         std::endl <<
         "% --> generating code for noteRegularInChord " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
       if (traceNotes) {
@@ -2653,9 +2651,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
 void lpsr2lilypondTranslator::generateCodeForNoteInTuplet (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -2673,7 +2668,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTuplet (
         std::endl <<
         "% --> generating code for noteRegularInTuplet " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
         if (traceNotes) {
@@ -2694,7 +2689,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTuplet (
   // generate the note display duration if relevant
 //   fLilypondCodeStream <<
 //     durationAsLilypondStringIfItShouldBeGenerated (
-//       inputLineNumber,
+//       note->getInputStartLineNumber (),
 //       note->getNoteDisplayWholeNotes ());
   msrWholeNotes
     noteDisplayWholeNotes =
@@ -2702,7 +2697,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTuplet (
 
   if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
     generateWholeNotesDuration (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       noteDisplayWholeNotes);
   }
 
@@ -2714,7 +2709,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTuplet (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          " %{ l ine " << inputLineNumber << " %}" <<
+          " %{ l ine " << note->getInputStartLineNumber () << " %}" <<
           "~  %{ kTupletMemberNote %}"; // JMI spaces???
       }
     }
@@ -2736,9 +2731,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTuplet (
 void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -2756,7 +2748,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
       std::endl <<
       "% --> generating code for noteRestInTuplet " <<
       note->asString () <<
-      ", line " << inputLineNumber <<
+      ", line " << note->getInputStartLineNumber () <<
       std::endl;
 
       if (traceNotes) {
@@ -2784,7 +2776,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
   // generate the note display duration if relevant
 //   fLilypondCodeStream <<
 //     durationAsLilypondStringIfItShouldBeGenerated (
-//       inputLineNumber,
+//       note->getInputStartLineNumber (),
 //       note-> getNoteDisplayWholeNotes ());
   msrWholeNotes
     noteDisplayWholeNotes =
@@ -2792,7 +2784,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
 
   if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
     generateWholeNotesDuration (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       noteDisplayWholeNotes);
   }
 
@@ -2818,7 +2810,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          " %{ line " << inputLineNumber << " %}" <<
+          " %{ line " << note->getInputStartLineNumber () << " %}" <<
           "~  %{ kTupletMemberNote %}"; // JMI spaces???
       }
     }
@@ -2831,9 +2823,6 @@ void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
 void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInTuplet (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -2851,7 +2840,7 @@ void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInTuplet (
         std::endl <<
         "% --> generating code for noteUnpitchedInTuplet " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
       if (traceNotes) {
@@ -2876,7 +2865,7 @@ void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInTuplet (
   // generate the note display duration if relevant
 //   fLilypondCodeStream <<
 //     durationAsLilypondStringIfItShouldBeGenerated (
-//       inputLineNumber,
+//       note->getInputStartLineNumber (),
 //       note-> getNoteDisplayWholeNotes ());
   msrWholeNotes
     noteDisplayWholeNotes =
@@ -2884,7 +2873,7 @@ void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInTuplet (
 
   if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
     generateWholeNotesDuration (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       noteDisplayWholeNotes);
   }
 
@@ -2896,7 +2885,7 @@ void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInTuplet (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          " %{ line " << inputLineNumber << " %}" <<
+          " %{ line " << note->getInputStartLineNumber () << " %}" <<
           "~  %{ kTupletUnpitchedMemberNote %}";
       }
     }
@@ -2908,9 +2897,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
   {
     Bool
       traceNotes =
@@ -2927,7 +2913,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
         std::endl <<
         "% --> generating code for noteRegularInGraceNotesGroup " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
       if (traceNotes) {
@@ -2964,7 +2950,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          " %{ line " << inputLineNumber << " %}" <<
+          " %{ line " << note->getInputStartLineNumber () << " %}" <<
           "~  %{ kGraceNote %}";
       }
     }
@@ -2986,9 +2972,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
 void lpsr2lilypondTranslator::generateCodeForSkipInGraceNotesGroup (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -3006,7 +2989,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInGraceNotesGroup (
         std::endl <<
         "% --> generating code for noteSkipInGraceNotesGroup " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
       if (traceNotes) {
@@ -3033,7 +3016,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInGraceNotesGroup (
   // generate the skip duration if relevant
 //   fLilypondCodeStream <<
 //     durationAsLilypondStringIfItShouldBeGenerated (
-//       inputLineNumber,
+//       note->getInputStartLineNumber (),
 //       note->getNoteDisplayWholeNotes ());
   msrWholeNotes
     noteDisplayWholeNotes =
@@ -3041,7 +3024,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInGraceNotesGroup (
 
   if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
     generateWholeNotesDuration (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       noteDisplayWholeNotes);
   }
 
@@ -3072,9 +3055,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
   {
     Bool
       traceNotes =
@@ -3091,7 +3071,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
         std::endl <<
         "% --> generating code for noteInChordInGraceNotesGroup " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
       if (traceNotes) {
@@ -3124,7 +3104,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          " %{ line " << inputLineNumber << " %}" <<
+          " %{ line " << note->getInputStartLineNumber () << " %}" <<
           "~  %{ msrNoteKind::kNoteInChordInGraceNotesGroup %}";
       }
     }
@@ -3146,9 +3126,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
 void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -3166,7 +3143,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
         std::endl <<
         "% --> generating code for noteInTupletInGraceNotesGroup " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
       if (traceNotes) {
@@ -3200,7 +3177,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
   // generate the note display duration if relevant
 //   fLilypondCodeStream <<
 //     durationAsLilypondStringIfItShouldBeGenerated (
-//       inputLineNumber,
+//       note->getInputStartLineNumber (),
 //       note->getNoteDisplayWholeNotes ());
   msrWholeNotes
     noteDisplayWholeNotes =
@@ -3208,7 +3185,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
 
   if (wholeNotesDurationShouldBeGenerated (noteDisplayWholeNotes)) {
     generateWholeNotesDuration (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       noteDisplayWholeNotes);
   }
 
@@ -3254,9 +3231,6 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
 void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -3274,7 +3248,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
         std::endl <<
         "% --> generating code for noteInDoubleTremolo " <<
         note->asString () <<
-        ", line " << inputLineNumber <<
+        ", line " << note->getInputStartLineNumber () <<
         std::endl;
 
       if (traceNotes) {
@@ -3295,7 +3269,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
   // generate the note duration if relevant
 //   fLilypondCodeStream <<
 //     durationAsLilypondStringIfItShouldBeGenerated (
-//       inputLineNumber,
+//       note->getInputStartLineNumber (),
 //       note->getMeasureElementSoundingWholeNotes ());
   msrWholeNotes
     noteSoundingWholeNotes =
@@ -3303,7 +3277,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
 
   if (wholeNotesDurationShouldBeGenerated (noteSoundingWholeNotes)) {
     generateWholeNotesDuration (
-      inputLineNumber,
+      note->getInputStartLineNumber (),
       noteSoundingWholeNotes);
   }
 
@@ -3323,7 +3297,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          " %{ line " << inputLineNumber << " %}" <<
+          " %{ line " << note->getInputStartLineNumber () << " %}" <<
           " ~ %{ kDoubleTremoloMemberNote %}";
       }
     }
@@ -4074,13 +4048,15 @@ std::string lpsr2lilypondTranslator::technicalWithIntegerAsLilypondString (
   switch (technicalWithInteger->getTechnicalWithIntegerKind ()) {
      case msrTechnicalWithIntegerKind::kFingering:
       ss <<
-        "- " <<
+        "-" <<
        technicalWithInteger->
           getTechnicalWithIntegerValue ();
       break;
+
     case msrTechnicalWithIntegerKind::kFret:
-      // LilyPond will take care of that JMI
+      // LilyPond will take care of that JMI v0.9.70
       break;
+
     case msrTechnicalWithIntegerKind::kString:
       ss << // no space is allowed between the backSlash and the number
         "\\" <<
@@ -4244,7 +4220,7 @@ void lpsr2lilypondTranslator::generateOrnament (
           "see http://lilypond.org/doc/v2.18/Documentation/snippets/expressive-marks";
 
         lpsrWarning (
-          inputLineNumber,
+          note->getInputStartLineNumber (),
           ss.str ());
 
         result = "\\reverseturn %{ " + ss.str () + " %}";
@@ -4281,7 +4257,7 @@ void lpsr2lilypondTranslator::generateOrnament (
           "delayed vertical turn is not supported, ignored";
 
         lpsrWarning (
-          inputLineNumber,
+          note->getInputStartLineNumber (),
           message);
 
         result = "%{ " + message + " %}";
@@ -4594,7 +4570,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
       " after note " <<
       note->asString () <<
       ", line " <<
-      spanner->getInputEndLineNumber ();
+      spanner->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4957,9 +4933,6 @@ std::string lpsr2lilypondTranslator::harmonyDegreeAlterationKindAsLilypondString
 std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
   const S_msrHarmony& harmony)
 {
-  int inputLineNumber =
-    harmony->getInputStartLineNumber ();
-
   std::stringstream ss;
 
   // should '\powerChords' be generated?
@@ -4991,7 +4964,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
     // generate harmony sounding whole notes if relevant
 //     ss <<
 //       durationAsLilypondStringIfItShouldBeGenerated (
-//         inputLineNumber,
+//         harmony->getInputStartLineNumber (),
 //         harmony->getMeasureElementSoundingWholeNotes ());
     msrWholeNotes
       harmonySoundingWholeNotes =
@@ -4999,7 +4972,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
 
     if (wholeNotesDurationShouldBeGenerated (harmonySoundingWholeNotes)) {
       generateWholeNotesDurationOnStream (
-        inputLineNumber,
+        harmony->getInputStartLineNumber (),
         harmonySoundingWholeNotes,
         ss);
     }
@@ -5008,7 +4981,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
     // generate harmony display whole notes if relevant and tuplet factor
 //     ss <<
 //       durationAsLilypondStringIfItShouldBeGenerated (
-//         inputLineNumber,
+//         harmony->getInputStartLineNumber (),
 //         harmony->getHarmonyDisplayWholeNotes ()) <<
     msrWholeNotes
       harmonyDisplayWholeNotes =
@@ -5016,7 +4989,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
 
     if (wholeNotesDurationShouldBeGenerated (harmonyDisplayWholeNotes)) {
       generateWholeNotesDurationOnStream (
-        inputLineNumber,
+        harmony->getInputStartLineNumber (),
         harmonyDisplayWholeNotes,
         ss);
     }
@@ -5416,9 +5389,6 @@ std::string lpsr2lilypondTranslator::figureAsLilypondString (
 std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
   const S_msrFiguredBass& figuredBass)
 {
-  int inputLineNumber =
-    figuredBass->getInputStartLineNumber ();
-
   std::stringstream ss;
 
   ss << "<";
@@ -5452,7 +5422,7 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
     // generate figured bass element sounding whole notes if relevant
 //     ss <<
 //       durationAsLilypondStringIfItShouldBeGenerated (
-//         inputLineNumber,
+//         figuredBass->getInputStartLineNumber (),
 //         figuredBass->getMeasureElementSoundingWholeNotes ());
     msrWholeNotes
       figuredBassSoundingWholeNotes =
@@ -5460,7 +5430,7 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
 
     if (wholeNotesDurationShouldBeGenerated (figuredBassSoundingWholeNotes)) {
       generateWholeNotesDurationOnStream (
-        inputLineNumber,
+        figuredBass->getInputStartLineNumber (),
         figuredBassSoundingWholeNotes,
         ss);
     }
@@ -5469,7 +5439,7 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
     // generate figured bass element display whole notes if relevant and tuplet factor
 //     ss <<
 //       durationAsLilypondStringIfItShouldBeGenerated (
-//         inputLineNumber,
+//         figuredBass->getInputStartLineNumber (),
 //         figuredBass->getFiguredBassDisplayWholeNotes ()) <<
     msrWholeNotes
       figuredBassDisplayWholeNotes =
@@ -5477,7 +5447,7 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
 
     if (wholeNotesDurationShouldBeGenerated (figuredBassDisplayWholeNotes)) {
       generateWholeNotesDurationOnStream (
-        inputLineNumber,
+        figuredBass->getInputStartLineNumber (),
         figuredBassDisplayWholeNotes,
         ss);
     }
@@ -5524,11 +5494,6 @@ bool compareFrameNotesByDecreasingStringNumber (
 std::string lpsr2lilypondTranslator::frameAsLilypondString (
   const S_msrFrame& frame)
 {
-/* JMI
-  int inputLineNumber =
-    frame->getInputStartLineNumber ();
-  */
-
   std::stringstream ss;
 
   std::list<S_msrFrameNote> // not const&, it will be sorted below
@@ -5894,7 +5859,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScore& elt)
 
       ss <<
         "% --> End visiting lpsrScore" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -5969,7 +5934,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrIdentification& elt) // JMI
 
       ss <<
         "% --> End visiting msrIdentification" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -6092,7 +6057,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeVariable& elt)
 
       ss <<
         "% --> End visiting lpsrSchemeVariable" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -6199,7 +6164,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrHeader& elt)
 
       ss <<
         "% --> End visiting lpsrHeader" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -8061,7 +8026,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPaper& elt) // superflous ??? JMI
 
       ss <<
         "% --> End visiting lpsrPaper" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -8206,7 +8171,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
 
       ss <<
         "% --> End visiting lpsrLayout" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -8374,7 +8339,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
 
       ss <<
         "% --> End visiting lpsrBookBlock" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -8467,7 +8432,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
 
       ss <<
         "% --> End visiting lpsrScoreBlock" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -8554,7 +8519,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
 
       ss <<
         "% --> End visiting lpsrBookPartBlock" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -8653,7 +8618,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
 
       ss <<
         "% --> End visiting lpsrParallelMusicBLock" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -8990,7 +8955,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
 
       ss <<
         "% --> End visiting lpsrPartGroupBlock" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -9175,7 +9140,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
 
       ss <<
         "% --> End visiting lpsrPartBlock" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -9212,9 +9177,6 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 {
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -9230,7 +9192,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
       ss <<
         "% --> Start visiting lpsrStaffBlock" <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -9474,7 +9436,7 @@ if (true)
               getLpsrQuarterTonesPitchesLanguageKind ()) <<
 
           absoluteOctaveAsLilypondString (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             staffTuning->
               getStaffTuningOctaveKind ());
 
@@ -9558,7 +9520,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 
       ss <<
         "% --> End visiting lpsrStaffBlock" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -9727,7 +9689,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewStaffBlock& elt)
 
       ss <<
         "% --> End visiting lpsrNewStaffBlock" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10068,7 +10030,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrUseVoiceCommand& elt)
 
       ss <<
         "% --> End visiting lpsrUseVoiceCommand" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10178,7 +10140,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrNewLyricsBlock& elt)
 
       ss <<
         "% --> End visiting lpsrNewLyricsBlock" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10249,7 +10211,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrVariableUseCommand& elt)
 
       ss <<
         "% --> End visiting lpsrVariableUseCommand" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10365,7 +10327,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrChordNamesContext& elt)
 
       ss <<
         "% --> End visiting lpsrChordNamesContext" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10488,7 +10450,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrFiguredBassContext& elt)
 
       ss <<
         "% --> End visiting lpsrFiguredBassContext" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10553,7 +10515,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBarCommand& elt)
 
       ss <<
         "% --> End visiting lpsrBarCommand" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10625,7 +10587,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrComment& elt)
 
       ss <<
         "% --> End visiting lpsrComment" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10699,7 +10661,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrSchemeFunction& elt)
 
       ss <<
         "% --> End visiting lpsrSchemeFunction" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10774,7 +10736,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrMelismaCommand& elt)
 
       ss <<
         "% --> End visiting lpsrMelismaCommand" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10840,7 +10802,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScore& elt)
 
       ss <<
         "% --> End visiting msrScore" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10905,7 +10867,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScaling& elt)
 
       ss <<
         "% --> End visiting msrScaling" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -10993,7 +10955,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageLayout& elt)
 
       ss <<
         "% --> End visiting msrPageLayout" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -11058,7 +11020,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSystemLayout& elt)
 
       ss <<
         "% --> End visiting msrSystemLayout" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -11123,7 +11085,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaffLayout& elt)
 
       ss <<
         "% --> End visiting msrStaffLayout" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -11188,7 +11150,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAppearance& elt)
 
       ss <<
         "% --> End visiting msrAppearance" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -11253,7 +11215,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCredit& elt)
 
       ss <<
         "% --> End visiting msrCredit" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -11317,7 +11279,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCreditWords& elt)
 
       ss <<
         "% --> End visiting msrCreditWords" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -11388,7 +11350,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
       ss <<
         "% --> End visiting msrPartGroup" <<
         elt->getPartGroupCombinedName () <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -11489,7 +11451,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
       ss <<
         "% --> End visiting msrPart" <<
         elt->getPartCombinedName () <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -11572,7 +11534,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
         "% --> End visiting msrStaff \"" <<
         elt->getStaffAlphabeticName () <<
         "\"" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -11643,7 +11605,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffTuning& elt)
           ((*i)->getStaffTuningQuarterTonesPitch ())) <<
  // JMI       char (tolower ((*i)->getStaffTuningStep ())) <<
         absoluteOctaveAsLilypondString (
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
           (*i)->getStaffTuningOctaveKind ());
       if (++i == iEnd) break;
       fLilypondCodeStream << ' ';
@@ -12018,7 +11980,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
         "% --> End visiting msrVoice \"" <<
         elt->getVoiceAlphabeticName () <<
         "\"" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -12133,7 +12095,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 //       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
 //       " to staff " << fCurrentMusicXMLStaffNumber <<
 //       ", \"" << staffToChangeTo->getStaffAlphabeticName () << "\"" <<
-//       ", line " << inputLineNumber <<
+//       ", line " << elt->getInputStartLineNumber () <<
 //       std::endl;
 //
 //     gWaeHandler->waeTraceWithoutInputLocation (
@@ -12520,9 +12482,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
 void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    elt->getInputEndLineNumber ();
-
   {
     Bool
       traceLpsrVisitors =
@@ -12539,7 +12498,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
         "% --> End visiting msrFiguredBass '" <<
         elt->asString () <<
         '\'' <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -12567,11 +12526,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
       // generate figured bass sounding whole notes if relevant
       fLilypondCodeStream <<
         durationAsLilypondStringIfItShouldBeGenerated (
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
           elt->getFiguredBassSoundingWholeNotes ());
       if (wholeNotesDurationShouldBeGenerated ( elt->getFiguredBassSoundingWholeNotes ())) {
         generateWholeNotesDurationOnStream (
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
            elt->getFiguredBassSoundingWholeNotes (),
           ss);
       }
@@ -12580,11 +12539,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
       // generate figured bass display whole notes if relevant and tuplet factor
       fLilypondCodeStream <<
         durationAsLilypondStringIfItShouldBeGenerated (
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
           elt->getFiguredBassDisplayWholeNotes ()) <<
       if (wholeNotesDurationShouldBeGenerated (elt->getFiguredBassDisplayWholeNotes ())) {
         generateWholeNotesDurationOnStream (
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
           elt->getFiguredBassDisplayWholeNotes (),
           ss);
       }
@@ -12683,7 +12642,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
       "% end of segment " <<
       elt->getSegmentAbsoluteNumber () <<
       ", line " <<
-      elt->getInputEndLineNumber () <<
+      elt->getInputStartLineNumber () <<
       std::endl;
   }
 }
@@ -12691,12 +12650,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 {
-  int
-    inputLineNumber =
-      elt->getInputStartLineNumber ();
-
-  fCurrentMeasureNumber =
-    elt->getMeasureNumber ();
+  std::string
+    fCurrentMeasureNumber =
+      elt->getMeasureNumber ();
 
   msrMeasureKind
     measureKind =
@@ -12731,7 +12687,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         ", measureEndRegularKind: " << measureEndRegularKind <<
         ", measurePuristNumber: '" << measurePuristNumber << '\'' <<
         ", fOnGoingMultiMeasureRests: " << fOnGoingMultiMeasureRests <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -12762,7 +12718,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       " (" <<
       elt->getMeasureKind () <<
       ')' <<
-      ", line " << inputLineNumber <<
+      ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
 //     ++gIndenter; // decremented in visitEnd (S_msrMeasure& elt)
@@ -12787,7 +12743,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           std::endl <<
           "Generating a box around LilyPond measure purist number '" <<
           measurePuristNumber <<
-          "', line " << inputLineNumber << " ===-->" <<
+          "', line " << elt->getInputStartLineNumber () << " ===-->" <<
           std::endl;
       }
   #endif // MF_TRACE_IS_ENABLED
@@ -12822,7 +12778,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             fCurrentMeasureNumber <<
             "' to " <<
             lilypondMeasureNumber <<
-            "', line " << inputLineNumber << " ===-->" <<
+            "', line " << elt->getInputStartLineNumber () << " ===-->" <<
             std::endl;
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -12842,7 +12798,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             "' to " <<
             lilypondMeasureNumber <<
             ": they're one and the same" <<
-            "', line " << inputLineNumber << " ===-->" <<
+            "', line " << elt->getInputStartLineNumber () << " ===-->" <<
             std::endl;
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -12873,7 +12829,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       ", measureEndRegularKind: " << measureEndRegularKind <<
       ", measurePuristNumber: " << measurePuristNumber <<
       ", fOnGoingMultiMeasureRests: " << fOnGoingMultiMeasureRests <<
-      ", line " << inputLineNumber <<
+      ", line " << elt->getInputStartLineNumber () <<
       " ===-->";
 
     gWaeHandler->waeTrace (
@@ -12986,13 +12942,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 // if (false) // JMI
 //         lpsr2lilypondInternalError (
 //           gServiceRunData->getInputSourceName (),
-//           inputLineNumber,
+//           elt->getInputStartLineNumber (),
 //           __FILE__, __LINE__,
 //           ss.str ());
 // else
         lpsr2lilypondInternalWarning (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
           ss.str ());
       }
       break;
@@ -13001,12 +12957,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindAnacrusis:
+      // only generate '\partial' at the beginning of a voice // this code SUPERFLOUS??? JMI v0.9.66
       if (elt->getMeasureIsFirstInVoice ()) {
-        // only generate '\partial' at the beginning of a voice // this code SUPERFLOUS??? JMI v0.9.66
         std::string
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
-              inputLineNumber,
+              elt->getInputStartLineNumber (),
               elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
 
         fLilypondCodeStream <<
@@ -13025,7 +12981,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         std::string
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
-              inputLineNumber,
+              elt->getInputStartLineNumber (),
               elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
 
         fLilypondCodeStream <<
@@ -13044,7 +13000,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         std::string
           upbeatNotesDuration =
             wholeNotesAsLilypondString (
-              inputLineNumber,
+              elt->getInputStartLineNumber (),
               elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
 
         fLilypondCodeStream <<
@@ -13082,7 +13038,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
             "% Setting the measure whole notes for measure " <<
             std::setw (fieldWidth) <<
             fCurrentMeasureNumber <<
-            ", line: " << inputLineNumber <<
+            ", line: " << elt->getInputStartLineNumber () <<
             std::endl <<
             std::setw (fieldWidth) <<
             "% measureCurrentAccumulatedWholeNotesDuration: " <<
@@ -13109,7 +13065,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
      // JMI       lpsr2lilypondInternalError (
           lpsr2lilypondInternalWarning (
             gServiceRunData->getInputSourceName (),
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
     // JMI        __FILE__, __LINE__,
             ss.str ());
         }
@@ -13198,7 +13154,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           measureCurrentAccumulatedWholeNotesDuration =
             measurePart->
               fetchPartMeasuresWholeNotessVectorAt (
-                inputLineNumber,
+                elt->getInputStartLineNumber (),
                 elt->getMeasureOrdinalNumberInVoice () - 1);
 
         // generate the skip name
@@ -13222,7 +13178,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         // generate the duration of the skip from the full measure whole notes JMI v0.9.68
         fLilypondCodeStream <<
           wholeNotesAsLilypondString (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             elt->fetchFullMeasureWholeNotesDuration ());
 
         if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
@@ -13248,10 +13204,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
 void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 {
-  int
-    inputLineNumber =
-      elt->getInputEndLineNumber ();
-
   msrMeasureKind
     measureKind =
       elt->getMeasureKind ();
@@ -13286,7 +13238,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         ", measureEndRegularKind: '" << measureEndRegularKind << '\'' <<
         ", measurePuristNumber: '" << measurePuristNumber << '\'' <<
         ", fOnGoingMultiMeasureRests: " << fOnGoingMultiMeasureRests <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -13323,7 +13275,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       ", measureEndRegularKind: " << measureEndRegularKind <<
       ", measurePuristNumber: " << measurePuristNumber << '\'' <<
       ", fOnGoingMultiMeasureRests: " << fOnGoingMultiMeasureRests <<
-      ", line " << inputLineNumber <<
+      ", line " << elt->getInputStartLineNumber () <<
       " ===-->";
 
     gWaeHandler->waeTrace (
@@ -13343,7 +13295,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         fPendingTrillSpannerForStop->getSpannerKind () <<
         " upon the end of measure " <<
         fCurrentMeasureNumber <<
-        ", line " << inputLineNumber;
+        ", line " << elt->getInputStartLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -13436,7 +13388,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
           fLilypondCodeStream <<
             "%{ emptyMeasureKind" <<
-            ", line " << inputLineNumber <<
+            ", line " << elt->getInputStartLineNumber () <<
             " %} % " <<
             measurePuristNumber + 1 <<
             std::endl;
@@ -13453,7 +13405,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         " (" <<
         elt->getMeasureKind () <<
         ")" <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl << std::endl;
     }
 
@@ -13486,7 +13438,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
             std::endl <<
             "Adding a LilyPond line break after measure number '" <<
             fCurrentMeasureNumber <<
-            "', line " << inputLineNumber << " ===-->" <<
+            "', line " << elt->getInputStartLineNumber () << " ===-->" <<
             std::endl;
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -13505,7 +13457,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           "Measure number '" <<
           fCurrentMeasureNumber <<
           "' not found in gGlobalLpsr2lilypondOahGroup->getBreakLineAfterMeasureNumberSet ()" <<
-          ", line " << inputLineNumber <<
+          ", line " << elt->getInputStartLineNumber () <<
           std::endl;
       }
   #endif // MF_TRACE_IS_ENABLED
@@ -13528,7 +13480,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
             std::endl <<
             "Adding a LilyPond page break after measure number '" <<
             fCurrentMeasureNumber <<
-            "', line " << inputLineNumber << " ===-->" <<
+            "', line " << elt->getInputStartLineNumber () << " ===-->" <<
             std::endl;
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -13547,7 +13499,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           "Measure number '" <<
           fCurrentMeasureNumber <<
           "' not found in gGlobalLpsr2lilypondOahGroup->getBreakPageAfterMeasureNumberSet ()" <<
-          ", line " << inputLineNumber <<
+          ", line " << elt->getInputStartLineNumber () <<
           std::endl;
       }
   #endif // MF_TRACE_IS_ENABLED
@@ -13645,7 +13597,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
         "% --> End visiting msrStanza \"" <<
         elt->getStanzaName () <<
         "\"" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -15406,7 +15358,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
         "% --> End visiting msrSyllable '" <<
         elt->asString () <<
         '\'' <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -15475,7 +15427,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClefKeyTimeSignatureGroup& elt)
         "% --> End visiting msrClefKeyTimeSignatureGroup '" <<
         elt->asString () <<
         '\'' <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -15694,7 +15646,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
         "% --> End visiting msrClef '" <<
         elt->asString () <<
         '\'' <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -15902,7 +15854,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrKey& elt)
         "% --> End visiting msrKey '" <<
         elt->asString () <<
         "'"  <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -16156,7 +16108,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)
       ss <<
         "% --> End visiting msrTimeSignature " <<
         elt->asString () <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -16203,9 +16155,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrTransposition& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
   int  transposeDiatonic     = elt->getTranspositionDiatonic ();
   int  transposeChromatic    = elt->getTranspositionChromatic ();
   int  transposeOctaveChange = elt->getTranspositionOctaveChange ();
@@ -16241,7 +16190,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16255,7 +16204,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16273,7 +16222,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16287,7 +16236,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16301,7 +16250,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16319,7 +16268,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16333,7 +16282,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16351,7 +16300,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16365,7 +16314,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16383,7 +16332,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16397,7 +16346,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16411,7 +16360,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16429,7 +16378,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16443,7 +16392,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16461,7 +16410,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16475,7 +16424,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16489,7 +16438,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16507,7 +16456,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16521,7 +16470,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16539,7 +16488,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16553,7 +16502,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16571,7 +16520,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16585,7 +16534,7 @@ If the double element is present, it indicates that the music is doubled one oct
 
         default:
           transposeDiatonicError (
-            inputLineNumber,
+            elt->getInputStartLineNumber (),
             transposeDiatonic,
             transposeChromatic);
       } // switch
@@ -16644,7 +16593,7 @@ If the double element is present, it indicates that the music is doubled one oct
   std::string
     transpositionOctaveKindAsString =
       absoluteOctaveAsLilypondString (
-        inputLineNumber,
+        elt->getInputStartLineNumber (),
         transpositionOctaveKind);
 
 /* JMI
@@ -16698,7 +16647,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTransposition& elt)
 
       ss <<
         "% --> End visiting msrTransposition" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -16818,9 +16767,6 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsWordsOnly (
 void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
   const S_msrTempo& tempo)
 {
-  int inputLineNumber =
-    tempo->getInputStartLineNumber ();
-
   msrTempoParenthesizedKind
     tempoParenthesizedKind =
       tempo->getTempoParenthesizedKind ();
@@ -16885,7 +16831,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
 
       fLilypondCodeStream <<
         dottedNotesDurationAsLilypondString (
-          inputLineNumber,
+          tempo->getInputStartLineNumber (),
           tempoBeatUnit);
 
       if (
@@ -16972,7 +16918,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
 
     fLilypondCodeStream <<
       dottedNotesDurationAsLilypondString (
-        inputLineNumber,
+        tempo->getInputStartLineNumber (),
         tempoBeatUnit);
 
     if (
@@ -17012,9 +16958,6 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
 void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
   const S_msrTempo& tempo)
 {
-  int inputLineNumber =
-    tempo->getInputStartLineNumber ();
-
   msrTempoParenthesizedKind
     tempoParenthesizedKind =
       tempo->getTempoParenthesizedKind ();
@@ -17090,7 +17033,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
 
   fLilypondCodeStream <<
     dottedNotesDurationAsLilypondString (
-      inputLineNumber,
+      tempo->getInputStartLineNumber (),
       tempoBeatUnit);
 
   if (
@@ -17126,7 +17069,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
 
   fLilypondCodeStream <<
     dottedNotesDurationAsLilypondString (
-      inputLineNumber,
+      tempo->getInputStartLineNumber (),
       tempo->getTempoEquivalentBeatUnit ());
 
   if (
@@ -17278,7 +17221,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoNotesRelationshipElements& elt
 
       ss <<
         "% --> End visiting msrTempoNotesRelationshipElements" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -17398,7 +17341,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoTuplet& elt)
 
       ss <<
         "% --> End visiting msrTempoTuplet" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -17433,7 +17376,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempo& elt)
 
       ss <<
         "% --> End visiting msrTempo" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -17501,7 +17444,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArticulation& elt)
 
       ss <<
         "% --> End visiting msrArticulation" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -17611,7 +17554,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFermata& elt)
 
       ss <<
         "% --> End visiting msrFermata" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -17679,7 +17622,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArpeggiato& elt)
 
       ss <<
         "% --> End visiting msrArpeggiato" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -17747,7 +17690,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNonArpeggiato& elt)
 
       ss <<
         "% --> End visiting msrNonArpeggiato" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -17815,7 +17758,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnical& elt)
 
       ss <<
         "% --> End visiting msrTechnical" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -17885,7 +17828,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
 
       ss <<
         "% --> End visiting msrTechnicalWithInteger" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -17955,7 +17898,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
 
       ss <<
         "% --> End visiting msrTechnicalWithFloat" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18023,7 +17966,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithString& elt)
 
       ss <<
         "% --> End visiting msrTechnicalWithString" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18091,7 +18034,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOrnament& elt)
 
       ss <<
         "% --> End visiting msrOrnament" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18159,7 +18102,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGlissando& elt)
 
       ss <<
         "% --> End visiting msrGlissando" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18227,7 +18170,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlide& elt)
 
       ss <<
         "% --> End visiting msrSlide" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18295,7 +18238,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSingleTremolo& elt)
 
       ss <<
         "% --> End visiting msrSingleTremolo" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18398,7 +18341,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDoubleTremolo& elt)
 
       ss <<
         "% --> End visiting msrDoubleTremolo" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18469,7 +18412,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDynamic& elt)
 
       ss <<
         "% --> End visiting msrDynamic" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18534,7 +18477,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOtherDynamic& elt)
 
       ss <<
         "% --> End visiting msrOtherDynamic" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18599,7 +18542,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWords& elt)
 
       ss <<
         "% --> End visiting msrWords" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18666,7 +18609,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlur& elt)
       ss <<
         "% --> End visiting msrSlur " <<
         elt->asShortString () <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18733,7 +18676,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordSlurLink& elt)
       ss <<
         "% --> End visiting msrChordSlurLink " <<
         elt->asShortString () <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18799,7 +18742,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
 
       ss <<
         "% --> End visiting msrLigature" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18875,7 +18818,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)
 
       ss <<
         "% --> End visiting msrCrescDecresc" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -18940,7 +18883,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
 
       ss <<
         "% --> End visiting msrWedge" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -19006,12 +18949,18 @@ void lpsr2lilypondTranslator::generateNoteBeamsList (
               }
 #endif // MF_TRACE_IS_ENABLED
 
-              fLilypondCodeStream << "[ %{ kBeamBegin 1 %} "; // JMI v0.9.70
+              fLilypondCodeStream << "[ ";
+
+#ifdef MF_TRACE_IS_ENABLED
+              if (gWaeOahGroup->getMaintainanceRun ()) {
+                fLilypondCodeStream << "%{ kBeamBegin 1 %} ";
+              }
+#endif // MF_TRACE_IS_ENABLED
 
               if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
                 // generate the input line number as a comment
                 fLilypondCodeStream <<
-                  " %{ line " << beam->getInputStartLineNumber () << " kBeamBegin 1 %} ";
+                  " %{ line " << beam->getInputStartLineNumber () << " %} ";
               }
             }
           }
@@ -19023,12 +18972,18 @@ void lpsr2lilypondTranslator::generateNoteBeamsList (
         case msrBeamKind::kBeamEnd:
           if (beam->getBeamNumber () == 1) {
             if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
-              fLilypondCodeStream << "] %{ kBeamEnd 1 %} ";
+              fLilypondCodeStream << "] ";
+
+#ifdef MF_TRACE_IS_ENABLED
+              if (gWaeOahGroup->getMaintainanceRun ()) {
+                fLilypondCodeStream << "%{ kBeamEnd 1 %} ";
+              }
+#endif // MF_TRACE_IS_ENABLED
 
               if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
                 // generate the input line number as a comment
                 fLilypondCodeStream <<
-                  " %{ line " << beam->getInputStartLineNumber () << " kBeamEnd 1  %} ";
+                  " %{ line " << beam->getInputStartLineNumber () << " %} ";
               }
             }
           }
@@ -19588,7 +19543,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       ss <<
         "% --> End visiting msrGraceNotesGroup " <<
         elt->asShortString () <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -19659,7 +19614,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
       ss <<
         "% --> End visiting msrChordGraceNotesGroupLink " <<
         elt->asShortString () <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -19773,7 +19728,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
       ss <<
         "% --> End visiting msrAfterGraceNotesGroupContents " <<
         elt->asShortString () <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -19809,7 +19764,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroup& elt)
       ss <<
         "% --> End visiting msrAfterGraceNotesGroup " <<
         elt->asShortString () <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -20232,7 +20187,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 //                 "%{ " <<
 //                 gServiceRunData->getInputSourceName () <<
 //                 ":" <<
-//                 inputLineNumber <<
+//                 tempo->getInputStartLineNumber () <<
 //                 ": " <<
 //                 "ignoring 'msrPrintObjectKind::kPrintObjectNo'" <<
 //                 " %}" <<
@@ -20464,9 +20419,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 void lpsr2lilypondTranslator::generateNoteScordaturasList (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
   const std::list<S_msrScordatura>&
     noteScordaturasList =
       note->getNoteScordaturasList ();
@@ -20527,7 +20479,7 @@ void lpsr2lilypondTranslator::generateNoteScordaturasList (
 
           fLilypondCodeStream <<
             stringTuningAsLilypondString (
-              inputLineNumber,
+              note->getInputStartLineNumber (),
               stringTuning);
 
           if (++i == iEnd) break;
@@ -20938,9 +20890,6 @@ void lpsr2lilypondTranslator::generateNoteSlidesListWithText (
 void lpsr2lilypondTranslator::generateNoteTechnicalsListWithStrings (
   const S_msrNote& note)
 {
-  int inputLineNumber =
-    note->getInputStartLineNumber ();
-
   const std::list<S_msrTechnicalWithString>&
     noteTechnicalWithStringsList =
       note->getNoteTechnicalWithStringsList ();
@@ -20971,7 +20920,7 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsListWithStrings (
                 fLilypondCodeStream <<
                   "\\after " <<
                   wholeNotesAsLilypondString (
-                    inputLineNumber,
+                    note->getInputStartLineNumber (),
                     halfWholeNotes) <<
                   " ^\"H\" ";
               }
@@ -21003,7 +20952,7 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsListWithStrings (
                 fLilypondCodeStream <<
                   "\\after " <<
                   wholeNotesAsLilypondString (
-                    inputLineNumber,
+                    note->getInputStartLineNumber (),
                     halfWholeNotes) <<
                   " ^\"P\" ";
               }
@@ -21022,9 +20971,6 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsListWithStrings (
 void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    elt->getInputEndLineNumber ();
-
   {
     Bool
       traceLpsrVisitors =
@@ -21040,7 +20986,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       ss <<
         "% --> End visiting note " <<
         elt->asShortString () <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -21148,7 +21094,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 
       lpsr2lilypondInternalWarning (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        elt->getInputStartLineNumber (),
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -21246,11 +21192,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                 "note articulation '" <<
                 articulation->asString () <<
                 "' has 'fermata' kind, but is not of type S_msrFermata" <<
-                ", line " << articulation->getInputEndLineNumber ();
+                ", line " << articulation->getInputStartLineNumber ();
 
               lpsr2lilypondInternalError (
                 gServiceRunData->getInputSourceName (),
-                articulation->getInputEndLineNumber (),
+                articulation->getInputStartLineNumber (),
                 __FILE__, __LINE__,
                 ss.str ());
             }
@@ -21679,11 +21625,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                 "note articulation '" <<
                 articulation->asString () <<
                 "' has 'fermata' kind, but is not of type S_msrFermata" <<
-                ", line " << articulation->getInputEndLineNumber ();
+                ", line " << articulation->getInputStartLineNumber ();
 
               lpsr2lilypondInternalError (
                 gServiceRunData->getInputSourceName (),
-                articulation->getInputEndLineNumber (),
+                articulation->getInputStartLineNumber (),
                 __FILE__, __LINE__,
                 ss.str ());
             }
@@ -21857,7 +21803,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOctaveShift& elt)
 
       ss <<
         "% --> End visiting msrOctaveShift" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -22060,7 +22006,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStem& elt)
 
       ss <<
         "% --> End visiting msrStem" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -22125,7 +22071,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
 
       ss <<
         "% --> End visiting msrBeam" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -22990,12 +22936,18 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
 
         case msrBeamKind::kBeamBegin:
           if (originalBeam->getBeamNumber () == 1)
-            fLilypondCodeStream << "[ %{ kBeamBegin 2 %} "; // JMI v0.9.70
+            fLilypondCodeStream << "[ ";
+
+#ifdef MF_TRACE_IS_ENABLED
+              if (gWaeOahGroup->getMaintainanceRun ()) {
+                fLilypondCodeStream << "%{ kBeamBegin 2 %} ";
+              }
+#endif // MF_TRACE_IS_ENABLED
 
             if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
               // generate the input line number as a comment
               fLilypondCodeStream <<
-                " %{ line " << originalBeam->getInputStartLineNumber () << " kBeamBegin 2 %} ";
+                " %{ line " << originalBeam->getInputStartLineNumber () << " %} ";
             }
           break;
 
@@ -23004,12 +22956,18 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
 
         case msrBeamKind::kBeamEnd:
           if (originalBeam->getBeamNumber () == 1)
-            fLilypondCodeStream << "] %{ kBeamEnd 2 %} ";
+            fLilypondCodeStream << "] ";
+
+#ifdef MF_TRACE_IS_ENABLED
+              if (gWaeOahGroup->getMaintainanceRun ()) {
+                fLilypondCodeStream << "%{ kBeamEnd 2 %} ";
+              }
+#endif // MF_TRACE_IS_ENABLED
 
             if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
               // generate the input line number as a comment
               fLilypondCodeStream <<
-                " %{ line " << originalBeam->getInputStartLineNumber () << " kBeamBegin 2 %} ";
+                " %{ line " << originalBeam->getInputStartLineNumber () << " %} ";
             }
           break;
 
@@ -23087,7 +23045,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
       ++i
     ) {
       fLilypondCodeStream <<
-        "%{line " << inputLineNumber << "%}" <<
+        "%{line " << elt->getInputStartLineNumber () << "%}" <<
         "~ %{S_msrChord}"; // JMI spaces???
     } // for
   }
@@ -23101,7 +23059,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
     if (chordTie) {
       if (chordTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          "%{line " << inputLineNumber << "%}" <<
+          "%{line " << elt->getInputStartLineNumber () << "%}" <<
           "~ ";
       }
     }
@@ -23358,9 +23316,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
 void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    elt->getInputEndLineNumber ();
-
   {
     Bool
       traceLpsrVisitors =
@@ -23376,7 +23331,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
       ss <<
         "% --> End visiting msrChord " <<
         elt->asShortString () <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -23393,7 +23348,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
     if (gTraceOahGroup->getTraceNotes ()) {
       lpsr2lilypondInternalWarning (
         gServiceRunData->getInputSourceName (),
-        inputLineNumber,
+        elt->getInputStartLineNumber (),
         "% ==> End visiting grace chords is ignored inside grace notes groups");
     }
 
@@ -23428,9 +23383,6 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 {
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -23453,7 +23405,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
         fOnGoingGraceNotesGroup <<
         ", fOnGoingChordGraceNotesGroupLink: " <<
         fOnGoingChordGraceNotesGroupLink <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -23485,7 +23437,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 //   if (gGlobalLpsr2lilypondOahGroup->getIndentTuplets ()) { // JMI ??? v0.9.67
   if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
     fLilypondCodeStream <<
-      " %{ line " << inputLineNumber << " %} " <<
+      " %{ line " << elt->getInputStartLineNumber () << " %} " <<
       std::endl;
   }
 
@@ -23564,7 +23516,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
         "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-denominator-text #{ " <<
 //         wholeNotesAsLilypondMakeDuration ( // JMI v0.9.67
         wholeNotesAsLilypondString ( // JMI v0.9.67
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
           memberNoteDisplayWholeNotes) <<
         " #})" <<
         std::endl;
@@ -23574,11 +23526,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
         "\\once \\override TupletNumber.text = #(tuplet-number::fraction-with-notes" <<
         " #{ " <<
         wholeNotesAsLilypondString (
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
           memberNoteDisplayWholeNotes) <<
         " #} #{ " <<
         wholeNotesAsLilypondString (
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
           memberNoteDisplayWholeNotes) <<
         " #})" <<
         std::endl;
@@ -23630,7 +23582,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 
       ss <<
         "% --> End visiting msrTuplet" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -23682,9 +23634,6 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
   {
     Bool
       traceLpsrVisitors =
@@ -23699,7 +23648,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
 
       ss <<
         "% --> Start visiting msrTie" <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -23722,7 +23671,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
         // since the last of its notes sets fOnGoingNotesStack.size > 0 to false
         // after code has been generated for it
         fLilypondCodeStream <<
-  // JMI        "%{line " << inputLineNumber << "%}" <<
+  // JMI        "%{line " << elt->getInputStartLineNumber () << "%}" <<
           " ~ ";
       }
       break;
@@ -23750,7 +23699,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTie& elt)
 
       ss <<
         "% --> End visiting msrTie" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -24000,9 +23949,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrScordatura& elt)
 
 void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
 {
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -24018,7 +23964,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
 
       ss <<
         "% --> Start visiting pedal" <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -24047,7 +23993,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
 
         lpsr2lilypondInternalError (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -24178,9 +24124,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
   switch (elt->getBarLineCategory ()) {
     case msrBarLineCategoryKind::kBarLineCategoryStandalone:
       switch (elt->getBarLineStyleKind ()) {
@@ -24229,7 +24172,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
       if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
         // generate the barLine line number as a comment
         fLilypondCodeStream <<
-          " %{ line " << inputLineNumber << " %} ";
+          " %{ line " << elt->getInputStartLineNumber () << " %} ";
       }
 
       fLilypondCodeStream << std::endl;
@@ -24336,7 +24279,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
   // JMI      lpsr2lilypondInternalError (
         lpsr2lilypondInternalWarning (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          elt->getInputStartLineNumber (),
   // JMI        __FILE__, __LINE__,
           ss.str ());
       }
@@ -24345,7 +24288,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
 
   if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
     fLilypondCodeStream <<
-      " %{ line " << inputLineNumber << " %}";
+      " %{ line " << elt->getInputStartLineNumber () << " %}";
   }
 }
 
@@ -24367,7 +24310,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarLine& elt)
       ss <<
         std::endl <<
         "% --> End visiting msrBarLine" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -24385,9 +24328,6 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarLine& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
 {
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -24433,7 +24373,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
       fOnGoingVoiceCadenza <<
       ", nextBarPuristNumber: " <<
       nextBarPuristNumber <<
-      ", line " << inputLineNumber <<
+      ", line " << elt->getInputStartLineNumber () <<
       std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -24455,7 +24395,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
     if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
       // generate the line number as a comment
       fLilypondCodeStream <<
-        " %{ line " << inputLineNumber << " %} ";
+        " %{ line " << elt->getInputStartLineNumber () << " %} ";
     }
 
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
@@ -24486,7 +24426,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarCheck& elt)
 
       ss <<
         "% --> End visiting msrBarCheck" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -24504,9 +24444,6 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarCheck& elt)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
 {
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
@@ -24522,7 +24459,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
 
       ss <<
         "% --> Start visiting msrBarNumberCheck" <<
-        ", line " << inputLineNumber <<
+        ", line " << elt->getInputStartLineNumber () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -24547,7 +24484,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
       fOnGoingMultiMeasureRests <<
       "% fOnGoingVoiceCadenza: " <<
       fOnGoingVoiceCadenza <<
-      ", line " << inputLineNumber <<
+      ", line " << elt->getInputStartLineNumber () <<
       std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -24572,7 +24509,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
     if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
       // generate the line number as a comment
       fLilypondCodeStream <<
-        " %{ line " << inputLineNumber << " %} ";
+        " %{ line " << elt->getInputStartLineNumber () << " %} ";
     }
 
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
@@ -24604,7 +24541,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarNumberCheck& elt)
 
       ss <<
         "% --> End visiting msrBarNumberCheck" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -24707,7 +24644,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLineBreak& elt)
 
       ss <<
         "% --> End visiting msrLineBreak" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -24794,7 +24731,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageBreak& elt)
 
       ss <<
         "% --> End visiting msrPageBreak" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -24904,7 +24841,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 
       ss <<
         "% --> End visiting msrRepeat" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -24999,7 +24936,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 
       ss <<
         "% --> End visiting msrRepeatCommonPart" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -25163,7 +25100,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 
       ss <<
         "% --> End visiting msrRepeatEnding" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -25386,7 +25323,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRehearsalMark& elt)
 
       ss <<
         "% --> End visiting msrRehearsalMark" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -25504,7 +25441,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
 
       ss <<
         "% --> End visiting msrMeasureRepeat" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -25532,7 +25469,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
         elt->fetchMeasureRepeatReplicasNumber (),
         "replica",
         "replicas") <<
-      ", line " << elt->getInputEndLineNumber () <<
+      ", line " << elt->getInputStartLineNumber () <<
       std::endl << std::endl;
   }
 }
@@ -25708,9 +25645,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultiMeasureRest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int inputLineNumber =
-    elt->getInputStartLineNumber ();
-
   int measureRestsNumber =
     elt->getMeasureRestsNumber ();
 
@@ -25721,7 +25655,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultiMeasureRest& elt)
         measureRestsNumber,
         "measure",
         "measures") <<
-      ", line " << inputLineNumber <<
+      ", line " << elt->getInputStartLineNumber () <<
       std::endl << std::endl;
 
     ++gIndenter; // decremented in visitEnd (S_msrMultiMeasureRest&)
@@ -25762,7 +25696,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
 
       ss <<
         "% --> End visiting msrMultiMeasureRest" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {
@@ -25775,9 +25709,6 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
     }
   }
 #endif // MF_TRACE_IS_ENABLED
-
-  int inputLineNumber =
-    elt->getInputEndLineNumber ();
 
   int measureRestsNumber =
     elt->getMeasureRestsNumber ();
@@ -25826,7 +25757,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
   std::string
     measureRestsWholeNoteAsLilypondString =
       multiMeasureRestsWholeNoteAsLilypondString (
-        inputLineNumber,
+        elt->getInputStartLineNumber (),
         multiMeasureRestsMeasureSoundingNotes);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -25852,7 +25783,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
     // generate information and line number as a comment
     fLilypondCodeStream <<
       " %{ line " <<
-      elt->getInputEndLineNumber () <<
+      elt->getInputStartLineNumber () <<
       " %}";
   }
 
@@ -25874,7 +25805,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
       // generate the original MusicXML measure number as a comment
       fLilypondCodeStream <<
-        " (line: " << measureElement->getInputEndLineNumber () << ")";
+        " (line: " << measureElement->getInputStartLineNumber () << ")";
     }
 */
 
@@ -25890,7 +25821,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
         measureRestsNumber,
         "measure",
         "measures") <<
-      ", line " << inputLineNumber <<
+      ", line " << elt->getInputStartLineNumber () <<
       std::endl << std::endl;
   }
 
@@ -25996,7 +25927,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
 
       ss <<
         "% --> End visiting msrMidiTempo" <<
-        ", line " << elt->getInputEndLineNumber () <<
+        ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
       if (traceLpsrVisitors) {

@@ -622,7 +622,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
 }
 
 void msrSegment::setNextMeasureNumberInSegment (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& nextMeasureNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1170,7 +1170,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
 }
 
 void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& measurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1666,9 +1666,6 @@ void msrSegment::appendStaffDetailsToSegment (
   const S_msrStaffDetails& staffDetails)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int inputLineNumber =
-    staffDetails->getInputStartLineNumber ();
-
   if (
     gTraceOahGroup->getTraceStavesDetails ()
       ||
@@ -1682,7 +1679,7 @@ void msrSegment::appendStaffDetailsToSegment (
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\" line " << inputLineNumber;
+      "\" line " << staffDetails->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1698,7 +1695,7 @@ void msrSegment::appendStaffDetailsToSegment (
   ) {
     fSegmentUpLinkToVoice->
       displayVoice (
-        inputLineNumber,
+        staffDetails->getInputStartLineNumber (),
         "appendStaffDetailsToSegment() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1723,7 +1720,7 @@ void msrSegment::appendStaffDetailsToSegment (
   ) {
     fSegmentUpLinkToVoice->
       displayVoice (
-        inputLineNumber,
+        staffDetails->getInputStartLineNumber (),
         "appendStaffDetailsToSegment() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2058,7 +2055,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 }
 
 // void msrSegment::padUpToMeasurePositionInSegment (
-//   int             inputLineNumber,
+//   int                  inputLineNumber,
 //   const msrWholeNotes& wholeNotes)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -2169,7 +2166,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
 }
 
 void msrSegment::appendPaddingNoteToSegment (
-  int             inputLineNumber,
+  int                  inputLineNumber,
   const msrWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2237,9 +2234,6 @@ void msrSegment::appendMultiMeasureRestToSegment (
 
 void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 {
-  int inputLineNumber =
-    measure->getInputStartLineNumber ();
-
   std::string measureNumber =
     measure->getMeasureNumber ();
 
@@ -2292,7 +2286,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
     msrInternalWarning ( // JMI v0.9.67 v0.9.63
 //     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber,
+      measure->getInputStartLineNumber (),
 //       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2351,9 +2345,6 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
 void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
 {
-  int inputLineNumber =
-    measure->getInputStartLineNumber ();
-
   std::string measureNumber =
     measure->getMeasureNumber ();
 
@@ -2410,7 +2401,7 @@ void msrSegment::prependMeasureToSegment (const S_msrMeasure& measure)
     msrInternalError (
 // JMI    msrInternalWarning (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber,
+      measure->getInputStartLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2739,7 +2730,7 @@ S_msrElement msrSegment::removeLastElementFromSegment (
 */
 
 void msrSegment::removeNoteFromSegment (
-  int       inputLineNumber,
+  int              inputLineNumber,
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2789,7 +2780,7 @@ void msrSegment::removeNoteFromSegment (
 }
 
 void msrSegment::removeElementFromSegment (
-  int          inputLineNumber,
+  int                 inputLineNumber,
   const S_msrElement& element)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2835,7 +2826,7 @@ void msrSegment::removeElementFromSegment (
 }
 
 S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2901,7 +2892,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 }
 
 S_msrMeasure msrSegment::removeLastMeasureFromSegment (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& context)
 {
   S_msrMeasure result;
@@ -3274,7 +3265,7 @@ std::string msrSegment::asString () const
 }
 
 void msrSegment::displaySegment (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& context)
 {
   gLog <<

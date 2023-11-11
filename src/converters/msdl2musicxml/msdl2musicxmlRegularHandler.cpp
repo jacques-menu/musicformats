@@ -348,6 +348,7 @@ void msdl2musicxmlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1-skeleton", subGroup);
+  registerAtomInRegularSubgroup ("display-msr1-skeleton-full", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr1", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-full", subGroup);
@@ -425,7 +426,7 @@ void msdl2musicxmlRegularHandler::createWarningAndErrorsRegularGroup ()
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
 
-  registerAtomInRegularSubgroup ("maintainance", subGroup);
+  registerAtomInRegularSubgroup ("maintainance-run", subGroup);
 }
 
 void msdl2musicxmlRegularHandler::createPresentationRegularGroup ()

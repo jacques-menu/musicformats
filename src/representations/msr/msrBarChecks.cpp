@@ -47,7 +47,7 @@ S_msrBarCheck msrBarCheck::create (
 }
 
 S_msrBarCheck msrBarCheck::create (
-  int                 inputLineNumber)
+  int inputLineNumber)
 {
   return
     msrBarCheck::create (
@@ -109,10 +109,9 @@ msrBarCheck::msrBarCheck (
     std::stringstream ss;
 
     ss <<
-      "Creating a bar check" <<
-      " with next bar original number '" <<
+      "Creating a bar check with next bar original number '" <<
       nextBarOriginalNumber <<
-      " and next bar purist number '" <<
+      "' and next bar purist number '" <<
       fNextBarPuristNumber <<
       "'";
 

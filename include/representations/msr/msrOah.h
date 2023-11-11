@@ -260,6 +260,11 @@ class EXP msrOahGroup : public oahGroup
     Bool                  getDisplayMsrSkeleton () const
                               { return fDisplayMsrSkeleton; }
 
+    void                  setDisplayMsrSkeletonFull ()
+                              { fDisplayMsrSkeletonFull = true; }
+    Bool                  getDisplayMsrSkeletonFull () const
+                              { return fDisplayMsrSkeletonFull; }
+
     void                  setDisplayFirstMsr ()
                               { fDisplayFirstMsr = true; }
     Bool                  getDisplayFirstMsr () const
@@ -478,6 +483,7 @@ class EXP msrOahGroup : public oahGroup
     Bool                  fDisplayPartGroups;
 
     Bool                  fDisplayMsrSkeleton;
+    Bool                  fDisplayMsrSkeletonFull;
 
     Bool                  fDisplayFirstMsr;
     Bool                  fDisplayFirstMsrFull;
