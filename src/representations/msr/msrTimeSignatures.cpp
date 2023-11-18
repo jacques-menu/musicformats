@@ -505,7 +505,7 @@ msrTimeSignature::msrTimeSignature (
     : msrMeasureElement (
       inputLineNumber)
 {
-  fTimeSignatureUpLinkToMeasure = upLinkToMeasure;
+  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
   fTimeSignatureSymbolKind = timeSignatureSymbolKind;
 
@@ -1020,35 +1020,35 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 msrTimeSignature::~msrTimeSignature ()
 {}
 
-void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTimeSignatures ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of time signature " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fTimeSignatureUpLinkToMeasure = measure;
-}
+// void msrTimeSignature::setTimeSignatureUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTimeSignatures ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of time signature " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fTimeSignatureUpLinkToMeasure = measure;
+// }
 
 void msrTimeSignature::appendTimeSignatureItem (
   const S_msrTimeSignatureItem& timeSignatureItem)
@@ -1094,6 +1094,16 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
   msrWholeNotes result (0, 1); // addition neutral element
 
   size_t vectorSize = fTimeSignatureItemsVector.size ();
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTimeSignatures ()) {
+      gLog <<
+        "--> timeSignatureWholeNotesPerMeasure() 1 for " <<
+        asString () <<
+        ", line " << fInputStartLineNumber <<
+      std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
 
   if (vectorSize) {
     /* JMI
@@ -1141,6 +1151,16 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
       __FILE__, __LINE__,
       "time signature items vector is empty");
   }
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTimeSignatures ()) {
+      gLog <<
+        "--> timeSignatureWholeNotesPerMeasure() 2, result = " <<
+        result <<
+        ", line " << fInputStartLineNumber <<
+      std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
 
   // return result
   return result;

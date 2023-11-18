@@ -20,6 +20,9 @@
 
 namespace MusicFormats
 {
+//______________________________________________________________________________
+class   msrMeasure;
+typedef SMARTP<msrMeasure> S_msrMeasure;
 
 //______________________________________________________________________________
 /*
@@ -45,11 +48,16 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
     // the overrides call a class-specific method that can be called directly
+//     virtual void          setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) = 0;
     virtual void          setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) = 0;
+                            const S_msrMeasure& measure)
+                              { fMeasureElementUpLinkToMeasure = measure; }
 
     // the overrides call a class-specific method that can be called directly
-    virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const = 0;
+//     virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const = 0;
+    virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const
+                              { return fMeasureElementUpLinkToMeasure; }
 
     void                  setMeasureElementSoundingWholeNotes (
                             const msrWholeNotes& wholeNotes,
@@ -134,6 +142,8 @@ class EXP msrMeasureElement : public msrElement
 
     // protected fields
     // ------------------------------------------------------
+
+    S_msrMeasure          fMeasureElementUpLinkToMeasure;
 
     msrWholeNotes         fMeasureElementSoundingWholeNotes;
 

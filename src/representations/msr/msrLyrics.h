@@ -207,22 +207,21 @@ class EXP msrSyllable : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setSyllableUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getSyllableUpLinkToMeasure (); }
-
-    void                  setSyllableUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getSyllableUpLinkToMeasure () const
-                              { return fSyllableUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setSyllableUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getSyllableUpLinkToMeasure (); }
+//
+//     void                  setSyllableUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getSyllableUpLinkToMeasure () const
+//                               { return fSyllableUpLinkToMeasure; }
 
     // upLinks
-    void                  setSyllableUpLinkToNote (const S_msrNote& note)
-                              { fSyllableUpLinkToNote = note; }
+    void                  setSyllableUpLinkToNote (const S_msrNote& note);
 
     S_msrNote             getSyllableUpLinkToNote () const
                               { return fSyllableUpLinkToNote; }
@@ -313,7 +312,8 @@ class EXP msrSyllable : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fSyllableUpLinkToMeasure;
+    // this uplink is needed for setMeasureElementUpLinkToMeasure // JMI ??? v0.9.70 BABASSE
+//     S_msrMeasure          fSyllableUpLinkToMeasure;
 
     // upLinks
     S_msrNote             fSyllableUpLinkToNote;

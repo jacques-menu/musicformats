@@ -65,35 +65,35 @@ msrEyeGlasses::msrEyeGlasses (
 msrEyeGlasses::~msrEyeGlasses ()
 {}
 
-void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceEyeGlasses ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of eyeglasses " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fEyeGlassesUpLinkToMeasure = measure;
-}
+// void msrEyeGlasses::setEyeGlassesUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceEyeGlasses ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of eyeglasses " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fEyeGlassesUpLinkToMeasure = measure;
+// }
 
 // void msrEyeGlasses::setEyeGlassesMeasurePosition (
 //   const S_msrMeasure& measure,

@@ -275,7 +275,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         skip =
           msrNote::createGraceSkipNote (
             chordFirstNote->getInputStartLineNumber (),
-            chordFirstNote->getNoteUpLinkToMeasure ()->getMeasureNumber (),
+            chordFirstNote->getMeasureElementUpLinkToMeasure ()->getMeasureNumber (),
             chordFirstNote->getMeasureElementSoundingWholeNotes (), // 0/1 JMI v0.9.66
             chordFirstNote->getNoteDisplayWholeNotes (),
             chordFirstNote->getNoteDotsNumber ());

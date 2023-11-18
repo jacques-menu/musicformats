@@ -53,6 +53,8 @@
 #include "oahEarlyOptions.h"
 #include "oahOah.h"
 
+#include "waeOah.h"
+
 #include "msrOah.h"
 #include "msr2lpsrOah.h"
 #include "lpsrOah.h"
@@ -2041,7 +2043,11 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceParts ()) {
+  if (
+    gTraceOahGroup->getTraceParts ()
+      ||
+    gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+  ) {
     std::stringstream ss;
 
     ss <<
@@ -3254,6 +3260,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
       setNextBarPuristNumber (
         measurePuristNumber);
 
+    // forget about fLastBarCheck
     fLastBarCheck = nullptr;
   }
 }
@@ -3290,11 +3297,28 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
   // finalize the current measure clone
   fCurrentMeasureClone->
     finalizeMeasureClone (
-       elt->getInputStartLineNumber (),
+      elt->getInputStartLineNumber (),
       elt, // original measure
-      fCurrentVoiceClone);
+      fCurrentVoiceClone,
+      "msr2lpsrTranslator::visitEnd (S_msrMeasure&)");
 
-  Bool doCreateABarCheckAndABarNumberCheck (false);
+#ifdef MF_TRACE_IS_ENABLED
+  if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+    std::stringstream ss;
+
+    ss <<
+      "--> msr2lpsrTranslator::visitEnd() " <<
+      elt->asString () <<
+      ", line " <<  elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  Bool doCreateABarCheck (false);
+  Bool doCreateABarNumberCheck (false);
 
   switch (elt->getMeasureKind ()) {
     case msrMeasureKind::kMeasureKindUnknown:
@@ -3320,14 +3344,14 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 
     case msrMeasureKind::kMeasureKindRegular:
       {
-        // don't create a bar check for the last measure of the score
+        // don't create a bar check for the last measure of the score // JMI v0.9.70
         // if it is not full time-signature wise
 
         // fetch the measure whole notes duration from the current measure clone
         msrWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
-              fetchFullMeasureWholeNotesDuration ();
+              getFullMeasureWholeNotesDuration ();
 
         // get the current voice clone time signature
         S_msrTimeSignature
@@ -3369,8 +3393,8 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        doCreateABarCheckAndABarNumberCheck =
-          fullMeasureWholeNotesDuration == wholeNotesPerMeasure;
+        doCreateABarCheck = true;
+        doCreateABarNumberCheck = true;
       }
       break;
 
@@ -3380,7 +3404,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         msrWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
-              fetchFullMeasureWholeNotesDuration ();
+              getFullMeasureWholeNotesDuration ();
 
         // get the current voice clone time signature
         S_msrTimeSignature
@@ -3422,7 +3446,8 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        doCreateABarCheckAndABarNumberCheck = true;
+        doCreateABarCheck = true;
+        doCreateABarNumberCheck = true;
       }
       break;
 
@@ -3434,26 +3459,32 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHookedEnding:
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       // generate a bar check if relevant
-      switch (elt-> getMeasureEndRegularKind ()) {
-        case msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown:
-          break;
-        case msrMeasureEndRegularKind::kMeasureEndRegularKindYes:
-          doCreateABarCheckAndABarNumberCheck = true;
-          break;
-        case msrMeasureEndRegularKind::kMeasureEndRegularKindNo:
-          break;
-      } // switch
+//         doCreateABarCheck = true;
+//         doCreateABarNumberCheck = true;
+
+//       switch (elt-> getMeasureEndRegularKind ()) {
+//         case msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown:
+//           break;
+//         case msrMeasureEndRegularKind::kMeasureEndRegularKindYes:
+//           break;
+//         case msrMeasureEndRegularKind::kMeasureEndRegularKindNo:
+//           break;
+//       } // switch
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteLastMeasure:
+//         doCreateABarCheck = true;
+//         doCreateABarNumberCheck = true;
       break;
 
     case msrMeasureKind::kMeasureKindOverFlowing:
-      doCreateABarCheckAndABarNumberCheck = true;
+      doCreateABarCheck = true;
+      doCreateABarNumberCheck = true;
       break;
 
     case msrMeasureKind::kMeasureKindCadenza:
-      doCreateABarCheckAndABarNumberCheck = false; // JMI v0.9.67
+//         doCreateABarCheck = false;
+//         doCreateABarNumberCheck = false;
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
@@ -3461,83 +3492,36 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       break;
   } // switch
 
-//   // is this a measure rest?
-//   if (elt->getMeasureIsAMeasureRest ()) {
-//     // yes JMI
-//   }
-//
-//   else {//
-//     // no
-//
-//     // should we compress measure rests? // JMI v0.9.63
-//     if (gGlobalLpsr2lilypondOahGroup->getCompressMeasureRestsInLilypond ()) {
-//       // yes
-//
-//       if (fCurrentMultiMeasureRestsClone) {
-//         // append the current multi-measure rests to the current voice clone
-//         fCurrentVoiceClone->
-//           appendMultiMeasureRestToVoice (
-//              elt->getInputStartLineNumber (),
-//             fCurrentMultiMeasureRestsClone);
-//
-//         // forget about the current rest measure
-// //         fCurrentRestMeasure = nullptr;
-//
-//         // forget about the current multi-measure rests
-//         fCurrentMultiMeasureRestsClone = nullptr;
-//       }
-//
-//       else {
-//         std::stringstream ss;
-//
-//         ss <<
-//           "fCurrentMultiMeasureRestsClone is null upon multi-measure rest end" <<
-//           fCurrentMeasureNumber <<
-//           "', measurePuristNumber: '" <<
-//           measurePuristNumber <<
-//           "', line " <<  elt->getInputStartLineNumber ();
-//
-// /* JMI ???
-//         msr2lpsrInternalError (
-//           gServiceRunData->getInputSourceName (),
-//            elt->getInputStartLineNumber (),
-//           __FILE__, __LINE__,
-//           ss.str ());
-//           */
-//       }
-//     }
-//   }
-
-  if (doCreateABarCheckAndABarNumberCheck) {
+  if (doCreateABarCheck) {
     // create a bar check
-    int voiceCurrentMeasurePuristNumber =
-      fCurrentVoiceClone->
-        getVoiceCurrentMeasurePuristNumber ();
-
     fLastBarCheck =
       msrBarCheck::createWithNextBarPuristNumber (
-         elt->getInputStartLineNumber (),
+        elt->getInputStartLineNumber (),
         fCurrentMeasureClone,
         nextMeasureNumber,
-        voiceCurrentMeasurePuristNumber);
+        fCurrentVoiceClone->
+          getVoiceCurrentMeasurePuristNumber ());
 
     // append it to the current voice clone
     fCurrentVoiceClone->
       appendBarCheckToVoice (fLastBarCheck);
+  }
 
+  if (doCreateABarNumberCheck) {
     // create a bar number check
-    // should NOT be done in cadenza, SEE TO IT JMI
+    // should NOT be done in cadenza, SEE TO IT JMI v0.9.70
     S_msrBarNumberCheck
-      barNumberCheck_ =
+      barNumberCheck =
         msrBarNumberCheck::create (
-           elt->getInputStartLineNumber (),
+          elt->getInputStartLineNumber (),
           fCurrentMeasureClone,
           nextMeasureNumber,
-          voiceCurrentMeasurePuristNumber);
+          fCurrentVoiceClone->
+            getVoiceCurrentMeasurePuristNumber ());
 
     // append it to the current voice clone
     fCurrentVoiceClone->
-      appendBarNumberCheckToVoice (barNumberCheck_);
+      appendBarNumberCheckToVoice (barNumberCheck);
   }
 }
 
@@ -8762,5 +8746,54 @@ void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //       appendMeasureCloneToVoiceClone (
 //          elt->getInputStartLineNumber (),
 //         fCurrentMeasureClone);
+//   }
+
+
+
+//   // is this a measure rest?
+//   if (elt->getMeasureIsAMeasureRest ()) {
+//     // yes JMI
+//   }
+//
+//   else {//
+//     // no
+//
+//     // should we compress measure rests? // JMI v0.9.63
+//     if (gGlobalLpsr2lilypondOahGroup->getCompressMeasureRestsInLilypond ()) {
+//       // yes
+//
+//       if (fCurrentMultiMeasureRestsClone) {
+//         // append the current multi-measure rests to the current voice clone
+//         fCurrentVoiceClone->
+//           appendMultiMeasureRestToVoice (
+//              elt->getInputStartLineNumber (),
+//             fCurrentMultiMeasureRestsClone);
+//
+//         // forget about the current rest measure
+// //         fCurrentRestMeasure = nullptr;
+//
+//         // forget about the current multi-measure rests
+//         fCurrentMultiMeasureRestsClone = nullptr;
+//       }
+//
+//       else {
+//         std::stringstream ss;
+//
+//         ss <<
+//           "fCurrentMultiMeasureRestsClone is null upon multi-measure rest end" <<
+//           fCurrentMeasureNumber <<
+//           "', measurePuristNumber: '" <<
+//           measurePuristNumber <<
+//           "', line " <<  elt->getInputStartLineNumber ();
+//
+// /* JMI ???
+//         msr2lpsrInternalError (
+//           gServiceRunData->getInputSourceName (),
+//            elt->getInputStartLineNumber (),
+//           __FILE__, __LINE__,
+//           ss.str ());
+//           */
+//       }
+//     }
 //   }
 

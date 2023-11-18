@@ -34,6 +34,8 @@
 
 #include "oahOah.h"
 
+#include "waeOah.h"
+
 #include "mxsrOah.h"
 
 #include "msrOah.h"
@@ -2773,7 +2775,11 @@ if (false) // JMI
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceParts ()) {
+  if (
+    gTraceOahGroup->getTraceParts ()
+      ||
+    gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+  ) {
     std::stringstream ss;
 
     ss <<
@@ -3348,9 +3354,9 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
     ss <<
       std::endl <<
       "<!--=== " <<
-      "part \"" << fCurrentMSRPart->getPartName () << "\"" <<
-      " (partID \"" << fCurrentMSRPart->getPartID () << "\")" <<
-      ", measure \"" << fCurrentMeasureNumber << "\"" <<
+//       "fCurrentPartName \"" << fCurrentPartName << "\"" <<
+//       " (fCurrentPartID \"" << fCurrentPartID << "\")" <<
+      ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
 //      "', voice \"" <<
 //      fCurrentVoiceClone->getVoiceName () <<
 //       "\"" <<

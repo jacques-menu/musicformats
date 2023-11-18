@@ -37,14 +37,9 @@ class EXP msrBarCheck : public msrMeasureElement
     static SMARTP<msrBarCheck> create (
                             int inputLineNumber);
 
-    static SMARTP<msrBarCheck> createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
+    static SMARTP<msrBarCheck> createWithNextBarPuristNumber (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const std::string&  nextBarOriginalNumber,
-                            int                 nextBarPuristNumber);
-
-    static SMARTP<msrBarCheck> createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
-                            int                 inputLineNumber,
                             const std::string&  nextBarOriginalNumber,
                             int                 nextBarPuristNumber);
 
@@ -71,18 +66,18 @@ class EXP msrBarCheck : public msrMeasureElement
     // ------------------------------------------------------
 
 
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setBarCheckUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getBarCheckUpLinkToMeasure (); }
-
-    void                  setBarCheckUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getBarCheckUpLinkToMeasure () const
-                              { return fBarCheckUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setBarCheckUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getBarCheckUpLinkToMeasure (); }
+//
+//     void                  setBarCheckUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getBarCheckUpLinkToMeasure () const
+//                               { return fBarCheckUpLinkToMeasure; }
 
     std::string           getNextBarOriginalNumber () const
                               { return fNextBarOriginalNumber; }
@@ -121,7 +116,7 @@ class EXP msrBarCheck : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fBarCheckUpLinkToMeasure;
+//     S_msrMeasure          fBarCheckUpLinkToMeasure;
 
     std::string           fNextBarOriginalNumber;
     int                   fNextBarPuristNumber;

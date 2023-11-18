@@ -50,18 +50,18 @@ class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setHiddenMeasureAndBarLineUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getHiddenMeasureAndBarLineUpLinkToMeasure (); }
-
-    void                  setHiddenMeasureAndBarLineUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getHiddenMeasureAndBarLineUpLinkToMeasure () const
-                              { return fHiddenMeasureAndBarLineUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setHiddenMeasureAndBarLineUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getHiddenMeasureAndBarLineUpLinkToMeasure (); }
+//
+//     void                  setHiddenMeasureAndBarLineUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getHiddenMeasureAndBarLineUpLinkToMeasure () const
+//                               { return fHiddenMeasureAndBarLineUpLinkToMeasure; }
 
   public:
 
@@ -92,7 +92,7 @@ class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fHiddenMeasureAndBarLineUpLinkToMeasure;
+//     S_msrMeasure          fHiddenMeasureAndBarLineUpLinkToMeasure;
 };
 typedef SMARTP<msrHiddenMeasureAndBarLine> S_msrHiddenMeasureAndBarLine;
 EXP std::ostream& operator << (std::ostream& os, const S_msrHiddenMeasureAndBarLine& elt);

@@ -94,18 +94,18 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // uplink to measure
 
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setDoubleTremoloUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getDoubleTremoloUpLinkToMeasure (); }
-
-    void                  setDoubleTremoloUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getDoubleTremoloUpLinkToMeasure () const
-                              { return fDoubleTremoloUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setDoubleTremoloUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getDoubleTremoloUpLinkToMeasure (); }
+//
+//     void                  setDoubleTremoloUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getDoubleTremoloUpLinkToMeasure () const
+//                               { return fDoubleTremoloUpLinkToMeasure; }
 
     // double tremolo kind
 
@@ -234,7 +234,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fDoubleTremoloUpLinkToMeasure;
+//     S_msrMeasure          fDoubleTremoloUpLinkToMeasure;
 
     // sounding whole notes JMI
     // the same as the displayed divisions of both members

@@ -4419,9 +4419,9 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
     ss <<
 //       std::endl <<
       "<!--=== " <<
-//       "part \"" << fCurrentPartName << "\"" << JMI v0.9.67
-      " (partID \"" << fCurrentPartID << "\")" <<
-      ", measure \"" << fCurrentMeasureNumber << "\"" <<
+      "fCurrentPartName \"" << fCurrentPartName << "\"" <<
+      " (fCurrentPartID \"" << fCurrentPartID << "\")" <<
+      ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
       ", line " << elt->getInputStartLineNumber () <<
       " ===-->";
 

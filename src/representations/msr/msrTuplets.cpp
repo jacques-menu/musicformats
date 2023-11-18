@@ -106,7 +106,7 @@ msrTuplet::msrTuplet (
     : msrTupletElement (
         inputLineNumber)
 {
-  fTupletUpLinkToMeasure = upLinkToMeasure;
+  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
   fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN_;
 
@@ -167,7 +167,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
       msrTuplet::create (
         fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-//         fTupletUpLinkToMeasure->getMeasureNumber (),
+//         fMeasureElementUpLinkToMeasure->getMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
         fTupletLineShapeKind,
@@ -184,8 +184,8 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   newbornClone->fTupletDisplayWholeNotes =
     fTupletDisplayWholeNotes;
 
-  newbornClone->fTupletUpLinkToMeasure->getMeasureNumber () =
-    fTupletUpLinkToMeasure->getMeasureNumber ();
+  newbornClone->fMeasureElementUpLinkToMeasure->getMeasureNumber () =
+    fMeasureElementUpLinkToMeasure->getMeasureNumber ();
 
   newbornClone->fMeasureElementMeasurePosition =
     fMeasureElementMeasurePosition;
@@ -194,57 +194,57 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   return newbornClone;
 }
 
-void msrTuplet::setMeasureElementUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-  setTupletUpLinkToMeasure (measure);
-}
+// void msrTuplet::setMeasureElementUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+//   setTupletUpLinkToMeasure (measure);
+// }
+//
+// S_msrMeasure msrTuplet::getMeasureElementUpLinkToMeasure () const
+// {
+//   return getTupletUpLinkToMeasure ();
+// }
+//
+// void msrTuplet::setTupletUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTuplets ()) {
+//     ++gIndenter;
+//
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting the uplink to measure of tuplet " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fTupletUpLinkToMeasure = measure;
+// }
 
-S_msrMeasure msrTuplet::getMeasureElementUpLinkToMeasure () const
-{
-  return getTupletUpLinkToMeasure ();
-}
-
-void msrTuplet::setTupletUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
-    ++gIndenter;
-
-    std::stringstream ss;
-
-    ss <<
-      "Setting the uplink to measure of tuplet " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fTupletUpLinkToMeasure = measure;
-}
-
-S_msrMeasure msrTuplet::getTupletUpLinkToMeasure () const
-{
-  return fTupletUpLinkToMeasure;
-}
+// S_msrMeasure msrTuplet::getTupletUpLinkToMeasure () const
+// {
+//   return fTupletUpLinkToMeasure;
+// }
 
 //______________________________________________________________________________
 void msrTuplet::appendNoteToTuplet (
@@ -284,7 +284,7 @@ void msrTuplet::appendNoteToTuplet (
 //   // register note's uplink to measure // JMI v0.9.66 ???
 //   note->
 //     setMeasureElementUpLinkToMeasure (
-//       fTupletUpLinkToMeasure);
+//       fMeasureElementUpLinkToMeasure);
 
   // mark note as belonging to a tuplet
   note->setNoteBelongsToATuplet ();
@@ -360,7 +360,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 /* too early JMI
   // populate chord's measure number
   chord->setChordMeasureNumber (
-    fTupletUpLinkToMeasure->getMeasureNumber ());
+    fMeasureElementUpLinkToMeasure->getMeasureNumber ());
 */
 }
 
@@ -556,7 +556,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       note <<
       " from tuplet " << asString () <<
       " in voice \"" <<
-      fTupletUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"," <<
@@ -576,7 +576,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
     ss <<
       "cannot remove the first note of an empty tuplet " <<
       " in voice \"" <<
-      fTupletUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"";
@@ -649,7 +649,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
     ss <<
       "cannot remove the last note of an empty tuplet " <<
       " in voice \"" <<
-      fTupletUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"";
@@ -969,9 +969,9 @@ std::string msrTuplet::asString () const
 
   ss <<
     ", getMeasureNumber: ";
-  if (fTupletUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     ss <<
-      fTupletUpLinkToMeasure->getMeasureNumber ();
+      fMeasureElementUpLinkToMeasure->getMeasureNumber ();
   }
   else {
     ss << "[UNKNOWN_MEASURE_NUMBER]";
@@ -1047,9 +1047,9 @@ std::string msrTuplet::asShortString () const
 
   ss <<
     ", getMeasureNumber: ";
-  if (fTupletUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     ss <<
-      fTupletUpLinkToMeasure->getMeasureNumber ();
+      fMeasureElementUpLinkToMeasure->getMeasureNumber ();
   }
   else {
     ss << "[UNKNOWN_MEASURE_NUMBER]";
@@ -1172,7 +1172,7 @@ void msrTuplet::printFull (std::ostream& os) const
 
 //     std::setw (fieldWidth) <<
 //     "fTupletMeasureNumber" << ": " <<
-//     fTupletUpLinkToMeasure->getMeasureNumber () <<
+//     fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
 //     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1182,10 +1182,10 @@ void msrTuplet::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletUpLinkToMeasure" << ": ";
-  if (fTupletUpLinkToMeasure) {
+    "fMeasureElementUpLinkToMeasure" << ": ";
+  if (fMeasureElementUpLinkToMeasure) {
     os <<
-      fTupletUpLinkToMeasure->asShortString ();
+      fMeasureElementUpLinkToMeasure->asShortString ();
   }
   else {
     os << "[NULL]";
@@ -1291,9 +1291,9 @@ void msrTuplet::print (std::ostream& os) const
 //   os << std::left <<
 //     std::setw (fieldWidth) <<
 //     "fTupletMeasureNumber" << ": ";
-//     if (fTupletUpLinkToMeasure) {
+//     if (fMeasureElementUpLinkToMeasure) {
 //       os <<
-//         fTupletUpLinkToMeasure->getMeasureNumber ();
+//         fMeasureElementUpLinkToMeasure->getMeasureNumber ();
 //     }
 //     else {
 //       os << "[UNKNOWN_MEASURE_NUMBER]";
@@ -1304,10 +1304,10 @@ void msrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletUpLinkToMeasure" << ": ";
-  if (fTupletUpLinkToMeasure) {
+    "fMeasureElementUpLinkToMeasure" << ": ";
+  if (fMeasureElementUpLinkToMeasure) {
     os <<
-      fTupletUpLinkToMeasure->asShortString ();
+      fMeasureElementUpLinkToMeasure->asShortString ();
   }
   else {
     os << "[NULL]";
@@ -1385,7 +1385,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt)
 //       break;
 //
 //     case msrTupletInKind::kTupletInMeasure:
-//       result = fTupletUpLinkToMeasure;
+//       result = fMeasureElementUpLinkToMeasure;
 //       break;
 //
 //     case msrTupletInKind::kTupletInTuplet:

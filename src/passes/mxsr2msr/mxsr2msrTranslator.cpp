@@ -3104,12 +3104,14 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     gTraceOahGroup->getTraceParts ()
       ||
     gEarlyOptions.getEarlyTracePasses ()
+      ||
+    gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
   ) {
     std::stringstream ss;
 
     ss <<
 //       std::endl <<
-      "<!--=== part \"" << partID << "\"" <<
+      "<!--=== partID \"" << partID << "\"" <<
       ", line " << elt->getInputStartLineNumber () << " ===-->";
 
     gWaeHandler->waeTrace (
@@ -8312,7 +8314,7 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
 
     ss <<
 //       std::endl <<
-      "<!--=== voice \"" << "elt->getVoiceName ()" << "\"" <<
+      "<!--=== voiceName \"" << "elt->getVoiceName ()" << "\"" <<
       ", line " << elt->getInputStartLineNumber () << " ===-->";
 
     gWaeHandler->waeTrace (
@@ -10668,8 +10670,8 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
     ss <<
 //       std::endl <<
       "<!--=== " <<
-      "part \"" << fCurrentPart->getPartName () << "\"" <<
-      " (partID \"" << fCurrentPart->getPartID () << "\")" <<
+      "partName \"" << fCurrentPart->getPartName () << "\"" <<
+      ", partID \"" << fCurrentPart->getPartID () << "\"" <<
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
       ", measureImplicitKind " << measureImplicitKind <<
       ", nonControllingString \"" << nonControllingString << "\"" <<
@@ -10915,7 +10917,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceWedges ()) {
       // maintainance check
-      if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
+      if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
         std::stringstream ss;
 
         int numberOfPendingVoicesWedges = fPendingVoiceWedgesList.size ();
@@ -12054,16 +12056,14 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
     std::stringstream ss;
 
     ss <<
-      "Creating barLine in part " <<
-      fCurrentPart->getPartCombinedName () << ":" <<
-      std::endl;
+      "Creating barLine " <<
+      barLine->asString () <<
+      " in part " <<
+      fCurrentPart->getPartCombinedName ();
 
-    ++gIndenter;
-
-    gLog <<
-      barLine;
-
-    --gIndenter;
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -19714,7 +19714,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
   S_msrMeasure
     chordFirstNoteShortcutUpLinkToMeasure =
       chordFirstNote->
-        getNoteUpLinkToMeasure ();
+        getMeasureElementUpLinkToMeasure ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsDetails ()) {
@@ -19726,7 +19726,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
       std::endl <<
       "+++++++++++++++++" <<
       std::endl << std::endl <<
-      "++++++++++++++++ chordFirstNote->getNoteUpLinkToMeasure () =";
+      "++++++++++++++++ chordFirstNote->getMeasureElementUpLinkToMeasure () =";
 
     if (chordFirstNoteShortcutUpLinkToMeasure) {
       gLog <<
@@ -23193,7 +23193,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToCurrentNote ()
 //         S_msrMeasure
 //           noteMeasure =
 //             fCurrentNote->
-//               getNoteUpLinkToMeasure ();
+//               getMeasureElementUpLinkToMeasure ();
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 // sanity check
@@ -24171,7 +24171,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 
 #ifdef MF_TRACE_IS_ENABLED
   // maintainance check
-  if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
+  if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
     std::stringstream ss;
 
     ss <<
@@ -24692,7 +24692,7 @@ void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 #ifdef MF_TRACE_IS_ENABLED
-  if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70 BABASSE
+  if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70 BABASSE
     if (fTupletsStack.size () == 0) {
     }
 

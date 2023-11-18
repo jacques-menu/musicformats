@@ -4585,35 +4585,35 @@ void msrHarmony::setHarmonyDisplayWholeNotes (
   fHarmonyDisplayWholeNotes = wholeNotes;
 }
 
-void msrHarmony::setHarmonyUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of harmony " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fHarmonyUpLinkToMeasure = measure;
-}
+// void msrHarmony::setHarmonyUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceHarmonies ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of harmony " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fHarmonyUpLinkToMeasure = measure;
+// }
 
 void msrHarmony::setHarmonyTupletFactor (
   const msrTupletFactor& tupletFactor)
@@ -4974,10 +4974,10 @@ std::string msrHarmony::asString () const
   }
 
   ss <<
-    ", fHarmonyUpLinkToMeasure: ";
-    if (fHarmonyUpLinkToMeasure) {
+    ", fMeasureElementUpLinkToMeasure: ";
+    if (fMeasureElementUpLinkToMeasure) {
       ss <<
-        fHarmonyUpLinkToMeasure->asString ();
+        fMeasureElementUpLinkToMeasure->asString ();
     }
     else {
       ss << "[NULL]";
@@ -5122,10 +5122,10 @@ std::string msrHarmony::asString () const
 //     fHarmonyKindText << "\"";
 //
 //   ss <<
-//     ", fHarmonyUpLinkToMeasure: ";
-//   if (fHarmonyUpLinkToMeasure) {
+//     ", fMeasureElementUpLinkToMeasure: ";
+//   if (fMeasureElementUpLinkToMeasure) {
 //     ss <<
-//       fHarmonyUpLinkToMeasure->asString ();
+//       fMeasureElementUpLinkToMeasure->asString ();
 //   }
 //   else {
 //     ss << "[NULL]";
@@ -5309,10 +5309,10 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony uplink to measure
   os <<
     std::setw (fieldWidth) <<
-    "fHarmonyUpLinkToMeasure" << ": ";
-  if (fHarmonyUpLinkToMeasure) {
+    "fMeasureElementUpLinkToMeasure" << ": ";
+  if (fMeasureElementUpLinkToMeasure) {
     os <<
-      fHarmonyUpLinkToMeasure->asString ();
+      fMeasureElementUpLinkToMeasure->asString ();
   }
   else {
     os << "[NULL]";
@@ -5336,9 +5336,9 @@ void msrHarmony::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "harmonyUpLinkToMeasureMeasureNumber" << ": ";
-  if (fHarmonyUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     os <<
-      fHarmonyUpLinkToMeasure->getMeasureNumber ();
+      fMeasureElementUpLinkToMeasure->getMeasureNumber ();
   }
   else {
     os << "[NULL]";

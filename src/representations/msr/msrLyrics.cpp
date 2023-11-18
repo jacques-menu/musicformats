@@ -359,7 +359,7 @@ msrSyllable::msrSyllable (
     case msrSyllableKind::kSyllableSkipOnRestNote:
     case msrSyllableKind::kSyllableSkipOnNonRestNote:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gWaeOahGroup->getMaintainanceRun ()) {
+      if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         mfAssert ( // JMI v0.9.70 BABASSE
           __FILE__, __LINE__,
           syllableWholeNotes.getNumerator () > 0,
@@ -522,35 +522,35 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   return deepClone;
 }
 
-void msrSyllable::setSyllableUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of syllable " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fSyllableUpLinkToMeasure = measure;
-}
+// void msrSyllable::setSyllableUpLinkToMeasure ( // JMI UNUSED ??? v0.9.70 BABASSE
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceLyrics ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of syllable " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fSyllableUpLinkToMeasure = measure;
+// }
 
 void msrSyllable:: setSyllableMeasureNumber (
   const std::string& measureNumber)
@@ -627,6 +627,24 @@ void msrSyllable::appendSyllableElementToSyllable (
     syllableElement);
 }
 
+void msrSyllable::setSyllableUpLinkToNote (const S_msrNote& note)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceLyrics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting syllable note upLink of " <<
+      asString () <<
+      " to " <<
+      note->asString () <<
+      std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fSyllableUpLinkToNote = note;
+}
+
 void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
   const S_msrNote& note)
 {
@@ -638,31 +656,20 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
     "note is empty");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fSyllableUpLinkToNote = note;
-
-/*
-  // sanity check JMI ???
-  mfAssert (
-    __FILE__, __LINE__,
-    fSyllableElementsList.size () != 0,
-    "fSyllableElementsList is empty");
-    */
-
   // append syllable to note
   note->
     appendSyllableToNote (this);
 
   // set it upLink to note
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLyrics ()) {
-    std::stringstream ss;
+  setSyllableUpLinkToNote (note);
 
-    ss <<
-      "Setting syllable note upLink for:" <<
-      asString () <<
-      std::endl;
-  }
-#endif // MF_TRACE_IS_ENABLED
+/*
+  // sanity check JMI v0.9.70 BABASSE ???
+  mfAssert (
+    __FILE__, __LINE__,
+    fSyllableElementsList.size () != 0,
+    "fSyllableElementsList is empty");
+    */
 }
 
 void msrSyllable::acceptIn (basevisitor* v)
@@ -854,7 +861,7 @@ std::string msrSyllable::asString () const
     ", fSyllableExtendKind: " << fSyllableExtendKind <<
     ", fSyllableStanzaNumber: \"" << fSyllableStanzaNumber << "\"" <<
     ", fSyllableWholeNotes: " << fSyllableWholeNotes.asFractionString () <<
-    ", fSyllableTupletFactor: " << fSyllableTupletFactor <<
+    ", fSyllableTupletFactor: " << fSyllableTupletFactor.asFractionString () <<
     ", fSyllableMeasureNumber: " << fSyllableMeasureNumber <<
     ", line " << fInputStartLineNumber;
 
@@ -921,7 +928,7 @@ std::string msrSyllable::asShortString () const
     ", " << fSyllableExtendKind <<
     ", \"" << fSyllableStanzaNumber << "\"" <<
     ", " << fSyllableWholeNotes.asFractionString () <<
-    ", " << fSyllableTupletFactor <<
+    ", " << fSyllableTupletFactor.asFractionString () <<
     ", fSyllableMeasureNumber: " << fSyllableMeasureNumber <<
     ", line " << fInputStartLineNumber;
 
@@ -1261,27 +1268,27 @@ void msrStanza::appendSyllableToStanza (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // pad up stanza if relevant
-  if (positionsDelta.getNumerator () != 0) {
-    // create a skip on rest note syllable
-    S_msrSyllable
-      skipRestNoteSyllable =
-        msrSyllable::create (
-          syllable->getInputStartLineNumber (),
-          msrSyllableKind::kSyllableSkipOnRestNote,
-          msrSyllableExtendKind::kSyllableExtend_NONE,
-          fStanzaNumber,
-          positionsDelta,
-          msrTupletFactor (1, 1),
-          this);
-
-    // append it to this stanza
-    fSyllables.push_back (skipRestNoteSyllable);
-
-    // account for syllable length
-    fStanzaMeasureCurrentAccumulatedWholeNotesDuration +=
-      skipRestNoteSyllable->getSyllableWholeNotes ();
-  }
+//   // pad up stanza if relevant
+//   if (positionsDelta.getNumerator () != 0) { // JMI v0.9.70 BABASSE
+//     // create a skip on rest note syllable
+//     S_msrSyllable
+//       skipRestNoteSyllable =
+//         msrSyllable::create (
+//           syllable->getInputStartLineNumber (),
+//           msrSyllableKind::kSyllableSkipOnRestNote,
+//           msrSyllableExtendKind::kSyllableExtend_NONE,
+//           fStanzaNumber,
+//           positionsDelta,
+//           msrTupletFactor (1, 1),
+//           this);
+//
+//     // append it to this stanza
+//     fSyllables.push_back (skipRestNoteSyllable);
+//
+//     // account for syllable length
+//     fStanzaMeasureCurrentAccumulatedWholeNotesDuration +=
+//       skipRestNoteSyllable->getSyllableWholeNotes ();
+//   }
 
   // append syllable to this stanza
   fSyllables.push_back (syllable);
@@ -1416,27 +1423,27 @@ void msrStanza::appendMeasureEndSyllableToStanza (
 
   ++gIndenter;
 
-  // pad up stanza if relevant
-  if (positionsDelta.getNumerator () > 0) { // JMI v0.9.70 it may be negative...
-    // create a skip on rest note syllable
-    S_msrSyllable
-      skipRestNoteSyllable =
-        msrSyllable::create (
-          inputLineNumber,
-          msrSyllableKind::kSyllableSkipOnRestNote,
-          msrSyllableExtendKind::kSyllableExtend_NONE,
-          fStanzaNumber,
-          positionsDelta,
-          msrTupletFactor (1, 1),
-          this);
-
-    // append it to this stanza
-    fSyllables.push_back (skipRestNoteSyllable);
-
-    // account for syllable length
-    fStanzaMeasureCurrentAccumulatedWholeNotesDuration +=
-      skipRestNoteSyllable->getSyllableWholeNotes ();
-  }
+//   // pad up stanza if relevant
+//   if (positionsDelta.getNumerator () > 0) { // JMI v0.9.70 it may be negative...
+//     // create a skip on rest note syllable
+//     S_msrSyllable
+//       skipRestNoteSyllable =
+//         msrSyllable::create (
+//           inputLineNumber,
+//           msrSyllableKind::kSyllableSkipOnRestNote,
+//           msrSyllableExtendKind::kSyllableExtend_NONE,
+//           fStanzaNumber,
+//           positionsDelta,
+//           msrTupletFactor (1, 1),
+//           this);
+//
+//     // append it to this stanza
+//     fSyllables.push_back (skipRestNoteSyllable);
+//
+//     // account for syllable length
+//     fStanzaMeasureCurrentAccumulatedWholeNotesDuration +=
+//       skipRestNoteSyllable->getSyllableWholeNotes ();
+//   }
 
   // create measure end syllable
   S_msrSyllable

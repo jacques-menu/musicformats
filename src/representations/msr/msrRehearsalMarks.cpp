@@ -85,35 +85,35 @@ msrRehearsalMark::msrRehearsalMark (
 msrRehearsalMark::~msrRehearsalMark ()
 {}
 
-void msrRehearsalMark::setRehearsalMarkUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRehearsalMarks ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of rehearsal mark " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fRehearsalMarkUpLinkToMeasure = measure;
-}
+// void msrRehearsalMark::setRehearsalMarkUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceRehearsalMarks ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of rehearsal mark " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fRehearsalMarkUpLinkToMeasure = measure;
+// }
 
 void msrRehearsalMark::acceptIn (basevisitor* v)
 {

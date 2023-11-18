@@ -29,6 +29,7 @@ namespace MusicFormats
   hence class msrTupletElement
 */
 
+// //______________________________________________________________________________
 // class EXP msrTupletElement : public msrMeasureElement
 // {
 //   public:
@@ -44,29 +45,12 @@ namespace MusicFormats
 //                           msrTupletElement (
 //                             int inputLineNumber);
 //
-// //                           msrTupletElement (
-// //                             int                 inputLineNumber,
-// //                             const S_msrMeasure& upLinkToMeasure);
-//
-//                           msrTupletElement ();
-//
 //     virtual               ~msrTupletElement ();
 //
 //   public:
 //
-//       // set and get
-//       // ------------------------------------------------------
-//
-//       // uplink to measure
-// //     void                  setMeasureElementUpLinkToMeasure (
-// //                             const S_msrMeasure& measure) override;
-// //
-// //     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
-// //
-// //     void                  setTupletElementUpLinkToMeasure (
-// //                             const S_msrMeasure& measure);
-// //
-// //     S_msrMeasure          getTupletElementUpLinkToMeasure () const;
+//     // set and get
+//     // ------------------------------------------------------
 //
 //     void                  setPositionInTuplet (
 //                             int positionInTuplet)
@@ -77,15 +61,13 @@ namespace MusicFormats
 //
 //   protected:
 //
-//       // protected fields
-//       // ------------------------------------------------------
+//     // protected fields
+//     // ------------------------------------------------------
 //
 //     /*
 //       The uplinks to the tuplet and measure element are declared in the sub-classes,
 //       to allow for separate *.h files, C++ constraint
 //     */
-//
-// //     S_msrMeasure          fTupletElementUpLinkToMeasure;
 //
 //     int                   fPositionInTuplet;
 // };

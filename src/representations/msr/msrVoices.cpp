@@ -1959,8 +1959,24 @@ void msrVoice::setVoiceCurrentKey (
 };
 
 void msrVoice::setVoiceCurrentTimeSignature (
-  const S_msrTimeSignature& timeSignature
-){
+  const S_msrTimeSignature& timeSignature)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting voice current time signature of " <<
+      asString () <<
+      " to " <<
+      timeSignature->asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   fVoiceCurrentTimeSignature = timeSignature;
 };
 
@@ -4939,7 +4955,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
         msrWholeNotes
           fullMeasureWholeNotesDuration =
             lastMeasureInLastSegment->
-              fetchFullMeasureWholeNotesDuration ();
+              getFullMeasureWholeNotesDuration ();
 
         // is there a measure splitting?
         if ( // JMI better criterion???
@@ -5776,7 +5792,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
   if (
     voiceLastMeasure->getMeasureCurrentAccumulatedWholeNotesDuration ()
       ==
-    voiceLastMeasure->fetchFullMeasureWholeNotesDuration ()
+    voiceLastMeasure->getFullMeasureWholeNotesDuration ()
   ) {
     // this measure is incomplete and should be split
 #ifdef MF_TRACE_IS_ENABLED
@@ -7854,7 +7870,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
         lastAppendedMeasureClone->
           getMeasureOrdinalNumberInVoice (),
         lastAppendedMeasureClone->
-          fetchFullMeasureWholeNotesDuration ()); // JMI
+          getFullMeasureWholeNotesDuration ()); // JMI
 
     // append it to the voice last segment
     fVoiceLastSegment->
@@ -7898,7 +7914,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
   msrWholeNotes
     emptyMeasureCurrentAccumulatedWholeNotesDuration =
       fVoiceLastAppendedMeasure->
-        fetchFullMeasureWholeNotesDuration ();
+        getFullMeasureWholeNotesDuration ();
 
   for (int i = 1; i <= emptyMeasuresNumber; ++i) {
     // create a measure
@@ -9975,7 +9991,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
         int fullMeasureWholeNotesDuration =
           fVoiceLastSegment->
             getSegmentElementsList ().back ()->
-              fetchFullMeasureWholeNotesDuration ();
+              getFullMeasureWholeNotesDuration ();
               */
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -10703,7 +10719,7 @@ void msrVoice::finalizeVoice (
   if (fVoiceHasBeenFinalized) {
 #ifdef MF_TRACE_IS_ENABLED
     // maintainance check
-    if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
+    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
       std::stringstream ss;
 
       ss <<
@@ -10868,7 +10884,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
   if (fVoiceHasBeenFinalized) {
 #ifdef MF_TRACE_IS_ENABLED
     // maintainance check
-    if (gWaeOahGroup->getMaintainanceRun ()) { // JMI v0.9.70
+    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
       std::stringstream ss;
 
       ss <<
@@ -12026,7 +12042,7 @@ std::ostream& operator << (std::ostream& os, const S_msrVoice& elt)
 //         fVoiceCurrentMultiMeasureRest =
 //           msrMultiMeasureRest::create (
 //             inputLineNumber,
-//             firstRestMeasure->fetchFullMeasureWholeNotesDuration (),
+//             firstRestMeasure->getFullMeasureWholeNotesDuration (),
 //             multiMeasureRestMeasuresNumber,
 //             this);
 // */

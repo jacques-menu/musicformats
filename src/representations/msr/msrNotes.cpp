@@ -139,7 +139,7 @@ msrNote::msrNote (
         inputLineNumber),
       fNoteColorAlphaRGB ("", "")
 {
-  fNoteUpLinkToMeasure = upLinkToMeasure;
+  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
 //   fMeasureElementMeasureNumber = noteMeasureNumber; // JMI ??? v0.9.66
 
@@ -369,57 +369,57 @@ void msrNote::initializeNote ()
 msrNote::~msrNote ()
 {}
 
-void msrNote::setMeasureElementUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-  setNoteUpLinkToMeasure (measure);
-}
+// void msrNote::setMeasureElementUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+//   setNoteUpLinkToMeasure (measure);
+// }
+//
+// S_msrMeasure msrNote::getMeasureElementUpLinkToMeasure () const
+// {
+//   return getNoteUpLinkToMeasure ();
+// }
+//
+// void msrNote::setNoteUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
+//     ++gIndenter;
+//
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting the uplink to measure of note " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fNoteUpLinkToMeasure = measure;
+// }
 
-S_msrMeasure msrNote::getMeasureElementUpLinkToMeasure () const
-{
-  return getNoteUpLinkToMeasure ();
-}
-
-void msrNote::setNoteUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
-    ++gIndenter;
-
-    std::stringstream ss;
-
-    ss <<
-      "Setting the uplink to measure of note " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fNoteUpLinkToMeasure = measure;
-}
-
-S_msrMeasure msrNote::getNoteUpLinkToMeasure () const
-{
-  return fNoteUpLinkToMeasure;
-}
+// S_msrMeasure msrNote::getNoteUpLinkToMeasure () const
+// {
+//   return fNoteUpLinkToMeasure;
+// }
 
 //________________________________________________________________________
 // S_msrMeasure msrNote::fetchMeasureElementUpLinkToMeasure () const
@@ -573,9 +573,9 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteRegularInChord:
-      if (fNoteUpLinkToMeasure) {
+      if (fMeasureElementUpLinkToMeasure) {
         result =
-          fNoteUpLinkToMeasure->
+          fMeasureElementUpLinkToMeasure->
             fetchMeasureUpLinkToVoice ();
       }
       break;
@@ -634,9 +634,9 @@ S_msrStaff msrNote::fetchUpLinkToNoteToStaff () const
 {
   S_msrStaff result;
 
-  if (fNoteUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     result =
-      fNoteUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToStaff ();
   }
 
@@ -647,9 +647,9 @@ S_msrPart msrNote::fetchUpLinkToNoteToPart () const
 {
   S_msrPart result;
 
-  if (fNoteUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     result =
-      fNoteUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToPart ();
   }
 
@@ -660,9 +660,9 @@ S_msrPartGroup msrNote::fetchNoteUpLinkToPartGroup () const
 {
   S_msrPartGroup result;
 
-  if (fNoteUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     result =
-      fNoteUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToPartGroup ();
   }
 
@@ -673,9 +673,9 @@ S_msrScore msrNote::fetchUpLinkToNoteToScore () const
 {
   S_msrScore result;
 
-  if (fNoteUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     result =
-      fNoteUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToScore ();
   }
 
@@ -744,7 +744,7 @@ S_msrNote msrNote::createNoteNewbornClone (
         fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
-//         fNoteUpLinkToMeasure->getMeasureNumber (), // JMI v0.9.66
+//         fMeasureElementUpLinkToMeasure->getMeasureNumber (), // JMI v0.9.66
 
         fNoteKind,
 
@@ -956,7 +956,7 @@ S_msrNote msrNote::createNoteDeepClone (
         fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
 
-//         fNoteUpLinkToMeasure->getMeasureNumber (), // v0.9.66
+//         fMeasureElementUpLinkToMeasure->getMeasureNumber (), // v0.9.66
 
         fNoteKind,
 
@@ -1367,8 +1367,8 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   deepClone->
-    fNoteUpLinkToMeasure->getMeasureNumber () =
-      fNoteUpLinkToMeasure->getMeasureNumber ();
+    fMeasureElementUpLinkToMeasure->getMeasureNumber () =
+      fMeasureElementUpLinkToMeasure->getMeasureNumber ();
   deepClone->
     fMeasureElementMeasurePosition =
       fMeasureElementMeasurePosition;
@@ -3343,7 +3343,7 @@ void msrNote::appendScordaturaToNote (
 //       asString () <<
 //       " to " << voicePosition <<
 //       " in measure '" <<
-//       fNoteUpLinkToMeasure->getMeasureNumber () <<
+//       fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3369,7 +3369,7 @@ void msrNote::appendScordaturaToNote (
 //       asString () <<
 //       " to " << voicePosition <<
 //       " in measure '" <<
-//       fNoteUpLinkToMeasure->getMeasureNumber () <<
+//       fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3469,7 +3469,9 @@ S_msrWedge msrNote::removeFirstWedge () // JMI
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrWedge wedge = fNoteWedgesList.front ();
+
   fNoteWedgesList.pop_front ();
+
   return wedge;
 }
 
@@ -3493,6 +3495,10 @@ void msrNote::appendSyllableToNote (
 #endif // MF_TRACE_IS_ENABLED
 
   fNoteSyllablesList.push_back (syllable);
+
+  // set syllable upLink to note
+  syllable->
+		setSyllableUpLinkToNote (this);
 }
 
 void msrNote::appendHarmonyToNote (
@@ -4069,7 +4075,7 @@ void msrNote::browseData (basevisitor* v)
     // fetch the score
     S_msrScore
       score =
-        fNoteUpLinkToMeasure->
+        fMeasureElementUpLinkToMeasure->
           fetchMeasureUpLinkToScore ();
 
     if (score) {
@@ -4495,10 +4501,10 @@ std::string msrNote::noteComplementsAsString () const
 
   ss <<
     ", measureElementMeasureNumber: ";
-  if (fNoteUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     std::string
       measureNumber =
-        fNoteUpLinkToMeasure->
+        fMeasureElementUpLinkToMeasure->
           getMeasureNumber ();
 
     if (measureNumber == K_MEASURE_NUMBER_UNKNOWN_) {
@@ -5965,10 +5971,10 @@ void msrNote::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fNoteUpLinkToMeasureMeasureNumber" << ": ";
-  if (fNoteUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     std::string
       measureNumber =
-        fNoteUpLinkToMeasure->
+        fMeasureElementUpLinkToMeasure->
           getMeasureNumber ();
 
     if (measureNumber == K_MEASURE_NUMBER_UNKNOWN_) {
@@ -5983,19 +5989,19 @@ void msrNote::printFull (std::ostream& os) const
   }
 
 
-//   if (fNoteUpLinkToMeasure->getMeasureNumber () == K_MEASURE_NUMBER_UNKNOWN_) {
+//   if (fMeasureElementUpLinkToMeasure->getMeasureNumber () == K_MEASURE_NUMBER_UNKNOWN_) {
 //     os <<
 //       "[UNKNOWN_MEASURE_NUMBER]";
 //   }
-//   else if (fNoteUpLinkToMeasure->getMeasureNumber ().size ()) {
+//   else if (fMeasureElementUpLinkToMeasure->getMeasureNumber ().size ()) {
 //     os <<
-//       fNoteUpLinkToMeasure->getMeasureNumber ();
+//       fMeasureElementUpLinkToMeasure->getMeasureNumber ();
 //   }
 //   else {
 //     std::stringstream ss;
 //
 //     ss <<
-//       "fNoteUpLinkToMeasure->getMeasureNumber () is empty in note " <<
+//       "fMeasureElementUpLinkToMeasure->getMeasureNumber () is empty in note " <<
 //       this->asString () <<
 //       "'";
 //
@@ -6024,15 +6030,15 @@ void msrNote::printFull (std::ostream& os) const
   // print note uplink to measure
   os <<
     std::setw (fieldWidth) <<
-    "fNoteUpLinkToMeasure" << ": ";
+    "fMeasureElementUpLinkToMeasure" << ": ";
 
-  if (fNoteUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     os << std::endl;
 
     ++gIndenter;
 
     os <<
-      fNoteUpLinkToMeasure->asShortString () <<
+      fMeasureElementUpLinkToMeasure->asShortString () <<
       std::endl;
 
     --gIndenter;
@@ -6162,10 +6168,10 @@ void msrNote::printFull (std::ostream& os) const
   // may be unknown if there is no time signature
   msrWholeNotes
     measureFullLength =
-      fNoteUpLinkToMeasure
+      fMeasureElementUpLinkToMeasure
         ?
-          fNoteUpLinkToMeasure->
-            fetchFullMeasureWholeNotesDuration ()
+          fMeasureElementUpLinkToMeasure->
+            getFullMeasureWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI v0.9.67
 
   os << std::left <<

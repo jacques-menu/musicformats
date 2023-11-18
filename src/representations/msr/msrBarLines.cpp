@@ -139,35 +139,35 @@ msrBarLine::msrBarLine (
 msrBarLine::~msrBarLine ()
 {}
 
-void msrBarLine::setBarLineUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceBarLines ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of bar line " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fBarLineUpLinkToMeasure = measure;
-}
+// void msrBarLine::setBarLineUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceBarLines ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of bar line " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fBarLineUpLinkToMeasure = measure;
+// }
 
 S_msrBarLine msrBarLine::createFinalBarLine (
   int                 inputLineNumber,
@@ -612,11 +612,11 @@ std::string msrBarLine::asShortString () const
 
   ss <<
     "[BarLine " <<
-    msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
+    fBarLineCategoryKind <<
     ", measureNumber: ";
-  if (fBarLineUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     ss <<
-      fBarLineUpLinkToMeasure->getMeasureNumber ();
+      fMeasureElementUpLinkToMeasure->getMeasureNumber ();
   }
   else {
     ss << "[UNKNOWN]";
@@ -662,8 +662,18 @@ std::string msrBarLine::asString () const
 
   ss <<
     "[BarLine " <<
-    msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
-    ", measureElementMeasureNumber: " << fBarLineUpLinkToMeasure->getMeasureNumber () <<
+    fBarLineCategoryKind <<
+    ", measureElementMeasureNumber: ";
+
+    if (fMeasureElementUpLinkToMeasure) {
+      ss <<
+        fMeasureElementUpLinkToMeasure->getMeasureNumber ();
+    }
+    else {
+      ss << "[UNKNOWN]";
+    }
+
+  ss <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition.asString () <<
 
     ", " <<
@@ -713,12 +723,12 @@ void msrBarLine::printFull (std::ostream& os) const
   const int fieldWidth = 33;
 
   os << std::left <<
-    "fBarLineUpLinkToMeasure" << ": ";
-    if (fBarLineUpLinkToMeasure) {
+    "fMeasureElementUpLinkToMeasure" << ": ";
+    if (fMeasureElementUpLinkToMeasure) {
       os <<  std::endl;
       ++gIndenter;
       os <<
-        fBarLineUpLinkToMeasure->asShortString ();
+        fMeasureElementUpLinkToMeasure->asShortString ();
       --gIndenter;
     }
     else {
@@ -786,9 +796,18 @@ void msrBarLine::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "barLineUpLinkToMeasureMeasureNumber" << ": " <<
-    fBarLineUpLinkToMeasure->getMeasureNumber () <<
-    std::endl;
+    "barLineUpLinkToMeasureMeasureNumber" << ": ";
+
+    if (fMeasureElementUpLinkToMeasure) {
+      os <<  std::endl;
+      ++gIndenter;
+      os <<
+        fMeasureElementUpLinkToMeasure->getMeasureNumber ();
+      --gIndenter;
+    }
+    else {
+      os << "[NULL]" << std::endl;
+    }
 
   --gIndenter;
 
@@ -803,12 +822,34 @@ void msrBarLine::print (std::ostream& os) const
     "[BarLine" <<
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
     fBarLineCategoryKind <<
-    ", measureElementMeasureNumber: " <<
-    fBarLineUpLinkToMeasure->getMeasureNumber () <<
-    ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition.asString () <<
     ", line " << fInputStartLineNumber <<
-    ']' <<
     std::endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 31;
+  os <<
+    std::setw (fieldWidth) <<
+   "measureElementMeasureNumber: ";
+
+  if (fMeasureElementUpLinkToMeasure) {
+    os <<
+      fMeasureElementUpLinkToMeasure->getMeasureNumber ();
+  }
+  else {
+    os << "[UNKNOWN]";
+  }
+  os << std::endl;
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementMeasurePosition" <<
+    fMeasureElementMeasurePosition.asString () <<
+    std::endl;
+
+  --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrBarLine& elt)

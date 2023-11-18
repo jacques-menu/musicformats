@@ -116,35 +116,35 @@ msrLineBreak::msrLineBreak (
 msrLineBreak::~msrLineBreak ()
 {}
 
-void msrLineBreak::setLineBreakUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceLineBreaks ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of line break " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fLineBreakUpLinkToMeasure = measure;
-}
+// void msrLineBreak::setLineBreakUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceLineBreaks ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of line break " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fLineBreakUpLinkToMeasure = measure;
+// }
 
 void msrLineBreak::acceptIn (basevisitor* v)
 {
@@ -330,35 +330,35 @@ msrPageBreak::msrPageBreak (
 msrPageBreak::~msrPageBreak ()
 {}
 
-void msrPageBreak::setPageBreakUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTracePageBreaks ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of page break " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fPageBreakUpLinkToMeasure = measure;
-}
+// void msrPageBreak::setPageBreakUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTracePageBreaks ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of page break " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fPageBreakUpLinkToMeasure = measure;
+// }
 
 void msrPageBreak::acceptIn (basevisitor* v)
 {

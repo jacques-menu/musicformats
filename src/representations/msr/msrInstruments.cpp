@@ -74,35 +74,35 @@ msrStringTuning::msrStringTuning (
 msrStringTuning::~msrStringTuning ()
 {}
 
-void msrStringTuning::setStringTuningUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceInstruments ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of string tuning " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fStringTuningUpLinkToMeasure = measure;
-}
+// void msrStringTuning::setStringTuningUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceInstruments ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of string tuning " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fStringTuningUpLinkToMeasure = measure;
+// }
 
 void msrStringTuning::acceptIn (basevisitor* v)
 {
@@ -251,35 +251,35 @@ msrScordatura::msrScordatura (
 msrScordatura::~msrScordatura ()
 {}
 
-void msrScordatura::setScordaturaUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceInstruments ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of scordatura " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fScordaturaUpLinkToMeasure = measure;
-}
+// void msrScordatura::setScordaturaUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceInstruments ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of scordatura " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fScordaturaUpLinkToMeasure = measure;
+// }
 
 void msrScordatura::addStringTuningToScordatura (
   const S_msrStringTuning& stringTuning)
@@ -457,35 +457,35 @@ msrAccordionRegistration::msrAccordionRegistration (
 msrAccordionRegistration::~msrAccordionRegistration ()
 {}
 
-void msrAccordionRegistration::setAccordionRegistrationUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceInstruments ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of accordion registration " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fAccordionRegistrationUpLinkToMeasure = measure;
-}
+// void msrAccordionRegistration::setAccordionRegistrationUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceInstruments ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of accordion registration " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fAccordionRegistrationUpLinkToMeasure = measure;
+// }
 
 void msrAccordionRegistration::acceptIn (basevisitor* v)
 {
@@ -673,35 +673,35 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
   return harpPedalsTuningDeepClone;
 }
 
-void msrHarpPedalsTuning::setHarpPedalsTuningUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceInstruments ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of harp pedals tuning " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fHarpPedalsTuningUpLinkToMeasure = measure;
-}
+// void msrHarpPedalsTuning::setHarpPedalsTuningUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceInstruments ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of harp pedals tuning " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fHarpPedalsTuningUpLinkToMeasure = measure;
+// }
 
 void msrHarpPedalsTuning::addPedalTuning (
   int                  inputLineNumber,
@@ -952,35 +952,35 @@ msrPedal::msrPedal (
 msrPedal::~msrPedal ()
 {}
 
-void msrPedal::setPedalUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceInstruments ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of pedal " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fPedalUpLinkToMeasure = measure;
-}
+// void msrPedal::setPedalUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceInstruments ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of pedal " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fPedalUpLinkToMeasure = measure;
+// }
 
 void msrPedal::acceptIn (basevisitor* v)
 {
@@ -1191,35 +1191,35 @@ msrDamp::msrDamp (
 msrDamp::~msrDamp ()
 {}
 
-void msrDamp::setDampUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceInstruments ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of damp " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fDampUpLinkToMeasure = measure;
-}
+// void msrDamp::setDampUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceInstruments ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of damp " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fDampUpLinkToMeasure = measure;
+// }
 
 void msrDamp::acceptIn (basevisitor* v)
 {
@@ -1348,35 +1348,35 @@ msrDampAll::msrDampAll (
 msrDampAll::~msrDampAll ()
 {}
 
-void msrDampAll::setDampAllUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceInstruments ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of dampAll " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fDampAllUpLinkToMeasure = measure;
-}
+// void msrDampAll::setDampAllUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceInstruments ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of dampAll " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fDampAllUpLinkToMeasure = measure;
+// }
 
 void msrDampAll::acceptIn (basevisitor* v)
 {

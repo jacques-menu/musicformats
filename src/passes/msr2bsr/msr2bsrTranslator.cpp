@@ -35,6 +35,8 @@
 
 #include "oahOah.h"
 
+#include "waeOah.h"
+
 #include "msrOah.h"
 #include "msr2bsrOah.h"
 #include "brailleGenerationOah.h"
@@ -494,7 +496,11 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceParts ()) {
+  if (
+    gTraceOahGroup->getTraceParts ()
+      ||
+    gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+  ) {
     std::stringstream ss;
 
     ss <<

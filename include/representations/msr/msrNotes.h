@@ -45,7 +45,10 @@
 #include "msrTechnicals.h"
 #include "msrTies.h"
 #include "msrTupletElementsAndTuplets.h"
-#include "msrTupletElements.h"
+#include "msrTypesForwardDeclarations.h"
+
+#include "msrMeasureElements.h"
+#include "msrMeasures.h"
 #include "msrTupletFactors.h"
 
 
@@ -215,15 +218,15 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override;
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
-
-    void                  setNoteUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getNoteUpLinkToMeasure () const;
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override;
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
+//
+//     void                  setNoteUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getNoteUpLinkToMeasure () const;
 
     // uplink to chord
     void                  setNoteShortcutUpLinkToChord (
@@ -989,7 +992,7 @@ class EXP msrNote : public msrTupletElement
     // upLinks
     // ------------------------------------------------------
 
-    S_msrMeasure          fNoteUpLinkToMeasure;
+//     S_msrMeasure          fNoteUpLinkToMeasure;
 
     S_msrChord            fNoteShortcutUpLinkToChord;
 

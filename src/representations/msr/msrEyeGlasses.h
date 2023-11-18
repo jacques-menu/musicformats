@@ -51,19 +51,19 @@ class EXP msrEyeGlasses : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setEyeGlassesUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getEyeGlassesUpLinkToMeasure (); }
-
-    void                  setEyeGlassesUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getEyeGlassesUpLinkToMeasure () const
-                              { return fEyeGlassesUpLinkToMeasure; }
+//     // uplink to measure
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setEyeGlassesUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getEyeGlassesUpLinkToMeasure (); }
+//
+//     void                  setEyeGlassesUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getEyeGlassesUpLinkToMeasure () const
+//                               { return fEyeGlassesUpLinkToMeasure; }
 
   public:
 
@@ -94,7 +94,7 @@ class EXP msrEyeGlasses : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fEyeGlassesUpLinkToMeasure;
+//     S_msrMeasure          fEyeGlassesUpLinkToMeasure;
 };
 typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;
 EXP std::ostream& operator << (std::ostream& os, const S_msrEyeGlasses& elt);

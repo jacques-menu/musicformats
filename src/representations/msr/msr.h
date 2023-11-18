@@ -87,7 +87,10 @@
 
 #include "msrChords.h"
 
-#include "msrTupletElements.h"
+#include "msrTypesForwardDeclarations.h"
+
+#include "msrMeasureElements.h"
+#include "msrMeasures.h"
 #include "msrTupletElementsAndTuplets.h"
 
 #include "msrLyrics.h"

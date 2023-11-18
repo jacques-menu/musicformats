@@ -44,6 +44,8 @@
 
 #include "oahOah.h"
 
+#include "waeOah.h"
+
 #include "msrOah.h"
 #include "msr2msrOah.h"
 
@@ -1023,7 +1025,11 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
       ss.str ());
   }
 
-  if (gTraceOahGroup->getTraceParts ()) {
+  if (
+    gTraceOahGroup->getTraceParts ()
+      ||
+    gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+  ) {
     std::stringstream ss;
 
     ss <<
@@ -2048,7 +2054,8 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
     finalizeMeasureClone (
       elt->getInputStartLineNumber (),
       elt, // original measure
-      fCurrentVoiceClone);
+      fCurrentVoiceClone,
+      "msr2msrTranslator::visitEnd (S_msrMeasure&)");
 
   Bool doCreateABarCheck (false); // JMI ??? v0.9.70
 
@@ -2080,7 +2087,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
         msrWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
-              fetchFullMeasureWholeNotesDuration ();
+              getFullMeasureWholeNotesDuration ();
 
         // get the current voice clone time signature
         S_msrTimeSignature
@@ -2121,9 +2128,9 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
-      }
 
-      doCreateABarCheck = true;
+        doCreateABarCheck = true;
+      }
       break;
 
     case msrMeasureKind::kMeasureKindAnacrusis:
@@ -2143,7 +2150,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
         case msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown:
           break;
         case msrMeasureEndRegularKind::kMeasureEndRegularKindYes:
-          doCreateABarCheck = true;
+//           doCreateABarCheck = true; // JMI ??? v0.9.70
           break;
         case msrMeasureEndRegularKind::kMeasureEndRegularKindNo:
           break;

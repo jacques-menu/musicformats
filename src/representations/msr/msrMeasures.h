@@ -282,9 +282,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     S_msrScore            fetchMeasureUpLinkToScore () const;
 
-    // measure lengthes, in whole notes
-
-    msrWholeNotes         fetchFullMeasureWholeNotesDuration () const;
+//     // measure lengthes, in whole notes
+//
+//     msrWholeNotes         fetchFullMeasureWholeNotesDuration_KEEP (
+//                             int         inputLineNumber = 7327, // JMI v0.9.70 BABASSE
+//                             std::string context = "-- CONTEXT --") const;
 
   public:
 
@@ -362,8 +364,8 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendTimeSignatureToMeasure (
                             const S_msrTimeSignature& timeSignature);
 
-//     void                  setFullMeasureWholeNotesDurationFromTimeSignature (
-//                             const S_msrTimeSignature& timeSignature);
+    void                  setFullMeasureWholeNotesDurationFromTimeSignature ( // JMI v0.9.70 BABASSE SUPERFLOUS???
+                            const S_msrTimeSignature& timeSignature);
 
     void                  appendTimeSignatureToMeasureClone (
                             const S_msrTimeSignature& timeSignature);
@@ -615,7 +617,8 @@ class EXP msrMeasure : public msrSegmentElement
     void                  finalizeMeasureClone (
                             int                 inputLineNumber,
                             const S_msrMeasure& originalMeasure,
-                            const S_msrVoice&   voiceClone);
+                            const S_msrVoice&   voiceClone,
+                            const std::string&  context);
 
   private:
 
@@ -690,14 +693,14 @@ class EXP msrMeasure : public msrSegmentElement
     // measure lengthes, in whole notes
 
     msrWholeNotes         fFullMeasureWholeNotesDuration;
-                            // denormalization from msrStaff, for efficiency
+                            // denormalization from msrStaff, for efficiency // JMI v0.9.70 BABASSE
                             // meaningfull only when there is a time signature,
                             // but not for cadenzas
 
     // measure numbers
 
     std::string           fMeasureNumber;
-    std::string           fNextMeasureNumber;
+    std::string           fNextMeasureNumber; // JMI v0.9.70 NOT USED, go thru noteUpLinkToMeasure each time BABASSE
 
     int                   fMeasureOrdinalNumberInVoice;
 

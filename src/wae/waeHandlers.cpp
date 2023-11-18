@@ -60,8 +60,22 @@ void waeHandler::waeWarning (
       message;
 
     if (gServiceRunData) {
+      S_mfService
+        service =
+          getGlobalService ();
+
+      if (service) {
+        gLog <<
+          " -- service " <<
+          service <<
+          ", measure ";
+      }
+      else {
+        gLog <<
+          " -- measure ";
+      }
+
       gLog <<
-        " -- measure " <<
         gServiceRunData->getCurrentMeasureNumber () <<
         '/' <<
         gServiceRunData->getScoreMeasuresNumber () <<
@@ -103,8 +117,22 @@ void waeHandler::waeInternalWarning (
       message;
 
     if (gServiceRunData) {
+      S_mfService
+        service =
+          getGlobalService ();
+
+      if (service) {
+        gLog <<
+          " -- service " <<
+          service <<
+          ", measure ";
+      }
+      else {
+        gLog <<
+          " -- measure ";
+      }
+
       gLog <<
-        " -- measure " <<
         gServiceRunData->getCurrentMeasureNumber () <<
         '/' <<
         gServiceRunData->getScoreMeasuresNumber () <<
@@ -155,8 +183,22 @@ void waeHandler::waeErrorWithoutException (
         message;
 
       if (gServiceRunData) {
+        S_mfService
+          service =
+            getGlobalService ();
+
+        if (service) {
+          gLog <<
+            " -- service " <<
+            service <<
+            ", measure ";
+        }
+        else {
+          gLog <<
+            " -- measure ";
+        }
+
         gLog <<
-          " -- measure " <<
           gServiceRunData->getCurrentMeasureNumber () <<
           '/' <<
           gServiceRunData->getScoreMeasuresNumber () <<
@@ -204,8 +246,22 @@ void waeHandler::waeErrorWithoutExceptionWithInputLocation (
         message;
 
       if (gServiceRunData) {
+        S_mfService
+          service =
+            getGlobalService ();
+
+        if (service) {
+          gLog <<
+            " -- service " <<
+            service <<
+            ", measure ";
+        }
+        else {
+          gLog <<
+            " -- measure ";
+        }
+
         gLog <<
-          " -- measure " <<
           gServiceRunData->getCurrentMeasureNumber () <<
           '/' <<
           gServiceRunData->getScoreMeasuresNumber () <<
@@ -498,8 +554,22 @@ void waeHandler::waeTraceToStream (
       message;
 
     if (gServiceRunData) {
+      S_mfService
+        service =
+          getGlobalService ();
+
+      if (service) {
+        os <<
+          " -- service " <<
+          service <<
+          ", measure ";
+      }
+      else {
+        os <<
+          " -- measure ";
+      }
+
       os <<
-        " -- measure " <<
         gServiceRunData->getCurrentMeasureNumber () <<
         '/' <<
         gServiceRunData->getScoreMeasuresNumber () <<

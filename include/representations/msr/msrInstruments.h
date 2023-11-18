@@ -59,18 +59,18 @@ class EXP msrStringTuning : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setStringTuningUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getStringTuningUpLinkToMeasure (); }
-
-    void                  setStringTuningUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getStringTuningUpLinkToMeasure () const
-                              { return fStringTuningUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setStringTuningUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getStringTuningUpLinkToMeasure (); }
+//
+//     void                  setStringTuningUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getStringTuningUpLinkToMeasure () const
+//                               { return fStringTuningUpLinkToMeasure; }
 
     int                   getStringTuningNumber () const
                               { return fStringTuningNumber; }
@@ -113,7 +113,7 @@ class EXP msrStringTuning : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fStringTuningUpLinkToMeasure;
+//     S_msrMeasure          fStringTuningUpLinkToMeasure;
 
     int                   fStringTuningNumber;
 
@@ -169,18 +169,18 @@ class EXP msrScordatura : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setScordaturaUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getScordaturaUpLinkToMeasure (); }
-
-    void                  setScordaturaUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getScordaturaUpLinkToMeasure () const
-                              { return fScordaturaUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setScordaturaUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getScordaturaUpLinkToMeasure (); }
+//
+//     void                  setScordaturaUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getScordaturaUpLinkToMeasure () const
+//                               { return fScordaturaUpLinkToMeasure; }
 
     const std::list<S_msrStringTuning>&
                           getScordaturaStringTuningsList () const
@@ -216,7 +216,7 @@ class EXP msrScordatura : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fScordaturaUpLinkToMeasure;
+//     S_msrMeasure          fScordaturaUpLinkToMeasure;
 
     std::list<S_msrStringTuning>
                           fScordaturaStringTuningsList;
@@ -265,18 +265,18 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setAccordionRegistrationUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getAccordionRegistrationUpLinkToMeasure (); }
-
-    void                  setAccordionRegistrationUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getAccordionRegistrationUpLinkToMeasure () const
-                              { return fAccordionRegistrationUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setAccordionRegistrationUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getAccordionRegistrationUpLinkToMeasure (); }
+//
+//     void                  setAccordionRegistrationUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getAccordionRegistrationUpLinkToMeasure () const
+//                               { return fAccordionRegistrationUpLinkToMeasure; }
 
     int                   getHighDotsNumber () const
                               { return fHighDotsNumber; }
@@ -316,7 +316,7 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fAccordionRegistrationUpLinkToMeasure;
+//     S_msrMeasure          fAccordionRegistrationUpLinkToMeasure;
 
     // see https://de.wikipedia.org/wiki/Register_%28Akkordeon%29
     // for the meaning of the dots numbers
@@ -367,18 +367,18 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setHarpPedalsTuningUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getHarpPedalsTuningUpLinkToMeasure (); }
-
-    void                  setHarpPedalsTuningUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getHarpPedalsTuningUpLinkToMeasure () const
-                              { return fHarpPedalsTuningUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setHarpPedalsTuningUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getHarpPedalsTuningUpLinkToMeasure (); }
+//
+//     void                  setHarpPedalsTuningUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getHarpPedalsTuningUpLinkToMeasure () const
+//                               { return fHarpPedalsTuningUpLinkToMeasure; }
 
     const std::map<msrDiatonicPitchKind, msrAlterationKind>&
                           getHarpPedalsAlterationKindsMap () const
@@ -418,7 +418,7 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fHarpPedalsTuningUpLinkToMeasure;
+//     S_msrMeasure          fHarpPedalsTuningUpLinkToMeasure;
 
     std::map<msrDiatonicPitchKind, msrAlterationKind>
                           fHarpPedalsAlterationKindsMap;
@@ -497,18 +497,18 @@ class EXP msrPedal : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setPedalUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getPedalUpLinkToMeasure (); }
-
-    void                  setPedalUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getPedalUpLinkToMeasure () const
-                              { return fPedalUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setPedalUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getPedalUpLinkToMeasure (); }
+//
+//     void                  setPedalUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getPedalUpLinkToMeasure () const
+//                               { return fPedalUpLinkToMeasure; }
 
     msrPedalTypeKind      getPedalTypeKind () const
                               { return fPedalTypeKind; }
@@ -546,7 +546,7 @@ class EXP msrPedal : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fPedalUpLinkToMeasure;
+//     S_msrMeasure          fPedalUpLinkToMeasure;
 
     msrPedalTypeKind      fPedalTypeKind;
     msrPedalLineKind      fPedalLineKind;
@@ -587,18 +587,18 @@ class EXP msrDamp : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setDampUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getDampUpLinkToMeasure (); }
-
-    void                  setDampUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getDampUpLinkToMeasure () const
-                              { return fDampUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setDampUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getDampUpLinkToMeasure (); }
+//
+//     void                  setDampUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getDampUpLinkToMeasure () const
+//                               { return fDampUpLinkToMeasure; }
 
   public:
 
@@ -627,7 +627,7 @@ class EXP msrDamp : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fDampUpLinkToMeasure;
+//     S_msrMeasure          fDampUpLinkToMeasure;
 
 };
 typedef SMARTP<msrDamp> S_msrDamp;
@@ -665,18 +665,18 @@ class EXP msrDampAll : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setDampAllUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getDampAllUpLinkToMeasure (); }
-
-    void                  setDampAllUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getDampAllUpLinkToMeasure () const
-                              { return fDampAllUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setDampAllUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getDampAllUpLinkToMeasure (); }
+//
+//     void                  setDampAllUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getDampAllUpLinkToMeasure () const
+//                               { return fDampAllUpLinkToMeasure; }
 
   public:
 
@@ -705,7 +705,7 @@ class EXP msrDampAll : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fDampAllUpLinkToMeasure;
+//     S_msrMeasure          fDampAllUpLinkToMeasure;
 
 };
 typedef SMARTP<msrDampAll> S_msrDampAll;

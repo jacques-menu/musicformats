@@ -299,35 +299,35 @@ S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSi
   return newbornClone;
 }
 
-void msrClefKeyTimeSignatureGroup::setClefKeyTimeSignatureGroupUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefs ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of clef " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fClefKeyTimeSignatureGroupUpLinkToMeasure = measure;
-}
+// void msrClefKeyTimeSignatureGroup::setClefKeyTimeSignatureGroupUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceClefs ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of clef " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fClefKeyTimeSignatureGroupUpLinkToMeasure = measure;
+// }
 
 void msrClefKeyTimeSignatureGroup::setClef (const S_msrClef& clef)
 {
@@ -445,15 +445,15 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
   }
 
   // get the measure
-  S_msrMeasure
-    upLinkToMeasure =
-      getMeasureElementUpLinkToMeasure ();
+//   S_msrMeasure
+//     upLinkToMeasure =
+//       getMeasureElementUpLinkToMeasure ();
 
-  if (upLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     // set the current time signature of the staff if any
     S_msrStaff
       staff =
-        upLinkToMeasure->
+        fMeasureElementUpLinkToMeasure->
           fetchMeasureUpLinkToStaff ();
 
     if (staff) {
@@ -462,11 +462,13 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
     }
   }
 
-//   // set the measure full measure whole notes duration JMI v0.9.70
-//   measure->
-//     setFullMeasureWholeNotesDuration (
-//       fTimeSignature->
-//         timeSignatureWholeNotesPerMeasure ());
+  // set the measure full measure whole notes duration JMI v0.9.70 BABASSE
+  if (fMeasureElementUpLinkToMeasure) {
+    fMeasureElementUpLinkToMeasure->
+      setFullMeasureWholeNotesDuration (
+        fTimeSignature->
+          timeSignatureWholeNotesPerMeasure ());
+  }
 }
 
 S_msrTimeSignature msrClefKeyTimeSignatureGroup::getTimeSignature () const
@@ -566,7 +568,7 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
     std::stringstream ss;
 
     ss <<
-      "--> msrClefKeyTimeSignatureGroup::browseData(),  this: " <<
+      "--> msrClefKeyTimeSignatureGroup::browseData(), " <<
       asString ();
 
     gWaeHandler->waeTrace (

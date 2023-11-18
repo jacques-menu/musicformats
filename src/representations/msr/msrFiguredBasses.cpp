@@ -498,7 +498,7 @@ msrFiguredBass::msrFiguredBass (
 //     upLinkToMeasure != nullptr,
 //     "upLinkToMeasure is null");
 
-  fFiguredBassUpLinkToMeasure = upLinkToMeasure;
+  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
   /* JMI
   // set figuredBass's part upLink
@@ -656,35 +656,35 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
   fFiguredBassUpLinkToNote = note;
 }
 
-void msrFiguredBass::setFiguredBassUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBasses ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of figured bass " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fFiguredBassUpLinkToMeasure = measure;
-}
+// void msrFiguredBass::setFiguredBassUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceFiguredBasses ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of figured bass " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fFiguredBassUpLinkToMeasure = measure;
+// }
 
 void msrFiguredBass::appendFigureToFiguredBass (
   const S_msrBassFigure& bassFigure)
@@ -818,10 +818,10 @@ std::string msrFiguredBass::asString () const
     }
 
   ss <<
-    ", fFiguredBassUpLinkToMeasure: ";
-    if (fFiguredBassUpLinkToMeasure) {
+    ", fMeasureElementUpLinkToMeasure: ";
+    if (fMeasureElementUpLinkToMeasure) {
       ss <<
-        fFiguredBassUpLinkToMeasure->getMeasureNumber ();
+        fMeasureElementUpLinkToMeasure->getMeasureNumber ();
     }
     else {
       ss << "[NULL]";
@@ -914,10 +914,10 @@ std::string msrFiguredBass::asString () const
 //     }
 //
 //   ss <<
-//     ", fFiguredBassUpLinkToMeasure: ";
-//     if (fFiguredBassUpLinkToMeasure) {
+//     ", fMeasureElementUpLinkToMeasure: ";
+//     if (fMeasureElementUpLinkToMeasure) {
 //       ss <<
-//         fFiguredBassUpLinkToMeasure->getMeasureNumber ();
+//         fMeasureElementUpLinkToMeasure->getMeasureNumber ();
 //     }
 //     else {
 //       ss << "[NULL]";
@@ -1020,9 +1020,9 @@ void msrFiguredBass::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fFiguredBassUpLinkToMeasure" << ": ";
-  if (fFiguredBassUpLinkToMeasure) {
-    os << fFiguredBassUpLinkToMeasure->asString ();
+    "fMeasureElementUpLinkToMeasure" << ": ";
+  if (fMeasureElementUpLinkToMeasure) {
+    os << fMeasureElementUpLinkToMeasure->asString ();
   }
   else {
     os << "[NULL]";

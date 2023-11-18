@@ -70,18 +70,18 @@ class EXP msrLineBreak : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setLineBreakUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getLineBreakUpLinkToMeasure (); }
-
-    void                  setLineBreakUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getLineBreakUpLinkToMeasure () const
-                              { return fLineBreakUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setLineBreakUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getLineBreakUpLinkToMeasure (); }
+//
+//     void                  setLineBreakUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getLineBreakUpLinkToMeasure () const
+//                               { return fLineBreakUpLinkToMeasure; }
 
     std::string           getNextBarNumber () const
                               { return fNextBarNumber; }
@@ -119,7 +119,7 @@ class EXP msrLineBreak : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fLineBreakUpLinkToMeasure;
+//     S_msrMeasure          fLineBreakUpLinkToMeasure;
 
     std::string           fNextBarNumber;
 
@@ -176,18 +176,18 @@ class EXP msrPageBreak : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setPageBreakUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getPageBreakUpLinkToMeasure (); }
-
-    void                  setPageBreakUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getPageBreakUpLinkToMeasure () const
-                              { return fPageBreakUpLinkToMeasure; }
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setPageBreakUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getPageBreakUpLinkToMeasure (); }
+//
+//     void                  setPageBreakUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getPageBreakUpLinkToMeasure () const
+//                               { return fPageBreakUpLinkToMeasure; }
 
     msrUserSelectedPageBreakKind
                           getUserSelectedPageBreakKind () const
@@ -222,7 +222,7 @@ class EXP msrPageBreak : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrMeasure          fPageBreakUpLinkToMeasure;
+//     S_msrMeasure          fPageBreakUpLinkToMeasure;
 
     msrUserSelectedPageBreakKind
                           fUserSelectedPageBreakKind;

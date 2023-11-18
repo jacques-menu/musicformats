@@ -15,7 +15,10 @@
 #include "msrTypesForwardDeclarations.h"
 
 #include "msrMeasures.h"
-#include "msrTupletElements.h"
+#include "msrTypesForwardDeclarations.h"
+
+#include "msrMeasureElements.h"
+#include "msrMeasures.h"
 #include "msrTupletsEnumTypes.h"
 #include "msrTupletFactors.h"
 
@@ -131,15 +134,15 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override;
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
-
-    void                  setTupletUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getTupletUpLinkToMeasure () const;
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override;
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
+//
+//     void                  setTupletUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getTupletUpLinkToMeasure () const;
 
     // tuplet kind
     void                  setTupletKind (
@@ -268,7 +271,7 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to measure
-    S_msrMeasure          fTupletUpLinkToMeasure;
+//     S_msrMeasure          fTupletUpLinkToMeasure;
 
     msrTupletInKind       fTupletKind;
 

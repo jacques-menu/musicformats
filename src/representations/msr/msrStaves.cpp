@@ -511,6 +511,22 @@ void msrStaff::setStaffCurrentKey (
 void msrStaff::setStaffCurrentTimeSignature (
   const S_msrTimeSignature& timeSignature)
 {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting staff current time signature of " <<
+      asString () <<
+      " to " <<
+      timeSignature->asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   fStaffCurrentTimeSignature = timeSignature;
 };
 

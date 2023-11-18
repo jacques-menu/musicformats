@@ -149,7 +149,8 @@ msrChord::msrChord (
 {
   fChordKind = msrChordInKind::kChordIn_UNKNOWN_;
 
-  fChordUpLinkToMeasure = upLinkToMeasure;
+  // fChordUpLinkToMeasure = upLinkToMeasure;
+  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
   setMeasureElementSoundingWholeNotes (
     chordSoundingWholeNotes,
@@ -237,7 +238,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
-//       fChordUpLinkToMeasure->getMeasureNumber () <<
+//       fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
 //       "), context: \"" <<
 //       context <<
 //       "\"" <<
@@ -267,14 +268,14 @@ S_msrChord msrChord::createChordNewbornClone (
 //       break;
 //
 //     case msrChordInKind::kChordInMeasure:
-//       result = fChordUpLinkToMeasure;
+//       result = fMeasureElementUpLinkToMeasure;
 //       break;
 //
 //     case msrChordInKind::kChordInTuplet:
 //       if (fChordShortcutUpLinkToTuplet) {
 //         result =
 //           fChordShortcutUpLinkToTuplet->
-//             fChordUpLinkToMeasure;
+//             fMeasureElementUpLinkToMeasure;
 //       }
 //       break;
 //
@@ -283,7 +284,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //         result =
 //           fChordShortcutUpLinkToGraceNotesGroup->
 //             getGraceNotesGroupUpLinkToNote ()->
-//               fChordUpLinkToMeasure;
+//               fMeasureElementUpLinkToMeasure;
 //       }
 //       break;
 //   } // switch
@@ -291,86 +292,86 @@ S_msrChord msrChord::createChordNewbornClone (
 //   return result;
 // }
 
-void  msrChord::setMeasureElementUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-  setChordUpLinkToMeasure (measure);
-}
+// void  msrChord::setMeasureElementUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+//   setChordUpLinkToMeasure (measure);
+// }
+//
+// S_msrMeasure msrChord::getMeasureElementUpLinkToMeasure () const
+// {
+//   return getChordUpLinkToMeasure ();
+// }
 
-S_msrMeasure msrChord::getMeasureElementUpLinkToMeasure () const
-{
-  return getChordUpLinkToMeasure ();
-}
-
-void msrChord::setChordUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    ++gIndenter;
-
-    std::stringstream ss;
-
-    ss <<
-      "Setting the uplink to measure of chord " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fChordUpLinkToMeasure = measure;
-}
-
-S_msrMeasure msrChord::getChordUpLinkToMeasure () const
-{
-  return fChordUpLinkToMeasure;
-}
-
-// uplink to tuplet
-S_msrTuplet msrChord::fetchChordUpLinkToTuplet () const
-{
-  S_msrTuplet result;
-
-  switch (fChordKind) {
-    case msrChordInKind::kChordIn_UNKNOWN_:
-      break;
-
-    case msrChordInKind::kChordInMeasure:
-      break;
-
-    case msrChordInKind::kChordInTuplet:
-      result = fChordShortcutUpLinkToTuplet;
-      break;
-
-    case msrChordInKind::kChordInGraceNotesGroup:
-      if (fChordShortcutUpLinkToGraceNotesGroup) {
-        result =
-          fChordShortcutUpLinkToGraceNotesGroup->
-            getGraceNotesGroupUpLinkToNote ()->
-              getNoteShortcutUpLinkToTuplet ();
-      }
-      break;
-  } // switch
-
-  return result;
-}
+// void msrChord::setChordUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChords ()) {
+//     ++gIndenter;
+//
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting the uplink to measure of chord " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fChordUpLinkToMeasure = measure;
+// }
+//
+// S_msrMeasure msrChord::getChordUpLinkToMeasure () const
+// {
+//   return fChordUpLinkToMeasure;
+// }
+//
+// // uplink to tuplet
+// S_msrTuplet msrChord::fetchChordUpLinkToTuplet () const
+// {
+//   S_msrTuplet result;
+//
+//   switch (fChordKind) {
+//     case msrChordInKind::kChordIn_UNKNOWN_:
+//       break;
+//
+//     case msrChordInKind::kChordInMeasure:
+//       break;
+//
+//     case msrChordInKind::kChordInTuplet:
+//       result = fChordShortcutUpLinkToTuplet;
+//       break;
+//
+//     case msrChordInKind::kChordInGraceNotesGroup:
+//       if (fChordShortcutUpLinkToGraceNotesGroup) {
+//         result =
+//           fChordShortcutUpLinkToGraceNotesGroup->
+//             getGraceNotesGroupUpLinkToNote ()->
+//               getNoteShortcutUpLinkToTuplet ();
+//       }
+//       break;
+//   } // switch
+//
+//   return result;
+// }
 
 // uplink to grace notes group
 S_msrGraceNotesGroup msrChord::fetchChordUpLinkToGraceNotesGroup () const
@@ -399,7 +400,8 @@ S_msrScore msrChord::fetchChordUpLinkToScore () const
 
   S_msrMeasure
     measure =
-      fChordUpLinkToMeasure;
+//       fChordUpLinkToMeasure;
+      fMeasureElementUpLinkToMeasure;
 
   if (measure) {
     result =
@@ -558,7 +560,8 @@ void msrChord::setChordMembersMeasurePosition (
   for (S_msrNote note : fChordNotesVector) {
     // set note's uplink to measure
     note->
-      setNoteUpLinkToMeasure (
+//       setNoteUpLinkToMeasure (
+      setMeasureElementUpLinkToMeasure (
         measure);
 
     // set note's measure position // JMI v0.9.66
@@ -619,7 +622,7 @@ void msrChord::addFirstNoteToChord (
   // register note's uplink to measure
   note->
     setNoteUpLinkToMeasure (
-      fChordUpLinkToMeasure);
+      fMeasureElementUpLinkToMeasure);
 */
 
   // mark note as belonging to a chord
@@ -686,7 +689,7 @@ void msrChord::addAnotherNoteToChord (
 
   // append the note to the measure's notes flat list
 //   if (false) // JMI v0.9.70
-//   fChordUpLinkToMeasure->
+//   fMeasureElementUpLinkToMeasure->
 //     appendNoteToMeasureNotesFlatList (note);
 
 /* JMI
@@ -1204,7 +1207,7 @@ void msrChord::finalizeChord (
   // we can now set the measure positions for all the chord members JMI v0.9.66
   if (false) // JMI v0.9.67 MERDUM
   setChordMembersMeasurePosition (
-    fChordUpLinkToMeasure,
+    fMeasureElementUpLinkToMeasure,
     fMeasureElementMeasurePosition);
 }
 
@@ -1730,9 +1733,9 @@ void msrChord::print (std::ostream& os) const
 {
   msrWholeNotes
     chordMeasureFullLength =
-      fChordUpLinkToMeasure
-        ? fChordUpLinkToMeasure->
-            fetchFullMeasureWholeNotesDuration ()
+      fMeasureElementUpLinkToMeasure
+        ? fMeasureElementUpLinkToMeasure->
+            getFullMeasureWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI
 
   os <<
@@ -1759,9 +1762,9 @@ void msrChord::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "chordUpLinkToMeasureMeasureNumber" << ": ";
-    if (fChordUpLinkToMeasure) {
+    if (fMeasureElementUpLinkToMeasure) {
       os <<
-        fChordUpLinkToMeasure->getMeasureNumber ();
+        fMeasureElementUpLinkToMeasure->getMeasureNumber ();
     }
     else {
       os << "[UNKNOWN_MEASURE_NUMBER]";
@@ -2506,9 +2509,9 @@ void msrChord::printFull (std::ostream& os) const
 {
   msrWholeNotes
     chordMeasureFullLength =
-      fChordUpLinkToMeasure
-        ? fChordUpLinkToMeasure->
-            fetchFullMeasureWholeNotesDuration ()
+      fMeasureElementUpLinkToMeasure
+        ? fMeasureElementUpLinkToMeasure->
+            getFullMeasureWholeNotesDuration ()
         : msrWholeNotes (0, 1); // JMI
 
   os <<
@@ -2534,8 +2537,8 @@ void msrChord::printFull (std::ostream& os) const
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "getMeasureNumber()" << ": " <<
-    fChordUpLinkToMeasure->getMeasureNumber () <<
+    "fMeasureElementUpLinkToMeasure()" << ": " <<
+    fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<
@@ -2546,10 +2549,10 @@ void msrChord::printFull (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fChordUpLinkToMeasure" << ": ";
+    "fMeasureElementUpLinkToMeasure" << ": ";
   if (fChordShortcutUpLinkToTuplet) {
     os <<
-      fChordUpLinkToMeasure->asShortString ();
+      fMeasureElementUpLinkToMeasure->asShortString ();
   }
   else {
     os << "[NULL]";

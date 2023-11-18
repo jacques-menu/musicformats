@@ -55,7 +55,7 @@ S_msrBarCheck msrBarCheck::create (
       gNullMeasure); // set later in setMeasureElementUpLinkToMeasure()
 }
 
-S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
+S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
   const std::string&  nextBarOriginalNumber,
@@ -90,7 +90,7 @@ msrBarCheck::msrBarCheck (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fBarCheckUpLinkToMeasure = upLinkToMeasure;
+  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 }
 
 msrBarCheck::msrBarCheck (
@@ -125,35 +125,35 @@ msrBarCheck::msrBarCheck (
 msrBarCheck::~msrBarCheck ()
 {}
 
-void msrBarCheck::setBarCheckUpLinkToMeasure (
-  const S_msrMeasure& measure)
-{
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-    "measure is null");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceBarChecks ()) {
-    ++gIndenter;
-
-    gLog <<
-      "Setting the uplink to measure of bar check " <<
-      asString () <<
-      " to measure " << measure->asString () <<
-      "' in measure '" <<
-      measure->asString () <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fBarCheckUpLinkToMeasure = measure;
-}
+// void msrBarCheck::setBarCheckUpLinkToMeasure (
+//   const S_msrMeasure& measure)
+// {
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//     "measure is null");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceBarChecks ()) {
+//     ++gIndenter;
+//
+//     gLog <<
+//       "Setting the uplink to measure of bar check " <<
+//       asString () <<
+//       " to measure " << measure->asString () <<
+//       "' in measure '" <<
+//       measure->asString () <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fMeasureElementUpLinkToMeasure = measure;
+// }
 
 void msrBarCheck::setNextBarPuristNumber (int puristNumber)
 {

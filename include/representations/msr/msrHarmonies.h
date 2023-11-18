@@ -331,19 +331,19 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink to measure
-    void                  setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure) override
-                              { setHarmonyUpLinkToMeasure (measure); }
-
-    S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-                              { return getHarmonyUpLinkToMeasure (); }
-
-    void                  setHarmonyUpLinkToMeasure (
-                            const S_msrMeasure& measure);
-
-    S_msrMeasure          getHarmonyUpLinkToMeasure () const
-                              { return fHarmonyUpLinkToMeasure; }
-
+//     void                  setMeasureElementUpLinkToMeasure (
+//                             const S_msrMeasure& measure) override
+//                               { setHarmonyUpLinkToMeasure (measure); }
+//
+//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
+//                               { return getHarmonyUpLinkToMeasure (); }
+//
+//     void                  setHarmonyUpLinkToMeasure (
+//                             const S_msrMeasure& measure);
+//
+//     S_msrMeasure          getHarmonyUpLinkToMeasure () const
+//                               { return fHarmonyUpLinkToMeasure; }
+//
     // uplinks
     void                  setHarmonyUpLinkToNote (
                             const S_msrNote& note);
@@ -477,7 +477,7 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplinks
-    S_msrMeasure          fHarmonyUpLinkToMeasure;
+//     S_msrMeasure          fHarmonyUpLinkToMeasure;
 
     S_msrNote             fHarmonyUpLinkToNote;
     S_msrVoice            fHarmoniesUpLinkToVoice; // for use in harmonies voices JMI
