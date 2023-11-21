@@ -47,8 +47,8 @@ class EXP msrTie : public msrElement
                             msrPlacementKind placementKind);
 
     static SMARTP<msrTie> create (
-                            int              inputLineNumber,
-                            msrTieKind       tieKind);
+                            int        inputLineNumber,
+                            msrTieKind tieKind);
 
   protected:
 

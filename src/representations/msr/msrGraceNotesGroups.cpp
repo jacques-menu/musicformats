@@ -325,7 +325,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
     setNoteShortcutUpLinkToGraceNotesGroup (this);
 
   // is this grace note tied?
-  if (note->getNoteTie ()) {
+  if (note->getNoteTiesList ().size ()) {
     fGraceNotesGroupIsTied = true;
   }
 

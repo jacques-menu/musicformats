@@ -2252,7 +2252,7 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 
-    void                      copyNoteTieToChord (
+    void                      copyNoteTiesToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
 //    void                      copyNoteSlursListToChord (
@@ -2599,8 +2599,11 @@ class EXP mxsr2msrTranslator :
 
 // JMI    std::string               fCurrentTiedType;
     msrTieKind                fCurrentTieKind;
-    std::string               fCurrentTiedOrientation; // JMI
-    S_msrTie                  fCurrentTie;
+    std::string               fCurrentTiedOrientation; // JMI v0.9.70
+//     S_msrTie                  fCurrentTie;
+    std::list<S_msrTie>       fPendingTiesList;
+
+    void                      attachPendingTiesToCurrentNote ();
 
 
     // slurs handling

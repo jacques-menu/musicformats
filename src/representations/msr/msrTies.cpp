@@ -74,8 +74,8 @@ S_msrTie msrTie::create (
 }
 
 S_msrTie msrTie::create (
-  int              inputLineNumber,
-  msrTieKind       tieKind)
+  int        inputLineNumber,
+  msrTieKind tieKind)
 {
   return
     msrTie::create (
@@ -178,9 +178,10 @@ std::string msrTie::asString () const
   std::stringstream ss;
 
   ss <<
-    "Tie" << ' ' <<
+    "[Tie" << ' ' <<
     fTieKind <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputStartLineNumber <<
+    ']';
 
   return ss.str ();
 }

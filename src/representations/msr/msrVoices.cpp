@@ -3709,7 +3709,7 @@ void msrVoice::appendSyllableToVoice (
 
     ss <<
       "Appending syllable " <<
-      syllable <<
+      syllable->asString () <<
       " to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTrace (

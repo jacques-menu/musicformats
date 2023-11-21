@@ -700,20 +700,19 @@ std::string multiMeasureRestsWholeNoteAsLilypondString (
 }
 
 //_______________________________________________________________________________
-void printSyllableElementsListAsLilypondString (
-  const std::list<msrSyllableElement>& syllableElementsList,
-  std::ostream&                        os)
+std::string syllableElementsListAsLilypondString (
+  const std::list<msrSyllableElement>& syllableElementsList)
 {
-  std::string contents;
+  std::stringstream ss;
 
   if (syllableElementsList.size ()) {
     for (msrSyllableElement syllableElement : syllableElementsList) {
-      contents += syllableElement.getSyllableElementContents (); // JMI v0.9.70
-  // JMI    os << ", ";
+      ss <<
+       syllableElement.getSyllableElementContents ();
     } // for
   }
 
-  os << '\"' << contents << '\"'; // JMI v0.9.70
+  return ss.str ();
 }
 
 // score output kinds

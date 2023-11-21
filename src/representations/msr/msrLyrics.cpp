@@ -613,7 +613,7 @@ void msrSyllable::appendSyllableElementToSyllable (
 
     ss <<
       "Appending syllable element " <<
-      syllableElement <<
+      syllableElement.asString () <<
       " to syllable " <<
       asString ();
 
@@ -747,7 +747,7 @@ void msrSyllable::acceptOut (basevisitor* v)
 void msrSyllable::browseData (basevisitor* v)
 {}
 
-std::string msrSyllable::syllableWholeNotesPitchAndOctaveAsString () const
+std::string msrSyllable::syllableWholeNotesPitchAndOctaveAsString () const // JMI OCTAVE??? BABASSE
 {
   std::string result;
 
@@ -840,7 +840,7 @@ std::string msrSyllable::syllableElementsListAsString () const
       i      = iBegin;
 
     for ( ; ; ) {
-      ss << '\"' << mfDoubleQuoteStringIfNonAlpha ((*i).asString ()) << '\"';
+      ss << mfDoubleQuoteStringIfNonAlpha ((*i).asString ());
       if (++i == iEnd) break;
       ss << " || ";
     } // for
@@ -1252,7 +1252,7 @@ void msrStanza::appendSyllableToStanza (
     std::stringstream ss;
 
     ss <<
-      "Appending syllable " << syllable <<
+      "Appending syllable " << syllable->asString () <<
       " to stanza " << getStanzaName () <<
       ", partCurrentDrawingMeasurePosition: " <<
       partCurrentDrawingMeasurePosition.asString () <<
@@ -1339,7 +1339,7 @@ void msrStanza::appendSyllableToStanzaClone (
     std::stringstream ss;
 
     ss <<
-      "Appending syllable " << syllable <<
+      "Appending syllable " << syllable->asString () <<
       " to stanza clone " << getStanzaName ();
 
     gWaeHandler->waeTrace (

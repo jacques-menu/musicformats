@@ -147,9 +147,8 @@ std::string multiMeasureRestsWholeNoteAsLilypondString (
 
 // syllable elements lists
 //______________________________________________________________________________
-EXP void printSyllableElementsListAsLilypondString (
-  const std::list<msrSyllableElement>& syllableElementsList,
-  std::ostream&                        os);
+EXP std::string syllableElementsListAsLilypondString (
+  const std::list<msrSyllableElement>& syllableElementsList);
 
 // pitches and octaves
 //______________________________________________________________________________

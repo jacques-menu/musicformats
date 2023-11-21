@@ -1047,11 +1047,10 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 		std::stringstream ss;
 
 		ss <<
-			"Pushing part group '" <<
+			"Pushing part group " <<
 			partGroup->asString () <<
-			"' onto the part groups stack" <<
-			", line " << inputLineNumber <<
-			std::endl;
+			" onto the part groups stack" <<
+			", line " << inputLineNumber;
 
 		gWaeHandler->waeTrace (
 			__FILE__, __LINE__,
@@ -1161,9 +1160,8 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 				"Popping part group " <<
 				partGroupStackTop->
 					fetchMsrPartGroupCombinedName () <<
-				"' from the stack" <<
-				", line " << inputLineNumber <<
-				std::endl;
+				" from the stack" <<
+				", line " << inputLineNumber;
 
 			gWaeHandler->waeTrace (
 				__FILE__, __LINE__,
@@ -1198,8 +1196,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 				" is out of order, it does not match the part group stack top " <<
 				partGroupStackTop->
 					fetchMsrPartGroupCombinedName () <<
-				", line " << inputLineNumber <<
-				std::endl;
+				", line " << inputLineNumber;
 
 			gWaeHandler->waeTrace (
 				__FILE__, __LINE__,
@@ -1669,18 +1666,12 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
 			ss <<
 				"Sorting the started part group list" <<
-				", line " << inputLineNumber <<
-				std::endl;
+				", line " << inputLineNumber ;
 
-			++gIndenter;
 			thePartGroupList->printWithContext (
 				"handleBOFPartGroupsNestingBOFAndScorePartsAllocation()",
 				'>',
-				gLog);
-			--gIndenter;
-
-			ss <<
-				std::endl;
+				ss);
 
 			gWaeHandler->waeTrace (
 				__FILE__, __LINE__,
@@ -1708,11 +1699,8 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 			thePartGroupList->printWithContext (
 				"handleBOFPartGroupsNestingBOFAndScorePartsAllocation()",
 				'>',
-				gLog);
+				ss);
 			--gIndenter;
-
-			ss <<
-				std::endl;
 
 			gWaeHandler->waeTrace (
 				__FILE__, __LINE__,
@@ -1821,9 +1809,8 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
                 "Popping part group " <<
                 partGroup->
                   fetchMsrPartGroupCombinedName () <<
-                "' from the stack" <<
-                ", line " << stopInputLineNumber <<
-                std::endl;
+                " from the stack" <<
+                ", line " << stopInputLineNumber;
 
               gWaeHandler->waeTrace (
                 __FILE__, __LINE__,
@@ -1986,11 +1973,10 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
             std::stringstream ss;
 
             ss <<
-              "Pushing part group '" <<
+              "Pushing part group " <<
               partGroup->asString () <<
-              "' onto the part groups stack" <<
-              ", line " << inputLineNumber <<
-              std::endl;
+              " onto the part groups stack" <<
+              ", line " << inputLineNumber;
 
             gWaeHandler->waeTrace (
               __FILE__, __LINE__,
@@ -4169,7 +4155,6 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 
     ss <<
       "Analyzing part \"" << fCurrentPartID << "\" -- end" <<
-      std::endl <<
       "--------------------------------------------";
 
     gWaeHandler->waeTrace (
@@ -4603,8 +4588,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
         ss <<
           "Ignoring the harmonies" <<
           ", line " <<
-          elt->getInputStartLineNumber () <<
-          std::endl;
+          elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -4634,8 +4618,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
         ss <<
           "Ignoring the figured bass elements" <<
           ", line " <<
-          elt->getInputStartLineNumber () <<
-          std::endl;
+          elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -4703,8 +4686,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
         ss <<
           "--> setting fCurrentStanzaNumber to " <<
           fCurrentStanzaNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -4793,32 +4775,9 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
     std::stringstream ss;
 
     ss <<
-      std::endl <<
-      "visitEnd (S_lyric& )" <<
-      ", line: " << elt->getInputStartLineNumber () <<
-      ", with:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    ss <<
-      "Lyric data:" <<
-      std::endl;
-
-    {
-      ++gIndenter;
-
-      const int fieldWidth = 28;
-
-      ss << std::left <<
-        std::setw (fieldWidth) <<
-        "fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
-        std::endl;
-
-      --gIndenter;
-    }
-
-    --gIndenter;
+      "visitEnd (S_lyric&)" <<
+			", fCurrentStanzaNumber" << ": " << fCurrentStanzaNumber <<
+      ", line: " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

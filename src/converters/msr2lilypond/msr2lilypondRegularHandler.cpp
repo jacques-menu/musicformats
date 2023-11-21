@@ -1625,7 +1625,7 @@ void msr2lilypondRegularHandler::createOutputRegularGroup ()
   registerAtomInRegularSubgroup ("point-and-clic-off", subGroup);
 
   registerAtomInRegularSubgroup ("lilypond-version", subGroup);
-  registerAtomInRegularSubgroup ("lilypond-conversion-date", subGroup);
+  registerAtomInRegularSubgroup ("lilypond-run-date", subGroup);
   registerAtomInRegularSubgroup ("lilypond-comments", subGroup);
 
   registerAtomInRegularSubgroup ("no-set-global-staff-size", subGroup);

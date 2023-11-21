@@ -404,7 +404,7 @@ lpsrScore::lpsrScore (
       setOddHeaderMarkup (
 R"(\markup {
     \fill-line {
-      \on-the-fly \not-first-page {
+      \unless \on-first-page {
         \fromproperty #'page:page-number-std::string
         ' '
         \fromproperty #'header:title
@@ -420,7 +420,7 @@ R"(\markup {
       setEvenHeaderMarkup (
 R"(\markup {
     \fill-line {
-      \on-the-fly \not-first-page {
+      \unless \on-first-page {
         \fromproperty #'page:page-number-std::string
         ' '
         \fromproperty #'header:title
@@ -447,12 +447,11 @@ R"(\markup {
         #(string-append
 )"
       <<
-      "\"Music generated from MusicXML by " <<
+      "\"Score generated from MusicXML data by " <<
       gOahOahGroup->getOahOahGroupServiceName () <<
       ' ' <<
-      fMultiComponent->
-        mostRecentVersionNumberAndDateAsString () <<
-      " and engraved by LilyPond \" (lilypond-version))" <<
+      getGlobalMusicFormatsVersionNumberAndDate () <<
+      " and LilyPond \" (lilypond-version))" <<
 R"(
       }
       \fill-line { \italic { \modTimeAsString }}
@@ -2795,16 +2794,16 @@ R"(
 
     schemeFunctionCode =
 R"(
-#(define comml           (object->std::string (command-line)))
+#(define comml           (object->string (command-line)))
 #(define loc             (+ (string-rindex comml #\space ) 2))
 #(define commllen        (- (string-length comml) 2))
 #(define filen           (substring comml loc commllen))
-#(define siz             (object->std::string (stat:size (stat filen))))
-#(define ver             (object->std::string (lilypond-version)))
+#(define siz             (object->string (stat:size (stat filen))))
+#(define ver             (object->string (lilypond-version)))
 #(define dat             (strftime "%d/%m/%Y" (localtime (current-time))))
 #(define tim             (strftime "%H:%M:%S" (localtime (current-time))))
 #(define modTime         (stat:mtime (stat filen)))
-#(define modTimeAsString (strftime "%d/%m/%Y - %H:%M:%S" (localtime modTimeSignature)))
+#(define modTimeAsString (strftime "%d/%m/%Y - %H:%M:%S" (localtime modTime)))
 )";
 
 #ifdef MF_TRACE_IS_ENABLED

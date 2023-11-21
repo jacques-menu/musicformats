@@ -3741,8 +3741,6 @@ void msrStaff::printFull (std::ostream& os) const
     msrStaffKindAsStringForPrint (fStaffKind) <<
     "\", fStaffNumber: " <<
     fStaffNumber <<
-    ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
-    ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
     std::endl;
 
   ++gIndenter;
@@ -3751,13 +3749,17 @@ void msrStaff::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffNumber" << ": " <<
-    staffNumberAsString () <<
+    "fStaffAllVoicesList.size()" << ": " << fStaffAllVoicesList.size () <<
     std::endl <<
+    std::setw (fieldWidth) <<
+    "fStaffRegularVoicesCounter" << ": " << fStaffRegularVoicesCounter <<
+    std::endl <<
+
     std::setw (fieldWidth) <<
     "fStaffUpLinkToPart" << ": " <<
     fStaffUpLinkToPart->getPartCombinedName () <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fStaffInstrumentName" << ": \"" <<
     fStaffInstrumentName <<
@@ -4132,11 +4134,19 @@ void msrStaff::print (std::ostream& os) const
     msrStaffKindAsStringForPrint (fStaffKind) <<
     "\", fStaffNumber: " <<
     fStaffNumber <<
-    ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
-    ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
     std::endl;
 
   ++gIndenter;
+
+  const int fieldWidth = 27;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fStaffAllVoicesList.size()" << ": " << fStaffAllVoicesList.size () <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fStaffRegularVoicesCounter" << ": " << fStaffRegularVoicesCounter <<
+    std::endl;
 
   // print the  voices
   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {

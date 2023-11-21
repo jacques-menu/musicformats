@@ -953,7 +953,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
 
       // set the note tie start
       note1->
-        setNoteTie (
+        appendTieToNote (
           msrTie::create (
             __LINE__,
             msrTieKind::kTieStart,
@@ -1009,7 +1009,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
 
       // set the note tie stop
       note1->
-        setNoteTie (
+        appendTieToNote (
           msrTie::create (
             __LINE__,
             msrTieKind::kTieStop));
@@ -2287,7 +2287,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
 
       // set the note tie start
       note1->
-        setNoteTie (
+        appendTieToNote (
           msrTie::create (
             __LINE__,
             msrTieKind::kTieStart,
@@ -2330,7 +2330,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
 
       // set the note tie stop
       note1->
-        setNoteTie (
+        appendTieToNote (
           msrTie::create (
             __LINE__,
             msrTieKind::kTieStop));

@@ -5842,7 +5842,7 @@ void msr2msrTranslator::visitStart (S_msrTie& elt)
 
   if (fOnGoingNonGraceNote) {
     fCurrentNonGraceNoteClone->
-      setNoteTie (elt);
+      appendTieToNote (elt);
   }
   else if (fOnGoingChord) {
     fCurrentChordClone->

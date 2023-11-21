@@ -6046,7 +6046,7 @@ void msr2bsrTranslator::visitStart (S_msrTie& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentNonGraceNoteClone->
-    setNoteTie (elt);
+    appendTieToNote (elt);
 }
 
 void msr2bsrTranslator::visitEnd (S_msrTie& elt)

@@ -844,12 +844,12 @@ S_msrNote msrNote::createNoteNewbornClone (
   // single tremolo
   // ------------------------------------------------------
 
-  // tie
+  // ties
   // ------------------------------------------------------
 
-  newbornClone->fNoteTie = // JMI
+  newbornClone->fNoteTiesList = // JMI
     // share this data
-    fNoteTie;
+    fNoteTiesList;
 
   // dynamics
   // ------------------------------------------------------
@@ -1192,12 +1192,12 @@ S_msrNote msrNote::createNoteDeepClone (
   deepClone->fNoteSingleTremolo =
     fNoteSingleTremolo;
 
-  // tie
+  // ties
   // ------------------------------------------------------
 
-  deepClone->fNoteTie = // JMI
+  deepClone->fNoteTiesList = // JMI
     // share this data
-    fNoteTie;
+    fNoteTiesList;
 
   // dynamics
   // ------------------------------------------------------
@@ -2933,6 +2933,29 @@ void msrNote::appendSlideToNote (
   fNoteSlidesList.push_back (slide);
 }
 
+void msrNote::appendTieToNote (
+	const S_msrTie& tie)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Adding tie " <<
+      tie->asShortString () <<
+      " to note " <<
+      asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // append the slide to the note ties list
+  fNoteTiesList.push_back (tie);
+}
+
 void msrNote::setGraceNotesGroupBeforeNote (
   const S_msrGraceNotesGroup& graceNotesGroupBefore)
 {
@@ -3484,7 +3507,7 @@ void msrNote::appendSyllableToNote (
 
     ss <<
       "Appending syllable " <<
-      syllable <<
+      syllable->asString () <<
       " to note " <<
       asString ();
 
@@ -3842,10 +3865,15 @@ void msrNote::browseData (basevisitor* v)
     browser.browse (*fNoteSingleTremolo);
   }
 
-  if (fNoteTie) {
-    // browse the tie
-    msrBrowser<msrTie> browser (v);
-    browser.browse (*fNoteTie);
+  // browse the ties if any
+  if (fNoteTiesList.size ()) {
+    ++gIndenter;
+    for (S_msrTie tie : fNoteTiesList) {
+      // browse the tie
+      msrBrowser<msrTie> browser (v);
+      browser.browse (*tie);
+    } // for
+    --gIndenter;
   }
 
   // browse the dynamics if any
@@ -4710,9 +4738,34 @@ std::string msrNote::asShortString () const
       ", fNoteIsFollowedByGraceNotesGroup";
   }
 
-  if (fNoteTie) {
-    ss <<
-      ", " << fNoteTie->getTieKind ();
+  if (fNoteTiesList.size ()) {
+		ss <<
+			", fNoteTiesList:";
+
+		++gIndenter;
+
+// 		for (S_msrTie noteTie : fNoteTiesList) {
+// 			ss <<
+// 				", " << noteTie->getTieKind ();
+// 		} // for
+
+		for (
+			std::list<S_msrTie>::const_iterator i = fNoteTiesList.begin ();
+			i != fNoteTiesList.end ();
+			++i
+		) {
+			S_msrTie noteTie = (*i);
+
+			ss <<
+				noteTie->getTieKind ();
+
+			if (i != std::prev (fNoteTiesList.end ())) {
+				ss <<
+					", ";
+			}
+		} // for
+
+		--gIndenter;
   }
 
   ss <<
@@ -5088,12 +5141,28 @@ void msrNote::print (std::ostream& os) const
     --gIndenter;
   }
 
+  // print the ties if any
+  if (fNoteTiesList.size ()) {
+		os << std::left <<
+			std::setw (fieldWidth) <<
+			"fNoteTiesList:" <<
+			std::endl;
+
+		++gIndenter;
+
+		for (S_msrTie noteTie : fNoteTiesList) {
+			noteTie->print (os);
+		} // for
+
+		--gIndenter;
+  }
+
   // print the beams if any
   if (fNoteBeamsList.size ()) {
     os <<
       std::setw (fieldWidth) <<
-      "fNoteBeamsList";
-      os << std::endl;
+      "fNoteBeamsList" <<
+      std::endl;
 
     ++gIndenter;
 
@@ -5102,7 +5171,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteBeamsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5124,7 +5193,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteArticulationsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5146,7 +5215,7 @@ void msrNote::print (std::ostream& os) const
 			iEnd   = fNoteSpannersList.end (),
 			i      = iBegin;
 		for ( ; ; ) {
-			os << (*i);
+			(*i)->print (os);
 			if (++i == iEnd) break;
 			// no std::endl here;
 		} // for
@@ -5168,7 +5237,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteTechnicalsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5190,7 +5259,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteTechnicalWithIntegersList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5212,7 +5281,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteTechnicalWithFloatsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5234,7 +5303,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteTechnicalWithStringsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5256,7 +5325,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteOrnamentsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5278,7 +5347,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteGlissandosList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5300,7 +5369,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteSlidesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5336,7 +5405,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteDynamicsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5358,7 +5427,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteOtherDynamicsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5380,7 +5449,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteWordsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5402,7 +5471,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteSlursList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5424,7 +5493,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteLigaturesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5446,7 +5515,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNotePedalsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5468,7 +5537,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteSlashesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5490,7 +5559,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteCrescDecrescsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5512,7 +5581,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteWedgesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5534,7 +5603,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteSegnosList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5556,7 +5625,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteDalSegnosList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5578,7 +5647,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteCodasList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5600,7 +5669,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteEyeGlassesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5622,7 +5691,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteDampsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5644,7 +5713,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteDampAllsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -5666,7 +5735,7 @@ void msrNote::print (std::ostream& os) const
       iEnd   = fNoteScordaturasList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i);
+      (*i)->print (os);
       if (++i == iEnd) break;
       // no std::endl here;
     } // for
@@ -6596,15 +6665,18 @@ void msrNote::printFull (std::ostream& os) const
     fNoteSoloNoteOrRestInStaffKind <<
     std::endl;
 
-  // print the tie if any
+  // print the ties if any
   os <<
     std::setw (fieldWidth) <<
-    "fNoteTie" << ": ";
-  if (fNoteTie) {
+    "fNoteTiesList" << ": ";
+  if (fNoteTiesList.size ()) {
     os << std::endl;
+
     ++gIndenter;
 
-		fNoteTie->printFull (os);
+    for (S_msrTie noteTie : fNoteTiesList) {
+			noteTie->printFull (os);
+    } // for
 
     --gIndenter;
   }

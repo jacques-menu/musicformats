@@ -954,7 +954,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // set the note tie start
       note1->
-        setNoteTie (
+        appendTieToNote (
           msrTie::create (
             __LINE__,
             msrTieKind::kTieStart,
@@ -1010,7 +1010,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // set the note tie stop
       note1->
-        setNoteTie (
+        appendTieToNote (
           msrTie::create (
             __LINE__,
             msrTieKind::kTieStop));
@@ -2290,7 +2290,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
 
       // set the note tie start
       note1->
-        setNoteTie (
+        appendTieToNote (
           msrTie::create (
             __LINE__,
             msrTieKind::kTieStart,
@@ -2333,7 +2333,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
 
       // set the note tie stop
       note1->
-        setNoteTie (
+        appendTieToNote (
           msrTie::create (
             __LINE__,
             msrTieKind::kTieStop));

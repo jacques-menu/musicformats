@@ -1885,7 +1885,7 @@ std::string wholeNotesPitchAndOctaveAsString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
-  int dotsNumber; // not used
+  int dotsNumber; // not used JMI v0.9.70
 
   return
     wholeNotesAndDotsNumberPitchAndOctaveAsString (

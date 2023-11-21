@@ -7899,76 +7899,72 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
   std::string oddHeaderMarkup =
     pagePaper->getOddHeaderMarkup ();
 
-  if (oddHeaderMarkup.size ()) {
   fLilypondCodeStream <<
     std::left <<
     std::setw (fieldWidth) <<
-    "oddHeaderMarkup" << " = " <<
-    oddHeaderMarkup <<
-    std::endl;
+    "oddHeaderMarkup" << " = ";
+  if (oddHeaderMarkup.size ()) {
+    fLilypondCodeStream <<
+      oddHeaderMarkup;
   }
   else {
-    fLilypondCodeStream <<
-      "% oddHeaderMarkup = \"\"" <<
-      std::endl;
+    fLilypondCodeStream << "\"\"";
   }
+  fLilypondCodeStream << std::endl;
   outputHasBeenProduced = true;
 
   // even header markup
   std::string evenHeaderMarkup =
     pagePaper->getEvenHeaderMarkup ();
 
+  fLilypondCodeStream <<
+    std::left <<
+    std::setw (fieldWidth) <<
+    "evenHeaderMarkup" << " = ";
   if (evenHeaderMarkup.size ()) {
     fLilypondCodeStream <<
-      std::left <<
-      std::setw (fieldWidth) <<
-      "evenHeaderMarkup" << " = " <<
-      evenHeaderMarkup <<
-      std::endl;
+      evenHeaderMarkup;
   }
   else {
-    fLilypondCodeStream <<
-      "% evenHeaderMarkup = \"\"" <<
-      std::endl;
+    fLilypondCodeStream << "\"\"";
   }
+  fLilypondCodeStream << std::endl;
   outputHasBeenProduced = true;
 
   // odd footer markup
   std::string oddFooterMarkup =
     pagePaper->getOddFooterMarkup ();
 
+  fLilypondCodeStream <<
+    std::left <<
+    std::setw (fieldWidth) <<
+    "oddFooterMarkup" << " = ";
   if (oddFooterMarkup.size ()) {
     fLilypondCodeStream <<
-      std::left <<
-      std::setw (fieldWidth) <<
-      "oddFooterMarkup" << " = " <<
-      oddFooterMarkup <<
-      std::endl;
+      oddFooterMarkup;
   }
   else {
-    fLilypondCodeStream <<
-      "% oddFooterMarkup = \"\"" <<
-      std::endl;
+    fLilypondCodeStream << "\"\"";
   }
+  fLilypondCodeStream << std::endl;
   outputHasBeenProduced = true;
 
   // even footer markup
   std::string evenFooterMarkup =
     pagePaper->getEvenFooterMarkup ();
 
+  fLilypondCodeStream <<
+    std::left <<
+    std::setw (fieldWidth) <<
+    "evenFooterMarkup" << " = ";
   if (evenFooterMarkup.size ()) {
     fLilypondCodeStream <<
-      std::left <<
-      std::setw (fieldWidth) <<
-      "evenFooterMarkup" << " = " <<
-      evenFooterMarkup <<
-      std::endl;
+      evenFooterMarkup;
   }
   else {
-    fLilypondCodeStream <<
-      "% evenFooterMarkup = \"\"" <<
-      std::endl;
+    fLilypondCodeStream << "\"\"";
   }
+  fLilypondCodeStream << std::endl;
   outputHasBeenProduced = true;
 }
 
@@ -9055,7 +9051,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
 
     std::string
       partName =
-        part->getPartAlphabeticName (),
+        part->getPartName (),
       partAbbreviation =
         part->getPartAbbreviation ();
 
@@ -9275,7 +9271,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
     std::string
       partName =
         staffUpLinkToPart->
-          getPartName ();
+          getPartNameDisplayText ();
 
 // JMI    gLog << "--> partName: \"" << partName << "\"" << std::endl;
 
@@ -13692,7 +13688,7 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
 
   fLilypondCodeStream << std::left <<
     std::endl <<
-    "%{ ================= SYLLABLE DESCRIPTION ================="  <<
+    "%{ ================= SYLLABLE DESCRIPTION ======================================="  <<
     std::endl;
 
   gIndenter++;
@@ -13703,15 +13699,16 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
     syllableElementsListAsLilypondString (
       syllable->getSyllableElementsList ()) <<
     '\"' <<
-    std::endl <<
+    std::endl;
 
+  fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
     "getSyllableKind" << ": " <<
     syllable->getSyllableKind () <<
-    std::endl <<
+    std::endl;
 
+  fLilypondCodeStream << std::left <<
     std::endl <<
-
     std::setw (fieldWidth) <<
     "noteTheSyllableIsAttachedTo" << ": ";
 
@@ -13765,12 +13762,7 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
 
   fLilypondCodeStream << std::endl;
 
-  fLilypondCodeStream << std::left <<
-//     std::setw (fieldWidth) <<
-//     "wholeNotes" << ": " <<
-//     noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes () <<
-//     std::endl <<
-
+  fLilypondCodeStream <<
     std::setw (fieldWidth) <<
     "getLyricsNotesDurationsKind" << ": " <<
     gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind () <<
@@ -13899,7 +13891,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            '\"';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -13958,7 +13950,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            '\"';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14002,7 +13994,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            '\"';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14015,6 +14007,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
+
 
           fLilypondCodeStream <<
             '\"' <<
@@ -14046,7 +14039,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            '\"';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14064,7 +14057,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            '\"';
 
           fLilypondCodeStream <<
             syllable->syllableWholeNotesPitchAndOctaveAsString () <<
@@ -14077,13 +14070,13 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     case msrSyllableKind::kSyllableOnRestNote:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyricsDetails ()) {
-            fLilypondCodeStream <<
-              "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllableOnRestNote" <<
-              ", line " << syllable->getInputStartLineNumber () <<
-              " %} " <<
-              std::endl;
-          }
+      if (gTraceOahGroup->getTraceLyricsDetails ()) {
+        fLilypondCodeStream <<
+          "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllableOnRestNote" <<
+          ", line " << syllable->getInputStartLineNumber () <<
+          " %} " <<
+          std::endl;
+      }
 #endif // MF_TRACE_IS_ENABLED
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
@@ -14102,7 +14095,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            '\"';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14120,7 +14113,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            '\"';
 
           fLilypondCodeStream <<
             syllable->syllableWholeNotesPitchAndOctaveAsString () <<
@@ -14196,6 +14189,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
+//           fLilypondCodeStream <<
+//             " %{ kSyllableMeasureEnd %} ";
+
           // generate the empty syllable
           fLilypondCodeStream <<
             "\"\"";
@@ -14224,22 +14220,24 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
         fLilypondCodeStream <<
-          "| ";
+          " | ";
+//           "%{ kSyllableMeasureEnd %} ";
 
         // get the note the syllable is attached to
         S_msrNote
           noteTheSyllableIsAttachedTo =
             syllable->getSyllableUpLinkToNote ();
 
-        if (noteTheSyllableIsAttachedTo) {
+        if (noteTheSyllableIsAttachedTo) { // JMI v0.9.70 BABASSE
           S_msrMeasure
             noteUpLinkToMeasure =
               noteTheSyllableIsAttachedTo->getMeasureElementUpLinkToMeasure ();
 
-          if (noteUpLinkToMeasure) {
+          if (noteUpLinkToMeasure) { // JMI v0.9.70 BABASSE
             fLilypondCodeStream <<
-              "% " <<
-              noteUpLinkToMeasure->getNextMeasureNumber ();
+              " | % " <<
+              noteUpLinkToMeasure->getNextMeasureNumber (); // << // JMI v0.9.70 BABASSE
+//               " %{ kSyllableMeasureEnd %} ";
           }
         }
 //         else {
@@ -14257,8 +14255,8 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
           // generate information and line number as a comment
-          fLilypondCodeStream <<
-            " %{ kSyllableMeasureEnd %} ";
+//           fLilypondCodeStream <<
+//             " %{ kSyllableMeasureEnd %} ";
         }
 
         fLilypondCodeStream << std::endl;
@@ -14526,6 +14524,14 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     noteTheSyllableIsAttachedTo =
       syllable->getSyllableUpLinkToNote ();
 
+//   // get the note ties list JMI v0.9.70 BABASSE
+//   S_msrTie noteTie;
+//
+//   if (noteTheSyllableIsAttachedTo) {
+//     const std::list<S_msrTie>& noteTiesList =
+//       noteTheSyllableIsAttachedTo->getNoteTiesList ();
+//   }
+
   // what is the syllable kind?
   switch (syllable->getSyllableKind ()) {
 
@@ -14560,7 +14566,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 #endif // MF_TRACE_IS_ENABLED
 
       if (noteTheSyllableIsAttachedTo) {
-        // take note's tie into account if any
+      // take note's tie into account if any
         const std::list<S_msrTie>& noteTiesList =
           noteTheSyllableIsAttachedTo->getNoteTiesList ();
 
@@ -14583,36 +14589,36 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
         }
       }
 
-//       // what it the syllable's extend kind?
-//       switch (syllable->getSyllableExtendKind ()) {
-//         case msrSyllableExtendKind::kSyllableExtend_NONE:
-//           // a continue type extension is not mandatory
-//           if (fOnGoingExtend) {
-// //             doGenerateASingleUnderscore = true;
+      // what it the syllable's extend kind?
+      switch (syllable->getSyllableExtendKind ()) {
+        case msrSyllableExtendKind::kSyllableExtend_NONE:
+          // a continue type extension is not mandatory
+          if (fOnGoingExtend) {
+//             doGenerateASingleUnderscore = true;
+          }
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeLess:
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStart:
+          fOnGoingExtend = true;
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStop:
+//           if (fOnGoingExtend) { // JMI v0.9.70
+//             doGenerateASingleHyphen = true;
 //           }
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//           fOnGoingExtend = true;
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStop:
-// //           if (fOnGoingExtend) { // JMI v0.9.70
-// //             doGenerateASingleHyphen = true;
-// //           }
-//
-//           fOnGoingExtend = false;
-//           break;
-//       } // switch
+
+          fOnGoingExtend = false;
+          break;
+      } // switch
       }
       break;
 
@@ -14710,7 +14716,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 
 //       {
 //         // take note's tie into account if any
-//         if (noteTie) {
+//         if (noteTiesList.size ()) {
 //           switch (noteTie->getTieKind ()) {
 //             case msrTieKind::kTieNone:
 //               break;
@@ -14827,7 +14833,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 
       {
 //         // take note's tie into account if any
-//         if (noteTie) {
+//         if (noteTiesList.size ()) {
 //           switch (noteTie->getTieKind ()) {
 //             case msrTieKind::kTieNone:
 //               break;
@@ -14865,7 +14871,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 //
 //       {
 // //         // take note's tie into account if any
-// //         if (noteTie) {
+// //         if (noteTiesList.size ()) {
 // //           switch (noteTie->getTieKind ()) {
 // //             case msrTieKind::kTieNone:
 // //               break;
@@ -15019,6 +15025,13 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     noteTheSyllableIsAttachedTo =
       syllable->getSyllableUpLinkToNote ();
 
+//   S_msrTie noteTie;
+//
+//   if (noteTheSyllableIsAttachedTo) {
+//     noteTie =
+//       noteTheSyllableIsAttachedTo->getNoteTiesList ();
+//   }
+
   // what is the syllable kind?
   switch (syllable->getSyllableKind ()) {
 
@@ -15051,29 +15064,22 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      if (noteTheSyllableIsAttachedTo) {
-        // take note's tie into account if any
-        const std::list<S_msrTie>& noteTiesList =
-          noteTheSyllableIsAttachedTo->getNoteTiesList ();
-
-        if (noteTiesList.size ()) {
-          for (S_msrTie noteTie : noteTiesList) {
-            switch (noteTie->getTieKind ()) {
-              case msrTieKind::kTieNone:
-                break;
-              case msrTieKind::kTieStart: // PAS CLAIR, VOIR GOAL
-    //              doGenerateASingleUnderscore = true;
-    //              doGenerateADoubleUnderscore = true;
-    //              doGenerateASkip = true;
-                break;
-              case msrTieKind::kTieContinue:
-                break;
-              case msrTieKind::kTieStop:
-                break;
-            } // switch
-          } // for
-        }
-      }
+//       {
+//         // take note's tie into account if any
+//         if (noteTiesList.size ()) {
+//           switch (noteTie->getTieKind ()) {
+//             case msrTieKind::kTieNone:
+//               break;
+//             case msrTieKind::kTieStart:
+// //                doGenerateASingleUnderscore = true;
+//               break;
+//             case msrTieKind::kTieContinue:
+//               break;
+//             case msrTieKind::kTieStop:
+//               break;
+//           } // switch
+//         }
+//       }
 
 //       // what it the syllable's extend kind?
 //       switch (syllable->getSyllableExtendKind ()) {
@@ -15153,27 +15159,27 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 //         }
 
       // what it the syllable's extend kind?
-      switch (syllable->getSyllableExtendKind ()) {
-        case msrSyllableExtendKind::kSyllableExtend_NONE:
-          break;
-
-        case msrSyllableExtendKind::kSyllableExtendTypeLess:
-          doGenerateADoubleHyphen = true;
-          break;
-
-        case msrSyllableExtendKind::kSyllableExtendTypeStart:
-          fOnGoingExtend = true;
-//           doGenerateASingleUnderscore = true;
-          break;
-
-        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//           doGenerateASingleUnderscore = true;
-          break;
-
-        case msrSyllableExtendKind::kSyllableExtendTypeStop:
-          fOnGoingExtend = false;
-          break;
-      } // switch
+//       switch (syllable->getSyllableExtendKind ()) {
+//         case msrSyllableExtendKind::kSyllableExtend_NONE:
+//           break;
+//
+//         case msrSyllableExtendKind::kSyllableExtendTypeLess:
+//           doGenerateADoubleHyphen = true;
+//           break;
+//
+//         case msrSyllableExtendKind::kSyllableExtendTypeStart:
+//           fOnGoingExtend = true;
+// //           doGenerateASingleUnderscore = true;
+//           break;
+//
+//         case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+// //           doGenerateASingleUnderscore = true;
+//           break;
+//
+//         case msrSyllableExtendKind::kSyllableExtendTypeStop:
+//           fOnGoingExtend = false;
+//           break;
+//       } // switch
       break;
 
     // ----------------------------------------------------
@@ -15191,72 +15197,71 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
         }
 #endif // MF_TRACE_IS_ENABLED
 
-//        doGenerateASingleHyphen = true;
-
-        const std::list<S_msrTie>& noteTiesList =
-          noteTheSyllableIsAttachedTo->getNoteTiesList ();
-
-        if (noteTiesList.size ()) {
-          for (S_msrTie noteTie : noteTiesList) {
-            switch (noteTie->getTieKind ()) {
-              case msrTieKind::kTieNone:
-                break;
-              case msrTieKind::kTieStart:
-                doGenerateASingleHyphen = true;
-                break;
-              case msrTieKind::kTieContinue:
-                doGenerateASingleHyphen = true;
-                break;
-              case msrTieKind::kTieStop:
-                break;
-             } // switch
-          } // for
-        }
-
-//         {
-//           // get the note slurs
-//           const std::list<S_msrSlur>&
-//             noteSlursList =
-//               noteTheSyllableIsAttachedTo->getNoteSlursList ();
-//
-//           // take note's tie into account if any
-//           if (noteSlursList.size ()) {
-//             doGenerateASingleHyphen = true;
-//           }
-//         }
-
-        // what it the syllable's extend kind?
-        switch (syllable->getSyllableExtendKind ()) {
-          case msrSyllableExtendKind::kSyllableExtend_NONE:
-            break;
-
-          case msrSyllableExtendKind::kSyllableExtendTypeLess:
-            {
-  //             // get the note slurs
-  //             const std::list<S_msrSlur>&
-  //               noteSlursList =
-  //                 noteTheSyllableIsAttachedTo->getNoteSlursList ();
+  //        doGenerateASingleHyphen = true;
+  //         {
+  //           // get the note slurs
+  //           const std::list<S_msrSlur>&
+  //             noteSlursList =
+  //               noteTheSyllableIsAttachedTo->getNoteSlursList ();
   //
-  //             // take note's tie into account if any
-  //             if (noteSlursList.size ()) {
-  //               doGenerateADoubleHyphen = true;
-  //             }
-            }
+  //           // take note's tie into account if any
+  //           if (noteSlursList.size ()) {
+  //             doGenerateASingleHyphen = true;
+  //           }
+  //         }
 
-            doGenerateASingleHyphen = true;
-            break;
+          const std::list<S_msrTie>& noteTiesList =
+            noteTheSyllableIsAttachedTo->getNoteTiesList ();
 
-          case msrSyllableExtendKind::kSyllableExtendTypeStart:
-  //           doGenerateADoubleUnderscore = true;
-            break;
+          if (noteTiesList.size ()) {
+            for (S_msrTie noteTie : noteTiesList) {
+              switch (noteTie->getTieKind ()) {
+                case msrTieKind::kTieNone:
+                  break;
+                case msrTieKind::kTieStart:
+                  doGenerateADoubleHyphen = true;
+                  break;
+                case msrTieKind::kTieContinue:
+                  doGenerateADoubleHyphen = true;
+                  break;
+                case msrTieKind::kTieStop:
+                  break;
+               } // switch
+            } // for
+          }
 
-          case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-  //           doGenerateADoubleUnderscore = true;
-            break;
-
-          case msrSyllableExtendKind::kSyllableExtendTypeStop:
-            break;
-        } // switch
+//       // what it the syllable's extend kind?
+//       switch (syllable->getSyllableExtendKind ()) {
+//         case msrSyllableExtendKind::kSyllableExtend_NONE:
+//           break;
+//
+//         case msrSyllableExtendKind::kSyllableExtendTypeLess:
+//           {
+// //             // get the note slurs
+// //             const std::list<S_msrSlur>&
+// //               noteSlursList =
+// //                 noteTheSyllableIsAttachedTo->getNoteSlursList ();
+// //
+// //             // take note's tie into account if any
+// //             if (noteSlursList.size ()) {
+// //               doGenerateADoubleHyphen = true;
+// //             }
+//           }
+//
+//           doGenerateASingleHyphen = true;
+//           break;
+//
+//         case msrSyllableExtendKind::kSyllableExtendTypeStart:
+// //           doGenerateADoubleUnderscore = true;
+//           break;
+//
+//         case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+// //           doGenerateADoubleUnderscore = true;
+//           break;
+//
+//         case msrSyllableExtendKind::kSyllableExtendTypeStop:
+//           break;
+//       } // switch
       }
       break;
 

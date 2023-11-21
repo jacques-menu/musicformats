@@ -5265,9 +5265,9 @@ R"(Don't generate any lyrics in the LilyPond code.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "lilypond-conversion-date", "lilyconvdate",
+        "lilypond-run-date", "lilyrundate",
 R"(Generate code to include the conversion date
-when LilyPond creates the score.)",
+when LilyPond creates the score in the footers.)",
         "fLilypondRunDate",
         fLilypondRunDate));
 

@@ -322,7 +322,10 @@ class EXP msrNote : public msrTupletElement
     void                  setNoteSoundingWholeNotes (
                             const msrWholeNotes& wholeNotes,
                             const std::string&   context)
-                              { setMeasureElementSoundingWholeNotes (wholeNotes, context); }
+                              {
+                                setMeasureElementSoundingWholeNotes (
+                                  wholeNotes, context);
+                              }
 
     void                  setNoteDisplayWholeNotes (
                             const msrWholeNotes& wholeNotes)
@@ -590,10 +593,9 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteSingleTremolo; }
 
     // ties
-    void                  setNoteTie (const S_msrTie& tie)
-                              { fNoteTie = tie; }
-    S_msrTie              getNoteTie () const
-                              { return fNoteTie; }
+    const std::list<S_msrTie>&
+                          getNoteTiesList () const
+                              { return fNoteTiesList; }
 
     // dynamics
     const std::list<S_msrDynamic>&
@@ -839,6 +841,10 @@ class EXP msrNote : public msrTupletElement
     // slides
     void                  appendSlideToNote (
                             const S_msrSlide& slide);
+
+    // ties
+    void                  appendTieToNote (
+                            const S_msrTie& tie);
 
     // dynamics
     void                  appendDynamicToNote (
@@ -1150,7 +1156,7 @@ class EXP msrNote : public msrTupletElement
     // tie
     // ------------------------------------------------------
 
-    S_msrTie              fNoteTie;
+    std::list<S_msrTie>   fNoteTiesList;
 
     // dynamics
     // ------------------------------------------------------

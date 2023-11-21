@@ -6194,38 +6194,40 @@ void msr2mxsrTranslator:: appendNoteTieIfAny (
 #endif // MF_TRACE_IS_ENABLED
 
   // append the tie element if any
-  S_msrTie noteTie = theMsrNote->getNoteTie ();
+  const std::list<S_msrTie>& noteTiesList = theMsrNote->getNoteTiesList ();
 
-  if (noteTie) {
-    // create the tied element
-    Sxmlelement tiedElement = createMxmlelement (k_tied, "");
+  if (noteTiesList.size ()) {
+    for (S_msrTie noteTie : noteTiesList) {
+      // create the tied element
+      Sxmlelement tiedElement = createMxmlelement (k_tied, "");
 
-    // set its "type" attribute if any
-    std::string typeString;
+      // set its "type" attribute if any
+      std::string typeString;
 
-    switch (noteTie->getTieKind ()) {
-      case msrTieKind::kTieNone:
-        break;
-      case msrTieKind::kTieStart:
-        typeString = "start";
-        break;
-      case msrTieKind::kTieContinue:
-        typeString = "continue";
-        break;
-      case msrTieKind::kTieStop:
-        typeString = "stop";
-        break;
-    } // switch
+      switch (noteTie->getTieKind ()) {
+        case msrTieKind::kTieNone:
+          break;
+        case msrTieKind::kTieStart:
+          typeString = "start";
+          break;
+        case msrTieKind::kTieContinue:
+          typeString = "continue";
+          break;
+        case msrTieKind::kTieStop:
+          typeString = "stop";
+          break;
+      } // switch
 
-    if (typeString.size ()) {
-      tiedElement->add (
-        createMxmlAttribute ("type", typeString));
-    }
+      if (typeString.size ()) {
+        tiedElement->add (
+          createMxmlAttribute ("type", typeString));
+      }
 
-    // append it to the current note notations element
-    appendToNoteNotations (
-      tiedElement,
-      noteTie->getTiePlacementKind ());
+      // append it to the current note notations element
+      appendToNoteNotations (
+        tiedElement,
+        noteTie->getTiePlacementKind ());
+    } // for
   }
 }
 
@@ -10430,7 +10432,7 @@ void msr2mxsrTranslator::visitStart (S_msrTie& elt)
 
   if (fOnGoingNonGraceNote) {
     fCurrentNonGraceNoteClone->
-      setNoteTie (elt);
+      appendTieToNote (elt);
   }
   else if (fOnGoingChord) {
     fCurrentChordClone->

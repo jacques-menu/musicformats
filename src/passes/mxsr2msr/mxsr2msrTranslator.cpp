@@ -3110,7 +3110,6 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     std::stringstream ss;
 
     ss <<
-//       std::endl <<
       "<!--=== partID \"" << partID << "\"" <<
       ", line " << elt->getInputStartLineNumber () << " ===-->";
 
@@ -8313,7 +8312,6 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
     std::stringstream ss;
 
     ss <<
-//       std::endl <<
       "<!--=== voiceName \"" << "elt->getVoiceName ()" << "\"" <<
       ", line " << elt->getInputStartLineNumber () << " ===-->";
 
@@ -8725,10 +8723,13 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
     case msrTieKind::kTieContinue:
     case msrTieKind::kTieStop:
       if (! gGlobalMxsr2msrOahGroup->getIgnoreTies ()) {
-        fCurrentTie =
-          msrTie::create (
-            elt->getInputStartLineNumber (),
-            fCurrentTieKind);
+        S_msrTie
+          tie =
+            msrTie::create (
+              elt->getInputStartLineNumber (),
+              fCurrentTieKind);
+
+        fPendingTiesList.push_back (tie);
       }
       break;
   } // switch
@@ -10338,6 +10339,19 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         std::endl;
 
       gLog << std::left <<
+        "fNoteTiesList:";
+      if (fPendingTiesList.size ()) {
+        ++gIndenter;
+        for (S_msrTie tie : fPendingTiesList) {
+          gLog << tie;
+        } // for
+        --gIndenter;
+      }
+      else {
+        gLog << "[NONE]" << std::endl;
+      }
+
+      gLog << std::left <<
         std::setw (fieldWidth) <<
         "fCurrentTieKind" << ": \"" <<
         msrTieKindAsString (fCurrentTieKind) <<
@@ -10668,14 +10682,13 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
     std::stringstream ss;
 
     ss <<
-//       std::endl <<
       "<!--=== " <<
       "partName \"" << fCurrentPart->getPartName () << "\"" <<
       ", partID \"" << fCurrentPart->getPartID () << "\"" <<
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
       ", measureImplicitKind " << measureImplicitKind <<
       ", nonControllingString \"" << nonControllingString << "\"" <<
-      ", widthValue" << widthValue <<
+      ", widthValue " << widthValue <<
       ", line " << elt->getInputStartLineNumber () <<
       " ===-->";
 
@@ -12376,7 +12389,6 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // ties
 
-  fCurrentTie = nullptr;
   fCurrentTiedOrientation = "";
 
   // slurs
@@ -20466,36 +20478,35 @@ void mxsr2msrTranslator::appendNoteBeamsListLinksToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTieToChord (
+void mxsr2msrTranslator::copyNoteTiesToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
   // copy note's tie if any from the first note to chord
 
-  S_msrTie
-    noteTie =
-      note->
-        getNoteTie ();
+  const std::list<S_msrTie>& noteTiesList = note->getNoteTiesList ();
 
-  if (noteTie) {
+  if (noteTiesList.size ()) {
+    for (S_msrTie noteTie : noteTiesList) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTies ()) {
-      std::stringstream ss;
+      if (gTraceOahGroup->getTraceTies ()) {
+        std::stringstream ss;
 
-      ss <<
-        "Appending tie " <<
-        noteTie->asString () <<
-        " from note " << note->asString () <<
-        " to chord" << chord->asString ();
+        ss <<
+          "Appending tie " <<
+          noteTie->asString () <<
+          " from note " << note->asString () <<
+          " to chord" << chord->asString ();
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
 
-    chord->
-      appendTieToChord (noteTie);
+      chord->
+        appendTieToChord (noteTie);
+    } // for
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -21218,8 +21229,8 @@ void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
   }
 
   // copy note's ties if any to the chord // JMI v0.9.70
-//   if (note->getNoteTie ()) {
-//     copyNoteTieToChord (note, chord);
+//   if (note->getNoteTiesList ()) {
+//     copyNoteTiesToChord (note, chord);
 //   }
 
   // copy note's slurs if any to the chord
@@ -22441,6 +22452,35 @@ void mxsr2msrTranslator::attachPendingPageBreaksToPart (
 
     // remove it from the list
     fPendingPageBreaksList.pop_front ();
+  } // while
+}
+
+//______________________________________________________________________________
+void mxsr2msrTranslator::attachPendingTiesToCurrentNote ()
+{
+ // attach the pending ties to the note
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Attaching pending ties to note " <<
+      fCurrentNote->asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  while (fPendingTiesList.size ()) {
+    S_msrTie
+      tie =
+        fPendingTiesList.front ();
+
+    fCurrentNote->appendTieToNote (tie);
+
+    fPendingTiesList.pop_front ();
   } // while
 }
 
@@ -23780,6 +23820,11 @@ void mxsr2msrTranslator::attachPendingPartLevelElementsIfAnyToPart ( // JMI v0.9
 
 void mxsr2msrTranslator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
 {
+  // attach the pending ties, if any, to the note
+  if (fPendingTiesList.size ()) {
+    attachPendingTiesToCurrentNote ();
+  }
+
   // attach the pending segnos, if any, to the note
   if (fPendingSegnosList.size ()) {
     attachPendingSegnosToCurrentNote ();
@@ -24350,16 +24395,17 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
     } // switch
   }
 
-  // set fCurrentNote tie if any
-  if (fCurrentTie) {
-    fCurrentNote->
-      setNoteTie (fCurrentTie);
-
-    // forget about this tie
-    fCurrentTie = nullptr;
-  }
-
-  // set its stem if any
+//   // set fCurrentNote tie if any
+//   if (fCurrentTie) {
+//     fPendingTiesList.push_back (fCurrentTie);
+// //     fCurrentNote->
+// //       appendTieToNote (fCurrentTie);
+//
+//     // forget about this tie
+//     fCurrentTie = nullptr;
+//   }
+//
+  // set fCurrentNote stem if any
   if (fCurrentStem) {
     fCurrentNote->
       setNoteStem (fCurrentStem);
@@ -26755,7 +26801,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHassBeenHandled ()
 
     const int fieldWidth = 37;
 
-    gLog <<
+    gLog << std::left <<
       std::setw (fieldWidth) <<
       "fCurrentNoteVoice" << " = \"" << fCurrentNoteVoice->getVoiceName () <<"\"" <<
       std::endl <<
