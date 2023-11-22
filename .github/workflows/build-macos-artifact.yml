@@ -30,6 +30,8 @@ jobs:
 
       - name: Build MusicFormats for MacOS
         run: make -C build
+
+      - name: Build MusicFormats documentation for MacOS
         run: cd documentation/mfapiguide; pdflatex --file-line-error --synctex=1 MusicFormatsAPIGuide.tex
 
       - name: Upload libraries and executables for MacOS
