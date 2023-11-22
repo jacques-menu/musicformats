@@ -30,6 +30,7 @@ jobs:
 
       - name: Build MusicFormats for MacOS
         run: make -C build
+        run: cd documentation/mfapiguide; pdflatex --file-line-error --synctex=1 MusicFormatsAPIGuide.tex
 
       - name: Upload libraries and executables for MacOS
         uses: actions/upload-artifact@v3
@@ -42,8 +43,9 @@ jobs:
             build/lib
             include
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
-            documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
-            documentation/MusicFormatsFigures/MusicFormatsFigures.pdf
-            documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
+            documentation/mfuserguide/MusicFormatsUserGuide.pdf
+            documentation/mfmaintainanceguide/MusicFormatsFigures.pdf
+            documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+            documentation/mfapiguide/MusicFormatsAPIGuide.pdf
             #uncomment to have the full libdir in the .zip archive
             #build/libdir
