@@ -9395,7 +9395,9 @@ if (true)
         // and generate a \markup{} // JMI ???
         fLilypondCodeStream <<
           std::endl <<
-          generateMultilineMarkup (partAbbreviation) <<
+          generateMultilineMarkup (
+            partAbbreviation,
+            lilypondMarkupColumnKind::kMarkupColumnKindLeftACentered) <<
           std::endl;
       }
     }
@@ -13932,10 +13934,16 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             fLilypondCodeStream <<
               '\"' <<
               elementsListAsLilypondString <<
-              '\"' <<
-              durationAsLilypondStringIfItShouldBeGenerated (
-                noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
-                noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
+              '\"';
+
+            if (noteTheSyllableIsAttachedTo) { // JMI v0.9.70 BABASSE
+              fLilypondCodeStream <<
+                durationAsLilypondStringIfItShouldBeGenerated (
+                  noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+                  noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ());
+            }
+
+            fLilypondCodeStream <<
               ' ';
           }
           break;
