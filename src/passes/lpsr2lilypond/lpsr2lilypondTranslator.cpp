@@ -9367,7 +9367,7 @@ if (true)
     // get the part upLink abbreviation display text to be used
     std::string partAbbreviation =
       staffUpLinkToPart->
-        getPartAbbreviationDisplayText ();
+        getPartAbbreviation ();
 
     if (partAbbreviation.size () == 0) {
       partAbbreviation =
@@ -9375,7 +9375,6 @@ if (true)
           getPartAbbreviation ();
     }
 
-/* JMI ???
     if (partAbbreviation.size ()) {
       fLilypondCodeStream <<
         "shortInstrumentName = ";
@@ -9400,7 +9399,6 @@ if (true)
           std::endl;
       }
     }
-    */
   }
 
   --gIndenter;
