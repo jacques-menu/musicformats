@@ -10108,6 +10108,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
 
     switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+        // maybe we could use addlyrics optionally? JMI v0.9.70 BABASSE LPNR page 64
         fLilypondCodeStream <<
           "\\lyricsto \"" << elt->getVoice ()->getVoiceAlphabeticName () << "\" {" <<
           "\\" << stanza->getStanzaAlphabeticName () <<
@@ -13864,6 +13865,11 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
 //   generateCodeBeforeSyllableIfRelevant (syllable);
 
+  // get the note the syllable is attached to
+  S_msrNote
+    noteTheSyllableIsAttachedTo =
+      syllable->getSyllableUpLinkToNote ();
+
   switch (syllable->getSyllableKind ()) {
 
     // ----------------------------------------------------
@@ -13929,7 +13935,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
               '\"' <<
               elementsListAsLilypondString <<
               '\"' <<
-              syllable->syllableWholeNotesPitchAndOctaveAsString () <<
+              durationAsLilypondStringIfItShouldBeGenerated (
+                noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+                noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
               ' ';
           }
           break;
@@ -13977,7 +13985,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
             '\"' <<
-            syllable->syllableWholeNotesPitchAndOctaveAsString () <<
+            durationAsLilypondStringIfItShouldBeGenerated (
+              noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+              noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
             ' ';
           break;
       } // switch
@@ -14021,7 +14031,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
             '\"' <<
-            syllable->syllableWholeNotesPitchAndOctaveAsString () <<
+            durationAsLilypondStringIfItShouldBeGenerated (
+              noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+              noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
             ' ';
           break;
       } // switch
@@ -14067,7 +14079,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             "\" ";
 
           fLilypondCodeStream <<
-            syllable->syllableWholeNotesPitchAndOctaveAsString () <<
+            durationAsLilypondStringIfItShouldBeGenerated (
+              noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+              noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
             ' ';
           break;
       } // switch
@@ -14123,7 +14137,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
             "\" ";
 
           fLilypondCodeStream <<
-            syllable->syllableWholeNotesPitchAndOctaveAsString () <<
+            durationAsLilypondStringIfItShouldBeGenerated (
+              noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+              noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
             ' ';
           break;
       } // switch
@@ -14214,7 +14230,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
       {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceLyricsDetails ()) {
+        if (gTraceOahGroup->getTraceLyrics ()) {
           fLilypondCodeStream <<
             "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllableMeasureEnd" <<
             ", line " << syllable->getInputStartLineNumber () <<
@@ -14225,11 +14241,6 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
         fLilypondCodeStream <<
           "| ";
-
-        // get the note the syllable is attached to
-        S_msrNote
-          noteTheSyllableIsAttachedTo =
-            syllable->getSyllableUpLinkToNote ();
 
         if (noteTheSyllableIsAttachedTo) {
           S_msrMeasure
@@ -14269,7 +14280,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     case msrSyllableKind::kSyllableLineBreak:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyricsDetails ()) {
+          if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllableLineBreak" <<
               ", line " << syllable->getInputStartLineNumber () <<
@@ -14278,14 +14289,18 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-      // generate information and line number as a comment
+      // generate information and line number as a comment if relevant
+      if (gTraceOahGroup->getTraceLyrics ()) {
+        fLilypondCodeStream <<
+          "%{ kSyllableLineBreak, line " <<
+          syllable->getInputStartLineNumber () <<
+          " %}  " <<
+          std::endl;
+      }
+
       fLilypondCodeStream <<
-        "%{ kSyllableLineBreak, line " <<
-        syllable->getInputStartLineNumber () <<
-        " %}  " <<
-        std::endl <<
-        "\\break % " <<
-        syllable->getSyllableMeasureNumber () <<
+        "\\break" <<
+//         syllable->getSyllableMeasureNumber () <<
         std::endl;
       break;
 
@@ -14293,7 +14308,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     case msrSyllableKind::kSyllablePageBreak:
     // ----------------------------------------------------
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyricsDetails ()) {
+          if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
               "%{ GENERATE_CODE_FOR_SYLLABLE_kSyllablePageBreak" <<
               ", line " << syllable->getInputStartLineNumber () <<
@@ -14303,13 +14318,18 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
       // generate information and line number as a comment
+      // generate information and line number as a comment if relevant
+      if (gTraceOahGroup->getTraceLyrics ()) {
+        fLilypondCodeStream <<
+          "%{ kSyllablePageBreak, line " <<
+          syllable->getInputStartLineNumber () <<
+          " %}  " <<
+          std::endl;
+      }
+
       fLilypondCodeStream <<
-        "%{ kSyllablePageBreak, line " <<
-        syllable->getInputStartLineNumber () <<
-        " %} " <<
-        std::endl <<
-        "\\pageBreak %" <<
-        syllable->getSyllableMeasureNumber () <<
+        "\\pageBreak" <<
+//         syllable->getSyllableMeasureNumber () <<
         std::endl;
       break;
   } // switch
@@ -14978,7 +14998,9 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   if (doGenerateASkip) {
     fLilypondCodeStream <<
       " \\skip" <<
-      syllable->syllableWholeNotesPitchAndOctaveAsString () <<
+      durationAsLilypondStringIfItShouldBeGenerated (
+        noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+        noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
       ' ';
   }
 
@@ -15438,7 +15460,9 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   if (doGenerateASkip) {
     fLilypondCodeStream <<
       " \\skip" <<
-      syllable->syllableWholeNotesPitchAndOctaveAsString () <<
+      durationAsLilypondStringIfItShouldBeGenerated (
+        noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+        noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
       ' ';
   }
 

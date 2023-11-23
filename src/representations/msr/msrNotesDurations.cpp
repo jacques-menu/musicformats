@@ -1107,7 +1107,7 @@ msrWholeNotes::msrWholeNotes (const std::string &theString)
     std::stringstream ss;
 
     ss <<
-      "msrWholeNotes std::string '" << theString <<
+      "msrWholeNotes string '" << theString <<
       "' is ill-formed";
 
     msrError (

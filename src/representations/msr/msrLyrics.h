@@ -338,7 +338,7 @@ class EXP msrSyllable : public msrMeasureElement
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;
 
-    std::string           fSyllableMeasureNumber;
+    std::string           fSyllableMeasureNumber; // JMI v0.9.70 USELESS
 };
 typedef SMARTP<msrSyllable> S_msrSyllable;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt);
