@@ -266,7 +266,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         firstBsrScore,
         gMsrOahGroup,
         gBsrOahGroup,
-        gLanguage->displayTheFirstMSRAsText ());
+        gLanguage->displayTheFirstBSRAsText ());
     }
 
     if (gBsrOahGroup->getDisplayFirstBsrFull ()) {
@@ -274,7 +274,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
         firstBsrScore,
         gMsrOahGroup,
         gBsrOahGroup,
-        gLanguage->displayTheFirstMSRAsText ());
+        gLanguage->displayTheFirstBSRAsText ());
     }
   }
 

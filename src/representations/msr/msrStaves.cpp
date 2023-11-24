@@ -30,6 +30,8 @@
 
 #include "oahOah.h"
 
+#include "waeOah.h"
+
 #include "msrOah.h"
 #include "mxsr2msrOah.h"
 #include "msr2msrOah.h"
@@ -3349,10 +3351,16 @@ void msrStaff::collectStaffMeasuresSlices (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fStaffMeasuresSlicesSequence == nullptr,
-    "fStaffMeasuresSlicesSequence is not null");
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+    mfAssert (
+      __FILE__, __LINE__,
+      fStaffMeasuresSlicesSequence == nullptr,
+      "fStaffMeasuresSlicesSequence is not null");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;

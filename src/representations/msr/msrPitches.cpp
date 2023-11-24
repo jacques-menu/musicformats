@@ -16,6 +16,8 @@
 
 #include "msrOah.h"
 
+#include "waeOah.h"
+
 #include "msrWae.h"
 
 
@@ -2053,12 +2055,17 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
           "cannot get the diatonic pitch of a rest"
           ", line: " << inputLineNumber;
 
-        msrInternalError (
-          gServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          ss.str ());
+#ifdef MF_TRACE_IS_ENABLED
+        if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+          msrInternalError (
+            gServiceRunData->getInputSourceName (),
+            inputLineNumber,
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
       }
+      break;
 
     case msrQuarterTonesPitchKind::kQTP_Skip:
       {
@@ -2068,12 +2075,17 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
           "cannot get the diatonic pitch of a skip"
           ", line: " << inputLineNumber;
 
-        msrInternalError (
-          gServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          ss.str ());
+#ifdef MF_TRACE_IS_ENABLED
+        if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+          msrInternalError (
+            gServiceRunData->getInputSourceName (),
+            inputLineNumber,
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
       }
+      break;
 
     case msrQuarterTonesPitchKind::kQTP_UNKNOWN_:
       {
@@ -2093,6 +2105,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
           ss.str ());
           */
       }
+      break;
   } // switch
 
   return result;
@@ -2223,12 +2236,17 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
           "cannot get the alteration kind of a rest"
           ", line: " << inputLineNumber;
 
-        msrInternalError (
-          gServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          ss.str ());
+#ifdef MF_TRACE_IS_ENABLED
+        if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+          msrInternalError (
+            gServiceRunData->getInputSourceName (),
+            inputLineNumber,
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
       }
+      break;
 
     case msrQuarterTonesPitchKind::kQTP_Skip:
       {
@@ -2238,12 +2256,17 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
           "cannot get the alteration kind of a skip"
           ", line: " << inputLineNumber;
 
+#ifdef MF_TRACE_IS_ENABLED
+      if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         msrInternalError (
           gServiceRunData->getInputSourceName (),
           inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
+#endif // MF_TRACE_IS_ENABLED
+      }
+      break;
 
     case msrQuarterTonesPitchKind::kQTP_UNKNOWN_:
       {

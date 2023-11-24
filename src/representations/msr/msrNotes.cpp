@@ -4312,6 +4312,9 @@ std::string msrNote::noteCoreAsString () const
       break;
   } // switch
 
+	ss <<
+		"fNoteKind: " << fNoteKind << ' ';
+
 	if (doIncludeSoundingWholeNotes) {
 		ss <<
 			msrQuarterTonesPitchKindAsStringInLanguage (
@@ -4982,7 +4985,7 @@ void msrNote::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 30;
+  const int fieldWidth = 34;
 
   // print measure position and sounding whole notes
   os << std::left <<
