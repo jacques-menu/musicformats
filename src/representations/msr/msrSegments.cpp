@@ -1101,8 +1101,7 @@ void msrSegment::appendTimeSignatureToSegment (
       "to segment " << asString () <<
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
-      "\"" <<
-      std::endl;
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

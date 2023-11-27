@@ -483,8 +483,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
         ss <<
           "--> note: " <<
-          note->asShortString () <<
-          std::endl;
+          note->asShortString ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

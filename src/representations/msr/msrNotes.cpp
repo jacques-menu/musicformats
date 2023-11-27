@@ -401,7 +401,7 @@ msrNote::~msrNote ()
 //       "Setting the uplink to measure of note " <<
 //       asString () <<
 //       " to measure " << measure->asString () <<
-//       "' in measure '" <<
+//       " in measure '" <<
 //       measure->asString () <<
 //       std::endl;
 //
@@ -1319,11 +1319,10 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrSlur>::const_iterator i;
-    for (i = fNoteSlursList.begin (); i != fNoteSlursList.end (); ++i) {
+    for (S_msrSlur slur : fNoteSlursList) {
       // share this data
       deepClone->
-        fNoteSlursList.push_back ((*i));
+        fNoteSlursList.push_back (slur);
     } // for
   }
 
@@ -3023,8 +3022,8 @@ void msrNote::setNoteAfterGraceNotesGroup (S_msrGraceNotesGroup afterGraceNotesG
 
     ss <<
       "Attaching afterGraceNotesGroup '" << afterGraceNotesGroup->asString () <<
-      "' to note '" << asShortString () <<
-      "', line " << afterGraceNotesGroup->getInputStartLineNumber ();
+      " to note " << asShortString () <<
+      ", line " << afterGraceNotesGroup->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3049,7 +3048,7 @@ void msrNote::setNoteSingleTremolo (
       trem->asString () <<
       " to note " <<
       asString () <<
-      "', line " << trem->getInputStartLineNumber ();
+      ", line " << trem->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3073,7 +3072,7 @@ void msrNote::appendDynamicToNote (
       dynamic->asString () <<
       " to note " <<
       asString () <<
-      "', line " << dynamic->getInputStartLineNumber ();
+      ", line " << dynamic->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3103,8 +3102,8 @@ void msrNote::appendSlurToNote (
     std::stringstream ss;
 
     ss <<
-      "Adding slur '" << slur <<
-      "' to note '" << asString () << "'";
+      "Adding slur " << slur->asString () <<
+      " to note " << asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3113,6 +3112,10 @@ void msrNote::appendSlurToNote (
 #endif // MF_TRACE_IS_ENABLED
 
   fNoteSlursList.push_back (slur);
+
+  // make sure slur stops appear before slur starts
+  fNoteSlursList.sort (
+  	msrSlur::compareSlursStopsBeforeStarts);
 }
 
 void msrNote::appendLigatureToNote (
@@ -3167,8 +3170,7 @@ void msrNote::appendLigatureToNote (
 
         ss <<
           "Removing last ligature (start) for note '" <<
-          asShortString () <<
-          std::endl;
+          asShortString ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -3239,8 +3241,7 @@ void msrNote::appendPedalToNote (
 
         ss <<
           "Removing last pedal (start) for note '" <<
-          asShortString () <<
-          std::endl;
+          asShortString ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -3367,7 +3368,7 @@ void msrNote::appendScordaturaToNote (
 //       " to " << voicePosition <<
 //       " in measure '" <<
 //       fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
-//       "', context: \"" <<
+//       ", context: \"" <<
 //       context <<
 //       "\"" <<
 //       std::endl;
@@ -3393,7 +3394,7 @@ void msrNote::appendScordaturaToNote (
 //       " to " << voicePosition <<
 //       " in measure '" <<
 //       fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
-//       "', context: \"" <<
+//       ", context: \"" <<
 //       context <<
 //       "\"" <<
 //       std::endl;
@@ -3413,7 +3414,7 @@ void msrNote::appendScordaturaToNote (
 //     ss <<
 //       "Position in voice becomes " <<
 //       voicePosition <<
-//       "', context: \"" <<
+//       ", context: \"" <<
 //       context <<
 //       "\"" <<
 //       std::endl;
@@ -3435,6 +3436,64 @@ bool msrNote::compareNotesByIncreasingMeasurePosition (
         <
       second->fMeasureElementMeasurePosition
     );
+}
+
+int msrNote:: fetchNoteSlurStartsNumber () const
+{
+	int result = 0;
+
+	for (S_msrSlur slur : fNoteSlursList) {
+		switch (slur->getSlurTypeKind ()) {
+			case msrSlurTypeKind::kSlurType_UNKNOWN_:
+				break;
+
+			case msrSlurTypeKind::kSlurTypeRegularStart:
+				++result;
+				break;
+			case msrSlurTypeKind::kSlurTypeRegularContinue:
+				break;
+			case msrSlurTypeKind::kSlurTypeRegularStop:
+				break;
+
+			case msrSlurTypeKind::kSlurTypePhrasingStart:
+				break;
+			case msrSlurTypeKind::kSlurTypePhrasingContinue:
+				break;
+			case msrSlurTypeKind::kSlurTypePhrasingStop:
+				break;
+		} // switch
+	} // for
+
+	return result;
+}
+
+int msrNote:: fetchNoteSlurStopsNumber () const
+{
+	int result = 0;
+
+	for (S_msrSlur slur : fNoteSlursList) {
+		switch (slur->getSlurTypeKind ()) {
+			case msrSlurTypeKind::kSlurType_UNKNOWN_:
+				break;
+
+			case msrSlurTypeKind::kSlurTypeRegularStart:
+				break;
+			case msrSlurTypeKind::kSlurTypeRegularContinue:
+				break;
+			case msrSlurTypeKind::kSlurTypeRegularStop:
+				++result;
+				break;
+
+			case msrSlurTypeKind::kSlurTypePhrasingStart:
+				break;
+			case msrSlurTypeKind::kSlurTypePhrasingContinue:
+				break;
+			case msrSlurTypeKind::kSlurTypePhrasingStop:
+				break;
+		} // switch
+	} // for
+
+	return result;
 }
 
 S_msrDynamic msrNote::removeFirstDynamics () // JMI
@@ -3915,11 +3974,10 @@ void msrNote::browseData (basevisitor* v)
   // browse the slurs if any
   if (fNoteSlursList.size ()) {
     ++gIndenter;
-    std::list<S_msrSlur>::const_iterator i;
-    for (i = fNoteSlursList.begin (); i != fNoteSlursList.end (); ++i) {
+    for (S_msrSlur slur : fNoteSlursList) {
       // browse the slur
       msrBrowser<msrSlur> browser (v);
-      browser.browse (*(*i));
+      browser.browse (*slur);
     } // for
     --gIndenter;
   }
@@ -5469,14 +5527,8 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSlur>::const_iterator
-      iBegin = fNoteSlursList.begin (),
-      iEnd   = fNoteSlursList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      (*i)->print (os);
-      if (++i == iEnd) break;
-      // no std::endl here;
+    for (S_msrSlur slur : fNoteSlursList) {
+      slur->print (os);
     } // for
 
     --gIndenter;
@@ -6074,8 +6126,7 @@ void msrNote::printFull (std::ostream& os) const
 //
 //     ss <<
 //       "fMeasureElementUpLinkToMeasure->getMeasureNumber () is empty in note " <<
-//       this->asString () <<
-//       "'";
+//       this->asString ();
 //
 // // JMI     msrInternalError (
 //     msrInternalWarning (
@@ -7065,14 +7116,8 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSlur>::const_iterator
-      iBegin = fNoteSlursList.begin (),
-      iEnd   = fNoteSlursList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      (*i)->printFull (os);
-      if (++i == iEnd) break;
-      // no std::endl here;
+    for (S_msrSlur slur : fNoteSlursList) {
+      slur->printFull (os);
     } // for
 
     --gIndenter;

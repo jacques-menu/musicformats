@@ -1309,7 +1309,7 @@ void msrChord::browseData (basevisitor* v)
         std::stringstream ss;
 
         ss <<
-          "% ==> visiting grace notes groups before notes is inhibited";
+          "% ==> visiting grace notes groups before chords is inhibited";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

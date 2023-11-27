@@ -208,7 +208,8 @@ void initializeLilypondDurationsGenerationKindsMap ();
 // lyrics durations
 //______________________________________________________________________________
 enum class lpsrLyricsNotesDurationsKind {
-  kLyricsNotesDurationsImplicit, // default value
+  kLyricsNotesDurationsAutomatic, // default value
+  kLyricsNotesDurationsImplicit,
   kLyricsNotesDurationsExplicit
 };
 

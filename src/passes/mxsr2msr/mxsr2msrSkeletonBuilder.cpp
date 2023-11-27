@@ -4737,8 +4737,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
         ss <<
           "--> setting fCurrentStanzaName to " <<
           fCurrentStanzaName <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

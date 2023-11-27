@@ -2560,8 +2560,7 @@ void msrPart::appendFiguredBassToPartClone (
           figuredBass->asString () <<
           " to part clone " <<
           getPartCombinedName () <<
-          ", line " << figuredBass->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << figuredBass->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

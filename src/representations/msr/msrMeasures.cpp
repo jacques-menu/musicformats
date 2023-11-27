@@ -1326,8 +1326,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         ss <<
           "last measure element " <<
           lastMeasureElement->asString () <<
-          " is no barLine, inserting elem after it" <<
-          std::endl;
+          " is no barLine, inserting elem after it";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -2267,8 +2266,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
             getSegmentUpLinkToVoice ()->
               getVoiceName () <<
           "\"" <<
-          " is senza misura" <<
-          std::endl;
+          " is senza misura";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -5937,8 +5935,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
           "' in voice \"" <<
           voice->getVoiceName () <<
           "\" (" << context << ")" <<
-          ", line " << measureElement->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << measureElement->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6032,8 +6029,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 
         ss <<
           "*** the current harmonies measure is empty ***" <<
-          ", line " << inputLineNumber <<
-          std::endl;
+          ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6079,8 +6075,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
         ss <<
           "===> measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector: " <<
           measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector <<
-          ", fMeasureOrdinalNumberInVoice: " << fMeasureOrdinalNumberInVoice <<
-          std::endl;
+          ", fMeasureOrdinalNumberInVoice: " << fMeasureOrdinalNumberInVoice;
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

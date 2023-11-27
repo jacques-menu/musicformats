@@ -48,7 +48,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // global variable
-int msrStaff::sStaffMaxRegularVoices = 4;
+int msrStaff::sStaffMaxRegularVoices = 4; // JMI TEMP MOD v0.9.70
 
 S_msrStaff msrStaff::create (
   int              inputLineNumber,
@@ -263,8 +263,7 @@ void msrStaff::initializeStaff ()
           " as initial clef to staff \"" <<
           fStaffName <<
           "\" in part " <<
-          fStaffUpLinkToPart->getPartCombinedName () <<
-          std::endl;
+          fStaffUpLinkToPart->getPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -297,8 +296,7 @@ void msrStaff::initializeStaff ()
           "' as initial key to staff \"" <<
           fStaffName <<
           "\" in part " <<
-          fStaffUpLinkToPart->getPartCombinedName () <<
-          std::endl;
+          fStaffUpLinkToPart->getPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -329,8 +327,7 @@ void msrStaff::initializeStaff ()
           "' as initial transposition to staff \"" <<
           fStaffName <<
           "\" in part " <<
-          fStaffUpLinkToPart->getPartCombinedName () <<
-          std::endl;
+          fStaffUpLinkToPart->getPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -800,8 +797,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
-     // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
-          std::endl;
+     // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -824,8 +820,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
-     // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
-          std::endl;
+     // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -1057,8 +1052,7 @@ void msrStaff::registerVoiceByItsNumber (
         ss <<
           "Sorting the voices in staff \"" <<
           fStaffName << "\"" <<
-          ", line " << inputLineNumber <<
-          std::endl;
+          ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -1082,8 +1076,7 @@ void msrStaff::registerVoiceByItsNumber (
         ss <<
           "Sorting the voices in staff \"" <<
           fStaffName << "\"" <<
-          ", line " << inputLineNumber <<
-          std::endl;
+          ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -1295,8 +1288,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
           "Voice number '" << voiceNumber <<
           "' in staff \"" << fStaffName << "\"" <<
           " has staff relative number '" << number <<
-          '\'' <<
-          std::endl;
+          '\'';
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -1370,8 +1362,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
           voiceSequentialCounter <<
           " in staff \"" <<
           fStaffName <<
-          "\"" <<
-          std::endl;
+          "\"";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -2930,8 +2921,7 @@ void msrStaff::appendTranspositionToStaff (
           "' ignored because it is already present in staff " <<
           fStaffName <<
           "\" in part " <<
-          fStaffUpLinkToPart->getPartCombinedName () <<
-          std::endl;
+          fStaffUpLinkToPart->getPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

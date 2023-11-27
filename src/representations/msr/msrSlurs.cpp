@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <iomanip>      // std::setw, std::setprecision, ...
 
 #include <stack>
 
@@ -121,6 +122,18 @@ msrSlur::msrSlur (
 msrSlur::~msrSlur ()
 {}
 
+bool msrSlur::compareSlursStopsBeforeStarts (
+  const SMARTP<msrSlur>& first,
+  const SMARTP<msrSlur>& second)
+{
+  return
+    bool ( // JMI switch() here? v0.9.70
+      first->fSlurTypeKind
+        >
+      second->fSlurTypeKind
+    );
+}
+
 void msrSlur::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -188,7 +201,7 @@ void msrSlur::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -207,16 +220,13 @@ std::string msrSlur::asString () const
     fSlurNumber <<
 
     ", slurTypeKind: " <<
-    msrSlurTypeKindAsString (
-      fSlurTypeKind) <<
+    fSlurTypeKind <<
 
     ", slurLineTypeKind: " <<
-    msrLineTypeKindAsString (
-      fSlurLineTypeKind) <<
+    fSlurLineTypeKind <<
 
     ", slurPlacementKind: " <<
-    msrPlacementKindAsString (
-      fSlurPlacementKind) <<
+    fSlurPlacementKind <<
 
     ", line " << fInputStartLineNumber <<
     ']';
@@ -226,7 +236,40 @@ std::string msrSlur::asString () const
 
 void msrSlur::print (std::ostream& os) const
 {
-  os << asString () << std::endl;
+  os <<
+    "[Slur" <<
+    ", fSlurTypeKind: " << fSlurTypeKind <<
+    ", line " << fInputStartLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 19;
+
+  os <<
+    std::setw(fieldWidth) <<
+    "fSlurNumber" << ": " <<
+    fSlurNumber <<
+    std::endl <<
+
+    std::setw(fieldWidth) <<
+    "fSlurTypeKind" << ": " <<
+    fSlurTypeKind <<
+    std::endl <<
+
+    std::setw(fieldWidth) <<
+    "fSlurLineTypeKind" << ": " <<
+    fSlurLineTypeKind <<
+    std::endl <<
+
+    std::setw(fieldWidth) <<
+    "fSlurPlacementKind" << ": " <<
+    fSlurPlacementKind <<
+    std::endl;
+
+  --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrSlur& elt)

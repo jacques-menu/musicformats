@@ -239,8 +239,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
         ss <<
           "Creating a skip grace note" <<
           ", soundingWholeNotes: " << note->getMeasureElementSoundingWholeNotes ().asFractionString () <<
-          ", displayWholeNotes: " << note->getNoteDisplayWholeNotes ().asFractionString () <<
-          std::endl;
+          ", displayWholeNotes: " << note->getNoteDisplayWholeNotes ().asFractionString ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

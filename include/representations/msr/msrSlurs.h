@@ -106,6 +106,10 @@ class EXP msrSlur : public msrElement
     // public services
     // ------------------------------------------------------
 
+    static bool           compareSlursStopsBeforeStarts (
+                            const SMARTP<msrSlur>& first,
+                            const SMARTP<msrSlur>& second);
+
   public:
 
     // visitors

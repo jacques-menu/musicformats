@@ -9692,8 +9692,7 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
           elt->asShortString () <<
           "' to tempo '" <<
           tempo->asShortString () <<
-          '\'' <<
-          std::endl;
+          '\'';
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -9725,8 +9724,7 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
           elt->asShortString () <<
           "' to rehearsal mark '" <<
           rehearsalMark->asShortString () <<
-          '\'' <<
-          std::endl;
+          '\'';
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

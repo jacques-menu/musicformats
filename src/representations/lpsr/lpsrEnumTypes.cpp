@@ -1553,6 +1553,10 @@ std::string lpsrLyricsNotesDurationsKindAsString (
   // no CamelCase here, these strings are used in the command line options
 
   switch (lyricsNotesDurationsKind) {
+    case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+      result = "automatic";
+      break;
+
     case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
       result = "implicit";
       break;
@@ -1577,6 +1581,10 @@ void initializeLpsrLyricsNotesDurationsKindsMap ()
 
   // no CamelCase here, these strings are used in the command line options
 
+  gGlobalLpsrLyricsNotesDurationsKindsMap ["automatic"] =
+    lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic;
+  gGlobalLpsrLyricsNotesDurationsKindsMap ["explicit"] =
+    lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit;
   gGlobalLpsrLyricsNotesDurationsKindsMap ["implicit"] =
     lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit;
   gGlobalLpsrLyricsNotesDurationsKindsMap ["explicit"] =

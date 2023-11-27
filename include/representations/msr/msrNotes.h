@@ -916,6 +916,9 @@ class EXP msrNote : public msrTupletElement
                             const SMARTP<msrNote>& first,
                             const SMARTP<msrNote>& second);
 
+    int                   fetchNoteSlurStartsNumber () const;
+    int                   fetchNoteSlurStopsNumber () const;
+
   public:
 
     // visitors

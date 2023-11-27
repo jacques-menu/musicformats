@@ -4725,8 +4725,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
 
         ss <<
           "===> fCurrentNonGraceNoteClone: " <<
-          fCurrentNonGraceNoteClone->asString () <<
-          std::endl;
+          fCurrentNonGraceNoteClone->asString ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -4768,14 +4767,13 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
     // yes, create the after grace notes
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGraceNotes ()) {
-        std::stringstream ss;
+      std::stringstream ss;
 
-        ss <<
+      ss <<
         "Optimizing grace notes on trilled note '" <<
         elt->asShortString () <<
         "' as after grace notes " <<
-        ", line " << elt->getInputStartLineNumber ()<<
-        std::endl;
+        ", line " << elt->getInputStartLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -4866,12 +4864,11 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending rest note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4889,8 +4886,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending skip note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -4911,8 +4907,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending unpitched note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -4933,8 +4928,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending regular note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -5209,8 +5203,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending note clone " <<
           fCurrentNonGraceNoteClone->asShortString () << " to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

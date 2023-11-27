@@ -5155,8 +5155,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
           elt->asShortString () <<
           "' to tempo '" <<
           tempo->asShortString () <<
-          '\'' <<
-          std::endl;
+          '\'';
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -5191,8 +5190,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
           elt->asShortString () <<
           "' to rehearsal mark '" <<
           rehearsalMark->asShortString () <<
-          '\'' <<
-          std::endl;
+          '\'';
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6306,8 +6304,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending rest note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6328,8 +6325,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending skip note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6350,8 +6346,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending unpitched note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6372,8 +6367,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending regular note clone '" <<
           fCurrentNonGraceNoteClone->asShortString () << "' to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6650,8 +6644,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         ss <<
           "Appending note clone " <<
           fCurrentNonGraceNoteClone->asShortString () << " to voice clone " <<
-          fCurrentVoiceClone->getVoiceName () <<
-          std::endl;
+          fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

@@ -6139,12 +6139,11 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR tempo" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6181,8 +6180,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR rehearsal mark" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -6221,12 +6219,11 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR segno" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -6260,8 +6257,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "\" to an MSR dal segno " <<
           dalSegno->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6302,8 +6298,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           " to an MSR dal segno " <<
           dalSegno->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6340,8 +6335,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           " to an MSR dal segno " <<
           dalSegno->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6381,8 +6375,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           " to an MSR coda first " <<
           coda->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6423,8 +6416,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           " to an MSR coda second " <<
           coda->asString () <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6455,8 +6447,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR cresc" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6474,8 +6465,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
         ss <<
           "Creating an msrCrescDecresc crescendo" <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6512,8 +6502,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR decresc" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6531,8 +6520,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
         ss <<
           "Creating an msrCrescDecresc decrescendo" <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6565,8 +6553,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           msrPlacementKindAsString (
             fCurrentDirectionPlacementKind) <<
           "\"" <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -7110,8 +7097,7 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
       ss <<
         "Attaching beam " <<
         beam->asString () <<
-        " to tempoNote " << tempoNote->asString () <<
-        std::endl;
+        " to tempoNote " << tempoNote->asString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -9348,8 +9334,7 @@ The values of start, stop, and continue refer to how an
             fCurrentSlurTypeKind) <<
           ", slurLineType: " <<
           msrLineTypeKindAsString (
-            slurLineTypeKind) <<
-          std::endl;
+            slurLineTypeKind);
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -9908,8 +9893,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
         ss <<
           "Lyric name is empty, using \"" <<
           msrStanza::K_STANZA_NAME_UNKNOWN_ <<
-          "\" by default" <<
-          std::endl;
+          "\" by default";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -10856,8 +10840,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
         ss <<
           "+++++++++++++++++" <<
-          fCurrentPart <<
-          std::endl;
+          fCurrentPart;
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -11033,8 +11016,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
           mfSingularOrPlural (
             measuresToBeAdded, "empty measure", "empty measures") <<
           " to part " <<
-          fCurrentPart->getPartCombinedName () <<
-          std::endl;
+          fCurrentPart->getPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -16001,8 +15983,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
             tremoloMarksNumber, "mark", "marks") <<
           ", placement : " <<
           msrPlacementKindAsString (
-            singleTremoloPlacementKind) <<
-          std::endl;
+            singleTremoloPlacementKind);
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -18849,8 +18830,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
 
         ss <<
           "--> There is a tuplet start (kTupletTypeStart)" <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -18868,8 +18848,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
 
         ss <<
           "--> There is a tuplet continue (kTupletTypeContinue)" <<
-          ", line " << elt->getInputStartLineNumber () <<
-          std::endl;
+          ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -21698,8 +21677,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToCurrentNote ()
       ss <<
         "Attaching articulation " <<
         art->getArticulationKind () <<
-        " to note " << fCurrentNote->asString () <<
-        std::endl;
+        " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -21745,8 +21723,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToCurrentNote ()
       ss <<
         "Attaching technical " <<
         tech->asString () <<
-        " to note " << fCurrentNote->asString () <<
-        std::endl;
+        " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -21791,8 +21768,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToCurrentNote ()
       ss <<
         "Attaching technical with integer " <<
         tech->asString () <<
-        " to note " << fCurrentNote->asString () <<
-        std::endl;
+        " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -21837,8 +21813,7 @@ if (gTraceOahGroup->getTraceTechnicals ()) {
       ss <<
         "Attaching technical with integer " <<
         tech->asString () <<
-        " to note " << fCurrentNote->asString () <<
-        std::endl;
+        " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -21883,8 +21858,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToCurrentNote ()
       ss <<
         "Attaching technical with std::string " <<
         tech->asString () <<
-        " to note " << fCurrentNote->asString () <<
-        std::endl;
+        " to note " << fCurrentNote->asString ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -22131,8 +22105,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
       if (gTraceOahGroup->getTraceArticulations ()) {
         gLog <<
           "Attaching articulation " <<  (*i) <<
-          " to chord " << chord <<
-          std::endl;
+          " to chord " << chord;
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -22176,8 +22149,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
       if (gTraceOahGroup->getTraceOrnaments ()) {
         gLog <<
           "Attaching ornament " <<  (*i) << " to chord " <<
-          chord <<
-          std::endl;
+          chord;
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -24578,8 +24550,7 @@ Bool mxsr2msrTranslator::isThereAStaffChange (
         ss <<
           "*** There is staff change upon note " <<
           fCurrentNote->asShortString () <<
-          ", line " << inputLineNumber <<
-          std::endl;
+          ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -25584,8 +25555,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
         ss <<
           "==> fCurrentOuterMostTupletRelativeOffset becomes: " <<
           fCurrentOuterMostTupletRelativeOffset.asString () <<
-          ", fCurrentNote" << fCurrentNote->asString () <<
-          std::endl;
+          ", fCurrentNote" << fCurrentNote->asString ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -26517,8 +26487,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
           "Creating grace notes for note " <<
           fCurrentNote->asString () <<
           " in voice \"" <<
-          fCurrentNoteVoice->getVoiceName () << "\"" <<
-          std::endl;
+          fCurrentNoteVoice->getVoiceName () << "\"";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -26716,8 +26685,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
           ", line " << fCurrentNote->getInputStartLineNumber () <<
           ", to voice \"" <<
           fCurrentNoteVoice->getVoiceName () <<
-          "\"" <<
-          std::endl;
+          "\"";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

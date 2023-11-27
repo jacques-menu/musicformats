@@ -1250,6 +1250,9 @@ class EXP lpsr2lilypondTranslator :
     void                  generateCodeAfterSyllableIfRelevant (
                             S_msrSyllable& syllable);
 
+    void                  generateLyricExtenderAndOrSkipWithAutomaticDurations (
+                            S_msrSyllable& syllable);
+
     void                  generateLyricExtenderAndOrSkipWithImplicitDurations (
                             S_msrSyllable& syllable);
 

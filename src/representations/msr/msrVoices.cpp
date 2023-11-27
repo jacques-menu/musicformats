@@ -1222,8 +1222,7 @@ void msrVoice::setNextMeasureNumberInVoice (
           "Setting multi-measure rests next measure number to '" <<
           nextMeasureNumber <<
           "' in voice \"" <<
-          fVoiceName << "\"" <<
-          std::endl;
+          fVoiceName << "\"";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -2159,8 +2158,7 @@ void msrVoice::appendTimeSignatureToVoice (
     ss <<
       "Appending time signature " <<
       timeSignature->asString () <<
-      " to voice \"" << fVoiceName << "\"" <<
-      std::endl;
+      " to voice \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4778,8 +4776,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           "' to the initial elements in voice \"" <<
           fVoiceName <<
           "\" (" << context << ")" <<
-          ", line " << inputLineNumber <<
-          std::endl;
+          ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -4820,8 +4817,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
           "' contains no measure, not moved to the initial elements in voice \"" <<
           fVoiceName <<
           "\" (" << context << ")" <<
-          ", line " << inputLineNumber <<
-          std::endl;
+          ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -9797,8 +9793,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
           "Creating a repeat upon its start in voice clone \"" <<
           fVoiceName <<
           "\"" <<
-          ", line " << inputLineNumber <<
-          std::endl;
+          ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,

@@ -5014,7 +5014,7 @@ R"(Add stanzas numbers to lyrics in LilyPond.)",
 
   const lpsrLyricsNotesDurationsKind
     lpsrLyricsNotesDurationsKindDefaultValue =
-      lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit; // default value
+      lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic; // default value
 
   fLyricsNotesDurationsKind = lpsrLyricsNotesDurationsKindDefaultValue;
 

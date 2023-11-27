@@ -632,8 +632,7 @@ void msrPartGroup::removePartFromPartGroup (
     ss <<
       "Removing part " <<
       partToBeRemoved->getPartCombinedName () <<
-      " from part group " << asString () <<
-      std::endl;
+      " from part group " << asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
