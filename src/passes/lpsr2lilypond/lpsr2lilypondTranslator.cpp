@@ -20061,7 +20061,7 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
     std::stringstream ss;
 
     ss <<
-      "% --> generateGraceNotesGroup()" <<
+      "% --> generateGraceNotesGroup()" << // JMI BOF
       ", graceNotesGroupKind: " << graceNotesGroupKind <<
       ", graceNotesGroupIsSlashed: " << graceNotesGroupIsSlashed <<
       ", graceNotesGroupIsBeamed: " << graceNotesGroupIsBeamed <<
