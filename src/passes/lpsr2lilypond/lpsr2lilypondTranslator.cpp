@@ -10217,7 +10217,11 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
       std::endl;
 
     switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
-        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+      case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+        // no \lyricsto in that case
+        fLilypondCodeStream <<
+          "\\" << stanza->getStanzaAlphabeticName () <<
+          std::endl;
           break;
 
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14145,13 +14149,28 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSingle" <<
+              ", line " << syllable->getInputStartLineNumber () <<
+              " %} " <<
+              std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
+
+          fLilypondCodeStream <<
+            '\"' <<
+            syllableElementsListAsLilypondString (
+              syllable->getSyllableElementsList ()) <<
+            "\" ";
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
-              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_IMPLICIT_kSyllableSingle" <<
+              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSingle" <<
               ", line " << syllable->getInputStartLineNumber () <<
               " %} " <<
               std::endl;
@@ -14215,6 +14234,21 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableBegin" <<
+              ", line " << syllable->getInputStartLineNumber () <<
+              " %} " <<
+              std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
+
+          fLilypondCodeStream <<
+            '\"' <<
+            syllableElementsListAsLilypondString (
+              syllable->getSyllableElementsList ()) <<
+            "\" ";
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14264,6 +14298,21 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableMiddle" <<
+              ", line " << syllable->getInputStartLineNumber () <<
+              " %} " <<
+              std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
+
+          fLilypondCodeStream <<
+            '\"' <<
+            syllableElementsListAsLilypondString (
+              syllable->getSyllableElementsList ()) <<
+            "\" ";
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14313,6 +14362,21 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableEnd" <<
+              ", line " << syllable->getInputStartLineNumber () <<
+              " %} " <<
+              std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
+
+          fLilypondCodeStream <<
+            '\"' <<
+            syllableElementsListAsLilypondString (
+              syllable->getSyllableElementsList ()) <<
+            "\" ";
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14374,6 +14438,22 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableOnRestNote" <<
+              ", line " << syllable->getInputStartLineNumber () <<
+              " %} " <<
+              std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
+
+          fLilypondCodeStream <<
+            '\"' <<
+            syllableElementsListAsLilypondString (
+              syllable->getSyllableElementsList ()) <<
+            "\" ";
+          break;
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14425,6 +14505,15 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSkipOnRestNote" <<
+              ", line " << syllable->getInputStartLineNumber () <<
+              " %} " <<
+              std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14468,6 +14557,15 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+#ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceLyrics ()) {
+            fLilypondCodeStream <<
+              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSkipOnNonRestNote" <<
+              ", line " << syllable->getInputStartLineNumber () <<
+              " %} " <<
+              std::endl;
+          }
+#endif // MF_TRACE_IS_ENABLED
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
