@@ -54,7 +54,7 @@ std::string msrUserSelectedLineBreakKindAsString (
 S_msrLineBreak msrLineBreak::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  const std::string&  nextBarNumber,
+  int                 nextBarPuristNumber,
   msrUserSelectedLineBreakKind
                       userSelectedLineBreakKind)
 {
@@ -62,7 +62,7 @@ S_msrLineBreak msrLineBreak::create (
     new msrLineBreak (
       inputLineNumber,
       upLinkToMeasure,
-      nextBarNumber,
+      nextBarPuristNumber,
       userSelectedLineBreakKind);
   assert (obj != nullptr);
   return obj;
@@ -70,7 +70,7 @@ S_msrLineBreak msrLineBreak::create (
 
 S_msrLineBreak msrLineBreak::create (
   int                inputLineNumber,
-  const std::string& nextBarNumber,
+  int                nextBarPuristNumber,
   msrUserSelectedLineBreakKind
                      userSelectedLineBreakKind)
 {
@@ -78,20 +78,20 @@ S_msrLineBreak msrLineBreak::create (
     msrLineBreak::create (
       inputLineNumber,
       gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-      nextBarNumber,
+      nextBarPuristNumber,
       userSelectedLineBreakKind);
 }
 
 msrLineBreak::msrLineBreak (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  const std::string&  nextBarNumber,
+  int                 nextBarPuristNumber,
   msrUserSelectedLineBreakKind
                       userSelectedLineBreakKind)
     : msrMeasureElement (
         inputLineNumber)
 {
-  fNextBarNumber = nextBarNumber;
+  fNextBarPuristNumber = nextBarPuristNumber;
 
   fUserSelectedLineBreakKind = userSelectedLineBreakKind;
 
@@ -100,7 +100,7 @@ msrLineBreak::msrLineBreak (
     std::stringstream ss;
 
     ss <<
-      "Constructing a break before measure " << fNextBarNumber <<
+      "Constructing a break before measure " << fNextBarPuristNumber <<
       ", fUserSelectedLineBreakKind: " <<
       msrUserSelectedLineBreakKindAsString (
         fUserSelectedLineBreakKind) <<
@@ -226,12 +226,13 @@ std::string msrLineBreak::asString () const
   std::stringstream ss;
 
   ss <<
-    "LineBreak" <<
-    ", nextBarNumber = \"" << fNextBarNumber << "\"" <<
+    "[LineBreak" <<
+    ", nextBarPuristNumber = \"" << fNextBarPuristNumber << "\"" <<
     ", fUserSelectedLineBreakKind: " <<
     msrUserSelectedLineBreakKindAsString (
       fUserSelectedLineBreakKind) <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputStartLineNumber <<
+    ']';
 
   return ss.str ();
 }
@@ -275,6 +276,7 @@ std::string msrUserSelectedPageBreakKindAsString (
 S_msrPageBreak msrPageBreak::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
+  int                 nextBarPuristNumber,
   msrUserSelectedPageBreakKind
                       userSelectedPageBreakKind)
 {
@@ -282,6 +284,7 @@ S_msrPageBreak msrPageBreak::create (
     new msrPageBreak (
       inputLineNumber,
       upLinkToMeasure,
+      nextBarPuristNumber,
       userSelectedPageBreakKind);
   assert (obj != nullptr);
   return obj;
@@ -289,6 +292,7 @@ S_msrPageBreak msrPageBreak::create (
 
 S_msrPageBreak msrPageBreak::create (
   int                 inputLineNumber,
+  int                 nextBarPuristNumber,
   msrUserSelectedPageBreakKind
                       userSelectedPageBreakKind)
 {
@@ -296,12 +300,14 @@ S_msrPageBreak msrPageBreak::create (
     msrPageBreak::create (
       inputLineNumber,
       gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
+      nextBarPuristNumber,
       userSelectedPageBreakKind);
 }
 
 msrPageBreak::msrPageBreak (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
+  int                 nextBarPuristNumber,
   msrUserSelectedPageBreakKind
                       userSelectedPageBreakKind)
     : msrMeasureElement (
@@ -323,6 +329,8 @@ msrPageBreak::msrPageBreak (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  fNextBarPuristNumber = nextBarPuristNumber;
 
   fUserSelectedPageBreakKind = userSelectedPageBreakKind;
 }
@@ -440,11 +448,13 @@ std::string msrPageBreak::asString () const
   std::stringstream ss;
 
   ss <<
-    "PageBreak" <<
+    "[PageBreak" <<
+    ", nextBarPuristNumber = \"" << fNextBarPuristNumber << "\"" <<
     ", fUserSelectedPageBreakKind: " <<
     msrUserSelectedPageBreakKindAsString (
       fUserSelectedPageBreakKind) <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputStartLineNumber <<
+    ']';
 
   return ss.str ();
 }

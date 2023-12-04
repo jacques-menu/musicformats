@@ -104,7 +104,7 @@ class EXP mfService : public smartable
     // ------------------------------------------------------
 
     void                  appendPassToService (
-                            S_mfPass pass)
+                            const S_mfPass& pass)
                               {
                                 fServicePassesList.push_back (pass);
                               }

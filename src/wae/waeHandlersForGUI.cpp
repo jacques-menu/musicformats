@@ -188,7 +188,7 @@ void waeHandlerForGUI::waeErrorWithException (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except)
+  const S_mfException& except)
 {
   waeErrorWithoutException (
     context,
@@ -208,7 +208,7 @@ void waeHandlerForGUI::waeErrorWithExceptionWithInputLocation (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except)
+  const S_mfException& except)
 {
   waeErrorWithoutExceptionWithInputLocation (
     context,
@@ -250,7 +250,7 @@ void waeHandlerForGUI::waeInternalErrorWithExceptionWithInputLocation (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except)
+  const S_mfException& except)
 {
   waeErrorWithoutExceptionWithInputLocation (
     context,

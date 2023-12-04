@@ -2237,6 +2237,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
           msrPageBreak::create (
             elt->getInputStartLineNumber (),
             fCurrentMeasureClone,
+            fCurrentMeasureClone->getMeasurePuristNumber (),
             msrUserSelectedPageBreakKind::kUserSelectedPageBreakYes);
 
       fCurrentMeasureClone->
@@ -2331,12 +2332,17 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
     elt->createSyllableNewbornClone (
       fCurrentPartClone);
 
-  // add it to the current stanza clone or current note clone
+//   // set the syllable's measure uplink
+//   syllable->
+//     setSyllableUpLinkToMeasure (fCurrentMeasureClone);
+
+  // append it to the current stanza clone or current note clone
   if (fOnGoingStanza) { // fCurrentStanzaClone JMI
     // visiting a syllable as a stanza member
     fCurrentStanzaClone->
       appendSyllableToStanzaClone (
-        fCurrentSyllableClone);
+        fCurrentSyllableClone,
+        fCurrentMeasureClone);
   }
 
   else if (fOnGoingNonGraceNote) { // JMI

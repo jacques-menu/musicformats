@@ -105,17 +105,6 @@ class EXP msrChord : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override;
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
-//
-//     void                  setChordUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getChordUpLinkToMeasure () const;
-
     // uplink to tuplet
     void                  setChordShortcutUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
@@ -533,9 +522,6 @@ class EXP msrChord : public msrTupletElement
 
     // private fields
     // ------------------------------------------------------
-
-    // uplink to measure
-//     S_msrMeasure          fChordUpLinkToMeasure;
 
     // uplink to tuplet
     S_msrTuplet           fChordShortcutUpLinkToTuplet;

@@ -103,17 +103,6 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override;
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
-//
-//     void                  setMusicXMLPrintLayoutUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getMusicXMLPrintLayoutUpLinkToMeasure () const;
-
     void                  setPageLayout (S_msrPageLayout pageLayout)
                               { fPageLayout = pageLayout; }
 
@@ -201,8 +190,6 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
-
-//     S_msrMeasure          fMusicXMLPrintLayoutUpLinkToMeasure;
 
     S_msrPageLayout       fPageLayout;
 

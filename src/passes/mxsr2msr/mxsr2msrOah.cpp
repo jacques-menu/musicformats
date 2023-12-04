@@ -593,7 +593,7 @@ void mxsr2msrOahGroup::initializeMxsr2msrPartsOptions ()
   S_oahSubGroup subGroup =
     oahSubGroup::create (
       "Parts",
-      "help-mxsr-to-msr-parts", "hm2mparts",
+      "help-mxsr-to-msr-parts", "hmx2mparts",
 R"()",
     oahElementVisibilityKind::kElementVisibilityWhole,
     this);
@@ -605,11 +605,11 @@ R"()",
 
   fIgnoreMusicXMLPartIDAtom =
     oahStringSetElementAtom::create (
-      "ignore-musicxml-part-id", "imxmlpi",
+      "ignore-musicxml-part-with-id", "igmxmlpartwithid",
 R"(Ignore the part with ID PART_ID, which is a std::string.
 There can be several occurrences of this option.
 All the parts not ignored are kept.
-This option is incompatible with '-mkpi, -msr-keep-musicxml-part-id'.)",
+This option is incompatible with '-mkpi, -msr-keep-musicxml-part-with-id'.)",
       "PART_ID",
       "fPartsIgnoreIDSet",
       fPartsIgnoreIDSet);
@@ -623,11 +623,11 @@ This option is incompatible with '-mkpi, -msr-keep-musicxml-part-id'.)",
 
   fIgnoreMusicXMLPartNameAtom =
     oahStringSetElementAtom::create (
-      "ignore-musicxml-part-name", "imxmlpn",
+      "ignore-musicxml-part-with-name", "igmxmlpartwithname",
 R"(Ignore the part named PART_NAME, which is a std::string.
 There can be several occurrences of this option.
 All the parts not ignored are kept.
-This option is incompatible with '-mkpn, -msr-keep-musicxml-part-name'.)",
+This option is incompatible with '-mkpn, -msr-keep-musicxml-part-with-name'.)",
       "PART_NAME",
       "fMusicXMLPartsIgnoreNameSet",
       fMusicXMLPartsIgnoreNameSet);
@@ -641,11 +641,11 @@ This option is incompatible with '-mkpn, -msr-keep-musicxml-part-name'.)",
 
   fKeepMusicXMLPartIDAtom =
     oahStringSetElementAtom::create (
-      "keep-musicxml-part-id", "kmxmlpi",
+      "keep-musicxml-part-with-id", "kmxmlpartwithid",
 R"(Keep the part with ID PART_ID, which is a std::string.
 There can be several occurrences of this option.
 All the parts not kept are ignored.
-This option is incompatible with '-mopi, -msr-ignore-musicxml-part-id'.)",
+This option is incompatible with '-mopi, -msr-ignore-musicxml-part-with-id'.)",
       "PART_ID",
       "fMusicXMLPartsKeepIDSet",
       fMusicXMLPartsKeepIDSet);
@@ -659,11 +659,11 @@ This option is incompatible with '-mopi, -msr-ignore-musicxml-part-id'.)",
 
   fKeepMusicXMLPartNameAtom =
     oahStringSetElementAtom::create (
-      "keep-musicxml-part-name", "kmxmlpn",
+      "keep-musicxml-part-with-name", "kmxmlpartwithname",
 R"(Keep the part named PART_NAME, which is a std::string.
 There can be several occurrences of this option.
 All the parts not kept are ignored.
-This option is incompatible with '-mopn, -msr-ignore-musicxml-part-name'.)",
+This option is incompatible with '-mopn, -msr-ignore-musicxml-part-with-name'.)",
       "PART_NAME",
       "fMusicXMLPartsKeepNameSet",
       fMusicXMLPartsKeepNameSet);

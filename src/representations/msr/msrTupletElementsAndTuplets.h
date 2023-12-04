@@ -133,17 +133,6 @@ class EXP msrTuplet : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override;
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
-//
-//     void                  setTupletUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getTupletUpLinkToMeasure () const;
-
     // tuplet kind
     void                  setTupletKind (
                             msrTupletInKind tupletKind)
@@ -270,13 +259,11 @@ class EXP msrTuplet : public msrTupletElement
     // private fields
     // ------------------------------------------------------
 
-    // uplink to measure
-//     S_msrMeasure          fTupletUpLinkToMeasure;
-
-    msrTupletInKind       fTupletKind;
-
     // uplink to tuplet
     S_msrTuplet           fTupletShortcutUpLinkToTuplet;
+
+    // tuplet kind
+    msrTupletInKind       fTupletKind;
 
     // number
     int                   fTupletNumber;

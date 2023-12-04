@@ -30,7 +30,7 @@ service : xml2ly
 input :test.mfsl
 
 # parts
-  -keep-musicxml-part-id P1
+  -keep-musicxml-part-with-id P1
 
 # the voices choice
 choice VOICES_CHOICE : voice1Only | voice2Only ;
@@ -843,9 +843,9 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl 
 --> ./test.mfsl:4.25-33: name [test.mfsl]
   ==> input: test.mfsl
 
---> test.mfsl:6.11-32: option [-keep-musicxml-part-id]
+--> test.mfsl:6.11-32: option [-keep-musicxml-part-with-id]
 --> test.mfsl:6.34-35: name [P1]
-  ==> option -keep-musicxml-part-id P1
+  ==> option -keep-musicxml-part-with-id P1
 
 --> test.mfsl:8.1-26: choice
 --> test.mfsl:8.28-40: name [VOICES_CHOICE]

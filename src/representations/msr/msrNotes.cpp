@@ -369,121 +369,6 @@ void msrNote::initializeNote ()
 msrNote::~msrNote ()
 {}
 
-// void msrNote::setMeasureElementUpLinkToMeasure (
-//   const S_msrMeasure& measure)
-// {
-//   setNoteUpLinkToMeasure (measure);
-// }
-//
-// S_msrMeasure msrNote::getMeasureElementUpLinkToMeasure () const
-// {
-//   return getNoteUpLinkToMeasure ();
-// }
-//
-// void msrNote::setNoteUpLinkToMeasure (
-//   const S_msrMeasure& measure)
-// {
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     measure != nullptr,
-//     "measure is null");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
-//     ++gIndenter;
-//
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Setting the uplink to measure of note " <<
-//       asString () <<
-//       " to measure " << measure->asString () <<
-//       " in measure '" <<
-//       measure->asString () <<
-//       std::endl;
-//
-//     --gIndenter;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fNoteUpLinkToMeasure = measure;
-// }
-
-// S_msrMeasure msrNote::getNoteUpLinkToMeasure () const
-// {
-//   return fNoteUpLinkToMeasure;
-// }
-
-//________________________________________________________________________
-// S_msrMeasure msrNote::fetchMeasureElementUpLinkToMeasure () const
-// {
-//   S_msrMeasure result;
-//
-//   switch (fNoteKind) {
-//     case msrNoteKind::kNote_UNKNOWN_:
-//       break;
-//
-//     case msrNoteKind::kNoteRegularInMeasure:
-//     case msrNoteKind::kNoteRestInMeasure:
-//     case msrNoteKind::kNoteSkipInMeasure:
-//     case msrNoteKind::kNoteUnpitchedInMeasure:
-//       result = fNoteUpLinkToMeasure;
-//       break;
-//
-//     case msrNoteKind::kNoteRegularInChord:
-//       if (fNoteShortcutUpLinkToChord) {
-//         result =
-//           fNoteShortcutUpLinkToChord->
-//             fMeasureElementUpLinkToMeasure ();
-//       }
-//       break;
-//
-//     case msrNoteKind::kNoteRegularInTuplet:
-//     case msrNoteKind::kNoteRestInTuplet:
-//     case msrNoteKind::kNoteUnpitchedInTuplet:
-//       if (fNoteShortcutUpLinkToTuplet) {
-//         result =
-//           fNoteShortcutUpLinkToTuplet->
-//             fMeasureElementUpLinkToMeasure ();
-//       }
-//       break;
-//
-//     case msrNoteKind::kNoteInDoubleTremolo:
-//       // JMI
-//       break;
-//
-//     case msrNoteKind::kNoteRegularInGraceNotesGroup:
-//     case msrNoteKind::kNoteSkipInGraceNotesGroup:
-//     /* JMi
-//       if (fNoteShortcutUpLinkToGraceNotesGroup) {
-//         result =
-//           fNoteShortcutUpLinkToGraceNotesGroup->
-//             getGraceNotesGroupUpLinkToVoice ();
-//               / * JMI
-//               getGraceNotesGroupUpLinkToNote ()->
-//               fetchNoteUpLinkToVoice ();
-//               * /
-//       }
-//     */
-//       break;
-//
-//     case msrNoteKind::kNoteInChordInGraceNotesGroup:
-//       break;
-//
-//     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-//       break;
-//   } // switch
-//
-//   return result;
-// }
-
 // uplink to grace notes group
 S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
 {
@@ -669,7 +554,7 @@ S_msrPartGroup msrNote::fetchNoteUpLinkToPartGroup () const
   return result;
 }
 
-S_msrScore msrNote::fetchUpLinkToNoteToScore () const
+S_msrScore msrNote::fetchNoteUpLinkToScore () const
 {
   S_msrScore result;
 
@@ -3733,7 +3618,7 @@ void msrNote::browseData (basevisitor* v)
     // fetch the score
     S_msrScore
       score =
-        fetchUpLinkToNoteToScore ();
+        fetchNoteUpLinkToScore ();
 
     if (score) {
       Bool

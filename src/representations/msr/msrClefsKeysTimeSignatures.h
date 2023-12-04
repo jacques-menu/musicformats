@@ -131,20 +131,6 @@ class EXP msrClef : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override
-//                               { setClefUpLinkToMeasure (measure); }
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-//                               { return getClefUpLinkToMeasure (); }
-//
-//     void                  setClefUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getClefUpLinkToMeasure () const
-//                               { return fClefUpLinkToMeasure; }
-
     msrClefKind           getClefKind () const
                               { return fClefKind; }
 
@@ -192,8 +178,6 @@ class EXP msrClef : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
-
-//     S_msrMeasure          fClefUpLinkToMeasure;
 
     msrClefKind           fClefKind;
     int                   fClefStaffNumber; // 0 by default in MSR,
@@ -386,20 +370,6 @@ class EXP msrKey : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override
-//                               { setKeyUpLinkToMeasure (measure); }
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-//                               { return getKeyUpLinkToMeasure (); }
-//
-//     void                  setKeyUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getKeyUpLinkToMeasure () const
-//                               { return fKeyUpLinkToMeasure; }
-
     msrKeyKind            getKeyKind () const
                               { return fKeyKind; }
 
@@ -462,8 +432,6 @@ class EXP msrKey : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
-
-//     S_msrMeasure          fKeyUpLinkToMeasure;
 
     msrKeyKind            fKeyKind;
 
@@ -684,20 +652,6 @@ class EXP msrTimeSignature : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override
-//                               { setTimeSignatureUpLinkToMeasure (measure); }
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-//                               { return getTimeSignatureUpLinkToMeasure (); }
-//
-//     void                  setTimeSignatureUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getTimeSignatureUpLinkToMeasure () const
-//                               { return fTimeSignatureUpLinkToMeasure; }
-
     msrTimeSignatureSymbolKind
                           getTimeSignatureSymbolKind () const
                               { return fTimeSignatureSymbolKind; }
@@ -749,8 +703,6 @@ class EXP msrTimeSignature : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
-
-//     S_msrMeasure          fTimeSignatureUpLinkToMeasure;
 
     msrTimeSignatureSymbolKind
                           fTimeSignatureSymbolKind;
@@ -834,26 +786,6 @@ class EXP msrClefKeyTimeSignatureGroup : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override
-//                               {
-//                                 setClefKeyTimeSignatureGroupUpLinkToMeasure (
-//                                   measure);
-//                               }
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-//                               {
-//                                 return
-//                                   getClefKeyTimeSignatureGroupUpLinkToMeasure ();
-//                               }
-//
-//     void                  setClefKeyTimeSignatureGroupUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getClefKeyTimeSignatureGroupUpLinkToMeasure () const
-//                               { return fClefKeyTimeSignatureGroupUpLinkToMeasure; }
-
     int                   getGroupInputLineNumber () const
                               { return fGroupInputLineNumber; }
 
@@ -911,8 +843,6 @@ class EXP msrClefKeyTimeSignatureGroup : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
-
-//     S_msrMeasure          fClefKeyTimeSignatureGroupUpLinkToMeasure;
 
     int                   fGroupInputLineNumber; // start/end line numbers??? JMI v0.9.70
 

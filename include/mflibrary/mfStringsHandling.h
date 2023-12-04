@@ -310,6 +310,9 @@ std::string mfDoubleQuoteString (
 std::string mfDoubleQuoteStringContentsOnly (
   const std::string& theString);
 
+std::string mfDoubleQuoteStringIfNonWord (
+  const std::string& theString);
+
 std::string mfSingleQuoteString (
   const std::string& theString);
 std::string mfSingleQuoteStringContentsOnly (

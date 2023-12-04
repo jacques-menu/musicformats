@@ -41,13 +41,13 @@ class EXP msrLineBreak : public msrMeasureElement
     static SMARTP<msrLineBreak> create (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const std::string&  nextBarNumber,
+                            int                 nextBarPuristNumber,
                             msrUserSelectedLineBreakKind
                                                 userSelectedLineBreakKind);
 
     static SMARTP<msrLineBreak> create (
                             int                 inputLineNumber,
-                            const std::string&  nextBarNumber,
+                            int                 nextBarPuristNumber,
                             msrUserSelectedLineBreakKind
                                                 userSelectedLineBreakKind);
 
@@ -59,7 +59,7 @@ class EXP msrLineBreak : public msrMeasureElement
                           msrLineBreak (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const std::string&  nextBarNumber,
+                            int                 nextBarPuristNumber,
                             msrUserSelectedLineBreakKind
                                                 userSelectedLineBreakKind);
 
@@ -70,21 +70,8 @@ class EXP msrLineBreak : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override
-//                               { setLineBreakUpLinkToMeasure (measure); }
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-//                               { return getLineBreakUpLinkToMeasure (); }
-//
-//     void                  setLineBreakUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getLineBreakUpLinkToMeasure () const
-//                               { return fLineBreakUpLinkToMeasure; }
-
-    std::string           getNextBarNumber () const
-                              { return fNextBarNumber; }
+   int                   getNextBarPuristNumber () const
+                              { return fNextBarPuristNumber; }
 
     msrUserSelectedLineBreakKind
                           getUserSelectedLineBreakKind () const
@@ -119,9 +106,7 @@ class EXP msrLineBreak : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-//     S_msrMeasure          fLineBreakUpLinkToMeasure;
-
-    std::string           fNextBarNumber;
+    int                   fNextBarPuristNumber;
 
     msrUserSelectedLineBreakKind
                           fUserSelectedLineBreakKind;
@@ -150,11 +135,13 @@ class EXP msrPageBreak : public msrMeasureElement
     static SMARTP<msrPageBreak> create (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
+                            int                 nextBarPuristNumber,
                             msrUserSelectedPageBreakKind
                                                 userSelectedPageBreakKind);
 
     static SMARTP<msrPageBreak> create (
                             int                 inputLineNumber,
+                            int                 nextBarPuristNumber,
                             msrUserSelectedPageBreakKind
                                                 userSelectedPageBreakKind);
 
@@ -166,6 +153,7 @@ class EXP msrPageBreak : public msrMeasureElement
                           msrPageBreak (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
+                            int                 nextBarPuristNumber,
                             msrUserSelectedPageBreakKind
                                                 userSelectedPageBreakKind);
 
@@ -176,18 +164,8 @@ class EXP msrPageBreak : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override
-//                               { setPageBreakUpLinkToMeasure (measure); }
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-//                               { return getPageBreakUpLinkToMeasure (); }
-//
-//     void                  setPageBreakUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getPageBreakUpLinkToMeasure () const
-//                               { return fPageBreakUpLinkToMeasure; }
+    int                   getNextBarPuristNumber () const
+                              { return fNextBarPuristNumber; }
 
     msrUserSelectedPageBreakKind
                           getUserSelectedPageBreakKind () const
@@ -222,7 +200,7 @@ class EXP msrPageBreak : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-//     S_msrMeasure          fPageBreakUpLinkToMeasure;
+    int                   fNextBarPuristNumber;
 
     msrUserSelectedPageBreakKind
                           fUserSelectedPageBreakKind;

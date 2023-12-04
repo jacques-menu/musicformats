@@ -83,52 +83,6 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
 msrMusicXMLPrintLayout::~msrMusicXMLPrintLayout ()
 {}
 
-// void msrMusicXMLPrintLayout::setMeasureElementUpLinkToMeasure (
-//   const S_msrMeasure& measure)
-// {
-//   setMusicXMLPrintLayoutUpLinkToMeasure (measure);
-// }
-//
-// S_msrMeasure msrMusicXMLPrintLayout::getMeasureElementUpLinkToMeasure () const
-// {
-//   return getMusicXMLPrintLayoutUpLinkToMeasure ();
-// }
-//
-// void msrMusicXMLPrintLayout::setMusicXMLPrintLayoutUpLinkToMeasure (
-//   const S_msrMeasure& measure)
-// {
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     measure != nullptr,
-//     "measure is null");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasures ()) {
-//     ++gIndenter;
-//
-//     gLog <<
-//       "Setting the uplink to measure of print layout " <<
-//       asString () <<
-//       " to measure " << measure->asString () <<
-//       "' in measure '" <<
-//       measure->asString () <<
-//       std::endl;
-//
-//     --gIndenter;
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fMusicXMLPrintLayoutUpLinkToMeasure = measure;
-// }
-
-// S_msrMeasure msrMusicXMLPrintLayout::getMusicXMLPrintLayoutUpLinkToMeasure () const
-// {
-//   return fMusicXMLPrintLayoutUpLinkToMeasure;
-// }
-
 void msrMusicXMLPrintLayout::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED

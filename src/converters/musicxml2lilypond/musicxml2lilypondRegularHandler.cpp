@@ -559,10 +559,10 @@ void xml2lyRegularHandler::createPartsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-musicxml-part-id", subGroup);
-  registerAtomInRegularSubgroup ("ignore-musicxml-part-name", subGroup);
-  registerAtomInRegularSubgroup ("keep-musicxml-part-id", subGroup);
-  registerAtomInRegularSubgroup ("keep-musicxml-part-name", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-part-with-id", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-part-with-name", subGroup);
+  registerAtomInRegularSubgroup ("keep-musicxml-part-with-id", subGroup);
+  registerAtomInRegularSubgroup ("keep-musicxml-part-with-name", subGroup);
   registerAtomInRegularSubgroup ("msr-rename-part", subGroup);
 
   registerAtomInRegularSubgroup ("ignore-musicxml-staff-number", subGroup);

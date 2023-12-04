@@ -43,52 +43,6 @@ msrTupletElement::msrTupletElement (
 msrTupletElement::~msrTupletElement ()
 {}
 
-// void msrTupletElement::setMeasureElementUpLinkToMeasure (
-//   const S_msrMeasure& measure)
-// {
-//   setTupletElementUpLinkToMeasure (measure);
-// }
-//
-// S_msrMeasure msrTupletElement::getMeasureElementUpLinkToMeasure () const
-// {
-//   return getTupletElementUpLinkToMeasure ();
-// }
-//
-// void msrTupletElement::setTupletElementUpLinkToMeasure (
-//   const S_msrMeasure& measure)
-// {
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     measure != nullptr,
-//     "measure is null");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     ++gIndenter;
-//
-//     gLog <<
-//       "Setting the uplink to measure of tuplet element " <<
-//       asString () <<
-//       " to measure " << measure->asString () <<
-//       "' in measure '" <<
-//       measure->asString () <<
-//       std::endl;
-//
-//     --gIndenter;
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fTupletElementUpLinkToMeasure = measure;
-// }
-//
-// S_msrMeasure msrTupletElement::getTupletElementUpLinkToMeasure () const
-// {
-//   return fTupletElementUpLinkToMeasure;
-// }
-
 std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt)
 {
   if (elt) {

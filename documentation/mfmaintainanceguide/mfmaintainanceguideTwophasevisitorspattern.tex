@@ -411,7 +411,7 @@ void msrNote::browseData (basevisitor* v)
     // fetch the score
     S_msrScore
       score =
-        fetchUpLinkToNoteToScore ();
+        fetchNoteUpLinkToScore ();
 
     if (score) {
       Bool

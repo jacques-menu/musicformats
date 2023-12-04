@@ -39,11 +39,11 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 Sxmlelement translateMsrToMxsr (
-  const S_msrScore theMsrScore,
-  S_msrOahGroup    msrOpts,
-  mfPassIDKind     passIDKind,
-  std::string      passDescription,
-  mfTimingItemKind mfTimingItemKind)
+  const S_msrScore&    theMsrScore,
+  const S_msrOahGroup& msrOpts,
+  mfPassIDKind         passIDKind,
+  const std::string&   passDescription,
+  mfTimingItemKind     mfTimingItemKind)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check

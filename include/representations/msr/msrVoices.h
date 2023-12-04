@@ -856,8 +856,8 @@ class EXP msrVoice : public msrElement
     // beams begin, continue and end check
 
     void                  checkBeamNumber (
-                            const S_msrBeam beam,
-                            const S_msrNote note);
+                            const S_msrBeam& beam,
+                            const S_msrNote& note);
 
     // finalization
 
@@ -1224,7 +1224,7 @@ class EXP msrVoice : public msrElement
     void                  setVoiceFirstMeasure (
                             const S_msrMeasure& measure);
 
-    const S_msrMeasure    getVoiceFirstMeasure () const
+    const S_msrMeasure&   getVoiceFirstMeasure () const
                               { return fVoiceFirstMeasure; }
 
     void                  appendMeasureCloneToVoiceClone (
@@ -1235,7 +1235,7 @@ class EXP msrVoice : public msrElement
     void                  setVoiceLastAppendedMeasure (
                             const S_msrMeasure& measure);
 
-    const S_msrMeasure    getVoiceLastAppendedMeasure () const
+    const S_msrMeasure&   getVoiceLastAppendedMeasure () const
                               { return fVoiceLastAppendedMeasure; }
 
   private:
@@ -1291,8 +1291,6 @@ class EXP msrVoice : public msrElement
     // not yet stored in fVoiceInitialElementsList,
     // it is thus logically the end of the latter,
     // and is created implicitly for every voice.
-    // It is needed 'outside' of the 'std::list<S_msrElement>'
-    // because it is not a mere S_msrElement, but a S_msrSegment
     S_msrSegment          fVoiceLastSegment;
 
     // fVoiceFirstSegment is used to work around LilyPond_Issue_34

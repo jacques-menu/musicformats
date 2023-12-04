@@ -36,7 +36,7 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-class mxsrVoiceTupletHandler : public smartable
+class mxsr2msrVoiceTupletHandler : public smartable
 {
 /*
   positions represent the order in which the parts appear in <part-list />,
@@ -48,7 +48,7 @@ class mxsrVoiceTupletHandler : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mxsrVoiceTupletHandler> create (
+    static SMARTP<mxsr2msrVoiceTupletHandler> create (
                             int                startInputLineNumber,
                             int                tupletNumber,
                             const S_msrVoice&  voice,
@@ -60,14 +60,14 @@ class mxsrVoiceTupletHandler : public smartable
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mxsrVoiceTupletHandler (
+                          mxsr2msrVoiceTupletHandler (
                             int                startInputLineNumber,
                             int                tupletNumber,
                             const S_msrVoice&  fMsrVoice,
                             const S_msrTuplet& theMsrTuplet,
                             int                identity);
 
-    virtual               ~mxsrVoiceTupletHandler ();
+    virtual               ~mxsr2msrVoiceTupletHandler ();
 
   public:
 
@@ -161,13 +161,13 @@ class mxsrVoiceTupletHandler : public smartable
     void                  displayTupletsStack (
                             const std::string& context);
 };
-typedef SMARTP<mxsrVoiceTupletHandler> S_mxsrVoiceTupletHandler;
-EXP std::ostream& operator << (std::ostream& os, const mxsrVoiceTupletHandler& elt);
-EXP std::ostream& operator << (std::ostream& os, const S_mxsrVoiceTupletHandler& elt);
+typedef SMARTP<mxsr2msrVoiceTupletHandler> S_mxsr2msrVoiceTupletHandler;
+EXP std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceTupletHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceTupletHandler& elt);
 
-typedef std::list<S_mxsrVoiceTupletHandler>             mxsrVoiceTupletHandlersStack;
-typedef std::map<int, mxsrVoiceTupletHandlersStack>     mxsrVoiceTupletHandlersStacksMap;
-typedef std::map<int, mxsrVoiceTupletHandlersStacksMap> mxsrVoiceTupletHandlersStacksMapMap;
+typedef std::list<S_mxsr2msrVoiceTupletHandler>             mxsr2msrVoiceTupletHandlersStack;
+typedef std::map<int, mxsr2msrVoiceTupletHandlersStack>     mxsr2msrVoiceTupletHandlersStacksMap;
+typedef std::map<int, mxsr2msrVoiceTupletHandlersStacksMap> mxsr2msrVoiceTupletHandlersStacksMapMap;
 
 //________________________________________________________________________
 class EXP mxsr2msrTranslator :
@@ -2526,18 +2526,18 @@ class EXP mxsr2msrTranslator :
       this is done with a vector, whose indices are the voices sequential, ordinal numbers
     */
 
-    S_mxsrVoiceTupletHandler  fVoiceTupletHandler; // JMI v0.9.70
+    S_mxsr2msrVoiceTupletHandler  fVoiceTupletHandler; // JMI v0.9.70
 
     std::list<S_msrTuplet>    fTupletsStack;
     void                      displayTupletsStack (
                                 const std::string& context);
 
-    std::map<int, mxsrVoiceTupletHandlersStack>
+    std::map<int, mxsr2msrVoiceTupletHandlersStack>
                               fVoicesTupletsStacksMap;
     void                      displayVoicesTupletsStacksMap (
                                 const std::string& context);
 
-//     mxsrVoiceTupletHandlersStacksMapMap   fTupletsStacksMapMap;
+//     mxsr2msrVoiceTupletHandlersStacksMapMap   fTupletsStacksMapMap;
 //     void                      displayMxsrTupletsStacksMapMap (
 //                                 const std::string& context);
 
@@ -2691,36 +2691,36 @@ class EXP mxsr2msrTranslator :
 
 
 // //______________________________________________________________________________
-// class EXP mxsrVoiceTupletHandlersList : public smartable
+// class EXP mxsr2msrVoiceTupletHandlersList : public smartable
 // {
 //   public:
 //
 //     // creation
 //     // ------------------------------------------------------
 //
-//     static SMARTP<mxsrVoiceTupletHandlersList> create ();
+//     static SMARTP<mxsr2msrVoiceTupletHandlersList> create ();
 //
-//     static SMARTP<mxsrVoiceTupletHandlersList> create (
-//                             const S_mxsrVoiceTupletHandler& tuplet);
+//     static SMARTP<mxsr2msrVoiceTupletHandlersList> create (
+//                             const S_mxsr2msrVoiceTupletHandler& tuplet);
 //
 //     // constructors/destructor
 //     // ------------------------------------------------------
 //
-//                           mxsrVoiceTupletHandlersList ();
+//                           mxsr2msrVoiceTupletHandlersList ();
 //
-//                           mxsrVoiceTupletHandlersList (
-//                             const S_mxsrVoiceTupletHandler& tuplet);
+//                           mxsr2msrVoiceTupletHandlersList (
+//                             const S_mxsr2msrVoiceTupletHandler& tuplet);
 //
-//     virtual               ~mxsrVoiceTupletHandlersList ();
+//     virtual               ~mxsr2msrVoiceTupletHandlersList ();
 //
 //   public:
 //
 //     // set and get
 //     // ------------------------------------------------------
 //
-//     const std::list<S_mxsrVoiceTupletHandler>&
-//                           getmxsrVoiceTupletHandlersStdList () const
-//                               { return fmxsrVoiceTupletHandlersStdList;}
+//     const std::list<S_mxsr2msrVoiceTupletHandler>&
+//                           getmxsr2msrVoiceTupletHandlersStdList () const
+//                               { return fmxsr2msrVoiceTupletHandlersStdList;}
 //
 //   public:
 //
@@ -2729,27 +2729,27 @@ class EXP mxsr2msrTranslator :
 //
 //     // basic list stuff
 //     size_t                size () const
-//                               { return fmxsrVoiceTupletHandlersStdList.size (); }
+//                               { return fmxsr2msrVoiceTupletHandlersStdList.size (); }
 //
-//     S_mxsrVoiceTupletHandler&         front ()
-//                               { return fmxsrVoiceTupletHandlersStdList.front (); }
+//     S_mxsr2msrVoiceTupletHandler&         front ()
+//                               { return fmxsr2msrVoiceTupletHandlersStdList.front (); }
 //
-//     S_mxsrVoiceTupletHandler&         back ()
-//                               { return fmxsrVoiceTupletHandlersStdList.back (); }
+//     S_mxsr2msrVoiceTupletHandler&         back ()
+//                               { return fmxsr2msrVoiceTupletHandlersStdList.back (); }
 //
 //     void                  pop_front ()
-//                               { fmxsrVoiceTupletHandlersStdList.pop_front (); }
+//                               { fmxsr2msrVoiceTupletHandlersStdList.pop_front (); }
 //
 //     void                  pop_back ()
-//                               { fmxsrVoiceTupletHandlersStdList.pop_back (); }
+//                               { fmxsr2msrVoiceTupletHandlersStdList.pop_back (); }
 //
 //     void                  push_front (
-//                             const S_mxsrVoiceTupletHandler& tuplet)
-//                               { fmxsrVoiceTupletHandlersStdList.push_front (tuplet); }
+//                             const S_mxsr2msrVoiceTupletHandler& tuplet)
+//                               { fmxsr2msrVoiceTupletHandlersStdList.push_front (tuplet); }
 //
 //     void                  push_back (
-//                             const S_mxsrVoiceTupletHandler& tuplet)
-//                               { fmxsrVoiceTupletHandlersStdList.push_back (tuplet); }
+//                             const S_mxsr2msrVoiceTupletHandler& tuplet)
+//                               { fmxsr2msrVoiceTupletHandlersStdList.push_back (tuplet); }
 //
 //     // sort
 //     void                  sortByDecreasingIdentity();
@@ -2772,27 +2772,27 @@ class EXP mxsr2msrTranslator :
 //     // ------------------------------------------------------
 //
 //
-//     // add an mxsrVoiceTupletHandler
+//     // add an mxsr2msrVoiceTupletHandler
 //     void                  prependTuplet (
-//                             const S_mxsrVoiceTupletHandler& theTuplet);
+//                             const S_mxsr2msrVoiceTupletHandler& theTuplet);
 //
 //     void                  appendTuplet (
-//                             const S_mxsrVoiceTupletHandler& theTuplet);
+//                             const S_mxsr2msrVoiceTupletHandler& theTuplet);
 //
 //     // private fields
 //     // ------------------------------------------------------
 //
-//     std::string           fmxsrVoiceTupletHandlerListName;
+//     std::string           fmxsr2msrVoiceTupletHandlerListName;
 //
-//     std::list<S_mxsrVoiceTupletHandler>
-//                           fmxsrVoiceTupletHandlersStdList;
+//     std::list<S_mxsr2msrVoiceTupletHandler>
+//                           fmxsr2msrVoiceTupletHandlersStdList;
 // };
-// typedef SMARTP<mxsrVoiceTupletHandlersList> S_mxsrVoiceTupletHandlersList;
-// EXP std::ostream& operator << (std::ostream& os, const mxsrVoiceTupletHandlersList& elt);
-// EXP std::ostream& operator << (std::ostream& os, const S_mxsrVoiceTupletHandlersList& elt);
+// typedef SMARTP<mxsr2msrVoiceTupletHandlersList> S_mxsr2msrVoiceTupletHandlersList;
+// EXP std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceTupletHandlersList& elt);
+// EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceTupletHandlersList& elt);
 
 // //______________________________________________________________________________
-// class EXP mxsrVoiceTupletHandlersStack : public smartable
+// class EXP mxsr2msrVoiceTupletHandlersStack : public smartable
 // /*
 //   C++ std::stack cannot be traversed, so we use std::list instead
 // */
@@ -2802,20 +2802,20 @@ class EXP mxsr2msrTranslator :
 //     // creation
 //     // ------------------------------------------------------
 //
-//     static SMARTP<mxsrVoiceTupletHandlersStack> create ();
+//     static SMARTP<mxsr2msrVoiceTupletHandlersStack> create ();
 //
-//     static SMARTP<mxsrVoiceTupletHandlersStack> create (
+//     static SMARTP<mxsr2msrVoiceTupletHandlersStack> create (
 //                             const S_msrTuplet& tuplet);
 //
 //     // constructors/destructor
 //     // ------------------------------------------------------
 //
-//                           mxsrVoiceTupletHandlersStack ();
+//                           mxsr2msrVoiceTupletHandlersStack ();
 //
-//                           mxsrVoiceTupletHandlersStack (
+//                           mxsr2msrVoiceTupletHandlersStack (
 //                             const S_msrTuplet& tuplet);
 //
-//     virtual               ~mxsrVoiceTupletHandlersStack ();
+//     virtual               ~mxsr2msrVoiceTupletHandlersStack ();
 //
 //   public:
 //
@@ -2823,8 +2823,8 @@ class EXP mxsr2msrTranslator :
 //     // ------------------------------------------------------
 //
 //     const std::list<S_msrTuplet>&
-//                           getmxsrVoiceTupletHandlersStdList () const
-//                               { return fmxsrVoiceTupletHandlersStdList;}
+//                           getmxsr2msrVoiceTupletHandlersStdList () const
+//                               { return fmxsr2msrVoiceTupletHandlersStdList;}
 //
 //   public:
 //
@@ -2833,17 +2833,17 @@ class EXP mxsr2msrTranslator :
 //
 //     // basic list stuff
 //     size_t                size () const
-//                               { return fmxsrVoiceTupletHandlersStdList.size (); }
+//                               { return fmxsr2msrVoiceTupletHandlersStdList.size (); }
 //
 //     void                  push (
 //                             const S_msrTuplet& tuplet)
-//                               { fmxsrVoiceTupletHandlersStdList.push_front (tuplet); }
+//                               { fmxsr2msrVoiceTupletHandlersStdList.push_front (tuplet); }
 //
 //     S_msrTuplet&          top ()
-//                               { return fmxsrVoiceTupletHandlersStdList.front (); }
+//                               { return fmxsr2msrVoiceTupletHandlersStdList.front (); }
 //
 //     void                  pop ()
-//                               { fmxsrVoiceTupletHandlersStdList.pop_front (); }
+//                               { fmxsr2msrVoiceTupletHandlersStdList.pop_front (); }
 //
 //   public:
 //
@@ -2867,12 +2867,12 @@ class EXP mxsr2msrTranslator :
 //     // private fields
 //     // ------------------------------------------------------
 //
-//     std::string           fmxsrVoiceTupletHandlerStackName;
+//     std::string           fmxsr2msrVoiceTupletHandlerStackName;
 //
 //     std::list<S_msrTuplet>
-//                           fmxsrVoiceTupletHandlersStdList;
+//                           fmxsr2msrVoiceTupletHandlersStdList;
 // };
-// typedef SMARTP<mxsrVoiceTupletHandlersStack> S_mxsrVoiceTupletHandlersStack;
-// EXP std::ostream& operator << (std::ostream& os, const mxsrVoiceTupletHandlersStack& elt);
-// EXP std::ostream& operator << (std::ostream& os, const S_mxsrVoiceTupletHandlersStack& elt);
+// typedef SMARTP<mxsr2msrVoiceTupletHandlersStack> S_mxsr2msrVoiceTupletHandlersStack;
+// EXP std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceTupletHandlersStack& elt);
+// EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceTupletHandlersStack& elt);
 

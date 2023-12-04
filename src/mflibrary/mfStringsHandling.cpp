@@ -984,7 +984,7 @@ std::string mfDoubleQuoteStringIfNonAlpha (
         stringShouldBeDoubleQuoted = true;
       }
 
-      // append the result to result // JMI v0.9.70
+      // append theChar to result // JMI v0.9.70
       result += theChar;
 
 //       if (
@@ -1083,10 +1083,42 @@ std::string mfDoubleQuoteStringContentsOnly (
 //   return ss.str();
 }
 
+//______________________________________________________________________________
 std::string mfDoubleQuoteString (
   const std::string& theString)
 {
   return "\"" + mfDoubleQuoteStringContentsOnly (theString) + "\"";
+}
+
+//______________________________________________________________________________
+std::string mfDoubleQuoteStringIfNonWord (
+  const std::string& theString)
+{
+  std::string result;
+
+  Bool stringShouldBeDoubleQuoted (false);
+
+  if (theString.size ()) {
+    for (char const &theChar : theString) {
+      if (! std::isalpha (theChar)) {
+        stringShouldBeDoubleQuoted = true;
+      }
+
+      if (theChar == '"') {
+        result += "\\\"";
+      }
+      else {
+        result += theChar;
+      }
+    } // for
+  }
+
+  if (stringShouldBeDoubleQuoted) {
+    return "\"" + result + "\"";
+  }
+  else {
+    return result;
+  }
 }
 
 //______________________________________________________________________________

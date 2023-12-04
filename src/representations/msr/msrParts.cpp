@@ -55,9 +55,9 @@ const int msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
 int msrPart::sPartsCounter = 0;
 
 S_msrPart msrPart::create (
-  int                  inputLineNumber,
-  const std::string&   partID,
-  const S_msrPartGroup partUpLinkToPartGroup)
+  int                   inputLineNumber,
+  const std::string&    partID,
+  const S_msrPartGroup& partUpLinkToPartGroup)
 {
   msrPart* obj =
     new msrPart (
@@ -69,9 +69,9 @@ S_msrPart msrPart::create (
 }
 
 msrPart::msrPart (
-  int                  inputLineNumber,
-  const std::string&   partID,
-  const S_msrPartGroup partUpLinkToPartGroup)
+  int                   inputLineNumber,
+  const std::string&    partID,
+  const S_msrPartGroup& partUpLinkToPartGroup)
     : msrPartGroupElement (inputLineNumber)
 {
   // replace spaces in partID to set fPartID

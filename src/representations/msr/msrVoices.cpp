@@ -3724,9 +3724,11 @@ void msrVoice::appendSyllableToVoice (
         stanzaNumber,
         stanzaName);
 
-  // add the syllable to the stanza
+  // add the syllable to the stanza clone
   stanza->
-    appendSyllableToStanzaClone (syllable);
+    appendSyllableToStanzaClone (
+      syllable,
+      fVoiceLastAppendedMeasure);
 }
 
 void msrVoice::appendBarCheckToVoice (
@@ -3803,7 +3805,7 @@ void msrVoice::appendLineBreakToVoice  (
       stanza->
         appendLineBreakSyllableToStanza (
           lineBreak->getInputStartLineNumber (),
-          fVoiceCurrentMeasureNumber);
+          fVoiceLastAppendedMeasure);
     } // for
   }
 }
@@ -3827,6 +3829,18 @@ void msrVoice::appendPageBreakToVoice (
 
   fVoiceLastSegment->
     appendPageBreakToSegment (pageBreak);
+
+  // cascade this pageBreak to the voice stanzas if any
+  if (fVoiceStanzasMap.size ()) {
+    for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+      const S_msrStanza& stanza = thePair.second;
+
+      stanza->
+        appendPageBreakSyllableToStanza (
+          pageBreak->getInputStartLineNumber (),
+          fVoiceLastAppendedMeasure);
+    } // for
+  }
 }
 
 // void msrVoice::prependOtherElementToVoice (const S_msrMeasureElement& elem) {
@@ -10599,6 +10613,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
          stanza->
             appendMeasureEndSyllableToStanza (
               inputLineNumber,
+              fVoiceLastAppendedMeasure,
               partCurrentDrawingMeasurePosition);
         } // for
       }
@@ -11043,7 +11058,9 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
   } // for
 }
 
-void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
+void msrVoice::checkBeamNumber (
+  const S_msrBeam& beam,
+  const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeams ()) {

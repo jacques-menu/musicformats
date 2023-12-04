@@ -214,7 +214,7 @@
           </notations>
         <lyric number="1" default-y="-40.00" relative-y="-30.00">
           <syllabic>middle</syllabic>
-          <text>spi</text>
+          <text>spi_1</text>
           </lyric>
         </note>
       </measure>
@@ -333,7 +333,7 @@
         <stem>down</stem>
         <lyric number="1" default-x="6.50" default-y="-40.00" relative-y="-30.00">
           <syllabic>begin</syllabic>
-          <text>mar</text>
+          <text>mar_1</text>
           </lyric>
         </note>
       </measure>
@@ -459,7 +459,7 @@
         <stem>down</stem>
         <lyric number="1" default-x="6.50" default-y="-46.90" relative-y="-30.00">
           <syllabic>begin</syllabic>
-          <text>mar</text>
+          <text>mar_2</text>
           </lyric>
         </note>
       </measure>
@@ -808,7 +808,7 @@
         <stem>down</stem>
         <lyric number="1" default-x="6.50" default-y="-40.00" relative-y="-30.00">
           <syllabic>middle</syllabic>
-          <text>spi</text>
+          <text>spi_2</text>
           </lyric>
         </note>
       <note default-x="105.01" default-y="-10.00">
@@ -915,7 +915,7 @@
         <stem>down</stem>
         <lyric number="1" default-x="6.50" default-y="-40.00" relative-y="-30.00">
           <syllabic>begin</syllabic>
-          <text>mar</text>
+          <text>mar_3</text>
           </lyric>
         </note>
       <note default-x="138.30" default-y="-5.00">
@@ -1052,7 +1052,7 @@
         <stem>up</stem>
         <lyric number="1" default-x="6.50" default-y="-44.00" relative-y="-30.00">
           <syllabic>single</syllabic>
-          <text>ch'io</text>
+          <text>ch'io_1</text>
           </lyric>
         </note>
       </measure>
@@ -1386,7 +1386,7 @@
         <stem>down</stem>
         <lyric number="1" default-x="6.50" default-y="-41.49" relative-y="-30.00">
           <syllabic>single</syllabic>
-          <text>ch'io</text>
+          <text>ch'io_2</text>
           </lyric>
         </note>
       <note default-x="86.34" default-y="-10.00">

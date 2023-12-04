@@ -988,11 +988,11 @@ class EXP lpsr2lilypondTranslator :
 
     void                  generateCodeForSpannerBeforeNote (
                             const S_msrSpanner& spanner,
-                            const S_msrNote     note);
+                            const S_msrNote&    note);
 
     void                  generateCodeForSpannerAfterNote (
                             const S_msrSpanner& spanner,
-                            const S_msrNote     note);
+                            const S_msrNote&    note);
 
     // tuplets
 

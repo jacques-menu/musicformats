@@ -214,19 +214,6 @@ class EXP msrFiguredBass : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplinks
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override
-//                               { setFiguredBassUpLinkToMeasure (measure); }
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-//                               { return getFiguredBassUpLinkToMeasure (); }
-//
-//     void                  setFiguredBassUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getFiguredBassUpLinkToMeasure () const
-//                               { return fFiguredBassUpLinkToMeasure; }
-
     void                  setFiguredBassUpLinkToNote (
                             const S_msrNote& note);
 
@@ -321,8 +308,6 @@ class EXP msrFiguredBass : public msrMeasureElement
     // ------------------------------------------------------
 
     // upLinks
-//     S_msrMeasure          fFiguredBassUpLinkToMeasure;
-
     S_msrNote             fFiguredBassUpLinkToNote;
     S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI v0.9.66
 

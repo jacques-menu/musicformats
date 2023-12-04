@@ -194,58 +194,6 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   return newbornClone;
 }
 
-// void msrTuplet::setMeasureElementUpLinkToMeasure (
-//   const S_msrMeasure& measure)
-// {
-//   setTupletUpLinkToMeasure (measure);
-// }
-//
-// S_msrMeasure msrTuplet::getMeasureElementUpLinkToMeasure () const
-// {
-//   return getTupletUpLinkToMeasure ();
-// }
-//
-// void msrTuplet::setTupletUpLinkToMeasure (
-//   const S_msrMeasure& measure)
-// {
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     measure != nullptr,
-//     "measure is null");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     ++gIndenter;
-//
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Setting the uplink to measure of tuplet " <<
-//       asString () <<
-//       " to measure " << measure->asString () <<
-//       "' in measure '" <<
-//       measure->asString () <<
-//       std::endl;
-//
-//     --gIndenter;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fTupletUpLinkToMeasure = measure;
-// }
-
-// S_msrMeasure msrTuplet::getTupletUpLinkToMeasure () const
-// {
-//   return fTupletUpLinkToMeasure;
-// }
-
 //______________________________________________________________________________
 void msrTuplet::appendNoteToTuplet (
   const S_msrNote&  note,
@@ -281,7 +229,7 @@ void msrTuplet::appendNoteToTuplet (
   note->
     setNoteShortcutUpLinkToTuplet (this);
 
-//   // register note's uplink to measure // JMI v0.9.66 ???
+//   // register note's uplink to measure // JMI v0.9.70 ???
 //   note->
 //     setMeasureElementUpLinkToMeasure (
 //       fMeasureElementUpLinkToMeasure);
@@ -775,7 +723,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
     ) {
       // note
       note->
-        setMeasureElementUpLinkToMeasure (
+        setMeasureElementUpLinkToMeasure ( // JMI v0.9.70 ???
           measure);
 
       note->

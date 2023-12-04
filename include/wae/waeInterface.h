@@ -63,7 +63,7 @@ EXP void waeErrorWithException (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except);
+  const S_mfException& except);
 
 EXP void waeErrorWithExceptionWithInputLocation (
   const std::string& context,
@@ -72,7 +72,7 @@ EXP void waeErrorWithExceptionWithInputLocation (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except);
+  const S_mfException& except);
 
 //______________________________________________________________________________
 // errors
@@ -109,7 +109,7 @@ EXP void waeInternalErrorWithExceptionWithInputLocation (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except);
+  const S_mfException& except);
 
 //______________________________________________________________________________
 

@@ -951,7 +951,7 @@ void msrMeasure::setMeasurePuristNumber (
     std::stringstream ss;
 
     ss <<
-      "Setting purist number of measure '" <<
+      "Setting the purist number of measure '" <<
       fMeasureNumber <<
       "' to '" <<
       measurePuristNumber <<
@@ -4914,10 +4914,8 @@ void msrMeasure::handleIncompleteMeasure (
     // this is a regular measure end
     setMeasureEndRegularKind (kMeasureEndRegularKindYes);
 
-    // fix measure purist number
+    // set first incomplete measure purist number to 0
     setMeasurePuristNumber (0);
-
-    // voice current measure purist number remains at 1
   }
 
   else {

@@ -65,20 +65,6 @@ class EXP msrBarCheck : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override
-//                               { setBarCheckUpLinkToMeasure (measure); }
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-//                               { return getBarCheckUpLinkToMeasure (); }
-//
-//     void                  setBarCheckUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getBarCheckUpLinkToMeasure () const
-//                               { return fBarCheckUpLinkToMeasure; }
-
     std::string           getNextBarOriginalNumber () const
                               { return fNextBarOriginalNumber; }
 
@@ -115,8 +101,6 @@ class EXP msrBarCheck : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
-
-//     S_msrMeasure          fBarCheckUpLinkToMeasure;
 
     std::string           fNextBarOriginalNumber;
     int                   fNextBarPuristNumber;

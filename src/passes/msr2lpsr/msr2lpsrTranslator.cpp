@@ -3615,12 +3615,13 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
     elt->createSyllableNewbornClone (
       fCurrentPartClone);
 
-  // add it to the current stanza clone or current note clone
+  // append it to the current stanza clone or current note clone
   if (fOnGoingStanza) { // fCurrentStanzaClone JM
     // visiting a syllable as a stanza member
     fCurrentStanzaClone->
       appendSyllableToStanzaClone (
-        fCurrentSyllableClone);
+        fCurrentSyllableClone,
+        fCurrentMeasureClone);
   }
 
   else if (fOnGoingNonGraceNote) { // JMI

@@ -47,15 +47,10 @@ class EXP msrMeasureElement : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    // the overrides call a class-specific method that can be called directly
-//     virtual void          setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) = 0;
     virtual void          setMeasureElementUpLinkToMeasure (
                             const S_msrMeasure& measure)
                               { fMeasureElementUpLinkToMeasure = measure; }
 
-    // the overrides call a class-specific method that can be called directly
-//     virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const = 0;
     virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const
                               { return fMeasureElementUpLinkToMeasure; }
 

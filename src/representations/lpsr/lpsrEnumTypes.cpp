@@ -712,7 +712,9 @@ std::string syllableElementsListAsLilypondString (
     } // for
   }
 
-  return ss.str ();
+  return
+    mfDoubleQuoteStringIfNonWord (
+      ss.str ());
 }
 
 // score output kinds

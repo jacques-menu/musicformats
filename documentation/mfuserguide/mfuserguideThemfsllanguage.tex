@@ -391,7 +391,7 @@ input : "Hymn121.xml" ;
   -title "Hymn 121 - Angels From The Realms Of Glory"
   -subtitle "Part 4 - Bass"
 
-  -keep-musicxml-part-id P4
+  -keep-musicxml-part-with-id P4
 
 # display
  -display-options-values
@@ -636,7 +636,7 @@ case SCORE :
 	  -output-file-name "Hymn121_SATB_soprano.ly"
 
     -subtitle '\markup { "B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
-    -keep-musicxml-part-id P1
+    -keep-musicxml-part-with-id P1
 
     -msr-rename-part "P1:soprano"
 
@@ -647,14 +647,14 @@ case SCORE :
 	  -output-file-name "Hymn121_SATB_alto.ly"
 
     -subtitle "Alto"
-    -keep-musicxml-part-id P2
+    -keep-musicxml-part-with-id P2
   ;
 
 	tenor:
 	  -output-file-name "Hymn121_SATB_tenor.ly"
 
     -subtitle "Tenor"
-    -keep-musicxml-part-id P3
+    -keep-musicxml-part-with-id P3
 
     -global-staff-size 23 # an easier-to-read score is needed
   ;
@@ -663,7 +663,7 @@ case SCORE :
 	  -output-file-name "Hymn121_SATB_bass.ly"
 
     -subtitle "Bass"
-    -keep-musicxml-part-id P4
+    -keep-musicxml-part-with-id P4
 
     -ignore-musicxml-lyrics
       # there's a glitch in the last measure of the bass...
@@ -674,11 +674,11 @@ case SCORE :
 
     -subtitle 'Soprano and alto'
 
-    -keep-musicxml-part-id P1
+    -keep-musicxml-part-with-id P1
     -msr-rename-part "P1:soprano"
     -lpsr-staff-instrument-name "Voice 1:Soprano"
 
-    -keep-musicxml-part-id P2
+    -keep-musicxml-part-with-id P2
     -msr-rename-part "P2:alto"
     -lpsr-staff-instrument-name "Voice 2:Alto"
   ;
@@ -688,11 +688,11 @@ case SCORE :
 
     -subtitle 'Tenor and bass'
 
-    -keep-musicxml-part-id P3
+    -keep-musicxml-part-with-id P3
     -msr-rename-part "P3:tenor"
     -lpsr-staff-instrument-name "Voice 3:Tenor"
 
-    -keep-musicxml-part-id P4
+    -keep-musicxml-part-with-id P4
     -msr-rename-part "P4:bass"
     -lpsr-staff-instrument-name "Voice 4:Bass"
 
@@ -905,7 +905,7 @@ case SCORE :
   ;
 
 	part1_C_instruments:
-    -keep-musicxml-part-id P1
+    -keep-musicxml-part-with-id P1
     -msr-rename-part "P1:partOne_C_instruments"
 
     -lpsr-staff-instrument-name "Voice 1:C instruments"
@@ -913,7 +913,7 @@ case SCORE :
   ;
 
 	part2_Bb_instruments:
-    -keep-musicxml-part-id P2
+    -keep-musicxml-part-with-id P2
     -msr-rename-part "P2:partTwo_Bb_instruments"
 
     -indent '2.5\cm'

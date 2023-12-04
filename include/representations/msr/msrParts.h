@@ -48,9 +48,9 @@ class EXP msrPart : public msrPartGroupElement
     // ------------------------------------------------------
 
     static SMARTP<msrPart> create (
-                            int                  inputLineNumber,
-                            const std::string&   partID,
-                            const S_msrPartGroup partUpLinkToPartGroup);
+                            int                   inputLineNumber,
+                            const std::string&    partID,
+                            const S_msrPartGroup& partUpLinkToPartGroup);
 
     SMARTP<msrPart> createPartNewbornClone (
                             const S_msrPartGroup& partGroupClone);
@@ -61,9 +61,9 @@ class EXP msrPart : public msrPartGroupElement
     // ------------------------------------------------------
 
                           msrPart (
-                            int                  inputLineNumber,
-                            const std::string&   partID,
-                            const S_msrPartGroup partUpLinkToPartGroup);
+                            int                   inputLineNumber,
+                            const std::string&    partID,
+                            const S_msrPartGroup& partUpLinkToPartGroup);
 
     virtual               ~msrPart ();
 

@@ -228,6 +228,7 @@ if (false) // JMI
       break;
 
     case msrOctaveEntryKind::kOctaveEntryAbsolute:
+      // forget about the current octave entry reference
       fCurrentOctaveEntryReference = nullptr;
       break;
 
@@ -347,8 +348,9 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
           getRelativeOctaveEntrySemiTonesPitchAndOctave ());
   }
   else {
-    fCurrentOctaveEntryReference = nullptr;
+    // forget about the current octave entry reference
     // the first note in the voice will become the initial reference
+    fCurrentOctaveEntryReference = nullptr;
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -361,7 +363,7 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
       msrOctaveEntryKindAsString (
         gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue ()) <<
       std::endl <<
-      "Initial fCurrentOctaveEntryReference is ";
+      "The initial fCurrentOctaveEntryReference is ";
 
     if (fCurrentOctaveEntryReference) {
       ss <<
@@ -4463,7 +4465,7 @@ void lpsr2lilypondTranslator::generateOrnament (
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
   const S_msrSpanner& spanner,
-  const S_msrNote     note)
+  const S_msrNote&    note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSpanners ()) {
@@ -4602,7 +4604,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
   const S_msrSpanner& spanner,
-  const S_msrNote     note)
+  const S_msrNote&    note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceSpanners ()) {
@@ -10220,16 +10222,18 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
         // no \lyricsto in that case
         fLilypondCodeStream <<
+          "\\lyricsto \"" << elt->getVoice ()->getVoiceAlphabeticName () << "\" { " <<
           "\\" << stanza->getStanzaAlphabeticName () <<
+          " }" <<
           std::endl;
           break;
 
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
         // maybe we could use addlyrics optionally? JMI v0.9.70 BABASSE LPNR page 64
         fLilypondCodeStream <<
-          "\\lyricsto \"" << elt->getVoice ()->getVoiceAlphabeticName () << "\" {" <<
+          "\\lyricsto \"" << elt->getVoice ()->getVoiceAlphabeticName () << "\" { " <<
           "\\" << stanza->getStanzaAlphabeticName () <<
-          '}' <<
+          " }" <<
           std::endl;
         break;
 
@@ -13827,17 +13831,47 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 
       ++gIndenter; // decremented in visitEnd (S_msrStanza& elt)
 
-      fLilypondCodeStream <<
-        // set associatedVoice so that
-        // both double hyphens and double underscores can be used
-        // to draw hyphenated lines and extenders under melismata correctly
-        "\\set associatedVoice = #\"" <<
-        elt->
-          getStanzaUpLinkToVoice ()->getVoiceAlphabeticName () <<
-        "\"" <<
-        std::endl <<
-        "\\set ignoreMelismata = ##t" <<
-        std::endl;
+      switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+//           fLilypondCodeStream <<
+//             "\\lyricsto \"" <<
+//             elt->
+//               getStanzaUpLinkToVoice ()->getVoiceAlphabeticName () <<
+//             "\"" <<
+//             std::endl;
+          fLilypondCodeStream <<
+            "\\set ignoreMelismata = ##t" <<
+            std::endl;
+          break;
+
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+          fLilypondCodeStream <<
+            // set associatedVoice so that
+            // both double hyphens and double underscores can be used
+            // to draw hyphenated lines and extenders under melismata correctly
+            "\\set associatedVoice = #\"" <<
+            elt->
+              getStanzaUpLinkToVoice ()->getVoiceAlphabeticName () <<
+            "\"" <<
+            std::endl <<
+            "\\set ignoreMelismata = ##t" <<
+            std::endl;
+          break;
+
+        case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+          fLilypondCodeStream <<
+            // set associatedVoice so that
+            // both double hyphens and double underscores can be used
+            // to draw hyphenated lines and extenders under melismata correctly
+            "\\set associatedVoice = #\"" <<
+            elt->
+              getStanzaUpLinkToVoice ()->getVoiceAlphabeticName () <<
+            "\"" <<
+            std::endl <<
+            "\\set ignoreMelismata = ##t" <<
+            std::endl;
+          break;
+      } // switch
     }
   }
 
@@ -13958,10 +13992,9 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
 
   fLilypondCodeStream << std::left <<
     std::setw (fieldWidth) <<
-    "getSyllableElementsList" << ": \"" <<
+    "getSyllableElementsList" << ": " <<
     syllableElementsListAsLilypondString (
       syllable->getSyllableElementsList ()) <<
-    '\"' <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -14149,21 +14182,33 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+          {
 #ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceLyrics ()) {
-            fLilypondCodeStream <<
-              "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSingle" <<
-              ", line " << syllable->getInputStartLineNumber () <<
-              " %} " <<
-              std::endl;
-          }
+            if (gTraceOahGroup->getTraceLyrics ()) {
+              fLilypondCodeStream <<
+                "%{ CODE_FOR_SYLLABLE_DURATION_KIND_AUTOMATIC_kSyllableSingle" <<
+                ", line " << syllable->getInputStartLineNumber () <<
+                " %} " <<
+                std::endl;
+            }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            '\"' <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            "\" ";
+            fLilypondCodeStream <<
+              syllableElementsListAsLilypondString (
+                syllable->getSyllableElementsList ()) <<
+              ' ';
+
+//             if (syllableAsLilypondString.size ()) {
+//               fLilypondCodeStream <<
+//                 '\"' <<
+//                 syllableAsLilypondString <<
+//                 "\" ";
+//             }
+// //             else {
+// //               fLilypondCodeStream <<
+// //                 "\\skip1 ";
+// //             }
+          }
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14177,11 +14222,6 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            '\"' <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            "\" ";
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14202,15 +14242,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
                 syllableElementsListAsLilypondString (
                   syllable->getSyllableElementsList ());
 
-            // use a single space string instead of an empty one
-            if (elementsListAsLilypondString.size () == 0) {
-              elementsListAsLilypondString = " ";
-            }
-
             fLilypondCodeStream <<
-              '\"' <<
-              elementsListAsLilypondString <<
-              '\"';
+              syllableElementsListAsLilypondString (
+                syllable->getSyllableElementsList ()) <<
+              ' ';
 
             if (noteTheSyllableIsAttachedTo) { // JMI v0.9.70 BABASSE
               fLilypondCodeStream <<
@@ -14245,10 +14280,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14263,10 +14297,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14281,10 +14314,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            '\"' <<
+            ' ' <<
             durationAsLilypondStringIfItShouldBeGenerated (
               noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
               noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
@@ -14309,10 +14341,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14326,11 +14357,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            '\"' <<
+          fLilypondCodeStream << // JMI v0.9.70 FOOFPP
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14345,10 +14375,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            '\"' <<
+            ' ' <<
             durationAsLilypondStringIfItShouldBeGenerated (
               noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
               noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
@@ -14373,10 +14402,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14391,10 +14419,14 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
+
+          // forget the last met whole notes duration,
+          // to enforce the duration being generated
+          // for the first syllable in the next measure
+          fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_; // JMI v0.9.67
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14409,16 +14441,20 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
 
           fLilypondCodeStream <<
             durationAsLilypondStringIfItShouldBeGenerated (
               noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
               noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
             ' ';
+
+          // forget the last met whole notes duration,
+          // to enforce the duration being generated
+          // for the first syllable in the next measure
+          fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_; // JMI v0.9.67
           break;
       } // switch
       break;
@@ -14449,10 +14485,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
           break;
           break;
 
@@ -14468,10 +14503,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14486,10 +14520,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            '\"' <<
             syllableElementsListAsLilypondString (
               syllable->getSyllableElementsList ()) <<
-            "\" ";
+            ' ';
 
           fLilypondCodeStream <<
             durationAsLilypondStringIfItShouldBeGenerated (
@@ -14514,6 +14547,14 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
+//
+//             fLilypondCodeStream <<
+//               "\\skip";
+//             generateWholeNotesDuration (
+//               syllable->getInputStartLineNumber (),
+//               syllable->getSyllableWholeNotes ());
+//             fLilypondCodeStream <<
+//               ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14566,6 +14607,14 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
+
+//             fLilypondCodeStream <<
+//               "\\skip";
+//             generateWholeNotesDuration (
+//               syllable->getInputStartLineNumber (),
+//               syllable->getSyllableWholeNotes ());
+//             fLilypondCodeStream <<
+//               ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14618,8 +14667,29 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
         }
 #endif // MF_TRACE_IS_ENABLED
 
+        switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
+          case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
+            // don't generate a bar check:
+            // the rests are not present in stanzas in aotomatic mode,
+            // in which which case LilyPond complains about too short measures
+            break;
+
+          case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
+            // a continue type extension is not mandatory
+              fLilypondCodeStream <<
+                "| ";
+            break;
+
+          case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
+              fLilypondCodeStream <<
+                "| ";
+            break;
+        } // switch
+
         fLilypondCodeStream <<
-          "| ";
+          "% " <<
+          syllable->fetchSyllableMeasurePuristNumber () + 1<<
+          ' ';
 
         if (noteTheSyllableIsAttachedTo) {
           S_msrMeasure
@@ -14679,7 +14749,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
       fLilypondCodeStream <<
         "\\break" <<
-//         syllable->getSyllableMeasureNumber () <<
+//         syllable->fetchSyllableMeasurePuristNumber () + 1 <<
         std::endl;
       break;
 
@@ -14708,7 +14778,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
       fLilypondCodeStream <<
         "\\pageBreak" <<
-//         syllable->getSyllableMeasureNumber () <<
+        syllable->fetchSyllableMeasurePuristNumber () + 1 <<
         std::endl;
       break;
   } // switch
@@ -14790,6 +14860,19 @@ void lpsr2lilypondTranslator::generateCodeBeforeSyllableIfRelevant (
 void lpsr2lilypondTranslator::generateCodeAfterSyllableIfRelevant (
   S_msrSyllable& syllable)
 {
+/*
+LilyPond syntax:
+
+  In all three methods hyphens can be drawn between the syllables of a word
+  and extender lines can be drawn beyond the end of a word.
+
+  -  same syllable on a note tied to the preceding one
+  -- new syllable in same word on a new note
+
+  _  EFEF
+  __ extender, new syllable on a note tied to the preceding one
+*/
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
     fLilypondCodeStream <<
@@ -14983,6 +15066,29 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
           std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
+
+      if (noteTheSyllableIsAttachedTo) {
+        // take note's tie into account if any
+        const std::list<S_msrTie>& noteTiesList =
+          noteTheSyllableIsAttachedTo->getNoteTiesList ();
+
+        if (noteTiesList.size ()) {
+          for (S_msrTie noteTie : noteTiesList) {
+            switch (noteTie->getTieKind ()) {
+              case msrTieKind::kTieNone:
+                break;
+              case msrTieKind::kTieStart: // PAS CLAIR, VOIR GOAL
+                doGenerateASingleHyphen = true;
+                break;
+              case msrTieKind::kTieContinue:
+                doGenerateASingleHyphen = true;
+                break;
+              case msrTieKind::kTieStop:
+                break;
+            } // switch
+          } // for
+        }
+      }
       break;
 
     // ----------------------------------------------------
@@ -14998,6 +15104,31 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
           std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
+
+      doGenerateADoubleHyphen = true;
+
+      if (noteTheSyllableIsAttachedTo) {
+        // take note's tie into account if any
+        const std::list<S_msrTie>& noteTiesList =
+          noteTheSyllableIsAttachedTo->getNoteTiesList ();
+
+        if (noteTiesList.size ()) {
+          for (S_msrTie noteTie : noteTiesList) {
+            switch (noteTie->getTieKind ()) {
+              case msrTieKind::kTieNone:
+                break;
+              case msrTieKind::kTieStart: // PAS CLAIR, VOIR GOAL
+                doGenerateASingleHyphen = true;
+                break;
+              case msrTieKind::kTieContinue:
+                doGenerateASingleHyphen = true;
+                break;
+              case msrTieKind::kTieStop:
+                break;
+            } // switch
+          } // for
+        }
+      }
       break;
 
     // ----------------------------------------------------
@@ -15015,6 +15146,29 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 #endif // MF_TRACE_IS_ENABLED
 
       doGenerateADoubleHyphen = true;
+
+      if (noteTheSyllableIsAttachedTo) {
+        // take note's tie into account if any
+        const std::list<S_msrTie>& noteTiesList =
+          noteTheSyllableIsAttachedTo->getNoteTiesList ();
+
+        if (noteTiesList.size ()) {
+          for (S_msrTie noteTie : noteTiesList) {
+            switch (noteTie->getTieKind ()) {
+              case msrTieKind::kTieNone:
+                break;
+              case msrTieKind::kTieStart: // PAS CLAIR, VOIR GOAL
+                doGenerateASingleHyphen = true;
+                break;
+              case msrTieKind::kTieContinue:
+                doGenerateASingleHyphen = true;
+                break;
+              case msrTieKind::kTieStop:
+                break;
+            } // switch
+          } // for
+        }
+      }
       break;
 
     // ----------------------------------------------------
@@ -15030,6 +15184,29 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
           std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
+
+      if (noteTheSyllableIsAttachedTo) {
+        // take note's tie into account if any
+        const std::list<S_msrTie>& noteTiesList =
+          noteTheSyllableIsAttachedTo->getNoteTiesList ();
+
+        if (noteTiesList.size ()) {
+          for (S_msrTie noteTie : noteTiesList) {
+            switch (noteTie->getTieKind ()) {
+              case msrTieKind::kTieNone:
+                break;
+              case msrTieKind::kTieStart: // PAS CLAIR, VOIR GOAL
+                doGenerateASingleHyphen = true;
+                break;
+              case msrTieKind::kTieContinue:
+                doGenerateASingleHyphen = true;
+                break;
+              case msrTieKind::kTieStop:
+                break;
+            } // switch
+          } // for
+        }
+      }
       break;
 
     // ----------------------------------------------------
@@ -15103,6 +15280,12 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 
     const int fieldWidth = 28;
 
+    syllable->printForTrace (
+      fLilypondCodeStream,
+      fieldWidth);
+
+    fLilypondCodeStream << std::endl;
+
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
       "doGenerateASingleUnderscore" << ": " <<
@@ -15111,6 +15294,11 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       std::setw (fieldWidth) <<
       "doGenerateADoubleUnderscore" << ": " <<
       doGenerateADoubleUnderscore <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "syllableUpLinkToNote" << ": " <<
+      syllable->syllableUpLinkToNoteAsString () <<
       std::endl <<
 
       std::setw (fieldWidth) <<
@@ -15135,33 +15323,34 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // should a double underscore be generated? (before a single underscore if relevant)
-  // ----------------------------------------------------
-  if (doGenerateADoubleUnderscore) {
-    fLilypondCodeStream <<
-      " __ ";
-  }
-
-  // should a single underscore be generated?
-  // ----------------------------------------------------
-  if (doGenerateASingleUnderscore) {
-    fLilypondCodeStream <<
-      " _ ";
-  }
-
   // should a single hyphen be generated?
   // ----------------------------------------------------
   if (doGenerateASingleHyphen) {
     fLilypondCodeStream <<
-      " - ";
+      "- ";
   }
 
   // should a double hyphen be generated?
   // ----------------------------------------------------
   if (doGenerateADoubleHyphen) {
     fLilypondCodeStream <<
-      " -- ";
+      "-- ";
   }
+
+  // should a double underscore be generated? (before a single underscore if relevant)
+  // ----------------------------------------------------
+  if (doGenerateADoubleUnderscore) {
+    fLilypondCodeStream <<
+      "__ ";
+  }
+
+  // should a single underscore be generated?
+  // ----------------------------------------------------
+  if (doGenerateASingleUnderscore) {
+    fLilypondCodeStream <<
+      "_ ";
+  }
+
 
   // should a \skip be generated?
   // ----------------------------------------------------
@@ -15255,11 +15444,10 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
               case msrTieKind::kTieNone:
                 break;
               case msrTieKind::kTieStart: // PAS CLAIR, VOIR GOAL
-    //              doGenerateASingleUnderscore = true;
-    //              doGenerateADoubleUnderscore = true;
-    //              doGenerateASkip = true;
+                doGenerateASingleHyphen = true;
                 break;
               case msrTieKind::kTieContinue:
+                doGenerateASingleHyphen = true;
                 break;
               case msrTieKind::kTieStop:
                 break;
@@ -15329,9 +15517,10 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                 case msrTieKind::kTieNone:
                   break;
                 case msrTieKind::kTieStart:
-     //              doGenerateASkip = true;
+                doGenerateASingleHyphen = true;
                   break;
                 case msrTieKind::kTieContinue:
+                doGenerateASingleHyphen = true;
                   break;
                 case msrTieKind::kTieStop:
                   break;
@@ -15528,6 +15717,10 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableMeasureEnd:
     // ----------------------------------------------------
+      // forget about the last whole notes,
+      // to enforce a duration being generated
+      // for the first syllable in the next measure
+      fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_; // JMI v0.9.70
       break;
 
     // ----------------------------------------------------
@@ -15583,32 +15776,32 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // should a double underscore be generated? (before a single underscore if relevant)
-  // ----------------------------------------------------
-  if (doGenerateADoubleUnderscore) {
-    fLilypondCodeStream <<
-      " __ ";
-  }
-
-  // should a single underscore be generated?
-  // ----------------------------------------------------
-  if (doGenerateASingleUnderscore) {
-    fLilypondCodeStream <<
-      " _ ";
-  }
-
   // should a single hyphen be generated?
   // ----------------------------------------------------
   if (doGenerateASingleHyphen) {
     fLilypondCodeStream <<
-      " - ";
+      "- ";
   }
 
   // should a double hyphen be generated?
   // ----------------------------------------------------
   if (doGenerateADoubleHyphen) {
     fLilypondCodeStream <<
-      " -- ";
+      "-- ";
+  }
+
+  // should a double underscore be generated? (before a single underscore if relevant)
+  // ----------------------------------------------------
+  if (doGenerateADoubleUnderscore) {
+    fLilypondCodeStream <<
+      "__ ";
+  }
+
+  // should a single underscore be generated?
+  // ----------------------------------------------------
+  if (doGenerateASingleUnderscore) {
+    fLilypondCodeStream <<
+      "_ ";
   }
 
   // should a \skip be generated?
@@ -15702,11 +15895,10 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
               case msrTieKind::kTieNone:
                 break;
               case msrTieKind::kTieStart: // PAS CLAIR, VOIR GOAL
-    //              doGenerateASingleUnderscore = true;
-    //              doGenerateADoubleUnderscore = true;
-    //              doGenerateASkip = true;
+                doGenerateASingleHyphen = true;
                 break;
               case msrTieKind::kTieContinue:
+                doGenerateASingleHyphen = true;
                 break;
               case msrTieKind::kTieStop:
                 break;
@@ -15767,10 +15959,10 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                   case msrTieKind::kTieNone:
                     break;
                   case msrTieKind::kTieStart:
-                     doGenerateADoubleHyphen = true;
+                    doGenerateASingleHyphen = true;
                     break;
                   case msrTieKind::kTieContinue:
-                     doGenerateADoubleHyphen = true;
+                    doGenerateASingleHyphen = true;
                     break;
                   case msrTieKind::kTieStop:
                     break;
@@ -15988,6 +16180,10 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableMeasureEnd:
     // ----------------------------------------------------
+      // forget about the last whole notes,
+      // to enforce a duration being generated
+      // for the first syllable in the next measure
+      fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_; // JMI v0.9.70
       break;
 
     // ----------------------------------------------------
@@ -16043,11 +16239,25 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // should a single hyphen be generated?
+  // ----------------------------------------------------
+  if (doGenerateASingleHyphen) {
+    fLilypondCodeStream <<
+      "- ";
+  }
+
+  // should a double hyphen be generated?
+  // ----------------------------------------------------
+  if (doGenerateADoubleHyphen) {
+    fLilypondCodeStream <<
+      "-- ";
+  }
+
   // should a single underscore be generated?
   // ----------------------------------------------------
   if (doGenerateASingleUnderscore) {
     fLilypondCodeStream <<
-      " _ " <<
+      "_ " <<
       std::endl;
   }
 
@@ -16055,21 +16265,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   // ----------------------------------------------------
   if (doGenerateADoubleUnderscore) {
     fLilypondCodeStream <<
-      " __ ";
-  }
-
-  // should a single hyphen be generated?
-  // ----------------------------------------------------
-  if (doGenerateASingleHyphen) {
-    fLilypondCodeStream <<
-      " - ";
-  }
-
-  // should a double hyphen be generated?
-  // ----------------------------------------------------
-  if (doGenerateADoubleHyphen) {
-    fLilypondCodeStream <<
-      " -- ";
+      "__ ";
   }
 
   // should a skip with duratoin be generated?
@@ -24652,8 +24848,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
   fOnGoingTupletsStack.pop_front ();
 
 /* JMI
- ?????? fCurrentOctaveEntryReference = nullptr;
+  // forget about the current octave entry reference
   // the first note after the tuplet will become the new reference
+ ?????? fCurrentOctaveEntryReference = nullptr;
   */
 }
 
@@ -25651,12 +25848,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
 
   // generate a page break
   fLilypondCodeStream <<
-    "\\break | % " << elt->getNextBarNumber ();
+    "\\break | % " << elt->getNextBarPuristNumber ();
 
   if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
     // generate the line number as a comment
     fLilypondCodeStream <<
-      " %{ line " << elt->getNextBarNumber () << " %}  ";
+      " %{ line " << elt->getNextBarPuristNumber () << " %}  ";
   }
 
   if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
@@ -25761,11 +25958,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
   switch (elt->getUserSelectedPageBreakKind ()) {
     case msrUserSelectedPageBreakKind::kUserSelectedPageBreakYes:
       fLilypondCodeStream <<
-        " \\pageBreak ";
+        "\\pageBreak | % " << elt->getNextBarPuristNumber ();
       break;
     case msrUserSelectedPageBreakKind::kUserSelectedPageBreakNo:
       fLilypondCodeStream <<
-        " \\myPageBreak ";
+//         "\\myPageBreak | % " << elt->getNextBarPuristNumber ();
+        "\\pageBreak | % " << elt->getNextBarPuristNumber ();
       break;
   } // switch
 
@@ -26899,8 +27097,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
 
   // now we can generate the bar check
   fLilypondCodeStream <<
-    " | % " <<
-    elt->getMultiMeasureRestLastMeasurePuristMeasureNumber () + 1;
+    " | % ";
+//     " | % " <<
+//     elt->getMultiMeasureRestLastMeasurePuristMeasureNumber () + 1;
 
 /* TO BE FINALIZED JMI
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {

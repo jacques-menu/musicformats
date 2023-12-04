@@ -271,7 +271,7 @@ mfService::~mfService ()
 void mfService::fetchPassIDKindList (
   std::list<mfPassIDKind>& passIDKindList) const
 {
-  for (S_mfPass pass : fServicePassesList) {
+  for (const S_mfPass& pass : fServicePassesList) {
     passIDKindList.push_back (
       pass-> getPassIDKind());
   } // for
@@ -281,7 +281,7 @@ size_t mfService::fetchMaxPassIDKindAsStringLength () const
 {
   size_t result = 0;
 
-  for (S_mfPass pass : fServicePassesList) {
+  for (const S_mfPass& pass : fServicePassesList) {
     std::string
       passIDKindAsString =
         mfPassIDKindAsString (
@@ -313,7 +313,7 @@ void mfService::print (std::ostream& os) const
 
   const int fieldWidth = fetchMaxPassIDKindAsStringLength ();
 
-  for (S_mfPass pass : fServicePassesList) {
+  for (const S_mfPass& pass : fServicePassesList) {
     os << std::left <<
       std::setw (fieldWidth) <<
       "passIDKind:" <<
@@ -371,7 +371,7 @@ std::string mfService::fetchServicePassDescriptionsAsString () const
 
 //   const int fieldWidth = 10;
 
-  for (S_mfPass pass : fServicePassesList) {
+  for (const S_mfPass& pass : fServicePassesList) {
     iss << // JMI std::left <<
 //       std::setw (fieldWidth) <<
       pass->getPassIDKind () << ": " <<
@@ -415,7 +415,7 @@ void mfService::printServiceForAboutOption (std::ostream& os) const
 
 //   const int fieldWidth = 21;
 
-  for (S_mfPass pass : fServicePassesList) {
+  for (const S_mfPass& pass : fServicePassesList) {
     os << // std::left <<
 //       std::setw (fieldWidth) <<
       gLanguage->

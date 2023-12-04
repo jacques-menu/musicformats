@@ -291,7 +291,7 @@ void waeHandler::waeErrorWithException (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except)
+  const S_mfException& except)
 {
   this->waeErrorWithoutException (
     context,
@@ -311,7 +311,7 @@ void waeHandler::waeErrorWithExceptionWithInputLocation (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except)
+  const S_mfException& except)
 {
   this->waeErrorWithoutExceptionWithInputLocation (
     context,
@@ -392,7 +392,7 @@ void waeHandler::waeInternalErrorWithExceptionWithInputLocation (
   const std::string& sourceCodeFileName,
   int                sourceCodeLineNumber,
   const std::string& message,
-  S_mfException      except)
+  const S_mfException& except)
 {
   this->waeErrorWithoutExceptionWithInputLocation (
     context,

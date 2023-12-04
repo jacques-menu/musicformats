@@ -704,8 +704,10 @@ class EXP msrMeasure : public msrSegmentElement
 
     int                   fMeasureOrdinalNumberInVoice;
 
-    // purist measure number, forcing anacruses to start at '0' if it's not the case
-    // and not shared among repeats components
+    // purist measure number,
+    // forcing anacruses to start at '0' if it's not the case
+    // and used by LilyPond barCheck and barNumberCheck generation
+    // not shared among repeats components // JMI ??? v0.9.70
 
     int                   fMeasurePuristNumber;
 

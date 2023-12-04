@@ -16,8 +16,7 @@
 #include <vector>
 
 #include "msrElements.h"
-#include "msrMeasureElements.h"
-
+#include "msrMeasures.h"
 #include "msrTupletFactors.h"
 #include "msrVoices.h"
 
@@ -152,7 +151,7 @@ std::string syllableElementsListAsString (
   const std::list<msrSyllableElement>& syllableElementsList);
 
 //______________________________________________________________________________
-class EXP msrSyllable : public msrMeasureElement
+class EXP msrSyllable : public msrElement
 {
   public:
 
@@ -161,6 +160,7 @@ class EXP msrSyllable : public msrMeasureElement
 
     static SMARTP<msrSyllable> create (
                             int                    inputLineNumber,
+//                             int                    measurePuristNumber,
                             const S_msrMeasure&    upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
@@ -191,6 +191,7 @@ class EXP msrSyllable : public msrMeasureElement
 
                           msrSyllable (
                             int                    inputLineNumber,
+//                             int                    measurePuristNumber,
                             const S_msrMeasure&    upLinkToMeasure,
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
@@ -206,31 +207,29 @@ class EXP msrSyllable : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override
-//                               { setSyllableUpLinkToMeasure (measure); }
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override
-//                               { return getSyllableUpLinkToMeasure (); }
-//
-//     void                  setSyllableUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getSyllableUpLinkToMeasure () const
-//                               { return fSyllableUpLinkToMeasure; }
-
     // upLinks
     void                  setSyllableUpLinkToNote (const S_msrNote& note);
 
-    S_msrNote             getSyllableUpLinkToNote () const
+    const S_msrNote&      getSyllableUpLinkToNote () const
                               { return fSyllableUpLinkToNote; }
 
     void                  setSyllableUpLinkToStanza (const S_msrStanza& stanza)
                               { fSyllableUpLinkToStanza = stanza; }
 
-    S_msrStanza           getSyllableUpLinkToStanza () const
+    const S_msrStanza&    getSyllableUpLinkToStanza () const
                               { return fSyllableUpLinkToStanza; }
+
+    void                  setSyllableMeasurePuristNumber (int measurePuristNumber)
+                              { fSyllableMeasurePuristNumber = measurePuristNumber; }
+
+    int                   getSyllableMeasurePuristNumber () const
+                              { return fSyllableMeasurePuristNumber; }
+
+    void                  setSyllableUpLinkToMeasure (const S_msrMeasure& measure)
+                              { fSyllableUpLinkToMeasure = measure; }
+
+    const S_msrMeasure&   getSyllableUpLinkToMeasure () const
+                              { return fSyllableUpLinkToMeasure; }
 
     // syllable kind
     msrSyllableKind       getSyllableKind () const
@@ -262,12 +261,9 @@ class EXP msrSyllable : public msrMeasureElement
     msrTupletFactor       getSyllableTupletFactor () const
                               { return fSyllableTupletFactor; }
 
-    // syllable next measure purist number
-    void                  setSyllableMeasureNumber (
-                            const std::string& measureNumber);
-
-    const std::string&    getSyllableMeasureNumber () const
-                              { return fSyllableMeasureNumber; }
+//     // syllable measure number
+//     void                  setSyllableMeasureNumber (
+//                             const std::string& measureNumber);
 
   public:
 
@@ -279,6 +275,8 @@ class EXP msrSyllable : public msrMeasureElement
 
     void                  appendSyllableElementToSyllable (
                             const msrSyllableElement& syllableElement);
+
+    int                   fetchSyllableMeasurePuristNumber () const;
 
   public:
 
@@ -306,18 +304,26 @@ class EXP msrSyllable : public msrMeasureElement
     std::string           asShortString () const override;
 
     void                  print (std::ostream& os) const override;
+    void                  printForTrace (
+                            std::ostream& os,
+                            int theFieldWidth) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    // this uplink is needed for setMeasureElementUpLinkToMeasure // JMI ??? v0.9.70 BABASSE
-//     S_msrMeasure          fSyllableUpLinkToMeasure;
-
     // upLinks
     S_msrNote             fSyllableUpLinkToNote;
-    S_msrStanza           fSyllableUpLinkToStanza; // for use in stanzas
+                            // basic attachment
+
+    S_msrStanza           fSyllableUpLinkToStanza;
+                            // a stanza is a sequence of syllables
+
+    S_msrMeasure          fSyllableUpLinkToMeasure;
+                            // to access next measure's purist number
+
+    int                   fSyllableMeasurePuristNumber;
 
     // syllable kind
     msrSyllableKind       fSyllableKind;
@@ -337,8 +343,6 @@ class EXP msrSyllable : public msrMeasureElement
 
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;
-
-    std::string           fSyllableMeasureNumber; // JMI v0.9.70 USELESS
 };
 typedef SMARTP<msrSyllable> S_msrSyllable;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt);
@@ -427,10 +431,12 @@ class EXP msrStanza : public msrElement
 
     void                  appendSyllableToStanza (
                             const S_msrSyllable& syllable,
+                            const S_msrMeasure&  upLinkToMeasure,
                             const msrWholeNotes& partCurrentDrawingMeasurePosition);
 
     void                  appendSyllableToStanzaClone (
-                            const S_msrSyllable& syllable);
+                            const S_msrSyllable& syllable,
+                            const S_msrMeasure&  upLinkToMeasure);
 
 //     S_msrSyllable         appendRestSyllableToStanza (
 //                             int             inputLineNumber,
@@ -442,6 +448,7 @@ class EXP msrStanza : public msrElement
 
     void                  appendMeasureEndSyllableToStanza (
                             int                  inputLineNumber,
+                            const S_msrMeasure&  upLinkToMeasure,
                             const msrWholeNotes& partCurrentDrawingMeasurePosition);
 
 //     S_msrSyllable         appendMelismaSyllableToStanza (
@@ -480,12 +487,12 @@ class EXP msrStanza : public msrElement
 */
 
     S_msrSyllable         appendLineBreakSyllableToStanza (
-                            int                inputLineNumber,
-                            const std::string& measureNumber);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
     S_msrSyllable         appendPageBreakSyllableToStanza (
-                            int                inputLineNumber,
-                            const std::string& measureNumber);
+                            int                 inputLineNumber,
+                            const S_msrMeasure& upLinkToMeasure);
 
 //     void                  padUpToMeasureCurrentAccumulatedWholeNotesDurationInStanza ( // JMI v0.9.68
 //                             int                  inputLineNumber,

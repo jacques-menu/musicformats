@@ -217,17 +217,6 @@ class EXP msrNote : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink to measure
-//     void                  setMeasureElementUpLinkToMeasure (
-//                             const S_msrMeasure& measure) override;
-//
-//     S_msrMeasure          getMeasureElementUpLinkToMeasure () const override;
-//
-//     void                  setNoteUpLinkToMeasure (
-//                             const S_msrMeasure& measure);
-//
-//     S_msrMeasure          getNoteUpLinkToMeasure () const;
-
     // uplink to chord
     void                  setNoteShortcutUpLinkToChord (
                             const S_msrChord& chord)
@@ -787,7 +776,7 @@ class EXP msrNote : public msrTupletElement
     S_msrPartGroup        fetchNoteUpLinkToPartGroup () const;
 
     // score upLink
-    S_msrScore            fetchUpLinkToNoteToScore () const;
+    S_msrScore            fetchNoteUpLinkToScore () const;
 
     // a pitched rest?
     Bool                  noteIsAPitchedRest () const;
@@ -1000,8 +989,6 @@ class EXP msrNote : public msrTupletElement
 
     // upLinks
     // ------------------------------------------------------
-
-//     S_msrMeasure          fNoteUpLinkToMeasure;
 
     S_msrChord            fNoteShortcutUpLinkToChord;
 
