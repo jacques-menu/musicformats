@@ -1085,7 +1085,7 @@ void msrSyllable::print (std::ostream& os) const
 
 void msrSyllable::printForTrace (
   std::ostream& os,
-  int fieldWtheFieldWidthidth) const
+  int           theFieldWidth) const
 {
   os << std::left <<
     std::setw (theFieldWidth) <<

@@ -306,7 +306,7 @@ class EXP msrSyllable : public msrElement
     void                  print (std::ostream& os) const override;
     void                  printForTrace (
                             std::ostream& os,
-                            int theFieldWidth) const;
+                            int           theFieldWidth) const;
 
   private:
 

@@ -1,1 +1,1 @@
-#define MUSICFORMATS_VERSION_DATE "Decembre 4, 2023"
+#define MUSICFORMATS_VERSION_DATE "December 5, 2023"
