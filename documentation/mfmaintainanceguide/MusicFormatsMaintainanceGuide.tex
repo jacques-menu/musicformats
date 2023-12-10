@@ -21,7 +21,7 @@
 \usepackage{import}
 
 
-\subimport{../mflatexlib}{mflatexlibCommonSettings.tex} 
+\subimport{../mflatexlib}{mflatexlibCommonSettings.tex}
 
 \subimport{../mflatexlib}{mflatexlibDivisionsCommands.tex}
 
@@ -195,237 +195,216 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
 
 
 % -------------------------------------------------------------------------
-\part{Overview of MusicFormats}
+%\part{Overview of MusicFormats}
 % -------------------------------------------------------------------------
 
-
-% now we can switch to the regular headers and footers
-\useRegularPagesHeadersAndFooters
-
-
-\subimport{./}{mfmaintainanceguideIntroduction.tex}
-
-\subimport{./}{mfmaintainanceguideDocumentation.tex}
-
-\subimport{./}{mfmaintainanceguideBuildingMusicFormats.tex}
-
-\subimport{./}{mfmaintainanceguideCodeBaseStructure.tex}
-
-\subimport{./}{mfmaintainanceguideComponents.tex}
-
-\subimport{./}{mfmaintainanceguideClisamples.tex}
-
-\subimport{./}{mfmaintainanceguideWAE.tex}
-
-\subimport{./}{mfmaintainanceguideTraceFacility.tex}
-
-\subimport{./}{mfmaintainanceguideMultiLingualSupport.tex}
-
-\subimport{./}{mfmaintainanceguideTextualInputAndOutput.tex}
-
-\subimport{./}{mfmaintainanceguideBinaryDataOutput.tex}
-
-\subimport{./}{mfmaintainanceguideCPUMeasurements.tex}
+\subimport{./overview/}{mfmgOverview.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Programming style and conventions}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideProgrammingStyleAndConventions.tex}
+\subimport{./}{mfmgProgrammingStyleAndConventions.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Maintainance tools}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideMaintainanceTools.tex}
+\subimport{./}{mfmgMaintainanceTools.tex}
 
 
 % -------------------------------------------------------------------------
 \part{The two-phase visitors pattern}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideTwoPhaseVisitorsPattern.tex}
+\subimport{./}{mfmgTwoPhaseVisitorsPattern.tex}
 
 
 % -------------------------------------------------------------------------
 \part{MusicFormats components}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideMFC.tex}
+\subimport{./}{mfmgMFC.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Options and help}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideOAH.tex}
+\subimport{./}{mfmgOAH.tex}
 
 
 % -------------------------------------------------------------------------
-\part{Representations}
+%\part{Representations}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideRepresentationsGeneralPrinciples.tex}
-
-\subimport{./}{mfmaintainanceguideDisplayingRepresentations.tex}
-
-\subimport{./}{mfmaintainanceguideMSR.tex}
-
-\subimport{./}{mfmaintainanceguideMsrTimeOrientedRepresentation.tex}
-
-\subimport{./}{mfmaintainanceguidePathToVoice.tex}
-
-\subimport{./}{mfmaintainanceguideLPSR.tex}
-
-\subimport{./}{mfmaintainanceguideBSR.tex}
-
-\subimport{./}{mfmaintainanceguideMXSR.tex}
+\subimport{./}{mfmgRepresentations.tex}
+%\subimport{./}{mfmgRepresentationsGeneralPrinciples.tex}
+%
+%\subimport{./}{mfmgDisplayingRepresentations.tex}
+%
+%\subimport{./}{mfmgMSR.tex}
+%
+%\subimport{./}{mfmgMsrTimeOrientedRepresentation.tex}
+%
+%\subimport{./}{mfmgPathToVoice.tex}
+%
+%\subimport{./}{mfmgLPSR.tex}
+%
+%\subimport{./}{mfmgBSR.tex}
+%
+%\subimport{./}{mfmgMXSR.tex}
 
 
 % -------------------------------------------------------------------------
-\part{Passes}
+%\part{Passes}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguidePasses.tex}
-
-\subimport{./}{mfmaintainanceguideLilypondGeneration.tex}
-
-\subimport{./}{mfmaintainanceguideBrailleGeneration.tex}
-
-\subimport{./}{mfmaintainanceguideMusicxmlGeneration.tex}
-
-\subimport{./}{mfmaintainanceguideGuidoGeneration.tex}
+\subimport{./}{mfmgPasses.tex}
+%\subimport{./}{mfmgPassesOverview.tex}
+%
+%\subimport{./}{mfmgLilypondGeneration.tex}
+%
+%\subimport{./}{mfmgBrailleGeneration.tex}
+%
+%\subimport{./}{mfmgMusicxmlGeneration.tex}
+%
+%\subimport{./}{mfmgGuidoGeneration.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Generators}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideGenerators.tex}
+\subimport{./}{mfmgGenerators.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Converters}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideConverters.tex}
+\subimport{./}{mfmgConverters.tex}
 
 
 % -------------------------------------------------------------------------
-\part{Interfaces}
+%\part{Interfaces}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideLibraryInterfaces.tex}
+\subimport{./}{mfmgInterfaces.tex}
 
-\subimport{./}{mfmaintainanceguideRepresentationsInterfaces.tex}
-
-\subimport{./}{mfmaintainanceguidePassesInterfaces.tex}
-
-\subimport{./}{mfmaintainanceguideConvertersInterfaces.tex}
+%\subimport{./}{mfmgLibraryInterfaces.tex}
+%
+%\subimport{./}{mfmgRepresentationsInterfaces.tex}
+%
+%\subimport{./}{mfmgPassesInterfaces.tex}
+%
+%\subimport{./}{mfmgConvertersInterfaces.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Releases}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideCreatingReleases.tex}
+\subimport{./}{mfmgCreatingReleases.tex}
 
 
 % -------------------------------------------------------------------------
-\part{Selected topics}
+%\part{Selected topics}
 % -------------------------------------------------------------------------
 
-% initializations
-% -------------------------------------------------------------------------
+\subimport{./}{mfmgSelectedTopics.tex}
 
-\subimport{./}{mfmaintainanceguideInitializations.tex}
-
-
-% the OAH atoms collection
-% -------------------------------------------------------------------------
-
-\subimport{./}{mfmaintainanceguideTheOAHAtomsCollection.tex}
-
-
+%% initializations
+%% -------------------------------------------------------------------------
+%
+%\subimport{./}{mfmgInitializations.tex}
+%
+%
+%% the OAH atoms collection
+%% -------------------------------------------------------------------------
+%
+%\subimport{./}{mfmgTheOAHAtomsCollection.tex}
+%
+%
 % MSR
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideMeasuresHandling.tex}
-
-\subimport{./}{mfmaintainanceguideFinalizations.tex}
-
-\subimport{./}{mfmaintainanceguideTemposHandling.tex}
-
-\subimport{./}{mfmaintainanceguideNotesHandling.tex}
-
-\subimport{./}{mfmaintainanceguideSegmentsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideBeatRepeatsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideMeasureRepeatsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideMultiMeasureRestsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideRepeatsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideVoicesHandling.tex}
-
-\subimport{./}{mfmaintainanceguideStavesHandling.tex}
-
-\subimport{./}{mfmaintainanceguidePartsHandling.tex}
-
-\subimport{./}{mfmaintainanceguidePartGroupsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideScoresHandling.tex}
-
-\subimport{./}{mfmaintainanceguideBooksHandling.tex}
-
-\subimport{./}{mfmaintainanceguideOrnamentsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideTiesHandling.tex}
-
-\subimport{./}{mfmaintainanceguideDynamicsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideBeamsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideSlursHandling.tex}
-
-\subimport{./}{mfmaintainanceguideGraceNotesGroupsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideChordsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideTupletsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideHarmoniesHandling.tex}
-
-\subimport{./}{mfmaintainanceguideFiguredBassesHandling.tex}
-
-\subimport{./}{mfmaintainanceguideLyricsHandling.tex}
-
-\subimport{./}{mfmaintainanceguideMIDIHandling.tex}
+%\subimport{./}{mfmgMeasuresHandling.tex}
+%
+%\subimport{./}{mfmgFinalizations.tex}
+%
+%\subimport{./}{mfmgTemposHandling.tex}
+%
+%\subimport{./}{mfmgNotesHandling.tex}
+%
+%\subimport{./}{mfmgSegmentsHandling.tex}
+%
+%\subimport{./}{mfmgBeatRepeatsHandling.tex}
+%
+%\subimport{./}{mfmgMeasureRepeatsHandling.tex}
+%
+%\subimport{./}{mfmgMultiMeasureRestsHandling.tex}
+%
+%\subimport{./}{mfmgRepeatsHandling.tex}
+%
+%\subimport{./}{mfmgVoicesHandling.tex}
+%
+%\subimport{./}{mfmgStavesHandling.tex}
+%
+%\subimport{./}{mfmgPartsHandling.tex}
+%
+%\subimport{./}{mfmgPartGroupsHandling.tex}
+%
+%\subimport{./}{mfmgScoresHandling.tex}
+%
+%\subimport{./}{mfmgBooksHandling.tex}
+%
+%\subimport{./}{mfmgOrnamentsHandling.tex}
+%
+%\subimport{./}{mfmgTiesHandling.tex}
+%
+%\subimport{./}{mfmgDynamicsHandling.tex}
+%
+%\subimport{./}{mfmgBeamsHandling.tex}
+%
+%\subimport{./}{mfmgSlursHandling.tex}
+%
+%\subimport{./}{mfmgGraceNotesGroupsHandling.tex}
+%
+%\subimport{./}{mfmgChordsHandling.tex}
+%
+%\subimport{./}{mfmgTupletsHandling.tex}
+%
+%\subimport{./}{mfmgHarmoniesHandling.tex}
+%
+%\subimport{./}{mfmgFiguredBassesHandling.tex}
+%
+%\subimport{./}{mfmgLyricsHandling.tex}
+%
+%\subimport{./}{mfmgMIDIHandling.tex}
 
 
 % -------------------------------------------------------------------------
 \part{MusicFormats Scripting Language (MFSL)}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideMFSL.tex}
+\subimport{./}{mfmgMFSL.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Music Scores Description Language (MSDL)}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideMSDL.tex}
+\subimport{./}{mfmgMSDL.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Debugging}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmaintainanceguideDebugging.tex}
+\subimport{./}{mfmgDebugging.tex}
 
 
 % -------------------------------------------------------------------------

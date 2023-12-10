@@ -12,30 +12,26 @@
 % !TEX root = mfuserguide.tex
 
 % -------------------------------------------------------------------------
-\chapter{\xmlToGmn\ }
+\chapter{\xmlToXml\ }
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfuserguideXml2gmnArchitecturePicture}
-
-
-% -------------------------------------------------------------------------
-\section{Why \xmlToGmn?}
-% -------------------------------------------------------------------------
-
-\libmusicxml\ comes with \xmlToGuido, a \converter\ of \mxml\ files to \guido\ syntax, which has some limitations. It is supplied as as sample of the library's use.
-
-\xmlToGmn\ has been designed to complement \libmusicxml\ features: it provides the same translation as \xmlToGuido, with more options for flexibility.
-
-Work remains to be done in the conversion of \msrRepr\ to MXSR, but \xmlToGmn\ is already fairly complete.
+\subimport{./}{mfugXml2xmlArchitecturePicture}
 
 
 % -------------------------------------------------------------------------
-\section{What \xmlToGmn\ does}
+\section{Why \xmlToXml?}
 % -------------------------------------------------------------------------
 
-\xmlToGmn\ performs the 5 steps from \mxml\ to LilyPond\ to translate the former into the latter, as shown in \figureRef{xmlToLyArchitecture}. Converting from MXSR to MSR\ is done in two sub-phases for implementation reasons.
+\xmlToXml\ has been designed to operate on \mxml\ data, applying options to apply the desired changes. It does a good job already, and will be completed as needed.
 
-The '{\tt -about}' option to \xmlToGmn\ details that somewhat:
+
+% -------------------------------------------------------------------------
+\section{What \xmlToXml\ does}
+% -------------------------------------------------------------------------
+
+\xmlToXml\ performs the 5 steps from \mxml\ to LilyPond\ to translate the former into the latter, as shown in \figureRef{xmlToLyArchitecture}. Converting from MXSR to MSR\ is done in two sub-phases for implementation reasons.
+
+The '{\tt -about}' option to \xmlToXml\ details that somewhat:
 \begin{lstlisting}[language=MusicXML]
 jacquesmenu@macmini > xml2xml -about
 What xml2xml does:

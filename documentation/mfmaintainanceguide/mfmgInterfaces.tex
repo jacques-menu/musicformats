@@ -9,16 +9,16 @@
 %  https://github.com/jacques-menu/musicformats
 % -------------------------------------------------------------------------
 
-% !TEX root = mfmaintainanceguide.tex
+% MusicFormats maintainance guide
 
 % -------------------------------------------------------------------------
-\chapter{Multi-lingual support}
+\part{Interfaces}
 % -------------------------------------------------------------------------
 
+\subimport{./interfaces}{mfmgLibraryInterfaces.tex}
 
-\mf\ supports multiple languages in various areas:
-\begin{itemize}
-\item note pitches names in MSR, LPSR and generated LilyPond code;
-\item LilyPond chord names;
-\item reserved keywords in MSDL.
-\end{itemize}
+\subimport{./interfaces}{mfmgRepresentationsInterfaces.tex}
+
+\subimport{./interfaces}{mfmgPassesInterfaces.tex}
+
+\subimport{./interfaces}{mfmgConvertersInterfaces.tex}
