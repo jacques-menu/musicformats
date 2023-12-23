@@ -214,11 +214,12 @@ std::string msrSyllableElement::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[SyllableElement" <<
-    ", " << fSyllableElementKind <<
-    ", \"" << fSyllableElementContents << "\"" <<
-    ", line " << fInputStartLineNumber <<
-    ']';
+//     '[' <<
+    "\"" << fSyllableElementContents << "\"" <<
+    ", " <<
+    fSyllableElementKind <<
+    ", line " << fInputStartLineNumber;
+//     ']';
 
   return ss.str ();
 }
@@ -276,6 +277,28 @@ std::string syllableElementsListAsString (
     for ( ; ; ) {
       ss <<
         (*i).asString ();
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+  }
+
+  return ss.str ();
+}
+
+std::string syllableElementsListAsShortString (
+  const std::list<msrSyllableElement>& syllableElementsList)
+{
+  std::stringstream ss;
+
+  if (syllableElementsList.size ()) {
+    std::list<msrSyllableElement>::const_iterator
+      iBegin = syllableElementsList.begin (),
+      iEnd   = syllableElementsList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      ss <<
+        (*i).asShortString ();
       if (++i == iEnd) break;
       ss << ", ";
     } // for
@@ -858,25 +881,45 @@ std::string msrSyllable::syllableUpLinkToNoteAsShortString () const
   return result;
 }
 
-std::string msrSyllable::syllableElementsListAsString () const
-{
-  std::stringstream ss;
-
-  if (fSyllableElementsList.size ()) {
-    std::list<msrSyllableElement>::const_iterator
-      iBegin = fSyllableElementsList.begin (),
-      iEnd   = fSyllableElementsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      ss << mfDoubleQuoteStringIfNonAlpha ((*i).asString ());
-      if (++i == iEnd) break;
-      ss << " || ";
-    } // for
-  }
-
-  return ss.str ();
-}
+// std::string msrSyllable::syllableElementsListAsString () const
+// {
+//   std::stringstream ss;
+//
+//   if (fSyllableElementsList.size ()) {
+//     std::list<msrSyllableElement>::const_iterator
+//       iBegin = fSyllableElementsList.begin (),
+//       iEnd   = fSyllableElementsList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       ss << mfDoubleQuoteStringIfNonAlpha ((*i).asString ());
+//       if (++i == iEnd) break;
+//       ss << " || ";
+//     } // for
+//   }
+//
+//   return ss.str ();
+// }
+//
+// std::string msrSyllable::syllableElementsListAsShortString () const
+// {
+//   std::stringstream ss;
+//
+//   if (fSyllableElementsList.size ()) {
+//     std::list<msrSyllableElement>::const_iterator
+//       iBegin = fSyllableElementsList.begin (),
+//       iEnd   = fSyllableElementsList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       ss << mfDoubleQuoteStringIfNonAlpha ((*i).asString ());
+//       if (++i == iEnd) break;
+//       ss << " || ";
+//     } // for
+//   }
+//
+//   return ss.str ();
+// }
 
 std::string msrSyllable::asString () const
 {
@@ -885,7 +928,7 @@ std::string msrSyllable::asString () const
   ss <<
     "[Syllable " <<
     ", fSyllableElementsList: " <<
-    syllableElementsListAsString () <<
+    syllableElementsListAsString (fSyllableElementsList) <<
     ", fSyllableKind: " << fSyllableKind <<
     ", fSyllableExtendKind: " << fSyllableExtendKind <<
     ", fSyllableStanzaNumber: \"" << fSyllableStanzaNumber << "\"" <<
@@ -961,24 +1004,25 @@ std::string msrSyllable::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Syllable" <<
-    " \"" <<
-    syllableElementsListAsString () <<
-    "\", " << fSyllableKind <<
+    "[Syllable " <<
+//     " \"" <<
+    syllableElementsListAsShortString (fSyllableElementsList) <<
+//     "\", " << fSyllableKind <<
+//     ", " << fSyllableKind <<
     ", " << fSyllableExtendKind <<
-    ", \"" << fSyllableStanzaNumber << "\"" <<
-    ", " << fSyllableWholeNotes.asFractionString () <<
-    ", " << fSyllableTupletFactor.asFractionString ();
+//     ", \"" << fSyllableStanzaNumber << "\"" <<
+    ", " << fSyllableWholeNotes.asFractionString () << " whole notes" <<
+    ", " << fSyllableTupletFactor.asFractionString () << " factor";
 
-  ss <<
-    ", fSyllableUpLinkToMeasure: ";
-    if (fSyllableUpLinkToMeasure) {
-      ss <<
-        fSyllableUpLinkToMeasure->asString ();
-    }
-    else {
-      ss << "[NULL]";
-    }
+//   ss <<
+//     ", fSyllableUpLinkToMeasure: ";
+//     if (fSyllableUpLinkToMeasure) {
+//       ss <<
+//         fSyllableUpLinkToMeasure->asString ();
+//     }
+//     else {
+//       ss << "[NULL]";
+//     }
 
   ss <<
     ", line " << fInputStartLineNumber;
@@ -988,7 +1032,7 @@ std::string msrSyllable::asShortString () const
   return ss.str ();
 }
 
-void msrSyllable::print (std::ostream& os) const
+void msrSyllable::printFull (std::ostream& os) const
 {
   os <<
     "[Syllable" <<
@@ -1004,7 +1048,7 @@ void msrSyllable::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fSyllableElementsList" << ": " <<
-    syllableElementsListAsString () <<
+    syllableElementsListAsString (fSyllableElementsList) <<
     std::endl <<
 
 //     std::setw (fieldWidth) <<
@@ -1083,31 +1127,35 @@ void msrSyllable::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrSyllable::printForTrace (
-  std::ostream& os,
-  int           theFieldWidth) const
+void msrSyllable::print (std::ostream& os) const
+//   std::ostream& os,
+//   int           theFieldWidth) const
 {
-  os << std::left <<
-    std::setw (theFieldWidth) <<
-    "fSyllableElementsList" << ": " <<
-    syllableElementsListAsString () <<
-    std::endl <<
-    std::setw (theFieldWidth) <<
-    "fSyllableKind" << ": " <<
-    fSyllableKind <<
+  os <<
+    asShortString () <<
     std::endl;
 
-  os << std::left <<
-    std::setw (theFieldWidth) <<
-    "fSyllableUpLinkToMeasure" << ": ";
-  if (fSyllableUpLinkToMeasure) {
-    os <<
-      fSyllableUpLinkToMeasure->asString ();
-  }
-  else {
-    os << "[NULL]";
-  }
-  os << std::endl;
+//   os << std::left <<
+//     std::setw (theFieldWidth) <<
+//     "fSyllableElementsList" << ": " <<
+//     syllableElementsListAsString (fSyllableElementsList) <<
+//     std::endl <<
+//     std::setw (theFieldWidth) <<
+//     "fSyllableKind" << ": " <<
+//     fSyllableKind <<
+//     std::endl;
+//
+//   os << std::left <<
+//     std::setw (theFieldWidth) <<
+//     "fSyllableUpLinkToMeasure" << ": ";
+//   if (fSyllableUpLinkToMeasure) {
+//     os <<
+//       fSyllableUpLinkToMeasure->asString ();
+//   }
+//   else {
+//     os << "[NULL]";
+//   }
+//   os << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)
@@ -1847,15 +1895,42 @@ void msrStanza::print (std::ostream& os) const
 
   else {
     if (fSyllables.size ()) {
-      std::vector<S_msrSyllable>::const_iterator
-        iBegin = fSyllables.begin (),
-        iEnd   = fSyllables.end (),
-        i      = iBegin;
+      for (S_msrSyllable syllable : fSyllables) {
+//         syllable->print (os);
+        os <<
+          syllable->asShortString () <<
+          std::endl;
+      } // for
+    }
+  }
 
-      for ( ; ; ) {
-        os << (*i);
-        if (++i == iEnd) break;
-        // no std::endl here
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
+void msrStanza::printFull (std::ostream& os) const
+{
+  os <<
+    "[Stanza " << getStanzaName () <<
+    " (number \"" <<
+    fStanzaNumber <<
+    "\", " <<
+    fSyllables.size () << " syllables)" <<
+    std::endl;
+
+  ++gIndenter;
+
+  if (! fStanzaTextPresent) {
+    os <<
+      "(No actual text)" <<
+      std::endl;
+  }
+
+  else {
+    if (fSyllables.size ()) {
+      for (S_msrSyllable syllable : fSyllables) {
+        syllable->printFull (os);
       } // for
     }
   }

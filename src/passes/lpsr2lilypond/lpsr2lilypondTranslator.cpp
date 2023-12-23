@@ -15280,11 +15280,13 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 
     const int fieldWidth = 28;
 
-    syllable->printForTrace (
-      fLilypondCodeStream,
-      fieldWidth);
+//     syllable->printForTrace (
+//       fLilypondCodeStream,
+//       fieldWidth);
 
-    fLilypondCodeStream << std::endl;
+    fLilypondCodeStream <<
+      syllable <<
+      std::endl;
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<

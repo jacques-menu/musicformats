@@ -1,0 +1,135 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Parts handling}\label{Parts handling}
+% -------------------------------------------------------------------------
+
+Parts are presented at \sectionRef{Parts}.
+
+
+% -------------------------------------------------------------------------
+\section{Parts browsing}\label{Parts browsing}
+% -------------------------------------------------------------------------
+
+\Method{msrPart}{browseData} defined in \msrBoth{msrParts}\index{Parts!browsing} is pecular in that it imposes a \MainIt{partial order}\index{partial!order}\index{order!partial|see{partial order}} on the part staves browsing: %%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+void msrPart::browseData (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gMsrOahGroup->getTraceMsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "% ==> msrPart::browseData ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED // JMI
+  if (gMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
+    gLog <<
+      "++++++++ fPartAllStavesList.size(): " <<
+      fPartAllStavesList.size () <<
+      std::endl;
+
+    if (fPartAllStavesList.size ()) {
+      for (S_msrStaff staff : fPartAllStavesList) {
+        gLog <<
+          std::endl <<
+          "+++++++++ staff: ++++++++" <<
+          " \"" << staff->getStaffName () << "\"" <<
+          std::endl;
+      } // for
+    }
+
+    gLog <<
+      "++++++++ fPartNonHarmoniesNorFiguredBassStavesList.size(): " <<
+      fPartNonHarmoniesNorFiguredBassStavesList.size () <<
+      std::endl;
+
+    if (fPartNonHarmoniesNorFiguredBassStavesList.size ()) {
+      for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
+        gLog <<
+          std::endl <<
+          "+++++++++ staff: ++++++++" <<
+          " \"" << staff->getStaffName () << "\"" <<
+          std::endl;
+      } // for
+    }
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  /* don't enforce any order here, leave it to the client thru sorting JMI */
+
+  // browse the part harmonies staff if any right now, JMI
+  // to place it before the corresponding part
+  if (fPartHarmoniesStaff) {
+    msrBrowser<msrStaff> browser (v);
+    browser.browse (*fPartHarmoniesStaff);
+  }
+
+  // browse all non harmonies and non figured bass staves
+  for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
+    // browse the staff
+    msrBrowser<msrStaff> browser (v);
+    browser.browse (*staff);
+  } // for
+
+  // browse the part figured bass staff if any only now, JMI
+  // to place it after the corresponding part
+  if (fPartFiguredBassStaff) {
+    msrBrowser<msrStaff> browser (v);
+    browser.browse (*fPartFiguredBassStaff);
+  }
+
+//   // browse all the part staves JMI
+//   for (S_msrStaff staff : fPartAllStavesList) {
+//     if (staff != fPartHarmoniesStaff && staff != fPartFiguredBassStaff) {
+//       // browse the staff
+//       msrBrowser<msrStaff> browser (v);
+//       browser.browse (*staff);
+//     }
+//   } // for
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{XXXX in \mxsrToMsr{}}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{XXXX in \mxsrToMsr{}}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{XXXX in \msrToMsr{}}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{XXXX in \msrToLpsr{}}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{XXXX in \lpsrToLilypond{}}
+% -------------------------------------------------------------------------
+
+

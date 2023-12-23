@@ -3640,7 +3640,8 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
         // build a single words value from the texts list
         // JMI create an msrWords instance for each???
         std::string wordsValue =
-          elt->syllableElementsListAsString();
+          syllableElementsListAsString (
+            elt-> getSyllableElementsList ());
 
         // create the words
 #ifdef MF_TRACE_IS_ENABLED

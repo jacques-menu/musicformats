@@ -52,7 +52,7 @@
 % indexing (specific to this document)
 % -------------------------------------------------------------------------
 
-\makeindex[name=Main, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Main index, intoc]
+\makeindex[name=Main, options= -s ../mflatexlib/MusicFormats.ist, columns=2, title=Main index, intoc]
 %\makeindex[columns=2, title=Index, intoc]
 % typically, \printindex is placed at the end of the document
 % https://mirror.foobar.to/CTAN/macros/latex/contrib/imakeidx/imakeidx.pdf
@@ -61,17 +61,17 @@
 
 % JMI don't create too many indexes, this causes idxlayout not to produce any indexes at all!
 
-\makeindex[name=Files, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Files index, intoc]
+\makeindex[name=Files, options= -s ../mflatexlib/MusicFormats.ist, columns=2, title=Files index, intoc]
 
-\makeindex[name=Types, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Types index, intoc]
+\makeindex[name=Types, options= -s ../mflatexlib/MusicFormats.ist, columns=2, title=Types index, intoc]
 
-\makeindex[name=MethodsAndFields, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Methods and fields index, intoc]
+\makeindex[name=MethodsAndFields, options= -s ../mflatexlib/MusicFormats.ist, columns=2, title=Methods and fields index, intoc]
 
-\makeindex[name=ConstantsFunctionsAndVariables, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title={Constants, functions and variables index}, intoc]
+\makeindex[name=ConstantsFunctionsAndVariables, options= -s ../mflatexlib/MusicFormats.ist, columns=2, title={Constants, functions and variables index}, intoc]
 
-\makeindex[name=Options, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Options, intoc]
+\makeindex[name=Options, options= -s ../mflatexlib/MusicFormats.ist, columns=2, title=Options, intoc]
 
-\makeindex[name=MusicXML, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=MusicXML index, intoc]
+\makeindex[name=MusicXML, options= -s ../mflatexlib/MusicFormats.ist, columns=2, title=MusicXML index, intoc]
 
 \indexsetup{level=\section}
 
@@ -198,35 +198,14 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
 %\part{Overview of MusicFormats}
 % -------------------------------------------------------------------------
 
-\subimport{./overview/}{mfmgOverview.tex}
+\subimport{./}{mfmgOverview.tex}
 
 
 % -------------------------------------------------------------------------
-\part{Programming style and conventions}
+%\part{Developper perspective}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmgProgrammingStyleAndConventions.tex}
-
-
-% -------------------------------------------------------------------------
-\part{Maintainance tools}
-% -------------------------------------------------------------------------
-
-\subimport{./}{mfmgMaintainanceTools.tex}
-
-
-% -------------------------------------------------------------------------
-\part{The two-phase visitors pattern}
-% -------------------------------------------------------------------------
-
-\subimport{./}{mfmgTwoPhaseVisitorsPattern.tex}
-
-
-% -------------------------------------------------------------------------
-\part{MusicFormats components}
-% -------------------------------------------------------------------------
-
-\subimport{./}{mfmgMFC.tex}
+\subimport{./}{mfmgDevelopper.tex}
 
 
 % -------------------------------------------------------------------------
@@ -241,21 +220,6 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
 % -------------------------------------------------------------------------
 
 \subimport{./}{mfmgRepresentations.tex}
-%\subimport{./}{mfmgRepresentationsGeneralPrinciples.tex}
-%
-%\subimport{./}{mfmgDisplayingRepresentations.tex}
-%
-%\subimport{./}{mfmgMSR.tex}
-%
-%\subimport{./}{mfmgMsrTimeOrientedRepresentation.tex}
-%
-%\subimport{./}{mfmgPathToVoice.tex}
-%
-%\subimport{./}{mfmgLPSR.tex}
-%
-%\subimport{./}{mfmgBSR.tex}
-%
-%\subimport{./}{mfmgMXSR.tex}
 
 
 % -------------------------------------------------------------------------
@@ -263,29 +227,6 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
 % -------------------------------------------------------------------------
 
 \subimport{./}{mfmgPasses.tex}
-%\subimport{./}{mfmgPassesOverview.tex}
-%
-%\subimport{./}{mfmgLilypondGeneration.tex}
-%
-%\subimport{./}{mfmgBrailleGeneration.tex}
-%
-%\subimport{./}{mfmgMusicxmlGeneration.tex}
-%
-%\subimport{./}{mfmgGuidoGeneration.tex}
-
-
-% -------------------------------------------------------------------------
-\part{Generators}
-% -------------------------------------------------------------------------
-
-\subimport{./}{mfmgGenerators.tex}
-
-
-% -------------------------------------------------------------------------
-\part{Converters}
-% -------------------------------------------------------------------------
-
-\subimport{./}{mfmgConverters.tex}
 
 
 % -------------------------------------------------------------------------
@@ -294,21 +235,6 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
 
 \subimport{./}{mfmgInterfaces.tex}
 
-%\subimport{./}{mfmgLibraryInterfaces.tex}
-%
-%\subimport{./}{mfmgRepresentationsInterfaces.tex}
-%
-%\subimport{./}{mfmgPassesInterfaces.tex}
-%
-%\subimport{./}{mfmgConvertersInterfaces.tex}
-
-
-% -------------------------------------------------------------------------
-\part{Releases}
-% -------------------------------------------------------------------------
-
-\subimport{./}{mfmgCreatingReleases.tex}
-
 
 % -------------------------------------------------------------------------
 %\part{Selected topics}
@@ -316,95 +242,12 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
 
 \subimport{./}{mfmgSelectedTopics.tex}
 
-%% initializations
-%% -------------------------------------------------------------------------
-%
-%\subimport{./}{mfmgInitializations.tex}
-%
-%
-%% the OAH atoms collection
-%% -------------------------------------------------------------------------
-%
-%\subimport{./}{mfmgTheOAHAtomsCollection.tex}
-%
-%
-% MSR
-% -------------------------------------------------------------------------
-
-%\subimport{./}{mfmgMeasuresHandling.tex}
-%
-%\subimport{./}{mfmgFinalizations.tex}
-%
-%\subimport{./}{mfmgTemposHandling.tex}
-%
-%\subimport{./}{mfmgNotesHandling.tex}
-%
-%\subimport{./}{mfmgSegmentsHandling.tex}
-%
-%\subimport{./}{mfmgBeatRepeatsHandling.tex}
-%
-%\subimport{./}{mfmgMeasureRepeatsHandling.tex}
-%
-%\subimport{./}{mfmgMultiMeasureRestsHandling.tex}
-%
-%\subimport{./}{mfmgRepeatsHandling.tex}
-%
-%\subimport{./}{mfmgVoicesHandling.tex}
-%
-%\subimport{./}{mfmgStavesHandling.tex}
-%
-%\subimport{./}{mfmgPartsHandling.tex}
-%
-%\subimport{./}{mfmgPartGroupsHandling.tex}
-%
-%\subimport{./}{mfmgScoresHandling.tex}
-%
-%\subimport{./}{mfmgBooksHandling.tex}
-%
-%\subimport{./}{mfmgOrnamentsHandling.tex}
-%
-%\subimport{./}{mfmgTiesHandling.tex}
-%
-%\subimport{./}{mfmgDynamicsHandling.tex}
-%
-%\subimport{./}{mfmgBeamsHandling.tex}
-%
-%\subimport{./}{mfmgSlursHandling.tex}
-%
-%\subimport{./}{mfmgGraceNotesGroupsHandling.tex}
-%
-%\subimport{./}{mfmgChordsHandling.tex}
-%
-%\subimport{./}{mfmgTupletsHandling.tex}
-%
-%\subimport{./}{mfmgHarmoniesHandling.tex}
-%
-%\subimport{./}{mfmgFiguredBassesHandling.tex}
-%
-%\subimport{./}{mfmgLyricsHandling.tex}
-%
-%\subimport{./}{mfmgMIDIHandling.tex}
-
 
 % -------------------------------------------------------------------------
-\part{MusicFormats Scripting Language (MFSL)}
+%\part{Other tools}
 % -------------------------------------------------------------------------
 
-\subimport{./}{mfmgMFSL.tex}
-
-
-% -------------------------------------------------------------------------
-\part{Music Scores Description Language (MSDL)}
-% -------------------------------------------------------------------------
-
-\subimport{./}{mfmgMSDL.tex}
-
-
-% -------------------------------------------------------------------------
-\part{Debugging}
-% -------------------------------------------------------------------------
-
-\subimport{./}{mfmgDebugging.tex}
+\subimport{./}{mfmgOtherTools.tex}
 
 
 % -------------------------------------------------------------------------
@@ -415,7 +258,8 @@ void msr2msrTranslator::visitStart (S_msrClef& elt)
 \part{Indexes}
 % -------------------------------------------------------------------------
 
-%%%JMI There are several thematic indexes apart from the main, alphabetical one, to provide rich cross-indexing in this document.
+%%% There are several thematic indexes apart from the main, alphabetical one,
+%%% to provide rich cross-indexing in this document.
 
 % back to the lists fancyhead headers and footers
 \useListsPagesHeadersAndFooters

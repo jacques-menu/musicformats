@@ -108,7 +108,10 @@ This may be useful when debugging EXECUTABLE.)",
     traceForTestsOahBooleanAtom =
       oahBooleanAtom::create (
         "maintainance-run", "maint",
-R"(Write information for use by the developpers/maintainers of MusicFormats to standard error.)",
+R"(Execute parts of the code otherwise ignored for use
+by the developpers/maintainers of MusicFormats.
+This is useful when code not yet finalized has to be debugged
+without annoying the regular user.)",
         "fMaintainanceRun",
         fMaintainanceRun);
 
