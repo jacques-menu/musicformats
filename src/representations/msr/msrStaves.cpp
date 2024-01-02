@@ -996,7 +996,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 }
 
 void msrStaff::registerVoiceByItsNumber (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& voice)
 {
   int voiceNumber = voice->getVoiceNumber ();
@@ -1097,9 +1097,9 @@ void msrStaff::registerVoiceByItsNumber (
 }
 
 void msrStaff::registerRegularVoiceByItsNumber (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& regularVoice,
-  int        voiceNumber)
+  int               voiceNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
@@ -1181,15 +1181,20 @@ void msrStaff::registerRegularVoiceByItsNumber (
 
   ++gIndenter;
 
+  // register voice by its number
   registerVoiceByItsNumber (
     inputLineNumber,
     regularVoice);
+
+  // register voice in its staff at the part level
+  fStaffUpLinkToPart->
+    registerVoiceInRegularVoicesMap (regularVoice);
 
   --gIndenter;
 }
 
 void msrStaff::registerHarmoniesVoiceByItsNumber (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1217,7 +1222,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
 }
 
 void msrStaff::registerFiguredBassVoiceByItsNumber (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3342,7 +3347,7 @@ void msrStaff::collectStaffMeasuresSlices (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
     mfAssert (
       __FILE__, __LINE__,

@@ -2055,7 +2055,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
           "cannot get the diatonic pitch of a rest"
           ", line: " << inputLineNumber;
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
         if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
           msrInternalError (
             gServiceRunData->getInputSourceName (),
@@ -2075,7 +2075,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
           "cannot get the diatonic pitch of a skip"
           ", line: " << inputLineNumber;
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
         if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
           msrInternalError (
             gServiceRunData->getInputSourceName (),
@@ -2236,7 +2236,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
           "cannot get the alteration kind of a rest"
           ", line: " << inputLineNumber;
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
         if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
           msrInternalError (
             gServiceRunData->getInputSourceName (),
@@ -2256,7 +2256,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
           "cannot get the alteration kind of a skip"
           ", line: " << inputLineNumber;
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         msrInternalError (
           gServiceRunData->getInputSourceName (),

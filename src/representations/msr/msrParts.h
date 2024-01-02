@@ -12,6 +12,8 @@
 #ifndef ___msrParts___
 #define ___msrParts___
 
+#include <map>
+
 #include "msrPartGroupElements.h"
 
 #include "msrTypesForwardDeclarations.h"
@@ -147,8 +149,17 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  setPartInstrumentNamesMaxLengthes ();
 
-    // regular voices counter
+    // voices
 
+    const std::map<int, S_msrVoice>&
+                          getfPartRegularVoicesMap () const
+                              { return fPartRegularVoicesMap; }
+
+//     const std::vector<std::vector<S_msrVoice>>&
+//                           getPartStavesAndVoicesVector () const
+//                               { return fPartStavesAndVoicesVector; }
+
+    // regular voices counter
 
     void                  incrementPartRegularVoicesCounter ()
                               { ++fPartRegularVoicesCounter; }
@@ -219,8 +230,8 @@ class EXP msrPart : public msrPartGroupElement
                               { return fPartNumberOfMeasures; }
 
     const std::vector<msrWholeNotes>&
-                          getPartMeasuresWholeNotessVector () const
-                              { return fPartMeasuresWholeNotessVector; }
+                          getPartMeasuresWholeNotesVector () const
+                              { return fPartMeasuresWholeNotesVector; }
 
     // harmonies staff and voice
 
@@ -319,7 +330,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // whole notes durations
 
-    msrWholeNotes         fetchPartMeasuresWholeNotessVectorAt (
+    msrWholeNotes         fetchPartMeasuresWholeNotesVectorAt (
                             int inputLineNumber,
                             int indexValue) const;
 
@@ -373,6 +384,42 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendTempoToPart (
                             const S_msrTempo& tempo);
+
+    // staves
+
+    S_msrStaff            addStaffToPartByItsNumber (
+                            int          inputLineNumber,
+                            msrStaffKind staffKind,
+                            int          staffNumber);
+
+    S_msrStaff            addHarmoniesStaffToPart (
+                            int inputLineNumber);
+
+    S_msrStaff            addHFiguredBassStaffToPart (
+                            int inputLineNumber);
+
+    void                  addStaffToPartCloneByItsNumber (
+                            const S_msrStaff& staff);
+
+    S_msrStaff            fetchStaffFromPart (int staffNumber);
+
+    // voices
+
+    void                  registerVoiceInPartAllVoicesList (
+                            const S_msrVoice& voice);
+
+    // voices
+
+    void                  registerVoiceInRegularVoicesMap (
+                            const S_msrVoice& voice);
+
+    void                  displayPartRegularVoicesMap (
+                            int                inputLineNumber,
+                            const std::string& context) const;
+
+//     void                  displayPartStavesAndVoicesVector (
+//                             int                inputLineNumber,
+//                             const std::string& context) const;
 
     // rehearsal marks
 
@@ -474,29 +521,6 @@ class EXP msrPart : public msrPartGroupElement
 //     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED v0.9.66
 //                             int                              inputLineNumber,
 //                             const S_msrMultiMeasureRest& multiMeasureRests);
-
-    // staves
-
-    S_msrStaff            addStaffToPartByItsNumber (
-                            int          inputLineNumber,
-                            msrStaffKind staffKind,
-                            int          staffNumber);
-
-    S_msrStaff            addHarmoniesStaffToPart (
-                            int inputLineNumber);
-
-    S_msrStaff            addHFiguredBassStaffToPart (
-                            int inputLineNumber);
-
-    void                  addStaffToPartCloneByItsNumber (
-                            const S_msrStaff& staff);
-
-    S_msrStaff            fetchStaffFromPart (int staffNumber);
-
-    // voices
-
-    void                  registerVoiceInPartAllVoicesList (
-                            const S_msrVoice& voice);
 
     // frames
 
@@ -638,6 +662,14 @@ class EXP msrPart : public msrPartGroupElement
 
     static int            sPartsCounter;
 
+    // clef, key, time signature
+
+    S_msrClef             fPartCurrentClef;
+
+    S_msrKey              fPartCurrentKey;
+
+    S_msrTimeSignature    fPartCurrentTimeSignature;
+
     // staves
 
     std::list<S_msrStaff> fPartAllStavesList;
@@ -649,6 +681,25 @@ class EXP msrPart : public msrPartGroupElement
     std::map<int, S_msrStaff>
                           fPartStaveNumbersToStavesMap;
 
+    // voices
+
+    std::list<S_msrVoice> fPartAllVoicesList;
+    int                   fPartRegularVoicesCounter;
+
+    std::map<int, S_msrVoice>
+                          fPartRegularVoicesMap;
+
+//     std::vector<std::vector<S_msrVoice>>
+//                           fPartStavesAndVoicesVector;
+    // measures
+
+    std::string           fPartCurrentMeasureNumber;
+
+    size_t                fPartNumberOfMeasures;
+
+    std::vector<msrWholeNotes>
+                          fPartMeasuresWholeNotesVector;
+
     // harmonies
 
     S_msrStaff            fPartHarmoniesStaff;
@@ -658,29 +709,6 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrStaff            fPartFiguredBassStaff;
     S_msrVoice            fPartFiguredBassVoice;
-
-    // voices
-
-    std::list<S_msrVoice> fPartAllVoicesList;
-    int                   fPartRegularVoicesCounter;
-
-
-    // measures
-
-    std::string           fPartCurrentMeasureNumber;
-
-    size_t                fPartNumberOfMeasures;
-
-    std::vector<msrWholeNotes>
-                          fPartMeasuresWholeNotessVector;
-
-    // clef, key, time signature
-
-    S_msrClef             fPartCurrentClef;
-
-    S_msrKey              fPartCurrentKey;
-
-    S_msrTimeSignature    fPartCurrentTimeSignature;
 
     // part shortest note
 

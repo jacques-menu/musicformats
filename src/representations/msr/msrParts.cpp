@@ -299,6 +299,10 @@ void msrPart::registerStaffInPart (
   // register its number in the staves numbers to staves map
   fPartStaveNumbersToStavesMap [staff->getStaffNumber ()] = staff;
 
+  // register staff in the staves and voices bidimensional vector
+//   fPartStavesAndVoicesVector [staff->getStaffNumber ()] = staff;
+
+  // register staff in adhoc staves lists
   switch (staff->getStaffKind ()) {
     case msrStaffKind::kStaffKindRegular:
       // register staff in the regular staves list
@@ -591,7 +595,7 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
     ss <<
       "Assigning sequential numbers to the staves in part \"" <<
       fPartID <<
-      ", " <<
+      ", \"" <<
       fPartName <<
       "\"" <<
       ", line " << inputLineNumber;
@@ -788,15 +792,15 @@ void msrPart::setNextMeasureNumberInPart (
   --gIndenter;
 }
 
-msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
+msrWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
   int inputLineNumber,
   int indexValue) const
 {
   msrWholeNotes result;
 
   size_t
-    partMeasuresWholeNotessVectorSize =
-      fPartMeasuresWholeNotessVector.size ();
+    partMeasuresWholeNotesVectorSize =
+      fPartMeasuresWholeNotesVector.size ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -807,11 +811,11 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
     std::stringstream ss;
 
     ss <<
-      "fetchPartMeasuresWholeNotessVectorAt() in part \"" <<
+      "fetchPartMeasuresWholeNotesVectorAt() in part \"" <<
       getPartCombinedName () <<
       "\"" <<
-      ", partMeasuresWholeNotessVectorSize: " <<
-      partMeasuresWholeNotessVectorSize <<
+      ", partMeasuresWholeNotesVectorSize: " <<
+      partMeasuresWholeNotesVectorSize <<
       ", indexValue: " << indexValue;
 
     gWaeHandler->waeTrace (
@@ -824,7 +828,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
   try {
     msrWholeNotes
       currentWholeNotesValue =
-        fPartMeasuresWholeNotessVector.at (indexValue);
+        fPartMeasuresWholeNotesVector.at (indexValue);
 
     // yes
     result = currentWholeNotesValue;
@@ -836,11 +840,11 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
     std::stringstream ss;
 
     ss <<
-      "fetchPartMeasuresWholeNotessVectorAt() in part \"" <<
+      "fetchPartMeasuresWholeNotesVectorAt() in part \"" <<
       getPartCombinedName () <<
       "\"" <<
-      ", partMeasuresWholeNotessVectorSize: " <<
-      partMeasuresWholeNotessVectorSize <<
+      ", partMeasuresWholeNotesVectorSize: " <<
+      partMeasuresWholeNotesVectorSize <<
       ", indexValue: " << indexValue << " is out of bounds" <<
       ", line " << inputLineNumber;
 
@@ -863,7 +867,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotessVectorAt (
     std::stringstream ss;
 
     ss <<
-      "fetchPartMeasuresWholeNotessVectorAt() returns \"" <<
+      "fetchPartMeasuresWholeNotesVectorAt() returns \"" <<
       result.asString () <<
       ", line " << inputLineNumber;
 
@@ -948,19 +952,19 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
   fPartNumberOfMeasures = partNumberOfMeasures;
 
   size_t
-    fPartMeasuresWholeNotessVectorSize =
-      fPartMeasuresWholeNotessVector.size ();
+    fPartMeasuresWholeNotesVectorSize =
+      fPartMeasuresWholeNotesVector.size ();
 
-  if (partNumberOfMeasures > fPartMeasuresWholeNotessVectorSize) {
+  if (partNumberOfMeasures > fPartMeasuresWholeNotesVectorSize) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasures ()) {
       std::stringstream ss;
 
       ss <<
-        "Resizing fPartMeasuresWholeNotessVector in part " << // JMI ???
+        "Resizing fPartMeasuresWholeNotesVector in part " << // JMI ???
         getPartCombinedName () <<
         " from " <<
-        fPartMeasuresWholeNotessVectorSize <<
+        fPartMeasuresWholeNotesVectorSize <<
         " to " <<
         partNumberOfMeasures <<
         " measures";
@@ -971,8 +975,8 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fPartMeasuresWholeNotessVector.clear ();
-    fPartMeasuresWholeNotessVector.resize (
+    fPartMeasuresWholeNotesVector.clear ();
+    fPartMeasuresWholeNotesVector.resize (
       fPartNumberOfMeasures,
       msrWholeNotes (0, 1));
   }
@@ -1032,7 +1036,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
   try {
     msrWholeNotes
       currentWholeNotesValue =
-        fPartMeasuresWholeNotessVector.at (index);
+        fPartMeasuresWholeNotesVector.at (index);
 
     // yes
 
@@ -1056,7 +1060,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fPartMeasuresWholeNotessVector [index] =
+    fPartMeasuresWholeNotesVector [index] =
       wholeNotes;
   }
 
@@ -1071,8 +1075,8 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 //         " is now registered with a duration of " <<
 //         wholeNotes.asString () <<
 //         " in part " << getPartCombinedName () <<
-//         ", fPartMeasuresWholeNotessVector.size (): " <<
-//         fPartMeasuresWholeNotessVector.size () <<
+//         ", fPartMeasuresWholeNotesVector.size (): " <<
+//         fPartMeasuresWholeNotesVector.size () <<
 //         std::endl;
 //
 //           gWaeHandler->waeTrace (
@@ -2181,6 +2185,64 @@ void msrPart::registerVoiceInPartAllVoicesList (
   // register it in the partgroup uplink
   fPartUpLinkToPartGroup->
     registerVoiceInPartGroupAllVoicesList (voice);
+//
+//   // register voice in the regular voices map
+//   registerVoiceInRegularVoicesMap (voice);
+//
+}
+
+void msrPart::registerVoiceInRegularVoicesMap (
+  const S_msrVoice& voice)
+{
+  int voiceNumber = voice->getVoiceNumber ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Registering regular voice " <<
+      voiceNumber <<
+      ", \"" <<
+      voice->getVoiceName () <<
+      "\" in part \"" <<
+      fPartID <<
+      ", \"" <<
+      fPartName <<
+      "\"" <<
+      ", line " << voice->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // register regular voice in the regular voices map
+  if (fPartRegularVoicesMap.count (voiceNumber)) {
+    std::stringstream ss;
+
+    ss <<
+      "Regular voice " <<
+      voiceNumber <<
+      ", \"" <<
+      voice->getVoiceName () <<
+      "\", has already been registered in the regular voices map of part " << // JMI v0.9.70
+      getPartName () <<
+      ", line " << voice->getInputStartLineNumber ();
+
+    msrError (
+      gServiceRunData->getInputSourceName (),
+      voice->getInputStartLineNumber (),
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+
+  fPartRegularVoicesMap [voice->getVoiceNumber ()] = voice;
+
+  displayPartRegularVoicesMap (
+    voice->getInputStartLineNumber (),
+    "registerVoiceInRegularVoicesMap()");
 }
 
 S_msrVoice msrPart::createPartHarmoniesVoice (
@@ -2799,6 +2861,75 @@ void msrPart::setPartInstrumentNamesMaxLengthes ()
   }
 }
 
+void msrPart::displayPartRegularVoicesMap (
+  int                inputLineNumber,
+  const std::string& context) const
+{
+  gLog <<
+    ">>> The fPartRegularVoicesMap of part " <<
+    getPartName () <<
+    " contains:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair<int, S_msrVoice> thePair : fPartRegularVoicesMap) {
+    int        voiceNumber = thePair.first;
+    S_msrVoice regularVoice = thePair.second;
+
+    gLog <<
+      "voice " <<
+      voiceNumber <<
+      ": " <<
+      regularVoice->asShortString () <<
+      std::endl;
+  } // for
+
+  --gIndenter;
+
+  gLog <<
+    "<<<" <<
+    std::endl;
+}
+
+// void msrPart::displayPartStavesAndVoicesVector (
+//   int                inputLineNumber,
+//   const std::string& context) const
+// {
+//   gLog <<
+//     ">>> The fPartStavesAndVoicesVector of part " <<
+//     getPartName () <<
+//     " contains:" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//
+//   for (int staffIndex = 0; staffIndex < fPartStavesAndVoicesVector.size (); ++staffIndex) {
+//     const std::vector<S_msrVoice>&
+//       staffVoicesVector =
+//         fPartStavesAndVoicesVector [staffIndex];
+//
+//     for (int voiceIndex = 0; voiceIndex < staffVoicesVector.size (); ++voiceIndex) {
+//       const S_msrVoice voice = staffVoicesVector [voiceIndex];
+//
+//       gLog <<
+//         "staff " <<
+//         staffIndex <<
+//         ", voice" <<
+//         voice <<
+//         ": " <<
+//         voice->asShortString () <<
+//         std::endl;
+//     } // for
+//   } // for
+//
+//   --gIndenter;
+//
+//   gLog <<
+//     "<<<" <<
+//     std::endl;
+// }
+
 bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
   const S_msrStaff& first,
   const S_msrStaff& second)
@@ -2982,7 +3113,7 @@ void msrPart::collectPartMeasuresSlices (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
     mfAssert (
       __FILE__, __LINE__,
@@ -3321,7 +3452,7 @@ void msrPart::printPartMeasuresWholeNotesVector (
   const std::string& context) const
 {
   os <<
-    "fPartMeasuresWholeNotessVector" <<
+    "fPartMeasuresWholeNotesVector" <<
     ", context: " << context <<
     ": " ;
 
@@ -3341,7 +3472,7 @@ void msrPart::printPartMeasuresWholeNotesVector (
         std::setw (3) << std::right <<
         ordinalNumber << ": " <<
         std::setw (4) <<
-        fPartMeasuresWholeNotessVector [ i ].toString () <<
+        fPartMeasuresWholeNotesVector [ i ].toString () <<
         std::endl;
     } // for
 

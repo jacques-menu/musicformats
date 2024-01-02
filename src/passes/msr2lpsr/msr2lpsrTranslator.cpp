@@ -3302,7 +3302,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       fCurrentVoiceClone,
       "msr2lpsrTranslator::visitEnd (S_msrMeasure&)");
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
     std::stringstream ss;
 

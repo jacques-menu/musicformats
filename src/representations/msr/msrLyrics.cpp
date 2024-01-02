@@ -384,7 +384,7 @@ msrSyllable::msrSyllable (
     case msrSyllableKind::kSyllableOnRestNote:
     case msrSyllableKind::kSyllableSkipOnRestNote:
     case msrSyllableKind::kSyllableSkipOnNonRestNote:
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         mfAssert ( // JMI v0.9.70 BABASSE
           __FILE__, __LINE__,

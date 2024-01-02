@@ -4205,6 +4205,27 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
   fCurrentPart->
     assignSequentialNumbersToRegularVoicesInPart (
       elt->getInputStartLineNumber ());
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceVoices ()) {
+    gLog <<
+    	std::endl <<
+      "<!--=== "
+      "The regular voices map of part \"" <<
+      fCurrentPart->getPartName () << "\"" <<
+      " contains:" <<
+      std::endl;
+
+    ++gIndenter;
+
+		fCurrentPart->displayPartRegularVoicesMap (
+			elt->getInputStartLineNumber (),
+			"mxsr2msrSkeletonBuilder::visitEnd(S_part& elt)");
+
+		gLog << std::endl << std::endl;
+    --gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________

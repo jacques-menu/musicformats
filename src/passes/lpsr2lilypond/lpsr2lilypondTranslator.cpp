@@ -1882,7 +1882,7 @@ void lpsr2lilypondTranslator::generateCoda (const S_msrCoda& coda)
       fLilypondCodeStream <<
         "\\mark \\markup { \\musicglyph #\"scripts.coda\" }";
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         fLilypondCodeStream << " %{ kCodaFirst %}  ";
       }
@@ -1894,7 +1894,7 @@ void lpsr2lilypondTranslator::generateCoda (const S_msrCoda& coda)
       fLilypondCodeStream <<
         "\\mark \\markup { \\musicglyph #\"scripts.coda\" }";
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         fLilypondCodeStream << " %{ kCodaSecond %}  ";
       }
@@ -2465,7 +2465,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
     // generate a rest to help pin-point bugs
     fLilypondCodeStream << 'r';
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
     if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
       fLilypondCodeStream << " %{ r222 %}  ";
     }
@@ -2475,7 +2475,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
     // generate a skip
     fLilypondCodeStream << 's';
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
     if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
       fLilypondCodeStream << " %{ s222 %}  ";
     }
@@ -12926,7 +12926,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
     fLilypondCodeStream <<
       "%{ visitStart (S_msrMeasure&(), measureKind: " << measureKind << " %} " <<
@@ -13402,7 +13402,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         msrWholeNotes
           measureCurrentAccumulatedWholeNotesDuration =
             measurePart->
-              fetchPartMeasuresWholeNotessVectorAt (
+              fetchPartMeasuresWholeNotesVectorAt (
                 elt->getInputStartLineNumber (),
                 elt->getMeasureOrdinalNumberInVoice () - 1);
 

@@ -32,6 +32,10 @@
 #define MF_SANITY_CHECKS_ARE_ENABLED
 
 //______________________________________________________________________________
+// uncomment the following definition if maintaince runs are desired
+#define MF_MAINTAINANCE_RUNS_ARE_ENABLED
+
+//______________________________________________________________________________
 // uncomment the following definition if trace is desired
 #define MF_TRACE_IS_ENABLED
 

@@ -5148,7 +5148,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 //   msrWholeNotes
 //     measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
 //       regularPart->
-//         fetchPartMeasuresWholeNotessVectorAt (
+//         fetchPartMeasuresWholeNotesVectorAt (
 //           inputLineNumber,
 //           fMeasureOrdinalNumberInVoice - 1);
 //
@@ -5627,7 +5627,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
   msrWholeNotes
     measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
       harmoniesPart->
-        fetchPartMeasuresWholeNotessVectorAt (
+        fetchPartMeasuresWholeNotesVectorAt (
           inputLineNumber,
           fMeasureOrdinalNumberInVoice - 1);
 
@@ -6062,7 +6062,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
       msrWholeNotes
         measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
           regularPart->
-            fetchPartMeasuresWholeNotessVectorAt (
+            fetchPartMeasuresWholeNotesVectorAt (
               inputLineNumber,
               fMeasureOrdinalNumberInVoice - 1);
 
@@ -6935,7 +6935,7 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
   msrWholeNotes
     measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
       harmoniesPart->
-        fetchPartMeasuresWholeNotessVectorAt (
+        fetchPartMeasuresWholeNotesVectorAt (
           inputLineNumber,
           fMeasureOrdinalNumberInVoice - 1);
 
@@ -7049,7 +7049,7 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
   msrWholeNotes
     measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
       figuredBassPart->
-        fetchPartMeasuresWholeNotessVectorAt (
+        fetchPartMeasuresWholeNotesVectorAt (
           inputLineNumber,
           fMeasureOrdinalNumberInVoice - 1);
 
