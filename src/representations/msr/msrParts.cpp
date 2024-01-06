@@ -165,6 +165,9 @@ void msrPart::initializePart ()
   // initialize part's number of regular voices
   fPartRegularVoicesCounter = 0;
 
+  fPartMinimumVoiceNumber = INT_MAX;
+  fPartMaximumVoiceNumber = 0;
+
   // initialize part's number of measures
   fPartNumberOfMeasures = 0;
 
@@ -297,7 +300,7 @@ void msrPart::registerStaffInPart (
   fPartAllStavesList.push_back (staff);
 
   // register its number in the staves numbers to staves map
-  fPartStaveNumbersToStavesMap [staff->getStaffNumber ()] = staff;
+  fPartStavesMap [staff->getStaffNumber ()] = staff;
 
   // register staff in the staves and voices bidimensional vector
 //   fPartStavesAndVoicesVector [staff->getStaffNumber ()] = staff;
@@ -1969,7 +1972,7 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
   msrStaffKind staffKind,
   int          staffNumber)
 {
-  if (fPartStaveNumbersToStavesMap.count (staffNumber)) {
+  if (fPartStavesMap.count (staffNumber)) {
     std::stringstream ss;
 
     ss <<
@@ -1983,7 +1986,7 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
       __FILE__, __LINE__,
       ss.str ());
 
-    return fPartStaveNumbersToStavesMap [staffNumber];
+    return fPartStavesMap [staffNumber];
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2162,9 +2165,9 @@ S_msrStaff msrPart::fetchStaffFromPart (
 {
   S_msrStaff result;
 
-  if (fPartStaveNumbersToStavesMap.count (staffNumber)) {
+  if (fPartStavesMap.count (staffNumber)) {
     result =
-      fPartStaveNumbersToStavesMap [staffNumber];
+      fPartStavesMap [staffNumber];
   }
 
   return result;
@@ -2238,11 +2241,23 @@ void msrPart::registerVoiceInRegularVoicesMap (
       ss.str ());
   }
 
-  fPartRegularVoicesMap [voice->getVoiceNumber ()] = voice;
+  fPartRegularVoicesMap [voiceNumber] = voice;
 
-  displayPartRegularVoicesMap (
-    voice->getInputStartLineNumber (),
-    "registerVoiceInRegularVoicesMap()");
+  // register part minimum and maximum voice numbers
+  if (voiceNumber < fPartMinimumVoiceNumber) {
+    fPartMinimumVoiceNumber = voiceNumber;
+  }
+  if (voiceNumber > fPartMaximumVoiceNumber) {
+    fPartMaximumVoiceNumber = voiceNumber;
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
+    displayPartRegularVoicesMap (
+      voice->getInputStartLineNumber (),
+      "msrPart::registerVoiceInRegularVoicesMap()");
+  }
+#endif
 }
 
 S_msrVoice msrPart::createPartHarmoniesVoice (
@@ -2866,9 +2881,10 @@ void msrPart::displayPartRegularVoicesMap (
   const std::string& context) const
 {
   gLog <<
-    ">>> The fPartRegularVoicesMap of part " <<
+    ">>> The fPartRegularVoicesMap of part \"" <<
     getPartName () <<
-    " contains:" <<
+    "\" , context: " << context <<
+    ", contains:" <<
     std::endl;
 
   ++gIndenter;
@@ -2877,12 +2893,16 @@ void msrPart::displayPartRegularVoicesMap (
     int        voiceNumber = thePair.first;
     S_msrVoice regularVoice = thePair.second;
 
-    gLog <<
-      "voice " <<
-      voiceNumber <<
-      ": " <<
-      regularVoice->asShortString () <<
-      std::endl;
+    // CAUTION: there may be 'holes' in the vector,
+    // whose indexes start at 0 moreover
+    if (regularVoice) {
+      gLog <<
+        "voice " <<
+        voiceNumber <<
+        ": " <<
+        regularVoice->asShortString () <<
+        std::endl;
+    }
   } // for
 
   --gIndenter;

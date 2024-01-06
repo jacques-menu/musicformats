@@ -4440,38 +4440,38 @@ std::string msrNote::noteComplementsAsString () const
 {
   std::stringstream ss;
 
-	S_msrVoice
-		noteVoiceUpLink =
-			fetchNoteUpLinkToVoice ();
-
-	S_msrStaff
-		noteStaffUpLink;
-
-  if (noteVoiceUpLink) {
-    noteStaffUpLink =
-      noteVoiceUpLink->
-        getVoiceUpLinkToStaff ();
-  }
-
-  ss <<
-    "noteStaffUpLink: ";
-  if (noteStaffUpLink) {
-    ss <<
-      noteStaffUpLink->getStaffName ();
-  }
-  else {
-    ss << "[NULL]";
-  }
-
-  ss <<
-    ", noteVoiceUpLink: ";
-  if (noteVoiceUpLink) {
-    ss <<
-      noteVoiceUpLink->getVoiceName ();
-  }
-  else {
-    ss << "[NULL]";
-  }
+// 	S_msrVoice
+// 		noteVoiceUpLink =
+// 			fetchNoteUpLinkToVoice ();
+//
+// 	S_msrStaff
+// 		noteStaffUpLink;
+//
+//   if (noteVoiceUpLink) {
+//     noteStaffUpLink =
+//       noteVoiceUpLink->
+//         getVoiceUpLinkToStaff ();
+//   }
+//
+//   ss <<
+//     "noteStaffUpLink: ";
+//   if (noteStaffUpLink) {
+//     ss <<
+//       noteStaffUpLink->getStaffName ();
+//   }
+//   else {
+//     ss << "[NULL]";
+//   }
+//
+//   ss <<
+//     ", noteVoiceUpLink: ";
+//   if (noteVoiceUpLink) {
+//     ss <<
+//       noteVoiceUpLink->getVoiceName ();
+//   }
+//   else {
+//     ss << "[NULL]";
+//   }
 
   ss <<
     ", measureElementMeasureNumber: ";

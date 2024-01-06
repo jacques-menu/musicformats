@@ -8747,6 +8747,9 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
+      tracePartGroups =
+        gTraceOahGroup->
+          getTracePartGroups (),
       traceLpsrVisitors =
         gLpsrOahGroup->
           getTraceLpsrVisitors (),
@@ -8754,7 +8757,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceLpsrVisitors || generateLpsrVisitingInformation) {
+    if (tracePartGroups || traceLpsrVisitors || generateLpsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -8829,6 +8832,8 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           "% start of explicit part group block";
       }
 
+      // don't factorize '\\new' out,
+      // to facilitate debugging
       switch (partGroupSymbolKind) {
         case msrPartGroupSymbolKind::kPartGroupSymbolNone:
           fLilypondCodeStream <<
@@ -8871,6 +8876,14 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
             "\\new StaffGroup";
           break;
       } // switch
+
+      if (true || gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+        fLilypondCodeStream <<
+          " %{ partGroupImplicitKind: " <<
+          partGroupImplicitKind <<
+          " %}";
+      }
+
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTracePartGroups ()) {
@@ -8997,7 +9010,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           std::endl;
       }
 
-      fLilypondCodeStream << "<<";
+//       fLilypondCodeStream << "<<";
 
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream <<
@@ -9142,7 +9155,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
   fNumberOfStaffBlocksElements =
     elt->getPartBlockElementsList ().size ();
 
-  if (part->getPartStaveNumbersToStavesMap ().size () > 1) { // JMI
+  if (part->getPartStavesMap ().size () > 1) { // JMI
     // don't generate code here for a part with only one staff
 
     std::string
@@ -9252,7 +9265,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (part->getPartStaveNumbersToStavesMap ().size () > 1) {
+  if (part->getPartStavesMap ().size () > 1) {
     // don't generate code for a part with only one staff
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
@@ -9366,7 +9379,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
   // don't generate instrument names in the staves
   // if the containing part contains several of them
-  if (staffUpLinkToPart->getPartStaveNumbersToStavesMap ().size () == 1) {
+  if (staffUpLinkToPart->getPartStavesMap ().size () == 1) {
     // get the part upLink name to be used
     std::string
       partName =

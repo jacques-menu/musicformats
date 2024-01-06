@@ -421,7 +421,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPart& elt)
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
     size_t partStavesMapSize =
-      elt->getPartStaveNumbersToStavesMap ().size ();
+      elt->getPartStavesMap ().size ();
 
     gLog <<
       "Part " << elt->getPartCombinedName () <<

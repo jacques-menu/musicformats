@@ -8459,7 +8459,7 @@ void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
   std::map<int, S_msrStaff>
     partStavesMap =
       partClone->
-        getPartStaveNumbersToStavesMap ();
+        getPartStavesMap ();
 
   for (
     std::map<int, S_msrStaff>::const_iterator i = partStavesMap.begin ();

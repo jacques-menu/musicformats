@@ -252,7 +252,7 @@ void displayLpsrNamesVisitor::visitStart (S_msrPart& elt)
 
   size_t partStavesMapSize =
     elt->
-      getPartStaveNumbersToStavesMap ().size ();
+      getPartStavesMap ().size ();
 
   gLog <<
     "Part " << elt->getPartCombinedName () <<

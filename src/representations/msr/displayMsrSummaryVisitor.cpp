@@ -383,7 +383,7 @@ void displayMsrSummaryVisitor::visitStart (S_msrPart& elt)
 
   ++fPartsCounter;
 
-  size_t partStavesMapSize = elt->getPartStaveNumbersToStavesMap ().size ();
+  size_t partStavesMapSize = elt->getPartStavesMap ().size ();
 
   gLog <<
     "Part " << elt->getPartCombinedName () <<

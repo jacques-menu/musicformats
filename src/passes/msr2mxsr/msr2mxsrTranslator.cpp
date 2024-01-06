@@ -2936,7 +2936,7 @@ if (false) // JMI
 
   // should a <staves /> element be created?
   int partStavesNumber =
-    fCurrentMSRPart->getPartStaveNumbersToStavesMap ().size ();
+    fCurrentMSRPart->getPartStavesMap ().size ();
   if (partStavesNumber > 1) {
     // create a staves element
     fStavesElement =

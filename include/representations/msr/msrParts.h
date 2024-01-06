@@ -167,6 +167,11 @@ class EXP msrPart : public msrPartGroupElement
     int                   getPartRegularVoicesCounter () const
                               { return fPartRegularVoicesCounter; }
 
+    int                   getPartMinimumVoiceNumber () const
+                              { return fPartMinimumVoiceNumber; }
+    int                   getPartMaximumVoiceNumber () const
+                              { return fPartMaximumVoiceNumber; }
+
     // instrument name
 
     void                  setPartInstrumentName (
@@ -268,8 +273,8 @@ class EXP msrPart : public msrPartGroupElement
     // staves map
 
     const std::map<int, S_msrStaff>&
-                          getPartStaveNumbersToStavesMap () const
-                              { return fPartStaveNumbersToStavesMap; }
+                          getPartStavesMap () const
+                              { return fPartStavesMap; }
 
     // part drawing measure position
 
@@ -408,10 +413,12 @@ class EXP msrPart : public msrPartGroupElement
     void                  registerVoiceInPartAllVoicesList (
                             const S_msrVoice& voice);
 
-    // voices
-
     void                  registerVoiceInRegularVoicesMap (
                             const S_msrVoice& voice);
+
+    const std::map<int, S_msrVoice>&
+                          getPartRegularVoicesMap () const
+                              { return  fPartRegularVoicesMap; }
 
     void                  displayPartRegularVoicesMap (
                             int                inputLineNumber,
@@ -679,12 +686,16 @@ class EXP msrPart : public msrPartGroupElement
     std::list<S_msrStaff> fPartNonHarmoniesNorFiguredBassStavesList;
 
     std::map<int, S_msrStaff>
-                          fPartStaveNumbersToStavesMap;
+                          fPartStavesMap;
 
     // voices
 
     std::list<S_msrVoice> fPartAllVoicesList;
+
     int                   fPartRegularVoicesCounter;
+
+    int                   fPartMinimumVoiceNumber;
+    int                   fPartMaximumVoiceNumber;
 
     std::map<int, S_msrVoice>
                           fPartRegularVoicesMap;

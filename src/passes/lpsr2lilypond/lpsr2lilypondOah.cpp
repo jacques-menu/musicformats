@@ -3520,7 +3520,7 @@ R"()",
 
   // LilyPond version
 
-  fLilypondVersionMinimumValue = "2.24.0";
+  fLilypondVersionMinimumValue = "2.25.0";
 
   fLilypondVersion = fLilypondVersionMinimumValue;
 

@@ -49,15 +49,7 @@ class mxsr2msrVoiceHandler : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mxsr2msrVoiceHandler> create (
-                            int                startInputLineNumber,
                             const S_msrVoice&  voice);
-
-    static SMARTP<mxsr2msrVoiceHandler> create (
-                            int                startInputLineNumber,
-                            int                tupletNumber,
-                            const S_msrVoice&  voice,
-                            const S_msrTuplet& theMsrTuplet,
-                            int                tupletIdentity);
 
   protected:
 
@@ -65,15 +57,7 @@ class mxsr2msrVoiceHandler : public smartable
     // ------------------------------------------------------
 
                           mxsr2msrVoiceHandler (
-                            int                startInputLineNumber,
                             const S_msrVoice&  fMsrVoice);
-
-                          mxsr2msrVoiceHandler (
-                            int                startInputLineNumber,
-                            int                tupletNumber,
-                            const S_msrVoice&  fMsrVoice,
-                            const S_msrTuplet& theMsrTuplet,
-                            int                tupletIdentity);
 
     virtual               ~mxsr2msrVoiceHandler ();
 
@@ -86,28 +70,13 @@ class mxsr2msrVoiceHandler : public smartable
                           getTupletsStack () const
                               { return fTupletsStack; }
 
-    int                   getTupletNumber () const
-                              { return fTupletNumber; }
-
-    void                  setTupletIdentity (int identity)
-                              { fTupletIdentity= identity; }
-
-    int                   getTupletIdentity () const
-                              { return fTupletIdentity; }
-
-    int                   getInputStartLineNumber () const
-                              { return fStartInputLineNumber; }
-
-    int                   getStopInputLineNumber () const
-                              { return fStopInputLineNumber; }
-
-    S_msrTuplet           getMsrTuplet () const
-                              { return fMsrTuplet; }
-
   public:
 
     // public services
     // ------------------------------------------------------
+
+    void                  pushTupletOntoTupletsStack (const S_msrTuplet& tuplet)
+                              { fTupletsStack.push_front (tuplet); }
 
     void                  handleTupletStartByHandler (
                             S_msrTuplet tuplet,
@@ -129,29 +98,29 @@ class mxsr2msrVoiceHandler : public smartable
                             int         inputLineNumber,
                             std::string context);
 
-    void                  handleTupletStart (
-                            S_msrTuplet tuplet,
-                            S_msrVoice  currentNoteVoice);
+//     void                  handleTupletStart (
+//                             S_msrTuplet tuplet,
+//                             S_msrVoice  currentNoteVoice);
+//
+//     void                  handleTupletContinue (
+//                             S_msrNote  note,
+//                             S_msrVoice currentNoteVoice);
+//
+//     void                  handleTupletStop (
+//                             S_msrNote  note,
+//                             S_msrVoice currentNoteVoice);
 
-    void                  handleTupletContinue (
-                            S_msrNote  note,
-                            S_msrVoice currentNoteVoice);
-
-    void                  handleTupletStop (
-                            S_msrNote  note,
-                            S_msrVoice currentNoteVoice);
-
-    void                  handleNoteBelongingToAChord (
-                            const S_msrNote& newChordNote);
-
-    void                  handleNoteBelongingToATuplet (
-														const S_msrNote& note);
-
-    void                  handleNoteBelongingToAChordInATuplet (
-                            const S_msrNote& newChordNote);
-
-    void                  handleNoteBelongingToAChordInAGraceNotesGroup (
-                            const S_msrNote& newChordNote);
+//     void                  handleNoteBelongingToAChord (
+//                             const S_msrNote& newChordNote);
+//
+//     void                  handleNoteBelongingToATuplet (
+// 														const S_msrNote& note);
+//
+//     void                  handleNoteBelongingToAChordInATuplet (
+//                             const S_msrNote& newChordNote);
+//
+//     void                  handleNoteBelongingToAChordInAGraceNotesGroup (
+//                             const S_msrNote& newChordNote);
 
   public:
 
@@ -167,26 +136,16 @@ class mxsr2msrVoiceHandler : public smartable
     // private fields
     // ------------------------------------------------------
 
-    std::list<S_msrTuplet>
-                          fTupletsStack;
-
-    int                   fTupletNumber; // may be reused later
-
-    int                   fTupletIdentity; // set upon part group start
-
-    int                   fStartInputLineNumber;
-    int                   fStopInputLineNumber;
 
     S_msrVoice            fMsrVoice;
-    S_msrTuplet           fMsrTuplet;
+
+    std::list<S_msrTuplet>
+                          fTupletsStack;
 
     S_msrNote             fCurrentOuterMostTupletFirstNote;
     S_msrTuplet           fCurrentOuterMostTuplet;
 
     msrWholeNotes         fCurrentOuterMostTupletRelativeOffset;
-
-    // the tuplets stops are not always in first-in/first-out order, so:
-    std::set<int>         fExpectedTupletsStopNumbersSet;
 
   private:
 
@@ -217,28 +176,13 @@ class mxsr2msrVoiceHandler : public smartable
 //                                 int              inputLineNumber,
 //                                 const S_msrNote& note);
 
-//     void                      finalizeTupletStackTopAndPopItFromTupletsStack (
-//                                 int         inputLineNumber,
-//                                 std::string context);
-
     void                  handleTupletsPendingOnTupletsStack (
                             int inputLineNumber);
-
-    void                  handleTupletStopNumbersForNote (
-                            int              inputLineNumber,
-                            const S_msrNote& note);
 
      void                 displayLastHandledTupletInVoiceMap (
                             const std::string& header);
 };
 typedef SMARTP<mxsr2msrVoiceHandler> S_mxsr2msrVoiceHandler;
-
-// typedef std::list<S_mxsr2msrVoiceHandler>
-//   mxsr2msrVoiceHandlersStack;
-//
-// typedef std::map<int, mxsr2msrVoiceHandlersStack>     mxsr2msrVoiceHandlersStacksMap;
-//
-// typedef std::map<int, mxsr2msrVoiceHandlersStacksMap> mxsr2msrVoiceHandlersStacksMapMap;
 
 EXP std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceHandler& elt);
 EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandler& elt);
@@ -1478,8 +1422,56 @@ class EXP mxsr2msrTranslator :
     Bool                      fOnGoingInterchangeable;
 
 
-    // voices
+    // staff handling
     // ------------------------------------------------------
+
+    int                       fCurrentMusicXMLStaffNumber; // used throughout
+
+    std::vector<S_msrStaff>   fStavesVector;
+
+    void                      populateStavesVectorFromPart (
+                                  S_msrPart part);
+
+		void											displayStavesVector (
+                                int               inputLineNumber,
+																const std::string context);
+
+
+    // staff details handling
+    // ------------------------------------------------------
+
+    msrStaffTypeKind          fCurrentStaffTypeKind;
+    msrShowFretsKind          fCurrentShowFretsKind;
+    msrPrintSpacingKind       fCurrentPrintSpacingKind;
+
+    int                       fCurrentStaffDetailsCapo;
+
+    int                       fCurrentStaffDetailsStaffSize; // JMI
+
+    int                       fCurrentStaffLinesNumber;
+
+    int                       fStaffDetailsStaffNumber;
+
+    int                       fCurrentStaffTuningLine;
+    msrDiatonicPitchKind      fCurrentStaffTuningDiatonicPitchKind;
+    msrAlterationKind         fCurrentStaffTuningAlterationKind;
+    msrOctaveKind             fCurrentStaffTuningOctaveKind;
+
+    S_msrStaffDetails         fCurrentStaffDetails;
+
+    Bool                      fOnGoingStaffTuning;
+
+
+    // voice handling
+    // ------------------------------------------------------
+
+    int                       fCurrentMusicXMLVoiceNumber; // used throughout
+
+    S_msrMeasureElement       fPreviousMeasureElement;
+
+    S_msrVoice                fetchFirstVoiceFromCurrentPart (
+                                int inputLineNumber);
+
 
     /*
       the order in which a tuplet'members are present in a MusicXML file
@@ -1491,18 +1483,16 @@ class EXP mxsr2msrTranslator :
       this is done with a vector, whose indices are the voices sequential, ordinal numbers
     */
 
-    S_mxsr2msrVoiceHandler    fCurrentMxsr2msrVoiceHandler; // JMI v0.9.70
+    // we need a fast access to the voices and their handles, hence:
+    std::vector<S_msrVoice>   fRegularVoicesVector;
 
-    // the staff number is not needed, since voice numbers are unique
-    // in a multistaff part
-    std::map<int, S_mxsr2msrVoiceHandler>
-                              fMxsr2msrVoiceHandlersMap;
+    std::vector<S_mxsr2msrVoiceHandler>
+                              fRegularVoiceHandlersVector;
 
-    void                      registerVoiceInMxsr2msrVoiceHandlersMapIfNotYetDone (
-                                int               inputLineNumber,
-                                const S_msrVoice& voice);
+    void                      populateRegularVoicesVectorsFromPart (
+                                  S_msrPart part);
 
-		void											displayMxsr2msrVoiceHandlersMap (
+		void											displayRegularVoicesVectors (
                                 int               inputLineNumber,
 																const std::string context);
 
@@ -1550,57 +1540,6 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentMeasureRepeatSlashesNumber;
 
 
-    // staff details handling
-    // ------------------------------------------------------
-
-    msrStaffTypeKind          fCurrentStaffTypeKind;
-    msrShowFretsKind          fCurrentShowFretsKind;
-    msrPrintSpacingKind       fCurrentPrintSpacingKind;
-
-    int                       fCurrentStaffDetailsCapo;
-
-    int                       fCurrentStaffDetailsStaffSize; // JMI
-
-    int                       fCurrentStaffLinesNumber;
-
-    int                       fStaffDetailsStaffNumber;
-
-    int                       fCurrentStaffTuningLine;
-    msrDiatonicPitchKind      fCurrentStaffTuningDiatonicPitchKind;
-    msrAlterationKind         fCurrentStaffTuningAlterationKind;
-    msrOctaveKind             fCurrentStaffTuningOctaveKind;
-
-    S_msrStaffDetails         fCurrentStaffDetails;
-
-    Bool                      fOnGoingStaffTuning;
-
-
-    // staff handling
-    // ------------------------------------------------------
-
-    int                       fCurrentMusicXMLStaffNumber; // used throughout
-
-    S_msrStaff                fetchStaffFromCurrentPart (
-                                int inputLineNumber,
-                                int staffNumber);
-
-
-    // voice handling
-    // ------------------------------------------------------
-
-    int                       fCurrentMusicXMLVoiceNumber; // used throughout
-
-    S_msrMeasureElement       fPreviousMeasureElement;
-
-    S_msrVoice                fetchVoiceFromCurrentPart (
-                                int inputLineNumber,
-                                int staffNumber,
-                                int voiceNumber);
-
-    S_msrVoice                fetchFirstVoiceFromCurrentPart (
-                                int inputLineNumber);
-
-
     // notes handling
     // ------------------------------------------------------
 
@@ -1617,17 +1556,17 @@ class EXP mxsr2msrTranslator :
 
     void                      handleNonChordNorTupletNoteOrRest ();
 
-//     void                      handleNoteBelongingToAChord (
-//                                 const S_msrNote& newChordNote);
-//
-//     void                      handleNoteBelongingToATuplet (
-// 																const S_msrNote& note);
+    void                      handleNoteBelongingToAChord (
+                                const S_msrNote& newChordNote);
 
-//     void                      handleNoteBelongingToAChordInATuplet (
-//                                 const S_msrNote& newChordNote);
+    void                      handleNoteBelongingToATuplet (
+																const S_msrNote& note);
 
-//     void                      handleNoteBelongingToAChordInAGraceNotesGroup (
-//                                 const S_msrNote& newChordNote);
+    void                      handleNoteBelongingToAChordInATuplet (
+                                const S_msrNote& newChordNote);
+
+    void                      handleNoteBelongingToAChordInAGraceNotesGroup (
+                                const S_msrNote& newChordNote);
 
     // staff changes detection
     // ------------------------------------------------------
@@ -1684,7 +1623,7 @@ class EXP mxsr2msrTranslator :
     // transpose handling
     // ------------------------------------------------------
 
-    int                       fCurrentTransposeNumber;
+    int                       fCurrentTransposeStaffNumber;
     int                       fCurrentTransposeDiatonic;
     int                       fCurrentTransposeChromatic;
     int                       fCurrentTransposeOctaveChange;
@@ -2619,61 +2558,36 @@ class EXP mxsr2msrTranslator :
 
     msrWholeNotes             fCurrentOuterMostTupletRelativeOffset;
 
-//     std::list<S_msrTuplet>    fTupletsStack;
-//     void                      displayTupletsStack (
-//                                 const std::string& context);
-
-//     std::map<int, mxsr2msrVoiceHandlersStack>
-//                               fVoicesTupletsStacksMap;
-//     void                      displayVoicesTupletsStacksMap (
-//                                 const std::string& context);
-
-//     mxsr2msrVoiceHandlersStacksMapMap   fTupletsStacksMapMap;
-//     void                      displayMxsrTupletsStacksMapMap (
-//                                 const std::string& context);
-
-    // https://www.toptal.com/c-plus-plus/top-10-common-c-plus-plus-developer-mistakes
-//     std::map<int, mfStack<S_msrTuplet> >
-//                               fTupletsStacksMap;
-
-//     // the tuplets stops are not always in first-in/first-out order, so:
+    // the tuplets stops are not always in first-in/first-out order, so:
 //     std::set<int>             fExpectedTupletsStopNumbersSet;
 
 //     Bool                      tupletsStopNumberIsExpected ( // JMI v0.9.70
 //                                 int tupletNumber);
 
-//     void                      createAndPushTupletUponItsFirstNote (
-// 																const S_msrNote& firstNote);
-
     S_msrTuplet               createTupletUponItsFirstNote (
                                 const S_msrNote& firstNote);
 
-//     void                      handleTupletStart (
-//                                 S_msrTuplet tuplet,
-//                                 S_msrVoice  currentNoteVoice);
+    void                      handleTupletStart (
+                                S_msrTuplet tuplet,
+                                S_msrVoice  currentNoteVoice);
+
+    void                      handleTupletContinue (
+                                S_msrNote  note,
+                                S_msrVoice currentNoteVoice);
+
+    void                      handleTupletStop (
+                                S_msrNote  note,
+                                S_msrVoice currentNoteVoice);
 //
-//     void                      handleTupletContinue (
-//                                 S_msrNote  note,
-//                                 S_msrVoice currentNoteVoice);
-//
-//     void                      handleTupletStop (
-//                                 S_msrNote  note,
-//                                 S_msrVoice currentNoteVoice);
-// //
-//     void                      handlePendingTupletStops (
-//                                 int              inputLineNumber,
-//                                 const S_msrNote& note);
-//
-//     void                      finalizeTupletStackTopAndPopItFromTupletsStack (
-//                                 int         inputLineNumber,
-//                                 std::string context);
-//
+    void                      handlePendingTupletStops (
+                                int              inputLineNumber,
+                                const S_msrNote& note);
 //     void                      handleTupletsPendingOnTupletsStack (
 //                                 int inputLineNumber);
 //
-//     void                      handleTupletStopNumbersForNote (
-//                                 int              inputLineNumber,
-//                                 const S_msrNote& note);
+    void                      handleTupletStopNumbersForNote (
+                                int              inputLineNumber,
+                                const S_msrNote& note);
 //
 //     // std::map<S_msrVoice, S_msrTuplet> seems buggy in g++ 4.9.x, so
 //     // we use a pair containing the staff and voice numbers:
@@ -2779,191 +2693,3 @@ class EXP mxsr2msrTranslator :
 
 
 #endif // ___mxsr2msrTranslator___
-
-
-// //______________________________________________________________________________
-// class EXP mxsr2msrVoiceHandlersList : public smartable
-// {
-//   public:
-//
-//     // creation
-//     // ------------------------------------------------------
-//
-//     static SMARTP<mxsr2msrVoiceHandlersList> create ();
-//
-//     static SMARTP<mxsr2msrVoiceHandlersList> create (
-//                             const S_mxsr2msrVoiceHandler& tuplet);
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           mxsr2msrVoiceHandlersList ();
-//
-//                           mxsr2msrVoiceHandlersList (
-//                             const S_mxsr2msrVoiceHandler& tuplet);
-//
-//     virtual               ~mxsr2msrVoiceHandlersList ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//     const std::list<S_mxsr2msrVoiceHandler>&
-//                           getmxsr2msrVoiceHandlersStdList () const
-//                               { return fCurrentMxsr2msrVoiceHandlersStdList;}
-//
-//   public:
-//
-//     // public services
-//     // ------------------------------------------------------
-//
-//     // basic list stuff
-//     size_t                size () const
-//                               { return fCurrentMxsr2msrVoiceHandlersStdList.size (); }
-//
-//     S_mxsr2msrVoiceHandler&         front ()
-//                               { return fCurrentMxsr2msrVoiceHandlersStdList.front (); }
-//
-//     S_mxsr2msrVoiceHandler&         back ()
-//                               { return fCurrentMxsr2msrVoiceHandlersStdList.back (); }
-//
-//     void                  pop_front ()
-//                               { fCurrentMxsr2msrVoiceHandlersStdList.pop_front (); }
-//
-//     void                  pop_back ()
-//                               { fCurrentMxsr2msrVoiceHandlersStdList.pop_back (); }
-//
-//     void                  push_front (
-//                             const S_mxsr2msrVoiceHandler& tuplet)
-//                               { fCurrentMxsr2msrVoiceHandlersStdList.push_front (tuplet); }
-//
-//     void                  push_back (
-//                             const S_mxsr2msrVoiceHandler& tuplet)
-//                               { fCurrentMxsr2msrVoiceHandlersStdList.push_back (tuplet); }
-//
-//     // sort
-//     void                  sortByDecreasingIdentity();
-//
-//   public:
-//
-//     // print
-//     // ------------------------------------------------------
-//
-//     void                  print (std::ostream& os) const;
-//
-//     void                  printWithContext (
-//                             const std::string& context,
-//                             char               evidencer,
-//                             std::ostream&      os) const;
-//
-//   private:
-//
-//     // private services
-//     // ------------------------------------------------------
-//
-//
-//     // add an mxsr2msrVoiceHandler
-//     void                  prependTuplet (
-//                             const S_mxsr2msrVoiceHandler& theTuplet);
-//
-//     void                  appendTuplet (
-//                             const S_mxsr2msrVoiceHandler& theTuplet);
-//
-//     // private fields
-//     // ------------------------------------------------------
-//
-//     std::string           fCurrentMxsr2msrVoiceHandlerListName;
-//
-//     std::list<S_mxsr2msrVoiceHandler>
-//                           fCurrentMxsr2msrVoiceHandlersStdList;
-// };
-// typedef SMARTP<mxsr2msrVoiceHandlersList> S_mxsr2msrVoiceHandlersList;
-// EXP std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceHandlersList& elt);
-// EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandlersList& elt);
-
-// //______________________________________________________________________________
-// class EXP mxsr2msrVoiceHandlersStack : public smartable
-// /*
-//   C++ std::stack cannot be traversed, so we use std::list instead
-// */
-// {
-//   public:
-//
-//     // creation
-//     // ------------------------------------------------------
-//
-//     static SMARTP<mxsr2msrVoiceHandlersStack> create ();
-//
-//     static SMARTP<mxsr2msrVoiceHandlersStack> create (
-//                             const S_msrTuplet& tuplet);
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           mxsr2msrVoiceHandlersStack ();
-//
-//                           mxsr2msrVoiceHandlersStack (
-//                             const S_msrTuplet& tuplet);
-//
-//     virtual               ~mxsr2msrVoiceHandlersStack ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//     const std::list<S_msrTuplet>&
-//                           getmxsr2msrVoiceHandlersStdList () const
-//                               { return fCurrentMxsr2msrVoiceHandlersStdList;}
-//
-//   public:
-//
-//     // public services
-//     // ------------------------------------------------------
-//
-//     // basic list stuff
-//     size_t                size () const
-//                               { return fCurrentMxsr2msrVoiceHandlersStdList.size (); }
-//
-//     void                  push (
-//                             const S_msrTuplet& tuplet)
-//                               { fCurrentMxsr2msrVoiceHandlersStdList.push_front (tuplet); }
-//
-//     S_msrTuplet&          top ()
-//                               { return fCurrentMxsr2msrVoiceHandlersStdList.front (); }
-//
-//     void                  pop ()
-//                               { fCurrentMxsr2msrVoiceHandlersStdList.pop_front (); }
-//
-//   public:
-//
-//     // print
-//     // ------------------------------------------------------
-//
-//     void                  print (std::ostream& os) const;
-//
-//     void                  printWithContext (
-//                             const std::string& context,
-//                             char               evidencer,
-//                             std::ostream&      os) const;
-//
-//   private:
-//
-//     // private services
-//     // ------------------------------------------------------
-//
-//   private:
-//
-//     // private fields
-//     // ------------------------------------------------------
-//
-//     std::string           fCurrentMxsr2msrVoiceHandlerStackName;
-//
-//     std::list<S_msrTuplet>
-//                           fCurrentMxsr2msrVoiceHandlersStdList;
-// };
-// typedef SMARTP<mxsr2msrVoiceHandlersStack> S_mxsr2msrVoiceHandlersStack;
-// EXP std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceHandlersStack& elt);
-// EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandlersStack& elt);
-
