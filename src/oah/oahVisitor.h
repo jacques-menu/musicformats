@@ -33,7 +33,7 @@ class EXP oahVisitor : public smartable,
 
     virtual               ~oahVisitor ();
 
-    virtual void          visitTheHandler () = 0;
+    virtual void              visitTheHandler () = 0;
 
   protected:
 

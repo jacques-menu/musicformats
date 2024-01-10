@@ -3555,7 +3555,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
 
     if (noteDalSegnosList.size ()) {
       std::list<S_msrDalSegno>::const_iterator i;
-      for (S_msrDalSegno dalSegno : noteDalSegnosList) {
+      for (const S_msrDalSegno& dalSegno : noteDalSegnosList) {
         // generate the dal segno
         fLilypondCodeStream <<
           std::endl <<

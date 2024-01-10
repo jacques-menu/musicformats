@@ -329,15 +329,15 @@ void displayLpsrNamesVisitor::visitStart (S_msrStaff& elt)
 
   ++fStavesCounter;
 
-  size_t staffAllVoicesVectorSize =
+  size_t staffVoicesVectorSize =
     elt->
-      getStaffAllVoicesVector ().size ();
+      getStaffVoicesVector ().size ();
 
   gLog <<
     "Staff" << ' ' << elt->getStaffName () <<
     " contains " <<
     mfSingularOrPlural (
-      staffAllVoicesVectorSize,
+      staffVoicesVectorSize,
       "voice", "voices") <<
     std::endl;
 

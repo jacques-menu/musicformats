@@ -454,7 +454,7 @@ R"(\markup {
       " and LilyPond \" (lilypond-version))" <<
 R"(
       }
-      \fill-line { \italic { \modTimeAsString }}
+      \fill-line { \column { \italic { \concat { \filen " - " \modTimeAsString } } } }
     }
   }
 )";
@@ -2789,7 +2789,7 @@ void lpsrScore::addDateAndTimeSchemeFunctionsToScore ()
 
     schemeFunctionDescription =
 R"(
-% A set of functions to obtain a source file's modification time.
+% A set of functions to obtain the LilyPond file creation or modification time.
 )",
 
     schemeFunctionCode =
@@ -2803,7 +2803,7 @@ R"(
 #(define dat             (strftime "%d/%m/%Y" (localtime (current-time))))
 #(define tim             (strftime "%H:%M:%S" (localtime (current-time))))
 #(define modTime         (stat:mtime (stat filen)))
-#(define modTimeAsString (strftime "%d/%m/%Y - %H:%M:%S" (localtime modTime)))
+#(define modTimeAsString (strftime "%d/%m/%Y, %H:%M:%S" (localtime modTime)))
 )";
 
 #ifdef MF_TRACE_IS_ENABLED

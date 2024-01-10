@@ -101,95 +101,95 @@ class EXP displayLpsrSummaryVisitor :
     // protected services
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_msrScore& elt);
-    virtual void          visitEnd   (S_msrScore& elt);
+    virtual void              visitStart (S_msrScore& elt);
+    virtual void              visitEnd   (S_msrScore& elt);
 
-    virtual void          visitStart (S_msrPartGroup& elt);
-    virtual void          visitEnd   (S_msrPartGroup& elt);
+    virtual void              visitStart (S_msrPartGroup& elt);
+    virtual void              visitEnd   (S_msrPartGroup& elt);
 
-    virtual void          visitStart (S_msrPart& elt);
-    virtual void          visitEnd   (S_msrPart& elt);
+    virtual void              visitStart (S_msrPart& elt);
+    virtual void              visitEnd   (S_msrPart& elt);
 
-    virtual void          visitStart (S_msrStaff& elt);
-    virtual void          visitEnd   (S_msrStaff& elt);
+    virtual void              visitStart (S_msrStaff& elt);
+    virtual void              visitEnd   (S_msrStaff& elt);
 
-    virtual void          visitStart (S_msrVoice& elt);
-    virtual void          visitEnd   (S_msrVoice& elt);
+    virtual void              visitStart (S_msrVoice& elt);
+    virtual void              visitEnd   (S_msrVoice& elt);
 
-    virtual void          visitStart (S_msrStanza& elt);
-    virtual void          visitEnd   (S_msrStanza& elt);
+    virtual void              visitStart (S_msrStanza& elt);
+    virtual void              visitEnd   (S_msrStanza& elt);
 
-    virtual void          visitStart (S_msrSyllable& elt);
-    virtual void          visitEnd   (S_msrSyllable& elt);
+    virtual void              visitStart (S_msrSyllable& elt);
+    virtual void              visitEnd   (S_msrSyllable& elt);
 
-    virtual void          visitStart (S_msrClef& elt);
-    virtual void          visitEnd   (S_msrClef& elt);
+    virtual void              visitStart (S_msrClef& elt);
+    virtual void              visitEnd   (S_msrClef& elt);
 
-    virtual void          visitStart (S_msrKey& elt);
-    virtual void          visitEnd   (S_msrKey& elt);
+    virtual void              visitStart (S_msrKey& elt);
+    virtual void              visitEnd   (S_msrKey& elt);
 
-    virtual void          visitStart (S_msrTimeSignature& elt);
-    virtual void          visitEnd   (S_msrTimeSignature& elt);
+    virtual void              visitStart (S_msrTimeSignature& elt);
+    virtual void              visitEnd   (S_msrTimeSignature& elt);
 
-    virtual void          visitStart (S_msrTempo& elt);
-    virtual void          visitEnd   (S_msrTempo& elt);
+    virtual void              visitStart (S_msrTempo& elt);
+    virtual void              visitEnd   (S_msrTempo& elt);
 
-    virtual void          visitStart (S_msrSegment& elt);
-    virtual void          visitEnd   (S_msrSegment& elt);
+    virtual void              visitStart (S_msrSegment& elt);
+    virtual void              visitEnd   (S_msrSegment& elt);
 
-    virtual void          visitStart (S_msrArticulation& elt);
-    virtual void          visitEnd   (S_msrArticulation& elt);
+    virtual void              visitStart (S_msrArticulation& elt);
+    virtual void              visitEnd   (S_msrArticulation& elt);
 
-    virtual void          visitStart (S_msrDynamic& elt);
-    virtual void          visitEnd   (S_msrDynamic& elt);
+    virtual void              visitStart (S_msrDynamic& elt);
+    virtual void              visitEnd   (S_msrDynamic& elt);
 
-    virtual void          visitStart (S_msrCrescDecresc& elt);
-    virtual void          visitEnd   (S_msrCrescDecresc& elt);
+    virtual void              visitStart (S_msrCrescDecresc& elt);
+    virtual void              visitEnd   (S_msrCrescDecresc& elt);
 
-    virtual void          visitStart (S_msrWedge& elt);
-    virtual void          visitEnd   (S_msrWedge& elt);
+    virtual void              visitStart (S_msrWedge& elt);
+    virtual void              visitEnd   (S_msrWedge& elt);
 
-    virtual void          visitStart (S_msrGraceNotesGroup& elt);
-    virtual void          visitEnd   (S_msrGraceNotesGroup& elt);
+    virtual void              visitStart (S_msrGraceNotesGroup& elt);
+    virtual void              visitEnd   (S_msrGraceNotesGroup& elt);
 
-    virtual void          visitStart (S_msrNote& elt);
-    virtual void          visitEnd   (S_msrNote& elt);
+    virtual void              visitStart (S_msrNote& elt);
+    virtual void              visitEnd   (S_msrNote& elt);
 
-    virtual void          visitStart (S_msrStem& elt);
-    virtual void          visitEnd   (S_msrStem& elt);
+    virtual void              visitStart (S_msrStem& elt);
+    virtual void              visitEnd   (S_msrStem& elt);
 
-    virtual void          visitStart (S_msrBeam& elt);
-    virtual void          visitEnd   (S_msrBeam& elt);
+    virtual void              visitStart (S_msrBeam& elt);
+    virtual void              visitEnd   (S_msrBeam& elt);
 
-    virtual void          visitStart (S_msrChord& elt);
-    virtual void          visitEnd   (S_msrChord& elt);
+    virtual void              visitStart (S_msrChord& elt);
+    virtual void              visitEnd   (S_msrChord& elt);
 
-    virtual void          visitStart (S_msrTuplet& elt);
-    virtual void          visitEnd   (S_msrTuplet& elt);
+    virtual void              visitStart (S_msrTuplet& elt);
+    virtual void              visitEnd   (S_msrTuplet& elt);
 
-    virtual void          visitStart (S_msrSlur& elt);
-    virtual void          visitEnd   (S_msrSlur& elt);
+    virtual void              visitStart (S_msrSlur& elt);
+    virtual void              visitEnd   (S_msrSlur& elt);
 
-    virtual void          visitStart (S_msrBarLine& elt);
-    virtual void          visitEnd   (S_msrBarLine& elt);
+    virtual void              visitStart (S_msrBarLine& elt);
+    virtual void              visitEnd   (S_msrBarLine& elt);
 
-    virtual void          visitStart (S_msrBarNumberCheck& elt);
-    virtual void          visitEnd   (S_msrBarNumberCheck& elt);
+    virtual void              visitStart (S_msrBarNumberCheck& elt);
+    virtual void              visitEnd   (S_msrBarNumberCheck& elt);
 
-    virtual void          visitStart (S_msrLineBreak& elt);
-    virtual void          visitEnd   (S_msrLineBreak& elt);
+    virtual void              visitStart (S_msrLineBreak& elt);
+    virtual void              visitEnd   (S_msrLineBreak& elt);
 
-    virtual void          visitStart (S_msrRepeat& elt);
-    virtual void          visitEnd   (S_msrRepeat& elt);
+    virtual void              visitStart (S_msrRepeat& elt);
+    virtual void              visitEnd   (S_msrRepeat& elt);
 
-    virtual void          visitStart (S_msrScaling& elt);
-    virtual void          visitEnd   (S_msrScaling& elt);
+    virtual void              visitStart (S_msrScaling& elt);
+    virtual void              visitEnd   (S_msrScaling& elt);
 
-    virtual void          visitStart (S_msrPageLayout& elt);
-    virtual void          visitEnd   (S_msrPageLayout& elt);
+    virtual void              visitStart (S_msrPageLayout& elt);
+    virtual void              visitEnd   (S_msrPageLayout& elt);
 
-    virtual void          visitStart (S_msrMidiTempo& elt);
-    virtual void          visitEnd   (S_msrMidiTempo& elt);
+    virtual void              visitStart (S_msrMidiTempo& elt);
+    virtual void              visitEnd   (S_msrMidiTempo& elt);
 
   public:
 

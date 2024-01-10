@@ -93,56 +93,56 @@ class EXP displayMsrVoicesFlatViewVisitor :
     // protected services
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_msrScore& elt);
-    virtual void          visitEnd   (S_msrScore& elt);
+    virtual void              visitStart (S_msrScore& elt);
+    virtual void              visitEnd   (S_msrScore& elt);
 
-    virtual void          visitStart (S_msrPartGroup& elt);
-    virtual void          visitEnd   (S_msrPartGroup& elt);
+    virtual void              visitStart (S_msrPartGroup& elt);
+    virtual void              visitEnd   (S_msrPartGroup& elt);
 
-    virtual void          visitStart (S_msrPart& elt);
-    virtual void          visitEnd   (S_msrPart& elt);
+    virtual void              visitStart (S_msrPart& elt);
+    virtual void              visitEnd   (S_msrPart& elt);
 
-    virtual void          visitStart (S_msrStaff& elt);
-    virtual void          visitEnd   (S_msrStaff& elt);
+    virtual void              visitStart (S_msrStaff& elt);
+    virtual void              visitEnd   (S_msrStaff& elt);
 
-    virtual void          visitStart (S_msrVoice& elt);
-    virtual void          visitEnd   (S_msrVoice& elt);
+    virtual void              visitStart (S_msrVoice& elt);
+    virtual void              visitEnd   (S_msrVoice& elt);
 
-    virtual void          visitStart (S_msrClef& elt);
-    virtual void          visitEnd   (S_msrClef& elt);
+    virtual void              visitStart (S_msrClef& elt);
+    virtual void              visitEnd   (S_msrClef& elt);
 
-    virtual void          visitStart (S_msrKey& elt);
-    virtual void          visitEnd   (S_msrKey& elt);
+    virtual void              visitStart (S_msrKey& elt);
+    virtual void              visitEnd   (S_msrKey& elt);
 
-    virtual void          visitStart (S_msrTimeSignature& elt);
-    virtual void          visitEnd   (S_msrTimeSignature& elt);
+    virtual void              visitStart (S_msrTimeSignature& elt);
+    virtual void              visitEnd   (S_msrTimeSignature& elt);
 
-    virtual void          visitStart (S_msrSegment& elt);
-    virtual void          visitEnd   (S_msrSegment& elt);
+    virtual void              visitStart (S_msrSegment& elt);
+    virtual void              visitEnd   (S_msrSegment& elt);
 
-    virtual void          visitStart (S_msrMeasure& elt);
-    virtual void          visitEnd   (S_msrMeasure& elt);
+    virtual void              visitStart (S_msrMeasure& elt);
+    virtual void              visitEnd   (S_msrMeasure& elt);
 
-    virtual void          visitStart (S_msrNote& elt);
-    virtual void          visitEnd   (S_msrNote& elt);
+    virtual void              visitStart (S_msrNote& elt);
+    virtual void              visitEnd   (S_msrNote& elt);
 
-    virtual void          visitStart (S_msrChord& elt);
-    virtual void          visitEnd   (S_msrChord& elt);
+    virtual void              visitStart (S_msrChord& elt);
+    virtual void              visitEnd   (S_msrChord& elt);
 
-    virtual void          visitStart (S_msrTuplet& elt);
-    virtual void          visitEnd   (S_msrTuplet& elt);
+    virtual void              visitStart (S_msrTuplet& elt);
+    virtual void              visitEnd   (S_msrTuplet& elt);
 
-    virtual void          visitStart (S_msrBarLine& elt);
-    virtual void          visitEnd   (S_msrBarLine& elt);
+    virtual void              visitStart (S_msrBarLine& elt);
+    virtual void              visitEnd   (S_msrBarLine& elt);
 
-    virtual void          visitStart (S_msrBarNumberCheck& elt);
-    virtual void          visitEnd   (S_msrBarNumberCheck& elt);
+    virtual void              visitStart (S_msrBarNumberCheck& elt);
+    virtual void              visitEnd   (S_msrBarNumberCheck& elt);
 
-    virtual void          visitStart (S_msrLineBreak& elt);
-    virtual void          visitEnd   (S_msrLineBreak& elt);
+    virtual void              visitStart (S_msrLineBreak& elt);
+    virtual void              visitEnd   (S_msrLineBreak& elt);
 
-    virtual void          visitStart (S_msrRepeat& elt);
-    virtual void          visitEnd   (S_msrRepeat& elt);
+    virtual void              visitStart (S_msrRepeat& elt);
+    virtual void              visitEnd   (S_msrRepeat& elt);
 
   public:
 

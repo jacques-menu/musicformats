@@ -990,7 +990,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
   // register it in the part uplink
   fStaffUpLinkToPart->
-    registerVoiceInPartAllVoicesList (voice);
+    registerVoiceInPartVoicesList (voice);
 
   --gIndenter;
 }
@@ -1029,12 +1029,12 @@ void msrStaff::registerVoiceByItsNumber (
   // sort the all voices list if necessary
   switch (voice->getVoiceKind ()) {
     case msrVoiceKind::kVoiceKindRegular:
-      // set regularVoice staff sequential number
+      // set voice's staff sequential number
       voice->
         setRegularVoiceStaffSequentialNumber (
           fStaffRegularVoicesCounter);
 
-      // register it in 'regular voices' list
+      // register voice in 'regular voices' list
       fStaffRegularVoicesList.push_back (voice);
 
       // register voice in the 'numbers to regular voices' map
@@ -1092,6 +1092,10 @@ void msrStaff::registerVoiceByItsNumber (
       }
       break;
   } // switch
+
+  // register voice in its staff at the part level
+  fStaffUpLinkToPart->
+    registerVoiceInVoicesMap (voice);
 
   --gIndenter;
 }
@@ -1185,10 +1189,6 @@ void msrStaff::registerRegularVoiceByItsNumber (
   registerVoiceByItsNumber (
     inputLineNumber,
     regularVoice);
-
-  // register voice in its staff at the part level
-  fStaffUpLinkToPart->
-    registerVoiceInRegularVoicesMap (regularVoice);
 
   --gIndenter;
 }

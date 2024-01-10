@@ -4218,7 +4218,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 
     ++gIndenter;
 
-		fCurrentPart->displayPartRegularVoicesMap (
+		fCurrentPart->displayPartVoicesMap (
 			elt->getInputStartLineNumber (),
 			"mxsr2msrSkeletonBuilder::visitEnd(S_part& elt)");
 

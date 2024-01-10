@@ -473,44 +473,44 @@ class EXP mxsr2msrSkeletonBuilder :
     // score partwise
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_score_partwise& elt);
+    virtual void              visitStart (S_score_partwise& elt);
 virtual void              visitEnd   (S_score_partwise& elt);
 
     // identification
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_identification& elt);
-    virtual void          visitEnd   (S_identification& elt);
-    virtual void          visitStart (S_creator& elt);
-    virtual void          visitStart (S_rights& elt);
-    virtual void          visitStart (S_source& elt);
-    virtual void          visitStart (S_relation& elt);
+    virtual void              visitStart (S_identification& elt);
+    virtual void              visitEnd   (S_identification& elt);
+    virtual void              visitStart (S_creator& elt);
+    virtual void              visitStart (S_rights& elt);
+    virtual void              visitStart (S_source& elt);
+    virtual void              visitStart (S_relation& elt);
 
     // encoding
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_encoding& elt);
-    virtual void          visitEnd   (S_encoding& elt);
-    virtual void          visitStart (S_encoding_date& elt);
-    virtual void          visitStart (S_encoder& elt);
-    virtual void          visitStart (S_software& elt);
-    virtual void          visitStart (S_encoding_description& elt);
-    virtual void          visitStart (S_supports& elt);
+    virtual void              visitStart (S_encoding& elt);
+    virtual void              visitEnd   (S_encoding& elt);
+    virtual void              visitStart (S_encoding_date& elt);
+    virtual void              visitStart (S_encoder& elt);
+    virtual void              visitStart (S_software& elt);
+    virtual void              visitStart (S_encoding_description& elt);
+    virtual void              visitStart (S_supports& elt);
 
 
 
-    virtual void          visitStart (S_work_number& elt);
-    virtual void          visitStart (S_work_title& elt);
-    virtual void          visitStart (S_opus& elt);
-    virtual void          visitStart (S_movement_number& elt);
-    virtual void          visitStart (S_movement_title& elt);
+    virtual void              visitStart (S_work_number& elt);
+    virtual void              visitStart (S_work_title& elt);
+    virtual void              visitStart (S_opus& elt);
+    virtual void              visitStart (S_movement_number& elt);
+    virtual void              visitStart (S_movement_title& elt);
 
     // miscellaneous
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_miscellaneous& elt);
-    virtual void          visitEnd   (S_miscellaneous& elt);
-    virtual void          visitStart (S_miscellaneous_field& elt);
+    virtual void              visitStart (S_miscellaneous& elt);
+    virtual void              visitEnd   (S_miscellaneous& elt);
+    virtual void              visitStart (S_miscellaneous_field& elt);
 
     // rights JMI
     // ------------------------------------------------------
@@ -518,95 +518,95 @@ virtual void              visitEnd   (S_score_partwise& elt);
     // credits
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_credit& elt);
-    virtual void          visitEnd   (S_credit& elt);
-    virtual void          visitStart (S_credit_type& elt);
-    virtual void          visitStart (S_credit_words& elt);
-    virtual void          visitStart (S_credit_symbol& elt);
-    virtual void          visitStart (S_credit_image& elt);
+    virtual void              visitStart (S_credit& elt);
+    virtual void              visitEnd   (S_credit& elt);
+    virtual void              visitStart (S_credit_type& elt);
+    virtual void              visitStart (S_credit_words& elt);
+    virtual void              visitStart (S_credit_symbol& elt);
+    virtual void              visitStart (S_credit_image& elt);
 
     // parts & part groups
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_part_list& elt);
-    virtual void          visitEnd   (S_part_list& elt);
+    virtual void              visitStart (S_part_list& elt);
+    virtual void              visitEnd   (S_part_list& elt);
 
-    virtual void          visitStart (S_display_text& elt);
+    virtual void              visitStart (S_display_text& elt);
 
-    virtual void          visitStart (S_part_group& elt);
-    virtual void          visitEnd   (S_part_group& elt);
+    virtual void              visitStart (S_part_group& elt);
+    virtual void              visitEnd   (S_part_group& elt);
 
-    virtual void          visitStart (S_group_name& elt);
-    virtual void          visitStart (S_group_name_display& elt);
-    virtual void          visitEnd   (S_group_name_display& elt);
+    virtual void              visitStart (S_group_name& elt);
+    virtual void              visitStart (S_group_name_display& elt);
+    virtual void              visitEnd   (S_group_name_display& elt);
 
-    virtual void          visitStart (S_accidental_text& elt);
-    virtual void          visitStart (S_group_abbreviation& elt);
-    virtual void          visitStart (S_group_symbol& elt);
-    virtual void          visitStart (S_group_barline& elt);
+    virtual void              visitStart (S_accidental_text& elt);
+    virtual void              visitStart (S_group_abbreviation& elt);
+    virtual void              visitStart (S_group_symbol& elt);
+    virtual void              visitStart (S_group_barline& elt);
 
-    virtual void          visitStart (S_score_part& elt);
-    virtual void          visitEnd   (S_score_part& elt);
+    virtual void              visitStart (S_score_part& elt);
+    virtual void              visitEnd   (S_score_part& elt);
 
-    virtual void          visitStart (S_part_name& elt);
-    virtual void          visitStart (S_part_name_display& elt);
-    virtual void          visitEnd   (S_part_name_display& elt);
+    virtual void              visitStart (S_part_name& elt);
+    virtual void              visitStart (S_part_name_display& elt);
+    virtual void              visitEnd   (S_part_name_display& elt);
 
-    virtual void          visitStart (S_part_abbreviation& elt);
-    virtual void          visitStart (S_part_abbreviation_display& elt);
-    virtual void          visitEnd   (S_part_abbreviation_display& elt);
+    virtual void              visitStart (S_part_abbreviation& elt);
+    virtual void              visitStart (S_part_abbreviation_display& elt);
+    virtual void              visitEnd   (S_part_abbreviation_display& elt);
 
-    virtual void          visitStart (S_instrument_name& elt);
-    virtual void          visitStart (S_instrument_abbreviation& elt);
+    virtual void              visitStart (S_instrument_name& elt);
+    virtual void              visitStart (S_instrument_abbreviation& elt);
 
-    virtual void          visitStart (S_part& elt);
-    virtual void          visitEnd   (S_part& elt);
+    virtual void              visitStart (S_part& elt);
+    virtual void              visitEnd   (S_part& elt);
 
     // staves
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_staves& elt);
+    virtual void              visitStart (S_staves& elt);
 
-    virtual void          visitStart (S_staff& elt);
+    virtual void              visitStart (S_staff& elt);
 
     // voices
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_voice& elt);
+    virtual void              visitStart (S_voice& elt);
 
     // measures
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_measure& elt);
-    virtual void          visitEnd   (S_measure& elt);
+    virtual void              visitStart (S_measure& elt);
+    virtual void              visitEnd   (S_measure& elt);
 
     // print
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_print& elt);
-    virtual void          visitEnd   (S_print& elt);
+    virtual void              visitStart (S_print& elt);
+    virtual void              visitEnd   (S_print& elt);
 
     // notes
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_note& elt);
-    virtual void          visitEnd   (S_note& elt);
+    virtual void              visitStart (S_note& elt);
+    virtual void              visitEnd   (S_note& elt);
 
     // lyrics
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_lyric& elt);
-    virtual void          visitEnd   (S_lyric& elt);
+    virtual void              visitStart (S_lyric& elt);
+    virtual void              visitEnd   (S_lyric& elt);
 
     // harmonies
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_harmony& elt);
+    virtual void              visitStart (S_harmony& elt);
 
     // figured bass
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_figured_bass& elt);
+    virtual void              visitStart (S_figured_bass& elt);
 
   private:
 

@@ -516,14 +516,14 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrStaff& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
-    size_t staffAllVoicesVectorSize =
-      elt->getStaffAllVoicesVector ().size ();
+    size_t staffVoicesVectorSize =
+      elt->getStaffVoicesVector ().size ();
 
     gLog <<
       "Staff" << ' ' << elt->getStaffName () <<
       " contains " <<
       mfSingularOrPlural (
-        staffAllVoicesVectorSize,
+        staffVoicesVectorSize,
         "voice", "voices") <<
       std::endl;
 

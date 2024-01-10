@@ -66,20 +66,20 @@ class EXP displayMsrNamesVisitor :
     // visitors
     // ------------------------------------------------------
 
-    virtual void          visitStart (S_msrScore& elt);
-    virtual void          visitEnd   (S_msrScore& elt);
+    virtual void              visitStart (S_msrScore& elt);
+    virtual void              visitEnd   (S_msrScore& elt);
 
-    virtual void          visitStart (S_msrPartGroup& elt);
-    virtual void          visitEnd   (S_msrPartGroup& elt);
+    virtual void              visitStart (S_msrPartGroup& elt);
+    virtual void              visitEnd   (S_msrPartGroup& elt);
 
-    virtual void          visitStart (S_msrPart& elt);
-    virtual void          visitEnd   (S_msrPart& elt);
+    virtual void              visitStart (S_msrPart& elt);
+    virtual void              visitEnd   (S_msrPart& elt);
 
-    virtual void          visitStart (S_msrStaff& elt);
-    virtual void          visitEnd   (S_msrStaff& elt);
+    virtual void              visitStart (S_msrStaff& elt);
+    virtual void              visitEnd   (S_msrStaff& elt);
 
-    virtual void          visitStart (S_msrVoice& elt);
-    virtual void          visitEnd   (S_msrVoice& elt);
+    virtual void              visitStart (S_msrVoice& elt);
+    virtual void              visitEnd   (S_msrVoice& elt);
 
   private:
 

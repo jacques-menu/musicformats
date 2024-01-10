@@ -6929,13 +6929,13 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
     ++i
   ) {
     std::list<S_msrVoice>
-      staffAllVoicesVector =
+      staffVoicesVector =
         (*i).second->
-          getStaffAllVoicesVector ();
+          getStaffVoicesVector ();
 
     for (
-      std::list<S_msrVoice>::const_iterator j=staffAllVoicesVector.begin ();
-      j!=staffAllVoicesVector.end ();
+      std::list<S_msrVoice>::const_iterator j=staffVoicesVector.begin ();
+      j!=staffVoicesVector.end ();
       ++j
     ) {
       const S_msrVoice& voice = (*j);

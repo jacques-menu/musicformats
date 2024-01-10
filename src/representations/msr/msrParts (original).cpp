@@ -2173,20 +2173,28 @@ S_msrStaff msrPart::fetchStaffFromPart (
   return result;
 }
 
-void msrPart::registerVoiceInPartVoicesList (
+void msrPart::registerVoiceInPartAllVoicesList (
   const S_msrVoice& voice)
 {
   // register voice in this part
-  fPartVoicesList.push_back (voice);
+  fPartAllVoicesList.push_back (voice);
 
   // set its regular voice ordinal number
   ++fPartRegularVoicesCounter;
   voice->
     setRegularVoiceOrdinalNumberInPart (
       fPartRegularVoicesCounter);
+
+  // register it in the partgroup uplink
+  fPartUpLinkToPartGroup->
+    registerVoiceInPartGroupAllVoicesList (voice);
+//
+//   // register voice in the regular voices map
+//   registerVoiceInRegularVoicesMap (voice);
+//
 }
 
-void msrPart::registerVoiceInVoicesMap (
+void msrPart::registerVoiceInRegularVoicesMap (
   const S_msrVoice& voice)
 {
   int voiceNumber = voice->getVoiceNumber ();
@@ -2196,7 +2204,7 @@ void msrPart::registerVoiceInVoicesMap (
     std::stringstream ss;
 
     ss <<
-      "Registering voice " <<
+      "Registering regular voice " <<
       voiceNumber <<
       ", \"" <<
       voice->getVoiceName () <<
@@ -2213,18 +2221,18 @@ void msrPart::registerVoiceInVoicesMap (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // register voice in the all voices map
-  if (fPartVoicesMap.count (voiceNumber)) {
+  // register regular voice in the regular voices map
+  if (fPartRegularVoicesMap.count (voiceNumber)) {
     std::stringstream ss;
 
     ss <<
-      "Voice " <<
+      "Regular voice " <<
       voiceNumber <<
       ", \"" <<
       voice->getVoiceName () <<
-      "\", has already been registered in the voices map of part \"" << // JMI v0.9.70
+      "\", has already been registered in the regular voices map of part " << // JMI v0.9.70
       getPartName () <<
-      "\", line " << voice->getInputStartLineNumber ();
+      ", line " << voice->getInputStartLineNumber ();
 
     msrError (
       gServiceRunData->getInputSourceName (),
@@ -2233,7 +2241,7 @@ void msrPart::registerVoiceInVoicesMap (
       ss.str ());
   }
 
-  fPartVoicesMap [voiceNumber] = voice;
+  fPartRegularVoicesMap [voiceNumber] = voice;
 
   // register part minimum and maximum voice numbers
   if (voiceNumber < fPartMinimumVoiceNumber) {
@@ -2245,132 +2253,12 @@ void msrPart::registerVoiceInVoicesMap (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
-    displayPartVoicesMap (
+    displayPartRegularVoicesMap (
       voice->getInputStartLineNumber (),
-      "msrPart::registerVoiceInPartVoicesList()");
+      "msrPart::registerVoiceInRegularVoicesMap()");
   }
 #endif
 }
-
-// void msrPart::registerVoiceInRegularVoicesMap (
-//   const S_msrVoice& voice)
-// {
-//   int voiceNumber = voice->getVoiceNumber ();
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Registering regular voice " <<
-//       voiceNumber <<
-//       ", \"" <<
-//       voice->getVoiceName () <<
-//       "\" in part \"" <<
-//       fPartID <<
-//       ", \"" <<
-//       fPartName <<
-//       "\"" <<
-//       ", line " << voice->getInputStartLineNumber ();
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // register regular voice in the regular voices map
-//   if (fPartRegularVoicesMap.count (voiceNumber)) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Regular voice " <<
-//       voiceNumber <<
-//       ", \"" <<
-//       voice->getVoiceName () <<
-//       "\", has already been registered in the regular voices map of part \"" << // JMI v0.9.70
-//       getPartName () <<
-//       "\", line " << voice->getInputStartLineNumber ();
-//
-//     msrError (
-//       gServiceRunData->getInputSourceName (),
-//       voice->getInputStartLineNumber (),
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-//
-//   fPartRegularVoicesMap [voiceNumber] = voice;
-//
-//   // register it in the partgroup uplink
-//   fPartUpLinkToPartGroup->
-//     registerVoiceInPartGroupAllVoicesList (voice);
-// }
-
-// void msrPart::registerVoiceInRegularVoicesMap (
-//   const S_msrVoice& voice)
-// {
-//   int voiceNumber = voice->getVoiceNumber ();
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Registering regular voice " <<
-//       voiceNumber <<
-//       ", \"" <<
-//       voice->getVoiceName () <<
-//       "\" in part \"" <<
-//       fPartID <<
-//       ", \"" <<
-//       fPartName <<
-//       "\"" <<
-//       ", line " << voice->getInputStartLineNumber ();
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // register regular voice in the regular voices map
-//   if (fPartRegularVoicesMap.count (voiceNumber)) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Regular voice " <<
-//       voiceNumber <<
-//       ", \"" <<
-//       voice->getVoiceName () <<
-//       "\", has already been registered in the regular voices map of part \"" << // JMI v0.9.70
-//       getPartName () <<
-//       "\", line " << voice->getInputStartLineNumber ();
-//
-//     msrError (
-//       gServiceRunData->getInputSourceName (),
-//       voice->getInputStartLineNumber (),
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-//
-//   fPartRegularVoicesMap [voiceNumber] = voice;
-//
-//   // register part minimum and maximum voice numbers
-//   if (voiceNumber < fPartMinimumVoiceNumber) {
-//     fPartMinimumVoiceNumber = voiceNumber;
-//   }
-//   if (voiceNumber > fPartMaximumVoiceNumber) {
-//     fPartMaximumVoiceNumber = voiceNumber;
-//   }
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
-//     displayPartRegularVoicesMap (
-//       voice->getInputStartLineNumber (),
-//       "msrPart::registerVoiceInRegularVoicesMap()");
-//   }
-// #endif
-// }
 
 S_msrVoice msrPart::createPartHarmoniesVoice (
   int                inputLineNumber,
@@ -2988,36 +2876,31 @@ void msrPart::setPartInstrumentNamesMaxLengthes ()
   }
 }
 
-void msrPart::displayPartVoicesMap (
+void msrPart::displayPartRegularVoicesMap (
   int                inputLineNumber,
   const std::string& context) const
 {
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
-    gLog <<
-      ">>> The fPartVoicesMap of part \"" <<
-      getPartName () <<
-      "\" , context: " << context <<
-      ", contains:" <<
-      std::endl;
-  }
-#endif // MF_TRACE_IS_ENABLED
+//   gLog <<
+//     ">>> The fPartRegularVoicesMap of part \"" <<
+//     getPartName () <<
+//     "\" , context: " << context <<
+//     ", contains:" <<
+//     std::endl;
 
   ++gIndenter;
 
-  for (std::pair<int, S_msrVoice> thePair : fPartVoicesMap) {
+  for (std::pair<int, S_msrVoice> thePair : fPartRegularVoicesMap) {
     int        voiceNumber = thePair.first;
-    S_msrVoice voice = thePair.second;
+    S_msrVoice regularVoice = thePair.second;
 
     // CAUTION: there may be 'holes' in the vector,
-    // whose indexes start at 0 moreover,
-    // in which case voice is null
-    if (voice) {
+    // whose indexes start at 0 moreover
+    if (regularVoice) {
       gLog <<
         "voice " <<
         voiceNumber <<
         ": " <<
-        voice->asShortString () <<
+        regularVoice->asShortString () <<
         std::endl;
     }
   } // for
@@ -3208,7 +3091,7 @@ void msrPart::finalizePartAndAllItsMeasures (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fPartVoicesList) {
+  for (const S_msrVoice& voice : fPartAllVoicesList) {
     voice->
       finalizeVoiceAndAllItsMeasures (
         inputLineNumber);
@@ -3904,18 +3787,18 @@ void msrPart::printFull (std::ostream& os) const
   }
 
   // print part part all voices
-  size_t partVoicesListSize =
-    fPartVoicesList.size ();
+  size_t partAllVoicesListSize =
+    fPartAllVoicesList.size ();
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "Voice names in fPartVoicesList" << ": ";
+    "Voice names in fPartAllVoicesList" << ": ";
 
-  if (partVoicesListSize) {
+  if (partAllVoicesListSize) {
     os << std::endl;
     ++gIndenter;
 
-    for (const S_msrVoice& voice : fPartVoicesList) {
+    for (const S_msrVoice& voice : fPartAllVoicesList) {
       os << "\"" << voice->getVoiceName () << "\"" << std::endl;
     } // for
 

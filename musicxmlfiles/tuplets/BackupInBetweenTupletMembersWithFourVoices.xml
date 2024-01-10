@@ -1,10 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <!DOCTYPE score-partwise PUBLIC '-//Recordare//DTD MusicXML 3.0 Partwise//EN' 'http://www.musicxml.org/dtds/partwise.dtd'>
 <score-partwise version='3.0'>
-  <work>
-    <work-title>Backup Between Tuplet Members With One Voice</work-title>
-    </work>
-  <movement-title>Backup Between Tuplet Members With One Voice</movement-title>
+  <movement-title>Backup Between Tuplet Members With Four Voices</movement-title>
 	<part-list>
 		<score-part id='P1'>
 			<part-name>Klavier</part-name>
@@ -51,10 +48,92 @@
 					<line>4</line>
 				</clef>
 			</attributes>
+
+      <!-- LOWER VOICES -->
 			<note>
 				<pitch>
-					<step>A</step>
+					<step>B</step>
+					<alter>-1</alter>
+					<octave>2</octave>
+				</pitch>
+				<duration>256</duration>
+				<voice>3</voice>
+				<type>eighth</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>down</stem>
+				<staff>1</staff>
+				<beam number='1'>begin</beam>
+				<notations>
+					<tuplet number='1' type='start'/>
+				</notations>
+			</note>
+			<backup>
+				<duration>256</duration>
+			</backup>
+			<note>
+				<pitch>
+					<step>F</step>
+					<octave>2</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>4</voice>
+				<type>half</type>
+				<stem>down</stem>
+				<staff>1</staff>
+			</note>
+			<backup>
+				<duration>1280</duration>
+			</backup>
+			<note>
+				<pitch>
+					<step>D</step>
 					<octave>3</octave>
+				</pitch>
+				<duration>256</duration>
+				<voice>3</voice>
+				<type>eighth</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>down</stem>
+				<staff>1</staff>
+				<beam number='1'>continue</beam>
+			</note>
+			<note>
+				<pitch>
+					<step>E</step>
+					<alter>-1</alter>
+					<octave>3</octave>
+				</pitch>
+				<duration>256</duration>
+				<voice>3</voice>
+				<type>eighth</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>down</stem>
+				<staff>1</staff>
+				<beam number='1'>end</beam>
+				<notations>
+					<tuplet number='1' type='stop'/>
+				</notations>
+			</note>
+
+
+			<backup>
+				<duration>1280</duration>
+			</backup>
+
+      <!-- UPPER VOICES -->
+			<note>
+				<pitch>
+					<step>C</step>
+					<octave>4</octave>
 				</pitch>
 				<duration>256</duration>
 				<voice>1</voice>
@@ -75,13 +154,13 @@
 			</backup>
 			<note>
 				<pitch>
-					<step>F</step>
+					<step>G</step>
 					<octave>3</octave>
 				</pitch>
 				<duration>1536</duration>
-				<voice>1</voice>
+				<voice>2</voice>
 				<type>half</type>
-				<stem>down</stem>
+				<stem>up</stem>
 				<staff>1</staff>
 			</note>
 			<backup>
@@ -89,7 +168,8 @@
 			</backup>
 			<note>
 				<pitch>
-					<step>C</step>
+					<step>E</step>
+					<alter>-1</alter>
 					<octave>4</octave>
 				</pitch>
 				<duration>256</duration>
@@ -122,6 +202,7 @@
 					<tuplet number='1' type='stop'/>
 				</notations>
 			</note>
+
 		</measure>
 	</part>
 <!--=========================================================-->

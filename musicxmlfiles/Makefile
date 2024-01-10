@@ -28,7 +28,7 @@ XML2LY    ?= xml2ly
 #XML2LY    ?= musicxml2ly
 #XML2LY    ?= time musicxml2ly
 
-OPTIONS   ?= -q
+XML2LY_OPTIONS   ?= -q -lilypond-run-date -lilypond-generation-infos
 
 LILYPOND  ?= /opt/local/bin/lilypond
 # LILYPOND  ?= /Applications/LilyPond/lilypond-2.23.6/bin/lilypond
@@ -38,9 +38,9 @@ LILYPOND  ?= /opt/local/bin/lilypond
 
 #########################################################################
 all:
-	@echo "XML2LY   = $(XML2LY)"
-	@echo "OPTIONS  = $(OPTIONS)"
-	@echo "LILYPOND = $(LILYPOND)"
+	@echo "XML2LY         = $(XML2LY)"
+	@echo "XML2LY_OPTIONS = $(XML2LY_OPTIONS)"
+	@echo "LILYPOND       = $(LILYPOND)"
 	@$(LILYPOND) --version
 	@echo
 
@@ -105,8 +105,8 @@ help:
 	@echo "  When XML2LY and/or LILYPOND are not set, "
 	@echo "  these tools are looked up in the PATH variable,"
 	@echo
-	@echo "  OPTIONS=..."
-	@echo "  By default, OPTIONS contains '-q' (quiet mode), for use by xml2ly."
+	@echo "  XML2LY_OPTIONS=..."
+	@echo "  By default, XML2LY_OPTIONS contains '-q' (quiet mode), for use by xml2ly."
 
 #########################################################################
 clean:
@@ -272,7 +272,7 @@ validlily: $(validlily)
 # rules for XML2LY
 lilypond/%.ly: ./%.xml
 	@[ -d $(@D) ] || mkdir -p $(@D)
-	$(XML2LY) $(OPTIONS) -o "$@" "$<"
+	$(XML2LY) $(XML2LY_OPTIONS) -o "$@" "$<"
 
 #lilyignored/%.ly: ./%.xml
 #	@[ -d $(@D) ] || mkdir -p $(@D)
