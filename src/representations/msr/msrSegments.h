@@ -161,7 +161,7 @@ class EXP msrSegment : public msrVoiceElement
                                     backupTargetMeasureElementMeasurePosition);
 
     void                  appendPaddingNoteToSegment (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& forwardStepLength);
 
     // measures
@@ -219,7 +219,7 @@ class EXP msrSegment : public msrVoiceElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInSegmentClone (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& measurePosition);
 
     // transposition
@@ -403,11 +403,11 @@ class EXP msrSegment : public msrVoiceElement
     // removing elements
 
     void                  removeNoteFromSegment (
-                            int       inputLineNumber,
+                            int              inputLineNumber,
                             const S_msrNote& note);
 
     void                  removeElementFromSegment (
-                            int          inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrElement& element);
 
     S_msrMeasure          removeLastMeasureFromSegment (

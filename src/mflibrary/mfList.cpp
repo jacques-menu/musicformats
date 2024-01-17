@@ -22,7 +22,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 template <typename ELEMENT_TYPE>
-SMARTP<mfList<ELEMENT_TYPE> > mfList<ELEMENT_TYPE>::create ()
+SMARTP<mfList<ELEMENT_TYPE>> mfList<ELEMENT_TYPE>::create ()
 {
   mfList<ELEMENT_TYPE>* obj = new
     mfList<ELEMENT_TYPE> ();
@@ -31,7 +31,7 @@ SMARTP<mfList<ELEMENT_TYPE> > mfList<ELEMENT_TYPE>::create ()
 }
 
 template <typename ELEMENT_TYPE>
-SMARTP<mfList<ELEMENT_TYPE> > mfList<ELEMENT_TYPE>::create (
+SMARTP<mfList<ELEMENT_TYPE>> mfList<ELEMENT_TYPE>::create (
 	const ELEMENT_TYPE& element)
 {
   mfList<ELEMENT_TYPE>* obj = new
@@ -172,7 +172,7 @@ std::ostream& operator << (std::ostream& os, const mfList<ELEMENT_TYPE>& elt)
 }
 
 template <typename ELEMENT_TYPE>
-std::ostream& operator << (std::ostream& os, const SMARTP<mfList<ELEMENT_TYPE> >& elt)
+std::ostream& operator << (std::ostream& os, const SMARTP<mfList<ELEMENT_TYPE>>& elt)
 {
   elt->print (os);
   return os;

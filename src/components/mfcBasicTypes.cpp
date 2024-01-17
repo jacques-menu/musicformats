@@ -741,13 +741,13 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionNumber& elt)
 S_mfcVersion mfcVersion::create (
   const S_mfcVersionNumber&     versionNumber,
   const std::string&            versionDate,
-  const std::list<std::string>& versioniptionItems)
+  const std::list<std::string>& versionDescriptionItems)
 {
   mfcVersion* obj =
     new mfcVersion (
       versionNumber,
       versionDate,
-      versioniptionItems);
+      versionDescriptionItems);
   assert (obj != nullptr);
   return obj;
 }
@@ -755,7 +755,7 @@ S_mfcVersion mfcVersion::create (
 mfcVersion::mfcVersion (
   const S_mfcVersionNumber&     versionNumber,
   const std::string&            versionDate,
-  const std::list<std::string>& versioniptionItems)
+  const std::list<std::string>& versionDescriptionItems)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
@@ -765,11 +765,11 @@ mfcVersion::mfcVersion (
       "Constructing mfcVersion" <<
       ", versionNumber:" << versionNumber <<
       ", versionDate:" << versionDate <<
-      ", versioniptionItems:" <<
+      ", versionDescriptionItems:" <<
       std::endl;
 
     ++gIndenter;
-    for (std::string const& item : versioniptionItems) {
+    for (std::string const& item : versionDescriptionItems) {
       gLog << item << std::endl;
     } // for
     --gIndenter;
@@ -779,7 +779,7 @@ mfcVersion::mfcVersion (
   fVersionNumber       = versionNumber;
   fVersionDate         = versionDate;
 
-  fVersioniptionItems = versioniptionItems;
+  fVersionDescriptionItems = versionDescriptionItems;
 }
 
 mfcVersion::~mfcVersion ()
@@ -805,7 +805,7 @@ void mfcVersion::print (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::string const& item : fVersioniptionItems) {
+  for (std::string const& item : fVersionDescriptionItems) {
     gLog << item << std::endl;
   } // for
 

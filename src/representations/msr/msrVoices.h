@@ -299,7 +299,7 @@ class EXP msrVoice : public msrElement
     // regular measure ends detection
 
     void                  setWholeNotesSinceLastRegularMeasureEnd (
-                            int             inputLineNumber,
+                            int                  inputLineNumber,
                             const msrWholeNotes& wholeNotes);
 
     msrWholeNotes         getWholeNotesSinceLastRegularMeasureEnd () const
@@ -645,11 +645,11 @@ class EXP msrVoice : public msrElement
     // removing elements from voice
 
     void                  removeNoteFromVoice (
-                            int       inputLineNumber,
+                            int              inputLineNumber,
                             const S_msrNote& note);
 
     void                  removeElementFromVoice (
-                            int          inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrElement& element);
 
     S_msrMeasure          removeLastMeasureFromVoice (
@@ -1228,7 +1228,7 @@ class EXP msrVoice : public msrElement
                               { return fVoiceFirstMeasure; }
 
     void                  appendMeasureCloneToVoiceClone (
-                            int          inputLineNumber,
+                            int                 inputLineNumber,
                             const S_msrMeasure& measureClone);
 
     // last appended measure

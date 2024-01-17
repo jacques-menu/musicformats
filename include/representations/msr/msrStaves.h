@@ -140,7 +140,7 @@ class EXP msrStaff : public msrElement
                               { return fStaffShortestNoteTupletFactor; }
 
 
-    const std::vector<std::list<S_msrMeasure> >&
+    const std::vector<std::list<S_msrMeasure>>&
                           getStaffMeasuresFlatListsVector () const
                               { return fStaffMeasuresFlatListsVector; }
 
@@ -224,17 +224,17 @@ class EXP msrStaff : public msrElement
     // voices
 
     S_msrVoice            createRegularVoiceInStaffByItsNumber (
-                            int                inputLineNumber,
-                            int                voiceNumber,
-                            const std::string& currentMeasureNumber,
-                            S_msrPartGroup     partUpLinkToPartGroup);
+                            int                   inputLineNumber,
+                            int                   voiceNumber,
+                            const std::string&    currentMeasureNumber,
+                            const S_msrPartGroup& partUpLinkToPartGroup);
 
     void                  registerVoiceInStaff (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrVoice& voice);
 
     void                  registerVoiceInStaffClone (
-                            int        inputLineNumber,
+                            int               inputLineNumber,
                             const S_msrVoice& voice);
 
     S_msrVoice            fetchRegularVoiceFromStaffByItsNumber (
@@ -311,7 +311,7 @@ class EXP msrStaff : public msrElement
                             int                emptyMeasuresNumber);
 
     void                  appendMultiMeasureRestCloneToStaff (
-                            int                              inputLineNumber,
+                            int                          inputLineNumber,
                             const S_msrMultiMeasureRest& multiMeasureRests);
 
     void                  createBeatRepeatFromItsFirstMeasuresInStaff (
@@ -320,7 +320,7 @@ class EXP msrStaff : public msrElement
                             int beatRepeatSlashesNumber);
 
     void                  appendRepeatCloneToStaff (
-                            int                nputLineNumber,
+                            int                inputLineNumber,
                             const S_msrRepeat& repeatCLone);
 
     void                  appendRepeatEndingCloneToStaff (
@@ -441,7 +441,7 @@ class EXP msrStaff : public msrElement
     // i.e. without segments nor repeats,
     // gathered from the staff's voices fVoiceInitialElementsList and fVoiceLastSegment
     // by finalizeMeasure()
-    std::vector<std::list<S_msrMeasure> >
+    std::vector<std::list<S_msrMeasure>>
                           fStaffMeasuresFlatListsVector;
 
     // multi-measure rests

@@ -324,121 +324,121 @@ class EXP mxsr2msrSkeletonBuilder :
 
   // score partwise
 
-  public visitor<S_score_partwise>,
+  public                      visitor<S_score_partwise>,
 
   // rights
   // ------------------------------------------------------
 
-  public visitor<S_work_number>,
-  public visitor<S_work_title>,
-  public visitor<S_opus>,
-  public visitor<S_movement_number>,
-  public visitor<S_movement_title>,
+  public                      visitor<S_work_number>,
+  public                      visitor<S_work_title>,
+  public                      visitor<S_opus>,
+  public                      visitor<S_movement_number>,
+  public                      visitor<S_movement_title>,
 
   // identification
   // ------------------------------------------------------
 
-  public visitor<S_identification>,
-  public visitor<S_creator>,
-  public visitor<S_rights>,
-  public visitor<S_source>,
-  public visitor<S_relation>,
+  public                      visitor<S_identification>,
+  public                      visitor<S_creator>,
+  public                      visitor<S_rights>,
+  public                      visitor<S_source>,
+  public                      visitor<S_relation>,
 
   // encoding
   // ------------------------------------------------------
 
-  public visitor<S_encoding>,
-  public visitor<S_encoding_date>,
-  public visitor<S_encoder>,
-  public visitor<S_software>,
-  public visitor<S_encoding_description>,
-  public visitor<S_supports>,
+  public                      visitor<S_encoding>,
+  public                      visitor<S_encoding_date>,
+  public                      visitor<S_encoder>,
+  public                      visitor<S_software>,
+  public                      visitor<S_encoding_description>,
+  public                      visitor<S_supports>,
 
   // miscellaneous
   // ------------------------------------------------------
 
-  public visitor<S_miscellaneous>,
-  public visitor<S_miscellaneous_field>,
+  public                      visitor<S_miscellaneous>,
+  public                      visitor<S_miscellaneous_field>,
 
   // credits
   // ------------------------------------------------------
 
-  public visitor<S_credit>,
-  public visitor<S_credit_type>,
-  public visitor<S_credit_words>,
-  public visitor<S_credit_symbol>,
-  public visitor<S_credit_image>,
+  public                      visitor<S_credit>,
+  public                      visitor<S_credit_type>,
+  public                      visitor<S_credit_words>,
+  public                      visitor<S_credit_symbol>,
+  public                      visitor<S_credit_image>,
 
   // parts & part groups
   // ------------------------------------------------------
 
-  public visitor<S_part_list>,
+  public                      visitor<S_part_list>,
 
-  public visitor<S_display_text>,
+  public                      visitor<S_display_text>,
 
-  public visitor<S_part_group>,
+  public                      visitor<S_part_group>,
 
-  public visitor<S_group_name>,
-  public visitor<S_group_name_display>,
+  public                      visitor<S_group_name>,
+  public                      visitor<S_group_name_display>,
 
-  public visitor<S_accidental_text>,
-  public visitor<S_group_abbreviation>,
-  public visitor<S_group_symbol>,
-  public visitor<S_group_barline>,
+  public                      visitor<S_accidental_text>,
+  public                      visitor<S_group_abbreviation>,
+  public                      visitor<S_group_symbol>,
+  public                      visitor<S_group_barline>,
 
-  public visitor<S_score_part>,
+  public                      visitor<S_score_part>,
 
-  public visitor<S_part_name>,
-  public visitor<S_part_name_display>,
+  public                      visitor<S_part_name>,
+  public                      visitor<S_part_name_display>,
 
-  public visitor<S_part_abbreviation>,
-  public visitor<S_part_abbreviation_display>,
+  public                      visitor<S_part_abbreviation>,
+  public                      visitor<S_part_abbreviation_display>,
 
-  public visitor<S_instrument_name>,
-  public visitor<S_instrument_abbreviation>,
+  public                      visitor<S_instrument_name>,
+  public                      visitor<S_instrument_abbreviation>,
 
-  public visitor<S_part>,
+  public                      visitor<S_part>,
 
   // staves
   // ------------------------------------------------------
 
-  public visitor<S_staves>,
-  public visitor<S_staff>,
+  public                      visitor<S_staves>,
+  public                      visitor<S_staff>,
 
   // voices
   // ------------------------------------------------------
 
-  public visitor<S_voice>,
+  public                      visitor<S_voice>,
 
   // measures
   // ------------------------------------------------------
 
-  public visitor<S_measure>,
+  public                      visitor<S_measure>,
 
   // print
   // ------------------------------------------------------
 
-  public visitor<S_print>,
+  public                      visitor<S_print>,
 
   // notes
   // ------------------------------------------------------
 
-  public visitor<S_note>,
+  public                      visitor<S_note>,
 
   // lyrics
   // ------------------------------------------------------
 
-  public visitor<S_lyric>,
+  public                      visitor<S_lyric>,
 
   // harmonies
   // ------------------------------------------------------
 
-  public visitor<S_harmony>,
+  public                      visitor<S_harmony>,
 
   // figured bass
   // ------------------------------------------------------
 
-  public visitor<S_figured_bass>
+  public                      visitor<S_figured_bass>
 
 {
   public:
@@ -446,15 +446,15 @@ class EXP mxsr2msrSkeletonBuilder :
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mxsr2msrSkeletonBuilder ();
+                              mxsr2msrSkeletonBuilder ();
 
-    virtual               ~mxsr2msrSkeletonBuilder ();
+    virtual                   ~mxsr2msrSkeletonBuilder ();
 
     // set and get
     // ------------------------------------------------------
 
-    S_msrScore            getMsrScore () const
-                              { return fMsrScore; }
+    S_msrScore                getMsrScore () const
+                                  { return fMsrScore; }
 
 
   public:
@@ -465,8 +465,8 @@ class EXP mxsr2msrSkeletonBuilder :
     // visitors
     // ------------------------------------------------------
 
-    void                  browseMxsr (
-                            const Sxmlelement& xmlTree);
+    void                      browseMxsr (
+                                const Sxmlelement& xmlTree);
 
   protected:
 
@@ -474,7 +474,7 @@ class EXP mxsr2msrSkeletonBuilder :
     // ------------------------------------------------------
 
     virtual void              visitStart (S_score_partwise& elt);
-virtual void              visitEnd   (S_score_partwise& elt);
+    virtual void              visitEnd   (S_score_partwise& elt);
 
     // identification
     // ------------------------------------------------------
@@ -615,53 +615,51 @@ virtual void              visitEnd   (S_score_partwise& elt);
     // the MSR score we're building
     // ------------------------------------------------------
 
-    S_msrScore            fMsrScore;
+    S_msrScore                fMsrScore;
 
 
     // credits handling
     // ------------------------------------------------------
 
-    S_msrCredit           fCurrentCredit;
+    S_msrCredit               fCurrentCredit;
 
 
     // part groups handling
     // ------------------------------------------------------
 
-    int                   fCurrentPartGroupNumber;
-    msrPartGroupTypeKind  fCurrentPartGroupTypeKind;
-    std::string           fCurrentPartGroupName;
-    std::string           fCurrentPartGroupAbbreviation;
+    int                       fCurrentPartGroupNumber;
+    msrPartGroupTypeKind      fCurrentPartGroupTypeKind;
+    std::string               fCurrentPartGroupName;
+    std::string               fCurrentPartGroupAbbreviation;
 
-    Bool                  fOnGoingPartGroupNameDisplay;
-    std::string           fCurrentPartGroupNameDisplayText;
+    Bool                      fOnGoingPartGroupNameDisplay;
+    std::string               fCurrentPartGroupNameDisplayText;
 
-    std::string           fCurrentPartGroupAccidentalText;
-    msrPartGroupSymbolKind
-                          fCurrentPartGroupSymbolKind;
-    msrPartGroupBarLineKind
-                          fCurrentPartGroupBarLineKind;
-    int                   fCurrentPartGroupSymbolDefaultX;
+    std::string               fCurrentPartGroupAccidentalText;
+    msrPartGroupSymbolKind    fCurrentPartGroupSymbolKind;
+    msrPartGroupBarLineKind   fCurrentPartGroupBarLineKind;
+    int                       fCurrentPartGroupSymbolDefaultX;
 
-    S_msrPartGroup        fImplicitOuterMostMsrPartGroup;
-    S_mxsrPartGroup       fImplicitOuterMostPartGroup;
+    S_msrPartGroup            fImplicitOuterMostMsrPartGroup;
+    S_mxsrPartGroup           fImplicitOuterMostPartGroup;
 
-    void                  createTheImplicitOuterPartGroupAndAddItToTheMsrScore (
-                            int inputLineNumber);
+    void                      createTheImplicitOuterPartGroupAndAddItToTheMsrScore (
+                                int inputLineNumber);
 
     std::vector<S_mxsrPartGroup>
-                          fPartGroupsVector;
+                              fPartGroupsVector;
 
-    void                  displayPartGroupsVector (
-                            int inputLineNumber);
-
-    std::map<int, S_mxsrPartGroup>
-                          fPartGroupsMap;
-
-    void                  displayPartGroupsMap (
-                            int inputLineNumber);
+    void                      displayPartGroupsVector (
+                                int inputLineNumber);
 
     std::map<int, S_mxsrPartGroup>
-                          fStartedPartGroupsMap;
+                              fPartGroupsMap;
+
+    void                      displayPartGroupsMap (
+                                int inputLineNumber);
+
+    std::map<int, S_mxsrPartGroup>
+                              fStartedPartGroupsMap;
 
     // the part groups may be nested so we need a stack,
     // on which they are pushed in handleBOFPartGroupsNestingBOFAndScorePartsAllocation()
@@ -669,20 +667,20 @@ virtual void              visitEnd   (S_score_partwise& elt);
     // the implicit outer-most part group is pushed onto it
     // in createTheImplicitOuterPartGroupAndAddItToTheMsrScore(),
     // called in mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder()
-    mxsrPartGroupsStack   fPartGroupsStack;
+    mxsrPartGroupsStack       fPartGroupsStack;
 
-    void                  displayPartGroupsStack (
-                            int inputLineNumber);
+    void                      displayPartGroupsStack (
+                                int inputLineNumber);
 
     // the part groups 'stop' may not be in strict first-in, first-out order,
     // for example in Finale MusicXML exports
     // we thus have to postpone the association of 'stop's with 'start's
     // until the whole <part-list /> markup has been analyzed
-    void                  displayStartedPartGroupsMap (
-                            int inputLineNumber);
+    void                      displayStartedPartGroupsMap (
+                                int inputLineNumber);
 
-    S_mxsrPartGroup       fetchStartedPartGroupFromMap (
-                            int partGroupNumber);
+    S_mxsrPartGroup           fetchStartedPartGroupFromMap (
+                                int partGroupNumber);
 
   private:
 
@@ -690,158 +688,157 @@ virtual void              visitEnd   (S_score_partwise& elt);
 
     // several part groups may start and/or stop at the same position JMI ??? v0.9.69
     std::vector<S_mxsrPartGroupsList>
-                          fStartedPartGroupsListsVector;
+                              fStartedPartGroupsListsVector;
 
-    void                  registerPartGroupStart (
-                            int                    inputLineNumber,
-                            const S_mxsrPartGroup& partGroup);
+    void                      registerPartGroupStart (
+                                int                    inputLineNumber,
+                                const S_mxsrPartGroup& partGroup);
 
-    void                  displayStartedPartGroupsVector (
-                            int inputLineNumber);
+    void                      displayStartedPartGroupsVector (
+                                int inputLineNumber);
 
     std::vector<S_mxsrPartGroupsList>
-                          fStoppedPartGroupsListsVector;
+                              fStoppedPartGroupsListsVector;
 
-    void                  registerPartGroupStop (
-                            int                    inputLineNumber,
-                            const S_mxsrPartGroup& partGroup);
+    void                      registerPartGroupStop (
+                                int                    inputLineNumber,
+                                const S_mxsrPartGroup& partGroup);
 
-    void                  displayStoppedPartGroupsVector (
-                           int inputLineNumber);
+    void                      displayStoppedPartGroupsVector (
+                              int inputLineNumber);
 
-    void                  displayAllCollectedData (
-                            int                inputLineNumber,
-                            const std::string& context);
+    void                      displayAllCollectedData (
+                                int                inputLineNumber,
+                                const std::string& context);
 
-    void                  handlePartGroupStart (
-                            int inputLineNumber);
+    void                      handlePartGroupStart (
+                                int inputLineNumber);
 
-    void                  handlePartGroupStop (
-                            int inputLineNumber);
+    void                      handlePartGroupStop (
+                                int inputLineNumber);
 
-    void                  registerPart (
-                            int              inputLineNumber,
-                            const S_msrPart& thePart);
+    void                      registerPart (
+                                int              inputLineNumber,
+                                const S_msrPart& thePart);
 
-    void                  handlePartGroupsNesting (
-                            int                    inputLineNumber,
-                            const S_mxsrPartGroup& partGroupToBeStopped,
-                            const S_mxsrPartGroup& containingPartGroup);
+    void                      handlePartGroupsNesting (
+                                int                    inputLineNumber,
+                                const S_mxsrPartGroup& partGroupToBeStopped,
+                                const S_mxsrPartGroup& containingPartGroup);
 
-    void                  handleBOFPartGroupsNestingBOFAndScorePartsAllocation (
-                            int inputLineNumber);
+    void                      handleBOFPartGroupsNestingBOFAndScorePartsAllocation (
+                                int inputLineNumber);
 
     // parts handling
     // ------------------------------------------------------
 
-    std::string           fCurrentScorePartID; // from <score-part />
-    std::string           fCurrentPartID;      // used throughout, computed
+    std::string               fCurrentScorePartID; // from <score-part />
+    std::string               fCurrentPartID;      // used throughout, computed
 
-    std::string           fCurrentPartName;
-    std::string           fCurrentPartNameDisplayText;
-    Bool                  fOnGoingPartNameDisplay;
+    std::string               fCurrentPartName;
+    std::string               fCurrentPartNameDisplayText;
+    Bool                      fOnGoingPartNameDisplay;
 
 
-    std::string           fCurrentPartAbbreviation;
-    std::string           fCurrentPartAbbreviationDisplayText;
-    Bool                  fOnGoingPartAbbreviationDisplay;
+    std::string               fCurrentPartAbbreviation;
+    std::string               fCurrentPartAbbreviationDisplayText;
+    Bool                      fOnGoingPartAbbreviationDisplay;
 
-    std::string           fCurrentPartInstrumentName;
-    std::string           fCurrentPartInstrumentAbbreviation;
+    std::string               fCurrentPartInstrumentName;
+    std::string               fCurrentPartInstrumentAbbreviation;
 
     std::map<std::string, S_msrPart>
-                          fPartsMap;
+                              fPartsMap;
 
-    void                  displayPartsMap (
-                            int inputLineNumber);
+    void                      displayPartsMap (
+                                int inputLineNumber);
 
     // part groups numbers can be re-used, so they're no identifier,
     // so we identify them by an ordinal number, set upon the 'start'
     // this is used for handling nesting/overlapping
-    int                   fCurrentPartGroupIdentity;
+    int                       fCurrentPartGroupIdentity;
 
-    std::vector<S_msrPart>
-                          fPartsVector;
+    std::vector<S_msrPart>    fPartsVector;
 
-    void                  displayPartsVector (
-                            int inputLineNumber);
+    void                      displayPartsVector (
+                                int inputLineNumber);
 
-    S_msrPart             fCurrentPart; // used throughout
+    S_msrPart                 fCurrentPart; // used throughout
 
 
     // staff handling
     // ------------------------------------------------------
 
-    int                   fCurrentStaffMusicXMLNumber; // used throughout
+    int                       fCurrentStaffMusicXMLNumber; // used throughout
 
-    S_msrStaff            createStaffInCurrentPartIfNotYetDone (
-                            int inputLineNumber,
-                            int staffNumber);
+    S_msrStaff                createStaffInCurrentPartIfNotYetDone (
+                                int inputLineNumber,
+                                int staffNumber);
 
 
     // voice handling
     // ------------------------------------------------------
 
-    int                   fCurrentVoiceMusicXMLNumber; // used throughout
+    int                       fCurrentVoiceMusicXMLNumber; // used throughout
 
-    S_msrVoice            createRegularVoiceInStaffIfNotYetDone (
-                            int inputLineNumber,
-                            int staffNumber,
-                            int voiceNumber);
+    S_msrVoice                createRegularVoiceInStaffIfNotYetDone (
+                                int inputLineNumber,
+                                int staffNumber,
+                                int voiceNumber);
 
 
     // measures
     // ------------------------------------------------------
 
-    std::string           fCurrentMeasureNumber;
+    std::string               fCurrentMeasureNumber;
 
-    std::string           fScoreFirstMeasureNumber;
-    std::string           fScoreLastMeasureNumber;
+    std::string               fScoreFirstMeasureNumber;
+    std::string               fScoreLastMeasureNumber;
 
-    int                   fScoreMeasuresNumber;
-    int                   fPartNumberOfMeasures;
+    int                       fScoreMeasuresNumber;
+    int                       fPartNumberOfMeasures;
 
 
     // print
     // ------------------------------------------------------
 
-    msrPrintObjectKind    fCurrentPrintObjectKind;
+    msrPrintObjectKind        fCurrentPrintObjectKind;
 
-    Bool                  fOnGoingPrint;
+    Bool                      fOnGoingPrint;
 
 
     // ------------------------------------------------------
 
-    Bool                  fOnGoingNote;
+    Bool                      fOnGoingNote;
 
 
     // lyrics handling
     // ------------------------------------------------------
 
-    std::string           fCurrentStanzaNumber;
-    std::string           fCurrentStanzaName;
+    std::string               fCurrentStanzaNumber;
+    std::string               fCurrentStanzaName;
 
 
     // harmonies handling
     // ------------------------------------------------------
 
-    Bool                  fThereAreHarmoniesToBeAttachedToCurrentNote;
-    int                   fHarmoniesVoicesCounter;
+    Bool                      fThereAreHarmoniesToBeAttachedToCurrentNote;
+    int                       fHarmoniesVoicesCounter;
 
-    S_msrVoice            createPartHarmoniesVoiceIfNotYetDone (
-                            int              inputLineNumber,
-                            const S_msrPart& thePart);
+    S_msrVoice                createPartHarmoniesVoiceIfNotYetDone (
+                                int              inputLineNumber,
+                                const S_msrPart& thePart);
 
 
     // figured bass handling
     // ------------------------------------------------------
 
-    Bool                  fThereAreFiguredBassToBeAttachedToCurrentNote;
-    int                   fFiguredBassVoicesCounter;
+    Bool                      fThereAreFiguredBassToBeAttachedToCurrentNote;
+    int                       fFiguredBassVoicesCounter;
 
-    S_msrVoice            createPartFiguredBassVoiceIfNotYetDone (
-                            int              inputLineNumber,
-                            const S_msrPart& thePart);
+    S_msrVoice                createPartFiguredBassVoiceIfNotYetDone (
+                                int              inputLineNumber,
+                                const S_msrPart& thePart);
 };
 
 

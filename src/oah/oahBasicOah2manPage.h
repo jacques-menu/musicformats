@@ -25,55 +25,55 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP basicOah2manPage : virtual public oah2manPage,
 
-  public visitor<S_oahPrefix>,
+  public                      visitor<S_oahPrefix>,
 
-  public visitor<S_oahGroup>,
+  public                      visitor<S_oahGroup>,
 
-  public visitor<S_oahSubGroup>,
+  public                      visitor<S_oahSubGroup>,
 
-  public visitor<S_oahAtom>,
+  public                      visitor<S_oahAtom>,
 
-  public visitor<S_oahValueLessAtomAlias>,
+  public                      visitor<S_oahValueLessAtomAlias>,
 
-  public visitor<S_oahOptionsUsageAtom>,
+  public                      visitor<S_oahOptionsUsageAtom>,
 
-  public visitor<S_oahHelpSummaryAtom>,
+  public                      visitor<S_oahHelpSummaryAtom>,
 
-  public visitor<S_oahAtomStoringAValue>,
+  public                      visitor<S_oahAtomStoringAValue>,
 
-  public visitor<S_oahOptionNameHelpAtom>,
+  public                      visitor<S_oahOptionNameHelpAtom>,
 
-  public visitor<S_oahBooleanAtom>,
-  public visitor<S_oahTwoBooleansAtom>,
-  public visitor<S_oahThreeBooleansAtom>,
+  public                      visitor<S_oahBooleanAtom>,
+  public                      visitor<S_oahTwoBooleansAtom>,
+  public                      visitor<S_oahThreeBooleansAtom>,
 
-  public visitor<S_oahCombinedBooleansAtom>,
+  public                      visitor<S_oahCombinedBooleansAtom>,
 
-  public visitor<S_oahCommonPrefixBooleansAtom>,
+  public                      visitor<S_oahCommonPrefixBooleansAtom>,
 
-// JMI  public visitor<S_oahAtomStoringAValue>, v0.9.66
+// JMI  public                      visitor<S_oahAtomStoringAValue>, v0.9.66
 
-  public visitor<S_oahIntegerAtom>,
-  public visitor<S_oahTwoIntegersAtom>,
+  public                      visitor<S_oahIntegerAtom>,
+  public                      visitor<S_oahTwoIntegersAtom>,
 
-  public visitor<S_oahFloatAtom>,
+  public                      visitor<S_oahFloatAtom>,
 
-  public visitor<S_oahStringAtom>,
+  public                      visitor<S_oahStringAtom>,
 
-  public visitor<S_oahRationalAtom>,
+  public                      visitor<S_oahRationalAtom>,
 
-  public visitor<S_oahFactorizedStringAtom>,
+  public                      visitor<S_oahFactorizedStringAtom>,
 
-  public visitor<S_oahDefaultedStringAtom>,
+  public                      visitor<S_oahDefaultedStringAtom>,
 
-  public visitor<oahNaturalNumbersSetElementAtom>,
+  public                      visitor<oahNaturalNumbersSetElementAtom>,
 
-  public visitor<S_oahStringSetElementAtom>,
+  public                      visitor<S_oahStringSetElementAtom>,
 
-  public visitor<S_oahColorRGBAtom>,
+  public                      visitor<S_oahColorRGBAtom>,
 
-  public visitor<S_oahStringAndIntegerAtom>,
-  public visitor<S_oahStringAndTwoIntegersAtom>
+  public                      visitor<S_oahStringAndIntegerAtom>,
+  public                      visitor<S_oahStringAndTwoIntegersAtom>
 
 {
   public:

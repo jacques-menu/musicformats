@@ -6054,7 +6054,7 @@ void msr2mxsrTranslator:: appendNoteArticulationsList (
     std::list<S_msrArticulation>::const_iterator i;
 
     for (i = noteArticulationsList.begin (); i != noteArticulationsList.end (); ++i) {
-      const S_msrArticulation& articulation = (*i);
+      S_msrArticulation articulation = (*i);
 
       msrArticulationKind
         articulationKind =
@@ -6350,7 +6350,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
     case msrNoteKind::kNoteRestInTuplet:
       {
         // get theMsrNote's uplink to tuplet
-        S_msrTuplet
+        const S_msrTuplet&
           noteShortcutUpLinkToTuplet =
             theMsrNote->
               getNoteShortcutUpLinkToTuplet ();

@@ -54,7 +54,10 @@
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+
 #ifndef WIN32
+
 static void _sigaction (int signal, siginfo_t *si, void *arg)
 {
   std::cerr << "Signal #" << signal << " catched!" << std::endl;
@@ -73,13 +76,15 @@ static void catchSignals ()
   sa.sa_flags     = SA_SIGINFO;
 
   sigaction (SIGSEGV, &sa, NULL);
-  sigaction (SIGILL,  &sa, NULL);
-  sigaction (SIGFPE,  &sa, NULL);
+  sigaction (SIGILL, &sa, NULL);
+  sigaction (SIGFPE, &sa, NULL);
 }
+
 #else
-static void catchSignals () {}
+static void catchSignals ()  {}
 #endif // WIN32
 
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
 
 //------------------------------------------------------------------------
 void enforceSomeOptions (
@@ -192,7 +197,9 @@ int main (int argc, char*  argv[])
   // setup signals catching
   // ------------------------------------------------------
 
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
   catchSignals ();
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
 
   // the service name
   // ------------------------------------------------------

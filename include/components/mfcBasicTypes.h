@@ -142,7 +142,7 @@ class EXP mfcVersion : public smartable
     static SMARTP<mfcVersion> create (
                             const S_mfcVersionNumber&     versionNumber,
                             const std::string&            versionDate,
-                            const std::list<std::string>& versioniptionItems);
+                            const std::list<std::string>& versionDescriptionItems);
 
   protected:
 
@@ -152,7 +152,7 @@ class EXP mfcVersion : public smartable
                           mfcVersion (
                             const S_mfcVersionNumber&     versionNumber,
                             const std::string&            versionDate,
-                            const std::list<std::string>& versioniptionItems);
+                            const std::list<std::string>& versionDescriptionItems);
 
     virtual               ~mfcVersion ();
 
@@ -169,8 +169,8 @@ class EXP mfcVersion : public smartable
 
     const std::list<std::string>&
 
-                          getVersioniptionItems () const
-                              { return fVersioniptionItems; }
+                          getVersionDescriptionItems () const
+                              { return fVersionDescriptionItems; }
 
   public:
 
@@ -189,7 +189,7 @@ class EXP mfcVersion : public smartable
     S_mfcVersionNumber    fVersionNumber;
     std::string           fVersionDate;
     std::list<std::string>
-                          fVersioniptionItems;
+                          fVersionDescriptionItems;
 };
 typedef SMARTP<mfcVersion> S_mfcVersion;
 EXP std::ostream& operator << (std::ostream& os, const S_mfcVersion& elt);

@@ -147,7 +147,7 @@ R"(Forward)",
     appendAtomToSubGroup (
       traceForwardAtom);
 
-  // MusicXML tree
+  // trace MusicXML tree
 
   subGroup->
     appendAtomToSubGroup (
@@ -156,6 +156,16 @@ R"(Forward)",
 R"(Write a trace of the MusicXML tree activity to standard error.)",
         "fTraceMxsr",
         fTraceMxsr));
+
+  // display MusicXML tree
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-mxsr", "dmxsr",
+R"(Write the contents of the MXSR data to standard error.)",
+        "fDisplayMxsr",
+        fDisplayMxsr));
 
   // MusicXML tree visiting
 

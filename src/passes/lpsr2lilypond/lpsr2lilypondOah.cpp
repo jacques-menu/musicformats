@@ -2499,7 +2499,7 @@ S_lilypondChordsDisplayAtom lilypondChordsDisplayAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::list<std::pair<std::string, std::string> >&
+  std::list<std::pair<std::string, std::string>>&
                      lilypondChordsDisplayVariable)
 {
   lilypondChordsDisplayAtom* obj = new
@@ -2520,7 +2520,7 @@ lilypondChordsDisplayAtom::lilypondChordsDisplayAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::list<std::pair<std::string, std::string> >&
+  std::list<std::pair<std::string, std::string>>&
                      lilypondChordsDisplayVariable)
   : oahAtomStoringAValue (
       longName,
@@ -2770,7 +2770,7 @@ std::string lilypondChordsDisplayAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (fStringsPairListVariable.size ()) { // JMI superflous???
-    std::list<std::pair<std::string, std::string> >::const_iterator
+    std::list<std::pair<std::string, std::string>>::const_iterator
       iBegin = fStringsPairListVariable.begin (),
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
@@ -2794,7 +2794,7 @@ std::string lilypondChordsDisplayAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (fStringsPairListVariable.size ()) { // JMI superflous???
-    std::list<std::pair<std::string, std::string> >::const_iterator
+    std::list<std::pair<std::string, std::string>>::const_iterator
       iBegin = fStringsPairListVariable.begin (),
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
@@ -2834,7 +2834,7 @@ void lilypondChordsDisplayAtom::print (std::ostream& os) const
   if (fStringsPairListVariable.size ()) {
     ++gIndenter;
 
-    std::list<std::pair<std::string, std::string> >::const_iterator
+    std::list<std::pair<std::string, std::string>>::const_iterator
       iBegin = fStringsPairListVariable.begin (),
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
@@ -2865,7 +2865,7 @@ void lilypondChordsDisplayAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::list<std::pair<std::string, std::string> >::const_iterator
+    std::list<std::pair<std::string, std::string>>::const_iterator
       iBegin = fStringsPairListVariable.begin (),
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
@@ -6312,7 +6312,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::list<std::pair<std::string, std::string> >::const_iterator
+    std::list<std::pair<std::string, std::string>>::const_iterator
       iBegin = fChordsDisplayList.begin (),
       iEnd   = fChordsDisplayList.end (),
       i      = iBegin;

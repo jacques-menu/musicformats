@@ -25,63 +25,63 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP displayMsrSummaryVisitor :
 
-  public visitor<S_msrScore>,
+  public                      visitor<S_msrScore>,
 
   // parts & part groups
 
-  public visitor<S_msrPartGroup>,
+  public                      visitor<S_msrPartGroup>,
 
-  public visitor<S_msrPart>,
+  public                      visitor<S_msrPart>,
 
   // staves
 
-  public visitor<S_msrStaff>,
+  public                      visitor<S_msrStaff>,
 
-  public visitor<S_msrVoice>,
+  public                      visitor<S_msrVoice>,
 
   // lyrics
 
-  public visitor<S_msrStanza>,
-  public visitor<S_msrSyllable>,
+  public                      visitor<S_msrStanza>,
+  public                      visitor<S_msrSyllable>,
 
-  public visitor<S_msrClef>,
-  public visitor<S_msrKey>,
-  public visitor<S_msrTimeSignature>,
-  public visitor<S_msrTempo>,
+  public                      visitor<S_msrClef>,
+  public                      visitor<S_msrKey>,
+  public                      visitor<S_msrTimeSignature>,
+  public                      visitor<S_msrTempo>,
 
-  public visitor<S_msrSegment>,
+  public                      visitor<S_msrSegment>,
 
-  public visitor<S_msrArticulation>,
+  public                      visitor<S_msrArticulation>,
 
-  public visitor<S_msrDynamic>,
+  public                      visitor<S_msrDynamic>,
 
-  public visitor<S_msrCrescDecresc>,
+  public                      visitor<S_msrCrescDecresc>,
 
-  public visitor<S_msrWedge>,
+  public                      visitor<S_msrWedge>,
 
-  public visitor<S_msrGraceNotesGroup>,
+  public                      visitor<S_msrGraceNotesGroup>,
 
-  public visitor<S_msrNote>,
+  public                      visitor<S_msrNote>,
 
-  public visitor<S_msrStem>,
-  public visitor<S_msrBeam>,
+  public                      visitor<S_msrStem>,
+  public                      visitor<S_msrBeam>,
 
-  public visitor<S_msrChord>,
+  public                      visitor<S_msrChord>,
 
-  public visitor<S_msrTuplet>,
+  public                      visitor<S_msrTuplet>,
 
-  public visitor<S_msrSlur>,
+  public                      visitor<S_msrSlur>,
 
-  public visitor<S_msrBarLine>,
-  public visitor<S_msrBarNumberCheck>,
-  public visitor<S_msrLineBreak>,
+  public                      visitor<S_msrBarLine>,
+  public                      visitor<S_msrBarNumberCheck>,
+  public                      visitor<S_msrLineBreak>,
 
-  public visitor<S_msrRepeat>,
+  public                      visitor<S_msrRepeat>,
 
-  public visitor<S_msrScaling>,
-  public visitor<S_msrPageLayout>,
+  public                      visitor<S_msrScaling>,
+  public                      visitor<S_msrPageLayout>,
 
-  public visitor<S_msrMidiTempo>
+  public                      visitor<S_msrMidiTempo>
 
 {
   public:

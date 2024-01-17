@@ -40,7 +40,7 @@ class EXP msrBook : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrBook> create (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& bookName);
 
     SMARTP<msrBook> createBookNewbornClone ();
@@ -51,7 +51,7 @@ class EXP msrBook : public msrElement
     // ------------------------------------------------------
 
                           msrBook (
-                            int           inputLineNumber,
+                            int                inputLineNumber,
                             const std::string& bookName);
 
     virtual               ~msrBook ();
@@ -268,14 +268,14 @@ class EXP msrBook : public msrElement
     void                  fetchIdentificationFromCreditsIfAny (
                             int inputLineNumber);
 
-/* JMI
+/* JMI v0.9.70
     void                  setHeaderFromOptionsIfAny (
                             int inputLineNumber);
 */
 
-    void                  collectBookElementsList (
-                            int    inputLineNumber,
-                            std::list<S_msrPart>& partsList);
+//     void                  collectBookElementsList ( JMI v0.9.70
+//                             int                   inputLineNumber,
+//                             std::list<S_msrPart>& partsList);
 
   public:
 

@@ -143,7 +143,7 @@ S_msrTuplet msrGraceNotesGroup::fetchGraceNoteGroupUpLinkToTuplet () const
 {
   S_msrTuplet result;
 
-  // JMI ???
+  // JMI v0.9.70 ???
 
   return result;
 }

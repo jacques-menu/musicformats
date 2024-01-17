@@ -361,7 +361,7 @@ class EXP msrChord : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to tuplet
-    S_msrTuplet           fetchChordUpLinkToTuplet () const;
+    const S_msrTuplet&           fetchChordUpLinkToTuplet () const;
 
     // uplink to grace notes group
     S_msrGraceNotesGroup  fetchChordUpLinkToGraceNotesGroup () const;

@@ -24,13 +24,13 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP msrOah2manPage : virtual public oah2manPage,
 
-  public visitor<S_msrRenamePartAtom>,
+  public                      visitor<S_msrRenamePartAtom>,
 
-  public visitor<S_msrIgnorePartAtom>,
+  public                      visitor<S_msrIgnorePartAtom>,
 
-  public visitor<S_msrKeepPartAtom>,
+  public                      visitor<S_msrKeepPartAtom>,
 
-  public visitor<S_msrPitchesLanguageAtom>
+  public                      visitor<S_msrPitchesLanguageAtom>
 
 {
   public:

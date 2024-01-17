@@ -686,7 +686,7 @@ class EXP msrMeasure : public msrSegmentElement
                           fMeasureElementsList;
 
 //     std::list<msrElementsBase*>
-//                           fMeasureElementsBaseList;
+//                           fMeasureElementsBaseList; // JMI v0.9.70
 
     Bool                  fMeasureContainsMusic;
 

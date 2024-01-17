@@ -131,7 +131,7 @@ template <typename ELEMENT_TYPE>
 EXP std::ostream& operator << (std::ostream& os, const mfStack<ELEMENT_TYPE>& elt);
 
 template <typename ELEMENT_TYPE>
-EXP std::ostream& operator << (std::ostream& os, const SMARTP<mfStack<ELEMENT_TYPE> >& elt);
+EXP std::ostream& operator << (std::ostream& os, const SMARTP<mfStack<ELEMENT_TYPE>>& elt);
 
 
 }
@@ -141,7 +141,7 @@ EXP std::ostream& operator << (std::ostream& os, const SMARTP<mfStack<ELEMENT_TY
 // using namespace std;
 //
 // template <typename ELEMENT_TYPE>
-// pair<int, MusicFormats::mfStack<ELEMENT_TYPE> >::~pair<int, MusicFormats::mfStack<ELEMENT_TYPE> > () {};
+// pair<int, MusicFormats::mfStack<ELEMENT_TYPE>>::~pair<int, MusicFormats::mfStack<ELEMENT_TYPE>> () {};
 
 
 #endif // ___mfStack___

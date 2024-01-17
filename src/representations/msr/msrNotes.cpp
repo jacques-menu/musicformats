@@ -3669,11 +3669,17 @@ void msrNote::browseData (basevisitor* v)
   // browse the beams if any
   if (fNoteBeamsList.size ()) {
     ++gIndenter;
+//     std::list<S_msrBeam>::const_iterator i;
+//     for (i = fNoteBeamsList.begin (); i != fNoteBeamsList.end (); ++i) {
+//       // browse the beam
+//       msrBrowser<msrBeam> browser (v);
+//       browser.browse (*(*i));
+//     } // for
     std::list<S_msrBeam>::const_iterator i;
-    for (i = fNoteBeamsList.begin (); i != fNoteBeamsList.end (); ++i) {
+    for (S_msrBeam beam : fNoteBeamsList) {
       // browse the beam
       msrBrowser<msrBeam> browser (v);
-      browser.browse (*(*i));
+      browser.browse (*beam);
     } // for
     --gIndenter;
   }
@@ -7641,7 +7647,7 @@ std::ostream& operator << (std::ostream& os, const S_msrNote& elt)
 // uplink to tuplet
 S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 {
-  S_msrTuplet result;
+  const S_msrTuplet& result;
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:

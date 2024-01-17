@@ -46,6 +46,8 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+
 #ifndef WIN32
 
 static void _sigaction (int signal, siginfo_t *si, void *arg)
@@ -74,6 +76,8 @@ static void catchSignals ()
 static void catchSignals ()  {}
 #endif // WIN32
 
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
+
 //_______________________________________________________________________________
 EXP int xml2ly (
   int   argc,
@@ -82,7 +86,9 @@ EXP int xml2ly (
   // setup signals catching
   // ------------------------------------------------------
 
-// JMI  catchSignals ();
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+  catchSignals ();
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
 
   // the service name
   // ------------------------------------------------------
@@ -479,9 +485,17 @@ EXP int xml2ly (
   // ------------------------------------------------------
 
   if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
-    gLog <<
-      "### Conversion from MusicXML to LilyPond failed ###" <<
-      std::endl;
+    if (inputSourceName == "-") {
+      gLog <<
+        "### Conversion from MusicXML standard input to LilyPond failed ###";
+    }
+    else {
+      gLog <<
+        "### Conversion from MusicXML file " <<
+        "\"" << inputSourceName << "\"" <<
+        " to LilyPond failed ###";
+    }
+    gLog << std::endl;
 
     return 1;
   }

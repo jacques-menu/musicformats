@@ -238,7 +238,7 @@ class EXP msrNote : public msrTupletElement
                             const S_msrTuplet& tuplet)
                               { fNoteShortcutUpLinkToTuplet = tuplet; }
 
-    S_msrTuplet           getNoteShortcutUpLinkToTuplet () const
+    S_msrTuplet          getNoteShortcutUpLinkToTuplet () const
                               { return fNoteShortcutUpLinkToTuplet; }
 
     // measure positions
@@ -758,7 +758,7 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to tuplet
-// JMI ???    S_msrTuplet           fetchNoteUpLinkToTuplet () const;
+// JMI ???    const S_msrTuplet&           fetchNoteUpLinkToTuplet () const;
 
     // uplink to grace notes group
     S_msrGraceNotesGroup  fetchNoteUpLinkToGraceNotesGroup () const;

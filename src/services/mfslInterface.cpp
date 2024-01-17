@@ -43,6 +43,8 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+
 #ifndef WIN32
 
 static void _sigaction (int signal, siginfo_t *si, void *arg)
@@ -71,6 +73,8 @@ static void catchSignals ()
 static void catchSignals ()  {}
 #endif // WIN32
 
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
+
 //_______________________________________________________________________________
 EXP int mfsl (
   int   argc,
@@ -79,7 +83,9 @@ EXP int mfsl (
   // setup signals catching
   // ------------------------------------------------------
 
-// JMI  catchSignals ();
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+  catchSignals ();
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
 
   // the service name
   // ------------------------------------------------------

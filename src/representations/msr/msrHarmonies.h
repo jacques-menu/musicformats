@@ -452,6 +452,7 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     std::string           asString () const override;
+    std::string           asShortString () const override;
 
 //     std::string           asStringForMeasuresSlices () const override;
 
@@ -523,7 +524,7 @@ class EXP msrHarmonyInterval : public smartable
 
     static SMARTP<msrHarmonyInterval> create (
                             msrIntervalKind harmonyIntervalIntervalKind,
-                            int             harmonyIntervalRelativeOctave = 0);
+                            int             harmonyIntervalRelativeOctave = 0); // JMI v0.9.70
                                               // 0: up to the thirteenth,
                                               // no relative octave is needed
 

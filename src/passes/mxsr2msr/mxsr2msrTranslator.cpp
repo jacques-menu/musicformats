@@ -325,8 +325,8 @@ void mxsr2msrVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
 }
 
 void mxsr2msrVoiceHandler::handleTupletStartByHandler (
-  S_msrTuplet tuplet,
-  S_msrVoice  currentNoteVoice)
+  const S_msrTuplet& tuplet,
+  const S_msrVoice&  currentNoteVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
@@ -404,8 +404,8 @@ void mxsr2msrVoiceHandler::handleTupletStartByHandler (
 }
 
 void mxsr2msrVoiceHandler::handleTupletContinueByHandler (
-  S_msrNote   note,
-  S_msrVoice  currentNoteVoice)
+  const S_msrNote&   note,
+  const S_msrVoice&  currentNoteVoice)
 {
   if (fTupletsStack.size ()) {
     S_msrTuplet
@@ -494,8 +494,8 @@ void mxsr2msrVoiceHandler::handleTupletContinueByHandler (
 }
 
 void mxsr2msrVoiceHandler::handleTupletStopByHandler (
-  S_msrNote   note,
-  S_msrVoice  currentNoteVoice)
+  const S_msrNote&   note,
+  const S_msrVoice&  currentNoteVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -1139,8 +1139,8 @@ void mxsr2msrTranslator::initializeNoteData ()
 }
 
 void mxsr2msrTranslator::displayStaffAndVoiceInformation (
-  int               inputLineNumber,
-	const std::string context)
+  int                inputLineNumber,
+	const std::string& context)
 {
 	gLog <<
 		context <<
@@ -1269,7 +1269,7 @@ void mxsr2msrTranslator::checkStep (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::populateCurrentPartStavesVectorFromPart (
-  S_msrPart part)
+  const S_msrPart& part)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
@@ -1297,7 +1297,7 @@ void mxsr2msrTranslator::populateCurrentPartStavesVectorFromPart (
   for (
     std::pair<int, S_msrStaff> thePair : fCurrentPart->getPartStavesMap ()
   ) {
-    int        staffNumber = thePair.first;
+    int staffNumber  = thePair.first;
     S_msrStaff staff = thePair.second;
 
     // register the staff
@@ -1316,8 +1316,8 @@ void mxsr2msrTranslator::populateCurrentPartStavesVectorFromPart (
 }
 
 void mxsr2msrTranslator::displayCurrentPartStavesVector (
-  int               inputLineNumber,
-  const std::string context)
+  int                inputLineNumber,
+  const std::string& context)
 {
   gLog <<
     ">>> fCurrentPartStavesVector contents" <<
@@ -1339,7 +1339,7 @@ void mxsr2msrTranslator::displayCurrentPartStavesVector (
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::populateCurrentPartVoicesVectorsFromPart (
-  S_msrPart part)
+  const S_msrPart& part)
 {
   int
     partMinimumVoiceNumber =
@@ -1377,7 +1377,7 @@ void mxsr2msrTranslator::populateCurrentPartVoicesVectorsFromPart (
   for (
     std::pair<int, S_msrVoice> thePair : fCurrentPart->getPartVoicesMap ()
   ) {
-    int        voiceNumber = thePair.first;
+    int voiceNumber  = thePair.first;
     S_msrVoice voice = thePair.second;
 
     // register the regular voice
@@ -1400,8 +1400,8 @@ void mxsr2msrTranslator::populateCurrentPartVoicesVectorsFromPart (
 }
 
 void mxsr2msrTranslator::displayCurrentPartVoicesVector (
-  int               inputLineNumber,
-  const std::string context)
+  int                inputLineNumber,
+  const std::string& context)
 {
   gLog <<
     ">>> fCurrentPartVoicesVector contents" <<
@@ -3072,10 +3072,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   std::string partID = elt->getAttributeValue ("id");
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceParts ()
-      ||
-    gEarlyOptions.getEarlyTracePasses ()
+  if (gTraceOahGroup->getTraceParts ()
       ||
     gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
   ) {
@@ -5906,10 +5903,14 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
   std::string wordsValue = elt->getValue ();
 
   if (! wordsValue.size ()) {
-    mxsr2msrWarning (
-      gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
-      "words contents is empty");
+ #ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceWords ()) {
+      mxsr2msrWarning (
+        gServiceRunData->getInputSourceName (),
+        elt->getInputStartLineNumber (),
+        "words contents is empty");
+    }
+#endif // MF_TRACE_IS_ENABLED
   }
 
   // justify
@@ -7627,17 +7628,21 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       } // while
 
 
-      std::stringstream ss;
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceWords ()) {
+        std::stringstream ss;
 
-      ss <<
-        "<direction/> contains " <<
-        pendingWordsSize <<
-        " <words/> markups";
+        ss <<
+          "<direction/> contains " <<
+          pendingWordsSize <<
+          " <words/> markups";
 
-      mxsr2msrWarning (
-        gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
-        ss.str ());
+        mxsr2msrWarning (
+          gServiceRunData->getInputSourceName (),
+          elt->getInputStartLineNumber (),
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
     }
 
     while (fPendingWordsList.size ()) {
@@ -10488,11 +10493,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       elt->getAttributeValue ("non-controlling");
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceMeasures ()
-      ||
-    gEarlyOptions.getEarlyTracePasses ()
-  ) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
     // width
     int
       widthValue =
@@ -11017,7 +11018,7 @@ Staff spacing between multiple staves is measured in
 
   // handle 'staff-spacing' if present
 
-  const std::string staffSpacing =
+  const std::string& staffSpacing =
     elt->getAttributeValue ("staff-spacing");
 
   if (staffSpacing.size ()) {
@@ -11033,7 +11034,7 @@ Staff spacing between multiple staves is measured in
   // handle 'new-system' if present and relevant
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreMusicXMLLineBreaks ()) {
-    const std::string newSystem = elt->getAttributeValue ("new-system");
+    const std::string& newSystem = elt->getAttributeValue ("new-system");
 
     if (newSystem.size ()) {
       fCurrentMusicXMLPrintLayout->setNewSystem ();
@@ -11087,7 +11088,7 @@ Staff spacing between multiple staves is measured in
   // handle 'new-page' if present and relevant
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreMusicXMLPageBreaks ()) {
-    const std::string newPage = elt->getAttributeValue ("new-page");
+    const std::string& newPage = elt->getAttributeValue ("new-page");
 
     if (newPage.size ()) {
       fCurrentMusicXMLPrintLayout->setNewPage ();
@@ -15844,7 +15845,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
   //    if (! fCurrentDoubleTremolo) { JMI
       {
         // fetch the current note's voice
-//         const S_msrVoice& UNUSED
+//         S_msrVoice UNUSED
 //           currentNoteVoice =
 //             fCurrentPartVoicesVector [fCurrentMusicXMLVoiceNumber];
 
@@ -16774,7 +16775,7 @@ void mxsr2msrTranslator::visitEnd (S_ornaments& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart( S_f& elt)
+void mxsr2msrTranslator::visitStart (S_f& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16817,7 +16818,7 @@ void mxsr2msrTranslator::visitStart( S_f& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_ff& elt)
+void mxsr2msrTranslator::visitStart (S_ff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16860,7 +16861,7 @@ void mxsr2msrTranslator::visitStart( S_ff& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_fff& elt)
+void mxsr2msrTranslator::visitStart (S_fff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16903,7 +16904,7 @@ void mxsr2msrTranslator::visitStart( S_fff& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_ffff& elt)
+void mxsr2msrTranslator::visitStart (S_ffff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16946,7 +16947,7 @@ void mxsr2msrTranslator::visitStart( S_ffff& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_fffff& elt)
+void mxsr2msrTranslator::visitStart (S_fffff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16989,7 +16990,7 @@ void mxsr2msrTranslator::visitStart( S_fffff& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_ffffff& elt)
+void mxsr2msrTranslator::visitStart (S_ffffff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17033,7 +17034,7 @@ void mxsr2msrTranslator::visitStart( S_ffffff& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_p& elt)
+void mxsr2msrTranslator::visitStart (S_p& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17076,7 +17077,7 @@ void mxsr2msrTranslator::visitStart( S_p& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_pp& elt)
+void mxsr2msrTranslator::visitStart (S_pp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17119,7 +17120,7 @@ void mxsr2msrTranslator::visitStart( S_pp& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_ppp& elt)
+void mxsr2msrTranslator::visitStart (S_ppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17162,7 +17163,7 @@ void mxsr2msrTranslator::visitStart( S_ppp& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_pppp& elt)
+void mxsr2msrTranslator::visitStart (S_pppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17205,7 +17206,7 @@ void mxsr2msrTranslator::visitStart( S_pppp& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_ppppp& elt)
+void mxsr2msrTranslator::visitStart (S_ppppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17248,7 +17249,7 @@ void mxsr2msrTranslator::visitStart( S_ppppp& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_pppppp& elt)
+void mxsr2msrTranslator::visitStart (S_pppppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17292,7 +17293,7 @@ void mxsr2msrTranslator::visitStart( S_pppppp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_mf& elt)
+void mxsr2msrTranslator::visitStart (S_mf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17335,7 +17336,7 @@ void mxsr2msrTranslator::visitStart( S_mf& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart( S_mp& elt)
+void mxsr2msrTranslator::visitStart (S_mp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17379,7 +17380,7 @@ void mxsr2msrTranslator::visitStart( S_mp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_fp& elt)
+void mxsr2msrTranslator::visitStart (S_fp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17423,7 +17424,7 @@ void mxsr2msrTranslator::visitStart( S_fp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_fz& elt)
+void mxsr2msrTranslator::visitStart (S_fz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17467,7 +17468,7 @@ void mxsr2msrTranslator::visitStart( S_fz& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_pf& elt)
+void mxsr2msrTranslator::visitStart (S_pf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17511,7 +17512,7 @@ void mxsr2msrTranslator::visitStart( S_pf& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_rf& elt)
+void mxsr2msrTranslator::visitStart (S_rf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17555,7 +17556,7 @@ void mxsr2msrTranslator::visitStart( S_rf& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_sf& elt)
+void mxsr2msrTranslator::visitStart (S_sf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17599,7 +17600,7 @@ void mxsr2msrTranslator::visitStart( S_sf& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_rfz& elt)
+void mxsr2msrTranslator::visitStart (S_rfz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17643,7 +17644,7 @@ void mxsr2msrTranslator::visitStart( S_rfz& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_sfz& elt)
+void mxsr2msrTranslator::visitStart (S_sfz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17687,7 +17688,7 @@ void mxsr2msrTranslator::visitStart( S_sfz& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_sfp& elt)
+void mxsr2msrTranslator::visitStart (S_sfp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17731,7 +17732,7 @@ void mxsr2msrTranslator::visitStart( S_sfp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_sfpp& elt)
+void mxsr2msrTranslator::visitStart (S_sfpp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17775,7 +17776,7 @@ void mxsr2msrTranslator::visitStart( S_sfpp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_sffz& elt)
+void mxsr2msrTranslator::visitStart (S_sffz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17819,7 +17820,7 @@ void mxsr2msrTranslator::visitStart( S_sffz& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_sfzp& elt)
+void mxsr2msrTranslator::visitStart (S_sfzp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17863,7 +17864,7 @@ void mxsr2msrTranslator::visitStart( S_sfzp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_n& elt)
+void mxsr2msrTranslator::visitStart (S_n& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17907,7 +17908,7 @@ void mxsr2msrTranslator::visitStart( S_n& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_other_dynamics& elt)
+void mxsr2msrTranslator::visitStart (S_other_dynamics& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17970,7 +17971,7 @@ void mxsr2msrTranslator::visitStart( S_other_dynamics& elt)
 */
 
 /*
-void mxsr2msrTranslator::visitStart( S_damper_pedal& elt)
+void mxsr2msrTranslator::visitStart (S_damper_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18037,7 +18038,7 @@ void mxsr2msrTranslator::visitStart( S_damper_pedal& elt)
 
 }
 
-void mxsr2msrTranslator::visitStart( S_soft_pedal& elt)
+void mxsr2msrTranslator::visitStart (S_soft_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18073,7 +18074,7 @@ void mxsr2msrTranslator::visitStart( S_soft_pedal& elt)
   fPendingOtherDynamicxList.push_back(otherDynamic);
 }
 
-void mxsr2msrTranslator::visitStart( S_sostenuto_pedal& elt)
+void mxsr2msrTranslator::visitStart (S_sostenuto_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -19652,7 +19653,7 @@ void mxsr2msrTranslator::printVoicesCurrentChordMap ()
       ++gIndenter;
 
       / * JMI
-      const S_msrVoice& voice = (*i).first;
+      S_msrVoice voice = (*i).first;
       S_msrChord chord = (*i).second;
     * /
       gLog <<
@@ -19774,7 +19775,7 @@ void mxsr2msrTranslator::copyNoteArticulationsListToChord (
       note->
         getNoteArticulationsList ();
 
-  for (const S_msrArticulation& articulation : noteArticulationsList) {
+  for (S_msrArticulation articulation : noteArticulationsList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceArticulations ()) {
       std::stringstream ss;
@@ -21152,7 +21153,7 @@ S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  S_msrTuplet
+  const S_msrTuplet&
     tuplet =
       msrTuplet::create (
         firstNoteInputLineNumber,
@@ -21172,8 +21173,8 @@ S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
 }
 
 void mxsr2msrTranslator::handleTupletStart (
-  S_msrTuplet tuplet,
-  S_msrVoice  currentNoteVoice)
+  const S_msrTuplet& tuplet,
+  const S_msrVoice&  currentNoteVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
@@ -21254,8 +21255,8 @@ void mxsr2msrTranslator::handleTupletStart (
 }
 
 void mxsr2msrTranslator::handleTupletContinue (
-  S_msrNote  note,
-  S_msrVoice currentNoteVoice)
+  const S_msrNote&  note,
+  const S_msrVoice& currentNoteVoice)
 {
     S_mxsr2msrVoiceHandler
       voiceHandler =
@@ -21350,8 +21351,8 @@ void mxsr2msrTranslator::handleTupletContinue (
 }
 
 void mxsr2msrTranslator::handleTupletStop (
-  S_msrNote  note,
-  S_msrVoice currentNoteVoice)
+  const S_msrNote&  note,
+  const S_msrVoice& currentNoteVoice)
 {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -23537,7 +23538,7 @@ void mxsr2msrTranslator::attachPendingSlidesToCurrentNote ()
               i != voiceStanzasMap.end ();
               ++i
             ) {
-              const S_msrStanza& stanza = (*i).second;
+              S_msrStanza stanza = (*i).second;
               // create a skip syllable
               S_msrSyllable
                 syllable =
@@ -24323,7 +24324,7 @@ void mxsr2msrTranslator::populateCurrentNoteAfterItHasBeenHandled (
 }
 
 //______________________________________________________________________________
-Bool mxsr2msrTranslator::isThereAStaffChange (
+Bool mxsr2msrTranslator::thereIsAStaffChange (
   int inputLineNumber)
 {
   Bool result (false);
@@ -24336,7 +24337,7 @@ Bool mxsr2msrTranslator::isThereAStaffChange (
   ) {
 		displayStaffAndVoiceInformation (
 		  inputLineNumber,
-      "isThereAStaffChange() 1");;
+      "thereIsAStaffChange() 1");;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24379,7 +24380,7 @@ Bool mxsr2msrTranslator::isThereAStaffChange (
 
 				displayStaffAndVoiceInformation (
     		  inputLineNumber,
-					"isThereAStaffChange() 2");
+					"thereIsAStaffChange() 2");
       }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24409,7 +24410,7 @@ Bool mxsr2msrTranslator::isThereAStaffChange (
 
         displayStaffAndVoiceInformation (
           inputLineNumber,
-          "isThereAStaffChange() 3");
+          "thereIsAStaffChange() 3");
       }
 
 #endif // MF_TRACE_IS_ENABLED
@@ -25129,7 +25130,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
-  if (isThereAStaffChange (elt->getInputStartLineNumber ())) {
+  if (thereIsAStaffChange (elt->getInputStartLineNumber ())) {
     // yes, KEEP APPENDING MUSIC TO fCurrentPartVoicesVector [fVoiceNumberToInsertInto], NO CHANGE ACTUALLY!
 
     // fetch the current note's staff
@@ -25439,29 +25440,29 @@ void  mxsr2msrTranslator:: handleTupletStopNumbersForNote (
 
   // the tuplets stop numbers may not be in first-in, last-out order,
   // for example when exporting from Finale JMI v0.9.70
-  for (size_t i = 1; i < voiceHandler->getTupletsStack ().size (); ++i) {
-    S_msrTuplet
-      tupletsStackTop =
-        voiceHandler->getTupletsStack ().front ();
-
-//     // has the 'started' tupletsStackTop found its stop? JMI v0.9.70
-//     std::set<int>::iterator it =
-//       fExpectedTupletsStopNumbersSet.find (
-//         tupletsStackTop->getTupletNumber ());
+//   for (size_t i = 1; i < voiceHandler->getTupletsStack ().size (); ++i) { // JMI v0.9.70
+//     const S_msrTuplet&
+//       tupletsStackTop =
+//         voiceHandler->getTupletsStack ().front ();
 //
-//     if (it != fExpectedTupletsStopNumbersSet.end ()) {
-//       // this tuplet number is in the set of 'started' tuplet numbers
-//
-//       // finalize tupletsStackTop and pop it from the tuplets stack, thus 'closing' it
-//       voiceHandler->
-//         finalizeTupletStackTopAndPopItFromTupletsStack (
-//           inputLineNumber,
-//           "handleTupletStopNumberForNote()");
-//
-//       // remove its tuplet number from the set
-//       fExpectedTupletsStopNumbersSet.erase (it);
-//     }
-  } // for
+// //     // has the 'started' tupletsStackTop found its stop? JMI v0.9.70
+// //     std::set<int>::iterator it =
+// //       fExpectedTupletsStopNumbersSet.find (
+// //         tupletsStackTop->getTupletNumber ());
+// //
+// //     if (it != fExpectedTupletsStopNumbersSet.end ()) {
+// //       // this tuplet number is in the set of 'started' tuplet numbers
+// //
+// //       // finalize tupletsStackTop and pop it from the tuplets stack, thus 'closing' it
+// //       voiceHandler->
+// //         finalizeTupletStackTopAndPopItFromTupletsStack (
+// //           inputLineNumber,
+// //           "handleTupletStopNumberForNote()");
+// //
+// //       // remove its tuplet number from the set
+// //       fExpectedTupletsStopNumbersSet.erase (it);
+// //     }
+//   } // for
 }
 
 //______________________________________________________________________________
@@ -26334,7 +26335,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
 
 /* JMI
       // register that last handled note if any is followed by grace notes
-      S_msrNote
+      const S_msrNote&
         lastHandledNoteInVoice =
           fCurrentPartVoicesVector [fVoiceNumberToInsertInto]->
             getVoiceLastAppendedNote ();
@@ -26688,7 +26689,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHasBeenHandled ()
         i != voiceStanzasMap.end ();
         ++i
       ) {
-        const S_msrStanza& stanza = (*i).second;
+        S_msrStanza stanza = (*i).second;
 
         // choose the syllable kind
         msrSyllableKind
@@ -27529,7 +27530,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
     // fetch the current tuplet, i.e. the top of the stack
     S_msrTuplet currentTuplet;
 
-    /* JMI
+    //* JMI
     if (voiceHandler->getTupletsStack ().size ()) {
       currentTuplet =
         voiceHandler->getTupletsStack ().front ();
@@ -27550,7 +27551,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
         __FILE__, __LINE__,
         ss.str ());
     }
-    */
+    // */
 
 //     currentTuplet =
 //       fLastHandledTupletInVoiceMap [
@@ -30187,7 +30188,7 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
       fCurrentHarpPedalAlterationKind);
 }
 
-void mxsr2msrTranslator::visitStart( S_damp& elt)
+void mxsr2msrTranslator::visitStart (S_damp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30215,7 +30216,7 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart( S_damp_all& elt)
+void mxsr2msrTranslator::visitStart (S_damp_all& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -31095,7 +31096,7 @@ part-symbol
 //           i != voiceStanzasMap.end ();
 //           ++i
 //         ) {
-//           const S_msrStanza& stanza = (*i).second;
+//           S_msrStanza stanza = (*i).second;
 //
 //           //choose the syllable kind
 //           msrSyllableKind

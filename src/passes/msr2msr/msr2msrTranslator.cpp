@@ -378,7 +378,7 @@ void msr2msrTranslator::displayOnGoingNotesStack (
     "The on-going notes stack contains " <<
     mfSingularOrPlural (
       onGoingNotesStackSize, "element", "elements") <<
-    " (" << context << "):" <<
+    " (context: " << context << "):" <<
     std::endl;
 
   if (onGoingNotesStackSize) {
@@ -398,7 +398,7 @@ void msr2msrTranslator::displayOnGoingNotesStack (
         std::endl;
 
       ++gIndenter;
-      gLog << note;
+      gLog << note << std::endl;
       --gIndenter;
 
       --n;
@@ -4356,8 +4356,6 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 //       ss.str ());
 //   }
 //
-//   fOnGoingGraceNotesGroup = true;
-//
 //   // is noteNotesGroupIsAttachedTo the first one in its voice?
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI
@@ -4450,6 +4448,8 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 //   // addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded() will
 //   // append the same skip grace notes to the ofhter voices if needed
 //   // in visitEnd (S_msrPart&)
+
+  fOnGoingGraceNotesGroup = true;
 }
 
 void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
@@ -4721,10 +4721,25 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       fCurrentGraceNoteClone = noteClone;
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceNotes ()) {
+        std::stringstream ss;
+
+        ss <<
+          "===> fCurrentGraceNoteClone: " <<
+          fCurrentGraceNoteClone->asString ();
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
       break;
 
     default:
       fCurrentNonGraceNoteClone = noteClone;
+
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;
@@ -4763,7 +4778,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
       fOnGoingNonGraceNote = true;
   } // switch
 
-//* JMI
+//* JMI v0.9.70
   // can we optimize graceNotesGroup into afterGraceNotesGroup?
   if (
     elt->getNoteIsFollowedByGraceNotesGroup ()
@@ -4823,9 +4838,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesDetails ()) {
-    std::stringstream ss;
-
-    ss <<
+    gLog <<
       "FAA fCurrentNonGraceNoteClone: " <<
       std::endl;
     if (fCurrentNonGraceNoteClone) {
@@ -4851,9 +4864,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::endl;
     }
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+    gLog << std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5719,7 +5730,7 @@ void msr2msrTranslator::visitStart (S_msrTuplet& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // create the tuplet clone
-  S_msrTuplet
+  const S_msrTuplet&
     tupletClone =
       elt->createTupletNewbornClone ();
 
@@ -6938,7 +6949,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
       j!=staffVoicesVector.end ();
       ++j
     ) {
-      const S_msrVoice& voice = (*j);
+      S_msrVoice voice = (*j);
 
       if (voice != voiceClone) {
         // prepend skip grace notes to voice JMI

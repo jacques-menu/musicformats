@@ -34,7 +34,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrBook msrBook::create (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& bookName)
 {
   msrBook* obj =
@@ -46,7 +46,7 @@ S_msrBook msrBook::create (
 }
 
 msrBook::msrBook (
-  int           inputLineNumber,
+  int                inputLineNumber,
   const std::string& bookName)
     : msrElement (inputLineNumber)
 {
@@ -703,7 +703,7 @@ void msrBook::printFull (std::ostream& os) const
       iEnd   = fBookAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      const S_msrVoice& voice = (*i);
+      S_msrVoice voice = (*i);
 
       os << voice->getVoiceName () << std::endl;
       if (++i == iEnd) break;
@@ -899,7 +899,7 @@ void msrBook::print (std::ostream& os) const
       iEnd   = fBookAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      const S_msrVoice& voice = (*i);
+      S_msrVoice voice = (*i);
 
       os << voice->getVoiceName () << std::endl;
       if (++i == iEnd) break;

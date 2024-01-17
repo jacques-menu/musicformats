@@ -1064,7 +1064,7 @@ std::string mfDoubleQuoteStringContentsOnly (
   std::string result;
 
   if (theString.size ()) {
-    for (char const &theChar : theString) {
+    for (char theChar : theString) {
       if (theChar == '"') {
         result += "\\\"";
       }
@@ -1099,7 +1099,7 @@ std::string mfDoubleQuoteStringIfNonWord (
   Bool stringShouldBeDoubleQuoted (false);
 
   if (theString.size ()) {
-    for (char const &theChar : theString) {
+    for (char theChar : theString) {
       if (! std::isalpha (theChar)) {
         stringShouldBeDoubleQuoted = true;
       }
@@ -1128,7 +1128,7 @@ std::string mfSingleQuoteStringContentsOnly (
   std::string result;
 
   if (theString.size ()) {
-    for (char const& theChar : theString) {
+    for (char theChar : theString) {
       if (theChar == '\'') {
         result += "\\\'";
       }

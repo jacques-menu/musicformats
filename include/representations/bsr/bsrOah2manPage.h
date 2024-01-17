@@ -23,9 +23,9 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP bsrOah2manPage : virtual public oah2manPage,
 
-  public visitor<S_bsrFacSimileKindAtom>,
+  public                      visitor<S_bsrFacSimileKindAtom>,
 
-  public visitor<S_bsrTextsLanguageAtom>
+  public                      visitor<S_bsrTextsLanguageAtom>
 
 {
   public:

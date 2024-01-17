@@ -1498,7 +1498,7 @@ void msrPartGroup::printFull (std::ostream& os) const
       iEnd   = fPartGroupAllVoicesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      const S_msrVoice& voice = (*i);
+      S_msrVoice voice = (*i);
 
       os << "\"" << voice->getVoiceName () << "\"" << std::endl;
       if (++i == iEnd) break;

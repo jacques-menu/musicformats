@@ -25,21 +25,21 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP displayMsrNamesVisitor :
 
-  public visitor<S_msrScore>,
+  public                      visitor<S_msrScore>,
 
   // parts & part groups
 
-  public visitor<S_msrPartGroup>,
+  public                      visitor<S_msrPartGroup>,
 
-  public visitor<S_msrPart>,
+  public                      visitor<S_msrPart>,
 
   // staves
 
-  public visitor<S_msrStaff>,
+  public                      visitor<S_msrStaff>,
 
   // voices
 
-  public visitor<S_msrVoice>
+  public                      visitor<S_msrVoice>
 
 {
   public:

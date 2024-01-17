@@ -984,7 +984,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 
   // stanzas
   for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-    const S_msrStanza& stanza = thePair.second;
+    S_msrStanza stanza = thePair.second;
 
     deepClone->
       addStanzaToVoiceWithoutCatchUp ( // JMI
@@ -2840,7 +2840,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //   // pad up the voice's stanzas // JMI ???
 //   if (fVoiceStanzasMap.size ()) {
 //     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-//       const S_msrStanza& stanza = thePair.second;
+//       S_msrStanza stanza = thePair.second;
 //
 //       stanza->
 //         padUpToMeasureCurrentAccumulatedWholeNotesDurationInStanza (
@@ -2936,7 +2936,7 @@ void msrVoice::appendPaddingNoteToVoice (
   // pad up the voice's stanzas JMI USELESS??? v0.9.70
   if (fVoiceStanzasMap.size ()) {
     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-      const S_msrStanza& stanza = thePair.second;
+      S_msrStanza stanza = thePair.second;
 
       stanza->
         appendPaddingNoteToStanza (
@@ -3800,7 +3800,7 @@ void msrVoice::appendLineBreakToVoice  (
   // cascade this lineBreak to the voice stanzas if any
   if (fVoiceStanzasMap.size ()) {
     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-      const S_msrStanza& stanza = thePair.second;
+      S_msrStanza stanza = thePair.second;
 
       stanza->
         appendLineBreakSyllableToStanza (
@@ -3833,7 +3833,7 @@ void msrVoice::appendPageBreakToVoice (
   // cascade this pageBreak to the voice stanzas if any
   if (fVoiceStanzasMap.size ()) {
     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-      const S_msrStanza& stanza = thePair.second;
+      S_msrStanza stanza = thePair.second;
 
       stanza->
         appendPageBreakSyllableToStanza (
@@ -10597,7 +10597,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
       // append a measure end syllable to the voice stanzas if any
       if (fVoiceStanzasMap.size ()) {
         for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-          const S_msrStanza& stanza = thePair.second;
+          S_msrStanza stanza = thePair.second;
 
           // fetch the part
           S_msrPart
@@ -11328,7 +11328,7 @@ void msrVoice::browseData (basevisitor* v)
   // browse the voice stanzas
   if (fVoiceStanzasMap.size ()) {
     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-      const S_msrStanza& stanza = thePair.second;
+      S_msrStanza stanza = thePair.second;
 
       if (stanza->getStanzaTextPresent ()) {
         // browse the stanza
@@ -11816,7 +11816,7 @@ void msrVoice::printFull (std::ostream& os) const
     ++gIndenter;
 
     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-      const S_msrStanza& stanza = thePair.second;
+      S_msrStanza stanza = thePair.second;
 
       os << stanza;
     } // for
@@ -11970,7 +11970,7 @@ void msrVoice::print (std::ostream& os) const
     ++gIndenter;
 
     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
-      const S_msrStanza& stanza = thePair.second;
+      S_msrStanza stanza = thePair.second;
 
       os << stanza;
     } // for

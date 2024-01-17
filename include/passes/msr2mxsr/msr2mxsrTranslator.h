@@ -32,232 +32,232 @@ class EXP msr2mxsrTranslator :
 
   // MSR score
 
-  public visitor<S_msrScore>,
+  public                      visitor<S_msrScore>,
 
   // rights
 
-  public visitor<S_msrIdentification>,
+  public                      visitor<S_msrIdentification>,
 
-  public visitor<S_msrCredit>,
-  public visitor<S_msrCreditWords>,
+  public                      visitor<S_msrCredit>,
+  public                      visitor<S_msrCreditWords>,
 
   // scaling
 
-  public visitor<S_msrScaling>,
+  public                      visitor<S_msrScaling>,
 
   // layout
 
-  public visitor<S_msrPageLayout>,
-  public visitor<S_msrSystemLayout>,
-  public visitor<S_msrStaffLayout>,
-  public visitor<S_msrMeasureLayout>,
+  public                      visitor<S_msrPageLayout>,
+  public                      visitor<S_msrSystemLayout>,
+  public                      visitor<S_msrStaffLayout>,
+  public                      visitor<S_msrMeasureLayout>,
 
   // appearance
 
-  public visitor<S_msrAppearance>,
+  public                      visitor<S_msrAppearance>,
 
   // print layouts
 
-  public visitor<S_msrMusicXMLPrintLayout>,
+  public                      visitor<S_msrMusicXMLPrintLayout>,
 
   // part groups
 
-  public visitor<S_msrPartGroup>,
+  public                      visitor<S_msrPartGroup>,
 
   // parts
 
-  public visitor<S_msrPart>,
+  public                      visitor<S_msrPart>,
 
   // staff details
 
-  public visitor<S_msrStaffTuning>,
-  public visitor<S_msrStaffDetails>,
+  public                      visitor<S_msrStaffTuning>,
+  public                      visitor<S_msrStaffDetails>,
 
-  public visitor<S_msrStaff>,
+  public                      visitor<S_msrStaff>,
 
   // voices
 
-  public visitor<S_msrVoice>,
+  public                      visitor<S_msrVoice>,
 
-  public visitor<S_msrVoiceStaffChange>,
+  public                      visitor<S_msrVoiceStaffChange>,
 
   // segments
 
-  public visitor<S_msrSegment>,
+  public                      visitor<S_msrSegment>,
 
   // measures
 
-  public visitor<S_msrMeasure>,
+  public                      visitor<S_msrMeasure>,
 
   // lyrics
 
-  public visitor<S_msrStanza>,
-  public visitor<S_msrSyllable>,
+  public                      visitor<S_msrStanza>,
+  public                      visitor<S_msrSyllable>,
 
   // clefs
 
-  public visitor<S_msrClef>,
+  public                      visitor<S_msrClef>,
 
   // keys
 
-  public visitor<S_msrKey>,
+  public                      visitor<S_msrKey>,
 
   // time signatures
 
-  public visitor<S_msrTimeSignature>,
+  public                      visitor<S_msrTimeSignature>,
 
   // transposition
 
-  public visitor<S_msrTransposition>,
+  public                      visitor<S_msrTransposition>,
 
   // words
 
-  public visitor<S_msrWords>,
+  public                      visitor<S_msrWords>,
 
   // tempos
 
-  public visitor<S_msrTempo>,
+  public                      visitor<S_msrTempo>,
 
   // chords
 
-  public visitor<S_msrChord>,
+  public                      visitor<S_msrChord>,
 
   // tuplets
 
-  public visitor<S_msrTuplet>,
+  public                      visitor<S_msrTuplet>,
 
   // rehearsal mark
 
-  public visitor<S_msrRehearsalMark>,
+  public                      visitor<S_msrRehearsalMark>,
 
   // harmonies
 
-  public visitor<S_msrHarmony>,
-  public visitor<S_msrHarmonyDegree>,
+  public                      visitor<S_msrHarmony>,
+  public                      visitor<S_msrHarmonyDegree>,
 
   // frames
 
-  public visitor<S_msrFrame>,
+  public                      visitor<S_msrFrame>,
 
   // figured bass
 
-  public visitor<S_msrFiguredBass>,
-  public visitor<S_msrBassFigure>,
+  public                      visitor<S_msrFiguredBass>,
+  public                      visitor<S_msrBassFigure>,
 
   // articulations
 
-  public visitor<S_msrArticulation>,
+  public                      visitor<S_msrArticulation>,
 
-  public visitor<S_msrFermata>,
+  public                      visitor<S_msrFermata>,
 
-  public visitor<S_msrArpeggiato>,
-  public visitor<S_msrNonArpeggiato>,
+  public                      visitor<S_msrArpeggiato>,
+  public                      visitor<S_msrNonArpeggiato>,
 
   // technicals
 
-  public visitor<S_msrTechnical>,
-  public visitor<S_msrTechnicalWithInteger>,
-  public visitor<S_msrTechnicalWithFloat>,
-  public visitor<S_msrTechnicalWithString>,
+  public                      visitor<S_msrTechnical>,
+  public                      visitor<S_msrTechnicalWithInteger>,
+  public                      visitor<S_msrTechnicalWithFloat>,
+  public                      visitor<S_msrTechnicalWithString>,
 
   // ornaments
 
-  public visitor<S_msrOrnament>,
+  public                      visitor<S_msrOrnament>,
 
   // spanners
 
-//  public visitor<S_msrSpanner>,
+//  public                      visitor<S_msrSpanner>,
 
   // glissandos
 
-  public visitor<S_msrGlissando>,
+  public                      visitor<S_msrGlissando>,
 
   // slides
 
-  public visitor<S_msrSlide>,
+  public                      visitor<S_msrSlide>,
 
   // tremolos
 
-  public visitor<S_msrSingleTremolo>,
+  public                      visitor<S_msrSingleTremolo>,
 
-  public visitor<S_msrDoubleTremolo>,
+  public                      visitor<S_msrDoubleTremolo>,
 
   // dynamics
 
-  public visitor<S_msrDynamic>,
+  public                      visitor<S_msrDynamic>,
 
-  public visitor<S_msrOtherDynamic>,
+  public                      visitor<S_msrOtherDynamic>,
 
-  public visitor<S_msrSlash>,
+  public                      visitor<S_msrSlash>,
 
-  public visitor<S_msrSlur>,
-  public visitor<S_msrLigature>,
+  public                      visitor<S_msrSlur>,
+  public                      visitor<S_msrLigature>,
 
-  public visitor<S_msrCrescDecresc>,
+  public                      visitor<S_msrCrescDecresc>,
 
-  public visitor<S_msrWedge>,
+  public                      visitor<S_msrWedge>,
 
   // grace notes
 
-  public visitor<S_msrGraceNotesGroup>,
+  public                      visitor<S_msrGraceNotesGroup>,
 
   // notes
 
-  public visitor<S_msrNote>,
-  public visitor<S_msrOctaveShift>,
+  public                      visitor<S_msrNote>,
+  public                      visitor<S_msrOctaveShift>,
 
   // accordion registration
 
-  public visitor<S_msrAccordionRegistration>,
+  public                      visitor<S_msrAccordionRegistration>,
 
   // harp pedals tuning
 
-  public visitor<S_msrHarpPedalsTuning>,
+  public                      visitor<S_msrHarpPedalsTuning>,
 
-  public visitor<S_msrStem>,
+  public                      visitor<S_msrStem>,
 
   // ties, slurs, brackets & beams
 
-  public visitor<S_msrTie>,
+  public                      visitor<S_msrTie>,
 
-  public visitor<S_msrBeam>,
+  public                      visitor<S_msrBeam>,
 
   // ?
 
-  public visitor<S_msrBarLine>,
+  public                      visitor<S_msrBarLine>,
 
-  public visitor<S_msrSegno>,
-  public visitor<S_msrDalSegno>,
-  public visitor<S_msrCoda>,
+  public                      visitor<S_msrSegno>,
+  public                      visitor<S_msrDalSegno>,
+  public                      visitor<S_msrCoda>,
 
-  public visitor<S_msrEyeGlasses>,
-  public visitor<S_msrPedal>,
-  public visitor<S_msrDamp>,
-  public visitor<S_msrDampAll>,
-  public visitor<S_msrScordatura>,
+  public                      visitor<S_msrEyeGlasses>,
+  public                      visitor<S_msrPedal>,
+  public                      visitor<S_msrDamp>,
+  public                      visitor<S_msrDampAll>,
+  public                      visitor<S_msrScordatura>,
 
-  public visitor<S_msrBarCheck>,
-  public visitor<S_msrBarNumberCheck>,
+  public                      visitor<S_msrBarCheck>,
+  public                      visitor<S_msrBarNumberCheck>,
 
-  public visitor<S_msrLineBreak>,
+  public                      visitor<S_msrLineBreak>,
 
-  public visitor<S_msrPageBreak>,
+  public                      visitor<S_msrPageBreak>,
 
   // repeats
 
-  public visitor<S_msrRepeat>,
-  public visitor<S_msrRepeatCommonPart>,
-  public visitor<S_msrRepeatEnding>,
+  public                      visitor<S_msrRepeat>,
+  public                      visitor<S_msrRepeatCommonPart>,
+  public                      visitor<S_msrRepeatEnding>,
 
-  public visitor<S_msrMeasureRepeat>,
-  public visitor<S_msrMeasureRepeatPattern>,
-  public visitor<S_msrMeasureRepeatReplicas>,
+  public                      visitor<S_msrMeasureRepeat>,
+  public                      visitor<S_msrMeasureRepeatPattern>,
+  public                      visitor<S_msrMeasureRepeatReplicas>,
 
-  public visitor<S_msrMultiMeasureRest>,
+  public                      visitor<S_msrMultiMeasureRest>,
 
   // midi
 
-  public visitor<S_msrMidiTempo>
+  public                      visitor<S_msrMidiTempo>
 
 {
   public:

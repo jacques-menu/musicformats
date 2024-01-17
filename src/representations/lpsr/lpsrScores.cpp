@@ -2132,12 +2132,12 @@ chExceptionMusic = {)###" <<
         gGlobalLpsr2lilypondOahGroup->getJazzChordsDisplayLilypondCode ();
     }
 
-  const std::list<std::pair<std::string, std::string> >&
+  const std::list<std::pair<std::string, std::string>>&
     chordsDisplayList =
       gGlobalLpsr2lilypondOahGroup->getChordsDisplayList ();
 
   if (chordsDisplayList.size ()) {
-    std::list<std::pair<std::string, std::string> >::const_iterator
+    std::list<std::pair<std::string, std::string>>::const_iterator
       iBegin = chordsDisplayList.begin (),
       iEnd   = chordsDisplayList.end (),
       i      = iBegin;

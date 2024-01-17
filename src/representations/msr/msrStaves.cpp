@@ -551,7 +551,7 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 {
   int result = 0;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       switch (voice->getVoiceKind ()) {
         case msrVoiceKind::kVoiceKindRegular:
@@ -600,7 +600,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
 #endif // MF_TRACE_IS_ENABLED
 
   // cascade it to all voices
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     mfAssert (
@@ -641,7 +641,7 @@ void msrStaff::setNextMeasureNumberInStaff (
   ++gIndenter;
 
   // cascade it to all voices
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     mfAssert (
@@ -676,10 +676,10 @@ void msrStaff::setNextMeasureNumberInStaff (
 }
 
 S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
-  int                inputLineNumber,
-  int                voiceNumber,
-  const std::string& currentMeasureNumber,
-  S_msrPartGroup     partUpLinkToPartGroup)
+  int                   inputLineNumber,
+  int                   voiceNumber,
+  const std::string&    currentMeasureNumber,
+  const S_msrPartGroup& partUpLinkToPartGroup)
 {
   ++fStaffRegularVoicesCounter;
 
@@ -1278,7 +1278,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
 #ifdef MF_TRACE_IS_ENABLED
     int        number = thePair.first;
 #endif // MF_TRACE_IS_ENABLED
-    const S_msrVoice& voice  = thePair.second;
+    S_msrVoice voice = thePair.second;
 
     if (
       voice->getVoiceNumber ()
@@ -1344,7 +1344,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
     for ( ; ; ) {
       if (i == iEnd) break;
 
-      const S_msrVoice& voice = (*i);
+      S_msrVoice voice = (*i);
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1470,7 +1470,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 }
 
 void msrStaff::registerVoiceInStaff (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -1699,7 +1699,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
 }
 
 void msrStaff::registerVoiceInStaffClone (
-  int        inputLineNumber,
+  int               inputLineNumber,
   const S_msrVoice& voice)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -1841,7 +1841,7 @@ void msrStaff::registerVoiceInStaffClone (
 //     fStaffCurrentClef = clef;
 //
 //     // cascade ClefKeyTimeSignatureGroup to all voices
-//     for (const S_msrVoice& voice : fStaffAllVoicesList) {
+//     for (S_msrVoice voice : fStaffAllVoicesList) {
 //       voice->
 //         appendClefKeyTimeSignatureGroupToVoice (clef);
 //     } // for
@@ -1943,7 +1943,7 @@ void msrStaff::appendClefToStaff  (
 
     if (doCreateAClefKeyTimeSignatureGroup) {
       // cascade fCurrentClefKeyTimeSignatureGroup to all voices
-      for (const S_msrVoice& voice : fStaffAllVoicesList) {
+      for (S_msrVoice voice : fStaffAllVoicesList) {
         voice->
           appendClefKeyTimeSignatureGroupToVoice (
             fCurrentClefKeyTimeSignatureGroup);
@@ -2051,7 +2051,7 @@ void msrStaff::appendKeyToStaff (
 
     if (doCreateAClefKeyTimeSignatureGroup) {
       // cascade fCurrentClefKeyTimeSignatureGroup to all voices
-      for (const S_msrVoice& voice : fStaffAllVoicesList) {
+      for (S_msrVoice voice : fStaffAllVoicesList) {
         voice->
           appendClefKeyTimeSignatureGroupToVoice (
             fCurrentClefKeyTimeSignatureGroup);
@@ -2153,7 +2153,7 @@ void msrStaff::appendTimeSignatureToStaff (
 
     if (doCreateAClefKeyTimeSignatureGroup) {
       // cascade fCurrentClefKeyTimeSignatureGroup to all voices
-      for (const S_msrVoice& voice : fStaffAllVoicesList) {
+      for (S_msrVoice voice : fStaffAllVoicesList) {
         voice->
           appendClefKeyTimeSignatureGroupToVoice (
             fCurrentClefKeyTimeSignatureGroup);
@@ -2169,7 +2169,7 @@ void msrStaff::appendTimeSignatureToStaff (
     fStaffCurrentTimeSignature = timeSignature;
 
 //     // cascade timeSignature to all voices
-//     for (const S_msrVoice& voice : fStaffAllVoicesList) {
+//     for (S_msrVoice voice : fStaffAllVoicesList) {
 //       voice->
 //         appendTimeSignatureToVoice (
 //           timeSignature);
@@ -2205,7 +2205,7 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
   fCurrentClefKeyTimeSignatureGroup = clefKeyTimeSignatureGroup;
 
   // cascade it to all voices
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendClefKeyTimeSignatureGroupToVoice (
         clefKeyTimeSignatureGroup);
@@ -2243,7 +2243,7 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
 //   fStaffCurrentTimeSignature = timeSignature;
 //
 //   // cascade it to all voices
-//   for (const S_msrVoice& voice : fStaffAllVoicesList) {
+//   for (S_msrVoice voice : fStaffAllVoicesList) {
 //     voice->
 //       appendTimeSignatureToVoice (timeSignature);
 //   } // for
@@ -2270,7 +2270,7 @@ void msrStaff::appendTempoToStaff (
 #endif // MF_TRACE_IS_ENABLED
 
  // append tempo to registered staves
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendTempoToVoice (tempo);
   } // for
@@ -2295,7 +2295,7 @@ void msrStaff::appendRehearsalMarkToStaff (
 #endif // MF_TRACE_IS_ENABLED
 
  // append rehearsal mark to registered staves
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendRehearsalMarkToVoice (rehearsalMark);
   } // for
@@ -2320,7 +2320,7 @@ void msrStaff::appendLineBreakToStaff  (
 #endif // MF_TRACE_IS_ENABLED
 
  // append line break to registered staves
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendLineBreakToVoice (lineBreak);
   } // for
@@ -2345,7 +2345,7 @@ void msrStaff::appendPageBreakToStaff (
 #endif // MF_TRACE_IS_ENABLED
 
  // append page break to registered staves
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendPageBreakToVoice (pageBreak);
   } // for
@@ -2377,7 +2377,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
   ++gIndenter;
 
   // cascade it to all voices
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       insertHiddenMeasureAndBarLineInVoiceClone (
         inputLineNumber,
@@ -2407,7 +2407,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       nestContentsIntoNewRepeatInVoice (
         inputLineNumber);
@@ -2437,7 +2437,7 @@ void msrStaff::handleRepeatStartInStaff (
 
   ++gIndenter;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       handleRepeatStartInVoice (
         inputLineNumber);
@@ -2470,7 +2470,7 @@ void msrStaff::handleRepeatEndInStaff (
 
   ++gIndenter;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       handleRepeatEndInVoice (
         inputLineNumber,
@@ -2503,7 +2503,7 @@ void msrStaff::handleRepeatEndingStartInStaff (
 
   ++gIndenter;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       handleRepeatEndingStartInVoice (
         inputLineNumber);
@@ -2540,7 +2540,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
 
   ++gIndenter;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       handleRepeatEndingEndInVoice (
         inputLineNumber,
@@ -2576,7 +2576,7 @@ void msrStaff::finalizeRepeatEndInStaff (
 
   ++gIndenter;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       finalizeRepeatEndInVoice (
         inputLineNumber,
@@ -2609,7 +2609,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       createMeasureRepeatFromItsFirstMeasures (
         inputLineNumber,
@@ -2637,7 +2637,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendPendingMeasureRepeatToVoice (
         inputLineNumber);
@@ -2670,7 +2670,7 @@ void msrStaff::appendMultiMeasureRestToStaff (
 
   fStaffContainsMultiMeasureRests = true;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendMultiMeasureRestToVoice (
         inputLineNumber,
@@ -2698,7 +2698,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
 #endif // MF_TRACE_IS_ENABLED
 
   // add multiple rest to all staves
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       replicateLastAppendedMeasureInVoice (
         inputLineNumber,
@@ -2734,7 +2734,7 @@ void msrStaff::appendEmptyMeasuresToStaff (
 
   fStaffContainsMultiMeasureRests = true;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendEmptyMeasuresToVoice (
         inputLineNumber,
@@ -2762,7 +2762,7 @@ void msrStaff::appendPendingMultiMeasureRestsToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendPendingMultiMeasureRestsToVoice (
         inputLineNumber);
@@ -2770,7 +2770,7 @@ void msrStaff::appendPendingMultiMeasureRestsToStaff (
 }
 
 void msrStaff::appendMultiMeasureRestCloneToStaff (
-  int               inputLineNumber,
+  int                          inputLineNumber,
   const S_msrMultiMeasureRest& multiMeasureRests)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2790,7 +2790,7 @@ void msrStaff::appendMultiMeasureRestCloneToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendMultiMeasureRestCloneToVoiceClone (
         inputLineNumber,
@@ -2799,7 +2799,7 @@ void msrStaff::appendMultiMeasureRestCloneToStaff (
 }
 
 void msrStaff::appendRepeatCloneToStaff (
-  int         inputLineNumber,
+  int                inputLineNumber,
   const S_msrRepeat& repeatCLone)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2818,7 +2818,7 @@ void msrStaff::appendRepeatCloneToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendRepeatCloneToVoiceClone (
         inputLineNumber, repeatCLone);
@@ -2847,7 +2847,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
 
   ++gIndenter;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendRepeatEndingCloneToVoice (
         repeatEndingClone);
@@ -2878,7 +2878,7 @@ void msrStaff::appendBarLineToStaff (
 
   ++gIndenter;
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendBarLineToVoice (barLine);
   } // for
@@ -3011,7 +3011,7 @@ void msrStaff::appendStaffDetailsToStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendStaffDetailsToVoice (staffDetails);
   } // for
@@ -3020,7 +3020,7 @@ void msrStaff::appendStaffDetailsToStaff (
 void msrStaff::appendTranspositionToAllStaffVoices (
   const S_msrTransposition& transposition)
 {
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendTranspositionToVoice (transposition);
   } // for
@@ -3029,7 +3029,7 @@ void msrStaff::appendTranspositionToAllStaffVoices (
 void msrStaff::appendScordaturaToStaff (
   const S_msrScordatura& scordatura)
 {
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendScordaturaToVoice (
         scordatura);
@@ -3040,7 +3040,7 @@ void msrStaff::appendAccordionRegistrationToStaff (
   const S_msrAccordionRegistration&
     accordionRegistration)
 {
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendAccordionRegistrationToVoice (
         accordionRegistration);
@@ -3050,7 +3050,7 @@ void msrStaff::appendAccordionRegistrationToStaff (
 void msrStaff::appendHarpPedalsTuningToStaff (
   const S_msrHarpPedalsTuning& harpPedalsTuning)
 {
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       appendHarpPedalsTuningToVoice (
         harpPedalsTuning);
@@ -3078,7 +3078,7 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
   ++gIndenter;
 
   // finalize all the voices in the staff
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     switch (voice->getVoiceKind ()) {
       case msrVoiceKind::kVoiceKindRegular:
       case msrVoiceKind::kVoiceKindDynamics:
@@ -3278,7 +3278,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       finalizeVoice (
         inputLineNumber);
@@ -3311,7 +3311,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
     S_msrVoice foo = voice; // ??? JMI v0.9.66
   } // for
 }
@@ -3366,7 +3366,7 @@ void msrStaff::collectStaffMeasuresSlices (
       fStaffName); // origin
 
   // populate it
-  for (const S_msrVoice& voice : fStaffAllVoicesList) {
+  for (S_msrVoice voice : fStaffAllVoicesList) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasuresSlices ()) {
       std::stringstream ss;
@@ -3550,7 +3550,7 @@ void msrStaff::browseData (basevisitor* v)
 
 /* JMI may be useful???
   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
-    for (const S_msrVoice& voice : fStaffAllVoicesList) {
+    for (S_msrVoice voice : fStaffAllVoicesList) {
         msrBrowser<msrVoice> browser (v);
         browser.browse (*((*i).second));
     } // for
@@ -3565,7 +3565,7 @@ void msrStaff::browseData (basevisitor* v)
       std::endl;
 
     if (fStaffAllVoicesList.size ()) {
-      for (const S_msrVoice& voice : fStaffAllVoicesList) {
+      for (S_msrVoice voice : fStaffAllVoicesList) {
         gLog <<
           std::endl <<
           "+++++++++ voice: ++++++++" <<
@@ -3577,7 +3577,7 @@ void msrStaff::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
   if (fStaffAllVoicesList.size ()) {
-    for (const S_msrVoice& voice : fStaffAllVoicesList) {
+    for (S_msrVoice voice : fStaffAllVoicesList) {
       // get the  set of voices to ignore
       S_oahStringSetElementAtom
         ignoreMsrVoicesSetAtom =
@@ -3873,7 +3873,7 @@ void msrStaff::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    for (const S_msrVoice& voice : fStaffAllVoicesList) {
+    for (S_msrVoice voice : fStaffAllVoicesList) {
       os << "\"" << voice->getVoiceName () << "\"" << std::endl;
     } // for
     os << std::endl;
@@ -3896,7 +3896,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     int voiceNumber = 0;
 
-    for (const S_msrVoice& voice : fStaffRegularVoicesList) {
+    for (S_msrVoice voice : fStaffRegularVoicesList) {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
@@ -3945,7 +3945,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToAllVoicesMap) {
       int        voiceNumber = thePair.first;
-      const S_msrVoice& voice       = thePair.second;
+      S_msrVoice voice       = thePair.second;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
@@ -3992,7 +3992,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
       int        voiceNumber = thePair.first;
-      const S_msrVoice& voice       = thePair.second;
+      S_msrVoice voice       = thePair.second;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
@@ -4043,7 +4043,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::vector<std::list<S_msrMeasure> >::const_iterator
+    std::vector<std::list<S_msrMeasure>>::const_iterator
       iBegin = fStaffMeasuresFlatListsVector.begin (),
       iEnd   = fStaffMeasuresFlatListsVector.end (),
       i      = iBegin;
@@ -4113,7 +4113,7 @@ void msrStaff::printFull (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      const S_msrVoice& voice = (*i).second;
+      S_msrVoice voice = (*i).second;
 
       voice->printFull (os);
 
@@ -4161,7 +4161,7 @@ void msrStaff::print (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      const S_msrVoice& voice = (*i).second;
+      S_msrVoice voice = (*i).second;
 
       os << voice;
 

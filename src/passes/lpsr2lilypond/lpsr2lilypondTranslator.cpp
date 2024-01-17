@@ -3555,7 +3555,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
 
     if (noteDalSegnosList.size ()) {
       std::list<S_msrDalSegno>::const_iterator i;
-      for (const S_msrDalSegno& dalSegno : noteDalSegnosList) {
+      for (S_msrDalSegno dalSegno : noteDalSegnosList) {
         // generate the dal segno
         fLilypondCodeStream <<
           std::endl <<
@@ -6332,7 +6332,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
     over those found in the header
   */
 
-  std::list<std::pair<std::string, std::string> > nameStringValuePairsList;
+  std::list<std::pair<std::string, std::string>> nameStringValuePairsList;
 
   S_msrIdentification
     headerIdentification =
@@ -6384,7 +6384,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
   const S_msrIdentification& identification,
-  std::list<std::pair<std::string, std::string> >&
+  std::list<std::pair<std::string, std::string>>&
                              nameStringValuePairsList)
 {
   /*
@@ -6690,7 +6690,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       std::endl;
 
     for (
-      std::list<std::pair<std::string, std::string> >::const_iterator i =
+      std::list<std::pair<std::string, std::string>>::const_iterator i =
         nameStringValuePairsList.begin ();
       i != nameStringValuePairsList.end ();
       ++i
@@ -6713,7 +6713,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
 //________________________________________________________________________
 void lpsr2lilypondTranslator::createLilypondHeaderStringValuePairs (
   const S_lpsrHeader& header,
-  std::list<std::pair<std::string, std::string> >&
+  std::list<std::pair<std::string, std::string>>&
                       nameStringValuePairsList)
 {
   /*
@@ -7100,7 +7100,7 @@ void lpsr2lilypondTranslator::generatePaper (
   ++gIndenter;
 
   // fetch length values from paper the page size
-  std::list<std::pair<std::string, msrLength> > nameLengthPairsList;
+  std::list<std::pair<std::string, msrLength>> nameLengthPairsList;
 
   fetchLengthValuesFromPaperPageSize (
     paper,
@@ -7109,7 +7109,7 @@ void lpsr2lilypondTranslator::generatePaper (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceIdentification ()) {
   // fetch boolean on/off values from the LPSR options group
-  std::list<std::pair<std::string, Bool> > nameBooleanPairsList;
+  std::list<std::pair<std::string, Bool>> nameBooleanPairsList;
 
   fetchOnOffValuesFromLpsrOptionsGroup (
     paper,
@@ -7258,7 +7258,7 @@ void lpsr2lilypondTranslator::generatePaper (
 //________________________________________________________________________
 void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
   const S_lpsrPaper& paper,
-  std::list<std::pair<std::string, msrLength> >&
+  std::list<std::pair<std::string, msrLength>>&
                      nameLengthValuePairsList)
 {
   Bool
@@ -7313,7 +7313,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
 
 void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   const S_lpsrPaper& paper,
-  std::list<std::pair<std::string, Bool> >&
+  std::list<std::pair<std::string, Bool>>&
                      nameBooleanValuePairsList)
 {
   // ragged-last
@@ -10207,7 +10207,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLilypondLyrics ()) {
-    const S_msrStanza& stanza = elt->getStanza ();
+    S_msrStanza stanza = elt->getStanza ();
 
     fLilypondCodeStream <<
       "\\new Lyrics" <<
@@ -13987,7 +13987,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 }
 
 void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
-  S_msrSyllable& syllable)
+  const S_msrSyllable& syllable)
 {
   // get the note the syllable is attached to
   S_msrNote
@@ -14109,7 +14109,7 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
 }
 
 void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
-  S_msrSyllable& syllable)
+  const S_msrSyllable& syllable)
 {
 /*
 From Lars Opfermann | soundnotation <Lars.Opfermann@soundnotation.com> :
@@ -14800,7 +14800,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 }
 
 void lpsr2lilypondTranslator::generateCodeBeforeSyllableIfRelevant (
-  S_msrSyllable& syllable)
+  const S_msrSyllable& syllable)
 {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -14871,7 +14871,7 @@ void lpsr2lilypondTranslator::generateCodeBeforeSyllableIfRelevant (
 }
 
 void lpsr2lilypondTranslator::generateCodeAfterSyllableIfRelevant (
-  S_msrSyllable& syllable)
+  const S_msrSyllable& syllable)
 {
 /*
 LilyPond syntax:
@@ -15020,7 +15020,7 @@ LilyPond syntax:
 }
 
 void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithAutomaticDurations (
-  S_msrSyllable& syllable)
+  const S_msrSyllable& syllable)
 {
 /*
 Multiple notes to one syllable:
@@ -15387,7 +15387,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 }
 
 void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithImplicitDurations (
-  S_msrSyllable& syllable)
+  const S_msrSyllable& syllable)
 {
 /*
 Multiple notes to one syllable:
@@ -15839,7 +15839,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 }
 
 void lpsr2lilypondTranslator::generateLyricExtenderAndOrSkipWithExplicitDurations (
-  S_msrSyllable& syllable)
+  const S_msrSyllable& syllable)
 {
 /*
 Multiple notes to one syllable:
@@ -22355,7 +22355,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         i != noteArticulationsList.end ();
         ++i
       ) {
-        const S_msrArticulation& articulation = (*i);
+        S_msrArticulation articulation = (*i);
         switch (articulation->getArticulationKind ()) {
           case msrArticulationKind::kArticulationFermata: // handle this better JMI
             if (
@@ -22779,7 +22779,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         i != noteArticulationsList.end ();
         ++i
       ) {
-        const S_msrArticulation& articulation = (*i);
+        S_msrArticulation articulation = (*i);
 
         switch (articulation->getArticulationKind ()) {
           case msrArticulationKind::kArticulationFermata: // handle this better JMI
@@ -23445,7 +23445,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
 */
 
   // generate the chord's grace notes before if any,
-  const S_msrChordGraceNotesGroupLink&
+  S_msrChordGraceNotesGroupLink
     chordGraceNotesGroupLinkBefore =
       chord->getChordGraceNotesGroupLinkBefore ();
 
@@ -23589,7 +23589,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
       i != chordArticulationsList.end ();
       ++i
     ) {
-      const S_msrArticulation& articulation = (*i);
+      S_msrArticulation articulation = (*i);
 
       if (
         // arpeggiato?
@@ -23823,7 +23823,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
 */
 
   // generate the chord's grace notes after if any
-  const S_msrChordGraceNotesGroupLink&
+  S_msrChordGraceNotesGroupLink
     chordGraceNotesGroupLinkAfter =
       chord->getChordGraceNotesGroupLinkAfter ();
 

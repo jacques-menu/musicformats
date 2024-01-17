@@ -126,285 +126,285 @@ class EXP lpsr2lilypondTranslator :
 
   // LPSR
 
-  public visitor<S_lpsrScore>,
+  public                      visitor<S_lpsrScore>,
 
   // rights
 
-  public visitor<S_msrIdentification>,
+  public                      visitor<S_msrIdentification>,
 
   // Scheme variable-s
 
-  public visitor<S_lpsrSchemeVariable>,
+  public                      visitor<S_lpsrSchemeVariable>,
 
   // MSR scaling
 
-  public visitor<S_msrScaling>,
+  public                      visitor<S_msrScaling>,
 
   // header
 
-  public visitor<S_lpsrHeader>,
+  public                      visitor<S_lpsrHeader>,
 
   // paper
 
-  public visitor<S_lpsrPaper>,
+  public                      visitor<S_lpsrPaper>,
 
   // layout
 
-  public visitor<S_lpsrLayout>,
+  public                      visitor<S_lpsrLayout>,
 
   // score blocks
 
-  public visitor<S_lpsrParallelMusicBLock>,
+  public                      visitor<S_lpsrParallelMusicBLock>,
 
-  public visitor<S_lpsrBookBlock>,
-  public visitor<S_lpsrScoreBlock>,
-  public visitor<S_lpsrBookPartBlock>,
+  public                      visitor<S_lpsrBookBlock>,
+  public                      visitor<S_lpsrScoreBlock>,
+  public                      visitor<S_lpsrBookPartBlock>,
 
-  public visitor<S_lpsrPartGroupBlock>,
-  public visitor<S_lpsrPartBlock>,
-  public visitor<S_lpsrStaffBlock>,
+  public                      visitor<S_lpsrPartGroupBlock>,
+  public                      visitor<S_lpsrPartBlock>,
+  public                      visitor<S_lpsrStaffBlock>,
 
-  public visitor<S_lpsrUseVoiceCommand>,
-  public visitor<S_lpsrNewLyricsBlock>,
-  public visitor<S_lpsrVariableUseCommand>,
+  public                      visitor<S_lpsrUseVoiceCommand>,
+  public                      visitor<S_lpsrNewLyricsBlock>,
+  public                      visitor<S_lpsrVariableUseCommand>,
 
-//  public visitor<S_lpsrContext>, JMI
-  public visitor<S_lpsrChordNamesContext>,
-  public visitor<S_lpsrFiguredBassContext>,
+//  public                      visitor<S_lpsrContext>, JMI
+  public                      visitor<S_lpsrChordNamesContext>,
+  public                      visitor<S_lpsrFiguredBassContext>,
 
-  public visitor<S_lpsrBarCommand>,
+  public                      visitor<S_lpsrBarCommand>,
 
  // JMI public visitor<S_lpsrMelismaCommand>,
 
-  public visitor<S_lpsrComment>,
+  public                      visitor<S_lpsrComment>,
 
-  public visitor<S_lpsrSchemeFunction>,
+  public                      visitor<S_lpsrSchemeFunction>,
 
   // MSR score
 
-  public visitor<S_msrScore>,
+  public                      visitor<S_msrScore>,
 
   // MSR page layout
 
-  public visitor<S_msrPageLayout>,
+  public                      visitor<S_msrPageLayout>,
 
   // rights
 
-  public visitor<S_msrCredit>,
-  public visitor<S_msrCreditWords>,
+  public                      visitor<S_msrCredit>,
+  public                      visitor<S_msrCreditWords>,
 
   // parts & part groups
 
-  public visitor<S_msrPartGroup>,
+  public                      visitor<S_msrPartGroup>,
 
-  public visitor<S_msrPart>,
+  public                      visitor<S_msrPart>,
 
   // staff details
 
-  public visitor<S_msrStaffTuning>,
-  public visitor<S_msrStaffDetails>,
+  public                      visitor<S_msrStaffTuning>,
+  public                      visitor<S_msrStaffDetails>,
 
   // staves and voices
 
-  public visitor<S_msrStaff>,
+  public                      visitor<S_msrStaff>,
 
-  public visitor<S_msrVoice>,
+  public                      visitor<S_msrVoice>,
 
-  public visitor<S_msrVoiceStaffChange>,
+  public                      visitor<S_msrVoiceStaffChange>,
 
   // harmonies
 
-  public visitor<S_msrHarmony>,
+  public                      visitor<S_msrHarmony>,
 
   // frames
 
-  public visitor<S_msrFrame>,
+  public                      visitor<S_msrFrame>,
 
   // figured bass
 
-  public visitor<S_msrFiguredBass>,
-  public visitor<S_msrBassFigure>,
+  public                      visitor<S_msrFiguredBass>,
+  public                      visitor<S_msrBassFigure>,
 
-  public visitor<S_msrSegment>,
-  public visitor<S_msrMeasure>,
+  public                      visitor<S_msrSegment>,
+  public                      visitor<S_msrMeasure>,
 
   // lyrics
 
-  public visitor<S_msrStanza>,
-  public visitor<S_msrSyllable>,
+  public                      visitor<S_msrStanza>,
+  public                      visitor<S_msrSyllable>,
 
   // clefs
 
-  public visitor<S_msrClefKeyTimeSignatureGroup>,
-  public visitor<S_msrClef>,
+  public                      visitor<S_msrClefKeyTimeSignatureGroup>,
+  public                      visitor<S_msrClef>,
 
   // keys
 
-  public visitor<S_msrKey>,
+  public                      visitor<S_msrKey>,
 
   // time signatures
 
-  public visitor<S_msrTimeSignature>,
+  public                      visitor<S_msrTimeSignature>,
 
   // transposition
 
-  public visitor<S_msrTransposition>,
+  public                      visitor<S_msrTransposition>,
 
   // words
 
-  public visitor<S_msrWords>,
+  public                      visitor<S_msrWords>,
 
   // tempo
 
-  public visitor<S_msrTempo>,
-  public visitor<S_msrTempoNotesRelationshipElements>,
-  public visitor<S_msrTempoNote>,
-  public visitor<S_msrTempoTuplet>,
+  public                      visitor<S_msrTempo>,
+  public                      visitor<S_msrTempoNotesRelationshipElements>,
+  public                      visitor<S_msrTempoNote>,
+  public                      visitor<S_msrTempoTuplet>,
 
   // articulations
 
-  public visitor<S_msrArticulation>,
+  public                      visitor<S_msrArticulation>,
 
-  public visitor<S_msrFermata>,
+  public                      visitor<S_msrFermata>,
 
-  public visitor<S_msrArpeggiato>,
-  public visitor<S_msrNonArpeggiato>,
+  public                      visitor<S_msrArpeggiato>,
+  public                      visitor<S_msrNonArpeggiato>,
 
   // technicals
 
-  public visitor<S_msrTechnical>,
-  public visitor<S_msrTechnicalWithInteger>,
-  public visitor<S_msrTechnicalWithFloat>,
-  public visitor<S_msrTechnicalWithString>,
+  public                      visitor<S_msrTechnical>,
+  public                      visitor<S_msrTechnicalWithInteger>,
+  public                      visitor<S_msrTechnicalWithFloat>,
+  public                      visitor<S_msrTechnicalWithString>,
 
   // ornaments
 
-  public visitor<S_msrOrnament>,
+  public                      visitor<S_msrOrnament>,
 
   // glissandos
 
-  public visitor<S_msrGlissando>,
+  public                      visitor<S_msrGlissando>,
 
   // slides
 
-  public visitor<S_msrSlide>,
+  public                      visitor<S_msrSlide>,
 
   // tremolos
 
-  public visitor<S_msrSingleTremolo>,
+  public                      visitor<S_msrSingleTremolo>,
 
-  public visitor<S_msrDoubleTremolo>,
+  public                      visitor<S_msrDoubleTremolo>,
 
   // dynamics
 
-  public visitor<S_msrDynamic>,
+  public                      visitor<S_msrDynamic>,
 
-  public visitor<S_msrOtherDynamic>,
+  public                      visitor<S_msrOtherDynamic>,
 
-  public visitor<S_msrCrescDecresc>,
+  public                      visitor<S_msrCrescDecresc>,
 
-  public visitor<S_msrWedge>,
+  public                      visitor<S_msrWedge>,
 
   // grace notes
 
-  public visitor<S_msrGraceNotesGroup>,
+  public                      visitor<S_msrGraceNotesGroup>,
 
-  public visitor<S_msrChordGraceNotesGroupLink>,
+  public                      visitor<S_msrChordGraceNotesGroupLink>,
 
-  public visitor<S_msrAfterGraceNotesGroup>,
-  public visitor<S_msrAfterGraceNotesGroupContents>,
+  public                      visitor<S_msrAfterGraceNotesGroup>,
+  public                      visitor<S_msrAfterGraceNotesGroupContents>,
 
   // notes
 
-  public visitor<S_msrNote>,
-  public visitor<S_msrOctaveShift>,
+  public                      visitor<S_msrNote>,
+  public                      visitor<S_msrOctaveShift>,
 
   // accordion registration
 
-  public visitor<S_msrAccordionRegistration>,
+  public                      visitor<S_msrAccordionRegistration>,
 
   // harp pedals tuning
 
-  public visitor<S_msrHarpPedalsTuning>,
+  public                      visitor<S_msrHarpPedalsTuning>,
 
   // stems
 
-  public visitor<S_msrStem>,
+  public                      visitor<S_msrStem>,
 
   // beams
 
-  public visitor<S_msrBeam>,
+  public                      visitor<S_msrBeam>,
 
   // chords
 
-  public visitor<S_msrChord>,
+  public                      visitor<S_msrChord>,
 
-  public visitor<S_msrTuplet>,
+  public                      visitor<S_msrTuplet>,
 
-  public visitor<S_msrTie>,
+  public                      visitor<S_msrTie>,
 
-  public visitor<S_msrSlur>,
+  public                      visitor<S_msrSlur>,
   /*
-  public visitor<S_msrChordSlurLink>,
+  public                      visitor<S_msrChordSlurLink>,
 */
 
-  public visitor<S_msrLigature>,
+  public                      visitor<S_msrLigature>,
 
   // ?
 
-  public visitor<S_msrBarLine>,
+  public                      visitor<S_msrBarLine>,
 
   // segnos and codas
-  public visitor<S_msrSegno>,
-  public visitor<S_msrHiddenMeasureAndBarLine>,
-  public visitor<S_msrCoda>,
+  public                      visitor<S_msrSegno>,
+  public                      visitor<S_msrHiddenMeasureAndBarLine>,
+  public                      visitor<S_msrCoda>,
 
-  public visitor<S_msrEyeGlasses>,
-  public visitor<S_msrPedal>,
-  public visitor<S_msrDamp>,
-  public visitor<S_msrDampAll>,
-  public visitor<S_msrScordatura>,
+  public                      visitor<S_msrEyeGlasses>,
+  public                      visitor<S_msrPedal>,
+  public                      visitor<S_msrDamp>,
+  public                      visitor<S_msrDampAll>,
+  public                      visitor<S_msrScordatura>,
 
-  public visitor<S_msrBarCheck>,
+  public                      visitor<S_msrBarCheck>,
 
-  public visitor<S_msrBarNumberCheck>,
+  public                      visitor<S_msrBarNumberCheck>,
 
-  public visitor<S_msrLineBreak>,
+  public                      visitor<S_msrLineBreak>,
 
-  public visitor<S_msrPageBreak>,
+  public                      visitor<S_msrPageBreak>,
 
   // repeats
 
-  public visitor<S_msrRepeat>,
-  public visitor<S_msrRepeatCommonPart>,
-  public visitor<S_msrRepeatEnding>,
+  public                      visitor<S_msrRepeat>,
+  public                      visitor<S_msrRepeatCommonPart>,
+  public                      visitor<S_msrRepeatEnding>,
 
-  public visitor<S_msrMeasureRepeat>,
-  public visitor<S_msrMeasureRepeatPattern>,
-  public visitor<S_msrMeasureRepeatReplicas>,
+  public                      visitor<S_msrMeasureRepeat>,
+  public                      visitor<S_msrMeasureRepeatPattern>,
+  public                      visitor<S_msrMeasureRepeatReplicas>,
 
-  public visitor<S_msrMultiMeasureRest>,
+  public                      visitor<S_msrMultiMeasureRest>,
 
   // rehearsal mark
 
-  public visitor<S_msrRehearsalMark>,
+  public                      visitor<S_msrRehearsalMark>,
 
   // midi
 
-  public visitor<S_msrMidiTempo>
+  public                      visitor<S_msrMidiTempo>
 
 {
   public:
 
-                          lpsr2lilypondTranslator (
-                            const S_msrOahGroup&  msrOpts,
-                            const S_lpsrOahGroup& lpsrOpts,
-                            std::ostream&         lilypondCodeStream);
+                              lpsr2lilypondTranslator (
+                                const S_msrOahGroup&  msrOpts,
+                                const S_lpsrOahGroup& lpsrOpts,
+                                std::ostream&         lilypondCodeStream);
 
-    virtual               ~lpsr2lilypondTranslator ();
+        virtual               ~lpsr2lilypondTranslator ();
 
-    void                  translateLpsrToLilypondCode (
-                            const S_lpsrScore& theLpsrScore);
+        void                  translateLpsrToLilypondCode (
+                                const S_lpsrScore& theLpsrScore);
 
   protected:
 
@@ -854,8 +854,10 @@ class EXP lpsr2lilypondTranslator :
     void                  generateNoteHead (
                             const S_msrNote& note);
 
-    void                  generateSegno (const S_msrSegno& segno);
-    void                  generateCoda (const S_msrCoda& coda);
+    void                  generateSegno (
+                            const S_msrSegno& segno);
+    void                  generateCoda (
+                            const S_msrCoda& coda);
 
     void                  generateCodeRightBeforeNote (
                             const S_msrNote& note);
@@ -1109,12 +1111,12 @@ class EXP lpsr2lilypondTranslator :
 
     void                  generateHeaderIdentificationPart (
                             const S_msrIdentification& identification,
-                            std::list<std::pair<std::string, std::string> >&
+                            std::list<std::pair<std::string, std::string>>&
                                                        nameStringValuePairsList);
 
     void                  createLilypondHeaderStringValuePairs (
                             const S_lpsrHeader& header,
-                            std::list<std::pair<std::string, std::string> >&
+                            std::list<std::pair<std::string, std::string>>&
                                                 nameStringValuePairsList);
 
     std::string           generateStringAsLilypondMarkupOrDoubleQuotedString (
@@ -1126,12 +1128,12 @@ class EXP lpsr2lilypondTranslator :
 
     void                  fetchLengthValuesFromPaperPageSize (
                             const S_lpsrPaper& paper,
-                            std::list<std::pair<std::string, msrLength> >&
+                            std::list<std::pair<std::string, msrLength>>&
                                                nameLengthValuePairsList);
 
     void                  fetchOnOffValuesFromLpsrOptionsGroup (
                             const S_lpsrPaper& paper,
-                            std::list<std::pair<std::string, Bool> >&
+                            std::list<std::pair<std::string, Bool>>&
                                                nameBooleanValuePairsList);
 
     void                  generatePaperPageSize (
@@ -1239,25 +1241,25 @@ class EXP lpsr2lilypondTranslator :
     Bool                  fOnGoingExtend;
 
     void                  generateSyllableDescripionAsComment (
-                            S_msrSyllable& syllable);
+                            const S_msrSyllable& syllable);
 
     void                  generateLilypondCodeForSyllable (
-                            S_msrSyllable& syllable);
+                            const S_msrSyllable& syllable);
 
     void                  generateCodeBeforeSyllableIfRelevant (
-                            S_msrSyllable& syllable);
+                            const S_msrSyllable& syllable);
 
     void                  generateCodeAfterSyllableIfRelevant (
-                            S_msrSyllable& syllable);
+                            const S_msrSyllable& syllable);
 
     void                  generateLyricExtenderAndOrSkipWithAutomaticDurations (
-                            S_msrSyllable& syllable);
+                            const S_msrSyllable& syllable);
 
     void                  generateLyricExtenderAndOrSkipWithImplicitDurations (
-                            S_msrSyllable& syllable);
+                            const S_msrSyllable& syllable);
 
     void                  generateLyricExtenderAndOrSkipWithExplicitDurations (
-                            S_msrSyllable& syllable);
+                            const S_msrSyllable& syllable);
 
     // octaves entry
     // ------------------------------------------------------
@@ -1327,8 +1329,10 @@ class EXP lpsr2lilypondTranslator :
 
     void                  generateCodeRightBeforeChordContents (
                             const S_msrChord& chord);
+
     void                  generateCodeForChordInGraceNotesGroupContents (
                             const S_msrChord& chord);
+
     void                  generateCodeRightAfterChordContents (
                             const S_msrChord& chord);
 
@@ -1338,7 +1342,7 @@ class EXP lpsr2lilypondTranslator :
 
     // tuplets
     // ------------------------------------------------------
-// JMI     S_msrTuplet          fCurrentMsrTupletClone;
+// JMI     const S_msrTuplet&          fCurrentMsrTupletClone; JMI v0.9.79
     std::list<S_msrTuplet>
                           fOnGoingTupletsStack;
 

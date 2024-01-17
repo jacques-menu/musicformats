@@ -22,7 +22,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 template <typename ELEMENT_TYPE>
-SMARTP<mfStack<ELEMENT_TYPE> > mfStack<ELEMENT_TYPE>::create ()
+SMARTP<mfStack<ELEMENT_TYPE>> mfStack<ELEMENT_TYPE>::create ()
 {
   mfStack<ELEMENT_TYPE>* obj = new
     mfStack<ELEMENT_TYPE> ();
@@ -31,7 +31,7 @@ SMARTP<mfStack<ELEMENT_TYPE> > mfStack<ELEMENT_TYPE>::create ()
 }
 
 template <typename ELEMENT_TYPE>
-SMARTP<mfStack<ELEMENT_TYPE> > mfStack<ELEMENT_TYPE>::create (
+SMARTP<mfStack<ELEMENT_TYPE>> mfStack<ELEMENT_TYPE>::create (
 	const ELEMENT_TYPE& element)
 {
   mfStack<ELEMENT_TYPE>* obj = new
@@ -165,7 +165,7 @@ std::ostream& operator << (std::ostream& os, const mfStack<ELEMENT_TYPE>& elt)
 }
 
 template <typename ELEMENT_TYPE>
-std::ostream& operator << (std::ostream& os, const SMARTP<mfStack<ELEMENT_TYPE> >& elt)
+std::ostream& operator << (std::ostream& os, const SMARTP<mfStack<ELEMENT_TYPE>>& elt)
 {
   elt->print (os);
   return os;

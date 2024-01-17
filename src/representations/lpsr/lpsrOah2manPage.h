@@ -23,13 +23,13 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP lpsrOah2manPage : virtual public oah2manPage,
 
-// JMI  public visitor<S_lpsrScoreOutputKindAtom>,
+// JMI  public                      visitor<S_lpsrScoreOutputKindAtom>,
 
-  public visitor<S_lpsrPitchesLanguageAtom>,
+  public                      visitor<S_lpsrPitchesLanguageAtom>,
 
-  public visitor<S_lpsrChordsLanguageAtom>,
+  public                      visitor<S_lpsrChordsLanguageAtom>,
 
-  public visitor<S_lpsrTransposeAtom>
+  public                      visitor<S_lpsrTransposeAtom>
 
 {
   public:

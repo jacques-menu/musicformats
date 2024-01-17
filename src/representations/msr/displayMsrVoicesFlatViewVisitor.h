@@ -37,44 +37,44 @@ std::ostream& operator << (std::ostream& os, const msrVoicesFlatViewDetailedKind
 //________________________________________________________________________
 class EXP displayMsrVoicesFlatViewVisitor :
 
-  public visitor<S_msrScore>,
+  public                      visitor<S_msrScore>,
 
   // parts & part groups
 
-  public visitor<S_msrPartGroup>,
+  public                      visitor<S_msrPartGroup>,
 
-  public visitor<S_msrPart>,
+  public                      visitor<S_msrPart>,
 
   // staves
 
-  public visitor<S_msrStaff>,
+  public                      visitor<S_msrStaff>,
 
-  public visitor<S_msrVoice>,
+  public                      visitor<S_msrVoice>,
 
   // clef, key, time signature
 
-  public visitor<S_msrClef>,
-  public visitor<S_msrKey>,
-  public visitor<S_msrTimeSignature>,
+  public                      visitor<S_msrClef>,
+  public                      visitor<S_msrKey>,
+  public                      visitor<S_msrTimeSignature>,
 
-  public visitor<S_msrSegment>,
+  public                      visitor<S_msrSegment>,
 
-  public visitor<S_msrMeasure>,
+  public                      visitor<S_msrMeasure>,
 
-  public visitor<S_msrNote>,
+  public                      visitor<S_msrNote>,
 
-  public visitor<S_msrChord>,
+  public                      visitor<S_msrChord>,
 
-  public visitor<S_msrTuplet>,
+  public                      visitor<S_msrTuplet>,
 
-  public visitor<S_msrBarLine>,
-  public visitor<S_msrBarNumberCheck>,
-  public visitor<S_msrLineBreak>,
+  public                      visitor<S_msrBarLine>,
+  public                      visitor<S_msrBarNumberCheck>,
+  public                      visitor<S_msrLineBreak>,
 
-  public visitor<S_msrRepeat>,
+  public                      visitor<S_msrRepeat>,
 
-  public visitor<S_msrScaling>,
-  public visitor<S_msrPageLayout>
+  public                      visitor<S_msrScaling>,
+  public                      visitor<S_msrPageLayout>
 
 {
   public:

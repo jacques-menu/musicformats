@@ -69,7 +69,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   const S_oahHandler& handler)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
+  if (gGlobalMxsrOahGroup->getDisplayMxsr ()) {
     std::stringstream ss;
 
     ss <<

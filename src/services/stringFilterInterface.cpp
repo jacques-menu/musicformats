@@ -45,35 +45,39 @@
 namespace MusicFormats
 {
 
-// //_______________________________________________________________________________
-// #ifndef WIN32
-//
-// static void _sigaction (int signal, siginfo_t *si, void *arg)
-// {
-//   std::cerr << "Signal #" << signal << " catched!" << std::endl;
-//   exit (-2);
-// }
-//
-// static void catchSignals ()
-// {
-//   struct sigaction sa;
-//
-//   memset (&sa, 0, sizeof(struct sigaction));
-//
-//   sigemptyset (&sa.sa_mask);
-//
-//   sa.sa_sigaction = _sigaction;
-//   sa.sa_flags     = SA_SIGINFO;
-//
-//   sigaction (SIGSEGV, &sa, NULL);
-//   sigaction (SIGILL, &sa, NULL);
-//   sigaction (SIGFPE, &sa, NULL);
-// }
-//
-// #else
-// static void catchSignals ()  {}
-// #endif // WIN32
-//
+//_______________________________________________________________________________
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+
+#ifndef WIN32
+
+static void _sigaction (int signal, siginfo_t *si, void *arg)
+{
+  std::cerr << "Signal #" << signal << " catched!" << std::endl;
+  exit (-2);
+}
+
+static void catchSignals ()
+{
+  struct sigaction sa;
+
+  memset (&sa, 0, sizeof(struct sigaction));
+
+  sigemptyset (&sa.sa_mask);
+
+  sa.sa_sigaction = _sigaction;
+  sa.sa_flags     = SA_SIGINFO;
+
+  sigaction (SIGSEGV, &sa, NULL);
+  sigaction (SIGILL, &sa, NULL);
+  sigaction (SIGFPE, &sa, NULL);
+}
+
+#else
+static void catchSignals ()  {}
+#endif // WIN32
+
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
+
 //_______________________________________________________________________________
 mfMusicformatsErrorKind executeStringFilter (
   const std::string& stringFilterExpressionString,
@@ -114,7 +118,9 @@ EXP int stringfilter (
   // setup signals catching
   // ------------------------------------------------------
 
-// JMI  catchSignals ();
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+  catchSignals ();
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
 
   // the service name
   // ------------------------------------------------------

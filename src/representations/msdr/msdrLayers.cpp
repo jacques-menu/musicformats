@@ -213,7 +213,7 @@ void msdrLayer::browseData (basevisitor* v)
       i != fMusicStanzasMap.end ();
       ++i
     ) {
-      const S_msrStanza& stanza = (*i).second;
+      S_msrStanza stanza = (*i).second;
 
       if (stanza->getStanzaTextPresent ()) {
         // browse the stanza

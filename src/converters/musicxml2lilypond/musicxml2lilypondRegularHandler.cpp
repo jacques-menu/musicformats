@@ -285,6 +285,7 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-lpsr-measures-slices-details", subGroup);
 
 #ifdef MF_TRACE_IS_ENABLED
+  registerAtomInRegularSubgroup ("display-mxsr", subGroup);
   registerAtomInRegularSubgroup ("trace-mxsr", subGroup);
   registerAtomInRegularSubgroup ("trace-mxsr-visitors", subGroup);
 

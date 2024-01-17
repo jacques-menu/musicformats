@@ -4917,6 +4917,109 @@ void msrHarmony::browseData (basevisitor* v)
   }
 }
 
+std::string msrHarmony::asShortString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[Harmony" <<
+//     ", " << std::hex << std::showbase << this << std::dec << // JMI HEX ADDRESS
+    ", fHarmonyRootQuarterTonesPitchKind: " <<
+    msrQuarterTonesPitchKindAsStringInLanguage (
+      fHarmonyRootQuarterTonesPitchKind,
+      gMsrOahGroup->
+        getMsrQuarterTonesPitchesLanguageKind ());
+
+  ss <<
+    ", fHarmonyKindText: \"" <<
+    fHarmonyKindText << "\"";
+
+  ss <<
+    ", fHarmonyKind: " <<
+    fHarmonyKind;
+
+  ss <<
+    ", fHarmonyFunctionText: \"" <<
+    fHarmonyFunctionText << "\"";
+
+  ss <<
+    ", fHarmonyWholeNotesOffset: " <<
+    fHarmonyWholeNotesOffset.asString ();
+
+  ss <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
+    ", fHarmonyDisplayWholeNotes: " <<
+    fHarmonyDisplayWholeNotes.asFractionString () <<
+
+    ", fMeasureElementMeasurePosition: " <<
+    fMeasureElementMeasurePosition.asString ();
+
+  ss <<
+    ", fHarmonyInversion: ";
+  if (fHarmonyInversion == K_HARMONY_INVERSION_NONE) {
+    ss << "[NONE]";
+  }
+  else {
+    ss << fHarmonyInversion;
+  }
+
+  if (fHarmonyBassQuarterTonesPitchKind != msrQuarterTonesPitchKind::kQTP_UNKNOWN_) {
+    ss <<
+      ", fHarmonyBassQuarterTonesPitchKind: " <<
+    msrQuarterTonesPitchKindAsStringInLanguage (
+      fHarmonyBassQuarterTonesPitchKind,
+      gMsrOahGroup->
+        getMsrQuarterTonesPitchesLanguageKind ());
+  }
+
+  if (fHarmonyDegreesList.size ()) {
+    ss <<
+      ", fHarmonyDegreesList: [";
+
+    std::list<S_msrHarmonyDegree>::const_iterator
+      iBegin = fHarmonyDegreesList.begin (),
+      iEnd   = fHarmonyDegreesList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      ss << (*i)->asString ();
+      if (++i == iEnd) break;
+      ss << ' ';
+    } // for
+
+    ss << ']';
+  }
+
+//   // print the harmonies staff number
+//   ss <<
+//     ", fHarmoniesStaffNumber: ";
+//   if (fHarmoniesStaffNumber == K_STAFF_NUMBER_UNKNOWN_)
+//     ss << "[K_STAFF_NUMBER_UNKNOWN_]";
+//   else
+//     ss << fHarmoniesStaffNumber;
+
+  // print the harmony tuplet factor
+  ss <<
+    ", fHarmonyTupletFactor: " <<
+    fHarmonyTupletFactor;
+
+  // print the harmony frame
+  ss << ", fHarmonyFrame: ";
+  if (fHarmonyFrame) {
+    ss << fHarmonyFrame;
+  }
+  else {
+    ss << "[NULL]";
+  }
+
+  ss <<
+    ", line " << fInputStartLineNumber <<
+    ']';
+
+  return ss.str ();
+}
+
 std::string msrHarmony::asString () const
 {
   std::stringstream ss;
@@ -4973,6 +5076,7 @@ std::string msrHarmony::asString () const
     ss << "[NULL]";
   }
 
+  // print the harmony uplink to measure
   ss <<
     ", fMeasureElementUpLinkToMeasure: ";
     if (fMeasureElementUpLinkToMeasure) {

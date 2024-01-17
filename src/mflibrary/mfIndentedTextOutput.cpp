@@ -491,7 +491,7 @@ EXP mfIndentedStringStream& operator << (
 //______________________________________________________________________________
 // code taken from:
 // http://comp.lang.cpp.moderated.narkive.com/fylLGJgp/redirect-output-to-dev-null
-template<typename Ch, typename Traits = std::char_traits<Ch> >
+template<typename Ch, typename Traits = std::char_traits<Ch>>
 struct basic_nullbuf : std::basic_streambuf<Ch, Traits>
 {
   typedef std::basic_streambuf<Ch, Traits> base_type;

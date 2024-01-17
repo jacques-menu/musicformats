@@ -30,37 +30,37 @@ class EXP bsr2bsrFinalizer :
 
   // BSR score
 
-  public visitor<S_bsrScore>,
+  public                      visitor<S_bsrScore>,
 
-  public visitor<S_bsrSpaces>,
+  public                      visitor<S_bsrSpaces>,
 
-  public visitor<S_bsrBarLine>,
+  public                      visitor<S_bsrBarLine>,
 
-  public visitor<S_bsrTranscriptionNotes>,
-  public visitor<S_bsrTranscriptionNotesElement>,
+  public                      visitor<S_bsrTranscriptionNotes>,
+  public                      visitor<S_bsrTranscriptionNotesElement>,
 
-  public visitor<S_bsrPage>,
+  public                      visitor<S_bsrPage>,
 
-  public visitor<S_bsrPageHeading>,
-  public visitor<S_bsrMusicHeading>,
+  public                      visitor<S_bsrPageHeading>,
+  public                      visitor<S_bsrMusicHeading>,
 
-  public visitor<S_bsrFootNotes>,
+  public                      visitor<S_bsrFootNotes>,
 
-  public visitor<S_bsrLine>,
-  public visitor<S_bsrLineContents>,
+  public                      visitor<S_bsrLine>,
+  public                      visitor<S_bsrLineContents>,
 
-  public visitor<S_bsrMeasure>,
+  public                      visitor<S_bsrMeasure>,
 
-  public visitor<S_bsrNumber>,
-  public visitor<S_bsrWords>,
+  public                      visitor<S_bsrNumber>,
+  public                      visitor<S_bsrWords>,
 
-  public visitor<S_bsrClef>,
-  public visitor<S_bsrKey>,
-  public visitor<S_bsrTimeSignature>,
+  public                      visitor<S_bsrClef>,
+  public                      visitor<S_bsrKey>,
+  public                      visitor<S_bsrTimeSignature>,
 
-  public visitor<S_bsrTempo>,
+  public                      visitor<S_bsrTempo>,
 
-  public visitor<S_bsrNote>
+  public                      visitor<S_bsrNote>
 
 {
   public:

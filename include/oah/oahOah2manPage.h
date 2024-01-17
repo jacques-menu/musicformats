@@ -23,7 +23,7 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP oahOah2manPage : virtual public oah2manPage,
 
-  public visitor<S_oahOptionalValuesStyleKindAtom>
+  public                      visitor<S_oahOptionalValuesStyleKindAtom>
 
 {
   public:

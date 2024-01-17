@@ -821,7 +821,7 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::list<std::pair<std::string, std::string> >&
+                            std::list<std::pair<std::string, std::string>>&
                                                lilypondChordsDisplayVariable);
 
   protected:
@@ -835,7 +835,7 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::list<std::pair<std::string, std::string> >&
+                            std::list<std::pair<std::string, std::string>>&
                                                lilypondChordsDisplayVariable);
 
     virtual               ~lilypondChordsDisplayAtom ();
@@ -851,7 +851,7 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
                                 fStringsPairListVariable.push_back (value);
                               }
 
-    const std::list<std::pair<std::string, std::string> >&
+    const std::list<std::pair<std::string, std::string>>&
                           getStringsPairListVariable () const
                               { return fStringsPairListVariable; }
 
@@ -893,7 +893,7 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::list<std::pair<std::string, std::string> >&
+    std::list<std::pair<std::string, std::string>>&
                           fStringsPairListVariable;
 };
 typedef SMARTP<lilypondChordsDisplayAtom> S_lilypondChordsDisplayAtom;
@@ -1589,7 +1589,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // chords display
     // --------------------------------------
 
-    const std::list<std::pair<std::string, std::string> >&
+    const std::list<std::pair<std::string, std::string>>&
                           getChordsDisplayList () const
                               { return fChordsDisplayList; }
 
@@ -2131,7 +2131,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // chords display
     // --------------------------------------
 
-    std::list<std::pair<std::string, std::string> >
+    std::list<std::pair<std::string, std::string>>
                           fChordsDisplayList;
 
     Bool                  fJazzChordsDisplay;

@@ -23,23 +23,23 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP lpsr2lilypondOah2manPage : virtual public oah2manPage,
 
-  public visitor<S_lilypondScoreOutputKindAtom>,
+  public                      visitor<S_lilypondScoreOutputKindAtom>,
 
-  public visitor<S_lilypondTransposePartNameAtom>,
+  public                      visitor<S_lilypondTransposePartNameAtom>,
 
-  public visitor<S_lilypondAbsoluteOctaveEntryAtom>,
+  public                      visitor<S_lilypondAbsoluteOctaveEntryAtom>,
 
-  public visitor<S_lilypondRelativeOctaveEntryAtom>,
+  public                      visitor<S_lilypondRelativeOctaveEntryAtom>,
 
-  public visitor<S_lilypondFixedOctaveEntryAtom>,
+  public                      visitor<S_lilypondFixedOctaveEntryAtom>,
 
-  public visitor<S_lilypondAccidentalStyleKindAtom>,
+  public                      visitor<S_lilypondAccidentalStyleKindAtom>,
 
-  public visitor<S_lilypondChordsDisplayAtom>,
+  public                      visitor<S_lilypondChordsDisplayAtom>,
 
-  public visitor<S_lilypondLyricsNotesDurationsKindAtom>,
+  public                      visitor<S_lilypondLyricsNotesDurationsKindAtom>,
 
-  public visitor<S_oahMidiTempoAtom>
+  public                      visitor<S_oahMidiTempoAtom>
 
 {
   public:

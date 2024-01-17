@@ -5046,7 +5046,7 @@ void oahCombinedBooleansAtom::browseData (basevisitor* v)
       i != fBooleanAtomsList.end ();
       ++i
     ) {
-      const S_oahBooleanAtom& booleanAtom = (*i);
+      S_oahBooleanAtom booleanAtom = (*i);
 
       // browse the boolean atom
       oahBrowser<oahBooleanAtom> browser (v);
@@ -5173,7 +5173,7 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
       i      = iBegin;
 
     for ( ; ; ) {
-      const S_oahBooleanAtom& booleanAtom = (*i);
+      S_oahBooleanAtom booleanAtom = (*i);
 
       os <<
         booleanAtom-> fetchNames () <<
@@ -7556,7 +7556,7 @@ void oahCommonPrefixBooleansAtom::browseData (basevisitor* v)
       i != fBooleanAtomsList.end ();
       ++i
     ) {
-      const S_oahBooleanAtom& booleanAtom = (*i);
+      S_oahBooleanAtom booleanAtom = (*i);
 
       // browse the boolean atom
       oahBrowser<oahBooleanAtom> browser (v);

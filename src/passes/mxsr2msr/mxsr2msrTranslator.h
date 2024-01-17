@@ -79,16 +79,16 @@ class mxsr2msrVoiceHandler : public smartable
                               { fTupletsStack.push_front (tuplet); }
 
     void                  handleTupletStartByHandler (
-                            S_msrTuplet tuplet,
-                            S_msrVoice  currentNoteVoice);
+                            const S_msrTuplet& tuplet,
+                            const S_msrVoice&  currentNoteVoice);
 
     void                  handleTupletContinueByHandler (
-                            S_msrNote   note,
-                            S_msrVoice  currentNoteVoice);
+                            const S_msrNote&   note,
+                            const S_msrVoice&  currentNoteVoice);
 
     void                  handleTupletStopByHandler (
-                            S_msrNote   note,
-                            S_msrVoice  currentNoteVoice);
+                            const S_msrNote&   note,
+                            const S_msrVoice&  currentNoteVoice);
 
     void                  finalizeTupletStackTopAndPopItFromTupletsStack (
                             int         inputLineNumber,
@@ -158,504 +158,504 @@ class EXP mxsr2msrTranslator :
   // MXSR score partwise
   // ------------------------------------------------------
 
-  public visitor<S_score_partwise>,
+  public                      visitor<S_score_partwise>,
 
   // scaling
   // ------------------------------------------------------
 
-  public visitor<S_scaling>,
-  public visitor<S_millimeters>,
-  public visitor<S_tenths>,
+  public                      visitor<S_scaling>,
+  public                      visitor<S_millimeters>,
+  public                      visitor<S_tenths>,
 
   // layout
   // ------------------------------------------------------
 
-  public visitor<S_page_layout>,
-  public visitor<S_page_height>,
-  public visitor<S_page_width>,
-  public visitor<S_page_margins>,
+  public                      visitor<S_page_layout>,
+  public                      visitor<S_page_height>,
+  public                      visitor<S_page_width>,
+  public                      visitor<S_page_margins>,
 
-  public visitor<S_left_margin>,
-  public visitor<S_right_margin>,
-  public visitor<S_top_margin>,
-  public visitor<S_bottom_margin>,
+  public                      visitor<S_left_margin>,
+  public                      visitor<S_right_margin>,
+  public                      visitor<S_top_margin>,
+  public                      visitor<S_bottom_margin>,
 
-  public visitor<S_system_layout>,
-  public visitor<S_system_margins>,
-  public visitor<S_system_distance>,
-  public visitor<S_top_system_distance>,
+  public                      visitor<S_system_layout>,
+  public                      visitor<S_system_margins>,
+  public                      visitor<S_system_distance>,
+  public                      visitor<S_top_system_distance>,
 
-  public visitor<S_staff_layout>,
-  public visitor<S_staff_distance>,
+  public                      visitor<S_staff_layout>,
+  public                      visitor<S_staff_distance>,
 
-  public visitor<S_measure_layout>,
-  public visitor<S_measure_distance>,
+  public                      visitor<S_measure_layout>,
+  public                      visitor<S_measure_distance>,
 
   // appearance
   // ------------------------------------------------------
 
-  public visitor<S_appearance>,
-  public visitor<S_line_width>,
-  public visitor<S_note_size>,
-  public visitor<S_distance>,
-  public visitor<S_glyph>,
-  public visitor<S_other_appearance>,
+  public                      visitor<S_appearance>,
+  public                      visitor<S_line_width>,
+  public                      visitor<S_note_size>,
+  public                      visitor<S_distance>,
+  public                      visitor<S_glyph>,
+  public                      visitor<S_other_appearance>,
 
   // system dividers
   // ------------------------------------------------------
 
-  public visitor<S_system_dividers>,
-  public visitor<S_left_divider>,
-  public visitor<S_right_divider>,
+  public                      visitor<S_system_dividers>,
+  public                      visitor<S_left_divider>,
+  public                      visitor<S_right_divider>,
 
   // notations
   // ------------------------------------------------------
 
-  public visitor<S_notations>,
-  public visitor<S_other_notation>,
+  public                      visitor<S_notations>,
+  public                      visitor<S_other_notation>,
 
   // groups
   // ------------------------------------------------------
 
-  public visitor<S_group>,
-  public visitor<S_group_name>,
-  public visitor<S_group_abbreviation>,
-  public visitor<S_group_abbreviation_display>,
+  public                      visitor<S_group>,
+  public                      visitor<S_group_name>,
+  public                      visitor<S_group_abbreviation>,
+  public                      visitor<S_group_abbreviation_display>,
 
   // parts
   // ------------------------------------------------------
 
-  public visitor<S_part>,
-  public visitor<S_part_abbreviation>,
-  public visitor<S_part_abbreviation_display>,
-  public visitor<S_part_symbol>,
+  public                      visitor<S_part>,
+  public                      visitor<S_part_abbreviation>,
+  public                      visitor<S_part_abbreviation_display>,
+  public                      visitor<S_part_symbol>,
 
   // JMI ??? v0.9.67
   // ------------------------------------------------------
 
-  public visitor<S_attributes>,
+  public                      visitor<S_attributes>,
 
-  public visitor<S_divisions>,
+  public                      visitor<S_divisions>,
 
-  public visitor<S_staves>,
-  public visitor<S_staff>,
+  public                      visitor<S_staves>,
+  public                      visitor<S_staff>,
 
   // staff details
   // ------------------------------------------------------
 
-  public visitor<S_staff_details>,
-  public visitor<S_staff_type>,
-  public visitor<S_staff_lines>,
-  public visitor<S_staff_tuning>,
-  public visitor<S_tuning_step>,
-  public visitor<S_tuning_octave>,
-  public visitor<S_tuning_alter>,
-  public visitor<S_capo>,
-  public visitor<S_staff_size>,
+  public                      visitor<S_staff_details>,
+  public                      visitor<S_staff_type>,
+  public                      visitor<S_staff_lines>,
+  public                      visitor<S_staff_tuning>,
+  public                      visitor<S_tuning_step>,
+  public                      visitor<S_tuning_octave>,
+  public                      visitor<S_tuning_alter>,
+  public                      visitor<S_capo>,
+  public                      visitor<S_staff_size>,
 
   // ???
   // ------------------------------------------------------
 
-  public visitor<S_voice>,
+  public                      visitor<S_voice>,
 
   // backup & forward
   // ------------------------------------------------------
 
-  public visitor<S_backup>,
-  public visitor<S_forward>,
+  public                      visitor<S_backup>,
+  public                      visitor<S_forward>,
 
   // clefs
   // ------------------------------------------------------
 
-  public visitor<S_clef>,
-  public visitor<S_sign>,
-  public visitor<S_line>,
-  public visitor<S_clef_octave_change>,
+  public                      visitor<S_clef>,
+  public                      visitor<S_sign>,
+  public                      visitor<S_line>,
+  public                      visitor<S_clef_octave_change>,
 
   // keys
   // ------------------------------------------------------
 
-  public visitor<S_key>,
-  public visitor<S_cancel>,
-  public visitor<S_fifths>,
-  public visitor<S_mode>,
-  public visitor<S_key_step>,
-  public visitor<S_key_alter>,
-  public visitor<S_key_octave>,
+  public                      visitor<S_key>,
+  public                      visitor<S_cancel>,
+  public                      visitor<S_fifths>,
+  public                      visitor<S_mode>,
+  public                      visitor<S_key_step>,
+  public                      visitor<S_key_alter>,
+  public                      visitor<S_key_octave>,
 
   // time signatures
   // ------------------------------------------------------
 
-  public visitor<S_time>,
-  public visitor<S_beats>,
-  public visitor<S_beat_type>,
-  public visitor<S_senza_misura>,
+  public                      visitor<S_time>,
+  public                      visitor<S_beats>,
+  public                      visitor<S_beat_type>,
+  public                      visitor<S_senza_misura>,
 
-  public visitor<S_interchangeable>,
-  public visitor<S_time_relation>,
+  public                      visitor<S_interchangeable>,
+  public                      visitor<S_time_relation>,
 
   // instruments
   // ------------------------------------------------------
 
-  public visitor<S_score_instrument>,
-  public visitor<S_instrument_name>,
-  public visitor<S_solo>,
-  public visitor<S_instruments>,
+  public                      visitor<S_score_instrument>,
+  public                      visitor<S_instrument_name>,
+  public                      visitor<S_solo>,
+  public                      visitor<S_instruments>,
 
   // transposition
   // ------------------------------------------------------
 
-  public visitor<S_transpose>,
-  public visitor<S_diatonic>,
-  public visitor<S_chromatic>,
-  public visitor<S_octave_change>,
-  public visitor<S_double>,
+  public                      visitor<S_transpose>,
+  public                      visitor<S_diatonic>,
+  public                      visitor<S_chromatic>,
+  public                      visitor<S_octave_change>,
+  public                      visitor<S_double>,
 
   // directions
   // ------------------------------------------------------
 
-  public visitor<S_direction>,
-  public visitor<S_direction_type>,
-  public visitor<S_offset>,
+  public                      visitor<S_direction>,
+  public                      visitor<S_direction_type>,
+  public                      visitor<S_offset>,
 
-  public visitor<S_words>,
+  public                      visitor<S_words>,
 
-  public visitor<S_octave_shift>,
+  public                      visitor<S_octave_shift>,
 
-  public visitor<S_scordatura>,
-  public visitor<S_accord>,
+  public                      visitor<S_scordatura>,
+  public                      visitor<S_accord>,
 
   // tempo
   // ------------------------------------------------------
 
-  public visitor<S_metronome>,
-  public visitor<S_beat_unit>,
-  public visitor<S_beat_unit_dot>,
-  public visitor<S_per_minute>,
-  public visitor<S_metronome_note>,
-  public visitor<S_metronome_relation>,
-  public visitor<S_metronome_type>,
-  public visitor<S_metronome_beam>,
-  public visitor<S_metronome_dot>,
-  public visitor<S_metronome_tuplet>,
-  public visitor<S_normal_dot>,
+  public                      visitor<S_metronome>,
+  public                      visitor<S_beat_unit>,
+  public                      visitor<S_beat_unit_dot>,
+  public                      visitor<S_per_minute>,
+  public                      visitor<S_metronome_note>,
+  public                      visitor<S_metronome_relation>,
+  public                      visitor<S_metronome_type>,
+  public                      visitor<S_metronome_beam>,
+  public                      visitor<S_metronome_dot>,
+  public                      visitor<S_metronome_tuplet>,
+  public                      visitor<S_normal_dot>,
 
   // ties, slurs, brackets & beams
   // ------------------------------------------------------
 
-  public visitor<S_tied>,
-  public visitor<S_slur>,
-  public visitor<S_bracket>,
-  public visitor<S_beam>,
+  public                      visitor<S_tied>,
+  public                      visitor<S_slur>,
+  public                      visitor<S_bracket>,
+  public                      visitor<S_beam>,
 
   // lyrics
   // ------------------------------------------------------
 
-  public visitor<S_lyric>,
-  public visitor<S_syllabic>,
-  public visitor<S_text>,
-  public visitor<S_elision>,
-  public visitor<S_extend>,
+  public                      visitor<S_lyric>,
+  public                      visitor<S_syllabic>,
+  public                      visitor<S_text>,
+  public                      visitor<S_elision>,
+  public                      visitor<S_extend>,
 
   // harmonies
   // ------------------------------------------------------
 
-  public visitor<S_degree>,
-  public visitor<S_degree_value>,
-  public visitor<S_degree_alter>,
-  public visitor<S_degree_type>,
+  public                      visitor<S_degree>,
+  public                      visitor<S_degree_value>,
+  public                      visitor<S_degree_alter>,
+  public                      visitor<S_degree_type>,
 
-  public visitor<S_harmony>,
-  public visitor<S_root>,
-  public visitor<S_root_step>,
-  public visitor<S_root_alter>,
-  public visitor<S_function>,
-  public visitor<S_kind>,
-  public visitor<S_inversion>,
+  public                      visitor<S_harmony>,
+  public                      visitor<S_root>,
+  public                      visitor<S_root_step>,
+  public                      visitor<S_root_alter>,
+  public                      visitor<S_function>,
+  public                      visitor<S_kind>,
+  public                      visitor<S_inversion>,
 
-  public visitor<S_bass>,
-  public visitor<S_bass_step>,
-  public visitor<S_bass_alter>,
+  public                      visitor<S_bass>,
+  public                      visitor<S_bass_step>,
+  public                      visitor<S_bass_alter>,
 
-  public visitor<S_numeral>,
-  public visitor<S_numeral_root>,
-  public visitor<S_numeral_alter>,
-  public visitor<S_numeral_key>,
+  public                      visitor<S_numeral>,
+  public                      visitor<S_numeral_root>,
+  public                      visitor<S_numeral_alter>,
+  public                      visitor<S_numeral_key>,
 
   // frames
   // ------------------------------------------------------
 
-  public visitor<S_frame>,
-  public visitor<S_frame_strings>,
-  public visitor<S_frame_frets>,
-  public visitor<S_first_fret>,
-  public visitor<S_frame_note>,
-  public visitor<S_barre>,
+  public                      visitor<S_frame>,
+  public                      visitor<S_frame_strings>,
+  public                      visitor<S_frame_frets>,
+  public                      visitor<S_first_fret>,
+  public                      visitor<S_frame_note>,
+  public                      visitor<S_barre>,
 
   // figured bass
   // ------------------------------------------------------
 
-  public visitor<S_figured_bass>,
-  public visitor<S_figure>,
-  public visitor<S_prefix>,
-  public visitor<S_figure_number>,
-  public visitor<S_suffix>,
+  public                      visitor<S_figured_bass>,
+  public                      visitor<S_figure>,
+  public                      visitor<S_prefix>,
+  public                      visitor<S_figure_number>,
+  public                      visitor<S_suffix>,
 
   // measures
   // ------------------------------------------------------
 
-  public visitor<S_measure>,
-  public visitor<S_measure_numbering>,
+  public                      visitor<S_measure>,
+  public                      visitor<S_measure_numbering>,
 
 
   // printing
   // ------------------------------------------------------
 
-  public visitor<S_print>,
+  public                      visitor<S_print>,
 
   // ???
   // ------------------------------------------------------
 
-  public visitor<S_barline>,
-  public visitor<S_segno>,
-  public visitor<S_coda>,
-  public visitor<S_eyeglasses>,
-  public visitor<S_pedal>,
-  public visitor<S_bar_style>,
-  public visitor<S_repeat>,
-  public visitor<S_ending>,
+  public                      visitor<S_barline>,
+  public                      visitor<S_segno>,
+  public                      visitor<S_coda>,
+  public                      visitor<S_eyeglasses>,
+  public                      visitor<S_pedal>,
+  public                      visitor<S_bar_style>,
+  public                      visitor<S_repeat>,
+  public                      visitor<S_ending>,
 
   // notes
   // ------------------------------------------------------
 
-  public visitor<S_note>,
-  public visitor<S_step>,
-  public visitor<S_alter>,
-  public visitor<S_octave>,
-  public visitor<S_duration>,
-  public visitor<S_instrument>,
-  public visitor<S_dot>,
+  public                      visitor<S_note>,
+  public                      visitor<S_step>,
+  public                      visitor<S_alter>,
+  public                      visitor<S_octave>,
+  public                      visitor<S_duration>,
+  public                      visitor<S_instrument>,
+  public                      visitor<S_dot>,
 
-  public visitor<S_rest>,
+  public                      visitor<S_rest>,
 
-  public visitor<S_unpitched>,
-  public visitor<S_display_step>,
-  public visitor<S_display_octave>,
+  public                      visitor<S_unpitched>,
+  public                      visitor<S_display_step>,
+  public                      visitor<S_display_octave>,
 
-  public visitor<S_stem>,
+  public                      visitor<S_stem>,
 
   // note heads
   // ------------------------------------------------------
 
-  public visitor<S_type>,
-  public visitor<S_notehead>,
-  public visitor<S_accidental>,
+  public                      visitor<S_type>,
+  public                      visitor<S_notehead>,
+  public                      visitor<S_accidental>,
 
   // repeats
   // ------------------------------------------------------
 
-  public visitor<S_measure_style>,
-  public visitor<S_beat_repeat>,
-  public visitor<S_measure_repeat>,
-  public visitor<S_multiple_rest>,
-  public visitor<S_slash>,
-  public visitor<S_slash_type>,
-  public visitor<S_slash_dot>,
+  public                      visitor<S_measure_style>,
+  public                      visitor<S_beat_repeat>,
+  public                      visitor<S_measure_repeat>,
+  public                      visitor<S_multiple_rest>,
+  public                      visitor<S_slash>,
+  public                      visitor<S_slash_type>,
+  public                      visitor<S_slash_dot>,
 
   // articulations
   // ------------------------------------------------------
 
-  public visitor<S_articulations>,
-  public visitor<S_accent>,
-  public visitor<S_breath_mark>,
-  public visitor<S_caesura>,
-  public visitor<S_spiccato>,
-  public visitor<S_staccato>,
-  public visitor<S_staccatissimo>,
-  public visitor<S_stress>,
-  public visitor<S_unstress>,
-  public visitor<S_detached_legato>,
-  public visitor<S_strong_accent>,
-  public visitor<S_tenuto>,
-  public visitor<S_fermata>,
-  public visitor<S_arpeggiate>,
-  public visitor<S_non_arpeggiate>,
-  public visitor<S_doit>,
-  public visitor<S_falloff>,
-  public visitor<S_plop>,
-  public visitor<S_scoop>,
+  public                      visitor<S_articulations>,
+  public                      visitor<S_accent>,
+  public                      visitor<S_breath_mark>,
+  public                      visitor<S_caesura>,
+  public                      visitor<S_spiccato>,
+  public                      visitor<S_staccato>,
+  public                      visitor<S_staccatissimo>,
+  public                      visitor<S_stress>,
+  public                      visitor<S_unstress>,
+  public                      visitor<S_detached_legato>,
+  public                      visitor<S_strong_accent>,
+  public                      visitor<S_tenuto>,
+  public                      visitor<S_fermata>,
+  public                      visitor<S_arpeggiate>,
+  public                      visitor<S_non_arpeggiate>,
+  public                      visitor<S_doit>,
+  public                      visitor<S_falloff>,
+  public                      visitor<S_plop>,
+  public                      visitor<S_scoop>,
 
   // technicals
   // ------------------------------------------------------
 
-  public visitor<S_technical>,
-  public visitor<S_arrow>,
-  public visitor<S_bend>,
-  public visitor<S_bend_alter>,
-  public visitor<S_double_tongue>,
-  public visitor<S_down_bow>,
-  public visitor<S_fingering>,
-  public visitor<S_fingernails>,
-  public visitor<S_fret>,
-  public visitor<S_hammer_on>,
-  public visitor<S_handbell>,
-  public visitor<S_harmonic>,
-  public visitor<S_heel>,
-  public visitor<S_hole>,
-  public visitor<S_open_string>,
-  public visitor<S_other_technical>,
-  public visitor<S_pluck>,
-  public visitor<S_pull_off>,
-  public visitor<S_snap_pizzicato>,
-  public visitor<S_stopped>,
-  public visitor<S_string>,
-  public visitor<S_tap>,
-  public visitor<S_thumb_position>,
-  public visitor<S_toe>,
-  public visitor<S_triple_tongue>,
-  public visitor<S_up_bow>,
+  public                      visitor<S_technical>,
+  public                      visitor<S_arrow>,
+  public                      visitor<S_bend>,
+  public                      visitor<S_bend_alter>,
+  public                      visitor<S_double_tongue>,
+  public                      visitor<S_down_bow>,
+  public                      visitor<S_fingering>,
+  public                      visitor<S_fingernails>,
+  public                      visitor<S_fret>,
+  public                      visitor<S_hammer_on>,
+  public                      visitor<S_handbell>,
+  public                      visitor<S_harmonic>,
+  public                      visitor<S_heel>,
+  public                      visitor<S_hole>,
+  public                      visitor<S_open_string>,
+  public                      visitor<S_other_technical>,
+  public                      visitor<S_pluck>,
+  public                      visitor<S_pull_off>,
+  public                      visitor<S_snap_pizzicato>,
+  public                      visitor<S_stopped>,
+  public                      visitor<S_string>,
+  public                      visitor<S_tap>,
+  public                      visitor<S_thumb_position>,
+  public                      visitor<S_toe>,
+  public                      visitor<S_triple_tongue>,
+  public                      visitor<S_up_bow>,
 
   // ornaments
   // ------------------------------------------------------
 
-  public visitor<S_ornaments>,
-  public visitor<S_trill_mark>,
-  public visitor<S_dashes>,
-  public visitor<S_wavy_line>,
-  public visitor<S_turn>,
-  public visitor<S_inverted_turn>,
-  public visitor<S_delayed_turn>,
-  public visitor<S_delayed_inverted_turn>,
-  public visitor<S_vertical_turn>,
-  public visitor<S_mordent>,
-  public visitor<S_inverted_mordent>,
-  public visitor<S_schleifer>,
-  public visitor<S_shake>,
-  public visitor<S_accidental_mark>,
+  public                      visitor<S_ornaments>,
+  public                      visitor<S_trill_mark>,
+  public                      visitor<S_dashes>,
+  public                      visitor<S_wavy_line>,
+  public                      visitor<S_turn>,
+  public                      visitor<S_inverted_turn>,
+  public                      visitor<S_delayed_turn>,
+  public                      visitor<S_delayed_inverted_turn>,
+  public                      visitor<S_vertical_turn>,
+  public                      visitor<S_mordent>,
+  public                      visitor<S_inverted_mordent>,
+  public                      visitor<S_schleifer>,
+  public                      visitor<S_shake>,
+  public                      visitor<S_accidental_mark>,
 
   // tremolos
   // ------------------------------------------------------
 
-  public visitor<S_tremolo>,
+  public                      visitor<S_tremolo>,
 
   // dynamics
   // ------------------------------------------------------
 
-  public visitor<S_f>,
-  public visitor<S_ff>,
-  public visitor<S_fff>,
-  public visitor<S_ffff>,
-  public visitor<S_fffff>,
-  public visitor<S_ffffff>,
+  public                      visitor<S_f>,
+  public                      visitor<S_ff>,
+  public                      visitor<S_fff>,
+  public                      visitor<S_ffff>,
+  public                      visitor<S_fffff>,
+  public                      visitor<S_ffffff>,
 
-  public visitor<S_p>,
-  public visitor<S_pp>,
-  public visitor<S_ppp>,
-  public visitor<S_pppp>,
-  public visitor<S_ppppp>,
-  public visitor<S_pppppp>,
+  public                      visitor<S_p>,
+  public                      visitor<S_pp>,
+  public                      visitor<S_ppp>,
+  public                      visitor<S_pppp>,
+  public                      visitor<S_ppppp>,
+  public                      visitor<S_pppppp>,
 
-  public visitor<S_mf>,
-  public visitor<S_mp>,
-  public visitor<S_fp>,
-  public visitor<S_fz>,
-  public visitor<S_pf>, // 3.1
+  public                      visitor<S_mf>,
+  public                      visitor<S_mp>,
+  public                      visitor<S_fp>,
+  public                      visitor<S_fz>,
+  public                      visitor<S_pf>, // 3.1
 
-  public visitor<S_rf>,
-  public visitor<S_sf>,
-  public visitor<S_rfz>,
-  public visitor<S_sfz>,
+  public                      visitor<S_rf>,
+  public                      visitor<S_sf>,
+  public                      visitor<S_rfz>,
+  public                      visitor<S_sfz>,
 
-  public visitor<S_sfp>,
-  public visitor<S_sfpp>,
-  public visitor<S_sffz>,
-  public visitor<S_sfzp>, // 3.1
+  public                      visitor<S_sfp>,
+  public                      visitor<S_sfpp>,
+  public                      visitor<S_sffz>,
+  public                      visitor<S_sfzp>, // 3.1
 
-  public visitor<S_n>, // niente, 3.1
+  public                      visitor<S_n>, // niente, 3.1
 
-  public visitor<S_other_dynamics>,
+  public                      visitor<S_other_dynamics>,
 
-  public visitor<S_wedge>,
+  public                      visitor<S_wedge>,
 
   // cue notes
   // ------------------------------------------------------
 
-  public visitor<S_cue>,
+  public                      visitor<S_cue>,
 
   // grace notes
   // ------------------------------------------------------
 
-  public visitor<S_grace>,
+  public                      visitor<S_grace>,
 
   // chords
   // ------------------------------------------------------
 
-  public visitor<S_chord>,
+  public                      visitor<S_chord>,
 
   // time signatures
   // ------------------------------------------------------
 
-  public visitor<S_time_modification>,
-  public visitor<S_actual_notes>,
-  public visitor<S_normal_notes>,
-  public visitor<S_normal_type>,
+  public                      visitor<S_time_modification>,
+  public                      visitor<S_actual_notes>,
+  public                      visitor<S_normal_notes>,
+  public                      visitor<S_normal_type>,
 
   // tuplets
   // ------------------------------------------------------
 
-  public visitor<S_tuplet>,
-  public visitor<S_tuplet_actual>,
-  public visitor<S_tuplet_normal>,
-  public visitor<S_tuplet_number>,
-  public visitor<S_tuplet_type>,
-  public visitor<S_tuplet_dot>,
+  public                      visitor<S_tuplet>,
+  public                      visitor<S_tuplet_actual>,
+  public                      visitor<S_tuplet_normal>,
+  public                      visitor<S_tuplet_number>,
+  public                      visitor<S_tuplet_type>,
+  public                      visitor<S_tuplet_dot>,
 
   // glissandos
   // ------------------------------------------------------
 
-  public visitor<S_glissando>,
+  public                      visitor<S_glissando>,
 
   // slides
   // ------------------------------------------------------
 
-  public visitor<S_slide>,
+  public                      visitor<S_slide>,
 
   // rehearsals
   // ------------------------------------------------------
 
-  public visitor<S_rehearsal>,
+  public                      visitor<S_rehearsal>,
 
   // accordion registration
   // ------------------------------------------------------
 
-  public visitor<S_accordion_registration>,
-  public visitor<S_accordion_high>,
-  public visitor<S_accordion_middle>,
-  public visitor<S_accordion_low>,
+  public                      visitor<S_accordion_registration>,
+  public                      visitor<S_accordion_high>,
+  public                      visitor<S_accordion_middle>,
+  public                      visitor<S_accordion_low>,
 
   // harp pedals tuning
   // ------------------------------------------------------
 
-  public visitor<S_harp_pedals>,
-  public visitor<S_pedal_tuning>,
-  public visitor<S_pedal_step>,
-  public visitor<S_pedal_alter>,
+  public                      visitor<S_harp_pedals>,
+  public                      visitor<S_pedal_tuning>,
+  public                      visitor<S_pedal_step>,
+  public                      visitor<S_pedal_alter>,
 
-  public visitor<S_damp>,
-  public visitor<S_damp_all>,
+  public                      visitor<S_damp>,
+  public                      visitor<S_damp_all>,
 
   // sound
   // ------------------------------------------------------
 
-  public visitor<S_sound>,
+  public                      visitor<S_sound>,
 
   // midi
   // ------------------------------------------------------
 
-  public visitor<S_instrument_sound>,
-  public visitor<S_virtual_instrument>,
-  public visitor<S_midi_device>,
-  public visitor<S_midi_instrument>
+  public                      visitor<S_instrument_sound>,
+  public                      visitor<S_virtual_instrument>,
+  public                      visitor<S_midi_device>,
+  public                      visitor<S_midi_instrument>
 
 {
   public:
@@ -1395,11 +1395,11 @@ class EXP mxsr2msrTranslator :
     std::vector<S_msrStaff>   fCurrentPartStavesVector;
 
     void                      populateCurrentPartStavesVectorFromPart (
-                                  S_msrPart part);
+                                  const S_msrPart& part);
 
 		void											displayCurrentPartStavesVector (
-                                int               inputLineNumber,
-																const std::string context);
+                                int                inputLineNumber,
+																const std::string& context);
 
 
     // voices handling
@@ -1430,11 +1430,11 @@ class EXP mxsr2msrTranslator :
                               fCurrentPartVoicesHandlersVector;
 
     void                      populateCurrentPartVoicesVectorsFromPart (
-                                  S_msrPart part);
+                                  const S_msrPart& part);
 
 		void											displayCurrentPartVoicesVector (
-                                int               inputLineNumber,
-																const std::string context);
+                                int                inputLineNumber,
+																const std::string& context);
 
     // staff details handling
     // ------------------------------------------------------
@@ -1555,12 +1555,12 @@ class EXP mxsr2msrTranslator :
     // cross staff chords
     int                       fCurrentChordStaffNumber;
 
-    Bool                      isThereAStaffChange (
+    Bool                      thereIsAStaffChange (
                                 int inputLineNumber);
 
 		void											displayStaffAndVoiceInformation (
-                                int               inputLineNumber,
-																const std::string context);
+                                int                inputLineNumber,
+																const std::string& context);
 
 
     // harmonies and figured bass elements are pending
@@ -1624,13 +1624,13 @@ class EXP mxsr2msrTranslator :
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
     std::list<S_msrRehearsalMark>
-                          fPendingRehearsalMarksList;
+                              fPendingRehearsalMarksList;
 
 //     void                  attachPendingRehearsalMarksToVoice ( JMI UNUSED??? v0.9.68
 //                             const S_msrVoice& voice);
 
-    void                  attachPendingRehearsalMarksToPart (
-                            const S_msrPart& part);
+    void                      attachPendingRehearsalMarksToPart (
+                                const S_msrPart& part);
 
 //     void                  convertWordsToRehearsalMark (
 //                             int                inputLineNumber,
@@ -1761,7 +1761,8 @@ class EXP mxsr2msrTranslator :
 
     msrNotesDurationKind      fCurrentMetronomeBeatUnitNotesDurationKind;
 
-    std::vector<msrDottedNotesDuration> fCurrentMetronomeBeatUnitsVector;
+    std::vector<msrDottedNotesDuration>
+                              fCurrentMetronomeBeatUnitsVector;
     std::string               fCurrentMetrenomePerMinute;
     msrTempoParenthesizedKind fCurrentMetronomeParenthesedKind;
 
@@ -2217,7 +2218,7 @@ class EXP mxsr2msrTranslator :
     // wedges are 'floating' in MusicXML,
     // but LilyPond needs wedges stops on the note to the right
     std::list<S_msrWedge>     fPendingWedgesList;
-    std::list<std::pair<int, S_msrWedge> >
+    std::list<std::pair<int, S_msrWedge>>
                               fPendingVoiceWedgesList;
 
     // attaching elements to notes
@@ -2535,16 +2536,16 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote& firstNote);
 
     void                      handleTupletStart (
-                                S_msrTuplet tuplet,
-                                S_msrVoice  currentNoteVoice);
+                                const S_msrTuplet& tuplet,
+                                const S_msrVoice&  currentNoteVoice);
 
     void                      handleTupletContinue (
-                                S_msrNote  note,
-                                S_msrVoice currentNoteVoice);
+                                const S_msrNote&  note,
+                                const S_msrVoice& currentNoteVoice);
 
     void                      handleTupletStop (
-                                S_msrNote  note,
-                                S_msrVoice currentNoteVoice);
+                                const S_msrNote&  note,
+                                const S_msrVoice& currentNoteVoice);
 //
     void                      handlePendingTupletStops (
                                 int              inputLineNumber,

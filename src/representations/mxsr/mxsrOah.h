@@ -95,6 +95,11 @@ class EXP mxsrOahGroup : public oahGroup
     // specific trace JMI move to traceOah
     // --------------------------------------
 
+    void                  setDisplayMxsr ()
+                              { fDisplayMxsr = true; }
+    Bool                  getDisplayMxsr () const
+                              { return fDisplayMxsr; }
+
     void                  setTraceMxsr ()
                               { fTraceMxsr = true; }
     Bool                  getTraceMxsr () const
@@ -159,9 +164,10 @@ class EXP mxsrOahGroup : public oahGroup
     Bool                  fTraceBackup;
     Bool                  fTraceForward;
 
-    // specific trace JMI move to traceOah JMI ???
+    // specific trace JMI move to traceOah JMI ??? v0.9.70
     // --------------------------------------
 
+    Bool                  fDisplayMxsr;
     Bool                  fTraceMxsr;
 
     // visitors

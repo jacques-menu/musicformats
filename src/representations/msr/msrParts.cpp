@@ -1915,7 +1915,7 @@ void msrPart::appendPendingMultiMeasureRestsToPart (
 }
 
 void msrPart::appendMultiMeasureRestCloneToPart (
-  int                              inputLineNumber,
+  int                          inputLineNumber,
   const S_msrMultiMeasureRest& multiMeasureRests)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2902,7 +2902,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
           getStaffVoiceNumbersToAllVoicesMap ();
 
     for (std::pair<int, S_msrVoice> thePair : staffAllVoicesMap) {
-      const S_msrVoice& voice = thePair.second;
+      S_msrVoice voice = thePair.second;
 
       if (voice != graceNotesGroupOriginVoice) {
         // add skip grace notes group ahead of voice
@@ -3047,7 +3047,7 @@ void msrPart::displayPartVoicesMap (
 //         fPartStavesAndVoicesVector [staffIndex];
 //
 //     for (int voiceIndex = 0; voiceIndex < staffVoicesVector.size (); ++voiceIndex) {
-//       const S_msrVoice voice = staffVoicesVector [voiceIndex];
+//       S_msrVoicevoice = staffVoicesVector [voiceIndex];
 //
 //       gLog <<
 //         "staff " <<
@@ -3208,7 +3208,7 @@ void msrPart::finalizePartAndAllItsMeasures (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  for (const S_msrVoice& voice : fPartVoicesList) {
+  for (S_msrVoice voice : fPartVoicesList) {
     voice->
       finalizeVoiceAndAllItsMeasures (
         inputLineNumber);
@@ -3915,7 +3915,7 @@ void msrPart::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    for (const S_msrVoice& voice : fPartVoicesList) {
+    for (S_msrVoice voice : fPartVoicesList) {
       os << "\"" << voice->getVoiceName () << "\"" << std::endl;
     } // for
 

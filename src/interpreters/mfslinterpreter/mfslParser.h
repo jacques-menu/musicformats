@@ -1390,7 +1390,7 @@ switch (yykind)
     };
 
     /// A stack with random access from its top.
-    template <typename T, typename S = std::vector<T> >
+    template <typename T, typename S = std::vector<T>>
     class stack
     {
     public:

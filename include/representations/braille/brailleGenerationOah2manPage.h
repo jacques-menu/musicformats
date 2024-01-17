@@ -23,11 +23,11 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP brailleGenerationOah2manPage : virtual public oah2manPage,
 
-  public visitor<S_brailleOutputKindAtom>,
+  public                      visitor<S_brailleOutputKindAtom>,
 
-  public visitor<S_brailleUTFKindAtom>,
+  public                      visitor<S_brailleUTFKindAtom>,
 
-  public visitor<S_brailleByteOrderingKindAtom>
+  public                      visitor<S_brailleByteOrderingKindAtom>
 
 {
   public:

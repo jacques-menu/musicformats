@@ -14,12 +14,29 @@
 
 /*
   This file groups several build-time setting that influence
-  code security and speed, as well as a couple of facilities
+  code security and behaviour, as well as speed and a couple of facilities
 */
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+//                            EXCEPTIONS
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+//______________________________________________________________________________
+// uncomment the following definition if no signal catching is desired
+#define MF_CATCH_SIGNALS_IS_ENABLED
 
 //______________________________________________________________________________
 // uncomment the following definition if no exceptions display is desired
 #define MF_CAUGHT_EXCEPTIONS_DISPLAY_IS_ENABLED
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+//                            BEHAVIOUR
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 //______________________________________________________________________________
 // comment the following definition if abort on internal errors is desired
@@ -28,12 +45,26 @@
 #define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
 
 //______________________________________________________________________________
+// uncomment the following definition if maintaince runs are desired
+#define MF_MAINTAINANCE_RUNS_ARE_ENABLED
+
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+//                            SPEED
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+//______________________________________________________________________________
 // uncomment the following definition if abort on internal errors is desired
 #define MF_SANITY_CHECKS_ARE_ENABLED
 
-//______________________________________________________________________________
-// uncomment the following definition if maintaince runs are desired
-#define MF_MAINTAINANCE_RUNS_ARE_ENABLED
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+//                            TRACE
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 //______________________________________________________________________________
 // uncomment the following definition if trace is desired

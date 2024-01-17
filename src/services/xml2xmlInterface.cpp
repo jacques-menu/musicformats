@@ -43,6 +43,8 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+
 #ifndef WIN32
 
 static void _sigaction (int signal, siginfo_t *si, void *arg)
@@ -71,6 +73,8 @@ static void catchSignals ()
 static void catchSignals ()  {}
 #endif // WIN32
 
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
+
 //_______________________________________________________________________________
 EXP int xml2xml (
   int   argc,
@@ -79,7 +83,9 @@ EXP int xml2xml (
   // setup signals catching
   // ------------------------------------------------------
 
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
   catchSignals ();
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
 
   // fetch service name
   std::string serviceName = argv [0];
@@ -469,9 +475,17 @@ EXP int xml2xml (
   // ------------------------------------------------------
 
   if (err != mfMusicformatsErrorKind::kMusicformatsError_NONE) {
-    gLog <<
-      "### Conversion from MusicXML to MusicXML failed ###" <<
-      std::endl;
+    if (inputSourceName == "-") {
+      gLog <<
+        "### Conversion from MusicXML standard input to MusicXML failed ###";
+    }
+    else {
+      gLog <<
+        "### Conversion from MusicXML file " <<
+        "\"" << inputSourceName << "\"" <<
+        " to MusicXML failed ###";
+    }
+    gLog << std::endl;
 
     return 1;
   }

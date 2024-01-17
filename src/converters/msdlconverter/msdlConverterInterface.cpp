@@ -225,7 +225,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //   const S_oahHandler& handler)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
+//   if (gGlobalMxsrOahGroup->getDisplayMxsr ()) {
 //     gLog <<
 //       std::endl <<
 //       "<!-- ----------------------------------------------------------- -->" <<
@@ -236,7 +236,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //     ++gIndenter;
 //
 //     sxmlfile->print (gLog);
-//     gLog << std::endl << std::endl;
+//     ss << std::endl << std::endl;
 //
 //     --gIndenter;
 //
@@ -337,7 +337,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //
 //   try {
 // if (false) { // JMI
-//     for (const S_msrVoice& voice: firstMsrScore->getScoreAllVoicesList ()) {
+//     for (S_msrVoice voice: firstMsrScore->getScoreAllVoicesList ()) {
 //       gLog <<
 //         "===> firstMsrScore voice: " << voice->getVoiceName () <<
 //         std::endl;

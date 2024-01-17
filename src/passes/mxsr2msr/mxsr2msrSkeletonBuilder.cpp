@@ -496,6 +496,8 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
       K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
 
+	fMsrScore->print (gLog);
+
   // parts handling
   fCurrentPartGroupIdentity= -1; // the score part 'start' will set this identity
 
@@ -4043,11 +4045,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   fCurrentPartID = elt->getAttributeValue ("id");
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceParts ()
-      ||
-    gEarlyOptions.getEarlyTracePasses ()
-  ) {
+  if (gTraceOahGroup->getTraceParts ()) {
     std::stringstream ss;
 
     ss <<
@@ -4415,11 +4413,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
     elt->getAttributeValue ("number");
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceMeasures ()
-      ||
-    gEarlyOptions.getEarlyTracePasses ()
-  ) {
+  if (gTraceOahGroup->getTraceMeasures ()) {
     std::stringstream ss;
 
     ss <<

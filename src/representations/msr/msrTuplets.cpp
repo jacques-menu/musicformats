@@ -162,7 +162,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  S_msrTuplet
+  const S_msrTuplet&
     newbornClone =
       msrTuplet::create (
         fInputStartLineNumber,
@@ -1350,7 +1350,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt)
 
 // S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
 // {
-//   S_msrTuplet result;
+//   const S_msrTuplet& result;
 //
 //   switch (fTupletKind) {
 //     case msrTupletInKind::kTupletIn_UNKNOWN_:

@@ -117,7 +117,7 @@ template <typename ELEMENT_TYPE>
 EXP std::ostream& operator << (std::ostream& os, const mfList<ELEMENT_TYPE>& elt);
 
 template <typename ELEMENT_TYPE>
-EXP std::ostream& operator << (std::ostream& os, const SMARTP<mfList<ELEMENT_TYPE> >& elt);
+EXP std::ostream& operator << (std::ostream& os, const SMARTP<mfList<ELEMENT_TYPE>>& elt);
 
 
 }

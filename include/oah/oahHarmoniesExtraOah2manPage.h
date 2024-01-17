@@ -26,13 +26,13 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP harmoniesExtraOah2manPage : virtual public oah2manPage,
 
-  public visitor<S_extraDisplayAllHarmoniesStructuresAtom>,
+  public                      visitor<S_extraDisplayAllHarmoniesStructuresAtom>,
 
-  public visitor<S_extraDisplayAllHarmoniesContentsAtom>,
+  public                      visitor<S_extraDisplayAllHarmoniesContentsAtom>,
 
-  public visitor<S_extraDisplayHarmonyDetailsAtom>,
+  public                      visitor<S_extraDisplayHarmonyDetailsAtom>,
 
-  public visitor<S_extraDisplayHarmonyAnalysisAtom>
+  public                      visitor<S_extraDisplayHarmonyAnalysisAtom>
 
 {
   public:

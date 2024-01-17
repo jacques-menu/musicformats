@@ -347,7 +347,7 @@ S_msrChord msrChord::createChordNewbornClone (
 // // uplink to tuplet
 // S_msrTuplet msrChord::fetchChordUpLinkToTuplet () const
 // {
-//   S_msrTuplet result;
+//   const S_msrTuplet& result;
 //
 //   switch (fChordKind) {
 //     case msrChordInKind::kChordIn_UNKNOWN_:
@@ -749,7 +749,7 @@ void msrChord::appendArticulationToChord (
         getArticulationKind ();
 
   // don't append the same articulation several times
-  for (const S_msrArticulation& articulation : fChordArticulationsList) {
+  for (S_msrArticulation articulation : fChordArticulationsList) {
     if (articulation->getArticulationKind () == articulationKind)
       return;
   } // for

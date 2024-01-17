@@ -68,7 +68,7 @@ class EXP msrBassFigure : public msrElement
 
     static SMARTP<msrBassFigure> create (
                             int                     inputLineNumber,
-                            const S_msrPart&               figureUpLinkToPart,
+                            const S_msrPart&        figureUpLinkToPart,
                             msrBassFigurePrefixKind figurePrefixKind,
                             int                     figureNumber,
                             msrBassFigureSuffixKind figureSuffixKind);
@@ -86,7 +86,7 @@ class EXP msrBassFigure : public msrElement
 
                           msrBassFigure (
                             int                     inputLineNumber,
-                            const S_msrPart&               figureUpLinkToPart,
+                            const S_msrPart&        figureUpLinkToPart,
                             msrBassFigurePrefixKind figurePrefixKind,
                             int                     figureNumber,
                             msrBassFigureSuffixKind figureSuffixKind);

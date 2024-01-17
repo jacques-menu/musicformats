@@ -76,10 +76,8 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   const S_oahHandler& handler)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
-    std::stringstream ss;
-
-    ss <<
+  if (gGlobalMxsrOahGroup->getDisplayMxsr ()) {
+    gLog <<
       std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl <<
@@ -89,17 +87,13 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     ++gIndenter;
 
     sxmlfile->print (gLog);
-    ss << std::endl << std::endl;
+    gLog << std::endl << std::endl;
 
     --gIndenter;
 
-    ss <<
+    gLog <<
       "<!-- ----------------------------------------------------------- -->" <<
       std::endl << std::endl;
-
-    gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
-      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -221,7 +215,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
 
   else {
     try {
-//       for (const S_msrVoice& voice: firstMsrScore->getScoreAllVoicesList ()) {
+//       for (S_msrVoice voice: firstMsrScore->getScoreAllVoicesList ()) {
 //         gLog <<
 //           "===> firstMsrScore voice: " << voice->getVoiceName () <<
 //           std::endl;

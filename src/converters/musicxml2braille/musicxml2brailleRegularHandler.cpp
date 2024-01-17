@@ -279,6 +279,7 @@ void xml2brlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-bsr2-full", subGroup);
 
 #ifdef MF_TRACE_IS_ENABLED
+  registerAtomInRegularSubgroup ("display-mxsr", subGroup);
   registerAtomInRegularSubgroup ("trace-mxsr", subGroup);
   registerAtomInRegularSubgroup ("trace-mxsr-visitors", subGroup);
 

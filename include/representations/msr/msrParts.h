@@ -519,7 +519,7 @@ class EXP msrPart : public msrPartGroupElement
                             int                measureRestsNumber);
 
     void                  appendMultiMeasureRestCloneToPart (
-                            int                              inputLineNumber,
+                            int                          inputLineNumber,
                             const S_msrMultiMeasureRest& multiMeasureRests);
 
     // measure repeats

@@ -5918,7 +5918,7 @@ void msr2bsrTranslator::visitStart (S_msrTuplet& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // create the tuplet clone
-  S_msrTuplet
+  const S_msrTuplet&
     tupletClone =
       elt->createTupletNewbornClone ();
 

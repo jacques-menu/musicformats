@@ -22,7 +22,7 @@ namespace MusicFormats
 
 // //______________________________________________________________________________
 // template <typename FIRST_TYPE, typename SECOND_TYPE>
-// SMARTP<mfPair<FIRST_TYPE, SECOND_TYPE> > mfPair<FIRST_TYPE, SECOND_TYPE>::create ()
+// SMARTP<mfPair<FIRST_TYPE, SECOND_TYPE>> mfPair<FIRST_TYPE, SECOND_TYPE>::create ()
 // {
 //   mfPair<FIRST_TYPE, SECOND_TYPE>* obj = new
 //     mfPair<FIRST_TYPE, SECOND_TYPE> ();
@@ -31,7 +31,7 @@ namespace MusicFormats
 // }
 //
 // template <typename FIRST_TYPE, typename SECOND_TYPE>
-// SMARTP<mfPair<FIRST_TYPE, SECOND_TYPE> > mfPair<FIRST_TYPE, SECOND_TYPE>::create (
+// SMARTP<mfPair<FIRST_TYPE, SECOND_TYPE>> mfPair<FIRST_TYPE, SECOND_TYPE>::create (
 // 	const FIRST_TYPE, SECOND_TYPE& element)
 // {
 //   mfPair<FIRST_TYPE, SECOND_TYPE>* obj = new
@@ -165,7 +165,7 @@ namespace MusicFormats
 // }
 //
 // template <typename FIRST_TYPE, typename SECOND_TYPE>
-// std::ostream& operator << (std::ostream& os, const SMARTP<mfPair<FIRST_TYPE, SECOND_TYPE> >& elt)
+// std::ostream& operator << (std::ostream& os, const SMARTP<mfPair<FIRST_TYPE, SECOND_TYPE>>& elt)
 // {
 //   elt->print (os);
 //   return os;
