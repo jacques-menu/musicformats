@@ -500,7 +500,7 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrStaff& elt)
 //   ++fStavesCounter;
 
   size_t staffVoicesVectorSize =
-    elt->getStaffVoicesVector ().size ();
+    elt->getStaffAllVoicesList ().size ();
 
   gLog <<
     "Staff" << ' ' << elt->getStaffName () <<

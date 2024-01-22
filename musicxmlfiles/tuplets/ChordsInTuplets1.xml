@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
-<score-partwise>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="4.0">
   <movement-title>Chords In Tuplets 1</movement-title>
   <identification>
     <encoding>
-      <software>MuseScore 2.0.3.1</software>
-      <encoding-date>2017-01-23</encoding-date>
+      <software>MuseScore 4.1.1</software>
+      <encoding-date>2024-01-19</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="yes" value="yes"/>
@@ -37,27 +37,33 @@
     <word-font font-family="FreeSerif" font-size="10"/>
     <lyric-font font-family="FreeSerif" font-size="11"/>
     </defaults>
+  <credit page="1">
+    <credit-type>title</credit-type>
+    <credit-words default-x="595.275" default-y="1627.09" justify="center" valign="top" font-family="Edwin" font-size="22">Chords In Tuplets 0</credit-words>
+    </credit>
   <part-list>
     <score-part id="P1">
       <part-name></part-name>
       <score-instrument id="P1-I1">
         <instrument-name></instrument-name>
+        <instrument-sound>keyboard.piano.grand</instrument-sound>
         </score-instrument>
       <midi-device id="P1-I1" port="1"></midi-device>
       <midi-instrument id="P1-I1">
         <midi-channel>1</midi-channel>
+        <midi-program>1</midi-program>
         <volume>78.7402</volume>
         <pan>0</pan>
         </midi-instrument>
       </score-part>
     </part-list>
   <part id="P1">
-    <measure number="1" width="358.95">
+    <measure number="1" width="205.39">
       <print>
         <system-layout>
           <system-margins>
-            <left-margin>0.00</left-margin>
-            <right-margin>718.22</right-margin>
+            <left-margin>50.00</left-margin>
+            <right-margin>821.77</right-margin>
             </system-margins>
           <top-system-distance>170.00</top-system-distance>
           </system-layout>
@@ -76,7 +82,7 @@
           <line>2</line>
           </clef>
         </attributes>
-      <note default-x="76.38" default-y="-15.00">
+      <note default-x="75.12" default-y="-15.00">
         <pitch>
           <step>C</step>
           <octave>5</octave>
@@ -93,7 +99,7 @@
           <tuplet type="start" bracket="yes"/>
           </notations>
         </note>
-      <note default-x="76.38" default-y="-5.00">
+      <note default-x="75.12" default-y="-5.00">
         <chord/>
         <pitch>
           <step>E</step>
@@ -108,66 +114,7 @@
           </time-modification>
         <stem>down</stem>
         </note>
-      <note default-x="76.38" default-y="5.00">
-        <chord/>
-        <pitch>
-          <step>G</step>
-          <octave>5</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
-        </note>
-      <note default-x="123.21" default-y="-20.00">
-        <pitch>
-          <step>B</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
-        </note>
-      <note default-x="123.21" default-y="-10.00">
-        <chord/>
-        <pitch>
-          <step>D</step>
-          <octave>5</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
-        </note>
-      <note default-x="123.21" default-y="0.00">
-        <chord/>
-        <pitch>
-          <step>F</step>
-          <octave>5</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
-        </note>
-      <note default-x="170.04" default-y="-15.00">
+      <note default-x="101.33" default-y="-25.00">
         <pitch>
           <step>A</step>
           <octave>4</octave>
@@ -180,11 +127,8 @@
           <normal-notes>2</normal-notes>
           </time-modification>
         <stem>down</stem>
-        <notations>
-          <tuplet type="stop"/>
-          </notations>
         </note>
-      <note default-x="170.04" default-y="-5.00">
+      <note default-x="101.33" default-y="-15.00">
         <chord/>
         <pitch>
           <step>C</step>
@@ -199,113 +143,7 @@
           </time-modification>
         <stem>down</stem>
         </note>
-      <note default-x="170.04" default-y="5.00">
-        <chord/>
-        <pitch>
-          <step>E</step>
-          <octave>5</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
-        </note>
-      <note default-x="216.87" default-y="-30.00">
-        <pitch>
-          <step>G</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
-        <notations>
-          <tuplet type="start" bracket="yes"/>
-          </notations>
-        </note>
-      <note default-x="216.87" default-y="-20.00">
-        <chord/>
-        <pitch>
-          <step>B</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
-        </note>
-      <note default-x="216.87" default-y="-10.00">
-        <chord/>
-        <pitch>
-          <step>D</step>
-          <octave>5</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
-        </note>
-      <note default-x="263.69" default-y="-35.00">
-        <pitch>
-          <step>F</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>up</stem>
-        </note>
-      <note default-x="263.69" default-y="-25.00">
-        <chord/>
-        <pitch>
-          <step>A</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>up</stem>
-        </note>
-      <note default-x="263.69" default-y="-10.00">
-        <chord/>
-        <pitch>
-          <step>C</step>
-          <octave>5</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>up</stem>
-        </note>
-      <note default-x="310.52" default-y="-30.00">
+      <note default-x="127.54" default-y="-40.00">
         <pitch>
           <step>E</step>
           <octave>4</octave>
@@ -322,7 +160,7 @@
           <tuplet type="stop"/>
           </notations>
         </note>
-      <note default-x="310.52" default-y="-20.00">
+      <note default-x="127.54" default-y="-30.00">
         <chord/>
         <pitch>
           <step>G</step>
@@ -337,20 +175,11 @@
           </time-modification>
         <stem>down</stem>
         </note>
-      <note default-x="310.52" default-y="-10.00">
-        <chord/>
-        <pitch>
-          <step>B</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>2</duration>
+      <note default-x="153.75" default-y="-20.00">
+        <rest/>
+        <duration>6</duration>
         <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
+        <type>half</type>
         </note>
       </measure>
     </part>

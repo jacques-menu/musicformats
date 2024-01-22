@@ -440,6 +440,11 @@ class EXP lpsrOahGroup : public oahGroup
     Bool                  getDisplayLpsrFull () const
                               { return fDisplayLpsrFull; }
 
+    void                  setDisplayLpsrEmbeddedMsr ()
+                              { fDisplayLpsrEmbeddedMsr = true; }
+    Bool                  getDisplayLpsrEmbeddedMsr () const
+                              { return fDisplayLpsrEmbeddedMsr; }
+
     void                  setDisplayLpsrNames ()
                               { fDisplayLpsrNames = true; }
 
@@ -762,6 +767,8 @@ class EXP lpsrOahGroup : public oahGroup
 
     Bool                  fDisplayLpsr;
     Bool                  fDisplayLpsrFull;
+
+    Bool                  fDisplayLpsrEmbeddedMsr;
 
     Bool                  fDisplayLpsrNames;
 

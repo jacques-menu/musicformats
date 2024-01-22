@@ -327,7 +327,7 @@ void displayMsrNamesVisitor::visitStart (S_msrStaff& elt)
 
   size_t staffVoicesVectorSize =
     elt->
-      getStaffVoicesVector ().size ();
+      getStaffAllVoicesList ().size ();
 
   gLog <<
     "Staff" << ' ' << elt->getStaffName () <<

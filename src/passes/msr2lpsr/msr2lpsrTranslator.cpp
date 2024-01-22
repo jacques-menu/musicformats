@@ -39,6 +39,8 @@
 #include "msrTempos.h"
 #include "msrVoiceStaffChanges.h"
 
+#include "msrInterface.h"
+
 #include "lpsrBookBlockElements.h"
 #include "lpsrContexts.h"
 #include "lpsrHeaders.h"
@@ -574,6 +576,15 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
       gMsrOahGroup,
       gLpsrOahGroup,
       gLanguage->displayTheLPSRAsText ());
+  }
+
+  //display the MSR embeded in the LPSR score if requested
+  // ------------------------------------------------------
+
+  if (gLpsrOahGroup->getDisplayLpsrEmbeddedMsr ()) {
+    displayMsrScore (
+      fResultingLpsr->getEmbeddedMsrScore (),
+      gLanguage->displayTheMSREmbededInTheLPSRAsText ());
   }
 
   // display the LPSR score summary if requested
@@ -1143,7 +1154,7 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
 
   // is noteTheGraceNotesGroupIsAttachedTo the first one in its voice?
 #ifdef MF_TRACE_IS_ENABLED
-  if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI
+  if (gTraceOahGroup->getTraceGraceNotes ()) { // JMI
     std::stringstream ss;
 
     ss <<
@@ -1169,7 +1180,7 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (false && gTraceOahGroup->getTraceGraceNotes ()) { // JMI
+  if (gTraceOahGroup->getTraceGraceNotes ()) { // JMI
     std::stringstream ss;
 
     ss <<
@@ -1201,31 +1212,39 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
         fetchVoiceFirstNonGraceNote ();
 
   if (originalVoiceFirstNonGraceNote) { // JMI
-    if (noteTheGraceNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote) {
-    // don't createSkipGraceNotesGroupClone() is there's only a single voice JMI
+    if (
+      noteTheGraceNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote
+    ) {
+      // don't createSkipGraceNotesGroupClone() is there's only a single voice
+      // JMI ??? v0.9.70 maybe this criterion should be refined
+      S_msrStaff
+        currentVoiceOriginalStaff =
+          fCurrentVoiceOriginal->getVoiceUpLinkToStaff ();
 
-      // LilyPond_Issue_34 should be worked around by creating
-      // skip grace notes in the other voices of the part
+      if (currentVoiceOriginalStaff->getStaffAllVoicesList ().size () > 1) {
+        // LilyPond_Issue_34 should be worked around by creating
+        // skip grace notes in the other voices of the part
 
-      // create the skip grace notes group
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceGraceNotes ()) {
-          std::stringstream ss;
+        // create the skip grace notes group
+  #ifdef MF_TRACE_IS_ENABLED
+          if (gTraceOahGroup->getTraceGraceNotes ()) {
+            std::stringstream ss;
 
-          ss <<
-            "Creating a skip clone of grace notes group " <<
-            graceNotesGroup->asShortString () <<
-            " to work around LilyPond_Issue_34";
+            ss <<
+              "Creating a skip clone of grace notes group " <<
+              graceNotesGroup->asShortString () <<
+              " to work around LilyPond_Issue_34";
 
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
+            gWaeHandler->waeTrace (
+              __FILE__, __LINE__,
+              ss.str ());
+          }
+  #endif // MF_TRACE_IS_ENABLED
 
-      fCurrentSkipGraceNotesGroup =
-        graceNotesGroup->
-          createSkipGraceNotesGroupClone ();
+        fCurrentSkipGraceNotesGroup =
+          graceNotesGroup->
+            createSkipGraceNotesGroupClone ();
+      }
     }
   }
 
@@ -2341,7 +2360,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
   if (fCurrentSkipGraceNotesGroup) {
     // add it ahead of the other voices in the part if needed
     fCurrentPartClone->
-      addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded ( // JMI only if there's more than one voice???
+      addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded ( // JMI only if there's more than one voice??? v0.9.70
         fCurrentVoiceClone,
         fCurrentSkipGraceNotesGroup);
 
@@ -8505,7 +8524,7 @@ void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
     std::list<S_msrVoice>
       staffVoicesVector =
         (*i).second->
-          getStaffVoicesVector ();
+          getStaffAllVoicesList ();
 
     for (
       std::list<S_msrVoice>::const_iterator j=staffVoicesVector.begin ();

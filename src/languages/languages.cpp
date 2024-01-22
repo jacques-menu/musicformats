@@ -434,6 +434,10 @@ std::string language::displayTheSecondMSRAsText () const
 {
   return "Display the second MSR as text";
 }
+std::string language::displayTheMSREmbededInTheLPSRAsText () const
+{
+  return "Display the third MSR as text";
+}
 std::string language::displayTheLPSRAsText () const
 {
   return "Display the LPSR as text";

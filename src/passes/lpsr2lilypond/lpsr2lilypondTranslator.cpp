@@ -2066,7 +2066,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
 
     // in measures
     case msrNoteKind::kNoteRegularInMeasure:
-      generateCodeForNoteInMeasure (note);
+      generateCodeForNoteRegularInMeasure (note);
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -2078,7 +2078,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
-      generateCodeForUnpitchedNoteInMeasure (note);
+      generateCodeForNoteUnpitchedInMeasure (note);
       break;
 
     // in chords
@@ -2089,7 +2089,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
 
     // in tuplets
     case msrNoteKind::kNoteRegularInTuplet:
-      generateCodeForNoteInTuplet (note);
+      generateCodeForNoteRegularInTuplet (note);
       break;
 
     case msrNoteKind::kNoteRestInTuplet:
@@ -2097,7 +2097,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
-      generateCodeForUnpitchedNoteInTuplet (note);
+      generateCodeForNoteUnpitchedInTuplet (note);
       break;
 
     // in grace notes groups
@@ -2128,7 +2128,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
   fLilypondCodeStream << ' ';
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteInMeasure (
+void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2515,7 +2515,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
   // thus the preceding one is kept
 }
 
-void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInMeasure (
+void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2678,7 +2678,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
   } // switch
 }
 
-void lpsr2lilypondTranslator::generateCodeForNoteInTuplet (
+void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2854,7 +2854,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
   // a rest is no relative octave reference,
 }
 
-void lpsr2lilypondTranslator::generateCodeForUnpitchedNoteInTuplet (
+void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -19987,7 +19987,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::generateNoteBeamsList (
+void lpsr2lilypondTranslator::generateNoteBeams (
   const S_msrNote& note)
 {
   const std::list<S_msrBeam>&
@@ -20042,7 +20042,7 @@ void lpsr2lilypondTranslator::generateNoteBeamsList (
               }
 #endif // MF_TRACE_IS_ENABLED
 
-              fLilypondCodeStream << "[ ";
+              fLilypondCodeStream << "[ " << " %{ generateNoteBeams() %}";
 
 #ifdef MF_TRACE_IS_ENABLED
               if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
@@ -20388,6 +20388,7 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
   switch (graceNotesGroupKind) {
     case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
       if (graceNotesGroupIsBeamed) {
+        // JMI ??? v0.9.70
       }
 
       if (graceNotesGroupIsSlashed) {
@@ -20483,7 +20484,7 @@ slash = \tweak Flag.stroke-style grace \etc
       iEnd   = graceNotesGroupElementsList.end (),
       i      = iBegin;
 
-    size_t elementNumber = 0;
+//     size_t elementNumber = 0;
 
     for ( ; ; ) {
       S_msrElement element = (*i);
@@ -20496,7 +20497,7 @@ slash = \tweak Flag.stroke-style grace \etc
         "element is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-      elementNumber += 1;
+//       elementNumber += 1;
 
       if (
         // note?
@@ -20526,21 +20527,21 @@ slash = \tweak Flag.stroke-style grace \etc
           // generate the graceNotesGroupNote beams if any,
           // unless the graceNotesGroupNote is chord member
           if (! graceNotesGroupNote->getNoteBelongsToAChord ()) {
-            generateNoteBeamsList (graceNotesGroupNote);
+//             generateNoteBeams (graceNotesGroupNote); // JMI fixes [ [ ... ] ] issue v0.9.70
           }
 
-          if (graceNotesGroupIsBeamed) {
-            if (elementNumber == 1) {
-              fLilypondCodeStream << "[ ";
-            }
-            else if (elementNumber == graceNotesGroupElementsListSize) {
-              fLilypondCodeStream << "] ";
-            }
-
-            fLilypondCodeStream <<
-              " %{ line " << graceNotesGroupNote->getInputStartLineNumber () <<
-              ", elementNumber: " << elementNumber << " %}  "; // JMI v0.9.70
-          }
+//           if (graceNotesGroupIsBeamed) { // JMI fixed [ ] issue v0.9.70
+//             if (elementNumber == 1) {
+//               fLilypondCodeStream << "[ " << " %{ generateGraceNotesGroup() %}";
+//             }
+//             else if (elementNumber == graceNotesGroupElementsListSize) {
+//               fLilypondCodeStream << "] ";
+//             }
+//
+//             fLilypondCodeStream <<
+//               " %{ line " << graceNotesGroupNote->getInputStartLineNumber () <<
+//               ", elementNumber: " << elementNumber << " %}  "; // JMI v0.9.70
+//           }
 
           // generate the graceNotesGroupNote slurs if any,
           // unless the graceNotesGroupNote is chord member
@@ -20975,7 +20976,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting note " <<
+        "% --> Start visiting msrNote " <<
         elt->asShortString () <<
         ", fOnGoingChord: " <<
         fOnGoingChord <<
@@ -22663,7 +22664,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     doGenerateBeams = false;
   }
   if (doGenerateBeams) {
-    generateNoteBeamsList (elt);
+    generateNoteBeams (elt);
   }
 
   // generate the note ligatures if any
@@ -23271,6 +23272,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrBeam& elt)
     }
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // don't generate '[ ... ] here, this will be done in generateNoteBeams()
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
@@ -23305,6 +23308,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
     }
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // don't generate '[ ... ] here, this will be done in generateNoteBeams()
 }
 
 //________________________________________________________________________
@@ -23715,7 +23720,7 @@ void lpsr2lilypondTranslator::generateCodeForChordInGraceNotesGroupContents (
     chordNotesVector =
       chord->getChordNotesVector ();
 
-  // generate the chord notes KOF JMI
+  // generate the chord notes KOF JMI v0.9.70
   if (chordNotesVector.size ()) {
     std::vector<S_msrNote>::const_iterator
       iBegin = chordNotesVector.begin (),
@@ -24166,7 +24171,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
 
         case msrBeamKind::kBeamBegin:
           if (originalBeam->getBeamNumber () == 1)
-            fLilypondCodeStream << "[ ";
+            fLilypondCodeStream << "[ " << " %{ generateCodeRightAfterChordContents() %}";
 
 #ifdef MF_TRACE_IS_ENABLED
               if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN

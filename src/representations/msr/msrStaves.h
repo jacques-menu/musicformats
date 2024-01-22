@@ -121,7 +121,7 @@ class EXP msrStaff : public msrElement
                               { return fStaffRegularVoicesList; }
 
     const std::list<S_msrVoice>&
-                          getStaffVoicesVector () const
+                          getStaffAllVoicesList () const
                               { return fStaffAllVoicesList; }
 
     // staff shortest note

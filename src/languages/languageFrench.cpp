@@ -220,6 +220,10 @@ std::string languageFrench::displayTheSecondMSRAsText () const
 {
   return "Affichage du second MSR en texte";
 }
+std::string languageFrench::displayTheMSREmbededInTheLPSRAsText () const
+{
+  return "Affichage du troisième MSR en texte";
+}
 std::string languageFrench::displayTheLPSRAsText () const
 {
   return "Affichage du LPSR en texte";

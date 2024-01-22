@@ -517,7 +517,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrStaff& elt)
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
     size_t staffVoicesVectorSize =
-      elt->getStaffVoicesVector ().size ();
+      elt->getStaffAllVoicesList ().size ();
 
     gLog <<
       "Staff" << ' ' << elt->getStaffName () <<

@@ -34,25 +34,51 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+S_msrTuplet msrTuplet::create ()
+{
+}
+
 S_msrTuplet msrTuplet::create (
-  int inputLineNumber)
+  int                     inputLineNumber,
+  const S_msrMeasure&     upLinkToMeasure,
+//   const std::string&      tupletMeasureNumber,
+  int                     tupletNumber,
+  msrTupletBracketKind    tupletBracketKind,
+  msrTupletLineShapeKind  tupletLineShapeKind,
+  msrTupletShowNumberKind tupletShowNumberKind,
+  msrTupletShowTypeKind   tupletShowTypeKind,
+  const msrTupletFactor&  tupletFactor,
+  const msrWholeNotes&    memberNotesSoundingWholeNotes,
+  const msrWholeNotes&    memberNotesDisplayWholeNotes)
 {
   msrTuplet* obj =
     new msrTuplet (
-      inputLineNumber);
+      inputLineNumber,
+      upLinkToMeasure,
+      // tupletMeasureNumber,
+      tupletNumber,
+      tupletBracketKind,
+      tupletLineShapeKind,
+      tupletShowNumberKind,
+      tupletShowTypeKind,
+      tupletFactor,
+      memberNotesSoundingWholeNotes,
+      memberNotesDisplayWholeNotes);
   assert (obj != nullptr);
   return obj;
 }
 
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
+//   const std::string&      tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
-  msrTupletTypeKind       tupletTypeKind,
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
-  const msrTupletFactor&  tupletFactor)
+  const msrTupletFactor&  tupletFactor,
+  const msrWholeNotes&    memberNotesSoundingWholeNotes,
+  const msrWholeNotes&    memberNotesDisplayWholeNotes)
 {
   return
     msrTuplet::create (
@@ -62,139 +88,29 @@ S_msrTuplet msrTuplet::create (
       tupletNumber,
       tupletBracketKind,
       tupletLineShapeKind,
-      tupletTypeKind,
       tupletShowNumberKind,
       tupletShowTypeKind,
-      tupletFactor);
+      tupletFactor,
+      memberNotesSoundingWholeNotes,
+      memberNotesDisplayWholeNotes);
 }
 
-S_msrTuplet msrTuplet::create (
-  int                     inputLineNumber,
-  const S_msrMeasure&     upLinkToMeasure,
-  int                     tupletNumber,
-  msrTupletBracketKind    tupletBracketKind,
-  msrTupletLineShapeKind  tupletLineShapeKind,
-  msrTupletTypeKind       tupletTypeKind,
-  msrTupletShowNumberKind tupletShowNumberKind,
-  msrTupletShowTypeKind   tupletShowTypeKind,
-  const msrTupletFactor&  tupletFactor)
+msrTuplet::msrTuplet ()
 {
-  msrTuplet* obj =
-    new msrTuplet (
-      inputLineNumber,
-      upLinkToMeasure,
-      tupletNumber,
-      tupletBracketKind,
-      tupletLineShapeKind,
-      tupletTypeKind,
-      tupletShowNumberKind,
-      tupletShowTypeKind,
-      tupletFactor);
-  assert (obj != nullptr);
-  return obj;
 }
-
-msrTuplet::msrTuplet (
-  int inputLineNumber)
-    : msrTupletElement (
-        inputLineNumber)
-{
-  fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN_;
-
-  fTupletNumber = 0;
-
-  fTupletBracketKind    = msrTupletBracketKind::kTupletBracketYes;
-  fTupletLineShapeKind  = msrTupletLineShapeKind::kTupletLineShapeStraight;
-  fTupletTypeKind       = msrTupletTypeKind::kTupletTypeNone;
-  fTupletShowNumberKind = msrTupletShowNumberKind::kTupletShowNumberActual;
-  fTupletShowTypeKind   = msrTupletShowTypeKind::kTupletShowTypeActual;
-
-  fTupletFactor = msrTupletFactor (0, 1);
-
-  fMemberNotesSoundingWholeNotes = msrWholeNotes (0, 1);
-  fMemberNotesDisplayWholeNotes  = msrWholeNotes (0, 1);
-
-  setMeasureElementSoundingWholeNotes (
-    msrWholeNotes (0, 1),
-    "msrTuplet::msrTuplet()");
-
-  fTupletDisplayWholeNotes = msrWholeNotes (0, 1);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating tuplet " <<
-      asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-// msrTuplet::msrTuplet (
-//   int                     inputLineNumber,
-//   int                     tupletNumber,
-//   msrTupletBracketKind    tupletBracketKind,
-//   msrTupletLineShapeKind  tupletLineShapeKind,
-//   msrTupletTypeKind       tupletTypeKind,
-//   msrTupletShowNumberKind tupletShowNumberKind,
-//   msrTupletShowTypeKind   tupletShowTypeKind,
-//   const msrTupletFactor&  tupletFactor)
-//     : msrTupletElement (
-//         inputLineNumber)
-// {
-//   fMeasureElementUpLinkToMeasure = gNullMeasure;
-//
-//   fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN_;
-//
-//   fTupletNumber = tupletNumber;
-//
-//   fTupletBracketKind    = tupletBracketKind;
-//   fTupletLineShapeKind  = tupletLineShapeKind;
-//   fTupletTypeKind       = tupletTypeKind;
-//   fTupletShowNumberKind = tupletShowNumberKind;
-//   fTupletShowTypeKind   = tupletShowTypeKind;
-//
-//   fTupletFactor = tupletFactor;
-//
-//   fMemberNotesSoundingWholeNotes = memberNotesSoundingWholeNotes; // JMI v0.9.70
-//   fMemberNotesDisplayWholeNotes = memberNotesDisplayWholeNotes;
-//
-//   setMeasureElementSoundingWholeNotes (
-//     msrWholeNotes (0, 1),
-//     "msrTuplet::msrTuplet()");
-//
-//   fTupletDisplayWholeNotes = msrWholeNotes (0, 1);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Creating tuplet " <<
-//       asString ();
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
 
 msrTuplet::msrTuplet (
   int                     inputLineNumber,
   const S_msrMeasure&     upLinkToMeasure,
+//   const std::string&      tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
-  msrTupletTypeKind       tupletTypeKind,
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
-  const msrTupletFactor&  tupletFactor)
+  const msrTupletFactor&  tupletFactor,
+  const msrWholeNotes&    memberNotesSoundingWholeNotes,
+  const msrWholeNotes&    memberNotesDisplayWholeNotes)
     : msrTupletElement (
         inputLineNumber)
 {
@@ -206,14 +122,13 @@ msrTuplet::msrTuplet (
 
   fTupletBracketKind    = tupletBracketKind;
   fTupletLineShapeKind  = tupletLineShapeKind;
-  fTupletTypeKind       = tupletTypeKind;
   fTupletShowNumberKind = tupletShowNumberKind;
   fTupletShowTypeKind   = tupletShowTypeKind;
 
   fTupletFactor = tupletFactor;
 
-  fMemberNotesSoundingWholeNotes = msrWholeNotes (0, 1);
-  fMemberNotesDisplayWholeNotes  = msrWholeNotes (0, 1);
+  fMemberNotesSoundingWholeNotes = memberNotesSoundingWholeNotes; // JMI v0.9.70
+  fMemberNotesDisplayWholeNotes = memberNotesDisplayWholeNotes;
 
   setMeasureElementSoundingWholeNotes (
     msrWholeNotes (0, 1),
@@ -260,13 +175,15 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
       msrTuplet::create (
         fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
+//         fMeasureElementUpLinkToMeasure->getMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
         fTupletLineShapeKind,
-        fTupletTypeKind,
         fTupletShowNumberKind,
         fTupletShowTypeKind,
-        fTupletFactor);
+        fTupletFactor,
+        fMemberNotesSoundingWholeNotes,
+        fMemberNotesDisplayWholeNotes);
 
 /* JMI ???
   newbornClone->fMeasureElementSoundingWholeNotes =
@@ -309,34 +226,6 @@ void msrTuplet::appendNoteToTuplet (
 
   ++gIndenter;
 
-  // set or check member notes sounding whole notes
-  msrWholeNotes
-    noteSoundingWholeNotes =
-      note->getMeasureElementSoundingWholeNotes ();
-
-  if (fTupletElementsList.size () == 0) {
-    // register the value
-    fMemberNotesSoundingWholeNotes = noteSoundingWholeNotes;
-  }
-  else {
-    // consistency check
-    if (noteSoundingWholeNotes != fMemberNotesSoundingWholeNotes) {
-      std::stringstream ss;
-
-      ss <<
-        "cannot add tuplet member with sounding whole notes " <<
-        noteSoundingWholeNotes <<
-        " in a tuplet containing members with sounding whole notes " <<
-        fMemberNotesSoundingWholeNotes;
-
-      msrError (
-        gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-  }
-
   // append note to elements list
   fTupletElementsList.push_back (note);
 
@@ -361,7 +250,7 @@ void msrTuplet::appendNoteToTuplet (
 //     note->getMeasureElementSoundingWholeNotes ();
 
   // account for note duration in tuplet displaly duration
-  fTupletDisplayWholeNotes += // JMI v0.9.70
+  fTupletDisplayWholeNotes += // JMI
     note->getNoteDisplayWholeNotes ();
 
   // register note's tuplet factor
@@ -748,9 +637,9 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 }
 
 void msrTuplet::setMeasureElementMeasurePosition (
-  const S_msrMeasure&  measure,
-  const msrWholeNotes& measurePosition,
-  const std::string&   context)
+  const S_msrMeasure& measure,
+  const msrWholeNotes&     measurePosition,
+  const std::string&  context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {
@@ -794,8 +683,8 @@ void msrTuplet::setMeasureElementMeasurePosition (
 }
 
 void msrTuplet::setTupletMembersMeasurePositions (
-  const S_msrMeasure&  measure,
-  const msrWholeNotes& measurePosition)
+  const S_msrMeasure& measure,
+  const msrWholeNotes&     measurePosition)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasurePositions ()) {

@@ -1404,6 +1404,28 @@ R"(Write the contents of the LPSR data with its full MSR component to standard e
         "fDisplayLpsrFull",
         fDisplayLpsrFull));
 
+  // display the MSR embeded in the LPSR
+
+  S_oahBooleanAtom
+    displayLpsrEmbeddedMsrBooleanAtom =
+      oahBooleanAtom::create (
+        "display-lpsr-embedded-msr", "dlpsrembedmsr",
+R"(Write the contents of the MSR embedded in the LPSR data to standard error.)",
+        "fDisplayLpsrEmbeddedMsr",
+        fDisplayLpsrEmbeddedMsr);
+
+  subGroup->
+    appendAtomToSubGroup (
+      displayLpsrEmbeddedMsrBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahValueLessAtomAlias::create (
+        "display-msr3", "dmsr3",
+R"(Write the MSR component of the LPSR data to standard error.
+This option is an alias for '-dlpsrembedmsr, -dlpsrembedmsr'.)",
+        displayLpsrEmbeddedMsrBooleanAtom));
+
   // display LPSR names
 
   subGroup->

@@ -88,6 +88,7 @@ class EXP languageFrench : public language
     std::string           displayTheFirstMSRSkeletonAsText () const override;
     std::string           displayTheFirstMSRAsText () const override;
     std::string           displayTheSecondMSRAsText () const override;
+    std::string           displayTheMSREmbededInTheLPSRAsText () const override;
     std::string           displayTheLPSRAsText () const override;
 
     std::string           displayTheNamesInTheFirstMSR () const override;

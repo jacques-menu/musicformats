@@ -129,6 +129,7 @@ class EXP language : public smartable
     virtual std::string   displayTheFirstMSRSkeletonAsText () const;
     virtual std::string   displayTheFirstMSRAsText () const;
     virtual std::string   displayTheSecondMSRAsText () const;
+    virtual std::string   displayTheMSREmbededInTheLPSRAsText () const;
     virtual std::string   displayTheLPSRAsText () const;
 
     virtual std::string   displayTheNamesInTheFirstMSR () const;

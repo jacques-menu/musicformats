@@ -839,7 +839,7 @@ class EXP lpsr2lilypondTranslator :
     std::string           pitchedRestAsLilypondString (
                             const S_msrNote& note);
 
-    void                  generateNoteBeamsList (
+    void                  generateNoteBeams (
                             const S_msrNote& note);
 
     void                  generateNoteSlurDirection (
@@ -865,24 +865,24 @@ class EXP lpsr2lilypondTranslator :
     void                  generateCodeForNote (
                             const S_msrNote& note);
 
-    void                  generateCodeForNoteInMeasure (
+    void                  generateCodeForNoteRegularInMeasure (
                             const S_msrNote& note);
 
     void                  generateCodeForRestInMeasure (
                             const S_msrNote& note);
     void                  generateCodeForSkipInMeasure (
                             const S_msrNote& note);
-    void                  generateCodeForUnpitchedNoteInMeasure (
+    void                  generateCodeForNoteUnpitchedInMeasure (
                             const S_msrNote& note);
 
     void                  generateCodeForNoteRegularInChord (
                             const S_msrNote& note);
 
-    void                  generateCodeForNoteInTuplet (
+    void                  generateCodeForNoteRegularInTuplet (
                             const S_msrNote& note);
     void                  generateCodeForRestInTuplet (
                             const S_msrNote& note);
-    void                  generateCodeForUnpitchedNoteInTuplet (
+    void                  generateCodeForNoteUnpitchedInTuplet (
                             const S_msrNote& note);
 
     void                  generateCodeForNoteRegularInGraceNotesGroup (

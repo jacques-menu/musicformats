@@ -496,8 +496,6 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
       K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
 
-	fMsrScore->print (gLog);
-
   // parts handling
   fCurrentPartGroupIdentity= -1; // the score part 'start' will set this identity
 

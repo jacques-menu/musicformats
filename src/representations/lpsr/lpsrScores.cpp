@@ -454,7 +454,8 @@ R"(\markup {
       " and LilyPond \" (lilypond-version))" <<
 R"(
       }
-      \fill-line { \column { \italic { \concat { \filen " - " \modTimeAsString } } } }
+      \fill-line { \column { \italic { \concat { \filename " - modified on " \modTimeAsString } } } }
+      \fill-line { \column { \italic { \concat { "PDF created on " \pdfCreationTime } } } }
     }
   }
 )";
@@ -2797,13 +2798,18 @@ R"(
 #(define comml           (object->string (command-line)))
 #(define loc             (+ (string-rindex comml #\space ) 2))
 #(define commllen        (- (string-length comml) 2))
-#(define filen           (substring comml loc commllen))
-#(define siz             (object->string (stat:size (stat filen))))
+#(define filename        (substring comml loc commllen))
+#(define siz             (object->string (stat:size (stat filename))))
 #(define ver             (object->string (lilypond-version)))
 #(define dat             (strftime "%d/%m/%Y" (localtime (current-time))))
 #(define tim             (strftime "%H:%M:%S" (localtime (current-time))))
-#(define modTime         (stat:mtime (stat filen)))
+#(define modTime         (stat:mtime (stat filename)))
+
 #(define modTimeAsString (strftime "%d/%m/%Y, %H:%M:%S" (localtime modTime)))
+
+#(use-modules (srfi srfi-19))
+% https://www.gnu.org/software/guile/manual/html_node/SRFI_002d19-Date-to-string.html
+#(define pdfCreationTime (date->string (current-date) "~A, ~B ~e ~Y ~H:~M:~S"))
 )";
 
 #ifdef MF_TRACE_IS_ENABLED

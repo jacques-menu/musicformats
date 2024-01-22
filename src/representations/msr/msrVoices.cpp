@@ -3528,7 +3528,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     ss <<
       "Adding grace notes " <<
       graceNotesGroup->asString () <<
-      " ahead of voice \"" << fVoiceName << "\"";
+      " ahead of voice if needed in \"" << fVoiceName << "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

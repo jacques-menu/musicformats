@@ -75,20 +75,26 @@ class mxsr2msrVoiceHandler : public smartable
     // public services
     // ------------------------------------------------------
 
+    const std::size_t     fetchTupletsStackSize () const
+                              { return fTupletsStack.size (); }
+
+    const S_msrTuplet&    fetchTupletsStackFront () const
+                              { return fTupletsStack.front (); }
+
     void                  pushTupletOntoTupletsStack (const S_msrTuplet& tuplet)
                               { fTupletsStack.push_front (tuplet); }
 
-    void                  handleTupletStartByHandler (
-                            const S_msrTuplet& tuplet,
-                            const S_msrVoice&  currentNoteVoice);
-
-    void                  handleTupletContinueByHandler (
-                            const S_msrNote&   note,
-                            const S_msrVoice&  currentNoteVoice);
-
-    void                  handleTupletStopByHandler (
-                            const S_msrNote&   note,
-                            const S_msrVoice&  currentNoteVoice);
+//     void                  handleTupletStartByHandler (
+//                             const S_msrTuplet& tuplet,
+//                             const S_msrVoice&  currentNoteVoice);
+//
+//     void                  handleTupletContinueByHandler (
+//                             const S_msrNote&   note,
+//                             const S_msrVoice&  currentNoteVoice);
+//
+//     void                  handleTupletStopByHandler (
+//                             const S_msrNote&   note,
+//                             const S_msrVoice&  currentNoteVoice);
 
     void                  finalizeTupletStackTopAndPopItFromTupletsStack (
                             int         inputLineNumber,
@@ -1200,6 +1206,7 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     virtual void              visitStart (S_tuplet& elt);
+    virtual void              visitEnd   (S_tuplet& elt);
     virtual void              visitStart (S_tuplet_actual& elt);
     virtual void              visitEnd   (S_tuplet_actual& elt);
     virtual void              visitStart (S_tuplet_normal& elt);
@@ -2478,7 +2485,8 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fCurrentNoteHasATimeModification;
 
-    Bool                      fOnGoingTuplet;
+    // there is no fOnGoingTuplet, this is indicated
+    // by the current voice handlers's being empty
 
     int                       fCurrentNoteActualNotes;
     int                       fCurrentNoteNormalNotes;
