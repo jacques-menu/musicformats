@@ -227,8 +227,7 @@ class EXP msrTuplet : public msrTupletElement
     S_msrTuplet           fetchTupletUpLinkToTuplet () const;
 
     void                  appendNoteToTuplet (
-                            const S_msrNote&  note,
-                            const S_msrVoice& voice);
+                            const S_msrNote& note);
 
     void                  appendChordToTuplet (const S_msrChord& chord);
 

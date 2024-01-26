@@ -222,14 +222,10 @@ void mxsr2msrVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
     std::stringstream ss;
 
     ss <<
-      "Popping tupletStackFront:" <<
-      std::endl;
-    ++gIndenter;
-    ss <<
-      tupletStackFront->asString ();
-    --gIndenter;
-    ss <<
-      " from the tuplets stack" <<
+      "Popping tupletStackFront " <<
+      tupletStackFront->asString () <<
+      " for voice " <<
+      fMsrVoice->getVoiceName () <<
       ", context: " << context <<
       ", line " << inputLineNumber;
 
@@ -295,7 +291,7 @@ void mxsr2msrVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceTuplets ()) {
         gLog <<
-          "=== adding nested tuplet " <<
+          "=== appending nested tuplet " <<
         tupletStackFront <<
           " to current stack top tuplet " <<
         fTupletsStack.front ()->asString () <<
@@ -451,8 +447,10 @@ void mxsr2msrVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
 //     // add note to tupletStackTop
 //     tupletStackTop->
 //       appendNoteToTuplet (
-//         note,
-//         currentNoteVoice);
+//         note);
+//
+//       currentNoteVoice->
+//         registerTupletNoteInVoice (note);
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -555,8 +553,10 @@ void mxsr2msrVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
 //         // add note to tupletStackTop
 //         tupletStackTop->
 //           appendNoteToTuplet (
-//             note,
-//             currentNoteVoice);
+//             note);
+
+//           currentNoteVoice-> // JMI v0.9.70
+//             registerTupletNoteInVoice (note);
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //         if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -594,8 +594,10 @@ void mxsr2msrVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
 //         // add note to tuplet stack top
 //         fTupletsStack.front ()->
 //           appendNoteToTuplet (
-//             note,
-//             currentNoteVoice);
+//             note);
+//
+//         currentNoteVoice->
+//           registerTupletNoteInVoice (note);
 //
 //         finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.70
 //           note->getInputStartLineNumber (),
@@ -2769,10 +2771,14 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
         noteSizeTypeKind =
           msrNoteSizeTypeKind::kNoteSizeType_UNKNOWN_;
 
-      if      (noteSizeTypeString == "cue")
-        noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeCue;
+      if      (noteSizeTypeString == "full")
+        noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeFull;
       else if (noteSizeTypeString == "grace")
         noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeGrace;
+      else if (noteSizeTypeString == "cue")
+        noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeCue;
+      else if (noteSizeTypeString == "grace-cue")
+        noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeGraceCue;
       else if (noteSizeTypeString == "large")
         noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeLarge;
 
@@ -18779,25 +18785,6 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   // create the tuplet
-//   S_msrTuplet
-//     tuplet =
-//       msrTuplet::create (
-//         elt->getInputStartLineNumber (),
-//         fCurrentTupletNumber,
-//         fCurrentTupletBracketKind,
-//         fCurrentTupletLineShapeKind,
-//         fCurrentTupletTypeKind,
-//         fCurrentTupletShowNumberKind,
-//         fCurrentTupletShowTypeKind,
-//         msrTupletFactor (
-//           fCurrentNoteActualNotes,
-//           fCurrentNoteNormalNotes));
-//
-//   // push it onto the voice's tuplets stack
-//   fCurrentPartVoicesHandlersVector [0]->
-//     pushTupletOntoTupletsStack (tuplet);
-
 //   fCurrentNoteBelongsToATuplet = true;
 }
 
@@ -21307,8 +21294,10 @@ void mxsr2msrTranslator::handleTupletContinue (
     // add note to tupletStackTop
     tupletStackTop->
       appendNoteToTuplet (
-        note,
-        fCurrentPartVoicesVector [fVoiceNumberToInsertInto]);
+        note);
+
+    fCurrentPartVoicesVector [fVoiceNumberToInsertInto]->
+      registerTupletNoteInVoice (note);
 
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -21417,8 +21406,10 @@ void mxsr2msrTranslator::handleTupletStop (
         // add note to tupletStackTop
         tupletStackTop->
           appendNoteToTuplet (
-            note,
-            fCurrentPartVoicesVector [fVoiceNumberToInsertInto]);
+            note);
+
+        fCurrentPartVoicesVector [fVoiceNumberToInsertInto]->
+          registerTupletNoteInVoice (note);
 
 // #ifdef MF_TRACE_IS_ENABLED
 //         if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -21459,8 +21450,10 @@ void mxsr2msrTranslator::handleTupletStop (
         // add note to tuplet stack top
         voiceHandler->getTupletsStack ().front ()->
           appendNoteToTuplet (
-            note,
-            fCurrentPartVoicesVector [fVoiceNumberToInsertInto]);
+            note);
+
+        fCurrentPartVoicesVector [fVoiceNumberToInsertInto]->
+          registerTupletNoteInVoice (note);
 
         voiceHandler->
           finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.70
@@ -24423,183 +24416,6 @@ Bool mxsr2msrTranslator::thereIsAStaffChange (
   return result;
 }
 
-// //______________________________________________________________________________
-// void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
-//   int         inputLineNumber,
-//   std::string context)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack() 1, " <<
-//       ", voiceHandler->fetchTupletsStackSize (): " << voiceHandler->fetchTupletsStackSize ();
-//
-//     ss <<
-//       ", fCurrentOuterMostTuplet: ";
-//     if (fCurrentOuterMostTuplet) {
-//       ss <<
-//         fCurrentOuterMostTuplet->asString ();
-//     }
-//     else {
-//       ss << "[NULL]";
-//     }
-//
-//     ss <<
-//       ", context: " << context <<
-//       "line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       displayTupletsStack (
-//         "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 2");
-//   }
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       displayVoicesTupletsStacksMap (
-//         "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 2");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // fetch the current voice
-//   S_msrVoice
-//     currentNoteVoice =
-//       fCurrentPartVoicesVector [fCurrentMusicXMLVoiceNumber];
-//
-//   // get tuplet from top of tuplet stack
-//   S_msrTuplet
-//     tupletStackFront =
-//       voiceHandler->fetchTupletsStackFront ();
-//
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     tupletStackFront != nullptr,
-//     "tupletStackFront is NULL");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-//   // pop from the tuplets stack
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Popping tupletStackFront:" <<
-//       std::endl;
-//     ++gIndenter;
-//     ss <<
-//       tupletStackFront->asString ();
-//     --gIndenter;
-//     ss <<
-//       " from the tuplets stack" <<
-//       ", context: " << context <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       displayTupletsStack (
-//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 3");
-//   }
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       displayVoicesTupletsStacksMap (
-//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 3");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70 BABASSE
-//     if (voiceHandler->fetchTupletsStackSize () == 0) {
-//     }
-//
-//     mfAssert (
-//       __FILE__, __LINE__,
-//       voiceHandler->fetchTupletsStackSize () > 0,
-//       "voiceHandler->getTupletsStack () is empty");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-//   voiceHandler->getTupletsStack ().pop_front (); // JMI v0.9.68
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       displayTupletsStack (
-//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 4");
-//   }
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       displayVoicesTupletsStacksMap (
-//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 4");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //   abort ();
-//
-//   switch (voiceHandler->fetchTupletsStackSize ()) {
-//     case 0:
-//       // tupletStackFront is a top level tuplet
-// #ifdef MF_TRACE_IS_ENABLED
-//       if (gTraceOahGroup->getTraceTuplets ()) {
-//         gLog <<
-//           "Appending top level tuplet " <<
-//         tupletStackFront->asString () <<
-//         " to voice \"" <<
-//         currentNoteVoice->getVoiceName () <<
-//         "\"" <<
-//         ", line " << inputLineNumber <<
-//         std::endl;
-//       }
-// #endif // MF_TRACE_IS_ENABLED
-//     break;
-//
-//     default:
-//       // tupletStackFront is a nested tuplet
-// #ifdef MF_TRACE_IS_ENABLED
-//       if (gTraceOahGroup->getTraceTuplets ()) {
-//         gLog <<
-//           "=== adding nested tuplet " <<
-//         tupletStackFront <<
-//           " to current stack top tuplet " <<
-//         voiceHandler->fetchTupletsStackFront ()->asString () <<
-//         ", line " << inputLineNumber <<
-//         std::endl;
-//       }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//       voiceHandler->fetchTupletsStackFront ()->
-//         appendTupletToTuplet (tupletStackFront);
-//   } // switch
-//
-//     // forget about the current outermost tuplet and its first note // JMI v0.9.68 HARMFUL
-// //     fCurrentOuterMostTupletFirstNote = nullptr;
-// //     fCurrentOuterMostTuplet = nullptr;
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       displayTupletsStack (
-//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
-//   }
-// //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-// //   //     displayVoicesTupletsStacksMap (
-//   //       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
-// //   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-
 //______________________________________________________________________________
 void mxsr2msrTranslator::populateCurrentNoteAndAppendItToCurrentRecipientVoice (
   int inputLineNumber)
@@ -27355,8 +27171,10 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         // append note as first note of tuplet
         tuplet->
           appendNoteToTuplet (
-            note,
-            firstNoteVoice);
+            note);
+
+        firstNoteVoice->
+          registerTupletNoteInVoice (note);
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTuplets ()) {
@@ -27444,8 +27262,10 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         // append note as first note of tuplet
         tuplet->
           appendNoteToTuplet (
-            note,
-            firstNoteVoice);
+            note);
+
+        firstNoteVoice->
+          registerTupletNoteInVoice (note);
 
         // push it onto tuplets stack VOFVOFVOF JMI v0.9.70
 
@@ -27541,7 +27361,16 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
     if (voiceHandler->fetchTupletsStackSize ()) {
       currentTuplet =
         voiceHandler->fetchTupletsStackFront ();
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check JMI v0.9.70
+      mfAssert (
+        __FILE__, __LINE__,
+        currentTuplet != nullptr,
+        "currentTuplet is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
     }
+
     else {
       std::stringstream ss;
 
@@ -27608,6 +27437,13 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 //         newChordNoteInputLineNumber,
 //         tupletLastNote,
 //         msrNoteKind::kNoteRegularInChord);
+
+    // create the current chord from the new chord note
+    fCurrentChord =
+      createChordFromItsFirstNote (
+        newChordNoteInputLineNumber,
+        newChordNote,
+        msrNoteKind::kNoteInChordInGraceNotesGroup);
 
 #ifdef MF_TRACE_IS_ENABLED
     if (false) { // JMI
@@ -31137,3 +30973,182 @@ part-symbol
 //         } // for
 //       }
 //     }
+
+
+// //______________________________________________________________________________
+// void mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack (
+//   int         inputLineNumber,
+//   std::string context)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTuplets ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "mxsr2msrTranslator::finalizeTupletStackTopAndPopItFromTupletsStack() 1, " <<
+//       ", voiceHandler->fetchTupletsStackSize (): " << voiceHandler->fetchTupletsStackSize ();
+//
+//     ss <<
+//       ", fCurrentOuterMostTuplet: ";
+//     if (fCurrentOuterMostTuplet) {
+//       ss <<
+//         fCurrentOuterMostTuplet->asString ();
+//     }
+//     else {
+//       ss << "[NULL]";
+//     }
+//
+//     ss <<
+//       ", context: " << context <<
+//       "line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//       displayTupletsStack (
+//         "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 2");
+//   }
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//       displayVoicesTupletsStacksMap (
+//         "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 2");
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // fetch the current voice
+//   S_msrVoice
+//     currentNoteVoice =
+//       fCurrentPartVoicesVector [fCurrentMusicXMLVoiceNumber];
+//
+//   // get tuplet from top of tuplet stack
+//   S_msrTuplet
+//     tupletStackFront =
+//       voiceHandler->fetchTupletsStackFront ();
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     tupletStackFront != nullptr,
+//     "tupletStackFront is NULL");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   // pop from the tuplets stack
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTuplets ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Popping tupletStackFront:" <<
+//       std::endl;
+//     ++gIndenter;
+//     ss <<
+//       tupletStackFront->asString ();
+//     --gIndenter;
+//     ss <<
+//       " from the tuplets stack" <<
+//       ", context: " << context <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//       displayTupletsStack (
+//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 3");
+//   }
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//       displayVoicesTupletsStacksMap (
+//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 3");
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70 BABASSE
+//     if (voiceHandler->fetchTupletsStackSize () == 0) {
+//     }
+//
+//     mfAssert (
+//       __FILE__, __LINE__,
+//       voiceHandler->fetchTupletsStackSize () > 0,
+//       "voiceHandler->getTupletsStack () is empty");
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   voiceHandler->getTupletsStack ().pop_front (); // JMI v0.9.68
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//       displayTupletsStack (
+//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 4");
+//   }
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//       displayVoicesTupletsStacksMap (
+//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 4");
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// //   abort ();
+//
+//   switch (voiceHandler->fetchTupletsStackSize ()) {
+//     case 0:
+//       // tupletStackFront is a top level tuplet
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceTuplets ()) {
+//         gLog <<
+//           "Appending top level tuplet " <<
+//         tupletStackFront->asString () <<
+//         " to voice \"" <<
+//         currentNoteVoice->getVoiceName () <<
+//         "\"" <<
+//         ", line " << inputLineNumber <<
+//         std::endl;
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//     break;
+//
+//     default:
+//       // tupletStackFront is a nested tuplet
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceTuplets ()) {
+//         gLog <<
+//           "=== adding nested tuplet " <<
+//         tupletStackFront <<
+//           " to current stack top tuplet " <<
+//         voiceHandler->fetchTupletsStackFront ()->asString () <<
+//         ", line " << inputLineNumber <<
+//         std::endl;
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       voiceHandler->fetchTupletsStackFront ()->
+//         appendTupletToTuplet (tupletStackFront);
+//   } // switch
+//
+//     // forget about the current outermost tuplet and its first note // JMI v0.9.68 HARMFUL
+// //     fCurrentOuterMostTupletFirstNote = nullptr;
+// //     fCurrentOuterMostTuplet = nullptr;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//       displayTupletsStack (
+//         "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
+//   }
+// //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+// //   //     displayVoicesTupletsStacksMap (
+//   //       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
+// //   }
+// #endif // MF_TRACE_IS_ENABLED
+// }
+

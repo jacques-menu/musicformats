@@ -216,11 +216,17 @@ std::string msrNoteSizeTypeKindAsString (
     case msrNoteSizeTypeKind::kNoteSizeType_UNKNOWN_:
       result = "kNoteSizeType_UNKNOWN_";
       break;
-    case msrNoteSizeTypeKind::kNoteSizeTypeCue:
-      result = "kNoteSizeTypeCue";
+    case msrNoteSizeTypeKind::kNoteSizeTypeFull:
+      result = "kNoteSizeTypeFull";
       break;
     case msrNoteSizeTypeKind::kNoteSizeTypeGrace:
       result = "kNoteSizeTypeGrace";
+      break;
+    case msrNoteSizeTypeKind::kNoteSizeTypeCue:
+      result = "kNoteSizeTypeCue";
+      break;
+    case msrNoteSizeTypeKind::kNoteSizeTypeGraceCue:
+      result = "kNoteSizeTypeGraceCue";
       break;
     case msrNoteSizeTypeKind::kNoteSizeTypeLarge:
       result = "kNoteSizeTypeLarge";

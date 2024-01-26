@@ -510,6 +510,9 @@ class EXP msrVoice : public msrElement
     void                  appendTupletToVoice (
                             const S_msrTuplet& tuplet);
 
+    void                  registerTupletNoteInVoice (
+                            const S_msrNote& note);
+
     // harmonies
 
     void                  appendHarmonyToVoice (

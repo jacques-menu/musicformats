@@ -5093,8 +5093,11 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
       fTupletClonesStack.front ()->
         appendNoteToTuplet (
-          fCurrentNonGraceNoteClone,
-          fCurrentVoiceClone);
+          fCurrentNonGraceNoteClone);
+
+      fCurrentVoiceClone->
+        registerTupletNoteInVoice (fCurrentNonGraceNoteClone);
+
       break;
   } // switch
 

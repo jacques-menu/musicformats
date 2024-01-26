@@ -3518,6 +3518,24 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
   fMeasureIsMusicallyEmpty = false;
 }
 
+void msrVoice::registerTupletNoteInVoice (
+  const S_msrNote& note)
+{
+  // is this note the shortest one in this voice?
+  registerShortestNoteInVoiceIfRelevant (note);
+
+  // fetch voice last measure
+  S_msrMeasure
+    voiceLastMeasure =
+      fetchVoiceLastMeasure (
+        note->getInputStartLineNumber ());
+
+  // account for the duration of note in voice last measure
+  voiceLastMeasure->
+    accountForTupletMemberNoteNotesDurationInMeasure (
+      note);
+}
+
 void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
   const S_msrGraceNotesGroup& graceNotesGroup)
 {

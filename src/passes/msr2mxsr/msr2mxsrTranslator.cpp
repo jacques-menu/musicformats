@@ -1985,11 +1985,17 @@ void msr2mxsrTranslator::populateAppearanceNoteSizes (
       case msrNoteSizeTypeKind::kNoteSizeType_UNKNOWN_:
         noteSizeTypeString = "msrNoteKind::kNoteSizeType_UNKNOWN_";
         break;
-      case msrNoteSizeTypeKind::kNoteSizeTypeCue:
-        noteSizeTypeString = "cue";
+      case msrNoteSizeTypeKind::kNoteSizeTypeFull:
+        noteSizeTypeString = "full";
         break;
       case msrNoteSizeTypeKind::kNoteSizeTypeGrace:
         noteSizeTypeString = "grace";
+        break;
+      case msrNoteSizeTypeKind::kNoteSizeTypeCue:
+        noteSizeTypeString = "cue";
+        break;
+      case msrNoteSizeTypeKind::kNoteSizeTypeGraceCue:
+        noteSizeTypeString = "grace-cue";
         break;
       case msrNoteSizeTypeKind::kNoteSizeTypeLarge:
         noteSizeTypeString = "large";

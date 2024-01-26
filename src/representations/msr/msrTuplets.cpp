@@ -58,7 +58,6 @@ S_msrTuplet msrTuplet::create (
     msrTuplet::create (
       inputLineNumber,
       gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-      // tupletMeasureNumber,
       tupletNumber,
       tupletBracketKind,
       tupletLineShapeKind,
@@ -287,8 +286,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 
 //______________________________________________________________________________
 void msrTuplet::appendNoteToTuplet (
-  const S_msrNote&  note,
-  const S_msrVoice& voice)
+  const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
@@ -367,21 +365,6 @@ void msrTuplet::appendNoteToTuplet (
   // register note's tuplet factor
   note->
     setNoteTupletFactor (fTupletFactor);
-
-  // is this note the shortest one in this voice?
-  voice->
-    registerShortestNoteInVoiceIfRelevant (note);
-
-  // fetch voice last measure
-  S_msrMeasure
-    voiceLastMeasure =
-      voice->fetchVoiceLastMeasure (
-        note->getInputStartLineNumber ());
-
-  // account for the duration of note in voice last measure
-  voiceLastMeasure->
-    accountForTupletMemberNoteNotesDurationInMeasure (
-      note);
 
   --gIndenter;
 }
@@ -1024,7 +1007,7 @@ std::string msrTuplet::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Tuplet asString ()" <<
+    "[Tuplet" <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
