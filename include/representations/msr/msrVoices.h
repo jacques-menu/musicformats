@@ -426,8 +426,8 @@ class EXP msrVoice : public msrElement
     void                  registerShortestNoteInVoiceIfRelevant (
                             const S_msrNote& note);
 
-    void                  registerNoteAsVoiceLastAppendedNote (
-                            const S_msrNote& note);
+//     void                  registerNoteAsVoiceLastAppendedNote (
+//                             const S_msrNote& note);
 
     // harmonies
 

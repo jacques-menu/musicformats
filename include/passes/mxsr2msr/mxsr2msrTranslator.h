@@ -66,20 +66,29 @@ class mxsr2msrVoiceHandler : public smartable
     // set and get
     // ------------------------------------------------------
 
+    S_msrVoice            getMsrVoice () const
+                              { return fMsrVoice; }
+
     const std::list<S_msrTuplet>&
                           getTupletsStack () const
                               { return fTupletsStack; }
+
+    const std::size_t     getTupletsStackSize () const
+                              { return fTupletsStack.size (); }
+
+    const S_msrTuplet     getTupletsStackTop () const
+                              { return fTupletsStack.front (); }
+
+    void                  setLastMetNoteInVoice (S_msrNote note)
+                              { fLastMetNoteInVoice = note; }
+
+    S_msrNote             getLastMetNoteInVoice () const
+                              { return fLastMetNoteInVoice; }
 
   public:
 
     // public services
     // ------------------------------------------------------
-
-    const std::size_t     fetchTupletsStackSize () const
-                              { return fTupletsStack.size (); }
-
-    const S_msrTuplet&    fetchTupletsStackFront () const
-                              { return fTupletsStack.front (); }
 
     void                  pushTupletOntoTupletsStack (const S_msrTuplet& tuplet)
                               { fTupletsStack.push_front (tuplet); }
@@ -117,6 +126,8 @@ class mxsr2msrVoiceHandler : public smartable
 
     S_msrVoice            fMsrVoice;
 
+    S_msrNote             fLastMetNoteInVoice;
+
     std::list<S_msrTuplet>
                           fTupletsStack;
 
@@ -130,11 +141,10 @@ class mxsr2msrVoiceHandler : public smartable
     // private work fields
     // ------------------------------------------------------
 
-    // std::map<S_msrVoice, S_msrTuplet> seems buggy in g++ 4.9.x, so
-    // we use a pair containing the staff and voice numbers:
+    // we use a pair containing the staff and voice numbers: JMI v0.9.70
 //     std::map<S_msrVoice, S_msrTuplet>
-    std::map<std::pair<int, int>, S_msrTuplet>
-                              fLastHandledTupletInVoiceMap;
+//     std::map<std::pair<int, int>, S_msrTuplet>
+//                               fLastHandledTupletInVoiceMap;
 
 //     // the tuplets stops are not always in first-in/first-out order, so:
 //     std::set<int>         fExpectedTupletsStopNumbersSet;
@@ -2083,8 +2093,7 @@ class EXP mxsr2msrTranslator :
     // notes/rests handling
     // ------------------------------------------------------
 
-    // std::map<S_msrVoice, S_msrNote> seems buggy in g++ 4.9.x,
-    // so we use a pair containing the staff and voice numbers:
+    // we use a pair containing the staff and voice numbers: JMI v0.9.70
     std::map<std::pair<int, int>, S_msrNote>
                               fVoicesLastMetNoteMap;
 
@@ -2450,12 +2459,11 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fCurrentNoteBelongsToAChord;
 
-/* JMI
- //    std::map<S_msrVoice, S_msrChord> // seems buggy in g++ 4.9.x, so
+/* JMI v0.9.70
     // we use a pair containing the staff and voice numbers:
     std::map<std::pair<int, int>, S_msrChord>
                               fVoicesCurrentChordMap;
-                              */
+*/
 
     S_msrChord                fCurrentChord;
     Bool                      fOnGoingChord;
@@ -2474,8 +2482,8 @@ class EXP mxsr2msrTranslator :
     void                      printVoicesCurrentChordMap ();
  */
 
-    void                      finalizeCurrentChord (
-                                int inputLineNumber);
+//     void                      finalizeCurrentChord (
+//                                 int inputLineNumber);
 
     void                      printCurrentChord ();
 
@@ -2515,6 +2523,11 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fCurrentNoteBelongsToATuplet;
 
+    // a tuplet stop may occur in a chord before the latter's last note, hence:
+    Bool                      fThereIsAPendingTupletStop;
+    S_msrNote                 fNoteWithThePendingTupletStop;
+    S_msrVoice                fVoiceOfTheNoteWithThePendingTupletStop;
+
     /*
       the measure position of a harmony is that of the next note
       after it in the MusicXML data,
@@ -2525,7 +2538,7 @@ class EXP mxsr2msrTranslator :
       which occurs only after the whole tuplet contents has be analyzed
 
       the elements in a tuplet, including the nested ones,
-      form a tree build along the way
+      form a tree built along the way
       each note therein however has an offset relative to
       the first note of the outermost tuplet, computed linearly long the way
     */
@@ -2555,24 +2568,19 @@ class EXP mxsr2msrTranslator :
                                 const S_msrNote&  note,
                                 const S_msrVoice& currentNoteVoice);
 //
-    void                      handlePendingTupletStops (
-                                int              inputLineNumber,
-                                const S_msrNote& note);
+    void                      reduceTupletStackTop (
+                                const S_msrNote&  note,
+                                const S_msrVoice& currentNoteVoice);
+//
+//     void                      handlePendingTupletStops (
+//                                 int              inputLineNumber,
+//                                 const S_msrNote& note);
 //     void                      handleTupletsPendingOnTupletsStack (
 //                                 int inputLineNumber);
-//
-    void                      handleTupletStopNumbersForNote (
-                                int              inputLineNumber,
-                                const S_msrNote& note);
-//
-//     // std::map<S_msrVoice, S_msrTuplet> seems buggy in g++ 4.9.x, so
-//     // we use a pair containing the staff and voice numbers:
-// //     std::map<S_msrVoice, S_msrTuplet>
-//     std::map<std::pair<int, int>, S_msrTuplet>
-//                               fLastHandledTupletInVoiceMap;
-//
-//      void                     displayLastHandledTupletInVoiceMap (
-//                                 const std::string& header);
+
+//     void                      handleTupletStopNumbersForNote (
+//                                 int              inputLineNumber,
+//                                 const S_msrNote& note);
 
 
     // ties handling

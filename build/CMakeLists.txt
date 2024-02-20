@@ -29,7 +29,8 @@ set (MUSICXML_VERSION 4.0)
 # MusicFormats version
 #===============================================================
 
-execute_process(COMMAND cat ../../MusicFormatsVersionNumber.txt OUTPUT_VARIABLE MUSICFORMATS_VERSION)
+# execute_process(COMMAND cat ../../MusicFormatsVersionNumber.txt OUTPUT_VARIABLE MUSICFORMATS_VERSION)
+execute_process(COMMAND cat ../MusicFormatsVersionNumber.txt OUTPUT_VARIABLE MUSICFORMATS_VERSION)
 message (STATUS "-----> MUSICFORMATS_VERSION: ${MUSICFORMATS_VERSION}")
 
 macro (get_major_minor_patch version)
@@ -165,6 +166,20 @@ message (STATUS "-----> LXML_SAMPLE_DIR: ${LXML_SAMPLE_DIR}")
 
 set (LXML_SRC_FOLDERS factory files elements guido lib operations parser visitors interface)
 message (STATUS "-----> LXML_SRC_FOLDERS: ${LXML_SRC_FOLDERS}")
+
+
+#===============================================================
+# fmt directories, sources and headers
+#===============================================================
+
+set (FMT_SRC_DIR  ${ROOT_DIR}/fmt/src)
+message (STATUS "-----> FMT_SRC_DIR: ${FMT_SRC_DIR}")
+
+set (FMT_INCLUDE_DIR ${ROOT_DIR}/fmt/include/fmt)
+message (STATUS "-----> FMT_INCLUDE_DIR: ${FMT_INCLUDE_DIR}")
+
+set (FMT_TEST_DIR ${ROOT_DIR}/fmt/tests)
+message (STATUS "-----> FMT_TEST_DIR: ${FMT_TEST_DIR}")
 
 
 #===============================================================

@@ -2474,26 +2474,26 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
     */
 }
 
-void msrVoice::registerNoteAsVoiceLastAppendedNote (const S_msrNote& note)
-{
-  fVoiceLastAppendedNote = note;
-
-  // is note the shortest one in this voice?
-  msrWholeNotes
-    noteSoundingWholeNotes =
-      note->
-        getMeasureElementSoundingWholeNotes (),
-    noteDisplayWholeNotes =
-      note->
-        getNoteDisplayWholeNotes (); // JMI
-
-  if (noteSoundingWholeNotes < fVoiceShortestNoteWholeNotes) {
-    fVoiceShortestNoteWholeNotes = noteSoundingWholeNotes;
-  }
-  if (noteDisplayWholeNotes < fVoiceShortestNoteWholeNotes) {
-    fVoiceShortestNoteWholeNotes = noteDisplayWholeNotes;
-  }
-}
+// void msrVoice::registerNoteAsVoiceLastAppendedNote (const S_msrNote& note)
+// {
+//   fVoiceLastAppendedNote = note;
+//
+//   // is note the shortest one in this voice?
+//   msrWholeNotes
+//     noteSoundingWholeNotes =
+//       note->
+//         getMeasureElementSoundingWholeNotes (),
+//     noteDisplayWholeNotes =
+//       note->
+//         getNoteDisplayWholeNotes (); // JMI
+//
+//   if (noteSoundingWholeNotes < fVoiceShortestNoteWholeNotes) {
+//     fVoiceShortestNoteWholeNotes = noteSoundingWholeNotes;
+//   }
+//   if (noteDisplayWholeNotes < fVoiceShortestNoteWholeNotes) {
+//     fVoiceShortestNoteWholeNotes = noteDisplayWholeNotes;
+//   }
+// }
 
 void msrVoice::appendHarmonyToVoice (
   int                  inputLineNumber,

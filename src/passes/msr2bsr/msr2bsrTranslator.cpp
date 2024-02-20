@@ -5500,7 +5500,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "msr2bsrTranslator::visitEnd (S_msrNote& elt): chord member note " <<
+          "msr2bsrTranslator::visitEnd (S_msrNote& elt): kNoteRegularInChord note " <<
           elt->asString () <<
           " appears outside of a chord";
 
@@ -5524,7 +5524,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "msr2bsrTranslator::visitEnd (S_msrNote& elt): chord member note " <<
+          "msr2bsrTranslator::visitEnd (S_msrNote& elt): kNoteInChordInGraceNotesGroup note " <<
           elt->asString () <<
           " appears outside of a chord";
 

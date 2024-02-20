@@ -1182,34 +1182,34 @@ void msrChord::appendChordBeamLinkToChord (
   fChordBeamLinksList.push_back (chordBeamLink);
 }
 
-void msrChord::finalizeChord (
-  int inputLineNumber)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Finalizing chord '" <<
-      asString () <<
-      "', line " << inputLineNumber <<
-      std::endl <<
-      "fMeasureElementMeasurePosition: " <<
-      std::endl <<
-      fMeasureElementMeasurePosition.asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // we can now set the measure positions for all the chord members JMI v0.9.66
-  if (false) // JMI v0.9.67 MERDUM
-  setChordMembersMeasurePosition (
-    fMeasureElementUpLinkToMeasure,
-    fMeasureElementMeasurePosition);
-}
+// void msrChord::finalizeChord (
+//   int inputLineNumber)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChords ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Finalizing chord '" <<
+//       asString () <<
+//       "', line " << inputLineNumber <<
+//       std::endl <<
+//       "fMeasureElementMeasurePosition: " <<
+//       std::endl <<
+//       fMeasureElementMeasurePosition.asString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // we can now set the measure positions for all the chord members JMI v0.9.66
+//   if (false) // JMI v0.9.67 MERDUM
+//   setChordMembersMeasurePosition (
+//     fMeasureElementUpLinkToMeasure,
+//     fMeasureElementMeasurePosition);
+// }
 
 void msrChord::acceptIn (basevisitor* v)
 {

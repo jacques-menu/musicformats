@@ -361,7 +361,7 @@ class EXP msrChord : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to tuplet
-    const S_msrTuplet&           fetchChordUpLinkToTuplet () const;
+    const S_msrTuplet&    fetchChordUpLinkToTuplet () const;
 
     // uplink to grace notes group
     S_msrGraceNotesGroup  fetchChordUpLinkToGraceNotesGroup () const;
@@ -375,7 +375,7 @@ class EXP msrChord : public msrTupletElement
                             const S_msrVoice& voice);
 
     void                  addAnotherNoteToChord (
-                            const S_msrNote& note,
+                            const S_msrNote&  note,
                             const S_msrVoice& voice);
 
     S_msrNote             fetchChordFirstNonGraceNote () const;
@@ -492,8 +492,8 @@ class EXP msrChord : public msrTupletElement
                             int actualNotes, int normalNotes);
 */
 
-    // finalization
-    void                  finalizeChord (int inputLineNumber);
+//     // finalization
+//     void                  finalizeChord (int inputLineNumber);
 
   public:
 

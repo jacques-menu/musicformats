@@ -80,13 +80,15 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     static SMARTP<msrTuplet> create (
-                            int inputLineNumber);
+                            int inputLineNumber,
+                            int fullTupletElementsNumber);
 
     // creation from MusicXML
     // ------------------------------------------------------
 
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
+                            int                     fullTupletElementsNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
@@ -97,6 +99,7 @@ class EXP msrTuplet : public msrTupletElement
 
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
+                            int                     fullTupletElementsNumber,
                             const S_msrMeasure&     upLinkToMeasure,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
@@ -119,10 +122,12 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
                           msrTuplet (
-                            int inputLineNumber);
+                            int inputLineNumber,
+                            int fullTupletElementsNumber);
 
                           msrTuplet (
                             int                     inputLineNumber,
+                            int                     fullTupletElementsNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
@@ -133,6 +138,7 @@ class EXP msrTuplet : public msrTupletElement
 
                           msrTuplet (
                             int                     inputLineNumber,
+                            int                     fullTupletElementsNumber,
                             const S_msrMeasure&     upLinkToMeasure,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
@@ -214,6 +220,12 @@ class EXP msrTuplet : public msrTupletElement
                           getTupletElementsList () const
                               { return fTupletElementsList; }
 
+//     void                  setFullTupletElementsNumber (int number)
+//                               { fFullTupletElementsNumber = number; }
+
+    int                   getFullTupletElementsNumber () const
+                              { return fFullTupletElementsNumber; }
+
     // tuplet durations
     msrWholeNotes         getTupletDisplayWholeNotes () const
                               { return fTupletDisplayWholeNotes; }
@@ -226,8 +238,7 @@ class EXP msrTuplet : public msrTupletElement
     // uplink to tuplet
     S_msrTuplet           fetchTupletUpLinkToTuplet () const;
 
-    void                  appendNoteToTuplet (
-                            const S_msrNote& note);
+    void                  appendNoteToTuplet (const S_msrNote& note);
 
     void                  appendChordToTuplet (const S_msrChord& chord);
 
@@ -235,11 +246,21 @@ class EXP msrTuplet : public msrTupletElement
 
     void                  appendTupletToTupletClone (const S_msrTuplet& tuplet);
 
+    Bool                  getTupletHasBeenFilled () const
+                              {
+                                return
+                                  fTupletElementsList.size () == fFullTupletElementsNumber;
+                              }
+
     S_msrNote             fetchTupletFirstNonGraceNote () const;
 
     S_msrNote             removeFirstNoteFromTuplet ( // JMI
                             int inputLineNumber);
+
     S_msrNote             removeLastNoteFromTuplet (
+                            int inputLineNumber);
+
+    S_msrTupletElement    removeLastElementFromTuplet (
                             int inputLineNumber);
 
  // JMI   void                  applyDisplayFactorToTupletMembers ();
@@ -312,6 +333,9 @@ class EXP msrTuplet : public msrTupletElement
     // elements
     std::list<S_msrTupletElement>
                           fTupletElementsList;
+
+    // we need to know when the tuplet has been filled in mxsr2msr
+    int                   fFullTupletElementsNumber;
 };
 typedef SMARTP<msrTuplet> S_msrTuplet;
 EXP std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt);

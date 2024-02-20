@@ -11,6 +11,8 @@
 
 #include "visitor.h"
 
+// #include <fmt/core.h> // JMI v0.9.70
+
 #include "msrWae.h"
 
 #include "mfPreprocessorSettings.h"
@@ -35,17 +37,20 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrTuplet msrTuplet::create (
-  int inputLineNumber)
+  int inputLineNumber,
+  int fullTupletElementsNumber)
 {
   msrTuplet* obj =
     new msrTuplet (
-      inputLineNumber);
+      inputLineNumber,
+      fullTupletElementsNumber);
   assert (obj != nullptr);
   return obj;
 }
 
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
+  int                     fullTupletElementsNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
@@ -57,6 +62,7 @@ S_msrTuplet msrTuplet::create (
   return
     msrTuplet::create (
       inputLineNumber,
+      fullTupletElementsNumber,
       gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
       tupletNumber,
       tupletBracketKind,
@@ -69,6 +75,7 @@ S_msrTuplet msrTuplet::create (
 
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
+  int                     fullTupletElementsNumber,
   const S_msrMeasure&     upLinkToMeasure,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
@@ -81,6 +88,7 @@ S_msrTuplet msrTuplet::create (
   msrTuplet* obj =
     new msrTuplet (
       inputLineNumber,
+      fullTupletElementsNumber,
       upLinkToMeasure,
       tupletNumber,
       tupletBracketKind,
@@ -94,10 +102,13 @@ S_msrTuplet msrTuplet::create (
 }
 
 msrTuplet::msrTuplet (
-  int inputLineNumber)
+  int inputLineNumber,
+  int fullTupletElementsNumber)
     : msrTupletElement (
         inputLineNumber)
 {
+  fFullTupletElementsNumber = fullTupletElementsNumber;
+
   fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN_;
 
   fTupletNumber = 0;
@@ -186,6 +197,7 @@ msrTuplet::msrTuplet (
 
 msrTuplet::msrTuplet (
   int                     inputLineNumber,
+  int                     fullTupletElementsNumber,
   const S_msrMeasure&     upLinkToMeasure,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
@@ -197,6 +209,8 @@ msrTuplet::msrTuplet (
     : msrTupletElement (
         inputLineNumber)
 {
+  fFullTupletElementsNumber = fullTupletElementsNumber;
+
   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
   fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN_;
@@ -258,6 +272,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
     newbornClone =
       msrTuplet::create (
         fInputStartLineNumber,
+        fFullTupletElementsNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fTupletNumber,
         fTupletBracketKind,
@@ -285,8 +300,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
 }
 
 //______________________________________________________________________________
-void msrTuplet::appendNoteToTuplet (
-  const S_msrNote& note)
+void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
@@ -334,6 +348,33 @@ void msrTuplet::appendNoteToTuplet (
         ss.str ());
     }
   }
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  if (fTupletElementsList.size () == fFullTupletElementsNumber) {
+    std::stringstream ss;
+
+    ss <<
+      "cannot append note " <<
+      note->asShortString () <<
+      " to an already full tuplet with " <<
+      fFullTupletElementsNumber <<
+      " elements in voice \"" <<
+      fMeasureElementUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ()->
+          getVoiceName () <<
+      "\"";
+
+//     msrInternalError (
+    msrInternalWarning (
+      gServiceRunData->getInputSourceName (),
+      note->getInputStartLineNumber (),
+//       __FILE__, __LINE__,
+      ss.str ());
+
+    return; // JMI v0.9.70 TEMP
+  }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append note to elements list
   fTupletElementsList.push_back (note);
@@ -390,6 +431,39 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
   // set the chord kind
   chord->setChordKind (msrChordInKind::kChordInTuplet);
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  if (fTupletElementsList.size () == fFullTupletElementsNumber) {
+    std::stringstream ss;
+
+    ss <<
+      "cannot append chord " <<
+      chord->asShortString () <<
+      " to an already full tuplet with " <<
+      fFullTupletElementsNumber <<
+      " elements in voice \"" <<
+      fMeasureElementUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ()->
+          getVoiceName () <<
+      "\"";
+
+    gLog <<
+      std::endl << std::endl;
+    this->print (gLog);
+    gLog <<
+      std::endl << std::endl;
+
+//     msrInternalError (
+    msrInternalWarning (
+      gServiceRunData->getInputSourceName (),
+      chord->getInputStartLineNumber (),
+//       __FILE__, __LINE__,
+      ss.str ());
+
+    return; // JMI v0.9.70 TEMP
+  }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   // append chord to elements list
   fTupletElementsList.push_back (chord);
 
@@ -444,6 +518,33 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
   // set the tuplet kind
   tuplet->setTupletKind (msrTupletInKind::kTupletInTuplet);
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  if (fTupletElementsList.size () == fFullTupletElementsNumber) {
+    std::stringstream ss;
+
+    ss <<
+      "cannot append tuplet " <<
+      tuplet->asShortString () <<
+      " to an already full tuplet with " <<
+      fFullTupletElementsNumber <<
+      " elements in voice \"" <<
+      fMeasureElementUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ()->
+          getVoiceName () <<
+      "\"";
+
+//     msrInternalError (
+    msrInternalWarning (
+      gServiceRunData->getInputSourceName (),
+      tuplet->getInputStartLineNumber (),
+//       __FILE__, __LINE__,
+      ss.str ());
+
+    return; // JMI v0.9.70 TEMP
+  }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   // append tuplet to elements list
   fTupletElementsList.push_back (tuplet);
 
@@ -494,6 +595,35 @@ void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
   fTupletDisplayWholeNotes +=
     tuplet->getTupletDisplayWholeNotes ();
 }
+
+// void msrTuplet::removeLastElementFromTuplet (
+//   int                 inputLineNumber,
+//   const S_msrElement& element)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceVoices ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing element '" <<
+//       element->asShortString () <<
+//       "' from voice \"" << fVoiceName << "\"";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   fVoiceLastSegment->
+//     removeElementFromSegment (
+//       inputLineNumber,
+//       element);
+//
+//   --gIndenter;
+// }
 
 S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 {
@@ -550,7 +680,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 #endif // MF_TRACE_IS_ENABLED
 
   if (fTupletElementsList.size ()) {
-    S_msrElement
+    S_msrTupletElement
       firstTupletElement =
         fTupletElementsList.front ();
 
@@ -661,7 +791,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 #endif // MF_TRACE_IS_ENABLED
 
   if (fTupletElementsList.size ()) {
-    S_msrElement
+    S_msrTupletElement
       lastTupletElement =
         fTupletElementsList.back ();
 
@@ -717,6 +847,94 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 
     ss <<
       "This last note from tuplet " <<
+      asString () <<
+      " turns out to be " <<
+      result->asShortString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return result;
+}
+
+S_msrTupletElement msrTuplet::removeLastElementFromTuplet (
+  int inputLineNumber)
+{
+  S_msrTupletElement result;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Removing last element from tuplet " <<
+      asString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (fTupletElementsList.size ()) {
+    result =
+      fTupletElementsList.back ();
+
+//     if (
+//       S_msrNote note = dynamic_cast<msrNote*>(&(*lastTupletElement))
+//     ) {
+//       // remove note from tuplet elements list
+//       fTupletElementsList.pop_back ();
+//
+// /*
+//       // decrement the tuplet sounding whole notes accordingly ??? JMI BAD???
+//       fMeasureElementSoundingWholeNotes +=
+//         note->getMeasureElementSoundingWholeNotes ();
+// */
+//
+//       result = note;
+//     }
+//
+//     else {
+//       if (true) { // JMI
+//         this->print (gLog);
+//       }
+//
+//       msrInternalError (
+//         gServiceRunData->getInputSourceName (),
+//         fInputStartLineNumber,
+//         __FILE__, __LINE__,
+//         "removeLastNoteFromTuplet () expects a note as the last tuplet element");
+//     }
+  }
+
+  else {
+    std::stringstream ss;
+
+    ss <<
+      "cannot remove the last element of an empty tuplet " <<
+      " in voice \"" <<
+      fMeasureElementUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ()->
+          getVoiceName () <<
+      "\"";
+
+    msrInternalError (
+      gServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTuplets ()) {
+    std::stringstream ss;
+
+    ss <<
+      "This last element from tuplet " <<
       asString () <<
       " turns out to be " <<
       result->asShortString ();
@@ -1008,6 +1226,7 @@ std::string msrTuplet::asString () const
 
   ss <<
     "[Tuplet" <<
+    ", fFullTupletElementsNumber: " << fFullTupletElementsNumber <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
@@ -1086,6 +1305,7 @@ std::string msrTuplet::asShortString () const
 
   ss <<
     "[Tuplet asShortString ()" <<
+    ", fFullTupletElementsNumber: " << fFullTupletElementsNumber <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
@@ -1161,6 +1381,7 @@ void msrTuplet::printFull (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
+    ", fFullTupletElementsNumber: " << fFullTupletElementsNumber <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
@@ -1296,6 +1517,7 @@ void msrTuplet::print (std::ostream& os) const
 {
   os <<
     "[Tuplet" <<
+    ", fFullTupletElementsNumber: " << fFullTupletElementsNumber <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<
@@ -1350,8 +1572,6 @@ void msrTuplet::print (std::ostream& os) const
 //     }
 //   os << std::endl;
 
-  os << std::endl;
-
   os << std::left <<
     std::setw (fieldWidth) <<
     "fMeasureElementUpLinkToMeasure" << ": ";
@@ -1380,7 +1600,11 @@ void msrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletElementsList" << ": ";
+    "fTupletElementsList" << ": " <<
+    mfSingularOrPlural (
+      fTupletElementsList.size (),
+      "element", "elements");
+
   if (fTupletElementsList.size ()) {
     os << std::endl;
 
@@ -1401,9 +1625,9 @@ void msrTuplet::print (std::ostream& os) const
 
     --gIndenter;
   }
-  else {
-    os << "[EMPTY]" << std::endl;
-  }
+//   else {
+//     os << "[EMPTY]" << std::endl;
+//   }
 
   --gIndenter;
 

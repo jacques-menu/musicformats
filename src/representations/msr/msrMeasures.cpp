@@ -2743,8 +2743,8 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
     std::stringstream ss;
 
     ss <<
-      "Appending note or padding '" << note->asShortString () <<
-      "' to measure " <<
+      "Appending note or padding " << note->asShortString () <<
+      " to measure " <<
       this->asShortString () <<
       " in voice \"" <<
        voice->getVoiceName () <<

@@ -5032,10 +5032,28 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
      }
 
       else {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (true) { // JMI
+//       gLog <<
+//         std::endl <<
+//         std::endl <<
+//         "&&&&&&&&&&&&&&&&&& msr2msrTranslator::visitEnd (S_msrNote& elt):" <<
+//         std::endl;
+//
+//       fCurrentChordClone->print (gLog);
+//
+//       gLog <<
+//         std::endl <<
+//         "&&&&&&&&&&&&&&&&&&" <<
+//         std::endl <<
+//         std::endl;
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+
         std::stringstream ss;
 
         ss <<
-          "msr2msrTranslator::visitEnd (S_msrNote& elt): chord member note " <<
+          "msr2msrTranslator::visitEnd (S_msrNote& elt): kNoteRegularInChord note " <<
           elt->asString () <<
           " appears outside of a chord";
 
@@ -5060,7 +5078,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         std::stringstream ss;
 
         ss <<
-          "msr2msrTranslator::visitEnd (S_msrNote& elt): chord member note " <<
+          "msr2msrTranslator::visitEnd (S_msrNote& elt): kNoteInChordInGraceNotesGroup note " <<
           elt->asString () <<
           " appears outside of a chord";
 
@@ -5270,6 +5288,24 @@ void msr2msrTranslator::visitStart (S_msrStem& elt)
       __FILE__, __LINE__,
       ss.str ());
   }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceStems ()) {
+        std::stringstream ss;
+
+        ss <<
+          "--> visitStart (S_msrStem& elt)" <<
+          ", fOnGoingNonGraceNote: " <<
+          fOnGoingNonGraceNote <<
+          ", fOnGoingChord: " <<
+          fOnGoingChord <<
+          ", line " << elt->getInputStartLineNumber ();
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
 
   if (fOnGoingNonGraceNote) {
@@ -5567,10 +5603,10 @@ void msr2msrTranslator::visitEnd (S_msrChord& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // finalize the current chord clone
-  fCurrentChordClone->
-    finalizeChord (
-      elt->getInputStartLineNumber ());
+//   // finalize the current chord clone
+//   fCurrentChordClone->
+//     finalizeChord (
+//       elt->getInputStartLineNumber ());
 
   // forget about the current chord clone
   fCurrentChordClone = nullptr;

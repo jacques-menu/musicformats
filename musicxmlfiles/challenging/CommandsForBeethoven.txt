@@ -2,3 +2,7 @@ time cxla BeethovenNinthSymphony.xml -t=passes --display-part-groups
 
 time cxla BeethovenNinthSymphony.xml -t=passes --display-part-groups -t=staves,backup,forward
 
+
+# clear; time musicxml2ly -o BeethovenNinthSymphony_musicxml2ly_FIXED.ly BeethovenNinthSymphony.xml > musicxml2ly_BeethovenNinthSymphony_musicxml2ly_FIXED_log.txt 2>&1
+
+clear; ls -sal BeethovenNinthSymphony_musicxml2ly_FIXED.ly ; time lily BeethovenNinthSymphony_musicxml2ly_FIXED.ly > lilypond_BeethovenNinthSymphony_musicxml2ly_FIXED_log.txt 2>&1

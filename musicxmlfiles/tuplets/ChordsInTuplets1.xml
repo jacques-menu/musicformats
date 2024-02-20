@@ -57,6 +57,7 @@
         </midi-instrument>
       </score-part>
     </part-list>
+
   <part id="P1">
     <measure number="1" width="205.39">
       <print>
@@ -82,6 +83,7 @@
           <line>2</line>
           </clef>
         </attributes>
+
       <note default-x="75.12" default-y="-15.00">
         <pitch>
           <step>C</step>
@@ -96,7 +98,7 @@
           </time-modification>
         <stem>down</stem>
         <notations>
-          <tuplet type="start" bracket="yes"/>
+          <tuplet type="start" bracket="yes"/> <!-- HERE -->
           </notations>
         </note>
       <note default-x="75.12" default-y="-5.00">
@@ -114,6 +116,7 @@
           </time-modification>
         <stem>down</stem>
         </note>
+
       <note default-x="101.33" default-y="-25.00">
         <pitch>
           <step>A</step>
@@ -143,6 +146,7 @@
           </time-modification>
         <stem>down</stem>
         </note>
+
       <note default-x="127.54" default-y="-40.00">
         <pitch>
           <step>E</step>
@@ -157,7 +161,7 @@
           </time-modification>
         <stem>down</stem>
         <notations>
-          <tuplet type="stop"/>
+          <tuplet type="stop"/> <!-- HERE -->
           </notations>
         </note>
       <note default-x="127.54" default-y="-30.00">
@@ -175,6 +179,7 @@
           </time-modification>
         <stem>down</stem>
         </note>
+
       <note default-x="153.75" default-y="-20.00">
         <rest/>
         <duration>6</duration>
