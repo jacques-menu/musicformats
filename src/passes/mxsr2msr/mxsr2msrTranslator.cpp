@@ -21195,17 +21195,18 @@ void mxsr2msrTranslator::reduceTupletStackTop (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-if (fThereIsAPendingTupletStop) {
-}
-else {
-        // add note to tupletStackTop
-        tupletStackTop->
-          appendNoteToTuplet (
-            note);
+        if (! fThereIsAPendingTupletStop) {
+          // JMI v0.9.70 tuplet stop not on last chord member
+          // see ChordsInTupletWithTupletStopNotOnTheChordLastNote.xml
 
-        fCurrentPartVoicesVector [fVoiceNumberToInsertInto]->
-          registerTupletNoteInVoice (note);
-}
+          // add note to tupletStackTop
+          tupletStackTop->
+            appendNoteToTuplet (
+              note);
+
+          fCurrentPartVoicesVector [fVoiceNumberToInsertInto]->
+            registerTupletNoteInVoice (note);
+        }
 
 // #ifdef MF_TRACE_IS_ENABLED
 //         if (gTraceOahGroup->getTraceTupletsDetails ()) {
