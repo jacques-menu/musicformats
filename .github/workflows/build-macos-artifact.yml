@@ -24,38 +24,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-
-      - name: Use Node.js 20.x
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v3
         with:
-          node-version: 20.x
-
-#       - uses: actions/cache@v4
-#         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-#         with:
-#           path: '**/node_modules'
-#           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-#           restore-keys: |
-#             ${{ runner.os }}-yarn-
-
-      - uses: actions/checkout@v3
+          node-version: '20'
 
       - name: Build MusicFormats for MacOS
         run: make -C build
 
-#       - name: Set up Git repository
-#         uses: actions/checkout@v2
-#       - name: Build PDF documentation
-#         uses: actions/upload-artifact@v4
-#
-#       - name: Compile LaTeX document
-#         uses: repaction/texlive@main
-#         with:
-#           tex_files: |
-#             documentation/mfuserguide/MusicFormatsUserGuide.tex
-
       - name: Upload libraries and executables for MacOS
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: musicformats-macos-artifact
           path: |
