@@ -38,14 +38,14 @@ jobs:
 
 #       - name: Set up Git repository
 #         uses: actions/checkout@v2
-      - name: Build PDF documentation
-        uses: actions/upload-artifact@v3
-
-      - name: Compile LaTeX document
-        uses: repaction/texlive@main
-        with:
-          tex_files: |
-            documentation/mfuserguide/MusicFormatsUserGuide.tex
+#       - name: Build PDF documentation
+#         uses: actions/upload-artifact@v3
+#
+#       - name: Compile LaTeX document
+#         uses: repaction/texlive@main
+#         with:
+#           tex_files: |
+#             documentation/mfuserguide/MusicFormatsUserGuide.tex
 
       - name: Upload libraries and executables for MacOS
         uses: actions/upload-artifact@v3
