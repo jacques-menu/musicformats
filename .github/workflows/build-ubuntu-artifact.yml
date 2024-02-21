@@ -31,6 +31,20 @@ jobs:
       - name: Build MusicFormats for Ubuntu
         run: make -C build
 
+      - name: Build LaTeX document
+        on: [push]
+        jobs:
+          build_latex:
+            runs-on: ubuntu-latest
+            steps:
+#             - name: Set up Git repository
+#               uses: actions/checkout@v2
+              - name: Compile LaTeX document
+                uses: repaction/texlive@main
+                with:
+                  tex_files: |
+                    documentation/mfuserguide/MusicFormatsUserGuide.tex
+
       - name: Upload libraries and executables for Ubuntu
         uses: actions/upload-artifact@v3
         with:
