@@ -39,6 +39,7 @@ jobs:
 #             ${{ runner.os }}-yarn-
 
       - name: Build MusicFormats for MacOS
+        uses: actions/checkout@v3
         run: make -C build
 
 #       - name: Set up Git repository
