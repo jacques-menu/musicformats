@@ -37,6 +37,7 @@ jobs:
         run: make -C build
 
       - name: Build PDF documentation
+        uses: actions/upload-artifact@v3
         on: [push]
         jobs:
           build_latex:
