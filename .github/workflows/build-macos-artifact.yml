@@ -29,7 +29,19 @@ jobs:
           node-version: '20'
 
       - name: Build MusicFormats for MacOS
-        run: cd build ; cmake . ; cd .. ; type make ; make -C build
+        run: cd build ; cmake . ; cd .. ; make -C build
+
+      - name: Build LaTeX document
+        on: [push]
+        jobs:
+          build_latex:
+            runs-on: ubuntu-latest
+            steps:
+              - name: Compile LaTeX document
+                uses: repaction/texlive@main
+                with:
+                  tex_files: |
+                    documentation/mfuserguide/MusicFormatsUserGuide.tex
 
       - name: Upload libraries and executables for MacOS
         uses: actions/upload-artifact@v3
@@ -40,13 +52,13 @@ jobs:
             MusicFormatsVersionDate.txt
             build/bin
             build/lib
+            documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
+            documentation/mfuserguide/MusicFormatsUserGuide.pdf
+            documentation/mfmaintainanceguide/MusicFormatsFigures.pdf
+            documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+            documentation/mfapiguide/MusicFormatsAPIGuide.pdf
 #
 #             uncomment to have the full libdir in the .zip archive
 #             build/libdir
 #
 #             include
-#             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
-#             documentation/mfuserguide/MusicFormatsUserGuide.pdf
-#             documentation/mfmaintainanceguide/MusicFormatsFigures.pdf
-#             documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
-#             documentation/mfapiguide/MusicFormatsAPIGuide.pdf
