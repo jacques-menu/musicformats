@@ -43,11 +43,11 @@ jobs:
             MusicFormatsVersionDate.txt
             build/bin
             build/lib
-            documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
-            documentation/mfuserguide/MusicFormatsUserGuide.pdf
-            documentation/mfmaintainanceguide/MusicFormatsFigures.pdf
-            documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
-            documentation/mfapiguide/MusicFormatsAPIGuide.pdf
+#             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
+#             documentation/mfuserguide/MusicFormatsUserGuide.pdf
+#             documentation/mfmaintainanceguide/MusicFormatsFigures.pdf
+#             documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+#             documentation/mfapiguide/MusicFormatsAPIGuide.pdf
 #
 #             uncomment to have the full libdir in the .zip archive
 #             build/libdir

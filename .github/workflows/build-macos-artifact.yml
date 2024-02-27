@@ -31,11 +31,23 @@ jobs:
       - name: Build MusicFormats for MacOS
         run: cd build ; cmake . ; cd .. ; make -C build
 
+      - name: Setup TeX Live
+        uses: teatimeguest/setup-texlive-action@v3
+        with:
+          packages: scheme-basic
+
+      - name: Check `tlmgr` version
+        run: tlmgr --version
+
       - name: Compile LaTeX documentation
         uses: repaction/texlive@main
         with:
           tex_files: |
+            documentation/IntroductionToMusicXML/IntroductionToMusicXML.tex
             documentation/mfuserguide/MusicFormatsUserGuide.tex
+            documentation/mfmaintainanceguide/MusicFormatsFigures.tex
+            documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.tex
+            documentation/mfapiguide/MusicFormatsAPIGuide.tex
 
       - name: Upload libraries and executables for MacOS
         uses: actions/upload-artifact@v3
