@@ -43,6 +43,7 @@ jobs:
             MusicFormatsVersionDate.txt
             build/bin
             build/lib
+            build/Makefile
 #             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
 #             documentation/mfuserguide/MusicFormatsUserGuide.pdf
 #             documentation/mfmaintainanceguide/MusicFormatsFigures.pdf

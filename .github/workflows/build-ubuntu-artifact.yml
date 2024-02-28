@@ -31,16 +31,6 @@ jobs:
       - name: Build MusicFormats for Ubuntu
         run: cd build ; cmake . ; cd .. ; make -C build
 
-#       - name: Compile LaTeX documentation
-#         uses: repaction/texlive@main
-#         with:
-#           tex_files: |
-#             documentation/IntroductionToMusicXML/IntroductionToMusicXML.tex
-#             documentation/mfuserguide/MusicFormatsUserGuide.tex
-#             documentation/mfmaintainanceguide/MusicFormatsFigures.tex
-#             documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.tex
-#             documentation/mfapiguide/MusicFormatsAPIGuide.tex
-
       - name: Upload libraries and executables for Ubuntu
         uses: actions/upload-artifact@v3
         with:
@@ -50,6 +40,7 @@ jobs:
             MusicFormatsVersionDate.txt
             build/bin
             build/lib
+            build/Makefile
 #             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
 #             documentation/mfuserguide/MusicFormatsUserGuide.pdf
 #             documentation/mfmaintainanceguide/MusicFormatsFigures.pdf
