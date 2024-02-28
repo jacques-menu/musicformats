@@ -1,6 +1,6 @@
 # This is a workflow to build MusicFormats and create an artifact of it
 
-name: Build MacOS Version
+name: Build MacOS latest Version
 
 # Controls when the action will run.
 on:

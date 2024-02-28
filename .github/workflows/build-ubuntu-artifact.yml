@@ -1,6 +1,6 @@
 # This is a workflow to build MusicFormats and create an artifact of it
 
-name: Build Ubuntu Version
+name: Build Ubuntu latest Version
 
 # Controls when the action will run.
 on:
