@@ -37,7 +37,7 @@ jobs:
       - name: Upload libraries and executables for Windows
         uses: actions/upload-artifact@v3
         with:
-          name: musicformats-windows-artifact
+          name: musicformats-windows-latest-artifact
           path: |
             MusicFormatsVersionNumber.txt
             MusicFormatsVersionDate.txt
