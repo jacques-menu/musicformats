@@ -68,7 +68,7 @@
 
 //______________________________________________________________________________
 // uncomment the following definition if trace is desired
-#define MF_TRACE_IS_ENABLED
+// #define MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   #include "mfTraceOah.h"

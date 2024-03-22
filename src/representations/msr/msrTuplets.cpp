@@ -528,10 +528,18 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
       tuplet->asShortString () <<
       " to an already full tuplet with " <<
       fFullTupletElementsNumber <<
-      " elements in voice \"" <<
-      fMeasureElementUpLinkToMeasure->
-        fetchMeasureUpLinkToVoice ()->
-          getVoiceName () <<
+      " elements in voice \"";
+    if (fMeasureElementUpLinkToMeasure) {
+      ss <<
+        fMeasureElementUpLinkToMeasure->
+          fetchMeasureUpLinkToVoice ()->
+            getVoiceName ();
+    }
+    else {
+      ss << "[NULL]";
+    }
+
+    ss <<
       "\"";
 
 //     msrInternalError (
