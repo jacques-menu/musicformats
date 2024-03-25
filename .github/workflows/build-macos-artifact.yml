@@ -20,11 +20,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: macos-latest
 
-    # Select Node.js v20
-    runs:
-      using: 'node20'
-      main: 'main.js'
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -32,6 +27,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
+        # Select Node.js v20
+        runs:
+          using: 'node20'
+          main: 'main.js'
 
       - name: Build MusicFormats for MacOS
         run: cd build ; cmake . ; cd .. ; make -C build
