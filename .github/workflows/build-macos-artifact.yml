@@ -26,13 +26,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 'node20'
+          main: 'main.js'
 
       - name: Build MusicFormats for MacOS
         run:
           # Select Node.js v20
-          using: 'node20'
-          main: 'main.js'
+#           using: 'node20'
+#           main: 'main.js'
           cd build ; cmake . ; cd .. ; make -C build
 
       - name: Setup TeX Live
