@@ -27,13 +27,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '20'
-        # Select Node.js v20
-        runs:
-          using: 'node20'
-          main: 'main.js'
 
       - name: Build MusicFormats for MacOS
-        run: cd build ; cmake . ; cd .. ; make -C build
+        run:
+          # Select Node.js v20
+          runs:
+            using: 'node20'
+            main: 'main.js'
+          cd build ; cmake . ; cd .. ; make -C build
 
       - name: Setup TeX Live
         uses: teatimeguest/setup-texlive-action@v3
