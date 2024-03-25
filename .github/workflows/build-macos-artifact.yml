@@ -25,15 +25,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          main: 'main.js'
+#         with:
+#           node-version: '20'
+#           main: 'main.js'
 
       - name: Build MusicFormats for MacOS
-        run:
+        runs:
           # Select Node.js v20
-#           using: 'node20'
-#           main: 'main.js'
+          using: 'node20'
+          main: 'main.js'
+        run:
           cd build ; cmake . ; cd .. ; make -C build
 
       - name: Setup TeX Live
