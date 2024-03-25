@@ -421,7 +421,9 @@ void msr2guidoRegularHandler::createWarningAndErrorsRegularGroup ()
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
 
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   registerAtomInRegularSubgroup ("maintainance-run", subGroup);
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 }
 
 void msr2guidoRegularHandler::createPresentationRegularGroup ()

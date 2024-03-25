@@ -9641,7 +9641,10 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   if (fElementUsesList.size ()) {
     ++gIndenter;
 
+#ifdef MF_TRACE_IS_ENABLED
     int counter = 0;
+#endif // MF_TRACE_IS_ENABLED
+
     for (
       std::list<S_oahElementUse >::const_iterator i =
         fElementUsesList.begin ();
@@ -9660,7 +9663,9 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
         valueUsed =
           elementUse->getValueUsed ();
 
+#ifdef MF_TRACE_IS_ENABLED
       ++counter;
+#endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {

@@ -3257,7 +3257,7 @@ void msrPart::collectPartMeasuresSlices (
       fPartMeasuresSlicesSequence == nullptr,
       "fPartMeasuresSlicesSequence is not null");
   }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 

@@ -395,7 +395,7 @@ msrSyllable::msrSyllable (
             +
           " is not positive");
         }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
       break;
 
     case msrSyllableKind::kSyllableMeasureEnd:

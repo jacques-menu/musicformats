@@ -2640,37 +2640,45 @@ void msrMeasure::appendNoteToMeasure (
   }
 
   else if (positionsDelta.getNumerator () < 0) {
-#ifdef MF_TRACE_IS_ENABLED
-    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
-      std::stringstream ss;
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+    if (
+      gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+    ) {
+  #ifdef MF_TRACE_IS_ENABLED
+      if (
+        gTraceOahGroup->getTraceParts ()
+      ) {
+        std::stringstream ss;
 
-      ss <<
-        "partCurrentDrawingMeasurePosition " <<
-        partCurrentDrawingMeasurePosition.asString () <<
-        " is smaller than fMeasureCurrentAccumulatedWholeNotesDuration " <<
-        fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
-        " in measure " <<
-        this->asShortString () <<
-        ", cannot padup in voice \"" <<
-        fMeasureUpLinkToSegment->
-          getSegmentUpLinkToVoice ()->
-            getVoiceName () <<
-        "\"" <<
-        ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-        fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
-        ", partCurrentDrawingMeasurePosition: " <<
-        partCurrentDrawingMeasurePosition.asString () <<
-        ", positionsDelta: " << positionsDelta <<
-        ", line " << note->getInputStartLineNumber ();
+        ss <<
+          "partCurrentDrawingMeasurePosition " <<
+          partCurrentDrawingMeasurePosition.asString () <<
+          " is smaller than fMeasureCurrentAccumulatedWholeNotesDuration " <<
+          fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
+          " in measure " <<
+          this->asShortString () <<
+          ", cannot padup in voice \"" <<
+          fMeasureUpLinkToSegment->
+            getSegmentUpLinkToVoice ()->
+              getVoiceName () <<
+          "\"" <<
+          ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
+          fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
+          ", partCurrentDrawingMeasurePosition: " <<
+          partCurrentDrawingMeasurePosition.asString () <<
+          ", positionsDelta: " << positionsDelta <<
+          ", line " << note->getInputStartLineNumber ();
 
-  //     msrInternalError ( // JMI v0.9.68
-      msrInternalWarning (
-        gServiceRunData->getInputSourceName (),
-        note->getInputStartLineNumber (),
-  //      __FILE__, __LINE__,
-        ss.str ());
-    }
+    //     msrInternalError ( // JMI v0.9.68
+        msrInternalWarning (
+          gServiceRunData->getInputSourceName (),
+          note->getInputStartLineNumber (),
+    //      __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
+    }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
   }
 
   else {
@@ -4006,31 +4014,38 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
   }
 
   else if (fMeasureCurrentAccumulatedWholeNotesDuration > measurePositionToPadUpTo) {
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+    if (
+      gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+    ) {
 #ifdef MF_TRACE_IS_ENABLED
-    // maintainance check
-    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
-      std::stringstream ss;
+      if (
+        gTraceOahGroup->getTraceParts ()
+      ) {
+        std::stringstream ss;
 
-      ss <<
-        "Cannot padup measure " <<
-        this->asShortString () <<
-        " from " <<
-        fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
-        " to " <<
-        measurePositionToPadUpTo.asString () <<
-        " in voice \"" <<
-        measureVoice->getVoiceName () <<
-        "\"," <<
-        " since the latter has already been overtaken";
+        ss <<
+          "Cannot padup measure " <<
+          this->asShortString () <<
+          " from " <<
+          fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
+          " to " <<
+          measurePositionToPadUpTo.asString () <<
+          " in voice \"" <<
+          measureVoice->getVoiceName () <<
+          "\"," <<
+          " since the latter has already been overtaken";
 
-  //     msrInternalError (
-      msrInternalWarning ( // JMI v0.9.70
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-  //       __FILE__, __LINE__,
-        ss.str ());
-    }
+    //     msrInternalError (
+        msrInternalWarning ( // JMI v0.9.70
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+    //       __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
+    }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
   }
 
   else {
@@ -4578,28 +4593,35 @@ void msrMeasure::determineMeasureKind (
   msrMeasureRepeatContextKind measureRepeatContextKind)
 {
   if (fMeasureKindHasBeenDetermined) {
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+    if (
+      gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+    ) {
 #ifdef MF_TRACE_IS_ENABLED
-    // maintainance check
-    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
-      std::stringstream ss;
+      if (
+        gTraceOahGroup->getTraceParts ()
+      ) {
+        std::stringstream ss;
 
-      ss <<
-        "### MAINTAINANCE ### -- " <<
-        "Attempting to determine measure kind for measure \"" <<
-        asShortString () <<
-        "\" more than once";
+        ss <<
+          "### MAINTAINANCE ### -- " <<
+          "Attempting to determine measure kind for measure \"" <<
+          asShortString () <<
+          "\" more than once";
 
-      msrInternalError (
-        gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+        msrInternalError (
+          gServiceRunData->getInputSourceName (),
+          fInputStartLineNumber,
+          __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
+    }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
   }
 
   // register measureRepeatContextKind
-// JMI ??? v0.9.70
+  // JMI ??? v0.9.70
   setMeasureRepeatContextKind (measureRepeatContextKind);
 
   // fetch the voice
@@ -7086,60 +7108,67 @@ void msrMeasure::finalizeMeasure (
   const std::string&          context)
 {
   if (fMeasureHasBeenFinalized) {
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+    if (
+      gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+    ) {
 #ifdef MF_TRACE_IS_ENABLED
-    // maintainance check
-    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
-      std::stringstream ss;
-
-      ss <<
-        "### MAINTAINANCE ### -- " <<
-        "Attempt at finalizing measure " <<
-        this->asShortString () <<
-        " more than once in segment '" <<
-        fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
-        "', context: " << context <<
-        "', measureFinalizationContext: " << fMeasureFinalizationContext <<
-        " in voice \"" <<
-        fMeasureUpLinkToSegment->
-          getSegmentUpLinkToVoice ()->
-            getVoiceName () <<
-        "\" (" << context << ")" <<
-        ", line " << inputLineNumber;
-
-      if (gTraceOahGroup->getTraceMeasuresDetails ()) {
+      if (
+        gTraceOahGroup->getTraceParts ()
+      ) {
         std::stringstream ss;
 
         ss <<
-          std::endl <<
-          ss.str () <<
-          std::endl << std::endl;
+          "### MAINTAINANCE ### -- " <<
+          "Attempt at finalizing measure " <<
+          this->asShortString () <<
+          " more than once in segment '" <<
+          fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
+          "', context: " << context <<
+          "', measureFinalizationContext: " << fMeasureFinalizationContext <<
+          " in voice \"" <<
+          fMeasureUpLinkToSegment->
+            getSegmentUpLinkToVoice ()->
+              getVoiceName () <<
+          "\" (" << context << ")" <<
+          ", line " << inputLineNumber;
 
-        S_msrStaff
-          staff =
-            fetchMeasureUpLinkToStaff ();
+        if (gTraceOahGroup->getTraceMeasuresDetails ()) {
+          std::stringstream ss;
 
-        ss <<
-          "staff:" <<
-          std::endl;
+          ss <<
+            std::endl <<
+            ss.str () <<
+            std::endl << std::endl;
 
-        ++gIndenter;
-        ss << staff;
-        ss << std::endl;
-        --gIndenter;
+          S_msrStaff
+            staff =
+              fetchMeasureUpLinkToStaff ();
 
-        gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
+          ss <<
+            "staff:" <<
+            std::endl;
+
+          ++gIndenter;
+          ss << staff;
+          ss << std::endl;
+          --gIndenter;
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
 
   //     msrInternalError ( // JMI v0.9.70
-      msrInternalWarning (
-        gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
-  //       __FILE__, __LINE__,
-        ss.str ());
-    }
+        msrInternalWarning (
+          gServiceRunData->getInputSourceName (),
+          fInputStartLineNumber,
+    //       __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
+    }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
   }
 
   else {
@@ -7363,24 +7392,31 @@ void msrMeasure::finalizeMeasureClone (
 #endif // MF_TRACE_IS_ENABLED
 
   if (fMeasureHasBeenFinalized) {
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+    if (
+      gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+    ) {
 #ifdef MF_TRACE_IS_ENABLED
-    // maintainance check
-    if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
-      std::stringstream ss;
+      if (
+        gTraceOahGroup->getTraceParts ()
+      ) {
+        std::stringstream ss;
 
-      ss <<
-        "### MAINTAINANCE ### -- " <<
-        "Attempt at finalizing measure clone " <<
-        asShortString () <<
-        "\" more than once";
+        ss <<
+          "### MAINTAINANCE ### -- " <<
+          "Attempt at finalizing measure clone " <<
+          asShortString () <<
+          "\" more than once";
 
-      msrInternalError (
-        gServiceRunData->getInputSourceName (),
-        inputLineNumber,
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+        msrInternalError (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
+    }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
   }
 
   ++gIndenter;

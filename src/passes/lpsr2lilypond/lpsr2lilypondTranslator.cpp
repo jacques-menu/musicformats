@@ -1886,7 +1886,7 @@ void lpsr2lilypondTranslator::generateCoda (const S_msrCoda& coda)
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         fLilypondCodeStream << " %{ kCodaFirst %}  ";
       }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
       break;
 
     case msrCodaKind::kCodaSecond:
@@ -1898,7 +1898,7 @@ void lpsr2lilypondTranslator::generateCoda (const S_msrCoda& coda)
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
         fLilypondCodeStream << " %{ kCodaSecond %}  ";
       }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
       break;
   } // switch
   fLilypondCodeStream << std::endl;
@@ -2469,7 +2469,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
     if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
       fLilypondCodeStream << " %{ r222 %}  ";
     }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
   }
   else {
     // generate a skip
@@ -2479,7 +2479,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
     if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
       fLilypondCodeStream << " %{ s222 %}  ";
     }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
   }
 
   // generate the skip duration if relevant
@@ -11609,24 +11609,28 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (
-    gTraceOahGroup->getTraceParts ()
-      ||
     gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
   ) {
-    std::stringstream ss;
+#ifdef MF_TRACE_IS_ENABLED
+    if (
+      gTraceOahGroup->getTraceParts ()
+    ) {
+      std::stringstream ss;
 
-    ss <<
-//       std::endl <<
-      "<!--=== part \"" << partCombinedName << "\"" <<
-      ", line " << elt->getInputStartLineNumber () << " ===-->";
+      ss <<
+  //       std::endl <<
+        "<!--=== part \"" << partCombinedName << "\"" <<
+        ", line " << elt->getInputStartLineNumber () << " ===-->";
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif // MF_TRACE_IS_ENABLED
+  }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
   // remember current part
   fCurrentPart = elt;
@@ -12945,7 +12949,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       "%{ visitStart (S_msrMeasure&(), measureKind: " << measureKind << " %} " <<
       std::endl;
   }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
   // register the current measure number in the service run data
   S_mfServiceRunData
@@ -14752,6 +14756,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
       // generate information and line number as a comment if relevant
+#ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceLyrics ()) {
         fLilypondCodeStream <<
           "%{ kSyllableLineBreak, line " <<
@@ -14759,6 +14764,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           " %}  " <<
           std::endl;
       }
+#endif // MF_TRACE_IS_ENABLED
 
       fLilypondCodeStream <<
         "\\break" <<
@@ -14781,6 +14787,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 
       // generate information and line number as a comment
       // generate information and line number as a comment if relevant
+#ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceLyrics ()) {
         fLilypondCodeStream <<
           "%{ kSyllablePageBreak, line " <<
@@ -14788,6 +14795,7 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           " %}  " <<
           std::endl;
       }
+#endif // MF_TRACE_IS_ENABLED
 
       fLilypondCodeStream <<
         "\\pageBreak" <<
@@ -20044,11 +20052,11 @@ void lpsr2lilypondTranslator::generateNoteBeams (
 
               fLilypondCodeStream << "[ " << " %{ generateNoteBeams() %}";
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
               if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
                 fLilypondCodeStream << "%{ kBeamBegin 1 %}  ";
               }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
               if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
                 // generate the input line number as a comment
@@ -20067,11 +20075,11 @@ void lpsr2lilypondTranslator::generateNoteBeams (
             if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
               fLilypondCodeStream << "] ";
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
               if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
                 fLilypondCodeStream << "%{ kBeamEnd 1 %}  ";
               }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
               if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
                 // generate the input line number as a comment
@@ -24173,11 +24181,11 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
           if (originalBeam->getBeamNumber () == 1)
             fLilypondCodeStream << "[ " << " %{ generateCodeRightAfterChordContents() %}";
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
               if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
                 fLilypondCodeStream << "%{ kBeamBegin 2 %}  ";
               }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
             if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
               // generate the input line number as a comment
@@ -24193,11 +24201,11 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
           if (originalBeam->getBeamNumber () == 1)
             fLilypondCodeStream << "] ";
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
               if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
                 fLilypondCodeStream << "%{ kBeamEnd 2 %}  ";
               }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
             if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
               // generate the input line number as a comment

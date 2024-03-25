@@ -1036,9 +1036,13 @@ void mxsr2msrTranslator::displayCurrentPartStavesVector (
 void mxsr2msrTranslator::populateCurrentPartVoicesVectorsFromPart (
   const S_msrPart& part)
 {
+#ifdef MF_TRACE_IS_ENABLED
   int
     partMinimumVoiceNumber =
-      part->getPartMinimumVoiceNumber (),
+      part->getPartMinimumVoiceNumber ();
+#endif // MF_TRACE_IS_ENABLED
+
+  int
     partMaximumVoiceNumber =
       part->getPartMaximumVoiceNumber ();
 
@@ -2770,22 +2774,27 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
 
   std::string partID = elt->getAttributeValue ("id");
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceParts ()
-      ||
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+  if (
     gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
   ) {
-    std::stringstream ss;
+#ifdef MF_TRACE_IS_ENABLED
+    if (
+      gTraceOahGroup->getTraceParts ()
+    ) {
+      std::stringstream ss;
 
-    ss <<
-      "<!--=== partID \"" << partID << "\"" <<
-      ", line " << elt->getInputStartLineNumber () << " ===-->";
+      ss <<
+        "<!--=== partID \"" << partID << "\"" <<
+        ", line " << elt->getInputStartLineNumber () << " ===-->";
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif // MF_TRACE_IS_ENABLED
+  }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
   // fetch current part from its partID
   fCurrentPart =
@@ -10445,8 +10454,14 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
     }
 
     // are there pending voices wedges?
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+  if (
+    gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+  ) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceWedges ()) {
+    if (
+      gTraceOahGroup->getTraceParts ()
+    ) {
       // maintainance check
       if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
         std::stringstream ss;
@@ -10467,6 +10482,8 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       }
     }
 #endif // MF_TRACE_IS_ENABLED
+  }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
     // finalize current measure in the part,
     // to add skips if necessary and set measure kind
@@ -11571,6 +11588,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         elt->getInputStartLineNumber (),
         "visitEnd (S_barline& elt)");
   }
+
 
   // create the barLine
   S_msrBarLine
@@ -23839,49 +23857,56 @@ S_msrNote mxsr2msrTranslator::createNote (
     }
   }
 
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+  if (
+    gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+  ) {
 #ifdef MF_TRACE_IS_ENABLED
-  // maintainance check
-  if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN // JMI v0.9.70
-    std::stringstream ss;
-
-    ss <<
-      "---> note sanity test: " <<
-      ", fCurrentDivisionsPerQuarterNote: " <<
-      fCurrentDivisionsPerQuarterNote <<
-      ", fCurrentNoteNormalNotes: " <<
-      fCurrentNoteNormalNotes <<
-      ", fCurrentNoteActualNotes: " <<
-      fCurrentNoteActualNotes <<
-      ", fCurrentNoteSoundingWholeNotes: " <<
-      fCurrentNoteSoundingWholeNotes;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-
     if (
-      fCurrentDivisionsPerQuarterNote * fCurrentNoteNormalNotes
-        !=
-      fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes
+      gTraceOahGroup->getTraceParts ()
     ) {
       std::stringstream ss;
 
       ss <<
-        ", fCurrentDivisionsPerQuarterNote * fCurrentNoteNormalNotes = " <<
-        fCurrentDivisionsPerQuarterNote * fCurrentNoteNormalNotes <<
-        ", fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes = " <<
-        fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes;
+        "---> note sanity test: " <<
+        ", fCurrentDivisionsPerQuarterNote: " <<
+        fCurrentDivisionsPerQuarterNote <<
+        ", fCurrentNoteNormalNotes: " <<
+        fCurrentNoteNormalNotes <<
+        ", fCurrentNoteActualNotes: " <<
+        fCurrentNoteActualNotes <<
+        ", fCurrentNoteSoundingWholeNotes: " <<
+        fCurrentNoteSoundingWholeNotes;
 
-//       mfAssert (
-//         __FILE__, __LINE__,
-//         false, // JMI v0.9.70
-//         ss.str ());
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
         ss.str ());
+
+      if (
+        fCurrentDivisionsPerQuarterNote * fCurrentNoteNormalNotes
+          !=
+        fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes
+      ) {
+        std::stringstream ss;
+
+        ss <<
+          ", fCurrentDivisionsPerQuarterNote * fCurrentNoteNormalNotes = " <<
+          fCurrentDivisionsPerQuarterNote * fCurrentNoteNormalNotes <<
+          ", fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes = " <<
+          fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes;
+
+  //       mfAssert (
+  //         __FILE__, __LINE__,
+  //         false, // JMI v0.9.70
+  //         ss.str ());
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
     }
-  }
 #endif // MF_TRACE_IS_ENABLED
+  }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
   // create the note
   S_msrNote

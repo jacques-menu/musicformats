@@ -2063,7 +2063,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
       }
       break;
 
@@ -2083,7 +2083,7 @@ msrDiatonicPitchKind diatonicPitchKindFromQuarterTonesPitchKind (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
       }
       break;
 
@@ -2244,7 +2244,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
       }
       break;
 
@@ -2264,7 +2264,7 @@ msrAlterationKind alterationKindFromQuarterTonesPitchKind (
           __FILE__, __LINE__,
           ss.str ());
       }
-#endif // MF_TRACE_IS_ENABLED
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
       }
       break;
 

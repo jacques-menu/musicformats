@@ -2201,24 +2201,28 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (
-    gTraceOahGroup->getTraceParts ()
-      ||
     gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
   ) {
-    std::stringstream ss;
+#ifdef MF_TRACE_IS_ENABLED
+    if (
+      gTraceOahGroup->getTraceParts ()
+    ) {
+      std::stringstream ss;
 
-    ss <<
-      std::endl <<
-      "<!--=== part \"" << partCombinedName << "\"" <<
-      ", line " <<  elt->getInputStartLineNumber () << " ===-->";
+      ss <<
+        std::endl <<
+        "<!--=== part \"" << partCombinedName << "\"" <<
+        ", line " <<  elt->getInputStartLineNumber () << " ===-->";
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif // MF_TRACE_IS_ENABLED
+  }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
   // register the current part in the service run data
   S_mfServiceRunData
@@ -3462,19 +3466,27 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       "msr2lpsrTranslator::visitEnd (S_msrMeasure&)");
 
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
-  if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
-    std::stringstream ss;
+  if (
+    gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
+  ) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (
+      gTraceOahGroup->getTraceParts ()
+    ) {
+      std::stringstream ss;
 
-    ss <<
-      "--> msr2lpsrTranslator::visitEnd() " <<
-      elt->asString () <<
-      ", line " <<  elt->getInputStartLineNumber ();
+      ss <<
+        "--> msr2lpsrTranslator::visitEnd() " <<
+        elt->asString () <<
+        ", line " <<  elt->getInputStartLineNumber ();
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif // MF_TRACE_IS_ENABLED
+  }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
   Bool doCreateABarCheck (false);
   Bool doCreateABarNumberCheck (false);

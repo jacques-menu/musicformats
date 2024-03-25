@@ -102,7 +102,8 @@ This may be useful when debugging EXECUTABLE.)",
         "fDontQuitOnErrors",
         fDontQuitOnErrors));
 
-  // '-maintainance, -maint' is hidden... JMI
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+  // '-maintainance, -maint' is hidden...
 
   S_oahBooleanAtom
     traceForTestsOahBooleanAtom =
@@ -122,6 +123,7 @@ without annoying the regular user.)",
   subGroup->
     appendAtomToSubGroup (
       traceForTestsOahBooleanAtom);
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 }
 
 void waeOahGroup::initializeWaeOah ()

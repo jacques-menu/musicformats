@@ -2780,24 +2780,28 @@ if (false) // JMI
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
+#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (
-    gTraceOahGroup->getTraceParts ()
-      ||
     gWaeOahGroup->getMaintainanceRun () // MAINTAINANCE_RUN
   ) {
-    std::stringstream ss;
+#ifdef MF_TRACE_IS_ENABLED
+    if (
+      gTraceOahGroup->getTraceParts ()
+    ) {
+      std::stringstream ss;
 
-    ss <<
-      std::endl <<
-      "<!--=== part \"" << partCombinedName << "\"" <<
-      ", line " << elt->getInputStartLineNumber () << " ===-->";
+      ss <<
+        std::endl <<
+        "<!--=== part \"" << partCombinedName << "\"" <<
+        ", line " << elt->getInputStartLineNumber () << " ===-->";
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
 #endif // MF_TRACE_IS_ENABLED
+  }
+#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
   fCurrentMSRPart = elt;
 
