@@ -30,11 +30,11 @@ jobs:
 #           main: 'main.js'
 
       - name: Build MusicFormats for MacOS
-        runs:
+#         runs:
           # Select Node.js v20
+        run:
           using: 'node20'
           main: 'main.js'
-        run:
           cd build ; cmake . ; cd .. ; make -C build
 
       - name: Setup TeX Live
