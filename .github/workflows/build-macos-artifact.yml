@@ -2,6 +2,10 @@
 
 name: Build MacOS latest Version
 
+runs:
+  using: 'node20'
+  main: 'main.js'
+
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
@@ -25,16 +29,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
-#         with:
-#           node-version: '20'
-#           main: 'main.js'
 
       - name: Build MusicFormats for MacOS
-#         runs:
           # Select Node.js v20
         run:
-          using: 'node20'
-          main: 'main.js'
           cd build ; cmake . ; cd .. ; make -C build
 
       - name: Setup TeX Live
