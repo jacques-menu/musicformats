@@ -2,9 +2,9 @@
 
 name: Build MacOS latest Version
 
-runs:
-  using: 'node20'
-  main: 'main.js'
+# runs:
+#   using: 'node20'
+#   main: 'main.js'
 
 # Controls when the action will run.
 on:
@@ -31,7 +31,6 @@ jobs:
       - uses: actions/setup-node@v3
 
       - name: Build MusicFormats for MacOS
-          # Select Node.js v20
         run:
           cd build ; cmake . ; cd .. ; make -C build
 
