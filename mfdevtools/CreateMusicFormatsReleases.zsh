@@ -35,7 +35,7 @@ echo "--> VERSION_NUMBER = ${VERSION_NUMBER}"
 DOWNLOADS_DIR=${HOME}/JMI_Downloads
 echo "--> DOWNLOADS_DIR = ${DOWNLOADS_DIR}"
 echo
-ls -sal "${DOWNLOADS_DIR}/musicformats-*-artifact"
+ls -sal "${DOWNLOADS_DIR}/musicformats-*-latest-artifact"
 echo
 
 
@@ -53,7 +53,7 @@ function CreateReleaseForOS ()
   echo "----------------------------------------------"
   echo
 
-  ARTIFACT_NAME="musicformats-${OS_NAME}-artifact"
+  ARTIFACT_NAME="musicformats-${OS_NAME}-latest-artifact"
   ARTIFACT_DIR="${DOWNLOADS_DIR}/${ARTIFACT_NAME}"
   echo "---> ARTIFACT_NAME: ${ARTIFACT_NAME}"
   echo "---> ARTIFACT_DIR : ${ARTIFACT_DIR}"
@@ -140,7 +140,7 @@ echo
 
 CreateReleaseForOS "macos"
 CreateReleaseForOS "ubuntu"
-CreateReleaseForOS "windows"
+# CreateReleaseForOS "windows"
 echo
 
 echo "----------------------------------------------"
