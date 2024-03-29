@@ -1,4 +1,4 @@
-name: Test zauguin TeXLive installer
+name: Test zauguin TeXLive installer 2
 on:
   push:
 
