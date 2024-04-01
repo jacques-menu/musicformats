@@ -17,6 +17,11 @@ to ease the use and selection of options with the tools provided by MusicFormats
 MusicFormats embeds a version of the [libmusicxml library](https://github.com/grame-cncm/libmusicxml.git),
 which supports the MusicXML (textual) format, both for reading and writing.
 
+To build the library, use:
+
+    cd build
+    cmake --build
+
 The documentation contains among other things a user guide :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
 and a maintenance guide for developpers :
@@ -36,5 +41,5 @@ Each .zip archive contains:
   - the whole set of PDF documentation files.
 
 These ready-to-use versions can be accessed directly with URLs such as:
-  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.66.
-Replace v0.9.66 by the version number of the desired release.
+  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.70.
+Replace v0.9.70 by the version number of the desired release.
