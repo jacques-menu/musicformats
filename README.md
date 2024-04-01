@@ -20,7 +20,7 @@ which supports the MusicXML (textual) format, both for reading and writing.
 To build the library, use:
 
     cd build
-    cmake --build
+    cmake --build .
 
 The documentation contains among other things a user guide :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf

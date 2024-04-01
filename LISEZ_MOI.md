@@ -19,7 +19,7 @@ qui permet la lecture et l'écriture du format MusicXML (textuel).
 
 Pour construire la librarie, utiliser :
     cd build
-    cmake --build
+    cmake --build .
 
 La documentation contient entre autres un guide d'utilisation en anglais :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
