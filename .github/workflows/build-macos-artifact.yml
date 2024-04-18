@@ -34,7 +34,8 @@ jobs:
 
       - name: Build MusicFormats for MacOS
         run:
-          cd build ; cmake --build .
+          cd build ; cmake . ; make
+#           cd build ; cmake --build .
 
 #       - name: Setup TeX Live
 #         uses: teatimeguest/setup-texlive-action@v3
