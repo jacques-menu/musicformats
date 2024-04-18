@@ -34,6 +34,8 @@ jobs:
 
       - name: Build MusicFormats for MacOS
         run:
+          shell: bash
+          working-directory: build
           cd build ; cmake . ; make
 #           cd build ; cmake --build .
 
