@@ -61,84 +61,10 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
     pRepresentationComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.51"),
-          "October 14, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Refined MSR names and summary display options"
-          }
-      ));
-
-    pRepresentationComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.52"),
-          "November 27, 2021",
-          std::list<std::string> {
-            "Finalized harmonies handling in MSR"
-          }
-      ));
-
-    pRepresentationComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.61"),
-          "November 27, 2021",
-          std::list<std::string> {
-            "Added msrCrescDecresc to MSR"
-          }
-      ));
-
-    pRepresentationComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.62"),
-          "November 27, 2021",
-          std::list<std::string> {
-            "Added measure end line numbers to MSR"
-          }
-      ));
-
-    pRepresentationComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.63"),
-          "May 17, 2022",
-          std::list<std::string> {
-            "Introduced msrSegmentComponent in MSR"
-          }
-      ));
-
-    pRepresentationComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.64"),
-          "July 22, 2022",
-          std::list<std::string> {
-            "Fixed unchechecked smart pointers in msrNotes.cpp",
-            "Finalized the representation of measure rests"
-          }
-      ));
-
-    pRepresentationComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.66"),
-          "October 6, 2022",
-          std::list<std::string> {
-            "Finalized the computation of measure positions",
-            "Finalized the '-display-msr-*' options"
-          }
-      ));
-
-    pRepresentationComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.67"),
-          "October 6, 2022",
-          std::list<std::string> {
-            "Finalized the computation of measure positions",
-            "Finalized the '-display-msr-*' options",
-            "Finalized harmonies handling"
+            "Many, many changes in the code base"
           }
       ));
   }

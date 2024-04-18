@@ -87,6 +87,16 @@ S_mfcConverterComponent createMsdl2brailleConverterComponent ()
           }
       ));
 
+    pConverterComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
+          std::list<std::string> {
+            "Many, many changes in the code base"
+          }
+      ));
+
     populateMultiComponent ();
   }
 

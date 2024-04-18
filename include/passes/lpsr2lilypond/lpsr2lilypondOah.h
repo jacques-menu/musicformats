@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2023
+  Copyright (C) Jacques Menu 2016-2024
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -1625,6 +1625,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getLilypondComments () const
                               { return fLilypondComments; }
 
+    void                  setLilypondUsefulFragmentsComments ()
+                              { fLilypondUsefulFragmentsComments = true; }
+    Bool                  getLilypondUsefulFragmentsComments () const
+                              { return fLilypondUsefulFragmentsComments; }
+
     void                  setGlobal ()
                               { fGlobal = true; }
     Bool                  getGlobal () const
@@ -2154,6 +2159,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fXml2lyInfos;
 
     Bool                  fLilypondComments;
+    Bool                  fLilypondUsefulFragmentsComments;
 
     Bool                  fGlobal;
 

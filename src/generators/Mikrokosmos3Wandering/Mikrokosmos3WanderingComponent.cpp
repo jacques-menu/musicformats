@@ -117,10 +117,10 @@ S_mfcGeneratorComponent createMikrokosmos3WanderingGeneratorComponent ()
     pGeneratorComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.6"),
-          "October 23, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Fixed generated output options handling"
+            "Many, many changes in the code base"
           }
       ));
 

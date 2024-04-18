@@ -87,7 +87,6 @@ msrMeasure::msrMeasure (
   fMeasureOrdinalNumberInVoice = -1;
 
   fMeasurePuristNumber = -1; // default irrealist value
-  fNextMeasureNumber = "";
 
   // set debug number
   fMeasureDebugNumber = ++sGlobalMeasureDebugNumber;
@@ -108,9 +107,9 @@ void msrMeasure::initializeMeasure ()
     std::stringstream ss;
 
     ss <<
-      "Initializing measure '" <<
+      "Initializing measure " <<
       fMeasureNumber <<
-      ", measureDebugNumber: '" <<
+      ", measureDebugNumber: " <<
       fMeasureDebugNumber <<
       "' in segment '" <<
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
@@ -1161,7 +1160,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
-      "\", has measure position '" <<
+      "\", has measure position " <<
       elem->getMeasureElementMeasurePosition () <<
       ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
       fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
@@ -1506,7 +1505,9 @@ void msrMeasure::setNextMeasureNumber (const std::string& nextMeasureNumber)
     std::stringstream ss;
 
     ss <<
-      "Setting next measure number to '" <<
+      "Setting next measure number for measure '" <<
+      fMeasureNumber <<
+      "' to '" <<
       nextMeasureNumber <<
       "' in measure " <<
       this->asShortString () <<
@@ -4987,12 +4988,13 @@ void msrMeasure::handleIncompleteMeasure (
             asShortString () <<
             ", line " << inputLineNumber;
 
-    // JMI      msrInternalError (
-          msrInternalWarning (
-            gServiceRunData->getInputSourceName (),
-            inputLineNumber,
-     //       __FILE__, __LINE__,
-            ss.str ());
+          // JMI v0.9.71 ignore this
+//     // JMI      msrInternalError (
+//           msrInternalWarning (
+//             gServiceRunData->getInputSourceName (),
+//             inputLineNumber,
+//      //       __FILE__, __LINE__,
+//             ss.str ());
         }
 
         // set it's measure kind
@@ -7912,7 +7914,9 @@ std::string msrMeasure::asString () const
     fMeasureOrdinalNumberInVoice <<
     ", fMeasurePuristNumber: " <<
     fMeasurePuristNumber <<
-    ", fMeasureDebugNumber: '" <<
+    ", fNextMeasureNumber: " <<
+    fNextMeasureNumber <<
+    ", fMeasureDebugNumber: " <<
     fMeasureDebugNumber <<
     "', fMeasureCurrentAccumulatedWholeNotesDuration: " <<
     fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
@@ -7938,7 +7942,7 @@ void msrMeasure::displayMeasure (
     /* JMI
     "', fMeasurePuristNumber: " <<
     fMeasurePuristNumber <<
-    ", fMeasureDebugNumber: '" <<
+    ", fMeasureDebugNumber: " <<
     fMeasureDebugNumber <<
     */
     "' (" << context << ")" <<
@@ -7987,6 +7991,10 @@ void msrMeasure::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMeasurePuristNumber" << ": " <<
     fMeasurePuristNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNextMeasureNumber" << ": " <<
+    fNextMeasureNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureDebugNumber" << ": " <<
@@ -8235,7 +8243,7 @@ void msrMeasure::printFull (std::ostream& os) const
 void msrMeasure::print (std::ostream& os) const
 {
   os <<
-    "[Measure '" <<
+    "[Measure " <<
     fMeasureNumber <<
     "', " << fMeasureKind <<
     ", " <<
@@ -8264,6 +8272,10 @@ void msrMeasure::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMeasurePuristNumber" << ": " <<
     fMeasurePuristNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNextMeasureNumber" << ": " <<
+    fNextMeasureNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureDebugNumber" << ": " <<

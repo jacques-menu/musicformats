@@ -49,41 +49,20 @@ S_mfcOahComponent createOahComponent ()
     pOahComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.65"),
-          "August 16, 2022",
+          mfcVersionNumber::createFromString ("0.9.50"),
+          "October 6, 2021",
           std::list<std::string> {
-            "Start of sequential versions numbering",
-            "Finalized option '-find' handling"
+            "Start of sequential versions numbering"
           }
       ));
 
     pOahComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.66"),
-          "October 4, 2022",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Added oahElementValueKind::kElementValue_UNKNOWN_ to fix an initialization issue"
-          }
-      ));
-
-    pOahComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.66"),
-          "January 3, 2023",
-          std::list<std::string> {
-            "Added the '-language, -lang' option"
-          }
-      ));
-
-    pOahComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.67"),
-          "February 5, 2023",
-          std::list<std::string> {
-            "Switched 'tracing' to 'trace' everywhere"
+            "Many, many changes in the code base"
           }
       ));
   }

@@ -272,6 +272,8 @@ void guidoGenerationOahGroup::displayGuidoGenerationOahGroupValues (
 //______________________________________________________________________________
 S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
 {
+  static S_mfcPassComponent pGeneratorComponent; // fHandlerMultiComponent instead??? JMI 0.9.70
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::stringstream ss;
@@ -295,9 +297,8 @@ S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
       guidoGenerationOahGroup::create ();
     assert (gGlobalGuidoGenerationOahGroup != 0);
 
-/* JMI ???
-  fHandlerMultiComponent->
-    appendVersionToComponent (
+    pGeneratorComponent->
+      appendVersionToComponent (
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
@@ -305,7 +306,16 @@ S_guidoGenerationOahGroup createGlobalGuidoGenerationOahGroup ()
             "Start of sequential versions numbering"
           }
     ));
-*/
+
+    pGeneratorComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
+          std::list<std::string> {
+            "Many, many changes in the code base"
+          }
+      ));
   }
 
   // return the global OAH group

@@ -95,24 +95,24 @@ S_mfcConverterComponent createstringFilterInterpreterComponent ()
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
     // populate the interpreter's own history
+    // populate it
     pConverterComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.62"),
-          "March 9, 2022",
-          list<std::string> {
-            "Created the stringFilter component"
+          mfcVersionNumber::createFromString ("0.9.50"),
+          "October 6, 2021",
+          std::list<std::string> {
+            "Start of sequential versions numbering"
           }
       ));
 
-    // populate the interpreter's own history
     pConverterComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.63"),
-          "March 9, 2022",
-          list<std::string> {
-            "Finalized the syntax and semantics of stringFilter, added '-input' option"
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
+          std::list<std::string> {
+            "Many, many changes in the code base"
           }
       ));
 

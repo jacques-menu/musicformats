@@ -1270,6 +1270,15 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+
+  // populate the measure numbers
+  fVisitedMsrScore->
+    setScoreFirstMeasureNumber (
+      elt->getScoreFirstMeasureNumber ()) ;
+  fVisitedMsrScore->
+    setScoreLastMeasureNumber (
+      elt->getScoreLastMeasureNumber ()) ;
+
   // fetch score header IDENTIFICATIONL JMI
   fCurrentLpsrScoreHeader =
     fResultingLpsr->getScoreHeader();
@@ -3443,7 +3452,8 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrMeasure '" <<
+      "--> End visiting msrMeasure" <<
+      ", fCurrentMeasureNumber: " <<
       fCurrentMeasureNumber <<
       "', nextMeasureNumber: '" <<
       nextMeasureNumber <<
@@ -3564,8 +3574,18 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        doCreateABarCheck = true;
-        doCreateABarNumberCheck = true;
+        // don't generate bar information for the last measure in the score
+        std::string
+          scoreLastMeasureNumber =
+            elt->fetchMeasureUpLinkToScore ()->getScoreLastMeasureNumber ();
+        gLog <<
+          "fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
+          ", scoreLastMeasureNumber: " << scoreLastMeasureNumber <<
+          std::endl;
+
+        doCreateABarCheck =
+          fCurrentMeasureNumber != scoreLastMeasureNumber;
+        doCreateABarNumberCheck = doCreateABarCheck;
       }
       break;
 
@@ -8516,366 +8536,3 @@ void msr2lpsrTranslator::visitEnd (S_msrMidiTempo& elt)
 
 
 } // namespace
-
-//________________________________________________________________________
-/* JMI
-void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
-  S_msrPart            partClone,
-  const S_msrVoice&           voiceClone,
-  const S_msrGraceNotesGroup& skipGraceNotesGroup)
-{
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceGraceNotes ()) {
-      std::stringstream ss;
-
-      ss <<
-        "--> prepending a skip graceNotesGroup clone " <<
-        skipGraceNotesGroup->asShortString () <<
-        " to voices other than \"" <<
-        voiceClone->getVoiceName () << "\"" <<
-        " in part " <<
-        partClone->getPartCombinedName () <<
-        ", line " << skipGraceNotesGroup->getInputStartLineNumber ();
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-  std::map<int, S_msrStaff>
-    partStavesMap =
-      partClone->
-        getPartStavesMap ();
-
-  for (
-    std::map<int, S_msrStaff>::const_iterator i = partStavesMap.begin ();
-    i != partStavesMap.end ();
-    ++i
-  ) {
-    std::list<S_msrVoice>
-      staffVoicesVector =
-        (*i).second->
-          getStaffAllVoicesList ();
-
-    for (
-      std::list<S_msrVoice>::const_iterator j=staffVoicesVector.begin ();
-      j!=staffVoicesVector.end ();
-      ++j
-    ) {
-      S_msrVoice voice = (*j);
-
-      if (voice != voiceClone) {
-        // prepend skip grace notes to voice JMI
-        / *
-        voice->
-          prependGraceNotesGroupToVoice (
-            skipGraceNotesGroup);
-            * /
-      }
-    } // for
-
-  } // for
-}
-*/
-
-/*
-  // is there a rights option?
-  if (gGlobalLpsr2lilypondOahGroup->getRights ().size ()) {
-    // define rights
-    fCurrentLpsrScoreHeader->
-      appendRight (
-         elt->getInputStartLineNumber (),
-        gGlobalLpsr2lilypondOahGroup->getRights ());
-  }
-
-  // is there a composer option?
-  if (gGlobalLpsr2lilypondOahGroup->getComposer ().size ()) {
-    // define composer
-    fCurrentLpsrScoreHeader->
-      appendComposer (
-         elt->getInputStartLineNumber (),
-        gGlobalLpsr2lilypondOahGroup->getComposer ());
-  }
-
-  // is there an arranger option?
-  if (gGlobalLpsr2lilypondOahGroup->getArranger ().size ()) {
-    // define arranger
-    fCurrentLpsrScoreHeader->
-      appendArranger (
-         elt->getInputStartLineNumber (),
-        gGlobalLpsr2lilypondOahGroup->getArranger ());
-  }
-
-  // is there a poet option?
-  if (gGlobalLpsr2lilypondOahGroup->getPoetAtom ()->getSelected ()) {
-    // remove all poets
-    fCurrentLpsrScoreHeader->
-      removeAllPoets ( elt->getInputStartLineNumber ());
-    // append poet
-    fCurrentLpsrScoreHeader->
-      appendPoet (
-         elt->getInputStartLineNumber (),
-        gGlobalLpsr2lilypondOahGroup->getPoet ());
-  }
-
-  // is there a lyricist option?
-  if (gGlobalLpsr2lilypondOahGroup->getLyricist ().size ()) {
-    // define lyricist
-    fCurrentLpsrScoreHeader->
-      appendLyricist (
-         elt->getInputStartLineNumber (),
-        gGlobalLpsr2lilypondOahGroup->getLyricist ());
-  }
-
-  // is there a software option?
-  if (gGlobalLpsr2lilypondOahGroup->getSoftware ().size ()) {
-    // define software
-    fCurrentLpsrScoreHeader->
-      appendSoftware (
-         elt->getInputStartLineNumber (),
-        gGlobalLpsr2lilypondOahGroup->getSoftware ());
-  }
-
-  // is there a dedication?
-  if (gGlobalLpsr2lilypondOahGroup->getDedication ().size ()) {
-    // define dedication
-    fCurrentLpsrScoreHeader->
-      setLilypondDedication (
-        gGlobalLpsr2lilypondOahGroup->getDedication ());
-  }
-
-  // is there a piece?
-  if (gGlobalLpsr2lilypondOahGroup->getPiece ().size ()) {
-    // define piece
-    fCurrentLpsrScoreHeader->
-      setLilypondPiece (
-        gGlobalLpsr2lilypondOahGroup->getPiece ());
-  }
-
-  // is there an opus?
-  if (gGlobalLpsr2lilypondOahGroup->getOpus ().size ()) {
-    // define opus
-    fCurrentLpsrScoreHeader->
-      setLilypondOpus (
-        gGlobalLpsr2lilypondOahGroup->getOpus ());
-  }
-
-  // is there a title?
-  if (gGlobalLpsr2lilypondOahGroup->getTitle ().size ()) {
-    // define title
-    fCurrentLpsrScoreHeader->
-      setLilypondTitle (
-        gGlobalLpsr2lilypondOahGroup->getTitle ());
-  }
-
-  // is there a subtitle?
-  if (gGlobalLpsr2lilypondOahGroup->getSubTitle ().size ()) {
-    // define subtitle
-    fCurrentLpsrScoreHeader->
-      setLilypondSubTitle (
-        gGlobalLpsr2lilypondOahGroup->getSubTitle ());
-  }
-
-  // is there a subsubtitle?
-  if (gGlobalLpsr2lilypondOahGroup->getSubSubTitle ().size ()) {
-    // define subsubtitle
-    fCurrentLpsrScoreHeader->
-      setLilypondSubSubTitle (
-        gGlobalLpsr2lilypondOahGroup->getSubSubTitle ());
-  }
-
-  // is there a meter?
-  if (gGlobalLpsr2lilypondOahGroup->getHeaderMeter ().size ()) {
-    // define meter
-    fCurrentLpsrScoreHeader->
-      setLilypondMeter (
-        gGlobalLpsr2lilypondOahGroup->getHeaderMeter ());
-  }
-
-  // is there a tagline?
-  if (gGlobalLpsr2lilypondOahGroup->getTagline ().size ()) {
-    // define tagline
-    fCurrentLpsrScoreHeader->
-      setLilypondTagline (
-        gGlobalLpsr2lilypondOahGroup->getTagline ());
-  }
-
-  // is there a copyright?
-  if (gGlobalLpsr2lilypondOahGroup->getCopyright ().size ()) {
-    // define copyright
-    fCurrentLpsrScoreHeader->
-      setLilypondCopyright (
-        gGlobalLpsr2lilypondOahGroup->getCopyright ());
-  }
-
-*/
-
-/*
-  if (fWorkNumberKnown && fMovementNumberKnown) {
-    std::string
-      workNumber =
-        fCurrentIdentification->
-          getWorkNumber (),
-      movementNumber =
-        fCurrentIdentification->
-          getMovementNumber ();
-
-    if (
-      workNumber.size () == 0
-        &&
-      movementNumber.size () > 0
-    ) {
-      // use the movement number as the work number
-      fCurrentIdentification->
-        setIdentificationWorkNumber (
-         elt->getInputStartLineNumber (),
-        movementNumber);
-
-      fCurrentLpsrScoreHeader->
-        setIdentificationWorkNumber (movementNumber);
-
-      // forget the movement number
-      fCurrentIdentification->
-        setIdentificationMovementNumber (
-         elt->getInputStartLineNumber (),
-        "");
-
-      fCurrentLpsrScoreHeader->
-        setIdentificationMovementNumber ("");
-    }
-  }
-
-  else if (! fWorkNumberKnown && fMovementNumberKnown) {
-    std::string
-      movementNumber =
-        fCurrentIdentification->
-          getMovementNumber ();
-
-    // use the movement number as the work number
-    fCurrentIdentification->
-      setIdentificationWorkNumber (
-         elt->getInputStartLineNumber (),
-        movementNumber);
-
-    fCurrentLpsrScoreHeader->
-      setIdentificationWorkNumber (movementNumber);
-
-    // forget the movement number
-    fCurrentIdentification->
-      setIdentificationMovementNumber (
-         elt->getInputStartLineNumber (),
-        "");
-
-    fCurrentLpsrScoreHeader->
-      setIdentificationMovementNumber ("");
-  }
-
-*/
-
-
-//   // is this a measure rest? // JMI
-//   if (elt->getMeasureIsAMeasureRest ()) {
-//     // yes
-//
-//     // should we compress measure rests?
-//     if (gGlobalLpsr2lilypondOahGroup->getCompressMeasureRestsInLilypond ()) {
-//       // yes
-//
-//       if (! fCurrentRestMeasure) {
-//         // this is the first multi-measure rest in the sequence
-//
-//         // create a multi-measure rests  containing fCurrentMeasureClone
-//         fCurrentMultiMeasureRestsClone =
-//           msrMultiMeasureRest::create (
-//              elt->getInputStartLineNumber (),
-//             fCurrentMeasureClone,
-//             fCurrentVoiceClone);
-//
-//         // append the current multi-measure rests to the current voice clone
-//         fCurrentVoiceClone->
-//           appendMultiMeasureRestToVoice (
-//              elt->getInputStartLineNumber (),
-//             fCurrentMultiMeasureRestsClone);
-//       }
-//
-//       else {
-//         // this is a subsequent multi-measure rest, merely append it
-//         fCurrentMultiMeasureRestsClone->
-//           appendMeasureCloneToMultiMeasureRests (
-//             fCurrentMeasureClone);
-//       }
-//
-//       fCurrentRestMeasure = fCurrentMeasureClone;
-//     }
-//
-//     else {
-//       // no
-//
-//       // append current measure clone to the current voice clone
-//       fCurrentVoiceClone->
-//         appendMeasureCloneToVoiceClone (
-//            elt->getInputStartLineNumber (),
-//           fCurrentMeasureClone);
-//     }
-//   }
-//
-//   else {
-//     // no, this is a regular measure
-//
-//     // append current measure clone to the current voice clone
-//     fCurrentVoiceClone->
-//       appendMeasureCloneToVoiceClone (
-//          elt->getInputStartLineNumber (),
-//         fCurrentMeasureClone);
-//   }
-
-
-
-//   // is this a measure rest?
-//   if (elt->getMeasureIsAMeasureRest ()) {
-//     // yes JMI
-//   }
-//
-//   else {//
-//     // no
-//
-//     // should we compress measure rests? // JMI v0.9.63
-//     if (gGlobalLpsr2lilypondOahGroup->getCompressMeasureRestsInLilypond ()) {
-//       // yes
-//
-//       if (fCurrentMultiMeasureRestsClone) {
-//         // append the current multi-measure rests to the current voice clone
-//         fCurrentVoiceClone->
-//           appendMultiMeasureRestToVoice (
-//              elt->getInputStartLineNumber (),
-//             fCurrentMultiMeasureRestsClone);
-//
-//         // forget about the current rest measure
-// //         fCurrentRestMeasure = nullptr;
-//
-//         // forget about the current multi-measure rests
-//         fCurrentMultiMeasureRestsClone = nullptr;
-//       }
-//
-//       else {
-//         std::stringstream ss;
-//
-//         ss <<
-//           "fCurrentMultiMeasureRestsClone is null upon multi-measure rest end" <<
-//           fCurrentMeasureNumber <<
-//           "', measurePuristNumber: '" <<
-//           measurePuristNumber <<
-//           "', line " <<  elt->getInputStartLineNumber ();
-//
-// /* JMI ???
-//         msr2lpsrInternalError (
-//           gServiceRunData->getInputSourceName (),
-//            elt->getInputStartLineNumber (),
-//           __FILE__, __LINE__,
-//           ss.str ());
-//           */
-//       }
-//     }
-//   }
-

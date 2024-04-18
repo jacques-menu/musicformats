@@ -55,83 +55,10 @@ S_mfcPassComponent createMxsr2msrComponent ()
     pPassComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.51"),
-          "November 27, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Made missing <divisions/> to be interpreted a 1 by default"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.52"),
-          "January 29, 2022",
-          std::list<std::string> {
-            "Moved barlines to a pending list instead of being appended to the part at once",
-            "Fixed a long-standing issue in barlines handling at the beginning of repeat alternatives"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.60"),
-          "February 21, 2022",
-          std::list<std::string> {
-            "Added options for words conversions and placement"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.61"),
-          "February 21, 2022",
-          std::list<std::string> {
-            "Finalized options -replicate-empty-lpsr-measure and add-empty-msr-measures",
-            "Added conversion of MusicXML words to cresc/decresc"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.62"),
-          "March 31, 2022",
-          std::list<std::string> {
-            "Fixed an issue in scordaturas handling"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.63"),
-          "April 14, 2022",
-          std::list<std::string> {
-            "Fixed missing final barline issue",
-            "Fixed an octave shifts handling issue"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.64"),
-          "July 22, 2022",
-          std::list<std::string> {
-            "Finalized the conversion of MusicXML <credit /> markups to MSR"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.66"),
-          "October 3, 2022",
-          std::list<std::string> {
-            "Permuted the order of populateNote() and handleNoteItself() in mxsr2msrTranslator::visitEnd (S_note& elt)"
+            "Many, many changes in the code base"
           }
       ));
   }

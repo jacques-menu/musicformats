@@ -454,8 +454,8 @@ R"(\markup {
       " and LilyPond \" (lilypond-version))" <<
 R"(
       }
-      \fill-line { \column { \italic { \concat { \filename " - modified on " \modTimeAsString } } } }
-      \fill-line { \column { \italic { \concat { "PDF created on " \pdfCreationTime } } } }
+      \fill-line { \column { \italic { \concat { \lilypondFileName " - modified on " \modTimeAsString } } } }
+      \fill-line { \column { \italic { \concat { "PDF file created on " \pdfCreationTime } } } }
     }
   }
 )";
@@ -2795,17 +2795,17 @@ R"(
 
     schemeFunctionCode =
 R"(
-#(define comml           (object->string (command-line)))
-#(define loc             (+ (string-rindex comml #\space ) 2))
-#(define commllen        (- (string-length comml) 2))
-#(define filename        (substring comml loc commllen))
-#(define siz             (object->string (stat:size (stat filename))))
-#(define ver             (object->string (lilypond-version)))
-#(define dat             (strftime "%d/%m/%Y" (localtime (current-time))))
-#(define tim             (strftime "%H:%M:%S" (localtime (current-time))))
-#(define modTime         (stat:mtime (stat filename)))
+#(define commandLine             (object->string (command-line)))
+#(define loc                     (+ (string-rindex commandLine #\space ) 2))
+#(define commandLineLength       (- (string-length commandLine) 2))
+#(define lilypondFileName        (substring commandLine loc commandLineLength))
+#(define lilypondFileNameSize    (object->string (stat:size (stat lilypondFileName))))
+#(define lilypondVersion         (object->string (lilypond-version)))
+#(define currentDate             (strftime "%d/%m/%Y" (localtime (current-time))))
+#(define currentTime             (strftime "%H:%M:%S" (localtime (current-time))))
+#(define lilypondFileNameModTime (stat:mtime (stat lilypondFileName)))
 
-#(define modTimeAsString (strftime "%d/%m/%Y, %H:%M:%S" (localtime modTime)))
+#(define modTimeAsString (strftime "%d/%m/%Y, %H:%M:%S" (localtime lilypondFileNameModTime)))
 
 #(use-modules (srfi srfi-19))
 % https://www.gnu.org/software/guile/manual/html_node/SRFI_002d19-Date-to-string.html

@@ -29,7 +29,7 @@ jobs:
           node-version: '20'
 
       - name: Build MusicFormats for Ubuntu
-        run: cd build ; cmake . ; cd .. ; make -C build
+        run: cd build ; cmake --build .
 
       - name: Upload libraries and executables for Ubuntu
         uses: actions/upload-artifact@v3

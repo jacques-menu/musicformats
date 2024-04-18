@@ -55,10 +55,10 @@ S_mfcPassComponent createMsr2mxsrComponent ()
     pPassComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.51"),
-          "October 6, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Added options for MusicXML generation"
+            "Many, many changes in the code base"
           }
       ));
   }

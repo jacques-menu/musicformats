@@ -45,6 +45,8 @@ static void populateMultiComponent ()
 //______________________________________________________________________________
 S_mfcConverterComponent createMsdl2musicxmlConverterComponent ()
 {
+  static S_mfcPassComponent pPassComponent;
+
   // protect library against multiple initializations
   if (! pConverterComponent) {
 
@@ -76,6 +78,16 @@ S_mfcConverterComponent createMsdl2musicxmlConverterComponent ()
           "October 6, 2021",
           std::list<std::string> {
             "Start of sequential versions numbering"
+          }
+      ));
+
+    pPassComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
+          std::list<std::string> {
+            "Many, many changes in the code base"
           }
       ));
 

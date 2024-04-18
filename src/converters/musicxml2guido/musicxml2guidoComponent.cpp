@@ -85,10 +85,10 @@ EXP S_mfcConverterComponent createMusicxml2guidoConverterComponent ()
     pConverterComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.51"),
-          "October 12, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Fixed trace OAH issue"
+            "Many, many changes in the code base"
           }
       ));
 

@@ -81,30 +81,20 @@ EXP S_mfcConverterComponent createMusicxml2lilypondConverterComponent ()
     pConverterComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.51"),
-          "October 12, 2021",
+          mfcVersionNumber::createFromString ("0.9.50"),
+          "October 6, 2021",
           std::list<std::string> {
-            "Fixed trace OAH issue"
+            "Start of sequential versions numbering"
           }
       ));
 
     pConverterComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.52"),
-          "November 29, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Finalized MusicXML data encoding check against UTF-8"
-          }
-      ));
-
-    pConverterComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.60"),
-          "February 21, 2022",
-          std::list<std::string> {
-            "Added options for LilyPond generation of words"
+            "Many, many changes in the code base"
           }
       ));
 

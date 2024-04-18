@@ -259,17 +259,17 @@ void Mikrokosmos3WanderingRegularHandler::createInformationsRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("about", subGroup);
-  
+
   registerAtomInRegularSubgroup ("version", subGroup);
   registerAtomInRegularSubgroup ("version-full", subGroup);
-  
+
   registerAtomInRegularSubgroup ("history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
-  
+
   registerAtomInRegularSubgroup ("contact", subGroup);
-  
+
   registerAtomInRegularSubgroup ("music-formats-test", subGroup);
 }
 
@@ -527,7 +527,7 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("display-msr1-voices-flat-view", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-voices-flat-view-details", subGroup);
-  
+
   registerAtomInRegularSubgroup ("display-msr2-voices-flat-view", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-voices-flat-viewdetails", subGroup);
 
@@ -543,6 +543,7 @@ void Mikrokosmos3WanderingRegularHandler::createOahRegularGroup ()
 
       registerAtomInRegularSubgroup ("lilypond-generation-infos", subGroup);
       registerAtomInRegularSubgroup ("lilypond-comments", subGroup);
+      registerAtomInRegularSubgroup ("lilypond-useful-fragments-comments", subGroup);
       registerAtomInRegularSubgroup ("input-line-numbers", subGroup);
 
   registerAtomInRegularSubgroup ("notes-comments", subGroup);

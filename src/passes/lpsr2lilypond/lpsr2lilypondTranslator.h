@@ -763,6 +763,8 @@ class EXP lpsr2lilypondTranslator :
     // private fields and methods
     // ------------------------------------------------------
 
+    void                  initializeLilypondUsefulFragments ();
+
     // names
 
     std::string           nameAsLilypondString (
@@ -933,7 +935,7 @@ class EXP lpsr2lilypondTranslator :
     // stems
 
     // the LilyPond \stem* commands have a persistent effect, hence:
-    msrStemKind  fCurrentStemKind;
+    msrStemKind           fCurrentStemKind;
 
     std::string           stemAsLilypondString (
                             msrStemKind stemKind);
@@ -1099,6 +1101,65 @@ class EXP lpsr2lilypondTranslator :
     void                  computeHeaderFields ();
 */
 
+    // LilyPond useful fragments
+    std::string           cLilypondParallelMusicOpener,
+                          cLilypondParallelMusicCloser;
+
+    std::string           cLilypondPartOpener,
+                          cLilypondPartCloser;
+
+    std::string           cLilypondScordaturaOpener,
+                          cLilypondScordaturaCloser;
+
+    std::string           cLilypondStaffOpener,
+                          cLilypondStaffCloser;
+
+    std::string           cLilypondLayoutContextScoreOpener,
+                          cLilypondLayoutContextScoreCloser;
+
+    std::string           cLilypondLayoutContextStaffOpener,
+                          cLilypondLayoutContextStaffCloser;
+
+    std::string           cLilypondLayoutContextVoiceOpener,
+                          cLilypondLayoutContextVoiceCloser;
+
+    std::string           cLilypondUseVoiceOpener,
+                          cLilypondUseVoiceCloser;
+
+    std::string           cLilypondChordOpener,
+                          cLilypondChordCloser;
+
+    std::string           cLilypondLigatureOpener,
+                          cLilypondLigatureCloser;
+
+    std::string           cLilypondHairPinsCrescendo,
+                          cLilypondHairPinsDecrescendo,
+                          cLilypondHairPinsStop;
+
+  // staff groups
+    std::string           cLilypondNewStaffGroup,
+                          cLilypondStaffGroupOpener,
+                          cLilypondStaffGroupCloser;
+
+    std::string           cLilypondNewStaff,
+                          cLilypondNewGrandStaff,
+                          cLilypondNewPianoStaff,
+                          cLilypondNewChoirStaff;
+
+    std::string           cLilypondNewLyrics;
+
+    std::string           cLilypondHide;
+
+    std::string           cLilypondNewTabStaff,
+                          cLilypondNewHarmoniesStaff,
+                          cLilypondNewFiguredBassStaff,
+                          cLilypondNewDrumStaff,
+                          cLilypondNewRythmicStaff,
+                          cLilypondNewJianpuStaff;
+
+    std::string           cLilypondPartGroupOpener,
+                          cLilypondPartGroupCloser;
+
     // global staff size
     // ------------------------------------------------------
     void                  generateGlobalStaffSize ();
@@ -1179,7 +1240,7 @@ class EXP lpsr2lilypondTranslator :
 
     // score
     // ------------------------------------------------------
-    S_msrScore            fCurrentMsrScoreClone;
+    S_msrScore            fCurrentVisitedMsrScore;
 
     // part groups
     // ------------------------------------------------------

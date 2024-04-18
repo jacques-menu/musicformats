@@ -471,6 +471,14 @@ void msr2msrTranslator::visitStart (S_msrScore& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // populate the measure numbers
+  fResultingNewMsrScore->
+    setScoreFirstMeasureNumber (
+      elt->getScoreFirstMeasureNumber ()) ;
+  fResultingNewMsrScore->
+    setScoreLastMeasureNumber (
+      elt->getScoreLastMeasureNumber ()) ;
 }
 
 void msr2msrTranslator::visitEnd (S_msrScore& elt)

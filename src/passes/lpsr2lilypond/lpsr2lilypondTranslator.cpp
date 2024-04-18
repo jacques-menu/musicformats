@@ -154,12 +154,250 @@ lpsr2lilypondTranslator::lpsr2lilypondTranslator (
   fMsrOahGroup  = msrOpts;
   fLpsrOahGroup = lpsrOpts;
 
+  initializeLilypondUsefulFragments ();
+
   // the private fields will be (re-)initialized each time
   // translateLpsrToLilypondCode() is called
 };
 
 lpsr2lilypondTranslator::~lpsr2lilypondTranslator ()
 {}
+
+void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
+{
+  // LilyPond useful fragments
+
+  // parallel music
+  cLilypondParallelMusicOpener = "<< ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondParallelMusicOpener +=
+      "%{ cLilypondParallelMusicOpener %} ";
+  }
+  cLilypondParallelMusicCloser = ">> ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondParallelMusicCloser +=
+      "%{ cLilypondParallelMusicCloser %} ";
+  }
+
+  // parts
+  cLilypondPartOpener = "<< ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondPartOpener +=
+      "%{ cLilypondPartOpener %} ";
+  }
+  cLilypondPartCloser = ">> ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondPartCloser +=
+      "%{ cLilypondPartCloser %} ";
+  }
+
+  // scordatura
+  cLilypondScordaturaOpener = "<< ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondScordaturaOpener +=
+      "%{ cLilypondScordaturaOpener %} ";
+  }
+  cLilypondScordaturaCloser = ">> ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondScordaturaCloser +=
+      "%{ cLilypondScordaturaCloser %} ";
+  }
+
+  // staves
+  cLilypondStaffOpener = "<< ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondStaffOpener +=
+      "%{ cLilypondStaffOpener %} ";
+  }
+  cLilypondStaffCloser = ">> ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondStaffCloser +=
+      "%{ cLilypondStaffCloser %} ";
+  }
+
+  // layout context
+  cLilypondLayoutContextScoreOpener = "\\context  { \\Score ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondLayoutContextScoreOpener +=
+      "%{ cLilypondLayoutContextScoreOpener %} ";
+  }
+  cLilypondLayoutContextScoreCloser = "} ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondLayoutContextScoreCloser +=
+      "%{ cLilypondLayoutContextScoreCloser %} ";
+  }
+
+  cLilypondLayoutContextStaffOpener = "\\context { \\Staff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondLayoutContextStaffOpener +=
+      "%{ cLilypondLayoutContextStaffOpener %} ";
+  }
+  cLilypondLayoutContextStaffCloser = "} ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondLayoutContextStaffCloser +=
+      "%{ cLilypondLayoutContextStaffCloser %} ";
+  }
+
+  cLilypondLayoutContextVoiceOpener = "\\context { \\Voice ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondLayoutContextVoiceOpener +=
+      "%{ cLilypondLayoutContextVoiceOpener %} ";
+  }
+  cLilypondLayoutContextVoiceCloser = "} ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondLayoutContextVoiceCloser +=
+      "%{ cLilypondLayoutContextVoiceCloser %} ";
+  }
+
+  // voices usage
+  cLilypondUseVoiceOpener = "\\context ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondUseVoiceOpener +=
+      "%{ cLilypondUseVoiceOpener %} ";
+  }
+  cLilypondUseVoiceCloser = ">> ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondUseVoiceCloser +=
+      "%{ cLilypondUseVoiceCloser %} ";
+  }
+
+  // chords
+  cLilypondChordOpener = "< ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondChordOpener +=
+      "%{ cLilypondChordOpener %} ";
+  }
+  cLilypondChordCloser = "> ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondChordCloser +=
+      "%{ cLilypondChordCloser %} ";
+  }
+
+  // ligatures
+  cLilypondLigatureOpener = "\\[ ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondLigatureOpener +=
+      "%{ cLilypondLigatureOpener %} ";
+  }
+  cLilypondLigatureCloser = "\\] ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondLigatureCloser +=
+      "%{ cLilypondLigatureCloser %} ";
+  }
+
+  // hairpins
+  cLilypondHairPinsCrescendo = "\\< ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondHairPinsCrescendo +=
+      "%{ cLilypondHairPinsCrescendo %} ";
+  }
+  cLilypondHairPinsDecrescendo = "\\> ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondHairPinsDecrescendo +=
+      "%{ cLilypondHairPinsDecrescendo %} ";
+  }
+  cLilypondHairPinsStop = "\\! ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondHairPinsStop +=
+      "%{ cLilypondHairPinsStop %} ";
+  }
+
+  // part groups
+  cLilypondPartGroupOpener = "<< ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondPartGroupOpener +=
+      "%{ cLilypondPartGroupOpener %} ";
+  }
+  cLilypondPartGroupCloser = ">> ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondPartGroupCloser +=
+      "%{ cLilypondPartGroupCloser %} ";
+  }
+
+  // staff groups
+  cLilypondNewStaffGroup = "\\new StaffGroup ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewStaffGroup +=
+      "%{ cLilypondNewStaffGroup %} ";
+  }
+  cLilypondStaffGroupOpener = "<< ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondStaffGroupOpener +=
+      "%{ cLilypondStaffGroupOpener %} ";
+  }
+  cLilypondStaffGroupCloser = ">> ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondStaffGroupCloser +=
+      "%{ cLilypondStaffGroupCloser %} ";
+  }
+
+  // staves
+  cLilypondNewStaff = "\\new Staff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewStaff +=
+      "%{ cLilypondNewStaff %} ";
+  }
+  cLilypondNewTabStaff = "\\new TabStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewTabStaff +=
+      "%{ cLilypondNewTabStaff %} ";
+  }
+  cLilypondNewHarmoniesStaff = "\\new HarmoniesStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewHarmoniesStaff +=
+      "%{ cLilypondNewHarmoniesStaff %} ";
+  }
+  cLilypondNewFiguredBassStaff = "\\new FiguredBassStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewFiguredBassStaff +=
+      "%{ cLilypondNewFiguredBassStaff %} ";
+  }
+  cLilypondNewDrumStaff = "\\new DrumStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewDrumStaff +=
+      "%{ cLilypondNewDrumStaff %} ";
+  }
+  cLilypondNewRythmicStaff = "\\new RythmicStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewRythmicStaff +=
+      "%{ cLilypondNewRythmicStaff %} ";
+  }
+  cLilypondNewJianpuStaff = "\\new JianpuStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewJianpuStaff +=
+      "%{ cLilypondNewJianpuStaff %} ";
+  }
+
+  cLilypondNewGrandStaff = "\\new GrandStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewGrandStaff +=
+      "%{ cLilypondNewGrandStaff %} ";
+  }
+  cLilypondNewPianoStaff = "\\new PianoStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewPianoStaff +=
+      "%{ cLilypondNewPianoStaff %} ";
+  }
+  cLilypondNewChoirStaff = "\\new ChoirStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewChoirStaff +=
+      "%{ cLilypondNewChoirStaff %} ";
+  }
+
+  // lyrics
+  cLilypondNewLyrics = "\\new LyricsStaff ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondNewLyrics +=
+      "%{ cLilypondNewLyrics %} ";
+  }
+
+  // hide
+  cLilypondHide = "\\hide ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+    cLilypondHide +=
+      "%{ cLilypondHide %} ";
+  }
+}
 
 //________________________________________________________________________
 void lpsr2lilypondTranslator::translateLpsrToLilypondCode (
@@ -169,27 +407,26 @@ void lpsr2lilypondTranslator::translateLpsrToLilypondCode (
   fVisitedLpsrScore = theLpsrScore;
 
   // get the msrScore
-  S_msrScore
-    theMsrScore =
-      fVisitedLpsrScore->
-        getEmbeddedMsrScore ();
+  fCurrentVisitedMsrScore =
+    fVisitedLpsrScore->
+      getEmbeddedMsrScore ();
 
   // JMI v0.9.70 these should be browsed to generated slurs...
 //   // inhibit the browsing of grace notes groups before,
 //   // since they are handled at the note level
-//   theMsrScore->
+//   fCurrentVisitedMsrScore->
 //     setInhibitGraceNotesGroupsBeforeBrowsing ();
 //
 //   // inhibit the browsing of grace notes groups after,
 //   // since they are handled at the note level
-//   theMsrScore->
+//   fCurrentVisitedMsrScore->
 //     setInhibitGraceNotesGroupsAfterBrowsing ();
 
   // inhibit the browsing of chords in grace notes groups,
   // since they are handled at the note level
   /* JMI
 if (false) // JMI
-  theMsrScore->
+  fCurrentVisitedMsrScore->
       setInhibitChordsInGraceNotesGroupsBrowsing ();
 */
 
@@ -197,13 +434,13 @@ if (false) // JMI
   // since they are handled at the note level
 // not relevant, since there are not tuplets in grace notes groups ??? JMI
 /* JMI
-  theMsrScore->
+  fCurrentVisitedMsrScore->
     setInhibitTupletsInGraceNotesGroupsBrowsing ();
 */
 
   // inhibit the browsing of measure repeats replicas,
   // since Lilypond only needs the repeat measure
-  theMsrScore->
+  fCurrentVisitedMsrScore->
     setInhibitMeasureRepeatReplicasBrowsing ();
 
   // inhibit the browsing of measures repeat replicas,
@@ -319,7 +556,7 @@ if (false) // JMI
 
   if (fVisitedLpsrScore) {
     // set the parts browsing order
-    theMsrScore->
+    fCurrentVisitedMsrScore->
       setStavesBrowingOrderKind (
         msrStavesBrowingOrderKind::kStavesBrowingOrderHarmoniesFiguredBassesRegulars);
 
@@ -1483,7 +1720,7 @@ void lpsr2lilypondTranslator::generateNoteLigaturesList (
       note->getNoteLigaturesList ();
 
   if (noteLigaturesList.size ()) {
-    for (S_msrLigature ligature : noteLigaturesList) {
+    for (const S_msrLigature& ligature : noteLigaturesList) {
       switch (ligature->getLigatureKind ()) {
         case msrLigatureKind::kLigatureNone:
           break;
@@ -1644,14 +1881,14 @@ void lpsr2lilypondTranslator::generateNoteLigaturesList (
               break;
           } // switch
 
-          fLilypondCodeStream << "\\[ ";
+          fLilypondCodeStream << cLilypondLigatureOpener;
           break;
 
         case msrLigatureKind::kLigatureContinue:
           break;
 
         case msrLigatureKind::kLigatureStop:
-   // JMI       fLilypondCodeStream << "\\] ";
+   // JMI       fLilypondCodeStream << cLilypondLigatureCloser;
           break;
       } // switch
     } // for
@@ -8158,15 +8395,20 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
   // score context?
   if (! gGlobalLpsr2lilypondOahGroup->getNoLayoutScoreContext ()) {
     fLilypondCodeStream <<
-      "\\context {" <<
-      std::endl <<
-      gTab << "\\Score" <<
-      std::endl <<
-      gTab << "autoBeaming = ##f % to display tuplets brackets" <<
+      cLilypondLayoutContextScoreOpener <<
       std::endl;
 
+      ++gIndenter;
+
+      fLilypondCodeStream <<
+        "autoBeaming = ##f % to display tuplets brackets" <<
+      std::endl;
+
+    --gIndenter;
+
     // generate the end of the voice definition
-    fLilypondCodeStream << '}';
+    fLilypondCodeStream <<
+      cLilypondLayoutContextScoreCloser;
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
@@ -8179,9 +8421,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
   // voice context?
   if (! gGlobalLpsr2lilypondOahGroup->getNoLayoutVoiceContext ()) {
     fLilypondCodeStream <<
-      "\\context {" <<
-      std::endl <<
-      gTab << "\\Voice" <<
+      cLilypondLayoutContextVoiceOpener <<
       std::endl;
   }
 
@@ -8198,7 +8438,8 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
   }
 
   if (! gGlobalLpsr2lilypondOahGroup->getNoLayoutVoiceContext ()) {
-    fLilypondCodeStream << '}';
+    fLilypondCodeStream <<
+      cLilypondLayoutContextVoiceCloser;
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
@@ -8262,12 +8503,12 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
   // should we set the repeat brackets type?
   if (gGlobalLpsr2lilypondOahGroup->getRepeatBrackets ()) {
     fLilypondCodeStream <<
-      "\\context {" <<
+      cLilypondLayoutContextScoreOpener <<
       std::endl;
 
+    ++gIndenter;
+
     fLilypondCodeStream <<
-      "\\Score" <<
-      std::endl <<
       "% defaultBarType = #\"!\"" <<
       std::endl <<
       "startRepeatType = #\"[|:\"" <<
@@ -8280,7 +8521,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      '}' <<
+      cLilypondLayoutContextScoreCloser <<
       std::endl;
   }
 
@@ -8291,14 +8532,12 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
 
   if (barNumbersSizeAtom->getSelected ()) {
     fLilypondCodeStream <<
-      "\\context {" <<
+      cLilypondLayoutContextScoreOpener <<
       std::endl;
 
     ++gIndenter;
 
     fLilypondCodeStream <<
-      "\\Score" <<
-      std::endl <<
       "\\override BarNumber.font-size = " <<
       barNumbersSizeAtom->getFloatVariable () <<
       std::endl;
@@ -8306,28 +8545,27 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      '}' <<
+      cLilypondLayoutContextScoreCloser <<
       std::endl;
   }
 
   // should we use an arpeggio engraver?
   if (gGlobalLpsr2lilypondOahGroup->getConnectArpeggios ()) {
     fLilypondCodeStream <<
-      "\\context {" <<
+      cLilypondLayoutContextScoreOpener <<
       std::endl;
 
     ++gIndenter;
 
     fLilypondCodeStream <<
-      "\\Staff" <<
-      std::endl <<
       "\\consists \"Span_arpeggio_engraver\"" <<
       std::endl;
 
     --gIndenter;
 
     fLilypondCodeStream <<
-      "} % end of staff context";
+      cLilypondLayoutContextStaffCloser <<
+      " % end of staff context";
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
@@ -8674,7 +8912,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
       getParallelMusicBLockPartGroupBlocks ().size ();
 
   if (fNumberOfPartGroupBlocks > 0) {
-    fLilypondCodeStream << "<<";
+    fLilypondCodeStream << cLilypondParallelMusicOpener;
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
@@ -8725,7 +8963,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
   if (fNumberOfPartGroupBlocks > 0) {
     --gIndenter; // incremented in visitStart (S_lpsrParallelMusicBLock& elt)
 
-    fLilypondCodeStream << ">>";
+    fLilypondCodeStream << cLilypondParallelMusicCloser;
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
@@ -8837,18 +9075,18 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       switch (partGroupSymbolKind) {
         case msrPartGroupSymbolKind::kPartGroupSymbolNone:
           fLilypondCodeStream <<
-            "\\new StaffGroup";
+            cLilypondNewStaffGroup;
           break;
 
         case msrPartGroupSymbolKind::kPartGroupSymbolBrace: // JMI
           switch (partGroupBarLineKind) {
             case msrPartGroupBarLineKind::kPartGroupBarLineYes:
               fLilypondCodeStream <<
-                "\\new PianoStaff";
+                cLilypondNewPianoStaff;
               break;
             case msrPartGroupBarLineKind::kPartGroupBarLineNo:
               fLilypondCodeStream <<
-                "\\new GrandStaff";
+                cLilypondNewGrandStaff;
               break;
           } // switch
           break;
@@ -8857,23 +9095,23 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           switch (partGroupBarLineKind) {
             case msrPartGroupBarLineKind::kPartGroupBarLineYes:
               fLilypondCodeStream <<
-                "\\new StaffGroup";
+                cLilypondNewStaffGroup;
               break;
             case msrPartGroupBarLineKind::kPartGroupBarLineNo:
               fLilypondCodeStream <<
-                "\\new ChoirStaff";
+                cLilypondNewChoirStaff;
               break;
           } // switch
           break;
 
         case msrPartGroupSymbolKind::kPartGroupSymbolLine:
           fLilypondCodeStream <<
-            "\\new StaffGroup";
+            cLilypondNewStaffGroup;
           break;
 
         case msrPartGroupSymbolKind::kPartGroupSymbolSquare:
           fLilypondCodeStream <<
-            "\\new StaffGroup";
+            cLilypondNewStaffGroup;
           break;
       } // switch
 
@@ -8976,10 +9214,10 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
            * check whether individual part have instrument names JMI
            *
             if (partGroupInstrumentName.size ()) {
-              fLilypondCodeStream << = "\\new PianoStaff";
+              fLilypondCodeStream << = cLilypondNewPianoStaff;
             }
             else {
-              fLilypondCodeStream << = "\\new GrandStaff";
+              fLilypondCodeStream << = cLilypondNewGrandStaff;
             }
               */
           break;
@@ -9010,7 +9248,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           std::endl;
       }
 
-//       fLilypondCodeStream << "<<";
+//       fLilypondCodeStream << csvPartGroupOpener;
 
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream <<
@@ -9036,11 +9274,15 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       std::endl;
   }
 
-  fLilypondCodeStream << std::endl;
+//   fLilypondCodeStream << std::endl;
 
 //   if (elt->getPartGroupBlockElements ().size () > 1) {
 //     ++gIndenter; //  // decremented in visitEnd (S_lpsrPartGroupBlock& elt)
 //   }
+
+  fLilypondCodeStream <<
+    cLilypondStaffGroupOpener <<
+    std::endl;
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
@@ -9095,7 +9337,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
       }
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
-//       fLilypondCodeStream << ">>";
+//       fLilypondCodeStream << kPartGroupCloser;
 
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream <<
@@ -9110,6 +9352,10 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
       }
       break;
   } // switch
+
+  fLilypondCodeStream <<
+    cLilypondPartGroupCloser <<
+    std::endl;
 }
 
 //________________________________________________________________________
@@ -9178,12 +9424,12 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
       fLilypondCodeStream <<
         std::left <<
         std::setw (commentFieldWidth) <<
-        "\\new PianoStaff" <<
+        cLilypondNewPianoStaff <<
         " % part " << part->getPartCombinedName ();
     }
     else {
       fLilypondCodeStream <<
-        "\\new PianoStaff";
+        cLilypondNewPianoStaff;
     }
 
     fLilypondCodeStream << std::endl;
@@ -9223,7 +9469,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
       std::endl;
 
     fLilypondCodeStream << // JMI ??? v0.9.62
-      "<<" <<
+      cLilypondPartOpener <<
       std::endl;
   }
 }
@@ -9274,7 +9520,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
     }
     else {
       fLilypondCodeStream <<
-        ">>";
+        cLilypondPartCloser;
     }
 
     fLilypondCodeStream << std::endl;
@@ -9330,31 +9576,31 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
   switch (staff->getStaffKind ()) {
     case msrStaffKind::kStaffKindRegular:
       if (gGlobalLpsr2lilypondOahGroup->getJianpu ()) {
-        fLilypondCodeStream << "\\new JianpuStaff";
+        fLilypondCodeStream << cLilypondNewJianpuStaff;
       }
       else {
-        fLilypondCodeStream << "\\new Staff";
+        fLilypondCodeStream << cLilypondNewStaff;
       }
       break;
 
     case msrStaffKind::kStaffKindTablature:
-      fLilypondCodeStream << "\\new TabStaff";
+      fLilypondCodeStream << cLilypondNewTabStaff;
       break;
 
     case msrStaffKind::kStaffKindHarmonies:
-      fLilypondCodeStream << "\\new msrStaffKind::kStaffKindHarmonies???";
+      fLilypondCodeStream << cLilypondNewHarmoniesStaff;
       break;
 
     case msrStaffKind::kStaffKindFiguredBass:
-      fLilypondCodeStream << "\\new FiguredBassStaff???";
+      fLilypondCodeStream << cLilypondNewFiguredBassStaff;
       break;
 
     case msrStaffKind::kStaffKindDrum:
-      fLilypondCodeStream << "\\new DrumStaff";
+      fLilypondCodeStream << cLilypondNewDrumStaff;
       break;
 
     case msrStaffKind::kStaffKindRythmic:
-      fLilypondCodeStream << "\\new RhythmicStaff";
+      fLilypondCodeStream << cLilypondNewRythmicStaff;
       break;
     } // switch
 
@@ -9598,7 +9844,7 @@ R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
     std::endl;
 
   // generate the comment if relevant
-  fLilypondCodeStream << "<<";
+  fLilypondCodeStream << cLilypondStaffOpener;
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream <<
@@ -9651,7 +9897,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 
   --gIndenter; // incremented in visitStart (S_lpsrStaffBlock& elt)
 
-  fLilypondCodeStream <<  ">>";
+  fLilypondCodeStream <<  cLilypondStaffCloser;
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
   // get the staff
@@ -9710,7 +9956,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewStaffGroupBlock& elt)
 #endif // MF_TRACE_IS_ENABLED
 
    fLilypondCodeStream <<
-     "\\new StaffGroup" << ' ' << "{" <<
+     cLilypondNewStaffGroup << ' ' << "{" <<
       std::endl;
 
   ++gIndenter; // decremented in visitEnd (S_lpsrStaffBlock& elt)
@@ -9912,9 +10158,10 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
 // if (voice->getStaffRelativeVoiceNumber () > 0) { JMI
   fLilypondCodeStream <<
-    "\\context " << voiceContextName << " = \"" <<
+    cLilypondUseVoiceOpener <<
+    voiceContextName << " = \"" <<
     voice->getVoiceAlphabeticName () << "\" <<" <<
-     std::endl;
+    std::endl;
 
   ++gIndenter;
 
@@ -10027,7 +10274,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
     }
   }
 
-  // check by ID
+  // check by partID
   std::string partID =
     part->getPartID ();
 
@@ -10122,7 +10369,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
   --gIndenter;
 
   fLilypondCodeStream <<
-    ">>";
+    cLilypondUseVoiceCloser;
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     // get the voice
@@ -10210,7 +10457,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
     S_msrStanza stanza = elt->getStanza ();
 
     fLilypondCodeStream <<
-      "\\new Lyrics" <<
+      cLilypondNewLyrics <<
       std::endl;
 
     ++gIndenter;
@@ -21614,7 +21861,7 @@ void lpsr2lilypondTranslator::generateNoteScordaturasList (
 
   if (noteScordaturasList.size ()) {
     fLilypondCodeStream <<
-      "<<" <<
+      cLilypondScordaturaOpener <<
       std::endl;
 
     ++gIndenter;
@@ -21635,7 +21882,8 @@ void lpsr2lilypondTranslator::generateNoteScordaturasList (
       ++gIndenter;
 
       fLilypondCodeStream <<
-        "\\new Staff \\with { alignAboveContext = \"" <<
+        cLilypondNewStaff <<
+        " \\with { alignAboveContext = \"" <<
         note->
           fetchUpLinkToNoteToStaff ()->
             getStaffAlphabeticName () <<
@@ -21645,9 +21893,9 @@ void lpsr2lilypondTranslator::generateNoteScordaturasList (
       ++gIndenter;
 
       fLilypondCodeStream <<
-        "\\hide Staff.Stem" <<
+        cLilypondHide << " Staff.Stem" <<
         std::endl <<
-        "\\hide Staff.TimeSignature" <<
+        cLilypondHide << " Staff.TimeSignature" <<
         std::endl <<
         "\\small" <<
         std::endl <<
@@ -21768,7 +22016,7 @@ void lpsr2lilypondTranslator::generateNoteSlashesList (
         case msrSlashUseStemsKind::kSlashUseStemsNo:
           fLilypondCodeStream <<
             std::endl <<
-            "\\hide Staff.Stem " <<
+            cLilypondHide << " Staff.Stem " <<
             std::endl;
           break;
       } // switch
@@ -22691,12 +22939,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         case msrLigatureKind::kLigatureNone:
           break;
         case msrLigatureKind::kLigatureStart:
-          fLilypondCodeStream << "\\[ "; // JMI v0.9.70
+          fLilypondCodeStream << cLilypondLigatureOpener; // JMI v0.9.70
           break;
         case msrLigatureKind::kLigatureContinue:
           break;
         case msrLigatureKind::kLigatureStop:
-          fLilypondCodeStream << "\\] ";
+          fLilypondCodeStream << cLilypondLigatureCloser;
           break;
       } // switch
     } // for
@@ -22734,7 +22982,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               break;
             } // switch
           fLilypondCodeStream <<
-            "\\< ";
+            cLilypondHairPinsCrescendo;
           break;
 
         case msrWedgeKind::kWedgeDecrescendo:
@@ -22751,12 +22999,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
               break;
             } // switch
           fLilypondCodeStream <<
-            "\\> ";
+            cLilypondHairPinsDecrescendo;
           break;
 
         case msrWedgeKind::kWedgeStop:
           fLilypondCodeStream <<
-            "\\! ";
+            cLilypondHairPinsStop;
           break;
       } // switch
     } // for
@@ -22864,14 +23112,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       elt->getNoteGlissandosList ();
 
   if (noteGlissandosList.size ()) {
-    std::list<S_msrGlissando>::const_iterator i;
-    for (
-      i = noteGlissandosList.begin ();
-      i != noteGlissandosList.end ();
-      ++i
-    ) {
-      S_msrGlissando glissando = (*i);
-
+    for (S_msrGlissando glissando : noteGlissandosList) {
       switch (glissando->getGlissandoTypeKind ()) {
         case msrGlissandoTypeKind::kGlissandoTypeNone:
           break;
@@ -22879,8 +23120,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         case msrGlissandoTypeKind::kGlissandoTypeStart:
           // generate the glissando itself
           fLilypondCodeStream <<
-            "\\glissando " <<
+            "\\glissando ";
+
+          if (glissando->getGlissandoTextValue().size ()) {
+            fLilypondCodeStream <<
             "\\glissandoTextOff ";
+          }
           break;
 
         case msrGlissandoTypeKind::kGlissandoTypeStop:
@@ -22938,7 +23183,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      ">>" <<
+      cLilypondScordaturaCloser <<
       std::endl;
   }
 
@@ -23576,12 +23821,12 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
         case msrLigatureKind::kLigatureNone:
           break;
         case msrLigatureKind::kLigatureStart:
-          fLilypondCodeStream << "\\[ ";
+          fLilypondCodeStream << cLilypondLigatureOpener;
           break;
         case msrLigatureKind::kLigatureContinue:
           break;
         case msrLigatureKind::kLigatureStop:
-  // JMI        fLilypondCodeStream << "\\] ";
+  // JMI        fLilypondCodeStream << cLilypondLigatureCloser;
           break;
       } // switch
     } // for
@@ -24326,12 +24571,12 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
         case msrLigatureKind::kLigatureNone:
           break;
         case msrLigatureKind::kLigatureStart:
-          fLilypondCodeStream << "\\[ ";
+          fLilypondCodeStream << cLilypondLigatureOpener;
           break;
         case msrLigatureKind::kLigatureContinue:
           break;
         case msrLigatureKind::kLigatureStop:
-          fLilypondCodeStream << "\\] ";
+          fLilypondCodeStream << cLilypondLigatureCloser;
           break;
       } // switch
     } // for
@@ -24353,13 +24598,13 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
         case msrWedgeKind::kWedgeKindNone:
           break;
         case msrWedgeKind::kWedgeCrescendo:
-          fLilypondCodeStream << "\\< ";
+          fLilypondCodeStream << cLilypondHairPinsCrescendo;
           break;
         case msrWedgeKind::kWedgeDecrescendo:
-          fLilypondCodeStream << "\\> ";
+          fLilypondCodeStream << cLilypondHairPinsDecrescendo;
           break;
         case msrWedgeKind::kWedgeStop:
-          fLilypondCodeStream << "\\! ";
+          fLilypondCodeStream << cLilypondHairPinsStop;
           break;
       } // switch
     } // for
@@ -24466,13 +24711,13 @@ void lpsr2lilypondTranslator::generateChordInGraceNotesGroup (const S_msrChord& 
 
   // generate the start of the chord
   fLilypondCodeStream <<
-    "<";
+   cLilypondChordOpener;
 
   generateCodeForChordInGraceNotesGroupContents (chord);
 
   // generate the end of the chord
   fLilypondCodeStream <<
-    ">";
+    cLilypondChordCloser;
 
   generateCodeRightAfterChordContents (chord);
 }
@@ -25163,15 +25408,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrScordatura& elt)
   ++gIndenter;
 
   fLilypondCodeStream <<
-    "\\new Staff {" <<
+    cLilypondNewStaff << " {" <<
     std::endl;
 
   ++gIndenter;
 
   fLilypondCodeStream <<
-    "\\hide Staff.Stem" <<
+    cLilypondHide << " Staff.Stem" <<
     std::endl <<
-    "\\hide Staff.TimeSignature" <<
+    cLilypondHide << " Staff.TimeSignature" <<
     std::endl <<
     "\\small" <<
     std::endl <<
@@ -25781,8 +26026,16 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
         fOnGoingMultiMeasureRests
       )
   ) {
+    std::string nextBarOriginalNumber =
+      elt->getNextBarOriginalNumber ();
+
     int nextBarPuristNumber =
       elt->getNextBarPuristNumber ();
+
+    gLog <<
+      "nextBarOriginalNumber: " << nextBarOriginalNumber <<
+      ", nextBarPuristNumber: " << nextBarPuristNumber <<
+      std::endl;
 
     fLilypondCodeStream <<
       "\\barNumberCheck #" <<
@@ -27276,157 +27529,3 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
 
 
 } // namespace
-
-
-/* JMI
-  Bool   commentOutLeftMargin (false);
-  float  leftMarginValue = 0.0; // JMI
-  std::string leftMarginUnitString =
-           lengthUnitAsLilypondString (defaultLengthUnit);
-
-  if (pageLayout) {
-    S_msrMargin
-      leftMargin =
-        pageLayout->getSingleLeftMargin ();
-
-    if (leftMargin) {
-      leftMarginValue =
-        leftMargin->getMarginLength ().getLengthValue ();
-
-      leftMarginUnitString =
-        lengthUnitAsLilypondString (
-          leftMargin->getMarginLength ().getLengthUnitKind ());
-    }
-    else {
-      commentOutLeftMargin = true;
-    }
-  }
-  else {
-    commentOutLeftMargin = true;
-  }
-
-  if (commentOutLeftMargin) {
-    fLilypondCodeStream << "% ";
-  }
-  fLilypondCodeStream <<
-    std::left <<
-    std::setw (fieldWidth) <<
-    "left-margin: " <<
-    std::setprecision (3) << leftMarginValue <<
-    leftMarginUnitString <<
-    std::endl;
-
-  // right margin
-  Bool   commentOutRightMargin (false);
-  float  rightMarginValue = 0.0; // JMI
-  std::string rightMarginUnitString =
-           lengthUnitAsLilypondString (defaultLengthUnit);
-
-  if (pageLayout) {
-    S_msrMargin
-      rightMargin =
-        pageLayout->getSingleRightMargin ();
-
-    if (rightMargin) {
-      rightMarginValue =
-        rightMargin->getMarginLength ().getLengthValue ();
-
-      rightMarginUnitString =
-        lengthUnitAsLilypondString (
-          rightMargin->getMarginLength ().getLengthUnitKind ());
-    }
-    else {
-      commentOutRightMargin = true;
-    }
-  }
-  else {
-    commentOutRightMargin = true;
-  }
-
-  if (commentOutRightMargin) {
-    fLilypondCodeStream << "% ";
-  }
-  fLilypondCodeStream <<
-    std::left <<
-    std::setw (fieldWidth) <<
-    "right-margin: " <<
-    std::setprecision (3) << rightMarginValue <<
-    rightMarginUnitString <<
-    std::endl;
-
-  // top margin
-  Bool   commentOutTopMargin (false);
-  float  topMarginValue = 0.0; // JMI
-  std::string topMarginUnitString =
-           lengthUnitAsLilypondString (defaultLengthUnit);
-
-  if (pageLayout) {
-    S_msrMargin
-      topMargin =
-        pageLayout->getSingleTopMargin ();
-
-    if (topMargin) {
-      topMarginValue =
-        topMargin->getMarginLength ().getLengthValue ();
-
-      topMarginUnitString =
-        lengthUnitAsLilypondString (
-          topMargin->getMarginLength ().getLengthUnitKind ());
-    }
-    else {
-      commentOutTopMargin = true;
-    }
-  }
-  else {
-    commentOutTopMargin = true;
-  }
-
-  if (commentOutTopMargin) {
-    fLilypondCodeStream << "% ";
-  }
-  fLilypondCodeStream <<
-    std::left <<
-    std::setw (fieldWidth) <<
-    "top-margin: " <<
-    std::setprecision (3) << topMarginValue <<
-    topMarginUnitString <<
-    std::endl;
-
-  // bottom margin
-  Bool   commentOutBottomMargin (false);
-  float  bottomMarginValue = 0.0; // JMI
-  std::string bottomMarginUnitString =
-           lengthUnitAsLilypondString (defaultLengthUnit);
-
-  if (pageLayout) {
-    S_msrMargin
-      bottomMargin =
-        pageLayout->getSingleBottomMargin ();
-
-    if (bottomMargin) {
-      bottomMarginValue =
-        bottomMargin->getMarginLength ().getLengthValue ();
-
-      bottomMarginUnitString =
-        lengthUnitAsLilypondString (
-          bottomMargin->getMarginLength ().getLengthUnitKind ());
-    }
-    else {
-      commentOutBottomMargin = true;
-    }
-  }
-  else {
-    commentOutBottomMargin = true;
-  }
-
-  if (commentOutBottomMargin) {
-    fLilypondCodeStream << "% ";
-  }
-  fLilypondCodeStream <<
-    std::left <<
-    std::setw (fieldWidth) <<
-    "bottom-margin: " <<
-    std::setprecision (3) << bottomMarginValue <<
-    bottomMarginUnitString <<
-    std::endl;
-    */

@@ -82,10 +82,10 @@ S_mfcConverterComponent createMsr2musicxmlConverterComponent ()
     pConverterComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.52"),
-          "October 6, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "FOO"
+            "Many, many changes in the code base"
           }
       ));
 

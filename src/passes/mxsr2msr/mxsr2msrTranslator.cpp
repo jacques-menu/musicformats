@@ -10212,11 +10212,11 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
     ss <<
       "<!--=== " <<
       "partName \"" << fCurrentPart->getPartName () << "\"" <<
-      ", partID \"" << fCurrentPart->getPartID () << "\"" <<
-      ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
-      ", measureImplicitKind " << measureImplicitKind <<
-      ", nonControllingString \"" << nonControllingString << "\"" <<
-      ", widthValue " << widthValue <<
+      ", partID: \"" << fCurrentPart->getPartID () << "\"" <<
+      ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber << "\"" <<
+      ", measureImplicitKind: " << measureImplicitKind <<
+      ", nonControllingString: \"" << nonControllingString << "\"" <<
+      ", widthValue: " << widthValue <<
       ", line " << elt->getInputStartLineNumber () <<
       " ===-->";
 
@@ -10237,21 +10237,19 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
   // set next measure number in current part' previous measure
   // if this measure is not the first one
-  /* JMI ??? SUPERFLOUS ???
-  if (fPartMeasuresCounter > 1) {
+  if (fPartMeasuresCounter > 1) { // JMI v0.9.71
     fCurrentPart->
       setNextMeasureNumberInPart (
         elt->getInputStartLineNumber (),
         fCurrentMeasureNumber);
   }
-    */
 
   // consistency check
   if (! fPartFirstMeasureNumber.size ()) {
     // this is the first measure in the part
     fPartFirstMeasureNumber = fCurrentMeasureNumber;
 
-    if (! fScoreFirstMeasureNumber.size ()) {
+    if (fScoreFirstMeasureNumber.size () == 0) {
       // this is the first measure of the first part in the score
       fScoreFirstMeasureNumber = fPartFirstMeasureNumber;
     }
@@ -10260,13 +10258,13 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
         std::stringstream ss;
 
         ss <<
-          "measure numbering inconsistency: first measure numbers " <<
+          "measure numbering inconsistency: first measure numbers '" <<
           fScoreFirstMeasureNumber <<
-           " and " <<
+           "' and '" <<
           fPartFirstMeasureNumber <<
-          " found";
+          "' found";
 
-        mxsr2msrError (
+        mxsr2msrInternalError (
           gServiceRunData->getInputSourceName (),
           elt->getInputStartLineNumber (),
           __FILE__, __LINE__,

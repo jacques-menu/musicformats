@@ -55,74 +55,20 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
     pPassComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.51"),
-          "November 23, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Added '-lilypond-dynamics-text-spanners-style, -dtss' option"
+            "Many, many changes in the code base"
           }
       ));
 
     pPassComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.52"),
-          "December 16, 2021",
+          mfcVersionNumber::createFromString ("0.9.71"),
+          "April 15, 2024",
           std::list<std::string> {
-            "Finalized harmonies duration generation",
-            "Added kVoiceKindDynamics to enum class msrVoiceKind"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.60"),
-          "February 21, 2022",
-          std::list<std::string> {
-            "Finalized paper options handling"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.63"),
-          "May 31, 2022",
-          std::list<std::string> {
-            "Fixed an issue in octave shift handling",
-            "Replace \\fermataMarkup by \\fermata in R* multi-measure rests",
-            "Fixed bug in absolute and relative octaves generation"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.64"),
-          "May 31, 2022",
-          std::list<std::string> {
-            "Finalized the generation of LilyPond code for measure rests"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.65"),
-          "August 2, 2022",
-          std::list<std::string> {
-            "Added support for '\"print-object=\"no\"' in notes",
-            "Removed extraneous '(' in tempo beat units equivalence code generation"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.66"),
-          "December 18, 2022",
-          std::list<std::string> {
-            "Fixed octave shift LilyPond code generation"
+            "Added '<<' and '>>' around staff groups contents"
           }
       ));
   }

@@ -1625,6 +1625,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getLilypondComments () const
                               { return fLilypondComments; }
 
+    void                  setLilypondUsefulFragmentsComments ()
+                              { fLilypondUsefulFragmentsComments = true; }
+    Bool                  getLilypondUsefulFragmentsComments () const
+                              { return fLilypondUsefulFragmentsComments; }
+
     void                  setGlobal ()
                               { fGlobal = true; }
     Bool                  getGlobal () const
@@ -2154,6 +2159,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fXml2lyInfos;
 
     Bool                  fLilypondComments;
+    Bool                  fLilypondUsefulFragmentsComments;
 
     Bool                  fGlobal;
 

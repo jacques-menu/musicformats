@@ -66,14 +66,13 @@ S_mfcConverterComponent createIschemeInterpreterComponent ()
           }
       ));
 
-    // populate the interpreter's own history
     pConverterComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.64"),
-          "June 20, 2022",
-          list<std::string> {
-            "Cloned the MFSL interpreter into iScheme"
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
+          std::list<std::string> {
+            "Many, many changes in the code base"
           }
       ));
 

@@ -155,6 +155,11 @@ S_msrScore msrScore::createScoreNewbornClone ()
   newbornClone->fScoreMeasuresNumber =
     fScoreMeasuresNumber;
 
+  newbornClone->fScoreFirstMeasureNumber =
+    fScoreFirstMeasureNumber;
+  newbornClone->fScoreLastMeasureNumber =
+    fScoreLastMeasureNumber;
+
   // part group names max length
 
   newbornClone->fScorePartGroupNamesMaxLength =
@@ -626,6 +631,15 @@ void msrScore::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
+    "fScoreFirstMeasureNumber" << ": " <<
+    fScoreFirstMeasureNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fScoreLastMeasureNumber" << ": " <<
+    fScoreLastMeasureNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
     "fScorePartGroupNamesMaxLength" <<  ": " <<
     fScorePartGroupNamesMaxLength <<
     std::endl<<
@@ -829,6 +843,15 @@ void msrScore::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fScoreMeasuresNumber" << ": " <<
     fScoreMeasuresNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fScoreFirstMeasureNumber" << ": " <<
+    fScoreFirstMeasureNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fScoreLastMeasureNumber" << ": " <<
+    fScoreLastMeasureNumber <<
     std::endl;
 
   os << std::endl;
@@ -967,6 +990,15 @@ void msrScore::printSummary (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fScoreMeasuresNumber" << ": " <<
     fScoreMeasuresNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fScoreFirstMeasureNumber" << ": " <<
+    fScoreFirstMeasureNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fScoreLastMeasureNumber" << ": " <<
+    fScoreLastMeasureNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<

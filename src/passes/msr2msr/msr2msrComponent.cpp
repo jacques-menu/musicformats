@@ -55,22 +55,10 @@ S_mfcPassComponent createMsr2msrComponent ()
     pPassComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.51"),
-          "November 15, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Added '-insert-page-break-after-measure, -ipbam' option",
-            "Added '-avoid-msr2msr, -am2m' option (for TESTS)",
-            "Added 'generate-stems-directions, ksd' option to lpsr2lilypond"
-          }
-      ));
-
-    pPassComponent->
-      appendVersionToComponent (
-        mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.62"),
-          "March 5, 2022",
-          std::list<std::string> {
-            "Added '-ignore-msr-voice, -imv' and '-keep-msr-voice, -kmv' options"
+            "Many, many changes in the code base"
           }
       ));
   }

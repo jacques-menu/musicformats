@@ -56,14 +56,13 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
           }
       ));
 
-    // populate it
     pRepresentationComponent->
       appendVersionToComponent (
         mfcVersion::create (
-          mfcVersionNumber::createFromString ("0.9.66"),
-          "October 6, 2021",
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
           std::list<std::string> {
-            "Finalized the '-display-bsr*' options"
+            "Many, many changes in the code base"
           }
       ));
   }

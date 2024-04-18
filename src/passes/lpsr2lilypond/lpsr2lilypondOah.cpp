@@ -5107,6 +5107,14 @@ such as '% part P_POne (P1).)",
         "fLilypondComments",
         fLilypondComments));
 
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "lilypond-useful-fragments-comments", "lilyusefulgragscoms",
+R"(Generate comments upon the use of useful fragments such as cLilypondParallelMusicOpener.)",
+        "fLilypondUsefulFragmentsComments",
+        fLilypondUsefulFragmentsComments));
+
   // global
   // --------------------------------------
 
@@ -6381,6 +6389,9 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     std::setw (valueFieldWidth) << "fLilypondComments" << ": " <<
       fLilypondComments <<
       std::endl <<
+    std::setw (valueFieldWidth) << "fLilypondUsefulFragmentsComments" << ": " <<
+      fLilypondUsefulFragmentsComments <<
+      std::endl <<
 
     std::setw (valueFieldWidth) << "fGlobal" << ": " <<
       fGlobal <<
@@ -6958,6 +6969,9 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
 
     std::setw (fieldWidth) << "fLilypondComments" << ": " <<
       fLilypondComments <<
+      std::endl <<
+    std::setw (fieldWidth) << "fLilypondUsefulFragmentsComments" << ": " <<
+      fLilypondUsefulFragmentsComments <<
       std::endl <<
 
     std::setw (fieldWidth) << "fGlobal" << ": " <<

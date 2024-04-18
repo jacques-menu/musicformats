@@ -15,4 +15,4 @@ jobs:
             l3build latex latex-bin luatex latex-bin-dev
             ...
       - name: Use TeX Live
-        run: pdflatex documentation/mfapiguide/MusicFormatsAPIGuide.tex
+        run: echo $PATH; pdflatex documentation/mfapiguide/MusicFormatsAPIGuide.tex
