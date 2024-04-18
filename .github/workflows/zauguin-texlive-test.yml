@@ -23,4 +23,5 @@ jobs:
         run:
           shell: bash
 #           working-directory: build
-          echo $PATH; pdflatex documentation/mfapiguide/MusicFormatsAPIGuide.tex
+          echo $PATH
+#           echo $PATH; pdflatex documentation/mfapiguide/MusicFormatsAPIGuide.tex
