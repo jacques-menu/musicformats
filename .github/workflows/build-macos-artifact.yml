@@ -35,8 +35,8 @@ jobs:
       - name: Build MusicFormats for MacOS
         run:
           shell: bash
-          working-directory: build
-          cmake . ; make
+#           working-directory: build
+          cd build; cmake . ; make
 #           cd build ; cmake --build .
 
 #       - name: Setup TeX Live
