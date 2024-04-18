@@ -36,7 +36,7 @@ jobs:
         run:
           shell: bash
           working-directory: build
-          cd build ; cmake . ; make
+          cmake . ; make
 #           cd build ; cmake --build .
 
 #       - name: Setup TeX Live
