@@ -36,8 +36,8 @@ jobs:
         run:
 #           shell: bash FOO
 #           working-directory: build
-          cd build; cmake --build .
-#           cd build ; cmake --build .
+#           cd build; cmake --build .
+          cd build ; cmake . ; make
 
 #       - name: Setup TeX Live
 #         uses: teatimeguest/setup-texlive-action@v3

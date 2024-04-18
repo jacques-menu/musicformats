@@ -30,7 +30,8 @@ jobs:
 
       - name: Build MusicFormats for Ubuntu
         run:
-          cd build ; cmake --build .
+#           cd build; cmake --build .
+          cd build ; cmake . ; make
 
       - name: Upload libraries and executables for Ubuntu
         uses: actions/upload-artifact@v3
