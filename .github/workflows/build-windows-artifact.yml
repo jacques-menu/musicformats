@@ -36,7 +36,7 @@ jobs:
 #           shell: bash
 #           working-directory: build
 #           cd build; cmake --build .
-          cd build ; cmake . ; ls -salR D:/a/musicformats/musicformats/build ; make
+          cd build ; cmake . ; ls D:/a/musicformats/musicformats/build ; make
 
       - name: Upload libraries and executables for Windows
         uses: actions/upload-artifact@v3
