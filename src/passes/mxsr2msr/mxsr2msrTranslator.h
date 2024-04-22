@@ -2251,8 +2251,9 @@ class EXP mxsr2msrTranslator :
     void                      attachPendingSlashesToCurrentNote ();
 
     void                      attachPendingWedgesToCurrentNote ();
-    void                      attachPendingVoicesWedgesToCurrentNoteIfRelevant (
-                                int theVoiceNumber);
+
+//     void                      attachPendingVoicesWedgesToCurrentNoteIfRelevant ( // superflous??? JMI v0.971
+//                                 int theVoiceNumber);
 
     void                      attachPendingGlissandosToCurrentNote ();
     void                      attachPendingSlidesToCurrentNote ();

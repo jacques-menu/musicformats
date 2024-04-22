@@ -23141,80 +23141,80 @@ void mxsr2msrTranslator::attachPendingWedgesToCurrentNote ()
   }
 }
 
-//______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingVoicesWedgesToCurrentNoteIfRelevant (
-  int theVoiceNumber)
-{
-  // attach the pending wedges to the note
-  Bool delayAttachment (false);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWedges ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Attaching pending voice wedges to note " <<
-      fCurrentNote->asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (fCurrentNoteIsARest) {
-    if (gGlobalMxsr2msrOahGroup->getDelayRestsWedges ()) {
-      gLog <<
-        "Delaying voice wedge attached to a rest until next note" <<
-    std::endl;
-
-      delayAttachment = true;
-    }
-
-    else {
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceWedges ()) {
-        std::stringstream ss;
-
-        int numberOfWedges = fPendingVoiceWedgesList.size ();
-
-        ss <<
-          "fPendingVoiceWedgesList contains " <<
-          mfSingularOrPlural (
-            numberOfWedges, "element", "elements");
-
-        mxsr2msrWarning (
-          gServiceRunData->getInputSourceName (),
-          fCurrentNote->getInputStartLineNumber (),
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-    }
-  }
-
-  if (! delayAttachment) {
-    while (fPendingVoiceWedgesList.size ()) {
-      // grab voiceWedgePair
-      std::pair<int, S_msrWedge>
-        voiceWedgePair =
-          fPendingVoiceWedgesList.front ();
-
-      int
-        voiceNumber =
-          voiceWedgePair.first;
-
-      S_msrWedge
-        wedge =
-          voiceWedgePair.second;
-
-      if (theVoiceNumber == voiceNumber) {
-        fCurrentNote->appendWedgeToNote (wedge);
-      }
-
-      fPendingVoiceWedgesList.pop_front ();
-    } // while
-  }
-}
+// //______________________________________________________________________________
+// void mxsr2msrTranslator::attachPendingVoicesWedgesToCurrentNoteIfRelevant ( // superflous??? JMI v0.9.71
+//   int theVoiceNumber)
+// {
+//   // attach the pending wedges to the note
+//   Bool delayAttachment (false);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceWedges ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Attaching pending voice wedges to note " <<
+//       fCurrentNote->asString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (fCurrentNoteIsARest) {
+//     if (gGlobalMxsr2msrOahGroup->getDelayRestsWedges ()) {
+//       gLog <<
+//         "Delaying voice wedge attached to a rest until next note" <<
+//     std::endl;
+//
+//       delayAttachment = true;
+//     }
+//
+//     else {
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceWedges ()) {
+//         std::stringstream ss;
+//
+//         int numberOfWedges = fPendingVoiceWedgesList.size ();
+//
+//         ss <<
+//           "fPendingVoiceWedgesList contains " <<
+//           mfSingularOrPlural (
+//             numberOfWedges, "element", "elements");
+//
+//         mxsr2msrWarning (
+//           gServiceRunData->getInputSourceName (),
+//           fCurrentNote->getInputStartLineNumber (),
+//           ss.str ());
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//     }
+//   }
+//
+//   if (! delayAttachment) {
+//     while (fPendingVoiceWedgesList.size ()) {
+//       // grab voiceWedgePair
+//       std::pair<int, S_msrWedge>
+//         voiceWedgePair =
+//           fPendingVoiceWedgesList.front ();
+//
+//       int
+//         voiceNumber =
+//           voiceWedgePair.first;
+//
+//       S_msrWedge
+//         wedge =
+//           voiceWedgePair.second;
+//
+//       if (theVoiceNumber == voiceNumber) {
+//         fCurrentNote->appendWedgeToNote (wedge);
+//       }
+//
+//       fPendingVoiceWedgesList.pop_front ();
+//     } // while
+//   }
+// }
 
 //______________________________________________________________________________
 void mxsr2msrTranslator::attachPendingGlissandosToCurrentNote ()
@@ -23549,11 +23549,11 @@ void mxsr2msrTranslator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
     attachPendingWedgesToCurrentNote ();
   }
 
-  // attach the pending wedges, if any and relevant, to the note
-  if (fPendingVoiceWedgesList.size ()) {
-    attachPendingVoicesWedgesToCurrentNoteIfRelevant (
-      fCurrentMusicXMLVoiceNumber);
-  }
+//   // attach the pending wedges, if any and relevant, to the note // JMI v0.9.71
+//   if (fPendingVoiceWedgesList.size ()) {
+//     attachPendingVoicesWedgesToCurrentNoteIfRelevant (
+//       fCurrentMusicXMLVoiceNumber);
+//   }
 
   // attach the pending glissandos, if any, to the note
   if (fPendingGlissandosList.size ()) {

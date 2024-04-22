@@ -61,6 +61,16 @@ S_mfcPassComponent createMxsr2msrComponent ()
             "Many, many changes in the code base"
           }
       ));
+
+    pPassComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "April 22, 2024",
+          std::list<std::string> {
+            "Removed extra msrWedgeKind::kWedgeStop creation in mxsr2msr"
+          }
+      ));
   }
 
   return pPassComponent;
