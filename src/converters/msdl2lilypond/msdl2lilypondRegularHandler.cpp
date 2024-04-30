@@ -1450,7 +1450,9 @@ void msdl2lilypondRegularHandler::createBookRegularGroup ()
   registerAtomInRegularSubgroup ("no-book-block", subGroup);
   registerAtomInRegularSubgroup ("no-header-block", subGroup);
   registerAtomInRegularSubgroup ("no-paper-block", subGroup);
+
   registerAtomInRegularSubgroup ("no-bar-number-checks", subGroup);
+  registerAtomInRegularSubgroup ("no-bar-check-comments", subGroup);
 }
 
 void msdl2lilypondRegularHandler::createHeaderRegularGroup ()

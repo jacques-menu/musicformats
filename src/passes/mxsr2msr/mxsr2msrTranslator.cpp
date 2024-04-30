@@ -1051,8 +1051,9 @@ void mxsr2msrTranslator::populateCurrentPartVoicesVectorsFromPart (
     std::stringstream ss;
 
     ss <<
-      ">>> Part \"" << part->getPartName () <<
-      "\" has voice numbers ranging from " <<
+      ">>> Populating the voices vectors for part \"" <<
+      part->getPartName () <<
+      "\", whose voice numbers ranges from " <<
       partMinimumVoiceNumber <<
       " to " <<
       partMaximumVoiceNumber <<
@@ -1076,8 +1077,29 @@ void mxsr2msrTranslator::populateCurrentPartVoicesVectorsFromPart (
   for (
     std::pair<int, S_msrVoice> thePair : fCurrentPart->getPartVoicesMap ()
   ) {
-    int voiceNumber  = thePair.first;
-    S_msrVoice voice = thePair.second;
+    int        voiceNumber  = thePair.first;
+    S_msrVoice voice        = thePair.second;
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceVoices ()) {
+      std::stringstream ss;
+
+      ss <<
+        ">>> Creating the voice handler for voice " <<
+        voiceNumber <<
+        " in part \"" <<
+        part->getPartName () <<
+        "\", whose voice numbers ranges from " <<
+        partMinimumVoiceNumber <<
+        " to " <<
+        partMaximumVoiceNumber <<
+        ", maybe with holes";
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
 
     // register the regular voice
     fCurrentPartVoicesVector [voiceNumber] = voice;
@@ -2941,11 +2963,14 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   fCurrentTimeSignature = nullptr;
 
   // staff numbers
-  fCurrentMusicXMLStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentMusicXMLStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentMusicXMLStaffNumber = 1; // JMI v0.9.71 default voice number
+
   fPreviousNoteMusicXMLStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 
   // voice numbers
-  fCurrentMusicXMLVoiceNumber = K_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentMusicXMLVoiceNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentMusicXMLVoiceNumber = 1; // JMI v0.9.71 default voice number
 
   // staff change detection
 
@@ -11577,6 +11602,14 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
     voiceHandler =
       fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    voiceHandler != nullptr, // JMI v0.9.71
+    "voiceHandler is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   // is there a pending tuplet?
   if (voiceHandler->getTupletsStackSize ()) { // JMI v0.9.70
     // finalize the tuplet,
@@ -11586,7 +11619,6 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         elt->getInputStartLineNumber (),
         "visitEnd (S_barline& elt)");
   }
-
 
   // create the barLine
   S_msrBarLine

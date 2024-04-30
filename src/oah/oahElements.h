@@ -151,63 +151,68 @@ EXP std::ostream& operator << (std::ostream& os, const oahFindStringMatch& elt);
   A type to hold the the OAH elements that can be found by (sub)std::string,
   thus implementing OAH introspection
 */
-class EXP oahFindableElement : public smartable
-{
-  public:
 
-    // creation from MusicXML
-    // ------------------------------------------------------
+// PRE-declarations
+class   oahElement;
+typedef SMARTP<oahElement> S_oahElement;
 
-/* this class is purely virtual
-    static SMARTP<oahFindableElement> create ();
-*/
-
-  protected:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          oahFindableElement ();
-
-    virtual               ~oahFindableElement ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-    virtual Bool          findStringInFindableElement (
-                            const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
-                            std::ostream&                    os) const = 0;
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    virtual std::string   asString () const = 0;
-
-    virtual void          print (std::ostream& os) const = 0;
-    virtual void          printFull (std::ostream& os) const
-                              { print (os); }
-
-    virtual const std::string
-                          containingFindableElementAsString () const = 0;
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-};
-typedef SMARTP<oahFindableElement> S_oahFindableElement;
-EXP std::ostream& operator << (std::ostream& os, const S_oahFindableElement& elt);
-EXP std::ostream& operator << (std::ostream& os, const oahFindableElement& elt);
+// class EXP oahFindableElement : public smartable
+// {
+//   public:
+//
+//     // creation from MusicXML
+//     // ------------------------------------------------------
+//
+// /* this class is purely virtual
+//     static SMARTP<oahFindableElement> create ();
+// */
+//
+//   protected:
+//
+//     // constructors/destructor
+//     // ------------------------------------------------------
+//
+//                           oahFindableElement ();
+//
+//     virtual               ~oahFindableElement ();
+//
+//   public:
+//
+//     // set and get
+//     // ------------------------------------------------------
+//
+//   public:
+//
+//     // public services
+//     // ------------------------------------------------------
+//
+//     virtual Bool          fetchElementsMatchingString (
+//                             const std::string&       lowerCaseString,
+//                             std::list<S_oahElement>& foundElementsList,
+//                             std::ostream&            os) const = 0;
+//
+//   public:
+//
+//     // print
+//     // ------------------------------------------------------
+//
+//     virtual std::string   asString () const = 0;
+//
+//     virtual void          print (std::ostream& os) const = 0;
+//     virtual void          printFull (std::ostream& os) const
+//                               { print (os); }
+//
+//     virtual const std::string
+//                           containingFindableElementAsString () const = 0;
+//
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+// };
+// typedef SMARTP<oahFindableElement> S_oahFindableElement;
+// EXP std::ostream& operator << (std::ostream& os, const S_oahFindableElement& elt);
+// EXP std::ostream& operator << (std::ostream& os, const oahFindableElement& elt);
 
 //______________________________________________________________________________
 /*
@@ -216,11 +221,10 @@ EXP std::ostream& operator << (std::ostream& os, const oahFindableElement& elt);
 */
 
 // PRE-declarations
-
 class   oahElement;
 typedef SMARTP<oahElement> S_oahElement;
 
-class EXP oahElement : public oahFindableElement
+class EXP oahElement : public smartable // oahFindableElement
 {
   public:
 
@@ -325,13 +329,14 @@ class EXP oahElement : public oahFindableElement
     S_oahElement          thisElementIfItHasName (
                             const std::string& name);
 
-    Bool                  findStringInFindableElement (
-                            const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
-                            std::ostream&                    os) const override;
+//     Bool                  fetchElementsMatchingString (
+//                             const std::string&       lowerCaseString,
+//                             std::list<S_oahElement>& foundElementsList,
+//                             std::ostream&            os) const override;
 
-    Bool                  elementMatchesString (
+    virtual Bool          elementMatchesString (
                             const std::string& lowerCaseString) const;
+
   public:
 
     // visitors
@@ -354,7 +359,7 @@ class EXP oahElement : public oahFindableElement
 
     std::string           asLongNamedOptionString () const;
 
-    virtual std::string   asString () const override; // JMI v0.9.67
+    virtual std::string   asString () const;
     virtual std::string   asShortString () const;
 
     virtual void          printOptionHeader (std::ostream& os) const;
@@ -366,11 +371,12 @@ class EXP oahElement : public oahFindableElement
                             std::ostream& os,
                             int fieldWidth) const;
 
-    virtual void          print (std::ostream& os) const override;
+    virtual void          print (std::ostream& os) const;
+    virtual void          printFull (std::ostream& os) const;
 
     virtual void          printHelp (std::ostream& os) const;
 
-    const std::string     containingFindableElementAsString () const override;
+//     const std::string     containingFindableElementAsString () const;
 
   protected:
 

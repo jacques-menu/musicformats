@@ -2,7 +2,7 @@
 
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2024
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -66,8 +66,8 @@
 
 
 %{
-//   iscm::parser::symbol_type JMI
-//   make_NAME (const std::string &s, const iscm::parser::location_type& loc);
+//   stringMatcher::parser::symbol_type JMI
+//   make_NAME (const std::string &s, const stringMatcher::parser::location_type& loc);
 %}
 
 
@@ -128,7 +128,7 @@ backSlash                 [\\]
 char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 // A handy shortcut to the location held by the ischemeDriver
-iscm::location& loc = drv.getScannerLocationNonConst ();
+stringMatcher::location& loc = drv.getScannerLocationNonConst ();
 
 // Code run each time yylex() is called
 loc.step ();
@@ -198,7 +198,7 @@ loc.step ();
   BEGIN INITIAL;
 
   return
-    iscm::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
+    stringMatcher::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
 }
 
 <SINGLE_QUOTED_STRING_MODE>{backSlash}{singleleQuote} {
@@ -244,7 +244,7 @@ loc.step ();
   loc.step ();
   BEGIN INITIAL;
   return
-    iscm::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
+    stringMatcher::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{backSlash}{doubleQuote} {
@@ -287,7 +287,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_DOUBLE (yytext, loc);
+    stringMatcher::parser::make_DOUBLE (yytext, loc);
 }
 
 {integer} {
@@ -301,7 +301,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_INTEGER (yytext, loc);
+    stringMatcher::parser::make_INTEGER (yytext, loc);
 }
 
 
@@ -318,7 +318,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_SERVICE (loc);
+    stringMatcher::parser::make_SERVICE (loc);
 }
 
 "input" {
@@ -332,7 +332,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_INPUT (loc);
+    stringMatcher::parser::make_INPUT (loc);
 }
 
 "choice" {
@@ -346,7 +346,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_CHOICE (loc);
+    stringMatcher::parser::make_CHOICE (loc);
 }
 
 "default" {
@@ -360,7 +360,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_DEFAULT (loc);
+    stringMatcher::parser::make_DEFAULT (loc);
 }
 
 "case" {
@@ -374,7 +374,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_CASE (loc);
+    stringMatcher::parser::make_CASE (loc);
 }
 
 "select" {
@@ -388,7 +388,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_SELECT (loc);
+    stringMatcher::parser::make_SELECT (loc);
 }
 
 "all" {
@@ -402,7 +402,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_ALL (loc);
+    stringMatcher::parser::make_ALL (loc);
 }
 
 
@@ -418,7 +418,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_NAME (yytext, loc);
+    stringMatcher::parser::make_NAME (yytext, loc);
 }
 
 
@@ -434,7 +434,7 @@ loc.step ();
   loc.begin.column += yyleng;
 
   return
-    iscm::parser::make_OPTION (yytext, loc);
+    stringMatcher::parser::make_OPTION (yytext, loc);
 }
 
 
@@ -450,7 +450,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_COMMA (loc);
+    stringMatcher::parser::make_COMMA (loc);
 }
 
 ":" {
@@ -464,7 +464,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_COLON (loc);
+    stringMatcher::parser::make_COLON (loc);
 }
 
 ";" {
@@ -478,7 +478,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_SEMICOLON (loc);
+    stringMatcher::parser::make_SEMICOLON (loc);
 }
 
 "|" {
@@ -492,7 +492,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_BAR (loc);
+    stringMatcher::parser::make_BAR (loc);
 }
 
 "&" {
@@ -506,7 +506,7 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_AMPERSAND (loc);
+    stringMatcher::parser::make_AMPERSAND (loc);
 }
 
 "=" {
@@ -520,12 +520,12 @@ loc.step ();
   loc.step ();
 
   return
-    iscm::parser::make_EQUAL (loc);
+    stringMatcher::parser::make_EQUAL (loc);
 }
 
 
 . {
-   throw iscm::parser::syntax_error (
+   throw stringMatcher::parser::syntax_error (
      loc,
      "### invalid character: " + std::string (yytext));
 }
@@ -534,7 +534,7 @@ loc.step ();
 
 <<EOF>> {
   return
-    iscm::parser::make_YYEOF (loc);
+    stringMatcher::parser::make_YYEOF (loc);
 }
 
 

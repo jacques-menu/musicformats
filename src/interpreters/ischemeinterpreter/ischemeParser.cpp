@@ -36,7 +36,7 @@
 
 
 // Take the name prefix into account.
-#define yylex   iscmlex
+#define yylex   stringMatcherlex
 
 // First part of user prologue.
 #line 1 "ischemeParser.yy"
@@ -44,7 +44,7 @@
 
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2024
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -175,7 +175,7 @@ using namespace MusicFormats;
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-namespace iscm {
+namespace stringMatcher {
 #line 180 "ischemeParser.cpp"
 
   /// Build a parser object.
@@ -2053,7 +2053,7 @@ namespace iscm {
 #endif // ISCMDEBUG
 
 
-} // iscm
+} // stringMatcher
 #line 2058 "ischemeParser.cpp"
 
 #line 863 "ischemeParser.yy"
@@ -2066,7 +2066,7 @@ namespace iscm {
 
 
 void
-iscm::parser::error (const location_type& loc, const std::string& message)
+stringMatcher::parser::error (const location_type& loc, const std::string& message)
 {
   ischemeError (
     message,

@@ -33,7 +33,7 @@
 
 /**
  ** \file ischemeParser.h
- ** Define the iscm::parser class.
+ ** Define the stringMatcher::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
@@ -198,7 +198,7 @@
 # endif /* ! defined YYDEBUG */
 #endif  /* ! defined ISCMDEBUG */
 
-namespace iscm {
+namespace stringMatcher {
 #line 203 "ischemeParser.h"
 
 
@@ -1694,7 +1694,7 @@ switch (yykind)
   }
 
 
-} // iscm
+} // stringMatcher
 #line 1699 "ischemeParser.h"
 
 

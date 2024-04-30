@@ -16,7 +16,7 @@
 */
 
 
-#include "stringFilterInterface.h"
+#include "stringMatcherInterface.h"
 
 
 namespace MusicFormats
@@ -29,7 +29,7 @@ void mfTest (std::ostream& os)
   place any code you need here...
 */
 
-  testStringFilter (os);
+  testStringMatcher (os);
 }
 
 

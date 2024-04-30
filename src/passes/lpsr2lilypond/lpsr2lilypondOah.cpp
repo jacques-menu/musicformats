@@ -4562,7 +4562,7 @@ Each step of 1 is approximately 12% larger; 6 steps are exactly a factor of 2.)"
 
   fNoBarNumberChecksAtom =
     oahBooleanAtom::create (
-      "no-bar-number-checks", "nbnc",
+      "no-bar-number-checks", "nbnchecks",
 R"(Don't generate bar number checks in the LilyPond code.)",
       "fNoBarNumberChecks",
       fNoBarNumberChecks);
@@ -4570,6 +4570,20 @@ R"(Don't generate bar number checks in the LilyPond code.)",
   subGroup->
     appendAtomToSubGroup (
       fNoBarNumberChecksAtom);
+
+  // bar check comments
+  // --------------------------------------
+
+  fNoBarCheckCommentsAtom =
+    oahBooleanAtom::create (
+      "no-bar-check-comments", "nbchecks",
+R"(Don't generate a comments containing the bar number after '|' in the LilyPond code.)",
+      "fNoBarCheckComments",
+      fNoBarCheckComments);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fNoBarCheckCommentsAtom);
 }
 
 void lpsr2lilypondOahGroup::initializeLpsr2LilypondPageAndLineBreaksOptions ()
@@ -5489,6 +5503,10 @@ meant to facilitate manual editing and completion of the result.)");
   minimalCombinedBooleansAtom->
     addBooleanAtom (
       fNoBarNumberChecksAtom);
+
+  minimalCombinedBooleansAtom->
+    addBooleanAtom (
+      fNoBarCheckCommentsAtom);
 
   minimalCombinedBooleansAtom->
     addBooleanAtom (

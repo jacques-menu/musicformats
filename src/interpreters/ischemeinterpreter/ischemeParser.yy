@@ -2,7 +2,7 @@
 
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2024
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -35,7 +35,7 @@ using namespace MusicFormats;
 %require "3.8.1"
 %defines
 
-%define api.prefix {iscm}
+%define api.prefix {stringMatcher}
 
 %define api.token.raw
 
@@ -869,7 +869,7 @@ SelectStatement
 
 
 void
-iscm::parser::error (const location_type& loc, const std::string& message)
+stringMatcher::parser::error (const location_type& loc, const std::string& message)
 {
   ischemeError (
     message,

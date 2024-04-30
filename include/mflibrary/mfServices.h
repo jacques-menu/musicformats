@@ -35,7 +35,7 @@ enum class mfServiceKind {
   kMfService_xml2xml,
   kMfService_xml2gmn,
 
-  kMfService_stringfilter,
+  kMfService_stringMatcher,
 
   kMfService_msdl,
   kMfService_mfsl,

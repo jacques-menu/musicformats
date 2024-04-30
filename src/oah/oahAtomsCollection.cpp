@@ -479,6 +479,47 @@ void oahMacroAtom::applyValueLessAtom (std::ostream& os)
   fSelected = true;
 }
 
+Bool oahMacroAtom::atomMatchesString (
+	const std::string& lowerCaseString,
+	std::ostream&      os) const
+{
+  Bool result;
+
+	gLog <<
+		"=======>>> oahMacroAtom::atomMatchesString ()" <<
+		", lowerCaseString: " << lowerCaseString <<
+		std::endl;
+	gLog << "THIS: " << std::endl;
+	printHelp (os);
+	gLog << std::endl;
+
+  if (elementMatchesString (lowerCaseString)) {
+    result = true;
+  }
+
+	for (S_oahValueLessAtom valueLessAtom : fMacroValueLessAtomsList) {
+		if (valueLessAtom->elementMatchesString (lowerCaseString)) {
+			result = true;
+		}
+	} // for
+
+// 	if (result) {
+//     // append this matching element to foundElementsList
+//     foundElementsList.push_back (this);
+// //       oahFindStringMatch::create (
+// //         fetchNames (),
+// //         fDescription,
+// //         containingFindableElementAsString ()));
+// 	}
+
+	gLog <<
+		"<<<<====== oahMacroAtom::atomMatchesString ()" <<
+		", result: " << result <<
+		std::endl;
+
+  return result;
+}
+
 void oahMacroAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -687,6 +728,21 @@ void oahMacroAtom::printHelp (std::ostream& os) const
   if (fDescription.size ()) {
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
+
+  std::list<S_oahValueLessAtom>::const_iterator
+    iBegin = fMacroValueLessAtomsList.begin (),
+    iEnd   = fMacroValueLessAtomsList.end (),
+    i      = iBegin;
+
+  for ( ; ; ) {
+    S_oahAtom valueLessAtom = (*i);
+
+    os <<
+      valueLessAtom->fetchNames ();
+
+    if (++i == iEnd) break;
+    os << ", ";
+  } // for
 }
 
 void oahMacroAtom::displayAtomWithVariableOptionsValues (
@@ -4952,6 +5008,47 @@ void oahCombinedBooleansAtom::applyValueLessAtom (std::ostream& os)
   fSelected = true;
 }
 
+Bool oahCombinedBooleansAtom::atomMatchesString (
+	const std::string&       lowerCaseString,
+	std::ostream&            os) const
+{
+  Bool result;
+
+	gLog <<
+		"=======>>> oahCombinedBooleansAtom::atomMatchesString ()" <<
+		", lowerCaseString: " << lowerCaseString <<
+		std::endl;
+	gLog << "THIS: " << std::endl;
+	printHelp (os);
+	gLog << std::endl;
+
+  if (elementMatchesString (lowerCaseString)) {
+    result = true;
+  }
+
+	for (S_oahBooleanAtom booleanAtom : fBooleanAtomsList) {
+		if (booleanAtom->elementMatchesString (lowerCaseString)) {
+			result = true;
+		}
+	} // for
+
+// 	if (result) {
+//     // append this matching element to foundElementsList
+//     foundElementsList.push_back (this);
+// //       oahFindStringMatch::create (
+// //         fetchNames (),
+// //         fDescription,
+// //         containingFindableElementAsString ()));
+// 	}
+
+	gLog <<
+		"<<<<====== oahCombinedBooleansAtom::atomMatchesString ()" <<
+		", result: " << result <<
+		std::endl;
+
+  return result;
+}
+
 void oahCombinedBooleansAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5198,6 +5295,32 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
   if (fDescription.size ()) {
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
+
+  os << std::left <<
+    "fBooleanAtomsList" << ": ";
+
+  if (! fBooleanAtomsList.size ()) {
+    os << "[EMPTY]";
+  }
+  else {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_oahBooleanAtom>::const_iterator
+      iBegin = fBooleanAtomsList.begin (),
+      iEnd   = fBooleanAtomsList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      os << ' ';
+    } // for
+
+    --gIndenter;
+  }
+  os << std::endl;
 }
 
 void oahCombinedBooleansAtom::displayAtomWithVariableOptionsValues (
@@ -7450,6 +7573,47 @@ void oahCommonPrefixBooleansAtom::applyValueLessAtom (std::ostream& os)
   fSelected = true;
 }
 
+Bool oahCommonPrefixBooleansAtom::atomMatchesString (
+	const std::string&       lowerCaseString,
+	std::ostream&            os) const
+{
+  Bool result;
+
+	gLog <<
+		"=======>>> oahCommonPrefixBooleansAtom::atomMatchesString ()" <<
+		", lowerCaseString: " << lowerCaseString <<
+		std::endl;
+	gLog << "THIS: " << std::endl;
+	printHelp (os);
+	gLog << std::endl;
+
+  if (elementMatchesString (lowerCaseString)) {
+    result = true;
+  }
+
+	for (S_oahBooleanAtom booleanAtom : fBooleanAtomsList) {
+		if (booleanAtom->elementMatchesString (lowerCaseString)) {
+			result = true;
+		}
+	} // for
+
+// 	if (result) {
+//     // append this matching element to foundElementsList
+//     foundElementsList.push_back (this);
+// //       oahFindStringMatch::create (
+// //         fetchNames (),
+// //         fDescription,
+// //         containingFindableElementAsString ()));
+// 	}
+
+	gLog <<
+		"<<<<====== oahCommonPrefixBooleansAtom::atomMatchesString ()" <<
+		", result: " << result <<
+		std::endl;
+
+  return result;
+}
+
 void oahCommonPrefixBooleansAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -7772,6 +7936,32 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
   if (fDescription.size ()) { // ??? JMI
 // JMI    g_Indenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
+
+  os << std::left <<
+    "fBooleanAtomsList" << ": ";
+
+  if (! fBooleanAtomsList.size ()) {
+    os << "[EMPTY]";
+  }
+  else {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list<S_oahBooleanAtom>::const_iterator
+      iBegin = fBooleanAtomsList.begin (),
+      iEnd   = fBooleanAtomsList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      os << ' ';
+    } // for
+
+    --gIndenter;
+  }
+  os << std::endl;
 }
 
 void oahCommonPrefixBooleansAtom::displayAtomWithVariableOptionsValues (
@@ -13035,18 +13225,27 @@ void oahFindStringAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // a strings list to collect the results
-  std::list<S_oahFindStringMatch> foundMatchesList;
+  std::list<S_oahElement> foundElementsList;
 
   // delegate this to the handler
-  fetchAtomUpLinkToHandler ()->
-    findStringInFindableElement (
-      mfStringToLowerCase (theString),
-      foundMatchesList,
-      os);
+//   Bool foundString =
+// 		fetchAtomUpLinkToHandler ()->
+// 			fetchElementsMatchingString (
+// 				mfStringToLowerCase (theString),
+// 				foundElementsList,
+// 				os);
+
+// 	if (foundString) {
+// 		// print the atom
+// 		os << "THIS atom matches:" <<
+// 			std::endl;
+//
+// 		print (os);
+// 	}
 
   //  print the found strings
   size_t foundMatchesListSize =
-    foundMatchesList.size ();
+    foundElementsList.size ();
 
   int saveIndent = gIndenter.getIndentation ();
 
@@ -13069,55 +13268,55 @@ void oahFindStringAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    std::list<S_oahFindStringMatch>::const_iterator
-      iBegin = foundMatchesList.begin (),
-      iEnd   = foundMatchesList.end (),
+    std::list<S_oahElement>::const_iterator
+      iBegin = foundElementsList.begin (),
+      iEnd   = foundElementsList.end (),
       i      = iBegin;
 
     int counter = 0;
 
     for ( ; ; ) {
-      oahFindStringMatch* theFindStringMatch = (*i);
+      S_oahElement matchingElement = (*i);
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
         __FILE__, __LINE__,
-        theFindStringMatch != nullptr,
-        "theFindStringMatch is null");
+        matchingElement != nullptr,
+        "matchingElement is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-      std::string
-        elementName =
-          theFindStringMatch->
-            getElementName (),
-        foundString =
-          theFindStringMatch->
-            getFoundString (),
-        containingFindableElementInfo =
-          theFindStringMatch->
-            getContainingFindableElementInfo ();
+//       std::string
+//         elementName =
+//           matchingElement->
+//             getElementName (),
+//         foundString =
+//           matchingElement->
+//             getFoundString (),
+//         containingFindableElementInfo =
+//           matchingElement->
+//             getContainingFindableElementInfo ();
 
       ++counter;
 
       os << std::right <<
-        std::setw (2) << counter << ": " << containingFindableElementInfo <<
+        std::setw (2) << counter << ": " << // containingFindableElementInfo <<
         std::endl;
 
       ++gIndenter;
 
-      os << elementName << std::endl;
+      os << matchingElement << std::endl;
 
-      // indent a bit more for readability
-      gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
-      gIndenter.indentMultiLineString (
-        foundString,
-        os);
-
-      // unindent a bit more for readability
-      gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-      --gIndenter;
+//       // indent a bit more for readability
+//       gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
+//
+//       gIndenter.indentMultiLineString (
+//         foundString,
+//         os);
+//
+//       // unindent a bit more for readability
+//       gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+//       --gIndenter;
 
       if (++i == iEnd) break;
 
@@ -13334,18 +13533,27 @@ void oahFilterStringAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // a strings list to collect the results
-  std::list<S_oahFindStringMatch> foundMatchesList; // JMI v0.9.70
+  std::list<S_oahElement> foundElementsList; // JMI v0.9.70
 
   // delegate this to the handler // JMI v0.9.70
-  fetchAtomUpLinkToHandler ()->
-    findStringInFindableElement (
-      mfStringToLowerCase (theString),
-      foundMatchesList,
-      os);
+//   Bool foundString =
+// 		fetchAtomUpLinkToHandler ()->
+// 			fetchElementsMatchingString (
+// 				mfStringToLowerCase (theString),
+// 				foundElementsList,
+// 				os);
+
+// 	if (foundString) {
+// 		// print the atom
+// 		os << "THIS atom matches:" <<
+// 			std::endl;
+//
+// 		print (os);
+// 	}
 
   //  print the found strings
   size_t foundMatchesListSize =
-    foundMatchesList.size ();
+    foundElementsList.size ();
 
   int saveIndent = gIndenter.getIndentation ();
 
@@ -13368,55 +13576,55 @@ void oahFilterStringAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    std::list<S_oahFindStringMatch>::const_iterator // JMI v0.9.70
-      iBegin = foundMatchesList.begin (),
-      iEnd   = foundMatchesList.end (),
+    std::list<S_oahElement>::const_iterator // JMI v0.9.70
+      iBegin = foundElementsList.begin (),
+      iEnd   = foundElementsList.end (),
       i      = iBegin;
 
     int counter = 0;
 
     for ( ; ; ) {
-      oahFindStringMatch* theFilterStringMatch = (*i); // JMI v0.9.70
+      S_oahElement matchingElement = (*i); // JMI v0.9.70
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
         __FILE__, __LINE__,
-        theFilterStringMatch != nullptr,
-        "theFilterStringMatch is null");
+        matchingElement != nullptr,
+        "matchingElement is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-      std::string
-        elementName =
-          theFilterStringMatch->
-            getElementName (),
-        foundString =
-          theFilterStringMatch->
-            getFoundString (),
-        containingFilterableElementInfo =
-          theFilterStringMatch->
-            getContainingFindableElementInfo ();
+//       std::string
+//         elementName =
+//           matchingElement->
+//             getElementName (),
+//         foundString =
+//           matchingElement->
+//             getFoundString (),
+//         containingFilterableElementInfo =
+//           matchingElement->
+//             getContainingFindableElementInfo ();
 
       ++counter;
 
       os << std::right <<
-        std::setw (2) << counter << ": " << containingFilterableElementInfo <<
+        std::setw (2) << counter << ": " << // containingFilterableElementInfo <<
         std::endl;
 
       ++gIndenter;
 
-      os << elementName << std::endl;
+      os << matchingElement << std::endl;
 
-      // indent a bit more for readability
-      gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
-      gIndenter.indentMultiLineString (
-        foundString,
-        os);
-
-      // unindent a bit more for readability
-      gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-      --gIndenter;
+//       // indent a bit more for readability
+//       gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
+//
+//       gIndenter.indentMultiLineString (
+//         foundString,
+//         os);
+//
+//       // unindent a bit more for readability
+//       gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+//       --gIndenter;
 
       if (++i == iEnd) break;
 

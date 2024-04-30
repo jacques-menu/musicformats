@@ -1,0 +1,350 @@
+Grammar
+
+    0 $accept: StringMatcherSpecification $end
+
+    1 $@1: ε
+
+    2 StringMatcherSpecification: $@1 Expression
+
+    3 Expression: Term
+    4           | Expression "&" Term
+    5           | Expression "^" Term
+
+    6 Term: Factor
+    7     | Term "|" Factor
+
+    8 Factor: BasicFactor
+    9       | "=" BasicFactor
+
+   10 BasicFactor: "word"
+   11            | String
+   12            | SubExpression
+
+   13 SubExpression: "(" Expression ")"
+
+   14 SingleString: "single quoted string"
+   15             | "double quoted string"
+
+   16 String: SingleString
+   17       | String SingleString
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256)
+    "&" (258) 4
+    "^" (259) 5
+    "|" (260) 7
+    "=" (261) 9
+    "(" (262) 13
+    ")" (263) 13
+    "word" <std::string> (264) 10
+    "single quoted string" <std::string> (265) 14
+    "double quoted string" <std::string> (266) 15
+
+
+Nonterminals, with rules where they appear
+
+    $accept (12)
+        on left: 0
+    StringMatcherSpecification <S_stringMatcherNode> (13)
+        on left: 2
+        on right: 0
+    $@1 (14)
+        on left: 1
+        on right: 2
+    Expression <S_stringMatcherNode> (15)
+        on left: 3 4 5
+        on right: 2 4 5 13
+    Term <S_stringMatcherNode> (16)
+        on left: 6 7
+        on right: 3 4 5 7
+    Factor <S_stringMatcherNode> (17)
+        on left: 8 9
+        on right: 6 7
+    BasicFactor <S_stringMatcherNode> (18)
+        on left: 10 11 12
+        on right: 8 9
+    SubExpression <S_stringMatcherNode> (19)
+        on left: 13
+        on right: 12
+    SingleString <std::string> (20)
+        on left: 14 15
+        on right: 16 17
+    String <std::string> (21)
+        on left: 16 17
+        on right: 11 17
+
+
+State 0
+
+    0 $accept: • StringMatcherSpecification $end
+
+    $default  reduce using rule 1 ($@1)
+
+    StringMatcherSpecification  go to state 1
+    $@1                         go to state 2
+
+
+State 1
+
+    0 $accept: StringMatcherSpecification • $end
+
+    $end  shift, and go to state 3
+
+
+State 2
+
+    2 StringMatcherSpecification: $@1 • Expression
+
+    "="                     shift, and go to state 4
+    "("                     shift, and go to state 5
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
+
+    Expression     go to state 9
+    Term           go to state 10
+    Factor         go to state 11
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
+
+
+State 3
+
+    0 $accept: StringMatcherSpecification $end •
+
+    $default  accept
+
+
+State 4
+
+    9 Factor: "=" • BasicFactor
+
+    "("                     shift, and go to state 5
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
+
+    BasicFactor    go to state 16
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
+
+
+State 5
+
+   13 SubExpression: "(" • Expression ")"
+
+    "="                     shift, and go to state 4
+    "("                     shift, and go to state 5
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
+
+    Expression     go to state 17
+    Term           go to state 10
+    Factor         go to state 11
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
+
+
+State 6
+
+   10 BasicFactor: "word" •
+
+    $default  reduce using rule 10 (BasicFactor)
+
+
+State 7
+
+   14 SingleString: "single quoted string" •
+
+    $default  reduce using rule 14 (SingleString)
+
+
+State 8
+
+   15 SingleString: "double quoted string" •
+
+    $default  reduce using rule 15 (SingleString)
+
+
+State 9
+
+    2 StringMatcherSpecification: $@1 Expression •
+    4 Expression: Expression • "&" Term
+    5           | Expression • "^" Term
+
+    "&"  shift, and go to state 18
+    "^"  shift, and go to state 19
+
+    $default  reduce using rule 2 (StringMatcherSpecification)
+
+
+State 10
+
+    3 Expression: Term •
+    7 Term: Term • "|" Factor
+
+    "|"  shift, and go to state 20
+
+    $default  reduce using rule 3 (Expression)
+
+
+State 11
+
+    6 Term: Factor •
+
+    $default  reduce using rule 6 (Term)
+
+
+State 12
+
+    8 Factor: BasicFactor •
+
+    $default  reduce using rule 8 (Factor)
+
+
+State 13
+
+   12 BasicFactor: SubExpression •
+
+    $default  reduce using rule 12 (BasicFactor)
+
+
+State 14
+
+   16 String: SingleString •
+
+    $default  reduce using rule 16 (String)
+
+
+State 15
+
+   11 BasicFactor: String •
+   17 String: String • SingleString
+
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
+
+    $default  reduce using rule 11 (BasicFactor)
+
+    SingleString  go to state 21
+
+
+State 16
+
+    9 Factor: "=" BasicFactor •
+
+    $default  reduce using rule 9 (Factor)
+
+
+State 17
+
+    4 Expression: Expression • "&" Term
+    5           | Expression • "^" Term
+   13 SubExpression: "(" Expression • ")"
+
+    "&"  shift, and go to state 18
+    "^"  shift, and go to state 19
+    ")"  shift, and go to state 22
+
+
+State 18
+
+    4 Expression: Expression "&" • Term
+
+    "="                     shift, and go to state 4
+    "("                     shift, and go to state 5
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
+
+    Term           go to state 23
+    Factor         go to state 11
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
+
+
+State 19
+
+    5 Expression: Expression "^" • Term
+
+    "="                     shift, and go to state 4
+    "("                     shift, and go to state 5
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
+
+    Term           go to state 24
+    Factor         go to state 11
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
+
+
+State 20
+
+    7 Term: Term "|" • Factor
+
+    "="                     shift, and go to state 4
+    "("                     shift, and go to state 5
+    "word"                  shift, and go to state 6
+    "single quoted string"  shift, and go to state 7
+    "double quoted string"  shift, and go to state 8
+
+    Factor         go to state 25
+    BasicFactor    go to state 12
+    SubExpression  go to state 13
+    SingleString   go to state 14
+    String         go to state 15
+
+
+State 21
+
+   17 String: String SingleString •
+
+    $default  reduce using rule 17 (String)
+
+
+State 22
+
+   13 SubExpression: "(" Expression ")" •
+
+    $default  reduce using rule 13 (SubExpression)
+
+
+State 23
+
+    4 Expression: Expression "&" Term •
+    7 Term: Term • "|" Factor
+
+    "|"  shift, and go to state 20
+
+    $default  reduce using rule 4 (Expression)
+
+
+State 24
+
+    5 Expression: Expression "^" Term •
+    7 Term: Term • "|" Factor
+
+    "|"  shift, and go to state 20
+
+    $default  reduce using rule 5 (Expression)
+
+
+State 25
+
+    7 Term: Term "|" Factor •
+
+    $default  reduce using rule 7 (Term)

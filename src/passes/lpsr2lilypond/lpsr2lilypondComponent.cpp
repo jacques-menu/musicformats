@@ -73,6 +73,17 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
       ));
   }
 
+    pPassComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.71"),
+          "April 23, 2024",
+          std::list<std::string> {
+            "Removed the generation of bar and barnumber checks after the last measure",
+            "Disabled the generation of staff changes TEMPORARILY"
+          }
+      ));
+
   return pPassComponent;
 }
 

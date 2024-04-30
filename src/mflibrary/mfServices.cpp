@@ -61,8 +61,8 @@ std::string mfServiceKindAsString (
       result = "kMfService_xml2gmn";
       break;
 
-    case mfServiceKind::kMfService_stringfilter:
-      result = "kMfService_stringfilter";
+    case mfServiceKind::kMfService_stringMatcher:
+      result = "kMfService_stringMatcher";
       break;
 
     case mfServiceKind::kMfService_msdl:
@@ -199,7 +199,7 @@ void initializeMusicFormatsServiceKindsMap ()
       mfServiceKind::kMfService_xml2gmn;
 
     gGlobalMusicFormatsServiceKindsMap ["filter"] =
-      mfServiceKind::kMfService_stringfilter;
+      mfServiceKind::kMfService_stringMatcher;
 
     gGlobalMusicFormatsServiceKindsMap ["msdl"] =
       mfServiceKind::kMfService_msdl;
@@ -925,7 +925,7 @@ EXP void initializeServices ()
   {
     std::string serviceName = "filter";
 
-// What stringFilterInterpreter does:
+// What stringMatcherInterpreter does:
 //
 //     This multi-pass converter performs various passes depending on the output generated,
 //     which should be specified by an option
@@ -975,7 +975,7 @@ EXP void initializeServices ()
           mfPassIDKind::kMfPassID_6,
           gLanguage->convertTheLPSRIntoLilyPondCode ()));
 
-    pGlobalServicesMap [mfServiceKind::kMfService_stringfilter] = filterService;
+    pGlobalServicesMap [mfServiceKind::kMfService_stringMatcher] = filterService;
   }
 
   // msdl

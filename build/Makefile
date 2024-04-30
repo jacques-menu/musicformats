@@ -510,17 +510,17 @@ msdl/fast:
 .PHONY : msdl/fast
 
 #=============================================================================
-# Target rules for targets named stringfilter
+# Target rules for targets named stringmatcher
 
 # Build rule for target.
-stringfilter: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stringfilter
-.PHONY : stringfilter
+stringmatcher: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 stringmatcher
+.PHONY : stringmatcher
 
 # fast build rule for target.
-stringfilter/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stringfilter.dir/build.make CMakeFiles/stringfilter.dir/build
-.PHONY : stringfilter/fast
+stringmatcher/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stringmatcher.dir/build.make CMakeFiles/stringmatcher.dir/build
+.PHONY : stringmatcher/fast
 
 #=============================================================================
 # Target rules for targets named mfsl
@@ -1943,29 +1943,29 @@ Users/jacquesmenu/musicformats-git-dev/src/clisamples/msdl.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/msdl.dir/build.make CMakeFiles/msdl.dir/Users/jacquesmenu/musicformats-git-dev/src/clisamples/msdl.cpp.s
 .PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/msdl.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.o: Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.o
+Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.o: Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stringfilter.dir/build.make CMakeFiles/stringfilter.dir/Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stringmatcher.dir/build.make CMakeFiles/stringmatcher.dir/Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.i: Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.i
+Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.i: Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stringfilter.dir/build.make CMakeFiles/stringfilter.dir/Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stringmatcher.dir/build.make CMakeFiles/stringmatcher.dir/Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.s: Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.s
+Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.s: Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/stringfilter.dir/build.make CMakeFiles/stringfilter.dir/Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/stringmatcher.dir/build.make CMakeFiles/stringmatcher.dir/Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.cpp.s
 
 Users/jacquesmenu/musicformats-git-dev/src/clisamples/xml2brl.o: Users/jacquesmenu/musicformats-git-dev/src/clisamples/xml2brl.cpp.o
 .PHONY : Users/jacquesmenu/musicformats-git-dev/src/clisamples/xml2brl.o
@@ -4979,248 +4979,248 @@ Users/jacquesmenu/musicformats-git-dev/src/interpreters/mfslinterpreter/mfslWae.
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/mfslinterpreter/mfslWae.cpp.s
 .PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/mfslinterpreter/mfslWae.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.o: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.i: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.s: Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.cpp.s
 
 Users/jacquesmenu/musicformats-git-dev/src/languages/languageDutch.o: Users/jacquesmenu/musicformats-git-dev/src/languages/languageDutch.cpp.o
 .PHONY : Users/jacquesmenu/musicformats-git-dev/src/languages/languageDutch.o
@@ -13349,32 +13349,32 @@ Users/jacquesmenu/musicformats-git-dev/src/services/msdlInterface.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/services/msdlInterface.cpp.s
 .PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/msdlInterface.cpp.s
 
-Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.o: Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.o
+Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.o: Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.o
 
 # target to build an object file
-Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.o
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.o
+Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.o
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.o
 
-Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.i: Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.i
+Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.i: Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.i
 
 # target to preprocess a source file
-Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.i
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.i
+Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.i
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.i
 
-Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.s: Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.s
+Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.s: Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.s
 
 # target to generate assembly for a file
-Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.s
-.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.cpp.s
+Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/libmusicformats.dir/build.make CMakeFiles/libmusicformats.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/musicformatsstatic.dir/build.make CMakeFiles/musicformatsstatic.dir/Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.s
+.PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.cpp.s
 
 Users/jacquesmenu/musicformats-git-dev/src/services/xml2brlInterface.o: Users/jacquesmenu/musicformats-git-dev/src/services/xml2brlInterface.cpp.o
 .PHONY : Users/jacquesmenu/musicformats-git-dev/src/services/xml2brlInterface.o
@@ -13621,7 +13621,7 @@ help:
 	@echo "... musicformatsstatic"
 	@echo "... partsummary"
 	@echo "... readunrolled"
-	@echo "... stringfilter"
+	@echo "... stringmatcher"
 	@echo "... xml2brl"
 	@echo "... xml2gmn"
 	@echo "... xml2guido"
@@ -13796,9 +13796,9 @@ help:
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/msdl.o"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/msdl.i"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/msdl.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringfilter.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/stringmatcher.s"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/xml2brl.o"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/xml2brl.i"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/clisamples/xml2brl.s"
@@ -14135,33 +14135,33 @@ help:
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/mfslinterpreter/mfslWae.o"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/mfslinterpreter/mfslWae.i"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/mfslinterpreter/mfslWae.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterBasicTypes.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterDriver.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterComponent.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterInsiderHandler.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterOah.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterInterpreterRegularHandler.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterParser.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterScanner.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringfilterinterpreter/stringFilterWae.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherBasicTypes.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherDriver.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterComponent.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterInsiderHandler.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterOah.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherInterpreterRegularHandler.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherParser.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherScanner.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/interpreters/stringmatcherinterpreter/stringMatcherWae.s"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/languages/languageDutch.o"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/languages/languageDutch.i"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/languages/languageDutch.s"
@@ -15065,9 +15065,9 @@ help:
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/msdlInterface.o"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/msdlInterface.i"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/msdlInterface.s"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.o"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.i"
-	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/stringFilterInterface.s"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.o"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.i"
+	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/stringMatcherInterface.s"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/xml2brlInterface.o"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/xml2brlInterface.i"
 	@echo "... Users/jacquesmenu/musicformats-git-dev/src/services/xml2brlInterface.s"

@@ -32,7 +32,7 @@
 
 /**
  ** \file location.hh
- ** Define the iscm::location class.
+ ** Define the stringMatcher::location class.
  */
 
 #ifndef YY_ISCM_LOCATION_HH_INCLUDED
@@ -53,7 +53,7 @@
 #  endif
 # endif
 
-namespace iscm {
+namespace stringMatcher {
 #line 58 "location.hh"
 
   /// A point in a source file.
@@ -298,7 +298,7 @@ namespace iscm {
     return ostr;
   }
 
-} // iscm
+} // stringMatcher
 #line 303 "location.hh"
 
 #endif // !YY_ISCM_LOCATION_HH_INCLUDED

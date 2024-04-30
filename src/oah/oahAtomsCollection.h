@@ -228,6 +228,10 @@ class EXP oahMacroAtom : public oahValueLessAtom
 
     void                  applyValueLessAtom (std::ostream& os) override;
 
+    virtual Bool          atomMatchesString (
+                            const std::string& lowerCaseString,
+                            std::ostream&      os) const override;
+
   public:
 
     // visitors
@@ -1560,6 +1564,10 @@ class EXP oahCombinedBooleansAtom : public oahValueLessAtom
 
     void                  applyValueLessAtom (std::ostream& os) override;
 
+    virtual Bool          atomMatchesString (
+                            const std::string& lowerCaseString,
+                            std::ostream&      os) const override;
+
   public:
 
     // visitors
@@ -2212,6 +2220,10 @@ class EXP oahCommonPrefixBooleansAtom : public oahValueLessAtom
                             const std::string& name);
 
     void                  applyValueLessAtom (std::ostream& os) override;
+
+    virtual Bool          atomMatchesString (
+                            const std::string& lowerCaseString,
+                            std::ostream&      os) const override;
 
   public:
 

@@ -214,7 +214,7 @@ std::ostream& operator << (std::ostream& os, const oahFindStringMatch* elt)
   return os;
 }
 
-//______________________________________________________________________________
+//__________________________xg____________________________________________________
 /* this class is purely virtual
 S_oahFindableElement oahFindableElement::create ()
 {
@@ -225,34 +225,34 @@ S_oahFindableElement oahFindableElement::create ()
 }
 */
 
-oahFindableElement::oahFindableElement ()
-{}
-
-oahFindableElement::~oahFindableElement ()
-{}
-
-void oahFindableElement::print (std::ostream& os) const
-{
-  os << asString () << std::endl;
-}
-
-std::ostream& operator << (std::ostream& os, const S_oahFindableElement& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "[NULL]" << std::endl;
-  }
-
-  return os;
-}
-
-std::ostream& operator << (std::ostream& os, const oahFindableElement& elt)
-{
-  elt.print (os);
-  return os;
-}
+// oahFindableElement::oahFindableElement ()
+// {}
+//
+// oahFindableElement::~oahFindableElement ()
+// {}
+//
+// void oahFindableElement::print (std::ostream& os) const
+// {
+//   os << asString () << std::endl;
+// }
+//
+// std::ostream& operator << (std::ostream& os, const S_oahFindableElement& elt)
+// {
+//   if (elt) {
+//     elt->print (os);
+//   }
+//   else {
+//     os << "[NULL]" << std::endl;
+//   }
+//
+//   return os;
+// }
+//
+// std::ostream& operator << (std::ostream& os, const oahFindableElement& elt)
+// {
+//   elt.print (os);
+//   return os;
+// }
 
 //______________________________________________________________________________
 /* this class is purely virtual
@@ -524,26 +524,26 @@ std::string oahElement::fetchNamesInColumnsBetweenParentheses (
 // #endif // MF_TRACE_IS_ENABLED
 // }
 
-Bool oahElement::findStringInFindableElement (
-  const std::string&               lowerCaseString,
-  std::list<S_oahFindStringMatch>& foundMatchesList,
-  std::ostream&                    os) const
-{
-  Bool result;
-
-  if (elementMatchesString (lowerCaseString)) {
-    // append the match to foundStringsList
-    foundMatchesList.push_back (
-      oahFindStringMatch::create (
-        fetchNames (),
-        fDescription,
-        containingFindableElementAsString ()));
-
-    result = true;
-  }
-
-  return result;
-}
+// Bool oahElement::fetchElementsMatchingString (
+// 	const std::string&       lowerCaseString,
+// 	std::list<S_oahElement>& foundElementsList,
+// 	std::ostream&            os) const
+// {
+//   Bool result;
+//
+//   if (elementMatchesString (lowerCaseString)) {
+//     // append the match to foundStringsList
+//     foundElementsList.push_back (
+//       oahFindStringMatch::create (
+//         fetchNames (),
+//         fDescription,
+//         containingFindableElementAsString ()));
+//
+//     result = true;
+//   }
+//
+//   return result;
+// }
 
 Bool oahElement::elementMatchesString (
   const std::string& lowerCaseString) const
@@ -694,6 +694,11 @@ void oahElement::print (std::ostream& os) const
   printOahElementEssentials (os, 40); // JMI v0.9.66
 }
 
+void oahElement::printFull (std::ostream& os) const
+{
+  print (os);
+}
+
 void oahElement::printHelp (std::ostream& os) const
 {
   os <<
@@ -712,16 +717,16 @@ void oahElement::printHelp (std::ostream& os) const
   }
 }
 
-const std::string oahElement::containingFindableElementAsString () const
-{
-  std::stringstream ss;
-
-  ss <<
-    fetchNames () << ": " <<
-    fDescription;
-
-  return ss.str ();
-}
+// const std::string oahElement::containingFindableElementAsString () const
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     fetchNames () << ": " <<
+//     fDescription;
+//
+//   return ss.str ();
+// }
 
 std::ostream& operator << (std::ostream& os, const S_oahElement& elt)
 {

@@ -454,7 +454,7 @@ void waeHandler::waeTraceToStreamWithoutInputLocation (
   {
     S_oahStringAtom
       traceOnlyMeasurerNumbeOahAtom =
-         gTraceOahGroup->getTraceOnlyMeasurerNumbeOahAtom ();
+        gTraceOahGroup->getTraceOnlyMeasurerNumbeOahAtom ();
 
     if (traceOnlyMeasurerNumbeOahAtom->getSelected ()) {
       doTraceCurrentMeasure =

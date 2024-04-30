@@ -65,6 +65,16 @@ S_mfcOahComponent createOahComponent ()
             "Many, many changes in the code base"
           }
       ));
+
+    pOahComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.71"),
+          "April 29, 2024",
+          std::list<std::string> {
+            "Finalized the OAH find infrastructure"
+          }
+      ));
   }
 
   return pOahComponent;

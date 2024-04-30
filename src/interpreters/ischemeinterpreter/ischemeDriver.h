@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2024
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -73,10 +73,10 @@ class ischemeDriver
     bool                  getTraceScanning () const
                               { return fTraceScanning; }
 
-    const iscm::location& getScannerLocation () const
+    const stringMatcher::location& getScannerLocation () const
                               { return fScannerLocation; }
 
-    iscm::location&       getScannerLocationNonConst ()
+    stringMatcher::location&       getScannerLocationNonConst ()
                             // no const here
                             // due to constraints in the Flex-generated code
                               { return fScannerLocation; }
@@ -237,7 +237,7 @@ class ischemeDriver
 
     // scanning
     bool                  fTraceScanning;
-    iscm::location        fScannerLocation;
+    stringMatcher::location        fScannerLocation;
 
     // parsing
     bool                  fDisplayServiceAndInput;
@@ -311,7 +311,7 @@ class ischemeDriver
 //______________________________________________________________________________
 // Give Flex the prototype of yylex() we want ...
 # define YY_DECL \
-  iscm::parser::symbol_type yylex (ischemeDriver& drv)
+  stringMatcher::parser::symbol_type yylex (ischemeDriver& drv)
 // ... and declare it for the parser's sake
 YY_DECL;
 

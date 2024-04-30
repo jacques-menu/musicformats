@@ -88,9 +88,9 @@ class EXP oahInsiderHandler : public oahHandler
     // print
     // ------------------------------------------------------
 
-    std::string           asString () const override;
+    std::string           asString () const;
 
-    void                  print (std::ostream& os) const override;
+    void                  print (std::ostream& os) const;
 
   protected:
 

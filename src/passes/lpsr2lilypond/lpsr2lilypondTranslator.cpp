@@ -4960,11 +4960,11 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
 
               if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
                 fLilypondCodeStream <<
-                  "\\stopTrillSpan %{ generateCodeForSpannerAfterNote() %}  ";
+                  "\\stopTrillSpan %{ generateCodeForSpannerAfterNote() AAA %}  ";
               }
               else {
                 fLilypondCodeStream <<
-                  "\\stopTextSpan %{ generateCodeForSpannerAfterNote() %}  ";
+                  "\\stopTextSpan %{ generateCodeForSpannerAfterNote() BBB %}  ";
               }
 
               fPendingTrillSpannerForStop = nullptr;
@@ -12582,11 +12582,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 
-  fLilypondCodeStream <<
-    std::endl <<
-    "\\change Staff = \"" <<
-    elt->getStaffToChangeTo ()->getStaffAlphabeticName () <<
-    "\"";
+//   fLilypondCodeStream << DISABLED TEMP JMI v0.9.71
+//     std::endl <<
+//     "\\change Staff = \"" <<
+//     elt->getStaffToChangeTo ()->getStaffAlphabeticName () <<
+//     "\"";
 
   // generate the input line number as comment if relevant
   if (
@@ -13834,11 +13834,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
     if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
       fLilypondCodeStream <<
-        "\\stopTrillSpan %{ lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt) %}  ";
+        "\\stopTrillSpan %{ XXX lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt) %}  ";
     }
     else {
       fLilypondCodeStream <<
-        "\\stopTextSpan %{ lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt) %}  ";
+        "\\stopTextSpan %{ YYY lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt) %}  ";
     }
 
     fPendingTrillSpannerForStop = nullptr;
@@ -25882,6 +25882,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // should bar number checks be generated?
+  if (gGlobalLpsr2lilypondOahGroup->getNoBarCheckComments ()) {
+    return;
+  }
+
   int nextBarPuristNumber =
     elt->getNextBarPuristNumber ();
 
@@ -26000,6 +26005,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // should bar number checks be generated?
   if (gGlobalLpsr2lilypondOahGroup->getNoBarNumberChecks ()) {
     return;
   }
@@ -26032,10 +26038,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
     int nextBarPuristNumber =
       elt->getNextBarPuristNumber ();
 
-    gLog <<
-      "nextBarOriginalNumber: " << nextBarOriginalNumber <<
-      ", nextBarPuristNumber: " << nextBarPuristNumber <<
-      std::endl;
+//     gLog << // JMI v0.9.71
+//       "nextBarOriginalNumber: " << nextBarOriginalNumber <<
+//       ", nextBarPuristNumber: " << nextBarPuristNumber <<
+//       std::endl;
 
     fLilypondCodeStream <<
       "\\barNumberCheck #" <<
@@ -26567,7 +26573,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
     // the first repeat ending is in charge of
     // outputting the start of the alternative
     fLilypondCodeStream <<
-      std::endl <<
+      std::endl << std::endl <<
       "\\alternative {";
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {

@@ -49,7 +49,7 @@ class EXP languageFrench : public language
 
     // pass names
 
-    virtual std::string   passIDKindAsString (mfPassIDKind passIDKind) const override;
+    std::string           passIDKindAsString (mfPassIDKind passIDKind) const override;
 
     std::string           passOptional () const override;
 
@@ -60,7 +60,7 @@ class EXP languageFrench : public language
 
     // quitting after passes
 
-    virtual std::string   quittingAfterPass (mfPassIDKind passIDKind) const override;
+    std::string           quittingAfterPass (mfPassIDKind passIDKind) const override;
 
     // OAH
 

@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2024
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -120,15 +120,15 @@ typedef SMARTP<ischeme2musicxmlException> S_ischeme2musicxmlException;
 //______________________________________________________________________________
 EXP void ischemeWarning (
   const std::string&       message,
-  const iscm::location& loc);
+  const stringMatcher::location& loc);
 
 EXP void ischemeError (
   const std::string&       message,
-  const iscm::location& loc);
+  const stringMatcher::location& loc);
 
 EXP void ischemeInternalError (
   const std::string&       message,
-  const iscm::location& loc);
+  const stringMatcher::location& loc);
 
 EXP void ischemeFileError (
   const std::string& inputSourceName,

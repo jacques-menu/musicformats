@@ -9,30 +9,30 @@
 /* %not-for-header */
 /* %if-c-only */
 /* %if-not-reentrant */
-#define yy_create_buffer iscm_create_buffer
-#define yy_delete_buffer iscm_delete_buffer
-#define yy_scan_buffer iscm_scan_buffer
-#define yy_scan_string iscm_scan_string
-#define yy_scan_bytes iscm_scan_bytes
-#define yy_init_buffer iscm_init_buffer
-#define yy_flush_buffer iscm_flush_buffer
-#define yy_load_buffer_state iscm_load_buffer_state
-#define yy_switch_to_buffer iscm_switch_to_buffer
-#define yypush_buffer_state iscmpush_buffer_state
-#define yypop_buffer_state iscmpop_buffer_state
-#define yyensure_buffer_stack iscmensure_buffer_stack
-#define yy_flex_debug iscm_flex_debug
-#define yyin iscmin
-#define yyleng iscmleng
-#define yylex iscmlex
-#define yylineno iscmlineno
-#define yyout iscmout
-#define yyrestart iscmrestart
-#define yytext iscmtext
-#define yywrap iscmwrap
-#define yyalloc iscmalloc
-#define yyrealloc iscmrealloc
-#define yyfree iscmfree
+#define yy_create_buffer stringMatcher_create_buffer
+#define yy_delete_buffer stringMatcher_delete_buffer
+#define yy_scan_buffer stringMatcher_scan_buffer
+#define yy_scan_string stringMatcher_scan_string
+#define yy_scan_bytes stringMatcher_scan_bytes
+#define yy_init_buffer stringMatcher_init_buffer
+#define yy_flush_buffer stringMatcher_flush_buffer
+#define yy_load_buffer_state stringMatcher_load_buffer_state
+#define yy_switch_to_buffer stringMatcher_switch_to_buffer
+#define yypush_buffer_state stringMatcherpush_buffer_state
+#define yypop_buffer_state stringMatcherpop_buffer_state
+#define yyensure_buffer_stack stringMatcherensure_buffer_stack
+#define yy_flex_debug stringMatcher_flex_debug
+#define yyin stringMatcherin
+#define yyleng stringMatcherleng
+#define yylex stringMatcherlex
+#define yylineno stringMatcherlineno
+#define yyout stringMatcherout
+#define yyrestart stringMatcherrestart
+#define yytext stringMatchertext
+#define yywrap stringMatcherwrap
+#define yyalloc stringMatcheralloc
+#define yyrealloc stringMatcherrealloc
+#define yyfree stringMatcherfree
 
 /* %endif */
 /* %endif */
@@ -51,241 +51,241 @@
 
 /* %if-c-only */
 #ifdef yy_create_buffer
-#define iscm_create_buffer_ALREADY_DEFINED
+#define stringMatcher_create_buffer_ALREADY_DEFINED
 #else
-#define yy_create_buffer iscm_create_buffer
+#define yy_create_buffer stringMatcher_create_buffer
 #endif
 
 #ifdef yy_delete_buffer
-#define iscm_delete_buffer_ALREADY_DEFINED
+#define stringMatcher_delete_buffer_ALREADY_DEFINED
 #else
-#define yy_delete_buffer iscm_delete_buffer
+#define yy_delete_buffer stringMatcher_delete_buffer
 #endif
 
 #ifdef yy_scan_buffer
-#define iscm_scan_buffer_ALREADY_DEFINED
+#define stringMatcher_scan_buffer_ALREADY_DEFINED
 #else
-#define yy_scan_buffer iscm_scan_buffer
+#define yy_scan_buffer stringMatcher_scan_buffer
 #endif
 
 #ifdef yy_scan_string
-#define iscm_scan_string_ALREADY_DEFINED
+#define stringMatcher_scan_string_ALREADY_DEFINED
 #else
-#define yy_scan_string iscm_scan_string
+#define yy_scan_string stringMatcher_scan_string
 #endif
 
 #ifdef yy_scan_bytes
-#define iscm_scan_bytes_ALREADY_DEFINED
+#define stringMatcher_scan_bytes_ALREADY_DEFINED
 #else
-#define yy_scan_bytes iscm_scan_bytes
+#define yy_scan_bytes stringMatcher_scan_bytes
 #endif
 
 #ifdef yy_init_buffer
-#define iscm_init_buffer_ALREADY_DEFINED
+#define stringMatcher_init_buffer_ALREADY_DEFINED
 #else
-#define yy_init_buffer iscm_init_buffer
+#define yy_init_buffer stringMatcher_init_buffer
 #endif
 
 #ifdef yy_flush_buffer
-#define iscm_flush_buffer_ALREADY_DEFINED
+#define stringMatcher_flush_buffer_ALREADY_DEFINED
 #else
-#define yy_flush_buffer iscm_flush_buffer
+#define yy_flush_buffer stringMatcher_flush_buffer
 #endif
 
 #ifdef yy_load_buffer_state
-#define iscm_load_buffer_state_ALREADY_DEFINED
+#define stringMatcher_load_buffer_state_ALREADY_DEFINED
 #else
-#define yy_load_buffer_state iscm_load_buffer_state
+#define yy_load_buffer_state stringMatcher_load_buffer_state
 #endif
 
 #ifdef yy_switch_to_buffer
-#define iscm_switch_to_buffer_ALREADY_DEFINED
+#define stringMatcher_switch_to_buffer_ALREADY_DEFINED
 #else
-#define yy_switch_to_buffer iscm_switch_to_buffer
+#define yy_switch_to_buffer stringMatcher_switch_to_buffer
 #endif
 
 #ifdef yypush_buffer_state
-#define iscmpush_buffer_state_ALREADY_DEFINED
+#define stringMatcherpush_buffer_state_ALREADY_DEFINED
 #else
-#define yypush_buffer_state iscmpush_buffer_state
+#define yypush_buffer_state stringMatcherpush_buffer_state
 #endif
 
 #ifdef yypop_buffer_state
-#define iscmpop_buffer_state_ALREADY_DEFINED
+#define stringMatcherpop_buffer_state_ALREADY_DEFINED
 #else
-#define yypop_buffer_state iscmpop_buffer_state
+#define yypop_buffer_state stringMatcherpop_buffer_state
 #endif
 
 #ifdef yyensure_buffer_stack
-#define iscmensure_buffer_stack_ALREADY_DEFINED
+#define stringMatcherensure_buffer_stack_ALREADY_DEFINED
 #else
-#define yyensure_buffer_stack iscmensure_buffer_stack
+#define yyensure_buffer_stack stringMatcherensure_buffer_stack
 #endif
 
 #ifdef yylex
-#define iscmlex_ALREADY_DEFINED
+#define stringMatcherlex_ALREADY_DEFINED
 #else
-#define yylex iscmlex
+#define yylex stringMatcherlex
 #endif
 
 #ifdef yyrestart
-#define iscmrestart_ALREADY_DEFINED
+#define stringMatcherrestart_ALREADY_DEFINED
 #else
-#define yyrestart iscmrestart
+#define yyrestart stringMatcherrestart
 #endif
 
 #ifdef yylex_init
-#define iscmlex_init_ALREADY_DEFINED
+#define stringMatcherlex_init_ALREADY_DEFINED
 #else
-#define yylex_init iscmlex_init
+#define yylex_init stringMatcherlex_init
 #endif
 
 #ifdef yylex_init_extra
-#define iscmlex_init_extra_ALREADY_DEFINED
+#define stringMatcherlex_init_extra_ALREADY_DEFINED
 #else
-#define yylex_init_extra iscmlex_init_extra
+#define yylex_init_extra stringMatcherlex_init_extra
 #endif
 
 #ifdef yylex_destroy
-#define iscmlex_destroy_ALREADY_DEFINED
+#define stringMatcherlex_destroy_ALREADY_DEFINED
 #else
-#define yylex_destroy iscmlex_destroy
+#define yylex_destroy stringMatcherlex_destroy
 #endif
 
 #ifdef yyget_debug
-#define iscmget_debug_ALREADY_DEFINED
+#define stringMatcherget_debug_ALREADY_DEFINED
 #else
-#define yyget_debug iscmget_debug
+#define yyget_debug stringMatcherget_debug
 #endif
 
 #ifdef yyset_debug
-#define iscmset_debug_ALREADY_DEFINED
+#define stringMatcherset_debug_ALREADY_DEFINED
 #else
-#define yyset_debug iscmset_debug
+#define yyset_debug stringMatcherset_debug
 #endif
 
 #ifdef yyget_extra
-#define iscmget_extra_ALREADY_DEFINED
+#define stringMatcherget_extra_ALREADY_DEFINED
 #else
-#define yyget_extra iscmget_extra
+#define yyget_extra stringMatcherget_extra
 #endif
 
 #ifdef yyset_extra
-#define iscmset_extra_ALREADY_DEFINED
+#define stringMatcherset_extra_ALREADY_DEFINED
 #else
-#define yyset_extra iscmset_extra
+#define yyset_extra stringMatcherset_extra
 #endif
 
 #ifdef yyget_in
-#define iscmget_in_ALREADY_DEFINED
+#define stringMatcherget_in_ALREADY_DEFINED
 #else
-#define yyget_in iscmget_in
+#define yyget_in stringMatcherget_in
 #endif
 
 #ifdef yyset_in
-#define iscmset_in_ALREADY_DEFINED
+#define stringMatcherset_in_ALREADY_DEFINED
 #else
-#define yyset_in iscmset_in
+#define yyset_in stringMatcherset_in
 #endif
 
 #ifdef yyget_out
-#define iscmget_out_ALREADY_DEFINED
+#define stringMatcherget_out_ALREADY_DEFINED
 #else
-#define yyget_out iscmget_out
+#define yyget_out stringMatcherget_out
 #endif
 
 #ifdef yyset_out
-#define iscmset_out_ALREADY_DEFINED
+#define stringMatcherset_out_ALREADY_DEFINED
 #else
-#define yyset_out iscmset_out
+#define yyset_out stringMatcherset_out
 #endif
 
 #ifdef yyget_leng
-#define iscmget_leng_ALREADY_DEFINED
+#define stringMatcherget_leng_ALREADY_DEFINED
 #else
-#define yyget_leng iscmget_leng
+#define yyget_leng stringMatcherget_leng
 #endif
 
 #ifdef yyget_text
-#define iscmget_text_ALREADY_DEFINED
+#define stringMatcherget_text_ALREADY_DEFINED
 #else
-#define yyget_text iscmget_text
+#define yyget_text stringMatcherget_text
 #endif
 
 #ifdef yyget_lineno
-#define iscmget_lineno_ALREADY_DEFINED
+#define stringMatcherget_lineno_ALREADY_DEFINED
 #else
-#define yyget_lineno iscmget_lineno
+#define yyget_lineno stringMatcherget_lineno
 #endif
 
 #ifdef yyset_lineno
-#define iscmset_lineno_ALREADY_DEFINED
+#define stringMatcherset_lineno_ALREADY_DEFINED
 #else
-#define yyset_lineno iscmset_lineno
+#define yyset_lineno stringMatcherset_lineno
 #endif
 
 #ifdef yywrap
-#define iscmwrap_ALREADY_DEFINED
+#define stringMatcherwrap_ALREADY_DEFINED
 #else
-#define yywrap iscmwrap
+#define yywrap stringMatcherwrap
 #endif
 
 /* %endif */
 
 #ifdef yyalloc
-#define iscmalloc_ALREADY_DEFINED
+#define stringMatcheralloc_ALREADY_DEFINED
 #else
-#define yyalloc iscmalloc
+#define yyalloc stringMatcheralloc
 #endif
 
 #ifdef yyrealloc
-#define iscmrealloc_ALREADY_DEFINED
+#define stringMatcherrealloc_ALREADY_DEFINED
 #else
-#define yyrealloc iscmrealloc
+#define yyrealloc stringMatcherrealloc
 #endif
 
 #ifdef yyfree
-#define iscmfree_ALREADY_DEFINED
+#define stringMatcherfree_ALREADY_DEFINED
 #else
-#define yyfree iscmfree
+#define yyfree stringMatcherfree
 #endif
 
 /* %if-c-only */
 
 #ifdef yytext
-#define iscmtext_ALREADY_DEFINED
+#define stringMatchertext_ALREADY_DEFINED
 #else
-#define yytext iscmtext
+#define yytext stringMatchertext
 #endif
 
 #ifdef yyleng
-#define iscmleng_ALREADY_DEFINED
+#define stringMatcherleng_ALREADY_DEFINED
 #else
-#define yyleng iscmleng
+#define yyleng stringMatcherleng
 #endif
 
 #ifdef yyin
-#define iscmin_ALREADY_DEFINED
+#define stringMatcherin_ALREADY_DEFINED
 #else
-#define yyin iscmin
+#define yyin stringMatcherin
 #endif
 
 #ifdef yyout
-#define iscmout_ALREADY_DEFINED
+#define stringMatcherout_ALREADY_DEFINED
 #else
-#define yyout iscmout
+#define yyout stringMatcherout
 #endif
 
 #ifdef yy_flex_debug
-#define iscm_flex_debug_ALREADY_DEFINED
+#define stringMatcher_flex_debug_ALREADY_DEFINED
 #else
-#define yy_flex_debug iscm_flex_debug
+#define yy_flex_debug stringMatcher_flex_debug
 #endif
 
 #ifdef yylineno
-#define iscmlineno_ALREADY_DEFINED
+#define stringMatcherlineno_ALREADY_DEFINED
 #else
-#define yylineno iscmlineno
+#define yylineno stringMatcherlineno
 #endif
 
 /* %endif */
@@ -668,7 +668,7 @@ void yyfree ( void *  );
 /* %% [1.0] yytext/yyin/yyout/yy_state_type/yylineno etc. def's & init go here */
 /* Begin user sect3 */
 
-#define iscmwrap() (/*CONSTCOND*/1)
+#define stringMatcherwrap() (/*CONSTCOND*/1)
 #define YY_SKIP_YYWRAP
 
 #define FLEX_DEBUG
@@ -892,7 +892,7 @@ char *yytext;
 
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2024
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -945,8 +945,8 @@ char *yytext;
 /* ---------------------------------------------------------------------- */
 #define YY_NO_INPUT 1
 #line 69 "ischemeScanner.ll"
-//   iscm::parser::symbol_type JMI
-//   make_NAME (const std::string &s, const iscm::parser::location_type& loc);
+//   stringMatcher::parser::symbol_type JMI
+//   make_NAME (const std::string &s, const stringMatcher::parser::location_type& loc);
 #line 950 "ischemeScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* regular expressions */
@@ -1260,7 +1260,7 @@ YY_DECL
 char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 // A handy shortcut to the location held by the ischemeDriver
-iscm::location& loc = drv.getScannerLocationNonConst ();
+stringMatcher::location& loc = drv.getScannerLocationNonConst ();
 
 // Code run each time yylex() is called
 loc.step ();
@@ -1451,7 +1451,7 @@ YY_RULE_SETUP
   BEGIN INITIAL;
 
   return
-    iscm::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
+    stringMatcher::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
 }
 	YY_BREAK
 case 12:
@@ -1521,7 +1521,7 @@ YY_RULE_SETUP
   loc.step ();
   BEGIN INITIAL;
   return
-    iscm::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
+    stringMatcher::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
 }
 	YY_BREAK
 case 20:
@@ -1585,7 +1585,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_DOUBLE (yytext, loc);
+    stringMatcher::parser::make_DOUBLE (yytext, loc);
 }
 	YY_BREAK
 case 28:
@@ -1602,7 +1602,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_INTEGER (yytext, loc);
+    stringMatcher::parser::make_INTEGER (yytext, loc);
 }
 	YY_BREAK
 case 29:
@@ -1619,7 +1619,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_SERVICE (loc);
+    stringMatcher::parser::make_SERVICE (loc);
 }
 	YY_BREAK
 case 30:
@@ -1636,7 +1636,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_INPUT (loc);
+    stringMatcher::parser::make_INPUT (loc);
 }
 	YY_BREAK
 case 31:
@@ -1653,7 +1653,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_CHOICE (loc);
+    stringMatcher::parser::make_CHOICE (loc);
 }
 	YY_BREAK
 case 32:
@@ -1670,7 +1670,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_DEFAULT (loc);
+    stringMatcher::parser::make_DEFAULT (loc);
 }
 	YY_BREAK
 case 33:
@@ -1687,7 +1687,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_CASE (loc);
+    stringMatcher::parser::make_CASE (loc);
 }
 	YY_BREAK
 case 34:
@@ -1704,7 +1704,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_SELECT (loc);
+    stringMatcher::parser::make_SELECT (loc);
 }
 	YY_BREAK
 case 35:
@@ -1721,7 +1721,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_ALL (loc);
+    stringMatcher::parser::make_ALL (loc);
 }
 	YY_BREAK
 case 36:
@@ -1738,7 +1738,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_NAME (yytext, loc);
+    stringMatcher::parser::make_NAME (yytext, loc);
 }
 	YY_BREAK
 case 37:
@@ -1756,7 +1756,7 @@ YY_RULE_SETUP
   loc.begin.column += yyleng;
 
   return
-    iscm::parser::make_OPTION (yytext, loc);
+    stringMatcher::parser::make_OPTION (yytext, loc);
 }
 	YY_BREAK
 case 39:
@@ -1773,7 +1773,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_COMMA (loc);
+    stringMatcher::parser::make_COMMA (loc);
 }
 	YY_BREAK
 case 40:
@@ -1790,7 +1790,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_COLON (loc);
+    stringMatcher::parser::make_COLON (loc);
 }
 	YY_BREAK
 case 41:
@@ -1807,7 +1807,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_SEMICOLON (loc);
+    stringMatcher::parser::make_SEMICOLON (loc);
 }
 	YY_BREAK
 case 42:
@@ -1824,7 +1824,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_BAR (loc);
+    stringMatcher::parser::make_BAR (loc);
 }
 	YY_BREAK
 case 43:
@@ -1841,7 +1841,7 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_AMPERSAND (loc);
+    stringMatcher::parser::make_AMPERSAND (loc);
 }
 	YY_BREAK
 case 44:
@@ -1858,14 +1858,14 @@ YY_RULE_SETUP
   loc.step ();
 
   return
-    iscm::parser::make_EQUAL (loc);
+    stringMatcher::parser::make_EQUAL (loc);
 }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 528 "ischemeScanner.ll"
 {
-   throw iscm::parser::syntax_error (
+   throw stringMatcher::parser::syntax_error (
      loc,
      "### invalid character: " + std::string (yytext));
 }
@@ -1878,7 +1878,7 @@ case YY_STATE_EOF(PARENTHESIZED_COMMENT_MODE):
 #line 536 "ischemeScanner.ll"
 {
   return
-    iscm::parser::make_YYEOF (loc);
+    stringMatcher::parser::make_YYEOF (loc);
 }
 	YY_BREAK
 case 46:

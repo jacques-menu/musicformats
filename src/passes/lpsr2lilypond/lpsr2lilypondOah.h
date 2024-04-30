@@ -1473,6 +1473,14 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getNoBarNumberChecks () const
                               { return fNoBarNumberChecks; }
 
+    // bar number comments
+    // --------------------------------------
+
+    void                  setNoBarCheckComments ()
+                              { fNoBarCheckComments = true; }
+    Bool                  getNoBarCheckComments () const
+                              { return fNoBarCheckComments; }
+
     // line breaks
     // --------------------------------------
 
@@ -2018,6 +2026,13 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fNoBarNumberChecks;
     // this atom is used by the '-minimal' combined option
     S_oahBooleanAtom      fNoBarNumberChecksAtom;
+    // this atom is used by the '-minimal' combined option
+    S_oahBooleanAtom      fNoBarCheckCommentsAtom;
+
+    // bar check comments
+    // --------------------------------------
+
+    Bool                  fNoBarCheckComments;
 
     // line breaks
     // --------------------------------------

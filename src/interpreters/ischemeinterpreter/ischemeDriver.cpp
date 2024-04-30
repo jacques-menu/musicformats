@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) Jacques Menu 2016-2024
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -519,7 +519,7 @@ int ischemeDriver::parseInput_Pass1 ()
   }
 
   // do the parsing
-  iscm::parser theParser (*this);
+  stringMatcher::parser theParser (*this);
 
   theParser.set_debug_level (
     fTraceParsing);
