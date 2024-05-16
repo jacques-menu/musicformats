@@ -101,7 +101,7 @@ void msrTupletFactor::print (std::ostream& os) const
 
 std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt)
 {
-  elt.print (os);
+  os << elt.asShortString ();
   return os;
 }
 

@@ -1421,7 +1421,7 @@ void msrWholeNotes::print (std::ostream& os) const
 
 std::ostream& operator << (std::ostream& os, const msrWholeNotes& wholeNotes)
 {
-  wholeNotes.print (os);
+  os << wholeNotes.asShortString ();
   return os;
 }
 

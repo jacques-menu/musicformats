@@ -2824,10 +2824,10 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             appendChordNamesContextToPartBlock (
                elt->getInputStartLineNumber (),
               chordNamesContext);
-
-          fOnGoingHarmoniesVoice = true;
         }
       }
+
+      fOnGoingHarmoniesVoice = true;
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
@@ -2898,10 +2898,10 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
           fCurrentPartBlock->
             appendFiguredBassContextToPartBlock (
               figuredBassContext);
-
-          fOnGoingFiguredBassVoice = true;
         }
       }
+
+      fOnGoingFiguredBassVoice = true;
       break;
   } // switch
 

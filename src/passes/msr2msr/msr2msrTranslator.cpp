@@ -1476,9 +1476,10 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
 //           }
 // #endif // MF_TRACE_IS_ENABLED
 
-          fOnGoingHarmoniesVoice = true;
         }
       }
+
+      fOnGoingHarmoniesVoice = true;
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
@@ -1511,10 +1512,10 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
 //               ss.str ());
 //           }
 // #endif // MF_TRACE_IS_ENABLED
-
-          fOnGoingFiguredBassVoice = true;
         }
       }
+
+      fOnGoingFiguredBassVoice = true;
       break;
   } // switch
 
