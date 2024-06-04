@@ -65,7 +65,6 @@ function addBuild ()
   git add    ${BUILD_DIR}/Building.md
   git add -f ${BUILD_DIR}/CMakeLists.txt
   git add    ${BUILD_DIR}/MakePkg.bat
-  git add -f ${BUILD_DIR}/Makefile
 }
 
 function addDevtools ()
