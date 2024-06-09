@@ -853,7 +853,9 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& note);
     void                  generateNoteLigaturesList (
                             const S_msrNote& note);
-    void                  generateNoteHead (
+    void                  generateNoteHeadSettingsBeforeNote (
+                            const S_msrNote& note);
+    void                  generateNoteHeadSettingsAfterNote (
                             const S_msrNote& note);
 
     void                  generateSegno (

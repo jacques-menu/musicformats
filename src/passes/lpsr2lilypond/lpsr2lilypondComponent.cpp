@@ -84,6 +84,16 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
           }
       ));
 
+    pPassComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.71"),
+          "June 9, 2024",
+          std::list<std::string> {
+            "Fixed an issue in LilyPond note heads generation"
+          }
+      ));
+
   return pPassComponent;
 }
 

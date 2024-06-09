@@ -2018,7 +2018,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
   }
 }
 
-void lpsr2lilypondTranslator::generateNoteHead (
+void lpsr2lilypondTranslator::generateNoteHeadSettingsBeforeNote (
   const S_msrNote& note)
 {
   if (! note->fetchNoteIsARest ()) { // JMI ???
@@ -2034,10 +2034,10 @@ void lpsr2lilypondTranslator::generateNoteHead (
       case msrNoteHeadKind::kNoteHeadTriangle:
         fLilypondCodeStream << "\\tweak style #'triangle ";
         break;
-      case msrNoteHeadKind::kNoteHeadDiamond:
-   // JMI     fLilypondCodeStream << "\\tweak style #'diamond ";
-        fLilypondCodeStream << "\\harmonic ";
-        break;
+//       case msrNoteHeadKind::kNoteHeadDiamond: JMI v0.9.72
+//    // JMI     fLilypondCodeStream << "\\tweak style #'diamond ";
+//         fLilypondCodeStream << "\\harmonic ";
+//         break;
       case msrNoteHeadKind::kNoteHeadSquare:
         fLilypondCodeStream << "\\tweak style #'la ";
         break;
@@ -2050,6 +2050,102 @@ void lpsr2lilypondTranslator::generateNoteHead (
       case msrNoteHeadKind::kNoteHeadCircleX:
         fLilypondCodeStream << "\\tweak style #'xcircle ";
         break;
+//       case msrNoteHeadKind::kNoteHeadInvertedTriangle:
+//         fLilypondCodeStream << "%{ kNoteHeadInvertedTriangle %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadArrowDown:
+//         fLilypondCodeStream << "%{ kNoteHeadArrowDown %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadArrowUp:
+//         fLilypondCodeStream << "%{ kNoteHeadArrowUp %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadSlashed:
+//         fLilypondCodeStream << "%{ kNoteHeadSlashed %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadBackSlashed:
+//         fLilypondCodeStream << "%{ kNoteHeadBackSlashed %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadNormal:
+//    // JMI     fLilypondCodeStream << "%{ msrNoteHeadKind::kNoteHeadNormal %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadCluster:
+//         fLilypondCodeStream << "%{ kNoteHeadCluster %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadCircleDot:
+//         fLilypondCodeStream << "%{ kNoteHeadCircleDot %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadLeftTriangle:
+//         fLilypondCodeStream << "%{ kNoteHeadLeftTriangle %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadRectangle:
+//         fLilypondCodeStream << "%{ kNoteHeadRectangle %}  ";
+//         break;
+      case msrNoteHeadKind::kNoteHeadNone:
+        fLilypondCodeStream << "\\once\\omit NoteHead ";
+        break;
+      case msrNoteHeadKind::kNoteHeadDo:
+        fLilypondCodeStream << "\\tweak style #'do ";
+        break;
+      case msrNoteHeadKind::kNoteHeadRe:
+        fLilypondCodeStream << "\\tweak style #'re ";
+        break;
+      case msrNoteHeadKind::kNoteHeadMi:
+        fLilypondCodeStream << "\\tweak style #'mi ";
+        break;
+      case msrNoteHeadKind::kNoteHeadFa:
+        fLilypondCodeStream << "\\tweak style #'fa ";
+        break;
+      case msrNoteHeadKind::kNoteHeadFaUp:
+        fLilypondCodeStream << "\\tweak style #'triangle ";
+        break;
+      case msrNoteHeadKind::kNoteHeadSo:
+        fLilypondCodeStream << "\\tweak style #'sol ";
+        break;
+      case msrNoteHeadKind::kNoteHeadLa:
+        fLilypondCodeStream << "\\tweak style #'la ";
+        break;
+      case msrNoteHeadKind::kNoteHeadTi:
+        fLilypondCodeStream << "\\tweak style #'ti ";
+        break;
+
+      default:
+        ;
+    } // switch
+  }
+}
+
+void lpsr2lilypondTranslator::generateNoteHeadSettingsAfterNote (
+  const S_msrNote& note)
+{
+  if (! note->fetchNoteIsARest ()) { // JMI ???
+    msrNoteHeadKind
+      noteHeadKind =
+        note->getNoteHeadKind ();
+
+    // these tweaks should occur right before the note itself
+    switch (noteHeadKind) {
+//       case msrNoteHeadKind::kNoteHeadSlash:
+//         fLilypondCodeStream << "\\tweak style #'slash ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadTriangle:
+//         fLilypondCodeStream << "\\tweak style #'triangle ";
+//         break;
+      case msrNoteHeadKind::kNoteHeadDiamond:
+   // JMI     fLilypondCodeStream << "\\tweak style #'diamond ";
+        fLilypondCodeStream << "\\harmonic ";
+        break;
+//       case msrNoteHeadKind::kNoteHeadSquare:
+//         fLilypondCodeStream << "\\tweak style #'la ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadCross:
+//         fLilypondCodeStream << "\\tweak style #'cross ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadX:
+//         fLilypondCodeStream << "\\tweak style #'cross %{ x %}  ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadCircleX:
+//         fLilypondCodeStream << "\\tweak style #'xcircle ";
+//         break;
       case msrNoteHeadKind::kNoteHeadInvertedTriangle:
         fLilypondCodeStream << "%{ kNoteHeadInvertedTriangle %}  ";
         break;
@@ -2080,33 +2176,36 @@ void lpsr2lilypondTranslator::generateNoteHead (
       case msrNoteHeadKind::kNoteHeadRectangle:
         fLilypondCodeStream << "%{ kNoteHeadRectangle %}  ";
         break;
-      case msrNoteHeadKind::kNoteHeadNone:
-        fLilypondCodeStream << "\\once\\omit NoteHead ";
-        break;
-      case msrNoteHeadKind::kNoteHeadDo:
-        fLilypondCodeStream << "\\tweak style #'do ";
-        break;
-      case msrNoteHeadKind::kNoteHeadRe:
-        fLilypondCodeStream << "\\tweak style #'re ";
-        break;
-      case msrNoteHeadKind::kNoteHeadMi:
-        fLilypondCodeStream << "\\tweak style #'mi ";
-        break;
-      case msrNoteHeadKind::kNoteHeadFa:
-        fLilypondCodeStream << "\\tweak style #'fa ";
-        break;
-      case msrNoteHeadKind::kNoteHeadFaUp:
-        fLilypondCodeStream << "\\tweak style #'triangle ";
-        break;
-      case msrNoteHeadKind::kNoteHeadSo:
-        fLilypondCodeStream << "\\tweak style #'sol ";
-        break;
-      case msrNoteHeadKind::kNoteHeadLa:
-        fLilypondCodeStream << "\\tweak style #'la ";
-        break;
-      case msrNoteHeadKind::kNoteHeadTi:
-        fLilypondCodeStream << "\\tweak style #'ti ";
-        break;
+//       case msrNoteHeadKind::kNoteHeadNone:
+//         fLilypondCodeStream << "\\once\\omit NoteHead ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadDo:
+//         fLilypondCodeStream << "\\tweak style #'do ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadRe:
+//         fLilypondCodeStream << "\\tweak style #'re ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadMi:
+//         fLilypondCodeStream << "\\tweak style #'mi ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadFa:
+//         fLilypondCodeStream << "\\tweak style #'fa ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadFaUp:
+//         fLilypondCodeStream << "\\tweak style #'triangle ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadSo:
+//         fLilypondCodeStream << "\\tweak style #'sol ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadLa:
+//         fLilypondCodeStream << "\\tweak style #'la ";
+//         break;
+//       case msrNoteHeadKind::kNoteHeadTi:
+//         fLilypondCodeStream << "\\tweak style #'ti ";
+//         break;
+
+      default:
+        ;
     } // switch
   }
 }
@@ -2219,8 +2318,8 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
     generateNoteSlurDirection (note);
   }
 
-  // handling note head
-  generateNoteHead (note);
+  // generating note head tweaks before note
+  generateNoteHeadSettingsBeforeNote (note);
 
   // generate note spanners if any
   generateBeforeNoteSpannersListIfAny (note);
@@ -3763,6 +3862,9 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
     }
   }
 */
+
+  // generate note head tweaks before note
+  generateNoteHeadSettingsAfterNote (note);
 
   if (! fOnGoingChord) {
     // generate the note codas if any
@@ -5475,7 +5577,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
       switch (harmonyDegreeTypeKind) {
         case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd:
           ss <<
-            "." << // JMI ??? v0.9.67
+//             "." << // JMI ??? v0.9.71
             harmonyDegreeValue <<
             harmonyDegreeAlterationKindAsLilypondString (
               harmonyDegreeAlterationKind);
@@ -5483,7 +5585,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
 
         case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAlter:
           ss <<
-            "." <<
+//             "." << // JMI ??? v0.9.71
             harmonyDegreeValue <<
             harmonyDegreeAlterationKindAsLilypondString (
               harmonyDegreeAlterationKind);

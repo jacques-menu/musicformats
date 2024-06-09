@@ -3686,7 +3686,7 @@ void msrHarmonyDegree::setHarmonyDegreeUpLinkToHarmony (
     UpLinkToHarmony;
 }
 
-/* JMI ???
+/* JMI ??? v0.9.71
 int msrHarmonyDegree::harmonyDegreeAsSemitones () const
 {
 / *
@@ -3867,9 +3867,9 @@ std::string msrHarmonyDegree::asString () const
 
   ss <<
     "[HarmonyDegree" <<
-    ", type: " << harmonyDegreeKindAsShortString () <<
-    ", value: " << fHarmonyDegreeValue <<
-    ", alteration: " <<
+    ", fHarmonyDegreeTypeKind: " << harmonyDegreeKindAsShortString () <<
+    ", fHarmonyDegreeValue: " << fHarmonyDegreeValue <<
+    ", fHarmonyDegreeAlterationKind: " <<
     msrAlterationKindAsString (
       fHarmonyDegreeAlterationKind) <<
     ", line: " << fInputStartLineNumber <<
@@ -5087,7 +5087,7 @@ std::string msrHarmony::asString () const
       ss << "[NULL]";
     }
 
-//   ss <<
+//   ss << JMI v0.9.71
 //     ", fHarmonyUpLinkToVoice: ";
 //     if (fHarmonyUpLinkToVoice) {
 //       ss <<
@@ -5439,7 +5439,7 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony measure number
   os <<
     std::setw (fieldWidth) <<
-    "harmonyUpLinkToMeasureMeasureNumber" << ": ";
+    "fMeasureElementUpLinkToMeasure" << ": ";
   if (fMeasureElementUpLinkToMeasure) {
     os <<
       fMeasureElementUpLinkToMeasure->getMeasureNumber ();

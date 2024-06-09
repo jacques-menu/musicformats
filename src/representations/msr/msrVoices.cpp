@@ -1184,10 +1184,15 @@ void msrVoice::setNextMeasureNumberInVoice (
 
   ++gIndenter;
 
-  fVoiceLastSegment->
-    setNextMeasureNumberInSegment (
-      inputLineNumber,
-      nextMeasureNumber);
+  if (fVoiceLastSegment) {
+    fVoiceLastSegment->
+      setNextMeasureNumberInSegment (
+        inputLineNumber,
+        nextMeasureNumber);
+  }
+  else {
+    // JMI ??? v0.9.71
+  }
 
   // is there a current multi-measure rests in this voice?
   if (fVoiceMultiMeasureRestsWaitingForItsNextMeasureNumber) {

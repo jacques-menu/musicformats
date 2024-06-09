@@ -3578,10 +3578,10 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         std::string
           scoreLastMeasureNumber =
             elt->fetchMeasureUpLinkToScore ()->getScoreLastMeasureNumber ();
-        gLog <<
-          "fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
-          ", scoreLastMeasureNumber: " << scoreLastMeasureNumber <<
-          std::endl;
+//         gLog << // JMI v0.9.71
+//           "fCurrentMeasureNumber: " << fCurrentMeasureNumber <<
+//           ", scoreLastMeasureNumber: " << scoreLastMeasureNumber <<
+//           std::endl;
 
         doCreateABarCheck =
           fCurrentMeasureNumber != scoreLastMeasureNumber;

@@ -10263,10 +10263,15 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   // set next measure number in current part' previous measure
   // if this measure is not the first one
   if (fPartMeasuresCounter > 1) { // JMI v0.9.71
-    fCurrentPart->
-      setNextMeasureNumberInPart (
-        elt->getInputStartLineNumber (),
-        fCurrentMeasureNumber);
+//     if (fCurrentPart) {
+      fCurrentPart->
+        setNextMeasureNumberInPart (
+          elt->getInputStartLineNumber (),
+          fCurrentMeasureNumber);
+//     }
+//     else {
+//       // JMI ???
+//     }
   }
 
   // consistency check

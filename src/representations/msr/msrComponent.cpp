@@ -67,6 +67,16 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
             "Many, many changes in the code base"
           }
       ));
+
+    pRepresentationComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.70"),
+          "February 20, 2024",
+          std::list<std::string> {
+            "Moved the generation of '\harmonic' from before to after the head note"
+          }
+      ));
   }
 
   return pRepresentationComponent;
