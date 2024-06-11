@@ -385,7 +385,7 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
   }
 
   // lyrics
-  cLilypondNewLyrics = "\\new LyricsStaff ";
+  cLilypondNewLyrics = "\\new Lyrics ";
   if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
     cLilypondNewLyrics +=
       "%{ cLilypondNewLyrics %} ";
@@ -14546,6 +14546,12 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableSingle:
     // ----------------------------------------------------
+      // generate the syllable elements
+      fLilypondCodeStream <<
+        syllableElementsListAsLilypondString (
+          syllable->getSyllableElementsList ()) <<
+        ' ';
+
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
           {
@@ -14558,22 +14564,6 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
                 std::endl;
             }
 #endif // MF_TRACE_IS_ENABLED
-
-            fLilypondCodeStream <<
-              syllableElementsListAsLilypondString (
-                syllable->getSyllableElementsList ()) <<
-              ' ';
-
-//             if (syllableAsLilypondString.size ()) {
-//               fLilypondCodeStream <<
-//                 '\"' <<
-//                 syllableAsLilypondString <<
-//                 "\" ";
-//             }
-// //             else {
-// //               fLilypondCodeStream <<
-// //                 "\\skip1 ";
-// //             }
           }
           break;
 
@@ -14603,15 +14593,15 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
             // get the syllable elements as a LilyPond string
-            std::string
-              elementsListAsLilypondString =
-                syllableElementsListAsLilypondString (
-                  syllable->getSyllableElementsList ());
-
-            fLilypondCodeStream <<
-              syllableElementsListAsLilypondString (
-                syllable->getSyllableElementsList ()) <<
-              ' ';
+//             std::string
+//               elementsListAsLilypondString =
+//                 syllableElementsListAsLilypondString (
+//                   syllable->getSyllableElementsList ());
+//
+//             fLilypondCodeStream <<
+//               syllableElementsListAsLilypondString (
+//                 syllable->getSyllableElementsList ()) <<
+//               ' ';
 
             if (noteTheSyllableIsAttachedTo) { // JMI v0.9.70 BABASSE
               fLilypondCodeStream <<
@@ -14633,6 +14623,12 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableBegin:
     // ----------------------------------------------------
+      // generate the syllable elements
+      fLilypondCodeStream <<
+        syllableElementsListAsLilypondString (
+          syllable->getSyllableElementsList ()) <<
+        ' ';
+
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
@@ -14645,10 +14641,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
+//           fLilypondCodeStream <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14662,10 +14658,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
+//           fLilypondCodeStream <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14680,9 +14676,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ' <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ' <<
             durationAsLilypondStringIfItShouldBeGenerated (
               noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
               noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
@@ -14694,6 +14690,12 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableMiddle:
     // ----------------------------------------------------
+      // generate the syllable elements
+      fLilypondCodeStream <<
+        syllableElementsListAsLilypondString (
+          syllable->getSyllableElementsList ()) <<
+        ' ';
+
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
@@ -14706,10 +14708,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
+//           fLilypondCodeStream <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14723,10 +14725,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream << // JMI v0.9.70 FOOFPP
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
+//           fLilypondCodeStream << // JMI v0.9.70 FOOFPP
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14741,9 +14743,9 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
 #endif // MF_TRACE_IS_ENABLED
 
           fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ' <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ' <<
             durationAsLilypondStringIfItShouldBeGenerated (
               noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
               noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
@@ -14755,6 +14757,12 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
     // ----------------------------------------------------
     case msrSyllableKind::kSyllableEnd:
     // ----------------------------------------------------
+      // generate the syllable elements
+      fLilypondCodeStream <<
+        syllableElementsListAsLilypondString (
+          syllable->getSyllableElementsList ()) <<
+        ' ';
+
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
@@ -14767,10 +14775,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
+//           fLilypondCodeStream <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14784,10 +14792,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
+//           fLilypondCodeStream <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
 
           // forget the last met whole notes duration,
           // to enforce the duration being generated
@@ -14806,10 +14814,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
+//           fLilypondCodeStream <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
 
           fLilypondCodeStream <<
             durationAsLilypondStringIfItShouldBeGenerated (
@@ -14838,6 +14846,12 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
+      // generate the syllable elements
+      fLilypondCodeStream <<
+        syllableElementsListAsLilypondString (
+          syllable->getSyllableElementsList ()) <<
+        ' ';
+
       switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
 #ifdef MF_TRACE_IS_ENABLED
@@ -14850,11 +14864,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
-          break;
+//           fLilypondCodeStream <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
@@ -14868,10 +14881,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
+//           fLilypondCodeStream <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -14885,10 +14898,10 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          fLilypondCodeStream <<
-            syllableElementsListAsLilypondString (
-              syllable->getSyllableElementsList ()) <<
-            ' ';
+//           fLilypondCodeStream <<
+//             syllableElementsListAsLilypondString (
+//               syllable->getSyllableElementsList ()) <<
+//             ' ';
 
           fLilypondCodeStream <<
             durationAsLilypondStringIfItShouldBeGenerated (

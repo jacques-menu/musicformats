@@ -275,8 +275,7 @@ std::string syllableElementsListAsString (
       i      = iBegin;
 
     for ( ; ; ) {
-      ss <<
-        (*i).asString ();
+      ss << (*i).asString ();
       if (++i == iEnd) break;
       ss << ", ";
     } // for
@@ -1007,12 +1006,12 @@ std::string msrSyllable::asShortString () const
     "[Syllable " <<
 //     " \"" <<
     syllableElementsListAsShortString (fSyllableElementsList) <<
-//     "\", " << fSyllableKind <<
-//     ", " << fSyllableKind <<
+    "\", " << fSyllableKind <<
+    ", " << fSyllableKind <<
     ", " << fSyllableExtendKind <<
-//     ", \"" << fSyllableStanzaNumber << "\"" <<
-    ", " << fSyllableWholeNotes.asFractionString () << " whole notes" <<
-    ", " << fSyllableTupletFactor.asFractionString () << " factor";
+    ", \"" << fSyllableStanzaNumber << "\"" <<
+    ", fSyllableWholeNotes: " << fSyllableWholeNotes.asFractionString () <<
+    ", fSyllableTupletFactor: " << fSyllableTupletFactor.asFractionString ();
 
 //   ss <<
 //     ", fSyllableUpLinkToMeasure: ";
