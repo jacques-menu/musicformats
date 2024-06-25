@@ -1495,7 +1495,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
     ss <<
       "octave entry kind '" << theString <<
       "' is unknown" <<
-      std::endl <<
+      std::endl << // JMI v0.9.71
       "The " <<
       gGlobalMsrOctaveEntryKindsMap.size () <<
       " known octave entry kinds are:" <<

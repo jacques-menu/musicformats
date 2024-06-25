@@ -344,9 +344,9 @@ class EXP oahOahGroup : public oahGroup
     // help about option name
     std::string           getOptionNameToProvideHelpAbout () const
                               { return fOptionNameToProvideHelpAbout; }
-    S_oahOptionNameHelpAtom
-                          getOptionNameHelpAtom () const
-                              { return fOptionNameHelpAtom; }
+    S_oahHelpAboutOptionName
+                          getHelpAboutOptionName () const
+                              { return fHelpAboutOptionName; }
 
     // query about option name
     std::string           getOptionNameToProvideQueryAbout () const
@@ -358,12 +358,12 @@ class EXP oahOahGroup : public oahGroup
     // find string
 //     std::string           getStringToBeFound () const // JMI v0.9.70
 //                               { return fStringToBeFound; }
-    S_oahFindStringAtom   getFindStringAtom () const
-                              { return fFindStringAtom; }
+    S_oahFindStringInHelpAtom   getFindStringInHelpAtom () const
+                              { return fFindStringInHelpAtom; }
 
-    // filter string
-    S_oahFilterStringAtom getFilterStringAtom () const
-                              { return fFilterStringAtom; }
+    // match help with string
+    S_oahMatchHelpWithStringAtom getMatchHelpWithStringAtom () const
+                              { return fMatchHelpWithStringAtom; }
 
     // include options file
     S_oahIncludeOptionsAndArgumentsFileAtom
@@ -457,8 +457,8 @@ class EXP oahOahGroup : public oahGroup
 
     // help about option name
     std::string           fOptionNameToProvideHelpAbout;
-    S_oahOptionNameHelpAtom
-                          fOptionNameHelpAtom;
+    S_oahHelpAboutOptionName
+                          fHelpAboutOptionName;
 
     // query about option name
     std::string           fOptionNameToProvideQueryAbout;
@@ -467,10 +467,10 @@ class EXP oahOahGroup : public oahGroup
 
     // find std::string
 //     std::string           fStringToBeFound; JMI ??? v0.9.66
-    S_oahFindStringAtom   fFindStringAtom;
+    S_oahFindStringInHelpAtom   fFindStringInHelpAtom;
 
     // find std::string
-    S_oahFilterStringAtom fFilterStringAtom;
+    S_oahMatchHelpWithStringAtom fMatchHelpWithStringAtom;
 
     // include options file
     S_oahIncludeOptionsAndArgumentsFileAtom

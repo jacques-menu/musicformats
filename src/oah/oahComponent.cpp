@@ -70,9 +70,9 @@ S_mfcOahComponent createOahComponent ()
       appendVersionToComponent (
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.71"),
-          "April 29, 2024",
+          "June 25, 2024",
           std::list<std::string> {
-            "Finalized the OAH find infrastructure"
+            "Finalized the OAH introspective options names to '-help-about-option-name, -name', '-query-help, -query', '-find-string-in-help, -find' and '-match-help-with-string, -match'"
           }
       ));
   }

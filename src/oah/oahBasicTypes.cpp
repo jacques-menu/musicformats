@@ -1147,6 +1147,39 @@ std::string oahPrefix::fetchPrefixNames () const
   return ss.str ();
 }
 
+Bool oahPrefix::findStringInFindableElement (
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
+{
+  Bool result;
+
+  // does this element's short name match?
+  Bool prefixNameMatches =
+    mfStringToLowerCase (fPrefixName).find (lowerCaseString) != std::string::npos;
+
+  // does this element's long name match?
+  Bool prefixErsatzMatches =
+    mfStringToLowerCase (fPrefixErsatz).find (lowerCaseString) != std::string::npos;
+
+  // does this element's description match?
+  Bool prefixDescriptionMatches =
+    mfStringToLowerCase (fPrefixDescription).find (lowerCaseString) != std::string::npos;
+
+  if (prefixNameMatches || prefixErsatzMatches || prefixDescriptionMatches) {
+    // append the match to foundStringsList
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        fetchPrefixNames (),
+        fPrefixDescription,
+        containingFindableElementAsString ()));
+
+    result = true;
+  }
+
+  return result;
+}
+
 Bool oahPrefix::fetchElementsMatchingStringInPrefix (
 	const std::string&       lowerCaseString,
 	std::list<S_oahElement>& foundElementsList,
@@ -1168,7 +1201,7 @@ Bool oahPrefix::fetchElementsMatchingStringInPrefix (
 
   if (prefixNameMatches || prefixErsatzMatches || prefixDescriptionMatches) {
     // append the match to foundStringsList
-//     foundElementsList.push_back (
+//     foundElementsList.push_back (// JMI v0.9.71 OHA_OAH
 //       oahFindStringMatch::create (
 //         fetchPrefixNames (),
 //         fPrefixDescription,
@@ -1566,6 +1599,18 @@ void oahAtom::printSummary (std::ostream& os) const
     "Atom: " <<
     fetchNames () <<
     std::endl;
+}
+
+Bool oahAtom::findStringInAtom (
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
+{
+  return
+    findStringInFindableElement (
+      lowerCaseString,
+      foundMatchesList,
+      os);
 }
 
 // const std::string oahAtom::containingFindableElementAsString () const
@@ -3296,11 +3341,11 @@ Bool oahSubGroup::fetchElementsMatchingStringInSubGroup (
   } // switch
 
   Bool subGroupNameMatches = // unused, side effect is to enrich foundElementsList
-    true;
-//     fetchElementsMatchingString (
-//       lowerCaseString,
-//       foundElementsList,
-//       os);
+//     true;
+    fetchElementsMatchingString (
+      lowerCaseString,
+      foundElementsList,
+      os);
 
   // do this groups's subgroups match?
   if (fSubGroupAtomsList.size ()) {
@@ -3881,17 +3926,17 @@ void oahSubGroup::printSubGroupAndAtomHelp (
 // }
 
 Bool oahSubGroup::findStringInSubGroup (
-	const std::string&       lowerCaseString,
-	std::list<S_oahElement>& foundElementsList,
-	std::ostream&            os) const
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
 {
   Bool result;
 
-//   Bool subGroupNameMatches = // unused, side effect is to enrich foundElementsList
-//     fetchElementsMatchingString (
-//       lowerCaseString,
-//       foundElementsList,
-//       os);
+  Bool subGroupNameMatches = // unused, side effect is to enrich foundMatchesList
+    findStringInFindableElement (
+      lowerCaseString,
+      foundMatchesList,
+      os);
 
   // do this subgroups's atoms match?
   if (fSubGroupAtomsList.size ()) {
@@ -3900,11 +3945,10 @@ Bool oahSubGroup::findStringInSubGroup (
     for (S_oahAtom atom : fSubGroupAtomsList) {
       Bool atomMatches =
         atom->
-          atomMatchesString (
+          findStringInAtom (
             lowerCaseString,
+            foundMatchesList,
             os);
-
-      result = result || atomMatches;
     } // for
 
     --gIndenter;
@@ -5035,6 +5079,46 @@ void oahGroup::printGroupOptionsValuesAll (
 //   return ss.str ();
 // }
 
+void oahGroup::findStringInGroup (
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
+{
+  switch (fElementVisibilityKind) { // JMI remove???
+    case oahElementVisibilityKind::kElementVisibilityNone:
+    case oahElementVisibilityKind::kElementVisibilityWhole:
+    case oahElementVisibilityKind::kElementVisibilityHeaderOnly:
+      break;
+
+    case oahElementVisibilityKind::kElementVisibilityHidden:
+      // don't use this groups's data to find the std::string
+      return;
+      break;
+  } // switch
+
+  Bool groupNameMatches = // unused, side effect is to enrich foundMatchesList
+    findStringInFindableElement (
+      lowerCaseString,
+      foundMatchesList,
+      os);
+
+  // do this groups's subgroups match?
+  if (fGroupSubGroupsList.size ()) {
+    ++gIndenter;
+
+    for (S_oahSubGroup subGroup : fGroupSubGroupsList) {
+      Bool subGroupMatches =
+        subGroup->
+          findStringInSubGroup (
+            lowerCaseString,
+            foundMatchesList,
+            os);
+    } // for
+
+    --gIndenter;
+  }
+}
+
 Bool oahGroup::fetchElementsMatchingStringInGroup (
 	const std::string&       lowerCaseString,
 	std::list<S_oahElement>& foundElementsList,
@@ -5053,23 +5137,23 @@ Bool oahGroup::fetchElementsMatchingStringInGroup (
   } // switch
 
   Bool groupNameMatches = // unused, side effect is to enrich foundElementsList
-    true;
-//     fetchElementsMatchingString (
-//       lowerCaseString,
-//       foundElementsList,
-//       os);
+//     true;
+    fetchElementsMatchingString (
+      lowerCaseString,
+      foundElementsList,
+      os);
 
   // do this groups's subgroups match?
   if (fGroupSubGroupsList.size ()) {
     ++gIndenter;
 
     for (S_oahSubGroup subGroup : fGroupSubGroupsList) {
-      Bool subGroupMatches =
-        subGroup->
-          findStringInSubGroup (
-            lowerCaseString,
-            foundElementsList,
-            os);
+      Bool subGroupMatches = true; // JMI v0.9.71 OAH_OAH
+//         subGroup->
+//           findStringInSubGroup (
+//             lowerCaseString,
+//             foundElementsList,
+//             os);
     } // for
 
     --gIndenter;
@@ -7115,7 +7199,7 @@ Bool oahHandler::fetchElementsMatchingStringInHandler (
       fHandlerUsage;
 
     // append the match to foundStringsList
-//     foundElementsList.push_back (
+//     foundElementsList.push_back (// JMI v0.9.71 OHA_OAH
 //       oahFindStringMatch::create (
 //         ss.str (),
 //         ss.str (), // JMI v0.9.66
@@ -7138,11 +7222,11 @@ Bool oahHandler::fetchElementsMatchingStringInHandler (
         prefix = (*i).second;
 
       // does the prefix match?
-//       prefix->
-//         fetchElementsMatchingString (
-//           lowerCaseString,
-//           foundElementsList,
-//           os);
+      prefix->
+        fetchElementsMatchingString (
+          lowerCaseString,
+          foundElementsList,
+          os);
     } // for
 
     --gIndenter;
@@ -7153,11 +7237,107 @@ Bool oahHandler::fetchElementsMatchingStringInHandler (
     ++gIndenter;
 
     for (S_oahGroup group : fHandlerGroupsList) {
-//       group->
-//         fetchElementsMatchingString (
-//           lowerCaseString,
-//           foundElementsList,
-//           os);
+      group->
+        fetchElementsMatchingString (
+          lowerCaseString,
+          foundElementsList,
+          os);
+    } // for
+
+    --gIndenter;
+  }
+
+  return result;
+}
+
+Bool oahHandler::findStringInFindableElement (
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
+{
+  Bool result;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    os << "Finding std::string \"" <<
+      lowerCaseString <<
+      "\" in handler \"" <<
+      fHandlerHeader <<
+      "\"" <<
+      std::endl;
+
+//     gWaeHandler->waeTraceWithoutInputLocation ( JMI v0.9.67
+//       __FILE__, __LINE__,
+//       ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // does this handler's header match?
+  Bool headerMatches =
+    mfStringToLowerCase (fHandlerHeader).find (lowerCaseString) != std::string::npos;
+
+  // does this handler's description match?
+  Bool descriptionMatches =
+    mfStringToLowerCase (fHandlerDescription).find (lowerCaseString) != std::string::npos;
+
+  // does this handler's usage match?
+  Bool usageMatches =
+    mfStringToLowerCase (fHandlerUsage).find (lowerCaseString) != std::string::npos;
+
+  if (headerMatches || descriptionMatches || usageMatches) {
+    std::stringstream ss;
+
+    ss <<
+      fHandlerHeader <<
+      ' ' <<
+      fHandlerDescription <<
+      ' ' <<
+      fHandlerUsage;
+
+    // append the match to foundStringsList
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        ss.str (),
+        ss.str (), // JMI v0.9.66
+        containingFindableElementAsString ()));
+
+    result = true;
+  }
+
+  // do this handler's prefixes match?
+  if (fHandlerPrefixesMap.size ()) {
+    ++gIndenter;
+
+    for (
+      std::map<std::string, S_oahPrefix>::const_iterator i =
+        fHandlerPrefixesMap.begin ();
+      i != fHandlerPrefixesMap.end ();
+      ++i
+    ) {
+      S_oahPrefix
+        prefix = (*i).second;
+
+      // does the prefix match?
+      prefix->
+        findStringInFindableElement (
+          lowerCaseString,
+          foundMatchesList,
+          os);
+    } // for
+
+    --gIndenter;
+  }
+
+  // do this handler's groups match?
+  if (fHandlerGroupsList.size ()) {
+    ++gIndenter;
+
+    for (S_oahGroup group : fHandlerGroupsList) {
+      group->
+        findStringInGroup (
+          lowerCaseString,
+          foundMatchesList,
+          os);
     } // for
 
     --gIndenter;
@@ -8726,7 +8906,7 @@ void oahHandler::handleNameContainingEqualSign (
       std::stringstream ss;
 
       ss <<
-        "Option name \"" <<
+        "handleNameContainingEqualSign(): Option name \"" <<
         stringBeforeEqualsSign <<
         "\" is a prefix";
 
@@ -8853,7 +9033,7 @@ if (gEarlyOptions.getTraceEarlyOptions ()) {
     // optionName is unknown
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-      if (false) // JMI
+      if (false) // JMI v0.9.71 OAH_OAH
         this->printHelp (gOutput);
 
 //       unknownOptionNameError (
@@ -9777,22 +9957,22 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
       if (elementUsed) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-    oahElementValueKind
-      atomValueExpectedKind =
-        elementUsed->getElementValueKind ();
+        if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
+          oahElementValueKind
+            atomValueExpectedKind =
+              elementUsed->getElementValueKind ();
 
-    std::stringstream ss;
+          std::stringstream ss;
 
-    ss <<
-      "Its atomValueExpectedKind is '" <<
-      oahElementValueKindAsString (atomValueExpectedKind) <<
-      '\'';
+          ss <<
+            "Its atomValueExpectedKind is '" <<
+            oahElementValueKindAsString (atomValueExpectedKind) <<
+            '\'';
 
-    gWaeHandler->waeTraceWithoutInputLocation (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
 #endif // MF_TRACE_IS_ENABLED
 
         // the heart of it
@@ -9871,7 +10051,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
               oahInternalError (ss.str ());
             }
 
-//             switch (atomValueKind) {
+//             switch (atomValueKind) { // JMI v0.9.71 OAH_OAH
 //               case oahElementValueKind::kElementValue_UNKNOWN_:
 //                 unknownOptionValueKindError (
 //                   valueFittedAtom->fetchNamesBetweenQuotes ());
@@ -9936,6 +10116,14 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
             S_oahValueLessAtom
               valueLessAtom =
                 dynamic_cast<oahValueLessAtom*>(&(*elementUsed));
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+            // sanity check // JMI v0.9.71 OAH_OAH
+            mfAssert (
+              __FILE__, __LINE__,
+              valueLessAtom != nullptr,
+              "valueLessAtom is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
             if (gEarlyOptions.getTraceEarlyOptions ()) {
@@ -10598,7 +10786,7 @@ void oahHandler::handleUnknownOptionName (
     // optionName is unknown to this handler
     unknownOptionNameError (
       optionName,
-      ""); // JMI do better ???
+      "oahHandler::handleUnknownOptionName()"); // JMI do better ??? v0.9.71 OAH_OAH
   }
 }
 
@@ -10609,7 +10797,7 @@ void oahHandler::unknownOptionNameWarning (
   std::stringstream ss;
 
   ss <<
-    "option name \"" <<
+    "unknownOptionNameWarning(): option name \"" <<
     name <<
     "\" is unknown";
 
@@ -10633,7 +10821,7 @@ void oahHandler::unknownOptionNameError (
   std::stringstream ss;
 
   ss <<
-    "option name \"" <<
+    "unknownOptionNameError(): option name \"" <<
     name <<
     "\" is unknown";
 

@@ -128,7 +128,7 @@ msrNote::msrNote (
   msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
   msrOctaveKind              noteDisplayOctaveKind,
 
-  msrNoteIsACueNoteKind      msrNoteIsACueNoteKind,
+  msrNoteIsACueNoteKind      noteIsACueNoteKind,
 
   msrPrintObjectKind         notePrintObjectKind,
 
@@ -158,7 +158,7 @@ msrNote::msrNote (
   fNoteQuarterTonesDisplayPitchKind = noteQuarterTonesDisplayPitchKind;
   fNoteDisplayOctaveKind            = noteDisplayOctaveKind;
 
-  fNoteIsACueNoteKind   = msrNoteIsACueNoteKind;
+  fNoteIsACueNoteKind = noteIsACueNoteKind;
 
   fNotePrintObjectKind = notePrintObjectKind;
 
@@ -287,7 +287,7 @@ void msrNote::initializeNote ()
       std::left <<
         std::setw (fieldWidth) <<
         "fNoteIsACueNoteKind" << ": " <<
-         fNoteIsACueNoteKind <<
+        fNoteIsACueNoteKind <<
         std::endl <<
 
       std::left <<
@@ -4949,6 +4949,8 @@ void msrNote::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fNoteOccupiesAFullMeasure" << ": " <<
     fNoteOccupiesAFullMeasure <<
+		"fNoteIsACueNoteKind" << ": " <<
+		fNoteIsACueNoteKind <<
     std::endl;
 
   // print position from beginning of voice

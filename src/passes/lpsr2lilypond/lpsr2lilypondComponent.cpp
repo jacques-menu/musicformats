@@ -94,6 +94,16 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
           }
       ));
 
+    pPassComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.71"),
+          "June 11, 2024",
+          std::list<std::string> {
+            "Fixed '\new Lyrics' generation"
+          }
+      ));
+
   return pPassComponent;
 }
 

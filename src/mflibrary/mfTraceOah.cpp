@@ -3435,13 +3435,20 @@ EXP S_traceOahGroup getGlobalTraceOahGroup ()
 S_traceOahGroup createGlobalTraceOahGroup (
   const S_oahHandler& handler)
 {
+#ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
     std::stringstream ss;
 
-    ss <<
-      "Creating global trace OAH group" <<
+//     ss <<
+    gLog << // JMI ??? v0.9.71 OAH_OAH
+      "Creating global trace OAH group 1" <<
       std::endl;
+
+//     gWaeHandler->waeTraceWithoutInputLocation (
+//       __FILE__, __LINE__,
+//       ss.str ());
   }
+#endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
   if (! pGlobalTraceOahGroup) {

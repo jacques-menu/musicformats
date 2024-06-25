@@ -2935,6 +2935,78 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
   */
 }
 
+void lpsr2lilypondTranslator::generateCodeForNoteCuedInMeasure (
+  const S_msrNote& note)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  {
+    Bool
+      traceNotes =
+        gTraceOahGroup->
+          getTraceNotes (),
+      generateMsrVisitingInformation =
+        gGlobalLpsr2lilypondOahGroup->
+          getGenerateLpsrVisitingInformation ();
+
+    if (traceNotes || generateMsrVisitingInformation) {
+    std::stringstream ss;
+
+    ss <<
+      std::endl <<
+      "% --> generating code for noteUnpitchedInMeasure " <<
+      note->asString () <<
+      ", line " << note->getInputStartLineNumber () <<
+      std::endl;
+
+      if (traceNotes) {
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+
+      if (generateMsrVisitingInformation) {
+        fLilypondCodeStream << ss.str ();
+      }
+    }
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // generate the note name, "e" by convention
+  fLilypondCodeStream <<
+      "e CUE_CUE ";
+
+  msrWholeNotes
+    noteSoundingWholeNotes =
+      note->getMeasureElementSoundingWholeNotes ();
+
+  std::string result; // JMI v0.9.71 CUE_CUE
+
+//   switch (note->getNoteSizeTypeKind ()) {  // JMI v0.9.71 CUE_CUE
+//     case msrNoteSizeTypeKind::kNoteSizeType_UNKNOWN_:
+//       result = "kNoteSizeType_UNKNOWN_";
+//       break;
+//     case msrNoteSizeTypeKind::kNoteSizeTypeFull:
+//       result = "kNoteSizeTypeFull";
+//       break;
+//     case msrNoteSizeTypeKind::kNoteSizeTypeGrace:
+//       result = "kNoteSizeTypeGrace";
+//       break;
+//     case msrNoteSizeTypeKind::kNoteSizeTypeCue:
+//       result = "kNoteSizeTypeCue";
+//       break;
+//     case msrNoteSizeTypeKind::kNoteSizeTypeGraceCue:
+//       result = "kNoteSizeTypeGraceCue";
+//       break;
+//     case msrNoteSizeTypeKind::kNoteSizeTypeLarge:
+//       result = "kNoteSizeTypeLarge";
+//       break;
+//   } // switch
+
+  fLilypondCodeStream <<
+    result <<
+    ' ';
+}
+
 void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
   const S_msrNote& note)
 {
@@ -14465,7 +14537,13 @@ void lpsr2lilypondTranslator::generateLilypondCodeForSyllable (
   const S_msrSyllable& syllable)
 {
 /*
+
 From Lars Opfermann | soundnotation <Lars.Opfermann@soundnotation.com> :
+
+June 2024 : Here are the files without cue, just normal notes. Implicit lyrics placement still missing skips, explicit missing hyphens.
+
+
+Older:
 
 The Finale version is correct. There are two words linked via the elision: tesoro and intanto.
 

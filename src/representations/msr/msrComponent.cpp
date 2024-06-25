@@ -74,7 +74,7 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
           mfcVersionNumber::createFromString ("0.9.70"),
           "February 20, 2024",
           std::list<std::string> {
-            "Moved the generation of '\harmonic' from before to after the head note"
+            "Moved the generation of '\\harmonic' from before to after the head note"
           }
       ));
   }

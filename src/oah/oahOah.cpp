@@ -1092,32 +1092,26 @@ R"(Display the single character options known to EXECUTABLE_NAME.)",
 
   // help about option name
 
-  std::string defaultOptionLongName = "name-help";
+  std::string defaultOptionLongName = "help-about-option-name";
 
   fOptionNameToProvideHelpAbout = defaultOptionLongName;
 
-  fOptionNameHelpAtom =
-    oahOptionNameHelpAtom::create (
-      defaultOptionLongName, "nh",
-      regex_replace (
-R"(Print help about OPTION_NAME.
-OPTION_NAME is optional, and the default value is 'DEFAULT_VALUE'.)",
-        std::regex ("DEFAULT_VALUE"),
-        defaultOptionLongName),
+  fHelpAboutOptionName =
+    oahHelpAboutOptionName::create (
+      defaultOptionLongName, "name",
+R"(Print help about OPTION_NAME.)",
       "OPTION_NAME",
-      defaultOptionLongName, // better variable name JMI ???
-      fOptionNameToProvideHelpAbout,
-      defaultOptionLongName);
+      serviceName);
 
   subGroup->
     appendAtomToSubGroup (
-      fOptionNameHelpAtom);
+      fHelpAboutOptionName);
 
-  // query about option name
+  // query help about option name
 
   fQueryOptionNameAtom =
     oahQueryOptionNameAtom::create (
-      "query", "", // "query-option-name" ??? JMI
+      "query-help", "query",
 R"(Print help about OPTION_NAME.)",
       "OPTION_NAME",
       serviceName);
@@ -1126,33 +1120,35 @@ R"(Print help about OPTION_NAME.)",
     appendAtomToSubGroup (
       fQueryOptionNameAtom);
 
-  // find string
+  // find string in help
 
-  fFindStringAtom =
-    oahFindStringAtom::create (
-      "find", "f",
+  fFindStringInHelpAtom =
+    oahFindStringInHelpAtom::create (
+      "find-string-in-help", "find",
 R"(Find string STRING in the help.
-The search is case insensitive, and a '-' is added in front of options name for clarity.)",
+The search is case insensitive, and a '-' is added in front of options names
+in the output for clarity.)",
       "STRING",
       serviceName);
 
   subGroup->
     appendAtomToSubGroup (
-      fFindStringAtom);
+      fFindStringInHelpAtom);
 
-  // filter string
+  // match help with string in help
 
-  fFilterStringAtom =
-    oahFilterStringAtom::create (
-      "filter", "filt",
+  fMatchHelpWithStringAtom =
+    oahMatchHelpWithStringAtom::create (
+      "match-help-with-string", "match",
 R"(Filter the help with string.
-The search is case insensitive, and a '-' is added in front of options name for clarity.)",
+The search is case insensitive, and a '-' is added in front of options names
+in the output for clarity.)",
       "STRING",
       serviceName);
 
   subGroup->
     appendAtomToSubGroup (
-      fFilterStringAtom);
+      fMatchHelpWithStringAtom);
 
   // include options file
 

@@ -691,8 +691,6 @@ class EXP msrNoteSize : public msrElement
 {
   public:
 
-  public:
-
     // creation from MusicXML
     // ------------------------------------------------------
 

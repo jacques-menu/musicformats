@@ -618,7 +618,7 @@ The actual pure help value-fitted atoms are:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grh 'public oahPureHelpValueFittedAtom'
 oah/oahAtomsCollection.h:class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
-oah/oahAtomsCollection.h:class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
+oah/oahAtomsCollection.h:class EXP oahFindStringInHelpAtom : public oahPureHelpValueFittedAtom
 formats/msdl/msdlInputOah.h:class EXP oahDisplayMsdlKeywordsInLanguageAtom : public oahPureHelpValueFittedAtom
 formats/msdl/msdlInputOah.h:class EXP oahDisplayMsdlTokensInLanguageAtom : public oahPureHelpValueFittedAtom
 \end{lstlisting}
@@ -899,9 +899,9 @@ class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
 class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
 class EXP oahLengthAtom : public oahAtomStoringAValue
 class EXP oahMidiTempoAtom : public oahAtomStoringAValue
-class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
+class EXP oahHelpAboutOptionName : public oahDefaultedStringAtom
 class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
-class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
+class EXP oahFindStringInHelpAtom : public oahPureHelpValueFittedAtom
 \end{lstlisting}
 
 See \chapterRef{The OAH atoms collection}, for more details.
@@ -1007,7 +1007,7 @@ jacquesmenu@macmini > xml2ly -find grace
     Add a beam to all grace notes
 \end{lstlisting}
 
-These two options are implementeds as {\tt oahQueryOptionNameAtom} and {\tt oahFindStringAtom} respectively in \oahBoth{oahAtomsCollection}.
+These two options are implementeds as {\tt oahQueryOptionNameAtom} and {\tt oahFindStringInHelpAtom} respectively in \oahBoth{oahAtomsCollection}.
 
 
 % -------------------------------------------------------------------------
@@ -1361,13 +1361,13 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 \subsection{Early handling of some options}
 % -------------------------------------------------------------------------
 
-Debugging OAH needs the trace handling trace options \optionBoth{trace-oah}{toah} and \optionBoth{trace-oah-details}{toahd} to be activated first, even if they are not the first ones supplied.
+Debugging OAH needs the trace handling options \optionBoth{trace-oah}{toah} and \optionBoth{trace-oah-details}{toahd} to be activated first, even if they are not the first ones supplied.
 
 The same holds to handle the \option{insider} option, since it involves using the \insider\ handler and not a \regular\ one.
 
 Also, the \optionNameBoth{quiet}{q} option should be handled early, to avoid errors in the options being reported.
 
-Another case is the \optionBoth{trace-components}{tcomps} option. The versions data should exist when the \optionBoth{version}{v} is applied in \method{oahVersionAtom}{applyElement} in \oah{oahAtomsCollection.cpp}, but building them should be able to produce a trace if this option is selected. This circularity \Main{circularity} should thus be broken. Version history handling is presented in \chapterRef{musicformats components}}.
+Another case is the \optionBoth{trace-components}{tcomps} option. The versions data should exist when \optionBoth{version}{v} is applied in \method{oahVersionAtom}{applyElement} in \oah{oahAtomsCollection.cpp}, but building them should be able to produce a trace if this option is selected. This circularity \Main{circularity} should thus be broken. Version history handling is presented in \chapterRef{musicformats components}}.
 
 The early options names are declared in \oah{oahEarlyOptions.h}:
 \begin{lstlisting}[language=Terminal]
@@ -2324,9 +2324,9 @@ As an internal representation, OAH can be browsed with the two-phase visitors. T
 %class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
 %class EXP oahLengthAtom : public oahAtomStoringAValue
 %class EXP oahMidiTempoAtom : public oahAtomStoringAValue
-%class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
+%class EXP oahHelpAboutOptionName : public oahDefaultedStringAtom
 %class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
-%class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
+%class EXP oahFindStringInHelpAtom : public oahPureHelpValueFittedAtom
 %
 %
 %\end{itemize}

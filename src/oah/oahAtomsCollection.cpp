@@ -503,14 +503,14 @@ Bool oahMacroAtom::atomMatchesString (
 		}
 	} // for
 
-// 	if (result) {
-//     // append this matching element to foundElementsList
-//     foundElementsList.push_back (this);
-// //       oahFindStringMatch::create (
-// //         fetchNames (),
-// //         fDescription,
-// //         containingFindableElementAsString ()));
-// 	}
+	if (result) {
+    // append this matching element to foundElementsList
+//     foundElementsList.push_back (this); // JMI v0.9.71 OHA_OAH
+//       oahFindStringMatch::create (
+//         fetchNames (),
+//         fDescription,
+//         containingFindableElementAsString ()));
+	}
 
 	gLog <<
 		"<<<<====== oahMacroAtom::atomMatchesString ()" <<
@@ -875,7 +875,7 @@ leads to an error if the environment is read-only access,
 as is the case of https://libmusicxml.grame.fr .)",
         std::regex ("OPTION_NAME_HELP_NAMES"),
         gOahOahGroup->
-          getOptionNameHelpAtom ()->
+          getHelpAboutOptionName ()->
             fetchNamesBetweenQuotes ()
         ),
       std::regex ("EXECUTABLE_NAME"),
@@ -5032,14 +5032,14 @@ Bool oahCombinedBooleansAtom::atomMatchesString (
 		}
 	} // for
 
-// 	if (result) {
-//     // append this matching element to foundElementsList
-//     foundElementsList.push_back (this);
-// //       oahFindStringMatch::create (
-// //         fetchNames (),
-// //         fDescription,
-// //         containingFindableElementAsString ()));
-// 	}
+	if (result) {
+    // append this matching element to foundElementsList
+//     foundElementsList.push_back (this);// JMI v0.9.71 OHA_OAH
+//       oahFindStringMatch::create (
+//         fetchNames (),
+//         fDescription,
+//         containingFindableElementAsString ()));
+	}
 
 	gLog <<
 		"<<<<====== oahCombinedBooleansAtom::atomMatchesString ()" <<
@@ -7597,14 +7597,14 @@ Bool oahCommonPrefixBooleansAtom::atomMatchesString (
 		}
 	} // for
 
-// 	if (result) {
-//     // append this matching element to foundElementsList
-//     foundElementsList.push_back (this);
-// //       oahFindStringMatch::create (
-// //         fetchNames (),
-// //         fDescription,
-// //         containingFindableElementAsString ()));
-// 	}
+	if (result) {
+    // append this matching element to foundElementsList
+//     foundElementsList.push_back (this);// JMI v0.9.71 OHA_OAH
+//       oahFindStringMatch::create (
+//         fetchNames (),
+//         fDescription,
+//         containingFindableElementAsString ()));
+	}
 
 	gLog <<
 		"<<<<====== oahCommonPrefixBooleansAtom::atomMatchesString ()" <<
@@ -12663,44 +12663,36 @@ std::ostream& operator << (std::ostream& os, const S_oahMidiTempoAtom& elt)
 }
 
 //______________________________________________________________________________
-S_oahOptionNameHelpAtom oahOptionNameHelpAtom::create (
+S_oahHelpAboutOptionName oahHelpAboutOptionName::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
   const std::string& valueSpecification,
-  const std::string& variableName,
-  std::string&       stringVariable,
-  const std::string& defaultOptionName)
+  const std::string& serviceName)
 {
-  oahOptionNameHelpAtom* obj = new
-    oahOptionNameHelpAtom (
+  oahHelpAboutOptionName* obj = new
+    oahHelpAboutOptionName (
       longName,
       shortName,
       description,
       valueSpecification,
-      variableName,
-      stringVariable,
-      defaultOptionName);
+      serviceName);
   assert (obj != nullptr);
   return obj;
 }
 
-oahOptionNameHelpAtom::oahOptionNameHelpAtom (
+oahHelpAboutOptionName::oahHelpAboutOptionName (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
   const std::string& valueSpecification,
-  const std::string& variableName,
-  std::string&       stringVariable,
-  const std::string& defaultOptionName)
-  : oahDefaultedStringAtom (
+  const std::string& serviceName)
+  : oahPureHelpValueFittedAtom (
       longName,
       shortName,
       description,
       valueSpecification,
-      variableName,
-      stringVariable,
-      defaultOptionName)
+      serviceName)
 {
   fElementHelpOnlyKind =
     oahElementHelpOnlyKind::kElementHelpOnlyYes;
@@ -12708,10 +12700,10 @@ oahOptionNameHelpAtom::oahOptionNameHelpAtom (
   this->setMultipleOccurrencesAllowed ();
 }
 
-oahOptionNameHelpAtom::~oahOptionNameHelpAtom ()
+oahHelpAboutOptionName::~oahHelpAboutOptionName ()
 {}
 
-void oahOptionNameHelpAtom::applyAtomWithValue (
+void oahHelpAboutOptionName::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -12722,7 +12714,7 @@ void oahOptionNameHelpAtom::applyAtomWithValue (
     ss <<
       "Handling option name '" <<
       fetchNames () <<
-      "' which is a oahOptionNameHelpAtom";
+      "' which is a oahHelpAboutOptionName";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -12737,23 +12729,23 @@ void oahOptionNameHelpAtom::applyAtomWithValue (
       theString);
 }
 
-void oahOptionNameHelpAtom::applyAtomWithDefaultValue (std::ostream& os)
-{
-  // delegate this to the handler
-  fetchAtomUpLinkToHandler ()->
-    printNameIntrospectiveHelp (
-      os,
-      fDefaultStringValue);
-}
+// void oahHelpAboutOptionName::applyAtomWithDefaultValue (std::ostream& os)
+// {
+//   // delegate this to the handler
+//   fetchAtomUpLinkToHandler ()->
+//     printNameIntrospectiveHelp (
+//       os,
+//       fDefaultStringValue);
+// }
 
-void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
+void oahHelpAboutOptionName::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahOptionNameHelpAtom::acceptIn ()";
+      ".\\\" ==> oahHelpAboutOptionName::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -12761,17 +12753,17 @@ void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahOptionNameHelpAtom>*
+  if (visitor<S_oahHelpAboutOptionName>*
     p =
-      dynamic_cast<visitor<S_oahOptionNameHelpAtom>*> (v)) {
-        S_oahOptionNameHelpAtom elem = this;
+      dynamic_cast<visitor<S_oahHelpAboutOptionName>*> (v)) {
+        S_oahHelpAboutOptionName elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahOptionNameHelpAtom::visitStart ()";
+            ".\\\" ==> Launching oahHelpAboutOptionName::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -12782,14 +12774,14 @@ void oahOptionNameHelpAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
+void oahHelpAboutOptionName::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahOptionNameHelpAtom::acceptOut ()";
+      ".\\\" ==> oahHelpAboutOptionName::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -12797,17 +12789,17 @@ void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahOptionNameHelpAtom>*
+  if (visitor<S_oahHelpAboutOptionName>*
     p =
-      dynamic_cast<visitor<S_oahOptionNameHelpAtom>*> (v)) {
-        S_oahOptionNameHelpAtom elem = this;
+      dynamic_cast<visitor<S_oahHelpAboutOptionName>*> (v)) {
+        S_oahHelpAboutOptionName elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahOptionNameHelpAtom::visitEnd ()";
+            ".\\\" ==> Launching oahHelpAboutOptionName::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -12818,14 +12810,14 @@ void oahOptionNameHelpAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahOptionNameHelpAtom::browseData (basevisitor* v)
+void oahHelpAboutOptionName::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahOptionNameHelpAtom::browseData ()";
+      ".\\\" ==> oahHelpAboutOptionName::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -12834,32 +12826,32 @@ void oahOptionNameHelpAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahOptionNameHelpAtom::asShortNamedOptionString () const
+std::string oahHelpAboutOptionName::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
   ss <<
-    '-' << fShortName << ' ' << fVariableName;
+    '-' << fShortName;
 
   return ss.str ();
 }
 
-std::string oahOptionNameHelpAtom::asActualLongNamedOptionString () const
+std::string oahHelpAboutOptionName::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
   ss <<
-    '-' << fLongName << ' ' << fVariableName;
+    '-' << fShortName;
 
   return ss.str ();
 }
 
-void oahOptionNameHelpAtom::print (std::ostream& os) const
+void oahHelpAboutOptionName::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "OptionNameHelpAtom:" <<
+    "HelpAboutOptionName:" <<
     std::endl;
 
   ++gIndenter;
@@ -12870,14 +12862,14 @@ void oahOptionNameHelpAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahOptionNameHelpAtom::displayAtomWithVariableOptionsValues (
+void oahHelpAboutOptionName::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   // nothing to print here
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahOptionNameHelpAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahHelpAboutOptionName& elt)
 {
   if (elt) {
     elt->print (os);
@@ -13135,7 +13127,7 @@ std::string oahFindStringResult::asString () const
 void oahFindStringResult::print (std::ostream& os) const
 {
   os <<
-    "FindStringAtom:" <<
+    "FindStringInHelpAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -13168,15 +13160,15 @@ std::ostream& operator << (std::ostream& os, const S_oahFindStringResult& elt)
 }
 
 //______________________________________________________________________________
-S_oahFindStringAtom oahFindStringAtom::create (
+S_oahFindStringInHelpAtom oahFindStringInHelpAtom::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& serviceName)
 {
-  oahFindStringAtom* obj = new
-    oahFindStringAtom (
+  oahFindStringInHelpAtom* obj = new
+    oahFindStringInHelpAtom (
       longName,
       shortName,
       description,
@@ -13186,7 +13178,7 @@ S_oahFindStringAtom oahFindStringAtom::create (
   return obj;
 }
 
-oahFindStringAtom::oahFindStringAtom (
+oahFindStringInHelpAtom::oahFindStringInHelpAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -13202,10 +13194,10 @@ oahFindStringAtom::oahFindStringAtom (
   this->setMultipleOccurrencesAllowed ();
 }
 
-oahFindStringAtom::~oahFindStringAtom ()
+oahFindStringInHelpAtom::~oahFindStringInHelpAtom ()
 {}
 
-void oahFindStringAtom::applyAtomWithValue (
+void oahFindStringInHelpAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -13216,7 +13208,7 @@ void oahFindStringAtom::applyAtomWithValue (
     ss <<
       "Handling option name '" <<
       fetchNames () <<
-      "' which is a oahFindStringAtom";
+      "' which is a oahFindStringInHelpAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13228,20 +13220,20 @@ void oahFindStringAtom::applyAtomWithValue (
   std::list<S_oahElement> foundElementsList;
 
   // delegate this to the handler
-//   Bool foundString =
-// 		fetchAtomUpLinkToHandler ()->
-// 			fetchElementsMatchingString (
-// 				mfStringToLowerCase (theString),
-// 				foundElementsList,
-// 				os);
+  Bool foundString =
+		fetchAtomUpLinkToHandler ()->
+			fetchElementsMatchingString (
+				mfStringToLowerCase (theString),
+				foundElementsList,
+				os);
 
-// 	if (foundString) {
-// 		// print the atom
-// 		os << "THIS atom matches:" <<
-// 			std::endl;
-//
-// 		print (os);
-// 	}
+	if (foundString) {
+		// print the atom
+		os << "THIS atom matches:" <<
+			std::endl;
+
+		print (os);
+	}
 
   //  print the found strings
   size_t foundMatchesListSize =
@@ -13332,14 +13324,14 @@ void oahFindStringAtom::applyAtomWithValue (
   gIndenter.setIndentation (saveIndent);
 }
 
-void oahFindStringAtom::acceptIn (basevisitor* v)
+void oahFindStringInHelpAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahFindStringAtom::acceptIn ()";
+      ".\\\" ==> oahFindStringInHelpAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13347,17 +13339,17 @@ void oahFindStringAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahFindStringAtom>*
+  if (visitor<S_oahFindStringInHelpAtom>*
     p =
-      dynamic_cast<visitor<S_oahFindStringAtom>*> (v)) {
-        S_oahFindStringAtom elem = this;
+      dynamic_cast<visitor<S_oahFindStringInHelpAtom>*> (v)) {
+        S_oahFindStringInHelpAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahFindStringAtom::visitStart ()";
+            ".\\\" ==> Launching oahFindStringInHelpAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -13368,14 +13360,14 @@ void oahFindStringAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahFindStringAtom::acceptOut (basevisitor* v)
+void oahFindStringInHelpAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahFindStringAtom::acceptOut ()";
+      ".\\\" ==> oahFindStringInHelpAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13383,17 +13375,17 @@ void oahFindStringAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahFindStringAtom>*
+  if (visitor<S_oahFindStringInHelpAtom>*
     p =
-      dynamic_cast<visitor<S_oahFindStringAtom>*> (v)) {
-        S_oahFindStringAtom elem = this;
+      dynamic_cast<visitor<S_oahFindStringInHelpAtom>*> (v)) {
+        S_oahFindStringInHelpAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahFindStringAtom::visitEnd ()";
+            ".\\\" ==> Launching oahFindStringInHelpAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -13404,14 +13396,14 @@ void oahFindStringAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahFindStringAtom::browseData (basevisitor* v)
+void oahFindStringInHelpAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahFindStringAtom::browseData ()";
+      ".\\\" ==> oahFindStringInHelpAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13420,7 +13412,7 @@ void oahFindStringAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahFindStringAtom::asShortNamedOptionString () const
+std::string oahFindStringInHelpAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -13430,7 +13422,7 @@ std::string oahFindStringAtom::asShortNamedOptionString () const
   return ss.str ();
 }
 
-std::string oahFindStringAtom::asActualLongNamedOptionString () const
+std::string oahFindStringInHelpAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -13440,12 +13432,12 @@ std::string oahFindStringAtom::asActualLongNamedOptionString () const
   return ss.str ();
 }
 
-void oahFindStringAtom::print (std::ostream& os) const
+void oahFindStringInHelpAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "FindStringAtom:" <<
+    "FindStringInHelpAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -13456,14 +13448,14 @@ void oahFindStringAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahFindStringAtom::displayAtomWithVariableOptionsValues (
+void oahFindStringInHelpAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   // nothing to print here
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahFindStringAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahFindStringInHelpAtom& elt)
 {
   if (elt) {
     elt->print (os);
@@ -13476,15 +13468,15 @@ std::ostream& operator << (std::ostream& os, const S_oahFindStringAtom& elt)
 }
 
 //______________________________________________________________________________
-S_oahFilterStringAtom oahFilterStringAtom::create (
+S_oahMatchHelpWithStringAtom oahMatchHelpWithStringAtom::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& serviceName)
 {
-  oahFilterStringAtom* obj = new
-    oahFilterStringAtom (
+  oahMatchHelpWithStringAtom* obj = new
+    oahMatchHelpWithStringAtom (
       longName,
       shortName,
       description,
@@ -13494,7 +13486,7 @@ S_oahFilterStringAtom oahFilterStringAtom::create (
   return obj;
 }
 
-oahFilterStringAtom::oahFilterStringAtom (
+oahMatchHelpWithStringAtom::oahMatchHelpWithStringAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -13510,10 +13502,10 @@ oahFilterStringAtom::oahFilterStringAtom (
   this->setMultipleOccurrencesAllowed ();
 }
 
-oahFilterStringAtom::~oahFilterStringAtom ()
+oahMatchHelpWithStringAtom::~oahMatchHelpWithStringAtom ()
 {}
 
-void oahFilterStringAtom::applyAtomWithValue (
+void oahMatchHelpWithStringAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -13524,7 +13516,7 @@ void oahFilterStringAtom::applyAtomWithValue (
     ss <<
       "Handling option name '" <<
       fetchNames () <<
-      "' which is a oahFilterStringAtom";
+      "' which is a oahMatchHelpWithStringAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13536,20 +13528,20 @@ void oahFilterStringAtom::applyAtomWithValue (
   std::list<S_oahElement> foundElementsList; // JMI v0.9.70
 
   // delegate this to the handler // JMI v0.9.70
-//   Bool foundString =
-// 		fetchAtomUpLinkToHandler ()->
-// 			fetchElementsMatchingString (
-// 				mfStringToLowerCase (theString),
-// 				foundElementsList,
-// 				os);
+  Bool foundString =
+		fetchAtomUpLinkToHandler ()->
+			fetchElementsMatchingString (
+				mfStringToLowerCase (theString),
+				foundElementsList,
+				os);
 
-// 	if (foundString) {
-// 		// print the atom
-// 		os << "THIS atom matches:" <<
-// 			std::endl;
-//
-// 		print (os);
-// 	}
+	if (foundString) {
+		// print the atom
+		os << "THIS atom matches:" <<
+			std::endl;
+
+		print (os);
+	}
 
   //  print the found strings
   size_t foundMatchesListSize =
@@ -13640,14 +13632,14 @@ void oahFilterStringAtom::applyAtomWithValue (
   gIndenter.setIndentation (saveIndent);
 }
 
-void oahFilterStringAtom::acceptIn (basevisitor* v)
+void oahMatchHelpWithStringAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahFilterStringAtom::acceptIn ()";
+      ".\\\" ==> oahMatchHelpWithStringAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13655,17 +13647,17 @@ void oahFilterStringAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahFilterStringAtom>*
+  if (visitor<S_oahMatchHelpWithStringAtom>*
     p =
-      dynamic_cast<visitor<S_oahFilterStringAtom>*> (v)) {
-        S_oahFilterStringAtom elem = this;
+      dynamic_cast<visitor<S_oahMatchHelpWithStringAtom>*> (v)) {
+        S_oahMatchHelpWithStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahFilterStringAtom::visitStart ()";
+            ".\\\" ==> Launching oahMatchHelpWithStringAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -13676,14 +13668,14 @@ void oahFilterStringAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahFilterStringAtom::acceptOut (basevisitor* v)
+void oahMatchHelpWithStringAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahFilterStringAtom::acceptOut ()";
+      ".\\\" ==> oahMatchHelpWithStringAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13691,17 +13683,17 @@ void oahFilterStringAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahFilterStringAtom>*
+  if (visitor<S_oahMatchHelpWithStringAtom>*
     p =
-      dynamic_cast<visitor<S_oahFilterStringAtom>*> (v)) {
-        S_oahFilterStringAtom elem = this;
+      dynamic_cast<visitor<S_oahMatchHelpWithStringAtom>*> (v)) {
+        S_oahMatchHelpWithStringAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahFilterStringAtom::visitEnd ()";
+            ".\\\" ==> Launching oahMatchHelpWithStringAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -13712,14 +13704,14 @@ void oahFilterStringAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahFilterStringAtom::browseData (basevisitor* v)
+void oahMatchHelpWithStringAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahFilterStringAtom::browseData ()";
+      ".\\\" ==> oahMatchHelpWithStringAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13728,7 +13720,7 @@ void oahFilterStringAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahFilterStringAtom::asShortNamedOptionString () const
+std::string oahMatchHelpWithStringAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -13738,7 +13730,7 @@ std::string oahFilterStringAtom::asShortNamedOptionString () const
   return ss.str ();
 }
 
-std::string oahFilterStringAtom::asActualLongNamedOptionString () const
+std::string oahMatchHelpWithStringAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -13748,12 +13740,12 @@ std::string oahFilterStringAtom::asActualLongNamedOptionString () const
   return ss.str ();
 }
 
-void oahFilterStringAtom::print (std::ostream& os) const
+void oahMatchHelpWithStringAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "FilterStringAtom:" <<
+    "MatchHelpWithStringAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -13764,14 +13756,14 @@ void oahFilterStringAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahFilterStringAtom::displayAtomWithVariableOptionsValues (
+void oahMatchHelpWithStringAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   // nothing to print here
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahFilterStringAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahMatchHelpWithStringAtom& elt)
 {
   if (elt) {
     elt->print (os);

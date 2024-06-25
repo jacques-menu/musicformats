@@ -462,7 +462,7 @@ void basicOah2manPage::visitEnd (S_oahHelpSummaryAtom& elt)
 }
 
 //________________________________________________________________________
-void basicOah2manPage::visitStart (S_oahOptionNameHelpAtom& elt)
+void basicOah2manPage::visitStart (S_oahHelpAboutOptionName& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -470,7 +470,7 @@ void basicOah2manPage::visitStart (S_oahOptionNameHelpAtom& elt)
 
     ss <<
       std::endl <<
-      ".\\\" --> Start visiting oahOptionNameHelpAtom '" <<
+      ".\\\" --> Start visiting oahHelpAboutOptionName '" <<
       elt->asString () <<
       '\'' <<
       " \"" << elt->fetchNames () << "\"";
@@ -482,7 +482,7 @@ void basicOah2manPage::visitStart (S_oahOptionNameHelpAtom& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void basicOah2manPage::visitEnd (S_oahOptionNameHelpAtom& elt)
+void basicOah2manPage::visitEnd (S_oahHelpAboutOptionName& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
@@ -490,7 +490,7 @@ void basicOah2manPage::visitEnd (S_oahOptionNameHelpAtom& elt)
 
     ss <<
       std::endl <<
-      ".\\\" --> End visiting oahOptionNameHelpAtom" <<
+      ".\\\" --> End visiting oahHelpAboutOptionName" <<
       " \"" << elt->fetchNames () << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (

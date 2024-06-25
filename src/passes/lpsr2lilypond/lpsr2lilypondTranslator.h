@@ -878,6 +878,8 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& note);
     void                  generateCodeForNoteUnpitchedInMeasure (
                             const S_msrNote& note);
+    void                  generateCodeForNoteCuedInMeasure (
+                            const S_msrNote& note);
 
     void                  generateCodeForNoteRegularInChord (
                             const S_msrNote& note);

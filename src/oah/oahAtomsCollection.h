@@ -3564,7 +3564,7 @@ typedef SMARTP<oahMidiTempoAtom> S_oahMidiTempoAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahMidiTempoAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
+class EXP oahHelpAboutOptionName : public oahPureHelpValueFittedAtom
 {
 /*
   This is where OAH is introspective:
@@ -3579,32 +3579,28 @@ class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahOptionNameHelpAtom> create (
+    static SMARTP<oahHelpAboutOptionName> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
                             const std::string& valueSpecification,
-                            const std::string& variableName,
-                            std::string&       stringVariable,
-                            const std::string& defaultOptionName);
+                            const std::string& serviceName);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahOptionNameHelpAtom (
+                          oahHelpAboutOptionName (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
                             const std::string& valueSpecification,
-                            const std::string& variableName,
-                            std::string&       stringVariable,
-                            const std::string& defaultOptionName);
+                            const std::string& serviceName);
 
   protected:
 
-    virtual               ~oahOptionNameHelpAtom ();
+    virtual               ~oahHelpAboutOptionName ();
 
   public:
 
@@ -3620,7 +3616,7 @@ class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
                             const std::string& theString,
                             std::ostream&      os) override;
 
-    void                  applyAtomWithDefaultValue (std::ostream& os) override;
+//     void                  applyAtomWithDefaultValue (std::ostream& os) override; JMI v0.9.71 OAH_OAH
 
   public:
 
@@ -3652,8 +3648,8 @@ class EXP oahOptionNameHelpAtom : public oahDefaultedStringAtom
 
 //    std::string           fValueSpecification;
 };
-typedef SMARTP<oahOptionNameHelpAtom> S_oahOptionNameHelpAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_oahOptionNameHelpAtom& elt);
+typedef SMARTP<oahHelpAboutOptionName> S_oahHelpAboutOptionName;
+EXP std::ostream& operator << (std::ostream& os, const S_oahHelpAboutOptionName& elt);
 
 //______________________________________________________________________________
 class EXP oahQueryOptionNameAtom : public oahPureHelpValueFittedAtom
@@ -3792,7 +3788,7 @@ EXP std::ostream& operator << (std::ostream& os, const oahFindStringResult& elt)
 EXP std::ostream& operator << (std::ostream& os, const S_oahFindStringResult& elt);
 
 //______________________________________________________________________________
-class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
+class EXP oahFindStringInHelpAtom : public oahPureHelpValueFittedAtom
 {
 /*
   This is where OAH is introspective too
@@ -3803,7 +3799,7 @@ class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahFindStringAtom> create (
+    static SMARTP<oahFindStringInHelpAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -3815,14 +3811,14 @@ class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahFindStringAtom (
+                          oahFindStringInHelpAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& serviceName);
 
-    virtual               ~oahFindStringAtom ();
+    virtual               ~oahFindStringInHelpAtom ();
 
   public:
 
@@ -3866,11 +3862,11 @@ class EXP oahFindStringAtom : public oahPureHelpValueFittedAtom
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<oahFindStringAtom> S_oahFindStringAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_oahFindStringAtom& elt);
+typedef SMARTP<oahFindStringInHelpAtom> S_oahFindStringInHelpAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahFindStringInHelpAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahFilterStringAtom : public oahPureHelpValueFittedAtom
+class EXP oahMatchHelpWithStringAtom : public oahPureHelpValueFittedAtom
 {
 /*
   This is where OAH is introspective too
@@ -3881,7 +3877,7 @@ class EXP oahFilterStringAtom : public oahPureHelpValueFittedAtom
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahFilterStringAtom> create (
+    static SMARTP<oahMatchHelpWithStringAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -3893,14 +3889,14 @@ class EXP oahFilterStringAtom : public oahPureHelpValueFittedAtom
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahFilterStringAtom (
+                          oahMatchHelpWithStringAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& serviceName);
 
-    virtual               ~oahFilterStringAtom ();
+    virtual               ~oahMatchHelpWithStringAtom ();
 
   public:
 
@@ -3944,8 +3940,8 @@ class EXP oahFilterStringAtom : public oahPureHelpValueFittedAtom
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<oahFilterStringAtom> S_oahFilterStringAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_oahFilterStringAtom& elt);
+typedef SMARTP<oahMatchHelpWithStringAtom> S_oahMatchHelpWithStringAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahMatchHelpWithStringAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahIncludeOptionsAndArgumentsFileAtom : public oahValueFittedAtom

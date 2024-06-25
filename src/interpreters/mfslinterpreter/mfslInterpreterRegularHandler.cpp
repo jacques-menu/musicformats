@@ -310,10 +310,10 @@ void mfslInterpreterRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("help-options-usage", subGroup);
 
-  registerAtomInRegularSubgroup ("name-help", subGroup);
-  registerAtomInRegularSubgroup ("query", subGroup);
-  registerAtomInRegularSubgroup ("find", subGroup);
-  registerAtomInRegularSubgroup ("filter", subGroup);
+  registerAtomInRegularSubgroup ("help-about-option-name", subGroup);
+  registerAtomInRegularSubgroup ("query-help", subGroup);
+  registerAtomInRegularSubgroup ("find-string-in-help", subGroup);
+  registerAtomInRegularSubgroup ("match-help-with-string", subGroup);
   registerAtomInRegularSubgroup (K_INCLUDE_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup ("reverse-names-display-order", subGroup);
