@@ -3866,7 +3866,7 @@ typedef SMARTP<oahFindStringInHelpAtom> S_oahFindStringInHelpAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahFindStringInHelpAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahMatchHelpWithStringAtom : public oahPureHelpValueFittedAtom
+class EXP oahMatchHelpWithPatternAtom : public oahPureHelpValueFittedAtom
 {
 /*
   This is where OAH is introspective too
@@ -3877,7 +3877,7 @@ class EXP oahMatchHelpWithStringAtom : public oahPureHelpValueFittedAtom
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahMatchHelpWithStringAtom> create (
+    static SMARTP<oahMatchHelpWithPatternAtom> create (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
@@ -3889,14 +3889,14 @@ class EXP oahMatchHelpWithStringAtom : public oahPureHelpValueFittedAtom
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahMatchHelpWithStringAtom (
+                          oahMatchHelpWithPatternAtom (
                             const std::string& longName,
                             const std::string& shortName,
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& serviceName);
 
-    virtual               ~oahMatchHelpWithStringAtom ();
+    virtual               ~oahMatchHelpWithPatternAtom ();
 
   public:
 
@@ -3940,8 +3940,8 @@ class EXP oahMatchHelpWithStringAtom : public oahPureHelpValueFittedAtom
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<oahMatchHelpWithStringAtom> S_oahMatchHelpWithStringAtom;
-EXP std::ostream& operator << (std::ostream& os, const S_oahMatchHelpWithStringAtom& elt);
+typedef SMARTP<oahMatchHelpWithPatternAtom> S_oahMatchHelpWithPatternAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahMatchHelpWithPatternAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahIncludeOptionsAndArgumentsFileAtom : public oahValueFittedAtom

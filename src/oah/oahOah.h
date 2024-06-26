@@ -362,8 +362,8 @@ class EXP oahOahGroup : public oahGroup
                               { return fFindStringInHelpAtom; }
 
     // match help with string
-    S_oahMatchHelpWithStringAtom getMatchHelpWithStringAtom () const
-                              { return fMatchHelpWithStringAtom; }
+    S_oahMatchHelpWithPatternAtom getMatchHelpWithPatternAtom () const
+                              { return fMatchHelpWithPatternAtom; }
 
     // include options file
     S_oahIncludeOptionsAndArgumentsFileAtom
@@ -470,7 +470,7 @@ class EXP oahOahGroup : public oahGroup
     S_oahFindStringInHelpAtom   fFindStringInHelpAtom;
 
     // find std::string
-    S_oahMatchHelpWithStringAtom fMatchHelpWithStringAtom;
+    S_oahMatchHelpWithPatternAtom fMatchHelpWithPatternAtom;
 
     // include options file
     S_oahIncludeOptionsAndArgumentsFileAtom

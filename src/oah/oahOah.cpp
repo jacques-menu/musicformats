@@ -1137,9 +1137,9 @@ in the output for clarity.)",
 
   // match help with string in help
 
-  fMatchHelpWithStringAtom =
-    oahMatchHelpWithStringAtom::create (
-      "match-help-with-string", "match",
+  fMatchHelpWithPatternAtom =
+    oahMatchHelpWithPatternAtom::create (
+      "match-help-with-pattern", "match",
 R"(Filter the help with string.
 The search is case insensitive, and a '-' is added in front of options names
 in the output for clarity.)",
@@ -1148,7 +1148,7 @@ in the output for clarity.)",
 
   subGroup->
     appendAtomToSubGroup (
-      fMatchHelpWithStringAtom);
+      fMatchHelpWithPatternAtom);
 
   // include options file
 

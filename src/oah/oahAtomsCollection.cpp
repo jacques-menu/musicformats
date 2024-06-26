@@ -13208,7 +13208,7 @@ void oahFindStringInHelpAtom::applyAtomWithValue (
     ss <<
       "Handling option name '" <<
       fetchNames () <<
-      "' which is a oahFindStringInHelpAtom";
+      "' which is a oahFindStringAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13217,27 +13217,18 @@ void oahFindStringInHelpAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // a strings list to collect the results
-  std::list<S_oahElement> foundElementsList;
+  std::list<S_oahFindStringMatch> foundMatchesList;
 
   // delegate this to the handler
-  Bool foundString =
-		fetchAtomUpLinkToHandler ()->
-			fetchElementsMatchingString (
-				mfStringToLowerCase (theString),
-				foundElementsList,
-				os);
-
-	if (foundString) {
-		// print the atom
-		os << "THIS atom matches:" <<
-			std::endl;
-
-		print (os);
-	}
+  fetchAtomUpLinkToHandler ()->
+    findStringInFindableElement (
+      mfStringToLowerCase (theString),
+      foundMatchesList,
+      os);
 
   //  print the found strings
   size_t foundMatchesListSize =
-    foundElementsList.size ();
+    foundMatchesList.size ();
 
   int saveIndent = gIndenter.getIndentation ();
 
@@ -13260,55 +13251,55 @@ void oahFindStringInHelpAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    std::list<S_oahElement>::const_iterator
-      iBegin = foundElementsList.begin (),
-      iEnd   = foundElementsList.end (),
+    std::list<S_oahFindStringMatch>::const_iterator
+      iBegin = foundMatchesList.begin (),
+      iEnd   = foundMatchesList.end (),
       i      = iBegin;
 
     int counter = 0;
 
     for ( ; ; ) {
-      S_oahElement matchingElement = (*i);
+      oahFindStringMatch* theFindStringMatch = (*i);
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
       mfAssert (
         __FILE__, __LINE__,
-        matchingElement != nullptr,
-        "matchingElement is null");
+        theFindStringMatch != nullptr,
+        "theFindStringMatch is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//       std::string
-//         elementName =
-//           matchingElement->
-//             getElementName (),
-//         foundString =
-//           matchingElement->
-//             getFoundString (),
-//         containingFindableElementInfo =
-//           matchingElement->
-//             getContainingFindableElementInfo ();
+      std::string
+        elementName =
+          theFindStringMatch->
+            getElementName (),
+        foundString =
+          theFindStringMatch->
+            getFoundString (),
+        containingFindableElementInfo =
+          theFindStringMatch->
+            getContainingFindableElementInfo ();
 
       ++counter;
 
       os << std::right <<
-        std::setw (2) << counter << ": " << // containingFindableElementInfo <<
+        std::setw (2) << counter << ": " << containingFindableElementInfo <<
         std::endl;
 
       ++gIndenter;
 
-      os << matchingElement << std::endl;
+      os << elementName << std::endl;
 
-//       // indent a bit more for readability
-//       gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-//
-//       gIndenter.indentMultiLineString (
-//         foundString,
-//         os);
-//
-//       // unindent a bit more for readability
-//       gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-//       --gIndenter;
+      // indent a bit more for readability
+      gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
+
+      gIndenter.indentMultiLineString (
+        foundString,
+        os);
+
+      // unindent a bit more for readability
+      gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+      --gIndenter;
 
       if (++i == iEnd) break;
 
@@ -13468,15 +13459,15 @@ std::ostream& operator << (std::ostream& os, const S_oahFindStringInHelpAtom& el
 }
 
 //______________________________________________________________________________
-S_oahMatchHelpWithStringAtom oahMatchHelpWithStringAtom::create (
+S_oahMatchHelpWithPatternAtom oahMatchHelpWithPatternAtom::create (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& serviceName)
 {
-  oahMatchHelpWithStringAtom* obj = new
-    oahMatchHelpWithStringAtom (
+  oahMatchHelpWithPatternAtom* obj = new
+    oahMatchHelpWithPatternAtom (
       longName,
       shortName,
       description,
@@ -13486,7 +13477,7 @@ S_oahMatchHelpWithStringAtom oahMatchHelpWithStringAtom::create (
   return obj;
 }
 
-oahMatchHelpWithStringAtom::oahMatchHelpWithStringAtom (
+oahMatchHelpWithPatternAtom::oahMatchHelpWithPatternAtom (
   const std::string& longName,
   const std::string& shortName,
   const std::string& description,
@@ -13502,10 +13493,10 @@ oahMatchHelpWithStringAtom::oahMatchHelpWithStringAtom (
   this->setMultipleOccurrencesAllowed ();
 }
 
-oahMatchHelpWithStringAtom::~oahMatchHelpWithStringAtom ()
+oahMatchHelpWithPatternAtom::~oahMatchHelpWithPatternAtom ()
 {}
 
-void oahMatchHelpWithStringAtom::applyAtomWithValue (
+void oahMatchHelpWithPatternAtom::applyAtomWithValue (
   const std::string& theString,
   std::ostream&      os)
 {
@@ -13516,7 +13507,7 @@ void oahMatchHelpWithStringAtom::applyAtomWithValue (
     ss <<
       "Handling option name '" <<
       fetchNames () <<
-      "' which is a oahMatchHelpWithStringAtom";
+      "' which is a oahMatchHelpWithPatternAtom";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13632,14 +13623,14 @@ void oahMatchHelpWithStringAtom::applyAtomWithValue (
   gIndenter.setIndentation (saveIndent);
 }
 
-void oahMatchHelpWithStringAtom::acceptIn (basevisitor* v)
+void oahMatchHelpWithPatternAtom::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMatchHelpWithStringAtom::acceptIn ()";
+      ".\\\" ==> oahMatchHelpWithPatternAtom::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13647,17 +13638,17 @@ void oahMatchHelpWithStringAtom::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahMatchHelpWithStringAtom>*
+  if (visitor<S_oahMatchHelpWithPatternAtom>*
     p =
-      dynamic_cast<visitor<S_oahMatchHelpWithStringAtom>*> (v)) {
-        S_oahMatchHelpWithStringAtom elem = this;
+      dynamic_cast<visitor<S_oahMatchHelpWithPatternAtom>*> (v)) {
+        S_oahMatchHelpWithPatternAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahMatchHelpWithStringAtom::visitStart ()";
+            ".\\\" ==> Launching oahMatchHelpWithPatternAtom::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -13668,14 +13659,14 @@ void oahMatchHelpWithStringAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahMatchHelpWithStringAtom::acceptOut (basevisitor* v)
+void oahMatchHelpWithPatternAtom::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMatchHelpWithStringAtom::acceptOut ()";
+      ".\\\" ==> oahMatchHelpWithPatternAtom::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13683,17 +13674,17 @@ void oahMatchHelpWithStringAtom::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_oahMatchHelpWithStringAtom>*
+  if (visitor<S_oahMatchHelpWithPatternAtom>*
     p =
-      dynamic_cast<visitor<S_oahMatchHelpWithStringAtom>*> (v)) {
-        S_oahMatchHelpWithStringAtom elem = this;
+      dynamic_cast<visitor<S_oahMatchHelpWithPatternAtom>*> (v)) {
+        S_oahMatchHelpWithPatternAtom elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching oahMatchHelpWithStringAtom::visitEnd ()";
+            ".\\\" ==> Launching oahMatchHelpWithPatternAtom::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -13704,14 +13695,14 @@ void oahMatchHelpWithStringAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahMatchHelpWithStringAtom::browseData (basevisitor* v)
+void oahMatchHelpWithPatternAtom::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> oahMatchHelpWithStringAtom::browseData ()";
+      ".\\\" ==> oahMatchHelpWithPatternAtom::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -13720,7 +13711,7 @@ void oahMatchHelpWithStringAtom::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string oahMatchHelpWithStringAtom::asShortNamedOptionString () const
+std::string oahMatchHelpWithPatternAtom::asShortNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -13730,7 +13721,7 @@ std::string oahMatchHelpWithStringAtom::asShortNamedOptionString () const
   return ss.str ();
 }
 
-std::string oahMatchHelpWithStringAtom::asActualLongNamedOptionString () const
+std::string oahMatchHelpWithPatternAtom::asActualLongNamedOptionString () const
 {
   std::stringstream ss;
 
@@ -13740,12 +13731,12 @@ std::string oahMatchHelpWithStringAtom::asActualLongNamedOptionString () const
   return ss.str ();
 }
 
-void oahMatchHelpWithStringAtom::print (std::ostream& os) const
+void oahMatchHelpWithPatternAtom::print (std::ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "MatchHelpWithStringAtom:" <<
+    "MatchHelpWithPatternAtom:" <<
     std::endl;
 
   ++gIndenter;
@@ -13756,14 +13747,14 @@ void oahMatchHelpWithStringAtom::print (std::ostream& os) const
   --gIndenter;
 }
 
-void oahMatchHelpWithStringAtom::displayAtomWithVariableOptionsValues (
+void oahMatchHelpWithPatternAtom::displayAtomWithVariableOptionsValues (
   std::ostream& os,
   int           valueFieldWidth) const
 {
   // nothing to print here
 }
 
-std::ostream& operator << (std::ostream& os, const S_oahMatchHelpWithStringAtom& elt)
+std::ostream& operator << (std::ostream& os, const S_oahMatchHelpWithPatternAtom& elt)
 {
   if (elt) {
     elt->print (os);

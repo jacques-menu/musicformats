@@ -15084,6 +15084,14 @@ If thus the last respective parameter <syllabic>begin</syllabic> would be interp
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
+
+//             fLilypondCodeStream <<
+//               "\\skip";
+//             generateWholeNotesDuration (
+//               syllable->getInputStartLineNumber (),
+//               syllable->getSyllableWholeNotes ());
+//             fLilypondCodeStream <<
+//               ' ';
           break;
 
         case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
@@ -15713,6 +15721,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
           std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
+
+      doGenerateASkip = true;
       break;
 
     // ----------------------------------------------------
@@ -15820,7 +15830,13 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   if (doGenerateASkip) {
     fLilypondCodeStream <<
       " \\skip" <<
-      durationAsLilypondStringIfItShouldBeGenerated (
+//       durationAsLilypondStringIfItShouldBeGenerated (
+//         noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+//         noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
+
+      // durationAsLilypondStringIfItShouldBeGenerated is not adequate it seems,
+      // so let's generate it the hardwired way... // JMI v0.9.71
+      wholeNotesAsLilypondString (
         noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
         noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
       ' ';
@@ -16175,6 +16191,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
           std::endl;
       }
 #endif // MF_TRACE_IS_ENABLED
+
+      doGenerateASkip = true;
       break;
 
     // ----------------------------------------------------
@@ -16272,7 +16290,13 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
   if (doGenerateASkip) {
     fLilypondCodeStream <<
       " \\skip" <<
-      durationAsLilypondStringIfItShouldBeGenerated (
+//       durationAsLilypondStringIfItShouldBeGenerated (
+//         noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
+//         noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
+
+      // durationAsLilypondStringIfItShouldBeGenerated is not adequate it seems,
+      // so let's generate it the hardwired way... // JMI v0.9.71
+      wholeNotesAsLilypondString (
         noteTheSyllableIsAttachedTo->getInputStartLineNumber (),
         noteTheSyllableIsAttachedTo->getMeasureElementSoundingWholeNotes ()) <<
       ' ';
@@ -16637,7 +16661,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       }
 #endif // MF_TRACE_IS_ENABLED
 
-//         doGenerateASkip = true;
+      doGenerateASkip = true;
       break;
 
     // ----------------------------------------------------

@@ -494,7 +494,7 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("help-about-option-name", subGroup);
   registerAtomInRegularSubgroup ("query-help", subGroup);
   registerAtomInRegularSubgroup ("find-string-in-help", subGroup);
-  registerAtomInRegularSubgroup ("match-help-with-string", subGroup);
+  registerAtomInRegularSubgroup ("match-help-with-pattern", subGroup);
   registerAtomInRegularSubgroup (K_INCLUDE_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup ("reverse-names-display-order", subGroup);
