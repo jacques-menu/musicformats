@@ -41,7 +41,7 @@ class EXP basicOah2manPage : virtual public oah2manPage,
 
   public                      visitor<S_oahAtomStoringAValue>,
 
-  public                      visitor<S_oahOptionNameHelpAtom>,
+  public                      visitor<S_oahHelpAboutOptionName>,
 
   public                      visitor<S_oahBooleanAtom>,
   public                      visitor<S_oahTwoBooleansAtom>,
@@ -113,8 +113,8 @@ class EXP basicOah2manPage : virtual public oah2manPage,
     virtual void              visitStart (S_oahAtomStoringAValue& elt);
     virtual void              visitEnd   (S_oahAtomStoringAValue& elt);
 
-    virtual void              visitStart (S_oahOptionNameHelpAtom& elt);
-    virtual void              visitEnd   (S_oahOptionNameHelpAtom& elt);
+    virtual void              visitStart (S_oahHelpAboutOptionName& elt);
+    virtual void              visitEnd   (S_oahHelpAboutOptionName& elt);
 
     virtual void              visitStart (S_oahBooleanAtom& elt);
     virtual void              visitEnd   (S_oahBooleanAtom& elt);

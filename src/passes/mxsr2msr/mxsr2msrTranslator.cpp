@@ -891,7 +891,6 @@ void mxsr2msrTranslator::printVoicesLastMetNoteMap (
   if (voicesLastMetNoteMapSize) {
     ++gIndenter;
 
-//    std::map<S_msrVoice, S_msrNote>::const_iterator
     std::map<std::pair<int, int>, S_msrNote>::const_iterator
       iBegin = fVoicesLastMetNoteMap.begin (),
       iEnd   = fVoicesLastMetNoteMap.end (),
@@ -970,7 +969,7 @@ void mxsr2msrTranslator::populateCurrentPartStavesVectorFromPart (
   if (gTraceOahGroup->getTraceStaves ()) {
     std::stringstream ss;
 
-    gLog <<
+    ss <<
       ">>> Part \"" <<
       part->getPartName () <<
       "\" has stave numbers ranging from 1 to " <<
@@ -996,6 +995,22 @@ void mxsr2msrTranslator::populateCurrentPartStavesVectorFromPart (
     S_msrStaff staff = thePair.second;
 
     // register the staff
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceStaves ()) {
+      std::stringstream ss;
+
+      ss <<
+        ">>> Part \"" <<
+        part->getPartName () <<
+        "\" registering staff " << staff <<
+        "in fCurrentPartStavesVector under staffNumber " << staffNumber;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
     fCurrentPartStavesVector [staffNumber] = staff;
   } // for
 
@@ -19490,6 +19505,7 @@ void mxsr2msrTranslator::copyNoteArticulationsListToChord (
         getNoteArticulationsList ();
 
   for (S_msrArticulation articulation : noteArticulationsList) {
+
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceArticulations ()) {
       std::stringstream ss;
@@ -19506,7 +19522,8 @@ void mxsr2msrTranslator::copyNoteArticulationsListToChord (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    chord->appendArticulationToChord (articulation);
+    chord->
+      appendArticulationToChord (articulation);
   } // for
 }
 
@@ -19523,6 +19540,7 @@ void mxsr2msrTranslator::copyNoteTechnicalsListToChord (
         getNoteTechnicalsList ();
 
   for (S_msrTechnical technical : noteTechnicalsList) {
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTechnicals ()) {
     std::stringstream ss;
@@ -19536,7 +19554,8 @@ void mxsr2msrTranslator::copyNoteTechnicalsListToChord (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    chord->appendTechnicalToChord (technical);
+    chord->
+      appendTechnicalToChord (technical);
   } // for
 }
 
@@ -19553,6 +19572,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersListToChord (
         getNoteTechnicalWithIntegersList ();
 
   for (S_msrTechnicalWithInteger technicalWithInteger : noteTechnicalWithIntegersList) {
+
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       gLog <<
@@ -19564,7 +19584,8 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersListToChord (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-    chord->appendTechnicalWithIntegerToChord (technicalWithInteger);
+    chord->
+      appendTechnicalWithIntegerToChord (technicalWithInteger);
   } // for
 }
 
@@ -19581,6 +19602,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsListToChord (
         getNoteTechnicalWithFloatsList ();
 
   for (S_msrTechnicalWithFloat technicalWithFloat : noteTechnicalWithFloatsList) {
+
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       std::stringstream ss;
@@ -19597,7 +19619,8 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsListToChord (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    chord->appendTechnicalWithFloatToChord (technicalWithFloat);
+    chord->
+      appendTechnicalWithFloatToChord (technicalWithFloat);
   } // for
 }
 
@@ -19614,6 +19637,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsListToChord (
         getNoteTechnicalWithStringsList ();
 
   for (S_msrTechnicalWithString technicalWithString : noteTechnicalWithStringsList) {
+
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTechnicals ()) {
       std::stringstream ss;
@@ -19630,7 +19654,8 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsListToChord (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    chord->appendTechnicalWithStringToChord (technicalWithString);
+    chord->
+      appendTechnicalWithStringToChord (technicalWithString);
   } // for
 }
 
@@ -19647,6 +19672,7 @@ void mxsr2msrTranslator::copyNoteOrnamentsListToChord (
         getNoteOrnamentsList ();
 
   for (S_msrOrnament ornament : noteOrnamentsList) {
+
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceOrnaments ()) {
       std::stringstream ss;
@@ -19681,6 +19707,7 @@ void mxsr2msrTranslator::copyNoteSpannersListToChord (
         getNoteSpannersList ();
 
   for (S_msrSpanner spanner : noteSpannersList) {
+
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSpanners ()) {
       std::stringstream ss;
@@ -19748,12 +19775,7 @@ void mxsr2msrTranslator::copyNoteDynamicsListToChord (
       note->
         getNoteDynamicsList ();
 
-  std::list<S_msrDynamic>::const_iterator i;
-  for (
-    i = noteDynamicsList.begin ();
-    i != noteDynamicsList.end ();
-    ++i
-  ) {
+  for (S_msrDynamic dynamic : noteDynamicsList) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDynamics ()) {
@@ -19761,7 +19783,7 @@ void mxsr2msrTranslator::copyNoteDynamicsListToChord (
 
       ss <<
         "Copying dynamics " <<
-        msrDynamicKindAsString ((*i)->getDynamicKind ()) <<
+        msrDynamicKindAsString (dynamic->getDynamicKind ()) <<
         " from note " << note->asString () <<
         " to chord";
 
@@ -19772,7 +19794,7 @@ void mxsr2msrTranslator::copyNoteDynamicsListToChord (
 #endif // MF_TRACE_IS_ENABLED
 
     chord->
-      appendDynamicToChord ((*i));
+      appendDynamicToChord (dynamic);
   } // for
 }
 
@@ -19788,12 +19810,7 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsListToChord (
       note->
         getNoteOtherDynamicsList ();
 
-  std::list<S_msrOtherDynamic>::const_iterator i;
-  for (
-    i = noteOtherDynamicsList.begin ();
-    i != noteOtherDynamicsList.end ();
-    ++i
-  ) {
+  for (S_msrOtherDynamic otherDynamic : noteOtherDynamicsList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDynamics ()) {
@@ -19801,7 +19818,7 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsListToChord (
 
       ss <<
         "Copying other dynamics " <<
-        (*i)->asString () <<
+        otherDynamic->asString () <<
         " from note " << note->asString () <<
         " to chord";
 
@@ -19812,7 +19829,7 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsListToChord (
 #endif // MF_TRACE_IS_ENABLED
 
     chord->
-      appendOtherDynamicToChord ((*i));
+      appendOtherDynamicToChord (otherDynamic);
   } // for
 }
 
@@ -19829,11 +19846,8 @@ void mxsr2msrTranslator::copyNoteWordsListToChord (
         getNoteWordsList ();
 
   std::list<S_msrWords>::const_iterator i;
-  for (
-    i = noteWordsList.begin ();
-    i != noteWordsList.end ();
-    ++i
-  ) {
+
+  for (S_msrWords word : noteWordsList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceWords ()) {
@@ -19841,7 +19855,7 @@ void mxsr2msrTranslator::copyNoteWordsListToChord (
 
       ss <<
         "Copying words " <<
-        (*i)->asString () <<
+        word->asString () <<
         " from note " << note->asString () <<
         " to chord";
 
@@ -19852,7 +19866,7 @@ void mxsr2msrTranslator::copyNoteWordsListToChord (
 #endif // MF_TRACE_IS_ENABLED
 
     chord->
-      appendWordsToChord ((*i));
+      appendWordsToChord (word);
   } // for
 }
 
@@ -19904,8 +19918,8 @@ void mxsr2msrTranslator::copyNoteBeamsListToChord (
         getNoteBeamsList ();
 
   std::list<S_msrBeam>::const_iterator i;
-  for (
-    i = noteBeamsList.begin ();
+  for (S_msrOtherDynamic : S_msrOtherDynamic ) {
+     noteBeamsList.begin ();
     i != noteBeamsList.end ();
     ++i
   ) {
@@ -20021,6 +20035,7 @@ void mxsr2msrTranslator::copyNoteTiesToChord (
 
   if (noteTiesList.size ()) {
     for (S_msrTie noteTie : noteTiesList) {
+
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceTies ()) {
         std::stringstream ss;
@@ -20079,8 +20094,8 @@ void mxsr2msrTranslator::copyNoteSlursListToChord (
         getNoteSlursList ();
 
   std::list<S_msrSlur>::const_iterator i;
-  for (
-    i = noteSlursList.begin ();
+  for (S_msrOtherDynamic : S_msrOtherDynamic ) {
+     noteSlursList.begin ();
     i != noteSlursList.end ();
     ++i
   ) {
@@ -20117,13 +20132,7 @@ void mxsr2msrTranslator::appendNoteSlursListLinksToChord (
       note->
         getNoteSlursList ();
 
-  std::list<S_msrSlur>::const_iterator i;
-  for (
-    i = noteSlursList.begin ();
-    i != noteSlursList.end ();
-    ++i
-  ) {
-    S_msrSlur slur = (*i);
+  for (S_msrSlur slur : noteSlursList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSlurs ()) {
@@ -20186,6 +20195,7 @@ void mxsr2msrTranslator::copyNoteLigaturesListToChord (
         getNoteLigaturesList ();
 
   for (S_msrLigature ligature : noteLigaturesList) {
+
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceLigatures ()) {
       std::stringstream ss;
@@ -20219,8 +20229,8 @@ void mxsr2msrTranslator::copyNotePedalsListToChord (
       note->
         getNotePedalsList ();
 
-  std::list<S_msrPedal>::const_iterator i;
   for (S_msrPedal pedal : notePedalsList) {
+
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTracePedals ()) {
       std::stringstream ss;
@@ -20238,7 +20248,7 @@ void mxsr2msrTranslator::copyNotePedalsListToChord (
 #endif // MF_TRACE_IS_ENABLED
 
     chord->
-      appendPedalToChord ((*i));
+      appendPedalToChord (pedal);
   } // for
 }
 
@@ -20254,12 +20264,7 @@ void mxsr2msrTranslator::copyNoteSlashesListToChord (
       note->
         getNoteSlashesList ();
 
-  std::list<S_msrSlash>::const_iterator i;
-  for (
-    i = noteSlashesList.begin ();
-    i != noteSlashesList.end ();
-    ++i
-  ) {
+  for (S_msrSlash slash : noteSlashesList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSlashes ()) {
@@ -20267,7 +20272,7 @@ void mxsr2msrTranslator::copyNoteSlashesListToChord (
 
       ss <<
         "Copying slash " <<
-        (*i)->asString () <<
+        slash->asString () <<
         " from note " << note->asString () <<
         " to chord";
 
@@ -20278,7 +20283,7 @@ void mxsr2msrTranslator::copyNoteSlashesListToChord (
 #endif // MF_TRACE_IS_ENABLED
 
     chord->
-      appendSlashToChord ((*i));
+      appendSlashToChord (slash);
   } // for
 }
 
@@ -20295,12 +20300,7 @@ void mxsr2msrTranslator::copyNoteWedgesListToChord (
         getNoteWedgesList ();
 
   std::list<S_msrWedge>::const_iterator i;
-  for (
-    i = noteWedgesList.begin ();
-    i != noteWedgesList.end ();
-    ++i
-  ) {
-    S_msrWedge wedge = (*i);
+  for (S_msrWedge wedge : noteWedgesList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceWedges ()) {
@@ -20319,7 +20319,7 @@ void mxsr2msrTranslator::copyNoteWedgesListToChord (
 #endif // MF_TRACE_IS_ENABLED
 
     chord->
-      appendWedgeToChord ((*i));
+      appendWedgeToChord (wedge);
   } // for
 }
 
@@ -20336,11 +20336,7 @@ void mxsr2msrTranslator::copyNoteSegnosListToChord (
         getNoteSegnosList ();
 
   std::list<S_msrSegno>::const_iterator i;
-  for (
-    i = noteSegnosList.begin ();
-    i != noteSegnosList.end ();
-    ++i
-  ) {
+  for (S_msrSegno segno : noteSegnosList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceSegnos ()) {
@@ -20348,7 +20344,7 @@ void mxsr2msrTranslator::copyNoteSegnosListToChord (
 
       ss <<
         "Copying segno " <<
-        (*i)->asShortString () <<
+        segno->asShortString () <<
         " from note " << note->asString () <<
         " to chord";
 
@@ -20359,7 +20355,7 @@ void mxsr2msrTranslator::copyNoteSegnosListToChord (
 #endif // MF_TRACE_IS_ENABLED
 
     chord->
-      appendSegnoToChord ((*i));
+      appendSegnoToChord (segno);
   } // for
 }
 
@@ -20376,11 +20372,7 @@ void mxsr2msrTranslator::copyNoteDalSegnosListToChord (
         getNoteDalSegnosList ();
 
   std::list<S_msrDalSegno>::const_iterator i;
-  for (
-    i = noteDalSegnosList.begin ();
-    i != noteDalSegnosList.end ();
-    ++i
-  ) {
+  for (S_msrDalSegno dalSegno : noteDalSegnosList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceDalSegnos ()) {
@@ -20388,7 +20380,7 @@ void mxsr2msrTranslator::copyNoteDalSegnosListToChord (
 
       ss <<
         "Copying dal degno " <<
-        (*i)->asShortString () <<
+        dalSegno->asShortString () <<
         " from note " << note->asString () <<
         " to chord";
 
@@ -20399,7 +20391,7 @@ void mxsr2msrTranslator::copyNoteDalSegnosListToChord (
 #endif // MF_TRACE_IS_ENABLED
 
     chord->
-      appendDalSegnoToChord ((*i));
+      appendDalSegnoToChord (dalSegno);
   } // for
 }
 
@@ -20416,11 +20408,7 @@ void mxsr2msrTranslator::copyNoteCodasListToChord (
         getNoteCodasList ();
 
   std::list<S_msrCoda>::const_iterator i;
-  for (
-    i = noteCodasList.begin ();
-    i != noteCodasList.end ();
-    ++i
-  ) {
+  for (S_msrCoda coda : noteCodasList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceCodas ()) {
@@ -20428,7 +20416,7 @@ void mxsr2msrTranslator::copyNoteCodasListToChord (
 
       ss <<
         "Copying coda " <<
-        (*i)->asShortString () <<
+        coda->asShortString () <<
         " from note " << note->asString () <<
         " to chord";
 
@@ -20439,7 +20427,7 @@ void mxsr2msrTranslator::copyNoteCodasListToChord (
 #endif // MF_TRACE_IS_ENABLED
 
     chord->
-      appendCodaToChord ((*i));
+      appendCodaToChord (coda);
   } // for
 }
 
@@ -20632,9 +20620,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
       note->getNoteHarmoniesList ();
 
   if (noteHarmoniesList.size ()) {
-    std::list<S_msrHarmony>::const_iterator i;
-    for (i = noteHarmoniesList.begin (); i != noteHarmoniesList.end (); ++i) {
-      S_msrHarmony harmony = (*i);
+    for (S_msrHarmony harmony : noteHarmoniesList) {
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -21806,15 +21792,12 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
 #endif // MF_TRACE_IS_ENABLED
 
     std::list<S_msrArticulation>::const_iterator i;
-    for (
-      i = fCurrentArticulations.begin ();
-      i != fCurrentArticulations.end ();
-      ++i
-  ) {
+    for (S_msrArticulation articulation : fCurrentArticulations) {
+
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceArticulations ()) {
         gLog <<
-          "Attaching articulation " <<  (*i) <<
+          "Attaching articulation " <<  articulation <<
           " to chord " << chord;
 
       gWaeHandler->waeTrace (
@@ -21824,7 +21807,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
 #endif // MF_TRACE_IS_ENABLED
 
       chord->
-        appendArticulationToChord ((*i));
+        appendArticulationToChord (articulation);
       } // for
   }
 }
@@ -21850,15 +21833,12 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
 #endif // MF_TRACE_IS_ENABLED
 
     std::list<S_msrOrnament>::const_iterator i;
-    for (
-      i = fCurrentOrnamentsList.begin ();
-      i != fCurrentOrnamentsList.end ();
-      ++i
-  ) {
+    for (S_msrOrnament ornament : fCurrentOrnamentsList) {
+
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceOrnaments ()) {
         gLog <<
-          "Attaching ornament " <<  (*i) << " to chord " <<
+          "Attaching ornament " <<  ornament << " to chord " <<
           chord;
 
       gWaeHandler->waeTrace (
@@ -21868,7 +21848,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
 #endif // MF_TRACE_IS_ENABLED
 
       chord->
-        appendOrnamentToChord ((*i));
+        appendOrnamentToChord (ornament);
       } // for
   }
 }
@@ -24107,13 +24087,9 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
 /* JMI
   // attach the beams if any to the note
   if (fPendingBeamsList.size ()) {
-    for (
-      std::list<S_msrBeam>::const_iterator i = fPendingBeamsList.begin ();
-      i != fPendingBeamsList.end ();
-      ++i
-    ) {
+    for (S_msrBeam beam : fPendingBeamsList) {
       fCurrentNote->
-        appendBeamToCurrentNote ((*i));
+        appendBeamToCurrentNote (beam);
     } // for
 
     fPendingBeamsList.clear ();

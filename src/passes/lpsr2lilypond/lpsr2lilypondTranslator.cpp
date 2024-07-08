@@ -15935,36 +15935,36 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
         }
       }
 
-//       // what it the syllable's extend kind?
-//       switch (syllable->getSyllableExtendKind ()) {
-//         case msrSyllableExtendKind::kSyllableExtend_NONE:
-//           // a continue type extension is not mandatory
-//           if (fOnGoingExtend) {
-// //             doGenerateASingleUnderscore = true;
+      // what it the syllable's extend kind?
+      switch (syllable->getSyllableExtendKind ()) {
+        case msrSyllableExtendKind::kSyllableExtend_NONE:
+          // a continue type extension is not mandatory
+          if (fOnGoingExtend) {
+//             doGenerateASingleUnderscore = true;
+          }
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeLess:
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStart:
+          fOnGoingExtend = true;
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStop:
+//           if (fOnGoingExtend) { // JMI v0.9.70
+//             doGenerateASingleHyphen = true;
 //           }
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//           fOnGoingExtend = true;
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStop:
-// //           if (fOnGoingExtend) { // JMI v0.9.70
-// //             doGenerateASingleHyphen = true;
-// //           }
-//
-//           fOnGoingExtend = false;
-//           break;
-//       } // switch
+
+          fOnGoingExtend = false;
+          break;
+      } // switch
       }
       break;
 
@@ -16009,40 +16009,40 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
         }
       }
 
-//         {
-//           // get the note slurs
-//           const std::list<S_msrSlur>&
-//             noteSlursList =
-//               noteTheSyllableIsAttachedTo->getNoteSlursList ();
-//
-//           // take note's tie into account if any
-//           if (noteSlursList.size ()) {
-// //             doGenerateASkip = true;
-//           }
-//         }
+        {
+          // get the note slurs
+          const std::list<S_msrSlur>&
+            noteSlursList =
+              noteTheSyllableIsAttachedTo->getNoteSlursList ();
 
-//       // what it the syllable's extend kind?
-//       switch (syllable->getSyllableExtendKind ()) {
-//         case msrSyllableExtendKind::kSyllableExtend_NONE:
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//           doGenerateASkip = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//           fOnGoingExtend = true;
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//           fOnGoingExtend = false;
-//           break;
-//       } // switch
+          // take note's tie into account if any
+          if (noteSlursList.size ()) {
+//             doGenerateASkip = true;
+          }
+        }
+
+      // what it the syllable's extend kind?
+      switch (syllable->getSyllableExtendKind ()) {
+        case msrSyllableExtendKind::kSyllableExtend_NONE:
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeLess:
+          doGenerateASkip = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStart:
+          fOnGoingExtend = true;
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStop:
+          fOnGoingExtend = false;
+          break;
+      } // switch
       break;
 
     // ----------------------------------------------------
@@ -16059,10 +16059,26 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       }
 #endif // MF_TRACE_IS_ENABLED
 
-       doGenerateADoubleHyphen = true;
+      doGenerateADoubleHyphen = true;
 
-//       {
-//         // take note's tie into account if any
+      {
+        // take note's tie into account if any
+        const std::list<S_msrTie>&
+          noteTiesList =
+            noteTheSyllableIsAttachedTo->getNoteTiesList ();
+
+        if (noteTiesList.size ()) {
+          for (S_msrTie noteTie : noteTiesList) {
+            if (noteTie->getTieKind () == msrTieKind::kTieStart) {
+      //        fLilypondCodeStream << " ~ %{ msrNoteKind::kNoteRegularInMeasure %}  "; // JMI v0.9.70
+            }
+          } // for
+        }
+
+//         S_msrTie
+//           noteTie =
+//             noteTheSyllableIsAttachedTo->getNoteTie ();
+//
 //         if (noteTie) {
 //           switch (noteTie->getTieKind ()) {
 //             case msrTieKind::kTieNone:
@@ -16076,40 +16092,40 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 //               break;
 //           } // switch
 //         }
-//       }
+      }
 
-//         {
-//           // get the note slurs
-//           const std::list<S_msrSlur>&
-//             noteSlursList =
-//               noteTheSyllableIsAttachedTo->getNoteSlursList ();
-//
-//           // take note's tie into account if any
-//           if (noteSlursList.size ()) {
-// //             doGenerateASkip = true;
-//           }
-//         }
+      {
+        // get the note slurs
+        const std::list<S_msrSlur>&
+          noteSlursList =
+            noteTheSyllableIsAttachedTo->getNoteSlursList ();
 
-//       // what it the syllable's extend kind?
-//       switch (syllable->getSyllableExtendKind ()) {
-//         case msrSyllableExtendKind::kSyllableExtend_NONE:
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//           doGenerateASkip = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//           break;
-//       } // switch
+        // take note's tie into account if any
+        if (noteSlursList.size ()) {
+//             doGenerateASkip = true;
+        }
+      }
+
+      // what it the syllable's extend kind?
+      switch (syllable->getSyllableExtendKind ()) {
+        case msrSyllableExtendKind::kSyllableExtend_NONE:
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeLess:
+          doGenerateASkip = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStart:
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+          doGenerateADoubleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStop:
+          break;
+      } // switch
       break;
 
     // ----------------------------------------------------
@@ -16126,26 +16142,27 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       }
 #endif // MF_TRACE_IS_ENABLED
 
-//       // what it the syllable's extend kind?
-//       switch (syllable->getSyllableExtendKind ()) {
-//         case msrSyllableExtendKind::kSyllableExtend_NONE:
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeLess:
-//           doGenerateADoubleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStart:
-//           doGenerateASingleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeContinue:
-//           doGenerateASingleUnderscore = true;
-//           break;
-//
-//         case msrSyllableExtendKind::kSyllableExtendTypeStop:
-//           break;
-//       } // switch
+      // what it the syllable's extend kind?
+      switch (syllable->getSyllableExtendKind ()) {
+        case msrSyllableExtendKind::kSyllableExtend_NONE:
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeLess:
+          doGenerateADoubleUnderscore = true;
+          doGenerateASkip = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStart:
+          doGenerateASingleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeContinue:
+          doGenerateASingleUnderscore = true;
+          break;
+
+        case msrSyllableExtendKind::kSyllableExtendTypeStop:
+          break;
+      } // switch
       break;
 
     // ----------------------------------------------------

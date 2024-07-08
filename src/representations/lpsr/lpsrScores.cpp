@@ -452,10 +452,18 @@ R"(\markup {
       ' ' <<
       getGlobalMusicFormatsVersionNumberAndDate () <<
       " and LilyPond \" (lilypond-version))" <<
+
+      // JMI v0.9.71
+//       \fill-line { \column { \italic { \concat { \lilypondFileName " - modified on " \modTimeAsString } } } }
+//       \fill-line { \column { \italic { \concat { "PDF file created on " \pdfCreationTime } } } }
+
 R"(
       }
-      \fill-line { \column { \italic { \concat { \lilypondFileName " - modified on " \modTimeAsString } } } }
-      \fill-line { \column { \italic { \concat { "PDF file created on " \pdfCreationTime } } } }
+      \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
+      \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileBaseName: " \lilypondFileBaseName } } } }
+%      \fill-line { \column { \italic { \concat { "lilypondFileSuffixlessName: " \lilypondFileSuffixlessName } } } }
+%      \fill-line { \column { \italic { \concat { "pdfFileName: " \pdfFileName } } } }
     }
   }
 )";
@@ -2793,23 +2801,49 @@ R"(
 % A set of functions to obtain the LilyPond file creation or modification time.
 )",
 
+      // JMI v0.9.71
+// R"(
+// #(define commandLine             (object->string (command-line)))
+// #(define loc                     (+ (string-rindex commandLine #\space ) 2))
+// #(define commandLineLength       (- (string-length commandLine) 2))
+// #(define lilypondFileName        (substring commandLine loc commandLineLength))
+// #(define lilypondFileNameSize    (object->string (stat:size (stat lilypondFileName))))
+// #(define lilypondVersion         (object->string (lilypond-version)))
+// #(define currentDate             (strftime "%d/%m/%Y" (localtime (current-time))))
+// #(define currentTime             (strftime "%H:%M:%S" (localtime (current-time))))
+// #(define lilypondFileNameModTime (stat:mtime (stat lilypondFileName)))
+//
+// #(define modTimeAsString (strftime "%d/%m/%Y, %H:%M:%S" (localtime lilypondFileNameModTime)))
+//
+// #(use-modules (srfi srfi-19))
+// % https://www.gnu.org/software/guile/manual/html_node/SRFI_002d19-Date-to-string.html
+// #(define pdfCreationTime (date->string (current-date) "~A, ~B ~e ~Y ~H:~M:~S"))
+
     schemeFunctionCode =
 R"(
 #(define commandLine             (object->string (command-line)))
 #(define loc                     (+ (string-rindex commandLine #\space ) 2))
 #(define commandLineLength       (- (string-length commandLine) 2))
 #(define lilypondFileName        (substring commandLine loc commandLineLength))
+
+#(define lilypondFileBaseName    (basename lilypondFileName))
+#(define lilypondFileSuffixlessName    (basename lilypondFileBaseName ".ly"))
+
+#(define pdfFileName             (string-append lilypondFileSuffixlessName ".pdf"))
+
 #(define lilypondFileNameSize    (object->string (stat:size (stat lilypondFileName))))
 #(define lilypondVersion         (object->string (lilypond-version)))
 #(define currentDate             (strftime "%d/%m/%Y" (localtime (current-time))))
 #(define currentTime             (strftime "%H:%M:%S" (localtime (current-time))))
-#(define lilypondFileNameModTime (stat:mtime (stat lilypondFileName)))
 
-#(define modTimeAsString (strftime "%d/%m/%Y, %H:%M:%S" (localtime lilypondFileNameModTime)))
+#(define lilypondFileModificationTime (stat:mtime (stat lilypondFileName)))
+
+#(define lilypondFileModificationTimeAsString (strftime "%A %d/%m/%Y, %H:%M:%S" (localtime lilypondFileModificationTime)))
 
 #(use-modules (srfi srfi-19))
 % https://www.gnu.org/software/guile/manual/html_node/SRFI_002d19-Date-to-string.html
-#(define pdfCreationTime (date->string (current-date) "~A, ~B ~e ~Y ~H:~M:~S"))
+%#(define pdfFileCreationTime (date->string (current-date) "~A, ~B ~e ~Y ~H:~M:~S"))
+#(define pdfFileCreationTime (date->string (current-date) "~A ~d/~m/~Y, ~H:~M:~S"))
 )";
 
 #ifdef MF_TRACE_IS_ENABLED

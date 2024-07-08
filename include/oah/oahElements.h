@@ -156,63 +156,70 @@ EXP std::ostream& operator << (std::ostream& os, const oahFindStringMatch& elt);
 class   oahElement;
 typedef SMARTP<oahElement> S_oahElement;
 
-// class EXP oahFindableElement : public smartable
-// {
-//   public:
-//
-//     // creation from MusicXML
-//     // ------------------------------------------------------
-//
-// /* this class is purely virtual
-//     static SMARTP<oahFindableElement> create ();
-// */
-//
-//   protected:
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           oahFindableElement ();
-//
-//     virtual               ~oahFindableElement ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//   public:
-//
-//     // public services
-//     // ------------------------------------------------------
-//
-//     virtual Bool          fetchElementsMatchingString (
-//                             const std::string&       lowerCaseString,
-//                             std::list<S_oahElement>& foundElementsList,
+class EXP oahFindableElement : public smartable
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+/* this class is purely virtual
+    static SMARTP<oahFindableElement> create ();
+*/
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahFindableElement ();
+
+    virtual               ~oahFindableElement ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    virtual Bool          findStringInFindableElement ( // JMI v0.9.71 OAH_OAH
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const = 0;
+
+    virtual Bool          fetchElementsMatchingString (
+                            const std::string&       lowerCaseString,
+                            std::list<S_oahElement>& foundElementsList,
 //                             std::ostream&            os) const = 0;
-//
-//   public:
-//
-//     // print
-//     // ------------------------------------------------------
-//
-//     virtual std::string   asString () const = 0;
-//
-//     virtual void          print (std::ostream& os) const = 0;
-//     virtual void          printFull (std::ostream& os) const
-//                               { print (os); }
-//
-//     virtual const std::string
+                            std::ostream&            os) const { return true; }; // JMI v0.9.71 OAH_OAH
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    virtual std::string   asString () const = 0;
+
+    virtual void          print (std::ostream& os) const = 0;
+    virtual void          printFull (std::ostream& os) const
+                              { print (os); }
+
+    virtual const std::string
 //                           containingFindableElementAsString () const = 0;
-//
-//   private:
-//
-//     // private fields
-//     // ------------------------------------------------------
-// };
-// typedef SMARTP<oahFindableElement> S_oahFindableElement;
-// EXP std::ostream& operator << (std::ostream& os, const S_oahFindableElement& elt);
-// EXP std::ostream& operator << (std::ostream& os, const oahFindableElement& elt);
+                          containingFindableElementAsString () const { return ""; }; // JMI v0.9.71 OAH_OAH
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+};
+typedef SMARTP<oahFindableElement> S_oahFindableElement;
+EXP std::ostream& operator << (std::ostream& os, const S_oahFindableElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const oahFindableElement& elt);
 
 //______________________________________________________________________________
 /*
@@ -224,7 +231,7 @@ typedef SMARTP<oahElement> S_oahElement;
 class   oahElement;
 typedef SMARTP<oahElement> S_oahElement;
 
-class EXP oahElement : public smartable // oahFindableElement
+class EXP oahElement : public oahFindableElement //  smartable
 {
   public:
 
@@ -329,10 +336,15 @@ class EXP oahElement : public smartable // oahFindableElement
     S_oahElement          thisElementIfItHasName (
                             const std::string& name);
 
-//     Bool                  fetchElementsMatchingString (
-//                             const std::string&       lowerCaseString,
-//                             std::list<S_oahElement>& foundElementsList,
-//                             std::ostream&            os) const override;
+    Bool                  findStringInFindableElement (
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const override;
+
+    Bool                  fetchElementsMatchingString (
+                            const std::string&       lowerCaseString,
+                            std::list<S_oahElement>& foundElementsList,
+                            std::ostream&            os) const override;
 
     virtual Bool          elementMatchesString (
                             const std::string& lowerCaseString) const;
@@ -359,7 +371,7 @@ class EXP oahElement : public smartable // oahFindableElement
 
     std::string           asLongNamedOptionString () const;
 
-    virtual std::string   asString () const;
+    virtual std::string   asString () const override;
     virtual std::string   asShortString () const;
 
     virtual void          printOptionHeader (std::ostream& os) const;
@@ -371,8 +383,8 @@ class EXP oahElement : public smartable // oahFindableElement
                             std::ostream& os,
                             int fieldWidth) const;
 
-    virtual void          print (std::ostream& os) const;
-    virtual void          printFull (std::ostream& os) const;
+    virtual void          print (std::ostream& os) const override;
+    virtual void          printFull (std::ostream& os) const override;
 
     virtual void          printHelp (std::ostream& os) const;
 

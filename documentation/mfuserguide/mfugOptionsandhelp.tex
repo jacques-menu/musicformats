@@ -179,9 +179,9 @@ jacquesmenu@macmini > xml2ly -query msr-pitches-language
 \end{lstlisting}
 
 \item expecting an optional value, supplied with a '=' without any spaces:
-a default value is used if none is provided by the user, such as \optionNameBoth{name-help}{nh}, presented in more detail at \sectionRef{Querying about options by name}:
+a default value is used if none is provided by the user, such as \optionNameBoth{help-about-option-name}{name}, presented in more detail at \sectionRef{Querying about options by name}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > xml2ly -name-help=output-file-name
+jacquesmenu@macmini > xml2ly -help-about-option-name=output-file-name
 --- Help for atom "output-file-name" in subgroup "Files"
     -output-file-name, -obj FILENAME
           Write output to file FILENAME instead of standard output.
@@ -303,7 +303,7 @@ jacquesmenu@macmini: ~ >  xml2ly -help-midi
 \section{Querying about options by name}\label{Querying about options by name}
 % -------------------------------------------------------------------------
 
-One can obtain help on any specific group, sub-group or atom with the \optionName{query} option:
+One can obtain help on any specific group, sub-group or atom with \optionNameBoth{query-help}{query} option:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -query query
 --- Help for atom "query" in subgroup "Options and help"
@@ -318,41 +318,41 @@ jacquesmenu@macmini > xml2ly -query output-file-name
           Write output to file FILENAME instead of standard output.
 \end{lstlisting}
 
-Another option exists to obtain the same result: \optionNameBoth{name-help}{nh} has an optional value:
+Another option exists to obtain the same result: \optionNameBoth{help-about-option-name}{name} has an optional value:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > xml2ly -name-help=output-file-name
+jacquesmenu@macmini > xml2ly -help-about-option-name=output-file-name
 --- Help for atom "output-file-name" in subgroup "Files"
     -output-file-name, -obj FILENAME
           Write output to file FILENAME instead of standard output.
 \end{lstlisting}
 
-The default value if none is supplied is\dots \code{name-help} itself:
+The default value if none is supplied is\dots \code{help-about-option-name} itself:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > xml2ly -name-help
---- Help for atom "name-help" in subgroup "Options and help"
-    -name-help, -nh OPTION_NAME
+jacquesmenu@macmini > xml2ly -help-about-option-name
+--- Help for atom "help-about-option-name" in subgroup "Options and help"
+    -help-about-option-name, -name OPTION_NAME
           Print help about OPTION_NAME.
-          OPTION_NAME is optional, and the default value is 'name-help'.
+          OPTION_NAME is optional, and the default value is 'help-about-option-name'.
 \end{lstlisting}
 
-Choosing one option of the other is a matter of taste. To be honest, \optionNameBoth{name-help}{nh} has been created to illustrate optional values\dots
+Choosing one option of the other is a matter of taste. To be honest, \optionNameBoth{help-about-option-name}{name} has been created to illustrate optional values\dots
 
 
 % -------------------------------------------------------------------------
 \section{Searching the help for a string}
 % -------------------------------------------------------------------------
 
-The \mf\ \service s have a great number of options. \Option{find} comes in handy to search the available help:
+The \mf\ \service s have a great number of options. \optionNameBoth{find-string-in-help}{find} comes in handy to search the available help:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > xml2ly -query find
---- Help for atom "find" in subgroup "Options and help"
-    -find STRING
+jacquesmenu@macmini > xml2ly -query find-string-in-help
+--- Help for atom "find-string-in-help" in subgroup "Options and help"
+    -find-string-in-help, -find STRING
           Find string STRING in the help.
           The search is case insensitive, and a '-' is added in front of options names for clarity.
 \end{lstlisting}
 
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > xml2ly -find output-file-name
+jacquesmenu@macmini > xml2ly -find-string-in-help output-file-name
 2 occurrences of string "output-file-name" have been found:
    1:
     Atom in subgroup "Files" in group "Files group"
@@ -385,7 +385,7 @@ xml2ly options usage:
 
   The options are organized in a group-subgroup-atom hierarchy.
   Help can be obtained for groups or subgroups at will,
-  as well as for any option with the '-name-help, -nh' option.
+  as well as for any option with the '-help-about-option-name, -name' option.
 
   A subgroup can be showm as a header only, in which case its description is printed
   only when the corresponding short or long names are used.
@@ -805,7 +805,7 @@ Input file name or '-' for standard input expected
 % -------------------------------------------------------------------------
 
 \mf\ provides many options to display its internals, including the representations it builds. \\
-\Option{find} can be used to see the various possibilities:
+\optionNameBoth{find-string-in-help}{find} can be used to see the various possibilities:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -find display-
 \end{lstlisting}

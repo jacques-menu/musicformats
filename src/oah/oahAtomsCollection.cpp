@@ -13216,19 +13216,21 @@ void oahFindStringInHelpAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // theString is the string to be found in the help
+
   // a strings list to collect the results
-  std::list<S_oahFindStringMatch> foundMatchesList;
+  std::list<S_oahFindStringMatch> foundStringMatchesList;
 
   // delegate this to the handler
   fetchAtomUpLinkToHandler ()->
     findStringInFindableElement (
       mfStringToLowerCase (theString),
-      foundMatchesList,
+      foundStringMatchesList,
       os);
 
   //  print the found strings
-  size_t foundMatchesListSize =
-    foundMatchesList.size ();
+  size_t foundStringMatchesListSize =
+    foundStringMatchesList.size ();
 
   int saveIndent = gIndenter.getIndentation ();
 
@@ -13236,15 +13238,15 @@ void oahFindStringInHelpAtom::applyAtomWithValue (
 
   os <<
     mfSingularOrPlural (
-      foundMatchesListSize, "occurrence", "occurrences") <<
+      foundStringMatchesListSize, "occurrence", "occurrences") <<
     " of string \"" <<
     theString <<
     "\" " <<
     mfSingularOrPluralWithoutNumber (
-      foundMatchesListSize, "has", "have") <<
+      foundStringMatchesListSize, "has", "have") <<
     " been found";
 
-  if (foundMatchesListSize) {
+  if (foundStringMatchesListSize) {
     os <<
       ":" <<
       std::endl;
@@ -13252,8 +13254,8 @@ void oahFindStringInHelpAtom::applyAtomWithValue (
     ++gIndenter;
 
     std::list<S_oahFindStringMatch>::const_iterator
-      iBegin = foundMatchesList.begin (),
-      iEnd   = foundMatchesList.end (),
+      iBegin = foundStringMatchesList.begin (),
+      iEnd   = foundStringMatchesList.end (),
       i      = iBegin;
 
     int counter = 0;
@@ -13515,10 +13517,12 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // a strings list to collect the results
-  std::list<S_oahElement> foundElementsList; // JMI v0.9.70
+  // theString is the pattern to be found in the help
 
-  // delegate this to the handler // JMI v0.9.70
+  // an element list to collect the results
+  std::list<S_oahElement> foundElementsList; // JMI v0.9.71
+
+  // delegate this to the handler // JMI v0.9.71
   Bool foundString =
 		fetchAtomUpLinkToHandler ()->
 			fetchElementsMatchingString (
@@ -13526,15 +13530,7 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
 				foundElementsList,
 				os);
 
-	if (foundString) {
-		// print the atom
-		os << "THIS atom matches:" <<
-			std::endl;
-
-		print (os);
-	}
-
-  //  print the found strings
+  //  print the found elements
   size_t foundMatchesListSize =
     foundElementsList.size ();
 
@@ -13545,7 +13541,7 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
   os <<
     mfSingularOrPlural (
       foundMatchesListSize, "occurrence", "occurrences") <<
-    " of string \"" <<
+    " of pattern \"" <<
     theString <<
     "\" " <<
     mfSingularOrPluralWithoutNumber (
@@ -13559,7 +13555,7 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    std::list<S_oahElement>::const_iterator // JMI v0.9.70
+    std::list<S_oahElement>::const_iterator // JMI v0.9.71
       iBegin = foundElementsList.begin (),
       iEnd   = foundElementsList.end (),
       i      = iBegin;
@@ -13567,7 +13563,7 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
     int counter = 0;
 
     for ( ; ; ) {
-      S_oahElement matchingElement = (*i); // JMI v0.9.70
+      S_oahElement matchingElement = (*i); // JMI v0.9.71
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
@@ -13598,16 +13594,16 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
 
       os << matchingElement << std::endl;
 
-//       // indent a bit more for readability
-//       gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-//
-//       gIndenter.indentMultiLineString (
-//         foundString,
-//         os);
-//
-//       // unindent a bit more for readability
-//       gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-//       --gIndenter;
+      // indent a bit more for readability
+      gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
+
+      gIndenter.indentMultiLineString (
+        "foundString HOO",
+        os);
+
+      // unindent a bit more for readability
+      gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+      --gIndenter;
 
       if (++i == iEnd) break;
 

@@ -71,6 +71,16 @@ S_mfcPassComponent createMxsr2msrComponent ()
             "Removed extra msrWedgeKind::kWedgeStop creation in mxsr2msr"
           }
       ));
+
+    pPassComponent->
+      appendVersionToComponent (
+        mfcVersion::create (
+          mfcVersionNumber::createFromString ("0.9.71"),
+          "July 3, 2024",
+          std::list<std::string> {
+            "Fixed an issue is pedals handling"
+          }
+      ));
   }
 
   return pPassComponent;

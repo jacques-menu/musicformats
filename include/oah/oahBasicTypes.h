@@ -375,7 +375,13 @@ EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const oahHandlerUsedThruKind& theChar);
 
 //______________________________________________________________________________
-class EXP oahPrefix : public smartable // oahFindableElement
+class EXP oahPrefix : public oahFindableElement //  smartable
+/* JMI v0.9.71 OAH_OAH
+An options prefix 'trace' --> 'trace-' allows:
+  -trace=abc,def,gh
+to be developped into :
+  -trace-abc -trace-def -trace-gh
+*/
 {
   public:
 
@@ -420,6 +426,11 @@ class EXP oahPrefix : public smartable // oahFindableElement
 
     std::string           fetchPrefixNames () const;
 
+    Bool                  findStringInFindableElement (
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const override;
+
     Bool                  fetchElementsMatchingStringInPrefix (
                             const std::string&       lowerCaseString,
                             std::list<S_oahElement>& foundElementsList,
@@ -440,14 +451,14 @@ class EXP oahPrefix : public smartable // oahFindableElement
     // print
     // ------------------------------------------------------
 
-    std::string           asString () const;
+    std::string           asString () const override;
 
     void                  printPrefixHeader (std::ostream& os) const;
 
     virtual void          printPrefixEssentials (
                             std::ostream& os) const;
 
-    void                  print (std::ostream& os) const;
+    void                  print (std::ostream& os) const override;
 
     virtual void          printHelp (std::ostream& os) const;
 
@@ -561,6 +572,11 @@ class EXP oahAtom : public oahElement
     void                  printFull (std::ostream& os) const override;
 
     void                  printSummary (std::ostream& os) const;
+
+    virtual Bool          findStringInAtom (
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const;
 
     virtual Bool          atomMatchesString (
                             const std::string& lowerCaseString,
@@ -1282,9 +1298,9 @@ class EXP oahSubGroup : public oahElement
                             const S_oahSubGroup& subGroup) const;
 
     Bool                  findStringInSubGroup (
-                            const std::string&       lowerCaseString,
-                            std::list<S_oahElement>& foundElementsList,
-                            std::ostream&            os) const;
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const;
 
     void                  printSubGroupOptionsValues (
                             std::ostream& os,
@@ -1493,6 +1509,11 @@ class EXP oahGroup : public oahElement
                             std::ostream&        os,
                             const S_oahSubGroup& subGroup) const;
 
+    void                  findStringInGroup (
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const;
+
     Bool                  fetchElementsMatchingStringInGroup (
                             const std::string&       lowerCaseString,
                             std::list<S_oahElement>& foundElementsList,
@@ -1551,7 +1572,7 @@ typedef SMARTP<oahGroup> S_oahGroup;
 EXP std::ostream& operator << (std::ostream& os, const S_oahGroup& elt);
 
 //_______________________________________________________________________________
-class EXP oahHandler : public smartable // oahFindableElement
+class EXP oahHandler : public oahFindableElement //  smartable
 {
   public:
 
@@ -1786,10 +1807,10 @@ class EXP oahHandler : public smartable // oahFindableElement
 
 //     void                  displayArgumentsVector (std::ostream& os) const; JMI v0.9.65
 
-    virtual std::string   asString () const;
+    virtual std::string   asString () const override;
 
-    virtual void          print (std::ostream& os) const;
-    virtual void          printFull (std::ostream& os) const;
+    virtual void          print (std::ostream& os) const override;
+    virtual void          printFull (std::ostream& os) const override;
 
     void                  printSummary (std::ostream& os) const;
 
@@ -1806,6 +1827,11 @@ class EXP oahHandler : public smartable // oahFindableElement
     void                  printNameIntrospectiveHelp (
                             std::ostream&      os,
                             const std::string& name);
+
+    Bool                  findStringInFindableElement (
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const override;
 
     Bool                  fetchElementsMatchingStringInHandler (
                             const std::string&       lowerCaseString,

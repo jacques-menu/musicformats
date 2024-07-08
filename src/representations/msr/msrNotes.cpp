@@ -3093,57 +3093,59 @@ void msrNote::appendPedalToNote (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fNotePedalsList.size ()) {
-    if (
-      fNotePedalsList.back ()->getPedalTypeKind () == msrPedalTypeKind::kPedalTypeStart
-        &&
-      pedal->getPedalTypeKind () == msrPedalTypeKind::kPedalTypeStop
-    ) {
-      // it may happen that a given note has a 'pedal start'
-      // and a 'pedal stop' in sequence, ignore both            // JMI ???
+//   if (fNotePedalsList.size ()) { // JMI v0.9.71
+//     if (
+//       fNotePedalsList.back ()->getPedalTypeKind () == msrPedalTypeKind::kPedalTypeStart
+//         &&
+//       pedal->getPedalTypeKind () == msrPedalTypeKind::kPedalTypeStop
+//     ) {
+//       // it may happen that a given note has a 'pedal start'
+//       // and a 'pedal stop' in sequence, ignore both            // JMI ???
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTracePedals ()) {
+//         std::stringstream ss;
+//
+//         ss <<
+//           "a 'pedal start' is immediately followed by a 'pedal stop'" <<
+//           std::endl <<
+//           "with the same number, ignoring both of them at line " <<
+//           pedal->getInputStartLineNumber ();
+//
+//         msrWarning (
+//           gServiceRunData->getInputSourceName (),
+//           pedal->getInputStartLineNumber (),
+//           ss.str ());
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       // rmeove 'pedal start'
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTracePedals ()) {
+//         std::stringstream ss;
+//
+//         ss <<
+//           "Removing last pedal (start) for note '" <<
+//           asShortString ();
+//
+//         gWaeHandler->waeTrace (
+//           __FILE__, __LINE__,
+//           ss.str ());
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//       fNotePedalsList.pop_back ();
+//
+//       // don't register 'pedal stop'
+//     }
+//
+//     else
+//       fNotePedalsList.push_back (pedal);
+//   }
+//
+//   else
+//     fNotePedalsList.push_back (pedal);
 
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTracePedals ()) {
-        std::stringstream ss;
-
-        ss <<
-          "a 'pedal start' is immediately followed by a 'pedal stop'" <<
-          std::endl <<
-          "with the same number, ignoring both of them at line " <<
-          pedal->getInputStartLineNumber ();
-
-        msrWarning (
-          gServiceRunData->getInputSourceName (),
-          pedal->getInputStartLineNumber (),
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      // rmeove 'pedal start'
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTracePedals ()) {
-        std::stringstream ss;
-
-        ss <<
-          "Removing last pedal (start) for note '" <<
-          asShortString ();
-
-        gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-      fNotePedalsList.pop_back ();
-
-      // don't register 'pedal stop'
-    }
-
-    else
-      fNotePedalsList.push_back (pedal);
-  }
-
-  else
-    fNotePedalsList.push_back (pedal);
+	fNotePedalsList.push_back (pedal);
 }
 
 void msrNote::appendSlashToNote (

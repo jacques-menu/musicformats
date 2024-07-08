@@ -195,7 +195,7 @@ class EXP oahFindableElement : public smartable
                             const std::string&       lowerCaseString,
                             std::list<S_oahElement>& foundElementsList,
 //                             std::ostream&            os) const = 0;
-                            std::ostream&            os) const { return false; }; // JMI v0.9.71 OAH_OAH
+                            std::ostream&            os) const { return true; }; // JMI v0.9.71 OAH_OAH
 
   public:
 

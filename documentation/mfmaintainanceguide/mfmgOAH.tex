@@ -976,7 +976,7 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
 \section{Options and help introspection}
 % -------------------------------------------------------------------------
 
-OAH represents options and the associated help in a tree of groups containing subgroups containing atoms. Searching it is easy, and there are options {\tt -query} and {\tt -find} for that.
+OAH represents options and the associated help in a tree of groups containing subgroups containing atoms. Searching it is easy, and there are \optionNameBoth{query-help}{query} and \optionNameBoth{find-string-in-help}{find} for that.
 
 Option '-query' provides informations about an option name:
 \begin{lstlisting}[language=Terminal]
@@ -1451,10 +1451,11 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
 
 
 % -------------------------------------------------------------------------
-\section{Implementing the {\tt -find} option}
+\section{Implementing the '{\tt -find-string-in-help, -find} option}
 % -------------------------------------------------------------------------
 
-\Class{oahFindableElement} in \oahBoth{oahElements} is the base class   of all those that can be found with this \Main{introspection} option:
+\Class{oahFindableElement} in \oahBoth{oahElements} is the base class of all those that can be found with this \Main{introspection} option.
+In \oah{oahElements.h} we have:
 \begin{lstlisting}[language=Terminal]
 class EXP oahFindableElement : public smartable
 {
@@ -1474,8 +1475,8 @@ class EXP oahFindableElement : public smartable
     // public services
     // ------------------------------------------------------
 
-    virtual Bool          findStringInFindableElement (
-                            const std::string&          lowerCaseString,
+    virtual Bool          findStringInFindableElement ( // JMI v0.9.71 OAH_OAH
+                            const std::string&               lowerCaseString,
                             std::list<S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const = 0;
 
@@ -1487,8 +1488,12 @@ class EXP oahFindableElement : public smartable
     virtual std::string   asString () const = 0;
 
     virtual void          print (std::ostream& os) const = 0;
+    virtual void          printFull (std::ostream& os) const
+                              { print (os); }
 
-		virtual const std::string 	containingFindableElementAsString () const = 0;
+    virtual const std::string
+//                           containingFindableElementAsString () const = 0;
+                          containingFindableElementAsString () const { return ""; }; // JMI v0.9.71 OAH_OAH
 
   private:
 
@@ -1497,7 +1502,7 @@ class EXP oahFindableElement : public smartable
 };
 \end{lstlisting}
 
-When matches are found, there are stored in a list of instances of \className{oahFindStringMatch}:
+When matches are found, there are stored in a list of instances of \className{oahFindStringMatch}, declared in \oah{oahElements.h}:
 \begin{lstlisting}[language=Terminal]
 class   oahFindStringMatch : public smartable
 {
@@ -1508,99 +1513,157 @@ class   oahFindStringMatch : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::string			      fFoundString;
-		std::string           fContainingFindableElementInfo;
+    std::string           fElementName;
+
+    std::string           fFoundString;
+    std::string           fContainingFindableElementInfo;
 };
 \end{lstlisting}
 
 The \fieldName{fContainingFindableElementInfo} describes the \oahRepr\ element that the string was found in, either in its option name(s) or in its description.
 
 For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oahElement.cpp} creates an instance and appends it to the list :
-\begin{lstlisting}[language=Terminal]
-Bool oahHandler::findStringInFindableElement (
-	const std::string&     lowerCaseString,
-	std::list<S_oahFindStringMatch>& foundMatchesList,
-	std::ostream&                    os) const
+
+%Bool oahHandler::findStringInFindableElement (
+%	const std::string&     lowerCaseString,
+%	std::list<S_oahFindStringMatch>& foundMatchesList,
+%	std::ostream&                    os) const
+%{
+%	Bool result;
+%
+%	// .. .. ..
+%
+%  // does this handler's header match?
+%  Bool headerMatches =
+%    mfStringToLowerCase (fHandlerHeader).find (lowerCaseString) != std::string::npos;
+%
+%  // does this handler's description match?
+%  Bool descriptionMatches =
+%    mfStringToLowerCase (fHandlerDescription).find (lowerCaseString) != std::string::npos;
+%
+%  // does this handler's usage match?
+%  Bool usageMatches =
+%    mfStringToLowerCase (fHandlerUsage).find (lowerCaseString) != std::string::npos;
+%
+%  if (headerMatches || descriptionMatches || usageMatches) {
+%    std::stringstream ss;
+%
+%    ss <<
+%      fHandlerHeader <<
+%      ' ' <<
+%      fHandlerDescription <<
+%      ' ' <<
+%      fHandlerUsage;
+%
+%    // append the match to foundStringsList
+%    foundMatchesList.push_back (
+%      oahFindStringMatch::create (
+%        ss.str (),
+%        containingFindableElementAsString ()));
+%
+%    result = true;
+%  }
+%
+%  // do this handler's prefixes match?
+%  if (fHandlerPrefixesMap.size ()) {
+%    ++gIndenter;
+%
+%    for (
+%      std::map<std::string, S_oahPrefix>::const_iterator i =
+%        fHandlerPrefixesMap.begin ();
+%      i != fHandlerPrefixesMap.end ();
+%      ++i
+%    ) {
+%      S_oahPrefix
+%        prefix = (*i).second;
+%
+%      // does the prefix match?
+%      prefix->
+%        findStringInFindableElement (
+%          lowerCaseString,
+%          foundMatchesList,
+%          os);
+%    } // for
+%
+%    --gIndenter;
+%  }
+%
+%  // do this handler's groups match?
+%  if (fHandlerGroupsList.size ()) {
+%    ++gIndenter;
+%
+%    for (S_oahGroup group : fHandlerGroupsList) {
+%      group->
+%        findStringInGroup (
+%          lowerCaseString,
+%          foundMatchesList,
+%          os);
+%    } // for
+%
+%    --gIndenter;
+%  }
+%
+%  return result;
+%}
+
+\begin{lstlisting}[language=CPlusPlus]
+Bool oahElement::findStringInFindableElement (
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
 {
-	Bool result;
+  Bool result;
 
-	// .. .. ..
-
-  // does this handler's header match?
-  Bool headerMatches =
-    mfStringToLowerCase (fHandlerHeader).find (lowerCaseString) != std::string::npos;
-
-  // does this handler's description match?
-  Bool descriptionMatches =
-    mfStringToLowerCase (fHandlerDescription).find (lowerCaseString) != std::string::npos;
-
-  // does this handler's usage match?
-  Bool usageMatches =
-    mfStringToLowerCase (fHandlerUsage).find (lowerCaseString) != std::string::npos;
-
-  if (headerMatches || descriptionMatches || usageMatches) {
-    std::stringstream ss;
-
-    ss <<
-      fHandlerHeader <<
-      ' ' <<
-      fHandlerDescription <<
-      ' ' <<
-      fHandlerUsage;
-
+  if (elementMatchesString (lowerCaseString)) {
     // append the match to foundStringsList
     foundMatchesList.push_back (
       oahFindStringMatch::create (
-        ss.str (),
+        fetchNames (),
+        fDescription,
         containingFindableElementAsString ()));
 
     result = true;
-  }
-
-  // do this handler's prefixes match?
-  if (fHandlerPrefixesMap.size ()) {
-    ++gIndenter;
-
-    for (
-      std::map<std::string, S_oahPrefix>::const_iterator i =
-        fHandlerPrefixesMap.begin ();
-      i != fHandlerPrefixesMap.end ();
-      ++i
-    ) {
-      S_oahPrefix
-        prefix = (*i).second;
-
-      // does the prefix match?
-      prefix->
-        findStringInFindableElement (
-          lowerCaseString,
-          foundMatchesList,
-          os);
-    } // for
-
-    --gIndenter;
-  }
-
-  // do this handler's groups match?
-  if (fHandlerGroupsList.size ()) {
-    ++gIndenter;
-
-    for (S_oahGroup group : fHandlerGroupsList) {
-      group->
-        findStringInGroup (
-          lowerCaseString,
-          foundMatchesList,
-          os);
-    } // for
-
-    --gIndenter;
   }
 
   return result;
 }
 \end{lstlisting}
 
-The same holds for \method{oahPrefix}{findStringInFindableElement} in \oah{oahElements.cpp}.
+Prefixes are handled this way in \method{oahPrefix}{findStringInFindableElement} in \oah{oahBasicTypes.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+Bool oahPrefix::findStringInFindableElement (
+  const std::string&               lowerCaseString,
+  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::ostream&                    os) const
+{
+  Bool result;
+
+  // does this element's short name match?
+  Bool prefixNameMatches =
+    mfStringToLowerCase (fPrefixName).find (lowerCaseString) != std::string::npos;
+
+  // does this element's long name match?
+  Bool prefixErsatzMatches =
+    mfStringToLowerCase (fPrefixErsatz).find (lowerCaseString) != std::string::npos;
+
+  // does this element's description match?
+  Bool prefixDescriptionMatches =
+    mfStringToLowerCase (fPrefixDescription).find (lowerCaseString) != std::string::npos;
+
+  if (prefixNameMatches || prefixErsatzMatches || prefixDescriptionMatches) {
+    // append the match to foundStringsList
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        fetchPrefixNames (),
+        fPrefixDescription,
+        containingFindableElementAsString ()));
+
+    result = true;
+  }
+
+  return result;
+}
+\end{lstlisting}
 
 
 % -------------------------------------------------------------------------
