@@ -18,7 +18,7 @@ function usage ()
     echo "Parameter error:"
     echo "  '"$1"'" "is unknown"
     echo "Usage is:"
-    echo "sudo  $0 "
+    echo " $0 "
     echo
     exit 1
   }
