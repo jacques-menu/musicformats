@@ -20,18 +20,13 @@
 
 using namespace std;
 
-namespace MusicXML2
+namespace MusicXML2 
 {
 
 //______________________________________________________________________________
 // xmlattribute
 //______________________________________________________________________________
-Sxmlattribute xmlattribute::create ()
-{
-  xmlattribute * o = new xmlattribute;
-  assert (o!=0);
-  return o;
-}
+Sxmlattribute xmlattribute::create() { xmlattribute * o = new xmlattribute; assert(o!=0); return o; }
 
 //______________________________________________________________________________
 void xmlattribute::setName (const string& name) 		{ fName = name; }
@@ -68,12 +63,7 @@ xmlattribute::operator float () const	{ return (float)atof(fValue.c_str()); }
 //______________________________________________________________________________
 // xmlelement
 //______________________________________________________________________________
-Sxmlelement xmlelement::create (int inputStartLineNumber)
-{
-  xmlelement * o = new xmlelement (inputStartLineNumber);
-  assert(o!=0);
-  return o;
-}
+Sxmlelement xmlelement::create(int lineno)			{ xmlelement * o = new xmlelement(lineno); assert(o!=0); return o; }
 void xmlelement::setValue (int value)				{ setValue((long)value); }
 void xmlelement::setValue (const string& value) 	{ fValue = value; }
 void xmlelement::setName (const string& name) 		{ fName = name; }
@@ -103,7 +93,7 @@ void xmlelement::setValue (float value)
 
 //______________________________________________________________________________
 long xmlelement::add (const Sxmlattribute& attr)
-{
+{ 
 	fAttributes.push_back(attr);
 	return long(fAttributes.size()-1);
 }
@@ -127,7 +117,7 @@ void xmlelement::acceptOut(basevisitor& v) {
 }
 
 //______________________________________________________________________________
-const Sxmlattribute xmlelement::getAttribute(const string& attrname) const
+const Sxmlattribute xmlelement::getAttribute(const string& attrname) const 
 {
 	vector<Sxmlattribute>::const_iterator it;
 	for (it = attributes().begin(); it != attributes().end(); it++) {
@@ -192,7 +182,7 @@ bool xmlelement::operator ==(const xmlelement& elt) const
 
 //______________________________________________________________________________
 ctree<xmlelement>::iterator xmlelement::find(int type)
-{
+{ 
 	return find(type, begin());
 }
 
@@ -229,7 +219,7 @@ float xmlelement::getFloatValue	(int subElementType, float defaultvalue)
 	ctree<xmlelement>::iterator iter = find(subElementType);
 	return (iter != end()) ? float(*(*iter)) : defaultvalue;
 }
-
+    
 bool xmlelement::hasSubElement(int subElementType)
 {
     ctree<xmlelement>::iterator iter = find(subElementType);
@@ -247,7 +237,7 @@ bool xmlelement::hasSubElement(int subElementType, std::string value)
         iter++;
     }
     return false;
-
+    
 }
 
 }

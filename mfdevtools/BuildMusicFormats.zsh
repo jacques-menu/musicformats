@@ -76,7 +76,9 @@ echo
 echo '--> cmake'
 echo
 
-cmake .
+# -S sets CMAKE_SOURCE_DIR
+# -B sets CMAKE_BINARY_DIR
+cmake -S . -B . .
 echo
 
 

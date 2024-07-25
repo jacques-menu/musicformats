@@ -1,21 +1,24 @@
 #===============================================================
-# CMAKE libmusicformats
-#===============================================================
-
-project(libmusicformats)
-
-
-#===============================================================
 # cmake
 #===============================================================
 
-cmake_minimum_required(VERSION 3.4.0)
+cmake_minimum_required(VERSION 3.5.0)
 
 if (CMAKE_CONFIGURATION_TYPES)
   set (CMAKE_CONFIGURATION_TYPES Debug Release)
 endif ()
 
 set (CMAKE_VERBOSE_MAKEFILE ON) # JMI
+
+message (STATUS "-----> FOOFOO  CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}")
+message (STATUS "-----> FOOFOO  CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}")
+
+
+#===============================================================
+# CMAKE libmusicformats
+#===============================================================
+
+project(libmusicformats)
 
 
 #===============================================================
@@ -233,14 +236,14 @@ foreach (folder ${MF_SRC_FOLDERS})
   set (PUBLIC_HEADERS ${PUBLIC_HEADERS} "${MF_SRC_DIR}/${folder}/*.h")
   set (SOURCES ${SOURCES} "${MF_SRC_DIR}/${folder}/*.cpp")
 endforeach ()
-message (STATUS "-----> PUBLIC_HEADERS: ${PUBLIC_HEADERS}")
-message (STATUS "-----> SOURCES: ${SOURCES}")
+message (STATUS "-----> FOOFOO PUBLIC_HEADERS: ${PUBLIC_HEADERS}")
+message (STATUS "-----> FOOFOO  SOURCES: ${SOURCES}")
 
 file (GLOB CORE_SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SOURCES})
-# message (STATUS "-----> CORE_SOURCES: ${CORE_SOURCES}")
+# message (STATUS "-----> FOOFOO  CORE_SOURCES: ${CORE_SOURCES}")
 
 file (GLOB CORE_HEADERS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${PUBLIC_HEADERS})
-message (STATUS "-----> CORE_HEADERS: ${CORE_HEADERS}")
+message (STATUS "-----> FOOFOO  CORE_HEADERS: ${CORE_HEADERS}")
 
 # add libmusicmxl2 include folders
 foreach (folder ${LXML_SRC_FOLDERS})
@@ -252,7 +255,7 @@ foreach (folder ${MF_SRC_FOLDERS})
   set (INCLUDES ${INCLUDES} "${MF_SRC_DIR}/${folder}")
 endforeach (folder)
 
-message (STATUS "-----> INCLUDES: ${INCLUDES}")
+message (STATUS "-----> FOOFOO  INCLUDES: ${INCLUDES}")
 
 
 #===============================================================
@@ -288,7 +291,7 @@ message (STATUS "-----> LIBCONTENT: ${LIBCONTENT}")
 # library
 #===============================================================
 
-set (staticlib musicformatsstatic)
+set (staticlib libmusicformatsstatic)
 
 if (NOT IOS)
   message (STATUS "-----> NOT IOS, adding SHARED library ${target}")

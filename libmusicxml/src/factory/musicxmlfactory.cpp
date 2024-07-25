@@ -37,10 +37,10 @@ musicxmlfactory::musicxmlfactory ()
 	fFile->set( new TXMLDecl("1.0", "", TXMLDecl::kNo));
 	fFile->set( new TDocType("score-partwise"));
 	fFile->set (fRoot);
-
+	
 	fIdentification = factory::instance().create(k_identification);
 	fRoot->push (fIdentification);
-
+	
 	fPartList = factory::instance().create(k_part_list);
 	fRoot->push (fPartList);
 }
@@ -100,11 +100,6 @@ Sxmlelement musicxmlfactory::newmeasure(int number) const
 	return measure;
 }
 
-// 		// JMI C++17
-// #include <sstream>
-// // #include <iostream>
-// #include <string>
-
 //------------------------------------------------------------------------
 Sxmlelement musicxmlfactory::newmeasure (int number, const char* time, const char* clef, int line, int key, int division) const
 {
@@ -114,16 +109,6 @@ Sxmlelement musicxmlfactory::newmeasure (int number, const char* time, const cha
 	if (time) {
 		int beat, beatType;
 		int n = sscanf (time, "%d/%d", &beat, &beatType);
-
-// 		// JMI C++17
-// 		std::cout << "===> newmeasure() sscanf (), beat = " << beat << ", beatType = " << beatType << std::endl;
-//
-// 		std::cout << "newmeasure(), time = " << time << std::endl;
-//     std::istringstream inputStream (time);
-//     std::string slash;
-//     inputStream >> beat >> slash >> beatType;
-// 		std::cout << "===> beat = " << beat << ", slash = " << slash << ", beatType = " << beatType << std::endl;
-
 		if (n == 2) {
 			Sxmlelement t = element (k_time);
 			t->push (element(k_beats, beat));
@@ -233,7 +218,7 @@ void musicxmlfactory::tie (Sxmlelement start, Sxmlelement stop)
 	Sxmlelement tiedStart = element (k_tied);
 	tiedStart->add (attribute ("type", "start"));
 	addnotation (start, tiedStart);
-
+	
 	Sxmlelement tieStop = element (k_tie);
 	tieStop->add (attribute ("type", "stop"));
 	stop->push (tieStop);
@@ -273,12 +258,12 @@ void musicxmlfactory::addgroup (int number, const char* name, const char* abbrev
 	Sxmlelement groupStop = element(k_part_group);
 	groupStop->add (attribute ("number", number));
 	groupStop->add (attribute ("type", "stop"));
-	fPartList->push (groupStop);
+	fPartList->push (groupStop);	
 }
 
 //------------------------------------------------------------------------
-void musicxmlfactory::addpart (const Sxmlelement& part)
-{
+void musicxmlfactory::addpart (const Sxmlelement& part)	
+{ 
 	switch (part->getType()) {
 		case k_score_part:
 			fPartList->push(part);
@@ -294,7 +279,7 @@ void musicxmlfactory::addpart (const Sxmlelement& part)
 //------------------------------------------------------------------------
 void musicxmlfactory::add (Sxmlelement elt, const std::vector<Sxmlelement>& subelts) const
 {
-	for (unsigned int i=0; i < subelts.size(); i++)
+	for (unsigned int i=0; i < subelts.size(); i++) 
 		elt->push( subelts[i]);
 }
 

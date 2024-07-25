@@ -95,15 +95,20 @@ class EXP xmlelement : public ctree<xmlelement>, public visitable
 	protected:
 		// the element type
 		int fType;
-		// the input line numbers for messages to the user
+
+		// the input line number for messages to the user
+// 		int fInputLineNumber; JMI
 		int fInputStartLineNumber;
 		int fInputEndLineNumber;
 
+//     JMI
+//     xmlelement (int inputLineNumber) : fType(0), fInputLineNumber(inputLineNumber) {}
     xmlelement (int inputStartLineNumber)
       : fType(0),
         fInputStartLineNumber (inputStartLineNumber),
         fInputEndLineNumber (inputStartLineNumber) // default value JMI v0.9.69
     {}
+
 		virtual ~xmlelement() {}
 
 	public:
@@ -114,10 +119,17 @@ class EXP xmlelement : public ctree<xmlelement>, public visitable
 		virtual void acceptIn  (basevisitor& visitor);
 		virtual void acceptOut (basevisitor& visitor);
 
+    // input start line number, JMI
 		int getInputStartLineNumber () { return fInputStartLineNumber; }
 
-		void setInputEndLineNumber (int inputEndLineNumber) { fInputEndLineNumber = inputEndLineNumber; }
-		int getInputEndLineNumber () { return fInputEndLineNumber; }
+    // keeping getInputLineNumber() for compatibility
+		int getInputLineNumber () { return fInputStartLineNumber; }
+
+    // input end line number, JMI
+		void setInputEndLineNumber (int inputEndLineNumber)
+		  { fInputEndLineNumber = inputEndLineNumber; }
+		int getInputEndLineNumber ()
+		  { return fInputEndLineNumber; }
 
 		void setValue (unsigned long value);
 		void setValue (long value);

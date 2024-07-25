@@ -461,6 +461,8 @@ R"(
       }
       \fill-line { \column { \italic { \concat { \lilypondFileName " was modified on " \lilypondFileModificationTimeAsString } } } }
       \fill-line { \column { \italic { \concat { \pdfFileName " was created on " \pdfFileCreationTime } } } }
+     \fill-line { \column { \italic { \concat { "lilypondFileDirName: " \lilypondFileDirName } } } }
+     \fill-line { \column { \italic { \concat { "pdfFileFullName: " \pdfFileFullName } } } }
 %      \fill-line { \column { \italic { \concat { "lilypondFileBaseName: " \lilypondFileBaseName } } } }
 %      \fill-line { \column { \italic { \concat { "lilypondFileSuffixlessName: " \lilypondFileSuffixlessName } } } }
 %      \fill-line { \column { \italic { \concat { "pdfFileName: " \pdfFileName } } } }
@@ -2821,20 +2823,21 @@ R"(
 
     schemeFunctionCode =
 R"(
-#(define commandLine             (object->string (command-line)))
-#(define loc                     (+ (string-rindex commandLine #\space ) 2))
-#(define commandLineLength       (- (string-length commandLine) 2))
-#(define lilypondFileName        (substring commandLine loc commandLineLength))
+#(define commandLine                  (object->string (command-line)))
+#(define loc                          (+ (string-rindex commandLine #\space ) 2))
+#(define commandLineLength            (- (string-length commandLine) 2))
+#(define lilypondFileName             (substring commandLine loc commandLineLength))
 
-#(define lilypondFileBaseName    (basename lilypondFileName))
-#(define lilypondFileSuffixlessName    (basename lilypondFileBaseName ".ly"))
+#(define lilypondFileDirName          (dirname lilypondFileName))
+#(define lilypondFileBaseName         (basename lilypondFileName))
+#(define lilypondFileSuffixlessName   (basename lilypondFileBaseName ".ly"))
 
-#(define pdfFileName             (string-append lilypondFileSuffixlessName ".pdf"))
+#(define pdfFileName                  (string-append lilypondFileSuffixlessName ".pdf"))
+#(define pdfFileFullName              (string-append lilypondFileDirName file-name-separator-string pdfFileName))
 
-#(define lilypondFileNameSize    (object->string (stat:size (stat lilypondFileName))))
-#(define lilypondVersion         (object->string (lilypond-version)))
-#(define currentDate             (strftime "%d/%m/%Y" (localtime (current-time))))
-#(define currentTime             (strftime "%H:%M:%S" (localtime (current-time))))
+#(define lilypondVersion              (object->string (lilypond-version)))
+#(define currentDate                  (strftime "%d/%m/%Y" (localtime (current-time))))
+#(define currentTime                  (strftime "%H:%M:%S" (localtime (current-time))))
 
 #(define lilypondFileModificationTime (stat:mtime (stat lilypondFileName)))
 

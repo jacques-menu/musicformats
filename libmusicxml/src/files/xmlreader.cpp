@@ -20,9 +20,6 @@
 
 using namespace std;
 
-// libmxmllineno is outside of name space MusicXML2
-extern int libmxmllineno;
-
 namespace MusicXML2
 {
 
@@ -103,9 +100,6 @@ bool xmlreader::endElement (const char* eltName)
 	debug("endElement", eltName);
 	Sxmlelement top = fStack.top();
 	fStack.pop();
-
-	top->setInputEndLineNumber (libmxmllineno);
-
 	return top->getName() == eltName;
 }
 
