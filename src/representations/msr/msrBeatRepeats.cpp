@@ -1293,7 +1293,7 @@ void msrBeatRepeat::browseData (basevisitor* v)
   */
 }
 
-void msrBeatRepeat:: appendMeasureElementToSegmentElement (
+void msrBeatRepeat::appendMeasureElementToSegmentElement (
   const S_msrMeasureElement& elem)
 {
   std::stringstream ss;

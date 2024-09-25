@@ -3325,7 +3325,7 @@ bool msrNote::compareNotesByIncreasingMeasurePosition (
     );
 }
 
-int msrNote:: fetchNoteSlurStartsNumber () const
+int msrNote::fetchNoteSlurStartsNumber () const
 {
 	int result = 0;
 
@@ -3354,7 +3354,7 @@ int msrNote:: fetchNoteSlurStartsNumber () const
 	return result;
 }
 
-int msrNote:: fetchNoteSlurStopsNumber () const
+int msrNote::fetchNoteSlurStopsNumber () const
 {
 	int result = 0;
 

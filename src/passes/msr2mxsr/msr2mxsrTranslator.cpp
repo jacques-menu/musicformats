@@ -4952,7 +4952,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTuplet& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteWedgesList (
+void msr2mxsrTranslator::appendNoteWedgesList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5266,7 +5266,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendAForwardToMeasure (
+void msr2mxsrTranslator::appendAForwardToMeasure (
   const S_msrNote& theMsrNote)
 {
   /*
@@ -5364,7 +5364,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
+void msr2mxsrTranslator::appendABackupOrForwardToMeasureIfNeeded (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5536,7 +5536,7 @@ fCurrentCumulatedSkipsVoiceNumber
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: populateNoteDirections (
+void msr2mxsrTranslator::populateNoteDirections (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5573,7 +5573,7 @@ void msr2mxsrTranslator:: populateNoteDirections (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteOrnamentsList (
+void msr2mxsrTranslator::appendNoteOrnamentsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5691,7 +5691,7 @@ void msr2mxsrTranslator:: appendNoteOrnamentsList (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTechnicalsList (
+void msr2mxsrTranslator::appendNoteTechnicalsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5800,7 +5800,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalsList (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTechnicalWithIntegersList (
+void msr2mxsrTranslator::appendNoteTechnicalWithIntegersList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5883,7 +5883,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegersList (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTechnicalWithFloatsList (
+void msr2mxsrTranslator::appendNoteTechnicalWithFloatsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -5956,7 +5956,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloatsList (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTechnicalWithStringsList (
+void msr2mxsrTranslator::appendNoteTechnicalWithStringsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6038,7 +6038,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStringsList (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteArticulationsList (
+void msr2mxsrTranslator::appendNoteArticulationsList (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6186,7 +6186,7 @@ void msr2mxsrTranslator:: appendNoteArticulationsList (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTieIfAny (
+void msr2mxsrTranslator::appendNoteTieIfAny (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6242,7 +6242,7 @@ void msr2mxsrTranslator:: appendNoteTieIfAny (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteSlursListIfAny (
+void msr2mxsrTranslator::appendNoteSlursListIfAny (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6330,7 +6330,7 @@ void msr2mxsrTranslator:: appendNoteSlursListIfAny (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
+void msr2mxsrTranslator::appendNoteTupletIfRelevant (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6426,7 +6426,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteSpannersListBeforeNote (
+void msr2mxsrTranslator::appendNoteSpannersListBeforeNote (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6538,7 +6538,7 @@ void msr2mxsrTranslator:: appendNoteSpannersListBeforeNote (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteSpannersListAfterNote (
+void msr2mxsrTranslator::appendNoteSpannersListAfterNote (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6647,7 +6647,7 @@ void msr2mxsrTranslator:: appendNoteSpannersListAfterNote (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendStemToNote (
+void msr2mxsrTranslator::appendStemToNote (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6766,7 +6766,7 @@ void msr2mxsrTranslator::appendBeamsToNote (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
+void msr2mxsrTranslator::appendStaffToNoteIfRelevant (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6884,7 +6884,7 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteNotationsToNote (
+void msr2mxsrTranslator::appendNoteNotationsToNote (
                                 const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6937,7 +6937,7 @@ void msr2mxsrTranslator:: appendNoteNotationsToNote (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator:: appendNoteLyricsToNote (
+void msr2mxsrTranslator::appendNoteLyricsToNote (
   const S_msrNote& theMsrNote)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -11257,7 +11257,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         elt->getInputStartLineNumber (),
@@ -11289,7 +11289,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         elt->getInputStartLineNumber (),
@@ -11322,7 +11322,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         elt->getInputStartLineNumber (),
@@ -11355,7 +11355,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         elt->getInputStartLineNumber (),

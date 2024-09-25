@@ -1067,8 +1067,8 @@ std::ostream& operator << (std::ostream& os, const S_msrRepeatEnding& elt)
 
 //______________________________________________________________________________
 S_msrRepeat msrRepeat::create (
-  int        inputLineNumber,
-  int        repeatTimes,
+  int               inputLineNumber,
+  int               repeatTimes,
   const S_msrVoice& upLinkToVoice)
 {
   msrRepeat* obj =
@@ -1081,8 +1081,8 @@ S_msrRepeat msrRepeat::create (
 }
 
 msrRepeat::msrRepeat (
-  int        inputLineNumber,
-  int        repeatTimes,
+  int               inputLineNumber,
+  int               repeatTimes,
   const S_msrVoice& upLinkToVoice)
     : msrVoiceElement (inputLineNumber)
 {
@@ -1099,7 +1099,7 @@ msrRepeat::msrRepeat (
   fRepeatTimes = repeatTimes;
 
   fRepeatExplicitStartKind =
-    msrRepeatExplicitStartKind::kRepeatExplicitStartNo; // default value
+    msrRepeatExplicitStartKind::kRepeatExplicitStartUnknown; // default value
 
   fRepeatEndingsInternalCounter = 0;
 
@@ -1360,7 +1360,11 @@ void msrRepeat::appendSegmentToRepeat (
       asShortString () <<
       '\'' <<
       std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
       "appendSegmentToRepeat() 1");
@@ -1422,7 +1426,7 @@ void msrRepeat::appendSegmentToRepeat (
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
       "appendSegmentToRepeat() 2");
@@ -1446,7 +1450,11 @@ void msrRepeat::appendRepeatToRepeat (
       asShortString () <<
       '\'' <<
       std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
       "appendRepeatToRepeat() 1");
@@ -1508,7 +1516,7 @@ void msrRepeat::appendRepeatToRepeat (
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
       "appendRepeatToRepeat() 2");
@@ -1532,7 +1540,11 @@ void msrRepeat::appendMeasureRepeatToRepeat (
       asShortString () <<
       '\'' <<
       std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
       "appendMeasureRepeatToRepeat() 1");
@@ -1594,7 +1606,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
       "appendMeasureRepeatToRepeat() 2");
@@ -1617,7 +1629,11 @@ void msrRepeat::appendMultiMeasureRestToRepeat (
       " to repeat " <<
       asShortString () <<
       std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
       "appendMultiMeasureRestToRepeat() 1");
@@ -1679,7 +1695,7 @@ void msrRepeat::appendMultiMeasureRestToRepeat (
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
       "appendMultiMeasureRestToRepeat() 2");
@@ -1797,7 +1813,7 @@ std::string msrRepeat::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "Repeat" <<
+    "[Repeat" <<
     ", " << fRepeatTimes << " times" <<
    ", fRepeatExplicitStartKind: " <<
     msrRepeatExplicitStartKindAsString (
@@ -1806,7 +1822,7 @@ std::string msrRepeat::asShortString () const
 //     repeatBuildPhaseKindAsString (
 //       fCurrentRepeatBuildPhaseKind);
 
-  if (fImmediatelyPrecedingRepeat) {
+  if (fImmediatelyPrecedingRepeat && fImmediatelyPrecedingRepeat != this) { // JMI v0.9.71 loop removal
     ss <<
       ", fImmediatelyPrecedingRepeat: " <<
       fImmediatelyPrecedingRepeat->asShortString ();
@@ -1841,7 +1857,8 @@ std::string msrRepeat::asShortString () const
 
   ss <<
     ", repeatEndingsNumber: " << repeatEndingsNumber <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputStartLineNumber <<
+    ']';
 
   return ss.str ();
 }
@@ -1853,7 +1870,7 @@ std::string msrRepeat::asString () const
   ss <<
     "[Repeat" <<
     ", " << fRepeatTimes << " times" <<
-   ", fRepeatExplicitStartKind:: " <<
+   ", fRepeatExplicitStartKind: " <<
     msrRepeatExplicitStartKindAsString (
       fRepeatExplicitStartKind);
 //     ", fCurrentRepeatBuildPhaseKind: " <<
@@ -1948,7 +1965,7 @@ void msrRepeat::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-   "fRepeatExplicitStartKind" << ": " <<
+   "fRepeatExplicitStartKind: " <<
     msrRepeatExplicitStartKindAsString (
       fRepeatExplicitStartKind) <<
     std::endl <<
@@ -2052,7 +2069,7 @@ void msrRepeat::print (std::ostream& os) const
   os <<
     "[Repeat" <<
     ", " << fRepeatTimes << " times" <<
-    ", fRepeatExplicitStartKind:: " <<
+    ", fRepeatExplicitStartKind: " <<
     fRepeatExplicitStartKind <<
 //     ", fCurrentRepeatBuildPhaseKind: " <<
 //     repeatBuildPhaseKindAsString (

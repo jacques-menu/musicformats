@@ -2136,7 +2136,9 @@ void mxsr2msrTranslator::visitStart (S_staff_distance& elt)
 void mxsr2msrTranslator::visitStart (S_measure_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (
+    gGlobalMxsrOahGroup->getTraceMxsrVisitors ()
+  ) {
     std::stringstream ss;
 
     ss <<
@@ -2899,6 +2901,32 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     }
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceParts ()) {
+    std::stringstream ss;
+
+    ss <<
+      "%--------------------------------------------------------------" <<
+      std::endl <<
+      "   ===>> " <<
+      std::endl <<
+      "      " <<
+      "part " <<
+      fCurrentPart-> getPartCombinedName () <<
+      ", line " <<
+      elt->getInputStartLineNumber () <<
+      std::endl <<
+      "   <<===" <<
+      std::endl <<
+      "%--------------------------------------------------------------" <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithoutInputLocation ( // JMI v0.9.71 without CODE location ???
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   // register the current part in the service run data
   S_mfServiceRunData
@@ -10191,6 +10219,35 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   fCurrentMeasureNumber =
     elt->getAttributeValue ("number");
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasures ()) {
+    std::stringstream ss;
+
+    ss <<
+      "%--------------------------------------------------------------" <<
+      std::endl <<
+      "   ===>> " <<
+      std::endl <<
+      "      " <<
+      "part " <<
+      fCurrentPart-> getPartCombinedName () <<
+      std::endl <<
+      "      " <<
+      "measure " << fCurrentMeasureNumber <<
+      ", line " <<
+      elt->getInputStartLineNumber () <<
+      std::endl <<
+      "   <<===" <<
+      std::endl <<
+      "%--------------------------------------------------------------" <<
+      std::endl;
+
+    gWaeHandler->waeTraceWithoutInputLocation ( // JMI v0.9.71 without CODE location ???
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   // implicit
 /*
   Measures with an implicit attribute set to "yes"
@@ -11686,6 +11743,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
       break;
 
     case msrBarLineLocationKind::kBarLineLocationLeft:
+    // ---------------------------------------------------------
       if (
         fCurrentBarLineEndingTypeKind
           ==
@@ -11729,82 +11787,129 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 
         barLineHasBeenHandled = true;
       }
+
+      else {
+      // ---------------------------------------------------------
+        std::stringstream ss;
+
+        ss <<
+          "cannot handle barLine " <<
+          barLine <<
+          " of type kBarLineLocationLeft";
+
+        mxsr2msrError (
+          gServiceRunData->getInputSourceName (),
+          elt->getInputStartLineNumber (),
+          __FILE__, __LINE__,
+          ss.str ());
+      }
       break;
 
     case msrBarLineLocationKind::kBarLineLocationMiddle:
-      // JMI ???
+    // ---------------------------------------------------------
+      {
+        // JMI ??? v0.9.71
+        std::stringstream ss;
+
+        ss <<
+          "cannot handle barLine " <<
+          barLine <<
+          " of type kBarLineLocationMiddle";
+
+        mxsr2msrError (
+          gServiceRunData->getInputSourceName (),
+          elt->getInputStartLineNumber (),
+          __FILE__, __LINE__,
+          ss.str ());
+      }
       break;
 
     case msrBarLineLocationKind::kBarLineLocationRight:
-      {
-        if (
-          fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeStop
-            &&
-          fCurrentBarLineEndingNumber.size () != 0
-        ) {
-          // hooked ending end
-          // ------------------------------------------------------
-          // set current barLine ending start category
-          fCurrentRepeatEndingStartBarLine->
-            setBarLineCategory (
-              msrBarLineCategoryKind::kBarLineCategoryHookedEndingStart);
+    // ---------------------------------------------------------
+      if (
+        fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeStop
+          &&
+        fCurrentBarLineEndingNumber.size () != 0
+      ) {
+        // hooked ending end
+        // ------------------------------------------------------
+        // set current barLine ending start category
+        fCurrentRepeatEndingStartBarLine->
+          setBarLineCategory (
+            msrBarLineCategoryKind::kBarLineCategoryHookedEndingStart);
 
-          // set this barLine's category
-          barLine->
-            setBarLineCategory (
-              msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd);
+        // set this barLine's category
+        barLine->
+          setBarLineCategory (
+            msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd);
 
-          // handle the repeat hooked ending end
-          handleRepeatHookedEndingEnd (barLine);
+        // handle the repeat hooked ending end
+        handleRepeatHookedEndingEnd (barLine);
 
-          barLineHasBeenHandled = true;
-        }
-
-        else if (
-          fCurrentBarLineRepeatDirectionKind
-            ==
-          msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionBackward
-        ) {
-          // repeat end
-          // ------------------------------------------------------
-
-          // set this barLine's category
-          barLine->
-            setBarLineCategory (
-              msrBarLineCategoryKind::kBarLineCategoryRepeatEnd);
-
-          // handle the repeat end
-          handleRepeatEnd (barLine);
-
-          barLineHasBeenHandled = true;
-        }
-
-        else if (
-          fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue
-            &&
-          fCurrentBarLineEndingNumber.size () != 0
-        ) {
-          // hookless ending end
-          // ------------------------------------------------------
-          // set current barLine ending start category
-          fCurrentRepeatEndingStartBarLine->
-            setBarLineCategory (
-              msrBarLineCategoryKind::kBarLineCategoryHooklessEndingStart);
-
-          // set this barLine's category
-          barLine->
-            setBarLineCategory (
-              msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd);
-
-          // handle the repeat hookless ending end
-          handleRepeatHooklessEndingEnd (barLine);
-
-          barLineHasBeenHandled = true;
-        }
-
-        // forget about current repeat ending start barLine
-        fCurrentRepeatEndingStartBarLine = nullptr;
+        barLineHasBeenHandled = true;
       }
+
+      else if (
+        fCurrentBarLineRepeatDirectionKind
+          ==
+        msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionBackward
+      ) {
+        // repeat end
+        // ------------------------------------------------------
+
+        // set this barLine's category
+        barLine->
+          setBarLineCategory (
+            msrBarLineCategoryKind::kBarLineCategoryRepeatEnd);
+
+        // handle the repeat end
+        handleRepeatEnd (barLine);
+
+        barLineHasBeenHandled = true;
+      }
+
+      else if (
+        fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue
+          &&
+        fCurrentBarLineEndingNumber.size () != 0
+      ) {
+        // hookless ending end
+        // ------------------------------------------------------
+        // set current barLine ending start category
+        fCurrentRepeatEndingStartBarLine->
+          setBarLineCategory (
+            msrBarLineCategoryKind::kBarLineCategoryHooklessEndingStart);
+
+        // set this barLine's category
+        barLine->
+          setBarLineCategory (
+            msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd);
+
+        // handle the repeat hookless ending end
+        handleRepeatHooklessEndingEnd (barLine);
+
+        barLineHasBeenHandled = true;
+      }
+
+      else {
+      // ---------------------------------------------------------
+        std::stringstream ss;
+
+        ss <<
+          "cannot handle barLine " <<
+          barLine <<
+          " of type kBarLineLocationRight";
+
+        mxsr2msrError (
+          gServiceRunData->getInputSourceName (),
+          elt->getInputStartLineNumber (),
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+
+      // forget about current repeat ending start barLine
+      fCurrentRepeatEndingStartBarLine = nullptr;
+
       break;
   } // switch
 
@@ -12574,8 +12679,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
     }
   }
 
-  // color JMI
-
+  // color JMI v0.9.71
 }
 
 void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
@@ -25094,7 +25198,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 }
 
 // //______________________________________________________________________________
-// void  mxsr2msrTranslator:: handleTupletStopNumbersForNote (
+// void  mxsr2msrTranslator: handleTupletStopNumbersForNote (
 //   int              inputLineNumber,
 //   const S_msrNote& note)
 // {

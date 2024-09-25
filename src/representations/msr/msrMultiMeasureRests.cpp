@@ -242,7 +242,7 @@ void msrMultiMeasureRest::setMultiMeasureRestLastMeasurePuristMeasureNumber (
     lastMeasuresPuristNumber;
 }
 
-void msrMultiMeasureRest:: appendMeasureElementToSegmentElement (
+void msrMultiMeasureRest::appendMeasureElementToSegmentElement (
   const S_msrMeasureElement& elem)
 {
   std::stringstream ss;

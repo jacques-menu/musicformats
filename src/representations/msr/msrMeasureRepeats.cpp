@@ -1296,7 +1296,7 @@ void msrMeasureRepeat::browseData (basevisitor* v)
   }
 }
 
-void msrMeasureRepeat:: appendMeasureElementToSegmentElement (
+void msrMeasureRepeat::appendMeasureElementToSegmentElement (
   const S_msrMeasureElement& elem)
 {
   std::stringstream ss;

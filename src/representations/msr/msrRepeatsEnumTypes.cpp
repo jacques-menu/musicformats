@@ -47,6 +47,9 @@ std::string msrRepeatExplicitStartKindAsString (
   std::string result;
 
   switch (repeatExplicitStartKind) {
+    case msrRepeatExplicitStartKind::kRepeatExplicitStartUnknown:
+      result = "kRepeatExplicitStartUnknown";
+      break;
     case msrRepeatExplicitStartKind::kRepeatExplicitStartNo:
       result = "kRepeatExplicitStartNo";
       break;

@@ -2465,7 +2465,7 @@ void msrMeasure::appendBarLineToMeasure (
 
     ss <<
       "Appending barLine " <<
-      barLine->asShortString () <<
+      barLine->asString () <<
       " to measure " <<
       this->asShortString () <<
       " in voice \"" <<
@@ -2574,7 +2574,7 @@ void msrMeasure::appendNoteToMeasure (
       fMeasureCurrentAccumulatedWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotesDetails ()) {
     gLog <<
       std::endl << std::endl <<
       "this->print (gLog):" <<

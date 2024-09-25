@@ -641,6 +641,7 @@ std::string msrBarLine::asShortString () const
     ", " <<
     msrBarLineEndingTypeKindAsString (fEndingTypeKind) <<
     ", " <<
+    ", endingNumbersList: " <<
     endingNumbersListAsString () <<
 
     ", " <<
@@ -649,7 +650,8 @@ std::string msrBarLine::asShortString () const
     msrBarLineRepeatWingedKindAsString (fRepeatWingedKind) <<
     */
     ", " <<
-    fBarLineTimes << " times" <<
+    ", fBarLineTimes: \"" <<
+    fBarLineTimes << "\"" <<
     ", line " << fInputStartLineNumber <<
     ']';
 
@@ -689,11 +691,11 @@ std::string msrBarLine::asString () const
 
     ", " <<
     msrBarLineEndingTypeKindAsString (fEndingTypeKind) <<
-    ", " <<
+    ", endingNumbersList: " <<
     endingNumbersListAsString () <<
 
     ", fBarLineTimes: \"" <<
-    fBarLineTimes << "\" times" <<
+    fBarLineTimes << "\"" <<
 
     ", " <<
     msrBarLineHasSegnoKindAsString (

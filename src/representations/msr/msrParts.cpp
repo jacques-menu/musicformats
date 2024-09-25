@@ -663,20 +663,19 @@ std::string msrPart::getPartIDAndName () const
 {
   std::stringstream ss;
 
+  ss << '[';
+
   if (! fPartMsrName.size ()) {
     ss <<
-      "[empty name]";
+      "empty name";
   }
   else {
     ss <<
-     // JMI "\"" <<
-      fPartMsrName
-     // JMI << "\""
-      ;
+      fPartMsrName;
   }
 
   ss <<
-    " (\"" << fPartID << "\"";
+    " \"" << fPartID << "\"";
 
   if (fPartName.size ()) {
     ss <<
@@ -684,7 +683,7 @@ std::string msrPart::getPartIDAndName () const
   }
 
   ss <<
-    ")";
+    ']';
 
   return ss.str ();
 }
@@ -693,28 +692,27 @@ std::string msrPart::getPartCombinedName () const
 {
   std::stringstream ss;
 
+  ss << '[';
+
   if (! fPartMsrName.size ()) {
     ss <<
-      "[empty part name]";
+      "empty part name";
   }
   else {
     ss <<
-     // JMI "\"" <<
-      fPartMsrName
-     // JMI << "\""
-      ;
+      fPartMsrName;
   }
 
   ss <<
-    " (partID \"" << fPartID << "\"";
+    ", partID: \"" << fPartID << "\"";
 
   if (fPartName.size ()) {
     ss <<
-      ", partName \"" << fPartName << "\"";
+      ", partName: \"" << fPartName << "\"";
   }
 
   ss <<
-    ")";
+    ']';
 
   return ss.str ();
 }

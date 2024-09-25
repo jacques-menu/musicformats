@@ -6615,7 +6615,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         elt->getInputStartLineNumber (),
@@ -6647,7 +6647,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         elt->getInputStartLineNumber (),
@@ -6680,7 +6680,7 @@ void msr2msrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         elt->getInputStartLineNumber (),
@@ -6713,7 +6713,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+  if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         elt->getInputStartLineNumber (),

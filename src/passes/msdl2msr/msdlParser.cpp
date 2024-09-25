@@ -534,7 +534,7 @@ Bool msdlParser::checkMandatoryTokenKind (
 //  msdlParser::checkMandatoryTokenKindsSet
 // --------------------------------------------------------------------------
 
-Bool msdlParser:: checkMandatoryTokenKindsSet (
+Bool msdlParser::checkMandatoryTokenKindsSet (
   const std::string&       fileName,
   int                 lineNumber,
   const S_msdlTokenKindsSet& tokenKindsSet,
@@ -749,7 +749,7 @@ Bool msdlParser::checkOptionalTokenKind (
 //  msdlParser::checkOptionalTokenKindsSet
 // --------------------------------------------------------------------------
 
-Bool msdlParser:: checkOptionalTokenKindsSet (
+Bool msdlParser::checkOptionalTokenKindsSet (
   const std::string&       fileName,
   int                 lineNumber,
   const S_msdlTokenKindsSet& tokenKindsSet,
