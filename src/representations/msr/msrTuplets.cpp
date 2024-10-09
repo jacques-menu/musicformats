@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2023
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -331,22 +331,22 @@ void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
     fMemberNotesSoundingWholeNotes = noteSoundingWholeNotes;
   }
   else {
-    // consistency check
-    if (noteSoundingWholeNotes != fMemberNotesSoundingWholeNotes) {
-      std::stringstream ss;
-
-      ss <<
-        "cannot add tuplet member with sounding whole notes " <<
-        noteSoundingWholeNotes <<
-        " in a tuplet containing members with sounding whole notes " <<
-        fMemberNotesSoundingWholeNotes;
-
-      msrError (
-        gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+//     // consistency check NO JMI v0.9.71 as noted by Lars Opfermann
+//     if (noteSoundingWholeNotes != fMemberNotesSoundingWholeNotes) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "cannot add tuplet member with sounding whole notes " <<
+//         noteSoundingWholeNotes <<
+//         " in a tuplet containing members with sounding whole notes " <<
+//         fMemberNotesSoundingWholeNotes;
+//
+//       msrError (
+//         gServiceRunData->getInputSourceName (),
+//         fInputStartLineNumber,
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
   }
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -359,17 +359,28 @@ void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
       note->asShortString () <<
       " to an already full tuplet with " <<
       fFullTupletElementsNumber <<
-      " elements in voice \"" <<
-      fMeasureElementUpLinkToMeasure->
-        fetchMeasureUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
+      " elements in voice \"";
 
-//     msrInternalError (
-    msrInternalWarning (
+    if (fMeasureElementUpLinkToMeasure) {
+      ss <<
+        fMeasureElementUpLinkToMeasure->
+          fetchMeasureUpLinkToVoice ()->
+            getVoiceName ();
+    }
+    else {
+      ss <<
+        "fMeasureElementUpLinkToMeasure: NULL"; // JMI v0.9.71
+    }
+
+    ss <<
+      "\"" <<
+      ", THIS TUPLET: " << asShortString ();
+
+    msrInternalError (
+//     msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       note->getInputStartLineNumber (),
-//       __FILE__, __LINE__,
+      __FILE__, __LINE__,
       ss.str ());
 
     return; // JMI v0.9.70 TEMP
@@ -453,11 +464,11 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
     gLog <<
       std::endl << std::endl;
 
-//     msrInternalError (
-    msrInternalWarning (
+    msrInternalError (
+//     msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       chord->getInputStartLineNumber (),
-//       __FILE__, __LINE__,
+      __FILE__, __LINE__,
       ss.str ());
 
     return; // JMI v0.9.70 TEMP
@@ -536,17 +547,19 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
             getVoiceName ();
     }
     else {
-      ss << "[NULL]";
+      ss <<
+        "fMeasureElementUpLinkToMeasure: NULL"; // JMI v0.9.71
     }
 
     ss <<
-      "\"";
+      "\"" <<
+      ", THIS TUPLET: " << asShortString ();
 
-//     msrInternalError (
-    msrInternalWarning (
+    msrInternalError (
+//     msrInternalWarning (
       gServiceRunData->getInputSourceName (),
       tuplet->getInputStartLineNumber (),
-//       __FILE__, __LINE__,
+      __FILE__, __LINE__,
       ss.str ());
 
     return; // JMI v0.9.70 TEMP
@@ -1467,7 +1480,8 @@ void msrTuplet::printFull (std::ostream& os) const
       fMeasureElementUpLinkToMeasure->asShortString ();
   }
   else {
-    os << "[NULL]";
+    os <<
+      "fMeasureElementUpLinkToMeasure: NULL"; // JMI v0.9.71
   }
   os << std::endl;
 
@@ -1588,7 +1602,8 @@ void msrTuplet::print (std::ostream& os) const
       fMeasureElementUpLinkToMeasure->asShortString ();
   }
   else {
-    os << "[NULL]";
+    os <<
+      "fMeasureElementUpLinkToMeasure: NULL"; // JMI v0.9.71
   }
   os << std::endl;
 

@@ -611,7 +611,7 @@ std::string msrBarLine::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[BarLine " <<
+    "[BarLine, " <<
     fBarLineCategoryKind <<
     ", measureNumber: ";
   if (fMeasureElementUpLinkToMeasure) {
@@ -663,7 +663,7 @@ std::string msrBarLine::asString () const
   std::stringstream ss;
 
   ss <<
-    "[BarLine " <<
+    "[BarLine, " <<
     fBarLineCategoryKind <<
     ", measureElementMeasureNumber: ";
 
@@ -715,8 +715,7 @@ void msrBarLine::printFull (std::ostream& os) const
   os <<
     "[BarLine" <<
     ", fBarLineCategoryKind: " <<
-    msrBarLineCategoryKindAsString (
-      fBarLineCategoryKind) <<
+    fBarLineCategoryKind <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
@@ -823,7 +822,6 @@ void msrBarLine::print (std::ostream& os) const
   os <<
     "[BarLine" <<
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
-    fBarLineCategoryKind <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 

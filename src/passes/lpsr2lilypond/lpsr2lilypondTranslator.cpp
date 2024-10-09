@@ -23150,8 +23150,15 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   // generate the note beams if any,
   // unless the note is chord member
   Bool doGenerateBeams (true);
+
   if (elt->getNoteBelongsToAChord ()) {
     doGenerateBeams = false;
+  }
+  else {
+    doGenerateBeams =
+      gGlobalLpsr2lilypondOahGroup->getGenerateNoteBeams ();
+        // JMI fixes superflous[ [ ... ] ] issue, asked by Lars Opfermann v0.9.71
+        // but then, when should they be generated ??? JMI
   }
   if (doGenerateBeams) {
     generateNoteBeams (elt);
@@ -25249,6 +25256,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
         " #})" <<
         std::endl;
       break;
+
     case msrTupletShowTypeKind::kTupletShowTypeBoth:
       fLilypondCodeStream <<
         "\\once \\override TupletNumber.text = #(tuplet-number::fraction-with-notes" <<
@@ -25263,6 +25271,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
         " #})" <<
         std::endl;
       break;
+
     case msrTupletShowTypeKind::kTupletShowTypeNone:
     /* JMI
       fLilypondCodeStream <<

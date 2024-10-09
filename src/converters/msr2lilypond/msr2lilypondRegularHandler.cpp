@@ -860,6 +860,7 @@ void msr2lilypondRegularHandler::createNotesRegularGroup ()
   registerAtomInRegularSubgroup ("fixed", subGroup);
 
   registerAtomInRegularSubgroup ("white-note-heads", subGroup);
+  registerAtomInRegularSubgroup ("generate-notes-beams", subGroup);
 
   registerAtomInRegularSubgroup ("generate-stems-directions", subGroup);
 

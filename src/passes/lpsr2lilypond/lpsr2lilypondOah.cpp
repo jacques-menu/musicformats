@@ -5349,6 +5349,17 @@ at the beginning of the LilyPond code.)",
         "fWhiteNoteHeads",
         fWhiteNoteHeads));
 
+  // note beams
+  // --------------------------------------
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "generate-notes-beams", "gnb",
+R"(Generate notes beams.)",
+        "fGenerateNoteBeams",
+        fGenerateNoteBeams));
+
   // generate commented out variables
   // --------------------------------------
 
@@ -6449,6 +6460,10 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
 
     std::setw (valueFieldWidth) << "fWhiteNoteHeads" << ": " <<
       fWhiteNoteHeads <<
+      std::endl <<
+
+    std::setw (valueFieldWidth) << "fGenerateNoteBeams" << ": " <<
+      fGenerateNoteBeams <<
       std::endl;
 
   --gIndenter;
@@ -7026,6 +7041,10 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
 
     std::setw (fieldWidth) << "fWhiteNoteHeads" << ": " <<
       fWhiteNoteHeads <<
+      std::endl <<
+
+    std::setw (fieldWidth) << "fGenerateNoteBeams" << ": " <<
+      fGenerateNoteBeams <<
       std::endl <<
 
     std::setw (fieldWidth) << "fGenerateCommentedOutVariables" << ": " <<

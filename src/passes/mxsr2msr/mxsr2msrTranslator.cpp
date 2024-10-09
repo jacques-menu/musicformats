@@ -11789,13 +11789,17 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
       }
 
       else {
-      // ---------------------------------------------------------
+        // ---------------------------------------------------------
         std::stringstream ss;
 
         ss <<
-          "cannot handle barLine " <<
-          barLine <<
-          " of type kBarLineLocationLeft";
+          "cannot handle barLine of type kBarLineLocationLeft " <<
+          barLine->asString () <<
+          ", fCurrentBarLineLocationKind: " << fCurrentBarLineLocationKind <<
+          ", fCurrentBarLineStyleKind: " << fCurrentBarLineStyleKind <<
+          ", fCurrentBarLineEndingTypeKind: " << fCurrentBarLineEndingTypeKind <<
+          ", fCurrentBarLineRepeatDirectionKind: " << fCurrentBarLineRepeatDirectionKind <<
+          ", fCurrentBarLineRepeatWingedKind: " << fCurrentBarLineRepeatWingedKind;
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
@@ -11812,9 +11816,13 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         std::stringstream ss;
 
         ss <<
-          "cannot handle barLine " <<
-          barLine <<
-          " of type kBarLineLocationMiddle";
+          "cannot handle barLine of type kBarLineLocationMiddle " <<
+          barLine->asString () <<
+          ", fCurrentBarLineLocationKind: " << fCurrentBarLineLocationKind <<
+          ", fCurrentBarLineStyleKind: " << fCurrentBarLineStyleKind <<
+          ", fCurrentBarLineEndingTypeKind: " << fCurrentBarLineEndingTypeKind <<
+          ", fCurrentBarLineRepeatDirectionKind: " << fCurrentBarLineRepeatDirectionKind <<
+          ", fCurrentBarLineRepeatWingedKind: " << fCurrentBarLineRepeatWingedKind;
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
@@ -11891,14 +11899,31 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         barLineHasBeenHandled = true;
       }
 
+      else if (fCurrentBarLineStyleKind == msrBarLineStyleKind::kBarLineStyleLightHeavy) {
+        // final bar JMI v0.9.71
+        // set this barLine's category
+        barLine->
+          setBarLineCategory (
+            msrBarLineCategoryKind::kBarLineCategoryStandalone);
+
+        // handle the final bar line
+        fPendingBarLinesList.push_back (barLine);
+
+        barLineHasBeenHandled = true;
+      }
+
       else {
-      // ---------------------------------------------------------
+        // ---------------------------------------------------------
         std::stringstream ss;
 
         ss <<
-          "cannot handle barLine " <<
-          barLine <<
-          " of type kBarLineLocationRight";
+          "cannot handle barLine of type kBarLineLocationRight " <<
+          barLine->asString () <<
+          ", fCurrentBarLineLocationKind: " << fCurrentBarLineLocationKind <<
+          ", fCurrentBarLineStyleKind: " << fCurrentBarLineStyleKind <<
+          ", fCurrentBarLineEndingTypeKind: " << fCurrentBarLineEndingTypeKind <<
+          ", fCurrentBarLineRepeatDirectionKind: " << fCurrentBarLineRepeatDirectionKind <<
+          ", fCurrentBarLineRepeatWingedKind: " << fCurrentBarLineRepeatWingedKind;
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
@@ -20929,10 +20954,6 @@ S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
     firstNote->getInputStartLineNumber ();
 
   // account for note duration
-  msrWholeNotes
-    memberNotesSoundingWholeNotes =
-      firstNote->getMeasureElementSoundingWholeNotes ();
-
   msrWholeNotes
     memberNotesDisplayWholeNotes =
       firstNote->getNoteDisplayWholeNotes ();
