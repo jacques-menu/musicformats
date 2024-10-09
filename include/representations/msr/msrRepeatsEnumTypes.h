@@ -21,6 +21,7 @@ namespace MusicFormats
 // repeats
 //______________________________________________________________________________
 enum class msrRepeatExplicitStartKind {
+  kRepeatExplicitStartUnknown,
   kRepeatExplicitStartNo,
   kRepeatExplicitStartYes
 };

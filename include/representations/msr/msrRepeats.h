@@ -277,8 +277,8 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     static SMARTP<msrRepeat> create (
-                            int        inputLineNumber,
-                            int        repeatTimes,
+                            int               inputLineNumber,
+                            int               repeatTimes,
                             const S_msrVoice& upLinkToVoice);
 
     SMARTP<msrRepeat> createRepeatNewbornClone (
@@ -290,8 +290,8 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
                           msrRepeat (
-                            int        inputLineNumber,
-                            int        repeatTimes,
+                            int               inputLineNumber,
+                            int               repeatTimes,
                             const S_msrVoice& upLinkToVoice);
 
     virtual               ~msrRepeat ();
