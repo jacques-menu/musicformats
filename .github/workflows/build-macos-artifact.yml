@@ -37,7 +37,7 @@ jobs:
 #           shell: bash FOO
 #           working-directory: build
 #           cd build; cmake --build .
-          cd build ; cmake -S . -B . . ; make ; ls -salR .
+          cd build ; cmake -S . -B . . ;  ; ls -salR .make ; ls -salR .
 
 #       - name: Setup TeX Live
 #         uses: teatimeguest/setup-texlive-action@v3
