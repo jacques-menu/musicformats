@@ -41,6 +41,7 @@
 #include "msrRepeatConstants.h"
 #include "msrStaves.h"
 #include "msrTempos.h"
+#include "msrTuplets.h"
 #include "msrVoiceStaffChanges.h"
 
 #include "msrBrowsers.h"
@@ -7741,10 +7742,11 @@ void msrVoice::appendMultiMeasureRestToVoice (
           ss <<
             "attempt at creating a multi-measure rests while another one is pending";
 
-          msrInternalError (
+          msrInternalWarning (
+//           msrInternalError (
             gServiceRunData->getInputSourceName (),
             inputLineNumber,
-            __FILE__, __LINE__,
+//             __FILE__, __LINE__,
             ss.str ());
         }
 

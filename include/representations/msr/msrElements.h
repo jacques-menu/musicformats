@@ -58,21 +58,17 @@ class EXP msrElement : public smartable
     // set and get
     // ------------------------------------------------------
 
-    int                   getInputStartLineNumber () const
-                              { return fInputStartLineNumber; }
+    int                   getInputStartLineNumber () const;
 
-    void                  setInputEndLineNumber (int value)
-                              { fInputEndLineNumber = value; }
-    int                   getInputEndLineNumber () const
-                              { return fInputEndLineNumber; }
+    void                  setInputEndLineNumber (int value);
+    int                   getInputEndLineNumber () const;
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    operator std::string() const
-                              { return asString (); }
+    operator              std::string() const;
 
   public:
 
@@ -100,8 +96,7 @@ class EXP msrElement : public smartable
     virtual std::string   asStringForMeasuresSlices () const;
 
     virtual void          print (std::ostream& os) const;
-    virtual void          printFull (std::ostream& os) const
-                              { print (os); }
+    virtual void          printFull (std::ostream& os) const;
 
     virtual void          printSummary (std::ostream& os) const;
 

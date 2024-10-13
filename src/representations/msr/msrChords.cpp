@@ -25,6 +25,7 @@
 #include "msrMusicXMLBasicTypes.h"
 #include "msrSlides.h"
 #include "msrTechnicals.h"
+#include "msrTuplets.h"
 
 #include "oahOah.h"
 
@@ -272,17 +273,17 @@ S_msrChord msrChord::createChordNewbornClone (
 //       break;
 //
 //     case msrChordInKind::kChordInTuplet:
-//       if (fChordShortcutUpLinkToTuplet) {
+//       if (fChordShortcutUpLinkToContainingTuplet) {
 //         result =
-//           fChordShortcutUpLinkToTuplet->
+//           fChordShortcutUpLinkToContainingTuplet->
 //             fMeasureElementUpLinkToMeasure;
 //       }
 //       break;
 //
 //     case msrChordInKind::kChordInGraceNotesGroup:
-//       if (fChordShortcutUpLinkToGraceNotesGroup) {
+//       if (fChordUpLinkToContainingGraceNotesGroup) {
 //         result =
-//           fChordShortcutUpLinkToGraceNotesGroup->
+//           fChordUpLinkToContainingGraceNotesGroup->
 //             getGraceNotesGroupUpLinkToNote ()->
 //               fMeasureElementUpLinkToMeasure;
 //       }
@@ -357,13 +358,13 @@ S_msrChord msrChord::createChordNewbornClone (
 //       break;
 //
 //     case msrChordInKind::kChordInTuplet:
-//       result = fChordShortcutUpLinkToTuplet;
+//       result = fChordShortcutUpLinkToContainingTuplet;
 //       break;
 //
 //     case msrChordInKind::kChordInGraceNotesGroup:
-//       if (fChordShortcutUpLinkToGraceNotesGroup) {
+//       if (fChordUpLinkToContainingGraceNotesGroup) {
 //         result =
-//           fChordShortcutUpLinkToGraceNotesGroup->
+//           fChordUpLinkToContainingGraceNotesGroup->
 //             getGraceNotesGroupUpLinkToNote ()->
 //               getNoteShortcutUpLinkToTuplet ();
 //       }
@@ -373,25 +374,45 @@ S_msrChord msrChord::createChordNewbornClone (
 //   return result;
 // }
 
-// uplink to grace notes group
-S_msrGraceNotesGroup msrChord::fetchChordUpLinkToGraceNotesGroup () const
+// // uplink to grace notes group
+// S_msrGraceNotesGroup msrChord::fetchChordUpLinkToGraceNotesGroup () const
+// {
+//   S_msrGraceNotesGroup result;
+//
+//   switch (fChordKind) {
+//     case msrChordInKind::kChordIn_UNKNOWN_:
+//       break;
+//     case msrChordInKind::kChordInMeasure:
+//       break;
+//     case msrChordInKind::kChordInTuplet:
+//       break;
+//     case msrChordInKind::kChordInGraceNotesGroup:
+//       result = fChordUpLinkToContainingGraceNotesGroup; // JMI v0.9.71
+//       break;
+//   } // switch
+//
+//   return result;
+// }
+
+// uplink to tuplet
+void msrChord::setChordShortcutUpLinkToContainingTuplet (
+  const S_msrTuplet& tuplet)
 {
-  S_msrGraceNotesGroup result;
-
-  switch (fChordKind) {
-    case msrChordInKind::kChordIn_UNKNOWN_:
-      break;
-    case msrChordInKind::kChordInMeasure:
-      break;
-    case msrChordInKind::kChordInTuplet:
-      break;
-    case msrChordInKind::kChordInGraceNotesGroup:
-      result = fChordShortcutUpLinkToGraceNotesGroup; // JMI
-      break;
-  } // switch
-
-  return result;
+  fChordShortcutUpLinkToContainingTuplet = tuplet;
 }
+
+S_msrTuplet msrChord::getChordShortcutUpLinkToContainingTuplet () const
+{
+  return fChordShortcutUpLinkToContainingTuplet;
+}
+
+// // uplink to grace notes group
+// void msrChord::setChordUpLinkToContainingGraceNotesGroup (
+//   const S_msrGraceNotesGroup& graceNotesGroup)
+// {
+//   fChordUpLinkToContainingGraceNotesGroup =
+//     graceNotesGroup;
+// }
 
 // score upLink
 S_msrScore msrChord::fetchChordUpLinkToScore () const
@@ -487,51 +508,51 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
     chordChordGraceNotesGroupLinkAfter;
 }
 
-void msrChord::setMeasureElementMeasurePosition (
-  const S_msrMeasure& measure,
-  const msrWholeNotes&     measurePosition,
-  const std::string&  context)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
-    S_msrMeasure
-      upLinkToMeasure =
-        getMeasureElementUpLinkToMeasure ();
-
-    std::stringstream ss;
-
-    ss <<
-      "Setting the measure position of " <<
-      asString () <<
-      " to " <<
-      measurePosition.asString () <<
-      " (was '" <<
-      fMeasureElementMeasurePosition.asString () <<
-      "') in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      upLinkToMeasure->getMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // handle the chord itself
-  msrMeasureElement::setMeasureElementMeasurePosition (
-    measure,
-    measurePosition,
-    context);
-
-  // handle its members
-  setChordMembersMeasurePosition (
-    measure,
-    measurePosition);
-}
+// void msrChord::setMeasureElementMeasurePosition (
+//   const S_msrMeasure& measure,
+//   const msrWholeNotes&     measurePosition,
+//   const std::string&  context)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//     S_msrMeasure
+//       upLinkToMeasure =
+//         getMeasureElementUpLinkToMeasure ();
+//
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting the measure position of " <<
+//       asString () <<
+//       " to " <<
+//       measurePosition.asString () <<
+//       " (was '" <<
+//       fMeasureElementMeasurePosition.asString () <<
+//       "') in measure " <<
+//       measure->asShortString () <<
+//       " (measureElementMeasureNumber: " <<
+//       upLinkToMeasure->getMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // handle the chord itself
+//   msrMeasureElement::setMeasureElementMeasurePosition (
+//     measure,
+//     measurePosition,
+//     context);
+//
+//   // handle its members
+//   setChordMembersMeasurePosition (
+//     measure,
+//     measurePosition);
+// }
 
 void msrChord::setChordMembersMeasurePosition (
   const S_msrMeasure&  measure,
@@ -1784,9 +1805,21 @@ void msrChord::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fChordShortcutUpLinkToTuplet" << ": " <<
-    fChordShortcutUpLinkToTuplet <<
+    "fChordShortcutUpLinkToContainingTuplet" << ": " <<
+    fChordShortcutUpLinkToContainingTuplet <<
     std::endl;
+/*
+  os <<
+    std::setw (fieldWidth) <<
+    "fChordShortcutUpLinkToContainingTuplet" << ": ";
+  if (fChordShortcutUpLinkToContainingTuplet) {
+    os << fChordShortcutUpLinkToContainingTuplet->asString (); // JMI v0.9.71
+  }
+  else {
+    os << "[NULL]";
+  }
+  os << std::endl;
+*/
 
   os <<
     std::setw (fieldWidth) <<
@@ -2550,7 +2583,7 @@ void msrChord::printFull (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fMeasureElementUpLinkToMeasure" << ": ";
-  if (fChordShortcutUpLinkToTuplet) {
+  if (fChordShortcutUpLinkToContainingTuplet) {
     os <<
       fMeasureElementUpLinkToMeasure->asShortString ();
   }
@@ -2561,10 +2594,10 @@ void msrChord::printFull (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fChordShortcutUpLinkToTuplet" << ": ";
-  if (fChordShortcutUpLinkToTuplet) {
+    "fChordShortcutUpLinkToContainingTuplet" << ": ";
+  if (fChordShortcutUpLinkToContainingTuplet) {
     os <<
-      fChordShortcutUpLinkToTuplet->asShortString ();
+      fChordShortcutUpLinkToContainingTuplet->asShortString ();
   }
   else {
     os << "[NULL]";

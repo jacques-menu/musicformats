@@ -30,7 +30,8 @@ XML2LY    ?= xml2ly
 
 XML2LY_OPTIONS   ?= -q -lilypond-run-date -lilypond-generation-infos
 
-LILYPOND  ?= /opt/local/bin/lilypond
+LILYPOND  ?= /opt/homebrew/bin/lilypond
+# LILYPOND  ?= /opt/local/bin/lilypond
 # LILYPOND  ?= /Applications/LilyPond/lilypond-2.23.6/bin/lilypond
 
 .PHONY: lilyignored lily

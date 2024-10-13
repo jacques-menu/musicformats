@@ -16,7 +16,6 @@
 
 #include "mfBool.h"
 #include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
-// #include "mfStack.h"
 
 #include "stringMatcherBasicTypes.h"
 

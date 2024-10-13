@@ -91,7 +91,6 @@
 
 #include "msrMeasureElements.h"
 #include "msrMeasures.h"
-#include "msrTupletElementsAndTuplets.h"
 
 #include "msrLyrics.h"
 
@@ -110,6 +109,8 @@
 #include "msrMeasures.h"
 
 #include "msrSegments.h"
+
+#include "msrTuplets.h"
 
 #include "msrVoiceElements.h"
 #include "msrVoices.h"

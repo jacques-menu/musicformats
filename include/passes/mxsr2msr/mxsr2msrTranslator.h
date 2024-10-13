@@ -29,6 +29,7 @@
 #include "msrTablatures.h"
 #include "msrTechnicals.h"
 #include "msrTempos.h"
+#include "msrTuplets.h"
 #include "msrVoiceStaffChanges.h"
 
 
@@ -2516,11 +2517,13 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentTupletNormalDotsNumber;
 
     msrTupletTypeKind         fCurrentTupletTypeKind;
-    msrTupletLineShapeKind    fCurrentTupletLineShapeKind;
+    int                       fCurrentTempoTupletNumber;
     msrTupletBracketKind      fCurrentTupletBracketKind;
     msrTupletShowNumberKind   fCurrentTupletShowNumberKind;
     msrTupletShowTypeKind     fCurrentTupletShowTypeKind;
-    int                       fCurrentTempoTupletNumber;
+    msrTupletLineShapeKind    fCurrentTupletLineShapeKind;
+    msrPlacementKind          fCurrentTupletPlacementKind;
+
 
     Bool                      fCurrentNoteBelongsToATuplet;
 

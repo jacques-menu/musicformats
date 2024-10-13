@@ -32,6 +32,7 @@
 #include "msrPitchesNames.h"
 #include "msrSlides.h"
 #include "msrTechnicals.h"
+#include "msrTuplets.h"
 
 #include "oahOah.h"
 #include "oahEarlyOptions.h"
@@ -368,6 +369,18 @@ void msrNote::initializeNote ()
 
 msrNote::~msrNote ()
 {}
+
+// uplink to tuplet
+void msrNote::setNoteShortcutUpLinkToTuplet (
+	const S_msrTuplet& tuplet)
+{
+	fNoteShortcutUpLinkToTuplet = tuplet;
+}
+
+S_msrTuplet msrNote::getNoteShortcutUpLinkToTuplet () const
+{
+	return fNoteShortcutUpLinkToTuplet;
+}
 
 // uplink to grace notes group
 S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
@@ -2246,58 +2259,58 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 }
 
 //________________________________________________________________________
-void msrNote::setMeasureElementMeasurePosition (
-  const S_msrMeasure& measure,
-  const msrWholeNotes&     measurePosition,
-  const std::string&  context)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
-    S_msrMeasure
-      upLinkToMeasure =
-        getMeasureElementUpLinkToMeasure ();
-
-    std::stringstream ss;
-
-    ss <<
-      "Setting the measure position of " <<
-      asString () <<
-      " to " <<
-      measurePosition.asString () <<
-      " (was '" <<
-      fMeasureElementMeasurePosition.asString () <<
-      "') in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      upLinkToMeasure->getMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != K_MEASURE_POSITION_UNKNOWN_,
-    "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  // handle the chord itself
-  msrMeasureElement::setMeasureElementMeasurePosition (
-    measure,
-    measurePosition,
-    context);
-
-  setNoteAttachedElementsMeasurePosition (
-    measure,
-    measurePosition);
-}
+// void msrNote::setMeasureElementMeasurePosition (
+//   const S_msrMeasure& measure,
+//   const msrWholeNotes&     measurePosition,
+//   const std::string&  context)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//     S_msrMeasure
+//       upLinkToMeasure =
+//         getMeasureElementUpLinkToMeasure ();
+//
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting the measure position of " <<
+//       asString () <<
+//       " to " <<
+//       measurePosition.asString () <<
+//       " (was '" <<
+//       fMeasureElementMeasurePosition.asString () <<
+//       "') in measure " <<
+//       measure->asShortString () <<
+//       " (measureElementMeasureNumber: " <<
+//       upLinkToMeasure->getMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measurePosition != K_MEASURE_POSITION_UNKNOWN_,
+//     "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   // handle the chord itself
+//   msrMeasureElement::setMeasureElementMeasurePosition (
+//     measure,
+//     measurePosition,
+//     context);
+//
+//   setNoteAttachedElementsMeasurePosition (
+//     measure,
+//     measurePosition);
+// }
 
 void msrNote::setNoteAttachedElementsMeasurePosition (
   const S_msrMeasure& measure,
@@ -7668,7 +7681,7 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
       if (fNoteShortcutUpLinkToChord) {
         result =
           fNoteShortcutUpLinkToChord->
-            fetchChordUpLinkToTuplet ();
+            fetchChordUpLinkToTuplet (); JMI v0.9.71
       }
       break;
 
@@ -7677,7 +7690,7 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
       if (fNoteShortcutUpLinkToTuplet) {
         result =
           fNoteShortcutUpLinkToTuplet->
-            fetchTupletUpLinkToTuplet ();
+            fetchTupletUpLinkToTuplet (); JMI v0.9.71
       }
       break;
 
@@ -7703,7 +7716,7 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
       if (fNoteShortcutUpLinkToChord) {
         result =
           fNoteShortcutUpLinkToChord->
-            getChordShortcutUpLinkToGraceNotesGroup ()->
+            getChordUpLinkToContainingGraceNotesGroup ()->
               fetchGraceNoteGroupUpLinkToTuplet ();
       }
       break;
@@ -7713,7 +7726,7 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
       if (fNoteShortcutUpLinkToTuplet) {
         result =
           fNoteShortcutUpLinkToTuplet->
-            getTupletShortcutUpLinkToTuplet ()->
+            getTupletUpLinkToContainingTuplet ()->
               fetchUpLinkToTupletToVoice ();
       }
       * /

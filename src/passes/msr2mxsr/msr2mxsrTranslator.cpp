@@ -29,6 +29,7 @@
 #include "msrBarLines.h"
 #include "msrTechnicals.h"
 #include "msrTempos.h"
+#include "msrTuplets.h"
 
 #include "msr2mxsrWae.h"
 

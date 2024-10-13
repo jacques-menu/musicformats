@@ -37,6 +37,7 @@
 #include "msrTablatures.h"
 #include "msrTechnicals.h"
 #include "msrTempos.h"
+#include "msrTuplets.h"
 #include "msrVoiceStaffChanges.h"
 
 #include "msrInterface.h"

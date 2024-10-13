@@ -9,26 +9,17 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include <iostream>
 #include <regex>
-// #include <sstream>
-//
-// #include "mfPreprocessorSettings.h"
-//
+
 #include "visitor.h"
 //
 #include "mfAssert.h"
 #include "mfServices.h"
 
 #include "msrBrowsers.h"
-// #include "msrMeasureConstants.h"
 #include "msrClefsKeysTimeSignatures.h"
 
-
 #include "msrWae.h"
-
-
-// #include "oahOah.h"
 
 #include "oahEarlyOptions.h"
 

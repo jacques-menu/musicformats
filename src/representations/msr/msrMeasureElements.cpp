@@ -59,6 +59,20 @@ msrMeasureElement::msrMeasureElement (
 msrMeasureElement::~msrMeasureElement ()
 {}
 
+//______________________________________________________________________________
+// set and get
+
+void msrMeasureElement::setMeasureElementUpLinkToMeasure (
+  const S_msrMeasure& measure)
+{
+  fMeasureElementUpLinkToMeasure = measure;
+}
+
+S_msrMeasure msrMeasureElement::getMeasureElementUpLinkToMeasure () const
+{
+  return fMeasureElementUpLinkToMeasure;
+}
+
 void msrMeasureElement::setMeasureElementSoundingWholeNotes (
   const msrWholeNotes& wholeNotes,
   const std::string&   context)
@@ -112,6 +126,21 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureElementSoundingWholeNotes = wholeNotes;
+}
+
+msrWholeNotes msrMeasureElement:: getMeasureElementSoundingWholeNotes () const
+{
+  return fMeasureElementSoundingWholeNotes;
+}
+
+msrWholeNotes msrMeasureElement::getMeasureElementMeasurePosition () const
+{
+  return fMeasureElementMeasurePosition;
+}
+
+msrWholeNotes msrMeasureElement::getMeasureElementVoicePosition () const
+{
+  return fMeasureElementVoicePosition;
 }
 
 void msrMeasureElement::setMeasureElementMeasurePosition (
@@ -196,6 +225,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 //         getMeasureElementSoundingWholeNotes ());
 }
 
+//______________________________________________________________________________
 bool msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition (
   const SMARTP<msrMeasureElement>& first,
   const SMARTP<msrMeasureElement>& second)

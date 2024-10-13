@@ -32,6 +32,7 @@
 #include "mxsr2msrComponent.h"
 
 #include "msrMeasureConstants.h"
+#include "msrTuplets.h"
 
 #include "oahOah.h"
 
@@ -102,7 +103,7 @@ void mxsr2msrVoiceHandler::displayTupletsStack (
         std::endl;
 
       ++gIndenter;
-      gLog << tuplet;
+      gLog << tuplet->asString (); // JMI v0.9.71
       --gIndenter;
 
       --n;
@@ -18403,90 +18404,6 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // number
-
-  fPreviousTupletNumber = fCurrentTupletNumber;
-
-  // the tuplet number may be absent, so use 0 in that case
-  fCurrentTupletNumber = elt->getAttributeIntValue ("number", 0);
-
-  // bracket
-
-  {
-    std::string tupletBracket =
-      elt->getAttributeValue ("bracket");
-
-    fCurrentTupletBracketKind =
-      msrTupletBracketKind::kTupletBracketYes; // option ??? JMI v0.9.70
-
-    if      (tupletBracket == "yes")
-      fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketYes;
-    else if (tupletBracket == "no")
-      fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketNo;
-    else {
-      if (tupletBracket.size ()) {
-        std::stringstream ss;
-
-        ss <<
-          "tuplet bracket \"" << tupletBracket <<
-          "\" is unknown";
-
-        mxsr2msrError (
-          gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-      else {
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceTuplets ()) {
-          std::stringstream ss;
-
-          ss <<
-            "tuplet bracket is empty: this is implementation dependent," <<
-            " \"yes\" is assumed" <<
-            ", line " << elt->getInputStartLineNumber () <<
-            std::endl; // option ??? JMI v0.9.68
-
-          mxsr2msrWarning (
-            gServiceRunData->getInputSourceName (),
-            elt->getInputStartLineNumber (),
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-      }
-    }
-  }
-
-  // line-shape
-
-  {
-    std::string tupletLineShape = elt->getAttributeValue ("line-shape");
-
-    fCurrentTupletLineShapeKind =
-      msrTupletLineShapeKind::kTupletLineShapeStraight; // default value
-
-    if      (tupletLineShape == "straight")
-      fCurrentTupletLineShapeKind = msrTupletLineShapeKind::kTupletLineShapeStraight;
-    else if (tupletLineShape == "curved")
-      fCurrentTupletLineShapeKind = msrTupletLineShapeKind::kTupletLineShapeCurved;
-    else {
-      if (tupletLineShape.size ()) {
-        std::stringstream ss;
-
-        ss <<
-          "tuplet line-shape \"" << tupletLineShape <<
-          "\" is unknown";
-
-        mxsr2msrError (
-          gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-    }
-  }
-
   // type
 
   {
@@ -18598,6 +18515,61 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     }
   }
 
+  // number
+
+  fPreviousTupletNumber = fCurrentTupletNumber;
+
+  // the tuplet number may be absent, so use 0 in that case
+  fCurrentTupletNumber = elt->getAttributeIntValue ("number", 0);
+
+  // bracket
+
+  {
+    std::string tupletBracket =
+      elt->getAttributeValue ("bracket");
+
+    fCurrentTupletBracketKind =
+      msrTupletBracketKind::kTupletBracketYes; // option ??? JMI v0.9.70
+
+    if      (tupletBracket == "yes")
+      fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketYes;
+    else if (tupletBracket == "no")
+      fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketNo;
+    else {
+      if (tupletBracket.size ()) {
+        std::stringstream ss;
+
+        ss <<
+          "tuplet bracket \"" << tupletBracket <<
+          "\" is unknown";
+
+        mxsr2msrError (
+          gServiceRunData->getInputSourceName (),
+          elt->getInputStartLineNumber (),
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+      else {
+#ifdef MF_TRACE_IS_ENABLED
+        if (gTraceOahGroup->getTraceTuplets ()) {
+          std::stringstream ss;
+
+          ss <<
+            "tuplet bracket is empty: this is implementation dependent," <<
+            " \"yes\" is assumed" <<
+            ", line " << elt->getInputStartLineNumber () <<
+            std::endl; // option ??? JMI v0.9.68
+
+          mxsr2msrWarning (
+            gServiceRunData->getInputSourceName (),
+            elt->getInputStartLineNumber (),
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+      }
+    }
+  }
+
   // show-number
 
   {
@@ -18653,6 +18625,44 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     }
   }
 
+  // line-shape
+
+  {
+    std::string tupletLineShape = elt->getAttributeValue ("line-shape");
+
+    fCurrentTupletLineShapeKind =
+      msrTupletLineShapeKind::kTupletLineShapeStraight; // default value
+
+    if      (tupletLineShape == "straight")
+      fCurrentTupletLineShapeKind = msrTupletLineShapeKind::kTupletLineShapeStraight;
+    else if (tupletLineShape == "curved")
+      fCurrentTupletLineShapeKind = msrTupletLineShapeKind::kTupletLineShapeCurved;
+    else {
+      if (tupletLineShape.size ()) {
+        std::stringstream ss;
+
+        ss <<
+          "tuplet line-shape \"" << tupletLineShape <<
+          "\" is unknown";
+
+        mxsr2msrError (
+          gServiceRunData->getInputSourceName (),
+          elt->getInputStartLineNumber (),
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+    }
+  }
+
+  // placement
+
+  std::string placementString = elt->getAttributeValue ("placement");
+
+  fCurrentTupletPlacementKind =
+    msrPlacementKindFromString (
+      elt->getInputStartLineNumber (),
+      placementString);
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
     std::stringstream ss;
@@ -18667,7 +18677,9 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       ", fCurrentTupletShowNumberKind: " <<
       fCurrentTupletShowNumberKind <<
       ", fCurrentTupletShowTypeKind: " <<
-      fCurrentTupletShowTypeKind;
+      fCurrentTupletShowTypeKind <<
+      ", fCurrentTupletPlacementKind: " <<
+      fCurrentTupletPlacementKind;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18694,7 +18706,7 @@ void mxsr2msrTranslator::visitEnd (S_tuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // push it onto the voice's tuplets stack
+  // push it onto the voice's tuplets stack JMI v0.9.71
 //   fCurrentPartVoicesHandlersVector [0]->
 //     finalizeTupletStackTopAndPopItFromTupletsStack (
 //       note->getInputStartLineNumber (),
@@ -20953,11 +20965,6 @@ S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
   int firstNoteInputLineNumber =
     firstNote->getInputStartLineNumber ();
 
-  // account for note duration
-  msrWholeNotes
-    memberNotesDisplayWholeNotes =
-      firstNote->getNoteDisplayWholeNotes ();
-
   // create the tuplet
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTuplets ()) {
@@ -20992,7 +20999,9 @@ S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
       ", fCurrentTupletShowNumberKind: " <<
       fCurrentTupletShowNumberKind <<
       ", fCurrentTupletShowTypeKind: " <<
-      fCurrentTupletShowTypeKind;
+      fCurrentTupletShowTypeKind <<
+      ", fCurrentTupletPlacementKind: " <<
+      fCurrentTupletPlacementKind;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -21004,7 +21013,6 @@ S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
     tuplet =
       msrTuplet::create (
         firstNoteInputLineNumber,
-        fCurrentNoteActualNotes, // fullTupletElementsNumber
         fCurrentTupletNumber,
         fCurrentTupletBracketKind,
         fCurrentTupletLineShapeKind,
@@ -21013,7 +21021,8 @@ S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
         fCurrentTupletShowTypeKind,
         msrTupletFactor (
           fCurrentNoteActualNotes,
-          fCurrentNoteNormalNotes));
+          fCurrentNoteNormalNotes),
+        fCurrentTupletPlacementKind);
 
   return tuplet;
 }
@@ -27548,15 +27557,15 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
     currentTuplet->
       appendChordToTuplet (fCurrentChord);
 
-    // is this chord the last one in the tuplet?
-    if (currentTuplet->getTupletHasBeenFilled ()) {
-      // fThereIsAPendingTupletStop ???
-
-      // handle the tuplet stop
-      reduceTupletStackTop (
-        fNoteWithThePendingTupletStop,
-        fVoiceOfTheNoteWithThePendingTupletStop);
-    }
+//     // is this chord the last one in the tuplet?
+//     if (currentTuplet->getTupletHasBeenFilled ()) { JMI v0.9.71
+//       // fThereIsAPendingTupletStop ???
+//
+//       // handle the tuplet stop
+//       reduceTupletStackTop (
+//         fNoteWithThePendingTupletStop,
+//         fVoiceOfTheNoteWithThePendingTupletStop);
+//     }
 
     if (fCurrentNoteSoundingWholeNotesFromNotesDuration.getNumerator () == 0) {
       // no duration has been found,

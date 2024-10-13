@@ -21,6 +21,7 @@
 
 #include "msrRepeatsEnumTypes.h"
 #include "msrRepeats.h"
+#include "msrTuplets.h"
 
 #include "oahOah.h"
 

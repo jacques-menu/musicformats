@@ -28,6 +28,7 @@
 #include "msrMeasures.h"
 #include "msrRehearsalMarks.h"
 #include "msrTempos.h"
+#include "msrTuplets.h"
 #include "msrVoiceStaffChanges.h"
 
 #include "oahOah.h"

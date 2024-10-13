@@ -14,7 +14,6 @@
 
 #include <list>
 
-// #include "msrClefKeyTimeSignatureGroup.h"
 #include "msrClefsKeysTimeSignatures.h"
 #include "msrMeasuresEnumTypes.h"
 #include "msrMeasureElements.h"

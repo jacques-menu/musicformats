@@ -17,7 +17,7 @@
 
 #include "msrMeasureElements.h"
 #include "msrMeasures.h"
-#include "msrTupletElementsAndTuplets.h"
+#include "msrTupletElements.h"
 
 
 namespace MusicFormats
@@ -26,22 +26,29 @@ namespace MusicFormats
 //______________________________________________________________________________
 msrTupletElement::msrTupletElement (
   int inputLineNumber)
+//     : msrElement (
     : msrMeasureElement (
         inputLineNumber)
 {
   fPositionInTuplet = -1;
 }
-// msrTupletElement::msrTupletElement (
-//   int                 inputLineNumber,
-//   const S_msrMeasure& upLinkToMeasure)
-//     : msrMeasureElement (
-//         inputLineNumber)
-// {
-//   fPositionInTuplet = -1;
-// }
 
 msrTupletElement::~msrTupletElement ()
 {}
+
+// set and get
+// ------------------------------------------------------
+
+void msrTupletElement::setPositionInTuplet (
+int positionInTuplet)
+{
+  fPositionInTuplet = positionInTuplet;
+}
+
+const size_t msrTupletElement::getPositionInTuplet () const
+{
+  return fPositionInTuplet;
+}
 
 std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt)
 {

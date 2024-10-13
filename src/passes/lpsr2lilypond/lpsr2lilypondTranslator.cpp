@@ -25235,51 +25235,51 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
       break;
   } // switch
 
-  // get show type kind
-  msrTupletShowTypeKind
-    tupletShowTypeKind =
-      elt->getTupletShowTypeKind ();
-
-  msrWholeNotes
-    memberNoteDisplayWholeNotes =
-      elt->getMemberNotesDisplayWholeNotes ();
-
-  switch (tupletShowTypeKind) {
-    case msrTupletShowTypeKind::kTupletShowTypeActual:
-      fLilypondCodeStream <<
-     // JMI ???   "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-fraction-text \"" <<
-        "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-denominator-text #{ " <<
-//         wholeNotesAsLilypondMakeDuration ( // JMI v0.9.67
-        wholeNotesAsLilypondString ( // JMI v0.9.67
-          elt->getInputStartLineNumber (),
-          memberNoteDisplayWholeNotes) <<
-        " #})" <<
-        std::endl;
-      break;
-
-    case msrTupletShowTypeKind::kTupletShowTypeBoth:
-      fLilypondCodeStream <<
-        "\\once \\override TupletNumber.text = #(tuplet-number::fraction-with-notes" <<
-        " #{ " <<
-        wholeNotesAsLilypondString (
-          elt->getInputStartLineNumber (),
-          memberNoteDisplayWholeNotes) <<
-        " #} #{ " <<
-        wholeNotesAsLilypondString (
-          elt->getInputStartLineNumber (),
-          memberNoteDisplayWholeNotes) <<
-        " #})" <<
-        std::endl;
-      break;
-
-    case msrTupletShowTypeKind::kTupletShowTypeNone:
-    /* JMI
-      fLilypondCodeStream <<
-        "%{ tupletShowTypeNone %}" <<
-        std::endl;
-        */
-      break;
-  } // switch
+//   // get show type kind JMI v0.9.71
+//   msrTupletShowTypeKind
+//     tupletShowTypeKind =
+//       elt->getTupletShowTypeKind ();
+//
+//   msrWholeNotes
+//     memberNoteDisplayWholeNotes =
+//       elt->getMemberNotesDisplayWholeNotes ();
+//
+//   switch (tupletShowTypeKind) {
+//     case msrTupletShowTypeKind::kTupletShowTypeActual:
+//       fLilypondCodeStream <<
+//      // JMI ???   "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-fraction-text \"" <<
+//         "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-denominator-text #{ " <<
+// //         wholeNotesAsLilypondMakeDuration ( // JMI v0.9.67
+//         wholeNotesAsLilypondString ( // JMI v0.9.67
+//           elt->getInputStartLineNumber (),
+//           memberNoteDisplayWholeNotes) <<
+//         " #})" <<
+//         std::endl;
+//       break;
+//
+//     case msrTupletShowTypeKind::kTupletShowTypeBoth:
+//       fLilypondCodeStream <<
+//         "\\once \\override TupletNumber.text = #(tuplet-number::fraction-with-notes" <<
+//         " #{ " <<
+//         wholeNotesAsLilypondString (
+//           elt->getInputStartLineNumber (),
+//           memberNoteDisplayWholeNotes) <<
+//         " #} #{ " <<
+//         wholeNotesAsLilypondString (
+//           elt->getInputStartLineNumber (),
+//           memberNoteDisplayWholeNotes) <<
+//         " #})" <<
+//         std::endl;
+//       break;
+//
+//     case msrTupletShowTypeKind::kTupletShowTypeNone:
+//     /* JMI
+//       fLilypondCodeStream <<
+//         "%{ tupletShowTypeNone %}" <<
+//         std::endl;
+//         */
+//       break;
+//   } // switch
 
   fLilypondCodeStream <<
     "\\tuplet " <<

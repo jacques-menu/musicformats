@@ -12,8 +12,6 @@
 #ifndef ___msrSegmentElements___
 #define ___msrSegmentElements___
 
-// #include "msrNoteDurations.h"
-
 #include "msrElements.h"
 
 

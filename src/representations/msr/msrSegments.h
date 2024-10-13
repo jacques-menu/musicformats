@@ -14,16 +14,12 @@
 
 #include "msrVoiceElements.h"
 
-// #include "msrClefKeyTimeSignatureGroup.h"
 #include "msrClefsKeysTimeSignatures.h"
-// #include "msrClefsKeysTimeSignatures.h"
-// #include "msrClefsKeysTimeSignatures.h"
 #include "msrEyeGlasses.h"
 #include "msrLyrics.h"
 #include "msrMeasures.h"
 #include "msrMoments.h"
 #include "msrMultiMeasureRests.h"
-// #include "msrClefsKeysTimeSignatures.h"
 
 
 namespace MusicFormats

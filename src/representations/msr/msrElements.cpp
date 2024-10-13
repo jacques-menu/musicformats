@@ -58,6 +58,26 @@ SMARTP<msrElement> msrElement::createDeepClone ()
   return createNewbornClone ();
 }
 
+//______________________________________________________________________________
+// set and get
+// ------------------------------------------------------
+
+int msrElement:: getInputStartLineNumber () const
+{
+  return fInputStartLineNumber;
+}
+
+void msrElement::setInputEndLineNumber (int value)
+{
+  fInputEndLineNumber = value;
+}
+
+int msrElement::getInputEndLineNumber () const
+{
+  return fInputEndLineNumber;
+}
+
+//______________________________________________________________________________
 void msrElement::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -174,9 +194,19 @@ void msrElement::print (std::ostream& os) const
   os << asString () << std::endl;
 }
 
+void msrElement::printFull (std::ostream& os) const
+{
+   print (os);
+}
+
 void msrElement::printSummary (std::ostream& os) const
 {
   print (os);
+}
+
+msrElement::operator std::string() const
+{
+  return asString ();
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrElement& elt)

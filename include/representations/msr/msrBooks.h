@@ -43,7 +43,7 @@ class EXP msrBook : public msrElement
                             int                inputLineNumber,
                             const std::string& bookName);
 
-    SMARTP<msrBook> createBookNewbornClone ();
+    SMARTP<msrBook>       createBookNewbornClone ();
 
   protected:
 

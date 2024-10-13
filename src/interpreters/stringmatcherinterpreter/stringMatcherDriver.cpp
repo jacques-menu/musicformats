@@ -13,18 +13,8 @@
 #include <chrono>         // std::chrono::seconds
 
 #include "mfAssert.h"
-// #include "mfStringsHandling.h"
-// #include "mfIndentedTextOutput.h"
-// #include "mfSystemInterface.h"
-//
-// #include "oahEarlyOptions.h"
-//
-// #include "stringMatcherInterpreterOah.h"
 
 #include "stringMatcherDriver.h"
-// #include "stringMatcherParser.h"
-
-// #include "stringMatcherWae.h"
 
 
 using namespace std;

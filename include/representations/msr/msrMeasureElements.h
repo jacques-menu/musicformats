@@ -48,18 +48,15 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
     virtual void          setMeasureElementUpLinkToMeasure (
-                            const S_msrMeasure& measure)
-                              { fMeasureElementUpLinkToMeasure = measure; }
+                            const S_msrMeasure& measure);
 
-    virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const
-                              { return fMeasureElementUpLinkToMeasure; }
+    virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const;
 
     void                  setMeasureElementSoundingWholeNotes (
                             const msrWholeNotes& wholeNotes,
                             const std::string&   context);
 
-    msrWholeNotes         getMeasureElementSoundingWholeNotes () const
-                              { return fMeasureElementSoundingWholeNotes; }
+    msrWholeNotes         getMeasureElementSoundingWholeNotes () const;
 
     // this method is overridden in sub-classes such as those for
     // time signatures, harmonies and figured bass elements,
@@ -73,15 +70,13 @@ class EXP msrMeasureElement : public msrElement
                             const msrWholeNotes& measurePosition,
                             const std::string&   context);
 
-    msrWholeNotes         getMeasureElementMeasurePosition () const
-                              { return fMeasureElementMeasurePosition; }
+    msrWholeNotes         getMeasureElementMeasurePosition () const;
 
     void                  setMeasureElementVoicePosition (
                             const msrWholeNotes& voicePosition,
                             const std::string&   context);
 
-    msrWholeNotes         getMeasureElementVoicePosition () const
-                              { return fMeasureElementVoicePosition; }
+    msrWholeNotes         getMeasureElementVoicePosition () const;
 
 //     void                  setMeasureMoment (
 //                             const msrMoment&   measureMoment,

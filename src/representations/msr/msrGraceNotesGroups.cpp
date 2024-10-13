@@ -22,6 +22,7 @@
 #include "msrWae.h"
 
 #include "msrGraceNotesGroups.h"
+#include "msrTuplets.h"
 
 #include "oahOah.h"
 

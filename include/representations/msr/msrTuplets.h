@@ -9,15 +9,9 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrTupletElementsAndTuplets___
-#define ___msrTupletElementsAndTuplets___
+#ifndef ___msrTuplets___
+#define ___msrTuplets___
 
-#include "msrTypesForwardDeclarations.h"
-
-#include "msrMeasures.h"
-#include "msrTypesForwardDeclarations.h"
-
-#include "msrMeasureElements.h"
 #include "msrMeasures.h"
 #include "msrTupletsEnumTypes.h"
 #include "msrTupletFactors.h"
@@ -27,49 +21,9 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrTupletElement : public msrMeasureElement
-{
-  public:
-
-    // creation from MusicXML
-    // ------------------------------------------------------
-
-//   protected:
-
-      // constructors/destructor
-      // ------------------------------------------------------
-
-                          msrTupletElement (
-                            int inputLineNumber);
-
-    virtual               ~msrTupletElement ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-    void                  setPositionInTuplet (
-                            int positionInTuplet)
-                              { fPositionInTuplet = positionInTuplet; }
-
-    const size_t          getPositionInTuplet () const
-                              { return fPositionInTuplet; }
-
-  protected:
-
-    // protected fields
-    // ------------------------------------------------------
-
-    /*
-      The uplinks to the tuplet and measure element are declared in the sub-classes,
-      to allow for separate *.h files, C++ constraint
-    */
-
-    int                   fPositionInTuplet;
-};
-typedef SMARTP<msrTupletElement> S_msrTupletElement;
-EXP std::ostream& operator << (std::ostream& os, const S_msrTupletElement& elt);
+// PRE-declaration
+class   msrTuplet;
+typedef SMARTP<msrTuplet> S_msrTuplet;
 
 //______________________________________________________________________________
 class EXP msrTuplet : public msrTupletElement
@@ -79,27 +33,19 @@ class EXP msrTuplet : public msrTupletElement
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msrTuplet> create (
-                            int inputLineNumber,
-                            int fullTupletElementsNumber);
-
-    // creation from MusicXML
-    // ------------------------------------------------------
-
-    static SMARTP<msrTuplet> create (
+    static S_msrTuplet    create (
                             int                     inputLineNumber,
-                            int                     fullTupletElementsNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletTypeKind       tupletTypeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            const msrTupletFactor&  tupletFactor);
+                            const msrTupletFactor&  tupletFactor,
+                            msrPlacementKind        tupletPlacementKind);
 
-    static SMARTP<msrTuplet> create (
+    static S_msrTuplet    create (
                             int                     inputLineNumber,
-                            int                     fullTupletElementsNumber,
                             const S_msrMeasure&     upLinkToMeasure,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
@@ -107,14 +53,15 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletTypeKind       tupletTypeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            const msrTupletFactor&  tupletFactor);
+                            const msrTupletFactor&  tupletFactor,
+                            msrPlacementKind        tupletPlacementKind);
 
     // cloning
     // ------------------------------------------------------
 
-    SMARTP<msrTuplet> createTupletNewbornClone ();
+    S_msrTuplet           createTupletNewbornClone ();
 
-    SMARTP<msrTuplet> createTupletDeepClone ();
+    S_msrTuplet           createTupletDeepClone ();
 
   protected:
 
@@ -122,23 +69,18 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
                           msrTuplet (
-                            int inputLineNumber,
-                            int fullTupletElementsNumber);
-
-                          msrTuplet (
                             int                     inputLineNumber,
-                            int                     fullTupletElementsNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletTypeKind       tupletTypeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            const msrTupletFactor&  tupletFactor);
+                            const msrTupletFactor&  tupletFactor,
+                            msrPlacementKind        tupletPlacementKind);
 
                           msrTuplet (
                             int                     inputLineNumber,
-                            int                     fullTupletElementsNumber,
                             const S_msrMeasure&     upLinkToMeasure,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
@@ -146,7 +88,8 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletTypeKind       tupletTypeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            const msrTupletFactor&  tupletFactor);
+                            const msrTupletFactor&  tupletFactor,
+                            msrPlacementKind        tupletPlacementKind);
 
     virtual               ~msrTuplet ();
 
@@ -157,19 +100,15 @@ class EXP msrTuplet : public msrTupletElement
 
     // tuplet kind
     void                  setTupletKind (
-                            msrTupletInKind tupletKind)
-                              { fTupletKind = tupletKind; }
+                            msrTupletInKind tupletKind);
 
-    msrTupletInKind       getTupletKind () const
-                              { return fTupletKind; }
+    msrTupletInKind       getTupletKind () const;
 
     // uplink to tuplet
-    void                  setTupletShortcutUpLinkToTuplet (
-                            const S_msrTuplet& tuplet)
-                              { fTupletShortcutUpLinkToTuplet = tuplet; }
+    void                  setTupletUpLinkToContainingTuplet (
+                            const S_msrTuplet& tuplet);
 
-    S_msrTuplet           getTupletShortcutUpLinkToTuplet () const
-                              { return fTupletShortcutUpLinkToTuplet; }
+    S_msrTuplet           getTupletUpLinkToContainingTuplet () const;
 
     // measure positions
     // this override calls setTupletMembersMeasurePositions()
@@ -183,60 +122,41 @@ class EXP msrTuplet : public msrTupletElement
                             const msrWholeNotes& measurePosition);
 
     // number
-    int                   getTupletNumber () const
-                              { return fTupletNumber; }
+    int                   getTupletNumber () const;
 
     // appearance
-    msrTupletBracketKind  getTupletBracketKind () const
-                              { return fTupletBracketKind; }
+    msrTupletBracketKind  getTupletBracketKind () const;
 
     msrTupletLineShapeKind
-                          getTupletLineShapeKind () const
-                              { return fTupletLineShapeKind; }
+                          getTupletLineShapeKind () const;
 
-    msrTupletTypeKind     getTupletTypeKind () const
-                              { return fTupletTypeKind; }
+    msrTupletTypeKind     getTupletTypeKind () const;
 
     msrTupletShowNumberKind
-                          getTupletShowNumberKind () const
-                              { return fTupletShowNumberKind; }
+                          getTupletShowNumberKind () const;
 
-    msrTupletShowTypeKind getTupletShowTypeKind () const
-                              { return fTupletShowTypeKind; }
+    msrTupletShowTypeKind getTupletShowTypeKind () const;
 
     // tuplet factor
     const msrTupletFactor&
-                          getTupletFactor () const
-                              { return fTupletFactor; }
+                          getTupletFactor () const;
 
-    // member notes durations
-    msrWholeNotes         getMemberNotesSoundingWholeNotes () const
-                              { return fMemberNotesSoundingWholeNotes; }
-    msrWholeNotes         getMemberNotesDisplayWholeNotes () const
-                              { return fMemberNotesDisplayWholeNotes; }
-
-    // elements
+    // tuplets elements list
     const std::list<S_msrTupletElement>&
-                          getTupletElementsList () const
-                              { return fTupletElementsList; }
-
-//     void                  setFullTupletElementsNumber (int number)
-//                               { fFullTupletElementsNumber = number; }
-
-    int                   getFullTupletElementsNumber () const
-                              { return fFullTupletElementsNumber; }
+                          getTupletElementsList () const;
 
     // tuplet durations
-    msrWholeNotes         getTupletDisplayWholeNotes () const
-                              { return fTupletDisplayWholeNotes; }
+    msrWholeNotes         getTupletDisplayWholeNotes () const;
+
+    void                  setTupletPlacementKind (msrPlacementKind placementKind);
+
+    // tuplet placement
+    msrPlacementKind      getTupletPlacementKind () const;
 
   public:
 
     // public services
     // ------------------------------------------------------
-
-    // uplink to tuplet
-    S_msrTuplet           fetchTupletUpLinkToTuplet () const;
 
     void                  appendNoteToTuplet (const S_msrNote& note);
 
@@ -245,12 +165,6 @@ class EXP msrTuplet : public msrTupletElement
     void                  appendTupletToTuplet (const S_msrTuplet& tuplet);
 
     void                  appendTupletToTupletClone (const S_msrTuplet& tuplet);
-
-    Bool                  getTupletHasBeenFilled () const
-                              {
-                                return
-                                  fTupletElementsList.size () == fFullTupletElementsNumber;
-                              }
 
     S_msrNote             fetchTupletFirstNonGraceNote () const;
 
@@ -299,7 +213,7 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to tuplet
-    S_msrTuplet           fTupletShortcutUpLinkToTuplet;
+    S_msrTuplet           fTupletUpLinkToContainingTuplet;
 
     // tuplet kind
     msrTupletInKind       fTupletKind;
@@ -323,25 +237,20 @@ class EXP msrTuplet : public msrTupletElement
     // tuplet factor
     msrTupletFactor       fTupletFactor;
 
-    // member notes durations
-    msrWholeNotes         fMemberNotesSoundingWholeNotes;
-    msrWholeNotes         fMemberNotesDisplayWholeNotes;
-
     // display whole notes
     msrWholeNotes         fTupletDisplayWholeNotes;
 
-    // elements
+    // placement
+    msrPlacementKind      fTupletPlacementKind;
+
+    // elements list
     std::list<S_msrTupletElement>
                           fTupletElementsList;
-
-    // we need to know when the tuplet has been filled in mxsr2msr
-    int                   fFullTupletElementsNumber;
 };
-typedef SMARTP<msrTuplet> S_msrTuplet;
 EXP std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt);
 
 
 }
 
 
-#endif // ___msrTupletElementsAndTuplets___
+#endif // ___msrTuplets___

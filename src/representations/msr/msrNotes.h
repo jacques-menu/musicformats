@@ -29,7 +29,6 @@
 #include "msrHarmonies.h"
 #include "msrInstruments.h"
 #include "msrLyrics.h"
-#include "msrGraceNotesGroups.h"
 #include "msrLigatures.h"
 #include "msrMeasures.h"
 #include "msrOrnaments.h"
@@ -44,11 +43,7 @@
 #include "msrStems.h"
 #include "msrTechnicals.h"
 #include "msrTies.h"
-#include "msrTupletElementsAndTuplets.h"
-#include "msrTypesForwardDeclarations.h"
-
-#include "msrMeasureElements.h"
-#include "msrMeasures.h"
+#include "msrTupletElements.h"
 #include "msrTupletFactors.h"
 
 
@@ -235,18 +230,16 @@ class EXP msrNote : public msrTupletElement
 
     // uplink to tuplet
     void                  setNoteShortcutUpLinkToTuplet (
-                            const S_msrTuplet& tuplet)
-                              { fNoteShortcutUpLinkToTuplet = tuplet; }
+                            const S_msrTuplet& tuplet);
 
-    S_msrTuplet          getNoteShortcutUpLinkToTuplet () const
-                              { return fNoteShortcutUpLinkToTuplet; }
+    S_msrTuplet           getNoteShortcutUpLinkToTuplet () const;
 
-    // measure positions
-    // this override calls setNoteAttachedElementsMeasurePosition()
-    void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure&  measure,
-                            const msrWholeNotes& measurePosition,
-                            const std::string&   context) override;
+//     // measure positions
+//     // this override calls setNoteAttachedElementsMeasurePosition()
+//     void                  setMeasureElementMeasurePosition (
+//                             const S_msrMeasure&  measure,
+//                             const msrWholeNotes& measurePosition,
+//                             const std::string&   context) override;
 
     void                  setNoteAttachedElementsMeasurePosition (
                             const S_msrMeasure&  measure,
@@ -312,8 +305,8 @@ class EXP msrNote : public msrTupletElement
                             const msrWholeNotes& wholeNotes,
                             const std::string&   context)
                               {
-                                setMeasureElementSoundingWholeNotes (
-                                  wholeNotes, context);
+//                                 setMeasureElementSoundingWholeNotes (
+//                                   wholeNotes, context);
                               }
 
     void                  setNoteDisplayWholeNotes (

@@ -17,15 +17,11 @@
 
 #include "msrTypesForwardDeclarations.h"
 
-// #include "msrClefKeyTimeSignatureGroup.h"
 #include "msrClefsKeysTimeSignatures.h"
-// #include "msrClefsKeysTimeSignatures.h"
-// #include "msrClefsKeysTimeSignatures.h"
 #include "msrElements.h"
 #include "msrMeasures.h"
 #include "msrMeasuresSlices.h"
 #include "msrRepeatsEnumTypes.h"
-// #include "msrClefsKeysTimeSignatures.h"
 #include "msrTupletFactors.h"
 
 

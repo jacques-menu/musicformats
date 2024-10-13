@@ -35,11 +35,7 @@
 #include "msrStems.h"
 #include "msrTechnicals.h"
 #include "msrTies.h"
-#include "msrTupletElementsAndTuplets.h"
-#include "msrTypesForwardDeclarations.h"
-
-#include "msrMeasureElements.h"
-#include "msrMeasures.h"
+#include "msrTupletElements.h"
 #include "msrWords.h"
 
 
@@ -106,23 +102,21 @@ class EXP msrChord : public msrTupletElement
     // ------------------------------------------------------
 
     // uplink to tuplet
-    void                  setChordShortcutUpLinkToTuplet (
-                            const S_msrTuplet& tuplet)
-                              { fChordShortcutUpLinkToTuplet = tuplet; }
+    void                  setChordShortcutUpLinkToContainingTuplet (
+                            const S_msrTuplet& tuplet);
 
-    S_msrTuplet           getChordShortcutUpLinkToTuplet () const
-                              { return fChordShortcutUpLinkToTuplet; }
+    S_msrTuplet           getChordShortcutUpLinkToContainingTuplet () const;
 
     // uplink to grace notes group
-    void                  setChordShortcutUpLinkToGraceNotesGroup (
+    void                  setChordUpLinkToContainingGraceNotesGroup (
                             const S_msrGraceNotesGroup& graceNotesGroup)
                               {
-                                fChordShortcutUpLinkToGraceNotesGroup =
+                                fChordUpLinkToContainingGraceNotesGroup =
                                   graceNotesGroup;
                               }
 
-    S_msrGraceNotesGroup  getChordShortcutUpLinkToGraceNotesGroup () const
-                              { return fChordShortcutUpLinkToGraceNotesGroup; }
+    S_msrGraceNotesGroup  getChordUpLinkToContainingGraceNotesGroup () const
+                              { return fChordUpLinkToContainingGraceNotesGroup; }
 
     // chord kind
     void                  setChordKind (
@@ -344,12 +338,12 @@ class EXP msrChord : public msrTupletElement
     S_msrOctaveShift      getChordOctaveShift () const
                               { return fChordOctaveShift; }
 
-    // measure positions
-    // this override calls setChordMembersMeasurePosition()
-    void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure&  measure,
-                            const msrWholeNotes& measurePosition,
-                            const std::string&   context) override;
+//     // measure positions
+//     // this override calls setChordMembersMeasurePosition()
+//     void                  setMeasureElementMeasurePosition (
+//                             const S_msrMeasure&  measure,
+//                             const msrWholeNotes& measurePosition,
+//                             const std::string&   context) override;
 
     void                  setChordMembersMeasurePosition (
                             const S_msrMeasure&  measure,
@@ -360,11 +354,11 @@ class EXP msrChord : public msrTupletElement
     // public services
     // ------------------------------------------------------
 
-    // uplink to tuplet
-    const S_msrTuplet&    fetchChordUpLinkToTuplet () const;
+//     // uplink to tuplet
+//     const S_msrTuplet&    fetchChordUpLinkToTuplet () const;
 
-    // uplink to grace notes group
-    S_msrGraceNotesGroup  fetchChordUpLinkToGraceNotesGroup () const;
+//     // uplink to  grace notes group
+//     S_msrGraceNotesGroup  fetchChordUpLinkToGraceNotesGroup () const;
 
     // score upLink
     S_msrScore            fetchChordUpLinkToScore () const;
@@ -523,11 +517,11 @@ class EXP msrChord : public msrTupletElement
     // private fields
     // ------------------------------------------------------
 
-    // uplink to tuplet
-    S_msrTuplet           fChordShortcutUpLinkToTuplet;
+    // uplink to containing tuplet
+    S_msrTuplet           fChordShortcutUpLinkToContainingTuplet;
 
-    // uplink to grace notes group
-    S_msrGraceNotesGroup  fChordShortcutUpLinkToGraceNotesGroup;
+    // uplink to containing grace notes group
+    S_msrGraceNotesGroup  fChordUpLinkToContainingGraceNotesGroup;
 
     msrChordInKind        fChordKind;
 

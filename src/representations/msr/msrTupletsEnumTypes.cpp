@@ -20,6 +20,7 @@
 #include "mfStringsHandling.h"
 
 #include "msrBrowsers.h"
+#include "msrTupletsEnumTypes.h"
 
 #include "oahOah.h"
 #include "msrOah.h"

@@ -18,7 +18,6 @@
 
 #include "msrTypesForwardDeclarations.h"
 
-// #include "msrClefKeyTimeSignatureGroup.h"
 #include "msrClefsKeysTimeSignatures.h"
 #include "msrPartGroups.h"
 #include "msrRepeatsEnumTypes.h"
@@ -655,7 +654,7 @@ class EXP msrPart : public msrPartGroupElement
                             // may be different than fPartID if renamed,
                             // coined in constructor
 
-    std::string           fPartName; // from '<part-name/>'
+    std::string           fPartName;           // from '<part-name/>'
     std::string           fPartAlphabeticName; // from '<part-name/>'
 
     std::string           fPartNameDisplayText;
