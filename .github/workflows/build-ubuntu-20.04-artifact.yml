@@ -31,7 +31,7 @@ jobs:
       - name: Build MusicFormats for Ubuntu
         run:
 #           cd build; cmake --build .
-          cd build ; cmake -S . -B . . ;  ; ls -salR .make ; ls -salR .
+          cd build ; cmake -S . -B . . ; ls -salR . ; make ; ls -salR .
 
       - name: Upload libraries and executables for Ubuntu
         uses: actions/upload-artifact@v3
