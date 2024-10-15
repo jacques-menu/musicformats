@@ -4838,7 +4838,7 @@ void msrMeasure::handleEmptyMeasure (
       inputLineNumber,
       "handleEmptyMeasure 3 msrMeasureKind::kMeasureKindMusicallyEmpty");
 
-  // reset voice whole notes since last regular measure end  // JMI ???
+  // reset voice whole notes since last regular measure end  // JMI ??? v0.9.71
   voice->
     setWholeNotesSinceLastRegularMeasureEnd (
       inputLineNumber,

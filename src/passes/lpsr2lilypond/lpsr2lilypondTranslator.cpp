@@ -13823,71 +13823,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
-      {
-        // fetch measure's voice
-        S_msrVoice
-          measureVoice =
-            elt->
-              fetchMeasureUpLinkToVoice ();
-
-        // fetch measure's part
-        S_msrPart
-          measurePart =
-            measureVoice->
-              getVoiceUpLinkToStaff ()->
-                getStaffUpLinkToPart ();
-
-        msrWholeNotes
-          measureCurrentAccumulatedWholeNotesDuration =
-            measurePart->
-              fetchPartMeasuresWholeNotesVectorAt (
-                elt->getInputStartLineNumber (),
-                elt->getMeasureOrdinalNumberInVoice () - 1);
-
-        // generate the skip name
-        // take voice kind into account may be useful for debug
-        switch (measureVoice->getVoiceKind ()) {
-          case msrVoiceKind::kVoiceKindRegular:
-          case msrVoiceKind::kVoiceKindDynamics:
-            fLilypondCodeStream <<
-//               'R';
-              's' << " %{ s777 %}  ";
-            break;
-
-          case msrVoiceKind::kVoiceKindHarmonies:
-          case msrVoiceKind::kVoiceKindFiguredBass:
-            fLilypondCodeStream <<
-//               'R';
-              's' << " %{ s888 %}  ";
-            break;
-        } // switch
-
-        // generate the duration of the skip from the full measure whole notes JMI v0.9.68
-        fLilypondCodeStream <<
-          wholeNotesAsLilypondString (
-            elt->getInputStartLineNumber (),
-            elt->getFullMeasureWholeNotesDuration ());
-
-        if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
-          // generate information and line number as a comment
-          fLilypondCodeStream <<
-            " %{ line " <<
-            elt->getInputStartLineNumber () <<
-            " %}  ";
-        }
-
-        if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
-          // generate information and line number as a comment
-          fLilypondCodeStream <<
-            " %{ kMeasureKindMusicallyEmpty %}  ";
-        }
-
-        // generate a bar check
-        fLilypondCodeStream <<
-          " | % " <<
-          elt->getNextMeasureNumber () <<
-          std::endl;
-      }
+      // DON'T generate a skip and bar check here,
+      // this is done in lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
+      // to have the msrClefKeyTimeSignatureGroup if any generated before it
       break;
   } // switch
 }
@@ -14030,8 +13968,6 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         break;
 
       case msrMeasureKind::kMeasureKindRegular:
-        {
-        }
         break;
 
       case msrMeasureKind::kMeasureKindAnacrusis:
@@ -14074,12 +14010,80 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         break;
 
       case msrMeasureKind::kMeasureKindMusicallyEmpty:
-        if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+        {
+          // only now, to have the msrClefKeyTimeSignatureGroup if any
+          // being handled first
+          if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+            fLilypondCodeStream <<
+              "%{ emptyMeasureKind" <<
+              ", line " << elt->getInputStartLineNumber () <<
+              " %}  % " <<
+              measurePuristNumber + 1 <<
+              std::endl;
+          }
+
+          // fetch measure's voice
+          S_msrVoice
+            measureVoice =
+              elt->
+                fetchMeasureUpLinkToVoice ();
+
+          // fetch measure's part
+          S_msrPart
+            measurePart =
+              measureVoice->
+                getVoiceUpLinkToStaff ()->
+                  getStaffUpLinkToPart ();
+
+          msrWholeNotes
+            measureCurrentAccumulatedWholeNotesDuration =
+              measurePart->
+                fetchPartMeasuresWholeNotesVectorAt (
+                  elt->getInputStartLineNumber (),
+                  elt->getMeasureOrdinalNumberInVoice () - 1);
+
+          // generate the skip name
+          // take voice kind into account may be useful for debug
+          switch (measureVoice->getVoiceKind ()) {
+            case msrVoiceKind::kVoiceKindRegular:
+            case msrVoiceKind::kVoiceKindDynamics:
+              fLilypondCodeStream <<
+  //               'R';
+                's' << " %{ s999 %}  ";
+              break;
+
+            case msrVoiceKind::kVoiceKindHarmonies:
+            case msrVoiceKind::kVoiceKindFiguredBass:
+              fLilypondCodeStream <<
+  //               'R';
+                's' << " %{ s888 %}  ";
+              break;
+          } // switch
+
+          // generate the duration of the skip from the full measure whole notes JMI v0.9.68
           fLilypondCodeStream <<
-            "%{ emptyMeasureKind" <<
-            ", line " << elt->getInputStartLineNumber () <<
-            " %}  % " <<
-            measurePuristNumber + 1 <<
+            wholeNotesAsLilypondString (
+              elt->getInputStartLineNumber (),
+              elt->getFullMeasureWholeNotesDuration ());
+
+          if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+            // generate information and line number as a comment
+            fLilypondCodeStream <<
+              " %{ line " <<
+              elt->getInputStartLineNumber () <<
+              " %}  ";
+          }
+
+          if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
+            // generate information and line number as a comment
+            fLilypondCodeStream <<
+              " %{ kMeasureKindMusicallyEmpty %}  ";
+          }
+
+          // generate a bar check
+          fLilypondCodeStream <<
+            " | % " <<
+            elt->getNextMeasureNumber () <<
             std::endl;
         }
         break;

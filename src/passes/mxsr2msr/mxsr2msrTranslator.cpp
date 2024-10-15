@@ -11900,8 +11900,21 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         barLineHasBeenHandled = true;
       }
 
+      else if (fCurrentBarLineStyleKind == msrBarLineStyleKind::kBarLineStyleLightLight) {
+        // double barline JMI v0.9.71
+        // set this barLine's category
+        barLine->
+          setBarLineCategory (
+            msrBarLineCategoryKind::kBarLineCategoryStandalone);
+
+        // handle the final bar line
+        fPendingBarLinesList.push_back (barLine);
+
+        barLineHasBeenHandled = true;
+      }
+
       else if (fCurrentBarLineStyleKind == msrBarLineStyleKind::kBarLineStyleLightHeavy) {
-        // final bar JMI v0.9.71
+        // final barline JMI v0.9.71
         // set this barLine's category
         barLine->
           setBarLineCategory (
