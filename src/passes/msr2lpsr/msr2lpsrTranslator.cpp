@@ -6728,12 +6728,13 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
     case msrNoteKind::kNoteUnpitchedInTuplet:
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNotes ()) {
+      if (gTraceOahGroup->getTraceNotesBasics ()) {
         std::stringstream ss;
 
         ss <<
           "Appending note clone " <<
-          fCurrentNonGraceNoteClone->asShortString () << " to voice clone " <<
+          fCurrentNonGraceNoteClone->asShortString () <<
+          " to voice clone " <<
           fCurrentVoiceClone->getVoiceName ();
 
         gWaeHandler->waeTrace (
@@ -7291,13 +7292,13 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 
   // register it in this visitor
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "++> pushing tuplet '" <<
+      "Pushing tuplet " <<
       tupletClone->asString () <<
-      "' to tuplets stack";
+      " to tuplets stack";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7336,13 +7337,13 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Popping tuplet '" <<
+      "Popping tuplet " <<
       elt->asString () <<
-      "' from tuplets stack";
+      " from tuplets stack";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7355,13 +7356,13 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
   if (fTupletClonesStack.size ()) {
     // tuplet is a nested tuplet
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTuplets ()) {
+    if (gTraceOahGroup->getTraceTupletsBasics ()) {
       std::stringstream ss;
 
       ss <<
-        "Adding nested tuplet '" <<
+        "Adding nested tuplet " <<
       elt->asString () <<
-        "' to stack top tuplet '" <<
+        " to stack top tuplet '" <<
       fTupletClonesStack.front ()->asString () <<
       '\'' <<
       std::endl;
@@ -7380,13 +7381,13 @@ void msr2lpsrTranslator::visitEnd (S_msrTuplet& elt)
     // tuplet is a top level tuplet
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTuplets ()) {
+    if (gTraceOahGroup->getTraceTupletsBasics ()) {
       std::stringstream ss;
 
       ss <<
-        "Adding top level tuplet '" <<
+        "Adding top level tuplet " <<
         elt->asString () <<
-        "' to voice" <<
+        " to voice" <<
         fCurrentVoiceClone->getVoiceName ();
 
       gWaeHandler->waeTrace (
@@ -7893,7 +7894,7 @@ void msr2lpsrTranslator::visitStart (S_msrRepeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -7930,7 +7931,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -8013,7 +8014,7 @@ void msr2lpsrTranslator::visitStart (S_msrRepeatEnding& elt)
 
   // handle the repeat ending start in the voice clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -8052,7 +8053,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 
   // handle the repeat ending end in the voice clone
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceRepeats ()) {
+  if (gTraceOahGroup->getTraceRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<

@@ -2332,13 +2332,12 @@ void lpsr2lilypondTranslator::generateCodeForNote (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (gTraceOahGroup->getTraceNotes ()) {
+    if (traceNotes) {
       std::stringstream ss;
 
       ss <<
@@ -2471,8 +2470,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -2560,8 +2558,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInMeasure (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -2768,8 +2765,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -2858,8 +2854,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -2942,8 +2937,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteCuedInMeasure (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -3014,8 +3008,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -3093,8 +3086,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -3175,8 +3167,7 @@ void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -3269,8 +3260,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -3344,8 +3334,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -3422,8 +3411,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInGraceNotesGroup (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -3506,8 +3494,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -3580,8 +3567,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -3687,8 +3673,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->
-          getTraceNotes (),
+        gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -23159,11 +23144,22 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     doGenerateBeams = false;
   }
   else {
-    doGenerateBeams =
-      gGlobalLpsr2lilypondOahGroup->getGenerateNoteBeams ();
-        // JMI fixes superflous[ [ ... ] ] issue, asked by Lars Opfermann v0.9.71
-        // but then, when should they be generated ??? JMI
+    const std::list<S_msrBeam>&
+      noteBeamsList =
+        elt->getNoteBeamsList ();
+
+    if (noteBeamsList.size ()) {
+      doGenerateBeams = true;
+    }
+
+    else {
+      doGenerateBeams =
+        gGlobalLpsr2lilypondOahGroup->getGenerateNoteBeams ();
+          // JMI fixes superflous[ [ ... ] ] issue, asked by Lars Opfermann v0.9.71
+          // but then, when should they be generated ??? JMI
+    }
   }
+
   if (doGenerateBeams) {
     generateNoteBeams (elt);
   }
@@ -25285,6 +25281,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 //       break;
 //   } // switch
 
+  // should a \tupletDown be generated? // JMI ??? v0.9.71
+//   S_msrNote
+//     tupletVoiceNumber =
+//       elt->getTupletFactor ()->
+//         getSingleTremoloUpLinkToNote ();
+
+  // generated the \tuplet command
   fLilypondCodeStream <<
     "\\tuplet " <<
     tupletFactorAsLilypondString (elt->getTupletFactor ()) <<

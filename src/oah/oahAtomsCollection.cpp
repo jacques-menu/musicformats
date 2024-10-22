@@ -4384,13 +4384,12 @@ oahThreeBooleansAtom::oahThreeBooleansAtom (
   Bool&                   booleanVariable,
   const S_oahBooleanAtom& secondBooleanAtom,
   const S_oahBooleanAtom& thirdBooleanAtom)
-  : oahBooleanAtom (
+  : oahTwoBooleansAtom (
       longName,
       shortName,
       description,
       variableName,
-      booleanVariable),
-    fSecondBooleanAtom (
+      booleanVariable,
       secondBooleanAtom),
     fThirdBooleanAtom (
       thirdBooleanAtom)
@@ -4834,6 +4833,510 @@ void oahThreeBooleansAtomWithTracePasses::displayAtomWithVariableOptionsValues (
 }
 
 std::ostream& operator << (std::ostream& os, const S_oahThreeBooleansAtomWithTracePasses& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
+S_oahFourBooleansAtom oahFourBooleansAtom::create (
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
+  const S_oahBooleanAtom& secondBooleanAtom,
+  const S_oahBooleanAtom& thirdBooleanAtom,
+  const S_oahBooleanAtom& fourthBooleanAtom)
+{
+  oahFourBooleansAtom* obj = new
+    oahFourBooleansAtom (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable,
+      secondBooleanAtom,
+      thirdBooleanAtom,
+      fourthBooleanAtom);
+  assert (obj != nullptr);
+  return obj;
+}
+
+oahFourBooleansAtom::oahFourBooleansAtom (
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
+  const S_oahBooleanAtom& secondBooleanAtom,
+  const S_oahBooleanAtom& thirdBooleanAtom,
+  const S_oahBooleanAtom& fourthBooleanAtom)
+  : oahThreeBooleansAtom (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable,
+      secondBooleanAtom,
+      thirdBooleanAtom),
+    fFourthBooleanAtom (
+      fourthBooleanAtom)
+{}
+
+oahFourBooleansAtom::~oahFourBooleansAtom ()
+{}
+
+void oahFourBooleansAtom::applyValueLessAtom (std::ostream& os)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahFourBooleansAtom";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  setFourBooleansVariables (true);
+
+  fSelected = true;
+}
+
+void oahFourBooleansAtom::setFourBooleansVariables (Bool value)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Setting option '" <<
+      fetchNames () <<
+      "' four booleans variables to '" <<
+      value <<
+      '\'';
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fBooleanVariable = value;
+
+  fSecondBooleanAtom->setBooleanVariable (value);
+  fThirdBooleanAtom->setBooleanVariable (value);
+  fFourthBooleanAtom->setBooleanVariable (value);
+
+  fSelected = true;
+}
+
+void oahFourBooleansAtom::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahFourBooleansAtom::acceptIn ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahFourBooleansAtom>*
+    p =
+      dynamic_cast<visitor<S_oahFourBooleansAtom>*> (v)) {
+        S_oahFourBooleansAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahFourBooleansAtom::visitStart ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitStart (elem);
+  }
+}
+
+void oahFourBooleansAtom::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahFourBooleansAtom::acceptOut ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahFourBooleansAtom>*
+    p =
+      dynamic_cast<visitor<S_oahFourBooleansAtom>*> (v)) {
+        S_oahFourBooleansAtom elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahFourBooleansAtom::visitEnd ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitEnd (elem);
+  }
+}
+
+void oahFourBooleansAtom::browseData (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahFourBooleansAtom::browseData ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+void oahFourBooleansAtom::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "FourBooleansAtom:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fDescription" << ": " <<
+    std::endl;
+
+  ++gIndenter;
+
+  gIndenter.indentMultiLineString (
+    fDescription,
+    os);
+
+  --gIndenter;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fBooleanVariable" << ": " <<
+    fBooleanVariable <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fSecondBooleanAtom" << ": " <<
+    fSecondBooleanAtom <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fThirdBooleanAtom" << ": " <<
+    fThirdBooleanAtom <<
+    "fFourthBooleanAtom" << ": " <<
+    fFourthBooleanAtom <<
+    std::endl;
+
+  --gIndenter;
+}
+
+void oahFourBooleansAtom::displayAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    fVariableName <<
+    ": " <<
+    fBooleanVariable;
+
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+      os <<
+        ", early";
+      break;
+  } // switch
+  if (fSelected) {
+    os << ", selected";
+  }
+  os << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahFourBooleansAtom& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
+S_oahFourBooleansAtomWithTracePasses oahFourBooleansAtomWithTracePasses::create (
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
+  const S_oahBooleanAtom& secondBooleanAtom,
+  const S_oahBooleanAtom& thirdBooleanAtom,
+  const S_oahBooleanAtom& fourthBooleanAtom)
+{
+  oahFourBooleansAtomWithTracePasses* obj = new
+    oahFourBooleansAtomWithTracePasses (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable,
+      secondBooleanAtom,
+      thirdBooleanAtom,
+      fourthBooleanAtom);
+  assert (obj != nullptr);
+  return obj;
+}
+
+oahFourBooleansAtomWithTracePasses::oahFourBooleansAtomWithTracePasses (
+  const std::string&      longName,
+  const std::string&      shortName,
+  const std::string&      description,
+  const std::string&      variableName,
+  Bool&                   booleanVariable,
+  const S_oahBooleanAtom& secondBooleanAtom,
+  const S_oahBooleanAtom& thirdBooleanAtom,
+  const S_oahBooleanAtom& fourthBooleanAtom)
+  : oahFourBooleansAtom (
+      longName,
+      shortName,
+      description,
+      variableName,
+      booleanVariable,
+      secondBooleanAtom,
+      thirdBooleanAtom,
+      fourthBooleanAtom)
+{}
+
+oahFourBooleansAtomWithTracePasses::~oahFourBooleansAtomWithTracePasses ()
+{}
+
+void oahFourBooleansAtomWithTracePasses::applyValueLessAtom (std::ostream& os)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getTraceEarlyOptions ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahFourBooleansAtomWithTracePasses" <<
+      std::endl;
+  }
+
+  setFourBooleansVariables (true);
+
+  fSelected = true;
+#endif // MF_TRACE_IS_ENABLED
+}
+
+void oahFourBooleansAtomWithTracePasses::acceptIn (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahFourBooleansAtomWithTracePasses::acceptIn ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahFourBooleansAtomWithTracePasses>*
+    p =
+      dynamic_cast<visitor<S_oahFourBooleansAtomWithTracePasses>*> (v)) {
+        S_oahFourBooleansAtomWithTracePasses elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahFourBooleansAtomWithTracePasses::visitStart ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitStart (elem);
+  }
+}
+
+void oahFourBooleansAtomWithTracePasses::acceptOut (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahFourBooleansAtomWithTracePasses::acceptOut ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  if (visitor<S_oahFourBooleansAtomWithTracePasses>*
+    p =
+      dynamic_cast<visitor<S_oahFourBooleansAtomWithTracePasses>*> (v)) {
+        S_oahFourBooleansAtomWithTracePasses elem = this;
+
+#ifdef MF_TRACE_IS_ENABLED
+        if (gOahOahGroup->getTraceOahVisitors ()) {
+          std::stringstream ss;
+
+          ss <<
+            ".\\\" ==> Launching oahFourBooleansAtomWithTracePasses::visitEnd ()";
+
+          gWaeHandler->waeTraceWithoutInputLocation (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+#endif // MF_TRACE_IS_ENABLED
+        p->visitEnd (elem);
+  }
+}
+
+void oahFourBooleansAtomWithTracePasses::browseData (basevisitor* v)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gOahOahGroup->getTraceOahVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      ".\\\" ==> oahFourBooleansAtomWithTracePasses::browseData ()";
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+void oahFourBooleansAtomWithTracePasses::print (std::ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "oahFourBooleansAtomWithTracePasses:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  os <<
+    std::setw (fieldWidth) <<
+    "fDescription" << ": " <<
+    std::endl;
+
+  ++gIndenter;
+
+  gIndenter.indentMultiLineString (
+    fDescription,
+    os);
+
+  --gIndenter;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fBooleanVariable" << ": " <<
+    fBooleanVariable <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fSecondBooleanAtom" << ": " <<
+    fSecondBooleanAtom <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fThirdBooleanAtom" << ": " <<
+    fThirdBooleanAtom <<
+    "fFourthBooleanAtom" << ": " <<
+    fFourthBooleanAtom <<
+    std::endl;
+
+  --gIndenter;
+}
+
+void oahFourBooleansAtomWithTracePasses::displayAtomWithVariableOptionsValues (
+  std::ostream& os,
+  int           valueFieldWidth) const
+{
+  os << std::left <<
+    std::setw (valueFieldWidth) <<
+    fVariableName <<
+    ": " <<
+    fBooleanVariable;
+
+  switch (fEarlyOptionKind) {
+    case oahEarlyOptionKind::kEarlyOptionNo:
+      break;
+    case oahEarlyOptionKind::kEarlyOptionYes:
+      os <<
+        ", early";
+      break;
+  } // switch
+  if (fSelected) {
+    os << ", selected";
+  }
+  os << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_oahFourBooleansAtomWithTracePasses& elt)
 {
   if (elt) {
     elt->print (os);

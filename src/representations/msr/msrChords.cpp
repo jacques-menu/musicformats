@@ -82,7 +82,7 @@ S_msrChord msrChord::create (
   msrNotesDurationKind chordGraphicNotesDurationKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -115,7 +115,7 @@ S_msrChord msrChord::create (
   msrNotesDurationKind chordGraphicNotesDurationKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -172,7 +172,7 @@ S_msrChord msrChord::createChordNewbornClone (
   const S_msrPart& containingPart)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1207,7 +1207,7 @@ void msrChord::appendChordBeamLinkToChord (
 //   int inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChords ()) {
+//   if (gTraceOahGroup->getTraceChordsBasics ()) {
 //     std::stringstream ss;
 //
 //     ss <<

@@ -124,7 +124,7 @@ msrTuplet::msrTuplet (
   fTupletDisplayWholeNotes = msrWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -175,7 +175,7 @@ msrTuplet::msrTuplet (
   fTupletDisplayWholeNotes = msrWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -195,7 +195,7 @@ msrTuplet::~msrTuplet ()
 S_msrTuplet msrTuplet::createTupletNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -441,7 +441,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
 void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -486,7 +486,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
 void msrTuplet::appendTupletToTupletClone (const S_msrTuplet& tuplet)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1580,7 +1580,7 @@ void msrTuplet::finalizeTuplet (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<

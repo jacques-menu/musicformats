@@ -63,7 +63,7 @@ mfIndentedStringStream& operator << (mfIndentedStringStream& iss, const msrMeasu
 //______________________________________________________________________________
 // data types
 
-enum msrMeasureFirstInSegmentKind {
+enum class msrMeasureFirstInSegmentKind {
   kMeasureFirstInSegmentKindUnknown,
   kMeasureFirstInSegmentKindYes,
   kMeasureFirstInSegmentKindNo
@@ -74,7 +74,7 @@ std::string msrMeasureFirstInSegmentKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrMeasureFirstInSegmentKind& elt);
 
-enum msrMeasureRepeatContextKind {
+enum class msrMeasureRepeatContextKind {
   kMeasureRepeatContext_UNKNOWN_,
   kMeasureRepeatContextNone,
   kMeasureRepeatContextCommonPartLastMeasure,
@@ -90,7 +90,7 @@ std::string msrMeasureRepeatContextKindAsString (
 
 std::ostream& operator << (std::ostream& os, const msrMeasureRepeatContextKind& elt);
 
-enum msrMeasureEndRegularKind {
+enum class msrMeasureEndRegularKind {
   kMeasureEndRegularKindUnknown,
   kMeasureEndRegularKindYes,
   kMeasureEndRegularKindNo

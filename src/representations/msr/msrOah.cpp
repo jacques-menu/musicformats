@@ -874,7 +874,7 @@ R"(Write the contents of the first MSR data slices to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-msr1-measures-slices-details", "dmsr1measslicesdets",
+        "display-msr1-measures-slices-details", "dmsr1measslicesd",
 R"(Write the contents of the first MSR data slices to standard error.)",
         "fDisplayFirstMsrMeasuresSlicesDetails",
         fDisplayFirstMsrMeasuresSlicesDetails));
@@ -918,7 +918,7 @@ R"(Write the contents of the second MSR data slices to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-msr2-measures-slices-details", "dmsr2measslicesdets",
+        "display-msr2-measures-slices-details", "dmsr2measslicesd",
 R"(Write the contents of the second MSR data slices to standard error.)",
         "fDisplaySecondMsrMeasuresSlicesDetails",
         fDisplaySecondMsrMeasuresSlicesDetails));
@@ -986,7 +986,7 @@ This option implies that no LilyPond code is generated.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-msr1-voices-flat-view-details", "dmsr1voicesflatviewdets",
+        "display-msr1-voices-flat-view-details", "dmsr1voicesflatviewd",
 R"(Only write a voices flat view of the first MSR to standard error,
 with more details.
 The output looks like:
@@ -1019,7 +1019,7 @@ This option implies that no LilyPond code is generated.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-msr2-voices-flat-view-details", "dmsr2voicesflatviewdets",
+        "display-msr2-voices-flat-view-details", "dmsr2voicesflatviewd",
 R"(Only write a voices flat view of the second MSR to standard error,
 with more details.
 The output looks like:

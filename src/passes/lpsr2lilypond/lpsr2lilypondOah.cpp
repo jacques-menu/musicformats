@@ -3520,7 +3520,7 @@ R"()",
 
   // LilyPond version
 
-  fLilypondVersionMinimumValue = "2.25.0";
+  fLilypondVersionMinimumValue = "2.24.4"; // JMI v0.9.71
 
   fLilypondVersion = fLilypondVersionMinimumValue;
 

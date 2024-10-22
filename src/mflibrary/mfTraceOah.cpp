@@ -538,7 +538,7 @@ R"(BarLines)",
   S_oahThreeBooleansAtom
     traceBarLinesDetailsAtom =
       oahThreeBooleansAtom::create (
-        "trace-barlines-details", "tblinesdets",
+        "trace-barlines-details", "tblinesd",
 R"(BarLines details)",
         "fTraceBarLinesDetails",
         fTraceBarLinesDetails,
@@ -656,7 +656,7 @@ R"(Keys)",
   S_oahThreeBooleansAtom
     traceKeysDetailsAtom =
       oahThreeBooleansAtom::create (
-        "trace-keys-details", "tkeysdets",
+        "trace-keys-details", "tkeysd",
 R"(Keys details)",
         "fTraceKeysDetails",
         fTraceKeysDetails,
@@ -915,7 +915,7 @@ R"(Slurs)",
   S_oahThreeBooleansAtom
     traceSlursDetailsAtom =
       oahThreeBooleansAtom::create (
-        "trace-slurs-details", "tslursdets",
+        "trace-slurs-details", "tslursd",
 R"(Slurs details)",
         "fTraceSlursDetails",
         fTraceSlursDetails,
@@ -982,7 +982,7 @@ R"()",
   // harmonies
 
   fTraceHarmoniesBooleanAtom =
-    oahTwoBooleansAtomWithTracePasses::create (
+    oahTwoBooleansAtom::create (
       "trace-harmonies", "tharms",
 R"(<harmony/> in MusicXML, \chordmode in LilyPond)",
       "fTraceHarmonies",
@@ -998,7 +998,7 @@ R"(<harmony/> in MusicXML, \chordmode in LilyPond)",
   S_oahThreeBooleansAtom
     traceHarmoniesDetailsAtom =
       oahThreeBooleansAtom::create (
-        "trace-harmonies-details", "tharmsdets",
+        "trace-harmonies-details", "tharmsd",
 R"(<harmony/> in MusicXML, \chordmode in LilyPond, with more details)",
         "fTraceHarmoniesDetails",
         fTraceHarmoniesDetails,
@@ -1041,7 +1041,7 @@ R"()",
   // figured bass
 
   fTraceFiguredBassesBooleanAtom =
-    oahTwoBooleansAtomWithTracePasses::create (
+    oahTwoBooleansAtom::create (
       "trace-figured-basses", "tfigbasses",
 R"(<figured-bass> in MusicXML, \figuremode in LilyPond)",
       "fTraceFiguredBasses",
@@ -1057,7 +1057,7 @@ R"(<figured-bass> in MusicXML, \figuremode in LilyPond)",
   S_oahThreeBooleansAtom
     traceFiguredBasseseAtomDetails =
       oahThreeBooleansAtom::create (
-        "trace-figured-bass-details", "tfigbassdets",
+        "trace-figured-bass-details", "tfigbassd",
 R"(<figured-bass> in MusicXML, \figuremode in LilyPond, with more details)",
         "fTraceFiguredBassesDetails",
         fTraceFiguredBassesDetails,
@@ -1139,7 +1139,7 @@ R"(Lyrics)",
   S_oahThreeBooleansAtom
     traceLyricsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-lyrics-details", "tlyricsdets",
+        "trace-lyrics-details", "tlyricsd",
 R"(Lyrics in MusicXML, stanzas in MSR)",
         "fTraceLyricsDetails",
         fTraceLyricsDetails,
@@ -1201,15 +1201,32 @@ R"()",
     appendAtomToSubGroup (
       chordsAndTupletsMultiplexBooleansAtom);
 
+  // chords basics
+
+  S_oahTwoBooleansAtom
+    traceChordsBasicsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-chords-basics", "tchordsb",
+R"(Chords basic trace information)",
+        "fTraceChordsBasics",
+        fTraceChordsBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceChordsBasicsBooleanAtom);
+
   // chords
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahThreeBooleansAtom
     taceChordsBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahThreeBooleansAtom::create (
         "trace-chords", "tchords",
-R"(Chords)",
+R"(Chords.
+This option implies '-trace-chords-basics, -tchordsb'.)",
         "fTraceChords",
         fTraceChords,
+        traceChordsBasicsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -1221,13 +1238,15 @@ R"(Chords)",
 
   // chords details
 
-  S_oahThreeBooleansAtom
+  S_oahFourBooleansAtom
     traceChordsDetailsBooleanAtom =
-      oahThreeBooleansAtom::create (
-        "trace-chords-details", "tchordsdets",
-R"(Chords details)",
+      oahFourBooleansAtom::create (
+        "trace-chords-details", "tchordsd",
+R"(Chords details.
+This option implies '-trace-chords-basics, -tchordsb' and '-trace-chords, -tchords'.)",
         "fTraceChordsDetails",
         fTraceChordsDetails,
+        traceChordsBasicsBooleanAtom,
         taceChordsBooleanAtom,
         fTracePassesBooleanAtom);
 
@@ -1238,15 +1257,32 @@ R"(Chords details)",
     addBooleanAtom (
       traceChordsDetailsBooleanAtom);
 
+  // tuplets basics
+
+  S_oahTwoBooleansAtom
+    traceTupletsBasicsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-tuplets-basics", "ttupsb",
+R"(Tuplets basic trace information)",
+        "fTraceTupletsBasics",
+        fTraceTupletsBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceTupletsBasicsBooleanAtom);
+
   // tuplets
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahThreeBooleansAtom
     traceTupletsBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahThreeBooleansAtom::create (
         "trace-tuplets", "ttups",
-R"(Tuplets)",
+R"(Tuplets trace information.
+This option implies '-trace-tuplets-basics, -ttupsb'.)",
         "fTraceTuplets",
         fTraceTuplets,
+        traceTupletsBasicsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -1256,28 +1292,17 @@ R"(Tuplets)",
     addBooleanAtom (
       traceTupletsBooleanAtom);
 
-//   S_oahTwoBooleansAtomWithTracePasses
-//     displayTupletsBooleanAtom =
-//       oahTwoBooleansAtomWithTracePasses::create (
-//         "display-tuplets", "dtups",
-// R"(Tuplets)",
-//         "fDisplayTuplets",
-//         fDisplayTuplets,
-//         traceTupletsBooleanAtom);
-//   subGroup->
-//     appendAtomToSubGroup (
-//       displayTupletsBooleanAtom);
-//   chordsAndTupletsMultiplexBooleansAtom->
-//     addBooleanAtom (
-//       displayTupletsBooleanAtom);
+  // tuplets details
 
-  S_oahThreeBooleansAtom
+  S_oahFourBooleansAtom
     traceTupletsDetailsBooleanAtom =
-      oahThreeBooleansAtom::create (
-        "trace-tuplets-details", "ttupsdets",
-R"(Tuplets details)",
+      oahFourBooleansAtom::create (
+        "trace-tuplets-details", "ttupsd",
+R"(Tuplets detailed information.
+This option implies '-trace-tuplets-basics, -ttupsb' and '-trace-tuplets, -ttups'.)",
         "fTraceTupletsDetails",
         fTraceTupletsDetails,
+        traceTupletsBasicsBooleanAtom,
         traceTupletsBooleanAtom,
         fTracePassesBooleanAtom);
 
@@ -1638,7 +1663,7 @@ R"(Ornaments)",
   S_oahThreeBooleansAtom
     traceOrnamentsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-ornaments-details", "tornsdets",
+        "trace-ornaments-details", "tornsd",
 R"(Ornaments)",
         "fTraceOrnamentsDetails",
         fTraceOrnamentsDetails,
@@ -1702,9 +1727,9 @@ R"()",
 
   // segments
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceSegmentsBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-segments", "tsegs",
 R"(Voices segments)",
         "fTraceSegments",
@@ -1723,7 +1748,7 @@ R"(Voices segments)",
   S_oahThreeBooleansAtom
     traceSegmentsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-segments-details", "tsegsdets",
+        "trace-segments-details", "tsegsd",
 R"(Voices segments details)",
         "fTraceSegmentsDetails",
         fTraceSegmentsDetails,
@@ -1769,9 +1794,9 @@ R"()",
 
   // measure numbers
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceMeasuresNumbersBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-measures-numbers", "tmneasnums",
 R"(Measure numberss)",
         "fTraceMeasuresNumbers",
@@ -1785,15 +1810,32 @@ R"(Measure numberss)",
     addBooleanAtom (
       traceMeasuresNumbersBooleanAtom);
 
+  // measures basics
+
+  S_oahTwoBooleansAtom
+    traceMeasuresBasicsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-measures-basics", "tmeasb",
+R"(Measures basic trace information)",
+        "fTraceMeasuresBasics",
+        fTraceMeasuresBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceMeasuresBasicsBooleanAtom);
+
   // measures
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahThreeBooleansAtom
     traceMeasuresBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahThreeBooleansAtom::create (
         "trace-measures", "tmeas",
-R"(Measures)",
+R"(Measures.
+This option implies '-trace-measures-basics, -tmeasb'.)",
         "fTraceMeasures",
         fTraceMeasures,
+        traceMeasuresBasicsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -1805,13 +1847,15 @@ R"(Measures)",
 
   // measures details
 
-  S_oahThreeBooleansAtom
+  S_oahFourBooleansAtom
     traceMeasuresDetailsBooleanAtom =
-      oahThreeBooleansAtom::create (
-        "trace-measures-details", "tmeasdets",
-R"(Measures details)",
+      oahFourBooleansAtom::create (
+        "trace-measures-details", "tmeasd",
+R"(Measures details.
+This option implies '-trace-measures-basics, -tmeasb' and '-trace-measures, -tmeas'.)",
         "fTraceMeasuresDetails",
         fTraceMeasuresDetails,
+        traceMeasuresBasicsBooleanAtom,
         traceMeasuresBooleanAtom,
         fTracePassesBooleanAtom);
 
@@ -1822,7 +1866,7 @@ R"(Measures details)",
     addBooleanAtom (
       traceMeasuresDetailsBooleanAtom);
 
-  // measure numbers
+  // only measure
 
   fTraceOnlyMeasurerNumbeOahAtom =
     oahStringAtom::create (
@@ -1838,9 +1882,9 @@ R"(Restrict the production of trace information to measure NUMBER)",
 
   // measure positions
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceMeasurePositionsBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-measure-positions", "tmeapos",
 R"(Measure positions)",
         "fTraceMeasurePositions",
@@ -1857,7 +1901,7 @@ R"(Measure positions)",
   S_oahThreeBooleansAtom
     traceMeasurePositionsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-measure-positions-details", "tmeaposdets",
+        "trace-measure-positions-details", "tmeaposd",
 R"(Measure positions details)",
         "fTraceMeasurePositionsDetails",
         fTraceMeasurePositionsDetails,
@@ -1906,9 +1950,9 @@ R"(Measure moments)",
 
   // voice moments
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceVoiceMomentsBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-voice-moments", "tvoicemoms",
 R"(Voice moments)",
         "fTraceVoiceMoments",
@@ -1940,9 +1984,9 @@ R"()",
 
   // voices flat view
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceVoicesFlatViewBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-voices-flat-view", "tvoicesflatview",
 R"(Trace the voices flat view gathering activity.)",
         "fTraceVoicesFlatView",
@@ -1958,7 +2002,7 @@ R"(Trace the voices flat view gathering activity.)",
   S_oahThreeBooleansAtom
     traceVoicesFlatViewDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-voices-flat-view-details", "tvoicesflatviewdets",
+        "trace-voices-flat-view-details", "tvoicesflatviewd",
 R"(Trace the voices flat view gathering activity with more details.)",
         "fTraceVoicesFlatViewDetails",
         fTraceVoicesFlatViewDetails,
@@ -2003,9 +2047,9 @@ R"()",
 
   // measures slices
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceMeasuresSlicesBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-measures-slices", "tmeasslices",
 R"(Trace the measures slices gathering activity.)",
         "fTraceMeasuresSlices",
@@ -2021,7 +2065,7 @@ R"(Trace the measures slices gathering activity.)",
   S_oahThreeBooleansAtom
     traceMeasuresSlicesDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-measures-slices-details", "tmeasslicesdets",
+        "trace-measures-slices-details", "tmeasslicesd",
 R"(Trace the measures slices gathering activity details.)",
         "fTraceMeasuresSlicesDetails",
         fTraceMeasuresSlicesDetails,
@@ -2064,9 +2108,9 @@ R"()",
 
   // books
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceBooksBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-books", "tbooks",
 R"(Books)",
         "fTraceBooks",
@@ -2082,9 +2126,9 @@ R"(Books)",
 
   // scores
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceScoresBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-scores", "tscores",
 R"(Score)",
         "fTraceScores",
@@ -2100,9 +2144,9 @@ R"(Score)",
 
   // part groups
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     tracePartGroupsBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-part-groups", "tpartgroups",
 R"(Part groups)",
         "fTracePartGroups",
@@ -2121,7 +2165,7 @@ R"(Part groups)",
   S_oahThreeBooleansAtom
     tracePartGroupsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-part-groups-details", "tpartgroupsdets",
+        "trace-part-groups-details", "tpartgroupsd",
 R"(Part groups with more details.
 This option implies '-trace-part-groups, -tpgrps'.)",
         "fTracePartGroupsDetails",
@@ -2138,9 +2182,9 @@ This option implies '-trace-part-groups, -tpgrps'.)",
 
   // parts
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     tracePartsBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-parts", "tparts",
 R"(Parts)",
         "fTraceParts",
@@ -2156,9 +2200,9 @@ R"(Parts)",
 
   // staves
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceStavesBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-staves", "tstaves",
 R"(Staves)",
         "fTraceStaves",
@@ -2177,7 +2221,7 @@ R"(Staves)",
   S_oahThreeBooleansAtom
     traceStaffDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-staves-details", "tstavesdets",
+        "trace-staves-details", "tstavesd",
 R"(Staff details)",
         "fTraceStavesDetails",
         fTraceStavesDetails,
@@ -2193,9 +2237,9 @@ R"(Staff details)",
 
   // staff changes
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceStaffChangesBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-staff-changes", "tstchanges",
 R"(Staff changes)",
         "fTraceStaffChanges",
@@ -2211,9 +2255,9 @@ R"(Staff changes)",
 
   // voices
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceVoicesBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-voices", "tvoices",
 R"(Voices)",
         "fTraceVoices",
@@ -2232,7 +2276,7 @@ R"(Voices)",
   S_oahThreeBooleansAtom
     traceVoicesDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-voices-details", "tvoicesdets",
+        "trace-voices-details", "tvoicesd",
 R"(Voices with more details (quite verbose)..
 This option implies '-trace-voices, -tvoices'.)",
         "fTraceVoicesDetails",
@@ -2254,7 +2298,7 @@ void traceOahGroup::initializeNotesDurationsTraceOah ()
     subGroup =
       oahSubGroup::create (
         "NotesDurations",
-        "help-trace-notes-durations", "htndets",
+        "help-trace-notes-durations", "htnd",
 R"()",
       oahElementVisibilityKind::kElementVisibilityWhole,
       this);
@@ -2263,9 +2307,9 @@ R"()",
 
   // durations
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceNotesDurationsBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create ( // JMI trace too??? v0.9.67
+      oahTwoBooleansAtom::create ( // JMI trace too??? v0.9.67
         "trace-notes-durations", "tndurs",
 R"(Notes durations)",
         "fTraceNotesDurations",
@@ -2306,15 +2350,32 @@ R"()",
     appendAtomToSubGroup (
       notesMultiplexBooleansAtom);
 
+  // notes basics
+
+  S_oahTwoBooleansAtom
+    traceNotesBasicsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-notes-basics", "tnotesb",
+R"(Notes basic trace information)",
+        "fTraceNotesBasics",
+        fTraceNotesBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceNotesBasicsBooleanAtom);
+
   // notes
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahThreeBooleansAtom
     traceNotesBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahThreeBooleansAtom::create (
         "trace-notes", "tnotes",
-R"(Notes)",
+R"(Notes.
+This option implies '-trace-notes-basics, -tnotesb'.)",
         "fTraceNotes",
         fTraceNotes,
+        traceNotesBasicsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2326,14 +2387,15 @@ R"(Notes)",
 
   // notes details
 
-  S_oahThreeBooleansAtom
+  S_oahFourBooleansAtom
     traceNotesDetailsBooleanAtom =
-      oahThreeBooleansAtom::create (
-        "trace-notes-details", "tnotesdets",
+      oahFourBooleansAtom::create (
+        "trace-notes-details", "tnotesd",
 R"(Notes with more details, including divisions handling (quite verbose)...
-This option implies '-trace-notes, -tnotes'.)",
+This option implies '-trace-notes-basics, -tnotesb' and '-trace-notes, -tnotes'.)",
         "fTraceNotesDetails",
         fTraceNotesDetails,
+        traceNotesBasicsBooleanAtom,
         traceNotesBooleanAtom,
         fTracePassesBooleanAtom);
 
@@ -2346,9 +2408,9 @@ This option implies '-trace-notes, -tnotes'.)",
 
   // whole notes
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceWholeNoteDurationsBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-whole-notes-durations", "twhndurs", // JMI v0.9.67 SUPERFLOUS with trace-notes-durations ???
 R"(Whole notes computations (quite verbose)...)",
         "fTraceWholeNoteDurations",
@@ -2367,7 +2429,7 @@ R"(Whole notes computations (quite verbose)...)",
   S_oahThreeBooleansAtom
     traceWholeNoteDurationsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-whole-notes-details", "twhndursdets",
+        "trace-whole-notes-details", "twhndursd",
 R"(Whole notes computations details (event more verbose)...)",
         "fTraceWholeNoteDurationsDetails",
         fTraceWholeNoteDurationsDetails,
@@ -2398,9 +2460,9 @@ R"(Meaures whole notes vectors)",
 
   // rest notes
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceRestNotesBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-rest-notes", "trn",
 R"(Rest notes)",
         "fTraceRestNotes",
@@ -2416,9 +2478,9 @@ R"(Rest notes)",
 
   // skip notes
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceSkipNotesBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-skip-notes", "tskips",
 R"(Skip notes)",
         "fTraceSkipNotes",
@@ -2452,9 +2514,9 @@ R"(Notes octave entry)",
 
   // grace notes
 
-  S_oahTwoBooleansAtomWithTracePasses
+  S_oahTwoBooleansAtom
     traceGraceNotesBooleanAtom =
-      oahTwoBooleansAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "trace-grace-notes", "tgraces",
 R"(Grace notes)",
         "fTraceGraceNotes",
@@ -2556,15 +2618,32 @@ R"()",
     appendAtomToSubGroup (
       repeatsToSlashesMultiplexBooleansAtom);
 
-  // repeats
+  // repeats basics
 
   S_oahTwoBooleansAtom
-    traceRepeatsBooleanAtom =
+    traceRepeatsBasicsBooleanAtom =
       oahTwoBooleansAtom::create (
+        "trace-repeats-basics", "ttupsb",
+R"(Repeats basic trace information)",
+        "fTraceRepeatsBasics",
+        fTraceRepeatsBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceRepeatsBasicsBooleanAtom);
+
+  // repeats
+
+  S_oahThreeBooleansAtom
+    traceRepeatsBooleanAtom =
+      oahThreeBooleansAtom::create (
         "trace-repeats", "treps",
-R"(Repeats)",
+R"(Repeats.
+This option implies '-trace-tuplets-basics, -ttupsb'.)",
         "fTraceRepeats",
         fTraceRepeats,
+        traceRepeatsBasicsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2576,13 +2655,15 @@ R"(Repeats)",
 
   // repeats details
 
-  S_oahThreeBooleansAtom
+  S_oahFourBooleansAtom
     traceRepeatsDetailsBooleanAtom =
-      oahThreeBooleansAtom::create (
-        "trace-repeats-details", "trepsdets",
-R"(Repeats details)",
+      oahFourBooleansAtom::create (
+        "trace-repeats-details", "trepsd",
+R"(Repeats details.
+This option implies '-trace-tuplets-basics, -ttupsb' and '-trace-tuplets, -ttups'.)",
         "fTraceRepeatsDetails",
         fTraceRepeatsDetails,
+        traceRepeatsBasicsBooleanAtom,
         traceRepeatsBooleanAtom,
         fTracePassesBooleanAtom);
 
@@ -2593,15 +2674,32 @@ R"(Repeats details)",
     addBooleanAtom (
       traceRepeatsDetailsBooleanAtom);
 
-  // measure repeats
+  // measure repeats basics
 
   S_oahTwoBooleansAtom
-    traceMeasureRepeatsBooleanAtom =
+    traceMeasureRepeatsBasicsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-measures-repeats", "tmreps",
-R"(Measure repeats)",
+        "trace-measure-repeats-basics", "tmrepsb",
+R"(Measure repeats basic trace information)",
+        "fTraceRepeatsBasics",
+        fTraceRepeatsBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceMeasureRepeatsBasicsBooleanAtom);
+
+  // measure repeats
+
+  S_oahThreeBooleansAtom
+    traceMeasureRepeatsBooleanAtom =
+      oahThreeBooleansAtom::create (
+        "trace-measures-repeats", "tmeasreps",
+R"(Measure repeats.
+This option implies '-trace-tuplets-basics, -ttupsb'.)",
         "fTraceMeasureRepeats",
         fTraceMeasureRepeats,
+        traceMeasureRepeatsBasicsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2611,13 +2709,17 @@ R"(Measure repeats)",
     addBooleanAtom (
       traceMeasureRepeatsBooleanAtom);
 
-  S_oahThreeBooleansAtom
+  // measure repeats details
+
+  S_oahFourBooleansAtom
     traceMeasureRepeatsDetailsBooleanAtom =
-      oahThreeBooleansAtom::create (
-        "trace-measures-repeats-details", "tmesrepsdets",
-R"(Measure repeats)",
+      oahFourBooleansAtom::create (
+        "trace-measures-repeats-details", "tmeasrepsd",
+R"(Measure repeats.
+This option implies '-trace-tuplets-basics, -ttupsb' and '-trace-tuplets, -ttups'.)",
         "fTraceMeasureRepeatsDetails",
         fTraceMeasureRepeatsDetails,
+        traceMeasureRepeatsBasicsBooleanAtom,
         traceMeasureRepeatsBooleanAtom,
         fTracePassesBooleanAtom);
 
@@ -2649,7 +2751,7 @@ R"(Multi-measure rests)",
   S_oahThreeBooleansAtom
     traceMultiMeasureRestsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-multi-measure-rests-details", "tmfbrdets",
+        "trace-multi-measure-rests-details", "tmfbrd",
 R"(Multi-measure rests details)",
         "fTraceMultiMeasureRestsDetails",
         fTraceMultiMeasureRestsDetails,

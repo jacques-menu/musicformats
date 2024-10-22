@@ -226,6 +226,9 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceMeasuresNumbers () const
                               { return fTraceMeasuresNumbers; }
 
+    Bool                  getTraceMeasuresBasics () const
+                              { return fTraceMeasuresBasics; }
+
     void                  setTraceMeasures ()
                               { fTraceMeasures = true; }
     Bool                  getTraceMeasures () const
@@ -387,6 +390,9 @@ class EXP traceOahGroup : public oahGroup
     // --------------------------------------
 
     // repeats
+    Bool                  getTraceRepeatsBasics () const
+                              { return fTraceRepeatsBasics; }
+
     void                  setTraceRepeats ()
                               { fTraceRepeats = true; }
     Bool                  getTraceRepeats () const
@@ -396,6 +402,9 @@ class EXP traceOahGroup : public oahGroup
                               { return fTraceRepeatsDetails; }
 
     // measure repeats
+    Bool                  getTraceMeasureRepeatsBasics () const
+                              { return fTraceMeasureRepeatsBasics; }
+
     void                  setTraceMeasureRepeats ()
                               { fTraceMeasureRepeats = true; }
     Bool                  getTraceMeasureRepeats () const
@@ -440,14 +449,17 @@ class EXP traceOahGroup : public oahGroup
     // --------------------------------------
 
     // notes
+    Bool                  getTraceNotesBasics () const
+                              { return fTraceNotesBasics; }
+
     void                  setTraceNotes ()
                               { fTraceNotes = true; }
     Bool                  getTraceNotes () const
                               { return fTraceNotes; }
 
-    // notes details
     Bool                  getTraceNotesDetails () const
                               { return fTraceNotesDetails; }
+
     // whole notes
     Bool                  getTraceWholeNoteDurations () const
                               { return fTraceWholeNoteDurations; }
@@ -594,6 +606,9 @@ class EXP traceOahGroup : public oahGroup
     // --------------------------------------
 
     // chords
+    Bool                  getTraceChordsBasics () const
+                              { return fTraceChordsBasics; }
+
     void                  setTraceChords ()
                               { fTraceChords = true; }
     Bool                  getTraceChords () const
@@ -601,7 +616,11 @@ class EXP traceOahGroup : public oahGroup
 
     Bool                  getTraceChordsDetails () const
                               { return fTraceChordsDetails; }
+
     // tuplets
+    Bool                  getTraceTupletsBasics () const
+                              { return fTraceTupletsBasics; }
+
     void                  setTraceTuplets ()
                               { fTraceTuplets = true; }
     Bool                  getTraceTuplets () const
@@ -927,6 +946,7 @@ class EXP traceOahGroup : public oahGroup
 
     Bool                  fTraceMeasuresNumbers;
 
+    Bool                  fTraceMeasuresBasics;
     Bool                  fTraceMeasures;
     Bool                  fTraceMeasuresDetails;
 
@@ -1024,6 +1044,7 @@ class EXP traceOahGroup : public oahGroup
     // repeats
     // --------------------------------------
 
+    Bool                  fTraceRepeatsBasics;
     Bool                  fTraceRepeats;
     Bool                  fTraceRepeatsDetails;
 
@@ -1031,6 +1052,7 @@ class EXP traceOahGroup : public oahGroup
     // measure repeats
     // --------------------------------------
 
+    Bool                  fTraceMeasureRepeatsBasics;
     Bool                  fTraceMeasureRepeats;
     Bool                  fTraceMeasureRepeatsDetails;
 
@@ -1061,6 +1083,7 @@ class EXP traceOahGroup : public oahGroup
     // notes
     // --------------------------------------
 
+    Bool                  fTraceNotesBasics;
     Bool                  fTraceNotes;
     Bool                  fTraceNotesDetails;
 
@@ -1184,6 +1207,7 @@ class EXP traceOahGroup : public oahGroup
     // chords
     // --------------------------------------
 
+    Bool                  fTraceChordsBasics;
     Bool                  fTraceChords;
     Bool                  fTraceChordsDetails;
 
@@ -1191,6 +1215,7 @@ class EXP traceOahGroup : public oahGroup
     // tuplets
     // --------------------------------------
 
+    Bool                  fTraceTupletsBasics;
     Bool                  fTraceTuplets;
     Bool                  fTraceTupletsDetails;
 

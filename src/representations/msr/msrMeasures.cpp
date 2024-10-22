@@ -129,7 +129,8 @@ void msrMeasure::initializeMeasure ()
   fMeasureKind = msrMeasureKind::kMeasureKindUnknown;
 
   // measure 'first in segment' kind
-  fMeasureFirstInSegmentKind = kMeasureFirstInSegmentKindUnknown;
+  fMeasureFirstInSegmentKind =
+    msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindUnknown;
 
   // measure 'first in voice'
   fMeasureIsFirstInVoice = false; // default value
@@ -164,10 +165,12 @@ void msrMeasure::initializeMeasure ()
   fMeasureContainsMusic = false;
 
   // regular measure ends detection
-  fMeasureEndRegularKind = kMeasureEndRegularKindUnknown;
+  fMeasureEndRegularKind =
+    msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown;
 
   // repeat context
-  fMeasureRepeatContextKind = msrMeasureRepeatContextKind::kMeasureRepeatContext_UNKNOWN_;
+  fMeasureRepeatContextKind =
+    msrMeasureRepeatContextKind::kMeasureRepeatContext_UNKNOWN_;
 
   // measure whole notes duration
   // initialize measure whole notes
@@ -4867,7 +4870,8 @@ void msrMeasure::handleRegularMeasure (
   setMeasureKind (msrMeasureKind::kMeasureKindRegular);
 
   // this is a regular measure end
-  setMeasureEndRegularKind (kMeasureEndRegularKindYes);
+  setMeasureEndRegularKind (
+    msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
 
   // increment voice's current measure purist number
   voice->
@@ -4936,7 +4940,8 @@ void msrMeasure::handleIncompleteMeasure (
     }
 
     // this is a regular measure end
-    setMeasureEndRegularKind (kMeasureEndRegularKindYes);
+    setMeasureEndRegularKind (
+      msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
 
     // set first incomplete measure purist number to 0
     setMeasurePuristNumber (0);
@@ -4949,7 +4954,8 @@ void msrMeasure::handleIncompleteMeasure (
       newWholeNotesSinceLastRegularMeasureEnd == getFullMeasureWholeNotesDuration ()
     ) {
       // this is a regular measure end
-      setMeasureEndRegularKind (kMeasureEndRegularKindYes);
+      setMeasureEndRegularKind (
+        msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
 
       // increment voice's current measure purist number
       voice->
@@ -4965,7 +4971,8 @@ void msrMeasure::handleIncompleteMeasure (
     }
     else {
       // this is no regular measure end
-      setMeasureEndRegularKind (kMeasureEndRegularKindNo);
+      setMeasureEndRegularKind (
+        msrMeasureEndRegularKind::kMeasureEndRegularKindNo);
     }
 
     // set measure's kind according to measureRepeatContextKind
@@ -5084,7 +5091,8 @@ void msrMeasure::handleOverflowingMeasure (
   setMeasureKind (msrMeasureKind::kMeasureKindOverFlowing);
 
   // this is a regular measure end
-  setMeasureEndRegularKind (kMeasureEndRegularKindYes);
+  setMeasureEndRegularKind (
+    msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
 
   // increment voice's current measure purist number
   voice->

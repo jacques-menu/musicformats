@@ -1270,9 +1270,9 @@ class EXP oahTwoBooleansAtom : public oahBooleanAtom
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
-  private:
+  protected:
 
-    // private fields
+    // protected fields
     // ------------------------------------------------------
 
     S_oahBooleanAtom      fSecondBooleanAtom;
@@ -1344,18 +1344,18 @@ class EXP oahTwoBooleansAtomWithTracePasses : public oahTwoBooleansAtom
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    S_oahBooleanAtom      fSecondBooleanAtom;
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//     S_oahBooleanAtom      fSecondBooleanAtom;
 };
 typedef SMARTP<oahTwoBooleansAtomWithTracePasses> S_oahTwoBooleansAtomWithTracePasses;
 EXP std::ostream& operator << (std::ostream& os, const S_oahTwoBooleansAtomWithTracePasses& elt);
 
 //______________________________________________________________________________
-class EXP oahThreeBooleansAtom : public oahBooleanAtom
+class EXP oahThreeBooleansAtom : public oahTwoBooleansAtom
 {
   public:
 
@@ -1422,12 +1422,12 @@ class EXP oahThreeBooleansAtom : public oahBooleanAtom
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
-  private:
+  protected:
 
-    // private fields
+    // protected fields
     // ------------------------------------------------------
 
-    S_oahBooleanAtom      fSecondBooleanAtom;
+//     S_oahBooleanAtom      fSecondBooleanAtom;
     S_oahBooleanAtom      fThirdBooleanAtom;
 };
 typedef SMARTP<oahThreeBooleansAtom> S_oahThreeBooleansAtom;
@@ -1499,16 +1499,178 @@ class EXP oahThreeBooleansAtomWithTracePasses : public oahThreeBooleansAtom
                             std::ostream& os,
                             int           valueFieldWidth) const override;
 
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    S_oahBooleanAtom      fSecondBooleanAtom;
-    S_oahBooleanAtom      fThirdBooleanAtom;
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//     S_oahBooleanAtom      fSecondBooleanAtom;
+//     S_oahBooleanAtom      fThirdBooleanAtom;
 };
 typedef SMARTP<oahThreeBooleansAtomWithTracePasses> S_oahThreeBooleansAtomWithTracePasses;
 EXP std::ostream& operator << (std::ostream& os, const S_oahThreeBooleansAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahFourBooleansAtom : public oahThreeBooleansAtom
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahFourBooleansAtom> create (
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
+                            Bool&                   booleanVariable,
+                            const S_oahBooleanAtom& secondBooleanAtom,
+                            const S_oahBooleanAtom& thirdBooleanAtom,
+                            const S_oahBooleanAtom& fourthBooleanAtom);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahFourBooleansAtom (
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
+                            Bool&                   booleanVariable,
+                            const S_oahBooleanAtom& secondBooleanAtom,
+                            const S_oahBooleanAtom& thirdBooleanAtom,
+                            const S_oahBooleanAtom& fourthBooleanAtom);
+
+    virtual               ~oahFourBooleansAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    void                  setFourBooleansVariables (Bool value);
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyValueLessAtom (std::ostream& os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    void                  print (std::ostream& os) const override;
+
+    void                  displayAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+//     S_oahBooleanAtom      fSecondBooleanAtom;
+//     S_oahBooleanAtom      fThirdBooleanAtom;
+    S_oahBooleanAtom      fFourthBooleanAtom;
+};
+typedef SMARTP<oahFourBooleansAtom> S_oahFourBooleansAtom;
+EXP std::ostream& operator << (std::ostream& os, const S_oahFourBooleansAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahFourBooleansAtomWithTracePasses : public oahFourBooleansAtom
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahFourBooleansAtomWithTracePasses> create (
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
+                            Bool&                   booleanVariable,
+                            const S_oahBooleanAtom& secondBooleanAtom,
+                            const S_oahBooleanAtom& thirdBooleanAtom,
+                            const S_oahBooleanAtom& fourthBooleanAtom);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahFourBooleansAtomWithTracePasses (
+                            const std::string&      longName,
+                            const std::string&      shortName,
+                            const std::string&      description,
+                            const std::string&      variableName,
+                            Bool&                   booleanVariable,
+                            const S_oahBooleanAtom& secondBooleanAtom,
+                            const S_oahBooleanAtom& thirdBooleanAtom,
+                            const S_oahBooleanAtom& fourthBooleanAtom);
+
+    virtual               ~oahFourBooleansAtomWithTracePasses ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyValueLessAtom (std::ostream& os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    void                  print (std::ostream& os) const override;
+
+    void                  displayAtomWithVariableOptionsValues (
+                            std::ostream& os,
+                            int           valueFieldWidth) const override;
+
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//     S_oahBooleanAtom      fSecondBooleanAtom;
+//     S_oahBooleanAtom      fThirdBooleanAtom;
+//     S_oahBooleanAtom      fFourthBooleanAtom;
+};
+typedef SMARTP<oahFourBooleansAtomWithTracePasses> S_oahFourBooleansAtomWithTracePasses;
+EXP std::ostream& operator << (std::ostream& os, const S_oahFourBooleansAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahCombinedBooleansAtom : public oahValueLessAtom

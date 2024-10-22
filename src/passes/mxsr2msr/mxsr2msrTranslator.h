@@ -2575,16 +2575,6 @@ class EXP mxsr2msrTranslator :
     void                      reduceTupletStackTop (
                                 const S_msrNote&  note,
                                 const S_msrVoice& currentNoteVoice);
-//
-//     void                      handlePendingTupletStops (
-//                                 int              inputLineNumber,
-//                                 const S_msrNote& note);
-//     void                      handleTupletsPendingOnTupletsStack (
-//                                 int inputLineNumber);
-
-//     void                      handleTupletStopNumbersForNote (
-//                                 int              inputLineNumber,
-//                                 const S_msrNote& note);
 
 
     // ties handling

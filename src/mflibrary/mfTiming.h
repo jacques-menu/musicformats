@@ -30,7 +30,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 // data types
 
-enum mfTimingItemKind {
+enum class mfTimingItemKind {
   kMandatory, kOptional
 };
 

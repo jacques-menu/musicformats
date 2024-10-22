@@ -1467,7 +1467,7 @@ This implies that no LilyPond code is generated.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-lpsr-voices-flat-view-details", "dlpsrvoicesflatviewdets",
+        "display-lpsr-voices-flat-view-details", "dlpsrvoicesflatviewd",
 R"(Only write a voices flat view of the LPSR to standard error
 with more details.
 The output looks like:
@@ -1496,7 +1496,7 @@ This implies that no LilyPond code is generated.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtomWithTracePasses::create (
-        "display-lpsr-measures-slices-details", "dlpsrmeasslicesdets",
+        "display-lpsr-measures-slices-details", "dlpsrmeasslicesd",
 R"(Only write the measures slices of the LPSR to standard error
 with more details.
 This implies that no LilyPond code is generated.)",
