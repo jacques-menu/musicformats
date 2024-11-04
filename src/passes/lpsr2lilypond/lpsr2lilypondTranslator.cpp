@@ -27729,8 +27729,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
 
   fLilypondCodeStream <<
     "\\tempo " <<
-    elt->getMidiTempoNotesDuration () << // BLARK
-    "= " <<
+    elt->getMidiTempoNotesDuration () << // BLARK v0.9.71
+    " = " <<
     elt->getMidiTempoPerSecond () <<
     std::endl;
 

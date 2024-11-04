@@ -33,8 +33,6 @@
 
 #include "mxsr2msrSkeletonBuilderInterface.h"
 
-#include "mxsr2msrSkeletonBuilder.h"
-
 #include "displayMsrSummaryVisitor.h"
 
 #include "waeHandlers.h"
@@ -45,10 +43,11 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 S_msrScore translateMxsrToMsrSkeleton (
-  const Sxmlelement&   theMxsr,
-  const S_msrOahGroup& msrOpts,
-  mfPassIDKind         passIDKind,
-  const std::string&   passDescription)
+  const Sxmlelement&    theMxsr,
+  mxsrScoreNotesEvents& theResultingScoreNotesEvents,
+  const S_msrOahGroup&  msrOpts,
+  mfPassIDKind          passIDKind,
+  const std::string&    passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -90,7 +89,8 @@ S_msrScore translateMxsrToMsrSkeleton (
 
   // create an MXSR2msrSkeletonBuilder
   mxsr2msrSkeletonBuilder
-    skeletonBuilder;
+    skeletonBuilder (
+      theResultingScoreNotesEvents);
 
   // build the MSR score
   skeletonBuilder.browseMxsr (

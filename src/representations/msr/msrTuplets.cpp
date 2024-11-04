@@ -421,12 +421,9 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
   chord->setPositionInTuplet (
     fTupletElementsList.size ());
 
-  // DO NOT account for the chord duration,
-  // since its first note has been accounted for already JMI v0.9.70
-  /*
-  fMeasureElementSoundingWholeNotes +=
+  // account for the chord duration,
+  fMeasureElementSoundingWholeNotes += // JMI v0.9.71 FIRST_AFTER TENOR
     chord->getMeasureElementSoundingWholeNotes ();
-  */
 
   fTupletDisplayWholeNotes += // JMI
     chord->getChordDisplayWholeNotes ();

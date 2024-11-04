@@ -19,7 +19,7 @@
 
 In \mxml, part groups can overlap, even though no one seems ever to have needed that. That seems to be more a feature in the Finale handling of \mxml export that a true musical need.
 
-\msrRepr\ does not support overlapping part group. Handling part groups is done in \mxsrToMsrBoth{mxsr2msrTranslator.h}, where overlapping groups are identified and rejected:
+\msrRepr\ does not support overlapping part group. Handling part groups is done in \mxsrToMsrBoth{mxsr2msrSkeletonPopulator.h}, where overlapping groups are identified and rejected:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly partgroups/OverlappingPartGroups.xml
 ### MusicXML ERROR ### partgroups/OverlappingPartGroups.xml:169:

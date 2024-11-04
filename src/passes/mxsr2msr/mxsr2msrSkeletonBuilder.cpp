@@ -24,7 +24,7 @@
 #include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
-
+#include "mfTraceOah.h"
 #include "msrMeasureConstants.h"
 
 #include "displayMsrSummaryVisitor.h"
@@ -487,8 +487,363 @@ std::ostream& operator << (std::ostream& os, const S_mxsrPartGroupsStack& elt) {
   return os;
 }
 
-//_______________________________________________________________________________
-mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
+// //______________________________________________________________________________
+// S_mxsr2msrVoiceHandler mxsr2msrVoiceHandler::create (
+//   const S_msrVoice&  voice)
+// {
+//   mxsr2msrVoiceHandler* obj = new
+//     mxsr2msrVoiceHandler (
+//       voice);
+//   assert (obj != nullptr);
+//   return obj;
+// }
+//
+// mxsr2msrVoiceHandler::mxsr2msrVoiceHandler (
+//   const S_msrVoice&  voice)
+// {
+//   fMsrVoice = voice;
+// }
+//
+// mxsr2msrVoiceHandler::~mxsr2msrVoiceHandler ()
+// {}
+//
+// //________________________________________________________________________
+// void mxsr2msrVoiceHandler::displayTupletsStack (
+//   const std::string& context)
+// {
+//   size_t tupletsStackSize = fTupletsStack.size ();
+//
+//   gLog <<
+//     std::endl <<
+//     ">>++++++++++++++ The tuplets stack contains " <<
+//     mfSingularOrPlural (
+//       tupletsStackSize, "element", "elements") <<
+//     ':' <<
+//     std::endl;
+//
+//   if (tupletsStackSize) {
+//     std::list<S_msrTuplet>::const_iterator
+//       iBegin = fTupletsStack.begin (),
+//       iEnd   = fTupletsStack.end (),
+//       i      = iBegin;
+//
+//     S_msrTuplet tuplet = (*i);
+//
+//     ++gIndenter;
+//
+//     int n = tupletsStackSize;
+//     for ( ; ; ) {
+//       gLog <<
+//         "v (" << n << ")" <<
+//         std::endl;
+//
+//       ++gIndenter;
+//       gLog << tuplet->asString (); // JMI v0.9.71
+//       --gIndenter;
+//
+//       --n;
+//
+//       if (++i == iEnd) break;
+//
+//       gLog << std::endl;
+//     } // for
+//
+//     --gIndenter;
+//   }
+//
+//   gLog <<
+//     " <<++++++++++++++++ " <<
+//     std::endl << std::endl;
+// }
+//
+// // void mxsr2msrVoiceHandler::displayLastHandledTupletInVoiceMap (
+// //   const std::string& header)
+// // {
+// //   gLog <<
+// //     std::endl <<
+// //     header <<
+// //     ", fLastHandledTupletInVoiceMap contains:";
+// //
+// //   if (! fLastHandledTupletInVoiceMap.size ()) {
+// //     gLog <<
+// //       " none" <<
+// //       std::endl;
+// //   }
+// //
+// //   else {
+// //     std::map<std::pair<int, int>, S_msrTuplet>::const_iterator
+// //       iBegin = fLastHandledTupletInVoiceMap.begin (),
+// //       iEnd   = fLastHandledTupletInVoiceMap.end (),
+// //       i      = iBegin;
+// //
+// //     gLog << std::endl;
+// //
+// //     ++gIndenter;
+// //
+// //     for ( ; ; ) {
+// //       gLog <<
+// //         "staff " << (*i).first.first <<
+// //         ", voice " <<  (*i).first.second <<
+// //         std::endl;
+// // //        "\"" << (*i).first->getVoiceName () <<
+// // //        "\" ----> " << (*i).second->asString ();
+// //       if (++i == iEnd) break;
+// //       gLog << std::endl;
+// //     } // for
+// //
+// //     gLog << std::endl;
+// //
+// //     --gIndenter;
+// //   }
+// //
+// //   gLog << std::endl;
+// // }
+//
+// void mxsr2msrVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
+//   int         inputLineNumber,
+//   std::string context)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Finalizing tuplet stack top and popping it from tuplet stack" <<
+//       ", fTupletsStack.size (): " << fTupletsStack.size ();
+//
+//     ss <<
+//       ", fCurrentOuterMostTuplet: ";
+//     if (fCurrentOuterMostTuplet) {
+//       ss <<
+//         fCurrentOuterMostTuplet->asString ();
+//     }
+//     else {
+//       ss << "[NULL]";
+//     }
+//
+//     ss <<
+//       ", context: " << context <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//     displayTupletsStack (
+//       "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 2");
+//   }
+// //   if (gTraceOahGroup->getTraceTuplets ()) {
+// //     displayVoicesTupletsStacksMap (
+// //       "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 3");
+// //   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // fetch the current voice
+//   S_msrVoice
+//     currentNoteVoice =
+//       fMsrVoice; // JMI v0.9.70
+//
+//   // get tuplet from top of tuplet stack
+//   S_msrTuplet
+//     tupletStackFront =
+//       fTupletsStack.front ();
+//
+//   // pop from the tuplets stack
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Popping tupletStackFront " <<
+//       tupletStackFront->asString () <<
+//       " for voice " <<
+//       fMsrVoice->getVoiceName () <<
+//       ", context: " << context <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//     displayTupletsStack (
+//       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 4");
+//   }
+// //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+// //     displayVoicesTupletsStacksMap (
+// //       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
+// //   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check JMI v0.9.70
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     fTupletsStack.size () > 0,
+//     "fTupletsStack is empty");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   fTupletsStack.pop_front (); // JMI v0.9.68
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//     displayTupletsStack (
+//       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 6");
+//   }
+// //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+// //     displayVoicesTupletsStacksMap (
+// //       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 7");
+// //   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// //   abort ();
+//
+//   switch (fTupletsStack.size ()) {
+//     case 0:
+//       // tupletStackFront is a top level tuplet
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceTupletsBasics ()) {
+//         gLog <<
+//           "Appending top level tuplet " <<
+//         tupletStackFront->asString () <<
+//         " to voice \"" <<
+//         currentNoteVoice->getVoiceName () <<
+//         "\"" <<
+//         ", line " << inputLineNumber <<
+//         std::endl;
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//     break;
+//
+//     default:
+//       // tupletStackFront is a nested tuplet
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceTupletsBasics ()) {
+//         gLog <<
+//           "=== appending nested tuplet " <<
+//         tupletStackFront <<
+//           " to current stack top tuplet " <<
+//         fTupletsStack.front ()->asString () <<
+//         ", line " << inputLineNumber <<
+//         std::endl;
+//       }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//       fTupletsStack.front ()->
+//         appendTupletToTuplet (tupletStackFront);
+//   } // switch
+//
+//     // forget about the current outermost tuplet and its first note // JMI v0.9.68 HARMFUL
+// //     fCurrentOuterMostTupletFirstNote = nullptr;
+// //     fCurrentOuterMostTuplet = nullptr;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+//     displayTupletsStack (
+//       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 8");
+//   }
+// //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
+// //     displayVoicesTupletsStacksMap (
+// //       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 9");
+// //   }
+// #endif // MF_TRACE_IS_ENABLED
+// }
+//
+// std::string mxsr2msrVoiceHandler::asString () const
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+// 		"[mxsr2msrVoiceHandler" <<
+//     ']' <<
+//     std::endl;
+//
+//   return ss.str ();
+// }
+//
+// void mxsr2msrVoiceHandler::print (std::ostream& os) const
+// {
+// 	os <<
+// 		"[mxsr2msrVoiceHandler" <<
+// 		std::endl;
+//
+// 	++gIndenter;
+//
+//   const int fieldWidth = 14;
+//
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fMsrVoice" << ": " <<
+//     fMsrVoice->getVoiceName () <<
+//     std::endl <<
+//
+//     std::setw (fieldWidth) <<
+//     "fLastMetNoteInVoice" << ": " <<
+//     fLastMetNoteInVoice <<
+//     std::endl <<
+//
+//     std::setw (fieldWidth) <<
+//     "fCurrentOuterMostTupletFirstNote" << ": " <<
+//     fCurrentOuterMostTupletFirstNote <<
+//     std::endl <<
+//
+//     std::setw (fieldWidth) <<
+//     "fCurrentOuterMostTuplet" << ": " <<
+//     fCurrentOuterMostTuplet <<
+//     std::endl <<
+//
+//     std::setw (fieldWidth) <<
+//     "fCurrentOuterMostTuplet" << ": " <<
+//     fCurrentOuterMostTuplet <<
+//     std::endl <<
+//
+//     std::setw (fieldWidth) <<
+//     "fTupletsStack" << ": " <<
+//     std::endl;
+//
+//   ++gIndenter;
+//   for (S_msrTuplet tuplet : fTupletsStack) {
+//     os <<
+//       tuplet <<
+//       std::endl;
+//   } // for
+//   --gIndenter;
+//
+// 	os << ']' << std::endl;
+//
+//   --gIndenter;
+// }
+//
+// std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceHandler& elt)
+// {
+//   elt.print (os);
+//   return os;
+// }
+//
+// std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandler& elt)
+// {
+//   if (elt) {
+//     elt->print (os);
+//   }
+//   else {
+//     os << "[NULL]" << std::endl;
+//   }
+//
+//   return os;
+// }
+
+//________________________________________________________________________
+mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
+	mxsrScoreNotesEvents& theResultingScoreNotesEvents)
+	: fResultingScoreNotesEvents (
+			theResultingScoreNotesEvents)
 {
   // the MSR score we're building
   fMsrScore =
@@ -496,14 +851,24 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
       K_MF_INPUT_LINE_UNKNOWN_,
       "msrScore::create()");
 
+	// the score notes events we shall collect for  mxsr2msrSkeletonPopulator
+	fCurrentNoteSequentialNumber = 0;
+
+	fCurrentNoteStartInputLine = -1;
+	fCurrentNoteEndInputLine = -1;
+
+	fPreviousNoteStartInputLine = -1;
+	fPreviousNoteEndInputLine = -1;
+
   // parts handling
   fCurrentPartGroupIdentity= -1; // the score part 'start' will set this identity
 
   // staff handling
-  fCurrentStaffMusicXMLNumber = -1;
+  fCurrentNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+  fPreviousNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 
   // voice handling
-  fCurrentVoiceMusicXMLNumber = -1;
+  fCurrentVoiceMusicXMLNumber = K_VOICE_NUMBER_UNKNOWN_;
 
   // measures handling
   fScoreFirstMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
@@ -511,6 +876,18 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
 
   fScoreMeasuresNumber = 0;
   fPartNumberOfMeasures = 0;
+
+  // chords handling
+  fCurrentNoteBelongsToAChord = false;
+  fPreviousNoteBelongsToAChord = false;
+
+  // tuplets handling
+  fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeNone;
+
+  fCurrentTupletNumber  = -1;
+  fPreviousTupletNumber = -1;
+
+  fCurrentNoteBelongsToATuplet = false;
 
   // lyrics handling
   fCurrentStanzaNumber = msrStanza::K_STANZA_NUMBER_UNKNOWN_; // JMI
@@ -521,10 +898,6 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
 
   // figured bass handling
   fFiguredBassVoicesCounter = 0;
-
-  // note context
-  fCurrentStaffMusicXMLNumber = 0;
-  fCurrentVoiceMusicXMLNumber = 0;
 
   // create the implicit outer-most part group,
   // needed for stand-alone parts
@@ -545,6 +918,28 @@ void mxsr2msrSkeletonBuilder::browseMxsr (
 
     // browse the MXSR
     browser.browse (*theMxsr);
+
+		// sort the fResultingScoreNotesEvents all notes events list
+		fResultingScoreNotesEvents.sortAllNotesEventsList ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (
+  	gTraceOahGroup->getTraceChordsBasics ()
+  		||
+  	gTraceOahGroup->getTraceTupletsBasics ()
+  		||
+  	gTraceOahGroup->getTraceStaffChanges () // JMI v0.9.71
+  ) {
+    gLog <<
+      std::endl <<
+      "The MSR skeleton builder collected the following note events:" <<
+      std::endl;
+
+			++gIndenter;
+			fResultingScoreNotesEvents.print (gLog);
+			--gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
   }
 }
 
@@ -1209,7 +1604,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "staff number " << fCurrentStaffMusicXMLNumber <<
+//       "staff number " << fCurrentNoteStaffNumber <<
 //       " is not positive" <<
 //       ", line " << inputLineNumber;
 //
@@ -4125,7 +4520,9 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   fPartNumberOfMeasures = 0;
 
   // staves and voices
-  fCurrentStaffMusicXMLNumber = 1; // default if there are no <staff> element
+  fCurrentNoteStaffNumber = 1; // default if there are no <staff> element
+  fPreviousNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+
   fCurrentVoiceMusicXMLNumber = 1; // default if there are no <voice> element
 }
 
@@ -4312,14 +4709,15 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentStaffMusicXMLNumber = int(*elt);
+	fPreviousNoteStaffNumber = fCurrentNoteStaffNumber;
+  fCurrentNoteStaffNumber = int(*elt);
 
   // the staff number should be positive
-  if (fCurrentStaffMusicXMLNumber == K_STAFF_NUMBER_UNKNOWN_) {
+  if (fCurrentNoteStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
     std::stringstream ss;
 
     ss <<
-      "staff number " << fCurrentStaffMusicXMLNumber <<
+      "staff number " << fCurrentNoteStaffNumber <<
       " is not positive" <<
       ", line " << elt->getInputStartLineNumber ();
 
@@ -4383,6 +4781,45 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
   // don't attempt to create the voice now,
   // it's staff number if any comes later!
   // do it upton visitEnd (S_note& )
+}
+
+//________________________________________________________________________
+void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting S_print" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fOnGoingPrint = true;
+}
+
+void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting S_print" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fOnGoingPrint = false;
 }
 
 //________________________________________________________________________
@@ -4465,46 +4902,108 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+	// an end of measure enforces the end of a chord or tuplets  CHORD_TUP
+	// the current note is then the one preceding the end of measure
+
+	gLog <<
+		"===> visitEnd (S_measure& elt)" <<
+		", fCurrentNoteSequentialNumber: " <<
+    fCurrentNoteSequentialNumber <<
+
+		", fCurrentNoteStartInputLine: " <<
+    fCurrentNoteStartInputLine <<
+
+		", fCurrentNoteBelongsToAChord: " <<
+		fCurrentNoteBelongsToAChord <<
+		", fPreviousNoteBelongsToAChord: " <<
+    fPreviousNoteBelongsToAChord <<
+
+		", fCurrentNoteBelongsToATuplet: " <<
+    fCurrentNoteBelongsToATuplet <<
+
+		", fCurrentTupletTypeKind: " <<
+    fCurrentTupletTypeKind <<
+    std::endl;
+
+ 	// Q_MEASURE
+
+	// register chord events if any
+	if (fCurrentNoteBelongsToAChord) {
+		// the note before the measure end is the last one of the chord
+		fResultingScoreNotesEvents.registerChordEndEvent (
+			fCurrentNoteSequentialNumber,
+			fCurrentNoteStartInputLine,
+			fCurrentNoteEndInputLine);
+
+// 			fOnGoingChord = true;
+	}
+
+	else {
+// 		// is this note the one that follows the last one of a chord?
+// 		if (fPreviousNoteBelongsToAChord) {
+// 			// this the note after the last one of the chord
+// 			 // we're one note late!
+// 			fResultingScoreNotesEvents.registerChordEndEvent (
+// 				fCurrentNoteSequentialNumber - 1,
+// 				fPreviousNoteStartInputLine,
+// 				fPreviousNoteEndInputLine);
+//
+// // 			fOnGoingChord = false;
+// 		}
+// 		else {
+// 		}
+	}
+
+ 	// Q_MEASURE
+
+	// register tuplet events if any
+
+	if (fThereIsAPendingTupletStop) {
+		fResultingScoreNotesEvents.registerTupletEndEvent (
+			fCurrentNoteSequentialNumber,
+			fCurrentNoteStartInputLine,
+			fCurrentNoteEndInputLine);
+
+		// forget about the pending tuplet stop
+		fThereIsAPendingTupletStop = false;
+	}
+
+	switch (fCurrentTupletTypeKind) {
+    case msrTupletTypeKind::kTupletTypeNone:
+    	// should not occur
+      break;
+
+    case msrTupletTypeKind::kTupletTypeStart:
+    	// should not occur
+// 			fResultingScoreNotesEvents.registerTupletBeginEvent (
+// 				fCurrentNoteSequentialNumber,
+// 				fCurrentNoteStartInputLine,
+// 				fCurrentNoteEndInputLine);
+abort();
+// 			fOnGoingTuplet = true;
+      break;
+
+    case msrTupletTypeKind::kTupletTypeContinue:
+    	// nothing to do
+      break;
+
+    case msrTupletTypeKind::kTupletTypeStop:
+// 			fResultingScoreNotesEvents.registerTupletEndEvent (
+// 				fCurrentNoteSequentialNumber,
+// 				fCurrentNoteStartInputLine,
+// 				fCurrentNoteEndInputLine);
+//
+// 					// forget about the pending tuplet stop
+// 					fThereIsAPendingTupletStop = false;
+
+// 			fOnGoingTuplet = false;
+      break;
+
+    case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
+      break;
+	} // switch
+
   --gIndenter;
-}
-
-//________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting S_print" <<
-      ", line " << elt->getInputStartLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fOnGoingPrint = true;
-}
-
-void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting S_print" <<
-      ", line " << elt->getInputStartLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fOnGoingPrint = false;
 }
 
 //______________________________________________________________________________
@@ -4524,8 +5023,24 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+	++fCurrentNoteSequentialNumber;
+
+	fPreviousNoteBelongsToAChord = fCurrentNoteBelongsToAChord;
+	fCurrentNoteBelongsToAChord = false;
+
+	fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeNone;
+  fCurrentNoteBelongsToATuplet = false;
+
+	fPreviousNoteStartInputLine = fCurrentNoteStartInputLine;
+	fPreviousNoteStartInputLine = fCurrentNoteEndInputLine;
+
+	fCurrentNoteStartInputLine =
+		elt->getInputStartLineNumber ();
+	fCurrentNoteEndInputLine =
+		elt->getInputEndLineNumber ();
+
   // assuming staff number 1, unless S_staff states otherwise afterwards
-  fCurrentStaffMusicXMLNumber = 1;
+  fCurrentNoteStaffNumber = 1;
 
   // assuming voice number 1, unless S_voice states otherwise afterwards
   fCurrentVoiceMusicXMLNumber = 1;
@@ -4558,32 +5073,38 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
     staff =
       createStaffInCurrentPartIfNotYetDone (
         elt->getInputStartLineNumber (),
-        fCurrentStaffMusicXMLNumber);
+        fCurrentNoteStaffNumber);
 
   // should the voice be created?
   S_msrVoice
     noteVoice =
       createRegularVoiceInStaffIfNotYetDone (
         elt->getInputStartLineNumber (),
-        fCurrentStaffMusicXMLNumber,
+        fCurrentNoteStaffNumber,
         fCurrentVoiceMusicXMLNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDetails ()) {
+  if (true || gTraceOahGroup->getTraceNotesDetails ()) {
     std::stringstream ss;
 
     ss <<
-      "--> S_note, fCurrentStaffMusicXMLNumber: " <<
-      fCurrentStaffMusicXMLNumber <<
-      std::endl <<
-      "--> S_note, current staff name: " <<
-      staff->getStaffName() <<
-      std::endl <<
-      "--> S_note, fCurrentVoiceMusicXMLNumber: " <<
+    	"--> visitEnd (S_note& elt) 1:"
+      ", fCurrentNoteSequentialNumber: " <<
+      fCurrentNoteSequentialNumber <<
+      ", fCurrentNoteStartInputLine: " <<
+      fCurrentNoteStartInputLine <<
+
+      ", fCurrentNoteStaffNumber: " <<
+      fCurrentNoteStaffNumber <<
+      ", tStaffName(): " <<
+      staff->getStaffName () <<
+      ", fCurrentVoiceMusicXMLNumber: " <<
       fCurrentVoiceMusicXMLNumber <<
-      std::endl <<
-      "--> S_note, current noteVoice name: " <<
-      noteVoice->getVoiceName();
+      ", getVoiceName(): " <<
+      noteVoice->getVoiceName () <<
+      ", fCurrentTupletTypeKind: " <<
+      fCurrentTupletTypeKind <<
+      ", line " << fCurrentNoteStartInputLine;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4606,9 +5127,9 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
-      }
+			}
 #endif // MF_TRACE_IS_ENABLED
-    }
+		}
     else {
       // create the part harmonies voice if not yet done
       S_msrVoice
@@ -4651,7 +5172,433 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
     fThereAreFiguredBassToBeAttachedToCurrentNote = false;
   }
 
-  fOnGoingNote = false;
+ 	// Q_NOTE
+
+	// register chord events if any
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+    	"--> visitEnd (S_note& elt) 2:"
+      ", fCurrentNoteSequentialNumber: " <<
+      fCurrentNoteSequentialNumber <<
+      ", fCurrentNoteStartInputLine: " <<
+      fCurrentNoteStartInputLine <<
+
+      ", fCurrentNoteBelongsToAChord: " <<
+      fCurrentNoteBelongsToAChord <<
+      ", fPreviousNoteBelongsToAChord: " <<
+      fPreviousNoteBelongsToAChord <<
+      ", line " << fCurrentNoteStartInputLine;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+	if (fCurrentNoteBelongsToAChord) {
+		// was the previous note also in the chords?
+		if (fPreviousNoteBelongsToAChord) {
+			// this note is after the second one of the chord
+			// wait and see upon the next note or the measure end
+		}
+		else {
+			// this is the second note of the chord
+			// we're one note late!
+			fResultingScoreNotesEvents.registerChordBeginEvent (
+				fCurrentNoteSequentialNumber - 1,
+				fPreviousNoteStartInputLine,
+				fPreviousNoteEndInputLine);
+
+// 			fOnGoingChord = true;
+		}
+	}
+
+	else {
+		// is this note the one that follows the last one of a chord?
+		if (fPreviousNoteBelongsToAChord) {
+			// this the note after the last one of the chord
+			 // we're one note late!
+			fResultingScoreNotesEvents.registerChordEndEvent (
+				fCurrentNoteSequentialNumber - 1,
+				fPreviousNoteStartInputLine,
+				fPreviousNoteEndInputLine);
+
+// 			fOnGoingChord = false;
+		}
+		else {
+			// wait and see upon the next note or the measure end
+		}
+	}
+
+ 	// Q_NOTE
+
+	// register tuplet events if any
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+    	"--> visitEnd (S_note& elt) 3:"
+      ", fCurrentNoteSequentialNumber: " <<
+      fCurrentNoteSequentialNumber <<
+      ", fCurrentNoteStartInputLine: " <<
+      fCurrentNoteStartInputLine <<
+
+      ", fCurrentNoteBelongsToATuplet: " <<
+      fCurrentNoteBelongsToATuplet <<
+      ", fCurrentTupletTypeKind: " <<
+      fCurrentTupletTypeKind <<
+      ", fThereIsAPendingTupletStop: " <<
+      fThereIsAPendingTupletStop <<
+      ", line " << fCurrentNoteStartInputLine;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+	switch (fCurrentTupletTypeKind) {
+    case msrTupletTypeKind::kTupletTypeNone:
+			if (fCurrentNoteBelongsToATuplet) {
+				// rien
+			}
+			else {
+				if (fThereIsAPendingTupletStop) {
+					// register the preceding tuplet end
+					fResultingScoreNotesEvents.registerTupletEndEvent (
+						fCurrentNoteSequentialNumber,
+						fCurrentNoteStartInputLine,
+						fCurrentNoteEndInputLine);
+
+					// forget about the pending tuplet stop
+					fThereIsAPendingTupletStop = false;
+				}
+			}
+      break;
+
+    case msrTupletTypeKind::kTupletTypeStart:
+    	// is there a pending tuplet stop?
+    	if (fThereIsAPendingTupletStop) {
+    		// yes, the previous note is the end of the preceding tuplet
+				fResultingScoreNotesEvents.registerTupletEndEvent (
+					fCurrentNoteSequentialNumber - 1,
+					fPreviousNoteStartInputLine,
+					fPreviousNoteEndInputLine);
+
+				// forget about the pending tuplet stop
+				fThereIsAPendingTupletStop = false;
+			}
+
+			// now register the new tuplet begin event
+			fResultingScoreNotesEvents.registerTupletBeginEvent (
+				fCurrentNoteSequentialNumber,
+				fCurrentNoteStartInputLine,
+				fCurrentNoteEndInputLine);
+      break;
+
+    case msrTupletTypeKind::kTupletTypeContinue:
+    	// nothing to do
+      break;
+
+    case msrTupletTypeKind::kTupletTypeStop:
+    	fThereIsAPendingTupletStop = true;
+
+// 			fResultingScoreNotesEvents.registerTupletEndEvent (
+// 				fCurrentNoteSequentialNumber,
+// 				fCurrentNoteStartInputLine,
+// 				fCurrentNoteEndInputLine);
+
+// 				// forget about the pending tuplet stop
+// 				fThereIsAPendingTupletStop = false;
+
+// 			fOnGoingTuplet = false;
+      break;
+
+    case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
+      break;
+	} // switch
+
+ 	// Q_NOTE
+
+  // is there a staff change?
+#ifdef MF_TRACE_IS_ENABLED
+		if (gTraceOahGroup->getTraceStaffChanges ()) {
+			std::stringstream ss;
+
+			ss <<
+				"===> Is there is a staff change???" <<
+				'\n' <<
+
+				", fCurrentNoteStaffNumber: " <<
+				fCurrentNoteStaffNumber <<
+				", fPreviousNoteStaffNumber: " <<
+				fPreviousNoteStaffNumber <<
+
+				", fCurrentNoteVoiceNumber: " <<
+				fCurrentNoteVoiceNumber <<
+				", fPreviousNoteVoiceNumber: " <<
+				fPreviousNoteVoiceNumber <<
+
+				", line " << fCurrentNoteStartInputLine;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+		}
+#endif // MF_TRACE_IS_ENABLED
+
+  if (
+    fCurrentNoteStaffNumber != fPreviousNoteStaffNumber
+      &&
+//     fCurrentNoteVoiceNumber != fPreviousNoteVoiceNumber
+//       &&
+    fPreviousNoteStaffNumber != K_STAFF_NUMBER_UNKNOWN_ // JMI STAFF_CHANGE
+  ) {
+    // yes, register a staff change event
+    // taking off from the previous note
+    // and landing on the current note
+
+#ifdef MF_TRACE_IS_ENABLED
+		if (gTraceOahGroup->getTraceStaffChanges ()) {
+			std::stringstream ss;
+
+			ss <<
+				"===> There is a staff change" <<
+				'\n' <<
+
+				", fCurrentNoteStaffNumber: " <<
+				fCurrentNoteStaffNumber <<
+				", fPreviousNoteStaffNumber: " <<
+				fPreviousNoteStaffNumber <<
+
+				", fCurrentNoteVoiceNumber: " <<
+				fCurrentNoteVoiceNumber <<
+				", fPreviousNoteVoiceNumber: " <<
+				fPreviousNoteVoiceNumber <<
+
+				", line " << fCurrentNoteStartInputLine;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+		}
+#endif // MF_TRACE_IS_ENABLED
+
+		fResultingScoreNotesEvents.registerStaffChangeTakeOffEvent ( // CHORD_TUP
+			fCurrentNoteSequentialNumber - 1,
+			fPreviousNoteStartInputLine,
+			fPreviousNoteEndInputLine);
+
+		fResultingScoreNotesEvents.registerStaffChangeLandingEvent (
+			fCurrentNoteSequentialNumber,
+			fCurrentNoteStartInputLine,
+			fCurrentNoteEndInputLine);
+  }
+}
+
+//________________________________________________________________________
+void mxsr2msrSkeletonBuilder::visitStart (S_chord& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting S_chord" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+	if (gTraceOahGroup->getTraceChordsBasics ()) {
+		std::stringstream ss;
+
+		ss <<
+			"--> There is a chord markup" <<
+			", fCurrentNoteSequentialNumber: " <<
+			fCurrentNoteSequentialNumber <<
+			", line " << elt->getInputStartLineNumber ();
+
+		gWaeHandler->waeTrace (
+			__FILE__, __LINE__,
+			ss.str ());
+	}
+#endif // MF_TRACE_IS_ENABLED
+
+  fCurrentNoteBelongsToAChord = true;
+}
+
+void mxsr2msrSkeletonBuilder:: visitEnd (S_chord& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting S_chord" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+//________________________________________________________________________
+void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting S_tuplet" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // number
+
+  fCurrentTupletNumber = elt->getAttributeIntValue ("number", 0);
+
+  // type
+
+  {
+    std::string tupletType = elt->getAttributeValue ("type");
+
+    if      (tupletType == "start") {
+      fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStart;
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceTupletsBasics ()) {
+        std::stringstream ss;
+
+        ss <<
+          "--> There is a tuplet start (kTupletTypeStart)" <<
+          ", fCurrentNoteSequentialNumber: " <<
+          fCurrentNoteSequentialNumber <<
+          ", line " << elt->getInputStartLineNumber ();
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+    }
+
+    else if (tupletType == "continue") {
+      fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeContinue;
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceTupletsBasics ()) {
+        std::stringstream ss;
+
+        ss <<
+          "--> There is a tuplet continue (kTupletTypeContinue)" <<
+          ", fCurrentNoteSequentialNumber: " <<
+          fCurrentNoteSequentialNumber <<
+          ", line " << elt->getInputStartLineNumber ();
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+    }
+
+    else if (tupletType == "stop") {
+			fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStop;
+
+#ifdef MF_TRACE_IS_ENABLED
+			if (gTraceOahGroup->getTraceTupletsBasics ()) {
+				std::stringstream ss;
+
+				ss <<
+					"--> There is a tuplet stop (kTupletTypeStop)" <<
+					", fCurrentNoteSequentialNumber: " <<
+					fCurrentNoteSequentialNumber <<
+					", line " << elt->getInputStartLineNumber ();
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
+			}
+#endif // MF_TRACE_IS_ENABLED
+    }
+
+    else {
+      std::stringstream ss;
+
+      ss <<
+        "tuplet type \"" << tupletType <<
+        "\" is unknown";
+
+      mxsr2msrError (
+        gServiceRunData->getInputSourceName (),
+        elt->getInputStartLineNumber (),
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+  }
+
+  // number
+
+  fPreviousTupletNumber = fCurrentTupletNumber;
+
+  // the tuplet number may be absent, so use 0 in that case
+  fCurrentTupletNumber = elt->getAttributeIntValue ("number", 0);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Tuplet information gathered: " <<
+      "fCurrentTupletNumber: " <<
+      fCurrentTupletNumber <<
+      ", fCurrentTupletTypeKind: " <<
+      fCurrentTupletTypeKind;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fCurrentNoteBelongsToATuplet = true;
+}
+
+void mxsr2msrSkeletonBuilder::visitStart (S_time_modification& elt)
+{
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting S_tuplet" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fCurrentNoteBelongsToATuplet = true;
 }
 
 //________________________________________________________________________
@@ -4803,7 +5750,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
       currentVoice =
         createRegularVoiceInStaffIfNotYetDone (
           elt->getInputStartLineNumber (),
-          fCurrentStaffMusicXMLNumber,
+          fCurrentNoteStaffNumber,
           fCurrentVoiceMusicXMLNumber);
 
     // create stanzaNumber in current voice if need be

@@ -38,7 +38,7 @@
 
 #include "msr2msrTranslator.h"
 
-#include "mxsr2msrTranslatorInterface.h"
+#include "mxsr2msrSkeletonPopulatorInterface.h"
 
 #include "waeHandlers.h"
 

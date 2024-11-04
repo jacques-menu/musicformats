@@ -1133,7 +1133,7 @@ class EXP msrVoice : public msrElement
     // the handling of tuplets in mxsr2msrTranslator.cpp
     // need to store the yet incomplete tuplets
     // due to the order in which their elements are present in the MusicXML data,
-    // see mxsr2msrTranslator.h
+    // see mxsr2msrSkeletonPopulator.h
     int                   fRegularVoiceOrdinalNumberInPart;
 
     // there can only be 4 regular voices in a staff

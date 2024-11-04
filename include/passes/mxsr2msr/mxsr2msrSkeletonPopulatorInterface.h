@@ -9,12 +9,14 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mxsr2msrTranslatorInterface___
-#define ___mxsr2msrTranslatorInterface___
+#ifndef ___mxsr2msrSkeletonPopulatorInterface___
+#define ___mxsr2msrSkeletonPopulatorInterface___
 
 #include <iostream>
 
 #include "exports.h"
+
+#include "mxsr2msrSkeletonPopulator.h"
 
 #include "msrOah.h"
 
@@ -24,13 +26,14 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 EXP void populateMsrSkeletonFromMxsr (
-  const Sxmlelement& theMxsr,
-  S_msrScore         scoreSkeletonToBePopulated,
-  mfPassIDKind       passIDKind,
-  const std::string& passDescription);
+  const Sxmlelement&    theMxsr,
+  S_msrScore            scoreSkeletonToBePopulated,
+  mxsrScoreNotesEvents& theKnownScoreNotesEvents,
+  mfPassIDKind          passIDKind,
+  const std::string&    passDescription);
 
 
 }
 
 
-#endif // ___mxsr2msrTranslatorInterface___
+#endif // ___mxsr2msrSkeletonPopulatorInterface___

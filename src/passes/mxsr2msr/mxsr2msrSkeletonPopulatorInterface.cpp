@@ -27,9 +27,7 @@
 
 #include "msrInterface.h"
 
-#include "mxsr2msrTranslatorInterface.h"
-
-#include "mxsr2msrTranslator.h"
+#include "mxsr2msrSkeletonPopulatorInterface.h"
 
 #include "displayMsrSummaryVisitor.h"
 #include "displayMsrNamesVisitor.h"
@@ -42,10 +40,11 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 void populateMsrSkeletonFromMxsr (
-  const Sxmlelement& theMxsr,
-  S_msrScore         scoreSkeletonToBePopulated,
-  mfPassIDKind       passIDKind,
-  const std::string& passDescription)
+  const Sxmlelement&    theMxsr,
+  S_msrScore            scoreSkeletonToBePopulated,
+  mxsrScoreNotesEvents& theKnownScoreNotesEvents,
+  mfPassIDKind          passIDKind,
+  const std::string&    passDescription)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -88,13 +87,14 @@ void populateMsrSkeletonFromMxsr (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // create an mxsr2msrTranslator
-  mxsr2msrTranslator
-    translator (
-      scoreSkeletonToBePopulated);
+  // create an mxsr2msrSkeletonPopulator
+  mxsr2msrSkeletonPopulator
+    skeletonPopulator (
+      scoreSkeletonToBePopulated,
+      theKnownScoreNotesEvents);
 
   // browse the MXSR
-  translator.browseMxsr (
+  skeletonPopulator.browseMxsr (
     theMxsr);
 
   // register time spent

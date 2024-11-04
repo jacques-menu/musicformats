@@ -44,7 +44,7 @@
 #include "mxsr2msrOah.h"
 #include "msrOah.h"
 
-#include "mxsr2msrTranslator.h"
+#include "mxsr2msrSkeletonPopulator.h"
 
 #include "waeHandlers.h"
 
@@ -405,8 +405,11 @@ std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandler& elt)
 }
 
 //________________________________________________________________________
-mxsr2msrTranslator::mxsr2msrTranslator (
-  const S_msrScore& scoreSkeleton)
+mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
+  const S_msrScore& scoreSkeleton,
+  mxsrScoreNotesEvents&
+                    theKnownScoreNotesEvents)
+	: fKnownScoreNotesEvents (theKnownScoreNotesEvents)
 {
   // initialize note data to a neutral state
   initializeNoteData ();
@@ -678,11 +681,11 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentForwardVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
 }
 
-mxsr2msrTranslator::~mxsr2msrTranslator ()
+mxsr2msrSkeletonPopulator::~mxsr2msrSkeletonPopulator ()
 {}
 
 //________________________________________________________________________
-void mxsr2msrTranslator::browseMxsr (
+void mxsr2msrSkeletonPopulator::browseMxsr (
   const Sxmlelement& theMxsr)
 {
   if (theMxsr) {
@@ -695,7 +698,7 @@ void mxsr2msrTranslator::browseMxsr (
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::initializeNoteData ()
+void mxsr2msrSkeletonPopulator::initializeNoteData ()
 {
   // basic note description
 
@@ -836,7 +839,7 @@ void mxsr2msrTranslator::initializeNoteData ()
 // JMI  fCurrentNoteSyllableExtendKind = kSyllableExtend_NONE; v0.9.67
 }
 
-void mxsr2msrTranslator::displayStaffAndVoiceInformation (
+void mxsr2msrSkeletonPopulator::displayStaffAndVoiceInformation (
   int                inputLineNumber,
 	const std::string& context)
 {
@@ -873,7 +876,7 @@ void mxsr2msrTranslator::displayStaffAndVoiceInformation (
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::printVoicesLastMetNoteMap (
+void mxsr2msrSkeletonPopulator::printVoicesLastMetNoteMap (
   int                inputLineNumber,
   const std::string& context)
 {
@@ -924,7 +927,7 @@ void mxsr2msrTranslator::printVoicesLastMetNoteMap (
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::checkStep (
+void mxsr2msrSkeletonPopulator::checkStep (
   int                inputLineNumber,
   const std::string& stepValue,
   const std::string& markup)
@@ -965,7 +968,7 @@ void mxsr2msrTranslator::checkStep (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::populateCurrentPartStavesVectorFromPart (
+void mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart (
   const S_msrPart& part)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1023,12 +1026,12 @@ void mxsr2msrTranslator::populateCurrentPartStavesVectorFromPart (
 
     displayCurrentPartStavesVector (
       0,
-      "after mxsr2msrTranslator::populateCurrentPartStavesVectorFromPart()");
+      "after mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart()");
   }
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::displayCurrentPartStavesVector (
+void mxsr2msrSkeletonPopulator::displayCurrentPartStavesVector (
   int                inputLineNumber,
   const std::string& context)
 {
@@ -1051,7 +1054,7 @@ void mxsr2msrTranslator::displayCurrentPartStavesVector (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::populateCurrentPartVoicesVectorsFromPart (
+void mxsr2msrSkeletonPopulator::populateCurrentPartVoicesVectorsFromPart (
   const S_msrPart& part)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1133,12 +1136,12 @@ void mxsr2msrTranslator::populateCurrentPartVoicesVectorsFromPart (
 
     displayCurrentPartVoicesVector (
       0,
-      "after mxsr2msrTranslator::populateCurrentPartVoicesVectorsFromPart()");
+      "after mxsr2msrSkeletonPopulator::populateCurrentPartVoicesVectorsFromPart()");
   }
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::displayCurrentPartVoicesVector (
+void mxsr2msrSkeletonPopulator::displayCurrentPartVoicesVector (
   int                inputLineNumber,
   const std::string& context)
 {
@@ -1161,7 +1164,7 @@ void mxsr2msrTranslator::displayCurrentPartVoicesVector (
 }
 
 //______________________________________________________________________________
-S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
+S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
   int inputLineNumber)
 {
   int staffNumber = 1;
@@ -1233,7 +1236,7 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_millimeters& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_millimeters& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1252,7 +1255,7 @@ void mxsr2msrTranslator::visitStart (S_millimeters& elt)
   fCurrentMillimeters = (float)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_tenths& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tenths& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1271,7 +1274,7 @@ void mxsr2msrTranslator::visitStart (S_tenths& elt)
   fCurrentTenths = (float)(*elt);
 }
 
-void mxsr2msrTranslator::visitEnd (S_scaling& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_scaling& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1315,7 +1318,7 @@ void mxsr2msrTranslator::visitEnd (S_scaling& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_system_layout& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_system_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1339,7 +1342,7 @@ void mxsr2msrTranslator::visitStart (S_system_layout& elt)
   fOnGoingSystemLayout = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_system_layout& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_system_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1375,7 +1378,7 @@ void mxsr2msrTranslator::visitEnd (S_system_layout& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_system_margins& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_system_margins& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1402,7 +1405,7 @@ void mxsr2msrTranslator::visitStart (S_system_margins& elt)
   fOnGoingSystemMargins = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_system_distance& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_system_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1437,7 +1440,7 @@ void mxsr2msrTranslator::visitStart (S_system_distance& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_top_system_distance& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_top_system_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1472,7 +1475,7 @@ void mxsr2msrTranslator::visitStart (S_top_system_distance& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_system_margins& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_system_margins& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1500,7 +1503,7 @@ void mxsr2msrTranslator::visitEnd (S_system_margins& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_system_dividers& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_system_dividers& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1530,7 +1533,7 @@ void mxsr2msrTranslator::visitStart (S_system_dividers& elt)
      */
 }
 
-void mxsr2msrTranslator::visitStart (S_left_divider& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_left_divider& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1558,7 +1561,7 @@ void mxsr2msrTranslator::visitStart (S_left_divider& elt)
       printObjectString);
 }
 
-void mxsr2msrTranslator::visitStart (S_right_divider& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_right_divider& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1587,7 +1590,7 @@ void mxsr2msrTranslator::visitStart (S_right_divider& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_notations& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_notations& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1606,7 +1609,7 @@ void mxsr2msrTranslator::visitStart (S_notations& elt)
   // JMI
 }
 
-void mxsr2msrTranslator::visitStart (S_other_notation& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_other_notation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1626,7 +1629,7 @@ void mxsr2msrTranslator::visitStart (S_other_notation& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_page_layout& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_page_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1650,7 +1653,7 @@ void mxsr2msrTranslator::visitStart (S_page_layout& elt)
   fOnGoingPageLayout = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_page_layout& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_page_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1678,7 +1681,7 @@ void mxsr2msrTranslator::visitEnd (S_page_layout& elt)
   fOnGoingPageLayout = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_page_height& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_page_height& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1712,7 +1715,7 @@ void mxsr2msrTranslator::visitStart (S_page_height& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_page_width& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_page_width& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1746,7 +1749,7 @@ void mxsr2msrTranslator::visitStart (S_page_width& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_page_margins& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1827,7 +1830,7 @@ void mxsr2msrTranslator::visitStart (S_page_margins& elt)
   fOnGoingPageMargins = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_page_margins& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_page_margins& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1849,7 +1852,7 @@ void mxsr2msrTranslator::visitEnd (S_page_margins& elt)
   fOnGoingPageMargins = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_left_margin& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_left_margin& elt)
 {
   float leftMargin = (float)(*elt);
 
@@ -1901,7 +1904,7 @@ void mxsr2msrTranslator::visitStart (S_left_margin& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_right_margin& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_right_margin& elt)
 {
   float rightMargin = (float)(*elt);
 
@@ -1950,7 +1953,7 @@ void mxsr2msrTranslator::visitStart (S_right_margin& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_top_margin& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_top_margin& elt)
 {
   float topMargin = (float)(*elt);
 
@@ -1989,7 +1992,7 @@ void mxsr2msrTranslator::visitStart (S_top_margin& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_bottom_margin& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_bottom_margin& elt)
 {
   float bottomMargin = (float)(*elt);
 
@@ -2029,7 +2032,7 @@ void mxsr2msrTranslator::visitStart (S_bottom_margin& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_staff_layout& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staff_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2078,7 +2081,7 @@ From DalSegno.xml: JMI there is no <staff-distance /> ...
   fOnGoingStaffLayout = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_staff_layout& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_staff_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2100,7 +2103,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_layout& elt)
   fOnGoingStaffLayout = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_staff_distance& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staff_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2136,7 +2139,7 @@ void mxsr2msrTranslator::visitStart (S_staff_distance& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_measure_layout& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_measure_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -2162,7 +2165,7 @@ void mxsr2msrTranslator::visitStart (S_measure_layout& elt)
   fOnGoingMeasureLayout = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_measure_layout& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_measure_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2184,7 +2187,7 @@ void mxsr2msrTranslator::visitEnd (S_measure_layout& elt)
   fOnGoingMeasureLayout = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_measure_distance& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_measure_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2220,7 +2223,7 @@ void mxsr2msrTranslator::visitStart (S_measure_distance& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_appearance& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_appearance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2339,7 +2342,7 @@ void mxsr2msrTranslator::visitStart (S_appearance& elt)
   fOnGoingAppearance = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_appearance& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_appearance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2361,7 +2364,7 @@ void mxsr2msrTranslator::visitEnd (S_appearance& elt)
   fOnGoingAppearance = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_line_width& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2482,7 +2485,7 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_note_size& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2573,7 +2576,7 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_distance& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2659,7 +2662,7 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_glyph& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2767,7 +2770,7 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_other_appearance& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_other_appearance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2796,7 +2799,7 @@ void mxsr2msrTranslator::visitStart (S_other_appearance& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_part& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 {
 //   gLog << elt; //JMI v0.9.66 create MusicFormats's own smart pointer type ???
 
@@ -2948,7 +2951,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     fCurrentPart->
       displayPartVoicesMap (
         elt->getInputStartLineNumber (),
-        "mxsr2msrTranslator::visitStart (S_part& elt)");
+        "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
 #endif
 
@@ -2960,7 +2963,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     // display the stave vectors
     displayCurrentPartStavesVector (
       elt->getInputStartLineNumber (),
-      "mxsr2msrTranslator::visitStart (S_part& elt)");
+      "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
 #endif
 
@@ -2972,7 +2975,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     // display the voices vectors
     displayCurrentPartVoicesVector (
       elt->getInputStartLineNumber (),
-      "mxsr2msrTranslator::visitStart (S_part& elt)");
+      "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
 #endif
 
@@ -3044,7 +3047,7 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   ++gIndenter;
 }
 
-void mxsr2msrTranslator::visitEnd (S_part& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3186,7 +3189,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_attributes& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_attributes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3209,7 +3212,7 @@ void mxsr2msrTranslator::visitStart (S_attributes& elt)
   fOnGoingClefKeyTimeSignatureGroup = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_attributes& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_attributes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3245,7 +3248,7 @@ void mxsr2msrTranslator::visitEnd (S_attributes& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_divisions& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3310,7 +3313,7 @@ void mxsr2msrTranslator::visitStart (S_divisions& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_clef& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_clef& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3350,7 +3353,7 @@ void mxsr2msrTranslator::visitStart (S_clef& elt)
   fCurrentClefSign = "";
 }
 
-void mxsr2msrTranslator::visitStart (S_sign& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_sign& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3369,7 +3372,7 @@ void mxsr2msrTranslator::visitStart (S_sign& elt)
   fCurrentClefSign = elt->getValue();
 }
 
-void mxsr2msrTranslator::visitStart (S_line& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_line& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3388,7 +3391,7 @@ void mxsr2msrTranslator::visitStart (S_line& elt)
   fCurrentClefLine = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_clef_octave_change& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_clef_octave_change& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3421,7 +3424,7 @@ void mxsr2msrTranslator::visitStart (S_clef_octave_change& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_clef& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3716,7 +3719,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_key& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_key& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3762,7 +3765,7 @@ void mxsr2msrTranslator::visitStart (S_key& elt)
   fCurrentHumdrumScotKeyItem = nullptr;
 }
 
-void mxsr2msrTranslator::visitStart (S_cancel& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_cancel& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3781,7 +3784,7 @@ void mxsr2msrTranslator::visitStart (S_cancel& elt)
   fCurrentKeyCancelFifths = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_fifths& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_fifths& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3802,7 +3805,7 @@ void mxsr2msrTranslator::visitStart (S_fifths& elt)
   fCurrentKeyFifths = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_mode& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_mode& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3864,7 +3867,7 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_key_step& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_key_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3919,7 +3922,7 @@ void mxsr2msrTranslator::visitStart (S_key_step& elt)
       fCurrentHumdrumScotKeyItem);
 }
 
-void mxsr2msrTranslator::visitStart (S_key_alter& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3974,7 +3977,7 @@ void mxsr2msrTranslator::visitStart (S_key_alter& elt)
   fCurrentHumdrumScotKeyItem = nullptr;
 }
 
-void mxsr2msrTranslator::visitStart (S_key_octave& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_key_octave& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4066,7 +4069,7 @@ If the cancel attribute is
       keyOctaveKind);
 }
 
-void mxsr2msrTranslator::visitEnd (S_key& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_key& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4121,7 +4124,7 @@ void mxsr2msrTranslator::visitEnd (S_key& elt)
   }
 }
 
-S_msrKey mxsr2msrTranslator::handleTraditionalKey (
+S_msrKey mxsr2msrSkeletonPopulator::handleTraditionalKey (
   int inputLineNumber)
 {
   // key fifths number
@@ -4231,7 +4234,7 @@ S_msrKey mxsr2msrTranslator::handleTraditionalKey (
   return key;
 }
 
-S_msrKey mxsr2msrTranslator::handleHumdrumScotKey (
+S_msrKey mxsr2msrSkeletonPopulator::handleHumdrumScotKey (
   int inputLineNumber)
 {
  //  msrQuarterTonesPitch fCurrentNoteQuarterTonesPitch; // JMI BOF
@@ -4275,7 +4278,7 @@ S_msrKey mxsr2msrTranslator::handleHumdrumScotKey (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_time& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_time& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4336,7 +4339,7 @@ void mxsr2msrTranslator::visitStart (S_time& elt)
   fOnGoingInterchangeable = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_beats& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_beats& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4355,7 +4358,7 @@ void mxsr2msrTranslator::visitStart (S_beats& elt)
   fCurrentTimeSignatureBeats = elt->getValue (); // can be a string such as 3+2
 }
 
-void mxsr2msrTranslator::visitStart (S_beat_type& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4417,7 +4420,7 @@ void mxsr2msrTranslator::visitStart (S_beat_type& elt)
     timeSignatureItem);
 }
 
-void mxsr2msrTranslator::visitStart (S_senza_misura& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_senza_misura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4436,7 +4439,7 @@ void mxsr2msrTranslator::visitStart (S_senza_misura& elt)
   fCurrentTimeSignatureSymbolKind = msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura;
 }
 
-void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4529,7 +4532,7 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
   fOnGoingInterchangeable = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_time_relation& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_time_relation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4591,7 +4594,7 @@ void mxsr2msrTranslator::visitStart (S_time_relation& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_time& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4671,7 +4674,7 @@ open xmlsamples3.1/Telemann.xml
    </score-instrument>
 */
 
-void mxsr2msrTranslator::visitStart (S_score_instrument& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_score_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4736,7 +4739,7 @@ void mxsr2msrTranslator::visitStart (S_score_instrument& elt)
 }
 
 
-void mxsr2msrTranslator::visitStart (S_instrument_name& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_instrument_name& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4759,7 +4762,7 @@ void mxsr2msrTranslator::visitStart (S_instrument_name& elt)
 //  int instruments = (int)(*elt); // JMI
 }
 
-void mxsr2msrTranslator::visitStart (S_solo& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_solo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4782,7 +4785,7 @@ void mxsr2msrTranslator::visitStart (S_solo& elt)
 //  int instruments = (int)(*elt); // JMI
 }
 
-void mxsr2msrTranslator::visitStart (S_instruments& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_instruments& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4843,7 +4846,7 @@ void mxsr2msrTranslator::visitStart (S_instruments& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_transpose& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_transpose& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4867,7 +4870,7 @@ void mxsr2msrTranslator::visitStart (S_transpose& elt)
   fCurrentTransposeDouble       = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_diatonic& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_diatonic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4886,7 +4889,7 @@ void mxsr2msrTranslator::visitStart (S_diatonic& elt)
   fCurrentTransposeDiatonic = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_chromatic& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_chromatic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4905,7 +4908,7 @@ void mxsr2msrTranslator::visitStart (S_chromatic& elt)
   fCurrentTransposeChromatic = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_octave_change& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_octave_change& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4924,7 +4927,7 @@ void mxsr2msrTranslator::visitStart (S_octave_change& elt)
   fCurrentTransposeOctaveChange = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_double& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_double& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4950,7 +4953,7 @@ void mxsr2msrTranslator::visitStart (S_double& elt)
   fCurrentTransposeDouble = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_transpose& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5050,7 +5053,7 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_direction& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_direction& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5084,7 +5087,7 @@ void mxsr2msrTranslator::visitStart (S_direction& elt)
   fOnGoingDirection = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_direction& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_direction& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5143,7 +5146,7 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_direction_type& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_direction_type& elt)
 {
 /*
 <!ELEMENT direction-type (rehearsalMark+ | segno+ | coda+ |
@@ -5182,7 +5185,7 @@ void mxsr2msrTranslator::visitStart (S_direction_type& elt)
   fOnGoingDirectionType = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_direction_type& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_direction_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5202,7 +5205,7 @@ void mxsr2msrTranslator::visitEnd (S_direction_type& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_offset& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_offset& elt)
 {
 /*
 <!--
@@ -5441,7 +5444,7 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_other_direction& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_other_direction& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5470,7 +5473,7 @@ void mxsr2msrTranslator::visitStart (S_other_direction& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_sound& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_sound& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5515,7 +5518,7 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_sound& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_sound& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5533,7 +5536,7 @@ void mxsr2msrTranslator::visitEnd (S_sound& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5663,7 +5666,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_words& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6370,7 +6373,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_accordion_registration& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_accordion_registration& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6405,7 +6408,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_registration& elt)
   fCurrentAccordionNumbersCounter = 0;
 }
 
-void mxsr2msrTranslator::visitStart (S_accordion_high& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_accordion_high& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6426,7 +6429,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_high& elt)
   ++fCurrentAccordionNumbersCounter;
 }
 
-void mxsr2msrTranslator::visitStart (S_accordion_middle& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_accordion_middle& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6460,7 +6463,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_middle& elt)
   ++fCurrentAccordionNumbersCounter;
 }
 
-void mxsr2msrTranslator::visitStart (S_accordion_low& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_accordion_low& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6481,7 +6484,7 @@ void mxsr2msrTranslator::visitStart (S_accordion_low& elt)
   ++fCurrentAccordionNumbersCounter;
 }
 
-void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_accordion_registration& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6525,7 +6528,7 @@ void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_metronome& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_metronome& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6601,7 +6604,7 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
   // when the details are known
 }
 
-void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6648,7 +6651,7 @@ void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_beat_unit_dot& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6681,7 +6684,7 @@ void mxsr2msrTranslator::visitStart (S_beat_unit_dot& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_per_minute& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_per_minute& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6700,7 +6703,7 @@ void mxsr2msrTranslator::visitStart (S_per_minute& elt)
   fCurrentMetrenomePerMinute = elt->getValue ();
 }
 
-void mxsr2msrTranslator::visitStart (S_metronome_note& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_metronome_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6719,7 +6722,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_note& elt)
   fOnGoingMetronomeNote = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_metronome_type& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_metronome_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6744,7 +6747,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_type& elt)
      noteType);
 }
 
-void mxsr2msrTranslator::visitStart (S_metronome_dot& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_metronome_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6763,7 +6766,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_dot& elt)
   ++fCurrentMetrenomeDotsNumber;
 }
 
-void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_metronome_beam& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6828,7 +6831,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
   fPendingMetronomeBeamsList.push_back (beam);
 }
 
-void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
+void mxsr2msrSkeletonPopulator::attachCurrentMetronomeBeamsToMetronomeNote (
   const S_msrTempoNote& tempoNote)
 {
   // attach the current articulations to the note
@@ -6882,7 +6885,7 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
   } // while
 }
 
-void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6975,7 +6978,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
   fOnGoingMetronomeNote = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_metronome_relation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7013,7 +7016,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7154,7 +7157,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
   fOnGoingMetronomeTuplet = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_normal_dot& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_normal_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7173,7 +7176,7 @@ void mxsr2msrTranslator::visitStart (S_normal_dot& elt)
   ++fCurrentMetrenomeNormalDotsNumber;
 }
 
-void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7250,7 +7253,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
   fOnGoingMetronomeTuplet = false;
 }
 
-void mxsr2msrTranslator::visitEnd (S_metronome& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7443,7 +7446,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_staves& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staves& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7461,7 +7464,7 @@ void mxsr2msrTranslator::visitStart (S_staves& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_staff& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7559,7 +7562,7 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_staff_details& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7697,7 +7700,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
   ++gIndenter;
 }
 
-void mxsr2msrTranslator::visitStart (S_staff_type& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staff_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7758,7 +7761,7 @@ void mxsr2msrTranslator::visitStart (S_staff_type& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_staff_lines& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staff_lines& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7777,7 +7780,7 @@ void mxsr2msrTranslator::visitStart (S_staff_lines& elt)
   fCurrentStaffLinesNumber = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_staff_tuning& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staff_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7802,7 +7805,7 @@ void mxsr2msrTranslator::visitStart (S_staff_tuning& elt)
   fOnGoingStaffTuning = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_tuning_step& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tuning_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7852,7 +7855,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_tuning_octave& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tuning_octave& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7898,7 +7901,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_octave& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -7957,7 +7960,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -8046,7 +8049,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_voice& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -8119,7 +8122,7 @@ void mxsr2msrTranslator::visitStart (S_voice& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_backup& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_backup& elt)
 {
 /*
 <!--
@@ -8158,7 +8161,7 @@ void mxsr2msrTranslator::visitStart (S_backup& elt)
   fOnGoingBackup = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_backup& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -8220,7 +8223,7 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_forward& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_forward& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -8244,7 +8247,7 @@ void mxsr2msrTranslator::visitStart (S_forward& elt)
   fOnGoingForward = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_forward& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 {
 /*
 <!--
@@ -8392,7 +8395,7 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_tied& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -8493,7 +8496,7 @@ void mxsr2msrTranslator::visitStart (S_tied& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::displaySlurStartsStack (
+void mxsr2msrSkeletonPopulator::displaySlurStartsStack (
   const std::string& context)
 {
   gLog <<
@@ -8525,7 +8528,7 @@ void mxsr2msrTranslator::displaySlurStartsStack (
 }
 
 // //________________________________________________________________________
-// Bool mxsr2msrTranslator::tupletsStopNumberIsExpected (
+// Bool mxsr2msrSkeletonPopulator::tupletsStopNumberIsExpected (
 //   int tupletNumber)
 // {
 //   Bool result;
@@ -8545,7 +8548,7 @@ void mxsr2msrTranslator::displaySlurStartsStack (
 // }
 
 // //________________________________________________________________________
-// void mxsr2msrTranslator::displayTupletsStack (
+// void mxsr2msrSkeletonPopulator::displayTupletsStack (
 //   const std::string& context)
 // {
 //   size_t tupletsStackSize = fTupletsStack.size ();
@@ -8594,7 +8597,7 @@ void mxsr2msrTranslator::displaySlurStartsStack (
 // }
 
 // //________________________________________________________________________
-// void mxsr2msrTranslator::displayMxsrTupletsVector (
+// void mxsr2msrSkeletonPopulator::displayMxsrTupletsVector (
 //   const std::string& context)
 // {
 //   size_t mxsr2msrVoiceHandlersVectorSize = fMxsrTupletsVector.size ();
@@ -8643,7 +8646,7 @@ void mxsr2msrTranslator::displaySlurStartsStack (
 // }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_slur& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_slur& elt)
 {
 /*
 The values of start, stop, and continue refer to how an
@@ -8998,7 +9001,7 @@ The values of start, stop, and continue refer to how an
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_bracket& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -9288,7 +9291,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_wedge& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -9446,7 +9449,7 @@ void mxsr2msrTranslator::visitStart (S_wedge& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_lyric& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -9567,7 +9570,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt)
   fOnGoingLyric = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_syllabic& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_syllabic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -9617,7 +9620,7 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
 //   fCurrentSyllableElementsList.clear ();
 }
 
-void mxsr2msrTranslator::visitStart (S_text& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputStartLineNumber =
@@ -9692,7 +9695,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_elision& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_elision& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -9741,7 +9744,7 @@ void mxsr2msrTranslator::visitStart (S_elision& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_extend& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
 {
 /*
 <!--
@@ -9821,7 +9824,7 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
   // color JMI
 }
 
-void mxsr2msrTranslator::visitEnd (S_lyric& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 {
   int inputStartLineNumber =
     elt->getInputStartLineNumber ();
@@ -10179,7 +10182,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_measure& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -10429,7 +10432,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       elt->getInputStartLineNumber ());
 }
 
-void mxsr2msrTranslator::visitEnd (S_measure& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -10541,7 +10544,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
     if (fCurrentSpannersList.size ()) {
       attachCurrentSpannersToNote (
         noteToAttachTo,
-        "mxsr2msrTranslator::visitEnd (S_measure& elt)");
+        "mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)");
     }
 
     // are there pending voices wedges?
@@ -10679,7 +10682,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
   }
 }
 
-// void mxsr2msrTranslator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
+// void mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
 //   int inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -10687,7 +10690,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 //     const int fieldWidth = 37;
 //
 //     gLog <<
-//       "--> mxsr2msrTranslator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
+//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
 //       std::endl;
 //
 //     ++gIndenter;
@@ -10733,7 +10736,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 //     const int fieldWidth = 37;
 //
 //     gLog <<
-//       "--> mxsr2msrTranslator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
+//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
 //       ", onGoingMultiMeasureRests:" <<
 //       std::endl;
 //
@@ -10752,7 +10755,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 // }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_print& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_print& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -10963,7 +10966,7 @@ Staff spacing between multiple staves is measured in
   fOnGoingPrint = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_print& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_print& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11007,7 +11010,7 @@ void mxsr2msrTranslator::visitEnd (S_print& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_measure_numbering& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_measure_numbering& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11027,7 +11030,7 @@ void mxsr2msrTranslator::visitStart (S_measure_numbering& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_barline& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_barline& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11097,7 +11100,7 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_bar_style& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_bar_style& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11176,7 +11179,7 @@ void mxsr2msrTranslator::visitStart (S_bar_style& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_segno& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_segno& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11222,7 +11225,7 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_coda& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11297,7 +11300,7 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_eyeglasses& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11337,7 +11340,7 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_pedal& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11468,7 +11471,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_ending& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11549,7 +11552,7 @@ void mxsr2msrTranslator::visitStart (S_ending& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_repeat& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_repeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11650,7 +11653,7 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitEnd (S_barline& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12033,7 +12036,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_note& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12172,7 +12175,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_step& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12199,7 +12202,7 @@ void mxsr2msrTranslator::visitStart (S_step& elt)
     msrDiatonicPitchKindFromChar (step [0]);
 }
 
-void mxsr2msrTranslator::visitStart (S_alter& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12236,7 +12239,7 @@ void mxsr2msrTranslator::visitStart (S_alter& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_octave& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_octave& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12275,7 +12278,7 @@ void mxsr2msrTranslator::visitStart (S_octave& elt)
       octaveNumber);
 }
 
-void mxsr2msrTranslator::visitStart (S_duration& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12410,10 +12413,10 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
       ss.str ());
   }
 
-//  gLog << "=== mxsr2msrTranslator::visitStart (S_duration& elt), fCurrentNotesDuration: " << fCurrentNotesDuration << std::endl; JMI
+//  gLog << "=== mxsr2msrSkeletonPopulator::visitStart (S_duration& elt), fCurrentNotesDuration: " << fCurrentNotesDuration << std::endl; JMI
 }
 
-void mxsr2msrTranslator::visitStart (S_instrument& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12460,7 +12463,7 @@ void mxsr2msrTranslator::visitStart (S_instrument& elt)
 //  int instruments = (int)(*elt); // JMI
 }
 
-void mxsr2msrTranslator::visitStart (S_dot& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12479,7 +12482,7 @@ void mxsr2msrTranslator::visitStart (S_dot& elt)
   ++fCurrentNoteDotsNumber;
 }
 
-void mxsr2msrTranslator::visitStart (S_type& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12548,7 +12551,7 @@ void mxsr2msrTranslator::visitStart (S_type& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_notehead& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12689,7 +12692,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
   // color JMI v0.9.71
 }
 
-void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
+void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12861,7 +12864,7 @@ void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_stem& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_stem& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12934,7 +12937,7 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
       stemKind);
 }
 
-void mxsr2msrTranslator::visitStart (S_beam& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13008,7 +13011,7 @@ void mxsr2msrTranslator::visitStart (S_beam& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_measure_style& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_measure_style& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13027,7 +13030,7 @@ void mxsr2msrTranslator::visitStart (S_measure_style& elt)
   // color JMI
 }
 
-void mxsr2msrTranslator::visitStart (S_beat_repeat& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_beat_repeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13076,7 +13079,7 @@ void mxsr2msrTranslator::visitStart (S_beat_repeat& elt)
       useDotsString);
 }
 
-void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13188,7 +13191,7 @@ void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_multiple_rest& elt)
 {
 /*
 <!--
@@ -13309,7 +13312,7 @@ void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
     fCurrentMeasureRestsNumber;
 }
 
-void mxsr2msrTranslator::visitEnd (S_multiple_rest& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_multiple_rest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13326,7 +13329,7 @@ void mxsr2msrTranslator::visitEnd (S_multiple_rest& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_slash& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13400,7 +13403,7 @@ void mxsr2msrTranslator::visitStart (S_slash& elt)
   fCurrentSlashDotsNumber = 0;
 }
 
-void mxsr2msrTranslator::visitStart (S_slash_type& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13461,7 +13464,7 @@ void mxsr2msrTranslator::visitStart (S_slash_type& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_slash_dot& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_slash_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13480,7 +13483,7 @@ void mxsr2msrTranslator::visitStart (S_slash_dot& elt)
   ++fCurrentSlashDotsNumber;
 }
 
-void mxsr2msrTranslator::visitEnd (S_slash& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_slash& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13508,7 +13511,7 @@ void mxsr2msrTranslator::visitEnd (S_slash& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_articulations& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_articulations& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13525,7 +13528,7 @@ void mxsr2msrTranslator::visitStart (S_articulations& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_accent& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_accent& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13564,7 +13567,7 @@ void mxsr2msrTranslator::visitStart (S_accent& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_breath_mark& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_breath_mark& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13603,7 +13606,7 @@ void mxsr2msrTranslator::visitStart (S_breath_mark& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_caesura& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_caesura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13642,7 +13645,7 @@ void mxsr2msrTranslator::visitStart (S_caesura& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_spiccato& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_spiccato& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13681,7 +13684,7 @@ void mxsr2msrTranslator::visitStart (S_spiccato& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_staccato& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staccato& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13720,7 +13723,7 @@ void mxsr2msrTranslator::visitStart (S_staccato& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_staccatissimo& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staccatissimo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13759,7 +13762,7 @@ void mxsr2msrTranslator::visitStart (S_staccatissimo& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_stress& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_stress& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13798,7 +13801,7 @@ void mxsr2msrTranslator::visitStart (S_stress& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_unstress& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_unstress& elt)
 {
  #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13837,7 +13840,7 @@ void mxsr2msrTranslator::visitStart (S_unstress& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_detached_legato& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_detached_legato& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13876,7 +13879,7 @@ void mxsr2msrTranslator::visitStart (S_detached_legato& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_strong_accent& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_strong_accent& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13916,7 +13919,7 @@ void mxsr2msrTranslator::visitStart (S_strong_accent& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_tenuto& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tenuto& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13957,7 +13960,7 @@ void mxsr2msrTranslator::visitStart (S_tenuto& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_doit& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_doit& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13996,7 +13999,7 @@ void mxsr2msrTranslator::visitStart (S_doit& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_falloff& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_falloff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14035,7 +14038,7 @@ void mxsr2msrTranslator::visitStart (S_falloff& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_plop& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_plop& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14074,7 +14077,7 @@ void mxsr2msrTranslator::visitStart (S_plop& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_scoop& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_scoop& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14113,7 +14116,7 @@ void mxsr2msrTranslator::visitStart (S_scoop& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_articulations& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_articulations& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14133,7 +14136,7 @@ void mxsr2msrTranslator::visitEnd (S_articulations& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_arpeggiate& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14203,7 +14206,7 @@ void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_non_arpeggiate& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14279,7 +14282,7 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_technical& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_technical& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14298,7 +14301,7 @@ void mxsr2msrTranslator::visitStart (S_technical& elt)
   fOnGoingTechnical = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_technical& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_technical& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14317,7 +14320,7 @@ void mxsr2msrTranslator::visitEnd (S_technical& elt)
   fOnGoingTechnical = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_arrow& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_arrow& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14354,7 +14357,7 @@ void mxsr2msrTranslator::visitStart (S_arrow& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_bend_alter& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_bend_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14373,7 +14376,7 @@ void mxsr2msrTranslator::visitStart (S_bend_alter& elt)
   fBendAlterValue = (float)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_bend& elt) // JMI
+void mxsr2msrSkeletonPopulator::visitStart (S_bend& elt) // JMI
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14390,7 +14393,7 @@ void mxsr2msrTranslator::visitStart (S_bend& elt) // JMI
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitEnd (S_bend& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_bend& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14429,7 +14432,7 @@ void mxsr2msrTranslator::visitEnd (S_bend& elt)
     technicalWithFloat);
 }
 
-void mxsr2msrTranslator::visitStart (S_double_tongue& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_double_tongue& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14466,7 +14469,7 @@ void mxsr2msrTranslator::visitStart (S_double_tongue& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_down_bow& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_down_bow& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14503,7 +14506,7 @@ void mxsr2msrTranslator::visitStart (S_down_bow& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_fingering& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_fingering& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14564,7 +14567,7 @@ void mxsr2msrTranslator::visitStart (S_fingering& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_fingernails& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_fingernails& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14601,7 +14604,7 @@ void mxsr2msrTranslator::visitStart (S_fingernails& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_fret& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_fret& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14661,7 +14664,7 @@ void mxsr2msrTranslator::visitStart (S_fret& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_hammer_on& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14728,7 +14731,7 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart (S_handbell& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_handbell& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14769,7 +14772,7 @@ void mxsr2msrTranslator::visitStart (S_handbell& elt)
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart (S_harmonic& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_harmonic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14817,7 +14820,7 @@ void mxsr2msrTranslator::visitStart (S_harmonic& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_heel& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_heel& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14854,7 +14857,7 @@ void mxsr2msrTranslator::visitStart (S_heel& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_hole& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_hole& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14891,7 +14894,7 @@ void mxsr2msrTranslator::visitStart (S_hole& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_open_string& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_open_string& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14928,7 +14931,7 @@ void mxsr2msrTranslator::visitStart (S_open_string& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_other_technical& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_other_technical& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -14969,7 +14972,7 @@ void mxsr2msrTranslator::visitStart (S_other_technical& elt)
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart (S_pluck& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pluck& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15010,7 +15013,7 @@ void mxsr2msrTranslator::visitStart (S_pluck& elt)
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart (S_pull_off& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pull_off& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15077,7 +15080,7 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart (S_snap_pizzicato& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_snap_pizzicato& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15114,7 +15117,7 @@ void mxsr2msrTranslator::visitStart (S_snap_pizzicato& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_stopped& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_stopped& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15151,7 +15154,7 @@ void mxsr2msrTranslator::visitStart (S_stopped& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_string& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_string& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15242,7 +15245,7 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_tap& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tap& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15279,7 +15282,7 @@ void mxsr2msrTranslator::visitStart (S_tap& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_thumb_position& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_thumb_position& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15316,7 +15319,7 @@ void mxsr2msrTranslator::visitStart (S_thumb_position& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_toe& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_toe& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15353,7 +15356,7 @@ void mxsr2msrTranslator::visitStart (S_toe& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_triple_tongue& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_triple_tongue& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15390,7 +15393,7 @@ void mxsr2msrTranslator::visitStart (S_triple_tongue& elt)
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart (S_up_bow& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_up_bow& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15428,7 +15431,7 @@ void mxsr2msrTranslator::visitStart (S_up_bow& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_fermata& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15519,7 +15522,7 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_ornaments& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_ornaments& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15536,7 +15539,7 @@ void mxsr2msrTranslator::visitStart (S_ornaments& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_tremolo& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15808,7 +15811,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
   } // switch
 }
 
-void mxsr2msrTranslator::visitStart (S_trill_mark& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_trill_mark& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15849,7 +15852,7 @@ void mxsr2msrTranslator::visitStart (S_trill_mark& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_dashes& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_dashes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15925,7 +15928,7 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
   fCurrentSpannersList.push_back (spanner);
 }
 
-void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
 {
 /*
 <!--
@@ -16069,7 +16072,7 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
   } // switch
 }
 
-void mxsr2msrTranslator::visitStart (S_turn& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16108,7 +16111,7 @@ void mxsr2msrTranslator::visitStart (S_turn& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_inverted_turn& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_inverted_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16147,7 +16150,7 @@ void mxsr2msrTranslator::visitStart (S_inverted_turn& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_delayed_turn& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_delayed_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16186,7 +16189,7 @@ void mxsr2msrTranslator::visitStart (S_delayed_turn& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_delayed_inverted_turn& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_delayed_inverted_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16225,7 +16228,7 @@ void mxsr2msrTranslator::visitStart (S_delayed_inverted_turn& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_vertical_turn& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_vertical_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16264,7 +16267,7 @@ void mxsr2msrTranslator::visitStart (S_vertical_turn& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_mordent& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_mordent& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16303,7 +16306,7 @@ void mxsr2msrTranslator::visitStart (S_mordent& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_inverted_mordent& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_inverted_mordent& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16342,7 +16345,7 @@ void mxsr2msrTranslator::visitStart (S_inverted_mordent& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_schleifer& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_schleifer& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16381,7 +16384,7 @@ void mxsr2msrTranslator::visitStart (S_schleifer& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_shake& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_shake& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16420,7 +16423,7 @@ void mxsr2msrTranslator::visitStart (S_shake& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_accidental_mark& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16635,7 +16638,7 @@ void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_ornaments& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_ornaments& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16653,7 +16656,7 @@ void mxsr2msrTranslator::visitEnd (S_ornaments& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_f& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_f& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16696,7 +16699,7 @@ void mxsr2msrTranslator::visitStart (S_f& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_ff& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16739,7 +16742,7 @@ void mxsr2msrTranslator::visitStart (S_ff& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_fff& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16782,7 +16785,7 @@ void mxsr2msrTranslator::visitStart (S_fff& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_ffff& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16825,7 +16828,7 @@ void mxsr2msrTranslator::visitStart (S_ffff& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_fffff& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16868,7 +16871,7 @@ void mxsr2msrTranslator::visitStart (S_fffff& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_ffffff& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16912,7 +16915,7 @@ void mxsr2msrTranslator::visitStart (S_ffffff& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_p& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_p& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16955,7 +16958,7 @@ void mxsr2msrTranslator::visitStart (S_p& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_pp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16998,7 +17001,7 @@ void mxsr2msrTranslator::visitStart (S_pp& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_ppp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17041,7 +17044,7 @@ void mxsr2msrTranslator::visitStart (S_ppp& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_pppp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17084,7 +17087,7 @@ void mxsr2msrTranslator::visitStart (S_pppp& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_ppppp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17127,7 +17130,7 @@ void mxsr2msrTranslator::visitStart (S_ppppp& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_pppppp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17171,7 +17174,7 @@ void mxsr2msrTranslator::visitStart (S_pppppp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_mf& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_mf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17214,7 +17217,7 @@ void mxsr2msrTranslator::visitStart (S_mf& elt)
     fPendingDynamicxList.push_back(dynamics);
   }
 }
-void mxsr2msrTranslator::visitStart (S_mp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17258,7 +17261,7 @@ void mxsr2msrTranslator::visitStart (S_mp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_fp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_fp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17302,7 +17305,7 @@ void mxsr2msrTranslator::visitStart (S_fp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_fz& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_fz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17346,7 +17349,7 @@ void mxsr2msrTranslator::visitStart (S_fz& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_pf& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17390,7 +17393,7 @@ void mxsr2msrTranslator::visitStart (S_pf& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_rf& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_rf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17434,7 +17437,7 @@ void mxsr2msrTranslator::visitStart (S_rf& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_sf& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_sf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17478,7 +17481,7 @@ void mxsr2msrTranslator::visitStart (S_sf& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_rfz& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_rfz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17522,7 +17525,7 @@ void mxsr2msrTranslator::visitStart (S_rfz& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_sfz& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_sfz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17566,7 +17569,7 @@ void mxsr2msrTranslator::visitStart (S_sfz& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_sfp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_sfp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17610,7 +17613,7 @@ void mxsr2msrTranslator::visitStart (S_sfp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_sfpp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_sfpp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17654,7 +17657,7 @@ void mxsr2msrTranslator::visitStart (S_sfpp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_sffz& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_sffz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17698,7 +17701,7 @@ void mxsr2msrTranslator::visitStart (S_sffz& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_sfzp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_sfzp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17742,7 +17745,7 @@ void mxsr2msrTranslator::visitStart (S_sfzp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_n& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_n& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17786,7 +17789,7 @@ void mxsr2msrTranslator::visitStart (S_n& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_other_dynamics& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17849,7 +17852,7 @@ void mxsr2msrTranslator::visitStart (S_other_dynamics& elt)
 */
 
 /*
-void mxsr2msrTranslator::visitStart (S_damper_pedal& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_damper_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17916,7 +17919,7 @@ void mxsr2msrTranslator::visitStart (S_damper_pedal& elt)
 
 }
 
-void mxsr2msrTranslator::visitStart (S_soft_pedal& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_soft_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17952,7 +17955,7 @@ void mxsr2msrTranslator::visitStart (S_soft_pedal& elt)
   fPendingOtherDynamicxList.push_back(otherDynamic);
 }
 
-void mxsr2msrTranslator::visitStart (S_sostenuto_pedal& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17993,7 +17996,7 @@ void mxsr2msrTranslator::visitStart (S_sostenuto_pedal& elt)
 */
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_cue& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_cue& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18013,7 +18016,7 @@ void mxsr2msrTranslator::visitStart (S_cue& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_grace& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_grace& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18078,7 +18081,7 @@ void mxsr2msrTranslator::visitStart (S_grace& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_chord& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_chord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18104,7 +18107,7 @@ void mxsr2msrTranslator::visitStart (S_chord& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_time_modification& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_time_modification& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18126,7 +18129,7 @@ void mxsr2msrTranslator::visitStart (S_time_modification& elt)
   fCurrentNoteHasATimeModification = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_actual_notes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18205,7 +18208,7 @@ void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_normal_notes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18286,7 +18289,7 @@ void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_normal_type& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18369,7 +18372,7 @@ void mxsr2msrTranslator::visitStart (S_normal_type& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_tuplet& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18673,7 +18676,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   fCurrentNoteBelongsToATuplet = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_tuplet& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18691,7 +18694,7 @@ void mxsr2msrTranslator::visitEnd (S_tuplet& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_tuplet_actual& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18710,7 +18713,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_actual& elt)
   fOnGoingTupletActual = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_tuplet_actual& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18729,7 +18732,7 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_actual& elt)
   fOnGoingTupletActual = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_tuplet_normal& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_normal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18748,7 +18751,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_normal& elt)
   fOnGoingTupletNormal = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_tuplet_normal& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_normal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18767,7 +18770,7 @@ void mxsr2msrTranslator::visitEnd (S_tuplet_normal& elt)
   fOnGoingTupletNormal = false;
 }
 
-void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_number& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18817,7 +18820,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18867,7 +18870,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_tuplet_dot& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -18901,7 +18904,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet_dot& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_glissando& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -19025,7 +19028,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_slide& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -19151,7 +19154,7 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_rest& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_rest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -19226,7 +19229,7 @@ void mxsr2msrTranslator::visitStart (S_rest& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_display_step& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_display_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -19258,7 +19261,7 @@ void mxsr2msrTranslator::visitStart (S_display_step& elt)
   fCurrentNoteAlterationKind = msrAlterationKind::kAlterationNatural;
 }
 
-void mxsr2msrTranslator::visitStart (S_display_octave& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_display_octave& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -19297,7 +19300,7 @@ void mxsr2msrTranslator::visitStart (S_display_octave& elt)
       displayOctaveNumber);
 }
 
-void mxsr2msrTranslator::visitEnd (S_unpitched& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_unpitched& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -19320,7 +19323,7 @@ void mxsr2msrTranslator::visitEnd (S_unpitched& elt)
 }
 
 //______________________________________________________________________________
-S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
+S_msrChord mxsr2msrSkeletonPopulator::createChordFromItsFirstNote (
   int              inputLineNumber,
   const S_msrNote& chordFirstNote,
   msrNoteKind      noteKind)
@@ -19433,7 +19436,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
 
 //______________________________________________________________________________
 /* JMI
-void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
+void mxsr2msrSkeletonPopulator::registerVoiceCurrentChordInMap (
   int               inputLineNumber,
   const S_msrVoice& voice,
   const S_msrChord& chord)
@@ -19475,7 +19478,7 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
 
 //______________________________________________________________________________
 /* JMI
-void mxsr2msrTranslator::printVoicesCurrentChordMap ()
+void mxsr2msrSkeletonPopulator::printVoicesCurrentChordMap ()
 {
   gLog <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" <<
@@ -19534,7 +19537,7 @@ void mxsr2msrTranslator::printVoicesCurrentChordMap ()
 */
 
 // //______________________________________________________________________________
-// void mxsr2msrTranslator::finalizeCurrentChord (
+// void mxsr2msrSkeletonPopulator::finalizeCurrentChord (
 //   int inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -19580,7 +19583,7 @@ void mxsr2msrTranslator::printVoicesCurrentChordMap ()
 // }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::printCurrentChord ()
+void mxsr2msrSkeletonPopulator::printCurrentChord ()
 {
   gLog <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" <<
@@ -19611,7 +19614,7 @@ void mxsr2msrTranslator::printCurrentChord ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteArticulationsListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteArticulationsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19646,7 +19649,7 @@ void mxsr2msrTranslator::copyNoteArticulationsListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTechnicalsListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteTechnicalsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19678,7 +19681,7 @@ void mxsr2msrTranslator::copyNoteTechnicalsListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTechnicalWithIntegersListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteTechnicalWithIntegersListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19708,7 +19711,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTechnicalWithFloatsListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteTechnicalWithFloatsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19743,7 +19746,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTechnicalWithStringsListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteTechnicalWithStringsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19778,7 +19781,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteOrnamentsListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteOrnamentsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19813,7 +19816,7 @@ void mxsr2msrTranslator::copyNoteOrnamentsListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteSpannersListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteSpannersListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19848,7 +19851,7 @@ void mxsr2msrTranslator::copyNoteSpannersListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
+void mxsr2msrSkeletonPopulator::copyNoteSingleTremoloToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19882,7 +19885,7 @@ void mxsr2msrTranslator::copyNoteSingleTremoloToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteDynamicsListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteDynamicsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19917,7 +19920,7 @@ void mxsr2msrTranslator::copyNoteDynamicsListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteOtherDynamicsListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteOtherDynamicsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19952,7 +19955,7 @@ void mxsr2msrTranslator::copyNoteOtherDynamicsListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteWordsListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteWordsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -19989,7 +19992,7 @@ void mxsr2msrTranslator::copyNoteWordsListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteStemToChord (
+void mxsr2msrSkeletonPopulator::copyNoteStemToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20024,7 +20027,7 @@ void mxsr2msrTranslator::copyNoteStemToChord (
 
 /*
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteBeamsListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteBeamsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20080,7 +20083,7 @@ void mxsr2msrTranslator::copyNoteBeamsListToChord (
 }
 */
 
-void mxsr2msrTranslator::appendNoteBeamsListLinksToChord (
+void mxsr2msrSkeletonPopulator::appendNoteBeamsListLinksToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20143,7 +20146,7 @@ void mxsr2msrTranslator::appendNoteBeamsListLinksToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteTiesToChord (
+void mxsr2msrSkeletonPopulator::copyNoteTiesToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20200,7 +20203,7 @@ void mxsr2msrTranslator::copyNoteTiesToChord (
 
 /*
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteSlursListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteSlursListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20239,7 +20242,7 @@ void mxsr2msrTranslator::copyNoteSlursListToChord (
 */
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::appendNoteSlursListLinksToChord (
+void mxsr2msrSkeletonPopulator::appendNoteSlursListLinksToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20301,7 +20304,7 @@ void mxsr2msrTranslator::appendNoteSlursListLinksToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteLigaturesListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteLigaturesListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20336,7 +20339,7 @@ void mxsr2msrTranslator::copyNoteLigaturesListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNotePedalsListToChord (
+void mxsr2msrSkeletonPopulator::copyNotePedalsListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20371,7 +20374,7 @@ void mxsr2msrTranslator::copyNotePedalsListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteSlashesListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteSlashesListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20406,7 +20409,7 @@ void mxsr2msrTranslator::copyNoteSlashesListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteWedgesListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteWedgesListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20442,7 +20445,7 @@ void mxsr2msrTranslator::copyNoteWedgesListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteSegnosListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteSegnosListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20478,7 +20481,7 @@ void mxsr2msrTranslator::copyNoteSegnosListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteDalSegnosListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteDalSegnosListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20514,7 +20517,7 @@ void mxsr2msrTranslator::copyNoteDalSegnosListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteCodasListToChord (
+void mxsr2msrSkeletonPopulator::copyNoteCodasListToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20550,7 +20553,7 @@ void mxsr2msrTranslator::copyNoteCodasListToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteOctaveShiftToChord (
+void mxsr2msrSkeletonPopulator::copyNoteOctaveShiftToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20585,7 +20588,7 @@ void mxsr2msrTranslator::copyNoteOctaveShiftToChord (
 
 /*
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
+void mxsr2msrSkeletonPopulator::copyNoteGraceNotesGroupsToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20644,7 +20647,7 @@ void mxsr2msrTranslator::copyNoteGraceNotesGroupsToChord (
 */
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
+void mxsr2msrSkeletonPopulator::addNoteGraceNotesGroupsLinksToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20727,7 +20730,7 @@ void mxsr2msrTranslator::addNoteGraceNotesGroupsLinksToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteHarmoniesToChord (
+void mxsr2msrSkeletonPopulator::copyNoteHarmoniesToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20788,7 +20791,7 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
+void mxsr2msrSkeletonPopulator::copyNoteElementsIfAnyToChord (
   const S_msrNote&  note,
   const S_msrChord& chord)
 {
@@ -20932,7 +20935,7 @@ void mxsr2msrTranslator::copyNoteElementsIfAnyToChord (
   }
 }
 
-S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
+S_msrTuplet mxsr2msrSkeletonPopulator::createTupletUponItsFirstNote (
   const S_msrNote& firstNote)
 {
   // firstNote is the first tuplet note,
@@ -21004,7 +21007,7 @@ S_msrTuplet mxsr2msrTranslator::createTupletUponItsFirstNote (
   return tuplet;
 }
 
-void mxsr2msrTranslator::handleTupletStart (
+void mxsr2msrSkeletonPopulator::handleTupletStart (
   const S_msrTuplet& tuplet,
   const S_msrVoice&  currentNoteVoice)
 {
@@ -21062,11 +21065,11 @@ void mxsr2msrTranslator::handleTupletStart (
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //       displayTupletsStack (
-//         "############## mxsr2msrTranslator:handleTupletStart() 1");
+//         "############## mxsr2msrSkeletonPopulator:handleTupletStart() 1");
 //   }
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //       displayVoicesTupletsStacksMap (
-//         "############## mxsr2msrTranslator:handleTupletStart() 1");
+//         "############## mxsr2msrSkeletonPopulator:handleTupletStart() 1");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 
@@ -21081,12 +21084,12 @@ void mxsr2msrTranslator::handleTupletStart (
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayLastHandledTupletInVoiceMap (
-//       "############## mxsr2msrTranslator:handleTupletStart() 2");
+//       "############## mxsr2msrSkeletonPopulator:handleTupletStart() 2");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::handleTupletContinue (
+void mxsr2msrSkeletonPopulator::handleTupletContinue (
   const S_msrNote&  note,
   const S_msrVoice& currentNoteVoice)
 {
@@ -21124,7 +21127,7 @@ void mxsr2msrTranslator::handleTupletContinue (
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
       gLog <<
-        "--> mxsr2msrTranslator::handleTupletContinue() 1: adding tuplet member note " <<
+        "--> mxsr2msrSkeletonPopulator::handleTupletContinue() 1: adding tuplet member note " <<
         note->asShortString () <<
         " to stack top tuplet " <<
         tupletStackTop->asString () <<
@@ -21147,12 +21150,12 @@ void mxsr2msrTranslator::handleTupletContinue (
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //       voiceHandler->
 //         displayTupletsStack (
-//           "############## mxsr2msrTranslator:kTupletTypeContinue");
+//           "############## mxsr2msrSkeletonPopulator:kTupletTypeContinue");
 //     }
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //       voiceHandler->
 //         displayVoicesTupletsStacksMap (
-//           "############## mxsr2msrTranslator:kTupletTypeContinue");
+//           "############## mxsr2msrSkeletonPopulator:kTupletTypeContinue");
 //     }
 // #endif // MF_TRACE_IS_ENABLED
   }
@@ -21179,12 +21182,12 @@ void mxsr2msrTranslator::handleTupletContinue (
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayLastHandledTupletInVoiceMap (
-//       "############## mxsr2msrTranslator:handleTupletContinue() 3");
+//       "############## mxsr2msrSkeletonPopulator:handleTupletContinue() 3");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::handleTupletStop (
+void mxsr2msrSkeletonPopulator::handleTupletStop (
   const S_msrNote&  note,
   const S_msrVoice& currentNoteVoice)
 {
@@ -21238,7 +21241,7 @@ void mxsr2msrTranslator::handleTupletStop (
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
       gLog <<
-        "--> mxsr2msrTranslator::handleTupletStop(): adding tuplet member note " <<
+        "--> mxsr2msrSkeletonPopulator::handleTupletStop(): adding tuplet member note " <<
         note->asShortString () <<
         " to stack top tuplet " <<
         tupletStackTop->asString () <<
@@ -21261,12 +21264,12 @@ void mxsr2msrTranslator::handleTupletStop (
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //       voiceHandler->
 //         displayTupletsStack (
-//           "############## mxsr2msrTranslator:kTupletTypeContinue");
+//           "############## mxsr2msrSkeletonPopulator:kTupletTypeContinue");
 //     }
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //       voiceHandler->
 //         displayVoicesTupletsStacksMap (
-//           "############## mxsr2msrTranslator:kTupletTypeContinue");
+//           "############## mxsr2msrSkeletonPopulator:kTupletTypeContinue");
 //     }
 // #endif // MF_TRACE_IS_ENABLED
   }
@@ -21293,23 +21296,23 @@ void mxsr2msrTranslator::handleTupletStop (
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayLastHandledTupletInVoiceMap (
-//       "############## mxsr2msrTranslator:handleTupletStop() 2");
+//       "############## mxsr2msrSkeletonPopulator:handleTupletStop() 2");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::reduceTupletStackTop (
+void mxsr2msrSkeletonPopulator::reduceTupletStackTop (
   const S_msrNote&  note,
   const S_msrVoice& currentNoteVoice)
 {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //       displayTupletsStack (
-//         "############## mxsr2msrTranslator:reduceTupletStackTop() 1");
+//         "############## mxsr2msrSkeletonPopulator:reduceTupletStackTop() 1");
 //   }
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //       displayVoicesTupletsStacksMap (
-//         "############## mxsr2msrTranslator:reduceTupletStackTop() 1");
+//         "############## mxsr2msrSkeletonPopulator:reduceTupletStackTop() 1");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 
@@ -21350,7 +21353,7 @@ void mxsr2msrTranslator::reduceTupletStackTop (
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTupletsBasics ()) {
           gLog <<
-            "--> mxsr2msrTranslator::reduceTupletStackTop() 4, note " <<
+            "--> mxsr2msrSkeletonPopulator::reduceTupletStackTop() 4, note " <<
             note->asShortString () <<
             " to stack top tuplet " <<
             tupletStackTop->asString () <<
@@ -21361,7 +21364,7 @@ void mxsr2msrTranslator::reduceTupletStackTop (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        if (! fThereIsAPendingTupletStop) {
+        if (! fThereIsAPendingTupletStop) { // CHORD_TUP
           // JMI v0.9.70 tuplet stop not on last chord member
           // see ChordsInTupletWithTupletStopNotOnTheChordLastNote.xml
 
@@ -21378,12 +21381,12 @@ void mxsr2msrTranslator::reduceTupletStackTop (
 //         if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //           voiceHandler->
 //             displayTupletsStack (
-//               "############## mxsr2msrTranslator:kTupletTypeStop, outer-most");
+//               "############## mxsr2msrSkeletonPopulator:kTupletTypeStop, outer-most");
 //         }
 //         if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //           voiceHandler->
 //             displayVoicesTupletsStacksMap (
-//               "############## mxsr2msrTranslator:kTupletTypeStop, outer-most");
+//               "############## mxsr2msrSkeletonPopulator:kTupletTypeStop, outer-most");
 //         }
 // #endif // MF_TRACE_IS_ENABLED
 
@@ -21391,16 +21394,16 @@ void mxsr2msrTranslator::reduceTupletStackTop (
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTupletsBasics ()) {
           gLog <<
-            "--> mxsr2msrTranslator::reduceTupletStackTop(): finalizing pending tuplet stack top" <<
+            "--> mxsr2msrSkeletonPopulator::reduceTupletStackTop(): finalizing pending tuplet stack top" <<
             ", line " << note->getInputStartLineNumber () <<
             std::endl;
         }
 #endif // MF_TRACE_IS_ENABLED
 
     voiceHandler->
-      finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.71
+      finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.71 // CHORD_TUP
           note->getInputStartLineNumber (),
-          "mxsr2msrTranslator:reduceTupletStackTop() 4");
+          "mxsr2msrSkeletonPopulator:reduceTupletStackTop() 4");
 
         // don't pop the inner-most tuplet from the stack yet
 //         voiceHandler->getTupletsStack ().pop_front (); // JMI DEDIEUDIEU
@@ -21421,7 +21424,7 @@ void mxsr2msrTranslator::reduceTupletStackTop (
         voiceHandler->
           finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.71
             note->getInputStartLineNumber (),
-            "mxsr2msrTranslator:reduceTupletStackTop() 6");
+            "mxsr2msrSkeletonPopulator:reduceTupletStackTop() 6");
 
         S_msrTuplet
           tupletStackTop =
@@ -21431,7 +21434,7 @@ void mxsr2msrTranslator::reduceTupletStackTop (
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTuplets ()) {
           gLog <<
-            "--> mxsr2msrTranslator:reduceTupletStackTop(): adding nested tuplet member note " <<
+            "--> mxsr2msrSkeletonPopulator:reduceTupletStackTop(): adding nested tuplet member note " <<
             note->asShortString () <<
             " to stack top tuplet " <<
             tupletStackTop->asString () <<
@@ -21459,19 +21462,19 @@ void mxsr2msrTranslator::reduceTupletStackTop (
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayLastHandledTupletInVoiceMap (
-//       "############## mxsr2msrTranslator:reduceTupletStackTop() 2");
+//       "############## mxsr2msrSkeletonPopulator:reduceTupletStackTop() 2");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 
   // forget about the pending tuplet stop
-  fThereIsAPendingTupletStop = false;
+  fThereIsAPendingTupletStop = false; // CHORD_TUP
 
   fNoteWithThePendingTupletStop = nullptr;
   fVoiceOfTheNoteWithThePendingTupletStop = nullptr;
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachCurrentArticulationsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachCurrentArticulationsToCurrentNote ()
 {
   // attach the current articulations if any to the fCurrentNote
 #ifdef MF_TRACE_IS_ENABLED
@@ -21517,7 +21520,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachCurrentTechnicalsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachCurrentTechnicalsToCurrentNote ()
 {
   // attach the current technicals to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -21562,7 +21565,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachCurrentTechnicalWithIntegersToCurrentNote ()
 {
   // attach the current technicals to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -21607,7 +21610,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithIntegersToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachCurrentTechnicalWithFloatsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachCurrentTechnicalWithFloatsToCurrentNote ()
 {
   // attach the current technicals to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -21652,7 +21655,7 @@ if (gTraceOahGroup->getTraceTechnicals ()) {
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachCurrentTechnicalWithStringsToCurrentNote ()
 {
   // attach the current technicals to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -21697,7 +21700,7 @@ void mxsr2msrTranslator::attachCurrentTechnicalWithStringsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachCurrentOrnamentsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachCurrentOrnamentsToCurrentNote ()
 {
   // attach the current ornaments to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -21743,7 +21746,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachCurrentSpannersToNote (
+void mxsr2msrSkeletonPopulator::attachCurrentSpannersToNote (
   const S_msrNote&   note,
   const std::string& context)
 {
@@ -21870,7 +21873,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachCurrentSingleTremoloToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachCurrentSingleTremoloToCurrentNote ()
 {
   // attach the current singleTremolo to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -21901,7 +21904,7 @@ void mxsr2msrTranslator::attachCurrentSingleTremoloToCurrentNote ()
 
 //______________________________________________________________________________
 /* JMI
-void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
+void mxsr2msrSkeletonPopulator::attachCurrentArticulationsToChord ( // JMI
   const S_msrChord& chord)
 {
   if (fCurrentArticulations.size ()) {
@@ -21942,7 +21945,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToChord ( // JMI
 
 /*
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
+void mxsr2msrSkeletonPopulator::attachCurrentOrnamentsToChord ( // JMI
   const S_msrChord& chord)
 {
   if (fCurrentOrnamentsList.size ()) {
@@ -21982,7 +21985,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToChord ( // JMI
 */
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingTemposToVoice (
+void mxsr2msrSkeletonPopulator::attachPendingTemposToVoice (
   const S_msrVoice& voice)
 {
   // attach the pending tempos if any to the voice
@@ -22015,7 +22018,7 @@ void mxsr2msrTranslator::attachPendingTemposToVoice (
   }
 }
 
-void mxsr2msrTranslator::attachPendingTemposToPart (
+void mxsr2msrSkeletonPopulator::attachPendingTemposToPart (
   const S_msrPart& part)
 {
   // attach the pending tempos if any to the voice
@@ -22046,7 +22049,7 @@ void mxsr2msrTranslator::attachPendingTemposToPart (
   } // while
 }
 
-// void mxsr2msrTranslator::attachPendingBarLinesToVoice (
+// void mxsr2msrSkeletonPopulator::attachPendingBarLinesToVoice (
 //   const S_msrVoice& voice)
 // {
 //   // attach the pending barlines if any to the voice
@@ -22082,7 +22085,7 @@ void mxsr2msrTranslator::attachPendingTemposToPart (
 //   }
 // }
 
-void mxsr2msrTranslator::attachPendingBarLinesToPart (
+void mxsr2msrSkeletonPopulator::attachPendingBarLinesToPart (
   const S_msrPart& part)
 {
   // attach the pending barlines if any to the voice
@@ -22116,7 +22119,7 @@ void mxsr2msrTranslator::attachPendingBarLinesToPart (
   } // while
 }
 
-// void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
+// void mxsr2msrSkeletonPopulator::attachPendingRehearsalMarksToVoice (
 //   const S_msrVoice& voice)
 // {
 //  // attach the pending rehearsals to the note
@@ -22147,7 +22150,7 @@ void mxsr2msrTranslator::attachPendingBarLinesToPart (
 //   } // while
 // }
 
-void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
+void mxsr2msrSkeletonPopulator::attachPendingRehearsalMarksToPart (
   const S_msrPart& part)
 {
  // attach the pending rehearsals to the note
@@ -22178,7 +22181,7 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
   } // while
 }
 
-void mxsr2msrTranslator::attachPendingLineBreaksToPart (
+void mxsr2msrSkeletonPopulator::attachPendingLineBreaksToPart (
   const S_msrPart& part)
 {
  // attach the pending line breaks to the note
@@ -22211,7 +22214,7 @@ void mxsr2msrTranslator::attachPendingLineBreaksToPart (
   } // while
 }
 
-void mxsr2msrTranslator::attachPendingPageBreaksToPart (
+void mxsr2msrSkeletonPopulator::attachPendingPageBreaksToPart (
   const S_msrPart& part)
 {
  // attach the pending page breaks to the note
@@ -22245,7 +22248,7 @@ void mxsr2msrTranslator::attachPendingPageBreaksToPart (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingTiesToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingTiesToCurrentNote ()
 {
  // attach the pending ties to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22274,7 +22277,7 @@ void mxsr2msrTranslator::attachPendingTiesToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingSegnosToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingSegnosToCurrentNote ()
 {
  // attach the pending segno to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22303,7 +22306,7 @@ void mxsr2msrTranslator::attachPendingSegnosToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingDalSegnosToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingDalSegnosToCurrentNote ()
 {
  // attach the pending dal segno to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22331,7 +22334,7 @@ void mxsr2msrTranslator::attachPendingDalSegnosToCurrentNote ()
   } // while
 }
 
-void mxsr2msrTranslator::attachPendingDalSegnosToChord (
+void mxsr2msrSkeletonPopulator::attachPendingDalSegnosToChord (
   const S_msrChord& chord)
 {
  // attach the pending dal segno if any to the chord
@@ -22362,7 +22365,7 @@ void mxsr2msrTranslator::attachPendingDalSegnosToChord (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingCodasToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingCodasToCurrentNote ()
 {
  // attach the pending coda to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22391,7 +22394,7 @@ void mxsr2msrTranslator::attachPendingCodasToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingCrescDecrescsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingCrescDecrescsToCurrentNote ()
 {
  // attach the pending crescDecresc to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22420,7 +22423,7 @@ void mxsr2msrTranslator::attachPendingCrescDecrescsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingEyeGlassesToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingEyeGlassesToCurrentNote ()
 {
  // attach the pending eyeglasses to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22449,7 +22452,7 @@ void mxsr2msrTranslator::attachPendingEyeGlassesToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingDampsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingDampsToCurrentNote ()
 {
  // attach the pending damps to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22478,7 +22481,7 @@ void mxsr2msrTranslator::attachPendingDampsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingDampAllsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingDampAllsToCurrentNote ()
 {
  // attach the pending damp alls to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22507,7 +22510,7 @@ void mxsr2msrTranslator::attachPendingDampAllsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingOctaveShiftsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingOctaveShiftsToCurrentNote ()
 {
  // attach the pending octave shifts to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22536,7 +22539,7 @@ void mxsr2msrTranslator::attachPendingOctaveShiftsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingScordaturasToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingScordaturasToCurrentNote ()
 {
  // attach the pending scordatura to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -22565,7 +22568,7 @@ void mxsr2msrTranslator::attachPendingScordaturasToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingDynamicsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingDynamicsToCurrentNote ()
 {
  // attach the pending dynamics to the note
   Bool delayAttachment (false);
@@ -22633,7 +22636,7 @@ void mxsr2msrTranslator::attachPendingDynamicsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingOtherDynamicsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingOtherDynamicsToCurrentNote ()
 {
  // attach the pending other dynamics to the note
   Bool delayAttachment (false);
@@ -22701,7 +22704,7 @@ void mxsr2msrTranslator::attachPendingOtherDynamicsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingWordsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingWordsToCurrentNote ()
 {
   // attach the pending words to the note
   Bool delayAttachment;
@@ -22769,7 +22772,7 @@ void mxsr2msrTranslator::attachPendingWordsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingBeamsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingBeamsToCurrentNote ()
 {
   // attach the pending beams to the note
   Bool delayAttachment (false);
@@ -22837,7 +22840,7 @@ void mxsr2msrTranslator::attachPendingBeamsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingSlursToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingSlursToCurrentNote ()
 {
   // attach the pending slurs to the note
   Bool delayAttachment (false);
@@ -22901,7 +22904,7 @@ void mxsr2msrTranslator::attachPendingSlursToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingLigaturesToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
 {
   // attach the pending ligatures to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -23094,7 +23097,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingPedalsToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingPedalsToCurrentNote ()
 {
   // attach the pending pedals to the note
   Bool delayAttachment (false);
@@ -23158,7 +23161,7 @@ void mxsr2msrTranslator::attachPendingPedalsToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingSlashesToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingSlashesToCurrentNote ()
 {
   // attach the pending slashes to the note
   Bool delayAttachment (false);
@@ -23222,7 +23225,7 @@ void mxsr2msrTranslator::attachPendingSlashesToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingWedgesToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingWedgesToCurrentNote ()
 {
   // attach the pending wedges to the note
   Bool delayAttachment (false);
@@ -23286,7 +23289,7 @@ void mxsr2msrTranslator::attachPendingWedgesToCurrentNote ()
 }
 
 // //______________________________________________________________________________
-// void mxsr2msrTranslator::attachPendingVoicesWedgesToCurrentNoteIfRelevant ( // superflous??? JMI v0.9.71
+// void mxsr2msrSkeletonPopulator::attachPendingVoicesWedgesToCurrentNoteIfRelevant ( // superflous??? JMI v0.9.71
 //   int theVoiceNumber)
 // {
 //   // attach the pending wedges to the note
@@ -23361,7 +23364,7 @@ void mxsr2msrTranslator::attachPendingWedgesToCurrentNote ()
 // }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingGlissandosToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingGlissandosToCurrentNote ()
 {
  // attach the pending glissandos to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -23421,7 +23424,7 @@ void mxsr2msrTranslator::attachPendingGlissandosToCurrentNote ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingSlidesToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
 {
  // attach the pending slides to the note
 #ifdef MF_TRACE_IS_ENABLED
@@ -23527,7 +23530,7 @@ void mxsr2msrTranslator::attachPendingSlidesToCurrentNote ()
   } // while
 }
 
-// void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
+// void mxsr2msrSkeletonPopulator::attachPendingVoiceLevelElementsToVoice (
 //   const S_msrVoice& voice)
 // {
 // //   JMI
@@ -23568,7 +23571,7 @@ void mxsr2msrTranslator::attachPendingSlidesToCurrentNote ()
 // //   }
 // }
 
-void mxsr2msrTranslator::attachPendingPartLevelElementsIfAnyToPart ( // JMI v0.9.63
+void mxsr2msrSkeletonPopulator::attachPendingPartLevelElementsIfAnyToPart ( // JMI v0.9.63
   const S_msrPart& part)
 {
   /* JMI
@@ -23601,7 +23604,7 @@ void mxsr2msrTranslator::attachPendingPartLevelElementsIfAnyToPart ( // JMI v0.9
   }
 }
 
-void mxsr2msrTranslator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
+void mxsr2msrSkeletonPopulator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
 {
   // attach the pending ties, if any, to the note
   if (fPendingTiesList.size ()) {
@@ -23711,7 +23714,7 @@ void mxsr2msrTranslator::attachPendingNoteLevelElementsIfAnyToCurrentNote ()
 }
 
 //______________________________________________________________________________
-S_msrNote mxsr2msrTranslator::createNote (
+S_msrNote mxsr2msrSkeletonPopulator::createNote (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -24134,7 +24137,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
+void mxsr2msrSkeletonPopulator::populateCurrentNoteBeforeItIsHandled (
   int inputLineNumber)
 {
   // set current note's color if relevant
@@ -24206,7 +24209,7 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
         fCurrentNote->
           setMeasureElementSoundingWholeNotes (
             fCurrentNoteDisplayWholeNotesFromType,
-            "mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled()");
+            "mxsr2msrSkeletonPopulator::populateCurrentNoteBeforeItIsHandled()");
         break;
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
@@ -24307,7 +24310,7 @@ void mxsr2msrTranslator::populateCurrentNoteBeforeItIsHandled (
   }
 }
 
-void mxsr2msrTranslator::populateCurrentNoteAfterItHasBeenHandled (
+void mxsr2msrSkeletonPopulator::populateCurrentNoteAfterItHasBeenHandled (
   int inputLineNumber) // JMI v0.9.67
 {
   // attach the regular pending elements (not dal segnos), if any, to fCurrentNote
@@ -24316,7 +24319,7 @@ void mxsr2msrTranslator::populateCurrentNoteAfterItHasBeenHandled (
 }
 
 //______________________________________________________________________________
-Bool mxsr2msrTranslator::thereIsAStaffChange (
+Bool mxsr2msrSkeletonPopulator::thereIsAStaffChange (
   int inputLineNumber)
 {
   Bool result (false);
@@ -24415,7 +24418,7 @@ Bool mxsr2msrTranslator::thereIsAStaffChange (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::populateCurrentNoteAndAppendItToCurrentRecipientVoice (
+void mxsr2msrSkeletonPopulator::populateCurrentNoteAndAppendItToCurrentRecipientVoice (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -24534,7 +24537,7 @@ void mxsr2msrTranslator::populateCurrentNoteAndAppendItToCurrentRecipientVoice (
 //       }
 
        // is there a pending tuplet stop?
-//       if (fThereIsAPendingTupletStop) {
+//       if (fThereIsAPendingTupletStop) { // CHORD_TUP
 //         // handle the tuplet stop
 //         handleTupletStop (
 //           fNoteWithThePendingTupletStop,
@@ -24550,7 +24553,7 @@ void mxsr2msrTranslator::populateCurrentNoteAndAppendItToCurrentRecipientVoice (
     }
 
 //     // is there a pending tuplet stop?
-//     if (false && fThereIsAPendingTupletStop) {
+//     if (false && fThereIsAPendingTupletStop) { // CHORD_TUP
 //       // handle the tuplet stop
 //       handleTupletStop (
 //         fNoteWithThePendingTupletStop,
@@ -24603,7 +24606,7 @@ void mxsr2msrTranslator::populateCurrentNoteAndAppendItToCurrentRecipientVoice (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
+void mxsr2msrSkeletonPopulator::attachPendingGraceNotesGroupToNoteIfRelevant (
   int inputLineNumber)
 {
   // is there a pending grace notes group?
@@ -24696,7 +24699,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 }
 
 //______________________________________________________________________________
-// void mxsr2msrTranslator::handleBackup (
+// void mxsr2msrSkeletonPopulator::handleBackup (
 //   int inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -24770,7 +24773,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 // }
 
 //______________________________________________________________________________
-// void mxsr2msrTranslator::handleForward (
+// void mxsr2msrSkeletonPopulator::handleForward (
 //   int inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -24844,7 +24847,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
 // }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitEnd (S_note& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -24967,7 +24970,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
     displayStaffAndVoiceInformation (
       elt->getInputStartLineNumber (),
-      "mxsr2msrTranslator::visitEnd (S_note& elt)");
+      "mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -25067,7 +25070,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 
     displayStaffAndVoiceInformation (
       elt->getInputStartLineNumber (),
-      "mxsr2msrTranslator::visitEnd (S_note& elt)");
+      "mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -25233,7 +25236,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
           __FILE__, __LINE__,
           ss.str ());
 
-        displayPendingHarmoniesList ("mxsr2msrTranslator::visitEnd (S_note& elt)");
+        displayPendingHarmoniesList ("mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)");
       }
 #endif // MF_TRACE_IS_ENABLED
     }
@@ -25313,7 +25316,7 @@ void mxsr2msrTranslator::visitEnd (S_note& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handlePendingHarmonies ()
+void mxsr2msrSkeletonPopulator::handlePendingHarmonies ()
 {
   switch (fPendingHarmoniesList.size ()) {
     case 0:
@@ -25336,7 +25339,7 @@ void mxsr2msrTranslator::handlePendingHarmonies ()
   fHarmoniesVoicesCounter = 0;
 }
 
-void mxsr2msrTranslator::handlePendingSingleHarmony (
+void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
   const S_msrHarmony& harmony)
 {
   msrWholeNotes
@@ -25504,7 +25507,7 @@ void mxsr2msrTranslator::handlePendingSingleHarmony (
   }
 }
 
-void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
+void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
 {
   msrWholeNotes
     currentNoteSoundingWholeNotes =
@@ -25670,7 +25673,7 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
       previousHarmony->
         setHarmonySoundingWholeNotes (
           currentHarmonySoundingWholeNotes,
-          "mxsr2msrTranslator::handlePendingMultipleHarmonies() 3, first to next to last harmony");
+          "mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies() 3, first to next to last harmony");
 
       // remember the currentHarmony's whole notes offset as previous
       previousWholeNotesOffsetInTheLoop = currentHarmonyWholeNotesOffset;
@@ -25680,7 +25683,7 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
     currentHarmony->
       setHarmonyDisplayWholeNotes (
         currentNoteDisplayWholeNotes,
-        "mxsr2msrTranslator::handlePendingMultipleHarmonies() 4, first to next to last harmony");
+        "mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies() 4, first to next to last harmony");
 
     // set the currentHarmony's tuplet factor // JMI v0.9.67
     currentHarmony->
@@ -25766,17 +25769,17 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
   lastHarmony->
     setHarmonySoundingWholeNotes (
       lastHarmonySoundingWholeNotes,
-      "mxsr2msrTranslator::handlePendingMultipleHarmonies() 5, last harmony in the list");
+      "mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies() 5, last harmony in the list");
 
   // set the display whole notes of the last harmony in the list
   lastHarmony->
     setHarmonyDisplayWholeNotes (
       currentNoteDisplayWholeNotes,
-      "mxsr2msrTranslator::handlePendingMultipleHarmonies() 6, last harmony in the list");
+      "mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies() 6, last harmony in the list");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
-    displayPendingHarmoniesList ("mxsr2msrTranslator::handlePendingMultipleHarmonies() 7");
+    displayPendingHarmoniesList ("mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies() 7");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -25797,7 +25800,7 @@ void mxsr2msrTranslator::handlePendingMultipleHarmonies ()
   }
 }
 
-void mxsr2msrTranslator::displayPendingHarmoniesList (
+void mxsr2msrSkeletonPopulator::displayPendingHarmoniesList (
   std::string context)
 {
   gLog <<
@@ -25826,7 +25829,7 @@ void mxsr2msrTranslator::displayPendingHarmoniesList (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handlePendingFiguredBasses ()
+void mxsr2msrSkeletonPopulator::handlePendingFiguredBasses ()
 {
   switch (fPendingFiguredBassesList.size ()) {
     case 0:
@@ -25849,7 +25852,7 @@ void mxsr2msrTranslator::handlePendingFiguredBasses ()
   fFiguredBassVoicesCounter = 0;
 }
 
-void mxsr2msrTranslator::handlePendingSingleFiguredBass (
+void mxsr2msrSkeletonPopulator::handlePendingSingleFiguredBass (
   const S_msrFiguredBass& figuredBass)
 {
   // set figuredBass's sounding whole notes
@@ -25885,7 +25888,7 @@ void mxsr2msrTranslator::handlePendingSingleFiguredBass (
       fCurrentNote->getMeasureElementMeasurePosition ());
 }
 
-void mxsr2msrTranslator::handlePendingMultipleFiguredBasses ()
+void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
 {
   msrWholeNotes
     currentNoteSoundingWholeNotes =
@@ -25949,7 +25952,7 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses ()
     currentFiguredBass->
       setFiguredBassSoundingWholeNotes (
         figuredBassSoundingWholeNotes,
-        "mxsr2msrTranslator::handlePendingMultipleFiguredBasses() 3");
+        "mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses() 3");
 
     // set the currentFiguredBass's display whole notes
     currentFiguredBass->
@@ -25978,7 +25981,7 @@ void mxsr2msrTranslator::handlePendingMultipleFiguredBasses ()
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::displayPendingFiguredBassesList (
+void mxsr2msrSkeletonPopulator::displayPendingFiguredBassesList (
   std::string context)
 {
   gLog <<
@@ -25997,7 +26000,7 @@ void mxsr2msrTranslator::displayPendingFiguredBassesList (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
+void mxsr2msrSkeletonPopulator::handleNonChordNorTupletNoteOrRest ()
 {
   ++gIndenter;
 
@@ -26408,7 +26411,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHasBeenHandled ()
+void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled ()
 {
   int currentNoteInputLineNumber =
     fCurrentNote->getInputStartLineNumber ();
@@ -26587,7 +26590,7 @@ void mxsr2msrTranslator::handleLyricsForCurrentNoteAfterItHasBeenHandled ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleNoteBelongingToAChord (
+void mxsr2msrSkeletonPopulator::handleNoteBelongingToAChord (
   const S_msrNote& newChordNote)
 {
   int newChodeNoteInputLineNumber =
@@ -26780,7 +26783,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceChords ()) {
       gLog <<
-        "mxsr2msrTranslator::handleNoteBelongingToAChord()" <<
+        "mxsr2msrSkeletonPopulator::handleNoteBelongingToAChord()" <<
         ", chordFirstNote:" <<
         std::endl;
 
@@ -26899,9 +26902,10 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           std::stringstream ss;
 
           ss <<
-            "Appending chord " << fCurrentChord <<
+            "Appending chord " << fCurrentChord->asString () <<
             " to voice \"" <<
-            fCurrentPartVoicesVector [fVoiceNumberToInsertInto]->getVoiceName () <<
+            fCurrentPartVoicesVector [
+              fVoiceNumberToInsertInto]->getVoiceName () <<
             "\"";
 
           gWaeHandler->waeTrace (
@@ -26942,7 +26946,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           chord->
             setMeasureElementSoundingWholeNotes ( // ??? JMI
               chordFirstNoteSoundingWholeNotes,
-              "mxsr2msrTranslator::handleNoteBelongingToAChord()");
+              "mxsr2msrSkeletonPopulator::handleNoteBelongingToAChord()");
               */
 
           if (chordFirstNote->getNoteIsFirstNoteInADoubleTremolo ()) {
@@ -27079,7 +27083,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::handleNoteBelongingToATuplet (
+void mxsr2msrSkeletonPopulator::handleNoteBelongingToATuplet (
   const S_msrNote& note)
 {
   int noteInputLineNumber =
@@ -27208,7 +27212,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       break;
 
     case msrTupletTypeKind::kTupletTypeStop:
-      fThereIsAPendingTupletStop = true;
+      fThereIsAPendingTupletStop = true; // CHORD_TUP
 
       fNoteWithThePendingTupletStop = note;
       fVoiceOfTheNoteWithThePendingTupletStop = firstNoteVoice;
@@ -27293,7 +27297,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
+void mxsr2msrSkeletonPopulator::handleNoteBelongingToAChordInATuplet (
   const S_msrNote& newChordNote)
 {
   /*
@@ -27352,7 +27356,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
   }
 
 //   // is there a pending tuplet stop?
-//   if (fThereIsAPendingTupletStop) {
+//   if (fThereIsAPendingTupletStop) { // CHORD_TUP
 //     // handle the tuplet stop
 //     handleTupletStop (
 //       fNoteWithThePendingTupletStop,
@@ -27556,7 +27560,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 
 //     // is this chord the last one in the tuplet?
 //     if (currentTuplet->getTupletHasBeenFilled ()) { JMI v0.9.71
-//       // fThereIsAPendingTupletStop ???
+//       // fThereIsAPendingTupletStop // CHORD_TUP
 //
 //       // handle the tuplet stop
 //       reduceTupletStackTop (
@@ -27614,7 +27618,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
+void mxsr2msrSkeletonPopulator::handleNoteBelongingToAChordInAGraceNotesGroup (
   const S_msrNote& newChordNote)
 {
   /*
@@ -27807,7 +27811,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-// void mxsr2msrTranslator::displayLastHandledTupletInVoiceMap (const std::string& header)
+// void mxsr2msrSkeletonPopulator::displayLastHandledTupletInVoiceMap (const std::string& header)
 // {
 //   gLog <<
 //     std::endl <<
@@ -27850,7 +27854,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
 // }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleRepeatStart (
+void mxsr2msrSkeletonPopulator::handleRepeatStart (
   const S_msrBarLine& barLine)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -27887,7 +27891,7 @@ void mxsr2msrTranslator::handleRepeatStart (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleRepeatEnd (
+void mxsr2msrSkeletonPopulator::handleRepeatEnd (
   const S_msrBarLine& barLine)
 {
   std::string repeatStartMeasureNumber =
@@ -27932,7 +27936,7 @@ void mxsr2msrTranslator::handleRepeatEnd (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleRepeatEndingStart (
+void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
   const S_msrBarLine& barLine)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -27993,7 +27997,7 @@ void mxsr2msrTranslator::handleRepeatEndingStart (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
+void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
   const S_msrBarLine& barLine)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -28056,7 +28060,7 @@ void mxsr2msrTranslator::handleRepeatHookedEndingEnd (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
+void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
   const S_msrBarLine& barLine)
 {
   /*
@@ -28128,7 +28132,7 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28239,7 +28243,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_harmony& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_harmony& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28291,7 +28295,7 @@ void mxsr2msrTranslator::visitStart (S_harmony& elt)
   fOnGoingHarmony = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_root& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_root& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28319,7 +28323,7 @@ void mxsr2msrTranslator::visitStart (S_root& elt)
       printObjectString);
 }
 
-void mxsr2msrTranslator::visitStart (S_root_step& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_root_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28347,7 +28351,7 @@ void mxsr2msrTranslator::visitStart (S_root_step& elt)
       step [0]);
 }
 
-void mxsr2msrTranslator::visitStart (S_root_alter& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_root_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28384,7 +28388,7 @@ void mxsr2msrTranslator::visitStart (S_root_alter& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_function& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_function& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28403,7 +28407,7 @@ void mxsr2msrTranslator::visitStart (S_function& elt)
   std::string fCurrentHarmonyFunctionText = elt->getValue ();
 }
 
-void mxsr2msrTranslator::visitStart (S_kind& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28633,7 +28637,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
   */
 }
 
-void mxsr2msrTranslator::visitStart (S_inversion& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_inversion& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28657,7 +28661,7 @@ void mxsr2msrTranslator::visitStart (S_inversion& elt)
   fCurrentHarmonyInversion = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_bass& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_bass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28674,7 +28678,7 @@ void mxsr2msrTranslator::visitStart (S_bass& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_bass_step& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_bass_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28702,7 +28706,7 @@ void mxsr2msrTranslator::visitStart (S_bass_step& elt)
       step [0]);
 }
 
-void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_bass_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28739,7 +28743,7 @@ void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_degree& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_degree& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28767,7 +28771,7 @@ void mxsr2msrTranslator::visitStart (S_degree& elt)
       printObjectString);
 }
 
-void mxsr2msrTranslator::visitStart (S_degree_value& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_degree_value& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28786,7 +28790,7 @@ void mxsr2msrTranslator::visitStart (S_degree_value& elt)
   fCurrentHarmonyDegreeValue = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_degree_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28823,7 +28827,7 @@ void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_degree_type& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_degree_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28863,7 +28867,7 @@ void mxsr2msrTranslator::visitStart (S_degree_type& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_degree& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_degree& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -28893,7 +28897,7 @@ void mxsr2msrTranslator::visitEnd (S_degree& elt)
     harmonyDegree);
 }
 
-void mxsr2msrTranslator::visitEnd (S_harmony& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29128,7 +29132,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_frame& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
 {
 /*
 <!--
@@ -29287,7 +29291,7 @@ void mxsr2msrTranslator::visitStart (S_frame& elt)
   fOnGoingFrame = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_frame_strings& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_frame_strings& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29306,7 +29310,7 @@ void mxsr2msrTranslator::visitStart (S_frame_strings& elt)
   fCurrentFrameStrings = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_frame_frets& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_frame_frets& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29325,7 +29329,7 @@ void mxsr2msrTranslator::visitStart (S_frame_frets& elt)
   fCurrentFrameFrets = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_first_fret& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_first_fret& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29352,7 +29356,7 @@ void mxsr2msrTranslator::visitStart (S_first_fret& elt)
   std::string firstFretText = elt->getAttributeValue ("text");
 }
 
-void mxsr2msrTranslator::visitStart (S_frame_note& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_frame_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29376,7 +29380,7 @@ void mxsr2msrTranslator::visitStart (S_frame_note& elt)
   fOnGoingFrameNote = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_barre& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_barre& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29419,7 +29423,7 @@ void mxsr2msrTranslator::visitStart (S_barre& elt)
   // color JMI
 }
 
-void mxsr2msrTranslator::visitEnd (S_frame_note& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_frame_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29451,7 +29455,7 @@ void mxsr2msrTranslator::visitEnd (S_frame_note& elt)
   fOnGoingFrameNote = false;
 }
 
-void mxsr2msrTranslator::visitEnd (S_frame& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_frame& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29496,7 +29500,7 @@ void mxsr2msrTranslator::visitEnd (S_frame& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_figured_bass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29556,7 +29560,7 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
   fOnGoingFiguredBass = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_figure& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_figure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29573,7 +29577,7 @@ void mxsr2msrTranslator::visitStart (S_figure& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_prefix& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_prefix& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29631,7 +29635,7 @@ void mxsr2msrTranslator::visitStart (S_prefix& elt)
 
 }
 
-void mxsr2msrTranslator::visitStart (S_figure_number& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_figure_number& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29663,7 +29667,7 @@ void mxsr2msrTranslator::visitStart (S_figure_number& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_suffix& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_suffix& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29723,7 +29727,7 @@ void mxsr2msrTranslator::visitStart (S_suffix& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_figure& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_figure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29754,7 +29758,7 @@ void mxsr2msrTranslator::visitEnd (S_figure& elt)
     bassFigure);
 }
 
-void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29823,7 +29827,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_harp_pedals& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29925,7 +29929,7 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
       fCurrentHarpPedalsTuning);
 }
 
-void mxsr2msrTranslator::visitStart (S_pedal_tuning& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pedal_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29942,7 +29946,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_tuning& elt)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrTranslator::visitStart (S_pedal_step& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pedal_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -29970,7 +29974,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_step& elt)
       tuningStep [0]);
 }
 
-void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_pedal_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30007,7 +30011,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_pedal_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30058,7 +30062,7 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
       fCurrentHarpPedalAlterationKind);
 }
 
-void mxsr2msrTranslator::visitStart (S_damp& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_damp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30086,7 +30090,7 @@ void mxsr2msrTranslator::visitStart (S_damp& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_damp_all& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_damp_all& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30115,7 +30119,7 @@ void mxsr2msrTranslator::visitStart (S_damp_all& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_capo& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_capo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30134,7 +30138,7 @@ void mxsr2msrTranslator::visitStart (S_capo& elt)
   fCurrentStaffDetailsCapo = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_staff_size& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_staff_size& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30154,7 +30158,7 @@ void mxsr2msrTranslator::visitStart (S_staff_size& elt)
   // JMI not used
 }
 
-void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_staff_details& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30227,7 +30231,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_scordatura& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_scordatura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30269,7 +30273,7 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
       elt->getInputStartLineNumber ());
 }
 
-void mxsr2msrTranslator::visitStart (S_accord& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_accord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30306,7 +30310,7 @@ void mxsr2msrTranslator::visitStart (S_accord& elt)
   fOnGoingAccord = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_accord& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_accord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30341,7 +30345,7 @@ void mxsr2msrTranslator::visitEnd (S_accord& elt)
       stringTuning);
 }
 
-void mxsr2msrTranslator::visitEnd (S_scordatura& elt)
+void mxsr2msrSkeletonPopulator::visitEnd (S_scordatura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30365,7 +30369,7 @@ void mxsr2msrTranslator::visitEnd (S_scordatura& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_instrument_sound& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_instrument_sound& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30383,7 +30387,7 @@ void mxsr2msrTranslator::visitStart (S_instrument_sound& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_virtual_instrument& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_virtual_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30401,7 +30405,7 @@ void mxsr2msrTranslator::visitStart (S_virtual_instrument& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_midi_device& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_midi_device& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30423,7 +30427,7 @@ void mxsr2msrTranslator::visitStart (S_midi_device& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
+void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -30595,7 +30599,7 @@ part-symbol
 #endif // MF_TRACE_IS_ENABLED
 */
 
-// void mxsr2msrTranslator::convertWordsToTempo (
+// void mxsr2msrSkeletonPopulator::convertWordsToTempo (
 //   int                inputLineNumber,
 //   const std::string& wordsValue)
 // {
@@ -30643,7 +30647,7 @@ part-symbol
 //   fPendingTemposList.push_back (tempo);
 // }
 
-// void mxsr2msrTranslator::convertWordsToRehearsalMark (
+// void mxsr2msrSkeletonPopulator::convertWordsToRehearsalMark (
 //   int                inputLineNumber,
 //   const std::string& wordsValue)
 //     {
@@ -30676,7 +30680,7 @@ part-symbol
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
-// void mxsr2msrTranslator::convertWordsToSegno (
+// void mxsr2msrSkeletonPopulator::convertWordsToSegno (
 //   int                inputLineNumber,
 //   const std::string& wordsValue)
 //     {
@@ -30739,7 +30743,7 @@ part-symbol
 //   fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
-// void mxsr2msrTranslator::convertWordsToDalSegnoAlCoda (
+// void mxsr2msrSkeletonPopulator::convertWordsToDalSegnoAlCoda (
 //   int                inputLineNumber,
 //   const std::string& wordsValue)
 // {
@@ -30771,7 +30775,7 @@ part-symbol
 //   // append dal segno al coda to the pending tempos list
 //   fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
-// void mxsr2msrTranslator::convertWordsToCoda (
+// void mxsr2msrSkeletonPopulator::convertWordsToCoda (
 //   int                inputLineNumber,
 //   const std::string& wordsValue)
 //     {
@@ -30804,7 +30808,7 @@ part-symbol
 //       fPendingRehearsalMarksList.push_back (rehearsalMark);
 // }
 //
-// void mxsr2msrTranslator::convertWordsToCresc (
+// void mxsr2msrSkeletonPopulator::convertWordsToCresc (
 //   int                inputLineNumber,
 //   const std::string& wordsValue)
 //     {
@@ -30836,7 +30840,7 @@ part-symbol
 //       // append the rehearsalMark to the pending tempos list
 //       fPendinCrescDecrescsList.push_back (crescDecresc);
 // }
-// void mxsr2msrTranslator::convertWordsToDecresc (
+// void mxsr2msrSkeletonPopulator::convertWordsToDecresc (
 //   int                inputLineNumber,
 //   const std::string& wordsValue)
 //     {

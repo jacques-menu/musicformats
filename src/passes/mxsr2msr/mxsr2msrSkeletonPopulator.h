@@ -24,6 +24,7 @@
 #include "msrDivisions.h"
 #include "msrDoubleTremolos.h"
 #include "msrGlissandos.h"
+#include "mxsrNotesEvents.h"
 #include "msrRehearsalMarks.h"
 #include "msrSlides.h"
 #include "msrTablatures.h"
@@ -170,7 +171,7 @@ EXP std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceHandler& elt
 EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandler& elt);
 
 //________________________________________________________________________
-class EXP mxsr2msrTranslator :
+class EXP mxsr2msrSkeletonPopulator :
 
   // MXSR score partwise
   // ------------------------------------------------------
@@ -680,10 +681,12 @@ class EXP mxsr2msrTranslator :
     // constructors/destructor
     // ------------------------------------------------------
 
-                              mxsr2msrTranslator (
-                                const S_msrScore& scoreSkeleton);
+                              mxsr2msrSkeletonPopulator (
+                                const S_msrScore& scoreSkeleton,
+                                mxsrScoreNotesEvents&
+                                                  theKnownScoreNotesEvents);
 
-    virtual                   ~mxsr2msrTranslator ();
+    virtual                   ~mxsr2msrSkeletonPopulator ();
 
     // set and get
     // ------------------------------------------------------
@@ -1258,6 +1261,12 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     S_msrScore                fMsrScore;
+
+
+    // the score notes events we know from  mxsr2msrSkeletonBuilder
+    // ------------------------------------------------------
+
+    mxsrScoreNotesEvents&  fKnownScoreNotesEvents;
 
 
     // part handling
@@ -2528,7 +2537,7 @@ class EXP mxsr2msrTranslator :
     Bool                      fCurrentNoteBelongsToATuplet;
 
     // a tuplet stop may occur in a chord before the latter's last note, hence:
-    Bool                      fThereIsAPendingTupletStop;
+    Bool                      fThereIsAPendingTupletStop; // CHORD_TUP
     S_msrNote                 fNoteWithThePendingTupletStop;
     S_msrVoice                fVoiceOfTheNoteWithThePendingTupletStop;
 

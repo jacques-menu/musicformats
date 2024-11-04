@@ -36,7 +36,7 @@
 #include "msr2musicxmlRegularHandler.h"
 
 #include "mxsr2msrSkeletonBuilderInterface.h"
-#include "mxsr2msrTranslatorInterface.h"
+#include "mxsr2msrSkeletonPopulatorInterface.h"
 
 #include "msr2msrInterface.h"
 #include "msr2mxsrInterface.h"

@@ -2235,15 +2235,31 @@ R"(Staff details)",
     addBooleanAtom (
       traceStaffDetailsBooleanAtom);
 
-  // staff changes
+  // staff changes basics
 
   S_oahTwoBooleansAtom
-    traceStaffChangesBooleanAtom =
+    traceStaffChangesBasicsBooleanAtom =
       oahTwoBooleansAtom::create (
+        "trace-staff-changes-basics", "tstchangesb",
+R"(Staff changes basics)",
+        "fTraceStaffChangesBasics",
+        fTraceStaffChangesBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceStaffChangesBasicsBooleanAtom);
+
+  // staff changes
+
+  S_oahThreeBooleansAtom
+    traceStaffChangesBooleanAtom =
+      oahThreeBooleansAtom::create (
         "trace-staff-changes", "tstchanges",
 R"(Staff changes)",
         "fTraceStaffChanges",
         fTraceStaffChanges,
+        traceStaffChangesBasicsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2253,15 +2269,34 @@ R"(Staff changes)",
     addBooleanAtom (
       traceStaffChangesBooleanAtom);
 
-  // voices
+  // voices basics
 
   S_oahTwoBooleansAtom
-    traceVoicesBooleanAtom =
+    traceVoicesBasicsBooleanAtom =
       oahTwoBooleansAtom::create (
+        "trace-voices-basics", "tvoicesb",
+R"(Voices)",
+        "fTraceVoiceBasics",
+        fTraceVoiceBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceVoicesBasicsBooleanAtom);
+  bookstoVoicesMultiplexBooleansAtom->
+    addBooleanAtom (
+      traceVoicesBasicsBooleanAtom);
+
+  // voices
+
+  S_oahThreeBooleansAtom
+    traceVoicesBooleanAtom =
+      oahThreeBooleansAtom::create (
         "trace-voices", "tvoices",
 R"(Voices)",
         "fTraceVoices",
         fTraceVoices,
+        traceVoicesBasicsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2273,14 +2308,15 @@ R"(Voices)",
 
   // voices details
 
-  S_oahThreeBooleansAtom
+  S_oahFourBooleansAtom
     traceVoicesDetailsBooleanAtom =
-      oahThreeBooleansAtom::create (
+      oahFourBooleansAtom::create (
         "trace-voices-details", "tvoicesd",
 R"(Voices with more details (quite verbose)..
 This option implies '-trace-voices, -tvoices'.)",
         "fTraceVoicesDetails",
         fTraceVoicesDetails,
+        traceVoicesBasicsBooleanAtom,
         traceVoicesBooleanAtom,
         fTracePassesBooleanAtom);
 

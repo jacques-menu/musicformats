@@ -43,7 +43,7 @@
 
 #include "musicxml2mxsrInterface.h"
 #include "mxsr2msrSkeletonBuilderInterface.h"
-#include "mxsr2msrTranslatorInterface.h"
+#include "mxsr2msrSkeletonPopulatorInterface.h"
 
 #include "msr2msrInterface.h"
 #include "msr2mxsrInterface.h"
@@ -120,10 +120,13 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // create the skeleton of the first MSR from the originalMxsr (pass 2)
   // ------------------------------------------------------
 
+  mxsrScoreNotesEvents theMxsrScoreNotesEvents;
+
   try {
     firstMsrScore =
       translateMxsrToMsrSkeleton (
         originalMxsr,
+        theMxsrScoreNotesEvents,
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2,
         "Create the skeleton of the first MSR from the originalMxsr");
@@ -160,8 +163,9 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     populateMsrSkeletonFromMxsr (
       originalMxsr,
       firstMsrScore,
-        mfPassIDKind::kMfPassID_3,
-        gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
+      theMxsrScoreNotesEvents,
+      mfPassIDKind::kMfPassID_3,
+      gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   } // try
 
   catch ( mxsr2msrException& e) {

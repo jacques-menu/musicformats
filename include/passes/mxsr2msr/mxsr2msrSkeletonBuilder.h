@@ -14,8 +14,10 @@
 
 #include "typedefs.h"
 
+#include "mxsrNotesEvents.h"
 #include "msrPartGroups.h"
 #include "msrPrintObjects.h"
+#include "msrTupletsEnumTypes.h"
 
 
 namespace MusicFormats
@@ -320,6 +322,139 @@ EXP std::ostream& operator << (std::ostream& os, const mxsrPartGroupsStack& elt)
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartGroupsStack& elt);
 
 //________________________________________________________________________
+// class mxsr2msrVoiceHandler : public smartable
+// {
+// /*
+//   positions represent the order in which the parts appear in <part-list />,
+//   starting at 0 since std::vectors are used
+// */
+//
+//   public:
+//
+//     // creation
+//     // ------------------------------------------------------
+//
+//     static SMARTP<mxsr2msrVoiceHandler> create (
+//                             const S_msrVoice&  voice);
+//
+//   protected:
+//
+//     // constructors/destructor
+//     // ------------------------------------------------------
+//
+//                           mxsr2msrVoiceHandler (
+//                             const S_msrVoice& fMsrVoice);
+//
+//     virtual               ~mxsr2msrVoiceHandler ();
+//
+//   public:
+//
+//     // set and get
+//     // ------------------------------------------------------
+//
+//     S_msrVoice            getMsrVoice () const
+//                               { return fMsrVoice; }
+//
+//     const std::list<S_msrTuplet>&
+//                           getTupletsStack () const
+//                               { return fTupletsStack; }
+//
+//     const std::size_t     getTupletsStackSize () const
+//                               { return fTupletsStack.size (); }
+//
+//     const S_msrTuplet     getTupletsStackTop () const
+//                               { return fTupletsStack.front (); }
+//
+//     void                  setLastMetNoteInVoice (S_msrNote note)
+//                               { fLastMetNoteInVoice = note; }
+//
+//     S_msrNote             getLastMetNoteInVoice () const
+//                               { return fLastMetNoteInVoice; }
+//
+//   public:
+//
+//     // public services
+//     // ------------------------------------------------------
+//
+//     void                  pushTupletOntoTupletsStack (const S_msrTuplet& tuplet)
+//                               { fTupletsStack.push_front (tuplet); }
+//
+// //     void                  handleTupletStartByHandler (
+// //                             const S_msrTuplet& tuplet,
+// //                             const S_msrVoice&  currentNoteVoice);
+// //
+// //     void                  handleTupletContinueByHandler (
+// //                             const S_msrNote&   note,
+// //                             const S_msrVoice&  currentNoteVoice);
+// //
+// //     void                  handleTupletStopByHandler (
+// //                             const S_msrNote&   note,
+// //                             const S_msrVoice&  currentNoteVoice);
+//
+//     void                  finalizeTupletStackTopAndPopItFromTupletsStack (
+//                             int         inputLineNumber,
+//                             std::string context);
+//
+//   public:
+//
+//     // print
+//     // ------------------------------------------------------
+//
+//     std::string           asString () const;
+//
+//     virtual void          print (std::ostream& os) const;
+//
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//
+//     S_msrVoice            fMsrVoice;
+//
+//     S_msrNote             fLastMetNoteInVoice;
+//
+//     std::list<S_msrTuplet>
+//                           fTupletsStack;
+//
+//     S_msrNote             fCurrentOuterMostTupletFirstNote;
+//     S_msrTuplet           fCurrentOuterMostTuplet;
+//
+//     msrWholeNotes         fCurrentOuterMostTupletRelativeOffset;
+//
+//   private:
+//
+//     // private work fields
+//     // ------------------------------------------------------
+//
+//     // we use a pair containing the staff and voice numbers: JMI v0.9.70
+// //     std::map<S_msrVoice, S_msrTuplet>
+// //     std::map<std::pair<int, int>, S_msrTuplet>
+// //                               fLastHandledTupletInVoiceMap;
+//
+// //     // the tuplets stops are not always in first-in/first-out order, so:
+// //     std::set<int>         fExpectedTupletsStopNumbersSet;
+//
+//   private:
+//
+//     // private methods
+//     // ------------------------------------------------------
+//
+//     void                  displayTupletsStack (
+//                             const std::string& context);
+//
+//     void                  handleTupletsPendingOnTupletsStack (
+//                             int inputLineNumber);
+//
+//      void                 displayLastHandledTupletInVoiceMap (
+//                             const std::string& header);
+// };
+// typedef SMARTP<mxsr2msrVoiceHandler> S_mxsr2msrVoiceHandler;
+//
+// EXP std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceHandler& elt);
+// EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandler& elt);
+
+//________________________________________________________________________
 class EXP mxsr2msrSkeletonBuilder :
 
   // score partwise
@@ -425,6 +560,16 @@ class EXP mxsr2msrSkeletonBuilder :
 
   public                      visitor<S_note>,
 
+  // chords
+  // ------------------------------------------------------
+
+  public                      visitor<S_chord>,
+
+  // tuplets
+  // ------------------------------------------------------
+
+  public                      visitor<S_tuplet>,
+
   // lyrics
   // ------------------------------------------------------
 
@@ -446,7 +591,9 @@ class EXP mxsr2msrSkeletonBuilder :
     // constructors/destructor
     // ------------------------------------------------------
 
-                              mxsr2msrSkeletonBuilder ();
+                              mxsr2msrSkeletonBuilder (
+                                mxsrScoreNotesEvents&
+                                  theResultingScoreNotesEvents);
 
     virtual                   ~mxsr2msrSkeletonBuilder ();
 
@@ -592,6 +739,19 @@ class EXP mxsr2msrSkeletonBuilder :
     virtual void              visitStart (S_note& elt);
     virtual void              visitEnd   (S_note& elt);
 
+    // chords
+    // ------------------------------------------------------
+
+    virtual void              visitStart (S_chord& elt);
+    virtual void              visitEnd   (S_chord& elt);
+
+    // tuplets
+    // ------------------------------------------------------
+
+    virtual void              visitStart (S_tuplet& elt);
+
+    virtual void              visitStart (S_time_modification& elt);
+
     // lyrics
     // ------------------------------------------------------
 
@@ -616,6 +776,12 @@ class EXP mxsr2msrSkeletonBuilder :
     // ------------------------------------------------------
 
     S_msrScore                fMsrScore;
+
+
+    // the score notes events we shall collect for  mxsr2msrSkeletonPopulator
+    // ------------------------------------------------------
+
+    mxsrScoreNotesEvents&     fResultingScoreNotesEvents;
 
 
     // credits handling
@@ -769,8 +935,6 @@ class EXP mxsr2msrSkeletonBuilder :
     // staff handling
     // ------------------------------------------------------
 
-    int                       fCurrentStaffMusicXMLNumber; // used throughout
-
     S_msrStaff                createStaffInCurrentPartIfNotYetDone (
                                 int inputLineNumber,
                                 int staffNumber);
@@ -807,9 +971,57 @@ class EXP mxsr2msrSkeletonBuilder :
     Bool                      fOnGoingPrint;
 
 
+    // notes handling
     // ------------------------------------------------------
 
+		int	                      fCurrentNoteSequentialNumber;
+
+		int	                      fCurrentNoteStartInputLine;
+		int	                      fCurrentNoteEndInputLine;
+
+		int	                      fPreviousNoteStartInputLine;
+		int	                      fPreviousNoteEndInputLine;
+
+    int                       fCurrentNoteStaffNumber; // used throughout
+    int                       fPreviousNoteStaffNumber;
+
+    int                       fCurrentNoteVoiceNumber; // used throughout
+    int                       fPreviousNoteVoiceNumber;
+
+/*
+/Users/jacquesmenu/musicformats-git-dev/src/passes/mxsr2msr/mxsr2msrSkeletonBuilder.h:989:31: warning: private field 'fCurrentNoteVoiceNumber' is not used [-Wunused-private-field]
+  989 |     int                       fCurrentNoteVoiceNumber; // used throughout
+      |                               ^
+/Users/jacquesmenu/musicformats-git-dev/src/passes/mxsr2msr/mxsr2msrSkeletonBuilder.h:990:31: warning: private field 'fPreviousNoteVoiceNumber' is not used [-Wunused-private-field]
+  990 |     int                       fPreviousNoteVoiceNumber;
+      |                               ^
+*/
+
     Bool                      fOnGoingNote;
+
+    // chords handling
+    // ------------------------------------------------------
+
+    Bool                      fCurrentNoteBelongsToAChord;
+    Bool                      fPreviousNoteBelongsToAChord;
+
+//     Bool                      fOnGoingChord; // JMI v0.9.71
+
+    // tuplets handling
+    // ------------------------------------------------------
+
+    // nested tuplets are numbered 1, 2, ...
+    int                       fCurrentTupletNumber;
+    int                       fPreviousTupletNumber;
+
+    msrTupletTypeKind         fCurrentTupletTypeKind;
+
+    Bool                      fCurrentNoteBelongsToATuplet;
+
+    // a tuplet stop may occur in a chord before the latter's last note, hence:
+    Bool                      fThereIsAPendingTupletStop; // CHORD_TUP
+
+//     Bool                      fOnGoingTuplet; // JMI v0.9.71
 
 
     // lyrics handling

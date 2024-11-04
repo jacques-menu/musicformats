@@ -1679,8 +1679,8 @@ std::string msrChord::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Chord asString ()" <<
-    ", chordKind: " << fChordKind <<
+    "[Chord asString ()" << // JMI v0.9.71
+    ", fChordKind: " << fChordKind <<
     ", line " << fInputStartLineNumber <<
     " <";
 
@@ -1717,7 +1717,7 @@ std::string msrChord::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Chord asShortString ()" <<
+    "[Chord asShortString ()" << // JMI v0.9.71
     ", " << fChordKind <<
     ", line " << fInputStartLineNumber <<
     ", <";

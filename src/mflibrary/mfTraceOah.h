@@ -920,12 +920,14 @@ class EXP traceOahGroup : public oahGroup
     // staff changes
     // --------------------------------------
 
+    Bool                  fTraceStaffChangesBasics;
     Bool                  fTraceStaffChanges;
 
 
     // voices
     // --------------------------------------
 
+    Bool                  fTraceVoiceBasics;
     Bool                  fTraceVoices;
     Bool                  fTraceVoicesDetails;
 

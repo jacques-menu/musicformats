@@ -37,7 +37,7 @@
 
 #include "msr2mxsrInterface.h"
 #include "mxsr2msrSkeletonBuilderInterface.h"
-#include "mxsr2msrTranslatorInterface.h"
+#include "mxsr2msrSkeletonPopulatorInterface.h"
 #include "msr2mxsrInterface.h"
 #include "msr2bsrInterface.h"
 #include "bsr2bsrFinalizerInterface.h"

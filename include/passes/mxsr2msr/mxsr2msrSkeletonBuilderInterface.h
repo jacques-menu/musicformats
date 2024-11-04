@@ -12,16 +12,19 @@
 #ifndef ___mxsr2msrSkeletonBuilderInterface___
 #define ___mxsr2msrSkeletonBuilderInterface___
 
+#include "mxsr2msrSkeletonBuilder.h"
+
 
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 EXP S_msrScore translateMxsrToMsrSkeleton (
-  const Sxmlelement&   theMxsr,
-  const S_msrOahGroup& msrOpts,
-  mfPassIDKind         passIDKind,
-  const std::string&   passDescription);
+  const Sxmlelement&    theMxsr,
+  mxsrScoreNotesEvents& theResultingScoreNotesEvents,
+  const S_msrOahGroup&  msrOpts,
+  mfPassIDKind          passIDKind,
+  const std::string&    passDescription);
 
 //_______________________________________________________________________________
 // EXP void displayMsrScoreSkeleton ( // UNUSED JMI v0.9.66

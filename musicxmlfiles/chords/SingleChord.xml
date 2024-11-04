@@ -60,7 +60,7 @@
         <voice>1</voice>
         <type>eighth</type>
       </note>
-      <!--note>
+      <note>
         <chord />
         <pitch>
           <step>E</step>
@@ -81,7 +81,7 @@
         <voice>1</voice>
         <type>eighth</type>
         <accidental>flat</accidental>
-      </note-->
+      </note>
     </measure>
   </part>
 </score-partwise>

@@ -45,7 +45,7 @@
 
 #include "musicxml2mxsrInterface.h"
 #include "mxsr2msrSkeletonBuilderInterface.h"
-#include "mxsr2msrTranslatorInterface.h"
+#include "mxsr2msrSkeletonPopulatorInterface.h"
 #include "msr2mxsrInterface.h"
 #include "msr2msrInterface.h"
 #include "msr2lpsrInterface.h"
@@ -270,6 +270,8 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //   // create the skeleton of the first MSR from the originalMxsr (pass 2a)
 //   // ------------------------------------------------------
 //
+//   mxsrScoreNotesEvents theMxsrScoreNotesEvents;
+//
 //   try {
 //     firstMsrScore =
 //       translateMxsrToMsrSkeleton (
@@ -306,8 +308,9 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //     populateMsrSkeletonFromMxsr (
 //       theMxsr,
 //       firstMsrScore,
-//         mfPassIDKind::kMfPassID_2b,
-//         gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
+//       theMxsrScoreNotesEvents,
+// 			 mfPassIDKind::kMfPassID_2b,
+// 			 gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
 //   }
 //   catch (mxsr2msrException& e) {
 //     mfDisplayException (e, gOutput);

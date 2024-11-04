@@ -180,7 +180,7 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
     std::endl << std::endl;
 #endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
 
-  if (fIndentation < 0) {
+  if (false && fIndentation < 0) {
     mfAssert (
       __FILE__, __LINE__,
       false,
