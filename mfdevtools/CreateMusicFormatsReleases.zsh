@@ -140,7 +140,7 @@ echo
 
 CreateReleaseForOS "macos"
 CreateReleaseForOS "ubuntu"
-# CreateReleaseForOS "windows"
+CreateReleaseForOS "windows"
 echo
 
 echo "----------------------------------------------"
@@ -148,25 +148,29 @@ echo "==> final ${MF_RELEASES_DIR} contents:"
 echo "----------------------------------------------"
 echo
 
+cd ${MF_RELEASES_DIR}
+pwd
+echo
+
 echo "----------------------------------------------"
 echo "==> MacOS:"
 echo "----------------------------------------------"
 echo
-ls -salht ${MF_RELEASES_DIR}/musicformats-macos*
+ls -salht musicformats-macos-*.zip
 echo
 
 echo "----------------------------------------------"
 echo "==> Ubuntu:"
 echo "----------------------------------------------"
 echo
-ls -salht ${MF_RELEASES_DIR}/musicformats-ubuntu*
+ls -salht musicformats-ubuntu-*.zip
 echo
 
 echo "----------------------------------------------"
 echo "==> Windows:"
 echo "----------------------------------------------"
 echo
-ls -salht ${MF_RELEASES_DIR}/musicformats-windows*
+ls -salht musicformats-windows-*.zip
 echo
 
 # set +x

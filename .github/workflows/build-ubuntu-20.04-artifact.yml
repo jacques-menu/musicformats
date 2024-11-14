@@ -24,7 +24,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
@@ -34,7 +34,7 @@ jobs:
           cd build ; cmake -S . -B . . ; ls -salR . ; make ; ls -salR .
 
       - name: Upload libraries and executables for Ubuntu
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: musicformats-ubuntu-20.04 artifact
           path: |
