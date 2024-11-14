@@ -916,7 +916,8 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
     ss <<
       "Registering voice \"" << voice->getVoiceName () <<
-      "\" in all voices list of staff " << fStaffName;
+      "\" in all voices list of staff " << fStaffName <<
+      " line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1010,7 +1011,8 @@ void msrStaff::registerVoiceByItsNumber (
       "\", " <<
       voice->asShortString () <<
       ", by its number '" << voiceNumber <<
-      "\" in staff " << fStaffName;
+      "\" in staff " << fStaffName <<
+      " line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1260,9 +1262,9 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
     std::stringstream ss;
 
     ss <<
-      "Fetching voice number '" <<
+      "Fetching voice by its number " <<
       voiceNumber <<
-     "' in staff \"" << fStaffName <<
+     " in staff \"" << fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber;
@@ -1290,7 +1292,8 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
         std::stringstream ss;
 
         ss <<
-          "Voice number '" << voiceNumber <<
+          "Fetching voice by its number " <<
+          voiceNumber <<
           "' in staff \"" << fStaffName << "\"" <<
           " has staff relative number '" << number <<
           '\'';

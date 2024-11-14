@@ -168,6 +168,7 @@ class EXP mxsrOahGroup : public oahGroup
     // --------------------------------------
 
     Bool                  fDisplayMxsr;
+
     Bool                  fTraceMxsr;
 
     // visitors

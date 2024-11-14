@@ -745,10 +745,6 @@ S_msrNote msrNote::createNoteNewbornClone (
   // ties
   // ------------------------------------------------------
 
-  newbornClone->fNoteTiesList = // JMI
-    // share this data
-    fNoteTiesList;
-
   // dynamics
   // ------------------------------------------------------
 

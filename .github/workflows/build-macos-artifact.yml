@@ -40,7 +40,7 @@ jobs:
           cd build ; cmake -S . -B . . ; ls -salR . ; make ; ls -salR .
 
 #       - name: Setup TeX Live
-#         uses: teatimeguest/setup-texlive-action@v3
+#         uses: teatimeguest/setup-texlive-action@v4
 #         with:
 #           packages: >-
 #             scheme-basic
@@ -60,7 +60,7 @@ jobs:
 #             documentation/mfapiguide/MusicFormatsAPIGuide.tex
 
       - name: Upload libraries and executables for MacOS
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: musicformats-macos-latest-artifact
           path: |

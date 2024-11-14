@@ -5,7 +5,7 @@
   <identification>
     <encoding>
       <software>MuseScore 4.4.3</software>
-      <encoding-date>2024-11-01</encoding-date>
+      <encoding-date>2024-11-12</encoding-date>
       <supports element="accidental" type="yes"/>
       <supports element="beam" type="yes"/>
       <supports element="print" attribute="new-page" type="yes" value="yes"/>
@@ -64,7 +64,7 @@
     </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words default-x="595.275" default-y="1627.1742" justify="center" valign="top" font-size="22">Single Chords Tuplet</credit-words>
+    <credit-words default-x="595.275" default-y="1627.2613" justify="center" valign="top" font-size="22">Chords Tuplet</credit-words>
     </credit>
   <part-list>
     <score-part id="P1">

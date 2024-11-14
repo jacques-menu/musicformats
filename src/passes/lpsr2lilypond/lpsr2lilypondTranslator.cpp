@@ -12719,33 +12719,37 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceStaffChanges ()) { JMI v0.9.67
-//     std::stringstream ss;
-//
-//     ss <<
-//       "*** There is staff change for chord member note '" <<
+  S_msrStaff
+    staffToChangeTo =
+      elt->getStaffToChangeTo ();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceStaffChanges ()) { // JMI v0.9.67
+    std::stringstream ss;
+
+    ss <<
+      "*** There is staff change" << // for chord member note '" <<
 //       fCurrentNote->asShortString () <<
 //       "' in voice \"" <<
 //       voiceToInsertInto->getPartAlphabeticName () <<
 //       "\"" <<
 //       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
-//       " to staff " << fCurrentMusicXMLStaffNumber <<
-//       ", \"" << staffToChangeTo->getStaffAlphabeticName () << "\"" <<
-//       ", line " << elt->getInputStartLineNumber () <<
-//       std::endl;
-//
-//     gWaeHandler->waeTraceWithoutInputLocation (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
+//       " to staff " << staffToChangeTo->asShortString () <<
+      ", to staff \"" << staffToChangeTo->getStaffAlphabeticName () << "\"" <<
+      ", line " << elt->getInputStartLineNumber () <<
+      std::endl;
 
-//   fLilypondCodeStream << DISABLED TEMP JMI v0.9.71
-//     std::endl <<
-//     "\\change Staff = \"" <<
-//     elt->getStaffToChangeTo ()->getStaffAlphabeticName () <<
-//     "\"";
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fLilypondCodeStream << // DISABLED TEMP // JMI v0.9.71
+    std::endl <<
+    "\\change Staff = \"" <<
+    staffToChangeTo->getStaffAlphabeticName () <<
+    "\"";
 
   // generate the input line number as comment if relevant
   if (
@@ -26276,8 +26280,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
     !
       (
         fOnGoingVoiceCadenza
-            // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
-           // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
+          // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
+          // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
           ||
         fOnGoingMultiMeasureRests
       )

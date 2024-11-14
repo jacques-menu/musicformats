@@ -35,13 +35,13 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrReplaceClefAtom msrReplaceClefAtom::create (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   std::map<msrClefKind, msrClefKind>&
-                    clefKindToClefKindMapVariable)
+                     clefKindToClefKindMapVariable)
 {
   msrReplaceClefAtom* obj = new
     msrReplaceClefAtom (
@@ -56,13 +56,13 @@ S_msrReplaceClefAtom msrReplaceClefAtom::create (
 }
 
 msrReplaceClefAtom::msrReplaceClefAtom (
-  const std::string&     longName,
-  const std::string&     shortName,
-  const std::string&     description,
-  const std::string&     valueSpecification,
-  const std::string&     variableName,
+  const std::string& longName,
+  const std::string& shortName,
+  const std::string& description,
+  const std::string& valueSpecification,
+  const std::string& variableName,
   std::map<msrClefKind, msrClefKind>&
-                    clefKindToClefKindMapVariable)
+                     clefKindToClefKindMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,

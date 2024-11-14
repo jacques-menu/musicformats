@@ -78,7 +78,11 @@ class EXP traceOahGroup : public oahGroup
 
     void                  initializeInstrumentsTraceOah ();
 
-    void                  initializeChordsAndTupletsTraceOah ();
+    void                  initializeMxsrEventsTraceOah ();
+
+    void                  initializeChordsTraceOah ();
+
+    void                  initializeTupletsTraceOah ();
 
     void                  initializeCreditsToWordsTraceOah ();
 
@@ -193,7 +197,24 @@ class EXP traceOahGroup : public oahGroup
     // staff details
     Bool                  getTraceStavesDetails () const
                               { return fTraceStavesDetails; }
+
+    // MXSR events
+    void                  setTraceMxsrEvents ()
+                              { fTraceMxsrEvents = true; }
+    Bool                  getTraceMxsrEvents () const
+                              { return fTraceMxsrEvents; }
+
+    S_oahBooleanAtom      getTraceMxsrEventsAtom () const
+                              { return fTraceMxsrEventsAtom; }
+
     // staff changes
+    void                  setTraceTraceStaffChangesBasics ()
+                              { fTraceStaffChangesBasics = true; }
+    void                  setTraceStaffChanges ()
+                              { fTraceStaffChanges = true; }
+
+    Bool                  getTraceStaffChangesBasics () const
+                              { return fTraceStaffChangesBasics; }
     Bool                  getTraceStaffChanges () const
                               { return fTraceStaffChanges; }
     // voices
@@ -916,6 +937,11 @@ class EXP traceOahGroup : public oahGroup
     Bool                  fTraceStaves;
     Bool                  fTraceStavesDetails;
 
+    // MXSR events
+    // --------------------------------------
+
+    Bool                  fTraceMxsrEvents;
+    S_oahBooleanAtom      fTraceMxsrEventsAtom;
 
     // staff changes
     // --------------------------------------

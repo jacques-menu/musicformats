@@ -77,7 +77,7 @@ msrNoteEvent::msrNoteEvent (
 msrNoteEvent::~msrNoteEvent ()
 {}
 
-bool msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition (
+bool msrNoteEvent::compareMxsrEventsByIncreasingMeasurePosition (
   const SMARTP<msrNoteEvent>& first,
   const SMARTP<msrNoteEvent>& second)
 {
@@ -551,7 +551,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
   // sort the slice notes events list by measure position
   fSliceNoteEventsList.sort (
-    msrNoteEvent::compareNotesEventsByIncreasingMeasurePosition);
+    msrNoteEvent::compareMxsrEventsByIncreasingMeasurePosition);
 
   // build the simultaneous notes chunks list
   buildTheSimutaneousNotesChunksList ();

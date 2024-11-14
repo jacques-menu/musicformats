@@ -21,7 +21,7 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP S_msrScore translateMxsrToMsrSkeleton (
   const Sxmlelement&    theMxsr,
-  mxsrScoreNotesEvents& theResultingScoreNotesEvents,
+  mxsrEventsCollection& theResultingEventsCollection,
   const S_msrOahGroup&  msrOpts,
   mfPassIDKind          passIDKind,
   const std::string&    passDescription);

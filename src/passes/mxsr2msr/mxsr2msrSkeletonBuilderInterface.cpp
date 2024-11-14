@@ -44,7 +44,7 @@ namespace MusicFormats
 //_______________________________________________________________________________
 S_msrScore translateMxsrToMsrSkeleton (
   const Sxmlelement&    theMxsr,
-  mxsrScoreNotesEvents& theResultingScoreNotesEvents,
+  mxsrEventsCollection& theResultingEventsCollection,
   const S_msrOahGroup&  msrOpts,
   mfPassIDKind          passIDKind,
   const std::string&    passDescription)
@@ -90,7 +90,7 @@ S_msrScore translateMxsrToMsrSkeleton (
   // create an MXSR2msrSkeletonBuilder
   mxsr2msrSkeletonBuilder
     skeletonBuilder (
-      theResultingScoreNotesEvents);
+      theResultingEventsCollection);
 
   // build the MSR score
   skeletonBuilder.browseMxsr (

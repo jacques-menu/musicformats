@@ -120,13 +120,13 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   // create the skeleton of the first MSR from the originalMxsr (pass 2)
   // ------------------------------------------------------
 
-  mxsrScoreNotesEvents theMxsrScoreNotesEvents;
+  mxsrEventsCollection eventsCollection;
 
   try {
     firstMsrScore =
       translateMxsrToMsrSkeleton (
         originalMxsr,
-        theMxsrScoreNotesEvents,
+        eventsCollection,
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2,
         "Create the skeleton of the first MSR from the originalMxsr");
@@ -163,7 +163,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
     populateMsrSkeletonFromMxsr (
       originalMxsr,
       firstMsrScore,
-      theMxsrScoreNotesEvents,
+      eventsCollection,
       mfPassIDKind::kMfPassID_3,
       gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   } // try

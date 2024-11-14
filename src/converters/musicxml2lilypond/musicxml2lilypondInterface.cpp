@@ -121,13 +121,13 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   // create the skeleton of the first MSR from the originalMxsr (pass 2)
   // ------------------------------------------------------
 
-  mxsrScoreNotesEvents theMxsrScoreNotesEvents;
+  mxsrEventsCollection eventsCollection;
 
   try {
     firstMsrScore =
       translateMxsrToMsrSkeleton (
         theMxsr,
-        theMxsrScoreNotesEvents,
+        eventsCollection,
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2,
         gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
@@ -163,7 +163,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
     populateMsrSkeletonFromMxsr (
       theMxsr,
       firstMsrScore,
-      theMxsrScoreNotesEvents,
+      eventsCollection,
       mfPassIDKind::kMfPassID_3,
       gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   } // try

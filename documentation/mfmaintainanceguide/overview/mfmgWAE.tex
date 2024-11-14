@@ -1,0 +1,67 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Warning and errors (WAE)}
+% -------------------------------------------------------------------------
+
+
+Warning and errors in \mf\ are handled with a set of functions\index{functions} defined in the {\tt wae} folder.
+
+class   {\tt mfException} and context-specific exceptions are defined in \wae{waeExceptions}, such as:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+class EXP mfOahException: public mfException
+{
+  public:
+    mfOahException (std::string const& exceptionDescription) throw ()
+      : mfException (exceptionDescription)
+    {}
+};
+typedef SMARTP<mfOahException> S_mfOahException;
+\end{lstlisting}
+
+A typical use of exceptions in \lpsrToLilypond{lpsr2lilypondInterface.cpp} is:
+\begin{lstlisting}[language=CPlusPlus]
+    // convert the LPSR into LilyPond code
+    try {
+      translateLpsrToLilypond (
+        theLpsrScore,
+        gMsrOahGroup,
+        gLpsrOahGroup,
+        passIDKind,
+        passDescription,
+        lilypondStandardOutputStream);
+    } // try
+
+    catch (lpsr2lilypondException& e) {
+      mfDisplayException (e, gOutput);
+      return;
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutput);
+      return;
+    }
+\end{lstlisting}
+
+
+One finds in \wae{mfEnableAbortToDebugErrorsSetting.h} the {\tt MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED} macro to help debugging the code base:
+\begin{lstlisting}[language=CPlusPlus]
+// comment the following definition if abort on internal errors is desired
+// CAUTION: DON'T USE THIS IN PRODUCTION CODE,
+// since that could kill a session on a \Web\ server, for example
+
+#ifndef MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+  #define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+#endif // MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+\end{lstlisting}

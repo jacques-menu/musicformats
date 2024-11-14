@@ -288,7 +288,8 @@ void msrPart::registerStaffInPart (
       "\" under number " <<
       staff->getStaffNumber () <<
       " in part " <<
-      getPartCombinedName ();
+      getPartCombinedName () <<
+      ", line " << fInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2224,10 +2225,11 @@ void msrPart::registerVoiceInVoicesMap (
       getPartName () <<
       "\", line " << voice->getInputStartLineNumber ();
 
-    msrError (
+//     msrError (
+    msrWarning (
       gServiceRunData->getInputSourceName (),
       voice->getInputStartLineNumber (),
-      __FILE__, __LINE__,
+//       __FILE__, __LINE__,
       ss.str ());
   }
 

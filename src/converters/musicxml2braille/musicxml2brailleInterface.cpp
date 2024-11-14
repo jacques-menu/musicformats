@@ -126,13 +126,13 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   // create the MSR skeleton from the MXSR (pass 2)
   // ------------------------------------------------------
 
-  mxsrScoreNotesEvents theMxsrScoreNotesEvents;
+  mxsrEventsCollection eventsCollection;
 
   try {
     firstMsrScore =
       translateMxsrToMsrSkeleton (
         theMxsr,
-        theMxsrScoreNotesEvents,
+        eventsCollection,
         gMsrOahGroup,
         mfPassIDKind::kMfPassID_2,
         gLanguage->convertTheMXSRIntoAnMSRSkeleton ());
@@ -168,7 +168,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     populateMsrSkeletonFromMxsr (
       theMxsr,
       firstMsrScore,
-      theMxsrScoreNotesEvents,
+      eventsCollection,
       mfPassIDKind::kMfPassID_3,
       gLanguage->populateTheMSRSkeletonFromMusicXMLData ());
   } // try

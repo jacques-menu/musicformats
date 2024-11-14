@@ -376,13 +376,14 @@ void xml2gmnRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("display-msr1-voices-flat-view", subGroup);
   registerAtomInRegularSubgroup ("display-msr1-voices-flat-view-details", subGroup);
-  
+
   registerAtomInRegularSubgroup ("display-msr2-voices-flat-view", subGroup);
   registerAtomInRegularSubgroup ("display-msr2-voices-flat-viewdetails", subGroup);
 
 #ifdef MF_TRACE_IS_ENABLED
   registerAtomInRegularSubgroup ("display-mxsr", subGroup);
   registerAtomInRegularSubgroup ("trace-mxsr", subGroup);
+  registerAtomInRegularSubgroup ("trace-mxsr-events", subGroup);
   registerAtomInRegularSubgroup ("trace-mxsr-visitors", subGroup);
 
   registerAtomInRegularSubgroup ("trace-msr", subGroup);

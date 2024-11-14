@@ -1,0 +1,606 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\section{The GitHub repository}\label{The GitHub repository}
+% -------------------------------------------------------------------------
+
+The \mf\ \repo\ is hosted by \github\ and uses so-called \MainIt{actions} to build the library on \MacOS, \Ubuntu\ and \Windows. The resulting files are then available in the \repo, where they are available to create the releases for these three \OS s.
+
+The releases \zip\ archives are supplied with all \mf\ versions, i.e. the current, most recent version of \mf\ (the \default\ \masterBranch\ in the \repo), and the earlier versions such as the \code{v0.9.65} release.
+
+
+The \code{musicformats-ubuntu-distrib} archive has to be clicked to get downloaded, since its URL cannot be guessed by an algorithm (it contains numbers internal to \github).
+
+Doing so for the three releases, we get the following, here in the \directoryName{Downloads} folder on \MacOS, with the \zip\ archives are automatically uncompressed :
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/Downloads > ls -sal musicformats-*-distrib
+musicformats-macos-distrib:
+total 8
+0 drwx------@  5 jacquesmenu  staff   160 Mar  3 09:18 .
+0 drwx------+ 72 jacquesmenu  staff  2304 Mar  3 09:18 ..
+8 -rw-r--r--@  1 jacquesmenu  staff     6 Mar  3 07:10 MusicFormatsVersionNumber.txt
+0 drwxr-xr-x@  3 jacquesmenu  staff    96 Mar  3 09:18 build
+0 drwxr-xr-x@  4 jacquesmenu  staff   128 Mar  3 09:18 documentation
+
+musicformats-ubuntu-distrib:
+total 8
+0 drwx------@  5 jacquesmenu  staff   160 Mar  3 09:18 .
+0 drwx------+ 72 jacquesmenu  staff  2304 Mar  3 09:18 ..
+8 -rw-r--r--@  1 jacquesmenu  staff     6 Mar  3 07:31 MusicFormatsVersionNumber.txt
+0 drwxr-xr-x@  4 jacquesmenu  staff   128 Mar  3 09:18 build
+0 drwxr-xr-x@  4 jacquesmenu  staff   128 Mar  3 09:18 documentation
+
+musicformats-windows-distrib:
+total 8
+0 drwx------@  5 jacquesmenu  staff   160 Mar  3 09:18 .
+0 drwx------+ 72 jacquesmenu  staff  2304 Mar  3 09:18 ..
+8 -rw-r--r--@  1 jacquesmenu  staff     6 Mar  3 07:43 MusicFormatsVersionNumber.txt
+0 drwxr-xr-x@  4 jacquesmenu  staff   128 Mar  3 09:18 build
+0 drwxr-xr-x@  4 jacquesmenu  staff   128 Mar  3 09:18 documentation
+\end{lstlisting}
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/Downloads > ls -sal musicformats-ubuntu-distrib/*
+8 -rw-r--r--@ 1 jacquesmenu  staff  6 Mar  3 07:31 musicformats-ubuntu-distrib/MusicFormatsVersionNumber.txt
+
+musicformats-ubuntu-distrib/build:
+total 0
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Mar  3 09:18 .
+0 drwx------@  5 jacquesmenu  staff  160 Mar  3 09:18 ..
+0 drwxr-xr-x@ 25 jacquesmenu  staff  800 Mar  3 09:18 bin
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Mar  3 09:18 lib
+
+musicformats-ubuntu-distrib/documentation:
+total 0
+0 drwxr-xr-x@ 4 jacquesmenu  staff  128 Mar  3 09:18 .
+0 drwx------@ 5 jacquesmenu  staff  160 Mar  3 09:18 ..
+0 drwxr-xr-x@ 3 jacquesmenu  staff   96 Mar  3 09:18 IntroductionToMusicXML
+0 drwxr-xr-x@ 3 jacquesmenu  staff   96 Mar  3 09:18 mfuserguide
+\end{lstlisting}
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/Downloads > ls -sal musicformats-ubuntu-distrib/*/*
+musicformats-ubuntu-distrib/build/bin:
+total 2272
+  0 drwxr-xr-x@ 25 jacquesmenu  staff     800 Mar  3 09:18 .
+  0 drwxr-xr-x@  4 jacquesmenu  staff     128 Mar  3 09:18 ..
+ 96 -rw-r--r--@  1 jacquesmenu  staff   49008 Mar  3 07:31 LilyPondIssue34
+ 96 -rw-r--r--@  1 jacquesmenu  staff   49048 Mar  3 07:31 Mikrokosmos3Wandering
+ 96 -rw-r--r--@  1 jacquesmenu  staff   47280 Mar  3 07:31 MusicAndHarmonies
+ 96 -rw-r--r--@  1 jacquesmenu  staff   47272 Mar  3 07:31 RandomChords
+ 96 -rw-r--r--@  1 jacquesmenu  staff   47272 Mar  3 07:31 RandomMusic
+ 72 -rw-r--r--@  1 jacquesmenu  staff   33848 Mar  3 07:31 countnotes
+ 40 -rw-r--r--@  1 jacquesmenu  staff   17648 Mar  3 07:31 displayMusicformatsHistory
+ 40 -rw-r--r--@  1 jacquesmenu  staff   17648 Mar  3 07:31 displayMusicformatsVersion
+104 -rw-r--r--@  1 jacquesmenu  staff   50400 Mar  3 07:31 msdlconverter
+544 -rw-r--r--@  1 jacquesmenu  staff  276024 Mar  3 07:31 partsummary
+ 88 -rw-r--r--@  1 jacquesmenu  staff   43768 Mar  3 07:31 readunrolled
+ 80 -rw-r--r--@  1 jacquesmenu  staff   39064 Mar  3 07:31 xml2brl
+ 80 -rw-r--r--@  1 jacquesmenu  staff   39104 Mar  3 07:31 xml2gmn
+ 48 -rw-r--r--@  1 jacquesmenu  staff   23192 Mar  3 07:31 xml2guido
+ 72 -rw-r--r--@  1 jacquesmenu  staff   34816 Mar  3 07:31 xml2ly
+ 88 -rw-r--r--@  1 jacquesmenu  staff   42928 Mar  3 07:31 xml2midi
+ 80 -rw-r--r--@  1 jacquesmenu  staff   39104 Mar  3 07:31 xml2xml
+ 88 -rw-r--r--@  1 jacquesmenu  staff   43416 Mar  3 07:31 xmlclone
+ 48 -rw-r--r--@  1 jacquesmenu  staff   22616 Mar  3 07:31 xmlfactory
+160 -rw-r--r--@  1 jacquesmenu  staff   79440 Mar  3 07:31 xmliter
+ 56 -rw-r--r--@  1 jacquesmenu  staff   28472 Mar  3 07:31 xmlread
+ 64 -rw-r--r--@  1 jacquesmenu  staff   28704 Mar  3 07:31 xmltranspose
+ 40 -rw-r--r--@  1 jacquesmenu  staff   17360 Mar  3 07:31 xmlversion
+
+musicformats-ubuntu-distrib/build/lib:
+total 158600
+     0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Mar  3 09:18 .
+     0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Mar  3 09:18 ..
+113728 -rw-r--r--@ 1 jacquesmenu  staff  58227464 Mar  3 07:31 libmusicformats.a
+ 44872 -rw-r--r--@ 1 jacquesmenu  staff  22971160 Mar  3 07:31 libmusicformats.so
+
+musicformats-ubuntu-distrib/documentation/IntroductionToMusicXML:
+total 1704
+   0 drwxr-xr-x@ 3 jacquesmenu  staff      96 Mar  3 09:18 .
+   0 drwxr-xr-x@ 4 jacquesmenu  staff     128 Mar  3 09:18 ..
+1704 -rw-r--r--@ 1 jacquesmenu  staff  869211 Mar  3 07:31 IntroductionToMusicXML.pdf
+
+musicformats-ubuntu-distrib/documentation/mfuserguide:
+total 3000
+   0 drwxr-xr-x@ 3 jacquesmenu  staff       96 Mar  3 09:18 .
+   0 drwxr-xr-x@ 4 jacquesmenu  staff      128 Mar  3 09:18 ..
+3000 -rw-r--r--@ 1 jacquesmenu  staff  1532300 Mar  3 07:31 mfuserguide.pdf
+\end{lstlisting}
+
+The contents of \directoryName{musicformats-windows-distrib} differs in the \directoryName{lib} contents:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/Downloads > ls -sal musicformats-windows-distrib/build/lib/
+total 37672
+    0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Mar  3 09:18 .
+    0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Mar  3 09:18 ..
+14768 -rw-r--r--@ 1 jacquesmenu  staff   7558913 Mar  3 07:44 musicformats.exp
+22904 -rw-r--r--@ 1 jacquesmenu  staff  11726392 Mar  3 07:44 musicformats.lib
+\end{lstlisting}
+
+For \MacOS, there is no \directoryName{lib} directory, since the executables in \directoryName{bin} are self-sufficient. They can be placed anywhere on a disk except the trash. Usually, they are placed in the \directoryName{/Applications} directory.
+
+%These releases are in the form of \zip\ files. They are are available from \url{https://github.com/jacques-menu/musicformats/tree/master/distrib}, as well as the documentation PDF files and version number:
+%\begin{lstlisting}[language=Terminal]
+%jacquesmenu@macmini: ~/musicformats_local_clone/distrib > ls -sal
+%total 150088
+%     0 drwxr-xr-x   8 jacquesmenu  staff       256 Feb 16 07:47 .
+%     0 drwxr-xr-x  22 jacquesmenu  staff       704 Feb 16 07:47 ..
+%  1672 -rw-r--r--   1 jacquesmenu  staff    854294 Feb 16 07:47 IntroductionToMusicXML.pdf
+%  1976 -rw-r--r--   1 jacquesmenu  staff   1008702 Feb 16 07:47 mfuserguide.pdf
+%108168 -rw-r--r--   1 jacquesmenu  staff  55378423 Feb 16 07:47 MusicFormatsForMacOS.zip
+% 34080 -rw-r--r--   1 jacquesmenu  staff  17445663 Feb 16 07:47 MusicFormatsForUbuntu.zip
+%  4184 -rw-r--r--   1 jacquesmenu  staff   2139537 Feb 16 07:47 MusicFormatsForWindows.zip
+%     8 -rw-r--r--   1 jacquesmenu  staff         6 Feb 16 07:47 MusicFormatsVersionNumber.txt
+%\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Creating the releases}
+% -------------------------------------------------------------------------
+
+The hierarchy in the \directoryName{musicformats-*-distrib} directories comes from the \mf\ \repo\ untouched, which is not convenient for the users.
+
+Their contents is thus re-structured by \devtools{MakeMusicFormatsDistributions.bash}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/MakeMusicFormatsDistributions.bash
+... ... ...
+
+==> final distrib contents:
+----------------------------------------------
+
+  4208 -rw-r--r--  1 jacquesmenu  staff   2153547 Mar  3 12:55 /Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForWindows.zip
+ 34576 -rw-r--r--  1 jacquesmenu  staff  17559638 Mar  3 12:55 /Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForUbuntu.zip
+109512 -rw-r--r--  1 jacquesmenu  staff  55888914 Mar  3 12:55 /Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForMacOS.zip
+  1704 -rw-r--r--@ 1 jacquesmenu  staff    869211 Mar  3 07:10 /Users/jacquesmenu/musicformats-git-dev/distrib/IntroductionToMusicXML.pdf
+  3000 -rw-r--r--@ 1 jacquesmenu  staff   1532300 Mar  3 07:10 /Users/jacquesmenu/musicformats-git-dev/distrib/mfuserguide.pdf
+     8 -rw-r--r--@ 1 jacquesmenu  staff         6 Mar  3 07:10 /Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsVersionNumber.txt
+
+/Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForWindows:
+total 8
+0 drwxr-xr-x  16 jacquesmenu  staff  512 Mar  3 12:55 ..
+0 drwxr-xr-x   5 jacquesmenu  staff  160 Mar  3 12:55 .
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Mar  3 09:18 lib
+0 drwxr-xr-x@ 25 jacquesmenu  staff  800 Mar  3 09:18 bin
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Mar  3 07:43 MusicFormatsVersionNumber.txt
+
+/Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForUbuntu:
+total 8
+0 drwxr-xr-x  16 jacquesmenu  staff  512 Mar  3 12:55 ..
+0 drwxr-xr-x   5 jacquesmenu  staff  160 Mar  3 12:55 .
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Mar  3 09:18 lib
+0 drwxr-xr-x@ 25 jacquesmenu  staff  800 Mar  3 09:18 bin
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Mar  3 07:31 MusicFormatsVersionNumber.txt
+
+/Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForMacOS:
+total 8
+0 drwxr-xr-x  16 jacquesmenu  staff  512 Mar  3 12:55 ..
+0 drwxr-xr-x   4 jacquesmenu  staff  128 Mar  3 12:55 .
+0 drwxr-xr-x@ 25 jacquesmenu  staff  800 Mar  3 07:10 bin
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Mar  3 07:10 MusicFormatsVersionNumber.txt
+\end{lstlisting}
+
+The contents of \distrib\ is now:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/distrib > ls -sal
+total 154128
+     0 drwxr-xr-x  16 jacquesmenu  staff       512 Mar  3 13:18 .
+     0 drwxr-xr-x  35 jacquesmenu  staff      1120 Mar  3 07:13 ..
+    24 -rw-r--r--@  1 jacquesmenu  staff      8196 Feb 24 13:33 .DS_Store
+  1704 -rw-r--r--@  1 jacquesmenu  staff    869211 Mar  3 07:10 IntroductionToMusicXML.pdf
+     0 drwxr-xr-x   4 jacquesmenu  staff       128 Mar  3 13:18 MusicFormatsForMacOS
+109960 -rw-r--r--   1 jacquesmenu  staff  55888914 Mar  3 13:18 MusicFormatsForMacOS.zip
+     0 drwxr-xr-x   5 jacquesmenu  staff       160 Mar  3 13:18 MusicFormatsForUbuntu
+ 35216 -rw-r--r--   1 jacquesmenu  staff  17559638 Mar  3 13:18 MusicFormatsForUbuntu.zip
+     0 drwxr-xr-x   5 jacquesmenu  staff       160 Mar  3 13:18 MusicFormatsForWindows
+  4208 -rw-r--r--   1 jacquesmenu  staff   2153547 Mar  3 13:18 MusicFormatsForWindows.zip
+  3000 -rw-r--r--@  1 jacquesmenu  staff   1532300 Mar  3 07:10 mfuserguide.pdf
+     8 -rw-r--r--@  1 jacquesmenu  staff         6 Mar  3 07:10 MusicFormatsVersionNumber.txt
+     8 -rwxr-xr-x@  1 jacquesmenu  staff        95 Mar  3 12:54 doClean.bash
+     0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-macos-distrib
+     0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-ubuntu-distrib
+     0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-windows-distrib
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Security issue in recent MacOS\texttrademark\ versions}
+% -------------------------------------------------------------------------
+
+\MacOS\ gets more and more stringent over time regarding security. The \OS\ part in charge of this is named \Gatekeeper.
+
+When downloading the \mf\ releases from the \repo\ on versions up to 10 (\Main{High Sierra}), the executables in \code{bin} are usable alright.
+
+From version 11 (\Main{Catalina}) on, though, the executables you get are not executable actually, because their developer is unknown to the \OS, and actions have to be taken for them to be usable.
+
+The trouble is that these executables are in {\it \quarantine} by default. To make them usable, they have to quit quarantine and explicitly be made executable.
+
+This is done this way using \code{chmod} and \code{xattr} in \devtools{MakeMusicFormatsDistributions.bash}:
+\begin{lstlisting}[language=Terminal]
+  # make the executables actually executable
+  chmod +x bin/*
+  xattr -d com.apple.quarantine bin/*
+\end{lstlisting}
+%codesign --sign - --force --deep %%%JMI not necessary
+
+%%%JMI see user doc???
+
+From then on, the \mf\ executables can be used seamlessly on the given machine.
+
+Having to perform the preceding task for each executable is the price to pay for security. And it has to be perfomed again when installing new versions\dots
+
+The above can be done in the \GUI\ file by file too. Right after you got the message above:
+\begin{itemize}
+\item  open \MainIt{System Preferences}, choose the \MainIt{Security \& Privacy} tab, and there click on the \MainIt{General button};
+
+\item click on the lock at the bottom left of the dialog to make changes:\\
+\includegraphics[scale=0.35]{../mfgraphics/mfgraphicsMacOSAllowAnyway.png}
+
+\item click on the \MainIt{Allow Anyway} button.
+%%%JMI sudo spctl --master-disable to create a Anywhere radio button
+%jacquesmenu@macmini > spctl --status
+%assessments enabled
+
+\end{itemize}
+
+Re-execute the executable from the command line. This pops-up a dialog to confirm you actually want to use this software:\\
+\includegraphics[scale=0.35]{../mfgraphics/mfgraphicsMacOSConfirmOpening.png}
+
+Click on the \MainIt{Open} button to register the executable in \Gatekeeper\ and go ahead.
+
+
+
+
+
+% -------------------------------------------------------------------------
+\section{GitHub actions}
+% -------------------------------------------------------------------------
+
+These actions are defined in \code{.yml} files in \directoryName{.github/workflows}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini:~/musicformats-git-dev/.github/workflows > ls -sal
+total 24
+0 drwxr-xr-x  5 jacquesmenu  staff   160 Aug 24 09:35 .
+0 drwxr-xr-x  4 jacquesmenu  staff   128 Aug 22 08:41 ..
+8 -rw-r--r--@ 1 jacquesmenu  staff  1366 Aug 23 07:09 build-macos-version.yml
+8 -rw-r--r--@ 1 jacquesmenu  staff  1371 Aug 23 07:09 build-ubuntu-version.yml
+8 -rw-r--r--@ 1 jacquesmenu  staff  1455 Aug 23 07:08 build-windows-version.yml
+\end{lstlisting}
+
+These actions are executed by default each time a \code{git push} is performed to the \masterBranch. This can be disabled at will if needed.
+
+For example, the \Ubuntu\ action in \file{build-ubuntu-version.yml} is shown below:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macstudio-1:/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev/.github/workflows > cat build-ubuntu-artifact.yml
+# This is a workflow to build MusicFormats and create an artifact of it
+
+name: Build Ubuntu Version
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Build MusicFormats for Ubuntu
+        run: make -C build
+
+      - name: Upload libraries and executables for Ubuntu
+        uses: actions/upload-artifact@v3
+        with:
+          name: musicformats-ubuntu-artifact
+          path: |
+            MusicFormatsVersionNumber.txt
+            MusicFormatsVersionDate.txt
+            build/bin
+            build/lib
+            include
+            documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
+            documentation/mfuserguide/mfuserguide.pdf
+            documentation/MusicFormatsFigures/MusicFormatsFigures.pdf
+            documentation/mfmaintainanceguide/mfmaintainanceguide.pdf
+            #uncomment to have the full libdir in the .zip archive
+            #build/libdir
+\end{lstlisting}
+
+After a push to the \masterBranch:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "Switched from C++11 to C++17 for <filesystem>" -a[master 77d3d29] Switched from C++11 to C++17 for <filesystem>
+ 7 files changed, 10 insertions(+), 10 deletions(-)
+
+jacquesmenu@macmini: ~/musicformats-git-dev > git push
+Enumerating objects: 33, done.
+Counting objects: 100% (33/33), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (16/16), done.
+Writing objects: 100% (17/17), 1.47 KiB | 1.47 MiB/s, done.
+Total 17 (delta 14), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (14/14), completed with 13 local objects.
+To https://github.com/jacques-menu/musicformats.git
+   a880063..77d3d29  master -> master
+\end{lstlisting}
+
+we get for example:\\
+\includegraphics[scale=0.45]{../mfgraphics/mfgraphicsGitHubWorkflowsResults.png}
+
+Then cliking on the link leads to:\\
+\includegraphics[scale=0.45]{../mfgraphics/mfgraphicsGitHubUbuntuActionResult.png}
+
+
+% -------------------------------------------------------------------------
+\chapter{MusicFormats releases}\label{MusicFormats releases}
+% -------------------------------------------------------------------------
+
+The \mf\ \repo\ contains a single, \masterBranch, that contains the current evolution of the code base, examples and documentation.
+
+When a \code{git push} is performed, the \code{musicformats-*-artifact} archives are created, but they cannot be added to the \mf\ \repo\ by \github\. because they are too large.
+
+In order to create a new release, one should:
+\begin{enumerate}
+\item (re-)create the up-to-date documentation with:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/CreateDocumentationPDFs.bash
+\end{lstlisting}
+
+
+\item add all new and/or modified files to the local repository. The \code{addAll} function is defined for this:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macstudio:/Volumes/JMI_Volume/JMI_Developpement/musicformats-git-dev > typ addAll
+addAll is a shell function from /Volumes/JMI_VOLUME/JMI_ShellSettings/zsh_20_MusicFormats
+--
+addAll () {
+	git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
+	git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt
+	git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionNumber.h
+	git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionDate.h
+	addSrc
+	addBuild
+	addDevtools
+	addInclude
+	addDoc
+	addFxml
+	addFmfsl
+}
+\end{lstlisting}
+
+
+\item commit to the local repository clone with the release version number:
+\begin{lstlisting}[language=Terminal]
+git commit -m "v0.9.67-alpha" -a
+\end{lstlisting}
+
+
+\item push this to the \mf\ repo with:
+\begin{lstlisting}[language=Terminal]
+git push
+\end{lstlisting}
+
+
+\item the actions in the \mf\ \repo\ then perform a build on \Linux, \Windows and \MacOS. Check that they were executed successfully at \url{https://github.com/jacques-menu/musicformats/actions}:\\
+\includegraphics[scale=0.5]{../mfgraphics/mfgraphicsSuccessfulActions.png}
+
+
+\item when that is the case, download each of the three resulting \code{musicformats-*-distrib} archives locally in turn:\\
+\includegraphics[scale=0.5]{../mfgraphics/mfgraphicsDownloadDistribution.png}
+
+On this authors's machine, they go to \code{\$\{HOME\}/Downloads}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macstudio:~/JMI_Downloads > ls -sal musicformats-*-artifact
+musicformats-macos-artifact:
+total 32
+ 0 drwx------@  8 jacquesmenu  staff   256 Mar 13 14:26 .
+ 0 drwxr-xr-x@ 65 jacquesmenu  staff  2080 Mar 13 14:29 ..
+16 -rw-r--r--@  1 jacquesmenu  staff  6148 Mar 13 14:27 .DS_Store
+ 8 -rw-r--r--@  1 jacquesmenu  staff    15 Mar 13 12:49 MusicFormatsVersionDate.txt
+ 8 -rw-r--r--@  1 jacquesmenu  staff    12 Mar 13 12:49 MusicFormatsVersionNumber.txt
+ 0 drwxr-xr-x@  5 jacquesmenu  staff   160 Mar 13 14:26 build
+ 0 drwxr-xr-x@  7 jacquesmenu  staff   224 Mar 13 14:26 documentation
+ 0 drwxr-xr-x@ 18 jacquesmenu  staff   576 Mar 13 14:26 include
+
+musicformats-ubuntu-artifact:
+total 32
+ 0 drwx------@  8 jacquesmenu  staff   256 Mar 13 14:26 .
+ 0 drwxr-xr-x@ 65 jacquesmenu  staff  2080 Mar 13 14:29 ..
+16 -rw-r--r--@  1 jacquesmenu  staff  6148 Mar 13 14:27 .DS_Store
+ 8 -rw-r--r--@  1 jacquesmenu  staff    15 Mar 13 12:41 MusicFormatsVersionDate.txt
+ 8 -rw-r--r--@  1 jacquesmenu  staff    12 Mar 13 12:41 MusicFormatsVersionNumber.txt
+ 0 drwxr-xr-x@  5 jacquesmenu  staff   160 Mar 13 14:26 build
+ 0 drwxr-xr-x@  7 jacquesmenu  staff   224 Mar 13 14:26 documentation
+ 0 drwxr-xr-x@ 18 jacquesmenu  staff   576 Mar 13 14:26 include
+
+musicformats-windows-artifact:
+total 32
+ 0 drwx------@  8 jacquesmenu  staff   256 Mar 13 14:26 .
+ 0 drwxr-xr-x@ 65 jacquesmenu  staff  2080 Mar 13 14:29 ..
+16 -rw-r--r--@  1 jacquesmenu  staff  6148 Mar 13 14:27 .DS_Store
+ 8 -rw-r--r--@  1 jacquesmenu  staff    16 Mar 13 12:59 MusicFormatsVersionDate.txt
+ 8 -rw-r--r--@  1 jacquesmenu  staff    12 Mar 13 12:59 MusicFormatsVersionNumber.txt
+ 0 drwxr-xr-x@  5 jacquesmenu  staff   160 Mar 13 14:26 build
+ 0 drwxr-xr-x@  7 jacquesmenu  staff   224 Mar 13 14:26 documentation
+ 0 drwxr-xr-x@ 18 jacquesmenu  staff   576 Mar 13 14:26 include
+\end{lstlisting}
+
+
+\item create the releases in the local \mf\ \repo\ clone:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/MakeMusicFormatsDistributions.bash
+... ... ...
+----------------------------------------------
+==> final distrib contents:
+----------------------------------------------
+
+  4368 -rw-r--r--  1 jacquesmenu  staff   2234811 Jun  9 11:47 /Users/jacquesmenu/musicformats-git-dev/releases/MusicFormatsForWindows.zip
+ 35312 -rw-r--r--  1 jacquesmenu  staff  18076799 Jun  9 11:47 /Users/jacquesmenu/musicformats-git-dev/releases/MusicFormatsForUbuntu.zip
+127824 -rw-r--r--  1 jacquesmenu  staff  65442854 Jun  9 11:47 /Users/jacquesmenu/musicformats-git-dev/releases/MusicFormatsForMacOS.zip
+  1712 -rw-r--r--@ 1 jacquesmenu  staff    872863 Jun  9 07:40 /Users/jacquesmenu/musicformats-git-dev/releases/IntroductionToMusicXML.pdf
+  5328 -rw-r--r--@ 1 jacquesmenu  staff   2724130 Jun  9 07:40 /Users/jacquesmenu/musicformats-git-dev/releases/mfuserguide.pdf
+     8 -rw-r--r--@ 1 jacquesmenu  staff         6 Jun  9 07:40 /Users/jacquesmenu/musicformats-git-dev/releases/MusicFormatsVersionNumber.txt
+
+/Users/jacquesmenu/musicformats-git-dev/releases/MusicFormatsForWindows:
+total 8
+0 drwxr-xr-x  14 jacquesmenu  staff  448 Jun  9 11:47 ..
+0 drwxr-xr-x   5 jacquesmenu  staff  160 Jun  9 11:47 .
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Jun  9 11:43 lib
+0 drwxr-xr-x@ 26 jacquesmenu  staff  832 Jun  9 11:43 bin
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Jun  9 08:14 MusicFormatsVersionNumber.txt
+
+/Users/jacquesmenu/musicformats-git-dev/releases/MusicFormatsForUbuntu:
+total 8
+0 drwxr-xr-x  14 jacquesmenu  staff  448 Jun  9 11:47 ..
+0 drwxr-xr-x   5 jacquesmenu  staff  160 Jun  9 11:47 .
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Jun  9 11:44 lib
+0 drwxr-xr-x@ 26 jacquesmenu  staff  832 Jun  9 11:44 bin
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Jun  9 07:57 MusicFormatsVersionNumber.txt
+
+/Users/jacquesmenu/musicformats-git-dev/releases/MusicFormatsForMacOS:
+total 8
+0 drwxr-xr-x  14 jacquesmenu  staff  448 Jun  9 11:47 ..
+0 drwxr-xr-x   4 jacquesmenu  staff  128 Jun  9 11:47 .
+0 drwxr-xr-x@ 26 jacquesmenu  staff  832 Jun  9 07:40 bin
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Jun  9 07:40 MusicFormatsVersionNumber.txt
+\end{lstlisting}
+
+Now, the \releasesFolder\ folder contains the \mf\ new releases for the three \OS s:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev/releases > ls -al
+total 174552
+drwxr-xr-x  14 jacquesmenu  staff       448 Jun  9 11:47 .
+drwxr-xr-x  29 jacquesmenu  staff       928 Jun  9 09:13 ..
+-rw-r--r--@  1 jacquesmenu  staff    872863 Jun  9 07:40 IntroductionToMusicXML.pdf
+drwxr-xr-x   4 jacquesmenu  staff       128 Jun  9 11:47 MusicFormatsForMacOS
+-rw-r--r--   1 jacquesmenu  staff  65442854 Jun  9 11:47 MusicFormatsForMacOS.zip
+drwxr-xr-x   5 jacquesmenu  staff       160 Jun  9 11:47 MusicFormatsForUbuntu
+-rw-r--r--   1 jacquesmenu  staff  18076799 Jun  9 11:47 MusicFormatsForUbuntu.zip
+drwxr-xr-x   5 jacquesmenu  staff       160 Jun  9 11:47 MusicFormatsForWindows
+-rw-r--r--   1 jacquesmenu  staff   2234811 Jun  9 11:47 MusicFormatsForWindows.zip
+-rw-r--r--@  1 jacquesmenu  staff   2724130 Jun  9 07:40 mfuserguide.pdf
+-rw-r--r--@  1 jacquesmenu  staff         6 Jun  9 07:40 MusicFormatsVersionNumber.txt
+drwx------@  5 jacquesmenu  staff       160 Jun  9 11:44 musicformats-macos-distrib
+drwx------@  5 jacquesmenu  staff       160 Jun  9 11:44 musicformats-ubuntu-distrib
+drwx------@  5 jacquesmenu  staff       160 Jun  9 11:43 musicformats-windows-distrib
+\end{lstlisting}
+
+
+\item create the new release \tag\ on the remote \github\ \repo:
+\begin{enumerate}
+\item click on the Releases link in the \repo\ root window's right pane;
+\item click on the 'Draft a new release' button;
+\item clik on the 'Choose a tag' button to create a new tag such as 'v0.9.67-alpha';
+\item describe this release as needed;
+\item drop the three \zip\ files in the \releasesFolder\ folder to attach them to this release;
+\item click on the 'Publish release' button to copy the \zip\ file to \github.
+\end{enumerate}
+
+
+\item create a new version number and date, for example:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/SetMusicFormatsVersionNumber. bash 0.9.64
+-bash: devtools/SetMusicFormatsVersionNumber.: No such file or directory
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/SetMusicFormatsVersionNumber.bash 0.9.64
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev
+
+==> Writing MusicFormats version number 0.9.64 to MusicFormatsVersionNumber.txt
+
+8 -rw-r--r--  1 jacquesmenu  staff  6 Jun  9 12:14:57 2022 MusicFormatsVersionNumber.txt
+0.9.64
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev/src
+
+==> Writing MusicFormats version number 0.9.64 to MusicFormatsVersionNumber.h
+
+8 -rw-r--r--  1 jacquesmenu  staff  45 Jun  9 12:14:57 2022 MusicFormatsVersionNumber.h
+#define MUSICFORMATS_VERSION_NUMBER "0.9.64"
+\end{lstlisting}
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/SetMusicFormatsVersionDate.bash "June 9, 2022"
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev
+
+==> Writing MusicFormats version date June 9, 2022 to MusicFormatsVersionDate.txt
+
+8 -rw-r--r--  1 jacquesmenu  staff  13 Jun  9 12:15:52 2022 MusicFormatsVersionDate.txt
+June 9, 2022
+
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev/src
+
+==> Writing MusicFormats version date June 9, 2022 to MusicFormatsVersionDate.h
+
+8 -rw-r--r--  1 jacquesmenu  staff  49 Jun  9 12:15:52 2022 MusicFormatsVersionDate.h
+#define MUSICFORMATS_VERSION_DATE "June 9, 2022"
+\end{lstlisting}
+
+
+Check the result with:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > devtools/ShowMusicFormatsVersion.bash
+Version number:
+0.9.64Version date:
+June 9, 2022
+\end{lstlisting}
+
+\end{enumerate}
+
+
+
+%Create a new release
+%
+%  create a tag with same name
+%  describe the release
+%
+%  attach the three .zip archives to the release
+%
+%  publish the release, il will appear at https://github.com/jacques-menu/musicformats/releases
+%
+%  it contains the .zip archives as assets, as well as the source code in .zip and .tar.gz formats
+%
+%
+%
+%    git filter-branch --force --index-filter \
+%  'git rm -r --cached --ignore-unmatch scripts/musicformats-macos-version-v0.9.65.zip' \
+%  --prune-empty --tag-name-filter cat -- --all
+%
+%ou
+%
+%git filter-repo --force --index-filter \
+%  'git rm -r --cached --ignore-unmatch scripts/musicformats-macos-version-v0.9.65.zip' \
+%  --prune-empty --tag-name-filter cat -- --all
+%
+%puis
+%
+%git push -f origin master
+
+

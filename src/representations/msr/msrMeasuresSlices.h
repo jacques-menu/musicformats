@@ -75,7 +75,7 @@ class msrNoteEvent : public smartable
     // public services
     // ------------------------------------------------------
 
-    static bool           compareNotesEventsByIncreasingMeasurePosition (
+    static bool           compareMxsrEventsByIncreasingMeasurePosition (
                             const SMARTP<msrNoteEvent>& first,
                             const SMARTP<msrNoteEvent>& second);
 

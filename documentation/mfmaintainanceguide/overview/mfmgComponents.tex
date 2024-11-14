@@ -1,0 +1,569 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Components}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Components terminology}
+% -------------------------------------------------------------------------
+
+In compiler writing terminology:
+\begin{itemize}
+\item an external format %%%JMI
+\item an internal representation is a data structure representing the program being compiled;
+\item there are often several internal representations, to simplify the compiler internal workings or for optimisation purposes;
+\item the output of the compiler, such as binary code for some physical or emulated processor, is a last 'representation' of the program;
+\item a pass converts an internal representation into another one, in a single step;
+\item a multi-pass converter is a chain of passes, reading the input, converting it into a first internal representation, then a pass to convert it into another internal representation, and so on until the compiler output is produced.
+\end{itemize}
+
+\mf\ maps exactly to this model, providing the following components:
+\begin{itemize}
+\item internal representations (formats for short) of the music score: \msrRepr, \lpsrRepr, \bsrRepr\ and \mxsrRepr;
+\item several passes are available to convert such formats into others;
+\item a set of multi-pass converters are supplied, such as \xmlToLy\, \xmlToXml\ and \msdLangConv.%%%JMI
+\end{itemize}
+
+In the \mf\ user documentation, the term '\converter' is used because it is more meaningfull for musicians.
+
+\mf\ provides high-level interfaces to its components as functions\index{functions} in \fileName{Interface} files:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > look Interface
+./formats/msr/msrInterface.cpp
+./formats/msr/msrInterface.h
+./formats/lpsr/lpsrInterface.cpp
+./formats/lpsr/lpsrInterface.h
+./formats/bsr/bsrInterface.h
+./formats/bsr/bsrInterface.cpp
+./passes/mxsr2musicxml/mxsr2musicxmlTranlatorInterface.h
+./passes/mxsr2musicxml/mxsr2musicxmlTranlatorInterface.cpp
+./passes/bsr2bsr/bsr2bsrFinalizerInterface.h
+./passes/bsr2bsr/bsr2bsrFinalizerInterface.cpp
+./passes/msr2mxsr/msr2mxsrInterface.cpp
+./passes/msr2mxsr/msr2mxsrInterface.h
+./passes/mxsr2msr/mxsr2msrSkeletonBuilderInterface.h
+./passes/mxsr2msr/mxsr2msrTranslatorInterface.cpp
+./passes/mxsr2msr/mxsr2msrTranslatorInterface.h
+./passes/mxsr2msr/mxsr2msrSkeletonBuilderInterface.cpp
+./passes/msr2msr/msr2msrInterface.h
+./passes/msr2msr/msr2msrInterface.cpp
+./passes/lpsr2lilypond/lpsr2lilypondInterface.h
+./passes/lpsr2lilypond/lpsr2lilypondInterface.cpp
+./passes/msr2lpsr/msr2lpsrInterface.cpp
+./passes/msr2lpsr/msr2lpsrInterface.h
+./passes/bsr2braille/bsr2brailleTranslatorInterface.h
+./passes/bsr2braille/bsr2brailleTranslatorInterface.cpp
+./passes/msr2bsr/msr2bsrInterface.h
+./passes/msr2bsr/msr2bsrInterface.cpp
+./passes/musicxml2mxsr/musicxml2mxsrInterface.h
+./passes/musicxml2mxsr/musicxml2mxsrInterface.cpp
+./passes/mxsr2guido/mxsr2guidoTranlatorInterface.h
+./passes/mxsr2guido/mxsr2guidoTranlatorInterface.cpp
+./converters/msr2guido/msr2guidoInterface.h
+./converters/msr2guido/msr2guidoInterface.cpp
+./converters/msr2braille/msr2brailleInterface.h
+./converters/msr2braille/msr2brailleInterface.cpp
+./converters/msdl2braille/msdl2brailleInterface.h
+./converters/msdl2braille/msdl2brailleInterface.cpp
+./converters/msdl2guido/msdl2guidoInterface.cpp
+./converters/msdl2guido/msdl2guidoInterface.h
+./converters/msdl2musicxml/msdl2musicxmlInterface.h
+./converters/msdl2musicxml/msdl2musicxmlInterface.cpp
+./converters/msdl2lilypond/msdl2lilypondInterface.h
+./converters/msdl2lilypond/msdl2lilypondInterface.cpp
+./converters/musicxml2braille/musicxml2brailleInterface.cpp
+./converters/musicxml2braille/musicxml2brailleInterface.h
+./converters/msr2lilypond/msr2lilypondInterface.cpp
+./converters/msr2lilypond/msr2lilypondInterface.h
+./converters/msr2musicxml/msr2musicxmlInterface.cpp
+./converters/msr2musicxml/msr2musicxmlInterface.h
+./converters/musicxml2musicxml/musicxml2musicxmlInterface.h
+./converters/musicxml2musicxml/musicxml2musicxmlInterface.cpp
+./converters/musicxml2lilypond/musicxml2lilypondInterface.h
+./converters/musicxml2lilypond/musicxml2lilypondInterface.cpp
+./converters/musicxml2guido/musicxml2guidoInterface.cpp
+./converters/musicxml2guido/musicxml2guidoInterface.h
+\end{lstlisting}
+
+The converters are implemented as functions\index{functions} as well as CLI services that use the latter.
+
+\mf\ includes support for components versions numbering and history, see \chapterRef{MusicFormats components}.
+
+\mfc{mfcComponents.h} includes all the components's header files.
+
+
+% -------------------------------------------------------------------------
+\section{Formats}
+% -------------------------------------------------------------------------
+
+The \format s are in \src{formats}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll formats/
+total 32
+ 0 drwxr-xr-x   10 jacquesmenu  staff    320 Jun 25 05:39:49 2021 ./
+ 0 drwxr-xr-x   13 jacquesmenu  staff    416 Jun 17 17:16:37 2021 ../
+24 -rw-r--r--    1 jacquesmenu  staff  10244 Jun 19 07:58:55 2021 .DS_Store
+ 0 drwxr-xr-x   60 jacquesmenu  staff   1920 Jun 18 07:32:14 2021 bsr/
+ 0 drwxr-xr-x   42 jacquesmenu  staff   1344 May 26 08:20:55 2021 lpsr/
+ 0 drwxr-xr-x   12 jacquesmenu  staff    384 Apr 22 15:49:23 2021 msdl/
+ 0 drwxr-xr-x   10 jacquesmenu  staff    320 May 26 08:20:55 2021 msdr/
+ 0 drwxr-xr-x  151 jacquesmenu  staff   4832 Jun 20 09:58:00 2021 msr/
+ 0 drwxr-xr-x    6 jacquesmenu  staff    192 May 26 08:20:55 2021 mxsr/
+\end{lstlisting}
+
+The formats interfaces are in files with the format's name:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll formats/bsr/bsr.*
+8 -rw-r--r--@ 1 jacquesmenu  staff   700 Jun  6 06:35:19 2021 formats/bsr/bsr.cpp
+8 -rw-r--r--@ 1 jacquesmenu  staff  1206 Jun 18 10:04:45 2021 formats/bsr/bsr.h
+
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll formats/lpsr/lpsr.*
+8 -rw-r--r--@ 1 jacquesmenu  staff   703 Jun  6 06:35:19 2021 formats/lpsr/lpsr.cpp
+8 -rw-r--r--@ 1 jacquesmenu  staff  1004 Jun  6 06:35:19 2021 formats/lpsr/lpsr.h
+
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll formats/msdl/msdl.*
+8 -rw-r--r--@ 1 jacquesmenu  staff  736 Jun  6 06:35:19 2021 formats/msdl/msdl.cpp
+8 -rw-r--r--@ 1 jacquesmenu  staff  643 Jun  6 06:35:19 2021 formats/msdl/msdl.h
+
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll formats/msdr/msdr.*
+8 -rw-r--r--@ 1 jacquesmenu  staff  709 Jun  6 06:35:19 2021 formats/msdr/msdr.cpp
+8 -rw-r--r--@ 1 jacquesmenu  staff  531 Jun  6 06:35:19 2021 formats/msdr/msdr.h
+
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll formats/msr/msr.*
+8 -rw-r--r--@ 1 jacquesmenu  staff   700 Jun  6 06:35:19 2021 formats/msr/msr.cpp
+8 -rw-r--r--@ 1 jacquesmenu  staff  2410 Jun 20 09:58:38 2021 formats/msr/msr.h
+
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll formats/mxsr/mxsr.*
+8 -rw-r--r--@ 1 jacquesmenu  staff  3292 Jun  6 06:35:19 2021 formats/mxsr/mxsr.cpp
+8 -rw-r--r--@ 1 jacquesmenu  staff  1555 Jun  6 06:35:19 2021 formats/mxsr/mxsrGeneration.h
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Representations}
+% -------------------------------------------------------------------------
+
+The \representation s are in \src{representations}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll representations/
+total 24
+ 0 drwxr-xr-x   11 jacquesmenu  staff    352 Dec 30 17:25:10 2021 ./
+ 0 drwxr-xr-x   18 jacquesmenu  staff    576 Jan 16 16:50:25 2022 ../
+24 -rw-r--r--@   1 jacquesmenu  staff  10244 Jan  6 17:40:44 2022 .DS_Store
+ 0 drwxr-xr-x    8 jacquesmenu  staff    256 Dec 30 10:26:26 2021 braille/
+ 0 drwxr-xr-x   69 jacquesmenu  staff   2208 Jan  4 07:52:14 2022 bsr/
+ 0 drwxr-xr-x    4 jacquesmenu  staff    128 Dec 30 10:27:01 2021 guido/
+ 0 drwxr-xr-x   51 jacquesmenu  staff   1632 Jan  4 07:52:36 2022 lpsr/
+ 0 drwxr-xr-x   16 jacquesmenu  staff    512 Jan  4 07:52:55 2022 msdl/
+ 0 drwxr-xr-x   12 jacquesmenu  staff    384 Jan  4 07:53:13 2022 msdr/
+ 0 drwxr-xr-x  165 jacquesmenu  staff   5280 Jan  4 07:53:34 2022 msr/
+ 0 drwxr-xr-x   10 jacquesmenu  staff    320 Jan  4 07:53:54 2022 mxsr/
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Passes}
+% -------------------------------------------------------------------------
+
+The \pass s are in \src{passes}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll passes
+total 24
+ 0 drwxr-xr-x  14 jacquesmenu  staff    448 Nov 24 16:29:20 2021 ./
+ 0 drwxr-xr-x  20 jacquesmenu  staff    640 Nov 16 08:12:03 2021 ../
+24 -rw-r--r--@  1 jacquesmenu  staff  10244 Nov 24 10:38:11 2021 .DS_Store
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 Oct 22 07:19:11 2021 bsr2braille/
+ 0 drwxr-xr-x   6 jacquesmenu  staff    192 Oct 22 07:20:34 2021 bsr2bsr/
+ 0 drwxr-xr-x  10 jacquesmenu  staff    320 Nov 16 10:09:27 2021 lpsr2lilypond/
+ 0 drwxr-xr-x  14 jacquesmenu  staff    448 Oct 22 07:22:09 2021 msdl2msr/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 Oct 22 07:24:35 2021 msr2bsr/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 Nov  1 16:31:34 2021 msr2lpsr/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 Nov  1 16:31:34 2021 msr2msr/
+ 0 drwxr-xr-x   6 jacquesmenu  staff    192 Oct 22 07:27:46 2021 msr2mxsr/
+ 0 drwxr-xr-x   4 jacquesmenu  staff    128 Oct 22 07:28:37 2021 mxsr2guido/
+ 0 drwxr-xr-x  10 jacquesmenu  staff    320 Nov  1 16:31:34 2021 mxsr2msr/
+ 0 drwxr-xr-x   4 jacquesmenu  staff    128 Oct 22 07:29:50 2021 mxsr2musicxml/
+\end{lstlisting}
+
+Some passes are named translators (converters could have been used), and others are not. In \mxsrToMsr{}, \class{mxsr2msrSkeletonBuilder} does not translate \mxml\ data to another full representation: it merely creates a skeleton containing voices, are are empty:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll passes/mxsr2msr/
+total 1808
+   0 drwxr-xr-x   8 jacquesmenu  staff     256 Jun 25 05:47:41 2021 ./
+   0 drwxr-xr-x  16 jacquesmenu  staff     512 May 26 08:20:55 2021 ../
+  96 -rw-r--r--@  1 jacquesmenu  staff   48389 Jun 21 07:43:20 2021 mxsr2msrOah.cpp
+  40 -rw-r--r--@  1 jacquesmenu  staff   20327 Jun 16 10:41:37 2021 mxsr2msrOah.h
+ 192 -rw-r--r--@  1 jacquesmenu  staff   97896 Jun 25 08:58:38 2021 mxsr2msrSkeletonBuilder.cpp
+  48 -rw-r--r--@  1 jacquesmenu  staff   20942 Jun 25 07:36:29 2021 mxsr2msrSkeletonBuilder.h
+1280 -rw-r--r--@  1 jacquesmenu  staff  651474 Jun 25 07:49:52 2021 mxsr2msrTranslator.cpp
+ 152 -rw-r--r--@  1 jacquesmenu  staff   77039 Jun 21 07:43:20 2021 mxsr2msrTranslator.h
+\end{lstlisting}
+
+The passes functionality is available as functions\index{functions} in \fileName{*Interface.*}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > look Interface
+./representations/msr/msrInterface.cpp
+./representations/msr/msrInterface.h
+./representations/lpsr/lpsrInterface.cpp
+./representations/lpsr/lpsrInterface.h
+./representations/bsr/bsrInterface.h
+./representations/bsr/bsrInterface.cpp
+./passes/mxsr2musicxml/mxsr2musicxmlTranlatorInterface.h
+./passes/mxsr2musicxml/mxsr2musicxmlTranlatorInterface.cpp
+./passes/bsr2bsr/bsr2bsrFinalizerInterface.h
+./passes/bsr2bsr/bsr2bsrFinalizerInterface.cpp
+./passes/msr2mxsr/msr2mxsrInterface.cpp
+./passes/msr2mxsr/msr2mxsrInterface.h
+./passes/mxsr2msr/mxsr2msrSkeletonBuilderInterface.h
+./passes/mxsr2msr/mxsr2msrTranslatorInterface.cpp
+./passes/mxsr2msr/mxsr2msrTranslatorInterface.h
+./passes/mxsr2msr/mxsr2msrSkeletonBuilderInterface.cpp
+./passes/msr2msr/msr2msrInterface.h
+./passes/msr2msr/msr2msrInterface.cpp
+./passes/lpsr2lilypond/lpsr2lilypondInterface.h
+./passes/lpsr2lilypond/lpsr2lilypondInterface.cpp
+./passes/msr2lpsr/msr2lpsrInterface.cpp
+./passes/msr2lpsr/msr2lpsrInterface.h
+./passes/bsr2braille/bsr2brailleTranslatorInterface.h
+./passes/bsr2braille/bsr2brailleTranslatorInterface.cpp
+./passes/msr2bsr/msr2bsrInterface.h
+./passes/msr2bsr/msr2bsrInterface.cpp
+./passes/musicxml2mxsr/musicxml2mxsrInterface.h
+./passes/musicxml2mxsr/musicxml2mxsrInterface.cpp
+./passes/mxsr2guido/mxsr2guidoTranlatorInterface.h
+./passes/mxsr2guido/mxsr2guidoTranlatorInterface.cpp
+./converters/msr2guido/msr2guidoInterface.h
+./converters/msr2guido/msr2guidoInterface.cpp
+./converters/msr2braille/msr2brailleInterface.h
+./converters/msr2braille/msr2brailleInterface.cpp
+./converters/msdl2braille/msdl2brailleInterface.h
+./converters/msdl2braille/msdl2brailleInterface.cpp
+./converters/msdl2guido/msdl2guidoInterface.cpp
+./converters/msdl2guido/msdl2guidoInterface.h
+./converters/msdl2musicxml/msdl2musicxmlInterface.h
+./converters/msdl2musicxml/msdl2musicxmlInterface.cpp
+./converters/msdl2lilypond/msdl2lilypondInterface.h
+./converters/msdl2lilypond/msdl2lilypondInterface.cpp
+./converters/musicxml2braille/musicxml2brailleInterface.cpp
+./converters/musicxml2braille/musicxml2brailleInterface.h
+./converters/msr2lilypond/msr2lilypondInterface.cpp
+./converters/msr2lilypond/msr2lilypondInterface.h
+./converters/msr2musicxml/msr2musicxmlInterface.cpp
+./converters/msr2musicxml/msr2musicxmlInterface.h
+./converters/musicxml2musicxml/musicxml2musicxmlInterface.h
+./converters/musicxml2musicxml/musicxml2musicxmlInterface.cpp
+./converters/musicxml2lilypond/musicxml2lilypondInterface.h
+./converters/musicxml2lilypond/musicxml2lilypondInterface.cpp
+./converters/musicxml2guido/musicxml2guidoInterface.cpp
+./converters/musicxml2guido/musicxml2guidoInterface.h
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Generators}
+% -------------------------------------------------------------------------
+
+A \generator\ is a multi-pass \CLI\ service that creates an ouput from scratch, without reading anything. All of them use \multiGenerationBoth{multiGeneration} to offer a set of output formats:
+\begin{itemize}
+\item \clisamples{Mikrokosmos3Wandering.cpp}\\
+			creates a score for this Bartok piece in various forms, depending on the options. It has been used to check th e MSR \API's:
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll formatsgeneration/multiGeneration/
+total 56
+ 0 drwxr-xr-x   4 jacquesmenu  staff    128 Apr 22 15:49:16 2021 ./
+ 0 drwxr-xr-x  10 jacquesmenu  staff    320 May 26 08:20:55 2021 ../
+40 -rw-r--r--@  1 jacquesmenu  staff  16774 Jun  6 06:38:55 2021 multiGenerationOah.cpp
+16 -rw-r--r--@  1 jacquesmenu  staff   6750 Jun  6 06:38:55 2021 mfMultiGenerationOah.h
+\end{lstlisting}
+
+For example:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~ > Mikrokosmos3Wandering -lilypond -a
+What LilyPondIssue34 does:
+
+    This multi-pass generator creates a textual representation
+    of the LilyPondIssue34 score.
+    It basically performs 4 passes when generating LilyPond output output:
+
+        Pass 1:  generate a first MSR for the LilyPondIssue34 score
+        Pass 2:  converts the first MSR a second MSR;
+        Pass 3:  converts the second MSR into a
+                 LilyPond Score Representation (LPSR);
+        Pass 4:  converts the LPSR to LilyPond code
+                 and writes it to standard output.
+
+    Other passes are performed according to the options, such as
+    displaying views of the internal data or printing a summary of the score.
+
+    The activity log and warning/error messages go to standard error.
+\end{lstlisting}
+
+\item \clisamples{LilyPondIssue34.cpp}
+			creates a score for the \lily\ issue \#34 issue, also in various forms:;
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~ > LilyPondIssue34 -musicxml -a
+What LilyPondIssue34 does:
+
+    This multi-pass generator creates a textual representation
+    of the LilyPondIssue34 score.
+    It basically performs 4 passes when generating MusicXML output output:
+
+        Pass 1:  generate a first MSR for the LilyPondIssue34 score
+        Pass 2:  converts the first MSR a second MSR, to apply options;
+        Pass 3:  converts the second MSR into an MusicXML tree;
+        Pass 4:  converts the MusicXML tree to MusicXML code
+                 and writes it to standard output.
+
+    Other passes are performed according to the options, such as
+    displaying views of the internal data or printing a summary of the score.
+
+    The activity log and warning/error messages go to standard error.
+\end{lstlisting}
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{Converters}
+% -------------------------------------------------------------------------
+
+The \mf\ \converter s chain passes into a sequence, each pass reading the input or the format produced by the preceeding one:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll converters/
+total 32
+ 0 drwxr-xr-x  17 jacquesmenu  staff    544 May 26 08:20:55 2021 ./
+ 0 drwxr-xr-x  13 jacquesmenu  staff    416 Jun 17 17:16:37 2021 ../
+24 -rw-r--r--   1 jacquesmenu  staff  10244 Jun 18 10:34:45 2021 .DS_Store
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 May 26 08:20:55 2021 msdl2braille/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 May 26 08:20:55 2021 msdl2guido/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 May 26 08:20:55 2021 msdl2lilypond/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 May 26 08:20:55 2021 msdl2musicxml/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 May 26 08:20:55 2021 msdlconverter/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 May 26 08:20:55 2021 msr2braille/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 May 26 08:20:55 2021 msr2guido/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 May 26 08:20:55 2021 msr2lilypond/
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 May 26 08:20:55 2021 msr2musicxml/
+ 0 drwxr-xr-x   4 jacquesmenu  staff    128 May 26 08:20:55 2021 musicxml2braille/
+ 0 drwxr-xr-x   4 jacquesmenu  staff    128 May 26 08:20:55 2021 musicxml2guido/
+ 0 drwxr-xr-x   4 jacquesmenu  staff    128 May 26 08:20:55 2021 musicxml2lilypond/
+ 0 drwxr-xr-x   4 jacquesmenu  staff    128 May 26 08:20:55 2021 musicxml2musicxml/
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Running a service}
+% -------------------------------------------------------------------------
+
+When a \mf\ \service\ is \MainIt{run} from the \CLI\ or through an \API\ function, an instance of \class{mfServiceRunData} is created.
+
+This class   is defined in \mflibraryBoth{mfServiceRunData} to hold data specific to the run. They are global data, but don't belong to the regular, invariant data contained in the library, such as the notes pitches in various languages: %%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+class EXP mfServiceRunData : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mfServiceRunData> create (const std::string& serviceName);
+
+    static SMARTP<mfServiceRunData> create (
+                            const std::string& serviceName,
+                            int           argc,
+                            char*         argv[]);
+
+    static SMARTP<mfServiceRunData> create (
+                            const std::string&      serviceName,
+                            mfOptionsAndArguments& optionsAndArguments);
+
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfServiceRunData (const std::string& serviceName);
+
+                          mfServiceRunData (
+                            const std::string& serviceName,
+                            int           argc,
+                            char*         argv[]);
+
+                          mfServiceRunData (
+                            const std::string&      serviceName,
+                            mfOptionsAndArguments& optionsAndArguments);
+
+    virtual               ~mfServiceRunData ();
+
+	// .. .. ..
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    // service name
+    std::string           fServiceName;
+
+    // conversion date
+    std::string           fRunDateFull;
+    std::string           fRunDateYYYYMMDD;
+
+    // conversion command
+    std::string           fCommandAsSupplied;
+
+    std::string           fCommandWithLongOptionsNames;
+    std::string           fCommandWithShortOptionsNames;
+
+    // options and arguments
+    mfOptionsAndArguments
+                          fOptionsAndArguments;
+
+    // command line
+    std::string           fCommandLineAsSupplied;
+
+    // input source
+    std::string           fInputSourceName;
+};
+\end{lstlisting}
+
+The various constructors are used depending on the way the service is run.
+
+For example, if is created this way in \clisamples{xml2ly.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+//_______________________________________________________________________________
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+
+#ifndef WIN32
+
+static void _sigaction (int signal, siginfo_t *si, void *arg)
+{
+  std::cerr << "Signal #" << signal << " catched!" << std::endl;
+  exit (-2);
+}
+
+static void catchSignals ()
+{
+  struct sigaction sa;
+
+  memset (&sa, 0, sizeof(struct sigaction));
+
+  sigemptyset (&sa.sa_mask);
+
+  sa.sa_sigaction = _sigaction;
+  sa.sa_flags     = SA_SIGINFO;
+
+  sigaction (SIGSEGV, &sa, NULL);
+  sigaction (SIGILL, &sa, NULL);
+  sigaction (SIGFPE, &sa, NULL);
+}
+
+#else
+static void catchSignals ()  {}
+#endif // WIN32
+
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
+
+//_______________________________________________________________________________
+int main (int argc, char* argv[])
+{
+  // setup signals catching
+  // ------------------------------------------------------
+
+#ifdef MF_CATCH_SIGNALS_IS_ENABLED
+  catchSignals ();
+#endif // MF_CATCH_SIGNALS_IS_ENABLED
+
+  // the service name
+  // ------------------------------------------------------
+
+  std::string serviceName = argv [0];
+
+  // create the global output and log indented streams
+  // ------------------------------------------------------
+
+  createTheGlobalIndentedOstreams (std::cout, std::cerr);
+
+  // create the global run data
+  // ------------------------------------------------------
+
+  gServiceRunData =
+    mfServiceRunData::create (serviceName);
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+Then the various run data can be accessed easily:
+\begin{lstlisting}[language=CPlusPlus]
+  std::string
+    inputSourceName =
+      gServiceRunData->getInputSourceName ();
+\end{lstlisting}
+
+The run date is used for example in \class{lpsrScore}, defined in \lpsrBoth{lpsrScores}:%%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+lpsrScore::lpsrScore (
+  int                 inputLineNumber,
+  const S_msrScore&   theMsrScore,
+  const S_mfcMultiComponent& multiComponent)
+    : lpsrElement (inputLineNumber)
+{
+	// ...
+
+  fMultiComponent = multiComponent;
+
+  // should the initial comments about the service and the options used
+  // be generated?
+  if (gGlobalLpsr2lilypondOahGroup->getXml2lyInfos ()) {
+    // create the 'generated by' comment
+    {
+      std::stringstream ss;
+
+      ss <<
+        "Generated by " <<
+        gOahOahGroup->getOahOahGroupServiceName () <<
+        ' ' <<
+        getGlobalMusicFormatsVersionNumberAndDate () <<
+        std::endl <<
+
+        "% on " <<
+        gServiceRunData->getRunDateFull () <<
+        std::endl <<
+
+        "% from ";
+
+      std::string inputSourceName =
+        gServiceRunData->getInputSourceName ();
+
+      if (inputSourceName == "-") {
+        ss << "standard input";
+      }
+      else {
+        ss << "\"" << inputSourceName << "\"";
+      }
+
+      fInputSourceNameComment =
+        lpsrComment::create (
+          inputLineNumber,
+          ss.str (),
+          lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes);
+    }
+	}
+
+	// ...
+}
+\end{lstlisting}
+

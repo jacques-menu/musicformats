@@ -482,7 +482,7 @@ void msrVoice::initializeVoice (
 
   // compute voice number
   int voiceNumber =
-    gMsrOahGroup->getCreateVoicesStaffRelativeNumbers () // JMI use it
+    gMsrOahGroup->getCreateVoicesStaffRelativeNumbers ()
       ? fRegularVoiceStaffSequentialNumber
       : fVoiceNumber;
 
@@ -497,8 +497,11 @@ void msrVoice::initializeVoice (
 
     ss <<
       "Initializing voice \"" << fVoiceName <<
-      "\" in staff \"" <<
+      "\"" <<
+      ", voiceNumber: " << voiceNumber <<
+      ", in staff \"" <<
       fVoiceUpLinkToStaff->getStaffName () <<
+      " line " << fInputStartLineNumber <<
       "\"";
 
     gWaeHandler->waeTrace (

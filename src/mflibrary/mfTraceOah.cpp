@@ -26,6 +26,8 @@
 #include "oahAtomsCollection.h"
 #include "oahEarlyOptions.h"
 
+#include "mxsrOah.h"
+
 #include "waeHandlers.h"
 
 
@@ -1172,12 +1174,12 @@ R"(Words)",
       traceWordsBooleanAtom);
 }
 
-void traceOahGroup::initializeChordsAndTupletsTraceOah ()
+void traceOahGroup::initializeMxsrEventsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
       oahSubGroup::create (
-        "Chords and tuplets",
+        "MXSR events",
         "help-trace-chords-and-tuplets", "htcat",
 R"()",
       oahElementVisibilityKind::kElementVisibilityWhole,
@@ -1185,10 +1187,37 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // the 'chords and tuplets' multiplex booleans atom
+  // trace MusicXML tree events
+
+  fTraceMxsrEventsAtom =
+    oahBooleanAtom::create (
+      "trace-mxsr-events", "tmxsre",
+R"(Write a trace of the MXSR events to standard error.)",
+      "fTraceMxsrEvents",
+      fTraceMxsrEvents);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fTraceMxsrEventsAtom);
+}
+
+void traceOahGroup::initializeChordsTraceOah ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Chords",
+        "help-trace-chords", "htc",
+R"()",
+      oahElementVisibilityKind::kElementVisibilityWhole,
+      this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // the chords multiplex booleans atom
 
   S_oahCommonPrefixBooleansAtom
-    chordsAndTupletsMultiplexBooleansAtom =
+    chordsMultiplexBooleansAtom =
       oahCommonPrefixBooleansAtom::create (
         "trace-in-chords-and-tuplets", "ticat",
         "Trace SHORT_NAME/LONG_NAME in chords and tuplets.",
@@ -1199,17 +1228,20 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      chordsAndTupletsMultiplexBooleansAtom);
+      chordsMultiplexBooleansAtom);
 
   // chords basics
 
-  S_oahTwoBooleansAtom
+  S_oahThreeBooleansAtom
     traceChordsBasicsBooleanAtom =
-      oahTwoBooleansAtom::create (
+      oahThreeBooleansAtom::create (
         "trace-chords-basics", "tchordsb",
-R"(Chords basic trace information)",
+R"(Chords basic trace information.
+This option implies '-trace-chords-basics, -tchordsb',
+'-trace-mxsr-events, tmxsre' and '-trace-passes, -tpasses'.)",
         "fTraceChordsBasics",
         fTraceChordsBasics,
+        fTraceMxsrEventsAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -1222,8 +1254,7 @@ R"(Chords basic trace information)",
     taceChordsBooleanAtom =
       oahThreeBooleansAtom::create (
         "trace-chords", "tchords",
-R"(Chords.
-This option implies '-trace-chords-basics, -tchordsb'.)",
+R"(Chords)",
         "fTraceChords",
         fTraceChords,
         traceChordsBasicsBooleanAtom,
@@ -1232,7 +1263,7 @@ This option implies '-trace-chords-basics, -tchordsb'.)",
   subGroup->
     appendAtomToSubGroup (
       taceChordsBooleanAtom);
-  chordsAndTupletsMultiplexBooleansAtom->
+  chordsMultiplexBooleansAtom->
     addBooleanAtom (
       taceChordsBooleanAtom);
 
@@ -1242,8 +1273,7 @@ This option implies '-trace-chords-basics, -tchordsb'.)",
     traceChordsDetailsBooleanAtom =
       oahFourBooleansAtom::create (
         "trace-chords-details", "tchordsd",
-R"(Chords details.
-This option implies '-trace-chords-basics, -tchordsb' and '-trace-chords, -tchords'.)",
+R"(Chords details)",
         "fTraceChordsDetails",
         fTraceChordsDetails,
         traceChordsBasicsBooleanAtom,
@@ -1253,19 +1283,51 @@ This option implies '-trace-chords-basics, -tchordsb' and '-trace-chords, -tchor
   subGroup->
     appendAtomToSubGroup (
       traceChordsDetailsBooleanAtom);
-  chordsAndTupletsMultiplexBooleansAtom->
+  chordsMultiplexBooleansAtom->
     addBooleanAtom (
       traceChordsDetailsBooleanAtom);
+}
+
+void traceOahGroup::initializeTupletsTraceOah ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Tuplets",
+        "help-trace-tuplets", "htt",
+R"()",
+      oahElementVisibilityKind::kElementVisibilityWhole,
+      this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // the chords multiplex booleans atom
+
+  S_oahCommonPrefixBooleansAtom
+    tupletsMultiplexBooleansAtom =
+      oahCommonPrefixBooleansAtom::create (
+        "trace-in-chords-and-tuplets", "ticat",
+        "Trace SHORT_NAME/LONG_NAME in chords and tuplets.",
+        "SHORT_NAME",
+        "LONG_NAME",
+        fShortTracePrefix,
+        fLongTracePrefix);
+
+  subGroup->
+    appendAtomToSubGroup (
+      tupletsMultiplexBooleansAtom);
 
   // tuplets basics
 
-  S_oahTwoBooleansAtom
+  S_oahThreeBooleansAtom
     traceTupletsBasicsBooleanAtom =
-      oahTwoBooleansAtom::create (
+      oahThreeBooleansAtom::create (
         "trace-tuplets-basics", "ttupsb",
-R"(Tuplets basic trace information)",
+R"(Tuplets basic trace information.
+This options implies '-trace-mxsr-events, -tmxsre' and '-trace-passes, -tpasses'.)",
         "fTraceTupletsBasics",
         fTraceTupletsBasics,
+        fTraceMxsrEventsAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -1288,7 +1350,7 @@ This option implies '-trace-tuplets-basics, -ttupsb'.)",
   subGroup->
     appendAtomToSubGroup (
       traceTupletsBooleanAtom);
-  chordsAndTupletsMultiplexBooleansAtom->
+  tupletsMultiplexBooleansAtom->
     addBooleanAtom (
       traceTupletsBooleanAtom);
 
@@ -1309,7 +1371,7 @@ This option implies '-trace-tuplets-basics, -ttupsb' and '-trace-tuplets, -ttups
   subGroup->
     appendAtomToSubGroup (
       traceTupletsDetailsBooleanAtom);
-  chordsAndTupletsMultiplexBooleansAtom->
+  tupletsMultiplexBooleansAtom->
     addBooleanAtom (
       traceTupletsDetailsBooleanAtom);
 }
@@ -2077,7 +2139,7 @@ R"(Trace the measures slices gathering activity details.)",
       traceMeasuresSlicesDetailsBooleanAtom);
 }
 
-void traceOahGroup::initializeBooksToVoicesTraceOah () // RENAME for books and stores? JMI v0.9.70
+void traceOahGroup::initializeBooksToVoicesTraceOah () // RENAME and SPLIT? JMI v0.9.71
 {
   S_oahSubGroup
     subGroup =
@@ -2237,13 +2299,15 @@ R"(Staff details)",
 
   // staff changes basics
 
-  S_oahTwoBooleansAtom
+  S_oahThreeBooleansAtom
     traceStaffChangesBasicsBooleanAtom =
-      oahTwoBooleansAtom::create (
+      oahThreeBooleansAtom::create (
         "trace-staff-changes-basics", "tstchangesb",
-R"(Staff changes basics)",
+R"(Staff changes basics.
+This options implies '-trace-mxsr-events, -tmxsre' and '-trace-passes, -tpasses'.)",
         "fTraceStaffChangesBasics",
         fTraceStaffChangesBasics,
+        fTraceMxsrEventsAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2659,7 +2723,7 @@ R"()",
   S_oahTwoBooleansAtom
     traceRepeatsBasicsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-repeats-basics", "ttupsb",
+        "trace-repeats-basics", "trepsb",
 R"(Repeats basic trace information)",
         "fTraceRepeatsBasics",
         fTraceRepeatsBasics,
@@ -2847,6 +2911,9 @@ void traceOahGroup::initializeTraceOahGroup ()
   // options and help trace and display
   initializeOptionsTraceAndDisplayOptions ();
 
+  // MXSR events (fTraceMxsrEventsAtom is used by other initializations)
+  initializeMxsrEventsTraceOah ();
+
   // score to voices
   initializeBooksToVoicesTraceOah ();
 
@@ -2880,8 +2947,11 @@ void traceOahGroup::initializeTraceOahGroup ()
   // instruments
   initializeInstrumentsTraceOah ();
 
-  // chords and tuplets
-  initializeChordsAndTupletsTraceOah ();
+  // chord
+  initializeChordsTraceOah ();
+
+  // tuplets
+  initializeTupletsTraceOah ();
 
   // texts
   initializeCreditsToWordsTraceOah ();

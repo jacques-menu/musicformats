@@ -18,13 +18,14 @@
 
 #include "mfStack.h"
 
+#include "mxsrEvents.h"
+
 #include "msrArticulations.h"
 #include "msrBarLines.h"
 #include "msrBreaks.h"
 #include "msrDivisions.h"
 #include "msrDoubleTremolos.h"
 #include "msrGlissandos.h"
-#include "mxsrNotesEvents.h"
 #include "msrRehearsalMarks.h"
 #include "msrSlides.h"
 #include "msrTablatures.h"
@@ -38,7 +39,7 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-class mxsr2msrVoiceHandler : public smartable
+class mxsr2msrPopulatorVoiceHandler : public smartable
 {
 /*
   positions represent the order in which the parts appear in <part-list />,
@@ -50,7 +51,7 @@ class mxsr2msrVoiceHandler : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mxsr2msrVoiceHandler> create (
+    static SMARTP<mxsr2msrPopulatorVoiceHandler> create (
                             const S_msrVoice&  voice);
 
   protected:
@@ -58,10 +59,10 @@ class mxsr2msrVoiceHandler : public smartable
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mxsr2msrVoiceHandler (
+                          mxsr2msrPopulatorVoiceHandler (
                             const S_msrVoice& fMsrVoice);
 
-    virtual               ~mxsr2msrVoiceHandler ();
+    virtual               ~mxsr2msrPopulatorVoiceHandler ();
 
   public:
 
@@ -162,13 +163,13 @@ class mxsr2msrVoiceHandler : public smartable
     void                  handleTupletsPendingOnTupletsStack (
                             int inputLineNumber);
 
-     void                 displayLastHandledTupletInVoiceMap (
+    void                  displayLastHandledTupletInVoiceMap (
                             const std::string& header);
 };
-typedef SMARTP<mxsr2msrVoiceHandler> S_mxsr2msrVoiceHandler;
+typedef SMARTP<mxsr2msrPopulatorVoiceHandler> S_mxsr2msrPopulatorVoiceHandler;
 
-EXP std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceHandler& elt);
-EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const mxsr2msrPopulatorVoiceHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrPopulatorVoiceHandler& elt);
 
 //________________________________________________________________________
 class EXP mxsr2msrSkeletonPopulator :
@@ -431,14 +432,18 @@ class EXP mxsr2msrSkeletonPopulator :
 
   public                      visitor<S_print>,
 
-  // ???
+  // miscellaneous??? JMI v0.9.71
   // ------------------------------------------------------
 
-  public                      visitor<S_barline>,
   public                      visitor<S_segno>,
   public                      visitor<S_coda>,
   public                      visitor<S_eyeglasses>,
   public                      visitor<S_pedal>,
+
+  // barlines
+  // ------------------------------------------------------
+
+  public                      visitor<S_barline>,
   public                      visitor<S_bar_style>,
   public                      visitor<S_repeat>,
   public                      visitor<S_ending>,
@@ -683,8 +688,8 @@ class EXP mxsr2msrSkeletonPopulator :
 
                               mxsr2msrSkeletonPopulator (
                                 const S_msrScore& scoreSkeleton,
-                                mxsrScoreNotesEvents&
-                                                  theKnownScoreNotesEvents);
+                                mxsrEventsCollection&
+                                                  theKnownEventsCollection);
 
     virtual                   ~mxsr2msrSkeletonPopulator ();
 
@@ -1001,7 +1006,13 @@ class EXP mxsr2msrSkeletonPopulator :
     virtual void              visitStart (S_print& elt);
     virtual void              visitEnd   (S_print& elt);
 
+    // measure numbering
+    // ------------------------------------------------------
+
     virtual void              visitStart (S_measure_numbering& elt);
+
+    // barlines
+    // ------------------------------------------------------
 
     virtual void              visitStart (S_barline& elt);
     virtual void              visitStart (S_segno& elt);
@@ -1030,7 +1041,7 @@ class EXP mxsr2msrSkeletonPopulator :
     virtual void              visitStart (S_beat_repeat& elt);
     virtual void              visitStart (S_measure_repeat& elt);
     virtual void              visitStart (S_multiple_rest& elt);
-    virtual void              visitEnd (S_multiple_rest& elt);
+    virtual void              visitEnd   (S_multiple_rest& elt);
     virtual void              visitStart (S_slash& elt);
     virtual void              visitEnd   (S_slash& elt);
     virtual void              visitStart (S_slash_type& elt);
@@ -1266,7 +1277,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // the score notes events we know from  mxsr2msrSkeletonBuilder
     // ------------------------------------------------------
 
-    mxsrScoreNotesEvents&  fKnownScoreNotesEvents;
+    mxsrEventsCollection&  fKnownEventsCollection;
 
 
     // part handling
@@ -1453,8 +1464,8 @@ class EXP mxsr2msrSkeletonPopulator :
     // we need a fast access to the voices and their handlers, hence:
     std::vector<S_msrVoice>   fCurrentPartVoicesVector;
 
-    std::vector<S_mxsr2msrVoiceHandler>
-                              fCurrentPartVoicesHandlersVector;
+    std::vector<S_mxsr2msrPopulatorVoiceHandler>
+                              fCurrentPartPopulatorVoicesHandlersVector;
 
     void                      populateCurrentPartVoicesVectorsFromPart (
                                   const S_msrPart& part);

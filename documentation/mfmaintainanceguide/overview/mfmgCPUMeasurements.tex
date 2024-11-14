@@ -1,0 +1,144 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2023
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfmaintainanceguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{CPU measurements}
+% -------------------------------------------------------------------------
+
+\Option{cpu} displays the time spent in the successive passes, such as:
+\begin{lstlisting}[language=Terminal]
+Activity  Description                                             Kind       CPU (sec)
+--------  ------------------------------------------------------  ---------  ---------
+
+          Handle the options and arguments from argc/argv         mandatory    0.01187
+Pass 1    Create an MXSR from a MusicXML file              mandatory    0.00471
+Pass 2a   Create an MSR skeleton from the MXSR                mandatory    0.00222
+Pass 2b   Populate the MSR skeleton from MusicXML data            mandatory    0.00405
+Pass 4    Convert the MSR into an LPSR                            mandatory    0.00137
+Pass 5    Convert the LPSR into LilyPond code                 mandatory    0.00136
+
+Total (sec)  Mandatory  Optional
+-----------  ---------  ---------
+0.02558      0.02558    0.00000
+\end{lstlisting}
+
+These numbers are for the CPU only, not including input and output tasks.
+The time spent in options handling is roughly always the same on a given machine.
+
+\Class{mfTimingItemsList}, defined in \mfutilitiesBoth{mfTiming}, provides:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP mfTimingItemsList {
+	// ... ... ...
+
+  public:
+
+    // global variable for general use
+    // ------------------------------------------------------
+
+    static mfTimingItemsList         sGlobalTimingItemsList;
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    // add an item
+    void                  appendTimingItem (
+                            std::string           activity,
+                            std::string           description,
+                            mfTimingItemKind kind,
+                            clock_t          startClock,
+                            clock_t          endClock);
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+\newpage
+
+\Function {translateMsrToLpsrScore} in \msrToLpsr{msr2lpsrInterface.cpp} measures time to perform the conversion this way:
+\begin{lstlisting}[language=CPlusPlus]
+S_lpsrScore translateMsrToLpsr (
+  const S_msrScore&          originalMsrScore,
+  const S_msrOahGroup&       msrOpts,
+  const S_lpsrOahGroup&      lpsrOpts,
+  mfPassIDKind               passIDKind,
+  std::string                passDescription,
+  const S_mfcMultiComponent& multiComponent)
+{
+  if (gGlobalLpsr2lilypondOahGroup->getNoLilypondCode ()) {
+    gLog <<
+      "Option '-nolpc, -no-lilypond-code' is set, no LPSR is created" <<
+      std::endl;
+
+    return nullptr;
+  }
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    originalMsrScore != nullptr,
+    "originalMsrScore is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // start the clock
+  clock_t startClock = clock ();
+
+  // set the global current passID
+  setGlobalCurrentPassIDKind (passIDKind);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gEarlyOptions.getEarlyTracePasses ()) {
+    std::string separator =
+      "%--------------------------------------------------------------";
+
+    std::stringstream ss;
+
+    ss <<
+      std::endl <<
+      separator <<
+      std::endl <<
+      gTab <<
+      gLanguage->passIDKindAsString (passIDKind) << ": " << passDescription <<
+      std::endl <<
+      separator;
+
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // create an msr2lpsrTranslator
+  msr2lpsrTranslator
+    translator (
+      originalMsrScore);
+
+  // build the LPSR score
+  S_lpsrScore
+    resultingLpsr =
+      translator.translateMsrToLpsr (
+        originalMsrScore,
+        multiComponent);
+
+  clock_t endClock = clock ();
+
+  // register time spent
+  gGlobalTimingItemsList.appendTimingItem (
+    passIDKind,
+    passDescription,
+    mfTimingItemKind::kMandatory,
+    startClock,
+    endClock);
+\end{lstlisting}

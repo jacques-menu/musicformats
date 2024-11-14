@@ -42,7 +42,7 @@ namespace MusicFormats
 void populateMsrSkeletonFromMxsr (
   const Sxmlelement&    theMxsr,
   S_msrScore            scoreSkeletonToBePopulated,
-  mxsrScoreNotesEvents& theKnownScoreNotesEvents,
+  mxsrEventsCollection& theKnownEventsCollection,
   mfPassIDKind          passIDKind,
   const std::string&    passDescription)
 {
@@ -91,7 +91,7 @@ void populateMsrSkeletonFromMxsr (
   mxsr2msrSkeletonPopulator
     skeletonPopulator (
       scoreSkeletonToBePopulated,
-      theKnownScoreNotesEvents);
+      theKnownEventsCollection);
 
   // browse the MXSR
   skeletonPopulator.browseMxsr (

@@ -53,27 +53,26 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-S_mxsr2msrVoiceHandler mxsr2msrVoiceHandler::create (
+S_mxsr2msrPopulatorVoiceHandler mxsr2msrPopulatorVoiceHandler::create (
   const S_msrVoice&  voice)
 {
-  mxsr2msrVoiceHandler* obj = new
-    mxsr2msrVoiceHandler (
+  mxsr2msrPopulatorVoiceHandler* obj = new
+    mxsr2msrPopulatorVoiceHandler (
       voice);
   assert (obj != nullptr);
   return obj;
 }
 
-mxsr2msrVoiceHandler::mxsr2msrVoiceHandler (
+mxsr2msrPopulatorVoiceHandler::mxsr2msrPopulatorVoiceHandler (
   const S_msrVoice&  voice)
 {
   fMsrVoice = voice;
 }
 
-mxsr2msrVoiceHandler::~mxsr2msrVoiceHandler ()
+mxsr2msrPopulatorVoiceHandler::~mxsr2msrPopulatorVoiceHandler ()
 {}
 
-//________________________________________________________________________
-void mxsr2msrVoiceHandler::displayTupletsStack (
+void mxsr2msrPopulatorVoiceHandler::displayTupletsStack (
   const std::string& context)
 {
   size_t tupletsStackSize = fTupletsStack.size ();
@@ -121,7 +120,7 @@ void mxsr2msrVoiceHandler::displayTupletsStack (
     std::endl << std::endl;
 }
 
-// void mxsr2msrVoiceHandler::displayLastHandledTupletInVoiceMap (
+// void mxsr2msrPopulatorVoiceHandler::displayLastHandledTupletInVoiceMap (
 //   const std::string& header)
 // {
 //   gLog <<
@@ -164,7 +163,7 @@ void mxsr2msrVoiceHandler::displayTupletsStack (
 //   gLog << std::endl;
 // }
 
-void mxsr2msrVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
+void mxsr2msrPopulatorVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
   int         inputLineNumber,
   std::string context)
 {
@@ -321,22 +320,22 @@ void mxsr2msrVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string mxsr2msrVoiceHandler::asString () const
+std::string mxsr2msrPopulatorVoiceHandler::asString () const
 {
   std::stringstream ss;
 
   ss <<
-		"[mxsr2msrVoiceHandler" <<
+		"[mxsr2msrPopulatorVoiceHandler" <<
     ']' <<
     std::endl;
 
   return ss.str ();
 }
 
-void mxsr2msrVoiceHandler::print (std::ostream& os) const
+void mxsr2msrPopulatorVoiceHandler::print (std::ostream& os) const
 {
 	os <<
-		"[mxsr2msrVoiceHandler" <<
+		"[mxsr2msrPopulatorVoiceHandler" <<
 		std::endl;
 
 	++gIndenter;
@@ -386,13 +385,13 @@ void mxsr2msrVoiceHandler::print (std::ostream& os) const
   --gIndenter;
 }
 
-std::ostream& operator << (std::ostream& os, const mxsr2msrVoiceHandler& elt)
+std::ostream& operator << (std::ostream& os, const mxsr2msrPopulatorVoiceHandler& elt)
 {
   elt.print (os);
   return os;
 }
 
-std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandler& elt)
+std::ostream& operator << (std::ostream& os, const S_mxsr2msrPopulatorVoiceHandler& elt)
 {
   if (elt) {
     elt->print (os);
@@ -407,9 +406,9 @@ std::ostream& operator << (std::ostream& os, const S_mxsr2msrVoiceHandler& elt)
 //________________________________________________________________________
 mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   const S_msrScore& scoreSkeleton,
-  mxsrScoreNotesEvents&
-                    theKnownScoreNotesEvents)
-	: fKnownScoreNotesEvents (theKnownScoreNotesEvents)
+  mxsrEventsCollection&
+                    theKnownEventsCollection)
+	: fKnownEventsCollection (theKnownEventsCollection)
 {
   // initialize note data to a neutral state
   initializeNoteData ();
@@ -1009,7 +1008,8 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart (
         ">>> Part \"" <<
         part->getPartName () <<
         "\" registering staff " << staff <<
-        "in fCurrentPartStavesVector under staffNumber " << staffNumber;
+        "in fCurrentPartStavesVector under staffNumber " << staffNumber <<
+        ", line " << staff->getInputStartLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -1088,11 +1088,11 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartVoicesVectorsFromPart (
 
   // forget any previous contents if any
   fCurrentPartVoicesVector.clear ();
-  fCurrentPartVoicesHandlersVector.clear ();
+  fCurrentPartPopulatorVoicesHandlersVector.clear ();
 
   // reserve room for enough elements
   fCurrentPartVoicesVector.reserve (partMaximumVoiceNumber + 1); // index 0 is not used
-  fCurrentPartVoicesHandlersVector.reserve (partMaximumVoiceNumber + 1); // index 0 is not used
+  fCurrentPartPopulatorVoicesHandlersVector.reserve (partMaximumVoiceNumber + 1); // index 0 is not used
 
   // populate the voices vector
   for (
@@ -1126,8 +1126,8 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartVoicesVectorsFromPart (
     fCurrentPartVoicesVector [voiceNumber] = voice;
 
     // create the voice voice handler for it
-    fCurrentPartVoicesHandlersVector [voiceNumber] =
-      mxsr2msrVoiceHandler::create (voice);
+    fCurrentPartPopulatorVoicesHandlersVector [voiceNumber] =
+      mxsr2msrPopulatorVoiceHandler::create (voice);
   } // for
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -8600,17 +8600,17 @@ void mxsr2msrSkeletonPopulator::displaySlurStartsStack (
 // void mxsr2msrSkeletonPopulator::displayMxsrTupletsVector (
 //   const std::string& context)
 // {
-//   size_t mxsr2msrVoiceHandlersVectorSize = fMxsrTupletsVector.size ();
+//   size_t mxsr2msrPopulatorVoiceHandlersVectorSize = fMxsrTupletsVector.size ();
 //
 //   gLog <<
 //     std::endl <<
 //     ">>++++++++++++++ The tuplets vector contains " <<
 //     mfSingularOrPlural (
-//       mxsr2msrVoiceHandlersVectorSize, "element", "elements") <<
+//       mxsr2msrPopulatorVoiceHandlersVectorSize, "element", "elements") <<
 //     ':' <<
 //     std::endl;
 //
-//   if (mxsr2msrVoiceHandlersVectorSize) {
+//   if (mxsr2msrPopulatorVoiceHandlersVectorSize) {
 //     std::vector<S_msrTuplet>::const_iterator
 //       iBegin = fMxsrTupletsVector.begin (),
 //       iEnd   = fMxsrTupletsVectorfMxsrTupletsVector.end (),
@@ -8620,7 +8620,7 @@ void mxsr2msrSkeletonPopulator::displaySlurStartsStack (
 //
 //     ++gIndenter;
 //
-//     int n = mxsr2msrVoiceHandlersVectorSize;
+//     int n = mxsr2msrPopulatorVoiceHandlersVectorSize;
 //     for ( ; ; ) {
 //       gLog <<
 //         "v (" << n << ")" <<
@@ -21033,9 +21033,9 @@ void mxsr2msrSkeletonPopulator::handleTupletStart (
 #endif // MF_TRACE_IS_ENABLED
 
   // handle tuplet
-  S_mxsr2msrVoiceHandler
+  S_mxsr2msrPopulatorVoiceHandler
     voiceHandler =
-      fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+      fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
   switch (voiceHandler->getTupletsStackSize ()) {
     case 0:
@@ -21093,9 +21093,9 @@ void mxsr2msrSkeletonPopulator::handleTupletContinue (
   const S_msrNote&  note,
   const S_msrVoice& currentNoteVoice)
 {
-    S_mxsr2msrVoiceHandler
+    S_mxsr2msrPopulatorVoiceHandler
       voiceHandler =
-        fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+        fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
   if (voiceHandler->getTupletsStackSize ()) {
     S_msrTuplet
@@ -21191,9 +21191,9 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
   const S_msrNote&  note,
   const S_msrVoice& currentNoteVoice)
 {
-    S_mxsr2msrVoiceHandler
+    S_mxsr2msrPopulatorVoiceHandler
       voiceHandler =
-        fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+        fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
   if (voiceHandler->getTupletsStackSize ()) {
     S_msrTuplet
@@ -21316,9 +21316,9 @@ void mxsr2msrSkeletonPopulator::reduceTupletStackTop (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 
-  S_mxsr2msrVoiceHandler
+  S_mxsr2msrPopulatorVoiceHandler
     voiceHandler =
-      fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+      fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
   switch (voiceHandler->getTupletsStackSize ()) {
     case 0:
@@ -24129,7 +24129,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 #endif // MF_TRACE_IS_ENABLED
 
   // register note as the last one met in its voice
-  fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber]->
+  fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber]->
     setLastMetNoteInVoice (
       note);
 
@@ -24446,9 +24446,9 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteAndAppendItToCurrentRecipient
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   S_mxsr2msrVoiceHandler
+//   S_mxsr2msrPopulatorVoiceHandler
 //     voiceHandler =
-//       fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+//       fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
   // handle the note itself
   if (fCurrentNoteBelongsToAChord) {
@@ -24493,9 +24493,9 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteAndAppendItToCurrentRecipient
           "fVoiceNumberToInsertInto is unknown");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-    const S_mxsr2msrVoiceHandler&
+    const S_mxsr2msrPopulatorVoiceHandler&
       voiceHandler =
-        fCurrentPartVoicesHandlersVector [fVoiceNumberToInsertInto];
+        fCurrentPartPopulatorVoicesHandlersVector [fVoiceNumberToInsertInto];
 
     if (voiceHandler->getTupletsStackSize ()) {
       voiceHandler->
@@ -25267,9 +25267,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     } // switch
 
     if (aTupletIsStopping) {
-      S_mxsr2msrVoiceHandler
+      S_mxsr2msrPopulatorVoiceHandler
         voiceHandler =
-          fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+          fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
       if (voiceHandler->getTupletsStackSize ()) { // JMI v0.9.71
         voiceHandler->
@@ -25309,7 +25309,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     handleLyricsForCurrentNoteAfterItHasBeenHandled ();
   }
 
-  // remember previous note staff number if relevant
+	// set current note MusicXML staff number as previous for the next note
   fPreviousNoteMusicXMLStaffNumber = fCurrentMusicXMLStaffNumber;
 
   fOnGoingNote = false;
@@ -27140,9 +27140,9 @@ void mxsr2msrSkeletonPopulator::handleNoteBelongingToATuplet (
     firstNoteVoice =
       fCurrentPartVoicesVector [fCurrentMusicXMLVoiceNumber];
 
-  S_mxsr2msrVoiceHandler
+  S_mxsr2msrPopulatorVoiceHandler
     voiceHandler =
-      fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+      fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
   switch (fCurrentTupletTypeKind) {
     case msrTupletTypeKind::kTupletTypeStart:
@@ -27273,9 +27273,9 @@ void mxsr2msrSkeletonPopulator::handleNoteBelongingToATuplet (
         // push it onto tuplets stack VOFVOFVOF JMI v0.9.70
 
         // finalize it
-        S_mxsr2msrVoiceHandler
+        S_mxsr2msrPopulatorVoiceHandler
           voiceHandler =
-            fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+            fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
         voiceHandler->
           finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.71
@@ -27310,9 +27310,9 @@ void mxsr2msrSkeletonPopulator::handleNoteBelongingToAChordInATuplet (
   int newChordNoteInputLineNumber =
     newChordNote->getInputStartLineNumber ();
 
-  S_mxsr2msrVoiceHandler
+  S_mxsr2msrPopulatorVoiceHandler
     voiceHandler =
-      fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+      fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
   // set new note kind as a chord or grace chord member JMI ???
   newChordNote->
@@ -27409,7 +27409,7 @@ void mxsr2msrSkeletonPopulator::handleNoteBelongingToAChordInATuplet (
 //           fCurrentMusicXMLVoiceNumber)
 //       ];
 #ifdef MF_TRACE_IS_ENABLED
-    if (true) { // JMI
+    if (gTraceOahGroup->getTraceTupletsDetails ()) { // JMI v0.9.71
       gLog <<
         std::endl <<
         std::endl <<
@@ -27468,9 +27468,9 @@ void mxsr2msrSkeletonPopulator::handleNoteBelongingToAChordInATuplet (
 //         tupletLastNote,
 //         msrNoteKind::kNoteRegularInChord);
 
-    S_mxsr2msrVoiceHandler
+    S_mxsr2msrPopulatorVoiceHandler
       voiceHandler =
-        fCurrentPartVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
+        fCurrentPartPopulatorVoicesHandlersVector [fCurrentMusicXMLVoiceNumber];
 
     // the chord first note has been placed in the tuplet at the top of the tuplets stack,
     // remove it from there
@@ -27506,7 +27506,7 @@ void mxsr2msrSkeletonPopulator::handleNoteBelongingToAChordInATuplet (
 //         voiceHandler->getMsrVoice ());
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (true) { // JMI
+    if (gTraceOahGroup->getTraceTupletsDetails ()) { // JMI v0.9.71
       gLog <<
         std::endl <<
         std::endl <<
@@ -27539,7 +27539,7 @@ void mxsr2msrSkeletonPopulator::handleNoteBelongingToAChordInATuplet (
 
     // add chord to the current tuplet instead of tupletLastNote
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceChordsBasics () || gTraceOahGroup->getTraceTuplets ()) {
+    if (gTraceOahGroup->getTraceChordsBasics ()) {
       std::stringstream ss;
 
       ss <<
@@ -31008,7 +31008,7 @@ part-symbol
 
 
 
-// void mxsr2msrVoiceHandler::handleTupletStartByHandler (
+// void mxsr2msrPopulatorVoiceHandler::handleTupletStartByHandler (
 //   const S_msrTuplet& tuplet,
 //   const S_msrVoice&  currentNoteVoice)
 // {
@@ -31063,11 +31063,11 @@ part-symbol
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayTupletsStack (
-//       "############## mxsr2msrVoiceHandler::handleTupletStart() 1");
+//       "############## mxsr2msrPopulatorVoiceHandler::handleTupletStart() 1");
 //   }
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayVoicesTupletsStacksMap (
-//       "############## mxsr2msrVoiceHandler::handleTupletStart() 1");
+//       "############## mxsr2msrPopulatorVoiceHandler::handleTupletStart() 1");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
@@ -31082,12 +31082,12 @@ part-symbol
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayLastHandledTupletInVoiceMap (
-//       "############## mxsr2msrVoiceHandler::handleTupletStart() 2");
+//       "############## mxsr2msrPopulatorVoiceHandler::handleTupletStart() 2");
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 // }
 
-// void mxsr2msrVoiceHandler::handleTupletContinueByHandler (
+// void mxsr2msrPopulatorVoiceHandler::handleTupletContinueByHandler (
 //   const S_msrNote&   note,
 //   const S_msrVoice&  currentNoteVoice)
 // {
@@ -31121,7 +31121,7 @@ part-symbol
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTuplets ()) {
 //       gLog <<
-//         "--> mxsr2msrVoiceHandler::handleTupletContinue(), kTupletTypeContinue: adding tuplet member note " <<
+//         "--> mxsr2msrPopulatorVoiceHandler::handleTupletContinue(), kTupletTypeContinue: adding tuplet member note " <<
 //         note->asShortString () <<
 //         " to stack top tuplet " <<
 //         tupletStackTop->asString () <<
@@ -31143,11 +31143,11 @@ part-symbol
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //       displayTupletsStack (
-//         "############## mxsr2msrVoiceHandler:kTupletTypeContinue");
+//         "############## mxsr2msrPopulatorVoiceHandler:kTupletTypeContinue");
 //     }
 // //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
 // //       displayVoicesTupletsStacksMap (
-// //         "############## mxsr2msrVoiceHandler:kTupletTypeContinue");
+// //         "############## mxsr2msrPopulatorVoiceHandler:kTupletTypeContinue");
 // //     }
 // #endif // MF_TRACE_IS_ENABLED
 //   }
@@ -31174,7 +31174,7 @@ part-symbol
 // // #ifdef MF_TRACE_IS_ENABLED
 // //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 // //     displayLastHandledTupletInVoiceMap (
-// //       "############## mxsr2msrVoiceHandler:handleTupletContinue() 2");
+// //       "############## mxsr2msrPopulatorVoiceHandler:handleTupletContinue() 2");
 // //   }
 // // #endif // MF_TRACE_IS_ENABLED
 // }
