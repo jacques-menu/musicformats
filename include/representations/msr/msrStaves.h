@@ -151,6 +151,21 @@ class EXP msrStaff : public msrElement
 
   public:
 
+    // comparisons
+    // ------------------------------------------------------
+
+    // staves ordering in parts
+    static bool           compareStavesByIncreasingNumber (
+                            const S_msrStaff& first,
+                            const S_msrStaff& second);
+
+    // figured bass // JMI v0.9.72
+    static bool           compareStavesToHaveFiguredBassesBelowCorrespondingPart (
+                            const S_msrStaff& first,
+                            const S_msrStaff& second);
+
+  public:
+
     // public services
     // ------------------------------------------------------
 
@@ -370,7 +385,7 @@ class EXP msrStaff : public msrElement
 
     // staff number
 
-    std::string           staffNumberAsString () const;
+    std::string           fetchStaffNumberAsString () const;
 
     std::string           asString () const override;
 
@@ -526,20 +541,6 @@ class EXP msrStaff : public msrElement
 
     S_msrTransposition    getStaffCurrentTransposition () const
                               { return fStaffCurrentTransposition; }
-
-    // voices ordering in staves
-
-    static bool           compareVoicesByIncreasingNumber (
-                            const S_msrVoice& first,
-                            const S_msrVoice& second);
-
-    static bool           compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
-                            const S_msrVoice& first,
-                            const S_msrVoice& second);
-
-    static bool           compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
-                            const S_msrVoice& first,
-                            const S_msrVoice& second);
 
   private:
 

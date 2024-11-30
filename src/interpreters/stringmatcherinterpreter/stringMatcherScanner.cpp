@@ -2732,14 +2732,14 @@ void stringMatcherDriver::scanBegin ()
 
   else if (!(yyin = fopen (fScriptName.c_str (), "r")))
     {
-      stringstream s;
+      std::stringstream ss;
 
       char*
         errorString =
           mfStrErrorCString ();
 
       if (errorString != nullptr) {
-        s <<
+        ss <<
           "cannot open " <<
           fScriptName << ": " <<
           errorString <<
@@ -2747,7 +2747,7 @@ void stringMatcherDriver::scanBegin ()
 
         stringMatcherFileError (
           fScriptName,
-          s.str ());
+          ss.str ());
       }
     }
 }

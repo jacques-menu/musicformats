@@ -2,7 +2,7 @@
 
 #
 #   MusicFormats Library
-#   Copyright (C) Jacques Menu 2016-2023
+#   Copyright (C) Jacques Menu 2016-2024
 #
 #   This Source Code Form is subject to the terms of the Mozilla Public
 #   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -116,6 +116,9 @@ function addFxml ()
 
   git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.bash
   git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.mfsl
+
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.mscz
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.dorico
 }
 
 function addFmfsl ()

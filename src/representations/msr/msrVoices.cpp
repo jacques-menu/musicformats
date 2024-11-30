@@ -539,12 +539,12 @@ void msrVoice::initializeVoice (
 
     case msrVoiceKind::kVoiceKindFiguredBass:
     /* JMI
-      if (fVoiceNumber != msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER) {
+      if (fVoiceNumber != K_PART_FIGURED_BASS_VOICE_NUMBER) {
         std::stringstream ss;
 
         ss <<
           "figured bass voice number " << fVoiceNumber <<
-          " is not equal to " << msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER;
+          " is not equal to " << K_PART_FIGURED_BASS_VOICE_NUMBER;
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -1020,6 +1020,120 @@ S_msrVoice msrVoice::createVoiceDeepClone (
 #endif // MF_TRACE_IS_ENABLED
 
   return deepClone;
+}
+
+bool msrVoice::compareVoicesByIncreasingNumber (
+  const S_msrVoice& first,
+  const S_msrVoice& second)
+{
+  return
+    first->fVoiceNumber
+      <
+    second->fVoiceNumber;
+}
+
+bool msrVoice::compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
+  const S_msrVoice& first,
+  const S_msrVoice& second)
+{
+  int
+    firstVoiceNumber =
+      first->fVoiceNumber,
+    secondVoiceNumber =
+      second->fVoiceNumber;
+
+  if (firstVoiceNumber > K_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
+    firstVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1;
+  }
+  if (secondVoiceNumber > K_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
+    secondVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1;
+  }
+
+  bool result =
+    firstVoiceNumber < secondVoiceNumber;
+
+  return result;
+
+  /* JMI
+  switch (firstVoiceNumber) {
+    case msrVoiceKind::kVoiceKindRegular:
+      switch (secondVoiceNumber) {
+        case msrVoiceKind::kVoiceKindRegular:
+          break;
+
+        case msrVoiceKind::kVoiceKindHarmonies:
+          result =
+            secondVoiceNumber - K_VOICE_HARMONIES_VOICE_BASE_NUMBER
+              >
+            firstVoiceNumber;
+          break;
+
+        case msrVoiceKind::kVoiceKindFiguredBass:
+          break;
+      } // switch
+      break;
+
+    case msrVoiceKind::kVoiceKindDynamics:
+      break;
+
+      switch (secondVoiceNumber) {
+        case msrVoiceKind::kVoiceKindRegular:
+          result =
+            firstVoiceNumber - K_VOICE_HARMONIES_VOICE_BASE_NUMBER
+              >
+            secondVoiceNumber;
+          break;
+
+        case msrVoiceKind::kVoiceKindHarmonies:
+          break;
+
+        case msrVoiceKind::kVoiceKindFiguredBass:
+          break;
+      } // switch
+      break;
+
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      switch (secondVoiceNumber) {
+        case msrVoiceKind::kVoiceKindRegular:
+          break;
+
+        case msrVoiceKind::kVoiceKindDynamics:
+          break;
+
+        case msrVoiceKind::kVoiceKindHarmonies:
+          break;
+
+        case msrVoiceKind::kVoiceKindFiguredBass:
+          break;
+      } // switch
+      break;
+  } // switch
+
+  return result;
+  */
+}
+
+bool msrVoice::compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
+  const S_msrVoice& first,
+  const S_msrVoice& second)
+{
+  int
+    firstVoiceNumber =
+      first->fVoiceNumber,
+    secondVoiceNumber =
+      second->fVoiceNumber;
+
+  if (firstVoiceNumber > K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
+    firstVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
+  }
+  if (secondVoiceNumber > K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
+    secondVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
+  }
+
+  bool result =
+    firstVoiceNumber > secondVoiceNumber;
+
+  return result;
 }
 
 void msrVoice::setVoiceLastSegmentInVoiceClone (
@@ -11400,29 +11514,17 @@ void msrVoice::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 }
 
-std::string msrVoice::voiceNumberAsString () const
+std::string msrVoice::fetchVoiceNumberAsString () const
 {
-  std::string result = std::to_string (fVoiceNumber);
-
-  if (fVoiceNumber == msrPart::K_PART_HARMONIES_VOICE_NUMBER) {
-    result += " (msrPart::K_PART_HARMONIES_VOICE_NUMBER)";
-  }
-  else if (fVoiceNumber == msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER) {
-    result += " (msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER)";
-  }
-  else {
-    // nothing more
-  }
-
-  return result;
+  return mfVoiceNumberAsString (fVoiceNumber);
 }
 
 std::string msrVoice::regularVoiceStaffSequentialNumberAsString () const
 {
   std::string result;
 
-  if (fRegularVoiceStaffSequentialNumber == msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER) {
-    result += " (msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER)";
+  if (fRegularVoiceStaffSequentialNumber == K_PART_FIGURED_BASS_VOICE_NUMBER) {
+    result += " (K_PART_FIGURED_BASS_VOICE_NUMBER)";
   }
   else {
     // nothing more

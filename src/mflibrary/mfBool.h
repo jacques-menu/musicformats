@@ -100,7 +100,6 @@ public:
 
     void                  print (std::ostream& os) const;
 
-
   private:
 
     // private fields

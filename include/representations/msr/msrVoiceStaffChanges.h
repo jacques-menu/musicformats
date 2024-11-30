@@ -33,11 +33,8 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
     static SMARTP<msrVoiceStaffChange> create (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const S_msrStaff&   staffToChangeTo);
-
-    static SMARTP<msrVoiceStaffChange> create (
-                            int                 inputLineNumber,
-                            const S_msrStaff&   staffToChangeTo);
+                            const S_msrStaff&   takeOffStaff,
+                            const S_msrStaff&   landingStaff);
 
     SMARTP<msrVoiceStaffChange> createStaffChangeNewbornClone ();
 
@@ -49,7 +46,8 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
                           msrVoiceStaffChange (
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure,
-                            const S_msrStaff&   staffToChangeTo);
+                            const S_msrStaff&   takeOffStaff,
+                            const S_msrStaff&   landingStaff);
 
     virtual               ~msrVoiceStaffChange ();
 
@@ -58,8 +56,11 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    S_msrStaff            getStaffToChangeTo () const
-                              { return fStaffToChangeTo; }
+    S_msrStaff            getTakeOffStaff () const
+                              { return fTakeOffStaff; }
+
+    S_msrStaff            getLandingStaff () const
+                              { return fLandingStaff; }
 
   public:
 
@@ -90,7 +91,8 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrStaff            fStaffToChangeTo;
+    S_msrStaff            fTakeOffStaff;
+    S_msrStaff            fLandingStaff;
 };
 typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
 EXP std::ostream& operator << (std::ostream& os, const S_msrVoiceStaffChange& elt);

@@ -673,6 +673,53 @@ void msrChord::addFirstNoteToChord (
     */
 }
 
+void msrChord::addNoteToChord_EVENTS (
+  const S_msrNote&  note,
+  const S_msrVoice& voice)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceChords ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Adding note '" <<
+      note->asShortString () <<
+      "' to chord '" <<
+      asString () <<
+      "'";
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+//   gLog << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+//   print (gLog); // JMI v0.9.66
+//   gLog << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
+
+  // append note to chord notes vector
+  fChordNotesVector.push_back (note);
+
+  // register note's uplink to chord
+  note->
+    setNoteShortcutUpLinkToChord (this);
+
+  // mark note as belonging to a chord
+  note->setNoteBelongsToAChord ();
+
+  // append the note to the measure's notes flat list
+//   if (false) // JMI v0.9.70
+//   fMeasureElementUpLinkToMeasure->
+//     appendNoteToMeasureNotesFlatList (note);
+
+/* JMI
+  // register note as the last appended one into this voice
+  voice->
+    registerNoteAsVoiceLastAppendedNote (note);
+    */
+}
+
 void msrChord::addAnotherNoteToChord (
   const S_msrNote&  note,
   const S_msrVoice& voice)

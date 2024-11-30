@@ -533,6 +533,10 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
 
   // parts
   // --------------------------------------
+  initializeMxsr2msrEventsOptions ();
+
+  // parts
+  // --------------------------------------
   initializeMxsr2msrPartsOptions ();
 
   // staves
@@ -587,6 +591,50 @@ R"()",
   appendSubGroupToGroup (subGroup);
 }
 #endif // MF_TRACE_IS_ENABLED
+
+void mxsr2msrOahGroup::initializeMxsr2msrEventsOptions ()
+{
+  S_oahSubGroup subGroup =
+    oahSubGroup::create (
+      "MXSR Events",
+      "help-mxsr-to-msr-events", "hmx2mevents",
+R"()",
+    oahElementVisibilityKind::kElementVisibilityWhole,
+    this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // use MXSR events
+  // --------------------------------------
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "use-mxsr-events", "ume",
+R"(In MusicXML, some informations are known too early or too late, i.e not to the note:
+  - the first backward repeat bar line, if not preceded by a forward one,
+    shows that there is an implicit initial forward repeat barline
+    at the beginning of the score;
+  - <chord /> appears only on the second note of a chord (the drawing approach),
+    so the first one is the preceding note;
+  - when a chord is the last element in a tuplet, the tuplet stop may appear
+    on a chord note that is not the last one of the chord,
+    in which case the tuplet stop actually occurs on its last note;
+  - an end of measure indicates the previous tuplet element is the last one in the tuplet;
+  - a staff change is dectected when two consecutive notes have the same voice number
+    but a different staff number, provided there is no <backup /> nor <forward /> in-between.
+    The staff change then occurs from the first note to the second one.
+
+From v0.9.72 on, the skeleton builder in mxsr2msr collects such information,
+which we call events, pinning them to the note where they belong.
+
+This temporary option causes the MSR skeleton populator to take advantage
+of this events knowledge.
+By default, the regular code is executed, to allow users to use MusicFormats as usual
+until the events handling is fully tested and becomes the default.)",
+      "fUseMxsrEvents",
+      fUseMxsrEvents));
+}
 
 void mxsr2msrOahGroup::initializeMxsr2msrPartsOptions ()
 {

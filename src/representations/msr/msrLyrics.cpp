@@ -1171,8 +1171,8 @@ std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)
 
 //______________________________________________________________________________
 // constants
-const std::string msrStanza::K_STANZA_NUMBER_UNKNOWN_ = "-1";
-const std::string msrStanza::K_STANZA_NAME_UNKNOWN_   = "Unknown stanza";
+const std::string K_STANZA_NUMBER_UNKNOWN_ = "-1";
+const std::string K_STANZA_NAME_UNKNOWN_   = "Unknown stanza";
 
 S_msrStanza msrStanza::create (
   int                inputLineNumber,

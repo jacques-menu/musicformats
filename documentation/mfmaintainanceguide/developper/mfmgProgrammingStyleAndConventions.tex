@@ -1,6 +1,6 @@
 % -------------------------------------------------------------------------
 %  MusicFormats Library
-%  Copyright (C) Jacques Menu 2016-2023
+%  Copyright (C) Jacques Menu 2016-2024
 
 %  This Source Code Form is subject to the terms of the Mozilla Public
 %  License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -531,11 +531,11 @@ with the definition in \msr{msrParts.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
 // constants
-const int msrPart::K_PART_HARMONIES_STAFF_NUMBER = 10;
-const int msrPart::K_PART_HARMONIES_VOICE_NUMBER = 11;
+const int K_PART_HARMONIES_STAFF_NUMBER = 10;
+const int K_PART_HARMONIES_VOICE_NUMBER = 11;
 
-const int msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
-const int msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
+const int K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
+const int K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
 \end{lstlisting}
 
 \end{itemize}
@@ -1853,11 +1853,11 @@ bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
     secondStaffNumber =
       second->getStaffNumber ();
 
-  if (firstStaffNumber > msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
-    firstStaffNumber -= msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
+  if (firstStaffNumber > K_PART_FIGURED_BASS_STAFF_NUMBER) {
+    firstStaffNumber -= K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
   }
-  if (secondStaffNumber > msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
-    secondStaffNumber -= msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
+  if (secondStaffNumber > K_PART_FIGURED_BASS_STAFF_NUMBER) {
+    secondStaffNumber -= K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
   }
 
   bool result =

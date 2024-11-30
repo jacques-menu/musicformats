@@ -169,231 +169,231 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
 
   // parallel music
   cLilypondParallelMusicOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondParallelMusicOpener +=
       "%{ cLilypondParallelMusicOpener %} ";
   }
   cLilypondParallelMusicCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondParallelMusicCloser +=
       "%{ cLilypondParallelMusicCloser %} ";
   }
 
   // parts
   cLilypondPartOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondPartOpener +=
       "%{ cLilypondPartOpener %} ";
   }
   cLilypondPartCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondPartCloser +=
       "%{ cLilypondPartCloser %} ";
   }
 
   // scordatura
   cLilypondScordaturaOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondScordaturaOpener +=
       "%{ cLilypondScordaturaOpener %} ";
   }
   cLilypondScordaturaCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondScordaturaCloser +=
       "%{ cLilypondScordaturaCloser %} ";
   }
 
   // staves
   cLilypondStaffOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondStaffOpener +=
       "%{ cLilypondStaffOpener %} ";
   }
   cLilypondStaffCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondStaffCloser +=
       "%{ cLilypondStaffCloser %} ";
   }
 
   // layout context
   cLilypondLayoutContextScoreOpener = "\\context  { \\Score ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondLayoutContextScoreOpener +=
       "%{ cLilypondLayoutContextScoreOpener %} ";
   }
   cLilypondLayoutContextScoreCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondLayoutContextScoreCloser +=
       "%{ cLilypondLayoutContextScoreCloser %} ";
   }
 
   cLilypondLayoutContextStaffOpener = "\\context { \\Staff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondLayoutContextStaffOpener +=
       "%{ cLilypondLayoutContextStaffOpener %} ";
   }
   cLilypondLayoutContextStaffCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondLayoutContextStaffCloser +=
       "%{ cLilypondLayoutContextStaffCloser %} ";
   }
 
   cLilypondLayoutContextVoiceOpener = "\\context { \\Voice ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondLayoutContextVoiceOpener +=
       "%{ cLilypondLayoutContextVoiceOpener %} ";
   }
   cLilypondLayoutContextVoiceCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondLayoutContextVoiceCloser +=
       "%{ cLilypondLayoutContextVoiceCloser %} ";
   }
 
   // voices usage
   cLilypondUseVoiceOpener = "\\context ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondUseVoiceOpener +=
       "%{ cLilypondUseVoiceOpener %} ";
   }
   cLilypondUseVoiceCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondUseVoiceCloser +=
       "%{ cLilypondUseVoiceCloser %} ";
   }
 
   // chords
   cLilypondChordOpener = "< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondChordOpener +=
       "%{ cLilypondChordOpener %} ";
   }
   cLilypondChordCloser = "> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondChordCloser +=
       "%{ cLilypondChordCloser %} ";
   }
 
   // ligatures
   cLilypondLigatureOpener = "\\[ ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondLigatureOpener +=
       "%{ cLilypondLigatureOpener %} ";
   }
   cLilypondLigatureCloser = "\\] ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondLigatureCloser +=
       "%{ cLilypondLigatureCloser %} ";
   }
 
   // hairpins
   cLilypondHairPinsCrescendo = "\\< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondHairPinsCrescendo +=
       "%{ cLilypondHairPinsCrescendo %} ";
   }
   cLilypondHairPinsDecrescendo = "\\> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondHairPinsDecrescendo +=
       "%{ cLilypondHairPinsDecrescendo %} ";
   }
   cLilypondHairPinsStop = "\\! ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondHairPinsStop +=
       "%{ cLilypondHairPinsStop %} ";
   }
 
   // part groups
   cLilypondPartGroupOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondPartGroupOpener +=
       "%{ cLilypondPartGroupOpener %} ";
   }
   cLilypondPartGroupCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondPartGroupCloser +=
       "%{ cLilypondPartGroupCloser %} ";
   }
 
   // staff groups
   cLilypondNewStaffGroup = "\\new StaffGroup ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewStaffGroup +=
       "%{ cLilypondNewStaffGroup %} ";
   }
   cLilypondStaffGroupOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondStaffGroupOpener +=
       "%{ cLilypondStaffGroupOpener %} ";
   }
   cLilypondStaffGroupCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondStaffGroupCloser +=
       "%{ cLilypondStaffGroupCloser %} ";
   }
 
   // staves
   cLilypondNewStaff = "\\new Staff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewStaff +=
       "%{ cLilypondNewStaff %} ";
   }
   cLilypondNewTabStaff = "\\new TabStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewTabStaff +=
       "%{ cLilypondNewTabStaff %} ";
   }
   cLilypondNewHarmoniesStaff = "\\new HarmoniesStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewHarmoniesStaff +=
       "%{ cLilypondNewHarmoniesStaff %} ";
   }
   cLilypondNewFiguredBassStaff = "\\new FiguredBassStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewFiguredBassStaff +=
       "%{ cLilypondNewFiguredBassStaff %} ";
   }
   cLilypondNewDrumStaff = "\\new DrumStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewDrumStaff +=
       "%{ cLilypondNewDrumStaff %} ";
   }
   cLilypondNewRythmicStaff = "\\new RythmicStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewRythmicStaff +=
       "%{ cLilypondNewRythmicStaff %} ";
   }
   cLilypondNewJianpuStaff = "\\new JianpuStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewJianpuStaff +=
       "%{ cLilypondNewJianpuStaff %} ";
   }
 
   cLilypondNewGrandStaff = "\\new GrandStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewGrandStaff +=
       "%{ cLilypondNewGrandStaff %} ";
   }
   cLilypondNewPianoStaff = "\\new PianoStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewPianoStaff +=
       "%{ cLilypondNewPianoStaff %} ";
   }
   cLilypondNewChoirStaff = "\\new ChoirStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewChoirStaff +=
       "%{ cLilypondNewChoirStaff %} ";
   }
 
   // lyrics
   cLilypondNewLyrics = "\\new Lyrics ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondNewLyrics +=
       "%{ cLilypondNewLyrics %} ";
   }
 
   // hide
   cLilypondHide = "\\hide ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondUsefulFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
     cLilypondHide +=
       "%{ cLilypondHide %} ";
   }
@@ -1992,7 +1992,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
 #endif // MF_TRACE_IS_ENABLED
 
     if (doGenerateAStemDirection) {
-      // JMI msrStemKind::kStemKindNeutral ??? JMI v0.9.70
+      // JMI msrStemKind::kStemKindNeutral ??? JMI v0.9.72
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceStems ()) {
         std::stringstream ss;
@@ -2010,10 +2010,12 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
       }
 #endif // MF_TRACE_IS_ENABLED
 
+      // generate the stem code
       fLilypondCodeStream <<
         stemAsLilypondString (stemKind);
     }
 
+    // update fCurrentStemKind upon each stem occurrence
     fCurrentStemKind = stemKind;
   }
 }
@@ -9078,7 +9080,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
         " % start of parallel music";
     }
 
-    fLilypondCodeStream << std::endl;
+    fLilypondCodeStream << std::endl << std::endl;
 
     ++gIndenter; //  // decremented in visitEnd (S_lpsrParallelMusicBLock& elt)
   }
@@ -9122,7 +9124,9 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
   if (fNumberOfPartGroupBlocks > 0) {
     --gIndenter; // incremented in visitStart (S_lpsrParallelMusicBLock& elt)
 
-    fLilypondCodeStream << cLilypondParallelMusicCloser;
+    fLilypondCodeStream <<
+      std::endl <<
+      cLilypondParallelMusicCloser;
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
@@ -12720,8 +12724,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   S_msrStaff
-    staffToChangeTo =
-      elt->getStaffToChangeTo ();
+    landingStaff =
+      elt->getLandingStaff ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaffChanges ()) { // JMI v0.9.67
@@ -12734,8 +12738,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 //       voiceToInsertInto->getPartAlphabeticName () <<
 //       "\"" <<
 //       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
-//       " to staff " << staffToChangeTo->asShortString () <<
-      ", to staff \"" << staffToChangeTo->getStaffAlphabeticName () << "\"" <<
+//       " to staff " << landingStaff->asShortString () <<
+      ", to staff \"" << landingStaff->getStaffAlphabeticName () << "\"" <<
       ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
@@ -12748,7 +12752,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
   fLilypondCodeStream << // DISABLED TEMP // JMI v0.9.71
     std::endl <<
     "\\change Staff = \"" <<
-    staffToChangeTo->getStaffAlphabeticName () <<
+    landingStaff->getStaffAlphabeticName () <<
     "\"";
 
   // generate the input line number as comment if relevant
@@ -20606,16 +20610,74 @@ void lpsr2lilypondTranslator::generateNoteSlurDirection (
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      switch (slur->getSlurPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN_:
-          break;
-        case msrPlacementKind::kPlacementAbove:
-          fLilypondCodeStream << "\\slurUp ";
-          break;
-        case msrPlacementKind::kPlacementBelow:
-          fLilypondCodeStream << "\\slurDown ";
-          break;
-      } // switch
+      // should a stem direction command be generated?
+      // otherwise, leave stems management to LilyPond
+      msrPlacementKind
+        slurPlacementKind =
+          slur->getSlurPlacementKind ();
+
+      Bool doGenerateASlurDirection (false);
+
+      if (
+        gGlobalLpsr2lilypondOahGroup->getGenerateSlursDirections ()
+      ) {
+        doGenerateASlurDirection = true;
+      }
+      else {
+        doGenerateASlurDirection =
+          slurPlacementKind != fCurrentSlurPlacementKind;
+      }
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceSlurs ()) {
+        std::stringstream ss;
+
+        ss <<
+          "--> generateNoteSlurDirection() 2" <<
+          ", slur: " <<
+          slur->asShortString () <<
+          ", doGenerateAStemDirection: " <<
+          doGenerateASlurDirection;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+
+      if (doGenerateASlurDirection) {
+        // JMI msrPlacementKind::kPlacement_UNKNOWN_ ??? JMI v0.9.72
+  #ifdef MF_TRACE_IS_ENABLED
+        if (gTraceOahGroup->getTraceSlurs ()) {
+          std::stringstream ss;
+
+          ss <<
+            "--> fCurrentSlurPlacementKind switches from " <<
+            fCurrentSlurPlacementKind <<
+            " to " <<
+            slurPlacementKind <<
+            ", line " << slur->getInputStartLineNumber ();
+
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+  #endif // MF_TRACE_IS_ENABLED
+
+        switch (slurPlacementKind) {
+          case msrPlacementKind::kPlacement_UNKNOWN_:
+            break;
+          case msrPlacementKind::kPlacementAbove:
+            fLilypondCodeStream << "\\slurUp ";
+            break;
+          case msrPlacementKind::kPlacementBelow:
+            fLilypondCodeStream << "\\slurDown ";
+            break;
+        } // switch
+      }
+
+      // update fCurrentSlurPlacementKind upon each slur occurrence
+      fCurrentSlurPlacementKind = slurPlacementKind;
     } // for
   }
 }
@@ -25941,6 +26003,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
           break;
           */
       } // switch
+      fLilypondCodeStream << " %{ b333 %}";
 
       if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
         // generate the barLine line number as a comment
@@ -26027,6 +26090,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
         else {
           fLilypondCodeStream << "\\bar \":|.\" ";
         }
+        fLilypondCodeStream << " { b666 }";
       }
       else {
         // JMI

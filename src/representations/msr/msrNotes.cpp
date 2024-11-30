@@ -4531,7 +4531,7 @@ std::string msrNote::asShortString () const
   ss <<
     "[Note " <<
     fNoteKind <<
-    ' ';
+    ", ";
 
   switch (fNoteKind) {
     case msrNoteKind::kNote_UNKNOWN_:
@@ -6304,7 +6304,7 @@ void msrNote::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "noteIsAGraceNote" << ": " <<
-    getNoteIsAGraceNote () <<
+    fetchNoteIsAGraceNote () <<
     std::endl;
 
   // note redundant information (for speed)

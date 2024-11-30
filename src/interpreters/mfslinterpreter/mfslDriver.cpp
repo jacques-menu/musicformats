@@ -673,29 +673,29 @@ void mfslDriver::handleSelectLabel (
     }
 
     else {
-      stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "label \"" << label <<
         "\" is no label of choice nor 'all' \"" <<
         choiceName <<
         "\", cannot be used in a 'select' statement";
 
       mfslError (
-        s.str (),
+        ss.str (),
         fScannerLocation);
     }
   }
 
   else {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "choice name \"" << choiceName <<
       "\" is unknown in the choices table, cannot be used in a 'select' statement";
 
     mfslError (
-      s.str (),
+      ss.str (),
       fScannerLocation);
   }
 }
@@ -735,9 +735,9 @@ void mfslDriver::appendSelectLabelForServiceLaunching (
         getSelected ()
   ) {
     if (! overriddenMessageHasBeenIssued) {
-      stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "'select' label \"" <<
         label <<
         "\" for choice \"" <<
@@ -745,7 +745,7 @@ void mfslDriver::appendSelectLabelForServiceLaunching (
         "\" ignored, it is overridden by a '-select, -sel' option";
 
       mfslWarning (
-        s.str (),
+        ss.str (),
         fScannerLocation);
 
       // issue above warning only one if the 'all' pseudo-label has be selected
@@ -1030,9 +1030,9 @@ Bool mfslDriver::applySelectOption (
   }
 
   else {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "applySelectOption(): label \"" <<
       label <<
       "\" is unknown in choice \"" <<
@@ -1040,7 +1040,7 @@ Bool mfslDriver::applySelectOption (
       "\"";
 
     mfslError (
-      s.str (),
+      ss.str (),
       fScannerLocation);
   }
 
@@ -1052,9 +1052,9 @@ void mfslDriver::finalSemanticsCheck ()
 {
   // have all the options supplied choices been used?
   for (std::string choiceName : fUnusedOptionsSuppliedChoicesSet) {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "option-supplied choice \"" <<
       choiceName <<
       "\" has not been used in script \"" <<
@@ -1062,7 +1062,7 @@ void mfslDriver::finalSemanticsCheck ()
       "\"";
 
     mfslWarning (
-      s.str (),
+      ss.str (),
       fScannerLocation);
   } // for
 

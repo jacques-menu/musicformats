@@ -66,13 +66,13 @@ void waeHandler::waeWarning (
 
       if (service) {
         gLog <<
-          " -- service " <<
+           " -***- service " <<
           service <<
           ", measure ";
       }
       else {
         gLog <<
-          " -- measure ";
+           " -***- measure ";
       }
 
       gLog <<
@@ -123,13 +123,13 @@ void waeHandler::waeInternalWarning (
 
       if (service) {
         gLog <<
-          " -- service " <<
+           " -***- service " <<
           service <<
           ", measure ";
       }
       else {
         gLog <<
-          " -- measure ";
+           " -***- measure ";
       }
 
       gLog <<
@@ -189,13 +189,13 @@ void waeHandler::waeErrorWithoutException (
 
         if (service) {
           gLog <<
-            " -- service " <<
+             " -***- service " <<
             service <<
             ", measure ";
         }
         else {
           gLog <<
-            " -- measure ";
+             " -***- measure ";
         }
 
         gLog <<
@@ -252,13 +252,13 @@ void waeHandler::waeErrorWithoutExceptionWithInputLocation (
 
         if (service) {
           gLog <<
-            " -- service " <<
+             " -***- service " <<
             service <<
             ", measure ";
         }
         else {
           gLog <<
-            " -- measure ";
+            " -***- measure ";
         }
 
         gLog <<
@@ -560,13 +560,13 @@ void waeHandler::waeTraceToStream (
 
       if (service) {
         os <<
-          " -- service " <<
+          " -***- service " <<
           service <<
           ", measure ";
       }
       else {
         os <<
-          " -- measure ";
+          " -***- measure ";
       }
 
       os <<

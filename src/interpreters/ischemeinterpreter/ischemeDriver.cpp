@@ -666,29 +666,29 @@ void ischemeDriver::handleSelectLabel (
     }
 
     else {
-      stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "label \"" << label <<
         "\" is no label of choice nor 'all' \"" <<
         choiceName <<
         "\", cannot be used in a 'select' statement";
 
       ischemeError (
-        s.str (),
+        ss.str (),
         fScannerLocation);
     }
   }
 
   else {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "choice name \"" << choiceName <<
       "\" is unknown in the choices table, cannot be used in a 'select' statement";
 
     ischemeError (
-      s.str (),
+      ss.str (),
       fScannerLocation);
   }
 }
@@ -728,9 +728,9 @@ void ischemeDriver::appendSelectLabelForServiceLaunching (
         getSelected ()
   ) {
     if (! overriddenMessageHasBeenIssued) {
-      stringstream s;
+      std::stringstream ss;
 
-      s <<
+      ss <<
         "'select' label \"" <<
         label <<
         "\" for choice \"" <<
@@ -738,7 +738,7 @@ void ischemeDriver::appendSelectLabelForServiceLaunching (
         "\" ignored, it is overridden by a '-select, -sel' option";
 
       ischemeWarning (
-        s.str (),
+        ss.str (),
         fScannerLocation);
 
       // issue above warning only one if the 'all' pseudo-label has be selected
@@ -1021,9 +1021,9 @@ Bool ischemeDriver::applySelectOption (
   }
 
   else {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "applySelectOption(): label \"" <<
       label <<
       "\" is unknown in choice \"" <<
@@ -1031,7 +1031,7 @@ Bool ischemeDriver::applySelectOption (
       "\"";
 
     ischemeError (
-      s.str (),
+      ss.str (),
       fScannerLocation);
   }
 
@@ -1042,9 +1042,9 @@ void ischemeDriver::finalSemanticsCheck ()
 {
   // have all the options supplied choices been used?
   for (std::string choiceName : fUnusedOptionsSuppliedChoicesSet) {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "option-supplied choice \"" <<
       choiceName <<
       "\" has not been used in script \"" <<
@@ -1052,7 +1052,7 @@ void ischemeDriver::finalSemanticsCheck ()
       "\"";
 
     ischemeWarning (
-      s.str (),
+      ss.str (),
       fScannerLocation);
   } // for
 

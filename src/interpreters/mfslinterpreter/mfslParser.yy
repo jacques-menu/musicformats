@@ -486,16 +486,16 @@ CaseChoiceStatement
                 drv);
 
         if (! choice) {
-          stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "name \"" << choiceName <<
             "\" is no choice name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
             endl;
 
           mfslError (
-            s.str (),
+            ss.str (),
             drv.getScannerLocation ());
         }
 
@@ -565,9 +565,9 @@ CaseChoiceAlternative
             drv.caseChoiceStatementsStackTop ();
 
         // push a new current options block onto the stack
-        stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Case alternative for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
@@ -575,7 +575,7 @@ CaseChoiceAlternative
 
         std::string
           CaseChoiceAlternativeDescription =
-            s.str ();
+            ss.str ();
 
         S_mfslOptionsBlock
           CaseChoiceAlternativeOptionsBlock =
@@ -609,16 +609,16 @@ CaseChoiceAlternative
         } // for
 
         // discard this case alternative
-        stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Discarding case alternative options block for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation () <<
           endl;
 
-        std::string context = s.str ();
+        std::string context = ss.str ();
 
         drv.optionsBlocksStackPop (
           context);
@@ -685,16 +685,16 @@ CaseInputStatement
                 drv);
 
         if (! input) {
-          stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "name \"" << inputName <<
             "\" is no input name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
             endl;
 
           mfslError (
-            s.str (),
+            ss.str (),
             drv.getScannerLocation ());
         }
 
@@ -764,9 +764,9 @@ CaseInputAlternative
             drv.caseInputStatementsStackTop ();
 
         // push a new current options block onto the stack
-        stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "CaseInput alternative for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
@@ -774,7 +774,7 @@ CaseInputAlternative
 
         std::string
           caseInputAlternativeDescription =
-            s.str ();
+            ss.str ();
 
         S_mfslOptionsBlock
           caseInputAlternativeOptionsBlock =
@@ -808,16 +808,16 @@ CaseInputAlternative
         } // for
 
         // discard this case input alternative
-        stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Discarding case input alternative options block for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
           ", line " << drv.getScannerLocation () <<
           endl;
 
-        std::string context = s.str ();
+        std::string context = ss.str ();
 
         drv.optionsBlocksStackPop (
           context);

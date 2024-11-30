@@ -1633,10 +1633,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getLilypondComments () const
                               { return fLilypondComments; }
 
-    void                  setLilypondUsefulFragmentsComments ()
-                              { fLilypondUsefulFragmentsComments = true; }
-    Bool                  getLilypondUsefulFragmentsComments () const
-                              { return fLilypondUsefulFragmentsComments; }
+    void                  setLilypondFragmentsComments ()
+                              { fLilypondFragmentsComments = true; }
+    Bool                  getLilypondFragmentsComments () const
+                              { return fLilypondFragmentsComments; }
 
     void                  setGlobal ()
                               { fGlobal = true; }
@@ -1677,6 +1677,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
                               { fGenerateStemsDirections = true; }
     Bool                  getGenerateStemsDirections () const
                               { return fGenerateStemsDirections; }
+
+    void                  setGenerateSlursDirections ()
+                              { fGenerateSlursDirections = true; }
+    Bool                  getGenerateSlursDirections () const
+                              { return fGenerateSlursDirections; }
 
     void                  setWhiteNoteHeads ()
                               { fWhiteNoteHeads = true; }
@@ -2179,7 +2184,9 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fXml2lyInfos;
 
     Bool                  fLilypondComments;
-    Bool                  fLilypondUsefulFragmentsComments;
+    S_oahBooleanAtom      fLilypondCommentsAtom;
+
+    Bool                  fLilypondFragmentsComments;
 
     Bool                  fGlobal;
 
@@ -2196,6 +2203,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fPointAndClickOff;
 
     Bool                  fGenerateStemsDirections;
+
+    Bool                  fGenerateSlursDirections;
 
     Bool                  fWhiteNoteHeads;
     Bool                  fGenerateNoteBeams;

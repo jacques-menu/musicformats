@@ -73,7 +73,7 @@ BEGIN
             VALUE "FileDescription", "MusicFormats library"
             VALUE "FileVersion", "0,9,60,0"
             VALUE "InternalName", "libmusicformats"
-            VALUE "LegalCopyright", "Copyright (C) Jacques Menu 2016-2022"
+            VALUE "LegalCopyright", "Copyright (C) Jacques Menu 2016-2024"
             VALUE "OriginalFilename", "musicformats.dll"
             VALUE "ProductName", "musicformats"
             VALUE "ProductVersion", "0,9,60,0"

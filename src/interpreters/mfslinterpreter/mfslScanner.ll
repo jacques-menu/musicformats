@@ -557,14 +557,14 @@ void mfslDriver::scanBegin ()
 
   else if (!(yyin = fopen (fScriptName.c_str (), "r")))
     {
-      stringstream s;
+      std::stringstream ss;
 
       char*
         errorString =
           mfStrErrorCString ();
 
       if (errorString != nullptr) {
-        s <<
+        ss <<
           "cannot open " <<
           fScriptName << ": " <<
           errorString <<
@@ -572,7 +572,7 @@ void mfslDriver::scanBegin ()
 
         mfslFileError (
           fScriptName,
-          s.str ());
+          ss.str ());
       }
     }
 }

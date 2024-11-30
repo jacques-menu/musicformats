@@ -277,7 +277,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   return deepClone;
 }
 
-// bool msrFiguredBass::compareFiguredBassesByIncreasingDuration (
+// bool msrFiguredBass::compareFiguredBassesByIncreasingDuration ( // JMI v0.9.72 ???
 //   const SMARTP<msrFiguredBass>& first,
 //   const SMARTP<msrFiguredBass>& second)
 // {

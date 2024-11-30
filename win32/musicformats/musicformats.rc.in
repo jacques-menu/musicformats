@@ -73,7 +73,7 @@ BEGIN
             VALUE "FileDescription", "MusicFormats library"
             VALUE "FileVersion", "comma_separeted_version_number"
             VALUE "InternalName", "musicformats"
-            VALUE "LegalCopyright", "Copyright (C) Jacques Menu 2016-2022"
+            VALUE "LegalCopyright", "Copyright (C) Jacques Menu 2016-2024"
             VALUE "OriginalFilename", "musicformats.dll"
             VALUE "ProductName", "musicformats"
             VALUE "ProductVersion", "comma_separeted_version_number"

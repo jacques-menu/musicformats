@@ -1,6 +1,6 @@
 % -------------------------------------------------------------------------
 %  MusicFormats Library
-%  Copyright (C) Jacques Menu 2016-2023
+%  Copyright (C) Jacques Menu 2016-2024
 
 %  This Source Code Form is subject to the terms of the Mozilla Public
 %  License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -175,8 +175,8 @@ Every \class{msrVoice} instance in \mf\ belongs to an \class{msrStaff} instance.
 
 		// ... ... ...
 
-    #define msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER  20
-    #define msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER  21
+    #define K_PART_FIGURED_BASS_STAFF_NUMBER  20
+    #define K_PART_FIGURED_BASS_VOICE_NUMBER  21
 \end{lstlisting}
 
 In \class{msrStaff}, there is:
@@ -250,7 +250,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 
   // create the part figured bass staff
   int partFiguredBassStaffNumber =
-    msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
+    K_PART_FIGURED_BASS_STAFF_NUMBER;
 
 	// ... ... ...
 
@@ -262,7 +262,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 
   // create the figured bass voice
   int partFiguredBassVoiceNumber =
-    msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER;
+    K_PART_FIGURED_BASS_VOICE_NUMBER;
 
 	// ... ... ...
 

@@ -88,9 +88,9 @@ EXP void ischemeOptionsIncompatibilityError (
   const S_oahAtom atom1,
   const S_oahAtom atom2)
 {
-  stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "### iScheme options incompatibility: " <<
     atom1->fetchNamesBetweenQuotes () <<
     " and " <<
@@ -98,7 +98,7 @@ EXP void ischemeOptionsIncompatibilityError (
     " are incompatible" <<
     endl;
 
-  std::string message = s.str ();
+  std::string message = ss.str ();
 
   if (! gWaeOahGroup->getDontShowErrors ()) { // JMI
     throw ischemeException (message);

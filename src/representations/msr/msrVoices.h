@@ -343,6 +343,24 @@ class EXP msrVoice : public msrElement
 
   public:
 
+    // comparisons
+    // ------------------------------------------------------
+
+    // voices ordering in staves
+    static bool           compareVoicesByIncreasingNumber (
+                            const S_msrVoice& first,
+                            const S_msrVoice& second);
+
+    static bool           compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
+                            const S_msrVoice& first,
+                            const S_msrVoice& second);
+
+    static bool           compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
+                            const S_msrVoice& first,
+                            const S_msrVoice& second);
+
+  public:
+
     // public services
     // ------------------------------------------------------
 
@@ -1032,7 +1050,7 @@ class EXP msrVoice : public msrElement
     // print
     // ------------------------------------------------------
 
-    std::string           voiceNumberAsString () const;
+    std::string           fetchVoiceNumberAsString () const;
 
     std::string           regularVoiceStaffSequentialNumberAsString () const;
 

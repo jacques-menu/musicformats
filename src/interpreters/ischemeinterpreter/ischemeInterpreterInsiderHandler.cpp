@@ -105,14 +105,14 @@ void ischemeInterpreterInsiderHandler::initializeHandlerMultiComponent ()
 
 std::string ischemeInterpreterInsiderHandler::usageInformation ()
 {
-  stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
 R"(Usage: ischeme [option]*
 )" <<
     endl;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string ischemeInterpreterInsiderHandler::handlerServiceAboutInformation () const
@@ -261,9 +261,9 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << inputSourceName << "\" is both the input and output file name";
 
     oahError (s.str ());
@@ -273,18 +273,18 @@ void ischemeInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 
 
   if (! fOutputFileName.size ()) {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "ischemeInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
 
     oahError (s.str ());
   }
 
   else if (fOutputFileName == gServiceRunData->getInputSourceName ()) {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
 
     oahError (s.str ());

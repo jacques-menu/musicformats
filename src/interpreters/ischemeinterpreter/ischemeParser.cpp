@@ -1059,16 +1059,16 @@ namespace stringMatcher {
                 drv);
 
         if (! choice) {
-          stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "name \"" << choiceName <<
             "\" is no choice name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
             endl;
 
           ischemeError (
-            s.str (),
+            ss.str (),
             drv.getScannerLocation ());
         }
 
@@ -1134,9 +1134,9 @@ namespace stringMatcher {
             drv.caseChoiceStatementsStackTop ();
 
         // push a new current options block onto the stack
-        stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Case alternative for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
@@ -1144,7 +1144,7 @@ namespace stringMatcher {
 
         std::string
           CaseChoiceAlternativeDescription =
-            s.str ();
+            ss.str ();
 
         S_ischemeOptionsBlock
           CaseChoiceAlternativeOptionsBlock =
@@ -1181,16 +1181,16 @@ namespace stringMatcher {
         } // for
 
         // discard this case alternative
-        stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Discarding case alternative options block for " <<
           currentCaseChoiceStatement->
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation () <<
           endl;
 
-        std::string context = s.str ();
+        std::string context = ss.str ();
 
         drv.optionsBlocksStackPop (
           context);
@@ -1250,16 +1250,16 @@ namespace stringMatcher {
                 drv);
 
         if (! input) {
-          stringstream s;
+          std::stringstream ss;
 
-          s <<
+          ss <<
             "name \"" << inputName <<
             "\" is no input name, cannot be used in a 'select' statement" <<
             ", line " << drv.getScannerLocation () <<
             endl;
 
           ischemeError (
-            s.str (),
+            ss.str (),
             drv.getScannerLocation ());
         }
 
@@ -1325,9 +1325,9 @@ namespace stringMatcher {
             drv.caseInputStatementsStackTop ();
 
         // push a new current options block onto the stack
-        stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "CaseInput alternative for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
@@ -1335,7 +1335,7 @@ namespace stringMatcher {
 
         std::string
           caseInputAlternativeDescription =
-            s.str ();
+            ss.str ();
 
         S_ischemeOptionsBlock
           caseInputAlternativeOptionsBlock =
@@ -1372,16 +1372,16 @@ namespace stringMatcher {
         } // for
 
         // discard this case input alternative
-        stringstream s;
+        std::stringstream ss;
 
-        s <<
+        ss <<
           "Discarding case input alternative options block for " <<
           currentCaseInputStatement->
             currentNamesListAsString () <<
           ", line " << drv.getScannerLocation () <<
           endl;
 
-        std::string context = s.str ();
+        std::string context = ss.str ();
 
         drv.optionsBlocksStackPop (
           context);

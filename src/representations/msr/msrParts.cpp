@@ -16,6 +16,7 @@
 #include "visitor.h"
 
 #include "mfPreprocessorSettings.h"
+#include "mfConstants.h"
 
 #include "mfAssert.h"
 #include "mfServices.h"
@@ -44,13 +45,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// constants
-const int msrPart::K_PART_HARMONIES_STAFF_NUMBER = 10;
-const int msrPart::K_PART_HARMONIES_VOICE_NUMBER = 11;
-
-const int msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
-const int msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
-
 // global variable
 int msrPart::sPartsCounter = 0;
 
@@ -300,6 +294,11 @@ void msrPart::registerStaffInPart (
   // register staff in the all staves list
   fPartAllStavesList.push_back (staff);
 
+  // the staves may be regitered in disorder, for example in mxml2msr,
+  // so we have to sort them
+//   fPartAllStavesList.sort ( // JMI EVENTS
+//     msrStaff::compareStavesByIncreasingNumber);
+
   // register its number in the staves numbers to staves map
   fPartStavesMap [staff->getStaffNumber ()] = staff;
 
@@ -309,10 +308,10 @@ void msrPart::registerStaffInPart (
   // register staff in adhoc staves lists
   switch (staff->getStaffKind ()) {
     case msrStaffKind::kStaffKindRegular:
-      // register staff in the regular staves list
+      // register regular staff in the regular staves list
       fPartRegularStavesList.push_back (staff);
 
-      // register staff in the
+      // register regular staff in the
       // non harmonies nor figured bass staves list
       fPartNonHarmoniesNorFiguredBassStavesList.push_back (staff);
       break;
@@ -449,6 +448,8 @@ void msrPart::incrementPartCurrentDrawingMeasurePosition (
       getPartCombinedName () <<
       " by " <<
       wholeNotesDelta <<
+      ", fPartCurrentDrawingMeasurePosition: " <<
+      fPartCurrentDrawingMeasurePosition <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -465,6 +466,7 @@ void msrPart::incrementPartCurrentDrawingMeasurePosition (
 
     ss <<
       "The new part drawing measure position is " <<
+      "fPartCurrentDrawingMeasurePosition: " <<
       fPartCurrentDrawingMeasurePosition <<
       " in part " <<
       getPartCombinedName ();
@@ -481,7 +483,7 @@ void msrPart::decrementPartCurrentDrawingMeasurePosition (
   const msrWholeNotes& wholeNotesDelta)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (true || gTraceOahGroup->getTraceMeasurePositions ()) {
     std::stringstream ss;
 
     ss <<
@@ -489,6 +491,8 @@ void msrPart::decrementPartCurrentDrawingMeasurePosition (
       getPartCombinedName () <<
       " by " <<
       wholeNotesDelta <<
+      ", fPartCurrentDrawingMeasurePosition: " <<
+      fPartCurrentDrawingMeasurePosition <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -521,11 +525,12 @@ void msrPart::decrementPartCurrentDrawingMeasurePosition (
   fPartCurrentDrawingMeasurePosition -= wholeNotesDelta;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (true || gTraceOahGroup->getTraceMeasurePositions ()) {
     std::stringstream ss;
 
     ss <<
       "The new part drawing measure position is " <<
+      "fPartCurrentDrawingMeasurePosition: " <<
       fPartCurrentDrawingMeasurePosition <<
       " in part " <<
       getPartCombinedName ();
@@ -1989,7 +1994,7 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
+  if (true || gTraceOahGroup->getTraceStaves ()) {
     std::stringstream ss;
 
     ss <<
@@ -2054,7 +2059,7 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
 
   // create the staff
   int partHarmoniesStaffNumber =
-    msrPart::K_PART_HARMONIES_STAFF_NUMBER;
+    K_PART_HARMONIES_STAFF_NUMBER;
 
   S_msrStaff
     staff =
@@ -2106,7 +2111,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
 
   // create the staff
   int partFiguredBassStaffNumber =
-    msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
+    K_PART_FIGURED_BASS_STAFF_NUMBER;
 
   S_msrStaff
     staff =
@@ -2395,7 +2400,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
   // create the part harmonies staff
 #ifdef MF_TRACE_IS_ENABLED
   int partHarmoniesStaffNumber =
-    msrPart::K_PART_HARMONIES_STAFF_NUMBER;
+    K_PART_HARMONIES_STAFF_NUMBER;
 
   if (gTraceOahGroup->getTraceHarmonies ()) {
     std::stringstream ss;
@@ -2419,7 +2424,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 
   // create the part harmonies voice
   int partHarmoniesVoiceNumber =
-    msrPart::K_PART_HARMONIES_VOICE_NUMBER;
+    K_PART_HARMONIES_VOICE_NUMBER;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -2573,7 +2578,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
   // create the part figured bass staff
 #ifdef MF_TRACE_IS_ENABLED
   int partFiguredBassStaffNumber =
-    msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
+    K_PART_FIGURED_BASS_STAFF_NUMBER;
 
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
     std::stringstream ss;
@@ -2597,7 +2602,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 
   // create the figured bass voice
   int partFiguredBassVoiceNumber =
-    msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER;
+    K_PART_FIGURED_BASS_VOICE_NUMBER;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -3067,29 +3072,6 @@ void msrPart::displayPartVoicesMap (
 //     std::endl;
 // }
 
-bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
-  const S_msrStaff& first,
-  const S_msrStaff& second)
-{
-  int
-    firstStaffNumber =
-      first->getStaffNumber (),
-    secondStaffNumber =
-      second->getStaffNumber ();
-
-  if (firstStaffNumber > msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
-    firstStaffNumber -= msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
-  }
-  if (secondStaffNumber > msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
-    secondStaffNumber -= msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
-  }
-
-  bool result =
-    firstStaffNumber > secondStaffNumber;
-
-  return result;
-}
-
 void msrPart::finalizePart (
   int inputLineNumber)
 {
@@ -3129,14 +3111,14 @@ void msrPart::finalizePart (
     // figured bass below the part
     if (false) // JMI v0.9.67
     fPartAllStavesList.sort (
-      compareStavesToHaveFiguredBassesBelowCorrespondingPart);
+      msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
     // finalize all the staves
-  for (S_msrStaff staff : fPartAllStavesList) {
-    staff->
-      finalizeStaff (
-        inputLineNumber);
-    } // for
+    for (S_msrStaff staff : fPartAllStavesList) {
+      staff->
+        finalizeStaff (
+          inputLineNumber);
+      } // for
   }
 
   // set score instrument names max lengthes if relevant
@@ -3171,7 +3153,7 @@ void msrPart::finalizePartClone (
     // sort the staves to have harmonies above and figured bass below the part
     if (false) // JMI v0.9.67
     fPartAllStavesList.sort (
-      compareStavesToHaveFiguredBassesBelowCorrespondingPart);
+       msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
     // finalize all the staves
   for (S_msrStaff staff : fPartAllStavesList) {

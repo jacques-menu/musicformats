@@ -553,6 +553,10 @@ void xml2gmnRegularHandler::createPartsRegularGroup ()
   group->
     appendSubGroupToGroup (subGroup);
 
+  // MXSR events
+
+  registerAtomInRegularSubgroup ("use-mxsr-events", subGroup);
+
   // atoms
 
   registerAtomInRegularSubgroup ("ignore-musicxml-part-with-id", subGroup);

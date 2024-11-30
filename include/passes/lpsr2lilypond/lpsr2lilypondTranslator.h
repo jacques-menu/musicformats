@@ -947,6 +947,11 @@ class EXP lpsr2lilypondTranslator :
     void                  generateStemIfNeededAndUpdateCurrentStemKind (
                             const S_msrStem& stem);
 
+    // slurs
+
+    // the LilyPond \slur* commands have a persistent effect, hence:
+    msrPlacementKind      fCurrentSlurPlacementKind;
+
     // articulations
 
     msrDirectionKind      fCurrentArpeggioDirectionKind;

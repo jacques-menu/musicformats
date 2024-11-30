@@ -6281,6 +6281,28 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
+//
+//         // should an initial staff change be created?
+//         int
+//           firstNoteStaffNumber =
+//             fFirstNoteCloneInVoice->getNoteStaffNumber ();
+//
+//         if (firstNoteStaffNumber > 1) { // 1 is the default LilyPond staff number
+//           // create the voice staff change
+//           S_msrVoiceStaffChange
+//             voiceStaffChange =
+//               msrVoiceStaffChange::create (
+//                 elt->getInputStartLineNumber (),
+//                 gNullMeasure,  // JMI v0.9.72 ???  // set later in setMeasureElementUpLinkToMeasure()
+//                 previousNoteStaff,
+//                 currentNoteStaff);
+//
+//           // append it to the previous note's voice
+//           // before the note itself is appended
+//           fCurrentPartVoicesVector [fVoiceNumberToInsertInto]->
+//             appendVoiceStaffChangeToVoice (
+//               voiceStaffChange);
+//         }
       }
 
       fOnGoingNonGraceNote = true;

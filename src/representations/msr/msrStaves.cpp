@@ -14,6 +14,7 @@
 #include "visitor.h"
 
 #include "mfPreprocessorSettings.h"
+#include "mfConstants.h"
 
 #include "mfAssert.h"
 #include "mfConstants.h"
@@ -205,12 +206,12 @@ void msrStaff::initializeStaff ()
 
     case msrStaffKind::kStaffKindFiguredBass:
     /* JMI
-      if (fStaffNumber != msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
+      if (fStaffNumber != K_PART_FIGURED_BASS_STAFF_NUMBER) {
         std::stringstream ss;
 
         ss <<
           "figured bass staff number " << fStaffNumber <<
-          " is not equal to " << msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
+          " is not equal to " << K_PART_FIGURED_BASS_STAFF_NUMBER;
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
@@ -529,21 +530,9 @@ void msrStaff::setStaffCurrentTimeSignature (
   fStaffCurrentTimeSignature = timeSignature;
 };
 
-std::string msrStaff::staffNumberAsString () const
+std::string msrStaff::fetchStaffNumberAsString () const
 {
-  std::string result = std::to_string (fStaffNumber);
-
-  if (fStaffNumber == msrPart::K_PART_HARMONIES_STAFF_NUMBER) {
-    result += " (msrPart::K_PART_HARMONIES_STAFF_NUMBER)";
-  }
-  else if (fStaffNumber == msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER) {
-    result += " (msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER)";
-  }
-  else {
-    // nothing more
-  }
-
-  return result;
+  return mfStaffNumberAsString (fStaffNumber);
 }
 
 /* KEEP JMI
@@ -1066,7 +1055,7 @@ void msrStaff::registerVoiceByItsNumber (
       // the corresponding voice
       if (fStaffAllVoicesList.size ()) {
         fStaffAllVoicesList.sort (
-          compareVoicesToHaveHarmoniesAboveCorrespondingVoice);
+          msrVoice::compareVoicesToHaveHarmoniesAboveCorrespondingVoice);
       }
       break;
 
@@ -1090,7 +1079,7 @@ void msrStaff::registerVoiceByItsNumber (
       // the corresponding voice
       if (fStaffAllVoicesList.size ()) {
         fStaffAllVoicesList.sort (
-          compareVoicesToHaveFiguredBassesBelowCorrespondingVoice);
+          msrVoice::compareVoicesToHaveFiguredBassesBelowCorrespondingVoice);
       }
       break;
   } // switch
@@ -1334,7 +1323,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
   // assign sequential numbers to the regular voices,
   // needed to know about voices 1, 2, 3 and 4
   fStaffRegularVoicesList.sort (
-    compareVoicesByIncreasingNumber);
+    msrVoice::compareVoicesByIncreasingNumber);
 
   if (fStaffRegularVoicesList.size ()) {
     int voiceSequentialCounter = 0;
@@ -3132,116 +3121,35 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
   --gIndenter;
 }
 
-bool msrStaff::compareVoicesByIncreasingNumber (
-  const S_msrVoice& first,
-  const S_msrVoice& second)
+bool msrStaff::compareStavesByIncreasingNumber (
+  const S_msrStaff& first,
+  const S_msrStaff& second)
 {
   return
-    first->getVoiceNumber ()
+    first->fStaffNumber
       <
-    second->getVoiceNumber ();
+    second->fStaffNumber;
 }
 
-bool msrStaff::compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
-  const S_msrVoice& first,
-  const S_msrVoice& second)
+bool msrStaff::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
+  const S_msrStaff& first,
+  const S_msrStaff& second)
 {
   int
-    firstVoiceNumber =
-      first->getVoiceNumber (),
-    secondVoiceNumber =
-      second->getVoiceNumber ();
+    firstStaffNumber =
+      first->fStaffNumber,
+    secondStaffNumber =
+      second->fStaffNumber;
 
-  if (firstVoiceNumber > K_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
-    firstVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1;
+  if (firstStaffNumber > K_PART_FIGURED_BASS_STAFF_NUMBER) {
+    firstStaffNumber -= K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
   }
-  if (secondVoiceNumber > K_VOICE_HARMONIES_VOICE_BASE_NUMBER) {
-    secondVoiceNumber -= K_VOICE_HARMONIES_VOICE_BASE_NUMBER + 1;
+  if (secondStaffNumber > K_PART_FIGURED_BASS_STAFF_NUMBER) {
+    secondStaffNumber -= K_PART_FIGURED_BASS_STAFF_NUMBER + 1;
   }
 
   bool result =
-    firstVoiceNumber < secondVoiceNumber;
-
-  return result;
-
-  /* JMI
-  switch (firstVoiceNumber) {
-    case msrVoiceKind::kVoiceKindRegular:
-      switch (secondVoiceNumber) {
-        case msrVoiceKind::kVoiceKindRegular:
-          break;
-
-        case msrVoiceKind::kVoiceKindHarmonies:
-          result =
-            secondVoiceNumber - K_VOICE_HARMONIES_VOICE_BASE_NUMBER
-              >
-            firstVoiceNumber;
-          break;
-
-        case msrVoiceKind::kVoiceKindFiguredBass:
-          break;
-      } // switch
-      break;
-
-    case msrVoiceKind::kVoiceKindDynamics:
-      break;
-
-      switch (secondVoiceNumber) {
-        case msrVoiceKind::kVoiceKindRegular:
-          result =
-            firstVoiceNumber - K_VOICE_HARMONIES_VOICE_BASE_NUMBER
-              >
-            secondVoiceNumber;
-          break;
-
-        case msrVoiceKind::kVoiceKindHarmonies:
-          break;
-
-        case msrVoiceKind::kVoiceKindFiguredBass:
-          break;
-      } // switch
-      break;
-
-    case msrVoiceKind::kVoiceKindFiguredBass:
-      switch (secondVoiceNumber) {
-        case msrVoiceKind::kVoiceKindRegular:
-          break;
-
-        case msrVoiceKind::kVoiceKindDynamics:
-          break;
-
-        case msrVoiceKind::kVoiceKindHarmonies:
-          break;
-
-        case msrVoiceKind::kVoiceKindFiguredBass:
-          break;
-      } // switch
-      break;
-  } // switch
-
-  return result;
-  */
-}
-
-bool msrStaff::compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
-  const S_msrVoice& first,
-  const S_msrVoice& second)
-{
-  int
-    firstVoiceNumber =
-      first->getVoiceNumber (),
-    secondVoiceNumber =
-      second->getVoiceNumber ();
-
-  if (firstVoiceNumber > K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
-    firstVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
-  }
-  if (secondVoiceNumber > K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) {
-    secondVoiceNumber -= K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + 1;
-  }
-
-  bool result =
-    firstVoiceNumber > secondVoiceNumber;
+    firstStaffNumber > secondStaffNumber;
 
   return result;
 }

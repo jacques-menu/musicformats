@@ -30,17 +30,36 @@ EXP extern const int K_MF_INPUT_LINE_UNKNOWN_;
 
 EXP extern const int K_STAFF_NUMBER_UNKNOWN_;
 
+EXP extern const int K_PART_HARMONIES_STAFF_NUMBER;
+
+EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER;
+
+EXP extern std::string mfStaffNumberAsString (int staffNumber);
+
 // voice numbers
 //______________________________________________________________________________
 
 EXP extern const int K_VOICE_NUMBER_UNKNOWN_;
 
+EXP extern const int K_PART_HARMONIES_VOICE_NUMBER;
 EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER;
+
+EXP extern const int K_PART_FIGURED_BASS_VOICE_NUMBER;
 EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
 
-// voice numbers and positions
+EXP extern std::string mfVoiceNumberAsString (int voiceNumber);
+
+// measure numbers
 //______________________________________________________________________________
 extern const std::string K_MEASURE_NUMBER_UNKNOWN_;
+
+EXP extern std::string mfMeasureNumberAsString (int measureNumber);
+
+// lyrics
+//______________________________________________________________________________
+
+EXP extern const std::string K_STANZA_NUMBER_UNKNOWN_;
+EXP extern const std::string K_STANZA_NAME_UNKNOWN_;
 
 // names lists max length
 //______________________________________________________________________________

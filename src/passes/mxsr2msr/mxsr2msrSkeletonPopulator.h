@@ -687,9 +687,8 @@ class EXP mxsr2msrSkeletonPopulator :
     // ------------------------------------------------------
 
                               mxsr2msrSkeletonPopulator (
-                                const S_msrScore& scoreSkeleton,
-                                mxsrEventsCollection&
-                                                  theKnownEventsCollection);
+                                const S_msrScore&     scoreSkeleton,
+                                mxsrEventsCollection& theKnownEventsCollection);
 
     virtual                   ~mxsr2msrSkeletonPopulator ();
 
@@ -815,10 +814,32 @@ class EXP mxsr2msrSkeletonPopulator :
     virtual void              visitStart (S_capo& elt);
     virtual void              visitStart (S_staff_size& elt);
 
-    // ???
+    // voices
     // ------------------------------------------------------
 
     virtual void              visitStart (S_voice& elt);
+
+    // notes
+    // ------------------------------------------------------
+
+    virtual void              visitStart (S_note& elt);
+    virtual void              visitEnd   (S_note& elt);
+
+    virtual void              visitStart (S_rest& elt);
+
+    virtual void              visitStart (S_step& elt);
+    virtual void              visitStart (S_alter& elt);
+    virtual void              visitStart (S_octave& elt);
+    virtual void              visitStart (S_duration& elt);
+    virtual void              visitStart (S_dot& elt);
+
+    virtual void              visitStart (S_stem& elt);
+
+    virtual void              visitEnd   (S_unpitched& elt);
+    virtual void              visitStart (S_display_step& elt);
+    virtual void              visitStart (S_display_octave& elt);
+
+    virtual void              visitStart (S_accidental& elt);
 
     // backup & forward
     // ------------------------------------------------------
@@ -945,7 +966,7 @@ class EXP mxsr2msrSkeletonPopulator :
     virtual void              visitStart (S_elision& elt);
     virtual void              visitStart (S_extend& elt);
 
-    // ???
+    // degrees
     // ------------------------------------------------------
 
     virtual void              visitStart (S_degree& elt);
@@ -1023,16 +1044,6 @@ class EXP mxsr2msrSkeletonPopulator :
     virtual void              visitStart (S_repeat& elt);
     virtual void              visitStart (S_ending& elt);
     virtual void              visitEnd   (S_barline& elt);
-
-    // notes
-    // ------------------------------------------------------
-
-    virtual void              visitStart (S_note& elt);
-    virtual void              visitStart (S_step& elt);
-    virtual void              visitStart (S_alter& elt);
-    virtual void              visitStart (S_octave& elt);
-    virtual void              visitStart (S_duration& elt);
-    virtual void              visitStart (S_dot& elt);
 
     // repeats
     // ------------------------------------------------------
@@ -1188,7 +1199,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     virtual void              visitStart (S_grace& elt);
 
-    // ???
+    // type
     // ------------------------------------------------------
 
     virtual void              visitStart (S_type& elt);
@@ -1198,21 +1209,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     virtual void              visitStart (S_notehead& elt);
 
-
-    // notes
-    // ------------------------------------------------------
-
-    virtual void              visitStart (S_accidental& elt);
-
-    virtual void              visitStart (S_stem& elt);
-
-    virtual void              visitEnd   (S_note& elt);
-
-    virtual void              visitStart (S_rest& elt);
-
-    virtual void              visitEnd   (S_unpitched& elt);
-    virtual void              visitStart (S_display_step& elt);
-    virtual void              visitStart (S_display_octave& elt);
 
     // chords
     // ------------------------------------------------------
@@ -1277,7 +1273,8 @@ class EXP mxsr2msrSkeletonPopulator :
     // the score notes events we know from  mxsr2msrSkeletonBuilder
     // ------------------------------------------------------
 
-    mxsrEventsCollection&  fKnownEventsCollection;
+    mxsrEventsCollection&     fKnownEventsCollection;
+//     int                       fEventSequentialNumber;
 
 
     // part handling
@@ -1428,8 +1425,6 @@ class EXP mxsr2msrSkeletonPopulator :
     // staff handling
     // ------------------------------------------------------
 
-    int                       fCurrentMusicXMLStaffNumber; // used throughout
-
     std::vector<S_msrStaff>   fCurrentPartStavesVector;
 
     void                      populateCurrentPartStavesVectorFromPart (
@@ -1442,8 +1437,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // voices handling
     // ------------------------------------------------------
-
-    int                       fCurrentMusicXMLVoiceNumber; // used throughout
 
     S_msrMeasureElement       fPreviousMeasureElement;
 
@@ -1546,29 +1539,37 @@ class EXP mxsr2msrSkeletonPopulator :
     // notes handling
     // ------------------------------------------------------
 
+    int                       fCurrentNoteStaffNumber;
+    int                       fPreviousNoteStaffNumber;
+
+    int                       fCurrentNoteVoiceNumber; // used throughout
+
     S_msrNote                 fCurrentNote;
 
-    int                       fVoiceNumberToInsertInto;
-
-    void                      populateCurrentNoteAndAppendItToCurrentRecipientVoice (
+    void                      handleCurrentNote (
                                 int inputLineNumber);
 
     // detailed notes handling
     void                      attachPendingGraceNotesGroupToNoteIfRelevant (
                                 int inputLineNumber);
 
-    void                      handleNonChordNorTupletNoteOrRest ();
+    void                      handleStandAloneNoteOrRest ();
 
-    void                      handleNoteBelongingToAChord (
+    void                      handleGraceNote (); // JMI v0.9.72
+
+    void                      handleChordMemberNote_EVENTS (
                                 const S_msrNote& newChordNote);
 
-    void                      handleNoteBelongingToATuplet (
+    void                      handleChordMemberNote (
+                                const S_msrNote& newChordNote);
+
+    void                      handleTupletMemberNote (
 																const S_msrNote& note);
 
-    void                      handleNoteBelongingToAChordInATuplet (
+    void                      handleChordMemberNoteInATuplet (
                                 const S_msrNote& newChordNote);
 
-    void                      handleNoteBelongingToAChordInAGraceNotesGroup (
+    void                      handleChordMemberNoteInAGraceNotesGroup (
                                 const S_msrNote& newChordNote);
 
     // staff changes detection
@@ -1576,25 +1577,40 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // MusicXMl contains sequences of elements on one and the same staff,
     // until a <backup/> or <forward/> markup may change the latter
-    // or an element has not the same staff/voice numbers pair
+    // or some note in not in the same staff
 
-    // a staff change occurs when the staff number changes,
-    // in which case both the staff change element and the note
-    // remain in the same voice, hence fCurrentRecipientVoice,
+    // such a staff change occurs when the staff number changes
+    // whilst the voice number remains the same
+    // hence the use of fCurrentRecipientStaffNumber,
     // which doesnt change in case of a staff change
 
+    // fCurrentRecipientStaffNumber is that of the staff that contains the note
+    int                       fCurrentRecipientStaffNumber;
+
+    // fCurrentDisplayStaffNumber is that where the notes are displayed
+    // for the duration of the staff change
+    int                       fCurrentDisplayStaffNumber;
 //     S_msrVoice                fCurrentRecipientVoice;
 
-    int                       fPreviousNoteMusicXMLStaffNumber;
+    // fCurrentNoteStaffChangeEvent contains the staff change event
+    // that occurs on a take off note, if any
+    S_mxsrStaffChangeEvent    fCurrentNoteStaffChangeEvent; // EVENTS
 
-    msrStaffChangeKind        fCurrentStaffChangeKind;
-    Bool                      fCurrentNoteIsCrossStaves;
+    // an ongoing staff change is indicated by ??? JMI v0.9.72
+    //   fCurrentDisplayStaffNumber != fCurrentRecipientStaffNumber
+    Bool                      fOnGoingStaffChange;
+
+//     msrStaffChangeKind        fCurrentStaffChangeKind;
+//     Bool                      fCurrentNoteIsCrossStaves;
 
     // cross staff chords
-    int                       fCurrentChordStaffNumber;
+//     int                       fCurrentChordStaffNumber;
 
-    Bool                      thereIsAStaffChange (
-                                int inputLineNumber);
+//     Bool                      thereIsAStaffChange (
+//                                 int inputLineNumber);
+
+    // print v0.9.72
+    // ------------------------------------------------------
 
 		void											displayStaffAndVoiceInformation (
                                 int                inputLineNumber,
@@ -1610,7 +1626,15 @@ class EXP mxsr2msrSkeletonPopulator :
 //     void                      attachPendingFiguredBassesToCurrentNote ( // JMI v0.9.67
 //                                 int               inputLineNumber);
 
+    void                      attachThePendingDalSegnosIfAny ();
+
     S_msrNote                 createNote (
+                                int inputLineNumber);
+
+    void                      handleStaffChangeIfAny (
+                                int inputLineNumber);
+
+    void                      finalizeTupletIfAny (
                                 int inputLineNumber);
 
     void                      populateCurrentNoteBeforeItIsHandled (
@@ -2114,7 +2138,8 @@ class EXP mxsr2msrSkeletonPopulator :
     // notes/rests handling
     // ------------------------------------------------------
 
-    // we use a pair containing the staff and voice numbers: JMI v0.9.70
+    int                       fCurrentNoteSequentialNumber; // EVENTS
+
     std::map<std::pair<int, int>, S_msrNote>
                               fVoicesLastMetNoteMap;
 
@@ -2479,6 +2504,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // chords handling
     // ------------------------------------------------------
 
+    S_mxsrChordEvent          fCurrentNoteChordEvent; // EVENTS
     Bool                      fCurrentNoteBelongsToAChord;
 
 /* JMI v0.9.70
@@ -2512,6 +2538,8 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // tuplets handling
     // ------------------------------------------------------
+
+    S_mxsrTupletEvent         fCurrentNoteTupletEvent; // EVENTS
 
     Bool                      fCurrentNoteHasATimeModification;
 
@@ -2591,10 +2619,10 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleTupletStop (
                                 const S_msrNote&  note,
                                 const S_msrVoice& currentNoteVoice);
-//
-    void                      reduceTupletStackTop (
-                                const S_msrNote&  note,
-                                const S_msrVoice& currentNoteVoice);
+
+//     void                      reduceTupletStackTop (
+//                                 const S_msrNote&  note,
+//                                 const S_msrVoice& currentNoteVoice);
 
 
     // ties handling

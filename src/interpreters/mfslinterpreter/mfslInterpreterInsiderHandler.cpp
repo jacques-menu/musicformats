@@ -103,14 +103,14 @@ void mfslInterpreterInsiderHandler::initializeHandlerMultiComponent ()
 
 std::string mfslInterpreterInsiderHandler::usageInformation ()
 {
-  stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
 R"(Usage: mfsl [option]*
 )" <<
     endl;
 
-  return s.str ();
+  return ss.str ();
 }
 
 std::string mfslInterpreterInsiderHandler::handlerServiceAboutInformation () const
@@ -259,9 +259,9 @@ void mfslInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 /* JMI
 
   if (inputSourceName.size () > 0 && inputSourceName == outputFileName) {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << inputSourceName << "\" is both the input and output file name";
 
     oahError (s.str ());
@@ -271,18 +271,18 @@ void mfslInterpreterInsiderOahGroup::checkGroupOptionsConsistency ()
 
 
   if (! fOutputFileName.size ()) {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "mfslInterpreterInsiderOahGroup: a MusicXML output file name must be chosen with '-o, -output-file-name";
 
     oahError (s.str ());
   }
 
   else if (fOutputFileName == gServiceRunData->getInputSourceName ()) {
-    stringstream s;
+    std::stringstream ss;
 
-    s <<
+    ss <<
       "\"" << fOutputFileName << "\" is both the input and output file name";
 
     oahError (s.str ());

@@ -3016,14 +3016,14 @@ void ischemeDriver::scanBegin ()
 
   else if (!(yyin = fopen (fScriptName.c_str (), "r")))
     {
-      stringstream s;
+      std::stringstream ss;
 
       char*
         errorString =
           mfStrErrorCString ();
 
       if (errorString != nullptr) {
-        s <<
+        ss <<
           "cannot open " <<
           fScriptName << ": " <<
           errorString <<
@@ -3031,7 +3031,7 @@ void ischemeDriver::scanBegin ()
 
         ischemeFileError (
           fScriptName,
-          s.str ());
+          ss.str ());
       }
     }
 }

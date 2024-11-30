@@ -305,7 +305,7 @@ class EXP msrNote : public msrTupletElement
                             const msrWholeNotes& wholeNotes,
                             const std::string&   context)
                               {
-//                                 setMeasureElementSoundingWholeNotes (
+//                                 setMeasureElementSoundingWholeNotes ( v0.9.72 JMI
 //                                   wholeNotes, context);
                               }
 
@@ -441,7 +441,7 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteBelongsToATuplet; }
 
     // grace notes
-    Bool                  getNoteIsAGraceNote () const
+    Bool                  fetchNoteIsAGraceNote () const
                               {
                                 return
                                   fNoteKind ==

@@ -2,7 +2,7 @@
 
 #
 #   MusicFormats Library
-#   Copyright (C) Jacques Menu 2016-2023
+#   Copyright (C) Jacques Menu 2016-2024
 #
 #   This Source Code Form is subject to the terms of the Mozilla Public
 #   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -11,13 +11,13 @@
 #   https://github.com/jacques-menu/musicformats
 #
 
-#set -x
+# set -x
 
 function usage ()
   {
     echo "An argument is expected."
     echo "Usage is:"
-    echo "  $0 DATE"
+    echo " $0 [DATE | today]"
     exit 1
   }
 
@@ -36,6 +36,12 @@ LIBMUSICFORMATS_GIT=${HOME}/musicformats-git-dev
 [ $# != 1 ] && usage
 
 VERSION_DATE=$1
+
+if [[ ${VERSION_DATE} == "today" ]]; then
+  VERSION_DATE=$(date +"%B %d, %Y")
+fi
+
+echo "==> VERSION_DATE : ${VERSION_DATE}"
 
 VERSION_DATE_FILE_NAME_ROOT="MusicFormatsVersionDate"
 
@@ -76,4 +82,4 @@ ls -salGTF ${VERSION_DATE_HEADER_NAME}
 cat ${VERSION_DATE_HEADER_NAME}
 
 
-#set +x
+# set +x

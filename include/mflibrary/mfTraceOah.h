@@ -198,7 +198,7 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceStavesDetails () const
                               { return fTraceStavesDetails; }
 
-    // MXSR events
+    // MXSR events (temporary from v0.9.72)
     void                  setTraceMxsrEvents ()
                               { fTraceMxsrEvents = true; }
     Bool                  getTraceMxsrEvents () const

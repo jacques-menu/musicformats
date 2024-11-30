@@ -33,36 +33,29 @@ namespace MusicFormats
 S_msrVoiceStaffChange msrVoiceStaffChange::create (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  const S_msrStaff&   staffToChangeTo)
+  const S_msrStaff&   takeOffStaff,
+  const S_msrStaff&   landingStaff)
 {
   msrVoiceStaffChange* obj =
     new msrVoiceStaffChange (
       inputLineNumber,
       upLinkToMeasure,
-      staffToChangeTo);
+      takeOffStaff,
+      landingStaff);
   assert (obj != nullptr);
   return obj;
-}
-
-S_msrVoiceStaffChange msrVoiceStaffChange::create (
-  int                 inputLineNumber,
-  const S_msrStaff&   staffToChangeTo)
-{
-  return
-    msrVoiceStaffChange::create (
-      inputLineNumber,
-      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-      staffToChangeTo);
 }
 
 msrVoiceStaffChange::msrVoiceStaffChange (
   int                 inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  const S_msrStaff&   staffToChangeTo)
+  const S_msrStaff&   takeOffStaff,
+  const S_msrStaff&   landingStaff)
     : msrMeasureElement (
         inputLineNumber)
 {
-  fStaffToChangeTo = staffToChangeTo;
+  fTakeOffStaff = takeOffStaff;
+  fLandingStaff = landingStaff;
 }
 
 msrVoiceStaffChange::~msrVoiceStaffChange ()
@@ -90,7 +83,8 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
       msrVoiceStaffChange::create (
         fInputStartLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-        fStaffToChangeTo);
+        fTakeOffStaff,
+        fLandingStaff);
 
   return newbornClone;
 }
@@ -206,9 +200,9 @@ std::string msrVoiceStaffChange::asString () const
 
   ss <<
     "[VoiceStaffChange" <<
+    ", fTakeOffStaff: " << fTakeOffStaff->getStaffName () <<
+    ", fLandingStaff: " << fLandingStaff->getStaffName () <<
     ", line " << fInputStartLineNumber <<
-    ", " <<
-    "staffToChangeTo: \"" << fStaffToChangeTo->getStaffName () << "\"" <<
     ']';
 
   return ss.str ();
@@ -216,7 +210,25 @@ std::string msrVoiceStaffChange::asString () const
 
 void msrVoiceStaffChange::print (std::ostream& os) const
 {
-  os << asString () << std::endl;
+  os <<
+    "[VoiceStaffChange" <<
+    ", line " << fInputStartLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 14;
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTakeOffStaff" << " : " << fTakeOffStaff->getStaffName () <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fLandingStaff" << " : " << fLandingStaff->getStaffName () <<
+    std::endl;
+
+  --gIndenter;
+
+  os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const S_msrVoiceStaffChange& elt)

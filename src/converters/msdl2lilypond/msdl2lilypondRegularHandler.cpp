@@ -497,6 +497,10 @@ void msdl2lilypondRegularHandler::createPartsRegularGroup ()
   group->
     appendSubGroupToGroup (subGroup);
 
+  // MXSR events
+
+  registerAtomInRegularSubgroup ("use-mxsr-events", subGroup);
+
   // atoms
 
   registerAtomInRegularSubgroup ("ignore-musicxml-part-with-id", subGroup);
@@ -867,6 +871,8 @@ void msdl2lilypondRegularHandler::createNotesRegularGroup ()
   registerAtomInRegularSubgroup ("generate-notes-beams", subGroup);
 
   registerAtomInRegularSubgroup ("generate-stems-directions", subGroup);
+
+  registerAtomInRegularSubgroup ("generate-slurs-directions", subGroup);
 
   registerAtomInRegularSubgroup ("generate-commented-out-lilypond-variables", subGroup);
   registerAtomInRegularSubgroup ("generate-lpsr-visiting-information", subGroup);

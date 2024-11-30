@@ -5112,22 +5112,27 @@ R"(Generate initial comments showing the LilyPond generation informations.)",
   // comments
   // --------------------------------------
 
-  subGroup->
-    appendAtomToSubGroup (
+  S_oahBooleanAtom
+    fLilypondCommentsAtom =
       oahBooleanAtom::create (
         "lilypond-comments", "lilycoms",
 R"(Generate comments showing the structure of the score
 such as '% part P_POne (P1).)",
         "fLilypondComments",
-        fLilypondComments));
+        fLilypondComments);
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "lilypond-useful-fragments-comments", "lilyusefulgragscoms",
-R"(Generate comments upon the use of useful fragments such as cLilypondParallelMusicOpener.)",
-        "fLilypondUsefulFragmentsComments",
-        fLilypondUsefulFragmentsComments));
+      fLilypondCommentsAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahTwoBooleansAtom::create (
+        "lilypond-fragments-comments", "lilyfragscoms",
+R"(Generate comments upon the use of fragments such as cLilypondParallelMusicOpener.)",
+        "fLilypondFragmentsComments",
+        fLilypondFragmentsComments,
+        fLilypondCommentsAtom));
 
   // global
   // --------------------------------------
@@ -5336,6 +5341,18 @@ R"(Generate \stem* commands in the LilyPond code.
 The default is to leave it to LilyPond itself to choose the orientation of stems.)",
         "fGenerateStemsDirections",
         fGenerateStemsDirections));
+
+  // slurs directions
+  // --------------------------------------
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "generate-slurs-directions", "gslursdir",
+R"(Generate \slurs* commands in the LilyPond code.
+The default is to leave it to LilyPond itself to choose the orientation of slurs.)",
+        "fGenerateSlursDirections",
+        fGenerateSlursDirections));
 
   // white note heads
   // --------------------------------------
@@ -6418,8 +6435,8 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     std::setw (valueFieldWidth) << "fLilypondComments" << ": " <<
       fLilypondComments <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fLilypondUsefulFragmentsComments" << ": " <<
-      fLilypondUsefulFragmentsComments <<
+    std::setw (valueFieldWidth) << "fLilypondFragmentsComments" << ": " <<
+      fLilypondFragmentsComments <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fGlobal" << ": " <<
@@ -6456,6 +6473,10 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
 
     std::setw (valueFieldWidth) << "fGenerateStemsDirections" << ": " <<
       fGenerateStemsDirections <<
+      std::endl <<
+
+    std::setw (valueFieldWidth) << "fGenerateSlursDirections" << ": " <<
+      fGenerateSlursDirections <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fWhiteNoteHeads" << ": " <<
@@ -7003,8 +7024,8 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
     std::setw (fieldWidth) << "fLilypondComments" << ": " <<
       fLilypondComments <<
       std::endl <<
-    std::setw (fieldWidth) << "fLilypondUsefulFragmentsComments" << ": " <<
-      fLilypondUsefulFragmentsComments <<
+    std::setw (fieldWidth) << "fLilypondFragmentsComments" << ": " <<
+      fLilypondFragmentsComments <<
       std::endl <<
 
     std::setw (fieldWidth) << "fGlobal" << ": " <<
@@ -7037,6 +7058,10 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
 
     std::setw (fieldWidth) << "fGenerateStemsDirections" << ": " <<
       fGenerateStemsDirections <<
+      std::endl <<
+
+    std::setw (fieldWidth) << "fGenerateSlursDirections" << ": " <<
+      fGenerateSlursDirections <<
       std::endl <<
 
     std::setw (fieldWidth) << "fWhiteNoteHeads" << ": " <<

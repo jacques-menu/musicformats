@@ -88,9 +88,9 @@ EXP void stringMatcherOptionsIncompatibilityError (
   const S_oahAtom atom1,
   const S_oahAtom atom2)
 {
-  stringstream s;
+  std::stringstream ss;
 
-  s <<
+  ss <<
     "### stringMatcher options incompatibility: " <<
     atom1->fetchNamesBetweenQuotes () <<
     " and " <<
@@ -98,7 +98,7 @@ EXP void stringMatcherOptionsIncompatibilityError (
     " are incompatible" <<
     endl;
 
-  std::string message = s.str ();
+  std::string message = ss.str ();
 
   if (! gWaeOahGroup->getDontShowErrors ()) { // JMI
     throw stringMatcherException (message);

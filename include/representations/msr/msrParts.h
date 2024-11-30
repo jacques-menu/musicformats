@@ -34,15 +34,6 @@ class EXP msrPart : public msrPartGroupElement
 {
   public:
 
-    // constants
-    // ------------------------------------------------------
-
-    static const int      K_PART_HARMONIES_STAFF_NUMBER;
-    static const int      K_PART_HARMONIES_VOICE_NUMBER;
-
-    static const int      K_PART_FIGURED_BASS_STAFF_NUMBER;
-    static const int      K_PART_FIGURED_BASS_VOICE_NUMBER;
-
   public:
 
     // creation from MusicXML
@@ -781,12 +772,6 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  registerStaffInPart (
                             const S_msrStaff& staff);
-
-    // figured bass
-
-    static bool           compareStavesToHaveFiguredBassesBelowCorrespondingPart (
-                            const S_msrStaff& first,
-                            const S_msrStaff& second);
 
   private:
 

@@ -134,9 +134,9 @@ bool mxsrPartGroup::comparePartGroupsByIncreasingIdentity (
 	const S_mxsrPartGroup& second)
 {
   return
-    first->getPartGroupIdentity()
+    first->fPartGroupIdentity
       <
-    second->getPartGroupIdentity();
+    second->fPartGroupIdentity;
 }
 
 bool mxsrPartGroup::comparePartGroupsByDecreasingIdentity (
@@ -144,9 +144,9 @@ bool mxsrPartGroup::comparePartGroupsByDecreasingIdentity (
 	const S_mxsrPartGroup& second)
 {
   return
-    first->getPartGroupIdentity()
+    first->fPartGroupIdentity
       >=
-    second->getPartGroupIdentity();
+    second->fPartGroupIdentity;
 }
 
 std::string mxsrPartGroup::asString () const
@@ -522,7 +522,7 @@ mxsr2msrPendingTupletStop::mxsr2msrPendingTupletStop (
 	int eventInputEndLineNumber)
 {
   fEventSequentialNumber = eventSequentialNumber;
-  fNoteSequentialNumber  = noteSequentialNumber;
+  fNoteSequentialNumber = noteSequentialNumber;
 
 	fStaffNumber = staffNumber;
   fVoiceNumber = voiceNumber;
@@ -653,20 +653,18 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
   fScoreMeasuresNumber = 0;
   fPartNumberOfMeasures = 0;
 
-	// events handling
-	fCurrentEventSequentialNumber = 0;
-
 	// notes handling
 	fCurrentNoteSequentialNumber = 0;
 	fPreviousNoteSequentialNumber = 0;
 
-	fCurrentNoteStartInputLineNumber = -1;
-	fCurrentNoteEndInputLineNumber = -1;
+	fCurrentNoteStartInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
+	fCurrentNoteEndInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
 
-	fPreviousNoteStartInputLineNumber = -1;
-	fPreviousNoteEndInputLineNumber = -1;
+	fPreviousNoteStartInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
+	fPreviousNoteEndInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
 
 	// staff changes handling
+	fCurrentStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 	fPreviousNoteIsATakeOffCandidate = false;
 
   // chords handling
@@ -682,8 +680,8 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
   fCurrentNoteBelongsToATuplet = false;
 
   // lyrics handling
-  fCurrentStanzaNumber = msrStanza::K_STANZA_NUMBER_UNKNOWN_; // JMI
-  fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN_; // JMI
+  fCurrentStanzaNumber = K_STANZA_NUMBER_UNKNOWN_; // JMI
+  fCurrentStanzaName = K_STANZA_NAME_UNKNOWN_; // JMI
 
   // harmonies handling
   fHarmoniesVoicesCounter = 0;
@@ -745,7 +743,7 @@ S_mxsrPartGroup mxsr2msrSkeletonBuilder::fetchStartedPartGroupFromMap (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartGroupsMap (
-  int InputLineNumber)
+  int inputLineNumber)
 {
   gLog <<
     "fPartGroupsMap, " <<
@@ -774,7 +772,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsMap (
 
         theMsrPartGroup->
           displayPartGroupElementsList (
-            InputLineNumber);
+            inputLineNumber);
 
         --gIndenter;
     } // for
@@ -795,7 +793,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsMap (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartsMap (
-  int InputLineNumber)
+  int inputLineNumber)
 {
   gLog <<
     "fPartsMap," <<
@@ -839,7 +837,7 @@ void mxsr2msrSkeletonBuilder::displayPartsMap (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayStartedPartGroupsMap (
-  int InputLineNumber)
+  int inputLineNumber)
 {
   gLog <<
     "fStartedPartGroupsMap, " <<
@@ -868,7 +866,7 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsMap (
 
         theMsrPartGroup->
           displayPartGroupElementsList (
-            InputLineNumber);
+            inputLineNumber);
 
         --gIndenter;
     } // for
@@ -889,7 +887,7 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsMap (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartGroupsStack (
-  int InputLineNumber)
+  int inputLineNumber)
 {
   gLog <<
     "fPartGroupsStack, " <<
@@ -914,7 +912,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsStack (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartGroupsVector (
-  int InputLineNumber)
+  int inputLineNumber)
 {
   gLog <<
     "fPartGroupsVector, " <<
@@ -936,7 +934,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsVector (
     gLog <<
       i << ": " <<
 			theMsrPartGroup->asString () <<
-      ", line " << InputLineNumber <<
+      ", line " << inputLineNumber <<
       std::endl;
   } // for
 
@@ -949,7 +947,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsVector (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayStartedPartGroupsVector (
-  int InputLineNumber)
+  int inputLineNumber)
 {
   gLog <<
     "fStartedPartGroupsListsVector, " <<
@@ -988,7 +986,7 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsVector (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayStoppedPartGroupsVector (
-  int InputLineNumber)
+  int inputLineNumber)
 {
   gLog <<
     "fStoppedPartGroupsListsVector, " <<
@@ -1026,7 +1024,7 @@ void mxsr2msrSkeletonBuilder::displayStoppedPartGroupsVector (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartsVector (
-  int InputLineNumber)
+  int inputLineNumber)
 {
   gLog <<
     "fPartsVector, " <<
@@ -1064,7 +1062,7 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
       }
 
       gLog <<
-        ", line " << InputLineNumber <<
+        ", line " << inputLineNumber <<
         std::endl;
     } // for
 
@@ -1084,7 +1082,7 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayAllCollectedData (
-  int                InputLineNumber,
+  int                inputLineNumber,
   const std::string& context)
 {
   gLog <<
@@ -1092,7 +1090,7 @@ void mxsr2msrSkeletonBuilder::displayAllCollectedData (
     "=======> displayAllCollectedData(), " <<
     context <<
     ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity<<
-    ", line " << InputLineNumber <<
+    ", line " << inputLineNumber <<
     ":" <<
     std::endl <<
     ">>> ================================================" <<
@@ -1100,38 +1098,38 @@ void mxsr2msrSkeletonBuilder::displayAllCollectedData (
 
 	// part groups stack
 	displayPartGroupsStack (
-		InputLineNumber);
+		inputLineNumber);
   gLog << std::endl;
 
 	// part groups map
   displayPartGroupsMap (
-    InputLineNumber);
+    inputLineNumber);
   gLog << std::endl;
 
 	// parts map
   displayPartsMap (
-    InputLineNumber);
+    inputLineNumber);
   gLog << std::endl;
 
 //   displayPartsVector (
-//     InputLineNumber);
+//     inputLineNumber);
 //   gLog << std::endl;
 
 //   displayStartedPartGroupsMap (
-//     InputLineNumber);
+//     inputLineNumber);
 //   gLog << std::endl;
 //
 //   displayPartGroupsVector (
-//     InputLineNumber);
+//     inputLineNumber);
 //   gLog << std::endl;
 
 	// part groups identitys
 //   displayStartedPartGroupsVector (
-//     InputLineNumber);
+//     inputLineNumber);
 //   gLog << std::endl;
 //
 //   displayStoppedPartGroupsVector (
-//     InputLineNumber);
+//     inputLineNumber);
 //   gLog << std::endl;
 
   gLog <<
@@ -1141,7 +1139,7 @@ void mxsr2msrSkeletonBuilder::displayAllCollectedData (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPart (
-  int              InputLineNumber,
+  int              inputLineNumber,
   const S_msrPart& theMsrPart)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1152,7 +1150,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
       "Registering MSR part " <<
       theMsrPart->getPartCombinedName () <<
       " in the parts data" <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1184,10 +1182,10 @@ void mxsr2msrSkeletonBuilder::registerPart (
       "AFTER registering MSR part \"" <<
       theMsrPart->getPartCombinedName () <<
       "\" in the parts data" <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1195,7 +1193,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupStart (
-  int                    InputLineNumber,
+  int                    inputLineNumber,
   const S_mxsrPartGroup& partGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1205,7 +1203,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
     ss <<
       "Registering part group start for " <<
       partGroup->fetchMsrPartGroupCombinedName () <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1216,7 +1214,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "BEFORE registerPartGroupStart()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1231,7 +1229,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 			"Pushing part group " <<
 			partGroup->asString () <<
 			" onto the part groups stack" <<
-			", line " << InputLineNumber;
+			", line " << inputLineNumber;
 
 		gWaeHandler->waeTrace (
 			__FILE__, __LINE__,
@@ -1271,7 +1269,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
       ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity;
 
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1282,7 +1280,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "AFTER registerPartGroupStart()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1290,7 +1288,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupStop (
-  int                    InputLineNumber,
+  int                    inputLineNumber,
   const S_mxsrPartGroup& partGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1300,7 +1298,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
     ss <<
       "Registering part group stop for " <<
       partGroup->fetchMsrPartGroupCombinedName () <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1315,11 +1313,11 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 			"Cannot stop part group " <<
 			partGroup->asString () <<
 			", since the part groups groups stack is empty"<<
-			", line " << InputLineNumber;
+			", line " << inputLineNumber;
 
 		musicxmlError (
 			gServiceRunData->getInputSourceName (),
-			InputLineNumber,
+			inputLineNumber,
 			__FILE__, __LINE__,
 			ss.str ());
 	}
@@ -1342,7 +1340,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 				partGroupStackTop->
 					fetchMsrPartGroupCombinedName () <<
 				" from the stack" <<
-				", line " << InputLineNumber;
+				", line " << inputLineNumber;
 
 			gWaeHandler->waeTrace (
 				__FILE__, __LINE__,
@@ -1359,7 +1357,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 
 		// partGroupStackTop is nested in newPartGroupStackTop,
 		handlePartGroupsNesting (
-			InputLineNumber,
+			inputLineNumber,
 			partGroup,
 			newPartGroupStackTop);
 	}
@@ -1377,7 +1375,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 				" is out of order, it does not match the part group stack top " <<
 				partGroupStackTop->
 					fetchMsrPartGroupCombinedName () <<
-				", line " << InputLineNumber;
+				", line " << inputLineNumber;
 
 			gWaeHandler->waeTrace (
 				__FILE__, __LINE__,
@@ -1392,7 +1390,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 //     ss <<
 //       "staff number " << fCurrentNoteStaffNumber <<
 //       " is not positive" <<
-//       ", line " << InputLineNumber;
+//       ", line " << inputLineNumber;
 //
 //       mfAssert (
 //         __FILE__, __LINE__,
@@ -1428,7 +1426,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 //       ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity;
 //
 //     displayAllCollectedData (
-//       InputLineNumber,
+//       inputLineNumber,
 //       ss.str ());
 //   }
 // #endif // MF_TRACE_IS_ENABLED
@@ -1439,7 +1437,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "AFTER handlePartGroupStop()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1447,7 +1445,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handlePartGroupStart (
-  int InputLineNumber)
+  int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -1456,7 +1454,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
     ss <<
       "Hangling part group start with number '" <<
       fCurrentPartGroupNumber <<
-      "', line " << InputLineNumber;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1467,7 +1465,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "BEFORE handlePartGroupStart()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1482,7 +1480,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
   S_msrPartGroup
     startedPartGroup =
       msrPartGroup::create (
-        InputLineNumber,
+        inputLineNumber,
         fCurrentPartGroupNumber,
         fCurrentPartGroupIdentity,
         fCurrentPartGroupName,
@@ -1503,20 +1501,20 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
   S_mxsrPartGroup
     partGroup =
       mxsrPartGroup::create (
-        InputLineNumber,
+        inputLineNumber,
         fCurrentPartGroupNumber,
         startedPartGroup,
         fCurrentPartGroupIdentity) ;
 
   // register it in the part groups data
   registerPartGroupStart (
-    InputLineNumber,
+    inputLineNumber,
     partGroup);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "AFTER handlePartGroupStart()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1524,7 +1522,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handlePartGroupStop (
-  int InputLineNumber)
+  int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -1533,7 +1531,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
     ss <<
       "Hangling part group stop with number '" <<
       fCurrentPartGroupNumber <<
-      "', line " << InputLineNumber;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1545,7 +1543,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "BEFORE handlePartGroupStop()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1563,12 +1561,12 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
     ss <<
       "no part group '" << fCurrentPartGroupNumber <<
       "' has been started, it cannot be stopped" <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
  // JMI   musicxmlError (
     musicxmlWarning (
       gServiceRunData->getInputSourceName (),
-      InputLineNumber,
+      inputLineNumber,
   //    __FILE__, __LINE__,
       ss.str ());
   }
@@ -1576,14 +1574,14 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
   else {
     // register partGroupToBeStopped as stopped
     registerPartGroupStop (
-      InputLineNumber,
+      inputLineNumber,
       partGroupToBeStopped);
   }
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "AFTER handlePartGroupStop()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1591,7 +1589,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
-  int                    InputLineNumber,
+  int                    inputLineNumber,
   const S_mxsrPartGroup& partGroupToBeStopped,
   const S_mxsrPartGroup& containingPartGroup)
 {
@@ -1615,7 +1613,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
       "' into " <<
       theMsrContainingPartGroup->
         getPartGroupCombinedName () <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1635,7 +1633,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
       "' to " <<
       theMsrContainingPartGroup->
         getPartGroupCombinedName () <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1645,7 +1643,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
 
   theMsrPartGroupToBeStopped->
     setPartGroupUpLinkToContainingPartGroup (
-    	InputLineNumber,
+    	inputLineNumber,
       theMsrContainingPartGroup);
 
   // append currentPartGroup to containingPartGroup
@@ -1660,7 +1658,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
       "' to " <<
       theMsrContainingPartGroup->
         getPartGroupCombinedName () <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1675,7 +1673,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrScore (
-	int InputLineNumber)
+	int inputLineNumber)
 {
   // an implicit outer-most part group has to be created to contain everything,
   // since there can be parts out of any explicit part group in MusicXML
@@ -1692,7 +1690,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
     ss <<
       "Creating an implicit outer-most part group with number '" <<
       fCurrentPartGroupNumber <<
-      "', line " << InputLineNumber;
+      "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1703,7 +1701,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "BEFORE createTheImplicitOuterPartGroupAndAddItToTheMsrScore()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1713,7 +1711,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 	// create fImplicitOuterMostMsrPartGroup
   fImplicitOuterMostMsrPartGroup =
 		msrPartGroup::create (
-      InputLineNumber,
+      inputLineNumber,
       fCurrentPartGroupNumber,
       fCurrentPartGroupIdentity,
       "***IMPLICIT OUTER-MOST PART GROUP***", 			// partGroupName
@@ -1737,7 +1735,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
       fImplicitOuterMostMsrPartGroup->getPartGroupNumber () <<
       "' to MSR score" <<
       ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity<<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1753,7 +1751,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
   // create the MXSR part group for the implicit outer-most part group
   fImplicitOuterMostPartGroup =
     mxsrPartGroup::create (
-      InputLineNumber,
+      inputLineNumber,
       fCurrentPartGroupNumber,
       fImplicitOuterMostMsrPartGroup,
       fCurrentPartGroupIdentity);
@@ -1768,7 +1766,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
       fImplicitOuterMostPartGroup->asString () <<
       "' to the part groups data" <<
       ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity<<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1782,7 +1780,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 
   // register fImplicitOuterMostPartGroup as started
   registerPartGroupStart (
-    InputLineNumber,
+    inputLineNumber,
     fImplicitOuterMostPartGroup);
 
 //   // create an empty list for part groups started at scorePartIdentity
@@ -1798,7 +1796,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "AFTER createTheImplicitOuterPartGroupAndAddItToTheMsrScore()");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1806,7 +1804,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 
 //______________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocation (
-  int InputLineNumber)
+  int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -1828,7 +1826,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "BEFORE handleBOFPartGroupsNestingBOFAndScorePartsAllocation");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1847,7 +1845,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
 			ss <<
 				"Sorting the started part group list" <<
-				", line " << InputLineNumber ;
+				", line " << inputLineNumber ;
 
 			thePartGroupList->printWithContext (
 				"handleBOFPartGroupsNestingBOFAndScorePartsAllocation()",
@@ -1873,7 +1871,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
 			ss <<
 				"Sorting the stopped part group list " <<
-				", line " << InputLineNumber <<
+				", line " << inputLineNumber <<
 				std::endl;
 
 			++gIndenter;
@@ -1895,7 +1893,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 #ifdef MF_TRACE_IS_ENABLED
 	if (gTraceOahGroup->getTracePartGroups ()) {
 		displayAllCollectedData (
-			InputLineNumber,
+			inputLineNumber,
 			"AFTER sorting started and stopped MSXR part groups lists");
 	}
 #endif // MF_TRACE_IS_ENABLED
@@ -1920,11 +1918,11 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
           " to any part group " <<
           " at identity" << identity<<
           ", since the part groups groups stack is empty"<<
-					", line " << InputLineNumber;
+					", line " << inputLineNumber;
 
         musicxmlError (
           gServiceRunData->getInputSourceName (),
-          InputLineNumber,
+          inputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1970,7 +1968,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
               partGroup->fetchMsrPartGroupCombinedName () <<
               " at identity" << identity<<
               ", since the stack is empty"<<
-							", line " << InputLineNumber;
+							", line " << inputLineNumber;
 
             musicxmlError (
               gServiceRunData->getInputSourceName (),
@@ -2008,7 +2006,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 #ifdef MF_TRACE_IS_ENABLED
 								if (gTraceOahGroup->getTracePartGroups ()) {
 									displayAllCollectedData (
-										InputLineNumber,
+										inputLineNumber,
 									"the implicit outer-most part group isn't contained in any other");
 								}
 #endif // MF_TRACE_IS_ENABLED
@@ -2116,7 +2114,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
   of a score exhibiting overlapping part groups)",
               std::regex ("EXECUTABLE"),
               gOahOahGroup->getOahOahGroupServiceName ()) <<
-							", line " << InputLineNumber;
+							", line " << inputLineNumber;
 
             musicxmlError (
               gServiceRunData->getInputSourceName (),
@@ -2157,7 +2155,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
               "Pushing part group " <<
               partGroup->asString () <<
               " onto the part groups stack" <<
-              ", line " << InputLineNumber;
+              ", line " << inputLineNumber;
 
             gWaeHandler->waeTrace (
               __FILE__, __LINE__,
@@ -2181,7 +2179,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
 //         "AT identity" << identity;
 //
 //       displayAllCollectedData (
-//         InputLineNumber,
+//         inputLineNumber,
 //         ss.str ());
 //     }
 // #endif // MF_TRACE_IS_ENABLED
@@ -2190,7 +2188,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayAllCollectedData (
-      InputLineNumber,
+      inputLineNumber,
       "AFTER handleBOFPartGroupsNestingBOFAndScorePartsAllocation");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -2198,17 +2196,17 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
 
 //______________________________________________________________________________
 S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
-  int InputLineNumber,
+  int inputLineNumber,
   int staffNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceParts ()) {
+  if (true || gTraceOahGroup->getTraceParts ()) {
     std::stringstream ss;
 
     ss <<
       "createStaffInCurrentPartIfNotYetDone()" <<
       ", staffNumber: " << staffNumber <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2227,7 +2225,7 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
     staff =
       fCurrentPart->
         addStaffToPartByItsNumber (
-          InputLineNumber,
+          inputLineNumber,
           msrStaffKind::kStaffKindRegular,
           staffNumber);
 
@@ -2246,21 +2244,21 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
 
 //______________________________________________________________________________
 S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
-  int InputLineNumber,
+  int inputLineNumber,
   int staffNumber,
   int voiceNumber)
 {
   // the voice number is relative to a part
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (true || gTraceOahGroup->getTraceVoices ()) {
     std::stringstream ss;
 
     ss <<
       "createRegularVoiceInStaffIfNotYetDone()" <<
       ", staffNumber: " << staffNumber <<
       ", voiceNumber: " << voiceNumber <<
-      ", line " << InputLineNumber;
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2272,7 +2270,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
   S_msrStaff
     staff =
       createStaffInCurrentPartIfNotYetDone (
-        InputLineNumber,
+        inputLineNumber,
         staffNumber);
 
   // is voice already present in staff?
@@ -2280,7 +2278,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
     voice =
       staff->
         fetchRegularVoiceFromStaffByItsNumber (
-          InputLineNumber,
+          inputLineNumber,
           voiceNumber);
 
   if (! voice) {
@@ -2288,7 +2286,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
     voice =
       staff->
         createRegularVoiceInStaffByItsNumber (
-          InputLineNumber,
+          inputLineNumber,
           voiceNumber,
           fCurrentMeasureNumber,
           fPartGroupsStack.top ()->getMsrPartGroup ());
@@ -2307,7 +2305,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
 }
 
 S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
-  int              InputLineNumber,
+  int              inputLineNumber,
   const S_msrPart& theMsrPart)
 {
   // is the harmonies voice already present in theMsrPart?
@@ -2321,7 +2319,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
     partHarmoniesVoice =
       theMsrPart->
         createPartHarmoniesVoice (
-          InputLineNumber,
+          inputLineNumber,
           fCurrentMeasureNumber);
   }
 
@@ -2329,7 +2327,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
 }
 
 S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
-  int              InputLineNumber,
+  int              inputLineNumber,
   const S_msrPart& theMsrPart)
 {
   // is the figured bass voice already present in theMsrPart?
@@ -2343,7 +2341,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
     partFiguredBassVoice =
       theMsrPart->
         createPartFiguredBassVoice (
-          InputLineNumber,
+          inputLineNumber,
           fCurrentMeasureNumber);
   }
 
@@ -2393,9 +2391,13 @@ void mxsr2msrSkeletonBuilder::displayPendingTupletsStopsMap (
 void mxsr2msrSkeletonBuilder::handePendingTupletsStopsIfAny (
 	int inputStartLineNumber)
 {
-	displayPendingTupletsStopsMap (
-		"handePendingTupletsStopsIfAny(): ",
-		inputStartLineNumber);
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+		displayPendingTupletsStopsMap (
+			"handePendingTupletsStopsIfAny(): ",
+			inputStartLineNumber);
+  }
+#endif // MF_TRACE_IS_ENABLED
 
 	// register pending tuplet events if any
 	for (
@@ -2437,10 +2439,7 @@ void mxsr2msrSkeletonBuilder::handePendingTupletsStopsIfAny (
 		// register the tuplet end event with the corresponding info,
 		// except the input start end and end line numbers,
 		// which are those of the current note
-		++fCurrentEventSequentialNumber;
-
 		fResultingEventsCollection.registerTupletEvent (
-			fCurrentEventSequentialNumber,
 			pendingTupletStop->getNoteSequentialNumber (),
 			pendingTupletStop->getStaffNumber (),
 			pendingTupletStop->getVoiceNumber (),
@@ -4545,75 +4544,77 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> Start visiting S_direction" <<
-      ", line " << elt->getInputStartLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  int stavesNumber = int(*elt);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
-    std::stringstream ss;
-
-    switch (stavesNumber) {
-      case 0:
-        ss <<
-          "There isn't any explicit staff (hence 1 by default)"; // JMI
-        break;
-
-      case 1:
-        ss <<
-          "There is 1 staff";
-        break;
-
-      default:
-        ss <<
-          "There are " << stavesNumber << " staves";
-    } // switch
-
-    ss <<
-      " in part " << fCurrentPart->getPartCombinedName();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (stavesNumber > 1) {
-    // add stavesNumber staves to current part
-    int n = 1;
-
-    while (n <= stavesNumber) {
-    /* JMI v0.9.69
-      fCurrentPart->
-        addStaffToPartByItsNumber (
-          elt->getInputStartLineNumber (),
-          msrStaffKind::kStaffKindRegular,
-          n);
-          */
-      S_msrStaff
-        dummyStaff = // JMI
-          createStaffInCurrentPartIfNotYetDone (
-            elt->getInputStartLineNumber (),
-            n);
-
-      ++n;
-    } // while
-  }
-}
+// void mxsr2msrSkeletonBuilder::visitStart (S_staves& elt)
+// {
+// 	// JMI v0.9.72 should be ignored!
+//
+// // #ifdef MF_TRACE_IS_ENABLED
+// //   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+// //     std::stringstream ss;
+// //
+// //     ss <<
+// //       "--> Start visiting S_direction" <<
+// //       ", line " << elt->getInputStartLineNumber ();
+// //
+// //     gWaeHandler->waeTrace (
+// //       __FILE__, __LINE__,
+// //       ss.str ());
+// //   }
+// // #endif // MF_TRACE_IS_ENABLED
+// //
+// //   int stavesNumber = int(*elt);
+// //
+// // #ifdef MF_TRACE_IS_ENABLED
+// //   if (gTraceOahGroup->getTraceStaves ()) {
+// //     std::stringstream ss;
+// //
+// //     switch (stavesNumber) {
+// //       case 0:
+// //         ss <<
+// //           "There isn't any explicit staff (hence 1 by default)"; // JMI
+// //         break;
+// //
+// //       case 1:
+// //         ss <<
+// //           "There is 1 staff";
+// //         break;
+// //
+// //       default:
+// //         ss <<
+// //           "There are " << stavesNumber << " staves";
+// //     } // switch
+// //
+// //     ss <<
+// //       " in part " << fCurrentPart->getPartCombinedName();
+// //
+// //     gWaeHandler->waeTrace (
+// //       __FILE__, __LINE__,
+// //       ss.str ());
+// //   }
+// // #endif // MF_TRACE_IS_ENABLED
+//
+// //   if (stavesNumber > 1) {
+// //     // add stavesNumber staves to current part // JMI v0.9.72 which staff numbers...???
+// //     int n = 1;
+// //
+// //     while (n <= stavesNumber) {
+// //     /* JMI v0.9.69
+// //       fCurrentPart->
+// //         addStaffToPartByItsNumber (
+// //           elt->getInputStartLineNumber (),
+// //           msrStaffKind::kStaffKindRegular,
+// //           n);
+// //           */
+// //       S_msrStaff
+// //         dummyStaff = // JMI
+// //           createStaffInCurrentPartIfNotYetDone (
+// //             elt->getInputStartLineNumber (),
+// //             n);
+// //
+// //       ++n;
+// //     } // while
+// //   }
+// }
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
@@ -4632,17 +4633,41 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentNoteStaffNumber = int(*elt);
+  int staffNumber = int(*elt);
+
+  // the staff number should be positive
+  if (staffNumber <= 0) {
+    std::stringstream ss;
+
+    ss <<
+      "staff number " << staffNumber <<
+      " is not positive" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+      mfAssert (
+        __FILE__, __LINE__,
+				false,
+				ss.str ());
+  }
+
+	fCurrentNoteStaffNumber = staffNumber;
+
+  if (fCurrentStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
+  	// this is the first <staff /> in the current part // JMI v0.9.72 ???
+  	fCurrentStaffNumber = fCurrentNoteStaffNumber;
+	}
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceStaves ()) {
+  if (gTraceOahGroup->getTraceStaves ()) {
     std::stringstream ss;
 
     ss <<
 //       std::endl <<
       "<!--=== "
       "visitStart (S_staff& elt)" <<
-      ", fCurrentNoteStaffNumber: " << fCurrentNoteStaffNumber <<
+      ", staffNumber: " << staffNumber <<
+      ", fCurrentStaffNumber: " << fCurrentStaffNumber <<
+      ", fCurrentNoteStaffNumber: " << fPreviousNoteStaffNumber <<
       ", fPreviousNoteStaffNumber: " << fPreviousNoteStaffNumber <<
       ", line " << elt->getInputStartLineNumber () <<
       " ===-->";
@@ -4653,22 +4678,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // the staff number should be positive
-  if (fCurrentNoteStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
-    std::stringstream ss;
-
-    ss <<
-      "staff number " << fCurrentNoteStaffNumber <<
-      " is not positive" <<
-      ", line " << elt->getInputStartLineNumber ();
-
-      mfAssert (
-        __FILE__, __LINE__,
-				false,
-				ss.str ());
-  }
-
-  if (fOnGoingNote) { // JMI
+  if (fOnGoingNote) { // JMI v0.9.72
     // regular staff indication in note/rest, fine
   }
   else {
@@ -4696,7 +4706,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
   fCurrentNoteVoiceNumber = int(*elt);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
     std::stringstream ss;
 
     ss <<
@@ -4851,8 +4861,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 			", fCurrentNoteStartInputLineNumber: " <<
 			fCurrentNoteStartInputLineNumber <<
 
-			", fCurrentEventSequentialNumber: " <<
-			fCurrentEventSequentialNumber <<
+			", currentEventSequentialNumber: " <<
+			fResultingEventsCollection.getCurrentEventSequentialNumber () <<
 
 			", fCurrentNoteSequentialNumber: " <<
 			fCurrentNoteSequentialNumber <<
@@ -4887,10 +4897,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 	if (fCurrentNoteBelongsToAChord) {
 		// the note before the measure end is the last one of the chord
 		// it is still the current note
-		++fCurrentEventSequentialNumber;
 
 		fResultingEventsCollection.registerChordEvent (
-			fCurrentEventSequentialNumber,
 			fCurrentNoteSequentialNumber,
 			fCurrentNoteStaffNumber,
 			fCurrentNoteVoiceNumber,
@@ -5108,173 +5116,164 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
 		elt->getInputEndLineNumber ();
 
   // lyrics
-  fCurrentStanzaNumber = msrStanza::K_STANZA_NUMBER_UNKNOWN_;
-  fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN_;
+  fCurrentStanzaNumber = K_STANZA_NUMBER_UNKNOWN_;
+  fCurrentStanzaName = K_STANZA_NAME_UNKNOWN_;
 
   fOnGoingNote = true;
 }
 
-void  mxsr2msrSkeletonBuilder::visitEnd(S_note& elt)
+Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
+	int inputStartLineNumber)
 {
+	Bool result;
+
+  // if there is a staff change, we shouldn't create a voice
+  // for the current, landing note
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
-    std::stringstream ss;
+	if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
+		std::stringstream ss;
 
-    ss <<
-      "--> End visiting S_note" <<
-      ", line " << elt->getInputStartLineNumber ();
+		ss <<
+			"===> Is there is a staff change???" <<
+			'\n' <<
+			", fCurrentNoteStartInputLineNumber: " <<
+			fCurrentNoteStartInputLineNumber <<
+// 			", fCurrentNoteEndInputLineNumber: " <<
+// 			fCurrentNoteEndInputLineNumber <<
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
+			", fPreviousNoteStaffNumber: " <<
+			fPreviousNoteStaffNumber <<
+			", fCurrentNoteStaffNumber: " <<
+			fCurrentNoteStaffNumber <<
 
-  // should the staff be created?
-  S_msrStaff
-    staff =
-      createStaffInCurrentPartIfNotYetDone (
-        elt->getInputStartLineNumber (),
-        fCurrentNoteStaffNumber);
-
-  // should the voice be created?
-  S_msrVoice
-    noteVoice =
-      createRegularVoiceInStaffIfNotYetDone (
-        elt->getInputStartLineNumber (),
-        fCurrentNoteStaffNumber,
-        fCurrentNoteVoiceNumber);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceNotesBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-    	"--> visitEnd (S_note& elt) 1 (all):"
-      ", fCurrentNoteSequentialNumber: " <<
-      fCurrentNoteSequentialNumber <<
-      ", fPreviousNoteSequentialNumber: " <<
-      fPreviousNoteSequentialNumber <<
-
-      ", fCurrentNoteStartInputLineNumber: " <<
-      fCurrentNoteStartInputLineNumber <<
-
-      ", fCurrentNoteStaffNumber: " <<
-      fCurrentNoteStaffNumber <<
-      ", fCurrentNoteVoiceNumber: " <<
-      fCurrentNoteVoiceNumber <<
-
-      ", getStaffName(): " <<
-      staff->getStaffName () <<
-      ", getVoiceName(): " <<
-      noteVoice->getVoiceName () <<
-
-      ", fCurrentNoteBelongsToAChord: " <<
-      fCurrentNoteBelongsToAChord <<
-
-      ", fCurrentNoteBelongsToATuplet: " <<
-      fCurrentNoteBelongsToATuplet <<
-      std::endl;
-
-    displayPendingTupletsStopsMap (
-    	"=====> visitEnd(S_note& elt) 1",
-    	fCurrentNoteStartInputLineNumber);
-
-		gLog <<
-// 			", fCurrentTupletTypeKind: " <<
-// 			fCurrentTupletTypeKind <<
+			", fPreviousNoteVoiceNumber: " <<
+			fPreviousNoteVoiceNumber <<
+			", fCurrentNoteVoiceNumber: " <<
+			fCurrentNoteVoiceNumber <<
 
 			", fPreviousNoteIsATakeOffCandidate: " <<
 			fPreviousNoteIsATakeOffCandidate <<
-      ", line " << fCurrentNoteStartInputLineNumber;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+			", line " << fCurrentNoteStartInputLineNumber;
+
+		gWaeHandler->waeTrace (
+			__FILE__, __LINE__,
+			ss.str ());
+	}
 #endif // MF_TRACE_IS_ENABLED
 
-  // are there harmonies attached to the current note?
-  if (fThereAreHarmoniesToBeAttachedToCurrentNote) {
-    if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
+  if (
+    fCurrentNoteStaffNumber != fPreviousNoteStaffNumber
+      &&
+    fCurrentNoteVoiceNumber == fPreviousNoteVoiceNumber
+      &&
+    fPreviousNoteIsATakeOffCandidate
+//     fPreviousNoteStaffNumber != K_STAFF_NUMBER_UNKNOWN_ // JMI STAFF_CHANGE v0.9.72
+  ) {
+    // yes
+		result = true;
+
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceHarmonies ()) {
-        std::stringstream ss;
+		if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
+			std::stringstream ss;
 
-        ss <<
-          "Ignoring the harmonies" <<
-          ", line " <<
-          elt->getInputStartLineNumber ();
+			ss <<
+				"===> There IS a staff change!!!" <<
+				'\n' <<
+				", fCurrentNoteStartInputLineNumber: " <<
+				fCurrentNoteStartInputLineNumber <<
+	// 			", fCurrentNoteEndInputLineNumber: " <<
+	// 			fCurrentNoteEndInputLineNumber <<
 
-        gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
-          ss.str ());
-			}
-#endif // MF_TRACE_IS_ENABLED
+				", fPreviousNoteStaffNumber: " <<
+				fPreviousNoteStaffNumber <<
+				", fCurrentNoteStaffNumber: " <<
+				fCurrentNoteStaffNumber <<
+
+				", fPreviousNoteVoiceNumber: " <<
+				fPreviousNoteVoiceNumber <<
+				", fCurrentNoteVoiceNumber: " <<
+				fCurrentNoteVoiceNumber <<
+
+				", fPreviousNoteIsATakeOffCandidate: " <<
+				fPreviousNoteIsATakeOffCandidate <<
+
+				", line " << fCurrentNoteStartInputLineNumber;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
 		}
-    else {
-      // create the part harmonies voice if not yet done
-      S_msrVoice
-        partHarmoniesVoice =
-          createPartHarmoniesVoiceIfNotYetDone (
-            elt->getInputStartLineNumber (),
-            fCurrentPart);
-    }
+#endif // MF_TRACE_IS_ENABLE
 
-    fThereAreHarmoniesToBeAttachedToCurrentNote = false;
+		int
+			takeOffStaffNumber = fPreviousNoteStaffNumber,
+			landingStaffNumber = fCurrentNoteStaffNumber,
+
+			changingVoiceNumber = fPreviousNoteVoiceNumber,
+			landingVoiceNumber = fCurrentNoteVoiceNumber;
+
+		int
+			takeOffNoteStartInputLineNumber = fPreviousNoteStartInputLineNumber,
+			landingNoteStartInputLineNumber = fCurrentNoteStartInputLineNumber;
+
+		// create the landing staff if not yet done
+		S_msrVoice
+			landingVoice =
+				createRegularVoiceInStaffIfNotYetDone (
+					takeOffNoteStartInputLineNumber,
+					landingStaffNumber,
+					landingVoiceNumber);
+
+//     S_msrStaff
+//     	landingStaff =
+// 				createStaffInCurrentPartIfNotYetDone (
+// 					takeOffNoteStartInputLineNumber,
+// 					landingStaffNumber);
+
+    // register a staff change event
+    // taking off from the previous note
+    // and landing on the current note
+
+		// the airplane takes off upon the previous note
+		// and lands upon the current note
+		// let's create a staff change event with take off upon the previous note
+		// and landing upont the current note
+		fResultingEventsCollection.registerStaffChangeEvent ( // CHORD_TUP JMI v0.9.72
+			fPreviousNoteSequentialNumber,
+			fPreviousNoteStaffNumber,
+			changingVoiceNumber,							// the voice that changes staff
+// 			mxsrStaffChangeEventKind::kEventStaffChangeTakeOff,
+			takeOffStaffNumber,								// take off staff number
+			landingStaffNumber,  							// landing staff number
+			landingNoteStartInputLineNumber,  // landing start input line number
+			fPreviousNoteStartInputLineNumber,
+			fPreviousNoteEndInputLineNumber);
   }
 
-  // are there figured bass attached to the current note?
-  if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
-    if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBasses ()) {
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceFiguredBasses ()) {
-        std::stringstream ss;
+	return result;
+}
 
-        ss <<
-          "Ignoring the figured bass elements" <<
-          ", line " <<
-          elt->getInputStartLineNumber ();
-
-        gWaeHandler->waeTrace (
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-#endif // MF_TRACE_IS_ENABLED
-    }
-    else {
-      // create the part figured bass voice if not yet done
-      S_msrVoice
-        partFiguredBassVoice =
-          createPartFiguredBassVoiceIfNotYetDone (
-            elt->getInputStartLineNumber (),
-            fCurrentPart);
-    }
-
-    fThereAreFiguredBassToBeAttachedToCurrentNote = false;
-  }
-
- 	// Q_NOTE
-
-	// register chord event if any
+void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
+{
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
     std::stringstream ss;
 
     ss <<
     	"--> visitEnd (S_note& elt) 2 (chords):"
-      ", fCurrentNoteSequentialNumber: " <<
-      fCurrentNoteSequentialNumber <<
-      ", fPreviousNoteSequentialNumber: " <<
-      fPreviousNoteSequentialNumber <<
-
       ", fCurrentNoteStartInputLineNumber: " <<
       fCurrentNoteStartInputLineNumber <<
 
-      ", fCurrentNoteBelongsToAChord: " <<
-      fCurrentNoteBelongsToAChord <<
+      ", fPreviousNoteSequentialNumber: " <<
+      fPreviousNoteSequentialNumber <<
+      ", fCurrentNoteSequentialNumber: " <<
+      fCurrentNoteSequentialNumber <<
+
       ", fPreviousNoteBelongsToAChord: " <<
       fPreviousNoteBelongsToAChord <<
+      ", fCurrentNoteBelongsToAChord: " <<
+      fCurrentNoteBelongsToAChord <<
 
       ", fCurrentNoteBelongsToAChord: " <<
       fCurrentNoteBelongsToAChord <<
@@ -5312,10 +5311,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd(S_note& elt)
 		else {
 			// this is the second note of the chord
 			// we're one note late, hence the previous note is the chord begin
-			++fCurrentEventSequentialNumber;
-
 			fResultingEventsCollection.registerChordEvent (
-				fCurrentEventSequentialNumber,
 				fPreviousNoteSequentialNumber,
 				fPreviousNoteStaffNumber,
 				fPreviousNoteVoiceNumber,
@@ -5330,10 +5326,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd(S_note& elt)
 		if (fPreviousNoteBelongsToAChord) {
 			// this the note after the last one of the chord
 			// we're one note late, hence the previous note is the chord end
-			++fCurrentEventSequentialNumber;
-
 			fResultingEventsCollection.registerChordEvent (
-				fCurrentEventSequentialNumber,
 				fPreviousNoteSequentialNumber,
 				fPreviousNoteStaffNumber,
 				fPreviousNoteVoiceNumber,
@@ -5345,23 +5338,23 @@ void  mxsr2msrSkeletonBuilder::visitEnd(S_note& elt)
 			// wait and see upon the next note or the measure end
 		}
 	}
+}
 
- 	// Q_NOTE
-
-	// register tuplets events if any
+void mxsr2msrSkeletonBuilder::registerTupletEventIfAny ()
+{
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
     	"--> visitEnd (S_note& elt) 3 (tuplets):"
-      ", fCurrentNoteSequentialNumber: " <<
-      fCurrentNoteSequentialNumber <<
-      ", fPreviousNoteSequentialNumber: " <<
-      fPreviousNoteSequentialNumber <<
-
       ", fCurrentNoteStartInputLineNumber: " <<
       fCurrentNoteStartInputLineNumber <<
+
+      ", fPreviousNoteSequentialNumber: " <<
+      fPreviousNoteSequentialNumber <<
+      ", fCurrentNoteSequentialNumber: " <<
+      fCurrentNoteSequentialNumber <<
 
       ", fCurrentNoteBelongsToAChord: " <<
       fCurrentNoteBelongsToAChord <<
@@ -5438,10 +5431,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd(S_note& elt)
 				handePendingTupletsStopsIfAny (fCurrentNoteEndInputLineNumber);
 
 				// now register the new tuplet begin event upon the current note
-				++fCurrentEventSequentialNumber;
-
 				fResultingEventsCollection.registerTupletEvent (
-					fCurrentEventSequentialNumber,
 					fCurrentNoteSequentialNumber,
 					fCurrentNoteStaffNumber,
 					fCurrentNoteVoiceNumber,
@@ -5481,110 +5471,90 @@ void  mxsr2msrSkeletonBuilder::visitEnd(S_note& elt)
 		// forget about the pending tuplet type kind
 		it = fPendingTupletsInformationTuplesList.erase (it);
 	} // for
+}
+
+void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting S_note" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
 
  	// Q_NOTE
 
-  // is there a staff change?
-#ifdef MF_TRACE_IS_ENABLED
-	if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
-		std::stringstream ss;
+	// handle staff change if any
+	Bool
+		thereIsAStaffChange =
+			handleStaffChangeIfAny (elt->getInputStartLineNumber ());
 
-		ss <<
-			"===> Is there is a staff change???" <<
-			'\n' <<
-			", fCurrentNoteStartInputLineNumber: " <<
-			fCurrentNoteStartInputLineNumber <<
-// 			", fCurrentNoteEndInputLineNumber: " <<
-// 			fCurrentNoteEndInputLineNumber <<
+	if (! thereIsAStaffChange) {
+		// the current note is a regular one
 
-			", fCurrentNoteStaffNumber: " <<
-			fCurrentNoteStaffNumber <<
-			", fPreviousNoteStaffNumber: " <<
-			fPreviousNoteStaffNumber <<
+		// create the staff if not yet done
+		S_msrStaff
+			staff =
+				createStaffInCurrentPartIfNotYetDone (
+					elt->getInputStartLineNumber (),
+					fCurrentNoteStaffNumber);
 
-			", fCurrentNoteVoiceNumber: " <<
-			fCurrentNoteVoiceNumber <<
-			", fPreviousNoteVoiceNumber: " <<
-			fPreviousNoteVoiceNumber <<
-
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
-
-			", line " << fCurrentNoteStartInputLineNumber;
-
-		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
-			ss.str ());
-	}
-#endif // MF_TRACE_IS_ENABLED
-
-  if (
-    fCurrentNoteStaffNumber != fPreviousNoteStaffNumber
-      &&
-    fCurrentNoteVoiceNumber == fPreviousNoteVoiceNumber
-      &&
-    fPreviousNoteIsATakeOffCandidate
-//     fPreviousNoteStaffNumber != K_STAFF_NUMBER_UNKNOWN_ // JMI STAFF_CHANGE v0.9.71
-  ) {
-    // yes, register a staff change event
-    // taking off from the previous note
-    // and landing on the current note
-
-		// the airplane takes off upon the previous note
-		// and lands upon the current note
-		// let's create two event with the same to and from staff numbres
-		++fCurrentEventSequentialNumber;
-
-		fResultingEventsCollection.registerStaffChangeEvent ( // CHORD_TUP JMI v0.9.71
-			fCurrentEventSequentialNumber,
-			fCurrentNoteSequentialNumber,
-			fPreviousNoteStaffNumber,
-			fPreviousNoteVoiceNumber,
-			mxsrStaffChangeEventKind::kEventStaffChangeTakeOff,
-			fPreviousNoteStartInputLineNumber,
-			fPreviousNoteEndInputLineNumber,
-			fPreviousNoteStaffNumber,
-			fCurrentNoteStaffNumber);
-
-		++fCurrentEventSequentialNumber;
-
-		fResultingEventsCollection.registerStaffChangeEvent (
-			fCurrentEventSequentialNumber,
-			fCurrentNoteSequentialNumber,
-			fCurrentNoteStaffNumber,
-			fCurrentNoteVoiceNumber,
-			mxsrStaffChangeEventKind::kEventStaffChangeLanding,
-			fCurrentNoteStartInputLineNumber,
-			fCurrentNoteEndInputLineNumber,
-			fPreviousNoteStaffNumber,
-			fCurrentNoteStaffNumber);
+		// create the voice if not yet done
+		S_msrVoice
+			noteVoice =
+				createRegularVoiceInStaffIfNotYetDone (
+					elt->getInputStartLineNumber (),
+					fCurrentNoteStaffNumber,
+					fCurrentNoteVoiceNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-		if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
+		if (gTraceOahGroup->getTraceNotesBasics ()) {
 			std::stringstream ss;
 
 			ss <<
-				"===> There is a staff change" <<
-				'\n' <<
+				"--> visitEnd (S_note& elt) 1 (all):"
+				", fCurrentNoteSequentialNumber: " <<
+				fCurrentNoteSequentialNumber <<
+				", fPreviousNoteSequentialNumber: " <<
+				fPreviousNoteSequentialNumber <<
 
 				", fCurrentNoteStartInputLineNumber: " <<
 				fCurrentNoteStartInputLineNumber <<
-	// 			", fCurrentNoteEndInputLineNumber: " <<
-	// 			fCurrentNoteEndInputLineNumber <<
-
-				", fPreviousNoteStartInputLineNumber: " <<
-				fPreviousNoteStartInputLineNumber <<
 
 				", fCurrentNoteStaffNumber: " <<
 				fCurrentNoteStaffNumber <<
-				", fPreviousNoteStaffNumber: " <<
-				fPreviousNoteStaffNumber <<
-
 				", fCurrentNoteVoiceNumber: " <<
 				fCurrentNoteVoiceNumber <<
-				", fPreviousNoteVoiceNumber: " <<
-				fPreviousNoteVoiceNumber <<
 
+				", getStaffName(): " <<
+				staff->getStaffName () <<
+				", getVoiceName(): " <<
+				noteVoice->getVoiceName () <<
+
+				", fCurrentNoteBelongsToAChord: " <<
+				fCurrentNoteBelongsToAChord <<
+
+				", fCurrentNoteBelongsToATuplet: " <<
+				fCurrentNoteBelongsToATuplet <<
+				std::endl;
+
+			displayPendingTupletsStopsMap (
+				"=====> visitEnd(S_note& elt) 1",
+				fCurrentNoteStartInputLineNumber);
+
+			gLog <<
+	// 			", fCurrentTupletTypeKind: " <<
+	// 			fCurrentTupletTypeKind <<
+
+				", fPreviousNoteIsATakeOffCandidate: " <<
+				fPreviousNoteIsATakeOffCandidate <<
 				", line " << fCurrentNoteStartInputLineNumber;
 
 			gWaeHandler->waeTrace (
@@ -5592,7 +5562,77 @@ void  mxsr2msrSkeletonBuilder::visitEnd(S_note& elt)
 				ss.str ());
 		}
 #endif // MF_TRACE_IS_ENABLED
+	}
+
+  // are there harmonies attached to the current note?
+  if (fThereAreHarmoniesToBeAttachedToCurrentNote) {
+    if (gGlobalMxsr2msrOahGroup->getIgnoreHarmonies ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceHarmonies ()) {
+        std::stringstream ss;
+
+        ss <<
+          "Ignoring the harmonies" <<
+          ", line " <<
+          elt->getInputStartLineNumber ();
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+			}
+#endif // MF_TRACE_IS_ENABLED
+		}
+    else {
+      // create the part harmonies voice if not yet done
+      S_msrVoice
+        partHarmoniesVoice =
+          createPartHarmoniesVoiceIfNotYetDone (
+            elt->getInputStartLineNumber (),
+            fCurrentPart);
+    }
+
+    fThereAreHarmoniesToBeAttachedToCurrentNote = false;
   }
+
+  // are there figured bass attached to the current note?
+  if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
+    if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBasses ()) {
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceFiguredBasses ()) {
+        std::stringstream ss;
+
+        ss <<
+          "Ignoring the figured bass elements" <<
+          ", line " <<
+          elt->getInputStartLineNumber ();
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+    }
+    else {
+      // create the part figured bass voice if not yet done
+      S_msrVoice
+        partFiguredBassVoice =
+          createPartFiguredBassVoiceIfNotYetDone (
+            elt->getInputStartLineNumber (),
+            fCurrentPart);
+    }
+
+    fThereAreFiguredBassToBeAttachedToCurrentNote = false;
+  }
+
+ 	// Q_NOTE
+
+	// register chord event if any
+	registerChordEventIfAny ();
+
+ 	// Q_NOTE
+
+	// register tuplets events if any
+	registerTupletEventIfAny ();
 
 	// the current note is the new take off candidate
 	fPreviousNoteIsATakeOffCandidate = true;
@@ -5837,7 +5877,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 
         ss <<
           "lyric name is empty, using \"" <<
-          msrStanza::K_STANZA_NAME_UNKNOWN_ <<
+          K_STANZA_NAME_UNKNOWN_ <<
           "\" by default" <<
 					", line " << elt->getInputStartLineNumber ();
 
@@ -5848,7 +5888,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      fCurrentStanzaName = msrStanza::K_STANZA_NAME_UNKNOWN_;
+      fCurrentStanzaName = K_STANZA_NAME_UNKNOWN_;
     }
 
     else {
