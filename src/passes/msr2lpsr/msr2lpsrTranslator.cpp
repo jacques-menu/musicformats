@@ -1867,7 +1867,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "--> Start visiting msrPartGroup " <<
-      elt->getPartGroupCombinedName () <<
+      elt->fetchPartGroupCombinedName () <<
       ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1896,7 +1896,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 
       ss <<
           "Adding part group clone " <<
-          partGroupClone->getPartGroupCombinedName () <<
+          partGroupClone->fetchPartGroupCombinedName () <<
           " to the current MSR score clone" <<
           ", line " << elt->getInputStartLineNumber ();
 
@@ -1923,7 +1923,7 @@ void msr2lpsrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "Pushing part group clone " <<
-      partGroupClone->getPartGroupCombinedName () <<
+      partGroupClone->fetchPartGroupCombinedName () <<
       " onto the stack" <<
       ", line " << elt->getInputStartLineNumber ();
 
@@ -1966,7 +1966,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     ss <<
       "--> End visiting msrPartGroup " <<
-      elt->getPartGroupCombinedName () <<
+      elt->fetchPartGroupCombinedName () <<
       ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1990,7 +1990,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
       ss <<
         "Appending part group clone " <<
-        currentPartGroup->getPartGroupCombinedName () <<
+        currentPartGroup->fetchPartGroupCombinedName () <<
         " to the current part group" <<
         ", line " << elt->getInputStartLineNumber ();
 
@@ -2011,7 +2011,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 
       ss <<
         "Popping part group clone " <<
-        fPartGroupsStack.front ()->getPartGroupCombinedName () <<
+        fPartGroupsStack.front ()->fetchPartGroupCombinedName () <<
         " from the stack" <<
         ", line " << elt->getInputStartLineNumber ();
 
@@ -2040,7 +2040,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
           "Adding part group block clone for part group " <<
           currentPartGroupBlock->
             getPartGroup ()->
-              getPartGroupCombinedName () <<
+              fetchPartGroupCombinedName () <<
           " to LPSR score";
 
         gWaeHandler->waeTrace (
@@ -2076,7 +2076,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
                 "Appending part group block for part group " <<
                 currentPartGroupBlock->
                   getPartGroup ()->
-                    getPartGroupCombinedName () <<
+                    fetchPartGroupCombinedName () <<
                 " to the current score block '" <<
                 fCurrentScoreBlock->asShortString () <<
                 '\'' <<
@@ -2128,7 +2128,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
                 "Appending part group block for part group " <<
                 currentPartGroupBlock->
                   getPartGroup ()->
-                    getPartGroupCombinedName () <<
+                    fetchPartGroupCombinedName () <<
                 " to the current bookpart block '" <<
                 fCurrentScoreBlock->asShortString () <<
                 '\'' <<
@@ -2162,7 +2162,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
           "Popping part group block clone for part group " <<
           currentPartGroupBlock->
             getPartGroup ()->
-              getPartGroupCombinedName () <<
+              fetchPartGroupCombinedName () <<
           " from stack";
 
         gWaeHandler->waeTrace (
@@ -2194,7 +2194,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
 {
   std::string
     partCombinedName =
-      elt->getPartCombinedName ();
+      elt->fetchPartCombinedName ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -2257,9 +2257,9 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
 
     ss <<
       "Adding part clone " <<
-      fCurrentPartClone->getPartCombinedName () <<
+      fCurrentPartClone->fetchPartCombinedName () <<
       " to part group clone \"" <<
-      fPartGroupsStack.front ()->getPartGroupCombinedName () <<
+      fPartGroupsStack.front ()->fetchPartGroupCombinedName () <<
       "\"";
 
     gWaeHandler->waeTrace (
@@ -2283,7 +2283,7 @@ void msr2lpsrTranslator::visitStart (S_msrPart& elt)
 
     ss <<
       "Appending part block " <<
-      fPartGroupsStack.front ()->getPartGroupCombinedName () <<
+      fPartGroupsStack.front ()->fetchPartGroupCombinedName () <<
       " to part group blocks stack top";
 
     gWaeHandler->waeTrace (
@@ -2331,7 +2331,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
 
     ss <<
       "--> End visiting msrPart " <<
-      elt->getPartCombinedName () <<
+      elt->fetchPartCombinedName () <<
       ", line " <<  elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2778,7 +2778,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
           std::string partCombinedName =
             fCurrentVoiceOriginal->
               fetchVoiceUpLinkToPart ()->
-                getPartCombinedName ();
+                fetchPartCombinedName ();
 
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -2855,7 +2855,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
           std::string partCombinedName =
             fCurrentVoiceOriginal->
               fetchVoiceUpLinkToPart ()->
-                getPartCombinedName ();
+                fetchPartCombinedName ();
 
 #ifdef MF_TRACE_IS_ENABLED
           if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -7960,7 +7960,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeat& elt)
       "Handling repeat end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
 //      "\" in part \"" <<
-//      fCurrentPartClone->getPartCombinedName () <<
+//      fCurrentPartClone->fetchPartCombinedName () <<
       "\"";
 
     gWaeHandler->waeTrace (

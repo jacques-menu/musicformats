@@ -180,9 +180,9 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // names
 
-    std::string           getPartGroupCombinedName () const;
+    std::string           fetchPartGroupCombinedName () const;
 
-    std::string           getPartGroupCombinedNameWithoutEndOfLines () const;
+    std::string           fetchPartGroupCombinedNameWithoutEndOfLines () const;
                             // for comments in LilyPond code
 
     // miscellaneous

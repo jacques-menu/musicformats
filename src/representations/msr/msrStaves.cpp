@@ -100,7 +100,7 @@ msrStaff::msrStaff (
     ss <<
       "Creating staff \"" << asString () <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -264,7 +264,7 @@ void msrStaff::initializeStaff ()
           " as initial clef to staff \"" <<
           fStaffName <<
           "\" in part " <<
-          fStaffUpLinkToPart->getPartCombinedName ();
+          fStaffUpLinkToPart->fetchPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -297,7 +297,7 @@ void msrStaff::initializeStaff ()
           "' as initial key to staff \"" <<
           fStaffName <<
           "\" in part " <<
-          fStaffUpLinkToPart->getPartCombinedName ();
+          fStaffUpLinkToPart->fetchPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -328,7 +328,7 @@ void msrStaff::initializeStaff ()
           "' as initial transposition to staff \"" <<
           fStaffName <<
           "\" in part " <<
-          fStaffUpLinkToPart->getPartCombinedName ();
+          fStaffUpLinkToPart->fetchPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -685,7 +685,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       "\", line " << inputLineNumber <<
       "\", current measure number: " <<
       currentMeasureNumber;
- // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName ();
+ // JMI     " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -786,7 +786,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
-     // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName ();
+     // JMI     " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -809,7 +809,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
-     // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName ();
+     // JMI     " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -1197,7 +1197,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
       voice->asString () <<
      " by its number in staff \"" << fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1225,7 +1225,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
       voice->asString () <<
      " by its number in staff \"" << fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1255,7 +1255,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
       voiceNumber <<
      " in staff \"" << fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1389,7 +1389,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       "Fetching first regular voice in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1404,7 +1404,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
     ss <<
       "staff " << fStaffNumber <<
       " in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       " doesn't contain any regular voices, cannot fetch the first one" <<
       ", line " << inputLineNumber;
 
@@ -1483,7 +1483,7 @@ void msrStaff::registerVoiceInStaff (
       fStaffRegularVoicesCounter <<
       " of staff \"" << fStaffName <<
       "\", line " << inputLineNumber;
-// JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName ();
+// JMI       " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1644,7 +1644,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
       fStaffRegularVoicesCounter <<
       " in staff \"" << fStaffName <<
       "\", line " << inputLineNumber;
-// JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName ();
+// JMI       " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1720,7 +1720,7 @@ void msrStaff::registerVoiceInStaffClone (
       fStaffRegularVoicesCounter <<
       " of staff clone \"" << fStaffName <<
       "\", line " << inputLineNumber;
-// JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName ();
+// JMI       " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1803,7 +1803,7 @@ void msrStaff::registerVoiceInStaffClone (
 //       " to staff \"" <<
 //       fStaffName <<
 //       "\" in part " <<
-//       fStaffUpLinkToPart->getPartCombinedName ();
+//       fStaffUpLinkToPart->fetchPartCombinedName ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
@@ -1850,7 +1850,7 @@ void msrStaff::registerVoiceInStaffClone (
 //         " ignored because it is already present in staff " <<
 //         fStaffName <<
 //         "\" in part " <<
-//         fStaffUpLinkToPart->getPartCombinedName ();
+//         fStaffUpLinkToPart->fetchPartCombinedName ();
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
@@ -1877,7 +1877,7 @@ void msrStaff::appendClefToStaff  (
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1963,7 +1963,7 @@ void msrStaff::appendKeyToStaff (
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1997,7 +1997,7 @@ void msrStaff::appendKeyToStaff (
             "' ignored because it is already present in staff " <<
             fStaffName <<
             "\" in part " <<
-            fStaffUpLinkToPart->getPartCombinedName ();
+            fStaffUpLinkToPart->fetchPartCombinedName ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -2104,7 +2104,7 @@ void msrStaff::appendTimeSignatureToStaff (
             "' ignored because it is already present in staff " <<
             fStaffName <<
             "\" in part " <<
-            fStaffUpLinkToPart->getPartCombinedName ();
+            fStaffUpLinkToPart->fetchPartCombinedName ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -2183,7 +2183,7 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
       "' to staff clone \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2217,7 +2217,7 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
 //       " to staff clone \"" <<
 //       fStaffName <<
 //       "\" in part " <<
-//       fStaffUpLinkToPart->getPartCombinedName () <<
+//       fStaffUpLinkToPart->fetchPartCombinedName () <<
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
@@ -2357,7 +2357,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       "' in staff clone \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2391,7 +2391,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
       "Nesting contents into new repeat in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2418,7 +2418,7 @@ void msrStaff::handleRepeatStartInStaff (
       "Handling repeat start in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2451,7 +2451,7 @@ void msrStaff::handleRepeatEndInStaff (
       "Handling a repeat end in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2484,7 +2484,7 @@ void msrStaff::handleRepeatEndingStartInStaff (
       "Handling a repeat ending start in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2521,7 +2521,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
       " repeat ending end in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2557,7 +2557,7 @@ void msrStaff::finalizeRepeatEndInStaff (
       "Finalizing a repeat upon its end in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2593,7 +2593,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
       "Creating a measures repeat from it's first measure in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2621,7 +2621,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
       "Appending the pending measures repeat to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2651,7 +2651,7 @@ void msrStaff::appendMultiMeasureRestToStaff (
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2715,7 +2715,7 @@ void msrStaff::appendEmptyMeasuresToStaff (
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2746,7 +2746,7 @@ void msrStaff::appendPendingMultiMeasureRestsToStaff (
       "Appending the pending multiple rest to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2802,7 +2802,7 @@ void msrStaff::appendRepeatCloneToStaff (
       "Appending repeat clone to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2828,7 +2828,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       "Appending a repeat ending clone to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       ", line " << repeatEndingClone->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2860,7 +2860,7 @@ void msrStaff::appendBarLineToStaff (
       " to staff " <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2891,7 +2891,7 @@ void msrStaff::appendTranspositionToStaff (
       "' in staff " <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2918,7 +2918,7 @@ void msrStaff::appendTranspositionToStaff (
           "' ignored because it is already present in staff " <<
           fStaffName <<
           "\" in part " <<
-          fStaffUpLinkToPart->getPartCombinedName ();
+          fStaffUpLinkToPart->fetchPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -2952,7 +2952,7 @@ void msrStaff::appendStaffDetailsToStaff (
       "' to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2995,7 +2995,7 @@ void msrStaff::appendStaffDetailsToStaff (
       "' in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3671,7 +3671,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fStaffUpLinkToPart" << ": " <<
-    fStaffUpLinkToPart->getPartCombinedName () <<
+    fStaffUpLinkToPart->fetchPartCombinedName () <<
     std::endl <<
 
     std::setw (fieldWidth) <<

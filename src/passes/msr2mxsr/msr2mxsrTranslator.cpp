@@ -2532,7 +2532,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "--> Start visiting msrPartGroup " <<
-      elt->getPartGroupCombinedName () <<
+      elt->fetchPartGroupCombinedName () <<
       ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2553,7 +2553,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
           std::stringstream ss;
           ss <<
             " ========== " <<
-            elt->getPartGroupCombinedName () <<
+            elt->fetchPartGroupCombinedName () <<
             " START" <<
               ", line " << elt->getInputStartLineNumber () <<
             " ========== ";
@@ -2662,7 +2662,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     ss <<
       "--> End visiting msrPartGroup " <<
-      elt->getPartGroupCombinedName () <<
+      elt->fetchPartGroupCombinedName () <<
       ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
@@ -2689,7 +2689,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
           std::stringstream ss;
           ss <<
             " ========== " <<
-            elt->getPartGroupCombinedName () <<
+            elt->fetchPartGroupCombinedName () <<
             " END" <<
               ", line " << elt->getInputStartLineNumber () <<
             " ========== ";
@@ -2758,7 +2758,7 @@ if (false) // JMI
     partAbbreviation =
       elt->getPartAbbreviation (),
     partCombinedName =
-      elt->getPartCombinedName ();
+      elt->fetchPartCombinedName ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -2965,7 +2965,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPart& elt)
 
     ss <<
       "--> End visiting msrPart " <<
-      elt->getPartCombinedName () <<
+      elt->fetchPartCombinedName () <<
       ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -10928,7 +10928,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeat& elt)
       "Handling repeat end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
 //      "\" in part \"" <<
-//      fCurrentPartClone->getPartCombinedName () <<
+//      fCurrentPartClone->fetchPartCombinedName () <<
       "\"";
 
     gWaeHandler->waeTrace (

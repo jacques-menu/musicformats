@@ -335,7 +335,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
 
     ss <<
       "Sorting the voices in part block for part \"" <<
-      fPart->getPartCombinedName () << "\"" <<
+      fPart->fetchPartCombinedName () << "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -517,7 +517,7 @@ void lpsrPartBlock::print (std::ostream& os) const
 {
   os <<
     "PartBlock" << ' ' <<
-    "for part " << fPart->getPartCombinedName () <<
+    "for part " << fPart->fetchPartCombinedName () <<
     ", " <<
     mfSingularOrPlural (
       fPartBlockElementsList.size (), "element", "elements") <<

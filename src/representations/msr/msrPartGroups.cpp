@@ -263,7 +263,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
 
     ss <<
       "Creating a part group newborn clone of " <<
-      getPartGroupCombinedName ();
+      fetchPartGroupCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -362,7 +362,7 @@ void msrPartGroup::setPartGroupUpLinkToContainingPartGroup (
     containingPartGroup;
 }
 
-std::string msrPartGroup::getPartGroupCombinedName () const
+std::string msrPartGroup::fetchPartGroupCombinedName () const
 {
   std::stringstream ss;
 
@@ -374,7 +374,7 @@ std::string msrPartGroup::getPartGroupCombinedName () const
   return ss.str ();
 }
 
-std::string msrPartGroup::getPartGroupCombinedNameWithoutEndOfLines () const
+std::string msrPartGroup::fetchPartGroupCombinedNameWithoutEndOfLines () const
 {
   std::list<std::string> chunksList;
 
@@ -481,7 +481,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //     ss <<
 //       "partID \"" << partID <<
 //       "\" already exists in part group " <<
-//       getPartGroupCombinedName ();
+//       fetchPartGroupCombinedName ();
 //
 //     msrWarning ( // JMI
 //       gServiceRunData->getInputSourceName (),
@@ -506,7 +506,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //
 //     ss <<
 //       "Appending part " <<
-//       part->getPartCombinedName () <<
+//       part->fetchPartCombinedName () <<
 //       " to part group " <<
 //       asString ();
 //
@@ -542,7 +542,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //       ss <<
 //         "\"" << (*i).first << "\" --% --> " <<
 //         (*i).second->
-//           getPartCombinedName () <<
+//           fetchPartCombinedName () <<
 //         std::endl;
 //     } // for
 //
@@ -588,7 +588,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 
     ss <<
       "Adding part " <<
-      part->getPartCombinedName () <<
+      part->fetchPartCombinedName () <<
       " to part group " << asString ();
 
     gWaeHandler->waeTrace (
@@ -631,7 +631,7 @@ void msrPartGroup::removePartFromPartGroup (
 
     ss <<
       "Removing part " <<
-      partToBeRemoved->getPartCombinedName () <<
+      partToBeRemoved->fetchPartCombinedName () <<
       " from part group " << asString ();
 
     gWaeHandler->waeTrace (
@@ -675,7 +675,7 @@ void msrPartGroup::removePartFromPartGroup (
 
       ss <<
         "an element of partgroup " <<
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
         " is not a part group nor a part";
 
       msrInternalError (
@@ -849,7 +849,7 @@ void msrPartGroup::displayPartGroupPartsMap (
   for (std::pair<std::string, S_msrPart> thePair : fPartGroupPartsMap) {
     gLog <<
       "\"" << thePair.first << "\" --% --> " <<
-      thePair.second->getPartCombinedName () <<
+      thePair.second->fetchPartCombinedName () <<
       std::endl;
   } // for
 
@@ -889,7 +889,7 @@ void msrPartGroup::displayPartGroupElementsListFull (
         // this is a part group
 //         gLog << // JMI v0.9.67
 //           nestedPartGroup->
-//             getPartGroupCombinedNameWithoutEndOfLines () <<
+//             fetchPartGroupCombinedNameWithoutEndOfLines () <<
 //           std::endl;
 
         ++gIndenter;
@@ -923,7 +923,7 @@ void msrPartGroup::displayPartGroupElementsListFull (
 
         ss <<
           "an element of partgroup " <<
-          getPartGroupCombinedName () <<
+          fetchPartGroupCombinedName () <<
           " is not a part group nor a part";
 
         msrInternalError (
@@ -978,7 +978,7 @@ void msrPartGroup::displayPartGroupElementsList (
         // this is a part group
 //         gLog << // JMI v0.9.67
 //           nestedPartGroup->
-//             getPartGroupCombinedNameWithoutEndOfLines () <<
+//             fetchPartGroupCombinedNameWithoutEndOfLines () <<
 //           std::endl;
 
         ++gIndenter;
@@ -1006,7 +1006,7 @@ void msrPartGroup::displayPartGroupElementsList (
 
         ss <<
           "an element of partgroup " <<
-          getPartGroupCombinedName () <<
+          fetchPartGroupCombinedName () <<
           " is not a part group nor a part";
 
         msrInternalError (
@@ -1105,7 +1105,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 
       ss <<
         "an element of partgroup " <<
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
         " is not a part group nor a part";
 
       msrInternalError (
@@ -1159,7 +1159,7 @@ void msrPartGroup::collectPartGroupPartsList (
 
       ss <<
         "an element of partgroup " <<
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
         " is not a part group nor a part";
 
       msrInternalError (
@@ -1399,7 +1399,7 @@ std::string msrPartGroup::asString () const
 
   ss <<
     "[PartGroup \"" <<
-    getPartGroupCombinedName () <<
+    fetchPartGroupCombinedName () <<
     ", line " << fInputStartLineNumber <<
     ']';
 
@@ -1409,7 +1409,7 @@ std::string msrPartGroup::asString () const
 void msrPartGroup::printFull (std::ostream& os) const
 {
   os <<
-    "[PartGroup" " \"" << getPartGroupCombinedName () <<
+    "[PartGroup" " \"" << fetchPartGroupCombinedName () <<
     "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
     ")" <<
     ", line " << fInputStartLineNumber <<
@@ -1433,7 +1433,7 @@ void msrPartGroup::printFull (std::ostream& os) const
     os <<
       "\"" <<
       fPartGroupUpLinkToContainingPartGroup->
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
       "\"";
   }
   else {
@@ -1533,7 +1533,7 @@ void msrPartGroup::print (std::ostream& os) const
 //   if (simultaneousCalls == 100) abort (); // JMI v0.9.69 for the implicit outer-most part group...
 
   os <<
-    "[PartGroup" " \"" << getPartGroupCombinedName () <<
+    "[PartGroup" " \"" << fetchPartGroupCombinedName () <<
     "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
     ")" <<
     ", line " << fInputStartLineNumber <<
@@ -1569,7 +1569,7 @@ void msrPartGroup::print (std::ostream& os) const
 void msrPartGroup::printSummary (std::ostream& os) const
 {
   os <<
-    "[PartGroup" " \"" << getPartGroupCombinedName () <<
+    "[PartGroup" " \"" << fetchPartGroupCombinedName () <<
     "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
     ")" <<
     std::endl;

@@ -169,231 +169,243 @@ void lpsr2lilypondTranslator::initializeLilypondUsefulFragments ()
 
   // parallel music
   cLilypondParallelMusicOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondParallelMusicOpener +=
       "%{ cLilypondParallelMusicOpener %} ";
   }
   cLilypondParallelMusicCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondParallelMusicCloser +=
       "%{ cLilypondParallelMusicCloser %} ";
   }
 
   // parts
   cLilypondPartOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondPartOpener +=
       "%{ cLilypondPartOpener %} ";
   }
   cLilypondPartCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondPartCloser +=
       "%{ cLilypondPartCloser %} ";
   }
 
+  // with
+  cLilypondWithOpener = "{";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    cLilypondWithOpener +=
+      " %{ cLilypondWithOpener %} ";
+  }
+  cLilypondWithCloser = "}";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    cLilypondWithCloser +=
+      " %{ cLilypondWithCloser %} ";
+  }
+
   // scordatura
   cLilypondScordaturaOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondScordaturaOpener +=
       "%{ cLilypondScordaturaOpener %} ";
   }
   cLilypondScordaturaCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondScordaturaCloser +=
       "%{ cLilypondScordaturaCloser %} ";
   }
 
   // staves
   cLilypondStaffOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondStaffOpener +=
       "%{ cLilypondStaffOpener %} ";
   }
   cLilypondStaffCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondStaffCloser +=
       "%{ cLilypondStaffCloser %} ";
   }
 
   // layout context
-  cLilypondLayoutContextScoreOpener = "\\context  { \\Score ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  cLilypondLayoutContextScoreOpener = "\\context { \\Score ";
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondLayoutContextScoreOpener +=
       "%{ cLilypondLayoutContextScoreOpener %} ";
   }
   cLilypondLayoutContextScoreCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondLayoutContextScoreCloser +=
       "%{ cLilypondLayoutContextScoreCloser %} ";
   }
 
   cLilypondLayoutContextStaffOpener = "\\context { \\Staff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondLayoutContextStaffOpener +=
       "%{ cLilypondLayoutContextStaffOpener %} ";
   }
   cLilypondLayoutContextStaffCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondLayoutContextStaffCloser +=
       "%{ cLilypondLayoutContextStaffCloser %} ";
   }
 
   cLilypondLayoutContextVoiceOpener = "\\context { \\Voice ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondLayoutContextVoiceOpener +=
       "%{ cLilypondLayoutContextVoiceOpener %} ";
   }
   cLilypondLayoutContextVoiceCloser = "} ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondLayoutContextVoiceCloser +=
       "%{ cLilypondLayoutContextVoiceCloser %} ";
   }
 
   // voices usage
   cLilypondUseVoiceOpener = "\\context ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondUseVoiceOpener +=
       "%{ cLilypondUseVoiceOpener %} ";
   }
   cLilypondUseVoiceCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondUseVoiceCloser +=
       "%{ cLilypondUseVoiceCloser %} ";
   }
 
   // chords
   cLilypondChordOpener = "< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondChordOpener +=
       "%{ cLilypondChordOpener %} ";
   }
   cLilypondChordCloser = "> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondChordCloser +=
       "%{ cLilypondChordCloser %} ";
   }
 
   // ligatures
   cLilypondLigatureOpener = "\\[ ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondLigatureOpener +=
       "%{ cLilypondLigatureOpener %} ";
   }
   cLilypondLigatureCloser = "\\] ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondLigatureCloser +=
       "%{ cLilypondLigatureCloser %} ";
   }
 
   // hairpins
   cLilypondHairPinsCrescendo = "\\< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondHairPinsCrescendo +=
       "%{ cLilypondHairPinsCrescendo %} ";
   }
   cLilypondHairPinsDecrescendo = "\\> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondHairPinsDecrescendo +=
       "%{ cLilypondHairPinsDecrescendo %} ";
   }
   cLilypondHairPinsStop = "\\! ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondHairPinsStop +=
       "%{ cLilypondHairPinsStop %} ";
   }
 
   // part groups
   cLilypondPartGroupOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondPartGroupOpener +=
       "%{ cLilypondPartGroupOpener %} ";
   }
   cLilypondPartGroupCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondPartGroupCloser +=
       "%{ cLilypondPartGroupCloser %} ";
   }
 
   // staff groups
   cLilypondNewStaffGroup = "\\new StaffGroup ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewStaffGroup +=
       "%{ cLilypondNewStaffGroup %} ";
   }
   cLilypondStaffGroupOpener = "<< ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondStaffGroupOpener +=
       "%{ cLilypondStaffGroupOpener %} ";
   }
   cLilypondStaffGroupCloser = ">> ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondStaffGroupCloser +=
       "%{ cLilypondStaffGroupCloser %} ";
   }
 
   // staves
   cLilypondNewStaff = "\\new Staff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewStaff +=
       "%{ cLilypondNewStaff %} ";
   }
   cLilypondNewTabStaff = "\\new TabStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewTabStaff +=
       "%{ cLilypondNewTabStaff %} ";
   }
   cLilypondNewHarmoniesStaff = "\\new HarmoniesStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewHarmoniesStaff +=
       "%{ cLilypondNewHarmoniesStaff %} ";
   }
   cLilypondNewFiguredBassStaff = "\\new FiguredBassStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewFiguredBassStaff +=
       "%{ cLilypondNewFiguredBassStaff %} ";
   }
   cLilypondNewDrumStaff = "\\new DrumStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewDrumStaff +=
       "%{ cLilypondNewDrumStaff %} ";
   }
   cLilypondNewRythmicStaff = "\\new RythmicStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewRythmicStaff +=
       "%{ cLilypondNewRythmicStaff %} ";
   }
   cLilypondNewJianpuStaff = "\\new JianpuStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewJianpuStaff +=
       "%{ cLilypondNewJianpuStaff %} ";
   }
 
   cLilypondNewGrandStaff = "\\new GrandStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewGrandStaff +=
       "%{ cLilypondNewGrandStaff %} ";
   }
   cLilypondNewPianoStaff = "\\new PianoStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewPianoStaff +=
       "%{ cLilypondNewPianoStaff %} ";
   }
   cLilypondNewChoirStaff = "\\new ChoirStaff ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewChoirStaff +=
       "%{ cLilypondNewChoirStaff %} ";
   }
 
   // lyrics
   cLilypondNewLyrics = "\\new Lyrics ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondNewLyrics +=
       "%{ cLilypondNewLyrics %} ";
   }
 
   // hide
   cLilypondHide = "\\hide ";
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondFragmentsComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     cLilypondHide +=
       "%{ cLilypondHide %} ";
   }
@@ -6149,7 +6161,7 @@ std::string lpsr2lilypondTranslator::generateAColumnForMarkup (
     ss <<
       " } ";
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       ss <<
         "% " <<
         mfSingularOrPlural (
@@ -6278,8 +6290,8 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
 //       std::endl << std::endl;
 //   }
 
-  // generate a 'global' variable?
-  if (gGlobalLpsr2lilypondOahGroup->getGlobal ()) {
+  // generate a 'global' empty variable?
+  if (gGlobalLpsr2lilypondOahGroup->getGlobalEmptyVariable ()) {
     fLilypondCodeStream <<
       "global = {" <<
       std::endl <<
@@ -6641,7 +6653,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrHeader& elt)
   fLilypondCodeStream <<
     '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % header";
   }
@@ -7644,7 +7656,7 @@ void lpsr2lilypondTranslator::generatePaper (
   fLilypondCodeStream <<
     '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % paper";
   }
@@ -8571,7 +8583,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
     fLilypondCodeStream <<
       cLilypondLayoutContextScoreCloser;
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % end of score context";
     }
@@ -8602,7 +8614,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
     fLilypondCodeStream <<
       cLilypondLayoutContextVoiceCloser;
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % end of voice context";
     }
@@ -8728,7 +8740,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
       cLilypondLayoutContextStaffCloser <<
       " % end of staff context";
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % end of layout";
     }
@@ -8741,7 +8753,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
   fLilypondCodeStream <<
     '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % layout";
   }
@@ -8838,7 +8850,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
 
   fLilypondCodeStream << '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % end of book";
   }
@@ -8931,7 +8943,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
 
   fLilypondCodeStream << '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % end of score";
   }
@@ -9023,7 +9035,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
   fLilypondCodeStream <<
     '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % bookpart";
   }
@@ -9075,7 +9087,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrParallelMusicBLock& elt)
   if (fNumberOfPartGroupBlocks > 0) {
     fLilypondCodeStream << cLilypondParallelMusicOpener;
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % start of parallel music";
     }
@@ -9128,7 +9140,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrParallelMusicBLock& elt)
       std::endl <<
       cLilypondParallelMusicCloser;
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % end of parallel music";
     }
@@ -9218,17 +9230,19 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
   // LPNR, page 567 jMI ???
 
+  fLilypondCodeStream << std::endl; // JMI v0.9.72
+
   switch (partGroupImplicitKind) {
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       // don't generate code for the implicit outer-most part group block
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           "% start of implicit part group block";
       }
       break;
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           "% start of explicit part group block";
       }
@@ -9278,7 +9292,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           break;
       } // switch
 
-      if (true || gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " %{ partGroupImplicitKind: " <<
           partGroupImplicitKind <<
@@ -9290,7 +9304,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       if (gTraceOahGroup->getTracePartGroups ()) {
          fLilypondCodeStream <<
           " %{ " <<
-          partGroup->getPartGroupCombinedName () <<
+          partGroup->fetchPartGroupCombinedName () <<
           ", abs number: " <<
           partGroup->getPartGroupAbsoluteNumber () <<
           " %}  ";
@@ -9346,7 +9360,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       if (doGenerateAWithBlock) {
         fLilypondCodeStream <<
           std::endl <<
-          "\\with {" <<
+          "\\with " << cLilypondWithOpener <<
           std::endl;
       }
 
@@ -9407,16 +9421,16 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       // if the part group is not implicit
       if (doGenerateAWithBlock) {
         fLilypondCodeStream <<
-          '}' <<
+          cLilypondWithCloser <<
           std::endl;
       }
 
 //       fLilypondCodeStream << csvPartGroupOpener;
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " % start of part group block " <<
-          partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
+          partGroup->fetchPartGroupCombinedNameWithoutEndOfLines ();
       }
 
       fLilypondCodeStream << std::endl;
@@ -9443,9 +9457,16 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 //     ++gIndenter; //  // decremented in visitEnd (S_lpsrPartGroupBlock& elt)
 //   }
 
+  fLilypondCodeStream << std::endl; // JMI v0.9.72
+
   fLilypondCodeStream <<
+    std::endl <<
     cLilypondStaffGroupOpener <<
+    std::endl <<
     std::endl;
+
+  // decremented in visitEnd (S_lpsrPartGroupBlock& elt)
+  ++gIndenter;
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
@@ -9481,6 +9502,9 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // incremented in visitStart (S_lpsrPartGroupBlock& elt)
+  --gIndenter;
+
   // fetch part group
   S_msrPartGroup
     partGroup =
@@ -9493,19 +9517,19 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
   switch (partGroup->getPartGroupImplicitKind ()) {
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostYes:
       // don't generate code for the implicit outer-most part group block
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " % end of implicit part group block " <<
-          partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
+          partGroup->fetchPartGroupCombinedNameWithoutEndOfLines ();
       }
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
 //       fLilypondCodeStream << kPartGroupCloser;
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " % end of explicit part group block " <<
-          partGroup->getPartGroupCombinedNameWithoutEndOfLines ();
+          partGroup->fetchPartGroupCombinedNameWithoutEndOfLines ();
       }
 
       fLilypondCodeStream << std::endl;
@@ -9517,6 +9541,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
   } // switch
 
   fLilypondCodeStream <<
+    std::endl <<
     cLilypondPartGroupCloser <<
     std::endl;
 }
@@ -9583,12 +9608,12 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
         part->getPartInstrumentAbbreviation ();
         */
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         std::left <<
         std::setw (commentFieldWidth) <<
         cLilypondNewPianoStaff <<
-        " % part " << part->getPartCombinedName ();
+        " % part " << part->fetchPartCombinedName ();
     }
     else {
       fLilypondCodeStream <<
@@ -9599,7 +9624,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
 
     // generate the 'with' block beginning
     fLilypondCodeStream <<
-      "\\with {" <<
+      "\\with " << cLilypondWithOpener <<
       std::endl;
 
     ++gIndenter;
@@ -9628,12 +9653,15 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
 
     // generate the 'with' block ending
     fLilypondCodeStream <<
-      '}' <<
+      cLilypondWithCloser <<
       std::endl;
 
     fLilypondCodeStream << // JMI ??? v0.9.62
+      std::endl <<
       cLilypondPartOpener <<
-      std::endl;
+      std::endl << std::endl;
+
+    ++gIndenter;
   }
 }
 
@@ -9675,11 +9703,13 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (part->getPartStavesMap ().size () > 1) {
+    --gIndenter;
+
     // don't generate code for a part with only one staff
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         "% end of part blockpart " <<
-        part->getPartCombinedName ();
+        part->fetchPartCombinedName ();
     }
     else {
       fLilypondCodeStream <<
@@ -9776,7 +9806,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
   // generate the 'with' block beginning
   fLilypondCodeStream <<
-    "\\with {" <<
+    "\\with " << cLilypondWithOpener <<
     std::endl;
 
   ++gIndenter;
@@ -10003,13 +10033,13 @@ R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
 
   // generate the 'with' block ending
   fLilypondCodeStream <<
-    '}' <<
+    cLilypondWithCloser <<
     std::endl;
 
   // generate the comment if relevant
   fLilypondCodeStream << cLilypondStaffOpener;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % start of staff block for \"" << staff->getStaffAlphabeticName () << "\"";
   }
@@ -10062,7 +10092,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
 
   fLilypondCodeStream <<  cLilypondStaffCloser;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
   // get the staff
     S_msrStaff
       staff =
@@ -10534,7 +10564,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
   fLilypondCodeStream <<
     cLilypondUseVoiceCloser;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     // get the voice
     S_msrVoice
       voice =
@@ -10626,7 +10656,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
     ++gIndenter;
 
     fLilypondCodeStream <<
-      "\\with {" <<
+      "\\with " << cLilypondWithOpener <<
       std::endl;
 
     if (gGlobalLpsr2lilypondOahGroup->getAddLilypondStanzasNumbers ()) {
@@ -10638,7 +10668,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
     }
 
     fLilypondCodeStream <<
-      '}' <<
+      cLilypondWithCloser <<
       std::endl;
 
     switch (gGlobalLpsr2lilypondOahGroup->getLyricsNotesDurationsKind ()) {
@@ -10843,7 +10873,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
 /* JMI
   if (false) { //option JMI
     fLilypondCodeStream <<
-      "\\with {" <<
+      "\\with " << cLilypondWithOpener <<
       std::endl;
 
     ++gIndenter;
@@ -10857,7 +10887,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      '}' <<
+      cLilypondWithCloser <<
       std::endl;
   }
       */
@@ -10970,7 +11000,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
 /* JMI
   if (false) { //option JMI
     fLilypondCodeStream <<
-      "\\with {" <<
+      "\\with " << cLilypondWithOpener <<
       std::endl;
 
     ++gIndenter;
@@ -10984,7 +11014,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      '}' <<
+      cLilypondWithCloser <<
       std::endl;
   }
   */
@@ -11928,7 +11958,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
         std::endl;
 
       ss << // JMI v0.9.67
-        elt->getPartGroupCombinedName () <<
+        elt->fetchPartGroupCombinedName () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -11962,7 +11992,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
 
       ss <<
         "% --> End visiting msrPartGroup" <<
-        elt->getPartGroupCombinedName () <<
+        elt->fetchPartGroupCombinedName () <<
         ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
@@ -11985,7 +12015,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 {
   std::string
     partCombinedName =
-      elt->getPartCombinedName ();
+      elt->fetchPartCombinedName ();
 
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -12075,7 +12105,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
 
       ss <<
         "% --> End visiting msrPart" <<
-        elt->getPartCombinedName () <<
+        elt->fetchPartCombinedName () <<
         ", line " << elt->getInputStartLineNumber () <<
       std::endl;
 
@@ -12432,8 +12462,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
   ++gIndenter; // decremented in visitEnd (S_msrVoice& elt)
 
-  // use a 'global' macro?
-  if (gGlobalLpsr2lilypondOahGroup->getGlobal ()) {
+  // generate a 'global' empty variable?
+  if (gGlobalLpsr2lilypondOahGroup->getGlobalEmptyVariable ()) {
     fLilypondCodeStream <<
       "\\global" <<
       std::endl << std::endl;
@@ -12649,7 +12679,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
   if (gGlobalLpsr2lilypondOahGroup->getDisplayMusic ()) {
     fLilypondCodeStream << '}';
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % displayMusic";
     }
@@ -12662,7 +12692,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
   // generate the end of the voice definition
   fLilypondCodeStream << '}';
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % end of voice " << elt->getVoiceName ();
   }
@@ -13248,7 +13278,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     // generate the end of the voice definition
     fLilypondCodeStream <<
       "% start of segment " <<
@@ -13294,7 +13324,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
 //     --gIndenter; // incremented in visitStart (S_msrSegment& elt)
 
     fLilypondCodeStream <<
@@ -13375,7 +13405,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       fCurrentMeasureNumber);
 
   // generate measure start comment if relevant
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       "% start of measure " <<
       fCurrentMeasureNumber <<
@@ -13599,7 +13629,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       "\\bar \"|\" "; // JMI ???
       */
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % msrMeasureKind::kMeasureKindOverFlowing End";
     }
@@ -13610,26 +13640,27 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     fOnGoingVoiceCadenza = false;
   }
 
+  // is this measure musically empty?
   switch (measureKind) {
     case msrMeasureKind::kMeasureKindUnknown:
       {
-        std::stringstream ss;
-
-        ss <<
-          "measure '" << fCurrentMeasureNumber <<
-          "' is of unknown kind in lpsr2lilypondTranslator";
-
-// if (false) // JMI
-//         lpsr2lilypondInternalError (
+//         std::stringstream ss;
+//
+//         ss <<
+//           "measure '" << fCurrentMeasureNumber <<
+//           "' is of unknown kind in lpsr2lilypondTranslator";
+//
+// // if (false) // JMI
+// //         lpsr2lilypondInternalError (
+// //           gServiceRunData->getInputSourceName (),
+// //           elt->getInputStartLineNumber (),
+// //           __FILE__, __LINE__,
+// //           ss.str ());
+// // else
+//         lpsr2lilypondInternalWarning (
 //           gServiceRunData->getInputSourceName (),
 //           elt->getInputStartLineNumber (),
-//           __FILE__, __LINE__,
 //           ss.str ());
-// else
-        lpsr2lilypondInternalWarning (
-          gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
-          ss.str ());
       }
       break;
 
@@ -13637,56 +13668,56 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindAnacrusis:
-      // only generate '\partial' at the beginning of a voice // this code SUPERFLOUS??? JMI v0.9.66
-      if (elt->getMeasureIsFirstInVoice ()) {
-        std::string
-          upbeatNotesDuration =
-            wholeNotesAsLilypondString (
-              elt->getInputStartLineNumber (),
-              elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
-
-        fLilypondCodeStream <<
-          "\\partial " << upbeatNotesDuration <<
-          std::endl;
-      }
+//       // only generate '\partial' at the beginning of a voice // this code SUPERFLOUS??? JMI v0.9.66
+//       if (elt->getMeasureIsFirstInVoice ()) {//
+//         std::string
+//           upbeatNotesDuration =
+//             wholeNotesAsLilypondString (
+//               elt->getInputStartLineNumber (),
+//               elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
+//
+//         fLilypondCodeStream <<
+//           "\\partial " << upbeatNotesDuration <<
+//           std::endl;
+//       }
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
-      if (
-        elt->getMeasureIsFirstInVoice ()
-          &&
-        elt->fetchMeasureUpLinkToScore ()->getScoreMeasuresNumber () > 1
-      ) {
-        // don't generate '\partial' at the beginning of a voice
-        std::string
-          upbeatNotesDuration =
-            wholeNotesAsLilypondString (
-              elt->getInputStartLineNumber (),
-              elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
-
-        fLilypondCodeStream <<
-          "\\partial " << upbeatNotesDuration <<
-          std::endl;
-      }
+//       if (
+//         elt->getMeasureIsFirstInVoice ()
+//           &&
+//         elt->fetchMeasureUpLinkToScore ()->getScoreMeasuresNumber () > 1
+//       ) {
+//         // don't generate '\partial' at the beginning of a voice
+//         std::string
+//           upbeatNotesDuration =
+//             wholeNotesAsLilypondString (
+//               elt->getInputStartLineNumber (),
+//               elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
+//
+//         fLilypondCodeStream <<
+//           "\\partial " << upbeatNotesDuration <<
+//           std::endl;
+//       }
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteLastMeasure:
-      if (
-        elt->getMeasureIsFirstInVoice ()
-          &&
-        elt->fetchMeasureUpLinkToScore ()->getScoreMeasuresNumber () > 1
-      ) {
-        // don't generate '\partial' at the beginning of a voice
-        std::string
-          upbeatNotesDuration =
-            wholeNotesAsLilypondString (
-              elt->getInputStartLineNumber (),
-              elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
-
-        fLilypondCodeStream <<
-          "\\partial " << upbeatNotesDuration <<
-          std::endl;
-      }
+//       if (
+//         elt->getMeasureIsFirstInVoice ()
+//           &&
+//         elt->fetchMeasureUpLinkToScore ()->getScoreMeasuresNumber () > 1
+//       ) {
+//         // don't generate '\partial' at the beginning of a voice
+//         std::string
+//           upbeatNotesDuration =
+//             wholeNotesAsLilypondString (
+//               elt->getInputStartLineNumber (),
+//               elt->getMeasureCurrentAccumulatedWholeNotesDuration ());
+//
+//         fLilypondCodeStream <<
+//           "\\partial " << upbeatNotesDuration <<
+//           std::endl;
+//       }
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart:
@@ -13695,132 +13726,209 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterCommonPart:
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHookedEnding:
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
-      {
-        msrWholeNotes
-          measureCurrentAccumulatedWholeNotesDuration =
-            elt->getMeasureCurrentAccumulatedWholeNotesDuration ();
-
-        msrWholeNotes
-          fullMeasureWholeNotesDuration =
-            elt->getFullMeasureWholeNotesDuration ();
-
-        // we should set the score measure whole notes in this case
-        mfRational
-          ratioToFullMeasureWholeNotesDuration =
-            measureCurrentAccumulatedWholeNotesDuration / fullMeasureWholeNotesDuration;
-
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMeasuresDetails ()) {
-          int fieldWidth = 27;
-
-          fLilypondCodeStream <<
-            std::left <<
-            "% Setting the measure whole notes for measure " <<
-            std::setw (fieldWidth) <<
-            fCurrentMeasureNumber <<
-            ", line: " << elt->getInputStartLineNumber () <<
-            std::endl <<
-            std::setw (fieldWidth) <<
-            "% measureCurrentAccumulatedWholeNotesDuration: " <<
-            measureCurrentAccumulatedWholeNotesDuration.asString () <<
-            std::endl <<
-            std::setw (fieldWidth) <<
-            "% fullMeasureWholeNotesDuration: " <<
-            fullMeasureWholeNotesDuration.asString () <<
-            std::endl <<
-            std::setw (fieldWidth) <<
-            "% ratioToFullMeasureWholeNotesDuration: " <<
-            ratioToFullMeasureWholeNotesDuration.asString () <<
-            std::endl << std::endl;
-        }
-#endif // MF_TRACE_IS_ENABLED
-
-        if (ratioToFullMeasureWholeNotesDuration == mfRational (1, 1)) {
-          std::stringstream ss;
-
-          ss <<
-            "underfull measure '" << fCurrentMeasureNumber <<
-            "' has actually the full measure whole notes";
-
-     // JMI       lpsr2lilypondInternalError (
-          lpsr2lilypondInternalWarning (
-            gServiceRunData->getInputSourceName (),
-            elt->getInputStartLineNumber (),
-    // JMI        __FILE__, __LINE__,
-            ss.str ());
-        }
-
-        else {
-          /* JMI
-          fLilypondCodeStream <<
-            "\\set Score.measureLength = #(ly:make-moment " <<
-            measureCurrentAccumulatedWholeNotesDuration.toString () <<
-            ")" <<
-            std::endl;
-    */
-
-          // should we generate a line break?
-          if (gGlobalLpsr2lilypondOahGroup->getBreakLinesAtIncompleteRightMeasures ()) {
-            fLilypondCodeStream <<
-              "\\break" <<
-              std::endl;
-          }
-        }
-      }
+//       {
+//         msrWholeNotes
+//           measureCurrentAccumulatedWholeNotesDuration =
+//             elt->getMeasureCurrentAccumulatedWholeNotesDuration ();
+//
+//         msrWholeNotes
+//           fullMeasureWholeNotesDuration =
+//             elt->getFullMeasureWholeNotesDuration ();
+//
+//         // we should set the score measure whole notes in this case
+//         mfRational
+//           ratioToFullMeasureWholeNotesDuration =
+//             measureCurrentAccumulatedWholeNotesDuration / fullMeasureWholeNotesDuration;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gTraceOahGroup->getTraceMeasuresDetails ()) {
+//           int fieldWidth = 27;
+//
+//           fLilypondCodeStream <<
+//             std::left <<
+//             "% Setting the measure whole notes for measure " <<
+//             std::setw (fieldWidth) <<
+//             fCurrentMeasureNumber <<
+//             ", line: " << elt->getInputStartLineNumber () <<
+//             std::endl <<
+//             std::setw (fieldWidth) <<
+//             "% measureCurrentAccumulatedWholeNotesDuration: " <<
+//             measureCurrentAccumulatedWholeNotesDuration.asString () <<
+//             std::endl <<
+//             std::setw (fieldWidth) <<
+//             "% fullMeasureWholeNotesDuration: " <<
+//             fullMeasureWholeNotesDuration.asString () <<
+//             std::endl <<
+//             std::setw (fieldWidth) <<
+//             "% ratioToFullMeasureWholeNotesDuration: " <<
+//             ratioToFullMeasureWholeNotesDuration.asString () <<
+//             std::endl << std::endl;
+//         }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//         if (ratioToFullMeasureWholeNotesDuration == mfRational (1, 1)) {
+//           std::stringstream ss;
+//
+//           ss <<
+//             "underfull measure '" << fCurrentMeasureNumber <<
+//             "' has actually the full measure whole notes";
+//
+//      // JMI       lpsr2lilypondInternalError (
+//           lpsr2lilypondInternalWarning (
+//             gServiceRunData->getInputSourceName (),
+//             elt->getInputStartLineNumber (),
+//     // JMI        __FILE__, __LINE__,
+//             ss.str ());
+//         }
+//
+//         else {
+//           /* JMI
+//           fLilypondCodeStream <<
+//             "\\set Score.measureLength = #(ly:make-moment " <<
+//             measureCurrentAccumulatedWholeNotesDuration.toString () <<
+//             ")" <<
+//             std::endl;
+//     */
+//
+//           // should we generate a line break?
+//           if (gGlobalLpsr2lilypondOahGroup->getBreakLinesAtIncompleteRightMeasures ()) {
+//             fLilypondCodeStream <<
+//               "\\break" <<
+//               std::endl;
+//           }
+//         }
+//       }
       break;
 
     case msrMeasureKind::kMeasureKindOverFlowing:
-      if (! fOnGoingVoiceCadenza) {
-        msrWholeNotes
-          measureCurrentAccumulatedWholeNotesDuration =
-            elt->getMeasureCurrentAccumulatedWholeNotesDuration (); // JMI v0.9.70
-
-        fLilypondCodeStream <<
-          std::endl <<
-          "\\cadenzaOn" <<
-          std::endl <<
-          "% measureCurrentAccumulatedWholeNotesDuration: " <<
-          measureCurrentAccumulatedWholeNotesDuration.asString () <<
-          std::endl <<
-          "\\omit Staff.TimeSignature";
-
-        if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-          fLilypondCodeStream << " % msrMeasureKind::kMeasureKindOverFlowing Start";
-        }
-
-        fLilypondCodeStream << std::endl;
-
-        fOnGoingVoiceCadenza = true;
-      }
+//       if (! fOnGoingVoiceCadenza) {
+//         msrWholeNotes
+//           measureCurrentAccumulatedWholeNotesDuration =
+//             elt->getMeasureCurrentAccumulatedWholeNotesDuration (); // JMI v0.9.70
+//
+//         fLilypondCodeStream <<
+//           std::endl <<
+//           "\\cadenzaOn" <<
+//           std::endl <<
+//           "% measureCurrentAccumulatedWholeNotesDuration: " <<
+//           measureCurrentAccumulatedWholeNotesDuration.asString () <<
+//           std::endl <<
+//           "\\omit Staff.TimeSignature";
+//
+//         if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+//           fLilypondCodeStream << " % msrMeasureKind::kMeasureKindOverFlowing Start";
+//         }
+//
+//         fLilypondCodeStream << std::endl;
+//
+//         fOnGoingVoiceCadenza = true;
+//       }
       break;
 
     case msrMeasureKind::kMeasureKindCadenza:
-      if (! fOnGoingVoiceCadenza) {
-        fLilypondCodeStream <<
-          std::endl <<
-          "\\cadenzaOn" <<
-          std::endl;
-
-        if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-          fLilypondCodeStream << " % msrMeasureKind::kMeasureKindCadenza Start";
-        }
-
-        fLilypondCodeStream << std::endl;
-
-        fLilypondCodeStream <<
-          "\\once\\omit Staff.TimeSignature" <<
-          std::endl;
-
-        fOnGoingVoiceCadenza = true;
-      }
+//       if (! fOnGoingVoiceCadenza) {
+//         fLilypondCodeStream <<
+//           std::endl <<
+//           "\\cadenzaOn" <<
+//           std::endl;
+//
+//         if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+//           fLilypondCodeStream << " % msrMeasureKind::kMeasureKindCadenza Start";
+//         }
+//
+//         fLilypondCodeStream << std::endl;
+//
+//         fLilypondCodeStream <<
+//           "\\once\\omit Staff.TimeSignature" <<
+//           std::endl;
+//
+//         fOnGoingVoiceCadenza = true;
+//       }
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
       // DON'T generate a skip and bar check here,
       // this is done in lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       // to have the msrClefKeyTimeSignatureGroup if any generated before it
+
+      // the code for the rest or skip should be generated now,
+      // because there can be a barline as the only element of the measure
+      generateCodeForMusicallyEmptyMeasure (elt);
       break;
   } // switch
+}
+
+void lpsr2lilypondTranslator::generateCodeForMusicallyEmptyMeasure (
+  S_msrMeasure& measure)
+{ // JMI v0.9.72 ???
+  // now, to have the msrClefKeyTimeSignatureGroup if any
+  // being handled first
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+    fLilypondCodeStream <<
+      "%{ kMeasureKindMusicallyEmpty" <<
+      ", line " << measure->getInputStartLineNumber () <<
+      " %}  % " <<
+      measure->getMeasurePuristNumber () + 1 <<
+      std::endl;
+  }
+
+  // fetch measure's voice
+  S_msrVoice
+    measureVoice =
+      measure->
+        fetchMeasureUpLinkToVoice ();
+
+  // fetch measure's part
+  S_msrPart
+    measurePart =
+      measureVoice->
+        getVoiceUpLinkToStaff ()->
+          getStaffUpLinkToPart ();
+
+  msrWholeNotes
+    measureCurrentAccumulatedWholeNotesDuration =
+      measurePart->
+        fetchPartMeasuresWholeNotesVectorAt (
+          measure->getInputStartLineNumber (),
+          measure->getMeasureOrdinalNumberInVoice () - 1);
+
+  // generate the skip name
+  // take voice kind into account may be useful for debug
+  switch (measureVoice->getVoiceKind ()) {
+    case msrVoiceKind::kVoiceKindRegular:
+    case msrVoiceKind::kVoiceKindDynamics:
+      fLilypondCodeStream <<
+//               'R';
+        's' << " %{ s999 %}  ";
+      break;
+
+    case msrVoiceKind::kVoiceKindHarmonies:
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      fLilypondCodeStream <<
+//               'R';
+        's' << " %{ s888 %}  ";
+      break;
+  } // switch
+
+  // generate the duration of the skip from the full measure whole notes JMI v0.9.68
+  fLilypondCodeStream <<
+    wholeNotesAsLilypondString (
+      measure->getInputStartLineNumber (),
+      measure->getFullMeasureWholeNotesDuration ());
+
+  if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+    // generate information and line number as a comment
+    fLilypondCodeStream <<
+      " %{ line " <<
+      measure->getInputStartLineNumber () <<
+      " %}  ";
+  }
+
+  if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
+    // generate information and line number as a comment
+    fLilypondCodeStream <<
+      " %{ kMeasureKindMusicallyEmpty %}  ";
+  }
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
@@ -14003,86 +14111,86 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         break;
 
       case msrMeasureKind::kMeasureKindMusicallyEmpty:
-        {
-          // only now, to have the msrClefKeyTimeSignatureGroup if any
-          // being handled first
-          if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-            fLilypondCodeStream <<
-              "%{ emptyMeasureKind" <<
-              ", line " << elt->getInputStartLineNumber () <<
-              " %}  % " <<
-              measurePuristNumber + 1 <<
-              std::endl;
-          }
-
-          // fetch measure's voice
-          S_msrVoice
-            measureVoice =
-              elt->
-                fetchMeasureUpLinkToVoice ();
-
-          // fetch measure's part
-          S_msrPart
-            measurePart =
-              measureVoice->
-                getVoiceUpLinkToStaff ()->
-                  getStaffUpLinkToPart ();
-
-          msrWholeNotes
-            measureCurrentAccumulatedWholeNotesDuration =
-              measurePart->
-                fetchPartMeasuresWholeNotesVectorAt (
-                  elt->getInputStartLineNumber (),
-                  elt->getMeasureOrdinalNumberInVoice () - 1);
-
-          // generate the skip name
-          // take voice kind into account may be useful for debug
-          switch (measureVoice->getVoiceKind ()) {
-            case msrVoiceKind::kVoiceKindRegular:
-            case msrVoiceKind::kVoiceKindDynamics:
-              fLilypondCodeStream <<
-  //               'R';
-                's' << " %{ s999 %}  ";
-              break;
-
-            case msrVoiceKind::kVoiceKindHarmonies:
-            case msrVoiceKind::kVoiceKindFiguredBass:
-              fLilypondCodeStream <<
-  //               'R';
-                's' << " %{ s888 %}  ";
-              break;
-          } // switch
-
-          // generate the duration of the skip from the full measure whole notes JMI v0.9.68
-          fLilypondCodeStream <<
-            wholeNotesAsLilypondString (
-              elt->getInputStartLineNumber (),
-              elt->getFullMeasureWholeNotesDuration ());
-
-          if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
-            // generate information and line number as a comment
-            fLilypondCodeStream <<
-              " %{ line " <<
-              elt->getInputStartLineNumber () <<
-              " %}  ";
-          }
-
-          if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
-            // generate information and line number as a comment
-            fLilypondCodeStream <<
-              " %{ kMeasureKindMusicallyEmpty %}  ";
-          }
-
+//         {
+//           // only now, to have the msrClefKeyTimeSignatureGroup if any
+//           // being handled first // JMI v0.9.72 ???
+//           if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+//             fLilypondCodeStream <<
+//               "%{ kMeasureKindMusicallyEmpty" <<
+//               ", line " << elt->getInputStartLineNumber () <<
+//               " %}  % " <<
+//               measurePuristNumber + 1 <<
+//               std::endl;
+//           }
+//
+//           // fetch measure's voice
+//           S_msrVoice
+//             measureVoice =
+//               elt->
+//                 fetchMeasureUpLinkToVoice ();
+//
+//           // fetch measure's part
+//           S_msrPart
+//             measurePart =
+//               measureVoice->
+//                 getVoiceUpLinkToStaff ()->
+//                   getStaffUpLinkToPart ();
+//
+//           msrWholeNotes
+//             measureCurrentAccumulatedWholeNotesDuration =
+//               measurePart->
+//                 fetchPartMeasuresWholeNotesVectorAt (
+//                   elt->getInputStartLineNumber (),
+//                   elt->getMeasureOrdinalNumberInVoice () - 1);
+//
+//           // generate the skip name
+//           // take voice kind into account may be useful for debug
+//           switch (measureVoice->getVoiceKind ()) {
+//             case msrVoiceKind::kVoiceKindRegular:
+//             case msrVoiceKind::kVoiceKindDynamics:
+//               fLilypondCodeStream <<
+//   //               'R';
+//                 's' << " %{ s999 %}  ";
+//               break;
+//
+//             case msrVoiceKind::kVoiceKindHarmonies:
+//             case msrVoiceKind::kVoiceKindFiguredBass:
+//               fLilypondCodeStream <<
+//   //               'R';
+//                 's' << " %{ s888 %}  ";
+//               break;
+//           } // switch
+//
+//           // generate the duration of the skip from the full measure whole notes JMI v0.9.68
+//           fLilypondCodeStream <<
+//             wholeNotesAsLilypondString (
+//               elt->getInputStartLineNumber (),
+//               elt->getFullMeasureWholeNotesDuration ());
+//
+//           if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+//             // generate information and line number as a comment
+//             fLilypondCodeStream <<
+//               " %{ line " <<
+//               elt->getInputStartLineNumber () <<
+//               " %}  ";
+//           }
+//
+//           if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
+//             // generate information and line number as a comment
+//             fLilypondCodeStream <<
+//               " %{ kMeasureKindMusicallyEmpty %}  ";
+//           }
+//
           // generate a bar check
           fLilypondCodeStream <<
             " | % " <<
             elt->getNextMeasureNumber () <<
             std::endl;
-        }
+//         }
         break;
     } // switch
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
  // JMI     --gIndenter; // incremented in visitStart (S_msrMeasure& elt)
 
       fLilypondCodeStream <<
@@ -14211,7 +14319,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
  */
   }
 
-//   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+//   if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
 // //     ++gIndenter; // incremented in visitStart (S_msrMeasure& elt)
 //   }
 }
@@ -14355,7 +14463,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
 
       fLilypondCodeStream <<
         std::endl <<
-        '}' <<
+        "} %{ FOFO FOFO %}" <<
         std::endl << std::endl;
     }
 
@@ -18082,7 +18190,7 @@ If the double element is present, it indicates that the music is doubled one oct
       / * JMI
       getStaffAlphabeticName () <<
       "\" in part " <<
-      fStaffUpLinkToPart->getPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartCombinedName () <<
       * /
       std::endl <<
       ", transpositionPitch: " <<
@@ -20528,7 +20636,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
               }
 #endif // MF_TRACE_IS_ENABLED
 
-              fLilypondCodeStream << "[ " << " %{ generateNoteBeams() %}";
+              fLilypondCodeStream << "[ " << " %{ generateNoteBeams() %} ";
 
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
               if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
@@ -21907,7 +22015,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
           }
           else {
             // no
-//             if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+//             if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
 //               fLilypondCodeStream <<
 //                 "%{ " <<
 //                 gServiceRunData->getInputSourceName () <<
@@ -26003,7 +26111,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
           break;
           */
       } // switch
-      fLilypondCodeStream << " %{ b333 %}";
+      fLilypondCodeStream << " %{ b333 visitStart (S_msrBarLine& elt) %}";
 
       if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
         // generate the barLine line number as a comment
@@ -26678,7 +26786,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
   fLilypondCodeStream <<
     ss.str ();
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % start of repeat";
   }
@@ -26742,7 +26850,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 
     fLilypondCodeStream << "}";
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % end of repeat";
     }
@@ -26879,7 +26987,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
     // outputting the end of the repeat
     fLilypondCodeStream << '}';
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % end of repeat" <<
         std::endl;
@@ -26894,7 +27002,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
       std::endl << std::endl <<
       "\\alternative {";
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         " % start of alternative";
     }
@@ -26911,7 +27019,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
       fLilypondCodeStream <<
         '{';
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " % start of repeat hooked ending";
       }
@@ -26924,7 +27032,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
       fLilypondCodeStream <<
         '{';
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " % start of repeat hookless ending";
       }
@@ -27006,7 +27114,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
       fLilypondCodeStream <<
         '}' << " % HAHA_1";
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " % end of repeat hooked ending";
       }
@@ -27016,7 +27124,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
       fLilypondCodeStream <<
         '}' << " % HAHA_2";
 
-      if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ())   {
+      if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ())   {
         fLilypondCodeStream <<
           " % end of repeat hookless ending";
       }
@@ -27065,7 +27173,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
     fLilypondCodeStream <<
       '}';
 
-    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ())   {
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ())   {
       fLilypondCodeStream <<
         " % end of alternative";
     }
@@ -27293,7 +27401,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % start of measures repeat" <<
       mfSingularOrPlural (
@@ -27354,7 +27462,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
     " }" <<
     std::endl;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       "% end of measures repeat" <<
       mfSingularOrPlural (
@@ -27467,7 +27575,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   // output the start of the ending
   fLilypondCodeStream << "{";
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       " % start of measures repeat replicas" <<
       std::endl;
@@ -27550,7 +27658,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultiMeasureRest& elt)
   int measureRestsNumber =
     elt->getMeasureRestsNumber ();
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       "% start of multi-measure rests" <<
       mfSingularOrPlural (
@@ -27717,7 +27825,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
   fLilypondCodeStream <<
     std::endl;
 
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     --gIndenter; // incremented in visitStart (S_msrMultiMeasureRest&)
 
     fLilypondCodeStream <<

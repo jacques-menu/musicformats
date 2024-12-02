@@ -3293,7 +3293,7 @@ void msrVoice::appendVoiceStaffChangeToVoice (
 void msrVoice::appendNoteToVoice (const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes ()) {
+  if (true || gTraceOahGroup->getTraceNotes ()) {
     std::stringstream ss;
 
     ss <<

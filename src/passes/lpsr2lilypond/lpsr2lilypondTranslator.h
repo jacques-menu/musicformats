@@ -763,7 +763,12 @@ class EXP lpsr2lilypondTranslator :
     // private fields and methods
     // ------------------------------------------------------
 
+    // LilyPond fragments
     void                  initializeLilypondUsefulFragments ();
+
+    // musically empty measures
+    void                  generateCodeForMusicallyEmptyMeasure (
+                            S_msrMeasure& measure);
 
     // names
 
@@ -1111,18 +1116,56 @@ class EXP lpsr2lilypondTranslator :
 */
 
     // LilyPond useful fragments
-    std::string           cLilypondParallelMusicOpener,
-                          cLilypondParallelMusicCloser;
 
+    // partgroups
+    std::string           cLilypondPartGroupOpener,
+                          cLilypondPartGroupCloser;
+
+    // parts
     std::string           cLilypondPartOpener,
                           cLilypondPartCloser;
 
-    std::string           cLilypondScordaturaOpener,
-                          cLilypondScordaturaCloser;
+    // staff groups
+    std::string           cLilypondNewStaffGroup,
+                          cLilypondStaffGroupOpener,
+                          cLilypondStaffGroupCloser;
 
+    // barlines
+
+
+    // staves
     std::string           cLilypondStaffOpener,
                           cLilypondStaffCloser;
 
+    std::string           cLilypondNewStaff,
+                          cLilypondNewGrandStaff,
+                          cLilypondNewPianoStaff,
+                          cLilypondNewChoirStaff;
+
+    std::string           cLilypondNewTabStaff,
+                          cLilypondNewHarmoniesStaff,
+                          cLilypondNewFiguredBassStaff,
+                          cLilypondNewDrumStaff,
+                          cLilypondNewRythmicStaff,
+                          cLilypondNewJianpuStaff;
+
+    // voices
+    std::string           cLilypondUseVoiceOpener,
+                          cLilypondUseVoiceCloser;
+
+    // with
+    std::string           cLilypondWithOpener,
+                          cLilypondWithCloser;
+
+    // parallel music
+    std::string           cLilypondParallelMusicOpener,
+                          cLilypondParallelMusicCloser;
+
+    // scordaturas
+    std::string           cLilypondScordaturaOpener,
+                          cLilypondScordaturaCloser;
+
+    // layout contexts
     std::string           cLilypondLayoutContextScoreOpener,
                           cLilypondLayoutContextScoreCloser;
 
@@ -1132,42 +1175,24 @@ class EXP lpsr2lilypondTranslator :
     std::string           cLilypondLayoutContextVoiceOpener,
                           cLilypondLayoutContextVoiceCloser;
 
-    std::string           cLilypondUseVoiceOpener,
-                          cLilypondUseVoiceCloser;
-
+    // chords
     std::string           cLilypondChordOpener,
                           cLilypondChordCloser;
 
+    // ligarures
     std::string           cLilypondLigatureOpener,
                           cLilypondLigatureCloser;
 
+    // hairpins
     std::string           cLilypondHairPinsCrescendo,
                           cLilypondHairPinsDecrescendo,
                           cLilypondHairPinsStop;
 
-  // staff groups
-    std::string           cLilypondNewStaffGroup,
-                          cLilypondStaffGroupOpener,
-                          cLilypondStaffGroupCloser;
-
-    std::string           cLilypondNewStaff,
-                          cLilypondNewGrandStaff,
-                          cLilypondNewPianoStaff,
-                          cLilypondNewChoirStaff;
-
+    // lyrics
     std::string           cLilypondNewLyrics;
 
+    // with
     std::string           cLilypondHide;
-
-    std::string           cLilypondNewTabStaff,
-                          cLilypondNewHarmoniesStaff,
-                          cLilypondNewFiguredBassStaff,
-                          cLilypondNewDrumStaff,
-                          cLilypondNewRythmicStaff,
-                          cLilypondNewJianpuStaff;
-
-    std::string           cLilypondPartGroupOpener,
-                          cLilypondPartGroupCloser;
 
     // global staff size
     // ------------------------------------------------------

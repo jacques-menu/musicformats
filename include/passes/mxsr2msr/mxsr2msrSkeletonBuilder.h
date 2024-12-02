@@ -101,7 +101,7 @@ class mxsrPartGroup : public smartable
     std::string           fetchMsrPartGroupCombinedName () const
                               {
                                 return
-                                  fMsrPartGroup->getPartGroupCombinedName ();
+                                  fMsrPartGroup->fetchPartGroupCombinedName ();
                               }
 
     static bool           comparePartGroupsByIncreasingIdentity (

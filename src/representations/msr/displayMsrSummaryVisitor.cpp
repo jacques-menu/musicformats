@@ -285,7 +285,7 @@ void displayMsrSummaryVisitor::visitStart (S_msrPartGroup& elt)
   size_t partGroupElementsSize = elt->getPartGroupElementsList ().size ();
 
   gLog <<
-    "PartGroup" << ' ' << elt->getPartGroupCombinedName () <<
+    "PartGroup" << ' ' << elt->fetchPartGroupCombinedName () <<
     " contains " <<
     mfSingularOrPlural (
       partGroupElementsSize,
@@ -386,7 +386,7 @@ void displayMsrSummaryVisitor::visitStart (S_msrPart& elt)
   size_t partStavesMapSize = elt->getPartStavesMap ().size ();
 
   gLog <<
-    "Part " << elt->getPartCombinedName () <<
+    "Part " << elt->fetchPartCombinedName () <<
     " contains " <<
     mfSingularOrPlural (
       partStavesMapSize,

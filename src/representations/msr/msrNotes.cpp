@@ -620,7 +620,7 @@ S_msrNote msrNote::createNoteNewbornClone (
       asString () <<
       " in part " <<
       containingPart->
-        getPartCombinedName ();
+        fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -824,7 +824,7 @@ S_msrNote msrNote::createNoteDeepClone (
       /* JMI
       " in part " <<
       containingPart->
-        getPartCombinedName () <<
+        fetchPartCombinedName () <<
         */
       std::endl;
 

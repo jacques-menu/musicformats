@@ -348,10 +348,10 @@ void mxsr2msrPopulatorVoiceHandler::print (std::ostream& os) const
     fMsrVoice->getVoiceName () <<
     std::endl <<
 
-    std::setw (fieldWidth) <<
-    "fLastMetNoteInVoice" << ": " <<
-    fLastMetNoteInVoice <<
-    std::endl <<
+//     std::setw (fieldWidth) <<
+//     "fLastMetNoteInVoice" << ": " <<
+//     fLastMetNoteInVoice <<
+//     std::endl <<
 
     std::setw (fieldWidth) <<
     "fCurrentOuterMostTupletFirstNote" << ": " <<
@@ -484,7 +484,6 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
 
   // voice handling
   fCurrentNoteVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
-//   fCurrentNoteVoiceNumber = 1; // default value, useful for wedges ??? JMI v0.9.70
 
   // measures handling
   fPartMeasuresCounter = 0;
@@ -2925,7 +2924,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
       std::endl <<
       "      " <<
       "part " <<
-      fCurrentPart-> getPartCombinedName () <<
+      fCurrentPart-> fetchPartCombinedName () <<
       ", line " <<
       elt->getInputStartLineNumber () <<
       std::endl <<
@@ -3005,7 +3004,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
       std::endl <<
       "Analyzing part " <<
       fCurrentPart->
-        getPartCombinedName () <<
+        fetchPartCombinedName () <<
         " -- start";
 
     gWaeHandler->waeTrace (
@@ -3079,7 +3078,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
     ss <<
       "Analyzing part " <<
       fCurrentPart->
-        getPartCombinedName () <<
+        fetchPartCombinedName () <<
         " -- end" <<
       std::endl <<
       "--------------------------------------------";
@@ -3302,7 +3301,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
 
     ss <<
       " per quarter note in part " <<
-      fCurrentPart->getPartCombinedName() <<
+      fCurrentPart->fetchPartCombinedName() <<
       ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -7540,7 +7539,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
       gServiceRunData;
 
   serviceRunData->
-    setCurrentStaveNumber (
+    setCurrentStaveNumber ( // JMI v0.9.72 ???
       fCurrentNoteStaffNumber);
 
   // set concepts-specific staff numbers
@@ -8193,7 +8192,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gGlobalMxsrOahGroup->getTraceBackup ()) {
+  if (gGlobalMxsrOahGroup->getTraceBackup ()) {
     std::stringstream ss;
 
     ss <<
@@ -8232,8 +8231,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 //     elt->getInputStartLineNumber ());
 
   // reset staff change detection
-  fCurrentNoteVoiceNumber = 1; // default value
-  fCurrentRecipientStaffNumber = 1;// default value
+//   fCurrentNoteVoiceNumber = 1; // default value
+//   fCurrentRecipientStaffNumber = 1;// default value
 
   fOnGoingBackup = false;
 }
@@ -8408,7 +8407,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   // reset staff change detection
 //   fCurrentRecipientStaffNumber = fCurrentForwardStaffNumber; // JMI ??? v0.9.72
   // reset staff change detection
-  fCurrentRecipientStaffNumber = 1;// default value
+//   fCurrentRecipientStaffNumber = 1;// default value
 
   fOnGoingForward = false;
 }
@@ -10236,7 +10235,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
         fCurrentMeasureNumber <<
       ", line " << elt->getInputStartLineNumber () <<
       ", in part \"" <<
-      fCurrentPart->getPartCombinedName () << "\"";
+      fCurrentPart->fetchPartCombinedName () << "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -10259,7 +10258,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       std::endl <<
       "      " <<
       "part " <<
-      fCurrentPart-> getPartCombinedName () <<
+      fCurrentPart-> fetchPartCombinedName () <<
       std::endl <<
       "      " <<
       "measure " << fCurrentMeasureNumber <<
@@ -10631,7 +10630,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
             "Replicating meaure " <<
             fCurrentMeasureNumber <<
             " in part " <<
-            fCurrentPart->getPartCombinedName ();
+            fCurrentPart->fetchPartCombinedName ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -10685,7 +10684,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           mfSingularOrPlural (
             measuresToBeAdded, "empty measure", "empty measures") <<
           " to part " <<
-          fCurrentPart->getPartCombinedName ();
+          fCurrentPart->fetchPartCombinedName ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -11716,7 +11715,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
       "Creating barLine " <<
       barLine->asString () <<
       " in part " <<
-      fCurrentPart->getPartCombinedName ();
+      fCurrentPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11970,7 +11969,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 
           ss <<
             "Appending a standalone barLine to part " <<
-            fCurrentPart->getPartCombinedName () << ":" <<
+            fCurrentPart->fetchPartCombinedName () << ":" <<
             std::endl;
 
           ++gIndenter;
@@ -12077,12 +12076,15 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 
 	++fCurrentNoteSequentialNumber;
 
+  fCurrentNoteInputStartLineNumber =
+    elt->getInputStartLineNumber ();
+
   // initialize note data to a neutral state
   initializeNoteData ();
 
   if (gGlobalMxsr2msrOahGroup->getUseMxsrEvents ()) { // EVENTS
 #ifdef MF_TRACE_IS_ENABLED
-    if (true || gTraceOahGroup->getTraceStaffChangesBasics ()) {
+    if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
       gLog <<
         "====>>> fCurrentNoteChordEvent:";
       if (fCurrentNoteChordEvent) {
@@ -12154,7 +12156,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 //
 //       case mxsrTupletEventKind::kEventTupletEventTakeOff:
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (true || gTraceOahGroup->getTraceNotes ()) {
+//         if (gTraceOahGroup->getTraceNotes ()) {
 //           std::stringstream ss;
 //
 //           ss <<
@@ -12182,7 +12184,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 //
 //       case mxsrTupletEventKind::kEventTupletEventLanding:
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (true || gTraceOahGroup->getTraceNotes ()) {
+//         if (gTraceOahGroup->getTraceNotes ()) {
 //           std::stringstream ss;
 //
 //           ss <<
@@ -12254,7 +12256,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
   if (fCurrentNoteStaffChangeEvent) {
     // there is a staff change
 #ifdef MF_TRACE_IS_ENABLED
-    if (true || gTraceOahGroup->getTraceStaffChangesBasics ()) {
+    if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
       std::stringstream ss;
 
       ss <<
@@ -12271,6 +12273,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
+
+    handleStaffChangeIfAny ();
 
     fOnGoingStaffChange = true;
   }
@@ -12500,7 +12504,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
   int duration = (int)(*elt); // divisions
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceNotesDurations ()) {
+  if (gTraceOahGroup->getTraceNotesDurations ()) {
     std::stringstream ss;
 
     ss <<
@@ -13334,7 +13338,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
     ss <<
       "Creating measures repeat from its first measures" <<
       "in part " <<
-      fCurrentPart->getPartCombinedName () <<
+      fCurrentPart->fetchPartCombinedName () <<
       ", fCurrentMeasureRepeatMeasuresNumber: " <<
       fCurrentMeasureRepeatMeasuresNumber <<
       ", fCurrentMeasureRepeatSlashesNumber: " <<
@@ -13365,7 +13369,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
     ss <<
       "Appending measures repeat " <<
       "to part " <<
-      fCurrentPart->getPartCombinedName () <<
+      fCurrentPart->fetchPartCombinedName () <<
       ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -24371,6 +24375,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // register note as the last one in its voice
   fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber]->
     setLastMetNoteInVoice (
       note);
@@ -24843,7 +24848,7 @@ else {
 
   fVoicesLastMetNoteMap [
     std::make_pair (
-      fCurrentNoteStaffNumber,
+      fCurrentNoteStaffNumber, // JMI ??? v0.9.72
       fCurrentNoteVoiceNumber)
     ] =
       fCurrentNote;
@@ -25175,8 +25180,7 @@ void mxsr2msrSkeletonPopulator::finalizeTupletIfAny (
   }
 }
 
-void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny (
-  int inputLineNumber)
+void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny ()
 {
 /*
       Note 1:
@@ -25191,53 +25195,133 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny (
         ]
 */
 
-#ifdef MF_TRACE_IS_ENABLED
-    if (true || gTraceOahGroup->getTraceStaffChangesBasics ()) {
-      std::stringstream ss;
-
-      ss <<
-        "There is a staff change event at fCurrentNoteSequentialNumber: " <<
-        fCurrentNoteSequentialNumber <<
-        ": " <<
-        fCurrentNoteStaffChangeEvent->asString () <<
-        ", line " << fCurrentNoteStaffChangeEvent->getEventInputStartLineNumber ();
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
 //   if (thereIsAStaffChange (inputLineNumber)) { // EVENTS
   if (fCurrentNoteStaffChangeEvent) { // EVENTS
 //   if (thereIsAStaffChange) {
-    // yes, KEEP APPENDING MUSIC TO fCurrentPartVoicesVector [fCurrentNoteVoiceNumber], NO CHANGE ACTUALLY!
+    // yes, KEEP APPENDING MUSIC TO fCurrentPartVoicesVector [fCurrentRecipientStaffNumber], NO CHANGE ACTUALLY!
+
+    int
+      noteSequentialNumber =
+        fCurrentNoteStaffChangeEvent->
+          getNoteSequentialNumber ();
+
+    int
+      eventInputStartLineNumber =
+        fCurrentNoteStaffChangeEvent->
+          getEventInputStartLineNumber (),
+      eventInputEndLineNumber =
+        fCurrentNoteStaffChangeEvent->
+          getEventInputEndLineNumber ();
+
+    int
+      takeOffStaffNumber =
+        fCurrentNoteStaffChangeEvent->
+          getTakeOffStaffNumber (),
+     landingStaffNumber =
+        fCurrentNoteStaffChangeEvent->
+          getLandingStaffNumber ();
+
+    int
+      noteEventVoiceNumber =
+        fCurrentNoteStaffChangeEvent->
+          getNoteEventVoiceNumber ();
+
+
+#ifdef MF_TRACE_IS_ENABLED
+		if (true || gTraceOahGroup->getTraceStaffChangesBasics ()) {
+			std::stringstream ss;
+
+			ss <<
+				"===> There is a staff change event FOO:" <<
+				'\n' <<
+				"eventInputStartLineNumber: " <<
+				eventInputStartLineNumber <<
+				"eventInputEndLineNumber: " <<
+				eventInputEndLineNumber <<
+
+				", noteSequentialNumber: " <<
+				noteSequentialNumber <<
+
+				", takeOffStaffNumber: " <<
+				takeOffStaffNumber <<
+				", landingStaffNumber: " <<
+				landingStaffNumber <<
+
+				", noteEventVoiceNumber: " <<
+				noteEventVoiceNumber <<
+
+				", line " << eventInputStartLineNumber;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+		}
+#endif // MF_TRACE_IS_ENABLE
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+    // sanity checks
+    if (noteSequentialNumber != fCurrentNoteSequentialNumber) {
+      std::stringstream ss;
+
+      ss <<
+        "noteSequentialNumber: " <<
+        noteSequentialNumber <<
+        " is not equal to fCurrentNoteSequentialNumber: " <<
+        fCurrentNoteSequentialNumber;
+
+      mfAssert (
+        __FILE__, __LINE__,
+        false,
+        ss.str ());
+    }
+
+    if (eventInputStartLineNumber != fCurrentNoteInputStartLineNumber) {
+      std::stringstream ss;
+
+      ss <<
+        "eventInputStartLineNumber: " <<
+        eventInputStartLineNumber <<
+        " is not equal to fCurrentNoteInputStartLineNumber: " <<
+        fCurrentNoteInputStartLineNumber;
+
+      mfAssert (
+        __FILE__, __LINE__,
+        false,
+        ss.str ());
+    }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     // fetch the current note's staff
     S_msrStaff
-      currentNoteStaff =
-        fCurrentPartStavesVector [fCurrentNoteStaffNumber],
-      previousNoteStaff =
-        fCurrentPartStavesVector [fPreviousNoteStaffNumber]; // JMI v0.9.72
+      takeOffStaff =
+        fCurrentPartStavesVector [takeOffStaffNumber],
+      landingStaff =
+        fCurrentPartStavesVector [landingStaffNumber]; // JMI v0.9.72
 
     // create the voice staff change
     S_msrVoiceStaffChange
       voiceStaffChange =
         msrVoiceStaffChange::create (
-          inputLineNumber,
+          eventInputStartLineNumber,
           gNullMeasure,  // JMI v0.9.72 ???  // set later in setMeasureElementUpLinkToMeasure()
-          previousNoteStaff,
-          currentNoteStaff);
+          takeOffStaff,
+          landingStaff);
 
-    // append it to the previous note's voice
+    // append the voice staff change to the event's voice number
     // before the note itself is appended
-    fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+    fCurrentPartVoicesVector [noteEventVoiceNumber]->
       appendVoiceStaffChangeToVoice (
         voiceStaffChange);
+
+    // the recipient staff for current note is the take off staff,
+    // not the landing, current note staff
+    fCurrentRecipientStaffNumber =
+      takeOffStaffNumber; // JMI v0.9.72
   }
+
   else {
-    fCurrentRecipientStaffNumber = fCurrentNoteStaffNumber;
-    // no, KEEP APPENDING MUSIC TO fCurrentPartVoicesVector [fCurrentNoteVoiceNumber] JMI v0.9.68
+    fCurrentRecipientStaffNumber =
+      fCurrentNoteStaffNumber; // JMI v0.9.72
   }
 }
 
@@ -25273,10 +25357,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     Staff values are numbers, with 1 referring to the top-most staff in a part.
   */
 
-  if (fCurrentRecipientStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
-    // there is no previous note telling us that
-    fCurrentRecipientStaffNumber = fCurrentNoteStaffNumber;
-  }
+//   if (fCurrentRecipientStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
+//     // there is no previous note telling us that
+//     fCurrentRecipientStaffNumber = fCurrentNoteStaffNumber;
+//   }
+
   // attach the pending dal segnos, if any,
   // to the ** previous ** note or chord
   // fetch current note's voice
@@ -25708,7 +25793,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
         ", for note " <<
         fCurrentNote->asShortString () <<
         " to part " <<
-        fCurrentPart->getPartCombinedName () <<
+        fCurrentPart->fetchPartCombinedName () <<
         ", line " << harmony->getInputStartLineNumber ()  <<
         std::endl;
 
@@ -28871,7 +28956,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
 
     ss <<
       "Handling a repeat end in part " <<
-      fCurrentPart->getPartCombinedName () <<
+      fCurrentPart->fetchPartCombinedName () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
       "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
@@ -28909,7 +28994,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
 
     ss <<
       "Handling a repeat ending start in part " <<
-      fCurrentPart->getPartCombinedName () <<
+      fCurrentPart->fetchPartCombinedName () <<
       ", line " << barLine->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -28942,7 +29027,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
 
     ss <<
       "Handling a repeat ending upon its start in part " <<
-      fCurrentPart->getPartCombinedName () <<
+      fCurrentPart->fetchPartCombinedName () <<
       ", line " << barLine->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -28970,7 +29055,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
 
     ss <<
       "Handling a repeat hooked ending end in part " <<
-      fCurrentPart->getPartCombinedName () <<
+      fCurrentPart->fetchPartCombinedName () <<
       ", line " << barLine->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -29007,7 +29092,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
 
     ss <<
       "Handling a hooked repeat ending in part " <<
-      fCurrentPart->getPartCombinedName () <<
+      fCurrentPart->fetchPartCombinedName () <<
       ", line " << barLine->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -29042,7 +29127,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
 
     ss <<
       "Handling a repeat hookless ending end in part " <<
-      fCurrentPart->getPartCombinedName () <<
+      fCurrentPart->fetchPartCombinedName () <<
       ", line " << barLine->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -29079,7 +29164,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
 
     ss <<
       "Handling a hookless repeat ending in part " <<
-      fCurrentPart->getPartCombinedName () <<
+      fCurrentPart->fetchPartCombinedName () <<
       ", line " << barLine->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -29186,7 +29271,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
     ss <<
       "Creating rehearsalMark \"" << rehearsalValue << "\"" <<
       " in part " <<
-      fCurrentPart->getPartCombinedName ();
+      fCurrentPart->fetchPartCombinedName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -29960,7 +30045,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
 
       gLog << std::left <<
         std::setw (fieldWidth) << "fCurrentPart" << ": " <<
-        fCurrentPart->getPartCombinedName () <<
+        fCurrentPart->fetchPartCombinedName () <<
         std::endl <<
         /* JMI
         std::setw (fieldWidth) << "harmoniesVoice" << ": " <<
@@ -31436,7 +31521,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 
       gLog << std::left <<
         std::setw (fieldWidth) << "fCurrentPart" << ": " <<
-        fCurrentPart->getPartCombinedName () <<
+        fCurrentPart->fetchPartCombinedName () <<
         std::endl <<
         std::setw (fieldWidth) << "fCurrentFiguredBassSoundingWholeNotes" << ": " <<
         fCurrentFiguredBassSoundingWholeNotes <<
@@ -32263,7 +32348,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 //
 //       case mxsrStaffChangeEventKind::kEventStaffChangeTakeOff:
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (true || gTraceOahGroup->getTraceNotes ()) {
+//         if (gTraceOahGroup->getTraceNotes ()) {
 //           std::stringstream ss;
 //
 //           ss <<
@@ -32284,7 +32369,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 //
 //       case mxsrStaffChangeEventKind::kEventStaffChangeLanding:
 // #ifdef MF_TRACE_IS_ENABLED
-//         if (true || gTraceOahGroup->getTraceNotes ()) {
+//         if (gTraceOahGroup->getTraceNotes ()) {
 //           std::stringstream ss;
 //
 //           ss <<

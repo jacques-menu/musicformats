@@ -180,7 +180,7 @@ void displayLpsrNamesVisitor::visitStart (S_msrPartGroup& elt)
       getPartGroupElementsList ().size ();
 
   gLog <<
-    "PartGroup" << ' ' << elt->getPartGroupCombinedName () <<
+    "PartGroup" << ' ' << elt->fetchPartGroupCombinedName () <<
     " contains " <<
     mfSingularOrPlural (
       partGroupElementsSize,
@@ -255,7 +255,7 @@ void displayLpsrNamesVisitor::visitStart (S_msrPart& elt)
       getPartStavesMap ().size ();
 
   gLog <<
-    "Part " << elt->getPartCombinedName () <<
+    "Part " << elt->fetchPartCombinedName () <<
     " contains " <<
     mfSingularOrPlural (
       partStavesMapSize,

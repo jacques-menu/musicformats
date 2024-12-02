@@ -822,6 +822,7 @@ void msrBarLine::print (std::ostream& os) const
   os <<
     "[BarLine" <<
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
+    ", fStyleKind: " << fStyleKind <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 

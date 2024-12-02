@@ -1707,6 +1707,7 @@ void xml2lyRegularHandler::createOutputRegularGroup ()
   registerAtomInRegularSubgroup ("lilypond-version", subGroup);
   registerAtomInRegularSubgroup ("lilypond-run-date", subGroup);
 
+  registerAtomInRegularSubgroup ("lilypond-comments-basics", subGroup);
   registerAtomInRegularSubgroup ("lilypond-comments", subGroup);
   registerAtomInRegularSubgroup ("lilypond-useful-fragments-comments", subGroup);
 

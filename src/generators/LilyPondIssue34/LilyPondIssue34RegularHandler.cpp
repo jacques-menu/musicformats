@@ -544,7 +544,8 @@ void LilyPondIssue34RegularHandler::createOahRegularGroup ()
       registerAtomInRegularSubgroup ("lyluatex", subGroup);
 
       registerAtomInRegularSubgroup ("lilypond-generation-infos", subGroup);
-      registerAtomInRegularSubgroup ("lilypond-comments", subGroup);
+      registerAtomInRegularSubgroup ("lilypond-comments-basics", subGroup);
+  registerAtomInRegularSubgroup ("lilypond-comments", subGroup);
       registerAtomInRegularSubgroup ("lilypond-useful-fragments-comments", subGroup);
       registerAtomInRegularSubgroup ("input-line-numbers", subGroup);
 

@@ -556,7 +556,8 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
       registerAtomInRegularSubgroup ("input-line-numbers", subGroup);
 
       registerAtomInRegularSubgroup ("notes-comments", subGroup);
-      registerAtomInRegularSubgroup ("lilypond-comments", subGroup);
+      registerAtomInRegularSubgroup ("lilypond-comments-basics", subGroup);
+  registerAtomInRegularSubgroup ("lilypond-comments", subGroup);
       registerAtomInRegularSubgroup ("lilypond-useful-fragments-comments", subGroup);
 
       registerAtomInRegularSubgroup ("global-staff-size", subGroup);

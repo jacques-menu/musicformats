@@ -1628,20 +1628,20 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getXml2lyInfos () const
                               { return fXml2lyInfos; }
 
+    void                  setLilypondCommentsBasics ()
+                              { fLilypondCommentsBasics = true; }
+    Bool                  getLilypondCommentsBasics () const
+                              { return fLilypondCommentsBasics; }
+
     void                  setLilypondComments ()
                               { fLilypondComments = true; }
     Bool                  getLilypondComments () const
                               { return fLilypondComments; }
 
-    void                  setLilypondFragmentsComments ()
-                              { fLilypondFragmentsComments = true; }
-    Bool                  getLilypondFragmentsComments () const
-                              { return fLilypondFragmentsComments; }
-
-    void                  setGlobal ()
-                              { fGlobal = true; }
-    Bool                  getGlobal () const
-                              { return fGlobal; }
+    void                  setGlobalEmptyVariable ()
+                              { fGlobalEmptyVariable = true; }
+    Bool                  getGlobalEmptyVariable () const
+                              { return fGlobalEmptyVariable; }
 
     void                  setDisplayMusic ()
                               { fDisplayMusic = true; }
@@ -2037,10 +2037,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // this atom is used by the '-minimal' combined option
     S_oahBooleanAtom      fNoBarNumberChecksAtom;
     // this atom is used by the '-minimal' combined option
-    S_oahBooleanAtom      fNoBarCheckCommentsAtom;
 
     // bar check comments
     // --------------------------------------
+
+    S_oahBooleanAtom      fNoBarCheckCommentsAtom;
 
     Bool                  fNoBarCheckComments;
 
@@ -2183,12 +2184,12 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fXml2lyInfos;
 
+    Bool                  fLilypondCommentsBasics;
+    S_oahBooleanAtom      fLilypondCommentsBasicsAtom;
+
     Bool                  fLilypondComments;
-    S_oahBooleanAtom      fLilypondCommentsAtom;
 
-    Bool                  fLilypondFragmentsComments;
-
-    Bool                  fGlobal;
+    Bool                  fGlobalEmptyVariable;
 
     Bool                  fDisplayMusic;
 

@@ -5113,38 +5113,39 @@ R"(Generate initial comments showing the LilyPond generation informations.)",
   // --------------------------------------
 
   S_oahBooleanAtom
-    fLilypondCommentsAtom =
+    fLilypondCommentsBasicsAtom =
       oahBooleanAtom::create (
-        "lilypond-comments", "lilycoms",
-R"(Generate comments showing the structure of the score
+        "lilypond-comments-basics", "lilycommsb",
+R"(Generate basic trace comments showing the structure of the score
 such as '% part P_POne (P1).)",
-        "fLilypondComments",
-        fLilypondComments);
+        "fLilypondCommentsBasics",
+        fLilypondCommentsBasics);
 
   subGroup->
     appendAtomToSubGroup (
-      fLilypondCommentsAtom);
+      fLilypondCommentsBasicsAtom);
 
   subGroup->
     appendAtomToSubGroup (
       oahTwoBooleansAtom::create (
-        "lilypond-fragments-comments", "lilyfragscoms",
-R"(Generate comments upon the use of fragments such as cLilypondParallelMusicOpener.)",
-        "fLilypondFragmentsComments",
-        fLilypondFragmentsComments,
-        fLilypondCommentsAtom));
+        "lilypond-comments", "lilycomms",
+R"(Generate trace comments showing the structure of the score.
+This option implies '-lilypond-comments-basics, -lilycomsb'.)",
+        "fLilypondComments",
+        fLilypondComments,
+        fLilypondCommentsBasicsAtom));
 
-  // global
+  // global empty variable
   // --------------------------------------
 
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "global", "",
+        "global-empty-variable", "globalemptyvar",
 R"(Generate a 'global' empty variable and place a use of it
 at the beginning of all voices.)",
-        "fGlobal",
-        fGlobal));
+        "fGlobalEmptyVariable",
+        fGlobalEmptyVariable));
 
   // staff size
   // --------------------------------------
@@ -6432,15 +6433,15 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       fXml2lyInfos <<
       std::endl <<
 
+    std::setw (valueFieldWidth) << "fLilypondCommentsBasics" << ": " <<
+      fLilypondCommentsBasics <<
+      std::endl <<
     std::setw (valueFieldWidth) << "fLilypondComments" << ": " <<
       fLilypondComments <<
       std::endl <<
-    std::setw (valueFieldWidth) << "fLilypondFragmentsComments" << ": " <<
-      fLilypondFragmentsComments <<
-      std::endl <<
 
-    std::setw (valueFieldWidth) << "fGlobal" << ": " <<
-      fGlobal <<
+    std::setw (valueFieldWidth) << "fGlobalEmptyVariable" << ": " <<
+      fGlobalEmptyVariable <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fNoPaperBlock" << ": " <<
@@ -7021,15 +7022,15 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
       fXml2lyInfos <<
       std::endl <<
 
+    std::setw (fieldWidth) << "fLilypondCommentsBasics" << ": " <<
+      fLilypondCommentsBasics <<
+      std::endl <<
     std::setw (fieldWidth) << "fLilypondComments" << ": " <<
       fLilypondComments <<
       std::endl <<
-    std::setw (fieldWidth) << "fLilypondFragmentsComments" << ": " <<
-      fLilypondFragmentsComments <<
-      std::endl <<
 
-    std::setw (fieldWidth) << "fGlobal" << ": " <<
-      fGlobal <<
+    std::setw (fieldWidth) << "fGlobalEmptyVariable" << ": " <<
+      fGlobalEmptyVariable <<
       std::endl <<
 
     std::setw (fieldWidth) << "fDisplayMusic" << ": " <<

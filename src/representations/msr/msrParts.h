@@ -135,7 +135,7 @@ class EXP msrPart : public msrPartGroupElement
 
     std::string           getPartIDAndName () const;
 
-    std::string           getPartCombinedName () const;
+    std::string           fetchPartCombinedName () const;
 
     void                  setPartInstrumentNamesMaxLengthes ();
 
@@ -401,6 +401,8 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrStaff& staff);
 
     S_msrStaff            fetchStaffFromPart (int staffNumber);
+
+    void                  sortStavesByIncreasingNumber ();
 
     // voices
 

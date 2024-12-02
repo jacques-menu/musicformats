@@ -230,7 +230,7 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 
     ss <<
       "part group '" <<
-      partGroup->getPartGroupCombinedName () <<
+      partGroup->fetchPartGroupCombinedName () <<
       "' already exists in this score";
 
     msrInternalError (
@@ -262,7 +262,7 @@ void msrScore::removePartGroupFromScore (const S_msrPartGroup& partGroup)
 
     ss <<
       "part group '" <<
-      partGroup->getPartGroupCombinedName () <<
+      partGroup->fetchPartGroupCombinedName () <<
       "' is not present in this score";
 
     msrInternalError (
@@ -339,7 +339,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
       std::stringstream ss;
 
       ss <<
-        (*i)->getPartGroupCombinedName () <<
+        (*i)->fetchPartGroupCombinedName () <<
         ", " <<
         (*i)->getPartGroupName () <<
         std::endl;

@@ -157,7 +157,7 @@ std::string mxsrPartGroup::asString () const
     '\'' <<
     fPartGroupNumber <<
     "' -=> " <<
-    fMsrPartGroup->getPartGroupCombinedName ();
+    fMsrPartGroup->fetchPartGroupCombinedName ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -639,16 +639,16 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
   fCurrentPartGroupIdentity= -1; // the score part 'start' will set this identity
 
   // staff handling
-  fCurrentNoteStaffNumber  = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
   fPreviousNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 
   // voice handling
-  fCurrentNoteVoiceNumber  = K_VOICE_NUMBER_UNKNOWN_;
+  fCurrentNoteVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
   fPreviousNoteVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
 
   // measures handling
   fScoreFirstMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
-  fScoreLastMeasureNumber  = K_MEASURE_NUMBER_UNKNOWN_;
+  fScoreLastMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
 
   fScoreMeasuresNumber = 0;
   fPartNumberOfMeasures = 0;
@@ -1043,7 +1043,7 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
 
       gLog <<
         i << ": " <<
-        part->getPartCombinedName () <<
+        part->fetchPartCombinedName () <<
         ", upLink to: ";
 
       S_msrPartGroup
@@ -1054,7 +1054,7 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
       if (partUpLinkToPartGroup) {
         gLog <<
           partUpLinkToPartGroup->
-            getPartGroupCombinedName ();
+            fetchPartGroupCombinedName ();
       }
       else {
         gLog <<
@@ -1148,7 +1148,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
 
     ss <<
       "Registering MSR part " <<
-      theMsrPart->getPartCombinedName () <<
+      theMsrPart->fetchPartCombinedName () <<
       " in the parts data" <<
       ", line " << inputLineNumber;
 
@@ -1180,7 +1180,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
 
     ss <<
       "AFTER registering MSR part \"" <<
-      theMsrPart->getPartCombinedName () <<
+      theMsrPart->fetchPartCombinedName () <<
       "\" in the parts data" <<
       ", line " << inputLineNumber;
 
@@ -1609,10 +1609,10 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
     ss <<
       "Handling the nesting of part group " <<
       theMsrContainingPartGroup->
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
       "' into " <<
       theMsrContainingPartGroup->
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1629,10 +1629,10 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
     ss <<
       "Setting the upLink of part group " <<
       theMsrPartGroupToBeStopped->
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
       "' to " <<
       theMsrContainingPartGroup->
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1654,10 +1654,10 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
     ss <<
       "Appending sub part group " <<
       theMsrPartGroupToBeStopped->
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
       "' to " <<
       theMsrContainingPartGroup->
-        getPartGroupCombinedName () <<
+        fetchPartGroupCombinedName () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1914,7 +1914,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
         ss <<
           "Cannot append part " <<
-          part->getPartCombinedName () <<
+          part->fetchPartCombinedName () <<
           " to any part group " <<
           " at identity" << identity<<
           ", since the part groups groups stack is empty"<<
@@ -2099,7 +2099,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
               ss <<
                 gTab <<
-                part->getPartCombinedName () <<
+                part->fetchPartCombinedName () <<
                 ", line " << part->getInputStartLineNumber () <<
                 std::endl;
             } // for
@@ -2200,7 +2200,7 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
   int staffNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceParts ()) {
+  if (gTraceOahGroup->getTraceParts ()) {
     std::stringstream ss;
 
     ss <<
@@ -2251,7 +2251,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
   // the voice number is relative to a part
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoices ()) {
     std::stringstream ss;
 
     ss <<
@@ -4491,7 +4491,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       std::stringstream ss;
 
       ss <<
-        "part " << fCurrentPart->getPartCombinedName () <<
+        "part " << fCurrentPart->fetchPartCombinedName () <<
         " has " << fPartNumberOfMeasures <<
         " measures while the other ones have " << fScoreMeasuresNumber<<
 				", line " << elt->getInputStartLineNumber ();
@@ -4508,6 +4508,11 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
   fCurrentPart->
     setPartNumberOfMeasures (
       fPartNumberOfMeasures);
+
+//   // sort the part staves by increasing number,
+//   // because they can be out of order in the MusicXML data
+  fCurrentPart->
+    sortStavesByIncreasingNumber ();
 
 /* JMI v0.9.69
   // are there more staves in <staves/> that specified with <staff/>?
@@ -4585,7 +4590,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 // //     } // switch
 // //
 // //     ss <<
-// //       " in part " << fCurrentPart->getPartCombinedName();
+// //       " in part " << fCurrentPart->fetchPartCombinedName();
 // //
 // //     gWaeHandler->waeTrace (
 // //       __FILE__, __LINE__,
@@ -5129,38 +5134,38 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 
   // if there is a staff change, we shouldn't create a voice
   // for the current, landing note
-#ifdef MF_TRACE_IS_ENABLED
-	if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
-		std::stringstream ss;
-
-		ss <<
-			"===> Is there is a staff change???" <<
-			'\n' <<
-			", fCurrentNoteStartInputLineNumber: " <<
-			fCurrentNoteStartInputLineNumber <<
-// 			", fCurrentNoteEndInputLineNumber: " <<
-// 			fCurrentNoteEndInputLineNumber <<
-
-			", fPreviousNoteStaffNumber: " <<
-			fPreviousNoteStaffNumber <<
-			", fCurrentNoteStaffNumber: " <<
-			fCurrentNoteStaffNumber <<
-
-			", fPreviousNoteVoiceNumber: " <<
-			fPreviousNoteVoiceNumber <<
-			", fCurrentNoteVoiceNumber: " <<
-			fCurrentNoteVoiceNumber <<
-
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
-
-			", line " << fCurrentNoteStartInputLineNumber;
-
-		gWaeHandler->waeTrace (
-			__FILE__, __LINE__,
-			ss.str ());
-	}
-#endif // MF_TRACE_IS_ENABLED
+// #ifdef MF_TRACE_IS_ENABLED
+// 	if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
+// 		std::stringstream ss;
+//
+// 		ss <<
+// 			"===> Is there is a staff change event?" <<
+// 			'\n' <<
+// 			", fCurrentNoteStartInputLineNumber: " <<
+// 			fCurrentNoteStartInputLineNumber <<
+// // 			", fCurrentNoteEndInputLineNumber: " <<
+// // 			fCurrentNoteEndInputLineNumber <<
+//
+// 			", fPreviousNoteStaffNumber: " <<
+// 			fPreviousNoteStaffNumber <<
+// 			", fCurrentNoteStaffNumber: " <<
+// 			fCurrentNoteStaffNumber <<
+//
+// 			", fPreviousNoteVoiceNumber: " <<
+// 			fPreviousNoteVoiceNumber <<
+// 			", fCurrentNoteVoiceNumber: " <<
+// 			fCurrentNoteVoiceNumber <<
+//
+// 			", fPreviousNoteIsATakeOffCandidate: " <<
+// 			fPreviousNoteIsATakeOffCandidate <<
+//
+// 			", line " << fCurrentNoteStartInputLineNumber;
+//
+// 		gWaeHandler->waeTrace (
+// 			__FILE__, __LINE__,
+// 			ss.str ());
+// 	}
+// #endif // MF_TRACE_IS_ENABLED
 
   if (
     fCurrentNoteStaffNumber != fPreviousNoteStaffNumber
@@ -5178,9 +5183,9 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 			std::stringstream ss;
 
 			ss <<
-				"===> There IS a staff change!!!" <<
+				"===> There is a staff change event:" <<
 				'\n' <<
-				", fCurrentNoteStartInputLineNumber: " <<
+				"fCurrentNoteStartInputLineNumber: " <<
 				fCurrentNoteStartInputLineNumber <<
 	// 			", fCurrentNoteEndInputLineNumber: " <<
 	// 			fCurrentNoteEndInputLineNumber <<
@@ -5190,10 +5195,10 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 				", fCurrentNoteStaffNumber: " <<
 				fCurrentNoteStaffNumber <<
 
-				", fPreviousNoteVoiceNumber: " <<
-				fPreviousNoteVoiceNumber <<
 				", fCurrentNoteVoiceNumber: " <<
 				fCurrentNoteVoiceNumber <<
+				", fPreviousNoteVoiceNumber: " <<
+				fPreviousNoteVoiceNumber <<
 
 				", fPreviousNoteIsATakeOffCandidate: " <<
 				fPreviousNoteIsATakeOffCandidate <<

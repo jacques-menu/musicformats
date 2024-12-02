@@ -852,7 +852,7 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "--> Start visiting msrPartGroup " <<
-      elt->getPartGroupCombinedName () <<
+      elt->fetchPartGroupCombinedName () <<
       ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -881,7 +881,7 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
 
         ss <<
           "Adding part group clone " <<
-          partGroupClone->getPartGroupCombinedName () <<
+          partGroupClone->fetchPartGroupCombinedName () <<
           " to the resulting new MSR score" <<
           ", line " << elt->getInputStartLineNumber ();
 
@@ -908,7 +908,7 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "Pushing part group clone " <<
-      partGroupClone->getPartGroupCombinedName () <<
+      partGroupClone->fetchPartGroupCombinedName () <<
       " onto the stack" <<
       ", line " << elt->getInputStartLineNumber ();
 
@@ -937,7 +937,7 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
 
     ss <<
       "--> End visiting msrPartGroup " <<
-      elt->getPartGroupCombinedName () <<
+      elt->fetchPartGroupCombinedName () <<
       ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -955,7 +955,7 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
 
       ss <<
         "Popping part group clone " <<
-        fPartGroupsStack.front ()->getPartGroupCombinedName () <<
+        fPartGroupsStack.front ()->fetchPartGroupCombinedName () <<
         " from the stack" <<
         ", line " << elt->getInputStartLineNumber ();
 
@@ -986,9 +986,9 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
 
             ss <<
               "Appending part group clone " <<
-              elt->getPartGroupCombinedName () <<
+              elt->fetchPartGroupCombinedName () <<
               " to the current part group " <<
-              newPartGroupStackTop->getPartGroupCombinedName () <<
+              newPartGroupStackTop->fetchPartGroupCombinedName () <<
               ", line " << elt->getInputStartLineNumber ();
 
             gWaeHandler->waeTrace (
@@ -1019,7 +1019,7 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
 #ifdef MF_TRACE_IS_ENABLED
   std::string
     partCombinedName =
-      elt->getPartCombinedName ();
+      elt->fetchPartCombinedName ();
 
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
@@ -1081,9 +1081,9 @@ void msr2msrTranslator::visitStart (S_msrPart& elt)
 
     ss <<
       "Adding part clone " <<
-      fCurrentPartClone->getPartCombinedName () <<
+      fCurrentPartClone->fetchPartCombinedName () <<
       " to part group clone \"" <<
-      fPartGroupsStack.front ()->getPartGroupCombinedName () <<
+      fPartGroupsStack.front ()->fetchPartGroupCombinedName () <<
       "\"";
 
     gWaeHandler->waeTrace (
@@ -1106,7 +1106,7 @@ void msr2msrTranslator::visitEnd (S_msrPart& elt)
 
     ss <<
       "--> End visiting msrPart " <<
-      elt->getPartCombinedName () <<
+      elt->fetchPartCombinedName () <<
       ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -1460,7 +1460,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
 //           std::string partCombinedName =
 //             fCurrentVoiceOriginal->
 //               fetchVoiceUpLinkToPart ()->
-//                 getPartCombinedName ();
+//                 fetchPartCombinedName ();
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //           if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -1497,7 +1497,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
 //           std::string partCombinedName =
 //             fCurrentVoiceOriginal->
 //               fetchVoiceUpLinkToPart ()->
-//                 getPartCombinedName ();
+//                 fetchPartCombinedName ();
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //           if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -6277,7 +6277,7 @@ void msr2msrTranslator::visitEnd (S_msrRepeat& elt)
       "Handling repeat end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
 //      "\" in part \"" <<
-//      fCurrentPartClone->getPartCombinedName () <<
+//      fCurrentPartClone->fetchPartCombinedName () <<
       "\"";
 
     gWaeHandler->waeTrace (
@@ -6839,7 +6839,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
         " to voices other than \"" <<
         voiceClone->getVoiceName () << "\"" <<
         " in part " <<
-        partClone->getPartCombinedName () <<
+        partClone->fetchPartCombinedName () <<
         ", line " << skipGraceNotesGroup->getInputStartLineNumber ();
 
       gWaeHandler->waeTrace (

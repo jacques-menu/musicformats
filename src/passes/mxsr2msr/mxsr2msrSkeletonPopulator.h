@@ -256,6 +256,9 @@ class EXP mxsr2msrSkeletonPopulator :
 
   public                      visitor<S_divisions>,
 
+  // staves
+  // ------------------------------------------------------
+
   public                      visitor<S_staves>,
   public                      visitor<S_staff>,
 
@@ -272,7 +275,7 @@ class EXP mxsr2msrSkeletonPopulator :
   public                      visitor<S_capo>,
   public                      visitor<S_staff_size>,
 
-  // ???
+  // voices
   // ------------------------------------------------------
 
   public                      visitor<S_voice>,
@@ -425,7 +428,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
   public                      visitor<S_measure>,
   public                      visitor<S_measure_numbering>,
-
 
   // printing
   // ------------------------------------------------------
@@ -1631,8 +1633,7 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrNote                 createNote (
                                 int inputLineNumber);
 
-    void                      handleStaffChangeIfAny (
-                                int inputLineNumber);
+    void                      handleStaffChangeIfAny ();
 
     void                      finalizeTupletIfAny (
                                 int inputLineNumber);
@@ -2139,6 +2140,8 @@ class EXP mxsr2msrSkeletonPopulator :
     // ------------------------------------------------------
 
     int                       fCurrentNoteSequentialNumber; // EVENTS
+
+    int                       fCurrentNoteInputStartLineNumber;
 
     std::map<std::pair<int, int>, S_msrNote>
                               fVoicesLastMetNoteMap;
