@@ -289,7 +289,7 @@ void msdlParser::displayTokenKindsSetsStack (const std::string& context)
     std::endl;
 
   if (tokensSetsStackSize) {
-    std::list<S_msdlTokenKindsSet>::const_iterator
+    std::list <S_msdlTokenKindsSet>::const_iterator
       iBegin = fMsdlTokensSetsStack.begin (),
       iEnd   = fMsdlTokensSetsStack.end (),
       i      = iBegin;
@@ -371,7 +371,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const std::string& context)
   // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
 
   if (tokensSetsStackSize) {
-    std::list<S_msdlTokenKindsSet>::const_iterator
+    std::list <S_msdlTokenKindsSet>::const_iterator
       iBegin = fMsdlTokensSetsStack.begin (),
       iEnd   = fMsdlTokensSetsStack.end (),
       i      = iBegin;
@@ -684,7 +684,7 @@ Bool msdlParser::checkOptionalTokenKind (
       // the stack cannot be empty
       // since msdlTokenKind::kTokenEOF is in the set at the bottom of the stack
 
-      std::list<S_msdlTokenKindsSet>::const_iterator
+      std::list <S_msdlTokenKindsSet>::const_iterator
         iBegin = fMsdlTokensSetsStack.begin (),
         iEnd   = fMsdlTokensSetsStack.end (),
         i      = iBegin;

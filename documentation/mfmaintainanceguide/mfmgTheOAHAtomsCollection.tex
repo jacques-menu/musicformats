@@ -82,7 +82,7 @@ class EXP oahMacroAtom : public oahAtom
     // private fields
     // ------------------------------------------------------
 
-     std::list<S_oahAtom> fMacroValueLessAtomsList;
+     std::list <S_oahAtom> fMacroValueLessAtomsList;
 };
 \end{lstlisting}
 
@@ -120,7 +120,7 @@ void oahMacroAtom::applyValueLessAtom (std::ostream& os)
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_oahAtom>::const_iterator i =
+    std::list <S_oahAtom>::const_iterator i =
       fMacroValueLessAtomsList.begin ();
     i != fMacroValueLessAtomsList.end ();
     ++i

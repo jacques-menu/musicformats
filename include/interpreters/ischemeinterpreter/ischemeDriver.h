@@ -266,14 +266,14 @@ class ischemeDriver
     bool                  fNoLaunch;
 
     // known service names
-    std::set<std::string> fKnownNames;
+    std::set <std::string> fKnownNames;
 
     // choices handling
     S_ischemeChoicesTable fChoicesTable;
 
-    std::multimap<std::string, std::string>
+    std::multimap <std::string, std::string>
                           fOptionsSuppliedChoicesLabelsMultiMap;
-    std::set<std::string> fUnusedOptionsSuppliedChoicesSet;
+    std::set <std::string> fUnusedOptionsSuppliedChoicesSet;
 
     // case choice statements
     int                   fCaseChoiceStatementsNumber;
@@ -285,9 +285,9 @@ class ischemeDriver
     // inputs handling
     S_ischemeInputsTable  fInputsTable;
 
-    std::multimap<std::string, std::string>
+    std::multimap <std::string, std::string>
                           fOptionsSuppliedInputsLabelsMultiMap;
-    std::set<std::string> fUnusedOptionsSuppliedInputsSet;
+    std::set <std::string> fUnusedOptionsSuppliedInputsSet;
 
     // case input statements
     int                   fCaseInputStatementsNumber;

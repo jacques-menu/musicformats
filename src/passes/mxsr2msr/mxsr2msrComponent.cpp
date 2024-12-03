@@ -47,7 +47,7 @@ S_mfcPassComponent createMxsr2msrComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -57,7 +57,7 @@ S_mfcPassComponent createMxsr2msrComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.70"),
           "February 20, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Many, many changes in the code base"
           }
       ));
@@ -67,7 +67,7 @@ S_mfcPassComponent createMxsr2msrComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.70"),
           "April 22, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Removed extra msrWedgeKind::kWedgeStop creation in mxsr2msr"
           }
       ));
@@ -77,7 +77,7 @@ S_mfcPassComponent createMxsr2msrComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.71"),
           "July 3, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Fixed an issue is pedals handling"
           }
       ));

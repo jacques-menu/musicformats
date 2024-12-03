@@ -115,7 +115,7 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
     S_msrSystemLayout     getSystemLayout () const
                               { return fSystemLayout; }
 
-    const std::list<S_msrStaffLayout>&
+    const std::list <S_msrStaffLayout>&
                           getStaffLayoutsList () const
                               { return fStaffLayoutsList; }
 
@@ -195,7 +195,7 @@ class EXP msrMusicXMLPrintLayout : public msrMeasureElement
 
     S_msrSystemLayout     fSystemLayout;
 
-    std::list<S_msrStaffLayout>
+    std::list <S_msrStaffLayout>
                           fStaffLayoutsList;
 
     S_msrSystemDividers   fSystemDividers; // JMI ??? v0.9.66

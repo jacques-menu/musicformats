@@ -54,7 +54,7 @@ EXP mfIndentedStringStream& operator << (
 mfServiceKind mfServiceKindFromString (
   const std::string& theString);
 
-extern std::map<std::string, mfServiceKind>
+extern std::map <std::string, mfServiceKind>
   gGlobalMusicFormatsServiceKindsMap;
 
 std::string availableMusicFormatsServiceKinds (size_t namesListMaxLength);
@@ -94,7 +94,7 @@ class EXP mfService : public smartable
                               { return fServiceName; }
 
     // service pass descriptions
-    const std::list<S_mfPass>&
+    const std::list <S_mfPass>&
                           getServicePassesList () const
                               { return fServicePassesList; }
 
@@ -111,7 +111,7 @@ class EXP mfService : public smartable
 
 
     void                  fetchPassIDKindList (
-                            std::list<mfPassIDKind>& passIDKindList) const;
+                            std::list <mfPassIDKind>& passIDKindList) const;
 
     std::string           fetchServicePassDescriptionsAsString () const;
 
@@ -140,7 +140,7 @@ class EXP mfService : public smartable
     std::string           fServiceName;
 
     // service pass descriptions
-    std::list<S_mfPass>   fServicePassesList;
+    std::list <S_mfPass>   fServicePassesList;
 
   private:
 

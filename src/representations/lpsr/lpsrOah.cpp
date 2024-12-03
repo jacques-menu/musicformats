@@ -115,7 +115,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (
         theString);
@@ -397,7 +397,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, lpsrChordsLanguageKind>::const_iterator
+  std::map <std::string, lpsrChordsLanguageKind>::const_iterator
     it =
       gGlobalLpsrChordsLanguageKindsMap.find (theString);
 
@@ -609,7 +609,7 @@ S_lpsrStaffInstrumentNameAtom lpsrStaffInstrumentNameAtom::create (
   const std::string&    description,
   const std::string&    valueSpecification,
   const std::string&    variableName,
-  std::map<std::string, std::string>&  stringToStringMapVariable)
+  std::map <std::string, std::string>&  stringToStringMapVariable)
 {
   lpsrStaffInstrumentNameAtom* obj = new
     lpsrStaffInstrumentNameAtom (
@@ -629,7 +629,7 @@ lpsrStaffInstrumentNameAtom::lpsrStaffInstrumentNameAtom (
   const std::string&    description,
   const std::string&    valueSpecification,
   const std::string&    variableName,
-  std::map<std::string, std::string>&  stringToStringMapVariable)
+  std::map <std::string, std::string>&  stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -751,7 +751,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
-  std::map<std::string, std::string>::iterator
+  std::map <std::string, std::string>::iterator
     it =
       fStringToStringMapVariable.find (partName);
 
@@ -873,7 +873,7 @@ std::string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -898,7 +898,7 @@ std::string lpsrStaffInstrumentNameAtom::asActualLongNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -937,7 +937,7 @@ void lpsrStaffInstrumentNameAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -970,7 +970,7 @@ void lpsrStaffInstrumentNameAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -2221,7 +2221,7 @@ void lpsrOahGroup::initializeLpsrOahGroup ()
 Bool lpsrOahGroup::setLpsrQuarterTonesPitchesLanguage (std::string language)
 {
   // is language in the note names languages map?
-  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
@@ -2239,7 +2239,7 @@ Bool lpsrOahGroup::setLpsrQuarterTonesPitchesLanguage (std::string language)
 Bool lpsrOahGroup::setLpsrChordsLanguageKind (std::string language)
 {
   // is language in the chords languages map?
-  std::map<std::string, lpsrChordsLanguageKind>::const_iterator
+  std::map <std::string, lpsrChordsLanguageKind>::const_iterator
     it =
       gGlobalLpsrChordsLanguageKindsMap.find (language);
 
@@ -2529,7 +2529,7 @@ void lpsrOahGroup::displayLpsrOahValues (int fieldWidth)
     gLog << "[EMPTY]";
   }
   else {
-    std::map<std::string, int>::const_iterator
+    std::map <std::string, int>::const_iterator
       iBegin = fAddEmptyMeasuresStringToIntMap.begin (),
       iEnd   = fAddEmptyMeasuresStringToIntMap.end (),
       i      = iBegin;

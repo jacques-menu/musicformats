@@ -296,7 +296,7 @@ const msrTupletFactor&
 }
 
 // tuplets elements list
-const std::list<S_msrTupletElement>&
+const std::list <S_msrTupletElement>&
   msrTuplet::getTupletElementsList () const
 {
   return fTupletElementsList;
@@ -625,7 +625,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 
 /* JMI
     for (
-      std::list<S_msrElement>::iterator i = fTupletElementsList.begin ();
+      std::list <S_msrElement>::iterator i = fTupletElementsList.begin ();
       i != fTupletElementsList.end ();
       ++i
     ) {
@@ -952,7 +952,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
 
   // compute measure position for the tuplets elements
   for (
-    std::list<S_msrTupletElement>::const_iterator i = fTupletElementsList.begin ();
+    std::list <S_msrTupletElement>::const_iterator i = fTupletElementsList.begin ();
     i != fTupletElementsList.end ();
     ++i
   ) {
@@ -1130,7 +1130,7 @@ void msrTuplet::acceptOut (basevisitor* v)
 void msrTuplet::browseData (basevisitor* v)
 {
   for (
-    std::list<S_msrTupletElement>::const_iterator i = fTupletElementsList.begin ();
+    std::list <S_msrTupletElement>::const_iterator i = fTupletElementsList.begin ();
     i != fTupletElementsList.end ();
     ++i
   ) {
@@ -1170,7 +1170,7 @@ std::string msrTuplet::asString () const
   ss << ", fTupletElementsList: [";
 
   if (fTupletElementsList.size ()) {
-    std::list<S_msrTupletElement>::const_iterator
+    std::list <S_msrTupletElement>::const_iterator
       iBegin = fTupletElementsList.begin (),
       iEnd   = fTupletElementsList.end (),
       i      = iBegin;
@@ -1248,7 +1248,7 @@ std::string msrTuplet::asShortString () const
   ss << '[';
 
   if (fTupletElementsList.size ()) {
-    std::list<S_msrTupletElement>::const_iterator
+    std::list <S_msrTupletElement>::const_iterator
       iBegin = fTupletElementsList.begin (),
       iEnd   = fTupletElementsList.end (),
       i      = iBegin;
@@ -1398,7 +1398,7 @@ void msrTuplet::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTupletElement>::const_iterator
+    std::list <S_msrTupletElement>::const_iterator
       iBegin = fTupletElementsList.begin (),
       iEnd   = fTupletElementsList.end (),
       i      = iBegin;
@@ -1510,7 +1510,7 @@ void msrTuplet::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTupletElement>::const_iterator
+    std::list <S_msrTupletElement>::const_iterator
       iBegin = fTupletElementsList.begin (),
       iEnd   = fTupletElementsList.end (),
       i      = iBegin;

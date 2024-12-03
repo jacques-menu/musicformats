@@ -286,7 +286,7 @@ void waeHandlerForGUI::displayWarningsAndErrorsInputLineNumbers ()
         warningsInputLineNumbersSize, "line", "lines") <<
       ' ';
 
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fWarningsInputLineNumbers.begin (),
       iEnd   = fWarningsInputLineNumbers.end (),
       i      = iBegin;
@@ -312,7 +312,7 @@ void waeHandlerForGUI::displayWarningsAndErrorsInputLineNumbers ()
         errorsInputLineNumbersSize, "line", "lines") <<
       ' ';
 
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fErrorsInputLineNumbers.begin (),
       iEnd   = fErrorsInputLineNumbers.end (),
       i      = iBegin;

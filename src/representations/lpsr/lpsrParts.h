@@ -52,7 +52,7 @@ class EXP lpsrPartBlock : public lpsrElement
     S_msrPart             getPart () const
                               { return fPart; }
 
-    const std::list<S_msrElement>&
+    const std::list <S_msrElement>&
                           getPartBlockElementsList () const
                               { return fPartBlockElementsList; }
 
@@ -134,7 +134,7 @@ class EXP lpsrPartBlock : public lpsrElement
 
     S_msrPart             fPart;
 
-    std::list<S_msrElement>
+    std::list <S_msrElement>
                           fPartBlockElementsList;
 
     std::string           fPartBlockInstrumentName; // JMI

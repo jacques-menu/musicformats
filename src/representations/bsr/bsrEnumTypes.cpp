@@ -199,7 +199,7 @@ std::string bsrCellKindAsString (bsrCellKind cellKind)
 
 // braille output kinds
 //______________________________________________________________________________
-std::map<std::string, bsrBrailleOutputKind>
+std::map <std::string, bsrBrailleOutputKind>
   gGlobalBsrBrailleOutputKindsMap;
 
 void initializeBsrBrailleOutputKindsMap ()
@@ -249,7 +249,7 @@ std::string availableBsrBrailleOutputKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, bsrBrailleOutputKind>::const_iterator i =
+      std::map <std::string, bsrBrailleOutputKind>::const_iterator i =
         gGlobalBsrBrailleOutputKindsMap.begin ();
       i != gGlobalBsrBrailleOutputKindsMap.end ();
       ++i
@@ -284,7 +284,7 @@ std::string availableBsrBrailleOutputKinds (size_t namesListMaxLength)
 // chords languages
 //______________________________________________________________________________
 
-std::map<std::string, bsrTextsLanguageKind>
+std::map <std::string, bsrTextsLanguageKind>
   gGlobalBsrTextsLanguageKindsMap;
 
 void initializeBsrTextsLanguageKindsMap ()
@@ -333,7 +333,7 @@ std::string availableBsrTextsLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, bsrTextsLanguageKind>::const_iterator i =
+      std::map <std::string, bsrTextsLanguageKind>::const_iterator i =
         gGlobalBsrTextsLanguageKindsMap.begin ();
       i != gGlobalBsrTextsLanguageKindsMap.end ();
       ++i

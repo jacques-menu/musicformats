@@ -232,7 +232,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // elements
 
-    const std::list<S_msrPartGroupElement>&
+    const std::list <S_msrPartGroupElement>&
                           getPartGroupElementsList () const
                               { return fPartGroupElementsList; }
 
@@ -270,7 +270,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     void                  collectPartGroupPartsList (
                             int                   inputLineNumber,
-                            std::list<S_msrPart>& partsList);
+                            std::list <S_msrPart>& partsList);
 
     // voices
 
@@ -369,17 +369,17 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // accessing parts by name
 
-    std::map<std::string, S_msrPart>
+    std::map <std::string, S_msrPart>
                           fPartGroupPartsMap;
 
     // allowing for both parts and nested part groups as elements
 
-    std::list<S_msrPartGroupElement>
+    std::list <S_msrPartGroupElement>
                           fPartGroupElementsList;
 
     // voices
 
-    std::list<S_msrVoice> fPartGroupAllVoicesList;
+    std::list <S_msrVoice> fPartGroupAllVoicesList;
 
     // measures slices sequence
 

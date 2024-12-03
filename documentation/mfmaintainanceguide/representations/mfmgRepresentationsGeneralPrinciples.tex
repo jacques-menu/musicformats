@@ -39,11 +39,11 @@ MSR uses \denorm\ explicitly, with smart pointers to class instances being store
 In particular, \class{msrChord} contains elements that are actually detained by the notes it is composed of:
 \begin{lstlisting}[language=CPlusPlus]
     // articulations
-    std::list<S_msrArticulation>
+    std::list <S_msrArticulation>
                           fChordArticulationsList;
 
     // spanners
-    std::list<S_msrSpanner>
+    std::list <S_msrSpanner>
                           fChordSpannersList;
 
     // single tremolo
@@ -77,7 +77,7 @@ enum class msrVoiceKind {
 
 In \msrRepr, for example, a harmony is both attached to a note in a regular voice and an element of a harmony voice:
 \begin{lstlisting}[language=CPlusPlus]
-    std::list<S_msrHarmony>
+    std::list <S_msrHarmony>
                           fNoteHarmoniesList;
 \end{lstlisting}
 

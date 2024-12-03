@@ -72,7 +72,7 @@ namespace MusicFormats
 //     // set and get
 //     // ------------------------------------------------------
 //
-//     const std::list<ELEMENT_TYPE>&
+//     const std::list <ELEMENT_TYPE>&
 //                           getElementsStdList () const
 //                               { return fElementsStdList;}
 //
@@ -123,7 +123,7 @@ namespace MusicFormats
 //
 //     std::string           fElementsPairName;
 //
-//     std::list<ELEMENT_TYPE>
+//     std::list <ELEMENT_TYPE>
 //                           fElementsStdList;
 // };
 //

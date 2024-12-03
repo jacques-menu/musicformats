@@ -2143,12 +2143,12 @@ chExceptionMusic = {)###" <<
         gGlobalLpsr2lilypondOahGroup->getJazzChordsDisplayLilypondCode ();
     }
 
-  const std::list<std::pair<std::string, std::string>>&
+  const std::list <std::pair <std::string, std::string>>&
     chordsDisplayList =
       gGlobalLpsr2lilypondOahGroup->getChordsDisplayList ();
 
   if (chordsDisplayList.size ()) {
-    std::list<std::pair<std::string, std::string>>::const_iterator
+    std::list <std::pair <std::string, std::string>>::const_iterator
       iBegin = chordsDisplayList.begin (),
       iEnd   = chordsDisplayList.end (),
       i      = iBegin;
@@ -3066,7 +3066,7 @@ void lpsrScore::browseData (basevisitor* v)
   {
     // browse the Scheme function map
     for (
-      std::map<std::string, S_lpsrSchemeFunction>::const_iterator i =
+      std::map <std::string, S_lpsrSchemeFunction>::const_iterator i =
         fScoreSchemeFunctionsMap.begin ();
       i != fScoreSchemeFunctionsMap.end ();
       ++i
@@ -3098,7 +3098,7 @@ void lpsrScore::browseData (basevisitor* v)
   {
     // browse the voices and stanzas list
     for (
-      std::list<S_msrElement>::const_iterator i = fScoreElementsList.begin ();
+      std::list <S_msrElement>::const_iterator i = fScoreElementsList.begin ();
       i != fScoreElementsList.end ();
       ++i
     ) {
@@ -3111,7 +3111,7 @@ void lpsrScore::browseData (basevisitor* v)
   {
     // browse the score blocks list
     for (
-      std::list<S_lpsrBookBlock>::const_iterator i = fScoreBookBlocksList.begin ();
+      std::list <S_lpsrBookBlock>::const_iterator i = fScoreBookBlocksList.begin ();
       i != fScoreBookBlocksList.end ();
       ++i
     ) {
@@ -3315,7 +3315,7 @@ void lpsrScore::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fScoreElementsList.begin (),
       iEnd   = fScoreElementsList.end (),
       i      = iBegin;
@@ -3336,7 +3336,7 @@ void lpsrScore::printFull (std::ostream& os) const
       std::endl << std::endl;
     ++gIndenter;
 
-    std::list<S_lpsrBookBlock>::const_iterator
+    std::list <S_lpsrBookBlock>::const_iterator
       iBegin = fScoreBookBlocksList.begin (),
       iEnd   = fScoreBookBlocksList.end (),
       i      = iBegin;
@@ -3533,7 +3533,7 @@ void lpsrScore::printSummary (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fScoreElementsList.begin (),
       iEnd   = fScoreElementsList.end (),
       i      = iBegin;
@@ -3554,7 +3554,7 @@ void lpsrScore::printSummary (std::ostream& os) const
       std::endl << std::endl;
     ++gIndenter;
 
-    std::list<S_lpsrBookBlock>::const_iterator
+    std::list <S_lpsrBookBlock>::const_iterator
       iBegin = fScoreBookBlocksList.begin (),
       iEnd   = fScoreBookBlocksList.end (),
       i      = iBegin;
@@ -3751,7 +3751,7 @@ void lpsrScore::printNames (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fScoreElementsList.begin (),
       iEnd   = fScoreElementsList.end (),
       i      = iBegin;
@@ -3772,7 +3772,7 @@ void lpsrScore::printNames (std::ostream& os) const
       std::endl << std::endl;
     ++gIndenter;
 
-    std::list<S_lpsrBookBlock>::const_iterator
+    std::list <S_lpsrBookBlock>::const_iterator
       iBegin = fScoreBookBlocksList.begin (),
       iEnd   = fScoreBookBlocksList.end (),
       i      = iBegin;
@@ -3969,7 +3969,7 @@ void lpsrScore::printFlatView (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fScoreElementsList.begin (),
       iEnd   = fScoreElementsList.end (),
       i      = iBegin;
@@ -3990,7 +3990,7 @@ void lpsrScore::printFlatView (std::ostream& os) const
       std::endl << std::endl;
     ++gIndenter;
 
-    std::list<S_lpsrBookBlock>::const_iterator
+    std::list <S_lpsrBookBlock>::const_iterator
       iBegin = fScoreBookBlocksList.begin (),
       iEnd   = fScoreBookBlocksList.end (),
       i      = iBegin;
@@ -4187,7 +4187,7 @@ void lpsrScore::printSlices (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fScoreElementsList.begin (),
       iEnd   = fScoreElementsList.end (),
       i      = iBegin;
@@ -4208,7 +4208,7 @@ void lpsrScore::printSlices (std::ostream& os) const
       std::endl << std::endl;
     ++gIndenter;
 
-    std::list<S_lpsrBookBlock>::const_iterator
+    std::list <S_lpsrBookBlock>::const_iterator
       iBegin = fScoreBookBlocksList.begin (),
       iEnd   = fScoreBookBlocksList.end (),
       i      = iBegin;
@@ -4273,7 +4273,7 @@ void lpsrScore::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fScoreElementsList.begin (),
       iEnd   = fScoreElementsList.end (),
       i      = iBegin;
@@ -4294,7 +4294,7 @@ void lpsrScore::print (std::ostream& os) const
       std::endl << std::endl;
     ++gIndenter;
 
-    std::list<S_lpsrBookBlock>::const_iterator
+    std::list <S_lpsrBookBlock>::const_iterator
       iBegin = fScoreBookBlocksList.begin (),
       iEnd   = fScoreBookBlocksList.end (),
       i      = iBegin;

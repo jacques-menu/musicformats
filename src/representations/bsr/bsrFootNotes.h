@@ -83,7 +83,7 @@ class EXP bsrFootNotes : public bsrLine
     // private fields
     // ------------------------------------------------------
 
-    std::list<S_bsrFootNotesElement>
+    std::list <S_bsrFootNotesElement>
                           fFootNotesElementsList;
 };
 typedef SMARTP<bsrFootNotes> S_bsrFootNotes;

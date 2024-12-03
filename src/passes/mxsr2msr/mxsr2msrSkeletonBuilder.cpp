@@ -756,7 +756,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsMap (
 
     ++gIndenter;
 
-    for (std::pair<int, S_mxsrPartGroup> thePair : fPartGroupsMap) {
+    for (std::pair <int, S_mxsrPartGroup> thePair : fPartGroupsMap) {
       S_mxsrPartGroup
         partGroup = thePair.second;
 
@@ -806,7 +806,7 @@ void mxsr2msrSkeletonBuilder::displayPartsMap (
 
     ++gIndenter;
 
-    for (std::pair<std::string, S_msrPart> thePair : fPartsMap) {
+    for (std::pair <std::string, S_msrPart> thePair : fPartsMap) {
     	std::string
     		theString = thePair.first;
 
@@ -850,7 +850,7 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsMap (
 
     ++gIndenter;
 
-    for (std::pair<int, S_mxsrPartGroup> thePair : fStartedPartGroupsMap) {
+    for (std::pair <int, S_mxsrPartGroup> thePair : fStartedPartGroupsMap) {
       S_mxsrPartGroup
         partGroup = thePair.second;
 
@@ -1947,7 +1947,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
       if (stoppedPartGroupsList->size ()) {
         ++gIndenter;
 
-    		const std::list<S_mxsrPartGroup>&
+    		const std::list <S_mxsrPartGroup>&
     			stoppedPartGroupsStdList =
     				stoppedPartGroupsList->getMxsrPartGroupsStdList ();
 
@@ -2137,7 +2137,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
       if (startedMxsrPartGroupsList->size ()) {
         ++gIndenter;
 
-    		const std::list<S_mxsrPartGroup>&
+    		const std::list <S_mxsrPartGroup>&
     			startedPartGroupsStdList =
     				startedMxsrPartGroupsList->getMxsrPartGroupsStdList ();
 
@@ -2362,7 +2362,7 @@ void mxsr2msrSkeletonBuilder::displayPendingTupletsStopsMap (
 	++gIndenter;
 
 	for (
-		std::pair<int, S_mxsr2msrPendingTupletStop>
+		std::pair <int, S_mxsr2msrPendingTupletStop>
 			thePair : fPendingTupletsStopsMap
 	) {
 		int
@@ -4538,7 +4538,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 
     ++gIndenter;
 
-		fCurrentPart->displayPartVoicesMap (
+		fCurrentPart->displayPartStaffVoicesMap (
 			elt->getInputStartLineNumber (),
 			"mxsr2msrSkeletonBuilder::visitEnd(S_part& elt)");
 
@@ -5242,18 +5242,33 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 
 		// the airplane takes off upon the previous note
 		// and lands upon the current note
-		// let's create a staff change event with take off upon the previous note
-		// and landing upont the current note
+
+		// let's create two staff change eventSequentialNumber
+		// one for take off upon the previous note
+		// and the other one for landing upon the current note
 		fResultingEventsCollection.registerStaffChangeEvent ( // CHORD_TUP JMI v0.9.72
 			fPreviousNoteSequentialNumber,
 			fPreviousNoteStaffNumber,
 			changingVoiceNumber,							// the voice that changes staff
-// 			mxsrStaffChangeEventKind::kEventStaffChangeTakeOff,
-			takeOffStaffNumber,								// take off staff number
-			landingStaffNumber,  							// landing staff number
-			landingNoteStartInputLineNumber,  // landing start input line number
+			mxsrStaffChangeEventKind::kEventStaffChangeTakeOff,
+			takeOffStaffNumber,
+			landingStaffNumber,
+			takeOffNoteStartInputLineNumber,
+			landingNoteStartInputLineNumber,
 			fPreviousNoteStartInputLineNumber,
 			fPreviousNoteEndInputLineNumber);
+
+		fResultingEventsCollection.registerStaffChangeEvent ( // CHORD_TUP JMI v0.9.72
+			fCurrentNoteSequentialNumber,
+			fCurrentNoteStaffNumber,
+			changingVoiceNumber,							// the voice that changes staff
+			mxsrStaffChangeEventKind::kEventStaffChangeLanding,
+			takeOffStaffNumber,
+			landingStaffNumber,
+			takeOffNoteStartInputLineNumber,
+			landingNoteStartInputLineNumber,
+			fCurrentNoteStartInputLineNumber,
+			fCurrentNoteEndInputLineNumber);
   }
 
 	return result;

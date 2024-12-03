@@ -168,7 +168,7 @@ void msdrMusic::browseData (basevisitor* v)
   // browse the voice initial elements
   if (fInitialMusicElementsList.size ()) {
     for (
-      std::list<S_msdrMusicElement>::const_iterator i = fInitialMusicElementsList.begin ();
+      std::list <S_msdrMusicElement>::const_iterator i = fInitialMusicElementsList.begin ();
       i != fInitialMusicElementsList.end ();
       ++i
     ) {
@@ -187,7 +187,7 @@ void msdrMusic::browseData (basevisitor* v)
   // browse the voice stanzas
   if (fMusicStanzasMap.size ()) {
     for (
-      std::map<std::string, S_msrStanza>::const_iterator i = fMusicStanzasMap.begin ();
+      std::map <std::string, S_msrStanza>::const_iterator i = fMusicStanzasMap.begin ();
       i != fMusicStanzasMap.end ();
       ++i
     ) {
@@ -397,7 +397,7 @@ void msdrMusic::print (std::ostream& os) const
   if (voiceMeasuresFlatListSize) {
     ++gIndenter;
 
-    std::list<S_msrMeasure>::const_iterator
+    std::list <S_msrMeasure>::const_iterator
       iBegin = fVoiceMeasuresFlatList.begin (),
       iEnd   = fVoiceMeasuresFlatList.end (),
       i      = iBegin;

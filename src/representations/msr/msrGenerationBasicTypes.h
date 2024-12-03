@@ -32,7 +32,7 @@ std::ostream& operator << (std::ostream& os, const msrGenerationAPIKind& elt);
 EXP extern msrGenerationAPIKind msrGenerationAPIKindFromString (
   const std::string& theString);
 
-extern std::map<std::string, msrGenerationAPIKind>
+extern std::map <std::string, msrGenerationAPIKind>
   gGlobalGenerationAPIKindsMap;
 
 std::string availableGenerationAPIKinds (size_t namesListMaxLength);

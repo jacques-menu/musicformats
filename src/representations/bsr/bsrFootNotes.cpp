@@ -128,7 +128,7 @@ void bsrFootNotes::acceptOut (basevisitor* v)
 void bsrFootNotes::browseData (basevisitor* v)
 {
   for (
-    std::list<S_bsrFootNotesElement>::const_iterator i =
+    std::list <S_bsrFootNotesElement>::const_iterator i =
       fFootNotesElementsList.begin ();
     i != fFootNotesElementsList.end ();
     ++i ) {
@@ -160,7 +160,7 @@ void bsrFootNotes::print (std::ostream& os) const
     if (footNotesElementsListSize) {
       ++gIndenter;
 
-      std::list<S_bsrFootNotesElement>::const_iterator
+      std::list <S_bsrFootNotesElement>::const_iterator
         iBegin = fFootNotesElementsList.begin (),
         iEnd   = fFootNotesElementsList.end (),
         i      = iBegin;

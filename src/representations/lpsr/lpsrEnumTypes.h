@@ -43,7 +43,7 @@ std::string lpsrScoreOutputKindAsString (
 
 std::ostream& operator << (std::ostream& os, const lpsrScoreOutputKind& elt);
 
-extern std::map<std::string, lpsrScoreOutputKind>
+extern std::map <std::string, lpsrScoreOutputKind>
   gGlobalLpsrScoreOutputKindsMap;
 
 std::string availableLpsrScoreOutputKinds (size_t namesListMaxLength);
@@ -82,7 +82,7 @@ std::ostream& operator << (std::ostream& os, const lpsrAccidentalStyleKind& elt)
 std::string lpsrAccidentalStyleKindAsLilypondString (
   lpsrAccidentalStyleKind accidentalStyleKind);
 
-extern std::map<std::string, lpsrAccidentalStyleKind>
+extern std::map <std::string, lpsrAccidentalStyleKind>
   gGlobalLpsrAccidentalStyleKindsMap;
 
 std::string availableLpsrAccidentalStyleKinds (size_t namesListMaxLength);
@@ -104,7 +104,7 @@ std::string lpsrChordsLanguageKindAsString (
 
 std::ostream& operator << (std::ostream& os, const lpsrChordsLanguageKind& elt);
 
-extern std::map<std::string, lpsrChordsLanguageKind>
+extern std::map <std::string, lpsrChordsLanguageKind>
   gGlobalLpsrChordsLanguageKindsMap;
 
 std::string availableLpsrChordsLanguageKinds (size_t namesListMaxLength);
@@ -148,7 +148,7 @@ std::string multiMeasureRestsWholeNoteAsLilypondString (
 // syllable elements lists
 //______________________________________________________________________________
 EXP std::string syllableElementsListAsLilypondString (
-  const std::list<msrSyllableElement>& syllableElementsList);
+  const std::list <msrSyllableElement>& syllableElementsList);
 
 // pitches and octaves
 //______________________________________________________________________________
@@ -178,7 +178,7 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
   int           inputLineNumber,
   const std::string& dynamicsTextSpannersStyleKindString);
 
-extern std::map<std::string, lpsrDynamicsTextSpannersStyleKind>&
+extern std::map <std::string, lpsrDynamicsTextSpannersStyleKind>&
   getLpsrDynamicsTextSpannersStyleKindsMap ();
 
 std::string availableLpsrDynamicsTextSpannersStyleKinds (
@@ -198,7 +198,7 @@ std::string lilypondDurationsGenerationKindAsString (
 
 std::ostream& operator << (std::ostream& os, const lilypondDurationsGenerationKind& elt);
 
-extern std::map<std::string, lilypondDurationsGenerationKind>
+extern std::map <std::string, lilypondDurationsGenerationKind>
   gGlobalLilypondDurationsGenerationKindsMap;
 
 std::string availableLilypondDurationsGenerationKinds (size_t namesListMaxLength);
@@ -218,7 +218,7 @@ std::string lpsrLyricsNotesDurationsKindAsString (
 
 std::ostream& operator << (std::ostream& os, const lpsrLyricsNotesDurationsKind& elt);
 
-extern std::map<std::string, lpsrLyricsNotesDurationsKind>
+extern std::map <std::string, lpsrLyricsNotesDurationsKind>
   gGlobalLpsrLyricsNotesDurationsKindsMap;
 
 std::string availableLpsrLyricsNotesDurationsKinds (size_t namesListMaxLength);

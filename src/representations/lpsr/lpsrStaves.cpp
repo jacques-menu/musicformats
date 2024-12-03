@@ -526,7 +526,7 @@ void lpsrStaffBlock::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrElement>::const_iterator i = fStaffBlockElements.begin ();
+    std::list <S_msrElement>::const_iterator i = fStaffBlockElements.begin ();
     i != fStaffBlockElements.end ();
     ++i
   ) {
@@ -575,7 +575,7 @@ void lpsrStaffBlock::print (std::ostream& os) const
     std::endl << std::endl;
 
   if (fStaffBlockElements.size ()) {
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fStaffBlockElements.begin (),
       iEnd   = fStaffBlockElements.end (),
       i      = iBegin;

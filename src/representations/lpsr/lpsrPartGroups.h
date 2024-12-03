@@ -53,7 +53,7 @@ class EXP lpsrPartGroupBlock : public lpsrElement
     S_msrPartGroup        getPartGroup () const
                               { return fPartGroup; }
 
-    const std::list<S_msrElement>&
+    const std::list <S_msrElement>&
                           getPartGroupBlockElements () const
                               { return fPartGroupBlockElements; }
 
@@ -90,7 +90,7 @@ class EXP lpsrPartGroupBlock : public lpsrElement
 
     S_msrPartGroup        fPartGroup;
 
-    std::list<S_msrElement>
+    std::list <S_msrElement>
                           fPartGroupBlockElements;
 };
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrPartGroupBlock& elt);

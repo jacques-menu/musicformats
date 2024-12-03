@@ -118,10 +118,10 @@ class EXP oahEarlyOptions
                           getEarlyMultiGenerationOutputKindRef ()
                               { return fEarlyMultiGenerationOutputKind; }
 
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getEarlyIncludeFileNamesList () const
                               { return fEarlyIncludeFileNamesList; }
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getEarlyIncludeFileNamesListRef ()
                               { return fEarlyIncludeFileNamesList; }
 
@@ -223,7 +223,7 @@ class EXP oahEarlyOptions
     mfMultiGenerationOutputKind
                           fEarlyMultiGenerationOutputKind;
 
-    std::list<std::string>
+    std::list <std::string>
                           fEarlyIncludeFileNamesList;
 
 #ifdef MF_TRACE_IS_ENABLED

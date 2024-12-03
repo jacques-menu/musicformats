@@ -276,7 +276,7 @@ void msrScore::removePartGroupFromScore (const S_msrPartGroup& partGroup)
   fScorePartGroupsSet.erase (partGroup);
 
   for (
-    std::list<S_msrPartGroup>::iterator i = fPartGroupsList.begin ();
+    std::list <S_msrPartGroup>::iterator i = fPartGroupsList.begin ();
     i != fPartGroupsList.end ();
     ++i
   ) {
@@ -332,7 +332,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
     ++gIndenter;
 
     for (
-      std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
+      std::list <S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
       i != fPartGroupsList.end ();
       ++i
     ) {
@@ -358,7 +358,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
+    std::list <S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
     i != fPartGroupsList.end ();
     ++i
   ) {
@@ -380,12 +380,12 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
 
 void msrScore::collectScorePartsList (
   int                   inputLineNumber,
-  std::list<S_msrPart>& partsList)
+  std::list <S_msrPart>& partsList)
 {
   S_msrPart result;
 
   for (
-    std::list<S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
+    std::list <S_msrPartGroup>::const_iterator i = fPartGroupsList.begin ();
     i != fPartGroupsList.end ();
     ++i
   ) {
@@ -732,7 +732,7 @@ void msrScore::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrCredit>::const_iterator
+    std::list <S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -763,7 +763,7 @@ void msrScore::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrVoice>::const_iterator
+    std::list <S_msrVoice>::const_iterator
       iBegin = fScoreAllVoicesList.begin (),
       iEnd   = fScoreAllVoicesList.end (),
       i      = iBegin;
@@ -794,7 +794,7 @@ void msrScore::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrPartGroup>::const_iterator
+    std::list <S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
@@ -901,7 +901,7 @@ void msrScore::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrCredit>::const_iterator
+    std::list <S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -932,7 +932,7 @@ void msrScore::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrPartGroup>::const_iterator
+    std::list <S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
@@ -1093,7 +1093,7 @@ void msrScore::printSummary (std::ostream& os) const
 
   // print the credits if any
   if (fCreditsList.size ()) {
-    std::list<S_msrCredit>::const_iterator
+    std::list <S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -1106,7 +1106,7 @@ void msrScore::printSummary (std::ostream& os) const
   }
 
   if (partGroupsListSize) {
-    std::list<S_msrPartGroup>::const_iterator
+    std::list <S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;
@@ -1130,7 +1130,7 @@ void msrScore::printSlices (std::ostream& os) const
   ++gIndenter;
 
   if (fPartGroupsList.size ()) {
-    std::list<S_msrPartGroup>::const_iterator
+    std::list <S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsList.begin (),
       iEnd   = fPartGroupsList.end (),
       i      = iBegin;

@@ -651,7 +651,7 @@ void oahMacroAtom::print (std::ostream& os) const
   oahElement::printOahElementEssentials (
     os, fieldWidth);
 
-  std::list<S_oahValueLessAtom>::const_iterator
+  std::list <S_oahValueLessAtom>::const_iterator
     iBegin = fMacroValueLessAtomsList.begin (),
     iEnd   = fMacroValueLessAtomsList.end (),
     i      = iBegin;
@@ -697,7 +697,7 @@ void oahMacroAtom::printHelp (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahValueLessAtom>::const_iterator
+    std::list <S_oahValueLessAtom>::const_iterator
       iBegin = fMacroValueLessAtomsList.begin (),
       iEnd   = fMacroValueLessAtomsList.end (),
       i      = iBegin;
@@ -729,7 +729,7 @@ void oahMacroAtom::printHelp (std::ostream& os) const
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
 
-  std::list<S_oahValueLessAtom>::const_iterator
+  std::list <S_oahValueLessAtom>::const_iterator
     iBegin = fMacroValueLessAtomsList.begin (),
     iEnd   = fMacroValueLessAtomsList.end (),
     i      = iBegin;
@@ -5468,7 +5468,7 @@ void oahCombinedBooleansAtom::setCombinedBooleanVariables (Bool value)
   // set the value of the atoms in the list
   if (fBooleanAtomsList.size ()) {
     for (
-      std::list<S_oahBooleanAtom>::const_iterator i =
+      std::list <S_oahBooleanAtom>::const_iterator i =
         fBooleanAtomsList.begin ();
       i != fBooleanAtomsList.end ();
       ++i
@@ -5642,7 +5642,7 @@ void oahCombinedBooleansAtom::browseData (basevisitor* v)
   // browse the boolean atoms
   if (fBooleanAtomsList.size ()) {
     for (
-      std::list<S_oahBooleanAtom>::const_iterator i = fBooleanAtomsList.begin ();
+      std::list <S_oahBooleanAtom>::const_iterator i = fBooleanAtomsList.begin ();
       i != fBooleanAtomsList.end ();
       ++i
     ) {
@@ -5716,7 +5716,7 @@ void oahCombinedBooleansAtom::print (std::ostream& os) const
 
     os << '\'';
 
-    std::list<S_oahBooleanAtom>::const_iterator
+    std::list <S_oahBooleanAtom>::const_iterator
       iBegin = fBooleanAtomsList.begin (),
       iEnd   = fBooleanAtomsList.end (),
       i      = iBegin;
@@ -5767,7 +5767,7 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahBooleanAtom>::const_iterator
+    std::list <S_oahBooleanAtom>::const_iterator
       iBegin = fBooleanAtomsList.begin (),
       iEnd   = fBooleanAtomsList.end (),
       i      = iBegin;
@@ -5810,7 +5810,7 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahBooleanAtom>::const_iterator
+    std::list <S_oahBooleanAtom>::const_iterator
       iBegin = fBooleanAtomsList.begin (),
       iEnd   = fBooleanAtomsList.end (),
       i      = iBegin;
@@ -5842,7 +5842,7 @@ void oahCombinedBooleansAtom::displayAtomWithVariableOptionsValues (
   }
 
   else {
-    std::list<S_oahBooleanAtom>::const_iterator
+    std::list <S_oahBooleanAtom>::const_iterator
       iBegin = fBooleanAtomsList.begin (),
       iEnd   = fBooleanAtomsList.end (),
       i      = iBegin;
@@ -7321,7 +7321,7 @@ void oahFactorizedStringAtom::browseData (basevisitor* v)
   // browse the string atoms
   if (fStringAtomsList.size ()) {
     for (
-      std::list<S_oahStringAtom>::const_iterator i = fStringAtomsList.begin ();
+      std::list <S_oahStringAtom>::const_iterator i = fStringAtomsList.begin ();
       i != fStringAtomsList.end ();
       ++i
     ) {
@@ -7370,7 +7370,7 @@ void oahFactorizedStringAtom::print (std::ostream& os) const
 
     os << '\'';
 
-    std::list<S_oahStringAtom>::const_iterator
+    std::list <S_oahStringAtom>::const_iterator
       iBegin = fStringAtomsList.begin (),
       iEnd   = fStringAtomsList.end (),
       i      = iBegin;
@@ -7420,7 +7420,7 @@ void oahFactorizedStringAtom::printHelp (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<std::string>::const_iterator
+    std::list <std::string>::const_iterator
       iBegin = fAtomNamesList.begin (),
       iEnd   = fAtomNamesList.end (),
       i      = iBegin;
@@ -8219,7 +8219,7 @@ void oahCommonPrefixBooleansAtom::browseData (basevisitor* v)
   // browse the boolean atoms
   if (fBooleanAtomsList.size ()) {
     for (
-      std::list<S_oahBooleanAtom>::const_iterator i = fBooleanAtomsList.begin ();
+      std::list <S_oahBooleanAtom>::const_iterator i = fBooleanAtomsList.begin ();
       i != fBooleanAtomsList.end ();
       ++i
     ) {
@@ -8285,7 +8285,7 @@ void oahCommonPrefixBooleansAtom::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahBooleanAtom>::const_iterator
+    std::list <S_oahBooleanAtom>::const_iterator
       iBegin = fBooleanAtomsList.begin (),
       iEnd   = fBooleanAtomsList.end (),
       i      = iBegin;
@@ -8331,7 +8331,7 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<std::string>::const_iterator
+    std::list <std::string>::const_iterator
       iBegin = fShortNamesSuffixes.begin (),
       iEnd   = fShortNamesSuffixes.end (),
       i      = iBegin;
@@ -8373,7 +8373,7 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
 //     int longNamesSuffixesCount = 0; // JMI v9.9.69
 //
 //     {
-//       std::list<std::string>::const_iterator
+//       std::list <std::string>::const_iterator
 //         iBegin = fLongNamesSuffixes.begin (),
 //         iEnd   = fLongNamesSuffixes.end (),
 //         i      = iBegin;
@@ -8397,7 +8397,7 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<std::string>::const_iterator
+      std::list <std::string>::const_iterator
         iBegin = fLongNamesSuffixes.begin (),
         iEnd   = fLongNamesSuffixes.end (),
         i      = iBegin;
@@ -8451,7 +8451,7 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahBooleanAtom>::const_iterator
+    std::list <S_oahBooleanAtom>::const_iterator
       iBegin = fBooleanAtomsList.begin (),
       iEnd   = fBooleanAtomsList.end (),
       i      = iBegin;
@@ -9065,7 +9065,7 @@ S_oahNaturalNumbersSetElementAtom oahNaturalNumbersSetElementAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<int>&     naturalNumbersSetVariable)
+  std::set <int>&     naturalNumbersSetVariable)
 {
   oahNaturalNumbersSetElementAtom* obj = new
     oahNaturalNumbersSetElementAtom (
@@ -9085,7 +9085,7 @@ oahNaturalNumbersSetElementAtom::oahNaturalNumbersSetElementAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<int>&     naturalNumbersSetVariable)
+  std::set <int>&     naturalNumbersSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -9207,7 +9207,7 @@ std::string oahNaturalNumbersSetElementAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ' <<
     '[';
 
-  std::set<int>::const_iterator
+  std::set <int>::const_iterator
     iBegin = fNaturalNumbersSetVariable.begin (),
     iEnd   = fNaturalNumbersSetVariable.end (),
     i      = iBegin;
@@ -9232,7 +9232,7 @@ std::string oahNaturalNumbersSetElementAtom::asActualLongNamedOptionString () co
     '-' << fLongName << ' ' <<
     '[';
 
-  std::set<int>::const_iterator
+  std::set <int>::const_iterator
     iBegin = fNaturalNumbersSetVariable.begin (),
     iEnd   = fNaturalNumbersSetVariable.end (),
     i      = iBegin;
@@ -9276,7 +9276,7 @@ void oahNaturalNumbersSetElementAtom::print (std::ostream& os) const
     os <<
       '\'';
 
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fNaturalNumbersSetVariable.begin (),
       iEnd   = fNaturalNumbersSetVariable.end (),
       i      = iBegin;
@@ -9324,7 +9324,7 @@ void oahNaturalNumbersSetElementAtom::displayAtomWithVariableOptionsValues (
         ", selected";
     }
 
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fNaturalNumbersSetVariable.begin (),
       iEnd   = fNaturalNumbersSetVariable.end (),
       i      = iBegin;
@@ -9585,7 +9585,7 @@ S_oahIntSetElementAtom oahIntSetElementAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<int>&     intSetVariable)
+  std::set <int>&     intSetVariable)
 {
   oahIntSetElementAtom* obj = new
     oahIntSetElementAtom (
@@ -9605,7 +9605,7 @@ oahIntSetElementAtom::oahIntSetElementAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<int>&     intSetVariable)
+  std::set <int>&     intSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -9814,7 +9814,7 @@ std::string oahIntSetElementAtom::asShortNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fIntSetVariable.begin (),
       iEnd   = fIntSetVariable.end (),
       i      = iBegin;
@@ -9839,7 +9839,7 @@ std::string oahIntSetElementAtom::asActualLongNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fIntSetVariable.begin (),
       iEnd   = fIntSetVariable.end (),
       i      = iBegin;
@@ -9875,7 +9875,7 @@ void oahIntSetElementAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fIntSetVariable.begin (),
       iEnd   = fIntSetVariable.end (),
       i      = iBegin;
@@ -9909,7 +9909,7 @@ void oahIntSetElementAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fIntSetVariable.begin (),
       iEnd   = fIntSetVariable.end (),
       i      = iBegin;
@@ -9945,7 +9945,7 @@ S_oahStringSetElementAtom oahStringSetElementAtom::create (
   const std::string&     description,
   const std::string&     valueSpecification,
   const std::string&     variableName,
-  std::set<std::string>& stringSetVariable)
+  std::set <std::string>& stringSetVariable)
 {
   oahStringSetElementAtom* obj = new
     oahStringSetElementAtom (
@@ -9965,7 +9965,7 @@ oahStringSetElementAtom::oahStringSetElementAtom (
   const std::string&     description,
   const std::string&     valueSpecification,
   const std::string&     variableName,
-  std::set<std::string>& stringSetVariable)
+  std::set <std::string>& stringSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -10016,7 +10016,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
-  std::set<std::string>::iterator
+  std::set <std::string>::iterator
     it =
       fStringSetVariable.find (partName);
 
@@ -10138,7 +10138,7 @@ std::string oahStringSetElementAtom::asShortNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -10163,7 +10163,7 @@ std::string oahStringSetElementAtom::asActualLongNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -10199,7 +10199,7 @@ void oahStringSetElementAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -10235,7 +10235,7 @@ void oahStringSetElementAtom::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -10269,7 +10269,7 @@ S_oahStringToIntMapElementAtom oahStringToIntMapElementAtom::create (
   const std::string&     description,
   const std::string&     valueSpecification,
   const std::string&     variableName,
-  std::map<std::string, int>& stringToIntMapVariable)
+  std::map <std::string, int>& stringToIntMapVariable)
 {
   oahStringToIntMapElementAtom* obj = new
     oahStringToIntMapElementAtom (
@@ -10289,7 +10289,7 @@ oahStringToIntMapElementAtom::oahStringToIntMapElementAtom (
   const std::string&     description,
   const std::string&     valueSpecification,
   const std::string&     variableName,
-  std::map<std::string, int>& stringToIntMapVariable)
+  std::map <std::string, int>& stringToIntMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -10524,7 +10524,7 @@ std::string oahStringToIntMapElementAtom::asShortNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::map<std::string, int>::const_iterator
+    std::map <std::string, int>::const_iterator
       iBegin = fStringToIntMapVariable.begin (),
       iEnd   = fStringToIntMapVariable.end (),
       i      = iBegin;
@@ -10549,7 +10549,7 @@ std::string oahStringToIntMapElementAtom::asActualLongNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::map<std::string, int>::const_iterator
+    std::map <std::string, int>::const_iterator
       iBegin = fStringToIntMapVariable.begin (),
       iEnd   = fStringToIntMapVariable.end (),
       i      = iBegin;
@@ -10585,7 +10585,7 @@ void oahStringToIntMapElementAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::map<std::string, int>::const_iterator
+    std::map <std::string, int>::const_iterator
       iBegin = fStringToIntMapVariable.begin (),
       iEnd   = fStringToIntMapVariable.end (),
       i      = iBegin;
@@ -10619,7 +10619,7 @@ void oahStringToIntMapElementAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::map<std::string, int>::const_iterator
+    std::map <std::string, int>::const_iterator
       iBegin = fStringToIntMapVariable.begin (),
       iEnd   = fStringToIntMapVariable.end (),
       i      = iBegin;
@@ -10661,7 +10661,7 @@ S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
   const std::string&                  description,
   const std::string&                  valueSpecification,
   const std::string&                  variableName,
-  std::map<std::string, std::string>& stringToStringMapVariable)
+  std::map <std::string, std::string>& stringToStringMapVariable)
 {
   oahStringToStringMapElementAtom* obj = new
     oahStringToStringMapElementAtom (
@@ -10681,7 +10681,7 @@ oahStringToStringMapElementAtom::oahStringToStringMapElementAtom (
   const std::string&                  description,
   const std::string&                  valueSpecification,
   const std::string&                  variableName,
-  std::map<std::string, std::string>& stringToStringMapVariable)
+  std::map <std::string, std::string>& stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -10910,7 +10910,7 @@ std::string oahStringToStringMapElementAtom::asShortNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -10935,7 +10935,7 @@ std::string oahStringToStringMapElementAtom::asActualLongNamedOptionString () co
     ss << "[EMPTY]";
   }
   else {
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -10973,7 +10973,7 @@ void oahStringToStringMapElementAtom::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -11010,7 +11010,7 @@ void oahStringToStringMapElementAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -11052,7 +11052,7 @@ S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::cre
   const std::string&                       description,
   const std::string&                       valueSpecification,
   const std::string&                       variableName,
-  std::multimap<std::string, std::string>& stringToStringMultiMapVariable)
+  std::multimap <std::string, std::string>& stringToStringMultiMapVariable)
 {
   oahStringToStringMultiMapElementAtom* obj = new
     oahStringToStringMultiMapElementAtom (
@@ -11072,7 +11072,7 @@ oahStringToStringMultiMapElementAtom::oahStringToStringMultiMapElementAtom (
   const std::string&                       description,
   const std::string&                       valueSpecification,
   const std::string&                       variableName,
-  std::multimap<std::string, std::string>& stringToStringMultiMapVariable)
+  std::multimap <std::string, std::string>& stringToStringMultiMapVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -11198,7 +11198,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   fStringToStringMultiMapVariable.insert (
-    std::pair<std::string, std::string> (key, value));
+    std::pair <std::string, std::string> (key, value));
 
   fSelected = true;
 }
@@ -11302,7 +11302,7 @@ std::string oahStringToStringMultiMapElementAtom::asShortNamedOptionString () co
     ss << "[EMPTY]";
   }
   else {
-    std::multimap<std::string, std::string>::const_iterator
+    std::multimap <std::string, std::string>::const_iterator
       iBegin = fStringToStringMultiMapVariable.begin (),
       iEnd   = fStringToStringMultiMapVariable.end (),
       i      = iBegin;
@@ -11327,7 +11327,7 @@ std::string oahStringToStringMultiMapElementAtom::asActualLongNamedOptionString 
     ss << "[EMPTY]";
   }
   else {
-    std::multimap<std::string, std::string>::const_iterator
+    std::multimap <std::string, std::string>::const_iterator
       iBegin = fStringToStringMultiMapVariable.begin (),
       iEnd   = fStringToStringMultiMapVariable.end (),
       i      = iBegin;
@@ -11365,7 +11365,7 @@ void oahStringToStringMultiMapElementAtom::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::multimap<std::string, std::string>::const_iterator
+    std::multimap <std::string, std::string>::const_iterator
       iBegin = fStringToStringMultiMapVariable.begin (),
       iEnd   = fStringToStringMultiMapVariable.end (),
       i      = iBegin;
@@ -11402,7 +11402,7 @@ void oahStringToStringMultiMapElementAtom::displayAtomWithVariableOptionsValues 
     os << std::endl;
     ++gIndenter;
 
-    std::multimap<std::string, std::string>::const_iterator
+    std::multimap <std::string, std::string>::const_iterator
       iBegin = fStringToStringMultiMapVariable.begin (),
       iEnd   = fStringToStringMultiMapVariable.end (),
       i      = iBegin;
@@ -12279,7 +12279,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, msrLengthUnitKind>::const_iterator
+  std::map <std::string, msrLengthUnitKind>::const_iterator
     it =
       gGlobalMsrLengthUnitKindsMap.find (
         theString);
@@ -12594,7 +12594,7 @@ void oahLengthAtom::applyAtomWithValue (
     std::string lengthUnitName = sm [ 3 ];
 
     // is lengthUnitName known in the length unit names map?
-    std::map<std::string, msrLengthUnitKind>::const_iterator
+    std::map <std::string, msrLengthUnitKind>::const_iterator
       it =
         gGlobalMsrLengthUnitKindsMap.find (
           lengthUnitName);
@@ -13722,7 +13722,7 @@ void oahFindStringInHelpAtom::applyAtomWithValue (
   // theString is the string to be found in the help
 
   // a strings list to collect the results
-  std::list<S_oahFindStringMatch> foundStringMatchesList;
+  std::list <S_oahFindStringMatch> foundStringMatchesList;
 
   // delegate this to the handler
   fetchAtomUpLinkToHandler ()->
@@ -13756,7 +13756,7 @@ void oahFindStringInHelpAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    std::list<S_oahFindStringMatch>::const_iterator
+    std::list <S_oahFindStringMatch>::const_iterator
       iBegin = foundStringMatchesList.begin (),
       iEnd   = foundStringMatchesList.end (),
       i      = iBegin;
@@ -14023,7 +14023,7 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
   // theString is the pattern to be found in the help
 
   // an element list to collect the results
-  std::list<S_oahElement> foundElementsList; // JMI v0.9.71
+  std::list <S_oahElement> foundElementsList; // JMI v0.9.71
 
   // delegate this to the handler // JMI v0.9.71
   Bool foundString =
@@ -14058,7 +14058,7 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
 
     ++gIndenter;
 
-    std::list<S_oahElement>::const_iterator // JMI v0.9.71
+    std::list <S_oahElement>::const_iterator // JMI v0.9.71
       iBegin = foundElementsList.begin (),
       iEnd   = foundElementsList.end (),
       i      = iBegin;

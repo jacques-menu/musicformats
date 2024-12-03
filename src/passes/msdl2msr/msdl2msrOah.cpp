@@ -410,7 +410,7 @@ void msdl2msrOahGroup::initializeMsdl2msrGroup ()
 Bool msdl2msrOahGroup::setMsdlQuarterTonesPitchesLanguage (std::string language)
 {
   // is language in the pitches languages map?
-  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 

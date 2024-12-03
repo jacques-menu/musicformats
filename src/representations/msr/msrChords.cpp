@@ -673,7 +673,7 @@ void msrChord::addFirstNoteToChord (
     */
 }
 
-void msrChord::addNoteToChord_EVENTS (
+void msrChord::addAnotherNoteToChord (
   const S_msrNote&  note,
   const S_msrVoice& voice)
 {
@@ -682,7 +682,7 @@ void msrChord::addNoteToChord_EVENTS (
     std::stringstream ss;
 
     ss <<
-      "Adding note '" <<
+      "Adding another note '" <<
       note->asShortString () <<
       "' to chord '" <<
       asString () <<
@@ -720,7 +720,7 @@ void msrChord::addNoteToChord_EVENTS (
     */
 }
 
-void msrChord::addAnotherNoteToChord (
+void msrChord::addNoteToChord_EVENTS (
   const S_msrNote&  note,
   const S_msrVoice& voice)
 {
@@ -729,7 +729,7 @@ void msrChord::addAnotherNoteToChord (
     std::stringstream ss;
 
     ss <<
-      "Adding another note '" <<
+      "Adding note '" <<
       note->asShortString () <<
       "' to chord '" <<
       asString () <<
@@ -904,7 +904,7 @@ void msrChord::appendTechnicalToChord (
 
   // don't append the same technical several times
   for (
-    std::list<S_msrTechnical>::const_iterator i =
+    std::list <S_msrTechnical>::const_iterator i =
       fChordTechnicalsList.begin ();
     i != fChordTechnicalsList.end ();
     ++i
@@ -941,7 +941,7 @@ void msrChord::appendTechnicalWithIntegerToChord (
 
   // don't append the same technical several times
   for (
-    std::list<S_msrTechnicalWithInteger>::const_iterator i =
+    std::list <S_msrTechnicalWithInteger>::const_iterator i =
       fChordTechnicalWithIntegersList.begin ();
     i != fChordTechnicalWithIntegersList.end ();
     ++i
@@ -978,7 +978,7 @@ void msrChord::appendTechnicalWithFloatToChord (
 
   // don't append the same technical several times
   for (
-    std::list<S_msrTechnicalWithFloat>::const_iterator i =
+    std::list <S_msrTechnicalWithFloat>::const_iterator i =
       fChordTechnicalWithFloatsList.begin ();
     i != fChordTechnicalWithFloatsList.end ();
     ++i
@@ -1015,7 +1015,7 @@ void msrChord::appendTechnicalWithStringToChord (
 
   // don't append the same technical several times
   for (
-    std::list<S_msrTechnicalWithString>::const_iterator i =
+    std::list <S_msrTechnicalWithString>::const_iterator i =
       fChordTechnicalWithStringsList.begin ();
     i != fChordTechnicalWithStringsList.end ();
     ++i
@@ -1116,7 +1116,7 @@ void msrChord::appendSlideToChord (
 
   // don't append the same slide several times
   for (
-    std::list<S_msrSlide>::const_iterator i = fChordSlidesList.begin ();
+    std::list <S_msrSlide>::const_iterator i = fChordSlidesList.begin ();
     i != fChordSlidesList.end ();
     ++i
   ) {
@@ -1182,7 +1182,7 @@ void msrChord::appendStemToChord (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   for (
-    std::list<S_msrStem>::const_iterator i = fChordStemsList.begin ();
+    std::list <S_msrStem>::const_iterator i = fChordStemsList.begin ();
     i != fChordStemsList.end ();
     ++i
   ) {
@@ -1396,7 +1396,7 @@ void msrChord::browseData (basevisitor* v)
   }
 
   for (
-    std::vector<S_msrNote>::const_iterator i = fChordNotesVector.begin ();
+    std::vector <S_msrNote>::const_iterator i = fChordNotesVector.begin ();
     i != fChordNotesVector.end ();
     ++i
   ) {
@@ -1407,7 +1407,7 @@ void msrChord::browseData (basevisitor* v)
 
 
   for (
-    std::list<S_msrStem>::const_iterator i = fChordStemsList.begin ();
+    std::list <S_msrStem>::const_iterator i = fChordStemsList.begin ();
     i != fChordStemsList.end ();
     ++i
   ) {
@@ -1418,7 +1418,7 @@ void msrChord::browseData (basevisitor* v)
 
 /* JMI
   for (
-    std::list<S_msrBeam>::const_iterator i = fChordBeamsList.begin ();
+    std::list <S_msrBeam>::const_iterator i = fChordBeamsList.begin ();
     i != fChordBeamsList.end ();
     ++i
   ) {
@@ -1428,7 +1428,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
   */
   for (
-    std::list<S_msrChordBeamLink>::const_iterator i = fChordBeamLinksList.begin ();
+    std::list <S_msrChordBeamLink>::const_iterator i = fChordBeamLinksList.begin ();
     i != fChordBeamLinksList.end ();
     ++i
   ) {
@@ -1439,7 +1439,7 @@ void msrChord::browseData (basevisitor* v)
 
 
   for (
-    std::list<S_msrArticulation>::const_iterator i = fChordArticulationsList.begin ();
+    std::list <S_msrArticulation>::const_iterator i = fChordArticulationsList.begin ();
     i != fChordArticulationsList.end ();
     ++i
   ) {
@@ -1449,7 +1449,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrSpanner>::const_iterator i = fChordSpannersList.begin ();
+    std::list <S_msrSpanner>::const_iterator i = fChordSpannersList.begin ();
     i != fChordSpannersList.end ();
     ++i
   ) {
@@ -1459,7 +1459,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrTechnical>::const_iterator i = fChordTechnicalsList.begin ();
+    std::list <S_msrTechnical>::const_iterator i = fChordTechnicalsList.begin ();
     i != fChordTechnicalsList.end ();
     ++i
   ) {
@@ -1469,7 +1469,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrOrnament>::const_iterator i = fChordOrnamentsList.begin ();
+    std::list <S_msrOrnament>::const_iterator i = fChordOrnamentsList.begin ();
     i != fChordOrnamentsList.end ();
     ++i
   ) {
@@ -1479,7 +1479,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrGlissando>::const_iterator i = fChordGlissandosList.begin ();
+    std::list <S_msrGlissando>::const_iterator i = fChordGlissandosList.begin ();
     i != fChordGlissandosList.end ();
     ++i
   ) {
@@ -1489,7 +1489,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrSlide>::const_iterator i = fChordSlidesList.begin ();
+    std::list <S_msrSlide>::const_iterator i = fChordSlidesList.begin ();
     i != fChordSlidesList.end ();
     ++i
   ) {
@@ -1499,7 +1499,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrDynamic>::const_iterator i = fChordDynamicsList.begin ();
+    std::list <S_msrDynamic>::const_iterator i = fChordDynamicsList.begin ();
     i != fChordDynamicsList.end ();
     ++i
   ) {
@@ -1509,7 +1509,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrOtherDynamic>::const_iterator i = fChordOtherDynamicsList.begin ();
+    std::list <S_msrOtherDynamic>::const_iterator i = fChordOtherDynamicsList.begin ();
     i != fChordOtherDynamicsList.end ();
     ++i
   ) {
@@ -1519,7 +1519,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrWords>::const_iterator i = fChordWordsList.begin ();
+    std::list <S_msrWords>::const_iterator i = fChordWordsList.begin ();
     i != fChordWordsList.end ();
     ++i
   ) {
@@ -1529,7 +1529,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrTie>::const_iterator i = fChordTiesList.begin ();
+    std::list <S_msrTie>::const_iterator i = fChordTiesList.begin ();
     i != fChordTiesList.end ();
     ++i
   ) {
@@ -1539,7 +1539,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrLigature>::const_iterator i = fChordLigaturesList.begin ();
+    std::list <S_msrLigature>::const_iterator i = fChordLigaturesList.begin ();
     i != fChordLigaturesList.end ();
     ++i
   ) {
@@ -1549,7 +1549,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrSlash>::const_iterator i = fChordSlashesList.begin ();
+    std::list <S_msrSlash>::const_iterator i = fChordSlashesList.begin ();
     i != fChordSlashesList.end ();
     ++i
   ) {
@@ -1559,7 +1559,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrCrescDecresc>::const_iterator i = fChordCrescDecrescsList.begin ();
+    std::list <S_msrCrescDecresc>::const_iterator i = fChordCrescDecrescsList.begin ();
     i != fChordCrescDecrescsList.end ();
     ++i
   ) {
@@ -1569,7 +1569,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrWedge>::const_iterator i = fChordWedgesList.begin ();
+    std::list <S_msrWedge>::const_iterator i = fChordWedgesList.begin ();
     i != fChordWedgesList.end ();
     ++i
   ) {
@@ -1579,7 +1579,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrSegno>::const_iterator i = fChordSegnosList.begin ();
+    std::list <S_msrSegno>::const_iterator i = fChordSegnosList.begin ();
     i != fChordSegnosList.end ();
     ++i
   ) {
@@ -1589,7 +1589,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrDalSegno>::const_iterator i = fChordDalSegnosList.begin ();
+    std::list <S_msrDalSegno>::const_iterator i = fChordDalSegnosList.begin ();
     i != fChordDalSegnosList.end ();
     ++i
   ) {
@@ -1599,7 +1599,7 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrCoda>::const_iterator i = fChordCodasList.begin ();
+    std::list <S_msrCoda>::const_iterator i = fChordCodasList.begin ();
     i != fChordCodasList.end ();
     ++i
   ) {
@@ -1616,7 +1616,7 @@ void msrChord::browseData (basevisitor* v)
 
   // browse the harmonies if any
   if (fChordHarmoniesList.size ()) {
-    std::list<S_msrHarmony>::const_iterator i;
+    std::list <S_msrHarmony>::const_iterator i;
     for (i = fChordHarmoniesList.begin (); i != fChordHarmoniesList.end (); ++i) {
       // browse the harmony
       msrBrowser<msrHarmony> browser (v);
@@ -1631,7 +1631,7 @@ void msrChord::browseData (basevisitor* v)
   }
 
   for (
-    std::list<S_msrChordSlurLink>::const_iterator i = fChordSlurLinksList.begin ();
+    std::list <S_msrChordSlurLink>::const_iterator i = fChordSlurLinksList.begin ();
     i != fChordSlurLinksList.end ();
     ++i
   ) {
@@ -1676,7 +1676,7 @@ void msrChord::applyTupletMemberDisplayFactorToChordMembers (
       std::endl;
 
   for (
-    std::vector<S_msrNote>::const_iterator i = fChordNotesVector.begin ();
+    std::vector <S_msrNote>::const_iterator i = fChordNotesVector.begin ();
     i != fChordNotesVector.end ();
     ++i) {
     (*i)->
@@ -1694,7 +1694,7 @@ std::string msrChord::asStringwithRawDivisions () const // SUPERFLOUS??? JMI v0.
   ss << "<";
 
   if (fChordNotesVector.size ()) {
-    std::vector<S_msrNote>::const_iterator
+    std::vector <S_msrNote>::const_iterator
       iBegin = fChordNotesVector.begin (),
       iEnd   = fChordNotesVector.end (),
       i      = iBegin;
@@ -1732,7 +1732,7 @@ std::string msrChord::asString () const
     " <";
 
   if (fChordNotesVector.size ()) {
-    std::vector<S_msrNote>::const_iterator
+    std::vector <S_msrNote>::const_iterator
       iBegin = fChordNotesVector.begin (),
       iEnd   = fChordNotesVector.end (),
       i      = iBegin;
@@ -1770,7 +1770,7 @@ std::string msrChord::asShortString () const
     ", <";
 
   if (fChordNotesVector.size ()) {
-    std::vector<S_msrNote>::const_iterator
+    std::vector <S_msrNote>::const_iterator
       iBegin = fChordNotesVector.begin (),
       iEnd   = fChordNotesVector.end (),
       i      = iBegin;
@@ -1901,7 +1901,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrArticulation>::const_iterator i;
+      std::list <S_msrArticulation>::const_iterator i;
       for (i = fChordArticulationsList.begin (); i != fChordArticulationsList.end (); ++i) {
         os << (*i);
       } // for
@@ -1926,7 +1926,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrSpanner>::const_iterator i;
+      std::list <S_msrSpanner>::const_iterator i;
       for (i = fChordSpannersList.begin (); i != fChordSpannersList.end (); ++i) {
         os << (*i);
       } // for
@@ -1951,7 +1951,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrTechnical>::const_iterator i;
+      std::list <S_msrTechnical>::const_iterator i;
       for (i = fChordTechnicalsList.begin (); i != fChordTechnicalsList.end (); ++i) {
         os << (*i);
       } // for
@@ -1976,7 +1976,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrOrnament>::const_iterator i;
+      std::list <S_msrOrnament>::const_iterator i;
       for (i = fChordOrnamentsList.begin (); i != fChordOrnamentsList.end (); ++i) {
         os << (*i);
       } // for
@@ -2001,7 +2001,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrGlissando>::const_iterator i;
+      std::list <S_msrGlissando>::const_iterator i;
       for (i = fChordGlissandosList.begin (); i != fChordGlissandosList.end (); ++i) {
         os << (*i);
       } // for
@@ -2026,7 +2026,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrSlide>::const_iterator i;
+      std::list <S_msrSlide>::const_iterator i;
       for (i = fChordSlidesList.begin (); i != fChordSlidesList.end (); ++i) {
         os << (*i);
       } // for
@@ -2051,7 +2051,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrDynamic>::const_iterator i;
+      std::list <S_msrDynamic>::const_iterator i;
       for (i = fChordDynamicsList.begin (); i != fChordDynamicsList.end (); ++i) {
         os << (*i);
       } // for
@@ -2076,7 +2076,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrOtherDynamic>::const_iterator i;
+      std::list <S_msrOtherDynamic>::const_iterator i;
       for (i = fChordOtherDynamicsList.begin (); i != fChordOtherDynamicsList.end (); ++i) {
         os << (*i);
       } // for
@@ -2101,7 +2101,7 @@ void msrChord::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrStem>::const_iterator i;
+    std::list <S_msrStem>::const_iterator i;
     for (i = fChordStemsList.begin (); i != fChordStemsList.end (); ++i) {
       os << (*i);
     } // for
@@ -2125,7 +2125,7 @@ void msrChord::print (std::ostream& os) const
 //       os << std::endl;
 //       ++gIndenter;
 //
-//       std::list<S_msrBeam>::const_iterator i;
+//       std::list <S_msrBeam>::const_iterator i;
 //       for (i = fChordBeamsList.begin (); i != fChordBeamsList.end (); ++i) {
 //         os << (*i);
 //       } // for
@@ -2151,7 +2151,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrChordBeamLink>::const_iterator i;
+      std::list <S_msrChordBeamLink>::const_iterator i;
       for (i = fChordBeamLinksList.begin (); i != fChordBeamLinksList.end (); ++i) {
         os << (*i);
       } // for
@@ -2177,7 +2177,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrWords>::const_iterator i;
+      std::list <S_msrWords>::const_iterator i;
       for (i = fChordWordsList.begin (); i != fChordWordsList.end (); ++i) {
         os << (*i);
       } // for
@@ -2227,7 +2227,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrChordSlurLink>::const_iterator i;
+      std::list <S_msrChordSlurLink>::const_iterator i;
       for (i = fChordSlurLinksList.begin (); i != fChordSlurLinksList.end (); ++i) {
         os << (*i);
       } // for
@@ -2253,7 +2253,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrLigature>::const_iterator i;
+      std::list <S_msrLigature>::const_iterator i;
       for (i = fChordLigaturesList.begin (); i != fChordLigaturesList.end (); ++i) {
         os << (*i);
       } // for
@@ -2279,7 +2279,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrSlash>::const_iterator i;
+      std::list <S_msrSlash>::const_iterator i;
       for (i = fChordSlashesList.begin (); i != fChordSlashesList.end (); ++i) {
         os << (*i);
       } // for
@@ -2304,7 +2304,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrCrescDescrec>::const_iterator i;
+      std::list <S_msrCrescDescrec>::const_iterator i;
       for (i = fChordCrescDescrecs.begin (); i != fChordCrescDescrecs.end (); ++i) {
         os << (*i);
       } // for
@@ -2329,7 +2329,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrWedge>::const_iterator i;
+      std::list <S_msrWedge>::const_iterator i;
       for (i = fChordWedgesList.begin (); i != fChordWedgesList.end (); ++i) {
         os << (*i);
       } // for
@@ -2354,7 +2354,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrSegno>::const_iterator i;
+      std::list <S_msrSegno>::const_iterator i;
       for (i = fChordSegnosList.begin (); i != fChordSegnosList.end (); ++i) {
         os << (*i);
       } // for
@@ -2379,7 +2379,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrDalSegno>::const_iterator i;
+      std::list <S_msrDalSegno>::const_iterator i;
       for (i = fChordDalSegnosList.begin (); i != fChordDalSegnosList.end (); ++i) {
         os << (*i);
       } // for
@@ -2404,7 +2404,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrCoda>::const_iterator i;
+      std::list <S_msrCoda>::const_iterator i;
       for (i = fChordCodasList.begin (); i != fChordCodasList.end (); ++i) {
         os << (*i);
       } // for
@@ -2448,7 +2448,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_msrHarmony>::const_iterator
+      std::list <S_msrHarmony>::const_iterator
         iBegin = fChordHarmoniesList.begin (),
         iEnd   = fChordHarmoniesList.end (),
         i      = iBegin;
@@ -2505,7 +2505,7 @@ void msrChord::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::vector<S_msrNote>::const_iterator
+      std::vector <S_msrNote>::const_iterator
         iBegin = fChordNotesVector.begin (),
         iEnd   = fChordNotesVector.end (),
         i      = iBegin;
@@ -3190,7 +3190,7 @@ void msrChord::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::vector<S_msrNote>::const_iterator
+    std::vector <S_msrNote>::const_iterator
       iBegin = fChordNotesVector.begin (),
       iEnd   = fChordNotesVector.end (),
       i      = iBegin;
@@ -3223,7 +3223,7 @@ void msrChord::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrChordSlurLink>::const_iterator i;
+    std::list <S_msrChordSlurLink>::const_iterator i;
     for (i = fChordSlurLinksList.begin (); i != fChordSlurLinksList.end (); ++i) {
       (*i)->printFull (os);
     } // for
@@ -3946,7 +3946,7 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
 
 void msrChordGraceNotesGroupLink::browseData (basevisitor* v)
 {
-  std::list<S_msrMeasureElement>::const_iterator i;
+  std::list <S_msrMeasureElement>::const_iterator i;
 
   // browse the original grace notes group
   msrBrowser<msrGraceNotesGroup> browser (v);

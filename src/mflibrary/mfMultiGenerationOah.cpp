@@ -110,7 +110,7 @@ EXP mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
   return result;
 }
 
-std::map<std::string, mfMultiGenerationOutputKind>
+std::map <std::string, mfMultiGenerationOutputKind>
   gGlobalMultiGenerationOutputKindsMap;
 
 void initializeMultiGenerationOutputKindsMap ()
@@ -142,7 +142,7 @@ std::string availableMultiGenerationOutputKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, mfMultiGenerationOutputKind>::const_iterator i =
+      std::map <std::string, mfMultiGenerationOutputKind>::const_iterator i =
         gGlobalMultiGenerationOutputKindsMap.begin ();
       i != gGlobalMultiGenerationOutputKindsMap.end ();
       ++i
@@ -182,7 +182,7 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
       mfMultiGenerationOutputKind::kGeneration_UNKNOWN_;
 //
 //   // analyze the options
-//   const std::vector<oahOption>&
+//   const std::vector <oahOption>&
 //     optionsVector =
 //       gServiceRunData->
 //         getOptionsAndArguments ().getOptionsVector ();

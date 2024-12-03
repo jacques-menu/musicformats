@@ -118,10 +118,10 @@ std::string availableHarmonyKindsNames (size_t namesListMaxLength);
 // constant
 EXP extern const int K_HARMONY_INVERSION_NONE;
 
-EXP extern std::map<std::string, msrHarmonyKind>
+EXP extern std::map <std::string, msrHarmonyKind>
   gGlobalHarmonyKindsMap;
 
-EXP extern std::list<std::string>
+EXP extern std::list <std::string>
   gHarmonyKindsNamesList;
 
 void initializeHarmonyKinds ();
@@ -389,7 +389,7 @@ class EXP msrHarmony : public msrMeasureElement
                               { return fHarmonyBassQuarterTonesPitchKind; }
 
     // degrees
-    const std::list<S_msrHarmonyDegree>&
+    const std::list <S_msrHarmonyDegree>&
                           getHarmonyDegreesList () const
                               { return fHarmonyDegreesList; }
 
@@ -492,7 +492,7 @@ class EXP msrHarmony : public msrMeasureElement
                           fHarmonyBassQuarterTonesPitchKind;
 
     // degrees
-    std::list<S_msrHarmonyDegree>
+    std::list <S_msrHarmonyDegree>
                           fHarmonyDegreesList;
 
     // staff
@@ -711,7 +711,7 @@ class EXP msrHarmonyStructure : public smartable
     // ------------------------------------------------------
 
     msrHarmonyKind        fHarmonyStructureHarmonyKind;
-    std::vector<S_msrHarmonyInterval>
+    std::vector <S_msrHarmonyInterval>
                           fHarmonyStructureIntervals;
 };
 typedef SMARTP<msrHarmonyStructure> S_msrHarmonyStructure;
@@ -755,7 +755,7 @@ class EXP msrHarmonyContents : public smartable
     msrHarmonyKind        getHarmonyContentsHarmonyKind () const
                               { return fHarmonyContentsHarmonyKind; }
 
-    const std::vector<S_msrSemiTonesPitchAndOctave>&
+    const std::vector <S_msrSemiTonesPitchAndOctave>&
                           getHarmonyElementsVector () const
                               { return fHarmonyElementsVector; }
 
@@ -800,7 +800,7 @@ class EXP msrHarmonyContents : public smartable
     msrSemiTonesPitchKind fHarmonyContentsRootNote;
     msrHarmonyKind        fHarmonyContentsHarmonyKind;
 
-    std::vector<S_msrSemiTonesPitchAndOctave>
+    std::vector <S_msrSemiTonesPitchAndOctave>
                           fHarmonyElementsVector;
 };
 typedef SMARTP<msrHarmonyContents> S_msrHarmonyContents;
@@ -821,7 +821,7 @@ void printHarmonyAnalysis (
 
 // global variables
 //______________________________________________________________________________
-extern std::map<msrHarmonyKind, S_msrHarmonyStructure>
+extern std::map <msrHarmonyKind, S_msrHarmonyStructure>
   gGlobalHarmonyStructuresMap;
 
 void initializeHarmonyStructuresMap ();

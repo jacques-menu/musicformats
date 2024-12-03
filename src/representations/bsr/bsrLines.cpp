@@ -405,7 +405,7 @@ int bsrLine::fetchCellsNumber () const
   int result = 0;
 
   for (
-    std::list<S_bsrLineContents>::const_iterator i = fLineContentsList.begin ();
+    std::list <S_bsrLineContents>::const_iterator i = fLineContentsList.begin ();
     i != fLineContentsList.end ();
     ++i ) {
     result += (*i)->fetchCellsNumber ();
@@ -491,7 +491,7 @@ void bsrLine::acceptOut (basevisitor* v)
 void bsrLine::browseData (basevisitor* v)
 {
   for (
-    std::list<S_bsrLineContents>::const_iterator i = fLineContentsList.begin ();
+    std::list <S_bsrLineContents>::const_iterator i = fLineContentsList.begin ();
     i != fLineContentsList.end ();
     ++i ) {
     // browse the element
@@ -580,7 +580,7 @@ void bsrLine::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_bsrLineContents>::const_iterator
+      std::list <S_bsrLineContents>::const_iterator
         iBegin = fLineContentsList.begin (),
         iEnd   = fLineContentsList.end (),
         i      = iBegin;

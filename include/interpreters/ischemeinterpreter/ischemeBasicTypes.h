@@ -163,7 +163,7 @@ class EXP ischemeInput : public smartable
     ischemeInputNameKind  getInputNameKind () const
                               { return fInputNameKind; }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
                           getNamesSet () const
                               { return fNamesSet; }
 
@@ -214,7 +214,7 @@ class EXP ischemeInput : public smartable
 
     ischemeInputNameKind  fInputNameKind;
 
-    std::set<std::string> fNamesSet;
+    std::set <std::string> fNamesSet;
 
     Bool                  fInputIsUsedInCaseInputStatements;
 
@@ -363,12 +363,12 @@ class EXP ischemeCaseInputStatement : public smartable
 
     S_ischemeInput        fCaseInputInput;
 
-    std::set<std::string> fCaseInputNamesSet;
+    std::set <std::string> fCaseInputNamesSet;
     list<std::string>     fCaseInputCurrentNamesList;
 
     // checking unused names
-    std::set<std::string> fUsedNames;
-    std::set<std::string> fCaseInputUnusedNames;
+    std::set <std::string> fUsedNames;
+    std::set <std::string> fCaseInputUnusedNames;
 };
 typedef SMARTP<ischemeCaseInputStatement> S_ischemeCaseInputStatement;
 EXP std::ostream& operator<< (std::ostream& os, const S_ischemeCaseInputStatement& elt);
@@ -431,7 +431,7 @@ class EXP ischemeChoice : public smartable
     ischemeChoiceLabelKind   getChoiceLabelKind () const
                               { return fChoiceLabelKind; }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
                           getLabelsSet () const
                               { return fLabelsSet; }
 
@@ -491,7 +491,7 @@ class EXP ischemeChoice : public smartable
     ischemeChoiceLabelKind
                           fChoiceLabelKind;
 
-    std::set<std::string> fLabelsSet;
+    std::set <std::string> fLabelsSet;
 
     std::string           fChoiceDefaultLabel;
 
@@ -643,12 +643,12 @@ class EXP ischemeCaseChoiceStatement : public smartable
 
     S_ischemeChoice       fCaseChoice;
 
-    std::set<std::string> fCaseLabelsSet;
+    std::set <std::string> fCaseLabelsSet;
     list<std::string>     fCaseCurrentLabelsList;
 
     // checking unused labels
-    std::set<std::string> fUsedLabels;
-    std::set<std::string> fCaseUnusedLabels;
+    std::set <std::string> fUsedLabels;
+    std::set <std::string> fCaseUnusedLabels;
 };
 typedef SMARTP<ischemeCaseChoiceStatement> S_ischemeCaseChoiceStatement;
 EXP std::ostream& operator<< (std::ostream& os, const S_ischemeCaseChoiceStatement& elt);

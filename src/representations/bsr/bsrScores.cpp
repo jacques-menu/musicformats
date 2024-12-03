@@ -157,7 +157,7 @@ void bsrScore::browseData (basevisitor* v)
   }
 
   for (
-    std::list<S_bsrPage>::const_iterator i =
+    std::list <S_bsrPage>::const_iterator i =
       fScorePagesList.begin ();
     i != fScorePagesList.end ();
     ++i
@@ -234,7 +234,7 @@ void bsrScore::printFull (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_bsrPage>::const_iterator
+      std::list <S_bsrPage>::const_iterator
         iBegin = fScorePagesList.begin (),
         iEnd   = fScorePagesList.end (),
         i      = iBegin;
@@ -308,7 +308,7 @@ void bsrScore::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_bsrPage>::const_iterator
+      std::list <S_bsrPage>::const_iterator
         iBegin = fScorePagesList.begin (),
         iEnd   = fScorePagesList.end (),
         i      = iBegin;

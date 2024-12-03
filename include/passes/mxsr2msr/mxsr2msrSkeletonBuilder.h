@@ -166,7 +166,7 @@ class EXP mxsrPartGroupsList : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_mxsrPartGroup>&
+    const std::list <S_mxsrPartGroup>&
                           getMxsrPartGroupsStdList () const
                               { return fMxsrPartGroupsStdList;}
 
@@ -232,7 +232,7 @@ class EXP mxsrPartGroupsList : public smartable
 
     std::string           fMxsrPartGroupListName;
 
-    std::list<S_mxsrPartGroup>
+    std::list <S_mxsrPartGroup>
                           fMxsrPartGroupsStdList;
 };
 typedef SMARTP<mxsrPartGroupsList> S_mxsrPartGroupsList;
@@ -270,7 +270,7 @@ class EXP mxsrPartGroupsStack : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_mxsrPartGroup>&
+    const std::list <S_mxsrPartGroup>&
                           getMxsrPartGroupsStdList () const
                               { return fMxsrPartGroupsStdList;}
 
@@ -317,7 +317,7 @@ class EXP mxsrPartGroupsStack : public smartable
 
     std::string           fMxsrPartGroupStackName;
 
-    std::list<S_mxsrPartGroup>
+    std::list <S_mxsrPartGroup>
                           fMxsrPartGroupsStdList;
 };
 typedef SMARTP<mxsrPartGroupsStack> S_mxsrPartGroupsStack;
@@ -827,19 +827,19 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      createTheImplicitOuterPartGroupAndAddItToTheMsrScore (
                                 int inputLineNumber);
 
-    std::vector<S_mxsrPartGroup>
+    std::vector <S_mxsrPartGroup>
                               fPartGroupsVector;
 
     void                      displayPartGroupsVector (
                                 int inputLineNumber);
 
-    std::map<int, S_mxsrPartGroup>
+    std::map <int, S_mxsrPartGroup>
                               fPartGroupsMap;
 
     void                      displayPartGroupsMap (
                                 int inputLineNumber);
 
-    std::map<int, S_mxsrPartGroup>
+    std::map <int, S_mxsrPartGroup>
                               fStartedPartGroupsMap;
 
     // the part groups may be nested so we need a stack,
@@ -868,7 +868,7 @@ class EXP mxsr2msrSkeletonBuilder :
     // private methods
 
     // several part groups may start and/or stop at the same position JMI ??? v0.9.69
-    std::vector<S_mxsrPartGroupsList>
+    std::vector <S_mxsrPartGroupsList>
                               fStartedPartGroupsListsVector;
 
     void                      registerPartGroupStart (
@@ -878,7 +878,7 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      displayStartedPartGroupsVector (
                                 int inputLineNumber);
 
-    std::vector<S_mxsrPartGroupsList>
+    std::vector <S_mxsrPartGroupsList>
                               fStoppedPartGroupsListsVector;
 
     void                      registerPartGroupStop (
@@ -928,7 +928,7 @@ class EXP mxsr2msrSkeletonBuilder :
     std::string               fCurrentPartInstrumentName;
     std::string               fCurrentPartInstrumentAbbreviation;
 
-    std::map<std::string, S_msrPart>
+    std::map <std::string, S_msrPart>
                               fPartsMap;
 
     void                      displayPartsMap (
@@ -939,7 +939,7 @@ class EXP mxsr2msrSkeletonBuilder :
     // this is used for handling nesting/overlapping
     int                       fCurrentPartGroupIdentity;
 
-    std::vector<S_msrPart>    fPartsVector;
+    std::vector <S_msrPart>    fPartsVector;
 
     void                      displayPartsVector (
                                 int inputLineNumber);
@@ -977,9 +977,9 @@ class EXP mxsr2msrSkeletonBuilder :
     */
 
     // we need a fast access to the voices and their handlers, hence:
-    std::vector<S_msrVoice>   fCurrentPartVoicesVector;
+    std::vector <S_msrVoice>   fCurrentPartVoicesVector;
 
-//     std::vector<S_mxsr2msrBuilderVoiceHandler>
+//     std::vector <S_mxsr2msrBuilderVoiceHandler>
 //                               fCurrentPartBuilderVoicesHandlersVector;
 
     void                      populateCurrentPartVoicesVectorsFromPart (
@@ -1067,18 +1067,17 @@ class EXP mxsr2msrSkeletonBuilder :
 
     // there can be multiple tuplets starts on a given note,
     // so they aref kept aside until they are handled
-    std::list<std::tuple<
+    std::list <std::tuple <
       int,                // note inputStartLineNumber
       int,                // tuplet number
-      msrTupletTypeKind> >
-                              fPendingTupletsInformationTuplesList;
+      msrTupletTypeKind>>     fPendingTupletsInformationTuplesList;
 
     Bool                      fCurrentNoteBelongsToATuplet;
 
     // a tuplet stop may occur in a chord before the latter's last note,
     // and the can be several tuplets stop in a single note:
     // we store their description in a map indexed by a sequential number
-    std::multimap<int, S_mxsr2msrPendingTupletStop>
+    std::multimap <int, S_mxsr2msrPendingTupletStop>
                               fPendingTupletsStopsMap; // CHORD_TUP JMI v0.9.71
 
     void                      registerTupletEventIfAny ();
@@ -1161,7 +1160,7 @@ class EXP mxsr2msrSkeletonBuilder :
 //     S_msrVoice            getMsrVoice () const
 //                               { return fMsrVoice; }
 //
-//     const std::list<S_msrTuplet>&
+//     const std::list <S_msrTuplet>&
 //                           getTupletsStack () const
 //                               { return fTupletsStack; }
 //
@@ -1220,7 +1219,7 @@ class EXP mxsr2msrSkeletonBuilder :
 //
 //     S_msrNote             fLastMetNoteInVoice;
 //
-//     std::list<S_msrTuplet>
+//     std::list <S_msrTuplet>
 //                           fTupletsStack;
 //
 //     S_msrNote             fCurrentOuterMostTupletFirstNote;
@@ -1234,12 +1233,12 @@ class EXP mxsr2msrSkeletonBuilder :
 //     // ------------------------------------------------------
 //
 //     // we use a pair containing the staff and voice numbers: JMI v0.9.70
-// //     std::map<S_msrVoice, S_msrTuplet>
-// //     std::map<std::pair<int, int>, S_msrTuplet>
+// //     std::map <S_msrVoice, S_msrTuplet>
+// //     std::map <std::pair <int, int>, S_msrTuplet>
 // //                               fLastHandledTupletInVoiceMap;
 //
 // //     // the tuplets stops are not always in first-in/first-out order, so:
-// //     std::set<int>         fExpectedTupletsStopNumbersSet;
+// //     std::set <int>         fExpectedTupletsStopNumbersSet;
 //
 //   private:
 //

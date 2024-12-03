@@ -53,12 +53,12 @@ This one supplies a value to the {\tt xmlelement} it creates:
 void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
 {
   // composers
-  const std::list<std::string>&
+  const std::list <std::string>&
     composersList =
       elt->getComposersList ();
 
   for (
-    std::list<std::string>::const_iterator i = composersList.begin ();
+    std::list <std::string>::const_iterator i = composersList.begin ();
     i != composersList.end ();
     ++i
   ) {

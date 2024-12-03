@@ -113,7 +113,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
       case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
         {
           // fetch MSR tempo attributes
-          const std::list<S_msrWords>&
+          const std::list <S_msrWords>&
             tempoWordsList =
               fMsrTempo->getTempoWordsList ();
 
@@ -125,7 +125,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           size_t tempoWordsListSize = tempoWordsList.size ();
 
           if (tempoWordsListSize) {
-            std::list<S_msrWords>::const_iterator
+            std::list <S_msrWords>::const_iterator
               iBegin = tempoWordsList.begin (),
               iEnd   = tempoWordsList.end (),
               i      = iBegin;

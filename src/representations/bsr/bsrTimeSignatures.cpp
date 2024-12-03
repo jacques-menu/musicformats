@@ -475,14 +475,14 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
     case bsrTimeSignatureKind::kTimeSignatureDottedNote:
       {
         if (fTimeSignatureItemsVector.size ()) {
-          std::vector<S_bsrTimeSignatureItem>::const_iterator
+          std::vector <S_bsrTimeSignatureItem>::const_iterator
             iBegin = fTimeSignatureItemsVector.begin (),
         // JMI    iEnd   = fTimeSignatureItemsVector.end (),
             i      = iBegin;
 
           S_bsrTimeSignatureItem theBsrTimeSignatureItem = (*i);
 
-          const std::vector<int>&
+          const std::vector <int>&
             timeSignatureBeatsNumbersVector =
               theBsrTimeSignatureItem->getTimeSignatureBeatsNumbersVector ();
 
@@ -667,14 +667,14 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
     case bsrTimeSignatureKind::kTimeSignatureSingleNumber:
       {
         if (fTimeSignatureItemsVector.size ()) {
-          std::vector<S_bsrTimeSignatureItem>::const_iterator
+          std::vector <S_bsrTimeSignatureItem>::const_iterator
             iBegin = fTimeSignatureItemsVector.begin (),
    // JMI         iEnd   = fTimeSignatureItemsVector.end (),
             i      = iBegin;
 
           S_bsrTimeSignatureItem theBsrTimeSignatureItem = (*i);
 
-          const std::vector<int>&
+          const std::vector <int>&
             timeSignatureBeatsNumbersVector =
               theBsrTimeSignatureItem->getTimeSignatureBeatsNumbersVector ();
 
@@ -928,7 +928,7 @@ void bsrTimeSignature::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::vector<S_bsrTimeSignatureItem>::const_iterator
+    std::vector <S_bsrTimeSignatureItem>::const_iterator
       iBegin = fTimeSignatureItemsVector.begin (),
       iEnd   = fTimeSignatureItemsVector.end (),
       i      = iBegin;

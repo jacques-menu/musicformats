@@ -701,7 +701,7 @@ std::string multiMeasureRestsWholeNoteAsLilypondString (
 
 //_______________________________________________________________________________
 std::string syllableElementsListAsLilypondString (
-  const std::list<msrSyllableElement>& syllableElementsList)
+  const std::list <msrSyllableElement>& syllableElementsList)
 {
   std::stringstream ss;
 
@@ -720,7 +720,7 @@ std::string syllableElementsListAsLilypondString (
 // score output kinds
 //______________________________________________________________________________
 
-std::map<std::string, lpsrScoreOutputKind>
+std::map <std::string, lpsrScoreOutputKind>
   gGlobalLpsrScoreOutputKindsMap;
 
 std::string lpsrScoreOutputKindAsString (
@@ -803,7 +803,7 @@ std::string availableLpsrScoreOutputKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, lpsrScoreOutputKind>::const_iterator i =
+      std::map <std::string, lpsrScoreOutputKind>::const_iterator i =
         gGlobalLpsrScoreOutputKindsMap.begin ();
       i != gGlobalLpsrScoreOutputKindsMap.end ();
       ++i
@@ -838,7 +838,7 @@ std::string availableLpsrScoreOutputKinds (size_t namesListMaxLength)
 // accidental styles
 //______________________________________________________________________________
 
-std::map<std::string, lpsrAccidentalStyleKind>
+std::map <std::string, lpsrAccidentalStyleKind>
   gGlobalLpsrAccidentalStyleKindsMap;
 
 std::string lpsrAccidentalStyleKindAsString (
@@ -1037,7 +1037,7 @@ std::string availableLpsrAccidentalStyleKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, lpsrAccidentalStyleKind>::const_iterator i =
+      std::map <std::string, lpsrAccidentalStyleKind>::const_iterator i =
         gGlobalLpsrAccidentalStyleKindsMap.begin ();
       i != gGlobalLpsrAccidentalStyleKindsMap.end ();
       ++i
@@ -1072,7 +1072,7 @@ std::string availableLpsrAccidentalStyleKinds (size_t namesListMaxLength)
 // chords languages
 //______________________________________________________________________________
 
-std::map<std::string, lpsrChordsLanguageKind>
+std::map <std::string, lpsrChordsLanguageKind>
   gGlobalLpsrChordsLanguageKindsMap;
 
 void initializeLpsrChordsLanguageKindsMap ()
@@ -1137,7 +1137,7 @@ std::string availableLpsrChordsLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, lpsrChordsLanguageKind>::const_iterator i =
+      std::map <std::string, lpsrChordsLanguageKind>::const_iterator i =
         gGlobalLpsrChordsLanguageKindsMap.begin ();
       i != gGlobalLpsrChordsLanguageKindsMap.end ();
       ++i
@@ -1183,7 +1183,7 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
         semiTonesPitchAndOctave->
           getSemiTonesPitchKind ());
 
-  std::map<msrQuarterTonesPitchKind, std::string>*
+  std::map <msrQuarterTonesPitchKind, std::string>*
     pitchesNamesMapPTR =
       &getNederlandsPitchesNamesMap (); // default LilyPond value
 
@@ -1301,10 +1301,10 @@ std::string msrSemiTonesPitchAndOctaveAsLilypondString (
 
 // dynamics
 //______________________________________________________________________________
-std::map<std::string, lpsrDynamicsTextSpannersStyleKind>
+std::map <std::string, lpsrDynamicsTextSpannersStyleKind>
   pLpsrDynamicsTextSpannersStyleKindsMap;
 
-std::map<std::string, lpsrDynamicsTextSpannersStyleKind>&
+std::map <std::string, lpsrDynamicsTextSpannersStyleKind>&
   getLpsrDynamicsTextSpannersStyleKindsMap ()
 {
   return pLpsrDynamicsTextSpannersStyleKindsMap;
@@ -1414,7 +1414,7 @@ std::string availableLpsrDynamicsTextSpannersStyleKinds (
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, lpsrDynamicsTextSpannersStyleKind>::const_iterator i =
+      std::map <std::string, lpsrDynamicsTextSpannersStyleKind>::const_iterator i =
         pLpsrDynamicsTextSpannersStyleKindsMap.begin ();
       i != pLpsrDynamicsTextSpannersStyleKindsMap.end ();
       ++i
@@ -1450,7 +1450,7 @@ std::string availableLpsrDynamicsTextSpannersStyleKinds (
 // notes durations generation
 //______________________________________________________________________________
 
-std::map<std::string, lilypondDurationsGenerationKind>
+std::map <std::string, lilypondDurationsGenerationKind>
   gGlobalLilypondDurationsGenerationKindsMap;
 
 std::string lilypondDurationsGenerationKindAsString (
@@ -1508,7 +1508,7 @@ std::string availableLilypondDurationsGenerationKinds (size_t namesListMaxLength
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, lilypondDurationsGenerationKind>::const_iterator i =
+      std::map <std::string, lilypondDurationsGenerationKind>::const_iterator i =
         gGlobalLilypondDurationsGenerationKindsMap.begin ();
       i != gGlobalLilypondDurationsGenerationKindsMap.end ();
       ++i
@@ -1544,7 +1544,7 @@ std::string availableLilypondDurationsGenerationKinds (size_t namesListMaxLength
 // lyrics durations
 //______________________________________________________________________________
 
-std::map<std::string, lpsrLyricsNotesDurationsKind>
+std::map <std::string, lpsrLyricsNotesDurationsKind>
   gGlobalLpsrLyricsNotesDurationsKindsMap;
 
 std::string lpsrLyricsNotesDurationsKindAsString (
@@ -1610,7 +1610,7 @@ std::string availableLpsrLyricsNotesDurationsKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, lpsrLyricsNotesDurationsKind>::const_iterator i =
+      std::map <std::string, lpsrLyricsNotesDurationsKind>::const_iterator i =
         gGlobalLpsrLyricsNotesDurationsKindsMap.begin ();
       i != gGlobalLpsrLyricsNotesDurationsKindsMap.end ();
       ++i

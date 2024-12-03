@@ -70,7 +70,7 @@ class   msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
     mfRational              fChunkMeasurePosition;
-    std::list<S_msrNote>  fChunkNotesList;
+    std::list <S_msrNote>  fChunkNotesList;
     mfRational              fChunkNotesDurationWholeNotes;
 };
 \end{lstlisting}
@@ -95,17 +95,17 @@ class EXP msrMeasuresSlice : public smartable
     std::string           fSliceMeasureNumber;
 
     // the measures in the slice
-    std::vector<S_msrMeasure>  fSliceMeasuresVector;
+    std::vector <S_msrMeasure>  fSliceMeasuresVector;
 
     // notes flat list
-    std::list<S_msrNote>  fSliceNotesFlatList;
+    std::list <S_msrNote>  fSliceNotesFlatList;
 
     // note events list
-    std::list<S_msrNoteEvent>
+    std::list <S_msrNoteEvent>
                           fSliceNoteEventsList;
 
     // simultaneous notes chunks list
-    std::list<S_msrSimultaneousNotesChunk>
+    std::list <S_msrSimultaneousNotesChunk>
                           fSliceSimultaneousNotesChunksList;
 };
 
@@ -129,7 +129,7 @@ class EXP msrMeasuresSlicesSequence : public smartable
 
     std::string           fMeasuresOrigin;
 
-    std::vector<S_msrMeasuresSlice>
+    std::vector <S_msrMeasuresSlice>
                           fMeasuresSlicesVector;
 };
 \end{lstlisting}
@@ -259,7 +259,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 
   // collect the notes from the sequence's measures slices
   for (
-    std::vector<S_msrMeasuresSlice>::const_iterator i =
+    std::vector <S_msrMeasuresSlice>::const_iterator i =
       fMeasuresSlicesVector.begin ();
     i != fMeasuresSlicesVector.end ();
     ++i

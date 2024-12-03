@@ -40,7 +40,7 @@ S_msrReplaceClefAtom msrReplaceClefAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::map<msrClefKind, msrClefKind>&
+  std::map <msrClefKind, msrClefKind>&
                      clefKindToClefKindMapVariable)
 {
   msrReplaceClefAtom* obj = new
@@ -61,7 +61,7 @@ msrReplaceClefAtom::msrReplaceClefAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::map<msrClefKind, msrClefKind>&
+  std::map <msrClefKind, msrClefKind>&
                      clefKindToClefKindMapVariable)
   : oahAtomStoringAValue (
       longName,
@@ -187,7 +187,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
         K_MF_INPUT_LINE_UNKNOWN_,
         originalClefName);
 
-  std::map<msrClefKind, msrClefKind>::iterator
+  std::map <msrClefKind, msrClefKind>::iterator
     it =
       fClefKindToClefKindMapVariable.find (originalClefKind);
 
@@ -317,7 +317,7 @@ std::string msrReplaceClefAtom::asShortNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::map<msrClefKind, msrClefKind>::const_iterator
+    std::map <msrClefKind, msrClefKind>::const_iterator
       iBegin = fClefKindToClefKindMapVariable.begin (),
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
@@ -345,7 +345,7 @@ std::string msrReplaceClefAtom::asActualLongNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::map<msrClefKind, msrClefKind>::const_iterator
+    std::map <msrClefKind, msrClefKind>::const_iterator
       iBegin = fClefKindToClefKindMapVariable.begin (),
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
@@ -387,7 +387,7 @@ void msrReplaceClefAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::map<msrClefKind, msrClefKind>::const_iterator
+    std::map <msrClefKind, msrClefKind>::const_iterator
       iBegin = fClefKindToClefKindMapVariable.begin (),
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
@@ -423,7 +423,7 @@ void msrReplaceClefAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::map<msrClefKind, msrClefKind>::const_iterator
+    std::map <msrClefKind, msrClefKind>::const_iterator
       iBegin = fClefKindToClefKindMapVariable.begin (),
       iEnd   = fClefKindToClefKindMapVariable.end (),
       i      = iBegin;
@@ -1730,7 +1730,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToBold (
 
   // is wordsValue in the string to dal segno kind map?
   if (fBoldWordsSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fBoldWordsSet.find (wordsValue);
 
@@ -1752,7 +1752,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToItalic (
 
   // is wordsValue in the string to dal segno kind map?
   if (fItalicWordsSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fItalicWordsSet.find (wordsValue);
 
@@ -1774,7 +1774,7 @@ Bool mxsr2msrOahGroup::wordsIsToBePlacedAbove (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToBePlacedAboveSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToBePlacedAboveSet.find (wordsValue);
 
@@ -1796,7 +1796,7 @@ Bool mxsr2msrOahGroup::wordsIsToBePlacedBelow (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToBePlacedBelowSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToBePlacedBelowSet.find (wordsValue);
 
@@ -1819,7 +1819,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToTempo (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToTemposSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToTemposSet.find (wordsValue);
 
@@ -1841,7 +1841,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToRehearsalMark (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToRehearsalMarkSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToRehearsalMarkSet.find (wordsValue);
 
@@ -1863,7 +1863,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToSegno (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToSegnoSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToSegnoSet.find (wordsValue);
 
@@ -1885,7 +1885,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegno (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToDalSegnoSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToDalSegnoSet.find (wordsValue);
 
@@ -1907,7 +1907,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegnoAlFine (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToDalSegnoAlFineSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToDalSegnoAlFineSet.find (wordsValue);
 
@@ -1929,7 +1929,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDalSegnoAlCoda (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToDalSegnoAlCodaSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToDalSegnoAlCodaSet.find (wordsValue);
 
@@ -1951,7 +1951,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCodaFirst (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToCodaFirstSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToCodaFirstSet.find (wordsValue);
 
@@ -1973,7 +1973,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCodaSecond (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToCodaSecondSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToCodaSecondSet.find (wordsValue);
 
@@ -1995,7 +1995,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToCresc (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToCrescSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToCrescSet.find (wordsValue);
 
@@ -2017,7 +2017,7 @@ Bool mxsr2msrOahGroup::wordsIsToBeConvertedToDecresc (
 
   // is wordsValue in the string to dal segno kind map?
   if (fWordsToDecrescSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fWordsToDecrescSet.find (wordsValue);
 
@@ -2150,7 +2150,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   }
   else {
     for (
-      std::set<std::string> ::const_iterator i =
+      std::set <std::string> ::const_iterator i =
         fPartsIgnoreIDSet.begin ();
       i != fPartsIgnoreIDSet.end ();
       ++i
@@ -2171,7 +2171,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   }
   else {
     for (
-      std::set<std::string> ::const_iterator i =
+      std::set <std::string> ::const_iterator i =
         fMusicXMLPartsKeepIDSet.begin ();
       i != fMusicXMLPartsKeepIDSet.end ();
       ++i
@@ -2192,7 +2192,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   }
   else {
     for (
-      std::set<std::string> ::const_iterator i =
+      std::set <std::string> ::const_iterator i =
         fMusicXMLPartsIgnoreNameSet.begin ();
       i != fMusicXMLPartsIgnoreNameSet.end ();
       ++i
@@ -2213,7 +2213,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   }
   else {
     for (
-      std::set<std::string> ::const_iterator i =
+      std::set <std::string> ::const_iterator i =
         fMusicXMLPartsKeepNameSet.begin ();
       i != fMusicXMLPartsKeepNameSet.end ();
       ++i
@@ -2292,7 +2292,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   ++gIndenter;
 
-//     std::map<std::string,int>       fAddEmptyMeasuresStringToIntMap;
+//     std::map <std::string,int>       fAddEmptyMeasuresStringToIntMap;
 
 /* JMI
   gLog << std::left <<

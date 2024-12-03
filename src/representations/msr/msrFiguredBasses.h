@@ -260,7 +260,7 @@ class EXP msrFiguredBass : public msrMeasureElement
                               { return fFiguredBassParenthesesKind; }
 
     // bass figures list
-    const std::list<S_msrBassFigure>&
+    const std::list <S_msrBassFigure>&
                           getFiguredBassFiguresList () const
                               { return fFiguredBassFiguresList;  }
 
@@ -323,7 +323,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;
 
-    std::list<S_msrBassFigure>
+    std::list <S_msrBassFigure>
                           fFiguredBassFiguresList;
 
     msrTupletFactor       fFiguredBassTupletFactor;

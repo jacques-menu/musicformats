@@ -325,7 +325,7 @@ class   msdlTokenKindsSet : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const std::set<msdlTokenKind>&
+    const std::set <msdlTokenKind>&
                           getTokenKindsSet () const
                               { return fTokenKindsSet; }
 
@@ -364,7 +364,7 @@ class   msdlTokenKindsSet : public smartable
     // private fields
     // ------------------------------------------------------
 
-    std::set<msdlTokenKind>    fTokenKindsSet;
+    std::set <msdlTokenKind>    fTokenKindsSet;
 };
 EXP std::ostream& operator << (std::ostream& os, const msdlTokenKindsSet& elt);
 
@@ -697,7 +697,7 @@ class EXP msdlTokensList : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const std::list<msdlToken>&
+    const std::list <msdlToken>&
                           getTokensList () const
                               { return fTokensList; }
 
@@ -727,7 +727,7 @@ class EXP msdlTokensList : public smartable
     // private fields
     // ------------------------------------------------------
 
-    std::list<msdlToken>       fTokensList;
+    std::list <msdlToken>       fTokensList;
 };
 typedef SMARTP<msdlTokensList> S_msdlTokensList;
 EXP std::ostream& operator << (std::ostream& os, const S_msdlTokensList& elt);

@@ -482,7 +482,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 #endif // MF_TRACE_IS_ENABLED
 
     for (
-      std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
+      std::list <S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
       i != fMeasureElementsList.end ();
       ++i
     ) {
@@ -679,7 +679,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
 #endif // MF_TRACE_IS_ENABLED
 
     for (
-      std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
+      std::list <S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
       i != fMeasureElementsList.end ();
       ++i ) {
       S_msrMeasureElement element = (*i);
@@ -1078,7 +1078,7 @@ void msrMeasure::appendMeasureElementToMeasure (
 
 void msrMeasure::insertElementInMeasureBeforeIterator (
   int                                      inputLineNumber,
-  std::list<S_msrMeasureElement>::iterator iter,
+  std::list <S_msrMeasureElement>::iterator iter,
   const S_msrMeasureElement&               elem)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1274,7 +1274,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
         // fetch iterator to list end
-        std::list<S_msrMeasureElement>::iterator it =
+        std::list <S_msrMeasureElement>::iterator it =
             fMeasureElementsList.end ();
 
         // fetch iterator to list last element
@@ -1402,7 +1402,7 @@ void msrMeasure::insertElementAtMeasurePosition (
       fMeasureElementsList.size ();
 
   if (measureElementsListSize) {
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fMeasureElementsList.begin (),
       iEnd   = fMeasureElementsList.end (),
       i      = iBegin;
@@ -2431,7 +2431,7 @@ void msrMeasure::printMeasurePendingMeasureElementsList ()
   ++gIndenter;
 
   if (fMeasurePendingMeasureElementsList.size ()) {
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fMeasurePendingMeasureElementsList.begin (),
       iEnd   = fMeasurePendingMeasureElementsList.end (),
       i      = iBegin;
@@ -3319,7 +3319,7 @@ void msrMeasure::appendHarmonyToMeasure (
 
 void msrMeasure::appendHarmoniesListToMeasure (
   int                            inputLineNumber,
-  const std::list<S_msrHarmony>& harmoniesList,
+  const std::list <S_msrHarmony>& harmoniesList,
   const msrWholeNotes&           measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -3488,7 +3488,7 @@ void msrMeasure::appendFiguredBassToMeasure (
 
 void msrMeasure::appendFiguredBassesListToMeasure (
   int                                inputLineNumber,
-  const std::list<S_msrFiguredBass>& figuredBasssesList,
+  const std::list <S_msrFiguredBass>& figuredBasssesList,
   const msrWholeNotes&               measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4352,7 +4352,7 @@ void msrMeasure::removeNoteFromMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
+    std::list <S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
     i != fMeasureElementsList.end ();
     ++i
   ) {
@@ -4476,7 +4476,7 @@ void msrMeasure::removeElementFromMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
+    std::list <S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
     i != fMeasureElementsList.end ();
     ++i
   ) {
@@ -6227,7 +6227,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
 void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
   int                     inputLineNumber,
   const S_msrVoice&       voice,
-  std::list<S_msrMeasureElement>::iterator&
+  std::list <S_msrMeasureElement>::iterator&
                           i,
   const S_msrFiguredBass& previousFiguredBass,
   const S_msrFiguredBass& currentFiguredBass,
@@ -6319,7 +6319,7 @@ void msrMeasure::handleFirstFiguredBassInFiguredBassMeasure (
 void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
   int                     inputLineNumber,
   const S_msrVoice&       voice,
-  std::list<S_msrMeasureElement>::iterator&
+  std::list <S_msrMeasureElement>::iterator&
                           i,
   const S_msrFiguredBass& previousFiguredBass,
   const S_msrFiguredBass& currentFiguredBass,
@@ -6742,7 +6742,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
 
     // consider each measure element (a figured bass in fact) in turn,
     // updating their duration and adding skips if needed
-    std::list<S_msrMeasureElement>::iterator
+    std::list <S_msrMeasureElement>::iterator
       iBegin = fMeasureElementsList.begin (),
       iEnd   = fMeasureElementsList.end (),
       i      = iBegin;
@@ -7283,7 +7283,7 @@ void msrMeasure::finalizeMeasure (
 
     // delegate position measure assignment to the elements in the measure
     for (S_msrMeasureElement measureElement : fMeasureElementsList) {
-//       std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
+//       std::list <S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
 //       i != fMeasureElementsList.end ();
 //       ++i
 //     ) {
@@ -7317,7 +7317,7 @@ void msrMeasure::finalizeMeasure (
       if (measureNotesFlatListSize) {
         ++gIndenter;
 
-        std::list<S_msrNote>::const_iterator
+        std::list <S_msrNote>::const_iterator
           iBegin = fMeasureNotesFlatList.begin (),
           iEnd   = fMeasureNotesFlatList.end (),
           i      = iBegin;
@@ -7573,7 +7573,7 @@ void msrMeasure::finalizeMeasureClone (
   // delegate position measure assignment to the elements in the measure
     for (S_msrMeasureElement measureElement : fMeasureElementsList) {
 //   for (
-//     std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
+//     std::list <S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
 //     i != fMeasureElementsList.end ();
 //     ++i
 //   ) {
@@ -7688,7 +7688,7 @@ void msrMeasure::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
+    std::list <S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
     i != fMeasureElementsList.end ();
     ++i
   ) {
@@ -7881,7 +7881,7 @@ std::string msrMeasure::asStringForMeasuresSlices () const
 
     ++gIndenter;
 
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fMeasureElementsList.begin (),
       iEnd   = fMeasureElementsList.end (),
       i      = iBegin;
@@ -8192,7 +8192,7 @@ void msrMeasure::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fMeasureElementsList.begin (),
       iEnd   = fMeasureElementsList.end (),
       i      = iBegin;
@@ -8226,7 +8226,7 @@ void msrMeasure::printFull (std::ostream& os) const
   if (measureNotesFlatListSize) {
     ++gIndenter;
 
-    std::list<S_msrNote>::const_iterator
+    std::list <S_msrNote>::const_iterator
       iBegin = fMeasureNotesFlatList.begin (),
       iEnd   = fMeasureNotesFlatList.end (),
       i      = iBegin;
@@ -8321,7 +8321,7 @@ void msrMeasure::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fMeasureElementsList.begin (),
       iEnd   = fMeasureElementsList.end (),
       i      = iBegin;

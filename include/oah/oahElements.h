@@ -188,12 +188,12 @@ class EXP oahFindableElement : public smartable
 
     virtual Bool          findStringInFindableElement ( // JMI v0.9.71 OAH_OAH
                             const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::list <S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const = 0;
 
     virtual Bool          fetchElementsMatchingString (
                             const std::string&       lowerCaseString,
-                            std::list<S_oahElement>& foundElementsList,
+                            std::list <S_oahElement>& foundElementsList,
 //                             std::ostream&            os) const = 0;
                             std::ostream&            os) const { return true; }; // JMI v0.9.71 OAH_OAH
 
@@ -338,12 +338,12 @@ class EXP oahElement : public oahFindableElement //  smartable
 
     Bool                  findStringInFindableElement (
                             const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::list <S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 
     Bool                  fetchElementsMatchingString (
                             const std::string&       lowerCaseString,
-                            std::list<S_oahElement>& foundElementsList,
+                            std::list <S_oahElement>& foundElementsList,
                             std::ostream&            os) const override;
 
     virtual Bool          elementMatchesString (

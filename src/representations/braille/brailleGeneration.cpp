@@ -132,12 +132,12 @@ bsrBrailleGenerator::~bsrBrailleGenerator ()
 void bsrBrailleGenerator::generateCodeForCellsList (
   const S_bsrCellsList& cellsList)
 {
-  const std::list<bsrCellKind>&
+  const std::list <bsrCellKind>&
     cellsListElements =
       cellsList->getCellsListElements ();
 
   if (cellsListElements.size ()) {
-    std::list<bsrCellKind>::const_iterator
+    std::list <bsrCellKind>::const_iterator
       iBegin = cellsListElements.begin (),
       iEnd   = cellsListElements.end (),
       i      = iBegin;

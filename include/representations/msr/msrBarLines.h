@@ -255,7 +255,7 @@ class EXP msrBarLine : public msrMeasureElement
     // private services
     // ------------------------------------------------------
 
-    const std::list<int>& getEndingNumbersList () const
+    const std::list <int>& getEndingNumbersList () const
                               { return fEndingNumbersList; }
 
   public:
@@ -313,7 +313,7 @@ class EXP msrBarLine : public msrMeasureElement
     msrBarLineHasCodaKind fBarLineHasCodaKind;
 
     // the numbers extracted from fEndingNumber
-    std::list<int>        fEndingNumbersList;
+    std::list <int>        fEndingNumbersList;
 };
 typedef SMARTP<msrBarLine> S_msrBarLine;
 EXP std::ostream& operator << (std::ostream& os, const S_msrBarLine& elt);

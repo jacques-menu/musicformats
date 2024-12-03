@@ -72,7 +72,7 @@ class EXP mfStack : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const std::list<ELEMENT_TYPE>&
+    const std::list <ELEMENT_TYPE>&
                           getElementsStdList () const
                               { return fElementsStdList;}
 
@@ -123,7 +123,7 @@ class EXP mfStack : public smartable
 
     std::string           fElementsStackName;
 
-    std::list<ELEMENT_TYPE>
+    std::list <ELEMENT_TYPE>
                           fElementsStdList;
 };
 

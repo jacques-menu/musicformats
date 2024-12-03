@@ -249,7 +249,7 @@ std::string msrSimultaneousNotesChunk::asString () const
     ": ";
 
   if (chunkNotesListSize) {
-    std::list<S_msrNote>::const_iterator
+    std::list <S_msrNote>::const_iterator
       iBegin = fChunkNotesList.begin (),
       iEnd   = fChunkNotesList.end (),
       i      = iBegin;
@@ -339,7 +339,7 @@ S_msrMeasuresSlice msrMeasuresSlice::createMeasuresSliceShallowCopy ()
 
   // populate it
   for (
-    std::vector<S_msrMeasure>::const_iterator i =
+    std::vector <S_msrMeasure>::const_iterator i =
       fSliceMeasuresVector.begin ();
     i != fSliceMeasuresVector.end ();
     ++i
@@ -422,7 +422,7 @@ void msrMeasuresSlice::appendSliceMeasuresFrom (
 //
 //   if (otherSliceSize) {
 //     // get the other slices vector
-//     const std::vector<S_msrMeasure>&
+//     const std::vector <S_msrMeasure>&
 //       otherMeasuresVector =
 //         otherSlice->
 //           getSliceMeasuresVector ();
@@ -455,14 +455,14 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
   // collect the notes from the measures
   for (
-    std::vector<S_msrMeasure>::const_iterator i =
+    std::vector <S_msrMeasure>::const_iterator i =
       fSliceMeasuresVector.begin ();
     i != fSliceMeasuresVector.end ();
     ++i
   ) {
     S_msrMeasure measure = (*i);
 
-    const std::list<S_msrNote>&
+    const std::list <S_msrNote>&
       measureNotesFlatList =
         measure->
           getMeasureNotesFlatList ();
@@ -471,7 +471,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
     // append the measure's notes to the measures slices sequence notes flat list
     for (
-      std::list<S_msrNote>::const_iterator i = measureNotesFlatList.begin ();
+      std::list <S_msrNote>::const_iterator i = measureNotesFlatList.begin ();
       i != measureNotesFlatList.end ();
       ++i
     ) {
@@ -583,7 +583,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
     currentChunkMeasurePosition (-1, 1);
 
   for (
-    std::list<S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
+    std::list <S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
     i != fSliceNoteEventsList.end ();
     ++i
   ) {
@@ -653,7 +653,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
   S_msrNote soloCandidate;
 
   for (
-    std::list<S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
+    std::list <S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
     i != fSliceNoteEventsList.end ();
     ++i
   ) {
@@ -760,7 +760,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                     noteStaff =
                       note->fetchUpLinkToNoteToStaff ();
 
-                  const std::list<S_msrVoice>&
+                  const std::list <S_msrVoice>&
                     staffRegularVoicesList =
                       noteStaff->
                         getStaffRegularVoicesList ();
@@ -861,7 +861,7 @@ std::string msrMeasuresSlice::asShortString () const
       sliceMeasuresVectorSize, "measure", "measures");
 
   if (sliceMeasuresVectorSize) {
-    std::vector<S_msrMeasure>::const_iterator
+    std::vector <S_msrMeasure>::const_iterator
       iBegin = fSliceMeasuresVector.begin (),
       iEnd   = fSliceMeasuresVector.end (),
       i      = iBegin;
@@ -901,7 +901,7 @@ std::string msrMeasuresSlice::asStringForMeasuresSlices () const
 
   if (sliceMeasuresVectorSize) {
 
-    std::vector<S_msrMeasure>::const_iterator
+    std::vector <S_msrMeasure>::const_iterator
       iBegin = fSliceMeasuresVector.begin (),
       iEnd   = fSliceMeasuresVector.end (),
       i      = iBegin;
@@ -952,7 +952,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::vector<S_msrMeasure>::const_iterator
+    std::vector <S_msrMeasure>::const_iterator
       iBegin = fSliceMeasuresVector.begin (),
       iEnd   = fSliceMeasuresVector.end (),
       i      = iBegin;
@@ -986,7 +986,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrNote>::const_iterator
+    std::list <S_msrNote>::const_iterator
       iBegin = fSliceNotesFlatList.begin (),
       iEnd   = fSliceNotesFlatList.end (),
       i      = iBegin;
@@ -1018,7 +1018,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrNoteEvent>::const_iterator
+    std::list <S_msrNoteEvent>::const_iterator
       iBegin = fSliceNoteEventsList.begin (),
       iEnd   = fSliceNoteEventsList.end (),
       i      = iBegin;
@@ -1050,7 +1050,7 @@ void msrMeasuresSlice::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSimultaneousNotesChunk>::const_iterator
+    std::list <S_msrSimultaneousNotesChunk>::const_iterator
       iBegin = fSliceSimultaneousNotesChunksList.begin (),
       iEnd   = fSliceSimultaneousNotesChunksList.end (),
       i      = iBegin;
@@ -1160,7 +1160,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::createMeasuresSlicesSeque
 
   // populate it
   for (
-    std::vector<S_msrMeasuresSlice>::const_iterator i =
+    std::vector <S_msrMeasuresSlice>::const_iterator i =
       fMeasuresSlicesVector.begin ();
     i != fMeasuresSlicesVector.end ();
     ++i
@@ -1315,7 +1315,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
         // the two measures slices sequences have the same non null size
 
         // get the other sequence's measures slices vector
-        const std::vector<S_msrMeasuresSlice>&
+        const std::vector <S_msrMeasuresSlice>&
           otherMeasuresSlicesVector =
             otherMeasuresSlicesSequence->
               getMeasuresSlicesVector ();
@@ -1395,7 +1395,7 @@ void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
 
   // collect the notes from the sequence's measures slices
   for (
-    std::vector<S_msrMeasuresSlice>::const_iterator i =
+    std::vector <S_msrMeasuresSlice>::const_iterator i =
       fMeasuresSlicesVector.begin ();
     i != fMeasuresSlicesVector.end ();
     ++i
@@ -1454,7 +1454,7 @@ void msrMeasuresSlicesSequence::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::vector<S_msrMeasuresSlice>::const_iterator
+    std::vector <S_msrMeasuresSlice>::const_iterator
       iBegin = fMeasuresSlicesVector.begin (),
       iEnd   = fMeasuresSlicesVector.end (),
       i      = iBegin;
@@ -1500,7 +1500,7 @@ void msrMeasuresSlicesSequence::printMeasuresSlicesVector (std::ostream& os) con
     os << std::endl;
     ++gIndenter;
 
-    std::vector<S_msrMeasuresSlice>::const_iterator
+    std::vector <S_msrMeasuresSlice>::const_iterator
       iBegin = fMeasuresSlicesVector.begin (),
       iEnd   = fMeasuresSlicesVector.end (),
       i      = iBegin;

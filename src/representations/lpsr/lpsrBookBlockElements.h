@@ -270,7 +270,7 @@ class EXP lpsrBookBlock : public lpsrElement
     S_lpsrPaper           getBookBlockPaper () const
                               { return fBookBlockPaper; }
 
-    const std::list<S_lpsrBookBlockElement>&
+    const std::list <S_lpsrBookBlockElement>&
                           getBookBlockElementsList () const
                               { return fBookBlockElementsList; }
 
@@ -319,7 +319,7 @@ class EXP lpsrBookBlock : public lpsrElement
 
     S_lpsrPaper           fBookBlockPaper;
 
-    std::list<S_lpsrBookBlockElement>
+    std::list <S_lpsrBookBlockElement>
                           fBookBlockElementsList;
 };
 typedef SMARTP<lpsrBookBlock> S_lpsrBookBlock;

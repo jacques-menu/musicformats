@@ -44,6 +44,17 @@ namespace MusicFormats
 */
 
 //________________________________________________________________________
+enum class mxsrStaffChangeEventKind {
+  kEventStaffChange_NONE,
+  kEventStaffChangeTakeOff, kEventStaffChangeLanding
+};
+
+std::string mxsrStaffChangeEventKindAsString (
+  mxsrStaffChangeEventKind noteStaffChangeEventKind);
+
+std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEventKind& elt);
+
+//________________________________________________________________________
 enum class mxsrChordEventKind {
   kEventChord_NONE,
   kEventChordBegin, kEventChordEnd
@@ -54,6 +65,7 @@ std::string mxsrChordEventKindAsString (
 
 std::ostream& operator << (std::ostream& os, const mxsrChordEventKind& elt);
 
+//________________________________________________________________________
 enum class mxsrTupletEventKind {
   kEventTuplet_NONE,
   kEventTupletBegin, kEventTupletEnd
@@ -63,16 +75,6 @@ std::string mxsrTupletEventKindAsString (
   mxsrTupletEventKind noteTupletEventKind);
 
 std::ostream& operator << (std::ostream& os, const mxsrTupletEventKind& elt);
-
-// enum class mxsrStaffChangeEventKind {
-//   kEventStaffChange_NONE,
-//   kEventStaffChangeTakeOff, kEventStaffChangeLanding
-// };
-//
-// std::string mxsrStaffChangeEventKindAsString (
-//   mxsrStaffChangeEventKind noteStaffChangeEventKind);
-//
-// std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEventKind& elt);
 
 //------------------------------------------------------------------------
 class EXP mxsrEvent : public smartable
@@ -245,6 +247,124 @@ typedef SMARTP<mxsrNoteEvent> S_mxsrNoteEvent;
 // EXP std::ostream& operator << (std::ostream& os, const mxsrNoteEvent& elt);
 
 //------------------------------------------------------------------------
+class EXP mxsrStaffChangeEvent : public mxsrNoteEvent
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static SMARTP<mxsrStaffChangeEvent> create (
+                            int                      eventSequentialNumber,
+                            int                      noteSequentialNumber,
+                            int                      noteEventStaffNumber,
+                            int                      noteEventVoiceNumber,
+                            mxsrStaffChangeEventKind staffChangeEventKind,
+                            int                      takeOffStaffNumber,
+                            int                      landingStaffNumber,
+                            int                      takeOffInputStartLineNumber,
+                            int                      landingInputStartLineNumber,
+                            int                      eventInputStartLineNumber,
+                            int                      eventInputEndLineNumber);
+
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mxsrStaffChangeEvent (
+                            int                      eventSequentialNumber,
+                            int                      noteSequentialNumber,
+                            int                      noteEventStaffNumber,
+                            int                      noteEventVoiceNumber,
+                            mxsrStaffChangeEventKind staffChangeEventKind,
+                            int                      takeOffStaffNumber,
+                            int                      landingStaffNumber,
+                            int                      takeOffInputStartLineNumber,
+                            int                      landingInputStartLineNumber,
+                            int                      eventInputStartLineNumber,
+                            int                      eventInputEndLineNumber);
+
+    virtual               ~mxsrStaffChangeEvent ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    mxsrStaffChangeEventKind
+                          getStaffChangeEventKind () const
+                              { return fStaffChangeEventKind; }
+
+    // the staff change voice number is the one of the note
+    // upon which the staff change occurds
+    int                   getStaffChangeVoicefNumber () const
+                              { return fNoteEventVoiceNumber; }
+
+    int                   getTakeOffStaffNumber () const
+                              { return fTakeOffStaffNumber; }
+
+    int                   getLandingStaffNumber () const
+                              { return fLandingStaffNumber; }
+
+    int                   getTakeOffInputStartLineNumber () const
+                              { return fTakeOffInputStartLineNumber; }
+
+    int                   getLandingInputStartLineNumber () const
+                              { return fLandingInputStartLineNumber; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+
+  private:
+
+    // private services
+    // ------------------------------------------------------
+
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const override;
+    std::string           asShortString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    mxsrStaffChangeEventKind
+                          fStaffChangeEventKind;
+
+    // the staff change voice number is the one of the note
+    // upon which the staff change occurds
+//     int                   fStaffChangeVoicefNumber;
+
+    // a staff change event is attached to the take off note,
+    // so as to know early that there is staff change
+
+    // the staff numbers differ for take off and landing
+
+    // the take off staff number is that of the note event,
+    // and we need to store the landing staff number
+    int                   fTakeOffStaffNumber;
+    int                   fTakeOffInputStartLineNumber;
+
+    int                   fLandingStaffNumber;
+    int                   fLandingInputStartLineNumber;
+};
+typedef SMARTP<mxsrStaffChangeEvent> S_mxsrStaffChangeEvent;
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrStaffChangeEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEvent& elt);
+
+//------------------------------------------------------------------------
 class EXP mxsrChordEvent : public mxsrNoteEvent
 {
   public:
@@ -400,118 +520,6 @@ EXP std::ostream& operator << (std::ostream& os, const S_mxsrTupletEvent& elt);
 EXP std::ostream& operator << (std::ostream& os, const mxsrTupletEvent& elt);
 
 //------------------------------------------------------------------------
-class EXP mxsrStaffChangeEvent : public mxsrNoteEvent
-{
-  public:
-
-    // creation from MusicXML
-    // ------------------------------------------------------
-
-    static SMARTP<mxsrStaffChangeEvent> create (
-                            int                      eventSequentialNumber,
-                            int                      noteSequentialNumber,
-                            int                      noteEventStaffNumber,
-                            int                      noteEventVoiceNumber,
-//                             mxsrStaffChangeEventKind staffChangeEventKind,
-                            int                      takeOffStaffNumber,
-                            int                      landingStaffNumber,
-                            int                      landingInputStartLineNumber,
-                            int                      eventInputStartLineNumber,
-                            int                      eventInputEndLineNumber);
-
-  public:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          mxsrStaffChangeEvent (
-                            int                      eventSequentialNumber,
-                            int                      noteSequentialNumber,
-                            int                      noteEventStaffNumber,
-                            int                      noteEventVoiceNumber,
-//                             mxsrStaffChangeEventKind staffChangeEventKind,
-                            int                      takeOffStaffNumber,
-                            int                      landingStaffNumber,
-                            int                      landingInputStartLineNumber,
-                            int                      eventInputStartLineNumber,
-                            int                      eventInputEndLineNumber);
-
-    virtual               ~mxsrStaffChangeEvent ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-//     mxsrStaffChangeEventKind
-//                           getStaffChangeEventKind () const
-//                               { return fStaffChangeEventKind; }
-
-    // the staff change voice number is the one of the note
-    // upon which the staff change occurds
-    int                   getStaffChangeVoicefNumber () const
-                              { return fNoteEventVoiceNumber; }
-
-    int                   getTakeOffStaffNumber () const
-                              { return fTakeOffStaffNumber; }
-
-    int                   getLandingStaffNumber () const
-                              { return fLandingStaffNumber; }
-
-    int                   getLandingInputStartLineNumber () const
-                              { return fLandingInputStartLineNumber; }
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-
-  private:
-
-    // private services
-    // ------------------------------------------------------
-
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    std::string           asString () const override;
-    std::string           asShortString () const override;
-
-    void                  print (std::ostream& os) const override;
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-//     mxsrStaffChangeEventKind
-//                           fStaffChangeEventKind;
-
-    // the staff change voice number is the one of the note
-    // upon which the staff change occurds
-//     int                   fStaffChangeVoicefNumber;
-
-    // a staff change event is attached to the take off note,
-    // so as to know early that there is staff change
-
-    // the staff numbers differ for take off and landing
-
-    // the take off staff number is that of the note event,
-    // and we need to store the landing staff number
-    int                   fTakeOffStaffNumber;
-
-    int                   fLandingStaffNumber;
-    int                   fLandingInputStartLineNumber;
-};
-typedef SMARTP<mxsrStaffChangeEvent> S_mxsrStaffChangeEvent;
-EXP std::ostream& operator << (std::ostream& os, const S_mxsrStaffChangeEvent& elt);
-EXP std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEvent& elt);
-
-//------------------------------------------------------------------------
 class EXP mxsrEventsCollection : public smartable
 {
   public:
@@ -544,15 +552,15 @@ class EXP mxsrEventsCollection : public smartable
     Bool                  getInitialRepeatBarIsImplicit () const
                               { return fThereIsAnImplicitInitialForwardRepeat; }
 
-    const std::map<int, S_mxsrChordEvent>&
+    const std::map <int, S_mxsrChordEvent>&
                           getChordsEventMap () const
                               { return fChordsEventsMap; }
 
-    const std::multimap<int, S_mxsrTupletEvent>&
+    const std::multimap <int, S_mxsrTupletEvent>&
                           getTupletsEventMultiMap () const
                               { return fTupletsEventsMultiMap; }
 
-    const std::map<int, S_mxsrStaffChangeEvent>&
+    const std::map <int, S_mxsrStaffChangeEvent>&
                           getStaffChangesEventsMap () const
                               { return fStaffChangesEventsMap; }
 
@@ -582,31 +590,43 @@ class EXP mxsrEventsCollection : public smartable
                             int                      noteSequentialNumber,
                             int                      noteEventStaffNumber,
                             int                      noteEventVoiceNumber,
-//                             mxsrStaffChangeEventKind staffChangeEventKind,
+                            mxsrStaffChangeEventKind staffChangeEventKind,
                             int                      takeOffStaffNumber,
                             int                      landingStaffNumber,
+                            int                      takeOffInputStartLineNumber,
                             int                      landingInputStartLineNumber,
                             int                      eventInputStartLineNumber,
                             int                      eventInputEndLineNumber);
 
     void                  sortTheAllMxsrEventsList ();
 
+    // staff changes events
+    S_mxsrStaffChangeEvent
+                          fetchStaffChangeEventAtNoteSequentialNumber (
+                            int noteSequentialNumber) const;
+
+    S_mxsrStaffChangeEvent
+                          fetchStaffChangeTakeOffAtNoteSequentialNumber (
+                            int noteSequentialNumber) const;
+
+    S_mxsrStaffChangeEvent
+                          fetchStaffChangeLandingAtNoteSequentialNumber (
+                            int noteSequentialNumber) const;
+
+    // chord events
     S_mxsrChordEvent      fetchChordEventAtNoteSequentialNumber (
                             int noteSequentialNumber) const;
 
+    // tuplet events
 //     S_mxsrTupletEvent     fetchTupletEventAtNoteSequentialNumber (
 //                             int noteSequentialNumber) const;
 
     void                  fetchTupletEventRange (
                             int noteSequentialNumber,
-                            std::multimap<int, S_mxsrTupletEvent>::const_iterator&
+                            std::multimap <int, S_mxsrTupletEvent>::const_iterator&
                                 firstInRange,
-                            std::multimap<int, S_mxsrTupletEvent>::const_iterator&
+                            std::multimap <int, S_mxsrTupletEvent>::const_iterator&
                                 lastInRange) const;
-
-    S_mxsrStaffChangeEvent
-                          fetchStaffChangeEventAtNoteSequentialNumber (
-                            int noteSequentialNumber) const;
 
   private:
 
@@ -636,22 +656,22 @@ class EXP mxsrEventsCollection : public smartable
 
     // there can be only one chord begin or end per note,
     // hence this map, indexed by note sequential number
-    std::map<int, S_mxsrChordEvent>
+    std::map <int, S_mxsrChordEvent>
                           fChordsEventsMap;
 
     // there can be several tuplets start and/or stop events per note,
     // hence this multimap, indexed by note sequential number,
 
-    std::multimap<int, S_mxsrTupletEvent>
+    std::multimap <int, S_mxsrTupletEvent>
                           fTupletsEventsMultiMap;
 
     // there can be only one staff change per note,
     // hence this map, indexed by note sequential number
-    std::map<int, S_mxsrStaffChangeEvent>
+    std::map <int, S_mxsrStaffChangeEvent>
                           fStaffChangesEventsMap;
 
     // all events list
-    std::list<S_mxsrEvent>
+    std::list <S_mxsrEvent>
                           fAllEventsList;
 };
 typedef SMARTP<mxsrEventsCollection> S_mxsrEventsCollection;

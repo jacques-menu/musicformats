@@ -482,7 +482,7 @@ void msrStaffDetails::browseData (basevisitor* v)
 {
   if (fStaffTuningsList.size ()) {
     for (
-      std::list<S_msrStaffTuning>::const_iterator i = fStaffTuningsList.begin ();
+      std::list <S_msrStaffTuning>::const_iterator i = fStaffTuningsList.begin ();
       i != fStaffTuningsList.end ();
       ++i
   ) {
@@ -543,7 +543,7 @@ void msrStaffDetails::print (std::ostream& os) const
   if (fStaffTuningsList.size ()) {
     os << std::endl;
 
-    std::list<S_msrStaffTuning>::const_iterator
+    std::list <S_msrStaffTuning>::const_iterator
       iBegin = fStaffTuningsList.begin (),
       iEnd   = fStaffTuningsList.end (),
       i      = iBegin;

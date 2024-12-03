@@ -117,7 +117,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
+  std::map <std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
       gGlobalMsdlKeywordsLanguageKindsMap.find (theString);
 
@@ -369,7 +369,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the keywords languages map?
 
-  std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
+  std::map <std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
       gGlobalMsdlKeywordsLanguageKindsMap.find (theString);
 
@@ -602,7 +602,7 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
   // theString contains the language name:
   // is it in the keywords languages map?
 
-  std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
+  std::map <std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
       gGlobalMsdlKeywordsLanguageKindsMap.find (theString);
 
@@ -866,7 +866,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, msdlCommentsTypeKind>::const_iterator
+  std::map <std::string, msdlCommentsTypeKind>::const_iterator
     it =
       gGlobalMsdlCommentsTypeKindsMap.find (theString);
 
@@ -1150,7 +1150,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, msdlUserLanguageKind>::const_iterator
+  std::map <std::string, msdlUserLanguageKind>::const_iterator
     it =
       gGlobalMsdlUserLanguageKindsMap.find (
         theString);
@@ -1439,7 +1439,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (
         theString);
@@ -1862,7 +1862,7 @@ void msdlInputOahGroup::initializeMsdlInputOahGroup (
 Bool msdlInputOahGroup::setMsdlKeywordsLanguage (std::string language)
 {
   // is language in the keywords languages map?
-  std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
+  std::map <std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
       gGlobalMsdlKeywordsLanguageKindsMap.find (language);
 
@@ -1880,7 +1880,7 @@ Bool msdlInputOahGroup::setMsdlKeywordsLanguage (std::string language)
 Bool msdlInputOahGroup::setMsdlQuarterTonesPitchesLanguage (std::string language)
 {
   // is language in the note names languages map?
-  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 

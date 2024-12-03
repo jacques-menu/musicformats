@@ -264,12 +264,12 @@ std::ostream& operator << (std::ostream& os, const msrSyllableElement& elt)
 
 //______________________________________________________________________________
 std::string syllableElementsListAsString (
-  const std::list<msrSyllableElement>& syllableElementsList)
+  const std::list <msrSyllableElement>& syllableElementsList)
 {
   std::stringstream ss;
 
   if (syllableElementsList.size ()) {
-    std::list<msrSyllableElement>::const_iterator
+    std::list <msrSyllableElement>::const_iterator
       iBegin = syllableElementsList.begin (),
       iEnd   = syllableElementsList.end (),
       i      = iBegin;
@@ -285,12 +285,12 @@ std::string syllableElementsListAsString (
 }
 
 std::string syllableElementsListAsShortString (
-  const std::list<msrSyllableElement>& syllableElementsList)
+  const std::list <msrSyllableElement>& syllableElementsList)
 {
   std::stringstream ss;
 
   if (syllableElementsList.size ()) {
-    std::list<msrSyllableElement>::const_iterator
+    std::list <msrSyllableElement>::const_iterator
       iBegin = syllableElementsList.begin (),
       iEnd   = syllableElementsList.end (),
       i      = iBegin;
@@ -885,7 +885,7 @@ std::string msrSyllable::syllableUpLinkToNoteAsShortString () const
 //   std::stringstream ss;
 //
 //   if (fSyllableElementsList.size ()) {
-//     std::list<msrSyllableElement>::const_iterator
+//     std::list <msrSyllableElement>::const_iterator
 //       iBegin = fSyllableElementsList.begin (),
 //       iEnd   = fSyllableElementsList.end (),
 //       i      = iBegin;
@@ -905,7 +905,7 @@ std::string msrSyllable::syllableUpLinkToNoteAsShortString () const
 //   std::stringstream ss;
 //
 //   if (fSyllableElementsList.size ()) {
-//     std::list<msrSyllableElement>::const_iterator
+//     std::list <msrSyllableElement>::const_iterator
 //       iBegin = fSyllableElementsList.begin (),
 //       iEnd   = fSyllableElementsList.end (),
 //       i      = iBegin;

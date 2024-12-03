@@ -942,7 +942,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //       multiMeasureRest =
 //         dynamic_cast<msrMultiMeasureRest*>(&(*segmentElementsListFirstElement))
 //   ) {
-//     const std::list<S_msrMeasure>&
+//     const std::list <S_msrMeasure>&
 //       measureRestsList =
 //         multiMeasureRest->
 //           getMeasureRestsList ();
@@ -1252,7 +1252,7 @@ void msrSegment::appendHarmonyToSegment (
 
 void msrSegment::appendHarmoniesListToSegment (
   int                            inputLineNumber,
-  const std::list<S_msrHarmony>& harmoniesList,
+  const std::list <S_msrHarmony>& harmoniesList,
   const msrWholeNotes&           measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1356,7 +1356,7 @@ void msrSegment::appendFiguredBassToSegment (
 
 void msrSegment::appendFiguredBassesListToSegment (
   int                                inputLineNumber,
-  const std::list<S_msrFiguredBass>& figuredBasssesList,
+  const std::list <S_msrFiguredBass>& figuredBasssesList,
   const msrWholeNotes&               measurePositionToAppendAt)
 {
 
@@ -3244,7 +3244,7 @@ std::string msrSegment::asString () const
       "), i.e. [";
 
     if (fSegmentElementsList.size ()) {
-      std::list<S_msrSegmentElement>::const_iterator
+      std::list <S_msrSegmentElement>::const_iterator
         iBegin = fSegmentElementsList.begin (),
         iEnd   = fSegmentElementsList.end (),
         i      = iBegin;
@@ -3368,7 +3368,7 @@ void msrSegment::printFull (std::ostream& os) const
   else {
     os << std::endl;
 
-    std::list<S_msrSegmentElement>::const_iterator
+    std::list <S_msrSegmentElement>::const_iterator
       iBegin = fSegmentElementsList.begin (),
       iEnd   = fSegmentElementsList.end (),
       i      = iBegin;
@@ -3416,7 +3416,7 @@ void msrSegment::print (std::ostream& os) const
   else {
     os << std::endl;
 
-    std::list<S_msrSegmentElement>::const_iterator
+    std::list <S_msrSegmentElement>::const_iterator
       iBegin = fSegmentElementsList.begin (),
       iEnd   = fSegmentElementsList.end (),
       i      = iBegin;

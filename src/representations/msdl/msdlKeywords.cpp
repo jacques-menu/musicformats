@@ -31,21 +31,21 @@ namespace MusicFormats
 // the MSDL keywords languages
 //______________________________________________________________________________
 
-std::map<std::string, msdlKeywordsLanguageKind>
+std::map <std::string, msdlKeywordsLanguageKind>
   gGlobalMsdlKeywordsLanguageKindsMap;
 
-std::map<msdlKeywordKind, std::string> gGlobalEnglishKeywordsNamesMap;
-std::map<msdlKeywordKind, std::string> gGlobalFrenchKeywordsNamesMap;
-std::map<msdlKeywordKind, std::string> gGlobalItalianKeywordsNamesMap;
-std::map<msdlKeywordKind, std::string> gGlobalGermanKeywordsNamesMap;
-std::map<msdlKeywordKind, std::string> gGlobalSpanishKeywordsNamesMap;
-std::map<msdlKeywordKind, std::string> gGlobalDutchKeywordsNamesMap;
+std::map <msdlKeywordKind, std::string> gGlobalEnglishKeywordsNamesMap;
+std::map <msdlKeywordKind, std::string> gGlobalFrenchKeywordsNamesMap;
+std::map <msdlKeywordKind, std::string> gGlobalItalianKeywordsNamesMap;
+std::map <msdlKeywordKind, std::string> gGlobalGermanKeywordsNamesMap;
+std::map <msdlKeywordKind, std::string> gGlobalSpanishKeywordsNamesMap;
+std::map <msdlKeywordKind, std::string> gGlobalDutchKeywordsNamesMap;
 
 msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (const std::string& theString)
 {
   msdlKeywordsLanguageKind result = msdlKeywordsLanguageKind::kKeywordsLanguageEnglish; // MSDL default
 
-  std::map<std::string, msdlKeywordsLanguageKind>::const_iterator
+  std::map <std::string, msdlKeywordsLanguageKind>::const_iterator
     it =
       gGlobalMsdlKeywordsLanguageKindsMap.find (
         theString);
@@ -162,7 +162,7 @@ std::string availableMsdlKeywordsLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msdlKeywordsLanguageKind>::const_iterator i =
+      std::map <std::string, msdlKeywordsLanguageKind>::const_iterator i =
         gGlobalMsdlKeywordsLanguageKindsMap.begin ();
       i != gGlobalMsdlKeywordsLanguageKindsMap.end ();
       ++i
@@ -507,7 +507,7 @@ std::string msdlKeywordKindAsMsdlString (
 
   std::string result;
 
-  std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
+  std::map <msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
   // select the relevant keywords names map
   switch (languageKind) {
@@ -538,7 +538,7 @@ std::string msdlKeywordKindAsMsdlString (
   if (keywordsNamesMapPTR) {
     // is keywordKind present in the map?
     if (keywordsNamesMapPTR->size ()) {
-      std::map<msdlKeywordKind, std::string>::const_iterator
+      std::map <msdlKeywordKind, std::string>::const_iterator
         iBegin = (*keywordsNamesMapPTR).begin (),
         iEnd   = (*keywordsNamesMapPTR).end (),
         i      = iBegin;
@@ -680,7 +680,7 @@ msdlKeywordKind msdlKeywordKindFromString (
 
   msdlKeywordKind result = msdlKeywordKind::kKeyword_UNKNOWN_;
 
-  std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
+  std::map <msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
   // select the relevant keywords names map
   switch (languageKind) {
@@ -711,7 +711,7 @@ msdlKeywordKind msdlKeywordKindFromString (
   if (keywordsNamesMapPTR) {
     // is theString present in the map?
     if (keywordsNamesMapPTR->size ()) {
-      std::map<msdlKeywordKind, std::string>::const_iterator
+      std::map <msdlKeywordKind, std::string>::const_iterator
         iBegin = (*keywordsNamesMapPTR).begin (),
         iEnd   = (*keywordsNamesMapPTR).end (),
         i      = iBegin;
@@ -750,7 +750,7 @@ std::string availableKeywordsInLanguage (
 {
   std::stringstream ss;
 
-  std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
+  std::map <msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
   // select the relevant keywords names map
   switch (keywordsLanguageKind) {
@@ -791,7 +791,7 @@ std::string availableKeywordsInLanguage (
     size_t cumulatedLength = 0;
 
     for (
-      std::map<msdlKeywordKind, std::string>::const_iterator i =
+      std::map <msdlKeywordKind, std::string>::const_iterator i =
         (*keywordsNamesMapPTR).begin ();
       i != (*keywordsNamesMapPTR).end ();
       ++i

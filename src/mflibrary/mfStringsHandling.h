@@ -212,7 +212,7 @@ std::string mfReplicateString (
   int         times);
 
 //______________________________________________________________________________
-typedef std::vector<std::string> mfStringsVector;
+typedef std::vector <std::string> mfStringsVector;
 
 void mfDisplayStringsVector (
   const mfStringsVector& stringsVector,
@@ -235,9 +235,9 @@ EXP void mfDisplayArgcAndArgv (
     - second is the value of the option, possibly empty,
       and empty for an argument
 */
-typedef std::pair<std::string, std::string> mfStringsPair;
+typedef std::pair <std::string, std::string> mfStringsPair;
 
-typedef std::vector<mfStringsPair> mfStringsPairVector;
+typedef std::vector <mfStringsPair> mfStringsPairVector;
 
 // EXP void convertArgcArgvToStringPairVector (
 //   int                  argc,
@@ -266,17 +266,17 @@ std::string mfInputLineNumbersAsString (
   int inputEndLineNumber);
 
 //______________________________________________________________________________
-std::set<int> mfDecipherNaturalNumbersSetSpecification (
+std::set <int> mfDecipherNaturalNumbersSetSpecification (
   const std::string& theSpecification,
   Bool               debugMode = false);
 
 //______________________________________________________________________________
-std::set<std::string> mfDecipherStringsSetSpecification (
+std::set <std::string> mfDecipherStringsSetSpecification (
   std::string theSpecification,
   Bool   debugMode = false);
 
 //______________________________________________________________________________
-std::list<int> mfExtractNumbersFromString (
+std::list <int> mfExtractNumbersFromString (
   const std::string& theString, // can contain "1, 2, 17"
   Bool               debugMode = false);
 
@@ -293,7 +293,7 @@ EXP inline std::string& mfTrimFromBothEnds (std::string& s) {
 }
 
 //______________________________________________________________________________
-std::pair<std::string, std::string> mfExtractNamesPairFromString (
+std::pair <std::string, std::string> mfExtractNamesPairFromString (
   const std::string& theString, // may contain "P1 = Bassoon"
   char               separator,
   Bool               debugMode = false);
@@ -353,15 +353,15 @@ void mfConvertHTMLEntitiesToPlainCharacters (std::string& s);
 void mfSplitStringIntoChunks (
   std::string             theString,
   std::string             theSeparator,
-  std::list<std::string>& chunksList);
+  std::list <std::string>& chunksList);
 
 void mfSplitRegularStringAtEndOfLines (
   std::string             theString,
-  std::list<std::string>& chunksList);
+  std::list <std::string>& chunksList);
 
 void mfSplitHTMLStringContainingEndOfLines ( // JMI
   std::string             theString,
-  std::list<std::string>& chunksList);
+  std::list <std::string>& chunksList);
 
 //______________________________________________________________________________
 std::string mfBaseName (const std::string& filename);
@@ -373,53 +373,53 @@ std::string  mfMakeSingleWordFromString (const std::string& theString);
 //______________________________________________________________________________
 Bool mfStringIsInStringSet (
   const std::string&           theString,
-  const std::set<std::string>& stringSet);
+  const std::set <std::string>& stringSet);
 
 void mfStringSetMinusEquals (
-  std::set<std::string>&       dest,
-  const std::set<std::string>& source);
+  std::set <std::string>&       dest,
+  const std::set <std::string>& source);
 
 std::string mfStringSetAsString (
-  const std::set<std::string>& stringSet);
+  const std::set <std::string>& stringSet);
 
 std::string mfStringSetAsBracketedString (
-  const std::set<std::string>& stringSet);
+  const std::set <std::string>& stringSet);
 
 void mfDisplayStringSet (
   const std::string&           title,
-  const std::set<std::string>& stringSet,
+  const std::set <std::string>& stringSet,
   std::ostream&                os);
 
 //______________________________________________________________________________
 Bool mfFetchValueFromStringToStringMap (
   const std::string&                        theKey,
-  const std::map<std::string, std::string>& stringToStringMap,
+  const std::map <std::string, std::string>& stringToStringMap,
   std::string&                              theValue);
 
 std::string mfStringToStringMapAsString (
-  const std::map<std::string, std::string>& stringToStringMap);
+  const std::map <std::string, std::string>& stringToStringMap);
 
 void mfDisplayStringToStringMap (
   const std::string&                        title,
-  const std::map<std::string, std::string>& stringToStringMap,
+  const std::map <std::string, std::string>& stringToStringMap,
   std::ostream&                             os);
 
 //______________________________________________________________________________
 Bool mfKeyIsInStringToStringMultiMap (
   const std::string&                             theKey,
-  const std::multimap<std::string, std::string>& stringToStringMultiMap);
+  const std::multimap <std::string, std::string>& stringToStringMultiMap);
 
 Bool mfKeyValuePairIsInStringToStringMultiMap (
   const std::string&                             theKey,
-  const std::multimap<std::string, std::string>& stringToStringMultiMap,
+  const std::multimap <std::string, std::string>& stringToStringMultiMap,
   const std::string&                             theValue);
 
 std::string mfStringToStringMultiMapAsString (
-  const std::multimap<std::string, std::string>& stringToStringMultiMap);
+  const std::multimap <std::string, std::string>& stringToStringMultiMap);
 
 void mfDisplayStringToStringMultiMap (
   const std::string&                             title,
-  const std::multimap<std::string, std::string>& stringToStringMultiMap,
+  const std::multimap <std::string, std::string>& stringToStringMultiMap,
   std::ostream&                                  os);
 
 //______________________________________________________________________________

@@ -723,7 +723,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
   }
 
   // is this voice number already in the regular voices map?
-  std::map<int, S_msrVoice>::const_iterator
+  std::map <int, S_msrVoice>::const_iterator
     it =
       fStaffVoiceNumbersToRegularVoicesMap.find (voiceNumber);
 
@@ -1086,7 +1086,7 @@ void msrStaff::registerVoiceByItsNumber (
 
   // register voice in its staff at the part level
   fStaffUpLinkToPart->
-    registerVoiceInVoicesMap (voice);
+    registerVoiceInPartStaffVoicesMap (voice);
 
   --gIndenter;
 }
@@ -1265,7 +1265,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
 #endif // MF_TRACE_IS_ENABLED
 
   // search list ??? JMI
-  for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
+  for (std::pair <int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
 #ifdef MF_TRACE_IS_ENABLED
     int        number = thePair.first;
 #endif // MF_TRACE_IS_ENABLED
@@ -1328,7 +1328,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
   if (fStaffRegularVoicesList.size ()) {
     int voiceSequentialCounter = 0;
 
-    std::list<S_msrVoice>::const_iterator
+    std::list <S_msrVoice>::const_iterator
       iBegin = fStaffRegularVoicesList.begin (),
       iEnd   = fStaffRegularVoicesList.end (),
       i      = iBegin;
@@ -3447,7 +3447,7 @@ void msrStaff::browseData (basevisitor* v)
 /*
   if (fStaffTuningsList.size ()) {
     for (
-      std::list<S_msrStaffTuning>::const_iterator i = fStaffTuningsList.begin ();
+      std::list <S_msrStaffTuning>::const_iterator i = fStaffTuningsList.begin ();
       i != fStaffTuningsList.end ();
       ++i
   ) {
@@ -3530,7 +3530,7 @@ void msrStaff::browseData (basevisitor* v)
           ss.str ());
       }
 
-      const std::set<std::string>&
+      const std::set <std::string>&
         ignoreMsrVoicesSet =
           gGlobalMsr2msrOahGroup->
             getIgnoreMsrVoicesSet ();
@@ -3544,7 +3544,7 @@ void msrStaff::browseData (basevisitor* v)
       }
 #endif // MF_TRACE_IS_ENABLED
 
-      const std::set<std::string>&
+      const std::set <std::string>&
         keepMsrVoicesSet =
           gGlobalMsr2msrOahGroup->
             getKeepMsrVoicesSet ();
@@ -3854,7 +3854,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToAllVoicesMap) {
+    for (std::pair <int, S_msrVoice> thePair : fStaffVoiceNumbersToAllVoicesMap) {
       int        voiceNumber = thePair.first;
       S_msrVoice voice       = thePair.second;
 
@@ -3901,7 +3901,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    for (std::pair<int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
+    for (std::pair <int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
       int        voiceNumber = thePair.first;
       S_msrVoice voice       = thePair.second;
 
@@ -3954,20 +3954,20 @@ void msrStaff::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::vector<std::list<S_msrMeasure>>::const_iterator
+    std::vector <std::list <S_msrMeasure>>::const_iterator
       iBegin = fStaffMeasuresFlatListsVector.begin (),
       iEnd   = fStaffMeasuresFlatListsVector.end (),
       i      = iBegin;
 
     for ( ; ; ) {
-      const std::list<S_msrMeasure>&
+      const std::list <S_msrMeasure>&
         measuresList = (*i);
 
       // print the measurs list
       if (staffMeasuresFlatListsVectorSize) {
         ++gIndenter;
 
-        std::list<S_msrMeasure>::const_iterator
+        std::list <S_msrMeasure>::const_iterator
           iBegin = measuresList.begin (),
           iEnd   = measuresList.end (),
           i      = iBegin;
@@ -4018,7 +4018,7 @@ void msrStaff::printFull (std::ostream& os) const
 
   // print the  voices
   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
-    std::map<int, S_msrVoice>::const_iterator
+    std::map <int, S_msrVoice>::const_iterator
       iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
       iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
       i      = iBegin;
@@ -4066,7 +4066,7 @@ void msrStaff::print (std::ostream& os) const
   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
     os << std::endl;
 
-    std::map<int, S_msrVoice>::const_iterator
+    std::map <int, S_msrVoice>::const_iterator
       iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
       iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
       i      = iBegin;
@@ -4112,7 +4112,7 @@ void msrStaff::printSummary (std::ostream& os) const
       "fStaff tunings list:" <<
       std::endl;
 
-    std::list<S_msrStaffTuning>::const_iterator
+    std::list <S_msrStaffTuning>::const_iterator
       iBegin = fStaffTuningsList.begin (),
       iEnd   = fStaffTuningsList.end (),
       i      = iBegin;
@@ -4135,7 +4135,7 @@ void msrStaff::printSummary (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoice>::const_iterator
+    std::list <S_msrVoice>::const_iterator
       iBegin = fStaffAllVoicesList.begin (),
       iEnd   = fStaffAllVoicesList.end (),
       i      = iBegin;
@@ -4182,7 +4182,7 @@ void msrStaff::printSlices (std::ostream& os) const
   ++gIndenter;
 
 //   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
-//     std::map<int, S_msrVoice>::const_iterator
+//     std::map <int, S_msrVoice>::const_iterator
 //       iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
 //       iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
 //       i      = iBegin;

@@ -138,64 +138,64 @@ class EXP msrChord : public msrTupletElement
                               { return fChordGraphicNotesDurationKind; }
 
     // chord notes
-    const std::vector<S_msrNote>&
+    const std::vector <S_msrNote>&
                           getChordNotesVector () const
                               { return fChordNotesVector; }
 
     // stems
-    const std::list<S_msrStem>&
+    const std::list <S_msrStem>&
                           getChordStemsList () const
                               { return fChordStemsList; }
 
     // beams
     /*
-    const std::list<S_msrBeam>&
+    const std::list <S_msrBeam>&
                           getChordBeams () const
                               { return fChordBeams; }
                               */
-    const std::list<S_msrChordBeamLink>&
+    const std::list <S_msrChordBeamLink>&
                           getChordBeamLinksList () const
                               { return fChordBeamLinksList; }
 
     // articulations
-    const std::list<S_msrArticulation>&
+    const std::list <S_msrArticulation>&
                           getChordArticulationsList () const
                               { return fChordArticulationsList; }
 
     // spanners
-    const std::list<S_msrSpanner>&
+    const std::list <S_msrSpanner>&
                           getChordSpannersList () const
                               { return fChordSpannersList; }
 
     // technicals
-    const std::list<S_msrTechnical>&
+    const std::list <S_msrTechnical>&
                           getChordTechnicalsList () const
                               { return fChordTechnicalsList; }
 
-    const std::list<S_msrTechnicalWithInteger>&
+    const std::list <S_msrTechnicalWithInteger>&
                           getChordTechnicalWithIntegersList () const
                               { return fChordTechnicalWithIntegersList; }
 
-    const std::list<S_msrTechnicalWithFloat>&
+    const std::list <S_msrTechnicalWithFloat>&
                           getChordTechnicalWithFloatsList () const
                               { return fChordTechnicalWithFloatsList; }
 
-    const std::list<S_msrTechnicalWithString>&
+    const std::list <S_msrTechnicalWithString>&
                           getChordTechnicalWithStringsList () const
                               { return fChordTechnicalWithStringsList; }
 
     // ornaments
-    const std::list<S_msrOrnament>&
+    const std::list <S_msrOrnament>&
                           getChordOrnamentsList () const
                               { return fChordOrnamentsList; }
 
     // glissandos
-    const std::list<S_msrGlissando>&
+    const std::list <S_msrGlissando>&
                           getChordGlissandosList () const
                               { return fChordGlissandosList; }
 
     // slides
-    const std::list<S_msrSlide>&
+    const std::list <S_msrSlide>&
                           getChordSlidesList () const
                               { return fChordSlidesList; }
 
@@ -207,58 +207,58 @@ class EXP msrChord : public msrTupletElement
                               { return fChordSingleTremolo; }
 
     // dynamics
-    const std::list<S_msrDynamic>&
+    const std::list <S_msrDynamic>&
                           getChordDynamicsList () const
                               { return fChordDynamicsList; }
-    const std::list<S_msrOtherDynamic>&
+    const std::list <S_msrOtherDynamic>&
                           getChordOtherDynamicsList () const
                               { return fChordOtherDynamicsList; }
 
-    const std::list<S_msrCrescDecresc>&
+    const std::list <S_msrCrescDecresc>&
                           getChordCrescDecrescsList () const
                               { return fChordCrescDecrescsList; }
 
-    const std::list<S_msrWedge>&
+    const std::list <S_msrWedge>&
                           getChordWedgesList () const
                               { return fChordWedgesList; }
 
     // segnos
-    const std::list<S_msrSegno>&
+    const std::list <S_msrSegno>&
                           getChordSegnosList () const
                               { return fChordSegnosList; }
 
     // dal segnos
-    const std::list<S_msrDalSegno>&
+    const std::list <S_msrDalSegno>&
                           getChordDalSegnosList () const
                               { return fChordDalSegnosList; }
 
     // coda
-    const std::list<S_msrCoda>&
+    const std::list <S_msrCoda>&
                           getChordCodasList () const
                               { return fChordCodasList; }
 
     // words
-    const std::list<S_msrWords>&
+    const std::list <S_msrWords>&
                           getChordWordsList () const
                               { return fChordWordsList; }
 
     // ties
-    const std::list<S_msrTie>&
+    const std::list <S_msrTie>&
                           getChordTiesList () const
                               { return fChordTiesList; }
 
     // slurs
-    const std::list<S_msrChordSlurLink>&
+    const std::list <S_msrChordSlurLink>&
                           getChordSlurLinksList () const
                               { return fChordSlurLinksList; }
 
     // ligatures
-    const std::list<S_msrLigature>&
+    const std::list <S_msrLigature>&
                           getChordLigaturesList () const
                               { return fChordLigaturesList; }
 
     // pedals
-    const std::list<S_msrPedal>&
+    const std::list <S_msrPedal>&
                           getChordPedalsList () const
                               { return fChordPedalsList; }
 
@@ -541,23 +541,23 @@ class EXP msrChord : public msrTupletElement
     // since they don't have any note (sounding) duration
     msrNotesDurationKind  fChordGraphicNotesDurationKind;
 
-    std::vector<S_msrNote>
+    std::vector <S_msrNote>
                           fChordNotesVector;
 
     // stems
-    std::list<S_msrStem>  fChordStemsList;
+    std::list <S_msrStem>  fChordStemsList;
 
     // beams
-//    std::list<S_msrBeam>  fChordBeams;
-    std::list<S_msrChordBeamLink>
+//    std::list <S_msrBeam>  fChordBeams;
+    std::list <S_msrChordBeamLink>
                           fChordBeamLinksList;
 
     // articulations
-    std::list<S_msrArticulation>
+    std::list <S_msrArticulation>
                           fChordArticulationsList;
 
     // spanners
-    std::list<S_msrSpanner>
+    std::list <S_msrSpanner>
                           fChordSpannersList;
 
     // single tremolo
@@ -568,75 +568,75 @@ class EXP msrChord : public msrTupletElement
     Bool                  fChordIsSecondChordInADoubleTremolo;
 
     // technicals
-    std::list<S_msrTechnical>
+    std::list <S_msrTechnical>
                           fChordTechnicalsList;
 
-    std::list<S_msrTechnicalWithInteger>
+    std::list <S_msrTechnicalWithInteger>
                           fChordTechnicalWithIntegersList;
 
-    std::list<S_msrTechnicalWithFloat>
+    std::list <S_msrTechnicalWithFloat>
                           fChordTechnicalWithFloatsList;
 
-    std::list<S_msrTechnicalWithString>
+    std::list <S_msrTechnicalWithString>
                           fChordTechnicalWithStringsList;
 
     // ornaments
-    std::list<S_msrOrnament>
+    std::list <S_msrOrnament>
                           fChordOrnamentsList;
 
     // glissandos
-    std::list<S_msrGlissando>
+    std::list <S_msrGlissando>
                           fChordGlissandosList;
 
     // slides
-    std::list<S_msrSlide> fChordSlidesList;
+    std::list <S_msrSlide> fChordSlidesList;
 
     // dynamics
-    std::list<S_msrDynamic>
+    std::list <S_msrDynamic>
                           fChordDynamicsList;
-    std::list<S_msrOtherDynamic>
+    std::list <S_msrOtherDynamic>
                           fChordOtherDynamicsList;
 
     // slashes
-    std::list<S_msrSlash> fChordSlashesList;
+    std::list <S_msrSlash> fChordSlashesList;
 
     // cresc/decresc
-    std::list<S_msrCrescDecresc>
+    std::list <S_msrCrescDecresc>
                           fChordCrescDecrescsList;
 
     // wedges
-    std::list<S_msrWedge> fChordWedgesList;
+    std::list <S_msrWedge> fChordWedgesList;
 
     // segnos
-    std::list<S_msrSegno> fChordSegnosList;
+    std::list <S_msrSegno> fChordSegnosList;
 
     // dal segnos
-    std::list<S_msrDalSegno>
+    std::list <S_msrDalSegno>
                           fChordDalSegnosList;
 
     // coda
-    std::list<S_msrCoda>  fChordCodasList;
+    std::list <S_msrCoda>  fChordCodasList;
 
     // octave shift
     S_msrOctaveShift      fChordOctaveShift;
 
     // words
-    std::list<S_msrWords> fChordWordsList;
+    std::list <S_msrWords> fChordWordsList;
 
     // ties
-    std::list<S_msrTie>   fChordTiesList;
+    std::list <S_msrTie>   fChordTiesList;
 
     // slurs
-    std::list<S_msrChordSlurLink>
+    std::list <S_msrChordSlurLink>
                           fChordSlurLinksList;
 
     // ligatures
-    std::list<S_msrLigature>
+    std::list <S_msrLigature>
 
                           fChordLigaturesList;
 
     // pedals
-    std::list<S_msrPedal> fChordPedalsList;
+    std::list <S_msrPedal> fChordPedalsList;
 
     // grace notes
 //    S_msrGraceNotesGroup  fChordGraceNotesGroupBefore;
@@ -648,7 +648,7 @@ class EXP msrChord : public msrTupletElement
                           fChordGraceNotesGroupLinkAfter;
 
     // harmony
-    std::list<S_msrHarmony>
+    std::list <S_msrHarmony>
                           fChordHarmoniesList;
 
     // figured bass

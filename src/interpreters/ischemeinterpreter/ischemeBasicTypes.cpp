@@ -235,7 +235,7 @@ void ischemeInput::selectInputName (
   }
 
   // is this name in the inputs names set?
-  std::set<std::string>::const_iterator
+  std::set <std::string>::const_iterator
     it =
       fNamesSet.find (name);
 
@@ -257,7 +257,7 @@ void ischemeInput::selectInputName (
   }
 
 //   // did fInputName get a name by an option?
-//   const std::multimap<std::string, std::string>&
+//   const std::multimap <std::string, std::string>&
 //     setInputToNameMultiMap =
 //       gGlobalIschemeInterpreterOahGroup->
 //         getSelectInputToNamesMultiMap ();
@@ -479,7 +479,7 @@ void ischemeInput::addName (
   ischemeDriver&     drv)
 {
   // is this name in the inputs names set?
-  std::set<std::string>::const_iterator
+  std::set <std::string>::const_iterator
     it =
       fNamesSet.find (name);
 
@@ -589,7 +589,7 @@ std::string ischemeInput::namesSetAsString () const
     size_t cumulatedLength    = 0;
 
     for (
-      std::set<std::string>::const_iterator i =
+      std::set <std::string>::const_iterator i =
         fNamesSet.begin ();
       i != fNamesSet.end ();
       ++i
@@ -1056,7 +1056,7 @@ void ischemeChoice::selectChoiceLabel (
   }
 
   // is this label in the choices labels set?
-  std::set<std::string>::const_iterator
+  std::set <std::string>::const_iterator
     it =
       fLabelsSet.find (label);
 
@@ -1078,7 +1078,7 @@ void ischemeChoice::selectChoiceLabel (
   }
 
   // did fChoiceName get a label by an option?
-  const std::multimap<std::string, std::string>&
+  const std::multimap <std::string, std::string>&
     setChoiceToLabelMultiMap =
       gGlobalIschemeInterpreterOahGroup->
         getSelectChoiceToLabelsMultiMap ();
@@ -1300,7 +1300,7 @@ void ischemeChoice::addLabel (
   ischemeDriver&     drv)
 {
   // is this label in the choices labels set?
-  std::set<std::string>::const_iterator
+  std::set <std::string>::const_iterator
     it =
       fLabelsSet.find (label);
 
@@ -1447,7 +1447,7 @@ std::string ischemeChoice::labelsSetAsString () const
     size_t cumulatedLength    = 0;
 
     for (
-      std::set<std::string>::const_iterator i =
+      std::set <std::string>::const_iterator i =
         fLabelsSet.begin ();
       i != fLabelsSet.end ();
       ++i
@@ -1894,7 +1894,7 @@ void ischemeCaseChoiceStatement::registerCaseChoiceLabel (
       endl;
   }
 
-  std::set<std::string>
+  std::set <std::string>
     choiceLabelSet =
       fCaseChoice->
         getLabelsSet ();
@@ -2097,7 +2097,7 @@ void ischemeCaseInputStatement::registerCaseInputName (
       endl;
   }
 
-  std::set<std::string>
+  std::set <std::string>
     choiceNameSet =
       fCaseInputInput->
         getNamesSet ();

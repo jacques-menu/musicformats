@@ -194,7 +194,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     int                   getStaffLinesNumber () const
                               { return fStaffLinesNumber; }
 
-    const std::list<S_msrStaffTuning>&
+    const std::list <S_msrStaffTuning>&
                           getStaffTuningsList () const
                               { return fStaffTuningsList; }
 
@@ -245,7 +245,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     msrStaffTypeKind      fStaffTypeKind;
 
     int                   fStaffLinesNumber;
-    std::list<S_msrStaffTuning>
+    std::list <S_msrStaffTuning>
                           fStaffTuningsList;
 
     msrShowFretsKind      fShowFretsKind;

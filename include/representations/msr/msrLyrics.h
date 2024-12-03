@@ -148,10 +148,10 @@ EXP std::ostream& operator << (std::ostream& os, const S_msrSyllableElement& elt
 
 //______________________________________________________________________________
 std::string syllableElementsListAsString (
-  const std::list<msrSyllableElement>& syllableElementsList);
+  const std::list <msrSyllableElement>& syllableElementsList);
 
 std::string syllableElementsListAsShortString (
-  const std::list<msrSyllableElement>& syllableElementsList);
+  const std::list <msrSyllableElement>& syllableElementsList);
 
 //______________________________________________________________________________
 class EXP msrSyllable : public msrElement
@@ -239,7 +239,7 @@ class EXP msrSyllable : public msrElement
                               { return fSyllableKind; }
 
     // syllable elements list
-    const std::list<msrSyllableElement>&
+    const std::list <msrSyllableElement>&
                           getSyllableElementsList ()
                               { return fSyllableElementsList; }
 
@@ -331,7 +331,7 @@ class EXP msrSyllable : public msrElement
     msrSyllableKind       fSyllableKind;
 
     // elements
-    std::list<msrSyllableElement>
+    std::list <msrSyllableElement>
                           fSyllableElementsList;
 
     // extend kind
@@ -412,7 +412,7 @@ class EXP msrStanza : public msrElement
                               { return fStanzaAlphabeticName; }
 
     // contents
-    const std::vector<S_msrSyllable>&
+    const std::vector <S_msrSyllable>&
                           getSyllables () const
                               { return fSyllables; }
 
@@ -540,7 +540,7 @@ class EXP msrStanza : public msrElement
     std::string           fStanzaAlphabeticName;
 
     // contents
-    std::vector<S_msrSyllable>
+    std::vector <S_msrSyllable>
                           fSyllables;
 
     Bool                  fStanzaTextPresent;

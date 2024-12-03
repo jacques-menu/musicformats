@@ -23,7 +23,7 @@ namespace MusicFormats
 // length units
 //______________________________________________________________________________
 
-std::map<std::string, msrLengthUnitKind>
+std::map <std::string, msrLengthUnitKind>
   gGlobalMsrLengthUnitKindsMap;
 
 std::string msrLengthUnitKindAsString (
@@ -81,7 +81,7 @@ std::string availableMsrLengthUnitKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msrLengthUnitKind>::const_iterator i =
+      std::map <std::string, msrLengthUnitKind>::const_iterator i =
         gGlobalMsrLengthUnitKindsMap.begin ();
       i != gGlobalMsrLengthUnitKindsMap.end ();
       ++i

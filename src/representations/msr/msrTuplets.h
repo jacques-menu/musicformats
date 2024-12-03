@@ -142,7 +142,7 @@ class EXP msrTuplet : public msrTupletElement
                           getTupletFactor () const;
 
     // tuplets elements list
-    const std::list<S_msrTupletElement>&
+    const std::list <S_msrTupletElement>&
                           getTupletElementsList () const;
 
     // tuplet durations
@@ -244,7 +244,7 @@ class EXP msrTuplet : public msrTupletElement
     msrPlacementKind      fTupletPlacementKind;
 
     // elements list
-    std::list<S_msrTupletElement>
+    std::list <S_msrTupletElement>
                           fTupletElementsList;
 };
 EXP std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt);

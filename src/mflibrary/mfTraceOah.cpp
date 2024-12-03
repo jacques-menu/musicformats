@@ -2260,15 +2260,30 @@ R"(Parts)",
     addBooleanAtom (
       tracePartsBooleanAtom);
 
-  // staves
+  // staves basics
 
   S_oahTwoBooleansAtom
-    traceStavesBooleanAtom =
+    traceStavesBasicsBooleanAtom =
       oahTwoBooleansAtom::create (
+        "trace-stave-basics", "tstavesb",
+R"(Staves basics)",
+        "fTraceStavesBasics",
+        fTraceStavesBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceStavesBasicsBooleanAtom);
+
+  // staves
+  S_oahThreeBooleansAtom
+    traceStavesBooleanAtom =
+      oahThreeBooleansAtom::create (
         "trace-staves", "tstaves",
 R"(Staves)",
         "fTraceStaves",
         fTraceStaves,
+        traceStavesBasicsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2339,9 +2354,9 @@ R"(Staff changes)",
     traceVoicesBasicsBooleanAtom =
       oahTwoBooleansAtom::create (
         "trace-voices-basics", "tvoicesb",
-R"(Voices)",
-        "fTraceVoiceBasics",
-        fTraceVoiceBasics,
+R"(Voices basics)",
+        "fTraceVoicesBasics",
+        fTraceVoicesBasics,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -3209,7 +3224,7 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl;
 
   if (fTraceDetailedMeasureNumbersSet.size ()) {
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fTraceDetailedMeasureNumbersSet.begin (),
       iEnd   = fTraceDetailedMeasureNumbersSet.end (),
       i      = iBegin;

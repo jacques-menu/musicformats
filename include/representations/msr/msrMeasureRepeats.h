@@ -411,7 +411,7 @@ class EXP msrMeasureRepeatElement : public msrElement
                               { return fMeasureRepeatElementUpLinkToMeasureRepeat; }
 
     // elements
-    const std::list<S_msrVoiceElement>&
+    const std::list <S_msrVoiceElement>&
                           getMeasureRepeatElementsList () const
                               { return fMeasureRepeatElementsList; }
 
@@ -479,7 +479,7 @@ class EXP msrMeasureRepeatElement : public msrElement
     S_msrMeasureRepeat   fMeasureRepeatElementUpLinkToMeasureRepeat;
 
     // elements list
-    std::list<S_msrVoiceElement>
+    std::list <S_msrVoiceElement>
                           fMeasureRepeatElementsList;
 };
 typedef SMARTP<msrMeasureRepeatElement> S_msrMeasureRepeatElement;

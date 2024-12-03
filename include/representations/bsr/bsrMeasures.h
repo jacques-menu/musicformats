@@ -125,7 +125,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
     std::string           fPrintMeasureNumber;
     std::string           fBrailleMeasureNumber;
 
-    std::list<S_bsrLineContentsElement>
+    std::list <S_bsrLineContentsElement>
                           fMeasureLineElementsList;
 };
 typedef SMARTP<bsrMeasure> S_bsrMeasure;

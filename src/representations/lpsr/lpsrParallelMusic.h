@@ -63,7 +63,7 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_lpsrPartGroupBlock>&
+    const std::list <S_lpsrPartGroupBlock>&
                           getParallelMusicBLockPartGroupBlocks () const
                               { return fParallelMusicBLockPartGroupBlocks; }
 
@@ -114,7 +114,7 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     // fields
     // ------------------------------------------------------
 
-    std::list<S_lpsrPartGroupBlock>
+    std::list <S_lpsrPartGroupBlock>
                           fParallelMusicBLockPartGroupBlocks;
 
     lpsrElementsSeparatorKind

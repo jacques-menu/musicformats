@@ -115,7 +115,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+                            std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                                                stringToMsrSemiTonesPitchAndOctaveMapVariable);
 
   protected:
@@ -129,7 +129,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+                            std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                                                stringToMsrSemiTonesPitchAndOctaveMapVariable);
 
     virtual               ~lilypondTransposePartNameAtom ();
@@ -144,7 +144,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
                             const S_msrSemiTonesPitchAndOctave&
                                                semiTonesPitchAndOctave);
 
-    const std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+    const std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                           getStringToMsrSemiTonesPitchAndOctaveMapVariable () const
                               {
                                 return
@@ -189,7 +189,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                           fStringToMsrSemiTonesPitchAndOctaveMapVariable;
 };
 typedef SMARTP<lilypondTransposePartNameAtom> S_lilypondTransposePartNameAtom;
@@ -209,7 +209,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+                            std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                                                stringToMsrSemiTonesPitchAndOctaveMapVariable);
 
   protected:
@@ -223,7 +223,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+                            std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                                                stringToMsrSemiTonesPitchAndOctaveMapVariable);
 
     virtual               ~lilypondTransposePartIDAtom ();
@@ -238,7 +238,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
                             const S_msrSemiTonesPitchAndOctave&
                                                semiTonesPitchAndOctave);
 
-    const std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+    const std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                           getStringToMsrSemiTonesPitchAndOctaveMapVariable () const
                               {
                                 return
@@ -283,7 +283,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                           fStringToMsrSemiTonesPitchAndOctaveMapVariable;
 };
 typedef SMARTP<lilypondTransposePartIDAtom> S_lilypondTransposePartIDAtom;
@@ -821,7 +821,7 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::list<std::pair<std::string, std::string>>&
+                            std::list <std::pair <std::string, std::string>>&
                                                lilypondChordsDisplayVariable);
 
   protected:
@@ -835,7 +835,7 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::list<std::pair<std::string, std::string>>&
+                            std::list <std::pair <std::string, std::string>>&
                                                lilypondChordsDisplayVariable);
 
     virtual               ~lilypondChordsDisplayAtom ();
@@ -846,12 +846,12 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setStringsPairListVariable (
-                            std::pair<std::string, std::string> value)
+                            std::pair <std::string, std::string> value)
                               {
                                 fStringsPairListVariable.push_back (value);
                               }
 
-    const std::list<std::pair<std::string, std::string>>&
+    const std::list <std::pair <std::string, std::string>>&
                           getStringsPairListVariable () const
                               { return fStringsPairListVariable; }
 
@@ -893,7 +893,7 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::list<std::pair<std::string, std::string>>&
+    std::list <std::pair <std::string, std::string>>&
                           fStringsPairListVariable;
 };
 typedef SMARTP<lilypondChordsDisplayAtom> S_lilypondChordsDisplayAtom;
@@ -1283,10 +1283,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // parts
     // --------------------------------------
 
-    const std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+    const std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                           getPartNamesTranspositionMap () const
                               { return fPartNamesTranspositionMap; }
-    const std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+    const std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                           getPartIDsTranspositionMap () const
                               { return fPartIDsTranspositionMap; }
 
@@ -1433,10 +1433,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // measure numbers
     // --------------------------------------
 
-    const std::map<std::string, int>&
+    const std::map <std::string, int>&
                           getResetMeasureElementMeasureNumberMap () const
                               { return fResetMeasureElementMeasureNumberMap; }
-    const std::map<std::string, int>&
+    const std::map <std::string, int>&
                           getAddEmptyMeasuresAfterMeasureNumberMap () const
                               { return fAddEmptyMeasuresAfterMeasureNumberMap; }
 
@@ -1451,7 +1451,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getBoxAroundAllBarNumbers () const
                               { return fBoxAroundAllBarNumbers; }
 
-    const std::set<std::string>&    getShowNumbersAtMeasureSet () const
+    const std::set <std::string>&    getShowNumbersAtMeasureSet () const
                               { return fShowNumbersAtMeasureSet; }
 
     void                  setBarNumbersSize (float value)
@@ -1462,7 +1462,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahFloatAtom        getBarNumbersSizeAtom () const
                               { return fBarNumbersSizeAtom; }
 
-    const std::set<int>&  getBoxAroundBarNumberSet () const
+    const std::set <int>&  getBoxAroundBarNumberSet () const
                               { return fBoxAroundBarNumberSet; }
 
     // bar number checks
@@ -1499,7 +1499,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     int                   getSeparatorLineEveryNMeasures () const
                               { return fSeparatorLineEveryNMeasures; }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
                           getBreakLineAfterMeasureNumberSet () const
                               { return fBreakLineAfterMeasureNumberSet; }
 
@@ -1511,7 +1511,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getIgnoreLpsrPageBreaks () const
                               { return fIgnoreLpsrPageBreaks; }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
                           getBreakPageAfterMeasureNumberSet () const
                               { return fBreakPageAfterMeasureNumberSet; }
 
@@ -1597,7 +1597,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // chords display
     // --------------------------------------
 
-    const std::list<std::pair<std::string, std::string>>&
+    const std::list <std::pair <std::string, std::string>>&
                           getChordsDisplayList () const
                               { return fChordsDisplayList; }
 
@@ -1969,9 +1969,9 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // parts
     // --------------------------------------
 
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>
                           fPartNamesTranspositionMap;
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>
                           fPartIDsTranspositionMap;
 
     // voices
@@ -2010,9 +2010,9 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // measure numbers
     // --------------------------------------
 
-    std::map<std::string, int>
+    std::map <std::string, int>
                           fResetMeasureElementMeasureNumberMap;
-    std::map<std::string, int>
+    std::map <std::string, int>
                           fAddEmptyMeasuresAfterMeasureNumberMap;
 
     // bar numbers
@@ -2020,7 +2020,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fShowAllBarNumbers;
 
-    std::set<std::string> fShowNumbersAtMeasureSet;
+    std::set <std::string> fShowNumbersAtMeasureSet;
     S_oahStringSetElementAtom
                           fShowNumbersAtMeasureAtom;
 
@@ -2028,7 +2028,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahFloatAtom        fBarNumbersSizeAtom;
 
     Bool                  fBoxAroundAllBarNumbers;
-    std::set<int>         fBoxAroundBarNumberSet;
+    std::set <int>         fBoxAroundBarNumberSet;
 
     // bar number checks
     // --------------------------------------
@@ -2056,7 +2056,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     int                   fSeparatorLineEveryNMeasures;
 
-    std::set<std::string> fBreakLineAfterMeasureNumberSet;
+    std::set <std::string> fBreakLineAfterMeasureNumberSet;
 
     // page and line breaks
     // --------------------------------------
@@ -2065,7 +2065,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // this atom is used by the '-minimal' combined option
     S_oahBooleanAtom      fIgnoreLpsrPageBreaksAtom;
 
-    std::set<std::string> fBreakPageAfterMeasureNumberSet;
+    std::set <std::string> fBreakPageAfterMeasureNumberSet;
 
 
     // staves
@@ -2162,7 +2162,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // chords display
     // --------------------------------------
 
-    std::list<std::pair<std::string, std::string>>
+    std::list <std::pair <std::string, std::string>>
                           fChordsDisplayList;
 
     Bool                  fJazzChordsDisplay;
@@ -2277,7 +2277,7 @@ class EXP lilypondBreakPageAfterMeasureNumberAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::set<std::string>&  S_lilypondAbsoluteOctaveEntryAtomtringSetVariable);
+                            std::set <std::string>&  S_lilypondAbsoluteOctaveEntryAtomtringSetVariable);
 
   protected:
 
@@ -2290,7 +2290,7 @@ class EXP lilypondBreakPageAfterMeasureNumberAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::set<std::string>&  S_lilypondAbsoluteOctaveEntryAtomtringSetVariable);
+                            std::set <std::string>&  S_lilypondAbsoluteOctaveEntryAtomtringSetVariable);
 
     virtual               ~lilypondBreakPageAfterMeasureNumberAtom ();
 
@@ -2299,7 +2299,7 @@ class EXP lilypondBreakPageAfterMeasureNumberAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const std::set<std::string>&    getStringSetVariable ()
+    const std::set <std::string>&    getStringSetVariable ()
                               { return fStringSetVariable; }
 
   public:
@@ -2325,7 +2325,7 @@ class EXP lilypondBreakPageAfterMeasureNumberAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::set<std::string>&          fStringSetVariable;
+    std::set <std::string>&          fStringSetVariable;
 };
 typedef SMARTP<lilypondBreakPageAfterMeasureNumberAtom> S_lilypondBreakPageAfterMeasureNumberAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_lilypondBreakPageAfterMeasureNumberAtom& elt);

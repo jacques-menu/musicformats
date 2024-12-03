@@ -1622,7 +1622,7 @@ void msr2bsrTranslator::visitStart (S_msrTimeSignature& elt)
       elt->getTimeIsCompound ();
   */
 
-  const std::vector<S_msrTimeSignatureItem>&
+  const std::vector <S_msrTimeSignatureItem>&
     mTimeSignatureItemsVector =
       elt->getTimeSignatureItemsVector ();
 
@@ -1674,7 +1674,7 @@ void msr2bsrTranslator::visitStart (S_msrTimeSignature& elt)
 
   if (mTimeSignatureItemsVector.size ()) {
     for (
-      std::vector<S_msrTimeSignatureItem>::const_iterator i =
+      std::vector <S_msrTimeSignatureItem>::const_iterator i =
         mTimeSignatureItemsVector.begin ();
       i != mTimeSignatureItemsVector.end ();
       ++i
@@ -1687,7 +1687,7 @@ void msr2bsrTranslator::visitStart (S_msrTimeSignature& elt)
         mTimeSignatureBeatValue =
           mTimeSignatureItem->getTimeSignatureBeatValue ();
 
-      const std::vector<int>&
+      const std::vector <int>&
         mTimeSignatureBeatsNumbersVector =
           mTimeSignatureItem->getTimeSignatureBeatsNumbersVector ();
 
@@ -1999,12 +1999,12 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
   // if note doesn't belong to a chord,
   // otherwise it will be generated for the chord itself
   if (! note->getNoteBelongsToAChord ()) {
-    const std::list<S_msrWords>&
+    const std::list <S_msrWords>&
       noteWordsList =
         note->getNoteWordsList ();
 
     if (noteWordsList.size ()) {
-      std::list<S_msrWords>::const_iterator i;
+      std::list <S_msrWords>::const_iterator i;
 
       for (
         i = noteWordsList.begin ();
@@ -3494,7 +3494,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
 
     if (gBsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
       // get the syllable texts list
-      const std::list<std::string>&
+      const std::list <std::string>&
         syllableElementsList =
           elt->getSyllableElementsList ();
 

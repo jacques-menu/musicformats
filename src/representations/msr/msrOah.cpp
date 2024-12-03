@@ -115,7 +115,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (
         theString);
@@ -328,7 +328,7 @@ S_msrRenamePartAtom msrRenamePartAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::map<std::string, std::string>&
+  std::map <std::string, std::string>&
                      stringToStringMapVariable)
 {
   msrRenamePartAtom* obj = new
@@ -349,7 +349,7 @@ msrRenamePartAtom::msrRenamePartAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::map<std::string, std::string>&
+  std::map <std::string, std::string>&
                      stringToStringMapVariable)
   : oahAtomStoringAValue (
       longName,
@@ -472,7 +472,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
-  std::map<std::string, std::string>::iterator
+  std::map <std::string, std::string>::iterator
     it =
       fStringToStringMapVariable.find (oldPartName);
 
@@ -594,7 +594,7 @@ std::string msrRenamePartAtom::asShortNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -619,7 +619,7 @@ std::string msrRenamePartAtom::asActualLongNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -658,7 +658,7 @@ void msrRenamePartAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -691,7 +691,7 @@ void msrRenamePartAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
@@ -1317,7 +1317,7 @@ void msrOahGroup::initializeMsrOahGroup ()
 Bool msrOahGroup::setMsrQuarterTonesPitchesLanguage (const std::string& language)
 {
   // is language in the pitches languages map?
-  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
@@ -1540,7 +1540,7 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth) // JMI SUPERFLOUS???
   }
   else {
     for (
-      std::map<std::string, std::string>::const_iterator i =
+      std::map <std::string, std::string>::const_iterator i =
         fMsrPartsRenamingMap.begin ();
       i != fMsrPartsRenamingMap.end ();
       ++i

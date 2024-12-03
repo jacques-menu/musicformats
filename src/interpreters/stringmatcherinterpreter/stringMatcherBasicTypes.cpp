@@ -531,7 +531,7 @@ Bool stringMatcherString::stringMatches (const std::string& theString) const
 
 /*
   // a strings list to collect the results
-  std::list<S_oahFindMatch> foundElementsList;
+  std::list <S_oahFindMatch> foundElementsList;
 
   // delegate this to the handler
   fetchAtomUpLinkToHandler ()->
@@ -565,7 +565,7 @@ Bool stringMatcherString::stringMatches (const std::string& theString) const
 
     ++gIndenter;
 
-    std::list<S_oahFindMatch>::const_iterator
+    std::list <S_oahFindMatch>::const_iterator
       iBegin = foundElementsList.begin (),
       iEnd   = foundElementsList.end (),
       i      = iBegin;

@@ -471,7 +471,7 @@ void msrStaff::browseData (basevisitor* v)
         voice->
           getVoiceName ();
 
-      const std::set<std::string>&
+      const std::set <std::string>&
         ignoreMsrVoicesSet =
           gGlobalMsr2msrOahGroup->
             getIgnoreMsrVoicesSet ();
@@ -658,7 +658,7 @@ They are handled in \mxsrToMsr{mxsr2msrTranslator} and \lpsrToLilypondBoth{lpsr2
 
 \mf\ never uses C++ STL stacks, because they cannot be iterated over:
 \begin{lstlisting}[language=CPlusPlus]
-    std::list<S_msrTuplet>    fOnGoingTupletsStack;
+    std::list <S_msrTuplet>    fOnGoingTupletsStack;
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
@@ -719,7 +719,7 @@ void msrPart::appendStaffDetailsToPart (
 
   // append staff details to registered staves
   for (
-    std::map<int, S_msrStaff>::const_iterator i =
+    std::map <int, S_msrStaff>::const_iterator i =
       getPartStavesMap.begin ();
     i != getPartStavesMap.end ();
     ++i

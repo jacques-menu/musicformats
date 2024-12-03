@@ -637,7 +637,7 @@ void ischemeDriver::handleSelectLabel (
       --gIndenter;
     }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
       choiceLabelsSet =
         choice->
           getLabelsSet ();
@@ -883,7 +883,7 @@ Bool ischemeDriver::applySelectOptionsFinally ()
       endl;
   }
 
-  const std::multimap<std::string, std::string>&
+  const std::multimap <std::string, std::string>&
     selectChoiceToLabelsMultiMap =
       gGlobalIschemeInterpreterOahGroup->
         getSelectChoiceToLabelsMultiMap ();
@@ -922,7 +922,7 @@ Bool ischemeDriver::applySelectOptionsFinally ()
             *this);
 
     if (optionSuppliedLabel == K_ALL_PSEUDO_LABEL_NAME) {
-      const std::set<std::string>&
+      const std::set <std::string>&
         choiceLabelsSet =
           choice->
             getLabelsSet ();
@@ -973,7 +973,7 @@ Bool ischemeDriver::applySelectOption (
       endl;
   }
 
-  const std::set<std::string>&
+  const std::set <std::string>&
     choiceLabelsSet =
       choice->
         getLabelsSet ();

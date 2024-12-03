@@ -123,7 +123,7 @@ In \class{msrNote}, there is:
     void                  appendHarmonyToNote (
                             const S_msrHarmony& harmony);
 
-    const std::list<S_msrHarmony>&
+    const std::list <S_msrHarmony>&
                           getNoteHarmoniesList () const
                               { return fNoteHarmoniesList; }
 
@@ -132,7 +132,7 @@ In \class{msrNote}, there is:
     // harmonies
     // ------------------------------------------------------
 
-    std::list<S_msrHarmony>
+    std::list <S_msrHarmony>
                           fNoteHarmoniesList;
 
 		// ... ... ...
@@ -694,12 +694,12 @@ void mxsr2msrTranslator::copyNoteHarmoniesToChord (
 {
   // copy note's harmony if any from the first note to chord
 
-  const std::list<S_msrHarmony>&
+  const std::list <S_msrHarmony>&
     noteHarmoniesList =
       note->getNoteHarmoniesList ();
 
   if (noteHarmoniesList.size ()) {
-    std::list<S_msrHarmony>::const_iterator i;
+    std::list <S_msrHarmony>::const_iterator i;
     for (i = noteHarmoniesList.begin (); i != noteHarmoniesList.end (); ++i) {
       S_msrHarmony harmony = (*i);
 
@@ -739,7 +739,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 	// ... ... ...
 
   // are there harmonies attached to this note? // BLARK
-  const std::list<S_msrHarmony>&
+  const std::list <S_msrHarmony>&
     noteHarmoniesList =
       note->
         getNoteHarmoniesList ();

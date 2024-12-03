@@ -322,7 +322,7 @@ void oahRegularHandler::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -370,7 +370,7 @@ std::ostream& operator << (std::ostream& os, const S_oahRegularHandler& elt)
 // optional values style
 //______________________________________________________________________________
 
-std::map<std::string, oahOptionalValuesStyleKind>
+std::map <std::string, oahOptionalValuesStyleKind>
   gGlobalOahOptionalValuesStyleKindsMap;
 
 std::string oahOptionalValuesStyleKindAsString (
@@ -420,7 +420,7 @@ std::string availableOahOptionalValuesStyleKinds (size_t namesListMaxLength)
     int cumulatedLength = 0;
 
     for (
-      std::map<std::string, oahOptionalValuesStyleKind>::const_iterator i =
+      std::map <std::string, oahOptionalValuesStyleKind>::const_iterator i =
         gGlobalOahOptionalValuesStyleKindsMap.begin ();
       i != gGlobalOahOptionalValuesStyleKindsMap.end ();
       ++i

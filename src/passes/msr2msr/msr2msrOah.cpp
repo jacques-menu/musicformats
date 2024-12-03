@@ -40,7 +40,7 @@ S_msrIgnorePartAtom msrIgnorePartAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<std::string>&  stringSetVariable)
+  std::set <std::string>&  stringSetVariable)
 {
   msrIgnorePartAtom* obj = new
     msrIgnorePartAtom (
@@ -60,7 +60,7 @@ msrIgnorePartAtom::msrIgnorePartAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<std::string>&  stringSetVariable)
+  std::set <std::string>&  stringSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -111,7 +111,7 @@ void msrIgnorePartAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
-  std::set<std::string>::iterator
+  std::set <std::string>::iterator
     it =
       fStringSetVariable.find (partName);
 
@@ -234,7 +234,7 @@ std::string msrIgnorePartAtom::asShortNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -259,7 +259,7 @@ std::string msrIgnorePartAtom::asActualLongNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -298,7 +298,7 @@ void msrIgnorePartAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -333,7 +333,7 @@ void msrIgnorePartAtom::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -370,7 +370,7 @@ S_msrKeepPartAtom msrKeepPartAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<std::string>&  stringSetVariable)
+  std::set <std::string>&  stringSetVariable)
 {
   msrKeepPartAtom* obj = new
     msrKeepPartAtom (
@@ -390,7 +390,7 @@ msrKeepPartAtom::msrKeepPartAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<std::string>&  stringSetVariable)
+  std::set <std::string>&  stringSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -441,7 +441,7 @@ void msrKeepPartAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
-  std::set<std::string>::iterator
+  std::set <std::string>::iterator
     it =
       fStringSetVariable.find (partName);
 
@@ -564,7 +564,7 @@ std::string msrKeepPartAtom::asShortNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -589,7 +589,7 @@ std::string msrKeepPartAtom::asActualLongNamedOptionString () const
     ss << "[EMPTY]";
   }
   else {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -628,7 +628,7 @@ void msrKeepPartAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -663,7 +663,7 @@ void msrKeepPartAtom::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;

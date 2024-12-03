@@ -92,7 +92,7 @@ class EXP msrGraceNotesGroup : public msrElement
                             msrGraceNotesGroupKind graceNotesGroupKind)
                               { fGraceNotesGroupKind = graceNotesGroupKind; }
 
-    const std::list<S_msrMeasureElement>&
+    const std::list <S_msrMeasureElement>&
                           getGraceNotesGroupElementsList () const
                               { return fGraceNotesGroupElementsList; }
 
@@ -185,7 +185,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // note upLink
     S_msrNote             fGraceNotesGroupUpLinkToNote;
 
-    std::list<S_msrMeasureElement>
+    std::list <S_msrMeasureElement>
                           fGraceNotesGroupElementsList;
 
     Bool                  fGraceNotesGroupIsSlashed;

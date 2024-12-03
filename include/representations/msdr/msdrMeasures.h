@@ -72,11 +72,11 @@ class EXP msdrMeasure : public smartable
                               { return fInputStartLineNumber; }
 
     // music measures vector
-    const std::vector<S_msdrLayer>&
+    const std::vector <S_msdrLayer>&
                           getMeasureElementsVector () const
                               { return fMeasureElementsVector; }
     // measures flat list
-    const std::list<S_msdrLayer>&
+    const std::list <S_msdrLayer>&
                           getMeasureLayersList () const
                               { return fMeasureLayersList; }
 
@@ -132,7 +132,7 @@ class EXP msdrMeasure : public smartable
     int                   fInputStartLineNumber;
 
     // measures elements list
-    std::list<S_msdrLayer>
+    std::list <S_msdrLayer>
                           fMeasureLayersList;
 
   public:
@@ -146,7 +146,7 @@ class EXP msdrMeasure : public smartable
     // ------------------------------------------------------
 
     // measures elements vector
-    std::vector<S_msdrLayer>
+    std::vector <S_msdrLayer>
                           fMeasureElementsVector;
 
     // voice finalization

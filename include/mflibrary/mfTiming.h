@@ -149,7 +149,7 @@ class EXP mfTimingItemsList
     // private fields
     // ------------------------------------------------------
 
-    std::list<S_mfTimingItem>
+    std::list <S_mfTimingItem>
                           fTimingItemsList;
 };
 EXP std::ostream& operator << (std::ostream& os, const mfTimingItemsList& tim);

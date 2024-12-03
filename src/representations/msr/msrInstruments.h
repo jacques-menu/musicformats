@@ -152,7 +152,7 @@ class EXP msrScordatura : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_msrStringTuning>&
+    const std::list <S_msrStringTuning>&
                           getScordaturaStringTuningsList () const
                               { return fScordaturaStringTuningsList; }
 
@@ -186,7 +186,7 @@ class EXP msrScordatura : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    std::list<S_msrStringTuning>
+    std::list <S_msrStringTuning>
                           fScordaturaStringTuningsList;
 };
 typedef SMARTP<msrScordatura> S_msrScordatura;
@@ -318,7 +318,7 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    const std::map<msrDiatonicPitchKind, msrAlterationKind>&
+    const std::map <msrDiatonicPitchKind, msrAlterationKind>&
                           getHarpPedalsAlterationKindsMap () const
                               { return fHarpPedalsAlterationKindsMap; }
 
@@ -356,7 +356,7 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    std::map<msrDiatonicPitchKind, msrAlterationKind>
+    std::map <msrDiatonicPitchKind, msrAlterationKind>
                           fHarpPedalsAlterationKindsMap;
 };
 typedef SMARTP<msrHarpPedalsTuning> S_msrHarpPedalsTuning;

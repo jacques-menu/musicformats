@@ -78,7 +78,7 @@ class EXP lpsrNewStaffGroupBlock : public lpsrElement
     // fields
     // ------------------------------------------------------
 
-    std::vector<S_msrElement> fNewStaffGroupElementsVector;
+    std::vector <S_msrElement> fNewStaffGroupElementsVector;
 };
 typedef SMARTP<lpsrNewStaffGroupBlock> S_lpsrNewStaffGroupBlock;
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffGroupBlock& elt);
@@ -199,7 +199,7 @@ class EXP lpsrNewStaffBlock : public lpsrElement
     // fields
     // ------------------------------------------------------
 
-    std::vector<S_msrElement> fNewStaffElementsVector;
+    std::vector <S_msrElement> fNewStaffElementsVector;
 };
 typedef SMARTP<lpsrNewStaffBlock> S_lpsrNewStaffBlock;
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrNewStaffBlock& elt);
@@ -233,7 +233,7 @@ class EXP lpsrStaffBlock : public lpsrElement
     S_msrStaff            getStaff () const
                               { return fStaff; }
 
-    const std::list<S_msrElement>&
+    const std::list <S_msrElement>&
                           getStaffBlockElements () const
                               { return fStaffBlockElements; }
 
@@ -296,7 +296,7 @@ class EXP lpsrStaffBlock : public lpsrElement
 
     S_msrStaff            fStaff;
 
-    std::list<S_msrElement>
+    std::list <S_msrElement>
                           fStaffBlockElements;
 
     std::string           fStaffBlockInstrumentName;

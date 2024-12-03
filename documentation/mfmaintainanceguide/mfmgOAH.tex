@@ -794,7 +794,7 @@ Passing the options and arguments over to the library when using \mf\ can be don
 \item \CLI\ services get them from \argcargv\ as usual;
 \item application using the library through the \API\ should place them in an {\tt oahOptionsVector}, defined in \mflibrary{mfMusicformatsErrors.h}:
 \begin{lstlisting}[language=CPlusPlus]
-typedef std::vector<std::pair<std::string, std::string>> oahOptionsVector;
+typedef std::vector <std::pair <std::string, std::string>> oahOptionsVector;
 \end{lstlisting}
 
 \end{itemize}
@@ -1172,7 +1172,7 @@ This is done using a two-pass scheme:
 class   {\tt oahHandler} contains:
 \begin{lstlisting}[language=CPlusPlus]
     // elements uses
-    std::list<S_oahElementUse> fElementUsesList;
+    std::list <S_oahElementUse> fElementUsesList;
 
     // atoms waiting for a value
     S_oahValueFittedAtom
@@ -1477,7 +1477,7 @@ class EXP oahFindableElement : public smartable
 
     virtual Bool          findStringInFindableElement ( // JMI v0.9.71 OAH_OAH
                             const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::list <S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const = 0;
 
   public:
@@ -1526,7 +1526,7 @@ For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oah
 
 %Bool oahHandler::findStringInFindableElement (
 %	const std::string&     lowerCaseString,
-%	std::list<S_oahFindStringMatch>& foundMatchesList,
+%	std::list <S_oahFindStringMatch>& foundMatchesList,
 %	std::ostream&                    os) const
 %{
 %	Bool result;
@@ -1569,7 +1569,7 @@ For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oah
 %    ++gIndenter;
 %
 %    for (
-%      std::map<std::string, S_oahPrefix>::const_iterator i =
+%      std::map <std::string, S_oahPrefix>::const_iterator i =
 %        fHandlerPrefixesMap.begin ();
 %      i != fHandlerPrefixesMap.end ();
 %      ++i
@@ -1609,7 +1609,7 @@ For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oah
 \begin{lstlisting}[language=CPlusPlus]
 Bool oahElement::findStringInFindableElement (
   const std::string&               lowerCaseString,
-  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::list <S_oahFindStringMatch>& foundMatchesList,
   std::ostream&                    os) const
 {
   Bool result;
@@ -1633,7 +1633,7 @@ Prefixes are handled this way in \method{oahPrefix}{findStringInFindableElement}
 \begin{lstlisting}[language=CPlusPlus]
 Bool oahPrefix::findStringInFindableElement (
   const std::string&               lowerCaseString,
-  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::list <S_oahFindStringMatch>& foundMatchesList,
   std::ostream&                    os) const
 {
   Bool result;
@@ -2115,7 +2115,7 @@ void oahLengthAtom::applyAtomWithValue (
     std::string lengthUnitName = sm [ 3 ];
 
     // is lengthUnitName known in the length unit names map?
-    std::map<std::string, msrLengthUnitKind>::const_iterator
+    std::map <std::string, msrLengthUnitKind>::const_iterator
       it =
         gGlobalMsrLengthUnitKindsMap.find (
           lengthUnitName);

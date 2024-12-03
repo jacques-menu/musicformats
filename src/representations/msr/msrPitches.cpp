@@ -1502,7 +1502,7 @@ std::string availableQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
+      std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
         getQuarterTonesPitchesLanguageKindsMap ().begin ();
       i != getQuarterTonesPitchesLanguageKindsMap ().end ();
       ++i
@@ -2565,7 +2565,7 @@ std::string availableMsrQuarterTonesPitchesLanguageKinds (
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
+      std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
         getQuarterTonesPitchesLanguageKindsMap ().begin ();
       i != getQuarterTonesPitchesLanguageKindsMap ().end ();
       ++i

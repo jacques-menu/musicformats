@@ -39,7 +39,7 @@ std::ostream& operator << (std::ostream& os, const msrLengthUnitKind& elt);
 
 std::string availableMsrLengthUnitKinds (size_t namesListMaxLength);
 
-extern std::map<std::string, msrLengthUnitKind>
+extern std::map <std::string, msrLengthUnitKind>
   gGlobalMsrLengthUnitKindsMap;
 
 void initializeMsrLengthUnitKindsMap ();

@@ -71,11 +71,11 @@ class EXP msdrMusic : public smartable
                               { return fInputStartLineNumber; }
 
     // music measures vector
-    const std::vector<S_msdrMeasure>&
+    const std::vector <S_msdrMeasure>&
                           getMusicMeasuresVector () const
                               { return fMusicMeasuresVector; }
     // measures list
-    const std::list<S_msdrMeasure>&
+    const std::list <S_msdrMeasure>&
                           getMusicMeasuresList () const
                               { return fMusicMeasuresList; }
 
@@ -131,7 +131,7 @@ class EXP msdrMusic : public smartable
     int                   fInputStartLineNumber;
 
     // measures vector
-    std::vector<S_msdrMeasure>
+    std::vector <S_msdrMeasure>
                           fMusicMeasuresVector;
 
   public:
@@ -145,7 +145,7 @@ class EXP msdrMusic : public smartable
     // ------------------------------------------------------
 
     // measures list
-    std::list<S_msdrMeasure>
+    std::list <S_msdrMeasure>
                           fMusicMeasuresList; // JMI
 
     // voice finalization

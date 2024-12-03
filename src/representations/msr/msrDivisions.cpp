@@ -176,7 +176,7 @@ int msrDivisions::notesNotesDurationKindAsDivisions (
   msrNotesDurationKind notesNotesDurationKind)
 {
   for (
-    std::list<std::pair<msrNotesDurationKind, int>>::const_iterator i =
+    std::list <std::pair <msrNotesDurationKind, int>>::const_iterator i =
       fNotesDurationKindsToDivisions.begin ();
     i != fNotesDurationKindsToDivisions.end ();
     ++i
@@ -216,7 +216,7 @@ void msrDivisions::printNotesDurationKindsDivisions (std::ostream& os)
   ++gIndenter;
 
   if (fNotesDurationKindsToDivisions.size ()) {
-    std::list<std::pair<msrNotesDurationKind, int>>::const_iterator
+    std::list <std::pair <msrNotesDurationKind, int>>::const_iterator
       iBegin = fNotesDurationKindsToDivisions.begin (),
       iEnd   = fNotesDurationKindsToDivisions.end (),
       i      = iBegin;
@@ -238,7 +238,7 @@ void msrDivisions::printNotesDurationKindsDivisions (std::ostream& os)
 /* JMI
 
     for (
-      std::list<std::pair<msrNotesDuration, int>>::const_iterator i =
+      std::list <std::pair <msrNotesDuration, int>>::const_iterator i =
         fNotesDurationsToDivisions.begin ();
       i != fNotesDurationsToDivisions.end ();
       ++i
@@ -298,7 +298,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
   int             baseNotesDurationDivisions = -1;
 
   // search fNotesDurationsToDivisions in longer to shortest order
-  std::list<std::pair<msrNotesDurationKind, int>>::const_iterator
+  std::list <std::pair <msrNotesDurationKind, int>>::const_iterator
     iBegin = fNotesDurationKindsToDivisions.begin (),
     iEnd   = fNotesDurationKindsToDivisions.end (),
     i      = iBegin;

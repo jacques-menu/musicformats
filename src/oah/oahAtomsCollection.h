@@ -214,7 +214,7 @@ class EXP oahMacroAtom : public oahValueLessAtom
     // set and get
     // ------------------------------------------------------
 
-     const std::list<S_oahValueLessAtom>&
+     const std::list <S_oahValueLessAtom>&
                           getMacroValueLessAtomsList () const
                               { return fMacroValueLessAtomsList; }
 
@@ -260,7 +260,7 @@ class EXP oahMacroAtom : public oahValueLessAtom
     // private fields
     // ------------------------------------------------------
 
-     std::list<S_oahValueLessAtom>
+     std::list <S_oahValueLessAtom>
                           fMacroValueLessAtomsList;
 };
 typedef SMARTP<oahMacroAtom> S_oahMacroAtom;
@@ -1707,7 +1707,7 @@ class EXP oahCombinedBooleansAtom : public oahValueLessAtom
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_oahBooleanAtom>&
+    const std::list <S_oahBooleanAtom>&
                           getBooleanAtomsList () const
                               { return fBooleanAtomsList; }
 
@@ -1765,7 +1765,7 @@ class EXP oahCombinedBooleansAtom : public oahValueLessAtom
     // private fields
     // ------------------------------------------------------
 
-    std::list<S_oahBooleanAtom>
+    std::list <S_oahBooleanAtom>
                           fBooleanAtomsList;
 };
 typedef SMARTP<oahCombinedBooleansAtom> S_oahCombinedBooleansAtom;
@@ -2165,7 +2165,7 @@ class EXP oahFactorizedStringAtom : public oahValueLessAtom
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_oahStringAtom>&
+    const std::list <S_oahStringAtom>&
                           getStringAtomsList () const
                               { return fStringAtomsList; }
 
@@ -2213,10 +2213,10 @@ class EXP oahFactorizedStringAtom : public oahValueLessAtom
     std::string           fAtomNameDescriptor;
     std::string           fStringValueDescriptor;
 
-    std::list<S_oahStringAtom>
+    std::list <S_oahStringAtom>
                           fStringAtomsList;
 
-    std::list<std::string>
+    std::list <std::string>
                           fAtomNamesList;
 };
 typedef SMARTP<oahFactorizedStringAtom> S_oahFactorizedStringAtom;
@@ -2366,7 +2366,7 @@ class EXP oahCommonPrefixBooleansAtom : public oahValueLessAtom
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_oahBooleanAtom>&
+    const std::list <S_oahBooleanAtom>&
                           getBooleanAtomsList () const
                               { return fBooleanAtomsList; }
 
@@ -2421,16 +2421,16 @@ class EXP oahCommonPrefixBooleansAtom : public oahValueLessAtom
     std::string           fShortSuffixDescriptor;
     std::string           fLongSuffixDescriptor;
 
-    std::list<S_oahBooleanAtom>
+    std::list <S_oahBooleanAtom>
                           fBooleanAtomsList;
 
     std::string           fShortNamesPrefixName;
     std::string           fLongNamesPrefixName;
 
-    std::list<std::string>
+    std::list <std::string>
 
                           fShortNamesSuffixes;
-    std::list<std::string>
+    std::list <std::string>
                           fLongNamesSuffixes;
 };
 typedef SMARTP<oahCommonPrefixBooleansAtom> S_oahCommonPrefixBooleansAtom;
@@ -2636,7 +2636,7 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::set<int>&     naturalNumbersSetVariable);
+                            std::set <int>&     naturalNumbersSetVariable);
 
   protected:
 
@@ -2649,7 +2649,7 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::set<int>&     naturalNumbersSetVariable);
+                            std::set <int>&     naturalNumbersSetVariable);
 
     virtual               ~oahNaturalNumbersSetElementAtom ();
 
@@ -2659,12 +2659,12 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setNaturalNumbersSetVariable (
-                            std::set<int>& value)
+                            std::set <int>& value)
                               {
                                 fNaturalNumbersSetVariable = value;
                               }
 
-    const std::set<int>&       getNaturalNumbersSetVariable () const
+    const std::set <int>&       getNaturalNumbersSetVariable () const
                               { return fNaturalNumbersSetVariable; }
 
   public:
@@ -2705,7 +2705,7 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::set<int>&             fNaturalNumbersSetVariable;
+    std::set <int>&             fNaturalNumbersSetVariable;
 };
 typedef SMARTP<oahNaturalNumbersSetElementAtom> S_oahNaturalNumbersSetElementAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahNaturalNumbersSetElementAtom& elt);
@@ -2820,7 +2820,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::set<int>&     intSetVariable);
+                            std::set <int>&     intSetVariable);
 
   protected:
 
@@ -2833,7 +2833,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::set<int>&     intSetVariable);
+                            std::set <int>&     intSetVariable);
 
     virtual               ~oahIntSetElementAtom ();
 
@@ -2842,7 +2842,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const std::set<int>&       getIntSetVariable () const
+    const std::set <int>&       getIntSetVariable () const
                               { return fIntSetVariable; }
 
   public:
@@ -2883,7 +2883,7 @@ class EXP oahIntSetElementAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::set<int>&        fIntSetVariable;
+    std::set <int>&        fIntSetVariable;
 };
 typedef SMARTP<oahIntSetElementAtom> S_oahIntSetElementAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_oahIntSetElementAtom& elt);
@@ -2906,7 +2906,7 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
                             const std::string&     description,
                             const std::string&     valueSpecification,
                             const std::string&     variableName,
-                            std::set<std::string>& stringSetVariable);
+                            std::set <std::string>& stringSetVariable);
 
   protected:
 
@@ -2919,7 +2919,7 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
                             const std::string&     description,
                             const std::string&     valueSpecification,
                             const std::string&     variableName,
-                            std::set<std::string>& stringSetVariable);
+                            std::set <std::string>& stringSetVariable);
 
     virtual               ~oahStringSetElementAtom ();
 
@@ -2934,7 +2934,7 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
                                 fStringSetVariable.insert (partName);
                               }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
                           getStringSetVariable () const
                               { return fStringSetVariable; }
 
@@ -2976,7 +2976,7 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::set<std::string>&
+    std::set <std::string>&
                           fStringSetVariable;
 };
 typedef SMARTP<oahStringSetElementAtom> S_oahStringSetElementAtom;
@@ -3000,7 +3000,7 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
                             const std::string&          description,
                             const std::string&          valueSpecification,
                             const std::string&          variableName,
-                            std::map<std::string, int>& stringToIntMapVariable);
+                            std::map <std::string, int>& stringToIntMapVariable);
 
   protected:
 
@@ -3013,7 +3013,7 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
                             const std::string&          description,
                             const std::string&          valueSpecification,
                             const std::string&          variableName,
-                            std::map<std::string, int>& stringToIntMapVariable);
+                            std::map <std::string, int>& stringToIntMapVariable);
 
     virtual               ~oahStringToIntMapElementAtom ();
 
@@ -3022,7 +3022,7 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const std::map<std::string, int>&
+    const std::map <std::string, int>&
                           getStringToIntMapVariable () const
                               { return fStringToIntMapVariable; }
 
@@ -3064,7 +3064,7 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::map<std::string, int>&
+    std::map <std::string, int>&
                           fStringToIntMapVariable;
 };
 typedef SMARTP<oahStringToIntMapElementAtom> S_oahStringToIntMapElementAtom;
@@ -3088,7 +3088,7 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
                             const std::string&                  description,
                             const std::string&                  valueSpecification,
                             const std::string&                  variableName,
-                            std::map<std::string, std::string>& stringToStringMapVariable);
+                            std::map <std::string, std::string>& stringToStringMapVariable);
 
   protected:
 
@@ -3101,7 +3101,7 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
                             const std::string&                  description,
                             const std::string&                  valueSpecification,
                             const std::string&                  variableName,
-                            std::map<std::string, std::string>& stringToStringMapVariable);
+                            std::map <std::string, std::string>& stringToStringMapVariable);
 
     virtual               ~oahStringToStringMapElementAtom ();
 
@@ -3110,7 +3110,7 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const std::map<std::string, std::string>&
+    const std::map <std::string, std::string>&
                           getStringToStringMapVariable () const
                               { return fStringToStringMapVariable; }
 
@@ -3152,7 +3152,7 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::map<std::string, std::string>&
+    std::map <std::string, std::string>&
                           fStringToStringMapVariable;
 };
 typedef SMARTP<oahStringToStringMapElementAtom> S_oahStringToStringMapElementAtom;
@@ -3176,7 +3176,7 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
                             const std::string&                       description,
                             const std::string&                       valueSpecification,
                             const std::string&                       variableName,
-                            std::multimap<std::string, std::string>& stringToStringMultiMapVariable);
+                            std::multimap <std::string, std::string>& stringToStringMultiMapVariable);
 
   protected:
 
@@ -3189,7 +3189,7 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
                             const std::string&                       description,
                             const std::string&                       valueSpecification,
                             const std::string&                       variableName,
-                            std::multimap<std::string, std::string>& stringToStringMultiMapVariable);
+                            std::multimap <std::string, std::string>& stringToStringMultiMapVariable);
 
     virtual               ~oahStringToStringMultiMapElementAtom ();
 
@@ -3198,7 +3198,7 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const std::multimap<std::string, std::string>&
+    const std::multimap <std::string, std::string>&
                           getStringToStringMultiMapVariable () const
                               { return fStringToStringMultiMapVariable; }
 
@@ -3240,7 +3240,7 @@ class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::multimap<std::string, std::string>&
+    std::multimap <std::string, std::string>&
                           fStringToStringMultiMapVariable;
 };
 typedef SMARTP<oahStringToStringMultiMapElementAtom> S_oahStringToStringMultiMapElementAtom;

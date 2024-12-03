@@ -199,7 +199,7 @@ void bsrParallel::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_bsrElement>::const_iterator
+      std::list <S_bsrElement>::const_iterator
         iBegin = fParallelElementsList.begin (),
         iEnd   = fParallelElementsList.end (),
         i      = iBegin;

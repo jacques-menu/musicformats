@@ -84,7 +84,7 @@ class EXP msrSegment : public msrVoiceElement
 
     // measures elements
 
-    const std::list<S_msrSegmentElement>&
+    const std::list <S_msrSegmentElement>&
                           getSegmentElementsList () const
                               { return fSegmentElementsList; }
 
@@ -104,7 +104,7 @@ class EXP msrSegment : public msrVoiceElement
 
     // measures flat list
 
-    const std::list<S_msrMeasure>&
+    const std::list <S_msrMeasure>&
                           getSegmentMeasuresFlatList () const
                               { return fSegmentMeasuresFlatList; }
 
@@ -269,7 +269,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  appendHarmoniesListToSegment (
                             int                            inputLineNumber,
-                            const std::list<S_msrHarmony>& harmoniesList,
+                            const std::list <S_msrHarmony>& harmoniesList,
                             const msrWholeNotes&           measurePositionToAppendAt);
 
     void                  appendHarmonyToSegmentClone (
@@ -292,7 +292,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  appendFiguredBassesListToSegment (
                             int                                inputLineNumber,
-                            const std::list<S_msrFiguredBass>& figuredBasssesList,
+                            const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const msrWholeNotes&               measurePositionToAppendAt);
 
     void                  appendFiguredBassToSegmentClone (
@@ -463,12 +463,12 @@ class EXP msrSegment : public msrVoiceElement
     int                   fSegmentAbsoluteNumber;
 
     // the measures elements in the segment contain the mmusic
-    std::list<S_msrSegmentElement>
+    std::list <S_msrSegmentElement>
                           fSegmentElementsList;
 
     // measures flat list
     // including those not in non-measure segment elements,
-    std::list<S_msrMeasure>
+    std::list <S_msrMeasure>
                           fSegmentMeasuresFlatList;
 
     // debug number, unique for every msrSegment instance

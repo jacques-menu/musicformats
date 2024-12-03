@@ -197,7 +197,7 @@ void lpsrContext::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fContextElementsList.begin (),
       iEnd   = fContextElementsList.end (),
       i      = iBegin;
@@ -367,7 +367,7 @@ void lpsrChordNamesContext::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fContextElementsList.begin (),
       iEnd   = fContextElementsList.end (),
       i      = iBegin;
@@ -550,7 +550,7 @@ void lpsrFiguredBassContext::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fContextElementsList.begin (),
       iEnd   = fContextElementsList.end (),
       i      = iBegin;

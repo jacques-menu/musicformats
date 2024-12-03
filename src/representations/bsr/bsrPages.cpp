@@ -108,7 +108,7 @@ int bsrPage::fetchLineContentsNumber () const
   int result = 0;
 
   for (
-    std::list<S_bsrPageElement>::const_iterator i = fPageElementsList.begin ();
+    std::list <S_bsrPageElement>::const_iterator i = fPageElementsList.begin ();
     i != fPageElementsList.end ();
     ++i
   ) {
@@ -195,7 +195,7 @@ void bsrPage::acceptOut (basevisitor* v)
 void bsrPage::browseData (basevisitor* v)
 {
   for (
-    std::list<S_bsrPageElement>::const_iterator i = fPageElementsList.begin ();
+    std::list <S_bsrPageElement>::const_iterator i = fPageElementsList.begin ();
     i != fPageElementsList.end ();
     ++i ) {
     // browse the element
@@ -261,7 +261,7 @@ void bsrPage::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_bsrPageElement>::const_iterator
+      std::list <S_bsrPageElement>::const_iterator
         iBegin = fPageElementsList.begin (),
         iEnd   = fPageElementsList.end (),
         i      = iBegin;

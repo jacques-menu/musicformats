@@ -129,7 +129,7 @@ class msrSimultaneousNotesChunk : public smartable
     msrWholeNotes         getChunkMeasurePosition () const
                               { return fChunkMeasurePosition; }
 
-    const std::list<S_msrNote>&
+    const std::list <S_msrNote>&
                           getChunkNotesList () const
                               { return fChunkNotesList; }
 
@@ -165,7 +165,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
     msrWholeNotes         fChunkMeasurePosition;
-    std::list<S_msrNote>  fChunkNotesList;
+    std::list <S_msrNote>  fChunkNotesList;
     msrWholeNotes         fChunkNotesDurationWholeNotes;
 };
 typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
@@ -211,7 +211,7 @@ class EXP msrMeasuresSlice : public smartable
     int                   getSlicePuristMeasureNumber () const
                               { return fSlicePuristMeasureNumber; }
 
-    const std::vector<S_msrMeasure>&
+    const std::vector <S_msrMeasure>&
                           getSliceMeasuresVector () const
                               { return fSliceMeasuresVector; }
 
@@ -220,19 +220,19 @@ class EXP msrMeasuresSlice : public smartable
 
     // notes flat list
 
-    const std::list<S_msrNote>&
+    const std::list <S_msrNote>&
                           getSliceNotesFlatList () const
                               { return fSliceNotesFlatList; }
 
     // note events list
 
-    const std::list<S_msrNoteEvent>&
+    const std::list <S_msrNoteEvent>&
                           getSliceNoteEventsList () const
                               { return fSliceNoteEventsList; }
 
     // simultaneous notes chunks list
 
-    const std::list<S_msrSimultaneousNotesChunk>&
+    const std::list <S_msrSimultaneousNotesChunk>&
                           getSliceSimultaneousNotesChunksList () const
                               { return fSliceSimultaneousNotesChunksList; }
 
@@ -274,18 +274,18 @@ class EXP msrMeasuresSlice : public smartable
     std::string           fSliceMeasureNumber;
 
     // the measures in the slice
-    std::vector<S_msrMeasure>
+    std::vector <S_msrMeasure>
                           fSliceMeasuresVector;
 
     // notes flat list
-    std::list<S_msrNote>  fSliceNotesFlatList;
+    std::list <S_msrNote>  fSliceNotesFlatList;
 
     // note events list
-    std::list<S_msrNoteEvent>
+    std::list <S_msrNoteEvent>
                           fSliceNoteEventsList;
 
     // simultaneous notes chunks list
-    std::list<S_msrSimultaneousNotesChunk>
+    std::list <S_msrSimultaneousNotesChunk>
                           fSliceSimultaneousNotesChunksList;
 };
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlice& elt);
@@ -336,7 +336,7 @@ class EXP msrMeasuresSlicesSequence : public smartable
     std::string           getMeasuresOrigin () const
                               { return fMeasuresOrigin; }
 
-    const std::vector<S_msrMeasuresSlice>&
+    const std::vector <S_msrMeasuresSlice>&
                           getMeasuresSlicesVector () const
                               { return fMeasuresSlicesVector; }
 
@@ -381,7 +381,7 @@ class EXP msrMeasuresSlicesSequence : public smartable
 
     std::string           fMeasuresOrigin;
 
-    std::vector<S_msrMeasuresSlice>
+    std::vector <S_msrMeasuresSlice>
                           fMeasuresSlicesVector;
 };
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasuresSlicesSequence& elt);

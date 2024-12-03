@@ -60,7 +60,7 @@ EXP mfIndentedStringStream& operator << (
 mfPassIDKind mfPassIDKindFromString (
   const std::string& theString);
 
-extern std::map<std::string, mfPassIDKind>
+extern std::map <std::string, mfPassIDKind>
   gGlobalMusicFormatsPassIDKindsMap;
 
 std::string availableMusicFormatsPassIDKinds (size_t namesListMaxLength);

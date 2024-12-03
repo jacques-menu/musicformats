@@ -55,7 +55,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_msrMeasureElement>&
+    const std::list <S_msrMeasureElement>&
                           getAfterGraceNotesGroupContentsNotesList () const
                               {
                                 return
@@ -104,7 +104,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     S_msrVoice            fAfterGraceNotesGroupContentsUpLinkToVoice;
 
     // the notes list
-    std::list<S_msrMeasureElement>
+    std::list <S_msrMeasureElement>
                           fAfterGraceNotesGroupContentsNotesList;
 };
 typedef SMARTP<msrAfterGraceNotesGroupContents> S_msrAfterGraceNotesGroupContents;

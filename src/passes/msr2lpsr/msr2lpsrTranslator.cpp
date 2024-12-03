@@ -89,7 +89,7 @@ void msr2lpsrTranslator::computeLilypondScoreHeaderFields ()
   // title
   computeLilypondScoreHeaderTitleAndSubTitle ();
 
-  std::list<std::pair<std::string, std::string>> nameValuePairsList; // JMI TEMP
+  std::list <std::pair <std::string, std::string>> nameValuePairsList; // JMI TEMP
 
   // dedication
   std::string
@@ -710,7 +710,7 @@ void msr2lpsrTranslator::displayPartGroupsStack (
     std::endl;
 
   if (partGroupsStackSize) {
-    std::list<S_msrPartGroup>::const_iterator
+    std::list <S_msrPartGroup>::const_iterator
       iBegin = fPartGroupsStack.begin (),
       iEnd   = fPartGroupsStack.end (),
       i      = iBegin;
@@ -758,7 +758,7 @@ void msr2lpsrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
 
     const int fieldWidth = 19;
 
-    std::list<S_msrHiddenMeasureAndBarLineDescr>::const_iterator
+    std::list <S_msrHiddenMeasureAndBarLineDescr>::const_iterator
       iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
       iEnd   = fPartHiddenMeasureAndBarLineDescrList.end (),
       i      = iBegin;
@@ -815,7 +815,7 @@ void msr2lpsrTranslator::displayOnGoingNotesStack (
     std::endl;
 
   if (onGoingNotesStackSize) {
-    std::list<S_msrNote>::const_iterator
+    std::list <S_msrNote>::const_iterator
       iBegin = fOnGoingNotesStack.begin (),
       iEnd   = fOnGoingNotesStack.end (),
       i      = iBegin;
@@ -857,7 +857,7 @@ void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
     std::endl;
 
   if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
-    std::list<S_msrHiddenMeasureAndBarLineDescr>::const_iterator
+    std::list <S_msrHiddenMeasureAndBarLineDescr>::const_iterator
       iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
       iEnd   = fPartHiddenMeasureAndBarLineDescrList.end (),
       i      = iBegin;
@@ -3824,7 +3824,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
 
     if (gLpsrOahGroup->getAddLpsrWordsFromTheLyrics ()) {
       // get the syllable texts list
-      const std::list<msrSyllableElement>&
+      const std::list <msrSyllableElement>&
         syllableElementsList =
           elt->getSyllableElementsList ();
 

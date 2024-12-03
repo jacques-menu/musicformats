@@ -577,7 +577,7 @@ std::string existingTokensInLanguage (
 {
   std::string result;
 
-  std::map<msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
+  std::map <msdlKeywordKind, std::string> *keywordsNamesMapPTR = nullptr;
 
   // select the relevant keywords names map
   switch (keywordsLanguageKind) {
@@ -700,7 +700,7 @@ S_msdlTokenKindsSet msdlTokenKindsSet::createClone ()
 
   if (fTokenKindsSet.size ()) {
     for (
-      std::set<msdlTokenKind>::const_iterator i =
+      std::set <msdlTokenKind>::const_iterator i =
         fTokenKindsSet.begin ();
       i != fTokenKindsSet.end ();
       ++i
@@ -753,7 +753,7 @@ void msdlTokenKindsSet::addElementsFrom (S_msdlTokenKindsSet tokenKindsSet)
 {
   if (tokenKindsSet->fTokenKindsSet.size ()) {
     for (
-      std::set<msdlTokenKind>::const_iterator i =
+      std::set <msdlTokenKind>::const_iterator i =
         tokenKindsSet->fTokenKindsSet.begin ();
       i != tokenKindsSet->fTokenKindsSet.end ();
       ++i
@@ -767,7 +767,7 @@ void msdlTokenKindsSet::removeElementsFrom (S_msdlTokenKindsSet tokenKindsSet)
 {
   if (tokenKindsSet->fTokenKindsSet.size ()) {
     for (
-      std::set<msdlTokenKind>::const_iterator i =
+      std::set <msdlTokenKind>::const_iterator i =
         tokenKindsSet->fTokenKindsSet.begin ();
       i != tokenKindsSet->fTokenKindsSet.end ();
       ++i
@@ -784,7 +784,7 @@ std::string msdlTokenKindsSet::asString () const
   ss << '[';
 
   if (fTokenKindsSet.size ()) {
-    std::set<msdlTokenKind>::const_iterator
+    std::set <msdlTokenKind>::const_iterator
       iBegin = fTokenKindsSet.begin (),
       iEnd   = fTokenKindsSet.end (),
       i      = iBegin;
@@ -815,7 +815,7 @@ void msdlTokenKindsSet::print (std::ostream& os) const
     "msdlTokenKindsSet:";
 
   if (fTokenKindsSet.size ()) {
-    std::set<msdlTokenKind>::const_iterator
+    std::set <msdlTokenKind>::const_iterator
       iBegin = fTokenKindsSet.begin (),
       iEnd   = fTokenKindsSet.end (),
       i      = iBegin;
@@ -2031,7 +2031,7 @@ void msdlTokensList::print (std::ostream& os) const
   if (tokensListSize) {
     ++gIndenter;
 
-    std::list<msdlToken>::const_iterator
+    std::list <msdlToken>::const_iterator
       iBegin = fTokensList.begin (),
       iEnd   = fTokensList.end (),
       i      = iBegin;

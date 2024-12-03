@@ -40,10 +40,10 @@ namespace MusicFormats
 
 // clefs
 //______________________________________________________________________________
-std::map<std::string, msrClefKind>
+std::map <std::string, msrClefKind>
   gGlobalClefKindsMap;
 
-std::list<std::string>
+std::list <std::string>
   gClefKindsNamesList;
 
 std::string msrClefKindAsString (
@@ -280,7 +280,7 @@ std::string availableClefKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msrClefKind>::const_iterator i =
+      std::map <std::string, msrClefKind>::const_iterator i =
         gGlobalClefKindsMap.begin ();
       i != gGlobalClefKindsMap.end ();
       ++i
@@ -327,7 +327,7 @@ std::string availableClefKindsNames (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::list<std::string>::const_iterator i =
+      std::list <std::string>::const_iterator i =
         gClefKindsNamesList.begin ();
       i != gClefKindsNamesList.end ();
       ++i

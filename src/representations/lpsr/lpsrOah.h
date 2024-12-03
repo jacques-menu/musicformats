@@ -214,7 +214,7 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
                             const std::string&         description,
                             const std::string&         valueSpecification,
                             const std::string&         variableName,
-                            std::map<std::string, std::string>&  stringToStringMapVariable);
+                            std::map <std::string, std::string>&  stringToStringMapVariable);
 
   protected:
 
@@ -227,7 +227,7 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
                             const std::string&         description,
                             const std::string&         valueSpecification,
                             const std::string&         variableName,
-                            std::map<std::string, std::string>&  stringToStringMapVariable);
+                            std::map <std::string, std::string>&  stringToStringMapVariable);
 
     virtual               ~lpsrStaffInstrumentNameAtom ();
 
@@ -236,7 +236,7 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const std::map<std::string, std::string>&
+    const std::map <std::string, std::string>&
                           getStringToStringMapVariable () const
                               { return fStringToStringMapVariable; }
 
@@ -278,7 +278,7 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::map<std::string, std::string>&  fStringToStringMapVariable;
+    std::map <std::string, std::string>&  fStringToStringMapVariable;
 };
 typedef SMARTP<lpsrStaffInstrumentNameAtom> S_lpsrStaffInstrumentNameAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_lpsrStaffInstrumentNameAtom& elt);
@@ -607,7 +607,7 @@ class EXP lpsrOahGroup : public oahGroup
     // staves
     // --------------------------------------
 
-    const std::map<std::string, std::string>&
+    const std::map <std::string, std::string>&
                           getLpsrStavesInstrumentsNamesMap () const
                               { return fLpsrStavesInstrumentsNamesMap; }
 
@@ -628,7 +628,7 @@ class EXP lpsrOahGroup : public oahGroup
                               { return fReplicateEmptyMeasureReplicas; }
 
     // add empty measures
-// JMI    std::map<std::string,int>       getAddEmptyMeasuresStringToIntMap () const;
+// JMI    std::map <std::string,int>       getAddEmptyMeasuresStringToIntMap () const;
 
     // tempos
     // --------------------------------------
@@ -860,7 +860,7 @@ class EXP lpsrOahGroup : public oahGroup
     int                   fReplicateEmptyMeasureReplicas;
 
     // add empty measures
-// JMI    std::map<std::string,int>       fAddEmptyMeasuresStringToIntMap;
+// JMI    std::map <std::string,int>       fAddEmptyMeasuresStringToIntMap;
 
     // tempos
     // --------------------------------------
@@ -889,7 +889,7 @@ class EXP lpsrOahGroup : public oahGroup
                           fLpsrChordsLanguageKind;
 
     // staves instrument names
-    std::map<std::string, std::string>
+    std::map <std::string, std::string>
                           fLpsrStavesInstrumentsNamesMap;
     S_lpsrStaffInstrumentNameAtom
                           fLpsrStavesInstrumentsNamesMapAtom;

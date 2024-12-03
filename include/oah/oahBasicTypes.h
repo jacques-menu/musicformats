@@ -197,8 +197,8 @@ std::string oahOptionForCommandLine (
   const std::string& optionValue);
 
 void optionsNameAndValueVectorsPlusEquals (
-  std::vector<S_oahOption>&       vector1,
-  const std::vector<S_oahOption>& vector2);
+  std::vector <S_oahOption>&       vector1,
+  const std::vector <S_oahOption>& vector2);
 
 // //_______________________________________________________________________________
 // class EXP oahOptionsNamesAndValuesVector; JMI v0.9.66
@@ -234,7 +234,7 @@ void optionsNameAndValueVectorsPlusEquals (
 //     // set and get
 //     // ------------------------------------------------------
 //
-//     const std::vector<S_oahOption>&
+//     const std::vector <S_oahOption>&
 //                           getOptionsVector () const
 //                               { return fOptionsVector; }
 //
@@ -266,7 +266,7 @@ void optionsNameAndValueVectorsPlusEquals (
 //     // protected fields
 //     // ------------------------------------------------------
 //
-//     std::vector<S_oahOption>
+//     std::vector <S_oahOption>
 //                           fOptionsVector;
 // };
 // typedef SMARTP<oahOptionsNamesAndValuesVector> S_oahOptionsNamesAndValuesVector;
@@ -296,11 +296,11 @@ class EXP oahOptionsAndArguments : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const std::vector<oahOption>&
+    const std::vector <oahOption>&
                           getOptionsVector () const
                               { return fOptionsVector; }
 
-    const std::vector<std::string>&
+    const std::vector <std::string>&
                           getArgumentsVector () const
                               { return fArgumentsVector; }
 
@@ -334,9 +334,9 @@ class EXP oahOptionsAndArguments : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::vector<oahOption>
+    std::vector <oahOption>
                           fOptionsVector;
-    std::vector<std::string>
+    std::vector <std::string>
                           fArgumentsVector;
 };
 typedef SMARTP<oahOptionsAndArguments> S_oahOptionsAndArguments;
@@ -428,12 +428,12 @@ to be developped into :
 
     Bool                  findStringInFindableElement (
                             const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::list <S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 
     Bool                  fetchElementsMatchingStringInPrefix (
                             const std::string&       lowerCaseString,
-                            std::list<S_oahElement>& foundElementsList,
+                            std::list <S_oahElement>& foundElementsList,
                             std::ostream&            os) const;
 
   public:
@@ -547,7 +547,7 @@ class EXP oahAtom : public oahElement
 
     Bool                  fetchElementsMatchingStringInHandler (
                             const std::string&       lowerCaseString,
-                            std::list<S_oahElement>& foundElementsList,
+                            std::list <S_oahElement>& foundElementsList,
                             std::ostream&            os) const;
 
   public:
@@ -575,7 +575,7 @@ class EXP oahAtom : public oahElement
 
     virtual Bool          findStringInAtom (
                             const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::list <S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
     virtual Bool          atomMatchesString (
@@ -1214,7 +1214,7 @@ class EXP oahSubGroup : public oahElement
     int                   getNumberOfUserChoseAtomsInThisSubGroup () const
                               { return fNumberOfUserChoseAtomsInThisSubGroup; }
 
-    const std::list<S_oahAtom>&
+    const std::list <S_oahAtom>&
                           getSubGroupAtomsList () const
                               { return fSubGroupAtomsList; }
 
@@ -1249,7 +1249,7 @@ class EXP oahSubGroup : public oahElement
 
     Bool                  fetchElementsMatchingStringInSubGroup (
                             const std::string&       lowerCaseString,
-                            std::list<S_oahElement>& foundElementsList,
+                            std::list <S_oahElement>& foundElementsList,
                             std::ostream&            os) const;
 
   public:
@@ -1299,7 +1299,7 @@ class EXP oahSubGroup : public oahElement
 
     Bool                  findStringInSubGroup (
                             const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::list <S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
     void                  printSubGroupOptionsValues (
@@ -1320,7 +1320,7 @@ class EXP oahSubGroup : public oahElement
 
     std::string           fSubGroupHeader;
 
-    std::list<S_oahAtom>  fSubGroupAtomsList;
+    std::list <S_oahAtom>  fSubGroupAtomsList;
 
     // protected work fields
     // ------------------------------------------------------
@@ -1407,7 +1407,7 @@ class EXP oahGroup : public oahElement
                               { return fGroupHeader; }
 
     // groups list
-    const std::list<S_oahSubGroup>&
+    const std::list <S_oahSubGroup>&
                           getGroupSubGroupsList () const
                               { return fGroupSubGroupsList; }
 
@@ -1511,12 +1511,12 @@ class EXP oahGroup : public oahElement
 
     void                  findStringInGroup (
                             const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::list <S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const;
 
     Bool                  fetchElementsMatchingStringInGroup (
                             const std::string&       lowerCaseString,
-                            std::list<S_oahElement>& foundElementsList,
+                            std::list <S_oahElement>& foundElementsList,
                             std::ostream&            os) const;
 
     void                  printGroupOptionsValues (
@@ -1556,7 +1556,7 @@ class EXP oahGroup : public oahElement
 
     std::string           fGroupHeader;
 
-    std::list<S_oahSubGroup>
+    std::list <S_oahSubGroup>
                           fGroupSubGroupsList;
 
     Bool                  fGroupHeaderIsToBeWritten;
@@ -1650,12 +1650,12 @@ class EXP oahHandler : public oahFindableElement //  smartable
                               { return fLaunchCommandWithShortOptionsNames; }
 
     // prefixes
-    const std::map<std::string, S_oahPrefix>&
+    const std::map <std::string, S_oahPrefix>&
                           getHandlerPrefixesMap () const
                               { return fHandlerPrefixesMap; }
 
     // groups lists
-    const std::list<S_oahGroup>&
+    const std::list <S_oahGroup>&
                           getHandlerGroupsList () const
                               { return fHandlerGroupsList; }
 
@@ -1677,15 +1677,15 @@ class EXP oahHandler : public oahFindableElement //  smartable
                               { return fOptionsAndArguments; }
 
     // elements
-    const std::list<S_oahElement>&
+    const std::list <S_oahElement>&
                           getHandlerElementsList () const
                               { return fHandlerElementsList; }
 
-    const std::list<S_oahElement>&
+    const std::list <S_oahElement>&
                           getHandlerCommandLineElementsList () const
                               { return fHandlerCommandLineElementsList; }
 
-    const std::multiset<S_oahElement>&
+    const std::multiset <S_oahElement>&
                           getHandlerCommandLineElementsMultiset () const
                               { return fHandlerCommandLineElementsMultiset; }
 
@@ -1830,12 +1830,12 @@ class EXP oahHandler : public oahFindableElement //  smartable
 
     Bool                  findStringInFindableElement (
                             const std::string&               lowerCaseString,
-                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::list <S_oahFindStringMatch>& foundMatchesList,
                             std::ostream&                    os) const override;
 
     Bool                  fetchElementsMatchingStringInHandler (
                             const std::string&       lowerCaseString,
-                            std::list<S_oahElement>& foundElementsList,
+                            std::list <S_oahElement>& foundElementsList,
                             std::ostream&            os) const;
 
     void                  includeOptionsFileInHandler (
@@ -2026,17 +2026,17 @@ class EXP oahHandler : public oahFindableElement //  smartable
     std::string           fHandlerUsage;
 
     // prefixes map
-    std::map<std::string, S_oahPrefix>
+    std::map <std::string, S_oahPrefix>
                           fHandlerPrefixesMap;
 
     // single character names
-    std::set<std::string> fSingleCharacterNamesSet;
+    std::set <std::string> fSingleCharacterNamesSet;
 
     // groups list
-    std::list<S_oahGroup> fHandlerGroupsList;
+    std::list <S_oahGroup> fHandlerGroupsList;
 
     // elements map
-    std::map<std::string, S_oahElement>
+    std::map <std::string, S_oahElement>
                           fHandlerNamesToElementsMap;
 
 /* JMI
@@ -2082,13 +2082,13 @@ class EXP oahHandler : public oahFindableElement //  smartable
     // ------------------------------------------------------
 
     // all OAH elements are registered in the handler upon initialization
-    std::list<S_oahElement>
+    std::list <S_oahElement>
                           fHandlerElementsList;
 
     // those ones have be used in the command line
-    std::list<S_oahElement>
+    std::list <S_oahElement>
                           fHandlerCommandLineElementsList;
-    std::multiset<S_oahElement>
+    std::multiset <S_oahElement>
                           fHandlerCommandLineElementsMultiset;
 
     // launch command
@@ -2110,7 +2110,7 @@ class EXP oahHandler : public oahFindableElement //  smartable
     size_t                fMaximumVariableNameWidth;
 
     // elements uses
-    std::list<S_oahElementUse>
+    std::list <S_oahElementUse>
                           fElementUsesList;
 
     // options and arguments

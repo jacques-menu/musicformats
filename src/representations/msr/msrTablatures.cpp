@@ -475,7 +475,7 @@ void msrFrame::browseData (basevisitor* v)
   // browse frame notes if any
   if (fFrameFrameNotesList.size ()) {
     for (
-      std::list<S_msrFrameNote>::const_iterator i = fFrameFrameNotesList.begin ();
+      std::list <S_msrFrameNote>::const_iterator i = fFrameFrameNotesList.begin ();
       i != fFrameFrameNotesList.end ();
       ++i
   ) {
@@ -519,7 +519,7 @@ void msrFrame::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrFrameNote>::const_iterator
+    std::list <S_msrFrameNote>::const_iterator
       iBegin = fFrameFrameNotesList.begin (),
       iEnd   = fFrameFrameNotesList.end (),
       i      = iBegin;
@@ -546,7 +546,7 @@ void msrFrame::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<msrBarre>::const_iterator
+    std::list <msrBarre>::const_iterator
       iBegin = fFrameBarresList.begin (),
       iEnd   = fFrameBarresList.end (),
       i      = iBegin;

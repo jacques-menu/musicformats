@@ -163,7 +163,7 @@ class EXP mfslInput : public smartable
     mfslInputNameKind     getInputNameKind () const
                               { return fInputNameKind; }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
                           getNamesSet () const
                               { return fNamesSet; }
 
@@ -214,7 +214,7 @@ class EXP mfslInput : public smartable
 
     mfslInputNameKind     fInputNameKind;
 
-    std::set<std::string> fNamesSet;
+    std::set <std::string> fNamesSet;
 
     Bool                  fInputIsUsedInCaseInputStatements;
 
@@ -364,12 +364,12 @@ class EXP mfslCaseInputStatement : public smartable
 
     S_mfslInput           fCaseInputInput;
 
-    std::set<std::string> fCaseInputNamesSet;
+    std::set <std::string> fCaseInputNamesSet;
     list<std::string>     fCaseInputCurrentNamesList;
 
     // checking unused names
-    std::set<std::string> fUsedNames;
-    std::set<std::string> fCaseInputUnusedNames;
+    std::set <std::string> fUsedNames;
+    std::set <std::string> fCaseInputUnusedNames;
 };
 typedef SMARTP<mfslCaseInputStatement> S_mfslCaseInputStatement;
 EXP std::ostream& operator<< (std::ostream& os, const S_mfslCaseInputStatement& elt);
@@ -432,7 +432,7 @@ class EXP mfslChoice : public smartable
     mfslChoiceLabelKind   getChoiceLabelKind () const
                               { return fChoiceLabelKind; }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
                           getLabelsSet () const
                               { return fLabelsSet; }
 
@@ -491,7 +491,7 @@ class EXP mfslChoice : public smartable
     std::string           fChoiceLabel;
     mfslChoiceLabelKind   fChoiceLabelKind;
 
-    std::set<std::string> fLabelsSet;
+    std::set <std::string> fLabelsSet;
 
     std::string           fChoiceDefaultLabel;
 
@@ -642,12 +642,12 @@ class EXP mfslCaseChoiceStatement : public smartable
 
     S_mfslChoice          fCaseChoice;
 
-    std::set<std::string> fCaseLabelsSet;
+    std::set <std::string> fCaseLabelsSet;
     list<std::string>     fCaseCurrentLabelsList;
 
     // checking unused labels
-    std::set<std::string> fUsedLabels;
-    std::set<std::string> fCaseUnusedLabels;
+    std::set <std::string> fUsedLabels;
+    std::set <std::string> fCaseUnusedLabels;
 };
 typedef SMARTP<mfslCaseChoiceStatement> S_mfslCaseChoiceStatement;
 EXP std::ostream& operator<< (std::ostream& os, const S_mfslCaseChoiceStatement& elt);

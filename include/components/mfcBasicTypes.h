@@ -142,7 +142,7 @@ class EXP mfcVersion : public smartable
     static SMARTP<mfcVersion> create (
                             const S_mfcVersionNumber&     versionNumber,
                             const std::string&            versionDate,
-                            const std::list<std::string>& versionDescriptionItems);
+                            const std::list <std::string>& versionDescriptionItems);
 
   protected:
 
@@ -152,7 +152,7 @@ class EXP mfcVersion : public smartable
                           mfcVersion (
                             const S_mfcVersionNumber&     versionNumber,
                             const std::string&            versionDate,
-                            const std::list<std::string>& versionDescriptionItems);
+                            const std::list <std::string>& versionDescriptionItems);
 
     virtual               ~mfcVersion ();
 
@@ -167,7 +167,7 @@ class EXP mfcVersion : public smartable
     std::string           getVersionDate () const
                               { return fVersionDate; }
 
-    const std::list<std::string>&
+    const std::list <std::string>&
 
                           getVersionDescriptionItems () const
                               { return fVersionDescriptionItems; }
@@ -188,7 +188,7 @@ class EXP mfcVersion : public smartable
 
     S_mfcVersionNumber    fVersionNumber;
     std::string           fVersionDate;
-    std::list<std::string>
+    std::list <std::string>
                           fVersionDescriptionItems;
 };
 typedef SMARTP<mfcVersion> S_mfcVersion;
@@ -218,7 +218,7 @@ class EXP mfcVersionsHistory : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_mfcVersion>&
+    const std::list <S_mfcVersion>&
                           getVersionsList () const
                               { return fVersionsList; }
 
@@ -246,7 +246,7 @@ class EXP mfcVersionsHistory : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::list<S_mfcVersion>
+    std::list <S_mfcVersion>
                           fVersionsList;
 };
 typedef SMARTP<mfcVersionsHistory> S_mfcVersionsHistory;
@@ -489,11 +489,11 @@ class EXP mfcMultiComponent : public mfcComponent
     S_mfcOahComponent     getOahComponent () const
                               { return fOahComponent; }
 
-    const std::list<S_mfcRepresentationComponent>&
+    const std::list <S_mfcRepresentationComponent>&
                           getRepresentationComponentsList () const
                               { return fRepresentationComponentsList; }
 
-    const std::list<S_mfcPassComponent>&
+    const std::list <S_mfcPassComponent>&
                           getPassComponentsList () const
                               { return fPassComponentsList; }
 
@@ -549,10 +549,10 @@ class EXP mfcMultiComponent : public mfcComponent
 
     S_mfcOahComponent     fOahComponent;
 
-    std::list<S_mfcRepresentationComponent>
+    std::list <S_mfcRepresentationComponent>
                           fRepresentationComponentsList;
 
-    std::list<S_mfcPassComponent>
+    std::list <S_mfcPassComponent>
                           fPassComponentsList;
 
     // should the version number be at least equal to
@@ -664,7 +664,7 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_mfcConverterComponent>&
+    const std::list <S_mfcConverterComponent>&
                           getConverterComponentsList () const
                               { return fConverterComponentsList; }
 
@@ -699,7 +699,7 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
     // protected fields
     // ------------------------------------------------------
 
-    std::list<S_mfcConverterComponent>
+    std::list <S_mfcConverterComponent>
                           fConverterComponentsList;
 };
 typedef SMARTP<mfcLibraryComponent> S_mfcLibraryComponent;

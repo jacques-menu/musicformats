@@ -86,7 +86,7 @@ void mxsr2msrPopulatorVoiceHandler::displayTupletsStack (
     std::endl;
 
   if (tupletsStackSize) {
-    std::list<S_msrTuplet>::const_iterator
+    std::list <S_msrTuplet>::const_iterator
       iBegin = fTupletsStack.begin (),
       iEnd   = fTupletsStack.end (),
       i      = iBegin;
@@ -135,7 +135,7 @@ void mxsr2msrPopulatorVoiceHandler::displayTupletsStack (
 //   }
 //
 //   else {
-//     std::map<std::pair<int, int>, S_msrTuplet>::const_iterator
+//     std::map <std::pair <int, int>, S_msrTuplet>::const_iterator
 //       iBegin = fLastHandledTupletInVoiceMap.begin (),
 //       iEnd   = fLastHandledTupletInVoiceMap.end (),
 //       i      = iBegin;
@@ -326,6 +326,7 @@ std::string mxsr2msrPopulatorVoiceHandler::asString () const
 
   ss <<
 		"[mxsr2msrPopulatorVoiceHandler" <<
+    ", fMsrVoice: " << fMsrVoice->getVoiceName () <<
     ']' <<
     std::endl;
 
@@ -340,13 +341,13 @@ void mxsr2msrPopulatorVoiceHandler::print (std::ostream& os) const
 
 	++gIndenter;
 
-  const int fieldWidth = 14;
+  const int fieldWidth = 33;
 
   os << std::left <<
     std::setw (fieldWidth) <<
     "fMsrVoice" << ": " <<
     fMsrVoice->getVoiceName () <<
-    std::endl <<
+    std::endl << std::endl <<
 
 //     std::setw (fieldWidth) <<
 //     "fLastMetNoteInVoice" << ": " <<
@@ -380,9 +381,9 @@ void mxsr2msrPopulatorVoiceHandler::print (std::ostream& os) const
   } // for
   --gIndenter;
 
-	os << ']' << std::endl;
-
   --gIndenter;
+
+	os << ']' << std::endl;
 }
 
 std::ostream& operator << (std::ostream& os, const mxsr2msrPopulatorVoiceHandler& elt)
@@ -864,11 +865,16 @@ void mxsr2msrSkeletonPopulator::displayStaffAndVoiceInformation (
 		mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
 		", fCurrentRecipientStaffNumber: " <<
 		mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
-		", fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]: ";
+		", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: ";
 
-	if (fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]) {
+	if (
+	  fCurrentPartStaffVoicesMap
+      [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]
+  ) {
 		gLog <<
-			fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName ();
+			fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName ();
 	}
 	else {
 		gLog << "[NULL]";
@@ -885,45 +891,54 @@ void mxsr2msrSkeletonPopulator::printVoicesLastMetNoteMap (
   const std::string& context)
 {
   size_t
-    voicesLastMetNoteMapSize =
-      fVoicesLastMetNoteMap.size ();
+    staffVoicesLastMetNoteMapSize =
+      fStaffVoicesLastMetNoteMap.size ();
 
   gLog <<
     std::endl <<
-    "fVoicesLastMetNoteMap contains " <<
+    "fStaffVoicesLastMetNoteMap contains " <<
     mfSingularOrPlural (
-      voicesLastMetNoteMapSize, "element", "elements") <<
+      staffVoicesLastMetNoteMapSize, "stave", "staves") <<
     ", context: " << context <<
     ", line " << inputLineNumber <<
     ":" <<
     std::endl;
 
-  if (voicesLastMetNoteMapSize) {
+  if (staffVoicesLastMetNoteMapSize) {
     ++gIndenter;
 
-    std::map<std::pair<int, int>, S_msrNote>::const_iterator
-      iBegin = fVoicesLastMetNoteMap.begin (),
-      iEnd   = fVoicesLastMetNoteMap.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      gLog <<
-  //      (*i).first->getVoiceName () <<
-        "staff " << (*i).first.first <<
-        ", voice " <<  (*i).first.second <<
-        ":" <<
-        std::endl;
+    for (
+      std::pair <int, std::map <int, S_msrNote>> primaryPair :
+        fStaffVoicesLastMetNoteMap
+    ) {
+      int
+        staffNumber = primaryPair.first;
 
-      ++gIndenter;
+      for (
+        std::pair <int, S_msrNote> secondaryPair :
+          primaryPair.second
+      ) {
+        int
+          voiceNumber = secondaryPair.first;
+        S_msrNote
+          note = secondaryPair.second;
 
-      gLog <<
-        (*i).second <<
-        std::endl;
+        gLog <<
+          "staffNumber " << staffNumber <<
+          ", voiceNumber " <<  voiceNumber <<
+          ":" <<
+          std::endl;
 
-      --gIndenter;
+        ++gIndenter;
 
-      if (++i == iEnd) break;
+        gLog <<
+          note <<
+          std::endl;
 
-      gLog << std::endl;
+        --gIndenter;
+
+        gLog << std::endl;
+      } // for
     } // for
 
     --gIndenter;
@@ -999,7 +1014,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart (
 
   // populate the vector
   for (
-    std::pair<int, S_msrStaff> thePair : fCurrentPart->getPartStavesMap ()
+    std::pair <int, S_msrStaff> thePair : fCurrentPart->getPartStavesMap ()
   ) {
     int staffNumber  = thePair.first;
     S_msrStaff staff = thePair.second;
@@ -1059,31 +1074,21 @@ void mxsr2msrSkeletonPopulator::displayCurrentPartStavesVector (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::populateCurrentPartVoicesVectorsFromPart (
+void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
   const S_msrPart& part)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  int
-    partMinimumVoiceNumber =
-      part->getPartMinimumVoiceNumber ();
-#endif // MF_TRACE_IS_ENABLED
-
-  int
-    partMaximumVoiceNumber =
-      part->getPartMaximumVoiceNumber ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (true ||
+    gTraceOahGroup->getTraceStavesBasics ()
+      ||
+    gTraceOahGroup->getTraceVoicesBasics ()
+  ) {
     std::stringstream ss;
 
     ss <<
-      ">>> Populating the voices vectors for part \"" <<
+      ">>> Populating the staff voices maps for part \"" <<
       part->getPartName () <<
-      "\", whose voice numbers ranges from " <<
-      partMinimumVoiceNumber <<
-      " to " <<
-      partMaximumVoiceNumber <<
-      ", maybe with holes";
+      "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1092,78 +1097,207 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartVoicesVectorsFromPart (
 #endif // MF_TRACE_IS_ENABLED
 
   // forget any previous contents if any
-  fCurrentPartVoicesVector.clear ();
-  fCurrentPartPopulatorVoicesHandlersVector.clear ();
-
-  // reserve room for enough elements
-  fCurrentPartVoicesVector.reserve (partMaximumVoiceNumber + 1); // index 0 is not used
-  fCurrentPartPopulatorVoicesHandlersVector.reserve (partMaximumVoiceNumber + 1); // index 0 is not used
+  fCurrentPartStaffVoicesMap.clear ();
+  fCurrentStaffVoiceHandlersMap.clear ();
 
   // populate the voices vector
-  for (
-    std::pair<int, S_msrVoice> thePair : fCurrentPart->getPartVoicesMap ()
-  ) {
-    int        voiceNumber  = thePair.first;
-    S_msrVoice voice        = thePair.second;
+  size_t
+    currentPartStaffVoicesMapSize =
+      part->getPartStaffVoicesMap ().size ();
 
+  gLog <<
+    std::endl <<
+    "part->getPartStaffVoicesMap() from part " <<
+    part->getPartName () <<
+    " contains " <<
+    mfSingularOrPlural (
+      currentPartStaffVoicesMapSize, "stave", "staves") <<
+    ":" <<
+    std::endl;
+
+  if (currentPartStaffVoicesMapSize) {
+    ++gIndenter;
+
+    for (
+      std::pair <int, std::map <int, S_msrVoice>> primaryPair :
+        part->getPartStaffVoicesMap ()
+    ) {
+      int
+        staffNumber = primaryPair.first;
+
+      for (
+        std::pair <int, S_msrVoice> secondaryPair :
+          primaryPair.second
+      ) {
+        int
+          voiceNumber = secondaryPair.first;
+        S_msrVoice
+          voice = secondaryPair.second;
+
+        // register the regular voice
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceVoices ()) {
-      std::stringstream ss;
+        if (gTraceOahGroup->getTraceVoicesBasics ()) {
+          std::stringstream ss;
 
-      ss <<
-        ">>> Creating the voice handler for voice " <<
-        voiceNumber <<
-        " in part \"" <<
-        part->getPartName () <<
-        "\", whose voice numbers ranges from " <<
-        partMinimumVoiceNumber <<
-        " to " <<
-        partMaximumVoiceNumber <<
-        ", maybe with holes";
+          ss <<
+            ">>> Creating the voice handler for voice " <<
+            voice <<
+            " in staff " <<
+            staffNumber <<
+            " in part \"" <<
+            part->getPartName () <<
+            "\"";
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+          gWaeHandler->waeTrace (
+            __FILE__, __LINE__,
+            ss.str ());
+        }
 #endif // MF_TRACE_IS_ENABLED
 
-    // register the regular voice
-    fCurrentPartVoicesVector [voiceNumber] = voice;
+        fCurrentPartStaffVoicesMap
+          [staffNumber][voiceNumber] =
+            voice;
 
-    // create the voice voice handler for it
-    fCurrentPartPopulatorVoicesHandlersVector [voiceNumber] =
-      mxsr2msrPopulatorVoiceHandler::create (voice);
-  } // for
+        // create the voice voice handler for it
+        fCurrentStaffVoiceHandlersMap
+          [staffNumber][voiceNumber] =
+            mxsr2msrPopulatorVoiceHandler::create (voice);
+      } // for
+    } // for
+
+    --gIndenter;
+  }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
-    std::stringstream ss;
+  if (true ||
+    gTraceOahGroup->getTraceStavesBasics ()
+      ||
+    gTraceOahGroup->getTraceVoicesBasics ()
+  ) {
+    // display the resulting maps
+    displayCurrentStaffVoiceHandlersMap ();
 
-    displayCurrentPartVoicesVector (
+    displayCurrentPartStaffVoicesMap (
       0,
-      "after mxsr2msrSkeletonPopulator::populateCurrentPartVoicesVectorsFromPart()");
+      "after mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart()");
   }
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrSkeletonPopulator::displayCurrentPartVoicesVector (
+void mxsr2msrSkeletonPopulator::displayCurrentPartStaffVoicesMap (
   int                inputLineNumber,
   const std::string& context)
 {
+  size_t
+    currentPartStaffVoicesMapSize =
+      fCurrentPartStaffVoicesMap.size ();
+
   gLog <<
-    ">>> fCurrentPartVoicesVector contents" <<
+    std::endl <<
+    "fCurrentPartStaffVoicesMap contains " <<
+    mfSingularOrPlural (
+      currentPartStaffVoicesMapSize, "stave", "staves") <<
     ", context: " << context <<
+    ", line " << inputLineNumber <<
+    ":" <<
     std::endl;
 
-  for (S_msrVoice voice : fCurrentPartVoicesVector) {
-    int voiceNumber = voice->getVoiceNumber ();
+  if (currentPartStaffVoicesMapSize) {
+    ++gIndenter;
 
-    gLog <<
-      voiceNumber <<
-      ": " <<
-      voice->asShortString () <<
-      std::endl;
-  } // for
+    for (
+      std::pair <int, std::map <int, S_msrVoice>> primaryPair :
+        fCurrentPartStaffVoicesMap
+    ) {
+      int
+        staffNumber = primaryPair.first;
+
+      for (
+        std::pair <int, S_msrVoice> secondaryPair :
+          primaryPair.second
+      ) {
+        int
+          voiceNumber = secondaryPair.first;
+        S_msrVoice
+          voice = secondaryPair.second;
+
+        gLog <<
+          "staffNumber " << staffNumber <<
+          ", voiceNumber " <<  voiceNumber <<
+          ":" <<
+          std::endl;
+
+        ++gIndenter;
+
+        gLog <<
+          voice <<
+          std::endl;
+
+        --gIndenter;
+
+        gLog << std::endl;
+      } // for
+    } // for
+
+    --gIndenter;
+  }
+
+  gLog << std::endl;
+}
+
+void mxsr2msrSkeletonPopulator::displayCurrentStaffVoiceHandlersMap ()
+{
+  size_t
+    currentStaffVoiceHandlersMapSize =
+      fCurrentStaffVoiceHandlersMap.size ();
+
+  gLog <<
+    std::endl <<
+    "fCurrentStaffVoiceHandlersMap contains " <<
+    mfSingularOrPlural (
+      currentStaffVoiceHandlersMapSize, "stave", "staves") <<
+    ":" <<
+    std::endl;
+
+  if (currentStaffVoiceHandlersMapSize) {
+    ++gIndenter;
+
+    for (
+      std::pair <int, std::map <int, S_mxsr2msrPopulatorVoiceHandler>> primaryPair :
+        fCurrentStaffVoiceHandlersMap
+    ) {
+      int
+        staffNumber = primaryPair.first;
+
+      for (
+        std::pair <int, S_mxsr2msrPopulatorVoiceHandler> secondaryPair :
+          primaryPair.second
+      ) {
+        int
+          voiceNumber = secondaryPair.first;
+        S_mxsr2msrPopulatorVoiceHandler
+          voiceHandler = secondaryPair.second;
+
+        gLog <<
+          "staffNumber " << staffNumber <<
+          ", voiceNumber " <<  voiceNumber <<
+          ":" <<
+          std::endl;
+
+        ++gIndenter;
+
+        gLog <<
+          voiceHandler <<
+          std::endl;
+
+        --gIndenter;
+
+        gLog << std::endl;
+      } // for
+    } // for
+
+    --gIndenter;
+  }
 
   gLog << std::endl;
 }
@@ -2857,7 +2991,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   // sanity check
   if (! fCurrentPart) {
     // fetch fMsrScore's part list
-    std::list<S_msrPart> partsList;
+    std::list <S_msrPart> partsList;
 
     fMsrScore->
       collectScorePartsList (
@@ -2951,10 +3085,10 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
+  if (gTraceOahGroup->getTraceVoicesBasics ()) {
     // display the current part's voices map
     fCurrentPart->
-      displayPartVoicesMap (
+      displayPartStaffVoicesMap (
         elt->getInputStartLineNumber (),
         "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
@@ -2973,12 +3107,12 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 #endif
 
   // populate the voices vector from the current part
-  populateCurrentPartVoicesVectorsFromPart (fCurrentPart);
+  populateCurrentPartStaffVoicesMapsFromPart (fCurrentPart);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
     // display the voices vectors
-    displayCurrentPartVoicesVector (
+    displayCurrentPartStaffVoicesMap (
       elt->getInputStartLineNumber (),
       "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
@@ -3032,7 +3166,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 //   fCurrentNoteIsCrossStaves = false; // needed ??? JMI v0.9.68
 
   // get this part's staves map
-  std::map<int, S_msrStaff>
+  std::map <int, S_msrStaff>
     partStavesMap =
       fCurrentPart->
         getPartStavesMap ();
@@ -3102,7 +3236,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
   // can now be appended to the latter's voice
   // prior to the note itself
 //   attachPendingVoiceLevelElementsToVoice (
-//     fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]);
+//     fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]);
 
   attachPendingPartLevelElementsIfAnyToPart (
     fCurrentPart);
@@ -3114,7 +3249,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 
   // is this part name in the parts ignore IDs set?
   if (gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().size ()) {
-    std::set<std::string>::iterator
+    std::set <std::string>::iterator
       it =
         gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().find (
           fCurrentPart->
@@ -3134,7 +3269,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 
   // is this part name in the parts keep IDs set?
   if (gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().size ()) {
-    std::set<std::string>::iterator
+    std::set <std::string>::iterator
       it =
         gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().find (
           fCurrentPart->
@@ -3154,7 +3289,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 
   // is this part name in the parts ignore names set?
   if (gGlobalMxsr2msrOahGroup->getMusicXMLPartsIgnoreNameSet ().size ()) {
-    std::set<std::string>::iterator
+    std::set <std::string>::iterator
       it =
         gGlobalMxsr2msrOahGroup->getMusicXMLPartsIgnoreNameSet ().find (
           fCurrentPart->
@@ -3174,7 +3309,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 
   // is this part name in the parts keep names set?
   if (gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().size ()) {
-    std::set<std::string>::iterator
+    std::set <std::string>::iterator
       it =
         gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().find (
           fCurrentPart->
@@ -3658,12 +3793,12 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
   }
 
   // is this clef sign in the replace clef map?
-  const std::map<msrClefKind, msrClefKind>&
+  const std::map <msrClefKind, msrClefKind>&
     replaceClefKindToClefKindMapVariable =
       gGlobalMxsr2msrOahGroup->
         getReplaceClefKindToClefKindMapVariable ();
 
-  std::map<msrClefKind, msrClefKind>::const_iterator
+  std::map <msrClefKind, msrClefKind>::const_iterator
     it =
       replaceClefKindToClefKindMapVariable.find (clefKind);
 
@@ -4043,7 +4178,7 @@ If the cancel attribute is
 
     int counter = 0;
     for (
-      std::vector<S_msrHumdrumScotKeyItem>::const_iterator i =
+      std::vector <S_msrHumdrumScotKeyItem>::const_iterator i =
         fCurrentHumdrumScotKeyItemsVector.begin ();
       i != fCurrentHumdrumScotKeyItemsVector.end ();
       ++i
@@ -4259,7 +4394,7 @@ S_msrKey mxsr2msrSkeletonPopulator::handleHumdrumScotKey (
   // populate the key with the Humdrum/Scot items
   if (fCurrentHumdrumScotKeyItemsVector.size ()) {
     for (
-      std::vector<S_msrHumdrumScotKeyItem>::const_iterator i =
+      std::vector <S_msrHumdrumScotKeyItem>::const_iterator i =
         fCurrentHumdrumScotKeyItemsVector.begin ();
       i != fCurrentHumdrumScotKeyItemsVector.end ();
       ++i
@@ -4382,7 +4517,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
   int beatType = (int)(*elt);
 
   // extract the numbers list from the beat type
-  std::list<int>
+  std::list <int>
     beatNumbers =
       mfExtractNumbersFromString (
         fCurrentTimeSignatureBeats, // may contain "1+5+3"
@@ -4398,7 +4533,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
   if (beatNumbers.size ()) {
     // append the beats numbers to the time signature item
     for (
-      std::list<int>::const_iterator i = beatNumbers.begin ();
+      std::list <int>::const_iterator i = beatNumbers.begin ();
       i != beatNumbers.end ();
       ++i
   ) {
@@ -8373,7 +8508,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   // fetch the voice to be forwarded to
   S_msrVoice
     voiceToBeForwardedTo =
-      fCurrentPartVoicesVector [fCurrentForwardVoiceNumber];
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentForwardVoiceNumber];
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -8524,7 +8660,7 @@ void mxsr2msrSkeletonPopulator::displaySlurStartsStack (
     std::endl;
 
   if (fSlurStartsStack.size ()) {
-    std::list<S_msrSlur>::const_iterator
+    std::list <S_msrSlur>::const_iterator
       iBegin = fSlurStartsStack.begin (),
       iEnd   = fSlurStartsStack.end (),
       i      = iBegin;
@@ -8580,7 +8716,7 @@ void mxsr2msrSkeletonPopulator::displaySlurStartsStack (
 //     std::endl;
 //
 //   if (tupletsStackSize) {
-//     std::list<S_msrTuplet>::const_iterator
+//     std::list <S_msrTuplet>::const_iterator
 //       iBegin = fTupletsStack.begin (),
 //       iEnd   = fTupletsStack.end (),
 //       i      = iBegin;
@@ -8629,7 +8765,7 @@ void mxsr2msrSkeletonPopulator::displaySlurStartsStack (
 //     std::endl;
 //
 //   if (mxsr2msrPopulatorVoiceHandlersVectorSize) {
-//     std::vector<S_msrTuplet>::const_iterator
+//     std::vector <S_msrTuplet>::const_iterator
 //       iBegin = fMxsrTupletsVector.begin (),
 //       iEnd   = fMxsrTupletsVectorfMxsrTupletsVector.end (),
 //       i      = iBegin;
@@ -10097,7 +10233,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     // fetch the current voice, fCurrentNote has not been set/updated yet
     S_msrVoice
       currentNoteVoice =
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber];
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
     // fetch stanzaNumber in the current note's voice
     S_msrStanza
@@ -10432,7 +10569,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   // is this measure number in the debug set?
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceDetailed ()) {
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       it =
         gServiceRunData->fTraceDetailedMeasureNumbersSet.find (fMeasuresCounter);
 
@@ -10479,15 +10616,16 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
     // fetch the voice
     S_msrVoice
       voice =
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber];
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
     // fetch note to attach to
     S_msrNote
       noteToAttachTo =
       /*
       // JMI might prove not precise enough???
-  //      fVoicesLastMetNoteMap [currentNoteVoice];
-        fVoicesLastMetNoteMap [
+  //      fStaffVoicesLastMetNoteMap [currentNoteVoice];
+        fStaffVoicesLastMetNoteMap [
           std::make_pair (
             fCurrentNoteStaffNumber,
             fCurrentNoteVoiceNumber)
@@ -10608,13 +10746,13 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
         elt->getInputStartLineNumber ());
 
     // should this measure be replicated?
-    const std::map<std::string,int>&
+    const std::map <std::string,int>&
       measuresToBeReplicatedStringToIntMap =
         gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedStringToIntMap ();
 
     if (measuresToBeReplicatedStringToIntMap.size ()) { // JMI v0.9.70
       // should we add empty measures after current measures?
-      std::map<std::string,int>::const_iterator
+      std::map <std::string,int>::const_iterator
         it =
           measuresToBeReplicatedStringToIntMap.find (
             fCurrentMeasureNumber);
@@ -10652,13 +10790,13 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   }
 
   // should empty measures be added after this one?
-  const std::map<std::string,int>&
+  const std::map <std::string,int>&
     addEmptyMeasuresStringToIntMap =
       gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ();
 
   if (addEmptyMeasuresStringToIntMap.size ()) {
     // should we add empty measures after current measures?
-    std::map<std::string,int>::const_iterator
+    std::map <std::string,int>::const_iterator
       it =
         addEmptyMeasuresStringToIntMap.find (
           fCurrentMeasureNumber);
@@ -12082,25 +12220,47 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
   // initialize note data to a neutral state
   initializeNoteData ();
 
-  if (gGlobalMxsr2msrOahGroup->getUseMxsrEvents ()) { // EVENTS
+  // fetch the staff changes events on this note if any
+//   fCurrentNoteStaffChangeEvent =
+//     fKnownEventsCollection.
+//       fetchStaffChangeEventAtNoteSequentialNumber (
+//         fCurrentNoteSequentialNumber);
+//   fCurrentNoteStaffChangeEvent =
+//     fKnownEventsCollection.
+//       fetchStaffChangeTakeOffAtNoteSequentialNumber (
+//         fCurrentNoteSequentialNumber);
+  fCurrentNoteStaffChangeEvent =
+    fKnownEventsCollection.
+      fetchStaffChangeLandingAtNoteSequentialNumber (
+        fCurrentNoteSequentialNumber);
+
+  if (fCurrentNoteStaffChangeEvent) {
+    // there is a staff change
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
-      gLog <<
-        "====>>> fCurrentNoteChordEvent:";
-      if (fCurrentNoteChordEvent) {
-        gLog << std::endl;
-        ++gIndenter;
-        gLog <<
-          fCurrentNoteChordEvent;
-        --gIndenter;
-      }
-      else {
-        gLog << "[NULL]" << std::endl;
-      }
+    if (true || gTraceOahGroup->getTraceStaffChangesBasics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "==> visitStart (S_note& elt): "
+        "There is a staff change " <<
+        fCurrentNoteStaffChangeEvent->getStaffChangeEventKind () <<
+        " event at fCurrentNoteSequentialNumber: " <<
+        fCurrentNoteSequentialNumber <<
+        ": " <<
+        fCurrentNoteStaffChangeEvent->asString () <<
+        ", line " <<
+        fCurrentNoteStaffChangeEvent->getEventInputStartLineNumber ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
 
-  // chords events
+    fOnGoingStaffChange = true;
+  }
+
+  // get the chords events if any
   if (gGlobalMxsr2msrOahGroup->getUseMxsrEvents ()) { // EVENTS
     switch (fCurrentNoteChordEvent->getChordEventKind ()) { // EVENTS
       case mxsrChordEventKind::kEventChord_NONE:
@@ -12113,7 +12273,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
         break;
     } // switch
   }
-}
 
 
 // \new PianoStaff <<
@@ -12131,8 +12290,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 // >>
 
 
-  // handle the tuplet events upon this note if any
-  std::multimap<int, S_mxsrTupletEvent>::const_iterator
+  // fetch the tuplet events upon this note if any
+  std::multimap <int, S_mxsrTupletEvent>::const_iterator
     firstTupletEventInRange,
     lastTupletEventInRange;
 
@@ -12142,7 +12301,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
     lastTupletEventInRange);
 
   for (
-    std::multimap<int, S_mxsrTupletEvent>::const_iterator it =
+    std::multimap <int, S_mxsrTupletEvent>::const_iterator it =
      firstTupletEventInRange;
     it != lastTupletEventInRange;
     ++it
@@ -12220,16 +12379,19 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 //   int
 //     firstNoteStaffNumber =
 // //       elt->fetchUpLinkToNoteToStaff ())->
-//       fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+//       fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]->
 //         fetchUpLinkToNoteToStaff ()->
 //           getStaffNumber ();
 //
 //   if (firstNoteStaffNumber > 1) { // 1 is the default LilyPond staff number
 //     S_msrStaff
 //       takeOffStaff =
-//         fCurrentPartVoicesVector [1],
+//         fCurrentPartStaffVoicesMap
+//         [1],
 //       landingStaff =
-//         fCurrentPartVoicesVector [fCurrentNoteStaffNumber]
+//         fCurrentPartStaffVoicesMap
+//         [fCurrentNoteStaffNumber]
 //
 //     // create the voice staff change
 //     S_msrVoiceStaffChange
@@ -12242,42 +12404,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 //
 //     // append it to the previous note's voice
 //     // before the note itself is appended
-//     fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+//     fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]->
 //       appendVoiceStaffChangeToVoice (
 //         voiceStaffChange);
 //   }
 
-  // fetch the staff changes events on this note if any
-  fCurrentNoteStaffChangeEvent =
-    fKnownEventsCollection.
-      fetchStaffChangeEventAtNoteSequentialNumber (
-        fCurrentNoteSequentialNumber);
 
-  if (fCurrentNoteStaffChangeEvent) {
-    // there is a staff change
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
-      std::stringstream ss;
 
-      ss <<
-        "==> visitStart (S_note& elt): "
-        "There is a staff change event at fCurrentNoteSequentialNumber: " <<
-        fCurrentNoteSequentialNumber <<
-        ": " <<
-        fCurrentNoteStaffChangeEvent->asString () <<
-        ", line " <<
-        fCurrentNoteStaffChangeEvent->getEventInputStartLineNumber ();
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    handleStaffChangeIfAny ();
-
-    fOnGoingStaffChange = true;
-  }
 
   // harmonies
 
@@ -15935,7 +16069,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
         // fetch the current note's voice
 //         S_msrVoice UNUSED
 //           currentNoteVoice =
-//             fCurrentPartVoicesVector [fCurrentNoteVoiceNumber];
+//             fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber];
 
         // create a double tremolo start
 #ifdef MF_TRACE_IS_ENABLED
@@ -19549,8 +19684,10 @@ S_msrChord mxsr2msrSkeletonPopulator::createChordFromItsFirstNote (
     ss <<
       "Creating a chord from its first note " <<
       chordFirstNote->asShortString () <<
-      ", fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]: \"" <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+      ", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber;
 
@@ -19593,7 +19730,8 @@ S_msrChord mxsr2msrSkeletonPopulator::createChordFromItsFirstNote (
   chord->
     addFirstNoteToChord (
       chordFirstNote,
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]);
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]);
 
   // set chordFirstNote's kind
   chordFirstNote->
@@ -19706,8 +19844,8 @@ void mxsr2msrSkeletonPopulator::printVoicesCurrentChordMap ()
 
     ++gIndenter;
 
-//    std::map<S_msrVoice, S_msrChord>::const_iterator
-    std::map<std::pair<int, int>, S_msrChord>::const_iterator
+//    std::map <S_msrVoice, S_msrChord>::const_iterator
+    std::map <std::pair <int, int>, S_msrChord>::const_iterator
       iBegin = fVoicesCurrentChordMap.begin (),
       iEnd   = fVoicesCurrentChordMap.end (),
       i      = iBegin;
@@ -19833,7 +19971,7 @@ void mxsr2msrSkeletonPopulator::copyNoteArticulationsListToChord (
 {
   // copy note's articulations if any from the first note to chord
 
-  std::list<S_msrArticulation>
+  std::list <S_msrArticulation>
     noteArticulationsList =
       note->
         getNoteArticulationsList ();
@@ -19868,7 +20006,7 @@ void mxsr2msrSkeletonPopulator::copyNoteTechnicalsListToChord (
 {
   // copy note's technicals if any from the first note to chord
 
-  std::list<S_msrTechnical>
+  std::list <S_msrTechnical>
     noteTechnicalsList =
       note->
         getNoteTechnicalsList ();
@@ -19900,7 +20038,7 @@ void mxsr2msrSkeletonPopulator::copyNoteTechnicalWithIntegersListToChord (
 {
   // copy note's technicals if any from the first note to chord
 
-  std::list<S_msrTechnicalWithInteger>
+  std::list <S_msrTechnicalWithInteger>
     noteTechnicalWithIntegersList =
       note->
         getNoteTechnicalWithIntegersList ();
@@ -19930,7 +20068,7 @@ void mxsr2msrSkeletonPopulator::copyNoteTechnicalWithFloatsListToChord (
 {
   // copy note's technicals if any from the first note to chord
 
-  std::list<S_msrTechnicalWithFloat>
+  std::list <S_msrTechnicalWithFloat>
     noteTechnicalWithFloatsList =
       note->
         getNoteTechnicalWithFloatsList ();
@@ -19965,7 +20103,7 @@ void mxsr2msrSkeletonPopulator::copyNoteTechnicalWithStringsListToChord (
 {
   // copy note's technicals if any from the first note to chord
 
-  std::list<S_msrTechnicalWithString>
+  std::list <S_msrTechnicalWithString>
     noteTechnicalWithStringsList =
       note->
         getNoteTechnicalWithStringsList ();
@@ -20000,7 +20138,7 @@ void mxsr2msrSkeletonPopulator::copyNoteOrnamentsListToChord (
 {
   // copy note's ornaments if any from the first note to chord
 
-  std::list<S_msrOrnament>
+  std::list <S_msrOrnament>
     noteOrnamentsList =
       note->
         getNoteOrnamentsList ();
@@ -20035,7 +20173,7 @@ void mxsr2msrSkeletonPopulator::copyNoteSpannersListToChord (
 {
   // copy note's spanners if any from the first note to chord
 
-  std::list<S_msrSpanner>
+  std::list <S_msrSpanner>
     noteSpannersList =
       note->
         getNoteSpannersList ();
@@ -20104,7 +20242,7 @@ void mxsr2msrSkeletonPopulator::copyNoteDynamicsListToChord (
 {
   // copy note's dynamics if any from the first note to chord
 
-  std::list<S_msrDynamic>
+  std::list <S_msrDynamic>
     noteDynamicsList =
       note->
         getNoteDynamicsList ();
@@ -20139,7 +20277,7 @@ void mxsr2msrSkeletonPopulator::copyNoteOtherDynamicsListToChord (
 {
   // copy note's other dynamics if any from the first note to chord
 
-  std::list<S_msrOtherDynamic>
+  std::list <S_msrOtherDynamic>
     noteOtherDynamicsList =
       note->
         getNoteOtherDynamicsList ();
@@ -20174,12 +20312,12 @@ void mxsr2msrSkeletonPopulator::copyNoteWordsListToChord (
 {
   // copy note's words if any from the first note to chord
 
-  std::list<S_msrWords>
+  std::list <S_msrWords>
     noteWordsList =
       note->
         getNoteWordsList ();
 
-  std::list<S_msrWords>::const_iterator i;
+  std::list <S_msrWords>::const_iterator i;
 
   for (S_msrWords word : noteWordsList ) {
 
@@ -20246,12 +20384,12 @@ void mxsr2msrSkeletonPopulator::copyNoteBeamsListToChord (
 {
   // copy note's beams if any from the first note to chord
 
-  std::list<S_msrBeam>
+  std::list <S_msrBeam>
     noteBeamsList =
       note->
         getNoteBeamsList ();
 
-  std::list<S_msrBeam>::const_iterator i;
+  std::list <S_msrBeam>::const_iterator i;
   for (S_msrOtherDynamic : S_msrOtherDynamic ) {
      noteBeamsList.begin ();
     i != noteBeamsList.end ();
@@ -20301,7 +20439,7 @@ void mxsr2msrSkeletonPopulator::appendNoteBeamsListLinksToChord (
   const S_msrChord& chord)
 {
   // append link of note's beams if any from the first note to chord
-  std::list<S_msrBeam>
+  std::list <S_msrBeam>
     noteBeamsList =
       note->
         getNoteBeamsList ();
@@ -20365,7 +20503,7 @@ void mxsr2msrSkeletonPopulator::copyNoteTiesToChord (
 {
   // copy note's tie if any from the first note to chord
 
-  const std::list<S_msrTie>& noteTiesList = note->getNoteTiesList ();
+  const std::list <S_msrTie>& noteTiesList = note->getNoteTiesList ();
 
   if (noteTiesList.size ()) {
     for (S_msrTie noteTie : noteTiesList) {
@@ -20422,12 +20560,12 @@ void mxsr2msrSkeletonPopulator::copyNoteSlursListToChord (
 {
   // copy note's slurs if any from the first note to chord
 
-  std::list<S_msrSlur>
+  std::list <S_msrSlur>
     noteSlursList =
       note->
         getNoteSlursList ();
 
-  std::list<S_msrSlur>::const_iterator i;
+  std::list <S_msrSlur>::const_iterator i;
   for (S_msrOtherDynamic : S_msrOtherDynamic ) {
      noteSlursList.begin ();
     i != noteSlursList.end ();
@@ -20461,7 +20599,7 @@ void mxsr2msrSkeletonPopulator::appendNoteSlursListLinksToChord (
 {
   // append link of note's slurs if any from the first note to chord
 
-  std::list<S_msrSlur>
+  std::list <S_msrSlur>
     noteSlursList =
       note->
         getNoteSlursList ();
@@ -20523,7 +20661,7 @@ void mxsr2msrSkeletonPopulator::copyNoteLigaturesListToChord (
 {
   // copy note's ligatures if any from the first note to chord
 
-  std::list<S_msrLigature>
+  std::list <S_msrLigature>
     noteLigaturesList =
       note->
         getNoteLigaturesList ();
@@ -20558,7 +20696,7 @@ void mxsr2msrSkeletonPopulator::copyNotePedalsListToChord (
 {
   // copy note's pedals if any from the first note to chord
 
-  std::list<S_msrPedal>
+  std::list <S_msrPedal>
     notePedalsList =
       note->
         getNotePedalsList ();
@@ -20593,7 +20731,7 @@ void mxsr2msrSkeletonPopulator::copyNoteSlashesListToChord (
 {
   // copy note's slashes if any from the first note to chord
 
-  std::list<S_msrSlash>
+  std::list <S_msrSlash>
     noteSlashesList =
       note->
         getNoteSlashesList ();
@@ -20628,12 +20766,12 @@ void mxsr2msrSkeletonPopulator::copyNoteWedgesListToChord (
 {
   // copy note's wedges if any from the first note to chord
 
-  std::list<S_msrWedge>
+  std::list <S_msrWedge>
     noteWedgesList =
       note->
         getNoteWedgesList ();
 
-  std::list<S_msrWedge>::const_iterator i;
+  std::list <S_msrWedge>::const_iterator i;
   for (S_msrWedge wedge : noteWedgesList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -20664,12 +20802,12 @@ void mxsr2msrSkeletonPopulator::copyNoteSegnosListToChord (
 {
   // copy note's segnos if any from the first note to chord
 
-  std::list<S_msrSegno>
+  std::list <S_msrSegno>
     noteSegnosList =
       note->
         getNoteSegnosList ();
 
-  std::list<S_msrSegno>::const_iterator i;
+  std::list <S_msrSegno>::const_iterator i;
   for (S_msrSegno segno : noteSegnosList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -20700,12 +20838,12 @@ void mxsr2msrSkeletonPopulator::copyNoteDalSegnosListToChord (
 {
   // copy note's dal segnos if any from the first note to chord
 
-  std::list<S_msrDalSegno>
+  std::list <S_msrDalSegno>
     noteDalSegnosList =
       note->
         getNoteDalSegnosList ();
 
-  std::list<S_msrDalSegno>::const_iterator i;
+  std::list <S_msrDalSegno>::const_iterator i;
   for (S_msrDalSegno dalSegno : noteDalSegnosList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -20736,12 +20874,12 @@ void mxsr2msrSkeletonPopulator::copyNoteCodasListToChord (
 {
   // copy note's codas if any from the first note to chord
 
-  std::list<S_msrCoda>
+  std::list <S_msrCoda>
     noteCodasList =
       note->
         getNoteCodasList ();
 
-  std::list<S_msrCoda>::const_iterator i;
+  std::list <S_msrCoda>::const_iterator i;
   for (S_msrCoda coda : noteCodasList ) {
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -20949,7 +21087,7 @@ void mxsr2msrSkeletonPopulator::copyNoteHarmoniesToChord (
 {
   // copy note's harmony if any from the first note to chord
 
-  const std::list<S_msrHarmony>&
+  const std::list <S_msrHarmony>&
     noteHarmoniesList =
       note->getNoteHarmoniesList ();
 
@@ -21248,7 +21386,8 @@ void mxsr2msrSkeletonPopulator::handleTupletStart (
   // handle tuplet
   S_mxsr2msrPopulatorVoiceHandler
     voiceHandler =
-      fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+      fCurrentStaffVoiceHandlersMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   switch (voiceHandler->getTupletsStackSize ()) {
     case 0:
@@ -21308,7 +21447,8 @@ void mxsr2msrSkeletonPopulator::handleTupletContinue (
 {
     S_mxsr2msrPopulatorVoiceHandler
       voiceHandler =
-        fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+        fCurrentStaffVoiceHandlersMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   if (voiceHandler->getTupletsStackSize ()) {
     S_msrTuplet
@@ -21356,8 +21496,9 @@ void mxsr2msrSkeletonPopulator::handleTupletContinue (
       appendNoteToTuplet (
         note);
 
-    fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-      registerTupletNoteInVoice (note);
+    fCurrentPartStaffVoicesMap
+      [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+        registerTupletNoteInVoice (note);
 
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -21406,7 +21547,8 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 {
     S_mxsr2msrPopulatorVoiceHandler
       voiceHandler =
-        fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+        fCurrentStaffVoiceHandlersMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   if (voiceHandler->getTupletsStackSize ()) {
     S_msrTuplet
@@ -21470,8 +21612,9 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
       appendNoteToTuplet (
         note);
 
-    fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-      registerTupletNoteInVoice (note);
+    fCurrentPartStaffVoicesMap
+      [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+        registerTupletNoteInVoice (note);
 
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
@@ -21531,7 +21674,7 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 //
 //   S_mxsr2msrPopulatorVoiceHandler
 //     voiceHandler =
-//       fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+//       fCurrentStaffVoiceHandlersMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 //
 //   switch (voiceHandler->getTupletsStackSize ()) {
 //     case 0:
@@ -21586,7 +21729,8 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 //             appendNoteToTuplet (
 //               note);
 //
-//           fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+//           fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]->
 //             registerTupletNoteInVoice (note);
 //         }
 //
@@ -21631,7 +21775,8 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 //           appendNoteToTuplet (
 //             note);
 //
-//         fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+//         fCurrentPartStaffVoicesMap
+//          [fCurrentNoteVoiceNumber]->
 //           registerTupletNoteInVoice (note);
 //
 //         voiceHandler->
@@ -22134,7 +22279,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentArticulationsToChord ( // JMI
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    std::list<S_msrArticulation>::const_iterator i;
+    std::list <S_msrArticulation>::const_iterator i;
     for (S_msrArticulation articulation : fCurrentArticulations) {
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -22175,7 +22320,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentOrnamentsToChord ( // JMI
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    std::list<S_msrOrnament>::const_iterator i;
+    std::list <S_msrOrnament>::const_iterator i;
     for (S_msrOrnament ornament : fCurrentOrnamentsList) {
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -23206,7 +23351,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
     // append ligatures to note only if they belong to a suitable voice,
     // i.e. above goes to voice 1 or 3, and below to voice 2 or 4
 
-    std::list<S_msrLigature>::iterator
+    std::list <S_msrLigature>::iterator
       iBegin = fPendingLigaturesList.begin (),
       iEnd   = fPendingLigaturesList.end (),
       i      = iBegin;
@@ -23555,7 +23700,7 @@ void mxsr2msrSkeletonPopulator::attachPendingWedgesToCurrentNote ()
 //   if (! delayAttachment) {
 //     while (fPendingVoiceWedgesList.size ()) {
 //       // grab voiceWedgePair
-//       std::pair<int, S_msrWedge>
+//       std::pair <int, S_msrWedge>
 //         voiceWedgePair =
 //           fPendingVoiceWedgesList.front ();
 //
@@ -23611,11 +23756,12 @@ void mxsr2msrSkeletonPopulator::attachPendingGlissandosToCurrentNote ()
         // fetch the voice
         S_msrVoice
           voice =
-            fCurrentPartVoicesVector [fCurrentNoteVoiceNumber];
+            fCurrentPartStaffVoicesMap
+              [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
 #ifdef MF_TRACE_IS_ENABLED
         // get the voice's stanzas map
-        const std::map<std::string, S_msrStanza>&
+        const std::map <std::string, S_msrStanza>&
           voiceStanzasMap =
             voice->
               getVoiceStanzasMap ();
@@ -23671,10 +23817,11 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
         // fetch the voice
         S_msrVoice
           voice =
-            fCurrentPartVoicesVector [fCurrentNoteVoiceNumber];
+            fCurrentPartStaffVoicesMap
+              [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
         // get the voice's stanzas map
-        const std::map<std::string, S_msrStanza>&
+        const std::map <std::string, S_msrStanza>&
           voiceStanzasMap =
             voice->
               getVoiceStanzasMap ();
@@ -23707,7 +23854,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
 #endif // MF_TRACE_IS_ENABLED
 
             for (
-              std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+              std::map <std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
               i != voiceStanzasMap.end ();
               ++i
             ) {
@@ -24356,7 +24503,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 
   // register note as the last one met in its voice
 #ifdef MF_TRACE_IS_ENABLED
-  if (
+  if (true ||
     gTraceOahGroup->getTraceNotesBasics ()
       ||
     gTraceOahGroup->getTraceStaffChangesBasics ()
@@ -24367,7 +24514,11 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
       "Setting last met note in voice " <<
       mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
       " to note " <<
-      note->asShortString ();
+      note->asShortString () <<
+      ", fCurrentRecipientStaffNumber: " <<
+  		mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
+      ", fCurrentNoteVoiceNumber: " <<
+  		mfVoiceNumberAsString (fCurrentNoteVoiceNumber);
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -24376,9 +24527,10 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 #endif // MF_TRACE_IS_ENABLED
 
   // register note as the last one in its voice
-  fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber]->
-    setLastMetNoteInVoice (
-      note);
+  fCurrentStaffVoiceHandlersMap
+    [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
+      setLastMetNoteInVoice (
+        note);
 
   return note;
 }
@@ -24695,7 +24847,7 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
 
 //   S_mxsr2msrPopulatorVoiceHandler
 //     voiceHandler =
-//       fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+//       fCurrentStaffVoiceHandlersMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   // handle the note itself
   if (fCurrentNoteBelongsToAChord) {
@@ -24717,14 +24869,14 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
       // note is the second, third, ..., member of a chord
       // whose first member is in
       // JMI ??? 'fLastHandledNoteInVoiceMap [currentVoice]' v0.9.67
-if (gGlobalMxsr2msrOahGroup->getUseMxsrEvents ()) { // EVENTS
-        handleChordMemberNote_EVENTS (
-          fCurrentNote);
-}
-else {
+// if (gGlobalMxsr2msrOahGroup->getUseMxsrEvents ()) { // EVENTS
+//         handleChordMemberNote_EVENTS (
+//           fCurrentNote);
+// }
+// else {
         handleChordMemberNote (
           fCurrentNote);
-}
+// }
     }
   }
 
@@ -24752,7 +24904,8 @@ else {
 
     const S_mxsr2msrPopulatorVoiceHandler&
       voiceHandler =
-        fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+        fCurrentStaffVoiceHandlersMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
     if (voiceHandler->getTupletsStackSize ()) {
       voiceHandler->
@@ -24826,7 +24979,8 @@ else {
       "--> STORING " <<
       fCurrentNote->asShortString () <<
       " as last note found in voice " <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () <<
       std::endl <<
       "-->  fCurrentNoteStaffNumber: " <<
       mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
@@ -24840,17 +24994,15 @@ else {
       std::endl <<
       * /
       "--> voice name : " <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () <<
       std::endl;
       */
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fVoicesLastMetNoteMap [
-    std::make_pair (
-      fCurrentNoteStaffNumber, // JMI ??? v0.9.72
-      fCurrentNoteVoiceNumber)
-    ] =
+  fStaffVoicesLastMetNoteMap
+    [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] =
       fCurrentNote;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -24897,8 +25049,9 @@ void mxsr2msrSkeletonPopulator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //       noteToAttachTo =
 //       /*
 //       // JMI might prove not precise enough???
-//   //      fVoicesLastMetNoteMap [fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]];
-//         fVoicesLastMetNoteMap [
+//   //      fStaffVoicesLastMetNoteMap [fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]];
+//         fStaffVoicesLastMetNoteMap [
 //           std::make_pair (
 //             fCurrentNoteStaffNumber,
 //             fCurrentNoteVoiceNumber)
@@ -25000,7 +25153,8 @@ void mxsr2msrSkeletonPopulator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //   // fetch the current voice
 //   S_msrVoice
 //     currentVoice =
-//       fCurrentPartVoicesVector [fCurrentNoteVoiceNumber];
+//       fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber];
 //
 //   // are there pending note level elements?
 //   attachPendingNoteLevelElementsIfAnyToCurrentNote ( // JMI
@@ -25074,7 +25228,8 @@ void mxsr2msrSkeletonPopulator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //   // fetch the current voice
 //   S_msrVoice
 //     currentVoice =
-//       fCurrentPartVoicesVector [fCurrentNoteVoiceNumber];
+//       fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber];
 //
 //   // are there pending note level elements?
 //   attachPendingNoteLevelElementsIfAnyToCurrentNote ( // JMI
@@ -25154,7 +25309,8 @@ void mxsr2msrSkeletonPopulator::finalizeTupletIfAny (
     if (aTupletIsStopping) {
       S_mxsr2msrPopulatorVoiceHandler
         voiceHandler =
-          fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+          fCurrentStaffVoiceHandlersMap
+            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
       if (voiceHandler->getTupletsStackSize ()) { // JMI v0.9.71
         voiceHandler->
@@ -25180,7 +25336,8 @@ void mxsr2msrSkeletonPopulator::finalizeTupletIfAny (
   }
 }
 
-void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny ()
+void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny (
+  int inputLineNumber)
 {
 /*
       Note 1:
@@ -25198,7 +25355,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny ()
 //   if (thereIsAStaffChange (inputLineNumber)) { // EVENTS
   if (fCurrentNoteStaffChangeEvent) { // EVENTS
 //   if (thereIsAStaffChange) {
-    // yes, KEEP APPENDING MUSIC TO fCurrentPartVoicesVector [fCurrentRecipientStaffNumber], NO CHANGE ACTUALLY!
+    // yes, KEEP APPENDING MUSIC TO fCurrentPartStaffVoicesMap [fCurrentRecipientStaffNumber], NO CHANGE ACTUALLY!
 
     int
       noteSequentialNumber =
@@ -25232,7 +25389,9 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny ()
 			std::stringstream ss;
 
 			ss <<
-				"===> There is a staff change event FOO:" <<
+				"===> There is a staff change " <<
+				fCurrentNoteStaffChangeEvent->getStaffChangeEventKind () <<
+				" event FOO:" <<
 				'\n' <<
 				"eventInputStartLineNumber: " <<
 				eventInputStartLineNumber <<
@@ -25309,9 +25468,10 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny ()
 
     // append the voice staff change to the event's voice number
     // before the note itself is appended
-    fCurrentPartVoicesVector [noteEventVoiceNumber]->
-      appendVoiceStaffChangeToVoice (
-        voiceStaffChange);
+    fCurrentPartStaffVoicesMap
+      [fCurrentNoteStaffNumber][noteEventVoiceNumber]->
+        appendVoiceStaffChangeToVoice (
+          voiceStaffChange);
 
     // the recipient staff for current note is the take off staff,
     // not the landing, current note staff
@@ -25319,10 +25479,28 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny ()
       takeOffStaffNumber; // JMI v0.9.72
   }
 
-  else {
-    fCurrentRecipientStaffNumber =
-      fCurrentNoteStaffNumber; // JMI v0.9.72
+//   else {
+//     fCurrentRecipientStaffNumber =
+//       fCurrentNoteStaffNumber; // JMI v0.9.72 already done!
+//   }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> handleStaffChangeIfAny()" <<
+  		", fCurrentRecipientStaffNumber: " <<
+  		mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
+  		", fCurrentNoteVoiceNumber: " <<
+  		mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
@@ -25362,6 +25540,16 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 //     fCurrentRecipientStaffNumber = fCurrentNoteStaffNumber;
 //   }
 
+  // set fCurrentRecipientStaffNumber
+  fCurrentRecipientStaffNumber =
+    fCurrentNoteStaffNumber; // default value JMI v0.9.72
+
+  // handle staff change if any
+  if (fCurrentNoteStaffChangeEvent) {
+    handleStaffChangeIfAny (
+      elt->getInputStartLineNumber ());
+  }
+
   // attach the pending dal segnos, if any,
   // to the ** previous ** note or chord
   // fetch current note's voice
@@ -25381,9 +25569,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // remember current note as the previous measure element // JMI v0.9.67 LATER???
   fPreviousMeasureElement = fCurrentNote;
 
-  // set fCurrentPartVoicesVector [fCurrentNoteVoiceNumber] if no other note precedes this one,
+  // set fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber] if no other note precedes this one,
   // or a backup of forward markup precedes it
-//   if (! fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]) {
+//   if (! fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]) {
     // fetch the voice to append the note to
 //   }
 
@@ -25400,9 +25590,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     std::stringstream ss;
 
     ss <<
-      "==> fCurrentPartVoicesVector [fCurrentNoteVoiceNumber] is now " <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->asShortString () <<
-       ", line " << elt->getInputStartLineNumber ();
+      "==> fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] is now " <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->asShortString () <<
+      ", line " << elt->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -25418,7 +25609,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // can now be appended to the latter's voice
   // prior to the note itself
 //   attachPendingVoiceLevelElementsToVoice (
-//     fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]);
+//     fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]);
 
   attachPendingPartLevelElementsIfAnyToPart (
     fCurrentPart);
@@ -25447,7 +25639,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 //         "Setting fCurrentNoteStaffNumber to " <<
 //         mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
 //         ", in voice \"" <<
-//         fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+//         fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]->getVoiceName () <<
 //         "\"" <<
 //         ", line " << elt->getInputStartLineNumber () <<
 //         std::endl;
@@ -26418,8 +26611,10 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
     ss <<
       "Handling non-chord, non-tuplet note or rest " <<
        fCurrentNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
-      ", fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]: \"" <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+      ", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName () <<
       "\", line " << fCurrentNote->getInputStartLineNumber () <<
       ":" <<
       std::endl;
@@ -26434,7 +26629,10 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
 
     gLog << std::left <<
       std::setw (fieldWidth) << "voice" << ": \"" <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName () <<
+      "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<
       fCurrentNote->getInputStartLineNumber () <<
@@ -26485,7 +26683,10 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
           "Creating grace notes for note " <<
           fCurrentNote->asString () <<
           " in voice \"" <<
-          fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () << "\"";
+          fCurrentPartStaffVoicesMap
+            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+              getVoiceName () <<
+          "\"";
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -26514,7 +26715,8 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
       // register that last handled note if any is followed by grace notes
       const S_msrNote&
         lastHandledNoteInVoice =
-          fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+          fCurrentPartStaffVoicesMap
+        [fCurrentNoteVoiceNumber]->
             getVoiceLastAppendedNote ();
 
       if (lastHandledNoteInVoice) {
@@ -26525,7 +26727,8 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
 
       // append the grace notes to the current voice // NO JMI
       /*
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteVoiceNumber]->
         appendGraceNotesToVoice (
           fCurrentGraceNotesGroupNotes);
         //  */
@@ -26534,8 +26737,9 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
     // register that last handled note if any is followed by grace notes JMI ???
     S_msrNote
       lastHandledNoteInVoice =
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-          getVoiceLastAppendedNote ();
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            getVoiceLastAppendedNote ();
 
     if (lastHandledNoteInVoice) {
       lastHandledNoteInVoice->
@@ -26551,7 +26755,9 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
         "Appending note " <<
         fCurrentNote->asString () <<
         " to grace notes group in voice \"" <<
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            getVoiceName () <<
         "\", line " << fCurrentNote->getInputStartLineNumber ();
 
       gWaeHandler->waeTrace (
@@ -26567,6 +26773,8 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
   }
 
   else {
+    // current note is no grace note
+
     if (
       fCurrentDoubleTremoloTypeKind != msrDoubleTremoloTypeKind::kDoubleTremoloType_UNKNOWN_
     ) {
@@ -26588,7 +26796,9 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
               fCurrentNote->asString () <<
               ", line " << fCurrentNote->getInputStartLineNumber () <<
               ", to voice \"" <<
-              fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+              fCurrentPartStaffVoicesMap
+                [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+                  getVoiceName () <<
               "\"" <<
               std::endl;
 
@@ -26598,8 +26808,9 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
           }
   #endif // MF_TRACE_IS_ENABLED
 
-          fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-            appendNoteToVoice (fCurrentNote);
+          fCurrentPartStaffVoicesMap
+            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+              appendNoteToVoice (fCurrentNote);
 
           // fCurrentSingleTremolo is handled in
           // attachCurrentSingleTremoloToNote()
@@ -26617,7 +26828,9 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
               ", line " << fCurrentNote->getInputStartLineNumber () <<
               ", as double tremolo first element" <<
               " in voice \"" <<
-              fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+              fCurrentPartStaffVoicesMap
+                [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+                  getVoiceName () <<
               "\"" <<
               std::endl;
 
@@ -26644,7 +26857,9 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
               ", line " << fCurrentNote->getInputStartLineNumber () <<
               ", as double tremolo second element" <<
               " in voice \"" <<
-              fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+              fCurrentPartStaffVoicesMap
+                [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+                  getVoiceName () <<
               "\"" <<
               std::endl;
 
@@ -26659,9 +26874,10 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
               fCurrentNote);
 
           // append current double tremolo to current voice
-          fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-            appendDoubleTremoloToVoice (
-              fCurrentDoubleTremolo);
+          fCurrentPartStaffVoicesMap
+            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+              appendDoubleTremoloToVoice (
+                fCurrentDoubleTremolo);
 
           // forget about the current double tremolo
          // fCurrentDoubleTremolo = 0; // JMI not if there's a chord in the double tremolo XXL BOF
@@ -26670,7 +26886,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
     }
 
     else {
-      // regular note or rest
+      // current note is a regular note or a rest
 
       // append fCurrentNote to the current voice to append to
   #ifdef MF_TRACE_IS_ENABLED
@@ -26682,7 +26898,9 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
           fCurrentNote->asString () <<
           ", line " << fCurrentNote->getInputStartLineNumber () <<
           ", to voice \"" <<
-          fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+          fCurrentPartStaffVoicesMap
+            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+              getVoiceName () <<
           "\"";
 
         gWaeHandler->waeTrace (
@@ -26693,16 +26911,20 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
 
       ++gIndenter;
 
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-        appendNoteToVoice (fCurrentNote);
+      fCurrentPartStaffVoicesMap
+        [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
+          appendNoteToVoice (fCurrentNote);
 
       if (false) { // XXL, syllable sans fSyllableNote assigne JMI v0.9.70
         gLog <<
-          "&&&&&&&&&&&&&&&&&& fCurrentPartVoicesVector [fCurrentNoteVoiceNumber] (" <<
-          fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+          "&&&&&&&&&&&&&&&&&& fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] (" <<
+          fCurrentPartStaffVoicesMap
+            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+              getVoiceName () <<
           ") contents &&&&&&&&&&&&&&&&&&" <<
           std::endl <<
-          fCurrentPartVoicesVector [fCurrentNoteVoiceNumber] <<
+          fCurrentPartStaffVoicesMap
+            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] <<
           std::endl;
       }
 
@@ -26777,8 +26999,10 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
     ss <<
       "Handling grace note " <<
        fCurrentNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
-      ", fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]: \"" <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+      ", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName () <<
       "\", line " << fCurrentNote->getInputStartLineNumber () <<
       ":" <<
       std::endl;
@@ -26793,7 +27017,9 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
 
     gLog << std::left <<
       std::setw (fieldWidth) << "voice" << ": \"" <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () <<
+      "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<
       fCurrentNote->getInputStartLineNumber () <<
@@ -26843,7 +27069,9 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
         "Creating grace notes for note " <<
         fCurrentNote->asString () <<
         " in voice \"" <<
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () << "\"";
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            getVoiceName () << "\"";
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -26872,8 +27100,9 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
     // register that last handled note if any is followed by grace notes
     const S_msrNote&
       lastHandledNoteInVoice =
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-          getVoiceLastAppendedNote ();
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            getVoiceLastAppendedNote ();
 
     if (lastHandledNoteInVoice) {
       lastHandledNoteInVoice->
@@ -26883,17 +27112,19 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
 
     // append the grace notes to the current voice // NO JMI
     /*
-    fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-      appendGraceNotesToVoice (
-        fCurrentGraceNotesGroupNotes);
+    fCurrentPartStaffVoicesMap
+      [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+        appendGraceNotesToVoice (
+          fCurrentGraceNotesGroupNotes);
       //  */
   }
 
   // register that last handled note if any is followed by grace notes JMI ???
   S_msrNote
     lastHandledNoteInVoice =
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-        getVoiceLastAppendedNote ();
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceLastAppendedNote ();
 
   if (lastHandledNoteInVoice) {
     lastHandledNoteInVoice->
@@ -26909,7 +27140,9 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
       "Appending note " <<
       fCurrentNote->asString () <<
       " to grace notes group in voice \"" <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName () <<
       "\", line " << fCurrentNote->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -26982,8 +27215,12 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
-      "fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]" << " = \"" <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<"\"" <<
+      "fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]" <<
+      " = \"" <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName () <<
+      "\"" <<
       std::endl <<
       std::setw (fieldWidth) <<
       "fCurrentNote" << " = \"" << fCurrentNote->asShortString () << "\"" <<
@@ -27069,13 +27306,14 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
 
     if (! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)) {
       // get the current note voice's stanzas map
-      const std::map<std::string, S_msrStanza>&
+      const std::map <std::string, S_msrStanza>&
         voiceStanzasMap =
-          fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-            getVoiceStanzasMap ();
+          fCurrentPartStaffVoicesMap
+            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+              getVoiceStanzasMap ();
 
       for (
-        std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+        std::map <std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
         i != voiceStanzasMap.end ();
         ++i
       ) {
@@ -27140,501 +27378,517 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleChordMemberNote_EVENTS (
-  const S_msrNote& newChordNote)
-{
-  int newChodeNoteInputLineNumber =
-    newChordNote->getInputStartLineNumber ();
-
-  // set newChordNote kind as a chord member
-  newChordNote->
-    setNoteKind (
-      msrNoteKind::kNoteRegularInChord);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Handling a note belonging to a chord" <<
-      ", newChordNote:" <<
-      std::endl;
-
-    ++gIndenter;
-
-    gLog << newChordNote <<
-      std::endl;
-
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (fCurrentNoteIsARest) {
-    mxsr2msrError (
-      gServiceRunData->getInputSourceName (),
-      newChodeNoteInputLineNumber,
-      __FILE__, __LINE__,
-      "a rest cannot belong to a chord");
-  }
-
-//   // fetch current voice
-//   int staffNumberToUse = -1001; // JMI SUPERFLOUS??? v0.9.69
-//     // to avoid compiler warning for uninitialized variable
+// void mxsr2msrSkeletonPopulator::handleChordMemberNote_EVENTS (
+//   const S_msrNote& newChordNote)
+// {
+//   int newChodeNoteInputLineNumber =
+//     newChordNote->getInputStartLineNumber ();
 //
-//   switch (fCurrentStaffChangeKind) {
-//     case msrStaffChangeKind::kStaffChange_UNKNOWN_:
-//       staffNumberToUse =
-//         fCurrentNoteStaffNumber; // JMI fCurrentNoteStaffNumber;
-//       break;
-//     case msrStaffChangeKind::kStaffChangeChordMemberNote:
-//       if (fCurrentNoteIsCrossStaves) {
-//         staffNumberToUse =
-//           fCurrentNoteStaffNumber;
-//     // JMI    staffNumberToUse = fCurrentNoteStaffNumber; // keep it!
-//       }
-//       else {
-//    //   JMI   staffNumberToUse = fCurrentChordStaffNumber;
-//         staffNumberToUse =
-//           fCurrentNoteStaffNumber;
-//       }
-//       break;
-//     case msrStaffChangeKind::kStaffChangeOtherNote:
-//       staffNumberToUse =
-//         fCurrentNoteStaffNumber;
-//      // JMI staffNumberToUse = fCurrentNoteStaffNumber;
-//       break;
-//   } // switch
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    std::stringstream ss;
-
-    ss <<
-      std::endl <<
-//       ", fCurrentChordStaffNumber: " <<
-//       mfStaffNumberAsString (fCurrentChordStaffNumber) <<
-      ", fPreviousNoteStaffNumber: " <<
-      mfStaffNumberAsString (fPreviousNoteStaffNumber) <<
-      ", fCurrentNoteStaffNumber: " <<
-      mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-//       ", staffNumberToUse: " <<
-//       staffNumberToUse <<
-      ", line " << newChodeNoteInputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fCurrentNoteVoiceNumber != K_VOICE_NUMBER_UNKNOWN_,
-    "fCurrentNoteVoiceNumber is unknown");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Handling a chord member note" <<
-      ", fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]: \"" <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
-      "\", fOnGoingChord: " <<
-      fOnGoingChord <<
-      ", line " << newChodeNoteInputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChordsDetails ()) {
-    gLog <<
-      std::endl <<
-      "======================= handleChordMemberNote_EVENTS" <<
-      ", line " << newChodeNoteInputLineNumber <<
-      std::endl;
-    fCurrentPart->print (gLog);
-    gLog <<
-      "=======================" <<
-      std::endl << std::endl;
-
-/* JMI
-    if (fCurrentGraceNotesGroupNotes) {
-      gLog <<
-        fCurrentGraceNotesGroupNotes;
-    }
-    else {
+//   // set newChordNote kind as a chord member
+//   newChordNote->
+//     setNoteKind (
+//       msrNoteKind::kNoteRegularInChord);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChords ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Handling a note belonging to a chord" <<
+//       ", newChordNote:" <<
+//       std::endl;
+//
+//     ++gIndenter;
+//
+//     gLog << newChordNote <<
+//       std::endl;
+//
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (fCurrentNoteIsARest) {
+//     mxsr2msrError (
+//       gServiceRunData->getInputSourceName (),
+//       newChodeNoteInputLineNumber,
+//       __FILE__, __LINE__,
+//       "a rest cannot belong to a chord");
+//   }
+//
+// //   // fetch current voice
+// //   int staffNumberToUse = -1001; // JMI SUPERFLOUS??? v0.9.69
+// //     // to avoid compiler warning for uninitialized variable
+// //
+// //   switch (fCurrentStaffChangeKind) {
+// //     case msrStaffChangeKind::kStaffChange_UNKNOWN_:
+// //       staffNumberToUse =
+// //         fCurrentNoteStaffNumber; // JMI fCurrentNoteStaffNumber;
+// //       break;
+// //     case msrStaffChangeKind::kStaffChangeChordMemberNote:
+// //       if (fCurrentNoteIsCrossStaves) {
+// //         staffNumberToUse =
+// //           fCurrentNoteStaffNumber;
+// //     // JMI    staffNumberToUse = fCurrentNoteStaffNumber; // keep it!
+// //       }
+// //       else {
+// //    //   JMI   staffNumberToUse = fCurrentChordStaffNumber;
+// //         staffNumberToUse =
+// //           fCurrentNoteStaffNumber;
+// //       }
+// //       break;
+// //     case msrStaffChangeKind::kStaffChangeOtherNote:
+// //       staffNumberToUse =
+// //         fCurrentNoteStaffNumber;
+// //      // JMI staffNumberToUse = fCurrentNoteStaffNumber;
+// //       break;
+// //   } // switch
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChords ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       std::endl <<
+// //       ", fCurrentChordStaffNumber: " <<
+// //       mfStaffNumberAsString (fCurrentChordStaffNumber) <<
+//       ", fPreviousNoteStaffNumber: " <<
+//       mfStaffNumberAsString (fPreviousNoteStaffNumber) <<
+//       ", fCurrentNoteStaffNumber: " <<
+//       mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
+// //       ", staffNumberToUse: " <<
+// //       staffNumberToUse <<
+//       ", line " << newChodeNoteInputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     fCurrentNoteVoiceNumber != K_VOICE_NUMBER_UNKNOWN_,
+//     "fCurrentNoteVoiceNumber is unknown");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChords ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Handling a chord member note" <<
+//       ", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
+//       fCurrentPartStaffVoicesMap
+//         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+//           getVoiceName () <<
+//       "\", fOnGoingChord: " <<
+//       fOnGoingChord <<
+//       ", line " << newChodeNoteInputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChordsDetails ()) {
+//     gLog <<
+//       std::endl <<
+//       "======================= handleChordMemberNote_EVENTS" <<
+//       ", line " << newChodeNoteInputLineNumber <<
+//       std::endl;
+//     fCurrentPart->print (gLog);
+//     gLog <<
+//       "=======================" <<
+//       std::endl << std::endl;
+//
+// /* JMI
+//     if (fCurrentGraceNotesGroupNotes) {
 //       gLog <<
-//         "fCurrentGraceNotesGroupNotes is NULL"; // JMI
-    }
-*/
-
-    gLog << std::endl;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // should a chord be created?
-  if (! fOnGoingChord) {
-    // newChordNote is the second note of the chord to be created
-
-    // fetch this chord's first note,
-    // i.e. the last handled note for this voice
-
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceChords ()) {
-      printVoicesLastMetNoteMap (
-        newChodeNoteInputLineNumber,
-        "handleChordMemberNote_EVENTS()");
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-//     S_msrNote
-//       chordFirstNote =
-//   //      fVoicesLastMetNoteMap [fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]]; // JMI v0.9.67
-//         fVoicesLastMetNoteMap [
-//           std::make_pair (
-//             fCurrentNoteStaffNumber,
-//             fCurrentNoteVoiceNumber)
-//           ];
-//       /*
-//         fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-//           getVoiceLastAppendedNote (); ??? JMI
-//           */
+//         fCurrentGraceNotesGroupNotes;
+//     }
+//     else {
+// //       gLog <<
+// //         "fCurrentGraceNotesGroupNotes is NULL"; // JMI
+//     }
+// */
 //
-//     if (! chordFirstNote) {
+//     gLog << std::endl;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // should a chord be created?
+//   if (! fOnGoingChord) {
+//     // newChordNote is the second note of the chord to be created
+//
+//     // fetch this chord's first note,
+//     // i.e. the last handled note for this voice
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceChords ()) {
+//       printVoicesLastMetNoteMap (
+//         newChodeNoteInputLineNumber,
+//         "handleChordMemberNote_EVENTS()");
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// //     S_msrNote
+// //       chordFirstNote =
+// //   //      fStaffVoicesLastMetNoteMap [fCurrentPartStaffVoicesMap
+// //         [fCurrentNoteVoiceNumber]]; // JMI v0.9.67
+// //         fStaffVoicesLastMetNoteMap [
+// //           std::make_pair (
+// //             fCurrentNoteStaffNumber,
+// //             fCurrentNoteVoiceNumber)
+// //           ];
+// //       /*
+// //         fCurrentPartStaffVoicesMap
+// //         [fCurrentNoteVoiceNumber]->
+// //           getVoiceLastAppendedNote (); ??? JMI
+// //           */
+// //
+// //     if (! chordFirstNote) {
+// //       std::stringstream ss;
+// //
+// //       ss <<
+// //         "handleChordMemberNote_EVENTS():" <<
+// //         std::endl <<
+// //         "chordFirstNote is null on " <<
+// //         newChordNote->asString () <<
+// //         std::endl <<
+// //         "fCurrentNoteStaffNumber: " << mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
+// //         std::endl <<
+// //         "fCurrentNoteVoiceNumber: " <<
+// // mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
+// //         ", line " << newChodeNoteInputLineNumber;
+// //
+// //       mxsr2msrInternalError (
+// //         gServiceRunData->getInputSourceName (),
+// //         newChodeNoteInputLineNumber,
+// //         __FILE__, __LINE__,
+// //         ss.str ());
+// //     }
+// //
+// // #ifdef MF_TRACE_IS_ENABLED
+// //     if (gTraceOahGroup->getTraceChords ()) {
+// //       gLog <<
+// //         "mxsr2msrSkeletonPopulator::handleChordMemberNote_EVENTS()" <<
+// //         ", chordFirstNote:" <<
+// //         std::endl;
+// //
+// //       ++gIndenter;
+// //
+// //       gLog <<
+// //         chordFirstNote <<
+// //         std::endl;
+// //
+// //       --gIndenter;
+// //     }
+// // #endif // MF_TRACE_IS_ENABLED
+// //
+// //     // fetch chord first note's kind before createChordFromItsFirstNote(),
+// //     // because the latter will change it to kChordMemberNote or
+// //     // msrNoteKind::kNoteInChordInGraceNotesGroup
+// //     msrNoteKind
+// //       savedChordFirstNoteKind =
+// //         chordFirstNote->getNoteKind ();
+// //
+// // #ifdef MF_TRACE_IS_ENABLED
+// //     if (gTraceOahGroup->getTraceChords ()) {
+// //       gLog <<
+// //         "Handling a note belonging to a chord" <<
+// //         ", savedChordFirstNoteKind: " <<
+// //         msrNoteKindAsString (savedChordFirstNoteKind) <<
+// //         std::endl;
+// //
+// //       ++gIndenter;
+// //
+// //       gLog <<
+// //         chordFirstNote <<
+// //         std::endl;
+// //
+// //       --gIndenter;
+// //     }
+// // #endif // MF_TRACE_IS_ENABLED
+//
+// //     // create the current chord from its first note // EVENTS
+// //     fCurrentChord =
+// //       createChordFromItsFirstNote (
+// //         newChodeNoteInputLineNumber,
+// //         chordFirstNote,
+// //         msrNoteKind::kNoteRegularInChord);
+//
+//     fPreviousMeasureElement = fCurrentChord;
+//
+// //     // handle chord's first note
+// //     switch (savedChordFirstNoteKind) {
+// //       case msrNoteKind::kNoteRestInMeasure:
+// //         break;
+// //
+// //       case msrNoteKind::kNoteSkipInMeasure:
+// //         break;
+// //
+// //       case msrNoteKind::kNoteUnpitchedInMeasure:
+// //       case msrNoteKind::kNoteRegularInMeasure:
+// //         // remove last handled (previous current) note from the current voice
+// // #ifdef MF_TRACE_IS_ENABLED
+// //         if (gTraceOahGroup->getTraceChords ()) {
+// //           std::stringstream ss;
+// //
+// //           ss <<
+// //             "Removing chord first note " <<
+// //             chordFirstNote->asShortString () <<
+// //             ", line " << newChodeNoteInputLineNumber <<
+// //             ", from voice \"" <<
+// // fCurrentPartStaffVoicesMap
+// //         [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
+// //             ", line " << newChodeNoteInputLineNumber;
+// //
+// //           gWaeHandler->waeTrace (
+// //             __FILE__, __LINE__,
+// //             ss.str ());
+// //         }
+// // #endif // MF_TRACE_IS_ENABLED
+// //
+// // #ifdef MF_TRACE_IS_ENABLED
+// //         if (gTraceOahGroup->getTraceChordsDetails ()) {
+// //           gLog <<
+// //             std::endl << std::endl <<
+// //             "&&&&&&&&&&&&&&&&&& fCurrentPart contents before removeNoteFromVoice:" <<
+// //             std::endl <<
+// //             fCurrentPart <<
+// //             std::endl << std::endl <<
+// //             "&&&&&&&&&&&&&&&&&&" <<
+// //             std::endl <<
+// //             std::endl << std::endl;
+// //         }
+// // #endif // MF_TRACE_IS_ENABLED
+// //
+// // #ifdef MF_TRACE_IS_ENABLED
+// //         if (gTraceOahGroup->getTraceStaffChanges ()) {
+// //           std::stringstream ss;
+// //
+// //           ss <<
+// //             std::endl <<
+// //             ", fPreviousNoteStaffNumber: " <<
+// //             mfStaffNumberAsString (fPreviousNoteStaffNumber)
+// //             ", fCurrentNoteStaffNumber: " <<
+// //             mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
+// //             ", line " << newChodeNoteInputLineNumber;
+// //
+// //           gWaeHandler->waeTrace (
+// //             __FILE__, __LINE__,
+// //             ss.str ());
+// //         }
+// // #endif // MF_TRACE_IS_ENABLED
+// //
+// //         fCurrentPartStaffVoicesMap
+// //         [fCurrentNoteVoiceNumber]->
+// //           removeNoteFromVoice (
+// //             newChodeNoteInputLineNumber,
+// //             chordFirstNote);
+// //
+// //         // add chord to the voice instead
+// // #ifdef MF_TRACE_IS_ENABLED
+// //         if (gTraceOahGroup->getTraceChordsBasics ()) {
+// //           std::stringstream ss;
+// //
+// //           ss <<
+// //             "Appending chord " << fCurrentChord->asString () <<
+// //             " to voice \"" <<
+// //             fCurrentPartStaffVoicesMap
+//         [
+// //               fCurrentNoteVoiceNumber]->getVoiceName () <<
+// //             "\"";
+// //
+// //           gWaeHandler->waeTrace (
+// //             __FILE__, __LINE__,
+// //             ss.str ());
+// //         }
+// // #endif // MF_TRACE_IS_ENABLED
+// //
+// //         fCurrentPartStaffVoicesMap
+// //         [fCurrentNoteVoiceNumber]->
+// //           appendChordToVoice (
+// //             fCurrentChord);
+// //         break;
+// //
+// //       case msrNoteKind::kNoteInDoubleTremolo:
+// //         {
+// //           /* JMI
+// //           // fetch chordFirstNote's sounding divisions
+// //           int chordFirstNoteSoundingWholeNotes = // JMI
+// //             chordFirstNote->
+// //               getMeasureElementSoundingWholeNotes ();
+// //               */
+// //
+// //           /* JMI
+// //           // updating chord's divisions // JMI
+// // #ifdef MF_TRACE_IS_ENABLED
+// //           if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceChords ()) {
+// //             gLog <<
+// //               "Updating sounding divisions for double tremolo chord " <<
+// //               " " << chord <<
+// //               " to " << chordFirstNoteSoundingWholeNotes <<
+// //               " in voice \"" <<
+// //               fCurrentPartStaffVoicesMap
+// //         [fCurrentNoteVoiceNumber]->getVoiceName () <<
+// //               "\"" <<
+// //               std::endl;
+// //           }
+// // #endif // MF_TRACE_IS_ENABLED
+// //
+// //           chord->
+// //             setMeasureElementSoundingWholeNotes ( // ??? JMI
+// //               chordFirstNoteSoundingWholeNotes,
+// //               "mxsr2msrSkeletonPopulator::handleChordMemberNote_EVENTS()");
+// //               */
+// //
+// //           if (chordFirstNote->getNoteIsFirstNoteInADoubleTremolo ()) {
+// //             // replace double tremolo's first element by chord
+// //             fCurrentDoubleTremolo->
+// //               setDoubleTremoloChordFirstElement (
+// //                 fCurrentChord);
+// //           }
+// //
+// //           else if (chordFirstNote->getNoteIsSecondNoteInADoubleTremolo ()) {
+// //             // replace double tremolo's second element by chord
+// //             fCurrentDoubleTremolo->
+// //               setDoubleTremoloChordSecondElement (
+// //                 fCurrentChord);
+// //           }
+// //
+// //           else {
+// //             std::stringstream ss;
+// //
+// //             ss <<
+// //               "chord first note " <<
+// //               chordFirstNote->asShortString () <<
+// //               " belongs to a double tremolo, but is not marked as such" <<
+// //               ", line " << newChodeNoteInputLineNumber;
+// //
+// //             mxsr2msrInternalError (
+// //               gServiceRunData->getInputSourceName (),
+// //               newChodeNoteInputLineNumber,
+// //               __FILE__, __LINE__,
+// //               ss.str ());
+// //           }
+// //         }
+// //         break;
+// //
+// //       case msrNoteKind::kNoteRegularInGraceNotesGroup:
+// //       case msrNoteKind::kNoteSkipInGraceNotesGroup:
+// //       case msrNoteKind::kNoteInChordInGraceNotesGroup:
+// //       /* JMI
+// //         // remove last handled (previous current) note from the current voice
+// // #ifdef MF_TRACE_IS_ENABLED
+// //         if (gTraceOahGroup->getTraceChords ()) {
+// //           std::stringstream ss;
+// //
+// //           ss <<
+// //             "Removing chord first note " <<
+// //             chordFirstNote->asShortString () <<
+// //             ", line " << newChodeNoteInputLineNumber <<
+// //             ", from voice \"" <<
+// // fCurrentPartStaffVoicesMap
+// //         [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
+// //             ", line " << newChodeNoteInputLineNumber;
+// //
+// //           gWaeHandler->waeTrace (
+// //             __FILE__, __LINE__,
+// //             ss.str ());
+// //         }
+// // #endif // MF_TRACE_IS_ENABLED
+// //
+// //         fCurrentPartStaffVoicesMap
+// //         [fCurrentNoteVoiceNumber]->
+// //           removeNoteFromVoice (
+// //             newChodeNoteInputLineNumber,
+// //             chordFirstNote);
+// // */
+// //         break;
+// //
+// //       case msrNoteKind::kNoteRegularInChord:
+// //         // error? JMI
+// //         break;
+// //
+// //       case msrNoteKind::kNoteRegularInTuplet:
+// //       case msrNoteKind::kNoteRestInTuplet:
+// //       case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+// //       case msrNoteKind::kNoteUnpitchedInTuplet:
+// //         break;
+// //
+// //       case msrNoteKind::kNote_UNKNOWN_:
+// //         break;
+// //     } // switch
+//
+//     // account for chord being built
+//     fOnGoingChord = true;
+//   }
+//
+//   else {
+//     // is newChordNote in the same chord but in another voice,
+//     // implying it is a member of a crossstaff chord?
+//
+// /* JMI
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceChords ()) {
+//       gLog <<
+//         "is newChordNote in the same chord but in another voice?" <<
+//         ", fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]: " <<
+//         fCurrentPartStaffVoicesMap
+//         [fCurrentNoteVoiceNumber]->getVoiceName () <<
+//         std::endl;
+//
+//       printVoicesCurrentChordMap ();
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+// */
+//
+//   // register newChordNote as another member of chord
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceChords ()) {
 //       std::stringstream ss;
 //
 //       ss <<
-//         "handleChordMemberNote_EVENTS():" <<
-//         std::endl <<
-//         "chordFirstNote is null on " <<
-//         newChordNote->asString () <<
-//         std::endl <<
-//         "fCurrentNoteStaffNumber: " << mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-//         std::endl <<
-//         "fCurrentNoteVoiceNumber: " <<
-// mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
-//         ", line " << newChodeNoteInputLineNumber;
+//         "Adding another note " <<
+//         newChordNote->asString() <<
+//         ", line " << newChodeNoteInputLineNumber <<
+//         " to current chord in voice " <<
+//         fCurrentPartStaffVoicesMap
+//           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+//             getVoiceName ();
 //
-//       mxsr2msrInternalError (
-//         gServiceRunData->getInputSourceName (),
-//         newChodeNoteInputLineNumber,
+//       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
 //         ss.str ());
 //     }
+// #endif // MF_TRACE_IS_ENABLED
+//   }
+//
+//   // add newChordNote to current chord
+//   fCurrentChord->
+//     addNoteToChord_EVENTS (
+//       newChordNote,
+//       fCurrentPartStaffVoicesMap
+//         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]);
+//
+//   // copy newChordNote's elements if any to the current chord
+//   copyNoteElementsIfAnyToChord (
+//     newChordNote,
+//     fCurrentChord);
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceChords ()) {
-//       gLog <<
-//         "mxsr2msrSkeletonPopulator::handleChordMemberNote_EVENTS()" <<
-//         ", chordFirstNote:" <<
-//         std::endl;
-//
-//       ++gIndenter;
-//
-//       gLog <<
-//         chordFirstNote <<
-//         std::endl;
-//
-//       --gIndenter;
-//     }
+//   if (gTraceOahGroup->getTraceChordsDetails ()) {
+//     printCurrentChord ();
+//   }
 // #endif // MF_TRACE_IS_ENABLED
+// }
 //
-//     // fetch chord first note's kind before createChordFromItsFirstNote(),
-//     // because the latter will change it to kChordMemberNote or
-//     // msrNoteKind::kNoteInChordInGraceNotesGroup
-//     msrNoteKind
-//       savedChordFirstNoteKind =
-//         chordFirstNote->getNoteKind ();
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceChords ()) {
-//       gLog <<
-//         "Handling a note belonging to a chord" <<
-//         ", savedChordFirstNoteKind: " <<
-//         msrNoteKindAsString (savedChordFirstNoteKind) <<
-//         std::endl;
-//
-//       ++gIndenter;
-//
-//       gLog <<
-//         chordFirstNote <<
-//         std::endl;
-//
-//       --gIndenter;
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-
-//     // create the current chord from its first note // EVENTS
-//     fCurrentChord =
-//       createChordFromItsFirstNote (
-//         newChodeNoteInputLineNumber,
-//         chordFirstNote,
-//         msrNoteKind::kNoteRegularInChord);
-
-    fPreviousMeasureElement = fCurrentChord;
-
-//     // handle chord's first note
-//     switch (savedChordFirstNoteKind) {
-//       case msrNoteKind::kNoteRestInMeasure:
-//         break;
-//
-//       case msrNoteKind::kNoteSkipInMeasure:
-//         break;
-//
-//       case msrNoteKind::kNoteUnpitchedInMeasure:
-//       case msrNoteKind::kNoteRegularInMeasure:
-//         // remove last handled (previous current) note from the current voice
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceChords ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "Removing chord first note " <<
-//             chordFirstNote->asShortString () <<
-//             ", line " << newChodeNoteInputLineNumber <<
-//             ", from voice \"" <<
-// fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
-//             ", line " << newChodeNoteInputLineNumber;
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceChordsDetails ()) {
-//           gLog <<
-//             std::endl << std::endl <<
-//             "&&&&&&&&&&&&&&&&&& fCurrentPart contents before removeNoteFromVoice:" <<
-//             std::endl <<
-//             fCurrentPart <<
-//             std::endl << std::endl <<
-//             "&&&&&&&&&&&&&&&&&&" <<
-//             std::endl <<
-//             std::endl << std::endl;
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceStaffChanges ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             std::endl <<
-//             ", fPreviousNoteStaffNumber: " <<
-//             mfStaffNumberAsString (fPreviousNoteStaffNumber)
-//             ", fCurrentNoteStaffNumber: " <<
-//             mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-//             ", line " << newChodeNoteInputLineNumber;
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//         fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-//           removeNoteFromVoice (
-//             newChodeNoteInputLineNumber,
-//             chordFirstNote);
-//
-//         // add chord to the voice instead
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceChordsBasics ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "Appending chord " << fCurrentChord->asString () <<
-//             " to voice \"" <<
-//             fCurrentPartVoicesVector [
-//               fCurrentNoteVoiceNumber]->getVoiceName () <<
-//             "\"";
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//         fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-//           appendChordToVoice (
-//             fCurrentChord);
-//         break;
-//
-//       case msrNoteKind::kNoteInDoubleTremolo:
-//         {
-//           /* JMI
-//           // fetch chordFirstNote's sounding divisions
-//           int chordFirstNoteSoundingWholeNotes = // JMI
-//             chordFirstNote->
-//               getMeasureElementSoundingWholeNotes ();
-//               */
-//
-//           /* JMI
-//           // updating chord's divisions // JMI
-// #ifdef MF_TRACE_IS_ENABLED
-//           if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceChords ()) {
-//             gLog <<
-//               "Updating sounding divisions for double tremolo chord " <<
-//               " " << chord <<
-//               " to " << chordFirstNoteSoundingWholeNotes <<
-//               " in voice \"" <<
-//               fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
-//               "\"" <<
-//               std::endl;
-//           }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//           chord->
-//             setMeasureElementSoundingWholeNotes ( // ??? JMI
-//               chordFirstNoteSoundingWholeNotes,
-//               "mxsr2msrSkeletonPopulator::handleChordMemberNote_EVENTS()");
-//               */
-//
-//           if (chordFirstNote->getNoteIsFirstNoteInADoubleTremolo ()) {
-//             // replace double tremolo's first element by chord
-//             fCurrentDoubleTremolo->
-//               setDoubleTremoloChordFirstElement (
-//                 fCurrentChord);
-//           }
-//
-//           else if (chordFirstNote->getNoteIsSecondNoteInADoubleTremolo ()) {
-//             // replace double tremolo's second element by chord
-//             fCurrentDoubleTremolo->
-//               setDoubleTremoloChordSecondElement (
-//                 fCurrentChord);
-//           }
-//
-//           else {
-//             std::stringstream ss;
-//
-//             ss <<
-//               "chord first note " <<
-//               chordFirstNote->asShortString () <<
-//               " belongs to a double tremolo, but is not marked as such" <<
-//               ", line " << newChodeNoteInputLineNumber;
-//
-//             mxsr2msrInternalError (
-//               gServiceRunData->getInputSourceName (),
-//               newChodeNoteInputLineNumber,
-//               __FILE__, __LINE__,
-//               ss.str ());
-//           }
-//         }
-//         break;
-//
-//       case msrNoteKind::kNoteRegularInGraceNotesGroup:
-//       case msrNoteKind::kNoteSkipInGraceNotesGroup:
-//       case msrNoteKind::kNoteInChordInGraceNotesGroup:
-//       /* JMI
-//         // remove last handled (previous current) note from the current voice
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceChords ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "Removing chord first note " <<
-//             chordFirstNote->asShortString () <<
-//             ", line " << newChodeNoteInputLineNumber <<
-//             ", from voice \"" <<
-// fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
-//             ", line " << newChodeNoteInputLineNumber;
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
-//             ss.str ());
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//         fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-//           removeNoteFromVoice (
-//             newChodeNoteInputLineNumber,
-//             chordFirstNote);
-// */
-//         break;
-//
-//       case msrNoteKind::kNoteRegularInChord:
-//         // error? JMI
-//         break;
-//
-//       case msrNoteKind::kNoteRegularInTuplet:
-//       case msrNoteKind::kNoteRestInTuplet:
-//       case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-//       case msrNoteKind::kNoteUnpitchedInTuplet:
-//         break;
-//
-//       case msrNoteKind::kNote_UNKNOWN_:
-//         break;
-//     } // switch
-
-    // account for chord being built
-    fOnGoingChord = true;
-  }
-
-  else {
-    // is newChordNote in the same chord but in another voice,
-    // implying it is a member of a crossstaff chord?
-
-/* JMI
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceChords ()) {
-      gLog <<
-        "is newChordNote in the same chord but in another voice?" <<
-        ", fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]: " <<
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
-        std::endl;
-
-      printVoicesCurrentChordMap ();
-    }
-#endif // MF_TRACE_IS_ENABLED
-*/
-
-  // register newChordNote as another member of chord
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceChords ()) {
-      std::stringstream ss;
-
-      ss <<
-        "Adding another note " <<
-        newChordNote->asString() <<
-        ", line " << newChodeNoteInputLineNumber <<
-        " to current chord in voice " <<
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName ();
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-  }
-
-  // add newChordNote to current chord
-  fCurrentChord->
-    addNoteToChord_EVENTS (
-      newChordNote,
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]);
-
-  // copy newChordNote's elements if any to the current chord
-  copyNoteElementsIfAnyToChord (
-    newChordNote,
-    fCurrentChord);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChordsDetails ()) {
-    printCurrentChord ();
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
 void mxsr2msrSkeletonPopulator::handleChordMemberNote (
   const S_msrNote& newChordNote)
 {
@@ -27736,9 +27990,10 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
 
     ss <<
       "Handling a chord member note" <<
-      ", fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]: \"" <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+      ", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName () <<
       "\", fOnGoingChord: " <<
       fOnGoingChord <<
       ", line " << newChodeNoteInputLineNumber;
@@ -27793,16 +28048,14 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
 
     S_msrNote
       chordFirstNote =
-  //      fVoicesLastMetNoteMap [fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]]; // JMI v0.9.67
-        fVoicesLastMetNoteMap [
-          std::make_pair (
-            fCurrentNoteStaffNumber,
-            fCurrentNoteVoiceNumber)
-          ];
+  //      fStaffVoicesLastMetNoteMap [fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]]; // JMI v0.9.67
+        fStaffVoicesLastMetNoteMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
       /*
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-          getVoiceLastAppendedNote (); ??? JMI
-          */
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            getVoiceLastAppendedNote (); ??? JMI
+      */
 
     if (! chordFirstNote) {
       std::stringstream ss;
@@ -27898,7 +28151,10 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
             chordFirstNote->asShortString () <<
             ", line " << newChodeNoteInputLineNumber <<
             ", from voice \"" <<
-            fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
+            fCurrentPartStaffVoicesMap
+              [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+                getVoiceName () <<
+            "\"" <<
             ", line " << newChodeNoteInputLineNumber;
 
           gWaeHandler->waeTrace (
@@ -27939,10 +28195,11 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-          removeNoteFromVoice (
-            newChodeNoteInputLineNumber,
-            chordFirstNote);
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            removeNoteFromVoice (
+              newChodeNoteInputLineNumber,
+              chordFirstNote);
 
         // add chord to the voice instead
 #ifdef MF_TRACE_IS_ENABLED
@@ -27952,8 +28209,9 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
           ss <<
             "Appending chord " << fCurrentChord->asString () <<
             " to voice \"" <<
-            fCurrentPartVoicesVector [
-              fCurrentNoteVoiceNumber]->getVoiceName () <<
+            fCurrentPartStaffVoicesMap
+              [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+                getVoiceName () <<
             "\"";
 
           gWaeHandler->waeTrace (
@@ -27962,9 +28220,10 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-          appendChordToVoice (
-            fCurrentChord);
+        fCurrentPartStaffVoicesMap
+          [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
+            appendChordToVoice (
+              fCurrentChord);
         break;
 
       case msrNoteKind::kNoteInDoubleTremolo:
@@ -27985,7 +28244,8 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
               " " << chord <<
               " to " << chordFirstNoteSoundingWholeNotes <<
               " in voice \"" <<
-              fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+              fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () <<
               "\"" <<
               std::endl;
           }
@@ -28043,7 +28303,8 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
             chordFirstNote->asShortString () <<
             ", line " << newChodeNoteInputLineNumber <<
             ", from voice \"" <<
-            fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
+            fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
             ", line " << newChodeNoteInputLineNumber;
 
           gWaeHandler->waeTrace (
@@ -28052,7 +28313,8 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+        fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
           removeNoteFromVoice (
             newChodeNoteInputLineNumber,
             chordFirstNote);
@@ -28086,8 +28348,10 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
     if (gTraceOahGroup->getTraceChords ()) {
       gLog <<
         "is newChordNote in the same chord but in another voice?" <<
-        ", fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]: " <<
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+        ", fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: " <<
+        fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () <<
         std::endl;
 
       printVoicesCurrentChordMap ();
@@ -28105,7 +28369,9 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
         newChordNote->asString() <<
         ", line " << newChodeNoteInputLineNumber <<
         " to current chord in voice " <<
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName ();
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            getVoiceName ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -28118,7 +28384,8 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
   fCurrentChord->
     addAnotherNoteToChord (
       newChordNote,
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]);
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]);
 
   // copy newChordNote's elements if any to the current chord
   copyNoteElementsIfAnyToChord (
@@ -28187,11 +28454,13 @@ void mxsr2msrSkeletonPopulator::handleTupletMemberNote (
   // fetch the current note's voice
   S_msrVoice
     firstNoteVoice =
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber];
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   S_mxsr2msrPopulatorVoiceHandler
     voiceHandler =
-      fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+      fCurrentStaffVoiceHandlersMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   switch (fCurrentTupletTypeKind) {
     case msrTupletTypeKind::kTupletTypeStart:
@@ -28324,7 +28593,8 @@ void mxsr2msrSkeletonPopulator::handleTupletMemberNote (
         // finalize it
         S_mxsr2msrPopulatorVoiceHandler
           voiceHandler =
-            fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+            fCurrentStaffVoiceHandlersMap
+              [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
         voiceHandler->
           finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.71
@@ -28361,7 +28631,8 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
 
   S_mxsr2msrPopulatorVoiceHandler
     voiceHandler =
-      fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+      fCurrentStaffVoiceHandlersMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   // set new note kind as a chord or grace chord member JMI ???
   newChordNote->
@@ -28486,12 +28757,14 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
 /* JMI
     S_msrNote
       tupletLastNote =
-  //      fVoicesLastMetNoteMap [fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]];
-        fVoicesLastMetNoteMap [
+  //      fStaffVoicesLastMetNoteMap [fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]];
+        fStaffVoicesLastMetNoteMap [
           std::make_pair (fCurrentNoteStaffNumber, fCurrentNoteVoiceNumber)
           ];
 
-    fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+    fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
       removeNoteFromVoice (
         newChordNoteInputLineNumber,
         tupletLastNote);
@@ -28519,7 +28792,8 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
 
     S_mxsr2msrPopulatorVoiceHandler
       voiceHandler =
-        fCurrentPartPopulatorVoicesHandlersVector [fCurrentNoteVoiceNumber];
+        fCurrentStaffVoiceHandlersMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
     // the chord first note has been placed in the tuplet at the top of the tuplets stack,
     // remove it from there
@@ -28641,7 +28915,9 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
         asShortString () <<
       ", line " << newChordNoteInputLineNumber <<
       " to current chord in voice " <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName ();
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28652,7 +28928,8 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
   fCurrentChord->
     addAnotherNoteToChord (
       newChordNote,
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]);
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]);
 
   // copy newChordNote's elements if any to the chord
   copyNoteElementsIfAnyToChord (
@@ -28729,8 +29006,9 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
 
       // fetch last handled note for this voice
       chordFirstNote =
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-          getVoiceLastAppendedNote ();
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            getVoiceLastAppendedNote ();
 
       if (! chordFirstNote) {
         std::stringstream ss;
@@ -28779,11 +29057,14 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
 
     if (false) {
       gLog <<
-        "&&&&&&&&&&&&&&&&&& fCurrentPartVoicesVector [fCurrentNoteVoiceNumber] (" <<
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName () <<
+        "&&&&&&&&&&&&&&&&&& fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] (" <<
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            getVoiceName () <<
         ") contents &&&&&&&&&&&&&&&&&&" <<
         std::endl <<
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber] <<
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] <<
         std::endl << std::endl;
     }
 
@@ -28795,9 +29076,10 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
     }
     else {
       // append current chord to pending voice JMI ???
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
-        appendChordToVoice (
-          fCurrentChord);
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          appendChordToVoice (
+            fCurrentChord);
     }
 
 
@@ -28835,7 +29117,9 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
         asShortString () <<
       ", line " << newChordNoteInputLineNumber <<
       " to current chord in voice " <<
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->getVoiceName ();
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28846,7 +29130,8 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
   fCurrentChord->
     addAnotherNoteToChord (
       newChordNote,
-      fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]);
+      fCurrentPartStaffVoicesMap
+        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]);
 
   // copy newChordNote's elements if any to the chord
   copyNoteElementsIfAnyToChord (
@@ -28874,7 +29159,7 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
 //   }
 //
 //   else {
-//     std::map<std::pair<int, int>, S_msrTuplet>::const_iterator
+//     std::map <std::pair <int, int>, S_msrTuplet>::const_iterator
 //       iBegin = fLastHandledTupletInVoiceMap.begin (),
 //       iEnd   = fLastHandledTupletInVoiceMap.end (),
 //       i      = iBegin;
@@ -31553,7 +31838,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
     // attach pending figures to the figured bass
     if (fPendingFiguredBassFiguresList.size ()) {
       for (
-        std::list<S_msrBassFigure>::const_iterator i = fPendingFiguredBassFiguresList.begin ();
+        std::list <S_msrBassFigure>::const_iterator i = fPendingFiguredBassFiguresList.begin ();
         i != fPendingFiguredBassFiguresList.end ();
         ++i
       ) {
@@ -31567,7 +31852,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
     // append the figured bass to the current part
     fCurrentPart->
       appendFiguredBassToPart (
-        fCurrentPartVoicesVector [fCurrentNoteVoiceNumber],
+        fCurrentPartStaffVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber],
         figuredBass);
     */
 
@@ -32017,13 +32303,14 @@ part-symbol
 //         ! (fCurrentNoteBelongsToAChord || fCurrentNoteIsAGraceNote)
 //       ) {
 //         // get the current note voice's stanzas map
-//         const std::map<std::string, S_msrStanza>&
+//         const std::map <std::string, S_msrStanza>&
 //           voiceStanzasMap =
-//             fCurrentPartVoicesVector [fCurrentNoteVoiceNumber]->
+//             fCurrentPartStaffVoicesMap
+//         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
 //               getVoiceStanzasMap ();
 //
 //         for (
-//           std::map<std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
+//           std::map <std::string, S_msrStanza>::const_iterator i = voiceStanzasMap.begin ();
 //           i != voiceStanzasMap.end ();
 //           ++i
 //         ) {
@@ -32303,7 +32590,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
 
 
-//   std::multimap<int, S_mxsrStaffChangeEvent>::const_iterator
+//   std::multimap <int, S_mxsrStaffChangeEvent>::const_iterator
 //     firstStaffChangeInRange,
 //     lastStaffChangeInRange;
 //
@@ -32319,7 +32606,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 //       std::endl;
 //
 //     for (
-//       std::multimap<int, S_mxsrStaffChangeEvent>::const_iterator it =
+//       std::multimap <int, S_mxsrStaffChangeEvent>::const_iterator it =
 //         firstStaffChangeInRange;
 //       it != lastStaffChangeInRange;
 //       ++it
@@ -32334,7 +32621,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // handle the staff changes events on this note if any
 //   for (
-//     std::multimap<int, S_mxsrStaffChangeEvent>::const_iterator it =
+//     std::multimap <int, S_mxsrStaffChangeEvent>::const_iterator it =
 //      firstStaffChangeInRange;
 //     it != lastStaffChangeInRange;
 //     ++it
@@ -32397,14 +32684,14 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
 
   /* JMI
-  std::map<std::pair<int, int>, S_msrNote>::iterator
+  std::map <std::pair <int, int>, S_msrNote>::iterator
     it =
-      fVoicesLastMetNoteMap.find (
+      fStaffVoicesLastMetNoteMap.find (
         std::make_pair (
           fPreviousNoteStaffNumber,
           fCurrentNoteVoiceNumber)); // JMI ???
 
-  if (it != fVoicesLastMetNoteMap.end ()) {
+  if (it != fStaffVoicesLastMetNoteMap.end ()) {
     S_msrNote
       lastMetNoteInVoice =
         (*it).second;

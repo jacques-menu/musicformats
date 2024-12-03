@@ -174,7 +174,7 @@ S_msrNote msrMeasureRepeatElement::fetchMeasureRepeatElementFirstNonGraceNote ()
   // possibly inside a chord or tuplet
 
   if (fMeasureRepeatElementsList.size ()) {
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fMeasureRepeatElementsList.begin (),
       iEnd   = fMeasureRepeatElementsList.end (),
       i      = iBegin;
@@ -321,7 +321,7 @@ void msrMeasureRepeatElement::browseData (basevisitor* v)
   // browse the elements
   if (fMeasureRepeatElementsList.size ()) {
     for (
-      std::list<S_msrVoiceElement>::const_iterator i = fMeasureRepeatElementsList.begin ();
+      std::list <S_msrVoiceElement>::const_iterator i = fMeasureRepeatElementsList.begin ();
       i != fMeasureRepeatElementsList.end ();
       ++i
   ) {
@@ -386,7 +386,7 @@ void msrMeasureRepeatElement::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fMeasureRepeatElementsList.begin (),
       iEnd   = fMeasureRepeatElementsList.end (),
       i      = iBegin;
@@ -445,7 +445,7 @@ void msrMeasureRepeatElement::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fMeasureRepeatElementsList.begin (),
       iEnd   = fMeasureRepeatElementsList.end (),
       i      = iBegin;

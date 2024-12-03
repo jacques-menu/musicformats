@@ -96,7 +96,7 @@ class EXP bsrParallel : public bsrElement
     int                   fPrintParallelNumber;
     int                   fBrailleParallelNumber;
 
-    std::list<S_bsrElement>
+    std::list <S_bsrElement>
                           fParallelElementsList;
 };
 typedef SMARTP<bsrParallel> S_bsrParallel;

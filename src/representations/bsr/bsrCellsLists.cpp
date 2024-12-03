@@ -214,7 +214,7 @@ void bsrCellsList::appendCellsListToCellsList (
 {
   if (otherCellsList) {
     if (otherCellsList->fCellsListElements.size ()) {
-      std::list<bsrCellKind>::const_iterator
+      std::list <bsrCellKind>::const_iterator
         iBegin = otherCellsList->fCellsListElements.begin (),
         iEnd   = otherCellsList->fCellsListElements.end (),
         i      = iBegin;
@@ -232,7 +232,7 @@ void bsrCellsList::prependCellsListToCellsList (
 {
   if (otherCellsList) {
     if (otherCellsList->fCellsListElements.size ()) {
-      std::list<bsrCellKind>::const_reverse_iterator
+      std::list <bsrCellKind>::const_reverse_iterator
         iBegin = otherCellsList->fCellsListElements.rbegin (),
         iEnd   = otherCellsList->fCellsListElements.rend (),
         i      = iBegin;
@@ -249,7 +249,7 @@ void bsrCellsList::prependCellsListToCellsList (
 void bsrCellsList::generateBrailleCode (std::ostream& os)
 {
   if (fCellsListElements.size ()) {
-    std::list<bsrCellKind>::const_iterator
+    std::list <bsrCellKind>::const_iterator
       iBegin = fCellsListElements.begin (),
       iEnd   = fCellsListElements.end (),
       i      = iBegin;
@@ -349,7 +349,7 @@ std::string bsrCellsList::asString () const
     "cellsListElements [";
 
   if (fCellsListElements.size ()) {
-    std::list<bsrCellKind>::const_iterator
+    std::list <bsrCellKind>::const_iterator
       iBegin = fCellsListElements.begin (),
       iEnd   = fCellsListElements.end (),
       i      = iBegin;
@@ -378,7 +378,7 @@ void bsrCellsList::print (std::ostream& os) const
     "cellsListElements [";
 
   if (fCellsListElements.size ()) {
-    std::list<bsrCellKind>::const_iterator
+    std::list <bsrCellKind>::const_iterator
       iBegin = fCellsListElements.begin (),
       iEnd   = fCellsListElements.end (),
       i      = iBegin;

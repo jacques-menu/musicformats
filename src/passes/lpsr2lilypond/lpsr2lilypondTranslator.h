@@ -936,7 +936,7 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& note);
 
     void                  generateCodeForNoteWordsList (
-                            const std::list<S_msrWords>& noteWordsList);
+                            const std::list <S_msrWords>& noteWordsList);
 
     void                  generateCodeRightAfterNote (
                             const S_msrNote& note);
@@ -1206,12 +1206,12 @@ class EXP lpsr2lilypondTranslator :
 
     void                  generateHeaderIdentificationPart (
                             const S_msrIdentification& identification,
-                            std::list<std::pair<std::string, std::string>>&
+                            std::list <std::pair <std::string, std::string>>&
                                                        nameStringValuePairsList);
 
     void                  createLilypondHeaderStringValuePairs (
                             const S_lpsrHeader& header,
-                            std::list<std::pair<std::string, std::string>>&
+                            std::list <std::pair <std::string, std::string>>&
                                                 nameStringValuePairsList);
 
     std::string           generateStringAsLilypondMarkupOrDoubleQuotedString (
@@ -1223,12 +1223,12 @@ class EXP lpsr2lilypondTranslator :
 
     void                  fetchLengthValuesFromPaperPageSize (
                             const S_lpsrPaper& paper,
-                            std::list<std::pair<std::string, msrLength>>&
+                            std::list <std::pair <std::string, msrLength>>&
                                                nameLengthValuePairsList);
 
     void                  fetchOnOffValuesFromLpsrOptionsGroup (
                             const S_lpsrPaper& paper,
-                            std::list<std::pair<std::string, Bool>>&
+                            std::list <std::pair <std::string, Bool>>&
                                                nameBooleanValuePairsList);
 
     void                  generatePaperPageSize (
@@ -1373,7 +1373,7 @@ class EXP lpsr2lilypondTranslator :
 
     // repeats
     // ------------------------------------------------------
-    std::list<S_lpsrRepeat>
+    std::list <S_lpsrRepeat>
                           fRepeatDescrsStack;
 
     // multi-measure rests
@@ -1397,7 +1397,7 @@ class EXP lpsr2lilypondTranslator :
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    std::list<S_msrNote>  fOnGoingNotesStack; // USELESS??? JMI CLAR
+    std::list <S_msrNote>  fOnGoingNotesStack; // USELESS??? JMI CLAR
 
 
     // double tremolos
@@ -1412,12 +1412,12 @@ class EXP lpsr2lilypondTranslator :
 
     // chords
     // ------------------------------------------------------
-    std::list<int>        fPendingChordMemberNotesStringNumbers;
+    std::list <int>        fPendingChordMemberNotesStringNumbers;
 
     Bool                  fOnGoingChord;
     S_msrChord            fCurrentChord;
 
-    std::list<int>        fCurrentChordPendingSlurs;
+    std::list <int>        fCurrentChordPendingSlurs;
 
     void                  generateCodeAheadOfChordContents (
                             const S_msrChord& chord);
@@ -1438,7 +1438,7 @@ class EXP lpsr2lilypondTranslator :
     // tuplets
     // ------------------------------------------------------
 // JMI     const S_msrTuplet&          fCurrentMsrTupletClone; JMI v0.9.79
-    std::list<S_msrTuplet>
+    std::list <S_msrTuplet>
                           fOnGoingTupletsStack;
 
     // stanzas

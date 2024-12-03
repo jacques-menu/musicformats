@@ -908,7 +908,7 @@ void msrKey::print (std::ostream& os) const
 
         ++gIndenter;
 
-        std::vector<S_msrHumdrumScotKeyItem>::const_iterator
+        std::vector <S_msrHumdrumScotKeyItem>::const_iterator
           iBegin = fHumdrumScotKeyItemsVector.begin (),
           iEnd   = fHumdrumScotKeyItemsVector.end (),
           i      = iBegin;

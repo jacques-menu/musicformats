@@ -587,18 +587,18 @@ class EXP msr2mxsrTranslator :
 */
 
     // identification creator
-    std::list<Sxmlelement>    fComposersElementsList;
-    std::list<Sxmlelement>    fLyricistsElementsList;
-    std::list<Sxmlelement>    fArrangersElementsList;
+    std::list <Sxmlelement>    fComposersElementsList;
+    std::list <Sxmlelement>    fLyricistsElementsList;
+    std::list <Sxmlelement>    fArrangersElementsList;
 
-    std::list<Sxmlelement>    fPoetsElementsList;
-    std::list<Sxmlelement>    fTranslatorsElementsList;
-    std::list<Sxmlelement>    fArtistsElementsList;
+    std::list <Sxmlelement>    fPoetsElementsList;
+    std::list <Sxmlelement>    fTranslatorsElementsList;
+    std::list <Sxmlelement>    fArtistsElementsList;
 
-    std::list<Sxmlelement>    fSoftwaresElementsList;
+    std::list <Sxmlelement>    fSoftwaresElementsList;
 
     // identification rights
-    std::list<Sxmlelement>    fRightsElementsList;
+    std::list <Sxmlelement>    fRightsElementsList;
 
 
     // identification encoding
@@ -671,7 +671,7 @@ class EXP msr2mxsrTranslator :
                                 const S_msrSystemLayout& systemLayout);
 
     // staff layouts
-    std::list<Sxmlelement>    fScoreDefaultsStaffLayoutElementsList;
+    std::list <Sxmlelement>    fScoreDefaultsStaffLayoutElementsList;
 
     // measure print layout
     Sxmlelement               fCurrentMeasureMusicXMLPrintLayoutElement; // not used JMI
@@ -683,23 +683,23 @@ class EXP msr2mxsrTranslator :
 
   void                        populateAppearanceLineWidths (
                                 const Sxmlelement&               appearanceElement,
-                                const std::list<S_msrLineWidth>& lineWidthsList);
+                                const std::list <S_msrLineWidth>& lineWidthsList);
 
   void                        populateAppearanceNoteSizes (
                                 const Sxmlelement&              appearanceElement,
-                                const std::list<S_msrNoteSize>& noteSizesList);
+                                const std::list <S_msrNoteSize>& noteSizesList);
 
   void                        populateAppearanceDistances (
                                 const Sxmlelement&              appearanceElement,
-                                const std::list<S_msrDistance>& distancesList);
+                                const std::list <S_msrDistance>& distancesList);
 
   void                        populateAppearanceGlyphs (
                                 const Sxmlelement&           appearanceElement,
-                                const std::list<S_msrGlyph>& glyphsList);
+                                const std::list <S_msrGlyph>& glyphsList);
 
   void                        populateAppearanceOtherAppearances (
                                 const Sxmlelement& appearanceElement,
-                                const std::list<S_msrOtherAppearance>&
+                                const std::list <S_msrOtherAppearance>&
                                                    otherAppearancesList);
 
     // credits
@@ -707,7 +707,7 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fCurrentScoreCreditElement;
 
-    std::list<Sxmlelement>    fPendingScoreCreditElementsList;
+    std::list <Sxmlelement>    fPendingScoreCreditElementsList;
 
     // the part direction element
     // ------------------------------------------------------
@@ -747,7 +747,7 @@ class EXP msr2mxsrTranslator :
 
     // partGroup's can be nested, hence this stack
     // the current partGroup is the top of the stack
-    std::list<Sxmlelement>   fPartGroupElementsStack;
+    std::list <Sxmlelement>   fPartGroupElementsStack;
 
     // parts
     // ------------------------------------------------------
@@ -756,7 +756,7 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fCurrentPartElement;
 
-    std::list<Sxmlelement>    fPendingPartElementsList;
+    std::list <Sxmlelement>    fPendingPartElementsList;
 
     Sxmlelement               fScorePartListElement;
     Sxmlelement               fScorePartElement;
@@ -800,7 +800,7 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fCurrentMeasureElement;
 
-    std::map<std::string, Sxmlelement>
+    std::map <std::string, Sxmlelement>
                               fPartMeasureNumbersToElementsMap;
 
     void                      appendOtherMusicXMLElementToMeasure (
@@ -822,7 +822,7 @@ class EXP msr2mxsrTranslator :
 
     Sxmlelement               fStavesElement;
 
-    std::list<Sxmlelement>    fClefElementsList;
+    std::list <Sxmlelement>    fClefElementsList;
 
     void                      createMxmlAttributesElementAndAppendItToMeasure ();
 

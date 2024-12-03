@@ -142,7 +142,7 @@ class EXP msrIdentification : public msrElement
 
 		// ... ... ...
 
-    std::list<std::string>
+    std::list <std::string>
                           fSoftwaresList;
 
 	// ... ... ...
@@ -340,20 +340,20 @@ MSR stores descriptions of so-called 'measures slice' through \class{msrMeasures
 An \class{msrMeasuresSlice} contains basically a slice measures vector:
 \begin{lstlisting}[language=CPlusPlus]
     // the measures in the slice
-    std::vector<S_msrMeasure>  fSliceMeasuresVector;
+    std::vector <S_msrMeasure>  fSliceMeasuresVector;
 \end{lstlisting}
 
 From this, the following other descriptions are derived:
 \begin{lstlisting}[language=CPlusPlus]
     // notes flat list
-    std::list<S_msrNote>  fSliceNotesFlatList;
+    std::list <S_msrNote>  fSliceNotesFlatList;
 
     // note events list
-    std::list<S_msrNoteEvent>
+    std::list <S_msrNoteEvent>
                           fSliceNoteEventsList;
 
     // simultaneous notes chunks list
-    std::list<S_msrSimultaneousNotesChunk>
+    std::list <S_msrSimultaneousNotesChunk>
                           fSliceSimultaneousNotesChunksList;
 \end{lstlisting}
 
@@ -852,7 +852,7 @@ class EXP msrTempoNote : public msrElement
 
     mfRational              fTempoNoteWholeNotes;
 
-    std::list<S_msrBeam>  fTempoNoteBeamsList;
+    std::list <S_msrBeam>  fTempoNoteBeamsList;
 
     Bool                  fTempoNoteBelongsToATuplet;
 };
@@ -938,7 +938,7 @@ class EXP msrTempoTuplet : public msrElement
 
     mfRational              fTempoTupletDisplayWholeNotes;
 
-    std::list<S_msrElement>
+    std::list <S_msrElement>
                           fTempoTupletElementsList;
 };
 \end{lstlisting}
@@ -962,7 +962,7 @@ class EXP msrTempo : public msrMeasureElement
     msrTempoKBeatUnitsKind
                           fTempoKind;
 
-    std::list<S_msrWords> fTempoWordsList;
+    std::list <S_msrWords> fTempoWordsList;
 
     msrDottedNotesDuration     fTempoBeatUnit;
 
@@ -1075,7 +1075,7 @@ xml2ly -auto-output-file-name keys/HumdrumScotKeys.xml
 
     // Humdrum/Scot keys
 
-    std::vector<S_msrHumdrumScotKeyItem>
+    std::vector <S_msrHumdrumScotKeyItem>
                           fHumdrumScotKeyItemsVector;
     Bool                  fKeyItemsOctavesAreSpecified;
 \end{lstlisting}
@@ -1125,7 +1125,7 @@ enum class msrTimeSignatureRelationKind {
 
 A brick that can be used in \class{msrTimeSignature} is {\tt msrTimeSignatureItem}, whose private fields are:
 \begin{lstlisting}[language=CPlusPlus]
-    std::vector<int>      fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
+    std::vector <int>      fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
     int                   fTimeSignatureBeatValue;
 \end{lstlisting}
 
@@ -1134,7 +1134,7 @@ A brick that can be used in \class{msrTimeSignature} is {\tt msrTimeSignatureIte
     msrTimeSignatureSymbolKind
                           fTimeSignatureSymbolKind;
 
-    std::vector<S_msrTimeSignatureItem>
+    std::vector <S_msrTimeSignatureItem>
                           fTimeSignatureItemsVector;
 
     // a time is compound if it contains several items
@@ -1257,9 +1257,9 @@ There is no such concept in MusicXML, but MSR uses it for completeness, creating
 An \class{msrBook} contains a list and a set of {\tt S_msrBookElement}:
 \begin{lstlisting}[language=CPlusPlus]
     // book elements
-    std::set<S_msrBookElement> fBookElementsSet;
+    std::set <S_msrBookElement> fBookElementsSet;
 
-    std::list<S_msrBookElement>fBookElementsList;
+    std::list <S_msrBookElement>fBookElementsList;
 \end{lstlisting}
 
 Currently, the only book element used is the \class{msrScore}, but others might come, such as texts, which \lily\ allows as \lilycmd{markup}:
@@ -1278,9 +1278,9 @@ Scores handling is presented at \sectionRef{Scores handling}.
 A score in MSR is the usual music score concept. It contains a set and a list of {\tt S_msrPartGroup}:
 \begin{lstlisting}[language=CPlusPlus]
     // part groups
-    std::set<S_msrPartGroup>   fScorePartGroupsSet;
+    std::set <S_msrPartGroup>   fScorePartGroupsSet;
 
-    std::list<S_msrPartGroup>  fPartGroupsList;
+    std::list <S_msrPartGroup>  fPartGroupsList;
 \end{lstlisting}
 
 
@@ -1303,7 +1303,7 @@ formats/msr/msrPartGroups.h:class EXP msrPartGroup : public msrPartGroupElement
 which are stored in a list:
 \begin{lstlisting}[language=CPlusPlus]
     // allowing for both parts and nested part groups as elements
-    std::list<S_msrPartGroupElement>
+    std::list <S_msrPartGroupElement>
                           fPartGroupElementsList;
 \end{lstlisting}
 
@@ -1318,9 +1318,9 @@ A part in MSR is composed of voices, stored in:
 \begin{lstlisting}[language=CPlusPlus]
     // staves
 
-    std::map<int, S_msrStaff>
+    std::map <int, S_msrStaff>
                           getPartStavesMap;
-    std::list<S_msrStaff> fPartAllStavesList;
+    std::list <S_msrStaff> fPartAllStavesList;
 
     // harmonies
 
@@ -1334,7 +1334,7 @@ A part in MSR is composed of voices, stored in:
 
     // voices
 
-    std::list<S_msrVoice> fPartVoicesList;
+    std::list <S_msrVoice> fPartVoicesList;
 \end{lstlisting}
 
 
@@ -1348,11 +1348,11 @@ A staff contains at most 4 numbered voices, stored in:
 \begin{lstlisting}[language=CPlusPlus]
     // the mapping of all the voices in the staff,
     // including harmonies and figured bass voices
-    std::map<int, S_msrVoice>
+    std::map <int, S_msrVoice>
                           fStaffVoiceNumbersToAllVoicesMap;
 
     // the mapping of voice numbers to regular voices
-    std::map<int, S_msrVoice>
+    std::map <int, S_msrVoice>
                           fStaffVoiceNumbersToRegularVoicesMap;
 
     // we need to handle the regular voice specifically
@@ -1362,11 +1362,11 @@ A staff contains at most 4 numbered voices, stored in:
 
     // harmonies and figured bass elements should be placed %%%JMI
     // in the first regular voice of the staff, hence:
-    std::list<S_msrVoice> fStaffRegularVoicesList;
+    std::list <S_msrVoice> fStaffRegularVoicesList;
 
     // we need to sort the voices by increasing voice numbers,
     // but with harmonies voices right before the corresponding regular voices
-    std::list<S_msrVoice> fStaffAllVoicesList;
+    std::list <S_msrVoice> fStaffAllVoicesList;
 \end{lstlisting}
 
 
@@ -1439,7 +1439,7 @@ More precisely and for technical reasons, an \class{msrVoice} contains:
 \begin{lstlisting}[language=CPlusPlus]
     // voice initial elements list
 
-    std::list<S_msrVoiceElement>
+    std::list <S_msrVoiceElement>
                           fVoiceInitialElementsList;
 
     // voice first and last segments
@@ -1781,7 +1781,7 @@ class EXP msrMultiMeasureRest : public msrSegmentElement
     S_msrSegment          fMultiMeasureRestUpLinkToSegment;
 
     int                   fMeasureRestsNumber; // supplied by MusicXML
-    std::list<S_msrMeasure>
+    std::list <S_msrMeasure>
                           fMeasureRestsList;
 
     int                   fLastMeasureRestPuristNumber;
@@ -1838,7 +1838,7 @@ class EXP msrRepeat : public msrVoiceElement
     S_msrRepeatCommonPart fRepeatCommonPart;
 
     // repeat endings
-    std::vector<S_msrRepeatEnding>
+    std::vector <S_msrRepeatEnding>
                           fRepeatEndings;
     int                   fRepeatEndingsInternalCounter;
 
@@ -1861,7 +1861,7 @@ class EXP msrRepeat : public msrVoiceElement
     S_msrRepeat           fRepeatCommonPartUpLinkToRepeat;
 
     // elements list
-    std::list<S_msrVoiceElement>
+    std::list <S_msrVoiceElement>
                           fRepeatCommonPartElementsList;
 \end{lstlisting}
 
@@ -1891,7 +1891,7 @@ enum class msrRepeatEndingKind {
     msrRepeatEndingKind   fRepeatEndingKind;
 
     // elements list
-    std::list<S_msrVoiceElement>
+    std::list <S_msrVoiceElement>
                           fRepeatEndingElementsList;
 \end{lstlisting}
 
@@ -2152,13 +2152,13 @@ class EXP msrNote : public msrTupletElement
     // harmonies
     // ------------------------------------------------------
 
-    std::list<S_msrHarmony>
+    std::list <S_msrHarmony>
                           fNoteHarmoniesList;
 
     // figured bass
     // ------------------------------------------------------
 
-    std::list<S_msrFiguredBass>
+    std::list <S_msrFiguredBass>
                           fNoteFiguredBassesList;
 
 	// ... ... ...
@@ -2252,7 +2252,7 @@ Extensions are described by enumeration type {\tt }:
     msrSyllableKind       fSyllableKind;
 
     // texts list
-    std::list<std::string>
+    std::list <std::string>
                           fSyllableElementsList;
 
     // extend kind
@@ -2273,7 +2273,7 @@ Syllables are one case where the data in MSR is denormalized: a given \class{msr
 At the higher level, syllables are organized as instances of \class{msrStanza}, which contains:
 \begin{lstlisting}[language=CPlusPlus]
     // contents
-    std::vector<S_msrSyllable> fSyllables;
+    std::vector <S_msrSyllable> fSyllables;
 
     Bool                  fStanzaTextPresent;
 \end{lstlisting}

@@ -847,7 +847,7 @@ std::string msrFiguredBass::asString () const
   if (fFiguredBassFiguresList.size ()) {
     ss << ", fFiguredBassFiguresList: [";
 
-    std::list<S_msrBassFigure>::const_iterator
+    std::list <S_msrBassFigure>::const_iterator
       iBegin = fFiguredBassFiguresList.begin (),
       iEnd   = fFiguredBassFiguresList.end (),
       i      = iBegin;
@@ -943,7 +943,7 @@ std::string msrFiguredBass::asString () const
 //   if (fFiguredBassFiguresList.size ()) {
 //     ss << ", fFiguredBassFiguresList: [";
 //
-//     std::list<S_msrBassFigure>::const_iterator
+//     std::list <S_msrBassFigure>::const_iterator
 //       iBegin = fFiguredBassFiguresList.begin (),
 //       iEnd   = fFiguredBassFiguresList.end (),
 //       i      = iBegin;

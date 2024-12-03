@@ -22,7 +22,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-std::map<std::string, mfPassIDKind>
+std::map <std::string, mfPassIDKind>
   gGlobalMusicFormatsPassIDKindsMap;
 
 std::string mfPassIDKindAsString (
@@ -98,7 +98,7 @@ mfPassIDKind mfPassIDKindFromString (const std::string& theString)
   mfPassIDKind result =
     mfPassIDKind::kMfPassID_UNKNOWN_;
 
-  std::map<std::string, mfPassIDKind>::const_iterator
+  std::map <std::string, mfPassIDKind>::const_iterator
     it =
       gGlobalMusicFormatsPassIDKindsMap.find (
         theString);
@@ -147,7 +147,7 @@ std::string availableMusicFormatsPassIDKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::pair<std::string, mfPassIDKind>
+      std::pair <std::string, mfPassIDKind>
         thePair :
           gGlobalMusicFormatsPassIDKindsMap
     ) {

@@ -116,7 +116,7 @@ class EXP msrBook : public msrElement
                               { return fAppearance; }
 
     // book elements
-    const std::list<S_msrBookElement>&
+    const std::list <S_msrBookElement>&
                           getBookElementsList () const
                               { return fBookElementsList; }
 
@@ -137,7 +137,7 @@ class EXP msrBook : public msrElement
 */
 
     // credits
-    const std::list<S_msrCredit>&
+    const std::list <S_msrCredit>&
                           getCreditsList () const
                               { return fCreditsList; }
 
@@ -275,7 +275,7 @@ class EXP msrBook : public msrElement
 
 //     void                  collectBookElementsList ( JMI v0.9.70
 //                             int                   inputLineNumber,
-//                             std::list<S_msrPart>& partsList);
+//                             std::list <S_msrPart>& partsList);
 
   public:
 
@@ -322,14 +322,14 @@ class EXP msrBook : public msrElement
     S_msrAppearance       fAppearance;
 
     // credits
-    std::list<S_msrCredit>
+    std::list <S_msrCredit>
                           fCreditsList;
 
     // book elements
-    std::set<S_msrBookElement>
+    std::set <S_msrBookElement>
                           fBookElementsSet;
 
-    std::list<S_msrBookElement>
+    std::list <S_msrBookElement>
                           fBookElementsList;
 
     // master voice
@@ -376,7 +376,7 @@ class EXP msrBook : public msrElement
 
     // voices
 
-    std::list<S_msrVoice> fBookAllVoicesList;
+    std::list <S_msrVoice> fBookAllVoicesList;
 };
 typedef SMARTP<msrBook> S_msrBook;
 EXP std::ostream& operator << (std::ostream& os, const S_msrBook& elt);

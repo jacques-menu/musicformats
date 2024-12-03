@@ -87,7 +87,7 @@ class EXP lpsrLayout : public lpsrElement
 
     float                 fLayoutGlobalStaffSize;
 
-    std::vector<S_lpsrSchemeVariable>
+    std::vector <S_lpsrSchemeVariable>
                           fLpsrSchemeVariablesVector;
 };
 typedef SMARTP<lpsrLayout> S_lpsrLayout;

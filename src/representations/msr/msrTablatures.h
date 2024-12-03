@@ -210,11 +210,11 @@ class EXP msrFrame : public msrElement
     int                   getFrameFirstFretNumber () const
                               { return fFrameFirstFretNumber; }
 
-    const std::list<S_msrFrameNote>&
+    const std::list <S_msrFrameNote>&
                           getFrameFrameNotesList () const
                               { return fFrameFrameNotesList; }
 
-    const std::list<msrBarre>& getFrameBarresList ()
+    const std::list <msrBarre>& getFrameBarresList ()
                               { return fFrameBarresList; }
 
     Bool                  getFrameContainsFingerings () const
@@ -267,13 +267,13 @@ class EXP msrFrame : public msrElement
     int                   fFrameFretsNumber;
     int                   fFrameFirstFretNumber;
 
-    std::list<S_msrFrameNote>  fFrameFrameNotesList;
+    std::list <S_msrFrameNote>  fFrameFrameNotesList;
 
-    std::list<msrBarre >       fFrameBarresList;
+    std::list <msrBarre >       fFrameBarresList;
 
     // a barre start remains pending
     // until the matching stop is appended to the frame
-    std::list<S_msrFrameNote> fPendingBarreStartFrameNotes;
+    std::list <S_msrFrameNote> fPendingBarreStartFrameNotes;
 
     // optimizing computation
     Bool                  fFrameContainsFingerings;

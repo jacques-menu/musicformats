@@ -308,7 +308,7 @@ S_lilypondTransposePartNameAtom lilypondTransposePartNameAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+  std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                      stringToMsrSemiTonesPitchAndOctaveMapVariable)
 {
   lilypondTransposePartNameAtom* obj = new
@@ -329,7 +329,7 @@ lilypondTransposePartNameAtom::lilypondTransposePartNameAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+  std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                      stringToMsrSemiTonesPitchAndOctaveMapVariable)
   : oahAtomStoringAValue (
       longName,
@@ -448,7 +448,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
-  std::map<std::string, S_msrSemiTonesPitchAndOctave>::iterator
+  std::map <std::string, S_msrSemiTonesPitchAndOctave>::iterator
     it =
       fStringToMsrSemiTonesPitchAndOctaveMapVariable.find (partName);
 
@@ -570,7 +570,7 @@ std::string lilypondTransposePartNameAtom::asShortNamedOptionString () const
     ss <<
       '-' << fShortName << " \"";
 
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
@@ -597,7 +597,7 @@ std::string lilypondTransposePartNameAtom::asActualLongNamedOptionString () cons
     ss <<
       '-' << fShortName << " \"";
 
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
@@ -641,7 +641,7 @@ void lilypondTransposePartNameAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
@@ -687,7 +687,7 @@ void lilypondTransposePartNameAtom::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
@@ -724,7 +724,7 @@ S_lilypondTransposePartIDAtom lilypondTransposePartIDAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+  std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                      stringToMsrSemiTonesPitchAndOctaveMapVariable)
 {
   lilypondTransposePartIDAtom* obj = new
@@ -745,7 +745,7 @@ lilypondTransposePartIDAtom::lilypondTransposePartIDAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::map<std::string, S_msrSemiTonesPitchAndOctave>&
+  std::map <std::string, S_msrSemiTonesPitchAndOctave>&
                      stringToMsrSemiTonesPitchAndOctaveMapVariable)
   : oahAtomStoringAValue (
       longName,
@@ -861,7 +861,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
 #endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the part renaming map?
-  std::map<std::string, S_msrSemiTonesPitchAndOctave>::iterator
+  std::map <std::string, S_msrSemiTonesPitchAndOctave>::iterator
     it =
       fStringToMsrSemiTonesPitchAndOctaveMapVariable.find (partID);
 
@@ -983,7 +983,7 @@ std::string lilypondTransposePartIDAtom::asShortNamedOptionString () const
     ss <<
       '-' << fShortName << " \"";
 
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
@@ -1010,7 +1010,7 @@ std::string lilypondTransposePartIDAtom::asActualLongNamedOptionString () const
     ss <<
       '-' << fShortName << " \"";
 
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
@@ -1054,7 +1054,7 @@ void lilypondTransposePartIDAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
@@ -1100,7 +1100,7 @@ void lilypondTransposePartIDAtom::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
+    std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
       iEnd   = fStringToMsrSemiTonesPitchAndOctaveMapVariable.end (),
       i      = iBegin;
@@ -1480,7 +1480,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
 /* JMI
   // is it in the score output kinds map?
 
-  std::map<std::string, msrOctaveEntryKind>::const_iterator
+  std::map <std::string, msrOctaveEntryKind>::const_iterator
     it =
       gGlobalMsrOctaveEntryKindsMap.find (
         theString);
@@ -2283,7 +2283,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, lpsrAccidentalStyleKind>::const_iterator
+  std::map <std::string, lpsrAccidentalStyleKind>::const_iterator
     it =
       gGlobalLpsrAccidentalStyleKindsMap.find (
         theString);
@@ -2499,7 +2499,7 @@ S_lilypondChordsDisplayAtom lilypondChordsDisplayAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::list<std::pair<std::string, std::string>>&
+  std::list <std::pair <std::string, std::string>>&
                      lilypondChordsDisplayVariable)
 {
   lilypondChordsDisplayAtom* obj = new
@@ -2520,7 +2520,7 @@ lilypondChordsDisplayAtom::lilypondChordsDisplayAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::list<std::pair<std::string, std::string>>&
+  std::list <std::pair <std::string, std::string>>&
                      lilypondChordsDisplayVariable)
   : oahAtomStoringAValue (
       longName,
@@ -2770,7 +2770,7 @@ std::string lilypondChordsDisplayAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (fStringsPairListVariable.size ()) { // JMI superflous???
-    std::list<std::pair<std::string, std::string>>::const_iterator
+    std::list <std::pair <std::string, std::string>>::const_iterator
       iBegin = fStringsPairListVariable.begin (),
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
@@ -2794,7 +2794,7 @@ std::string lilypondChordsDisplayAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (fStringsPairListVariable.size ()) { // JMI superflous???
-    std::list<std::pair<std::string, std::string>>::const_iterator
+    std::list <std::pair <std::string, std::string>>::const_iterator
       iBegin = fStringsPairListVariable.begin (),
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
@@ -2834,7 +2834,7 @@ void lilypondChordsDisplayAtom::print (std::ostream& os) const
   if (fStringsPairListVariable.size ()) {
     ++gIndenter;
 
-    std::list<std::pair<std::string, std::string>>::const_iterator
+    std::list <std::pair <std::string, std::string>>::const_iterator
       iBegin = fStringsPairListVariable.begin (),
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
@@ -2865,7 +2865,7 @@ void lilypondChordsDisplayAtom::displayAtomWithVariableOptionsValues (
     os << std::endl;
     ++gIndenter;
 
-    std::list<std::pair<std::string, std::string>>::const_iterator
+    std::list <std::pair <std::string, std::string>>::const_iterator
       iBegin = fStringsPairListVariable.begin (),
       iEnd   = fStringsPairListVariable.end (),
       i      = iBegin;
@@ -2989,7 +2989,7 @@ void lilypondLyricsNotesDurationsKindAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, lpsrLyricsNotesDurationsKind>::const_iterator
+  std::map <std::string, lpsrLyricsNotesDurationsKind>::const_iterator
     it =
       gGlobalLpsrLyricsNotesDurationsKindsMap.find (
         theString);
@@ -3277,7 +3277,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, lpsrDynamicsTextSpannersStyleKind>::const_iterator
+  std::map <std::string, lpsrDynamicsTextSpannersStyleKind>::const_iterator
     it =
       getLpsrDynamicsTextSpannersStyleKindsMap ().find (
         theString);
@@ -5645,7 +5645,7 @@ void lpsr2lilypondOahGroup::initializeLpsr2LilypondOahGroup ()
 Bool lpsr2lilypondOahGroup::setAccidentalStyleKind (lpsrAccidentalStyleKind accidentalStyleKind)
 {
   // is accidentalStyleKind in the accidental styles set?
-  std::map<std::string, lpsrAccidentalStyleKind>::const_iterator
+  std::map <std::string, lpsrAccidentalStyleKind>::const_iterator
     it =
       gGlobalLpsrAccidentalStyleKindsMap.find (accidentalStyleKind);
 
@@ -5874,7 +5874,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     }
     else {
       for (
-        std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator i =
+        std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator i =
           fPartNamesTranspositionMap.begin ();
         i != fPartNamesTranspositionMap.end ();
         ++i
@@ -5905,7 +5905,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     }
     else {
       for (
-        std::map<std::string, S_msrSemiTonesPitchAndOctave>::const_iterator i =
+        std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator i =
           fPartIDsTranspositionMap.begin ();
         i != fPartIDsTranspositionMap.end ();
         ++i
@@ -6164,7 +6164,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     os << " empty";
   }
   else {
-    std::map<std::string, int>::const_iterator
+    std::map <std::string, int>::const_iterator
       iBegin = fResetMeasureElementMeasureNumberMap.begin (),
       iEnd   = fResetMeasureElementMeasureNumberMap.end (),
       i      = iBegin;
@@ -6182,7 +6182,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     os << "[EMPTY]";
   }
   else {
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fBoxAroundBarNumberSet.begin (),
       iEnd   = fBoxAroundBarNumberSet.end (),
       i      = iBegin;
@@ -6367,7 +6367,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
 
     ++gIndenter;
 
-    std::list<std::pair<std::string, std::string>>::const_iterator
+    std::list <std::pair <std::string, std::string>>::const_iterator
       iBegin = fChordsDisplayList.begin (),
       iEnd   = fChordsDisplayList.end (),
       i      = iBegin;
@@ -6805,7 +6805,7 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
     gLog << "[EMPTY]";
   }
   else {
-    std::map<std::string, int>::const_iterator
+    std::map <std::string, int>::const_iterator
       iBegin = fResetMeasureElementMeasureNumberMap.begin (),
       iEnd   = fResetMeasureElementMeasureNumberMap.end (),
       i      = iBegin;
@@ -6823,7 +6823,7 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
     gLog << "[EMPTY]";
   }
   else {
-    std::set<int>::const_iterator
+    std::set <int>::const_iterator
       iBegin = fBoxAroundBarNumberSet.begin (),
       iEnd   = fBoxAroundBarNumberSet.end (),
       i      = iBegin;
@@ -7184,7 +7184,7 @@ S_lilypondBreakPageAfterMeasureNumberAtom lilypondBreakPageAfterMeasureNumberAto
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<std::string>&  S_lilypondAbsoluteOctaveEntryAtomtringSetVariable)
+  std::set <std::string>&  S_lilypondAbsoluteOctaveEntryAtomtringSetVariable)
 {
   lilypondBreakPageAfterMeasureNumberAtom* obj = new
     lilypondBreakPageAfterMeasureNumberAtom (
@@ -7204,7 +7204,7 @@ lilypondBreakPageAfterMeasureNumberAtom::lilypondBreakPageAfterMeasureNumberAtom
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  std::set<std::string>&  S_lilypondAbsoluteOctaveEntryAtomtringSetVariable)
+  std::set <std::string>&  S_lilypondAbsoluteOctaveEntryAtomtringSetVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -7352,7 +7352,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::print (std::ostream& os) const
     os << "[EMPTY]";
   }
   else {
-    std::map<std::string, int>::const_iterator
+    std::map <std::string, int>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;
@@ -7386,7 +7386,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::displayAtomWithVariableOptionsValu
     os << std::endl;
     ++gIndenter;
 
-    std::map<std::string, int>::const_iterator
+    std::map <std::string, int>::const_iterator
       iBegin = fStringSetVariable.begin (),
       iEnd   = fStringSetVariable.end (),
       i      = iBegin;

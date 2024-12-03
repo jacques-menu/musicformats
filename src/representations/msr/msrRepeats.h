@@ -57,7 +57,7 @@ class EXP msrRepeatCommonPart : public msrElement
                               { return fRepeatCommonPartUpLinkToRepeat; }
 
     // elements
-    const std::list<S_msrVoiceElement>&
+    const std::list <S_msrVoiceElement>&
                           getRepeatCommonPartElementsList () const
                               { return fRepeatCommonPartElementsList; }
 
@@ -125,7 +125,7 @@ class EXP msrRepeatCommonPart : public msrElement
     S_msrRepeat           fRepeatCommonPartUpLinkToRepeat;
 
     // elements list
-    std::list<S_msrVoiceElement>
+    std::list <S_msrVoiceElement>
                           fRepeatCommonPartElementsList;
 };
 typedef SMARTP<msrRepeatCommonPart> S_msrRepeatCommonPart;
@@ -189,7 +189,7 @@ class EXP msrRepeatEnding : public msrElement
                               { return fRepeatEndingKind; }
 
     // elements
-    const std::list<S_msrVoiceElement>&
+    const std::list <S_msrVoiceElement>&
                           getRepeatEndingElementsList () const
                               { return fRepeatEndingElementsList; }
 
@@ -262,7 +262,7 @@ class EXP msrRepeatEnding : public msrElement
     msrRepeatEndingKind   fRepeatEndingKind;
 
     // elements list
-    std::list<S_msrVoiceElement>
+    std::list <S_msrVoiceElement>
                           fRepeatEndingElementsList;
 };
 typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
@@ -331,7 +331,7 @@ class EXP msrRepeat : public msrVoiceElement
                               { return fRepeatCommonPart; }
 
     // endings
-    const std::vector<S_msrRepeatEnding>&
+    const std::vector <S_msrRepeatEnding>&
                           getRepeatEndings () const
                               { return fRepeatEndings; }
 
@@ -428,7 +428,7 @@ class EXP msrRepeat : public msrVoiceElement
     S_msrRepeatCommonPart fRepeatCommonPart;
 
     // repeat endings
-    std::vector<S_msrRepeatEnding>
+    std::vector <S_msrRepeatEnding>
                           fRepeatEndings;
     int                   fRepeatEndingsInternalCounter;
 

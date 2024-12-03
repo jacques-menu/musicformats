@@ -62,7 +62,7 @@ class EXP msrTempoNote : public msrElement
     msrWholeNotes         getTempoNoteWholeNotes () const
                               { return fTempoNoteWholeNotes; }
 
-    const std::list<S_msrBeam>&
+    const std::list <S_msrBeam>&
                           getTempoNoteBeamsList () const
                               { return fTempoNoteBeamsList; }
 
@@ -99,7 +99,7 @@ class EXP msrTempoNote : public msrElement
 
     msrWholeNotes         fTempoNoteWholeNotes;
 
-    std::list<S_msrBeam>  fTempoNoteBeamsList;
+    std::list <S_msrBeam>  fTempoNoteBeamsList;
 
     Bool                  fTempoNoteBelongsToATuplet;
 };
@@ -160,7 +160,7 @@ class EXP msrTempoTuplet : public msrElement
     msrWholeNotes         getMemberNotesDisplayWholeNotes () const
                               { return fMemberNotesDisplayWholeNotes; }
 
-    const std::list<S_msrElement>&
+    const std::list <S_msrElement>&
                           getTempoTupletElementsList () const
                               { return fTempoTupletElementsList; }
 
@@ -229,7 +229,7 @@ class EXP msrTempoTuplet : public msrElement
 
     msrWholeNotes         fTempoTupletDisplayWholeNotes;
 
-    std::list<S_msrElement>
+    std::list <S_msrElement>
                           fTempoTupletElementsList;
 };
 typedef SMARTP<msrTempoTuplet> S_msrTempoTuplet;
@@ -271,7 +271,7 @@ class EXP msrTempoNotesRelationshipElements : public msrElement
                           getTempoNotesRelationshipElementsKind () const
                               { return fTempoNotesRelationshipElementsKind; }
 
-    const std::list<S_msrElement>&
+    const std::list <S_msrElement>&
                           getTempoNotesRelationshipElementsList () const
                               { return fTempoNotesRelationshipElementsList; }
 
@@ -307,7 +307,7 @@ class EXP msrTempoNotesRelationshipElements : public msrElement
     msrTempoNotesRelationshipElementsKind
                           fTempoNotesRelationshipElementsKind;
 
-    std::list<S_msrElement>
+    std::list <S_msrElement>
                           fTempoNotesRelationshipElementsList;
 };
 typedef SMARTP<msrTempoNotesRelationshipElements> S_msrTempoNotesRelationshipElements;
@@ -450,7 +450,7 @@ class EXP msrTempo : public msrMeasureElement
                           getTempoKind () const
                               { return fTempoKind; }
 
-    const std::list<S_msrWords>&
+    const std::list <S_msrWords>&
                           getTempoWordsList () const
                               { return fTempoWordsList; }
 
@@ -533,7 +533,7 @@ class EXP msrTempo : public msrMeasureElement
     msrTempoKBeatUnitsKind
                           fTempoKind;
 
-    std::list<S_msrWords> fTempoWordsList;
+    std::list <S_msrWords> fTempoWordsList;
 
     msrDottedNotesDuration
                           fTempoBeatUnit;

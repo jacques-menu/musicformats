@@ -930,7 +930,7 @@ S_msrNote msrNote::createNoteDeepClone (
 
 /* JMI
   {
-    std::list<S_msrSyllable>::const_iterator i;
+    std::list <S_msrSyllable>::const_iterator i;
     for (i = fNoteSyllablesList.begin (); i != fNoteSyllablesList.end (); ++i) {
       // share this data
       deepClone->
@@ -950,7 +950,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrBeam>::const_iterator i;
+    std::list <S_msrBeam>::const_iterator i;
     for (i = fNoteBeamsList.begin (); i != fNoteBeamsList.end (); ++i) {
       // share this data
       deepClone->
@@ -962,7 +962,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   for (
-    std::list<S_msrArticulation>::const_iterator i =
+    std::list <S_msrArticulation>::const_iterator i =
       fNoteArticulationsList.begin ();
       i != fNoteArticulationsList.end ();
       ++i
@@ -976,7 +976,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   for (
-    std::list<S_msrSpanner>::const_iterator i =
+    std::list <S_msrSpanner>::const_iterator i =
       fNoteSpannersList.begin ();
       i != fNoteSpannersList.end ();
       ++i
@@ -990,7 +990,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrTechnical>::const_iterator i;
+    std::list <S_msrTechnical>::const_iterator i;
     for (
       i = fNoteTechnicalsList.begin ();
       i != fNoteTechnicalsList.end ();
@@ -1003,7 +1003,7 @@ S_msrNote msrNote::createNoteDeepClone (
   }
 
   {
-    std::list<S_msrTechnicalWithInteger>::const_iterator i;
+    std::list <S_msrTechnicalWithInteger>::const_iterator i;
     for (
       i = fNoteTechnicalWithIntegersList.begin ();
       i != fNoteTechnicalWithIntegersList.end ();
@@ -1016,7 +1016,7 @@ S_msrNote msrNote::createNoteDeepClone (
   }
 
   {
-    std::list<S_msrTechnicalWithString>::const_iterator i;
+    std::list <S_msrTechnicalWithString>::const_iterator i;
     for (
       i = fNoteTechnicalWithStringsList.begin ();
       i != fNoteTechnicalWithStringsList.end ();
@@ -1032,7 +1032,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrOrnament>::const_iterator i;
+    std::list <S_msrOrnament>::const_iterator i;
     for (i = fNoteOrnamentsList.begin (); i != fNoteOrnamentsList.end (); ++i) {
       // share this data
       deepClone->
@@ -1044,7 +1044,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrGlissando>::const_iterator i;
+    std::list <S_msrGlissando>::const_iterator i;
     for (i = fNoteGlissandosList.begin (); i != fNoteGlissandosList.end (); ++i) {
       // share this data
       deepClone->
@@ -1056,7 +1056,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrSlide>::const_iterator i;
+    std::list <S_msrSlide>::const_iterator i;
     for (i = fNoteSlidesList.begin (); i != fNoteSlidesList.end (); ++i) {
       // share this data
       deepClone->
@@ -1097,7 +1097,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrDynamic>::const_iterator i;
+    std::list <S_msrDynamic>::const_iterator i;
     for (i = fNoteDynamicsList.begin (); i != fNoteDynamicsList.end (); ++i) {
       // share this data
       deepClone->
@@ -1106,7 +1106,7 @@ S_msrNote msrNote::createNoteDeepClone (
   }
 
   {
-    std::list<S_msrOtherDynamic>::const_iterator i;
+    std::list <S_msrOtherDynamic>::const_iterator i;
     for (i = fNoteOtherDynamicsList.begin (); i != fNoteOtherDynamicsList.end (); ++i) {
       // share this data
       deepClone->
@@ -1118,7 +1118,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrSlash>::const_iterator i;
+    std::list <S_msrSlash>::const_iterator i;
     for (i = fNoteSlashesList.begin (); i != fNoteSlashesList.end (); ++i) {
       // share this data
       deepClone->
@@ -1141,7 +1141,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrWedge>::const_iterator i;
+    std::list <S_msrWedge>::const_iterator i;
     for (i = fNoteWedgesList.begin (); i != fNoteWedgesList.end (); ++i) {
       // share this data
       deepClone->
@@ -1153,7 +1153,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrEyeGlasses>::const_iterator i;
+    std::list <S_msrEyeGlasses>::const_iterator i;
     for (i = fNoteEyeGlassesList.begin (); i != fNoteEyeGlassesList.end (); ++i) {
       // share this data
       deepClone->
@@ -1165,7 +1165,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrDamp>::const_iterator i;
+    std::list <S_msrDamp>::const_iterator i;
     for (i = fNoteDampsList.begin (); i != fNoteDampsList.end (); ++i) {
       // share this data
       deepClone->
@@ -1177,7 +1177,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrDampAll>::const_iterator i;
+    std::list <S_msrDampAll>::const_iterator i;
     for (i = fNoteDampAllsList.begin (); i != fNoteDampAllsList.end (); ++i) {
       // share this data
       deepClone->
@@ -1189,7 +1189,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrScordatura>::const_iterator i;
+    std::list <S_msrScordatura>::const_iterator i;
     for (i = fNoteScordaturasList.begin (); i != fNoteScordaturasList.end (); ++i) {
       // share this data
       deepClone->
@@ -1201,7 +1201,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrWords>::const_iterator i;
+    std::list <S_msrWords>::const_iterator i;
     for (i = fNoteWordsList.begin (); i != fNoteWordsList.end (); ++i) {
       // share this data
       deepClone->
@@ -1224,7 +1224,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrLigature>::const_iterator i;
+    std::list <S_msrLigature>::const_iterator i;
     for (i = fNoteLigaturesList.begin (); i != fNoteLigaturesList.end (); ++i) {
       // share this data
       deepClone->
@@ -1236,7 +1236,7 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   {
-    std::list<S_msrPedal>::const_iterator i;
+    std::list <S_msrPedal>::const_iterator i;
     for (i = fNotePedalsList.begin (); i != fNotePedalsList.end (); ++i) {
       // share this data
       deepClone->
@@ -2329,7 +2329,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 
 // JMI v0.9.66
 //   if (fNoteHarmoniesList.size ()) {
-//     std::list<S_msrHarmony>::const_iterator i;
+//     std::list <S_msrHarmony>::const_iterator i;
 //     for (S_msrHarmony harmony : fNoteHarmoniesList) {
 //       // set the harmony measure position, taking it's offset into account
 //       harmony->
@@ -2356,7 +2356,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 
   // are there figured bass elements attached to this note?
 //   if (fNoteFiguredBassesList.size ()) {
-//     std::list<S_msrFiguredBass>::const_iterator i;
+//     std::list <S_msrFiguredBass>::const_iterator i;
 //     for (S_msrFiguredBass figuredBass : fNoteFiguredBassesList) {
 //       // set the figured bass element measure position
 //       figuredBass->
@@ -3680,13 +3680,13 @@ void msrNote::browseData (basevisitor* v)
   // browse the beams if any
   if (fNoteBeamsList.size ()) {
     ++gIndenter;
-//     std::list<S_msrBeam>::const_iterator i;
+//     std::list <S_msrBeam>::const_iterator i;
 //     for (i = fNoteBeamsList.begin (); i != fNoteBeamsList.end (); ++i) {
 //       // browse the beam
 //       msrBrowser<msrBeam> browser (v);
 //       browser.browse (*(*i));
 //     } // for
-    std::list<S_msrBeam>::const_iterator i;
+    std::list <S_msrBeam>::const_iterator i;
     for (S_msrBeam beam : fNoteBeamsList) {
       // browse the beam
       msrBrowser<msrBeam> browser (v);
@@ -3698,7 +3698,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the articulations if any
   if (fNoteArticulationsList.size ()) {
     ++gIndenter;
-    std::list<S_msrArticulation>::const_iterator i;
+    std::list <S_msrArticulation>::const_iterator i;
     for (i = fNoteArticulationsList.begin (); i != fNoteArticulationsList.end (); ++i) {
       // browse the articulation
       msrBrowser<msrArticulation> browser (v);
@@ -3710,7 +3710,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the spanners if any
   if (fNoteSpannersList.size ()) {
     ++gIndenter;
-    std::list<S_msrSpanner>::const_iterator i;
+    std::list <S_msrSpanner>::const_iterator i;
     for (i = fNoteSpannersList.begin (); i != fNoteSpannersList.end (); ++i) {
       // browse the spanner
       msrBrowser<msrSpanner> browser (v);
@@ -3722,7 +3722,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the technicals if any
   if (fNoteTechnicalsList.size ()) {
     ++gIndenter;
-    std::list<S_msrTechnical>::const_iterator i;
+    std::list <S_msrTechnical>::const_iterator i;
     for (
       i = fNoteTechnicalsList.begin ();
       i != fNoteTechnicalsList.end ();
@@ -3738,7 +3738,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the technicals with integer if any
   if (fNoteTechnicalWithIntegersList.size ()) {
     ++gIndenter;
-    std::list<S_msrTechnicalWithInteger>::const_iterator i;
+    std::list <S_msrTechnicalWithInteger>::const_iterator i;
     for (
       i = fNoteTechnicalWithIntegersList.begin ();
       i != fNoteTechnicalWithIntegersList.end ();
@@ -3754,7 +3754,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the technicals with float if any
   if (fNoteTechnicalWithFloatsList.size ()) {
     ++gIndenter;
-    std::list<S_msrTechnicalWithFloat>::const_iterator i;
+    std::list <S_msrTechnicalWithFloat>::const_iterator i;
     for (
       i = fNoteTechnicalWithFloatsList.begin ();
       i != fNoteTechnicalWithFloatsList.end ();
@@ -3770,7 +3770,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the technicals with string if any
   if (fNoteTechnicalWithStringsList.size ()) {
     ++gIndenter;
-    std::list<S_msrTechnicalWithString>::const_iterator i;
+    std::list <S_msrTechnicalWithString>::const_iterator i;
     for (
       i = fNoteTechnicalWithStringsList.begin ();
       i != fNoteTechnicalWithStringsList.end ();
@@ -3786,7 +3786,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the ornaments if any
   if (fNoteOrnamentsList.size ()) {
     ++gIndenter;
-    std::list<S_msrOrnament>::const_iterator i;
+    std::list <S_msrOrnament>::const_iterator i;
     for (i = fNoteOrnamentsList.begin (); i != fNoteOrnamentsList.end (); ++i) {
       // browse the ornament
       msrBrowser<msrOrnament> browser (v);
@@ -3798,7 +3798,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the glissandos if any
   if (fNoteGlissandosList.size ()) {
     ++gIndenter;
-    std::list<S_msrGlissando>::const_iterator i;
+    std::list <S_msrGlissando>::const_iterator i;
     for (i = fNoteGlissandosList.begin (); i != fNoteGlissandosList.end (); ++i) {
       // browse the glissando
       msrBrowser<msrGlissando> browser (v);
@@ -3810,7 +3810,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the slides if any
   if (fNoteSlidesList.size ()) {
     ++gIndenter;
-    std::list<S_msrSlide>::const_iterator i;
+    std::list <S_msrSlide>::const_iterator i;
     for (i = fNoteSlidesList.begin (); i != fNoteSlidesList.end (); ++i) {
       // browse the glissando
       msrBrowser<msrSlide> browser (v);
@@ -3840,7 +3840,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the dynamics if any
   if (fNoteDynamicsList.size ()) {
     ++gIndenter;
-    std::list<S_msrDynamic>::const_iterator i;
+    std::list <S_msrDynamic>::const_iterator i;
     for (i = fNoteDynamicsList.begin (); i != fNoteDynamicsList.end (); ++i) {
       // browse the dynamics
       msrBrowser<msrDynamic> browser (v);
@@ -3852,7 +3852,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the other dynamics if any
   if (fNoteOtherDynamicsList.size ()) {
     ++gIndenter;
-    std::list<S_msrOtherDynamic>::const_iterator i;
+    std::list <S_msrOtherDynamic>::const_iterator i;
     for (i = fNoteOtherDynamicsList.begin (); i != fNoteOtherDynamicsList.end (); ++i) {
       // browse the other dynamics
       msrBrowser<msrOtherDynamic> browser (v);
@@ -3864,7 +3864,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the words if any
   if (fNoteWordsList.size ()) {
     ++gIndenter;
-    std::list<S_msrWords>::const_iterator i;
+    std::list <S_msrWords>::const_iterator i;
     for (i = fNoteWordsList.begin (); i != fNoteWordsList.end (); ++i) {
       // browse the words
       msrBrowser<msrWords> browser (v);
@@ -3887,7 +3887,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the ligatures if any
   if (fNoteLigaturesList.size ()) {
     ++gIndenter;
-    std::list<S_msrLigature>::const_iterator i;
+    std::list <S_msrLigature>::const_iterator i;
     for (i = fNoteLigaturesList.begin (); i != fNoteLigaturesList.end (); ++i) {
       // browse the ligature
       msrBrowser<msrLigature> browser (v);
@@ -3899,7 +3899,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the pedals if any
   if (fNotePedalsList.size ()) {
     ++gIndenter;
-    std::list<S_msrPedal>::const_iterator i;
+    std::list <S_msrPedal>::const_iterator i;
     for (i = fNotePedalsList.begin (); i != fNotePedalsList.end (); ++i) {
       // browse the pedal
       msrBrowser<msrPedal> browser (v);
@@ -3944,7 +3944,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the segnos if any
   if (fNoteSegnosList.size ()) {
     ++gIndenter;
-    std::list<S_msrSegno>::const_iterator i;
+    std::list <S_msrSegno>::const_iterator i;
     for (i = fNoteSegnosList.begin (); i != fNoteSegnosList.end (); ++i) {
       // browse the segno
       msrBrowser<msrSegno> browser (v);
@@ -3956,7 +3956,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the dal segnos if any
   if (fNoteDalSegnosList.size ()) {
     ++gIndenter;
-    std::list<S_msrDalSegno>::const_iterator i;
+    std::list <S_msrDalSegno>::const_iterator i;
     for (i = fNoteDalSegnosList.begin (); i != fNoteDalSegnosList.end (); ++i) {
       // browse the dal segno
       msrBrowser<msrDalSegno> browser (v);
@@ -3968,7 +3968,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the codas if any
   if (fNoteCodasList.size ()) {
     ++gIndenter;
-    std::list<S_msrCoda>::const_iterator i;
+    std::list <S_msrCoda>::const_iterator i;
     for (i = fNoteCodasList.begin (); i != fNoteCodasList.end (); ++i) {
       // browse the coda
       msrBrowser<msrCoda> browser (v);
@@ -3980,7 +3980,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the eyeglasses if any
   if (fNoteEyeGlassesList.size ()) {
     ++gIndenter;
-    std::list<S_msrEyeGlasses>::const_iterator i;
+    std::list <S_msrEyeGlasses>::const_iterator i;
     for (i = fNoteEyeGlassesList.begin (); i != fNoteEyeGlassesList.end (); ++i) {
       // browse the eyeglasses
       msrBrowser<msrEyeGlasses> browser (v);
@@ -3992,7 +3992,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the damps if any
   if (fNoteDampsList.size ()) {
     ++gIndenter;
-    std::list<S_msrDamp>::const_iterator i;
+    std::list <S_msrDamp>::const_iterator i;
     for (i = fNoteDampsList.begin (); i != fNoteDampsList.end (); ++i) {
       // browse the damp
       msrBrowser<msrDamp> browser (v);
@@ -4004,7 +4004,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the damp alls if any
   if (fNoteDampAllsList.size ()) {
     ++gIndenter;
-    std::list<S_msrDampAll>::const_iterator i;
+    std::list <S_msrDampAll>::const_iterator i;
     for (i = fNoteDampAllsList.begin (); i != fNoteDampAllsList.end (); ++i) {
       // browse the damp all
       msrBrowser<msrDampAll> browser (v);
@@ -4016,7 +4016,7 @@ void msrNote::browseData (basevisitor* v)
   // browse the scordaturas if any
   if (fNoteScordaturasList.size ()) {
     ++gIndenter;
-    std::list<S_msrScordatura>::const_iterator i;
+    std::list <S_msrScordatura>::const_iterator i;
     for (i = fNoteScordaturasList.begin (); i != fNoteScordaturasList.end (); ++i) {
       // browse the scordatura
       msrBrowser<msrScordatura> browser (v);
@@ -4713,7 +4713,7 @@ std::string msrNote::asShortString () const
 // 		} // for
 
 		for (
-			std::list<S_msrTie>::const_iterator i = fNoteTiesList.begin ();
+			std::list <S_msrTie>::const_iterator i = fNoteTiesList.begin ();
 			i != fNoteTiesList.end ();
 			++i
 		) {
@@ -5131,7 +5131,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrBeam>::const_iterator
+    std::list <S_msrBeam>::const_iterator
       iBegin = fNoteBeamsList.begin (),
       iEnd   = fNoteBeamsList.end (),
       i      = iBegin;
@@ -5153,7 +5153,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrArticulation>::const_iterator
+    std::list <S_msrArticulation>::const_iterator
       iBegin = fNoteArticulationsList.begin (),
       iEnd   = fNoteArticulationsList.end (),
       i      = iBegin;
@@ -5175,7 +5175,7 @@ void msrNote::print (std::ostream& os) const
 
 		++gIndenter;
 
-		std::list<S_msrSpanner>::const_iterator
+		std::list <S_msrSpanner>::const_iterator
 			iBegin = fNoteSpannersList.begin (),
 			iEnd   = fNoteSpannersList.end (),
 			i      = iBegin;
@@ -5197,7 +5197,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTechnical>::const_iterator
+    std::list <S_msrTechnical>::const_iterator
       iBegin = fNoteTechnicalsList.begin (),
       iEnd   = fNoteTechnicalsList.end (),
       i      = iBegin;
@@ -5219,7 +5219,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTechnicalWithInteger>::const_iterator
+    std::list <S_msrTechnicalWithInteger>::const_iterator
       iBegin = fNoteTechnicalWithIntegersList.begin (),
       iEnd   = fNoteTechnicalWithIntegersList.end (),
       i      = iBegin;
@@ -5241,7 +5241,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTechnicalWithFloat>::const_iterator
+    std::list <S_msrTechnicalWithFloat>::const_iterator
       iBegin = fNoteTechnicalWithFloatsList.begin (),
       iEnd   = fNoteTechnicalWithFloatsList.end (),
       i      = iBegin;
@@ -5263,7 +5263,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTechnicalWithString>::const_iterator
+    std::list <S_msrTechnicalWithString>::const_iterator
       iBegin = fNoteTechnicalWithStringsList.begin (),
       iEnd   = fNoteTechnicalWithStringsList.end (),
       i      = iBegin;
@@ -5285,7 +5285,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrOrnament>::const_iterator
+    std::list <S_msrOrnament>::const_iterator
       iBegin = fNoteOrnamentsList.begin (),
       iEnd   = fNoteOrnamentsList.end (),
       i      = iBegin;
@@ -5307,7 +5307,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrGlissando>::const_iterator
+    std::list <S_msrGlissando>::const_iterator
       iBegin = fNoteGlissandosList.begin (),
       iEnd   = fNoteGlissandosList.end (),
       i      = iBegin;
@@ -5329,7 +5329,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSlide>::const_iterator
+    std::list <S_msrSlide>::const_iterator
       iBegin = fNoteSlidesList.begin (),
       iEnd   = fNoteSlidesList.end (),
       i      = iBegin;
@@ -5365,7 +5365,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrDynamic>::const_iterator
+    std::list <S_msrDynamic>::const_iterator
       iBegin = fNoteDynamicsList.begin (),
       iEnd   = fNoteDynamicsList.end (),
       i      = iBegin;
@@ -5387,7 +5387,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrOtherDynamic>::const_iterator
+    std::list <S_msrOtherDynamic>::const_iterator
       iBegin = fNoteOtherDynamicsList.begin (),
       iEnd   = fNoteOtherDynamicsList.end (),
       i      = iBegin;
@@ -5409,7 +5409,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrWords>::const_iterator
+    std::list <S_msrWords>::const_iterator
       iBegin = fNoteWordsList.begin (),
       iEnd   = fNoteWordsList.end (),
       i      = iBegin;
@@ -5447,7 +5447,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrLigature>::const_iterator
+    std::list <S_msrLigature>::const_iterator
       iBegin = fNoteLigaturesList.begin (),
       iEnd   = fNoteLigaturesList.end (),
       i      = iBegin;
@@ -5469,7 +5469,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrPedal>::const_iterator
+    std::list <S_msrPedal>::const_iterator
       iBegin = fNotePedalsList.begin (),
       iEnd   = fNotePedalsList.end (),
       i      = iBegin;
@@ -5491,7 +5491,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSlash>::const_iterator
+    std::list <S_msrSlash>::const_iterator
       iBegin = fNoteSlashesList.begin (),
       iEnd   = fNoteSlashesList.end (),
       i      = iBegin;
@@ -5513,7 +5513,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrCrescDecresc>::const_iterator
+    std::list <S_msrCrescDecresc>::const_iterator
       iBegin = fNoteCrescDecrescsList.begin (),
       iEnd   = fNoteCrescDecrescsList.end (),
       i      = iBegin;
@@ -5535,7 +5535,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrWedge>::const_iterator
+    std::list <S_msrWedge>::const_iterator
       iBegin = fNoteWedgesList.begin (),
       iEnd   = fNoteWedgesList.end (),
       i      = iBegin;
@@ -5557,7 +5557,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSegno>::const_iterator
+    std::list <S_msrSegno>::const_iterator
       iBegin = fNoteSegnosList.begin (),
       iEnd   = fNoteSegnosList.end (),
       i      = iBegin;
@@ -5579,7 +5579,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrDalSegno>::const_iterator
+    std::list <S_msrDalSegno>::const_iterator
       iBegin = fNoteDalSegnosList.begin (),
       iEnd   = fNoteDalSegnosList.end (),
       i      = iBegin;
@@ -5601,7 +5601,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrCoda>::const_iterator
+    std::list <S_msrCoda>::const_iterator
       iBegin = fNoteCodasList.begin (),
       iEnd   = fNoteCodasList.end (),
       i      = iBegin;
@@ -5623,7 +5623,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrEyeGlasses>::const_iterator
+    std::list <S_msrEyeGlasses>::const_iterator
       iBegin = fNoteEyeGlassesList.begin (),
       iEnd   = fNoteEyeGlassesList.end (),
       i      = iBegin;
@@ -5645,7 +5645,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrDamp>::const_iterator
+    std::list <S_msrDamp>::const_iterator
       iBegin = fNoteDampsList.begin (),
       iEnd   = fNoteDampsList.end (),
       i      = iBegin;
@@ -5667,7 +5667,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrDampAll>::const_iterator
+    std::list <S_msrDampAll>::const_iterator
       iBegin = fNoteDampAllsList.begin (),
       iEnd   = fNoteDampAllsList.end (),
       i      = iBegin;
@@ -5689,7 +5689,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrScordatura>::const_iterator
+    std::list <S_msrScordatura>::const_iterator
       iBegin = fNoteScordaturasList.begin (),
       iEnd   = fNoteScordaturasList.end (),
       i      = iBegin;
@@ -5711,7 +5711,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrHarmony>::const_iterator
+    std::list <S_msrHarmony>::const_iterator
       iBegin = fNoteHarmoniesList.begin (),
       iEnd   = fNoteHarmoniesList.end (),
       i      = iBegin;
@@ -5737,7 +5737,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrFiguredBass>::const_iterator
+    std::list <S_msrFiguredBass>::const_iterator
       iBegin = fNoteFiguredBassesList.begin (),
       iEnd   = fNoteFiguredBassesList.end (),
       i      = iBegin;
@@ -5763,7 +5763,7 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSyllable>::const_iterator
+    std::list <S_msrSyllable>::const_iterator
       iBegin = fNoteSyllablesList.begin (),
       iEnd   = fNoteSyllablesList.end (),
       i      = iBegin;
@@ -6651,7 +6651,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrBeam>::const_iterator
+    std::list <S_msrBeam>::const_iterator
       iBegin = fNoteBeamsList.begin (),
       iEnd   = fNoteBeamsList.end (),
       i      = iBegin;
@@ -6678,7 +6678,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrArticulation>::const_iterator
+    std::list <S_msrArticulation>::const_iterator
       iBegin = fNoteArticulationsList.begin (),
       iEnd   = fNoteArticulationsList.end (),
       i      = iBegin;
@@ -6705,7 +6705,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSpanner>::const_iterator
+    std::list <S_msrSpanner>::const_iterator
       iBegin = fNoteSpannersList.begin (),
       iEnd   = fNoteSpannersList.end (),
       i      = iBegin;
@@ -6732,7 +6732,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTechnical>::const_iterator
+    std::list <S_msrTechnical>::const_iterator
       iBegin = fNoteTechnicalsList.begin (),
       iEnd   = fNoteTechnicalsList.end (),
       i      = iBegin;
@@ -6759,7 +6759,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTechnicalWithInteger>::const_iterator
+    std::list <S_msrTechnicalWithInteger>::const_iterator
       iBegin = fNoteTechnicalWithIntegersList.begin (),
       iEnd   = fNoteTechnicalWithIntegersList.end (),
       i      = iBegin;
@@ -6786,7 +6786,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTechnicalWithFloat>::const_iterator
+    std::list <S_msrTechnicalWithFloat>::const_iterator
       iBegin = fNoteTechnicalWithFloatsList.begin (),
       iEnd   = fNoteTechnicalWithFloatsList.end (),
       i      = iBegin;
@@ -6813,7 +6813,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrTechnicalWithString>::const_iterator
+    std::list <S_msrTechnicalWithString>::const_iterator
       iBegin = fNoteTechnicalWithStringsList.begin (),
       iEnd   = fNoteTechnicalWithStringsList.end (),
       i      = iBegin;
@@ -6840,7 +6840,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrOrnament>::const_iterator
+    std::list <S_msrOrnament>::const_iterator
       iBegin = fNoteOrnamentsList.begin (),
       iEnd   = fNoteOrnamentsList.end (),
       i      = iBegin;
@@ -6867,7 +6867,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrGlissando>::const_iterator
+    std::list <S_msrGlissando>::const_iterator
       iBegin = fNoteGlissandosList.begin (),
       iEnd   = fNoteGlissandosList.end (),
       i      = iBegin;
@@ -6894,7 +6894,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSlide>::const_iterator
+    std::list <S_msrSlide>::const_iterator
       iBegin = fNoteSlidesList.begin (),
       iEnd   = fNoteSlidesList.end (),
       i      = iBegin;
@@ -6940,7 +6940,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrDynamic>::const_iterator
+    std::list <S_msrDynamic>::const_iterator
       iBegin = fNoteDynamicsList.begin (),
       iEnd   = fNoteDynamicsList.end (),
       i      = iBegin;
@@ -6967,7 +6967,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrOtherDynamic>::const_iterator
+    std::list <S_msrOtherDynamic>::const_iterator
       iBegin = fNoteOtherDynamicsList.begin (),
       iEnd   = fNoteOtherDynamicsList.end (),
       i      = iBegin;
@@ -6993,7 +6993,7 @@ void msrNote::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrWords>::const_iterator
+    std::list <S_msrWords>::const_iterator
       iBegin = fNoteWordsList.begin (),
       iEnd   = fNoteWordsList.end (),
       i      = iBegin;
@@ -7041,7 +7041,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrLigature>::const_iterator
+    std::list <S_msrLigature>::const_iterator
       iBegin = fNoteLigaturesList.begin (),
       iEnd   = fNoteLigaturesList.end (),
       i      = iBegin;
@@ -7068,7 +7068,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrPedal>::const_iterator
+    std::list <S_msrPedal>::const_iterator
       iBegin = fNotePedalsList.begin (),
       iEnd   = fNotePedalsList.end (),
       i      = iBegin;
@@ -7095,7 +7095,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSlash>::const_iterator
+    std::list <S_msrSlash>::const_iterator
       iBegin = fNoteSlashesList.begin (),
       iEnd   = fNoteSlashesList.end (),
       i      = iBegin;
@@ -7122,7 +7122,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrCrescDecresc>::const_iterator
+    std::list <S_msrCrescDecresc>::const_iterator
       iBegin = fNoteCrescDecrescsList.begin (),
       iEnd   = fNoteCrescDecrescsList.end (),
       i      = iBegin;
@@ -7149,7 +7149,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrWedge>::const_iterator
+    std::list <S_msrWedge>::const_iterator
       iBegin = fNoteWedgesList.begin (),
       iEnd   = fNoteWedgesList.end (),
       i      = iBegin;
@@ -7176,7 +7176,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSegno>::const_iterator
+    std::list <S_msrSegno>::const_iterator
       iBegin = fNoteSegnosList.begin (),
       iEnd   = fNoteSegnosList.end (),
       i      = iBegin;
@@ -7203,7 +7203,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrDalSegno>::const_iterator
+    std::list <S_msrDalSegno>::const_iterator
       iBegin = fNoteDalSegnosList.begin (),
       iEnd   = fNoteDalSegnosList.end (),
       i      = iBegin;
@@ -7230,7 +7230,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrCoda>::const_iterator
+    std::list <S_msrCoda>::const_iterator
       iBegin = fNoteCodasList.begin (),
       iEnd   = fNoteCodasList.end (),
       i      = iBegin;
@@ -7257,7 +7257,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrEyeGlasses>::const_iterator
+    std::list <S_msrEyeGlasses>::const_iterator
       iBegin = fNoteEyeGlassesList.begin (),
       iEnd   = fNoteEyeGlassesList.end (),
       i      = iBegin;
@@ -7284,7 +7284,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrDamp>::const_iterator
+    std::list <S_msrDamp>::const_iterator
       iBegin = fNoteDampsList.begin (),
       iEnd   = fNoteDampsList.end (),
       i      = iBegin;
@@ -7311,7 +7311,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrDampAll>::const_iterator
+    std::list <S_msrDampAll>::const_iterator
       iBegin = fNoteDampAllsList.begin (),
       iEnd   = fNoteDampAllsList.end (),
       i      = iBegin;
@@ -7338,7 +7338,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrScordatura>::const_iterator
+    std::list <S_msrScordatura>::const_iterator
       iBegin = fNoteScordaturasList.begin (),
       iEnd   = fNoteScordaturasList.end (),
       i      = iBegin;
@@ -7365,7 +7365,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrHarmony>::const_iterator
+    std::list <S_msrHarmony>::const_iterator
       iBegin = fNoteHarmoniesList.begin (),
       iEnd   = fNoteHarmoniesList.end (),
       i      = iBegin;
@@ -7394,7 +7394,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrFiguredBass>::const_iterator
+    std::list <S_msrFiguredBass>::const_iterator
       iBegin = fNoteFiguredBassesList.begin (),
       iEnd   = fNoteFiguredBassesList.end (),
       i      = iBegin;
@@ -7423,7 +7423,7 @@ void msrNote::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrSyllable>::const_iterator
+    std::list <S_msrSyllable>::const_iterator
       iBegin = fNoteSyllablesList.begin (),
       iEnd   = fNoteSyllablesList.end (),
       i      = iBegin;

@@ -44,7 +44,7 @@ std::ostream& operator << (std::ostream& os, const msdlKeywordsLanguageKind& elt
 msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (
   const std::string& theString);
 
-extern std::map<std::string, msdlKeywordsLanguageKind>
+extern std::map <std::string, msdlKeywordsLanguageKind>
   gGlobalMsdlKeywordsLanguageKindsMap;
 
 std::string availableMsdlKeywordsLanguageKinds (size_t namesListMaxLength);
@@ -106,12 +106,12 @@ std::string availableKeywordsInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
   size_t                   namesListMaxLength);
 
-extern std::map<msdlKeywordKind, std::string> gGlobalEnglishKeywordsNamesMap;
-extern std::map<msdlKeywordKind, std::string> gGlobalFrenchKeywordsNamesMap;
-extern std::map<msdlKeywordKind, std::string> gGlobalItalianKeywordsNamesMap;
-extern std::map<msdlKeywordKind, std::string> gGlobalGermanKeywordsNamesMap;
-extern std::map<msdlKeywordKind, std::string> gGlobalSpanishKeywordsNamesMap;
-extern std::map<msdlKeywordKind, std::string> gGlobalDutchKeywordsNamesMap;
+extern std::map <msdlKeywordKind, std::string> gGlobalEnglishKeywordsNamesMap;
+extern std::map <msdlKeywordKind, std::string> gGlobalFrenchKeywordsNamesMap;
+extern std::map <msdlKeywordKind, std::string> gGlobalItalianKeywordsNamesMap;
+extern std::map <msdlKeywordKind, std::string> gGlobalGermanKeywordsNamesMap;
+extern std::map <msdlKeywordKind, std::string> gGlobalSpanishKeywordsNamesMap;
+extern std::map <msdlKeywordKind, std::string> gGlobalDutchKeywordsNamesMap;
 
 void initializeEnglishKeywordsNamesMap ();
 void initializeFrenchKeywordsNamesMap ();

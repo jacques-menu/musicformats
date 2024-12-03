@@ -140,7 +140,7 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
       fLineContentsLineElementsList.size ();
 
   if (lineContentsElementsListSize) {
-    std::list<S_bsrLineContentsElement>::iterator it =
+    std::list <S_bsrLineContentsElement>::iterator it =
       fLineContentsLineElementsList.begin();
 
     std::advance (it, lineContentsElementsListSize - 1);
@@ -171,7 +171,7 @@ S_bsrCellsList bsrLineContents::buildLineContentsElementsList () const
       bsrCellsList::create (fInputStartLineNumber);
 
   for (
-    std::list<S_bsrLineContentsElement>::const_iterator i =
+    std::list <S_bsrLineContentsElement>::const_iterator i =
       fLineContentsLineElementsList.begin ();
     i != fLineContentsLineElementsList.end ();
     ++i
@@ -192,7 +192,7 @@ int bsrLineContents::fetchCellsNumber () const
   int result = 0;
 
   for (
-    std::list<S_bsrLineContentsElement>::const_iterator i =
+    std::list <S_bsrLineContentsElement>::const_iterator i =
       fLineContentsLineElementsList.begin ();
     i != fLineContentsLineElementsList.end ();
     ++i
@@ -282,7 +282,7 @@ void bsrLineContents::acceptOut (basevisitor* v)
 void bsrLineContents::browseData (basevisitor* v)
 {
   for (
-    std::list<S_bsrLineContentsElement>::const_iterator i =
+    std::list <S_bsrLineContentsElement>::const_iterator i =
       fLineContentsLineElementsList.begin ();
     i != fLineContentsLineElementsList.end ();
     ++i ) {
@@ -378,7 +378,7 @@ void bsrLineContents::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_bsrLineContentsElement>::const_iterator
+      std::list <S_bsrLineContentsElement>::const_iterator
         iBegin = fLineContentsLineElementsList.begin (),
         iEnd   = fLineContentsLineElementsList.end (),
         i      = iBegin;
@@ -409,7 +409,7 @@ std::string bsrLineContents::asDebugString () const
 
   // collect the line elements debug strings if any
   if (lineElementsListSize) {
-    std::list<S_bsrLineContentsElement>::const_iterator
+    std::list <S_bsrLineContentsElement>::const_iterator
       iBegin = fLineContentsLineElementsList.begin (),
       iEnd   = fLineContentsLineElementsList.end (),
       i      = iBegin;

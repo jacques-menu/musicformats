@@ -33,10 +33,10 @@ namespace MusicFormats
 
 // clefs
 //______________________________________________________________________________
-std::map<std::string, msrClefKeyTimeSignatureOrderKind>
+std::map <std::string, msrClefKeyTimeSignatureOrderKind>
   gGlobalClefKeyTimeSignatureOrderKindsMap;
 
-std::list<std::string>
+std::list <std::string>
   gClefKeyTimeSignatureOrderKindsNamesList;
 
 std::string msrClefKeyTimeSignatureOrderKindAsString (
@@ -127,7 +127,7 @@ std::string availableClefKeyTimeSignatureOrderKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msrClefKeyTimeSignatureOrderKind>::const_iterator i =
+      std::map <std::string, msrClefKeyTimeSignatureOrderKind>::const_iterator i =
         gGlobalClefKeyTimeSignatureOrderKindsMap.begin ();
       i != gGlobalClefKeyTimeSignatureOrderKindsMap.end ();
       ++i
@@ -174,7 +174,7 @@ std::string availableClefKeyTimeSignatureOrderKindsNames (size_t namesListMaxLen
     size_t cumulatedLength = 0;
 
     for (
-      std::list<std::string>::const_iterator i =
+      std::list <std::string>::const_iterator i =
         gClefKeyTimeSignatureOrderKindsNamesList.begin ();
       i != gClefKeyTimeSignatureOrderKindsNamesList.end ();
       ++i

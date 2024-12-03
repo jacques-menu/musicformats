@@ -109,7 +109,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, lpsrScoreOutputKind>::const_iterator
+  std::map <std::string, lpsrScoreOutputKind>::const_iterator
     it =
       gGlobalLpsrScoreOutputKindsMap.find (
         theString);

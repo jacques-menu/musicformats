@@ -215,7 +215,7 @@ std::string uncompressMXLFile (
       --gIndenter;
 
       // analyze the contents list
-      std::list<std::string> linesList;
+      std::list <std::string> linesList;
 
       std::istringstream inputStream (contentsList);
       std::string        currentLine;

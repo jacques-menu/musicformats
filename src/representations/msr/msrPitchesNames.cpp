@@ -28,10 +28,10 @@ namespace MusicFormats
 // notes pitches languages
 /* the reference for note pitches names is LilyPond's scm/define-note-names.scm */
 
-std::map<std::string, msrQuarterTonesPitchesLanguageKind>
+std::map <std::string, msrQuarterTonesPitchesLanguageKind>
   pQuarterTonesPitchesLanguageKindsMap;
 
-std::map<std::string, msrQuarterTonesPitchesLanguageKind>&
+std::map <std::string, msrQuarterTonesPitchesLanguageKind>&
   getQuarterTonesPitchesLanguageKindsMap ()
 {
   return pQuarterTonesPitchesLanguageKindsMap;
@@ -76,19 +76,19 @@ void initializeQuarterTonesPitchesLanguageKinds ()
 }
 
 //______________________________________________________________________________
-std::map<msrQuarterTonesPitchKind, std::string> pNederlandsPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pCatalanPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pDeutschPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pEnglishPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pEspanolPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pFrancaisPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pItalianoPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pNorskPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pPortuguesPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pSuomiPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pSvenskaPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pVlaamsPitchesNamesMap;
-std::map<msrQuarterTonesPitchKind, std::string> pArabicPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pNederlandsPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pCatalanPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pDeutschPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pEnglishPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pEspanolPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pFrancaisPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pItalianoPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pNorskPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pPortuguesPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pSuomiPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pSvenskaPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pVlaamsPitchesNamesMap;
+std::map <msrQuarterTonesPitchKind, std::string> pArabicPitchesNamesMap;
 
 //______________________________________________________________________________
 void initializeNederlandsPitchesNamesMap ()
@@ -1555,7 +1555,7 @@ void initializeArabicPitchesNamesMap ()
 }
 
 //______________________________________________________________________________
-std::map<msrQuarterTonesPitchKind, std::string>& getNederlandsPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getNederlandsPitchesNamesMap ()
 {
   if (! pNederlandsPitchesNamesMap.size ()) {
     initializeNederlandsPitchesNamesMap ();
@@ -1564,7 +1564,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getNederlandsPitchesNamesMap ()
  return pNederlandsPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getCatalanPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getCatalanPitchesNamesMap ()
 {
   if (! pCatalanPitchesNamesMap.size ()) {
     initializeCatalanPitchesNamesMap ();
@@ -1573,7 +1573,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getCatalanPitchesNamesMap ()
  return pCatalanPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getDeutschPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getDeutschPitchesNamesMap ()
 {
   if (! pDeutschPitchesNamesMap.size ()) {
     initializeDeutschPitchesNamesMap ();
@@ -1582,7 +1582,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getDeutschPitchesNamesMap ()
  return pDeutschPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getEnglishPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getEnglishPitchesNamesMap ()
 {
   if (! pEnglishPitchesNamesMap.size ()) {
     initializeEnglishPitchesNamesMap ();
@@ -1591,7 +1591,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getEnglishPitchesNamesMap ()
  return pEnglishPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getEspanolPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getEspanolPitchesNamesMap ()
 {
   if (! pEspanolPitchesNamesMap.size ()) {
     initializeEspanolPitchesNamesMap ();
@@ -1600,7 +1600,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getEspanolPitchesNamesMap ()
  return pEspanolPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getFrancaisPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getFrancaisPitchesNamesMap ()
 {
   if (! pFrancaisPitchesNamesMap.size ()) {
     initializeFrancaisPitchesNamesMap ();
@@ -1609,7 +1609,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getFrancaisPitchesNamesMap ()
  return pFrancaisPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getItalianoPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getItalianoPitchesNamesMap ()
 {
   if (! pItalianoPitchesNamesMap.size ()) {
     initializeItalianoPitchesNamesMap ();
@@ -1618,7 +1618,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getItalianoPitchesNamesMap ()
  return pItalianoPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getNorskPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getNorskPitchesNamesMap ()
 {
   if (! pNorskPitchesNamesMap.size ()) {
     initializeNorskPitchesNamesMap ();
@@ -1627,7 +1627,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getNorskPitchesNamesMap ()
  return pNorskPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getPortuguesPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getPortuguesPitchesNamesMap ()
 {
   if (! pPortuguesPitchesNamesMap.size ()) {
     initializePortuguesPitchesNamesMap ();
@@ -1636,7 +1636,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getPortuguesPitchesNamesMap ()
  return pPortuguesPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getSuomiPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getSuomiPitchesNamesMap ()
 {
   if (! pSuomiPitchesNamesMap.size ()) {
     initializeSuomiPitchesNamesMap ();
@@ -1645,7 +1645,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getSuomiPitchesNamesMap ()
  return pSuomiPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getSvenskaPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getSvenskaPitchesNamesMap ()
 {
   if (! pSvenskaPitchesNamesMap.size ()) {
     initializeSvenskaPitchesNamesMap ();
@@ -1654,7 +1654,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getSvenskaPitchesNamesMap ()
  return pSvenskaPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getVlaamsPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getVlaamsPitchesNamesMap ()
 {
   if (! pVlaamsPitchesNamesMap.size ()) {
     initializeVlaamsPitchesNamesMap ();
@@ -1663,7 +1663,7 @@ std::map<msrQuarterTonesPitchKind, std::string>& getVlaamsPitchesNamesMap ()
  return pVlaamsPitchesNamesMap;
 }
 
-std::map<msrQuarterTonesPitchKind, std::string>& getArabicPitchesNamesMap ()
+std::map <msrQuarterTonesPitchKind, std::string>& getArabicPitchesNamesMap ()
 {
   if (! pArabicPitchesNamesMap.size ()) {
     initializeArabicPitchesNamesMap ();
@@ -1680,7 +1680,7 @@ msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString 
     result =
       msrQuarterTonesPitchesLanguageKind::kQTPEnglish;  // MSR default JMI ???
 
-  std::map<std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
+  std::map <std::string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
       pQuarterTonesPitchesLanguageKindsMap.find (
         theString);
@@ -1883,7 +1883,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
     result =
       msrQuarterTonesPitchKind::kQTP_UNKNOWN_;
 
-  std::map<msrQuarterTonesPitchKind, std::string>* pitchesNamesMapPTR;
+  std::map <msrQuarterTonesPitchKind, std::string>* pitchesNamesMapPTR;
 
   // select the relevant pitch names map
   switch (languageKind) {
@@ -1930,7 +1930,7 @@ msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
 
   // is quarterTonesPitchName present in the map?
   if (pitchesNamesMapPTR->size ()) {
-    std::map<msrQuarterTonesPitchKind, std::string>::const_iterator
+    std::map <msrQuarterTonesPitchKind, std::string>::const_iterator
       iBegin = pitchesNamesMapPTR->begin (),
       iEnd   = pitchesNamesMapPTR->end (),
       i      = iBegin;

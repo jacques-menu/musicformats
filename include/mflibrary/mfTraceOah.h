@@ -190,6 +190,8 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceParts () const
                               { return fTraceParts; }
     // staves
+    Bool                  getTraceStavesBasics () const
+                              { return fTraceStavesBasics; }
     void                  setTraceStaves ()
                               { fTraceStaves = true; }
     Bool                  getTraceStaves () const
@@ -218,10 +220,13 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceStaffChanges () const
                               { return fTraceStaffChanges; }
     // voices
-    void                  setTraceVoices ()
-                              { fTraceVoices = true; }
+    Bool                  getTraceVoicesBasics () const
+                              { return fTraceVoicesBasics; }
+//     void                  setTraceVoices ()
+//                               { fTraceVoices = true; }
     Bool                  getTraceVoices () const
                               { return fTraceVoices; }
+
     Bool                  getTraceVoicesDetails () const
                               { return fTraceVoicesDetails; }
 
@@ -261,7 +266,7 @@ class EXP traceOahGroup : public oahGroup
     S_oahStringAtom       getTraceOnlyMeasurerNumbeOahAtom () const
                               { return fTraceOnlyMeasurerNumbeOahAtom; }
 
-    std::set<int>         getTraceDetailedMeasureNumbersSet () const
+    std::set <int>         getTraceDetailedMeasureNumbersSet () const
                               { return fTraceDetailedMeasureNumbersSet; }
 
     // positions
@@ -934,6 +939,7 @@ class EXP traceOahGroup : public oahGroup
     // staves
     // --------------------------------------
 
+    Bool                  fTraceStavesBasics;
     Bool                  fTraceStaves;
     Bool                  fTraceStavesDetails;
 
@@ -953,7 +959,7 @@ class EXP traceOahGroup : public oahGroup
     // voices
     // --------------------------------------
 
-    Bool                  fTraceVoiceBasics;
+    Bool                  fTraceVoicesBasics;
     Bool                  fTraceVoices;
     Bool                  fTraceVoicesDetails;
 
@@ -981,7 +987,7 @@ class EXP traceOahGroup : public oahGroup
     S_oahStringAtom       fTraceOnlyMeasurerNumbeOahAtom;
     std::string           fTraceOnlyMeasure;
 
-    std::set<int>         fTraceDetailedMeasureNumbersSet; // JMI v0.9.67
+    std::set <int>         fTraceDetailedMeasureNumbersSet; // JMI v0.9.67
 
 
     // positions

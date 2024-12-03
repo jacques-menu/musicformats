@@ -47,7 +47,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -57,7 +57,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.70"),
           "February 20, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Many, many changes in the code base"
           }
       ));
@@ -67,7 +67,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.71"),
           "April 15, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Added '<<' and '>>' around staff groups contents"
           }
       ));
@@ -78,7 +78,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.71"),
           "April 23, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Removed the generation of bar and barnumber checks after the last measure",
             "Disabled the generation of staff changes TEMPORARILY"
           }
@@ -89,7 +89,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.71"),
           "June 9, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Fixed an issue in LilyPond note heads generation"
           }
       ));
@@ -99,7 +99,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.71"),
           "June 11, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Fixed '\new Lyrics' generation"
           }
       ));
@@ -109,7 +109,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.71"),
           "June 26, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Added missing skips in LilyPond lyrics generation"
           }
       ));

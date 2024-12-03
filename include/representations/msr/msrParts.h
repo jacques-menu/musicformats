@@ -141,15 +141,15 @@ class EXP msrPart : public msrPartGroupElement
 
     // voices
 
-    const std::map<int, S_msrVoice>&
-                          getPartVoicesMap () const
-                              { return fPartVoicesMap; }
+    const std::map <int, std::map <int, S_msrVoice>>&
+                          getPartStaffVoicesMap () const
+                              { return fPartStaffVoicesMap; }
 
-//     const std::map<int, S_msrVoice>&
+//     const std::map <int, S_msrVoice>&
 //                           getfPartRegularVoicesMap () const
 //                               { return fPartRegularVoicesMap; }
 
-//     const std::vector<std::vector<S_msrVoice>>&
+//     const std::vector <std::vector <S_msrVoice>>&
 //                           getPartStavesAndVoicesVector () const
 //                               { return fPartStavesAndVoicesVector; }
 
@@ -228,7 +228,7 @@ class EXP msrPart : public msrPartGroupElement
     const size_t          getPartNumberOfMeasures () const
                               { return fPartNumberOfMeasures; }
 
-    const std::vector<msrWholeNotes>&
+    const std::vector <msrWholeNotes>&
                           getPartMeasuresWholeNotesVector () const
                               { return fPartMeasuresWholeNotesVector; }
 
@@ -266,7 +266,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // staves map
 
-    const std::map<int, S_msrStaff>&
+    const std::map <int, S_msrStaff>&
                           getPartStavesMap () const
                               { return fPartStavesMap; }
 
@@ -409,13 +409,13 @@ class EXP msrPart : public msrPartGroupElement
     void                  registerVoiceInPartVoicesList (
                             const S_msrVoice& voice);
 
-    void                  registerVoiceInVoicesMap (
+    void                  registerVoiceInPartStaffVoicesMap (
                             const S_msrVoice& voice);
 
 //     void                  registerVoiceInRegularVoicesMap (
 //                             const S_msrVoice& voice);
 
-    void                  displayPartVoicesMap (
+    void                  displayPartStaffVoicesMap (
                             int                inputLineNumber,
                             const std::string& context) const;
 
@@ -545,7 +545,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendHarmoniesListToPart (
                             int                            inputLineNumber,
-                            const std::list<S_msrHarmony>& harmoniesList,
+                            const std::list <S_msrHarmony>& harmoniesList,
                             const msrWholeNotes&           measurePositionToAppendAt);
 
     // figured bass
@@ -561,7 +561,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendFiguredBassesListToPart (
                             int                                inputLineNumber,
-                            const std::list<S_msrFiguredBass>& figuredBasssesList,
+                            const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const msrWholeNotes&               measurePositionToAppendAt);
 
 //     void                  appendFiguredBassToPart ( // JMI v0.9.67 HARMFUL
@@ -678,30 +678,32 @@ class EXP msrPart : public msrPartGroupElement
 
     // staves
 
-    std::list<S_msrStaff> fPartAllStavesList;
+    std::list <S_msrStaff> fPartAllStavesList;
 
-    std::list<S_msrStaff> fPartRegularStavesList;
+    std::list <S_msrStaff> fPartRegularStavesList;
 
-    std::list<S_msrStaff> fPartNonHarmoniesNorFiguredBassStavesList;
+    std::list <S_msrStaff> fPartNonHarmoniesNorFiguredBassStavesList;
 
-    std::map<int, S_msrStaff>
+    std::map <int, S_msrStaff>
                           fPartStavesMap;
 
     // voices
 
-    std::list<S_msrVoice> fPartVoicesList;
+    std::list <S_msrVoice>
+                          fPartVoicesList;
 
     int                   fPartRegularVoicesCounter;
 
     int                   fPartMinimumVoiceNumber;
     int                   fPartMaximumVoiceNumber;
 
-    std::map<int, S_msrVoice>
-                          fPartVoicesMap;
-//     std::map<int, S_msrVoice>
+    // indexes are staff number and voice number
+    std::map <int, std::map <int, S_msrVoice>>
+                          fPartStaffVoicesMap;
+//     std::map <int, S_msrVoice>
 //                           fPartRegularVoicesMap;
 
-//     std::vector<std::vector<S_msrVoice>>
+//     std::vector <std::vector <S_msrVoice>>
 //                           fPartStavesAndVoicesVector;
     // measures
 
@@ -709,7 +711,7 @@ class EXP msrPart : public msrPartGroupElement
 
     size_t                fPartNumberOfMeasures;
 
-    std::vector<msrWholeNotes>
+    std::vector <msrWholeNotes>
                           fPartMeasuresWholeNotesVector;
 
     // harmonies

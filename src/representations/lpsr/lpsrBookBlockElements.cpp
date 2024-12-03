@@ -147,7 +147,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
 
 /* JMI
   for (
-    std::vector<S_msrElement>::const_iterator i = fBlockElements.begin ();
+    std::vector <S_msrElement>::const_iterator i = fBlockElements.begin ();
     i != fBlockElements.end ();
     ++i
   ) {
@@ -416,7 +416,7 @@ void lpsrScoreBlock::browseData (basevisitor* v)
 
 /* JMI
   for (
-    std::vector<S_msrElement>::const_iterator i = fBlockElements.begin ();
+    std::vector <S_msrElement>::const_iterator i = fBlockElements.begin ();
     i != fBlockElements.end ();
     ++i
   ) {
@@ -983,7 +983,7 @@ void lpsrBookBlock::browseData (basevisitor* v)
   }
 
   for (
-    std::list<S_lpsrBookBlockElement>::const_iterator i = fBookBlockElementsList.begin ();
+    std::list <S_lpsrBookBlockElement>::const_iterator i = fBookBlockElementsList.begin ();
     i != fBookBlockElementsList.end ();
     ++i
   ) {
@@ -1033,7 +1033,7 @@ void lpsrBookBlock::print (std::ostream& os) const
     ++gIndenter;
 
     for (
-      std::list<S_lpsrBookBlockElement>::const_iterator i = fBookBlockElementsList.begin ();
+      std::list <S_lpsrBookBlockElement>::const_iterator i = fBookBlockElementsList.begin ();
       i != fBookBlockElementsList.end ();
       ++i
     ) {

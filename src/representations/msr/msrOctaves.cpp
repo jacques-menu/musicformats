@@ -365,7 +365,7 @@ std::ostream& operator << (std::ostream& os, const msrOctaveKind& elt)
 // octave entry kinds
 //______________________________________________________________________________
 
-std::map<std::string, msrOctaveEntryKind>
+std::map <std::string, msrOctaveEntryKind>
   gGlobalMsrOctaveEntryKindsMap;
 
 std::string msrOctaveEntryKindAsString (
@@ -425,7 +425,7 @@ std::string availableMsrOctaveEntryKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msrOctaveEntryKind>::const_iterator i =
+      std::map <std::string, msrOctaveEntryKind>::const_iterator i =
         gGlobalMsrOctaveEntryKindsMap.begin ();
       i != gGlobalMsrOctaveEntryKindsMap.end ();
       ++i

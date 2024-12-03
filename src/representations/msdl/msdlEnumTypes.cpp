@@ -36,7 +36,7 @@ namespace MusicFormats
 // user languages
 //______________________________________________________________________________
 
-std::map<std::string, msdlUserLanguageKind>
+std::map <std::string, msdlUserLanguageKind>
   gGlobalMsdlUserLanguageKindsMap;
 
 void initializeMsdlUserLanguageKindsMap ()
@@ -81,7 +81,7 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const std::string& theStrin
 {
   msdlUserLanguageKind result = msdlUserLanguageKind::kUserLanguageEnglish; // MSDL default
 
-  std::map<std::string, msdlUserLanguageKind>::const_iterator
+  std::map <std::string, msdlUserLanguageKind>::const_iterator
     it =
       gGlobalMsdlUserLanguageKindsMap.find (
         theString);
@@ -130,7 +130,7 @@ std::string availableMsdlUserLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msdlUserLanguageKind>::const_iterator i =
+      std::map <std::string, msdlUserLanguageKind>::const_iterator i =
         gGlobalMsdlUserLanguageKindsMap.begin ();
       i != gGlobalMsdlUserLanguageKindsMap.end ();
       ++i
@@ -166,14 +166,14 @@ std::string availableMsdlUserLanguageKinds (size_t namesListMaxLength)
 // comments types
 //______________________________________________________________________________
 
-std::map<std::string, msdlCommentsTypeKind>
+std::map <std::string, msdlCommentsTypeKind>
   gGlobalMsdlCommentsTypeKindsMap;
 
 msdlCommentsTypeKind msdlCommentsTypeKindFromString (const std::string& theString)
 {
   msdlCommentsTypeKind result = msdlCommentsTypeKind::kCommentsTypePercent; // MSDL default
 
-  std::map<std::string, msdlCommentsTypeKind>::const_iterator
+  std::map <std::string, msdlCommentsTypeKind>::const_iterator
     it =
       gGlobalMsdlCommentsTypeKindsMap.find (
         theString);
@@ -252,7 +252,7 @@ std::string availableMsdlCommentsTypeKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msdlCommentsTypeKind>::const_iterator i =
+      std::map <std::string, msdlCommentsTypeKind>::const_iterator i =
         gGlobalMsdlCommentsTypeKindsMap.begin ();
       i != gGlobalMsdlCommentsTypeKindsMap.end ();
       ++i

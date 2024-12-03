@@ -159,7 +159,7 @@ class EXP bsrTranscriptionNotes : public bsrLine
     // private fields
     // ------------------------------------------------------
 
-    std::list<S_bsrTranscriptionNotesElement>
+    std::list <S_bsrTranscriptionNotesElement>
                           fTranscriptionNotesElementsList;
 };
 typedef SMARTP<bsrTranscriptionNotes> S_bsrTranscriptionNotes;

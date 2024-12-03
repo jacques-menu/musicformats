@@ -225,7 +225,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
 
   // populating the clone with skips
   for (
-    std::list<S_msrMeasureElement>::const_iterator i = fGraceNotesGroupElementsList.begin ();
+    std::list <S_msrMeasureElement>::const_iterator i = fGraceNotesGroupElementsList.begin ();
     i != fGraceNotesGroupElementsList.end ();
     ++i
   ) {
@@ -610,7 +610,7 @@ void msrGraceNotesGroup::acceptOut (basevisitor* v)
 
 void msrGraceNotesGroup::browseData (basevisitor* v)
 {
-  std::list<S_msrMeasureElement>::const_iterator i;
+  std::list <S_msrMeasureElement>::const_iterator i;
 
   for (
     i = fGraceNotesGroupElementsList.begin ();
@@ -636,7 +636,7 @@ std::string msrGraceNotesGroup::asShortString () const
     "\", ";
 
   if (fGraceNotesGroupElementsList.size ()) {
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fGraceNotesGroupElementsList.begin (),
       iEnd   = fGraceNotesGroupElementsList.end (),
       i      = iBegin;
@@ -682,7 +682,7 @@ std::string msrGraceNotesGroup::asString () const
     ", ";
 
   if (fGraceNotesGroupElementsList.size ()) {
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fGraceNotesGroupElementsList.begin (),
       iEnd   = fGraceNotesGroupElementsList.end (),
       i      = iBegin;
@@ -770,7 +770,7 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fGraceNotesGroupElementsList.begin (),
       iEnd   = fGraceNotesGroupElementsList.end (),
       i      = iBegin;
@@ -867,7 +867,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fGraceNotesGroupElementsList.begin (),
       iEnd   = fGraceNotesGroupElementsList.end (),
       i      = iBegin;

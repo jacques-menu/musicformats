@@ -1262,7 +1262,7 @@ std::string msrTimeSignature::asString () const
     ss <<
       ", ";
 
-    std::vector<S_msrTimeSignatureItem>::const_iterator
+    std::vector <S_msrTimeSignatureItem>::const_iterator
       iBegin = fTimeSignatureItemsVector.begin (),
       iEnd   = fTimeSignatureItemsVector.end (),
       i      = iBegin;
@@ -1334,7 +1334,7 @@ std::string msrTimeSignature::asShortString () const
 // //     ss <<
 // //       ", ";
 //
-//     std::vector<S_msrTimeSignatureItem>::const_iterator
+//     std::vector <S_msrTimeSignatureItem>::const_iterator
 //       iBegin = fTimeSignatureItemsVector.begin (),
 //       iEnd   = fTimeSignatureItemsVector.end (),
 //       i      = iBegin;

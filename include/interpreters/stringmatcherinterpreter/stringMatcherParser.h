@@ -1210,7 +1210,7 @@ switch (yykind)
     };
 
     /// A stack with random access from its top.
-    template <typename T, typename S = std::vector<T> >
+    template <typename T, typename S = std::vector <T> >
     class stack
     {
     public:
@@ -1337,7 +1337,7 @@ switch (yykind)
     /// yy_lac_check_. We just store it as a member of this class to hold
     /// on to the memory and to avoid frequent reallocations.
     /// Since yy_lac_check_ is const, this member must be mutable.
-    mutable std::vector<state_type> yylac_stack_;
+    mutable std::vector <state_type> yylac_stack_;
     /// Whether an initial LAC context was established.
     bool yy_lac_established_;
 

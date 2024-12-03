@@ -650,7 +650,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrVoice& elt)
 //
 //   // don't show fVoiceMuteStanza in the summary
 //
-//   const std::list<S_msrMeasure>&
+//   const std::list <S_msrMeasure>&
 //     voiceMeasuresFlatList =
 //       elt->getVoiceMeasuresFlatList ();
 //

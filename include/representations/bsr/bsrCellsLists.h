@@ -136,7 +136,7 @@ class EXP bsrCellsList : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const std::list<bsrCellKind>&
+    const std::list <bsrCellKind>&
                           getCellsListElements () const
                               { return fCellsListElements; }
 
@@ -185,7 +185,7 @@ class EXP bsrCellsList : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::list<bsrCellKind>     fCellsListElements;
+    std::list <bsrCellKind>     fCellsListElements;
 };
 typedef SMARTP<bsrCellsList> S_bsrCellsList;
 EXP std::ostream& operator << (std::ostream& os, const S_bsrCellsList& elt);

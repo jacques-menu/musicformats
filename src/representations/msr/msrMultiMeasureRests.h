@@ -70,7 +70,7 @@ class EXP msrMultiMeasureRest : public msrSegmentElement
     int                   getMeasureRestsNumber () const
                               { return fMeasureRestsNumber; }
 
-    const std::list<S_msrMeasure>&
+    const std::list <S_msrMeasure>&
                           getMeasureRestsList () const
                               { return fMeasureRestsList; }
 
@@ -134,7 +134,7 @@ class EXP msrMultiMeasureRest : public msrSegmentElement
     S_msrSegment          fMultiMeasureRestUpLinkToSegment;
 
     int                   fMeasureRestsNumber; // supplied by MusicXML
-    std::list<S_msrMeasure>
+    std::list <S_msrMeasure>
                           fMeasureRestsList;
 
     int                   fLastMeasureRestPuristNumber;

@@ -174,7 +174,7 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_lpsrPartGroupBlock>::const_iterator i =
+    std::list <S_lpsrPartGroupBlock>::const_iterator i =
       fParallelMusicBLockPartGroupBlocks.begin ();
     i != fParallelMusicBLockPartGroupBlocks.end ();
     ++i
@@ -210,7 +210,7 @@ void lpsrParallelMusicBLock::print (std::ostream& os) const
   ++gIndenter;
 
   for (
-    std::list<S_lpsrPartGroupBlock>::const_iterator i =
+    std::list <S_lpsrPartGroupBlock>::const_iterator i =
       fParallelMusicBLockPartGroupBlocks.begin ();
     i != fParallelMusicBLockPartGroupBlocks.end ();
     ++i

@@ -60,7 +60,7 @@ class EXP bsrTimeSignatureItem : public bsrElement
     // set and get
     // ------------------------------------------------------
 
-    const std::vector<int>&    getTimeSignatureBeatsNumbersVector ()
+    const std::vector <int>&    getTimeSignatureBeatsNumbersVector ()
                               { return fTimeSignatureBeatsNumbersVector; }
 
     void                  setTimeSignatureBeatValue (int timeSignatureBeatValue);
@@ -103,7 +103,7 @@ class EXP bsrTimeSignatureItem : public bsrElement
     // private fields
     // ------------------------------------------------------
 
-    std::vector<int>      fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
+    std::vector <int>      fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
     int                   fTimeSignatureBeatValue;
 };
 typedef SMARTP<bsrTimeSignatureItem> S_bsrTimeSignatureItem;
@@ -164,7 +164,7 @@ class EXP bsrTimeSignature : public bsrLineContentsElement
     bsrTimeSignatureKind           getTimeKind () const
                               { return fTimeKind; }
 
-    const std::vector<S_bsrTimeSignatureItem>&
+    const std::vector <S_bsrTimeSignatureItem>&
                           getTimeSignatureItemsVector () const
                               { return fTimeSignatureItemsVector; }
 
@@ -215,7 +215,7 @@ class EXP bsrTimeSignature : public bsrLineContentsElement
 
     bsrTimeSignatureKind           fTimeKind;
 
-    std::vector<S_bsrTimeSignatureItem> fTimeSignatureItemsVector;
+    std::vector <S_bsrTimeSignatureItem> fTimeSignatureItemsVector;
 };
 typedef SMARTP<bsrTimeSignature> S_bsrTimeSignature;
 EXP std::ostream& operator << (std::ostream& os, const S_bsrTimeSignature& elt);

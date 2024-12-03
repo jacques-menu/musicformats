@@ -170,7 +170,7 @@ void msrMusicXMLPrintLayout::browseData (basevisitor* v)
   }
 
   for (
-    std::list<S_msrStaffLayout>::const_iterator i = fStaffLayoutsList.begin ();
+    std::list <S_msrStaffLayout>::const_iterator i = fStaffLayoutsList.begin ();
     i != fStaffLayoutsList.end ();
     ++i
   ) {
@@ -243,7 +243,7 @@ void msrMusicXMLPrintLayout::printFull (std::ostream& os) const
   if (staffLayoutsListSize) {
     ++gIndenter;
 
-    std::list<S_msrStaffLayout>::const_iterator
+    std::list <S_msrStaffLayout>::const_iterator
       iBegin = fStaffLayoutsList.begin (),
       iEnd   = fStaffLayoutsList.end (),
       i      = iBegin;

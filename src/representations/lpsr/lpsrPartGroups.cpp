@@ -135,7 +135,7 @@ void lpsrPartGroupBlock::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrElement>::const_iterator i = fPartGroupBlockElements.begin ();
+    std::list <S_msrElement>::const_iterator i = fPartGroupBlockElements.begin ();
     i != fPartGroupBlockElements.end ();
     ++i
   ) {
@@ -179,7 +179,7 @@ void lpsrPartGroupBlock::print (std::ostream& os) const
     std::endl << std::endl;
 
   if (fPartGroupBlockElements.size ()) {
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fPartGroupBlockElements.begin (),
       iEnd   = fPartGroupBlockElements.end (),
       i      = iBegin;

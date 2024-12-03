@@ -174,7 +174,7 @@ void msrPart::finalizePartAndAllItsMeasures (
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrVoice>::const_iterator i = fPartVoicesList.begin ();
+    std::list <S_msrVoice>::const_iterator i = fPartVoicesList.begin ();
     i != fPartVoicesList.end ();
     ++i
   ) {
@@ -239,7 +239,7 @@ void msrPart::finalizePart (
 
     // finalize the staves
     for (
-      std::map<int, S_msrStaff>::const_iterator i =
+      std::map <int, S_msrStaff>::const_iterator i =
       getPartStavesMap.begin ();
       i != getPartStavesMap.end ();
       ++i
@@ -307,7 +307,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::map<int, S_msrVoice>::const_iterator i =
+    std::map <int, S_msrVoice>::const_iterator i =
       fStaffVoiceNumbersToAllVoicesMap.begin ();
     i != fStaffVoiceNumbersToAllVoicesMap.end ();
     ++i
@@ -499,7 +499,7 @@ void msrMeasure::finalizeMeasure (
 
     // assign measure' elements measure position
     for (
-      std::list<S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
+      std::list <S_msrMeasureElement>::const_iterator i = fMeasureElementsList.begin ();
       i != fMeasureElementsList.end ();
       ++i
     ) {

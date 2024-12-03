@@ -375,7 +375,7 @@ void msrScordatura::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrStringTuning>::const_iterator
+    std::list <S_msrStringTuning>::const_iterator
       iBegin = fScordaturaStringTuningsList.begin (),
       iEnd   = fScordaturaStringTuningsList.end (),
       i      = iBegin;
@@ -709,7 +709,7 @@ void msrHarpPedalsTuning::addPedalTuning (
   msrAlterationKind    alterationKind)
 {
   // is diatonicPitch in the part renaming map?
-  std::map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
+  std::map <msrDiatonicPitchKind, msrAlterationKind>::const_iterator
     it =
       fHarpPedalsAlterationKindsMap.find (diatonicPitchKind);
 
@@ -821,7 +821,7 @@ std::string msrHarpPedalsTuning::asString () const
   if (fHarpPedalsAlterationKindsMap.size ()) {
     ++gIndenter;
 
-    std::map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
+    std::map <msrDiatonicPitchKind, msrAlterationKind>::const_iterator
       iBegin = fHarpPedalsAlterationKindsMap.begin (),
       iEnd   = fHarpPedalsAlterationKindsMap.end (),
       i      = iBegin;
@@ -860,7 +860,7 @@ void msrHarpPedalsTuning::print (std::ostream& os) const
 
     os << std::endl;
 
-    std::map<msrDiatonicPitchKind, msrAlterationKind>::const_iterator
+    std::map <msrDiatonicPitchKind, msrAlterationKind>::const_iterator
       iBegin = fHarpPedalsAlterationKindsMap.begin (),
       iEnd   = fHarpPedalsAlterationKindsMap.end (),
       i      = iBegin;

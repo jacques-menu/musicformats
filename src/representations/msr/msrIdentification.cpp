@@ -445,7 +445,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationComposersList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationComposersList.begin (); i != fIdentificationComposersList.end (); ++i) {
       size_t length = (*i).size ();
@@ -456,7 +456,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationLyricistsList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationLyricistsList.begin (); i != fIdentificationLyricistsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -467,7 +467,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationArrangersList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationArrangersList.begin (); i != fIdentificationArrangersList.end (); ++i) {
       size_t length = (*i).size ();
@@ -478,7 +478,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationPoetsList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationPoetsList.begin (); i != fIdentificationPoetsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -489,7 +489,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationTranslatorsList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationTranslatorsList.begin (); i != fIdentificationTranslatorsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -500,7 +500,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationArtistsList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationArtistsList.begin (); i != fIdentificationArtistsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -511,7 +511,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationSoftwaresList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationSoftwaresList.begin (); i != fIdentificationSoftwaresList.end (); ++i) {
       size_t length = (*i).size ();
@@ -522,7 +522,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationRightsList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationRightsList.begin (); i != fIdentificationRightsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -533,7 +533,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationSourcesList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationSourcesList.begin (); i != fIdentificationSourcesList.end (); ++i) {
       size_t length = (*i).size ();
@@ -544,7 +544,7 @@ size_t msrIdentification::maxIdentificationNamesLength ()
   }
 
   if (fIdentificationRelationsList.size ()) {
-    std::list<std::string>::const_iterator i;
+    std::list <std::string>::const_iterator i;
 
     for (i = fIdentificationRelationsList.begin (); i != fIdentificationRelationsList.end (); ++i) {
       size_t length = (*i).size ();
@@ -745,7 +745,7 @@ void msrIdentification::print (std::ostream& os) const
       std::endl;
 
     for (
-      std::list<std::string>::const_iterator i = fIdentificationComposersList.begin ();
+      std::list <std::string>::const_iterator i = fIdentificationComposersList.begin ();
       i != fIdentificationComposersList.end ();
       ++i
     ) {
@@ -764,7 +764,7 @@ void msrIdentification::print (std::ostream& os) const
       std::endl;
 
     for (
-      std::list<std::string>::const_iterator i = fIdentificationLyricistsList.begin ();
+      std::list <std::string>::const_iterator i = fIdentificationLyricistsList.begin ();
       i != fIdentificationLyricistsList.end ();
       ++i
     ) {
@@ -783,7 +783,7 @@ void msrIdentification::print (std::ostream& os) const
       std::endl;
 
     for (
-      std::list<std::string>::const_iterator i = fIdentificationArrangersList.begin ();
+      std::list <std::string>::const_iterator i = fIdentificationArrangersList.begin ();
       i != fIdentificationArrangersList.end ();
       ++i
     ) {
@@ -802,7 +802,7 @@ void msrIdentification::print (std::ostream& os) const
       std::endl;
 
     for (
-      std::list<std::string>::const_iterator i = fIdentificationPoetsList.begin ();
+      std::list <std::string>::const_iterator i = fIdentificationPoetsList.begin ();
       i != fIdentificationPoetsList.end ();
       ++i
     ) {
@@ -821,7 +821,7 @@ void msrIdentification::print (std::ostream& os) const
       std::endl;
 
     for (
-      std::list<std::string>::const_iterator i = fIdentificationTranslatorsList.begin ();
+      std::list <std::string>::const_iterator i = fIdentificationTranslatorsList.begin ();
       i != fIdentificationTranslatorsList.end ();
       ++i
     ) {
@@ -840,7 +840,7 @@ void msrIdentification::print (std::ostream& os) const
       std::endl;
 
     for (
-      std::list<std::string>::const_iterator i = fIdentificationSoftwaresList.begin ();
+      std::list <std::string>::const_iterator i = fIdentificationSoftwaresList.begin ();
       i != fIdentificationSoftwaresList.end ();
       ++i
     ) {
@@ -859,7 +859,7 @@ void msrIdentification::print (std::ostream& os) const
       std::endl;
 
     for (
-      std::list<std::string>::const_iterator i = fIdentificationRightsList.begin ();
+      std::list <std::string>::const_iterator i = fIdentificationRightsList.begin ();
       i != fIdentificationRightsList.end ();
       ++i
     ) {
@@ -878,7 +878,7 @@ void msrIdentification::print (std::ostream& os) const
       std::endl;
 
     for (
-      std::list<std::string>::const_iterator i = fIdentificationSourcesList.begin ();
+      std::list <std::string>::const_iterator i = fIdentificationSourcesList.begin ();
       i != fIdentificationSourcesList.end ();
       ++i
     ) {
@@ -897,7 +897,7 @@ void msrIdentification::print (std::ostream& os) const
       std::endl;
 
     for (
-      std::list<std::string>::const_iterator i = fIdentificationRelationsList.begin ();
+      std::list <std::string>::const_iterator i = fIdentificationRelationsList.begin ();
       i != fIdentificationRelationsList.end ();
       ++i
     ) {

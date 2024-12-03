@@ -48,7 +48,7 @@ std::ostream& operator << (std::ostream& os, const mfMultiGenerationOutputKind& 
 EXP extern mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
   const std::string& theString);
 
-extern std::map<std::string, mfMultiGenerationOutputKind>
+extern std::map <std::string, mfMultiGenerationOutputKind>
   gGlobalMultiGenerationOutputKindsMap;
 
 std::string availableMultiGenerationOutputKinds (size_t namesListMaxLength);

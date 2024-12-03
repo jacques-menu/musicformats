@@ -280,7 +280,7 @@ void bsrTranscriptionNotes::acceptOut (basevisitor* v)
 void bsrTranscriptionNotes::browseData (basevisitor* v)
 {
   for (
-    std::list<S_bsrTranscriptionNotesElement>::const_iterator i =
+    std::list <S_bsrTranscriptionNotesElement>::const_iterator i =
       fTranscriptionNotesElementsList.begin ();
     i != fTranscriptionNotesElementsList.end ();
     ++i ) {
@@ -313,7 +313,7 @@ void bsrTranscriptionNotes::print (std::ostream& os) const
     if (transcriptionNotesElementsListSize) {
       ++gIndenter;
 
-      std::list<S_bsrTranscriptionNotesElement>::const_iterator
+      std::list <S_bsrTranscriptionNotesElement>::const_iterator
         iBegin = fTranscriptionNotesElementsList.begin (),
         iEnd   = fTranscriptionNotesElementsList.end (),
         i      = iBegin;

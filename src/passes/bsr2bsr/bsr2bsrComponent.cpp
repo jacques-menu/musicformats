@@ -47,7 +47,7 @@ S_mfcPassComponent createBsr2bsrComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -57,7 +57,7 @@ S_mfcPassComponent createBsr2bsrComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.70"),
           "February 20, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Many, many changes in the code base"
           }
       ));

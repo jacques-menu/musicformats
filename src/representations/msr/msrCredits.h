@@ -210,7 +210,7 @@ class EXP msrCredit : public msrElement
     msrCreditTypeKind     getCreditTypeKind () const
                               { return fCreditTypeKind; }
 
-    const std::vector<S_msrCreditWords>&
+    const std::vector <S_msrCreditWords>&
                           getCreditWordsList () const
                               { return fCreditWordsList; }
 
@@ -250,7 +250,7 @@ class EXP msrCredit : public msrElement
 
     msrCreditTypeKind     fCreditTypeKind;
 
-    std::vector<S_msrCreditWords>
+    std::vector <S_msrCreditWords>
                           fCreditWordsList;
 };
 typedef SMARTP<msrCredit> S_msrCredit;

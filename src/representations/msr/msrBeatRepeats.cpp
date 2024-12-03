@@ -175,7 +175,7 @@ S_msrNote msrBeatRepeatElement::fetchBeatRepeatElementFirstNonGraceNote () const
   // possibly inside a chord or tuplet
 
   if (fBeatRepeatElementsList.size ()) {
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fBeatRepeatElementsList.begin (),
       iEnd   = fBeatRepeatElementsList.end (),
       i      = iBegin;
@@ -322,7 +322,7 @@ void msrBeatRepeatElement::browseData (basevisitor* v)
   // browse the elements
   if (fBeatRepeatElementsList.size ()) {
     for (
-      std::list<S_msrVoiceElement>::const_iterator i = fBeatRepeatElementsList.begin ();
+      std::list <S_msrVoiceElement>::const_iterator i = fBeatRepeatElementsList.begin ();
       i != fBeatRepeatElementsList.end ();
       ++i
   ) {
@@ -387,7 +387,7 @@ void msrBeatRepeatElement::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fBeatRepeatElementsList.begin (),
       iEnd   = fBeatRepeatElementsList.end (),
       i      = iBegin;
@@ -446,7 +446,7 @@ void msrBeatRepeatElement::print (std::ostream& os)
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fBeatRepeatElementsList.begin (),
       iEnd   = fBeatRepeatElementsList.end (),
       i      = iBegin;

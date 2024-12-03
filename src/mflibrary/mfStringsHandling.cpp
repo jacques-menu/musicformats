@@ -433,8 +433,8 @@ std::string mfStringNumbersToEnglishWords (std::string theString)
   enum workState {
     kInitialState, kWorkingOnDigits, kWorkingOnNonDigits };
 
-  std::vector<std::string> chunks;
-  std::vector<int>         states;
+  std::vector <std::string> chunks;
+  std::vector <int>         states;
 
   workState state = kInitialState;
 
@@ -554,13 +554,13 @@ int consumeDecimalNumber (
 }
 
 //______________________________________________________________________________
-std::set<int> mfDecipherNaturalNumbersSetSpecification (
+std::set <int> mfDecipherNaturalNumbersSetSpecification (
   const std::string& theString,
   Bool               debugMode)
 {
   // A naturalNumbersSetSpecification sample is: "7,15-19,^16-17"
 
-  std::set<int> result;
+  std::set <int> result;
 
   if (debugMode) {
     gLog <<
@@ -704,13 +704,13 @@ std::string consumeString (
 }
 
 //______________________________________________________________________________
-std::set<std::string> mfDecipherStringsSetSpecification (
+std::set <std::string> mfDecipherStringsSetSpecification (
   const std::string& theString,
   Bool               debugMode)
 {
   // A integersSetSpecification sample is: "FOO,159,haLLo"
 
-  std::set<std::string> result;
+  std::set <std::string> result;
 
 /* JMI v0.9.66 ???
   if (debugMode) {
@@ -780,11 +780,11 @@ std::set<std::string> mfDecipherStringsSetSpecification (
 }
 
 //______________________________________________________________________________
-std::list<int> mfExtractNumbersFromString (
+std::list <int> mfExtractNumbersFromString (
   const std::string& theString, // can contain "1, 2, 17"
   Bool               debugMode)
 {
-  std::list<int> foundNumbers;
+  std::list <int> foundNumbers;
 
   if (debugMode) {
     gLog <<
@@ -867,7 +867,7 @@ std::string& mfRightTrim (std::string& s)
 }
 
 //______________________________________________________________________________
-std::pair<std::string, std::string> mfExtractNamesPairFromString (
+std::pair <std::string, std::string> mfExtractNamesPairFromString (
   const std::string& theString, // can contain "P1 = Bassoon"
   char               separator,
   Bool               debugMode)
@@ -1289,7 +1289,7 @@ std::string mfEscapeDoubleQuotes (std::string s)
 //______________________________________________________________________________
 void mfConvertHTMLEntitiesToPlainCharacters (std::string& s)
 {
-  std::map<std::string, std::string> conversionMap;
+  std::map <std::string, std::string> conversionMap;
 
   conversionMap ["&"] = "&amp;";
   conversionMap ["\""] = "&quot;";
@@ -1297,7 +1297,7 @@ void mfConvertHTMLEntitiesToPlainCharacters (std::string& s)
   conversionMap ["<"] = "&lt;";
   conversionMap [">"] = "&gt;";
 
-  std::map<std::string, std::string>::const_iterator i;
+  std::map <std::string, std::string>::const_iterator i;
 
   for (i = conversionMap.begin (); i != conversionMap.end (); ++i) {
     std::string
@@ -1321,7 +1321,7 @@ void mfConvertHTMLEntitiesToPlainCharacters (std::string& s)
 void mfSplitStringIntoChunks (
   std::string             theString,
   std::string             theSeparator,
-  std::list<std::string>& chunksList)
+  std::list <std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
   gLog <<
@@ -1339,7 +1339,7 @@ void mfSplitStringIntoChunks (
 
   size_t theSeparatorSize = theSeparator.size ();
 
-  std::map<std::string, std::string>::const_iterator i;
+  std::map <std::string, std::string>::const_iterator i;
 
   while (1) {
     size_t found =
@@ -1426,7 +1426,7 @@ void mfSplitStringIntoChunks (
 //______________________________________________________________________________
 void mfSplitRegularStringAtEndOfLines (
   std::string             theString,
-  std::list<std::string>& chunksList)
+  std::list <std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
   gLog <<
@@ -1451,7 +1451,7 @@ void mfSplitRegularStringAtEndOfLines (
   std::string lookedFor     = "\n";
   size_t    lookedForSize = lookedFor.size ();
 
-  std::map<std::string, std::string>::const_iterator i;
+  std::map <std::string, std::string>::const_iterator i;
 
   while (1) {
     size_t found =
@@ -1539,7 +1539,7 @@ void mfSplitRegularStringAtEndOfLines (
 //______________________________________________________________________________
 void mfSplitHTMLStringContainingEndOfLines (
   std::string             theString,
-  std::list<std::string>& chunksList)
+  std::list <std::string>& chunksList)
 {
 #ifdef DEBUG_SPLITTING
   gLog <<
@@ -1549,7 +1549,7 @@ void mfSplitHTMLStringContainingEndOfLines (
 
   size_t theStringSize = theString.size ();
 
-  std::map<std::string, std::string> conversionMap; // JMI
+  std::map <std::string, std::string> conversionMap; // JMI
 
   conversionMap ["&"] = "&amp;";
   conversionMap ["\""] = "&quot;";
@@ -1567,7 +1567,7 @@ void mfSplitHTMLStringContainingEndOfLines (
   std::string       lookedFor     = "\n";
   size_t            lookedForSize = lookedFor.size ();
 
-  std::map<std::string, std::string>::const_iterator i;
+  std::map <std::string, std::string>::const_iterator i;
 
 /*
   for (i = conversionMap.begin (); i != conversionMap.end (); ++i) {
@@ -1723,12 +1723,12 @@ std::string mfMakeSingleWordFromString (const std::string& theString)
 //______________________________________________________________________________
 Bool mfStringIsInStringSet (
   const std::string&           theString,
-  const std::set<std::string>& stringSet)
+  const std::set <std::string>& stringSet)
 {
   Bool result (false);
 
   if (stringSet.size ()) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         stringSet.find (
           theString);
@@ -1742,8 +1742,8 @@ Bool mfStringIsInStringSet (
 }
 
 void mfStringSetMinusEquals (
-  std::set<std::string>&       dest,
-  const std::set<std::string>& source)
+  std::set <std::string>&       dest,
+  const std::set <std::string>& source)
 {
   for (std::string theString : source) {
     size_t
@@ -1757,7 +1757,7 @@ void mfStringSetMinusEquals (
 }
 
 std::string mfStringSetAsString (
-  const std::set<std::string>& stringSet)
+  const std::set <std::string>& stringSet)
 {
   std::stringstream ss;
 
@@ -1788,7 +1788,7 @@ std::string mfStringSetAsString (
 }
 
 std::string mfStringSetAsBracketedString (
-  const std::set<std::string>& stringSet)
+  const std::set <std::string>& stringSet)
 {
   std::stringstream ss;
 
@@ -1799,7 +1799,7 @@ std::string mfStringSetAsBracketedString (
 
 void mfDisplayStringSet (
   const std::string&           title,
-  const std::set<std::string>& stringSet,
+  const std::set <std::string>& stringSet,
   std::ostream&                os)
 {
   // print the title
@@ -1820,7 +1820,7 @@ void mfDisplayStringSet (
     size_t count = 0;
 
     for (
-      std::set<std::string>::const_iterator
+      std::set <std::string>::const_iterator
         i    = stringSet.begin (),
         iEnd = stringSet.end ();
       i != iEnd;
@@ -1853,13 +1853,13 @@ void mfDisplayStringSet (
 //______________________________________________________________________________
 Bool mfFetchValueFromStringToStringMap (
   const std::string&                        theKey,
-  const std::map<std::string, std::string>& stringToStringMap,
+  const std::map <std::string, std::string>& stringToStringMap,
   std::string&                              theValue)
 {
   Bool result (false);
 
   if (stringToStringMap.size ()) {
-    std::map<std::string, std::string>::const_iterator
+    std::map <std::string, std::string>::const_iterator
       it =
         stringToStringMap.find (
           theKey);
@@ -1874,7 +1874,7 @@ Bool mfFetchValueFromStringToStringMap (
 }
 
 std::string mfStringToStringMapAsString (
-  const std::map<std::string, std::string>& stringToStringMap)
+  const std::map <std::string, std::string>& stringToStringMap)
 {
   std::stringstream ss;
 
@@ -1891,7 +1891,7 @@ std::string mfStringToStringMapAsString (
     size_t count = 0;
 
     for (
-     std::map<std::string, std::string>::const_iterator
+     std::map <std::string, std::string>::const_iterator
         i    = stringToStringMap.begin (),
         iEnd = stringToStringMap.end ();
       i != iEnd;
@@ -1925,7 +1925,7 @@ std::string mfStringToStringMapAsString (
 
 void mfDisplayStringToStringMap (
   const std::string&                        title,
-  const std::map<std::string, std::string>& stringToStringMap,
+  const std::map <std::string, std::string>& stringToStringMap,
   std::ostream&                             os)
 {
   // print the title
@@ -1946,7 +1946,7 @@ void mfDisplayStringToStringMap (
     size_t count = 0;
 
     for (
-     std::map<std::string, std::string>::const_iterator
+     std::map <std::string, std::string>::const_iterator
         i    = stringToStringMap.begin (),
         iEnd = stringToStringMap.end ();
       i != iEnd;
@@ -1984,9 +1984,9 @@ void mfDisplayStringToStringMap (
 //______________________________________________________________________________
 Bool mfKeyIsInStringToStringMultiMap (
   const std::string&                             theKey,
-  const std::multimap<std::string, std::string>& stringToStringMultiMap)
+  const std::multimap <std::string, std::string>& stringToStringMultiMap)
 {
-  const std::multimap<std::string, std::string>::const_iterator it =
+  const std::multimap <std::string, std::string>::const_iterator it =
     stringToStringMultiMap.find (theKey);
 
   return
@@ -1995,16 +1995,16 @@ Bool mfKeyIsInStringToStringMultiMap (
 
 Bool mfKeyValuePairIsInStringToStringMultiMap (
   const std::string&                             theKey,
-  const std::multimap<std::string, std::string>& stringToStringMultiMap,
+  const std::multimap <std::string, std::string>& stringToStringMultiMap,
   const std::string&                             theValue)
 {
   Bool result (false);
 
   if (stringToStringMultiMap.size ()) {
     // find all the  elements with key theKey
-    std::pair<
-      std::multimap<std::string, std::string>::const_iterator,
-      std::multimap<std::string, std::string>::const_iterator
+    std::pair <
+      std::multimap <std::string, std::string>::const_iterator,
+      std::multimap <std::string, std::string>::const_iterator
       >
       iteratorsRange =
         stringToStringMultiMap.equal_range (
@@ -2013,7 +2013,7 @@ Bool mfKeyValuePairIsInStringToStringMultiMap (
     if (iteratorsRange.first != iteratorsRange.second) {
       // the range is non-empty, there are elements with key theKey
       for (
-        std::multimap<std::string,std::string>::const_iterator it = iteratorsRange.first;
+        std::multimap <std::string,std::string>::const_iterator it = iteratorsRange.first;
         it != iteratorsRange.second;
         ++it
       ) {
@@ -2029,7 +2029,7 @@ Bool mfKeyValuePairIsInStringToStringMultiMap (
 }
 
 std::string mfStringToStringMultiMapAsString (
-  const std::multimap<std::string, std::string>& stringToStringMultiMap)
+  const std::multimap <std::string, std::string>& stringToStringMultiMap)
 {
   std::stringstream ss;
 
@@ -2046,7 +2046,7 @@ std::string mfStringToStringMultiMapAsString (
     size_t count = 0;
 
     for (
-     std::multimap<std::string, std::string>::const_iterator
+     std::multimap <std::string, std::string>::const_iterator
         i    = stringToStringMultiMap.begin (),
         iEnd = stringToStringMultiMap.end ();
       i != iEnd;
@@ -2080,7 +2080,7 @@ std::string mfStringToStringMultiMapAsString (
 
 void mfDisplayStringToStringMultiMap (
   const std::string&                             title,
-  const std::multimap<std::string, std::string>& stringToStringMultiMap,
+  const std::multimap <std::string, std::string>& stringToStringMultiMap,
   std::ostream&                                  os)
 {
   // print the title
@@ -2101,7 +2101,7 @@ void mfDisplayStringToStringMultiMap (
     size_t count = 0;
 
     for (
-     std::multimap<std::string, std::string>::const_iterator
+     std::multimap <std::string, std::string>::const_iterator
         i    = stringToStringMultiMap.begin (),
         iEnd = stringToStringMultiMap.end ();
       i != iEnd;

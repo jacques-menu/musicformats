@@ -106,7 +106,7 @@ class EXP msrFiguredBass : public msrMeasureElement
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;
 
-    std::list<S_msrBassFigure> fFiguredBassFiguresList;
+    std::list <S_msrBassFigure> fFiguredBassFiguresList;
 
     msrTupletFactor       fFiguredBassTupletFactor;
 };
@@ -148,7 +148,7 @@ In \class{msrNote}, there is:
     void                  appendFiguredBassToNote (
                             const S_msrFiguredBass& figuredBass);
 
-    const std::list<S_msrFiguredBass>&
+    const std::list <S_msrFiguredBass>&
                           getNoteFiguredBassesList () const
                               { return fNoteFiguredBassesList; }
 
@@ -157,7 +157,7 @@ In \class{msrNote}, there is:
     // figured bass
     // ------------------------------------------------------
 
-    std::list<S_msrFiguredBass>
+    std::list <S_msrFiguredBass>
                           fNoteFiguredBassesList;
 \end{lstlisting}
 
@@ -686,12 +686,12 @@ void mxsr2msrTranslator::handlePendingFiguredBasses (
 %{
 %  // copy note's harmony if any from the first note to chord
 %
-%  const std::list<S_msrHarmony>&
+%  const std::list <S_msrHarmony>&
 %    noteHarmoniesList =
 %      note->getNoteHarmoniesList ();
 %
 %  if (noteHarmoniesList.size ()) {
-%    std::list<S_msrHarmony>::const_iterator i;
+%    std::list <S_msrHarmony>::const_iterator i;
 %    for (i = noteHarmoniesList.begin (); i != noteHarmoniesList.end (); ++i) {
 %      S_msrHarmony harmony = (*i);
 %
@@ -733,7 +733,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 	// ... ... ...
 
   // are there figured bass elements attached to this note?
-  const std::list<S_msrFiguredBass>&
+  const std::list <S_msrFiguredBass>&
     noteFiguredBassesList =
       note->
         getNoteFiguredBassesList ();

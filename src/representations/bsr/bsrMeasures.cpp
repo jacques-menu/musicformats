@@ -227,7 +227,7 @@ S_bsrCellsList bsrMeasure::buildCellsList () const
       bsrCellsList::create (fInputStartLineNumber);
 
   for (
-    std::list<S_bsrLineContentsElement>::const_iterator i = fMeasureLineElementsList.begin ();
+    std::list <S_bsrLineContentsElement>::const_iterator i = fMeasureLineElementsList.begin ();
     i != fMeasureLineElementsList.end ();
     ++i ) {
     // append the braille for the element
@@ -321,7 +321,7 @@ void bsrMeasure::acceptOut (basevisitor* v)
 void bsrMeasure::browseData (basevisitor* v)
 {
   for (
-    std::list<S_bsrLineContentsElement>::const_iterator i = fMeasureLineElementsList.begin ();
+    std::list <S_bsrLineContentsElement>::const_iterator i = fMeasureLineElementsList.begin ();
     i != fMeasureLineElementsList.end ();
     ++i ) {
     // browse the element
@@ -355,7 +355,7 @@ std::string bsrMeasure::asDebugString () const // JMI
   size_t measureElementsListSize = fMeasureLineElementsList.size ();
 
   if (measureElementsListSize) {
-    std::list<S_bsrLineContentsElement>::const_iterator
+    std::list <S_bsrLineContentsElement>::const_iterator
       iBegin = fMeasureLineElementsList.begin (),
       iEnd   = fMeasureLineElementsList.end (),
       i      = iBegin;
@@ -421,7 +421,7 @@ void bsrMeasure::print (std::ostream& os) const
       os << std::endl;
       ++gIndenter;
 
-      std::list<S_bsrLineContentsElement>::const_iterator
+      std::list <S_bsrLineContentsElement>::const_iterator
         iBegin = fMeasureLineElementsList.begin (),
         iEnd   = fMeasureLineElementsList.end (),
         i      = iBegin;

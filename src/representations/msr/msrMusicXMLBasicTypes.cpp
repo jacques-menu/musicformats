@@ -2245,15 +2245,15 @@ void msrAppearance::acceptOut (basevisitor* v)
 void msrAppearance::browseData (basevisitor* v)
 {
 /*
-    std::list<S_msrLineWidth>  fLineWidthsList;
+    std::list <S_msrLineWidth>  fLineWidthsList;
 
-    std::list<S_msrNoteSize>   fNoteSizesList;
+    std::list <S_msrNoteSize>   fNoteSizesList;
 
-    std::list<S_msrDistance>   fDistancesList;
+    std::list <S_msrDistance>   fDistancesList;
 
-    std::list<S_msrGlyph>      fGlyphsList;
+    std::list <S_msrGlyph>      fGlyphsList;
 
-    std::list<S_msrOtherAppearance>
+    std::list <S_msrOtherAppearance>
                           fOtherAppearancesList;
 
 
@@ -2320,7 +2320,7 @@ void msrAppearance::print (std::ostream& os) const
   if (lineWidthsListSize) {
     ++gIndenter;
 
-    std::list<S_msrLineWidth>::const_iterator
+    std::list <S_msrLineWidth>::const_iterator
       iBegin = fLineWidthsList.begin (),
       iEnd   = fLineWidthsList.end (),
       i      = iBegin;
@@ -2348,7 +2348,7 @@ void msrAppearance::print (std::ostream& os) const
   if (noteSizesListSize) {
     ++gIndenter;
 
-    std::list<S_msrNoteSize>::const_iterator
+    std::list <S_msrNoteSize>::const_iterator
       iBegin = fNoteSizesList.begin (),
       iEnd   = fNoteSizesList.end (),
       i      = iBegin;
@@ -2376,7 +2376,7 @@ void msrAppearance::print (std::ostream& os) const
   if (distancesListSize) {
     ++gIndenter;
 
-    std::list<S_msrDistance>::const_iterator
+    std::list <S_msrDistance>::const_iterator
       iBegin = fDistancesList.begin (),
       iEnd   = fDistancesList.end (),
       i      = iBegin;
@@ -2404,7 +2404,7 @@ void msrAppearance::print (std::ostream& os) const
   if (glyphsListSize) {
     ++gIndenter;
 
-    std::list<S_msrGlyph>::const_iterator
+    std::list <S_msrGlyph>::const_iterator
       iBegin = fGlyphsList.begin (),
       iEnd   = fGlyphsList.end (),
       i      = iBegin;
@@ -2432,7 +2432,7 @@ void msrAppearance::print (std::ostream& os) const
   if (otherAppearancesListSize) {
     ++gIndenter;
 
-    std::list<S_msrOtherAppearance>::const_iterator
+    std::list <S_msrOtherAppearance>::const_iterator
       iBegin = fOtherAppearancesList.begin (),
       iEnd   = fOtherAppearancesList.end (),
       i      = iBegin;

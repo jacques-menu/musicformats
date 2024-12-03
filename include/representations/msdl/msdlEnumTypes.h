@@ -43,7 +43,7 @@ std::ostream& operator << (std::ostream& os, const msdlUserLanguageKind& elt);
 msdlUserLanguageKind msdlUserLanguageKindFromString (
   const std::string& theString);
 
-extern std::map<std::string, msdlUserLanguageKind>
+extern std::map <std::string, msdlUserLanguageKind>
   gGlobalMsdlUserLanguageKindsMap;
 
 std::string availableMsdlUserLanguageKinds (size_t namesListMaxLength);
@@ -65,7 +65,7 @@ std::ostream& operator << (std::ostream& os, const msdlCommentsTypeKind& elt);
 msdlCommentsTypeKind msdlCommentsTypeKindFromString (
   const std::string& theString);
 
-extern std::map<std::string, msdlCommentsTypeKind>
+extern std::map <std::string, msdlCommentsTypeKind>
   gGlobalMsdlCommentsTypeKindsMap;
 
 void initializeMsdlCommentsTypeKinds ();

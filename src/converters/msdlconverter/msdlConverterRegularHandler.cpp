@@ -1526,7 +1526,7 @@ void msdlConverterRegularHandler::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;

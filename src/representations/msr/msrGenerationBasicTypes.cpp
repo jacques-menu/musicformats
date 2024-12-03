@@ -74,7 +74,7 @@ EXP msrGenerationAPIKind msrGenerationAPIKindFromString (
   return result;
 }
 
-std::map<std::string, msrGenerationAPIKind>
+std::map <std::string, msrGenerationAPIKind>
   gGlobalGenerationAPIKindsMap;
 
 void initializeGenerationAPIKindsMap ()
@@ -99,7 +99,7 @@ std::string availableGenerationAPIKinds (
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msrGenerationAPIKind>::const_iterator i =
+      std::map <std::string, msrGenerationAPIKind>::const_iterator i =
         gGlobalGenerationAPIKindsMap.begin ();
       i != gGlobalGenerationAPIKindsMap.end ();
       ++i
@@ -193,7 +193,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<std::string, msrGenerationAPIKind>::const_iterator
+  std::map <std::string, msrGenerationAPIKind>::const_iterator
     it =
       gGlobalGenerationAPIKindsMap.find (
         theString);

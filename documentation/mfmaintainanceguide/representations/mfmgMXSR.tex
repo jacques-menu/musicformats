@@ -108,7 +108,7 @@ class EXP xmlelement : public ctree<xmlelement>, public visitable
 		//! the element value
 		std::string fValue;
 		//! list of the element attributes
-		std::vector<Sxmlattribute> fAttributes;
+		std::vector <Sxmlattribute> fAttributes;
 
 	protected:
 		// the element type
@@ -219,8 +219,8 @@ The two-way correspondance of \mxml\ elements names to type {\tt Sxmlelement} is
 \begin{lstlisting}[language=CPlusPlus]
 class EXP factory : public singleton<factory>{
 
-	std::map<std::string, functor<Sxmlelement>*> fMap;
-	std::map<int, const char*>	fType2Name;
+	std::map <std::string, functor<Sxmlelement>*> fMap;
+	std::map <int, const char*>	fType2Name;
 
 	// ... ... ...
 };

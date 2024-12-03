@@ -741,7 +741,7 @@ std::ostream& operator << (std::ostream& os, const S_mfcVersionNumber& elt)
 S_mfcVersion mfcVersion::create (
   const S_mfcVersionNumber&     versionNumber,
   const std::string&            versionDate,
-  const std::list<std::string>& versionDescriptionItems)
+  const std::list <std::string>& versionDescriptionItems)
 {
   mfcVersion* obj =
     new mfcVersion (
@@ -755,7 +755,7 @@ S_mfcVersion mfcVersion::create (
 mfcVersion::mfcVersion (
   const S_mfcVersionNumber&     versionNumber,
   const std::string&            versionDate,
-  const std::list<std::string>& versionDescriptionItems)
+  const std::list <std::string>& versionDescriptionItems)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getEarlyTraceComponents ()) {
@@ -902,7 +902,7 @@ S_mfcVersion mfcVersionsHistory::fetchMostRecentVersion () const
 
 void mfcVersionsHistory::print (std::ostream& os) const
 {
-  std::list<S_mfcVersion>::const_iterator
+  std::list <S_mfcVersion>::const_iterator
     iBegin = fVersionsList.begin (),
     iEnd   = fVersionsList.end (),
     i      = iBegin;
@@ -1641,7 +1641,7 @@ void mfcMultiComponent::printRepresentationsVersions (std::ostream&  os) const
   ++gIndenter;
 
   if (fRepresentationComponentsList.size ()) {
-    std::list<S_mfcRepresentationComponent>::const_iterator
+    std::list <S_mfcRepresentationComponent>::const_iterator
       iBegin = fRepresentationComponentsList.begin (),
       iEnd   = fRepresentationComponentsList.end (),
       i      = iBegin;
@@ -1683,7 +1683,7 @@ void mfcMultiComponent::printPassesVersions (std::ostream&  os) const
   ++gIndenter;
 
   if (fPassComponentsList.size ()) {
-    std::list<S_mfcPassComponent>::const_iterator
+    std::list <S_mfcPassComponent>::const_iterator
       iBegin = fPassComponentsList.begin (),
       iEnd   = fPassComponentsList.end (),
       i      = iBegin;
@@ -1725,7 +1725,7 @@ void mfcMultiComponent::printRepresentationsHistory (std::ostream&  os) const
   ++gIndenter;
 
   if (fRepresentationComponentsList.size ()) {
-    std::list<S_mfcRepresentationComponent>::const_iterator
+    std::list <S_mfcRepresentationComponent>::const_iterator
       iBegin = fRepresentationComponentsList.begin (),
       iEnd   = fRepresentationComponentsList.end (),
       i      = iBegin;
@@ -1765,7 +1765,7 @@ void mfcMultiComponent::printPassesHistory (std::ostream&  os) const
   ++gIndenter;
 
   if (fPassComponentsList.size ()) {
-    std::list<S_mfcPassComponent>::const_iterator
+    std::list <S_mfcPassComponent>::const_iterator
       iBegin = fPassComponentsList.begin (),
       iEnd   = fPassComponentsList.end (),
       i      = iBegin;
@@ -1828,7 +1828,7 @@ void mfcMultiComponent::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_mfcRepresentationComponent>::const_iterator
+    std::list <S_mfcRepresentationComponent>::const_iterator
       iBegin = fRepresentationComponentsList.begin (),
       iEnd   = fRepresentationComponentsList.end (),
       i      = iBegin;
@@ -1860,7 +1860,7 @@ void mfcMultiComponent::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_mfcPassComponent>::const_iterator
+    std::list <S_mfcPassComponent>::const_iterator
       iBegin = fPassComponentsList.begin (),
       iEnd   = fPassComponentsList.end (),
       i      = iBegin;
@@ -2294,7 +2294,7 @@ void mfcLibraryComponent::printConvertersVersions (std::ostream&  os) const
   ++gIndenter;
 
   if (fConverterComponentsList.size ()) {
-    std::list<S_mfcConverterComponent>::const_iterator
+    std::list <S_mfcConverterComponent>::const_iterator
       iBegin = fConverterComponentsList.begin (),
       iEnd   = fConverterComponentsList.end (),
       i      = iBegin;
@@ -2337,7 +2337,7 @@ void mfcLibraryComponent::printConvertersHistory (std::ostream&  os) const
   ++gIndenter;
 
   if (fConverterComponentsList.size ()) {
-    std::list<S_mfcConverterComponent>::const_iterator
+    std::list <S_mfcConverterComponent>::const_iterator
       iBegin = fConverterComponentsList.begin (),
       iEnd   = fConverterComponentsList.end (),
       i      = iBegin;

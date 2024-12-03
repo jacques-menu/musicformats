@@ -107,19 +107,19 @@ class EXP msrStaff : public msrElement
 
     // staff voices
 
-    const std::map<int, S_msrVoice>&
+    const std::map <int, S_msrVoice>&
                           getStaffVoiceNumbersToAllVoicesMap () const
                               { return fStaffVoiceNumbersToAllVoicesMap; }
 
-    const std::map<int, S_msrVoice>&
+    const std::map <int, S_msrVoice>&
                           getStaffVoiceNumbersToRegularVoicesMap () const
                               { return fStaffVoiceNumbersToRegularVoicesMap; }
 
-    const std::list<S_msrVoice>&
+    const std::list <S_msrVoice>&
                           getStaffRegularVoicesList () const
                               { return fStaffRegularVoicesList; }
 
-    const std::list<S_msrVoice>&
+    const std::list <S_msrVoice>&
                           getStaffAllVoicesList () const
                               { return fStaffAllVoicesList; }
 
@@ -139,7 +139,7 @@ class EXP msrStaff : public msrElement
                               { return fStaffShortestNoteTupletFactor; }
 
 
-    const std::vector<std::list<S_msrMeasure>>&
+    const std::vector <std::list <S_msrMeasure>>&
                           getStaffMeasuresFlatListsVector () const
                               { return fStaffMeasuresFlatListsVector; }
 
@@ -429,19 +429,19 @@ class EXP msrStaff : public msrElement
 
     // we need to sort the voices by increasing voice numbers,
     // but with harmonies voices right before the corresponding regular voices
-    std::list<S_msrVoice> fStaffAllVoicesList;
+    std::list <S_msrVoice> fStaffAllVoicesList;
 
     // harmonies and figured bass elements should be placed
     // in the first regular voice of the staff, hence:
-    std::list<S_msrVoice> fStaffRegularVoicesList;
+    std::list <S_msrVoice> fStaffRegularVoicesList;
 
     // the mapping of all the voices in the staff,
     // including harmonies and figured bass voices
-    std::map<int, S_msrVoice>
+    std::map <int, S_msrVoice>
                           fStaffVoiceNumbersToAllVoicesMap;
 
     // the mapping of voice numbers to regular voices
-    std::map<int, S_msrVoice>
+    std::map <int, S_msrVoice>
                           fStaffVoiceNumbersToRegularVoicesMap;
 
     // part shortest note
@@ -455,7 +455,7 @@ class EXP msrStaff : public msrElement
     // i.e. without segments nor repeats,
     // gathered from the staff's voices fVoiceInitialElementsList and fVoiceLastSegment
     // by finalizeMeasure()
-    std::vector<std::list<S_msrMeasure>>
+    std::vector <std::list <S_msrMeasure>>
                           fStaffMeasuresFlatListsVector;
 
     // multi-measure rests

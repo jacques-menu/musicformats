@@ -592,7 +592,7 @@ std::string msrBarLine::endingNumbersListAsString () const
   std::stringstream ss;
 
   if (fEndingNumbersList.size ()) {
-    std::list<int>::const_iterator
+    std::list <int>::const_iterator
       iBegin = fEndingNumbersList.begin (),
       iEnd   = fEndingNumbersList.end (),
       i      = iBegin;

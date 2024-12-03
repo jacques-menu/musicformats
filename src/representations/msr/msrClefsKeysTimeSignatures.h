@@ -71,10 +71,10 @@ EXP msrClefKind msrClefKindFromString (
 std::string availableClefKinds (size_t namesListMaxLength);
 std::string availableClefKindsNames (size_t namesListMaxLength);
 
-extern std::map<std::string, msrClefKind>
+extern std::map <std::string, msrClefKind>
   gGlobalClefKindsMap;
 
-extern std::list<std::string>
+extern std::list <std::string>
   gClefKindsNamesList;
 
 void initializeClefKinds ();
@@ -393,7 +393,7 @@ class EXP msrKey : public msrMeasureElement
     Bool                  getKeyItemsOctavesAreSpecified () const
                               { return fKeyItemsOctavesAreSpecified; }
 
-    const std::vector<S_msrHumdrumScotKeyItem>&
+    const std::vector <S_msrHumdrumScotKeyItem>&
                           getHumdrumScotKeyItemsVector () const
                               { return fHumdrumScotKeyItemsVector; }
 
@@ -444,7 +444,7 @@ class EXP msrKey : public msrMeasureElement
 
     // Humdrum/Scot keys
 
-    std::vector<S_msrHumdrumScotKeyItem>
+    std::vector <S_msrHumdrumScotKeyItem>
                           fHumdrumScotKeyItemsVector;
     Bool                  fKeyItemsOctavesAreSpecified;
 };
@@ -525,7 +525,7 @@ class EXP msrTimeSignatureItem : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    const std::vector<int>&
+    const std::vector <int>&
                           getTimeSignatureBeatsNumbersVector () const
                               { return fTimeSignatureBeatsNumbersVector; }
 
@@ -572,7 +572,7 @@ class EXP msrTimeSignatureItem : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    std::vector<int>      fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
+    std::vector <int>      fTimeSignatureBeatsNumbersVector; // 5+3+1 is possible
     int                   fTimeSignatureBeatValue;
 };
 typedef SMARTP<msrTimeSignatureItem> S_msrTimeSignatureItem;
@@ -659,7 +659,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     Bool                  getTimeIsCompound () const
                               { return fTimeIsCompound; }
 
-    const std::vector<S_msrTimeSignatureItem>&
+    const std::vector <S_msrTimeSignatureItem>&
                           getTimeSignatureItemsVector () const
                               { return fTimeSignatureItemsVector; }
 
@@ -707,7 +707,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     msrTimeSignatureSymbolKind
                           fTimeSignatureSymbolKind;
 
-    std::vector<S_msrTimeSignatureItem>
+    std::vector <S_msrTimeSignatureItem>
                           fTimeSignatureItemsVector;
 
     // a time signature is compound if it contains several items
@@ -748,10 +748,10 @@ EXP msrClefKeyTimeSignatureOrderKind msrClefKeyTimeSignatureOrderKindFromString 
 std::string availableClefKeyTimeSignatureOrderKinds (size_t namesListMaxLength);
 std::string availableClefKeyTimeSignatureOrderKindsNames (size_t namesListMaxLength);
 
-extern std::map<std::string, msrClefKeyTimeSignatureOrderKind>
+extern std::map <std::string, msrClefKeyTimeSignatureOrderKind>
   gGlobalClefKeyTimeSignatureOrderKindsMap;
 
-extern std::list<std::string>
+extern std::list <std::string>
   gClefKeyTimeSignatureOrderKindsNamesList;
 
 void initializeClefKeyTimeSignatureOrderKinds ();

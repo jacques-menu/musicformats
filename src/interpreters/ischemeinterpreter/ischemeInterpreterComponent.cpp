@@ -71,7 +71,7 @@ S_mfcConverterComponent createIschemeInterpreterComponent ()
         mfcVersion::create (
           mfcVersionNumber::createFromString ("0.9.70"),
           "February 20, 2024",
-          std::list<std::string> {
+          std::list <std::string> {
             "Many, many changes in the code base"
           }
       ));

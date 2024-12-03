@@ -376,7 +376,7 @@ std::string msrPartGroup::fetchPartGroupCombinedName () const
 
 std::string msrPartGroup::fetchPartGroupCombinedNameWithoutEndOfLines () const
 {
-  std::list<std::string> chunksList;
+  std::list <std::string> chunksList;
 
   mfSplitRegularStringAtEndOfLines (
     fPartGroupName,
@@ -391,7 +391,7 @@ std::string msrPartGroup::fetchPartGroupCombinedNameWithoutEndOfLines () const
 
   if (chunksList.size ()) {
     // used the chunks separated by a space
-    std::list<std::string>::const_iterator
+    std::list <std::string>::const_iterator
       iBegin = chunksList.begin (),
       iEnd   = chunksList.end (),
       i      = iBegin;
@@ -533,7 +533,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //     ++gIndenter;
 //
 //     for (
-//       std::map<std::string, S_msrPart>::const_iterator i = fPartGroupPartsMap.begin ();
+//       std::map <std::string, S_msrPart>::const_iterator i = fPartGroupPartsMap.begin ();
 //       i != fPartGroupPartsMap.end ();
 //       ++i
 //     ) {
@@ -555,7 +555,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //     ++gIndenter;
 //
 //     if (fPartGroupElementsList.size ()) {
-//       std::list<S_msrPartGroupElement>::const_iterator
+//       std::list <S_msrPartGroupElement>::const_iterator
 //         iBegin = fPartGroupElementsList.begin (),
 //         iEnd   = fPartGroupElementsList.end (),
 //         i      = iBegin;
@@ -643,7 +643,7 @@ void msrPartGroup::removePartFromPartGroup (
   ++gIndenter;
 
   for (
-    std::list<S_msrPartGroupElement>::iterator i = fPartGroupElementsList.begin ();
+    std::list <S_msrPartGroupElement>::iterator i = fPartGroupElementsList.begin ();
     i != fPartGroupElementsList.end ();
     ++i
   ) {
@@ -846,7 +846,7 @@ void msrPartGroup::displayPartGroupPartsMap (
 
   ++gIndenter;
 
-  for (std::pair<std::string, S_msrPart> thePair : fPartGroupPartsMap) {
+  for (std::pair <std::string, S_msrPart> thePair : fPartGroupPartsMap) {
     gLog <<
       "\"" << thePair.first << "\" --% --> " <<
       thePair.second->fetchPartCombinedName () <<
@@ -872,7 +872,7 @@ void msrPartGroup::displayPartGroupElementsListFull (
   if (partGroupElementsListSize) {
     gLog << std::endl;
 
-    std::list<S_msrPartGroupElement>::const_iterator
+    std::list <S_msrPartGroupElement>::const_iterator
       iBegin = fPartGroupElementsList.begin (),
       iEnd   = fPartGroupElementsList.end (),
       i      = iBegin;
@@ -959,7 +959,7 @@ void msrPartGroup::displayPartGroupElementsList (
   if (partGroupElementsListSize) {
     gLog << std::endl;
 
-    std::list<S_msrPartGroupElement>::const_iterator
+    std::list <S_msrPartGroupElement>::const_iterator
       iBegin = fPartGroupElementsList.begin (),
       iEnd   = fPartGroupElementsList.end (),
       i      = iBegin;
@@ -1061,7 +1061,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrPartGroupElement>::const_iterator i =
+    std::list <S_msrPartGroupElement>::const_iterator i =
       fPartGroupElementsList.begin ();
     i != fPartGroupElementsList.end ();
     ++i
@@ -1121,10 +1121,10 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 
 void msrPartGroup::collectPartGroupPartsList (
   int                   inputLineNumber,
-  std::list<S_msrPart>& partsList)
+  std::list <S_msrPart>& partsList)
 {
   for (
-    std::list<S_msrPartGroupElement>::const_iterator i =
+    std::list <S_msrPartGroupElement>::const_iterator i =
       fPartGroupElementsList.begin ();
     i != fPartGroupElementsList.end ();
     ++i
@@ -1493,7 +1493,7 @@ void msrPartGroup::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrVoice>::const_iterator
+    std::list <S_msrVoice>::const_iterator
       iBegin = fPartGroupAllVoicesList.begin (),
       iEnd   = fPartGroupAllVoicesList.end (),
       i      = iBegin;
@@ -1613,7 +1613,7 @@ void msrPartGroup::printSummary (std::ostream& os) const
 
   if (fPartGroupElementsList.size ()) {
     os << std::endl;
-    std::list<S_msrPartGroupElement>::const_iterator
+    std::list <S_msrPartGroupElement>::const_iterator
       iBegin = fPartGroupElementsList.begin (),
       iEnd   = fPartGroupElementsList.end (),
       i      = iBegin;
@@ -1641,7 +1641,7 @@ void msrPartGroup::printSlices (std::ostream& os) const
   ++gIndenter;
 
 //   if (fPartGroupElementsList.size ()) {
-//     std::list<S_msrPartGroupElement>::const_iterator
+//     std::list <S_msrPartGroupElement>::const_iterator
 //       iBegin = fPartGroupElementsList.begin (),
 //       iEnd   = fPartGroupElementsList.end (),
 //       i      = iBegin;

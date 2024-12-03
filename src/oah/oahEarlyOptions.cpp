@@ -656,7 +656,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
 void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
   oahOptionsAndArguments& optionsAndArguments)
 {
-  const std::vector<std::string>&
+  const std::vector <std::string>&
     argumentsVector =
       optionsAndArguments.getArgumentsVector ();
 

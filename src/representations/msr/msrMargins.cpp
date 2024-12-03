@@ -25,7 +25,7 @@ namespace MusicFormats
 // margins types
 //______________________________________________________________________________
 
-std::map<std::string, msrMarginTypeKind>
+std::map <std::string, msrMarginTypeKind>
   gGlobalMsrMarginTypeKindsMap;
 
 std::string msrMarginTypeKindAsString (
@@ -83,7 +83,7 @@ std::string availableMsrMarginTypeKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msrMarginTypeKind>::const_iterator i =
+      std::map <std::string, msrMarginTypeKind>::const_iterator i =
         gGlobalMsrMarginTypeKindsMap.begin ();
       i != gGlobalMsrMarginTypeKindsMap.end ();
       ++i

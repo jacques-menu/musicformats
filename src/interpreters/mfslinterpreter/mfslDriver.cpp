@@ -644,7 +644,7 @@ void mfslDriver::handleSelectLabel (
       --gIndenter;
     }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
       choiceLabelsSet =
         choice->
           getLabelsSet ();
@@ -892,7 +892,7 @@ Bool mfslDriver::applySelectOptionsFinally ()
       endl;
   }
 
-  const std::multimap<std::string, std::string>&
+  const std::multimap <std::string, std::string>&
     selectChoiceToLabelsMultiMap =
       gGlobalMfslInterpreterOahGroup->
         getSelectChoiceToLabelsMultiMap ();
@@ -931,7 +931,7 @@ Bool mfslDriver::applySelectOptionsFinally ()
             *this);
 
     if (optionSuppliedLabel == K_ALL_PSEUDO_LABEL_NAME) {
-      const std::set<std::string>&
+      const std::set <std::string>&
         choiceLabelsSet =
           choice->
             getLabelsSet ();
@@ -982,7 +982,7 @@ Bool mfslDriver::applySelectOption (
       endl;
   }
 
-  const std::set<std::string>&
+  const std::set <std::string>&
     choiceLabelsSet =
       choice->
         getLabelsSet ();

@@ -326,7 +326,7 @@ void msr2msrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
 
     const int fieldWidth = 19;
 
-    std::list<S_msrHiddenMeasureAndBarLineDescr>::const_iterator
+    std::list <S_msrHiddenMeasureAndBarLineDescr>::const_iterator
       iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
       iEnd   = fPartHiddenMeasureAndBarLineDescrList.end (),
       i      = iBegin;
@@ -383,7 +383,7 @@ void msr2msrTranslator::displayOnGoingNotesStack (
     std::endl;
 
   if (onGoingNotesStackSize) {
-    std::list<S_msrNote>::const_iterator
+    std::list <S_msrNote>::const_iterator
       iBegin = fOnGoingNotesStack.begin (),
       iEnd   = fOnGoingNotesStack.end (),
       i      = iBegin;
@@ -425,7 +425,7 @@ void msr2msrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
     std::endl;
 
   if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
-    std::list<S_msrHiddenMeasureAndBarLineDescr>::const_iterator
+    std::list <S_msrHiddenMeasureAndBarLineDescr>::const_iterator
       iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
       iEnd   = fPartHiddenMeasureAndBarLineDescrList.end (),
       i      = iBegin;
@@ -2235,7 +2235,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 
   // is fCurrentMeasureNumber in the parts ignore IDs set?
   if (gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().size ()) {
-    std::set<std::string>::iterator
+    std::set <std::string>::iterator
       it =
         gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().find (
           fCurrentMeasureNumber);
@@ -2369,7 +2369,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 
 //     if (gGlobalMsr2msrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) { JMI ???
 //       // get the syllable texts list
-//       const std::list<std::string>&
+//       const std::list <std::string>&
 //         syllableElementsList =
 //           elt->getSyllableElementsList ();
 //
@@ -6848,23 +6848,23 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::map<int, S_msrStaff>
+  std::map <int, S_msrStaff>
     partStavesMap =
       partClone->
         getPartStavesMap ();
 
   for (
-    std::map<int, S_msrStaff>::const_iterator i = partStavesMap.begin ();
+    std::map <int, S_msrStaff>::const_iterator i = partStavesMap.begin ();
     i != partStavesMap.end ();
     ++i
   ) {
-    std::list<S_msrVoice>
+    std::list <S_msrVoice>
       staffVoicesVector =
         (*i).second->
           getStaffAllVoicesList ();
 
     for (
-      std::list<S_msrVoice>::const_iterator j=staffVoicesVector.begin ();
+      std::list <S_msrVoice>::const_iterator j=staffVoicesVector.begin ();
       j!=staffVoicesVector.end ();
       ++j
     ) {
@@ -6920,12 +6920,12 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //       std::string wordsContents = elt->getWordsContents ();
 //
 //       // is this words contents in the string to dal segno kind map?
-//       const std::map<std::string, msrDalSegno::msrDalSegnoKind>&
+//       const std::map <std::string, msrDalSegno::msrDalSegnoKind>&
 //         converStringToDalSegnoMap =
 //           gGlobalMsr2msrOahGroup->
 //             getStringToDalSegnoKindMap ();
 //
-//       std::map<std::string, msrDalSegno::msrDalSegnoKind>::const_iterator
+//       std::map <std::string, msrDalSegno::msrDalSegnoKind>::const_iterator
 //         it = converStringToDalSegnoMap.find (wordsContents);
 //
 //       if (it != converStringToDalSegnoMap.end ()) {

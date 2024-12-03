@@ -542,7 +542,7 @@ const int K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
 
 When a field is an STL container, such a {\tt vector}, {\tt list}, {\tt map} or {\tt set}, this in indicated as part of the identifier, such as:
 \begin{lstlisting}[language=CPlusPlus]
-    std::map<std::string, std::string>
+    std::map <std::string, std::string>
                           fPartsRenamingMap;
 \end{lstlisting}
 or
@@ -551,7 +551,7 @@ or
 \end{lstlisting}
 or
 \begin{lstlisting}[language=CPlusPlus]
-    std::map<std::string, Sxmlelement>  fPartMeasureNumbersToElementsMap;
+    std::map <std::string, Sxmlelement>  fPartMeasureNumbersToElementsMap;
 \end{lstlisting}
 
 All \methodName{create*} methods create class   instances, and are paired with an explicit constructor with the same parameters:
@@ -1527,11 +1527,11 @@ Some methods exist in two versions, the second one with a \code{NonConst} suffix
 This happens for example in \msrBoth{mfslNotes}:
 \begin{lstlisting}[language=CPlusPlus]
     // articulations
-    const std::list<S_msrArticulation>&
+    const std::list <S_msrArticulation>&
                           getNoteArticulationsList () const
                               { return fNoteArticulationsList; }
 
-    std::list<S_msrArticulation>&
+    std::list <S_msrArticulation>&
                           getNoteArticulationsListNonConst ()
                               { return fNoteArticulationsList; }
 \end{lstlisting}
@@ -1824,8 +1824,8 @@ formats/lpsr/lpsrParts.cpp:    fPartBlockElementsList.sort (
 There are thus a number of \methodName{compare*} methods according to the needs:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r compare * | grep '\.h'
-oah/oahBasicTypes.h:    const std::multiset<S_oahPrintableElement, compareOahElements>&
-oah/oahBasicTypes.h:    std::multiset<S_oahPrintableElement, compareOahElements>
+oah/oahBasicTypes.h:    const std::multiset <S_oahPrintableElement, compareOahElements>&
+oah/oahBasicTypes.h:    std::multiset <S_oahPrintableElement, compareOahElements>
 oah/oahElements.h:struct compareOahElements {
 formats/msr/msrParts.h:    static bool           compareStavesToHaveFiguredBassesBelowCorrespondingPart (
 formats/msr/msrNotes.h:    static bool           compareNotesByIncreasingMeasurePosition (
@@ -2076,7 +2076,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // allowing for both parts and nested part groups as elements
 
-    std::list<S_msrPartGroupElement>
+    std::list <S_msrPartGroupElement>
                           fPartGroupElementsList;
 };
 \end{lstlisting}

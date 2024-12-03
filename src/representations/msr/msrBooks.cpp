@@ -249,7 +249,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
 
   // credits on top of page one can be used as identification
   if (fCreditsList.size () >= 1) {
-    std::list<S_msrCredit>::const_iterator
+    std::list <S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -261,7 +261,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
       S_msrCredit credit = (*i);
 
       if (credit->getCreditPageNumber () == 1) {
-        const std::vector<S_msrCreditWords>&
+        const std::vector <S_msrCreditWords>&
           creditWordsVector =
             credit->
               getCreditWordsList ();
@@ -516,7 +516,7 @@ void msrBook::browseData (basevisitor* v)
   }
 
   for (
-    std::list<S_msrCredit>::const_iterator i = fCreditsList.begin ();
+    std::list <S_msrCredit>::const_iterator i = fCreditsList.begin ();
     i != fCreditsList.end ();
     ++i
   ) {
@@ -526,7 +526,7 @@ void msrBook::browseData (basevisitor* v)
   } // for
 
   for (
-    std::list<S_msrBookElement>::const_iterator i = fBookElementsList.begin ();
+    std::list <S_msrBookElement>::const_iterator i = fBookElementsList.begin ();
     i != fBookElementsList.end ();
     ++i
   ) {
@@ -667,7 +667,7 @@ void msrBook::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrCredit>::const_iterator
+    std::list <S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -698,7 +698,7 @@ void msrBook::printFull (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrVoice>::const_iterator
+    std::list <S_msrVoice>::const_iterator
       iBegin = fBookAllVoicesList.begin (),
       iEnd   = fBookAllVoicesList.end (),
       i      = iBegin;
@@ -721,7 +721,7 @@ void msrBook::printFull (std::ostream& os) const
 
   // print the part groups if any
   if (bookElementsListSize) {
-    std::list<S_msrBookElement>::const_iterator
+    std::list <S_msrBookElement>::const_iterator
       iBegin = fBookElementsList.begin (),
       iEnd   = fBookElementsList.end (),
       i      = iBegin;
@@ -863,7 +863,7 @@ void msrBook::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrCredit>::const_iterator
+    std::list <S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -894,7 +894,7 @@ void msrBook::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
 
-    std::list<S_msrVoice>::const_iterator
+    std::list <S_msrVoice>::const_iterator
       iBegin = fBookAllVoicesList.begin (),
       iEnd   = fBookAllVoicesList.end (),
       i      = iBegin;
@@ -918,7 +918,7 @@ void msrBook::print (std::ostream& os) const
 
   // print the part groups if any
   if (bookElementsListSize) {
-    std::list<S_msrBookElement>::const_iterator
+    std::list <S_msrBookElement>::const_iterator
       iBegin = fBookElementsList.begin (),
       iEnd   = fBookElementsList.end (),
       i      = iBegin;
@@ -1038,7 +1038,7 @@ void msrBook::printSummary (std::ostream& os) const
 
   // print the credits if any
   if (fCreditsList.size ()) {
-    std::list<S_msrCredit>::const_iterator
+    std::list <S_msrCredit>::const_iterator
       iBegin = fCreditsList.begin (),
       iEnd   = fCreditsList.end (),
       i      = iBegin;
@@ -1051,7 +1051,7 @@ void msrBook::printSummary (std::ostream& os) const
   }
 
   if (bookElementsListSize) {
-    std::list<S_msrBookElement>::const_iterator
+    std::list <S_msrBookElement>::const_iterator
       iBegin = fBookElementsList.begin (),
       iEnd   = fBookElementsList.end (),
       i      = iBegin;

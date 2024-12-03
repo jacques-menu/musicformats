@@ -78,7 +78,7 @@ class EXP bsrLineContents : public bsrElement
     bsrLineContentsKind   getLineContentsKind () const
                               { return fLineContentsKind; }
 
-    const std::list<S_bsrLineContentsElement>&
+    const std::list <S_bsrLineContentsElement>&
                           getLineContentsLineElementsList () const
                               { return fLineContentsLineElementsList; }
 
@@ -137,7 +137,7 @@ class EXP bsrLineContents : public bsrElement
 
     bsrLineContentsKind   fLineContentsKind;
 
-    std::list<S_bsrLineContentsElement>
+    std::list <S_bsrLineContentsElement>
                           fLineContentsLineElementsList;
 };
 typedef SMARTP<bsrLineContents> S_bsrLineContents;

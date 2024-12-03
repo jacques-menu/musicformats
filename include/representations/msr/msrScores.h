@@ -150,7 +150,7 @@ class EXP msrScore : public msrBookElement
                               { return fAppearance; }
 
     // part groups
-    const std::list<S_msrPartGroup>&
+    const std::list <S_msrPartGroup>&
                           getPartGroupsList () const
                               { return fPartGroupsList; }
 
@@ -171,7 +171,7 @@ class EXP msrScore : public msrBookElement
 */
 
     // credits
-    const std::list<S_msrCredit>&
+    const std::list <S_msrCredit>&
                           getCreditsList () const
                               { return fCreditsList; }
 
@@ -314,7 +314,7 @@ class EXP msrScore : public msrBookElement
 
     // score voices
 
-    const std::list<S_msrVoice>&
+    const std::list <S_msrVoice>&
                           getScoreAllVoicesList () const
                               { return fScoreAllVoicesList; }
 
@@ -348,7 +348,7 @@ class EXP msrScore : public msrBookElement
 
     void                  collectScorePartsList (
                             int         inputLineNumber,
-                            std::list<S_msrPart>& partsList);
+                            std::list <S_msrPart>& partsList);
 
   public:
 
@@ -403,14 +403,14 @@ class EXP msrScore : public msrBookElement
     S_msrAppearance       fAppearance;
 
     // credits
-    std::list<S_msrCredit>
+    std::list <S_msrCredit>
                           fCreditsList;
 
     // part groups
-    std::set<S_msrPartGroup>
+    std::set <S_msrPartGroup>
                           fScorePartGroupsSet;
 
-    std::list<S_msrPartGroup>
+    std::list <S_msrPartGroup>
                           fPartGroupsList;
 
     // master voice
@@ -469,7 +469,7 @@ class EXP msrScore : public msrBookElement
 
     // score voices
 
-    std::list<S_msrVoice> fScoreAllVoicesList;
+    std::list <S_msrVoice> fScoreAllVoicesList;
 
     // measures slices sequence
 

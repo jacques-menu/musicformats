@@ -987,7 +987,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
     fVoiceContainsMeasureRepeats;
 
   // stanzas
-  for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+  for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
     S_msrStanza stanza = thePair.second;
 
     deepClone->
@@ -2375,7 +2375,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 
     if (voiceFirstMeasure) {
       // get the first measure's elements list
-      const std::list<S_msrMeasureElement>&
+      const std::list <S_msrMeasureElement>&
         firstMeasureElementsList =
           voiceFirstMeasure->
             getMeasureElementsList ();
@@ -2686,7 +2686,7 @@ void msrVoice::appendHarmonyToVoice (
 
 void msrVoice::appendHarmoniesListToVoice (
   int                            inputLineNumber,
-  const std::list<S_msrHarmony>& harmoniesList,
+  const std::list <S_msrHarmony>& harmoniesList,
   const msrWholeNotes&           measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2838,7 +2838,7 @@ void msrVoice::appendFiguredBassToVoice (
 
 void msrVoice::appendFiguredBassesListToVoice (
   int                                inputLineNumber,
-  const std::list<S_msrFiguredBass>& figuredBasssesList,
+  const std::list <S_msrFiguredBass>& figuredBasssesList,
   const msrWholeNotes&               measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2962,7 +2962,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //
 //   // pad up the voice's stanzas // JMI ???
 //   if (fVoiceStanzasMap.size ()) {
-//     for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+//     for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
 //       S_msrStanza stanza = thePair.second;
 //
 //       stanza->
@@ -3058,7 +3058,7 @@ void msrVoice::appendPaddingNoteToVoice (
 
   // pad up the voice's stanzas JMI USELESS??? v0.9.70
   if (fVoiceStanzasMap.size ()) {
-    for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       stanza->
@@ -3566,7 +3566,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
         chord->getMeasureElementSoundingWholeNotes ());
 
   // get the chord's notes vector
-  const std::vector<S_msrNote>&
+  const std::vector <S_msrNote>&
     chordNotesVector =
       chord->
         getChordNotesVector ();
@@ -3940,7 +3940,7 @@ void msrVoice::appendLineBreakToVoice  (
 
   // cascade this lineBreak to the voice stanzas if any
   if (fVoiceStanzasMap.size ()) {
-    for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       stanza->
@@ -3973,7 +3973,7 @@ void msrVoice::appendPageBreakToVoice (
 
   // cascade this pageBreak to the voice stanzas if any
   if (fVoiceStanzasMap.size ()) {
-    for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       stanza->
@@ -4063,7 +4063,7 @@ S_msrMeasureElement msrVoice::fetchVoiceLastMeasureElement (
     lastMeasure =
       fetchVoiceLastMeasure (inputLineNumber);
 
-  const std::list<S_msrMeasureElement>&
+  const std::list <S_msrMeasureElement>&
     lastMeasureElementsList =
       lastMeasure->getMeasureElementsList ();
 
@@ -4238,7 +4238,7 @@ void msrVoice::displayVoiceRepeatsStack (
     std::endl;
 
   if (repeatsStackSize) {
-    std::list<S_msrRepeat>::const_iterator
+    std::list <S_msrRepeat>::const_iterator
       iBegin = fVoicePendingRepeatsStack.begin (),
       iEnd   = fVoicePendingRepeatsStack.end (),
       i      = iBegin;
@@ -4292,7 +4292,7 @@ void msrVoice::displayVoiceRepeatsStackSummary (
     std::endl;
 
   if (repeatsStackSize) {
-    std::list<S_msrRepeat>::const_iterator
+    std::list <S_msrRepeat>::const_iterator
       iBegin = fVoicePendingRepeatsStack.begin (),
       iEnd   = fVoicePendingRepeatsStack.end (),
       i      = iBegin;
@@ -4411,7 +4411,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 //   if (voiceMeasuresFlatListSize) {
 //     ++gIndenter;
 //
-//     std::list<S_msrMeasure>::const_iterator
+//     std::list <S_msrMeasure>::const_iterator
 //       iBegin = fVoiceMeasuresFlatList.begin (),
 //       iEnd   = fVoiceMeasuresFlatList.end (),
 //       i      = iBegin;
@@ -4640,7 +4640,7 @@ void msrVoice::moveVoiceInitialElementsToRepeatCommonPart (
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrVoiceElement>::iterator i = fVoiceInitialElementsList.begin ();
+    std::list <S_msrVoiceElement>::iterator i = fVoiceInitialElementsList.begin ();
     i != fVoiceInitialElementsList.end ();
     ++i
   ) {
@@ -4937,7 +4937,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
   const std::string& context)
 {
   if (fVoiceLastSegment) {
-    const std::list<S_msrSegmentElement>&
+    const std::list <S_msrSegmentElement>&
       segmentElementsList =
         fVoiceLastSegment->
           getSegmentElementsList ();
@@ -5085,7 +5085,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
   if (fVoiceLastSegment) {
 
     // fetch last segment's measure elements list
-    std::list<S_msrSegmentElement>
+    std::list <S_msrSegmentElement>
       voiceLastSegmentElementsList =
         fVoiceLastSegment->
           getSegmentElementsList ();
@@ -5112,7 +5112,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
       // let's look at the last measure in detail
 
       // fetch its elements list
-      const std::list<S_msrMeasureElement>&
+      const std::list <S_msrMeasureElement>&
         lastMeasureElementsList =
           lastMeasureInLastSegment->
             getMeasureElementsList ();
@@ -6223,7 +6223,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
           "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 1");
 
   // fetch lastMeasure's elements list
-  const std::list<S_msrMeasureElement>&
+  const std::list <S_msrMeasureElement>&
     lastMeasureElementsList =
       lastMeasure->
         getMeasureElementsList ();
@@ -6407,7 +6407,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
 #endif // MF_TRACE_IS_ENABLED
 
   // fetch lastMeasure's elements list
-  const std::list<S_msrMeasureElement>&
+  const std::list <S_msrMeasureElement>&
     lastMeasureElementsList =
       lastMeasure->
         getMeasureElementsList ();
@@ -7428,7 +7428,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
   }
 
   // fetch the last segment's measure elements list
-  std::list<S_msrSegmentElement>
+  std::list <S_msrSegmentElement>
     voiceLastSegmentMeasureList =
       fVoiceLastSegment->
         getSegmentElementsList ();
@@ -9934,7 +9934,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
       if (fVoiceLastSegment) {
 
         // fetch last segment's measure elements list
-        const std::list<S_msrSegmentElement>
+        const std::list <S_msrSegmentElement>
           voiceLastSegmentElementsList =
             fVoiceLastSegment->
               getSegmentElementsList ();
@@ -10758,7 +10758,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
     case msrVoiceKind::kVoiceKindRegular:
       // append a measure end syllable to the voice stanzas if any
       if (fVoiceStanzasMap.size ()) {
-        for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+        for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
           S_msrStanza stanza = thePair.second;
 
           // fetch the part
@@ -10854,7 +10854,7 @@ void msrVoice::collectVoiceMeasuresIntoFlatList (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    std::list<S_msrMeasure>
+    std::list <S_msrMeasure>
       lastSegmentMeasuresFlatList =
         fVoiceLastSegment->
           getSegmentMeasuresFlatList ();
@@ -11471,7 +11471,7 @@ void msrVoice::browseData (basevisitor* v)
   // browse the voice initial elements
   if (fVoiceInitialElementsList.size ()) {
     for (
-      std::list<S_msrVoiceElement>::const_iterator i = fVoiceInitialElementsList.begin ();
+      std::list <S_msrVoiceElement>::const_iterator i = fVoiceInitialElementsList.begin ();
       i != fVoiceInitialElementsList.end ();
       ++i
     ) {
@@ -11489,7 +11489,7 @@ void msrVoice::browseData (basevisitor* v)
 
   // browse the voice stanzas
   if (fVoiceStanzasMap.size ()) {
-    for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       if (stanza->getStanzaTextPresent ()) {
@@ -11656,7 +11656,7 @@ void msrVoice::printFull (std::ostream& os) const
     ")" <<
     std::endl;
 
-  const int fieldWidth = 41;
+  const int fieldWidth = 43;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -11763,7 +11763,8 @@ void msrVoice::printFull (std::ostream& os) const
 
   // print the figured bass voice name if any
   os << std::left <<
-    std::setw (fieldWidth) << "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
+    std::setw (fieldWidth) <<
+    "fRegularVoiceForwardLinkToFiguredBassVoice" << ": ";
   if (fRegularVoiceForwardLinkToFiguredBassVoice) {
     os <<
       fRegularVoiceForwardLinkToFiguredBassVoice->fVoiceName;
@@ -11911,7 +11912,7 @@ void msrVoice::printFull (std::ostream& os) const
     ++gIndenter;
 
     for (
-      std::list<S_msrVoiceElement>::const_iterator i =
+      std::list <S_msrVoiceElement>::const_iterator i =
         fVoiceInitialElementsList.begin ();
       i != fVoiceInitialElementsList.end ();
       ++i
@@ -11965,7 +11966,7 @@ void msrVoice::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       os << stanza;
@@ -12000,7 +12001,7 @@ void msrVoice::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 41;
+  const int fieldWidth = 43;
 
   // print the regular voice harmonies voice name if any
   os << std::left <<
@@ -12076,7 +12077,7 @@ void msrVoice::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fVoiceInitialElementsList.begin (),
       iEnd   = fVoiceInitialElementsList.end (),
       i      = iBegin;
@@ -12119,7 +12120,7 @@ void msrVoice::print (std::ostream& os) const
 
     ++gIndenter;
 
-    for (std::pair<std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
+    for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
       os << stanza;
@@ -12142,7 +12143,7 @@ void msrVoice::print (std::ostream& os) const
 //   ++gIndenter;
 //
 //   if (fPartAllStavesList.size ()) {
-//     std::list<S_msrStaff>::const_iterator
+//     std::list <S_msrStaff>::const_iterator
 //       iBegin = fPartAllStavesList.begin (),
 //       iEnd   = fPartAllStavesList.end (),
 //       i      = iBegin;

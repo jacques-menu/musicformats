@@ -31,7 +31,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-std::map<std::string, mfServiceKind>
+std::map <std::string, mfServiceKind>
   gGlobalMusicFormatsServiceKindsMap;
 
 std::string mfServiceKindAsString (
@@ -99,7 +99,7 @@ mfServiceKind mfServiceKindFromString (const std::string& theString)
   mfServiceKind result =
     mfServiceKind::kMfService_UNKNOWN_;
 
-  std::map<std::string, mfServiceKind>::const_iterator
+  std::map <std::string, mfServiceKind>::const_iterator
     it =
       gGlobalMusicFormatsServiceKindsMap.find (
         theString);
@@ -148,7 +148,7 @@ std::string availableMusicFormatsServiceKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::pair<std::string, mfServiceKind>
+      std::pair <std::string, mfServiceKind>
         thePair :
           gGlobalMusicFormatsServiceKindsMap
     ) {
@@ -269,7 +269,7 @@ mfService::~mfService ()
 {}
 
 void mfService::fetchPassIDKindList (
-  std::list<mfPassIDKind>& passIDKindList) const
+  std::list <mfPassIDKind>& passIDKindList) const
 {
   for (S_mfPass pass : fServicePassesList) {
     passIDKindList.push_back (
@@ -595,7 +595,7 @@ std::ostream& operator << (std::ostream& os, const mfServiceRunData& elt)
 
 //________________________________________________________________________
 // hidden global service variable
-std::map<mfServiceKind, S_mfService> pGlobalServicesMap;
+std::map <mfServiceKind, S_mfService> pGlobalServicesMap;
 
 // hidden global service variable
 S_mfService pGlobalService;

@@ -142,7 +142,7 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
     Bool                  getNoLaunch () const
                               { return fNoLaunch; }
 
-    const std::set<std::string>&
+    const std::set <std::string>&
                           getInputSourcesSet () const
                               { return fInputSourcesSet; }
 
@@ -150,7 +150,7 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
                           getInputSourcesSetAtom () const
                               { return fInputSourcesSetAtom; }
 
-    const std::multimap<std::string, std::string>&
+    const std::multimap <std::string, std::string>&
                           getSelectChoiceToLabelsMultiMap () const
                               { return fSelectChoiceToLabelsMultiMap; }
 
@@ -227,13 +227,13 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
     Bool                  fTraceOptionsBlocks;
 
     // input sources
-    std::set<std::string>
+    std::set <std::string>
                           fInputSourcesSet;
     S_oahStringSetElementAtom
                           fInputSourcesSetAtom;
 
     // select statement
-    std::multimap<std::string, std::string>
+    std::multimap <std::string, std::string>
                           fSelectChoiceToLabelsMultiMap;
     S_oahStringToStringMultiMapElementAtom
                           fSelectChoiceToLabelsMultiMapAtom;

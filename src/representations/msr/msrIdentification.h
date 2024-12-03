@@ -111,52 +111,52 @@ class EXP msrIdentification : public msrElement
                               { return fIdentificationScoreInstrument; }
 
     // composers
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationComposersList () const
                               { return fIdentificationComposersList; }
 
     // lyricists
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationLyricistsList () const
                               { return fIdentificationLyricistsList; }
 
     // arrangers
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationArrangersList () const
                               { return fIdentificationArrangersList; }
 
     // poets
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationPoetsList () const
                               { return fIdentificationPoetsList; }
 
     // translators
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationTranslatorsList () const
                               { return fIdentificationTranslatorsList; }
 
     // artists
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationArtistsList () const
                               { return fIdentificationArtistsList; }
 
     // softwares
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationSoftwaresList () const
                               { return fIdentificationSoftwaresList; }
 
     // rights
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationRightsList () const
                               { return fIdentificationRightsList; }
 
     // sources
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationSourcesList () const
                               { return fIdentificationSourcesList; }
 
     // relations
-    const std::list<std::string>&
+    const std::list <std::string>&
                           getIdentificationRelationsList () const
                               { return fIdentificationRelationsList; }
 
@@ -259,32 +259,32 @@ class EXP msrIdentification : public msrElement
     std::string           fIdentificationScoreInstrument;
 
     // creators
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationComposersList;
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationLyricistsList;
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationArrangersList;
 
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationPoetsList;
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationTranslatorsList;
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationArtistsList;
 
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationSoftwaresList;
 
     // rights
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationRightsList;
     // sources
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationSourcesList;
 
     // relations
-    std::list<std::string>
+    std::list <std::string>
                           fIdentificationRelationsList;
 };
 typedef SMARTP<msrIdentification> S_msrIdentification;

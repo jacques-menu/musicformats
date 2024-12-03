@@ -44,7 +44,7 @@ std::ostream& operator << (std::ostream& os, const mfLanguageKind& elt);
 mfLanguageKind mfLanguageKindFromString (
   const std::string& theString);
 
-extern std::map<std::string, mfLanguageKind>
+extern std::map <std::string, mfLanguageKind>
   gGlobalMusicFormatsLanguageKindsMap;
 
 std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength);

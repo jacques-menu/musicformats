@@ -68,7 +68,7 @@ class EXP msrPathToVoice : public smartable
     S_msrScore            getScore () const
                               { return fScore; }
 
-    const std::list<S_msrPartGroup>&
+    const std::list <S_msrPartGroup>&
                           getPartGroupsList () const
                               { return fPartGroupsList; }
 
@@ -153,7 +153,7 @@ class EXP msrPathToVoice : public smartable
     S_msrScore            fScore;
 
     // part groups can be nested
-    std::list<S_msrPartGroup>  fPartGroupsList;
+    std::list <S_msrPartGroup>  fPartGroupsList;
 
     S_msrPart             fPart;
 

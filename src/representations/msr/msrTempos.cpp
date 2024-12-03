@@ -149,7 +149,7 @@ void msrTempoNote::acceptOut (basevisitor* v)
 void msrTempoNote::browseData (basevisitor* v)
 {
   for (
-    std::list<S_msrBeam>::const_iterator i = fTempoNoteBeamsList.begin ();
+    std::list <S_msrBeam>::const_iterator i = fTempoNoteBeamsList.begin ();
     i != fTempoNoteBeamsList.end ();
     ++i ) {
     // browse tempoTuplet element
@@ -198,7 +198,7 @@ void msrTempoNote::print (std::ostream& os) const
 
       ++gIndenter;
 
-      std::list<S_msrBeam>::const_iterator
+      std::list <S_msrBeam>::const_iterator
         iBegin = fTempoNoteBeamsList.begin (),
         iEnd   = fTempoNoteBeamsList.end (),
         i      = iBegin;
@@ -473,7 +473,7 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
         fTempoTupletElementsList.front ();
 
     for (
-      std::list<S_msrElement>::iterator i = fTempoTupletElementsList.begin ();
+      std::list <S_msrElement>::iterator i = fTempoTupletElementsList.begin ();
       i != fTempoTupletElementsList.end ();
       ++i) {
       if ((*i) == tempoNote) {
@@ -656,7 +656,7 @@ void msrTempoTuplet::acceptOut (basevisitor* v)
 void msrTempoTuplet::browseData (basevisitor* v)
 {
   for (
-    std::list<S_msrElement>::const_iterator i = fTempoTupletElementsList.begin ();
+    std::list <S_msrElement>::const_iterator i = fTempoTupletElementsList.begin ();
     i != fTempoTupletElementsList.end ();
     ++i ) {
     // browse tempoTuplet element
@@ -678,7 +678,7 @@ std::string msrTempoTuplet::asString () const
   ss << '[';
 
   if (fTempoTupletElementsList.size ()) {
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fTempoTupletElementsList.begin (),
       iEnd   = fTempoTupletElementsList.end (),
       i      = iBegin;
@@ -740,7 +740,7 @@ std::string msrTempoTuplet::asString () const
   ss << '[';
 
   if (fTempoTupletElementsList.size ()) {
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fTempoTupletElementsList.begin (),
       iEnd   = fTempoTupletElementsList.end (),
       i      = iBegin;
@@ -837,7 +837,7 @@ void msrTempoTuplet::print (std::ostream& os) const
   if (fTempoTupletElementsList.size ()) {
     ++gIndenter;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fTempoTupletElementsList.begin (),
       iEnd   = fTempoTupletElementsList.end (),
       i      = iBegin;
@@ -996,7 +996,7 @@ void msrTempoNotesRelationshipElements::browseData (basevisitor* v)
   // browse the elements list
   if (fTempoNotesRelationshipElementsList.size ()) {
     for (
-      std::list<S_msrElement>::const_iterator i =
+      std::list <S_msrElement>::const_iterator i =
         fTempoNotesRelationshipElementsList.begin ();
       i != fTempoNotesRelationshipElementsList.end ();
       ++i
@@ -1068,7 +1068,7 @@ void msrTempoNotesRelationshipElements::print (std::ostream& os) const
 
     os << std::endl;
 
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fTempoNotesRelationshipElementsList.begin (),
       iEnd   = fTempoNotesRelationshipElementsList.end (),
       i      = iBegin;
@@ -1523,7 +1523,7 @@ std::string msrTempo::tempoWordsListAsString (const std::string& separator) cons
 {
   std::string result;
 
-  std::list<S_msrWords>::const_iterator
+  std::list <S_msrWords>::const_iterator
     iBegin = fTempoWordsList.begin (),
     iEnd   = fTempoWordsList.end (),
     i      = iBegin;
@@ -1547,7 +1547,7 @@ std::string msrTempo::asString () const
     ", fTempoWordsList: ";
 
   if (fTempoWordsList.size ()) {
-    std::list<S_msrWords>::const_iterator
+    std::list <S_msrWords>::const_iterator
       iBegin = fTempoWordsList.begin (),
       iEnd   = fTempoWordsList.end (),
       i      = iBegin;
@@ -1581,7 +1581,7 @@ std::string msrTempo::asString () const
 // //     ", tempoWordsList: ";
 // //
 // //   if (fTempoWordsList.size ()) {
-// //     std::list<S_msrWords>::const_iterator
+// //     std::list <S_msrWords>::const_iterator
 // //       iBegin = fTempoWordsList.begin (),
 // //       iEnd   = fTempoWordsList.end (),
 // //       i      = iBegin;
@@ -1633,7 +1633,7 @@ void msrTempo::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrWords>::const_iterator
+    std::list <S_msrWords>::const_iterator
       iBegin = fTempoWordsList.begin (),
       iEnd   = fTempoWordsList.end (),
       i      = iBegin;

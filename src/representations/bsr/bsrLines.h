@@ -149,7 +149,7 @@ class EXP bsrLine : public bsrPageElement
 
     S_bsrCellsList        fLineNumberCellsList;
 
-    std::list<S_bsrLineContents>
+    std::list <S_bsrLineContents>
                           fLineContentsList;
 
     Bool                  fASpaceIsNeededInLine;

@@ -138,7 +138,7 @@ class EXP lpsrContext : public lpsrElement
 
     std::string           fContextAlphabeticName;
 
-    std::list<S_msrElement>
+    std::list <S_msrElement>
                           fContextElementsList;
 };
 typedef SMARTP<lpsrContext> S_lpsrContext;

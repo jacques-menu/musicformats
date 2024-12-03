@@ -39,7 +39,7 @@ namespace MusicFormats
 // the MusicFormats languages
 //______________________________________________________________________________
 
-std::map<std::string, mfLanguageKind>
+std::map <std::string, mfLanguageKind>
   gGlobalMusicFormatsLanguageKindsMap;
 
 mfLanguageKind mfLanguageKindFromString (const std::string& theString)
@@ -47,7 +47,7 @@ mfLanguageKind mfLanguageKindFromString (const std::string& theString)
   mfLanguageKind result =
     mfLanguageKind::kMusicFormatsLanguageEnglish; // MusicFormats default
 
-  std::map<std::string, mfLanguageKind>::const_iterator
+  std::map <std::string, mfLanguageKind>::const_iterator
     it =
       gGlobalMusicFormatsLanguageKindsMap.find (
         theString);
@@ -162,7 +162,7 @@ std::string availableMusicFormatsLanguageKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::pair<std::string, mfLanguageKind>
+      std::pair <std::string, mfLanguageKind>
         thePair :
           gGlobalMusicFormatsLanguageKindsMap
     ) {

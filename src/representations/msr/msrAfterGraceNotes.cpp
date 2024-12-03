@@ -196,7 +196,7 @@ void msrAfterGraceNotesGroupContents::acceptOut (basevisitor* v)
 
 void msrAfterGraceNotesGroupContents::browseData (basevisitor* v)
 {
-  std::list<S_msrMeasureElement>::const_iterator i;
+  std::list <S_msrMeasureElement>::const_iterator i;
 
   for (
     i = fAfterGraceNotesGroupContentsNotesList.begin ();
@@ -221,7 +221,7 @@ std::string msrAfterGraceNotesGroupContents::asShortString () const
 
 
   if (fAfterGraceNotesGroupContentsNotesList.size ()) {
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fAfterGraceNotesGroupContentsNotesList.begin (),
       iEnd   = fAfterGraceNotesGroupContentsNotesList.end (),
       i      = iBegin;
@@ -249,7 +249,7 @@ void msrAfterGraceNotesGroupContents::print (std::ostream& os) const
   ++gIndenter;
 
   if (fAfterGraceNotesGroupContentsNotesList.size ()) {
-    std::list<S_msrMeasureElement>::const_iterator
+    std::list <S_msrMeasureElement>::const_iterator
       iBegin = fAfterGraceNotesGroupContentsNotesList.begin (),
       iEnd   = fAfterGraceNotesGroupContentsNotesList.end (),
       i      = iBegin;

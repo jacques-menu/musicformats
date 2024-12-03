@@ -351,7 +351,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
     std::endl << std::endl;
 
   for (
-    std::list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
+    std::list <S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
     i != fPartBlockElementsList.end ();
     ++i
   ) {
@@ -380,7 +380,7 @@ void lpsrPartBlock::appendChordNamesContextToPartBlock (
     std::endl << std::endl;
 
   for (
-    std::list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
+    std::list <S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
     i != fPartBlockElementsList.end ();
     ++i
   ) {
@@ -490,7 +490,7 @@ void lpsrPartBlock::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
   for (
-    std::list<S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
+    std::list <S_msrElement>::const_iterator i = fPartBlockElementsList.begin ();
     i != fPartBlockElementsList.end ();
     ++i
   ) {
@@ -551,7 +551,7 @@ void lpsrPartBlock::print (std::ostream& os) const
   os << std::endl;
 
   if (fPartBlockElementsList.size ()) {
-    std::list<S_msrElement>::const_iterator
+    std::list <S_msrElement>::const_iterator
       iBegin = fPartBlockElementsList.begin (),
       iEnd   = fPartBlockElementsList.end (),
       i      = iBegin;

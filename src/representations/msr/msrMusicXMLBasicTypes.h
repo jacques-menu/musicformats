@@ -1068,23 +1068,23 @@ class EXP msrAppearance : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    const std::list<S_msrLineWidth>&
+    const std::list <S_msrLineWidth>&
                           getLineWidthsList () const
                               { return fLineWidthsList; }
 
-    const std::list<S_msrNoteSize>&
+    const std::list <S_msrNoteSize>&
                           getNoteSizesList () const
                               { return fNoteSizesList; }
 
-    const std::list<S_msrDistance>&
+    const std::list <S_msrDistance>&
                           getDistancesList () const
                               { return fDistancesList; }
 
-    const std::list<S_msrGlyph>&
+    const std::list <S_msrGlyph>&
                           getGlyphsList () const
                               { return fGlyphsList; }
 
-    const std::list<S_msrOtherAppearance>&
+    const std::list <S_msrOtherAppearance>&
                           getOtherAppearancesList () const
                               { return fOtherAppearancesList; }
 
@@ -1135,15 +1135,15 @@ class EXP msrAppearance : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    std::list<S_msrLineWidth>  fLineWidthsList;
+    std::list <S_msrLineWidth>  fLineWidthsList;
 
-    std::list<S_msrNoteSize>   fNoteSizesList;
+    std::list <S_msrNoteSize>   fNoteSizesList;
 
-    std::list<S_msrDistance>   fDistancesList;
+    std::list <S_msrDistance>   fDistancesList;
 
-    std::list<S_msrGlyph>      fGlyphsList;
+    std::list <S_msrGlyph>      fGlyphsList;
 
-    std::list<S_msrOtherAppearance>
+    std::list <S_msrOtherAppearance>
                           fOtherAppearancesList;
 };
 typedef SMARTP<msrAppearance> S_msrAppearance;

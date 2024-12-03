@@ -84,7 +84,7 @@ class   mfcVersionDescr : public smartable
 
     S_mfcVersionNumber    fVersionNumber;
     std::string           fVersionDate;
-    std::list<std::string>
+    std::list <std::string>
                           fVersionDescriptionItems;
 };
 \end{lstlisting}
@@ -119,7 +119,7 @@ class   mfcVersionsHistory : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    std::list<S_mfcVersionDescr>
+    std::list <S_mfcVersionDescr>
                           fVersionsList;
 };
 \end{lstlisting}
@@ -247,9 +247,9 @@ class   mfcMultiComponent : public mfcComponent
     // protected fields
     // ------------------------------------------------------
 
-    std::list<S_mfcRepresentationComponent>
+    std::list <S_mfcRepresentationComponent>
                           fRepresentationComponentsList;
-    std::list<S_mfcPassComponent>
+    std::list <S_mfcPassComponent>
                           fPassComponentsList;
 
     // should the version number be at least equal to
@@ -411,7 +411,7 @@ S_mfcRepresentationComponent EXP createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -421,7 +421,7 @@ S_mfcRepresentationComponent EXP createMsrRepresentationComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"), // JMI
           "October 14, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Refined MSR names and summary display options"
           }
       ));
@@ -476,7 +476,7 @@ S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -486,7 +486,7 @@ S_mfcConverterComponent EXP createMusicxml2brailleConverterComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 12, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Fixed trace OAH issue"
           }
       ));
@@ -567,7 +567,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Start of sequential versions numbering"
           }
       ));
@@ -577,7 +577,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.51"),
           "October 12, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Adding a version number to the MusicFormats library",
             "Fixed trace OAH issue in the musicxml2* converters)"
           }
@@ -588,7 +588,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.52"),
           "October 12, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Added MusicFormats library versions history to '-hist, -history'"
           }
       ));
@@ -598,7 +598,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.53"),
           "October 22, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Replaced bool by class   Bool in variables and fields",
             "Created MFC (MusicFormats components)"
           }
@@ -609,7 +609,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.54"),
           "Novermber 6, 2021",
-          std::list<std::string> {
+          std::list <std::string> {
             "Replaced std::cout and std::cerr by gOutput and gLog respectively in the CLI samples",
             "Finalized components numbering (MFC)"
           }

@@ -192,7 +192,7 @@ void msrMultiMeasureRest::setMultiMeasureRestLastMeasurePuristMeasureNumber (
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // get multi-measure rests contents segment measure elements list
-//   const std::list<S_msrMeasure>&
+//   const std::list <S_msrMeasure>&
 //     contentsSegmentElementsList =
 //       multiMeasureRestContentsSegment->
 //         getSegmentElementsList ();

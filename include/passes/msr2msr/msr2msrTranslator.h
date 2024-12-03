@@ -650,7 +650,7 @@ class EXP msr2msrTranslator :
 
     // partGroup's can be nested, hence this stack
     // the current partGroup is the top of the stack
-    std::list<S_msrPartGroup>
+    std::list <S_msrPartGroup>
                               fPartGroupsStack;
 
     void                      displayPartGroupsStack (
@@ -681,7 +681,7 @@ class EXP msr2msrTranslator :
     S_msrVoice                fCurrentVoiceClone;
     S_msrVoice                fCurrentVoiceOriginal;
 
-    std::map<S_msrNote, S_msrNote>
+    std::map <S_msrNote, S_msrNote>
                               fVoiceNotesMap; // JMI
 
     // segments
@@ -717,7 +717,7 @@ class EXP msr2msrTranslator :
     // dal segnos
     // ------------------------------------------------------
 
-    std::list<S_msrHiddenMeasureAndBarLineDescr>
+    std::list <S_msrHiddenMeasureAndBarLineDescr>
                               fPartHiddenMeasureAndBarLineDescrList;
 
     void                      displayPartHiddenMeasureAndBarLineDescrList ();
@@ -732,7 +732,7 @@ class EXP msr2msrTranslator :
     Bool                      fOnGoingHarmony;
     S_msrHarmony              fCurrentHarmonyClone;
 
-    std::list<S_msrHarmony>
+    std::list <S_msrHarmony>
                               fPendingHarmoniesList;
 
 
@@ -752,7 +752,7 @@ class EXP msr2msrTranslator :
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    std::list<S_msrNote>      fOnGoingNotesStack;
+    std::list <S_msrNote>      fOnGoingNotesStack;
     void                      displayOnGoingNotesStack (const std::string& context);
 
     Bool                      fOnGoingNonGraceNote;
@@ -825,7 +825,7 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
 //    const S_msrTuplet&             fCurrentTupletClone;
  //   Bool                      fOnGoingTuplet;
-    std::list<S_msrTuplet>   fTupletClonesStack;
+    std::list <S_msrTuplet>   fTupletClonesStack;
 
 
     // slurs

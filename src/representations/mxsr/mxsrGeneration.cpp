@@ -29,7 +29,7 @@ std::string mxmlelementAsString (Sxmlelement elem)
   const std::string&  elemName =
     elem->getName ();
 
-  const std::vector<Sxmlattribute>& elemAttributes =
+  const std::vector <Sxmlattribute>& elemAttributes =
     elem->attributes();
 
   std::stringstream ss;

@@ -235,7 +235,7 @@ void mfslInput::selectInputName (
   }
 
   // is this name in the inputs names set?
-  std::set<std::string>::const_iterator
+  std::set <std::string>::const_iterator
     it =
       fNamesSet.find (name);
 
@@ -257,7 +257,7 @@ void mfslInput::selectInputName (
   }
 
 //   // did fInputName get a name by an option?
-//   const std::multimap<std::string, std::string>&
+//   const std::multimap <std::string, std::string>&
 //     setInputToNameMultiMap =
 //       gGlobalMfslInterpreterOahGroup->
 //         getSelectInputToNamesMultiMap ();
@@ -479,7 +479,7 @@ void mfslInput::addName (
   mfslDriver&        drv)
 {
   // is this name in the inputs names set?
-  std::set<std::string>::const_iterator
+  std::set <std::string>::const_iterator
     it =
       fNamesSet.find (name);
 
@@ -589,7 +589,7 @@ std::string mfslInput::namesSetAsString () const
     size_t cumulatedLength    = 0;
 
     for (
-      std::set<std::string>::const_iterator i =
+      std::set <std::string>::const_iterator i =
         fNamesSet.begin ();
       i != fNamesSet.end ();
       ++i
@@ -1056,7 +1056,7 @@ void mfslChoice::selectChoiceLabel (
   }
 
   // is this label in the choices labels set?
-  std::set<std::string>::const_iterator
+  std::set <std::string>::const_iterator
     it =
       fLabelsSet.find (label);
 
@@ -1078,7 +1078,7 @@ void mfslChoice::selectChoiceLabel (
   }
 
   // did fChoiceName get a label by an option?
-  const std::multimap<std::string, std::string>&
+  const std::multimap <std::string, std::string>&
     setChoiceToLabelMultiMap =
       gGlobalMfslInterpreterOahGroup->
         getSelectChoiceToLabelsMultiMap ();
@@ -1300,7 +1300,7 @@ void mfslChoice::addLabel (
   mfslDriver&        drv)
 {
   // is this label in the choices labels set?
-  std::set<std::string>::const_iterator
+  std::set <std::string>::const_iterator
     it =
       fLabelsSet.find (label);
 
@@ -1447,7 +1447,7 @@ std::string mfslChoice::labelsSetAsString () const
     size_t cumulatedLength    = 0;
 
     for (
-      std::set<std::string>::const_iterator i =
+      std::set <std::string>::const_iterator i =
         fLabelsSet.begin ();
       i != fLabelsSet.end ();
       ++i
@@ -1894,7 +1894,7 @@ void mfslCaseChoiceStatement::registerCaseChoiceLabel (
       endl;
   }
 
-  std::set<std::string>
+  std::set <std::string>
     choiceLabelSet =
       fCaseChoice->
         getLabelsSet ();
@@ -2097,7 +2097,7 @@ void mfslCaseInputStatement::registerCaseInputName (
       endl;
   }
 
-  std::set<std::string>
+  std::set <std::string>
     choiceNameSet =
       fCaseInputInput->
         getNamesSet ();

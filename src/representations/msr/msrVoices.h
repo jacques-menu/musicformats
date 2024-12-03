@@ -232,7 +232,7 @@ class EXP msrVoice : public msrElement
 
     // stanzas
 
-    const std::map<std::string, S_msrStanza>&
+    const std::map <std::string, S_msrStanza>&
                           getVoiceStanzasMap () const
                               { return fVoiceStanzasMap; }
 
@@ -331,7 +331,7 @@ class EXP msrVoice : public msrElement
 
     // measures flat list
 
-    const std::list<S_msrMeasure>&
+    const std::list <S_msrMeasure>&
                           getVoiceMeasuresFlatList () const
                               { return fVoiceMeasuresFlatList; }
 
@@ -536,7 +536,7 @@ class EXP msrVoice : public msrElement
 
     void                  appendHarmoniesListToVoice (
                             int                            inputLineNumber,
-                            const std::list<S_msrHarmony>& harmoniesList,
+                            const std::list <S_msrHarmony>& harmoniesList,
                             const msrWholeNotes&           measurePositionToAppendAt);
 
     void                  appendHarmonyToVoiceClone (
@@ -551,7 +551,7 @@ class EXP msrVoice : public msrElement
 
     void                  appendFiguredBassesListToVoice (
                             int                                inputLineNumber,
-                            const std::list<S_msrFiguredBass>& figuredBasssesList,
+                            const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const msrWholeNotes&               measurePositionToAppendAt);
 
     void                  appendFiguredBassToVoiceClone (
@@ -1100,7 +1100,7 @@ class EXP msrVoice : public msrElement
 
      // stanzas
 
-    std::map<std::string, S_msrStanza>
+    std::map <std::string, S_msrStanza>
                           fVoiceStanzasMap;
 
     // measures
@@ -1115,7 +1115,7 @@ class EXP msrVoice : public msrElement
     // i.e. without segments nor repeats,
     // gathered from fVoiceInitialElementsList and fVoiceLastSegment
     // by finalizeMeasure()
-    std::list<S_msrMeasure>
+    std::list <S_msrMeasure>
                           fVoiceMeasuresFlatList;
 
     // measures slices sequence
@@ -1299,7 +1299,7 @@ class EXP msrVoice : public msrElement
 
     // voice initial elements list
 
-    std::list<S_msrVoiceElement>
+    std::list <S_msrVoiceElement>
                           fVoiceInitialElementsList;
 
     // voice first and last segments
@@ -1353,7 +1353,7 @@ class EXP msrVoice : public msrElement
 // JMI    int                   fVoiceLastMeasurePuristNumber;
 
     // a stack is needed to handle pending repeats, which can be nested
-    std::list<S_msrRepeat>
+    std::list <S_msrRepeat>
                           fVoicePendingRepeatsStack;
 
     // multi-measure rests
@@ -1393,7 +1393,7 @@ class EXP msrVoice : public msrElement
 
     // beams begin, continue and end check
 
-    std::list<int>        fVoiceBeamNumbersStack;
+    std::list <int>        fVoiceBeamNumbersStack;
 
     // calls counter (for debug)
     int                   fCallsCounter;

@@ -203,7 +203,7 @@ class EXP msr2bsrTranslator :
     // voices
     // ------------------------------------------------------
     S_msrVoice                fCurrentVoice;
- //   std::map<S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
+ //   std::map <S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
 
 
     // pages & lines
@@ -299,7 +299,7 @@ class EXP msr2bsrTranslator :
   //  S_msrPartGroup            fCurrentPartGroupClone; JMI
 
     // the current partGroup is the top of the stack
-    std::list<S_msrPartGroup>
+    std::list <S_msrPartGroup>
                               fPartGroupsStack;
 
 
@@ -309,7 +309,7 @@ class EXP msr2bsrTranslator :
 
     S_msrHarmony              fCurrentHarmonyClone;
 
-    std::list<S_msrHarmony>
+    std::list <S_msrHarmony>
                               fPendingHarmoniesList;
 
 
@@ -317,7 +317,7 @@ class EXP msr2bsrTranslator :
     // ------------------------------------------------------
  //   Bool                      fOnGoingFramesVoice; JMI
 
- //   std::list<S_msrFrame>          fPendingFramesList; // JMI
+ //   std::list <S_msrFrame>          fPendingFramesList; // JMI
 
 
     // figured bass
@@ -352,7 +352,7 @@ class EXP msr2bsrTranslator :
     // ------------------------------------------------------
     // segments can be imbedded in others,
     // the current segment clone is the one at the top of the stack
-    std::list<S_msrSegment>       fCurrentSegmentClonesStack;
+    std::list <S_msrSegment>       fCurrentSegmentClonesStack;
 
 
     // measures
@@ -427,7 +427,7 @@ class EXP msr2bsrTranslator :
     // ------------------------------------------------------
 //    const S_msrTuplet&             fCurrentTupletClone;
  //   Bool                      fOnGoingTuplet;
-    std::list<S_msrTuplet>   fTupletClonesStack;
+    std::list <S_msrTuplet>   fTupletClonesStack;
 
 
     // stanzas
@@ -444,7 +444,7 @@ class EXP msr2bsrTranslator :
 
     // part groups block
     // the current partGroup block is the top of the stack
-    std::list<S_bsrPartGroupBlock>
+    std::list <S_bsrPartGroupBlock>
                               fPartGroupBlocksStack;
                               */
 

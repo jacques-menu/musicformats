@@ -127,7 +127,7 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::map<std::string, std::string>&
+                            std::map <std::string, std::string>&
                                                stringToStringMapVariable);
 
   protected:
@@ -141,7 +141,7 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            std::map<std::string, std::string>&
+                            std::map <std::string, std::string>&
                                                stringToStringMapVariable);
 
     virtual               ~msrRenamePartAtom ();
@@ -151,7 +151,7 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const std::map<std::string, std::string>&
+    const std::map <std::string, std::string>&
                           getStringToStringMapVariable () const
                               { return fStringToStringMapVariable; }
 
@@ -193,7 +193,7 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    std::map<std::string, std::string>&  fStringToStringMapVariable;
+    std::map <std::string, std::string>&  fStringToStringMapVariable;
 };
 typedef SMARTP<msrRenamePartAtom> S_msrRenamePartAtom;
 EXP std::ostream& operator << (std::ostream& os, const S_msrRenamePartAtom& elt);
@@ -364,7 +364,7 @@ class EXP msrOahGroup : public oahGroup
                               { return fMsrQuarterTonesPitchesLanguageKind; }
 
     // parts
-    const std::map<std::string, std::string>&
+    const std::map <std::string, std::string>&
                           getMsrPartsRenamingMap () const
                               { return fMsrPartsRenamingMap; }
 
@@ -514,7 +514,7 @@ class EXP msrOahGroup : public oahGroup
                           fMsrQuarterTonesPitchesLanguageKind;
 
     // parts
-    std::map<std::string, std::string>
+    std::map <std::string, std::string>
                           fMsrPartsRenamingMap;
 
     // staves

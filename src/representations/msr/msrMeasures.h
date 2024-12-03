@@ -214,7 +214,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // elements list
 
-    const std::list<S_msrMeasureElement>&
+    const std::list <S_msrMeasureElement>&
                           getMeasureElementsList () const
                               { return fMeasureElementsList; }
 
@@ -260,7 +260,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // notes flat list
 
-    const std::list<S_msrNote>&
+    const std::list <S_msrNote>&
                           getMeasureNotesFlatList () const
                               { return fMeasureNotesFlatList; }
 
@@ -492,7 +492,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendHarmoniesListToMeasure (
                             int                            inputLineNumber,
-                            const std::list<S_msrHarmony>& harmoniesList,
+                            const std::list <S_msrHarmony>& harmoniesList,
                             const msrWholeNotes&           measurePositionToAppendAt);
 
     void                  appendHarmonyToMeasureClone (
@@ -519,7 +519,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendFiguredBassesListToMeasure (
                             int                                inputLineNumber,
-                            const std::list<S_msrFiguredBass>& figuredBasssesList,
+                            const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const msrWholeNotes&               measurePositionToAppendAt);
 
     void                  appendFiguredBassToMeasureClone (
@@ -681,10 +681,10 @@ class EXP msrMeasure : public msrSegmentElement
 
     // elements
 
-    std::list<S_msrMeasureElement>
+    std::list <S_msrMeasureElement>
                           fMeasureElementsList;
 
-//     std::list<msrElementsBase*>
+//     std::list <msrElementsBase*>
 //                           fMeasureElementsBaseList; // JMI v0.9.70
 
     Bool                  fMeasureContainsMusic;
@@ -786,7 +786,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // notes flat list
     // this is used to identify solo notes and rests in measures slices
-    std::list<S_msrNote>  fMeasureNotesFlatList;
+    std::list <S_msrNote>  fMeasureNotesFlatList;
 
   private:
 
@@ -825,7 +825,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  handleFirstFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
                             const S_msrVoice&       voice,
-                            std::list<S_msrMeasureElement>::iterator&
+                            std::list <S_msrMeasureElement>::iterator&
                                                     i,
                             const S_msrFiguredBass& previousFiguredBass,
                             const S_msrFiguredBass& currentFiguredBass,
@@ -834,7 +834,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  handleSubsequentFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
                             const S_msrVoice&       voice,
-                            std::list<S_msrMeasureElement>::iterator&
+                            std::list <S_msrMeasureElement>::iterator&
                                                     i,
                             const S_msrFiguredBass& previousFiguredBass,
                             const S_msrFiguredBass& currentFiguredBass,
@@ -852,12 +852,12 @@ class EXP msrMeasure : public msrSegmentElement
     // measure elements
     void                  insertElementInMeasureBeforeIterator (
                             int                        inputLineNumber,
-                            std::list<S_msrMeasureElement>::iterator iter,
+                            std::list <S_msrMeasureElement>::iterator iter,
                             const S_msrMeasureElement& elem);
 
     void                  insertElementInMeasureBeforeReverseIterator (
                             int                        inputLineNumber,
-                            std::list<S_msrMeasureElement>::reverse_iterator
+                            std::list <S_msrMeasureElement>::reverse_iterator
                                                        iter,
                             const S_msrMeasureElement& elem);
 
@@ -897,7 +897,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // pending measure elements, which may have to be delayed
     // because of <backup />
-    std::list<S_msrMeasureElement>
+    std::list <S_msrMeasureElement>
                           fMeasurePendingMeasureElementsList;
 
     // measure finalization

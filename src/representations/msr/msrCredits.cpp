@@ -433,7 +433,7 @@ std::string msrCredit::asString () const
   if (fCreditWordsList.size ()) {
     ss << " [";
 
-    std::vector<S_msrCreditWords>::const_iterator
+    std::vector <S_msrCreditWords>::const_iterator
       iBegin = fCreditWordsList.begin (),
       iEnd   = fCreditWordsList.end (),
       i      = iBegin;
@@ -472,7 +472,7 @@ void msrCredit::print (std::ostream& os) const
     std::endl;
 
   if (fCreditWordsList.size ()) {
-    std::vector<S_msrCreditWords>::const_iterator
+    std::vector <S_msrCreditWords>::const_iterator
       iBegin = fCreditWordsList.begin (),
       iEnd   = fCreditWordsList.end (),
       i      = iBegin;

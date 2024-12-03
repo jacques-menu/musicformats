@@ -3468,10 +3468,10 @@ msrHarmonyKind msrHarmonyKindFromString (
   return result;
 }
 
-std::map<std::string, msrHarmonyKind>
+std::map <std::string, msrHarmonyKind>
   gGlobalHarmonyKindsMap;
 
-std::list<std::string>
+std::list <std::string>
   gHarmonyKindsNamesList;
 
 void initializeHarmonyKinds ()
@@ -3545,7 +3545,7 @@ std::string availableHarmonyKinds (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::map<std::string, msrHarmonyKind>::const_iterator i =
+      std::map <std::string, msrHarmonyKind>::const_iterator i =
         gGlobalHarmonyKindsMap.begin ();
       i != gGlobalHarmonyKindsMap.end ();
       ++i
@@ -3592,7 +3592,7 @@ std::string availableHarmonyKindsNames (size_t namesListMaxLength)
     size_t cumulatedLength = 0;
 
     for (
-      std::list<std::string>::const_iterator i =
+      std::list <std::string>::const_iterator i =
         gHarmonyKindsNamesList.begin ();
       i != gHarmonyKindsNamesList.end ();
       ++i
@@ -3950,7 +3950,7 @@ msrHarmonyContents::msrHarmonyContents (
       msrHarmonyStructure::create (
         fHarmonyContentsHarmonyKind);
 
-  const std::vector<S_msrHarmonyInterval>&
+  const std::vector <S_msrHarmonyInterval>&
     harmonyIntervals =
       harmonyStructure->
         getHarmonyStructureIntervals ();
@@ -4086,7 +4086,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
 
     if (harmonyStructureIntervals.size ()) {
       // fetch the notes for these intervals
-      std::vector<S_msrHarmonyInterval>::const_reverse_iterator
+      std::vector <S_msrHarmonyInterval>::const_reverse_iterator
         iBegin = harmonyStructureIntervals.crbegin (),
         iEnd   = harmonyStructureIntervals.crend (),
         i      = iBegin;
@@ -4900,7 +4900,7 @@ void msrHarmony::browseData (basevisitor* v)
   // browse harmony degrees if any
   if (fHarmonyDegreesList.size ()) {
     for (
-      std::list<S_msrHarmonyDegree>::const_iterator i = fHarmonyDegreesList.begin ();
+      std::list <S_msrHarmonyDegree>::const_iterator i = fHarmonyDegreesList.begin ();
       i != fHarmonyDegreesList.end ();
       ++i
     ) {
@@ -4977,7 +4977,7 @@ std::string msrHarmony::asShortString () const
     ss <<
       ", fHarmonyDegreesList: [";
 
-    std::list<S_msrHarmonyDegree>::const_iterator
+    std::list <S_msrHarmonyDegree>::const_iterator
       iBegin = fHarmonyDegreesList.begin (),
       iEnd   = fHarmonyDegreesList.end (),
       i      = iBegin;
@@ -5119,7 +5119,7 @@ std::string msrHarmony::asString () const
     ss <<
       ", fHarmonyDegreesList: [";
 
-    std::list<S_msrHarmonyDegree>::const_iterator
+    std::list <S_msrHarmonyDegree>::const_iterator
       iBegin = fHarmonyDegreesList.begin (),
       iEnd   = fHarmonyDegreesList.end (),
       i      = iBegin;
@@ -5343,7 +5343,7 @@ void msrHarmony::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrHarmonyDegree>::const_iterator
+    std::list <S_msrHarmonyDegree>::const_iterator
       iBegin = fHarmonyDegreesList.begin (),
       iEnd   = fHarmonyDegreesList.end (),
       i      = iBegin;
@@ -5556,12 +5556,12 @@ void printHarmonyDetails (
 
       // fetch the notes for these intervals
       /* JMI
-      std::vector<S_msrHarmonyInterval>::const_iterator
+      std::vector <S_msrHarmonyInterval>::const_iterator
         iBegin = invertedHarmonyStructureIntervals.begin (),
         iEnd   = invertedHarmonyStructureIntervals.end (),
         i      = iBegin;
         */
-      std::vector<S_msrHarmonyInterval>::const_reverse_iterator
+      std::vector <S_msrHarmonyInterval>::const_reverse_iterator
         iBegin = invertedHarmonyStructureIntervals.crbegin (),
         iEnd   = invertedHarmonyStructureIntervals.crend (),
         i      = iBegin;
@@ -5761,7 +5761,7 @@ void printHarmonyAnalysis (
 
         ++gIndenter;
 
-        std::vector<S_msrHarmonyInterval>::const_reverse_iterator
+        std::vector <S_msrHarmonyInterval>::const_reverse_iterator
           iBegin = invertedHarmonyStructureIntervals.crbegin (),
           iEnd   = invertedHarmonyStructureIntervals.crend (),
           i      = iBegin;
@@ -5838,7 +5838,7 @@ void printHarmonyAnalysis (
 
         int tritonsCounter = 0;
 
-        std::vector<S_msrHarmonyInterval>::const_iterator
+        std::vector <S_msrHarmonyInterval>::const_iterator
           iBegin1 = invertedHarmonyStructureIntervals.begin (),
           iEnd1   = invertedHarmonyStructureIntervals.end () - 1,
           i1      = iBegin1;
@@ -5867,7 +5867,7 @@ void printHarmonyAnalysis (
                 noteSemiTonesPitchKind1);
 
           // print the invervals
-          std::vector<S_msrHarmonyInterval>::const_iterator
+          std::vector <S_msrHarmonyInterval>::const_iterator
             iBegin2 = i1 + 1,
             iEnd2   = invertedHarmonyStructureIntervals.end (),
             i2      = iBegin2;
@@ -5998,7 +5998,7 @@ void printHarmonyAnalysis (
 
 // harmonies structure
 //______________________________________________________________________________
-std::map<msrHarmonyKind, S_msrHarmonyStructure>
+std::map <msrHarmonyKind, S_msrHarmonyStructure>
   gGlobalHarmonyStructuresMap;
 
 S_msrHarmonyStructure msrHarmonyStructure::createBare (
@@ -7172,11 +7172,11 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
   return result;
 }
 
-std::list<msrSemiTonesPitchKind> buildSemiTonesChord (
+std::list <msrSemiTonesPitchKind> buildSemiTonesChord (
   msrHarmonyKind        harmonyKind,
   msrSemiTonesPitchKind rootNote)
 {
-  std::list<msrSemiTonesPitchKind> result;
+  std::list <msrSemiTonesPitchKind> result;
 
   // create the harmony intervals
   S_msrHarmonyStructure
@@ -7188,7 +7188,7 @@ std::list<msrSemiTonesPitchKind> buildSemiTonesChord (
   result.push_back (rootNote);
 
   // add the other notes to the harmony
-  const std::vector<S_msrHarmonyInterval>&
+  const std::vector <S_msrHarmonyInterval>&
     harmonyStructureIntervals =
       harmonyStructure->
         getHarmonyStructureIntervals ();
@@ -7232,7 +7232,7 @@ void msrHarmonyStructure::print (std::ostream& os) const
   ++gIndenter;
 
   if (fHarmonyStructureIntervals.size ()) {
-    std::vector<S_msrHarmonyInterval>::const_reverse_iterator
+    std::vector <S_msrHarmonyInterval>::const_reverse_iterator
       iBegin = fHarmonyStructureIntervals.crbegin (),
       iEnd   = fHarmonyStructureIntervals.crend (),
       i      = iBegin;

@@ -110,7 +110,7 @@ void msrPart::initializePart ()
 #endif // MF_TRACE_IS_ENABLED
 
   // is this part name in the MSR part renaming map?
-  std::map<std::string, std::string>::const_iterator
+  std::map <std::string, std::string>::const_iterator
     it =
       gMsrOahGroup->getMsrPartsRenamingMap ().find (fPartID);
 
@@ -624,7 +624,7 @@ void msrPart::assignSequentialNumbersToRegularVoicesInPart (
 void msrPart::setPartMsrName (const std::string& partMsrName)
 {
   // is this part name in the part renaming map?
-  std::map<std::string, std::string>::const_iterator
+  std::map <std::string, std::string>::const_iterator
     it =
       gMsrOahGroup->getMsrPartsRenamingMap ().find (fPartMsrName);
 
@@ -2225,10 +2225,14 @@ void msrPart::registerVoiceInPartVoicesList (
       fPartRegularVoicesCounter);
 }
 
-void msrPart::registerVoiceInVoicesMap (
+void msrPart::registerVoiceInPartStaffVoicesMap (
   const S_msrVoice& voice)
 {
-  int voiceNumber = voice->getVoiceNumber ();
+  int
+    staffNumber =
+      voice->getVoiceUpLinkToStaff ()->getStaffNumber (),
+    voiceNumber =
+      voice->getVoiceNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
@@ -2239,6 +2243,9 @@ void msrPart::registerVoiceInVoicesMap (
       voiceNumber <<
       ", " <<
       voice->getVoiceName () <<
+      "\" in staff " <<
+      staffNumber <<
+      ", " <<
       "\" in part " <<
       fPartID <<
       ", " <<
@@ -2252,7 +2259,7 @@ void msrPart::registerVoiceInVoicesMap (
 #endif // MF_TRACE_IS_ENABLED
 
   // register voice in the all voices map
-  if (fPartVoicesMap.count (voiceNumber)) {
+  if (fPartStaffVoicesMap.count (voiceNumber)) {
     std::stringstream ss;
 
     ss <<
@@ -2272,7 +2279,8 @@ void msrPart::registerVoiceInVoicesMap (
       ss.str ());
   }
 
-  fPartVoicesMap [voiceNumber] = voice;
+  fPartStaffVoicesMap
+    [staffNumber][voiceNumber] = voice;
 
   // register part minimum and maximum voice numbers
   if (voiceNumber < fPartMinimumVoiceNumber) {
@@ -2284,7 +2292,7 @@ void msrPart::registerVoiceInVoicesMap (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
-    displayPartVoicesMap (
+    displayPartStaffVoicesMap (
       voice->getInputStartLineNumber (),
       "msrPart::registerVoiceInPartVoicesList()");
   }
@@ -2532,7 +2540,7 @@ void msrPart::appendHarmonyToPart (
 
 void msrPart::appendHarmoniesListToPart (
   int                            inputLineNumber,
-  const std::list<S_msrHarmony>& harmoniesList,
+  const std::list <S_msrHarmony>& harmoniesList,
   const msrWholeNotes&           measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2560,7 +2568,7 @@ void msrPart::appendHarmoniesListToPart (
 
 void msrPart::appendFiguredBassesListToPart (
   int                                inputLineNumber,
-  const std::list<S_msrFiguredBass>& figuredBasssesList,
+  const std::list <S_msrFiguredBass>& figuredBasssesList,
   const msrWholeNotes&               measurePositionToAppendAt)
 {
 
@@ -2935,12 +2943,12 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 #endif // MF_TRACE_IS_ENABLED
 
   for (S_msrStaff staff : fPartAllStavesList) {
-    std::map<int, S_msrVoice>
+    std::map <int, S_msrVoice>
       staffAllVoicesMap =
         staff->
           getStaffVoiceNumbersToAllVoicesMap ();
 
-    for (std::pair<int, S_msrVoice> thePair : staffAllVoicesMap) {
+    for (std::pair <int, S_msrVoice> thePair : staffAllVoicesMap) {
       S_msrVoice voice = thePair.second;
 
       if (voice != graceNotesGroupOriginVoice) {
@@ -3027,14 +3035,14 @@ void msrPart::setPartInstrumentNamesMaxLengthes ()
   }
 }
 
-void msrPart::displayPartVoicesMap (
+void msrPart::displayPartStaffVoicesMap (
   int                inputLineNumber,
   const std::string& context) const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
     gLog <<
-      ">>> The fPartVoicesMap of part \"" <<
+      ">>> The fPartStaffVoicesMap of part \"" <<
       getPartName () <<
       "\" , context: " << context <<
       ", contains:" <<
@@ -3044,29 +3052,65 @@ void msrPart::displayPartVoicesMap (
 
   ++gIndenter;
 
-  for (std::pair<int, S_msrVoice> thePair : fPartVoicesMap) {
-    int        voiceNumber = thePair.first;
-    S_msrVoice voice = thePair.second;
-
-    // CAUTION: there may be 'holes' in the vector,
-    // whose indexes start at 0 moreover,
-    // in which case voice is null
-    if (voice) {
-      gLog <<
-        "voice " <<
-        voiceNumber <<
-        ": " <<
-        voice->asShortString () <<
-        std::endl;
-    }
-  } // for
-
-  --gIndenter;
+  size_t
+    partStaffVoicesMapSize =
+      fPartStaffVoicesMap.size ();
 
   gLog <<
-    "<<<" <<
+    std::endl <<
+    "fPartStaffVoicesMap contains " <<
+    mfSingularOrPlural (
+      partStaffVoicesMapSize, "stave", "staves") <<
+    ", context: " << context <<
+    ", line " << inputLineNumber <<
+    ":" <<
     std::endl;
+
+  if (partStaffVoicesMapSize) {
+    ++gIndenter;
+
+    for (
+      std::pair <int, std::map <int, S_msrVoice>> primaryPair :
+        fPartStaffVoicesMap
+    ) {
+      int
+        staffNumber = primaryPair.first;
+
+      for (
+        std::pair <int, S_msrVoice> secondaryPair :
+          primaryPair.second
+      ) {
+        int
+          voiceNumber = secondaryPair.first;
+        S_msrVoice
+          voice = secondaryPair.second;
+
+        gLog <<
+          "staffNumber " << staffNumber <<
+          ", voiceNumber " <<  voiceNumber <<
+          ":" <<
+          std::endl;
+
+        ++gIndenter;
+
+        gLog <<
+          voice <<
+          std::endl;
+
+        --gIndenter;
+
+        gLog << std::endl;
+      } // for
+    } // for
+
+    --gIndenter;
+  }
+
+  gLog << std::endl;
 }
+
+
+
 
 // void msrPart::displayPartStavesAndVoicesVector (
 //   int                inputLineNumber,
@@ -3081,7 +3125,7 @@ void msrPart::displayPartVoicesMap (
 //   ++gIndenter;
 //
 //   for (int staffIndex = 0; staffIndex < fPartStavesAndVoicesVector.size (); ++staffIndex) {
-//     const std::vector<S_msrVoice>&
+//     const std::vector <S_msrVoice>&
 //       staffVoicesVector =
 //         fPartStavesAndVoicesVector [staffIndex];
 //
@@ -3990,7 +4034,7 @@ void msrPart::printFull (std::ostream& os) const
 
   // print all the staves
   if (fPartAllStavesList.size ()) {
-    std::list<S_msrStaff>::const_iterator
+    std::list <S_msrStaff>::const_iterator
       iBegin = fPartAllStavesList.begin (),
       iEnd   = fPartAllStavesList.end (),
       i      = iBegin;
@@ -4183,7 +4227,7 @@ void msrPart::print (std::ostream& os) const
   if (fPartAllStavesList.size ()) {
     os << std::endl;
 
-    std::list<S_msrStaff>::const_iterator
+    std::list <S_msrStaff>::const_iterator
       iBegin = fPartAllStavesList.begin (),
       iEnd   = fPartAllStavesList.end (),
       i      = iBegin;
@@ -4379,7 +4423,7 @@ void msrPart::printSlices (std::ostream& os) const
   ++gIndenter;
 
   if (fPartAllStavesList.size ()) {
-    std::list<S_msrStaff>::const_iterator
+    std::list <S_msrStaff>::const_iterator
       iBegin = fPartAllStavesList.begin (),
       iEnd   = fPartAllStavesList.end (),
       i      = iBegin;

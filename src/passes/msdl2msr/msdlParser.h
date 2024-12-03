@@ -169,7 +169,7 @@ class msdlParser : public smartable
     S_msdlTokenKindsSet   fEmptyTokenKindsSet;
     S_msdlTokenKindsSet   fTokenEOFTokenKindsSet;
 
-    std::list<S_msdlTokenKindsSet>
+    std::list <S_msdlTokenKindsSet>
                           fMsdlTokensSetsStack;
 
     // warnings and errors

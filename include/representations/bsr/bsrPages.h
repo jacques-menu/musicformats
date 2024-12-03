@@ -119,7 +119,7 @@ class EXP bsrPage : public bsrElement
 
     int                   fLinesPerPage;
 
-    std::list<S_bsrPageElement>
+    std::list <S_bsrPageElement>
                           fPageElementsList;
 };
 typedef SMARTP<bsrPage> S_bsrPage;

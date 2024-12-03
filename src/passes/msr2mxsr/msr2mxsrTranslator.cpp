@@ -548,7 +548,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
   if (fClefElementsList.size ()) {
     // append the clef  elements if any to the current measure element
     for (
-      std::list<Sxmlelement>::const_iterator i =
+      std::list <Sxmlelement>::const_iterator i =
         fClefElementsList.begin ();
       i != fClefElementsList.end ();
       ++i
@@ -942,7 +942,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
 
   // append the staff layout elements if any to the score defaults element
   for (
-    std::list<Sxmlelement>::const_iterator i =
+    std::list <Sxmlelement>::const_iterator i =
       fScoreDefaultsStaffLayoutElementsList.begin ();
     i != fScoreDefaultsStaffLayoutElementsList.end ();
     ++i
@@ -994,7 +994,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
     }
 
     for (
-      std::list<Sxmlelement>::const_iterator i =
+      std::list <Sxmlelement>::const_iterator i =
         fPendingScoreCreditElementsList.begin ();
       i != fPendingScoreCreditElementsList.end ();
       ++i
@@ -1023,7 +1023,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
 
   // append the pending parts elements to the score part wise element
   for (
-    std::list<Sxmlelement>::const_iterator i =
+    std::list <Sxmlelement>::const_iterator i =
       fPendingPartElementsList.begin ();
     i != fPendingPartElementsList.end ();
     ++i
@@ -1233,12 +1233,12 @@ I don't know if any distributed software is currently supporting the opus. Howev
   fScoreInstrumentElement->push (scoreInstrumentNameElement);
 
   // composers
-  const std::list<std::string>&
+  const std::list <std::string>&
     composersList =
       elt->getIdentificationComposersList ();
 
   for (
-    std::list<std::string>::const_iterator i = composersList.begin ();
+    std::list <std::string>::const_iterator i = composersList.begin ();
     i != composersList.end ();
     ++i
   ) {
@@ -1255,12 +1255,12 @@ I don't know if any distributed software is currently supporting the opus. Howev
   } // for
 
   // arrangers
-  const std::list<std::string>&
+  const std::list <std::string>&
     arrangersList =
       elt->getIdentificationArrangersList ();
 
   for (
-    std::list<std::string>::const_iterator i = arrangersList.begin ();
+    std::list <std::string>::const_iterator i = arrangersList.begin ();
     i != arrangersList.end ();
     ++i
   ) {
@@ -1277,12 +1277,12 @@ I don't know if any distributed software is currently supporting the opus. Howev
   } // for
 
   // lyricists
-  const std::list<std::string>&
+  const std::list <std::string>&
     lyricistsList =
       elt->getIdentificationLyricistsList ();
 
   for (
-    std::list<std::string>::const_iterator i = lyricistsList.begin ();
+    std::list <std::string>::const_iterator i = lyricistsList.begin ();
     i != lyricistsList.end ();
     ++i
   ) {
@@ -1299,12 +1299,12 @@ I don't know if any distributed software is currently supporting the opus. Howev
   } // for
 
   // poets
-  const std::list<std::string>&
+  const std::list <std::string>&
     poetsList =
       elt->getIdentificationPoetsList ();
 
   for (
-    std::list<std::string>::const_iterator i = poetsList.begin ();
+    std::list <std::string>::const_iterator i = poetsList.begin ();
     i != poetsList.end ();
     ++i
   ) {
@@ -1321,12 +1321,12 @@ I don't know if any distributed software is currently supporting the opus. Howev
   } // for
 
   // translators
-  const std::list<std::string>&
+  const std::list <std::string>&
     translatorsList =
       elt->getIdentificationTranslatorsList ();
 
   for (
-    std::list<std::string>::const_iterator i = translatorsList.begin ();
+    std::list <std::string>::const_iterator i = translatorsList.begin ();
     i != translatorsList.end ();
     ++i
   ) {
@@ -1343,12 +1343,12 @@ I don't know if any distributed software is currently supporting the opus. Howev
   } // for
 
   // artists
-  const std::list<std::string>&
+  const std::list <std::string>&
     artistsList =
       elt->getIdentificationArtistsList ();
 
   for (
-    std::list<std::string>::const_iterator i = artistsList.begin ();
+    std::list <std::string>::const_iterator i = artistsList.begin ();
     i != artistsList.end ();
     ++i
   ) {
@@ -1365,12 +1365,12 @@ I don't know if any distributed software is currently supporting the opus. Howev
   } // for
 
   // softwares
-  const std::list<std::string>&
+  const std::list <std::string>&
     softwaresList =
       elt->getIdentificationSoftwaresList ();
 
   for (
-    std::list<std::string>::const_iterator i = softwaresList.begin ();
+    std::list <std::string>::const_iterator i = softwaresList.begin ();
     i != softwaresList.end ();
     ++i
   ) {
@@ -1384,12 +1384,12 @@ I don't know if any distributed software is currently supporting the opus. Howev
   } // for
 
   // rights
-  const std::list<std::string>&
+  const std::list <std::string>&
     rightsList =
       elt->getIdentificationRightsList ();
 
   for (
-    std::list<std::string>::const_iterator i = rightsList.begin ();
+    std::list <std::string>::const_iterator i = rightsList.begin ();
     i != rightsList.end ();
     ++i
   ) {
@@ -1421,7 +1421,7 @@ void msr2mxsrTranslator::visitEnd (S_msrIdentification& elt)
 
   if (fRightsElementsList.size ()) {
     // append the rights elements to the score identification element
-    std::list<Sxmlelement>::const_iterator i;
+    std::list <Sxmlelement>::const_iterator i;
 
     for (
       i = fRightsElementsList.begin ();
@@ -1437,7 +1437,7 @@ void msr2mxsrTranslator::visitEnd (S_msrIdentification& elt)
     if (fSoftwaresElementsList.size ()) {
       // append the software elements to the score identification  encoding element
       for (
-        std::list<Sxmlelement>::const_iterator i = fSoftwaresElementsList.begin ();
+        std::list <Sxmlelement>::const_iterator i = fSoftwaresElementsList.begin ();
         i != fSoftwaresElementsList.end ();
         ++i
       ) {
@@ -1849,10 +1849,10 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasureLayout& elt)
 //________________________________________________________________________
 void msr2mxsrTranslator::populateAppearanceLineWidths (
   const Sxmlelement&               appearanceElement,
-  const std::list<S_msrLineWidth>& lineWidthsList)
+  const std::list <S_msrLineWidth>& lineWidthsList)
 {
   for (
-    std::list<S_msrLineWidth>::const_iterator i =
+    std::list <S_msrLineWidth>::const_iterator i =
       lineWidthsList.begin ();
     i != lineWidthsList.end ();
     ++i
@@ -1952,10 +1952,10 @@ void msr2mxsrTranslator::populateAppearanceLineWidths (
 
 void msr2mxsrTranslator::populateAppearanceNoteSizes (
   const Sxmlelement&              appearanceElement,
-  const std::list<S_msrNoteSize>& noteSizesList)
+  const std::list <S_msrNoteSize>& noteSizesList)
 {
   for (
-    std::list<S_msrNoteSize>::const_iterator i =
+    std::list <S_msrNoteSize>::const_iterator i =
       noteSizesList.begin ();
     i != noteSizesList.end ();
     ++i
@@ -2013,10 +2013,10 @@ void msr2mxsrTranslator::populateAppearanceNoteSizes (
 
 void msr2mxsrTranslator::populateAppearanceDistances (
   const Sxmlelement&              appearanceElement,
-  const std::list<S_msrDistance>& distancesList)
+  const std::list <S_msrDistance>& distancesList)
 {
   for (
-    std::list<S_msrDistance>::const_iterator i =
+    std::list <S_msrDistance>::const_iterator i =
       distancesList.begin ();
     i != distancesList.end ();
     ++i
@@ -2065,10 +2065,10 @@ void msr2mxsrTranslator::populateAppearanceDistances (
 
 void msr2mxsrTranslator::populateAppearanceGlyphs (
   const Sxmlelement&           appearanceElement,
-  const std::list<S_msrGlyph>& glyphsList)
+  const std::list <S_msrGlyph>& glyphsList)
 {
   for (
-    std::list<S_msrGlyph>::const_iterator i =
+    std::list <S_msrGlyph>::const_iterator i =
       glyphsList.begin ();
     i != glyphsList.end ();
     ++i
@@ -2153,11 +2153,11 @@ void msr2mxsrTranslator::populateAppearanceGlyphs (
 
 void msr2mxsrTranslator::populateAppearanceOtherAppearances (
   const Sxmlelement& appearanceElement,
-  const std::list<S_msrOtherAppearance>&
+  const std::list <S_msrOtherAppearance>&
                      otherAppearancesList)
 {
   for (
-    std::list<S_msrOtherAppearance>::const_iterator i =
+    std::list <S_msrOtherAppearance>::const_iterator i =
       otherAppearancesList.begin ();
     i != otherAppearancesList.end ();
     ++i
@@ -2224,7 +2224,7 @@ void msr2mxsrTranslator::visitStart (S_msrAppearance& elt)
   // this will be done in visitEnd (S_msrScore&)
 
   // append the line width elements if any to the appearance element
-  const std::list<S_msrLineWidth>&
+  const std::list <S_msrLineWidth>&
     lineWidthsList =
       elt->getLineWidthsList ();
 
@@ -2233,7 +2233,7 @@ void msr2mxsrTranslator::visitStart (S_msrAppearance& elt)
     lineWidthsList);
 
   // append the note size elements if any to the appearance element
-  const std::list<S_msrNoteSize>&
+  const std::list <S_msrNoteSize>&
     noteSizesList =
       elt->getNoteSizesList ();
 
@@ -2242,7 +2242,7 @@ void msr2mxsrTranslator::visitStart (S_msrAppearance& elt)
     noteSizesList);
 
   // append the distance elements if any to the appearance element
-  const std::list<S_msrDistance>&
+  const std::list <S_msrDistance>&
     distancesList =
       elt->getDistancesList ();
 
@@ -2251,7 +2251,7 @@ void msr2mxsrTranslator::visitStart (S_msrAppearance& elt)
     distancesList);
 
   // append the glyph elements if any to the appearance element
-  const std::list<S_msrGlyph>&
+  const std::list <S_msrGlyph>&
     glyphsList =
       elt->getGlyphsList ();
 
@@ -2260,7 +2260,7 @@ void msr2mxsrTranslator::visitStart (S_msrAppearance& elt)
     glyphsList);
 
   // append the other appearance elements if any to the appearance element
-  const std::list<S_msrOtherAppearance>&
+  const std::list <S_msrOtherAppearance>&
     otherAppearancesList =
       elt->getOtherAppearancesList ();
 
@@ -3381,7 +3381,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // has a measure element for this measure number been created already?
-  std::map<std::string, Sxmlelement>::iterator
+  std::map <std::string, Sxmlelement>::iterator
     it =
       fPartMeasureNumbersToElementsMap.find (fCurrentMeasureNumber);
 
@@ -4357,7 +4357,7 @@ void msr2mxsrTranslator::visitStart (S_msrTimeSignature& elt)
 
       case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
         {
-          const std::vector<S_msrTimeSignatureItem>&
+          const std::vector <S_msrTimeSignatureItem>&
             timeSignatureItemsVector =
               elt->getTimeSignatureItemsVector ();
 
@@ -4371,7 +4371,7 @@ void msr2mxsrTranslator::visitStart (S_msrTimeSignature& elt)
                 timeSignatureItemsVector [0]; // the only element;
 
             // fetch the time signature item beat numbers vector
-            const std::vector<int>&
+            const std::vector <int>&
               beatsNumbersVector =
                 timeSignatureItem->
                   getTimeSignatureBeatsNumbersVector ();
@@ -4442,7 +4442,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 /*
-  const std::list<S_msrWords>&
+  const std::list <S_msrWords>&
     tempoWordsList =
       elt->getTempoWordsList ();
 
@@ -4471,7 +4471,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
           "\\tempo ";
 
         if (tempoWordsListSize) {
-          std::list<S_msrWords>::const_iterator
+          std::list <S_msrWords>::const_iterator
             iBegin = tempoWordsList.begin (),
             iEnd   = tempoWordsList.end (),
             i      = iBegin;
@@ -4530,7 +4530,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
 
   /*
           if (tempoWordsListSize) {
-            std::list<S_msrWords>::const_iterator
+            std::list <S_msrWords>::const_iterator
               iBegin = tempoWordsList.begin (),
               iEnd   = tempoWordsList.end (),
               i      = iBegin;
@@ -4581,7 +4581,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
 
   /*
           if (tempoWordsListSize) {
-            std::list<S_msrWords>::const_iterator
+            std::list <S_msrWords>::const_iterator
               iBegin = tempoWordsList.begin (),
               iEnd   = tempoWordsList.end (),
               i      = iBegin;
@@ -4611,7 +4611,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         "\\tempo ";
 
       if (tempoWordsListSize) {
-        std::list<S_msrWords>::const_iterator
+        std::list <S_msrWords>::const_iterator
           iBegin = tempoWordsList.begin (),
           iEnd   = tempoWordsList.end (),
           i      = iBegin;
@@ -4743,7 +4743,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         "\\tempoNotesRelationship #\"";
 
       if (tempoWordsListSize) {
-        std::list<S_msrWords>::const_iterator
+        std::list <S_msrWords>::const_iterator
           iBegin = tempoWordsList.begin (),
           iEnd   = tempoWordsList.end (),
           i      = iBegin;
@@ -4970,12 +4970,12 @@ void msr2mxsrTranslator::appendNoteWedgesList (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  const std::list<S_msrWedge>&
+  const std::list <S_msrWedge>&
     noteWedgesList =
       theMsrNote->getNoteWedgesList () ;
 
   if (noteWedgesList.size ()) {
-    std::list<S_msrWedge>::const_iterator i;
+    std::list <S_msrWedge>::const_iterator i;
 
     for (i = noteWedgesList.begin (); i != noteWedgesList.end (); ++i) {
       S_msrWedge wedge = (*i);
@@ -5031,12 +5031,12 @@ void msr2mxsrTranslator::appendNoteDynamicsList (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  const std::list<S_msrDynamic>&
+  const std::list <S_msrDynamic>&
     noteDynamicsList =
       theMsrNote->getNoteDynamicsList () ;
 
   if (noteDynamicsList.size ()) {
-    std::list<S_msrDynamic>::const_iterator i;
+    std::list <S_msrDynamic>::const_iterator i;
 
     for (i = noteDynamicsList.begin (); i != noteDynamicsList.end (); ++i) {
       S_msrDynamic dynamic = (*i);
@@ -5611,7 +5611,7 @@ void msr2mxsrTranslator::appendNoteOrnamentsList (
     */
 
   // append the ornament elements if any
-  const std::list<S_msrOrnament>&
+  const std::list <S_msrOrnament>&
     noteOrnamentsList =
       theMsrNote->getNoteOrnamentsList () ;
 
@@ -5724,12 +5724,12 @@ void msr2mxsrTranslator::appendNoteTechnicalsList (
     */
 
   // append the technical elements if any
-  const std::list<S_msrTechnical>&
+  const std::list <S_msrTechnical>&
     noteTechnicalsList =
       theMsrNote->getNoteTechnicalsList () ;
 
   if (noteTechnicalsList.size ()) {
-    std::list<S_msrTechnical>::const_iterator i;
+    std::list <S_msrTechnical>::const_iterator i;
 
     for (i = noteTechnicalsList.begin (); i != noteTechnicalsList.end (); ++i) {
       S_msrTechnical
@@ -5833,12 +5833,12 @@ void msr2mxsrTranslator::appendNoteTechnicalWithIntegersList (
     */
 
   // append the technicalWithInteger elements if any
-  const std::list<S_msrTechnicalWithInteger>&
+  const std::list <S_msrTechnicalWithInteger>&
     noteTechnicalWithIntegersList =
       theMsrNote->getNoteTechnicalWithIntegersList () ;
 
   if (noteTechnicalWithIntegersList.size ()) {
-    std::list<S_msrTechnicalWithInteger>::const_iterator i;
+    std::list <S_msrTechnicalWithInteger>::const_iterator i;
 
     for (i = noteTechnicalWithIntegersList.begin (); i != noteTechnicalWithIntegersList.end (); ++i) {
       S_msrTechnicalWithInteger
@@ -5915,12 +5915,12 @@ void msr2mxsrTranslator::appendNoteTechnicalWithFloatsList (
 */
 
   // append the technicalWithFloat elements if any
-  const std::list<S_msrTechnicalWithFloat>&
+  const std::list <S_msrTechnicalWithFloat>&
     noteTechnicalWithFloatsList =
       theMsrNote->getNoteTechnicalWithFloatsList () ;
 
   if (noteTechnicalWithFloatsList.size ()) {
-    std::list<S_msrTechnicalWithFloat>::const_iterator i;
+    std::list <S_msrTechnicalWithFloat>::const_iterator i;
 
     for (i = noteTechnicalWithFloatsList.begin (); i != noteTechnicalWithFloatsList.end (); ++i) {
       S_msrTechnicalWithFloat
@@ -5989,12 +5989,12 @@ void msr2mxsrTranslator::appendNoteTechnicalWithStringsList (
     */
 
   // append the technicalWithString elements if any
-  const std::list<S_msrTechnicalWithString>&
+  const std::list <S_msrTechnicalWithString>&
     noteTechnicalWithStringsList =
       theMsrNote->getNoteTechnicalWithStringsList () ;
 
   if (noteTechnicalWithStringsList.size ()) {
-    std::list<S_msrTechnicalWithString>::const_iterator i;
+    std::list <S_msrTechnicalWithString>::const_iterator i;
 
     for (i = noteTechnicalWithStringsList.begin (); i != noteTechnicalWithStringsList.end (); ++i) {
       S_msrTechnicalWithString
@@ -6057,12 +6057,12 @@ void msr2mxsrTranslator::appendNoteArticulationsList (
 #endif // MF_TRACE_IS_ENABLED
 
   // append the articulation elements if any
-  const std::list<S_msrArticulation>&
+  const std::list <S_msrArticulation>&
     noteArticulationsList =
       theMsrNote->getNoteArticulationsList () ;
 
   if (noteArticulationsList.size ()) {
-    std::list<S_msrArticulation>::const_iterator i;
+    std::list <S_msrArticulation>::const_iterator i;
 
     for (i = noteArticulationsList.begin (); i != noteArticulationsList.end (); ++i) {
       S_msrArticulation articulation = (*i);
@@ -6205,7 +6205,7 @@ void msr2mxsrTranslator::appendNoteTieIfAny (
 #endif // MF_TRACE_IS_ENABLED
 
   // append the tie element if any
-  const std::list<S_msrTie>& noteTiesList = theMsrNote->getNoteTiesList ();
+  const std::list <S_msrTie>& noteTiesList = theMsrNote->getNoteTiesList ();
 
   if (noteTiesList.size ()) {
     for (S_msrTie noteTie : noteTiesList) {
@@ -6261,12 +6261,12 @@ void msr2mxsrTranslator::appendNoteSlursListIfAny (
 #endif // MF_TRACE_IS_ENABLED
 
   // append the slur elements if any
-  const std::list<S_msrSlur>&
+  const std::list <S_msrSlur>&
     noteSlursList =
       theMsrNote->getNoteSlursList () ;
 
   if (noteSlursList.size ()) {
-    std::list<S_msrSlur>::const_iterator i;
+    std::list <S_msrSlur>::const_iterator i;
 
     for (i = noteSlursList.begin (); i != noteSlursList.end (); ++i) {
       S_msrSlur
@@ -6445,13 +6445,13 @@ void msr2mxsrTranslator::appendNoteSpannersListBeforeNote (
 #endif // MF_TRACE_IS_ENABLED
 
   // append the spanner elements if any
-  const std::list<S_msrSpanner>&
+  const std::list <S_msrSpanner>&
     noteSpannersList =
       theMsrNote->
         getNoteSpannersList () ;
 
   if (noteSpannersList.size ()) {
-    std::list<S_msrSpanner>::const_iterator i;
+    std::list <S_msrSpanner>::const_iterator i;
 
     for (i = noteSpannersList.begin (); i != noteSpannersList.end (); ++i) {
       S_msrSpanner spanner = (*i);
@@ -6557,12 +6557,12 @@ void msr2mxsrTranslator::appendNoteSpannersListAfterNote (
 #endif // MF_TRACE_IS_ENABLED
 
   // append the spanner elements if any
-  const std::list<S_msrSpanner>&
+  const std::list <S_msrSpanner>&
     noteSpannersList =
       theMsrNote->getNoteSpannersList () ;
 
   if (noteSpannersList.size ()) {
-    std::list<S_msrSpanner>::const_iterator i;
+    std::list <S_msrSpanner>::const_iterator i;
 
     for (i = noteSpannersList.begin (); i != noteSpannersList.end (); ++i) {
       S_msrSpanner spanner = (*i);
@@ -6718,12 +6718,12 @@ void msr2mxsrTranslator::appendBeamsToNote (
 #endif // MF_TRACE_IS_ENABLED
 
   // append the beam elements if any
-  const std::list<S_msrBeam>&
+  const std::list <S_msrBeam>&
     noteBeamsList =
       theMsrNote->getNoteBeamsList () ;
 
   if (noteBeamsList.size ()) {
-    std::list<S_msrBeam>::const_iterator i;
+    std::list <S_msrBeam>::const_iterator i;
 
     for (i = noteBeamsList.begin (); i != noteBeamsList.end (); ++i) {
       S_msrBeam beam = (*i);
@@ -6973,12 +6973,12 @@ void msr2mxsrTranslator::appendNoteLyricsToNote (
 */
 
   // append the lyric elements if any
-  const std::list<S_msrSyllable>&
+  const std::list <S_msrSyllable>&
     noteSyllablesList =
       theMsrNote->getNoteSyllablesList () ;
 
   if (noteSyllablesList.size ()) {
-    std::list<S_msrSyllable>::const_iterator i;
+    std::list <S_msrSyllable>::const_iterator i;
 
     for (i = noteSyllablesList.begin (); i != noteSyllablesList.end (); ++i) {
       S_msrSyllable syllable = (*i);
@@ -7044,7 +7044,7 @@ void msr2mxsrTranslator::appendNoteLyricsToNote (
         }
 
         // append a text elements to the lyric element if relevant
-        const std::list<msrSyllableElement>&
+        const std::list <msrSyllableElement>&
           syllableElementsList =
             syllable->getSyllableElementsList ();
 
@@ -8641,7 +8641,7 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
 
     if (gLpsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
       // get the syllable texts list
-      const std::list<msrSyllableElement>&
+      const std::list <msrSyllableElement>&
         syllableElementsList =
           elt->getSyllableElementsList ();
 
@@ -9755,12 +9755,12 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
       std::string wordsContents = elt->getWordsContents ();
 
       // is this words contents in the std::string to dal segno kind map?
-      const std::map<std::string, msrDalSegno::msrDalSegnoKind>&
+      const std::map <std::string, msrDalSegno::msrDalSegnoKind>&
         converStringToDalSegnoMap =
           gGlobalMxsr2msrOahGroup->
             getStringToDalSegnoKindMap ();
 
-      std::map<std::string, msrDalSegno::msrDalSegnoKind>::const_iterator
+      std::map <std::string, msrDalSegno::msrDalSegnoKind>::const_iterator
         it =
           converStringToDalSegnoMap.find (wordsContents);
 
@@ -11467,7 +11467,7 @@ class   musicxmlOrder
     // ------------------------------------------------------
 
     musicxmlOrder (
-      std::map<int,int>& order, Sxmlelement container);
+      std::map <int,int>& order, Sxmlelement container);
 
     virtual  ~musicxmlOrder ();
 
@@ -11483,12 +11483,12 @@ class   musicxmlOrder
     // private fields
     // ------------------------------------------------------
 
-    std::map<int,int>&          fOrder;
+    std::map <int,int>&          fOrder;
     Sxmlelement            fContainer;
 };
 
 musicxmlOrder::musicxmlOrder (
-  std::map<int,int>& order, Sxmlelement container)
+  std::map <int,int>& order, Sxmlelement container)
   : fOrder (order)
 {
   fContainer = container;
@@ -11572,7 +11572,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
             timeSignatureItemsVector [0]; // the only element;
 
         // fetch the time signature item beat numbers vector
-        const std::vector<int>&
+        const std::vector <int>&
           beatsNumbersVector =
             timeSignatureItem->
               getTimeSignatureBeatsNumbersVector ();
@@ -11610,7 +11610,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
               timeSignatureItemsVector [i];
 
           // fetch the time signature item beat numbers vector
-          const std::vector<int>&
+          const std::vector <int>&
             beatsNumbersVector =
               timeSignatureItem->
                 getTimeSignatureBeatsNumbersVector ();

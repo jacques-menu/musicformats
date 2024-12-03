@@ -263,7 +263,7 @@ S_msrNote msrRepeatCommonPart::fetchRepeatCommonPartFirstNonGraceNote () const
   // possibly inside a chord or tuplet
 
   if (fRepeatCommonPartElementsList.size ()) {
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fRepeatCommonPartElementsList.begin (),
       iEnd   = fRepeatCommonPartElementsList.end (),
       i      = iBegin;
@@ -410,7 +410,7 @@ void msrRepeatCommonPart::browseData (basevisitor* v)
   // browse the elements
   if (fRepeatCommonPartElementsList.size ()) {
     for (
-      std::list<S_msrVoiceElement>::const_iterator i = fRepeatCommonPartElementsList.begin ();
+      std::list <S_msrVoiceElement>::const_iterator i = fRepeatCommonPartElementsList.begin ();
       i != fRepeatCommonPartElementsList.end ();
       ++i
   ) {
@@ -475,7 +475,7 @@ void msrRepeatCommonPart::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fRepeatCommonPartElementsList.begin (),
       iEnd   = fRepeatCommonPartElementsList.end (),
       i      = iBegin;
@@ -539,7 +539,7 @@ void msrRepeatCommonPart::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fRepeatCommonPartElementsList.begin (),
       iEnd   = fRepeatCommonPartElementsList.end (),
       i      = iBegin;
@@ -847,7 +847,7 @@ void msrRepeatEnding::browseData (basevisitor* v)
   // browse the elements
   if (fRepeatEndingElementsList.size ()) {
     for (
-      std::list<S_msrVoiceElement>::const_iterator i = fRepeatEndingElementsList.begin ();
+      std::list <S_msrVoiceElement>::const_iterator i = fRepeatEndingElementsList.begin ();
       i != fRepeatEndingElementsList.end ();
       ++i
   ) {
@@ -948,7 +948,7 @@ void msrRepeatEnding::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fRepeatEndingElementsList.begin (),
       iEnd   = fRepeatEndingElementsList.end (),
       i      = iBegin;
@@ -1033,7 +1033,7 @@ void msrRepeatEnding::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_msrVoiceElement>::const_iterator
+    std::list <S_msrVoiceElement>::const_iterator
       iBegin = fRepeatEndingElementsList.begin (),
       iEnd   = fRepeatEndingElementsList.end (),
       i      = iBegin;
@@ -1799,7 +1799,7 @@ void msrRepeat::browseData (basevisitor* v)
 
   // browse the alternatives
   for (
-    std::vector<S_msrRepeatEnding>::const_iterator i = fRepeatEndings.begin ();
+    std::vector <S_msrRepeatEnding>::const_iterator i = fRepeatEndings.begin ();
     i != fRepeatEndings.end ();
     ++i
   ) {
@@ -1907,7 +1907,7 @@ std::string msrRepeat::asString () const
     ", endingsNumber: " << endingsNumber;
 
   if (endingsNumber) {
-    std::vector<S_msrRepeatEnding>::const_iterator
+    std::vector <S_msrRepeatEnding>::const_iterator
       iBegin = fRepeatEndings.begin (),
       iEnd   = fRepeatEndings.end (),
       i      = iBegin;
@@ -2045,7 +2045,7 @@ void msrRepeat::printFull (std::ostream& os) const
   if (endingsNumber) {
     ++gIndenter;
 
-    std::vector<S_msrRepeatEnding>::const_iterator
+    std::vector <S_msrRepeatEnding>::const_iterator
       iBegin = fRepeatEndings.begin (),
       iEnd   = fRepeatEndings.end (),
       i      = iBegin;
@@ -2114,7 +2114,7 @@ void msrRepeat::print (std::ostream& os) const
   if (repeatEndingsSize) {
     ++gIndenter;
 
-    std::vector<S_msrRepeatEnding>::const_iterator
+    std::vector <S_msrRepeatEnding>::const_iterator
       iBegin = fRepeatEndings.begin (),
       iEnd   = fRepeatEndings.end (),
       i      = iBegin;

@@ -165,7 +165,7 @@ EXP void displayStringPairVector (
 // static void argvElements2stringsVector (
 //   int             argc,
 //   char*           argv[],
-//   std::vector<std::string>& stringsVector)
+//   std::vector <std::string>& stringsVector)
 // {
 //   for (int i = 1; i<argc; ++i) {
 //     stringsVector.push_back (argv [i]);
@@ -179,7 +179,7 @@ EXP void displayStringPairVector (
 //   oahOptionsVector& theOptionsVector)
 // {
 //   // create a strings vector from the elements in argv
-//   std::vector<std::string> stringsVector;
+//   std::vector <std::string> stringsVector;
 //
 //   argvElements2stringsVector (argc, argv, stringsVector);
 //
@@ -292,7 +292,7 @@ EXP void displayStringPairVector (
 // static void argvElements2stringsVector (
 //   int             argc,
 //   char*           argv[],
-//   std::vector<std::string>& stringsVector)
+//   std::vector <std::string>& stringsVector)
 // {
 //   for (int i = 1; i<argc; ++i) {
 //     stringsVector.push_back (argv [i]);
@@ -313,7 +313,7 @@ EXP void displayStringPairVector (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //   // create a strings vector from the elements in argv
-//   std::vector<std::string> stringsVector;
+//   std::vector <std::string> stringsVector;
 //
 //   argvElements2stringsVector (
 //     argc,
@@ -638,8 +638,8 @@ std::string oahOptionForCommandLine (
 }
 
 void optionsNameAndValueVectorsPlusEquals (
-  std::vector<S_oahOption>&       vector1,
-  const std::vector<S_oahOption>& vector2)
+  std::vector <S_oahOption>&       vector1,
+  const std::vector <S_oahOption>& vector2)
 {
   // insert the elements of vector2 into vector1
   if (vector2.size ()) {
@@ -1149,7 +1149,7 @@ std::string oahPrefix::fetchPrefixNames () const
 
 Bool oahPrefix::findStringInFindableElement (
   const std::string&               lowerCaseString,
-  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::list <S_oahFindStringMatch>& foundMatchesList,
   std::ostream&                    os) const
 {
   Bool result;
@@ -1182,7 +1182,7 @@ Bool oahPrefix::findStringInFindableElement (
 
 Bool oahPrefix::fetchElementsMatchingStringInPrefix (
 	const std::string&       lowerCaseString,
-	std::list<S_oahElement>& foundElementsList,
+	std::list <S_oahElement>& foundElementsList,
 	std::ostream&            os) const
 {
   Bool result;
@@ -1603,7 +1603,7 @@ void oahAtom::printSummary (std::ostream& os) const
 
 Bool oahAtom::findStringInAtom (
   const std::string&               lowerCaseString,
-  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::list <S_oahFindStringMatch>& foundMatchesList,
   std::ostream&                    os) const
 {
   return
@@ -3157,7 +3157,7 @@ void oahSubGroup::appendSubGroupToElementsList (
 
   // register the OAH atoms in the handler
   for (
-    std::list<S_oahAtom>::const_iterator
+    std::list <S_oahAtom>::const_iterator
       i = fSubGroupAtomsList.begin ();
     i != fSubGroupAtomsList.end ();
     ++i
@@ -3201,7 +3201,7 @@ void oahSubGroup::registerNamesInSubGroupToTheNamesToElementsMap (
 
   // register this subgroup's names in handler
   for (
-    std::list<S_oahAtom>::const_iterator
+    std::list <S_oahAtom>::const_iterator
       i = fSubGroupAtomsList.begin ();
     i != fSubGroupAtomsList.end ();
     ++i
@@ -3262,7 +3262,7 @@ S_oahElement oahSubGroup::fetchOptionByNameInSubGroup (
   S_oahElement result;
 
   for (
-    std::list<S_oahAtom>::const_iterator
+    std::list <S_oahAtom>::const_iterator
       i = fSubGroupAtomsList.begin ();
     i != fSubGroupAtomsList.end ();
     ++i
@@ -3325,7 +3325,7 @@ void oahSubGroup::applySubGroup (std::ostream& os)
 
 Bool oahSubGroup::fetchElementsMatchingStringInSubGroup (
 	const std::string&       lowerCaseString,
-	std::list<S_oahElement>& foundElementsList,
+	std::list <S_oahElement>& foundElementsList,
 	std::ostream&            os) const
 {
   switch (fElementVisibilityKind) { // JMI remove???
@@ -3459,7 +3459,7 @@ void oahSubGroup::browseData (basevisitor* v)
   // browse the atoms
   if (fSubGroupAtomsList.size ()) {
     for (
-      std::list<S_oahAtom>::const_iterator i = fSubGroupAtomsList.begin ();
+      std::list <S_oahAtom>::const_iterator i = fSubGroupAtomsList.begin ();
       i != fSubGroupAtomsList.end ();
       ++i
     ) {
@@ -3521,7 +3521,7 @@ void oahSubGroup::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahAtom>::const_iterator
+    std::list <S_oahAtom>::const_iterator
       iBegin = fSubGroupAtomsList.begin (),
       iEnd   = fSubGroupAtomsList.end (),
       i      = iBegin;
@@ -3548,7 +3548,7 @@ void oahSubGroup::printSummary (std::ostream& os) const
   if (fSubGroupAtomsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahAtom>::const_iterator
+    std::list <S_oahAtom>::const_iterator
       iBegin = fSubGroupAtomsList.begin (),
       iEnd   = fSubGroupAtomsList.end (),
       i      = iBegin;
@@ -3667,7 +3667,7 @@ void oahSubGroup::printHelp (std::ostream& os) const
       if (fSubGroupAtomsList.size ()) {
         ++gIndenter;
 
-        std::list<S_oahAtom>::const_iterator
+        std::list <S_oahAtom>::const_iterator
           iBegin = fSubGroupAtomsList.begin (),
           iEnd   = fSubGroupAtomsList.end (),
           i      = iBegin;
@@ -3734,7 +3734,7 @@ void oahSubGroup::printHelpWithHeaderWidth (
       if (fSubGroupAtomsList.size ()) {
         ++gIndenter;
 
-        std::list<S_oahAtom>::const_iterator
+        std::list <S_oahAtom>::const_iterator
           iBegin = fSubGroupAtomsList.begin (),
           iEnd   = fSubGroupAtomsList.end (),
           i      = iBegin;
@@ -3788,7 +3788,7 @@ void oahSubGroup::printSubGroupHelp (std::ostream& os) const
   if (fSubGroupAtomsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahAtom>::const_iterator
+    std::list <S_oahAtom>::const_iterator
       iBegin = fSubGroupAtomsList.begin (),
       iEnd   = fSubGroupAtomsList.end (),
       i      = iBegin;
@@ -3894,7 +3894,7 @@ void oahSubGroup::printSubGroupAndAtomHelp (
   if (fSubGroupAtomsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahAtom>::const_iterator
+    std::list <S_oahAtom>::const_iterator
       iBegin = fSubGroupAtomsList.begin (),
       iEnd   = fSubGroupAtomsList.end (),
       i      = iBegin;
@@ -3927,7 +3927,7 @@ void oahSubGroup::printSubGroupAndAtomHelp (
 
 Bool oahSubGroup::findStringInSubGroup (
   const std::string&               lowerCaseString,
-  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::list <S_oahFindStringMatch>& foundMatchesList,
   std::ostream&                    os) const
 {
   Bool result;
@@ -4061,7 +4061,7 @@ void oahSubGroup::printSubGroupOptionsValuesAll (
   if (fSubGroupAtomsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahAtom>::const_iterator
+    std::list <S_oahAtom>::const_iterator
       iBegin = fSubGroupAtomsList.begin (),
       iEnd   = fSubGroupAtomsList.end (),
       i      = iBegin;
@@ -4262,7 +4262,7 @@ void oahGroup::appendGroupToElementsList (
 
   // append subgroups to elements list
   for (
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       i = fGroupSubGroupsList.begin ();
     i != fGroupSubGroupsList.end ();
     ++i
@@ -4315,7 +4315,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
 
   // append subgroups to elements list
   for (
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       i = fGroupSubGroupsList.begin ();
     i != fGroupSubGroupsList.end ();
     ++i
@@ -4357,7 +4357,7 @@ S_oahElement oahGroup::fetchOptionByNameInGroup (
   S_oahElement result;
 
   for (
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       i = fGroupSubGroupsList.begin ();
     i != fGroupSubGroupsList.end ();
     ++i
@@ -4460,7 +4460,7 @@ void oahGroup::checkGroupSubGroupsOptionsConsistency ()
   // check the subgroups options consistency
   if (fGroupSubGroupsList.size ()) {
     for (
-      std::list<S_oahSubGroup>::const_iterator i = fGroupSubGroupsList.begin ();
+      std::list <S_oahSubGroup>::const_iterator i = fGroupSubGroupsList.begin ();
       i != fGroupSubGroupsList.end ();
       ++i
     ) {
@@ -4569,7 +4569,7 @@ void oahGroup::browseData (basevisitor* v)
   // browse the subGroups
   if (fGroupSubGroupsList.size ()) {
     for (
-      std::list<S_oahSubGroup>::const_iterator i = fGroupSubGroupsList.begin ();
+      std::list <S_oahSubGroup>::const_iterator i = fGroupSubGroupsList.begin ();
       i != fGroupSubGroupsList.end ();
       ++i
     ) {
@@ -4618,7 +4618,7 @@ void oahGroup::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       iBegin = fGroupSubGroupsList.begin (),
       iEnd   = fGroupSubGroupsList.end (),
       i      = iBegin;
@@ -4647,7 +4647,7 @@ void oahGroup::printSummary (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       iBegin = fGroupSubGroupsList.begin (),
       iEnd   = fGroupSubGroupsList.end (),
       i      = iBegin;
@@ -4731,7 +4731,7 @@ void oahGroup::printHelp (std::ostream& os) const
     size_t maximumSubGroupHeaderLength = 0;
 
     for (
-      std::list<S_oahSubGroup>::const_iterator i = fGroupSubGroupsList.begin ();
+      std::list <S_oahSubGroup>::const_iterator i = fGroupSubGroupsList.begin ();
       i != fGroupSubGroupsList.end ();
       ++i
     ) {
@@ -4749,7 +4749,7 @@ void oahGroup::printHelp (std::ostream& os) const
       ++gIndenter;
     }
 
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       iBegin = fGroupSubGroupsList.begin (),
       iEnd   = fGroupSubGroupsList.end (),
       i      = iBegin;
@@ -4802,7 +4802,7 @@ void oahGroup::printGroupAndSubGroupHelp (
   if (fGroupSubGroupsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       iBegin = fGroupSubGroupsList.begin (),
       iEnd   = fGroupSubGroupsList.end (),
       i      = iBegin;
@@ -4828,7 +4828,7 @@ void oahGroup::printGroupAndSubGroupAndAtomHelp (
 {
   // print the target options subgroup
   if (fGroupSubGroupsList.size ()) {
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       iBegin = fGroupSubGroupsList.begin (),
       iEnd   = fGroupSubGroupsList.end (),
       i      = iBegin;
@@ -4877,7 +4877,7 @@ void oahGroup::printOptionsSummary (std::ostream& os) const
   if (fGroupSubGroupsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       iBegin = fGroupSubGroupsList.begin (),
       iEnd   = fGroupSubGroupsList.end (),
       i      = iBegin;
@@ -4945,7 +4945,7 @@ void oahGroup::printGroupAndSubGroupSpecificHelp (
   if (fGroupSubGroupsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       iBegin = fGroupSubGroupsList.begin (),
       iEnd   = fGroupSubGroupsList.end (),
       i      = iBegin;
@@ -4991,7 +4991,7 @@ void oahGroup::printGroupOptionsValues (
 
     Bool doPrintOptionsValues;
 
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       iBegin = fGroupSubGroupsList.begin (),
       iEnd   = fGroupSubGroupsList.end (),
       i      = iBegin;
@@ -5047,7 +5047,7 @@ void oahGroup::printGroupOptionsValuesAll (
   if (fGroupSubGroupsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahSubGroup>::const_iterator
+    std::list <S_oahSubGroup>::const_iterator
       iBegin = fGroupSubGroupsList.begin (),
       iEnd   = fGroupSubGroupsList.end (),
       i      = iBegin;
@@ -5081,7 +5081,7 @@ void oahGroup::printGroupOptionsValuesAll (
 
 void oahGroup::findStringInGroup (
   const std::string&               lowerCaseString,
-  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::list <S_oahFindStringMatch>& foundMatchesList,
   std::ostream&                    os) const
 {
   switch (fElementVisibilityKind) { // JMI remove???
@@ -5121,7 +5121,7 @@ void oahGroup::findStringInGroup (
 
 Bool oahGroup::fetchElementsMatchingStringInGroup (
 	const std::string&       lowerCaseString,
-	std::list<S_oahElement>& foundElementsList,
+	std::list <S_oahElement>& foundElementsList,
 	std::ostream&            os) const
 {
   switch (fElementVisibilityKind) { // JMI remove???
@@ -5285,7 +5285,7 @@ S_oahPrefix oahHandler::fetchNameInHandlerPrefixesMap (
   S_oahPrefix result;
 
   // is name known in prefixes map?
-  std::map<std::string, S_oahPrefix>::const_iterator
+  std::map <std::string, S_oahPrefix>::const_iterator
     it =
       fHandlerPrefixesMap.find (
         name);
@@ -5304,7 +5304,7 @@ S_oahElement oahHandler::fetchNameInNamesToElementsMap (
   S_oahElement result;
 
   // is name known in the names to elements map?
-  std::map<std::string, S_oahElement>::const_iterator
+  std::map <std::string, S_oahElement>::const_iterator
     it =
       fHandlerNamesToElementsMap.find (
         name);
@@ -5405,7 +5405,7 @@ void oahHandler::registerElementNamesInHandler (
     oahError (ss.str ());
   }
 
-  for (std::pair<std::string, S_oahElement> thePair : fHandlerNamesToElementsMap) {
+  for (std::pair <std::string, S_oahElement> thePair : fHandlerNamesToElementsMap) {
     std::string       name    = thePair.first;
     S_oahElement element = thePair.second;
 
@@ -5526,7 +5526,7 @@ void oahHandler::registerNamesInHandlerToTheNamesToElementsMap ()
   // check the handler groups options consistency
   if (fHandlerGroupsList.size ()) {
     for (
-      std::list<S_oahGroup>::const_iterator i = fHandlerGroupsList.begin ();
+      std::list <S_oahGroup>::const_iterator i = fHandlerGroupsList.begin ();
       i != fHandlerGroupsList.end ();
       ++i
     ) {
@@ -5743,7 +5743,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  const std::vector<std::string>&
+  const std::vector <std::string>&
     argumentsVector =
       fOptionsAndArguments.getArgumentsVector ();
 
@@ -5836,7 +5836,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  const std::vector<std::string>&
+  const std::vector <std::string>&
     argumentsVector =
       fOptionsAndArguments.getArgumentsVector ();
 
@@ -5956,7 +5956,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  const std::vector<std::string>&
+  const std::vector <std::string>&
     argumentsVector =
       fOptionsAndArguments.getArgumentsVector ();
 
@@ -6087,7 +6087,7 @@ void oahHandler::checkOneArgumentAndNoOrOneInputSourceInArgumentsVector () const
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  const std::vector<std::string>&
+  const std::vector <std::string>&
     argumentsVector =
       fOptionsAndArguments.getArgumentsVector ();
 
@@ -6263,7 +6263,7 @@ void oahHandler::checkHandlerOptionsConsistency ()
   // check the handler groups options consistency
   if (fHandlerGroupsList.size ()) {
     for (
-      std::list<S_oahGroup>::const_iterator i = fHandlerGroupsList.begin ();
+      std::list <S_oahGroup>::const_iterator i = fHandlerGroupsList.begin ();
       i != fHandlerGroupsList.end ();
       ++i
     ) {
@@ -6296,7 +6296,7 @@ void oahHandler::displayNamesToElementsMap ()
     ++gIndenter;
 
     for (
-      std::map<std::string, S_oahElement>::iterator i =
+      std::map <std::string, S_oahElement>::iterator i =
         fHandlerNamesToElementsMap.begin ();
       i != fHandlerNamesToElementsMap.end ();
       ++i
@@ -6342,7 +6342,7 @@ void oahHandler::displayNamesToElementsMapShort (std::ostream& os) const
     const int fieldWidth = 40;
 
     for (
-      std::map<std::string, S_oahElement>::const_iterator i =
+      std::map <std::string, S_oahElement>::const_iterator i =
         fHandlerNamesToElementsMap.begin ();
       i != fHandlerNamesToElementsMap.end ();
       ++i
@@ -6378,7 +6378,7 @@ void oahHandler::displayElementUsesList (std::ostream& os) const
 
     int counter = 0;
     for (
-      std::list<S_oahElementUse >::const_iterator i =
+      std::list <S_oahElementUse >::const_iterator i =
         fElementUsesList.begin ();
       i != fElementUsesList.end ();
       ++i
@@ -6528,7 +6528,7 @@ void oahHandler::browseData (basevisitor* v)
   // browse the prefixes
   if (fHandlerPrefixesMap.size ()) {
     for (
-      std::map<std::string, S_oahPrefix>::const_iterator i = fHandlerPrefixesMap.begin ();
+      std::map <std::string, S_oahPrefix>::const_iterator i = fHandlerPrefixesMap.begin ();
       i != fHandlerPrefixesMap.end ();
       ++i
     ) {
@@ -6543,7 +6543,7 @@ void oahHandler::browseData (basevisitor* v)
   // browse the groups
   if (fHandlerGroupsList.size ()) {
     for (
-      std::list<S_oahGroup>::const_iterator i = fHandlerGroupsList.begin ();
+      std::list <S_oahGroup>::const_iterator i = fHandlerGroupsList.begin ();
       i != fHandlerGroupsList.end ();
       ++i
     ) {
@@ -6679,7 +6679,7 @@ void oahHandler::printFull (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -6743,7 +6743,7 @@ void oahHandler::print (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -6787,7 +6787,7 @@ void oahHandler::printSummary (std::ostream& os) const
 
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -6827,7 +6827,7 @@ void oahHandler::printHelp (std::ostream& os) const
   if (fHandlerGroupsList.size ()) {
 // JMI    ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -6883,7 +6883,7 @@ void oahHandler::printOptionsSummary (std::ostream& os) const
   if (fHandlerGroupsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -6924,7 +6924,7 @@ void oahHandler::printHandlerAndGroupAndSubGroupSpecificHelp (
   if (fHandlerGroupsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -7156,7 +7156,7 @@ void oahHandler::printNameIntrospectiveHelp (
 
 Bool oahHandler::fetchElementsMatchingStringInHandler (
   const std::string&       lowerCaseString,
-  std::list<S_oahElement>& foundElementsList,
+  std::list <S_oahElement>& foundElementsList,
   std::ostream&            os) const
 {
   Bool result;
@@ -7213,7 +7213,7 @@ Bool oahHandler::fetchElementsMatchingStringInHandler (
     ++gIndenter;
 
     for (
-      std::map<std::string, S_oahPrefix>::const_iterator i =
+      std::map <std::string, S_oahPrefix>::const_iterator i =
         fHandlerPrefixesMap.begin ();
       i != fHandlerPrefixesMap.end ();
       ++i
@@ -7252,7 +7252,7 @@ Bool oahHandler::fetchElementsMatchingStringInHandler (
 
 Bool oahHandler::findStringInFindableElement (
   const std::string&               lowerCaseString,
-  std::list<S_oahFindStringMatch>& foundMatchesList,
+  std::list <S_oahFindStringMatch>& foundMatchesList,
   std::ostream&                    os) const
 {
   Bool result;
@@ -7309,7 +7309,7 @@ Bool oahHandler::findStringInFindableElement (
     ++gIndenter;
 
     for (
-      std::map<std::string, S_oahPrefix>::const_iterator i =
+      std::map <std::string, S_oahPrefix>::const_iterator i =
         fHandlerPrefixesMap.begin ();
       i != fHandlerPrefixesMap.end ();
       ++i
@@ -7488,7 +7488,7 @@ void oahHandler::printHandlerOptionsValues (
   if (fHandlerGroupsList.size ()) {
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -7589,7 +7589,7 @@ void oahHandler::printHandlerOptionsValuesAll (
 
     ++gIndenter;
 
-    std::list<S_oahGroup>::const_iterator
+    std::list <S_oahGroup>::const_iterator
       iBegin = fHandlerGroupsList.begin (),
       iEnd   = fHandlerGroupsList.end (),
       i      = iBegin;
@@ -7699,7 +7699,7 @@ void oahHandler::registerPrefixInHandler (
   std::string prefixName = prefix->getPrefixName ();
 
   // is prefixName already known in prefixes map?
-  std::map<std::string, S_oahPrefix>::const_iterator
+  std::map <std::string, S_oahPrefix>::const_iterator
     it =
       fHandlerPrefixesMap.find (
         prefixName);
@@ -7729,7 +7729,7 @@ S_oahPrefix oahHandler::fetchNameInPrefixesMap (
   S_oahPrefix result;
 
   // is prefixName already known in prefixes map?
-  std::map<std::string, S_oahPrefix>::const_iterator
+  std::map <std::string, S_oahPrefix>::const_iterator
     it =
       fHandlerPrefixesMap.find (
         prefixName);
@@ -7848,7 +7848,7 @@ void oahHandler::printKnownPrefixes (std::ostream& os) const
     ++gIndenter;
 
     for (
-      std::map<std::string, S_oahPrefix>::const_iterator i =
+      std::map <std::string, S_oahPrefix>::const_iterator i =
         fHandlerPrefixesMap.begin ();
       i != fHandlerPrefixesMap.end ();
       ++i
@@ -7898,7 +7898,7 @@ void oahHandler::printKnownSingleCharacterOptions (std::ostream& os) const
   ++gIndenter;
 
   if (oahHandlerPrefixesListSize) {
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       iBegin = fSingleCharacterNamesSet.begin (),
       iEnd   = fSingleCharacterNamesSet.end (),
       i      = iBegin;
@@ -7990,7 +7990,7 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
   ++gIndenter;
 
   if (handlerElementsMapSize) {
-    std::map<std::string, S_oahElement>::const_iterator
+    std::map <std::string, S_oahElement>::const_iterator
       iBegin = fHandlerNamesToElementsMap.begin (),
       iEnd   = fHandlerNamesToElementsMap.end (),
       i      = iBegin;
@@ -8019,14 +8019,14 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
   --gIndenter;
 
   // create a list of the options map elements names
-  std::list<std::string> optionsMapElementsNamesList;
+  std::list <std::string> optionsMapElementsNamesList;
 
   size_t optionsMapElementsNamesListSize =
     optionsMapElementsNamesList.size ();
 
   if (optionsMapElementsNamesListSize) {
     for (
-      std::map<std::string, S_oahElement>::const_iterator i = fHandlerNamesToElementsMap.begin ();
+      std::map <std::string, S_oahElement>::const_iterator i = fHandlerNamesToElementsMap.begin ();
       i !=  fHandlerNamesToElementsMap.end ();
       ++i
     ) {
@@ -8053,7 +8053,7 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
   ++gIndenter;
 
   if (optionsMapElementsNamesListSize) {
-    std::list<std::string>::const_iterator
+    std::list <std::string>::const_iterator
       iBegin = optionsMapElementsNamesList.begin (),
       iEnd   = optionsMapElementsNamesList.end (),
       i      = iBegin;
@@ -8080,7 +8080,7 @@ S_oahElement oahHandler::fetchElementByNameInHandler (
   S_oahElement result;
 
   for (
-    std::list<S_oahGroup>::const_iterator i = fHandlerGroupsList.begin ();
+    std::list <S_oahGroup>::const_iterator i = fHandlerGroupsList.begin ();
     i != fHandlerGroupsList.end ();
     ++i
   ) {
@@ -8565,7 +8565,7 @@ void oahHandler::handleOptionPrefixName (
 
   // split stringAfterEqualsSign into a list of strings
   // using the comma as separator
-  std::list<std::string> chunksList;
+  std::list <std::string> chunksList;
 
   mfSplitStringIntoChunks (
     stringAfterEqualsSign,
@@ -8586,7 +8586,7 @@ void oahHandler::handleOptionPrefixName (
 
     ++gIndenter;
 
-    std::list<std::string>::const_iterator
+    std::list <std::string>::const_iterator
       iBegin = chunksList.begin (),
       iEnd   = chunksList.end (),
       i      = iBegin;
@@ -8613,7 +8613,7 @@ void oahHandler::handleOptionPrefixName (
     if (chunksListSize) {
       // expand the option names contained in chunksList
       for (
-        std::list<std::string>::const_iterator i =
+        std::list <std::string>::const_iterator i =
           chunksList.begin ();
         i != chunksList.end ();
         ++i
@@ -8693,7 +8693,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
 
   ++gIndenter;
 
-  std::list<S_oahElement> clusterElementsList;
+  std::list <S_oahElement> clusterElementsList;
 
   // collect single-character elements in clusterElementsList
   for (
@@ -8716,7 +8716,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    std::set<std::string>::const_iterator
+    std::set <std::string>::const_iterator
       it =
         fSingleCharacterNamesSet.find (
           singleCharacterString);
@@ -8758,7 +8758,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     ++gIndenter;
 
     for (
-      std::list<S_oahElement>::const_iterator i = clusterElementsList.begin ();
+      std::list <S_oahElement>::const_iterator i = clusterElementsList.begin ();
       i != clusterElementsList.end ();
       ++i
     ) {
@@ -8778,7 +8778,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
       "fSingleCharacterNamesSet:" <<
       std::endl;
     for (
-      std::set<std::string>::const_iterator i = fSingleCharacterNamesSet.begin ();
+      std::set <std::string>::const_iterator i = fSingleCharacterNamesSet.begin ();
       i != fSingleCharacterNamesSet.end ();
       ++i
     ) {
@@ -8817,7 +8817,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     // all the elements in clusterElementsList are single character options,
     // handle them
     for (
-      std::list<S_oahElement>::const_iterator i = clusterElementsList.begin ();
+      std::list <S_oahElement>::const_iterator i = clusterElementsList.begin ();
       i != clusterElementsList.end ();
       ++i
     ) {
@@ -9634,7 +9634,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
   fHandlerServiceName = serviceName;
 
 //   // analyze the options
-//   const std::vector<oahOption>&
+//   const std::vector <oahOption>&
 //     optionsVector =
 //       gServiceRunData->
 //         getOptionsAndArguments ().getOptionsVector ();
@@ -9908,7 +9908,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 #endif // MF_TRACE_IS_ENABLED
 
     for (
-      std::list<S_oahElementUse >::const_iterator i =
+      std::list <S_oahElementUse >::const_iterator i =
         fElementUsesList.begin ();
       i != fElementUsesList.end ();
       ++i
@@ -10300,7 +10300,7 @@ void oahHandler::handleKnownOptionsVectorElement (
 #endif // MF_TRACE_IS_ENABLED
 
   // is this element already present in the commande line?
-  std::multiset<S_oahElement>::const_iterator
+  std::multiset <S_oahElement>::const_iterator
     it =
       fHandlerCommandLineElementsMultiset.find (
         element);
@@ -10480,7 +10480,7 @@ void oahHandler::handleKnownArgvElement (
 #endif // MF_TRACE_IS_ENABLED
 
   // is this element already present in the commande line?
-  std::multiset<S_oahElement, compareOahElements>::const_iterator
+  std::multiset <S_oahElement, compareOahElements>::const_iterator
     it =
       fHandlerCommandLineElementsMultiset.find (
         element);
@@ -10950,7 +10950,7 @@ void oahHandler::handleOptionNameCommon (
 //   }
 //
 //   // analyze the options
-//   const std::vector<oahOption>&
+//   const std::vector <oahOption>&
 //     optionsVector =
 //       fOptionsAndArguments.getOptionsVector ();
 //
@@ -11026,7 +11026,7 @@ void oahHandler::handleOptionNameCommon (
 //   }
 //
 //   // analyze the arguments
-//   const std::vector<std::string>&
+//   const std::vector <std::string>&
 //     optionArgumentsVector =
 //       optionsAndArguments.getArgumentsVector ();
 //
@@ -11630,14 +11630,14 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 */
 
 
-// //   const std::vector<oahOption>& // JMI
+// //   const std::vector <oahOption>& // JMI
 // //     optionsVector =
 // //       fOptionsAndArguments.getOptionsVector ();
 // //
 // //   if (optionsVector.size ()) {
 // //     ss << ' ';
 // //
-// //     std::vector<oahOption>::const_iterator
+// //     std::vector <oahOption>::const_iterator
 // //       iBegin = optionsVector.begin (),
 // //       iEnd   = optionsVector.end (),
 // //       i      = iBegin;
@@ -11651,7 +11651,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 // //   if (fHandlerCommandLineElementsList.size ()) {
 // //     ss << ' ';
 // //
-// //     std::list<S_oahElement>::const_iterator
+// //     std::list <S_oahElement>::const_iterator
 // //       iBegin = fHandlerCommandLineElementsList.begin (),
 // //       iEnd   = fHandlerCommandLineElementsList.end (),
 // //       i      = iBegin;

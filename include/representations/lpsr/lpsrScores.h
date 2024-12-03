@@ -74,11 +74,11 @@ class EXP lpsrScore : public lpsrElement
     S_lpsrLayout          getScoreLayout () const
                               { return fScoreLayout; }
 
-    const std::list<S_msrElement>&
+    const std::list <S_msrElement>&
                           getScoreElementsList () const
                               { return fScoreElementsList; }
 
-    const std::list<S_lpsrBookBlock>&
+    const std::list <S_lpsrBookBlock>&
                           getScoreBookBlocksList () const
                               { return fScoreBookBlocksList; }
 
@@ -467,11 +467,11 @@ class EXP lpsrScore : public lpsrElement
     S_lpsrLayout          fScoreLayout;
 
     // variables, voices and stanzas
-    std::list<S_msrElement>
+    std::list <S_msrElement>
                           fScoreElementsList;
 
     // score LPSR book blocks list
-    std::list<S_lpsrBookBlock> fScoreBookBlocksList;
+    std::list <S_lpsrBookBlock> fScoreBookBlocksList;
     S_lpsrScoreBlock      fScoreScoreBlock; // JMI ???
 
     // files includes
@@ -546,7 +546,7 @@ class EXP lpsrScore : public lpsrElement
     // ------------------------------------------------------
 
     // the Scheme functions map
-    std::map<std::string, S_lpsrSchemeFunction>
+    std::map <std::string, S_lpsrSchemeFunction>
                           fScoreSchemeFunctionsMap;
 };
 typedef SMARTP<lpsrScore> S_lpsrScore;

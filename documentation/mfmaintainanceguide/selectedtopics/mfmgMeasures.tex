@@ -24,14 +24,14 @@ Measures are presented at \sectionRef{Measures}.
 
 \Class{msrVoice} contains a list of the first elements and a last segment:
 \begin{lstlisting}[language=CPlusPlus]
-    std::list<S_msrVoiceElement>
+    std::list <S_msrVoiceElement>
                           fVoiceInitialElementsList;
 
     // fVoiceLastSegment contains the music
     // not yet stored in fVoiceInitialElementsList,
     // it is thus logically the end of the latter,
     // and is created implicitly for every voice.
-    // It is needed 'outside' of the 'std::list<S_msrElement>'
+    // It is needed 'outside' of the 'std::list <S_msrElement>'
     // because it is not a mere S_msrElement, but a S_msrSegment
     S_msrSegment          fVoiceLastSegment;
 \end{lstlisting}
@@ -54,7 +54,7 @@ formats/msr/msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \Class{msrSegment} contains a list of measures:
 \begin{lstlisting}[language=CPlusPlus]
     // the measures in the segment contain the mmusic
-    std::list<S_msrMeasure>
+    std::list <S_msrMeasure>
                           fSegmentElementsList;
 \end{lstlisting}
 
@@ -62,7 +62,7 @@ class   {\tt } contains a list of mesure elements:
 \begin{lstlisting}[language=CPlusPlus]
     // elements
 
-    std::list<S_msrMeasureElement>
+    std::list <S_msrMeasureElement>
                           fMeasureElementsList;
 \end{lstlisting}
 

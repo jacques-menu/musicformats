@@ -133,7 +133,7 @@ class EXP msrDivisions : public msrElement
 
     int                   fDivisionsPerQuarterNote;
 
-    std::list<std::pair<msrNotesDurationKind, int>>
+    std::list <std::pair <msrNotesDurationKind, int>>
                           fNotesDurationKindsToDivisions;
 };
 typedef SMARTP<msrDivisions> S_msrDivisions;
