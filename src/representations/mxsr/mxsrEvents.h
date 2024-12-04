@@ -364,6 +364,10 @@ typedef SMARTP<mxsrStaffChangeEvent> S_mxsrStaffChangeEvent;
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrStaffChangeEvent& elt);
 EXP std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEvent& elt);
 
+bool compareStaffChangeEventsByIncreasingInputStartLineNumber (
+  S_mxsrStaffChangeEvent& first,
+  S_mxsrStaffChangeEvent& second);
+
 //------------------------------------------------------------------------
 class EXP mxsrChordEvent : public mxsrNoteEvent
 {
@@ -552,6 +556,18 @@ class EXP mxsrEventsCollection : public smartable
     Bool                  getInitialRepeatBarIsImplicit () const
                               { return fThereIsAnImplicitInitialForwardRepeat; }
 
+    const std::map <int, S_mxsrStaffChangeEvent>&
+                          getStaffChangeTakeOffsMap () const
+                              { return fStaffChangeTakeOffsMap; }
+
+    const std::map <int, S_mxsrStaffChangeEvent>&
+                          getStaffChangeLandingsMap () const
+                              { return fStaffChangeLandingsMap; }
+
+    const std::list <S_mxsrStaffChangeEvent>&
+                          getStaffChangeEventsList () const
+                              { return fStaffChangeEventsList; }
+
     const std::map <int, S_mxsrChordEvent>&
                           getChordsEventMap () const
                               { return fChordsEventsMap; }
@@ -560,14 +576,36 @@ class EXP mxsrEventsCollection : public smartable
                           getTupletsEventMultiMap () const
                               { return fTupletsEventsMultiMap; }
 
-    const std::map <int, S_mxsrStaffChangeEvent>&
-                          getStaffChangesEventsMap () const
-                              { return fStaffChangesEventsMap; }
+    const std::list <S_mxsrEvent>&
+                          getAllEventsList () const
+                              { return fAllEventsList; }
 
   public:
 
     // public services
     // ------------------------------------------------------
+
+    void                  registerStaffChangeTakeOff (
+                            int                      noteSequentialNumber,
+                            int                      noteEventStaffNumber,
+                            int                      noteEventVoiceNumber,
+                            int                      takeOffStaffNumber,
+                            int                      landingStaffNumber,
+                            int                      takeOffInputStartLineNumber,
+                            int                      landingInputStartLineNumber,
+                            int                      eventInputStartLineNumber,
+                            int                      eventInputEndLineNumber);
+
+    void                  registerStaffChangeLanding (
+                            int                      noteSequentialNumber,
+                            int                      noteEventStaffNumber,
+                            int                      noteEventVoiceNumber,
+                            int                      takeOffStaffNumber,
+                            int                      landingStaffNumber,
+                            int                      takeOffInputStartLineNumber,
+                            int                      landingInputStartLineNumber,
+                            int                      eventInputStartLineNumber,
+                            int                      eventInputEndLineNumber);
 
     void                  registerChordEvent (
                             int                noteSequentialNumber,
@@ -586,24 +624,7 @@ class EXP mxsrEventsCollection : public smartable
                             int                 eventInputStartLineNumber,
                             int                 eventInputEndLineNumber);
 
-    void                  registerStaffChangeEvent (
-                            int                      noteSequentialNumber,
-                            int                      noteEventStaffNumber,
-                            int                      noteEventVoiceNumber,
-                            mxsrStaffChangeEventKind staffChangeEventKind,
-                            int                      takeOffStaffNumber,
-                            int                      landingStaffNumber,
-                            int                      takeOffInputStartLineNumber,
-                            int                      landingInputStartLineNumber,
-                            int                      eventInputStartLineNumber,
-                            int                      eventInputEndLineNumber);
-
-    void                  sortTheAllMxsrEventsList ();
-
-    // staff changes events
-    S_mxsrStaffChangeEvent
-                          fetchStaffChangeEventAtNoteSequentialNumber (
-                            int noteSequentialNumber) const;
+    void                  sortTheMxsrEventsLists ();
 
     S_mxsrStaffChangeEvent
                           fetchStaffChangeTakeOffAtNoteSequentialNumber (
@@ -621,7 +642,7 @@ class EXP mxsrEventsCollection : public smartable
 //     S_mxsrTupletEvent     fetchTupletEventAtNoteSequentialNumber (
 //                             int noteSequentialNumber) const;
 
-    void                  fetchTupletEventRange (
+    void                  fetchTupletEventsRange (
                             int noteSequentialNumber,
                             std::multimap <int, S_mxsrTupletEvent>::const_iterator&
                                 firstInRange,
@@ -643,6 +664,12 @@ class EXP mxsrEventsCollection : public smartable
 
     void                  print (std::ostream& os) const;
 
+    void                  printAllEvents (std::ostream& os) const;
+
+    void                  printStaffChangeEvents (std::ostream& os) const;
+    void                  printChordEvents (std::ostream& os) const;
+    void                  printTupletEvents (std::ostream& os) const;
+
   private:
 
     // private fields
@@ -654,6 +681,15 @@ class EXP mxsrEventsCollection : public smartable
     // initial repeat bar
     Bool                  fThereIsAnImplicitInitialForwardRepeat;
 
+    // there can be two staff changes per note,
+    // hence these two maps, indexed by note sequential number
+    std::map <int, S_mxsrStaffChangeEvent>
+                          fStaffChangeTakeOffsMap,
+                          fStaffChangeLandingsMap;
+
+    std::list <S_mxsrStaffChangeEvent>
+                          fStaffChangeEventsList;
+
     // there can be only one chord begin or end per note,
     // hence this map, indexed by note sequential number
     std::map <int, S_mxsrChordEvent>
@@ -664,11 +700,6 @@ class EXP mxsrEventsCollection : public smartable
 
     std::multimap <int, S_mxsrTupletEvent>
                           fTupletsEventsMultiMap;
-
-    // there can be only one staff change per note,
-    // hence this map, indexed by note sequential number
-    std::map <int, S_mxsrStaffChangeEvent>
-                          fStaffChangesEventsMap;
 
     // all events list
     std::list <S_mxsrEvent>

@@ -455,6 +455,9 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   // staff changes handling
   fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 
+//   fCurrentTakeOffStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentLandingStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+
   // staff details handling
   fStaffDetailsStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 
@@ -1169,7 +1172,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true ||
+  if (
     gTraceOahGroup->getTraceStavesBasics ()
       ||
     gTraceOahGroup->getTraceVoicesBasics ()
@@ -8365,10 +8368,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 //   handleBackup (
 //     elt->getInputStartLineNumber ());
 
-  // reset staff change detection
-//   fCurrentNoteVoiceNumber = 1; // default value
-//   fCurrentRecipientStaffNumber = 1;// default value
-
   fOnGoingBackup = false;
 }
 
@@ -8539,11 +8538,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
     appendPaddingNoteToVoice (
       elt->getInputStartLineNumber (),
       forwardStepLength);
-
-  // reset staff change detection
-//   fCurrentRecipientStaffNumber = fCurrentForwardStaffNumber; // JMI ??? v0.9.72
-  // reset staff change detection
-//   fCurrentRecipientStaffNumber = 1;// default value
 
   fOnGoingForward = false;
 }
@@ -12220,59 +12214,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
   // initialize note data to a neutral state
   initializeNoteData ();
 
-  // fetch the staff changes events on this note if any
-//   fCurrentNoteStaffChangeEvent =
-//     fKnownEventsCollection.
-//       fetchStaffChangeEventAtNoteSequentialNumber (
-//         fCurrentNoteSequentialNumber);
-//   fCurrentNoteStaffChangeEvent =
-//     fKnownEventsCollection.
-//       fetchStaffChangeTakeOffAtNoteSequentialNumber (
-//         fCurrentNoteSequentialNumber);
-  fCurrentNoteStaffChangeEvent =
-    fKnownEventsCollection.
-      fetchStaffChangeLandingAtNoteSequentialNumber (
-        fCurrentNoteSequentialNumber);
-
-  if (fCurrentNoteStaffChangeEvent) {
-    // there is a staff change
-#ifdef MF_TRACE_IS_ENABLED
-    if (true || gTraceOahGroup->getTraceStaffChangesBasics ()) {
-      std::stringstream ss;
-
-      ss <<
-        "==> visitStart (S_note& elt): "
-        "There is a staff change " <<
-        fCurrentNoteStaffChangeEvent->getStaffChangeEventKind () <<
-        " event at fCurrentNoteSequentialNumber: " <<
-        fCurrentNoteSequentialNumber <<
-        ": " <<
-        fCurrentNoteStaffChangeEvent->asString () <<
-        ", line " <<
-        fCurrentNoteStaffChangeEvent->getEventInputStartLineNumber ();
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    fOnGoingStaffChange = true;
-  }
-
-  // get the chords events if any
-  if (gGlobalMxsr2msrOahGroup->getUseMxsrEvents ()) { // EVENTS
-    switch (fCurrentNoteChordEvent->getChordEventKind ()) { // EVENTS
-      case mxsrChordEventKind::kEventChord_NONE:
-        break;
-      case mxsrChordEventKind::kEventChordBegin:
-        fCurrentNoteBelongsToAChord = true;
-        break;
-      case mxsrChordEventKind::kEventChordEnd:
-        fCurrentNoteBelongsToAChord = true;
-        break;
-    } // switch
-  }
 
 
 // \new PianoStaff <<
@@ -12290,88 +12231,10 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 // >>
 
 
-  // fetch the tuplet events upon this note if any
-  std::multimap <int, S_mxsrTupletEvent>::const_iterator
-    firstTupletEventInRange,
-    lastTupletEventInRange;
-
-  fKnownEventsCollection.fetchTupletEventRange (
-    fCurrentNoteSequentialNumber,
-    firstTupletEventInRange,
-    lastTupletEventInRange);
-
-  for (
-    std::multimap <int, S_mxsrTupletEvent>::const_iterator it =
-     firstTupletEventInRange;
-    it != lastTupletEventInRange;
-    ++it
-  ) {
-    S_mxsrTupletEvent tupletEvent = it->second;
-
-//     switch (tupletEvent->getTupletEventKind ()) {
-//       case mxsrTupletEventKind::kEventTupletEvent_NONE:
-//         // should not occur
-//         break;
-//
-//       case mxsrTupletEventKind::kEventTupletEventTakeOff:
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceNotes ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "==> kEventTupletEventTakeOff at fCurrentNoteSequentialNumber: " <<
-//             fCurrentNoteSequentialNumber <<
-//             ": " <<
-//             tupletEvent->asString () <<
-//             ", line " << elt->getInputStartLineNumber ();
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
-//             ss.str ());
-//
-//     //       displayStaffAndVoiceInformation (
-//     //         elt->getInputStartLineNumber (),
-//     //         "mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)");
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//         thereIsATupletEvent = true;
-//
-//         fCurrentRecipientStaffNumber =
-//           tupletEvent->getNoteEventStaffNumber ();
-//         break;
-//
-//       case mxsrTupletEventKind::kEventTupletEventLanding:
-// #ifdef MF_TRACE_IS_ENABLED
-//         if (gTraceOahGroup->getTraceNotes ()) {
-//           std::stringstream ss;
-//
-//           ss <<
-//             "==> kEventTupletEventLanding at fCurrentNoteSequentialNumber: " <<
-//             fCurrentNoteSequentialNumber <<
-//             ": " <<
-//             tupletEvent->asString () <<
-//             ", line " << elt->getInputStartLineNumber ();
-//
-//           gWaeHandler->waeTrace (
-//             __FILE__, __LINE__,
-//             ss.str ());
-//
-//     //       displayStaffAndVoiceInformation (
-//     //         elt->getInputStartLineNumber (),
-//     //         "mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)");
-//         }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//         thereIsATupletEvent = true;
-//
-//         // set the recipient voice and staff numbers
-//         fCurrentRecipientStaffNumber =
-//           tupletEvent->getLandingStaffNumber (); // RECIPIENT JMI v0.9.72
-//         break;
-//     } // switch
-
-  } // for
+//   fCurrentNoteTupletEvent =
+//     fKnownEventsCollection.
+//       fetchTupletEventAtNoteSequentialNumber (
+//         fCurrentNoteSequentialNumber);
 
 
 
@@ -18441,11 +18304,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_chord& elt)
 
   // the current note belongs to a chord,
   // placed in the corresponding staff AND voice
-if (gGlobalMxsr2msrOahGroup->getUseMxsrEvents ()) { // EVENTS
-}
-else {
   fCurrentNoteBelongsToAChord = true;
-}
 
   // delay the handling until 'visitEnd (S_note& elt)',
   // because we don't know yet the voice and staff numbers for sure
@@ -24503,7 +24362,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 
   // register note as the last one met in its voice
 #ifdef MF_TRACE_IS_ENABLED
-  if (true ||
+  if (
     gTraceOahGroup->getTraceNotesBasics ()
       ||
     gTraceOahGroup->getTraceStaffChangesBasics ()
@@ -24869,14 +24728,8 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
       // note is the second, third, ..., member of a chord
       // whose first member is in
       // JMI ??? 'fLastHandledNoteInVoiceMap [currentVoice]' v0.9.67
-// if (gGlobalMxsr2msrOahGroup->getUseMxsrEvents ()) { // EVENTS
-//         handleChordMemberNote_EVENTS (
-//           fCurrentNote);
-// }
-// else {
-        handleChordMemberNote (
-          fCurrentNote);
-// }
+      handleChordMemberNote (
+        fCurrentNote);
     }
   }
 
@@ -25286,57 +25139,7 @@ void mxsr2msrSkeletonPopulator::attachThePendingDalSegnosIfAny ()
   }
 }
 
-void mxsr2msrSkeletonPopulator::finalizeTupletIfAny (
-  int inputLineNumber)
-{
-  if (fCurrentNoteBelongsToATuplet) {
-    Bool aTupletIsStopping (false);
-
-    switch (fCurrentTupletTypeKind) {
-      case msrTupletTypeKind::kTupletTypeNone:
-        break;
-      case msrTupletTypeKind::kTupletTypeStart:
-        break;
-      case msrTupletTypeKind::kTupletTypeContinue:
-        break;
-      case msrTupletTypeKind::kTupletTypeStop:
-        aTupletIsStopping = true;
-        break;
-      case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
-        break;
-    } // switch
-
-    if (aTupletIsStopping) {
-      S_mxsr2msrPopulatorVoiceHandler
-        voiceHandler =
-          fCurrentStaffVoiceHandlersMap
-            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
-
-      if (voiceHandler->getTupletsStackSize ()) { // JMI v0.9.71
-        voiceHandler->
-          finalizeTupletStackTopAndPopItFromTupletsStack (
-            inputLineNumber,
-            "visitEnd (S_note& elt)");
-      }
-      else {
-        std::stringstream ss;
-
-        ss <<
-          "==> tuplet stop with no corresponding tuplet start" <<
-          ", on note: " << fCurrentNote->asString ();
-
-        mxsr2msrError (
-    //     mxsr2msrWarning (
-          gServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          ss.str ());
-      }
-    }
-  }
-}
-
-void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny (
+S_mxsrStaffChangeEvent mxsr2msrSkeletonPopulator::fetchStaffChangeTakeOffIfAny (
   int inputLineNumber)
 {
 /*
@@ -25347,74 +25150,253 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny (
           fNoteSequentialNumber         : N1
           fNoteEventStaffNumber         : S2
           fNoteEventVoiceNumber         : V1
+          fStaffChangeEventKind         : kEventStaffChangeTakeOff
+          fTakeOffInputStartLineNumber  : L120
           fLandingInputStartLineNumber  : L132
           staff number change           : S2 ->> S1
         ]
 */
 
-//   if (thereIsAStaffChange (inputLineNumber)) { // EVENTS
-  if (fCurrentNoteStaffChangeEvent) { // EVENTS
-//   if (thereIsAStaffChange) {
-    // yes, KEEP APPENDING MUSIC TO fCurrentPartStaffVoicesMap [fCurrentRecipientStaffNumber], NO CHANGE ACTUALLY!
+//   fCurrentTakeOffStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+//   fCurrentLandingStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+
+  // fetch the staff change landing event upon this note if any
+  gLog << "--------> fetchStaffChangeTakeOffIfAny() fCurrentNoteSequentialNumber: " << fCurrentNoteSequentialNumber << std::endl;
+  gLog << "--------> fetchStaffChangeTakeOffIfAny() fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber << std::endl;
+
+  S_mxsrStaffChangeEvent
+    staffChangeTakeOffEvent =
+      fKnownEventsCollection.
+        fetchStaffChangeTakeOffAtNoteSequentialNumber (
+          fCurrentNoteSequentialNumber);
+
+  if (staffChangeTakeOffEvent) {
+    // there is a staff change landing
+#ifdef MF_TRACE_IS_ENABLED
+    gLog <<
+      "There is a staff change fetchStaffChangeTakeOffIfAny():" <<
+      std::endl <<
+      staffChangeTakeOffEvent <<
+      "fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
+      std::endl <<
+      std::endl;
+
+//     if (false && gTraceOahGroup->getTraceStaffChangesBasics ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "There is a staff change FII " <<
+//         staffChangeTakeOffEvent->getStaffChangeEventKind () <<
+//         " event at fCurrentNoteSequentialNumber: " <<
+//         fCurrentNoteSequentialNumber <<
+//         ": " <<
+//         staffChangeTakeOffEvent->asString () <<
+//         ", line " <<
+//         staffChangeTakeOffEvent->getEventInputStartLineNumber ();
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+#endif // MF_TRACE_IS_ENABLED
+
+//     fCurrentTakeOffStaffNumber =
+//       staffChangeTakeOffEvent->
+//         getTakeOffStaffNumber ();
+//     fCurrentLandingStaffNumber =
+//       staffChangeTakeOffEvent->
+//         getLandingStaffNumber ();
 
     int
       noteSequentialNumber =
-        fCurrentNoteStaffChangeEvent->
+        staffChangeTakeOffEvent->
           getNoteSequentialNumber ();
 
     int
       eventInputStartLineNumber =
-        fCurrentNoteStaffChangeEvent->
-          getEventInputStartLineNumber (),
-      eventInputEndLineNumber =
-        fCurrentNoteStaffChangeEvent->
-          getEventInputEndLineNumber ();
+        staffChangeTakeOffEvent->
+          getEventInputStartLineNumber ();
+//       eventInputEndLineNumber =
+//         staffChangeTakeOffEvent->
+//           getEventInputEndLineNumber ();
 
     int
       takeOffStaffNumber =
-        fCurrentNoteStaffChangeEvent->
+        staffChangeTakeOffEvent->
+          getTakeOffStaffNumber ();
+//      landingStaffNumber =
+//         staffChangeTakeOffEvent->
+//           getLandingStaffNumber ();
+//
+//     int
+//       noteEventVoiceNumber =
+//         staffChangeTakeOffEvent->
+//           getNoteEventVoiceNumber ();
+
+
+// #ifdef MF_TRACE_IS_ENABLED
+//     gLog <<
+//       "There is a staff change FII:" <<
+//       std::endl <<
+//       staffChangeTakeOffEvent <<
+//       std::endl <<
+//       "fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
+//       std::endl;
+//
+// 		if (false && gTraceOahGroup->getTraceStaffChangesBasics ()) {
+// 			std::stringstream ss;
+//
+// 			ss <<
+// 				"===> There is a staff change fetchStaffChangeTakeOffIfAny() " <<
+// 				staffChangeTakeOffEvent->getStaffChangeEventKind () <<
+// 				" event:" <<
+// 				'\n' <<
+// 				"eventInputStartLineNumber: " <<
+// 				eventInputStartLineNumber <<
+// 				"eventInputEndLineNumber: " <<
+// 				eventInputEndLineNumber <<
+//
+// 				", noteSequentialNumber: " <<
+// 				noteSequentialNumber <<
+//
+// 				", takeOffStaffNumber: " <<
+// 				takeOffStaffNumber <<
+// 				", landingStaffNumber: " <<
+// 				landingStaffNumber <<
+//
+// 				", noteEventVoiceNumber: " <<
+// 				noteEventVoiceNumber <<
+//
+// 				", line " << eventInputStartLineNumber;
+//
+// 			gWaeHandler->waeTrace (
+// 				__FILE__, __LINE__,
+// 				ss.str ());
+// 		}
+// #endif // MF_TRACE_IS_ENABLE
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+    // sanity checks
+    if (noteSequentialNumber != fCurrentNoteSequentialNumber) {
+      std::stringstream ss;
+
+      ss <<
+        "noteSequentialNumber: " <<
+        noteSequentialNumber <<
+        " is not equal to fCurrentNoteSequentialNumber: " <<
+        fCurrentNoteSequentialNumber;
+
+      mfAssert (
+        __FILE__, __LINE__,
+        false,
+        ss.str ());
+    }
+
+    if (eventInputStartLineNumber != fCurrentNoteInputStartLineNumber) {
+      std::stringstream ss;
+
+      ss <<
+        "eventInputStartLineNumber: " <<
+        eventInputStartLineNumber <<
+        " is not equal to fCurrentNoteInputStartLineNumber: " <<
+        fCurrentNoteInputStartLineNumber;
+
+      mfAssert (
+        __FILE__, __LINE__,
+        false,
+        ss.str ());
+    }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+    // the recipient staff number is now that of the take off note
+    fCurrentRecipientStaffNumber =
+      takeOffStaffNumber; // JMI v0.9.72
+  gLog << "--------> fCurrentRecipientStaffNumber fetchStaffChangeTakeOffIfAny(): " << fCurrentRecipientStaffNumber << std::endl;
+
+//     // fetch the current note's staff
+//     S_msrStaff
+//       takeOffStaff =
+//         fCurrentPartStavesVector [takeOffStaffNumber],
+//       landingStaff =
+//         fCurrentPartStavesVector [landingStaffNumber]; // JMI v0.9.72
+  }
+
+  fOnGoingStaffChange = true;
+
+  return staffChangeTakeOffEvent;
+}
+
+void mxsr2msrSkeletonPopulator::createStaffChange (
+  int                    inputLineNumber,
+  S_mxsrStaffChangeEvent staffChangeTakeOffEvent)
+{
+  if (staffChangeTakeOffEvent) {
+    int
+      noteSequentialNumber =
+        staffChangeTakeOffEvent->
+          getNoteSequentialNumber ();
+
+    int
+      eventInputStartLineNumber =
+        staffChangeTakeOffEvent->
+          getEventInputStartLineNumber ();
+//       eventInputEndLineNumber =
+//         staffChangeTakeOffEvent->
+//           getEventInputEndLineNumber ();
+
+    int
+      takeOffStaffNumber =
+        staffChangeTakeOffEvent->
           getTakeOffStaffNumber (),
      landingStaffNumber =
-        fCurrentNoteStaffChangeEvent->
+        staffChangeTakeOffEvent->
           getLandingStaffNumber ();
 
     int
       noteEventVoiceNumber =
-        fCurrentNoteStaffChangeEvent->
+        staffChangeTakeOffEvent->
           getNoteEventVoiceNumber ();
 
 
 #ifdef MF_TRACE_IS_ENABLED
-		if (true || gTraceOahGroup->getTraceStaffChangesBasics ()) {
-			std::stringstream ss;
+    gLog <<
+      "There is a staff change createStaffChange():" <<
+      std::endl <<
+      staffChangeTakeOffEvent <<
+      "fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
+      std::endl <<
+      std::endl;
 
-			ss <<
-				"===> There is a staff change " <<
-				fCurrentNoteStaffChangeEvent->getStaffChangeEventKind () <<
-				" event FOO:" <<
-				'\n' <<
-				"eventInputStartLineNumber: " <<
-				eventInputStartLineNumber <<
-				"eventInputEndLineNumber: " <<
-				eventInputEndLineNumber <<
-
-				", noteSequentialNumber: " <<
-				noteSequentialNumber <<
-
-				", takeOffStaffNumber: " <<
-				takeOffStaffNumber <<
-				", landingStaffNumber: " <<
-				landingStaffNumber <<
-
-				", noteEventVoiceNumber: " <<
-				noteEventVoiceNumber <<
-
-				", line " << eventInputStartLineNumber;
-
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
-		}
+// 		if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
+// 			std::stringstream ss;
+//
+// 			ss <<
+// 				"===> There is a staff change createStaffChange() " <<
+// 				staffChangeTakeOffEvent->getStaffChangeEventKind () <<
+// 				" event:" <<
+// 				'\n' <<
+// 				"eventInputStartLineNumber: " <<
+// 				eventInputStartLineNumber <<
+// 				"eventInputEndLineNumber: " <<
+// 				eventInputEndLineNumber <<
+//
+// 				", noteSequentialNumber: " <<
+// 				noteSequentialNumber <<
+//
+// 				", takeOffStaffNumber: " <<
+// 				takeOffStaffNumber <<
+// 				", landingStaffNumber: " <<
+// 				landingStaffNumber <<
+//
+// 				", noteEventVoiceNumber: " <<
+// 				noteEventVoiceNumber <<
+//
+// 				", line " << eventInputStartLineNumber;
+//
+// 			gWaeHandler->waeTrace (
+// 				__FILE__, __LINE__,
+// 				ss.str ());
+// 		}
 #endif // MF_TRACE_IS_ENABLE
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -25469,27 +25451,17 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny (
     // append the voice staff change to the event's voice number
     // before the note itself is appended
     fCurrentPartStaffVoicesMap
-      [fCurrentNoteStaffNumber][noteEventVoiceNumber]->
+      [fCurrentRecipientStaffNumber][noteEventVoiceNumber]->
         appendVoiceStaffChangeToVoice (
           voiceStaffChange);
-
-    // the recipient staff for current note is the take off staff,
-    // not the landing, current note staff
-    fCurrentRecipientStaffNumber =
-      takeOffStaffNumber; // JMI v0.9.72
   }
-
-//   else {
-//     fCurrentRecipientStaffNumber =
-//       fCurrentNoteStaffNumber; // JMI v0.9.72 already done!
-//   }
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "--> handleStaffChangeIfAny()" <<
+      "--> fetchStaffChangeTakeOffIfAny()" <<
   		", fCurrentRecipientStaffNumber: " <<
   		mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
   		", fCurrentNoteVoiceNumber: " <<
@@ -25501,6 +25473,56 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeIfAny (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+}
+
+void mxsr2msrSkeletonPopulator::finalizeTupletIfAny (
+  int inputLineNumber)
+{
+  if (fCurrentNoteBelongsToATuplet) {
+    Bool aTupletIsStopping (false);
+
+    switch (fCurrentTupletTypeKind) {
+      case msrTupletTypeKind::kTupletTypeNone:
+        break;
+      case msrTupletTypeKind::kTupletTypeStart:
+        break;
+      case msrTupletTypeKind::kTupletTypeContinue:
+        break;
+      case msrTupletTypeKind::kTupletTypeStop:
+        aTupletIsStopping = true;
+        break;
+      case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
+        break;
+    } // switch
+
+    if (aTupletIsStopping) {
+      S_mxsr2msrPopulatorVoiceHandler
+        voiceHandler =
+          fCurrentStaffVoiceHandlersMap
+            [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
+
+      if (voiceHandler->getTupletsStackSize ()) { // JMI v0.9.71
+        voiceHandler->
+          finalizeTupletStackTopAndPopItFromTupletsStack (
+            inputLineNumber,
+            "visitEnd (S_note& elt)");
+      }
+      else {
+        std::stringstream ss;
+
+        ss <<
+          "==> tuplet stop with no corresponding tuplet start" <<
+          ", on note: " << fCurrentNote->asString ();
+
+        mxsr2msrError (
+    //     mxsr2msrWarning (
+          gServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+    }
+  }
 }
 
 void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
@@ -25535,47 +25557,72 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     Staff values are numbers, with 1 referring to the top-most staff in a part.
   */
 
-//   if (fCurrentRecipientStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
-//     // there is no previous note telling us that
-//     fCurrentRecipientStaffNumber = fCurrentNoteStaffNumber;
-//   }
-
-  // set fCurrentRecipientStaffNumber
-  fCurrentRecipientStaffNumber =
-    fCurrentNoteStaffNumber; // default value JMI v0.9.72
-
-  // handle staff change if any
-  if (fCurrentNoteStaffChangeEvent) {
-    handleStaffChangeIfAny (
-      elt->getInputStartLineNumber ());
-  }
-
   // attach the pending dal segnos, if any,
   // to the ** previous ** note or chord
   // fetch current note's voice
   attachThePendingDalSegnosIfAny ();
+
+  // the recipient staff number is that of the current note by default
+  fCurrentRecipientStaffNumber =
+    fCurrentNoteStaffNumber;
+  gLog << "--------> fCurrentRecipientStaffNumber visitEnd (S_note& elt): " << fCurrentRecipientStaffNumber << std::endl;
+
+  // handle staff change if any,
+  // in which case fCurrentRecipientStaffNumber will be updated
+  // needed before the note is created
+  S_mxsrStaffChangeEvent
+    staffChangeTakeOffEvent =
+      fetchStaffChangeTakeOffIfAny (
+        elt->getInputStartLineNumber ());
+
+
+//   // fetch the chords events upon this note if any
+//   fCurrentNoteChordEvent =
+//     fKnownEventsCollection.
+//       fetchChordEventAtNoteSequentialNumber (
+//         fCurrentNoteSequentialNumber);
+//
+//   if (fCurrentNoteChordEvent) {
+//     // there is a chord event
+//     switch (fCurrentNoteChordEvent->getChordEventKind ()) {
+//       case mxsrChordEventKind::kEventChord_NONE:
+//         break;
+//       case mxsrChordEventKind::kEventChordBegin:
+//         fCurrentNoteBelongsToAChord = true;
+//         break;
+//       case mxsrChordEventKind::kEventChordEnd:
+//         fCurrentNoteBelongsToAChord = true;
+//         break;
+//     } // switch
+//   }
+//
+//   // fetch the tuplet events range upon this note if any
+//   std::multimap <int, S_mxsrTupletEvent>::const_iterator
+//     firstTupletEventInRange,
+//     lastTupletEventInRange;
+//
+//   fKnownEventsCollection.fetchTupletEventsRange (
+//     fCurrentNoteSequentialNumber,
+//     firstTupletEventInRange,
+//     lastTupletEventInRange);
+//
+//   for (
+//     std::multimap <int, S_mxsrTupletEvent>::const_iterator it =
+//      firstTupletEventInRange;
+//     it != lastTupletEventInRange;
+//     ++it
+//   ) {
+//     S_mxsrTupletEvent tupletEvent = it->second;
+//   } // for
+
 
   // create the current note
   fCurrentNote =
     createNote (
       elt->getInputStartLineNumber ());
 
-//   gLog <<
-//     "createNote(): " <<
-//     std::endl <<
-//     fCurrentNote <<
-//     std::endl;
-
   // remember current note as the previous measure element // JMI v0.9.67 LATER???
   fPreviousMeasureElement = fCurrentNote;
-
-  // set fCurrentPartStaffVoicesMap
-//         [fCurrentNoteVoiceNumber] if no other note precedes this one,
-  // or a backup of forward markup precedes it
-//   if (! fCurrentPartStaffVoicesMap
-//         [fCurrentNoteVoiceNumber]) {
-    // fetch the voice to append the note to
-//   }
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -25624,35 +25671,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
   handleCurrentNote (
     elt->getInputStartLineNumber ());
-
-//   // set current staff number to insert into if needed JMI ??? v0.9.68
-//   if (fCurrentNoteStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (
-//       gTraceOahGroup->getTraceNotes ()
-//         ||
-//       gTraceOahGroup->getTraceStaffChanges ()
-//     ) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "Setting fCurrentNoteStaffNumber to " <<
-//         mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-//         ", in voice \"" <<
-//         fCurrentPartStaffVoicesMap
-//         [fCurrentNoteVoiceNumber]->getVoiceName () <<
-//         "\"" <<
-//         ", line " << elt->getInputStartLineNumber () <<
-//         std::endl;
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //     fCurrentNoteStaffNumber = fCurrentNoteStaffNumber;
-//   }
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -25837,6 +25855,13 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // may append skip syllables to the notes // JMI v0.9.70
   if (! gGlobalMxsr2msrOahGroup->getIgnoreLyrics ()) {
     handleLyricsForCurrentNoteAfterItHasBeenHandled ();
+  }
+
+  // create a staff change if relevant
+  if (staffChangeTakeOffEvent) {
+    createStaffChange (
+      elt->getInputStartLineNumber (),
+      staffChangeTakeOffEvent);
   }
 
 	// set current note MusicXML staff number as previous for the next note
@@ -26890,7 +26915,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
 
       // append fCurrentNote to the current voice to append to
   #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNotes ()) {
+      if (true || gTraceOahGroup->getTraceNotes ()) {
         std::stringstream ss;
 
         ss <<
@@ -26903,6 +26928,10 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
               getVoiceName () <<
           "\"";
 
+        ss <<
+          ", fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
+          ", fCurrentNoteVoiceNumber: " << fCurrentNoteVoiceNumber;
+
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -26910,6 +26939,8 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
   #endif // MF_TRACE_IS_ENABLED
 
       ++gIndenter;
+
+  gLog << "--------}> fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber << std::endl;
 
       fCurrentPartStaffVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
@@ -27377,518 +27408,6 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
     fCurrentSyllableElementsList.size ();
 }
 
-//______________________________________________________________________________
-// void mxsr2msrSkeletonPopulator::handleChordMemberNote_EVENTS (
-//   const S_msrNote& newChordNote)
-// {
-//   int newChodeNoteInputLineNumber =
-//     newChordNote->getInputStartLineNumber ();
-//
-//   // set newChordNote kind as a chord member
-//   newChordNote->
-//     setNoteKind (
-//       msrNoteKind::kNoteRegularInChord);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChords ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Handling a note belonging to a chord" <<
-//       ", newChordNote:" <<
-//       std::endl;
-//
-//     ++gIndenter;
-//
-//     gLog << newChordNote <<
-//       std::endl;
-//
-//     --gIndenter;
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   if (fCurrentNoteIsARest) {
-//     mxsr2msrError (
-//       gServiceRunData->getInputSourceName (),
-//       newChodeNoteInputLineNumber,
-//       __FILE__, __LINE__,
-//       "a rest cannot belong to a chord");
-//   }
-//
-// //   // fetch current voice
-// //   int staffNumberToUse = -1001; // JMI SUPERFLOUS??? v0.9.69
-// //     // to avoid compiler warning for uninitialized variable
-// //
-// //   switch (fCurrentStaffChangeKind) {
-// //     case msrStaffChangeKind::kStaffChange_UNKNOWN_:
-// //       staffNumberToUse =
-// //         fCurrentNoteStaffNumber; // JMI fCurrentNoteStaffNumber;
-// //       break;
-// //     case msrStaffChangeKind::kStaffChangeChordMemberNote:
-// //       if (fCurrentNoteIsCrossStaves) {
-// //         staffNumberToUse =
-// //           fCurrentNoteStaffNumber;
-// //     // JMI    staffNumberToUse = fCurrentNoteStaffNumber; // keep it!
-// //       }
-// //       else {
-// //    //   JMI   staffNumberToUse = fCurrentChordStaffNumber;
-// //         staffNumberToUse =
-// //           fCurrentNoteStaffNumber;
-// //       }
-// //       break;
-// //     case msrStaffChangeKind::kStaffChangeOtherNote:
-// //       staffNumberToUse =
-// //         fCurrentNoteStaffNumber;
-// //      // JMI staffNumberToUse = fCurrentNoteStaffNumber;
-// //       break;
-// //   } // switch
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChords ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       std::endl <<
-// //       ", fCurrentChordStaffNumber: " <<
-// //       mfStaffNumberAsString (fCurrentChordStaffNumber) <<
-//       ", fPreviousNoteStaffNumber: " <<
-//       mfStaffNumberAsString (fPreviousNoteStaffNumber) <<
-//       ", fCurrentNoteStaffNumber: " <<
-//       mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-// //       ", staffNumberToUse: " <<
-// //       staffNumberToUse <<
-//       ", line " << newChodeNoteInputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     fCurrentNoteVoiceNumber != K_VOICE_NUMBER_UNKNOWN_,
-//     "fCurrentNoteVoiceNumber is unknown");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChords ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Handling a chord member note" <<
-//       ", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
-//       fCurrentPartStaffVoicesMap
-//         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
-//           getVoiceName () <<
-//       "\", fOnGoingChord: " <<
-//       fOnGoingChord <<
-//       ", line " << newChodeNoteInputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChordsDetails ()) {
-//     gLog <<
-//       std::endl <<
-//       "======================= handleChordMemberNote_EVENTS" <<
-//       ", line " << newChodeNoteInputLineNumber <<
-//       std::endl;
-//     fCurrentPart->print (gLog);
-//     gLog <<
-//       "=======================" <<
-//       std::endl << std::endl;
-//
-// /* JMI
-//     if (fCurrentGraceNotesGroupNotes) {
-//       gLog <<
-//         fCurrentGraceNotesGroupNotes;
-//     }
-//     else {
-// //       gLog <<
-// //         "fCurrentGraceNotesGroupNotes is NULL"; // JMI
-//     }
-// */
-//
-//     gLog << std::endl;
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // should a chord be created?
-//   if (! fOnGoingChord) {
-//     // newChordNote is the second note of the chord to be created
-//
-//     // fetch this chord's first note,
-//     // i.e. the last handled note for this voice
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceChords ()) {
-//       printVoicesLastMetNoteMap (
-//         newChodeNoteInputLineNumber,
-//         "handleChordMemberNote_EVENTS()");
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //     S_msrNote
-// //       chordFirstNote =
-// //   //      fStaffVoicesLastMetNoteMap [fCurrentPartStaffVoicesMap
-// //         [fCurrentNoteVoiceNumber]]; // JMI v0.9.67
-// //         fStaffVoicesLastMetNoteMap [
-// //           std::make_pair (
-// //             fCurrentNoteStaffNumber,
-// //             fCurrentNoteVoiceNumber)
-// //           ];
-// //       /*
-// //         fCurrentPartStaffVoicesMap
-// //         [fCurrentNoteVoiceNumber]->
-// //           getVoiceLastAppendedNote (); ??? JMI
-// //           */
-// //
-// //     if (! chordFirstNote) {
-// //       std::stringstream ss;
-// //
-// //       ss <<
-// //         "handleChordMemberNote_EVENTS():" <<
-// //         std::endl <<
-// //         "chordFirstNote is null on " <<
-// //         newChordNote->asString () <<
-// //         std::endl <<
-// //         "fCurrentNoteStaffNumber: " << mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-// //         std::endl <<
-// //         "fCurrentNoteVoiceNumber: " <<
-// // mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
-// //         ", line " << newChodeNoteInputLineNumber;
-// //
-// //       mxsr2msrInternalError (
-// //         gServiceRunData->getInputSourceName (),
-// //         newChodeNoteInputLineNumber,
-// //         __FILE__, __LINE__,
-// //         ss.str ());
-// //     }
-// //
-// // #ifdef MF_TRACE_IS_ENABLED
-// //     if (gTraceOahGroup->getTraceChords ()) {
-// //       gLog <<
-// //         "mxsr2msrSkeletonPopulator::handleChordMemberNote_EVENTS()" <<
-// //         ", chordFirstNote:" <<
-// //         std::endl;
-// //
-// //       ++gIndenter;
-// //
-// //       gLog <<
-// //         chordFirstNote <<
-// //         std::endl;
-// //
-// //       --gIndenter;
-// //     }
-// // #endif // MF_TRACE_IS_ENABLED
-// //
-// //     // fetch chord first note's kind before createChordFromItsFirstNote(),
-// //     // because the latter will change it to kChordMemberNote or
-// //     // msrNoteKind::kNoteInChordInGraceNotesGroup
-// //     msrNoteKind
-// //       savedChordFirstNoteKind =
-// //         chordFirstNote->getNoteKind ();
-// //
-// // #ifdef MF_TRACE_IS_ENABLED
-// //     if (gTraceOahGroup->getTraceChords ()) {
-// //       gLog <<
-// //         "Handling a note belonging to a chord" <<
-// //         ", savedChordFirstNoteKind: " <<
-// //         msrNoteKindAsString (savedChordFirstNoteKind) <<
-// //         std::endl;
-// //
-// //       ++gIndenter;
-// //
-// //       gLog <<
-// //         chordFirstNote <<
-// //         std::endl;
-// //
-// //       --gIndenter;
-// //     }
-// // #endif // MF_TRACE_IS_ENABLED
-//
-// //     // create the current chord from its first note // EVENTS
-// //     fCurrentChord =
-// //       createChordFromItsFirstNote (
-// //         newChodeNoteInputLineNumber,
-// //         chordFirstNote,
-// //         msrNoteKind::kNoteRegularInChord);
-//
-//     fPreviousMeasureElement = fCurrentChord;
-//
-// //     // handle chord's first note
-// //     switch (savedChordFirstNoteKind) {
-// //       case msrNoteKind::kNoteRestInMeasure:
-// //         break;
-// //
-// //       case msrNoteKind::kNoteSkipInMeasure:
-// //         break;
-// //
-// //       case msrNoteKind::kNoteUnpitchedInMeasure:
-// //       case msrNoteKind::kNoteRegularInMeasure:
-// //         // remove last handled (previous current) note from the current voice
-// // #ifdef MF_TRACE_IS_ENABLED
-// //         if (gTraceOahGroup->getTraceChords ()) {
-// //           std::stringstream ss;
-// //
-// //           ss <<
-// //             "Removing chord first note " <<
-// //             chordFirstNote->asShortString () <<
-// //             ", line " << newChodeNoteInputLineNumber <<
-// //             ", from voice \"" <<
-// // fCurrentPartStaffVoicesMap
-// //         [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
-// //             ", line " << newChodeNoteInputLineNumber;
-// //
-// //           gWaeHandler->waeTrace (
-// //             __FILE__, __LINE__,
-// //             ss.str ());
-// //         }
-// // #endif // MF_TRACE_IS_ENABLED
-// //
-// // #ifdef MF_TRACE_IS_ENABLED
-// //         if (gTraceOahGroup->getTraceChordsDetails ()) {
-// //           gLog <<
-// //             std::endl << std::endl <<
-// //             "&&&&&&&&&&&&&&&&&& fCurrentPart contents before removeNoteFromVoice:" <<
-// //             std::endl <<
-// //             fCurrentPart <<
-// //             std::endl << std::endl <<
-// //             "&&&&&&&&&&&&&&&&&&" <<
-// //             std::endl <<
-// //             std::endl << std::endl;
-// //         }
-// // #endif // MF_TRACE_IS_ENABLED
-// //
-// // #ifdef MF_TRACE_IS_ENABLED
-// //         if (gTraceOahGroup->getTraceStaffChanges ()) {
-// //           std::stringstream ss;
-// //
-// //           ss <<
-// //             std::endl <<
-// //             ", fPreviousNoteStaffNumber: " <<
-// //             mfStaffNumberAsString (fPreviousNoteStaffNumber)
-// //             ", fCurrentNoteStaffNumber: " <<
-// //             mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-// //             ", line " << newChodeNoteInputLineNumber;
-// //
-// //           gWaeHandler->waeTrace (
-// //             __FILE__, __LINE__,
-// //             ss.str ());
-// //         }
-// // #endif // MF_TRACE_IS_ENABLED
-// //
-// //         fCurrentPartStaffVoicesMap
-// //         [fCurrentNoteVoiceNumber]->
-// //           removeNoteFromVoice (
-// //             newChodeNoteInputLineNumber,
-// //             chordFirstNote);
-// //
-// //         // add chord to the voice instead
-// // #ifdef MF_TRACE_IS_ENABLED
-// //         if (gTraceOahGroup->getTraceChordsBasics ()) {
-// //           std::stringstream ss;
-// //
-// //           ss <<
-// //             "Appending chord " << fCurrentChord->asString () <<
-// //             " to voice \"" <<
-// //             fCurrentPartStaffVoicesMap
-//         [
-// //               fCurrentNoteVoiceNumber]->getVoiceName () <<
-// //             "\"";
-// //
-// //           gWaeHandler->waeTrace (
-// //             __FILE__, __LINE__,
-// //             ss.str ());
-// //         }
-// // #endif // MF_TRACE_IS_ENABLED
-// //
-// //         fCurrentPartStaffVoicesMap
-// //         [fCurrentNoteVoiceNumber]->
-// //           appendChordToVoice (
-// //             fCurrentChord);
-// //         break;
-// //
-// //       case msrNoteKind::kNoteInDoubleTremolo:
-// //         {
-// //           /* JMI
-// //           // fetch chordFirstNote's sounding divisions
-// //           int chordFirstNoteSoundingWholeNotes = // JMI
-// //             chordFirstNote->
-// //               getMeasureElementSoundingWholeNotes ();
-// //               */
-// //
-// //           /* JMI
-// //           // updating chord's divisions // JMI
-// // #ifdef MF_TRACE_IS_ENABLED
-// //           if (gTraceOahGroup->getTraceNotes () || gTraceOahGroup->getTraceChords ()) {
-// //             gLog <<
-// //               "Updating sounding divisions for double tremolo chord " <<
-// //               " " << chord <<
-// //               " to " << chordFirstNoteSoundingWholeNotes <<
-// //               " in voice \"" <<
-// //               fCurrentPartStaffVoicesMap
-// //         [fCurrentNoteVoiceNumber]->getVoiceName () <<
-// //               "\"" <<
-// //               std::endl;
-// //           }
-// // #endif // MF_TRACE_IS_ENABLED
-// //
-// //           chord->
-// //             setMeasureElementSoundingWholeNotes ( // ??? JMI
-// //               chordFirstNoteSoundingWholeNotes,
-// //               "mxsr2msrSkeletonPopulator::handleChordMemberNote_EVENTS()");
-// //               */
-// //
-// //           if (chordFirstNote->getNoteIsFirstNoteInADoubleTremolo ()) {
-// //             // replace double tremolo's first element by chord
-// //             fCurrentDoubleTremolo->
-// //               setDoubleTremoloChordFirstElement (
-// //                 fCurrentChord);
-// //           }
-// //
-// //           else if (chordFirstNote->getNoteIsSecondNoteInADoubleTremolo ()) {
-// //             // replace double tremolo's second element by chord
-// //             fCurrentDoubleTremolo->
-// //               setDoubleTremoloChordSecondElement (
-// //                 fCurrentChord);
-// //           }
-// //
-// //           else {
-// //             std::stringstream ss;
-// //
-// //             ss <<
-// //               "chord first note " <<
-// //               chordFirstNote->asShortString () <<
-// //               " belongs to a double tremolo, but is not marked as such" <<
-// //               ", line " << newChodeNoteInputLineNumber;
-// //
-// //             mxsr2msrInternalError (
-// //               gServiceRunData->getInputSourceName (),
-// //               newChodeNoteInputLineNumber,
-// //               __FILE__, __LINE__,
-// //               ss.str ());
-// //           }
-// //         }
-// //         break;
-// //
-// //       case msrNoteKind::kNoteRegularInGraceNotesGroup:
-// //       case msrNoteKind::kNoteSkipInGraceNotesGroup:
-// //       case msrNoteKind::kNoteInChordInGraceNotesGroup:
-// //       /* JMI
-// //         // remove last handled (previous current) note from the current voice
-// // #ifdef MF_TRACE_IS_ENABLED
-// //         if (gTraceOahGroup->getTraceChords ()) {
-// //           std::stringstream ss;
-// //
-// //           ss <<
-// //             "Removing chord first note " <<
-// //             chordFirstNote->asShortString () <<
-// //             ", line " << newChodeNoteInputLineNumber <<
-// //             ", from voice \"" <<
-// // fCurrentPartStaffVoicesMap
-// //         [fCurrentNoteVoiceNumber]->getVoiceName () << "\"" <<
-// //             ", line " << newChodeNoteInputLineNumber;
-// //
-// //           gWaeHandler->waeTrace (
-// //             __FILE__, __LINE__,
-// //             ss.str ());
-// //         }
-// // #endif // MF_TRACE_IS_ENABLED
-// //
-// //         fCurrentPartStaffVoicesMap
-// //         [fCurrentNoteVoiceNumber]->
-// //           removeNoteFromVoice (
-// //             newChodeNoteInputLineNumber,
-// //             chordFirstNote);
-// // */
-// //         break;
-// //
-// //       case msrNoteKind::kNoteRegularInChord:
-// //         // error? JMI
-// //         break;
-// //
-// //       case msrNoteKind::kNoteRegularInTuplet:
-// //       case msrNoteKind::kNoteRestInTuplet:
-// //       case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-// //       case msrNoteKind::kNoteUnpitchedInTuplet:
-// //         break;
-// //
-// //       case msrNoteKind::kNote_UNKNOWN_:
-// //         break;
-// //     } // switch
-//
-//     // account for chord being built
-//     fOnGoingChord = true;
-//   }
-//
-//   else {
-//     // is newChordNote in the same chord but in another voice,
-//     // implying it is a member of a crossstaff chord?
-//
-// /* JMI
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceChords ()) {
-//       gLog <<
-//         "is newChordNote in the same chord but in another voice?" <<
-//         ", fCurrentPartStaffVoicesMap
-//         [fCurrentNoteVoiceNumber]: " <<
-//         fCurrentPartStaffVoicesMap
-//         [fCurrentNoteVoiceNumber]->getVoiceName () <<
-//         std::endl;
-//
-//       printVoicesCurrentChordMap ();
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-// */
-//
-//   // register newChordNote as another member of chord
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceChords ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "Adding another note " <<
-//         newChordNote->asString() <<
-//         ", line " << newChodeNoteInputLineNumber <<
-//         " to current chord in voice " <<
-//         fCurrentPartStaffVoicesMap
-//           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
-//             getVoiceName ();
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//   }
-//
-//   // add newChordNote to current chord
-//   fCurrentChord->
-//     addNoteToChord_EVENTS (
-//       newChordNote,
-//       fCurrentPartStaffVoicesMap
-//         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]);
-//
-//   // copy newChordNote's elements if any to the current chord
-//   copyNoteElementsIfAnyToChord (
-//     newChordNote,
-//     fCurrentChord);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChordsDetails ()) {
-//     printCurrentChord ();
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-//
 void mxsr2msrSkeletonPopulator::handleChordMemberNote (
   const S_msrNote& newChordNote)
 {
@@ -32543,17 +32062,6 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
 
 
-  // chords events // EVENTS
-//   fCurrentNoteChordEvent =
-//     fKnownEventsCollection.
-//       fetchChordEventAtNoteSequentialNumber (
-//         fCurrentNoteSequentialNumber);
-//
-//   fCurrentNoteTupletEvent =
-//     fKnownEventsCollection.
-//       fetchTupletEventAtNoteSequentialNumber (
-//         fCurrentNoteSequentialNumber);
-//
 
 //     std::stringstream ss;
 //

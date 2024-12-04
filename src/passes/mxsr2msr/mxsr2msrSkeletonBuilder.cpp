@@ -709,8 +709,8 @@ void mxsr2msrSkeletonBuilder::browseMxsr (
     // browse the MXSR
     browser.browse (*theMxsr);
 
-		// sort the fResultingEventsCollection all notes events list
-		fResultingEventsCollection.sortTheAllMxsrEventsList ();
+		// sort the fResultingEventsCollection MXSR events list
+		fResultingEventsCollection.sortTheMxsrEventsLists ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMxsrEvents ()) {
@@ -5246,11 +5246,10 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 		// let's create two staff change eventSequentialNumber
 		// one for take off upon the previous note
 		// and the other one for landing upon the current note
-		fResultingEventsCollection.registerStaffChangeEvent ( // CHORD_TUP JMI v0.9.72
+		fResultingEventsCollection.registerStaffChangeTakeOff ( // CHORD_TUP JMI v0.9.72
 			fPreviousNoteSequentialNumber,
 			fPreviousNoteStaffNumber,
 			changingVoiceNumber,							// the voice that changes staff
-			mxsrStaffChangeEventKind::kEventStaffChangeTakeOff,
 			takeOffStaffNumber,
 			landingStaffNumber,
 			takeOffNoteStartInputLineNumber,
@@ -5258,11 +5257,10 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 			fPreviousNoteStartInputLineNumber,
 			fPreviousNoteEndInputLineNumber);
 
-		fResultingEventsCollection.registerStaffChangeEvent ( // CHORD_TUP JMI v0.9.72
+		fResultingEventsCollection.registerStaffChangeLanding ( // CHORD_TUP JMI v0.9.72
 			fCurrentNoteSequentialNumber,
 			fCurrentNoteStaffNumber,
 			changingVoiceNumber,							// the voice that changes staff
-			mxsrStaffChangeEventKind::kEventStaffChangeLanding,
 			takeOffStaffNumber,
 			landingStaffNumber,
 			takeOffNoteStartInputLineNumber,

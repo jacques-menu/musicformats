@@ -1560,6 +1560,9 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleCurrentNote (
                                 int inputLineNumber);
 
+    S_msrNote                 createNote (
+                                int inputLineNumber);
+
     // detailed notes handling
     void                      attachPendingGraceNotesGroupToNoteIfRelevant (
                                 int inputLineNumber);
@@ -1567,9 +1570,6 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleStandAloneNoteOrRest ();
 
     void                      handleGraceNote (); // JMI v0.9.72
-
-    void                      handleChordMemberNote_EVENTS (
-                                const S_msrNote& newChordNote);
 
     void                      handleChordMemberNote (
                                 const S_msrNote& newChordNote);
@@ -1603,9 +1603,22 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentDisplayStaffNumber;
 //     S_msrVoice                fCurrentRecipientVoice;
 
-    // fCurrentNoteStaffChangeEvent contains the staff change event
+    // fCurrentNoteStaffChangeTakeOff contains the staff change event
     // that occurs on a take off note, if any
-    S_mxsrStaffChangeEvent    fCurrentNoteStaffChangeEvent; // EVENTS
+    S_mxsrStaffChangeEvent    fCurrentNoteStaffChangeTakeOff; // EVENTS
+
+//     int                       fCurrentTakeOffStaffNumber;
+//     int                       fCurrentLandingStaffNumber;
+
+    S_mxsrStaffChangeEvent    fetchStaffChangeTakeOffIfAny (
+                                int inputLineNumber);
+
+    void                      handleStaffChangeakeOff (
+                                int inputLineNumber);
+
+    void                      createStaffChange (
+                                int                    inputLineNumber,
+                                S_mxsrStaffChangeEvent staffChangeTakeOffEvent);
 
     // an ongoing staff change is indicated by ??? JMI v0.9.72
     //   fCurrentDisplayStaffNumber != fCurrentRecipientStaffNumber
@@ -1620,7 +1633,7 @@ class EXP mxsr2msrSkeletonPopulator :
 //     Bool                      thereIsAStaffChange (
 //                                 int inputLineNumber);
 
-    // print v0.9.72
+    // print
     // ------------------------------------------------------
 
 		void											displayStaffAndVoiceInformation (
@@ -1636,14 +1649,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
 //     void                      attachPendingFiguredBassesToCurrentNote ( // JMI v0.9.67
 //                                 int               inputLineNumber);
-
-    void                      attachThePendingDalSegnosIfAny ();
-
-    S_msrNote                 createNote (
-                                int inputLineNumber);
-
-    void                      handleStaffChangeIfAny (
-                                int inputLineNumber);
 
     void                      finalizeTupletIfAny (
                                 int inputLineNumber);
@@ -1719,6 +1724,8 @@ class EXP mxsr2msrSkeletonPopulator :
     std::list <S_msrSegno>    fPendingSegnosList;
 
     void                      attachPendingSegnosToCurrentNote ();
+
+    void                      attachThePendingDalSegnosIfAny ();
 
 //     void                      convertWordsToSegno (
 //                                 int                inputLineNumber,

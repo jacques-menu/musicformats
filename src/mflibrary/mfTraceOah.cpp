@@ -2372,7 +2372,8 @@ R"(Voices basics)",
     traceVoicesBooleanAtom =
       oahThreeBooleansAtom::create (
         "trace-voices", "tvoices",
-R"(Voices)",
+R"(Voices)
+This option implies '-trace-voices-basics, -tvoicesb'.)",
         "fTraceVoices",
         fTraceVoices,
         traceVoicesBasicsBooleanAtom,
@@ -2391,8 +2392,8 @@ R"(Voices)",
     traceVoicesDetailsBooleanAtom =
       oahFourBooleansAtom::create (
         "trace-voices-details", "tvoicesd",
-R"(Voices with more details (quite verbose)..
-This option implies '-trace-voices, -tvoices'.)",
+R"(Voices with more details (quite verbose)...
+This option implies '-trace-voices-basics, -tvoicesb' and '-trace-voices, -tvoices'.)",
         "fTraceVoicesDetails",
         fTraceVoicesDetails,
         traceVoicesBasicsBooleanAtom,
