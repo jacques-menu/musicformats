@@ -125,24 +125,6 @@
           <line>4</line>
           </clef>
         </attributes>
-      <note default-x="286.96" default-y="-10">
-        <rest measure="yes"/>
-        <duration>4</duration>
-        <voice>1</voice>
-        <staff>1</staff>
-        </note>
-      <backup>
-        <duration>4</duration>
-        </backup>
-      <note default-x="286.96" default-y="-115">
-        <rest measure="yes"/>
-        <duration>4</duration>
-        <voice>5</voice>
-        <staff>2</staff>
-        </note>
-      <backup>
-        <duration>4</duration>
-        </backup>
       <note default-x="82.97" default-y="-210">
         <pitch>
           <step>A</step>
@@ -209,35 +191,8 @@
           <tied type="start" orientation="under" placement="below"/>
           </notations>
         </note>
-      <backup>
-        <duration>4</duration>
-        </backup>
-      <note default-x="286.96" default-y="-260">
-        <rest measure="yes"/>
-        <duration>4</duration>
-        <voice>11</voice>
-        <staff>3</staff>
-        </note>
       </measure>
     <measure number="2" width="452.48">
-      <note default-x="214.24" default-y="-10">
-        <rest measure="yes"/>
-        <duration>4</duration>
-        <voice>1</voice>
-        <staff>1</staff>
-        </note>
-      <backup>
-        <duration>4</duration>
-        </backup>
-      <note default-x="214.24" default-y="-115">
-        <rest measure="yes"/>
-        <duration>4</duration>
-        <voice>5</voice>
-        <staff>2</staff>
-        </note>
-      <backup>
-        <duration>4</duration>
-        </backup>
       <note default-x="12.5" default-y="-120">
         <pitch>
           <step>C</step>
@@ -303,15 +258,6 @@
         <notations>
           <tied type="stop"/>
           </notations>
-        </note>
-      <backup>
-        <duration>4</duration>
-        </backup>
-      <note default-x="214.24" default-y="-250">
-        <rest measure="yes"/>
-        <duration>4</duration>
-        <voice>11</voice>
-        <staff>3</staff>
         </note>
       <barline location="right">
         <bar-style>light-heavy</bar-style>

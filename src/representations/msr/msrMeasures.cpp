@@ -4806,7 +4806,7 @@ void msrMeasure::handleEmptyMeasure (
     voice->
       displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
-        "handleEmptyMeasure 2 measure has 0 measure whole notes");
+        "handleEmptyMeasure () 1 measure has 0 measure whole notes");
 
     std::stringstream ss;
 
@@ -4839,7 +4839,7 @@ void msrMeasure::handleEmptyMeasure (
   voice->
     incrementVoiceCurrentMeasurePuristNumber (
       inputLineNumber,
-      "handleEmptyMeasure 3 msrMeasureKind::kMeasureKindMusicallyEmpty");
+      "handleEmptyMeasure () 2 msrMeasureKind::kMeasureKindMusicallyEmpty");
 
   // reset voice whole notes since last regular measure end  // JMI ??? v0.9.71
   voice->

@@ -8368,6 +8368,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 //   handleBackup (
 //     elt->getInputStartLineNumber ());
 
+  // staff changes handling
+  fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
+
   fOnGoingBackup = false;
 }
 
@@ -8538,6 +8541,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
     appendPaddingNoteToVoice (
       elt->getInputStartLineNumber (),
       forwardStepLength);
+
+  // staff changes handling
+  fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 
   fOnGoingForward = false;
 }
@@ -10788,8 +10794,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
     addEmptyMeasuresStringToIntMap =
       gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ();
 
+  // should we add empty measures after current measures?
   if (addEmptyMeasuresStringToIntMap.size ()) {
-    // should we add empty measures after current measures?
     std::map <std::string,int>::const_iterator
       it =
         addEmptyMeasuresStringToIntMap.find (
@@ -10834,6 +10840,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       // fRemainingMeasureRestsCounter JMI ???
     }
   }
+
+  // staff changes handling
+  fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 }
 
 // void mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
@@ -24388,8 +24397,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
   // register note as the last one in its voice
   fCurrentStaffVoiceHandlersMap
     [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
-      setLastMetNoteInVoice (
-        note);
+      setLastMetNoteInVoice (note);
 
   return note;
 }
@@ -25220,10 +25228,10 @@ S_mxsrStaffChangeEvent mxsr2msrSkeletonPopulator::fetchStaffChangeTakeOffIfAny (
 //         staffChangeTakeOffEvent->
 //           getEventInputEndLineNumber ();
 
-    int
-      takeOffStaffNumber =
-        staffChangeTakeOffEvent->
-          getTakeOffStaffNumber ();
+//     int
+//       takeOffStaffNumber =
+//         staffChangeTakeOffEvent->
+//           getTakeOffStaffNumber ();
 //      landingStaffNumber =
 //         staffChangeTakeOffEvent->
 //           getLandingStaffNumber ();
@@ -25308,10 +25316,14 @@ S_mxsrStaffChangeEvent mxsr2msrSkeletonPopulator::fetchStaffChangeTakeOffIfAny (
     }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-    // the recipient staff number is now that of the take off note
-    fCurrentRecipientStaffNumber =
-      takeOffStaffNumber; // JMI v0.9.72
-  gLog << "--------> fCurrentRecipientStaffNumber fetchStaffChangeTakeOffIfAny(): " << fCurrentRecipientStaffNumber << std::endl;
+//     // the recipient staff number is now that of the take off note
+//     fCurrentRecipientStaffNumber =
+//       takeOffStaffNumber; // JMI v0.9.72
+
+  gLog <<
+    "--------> fCurrentRecipientStaffNumber fetchStaffChangeTakeOffIfAny(): " <<
+    "fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
+    std::endl;
 
 //     // fetch the current note's staff
 //     S_msrStaff
@@ -25562,10 +25574,17 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // fetch current note's voice
   attachThePendingDalSegnosIfAny ();
 
-  // the recipient staff number is that of the current note by default
-  fCurrentRecipientStaffNumber =
-    fCurrentNoteStaffNumber;
-  gLog << "--------> fCurrentRecipientStaffNumber visitEnd (S_note& elt): " << fCurrentRecipientStaffNumber << std::endl;
+  // staff changes handling
+  if (fCurrentRecipientStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
+    // we're at the beginning of the part of right after a <backup /> or <forward />,
+    // so the new current recipient staff number is that of the current note
+    fCurrentRecipientStaffNumber =
+      fCurrentNoteStaffNumber;
+  }
+  gLog <<
+    "--------> fCurrentRecipientStaffNumber visitEnd (S_note& elt): " <<
+    "fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
+    std::endl;
 
   // handle staff change if any,
   // in which case fCurrentRecipientStaffNumber will be updated

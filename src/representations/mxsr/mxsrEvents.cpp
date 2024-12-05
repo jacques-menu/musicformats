@@ -391,8 +391,10 @@ void mxsrStaffChangeEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "staff change" <<
-       " : S" << fTakeOffStaffNumber << " ->> S" << fLandingStaffNumber <<
+    "staff change" << " : " <<
+     "S" << fTakeOffStaffNumber << "/" << "V" << fNoteEventVoiceNumber <<
+     " ->> " <<
+     "S" << fLandingStaffNumber << "/" << "V" << fNoteEventVoiceNumber <<
     std::endl;
 
   --gIndenter;
