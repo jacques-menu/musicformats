@@ -29,6 +29,8 @@ EXP void mfAssert (
   Bool               condition,
   const std::string& messageIfFalse);
 
+EXP void mfAssertFalse (int identifier); // for debugging
+
 //______________________________________________________________________________
 // assert with input location
 

@@ -1571,7 +1571,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      handleGraceNote (); // JMI v0.9.72
 
-    void                      handleChordMemberNote (
+    void                      handleRegularChordMemberNote (
                                 const S_msrNote& newChordNote);
 
     void                      handleTupletMemberNote (
@@ -1610,11 +1610,7 @@ class EXP mxsr2msrSkeletonPopulator :
 //     int                       fCurrentTakeOffStaffNumber;
 //     int                       fCurrentLandingStaffNumber;
 
-    S_mxsrStaffChangeEvent    fetchStaffChangeTakeOffIfAny (
-                                int inputLineNumber);
-
-    void                      handleStaffChangeakeOff (
-                                int inputLineNumber);
+    void                      handleStaffChangeTakeOffEventIfAny ();
 
     void                      createStaffChange (
                                 int                    inputLineNumber,
@@ -1650,8 +1646,8 @@ class EXP mxsr2msrSkeletonPopulator :
 //     void                      attachPendingFiguredBassesToCurrentNote ( // JMI v0.9.67
 //                                 int               inputLineNumber);
 
-    void                      finalizeTupletIfAny (
-                                int inputLineNumber);
+    // populate current note
+    // ------------------------------------------------------
 
     void                      populateCurrentNoteBeforeItIsHandled (
                                 int inputLineNumber);
@@ -2479,11 +2475,11 @@ class EXP mxsr2msrSkeletonPopulator :
     std::list <S_msrBeam>     fPendingBeamsList;
 
     void                      attachPendingBeamsToCurrentNote ();
-                                /*
+
     void                      copyNoteBeamsListToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
-                                */
+
     void                      appendNoteBeamsListLinksToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
@@ -2524,7 +2520,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // chords handling
     // ------------------------------------------------------
 
-//     S_mxsrChordEvent          fCurrentNoteChordEvent; // EVENTS
+    S_mxsrChordEvent          fCurrentNoteChordEvent;
     Bool                      fCurrentNoteBelongsToAChord;
 
 /* JMI v0.9.70
@@ -2536,10 +2532,17 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrChord                fCurrentChord;
     Bool                      fOnGoingChord;
 
-    S_msrChord                createChordFromItsFirstNote (
-                                int              inputLineNumber,
-                                const S_msrNote& chordFirstNote,
-                                msrNoteKind      noteKind);
+    Bool                      fCurrentChordHasToBePopulatedFromItsFIrstNote;
+
+    void                      populateCurrentChordFromNote (
+                                S_msrNote note);
+
+//     S_msrChord                createChordFromItsFirstNote (
+//                                 int              inputLineNumber,
+//                                 const S_msrNote& chordFirstNote,
+//                                 msrNoteKind      noteKind);
+
+    void                      handleChordEventIfAny ();
 
 /* JMI
     void                      registerVoiceCurrentChordInMap (
@@ -2594,6 +2597,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
 
     Bool                      fCurrentNoteBelongsToATuplet;
+    Bool                      fATupletIsEnding;
 
     // a tuplet stop may occur in a chord before the latter's last note, hence:
     Bool                      fThereIsAPendingTupletStop; // CHORD_TUP
@@ -2628,6 +2632,8 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrTuplet               createTupletUponItsFirstNote (
                                 const S_msrNote& firstNote);
 
+    void                      handleTupletEventsIfAny ();
+
     void                      handleTupletStart (
                                 const S_msrTuplet& tuplet,
                                 const S_msrVoice&  currentNoteVoice);
@@ -2639,6 +2645,9 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleTupletStop (
                                 const S_msrNote&  note,
                                 const S_msrVoice& currentNoteVoice);
+
+    void                      finalizeTupletIfAny (
+                                int inputLineNumber);
 
 //     void                      reduceTupletStackTop (
 //                                 const S_msrNote&  note,
@@ -2724,9 +2733,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     int                       fCurrentForwardStaffNumber;
     int                       fCurrentForwardVoiceNumber;
-
-//     void                      handleForward (
-//                                 int inputLineNumber);
 
 
     // current ongoing values display

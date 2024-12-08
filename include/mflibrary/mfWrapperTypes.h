@@ -9,14 +9,16 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfWrapperTypes___
-#define ___mfWrapperTypes___
+#ifndef ___mfTypes___
+#define ___mfTypes___
 
 #include <string>
 #include <ostream>
 #include <sstream>
 
 #include "mfBool.h"
+#include "msrNotesDurations.h"
+#include "msrMoments.h"
 
 #include "exports.h"
 
@@ -26,16 +28,16 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 template <typename T, const std::string& printPrefix>
-class EXP mfValueWrapper
+class EXP mfValue
 {
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mfValueWrapper (T value);
+                          mfValue (T value);
 
-    virtual               ~mfValueWrapper ();
+    virtual               ~mfValue ();
 
   public:
 
@@ -56,10 +58,12 @@ class EXP mfValueWrapper
     explicit operator     T () const;
 
     Bool                  operator == (
-                            const mfValueWrapper<T, printPrefix>& otherValueWrapper) const;
+                            const mfValue <T, printPrefix>&
+                              otherValue) const;
 
     Bool                  operator != (
-                            const mfValueWrapper<T, printPrefix>& otherValueWrapper) const;
+                            const mfValue <T, printPrefix>&
+                              otherValue) const;
 
     // print
     // ------------------------------------------------------
@@ -78,40 +82,43 @@ class EXP mfValueWrapper
 };
 
 template <typename T, const std::string& printPrefix>
-EXP std::ostream& operator << (std::ostream& os, const mfValueWrapper<T, printPrefix>& elt);
+EXP std::ostream& operator << (
+  std::ostream& os,
+  const mfValue <T, printPrefix>&
+    elt);
 
 template <typename T, const std::string& printPrefix>
-mfValueWrapper<T, printPrefix>::mfValueWrapper (T value)
+mfValue <T, printPrefix>::mfValue (T value)
   : fValue (value),
     fPrintPrefix (printPrefix)
 {}
 
 template <typename T, const std::string& printPrefix>
-mfValueWrapper<T, printPrefix>::~mfValueWrapper ()
+mfValue <T, printPrefix>::~mfValue ()
 {}
 
 template <typename T, const std::string& printPrefix>
-mfValueWrapper<T, printPrefix>::operator T () const
+mfValue <T, printPrefix>::operator T () const
 {
   return fValue;
 }
 
 template <typename T, const std::string& printPrefix>
-Bool mfValueWrapper<T, printPrefix>::operator == (
-  const mfValueWrapper& otherInputLineNumber) const
+Bool mfValue <T, printPrefix>::operator == (
+  const mfValue& otherInputLineNumber) const
 {
   return fValue == otherInputLineNumber.fValue;
 }
 
 template <typename T, const std::string& printPrefix>
-Bool mfValueWrapper<T, printPrefix>::operator != (
-  const mfValueWrapper& otherInputLineNumber) const
+Bool mfValue <T, printPrefix>::operator != (
+  const mfValue& otherInputLineNumber) const
 {
   return fValue != otherInputLineNumber.fValue;
 }
 
 template <typename T, const std::string& printPrefix>
-std::string mfValueWrapper<T, printPrefix>::asString () const
+std::string mfValue <T, printPrefix>::asString () const
 {
   std::stringstream ss;
 
@@ -122,13 +129,185 @@ std::string mfValueWrapper<T, printPrefix>::asString () const
 }
 
 template <typename T, const std::string& printPrefix>
-void mfValueWrapper<T, printPrefix>::print (std::ostream& os) const
+void mfValue <T, printPrefix>::print (std::ostream& os) const
 {
   os << asString ();
 }
 
 template <typename T, const std::string& printPrefix>
-EXP std::ostream& operator << (std::ostream& os, const mfValueWrapper<T, printPrefix>& elt)
+EXP std::ostream& operator << (
+  std::ostream&                   os,
+  const mfValue <T, printPrefix>& elt)
+{
+  elt.print (os);
+  return os;
+}
+
+//______________________________________________________________________________
+/*
+A non-type template-parameter shall have one of the following (optionally cv-qualified) types:
+  integral or enumeration type,
+  pointer to object or pointer to function,
+  lvalue reference to object or lvalue reference to function,
+  pointer to member,
+  std::nullptr_t.
+
+template <std::string * temp> //pointer to object
+void f()
+{
+   cout << *temp << endl;
+}
+
+template <std::string & temp> //reference to object
+void g()
+{
+     cout << temp << endl;
+     temp += "...appended some string";
+}
+
+std::string s; //must not be local as it must have external linkage!
+
+int main() {
+        s = "can assign values locally";
+        f<&s>();
+        g<s>();
+        cout << s << endl;
+        return 0;
+}
+*/
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+class EXP mfValueWithNeutralValue
+{
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfValueWithNeutralValue ();
+
+                          mfValueWithNeutralValue (T value);
+
+    virtual               ~mfValueWithNeutralValue ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    T                     getValue () const
+                              { return fValue; }
+
+    std::string           getPrintPrefix () const
+                              { return fPrintPrefix; }
+
+  public:
+
+    // operators
+    // ------------------------------------------------------
+
+    explicit operator     T () const;
+
+    Bool                  operator == (
+                            const mfValueWithNeutralValue <T, printPrefix, neutralValue, neutralValueString>&
+                              otherValue) const;
+
+    Bool                  operator != (
+                            const mfValueWithNeutralValue <T, printPrefix, neutralValue, neutralValueString>&
+                              otherValue) const;
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const;
+
+    void                  print (std::ostream& os) const;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    T                     fValue;
+    std::string           fPrintPrefix;
+
+    T                     fNeutralValue;
+    std::string           fNeutralValueString;
+};
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+EXP std::ostream& operator << (
+  std::ostream&                                                                      os,
+  const mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>& elt);
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::mfValueWithNeutralValue ()
+  : fValue (neutralValue),
+    fPrintPrefix (printPrefix),
+    fNeutralValue (neutralValue),
+    fNeutralValueString (neutralValueString)
+{}
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::mfValueWithNeutralValue (T value)
+  : fValue (value),
+    fPrintPrefix (printPrefix),
+    fNeutralValue (neutralValue),
+    fNeutralValueString (neutralValueString)
+{}
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::~mfValueWithNeutralValue ()
+{}
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::operator T () const
+{
+  return fValue;
+}
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+Bool mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::operator == (
+  const mfValueWithNeutralValue& otherInputLineNumber) const
+{
+  return fValue == otherInputLineNumber.fValue;
+}
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+Bool mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::operator != (
+  const mfValueWithNeutralValue& otherInputLineNumber) const
+{
+  return fValue != otherInputLineNumber.fValue;
+}
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+std::string mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::asString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    fPrintPrefix;
+
+  if (fValue == fNeutralValue) {
+    ss << fNeutralValueString;
+  }
+  else {
+    ss << fValue;
+  }
+
+  return ss.str ();
+}
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+void mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::print (std::ostream& os) const
+{
+  os << asString ();
+}
+
+template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+EXP std::ostream& operator << (
+  std::ostream&                                                                      os,
+  const mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>& elt)
 {
   elt.print (os);
   return os;
@@ -136,18 +315,18 @@ EXP std::ostream& operator << (std::ostream& os, const mfValueWrapper<T, printPr
 
 //______________________________________________________________________________
 template <typename T, const std::string& printSeparator>
-class EXP mfRangeWrapper
+class EXP mfRange
 {
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mfRangeWrapper (
+                          mfRange (
                             T rangeStart,
                             T rangeEnd);
 
-    virtual               ~mfRangeWrapper ();
+    virtual               ~mfRange ();
 
   public:
 
@@ -184,11 +363,13 @@ class EXP mfRangeWrapper
 };
 
 template <typename T, const std::string& printSeparator>
-EXP std::ostream& operator << (std::ostream& os, const mfRangeWrapper<T, printSeparator>& elt);
+EXP std::ostream& operator << (
+  std::ostream&                            os,
+  const mfRange <T, printSeparator>& elt);
 
 
 template <typename T, const std::string& printSeparator>
-mfRangeWrapper<T, printSeparator>::mfRangeWrapper (
+mfRange <T, printSeparator>::mfRange (
   T rangeStart,
   T rangeEnd)
     : fRangeStart (rangeStart),
@@ -197,11 +378,11 @@ mfRangeWrapper<T, printSeparator>::mfRangeWrapper (
 {}
 
 template <typename T, const std::string& printSeparator>
-mfRangeWrapper<T, printSeparator>::~mfRangeWrapper ()
+mfRange <T, printSeparator>::~mfRange ()
 {}
 
 template <typename T, const std::string& printSeparator>
-std::string mfRangeWrapper<T, printSeparator>::asString () const
+std::string mfRange <T, printSeparator>::asString () const
 {
   std::stringstream ss;
 
@@ -218,273 +399,123 @@ std::string mfRangeWrapper<T, printSeparator>::asString () const
 }
 
 template <typename T, const std::string& printSeparator>
-void mfRangeWrapper<T, printSeparator>::print (std::ostream& os) const
+void mfRange <T, printSeparator>::print (std::ostream& os) const
 {
   os << asString ();
 }
 
 template <typename T, const std::string& printSeparator>
-EXP std::ostream& operator << (std::ostream& os, const mfRangeWrapper<T, printSeparator>& elt)
+EXP std::ostream& operator << (
+  std::ostream&                      os,
+  const mfRange <T, printSeparator>& elt)
 {
   elt.print (os);
   return os;
 }
 
 //______________________________________________________________________________
-const std::string kInputLineNumberPrefix ("L_");
-typedef mfValueWrapper<int, kInputLineNumberPrefix> mfInputLineNumber;
+// input line numbers
+const int K_MF_INPUT_LINE_UNKNOWN_ = 0;
+const std::string
+  kInputLineNumberPrefix ("L_"),
+  kInputLineNumberNeutralValueString ("*Unknown*");
 
-const std::string kStaffNumberPrefix ("S_");
-typedef mfValueWrapper<int, kStaffNumberPrefix> mfStaffNumber;
-
-const std::string kVoiceNumberPrefix ("V_");
-typedef mfValueWrapper<int, kVoiceNumberPrefix> mfVoiceNumber;
-
-const std::string kInputLocationRangePrefix ("..");
-typedef mfRangeWrapper<mfInputLineNumber, kInputLocationRangePrefix> mfInputLocationRange;
-
-
-
-//                           mfInputLocation (
-//                             mfInputLineNumber inputStartLineNumber,
-//                             mfInputLineNumber inputEndLineNumber);
-
-
-// class EXP mfInputLocation
-// {
-//   public:
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           mfInputLocation (
-//                             mfInputLineNumber inputStartLineNumber,
-//                             mfInputLineNumber inputEndLineNumber);
-//
-//     virtual               ~mfInputLocation ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//     mfInputLineNumber     getInputStartLineNumber () const
-//                               { return fInputStartLineNumber; }
-//
-//     mfInputLineNumber     getInputEndLineNumber () const
-//                               { return fInputEndLineNumber; }
-//
-//   public:
-//
-//     // print
-//     // ------------------------------------------------------
-//
-//     std::string           asString () const;
-//
-//     void                  print (std::ostream& os) const;
-//
-//   private:
-//
-//     mfInputLineNumber     fInputStartLineNumber;
-//     mfInputLineNumber     fInputEndLineNumber;
-// };
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfInputLocation& elt);
-//
-// //______________________________________________________________________________
-// mfInputLocation::mfInputLocation (
-//   mfInputLineNumber inputStartLineNumber,
-//   mfInputLineNumber inputEndLineNumber)
-//     : fInputStartLineNumber (
-//         inputStartLineNumber),
-//       fInputEndLineNumber (
-//         inputEndLineNumber)
-// {}
-//
-// mfInputLocation::~mfInputLocation ()
-// {}
-//
-// std::string mfInputLocation::asString () const
-// {
-//   std::stringstream ss;
-//
-//   mfInputLineNumber
-//     startInputLineNumber = fInputStartLineNumber.getValue (),
-//     endInputLineNumber = fInputEndLineNumber.getValue ();
-//
-//   if (startInputLineNumber == endInputLineNumber) {
-//     ss << "line " << startInputLineNumber;
-//   }
-//   else {
-//     ss << "lines " << startInputLineNumber << ".." << endInputLineNumber;
-//   }
-//
-//   return ss.str ();
-// }
-//
-// void mfInputLocation::print (std::ostream& os) const
-// {
-//   os << asString ();
-// }
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfInputLocation& elt)
-// {
-//   elt.print (os);
-//   return os;
-// }
+typedef mfValueWithNeutralValue
+  <int, kInputLineNumberPrefix, K_MF_INPUT_LINE_UNKNOWN_, kInputLineNumberNeutralValueString>
+    mfInputLineNumber;
 
 //______________________________________________________________________________
-// class EXP mfInputLineNumber
-// {
-//   public:
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           mfInputLineNumber (int value);
-//
-//     virtual               ~mfInputLineNumber ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//     int                   getValue () const
-//                               { return fValue; }
-//
-//   public:
-//
-//     // operators
-//     // ------------------------------------------------------
-//
-//     explicit operator     int () const;
-//
-//     Bool                  operator == (
-//                             const mfInputLineNumber& otherInputLineNumber) const;
-//
-//   private:
-//
-//     int                   fValue;
-// };
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfInputLineNumber& elt);
+// input locations
+const std::string
+  kInputLocationRangePrefix (".."),
+  kInputLocationNeutralValueString ("*Unknown*");
 
-// //______________________________________________________________________________
-// class EXP mfStaffNumber
-// {
-//   public:
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           mfStaffNumber (int value);
-//
-//     virtual               ~mfStaffNumber ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//     int                   getValue () const
-//                               { return fValue; }
-//
-//   public:
-//
-//     // operators
-//     // ------------------------------------------------------
-//
-//     explicit operator     int () const;
-//
-//     Bool                  operator == (
-//                             const mfStaffNumber& otherStaffNumber) const;
-//
-//   private:
-//
-//     int                   fValue;
-// };
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfStaffNumber& elt);
-//
-// //______________________________________________________________________________
-// class EXP mfVoiceNumber
-// {
-//   public:
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           mfVoiceNumber (int value);
-//
-//     virtual               ~mfVoiceNumber ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//     int                   getValue () const
-//                               { return fValue; }
-//
-//   public:
-//
-//     // operators
-//     // ------------------------------------------------------
-//
-//     explicit operator     int () const;
-//
-//     Bool                  operator == (
-//                             const mfVoiceNumber& otherVoiceNumber) const;
-//
-//   private:
-//
-//     int                   fValue;
-// };
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfVoiceNumber& elt);
-//
-// //______________________________________________________________________________
-// class EXP mfMeasureNumber
-// {
-//   public:
-//
-//     // constructors/destructor
-//     // ------------------------------------------------------
-//
-//                           mfMeasureNumber (const std::string& value);
-//
-//     virtual               ~mfMeasureNumber ();
-//
-//   public:
-//
-//     // set and get
-//     // ------------------------------------------------------
-//
-//     std::string           getValue () const
-//                               { return fValue; }
-//   public:
-//
-//     // operators
-//     // ------------------------------------------------------
-//
-//     explicit operator     std::string () const;
-//
-//     Bool                  operator == (
-//                             const mfMeasureNumber& otherMeasureNumber) const;
-//
-//   private:
-//
-//     std::string           fValue;
-// };
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfMeasureNumber& elt);
+typedef mfRange
+  <mfInputLineNumber, kInputLocationRangePrefix>
+    mfInputLocationRange;
 
+//______________________________________________________________________________
+// staff numbers
+const int K_STAFF_NUMBER_UNKNOWN_ = 0;
+const std::string
+  kStaffNumberPrefix ("S_"),
+  kStaffNumberNeutralValueString ("*Unknown*");
 
+typedef mfValueWithNeutralValue
+  <int, kStaffNumberPrefix, K_STAFF_NUMBER_UNKNOWN_, kInputLineNumberNeutralValueString>
+   mfStaffNumber;
 
+//______________________________________________________________________________
+// voice numbers
+const int K_VOICE_NUMBER_UNKNOWN_ = 0;
+const std::string
+  kVoiceNumberPrefix ("V_"),
+  kVoiceNumberNeutralValueString ("*Unknown*");
 
+typedef mfValueWithNeutralValue
+  <int, kVoiceNumberPrefix, K_VOICE_NUMBER_UNKNOWN_, kVoiceNumberNeutralValueString>
+    mfVoiceNumber;
+
+//______________________________________________________________________________
+// stanzas numbers
+const std::string K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_";
+// const std::string K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
+const std::string
+  kStanzaNumberPrefix ("ST_"),
+  kStanzaNumberNeutralValueString ("*Unknown*");
+
+typedef mfValueWithNeutralValue
+  <std::string, kStanzaNumberPrefix, K_STANZA_NUMBER_UNKNOWN_, kStanzaNumberNeutralValueString>
+    mfStanzaNumber;
+
+// template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+
+//______________________________________________________________________________
+// measure numbers
+const std::string K_MEASURE_NUMBER_UNKNOWN_ = "K_MEASURE_NUMBER_UNKNOWN_";
+const std::string
+  kMeasureNumberPrefix ("ST_"),
+  kMeasureNumberNeutralValueString ("*Unknown*");
+
+typedef mfValueWithNeutralValue
+  <std::string, kMeasureNumberPrefix, K_MEASURE_NUMBER_UNKNOWN_, kMeasureNumberNeutralValueString>
+    mfMeasureNumber;
+
+//______________________________________________________________________________
+// whole notes durations
+const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = 0;
+const msrWholeNotes K_WHOLE_NOTES_UNKNOWN____ = // JMI v0.9.72 duplicates K_WHOLE_NOTES_UNKNOWN_ to be fixed
+  msrWholeNotes (0, 1);
+
+const std::string
+  kWholeNotePrefix ("WN_"),
+  kWholeNoteNeutralValueString ("*Unknown*");
+
+typedef mfValueWithNeutralValue
+  <msrWholeNotes, kWholeNotePrefix, K_WHOLE_NOTES_UNKNOWN____, kWholeNoteNeutralValueString>
+    mfWohleNotes;
+
+//______________________________________________________________________________
+// moments
+const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_ =
+  msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+
+const msrMoment K_MOMENT_UNKNOWN_ =
+  msrMoment (
+    K_MEASURE_POSITION_UNKNOWN_,
+    K_MEASURE_POSITION_UNKNOWN_);
+
+const std::string
+  kMomentPrefix ("WN_"),
+  kMomentNeutralValueString ("*Unknown*");
+
+typedef mfValueWithNeutralValue
+  <msrMoment, kMomentPrefix, K_MOMENT_UNKNOWN_, kMomentNeutralValueString>
+    mfMoment;
+
+//______________________________________________________________________________
+void testWrapperTypes ();
 
 }
 
-
-#endif // ___mfWrapperTypes___
+#endif // ___mfTypes___
