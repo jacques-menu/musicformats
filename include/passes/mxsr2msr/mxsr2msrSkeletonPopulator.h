@@ -1361,11 +1361,11 @@ class EXP mxsr2msrSkeletonPopulator :
     // clef, key and time signature handling
     // ------------------------------------------------------
 
-    S_msrClefKeyTimeSignatureGroup
-                              fCurrentClefKeyTimeSignatureGroup;
+//     S_msrClefKeyTimeSignatureGroup
+//                               fCurrentClefKeyTimeSignatureGroup;
     int                       fCurrentAttributesInputLineNumber;
 
-    Bool                      fOnGoingClefKeyTimeSignatureGroup;
+//     Bool                      fOnGoingClefKeyTimeSignatureGroup;
 
     // clef handling
     // ------------------------------------------------------
@@ -2524,7 +2524,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // chords handling
     // ------------------------------------------------------
 
-    S_mxsrChordEvent          fCurrentNoteChordEvent; // EVENTS
+//     S_mxsrChordEvent          fCurrentNoteChordEvent; // EVENTS
     Bool                      fCurrentNoteBelongsToAChord;
 
 /* JMI v0.9.70

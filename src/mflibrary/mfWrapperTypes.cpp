@@ -18,134 +18,34 @@
 namespace MusicFormats
 {
 
-// //______________________________________________________________________________
-// mfInputLineNumber::mfInputLineNumber (int value)
-// {
-//   fValue = value;
-// }
-//
-// mfInputLineNumber::~mfInputLineNumber ()
-// {}
-//
-// mfInputLineNumber::operator int () const
-// {
-//   return fValue;
-// }
-//
-// Bool mfInputLineNumber::operator == (
-//   const mfInputLineNumber& otherInputLineNumber) const
-// {
-//   return fValue == otherInputLineNumber.fValue;
-// }
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfInputLineNumber& elt)
-// {
-//   os << elt.getValue ();
-//   return os;
-// }
-//
-// //______________________________________________________________________________
-// mfInputLocation::mfInputLocation (
-//   mfInputLineNumber inputStartLineNumber,
-//   mfInputLineNumber inputEndLineNumber)
-//     : fInputStartLineNumber (
-//         inputStartLineNumber),
-//       fInputEndLineNumber (
-//         inputEndLineNumber)
-// {}
-//
-// mfInputLocation::~mfInputLocation ()
-// {}
-//
-// std::string mfInputLocation::asString () const
-// {
-//   std::stringstream ss;
-//
-//   mfInputLineNumber
-//     startInputLineNumber = fInputStartLineNumber.getValue (),
-//     endInputLineNumber = fInputEndLineNumber.getValue ();
-//
-//   if (startInputLineNumber == endInputLineNumber) {
-//     ss << "line " << startInputLineNumber;
-//   }
-//   else {
-//     ss << "lines " << startInputLineNumber << ".." << endInputLineNumber;
-//   }
-//
-//   return ss.str ();
-// }
-//
-// void mfInputLocation::print (std::ostream& os) const
-// {
-//   os << asString ();
-// }
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfInputLocation& elt)
-// {
-//   elt.print (os);
-//   return os;
-// }
-//
-// //______________________________________________________________________________
-// mfStaffNumber::mfStaffNumber (int value)
-// {
-//   fValue = value;
-// }
-//
-// mfStaffNumber::~mfStaffNumber ()
-// {}
-//
-// mfStaffNumber::operator int () const
-// {
-//   return fValue;
-// }
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfStaffNumber& elt)
-// {
-//   os << elt.getValue ();
-//   return os;
-// }
-//
-// //______________________________________________________________________________
-// mfVoiceNumber::mfVoiceNumber (int value)
-// {
-//   fValue = value;
-// }
-//
-// mfVoiceNumber::~mfVoiceNumber ()
-// {}
-//
-// mfVoiceNumber::operator int () const
-// {
-//   return fValue;
-// }
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfVoiceNumber& elt)
-// {
-//   os << elt.getValue ();
-//   return os;
-// }
-//
-// //______________________________________________________________________________
-// mfMeasureNumber::mfMeasureNumber (const std::string& value)
-// {
-//   fValue = value;
-// }
-//
-// mfMeasureNumber::~mfMeasureNumber ()
-// {}
-//
-// mfMeasureNumber::operator std::string () const
-// {
-//   return fValue;
-// }
-//
-// EXP std::ostream& operator << (std::ostream& os, const mfMeasureNumber& elt)
-// {
-//   os << elt.getValue ();
-//   return os;
-// }
+//______________________________________________________________________________
+void testWrapperTypes ()
+{
+  mfInputLineNumber inputLineNumber1 (157);
+  mfInputLineNumber inputLineNumber2 (200);
+
+  mfInputLocationRange inputLocationRange1 (333, 333);
+  mfInputLocationRange inputLocationRange2 (110, 132);
+
+  mfVoiceNumber voiceNumber (5);
+
+//   inputLineNumber1 = staffNumber;
+//   voiceNumber = inputLineNumber2;
+
+  inputLineNumber2 = inputLineNumber1;
+
+  gLog <<
+    "inputLineNumber1: " << inputLineNumber1 <<
+    std::endl <<
+    "inputLocationRange1: " << inputLocationRange1 <<
+    std::endl <<
+    "inputLocationRange2: " << inputLocationRange2 <<
+    std::endl <<
+    "voiceNumber: " << voiceNumber <<
+    std::endl <<
+    "inputLocationRange2.asString (): " << inputLocationRange2.asString () <<
+    std::endl;
+}
 
 
 }
-

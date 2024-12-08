@@ -3293,12 +3293,12 @@ void msrVoice::appendVoiceStaffChangeToVoice (
 void msrVoice::appendNoteToVoice (const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
       "Appending note " <<
-      note->asShortString () <<
+      note->asString () <<
       " to voice \"" << fVoiceName << "\"" <<
       ", line " << note->getInputStartLineNumber ();
 
@@ -3426,13 +3426,13 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 
 void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending note '" <<
-      note->asShortString () <<
-      "' to voice clone \"" << fVoiceName << "\"" <<
+      "Appending note " <<
+      note->asString () <<
+      " to voice clone \"" << fVoiceName << "\"" <<
       ", line " << note->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (

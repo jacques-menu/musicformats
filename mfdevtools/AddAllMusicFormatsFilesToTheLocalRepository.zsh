@@ -125,6 +125,7 @@ function addFmfsl ()
 {
   git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.mfsl
   git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.xml
+  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.musicxml
   git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.bash
 }
 

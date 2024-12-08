@@ -5495,7 +5495,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteRegularInChord:
       if (fOnGoingChord) {
         fCurrentChordClone->
-          addAnotherNoteToChord (
+          addNoteToChord (
             fCurrentNonGraceNoteClone,
             fCurrentVoiceClone);
       }
@@ -5519,7 +5519,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       if (fOnGoingChord) {
         fCurrentChordClone->
-          addAnotherNoteToChord (
+          addNoteToChord (
             fCurrentGraceNoteClone,
             fCurrentVoiceClone);
       }

@@ -3680,7 +3680,15 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
-      // JMI
+//       // JMI v0.9.72
+//       // append a skip to the current voice clone to fill this empty measure
+//       elt->
+//         appendPaddingSkipNoteToMeasure (
+//           elt->getInputStartLineNumber (),
+//           elt->getFullMeasureWholeNotesDuration ());
+
+      doCreateABarCheck = true;
+      doCreateABarNumberCheck = true;
       break;
   } // switch
 
@@ -6691,7 +6699,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       if (fOnGoingChord) {
         // append fCurrentNonGraceNoteClone to fCurrentChordClone
         fCurrentChordClone->
-          addAnotherNoteToChord (
+          addNoteToChord (
             fCurrentNonGraceNoteClone,
             fCurrentVoiceClone);
 
@@ -6724,7 +6732,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       if (fOnGoingChord) {
         // append fCurrentGraceNoteClone to fCurrentVoiceClone
         fCurrentChordClone->
-          addAnotherNoteToChord (
+          addNoteToChord (
             fCurrentGraceNoteClone,
             fCurrentVoiceClone);
       }

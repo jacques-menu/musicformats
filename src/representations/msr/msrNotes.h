@@ -301,14 +301,7 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteHeadParenthesesKind; }
 
     // whole notes
-    void                  setNoteSoundingWholeNotes (
-                            const msrWholeNotes& wholeNotes,
-                            const std::string&   context)
-                              {
-//                                 setMeasureElementSoundingWholeNotes ( v0.9.72 JMI
-//                                   wholeNotes, context);
-                              }
-
+    // sounding whole notes are stored in msrMeasureElement
     void                  setNoteDisplayWholeNotes (
                             const msrWholeNotes& wholeNotes)
                               { fNoteDisplayWholeNotes = wholeNotes; }

@@ -4846,6 +4846,12 @@ void msrMeasure::handleEmptyMeasure (
     setWholeNotesSinceLastRegularMeasureEnd (
       inputLineNumber,
       msrWholeNotes (0, 1));
+
+//   // JMI v0.9.72
+//   // append a skip to this measure to fill it
+//   appendPaddingSkipNoteToMeasure (
+//     inputLineNumber,
+//     fFullMeasureWholeNotesDuration);
 }
 
 void msrMeasure::handleRegularMeasure (

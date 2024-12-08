@@ -2445,8 +2445,8 @@ void mxsr2msrSkeletonBuilder::handePendingTupletsStopsIfAny (
 			pendingTupletStop->getVoiceNumber (),
 			mxsrTupletEventKind::kEventTupletEnd,
 			pendingTupletStop->getTupletNumber (),
-			pendingTupletStop->getEventInputStartLineNumber (),
-			pendingTupletStop->getEventInputEndLineNumber ());
+			inputStartLineNumber,
+			inputStartLineNumber); // should be inputEndLineNumber JMI v0.9.72
 
 		// forget about the pending tuplet stop
 		it = fPendingTupletsStopsMap.erase (it);
@@ -4540,7 +4540,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 
 		fCurrentPart->displayPartStaffVoicesMap (
 			elt->getInputStartLineNumber (),
-			"mxsr2msrSkeletonBuilder::visitEnd(S_part& elt)");
+			"mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)");
 
 		gLog << std::endl << std::endl;
     --gIndenter;
@@ -4878,21 +4878,21 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 			fCurrentNoteBelongsToAChord <<
 			", fPreviousNoteBelongsToAChord: " <<
 			fPreviousNoteBelongsToAChord <<
+			", fPreviousNoteIsATakeOffCandidate: " <<
+			fPreviousNoteIsATakeOffCandidate <<
+      ", line " << elt->getInputStartLineNumber () <<
 			std::endl;
 
 		if (gTraceOahGroup->getTraceTupletsBasics ()) {
+			gLog <<
+				", fCurrentTupletNumber: " <<
+				fCurrentTupletNumber <<
+				std::endl;
+
 			displayPendingTupletsStopsMap (
 				"=====> visitEnd (S_measure& elt)",
 				fCurrentNoteStartInputLineNumber);
 		}
-
-		gLog <<
-// 			", fCurrentTupletTypeKind: " <<
-// 			fCurrentTupletTypeKind <<
-
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
-			std::endl;
 	}
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4933,7 +4933,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
  	// Q_MEASURE
 
 	// handle pending tuplet stops if any, after the chord end if any
-	handePendingTupletsStopsIfAny (fCurrentNoteEndInputLineNumber);
+	handePendingTupletsStopsIfAny (
+		fPreviousNoteEndInputLineNumber);
 
 // 	switch (fCurrentTupletTypeKind) {
 //     case msrTupletTypeKind::kTupletTypeNone:
@@ -5132,41 +5133,6 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 {
 	Bool result;
 
-  // if there is a staff change, we shouldn't create a voice
-  // for the current, landing note
-// #ifdef MF_TRACE_IS_ENABLED
-// 	if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
-// 		std::stringstream ss;
-//
-// 		ss <<
-// 			"===> Is there is a staff change event?" <<
-// 			'\n' <<
-// 			", fCurrentNoteStartInputLineNumber: " <<
-// 			fCurrentNoteStartInputLineNumber <<
-// // 			", fCurrentNoteEndInputLineNumber: " <<
-// // 			fCurrentNoteEndInputLineNumber <<
-//
-// 			", fPreviousNoteStaffNumber: " <<
-// 			fPreviousNoteStaffNumber <<
-// 			", fCurrentNoteStaffNumber: " <<
-// 			fCurrentNoteStaffNumber <<
-//
-// 			", fPreviousNoteVoiceNumber: " <<
-// 			fPreviousNoteVoiceNumber <<
-// 			", fCurrentNoteVoiceNumber: " <<
-// 			fCurrentNoteVoiceNumber <<
-//
-// 			", fPreviousNoteIsATakeOffCandidate: " <<
-// 			fPreviousNoteIsATakeOffCandidate <<
-//
-// 			", line " << fCurrentNoteStartInputLineNumber;
-//
-// 		gWaeHandler->waeTrace (
-// 			__FILE__, __LINE__,
-// 			ss.str ());
-// 	}
-// #endif // MF_TRACE_IS_ENABLED
-
   if (
     fCurrentNoteStaffNumber != fPreviousNoteStaffNumber
       &&
@@ -5183,7 +5149,7 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 			std::stringstream ss;
 
 			ss <<
-				"===> There is a staff change event:" <<
+				"===> handleStaffChangeIfAny(): There is a staff change event:" <<
 				'\n' <<
 				"fCurrentNoteStartInputLineNumber: " <<
 				fCurrentNoteStartInputLineNumber <<
@@ -5230,12 +5196,6 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 					landingStaffNumber,
 					landingVoiceNumber);
 
-//     S_msrStaff
-//     	landingStaff =
-// 				createStaffInCurrentPartIfNotYetDone (
-// 					takeOffNoteStartInputLineNumber,
-// 					landingStaffNumber);
-
     // register a staff change event
     // taking off from the previous note
     // and landing on the current note
@@ -5243,9 +5203,8 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 		// the airplane takes off upon the previous note
 		// and lands upon the current note
 
-		// let's create two staff change eventSequentialNumber
+		// let's create two staff changes
 		// one for take off upon the previous note
-		// and the other one for landing upon the current note
 		fResultingEventsCollection.registerStaffChangeTakeOff ( // CHORD_TUP JMI v0.9.72
 			fPreviousNoteSequentialNumber,
 			fPreviousNoteStaffNumber,
@@ -5257,6 +5216,7 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 			fPreviousNoteStartInputLineNumber,
 			fPreviousNoteEndInputLineNumber);
 
+		// the other one for landing upon the current note
 		fResultingEventsCollection.registerStaffChangeLanding ( // CHORD_TUP JMI v0.9.72
 			fCurrentNoteSequentialNumber,
 			fCurrentNoteStaffNumber,
@@ -5279,7 +5239,7 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
     std::stringstream ss;
 
     ss <<
-    	"--> visitEnd (S_note& elt) 2 (chords):"
+    	"-->registerChordEventIfAny()"
       ", fCurrentNoteStartInputLineNumber: " <<
       fCurrentNoteStartInputLineNumber <<
 
@@ -5301,7 +5261,7 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
       std::endl;
 
     displayPendingTupletsStopsMap (
-    	"=====> visitEnd(S_note& elt) 2",
+    	"=====> visitEnd (S_note& elt) 2",
     	fCurrentNoteStartInputLineNumber);
 
 		gLog <<
@@ -5365,7 +5325,7 @@ void mxsr2msrSkeletonBuilder::registerTupletEventIfAny ()
     std::stringstream ss;
 
     ss <<
-    	"--> visitEnd (S_note& elt) 3 (tuplets):"
+    	"-->registerTupletEventIfAny()"
       ", fCurrentNoteStartInputLineNumber: " <<
       fCurrentNoteStartInputLineNumber <<
 
@@ -5382,7 +5342,7 @@ void mxsr2msrSkeletonBuilder::registerTupletEventIfAny ()
       std::endl;
 
     displayPendingTupletsStopsMap (
-    	"=====> visitEnd(S_note& elt) 3",
+    	"=====> visitEnd (S_note& elt) 3",
     	fCurrentNoteStartInputLineNumber);
 
 		gLog <<
@@ -5428,7 +5388,7 @@ void mxsr2msrSkeletonBuilder::registerTupletEventIfAny ()
 				tupletKind;
 
 // 			displayPendingTupletsStopsMap (
-// 				"=====> visitEnd(S_note& elt) 3",
+// 				"=====> visitEnd (S_note& elt) 3",
 // 				fCurrentNoteStartInputLineNumber);
 
 			gWaeHandler->waeTrace (
@@ -5441,12 +5401,14 @@ void mxsr2msrSkeletonBuilder::registerTupletEventIfAny ()
 		switch (tupletKind) {
 			case msrTupletTypeKind::kTupletTypeNone:
 				// handle pending tuplet stops if any
-				handePendingTupletsStopsIfAny (fCurrentNoteEndInputLineNumber);
+				handePendingTupletsStopsIfAny (
+					fCurrentNoteEndInputLineNumber);
 				break;
 
 			case msrTupletTypeKind::kTupletTypeStart:
 				// handle pending tuplet stops if any
-				handePendingTupletsStopsIfAny (fCurrentNoteEndInputLineNumber);
+				handePendingTupletsStopsIfAny (
+					fCurrentNoteEndInputLineNumber);
 
 				// now register the new tuplet begin event upon the current note
 				fResultingEventsCollection.registerTupletEvent (
@@ -5469,17 +5431,20 @@ void mxsr2msrSkeletonBuilder::registerTupletEventIfAny ()
 				/// since it may occur before the actual last note in the tuplet
 				// it event sequential number is temporary,
 				// it will be set when the tuplet stop event is created
+
+				// the 0 values are temporary and the actual ones will be used later,
+				// when  the tuplet stop event is created by registerTupletEvent()
 				fPendingTupletsStopsMap.insert (
 					std::make_pair (
 						fCurrentNoteSequentialNumber,
 						mxsr2msrPendingTupletStop::create (
-							0, // temporary event, will be set when the tuplet stop event is created
+							0,
 							fCurrentNoteSequentialNumber,
 							fCurrentNoteStaffNumber,
 							fCurrentNoteVoiceNumber,
 							tupletNumber,
-							noteInputStartLineNumber,
-							fCurrentNoteEndInputLineNumber)));
+							0,
+							0)));
 				break;
 
 			case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
@@ -5564,7 +5529,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 				std::endl;
 
 			displayPendingTupletsStopsMap (
-				"=====> visitEnd(S_note& elt) 1",
+				"=====> visitEnd (S_note& elt) 1",
 				fCurrentNoteStartInputLineNumber);
 
 			gLog <<

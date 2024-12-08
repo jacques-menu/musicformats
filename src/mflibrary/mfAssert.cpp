@@ -29,8 +29,6 @@ void mfAssert (
   int                sourceCodeLineNumber,
   Bool               condition,
   const std::string& messageIfFalse)
-//   const std::string  measureNumber,
-//   int                scoreMeasuresNumber)
 {
   if (! condition) {
     gIndenter.resetToZero ();
@@ -66,6 +64,14 @@ void mfAssert (
 
     throw mfAssertException (messageIfFalse);
   }
+}
+
+void mfAssertFalse (int identifier)
+{
+  mfAssert (
+    "__FILE__", identifier,
+    false,
+    "*** mfAssertFalse ***");
 }
 
 //______________________________________________________________________________

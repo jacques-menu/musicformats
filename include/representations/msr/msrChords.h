@@ -64,6 +64,13 @@ class EXP msrChord : public msrTupletElement
   public:
 
     static SMARTP<msrChord> create (
+                            int                  inputLineNumber);
+
+    static SMARTP<msrChord> create (
+                            int                  inputLineNumber,
+                            const S_msrMeasure&  upLinkToMeasure);
+
+    static SMARTP<msrChord> create (
                             int                  inputLineNumber,
                             const S_msrMeasure&  upLinkToMeasure,
                             const msrWholeNotes& chordSoundingWholeNotes,
@@ -86,6 +93,13 @@ class EXP msrChord : public msrTupletElement
 
     // constructors/destructor
     // ------------------------------------------------------
+
+                          msrChord (
+                            int                  inputLineNumber);
+
+                          msrChord (
+                            int                  inputLineNumber,
+                            const S_msrMeasure&  upLinkToMeasure);
 
                           msrChord (
                             int                  inputLineNumber,
@@ -364,15 +378,11 @@ class EXP msrChord : public msrTupletElement
     S_msrScore            fetchChordUpLinkToScore () const;
 
     // notes
-    void                  addNoteToChord_EVENTS (
-                            const S_msrNote&  note,
-                            const S_msrVoice& voice);
-
     void                  addFirstNoteToChord (
                             const S_msrNote&  note,
                             const S_msrVoice& voice);
 
-    void                  addAnotherNoteToChord (
+    void                  addNoteToChord (
                             const S_msrNote&  note,
                             const S_msrVoice& voice);
 
