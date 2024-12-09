@@ -325,13 +325,94 @@ EXP std::ostream& operator << (std::ostream& os, const mxsrPartGroupsStack& elt)
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartGroupsStack& elt);
 
 //________________________________________________________________________
+class mxsrTuplet : public smartable
+{
+/*
+  there can be multiple tuplets starts on a given note,
+  so they aref kept aside until they are handled
+*/
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mxsrTuplet> create (
+                            int               tupletInputStartLineNumber,
+                            int               tupletNumber,
+                            msrTupletTypeKind tupletTypeKind);
+
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mxsrTuplet (
+                            int               tupletInputStartLineNumber,
+                            int               tupletNumber,
+                            msrTupletTypeKind tupletTypeKind);
+
+    virtual               ~mxsrTuplet ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    void                  setTupletInputStartLineNumber (
+                            int tupletInputStartLineNumber)
+                              { fTupletInputStartLineNumber = tupletInputStartLineNumber; }
+
+    int                   getTupletInputStartLineNumber () const
+                              { return fTupletInputStartLineNumber; }
+
+    void                  setTupletNumber (
+                            int tupletNumber)
+                              { fTupletNumber = tupletNumber; }
+
+    int                   getTupletNumber () const
+                              { return fTupletNumber; }
+
+    void                  setTupletTypeKind (
+                            msrTupletTypeKind tupletTypeKind)
+                              { fTupletTypeKind = tupletTypeKind; }
+
+    msrTupletTypeKind     getTupletTypeKind () const
+                              { return fTupletTypeKind; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const;
+
+    virtual void          print (std::ostream& os) const;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    int                   fTupletInputStartLineNumber;
+    int                   fTupletNumber;
+    msrTupletTypeKind     fTupletTypeKind;
+};
+typedef SMARTP<mxsrTuplet> S_mxsrTuplet;
+EXP std::ostream& operator << (std::ostream& os, const mxsrTuplet& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrTuplet& elt);
+
+//________________________________________________________________________
 class mxsr2msrPendingTupletStop : public smartable
 {
 /*
   tuplets and staff changes can occur in any order in MusicXML data,
   hence the need to handle them per voice
 */
-
   public:
 
     // creation
@@ -386,8 +467,16 @@ class mxsr2msrPendingTupletStop : public smartable
     int                   getTupletNumber () const
                               { return fTupletNumber; }
 
+    void                  setEventInputStartLineNumber (
+                            int inputStartLineNumber)
+                              { fEventInputStartLineNumber = inputStartLineNumber; }
+
     int                   getEventInputStartLineNumber () const
                               { return fEventInputStartLineNumber; }
+
+    void                  setEventInputEndLineNumber (
+                            int inputEndLineNumber)
+                              { fEventInputEndLineNumber = inputEndLineNumber; }
 
     int                   getEventInputEndLineNumber () const
                               { return fEventInputEndLineNumber; }
@@ -1065,14 +1154,15 @@ class EXP mxsr2msrSkeletonBuilder :
     int                       fCurrentTupletNumber;
 //     int                       fPreviousTupletNumber;
 
+    Bool                      fCurrentNoteBelongsToATuplet;
+
     // there can be multiple tuplets starts on a given note,
     // so they aref kept aside until they are handled
-    std::list <std::tuple <
-      int,                // note inputStartLineNumber
-      int,                // tuplet number
-      msrTupletTypeKind>>     fPendingTupletsInformationTuplesList;
+    std::list <S_mxsrTuplet>  fPendingTupletsList;
 
-    Bool                      fCurrentNoteBelongsToATuplet;
+    void                      displayPendingTupletsList (
+                                const std::string& title,
+                                int                inputStartLineNumber) const;
 
     // a tuplet stop may occur in a chord before the latter's last note,
     // and the can be several tuplets stop in a single note:
@@ -1080,11 +1170,11 @@ class EXP mxsr2msrSkeletonBuilder :
     std::multimap <int, S_mxsr2msrPendingTupletStop>
                               fPendingTupletsStopsMap; // CHORD_TUP JMI v0.9.71
 
-    void                      registerTupletEventIfAny ();
+    void                      handleTupletEventIfAny ();
 
     void                      displayPendingTupletsStopsMap (
-                                const std::string title,
-                                int               inputStartLineNumber) const;
+                                const std::string& title,
+                                int                inputStartLineNumber) const;
 
     void                      handePendingTupletsStopsIfAny (
                                 int inputStartLineNumber);

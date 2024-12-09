@@ -855,7 +855,7 @@ void mxsrEventsCollection::registerTupletEvent (
         eventInputEndLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceTupletsBasics ()) {
+  if (true || GlobalMxsrOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<

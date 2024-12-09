@@ -33,7 +33,7 @@ void mfTest (std::ostream& os)
 
   testStringMatcher (os);
 
-  gLog << std::endl << std::endl;
+  gLog << "--------------" << std::endl;
 
   testWrapperTypes ();
 }

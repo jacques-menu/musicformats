@@ -21,30 +21,84 @@ namespace MusicFormats
 //______________________________________________________________________________
 void testWrapperTypes ()
 {
-  mfInputLineNumber inputLineNumber1 (157);
-  mfInputLineNumber inputLineNumber2 (200);
+  {
+    mfInputLineNumber inputLineNumber1 (157);
+    mfInputLineNumber inputLineNumber2 (200);
 
-  mfInputLocationRange inputLocationRange1 (333, 333);
-  mfInputLocationRange inputLocationRange2 (110, 132);
+    mfInputLocationRange inputLocationRange1 (333, 333);
+    mfInputLocationRange inputLocationRange2 (110, 132);
 
-  mfVoiceNumber voiceNumber (5);
+    mfVoiceNumber voiceNumber (5);
 
-//   inputLineNumber1 = staffNumber;
-//   voiceNumber = inputLineNumber2;
+  //   inputLineNumber1 = staffNumber;
+  //   voiceNumber = inputLineNumber2;
 
-  inputLineNumber2 = inputLineNumber1;
+    inputLineNumber2 = inputLineNumber1;
 
   gLog <<
-    "inputLineNumber1: " << inputLineNumber1 <<
-    std::endl <<
-    "inputLocationRange1: " << inputLocationRange1 <<
-    std::endl <<
-    "inputLocationRange2: " << inputLocationRange2 <<
-    std::endl <<
-    "voiceNumber: " << voiceNumber <<
-    std::endl <<
-    "inputLocationRange2.asString (): " << inputLocationRange2.asString () <<
-    std::endl;
+      "inputLineNumber1: " << inputLineNumber1 <<
+      std::endl <<
+      "inputLocationRange1: " << inputLocationRange1 <<
+      std::endl <<
+      "inputLocationRange2: " << inputLocationRange2 <<
+      std::endl <<
+      "voiceNumber: " << voiceNumber <<
+      std::endl <<
+      "inputLocationRange2.asString (): " << inputLocationRange2.asString () <<
+      std::endl;
+  }
+
+  gLog << "--------------" << std::endl;
+
+  {
+    // start the clock
+    clock_t startClock = clock ();
+
+    const int iterationsNumber = 10000000;
+    int total = 0;
+    for (int i = 1; i < iterationsNumber; ++i ) {
+      total += i;
+    } // for
+
+    clock_t endClock = clock ();
+
+    // print the time spent
+    clock_t
+      timeSpentInClocks =
+        endClock - startClock;
+
+    gLog <<
+      "Total: " << total << std::endl <<
+      "Time spent with integers: " << timeSpentInClocks << " clocks" <<
+      std::endl;
+  }
+
+  gLog << "--------------" << std::endl;
+
+  {
+    // start the clock
+    clock_t startClock = clock ();
+
+    const int iterationsNumber = 10000000;
+    int total = 0;
+    for (int i = 1; i < iterationsNumber; ++i ) {
+      mfInputLineNumber inputLineNumber (i);
+
+      total += inputLineNumber.getValue ();
+    } // for
+
+    clock_t endClock = clock ();
+
+    // print the time spent
+    clock_t
+      timeSpentInClocks =
+        endClock - startClock;
+
+    gLog <<
+      "Total: " << total << std::endl <<
+      "Time spent with mfInputLineNumber's: " << timeSpentInClocks << " clocks" <<
+      std::endl;
+  }
 }
 
 

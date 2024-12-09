@@ -202,12 +202,20 @@ pdflily:
 
 	@echo
 
+	@echo "Contents of current folder:"
+	@echo "--------------------------------------------"
+	@ls -sal *.xml *.musicxml
+	@echo
+
 	@echo "Contents of lilypond sub-folder:"
+	@echo "--------------------------------------------"
 	@[[ -d lilypond ]] && ls -sal lilypond/*.ly
 	@echo
 
 	@echo "Contents of pdflily sub-folder:"
+	@echo "--------------------------------------------"
 	@[[ -d pdflily ]] && ls -sal pdflily/*.pdf
+
 dopdflily: $(pdflily)
 
 pdflilyclean:
