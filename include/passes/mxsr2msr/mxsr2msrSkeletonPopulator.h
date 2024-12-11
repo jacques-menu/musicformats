@@ -2598,6 +2598,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     Bool                      fCurrentNoteBelongsToATuplet;
     Bool                      fATupletIsEnding;
+    int                       fEndingTupletNumber;
 
     // a tuplet stop may occur in a chord before the latter's last note, hence:
     Bool                      fThereIsAPendingTupletStop; // CHORD_TUP

@@ -2452,6 +2452,84 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
 }
 
 //________________________________________________________________________
+void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
+	int inputStartLineNumber)
+{
+	// an end of measure enforces the end of a chord or tuplets  CHORD_TUP
+	// the current note is then the one preceding the end of measure
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMxsrEvents ()) {
+		gLog <<
+			"===> visitEnd (S_measure& elt)" <<
+			", fCurrentNoteStartInputLineNumber: " <<
+			fCurrentNoteStartInputLineNumber <<
+
+			", currentEventSequentialNumber: " <<
+			fResultingEventsCollection.getCurrentEventSequentialNumber () <<
+
+			", fCurrentNoteSequentialNumber: " <<
+			fCurrentNoteSequentialNumber <<
+			", fPreviousNoteSequentialNumber: " <<
+			fPreviousNoteSequentialNumber <<
+
+			", fCurrentNoteBelongsToAChord: " <<
+			fCurrentNoteBelongsToAChord <<
+			", fPreviousNoteBelongsToAChord: " <<
+			fPreviousNoteBelongsToAChord <<
+			", fPreviousNoteIsATakeOffCandidate: " <<
+			fPreviousNoteIsATakeOffCandidate <<
+      ", line " << inputStartLineNumber <<
+			std::endl;
+
+		if (gTraceOahGroup->getTraceTupletsBasics ()) {
+			gLog <<
+				", fCurrentTupletNumber: " <<
+				fCurrentTupletNumber <<
+				std::endl;
+
+			displayPendingTupletsStopsMap (
+				"=====> visitEnd (S_measure& elt)",
+				fCurrentNoteStartInputLineNumber);
+		}
+	}
+#endif // MF_TRACE_IS_ENABLED
+
+ 	// Q_MEASURE
+
+	// register the chord end event if any, before pending tuplets stops if any
+	if (fCurrentNoteBelongsToAChord) {
+		// the note before the measure end is the last one of the chord
+		// it is still the current note
+
+		fResultingEventsCollection.registerChordEvent (
+			fCurrentNoteSequentialNumber,
+			fCurrentNoteStaffNumber,
+			fCurrentNoteVoiceNumber,
+			mxsrChordEventKind::kEventChordEnd,
+			fCurrentNoteStartInputLineNumber,
+			fCurrentNoteEndInputLineNumber);
+	}
+
+	else {
+// 		// is this note the one that follows the last one of a chord?
+// 		if (fPreviousNoteBelongsToAChord) {
+// 			// this the note after the last one of the chord
+// 			 // we're one note late!
+// 			fResultingEventsCollection.registerChordEndEvent (
+// 				fPreviousNoteSequentialNumber,
+// 			fCurrentNoteSequentialNumber,
+// 				fCurrentNoteStaffNumber,
+// 				fCurrentNoteVoiceNumber,
+// 				fPreviousNoteStartInputLineNumber,
+// 				fPreviousNoteEndInputLineNumber,
+// 		    fCurrentNoteVoiceNumber);
+// 		}
+// 		else {
+// 		}
+	}
+}
+
 void mxsr2msrSkeletonBuilder::displayPendingTupletsList (
 	const std::string& title,
 	int                inputStartLineNumber) const
@@ -2592,11 +2670,10 @@ void mxsr2msrSkeletonBuilder::handePendingTupletsStopsIfAny (
 		// register the tuplet end event with the corresponding info,
 		// except the input start end and end line numbers,
 		// which are those of the current note
-		fResultingEventsCollection.registerTupletEvent (
+		fResultingEventsCollection.registerTupletEndEvent (
 			fCurrentNoteSequentialNumber, // was 0 temporarily
 			pendingTupletStop->getStaffNumber (),
 			pendingTupletStop->getVoiceNumber (),
-			mxsrTupletEventKind::kEventTupletEnd,
 			pendingTupletStop->getTupletNumber (),
 			inputStartLineNumber,
 			inputStartLineNumber); // should be inputEndLineNumber JMI v0.9.72
@@ -5009,85 +5086,15 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	// an end of measure enforces the end of a chord or tuplets  CHORD_TUP
-	// the current note is then the one preceding the end of measure
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMxsrEvents ()) {
-		gLog <<
-			"===> visitEnd (S_measure& elt)" <<
-			", fCurrentNoteStartInputLineNumber: " <<
-			fCurrentNoteStartInputLineNumber <<
-
-			", currentEventSequentialNumber: " <<
-			fResultingEventsCollection.getCurrentEventSequentialNumber () <<
-
-			", fCurrentNoteSequentialNumber: " <<
-			fCurrentNoteSequentialNumber <<
-			", fPreviousNoteSequentialNumber: " <<
-			fPreviousNoteSequentialNumber <<
-
-			", fCurrentNoteBelongsToAChord: " <<
-			fCurrentNoteBelongsToAChord <<
-			", fPreviousNoteBelongsToAChord: " <<
-			fPreviousNoteBelongsToAChord <<
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
-      ", line " << elt->getInputStartLineNumber () <<
-			std::endl;
-
-		if (gTraceOahGroup->getTraceTupletsBasics ()) {
-			gLog <<
-				", fCurrentTupletNumber: " <<
-				fCurrentTupletNumber <<
-				std::endl;
-
-			displayPendingTupletsStopsMap (
-				"=====> visitEnd (S_measure& elt)",
-				fCurrentNoteStartInputLineNumber);
-		}
-	}
-#endif // MF_TRACE_IS_ENABLED
+	handleChordMemberNoteIfRelevant (
+		elt->getInputStartLineNumber () );
 
  	// Q_MEASURE
 
-	// register the chord end event if any, before pending tuplets stops if any
-	if (fCurrentNoteBelongsToAChord) {
-		// the note before the measure end is the last one of the chord
-		// it is still the current note
-
-		fResultingEventsCollection.registerChordEvent (
-			fCurrentNoteSequentialNumber,
-			fCurrentNoteStaffNumber,
-			fCurrentNoteVoiceNumber,
-			mxsrChordEventKind::kEventChordEnd,
-			fCurrentNoteStartInputLineNumber,
-			fCurrentNoteEndInputLineNumber);
-	}
-
-	else {
-// 		// is this note the one that follows the last one of a chord?
-// 		if (fPreviousNoteBelongsToAChord) {
-// 			// this the note after the last one of the chord
-// 			 // we're one note late!
-// 			fResultingEventsCollection.registerChordEndEvent (
-// 				fPreviousNoteSequentialNumber,
-// 			fCurrentNoteSequentialNumber,
-// 				fCurrentNoteStaffNumber,
-// 				fCurrentNoteVoiceNumber,
-// 				fPreviousNoteStartInputLineNumber,
-// 				fPreviousNoteEndInputLineNumber,
-// 		    fCurrentNoteVoiceNumber);
-// 		}
-// 		else {
-// 		}
-	}
-
- 	// Q_MEASURE
-
-	// handle pending tuplet stops if any, after the chord end if any
+	// handle pending tuplet stops if any, after the chord end if any,
+	// which occurs on the current notes, i.e. the one at the end of the measure JMI v0.9.72
 	handePendingTupletsStopsIfAny (
-		fPreviousNoteEndInputLineNumber);
+		fCurrentNoteStartInputLineNumber);
 
   --gIndenter;
 }
@@ -5481,6 +5488,18 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
+		std::list <S_mxsrTupletEvent> collectedBeginsList;
+
+		fResultingEventsCollection.fetchTupletBeginsList (
+			fCurrentNoteStartInputLineNumber,
+			collectedBeginsList);
+
+		std::list <S_mxsrTupletEvent> collectedEndsList;
+
+		fResultingEventsCollection.fetchTupletBeginsList (
+			fCurrentNoteStartInputLineNumber,
+			collectedEndsList);
+
 	for (
 		std::list <S_mxsrTuplet>::const_iterator it = fPendingTupletsList.cbegin ();
 		it != fPendingTupletsList.cend ();
@@ -5521,9 +5540,7 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
 		// handle the values
 		switch (tupletKind) {
 			case msrTupletTypeKind::kTupletTypeNone:
-				// handle pending tuplet stops if any
-// 				handePendingTupletsStopsIfAny ( // JMI ??? v0.9.72
-// 					fCurrentNoteEndInputLineNumber);
+				// nothing to do // JMI v0.9.72
 				break;
 
 			case msrTupletTypeKind::kTupletTypeStart:
@@ -5533,11 +5550,10 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
 					fCurrentNoteEndInputLineNumber);
 
 				// register the new tuplet begin event upon the current note at once
-				fResultingEventsCollection.registerTupletEvent (
+				fResultingEventsCollection.registerTupletBeginEvent (
 					fCurrentNoteSequentialNumber,
 					fCurrentNoteStaffNumber,
 					fCurrentNoteVoiceNumber,
-					mxsrTupletEventKind::kEventTupletBegin,
 					tupletNumber,
 					noteInputStartLineNumber,
 					fCurrentNoteEndInputLineNumber);
@@ -5555,7 +5571,7 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
 				// it will be set when the tuplet stop event is created
 
 				// the temporary values will be ignored when the actual ones become known later,
-				// when  the tuplet stop event is created by registerTupletEvent()
+				// when  the tuplet stop event is created by registerTupletEndEvent()
 				fPendingTupletsStopsMap.insert (
 					std::make_pair (
 						fCurrentNoteSequentialNumber,
@@ -5885,7 +5901,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
 		// there can be multiple <tuplet /> upon a given note,
 		// so we put them aside
 		fPendingTupletsList.push_back (
-			mxsrTuplet::create (
+			mxsrTuplet::create (			// temporary,
 				fCurrentNoteStartInputLineNumber,
 				fCurrentTupletNumber,
 				tupletTypeKind));

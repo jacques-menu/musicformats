@@ -9,6 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <algorithm>
 #include <cassert>
 #include <iostream>
 #include <sstream>
@@ -833,11 +834,10 @@ void mxsrEventsCollection::registerChordEvent (
   fAllEventsList.push_back (chordEvent);
 }
 
-void mxsrEventsCollection::registerTupletEvent (
+void mxsrEventsCollection::registerTupletBeginEvent (
   int                 noteSequentialNumber,
   int                 noteEventStaffNumber,
   int                 noteEventVoiceNumber,
-  mxsrTupletEventKind tupletEventKind,
   int                 tupletNumber,
   int                 eventInputStartLineNumber,
   int                 eventInputEndLineNumber)
@@ -849,13 +849,13 @@ void mxsrEventsCollection::registerTupletEvent (
         noteSequentialNumber,
         noteEventStaffNumber,
         noteEventVoiceNumber,
-        tupletEventKind,
+        mxsrTupletEventKind::kEventTupletBegin,
         tupletNumber,
         eventInputStartLineNumber,
         eventInputEndLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || GlobalMxsrOahGroup->getTraceTupletsBasics ()) {
+  if (true || gGlobalMxsrOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -869,13 +869,58 @@ void mxsrEventsCollection::registerTupletEvent (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   fTupletsEventsMultiMap [eventSequentialNumber] = tupletEvent;
+  fTupletsBeginsList.push_back (tupletEvent);
+
   fTupletsEventsMultiMap.insert (
     std::make_pair (noteSequentialNumber, tupletEvent));
 
   fAllEventsList.push_back (tupletEvent);
 }
 
+void mxsrEventsCollection::registerTupletEndEvent (
+  int                 noteSequentialNumber,
+  int                 noteEventStaffNumber,
+  int                 noteEventVoiceNumber,
+  int                 tupletNumber,
+  int                 eventInputStartLineNumber,
+  int                 eventInputEndLineNumber)
+{
+  S_mxsrTupletEvent
+    tupletEvent =
+      mxsrTupletEvent::create (
+        ++fCurrentEventSequentialNumber,
+        noteSequentialNumber,
+        noteEventStaffNumber,
+        noteEventVoiceNumber,
+        mxsrTupletEventKind::kEventTupletEnd,
+        tupletNumber,
+        eventInputStartLineNumber,
+        eventInputEndLineNumber);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (true || gGlobalMxsrOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering tuplet event " <<
+      tupletEvent->asString () <<
+      ", line " << eventInputStartLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fTupletsEndsList.push_back (tupletEvent);
+
+  fTupletsEventsMultiMap.insert (
+    std::make_pair (noteSequentialNumber, tupletEvent));
+
+  fAllEventsList.push_back (tupletEvent);
+}
+
+//________________________________________________________________________
 void mxsrEventsCollection::sortTheMxsrEventsLists ()
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -898,6 +943,7 @@ void mxsrEventsCollection::sortTheMxsrEventsLists ()
     compareStaffChangeEventsByIncreasingInputStartLineNumber);
 }
 
+//________________________________________________________________________
 S_mxsrStaffChangeEvent mxsrEventsCollection::fetchStaffChangeTakeOffAtNoteSequentialNumber (
   int noteSequentialNumber) const
 {
@@ -930,6 +976,7 @@ S_mxsrStaffChangeEvent mxsrEventsCollection::fetchStaffChangeLandingAtNoteSequen
   return result;
 }
 
+//________________________________________________________________________
 S_mxsrChordEvent mxsrEventsCollection::fetchChordEventAtNoteSequentialNumber (
   int noteSequentialNumber) const
 {
@@ -946,39 +993,141 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordEventAtNoteSequentialNumber (
   return result;
 }
 
-// S_mxsrTupletEvent mxsrEventsCollection::fetchTupletEventAtNoteSequentialNumber (
-//   int noteSequentialNumber) const
-// {
-//   S_mxsrTupletEvent result;
-//
-//   std::multimap <int, S_mxsrTupletEvent>::const_iterator it;
-//
-//   it = fTupletsEventsMultiMap.find (noteSequentialNumber);
-//
-//   if (it != fTupletsEventsMultiMap.end ()) {
-//     result = (*it).second;
-//   }
-//
-//   return result;
-// }
+/*
+#include <list>
+#include <algorithm>
+#include <iostream>
 
-void mxsrEventsCollection::fetchTupletEventsRange (
-  int noteSequentialNumber,
-  std::multimap <int, S_mxsrTupletEvent>::const_iterator&
-      firstInRange,
-  std::multimap <int, S_mxsrTupletEvent>::const_iterator&
-      lastInRange) const
+int main()
 {
-  std::pair <
-    std::multimap <int, S_mxsrTupletEvent>::const_iterator,
-    std::multimap <int, S_mxsrTupletEvent>::const_iterator
-  > thePair =
-    getTupletsEventMultiMap ().equal_range (
-      noteSequentialNumber);
+    std::list<int> myList{ 5, 19, 34, 3, 33 };
 
-  std::tie (firstInRange, lastInRange) = thePair;
+
+    auto it = std::find_if( std::begin( myList ),
+                            std::end( myList ),
+                            [&]( const int v ){ return 0 == ( v % 17 ); } );
+
+    if ( myList.end() == it )
+    {
+        std::cout << "item not found" << std::endl;
+    }
+    else
+    {
+        const int pos = std::distance( myList.begin(), it ) + 1;
+        std::cout << "item divisible by 17 found at position " << pos << std::endl;
+    }
+}
+*/
+
+void mxsrEventsCollection::fetchTupletBeginsList (
+  int                            noteSequentialNumber,
+  std::list <S_mxsrTupletEvent>& collectedBeginsList)
+{
+  // look for the first tuplet event matching noteSequentialNumber
+  std::list <S_mxsrTupletEvent>::iterator startIt =
+    std::find_if (
+      std::begin (fTupletsBeginsList),
+      std::end (fTupletsBeginsList),
+      [&] (const S_mxsrTupletEvent tupletEvent )
+        {
+          return
+            tupletEvent->getNoteSequentialNumber () == noteSequentialNumber;
+        });
+
+  if (startIt != fTupletsBeginsList.end ()) {
+    gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
+
+    // look for the first next tuplet event not matching noteSequentialNumber
+    std::list <S_mxsrTupletEvent>::iterator endIt =
+      std::find_if (
+        std::begin (fTupletsBeginsList),
+        std::end (fTupletsBeginsList),
+        [&] (const S_mxsrTupletEvent tupletEvent )
+          {
+            return
+              tupletEvent->getNoteSequentialNumber () != noteSequentialNumber;
+          });
+
+    gLog << "(*endIt): ";
+    if (endIt == fTupletsBeginsList.end ()) {
+      gLog << "fTupletsBeginsList.end ()";
+    }
+    else {
+      gLog << (*endIt);
+    }
+    gLog << std::endl << std::endl << std::flush;
+
+    // move the found tuplets events to collectedBeginsList
+    collectedBeginsList.splice (
+      collectedBeginsList.begin (), fTupletsBeginsList, startIt, endIt);
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceTupletsBasics ()) {
+    printTupletEventsList (
+      gLog,
+      noteSequentialNumber,
+      collectedBeginsList,
+      "fetchTupletBeginsList(), collectedBeginsList:");
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
+void mxsrEventsCollection::fetchTupletEndsList (
+  int                            noteSequentialNumber,
+  std::list <S_mxsrTupletEvent>& collectedEndsList)
+{
+  // look for the first tuplet event matching noteSequentialNumber
+  std::list <S_mxsrTupletEvent>::iterator startIt =
+    std::find_if (
+      std::begin (fTupletsEndsList),
+      std::end (fTupletsEndsList),
+      [&] (const S_mxsrTupletEvent tupletEvent )
+        {
+          return
+            tupletEvent->getNoteSequentialNumber () == noteSequentialNumber;
+        });
+
+  if (startIt != fTupletsEndsList.end ()) {
+    gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
+
+    // look for the first next tuplet event not matching noteSequentialNumber
+    std::list <S_mxsrTupletEvent>::iterator endIt =
+      std::find_if (
+        std::begin (fTupletsEndsList),
+        std::end (fTupletsEndsList),
+        [&] (const S_mxsrTupletEvent tupletEvent )
+          {
+            return
+              tupletEvent->getNoteSequentialNumber () != noteSequentialNumber;
+          });
+
+    gLog << "(*endIt): ";
+    if (endIt == fTupletsEndsList.end ()) {
+      gLog << "fTupletsEndsList.end ()";
+    }
+    else {
+      gLog << (*endIt);
+    }
+    gLog << std::endl << std::endl << std::flush;
+
+    // move the found tuplets events to collectedEndsList
+    collectedEndsList.splice (
+      collectedEndsList.begin (), fTupletsEndsList, startIt, endIt);
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceTupletsBasics ()) {
+    printTupletEventsList (
+      gLog,
+      noteSequentialNumber,
+      collectedEndsList,
+      "fetchTupletEndsList(), resultingEndsList:");
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+//________________________________________________________________________
 std::string mxsrEventsCollection::asShortString () const
 {
   std::stringstream ss;
@@ -987,8 +1136,13 @@ std::string mxsrEventsCollection::asShortString () const
     "[EventsCollection" <<
     ", fStaffChangeTakeOffsMap.size (): " << fStaffChangeTakeOffsMap.size () <<
     ", fStaffChangeLandingsMap.size (): " << fStaffChangeLandingsMap.size () <<
+
     ", fChordsEventsMap.size (): " << fChordsEventsMap.size () <<
+
+    ", fTupletsBeginsList.size (): " << fTupletsEventsMultiMap.size () <<
+    ", fTupletsEndsList.size (): " << fTupletsEventsMultiMap.size () <<
     ", fTupletsEventsMultiMap.size (): " << fTupletsEventsMultiMap.size () <<
+
     ", fAllEventsList.size (): " << fAllEventsList.size () <<
     ']';
 
@@ -1000,6 +1154,7 @@ std::string mxsrEventsCollection::asString () const
   return asShortString ();
 }
 
+//------------------------------------------------------------------------
 void mxsrEventsCollection::printAllEvents (std::ostream& os) const
 {
   os <<
@@ -1029,6 +1184,7 @@ void mxsrEventsCollection::printAllEvents (std::ostream& os) const
   --gIndenter;
 }
 
+//------------------------------------------------------------------------
 void mxsrEventsCollection::printStaffChangeEvents (std::ostream& os) const
 {
   os <<
@@ -1124,6 +1280,7 @@ void mxsrEventsCollection::printStaffChangeEvents (std::ostream& os) const
   --gIndenter;
   }
 
+//------------------------------------------------------------------------
 void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 {
   os <<
@@ -1158,6 +1315,7 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
   --gIndenter;
 }
 
+//------------------------------------------------------------------------
 void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 {
   os <<
@@ -1176,6 +1334,107 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
       eventSequentialNumber = thePair.first;
     S_mxsrTupletEvent
       tupletEvent = thePair.second;
+
+    os <<
+      "Note " << eventSequentialNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      tupletEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+
+  os << std::endl << "--------" << std::endl << std::endl;
+
+  os <<
+    "fTupletsBeginsList: " <<
+    mfSingularOrPlural (
+      fTupletsBeginsList.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (S_mxsrTupletEvent tupletEvent : fTupletsBeginsList) {
+    int
+      eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
+
+    os <<
+      "Note " << eventSequentialNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      tupletEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+
+  os << std::endl << "--------" << std::endl << std::endl;
+
+  os <<
+    "fTupletsEndsList: " <<
+    mfSingularOrPlural (
+      fTupletsEndsList.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (S_mxsrTupletEvent tupletEvent : fTupletsEndsList) {
+    int
+      eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
+
+    os <<
+      "Note " << eventSequentialNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      tupletEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+}
+
+//________________________________________________________________________
+void mxsrEventsCollection::printTupletEventsList (
+  std::ostream&                        os,
+  const std::list <S_mxsrTupletEvent>& tupletsList,
+  const std::string&                   context,
+  int                                  inputLineNumber) const
+{
+  os <<
+    "--> printTupletEventsList()" <<
+    ", context " <<
+    mfSingularOrPlural (
+      tupletsList.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    ", line " << inputLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (S_mxsrTupletEvent tupletEvent : tupletsList) {
+    int
+      eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
 
     os <<
       "Note " << eventSequentialNumber <<

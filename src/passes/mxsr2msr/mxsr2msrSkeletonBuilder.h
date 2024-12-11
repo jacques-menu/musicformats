@@ -518,17 +518,8 @@ class mxsr2msrPendingTupletStop : public smartable
 
   private:
 
-//     // private methods
-//     // ------------------------------------------------------
-//
-//     void                  displayTupletsStack (
-//                             const std::string& context);
-//
-//     void                  handleTupletsPendingOnTupletsStack (
-//                             int inputLineNumber);
-//
-//     void                  displayLastHandledTupletInVoiceMap (
-//                             const std::string& header);
+    // private methods
+    // ------------------------------------------------------
 };
 typedef SMARTP<mxsr2msrPendingTupletStop> S_mxsr2msrPendingTupletStop;
 EXP std::ostream& operator << (std::ostream& os, const mxsr2msrPendingTupletStop& elt);
@@ -1159,6 +1150,9 @@ class EXP mxsr2msrSkeletonBuilder :
     // there can be multiple tuplets starts on a given note,
     // so they aref kept aside until they are handled
     std::list <S_mxsrTuplet>  fPendingTupletsList;
+
+    void                      handleChordMemberNoteIfRelevant (
+                                int inputStartLineNumber);
 
     void                      displayPendingTupletsList (
                                 const std::string& title,
