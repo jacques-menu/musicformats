@@ -9,12 +9,12 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include <climits>      // INT_MIN, INT_MAX
-//
+#include <climits>      // INT_MIN, INT_MAX
+
 #include <regex>
 
 #include "tree_browser.h"
-//
+
 #include "musicxmlWae.h"
 #include "mxsr2msrWae.h"
 

@@ -290,7 +290,7 @@ mxsrStaffChangeEvent::mxsrStaffChangeEvent (
     std::stringstream ss;
 
     ss <<
-      "staff change event <<
+      "staff change event" <<
       staffChangeEventKind <<
       " to one and the same staff number " <<
       landingStaffNumber;
