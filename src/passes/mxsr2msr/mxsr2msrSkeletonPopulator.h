@@ -2355,7 +2355,7 @@ class EXP mxsr2msrSkeletonPopulator :
 //     int                       fCurrentTakeOffStaffNumber;
 //     int                       fCurrentLandingStaffNumber;
 
-    void                      handleStaffChangeTakeOffEventIfAny ();
+    void                      handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation ();
 
     void                      createStaffChange (
                                 int                    inputLineNumber,
@@ -2403,11 +2403,11 @@ class EXP mxsr2msrSkeletonPopulator :
 //                                 const S_msrNote& chordFirstNote,
 //                                 msrNoteKind      noteKind);
 
-    void                      handleChordBeginBeforeNoteIfAny ();
+    void                      handleChordBeginIfAnyBeforeNoteCreation ();
 //     void                      handleChordBeginAfterNoteIfAny ();
 
 //     void                      handleChordEndBeforeNoteIfAny ();
-    void                      handleChordEndAfterNoteIfAny ();
+    void                      handleChordEndIfAnyAfterNoteHandling ();
 
 /* JMI
     void                      registerVoiceCurrentChordInMap (
@@ -2502,14 +2502,15 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrNote&  firstNote,
                                 const S_msrTuplet tuplet);
 
-    void                      handleTupletBeginEventsBeforeNoteIfAny ();
+    void                      handleTupletBeginEventsIfAnyBeforeNoteCreation ();
 
-    void                      handleTupletBeginEvents_RIGHT_AfterNoteCreationIfAny ();
+    void                      handleTupletBeginEventsIfAnyAfterNoteCreation ();
 
     void                      handleTupletBeginEventsAfterNoteIfAny ();
 
     void                      handleTupletEndEventsBeforeNoteIfAny ();
-    void                      handleTupletEndEventsAfterNoteIfAny ();
+
+    void                      handleTupletEndEventsIfAnyAfterNoteHandling ();
 
     void                      handleTupletStart (
                                 const S_msrTuplet& tuplet,

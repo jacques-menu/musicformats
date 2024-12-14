@@ -10278,7 +10278,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
     S_msrNote
       noteToAttachTo =
       /*
-      // JMI might prove not precise enough???
+      // JMI might prove not precise enough??? v0.9.72
   //      fStaffVoicesLastMetNoteMap [currentNoteVoice];
         fStaffVoicesLastMetNoteMap [
           std::make_pair (
@@ -10680,7 +10680,7 @@ Staff spacing between multiple staves is measured in
           lineBreak =
             msrLineBreak::create (
               elt->getInputStartLineNumber (),
-              133, // JMI v0.9.70 next purist number???
+              1333333, // JMI v0.9.70 next purist number???
               msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo);
 
         // append lineBreak to the pending line breaks
@@ -10730,7 +10730,7 @@ Staff spacing between multiple staves is measured in
             msrPageBreak::create (
               elt->getInputStartLineNumber (),
               gNullMeasure, // JMI ??? v0.9.70
-              144, // JMI v0.9.70 next purist number???
+              14444444, // JMI v0.9.70 next purist number???
               msrUserSelectedPageBreakKind::kUserSelectedPageBreakNo);
 
         // append it to the pending page breaks
@@ -13230,7 +13230,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
 
   std::string slashTypeSize = elt->getAttributeValue ("size");
 
-  if (slashTypeSize == "cue") { // USE IT! JMI ???
+  if (slashTypeSize == "cue") { // USE IT! JMI ??? v0.9.72
   }
 
   else {
@@ -23306,7 +23306,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
   switch (fCurrentNoteGraphicNotesDurationKind) {
     case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       // use the same duration as the one from the duration
-      // internally ??? JMI
+      // internally ??? JMI v0.9.72
       fCurrentNoteDisplayWholeNotesFromType =
         fCurrentNoteSoundingWholeNotesFromNotesDuration;
       break;
@@ -24191,7 +24191,7 @@ void mxsr2msrSkeletonPopulator::attachThePendingDalSegnosIfAny ()
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
+void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation ()
 {
 /*
       Event 1:
@@ -24219,7 +24219,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
     std::stringstream ss;
 
     ss <<
-      "--------> handleStaffChangeTakeOffEventIfAny(): " <<
+      "--------> handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation(): " <<
       "fCurrentNoteSequentialNumber: " << fCurrentNoteSequentialNumber <<
       "fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber;
 
@@ -24241,7 +24241,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
       std::stringstream ss;
 
       ss <<
-        "There is a staff change handleStaffChangeTakeOffEventIfAny():" <<
+        "There is a staff change handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation():" <<
         '\n' <<
         fCurrentNoteStaffChangeTakeOff <<
         "fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
@@ -24305,7 +24305,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
     std::stringstream ss;
 
     ss <<
-      "--------> handleStaffChangeTakeOffEventIfAny(): " <<
+      "--------> handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation(): " <<
       "fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber <<
       ", eventInputStartLineNumber: " << eventInputStartLineNumber;
 
@@ -24454,7 +24454,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
     std::stringstream ss;
 
     ss <<
-      "--> handleStaffChangeTakeOffEventIfAny()" <<
+      "--> handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation()" <<
   		", fCurrentRecipientStaffNumber: " <<
   		mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
   		", fCurrentNoteVoiceNumber: " <<
@@ -24469,12 +24469,12 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleChordBeginBeforeNoteIfAny ()
+void mxsr2msrSkeletonPopulator::handleChordBeginIfAnyBeforeNoteCreation ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
     gLog <<
-      "===> handleChordBeginBeforeNoteIfAny(), gathered note informations:" <<
+      "===> handleChordBeginIfAnyBeforeNoteCreation(), gathered note informations:" <<
       std::endl;
 
     ++gIndenter;
@@ -24568,7 +24568,7 @@ void mxsr2msrSkeletonPopulator::handleChordBeginBeforeNoteIfAny ()
   }
 }
 
-void mxsr2msrSkeletonPopulator::handleChordEndAfterNoteIfAny ()
+void mxsr2msrSkeletonPopulator::handleChordEndIfAnyAfterNoteHandling ()
 {
   fCurrentNoteChordEnd =
     fKnownEventsCollection.
@@ -24697,14 +24697,14 @@ void mxsr2msrSkeletonPopulator::populateCurrentChordFromNote (
   ]
 */
 
-void mxsr2msrSkeletonPopulator::handleTupletBeginEventsBeforeNoteIfAny ()
+void mxsr2msrSkeletonPopulator::handleTupletBeginEventsIfAnyBeforeNoteCreation ()
 {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTupletsBasics ()) {
       std::stringstream ss;
 
       ss <<
-        "--------> handleTupletBeginEventsBeforeNoteIfAny()";
+        "--------> handleTupletBeginEventsIfAnyBeforeNoteCreation()";
 //         ", tupletEventKind: " << tupletEventKind <<
 //         ", tupletNumber: " << tupletNumber <<
 //         ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -24716,14 +24716,14 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEventsBeforeNoteIfAny ()
 #endif
 }
 
-void mxsr2msrSkeletonPopulator::handleTupletBeginEvents_RIGHT_AfterNoteCreationIfAny ()
+void mxsr2msrSkeletonPopulator::handleTupletBeginEventsIfAnyAfterNoteCreation ()
 {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTupletsBasics ()) {
       std::stringstream ss;
 
       ss <<
-        "--------> handleTupletBeginEventsBeforeNoteIfAny()";
+        "--------> handleTupletBeginEventsIfAnyBeforeNoteCreation()";
 //         ", tupletEventKind: " << tupletEventKind <<
 //         ", tupletNumber: " << tupletNumber <<
 //         ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -24788,7 +24788,7 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEvents_RIGHT_AfterNoteCreationI
       std::stringstream ss;
 
       ss <<
-        "--------> handleTupletBeginEventsBeforeNoteIfAny()" <<
+        "--------> handleTupletBeginEventsIfAnyBeforeNoteCreation()" <<
         ", tupletEventKind: " << tupletEventKind <<
         ", tupletNumber: " << tupletNumber <<
         ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -24816,7 +24816,7 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEvents_RIGHT_AfterNoteCreationI
 //           std::stringstream ss;
 //
 //           ss <<
-//             "--------> handleTupletBeginEventsBeforeNoteIfAny(): tuplet number " <<
+//             "--------> handleTupletBeginEventsIfAnyBeforeNoteCreation(): tuplet number " <<
 //             tupletNumber <<
 //             " is ending" <<
 //             ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -24926,7 +24926,7 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEventsAfterNoteIfAny ()
 //       std::stringstream ss;
 //
 //       ss <<
-//         "--------> handleTupletBeginEventsBeforeNoteIfAny()" <<
+//         "--------> handleTupletBeginEventsIfAnyBeforeNoteCreation()" <<
 //         ", tupletEventKind: " << tupletEventKind <<
 //         ", tupletNumber: " << tupletNumber <<
 //         ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -24954,7 +24954,7 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEventsAfterNoteIfAny ()
 // //           std::stringstream ss;
 // //
 // //           ss <<
-// //             "--------> handleTupletBeginEventsBeforeNoteIfAny(): tuplet number " <<
+// //             "--------> handleTupletBeginEventsIfAnyBeforeNoteCreation(): tuplet number " <<
 // //             tupletNumber <<
 // //             " is ending" <<
 // //             ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -25054,7 +25054,7 @@ void mxsr2msrSkeletonPopulator::handleTupletEndEventsBeforeNoteIfAny ()
   }
 #endif
 
-  // is this note the last one in a tuplet ?
+  // is this note the last one in a tuplet?
   fATupletIsEnding = false;
 
   // handling the tuplet begin events
@@ -25115,14 +25115,14 @@ void mxsr2msrSkeletonPopulator::handleTupletEndEventsBeforeNoteIfAny ()
   } // for
 }
 
-void mxsr2msrSkeletonPopulator::handleTupletEndEventsAfterNoteIfAny ()
+void mxsr2msrSkeletonPopulator::handleTupletEndEventsIfAnyAfterNoteHandling ()
 {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTupletsBasics ()) {
       std::stringstream ss;
 
       ss <<
-        "--------> handleTupletEndEventsAfterNoteIfAny()";
+        "--------> handleTupletEndEventsIfAnyAfterNoteHandling()";
 //         ", tupletEventKind: " << tupletEventKind <<
 //         ", tupletNumber: " << tupletNumber <<
 //         ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -25351,14 +25351,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
   // handle staff change take off if any,
   // in which case fCurrentRecipientStaffNumber will be updated
-  handleStaffChangeTakeOffEventIfAny ();
+  handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation ();
 
   // chords may be nested in tuplets, hence:
   // first, handle the tuplet begin events upon this note if any
-  handleTupletBeginEventsBeforeNoteIfAny ();
+  handleTupletBeginEventsIfAnyBeforeNoteCreation ();
 
   // then handle the chord begin event upon this note if any
-  handleChordBeginBeforeNoteIfAny ();
+  handleChordBeginIfAnyBeforeNoteCreation ();
 
   // create the note
   fCurrentNote =
@@ -25373,7 +25373,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 //     "fCurrentNoteVoiceNumber is unknown");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  handleTupletBeginEvents_RIGHT_AfterNoteCreationIfAny ();
+  handleTupletBeginEventsIfAnyAfterNoteCreation ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
@@ -25593,10 +25593,10 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // chords may be nested in tuplets, hence:
   // first, handle the chord end event upon this note if any
   // forget about the on-going chord if relevant
-  handleChordEndAfterNoteIfAny ();
+  handleChordEndIfAnyAfterNoteHandling ();
 
   // then, handle the tuplet end events upon this note if any
-  handleTupletEndEventsAfterNoteIfAny ();
+  handleTupletEndEventsIfAnyAfterNoteHandling ();
 
 	// set current note MusicXML staff number as previous for the next note
   fPreviousNoteStaffNumber = fCurrentNoteStaffNumber;

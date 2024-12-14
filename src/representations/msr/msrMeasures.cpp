@@ -4667,7 +4667,7 @@ void msrMeasure::determineMeasureKind (
   ++gIndenter;
 
   // determine the measure kind
-  if (false && ! fMeasureContainsSound) { // JMI v0.9.72 too early sometimes???
+  if (! fMeasureContainsSound) { // JMI v0.9.72 too early sometimes??? EASTWOOD
     // empty measure
       handleEmptyMeasure (
         inputLineNumber,
@@ -4751,8 +4751,10 @@ void msrMeasure::handleEmptyMeasure (
       std::stringstream ss;
 
       ss <<
-        "--> handleEmptyMeasure()" <<
-        ", fMeasureEndRegularKind: " << fMeasureEndRegularKind;
+        "--> Handling empty measure" <<
+        ", voice: " << voice->asString () <<
+        ", fMeasureEndRegularKind: " << fMeasureEndRegularKind <<
+        ", inputLineNumber: " << inputLineNumber;
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -4767,7 +4769,7 @@ void msrMeasure::handleEmptyMeasure (
     voice->
       displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
-        "handleEmptyMeasure () 1 measure has 0 measure whole notes");
+        "handleEmptyMeasure () 1 measure has 0 measure whole notes???"); // JMI v0.9.72
 
     std::stringstream ss;
 
@@ -4809,11 +4811,11 @@ void msrMeasure::handleEmptyMeasure (
       inputLineNumber,
       msrWholeNotes (0, 1));
 
-//   // JMI v0.9.72
-//   // append a skip to this measure to fill it
-//   appendPaddingSkipNoteToMeasure (
-//     inputLineNumber,
-//     fFullMeasureWholeNotesDuration);
+  // JMI v0.9.72
+  // append a skip to this measure to fill it EASTWOOD 1234567890
+  appendPaddingSkipNoteToMeasure (
+    inputLineNumber,
+    fFullMeasureWholeNotesDuration);
 }
 
 void msrMeasure::handleRegularMeasure (
