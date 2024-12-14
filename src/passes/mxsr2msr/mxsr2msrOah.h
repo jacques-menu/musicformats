@@ -460,6 +460,53 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  getCubase () const
                               { return fCubase; }
 
+#ifdef MF_TRACE_IS_ENABLED
+    // specific trace
+    // --------------------------------------
+
+    // encoding
+    void                  setTraceEncoding ()
+                              { fTraceEncoding = true; }
+    Bool                  getTraceEncoding () const
+                              { return fTraceEncoding; }
+
+    // divisions
+    void                  setTraceDivisions ()
+                              { fTraceDivisions = true; }
+    Bool                  getTraceDivisions () const
+                              { return fTraceDivisions; }
+
+    // backup & forward
+    void                  setTraceBackup ()
+                              { fTraceBackup = true; }
+    Bool                  getTraceBackup () const
+                              { return fTraceBackup; }
+
+    void                  setTraceForward ()
+                              { fTraceForward = true; }
+    Bool                  getTraceForward () const
+                              { return fTraceForward; }
+
+    // specific trace JMI move to traceOah
+    // --------------------------------------
+
+    void                  setDisplayMxsr ()
+                              { fDisplayMxsr = true; }
+    Bool                  getDisplayMxsr () const
+                              { return fDisplayMxsr; }
+
+    void                  setTraceMxsr ()
+                              { fTraceMxsr = true; }
+    Bool                  getTraceMxsr () const
+                              { return fTraceMxsr; }
+
+    // visitors
+    void                  setTraceMxsrVisitors ()
+                              { fTraceMxsrVisitors = true; }
+    Bool                  getTraceMxsrVisitors () const
+                              { return fTraceMxsrVisitors; }
+#endif // MF_TRACE_IS_ENABLED
+
   public:
 
     // public services
@@ -552,6 +599,10 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // print
     // ------------------------------------------------------
 
+    void                  printMxsrOahHelp ();
+
+    void                  displayMxsrOahValues (int fieldWidth);
+
     void                  printMxsr2msrHelp ();
 
     void                  printMxsr2msrValues (int valueFieldWidth);
@@ -583,11 +634,15 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // parts
     // --------------------------------------
 
-    std::set <std::string> fPartsIgnoreIDSet;
-    std::set <std::string> fMusicXMLPartsKeepIDSet;
+    std::set <std::string>
+                          fPartsIgnoreIDSet;
+    std::set <std::string>
+                          fMusicXMLPartsKeepIDSet;
 
-    std::set <std::string> fMusicXMLPartsIgnoreNameSet;
-    std::set <std::string> fMusicXMLPartsKeepNameSet;
+    std::set <std::string>
+                          fMusicXMLPartsIgnoreNameSet;
+    std::set <std::string>
+                          fMusicXMLPartsKeepNameSet;
 
      // for checkOptionsConsistency()
     S_oahStringSetElementAtom
@@ -603,8 +658,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // staves
     // --------------------------------------
 
-    std::set <int>         fMusicXMLStavesIgnoreNumberSet;
-    std::set <int>         fMusicXMLStavesKeepNumberSet;
+    std::set <int>        fMusicXMLStavesIgnoreNumberSet;
+    std::set <int>        fMusicXMLStavesKeepNumberSet;
 
      // for checkOptionsConsistency()
     S_oahIntSetElementAtom
@@ -615,8 +670,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // voices
     // --------------------------------------
 
-    std::set <int>         fMusicXMLVoicesIgnoreNumberSet;
-    std::set <int>         fMusicXMLVoicesKeepNumberSet;
+    std::set <int>        fMusicXMLVoicesIgnoreNumberSet;
+    std::set <int>        fMusicXMLVoicesKeepNumberSet;
 
      // for checkOptionsConsistency()
     S_oahIntSetElementAtom
@@ -692,15 +747,18 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     Bool                  fIgnoreMusicXMLWords;
 
-    std::set <std::string> fBoldWordsSet;
+    std::set <std::string>
+                          fBoldWordsSet;
     S_oahStringSetElementAtom
                           fBoldWordsAtom;
 
-    std::set <std::string> fItalicWordsSet;
+    std::set <std::string>
+                          fItalicWordsSet;
     S_oahStringSetElementAtom
                           fItalicWordsAtom;
 
-    std::set <std::string> fWordsToBePlacedAboveSet;
+    std::set <std::string>
+                          fWordsToBePlacedAboveSet;
     S_oahStringSetElementAtom
                           fWordsToBePlacedAboveAtom;
 
@@ -711,13 +769,16 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  fAddMsrWordsFromTheMusicXMLLyrics;
 
     // words conversions
-    std::set <std::string> fWordsToBeConvertedSet;
+    std::set <std::string>
+                          fWordsToBeConvertedSet;
 
-    std::set <std::string> fWordsToTemposSet;
+    std::set <std::string>
+                          fWordsToTemposSet;
     S_oahStringSetElementAtom
                           fWordsToTempoAtom;
 
-    std::set <std::string> fWordsToRehearsalMarkSet;
+    std::set <std::string>
+                          fWordsToRehearsalMarkSet;
     S_oahStringSetElementAtom
                           fWordsToRehearsalMarkAtom;
 
@@ -803,6 +864,25 @@ class EXP mxsr2msrOahGroup : public oahGroup
 #ifdef MF_TRACE_IS_ENABLED
     // specific trace
     // --------------------------------------
+    // encoding
+    Bool                  fTraceEncoding;
+
+    // divisions
+    Bool                  fTraceDivisions;
+
+    // backup & forward
+    Bool                  fTraceBackup;
+    Bool                  fTraceForward;
+
+    // specific trace JMI move to traceOah JMI ??? v0.9.70
+    // --------------------------------------
+
+    Bool                  fDisplayMxsr;
+
+    Bool                  fTraceMxsr;
+
+    // visitors
+    Bool                  fTraceMxsrVisitors;
 #endif // MF_TRACE_IS_ENABLED
 };
 typedef SMARTP<mxsr2msrOahGroup> S_mxsr2msrOahGroup;

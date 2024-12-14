@@ -9,36 +9,27 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <climits>      // INT_MIN, INT_MAX
-
+// #include <climits>      // INT_MIN, INT_MAX
+//
 #include <regex>
 
 #include "tree_browser.h"
-
+//
 #include "musicxmlWae.h"
 #include "mxsr2msrWae.h"
 
-#include "mfPreprocessorSettings.h"
-
 #include "mfAssert.h"
 #include "mfConstants.h"
-#include "mfServices.h"
+
 #include "mfStringsHandling.h"
-#include "mfTraceOah.h"
 
 #include "msrBarLines.h"
-#include "msrMeasureConstants.h"
 
-#include "displayMsrSummaryVisitor.h"
-
-#include "oahOah.h"
-
-#include "mxsrOah.h"
 #include "mxsr2msrOah.h"
-#include "msrOah.h"
-#include "msr2lpsrOah.h"
 
 #include "oahEarlyOptions.h"
+
+#include "mxsr2msrPartGroups.h"
 
 #include "mxsr2msrSkeletonBuilder.h"
 
@@ -47,685 +38,6 @@
 
 namespace MusicFormats
 {
-
-// K_MF_INPUT_LINE_UNKNOWN_
-
-/*
-<!--
-	The part-list identifies the different musical parts in
-	this movement. Each part has an ID that is used later
-	within the musical data. Since parts may be encoded
-	separately and combined later, identification elements
-	are present at both the score and score-part levels.
-	There must be at least one score-part, combined as
-	desired with part-group elements that indicate braces
-	and brackets. Parts are ordered from top to bottom in
-	a score based on the order in which they appear in the
-	part-list.
-
-	Each MusicXML part corresponds to a track in a Standard
-	MIDI Format 1 file. The score-instrument elements are
-	used when there are multiple instruments per track.
-	The midi-device element is used to make a MIDI device
-	or port assignment for the given track or specific MIDI
-	instruments. Initial midi-instrument assignments may be
-	made here as well.
-
-	The part-name-display and part-abbreviation-display
-	elements are defined in the common.mod file, as they can
-	be used within both the score-part and print elements.
--->
-<!ELEMENT part-list (part-group*, score-part,
-	(part-group | score-part)*)>
-<!ELEMENT score-part (identification?,
-	part-name, part-name-display?,
-	part-abbreviation?, part-abbreviation-display?,
-	group*, score-instrument*,
-	(midi-device?, midi-instrument?)*)>
-<!ATTLIST score-part
-    id ID #REQUIRED
->
-
-
-	The MusicXML part groups can be interleaved,
-	so everything is stored in data structures,
-	whose analysis and the creation of MSR part groups and parts
-	are postponed until the whole part list as been browsed
-*/
-
-//______________________________________________________________________________
-S_mxsrPartGroup mxsrPartGroup::create (
-	int                   startInputLineNumber,
-	int                   partGroupNumber,
-	const S_msrPartGroup& theMsrPartGroup,
-	int                   identity)
-{
-  mxsrPartGroup* obj = new
-    mxsrPartGroup (
-      startInputLineNumber,
-      partGroupNumber,
-      theMsrPartGroup,
-      identity);
-  assert (obj != nullptr);
-  return obj;
-}
-
-mxsrPartGroup::mxsrPartGroup (
-	int                   startInputLineNumber,
-	int                   partGroupNumber,
-	const S_msrPartGroup& theMsrPartGroup,
-	int                   identity)
-{
-  fPartGroupNumber = partGroupNumber;
-
-  fPartGroupIdentity = identity;
-
-  fStartInputLineNumber = startInputLineNumber;
-  fStopInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
-
-  fMsrPartGroup = theMsrPartGroup;
-}
-
-mxsrPartGroup::~mxsrPartGroup ()
-{}
-
-bool mxsrPartGroup::comparePartGroupsByIncreasingIdentity (
-	const S_mxsrPartGroup& first,
-	const S_mxsrPartGroup& second)
-{
-  return
-    first->fPartGroupIdentity
-      <
-    second->fPartGroupIdentity;
-}
-
-bool mxsrPartGroup::comparePartGroupsByDecreasingIdentity (
-	const S_mxsrPartGroup& first,
-	const S_mxsrPartGroup& second)
-{
-  return
-    first->fPartGroupIdentity
-      >=
-    second->fPartGroupIdentity;
-}
-
-std::string mxsrPartGroup::asString () const
-{
-  std::stringstream ss;
-
-  ss <<
-    '\'' <<
-    fPartGroupNumber <<
-    "' -=> " <<
-    fMsrPartGroup->fetchPartGroupCombinedName ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTracePartGroups ()) {
-    ss <<
-      ", fPartGroupIdentity " << fPartGroupIdentity;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ss <<
-    ", lines " <<
-    fStartInputLineNumber << ".." << fStopInputLineNumber;
-
-  return ss.str ();
-}
-
-void mxsrPartGroup::print (std::ostream& os) const
-{
-  const int fieldWidth = 14;
-
-	os <<
-		"[mxsrPartGroup" <<
-    ", fPartGroupNumber" << ": " <<
-    fPartGroupNumber <<
-		std::endl;
-
-	++gIndenter;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fStartInputLineNumber" << ": " <<
-    fStartInputLineNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fStopInputLineNumber" << ": " <<
-    fStopInputLineNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fPartGroupIdentity" << ": " <<
-    fPartGroupIdentity <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fMsrPartGroup" << ": " <<
-    std::endl;
-
-	++gIndenter;
-  os <<
-    fMsrPartGroup <<
-    std::endl;
-  --gIndenter;
-
-	os << ']' << std::endl;
-
-  --gIndenter;
-}
-
-std::ostream& operator << (std::ostream& os, const S_mxsrPartGroup& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "[NULL]" << std::endl;
-  }
-
-  return os;
-}
-
-//______________________________________________________________________________
-S_mxsrPartGroupsList mxsrPartGroupsList::create ()
-{
-  mxsrPartGroupsList* obj = new
-    mxsrPartGroupsList ();
-  assert (obj != nullptr);
-  return obj;
-}
-
-S_mxsrPartGroupsList mxsrPartGroupsList::create (
-	const S_mxsrPartGroup& partGroup)
-{
-  mxsrPartGroupsList* obj = new
-    mxsrPartGroupsList (
-    	partGroup);
-  assert (obj != nullptr);
-  return obj;
-}
-
-mxsrPartGroupsList::mxsrPartGroupsList ()
-{}
-
-mxsrPartGroupsList::mxsrPartGroupsList (
-	const S_mxsrPartGroup& partGroup)
-{
-  fMxsrPartGroupsStdList.push_back (partGroup);
-}
-
-mxsrPartGroupsList::~mxsrPartGroupsList ()
-{}
-
-void mxsrPartGroupsList::prependPartGroup (
-	const S_mxsrPartGroup& partGroup)
-{
-  fMxsrPartGroupsStdList.push_front (partGroup);
-}
-
-void mxsrPartGroupsList::appendPartGroup (
-	const S_mxsrPartGroup& partGroup)
-{
-  fMxsrPartGroupsStdList.push_back (partGroup);
-}
-
-void mxsrPartGroupsList::sortByDecreasingIdentity()
-{
-  fMxsrPartGroupsStdList.sort (
-  	mxsrPartGroup::comparePartGroupsByDecreasingIdentity);
-}
-
-void mxsrPartGroupsList::print (std::ostream& os) const
-{
-  os <<
-    "[mxsrPartGroupsList" <<
-    ", fMxsrPartGroupListName: " << fMxsrPartGroupListName << ':';
-
-  if (fMxsrPartGroupsStdList.size ()) {
-  	os << std::endl;
-
-    ++gIndenter;
-
-		for (S_mxsrPartGroup partGroup : fMxsrPartGroupsStdList) {
-			os <<
-				partGroup->asString () <<
-				std::endl;
-		} // for
-
-    --gIndenter;
-  }
-
-  else {
-    os <<
-      " [EMPTY]" <<
-      std::endl;
-  }
-
-	os << ']' << std::endl;
-}
-
-void mxsrPartGroupsList::printWithContext (
-  const std::string& context,
-	char               evidencer,
-  std::ostream&      os) const
-{
-	size_t
-		thePartGroupsStdListSize =
-			fMxsrPartGroupsStdList.size ();
-
-  os <<
-    "[mxsrPartGroupsList" <<
-    ", fMxsrPartGroupListName: \"" << fMxsrPartGroupListName << "\"" <<
-    ", " <<
-    mfSingularOrPlural (
-    	thePartGroupsStdListSize, "element", "elements") <<
-    " -- " <<
-    context <<
-    ':';
-
-  if (fMxsrPartGroupsStdList.size ()) {
-  	os << std::endl;
-
-    ++gIndenter;
-
-		int counter = thePartGroupsStdListSize - 1;
-    for (S_mxsrPartGroup partGroup : fMxsrPartGroupsStdList) {
-      os <<
-        counter << ": " << evidencer <<
-        std::endl;
-
-			++gIndenter;
-      os <<
-        partGroup <<
-        std::endl;
-			--gIndenter;
-
-      --counter;
-    } // for
-
-    --gIndenter;
-  }
-
-  else {
-    os <<
-      " [EMPTY]" <<
-      std::endl;
-  }
-
-  os << ']' << std::endl;
-}
-
-std::ostream& operator << (std::ostream& os, const mxsrPartGroupsList& elt) {
-  elt.print (os);
-  return os;
-}
-
-std::ostream& operator << (std::ostream& os, const S_mxsrPartGroupsList& elt) {
-  elt->print (os);
-  return os;
-}
-
-//______________________________________________________________________________
-S_mxsrPartGroupsStack mxsrPartGroupsStack::create ()
-{
-  mxsrPartGroupsStack* obj = new
-    mxsrPartGroupsStack ();
-  assert (obj != nullptr);
-  return obj;
-}
-
-S_mxsrPartGroupsStack mxsrPartGroupsStack::create (
-	const S_mxsrPartGroup& partGroup)
-{
-  mxsrPartGroupsStack* obj = new
-    mxsrPartGroupsStack (
-    	partGroup);
-  assert (obj != nullptr);
-  return obj;
-}
-
-mxsrPartGroupsStack::mxsrPartGroupsStack ()
-{}
-
-mxsrPartGroupsStack::mxsrPartGroupsStack (
-	const S_mxsrPartGroup& partGroup)
-{
-  fMxsrPartGroupsStdList.push_back (partGroup);
-}
-
-mxsrPartGroupsStack::~mxsrPartGroupsStack ()
-{}
-
-void mxsrPartGroupsStack::print (std::ostream& os) const
-{
-  os <<
-    "[mxsrPartGroupsStack" <<
-    ", fMxsrPartGroupStackName: " << fMxsrPartGroupStackName << ':';
-
-  if (fMxsrPartGroupsStdList.size ()) {
-  	os << std::endl;
-
-    ++gIndenter;
-
-		for (S_mxsrPartGroup partGroup : fMxsrPartGroupsStdList) {
-			os <<
-				partGroup->asString () <<
-				std::endl;
-		} // for
-
-    --gIndenter;
-  }
-
-  else {
-    os <<
-      " [EMPTY]" <<
-      std::endl;
-  }
-
-	os << ']' << std::endl;
-}
-
-void mxsrPartGroupsStack::printWithContext (
-  const std::string& context,
-	char               evidencer,
-  std::ostream&      os) const
-{
-	size_t
-		thePartGroupsStdListSize =
-			fMxsrPartGroupsStdList.size ();
-
-  os <<
-    "The part groups stack contains " <<
-    "[mxsrPartGroupsStack" <<
-    ", fMxsrPartGroupStackName: \"" << fMxsrPartGroupStackName << "\"" <<
-    ", " <<
-    mfSingularOrPlural (
-    	thePartGroupsStdListSize, "element", "elements") <<
-    " -- " <<
-    context <<
-    ':';
-
-  if (fMxsrPartGroupsStdList.size ()) {
-  	os << std::endl;
-
-    ++gIndenter;
-
-		int counter = thePartGroupsStdListSize - 1;
-    for (S_mxsrPartGroup partGroup : fMxsrPartGroupsStdList) {
-      os <<
-        counter << ": " << evidencer <<
-        std::endl;
-
-			++gIndenter;
-      os <<
-        partGroup <<
-        std::endl;
-			--gIndenter;
-
-      --counter;
-    } // for
-
-    --gIndenter;
-  }
-
-  else {
-    os <<
-      " [EMPTY]" <<
-      std::endl;
-  }
-
-  os << ']' << std::endl;
-}
-
-std::ostream& operator << (std::ostream& os, const mxsrPartGroupsStack& elt) {
-  elt.print (os);
-  return os;
-}
-
-std::ostream& operator << (std::ostream& os, const S_mxsrPartGroupsStack& elt) {
-  elt->print (os);
-  return os;
-}
-
-//______________________________________________________________________________
-S_mxsrTuplet mxsrTuplet::create (
-	int               tupletInputStartLineNumber,
-	int               tupletNumber,
-	msrTupletTypeKind tupletTypeKind)
-{
-  mxsrTuplet* obj = new
-    mxsrTuplet (
-    	tupletInputStartLineNumber,
-    	tupletNumber,
-    	tupletTypeKind);
-  assert (obj != nullptr);
-  return obj;
-}
-
-mxsrTuplet::mxsrTuplet (
-	int               tupletInputStartLineNumber,
-	int               tupletNumber,
-	msrTupletTypeKind tupletTypeKind)
-{
-  fTupletInputStartLineNumber =tupletInputStartLineNumber;
-  fTupletNumber = tupletNumber;
-  fTupletTypeKind = tupletTypeKind;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsBasics ()) {
-    gLog <<
-      std::endl <<
-      "Creating an MXSR tuplet: " <<
-      std::endl;
-
-			++gIndenter;
-
-			const int fieldWidth = 28;
-
-	    gLog << std::left <<
-    		std::setw (fieldWidth) <<
-	    	"fTupletInputStartLineNumber" << fTupletInputStartLineNumber <<
-	    	std::endl <<
-    		std::setw (fieldWidth) <<
-	    	"fTupletNumber" << fTupletNumber <<
-	    	std::endl <<
-    		std::setw (fieldWidth) <<
-	    	"fTupletTypeKind" << fTupletTypeKind <<
-	    	std::endl << std::endl;
-
-			--gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-mxsrTuplet::~mxsrTuplet ()
-{}
-
-std::string mxsrTuplet::asString () const
-{
-  std::stringstream ss;
-
-  ss <<
-		"[mxsrTuplet" <<
-		", fTupletInputStartLineNumber: " << fTupletInputStartLineNumber <<
-		", fTupletNumber: " << fTupletNumber <<
-		", fTupletTypeKind:" << fTupletTypeKind <<
-    ']';
-
-  return ss.str ();
-}
-
-void mxsrTuplet::print (std::ostream& os) const
-{
-  os <<
-    "[mxsrTuplet" <<
-    std::endl;
-
-  ++gIndenter;
-
-  const int fieldWidth = 27;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fTupletInputStartLineNumber" << ": " <<
-    fTupletInputStartLineNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fTupletNumber" << ": " << fTupletNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fTupletTypeKind" << ": " << fTupletTypeKind <<
-    std::endl;
-
-  --gIndenter;
-
-	os << ']' << std::endl;
-}
-
-std::ostream& operator << (std::ostream& os, const mxsrTuplet& elt) {
-  elt.print (os);
-  return os;
-}
-
-std::ostream& operator << (std::ostream& os, const S_mxsrTuplet& elt) {
-  elt->print (os);
-  return os;
-}
-
-//______________________________________________________________________________
-S_mxsr2msrPendingTupletStop mxsr2msrPendingTupletStop::create (
-	int eventSequentialNumber,
-	int noteSequentialNumber,
-	int staffNumber,
-	int voiceNumber,
-	int tupletNumber,
-	int eventInputStartLineNumber,
-	int eventInputEndLineNumber)
-{
-  mxsr2msrPendingTupletStop* obj = new
-    mxsr2msrPendingTupletStop (
-      eventSequentialNumber,
-      noteSequentialNumber,
-      staffNumber,
-      voiceNumber,
-      tupletNumber,
-      eventInputStartLineNumber,
-      eventInputEndLineNumber);
-  assert (obj != nullptr);
-  return obj;
-}
-
-mxsr2msrPendingTupletStop::mxsr2msrPendingTupletStop (
-	int eventSequentialNumber,
-	int noteSequentialNumber,
-	int staffNumber,
-	int voiceNumber,
-	int tupletNumber,
-	int eventInputStartLineNumber,
-	int eventInputEndLineNumber)
-{
-  fEventSequentialNumber = eventSequentialNumber;
-  fNoteSequentialNumber = noteSequentialNumber;
-
-	fStaffNumber = staffNumber;
-  fVoiceNumber = voiceNumber;
-
-  fTupletNumber = tupletNumber;
-
-  fEventInputStartLineNumber = eventInputStartLineNumber;
-  fEventInputEndLineNumber   = eventInputEndLineNumber;
-}
-
-mxsr2msrPendingTupletStop::~mxsr2msrPendingTupletStop ()
-{}
-
-std::string mxsr2msrPendingTupletStop::asString () const
-{
-  std::stringstream ss;
-
-  ss <<
-		"[PendingTupletStop" <<
-		", fEventInputStartLineNumber: " << fEventInputStartLineNumber <<
-// 		", fEventInputEndLineNumber: " << fEventInputEndLineNumber <<
-		", fEventSequentialNumber: E" << fEventSequentialNumber <<
-		", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
-		", fStaffNumber: S" << fStaffNumber <<
-		", fVoiceNumber:V" << fVoiceNumber <<
-		", fTupletNumber: T" << fTupletNumber <<
-    ']' <<
-    std::endl;
-
-  return ss.str ();
-}
-
-void mxsr2msrPendingTupletStop::print (std::ostream& os) const
-{
-	os <<
-		"[PendingTupletStop" <<
-		std::endl;
-
-	++gIndenter;
-
-  const int fieldWidth = 27;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fEventInputStartLineNumber" << ": " <<
-    fEventInputStartLineNumber <<
-    std::endl <<
-//     std::setw (fieldWidth) <<
-//     "fEventInputEndLineNumber" << ": " <<
-//     fEventInputEndLineNumber <<
-//     std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": E" <<
-    fEventSequentialNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": N" <<
-    fNoteSequentialNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fStaffNumber" << ": S" <<
-    fStaffNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fVoiceNumber" << ": V" <<
-    fVoiceNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fTupletNumber" << ": T" <<
-    fTupletNumber <<
-    std::endl;
-
-  --gIndenter;
-
-	os <<
-		']' << std::endl;
-}
-
-std::ostream& operator << (std::ostream& os, const mxsr2msrPendingTupletStop& elt)
-{
-  elt.print (os);
-  return os;
-}
-
-std::ostream& operator << (std::ostream& os, const S_mxsr2msrPendingTupletStop& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "[NULL]" << std::endl;
-  }
-
-  return os;
-}
 
 //________________________________________________________________________
 mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
@@ -775,6 +87,8 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
   // chords handling
   fCurrentNoteBelongsToAChord = false;
   fPreviousNoteBelongsToAChord = false;
+
+//   fOnGoingChord = false;
 
   // tuplets handling
   fCurrentTupletNumber  = -1;
@@ -2459,7 +1773,7 @@ void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
 	// the current note is then the one preceding the end of measure
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMxsrEvents ()) {
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
 		gLog <<
 			"===> visitEnd (S_measure& elt)" <<
 			", fCurrentNoteStartInputLineNumber: " <<
@@ -2502,11 +1816,10 @@ void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
 		// the note before the measure end is the last one of the chord
 		// it is still the current note
 
-		fResultingEventsCollection.registerChordEvent (
+		fResultingEventsCollection.registerChordEnd (
 			fCurrentNoteSequentialNumber,
 			fCurrentNoteStaffNumber,
 			fCurrentNoteVoiceNumber,
-			mxsrChordEventKind::kEventChordEnd,
 			fCurrentNoteStartInputLineNumber,
 			fCurrentNoteEndInputLineNumber);
 	}
@@ -2619,7 +1932,7 @@ void mxsr2msrSkeletonBuilder::handePendingTupletsStopsIfAny (
 				(*it).second;
 
 #ifdef MF_TRACE_IS_ENABLED
-		if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+		if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 			std::stringstream ss;
 
 			ss <<
@@ -2688,7 +2001,7 @@ void mxsr2msrSkeletonBuilder::handePendingTupletsStopsIfAny (
 void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2720,7 +2033,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_partwise& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2773,7 +2086,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2795,7 +2108,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2819,7 +2132,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2843,7 +2156,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2865,7 +2178,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2896,7 +2209,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2913,7 +2226,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2930,7 +2243,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3016,7 +2329,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3042,7 +2355,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3070,7 +2383,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3137,7 +2450,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3170,7 +2483,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3187,7 +2500,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3209,7 +2522,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3233,7 +2546,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3265,7 +2578,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
     if (gGlobalMxsr2msrOahGroup->getCubase ()) {
       S_oahElement
         cubaseOption =
-          gGlobalMxsrOahGroup->
+          gGlobalMxsr2msrOahGroup->
             getUpLinkToHandler ()->
               fetchNameInNamesToElementsMap ("cubase");
 
@@ -3306,7 +2619,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3330,7 +2643,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3355,7 +2668,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3385,7 +2698,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3403,7 +2716,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3503,7 +2816,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3533,7 +2846,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3580,7 +2893,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3597,7 +2910,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3614,7 +2927,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3745,7 +3058,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3766,7 +3079,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3798,7 +3111,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_list& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3830,7 +3143,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_list& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3907,7 +3220,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3926,7 +3239,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3956,7 +3269,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_group_name_display& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3975,7 +3288,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_group_name_display& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4017,7 +3330,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_display_text& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_accidental_text& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4036,7 +3349,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_accidental_text& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_group_abbreviation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4055,7 +3368,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_abbreviation& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4112,7 +3425,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4151,7 +3464,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4212,7 +3525,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4283,7 +3596,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4320,7 +3633,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_part_name_display& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4339,7 +3652,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name_display& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4358,7 +3671,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4388,7 +3701,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4407,7 +3720,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_part_abbreviation_display& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4426,7 +3739,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_abbreviation_display& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_instrument_name& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4445,7 +3758,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_name& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_instrument_abbreviation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4464,7 +3777,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_instrument_abbreviation& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4572,7 +3885,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4681,7 +3994,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4784,7 +4097,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 // 	// JMI v0.9.72 should be ignored!
 //
 // // #ifdef MF_TRACE_IS_ENABLED
-// //   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+// //   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 // //     std::stringstream ss;
 // //
 // //     ss <<
@@ -4855,7 +4168,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4925,7 +4238,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4971,7 +4284,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4990,7 +4303,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_print& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5010,7 +4323,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5073,7 +4386,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5103,7 +4416,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_backup& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5123,7 +4436,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_backup& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_forward& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5144,7 +4457,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_forward& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_repeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5217,7 +4530,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_repeat& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5420,11 +4733,10 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 		else {
 			// this is the second note of the chord
 			// we're one note late, hence the previous note is the chord begin
-			fResultingEventsCollection.registerChordEvent (
+			fResultingEventsCollection.registerChordBegin (
 				fPreviousNoteSequentialNumber,
 				fPreviousNoteStaffNumber,
 				fPreviousNoteVoiceNumber,
-				mxsrChordEventKind::kEventChordBegin,
 				fPreviousNoteStartInputLineNumber,
 				fPreviousNoteEndInputLineNumber);
 		}
@@ -5435,11 +4747,10 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 		if (fPreviousNoteBelongsToAChord) {
 			// this the note after the last one of the chord
 			// we're one note late, hence the previous note is the chord end
-			fResultingEventsCollection.registerChordEvent (
+			fResultingEventsCollection.registerChordEnd (
 				fPreviousNoteSequentialNumber,
 				fPreviousNoteStaffNumber,
 				fPreviousNoteVoiceNumber,
-				mxsrChordEventKind::kEventChordEnd,
 				fPreviousNoteStartInputLineNumber,
 				fPreviousNoteEndInputLineNumber);
 		}
@@ -5597,7 +4908,7 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
 void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5769,7 +5080,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_chord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5806,7 +5117,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_chord& elt)
 void mxsr2msrSkeletonBuilder:: visitEnd (S_chord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5824,7 +5135,7 @@ void mxsr2msrSkeletonBuilder:: visitEnd (S_chord& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5877,6 +5188,13 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
         ss.str ());
     }
 
+		// create a tuplet and push it onto fPendingTupletsList
+		fPendingTupletsList.push_back (
+			mxsrTuplet::create (
+				fCurrentNoteStartInputLineNumber,
+				fCurrentTupletNumber,
+				tupletTypeKind));
+
 #ifdef MF_TRACE_IS_ENABLED
 		if (gTraceOahGroup->getTraceTupletsBasics ()) {
 			std::stringstream ss;
@@ -5897,14 +5215,6 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
 				ss.str ());
 		}
 #endif // MF_TRACE_IS_ENABLED
-
-		// there can be multiple <tuplet /> upon a given note,
-		// so we put them aside
-		fPendingTupletsList.push_back (
-			mxsrTuplet::create (			// temporary,
-				fCurrentNoteStartInputLineNumber,
-				fCurrentTupletNumber,
-				tupletTypeKind));
   }
 }
 
@@ -5912,7 +5222,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_time_modification& elt)
 {
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5932,7 +5242,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_time_modification& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6043,7 +5353,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6095,7 +5405,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6124,7 +5434,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
 void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<

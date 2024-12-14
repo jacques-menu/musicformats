@@ -23,30 +23,30 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msr2mxsrOahGroup : public oahGroup
+class EXP msr2mxsr2msrOahGroup : public oahGroup
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msr2mxsrOahGroup> create ();
+    static SMARTP<msr2mxsr2msrOahGroup> create ();
 
   private:
 
     // initialisation
     // ------------------------------------------------------
 
-    void                  initializeMsr2mxsrOahGroup ();
+    void                  initializeMsr2mxsr2msrOahGroup ();
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msr2mxsrOahGroup ();
+                          msr2mxsr2msrOahGroup ();
 
-    virtual               ~msr2mxsrOahGroup ();
+    virtual               ~msr2mxsr2msrOahGroup ();
 
   public:
 
@@ -140,13 +140,13 @@ class EXP msr2mxsrOahGroup : public oahGroup
     std::string           fMovementTitle;
     std::string           fMovementNumber;
 };
-typedef SMARTP<msr2mxsrOahGroup> S_msr2mxsrOahGroup;
-EXP std::ostream& operator << (std::ostream& os, const S_msr2mxsrOahGroup& elt);
+typedef SMARTP<msr2mxsr2msrOahGroup> S_msr2mxsr2msrOahGroup;
+EXP std::ostream& operator << (std::ostream& os, const S_msr2mxsr2msrOahGroup& elt);
 
-EXP extern S_msr2mxsrOahGroup gGlobalMsr2mxsrOahGroup;
+EXP extern S_msr2mxsr2msrOahGroup gGlobalMsr2mxsr2msrOahGroup;
 
 //______________________________________________________________________________
-EXP S_msr2mxsrOahGroup createGlobalMsr2mxsrOahGroup ();
+EXP S_msr2mxsr2msrOahGroup createGlobalMsr2mxsr2msrOahGroup ();
 
 
 }

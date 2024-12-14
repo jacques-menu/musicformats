@@ -161,8 +161,8 @@ void msrMeasure::initializeMeasure ()
   // measure shortest note tuplet factor
 //  fMeasureShortestNoteTupletFactor = mfRational (1, 1);
 
-  // measure doesn't contain music yet
-  fMeasureContainsMusic = false;
+  // measure doesn't contain sound yet
+  fMeasureContainsSound = false;
 
   // regular measure ends detection
   fMeasureEndRegularKind =
@@ -1003,15 +1003,15 @@ void msrMeasure::setMeasurePuristNumber (
 // }
 
 void msrMeasure::appendMeasureElementToMeasure (
-  const S_msrMeasureElement& elem,
+  const S_msrMeasureElement& measureElement,
   const std::string&         context)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    elem != nullptr,
-    "appendMeasureElementToMeasure(): elem is null");
+    measureElement != nullptr,
+    "appendMeasureElementToMeasure(): measureElement is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1020,7 +1020,7 @@ void msrMeasure::appendMeasureElementToMeasure (
 
     ss <<
       "Appending measure element " <<
-      elem->asShortString () <<
+      measureElement->asShortString () <<
       " to measure " <<
       asShortString () <<
 //       " in voice \"" <<
@@ -1030,7 +1030,7 @@ void msrMeasure::appendMeasureElementToMeasure (
       ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
       fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
       ", context: " << context <<
-      ", line " << elem->getInputStartLineNumber ();
+      ", line " << measureElement->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1038,41 +1038,43 @@ void msrMeasure::appendMeasureElementToMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // populate elem uplink to measure
+  // populate measureElement uplink to measure
   S_msrMeasure upLinkToMeasure = this;
 
-  elem->
+  measureElement->
     setMeasureElementUpLinkToMeasure (upLinkToMeasure);
 
-//   // set elem's measure number JMI v0.9.66
+//   // set measureElement's measure number JMI v0.9.66
 //   upLinkToMeasure->
 //     setMeasureNumber (
 //       fMeasureNumber);
 
-  // set elem's measure position
-  elem->
+  // set measureElement's measure position
+  measureElement->
     setMeasureElementMeasurePosition (
       this,
       fMeasureCurrentAccumulatedWholeNotesDuration,
       "appendMeasureElementToMeasure() 1");
 
-  // append elem to the measure elements list
-  fMeasureElementsList.push_back (elem);
+  // append measureElement to the measure elements list
+  fMeasureElementsList.push_back (measureElement);
 
 //   DON'T account for tuplets sounding whole notes, // JMI v0.9.70
 //   this is done one member note at a time
 
   msrWholeNotes
-    elemWholeNotes =
-      elem->getMeasureElementSoundingWholeNotes ();
+    measureElementWholeNotes =
+      measureElement->getMeasureElementSoundingWholeNotes ();
 
-  if (elemWholeNotes.getNumerator () != 0 ) {
+  if (measureElementWholeNotes.getNumerator () != 0 ) {
+    fMeasureContainsSound = true;
+
     incrementMeasureCurrentAccumulatedWholeNotesDuration (
-      elem->getInputStartLineNumber (),
-      elemWholeNotes,
+      measureElement->getInputStartLineNumber (),
+      measureElementWholeNotes,
       context + "appendMeasureElementToMeasure() 2: "
         +
-      elem->asShortString ());
+      measureElement->asShortString ());
   }
 }
 
@@ -1998,9 +2000,6 @@ void msrMeasure::appendMusicXMLPrintLayoutToMeasure (
     musicXMLPrintLayout,
     "appendMusicXMLPrintLayoutToMeasure()");
 
-  // this measure contains music
-  fMeasureContainsMusic = true;
-
   // register it for MusicXML generation from MSR
   fMeasureMusicXMLPrintLayout = musicXMLPrintLayout;
 }
@@ -2881,9 +2880,6 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
     }
   }
 
-  // this measure contains music
-  fMeasureContainsMusic = true;
-
   --gIndenter;
 }
 
@@ -3001,9 +2997,6 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
     }
   }
 
-  // this measure contains music
-  fMeasureContainsMusic = true;
-
   --gIndenter;
 }
 
@@ -3072,10 +3065,6 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
     // register note as the last one in this measure
     fMeasureLastHandledNote = note;
 
-  // this measure contains music
-  fMeasureContainsMusic = true;
- // JMI }
-
   --gIndenter;
 }
 
@@ -3108,9 +3097,6 @@ void msrMeasure::appendDoubleTremoloToMeasure (
   appendMeasureElementToMeasure (
     doubleTremolo,
     "appendDoubleTremoloToMeasure()");
-
-  // this measure contains music
-  fMeasureContainsMusic = true;
 
   --gIndenter;
 }
@@ -3164,9 +3150,6 @@ void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
   // determine if the chord occupies a full measure
 // XXL  JMI  if (chordSoundingWholeNotes == fMeasureDivisionsPerWholeMeasure)
     // chord->setChordOccupiesAFullMeasure ();
-
-  // this measure contains music
-  fMeasureContainsMusic = true;
 }
 
 void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
@@ -3215,9 +3198,6 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
   // the duration of the individual members of the tuplet
   // have already been accounted for in current measure's whole notes
 
-  // this measure contains music
-  fMeasureContainsMusic = true;
-
   --gIndenter;
 }
 
@@ -3255,9 +3235,6 @@ void msrMeasure::appendHarmonyToMeasureWithoutPadUp (
   appendMeasureElementToMeasure (
     harmony,
     "appendHarmonyToMeasureWithoutPadUp()");
-
-  // this measure contains music
-  fMeasureContainsMusic = true;
 
   --gIndenter;
 }
@@ -3310,9 +3287,6 @@ void msrMeasure::appendHarmonyToMeasure (
   appendHarmonyToMeasureWithoutPadUp (
     inputLineNumber,
     harmony);
-
-  // this measure contains music
-  fMeasureContainsMusic = true;
 
   --gIndenter;
 }
@@ -3398,9 +3372,6 @@ void msrMeasure::appendHarmonyToMeasureClone (
     harmony,
     "appendHarmonyToMeasureClone()");
 
-  // this measure contains music
-  fMeasureContainsMusic = true;
-
   --gIndenter;
 }
 
@@ -3436,9 +3407,6 @@ void msrMeasure::appendFiguredBassToMeasureWithoutPadUp (
   appendMeasureElementToMeasure (
     figuredBass,
     "appendFiguredBassToMeasureWithoutPadUp()");
-
-  // this measure contains music
-  fMeasureContainsMusic = true;
 
   --gIndenter;
 }
@@ -3566,9 +3534,6 @@ void msrMeasure::appendFiguredBassToMeasureClone (
   appendMeasureElementToMeasure (
     figuredBass,
     "appendFiguredBassToMeasureClone()");
-
-  // this measure contains music
-  fMeasureContainsMusic = true;
 
   --gIndenter;
 }
@@ -3705,7 +3670,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 //     */
 //
 //     // this measure contains music
-//     fMeasureContainsMusic = true;
+//     fMeasureContainsSound = true;
 //
 //     --gIndenter;
 //   }
@@ -3870,9 +3835,6 @@ void msrMeasure::padUpToMeasurePosition (
 
     // append the paddingNote to the measure
     appendNoteOrPaddingToMeasure (paddingNote);
-
-    // this measure contains music
-    fMeasureContainsMusic = true;
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -4013,9 +3975,6 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
     // only now to make it possible to remove it afterwards
     // if it happens to be the first note of a chord JMI v0.9.67
     appendPaddingNoteAtTheEndOfMeasure (paddingSkipNote);
-
-    // this measure contains music
-    fMeasureContainsMusic = true;
   }
 
   else if (fMeasureCurrentAccumulatedWholeNotesDuration > measurePositionToPadUpTo) {
@@ -4303,7 +4262,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //   fMeasureElementsList.push_front (elem); // JMI
 //
 //   // this measure contains music
-//   fMeasureContainsMusic = true;
+//   fMeasureContainsSound = true;
 // }
 //
 // void msrMeasure::appendOtherElementToMeasure  (
@@ -4314,7 +4273,7 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //     "prependOtherElementToMeasure()");
 //
 //   // this measure contains music
-//   fMeasureContainsMusic = true;
+//   fMeasureContainsSound = true;
 // }
 
 void msrMeasure::removeNoteFromMeasure (
@@ -4708,7 +4667,7 @@ void msrMeasure::determineMeasureKind (
   ++gIndenter;
 
   // determine the measure kind
-  if (fMeasureCurrentAccumulatedWholeNotesDuration.getNumerator () == 0) {
+  if (false && ! fMeasureContainsSound) { // JMI v0.9.72 too early sometimes???
     // empty measure
       handleEmptyMeasure (
         inputLineNumber,
@@ -4801,6 +4760,8 @@ void msrMeasure::handleEmptyMeasure (
     }
 #endif // MF_TRACE_IS_ENABLED
 
+// mfAssertFalse (4444);
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     voice->
@@ -4833,7 +4794,8 @@ void msrMeasure::handleEmptyMeasure (
 #endif // MF_TRACE_IS_ENABLED
 
   // set it's measure kind
-  setMeasureKind (msrMeasureKind::kMeasureKindMusicallyEmpty);
+  setMeasureKind (
+    msrMeasureKind::kMeasureKindMusicallyEmpty);
 
   // increment voice's current measure purist number
   voice->
@@ -7925,7 +7887,11 @@ std::string msrMeasure::asString () const
     fMeasureKind <<
     ", voice: " <<
     voice->getVoiceName () <<
-    ", fMeasureOrdinalNumberInVoice: " <<
+
+    ", fMeasureContainsSound: " <<
+    fMeasureContainsSound <<
+
+   ", fMeasureOrdinalNumberInVoice: " <<
     fMeasureOrdinalNumberInVoice <<
     ", fMeasurePuristNumber: " <<
     fMeasurePuristNumber <<
@@ -7933,11 +7899,14 @@ std::string msrMeasure::asString () const
     fNextMeasureNumber <<
     ", fMeasureDebugNumber: " <<
     fMeasureDebugNumber <<
+
     "', fMeasureCurrentAccumulatedWholeNotesDuration: " <<
     fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
+
     ", getFullMeasureWholeNotesDuration (): " <<
     getFullMeasureWholeNotesDuration ().asFractionString () <<
     ", " <<
+
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
     ", line " << fInputStartLineNumber <<
@@ -8142,8 +8111,8 @@ void msrMeasure::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureContainsMusic" << ": " <<
-    fMeasureContainsMusic <<
+    "fMeasureContainsSound" << ": " <<
+    fMeasureContainsSound <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -8274,6 +8243,11 @@ void msrMeasure::print (std::ostream& os) const
   const int fieldWidth = 37;
 
   os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMeasureContainsSound" << ": " <<
+    fMeasureContainsSound <<
+    std::endl <<
+
     std::setw (fieldWidth) <<
     "fMeasureIsFirstInVoice" << ": " <<
     fMeasureIsFirstInVoice <<

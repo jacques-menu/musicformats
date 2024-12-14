@@ -122,6 +122,12 @@ class EXP msrMeasure : public msrSegmentElement
     int                   getMeasureEndInputLineNumber () const
                               { return fMeasureEndInputLineNumber; }
 
+    void                  setMeasureContainsSound ()
+                              { fMeasureContainsSound = true; }
+
+    Bool                  getMeasureContainsSound () const
+                              { return fMeasureContainsSound; }
+
     // measure whole notes durations, in whole notes
 
     void                  setFullMeasureWholeNotesDuration (
@@ -625,7 +631,7 @@ class EXP msrMeasure : public msrSegmentElement
     // ------------------------------------------------------
 
     void                  appendMeasureElementToMeasure (
-                            const S_msrMeasureElement& elem,
+                            const S_msrMeasureElement& measureElement,
                             const std::string&         context);
 
     void                  finalizeMeasureInRegularVoice (
@@ -720,6 +726,8 @@ class EXP msrMeasure : public msrSegmentElement
     int                   fMeasureEndInputLineNumber;
 
     // measure lengthes, in whole notes
+
+    Bool                  fMeasureContainsSound;
 
     msrWholeNotes         fMeasureCurrentAccumulatedWholeNotesDuration;
                             // this increases when musical elements

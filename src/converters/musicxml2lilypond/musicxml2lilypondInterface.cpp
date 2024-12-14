@@ -76,7 +76,7 @@ static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   const S_oahHandler& handler)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getDisplayMxsr ()) {
+  if (gGlobalMxsr2msrOahGroup->getDisplayMxsr ()) {
     gLog <<
       std::endl <<
       "<!-- ----------------------------------------------------------- -->" <<

@@ -171,15 +171,15 @@ void enforceSomeOptions (
       // ------------------------------------------------------
 
 /*
-      gGlobalMsr2mxsrOahGroup->setTraceDivisions ();
+      gGlobalMsr2mxsr2msrOahGroup->setTraceDivisions ();
 
-      gGlobalMxsrOahGroup->setTraceMxsrVisitors ();
+      gGlobalMxsr2msrOahGroup->setTraceMxsrVisitors ();
 */
       break;
 
     case mfMultiGenerationOutputKind::kGenerationGuido:
 /*
-     gGlobalMsr2mxsrOahGroup->setTraceDivisions ();
+     gGlobalMsr2mxsr2msrOahGroup->setTraceDivisions ();
 */
      break;
 

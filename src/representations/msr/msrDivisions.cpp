@@ -25,7 +25,7 @@
 
 #include "oahOah.h"
 
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 
 #include "msrOah.h"
 
@@ -50,7 +50,7 @@ S_msrDivisions msrDivisions::create (
 S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
- if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+ if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
     std::stringstream ss;
 
     ss <<
@@ -92,7 +92,7 @@ void msrDivisions::initializeDivisions ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalMxsrOahGroup->getTraceDivisions ()
+    gGlobalMxsr2msrOahGroup->getTraceDivisions ()
       &&
    ! gEarlyOptions.getEarlyQuietOption ()
   ) {
@@ -163,7 +163,7 @@ void msrDivisions::initializeDivisions ()
 
   // print the durations divisions if needed
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
     printNotesDurationKindsDivisions (gLog);
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -274,7 +274,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
   // either a sequence of dots or a multiplication factor
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
     const int fieldWidth = 16;
 
     std::stringstream ss;
@@ -331,7 +331,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
         msrNotesDurationKindAsString (baseNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+      if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
         const int fieldWidth = 22;
 
         gLog <<
@@ -366,7 +366,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
       baseNotesDurationDivisions / 2;
 
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+    if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
       const int fieldWidth = 22;
 
       gLog <<
@@ -393,7 +393,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
           baseNotesDurationDivisions);
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+      if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
         const int fieldWidth = 22;
 
         gLog <<
@@ -422,7 +422,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
         nextDivisionsInList /= 2;
 
 #ifdef MF_TRACE_IS_ENABLED
-        if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+        if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
           const int fieldWidth = 22;
 
           gLog <<
@@ -450,7 +450,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
       } // while
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+      if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
         const int fieldWidth = 24;
 
         gLog <<
@@ -483,7 +483,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
   numberOfDotsNeeded = dotsNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
     std::stringstream ss;
 
     ss <<

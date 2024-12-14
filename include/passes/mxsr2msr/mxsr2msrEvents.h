@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mxsrEventsCollection___
-#define ___mxsrEventsCollection___
+#ifndef ___mxsrEvents___
+#define ___mxsrEvents___
 
 #include <iomanip>
 #include <string>
@@ -572,8 +572,12 @@ class EXP mxsrEventsCollection : public smartable
 
     // chord events
     const std::map <int, S_mxsrChordEvent>&
-                          getChordsEventMap () const
-                              { return fChordsEventsMap; }
+                          getChordsBeginsMap () const
+                              { return fChordsBeginsMap; }
+
+    const std::map <int, S_mxsrChordEvent>&
+                          getChordsEndsMap () const
+                              { return fChordsEndsMap; }
 
     // tuplet events
     const std::list <S_mxsrTupletEvent>&
@@ -598,6 +602,7 @@ class EXP mxsrEventsCollection : public smartable
     // public services
     // ------------------------------------------------------
 
+    // staff changes
     void                  registerStaffChangeTakeOff (
                             int                      noteSequentialNumber,
                             int                      noteEventStaffNumber,
@@ -620,14 +625,36 @@ class EXP mxsrEventsCollection : public smartable
                             int                      eventInputStartLineNumber,
                             int                      eventInputEndLineNumber);
 
-    void                  registerChordEvent (
+    S_mxsrStaffChangeEvent
+                          fetchStaffChangeLandingAtNoteSequentialNumber (
+                            int noteSequentialNumber) const;
+
+    S_mxsrStaffChangeEvent
+                          fetchStaffChangeTakeOffAtNoteSequentialNumber (
+                            int noteSequentialNumber) const;
+
+    // chord events
+    void                  registerChordBegin (
                             int                noteSequentialNumber,
                             int                noteEventStaffNumber,
                             int                noteEventVoiceNumber,
-                            mxsrChordEventKind chordEventKind,
                             int                eventInputStartLineNumber,
                             int                eventInputEndLineNumber);
 
+    void                  registerChordEnd (
+                            int                noteSequentialNumber,
+                            int                noteEventStaffNumber,
+                            int                noteEventVoiceNumber,
+                            int                eventInputStartLineNumber,
+                            int                eventInputEndLineNumber);
+
+    S_mxsrChordEvent      fetchChordBeginAtNoteSequentialNumber (
+                            int noteSequentialNumber) const;
+
+    S_mxsrChordEvent      fetchChordEndAtNoteSequentialNumber (
+                            int noteSequentialNumber) const;
+
+    // tuplet events
     void                  registerTupletBeginEvent (
                             int                 noteSequentialNumber,
                             int                 noteEventStaffNumber,
@@ -644,22 +671,6 @@ class EXP mxsrEventsCollection : public smartable
                             int                 eventInputStartLineNumber,
                             int                 eventInputEndLineNumber);
 
-    void                  sortTheMxsrEventsLists ();
-
-    // staff changes
-    S_mxsrStaffChangeEvent
-                          fetchStaffChangeTakeOffAtNoteSequentialNumber (
-                            int noteSequentialNumber) const;
-
-    S_mxsrStaffChangeEvent
-                          fetchStaffChangeLandingAtNoteSequentialNumber (
-                            int noteSequentialNumber) const;
-
-    // chord events
-    S_mxsrChordEvent      fetchChordEventAtNoteSequentialNumber (
-                            int noteSequentialNumber) const;
-
-    // tuplet events
     void                  fetchTupletBeginsList (
                             int                            noteSequentialNumber,
                             std::list <S_mxsrTupletEvent>& collectedBeginsList);
@@ -667,6 +678,9 @@ class EXP mxsrEventsCollection : public smartable
     void                  fetchTupletEndsList (
                             int                            noteSequentialNumber,
                             std::list <S_mxsrTupletEvent>& collectedEndsList);
+
+    // sort MXSR events list
+    void                  sortTheMxsrEventsLists ();
 
   private:
 
@@ -717,14 +731,15 @@ class EXP mxsrEventsCollection : public smartable
                           fStaffChangeEventsList;
 
     // chords events
-      // there can be only one chord begin or end per note,
-      // hence this map, indexed by note sequential number
+      // there can be only one chord begin and one chord end per note,
+      // hence two maps, indexed by note sequential number
     std::map <int, S_mxsrChordEvent>
-                          fChordsEventsMap;
+                          fChordsBeginsMap,
+                          fChordsEndsMap;
 
     // tuplet events
       // there can be several tuplets start and/or stop events per note,
-      // hence this multimap, indexed by note sequential number,
+      // hence two lists and a multimap, indexed by note sequential number,
 
     std::list <S_mxsrTupletEvent>
                           fTupletsBeginsList,
@@ -744,4 +759,4 @@ EXP std::ostream& operator << (std::ostream& os, const mxsrEventsCollection& elt
 }
 
 
-#endif // ___mxsrEventsCollection___
+#endif // ___mxsrEvents___

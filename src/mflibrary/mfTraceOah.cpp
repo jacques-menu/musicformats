@@ -26,7 +26,7 @@
 #include "oahAtomsCollection.h"
 #include "oahEarlyOptions.h"
 
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 
 #include "waeHandlers.h"
 
@@ -2468,13 +2468,14 @@ R"()",
 
   // notes basics
 
-  S_oahTwoBooleansAtom
+  S_oahThreeBooleansAtom
     traceNotesBasicsBooleanAtom =
-      oahTwoBooleansAtom::create (
+      oahThreeBooleansAtom::create (
         "trace-notes-basics", "tnotesb",
 R"(Notes basic trace information)",
         "fTraceNotesBasics",
         fTraceNotesBasics,
+        fTraceMxsrEventsAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2797,8 +2798,8 @@ This option implies '-trace-tuplets-basics, -ttupsb' and '-trace-tuplets, -ttups
       oahTwoBooleansAtom::create (
         "trace-measure-repeats-basics", "tmrepsb",
 R"(Measure repeats basic trace information)",
-        "fTraceRepeatsBasics",
-        fTraceRepeatsBasics,
+        "fTraceMeasureRepeatsBasics",
+        fTraceMeasureRepeatsBasics,
         fTracePassesBooleanAtom);
 
   subGroup->
@@ -2812,7 +2813,7 @@ R"(Measure repeats basic trace information)",
       oahThreeBooleansAtom::create (
         "trace-measures-repeats", "tmeasreps",
 R"(Measure repeats.
-This option implies '-trace-tuplets-basics, -ttupsb'.)",
+This option implies '-trace-measure-repeats-basics, -tmrepsb'.)",
         "fTraceMeasureRepeats",
         fTraceMeasureRepeats,
         traceMeasureRepeatsBasicsBooleanAtom,
@@ -3171,6 +3172,9 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // staves
+    std::setw (fieldWidth) << "fTraceStavesBasics" << ": " <<
+    fTraceStavesBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceStaves" << ": " <<
     fTraceStaves <<
     std::endl <<
@@ -3179,11 +3183,17 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // staff changes
+    std::setw (fieldWidth) << "fTraceStaffChangesBasics" << ": " <<
+    fTraceStaffChangesBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceStaffChanges" << ": " <<
     fTraceStaffChanges <<
     std::endl <<
 
     // voices
+    std::setw (fieldWidth) << "fTraceVoicesBasics" << ": " <<
+    fTraceVoicesBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceVoices" << ": " <<
     fTraceVoices <<
     std::endl <<
@@ -3209,6 +3219,9 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceMeasuresNumbers <<
     std::endl <<
 
+    std::setw (fieldWidth) << "fTraceMeasuresBasics" << ": " <<
+    fTraceMeasuresBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceMeasures" << ": " <<
     fTraceMeasures <<
     std::endl <<
@@ -3341,6 +3354,9 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // repeats
+    std::setw (fieldWidth) << "fTraceRepeatsBasics" << ": " <<
+    fTraceRepeatsBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceRepeats" << ": " <<
     fTraceRepeats <<
     std::endl <<
@@ -3349,6 +3365,9 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // measure repeats
+    std::setw (fieldWidth) << "fTraceMeasureRepeatsBasics" << ": " <<
+    fTraceMeasureRepeatsBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceMeasureRepeats" << ": " <<
     fTraceMeasureRepeats <<
     std::endl <<
@@ -3380,6 +3399,9 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // notes
+    std::setw (fieldWidth) << "fTraceNotesBasics" << ": " <<
+    fTraceNotesBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceNotes" << ": " <<
     fTraceNotes <<
     std::endl <<
@@ -3492,15 +3514,20 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceLyricsDetails <<
     std::endl <<
 
+    // MXML events
+    std::setw (fieldWidth) << "fTraceMxsrEvents" << ": " <<
+    fTraceMxsrEvents <<
+    std::endl <<
+
     // words
     std::setw (fieldWidth) << "fTraceWords" << ": " <<
     fTraceWords <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceChordsDetails" << ": " <<
-    fTraceChordsDetails <<
-    std::endl <<
 
     // chords
+    std::setw (fieldWidth) << "fTraceChordsBasics" << ": " <<
+    fTraceChordsBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceChords" << ": " <<
     fTraceChords <<
     std::endl <<
@@ -3509,6 +3536,9 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // tuplets
+    std::setw (fieldWidth) << "fTraceTupletsBasics" << ": " <<
+    fTraceTupletsBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceTuplets" << ": " <<
     fTraceTuplets <<
     std::endl <<

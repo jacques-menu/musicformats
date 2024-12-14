@@ -40,7 +40,7 @@
 #include "guidoGenerationOah.h"
 
 // MXSR
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 #include "msr2mxsrOah.h"
 
 // MSR
@@ -465,11 +465,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
 
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMsr2mxsrOahGroup ());
-
-      // create the MXSR OAH group
-      appendGroupToHandler (
-        createGlobalMxsrOahGroup ());
+        createGlobalMsr2mxsr2msrOahGroup ());
       break;
 
     case mfMultiGenerationOutputKind::kGenerationGuido:
@@ -479,11 +475,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
 
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMsr2mxsrOahGroup ());
-
-      // create the MXSR OAH group
-      appendGroupToHandler (
-        createGlobalMxsrOahGroup ());
+        createGlobalMsr2mxsr2msrOahGroup ());
 
       // create the Guido generation OAH group
       appendGroupToHandler (
@@ -718,13 +710,13 @@ void Mikrokosmos3WanderingInsiderHandler::enforceHandlerQuietness ()
   gGlobalMikrokosmos3WanderingInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMxsrOahGroup->
+  gGlobalMxsr2msrOahGroup->
     enforceGroupQuietness ();
 
   gMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsr2mxsrOahGroup->
+  gGlobalMsr2mxsr2msrOahGroup->
     enforceGroupQuietness ();
 
   gHarmoniesExtraOahGroup->

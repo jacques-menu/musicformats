@@ -56,7 +56,7 @@
 
 
 // MXSR
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 #include "msr2mxsrOah.h"
 #include "msr2mxsrOah.h"
 
@@ -518,11 +518,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
     case mfMultiGenerationOutputKind::kGenerationMusicXML:
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMsr2mxsrOahGroup ());
-
-      // create the MXSR OAH group
-      appendGroupToHandler (
-        createGlobalMxsrOahGroup ());
+        createGlobalMsr2mxsr2msrOahGroup ());
 
       // create the msdl2musicxml OAH group
       appendGroupToHandler (
@@ -532,11 +528,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
     case mfMultiGenerationOutputKind::kGenerationGuido:
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMsr2mxsrOahGroup ());
-
-      // create the MXSR OAH group
-      appendGroupToHandler (
-        createGlobalMxsrOahGroup ());
+        createGlobalMsr2mxsr2msrOahGroup ());
 
       // create the xml2gmn OAH group
       appendGroupToHandler (
@@ -868,7 +860,7 @@ void msdlConverterInsiderHandler::enforceHandlerQuietness ()
   gMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsr2mxsrOahGroup->
+  gGlobalMsr2mxsr2msrOahGroup->
     enforceGroupQuietness ();
 
   gHarmoniesExtraOahGroup->

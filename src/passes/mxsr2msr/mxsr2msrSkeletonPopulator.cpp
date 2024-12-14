@@ -9,38 +9,18 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <sstream>
-#include <climits>      // INT_MIN, INT_MAX
-#include <iomanip>      // std::setw, std::setprecision, ...
-
-#include <set>
-#include <stdexcept>
-
-#include "smartpointer.h"
 #include "xml_tree_browser.h"
-
-#include "mfPreprocessorSettings.h"
-
 #include "mfAssert.h"
 #include "mfConstants.h"
-#include "mfServices.h"
 #include "mfStringsHandling.h"
 
-#include "waeInterface.h"
-#include "mxsr2msrWae.h"
-
-#include "mxsr2msrComponent.h"
-
+#include "msrBreaks.h"
 #include "msrMeasureConstants.h"
-#include "msrTuplets.h"
-
-#include "oahOah.h"
+#include "msrRehearsalMarks.h"
+#include "msrVoiceStaffChanges.h"
 
 #include "waeOah.h"
 
-#include "oahEarlyOptions.h"
-
-#include "mxsrOah.h"
 #include "mxsr2msrOah.h"
 #include "msrOah.h"
 
@@ -48,361 +28,11 @@
 
 #include "waeHandlers.h"
 
+#include "mxsr2msrWae.h"
+
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-S_mxsr2msrPopulatorVoiceHandler mxsr2msrPopulatorVoiceHandler::create (
-  const S_msrVoice&  voice)
-{
-  mxsr2msrPopulatorVoiceHandler* obj = new
-    mxsr2msrPopulatorVoiceHandler (
-      voice);
-  assert (obj != nullptr);
-  return obj;
-}
-
-mxsr2msrPopulatorVoiceHandler::mxsr2msrPopulatorVoiceHandler (
-  const S_msrVoice&  voice)
-{
-  fMsrVoice = voice;
-}
-
-mxsr2msrPopulatorVoiceHandler::~mxsr2msrPopulatorVoiceHandler ()
-{}
-
-void mxsr2msrPopulatorVoiceHandler::displayTupletsStack (
-  const std::string& context)
-{
-  size_t tupletsStackSize = fTupletsStack.size ();
-
-  gLog <<
-    std::endl <<
-    ">>++++++++++++++ The tuplets stack contains " <<
-    mfSingularOrPlural (
-      tupletsStackSize, "element", "elements") <<
-    ':' <<
-    std::endl;
-
-  if (tupletsStackSize) {
-    std::list <S_msrTuplet>::const_iterator
-      iBegin = fTupletsStack.begin (),
-      iEnd   = fTupletsStack.end (),
-      i      = iBegin;
-
-    S_msrTuplet tuplet = (*i);
-
-    ++gIndenter;
-
-    int n = tupletsStackSize;
-    for ( ; ; ) {
-      gLog <<
-        "v (" << n << ")" <<
-        std::endl;
-
-      ++gIndenter;
-      gLog << tuplet->asString (); // JMI v0.9.71
-      --gIndenter;
-
-      --n;
-
-      if (++i == iEnd) break;
-
-      gLog << std::endl;
-    } // for
-
-    --gIndenter;
-  }
-
-  gLog <<
-    " <<++++++++++++++++ " <<
-    std::endl << std::endl;
-}
-
-// void mxsr2msrPopulatorVoiceHandler::displayLastHandledTupletInVoiceMap (
-//   const std::string& header)
-// {
-//   gLog <<
-//     std::endl <<
-//     header <<
-//     ", fLastHandledTupletInVoiceMap contains:";
-//
-//   if (! fLastHandledTupletInVoiceMap.size ()) {
-//     gLog <<
-//       " none" <<
-//       std::endl;
-//   }
-//
-//   else {
-//     std::map <std::pair <int, int>, S_msrTuplet>::const_iterator
-//       iBegin = fLastHandledTupletInVoiceMap.begin (),
-//       iEnd   = fLastHandledTupletInVoiceMap.end (),
-//       i      = iBegin;
-//
-//     gLog << std::endl;
-//
-//     ++gIndenter;
-//
-//     for ( ; ; ) {
-//       gLog <<
-//         "staff " << (*i).first.first <<
-//         ", voice " <<  (*i).first.second <<
-//         std::endl;
-// //        "\"" << (*i).first->getVoiceName () <<
-// //        "\" ----> " << (*i).second->asString ();
-//       if (++i == iEnd) break;
-//       gLog << std::endl;
-//     } // for
-//
-//     gLog << std::endl;
-//
-//     --gIndenter;
-//   }
-//
-//   gLog << std::endl;
-// }
-
-void mxsr2msrPopulatorVoiceHandler::finalizeTupletStackTopAndPopItFromTupletsStack (
-  int         inputLineNumber,
-  std::string context)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Finalizing tuplet stack top and popping it from tuplet stack" <<
-      ", fTupletsStack.size (): " << fTupletsStack.size ();
-
-    ss <<
-      ", fCurrentOuterMostTuplet: ";
-    if (fCurrentOuterMostTuplet) {
-      ss <<
-        fCurrentOuterMostTuplet->asString ();
-    }
-    else {
-      ss << "[NULL]";
-    }
-
-    ss <<
-      ", context: " << context <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsDetails ()) {
-    displayTupletsStack (
-      "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 2");
-  }
-//   if (gTraceOahGroup->getTraceTuplets ()) {
-//     displayVoicesTupletsStacksMap (
-//       "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 3");
-//   }
-#endif // MF_TRACE_IS_ENABLED
-
-  // fetch the current voice
-  S_msrVoice
-    currentNoteVoice =
-      fMsrVoice; // JMI v0.9.70
-
-  // get tuplet from top of tuplet stack
-  S_msrTuplet
-    tupletStackFront =
-      fTupletsStack.front ();
-
-  // pop from the tuplets stack
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Popping tupletStackFront " <<
-      tupletStackFront->asString () <<
-      " for voice " <<
-      fMsrVoice->getVoiceName () <<
-      ", context: " << context <<
-      ", line " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsDetails ()) {
-    displayTupletsStack (
-      "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 4");
-  }
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//     displayVoicesTupletsStacksMap (
-//       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
-//   }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI v0.9.70
-  mfAssert (
-    __FILE__, __LINE__,
-    fTupletsStack.size () > 0,
-    "fTupletsStack is empty");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  fTupletsStack.pop_front (); // JMI v0.9.68
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsDetails ()) {
-    displayTupletsStack (
-      "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 6");
-  }
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//     displayVoicesTupletsStacksMap (
-//       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 7");
-//   }
-#endif // MF_TRACE_IS_ENABLED
-
-//   abort ();
-
-  switch (fTupletsStack.size ()) {
-    case 0:
-      // tupletStackFront is a top level tuplet
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceTupletsBasics ()) {
-        gLog <<
-          "Appending top level tuplet " <<
-        tupletStackFront->asString () <<
-        " to voice \"" <<
-        currentNoteVoice->getVoiceName () <<
-        "\"" <<
-        ", line " << inputLineNumber <<
-        std::endl;
-      }
-#endif // MF_TRACE_IS_ENABLED
-    break;
-
-    default:
-      // tupletStackFront is a nested tuplet
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceTupletsBasics ()) {
-        gLog <<
-          "=== appending nested tuplet " <<
-        tupletStackFront <<
-          " to current stack top tuplet " <<
-        fTupletsStack.front ()->asString () <<
-        ", line " << inputLineNumber <<
-        std::endl;
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fTupletsStack.front ()->
-        appendTupletToTuplet (tupletStackFront);
-  } // switch
-
-    // forget about the current outermost tuplet and its first note // JMI v0.9.68 HARMFUL
-//     fCurrentOuterMostTupletFirstNote = nullptr;
-//     fCurrentOuterMostTuplet = nullptr;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsDetails ()) {
-    displayTupletsStack (
-      "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 8");
-  }
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//     displayVoicesTupletsStacksMap (
-//       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 9");
-//   }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-std::string mxsr2msrPopulatorVoiceHandler::asString () const
-{
-  std::stringstream ss;
-
-  ss <<
-		"[mxsr2msrPopulatorVoiceHandler" <<
-    ", fMsrVoice: " << fMsrVoice->getVoiceName () <<
-    ']' <<
-    std::endl;
-
-  return ss.str ();
-}
-
-void mxsr2msrPopulatorVoiceHandler::print (std::ostream& os) const
-{
-	os <<
-		"[mxsr2msrPopulatorVoiceHandler" <<
-		std::endl;
-
-	++gIndenter;
-
-  const int fieldWidth = 33;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fMsrVoice" << ": " <<
-    fMsrVoice->getVoiceName () <<
-    std::endl << std::endl <<
-
-//     std::setw (fieldWidth) <<
-//     "fLastMetNoteInVoice" << ": " <<
-//     fLastMetNoteInVoice <<
-//     std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fCurrentOuterMostTupletFirstNote" << ": " <<
-    fCurrentOuterMostTupletFirstNote <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fCurrentOuterMostTuplet" << ": " <<
-    fCurrentOuterMostTuplet <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fCurrentOuterMostTuplet" << ": " <<
-    fCurrentOuterMostTuplet <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fTupletsStack" << ": " <<
-    std::endl;
-
-  ++gIndenter;
-  for (S_msrTuplet tuplet : fTupletsStack) {
-    os <<
-      tuplet <<
-      std::endl;
-  } // for
-  --gIndenter;
-
-  --gIndenter;
-
-	os << ']' << std::endl;
-}
-
-std::ostream& operator << (std::ostream& os, const mxsr2msrPopulatorVoiceHandler& elt)
-{
-  elt.print (os);
-  return os;
-}
-
-std::ostream& operator << (std::ostream& os, const S_mxsr2msrPopulatorVoiceHandler& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "[NULL]" << std::endl;
-  }
-
-  return os;
-}
 
 //________________________________________________________________________
 mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
@@ -868,15 +498,32 @@ void mxsr2msrSkeletonPopulator::displayStaffAndVoiceInformation (
 		mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
 		", fCurrentRecipientStaffNumber: " <<
 		mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
-		", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: ";
+
+		", fCurrentPartStaffMsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: ";
 
 	if (
-	  fCurrentPartStaffVoicesMap
+	  fCurrentPartStaffMsrVoicesMap
       [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]
   ) {
 		gLog <<
-			fCurrentPartStaffVoicesMap
+			fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+          getVoiceName ();
+	}
+	else {
+		gLog << "[NULL]";
+	}
+
+	gLog <<
+		", fCurrentPartStaffMsrVoicesMap [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]: ";
+
+	if (
+	  fCurrentPartStaffMsrVoicesMap
+      [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]
+  ) {
+		gLog <<
+			fCurrentPartStaffMsrVoicesMap
+        [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceName ();
 	}
 	else {
@@ -1100,8 +747,8 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 #endif // MF_TRACE_IS_ENABLED
 
   // forget any previous contents if any
-  fCurrentPartStaffVoicesMap.clear ();
-  fCurrentStaffVoiceHandlersMap.clear ();
+  fCurrentPartStaffMsrVoicesMap.clear ();
+  fCurrentPartStaffMxsrVoicesMap.clear ();
 
   // populate the voices vector
   size_t
@@ -1143,7 +790,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
         int
           voiceNumber = secondaryPair.first;
         S_msrVoice
-          voice = secondaryPair.second;
+          theMsrVoice = secondaryPair.second;
 
         // register the regular voice
 #ifdef MF_TRACE_IS_ENABLED
@@ -1152,7 +799,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 
           ss <<
             ">>> Creating the voice handler for voice " <<
-            voice <<
+            theMsrVoice <<
             " in staff " <<
             staffNumber <<
             " in part \"" <<
@@ -1165,14 +812,14 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        fCurrentPartStaffVoicesMap
+        fCurrentPartStaffMsrVoicesMap
           [staffNumber][voiceNumber] =
-            voice;
+            theMsrVoice;
 
         // create the voice voice handler for it
-        fCurrentStaffVoiceHandlersMap
+        fCurrentPartStaffMxsrVoicesMap
           [staffNumber][voiceNumber] =
-            mxsr2msrPopulatorVoiceHandler::create (voice);
+            mxsrVoice::create (theMsrVoice);
       } // for
     } // for
 
@@ -1186,39 +833,39 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
     gTraceOahGroup->getTraceVoicesBasics ()
   ) {
     // display the resulting maps
-    displayCurrentStaffVoiceHandlersMap ();
+    displayCurrentPartStaffMxsrVoicesMap ();
 
-    displayCurrentPartStaffVoicesMap (
+    displayCurrentPartStaffMsrVoicesMap (
       0,
       "after mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart()");
   }
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsr2msrSkeletonPopulator::displayCurrentPartStaffVoicesMap (
+void mxsr2msrSkeletonPopulator::displayCurrentPartStaffMsrVoicesMap (
   int                inputLineNumber,
   const std::string& context)
 {
   size_t
-    currentPartStaffVoicesMapSize =
-      fCurrentPartStaffVoicesMap.size ();
+    currentPartStaffMsrVoicesMapSize =
+      fCurrentPartStaffMsrVoicesMap.size ();
 
   gLog <<
     std::endl <<
-    "fCurrentPartStaffVoicesMap contains " <<
+    "fCurrentPartStaffMsrVoicesMap contains " <<
     mfSingularOrPlural (
-      currentPartStaffVoicesMapSize, "stave", "staves") <<
+      currentPartStaffMsrVoicesMapSize, "stave", "staves") <<
     ", context: " << context <<
     ", line " << inputLineNumber <<
     ":" <<
     std::endl;
 
-  if (currentPartStaffVoicesMapSize) {
+  if (currentPartStaffMsrVoicesMapSize) {
     ++gIndenter;
 
     for (
       std::pair <int, std::map <int, S_msrVoice>> primaryPair :
-        fCurrentPartStaffVoicesMap
+        fCurrentPartStaffMsrVoicesMap
     ) {
       int
         staffNumber = primaryPair.first;
@@ -1230,7 +877,7 @@ void mxsr2msrSkeletonPopulator::displayCurrentPartStaffVoicesMap (
         int
           voiceNumber = secondaryPair.first;
         S_msrVoice
-          voice = secondaryPair.second;
+          theMsrVoice = secondaryPair.second;
 
         gLog <<
           "staffNumber " << staffNumber <<
@@ -1241,7 +888,7 @@ void mxsr2msrSkeletonPopulator::displayCurrentPartStaffVoicesMap (
         ++gIndenter;
 
         gLog <<
-          voice <<
+          theMsrVoice <<
           std::endl;
 
         --gIndenter;
@@ -1256,38 +903,38 @@ void mxsr2msrSkeletonPopulator::displayCurrentPartStaffVoicesMap (
   gLog << std::endl;
 }
 
-void mxsr2msrSkeletonPopulator::displayCurrentStaffVoiceHandlersMap ()
+void mxsr2msrSkeletonPopulator::displayCurrentPartStaffMxsrVoicesMap ()
 {
   size_t
-    currentStaffVoiceHandlersMapSize =
-      fCurrentStaffVoiceHandlersMap.size ();
+    currentPartStaffMxsrVoicesMapSize =
+      fCurrentPartStaffMxsrVoicesMap.size ();
 
   gLog <<
     std::endl <<
-    "fCurrentStaffVoiceHandlersMap contains " <<
+    "fCurrentPartStaffMxsrVoicesMap contains " <<
     mfSingularOrPlural (
-      currentStaffVoiceHandlersMapSize, "stave", "staves") <<
+      currentPartStaffMxsrVoicesMapSize, "stave", "staves") <<
     ":" <<
     std::endl;
 
-  if (currentStaffVoiceHandlersMapSize) {
+  if (currentPartStaffMxsrVoicesMapSize) {
     ++gIndenter;
 
     for (
-      std::pair <int, std::map <int, S_mxsr2msrPopulatorVoiceHandler>> primaryPair :
-        fCurrentStaffVoiceHandlersMap
+      std::pair <int, std::map <int, S_mxsrVoice>> primaryPair :
+        fCurrentPartStaffMxsrVoicesMap
     ) {
       int
         staffNumber = primaryPair.first;
 
       for (
-        std::pair <int, S_mxsr2msrPopulatorVoiceHandler> secondaryPair :
+        std::pair <int, S_mxsrVoice> secondaryPair :
           primaryPair.second
       ) {
         int
           voiceNumber = secondaryPair.first;
-        S_mxsr2msrPopulatorVoiceHandler
-          voiceHandler = secondaryPair.second;
+        S_mxsrVoice
+          theMxsrVoice = secondaryPair.second;
 
         gLog <<
           "staffNumber " << staffNumber <<
@@ -1298,7 +945,7 @@ void mxsr2msrSkeletonPopulator::displayCurrentStaffVoiceHandlersMap ()
         ++gIndenter;
 
         gLog <<
-          voiceHandler <<
+          theMxsrVoice <<
           std::endl;
 
         --gIndenter;
@@ -1342,14 +989,14 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
 
   // fetch the first voice from the staff
   S_msrVoice
-    voice =
+    theMsrVoice =
       staff->
         fetchFirstRegularVoiceFromStaff (
           inputLineNumber);
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (! voice) {
+  if (! theMsrVoice) {
     staff->print (gLog); // JMI
 
     std::stringstream ss;
@@ -1374,7 +1021,7 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
 
     ss <<
       "--> fetchFirstVoiceFromCurrentPart() returns " <<
-      voice->getVoiceName ();
+      theMsrVoice->getVoiceName ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1382,14 +1029,14 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  return voice;
+  return theMsrVoice;
 }
 
 //______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::visitStart (S_millimeters& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1408,7 +1055,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_millimeters& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tenths& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1427,7 +1074,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tenths& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_scaling& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1471,7 +1118,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_scaling& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_system_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1495,7 +1142,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_layout& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_system_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1531,7 +1178,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_system_layout& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_system_margins& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1558,7 +1205,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_margins& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_system_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1593,7 +1240,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_distance& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_top_system_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1628,7 +1275,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_system_distance& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_system_margins& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1656,7 +1303,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_system_margins& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_system_dividers& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1686,7 +1333,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_dividers& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_left_divider& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1714,7 +1361,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_divider& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_right_divider& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1743,7 +1390,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_right_divider& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_notations& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1762,7 +1409,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notations& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_other_notation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1782,7 +1429,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_notation& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_page_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1806,7 +1453,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_layout& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_page_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1834,7 +1481,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_page_layout& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_page_height& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1868,7 +1515,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_height& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_page_width& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1902,7 +1549,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_width& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -1983,7 +1630,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_page_margins& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2007,7 +1654,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_margin& elt)
   float leftMargin = (float)(*elt);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2059,7 +1706,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_right_margin& elt)
   float rightMargin = (float)(*elt);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2108,7 +1755,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_margin& elt)
   float topMargin = (float)(*elt);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2147,7 +1794,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bottom_margin& elt)
   float bottomMargin = (float)(*elt);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2185,7 +1832,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bottom_margin& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staff_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2234,7 +1881,7 @@ From DalSegno.xml: JMI there is no <staff-distance /> ...
 void mxsr2msrSkeletonPopulator::visitEnd (S_staff_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2256,7 +1903,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_layout& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staff_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2293,7 +1940,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalMxsrOahGroup->getTraceMxsrVisitors ()
+    gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()
   ) {
     std::stringstream ss;
 
@@ -2318,7 +1965,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_layout& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_measure_layout& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2340,7 +1987,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure_layout& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_measure_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2376,7 +2023,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_distance& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_appearance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2495,7 +2142,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_appearance& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_appearance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2517,7 +2164,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_appearance& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2638,7 +2285,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2729,7 +2376,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2815,7 +2462,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2923,7 +2570,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_other_appearance& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -2954,7 +2601,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 //   gLog << elt; //JMI v0.9.66 create MusicFormats's own smart pointer type ???
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3123,7 +2770,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
     // display the voices vectors
-    displayCurrentPartStaffVoicesMap (
+    displayCurrentPartStaffMsrVoicesMap (
       elt->getInputStartLineNumber (),
       "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
@@ -3200,7 +2847,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3247,7 +2894,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
   // can now be appended to the latter's voice
   // prior to the note itself
 //   attachPendingVoiceLevelElementsToVoice (
-//     fCurrentPartStaffVoicesMap
+//     fCurrentPartStaffMsrVoicesMap
 //         [fCurrentNoteVoiceNumber]);
 
   attachPendingPartLevelElementsIfAnyToPart (
@@ -3343,7 +2990,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_attributes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3366,7 +3013,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_attributes& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_attributes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3402,7 +3049,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_attributes& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3431,7 +3078,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
 
   // set current part's divisions per quarter note
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
     std::stringstream ss;
 
     if (fCurrentDivisionsPerQuarterNote == 1) {
@@ -3467,7 +3114,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_clef& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3507,7 +3154,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_clef& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_sign& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3526,7 +3173,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sign& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_line& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3545,7 +3192,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_clef_octave_change& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3578,7 +3225,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_clef_octave_change& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3873,7 +3520,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_key& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3919,7 +3566,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_cancel& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3938,7 +3585,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_cancel& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_fifths& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -3959,7 +3606,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fifths& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_mode& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4021,7 +3668,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mode& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_key_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4076,7 +3723,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_step& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4131,7 +3778,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_key_octave& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4223,7 +3870,7 @@ If the cancel attribute is
 void mxsr2msrSkeletonPopulator::visitEnd (S_key& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4432,7 +4079,7 @@ S_msrKey mxsr2msrSkeletonPopulator::handleHumdrumScotKey (
 void mxsr2msrSkeletonPopulator::visitStart (S_time& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4493,7 +4140,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_beats& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4512,7 +4159,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beats& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4574,7 +4221,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_senza_misura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4593,7 +4240,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_senza_misura& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4686,7 +4333,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_time_relation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4748,7 +4395,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time_relation& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4828,7 +4475,7 @@ open xmlsamples3.1/Telemann.xml
 void mxsr2msrSkeletonPopulator::visitStart (S_score_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4893,7 +4540,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_score_instrument& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_instrument_name& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4916,7 +4563,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instrument_name& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_solo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -4939,7 +4586,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_solo& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_instruments& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5000,7 +4647,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instruments& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_transpose& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5024,7 +4671,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_transpose& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_diatonic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5043,7 +4690,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_diatonic& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_chromatic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5062,7 +4709,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_chromatic& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_octave_change& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5081,7 +4728,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_change& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_double& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5107,7 +4754,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_double& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5207,7 +4854,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_direction& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5241,7 +4888,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_direction& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5312,7 +4959,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction_type& elt)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5339,7 +4986,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction_type& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_direction_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5515,7 +5162,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_offset& elt)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5598,7 +5245,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_offset& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_other_direction& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5627,7 +5274,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_direction& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_sound& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5672,7 +5319,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sound& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_sound& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5690,7 +5337,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_sound& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -5820,7 +5467,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6536,7 +6183,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_accordion_registration& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6571,7 +6218,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_registration& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_accordion_high& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6592,7 +6239,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_high& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_accordion_middle& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6626,7 +6273,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_middle& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_accordion_low& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6647,7 +6294,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_low& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_accordion_registration& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6691,7 +6338,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_accordion_registration& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_metronome& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6767,7 +6414,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6814,7 +6461,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6847,7 +6494,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit_dot& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_per_minute& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6866,7 +6513,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_per_minute& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_metronome_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6885,7 +6532,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_note& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_metronome_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6910,7 +6557,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_type& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_metronome_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -6929,7 +6576,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_dot& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_metronome_beam& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7048,7 +6695,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentMetronomeBeamsToMetronomeNote (
 void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7141,7 +6788,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_note& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_metronome_relation& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7179,7 +6826,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_relation& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7320,7 +6967,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_normal_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7339,7 +6986,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_dot& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7416,7 +7063,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_tuplet& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7609,7 +7256,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staves& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7627,7 +7274,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staves& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7725,7 +7372,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7863,7 +7510,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staff_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7924,7 +7571,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_type& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staff_lines& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7943,7 +7590,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_lines& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staff_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -7968,7 +7615,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_tuning& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tuning_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8018,7 +7665,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_step& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tuning_octave& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8064,7 +7711,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_octave& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8123,7 +7770,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8212,7 +7859,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8305,7 +7952,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_backup& elt)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8324,7 +7971,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_backup& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8338,7 +7985,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceBackup ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceBackup ()) {
     std::stringstream ss;
 
     ss <<
@@ -8386,7 +8033,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_forward& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8432,7 +8079,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8455,7 +8102,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceForward ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceForward ()) {
     std::stringstream ss;
 
     ss <<
@@ -8518,7 +8165,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   // fetch the voice to be forwarded to
   S_msrVoice
     voiceToBeForwardedTo =
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentForwardVoiceNumber];
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -8531,7 +8178,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 
   // compute the forward step length
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceForward ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceForward ()) {
     std::stringstream ss;
 
     ss <<
@@ -8560,7 +8207,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -8762,17 +8409,17 @@ void mxsr2msrSkeletonPopulator::displaySlurStartsStack (
 // void mxsr2msrSkeletonPopulator::displayMxsrTupletsVector (
 //   const std::string& context)
 // {
-//   size_t mxsr2msrPopulatorVoiceHandlersVectorSize = fMxsrTupletsVector.size ();
+//   size_t mxsrVoicesVectorSize = fMxsrTupletsVector.size ();
 //
 //   gLog <<
 //     std::endl <<
 //     ">>++++++++++++++ The tuplets vector contains " <<
 //     mfSingularOrPlural (
-//       mxsr2msrPopulatorVoiceHandlersVectorSize, "element", "elements") <<
+//       mxsrVoicesVectorSize, "element", "elements") <<
 //     ':' <<
 //     std::endl;
 //
-//   if (mxsr2msrPopulatorVoiceHandlersVectorSize) {
+//   if (mxsrVoicesVectorSize) {
 //     std::vector <S_msrTuplet>::const_iterator
 //       iBegin = fMxsrTupletsVector.begin (),
 //       iEnd   = fMxsrTupletsVectorfMxsrTupletsVector.end (),
@@ -8782,7 +8429,7 @@ void mxsr2msrSkeletonPopulator::displaySlurStartsStack (
 //
 //     ++gIndenter;
 //
-//     int n = mxsr2msrPopulatorVoiceHandlersVectorSize;
+//     int n = mxsrVoicesVectorSize;
 //     for ( ; ; ) {
 //       gLog <<
 //         "v (" << n << ")" <<
@@ -8859,7 +8506,7 @@ The values of start, stop, and continue refer to how an
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -9166,7 +8813,7 @@ The values of start, stop, and continue refer to how an
 void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -9456,7 +9103,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -9616,7 +9263,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -9737,7 +9384,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_syllabic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -9790,7 +9437,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
   int inputStartLineNumber =
     elt->getInputStartLineNumber ();
 
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -9862,7 +9509,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_elision& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -9929,7 +9576,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
     elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -9994,7 +9641,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -10241,7 +9888,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     // fetch the current voice, fCurrentNote has not been set/updated yet
     S_msrVoice
       currentNoteVoice =
-        fCurrentPartStaffVoicesMap
+        fCurrentPartStaffMsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
     // fetch stanzaNumber in the current note's voice
@@ -10312,19 +9959,19 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 
     // fetch the voice
     S_msrVoice
-      voice =
+      theMsrVoice =
         stanza->getStanzaUpLinkToVoice ();
 
     // set the syllable's measure uplink
     syllable->
       setSyllableUpLinkToMeasure (
-        voice->
+        theMsrVoice->
           fetchVoiceLastMeasure (inputStartLineNumber));
 
     // fetch the part
     S_msrPart
       part =
-        voice->
+        theMsrVoice->
           fetchVoiceUpLinkToPart ();
 
     // fetch the part current measure position
@@ -10337,7 +9984,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     stanza->
       appendSyllableToStanza (
         syllable,
-        voice->getVoiceLastAppendedMeasure (),
+        theMsrVoice->getVoiceLastAppendedMeasure (),
         partCurrentDrawingMeasurePosition);
   }
 
@@ -10352,7 +9999,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -10602,7 +10249,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -10623,8 +10270,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   ) {
     // fetch the voice
     S_msrVoice
-      voice =
-        fCurrentPartStaffVoicesMap
+      theMsrVoice =
+        fCurrentPartStaffMsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
     // fetch note to attach to
@@ -10639,7 +10286,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
             fCurrentNoteVoiceNumber)
           ];
       */
-        voice->getVoiceLastAppendedNote (); // ??? JMI v0.9.70
+        theMsrVoice->getVoiceLastAppendedNote (); // ??? JMI v0.9.70
 
     // is there a pending grace notes group?
     if (fPendingGraceNotesGroup) {
@@ -10698,15 +10345,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       // forget about this grace notes group
       fPendingGraceNotesGroup = nullptr;
     }
-
-//     // is there an on going chord to be finalized?
-//     if (false && fOnGoingChord) { // JMI v0.9.67
-//       // finalize the current chord
-//       finalizeCurrentChord (
-//         elt->getInputStartLineNumber ());
-//
-//       fOnGoingChord = false;
-//     }
 
     // attach the spanners if any to the note
     if (fCurrentSpannersList.size ()) {
@@ -10931,7 +10569,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_print& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11142,7 +10780,7 @@ Staff spacing between multiple staves is measured in
 void mxsr2msrSkeletonPopulator::visitEnd (S_print& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11186,7 +10824,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_print& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_measure_numbering& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11206,7 +10844,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_numbering& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_barline& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11276,7 +10914,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barline& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_bar_style& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11355,7 +10993,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bar_style& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_segno& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11401,7 +11039,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_segno& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11476,7 +11114,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_eyeglasses& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11516,7 +11154,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_eyeglasses& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11647,7 +11285,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11728,7 +11366,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_repeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -11829,7 +11467,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_repeat& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12212,7 +11850,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12232,68 +11870,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 
   // initialize note data to a neutral state
   initializeNoteData ();
-
-
-
-// \new PianoStaff <<
-//   \new Staff = "up" {
-//     % enforce creation of all contexts at this point of time
-//     <>
-//     \change Staff = "down" c2
-//     \change Staff = "up" c'2
-//   }
-//   \new Staff = "down" {
-//     \clef bass
-//     % keep staff alive
-//     s1
-//   }
-// >>
-
-
-//   fCurrentNoteTupletEvent =
-//     fKnownEventsCollection.
-//       fetchTupletEventAtNoteSequentialNumber (
-//         fCurrentNoteSequentialNumber);
-
-
-
-//   // should an initial staff change be created?
-//   int
-//     firstNoteStaffNumber =
-// //       elt->fetchUpLinkToNoteToStaff ())->
-//       fCurrentPartStaffVoicesMap
-//         [fCurrentNoteVoiceNumber]->
-//         fetchUpLinkToNoteToStaff ()->
-//           getStaffNumber ();
-//
-//   if (firstNoteStaffNumber > 1) { // 1 is the default LilyPond staff number
-//     S_msrStaff
-//       takeOffStaff =
-//         fCurrentPartStaffVoicesMap
-//         [1],
-//       landingStaff =
-//         fCurrentPartStaffVoicesMap
-//         [fCurrentNoteStaffNumber]
-//
-//     // create the voice staff change
-//     S_msrVoiceStaffChange
-//       voiceStaffChange =
-//         msrVoiceStaffChange::create (
-//           elt->getInputStartLineNumber (),
-//           gNullMeasure,  // JMI v0.9.72 ???  // set later in setMeasureElementUpLinkToMeasure()
-//           takeOffStaff,
-//           landingStaff);
-//
-//     // append it to the previous note's voice
-//     // before the note itself is appended
-//     fCurrentPartStaffVoicesMap
-//         [fCurrentNoteVoiceNumber]->
-//       appendVoiceStaffChangeToVoice (
-//         voiceStaffChange);
-//   }
-
-
-
 
   // harmonies
 
@@ -12401,7 +11977,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12428,7 +12004,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_step& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12465,7 +12041,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_alter& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_octave& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12504,7 +12080,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12642,7 +12218,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12689,7 +12265,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instrument& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12708,7 +12284,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_dot& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12777,7 +12353,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -12918,7 +12494,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13090,7 +12666,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
 void mxsr2msrSkeletonPopulator::visitStart (S_stem& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13163,7 +12739,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stem& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13237,7 +12813,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_measure_style& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13256,7 +12832,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_style& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_beat_repeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13305,7 +12881,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_repeat& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13483,7 +13059,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_multiple_rest& elt)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13538,7 +13114,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_multiple_rest& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_multiple_rest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13555,7 +13131,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_multiple_rest& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13629,7 +13205,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13690,7 +13266,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_slash_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13709,7 +13285,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_dot& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_slash& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13737,7 +13313,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_slash& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_articulations& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13754,7 +13330,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_articulations& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_accent& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13793,7 +13369,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accent& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_breath_mark& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13832,7 +13408,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_breath_mark& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_caesura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13871,7 +13447,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_caesura& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_spiccato& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13910,7 +13486,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_spiccato& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staccato& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13949,7 +13525,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staccato& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staccatissimo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -13988,7 +13564,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staccatissimo& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_stress& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14027,7 +13603,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stress& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_unstress& elt)
 {
  #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14066,7 +13642,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_unstress& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_detached_legato& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14105,7 +13681,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_detached_legato& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_strong_accent& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14145,7 +13721,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_strong_accent& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tenuto& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14186,7 +13762,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tenuto& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_doit& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14225,7 +13801,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_doit& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_falloff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14264,7 +13840,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_falloff& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_plop& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14303,7 +13879,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_plop& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_scoop& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14342,7 +13918,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_scoop& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_articulations& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14362,7 +13938,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_articulations& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_arpeggiate& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14432,7 +14008,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arpeggiate& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_non_arpeggiate& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14508,7 +14084,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_non_arpeggiate& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_technical& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14527,7 +14103,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_technical& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_technical& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14546,7 +14122,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_technical& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_arrow& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14583,7 +14159,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arrow& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_bend_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14602,7 +14178,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bend_alter& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_bend& elt) // JMI
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14619,7 +14195,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bend& elt) // JMI
 void mxsr2msrSkeletonPopulator::visitEnd (S_bend& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14658,7 +14234,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_bend& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_double_tongue& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14695,7 +14271,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_double_tongue& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_down_bow& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14732,7 +14308,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_down_bow& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_fingering& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14793,7 +14369,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingering& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_fingernails& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14830,7 +14406,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingernails& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_fret& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14890,7 +14466,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fret& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_hammer_on& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14957,7 +14533,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hammer_on& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_handbell& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -14998,7 +14574,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_handbell& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_harmonic& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15046,7 +14622,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmonic& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_heel& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15083,7 +14659,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_heel& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_hole& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15120,7 +14696,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hole& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_open_string& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15157,7 +14733,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_open_string& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_other_technical& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15198,7 +14774,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_technical& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pluck& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15239,7 +14815,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pluck& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pull_off& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15306,7 +14882,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pull_off& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_snap_pizzicato& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15343,7 +14919,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_snap_pizzicato& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_stopped& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15380,7 +14956,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stopped& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_string& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15471,7 +15047,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_string& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tap& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15508,7 +15084,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tap& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_thumb_position& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15545,7 +15121,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_thumb_position& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_toe& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15582,7 +15158,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_toe& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_triple_tongue& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15619,7 +15195,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_triple_tongue& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_up_bow& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15657,7 +15233,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_up_bow& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15748,7 +15324,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_ornaments& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15765,7 +15341,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ornaments& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -15951,7 +15527,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
         // fetch the current note's voice
 //         S_msrVoice UNUSED
 //           currentNoteVoice =
-//             fCurrentPartStaffVoicesMap
+//             fCurrentPartStaffMsrVoicesMap
 //         [fCurrentNoteVoiceNumber];
 
         // create a double tremolo start
@@ -16038,7 +15614,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_trill_mark& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16079,7 +15655,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_trill_mark& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_dashes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16185,7 +15761,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16299,7 +15875,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16338,7 +15914,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_turn& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_inverted_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16377,7 +15953,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inverted_turn& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_delayed_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16416,7 +15992,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_delayed_turn& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_delayed_inverted_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16455,7 +16031,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_delayed_inverted_turn& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_vertical_turn& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16494,7 +16070,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_vertical_turn& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_mordent& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16533,7 +16109,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mordent& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_inverted_mordent& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16572,7 +16148,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inverted_mordent& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_schleifer& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16611,7 +16187,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_schleifer& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_shake& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16650,7 +16226,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_shake& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_accidental_mark& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16865,7 +16441,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental_mark& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_ornaments& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16883,7 +16459,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_ornaments& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_f& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16926,7 +16502,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_f& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -16969,7 +16545,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17012,7 +16588,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17055,7 +16631,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17098,7 +16674,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17142,7 +16718,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_p& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17185,7 +16761,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_p& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17228,7 +16804,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17271,7 +16847,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17314,7 +16890,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17357,7 +16933,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17401,7 +16977,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_mf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17444,7 +17020,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mf& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17488,7 +17064,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_fp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17532,7 +17108,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_fz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17576,7 +17152,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fz& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17620,7 +17196,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pf& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_rf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17664,7 +17240,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rf& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_sf& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17708,7 +17284,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sf& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_rfz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17752,7 +17328,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rfz& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_sfz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17796,7 +17372,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfz& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_sfp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17840,7 +17416,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_sfpp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17884,7 +17460,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfpp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_sffz& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17928,7 +17504,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sffz& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_sfzp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -17972,7 +17548,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfzp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_n& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18016,7 +17592,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_n& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18079,7 +17655,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_damper_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18146,7 +17722,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damper_pedal& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_soft_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18182,7 +17758,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_soft_pedal& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18223,7 +17799,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_cue& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18243,7 +17819,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_cue& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_grace& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18308,7 +17884,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_grace& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_chord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18320,21 +17896,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_chord& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-  // the current note belongs to a chord,
-  // placed in the corresponding staff AND voice
-//   fCurrentNoteBelongsToAChord = true;
-
-  // delay the handling until 'visitEnd (S_note& elt)',
-  // because we don't know yet the voice and staff numbers for sure
-  // (they can be specified after <chord/> in the <note/>)
 }
 
 //______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::visitStart (S_time_modification& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18356,7 +17924,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time_modification& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_actual_notes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18435,7 +18003,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_actual_notes& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_normal_notes& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18516,7 +18084,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_notes& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18599,7 +18167,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18630,7 +18198,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
         std::stringstream ss;
 
         ss <<
-          "--> There is a tuplet start (kTupletTypeStart)" <<
+          "--> There is a tuplet start" <<
           ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
@@ -18648,7 +18216,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
         std::stringstream ss;
 
         ss <<
-          "--> There is a tuplet continue (kTupletTypeContinue)" <<
+          "--> There is a tuplet continue" <<
           ", line " << elt->getInputStartLineNumber ();
 
         gWaeHandler->waeTrace (
@@ -18698,7 +18266,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
           std::stringstream ss;
 
           ss <<
-            "--> There is a tuplet stop (kTupletTypeStop)" <<
+            "--> There is a tuplet stop" <<
             ", line " << elt->getInputStartLineNumber ();
 
           gWaeHandler->waeTrace (
@@ -18903,7 +18471,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18921,7 +18489,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18940,7 +18508,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_actual& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18959,7 +18527,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_actual& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_normal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18978,7 +18546,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_normal& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_normal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -18997,7 +18565,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_normal& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_number& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -19047,7 +18615,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_number& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -19097,7 +18665,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_type& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_dot& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -19131,7 +18699,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_dot& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -19255,7 +18823,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -19381,7 +18949,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_rest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -19456,7 +19024,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rest& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_display_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -19488,7 +19056,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_display_step& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_display_octave& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -19527,7 +19095,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_display_octave& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_unpitched& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -19546,52 +19114,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_unpitched& elt)
    // fCurrentHarmonyRootDiatonicPitch;
 }
 
-
-// //______________________________________________________________________________
-// void mxsr2msrSkeletonPopulator::finalizeCurrentChord (
-//   int inputLineNumber)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChordsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Finalizing current chord START:" <<
-//       std::endl <<
-//       fCurrentChord <<
-//       std::endl <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //   fCurrentChord->
-// //     finalizeChord (
-// //       inputLineNumber);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChordsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Finalizing current chord END: " <<
-//       std::endl <<
-//       fCurrentChord <<
-//       std::endl <<
-//       ", line " << inputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // forget about the current chord
-//   fCurrentChord = nullptr;
-// }
 
 //______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::printCurrentChord ()
@@ -20070,7 +19592,7 @@ void mxsr2msrSkeletonPopulator::copyNoteBeamsListToChord (
   } // for
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceBeams ()) {
+  if (gTraceOahGroup->getTraceBeams ()) {
     std::stringstream ss;
 
     ss <<
@@ -20940,16 +20462,9 @@ void mxsr2msrSkeletonPopulator::copyNoteElementsIfAnyToChord (
   }
 }
 
-S_msrTuplet mxsr2msrSkeletonPopulator::createTupletUponItsFirstNote (
-  const S_msrNote& firstNote)
+S_msrTuplet mxsr2msrSkeletonPopulator::createTuplet (
+  int inputLineNumber)
 {
-  // firstNote is the first tuplet note,
-  // and is currently at the end of the voice
-  // it defines the tuplets sounding and display whole notes
-
-  int firstNoteInputLineNumber =
-    firstNote->getInputStartLineNumber ();
-
   // create the tuplet
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -20959,10 +20474,7 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createTupletUponItsFirstNote (
       "Creating a tuplet of " <<
       fCurrentNoteActualNotes <<
       '/' <<
-      fCurrentNoteNormalNotes <<
-      " with first note " <<
-      firstNote->
-        asShortString ();
+      fCurrentNoteNormalNotes;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -20997,7 +20509,7 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createTupletUponItsFirstNote (
   const S_msrTuplet&
     tuplet =
       msrTuplet::create (
-        firstNoteInputLineNumber,
+        inputLineNumber,
         fCurrentTupletNumber,
         fCurrentTupletBracketKind,
         fCurrentTupletLineShapeKind,
@@ -21010,6 +20522,44 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createTupletUponItsFirstNote (
         fCurrentTupletPlacementKind);
 
   return tuplet;
+}
+
+void mxsr2msrSkeletonPopulator::copyNoteElementsIfAnyToTuplet (
+  const S_msrNote&  firstNote,
+  const S_msrTuplet tuplet)
+{
+  // firstNote is the first tuplet note,
+  // and is currently at the end of the voice
+  // it defines the tuplets sounding and display whole notes
+
+//   int firstNoteInputLineNumber =
+//     firstNote->getInputStartLineNumber ();
+
+  // create the tuplet
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Populating tuplet from its first note " <<
+      firstNote->asShortString ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+//   tuplet->
+//     setMeasureElementSoundingWholeNotes (
+//       note->getMeasureElementSoundingWholeNotes ());
+//   tuplet->
+//     setChordDisplayWholeNotes (
+//       note->getChordDisplayWholeNotes ());
+//
+//   tuplet->
+//     setChordMeasureFullLength (
+//       note-> gsetChordMeasureFullLength ());
 }
 
 void mxsr2msrSkeletonPopulator::handleTupletStart (
@@ -21038,17 +20588,17 @@ void mxsr2msrSkeletonPopulator::handleTupletStart (
 #endif // MF_TRACE_IS_ENABLED
 
   // handle tuplet
-  S_mxsr2msrPopulatorVoiceHandler
-    voiceHandler =
-      fCurrentStaffVoiceHandlersMap
-        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
+  S_mxsrVoice
+    theMxsrVoice =
+      fCurrentPartStaffMxsrVoicesMap
+        [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber];
 
-  switch (voiceHandler->getTupletsStackSize ()) {
+  switch (theMxsrVoice->getTupletsStackSize ()) {
     case 0:
       // tuplet is an outermost tuplet
 
       // register tuplet by pushing it onto the tuplet stack
-      voiceHandler->pushTupletOntoTupletsStack (tuplet);
+      theMxsrVoice->pushTupletOntoTupletsStack (tuplet);
 
       // append it to currentNoteVoice
       // so that we know its measure position at once
@@ -21061,7 +20611,7 @@ void mxsr2msrSkeletonPopulator::handleTupletStart (
       // tuplet is a nested tuplet
 
       // register tuplet by pushing it onto the tuplet stack
-      voiceHandler->pushTupletOntoTupletsStack (tuplet);
+      theMxsrVoice->pushTupletOntoTupletsStack (tuplet);
       break;
   } //switch
 
@@ -21099,15 +20649,15 @@ void mxsr2msrSkeletonPopulator::handleTupletContinue (
   const S_msrNote&  note,
   const S_msrVoice& currentNoteVoice)
 {
-    S_mxsr2msrPopulatorVoiceHandler
-      voiceHandler =
-        fCurrentStaffVoiceHandlersMap
+    S_mxsrVoice
+      theMxsrVoice =
+        fCurrentPartStaffMxsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
-  if (voiceHandler->getTupletsStackSize ()) {
+  if (theMxsrVoice->getTupletsStackSize ()) {
     S_msrTuplet
       tupletStackTop =
-        voiceHandler->getTupletsStackTop ();
+        theMxsrVoice->getTupletsStackTop ();
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -21150,18 +20700,18 @@ void mxsr2msrSkeletonPopulator::handleTupletContinue (
       appendNoteToTuplet (
         note);
 
-    fCurrentPartStaffVoicesMap
+    fCurrentPartStaffMsrVoicesMap
       [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
         registerTupletNoteInVoice (note);
 
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       voiceHandler->
+//       theMxsrVoice->
 //         displayTupletsStack (
 //           "############## mxsr2msrSkeletonPopulator:kTupletTypeContinue");
 //     }
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       voiceHandler->
+//       theMxsrVoice->
 //         displayVoicesTupletsStacksMap (
 //           "############## mxsr2msrSkeletonPopulator:kTupletTypeContinue");
 //     }
@@ -21199,15 +20749,15 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
   const S_msrNote&  note,
   const S_msrVoice& currentNoteVoice)
 {
-    S_mxsr2msrPopulatorVoiceHandler
-      voiceHandler =
-        fCurrentStaffVoiceHandlersMap
+    S_mxsrVoice
+      theMxsrVoice =
+        fCurrentPartStaffMxsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
-  if (voiceHandler->getTupletsStackSize ()) {
+  if (theMxsrVoice->getTupletsStackSize ()) {
     S_msrTuplet
       tupletStackTop =
-        voiceHandler->getTupletsStackTop ();
+        theMxsrVoice->getTupletsStackTop ();
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -21266,18 +20816,18 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
       appendNoteToTuplet (
         note);
 
-    fCurrentPartStaffVoicesMap
+    fCurrentPartStaffMsrVoicesMap
       [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
         registerTupletNoteInVoice (note);
 
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       voiceHandler->
+//       theMxsrVoice->
 //         displayTupletsStack (
 //           "############## mxsr2msrSkeletonPopulator:kTupletTypeContinue");
 //     }
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       voiceHandler->
+//       theMxsrVoice->
 //         displayVoicesTupletsStacksMap (
 //           "############## mxsr2msrSkeletonPopulator:kTupletTypeContinue");
 //     }
@@ -21326,11 +20876,11 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 // //   }
 // // #endif // MF_TRACE_IS_ENABLED
 //
-//   S_mxsr2msrPopulatorVoiceHandler
-//     voiceHandler =
-//       fCurrentStaffVoiceHandlersMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
+//   S_mxsrVoice
+//     theMxsrVoice =
+//       fCurrentPartStaffMxsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 //
-//   switch (voiceHandler->getTupletsStackSize ()) {
+//   switch (theMxsrVoice->getTupletsStackSize ()) {
 //     case 0:
 //       {
 //         std::stringstream ss;
@@ -21357,7 +20907,7 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 //         // add the note to it before finalizing it
 //         S_msrTuplet
 //           tupletStackTop =
-//             voiceHandler->getTupletsStackTop ();
+//             theMxsrVoice->getTupletsStackTop ();
 //
 //         // populate the tuplet at the top of the stack
 // #ifdef MF_TRACE_IS_ENABLED
@@ -21383,19 +20933,19 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 //             appendNoteToTuplet (
 //               note);
 //
-//           fCurrentPartStaffVoicesMap
+//           fCurrentPartStaffMsrVoicesMap
 //         [fCurrentNoteVoiceNumber]->
 //             registerTupletNoteInVoice (note);
 //         }
 //
 // // #ifdef MF_TRACE_IS_ENABLED
 // //         if (gTraceOahGroup->getTraceTupletsDetails ()) {
-// //           voiceHandler->
+// //           theMxsrVoice->
 // //             displayTupletsStack (
 // //               "############## mxsr2msrSkeletonPopulator:kTupletTypeStop, outer-most");
 // //         }
 // //         if (gTraceOahGroup->getTraceTupletsDetails ()) {
-// //           voiceHandler->
+// //           theMxsrVoice->
 // //             displayVoicesTupletsStacksMap (
 // //               "############## mxsr2msrSkeletonPopulator:kTupletTypeStop, outer-most");
 // //         }
@@ -21411,13 +20961,13 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 //         }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//     voiceHandler->
+//     theMxsrVoice->
 //       finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.71 // CHORD_TUP
 //           note->getInputStartLineNumber (),
 //           "mxsr2msrSkeletonPopulator:reduceTupletStackTop() 4");
 //
 //         // don't pop the inner-most tuplet from the stack yet
-// //         voiceHandler->getTupletsStack ().pop_front (); // JMI DEDIEUDIEU
+// //         theMxsrVoice->getTupletsStack ().pop_front (); // JMI DEDIEUDIEU
 //       }
 //       break;
 //
@@ -21425,22 +20975,22 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 //       {
 //         // nested tuplet:
 //         // add note to tuplet stack top
-//         voiceHandler->getTupletsStackTop ()->
+//         theMxsrVoice->getTupletsStackTop ()->
 //           appendNoteToTuplet (
 //             note);
 //
-//         fCurrentPartStaffVoicesMap
+//         fCurrentPartStaffMsrVoicesMap
 //          [fCurrentNoteVoiceNumber]->
 //           registerTupletNoteInVoice (note);
 //
-//         voiceHandler->
+//         theMxsrVoice->
 //           finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.71
 //             note->getInputStartLineNumber (),
 //             "mxsr2msrSkeletonPopulator:reduceTupletStackTop() 6");
 //
 //         S_msrTuplet
 //           tupletStackTop =
-//             voiceHandler->getTupletsStackTop ();
+//             theMxsrVoice->getTupletsStackTop ();
 //
 //         // populate the tuplet at the top of the stack
 // #ifdef MF_TRACE_IS_ENABLED
@@ -21457,12 +21007,12 @@ void mxsr2msrSkeletonPopulator::handleTupletStop (
 //
 // // #ifdef MF_TRACE_IS_ENABLED
 // //         if (gTraceOahGroup->getTraceTupletsDetails ()) {
-// //           voiceHandler->
+// //           theMxsrVoice->
 // //             displayTupletsStack (
 // //               "############## kTupletTypeStop, nested");
 // //         }
 // //         if (gTraceOahGroup->getTraceTupletsDetails ()) {
-// //           voiceHandler->
+// //           theMxsrVoice->
 // //             displayVoicesTupletsStacksMap (
 // //               "############## kTupletTypeStop, nested");
 // //         }
@@ -23409,15 +22959,15 @@ void mxsr2msrSkeletonPopulator::attachPendingGlissandosToCurrentNote ()
       case msrGlissandoTypeKind::kGlissandoTypeStop:
         // fetch the voice
         S_msrVoice
-          voice =
-            fCurrentPartStaffVoicesMap
+          theMsrVoice =
+            fCurrentPartStaffMsrVoicesMap
               [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
 #ifdef MF_TRACE_IS_ENABLED
         // get the voice's stanzas map
         const std::map <std::string, S_msrStanza>&
           voiceStanzasMap =
-            voice->
+            theMsrVoice->
               getVoiceStanzasMap ();
 
         if (gTraceOahGroup->getTraceGlissandos ()) {
@@ -23470,14 +23020,14 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
       case msrSlideTypeKind::kSlideTypeStop:
         // fetch the voice
         S_msrVoice
-          voice =
-            fCurrentPartStaffVoicesMap
+          theMsrVoice =
+            fCurrentPartStaffMsrVoicesMap
               [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
         // get the voice's stanzas map
         const std::map <std::string, S_msrStanza>&
           voiceStanzasMap =
-            voice->
+            theMsrVoice->
               getVoiceStanzasMap ();
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -23731,37 +23281,6 @@ void mxsr2msrSkeletonPopulator::attachPendingNoteLevelElementsIfAnyToCurrentNote
 S_msrNote mxsr2msrSkeletonPopulator::createNote (
   int inputLineNumber)
 {
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "createNote(): " <<
-      "fCurrentNoteIsARest: " <<
-      fCurrentNoteIsARest <<
-      ", fCurrentDisplayDiatonicPitchKind: " <<
-      fCurrentDisplayDiatonicPitchKind <<
-      ", fCurrentNoteAlterationKind: " <<
-      fCurrentNoteAlterationKind <<
-      ", fCurrentNoteSoundingWholeNotesFromNotesDuration: " <<
-      fCurrentNoteSoundingWholeNotesFromNotesDuration <<
-      ", fCurrentNoteGraphicNotesDurationKind: " <<
-      fCurrentNoteGraphicNotesDurationKind <<
-      ", fCurrentNoteDisplayWholeNotesFromType: " <<
-      ", fCurrentRecipientStaffNumber: " <<
-      mfStaffNumberAsString (fCurrentRecipientStaffNumber)<<
-      ", fCurrentNoteVoiceNumber: " <<
-      mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
-      ", fCurrentNoteDisplayWholeNotesFromType: " <<
-      fCurrentNoteDisplayWholeNotesFromType <<
-      ", fOnGoingStaffChange: " << fOnGoingStaffChange;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
   // determine quarter tones note pitch
   if (fCurrentNoteIsARest) { // JMI v0.9.70
     fCurrentNoteQuarterTonesPitchKind =
@@ -23798,24 +23317,24 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
         msrNotesDurationKindAsWholeNotes (
           fCurrentNoteGraphicNotesDurationKind);
 
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNotesDetails ()) {
-        gLog <<
-          std::endl <<
-          "(1):" <<
-          std::endl <<
-          "fCurrentNoteGraphicNotesDurationKind: " <<
-          msrNotesDurationKindAsString (
-            fCurrentNoteGraphicNotesDurationKind) <<
-          std::endl <<
-          "fCurrentNoteDisplayWholeNotesFromType: " <<
-          fCurrentNoteDisplayWholeNotesFromType <<
-          std::endl <<
-          "fCurrentNoteDotsNumber: " <<
-          fCurrentNoteDotsNumber <<
-          std::endl << std::endl;
-      }
-#endif // MF_TRACE_IS_ENABLED
+// #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceNotesDetails ()) {
+//         gLog <<
+//           std::endl <<
+//           "(1):" <<
+//           std::endl <<
+//           "fCurrentNoteGraphicNotesDurationKind: " <<
+//           msrNotesDurationKindAsString (
+//             fCurrentNoteGraphicNotesDurationKind) <<
+//           std::endl <<
+//           "fCurrentNoteDisplayWholeNotesFromType: " <<
+//           fCurrentNoteDisplayWholeNotesFromType <<
+//           std::endl <<
+//           "fCurrentNoteDotsNumber: " <<
+//           fCurrentNoteDotsNumber <<
+//           std::endl << std::endl;
+//       }
+// #endif // MF_TRACE_IS_ENABLED
 
       // take dots into account if any
       if (fCurrentNoteDotsNumber > 0) {
@@ -23833,53 +23352,14 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
           wholeNotesIncrement *= mfRational (1, 2);
 
           --dots;
-
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTraceNotesDetails ()) {
-            gLog <<
-              std::endl <<
-              "(2):" <<
-              std::endl <<
-              "fCurrentNoteDisplayWholeNotesFromType: " <<
-              fCurrentNoteDisplayWholeNotesFromType <<
-              std::endl <<
-              "wholeNotesIncrement: " <<
-              wholeNotesIncrement <<
-              std::endl <<
-              "dots: " <<
-              dots <<
-              std::endl << std::endl;
-          }
-#endif // MF_TRACE_IS_ENABLED
         } // while
       }
-
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceNotesDetails ()) {
-        gLog <<
-          std::endl <<
-          "(3):" <<
-          std::endl <<
-          "fCurrentNoteGraphicNotesDurationKind: " <<
-          msrNotesDurationKindAsString (
-            fCurrentNoteGraphicNotesDurationKind) <<
-          std::endl <<
-          "fCurrentNoteDisplayWholeNotesFromType: " <<
-          fCurrentNoteDisplayWholeNotesFromType <<
-          std::endl <<
-          "fCurrentNoteDotsNumber: " <<
-          fCurrentNoteDotsNumber <<
-          std::endl << std::endl;
-      }
-#endif // MF_TRACE_IS_ENABLED
   } // switch
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Gathered note informations:" <<
+    gLog <<
+      "===> createNote(), gathered note informations:" <<
       std::endl;
 
     ++gIndenter;
@@ -23947,7 +23427,15 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
       "fCurrentRecipientStaffNumber" << " : " <<
       mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
       std::endl <<
+
       std::setw (fieldWidth) <<
+      "fCurrentNoteBelongsToAChord" << " : " <<
+      fCurrentNoteBelongsToAChord <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "fCurrentNoteBelongsToATuplet" << " : " <<
+      fCurrentNoteBelongsToATuplet <<
       std::endl <<
 
       std::setw (fieldWidth) <<
@@ -24181,9 +23669,11 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 #endif // MF_TRACE_IS_ENABLED
 
   // register note as the last one in its voice
-  fCurrentStaffVoiceHandlersMap
+  fCurrentPartStaffMxsrVoicesMap
     [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
       setLastMetNoteInVoice (note);
+
+  ++gIndenter;
 
   return note;
 }
@@ -24420,8 +23910,11 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
       fCurrentNoteBelongsToAChord <<
       ", fCurrentNoteBelongsToATuplet: " <<
       fCurrentNoteBelongsToATuplet <<
+
       ", fCurrentNoteIsAGraceNote: " <<
-      fCurrentNoteIsAGraceNote;
+      fCurrentNoteIsAGraceNote <<
+
+      ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -24429,9 +23922,9 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   S_mxsr2msrPopulatorVoiceHandler
-//     voiceHandler =
-//       fCurrentStaffVoiceHandlersMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
+//   S_mxsrVoice
+//     theMxsrVoice =
+//       fCurrentPartStaffMxsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   // handle the note itself
   if (fCurrentNoteBelongsToAChord) {
@@ -24474,13 +23967,13 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
           "fCurrentNoteVoiceNumber is unknown");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-    const S_mxsr2msrPopulatorVoiceHandler&
-      voiceHandler =
-        fCurrentStaffVoiceHandlersMap
+    const S_mxsrVoice&
+      theMxsrVoice =
+        fCurrentPartStaffMxsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
-    if (voiceHandler->getTupletsStackSize ()) {
-      voiceHandler->
+    if (theMxsrVoice->getTupletsStackSize ()) {
+      theMxsrVoice->
         finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.71
           inputLineNumber,
           "handleCurrentNote()");
@@ -24510,14 +24003,6 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
 
   if (! fCurrentNoteBelongsToAChord) {
     if (fOnGoingChord) {
-      // fCurrentNote is the first note after the chord in the current voice FIRST_AFTER
-
-//       // finalize the current chord
-//       if (false && ! fCurrentNoteIsAGraceNote) { // JMI v0.9.67
-//         finalizeCurrentChord (
-//           inputLineNumber);
-//       }
-
        // is there a pending tuplet stop?
 //       if (fThereIsAPendingTupletStop) { // CHORD_TUP
 //         // handle the tuplet stop
@@ -24525,8 +24010,6 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
 //           fNoteWithThePendingTupletStop,
 //           fVoiceOfTheNoteWithThePendingTupletStop);
 //       }
-
-     fOnGoingChord = false;
     }
 
     if (fCurrentDoubleTremolo) {
@@ -24551,7 +24034,7 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
       "--> STORING " <<
       fCurrentNote->asShortString () <<
       " as last note found in voice " <<
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () <<
       std::endl <<
       "-->  fCurrentNoteStaffNumber: " <<
@@ -24566,7 +24049,7 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
       std::endl <<
       * /
       "--> voice name : " <<
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () <<
       std::endl;
       */
@@ -24593,7 +24076,7 @@ void mxsr2msrSkeletonPopulator::attachPendingGraceNotesGroupToNoteIfRelevant (
   // is there a pending grace notes group?
   if (fPendingGraceNotesGroup) {
 #ifdef MF_TRACE_IS_ENABLED
-    if (gGlobalMxsrOahGroup->getTraceBackup ()) {
+    if (gGlobalMxsr2msrOahGroup->getTraceBackup ()) {
       gLog <<
         "Attaching pending grace notes group to current non-grace note upon backup" <<
         std::endl;
@@ -24620,7 +24103,7 @@ void mxsr2msrSkeletonPopulator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //       noteToAttachTo =
 //       /*
 //       // JMI might prove not precise enough???
-//   //      fStaffVoicesLastMetNoteMap [fCurrentPartStaffVoicesMap
+//   //      fStaffVoicesLastMetNoteMap [fCurrentPartStaffMsrVoicesMap
 //         [fCurrentNoteVoiceNumber]];
 //         fStaffVoicesLastMetNoteMap [
 //           std::make_pair (
@@ -24628,7 +24111,7 @@ void mxsr2msrSkeletonPopulator::attachPendingGraceNotesGroupToNoteIfRelevant (
 //             fCurrentNoteVoiceNumber)
 //           ];
 //       */
-//         voice->getVoiceLastAppendedNote ();
+//         theMsrVoice->getVoiceLastAppendedNote (); // JMI v0.9.72
     }
 
 #endif // MF_TRACE_IS_ENABLED
@@ -24960,7 +24443,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 
     // append the voice staff change to the event's voice number
     // before the note itself is appended
-    fCurrentPartStaffVoicesMap
+    fCurrentPartStaffMsrVoicesMap
       [fCurrentRecipientStaffNumber][noteEventVoiceNumber]->
         appendVoiceStaffChangeToVoice (
           voiceStaffChange);
@@ -24986,48 +24469,158 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::handleChordEventIfAny ()
+void mxsr2msrSkeletonPopulator::handleChordBeginBeforeNoteIfAny ()
 {
-  fCurrentNoteChordEvent =
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
+    gLog <<
+      "===> handleChordBeginBeforeNoteIfAny(), gathered note informations:" <<
+      std::endl;
+
+    ++gIndenter;
+
+    const int fieldWidth = 48;
+
+    gLog << std::left <<
+      std::setw (fieldWidth) <<
+      "fCurrentNoteStaffNumber =" << " : " <<
+      mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
+      std::endl <<
+      std::setw (fieldWidth) <<
+      "fPreviousNoteStaffNumber" << " : " <<
+      mfStaffNumberAsString (fPreviousNoteStaffNumber) <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "fCurrentNoteVoiceNumber" << " : " <<
+      mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "fCurrentRecipientStaffNumber" << " : " <<
+      mfStaffNumberAsString (fCurrentRecipientStaffNumber) <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "fCurrentNoteBelongsToAChord" << " : " <<
+      fCurrentNoteBelongsToAChord <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "fCurrentNoteBelongsToATuplet" << " : " <<
+      fCurrentNoteBelongsToATuplet <<
+      std::endl <<
+
+      std::setw (fieldWidth) <<
+      "fCurrentNoteInputStartLineNumber" << " : " <<
+      fCurrentNoteInputStartLineNumber <<
+      std::endl << std::endl;
+
+    --gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fCurrentNoteChordBegin =
     fKnownEventsCollection.
-      fetchChordEventAtNoteSequentialNumber (
+      fetchChordBeginAtNoteSequentialNumber (
         fCurrentNoteSequentialNumber);
 
-  if (fCurrentNoteChordEvent) {
-    // there is a chord event
-    switch (fCurrentNoteChordEvent->getChordEventKind ()) {
+  if (fCurrentNoteChordBegin) {
+    // there is a chord begin event
+    switch (fCurrentNoteChordBegin->getChordEventKind ()) {
       case mxsrChordEventKind::kEventChord_NONE:
         // should not occur
         break;
 
       case mxsrChordEventKind::kEventChordBegin:
-        fCurrentNoteBelongsToAChord = true;
-
         // create a chord
         fCurrentChord =
           msrChord::create (
-            fCurrentNoteChordEvent->
+            fCurrentNoteChordBegin->
               getEventInputStartLineNumber ());
 
         // register it as not yet populated fron its first note
-        fCurrentChordHasToBePopulatedFromItsFIrstNote = true;
+        fCurrentChordHasBeenPopulatedFromItsFirstNote = false;
+        fCurrentChordFirstNote = fCurrentNote;
 
-        // append it to the current recipient staff
-        fCurrentPartStaffVoicesMap
-          [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
-            appendChordToVoice (
-              fCurrentChord);
+//         // append it to the current voice in the recipient staff
+//         fCurrentPartStaffMsrVoicesMap
+//           [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
+//             appendChordToVoice (
+//               fCurrentChord);
+
+        fCurrentNoteBelongsToAChord = true;
 
         fOnGoingChord = true;
         break;
 
       case mxsrChordEventKind::kEventChordEnd:
-        fCurrentNoteBelongsToAChord = true;
+        // should not occur
         break;
     } // switch
   }
+
   else {
-    fCurrentNoteBelongsToAChord = fOnGoingChord;
+    // is this a chord member note without any chord event?
+    if (fOnGoingChord) {
+      fCurrentNoteBelongsToAChord = true;
+    }
+  }
+}
+
+void mxsr2msrSkeletonPopulator::handleChordEndAfterNoteIfAny ()
+{
+  fCurrentNoteChordEnd =
+    fKnownEventsCollection.
+      fetchChordBeginAtNoteSequentialNumber (
+        fCurrentNoteSequentialNumber);
+
+  if (fCurrentNoteChordEnd) {
+    // there is a chord event
+    switch (fCurrentNoteChordEnd->getChordEventKind ()) {
+      case mxsrChordEventKind::kEventChord_NONE:
+        // should not occur
+        break;
+
+      case mxsrChordEventKind::kEventChordBegin:
+        // nothing here, already handled earlier in this method
+        break;
+
+      case mxsrChordEventKind::kEventChordEnd:
+        if (! fCurrentChordHasBeenPopulatedFromItsFirstNote) {
+          // setup fCurrentChordFirstNote as the first note in the chord,
+          // which will give the latter ist sounding duration
+          fCurrentChord->
+            setupNoteAsFirstInChord (
+      //         newChordNote);
+              fCurrentChordFirstNote);
+
+          populateCurrentChordFromNote (
+            fCurrentChordFirstNote);
+
+          // forget about the current chord begin
+          fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
+          fCurrentChordFirstNote = nullptr;
+        }
+
+        // append it to the current voice in the recipient staff
+        // only now, so that the chord sounding duration is known
+        // and accounted for in the measure
+        fCurrentPartStaffMsrVoicesMap
+          [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
+            appendChordToVoice (
+              fCurrentChord);
+
+        // forget about the current chord
+        fCurrentChord = nullptr;
+
+        fOnGoingChord = false;
+        break;
+    } // switch
+
+
+    // forget about fCurrentNoteChordEnd
+    fCurrentNoteChordEnd = nullptr;
   }
 }
 
@@ -25039,7 +24632,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentChordFromNote (
     std::stringstream ss;
 
     ss <<
-      "Populating ccurrent chord" <<
+      "Populating current chord " <<
       fCurrentChord->asString () <<
   		" from note " <<
       note->asString () <<
@@ -25072,54 +24665,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentChordFromNote (
     fCurrentChord);
 }
 
-//______________________________________________________________________________
-// void mxsr2msrSkeletonPopulator::handleTupletEventIfAny ()
-// {
-//   fCurrentNoteChordEvent =
-//     fKnownEventsCollection.
-//       fetchChordEventAtNoteSequentialNumber (
-//         fCurrentNoteSequentialNumber);
-//
-//   if (fCurrentNoteChordEvent) {
-//     // there is a chord event
-//     switch (fCurrentNoteChordEvent->getChordEventKind ()) {
-//       case mxsrChordEventKind::kEventChord_NONE:
-//         // should not occur
-//         break;
-//
-//       case mxsrChordEventKind::kEventChordBegin:
-//         fCurrentNoteBelongsToAChord = true;
-//
-//         // create a chord
-//         fCurrentChord =
-//           msrChord::create (
-//             fCurrentNoteChordEvent->
-//               getEventInputStartLineNumber ());
-//
-//         // register it as not yet populated fron its first note
-//         fCurrentChordHasToBePopulatedFromItsFIrstNote = true;
-//
-//         // append it to the current recipient staff
-//         fCurrentPartStaffVoicesMap
-//           [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
-//             appendChordToVoice (
-//               fCurrentChord);
-//
-//         fOnGoingChord = true;
-//         break;
-//
-//       case mxsrChordEventKind::kEventChordEnd:
-//         fCurrentNoteBelongsToAChord = true;
-//         break;
-//     } // switch
-//   }
-//   else {
-//     fCurrentNoteBelongsToAChord = fOnGoingChord;
-//   }
-// }
-
-void mxsr2msrSkeletonPopulator::handleTupletEventsIfAny ()
-{
+//________________________________________________________________________
 /*
     fTupletsBeginsList: 1 element, in note sequential number order
       Note 1:
@@ -25151,22 +24697,33 @@ void mxsr2msrSkeletonPopulator::handleTupletEventsIfAny ()
   ]
 */
 
-  // fetch the tuplet events range upon this note if any
-//   std::multimap <int, S_mxsrTupletEvent>::const_iterator
-//     firstTupletEventInRange,
-//     lastTupletEventInRange;
-//
-//   fKnownEventsCollection.fetchTupletEventsRange (
-//     fCurrentNoteSequentialNumber,
-//     firstTupletEventInRange,
-//     lastTupletEventInRange);
-
+void mxsr2msrSkeletonPopulator::handleTupletBeginEventsBeforeNoteIfAny ()
+{
 #ifdef MF_TRACE_IS_ENABLED
-    if (true || gTraceOahGroup->getTraceTupletsBasics ()) {
+    if (gTraceOahGroup->getTraceTupletsBasics ()) {
       std::stringstream ss;
 
       ss <<
-        "--------> handleTupletEventsIfAny()";
+        "--------> handleTupletBeginEventsBeforeNoteIfAny()";
+//         ", tupletEventKind: " << tupletEventKind <<
+//         ", tupletNumber: " << tupletNumber <<
+//         ", line " << tupletEvent->getEventInputStartLineNumber ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif
+}
+
+void mxsr2msrSkeletonPopulator::handleTupletBeginEvents_RIGHT_AfterNoteCreationIfAny ()
+{
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTupletsBasics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "--------> handleTupletBeginEventsBeforeNoteIfAny()";
 //         ", tupletEventKind: " << tupletEventKind <<
 //         ", tupletNumber: " << tupletNumber <<
 //         ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -25183,21 +24740,40 @@ void mxsr2msrSkeletonPopulator::handleTupletEventsIfAny ()
     fCurrentNoteSequentialNumber,
     tupletBeginsList);
 
-  std::list <S_mxsrTupletEvent> tupletEndsList;
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    gLog <<
+      "--> tupletBeginsList contains " <<
+      mfSingularOrPlural (
+        tupletBeginsList.size (),
+        "element",
+        "elements") <<
+      ", in note sequential number order" <<
+      std::endl;
 
-  fKnownEventsCollection.fetchTupletEndsList (
-    fCurrentNoteSequentialNumber,
-    tupletEndsList);
+    ++gIndenter;
 
-//     printTupletEventsList (
-//       gLog,
-//       noteSequentialNumber,
-//       collectedEndsList,
-//       "fetchTupletEndsList(), resultingEndsList:");
+    for (S_mxsrTupletEvent tupletEvent : tupletBeginsList) {
+      int
+        eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
 
-  // is this note the last one in a tuplet ?
-  fATupletIsEnding = false;
+      gLog <<
+        "Note " << eventSequentialNumber <<
+        ':' <<
+        std::endl;
 
+      ++gIndenter;
+      gLog <<
+        tupletEvent <<
+        std::endl;
+      --gIndenter;
+    } // for
+
+    --gIndenter;
+  }
+#endif
+
+  // handling the tuplet begin events
   for (S_mxsrTupletEvent tupletEvent : tupletBeginsList) {
     mxsrTupletEventKind
       tupletEventKind =
@@ -25212,7 +24788,291 @@ void mxsr2msrSkeletonPopulator::handleTupletEventsIfAny ()
       std::stringstream ss;
 
       ss <<
-        "--------> handleTupletEventsIfAny()" <<
+        "--------> handleTupletBeginEventsBeforeNoteIfAny()" <<
+        ", tupletEventKind: " << tupletEventKind <<
+        ", tupletNumber: " << tupletNumber <<
+        ", line " << tupletEvent->getEventInputStartLineNumber ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif
+
+//     switch (tupletEventKind) {
+//       case mxsrTupletEventKind::kEventTuplet_NONE:
+//         // should not occur
+//         break;
+//
+//       case mxsrTupletEventKind::kEventTupletBegin:
+//         break;
+//
+//       case mxsrTupletEventKind::kEventTupletEnd:
+//         fATupletIsEnding = true;
+//         fEndingTupletNumber = tupletNumber;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gTraceOahGroup->getTraceTupletsBasics ()) {
+//           std::stringstream ss;
+//
+//           ss <<
+//             "--------> handleTupletBeginEventsBeforeNoteIfAny(): tuplet number " <<
+//             tupletNumber <<
+//             " is ending" <<
+//             ", line " << tupletEvent->getEventInputStartLineNumber ();
+//
+//           gWaeHandler->waeTrace (
+//             __FILE__, __LINE__,
+//             ss.str ());
+//         }
+// #endif
+//         break;
+//     } // switch
+
+    // create the tuplet upon its first note
+    S_msrTuplet
+      tuplet =
+        createTuplet (78978979);
+
+    // populate it from its first note
+    copyNoteElementsIfAnyToTuplet (
+      fCurrentNote,
+      tuplet);
+
+    // append note as first note of tuplet
+    tuplet->
+      appendNoteToTuplet (
+        fCurrentNote);
+
+    // fetch the current voice
+    S_msrVoice
+      currentNoteVoice =
+        fCurrentPartStaffMxsrVoicesMap
+          [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+            getMsrVoice (); // JMI v0.9.72 ???
+
+    // handle the tuplet start
+    handleTupletStart (
+      tuplet,
+      currentNoteVoice);
+  } // for
+}
+
+void mxsr2msrSkeletonPopulator::handleTupletBeginEventsAfterNoteIfAny ()
+{
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTupletsBasics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "--------> handleTupletBeginEventsAfterNoteIfAny()";
+//         ", tupletEventKind: " << tupletEventKind <<
+//         ", tupletNumber: " << tupletNumber <<
+//         ", line " << tupletEvent->getEventInputStartLineNumber ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif
+
+//   std::list <S_mxsrTupletEvent> tupletBeginsList;
+//
+//   fKnownEventsCollection.fetchTupletBeginsList (
+//     fCurrentNoteSequentialNumber,
+//     tupletBeginsList);
+//
+//   gLog <<
+//     "--> tupletBeginsList contains " <<
+//     mfSingularOrPlural (
+//       tupletBeginsList.size (),
+//       "element",
+//       "elements") <<
+//     ", in note sequential number order" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//
+//   for (S_mxsrTupletEvent tupletEvent : tupletBeginsList) {
+//     int
+//       eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
+//
+//     gLog <<
+//       "Note " << eventSequentialNumber <<
+//       ':' <<
+//       std::endl;
+//
+//     ++gIndenter;
+//     gLog <<
+//       tupletEvent <<
+//       std::endl;
+//     --gIndenter;
+//   } // for
+//
+//   --gIndenter;
+//
+//   // handling the tuplet begin events
+//   for (S_mxsrTupletEvent tupletEvent : tupletBeginsList) {
+//     mxsrTupletEventKind
+//       tupletEventKind =
+//         tupletEvent->getTupletEventKind ();
+//
+//     int
+//       tupletNumber =
+//         tupletEvent->getTupletNumber ();
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "--------> handleTupletBeginEventsBeforeNoteIfAny()" <<
+//         ", tupletEventKind: " << tupletEventKind <<
+//         ", tupletNumber: " << tupletNumber <<
+//         ", line " << tupletEvent->getEventInputStartLineNumber ();
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+// #endif
+//
+// //     switch (tupletEventKind) {
+// //       case mxsrTupletEventKind::kEventTuplet_NONE:
+// //         // should not occur
+// //         break;
+// //
+// //       case mxsrTupletEventKind::kEventTupletBegin:
+// //         break;
+// //
+// //       case mxsrTupletEventKind::kEventTupletEnd:
+// //         fATupletIsEnding = true;
+// //         fEndingTupletNumber = tupletNumber;
+// //
+// // #ifdef MF_TRACE_IS_ENABLED
+// //         if (gTraceOahGroup->getTraceTupletsBasics ()) {
+// //           std::stringstream ss;
+// //
+// //           ss <<
+// //             "--------> handleTupletBeginEventsBeforeNoteIfAny(): tuplet number " <<
+// //             tupletNumber <<
+// //             " is ending" <<
+// //             ", line " << tupletEvent->getEventInputStartLineNumber ();
+// //
+// //           gWaeHandler->waeTrace (
+// //             __FILE__, __LINE__,
+// //             ss.str ());
+// //         }
+// // #endif
+// //         break;
+// //     } // switch
+//
+//     // create the tuplet upon its first note
+//     S_msrTuplet
+//       tuplet =
+//         createTupletUponItsFirstNote (fCurrentNote);
+//
+//     // append note as first note of tuplet
+//     tuplet->
+//       appendNoteToTuplet (
+//         fCurrentNote);
+//
+//     // fetch the current voice
+//     S_msrVoice
+//       currentNoteVoice =
+//         fCurrentPartStaffMxsrVoicesMap
+//           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
+//             getMsrVoice (); // JMI v0.9.72 ???
+//
+//     // handle the tuplet start
+//     handleTupletStart (
+//       tuplet,
+//       currentNoteVoice);
+//   } // for
+}
+
+void mxsr2msrSkeletonPopulator::handleTupletEndEventsBeforeNoteIfAny ()
+{
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTupletsBasics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "--------> handleTupletEndEventsBeforeNoteIfAny()";
+//         ", tupletEventKind: " << tupletEventKind <<
+//         ", tupletNumber: " << tupletNumber <<
+//         ", line " << tupletEvent->getEventInputStartLineNumber ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif
+
+  std::list <S_mxsrTupletEvent> tupletEndsList;
+
+  fKnownEventsCollection.fetchTupletEndsList (
+    fCurrentNoteSequentialNumber,
+    tupletEndsList);
+
+//     printTupletEventsList (
+//       gLog,
+//       noteSequentialNumber,
+//       collectedEndsList,
+//       "fetchTupletEndsList(), resultingEndsList:");
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    gLog <<
+      "--> tupletEndsList contains " <<
+      mfSingularOrPlural (
+        tupletEndsList.size (),
+        "element",
+        "elements") <<
+      ", in note sequential number order" <<
+      std::endl;
+
+    ++gIndenter;
+
+    for (S_mxsrTupletEvent tupletEvent : tupletEndsList) {
+      int
+        eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
+
+      gLog <<
+        "Note " << eventSequentialNumber <<
+        ':' <<
+        std::endl;
+
+      ++gIndenter;
+      gLog <<
+        tupletEvent <<
+        std::endl;
+      --gIndenter;
+    } // for
+
+    --gIndenter;
+  }
+#endif
+
+  // is this note the last one in a tuplet ?
+  fATupletIsEnding = false;
+
+  // handling the tuplet begin events
+  for (S_mxsrTupletEvent tupletEvent : tupletEndsList) {
+    mxsrTupletEventKind
+      tupletEventKind =
+        tupletEvent->getTupletEventKind ();
+
+    int
+      tupletNumber =
+        tupletEvent->getTupletNumber ();
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTupletsBasics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "--------> handleTupletEndEventsBeforeNoteIfAny()" <<
         ", tupletEventKind: " << tupletEventKind <<
         ", tupletNumber: " << tupletNumber <<
         ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -25240,7 +25100,7 @@ void mxsr2msrSkeletonPopulator::handleTupletEventsIfAny ()
           std::stringstream ss;
 
           ss <<
-            "--------> handleTupletEventsIfAny(): tuplet number " <<
+            "--------> handleTupletEndEventsBeforeNoteIfAny(): tuplet number " <<
             tupletNumber <<
             " is ending" <<
             ", line " << tupletEvent->getEventInputStartLineNumber ();
@@ -25253,6 +25113,126 @@ void mxsr2msrSkeletonPopulator::handleTupletEventsIfAny ()
         break;
     } // switch
   } // for
+}
+
+void mxsr2msrSkeletonPopulator::handleTupletEndEventsAfterNoteIfAny ()
+{
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTupletsBasics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "--------> handleTupletEndEventsAfterNoteIfAny()";
+//         ", tupletEventKind: " << tupletEventKind <<
+//         ", tupletNumber: " << tupletNumber <<
+//         ", line " << tupletEvent->getEventInputStartLineNumber ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif
+
+//   std::list <S_mxsrTupletEvent> tupletEndsList;
+//
+//   fKnownEventsCollection.fetchTupletEndsList (
+//     fCurrentNoteSequentialNumber,
+//     tupletEndsList);
+//
+// //     printTupletEventsList (
+// //       gLog,
+// //       noteSequentialNumber,
+// //       collectedEndsList,
+// //       "fetchTupletEndsList(), resultingEndsList:");
+//
+//   gLog <<
+//     "--> tupletEndsList contains " <<
+//     mfSingularOrPlural (
+//       tupletEndsList.size (),
+//       "element",
+//       "elements") <<
+//     ", in note sequential number order" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//
+//   for (S_mxsrTupletEvent tupletEvent : tupletEndsList) {
+//     int
+//       eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
+//
+//     gLog <<
+//       "Note " << eventSequentialNumber <<
+//       ':' <<
+//       std::endl;
+//
+//     ++gIndenter;
+//     gLog <<
+//       tupletEvent <<
+//       std::endl;
+//     --gIndenter;
+//   } // for
+//
+//   --gIndenter;
+//
+//   // is this note the last one in a tuplet ?
+//   fATupletIsEnding = false;
+//
+//   // handling the tuplet begin events
+//   for (S_mxsrTupletEvent tupletEvent : tupletEndsList) {
+//     mxsrTupletEventKind
+//       tupletEventKind =
+//         tupletEvent->getTupletEventKind ();
+//
+//     int
+//       tupletNumber =
+//         tupletEvent->getTupletNumber ();
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "--------> handleTupletEndEventsBeforeNoteIfAny()" <<
+//         ", tupletEventKind: " << tupletEventKind <<
+//         ", tupletNumber: " << tupletNumber <<
+//         ", line " << tupletEvent->getEventInputStartLineNumber ();
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+// #endif
+//
+//     switch (tupletEventKind) {
+//       case mxsrTupletEventKind::kEventTuplet_NONE:
+//         // should not occur
+//         break;
+//
+//       case mxsrTupletEventKind::kEventTupletBegin:
+//         break;
+//
+//       case mxsrTupletEventKind::kEventTupletEnd:
+//         fATupletIsEnding = true;
+//         fEndingTupletNumber = tupletNumber;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gTraceOahGroup->getTraceTupletsBasics ()) {
+//           std::stringstream ss;
+//
+//           ss <<
+//             "--------> handleTupletEndEventsBeforeNoteIfAny(): tuplet number " <<
+//             tupletNumber <<
+//             " is ending" <<
+//             ", line " << tupletEvent->getEventInputStartLineNumber ();
+//
+//           gWaeHandler->waeTrace (
+//             __FILE__, __LINE__,
+//             ss.str ());
+//         }
+// #endif
+//         break;
+//     } // switch
+//   } // for
 }
 
 void mxsr2msrSkeletonPopulator::finalizeTupletIfAny (
@@ -25276,13 +25256,13 @@ void mxsr2msrSkeletonPopulator::finalizeTupletIfAny (
 //     } // switch
 
     if (fATupletIsEnding) {
-      S_mxsr2msrPopulatorVoiceHandler
-        voiceHandler =
-          fCurrentStaffVoiceHandlersMap
+      S_mxsrVoice
+        theMxsrVoice =
+          fCurrentPartStaffMxsrVoicesMap
             [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
-      if (voiceHandler->getTupletsStackSize ()) { // JMI v0.9.71
-        voiceHandler->
+      if (theMxsrVoice->getTupletsStackSize ()) { // JMI v0.9.71
+        theMxsrVoice->
           finalizeTupletStackTopAndPopItFromTupletsStack (
             inputLineNumber,
             "finalizeTupletIfAny()");
@@ -25309,7 +25289,7 @@ void mxsr2msrSkeletonPopulator::finalizeTupletIfAny (
 void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -25366,40 +25346,42 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   }
 #endif
 
+  // remember current note as the previous measure element // JMI v0.9.67 LATER???
+  fPreviousMeasureElement = fCurrentNote;
+
+  // handle staff change take off if any,
+  // in which case fCurrentRecipientStaffNumber will be updated
+  handleStaffChangeTakeOffEventIfAny ();
+
+  // chords may be nested in tuplets, hence:
+  // first, handle the tuplet begin events upon this note if any
+  handleTupletBeginEventsBeforeNoteIfAny ();
+
+  // then handle the chord begin event upon this note if any
+  handleChordBeginBeforeNoteIfAny ();
+
   // create the note
   fCurrentNote =
     createNote (
       elt->getInputStartLineNumber ());
 
-  // remember current note as the previous measure element // JMI v0.9.67 LATER???
-  fPreviousMeasureElement = fCurrentNote;
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     fCurrentNoteVoiceNumber != K_VOICE_NUMBER_UNKNOWN_,
+//     "fCurrentNoteVoiceNumber is unknown");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  // handle staff change if any,
-  // in which case fCurrentRecipientStaffNumber will be updated
-  // needed before the note is created
-  handleStaffChangeTakeOffEventIfAny ();
-
-  // handle the chord event upon this note if any
-  handleChordEventIfAny ();
-
-  // handle the tuplet events upon this note if any
-  handleTupletEventsIfAny ();
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fCurrentNoteVoiceNumber != K_VOICE_NUMBER_UNKNOWN_,
-    "fCurrentNoteVoiceNumber is unknown");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+  handleTupletBeginEvents_RIGHT_AfterNoteCreationIfAny ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
     std::stringstream ss;
 
     ss <<
-      "==> fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] is now " <<
-      fCurrentPartStaffVoicesMap
+      "==> fCurrentPartStaffMsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] is now " <<
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->asShortString () <<
       ", line " << elt->getInputStartLineNumber ();
 
@@ -25417,7 +25399,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // can now be appended to the latter's voice
   // prior to the note itself
 //   attachPendingVoiceLevelElementsToVoice (
-//     fCurrentPartStaffVoicesMap
+//     fCurrentPartStaffMsrVoicesMap
 //         [fCurrentNoteVoiceNumber]);
 
   attachPendingPartLevelElementsIfAnyToPart (
@@ -25608,31 +25590,13 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
       fCurrentNoteStaffChangeTakeOff);
   }
 
+  // chords may be nested in tuplets, hence:
+  // first, handle the chord end event upon this note if any
   // forget about the on-going chord if relevant
-  if (fCurrentNoteChordEvent) {
-    // there is a chord event
-    switch (fCurrentNoteChordEvent->getChordEventKind ()) {
-      case mxsrChordEventKind::kEventChord_NONE:
-        // should not occur
-        break;
+  handleChordEndAfterNoteIfAny ();
 
-      case mxsrChordEventKind::kEventChordBegin:
-        // nothing here, already handled earlier in this method
-        break;
-
-      case mxsrChordEventKind::kEventChordEnd:
-//         fCurrentNoteBelongsToAChord = true;
-
-        // forget about the current chord
-        fCurrentChord = nullptr;
-
-        fOnGoingChord = false;
-        break;
-    } // switch
-  }
-//   else {
-//     fCurrentNoteBelongsToAChord = fOnGoingChord;
-//   }
+  // then, handle the tuplet end events upon this note if any
+  handleTupletEndEventsAfterNoteIfAny ();
 
 	// set current note MusicXML staff number as previous for the next note
   fPreviousNoteStaffNumber = fCurrentNoteStaffNumber;
@@ -26406,8 +26370,8 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
     ss <<
       "Handling non-chord, non-tuplet note or rest " <<
        fCurrentNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
-      ", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
-      fCurrentPartStaffVoicesMap
+      ", fCurrentPartStaffMsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceName () <<
       "\", line " << fCurrentNote->getInputStartLineNumber () <<
@@ -26424,7 +26388,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
 
     gLog << std::left <<
       std::setw (fieldWidth) << "voice" << ": \"" <<
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceName () <<
       "\"" <<
@@ -26478,7 +26442,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
           "Creating grace notes for note " <<
           fCurrentNote->asString () <<
           " in voice \"" <<
-          fCurrentPartStaffVoicesMap
+          fCurrentPartStaffMsrVoicesMap
             [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
               getVoiceName () <<
           "\"";
@@ -26510,7 +26474,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
       // register that last handled note if any is followed by grace notes
       const S_msrNote&
         lastHandledNoteInVoice =
-          fCurrentPartStaffVoicesMap
+          fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteVoiceNumber]->
             getVoiceLastAppendedNote ();
 
@@ -26522,7 +26486,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
 
       // append the grace notes to the current voice // NO JMI
       /*
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteVoiceNumber]->
         appendGraceNotesToVoice (
           fCurrentGraceNotesGroupNotes);
@@ -26532,7 +26496,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
     // register that last handled note if any is followed by grace notes JMI ???
     S_msrNote
       lastHandledNoteInVoice =
-        fCurrentPartStaffVoicesMap
+        fCurrentPartStaffMsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
             getVoiceLastAppendedNote ();
 
@@ -26550,7 +26514,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
         "Appending note " <<
         fCurrentNote->asString () <<
         " to grace notes group in voice \"" <<
-        fCurrentPartStaffVoicesMap
+        fCurrentPartStaffMsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
             getVoiceName () <<
         "\", line " << fCurrentNote->getInputStartLineNumber ();
@@ -26591,7 +26555,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
               fCurrentNote->asString () <<
               ", line " << fCurrentNote->getInputStartLineNumber () <<
               ", to voice \"" <<
-              fCurrentPartStaffVoicesMap
+              fCurrentPartStaffMsrVoicesMap
                 [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
                   getVoiceName () <<
               "\"" <<
@@ -26603,7 +26567,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
           }
   #endif // MF_TRACE_IS_ENABLED
 
-          fCurrentPartStaffVoicesMap
+          fCurrentPartStaffMsrVoicesMap
             [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
               appendNoteToVoice (fCurrentNote);
 
@@ -26623,7 +26587,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
               ", line " << fCurrentNote->getInputStartLineNumber () <<
               ", as double tremolo first element" <<
               " in voice \"" <<
-              fCurrentPartStaffVoicesMap
+              fCurrentPartStaffMsrVoicesMap
                 [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
                   getVoiceName () <<
               "\"" <<
@@ -26652,7 +26616,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
               ", line " << fCurrentNote->getInputStartLineNumber () <<
               ", as double tremolo second element" <<
               " in voice \"" <<
-              fCurrentPartStaffVoicesMap
+              fCurrentPartStaffMsrVoicesMap
                 [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
                   getVoiceName () <<
               "\"" <<
@@ -26669,7 +26633,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
               fCurrentNote);
 
           // append current double tremolo to current voice
-          fCurrentPartStaffVoicesMap
+          fCurrentPartStaffMsrVoicesMap
             [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
               appendDoubleTremoloToVoice (
                 fCurrentDoubleTremolo);
@@ -26693,7 +26657,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
           fCurrentNote->asString () <<
           ", line " << fCurrentNote->getInputStartLineNumber () <<
           ", to voice \"" <<
-          fCurrentPartStaffVoicesMap
+          fCurrentPartStaffMsrVoicesMap
             [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
               getVoiceName () <<
           "\"";
@@ -26712,19 +26676,19 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
 
 //   gLog << "--------}> fCurrentRecipientStaffNumber: " << fCurrentRecipientStaffNumber << std::endl;
 
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
           appendNoteToVoice (fCurrentNote);
 
       if (false) { // XXL, syllable sans fSyllableNote assigne JMI v0.9.70
         gLog <<
-          "&&&&&&&&&&&&&&&&&& fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] (" <<
-          fCurrentPartStaffVoicesMap
+          "&&&&&&&&&&&&&&&&&& fCurrentPartStaffMsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] (" <<
+          fCurrentPartStaffMsrVoicesMap
             [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
               getVoiceName () <<
           ") contents &&&&&&&&&&&&&&&&&&" <<
           std::endl <<
-          fCurrentPartStaffVoicesMap
+          fCurrentPartStaffMsrVoicesMap
             [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] <<
           std::endl;
       }
@@ -26800,8 +26764,8 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
     ss <<
       "Handling grace note " <<
        fCurrentNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
-      ", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
-      fCurrentPartStaffVoicesMap
+      ", fCurrentPartStaffMsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceName () <<
       "\", line " << fCurrentNote->getInputStartLineNumber () <<
@@ -26817,8 +26781,9 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
     const int fieldWidth = 25;
 
     gLog << std::left <<
-      std::setw (fieldWidth) << "voice" << ": \"" <<
-      fCurrentPartStaffVoicesMap
+      std::setw (fieldWidth) <<
+      "voice" << ": \"" <<
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () <<
       "\"" <<
       std::endl <<
@@ -26870,7 +26835,7 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
         "Creating grace notes for note " <<
         fCurrentNote->asString () <<
         " in voice \"" <<
-        fCurrentPartStaffVoicesMap
+        fCurrentPartStaffMsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
             getVoiceName () << "\"";
 
@@ -26901,7 +26866,7 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
     // register that last handled note if any is followed by grace notes
     const S_msrNote&
       lastHandledNoteInVoice =
-        fCurrentPartStaffVoicesMap
+        fCurrentPartStaffMsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
             getVoiceLastAppendedNote ();
 
@@ -26913,7 +26878,7 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
 
     // append the grace notes to the current voice // NO JMI
     /*
-    fCurrentPartStaffVoicesMap
+    fCurrentPartStaffMsrVoicesMap
       [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
         appendGraceNotesToVoice (
           fCurrentGraceNotesGroupNotes);
@@ -26923,7 +26888,7 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
   // register that last handled note if any is followed by grace notes JMI ???
   S_msrNote
     lastHandledNoteInVoice =
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceLastAppendedNote ();
 
@@ -26941,7 +26906,7 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
       "Appending note " <<
       fCurrentNote->asString () <<
       " to grace notes group in voice \"" <<
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceName () <<
       "\", line " << fCurrentNote->getInputStartLineNumber ();
@@ -27016,9 +26981,9 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
-      "fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]" <<
+      "fCurrentPartStaffMsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]" <<
       " = \"" <<
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceName () <<
       "\"" <<
@@ -27109,7 +27074,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
       // get the current note voice's stanzas map
       const std::map <std::string, S_msrStanza>&
         voiceStanzasMap =
-          fCurrentPartStaffVoicesMap
+          fCurrentPartStaffMsrVoicesMap
             [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
               getVoiceStanzasMap ();
 
@@ -27148,13 +27113,13 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
 
         // fetch the voice
         S_msrVoice
-          voice =
+          theMsrVoice =
             stanza->getStanzaUpLinkToVoice ();
 
         // fetch the part
         S_msrPart
           part =
-            voice->
+            theMsrVoice->
               fetchVoiceUpLinkToPart ();
 
         // fetch the part current measure position
@@ -27167,7 +27132,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
         stanza->
           appendSyllableToStanza (
             skipSyllable,
-            voice->getVoiceLastAppendedMeasure (),
+            theMsrVoice->getVoiceLastAppendedMeasure (),
             partCurrentDrawingMeasurePosition);
       } // for
     }
@@ -27215,27 +27180,27 @@ void mxsr2msrSkeletonPopulator::handleRegularChordMemberNote (
       "a rest cannot belong to a chord");
   }
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    std::stringstream ss;
-
-    ss <<
-      std::endl <<
-//       ", fCurrentChordStaffNumber: " <<
-//       mfStaffNumberAsString (fCurrentChordStaffNumber) <<
-      ", fPreviousNoteStaffNumber: " <<
-      mfStaffNumberAsString (fPreviousNoteStaffNumber) <<
-      ", fCurrentNoteStaffNumber: " <<
-      mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
-//       ", staffNumberToUse: " <<
-//        mfStaffNumberAsString (staffNumberToUse) <<
-      ", line " << newChodeNoteInputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChords ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       std::endl <<
+// //       ", fCurrentChordStaffNumber: " <<
+// //       mfStaffNumberAsString (fCurrentChordStaffNumber) <<
+//       ", fPreviousNoteStaffNumber: " <<
+//       mfStaffNumberAsString (fPreviousNoteStaffNumber) <<
+//       ", fCurrentNoteStaffNumber: " <<
+//       mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
+// //       ", staffNumberToUse: " <<
+// //        mfStaffNumberAsString (staffNumberToUse) <<
+//       ", line " << newChodeNoteInputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -27251,8 +27216,8 @@ void mxsr2msrSkeletonPopulator::handleRegularChordMemberNote (
 
     ss <<
       "Handling a chord member note" <<
-      ", fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
-      fCurrentPartStaffVoicesMap
+      ", fCurrentPartStaffMsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]: \"" <<
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceName () <<
       "\", fOnGoingChord: " <<
@@ -27265,32 +27230,32 @@ void mxsr2msrSkeletonPopulator::handleRegularChordMemberNote (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChordsDetails ()) {
-    gLog <<
-      std::endl <<
-      "======================= handleRegularChordMemberNote" <<
-      ", line " << newChodeNoteInputLineNumber <<
-      std::endl;
-    fCurrentPart->print (gLog);
-    gLog <<
-      "=======================" <<
-      std::endl << std::endl;
-
-/* JMI
-    if (fCurrentGraceNotesGroupNotes) {
-      gLog <<
-        fCurrentGraceNotesGroupNotes;
-    }
-    else {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChordsDetails ()) {
+//     gLog <<
+//       std::endl <<
+//       "======================= handleRegularChordMemberNote" <<
+//       ", line " << newChodeNoteInputLineNumber <<
+//       std::endl;
+//     fCurrentPart->print (gLog);
+//     gLog <<
+//       "=======================" <<
+//       std::endl << std::endl;
+//
+// /* JMI
+//     if (fCurrentGraceNotesGroupNotes) {
 //       gLog <<
-//         "fCurrentGraceNotesGroupNotes is NULL"; // JMI
-    }
-*/
-
-    gLog << std::endl;
-  }
-#endif // MF_TRACE_IS_ENABLED
+//         fCurrentGraceNotesGroupNotes;
+//     }
+//     else {
+// //       gLog <<
+// //         "fCurrentGraceNotesGroupNotes is NULL"; // JMI
+//     }
+// */
+//
+//     gLog << std::endl;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
 
   // fetch current note's kind
   msrNoteKind
@@ -27337,7 +27302,7 @@ void mxsr2msrSkeletonPopulator::handleRegularChordMemberNote (
             " " << chord <<
             " to " << chordFirstNoteSoundingWholeNotes <<
             " in voice \"" <<
-            fCurrentPartStaffVoicesMap
+            fCurrentPartStaffMsrVoicesMap
       [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->getVoiceName () <<
             "\"" <<
             std::endl;
@@ -27405,15 +27370,21 @@ void mxsr2msrSkeletonPopulator::handleRegularChordMemberNote (
   fCurrentChord->
     addNoteToChord (
       newChordNote,
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]);
 
-  if (fCurrentChordHasToBePopulatedFromItsFIrstNote) {
-    populateCurrentChordFromNote (
-      newChordNote);
-
-    fCurrentChordHasToBePopulatedFromItsFIrstNote = false;
-  }
+//   if (! fCurrentChordHasBeenPopulatedFromItsFirstNote) {
+//     fCurrentChord->
+//       setupNoteAsFirstInChord (
+// //         newChordNote);
+//         fCurrentChordFirstNote);
+//
+//     populateCurrentChordFromNote (
+//       newChordNote);
+//
+//     fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
+//     fCurrentChordFirstNote = nullptr;
+//   }
 
   // copy newChordNote's elements if any to the current chord
   copyNoteElementsIfAnyToChord (
@@ -27482,12 +27453,13 @@ void mxsr2msrSkeletonPopulator::handleTupletMemberNote (
   // fetch the current note's voice
   S_msrVoice
     firstNoteVoice =
-      fCurrentPartStaffVoicesMap
-        [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
+      fCurrentPartStaffMsrVoicesMap
+        [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber];
 
-  S_mxsr2msrPopulatorVoiceHandler
-    voiceHandler =
-      fCurrentStaffVoiceHandlersMap
+  // get the voice handler
+  S_mxsrVoice
+    theMxsrVoice =
+      fCurrentPartStaffMxsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   switch (fCurrentTupletTypeKind) {
@@ -27512,40 +27484,30 @@ void mxsr2msrSkeletonPopulator::handleTupletMemberNote (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        // create the tuplet
-        S_msrTuplet
-          tuplet =
-            createTupletUponItsFirstNote (note);
-
-        // append note as first note of tuplet
-        tuplet->
-          appendNoteToTuplet (
-            note);
-
         firstNoteVoice->
           registerTupletNoteInVoice (note);
 
-#ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceTuplets ()) {
-          // only after appendNoteToTuplet() has set the note's uplink to tuplet
-          std::stringstream ss;
-
-          ss <<
-            "Handling first note " <<
-            note->asShortString () <<
-            " of tuplet " <<
-            tuplet->asString ();
-
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
-#endif // MF_TRACE_IS_ENABLED
-
-        // handle the tuplet start
-        handleTupletStart (
-          tuplet,
-          firstNoteVoice);
+// #ifdef MF_TRACE_IS_ENABLED
+//         if (gTraceOahGroup->getTraceTuplets ()) {
+//           // only after appendNoteToTuplet() has set the note's uplink to tuplet
+//           std::stringstream ss;
+//
+//           ss <<
+//             "Handling first note " <<
+//             note->asShortString () <<
+//             " of tuplet " <<
+//             tuplet->asString ();
+//
+//           gWaeHandler->waeTrace (
+//             __FILE__, __LINE__,
+//             ss.str ());
+//         }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//         // handle the tuplet start
+//         handleTupletStart (
+//           tuplet,
+//           firstNoteVoice);
 
         // swith to continuation mode // JMI v0.9.70
         // this is handy in case the forthcoming tuplet members
@@ -27562,7 +27524,7 @@ void mxsr2msrSkeletonPopulator::handleTupletMemberNote (
       break;
 
     case msrTupletTypeKind::kTupletTypeStop:
-      fThereIsAPendingTupletStop = true; // CHORD_TUP
+//       fThereIsAPendingTupletStop = true; // CHORD_TUP
 
       fNoteWithThePendingTupletStop = note;
       fVoiceOfTheNoteWithThePendingTupletStop = firstNoteVoice;
@@ -27610,9 +27572,15 @@ void mxsr2msrSkeletonPopulator::handleTupletMemberNote (
         // create the tuplet
         S_msrTuplet
           tuplet =
-            createTupletUponItsFirstNote (note);
+            createTuplet (
+              fCurrentNoteInputStartLineNumber);
 
-        // append note as first note of tuplet
+//         // set its informations from note
+//         copyNoteElementsIfAnyToTuplet (
+//           note);
+//           tuplet,
+
+        // append note to tuplet
         tuplet->
           appendNoteToTuplet (
             note);
@@ -27623,12 +27591,12 @@ void mxsr2msrSkeletonPopulator::handleTupletMemberNote (
         // push it onto tuplets stack VOFVOFVOF JMI v0.9.70
 
         // finalize it
-        S_mxsr2msrPopulatorVoiceHandler
-          voiceHandler =
-            fCurrentStaffVoiceHandlersMap
+        S_mxsrVoice
+          theMxsrVoice =
+            fCurrentPartStaffMxsrVoicesMap
               [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
-        voiceHandler->
+        theMxsrVoice->
           finalizeTupletStackTopAndPopItFromTupletsStack ( // JMI v0.9.71
             noteInputLineNumber,
             "handleTupletMemberNote() 7");
@@ -27657,9 +27625,9 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
   int newChordNoteInputLineNumber =
     newChordNote->getInputStartLineNumber ();
 
-  S_mxsr2msrPopulatorVoiceHandler
-    voiceHandler =
-      fCurrentStaffVoiceHandlersMap
+  S_mxsrVoice
+    theMxsrVoice =
+      fCurrentPartStaffMxsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
   // set new note kind as a chord or grace chord member JMI ???
@@ -27686,8 +27654,8 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
       ", newChordNote: " <<
       newChordNote->
         asShortString () <<
-      ", voiceHandler->getTupletsStackSize (): " <<
-      voiceHandler->getTupletsStackSize ();
+      ", theMxsrVoice->getTupletsStackSize (): " <<
+      theMxsrVoice->getTupletsStackSize ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27719,9 +27687,9 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
     S_msrTuplet currentTuplet;
 
     //* JMI
-    if (voiceHandler->getTupletsStackSize ()) {
+    if (theMxsrVoice->getTupletsStackSize ()) {
       currentTuplet =
-        voiceHandler->getTupletsStackTop ();
+        theMxsrVoice->getTupletsStackTop ();
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check JMI v0.9.70
@@ -27761,9 +27729,9 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
       gLog <<
         std::endl <<
         std::endl <<
-        "&&&&&&&&&&&&&&&&&& voiceHandler before removeLastNoteFromTuplet:";
+        "&&&&&&&&&&&&&&&&&& theMxsrVoice before removeLastNoteFromTuplet:";
 
-      voiceHandler->print (gLog);
+      theMxsrVoice->print (gLog);
 
       gLog <<
         std::endl <<
@@ -27785,13 +27753,13 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
 /* JMI
     S_msrNote
       tupletLastNote =
-  //      fStaffVoicesLastMetNoteMap [fCurrentPartStaffVoicesMap
+  //      fStaffVoicesLastMetNoteMap [fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]];
         fStaffVoicesLastMetNoteMap [
           std::make_pair (fCurrentNoteStaffNumber, fCurrentNoteVoiceNumber)
           ];
 
-    fCurrentPartStaffVoicesMap
+    fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
       removeNoteFromVoice (
         newChordNoteInputLineNumber,
@@ -27800,12 +27768,12 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
 
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       voiceHandler->
+//       theMxsrVoice->
 //         displayTupletsStack (
 //           "############## After removeLastNoteFromTuplet()");
 //     }
 //     if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//       voiceHandler->
+//       theMxsrVoice->
 //         displayVoicesTupletsStacksMap (
 //           "############## After removeLastNoteFromTuplet()");
 //     }
@@ -27818,16 +27786,16 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
 //         tupletLastNote,
 //         msrNoteKind::kNoteRegularInChord);
 
-    S_mxsr2msrPopulatorVoiceHandler
-      voiceHandler =
-        fCurrentStaffVoiceHandlersMap
+    S_mxsrVoice
+      theMxsrVoice =
+        fCurrentPartStaffMxsrVoicesMap
           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
     // the chord first note has been placed in the tuplet at the top of the tuplets stack,
     // remove it from there
 //     S_msrTuplet
 //       tupletStackTop =
-//         voiceHandler->
+//         theMxsrVoice->
 //           getTupletsStackTop ();
 
 //     S_msrNote
@@ -27854,17 +27822,17 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
 //     fCurrentChord->
 //       addNoteToChord (
 //         newChordNote,
-//         voiceHandler->getMsrVoice ());
+//         theMxsrVoice->getMsrVoice ());
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTupletsDetails ()) { // JMI v0.9.71
       gLog <<
         std::endl <<
         std::endl <<
-        "&&&&&&&&&&&&&&&&&& voiceHandler before appendChordToTuplet:" <<
+        "&&&&&&&&&&&&&&&&&& theMxsrVoice before appendChordToTuplet:" <<
         std::endl;
 
-      voiceHandler->print (gLog);
+      theMxsrVoice->print (gLog);
 
       gLog <<
         std::endl <<
@@ -27927,9 +27895,6 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes);
     }
-
-    // account for a chord being built
-    fOnGoingChord = true;
   }
 
   // register note as another member of chord
@@ -27943,7 +27908,7 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
         asShortString () <<
       ", line " << newChordNoteInputLineNumber <<
       " to current chord in voice " <<
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceName ();
 
@@ -27956,7 +27921,7 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
   fCurrentChord->
     addNoteToChord (
       newChordNote,
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]);
 
   // copy newChordNote's elements if any to the chord
@@ -28034,7 +27999,7 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
 // //
 // //       // fetch last handled note for this voice
 // //       chordFirstNote =
-// //         fCurrentPartStaffVoicesMap
+// //         fCurrentPartStaffMsrVoicesMap
 // //           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
 // //             getVoiceLastAppendedNote ();
 // //
@@ -28075,13 +28040,13 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
 //
 //     if (false) {
 //       gLog <<
-//         "&&&&&&&&&&&&&&&&&& fCurrentPartStaffVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] (" <<
-//         fCurrentPartStaffVoicesMap
+//         "&&&&&&&&&&&&&&&&&& fCurrentPartStaffMsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] (" <<
+//         fCurrentPartStaffMsrVoicesMap
 //           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
 //             getVoiceName () <<
 //         ") contents &&&&&&&&&&&&&&&&&&" <<
 //         std::endl <<
-//         fCurrentPartStaffVoicesMap
+//         fCurrentPartStaffMsrVoicesMap
 //           [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber] <<
 //         std::endl << std::endl;
 //     }
@@ -28094,7 +28059,7 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
 //     }
 //     else {
 //       // append current chord to pending voice JMI ???
-//       fCurrentPartStaffVoicesMap
+//       fCurrentPartStaffMsrVoicesMap
 //         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
 //           appendChordToVoice (
 //             fCurrentChord);
@@ -28119,9 +28084,6 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
 //         ss.str ());
 //     }
 //     */
-//
-//     // account for chord being built
-//     fOnGoingChord = true;
 //   }
 
   // register note as another member of chord
@@ -28135,7 +28097,7 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
         asShortString () <<
       ", line " << newChordNoteInputLineNumber <<
       " to current chord in grace notes group in voice " <<
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
           getVoiceName ();
 
@@ -28148,7 +28110,7 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
   fCurrentChord->
     addNoteToChord (
       newChordNote,
-      fCurrentPartStaffVoicesMap
+      fCurrentPartStaffMsrVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]);
 
   // copy newChordNote's elements if any to the chord
@@ -28487,7 +28449,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
 void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -28598,7 +28560,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_harmony& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -28650,7 +28612,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmony& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_root& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -28678,7 +28640,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_root_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -28706,7 +28668,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_step& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_root_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -28743,7 +28705,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_alter& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_function& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -28762,7 +28724,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_function& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -28992,7 +28954,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_inversion& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29016,7 +28978,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inversion& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_bass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29033,7 +28995,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_bass_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29061,7 +29023,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_step& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_bass_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29098,7 +29060,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_alter& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_degree& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29126,7 +29088,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_degree_value& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29145,7 +29107,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_value& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_degree_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29182,7 +29144,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_alter& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_degree_type& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29222,7 +29184,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_type& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_degree& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29252,7 +29214,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_degree& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29554,7 +29516,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
 */
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29646,7 +29608,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_frame_strings& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29665,7 +29627,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame_strings& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_frame_frets& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29684,7 +29646,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame_frets& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_first_fret& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29711,7 +29673,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_first_fret& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_frame_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29735,7 +29697,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame_note& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_barre& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29778,7 +29740,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barre& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_frame_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29810,7 +29772,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_frame_note& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_frame& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29855,7 +29817,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_frame& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_figured_bass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29915,7 +29877,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figured_bass& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_figure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29932,7 +29894,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figure& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_prefix& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -29990,7 +29952,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_prefix& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_figure_number& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30022,7 +29984,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figure_number& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_suffix& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30082,7 +30044,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_suffix& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_figure& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30113,7 +30075,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figure& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30182,7 +30144,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_harp_pedals& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30284,7 +30246,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harp_pedals& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pedal_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30301,7 +30263,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_tuning& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pedal_step& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30329,7 +30291,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_step& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_pedal_alter& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30366,7 +30328,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_alter& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_pedal_tuning& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30417,7 +30379,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_pedal_tuning& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_damp& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30445,7 +30407,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damp& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_damp_all& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30474,7 +30436,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damp_all& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_capo& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30493,7 +30455,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_capo& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_staff_size& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30513,7 +30475,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_size& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_staff_details& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30586,7 +30548,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_details& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_scordatura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30628,7 +30590,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_scordatura& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_accord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30665,7 +30627,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accord& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_accord& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30700,7 +30662,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_accord& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_scordatura& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30724,7 +30686,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_scordatura& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_instrument_sound& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30742,7 +30704,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instrument_sound& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_virtual_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30760,7 +30722,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_virtual_instrument& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_midi_device& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -30782,7 +30744,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_device& elt)
 void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
@@ -31181,7 +31143,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //         // get the current note voice's stanzas map
 //         const std::map <std::string, S_msrStanza>&
 //           voiceStanzasMap =
-//             fCurrentPartStaffVoicesMap
+//             fCurrentPartStaffMsrVoicesMap
 //         [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber]->
 //               getVoiceStanzasMap ();
 //
@@ -31229,4 +31191,137 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 
 
 
+
+// void mxsr2msrSkeletonPopulator::handleChordBeginAfterNoteIfAny ()
+// {
+//   if (fCurrentNoteChordBegin) {
+// //     // there is a chord begin event
+// //     switch (fCurrentNoteChordBegin->getChordEventKind ()) {
+// //       case mxsrChordEventKind::kEventChord_NONE:
+// //         // should not occur
+// //         break;
+// //
+// //       case mxsrChordEventKind::kEventChordBegin:
+// //         fCurrentNoteBelongsToAChord = true;
+// //
+// //         // create a chord
+// //         fCurrentChord =
+// //           msrChord::create (
+// //             fCurrentNoteChordBegin->
+// //               getEventInputStartLineNumber ());
+// //
+// //         // register it as not yet populated fron its first note
+// //         fCurrentChordHasToBePopulatedFromItsFirstNote = true;
+// //
+// //         // append it to the current recipient staff
+// //         fCurrentPartStaffMsrVoicesMap
+// //           [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
+// //             appendChordToVoice (
+// //               fCurrentChord);
+// //
+// //         fOnGoingChord = true;
+// //         break;
+// //
+// //       case mxsrChordEventKind::kEventChordEnd:
+// //         // should not occur
+// //         break;
+// //     } // switch
+//   }
+//   else {
+// //     fCurrentNoteBelongsToAChord = fOnGoingChord;
+//   }
+// }
+
+// void mxsr2msrSkeletonPopulator::handleChordEndBeforeNoteIfAny ()
+// {
+//   fCurrentNoteChordEnd =
+//     fKnownEventsCollection.
+//       fetchChordBeginAtNoteSequentialNumber (
+//         fCurrentNoteSequentialNumber);
+//
+//   if (fCurrentNoteChordEnd) {
+//     // there is a chord begin event
+//     switch (fCurrentNoteChordEnd->getChordEventKind ()) {
+//       case mxsrChordEventKind::kEventChord_NONE:
+//         // should not occur
+//         break;
+//
+//       case mxsrChordEventKind::kEventChordBegin:
+//         // should not occur
+//         break;
+//
+//       case mxsrChordEventKind::kEventChordEnd:
+// //         fCurrentNoteBelongsToAChord = false;
+//
+// //         // create a chord
+// //         fCurrentChord =
+// //           msrChord::create (
+// //             fCurrentNoteChordEnd->
+// //               getEventInputStartLineNumber ());
+// //
+// //         // register it as not yet populated fron its first note
+// //         fCurrentChordHasToBePopulatedFromItsFirstNote = true;
+// //
+// //         // append it to the current recipient staff
+// //         fCurrentPartStaffMsrVoicesMap
+// //           [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
+// //             appendChordToVoice (
+// //               fCurrentChord);
+// //
+// //         fOnGoingChord = false;
+//         break;
+//     } // switch
+//   }
+//   else {
+// //     fCurrentNoteBelongsToAChord = fOnGoingChord;
+//   }
+// }
+
+
+
+// //______________________________________________________________________________
+// void mxsr2msrSkeletonPopulator::finalizeCurrentChord (
+//   int inputLineNumber)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChordsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Finalizing current chord START:" <<
+//       std::endl <<
+//       fCurrentChord <<
+//       std::endl <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// //   fCurrentChord->
+// //     finalizeChord (
+// //       inputLineNumber);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChordsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Finalizing current chord END: " <<
+//       std::endl <<
+//       fCurrentChord <<
+//       std::endl <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // forget about the current chord
+//   fCurrentChord = nullptr;
+// }
 

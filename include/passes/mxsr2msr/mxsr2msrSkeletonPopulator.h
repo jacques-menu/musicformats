@@ -14,162 +14,19 @@
 
 #include "typedefs.h"
 
-#include "visitor.h"
+#include "mxsr2msrEvents.h"
 
-#include "mfStack.h"
+#include "mxsr2msrVoices.h"
 
-#include "mxsrEvents.h"
-
-#include "msrArticulations.h"
 #include "msrBarLines.h"
-#include "msrBreaks.h"
 #include "msrDivisions.h"
 #include "msrDoubleTremolos.h"
-#include "msrGlissandos.h"
-#include "msrRehearsalMarks.h"
-#include "msrSlides.h"
-#include "msrTablatures.h"
-#include "msrTechnicals.h"
 #include "msrTempos.h"
 #include "msrTuplets.h"
-#include "msrVoiceStaffChanges.h"
 
 
 namespace MusicFormats
 {
-
-//________________________________________________________________________
-class mxsr2msrPopulatorVoiceHandler : public smartable
-{
-/*
-  positions represent the order in which the parts appear in <part-list />,
-  starting at 0 since std::vectors are used
-*/
-
-  public:
-
-    // creation
-    // ------------------------------------------------------
-
-    static SMARTP<mxsr2msrPopulatorVoiceHandler> create (
-                            const S_msrVoice&  voice);
-
-  protected:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          mxsr2msrPopulatorVoiceHandler (
-                            const S_msrVoice& fMsrVoice);
-
-    virtual               ~mxsr2msrPopulatorVoiceHandler ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-    S_msrVoice            getMsrVoice () const
-                              { return fMsrVoice; }
-
-    const std::list <S_msrTuplet>&
-                          getTupletsStack () const
-                              { return fTupletsStack; }
-
-    const std::size_t     getTupletsStackSize () const
-                              { return fTupletsStack.size (); }
-
-    const S_msrTuplet     getTupletsStackTop () const
-                              { return fTupletsStack.front (); }
-
-    void                  setLastMetNoteInVoice (S_msrNote note)
-                              { fLastMetNoteInVoice = note; }
-
-    S_msrNote             getLastMetNoteInVoice () const
-                              { return fLastMetNoteInVoice; }
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-    void                  pushTupletOntoTupletsStack (const S_msrTuplet& tuplet)
-                              { fTupletsStack.push_front (tuplet); }
-
-//     void                  handleTupletStartByHandler (
-//                             const S_msrTuplet& tuplet,
-//                             const S_msrVoice&  currentNoteVoice);
-//
-//     void                  handleTupletContinueByHandler (
-//                             const S_msrNote&   note,
-//                             const S_msrVoice&  currentNoteVoice);
-//
-//     void                  handleTupletStopByHandler (
-//                             const S_msrNote&   note,
-//                             const S_msrVoice&  currentNoteVoice);
-
-    void                  finalizeTupletStackTopAndPopItFromTupletsStack (
-                            int         inputLineNumber,
-                            std::string context);
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    std::string           asString () const;
-
-    virtual void          print (std::ostream& os) const;
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-
-    S_msrVoice            fMsrVoice;
-
-    S_msrNote             fLastMetNoteInVoice;
-
-    std::list <S_msrTuplet>
-                          fTupletsStack;
-
-    S_msrNote             fCurrentOuterMostTupletFirstNote;
-    S_msrTuplet           fCurrentOuterMostTuplet;
-
-    msrWholeNotes         fCurrentOuterMostTupletRelativeOffset;
-
-  private:
-
-    // private work fields
-    // ------------------------------------------------------
-
-    // we use a pair containing the staff and voice numbers: JMI v0.9.70
-//     std::map <S_msrVoice, S_msrTuplet>
-//     std::map <std::pair <int, int>, S_msrTuplet>
-//                               fLastHandledTupletInVoiceMap;
-
-//     // the tuplets stops are not always in first-in/first-out order, so:
-//     std::set <int>         fExpectedTupletsStopNumbersSet;
-
-  private:
-
-    // private methods
-    // ------------------------------------------------------
-
-    void                  displayTupletsStack (
-                            const std::string& context);
-
-    void                  handleTupletsPendingOnTupletsStack (
-                            int inputLineNumber);
-
-    void                  displayLastHandledTupletInVoiceMap (
-                            const std::string& header);
-};
-typedef SMARTP<mxsr2msrPopulatorVoiceHandler> S_mxsr2msrPopulatorVoiceHandler;
-
-EXP std::ostream& operator << (std::ostream& os, const mxsr2msrPopulatorVoiceHandler& elt);
-EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrPopulatorVoiceHandler& elt);
 
 //________________________________________________________________________
 class EXP mxsr2msrSkeletonPopulator :
@@ -1462,21 +1319,21 @@ class EXP mxsr2msrSkeletonPopulator :
     // we need a fast access to the staves and voices
     // indexes are staff number and voice number
     std::map <int, std::map <int, S_msrVoice>>
-                              fCurrentPartStaffVoicesMap;
+                              fCurrentPartStaffMsrVoicesMap;
 
-		void											displayCurrentPartStaffVoicesMap (
+		void											displayCurrentPartStaffMsrVoicesMap (
                                 int                inputLineNumber,
 																const std::string& context);
 
     // we need a fast access to the voices and their handlers
     // indexes are staff number and voice number
-    std::map <int, std::map <int, S_mxsr2msrPopulatorVoiceHandler>>
-                              fCurrentStaffVoiceHandlersMap;
+    std::map <int, std::map <int, S_mxsrVoice>>
+                              fCurrentPartStaffMxsrVoicesMap;
 
     void                      populateCurrentPartStaffVoicesMapsFromPart (
                                   const S_msrPart& part);
 
-		void											displayCurrentStaffVoiceHandlersMap ();
+		void											displayCurrentPartStaffMxsrVoicesMap ();
 
     // staff details handling
     // ------------------------------------------------------
@@ -1582,52 +1439,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      handleChordMemberNoteInAGraceNotesGroup (
                                 const S_msrNote& newChordNote);
-
-    // staff changes detection
-    // ------------------------------------------------------
-
-    // MusicXMl contains sequences of elements on one and the same staff,
-    // until a <backup/> or <forward/> markup may change the latter
-    // or some note in not in the same staff
-
-    // such a staff change occurs when the staff number changes
-    // whilst the voice number remains the same
-    // hence the use of fCurrentRecipientStaffNumber,
-    // which doesnt change in case of a staff change
-
-    // fCurrentRecipientStaffNumber is that of the staff that contains the note
-    int                       fCurrentRecipientStaffNumber;
-
-    // fCurrentDisplayStaffNumber is that where the notes are displayed
-    // for the duration of the staff change
-    int                       fCurrentDisplayStaffNumber;
-//     S_msrVoice                fCurrentRecipientVoice;
-
-    // fCurrentNoteStaffChangeTakeOff contains the staff change event
-    // that occurs on a take off note, if any
-    S_mxsrStaffChangeEvent    fCurrentNoteStaffChangeTakeOff; // EVENTS
-
-//     int                       fCurrentTakeOffStaffNumber;
-//     int                       fCurrentLandingStaffNumber;
-
-    void                      handleStaffChangeTakeOffEventIfAny ();
-
-    void                      createStaffChange (
-                                int                    inputLineNumber,
-                                S_mxsrStaffChangeEvent staffChangeTakeOffEvent);
-
-    // an ongoing staff change is indicated by ??? JMI v0.9.72
-    //   fCurrentDisplayStaffNumber != fCurrentRecipientStaffNumber
-    Bool                      fOnGoingStaffChange;
-
-//     msrStaffChangeKind        fCurrentStaffChangeKind;
-//     Bool                      fCurrentNoteIsCrossStaves;
-
-    // cross staff chords
-//     int                       fCurrentChordStaffNumber;
-
-//     Bool                      thereIsAStaffChange (
-//                                 int inputLineNumber);
 
     // print
     // ------------------------------------------------------
@@ -2517,11 +2328,61 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrChord& chord);
 
 
+    // staff changes handling
+    // ------------------------------------------------------
+
+    // MusicXMl contains sequences of elements on one and the same staff,
+    // until a <backup/> or <forward/> markup may change the latter
+    // or some note in not in the same staff
+
+    // such a staff change occurs when the staff number changes
+    // whilst the voice number remains the same
+    // hence the use of fCurrentRecipientStaffNumber,
+    // which doesnt change in case of a staff change
+
+    // fCurrentRecipientStaffNumber is that of the staff that contains the note
+    int                       fCurrentRecipientStaffNumber;
+
+    // fCurrentDisplayStaffNumber is that where the notes are displayed
+    // for the duration of the staff change
+    int                       fCurrentDisplayStaffNumber;
+//     S_msrVoice                fCurrentRecipientVoice;
+
+    // fCurrentNoteStaffChangeTakeOff contains the staff change event
+    // that occurs on a take off note, if any
+    S_mxsrStaffChangeEvent    fCurrentNoteStaffChangeTakeOff; // EVENTS
+
+//     int                       fCurrentTakeOffStaffNumber;
+//     int                       fCurrentLandingStaffNumber;
+
+    void                      handleStaffChangeTakeOffEventIfAny ();
+
+    void                      createStaffChange (
+                                int                    inputLineNumber,
+                                S_mxsrStaffChangeEvent staffChangeTakeOffEvent);
+
+    // an ongoing staff change is indicated by ??? JMI v0.9.72
+    //   fCurrentDisplayStaffNumber != fCurrentRecipientStaffNumber
+    Bool                      fOnGoingStaffChange;
+
+//     msrStaffChangeKind        fCurrentStaffChangeKind;
+//     Bool                      fCurrentNoteIsCrossStaves;
+
+    // cross staff chords
+//     int                       fCurrentChordStaffNumber;
+
+//     Bool                      thereIsAStaffChange (
+//                                 int inputLineNumber);
+
     // chords handling
     // ------------------------------------------------------
 
-    S_mxsrChordEvent          fCurrentNoteChordEvent;
+    S_mxsrChordEvent          fCurrentNoteChordBegin;
+    S_mxsrChordEvent          fCurrentNoteChordEnd;
+
     Bool                      fCurrentNoteBelongsToAChord;
+
+    Bool                      fOnGoingChord;
 
 /* JMI v0.9.70
     // we use a pair containing the staff and voice numbers:
@@ -2530,9 +2391,9 @@ class EXP mxsr2msrSkeletonPopulator :
 */
 
     S_msrChord                fCurrentChord;
-    Bool                      fOnGoingChord;
 
-    Bool                      fCurrentChordHasToBePopulatedFromItsFIrstNote;
+    Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
+    S_msrNote                 fCurrentChordFirstNote;
 
     void                      populateCurrentChordFromNote (
                                 S_msrNote note);
@@ -2542,7 +2403,11 @@ class EXP mxsr2msrSkeletonPopulator :
 //                                 const S_msrNote& chordFirstNote,
 //                                 msrNoteKind      noteKind);
 
-    void                      handleChordEventIfAny ();
+    void                      handleChordBeginBeforeNoteIfAny ();
+//     void                      handleChordBeginAfterNoteIfAny ();
+
+//     void                      handleChordEndBeforeNoteIfAny ();
+    void                      handleChordEndAfterNoteIfAny ();
 
 /* JMI
     void                      registerVoiceCurrentChordInMap (
@@ -2630,10 +2495,21 @@ class EXP mxsr2msrSkeletonPopulator :
 //     Bool                      tupletsStopNumberIsExpected ( // JMI v0.9.70
 //                                 int tupletNumber);
 
-    S_msrTuplet               createTupletUponItsFirstNote (
-                                const S_msrNote& firstNote);
+    S_msrTuplet               createTuplet (
+                                int inputLineNumber);
 
-    void                      handleTupletEventsIfAny ();
+    void                      copyNoteElementsIfAnyToTuplet (
+                                const S_msrNote&  firstNote,
+                                const S_msrTuplet tuplet);
+
+    void                      handleTupletBeginEventsBeforeNoteIfAny ();
+
+    void                      handleTupletBeginEvents_RIGHT_AfterNoteCreationIfAny ();
+
+    void                      handleTupletBeginEventsAfterNoteIfAny ();
+
+    void                      handleTupletEndEventsBeforeNoteIfAny ();
+    void                      handleTupletEndEventsAfterNoteIfAny ();
 
     void                      handleTupletStart (
                                 const S_msrTuplet& tuplet,

@@ -74,8 +74,7 @@ std::ostream& operator << (std::ostream& os, const msrChordInKind& elt)
 }
 
 //______________________________________________________________________________
-S_msrChord msrChord::create (
-  int                  inputLineNumber)
+S_msrChord msrChord::create (int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
@@ -98,36 +97,36 @@ S_msrChord msrChord::create (
   return obj;
 }
 
-S_msrChord msrChord::create (
-  int                  inputLineNumber,
-  const S_msrMeasure&  upLinkToMeasure)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChordsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a chord" <<
-      ", inputLineNumber  " << inputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  msrChord* obj =
-    new msrChord (
-      inputLineNumber,
-      upLinkToMeasure);
-  assert (obj != nullptr);
-  return obj;
-}
+// S_msrChord msrChord::create (
+//   int                  inputLineNumber,
+//   const S_msrMeasure&  upLinkToMeasure)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChordsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Creating a chord" <<
+//       ", inputLineNumber  " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   msrChord* obj =
+//     new msrChord (
+//       inputLineNumber,
+//       upLinkToMeasure);
+//   assert (obj != nullptr);
+//   return obj;
+// }
 
 S_msrChord msrChord::create (
   int                  inputLineNumber,
   const S_msrMeasure&  upLinkToMeasure,
-  const msrWholeNotes& chordSoundingWholeNotes,
+//   const msrWholeNotes& chordSoundingWholeNotes,
   const msrWholeNotes& chordDisplayWholeNotes,
   msrNotesDurationKind chordGraphicNotesDurationKind)
 {
@@ -137,8 +136,10 @@ S_msrChord msrChord::create (
 
     ss <<
       "Creating a chord" <<
-      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asFractionString () <<
-      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asFractionString () <<
+//       ", chordSoundingWholeNotes: " <<
+//       chordSoundingWholeNotes.asFractionString () <<
+      ", chordDisplayWholeNotes: " <<
+      chordDisplayWholeNotes.asFractionString () <<
       ", chordGraphicNotesDuration: " <<
       msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
 
@@ -152,45 +153,46 @@ S_msrChord msrChord::create (
     new msrChord (
       inputLineNumber,
       upLinkToMeasure,
-      chordSoundingWholeNotes, chordDisplayWholeNotes,
+//       chordSoundingWholeNotes,
+      chordDisplayWholeNotes,
       chordGraphicNotesDurationKind);
   assert (obj != nullptr);
   return obj;
 }
 
-S_msrChord msrChord::create (
-  int                  inputLineNumber,
-  const msrWholeNotes& chordSoundingWholeNotes,
-  const msrWholeNotes& chordDisplayWholeNotes,
-  msrNotesDurationKind chordGraphicNotesDurationKind)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChordsBasics ()) {
-    std::stringstream ss;
+// S_msrChord msrChord::create (
+//   int                  inputLineNumber,
+//   const msrWholeNotes& chordSoundingWholeNotes,
+//   const msrWholeNotes& chordDisplayWholeNotes,
+//   msrNotesDurationKind chordGraphicNotesDurationKind)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChordsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Creating a chord" <<
+//       ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asFractionString () <<
+//       ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asFractionString () <<
+//       ", chordGraphicNotesDuration: " <<
+//       msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   return
+//     msrChord::create (
+//       inputLineNumber,
+//       gNullMeasure, // set later in setChordUpLinkToMeasure()
+//       chordSoundingWholeNotes,
+//       chordDisplayWholeNotes,
+//       chordGraphicNotesDurationKind);
+// }
 
-    ss <<
-      "Creating a chord" <<
-      ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asFractionString () <<
-      ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asFractionString () <<
-      ", chordGraphicNotesDuration: " <<
-      msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  return
-    msrChord::create (
-      inputLineNumber,
-      gNullMeasure, // set later in setChordUpLinkToMeasure()
-      chordSoundingWholeNotes, chordDisplayWholeNotes,
-      chordGraphicNotesDurationKind);
-}
-
-msrChord::msrChord (
-  int                  inputLineNumber)
+msrChord::msrChord (int inputLineNumber)
     : msrTupletElement (
         inputLineNumber)
 {
@@ -203,7 +205,7 @@ msrChord::msrChord (
     msrWholeNotes (0, 1),
     "msrChord::msrChord()");
 
-  fChordDisplayWholeNotes  = msrWholeNotes (0, 1);
+  fChordDisplayWholeNotes = msrWholeNotes (0, 1);
 
   fChordGraphicNotesDurationKind =
     msrNotesDurationKind::kNotesDuration_UNKNOWN_;
@@ -212,34 +214,34 @@ msrChord::msrChord (
   fChordIsSecondChordInADoubleTremolo = false;
 }
 
-msrChord::msrChord (
-  int                  inputLineNumber,
-  const S_msrMeasure&  upLinkToMeasure)
-    : msrTupletElement (
-        inputLineNumber)
-{
-  fChordKind = msrChordInKind::kChordIn_UNKNOWN_;
-
-  // fChordUpLinkToMeasure = upLinkToMeasure;
-  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
-
-  setMeasureElementSoundingWholeNotes (
-    msrWholeNotes (0, 1),
-    "msrChord::msrChord()");
-
-  fChordDisplayWholeNotes  = msrWholeNotes (0, 1);
-
-  fChordGraphicNotesDurationKind =
-    msrNotesDurationKind::kNotesDuration_UNKNOWN_;
-
-  fChordIsFirstChordInADoubleTremolo  = false;
-  fChordIsSecondChordInADoubleTremolo = false;
-}
+// msrChord::msrChord (
+//   int                  inputLineNumber,
+//   const S_msrMeasure&  upLinkToMeasure)
+//     : msrTupletElement (
+//         inputLineNumber)
+// {
+//   fChordKind = msrChordInKind::kChordIn_UNKNOWN_;
+//
+//   // fChordUpLinkToMeasure = upLinkToMeasure;
+//   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
+//
+//   setMeasureElementSoundingWholeNotes (
+//     msrWholeNotes (0, 1),
+//     "msrChord::msrChord()");
+//
+//   fChordDisplayWholeNotes  = msrWholeNotes (0, 1);
+//
+//   fChordGraphicNotesDurationKind =
+//     msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+//
+//   fChordIsFirstChordInADoubleTremolo  = false;
+//   fChordIsSecondChordInADoubleTremolo = false;
+// }
 
 msrChord::msrChord (
   int                  inputLineNumber,
   const S_msrMeasure&  upLinkToMeasure,
-  const msrWholeNotes& chordSoundingWholeNotes,
+//   const msrWholeNotes& chordSoundingWholeNotes,
   const msrWholeNotes& chordDisplayWholeNotes,
   msrNotesDurationKind chordGraphicNotesDurationKind)
     : msrTupletElement (
@@ -250,11 +252,11 @@ msrChord::msrChord (
   // fChordUpLinkToMeasure = upLinkToMeasure;
   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
-  setMeasureElementSoundingWholeNotes (
-    chordSoundingWholeNotes,
-    "msrChord::msrChord()");
+//   setMeasureElementSoundingWholeNotes (
+//     chordSoundingWholeNotes,
+//     "msrChord::msrChord()");
 
-  fChordDisplayWholeNotes  = chordDisplayWholeNotes;
+  fChordDisplayWholeNotes = chordDisplayWholeNotes;
 
   fChordGraphicNotesDurationKind = chordGraphicNotesDurationKind;
 
@@ -296,7 +298,7 @@ S_msrChord msrChord::createChordNewbornClone (
       msrChord::create (
         fInputStartLineNumber,
         gNullMeasure, // set later in setChordUpLinkToMeasure()
-        fMeasureElementSoundingWholeNotes,
+//         fMeasureElementSoundingWholeNotes,
         fChordDisplayWholeNotes,
         fChordGraphicNotesDurationKind);
 
@@ -530,28 +532,28 @@ S_msrScore msrChord::fetchChordUpLinkToScore () const
   return result;
 }
 
-void msrChord::setChordSoundingWholeNotes (
-   const msrWholeNotes& wholeNotes)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Setting chord sounding whole notes to '" <<
-      wholeNotes.asString () <<
-      "' for chord '" <<
-      asString () <<
-      "'";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fChordSoundingWholeNotes = wholeNotes;
-}
+// void msrChord::setChordSoundingWholeNotes (
+//    const msrWholeNotes& wholeNotes)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChords ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Setting chord sounding whole notes to '" <<
+//       wholeNotes.asString () <<
+//       "' for chord '" <<
+//       asString () <<
+//       "'";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fChordSoundingWholeNotes = wholeNotes;
+// }
 
 void msrChord::setChordDisplayWholeNotes (
    const msrWholeNotes& wholeNotes)
@@ -731,20 +733,18 @@ void msrChord::setChordMembersMeasurePosition (
 //     } // for
 }
 
-void msrChord::addFirstNoteToChord (
-  const S_msrNote&  note,
-  const S_msrVoice& voice)
+void msrChord::setupNoteAsFirstInChord (
+  const S_msrNote&  note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChords ()) {
     std::stringstream ss;
 
     ss <<
-      "Adding first note '" <<
+      "Setting up note " <<
       note->asString () <<
-      "' to chord '" <<
-      asString () <<
-      "'";
+      " as first note in chord " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -752,32 +752,11 @@ void msrChord::addFirstNoteToChord (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // append note to chord notes vector
-  fChordNotesVector.push_back (note);
-
-  // register note's uplink to chord
-  note->
-    setNoteShortcutUpLinkToChord (this);
-
-/* JMI too early v0.9.66
-  // register note's uplink to measure
-  note->
-    setNoteUpLinkToMeasure (
-      fMeasureElementUpLinkToMeasure);
-*/
-
-  // mark note as belonging to a chord
-  note->setNoteBelongsToAChord ();
-
   // mark note as being the first one in the chord
-  note->setNoteIsAChordsFirstMemberNote ();
+  note->
+    setNoteIsAChordsFirstMemberNote ();
 
-  // is this note the shortest one in this voice?
-  voice->
-    registerShortestNoteInVoiceIfRelevant (
-      note);
-
-  // has this note an msrStem attached to it?
+  // has this note an msrStem attached to it? // JMI ??? v0.9.72
   S_msrStem
     noteStem =
       note->getNoteStem ();
@@ -785,12 +764,6 @@ void msrChord::addFirstNoteToChord (
   if (noteStem) {
     appendStemToChord (noteStem);
   }
-
-  // register note as the last appended one into this voice
-  /* JMI
-  voice->
-    registerNoteAsVoiceLastAppendedNote (note);
-    */
 }
 
 void msrChord::addNoteToChord (
@@ -802,11 +775,10 @@ void msrChord::addNoteToChord (
     std::stringstream ss;
 
     ss <<
-      "Adding another note '" <<
+      "Adding note " <<
       note->asShortString () <<
-      "' to chord '" <<
-      asString () <<
-      "'";
+      " to chord " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -815,7 +787,7 @@ void msrChord::addNoteToChord (
 #endif // MF_TRACE_IS_ENABLED
 
 //   gLog << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
-//   print (gLog); // JMI v0.9.66
+//   print (gLog); // JMI v0.9.66 ???
 //   gLog << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl;
 
   // append note to chord notes vector
@@ -828,6 +800,11 @@ void msrChord::addNoteToChord (
   // mark note as belonging to a chord
   note->setNoteBelongsToAChord ();
 
+  // is this note the shortest one in this voice? // JMI ??? v0.9.72
+  voice->
+    registerShortestNoteInVoiceIfRelevant (
+      note);
+
   // append the note to the measure's notes flat list
 //   if (false) // JMI v0.9.70
 //   fMeasureElementUpLinkToMeasure->
@@ -837,7 +814,7 @@ void msrChord::addNoteToChord (
   // register note as the last appended one into this voice
   voice->
     registerNoteAsVoiceLastAppendedNote (note);
-    */
+*/
 }
 
 S_msrNote msrChord::fetchChordFirstNonGraceNote () const
@@ -1891,10 +1868,14 @@ void msrChord::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
  // JMI   "chordSoundingWholeNotes" << ": " << fChordSoundingWholeNotes << v0.9.72
-    "fMeasureElementSoundingWholeNotes" << ": " << fMeasureElementSoundingWholeNotes <<
+//     "fMeasureElementSoundingWholeNotes" << ": " <<
+//     fMeasureElementSoundingWholeNotes <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
+    "fChordDisplayWholeNotes" << ": " <<
+    fChordDisplayWholeNotes <<
     std::endl;
 
   os << std::left <<
@@ -2677,9 +2658,11 @@ void msrChord::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition.asString () <<
     std::setw (fieldWidth) <<
-    "fMeasureElementSoundingWholeNotes" << ": " << fMeasureElementSoundingWholeNotes <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<

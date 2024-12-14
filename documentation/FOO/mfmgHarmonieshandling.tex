@@ -278,7 +278,7 @@ A harmony belongs to a \musicXmlMarkup{part} in \mxml, but we sometimes need to 
 void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -381,7 +381,7 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
     elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<

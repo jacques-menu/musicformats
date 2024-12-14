@@ -21,7 +21,7 @@
 #include "mfAssert.h"
 #include "mfTiming.h"
 
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 
 #include "oahEarlyOptions.h"
 
@@ -102,7 +102,7 @@ Sxmlelement translateMsrToMxsr (
     endClock);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getDisplayMxsr ()) {
+  if (gGlobalMxsr2msrOahGroup->getDisplayMxsr ()) {
     std::stringstream ss;
 
     ss <<

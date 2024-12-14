@@ -312,7 +312,7 @@ Field{mxsr2msrSkeletonBuilder}{fThereAreFiguredBassToBeAttachedToCurrentNote} it
 void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -414,7 +414,7 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
     elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -485,7 +485,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
     elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<

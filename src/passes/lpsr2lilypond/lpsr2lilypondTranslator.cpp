@@ -13910,6 +13910,8 @@ void lpsr2lilypondTranslator::generateCodeForMusicallyEmptyMeasure (
       break;
   } // switch
 
+mfAssertFalse (999);
+
   // generate the duration of the skip from the full measure whole notes JMI v0.9.68
   fLilypondCodeStream <<
     wholeNotesAsLilypondString (

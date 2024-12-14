@@ -4960,6 +4960,8 @@ void msrNote::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fNoteOccupiesAFullMeasure" << ": " <<
     fNoteOccupiesAFullMeasure <<
+    std::endl <<
+    std::setw (fieldWidth) <<
 		"fNoteIsACueNoteKind" << ": " <<
 		fNoteIsACueNoteKind <<
     std::endl;

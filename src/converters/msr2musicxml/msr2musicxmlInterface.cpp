@@ -28,7 +28,7 @@
 
 #include "msrOah.h"
 #include "msr2msrOah.h"
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 
 #include "oahEarlyOptions.h"
 
@@ -138,7 +138,7 @@ EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getDisplayMxsr ()) {
+  if (gGlobalMxsr2msrOahGroup->getDisplayMxsr ()) {
     std::stringstream ss;
 
     ss <<

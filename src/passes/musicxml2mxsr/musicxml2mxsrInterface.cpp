@@ -447,7 +447,7 @@ void checkSXMLFile (
   const std::string& context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceEncoding ()) {
     gLog <<
       std::endl <<
       "!!!!! sxmlfile contents from " <<
@@ -465,7 +465,7 @@ void checkSXMLFile (
   TXMLDecl * xmlDecl = sxmlfile->getXMLDecl ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceEncoding ()) {
     gLog <<
       std::endl <<
       "!!!!! xmlDecl contents from file:" <<
@@ -481,7 +481,7 @@ void checkSXMLFile (
   // get the docType
   TDocType * docType = sxmlfile->getDocType ();
 
-  if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceEncoding ()) {
     gLog <<
       std::endl <<
       "!!!!! docType from file:" <<
@@ -497,7 +497,7 @@ void checkSXMLFile (
   std::string encoding = xmlDecl->getEncoding ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceEncoding ()) {
     std::stringstream ss;
 
     ss <<
@@ -735,7 +735,7 @@ SXMLFile createSXMLFileFromString (
 //_______________________________________________________________________________
 EXP Sxmlelement musicxmlFile2mxsr (
   const char*        fileName,
-  S_mxsrOahGroup     musicxmlOpts,
+  S_mxsr2msrOahGroup mxsr2msrOpts,
   mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
@@ -846,7 +846,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
 //_______________________________________________________________________________
 EXP Sxmlelement musicxmlFd2mxsr (
   FILE*              fd,
-  S_mxsrOahGroup     musicxmlOpts,
+  S_mxsr2msrOahGroup mxsr2msrOpts,
   mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
@@ -897,7 +897,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
   TXMLDecl *xmlDecl = sxmlfile->getXMLDecl ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceEncoding ()) {
     gLog <<
       std::endl <<
       "xmlDecl contents:" <<
@@ -913,7 +913,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
   // get the docType
   TDocType * docType = sxmlfile->getDocType ();
 
-  if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceEncoding ()) {
     gLog <<
       std::endl <<
       "!!!!! docType from stream:" <<
@@ -932,7 +932,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
 //   std::string desiredEncoding = "UTF-8";
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
+//   if (gGlobalMxsr2msrOahGroup->getTraceEncoding ()) {
 //     gLog <<
 //       "% MusicXML data uses \"" <<
 //       desiredEncoding <<
@@ -976,7 +976,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
 //_______________________________________________________________________________
 EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
   const char*        buffer,
-  S_mxsrOahGroup     musicxmlOpts,
+  S_mxsr2msrOahGroup mxsr2msrOpts,
   mfPassIDKind       passIDKind,
   const std::string& passDescription)
 {
@@ -1079,7 +1079,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
     theMxsr =
       musicxmlFd2mxsr (
         stdin,
-        gGlobalMxsrOahGroup,
+        gGlobalMxsr2msrOahGroup,
         passIDKind,
         passDescription);
   }
@@ -1109,7 +1109,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
     theMxsr =
       musicxmlFile2mxsr (
         inputSourceName.c_str(),
-        gGlobalMxsrOahGroup,
+        gGlobalMxsr2msrOahGroup,
         passIDKind,
         passDescription);
   }

@@ -191,7 +191,7 @@ In \mxsrToMsr{mxsr2msrTranslator.cpp}, visiting a \musicXmlMarkup{scaling} eleme
 void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -210,7 +210,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 void mxsr2msrTranslator::visitStart ( S_tenths& elt )
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -232,7 +232,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
     elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<

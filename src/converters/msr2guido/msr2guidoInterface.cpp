@@ -30,7 +30,7 @@
 
 #include "msrOah.h"
 #include "msr2msrOah.h"
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 
 #include "msr2guidoInsiderHandler.h"
 #include "msr2guidoRegularHandler.h"
@@ -120,7 +120,7 @@ EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getDisplayMxsr ()) {
+  if (gGlobalMxsr2msrOahGroup->getDisplayMxsr ()) {
     std::stringstream ss;
 
     ss <<

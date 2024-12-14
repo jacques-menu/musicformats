@@ -17,7 +17,7 @@
 #include "mfStringsHandling.h"
 #include "mfTraceOah.h"
 
-#include "mxsrEvents.h"
+#include "mxsr2msrEvents.h"
 
 namespace MusicFormats
 {
@@ -698,6 +698,7 @@ mxsrEventsCollection::mxsrEventsCollection ()
 mxsrEventsCollection::~mxsrEventsCollection ()
 {}
 
+//________________________________________________________________________
 void mxsrEventsCollection::registerStaffChangeTakeOff (
   int                      noteSequentialNumber,
   int                      noteEventStaffNumber,
@@ -725,7 +726,7 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceStaffChangesBasics ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceStaffChangesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -773,7 +774,7 @@ void mxsrEventsCollection::registerStaffChangeLanding (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceStaffChangesBasics ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceStaffChangesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -794,11 +795,11 @@ void mxsrEventsCollection::registerStaffChangeLanding (
   fAllEventsList.push_back (staffChangeEvent);
 }
 
-void mxsrEventsCollection::registerChordEvent (
+//________________________________________________________________________
+void mxsrEventsCollection::registerChordBegin (
   int                noteSequentialNumber,
   int                noteEventStaffNumber,
   int                noteEventVoiceNumber,
-  mxsrChordEventKind chordEventKind,
   int                eventInputStartLineNumber,
   int                eventInputEndLineNumber)
 {
@@ -809,12 +810,12 @@ void mxsrEventsCollection::registerChordEvent (
         noteSequentialNumber,
         noteEventStaffNumber,
         noteEventVoiceNumber,
-        chordEventKind,
+        mxsrChordEventKind::kEventChordBegin,
         eventInputStartLineNumber,
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceChordsBasics ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceChordsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -828,12 +829,52 @@ void mxsrEventsCollection::registerChordEvent (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fChordsEventsMap.insert (
+  fChordsBeginsMap.insert (
     std::make_pair (noteSequentialNumber, chordEvent));
 
   fAllEventsList.push_back (chordEvent);
 }
 
+void mxsrEventsCollection::registerChordEnd (
+  int                noteSequentialNumber,
+  int                noteEventStaffNumber,
+  int                noteEventVoiceNumber,
+  int                eventInputStartLineNumber,
+  int                eventInputEndLineNumber)
+{
+  S_mxsrChordEvent
+    chordEvent =
+      mxsrChordEvent::create (
+        ++fCurrentEventSequentialNumber,
+        noteSequentialNumber,
+        noteEventStaffNumber,
+        noteEventVoiceNumber,
+        mxsrChordEventKind::kEventChordEnd,
+        eventInputStartLineNumber,
+        eventInputStartLineNumber);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceChordsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering chord event " <<
+      chordEvent->asString () <<
+      ", line " << eventInputStartLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fChordsEndsMap.insert (
+    std::make_pair (noteSequentialNumber, chordEvent));
+
+  fAllEventsList.push_back (chordEvent);
+}
+
+//________________________________________________________________________
 void mxsrEventsCollection::registerTupletBeginEvent (
   int                 noteSequentialNumber,
   int                 noteEventStaffNumber,
@@ -855,7 +896,7 @@ void mxsrEventsCollection::registerTupletBeginEvent (
         eventInputEndLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gGlobalMxsrOahGroup->getTraceTupletsBasics ()) {
+  if (true || gGlobalMxsr2msrOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -898,7 +939,7 @@ void mxsrEventsCollection::registerTupletEndEvent (
         eventInputEndLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gGlobalMxsrOahGroup->getTraceTupletsBasics ()) {
+  if (true || gGlobalMxsr2msrOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -977,48 +1018,39 @@ S_mxsrStaffChangeEvent mxsrEventsCollection::fetchStaffChangeLandingAtNoteSequen
 }
 
 //________________________________________________________________________
-S_mxsrChordEvent mxsrEventsCollection::fetchChordEventAtNoteSequentialNumber (
+S_mxsrChordEvent mxsrEventsCollection::fetchChordBeginAtNoteSequentialNumber (
   int noteSequentialNumber) const
 {
   S_mxsrChordEvent result;
 
   std::map <int, S_mxsrChordEvent>::const_iterator it;
 
-  it = fChordsEventsMap.find (noteSequentialNumber);
+  it = fChordsBeginsMap.find (noteSequentialNumber);
 
-  if (it != fChordsEventsMap.end ()) {
+  if (it != fChordsBeginsMap.end ()) {
     result = (*it).second;
   }
 
   return result;
 }
 
-/*
-#include <list>
-#include <algorithm>
-#include <iostream>
-
-int main()
+S_mxsrChordEvent mxsrEventsCollection::fetchChordEndAtNoteSequentialNumber (
+  int noteSequentialNumber) const
 {
-    std::list<int> myList{ 5, 19, 34, 3, 33 };
+  S_mxsrChordEvent result;
 
+  std::map <int, S_mxsrChordEvent>::const_iterator it;
 
-    auto it = std::find_if( std::begin( myList ),
-                            std::end( myList ),
-                            [&]( const int v ){ return 0 == ( v % 17 ); } );
+  it = fChordsEndsMap.find (noteSequentialNumber);
 
-    if ( myList.end() == it )
-    {
-        std::cout << "item not found" << std::endl;
-    }
-    else
-    {
-        const int pos = std::distance( myList.begin(), it ) + 1;
-        std::cout << "item divisible by 17 found at position " << pos << std::endl;
-    }
+  if (it != fChordsEndsMap.end ()) {
+    result = (*it).second;
+  }
+
+  return result;
 }
-*/
 
+//________________________________________________________________________
 void mxsrEventsCollection::fetchTupletBeginsList (
   int                            noteSequentialNumber,
   std::list <S_mxsrTupletEvent>& collectedBeginsList)
@@ -1028,7 +1060,7 @@ void mxsrEventsCollection::fetchTupletBeginsList (
     std::find_if (
       std::begin (fTupletsBeginsList),
       std::end (fTupletsBeginsList),
-      [&] (const S_mxsrTupletEvent tupletEvent )
+      [&] (const S_mxsrTupletEvent tupletEvent)
         {
           return
             tupletEvent->getNoteSequentialNumber () == noteSequentialNumber;
@@ -1063,7 +1095,7 @@ void mxsrEventsCollection::fetchTupletBeginsList (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceTupletsBasics ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceTupletsBasics ()) {
     printTupletEventsList (
       gLog,
       noteSequentialNumber,
@@ -1082,7 +1114,7 @@ void mxsrEventsCollection::fetchTupletEndsList (
     std::find_if (
       std::begin (fTupletsEndsList),
       std::end (fTupletsEndsList),
-      [&] (const S_mxsrTupletEvent tupletEvent )
+      [&] (const S_mxsrTupletEvent tupletEvent)
         {
           return
             tupletEvent->getNoteSequentialNumber () == noteSequentialNumber;
@@ -1117,7 +1149,7 @@ void mxsrEventsCollection::fetchTupletEndsList (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceTupletsBasics ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceTupletsBasics ()) {
     printTupletEventsList (
       gLog,
       noteSequentialNumber,
@@ -1137,7 +1169,8 @@ std::string mxsrEventsCollection::asShortString () const
     ", fStaffChangeTakeOffsMap.size (): " << fStaffChangeTakeOffsMap.size () <<
     ", fStaffChangeLandingsMap.size (): " << fStaffChangeLandingsMap.size () <<
 
-    ", fChordsEventsMap.size (): " << fChordsEventsMap.size () <<
+    ", fChordsBeginsMap.size (): " << fChordsBeginsMap.size () <<
+    ", fChordsEndsMap.size (): " << fChordsEndsMap.size () <<
 
     ", fTupletsBeginsList.size (): " << fTupletsEventsMultiMap.size () <<
     ", fTupletsEndsList.size (): " << fTupletsEventsMultiMap.size () <<
@@ -1284,9 +1317,9 @@ void mxsrEventsCollection::printStaffChangeEvents (std::ostream& os) const
 void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 {
   os <<
-    "fChordsEventsMap: " <<
+    "fChordsBeginsMap: " <<
     mfSingularOrPlural (
-      fChordsEventsMap.size (),
+      fChordsBeginsMap.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -1294,9 +1327,10 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrChordEvent> thePair : fChordsEventsMap) {
+  for (std::pair <int, S_mxsrChordEvent> thePair : fChordsBeginsMap) {
     int
       eventSequentialNumber = thePair.first;
+
     S_mxsrChordEvent
       chordEvent = thePair.second;
 
@@ -1313,6 +1347,41 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
   } // for
 
   --gIndenter;
+
+  os << std::endl << "--------" << std::endl << std::endl;
+
+  os <<
+    "fChordsEndsMap: " <<
+    mfSingularOrPlural (
+      fChordsEndsMap.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair <int, S_mxsrChordEvent> thePair : fChordsEndsMap) {
+    int
+      eventSequentialNumber = thePair.first;
+
+    S_mxsrChordEvent
+      chordEvent = thePair.second;
+
+    os <<
+      "Note " << eventSequentialNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      chordEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+
 }
 
 //------------------------------------------------------------------------
@@ -1494,9 +1563,16 @@ void mxsrEventsCollection::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fChordsEventsMap" << " : " <<
+    "fChordsBeginsMap" << " : " <<
     mfSingularOrPlural (
-      fChordsEventsMap.size (),
+      fChordsBeginsMap.size (),
+      "element",
+      "elements") <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fChordsEndsMap" << " : " <<
+    mfSingularOrPlural (
+      fChordsEndsMap.size (),
       "element",
       "elements") <<
     std::endl <<

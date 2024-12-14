@@ -285,7 +285,7 @@ class EXP smartable {
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
-EXP S_mxsrOahGroup createGlobalMxsrOahGroup ();
+EXP S_mxsr2msrOahGroup createGlobalMxsrOahGroup ();
 \end{lstlisting}
 
 \code{EXP} is defined in \interface{exports.h} and is non-blank only when building on \Windows:
@@ -679,7 +679,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
     elt->getInputStartLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
 		std::stringstream ss;
 
 		ss <<

@@ -36,36 +36,36 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 
-S_msr2mxsrOahGroup gGlobalMsr2mxsrOahGroup;
+S_msr2mxsr2msrOahGroup gGlobalMsr2mxsr2msrOahGroup;
 
-S_msr2mxsrOahGroup msr2mxsrOahGroup::create ()
+S_msr2mxsr2msrOahGroup msr2mxsr2msrOahGroup::create ()
 {
-  msr2mxsrOahGroup* obj = new msr2mxsrOahGroup ();
+  msr2mxsr2msrOahGroup* obj = new msr2mxsr2msrOahGroup ();
   assert (obj != nullptr);
   return obj;
 }
 
-msr2mxsrOahGroup::msr2mxsrOahGroup ()
+msr2mxsr2msrOahGroup::msr2mxsr2msrOahGroup ()
   : oahGroup (
       "msr2mxsr",
       "help-msr2mxsr-to-msr", "hmsr2mxsr",
 R"(These options control the way MSR data is translated to an MXSR.)",
       oahElementVisibilityKind::kElementVisibilityWhole)
 {
-  initializeMsr2mxsrOahGroup ();
+  initializeMsr2mxsr2msrOahGroup ();
 }
 
-msr2mxsrOahGroup::~msr2mxsrOahGroup ()
+msr2mxsr2msrOahGroup::~msr2mxsr2msrOahGroup ()
 {}
 
 #ifdef MF_TRACE_IS_ENABLED
-void msr2mxsrOahGroup::initializMsr2mxsrTraceOptions ()
+void msr2mxsr2msrOahGroup::initializMsr2mxsrTraceOptions ()
 {
   // JMI
 }
 #endif // MF_TRACE_IS_ENABLED
 
-void msr2mxsrOahGroup::initializeCodeGenerationOptions ()
+void msr2mxsr2msrOahGroup::initializeCodeGenerationOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -105,7 +105,7 @@ R"(Generate comments showing the structure of the score.)",
         fMusicXMLComments));
 }
 
-void msr2mxsrOahGroup::initializeWorkAndMovementOptions ()
+void msr2mxsr2msrOahGroup::initializeWorkAndMovementOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
@@ -162,7 +162,7 @@ R"(Set the movement number to STRING in the MusicXML output.)",
         fMovementNumber));
 }
 
-void msr2mxsrOahGroup::initializeMsr2mxsrOahGroup ()
+void msr2mxsr2msrOahGroup::initializeMsr2mxsr2msrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   // trace
@@ -180,22 +180,22 @@ void msr2mxsrOahGroup::initializeMsr2mxsrOahGroup ()
 }
 
 //______________________________________________________________________________
-void msr2mxsrOahGroup::enforceGroupQuietness ()
+void msr2mxsr2msrOahGroup::enforceGroupQuietness ()
 {}
 
 //______________________________________________________________________________
-void msr2mxsrOahGroup::checkGroupOptionsConsistency ()
+void msr2mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 {}
 
 //______________________________________________________________________________
-void msr2mxsrOahGroup::acceptIn (basevisitor* v)
+void msr2mxsr2msrOahGroup::acceptIn (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2mxsrOahGroup::acceptIn ()";
+      ".\\\" ==> msr2mxsr2msrOahGroup::acceptIn ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -203,17 +203,17 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_msr2mxsrOahGroup>*
+  if (visitor<S_msr2mxsr2msrOahGroup>*
     p =
-      dynamic_cast<visitor<S_msr2mxsrOahGroup>*> (v)) {
-        S_msr2mxsrOahGroup elem = this;
+      dynamic_cast<visitor<S_msr2mxsr2msrOahGroup>*> (v)) {
+        S_msr2mxsr2msrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2mxsrOahGroup::visitStart ()";
+            ".\\\" ==> Launching msr2mxsr2msrOahGroup::visitStart ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -224,14 +224,14 @@ void msr2mxsrOahGroup::acceptIn (basevisitor* v)
   }
 }
 
-void msr2mxsrOahGroup::acceptOut (basevisitor* v)
+void msr2mxsr2msrOahGroup::acceptOut (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2mxsrOahGroup::acceptOut ()";
+      ".\\\" ==> msr2mxsr2msrOahGroup::acceptOut ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -239,17 +239,17 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (visitor<S_msr2mxsrOahGroup>*
+  if (visitor<S_msr2mxsr2msrOahGroup>*
     p =
-      dynamic_cast<visitor<S_msr2mxsrOahGroup>*> (v)) {
-        S_msr2mxsrOahGroup elem = this;
+      dynamic_cast<visitor<S_msr2mxsr2msrOahGroup>*> (v)) {
+        S_msr2mxsr2msrOahGroup elem = this;
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gOahOahGroup->getTraceOahVisitors ()) {
           std::stringstream ss;
 
           ss <<
-            ".\\\" ==> Launching msr2mxsrOahGroup::visitEnd ()";
+            ".\\\" ==> Launching msr2mxsr2msrOahGroup::visitEnd ()";
 
           gWaeHandler->waeTraceWithoutInputLocation (
             __FILE__, __LINE__,
@@ -260,14 +260,14 @@ void msr2mxsrOahGroup::acceptOut (basevisitor* v)
   }
 }
 
-void msr2mxsrOahGroup::browseData (basevisitor* v)
+void msr2mxsr2msrOahGroup::browseData (basevisitor* v)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gOahOahGroup->getTraceOahVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      ".\\\" ==> msr2mxsrOahGroup::browseData ()";
+      ".\\\" ==> msr2mxsr2msrOahGroup::browseData ()";
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -277,7 +277,7 @@ void msr2mxsrOahGroup::browseData (basevisitor* v)
 }
 
 //______________________________________________________________________________
-void msr2mxsrOahGroup::displayMsr2mxsrOahValues (int valueFieldWidth)
+void msr2mxsr2msrOahGroup::displayMsr2mxsrOahValues (int valueFieldWidth)
 {
   gLog <<
     "The MusicXML options are:" <<
@@ -319,7 +319,7 @@ void msr2mxsrOahGroup::displayMsr2mxsrOahValues (int valueFieldWidth)
   --gIndenter;
 }
 
-std::ostream& operator << (std::ostream& os, const S_msr2mxsrOahGroup& elt)
+std::ostream& operator << (std::ostream& os, const S_msr2mxsr2msrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
@@ -332,7 +332,7 @@ std::ostream& operator << (std::ostream& os, const S_msr2mxsrOahGroup& elt)
 }
 
 //______________________________________________________________________________
-S_msr2mxsrOahGroup createGlobalMsr2mxsrOahGroup ()
+S_msr2mxsr2msrOahGroup createGlobalMsr2mxsr2msrOahGroup ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptions ()) {
@@ -348,15 +348,15 @@ S_msr2mxsrOahGroup createGlobalMsr2mxsrOahGroup ()
 #endif // MF_TRACE_IS_ENABLED
 
   // protect library against multiple initializations
-  if (! gGlobalMsr2mxsrOahGroup) {
+  if (! gGlobalMsr2mxsr2msrOahGroup) {
     // create the global options group
-    gGlobalMsr2mxsrOahGroup =
-      msr2mxsrOahGroup::create ();
-    assert (gGlobalMsr2mxsrOahGroup != 0);
+    gGlobalMsr2mxsr2msrOahGroup =
+      msr2mxsr2msrOahGroup::create ();
+    assert (gGlobalMsr2mxsr2msrOahGroup != 0);
   }
 
   // return the global OAH group
-  return gGlobalMsr2mxsrOahGroup;
+  return gGlobalMsr2mxsr2msrOahGroup;
 }
 
 

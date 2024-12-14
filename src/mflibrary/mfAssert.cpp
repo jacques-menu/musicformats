@@ -35,7 +35,7 @@ void mfAssert (
 
     gLog <<
       "#### mfAssert" <<
-      ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
+      ", " << sourceCodeFileName << ": " << sourceCodeLineNumber <<
       " -- ";
 
     if (gServiceRunData) {
@@ -91,8 +91,8 @@ void mfAssertWithInputLocation (
 
     gLog <<
       "#### mfAssert" <<
-      ", " << inputSourceName << ":" << inputLineNumber <<
-      ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
+      ", " << inputSourceName << ": " << inputLineNumber <<
+      ", " << sourceCodeFileName << ": " << sourceCodeLineNumber <<
       " -- ";
 
     if (gServiceRunData) {

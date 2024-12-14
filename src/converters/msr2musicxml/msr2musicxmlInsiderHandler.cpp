@@ -27,7 +27,7 @@
 #include "oahDisplayOah.h"
 #include "oahHarmoniesExtraOah.h"
 
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 #include "msr2mxsrOah.h"
 #include "msrOah.h"
 #include "msr2msrOah.h"
@@ -213,10 +213,6 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
   appendGroupToHandler (
     createGlobalMsr2musicxmlOahGroup ());
 
-  // create the MXSR OAH group
-  appendGroupToHandler (
-    createGlobalMxsrOahGroup ());
-
   // create the MSR OAH group
   appendGroupToHandler (
     createGlobalMsrOahGroup ());
@@ -227,7 +223,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
 
   // create the msr2mxsr OAH group
   appendGroupToHandler (
-    createGlobalMsr2mxsrOahGroup ());
+    createGlobalMsr2mxsr2msrOahGroup ());
 
   // create the extra OAH group
   appendGroupToHandler (
@@ -415,7 +411,7 @@ void msr2musicxmlInsiderHandler::enforceHandlerQuietness ()
   gMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMsr2mxsrOahGroup->
+  gGlobalMsr2mxsr2msrOahGroup->
     enforceGroupQuietness ();
 
   gHarmoniesExtraOahGroup->

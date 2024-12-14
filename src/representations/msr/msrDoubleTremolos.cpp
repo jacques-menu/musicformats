@@ -120,7 +120,8 @@ msrDoubleTremolo::msrDoubleTremolo (
   fDoubleTremoloMarksNumber    = doubleTremoloMarksNumber;
   fDoubleTremoloPlacementKind  = doubleTremoloPlacementKind;
 
-  fDoubleTremoloSoundingWholeNotes =
+//   fDoubleTremoloSoundingWholeNotes =
+  fMeasureElementSoundingWholeNotes =
     K_WHOLE_NOTES_UNKNOWN_; // will be set later
 
   fDoubleTremoloNumberOfRepeats = -1; // will be set later
@@ -204,8 +205,8 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   newbornClone->fDoubleTremoloSecondElement =
     doubleTremoloSecondElement;
 
-  newbornClone->fDoubleTremoloSoundingWholeNotes =
-    fDoubleTremoloSoundingWholeNotes;
+//   newbornClone->fDoubleTremoloSoundingWholeNotes =
+//     fDoubleTremoloSoundingWholeNotes;
 
   newbornClone->fDoubleTremoloElementsWholeNotes =
     fDoubleTremoloElementsWholeNotes;
@@ -367,7 +368,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
   // set double tremolo sounding whole notes
   // to the note's display whole notes,
    // i.e. the duration of each of the two notes
-  fDoubleTremoloSoundingWholeNotes =
+//   fDoubleTremoloSoundingWholeNotes =
+  fMeasureElementSoundingWholeNotes =
     noteDisplayWholeNotes;
 
   // compute double tremolo elements duration
@@ -393,7 +395,8 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
   // setting number of repeats
   mfRational
     numberOfRepeatsAsRational =
-      fDoubleTremoloSoundingWholeNotes
+//       fDoubleTremoloSoundingWholeNotes
+      fMeasureElementSoundingWholeNotes
         /
       fDoubleTremoloElementsWholeNotes
         /
@@ -408,8 +411,11 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       "numberOfRepeatsAsRational: " <<
       numberOfRepeatsAsRational <<
       std::endl <<
-      "fDoubleTremoloSoundingWholeNotes: '" <<
-      fDoubleTremoloSoundingWholeNotes.asFractionString () << '\'' <<
+//       "fDoubleTremoloSoundingWholeNotes: '" <<
+//       fDoubleTremoloSoundingWholeNotes.asFractionString () << '\'' <<
+//       std::endl <<
+      "fMeasureElementSoundingWholeNotes: '" <<
+      fMeasureElementSoundingWholeNotes.asFractionString () << '\'' <<
       std::endl <<
       "fDoubleTremoloElementsWholeNotes: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
@@ -433,8 +439,10 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
     ss <<
       "Setting notes double tremolo number of repeats to '" <<
       fDoubleTremoloNumberOfRepeats <<
-      "', fDoubleTremoloSoundingWholeNotes: '" <<
-      fDoubleTremoloSoundingWholeNotes.asFractionString () << '\'' <<
+//       "', fDoubleTremoloSoundingWholeNotes: '" <<
+//       fDoubleTremoloSoundingWholeNotes.asFractionString () << '\'' <<
+      "', fMeasureElementSoundingWholeNotes: '" <<
+      fMeasureElementSoundingWholeNotes.asFractionString () << '\'' <<
       ", fDoubleTremoloElementsWholeNotes: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
       "', line " << note->getInputStartLineNumber ();
@@ -479,7 +487,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
   // compute expected double tremolo sounding whole notes
   msrWholeNotes
-    expectedDoubleTremoloSoundingWholeNotes =
+    expectedDoubleTremoloSoundingWholeNotes = // JMI v0.9.72
       noteDisplayWholeNotes;
 
   // check that expected double tremolo sounding whole notes
@@ -492,8 +500,10 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       "Checking notes double tremolo second note duration" <<
       ", doubleTremoloNumberOfRepeats: '" <<
       fDoubleTremoloNumberOfRepeats <<
-      "', doubleTremoloSoundingWholeNotes: '" <<
-      fDoubleTremoloSoundingWholeNotes.asFractionString () <<
+//       "', doubleTremoloSoundingWholeNotes: '" <<
+//       fDoubleTremoloSoundingWholeNotes.asFractionString () <<
+      "', fMeasureElementSoundingWholeNotes: '" <<
+      fMeasureElementSoundingWholeNotes.asFractionString () <<
       "', doubleTremoloElementsNotesDuration: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
       "', line " << note->getInputStartLineNumber ();
@@ -507,12 +517,14 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
   if (
     expectedDoubleTremoloSoundingWholeNotes
       !=
-    fDoubleTremoloSoundingWholeNotes) {
+//     fDoubleTremoloSoundingWholeNotes) {
+    fMeasureElementSoundingWholeNotes) {
     std::stringstream ss;
 
     ss <<
       "attempt to set notes double tremolo whole notes both to " <<
-      fDoubleTremoloSoundingWholeNotes.asFractionString () << " (existing)" <<
+//       fDoubleTremoloSoundingWholeNotes.asFractionString () << " (existing)" <<
+      fMeasureElementSoundingWholeNotes.asFractionString () << " (existing)" <<
       " and " <<
       expectedDoubleTremoloSoundingWholeNotes.asFractionString () <<
       " on note second element:" <<
@@ -573,21 +585,24 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
 
   // compute expected double tremolo sounding whole notes
   msrWholeNotes
-    expectedDoubleTremoloSoundingWholeNotes =
+    expectedDoubleTremoloSoundingWholeNotes = // JMI v0.9.72
       chordDisplayWholeNotes * 2;
 
   // set double tremolo whole notes to the chords's displayed whole notes
-  if (fDoubleTremoloSoundingWholeNotes.getNumerator () != 0) {
+//   if (fDoubleTremoloSoundingWholeNotes.getNumerator () != 0) {
+  if (fMeasureElementSoundingWholeNotes.getNumerator () != 0) {
     if (
       expectedDoubleTremoloSoundingWholeNotes
         !=
-      fDoubleTremoloSoundingWholeNotes
+//       fDoubleTremoloSoundingWholeNotes
+      fMeasureElementSoundingWholeNotes
     ) {
       std::stringstream ss;
 
       ss <<
         "attempt to set chord double tremolo sounding whole notes both to " <<
-        fDoubleTremoloSoundingWholeNotes.asFractionString () << " (existing)" <<
+//         fDoubleTremoloSoundingWholeNotes.asFractionString () << " (existing)" <<
+        fMeasureElementSoundingWholeNotes.asFractionString () << " (existing)" <<
         " and " <<
         expectedDoubleTremoloSoundingWholeNotes.asFractionString () <<
         " on chord first element:" <<
@@ -609,7 +624,8 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
     }
   }
 
-  fDoubleTremoloSoundingWholeNotes =
+//   fDoubleTremoloSoundingWholeNotes =
+  fMeasureElementSoundingWholeNotes =
     chordDisplayWholeNotes * 2; // taking the second note into account
 }
 
@@ -644,13 +660,16 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
         getChordDisplayWholeNotes ();
 
   // set double tremolo whole notes to the chords's displayed whole notes
-  if (fDoubleTremoloSoundingWholeNotes.getNumerator () != 0) {
-    if (chordDisplayWholeNotes != fDoubleTremoloSoundingWholeNotes) { // JMI
+//   if (fDoubleTremoloSoundingWholeNotes.getNumerator () != 0) {
+  if (fMeasureElementSoundingWholeNotes.getNumerator () != 0) {
+//     if (chordDisplayWholeNotes != fDoubleTremoloSoundingWholeNotes) { // JMI
+    if (chordDisplayWholeNotes != fMeasureElementSoundingWholeNotes) { // JMI
       std::stringstream ss;
 
      ss <<
         "attempt to set double tremolo whole notes both to " <<
-        fDoubleTremoloSoundingWholeNotes.asFractionString () << " (existing)" <<
+//         fDoubleTremoloSoundingWholeNotes.asFractionString () << " (existing)" <<
+        fMeasureElementSoundingWholeNotes.asFractionString () << " (existing)" <<
         " and " <<
         chordDisplayWholeNotes.asFractionString () <<
         " on chord second element:" << " (chord)" <<
@@ -673,7 +692,8 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
   }
 
   else {
-    fDoubleTremoloSoundingWholeNotes =
+//     fDoubleTremoloSoundingWholeNotes =
+    fMeasureElementSoundingWholeNotes =
       chordDisplayWholeNotes;
   }
 }
@@ -824,10 +844,16 @@ std::string msrDoubleTremolo::asString () const
 
   ss <<
     "[DoubleTremolo " <<
-    ", fDoubleDoubleTremoloTypeKind: " << fDoubleDoubleTremoloTypeKind <<
-    ", fDoubleTremoloMarksNumber: " <<fDoubleTremoloMarksNumber <<
-    ", placement: " << doubleTremoloPlacementKindAsString () <<
-    ",fDoubleTremoloSoundingWholeNotes: " << fDoubleTremoloSoundingWholeNotes.asFractionString () <<
+    ", fDoubleDoubleTremoloTypeKind: " <<
+    fDoubleDoubleTremoloTypeKind <<
+    ", fDoubleTremoloMarksNumber: " <<
+    fDoubleTremoloMarksNumber <<
+    ", placement: " <<
+    doubleTremoloPlacementKindAsString () <<
+//     ",fDoubleTremoloSoundingWholeNotes: " <<
+//     fDoubleTremoloSoundingWholeNotes.asFractionString () <<
+    ", fMeasureElementSoundingWholeNotes: " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
     ", line " << fInputStartLineNumber;
 
   if (fDoubleTremoloFirstElement) { // it may not be set yet
@@ -932,8 +958,10 @@ void msrDoubleTremolo::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fDoubleTremoloSoundingWholeNotes" << ": " <<
-    fDoubleTremoloSoundingWholeNotes.asFractionString () <<
+//     "fDoubleTremoloSoundingWholeNotes" << ": " <<
+//     fDoubleTremoloSoundingWholeNotes.asFractionString () <<
+    "fMeasureElementSoundingWholeNotes" << ": " <<
+    fMeasureElementSoundingWholeNotes.asFractionString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<

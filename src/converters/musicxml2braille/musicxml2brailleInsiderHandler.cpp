@@ -33,7 +33,6 @@
 #include "oahDisplayOah.h"
 #include "oahHarmoniesExtraOah.h"
 
-#include "mxsrOah.h"
 #include "mxsr2msrOah.h"
 #include "msrOah.h"
 #include "msr2msrOah.h"
@@ -223,10 +222,6 @@ void xml2brlInsiderHandler::createTheXml2brlOptionGroups (
 
   // initialize options handling, phase 2
   // ------------------------------------------------------
-
-  // create the MXSR OAH group
-  appendGroupToHandler (
-    createGlobalMxsrOahGroup ());
 
   // create the mxsr2msr OAH group
   appendGroupToHandler (
@@ -543,7 +538,7 @@ void xml2brlInsiderHandler::enforceHandlerQuietness ()
   gGlobalXml2brlInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMxsrOahGroup->
+  gGlobalMxsr2msrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMxsr2msrOahGroup->

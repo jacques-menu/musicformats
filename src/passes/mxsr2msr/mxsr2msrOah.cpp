@@ -482,7 +482,7 @@ mxsr2msrOahGroup::~mxsr2msrOahGroup ()
 {}
 
 void mxsr2msrOahGroup::createTheMxsr2msrPrefixes (
-                            const S_oahHandler& handler)
+  const S_oahHandler& handler)
 {
   // the 'ignore-redundant' prefixes
   // --------------------------------------
@@ -576,7 +576,6 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
   initializeMxsr2msrCombinedOptionsOptions ();
 }
 
-#ifdef MF_TRACE_IS_ENABLED
 void mxsr2msrOahGroup::initializeMxsr2msrTraceOptions ()
 {
   S_oahSubGroup
@@ -589,8 +588,115 @@ R"()",
         this);
 
   appendSubGroupToGroup (subGroup);
+
+  // the 'MusicXML' multiplex booleans atom
+
+  S_oahCommonPrefixBooleansAtom
+    musicxmlMultiplexBooleansAtom =
+      oahCommonPrefixBooleansAtom::create (
+        "trace-when-handling-musicxml-data", "twhmd",
+        "Trace SHORT_NAME/LONG_NAME when handling MusicXML data.",
+        "SHORT_NAME",
+        "LONG_NAME",
+        gTraceOahGroup->getShortTracePrefix (),
+        gTraceOahGroup->getLongTracePrefix ());
+
+  subGroup->
+    appendAtomToSubGroup (
+      musicxmlMultiplexBooleansAtom);
+
+  // encoding
+
+  S_oahBooleanAtom
+    traceEncodingAtom =
+      oahBooleanAtom::create (
+        "trace-encoding", "tenc",
+R"(Encoding)",
+        "fTraceEncoding",
+        fTraceEncoding);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceEncodingAtom);
+  musicxmlMultiplexBooleansAtom->
+    addBooleanAtom (
+      traceEncodingAtom);
+
+  // divisions
+
+  S_oahBooleanAtom
+    traceDivisionsAtom =
+      oahBooleanAtom::create (
+        "trace-divisions", "tdivs",
+R"(Divisions)",
+        "fTraceDivisions",
+        fTraceDivisions);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceDivisionsAtom);
+  musicxmlMultiplexBooleansAtom->
+    addBooleanAtom (
+      traceDivisionsAtom);
+
+  // backup
+
+  S_oahBooleanAtom
+    traceBackupAtom =
+      oahBooleanAtom::create (
+        "trace-backup", "tbackup",
+R"(Backup)",
+        "fTraceBackup",
+        fTraceBackup);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceBackupAtom);
+
+  // forward
+
+  S_oahBooleanAtom
+    traceForwardAtom =
+      oahBooleanAtom::create (
+        "trace-forward", "tforward",
+R"(Forward)",
+        "fTraceForward",
+        fTraceForward);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceForwardAtom);
+
+  // trace MusicXML tree
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "trace-mxsr", "tmxsr",
+R"(Write a trace of the MusicXML tree activity to standard error.)",
+        "fTraceMxsr",
+        fTraceMxsr));
+
+  // display MusicXML tree
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtomWithTracePasses::create (
+        "display-mxsr", "dmxsr",
+R"(Write the contents of the MXSR data to standard error.)",
+        "fDisplayMxsr",
+        fDisplayMxsr));
+
+  // MusicXML tree visiting
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+         "trace-mxsr-visitors", "tmxsrvis",
+R"(Write a trace of the MusicXML tree visiting activity to standard error.)",
+        "fTraceMxsrVisitors",
+        fTraceMxsrVisitors));
 }
-#endif // MF_TRACE_IS_ENABLED
 
 void mxsr2msrOahGroup::initializeMxsr2msrEventsOptions ()
 {
@@ -2589,6 +2695,54 @@ std::ostream& operator << (std::ostream& os, const S_mxsr2msrOahGroup& elt)
   }
 
   return os;
+}
+
+//______________________________________________________________________________
+void mxsr2msrOahGroup::displayMxsrOahValues (int fieldWidth)
+{
+  gLog <<
+    "The MusicXML options are:" <<
+    std::endl;
+
+  ++gIndenter;
+
+#ifdef MF_TRACE_IS_ENABLED
+  // trace
+  // --------------------------------------
+
+  gLog <<
+    "Trace:" <<
+    std::endl;
+
+  ++gIndenter;
+
+  gLog << std::left <<
+    std::setw (fieldWidth) << "fTraceEncoding" << ": " <<
+    fTraceEncoding <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fTraceDivisions" << ": " <<
+    fTraceDivisions <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fTraceBackup" << ": " <<
+    fTraceBackup <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceForward" << ": " <<
+    fTraceForward <<
+    std::endl <<
+
+    std::setw (fieldWidth) << "fTraceMxsr" << ": " <<
+    fTraceMxsr <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceMxsrVisitors" << ": " <<
+    fTraceMxsrVisitors <<
+    std::endl;
+
+  --gIndenter;
+#endif // MF_TRACE_IS_ENABLED
+
+  --gIndenter;
 }
 
 //______________________________________________________________________________

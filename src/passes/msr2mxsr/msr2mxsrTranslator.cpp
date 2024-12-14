@@ -37,7 +37,7 @@
 
 #include "waeOah.h"
 
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 
 #include "msrOah.h"
 
@@ -121,7 +121,7 @@ int msr2mxsrTranslator::wholeNotesAsDivisions (
         * 4; // divisions are per quarter note
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
     std::stringstream ss;
 
     ss <<
@@ -470,7 +470,7 @@ void msr2mxsrTranslator::appendToScoreDefaultsPageLayout (
 void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsr ()) {
     std::stringstream ss;
 
     ss <<
@@ -482,7 +482,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create an attributes comment
     std::stringstream ss;
     ss <<
@@ -556,7 +556,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
       Sxmlelement clefElement = (*i);
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gGlobalMxsrOahGroup->getTraceMxsr ()) {
+      if (gGlobalMxsr2msrOahGroup->getTraceMxsr ()) {
         std::stringstream ss;
 
         ss <<
@@ -583,7 +583,7 @@ void msr2mxsrTranslator::appendToMeasureDirection (
   Sxmlelement      elem,
   msrPlacementKind placementKind)
 {
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create a direction comment
     std::stringstream ss;
     ss <<
@@ -909,7 +909,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
 
   // append the score identification element if any to the score part wise element
   if (fScoreIdentificationElement) {
-    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
       // create an identification comment
       std::stringstream ss;
       ss <<
@@ -959,7 +959,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
 
   // append the score defaults element if any to the score part wise element
   if (fScoreDefaultsElement) {
-    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
       // create an defaults comment
       std::stringstream ss;
       ss <<
@@ -980,7 +980,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
     fPendingScoreCreditElementsList.size ();
 
   if (pendingScoreCreditElementsListSize) {
-    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
       std::stringstream ss;
       ss <<
         " ===== " <<
@@ -1005,7 +1005,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
     } // for
   }
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create an part-list comment
     std::stringstream ss;
     ss <<
@@ -1030,7 +1030,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
   ) {
     Sxmlelement partElement = (*i);
 
-    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
       // create a part comment
       std::stringstream ss;
       ss <<
@@ -1072,7 +1072,7 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
     workNumber =
       elt->getIdentificationWorkNumber (),
     optionsWorkNumber =
-      gGlobalMsr2mxsrOahGroup->getWorkNumber ();
+      gGlobalMsr2mxsr2msrOahGroup->getWorkNumber ();
 
   if (optionsWorkNumber.size ()) {
     workNumber = optionsWorkNumber;
@@ -1093,7 +1093,7 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
     workCreditTypeTitle =
       elt->getIdentificationWorkCreditTypeTitle (),
     optionsWorkCreditTypeTitle =
-      gGlobalMsr2mxsrOahGroup->getWorkCreditTypeTitle ();
+      gGlobalMsr2mxsr2msrOahGroup->getWorkCreditTypeTitle ();
 
   if (optionsWorkCreditTypeTitle.size ()) {
     workCreditTypeTitle = optionsWorkCreditTypeTitle;
@@ -1155,7 +1155,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     movementNumber =
       elt->getIdentificationMovementNumber (),
     optionsMovementNumber =
-      gGlobalMsr2mxsrOahGroup->getMovementNumber ();
+      gGlobalMsr2mxsr2msrOahGroup->getMovementNumber ();
 
   if (optionsMovementNumber.size ()) {
     movementNumber = optionsMovementNumber;
@@ -1174,7 +1174,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     movementTitle =
       elt->getIdentificationMovementTitle (),
     optionsMovementTitle =
-      gGlobalMsr2mxsrOahGroup->getMovementTitle ();
+      gGlobalMsr2mxsr2msrOahGroup->getMovementTitle ();
 
   if (optionsMovementTitle.size ()) {
     movementTitle = optionsMovementTitle;
@@ -2548,7 +2548,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       {
-        if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+        if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
           // create a start comment
           std::stringstream ss;
           ss <<
@@ -2684,7 +2684,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
       {
-        if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+        if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
           // create an end comment
           std::stringstream ss;
           ss <<
@@ -2894,7 +2894,7 @@ if (false) // JMI
     divisionsPerQuarterNoteAsRational.getDenominator ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
     std::stringstream ss;
 
     ss <<
@@ -3268,7 +3268,7 @@ void msr2mxsrTranslator::visitStart (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create a start comment
     std::stringstream ss;
     ss <<
@@ -3308,7 +3308,7 @@ void msr2mxsrTranslator::visitEnd (S_msrSegment& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create an end comment
     std::stringstream ss;
     ss <<
@@ -3392,7 +3392,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
   else {
     // no
 
-    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
       // create a comment
       std::stringstream ss;
       ss <<
@@ -3425,7 +3425,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
       elt->getMeasureMusicXMLPrintLayout ();
 
   if (measureMusicXMLPrintLayout) {
-    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
       // create a print comment
       std::stringstream ss;
       ss <<
@@ -3463,9 +3463,9 @@ if (false) { // JMI
   // there's no previous MSR note yet in this measure
 #ifdef MF_TRACE_IS_ENABLED
     if (
-      gGlobalMxsrOahGroup->getTraceBackup ()
+      gGlobalMxsr2msrOahGroup->getTraceBackup ()
         ||
-      gGlobalMxsrOahGroup->getTraceForward ()
+      gGlobalMxsr2msrOahGroup->getTraceForward ()
     ) {
       std::stringstream ss;
 
@@ -4818,7 +4818,7 @@ void msr2mxsrTranslator::visitStart (S_msrChord& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create a chord start comment
     std::stringstream ss;
     ss <<
@@ -4856,7 +4856,7 @@ void msr2mxsrTranslator::visitEnd (S_msrChord& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create a chord end comment
     std::stringstream ss;
     ss <<
@@ -4898,7 +4898,7 @@ void msr2mxsrTranslator::visitStart (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create a tuplet start comment
     std::stringstream ss;
     ss <<
@@ -4933,7 +4933,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create a tuplet end comment
     std::stringstream ss;
     ss <<
@@ -5179,7 +5179,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
         backupNotesDuration);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceBackup ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceBackup ()) {
     std::stringstream ss;
 
     ss <<
@@ -5207,7 +5207,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     S_msrVoice
       noteVoice =
         theMsrNote->fetchNoteUpLinkToVoice ();
@@ -5286,7 +5286,7 @@ void msr2mxsrTranslator::appendAForwardToMeasure (
         fCurrentCumulatedSkipsNotesDurations);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceForward ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceForward ()) {
     std::stringstream ss;
 
     ss <<
@@ -5311,7 +5311,7 @@ void msr2mxsrTranslator::appendAForwardToMeasure (
         fetchNoteUpLinkToVoice ()->
           getVoiceNumber ();
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     int
       previousMSRNoteStaffNumber =
         fPreviousMSRNoteStaff->
@@ -5370,9 +5370,9 @@ void msr2mxsrTranslator::appendABackupOrForwardToMeasureIfNeeded (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalMxsrOahGroup->getTraceBackup ()
+    gGlobalMxsr2msrOahGroup->getTraceBackup ()
       ||
-    gGlobalMxsrOahGroup->getTraceForward ()
+    gGlobalMxsr2msrOahGroup->getTraceForward ()
   ) {
     std::stringstream ss;
 
@@ -5418,9 +5418,9 @@ void msr2mxsrTranslator::appendABackupOrForwardToMeasureIfNeeded (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gGlobalMxsrOahGroup->getTraceBackup ()
+    gGlobalMxsr2msrOahGroup->getTraceBackup ()
       ||
-    gGlobalMxsrOahGroup->getTraceForward ()
+    gGlobalMxsr2msrOahGroup->getTraceForward ()
   ) {
     std::stringstream ss;
 
@@ -5492,9 +5492,9 @@ fCurrentCumulatedSkipsVoiceNumber
 
 #ifdef MF_TRACE_IS_ENABLED
           if (
-            gGlobalMxsrOahGroup->getTraceBackup ()
+            gGlobalMxsr2msrOahGroup->getTraceBackup ()
               ||
-            gGlobalMxsrOahGroup->getTraceForward ()
+            gGlobalMxsr2msrOahGroup->getTraceForward ()
           ) {
             gLog <<
               "--> appendABackupOrForwardToMeasureIfNeeded(2), note: " <<
@@ -7729,7 +7729,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
           getGraceNotesGroupAfterNote ();
 
     if (! (graceNotesGroupBeforeNote || graceNotesGroupAfterNote)) {
-      if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+      if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
         // create a note comment
         S_msrVoice
           noteVoice =
@@ -7786,7 +7786,7 @@ void msr2mxsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create a start comment
     std::stringstream ss;
     ss <<
@@ -7819,7 +7819,7 @@ void msr2mxsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsr2msrOahGroup->getMusicXMLComments ()) {
     // create an end comment
     std::stringstream ss;
     ss <<
@@ -7977,9 +7977,9 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
   if (doRememberThisNote) {
 #ifdef MF_TRACE_IS_ENABLED
     if (
-      gGlobalMxsrOahGroup->getTraceBackup ()
+      gGlobalMxsr2msrOahGroup->getTraceBackup ()
         ||
-      gGlobalMxsrOahGroup->getTraceForward ()
+      gGlobalMxsr2msrOahGroup->getTraceForward ()
     ) {
       std::stringstream ss;
 

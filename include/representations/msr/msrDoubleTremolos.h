@@ -222,7 +222,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // sounding whole notes JMI
     // the same as the displayed divisions of both members
 // JMI    msrWholeNotes           fDoubleTremoloSoundingWholeNotes;
-    msrWholeNotes         fDoubleTremoloSoundingWholeNotes;
+//     msrWholeNotes         fDoubleTremoloSoundingWholeNotes;
 
     msrDoubleTremoloKind  fDoubleTremoloKind;
 

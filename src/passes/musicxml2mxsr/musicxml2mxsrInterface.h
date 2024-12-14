@@ -14,7 +14,7 @@
 
 #include "typedefs.h"
 
-#include "mxsrOah.h"
+#include "mxsr2msrOah.h"
 
 
 namespace MusicFormats
@@ -39,7 +39,7 @@ void checkSXMLFile (
 */
 EXP Sxmlelement musicxmlFile2mxsr (
   const char*        fileName,
-  S_mxsrOahGroup     musicxmlOpts,
+  S_mxsr2msrOahGroup mxsr2msrOpts,
   mfPassIDKind       passIDKind,
   const std::string& passDescription);
 
@@ -53,7 +53,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
 
 EXP Sxmlelement musicxmlFd2mxsr (
   FILE*              fd,
-  S_mxsrOahGroup     musicxmlOpts,
+  S_mxsr2msrOahGroup mxsr2msrOpts,
   mfPassIDKind       passIDKind,
   const std::string& passDescription);
 
@@ -66,7 +66,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
 */
 EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
   const char*        buffer,
-  S_mxsrOahGroup     musicxmlOpts,
+  S_mxsr2msrOahGroup mxsr2msrOpts,
   mfPassIDKind       passIDKind,
   const std::string& passDescription);
 
