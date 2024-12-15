@@ -391,9 +391,6 @@ class EXP msrChord : public msrTupletElement
                             const S_msrNote&  note,
                             const S_msrVoice& voice);
 
-    void                  setupNoteAsFirstInChord (
-                            const S_msrNote&  note);
-
     S_msrNote             fetchChordFirstNonGraceNote () const;
 
     // articulations

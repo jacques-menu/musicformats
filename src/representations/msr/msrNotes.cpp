@@ -4953,14 +4953,21 @@ void msrNote::print (std::ostream& os) const
     "fMeasureElementMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition.asString () <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fMeasureElementSoundingWholeNotes" << ": " <<
     fMeasureElementSoundingWholeNotes.asFractionString () <<
     std::endl <<
     std::setw (fieldWidth) <<
+    "fNoteDisplayWholeNotes" << ": " <<
+    fNoteDisplayWholeNotes.asFractionString () <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
     "fNoteOccupiesAFullMeasure" << ": " <<
     fNoteOccupiesAFullMeasure <<
     std::endl <<
+
     std::setw (fieldWidth) <<
 		"fNoteIsACueNoteKind" << ": " <<
 		fNoteIsACueNoteKind <<
@@ -5825,10 +5832,16 @@ void msrNote::printFull (std::ostream& os) const
     "fMeasureElementMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition.asString () <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fMeasureElementSoundingWholeNotes" << ": " <<
     fMeasureElementSoundingWholeNotes.asFractionString () <<
     std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteDisplayWholeNotes" << ": " <<
+    fNoteDisplayWholeNotes.asFractionString () <<
+    std::endl <<
+
     std::setw (fieldWidth) <<
     "fNoteOccupiesAFullMeasure" << ": " <<
     fNoteOccupiesAFullMeasure <<

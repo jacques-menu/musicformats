@@ -2395,18 +2395,16 @@ class EXP mxsr2msrSkeletonPopulator :
     Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
     S_msrNote                 fCurrentChordFirstNote;
 
+    void                      createChord (int inputLineNumber);
+
     void                      populateCurrentChordFromNote (
                                 S_msrNote note);
 
-//     S_msrChord                createChordFromItsFirstNote (
-//                                 int              inputLineNumber,
-//                                 const S_msrNote& chordFirstNote,
-//                                 msrNoteKind      noteKind);
-
     void                      handleChordBeginIfAnyBeforeNoteCreation ();
-//     void                      handleChordBeginAfterNoteIfAny ();
+//     void                      handleChordBeginIfAnyAfterNoteCreation ();
 
 //     void                      handleChordEndBeforeNoteIfAny ();
+
     void                      handleChordEndIfAnyAfterNoteHandling ();
 
 /* JMI

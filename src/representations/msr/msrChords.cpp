@@ -733,39 +733,6 @@ void msrChord::setChordMembersMeasurePosition (
 //     } // for
 }
 
-void msrChord::setupNoteAsFirstInChord (
-  const S_msrNote&  note)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Setting up note " <<
-      note->asString () <<
-      " as first note in chord " <<
-      asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // mark note as being the first one in the chord
-  note->
-    setNoteIsAChordsFirstMemberNote ();
-
-  // has this note an msrStem attached to it? // JMI ??? v0.9.72
-  S_msrStem
-    noteStem =
-      note->getNoteStem ();
-
-  if (noteStem) {
-    appendStemToChord (noteStem);
-  }
-}
-
 void msrChord::addNoteToChord (
   const S_msrNote&  note,
   const S_msrVoice& voice)
@@ -1855,10 +1822,10 @@ void msrChord::print (std::ostream& os) const
 
   os <<
     "[Chord" <<
-    ", line " << fInputStartLineNumber <<
     ", " <<
     mfSingularOrPlural (
       fChordNotesVector.size (), "note", "notes") <<
+    ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1877,6 +1844,12 @@ void msrChord::print (std::ostream& os) const
     "fChordDisplayWholeNotes" << ": " <<
     fChordDisplayWholeNotes <<
     std::endl;
+
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fChordFirstMemberNote" << ": " <<
+//     fChordFirstMemberNote <<
+//     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
