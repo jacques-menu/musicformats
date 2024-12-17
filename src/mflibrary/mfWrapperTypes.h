@@ -9,18 +9,19 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfTypes___
-#define ___mfTypes___
+#ifndef ___mfWrapperTypes___
+#define ___mfWrapperTypes___
 
 #include <string>
 #include <ostream>
 #include <sstream>
 
+#include "exports.h"
+
 #include "mfBool.h"
 #include "msrNotesDurations.h"
 #include "msrMoments.h"
 
-#include "exports.h"
 
 
 namespace MusicFormats
@@ -177,7 +178,7 @@ int main() {
 */
 
 template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
-class EXP mfValueWithNeutralValue
+class mfValueWithNeutralValue
 {
   public:
 
@@ -315,7 +316,7 @@ EXP std::ostream& operator << (
 
 //______________________________________________________________________________
 template <typename T, const std::string& printSeparator>
-class EXP mfRange
+class mfRange
 {
   public:
 
@@ -518,4 +519,4 @@ void testWrapperTypes ();
 
 }
 
-#endif // ___mfTypes___
+#endif // ___mfWrapperTypes___
