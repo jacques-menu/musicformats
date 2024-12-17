@@ -22,6 +22,10 @@ namespace MusicFormats
 
 const int K_MF_INPUT_LINE_UNKNOWN_ = 0;
 
+const std::string
+  kInputLineNumberPrefix             ("L_"),
+  kInputLineNumberNeutralValueString ("*Unknown*");
+
 // staff numbers
 //______________________________________________________________________________
 

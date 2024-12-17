@@ -25,6 +25,10 @@ namespace MusicFormats
 
 EXP extern const int K_MF_INPUT_LINE_UNKNOWN_;
 
+EXP extern const std::string
+  kInputLineNumberPrefix,
+  kInputLineNumberNeutralValueString;
+
 // staff numbers
 //______________________________________________________________________________
 

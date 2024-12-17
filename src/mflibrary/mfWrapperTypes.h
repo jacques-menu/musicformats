@@ -19,6 +19,7 @@
 #include "exports.h"
 
 #include "mfBool.h"
+#include "mfConstants.h"
 #include "msrNotesDurations.h"
 #include "msrMoments.h"
 
@@ -416,10 +417,10 @@ EXP std::ostream& operator << (
 
 //______________________________________________________________________________
 // input line numbers
-const int K_MF_INPUT_LINE_UNKNOWN_ = 0;
-const std::string
-  kInputLineNumberPrefix ("L_"),
-  kInputLineNumberNeutralValueString ("*Unknown*");
+// EXP extern const int K_MF_INPUT_LINE_UNKNOWN_ = 0;
+// EXP extern const std::string
+//   kInputLineNumberPrefix ("L_"),
+//   kInputLineNumberNeutralValueString ("*Unknown*");
 
 typedef mfValueWithNeutralValue
   <int, kInputLineNumberPrefix, K_MF_INPUT_LINE_UNKNOWN_, kInputLineNumberNeutralValueString>
@@ -427,7 +428,7 @@ typedef mfValueWithNeutralValue
 
 //______________________________________________________________________________
 // input locations
-const std::string
+EXP extern const std::string
   kInputLocationRangePrefix (".."),
   kInputLocationNeutralValueString ("*Unknown*");
 
@@ -437,8 +438,8 @@ typedef mfRange
 
 //______________________________________________________________________________
 // staff numbers
-const int K_STAFF_NUMBER_UNKNOWN_ = 0;
-const std::string
+EXP extern const int K_STAFF_NUMBER_UNKNOWN_ = 0;
+EXP extern const std::string
   kStaffNumberPrefix ("S_"),
   kStaffNumberNeutralValueString ("*Unknown*");
 
@@ -448,8 +449,8 @@ typedef mfValueWithNeutralValue
 
 //______________________________________________________________________________
 // voice numbers
-const int K_VOICE_NUMBER_UNKNOWN_ = 0;
-const std::string
+EXP extern const int K_VOICE_NUMBER_UNKNOWN_ = 0;
+EXP extern const std::string
   kVoiceNumberPrefix ("V_"),
   kVoiceNumberNeutralValueString ("*Unknown*");
 
@@ -459,9 +460,9 @@ typedef mfValueWithNeutralValue
 
 //______________________________________________________________________________
 // stanzas numbers
-const std::string K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_";
-// const std::string K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
-const std::string
+EXP extern const std::string K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_";
+// extern const std::string K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
+EXP extern const std::string
   kStanzaNumberPrefix ("ST_"),
   kStanzaNumberNeutralValueString ("*Unknown*");
 
@@ -473,8 +474,8 @@ typedef mfValueWithNeutralValue
 
 //______________________________________________________________________________
 // measure numbers
-const std::string K_MEASURE_NUMBER_UNKNOWN_ = "K_MEASURE_NUMBER_UNKNOWN_";
-const std::string
+EXP extern const std::string K_MEASURE_NUMBER_UNKNOWN_ = "K_MEASURE_NUMBER_UNKNOWN_";
+extern const std::string
   kMeasureNumberPrefix ("ST_"),
   kMeasureNumberNeutralValueString ("*Unknown*");
 
