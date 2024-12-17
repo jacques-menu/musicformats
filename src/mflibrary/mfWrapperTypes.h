@@ -484,11 +484,11 @@ typedef mfValueWithNeutralValue
 
 //______________________________________________________________________________
 // whole notes durations
-EXP const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = 0;
-EXP const const msrWholeNotes K_WHOLE_NOTES_UNKNOWN____ = // JMI v0.9.72 duplicates K_WHOLE_NOTES_UNKNOWN_ to be fixed
+EXP extern const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = 0;
+EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN____ = // JMI v0.9.72 duplicates K_WHOLE_NOTES_UNKNOWN_ to be fixed
   msrWholeNotes (0, 1);
 
-EXP const  std::string
+EXP extern const std::string
   kWholeNotePrefix ("WN_"),
   kWholeNoteNeutralValueString ("*Unknown*");
 
@@ -498,15 +498,15 @@ typedef mfValueWithNeutralValue
 
 //______________________________________________________________________________
 // moments
-EXP const  msrWholeNotes K_MEASURE_POSITION_UNKNOWN_ =
+EXP extern const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_ =
   msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
-EXP const  msrMoment K_MOMENT_UNKNOWN_ =
+EXP extern const msrMoment K_MOMENT_UNKNOWN_ =
   msrMoment (
     K_MEASURE_POSITION_UNKNOWN_,
     K_MEASURE_POSITION_UNKNOWN_);
 
-EXP const  std::string
+EXP extern const std::string
   kMomentPrefix ("WN_"),
   kMomentNeutralValueString ("*Unknown*");
 
