@@ -37,7 +37,7 @@ jobs:
 #           working-directory: build
 #           cd build; cmake --build .
 #           cd build ; cmake . ; ls D:/a/musicformats/musicformats/build ; make
-          cd build ; uname -a ; cmake --help ; cmake -S . -B . . ; ls . ; make ; ls .
+          cd build ; uname -a ; cmake -G "Unix Makefiles" ; cmake -S . -B . . ; ls . ; make ; ls .
 
 
       - name: Upload libraries and executables for Windows
