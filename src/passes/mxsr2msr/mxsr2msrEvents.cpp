@@ -50,6 +50,33 @@ std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEventKind& elt
 }
 
 //________________________________________________________________________
+std::string mxsrGraceNoteEventKindAsString (
+  mxsrGraceNoteEventKind noteGraceNoteEventKind)
+{
+  std::string result;
+
+  switch (noteGraceNoteEventKind) {
+    case mxsrGraceNoteEventKind::kEventGraceNote_NONE:
+      result = "kEventGraceNote_NONE";
+      break;
+    case mxsrGraceNoteEventKind::kEventGraceNoteBegin:
+      result = "kEventGraceNoteBegin";
+      break;
+    case mxsrGraceNoteEventKind::kEventGraceNoteEnd:
+      result = "kEventGraceNoteEnd";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const mxsrGraceNoteEventKind& elt)
+{
+  os << mxsrGraceNoteEventKindAsString (elt);
+  return os;
+}
+
+//________________________________________________________________________
 std::string mxsrChordEventKindAsString (
   mxsrChordEventKind noteChordEventKind)
 {
@@ -184,7 +211,7 @@ bool compareStaffChangeEventsByIncreasingInputStartLineNumber (
 
 //________________________________________________________________________
 /* this class is purely virtual
-S_mxsrChordEvent mxsrNoteEvent::create (
+mxsrNoteEvent mxsrNoteEvent::create (
   int eventSequentialNumber,
   int noteSequentialNumber,
   int noteEventStaffNumber,
@@ -416,6 +443,132 @@ std::ostream& operator << (std::ostream& os, const S_mxsrStaffChangeEvent& elt)
 }
 
 std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEvent& elt)
+{
+  elt.print (os);
+  return os;
+}
+
+//________________________________________________________________________
+S_mxsrGraceNoteEvent mxsrGraceNoteEvent::create (
+  int                    eventSequentialNumber,
+  int                    noteSequentialNumber,
+  int                    noteEventStaffNumber,
+  int                    noteEventVoiceNumber,
+  mxsrGraceNoteEventKind graceNoteEventKind,
+  int                    eventInputStartLineNumber,
+  int                    eventInputEndLineNumber)
+{
+  mxsrGraceNoteEvent* obj =
+    new mxsrGraceNoteEvent (
+      eventSequentialNumber,
+      noteSequentialNumber,
+      noteEventStaffNumber,
+      noteEventVoiceNumber,
+      graceNoteEventKind,
+      eventInputStartLineNumber,
+      eventInputEndLineNumber);
+  assert (obj != nullptr);
+  return obj;
+}
+
+mxsrGraceNoteEvent::mxsrGraceNoteEvent (
+  int                    eventSequentialNumber,
+  int                    noteSequentialNumber,
+  int                    noteEventStaffNumber,
+  int                    noteEventVoiceNumber,
+  mxsrGraceNoteEventKind graceNoteEventKind,
+  int                    eventInputStartLineNumber,
+  int                    eventInputEndLineNumber)
+  : mxsrNoteEvent (
+      eventSequentialNumber,
+      noteSequentialNumber,
+      noteEventStaffNumber,
+      noteEventVoiceNumber,
+      eventInputStartLineNumber,
+      eventInputEndLineNumber)
+{
+  fGraceNoteEventKind = graceNoteEventKind;
+}
+
+mxsrGraceNoteEvent::~mxsrGraceNoteEvent ()
+{}
+
+std::string mxsrGraceNoteEvent::asShortString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[GraceNoteEvent, " <<
+    ", fEventInputStartLineNumber: " << fEventInputStartLineNumber <<
+//     ", fEventInputEndLineNumber: " << fEventInputEndLineNumber <<
+    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+    ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
+    ", fNoteEventStaffNumber: S" << fNoteEventStaffNumber <<
+    ", fNoteEventVoiceNumber: V" << fNoteEventVoiceNumber <<
+    ", fGraceNoteEventKind: " << fGraceNoteEventKind <<
+    ']';
+
+  return ss.str ();
+}
+
+std::string mxsrGraceNoteEvent::asString () const
+{
+  return asShortString ();
+}
+
+void mxsrGraceNoteEvent::print (std::ostream& os) const
+{
+  os <<
+    "[GraceNoteEvent" <<
+    std::endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 26;
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fEventInputStartLineNumber" << " : " << fEventInputStartLineNumber <<
+    std::endl <<
+//     std::setw (fieldWidth) <<
+//     "fEventInputEndLineNumber" << " :L" << fEventInputEndLineNumber <<
+//     std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fEventSequentialNumber" << " : E" << fEventSequentialNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteSequentialNumber" << " : N" << fNoteSequentialNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fNoteEventStaffNumber" << " : S" << fNoteEventStaffNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteEventVoiceNumber" << " : V" << fNoteEventVoiceNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fGraceNoteEventKind" << " : " << fGraceNoteEventKind <<
+    std::endl;
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_mxsrGraceNoteEvent& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+std::ostream& operator << (std::ostream& os, const mxsrGraceNoteEvent& elt)
 {
   elt.print (os);
   return os;
@@ -700,15 +853,15 @@ mxsrEventsCollection::~mxsrEventsCollection ()
 
 //________________________________________________________________________
 void mxsrEventsCollection::registerStaffChangeTakeOff (
-  int                      noteSequentialNumber,
-  int                      noteEventStaffNumber,
-  int                      noteEventVoiceNumber,
-  int                      takeOffStaffNumber,
-  int                      landingStaffNumber,
-  int                      takeOffInputStartLineNumber,
-  int                      landingInputStartLineNumber,
-  int                      eventInputStartLineNumber,
-  int                      eventInputEndLineNumber)
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int takeOffStaffNumber,
+  int landingStaffNumber,
+  int takeOffInputStartLineNumber,
+  int landingInputStartLineNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
 {
   S_mxsrStaffChangeEvent
     staffChangeEvent =
@@ -748,15 +901,15 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
 }
 
 void mxsrEventsCollection::registerStaffChangeLanding (
-  int                      noteSequentialNumber,
-  int                      noteEventStaffNumber,
-  int                      noteEventVoiceNumber,
-  int                      takeOffStaffNumber,
-  int                      landingStaffNumber,
-  int                      takeOffInputStartLineNumber,
-  int                      landingInputStartLineNumber,
-  int                      eventInputStartLineNumber,
-  int                      eventInputEndLineNumber)
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int takeOffStaffNumber,
+  int landingStaffNumber,
+  int takeOffInputStartLineNumber,
+  int landingInputStartLineNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
 {
   S_mxsrStaffChangeEvent
     staffChangeEvent =
@@ -796,12 +949,91 @@ void mxsrEventsCollection::registerStaffChangeLanding (
 }
 
 //________________________________________________________________________
+void mxsrEventsCollection::registerGraceNoteBegin (
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
+{
+  S_mxsrGraceNoteEvent
+    graceNoteEvent =
+      mxsrGraceNoteEvent::create (
+        ++fCurrentEventSequentialNumber,
+        noteSequentialNumber,
+        noteEventStaffNumber,
+        noteEventVoiceNumber,
+        mxsrGraceNoteEventKind::kEventGraceNoteBegin,
+        eventInputStartLineNumber,
+        eventInputStartLineNumber);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceGraceNotesBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering grace note event " <<
+      graceNoteEvent->asString () <<
+      ", line " << eventInputStartLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fGraceNotesBeginsMap.insert (
+    std::make_pair (noteSequentialNumber, graceNoteEvent));
+
+  fAllEventsList.push_back (graceNoteEvent);
+}
+
+void mxsrEventsCollection::registerGraceNoteEnd (
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
+{
+  S_mxsrGraceNoteEvent
+    graceNoteEvent =
+      mxsrGraceNoteEvent::create (
+        ++fCurrentEventSequentialNumber,
+        noteSequentialNumber,
+        noteEventStaffNumber,
+        noteEventVoiceNumber,
+        mxsrGraceNoteEventKind::kEventGraceNoteEnd,
+        eventInputStartLineNumber,
+        eventInputStartLineNumber);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceGraceNotesBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering grace note event " <<
+      graceNoteEvent->asString () <<
+      ", line " << eventInputStartLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fGraceNotesEndsMap.insert (
+    std::make_pair (noteSequentialNumber, graceNoteEvent));
+
+  fAllEventsList.push_back (graceNoteEvent);
+}
+
+//________________________________________________________________________
 void mxsrEventsCollection::registerChordBegin (
-  int                noteSequentialNumber,
-  int                noteEventStaffNumber,
-  int                noteEventVoiceNumber,
-  int                eventInputStartLineNumber,
-  int                eventInputEndLineNumber)
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
 {
   S_mxsrChordEvent
     chordEvent =
@@ -836,11 +1068,11 @@ void mxsrEventsCollection::registerChordBegin (
 }
 
 void mxsrEventsCollection::registerChordEnd (
-  int                noteSequentialNumber,
-  int                noteEventStaffNumber,
-  int                noteEventVoiceNumber,
-  int                eventInputStartLineNumber,
-  int                eventInputEndLineNumber)
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
 {
   S_mxsrChordEvent
     chordEvent =
@@ -876,12 +1108,12 @@ void mxsrEventsCollection::registerChordEnd (
 
 //________________________________________________________________________
 void mxsrEventsCollection::registerTupletBeginEvent (
-  int                 noteSequentialNumber,
-  int                 noteEventStaffNumber,
-  int                 noteEventVoiceNumber,
-  int                 tupletNumber,
-  int                 eventInputStartLineNumber,
-  int                 eventInputEndLineNumber)
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int tupletNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
 {
   S_mxsrTupletEvent
     tupletEvent =
@@ -919,12 +1151,12 @@ void mxsrEventsCollection::registerTupletBeginEvent (
 }
 
 void mxsrEventsCollection::registerTupletEndEvent (
-  int                 noteSequentialNumber,
-  int                 noteEventStaffNumber,
-  int                 noteEventVoiceNumber,
-  int                 tupletNumber,
-  int                 eventInputStartLineNumber,
-  int                 eventInputEndLineNumber)
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int tupletNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
 {
   S_mxsrTupletEvent
     tupletEvent =
@@ -1011,6 +1243,39 @@ S_mxsrStaffChangeEvent mxsrEventsCollection::fetchStaffChangeLandingAtNoteSequen
   it = fStaffChangeLandingsMap.find (noteSequentialNumber);
 
   if (it != fStaffChangeLandingsMap.end ()) {
+    result = (*it).second;
+  }
+
+  return result;
+}
+
+//________________________________________________________________________
+S_mxsrGraceNoteEvent mxsrEventsCollection::fetchGraceNoteBeginAtNoteSequentialNumber (
+  int noteSequentialNumber) const
+{
+  S_mxsrGraceNoteEvent result;
+
+  std::map <int, S_mxsrGraceNoteEvent>::const_iterator it;
+
+  it = fGraceNotesBeginsMap.find (noteSequentialNumber);
+
+  if (it != fGraceNotesBeginsMap.end ()) {
+    result = (*it).second;
+  }
+
+  return result;
+}
+
+S_mxsrGraceNoteEvent mxsrEventsCollection::fetchGraceNoteEndAtNoteSequentialNumber (
+  int noteSequentialNumber) const
+{
+  S_mxsrGraceNoteEvent result;
+
+  std::map <int, S_mxsrGraceNoteEvent>::const_iterator it;
+
+  it = fGraceNotesEndsMap.find (noteSequentialNumber);
+
+  if (it != fGraceNotesEndsMap.end ()) {
     result = (*it).second;
   }
 

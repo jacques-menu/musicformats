@@ -18996,7 +18996,11 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rest& elt)
 */
 
   fCurrentNoteQuarterTonesPitchKind = msrQuarterTonesPitchKind::kQTP_Rest;
+
   fCurrentNoteIsARest = true;
+
+  // a rest cannot be part of a chord
+  fCurrentNoteBelongsToAChord = false;
 
   std::string restMeasure = elt->getAttributeValue ("measure");
 
@@ -23876,36 +23880,73 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
 //     theMxsrVoice =
 //       fCurrentPartStaffMxsrVoicesMap [fCurrentNoteStaffNumber][fCurrentNoteVoiceNumber];
 
+  // a rest cannot belong to a chord or a grace notes group
+  Bool currentNoteIsARegultarNoteOrRest (false);
+
   // handle the note itself
-  if (fCurrentNoteBelongsToAChord) {
-    if (fCurrentNoteBelongsToATuplet) {
-      handleChordMemberNoteInATuplet (
-        fCurrentNote);
+  if (fCurrentNoteIsARest) {
+    currentNoteIsARegultarNoteOrRest = true;
+
+    if (fCurrentNoteBelongsToAChord) {
+      if (fCurrentNoteBelongsToATuplet) {
+        handleChordMemberNoteInATuplet (
+          fCurrentNote);
+      }
+
+      else if (fCurrentNoteIsAGraceNote) {
+        handleChordMemberNoteInAGraceNotesGroup (
+          fCurrentNote);
+      }
+
+      else {
+        // regular chord member
+        handleRegularChordMemberNote (
+          fCurrentNote);
+      }
     }
 
-    else if (fCurrentNoteIsAGraceNote) {
-      handleChordMemberNoteInAGraceNotesGroup (
-        fCurrentNote);
+    else if (fCurrentNoteBelongsToATuplet) {
+      // note/rest is the first, second, third, ..., member of a tuplet
+        handleTupletMemberNote (
+          fCurrentNote);
     }
 
-    else {
-      // regular chord member
-      handleRegularChordMemberNote (
-        fCurrentNote);
+    else if (fCurrentNoteIsAGraceNote) { // GRACE
+      handleGraceNote (); // JMI v0.9.72
     }
-  }
-
-  else if (fCurrentNoteBelongsToATuplet) {
-    // note/rest is the first, second, third, ..., member of a tuplet
-      handleTupletMemberNote (
-        fCurrentNote);
-  }
-
-  else if (fCurrentNoteIsAGraceNote) { // GRACE
-    handleGraceNote (); // JMI v0.9.72
   }
 
   else {
+    if (fCurrentNoteBelongsToAChord) {
+      if (fCurrentNoteBelongsToATuplet) {
+        handleChordMemberNoteInATuplet (
+          fCurrentNote);
+      }
+
+      else if (fCurrentNoteIsAGraceNote) {
+        handleChordMemberNoteInAGraceNotesGroup (
+          fCurrentNote);
+      }
+
+      else {
+        // regular chord member
+        handleRegularChordMemberNote (
+          fCurrentNote);
+      }
+    }
+
+    else if (fCurrentNoteBelongsToATuplet) {
+      // note/rest is the first, second, third, ..., member of a tuplet
+        handleTupletMemberNote (
+          fCurrentNote);
+    }
+
+    else if (fCurrentNoteIsAGraceNote) { // GRACE
+      handleGraceNote (); // JMI v0.9.72
+    }
+  }
+
+  if (currentNoteIsARegultarNoteOrRest) {
     // regular note or rest
 
     // this note terminates a tuplet if any

@@ -80,6 +80,10 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
 	fPreviousNoteStartInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
 	fPreviousNoteEndInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
 
+	// grace notes handling
+	fCurrentNoteIsAGraceNote = false;
+	fPreviousNoteIsAGraceNote = false;
+
 	// staff changes handling
 	fCurrentStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 	fPreviousNoteIsATakeOffCandidate = false;
@@ -1787,10 +1791,16 @@ void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
 			", fPreviousNoteSequentialNumber: " <<
 			fPreviousNoteSequentialNumber <<
 
+			", fCurrentNoteIsAGraceNote: " <<
+			fCurrentNoteIsAGraceNote <<
+			", fPreviousNoteIsAGraceNote: " <<
+			fPreviousNoteIsAGraceNote <<
+
 			", fCurrentNoteBelongsToAChord: " <<
 			fCurrentNoteBelongsToAChord <<
 			", fPreviousNoteBelongsToAChord: " <<
 			fPreviousNoteBelongsToAChord <<
+
 			", fPreviousNoteIsATakeOffCandidate: " <<
 			fPreviousNoteIsATakeOffCandidate <<
       ", line " << inputStartLineNumber <<
@@ -1822,24 +1832,6 @@ void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
 			fCurrentNoteVoiceNumber,
 			fCurrentNoteStartInputLineNumber,
 			fCurrentNoteEndInputLineNumber);
-	}
-
-	else {
-// 		// is this note the one that follows the last one of a chord?
-// 		if (fPreviousNoteBelongsToAChord) {
-// 			// this the note after the last one of the chord
-// 			 // we're one note late!
-// 			fResultingEventsCollection.registerChordEndEvent (
-// 				fPreviousNoteSequentialNumber,
-// 			fCurrentNoteSequentialNumber,
-// 				fCurrentNoteStaffNumber,
-// 				fCurrentNoteVoiceNumber,
-// 				fPreviousNoteStartInputLineNumber,
-// 				fPreviousNoteEndInputLineNumber,
-// 		    fCurrentNoteVoiceNumber);
-// 		}
-// 		else {
-// 		}
 	}
 }
 
@@ -4554,6 +4546,13 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
 	fCurrentNoteStaffNumber = 1; // default value, unless S_staff states otherwise afterwards
 	fCurrentNoteVoiceNumber = 1; // default value, unless S_voice states otherwise afterwards
 
+	// rests
+	fCurrentNoteIsARest = false;
+
+	// grace notes
+	fPreviousNoteIsAGraceNote = fCurrentNoteIsAGraceNote;
+	fCurrentNoteIsAGraceNote = false;
+
 	// chords
 	fPreviousNoteBelongsToAChord = fCurrentNoteBelongsToAChord;
 	fCurrentNoteBelongsToAChord = false;
@@ -4578,6 +4577,51 @@ void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
   fOnGoingNote = true;
 }
 
+void mxsr2msrSkeletonBuilder::visitStart (S_rest& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting S_rest" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+	fCurrentNoteIsARest = true;
+
+	// a rest cannot be a grace note
+	fCurrentNoteIsAGraceNote = false;
+
+	// a rest cannot be part of a chord
+	fCurrentNoteBelongsToAChord = false;
+}
+
+void mxsr2msrSkeletonBuilder::visitStart (S_grace& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting S_grace" <<
+      ", line " << elt->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+	fCurrentNoteIsAGraceNote = true;
+}
+
+//________________________________________________________________________
 Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 	int inputStartLineNumber)
 {
@@ -4682,6 +4726,89 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 	return result;
 }
 
+//________________________________________________________________________
+void mxsr2msrSkeletonBuilder::registerGraceNoteEventIfAny ()
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+    	"-->registerGraceNoteEventIfAny()"
+      ", fCurrentNoteStartInputLineNumber: " <<
+      fCurrentNoteStartInputLineNumber <<
+
+      ", fPreviousNoteSequentialNumber: " <<
+      fPreviousNoteSequentialNumber <<
+      ", fCurrentNoteSequentialNumber: " <<
+      fCurrentNoteSequentialNumber <<
+
+			", fPreviousNoteIsATakeOffCandidate: " <<
+			fPreviousNoteIsATakeOffCandidate <<
+
+      ", fPreviousNoteIsAGraceNote: " <<
+      fPreviousNoteIsAGraceNote <<
+      ", fCurrentNoteIsAGraceNote: " <<
+      fCurrentNoteIsAGraceNote <<
+
+      ", fPreviousNoteBelongsToAChord: " <<
+      fPreviousNoteBelongsToAChord <<
+      ", fCurrentNoteBelongsToAChord: " <<
+      fCurrentNoteBelongsToAChord <<
+
+      ", fCurrentNoteBelongsToATuplet: " <<
+      fCurrentNoteBelongsToATuplet <<
+      ", line " << fCurrentNoteStartInputLineNumber;
+
+		gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+
+    displayPendingTupletsStopsMap (
+    	"=====> registerGraceNoteEventIfAny() 1",
+    	fCurrentNoteStartInputLineNumber);
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+ 	// Q_NOTE
+
+	if (fCurrentNoteIsAGraceNote) {
+		// was the previous note also a grace note?
+		if (fPreviousNoteIsAGraceNote) {
+			// this note is after the last one of the grace notes group
+			// wait and see upon the next note or the measure end
+		}
+		else {
+			// this is the second note of the grace notes ???
+			// we're one note late, hence the previous note is the grace notes begin
+			fResultingEventsCollection.registerGraceNoteBegin (
+				fCurrentNoteSequentialNumber,
+				fCurrentNoteStaffNumber,
+				fCurrentNoteVoiceNumber,
+				fCurrentNoteStartInputLineNumber,
+				fCurrentNoteEndInputLineNumber);
+		}
+	}
+
+	else {
+		// is this note the one that follows the last one of a grace notes group?
+		if (fPreviousNoteIsAGraceNote) {
+			// this is the note right after the last one of the grace notes group
+			// we're one note late, hence the previous note is the grace notes group end
+			fResultingEventsCollection.registerGraceNoteEnd (
+				fPreviousNoteSequentialNumber,
+				fPreviousNoteStaffNumber,
+				fPreviousNoteVoiceNumber,
+				fPreviousNoteStartInputLineNumber,
+				fPreviousNoteEndInputLineNumber);
+		}
+		else {
+			// wait and see upon the next note or the measure end
+		}
+	}
+}
+
+//________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4698,18 +4825,21 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
       ", fCurrentNoteSequentialNumber: " <<
       fCurrentNoteSequentialNumber <<
 
+			", fPreviousNoteIsATakeOffCandidate: " <<
+			fPreviousNoteIsATakeOffCandidate <<
+
+      ", fPreviousNoteIsAGraceNote: " <<
+      fPreviousNoteIsAGraceNote <<
+      ", fCurrentNoteIsAGraceNote: " <<
+      fCurrentNoteIsAGraceNote <<
+
       ", fPreviousNoteBelongsToAChord: " <<
       fPreviousNoteBelongsToAChord <<
       ", fCurrentNoteBelongsToAChord: " <<
       fCurrentNoteBelongsToAChord <<
 
-      ", fCurrentNoteBelongsToAChord: " <<
-      fCurrentNoteBelongsToAChord <<
-
       ", fCurrentNoteBelongsToATuplet: " <<
       fCurrentNoteBelongsToATuplet <<
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
       ", line " << fCurrentNoteStartInputLineNumber;
 
 		gWaeHandler->waeTrace (
@@ -4745,7 +4875,7 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 	else {
 		// is this note the one that follows the last one of a chord?
 		if (fPreviousNoteBelongsToAChord) {
-			// this the note after the last one of the chord
+			// this is the note right after the last one of the chord
 			// we're one note late, hence the previous note is the chord end
 			fResultingEventsCollection.registerChordEnd (
 				fPreviousNoteSequentialNumber,
@@ -4760,6 +4890,7 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 	}
 }
 
+//________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4776,13 +4907,14 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
       ", fCurrentNoteSequentialNumber: " <<
       fCurrentNoteSequentialNumber <<
 
+			", fPreviousNoteIsATakeOffCandidate: " <<
+			fPreviousNoteIsATakeOffCandidate <<
+
       ", fCurrentNoteBelongsToAChord: " <<
       fCurrentNoteBelongsToAChord <<
 
       ", fCurrentNoteBelongsToATuplet: " <<
       fCurrentNoteBelongsToATuplet <<
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
       ", line " << fCurrentNoteStartInputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -4790,11 +4922,11 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
       ss.str ());
 
     displayPendingTupletsList (
-    	"=====> registerChordEventIfAny() 2",
+    	"=====> handleTupletEventIfAny() 2",
     	fCurrentNoteStartInputLineNumber);
 
     displayPendingTupletsStopsMap (
-    	"=====> registerChordEventIfAny() 2",
+    	"=====> handleTupletEventIfAny() 2",
     	fCurrentNoteStartInputLineNumber);
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -4905,6 +5037,7 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
 	} // for
 }
 
+//________________________________________________________________________
 void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4964,19 +5097,24 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 				fCurrentNoteStaffNumber <<
 				", fCurrentNoteVoiceNumber: " <<
 				fCurrentNoteVoiceNumber <<
+
 				", fPreviousNoteIsATakeOffCandidate: " <<
 				fPreviousNoteIsATakeOffCandidate <<
 
-				", getStaffName(): " <<
-				staff->getStaffName () <<
-				", getVoiceName(): " <<
-				noteVoice->getVoiceName () <<
+				", fCurrentNoteIsAGraceNote: " <<
+				fCurrentNoteIsAGraceNote <<
 
 				", fCurrentNoteBelongsToAChord: " <<
 				fCurrentNoteBelongsToAChord <<
 
 				", fCurrentNoteBelongsToATuplet: " <<
 				fCurrentNoteBelongsToATuplet <<
+
+				", getStaffName(): " <<
+				staff->getStaffName () <<
+				", getVoiceName(): " <<
+				noteVoice->getVoiceName () <<
+
 				", line " << fCurrentNoteStartInputLineNumber;
 
 			gWaeHandler->waeTrace (
@@ -4992,6 +5130,34 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 				fCurrentNoteStartInputLineNumber);
 		}
 #endif // MF_TRACE_IS_ENABLED
+	}
+
+	if (fCurrentNoteIsARest) {
+#ifdef MF_TRACE_IS_ENABLED
+		if (gTraceOahGroup->getTraceNotesBasics ()) {
+			std::stringstream ss;
+
+			ss <<
+				"Current note is a rest" <<
+				", line " <<
+				elt->getInputStartLineNumber ();
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+		}
+#endif // MF_TRACE_IS_ENABLED
+
+		if (fPreviousNoteBelongsToAChord) {
+			// this is the note right after the last one of the chord
+			// we're one note late, hence the previous note is the chord end
+			fResultingEventsCollection.registerChordEnd (
+				fPreviousNoteSequentialNumber,
+				fPreviousNoteStaffNumber,
+				fPreviousNoteVoiceNumber,
+				fPreviousNoteStartInputLineNumber,
+				fPreviousNoteEndInputLineNumber);
+		}
 	}
 
   // are there harmonies attached to the current note?
@@ -5012,6 +5178,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 			}
 #endif // MF_TRACE_IS_ENABLED
 		}
+
     else {
       // create the part harmonies voice if not yet done
       S_msrVoice
@@ -5055,6 +5222,9 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
   }
 
  	// Q_NOTE
+
+	// register grace note event if any
+	registerGraceNoteEventIfAny ();
 
 	// register chord event if any
 	registerChordEventIfAny ();

@@ -681,11 +681,12 @@ R"(Write a trace of the MusicXML tree activity to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtomWithTracePasses::create (
+      oahTwoBooleansAtom::create (
         "display-mxsr", "dmxsr",
 R"(Write the contents of the MXSR data to standard error.)",
         "fDisplayMxsr",
-        fDisplayMxsr));
+        fDisplayMxsr,
+        gTraceOahGroup->getTracePassesBooleanAtom ()));
 
   // MusicXML tree visiting
 

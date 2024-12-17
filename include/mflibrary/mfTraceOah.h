@@ -80,6 +80,8 @@ class EXP traceOahGroup : public oahGroup
 
     void                  initializeMxsrEventsTraceOah ();
 
+    void                  initializeGraceNotesTraceOah ();
+
     void                  initializeChordsTraceOah ();
 
     void                  initializeTupletsTraceOah ();
@@ -515,6 +517,11 @@ class EXP traceOahGroup : public oahGroup
                               { return fTraceNotesOctaveEntry; }
 
     // grace notes
+    void                  setTraceGraceNotesBasics ()
+                              { fTraceGraceNotesBasics = true; }
+    Bool                  getTraceGraceNotesBasics () const
+                              { return fTraceGraceNotesBasics; }
+
     void                  setTraceGraceNotes ()
                               { fTraceGraceNotes = true; }
     Bool                  getTraceGraceNotes () const
@@ -1150,6 +1157,7 @@ class EXP traceOahGroup : public oahGroup
     // grace notes
     // --------------------------------------
 
+    Bool                  fTraceGraceNotesBasics;
     Bool                  fTraceGraceNotes;
 
 

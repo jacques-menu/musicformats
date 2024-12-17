@@ -402,6 +402,13 @@ class EXP msrNote : public msrTupletElement
                                     msrNoteKind::kNoteUnpitchedInTuplet;
                               }
 
+    // grace note?
+    void                  setNoteIsACueNoteKind ()
+                              { fNoteIsAGraceNote = true; }
+
+    Bool                  getNoteIsAGraceNote () const
+                              { return fNoteIsAGraceNote; }
+
     // cue note?
     void                  setNoteIsACueNoteKind (
                             msrNoteIsACueNoteKind msrNoteIsACueNoteKind)
@@ -1009,6 +1016,9 @@ class EXP msrNote : public msrTupletElement
     msrOctaveKind         fNoteDisplayOctaveKind;
                                 // for unpitched notes
                                 // and pitched rests
+
+    // grace note?
+    Bool                  fNoteIsAGraceNote;
 
     // cue note?
     msrNoteIsACueNoteKind fNoteIsACueNoteKind;
