@@ -422,11 +422,11 @@ class EXP msrOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
+    void                  initializeMsrDisplayOptions ();
+
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeMsrTraceOah ();
 #endif // MF_TRACE_IS_ENABLED
-
-    void                  initializeMsrDisplayOptions ();
 
     void                  initializeMsrLanguagesOptions ();
 

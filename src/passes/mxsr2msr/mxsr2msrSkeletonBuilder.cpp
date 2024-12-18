@@ -1224,6 +1224,333 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 }
 
 //______________________________________________________________________________
+void mxsr2msrSkeletonBuilder::sortfStartedPartGroupsListsVector (
+	int inputLineNumber)
+{
+	for (
+		S_mxsrPartGroupsList thePartGroupList :
+			fStartedPartGroupsListsVector
+	) {
+
+		// sort thePartGroupList in decreasing identityorder
+#ifdef MF_TRACE_IS_ENABLED
+		if (gTraceOahGroup->getTracePartGroups ()) {
+			std::stringstream ss;
+
+			ss <<
+				"Sorting the started part group list" <<
+				", line " << inputLineNumber ;
+
+			thePartGroupList->printWithContext (
+				"sortfStartedPartGroupsListsVector()",
+				'>',
+				ss);
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+		}
+#endif // MF_TRACE_IS_ENABLED
+
+		thePartGroupList->sortByDecreasingIdentity();
+	} // for
+}
+
+void mxsr2msrSkeletonBuilder::sortStoppedPartGroupsListsVector (
+	int inputLineNumber)
+{
+	for (S_mxsrPartGroupsList thePartGroupList : fStoppedPartGroupsListsVector) {
+		// sort thePartGroupList in decreasing identit yorder
+#ifdef MF_TRACE_IS_ENABLED
+		if (gTraceOahGroup->getTracePartGroups ()) {
+			std::stringstream ss;
+
+			ss <<
+				"Sorting the stopped part group list " <<
+				", line " << inputLineNumber <<
+				std::endl;
+
+			++gIndenter;
+			thePartGroupList->printWithContext (
+				"sortStoppedPartGroupsListsVector()",
+				'>',
+				ss);
+			--gIndenter;
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+		}
+#endif // MF_TRACE_IS_ENABLED
+
+		thePartGroupList->sortByDecreasingIdentity();
+	} // for
+}
+
+void mxsr2msrSkeletonBuilder::handlePartGroupsStartAtIdentity (
+	int inputLineNumber,
+	int identity)
+{
+	if (fStartedPartGroupsListsVector.size ()) {
+		S_mxsrPartGroupsList
+			startedMxsrPartGroupsList =
+				fStartedPartGroupsListsVector [identity];
+
+		if (startedMxsrPartGroupsList->size ()) {
+			++gIndenter;
+
+			const std::list <S_mxsrPartGroup>&
+				startedPartGroupsStdList =
+					startedMxsrPartGroupsList->getMxsrPartGroupsStdList ();
+
+			for (S_mxsrPartGroup partGroup : startedPartGroupsStdList) {
+				S_msrPartGroup
+					theMsrPartGroup =
+						partGroup->getMsrPartGroup ();
+
+				// make it the new current part group
+#ifdef MF_TRACE_IS_ENABLED
+				if (gTraceOahGroup->getTracePartGroups ()) {
+					std::stringstream ss;
+
+					ss <<
+						"Pushing part group " <<
+						partGroup->asString () <<
+						" onto the part groups stack" <<
+						", line " << inputLineNumber;
+
+					gWaeHandler->waeTrace (
+						__FILE__, __LINE__,
+						ss.str ());
+				}
+#endif // MF_TRACE_IS_ENABLED
+
+				fPartGroupsStack.push (
+					partGroup);
+			} // for
+
+			--gIndenter;
+		}
+	}
+}
+
+void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
+	int inputLineNumber,
+	int identity)
+{
+	if (fStoppedPartGroupsListsVector.size ()) {
+		S_mxsrPartGroupsList
+			stoppedPartGroupsList =
+				fStoppedPartGroupsListsVector [identity];
+
+		if (stoppedPartGroupsList->size ()) {
+			++gIndenter;
+
+			const std::list <S_mxsrPartGroup>&
+				stoppedPartGroupsStdList =
+					stoppedPartGroupsList->getMxsrPartGroupsStdList ();
+
+			for (S_mxsrPartGroup partGroup : stoppedPartGroupsStdList) {
+				int stopInputLineNumber =
+					partGroup->getStopInputLineNumber ();
+
+				S_msrPartGroup
+					theMsrPartGroup =
+						partGroup->getMsrPartGroup ();
+
+				// fetch the part group stack top
+				if (fPartGroupsStack.size () == 0) {
+					std::stringstream ss;
+
+					ss <<
+						"Cannot 'stop' part group " <<
+						partGroup->fetchMsrPartGroupCombinedName () <<
+						" at identity" << identity<<
+						", since the stack is empty"<<
+						", line " << inputLineNumber;
+
+					musicxmlError (
+						gServiceRunData->getInputSourceName (),
+						stopInputLineNumber,
+						__FILE__, __LINE__,
+						ss.str ());
+				}
+
+				if (fPartGroupsStack.top () == partGroup) {
+					// pop partGroupToBeStopped from the stack
+
+#ifdef MF_TRACE_IS_ENABLED
+					if (gTraceOahGroup->getTracePartGroups ()) {
+						std::stringstream ss;
+
+						ss <<
+							"Popping part group " <<
+							partGroup->
+								fetchMsrPartGroupCombinedName () <<
+							" from the stack" <<
+							", line " << stopInputLineNumber;
+
+						gWaeHandler->waeTrace (
+							__FILE__, __LINE__,
+							ss.str ());
+					}
+#endif // MF_TRACE_IS_ENABLED
+
+					fPartGroupsStack.pop ();
+
+					// the implicit outer-most part group isn't contained in any other
+					if (partGroup != fImplicitOuterMostPartGroup) {
+						// fetch new current part group JMI v0.9.69
+						if (fPartGroupsStack.size () == 0) {
+#ifdef MF_TRACE_IS_ENABLED
+							if (gTraceOahGroup->getTracePartGroups ()) {
+								displayAllCollectedData (
+									inputLineNumber,
+								"the implicit outer-most part group isn't contained in any other");
+							}
+#endif // MF_TRACE_IS_ENABLED
+							std::stringstream ss;
+
+							ss <<
+								"there is no part group in the stack to contain part group " <<
+								partGroup->asString () <<
+								fCurrentPartID << "\"" ;
+
+							mxsr2msrInternalError (
+								gServiceRunData->getInputSourceName (),
+								stopInputLineNumber,
+								__FILE__, __LINE__,
+								ss.str ());
+						}
+
+// 							S_mxsrPartGroup
+// 								newMxsrPartGroupStackTop =
+// 									fPartGroupsStack.front ();
+//
+//               // partGroup is nested in newMxsrPartGroupStackTop,
+//               // do the nesting
+//               handlePartGroupsNesting (
+//                 stopInputLineNumber,
+//                 partGroup,
+//                 newMxsrPartGroupStackTop);
+					}
+				}
+
+				else {
+#ifdef MF_TRACE_IS_ENABLED
+					if (gTraceOahGroup->getTracePartGroups ()) {
+						displayAllCollectedData (
+							stopInputLineNumber,
+							"UPON overlapping part groups");
+					}
+#endif // MF_TRACE_IS_ENABLED
+
+					std::stringstream ss;
+
+					ss <<
+						std::endl <<
+						"There are overlapping part groups, namely: " <<
+						std::endl <<
+						gTab << partGroup->asString () <<
+						std::endl <<
+						"and" <<
+						std::endl <<
+						gTab << fPartGroupsStack.top ()->asString () <<
+						std::endl;
+
+/* JMI
+					// fetch the identitys in the intersection
+					int
+						startOne =
+							partGroup->getPartGroupIdentity (),
+						startTwo =
+							fPartGroupsStack.front ()->getPartGroupIdentity (),
+						stopOne =
+							partGroup->getStopIdentity(),
+						stopTwo =
+							fPartGroupsStack.front ()->getStopIdentity();
+
+					int firstCommonPosision = startOne;
+					if (startTwo > startOne) {
+						firstCommonPosision = startTwo;
+					}
+
+					int lastCommonPosision = stopOne;
+					if (stopTwo < stopOne) {
+						lastCommonPosision = stopTwo;
+					}
+
+					ss <<
+						std::endl <<
+						"The parts they share are:" <<
+						std::endl;
+
+					ss <<
+						"(identitys range is " <<
+						firstCommonPosision << ".." << lastCommonPosision <<
+						")" <<
+						std::endl;
+
+					for (int m = firstCommonPosision; m <= lastCommonPosision; ++m) {
+						S_msrPart
+							part =
+								fPartsVector [m];
+
+						ss <<
+							gTab <<
+							part->fetchPartCombinedName () <<
+							", line " << part->getInputStartLineNumber () <<
+							std::endl;
+					} // for
+*/
+
+#ifdef MF_TRACE_IS_ENABLED
+					if (gTraceOahGroup->getTracePartGroups ()) {
+						ss <<
+							std::endl <<
+							regex_replace (
+R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
+either you found a bug in the EXECUTABLE translator,
+or this MusicXML data is the first-ever real-world case
+of a score exhibiting overlapping part groups)",
+							std::regex ("EXECUTABLE"),
+							gOahOahGroup->getOahOahGroupServiceName ()) <<
+							", line " << inputLineNumber;
+
+						musicxmlError (
+							gServiceRunData->getInputSourceName (),
+							stopInputLineNumber,
+							__FILE__, __LINE__,
+							ss.str ());
+					}
+#endif // MF_TRACE_IS_ENABLED
+				}
+			} // for
+
+			--gIndenter;
+		}
+	}
+
+	// handle the part groups started at identity // JMI v0.9.69
+	handlePartGroupsStartAtIdentity (
+		inputLineNumber,
+		identity);
+
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTracePartGroups ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "AT identity" << identity;
+//
+//       displayAllCollectedData (
+//         inputLineNumber,
+//         ss.str ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+}
+
+//______________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocation (
   int inputLineNumber)
 {
@@ -1252,64 +1579,15 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	// sort the contents offStartedPartGroupsListsVector
+	// sort the contents of fStartedPartGroupsListsVector
 	// in decreasing identityorder
-	for (
-		S_mxsrPartGroupsList thePartGroupList :
-			fStartedPartGroupsListsVector
-	) {
-
-		// sort thePartGroupList in decreasing identityorder
-#ifdef MF_TRACE_IS_ENABLED
-		if (gTraceOahGroup->getTracePartGroups ()) {
-			std::stringstream ss;
-
-			ss <<
-				"Sorting the started part group list" <<
-				", line " << inputLineNumber ;
-
-			thePartGroupList->printWithContext (
-				"handleBOFPartGroupsNestingBOFAndScorePartsAllocation()",
-				'>',
-				ss);
-
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
-		}
-#endif // MF_TRACE_IS_ENABLED
-
-		thePartGroupList->sortByDecreasingIdentity();
-	} // for
+	sortfStartedPartGroupsListsVector (
+		inputLineNumber);
 
 	// sort the contents of fStoppedPartGroupsListsVector
 	// in decreasing identity order
-	for (S_mxsrPartGroupsList thePartGroupList : fStoppedPartGroupsListsVector) {
-		// sort thePartGroupList in decreasing identit yorder
-#ifdef MF_TRACE_IS_ENABLED
-		if (gTraceOahGroup->getTracePartGroups ()) {
-			std::stringstream ss;
-
-			ss <<
-				"Sorting the stopped part group list " <<
-				", line " << inputLineNumber <<
-				std::endl;
-
-			++gIndenter;
-			thePartGroupList->printWithContext (
-				"handleBOFPartGroupsNestingBOFAndScorePartsAllocation()",
-				'>',
-				ss);
-			--gIndenter;
-
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
-		}
-#endif // MF_TRACE_IS_ENABLED
-
-		thePartGroupList->sortByDecreasingIdentity();
-	} // for
+	sortStoppedPartGroupsListsVector (
+		inputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
 	if (gTraceOahGroup->getTracePartGroups ()) {
@@ -1319,10 +1597,9 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 	}
 #endif // MF_TRACE_IS_ENABLED
 
-  // handle each identityin turn in increasing order
+  // handle each identity in turn in increasing order
   for (int identity= 0; identity<= fCurrentPartGroupIdentity; ++identity) {
-
-//     if (identity> 0) {
+//     if (identity> 0) { JMI v0.9.72
 //       // parts actual identitys start at 1
       // append part to current part group, i.e. to the top of the stack
       S_msrPart
@@ -1359,252 +1636,11 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
           part);
 //     }
 
-    // handle the part groups groups stopped at identityidentity
-    if (fStoppedPartGroupsListsVector.size ()) {
-      S_mxsrPartGroupsList
-        stoppedPartGroupsList =
-          fStoppedPartGroupsListsVector [identity];
-
-      if (stoppedPartGroupsList->size ()) {
-        ++gIndenter;
-
-    		const std::list <S_mxsrPartGroup>&
-    			stoppedPartGroupsStdList =
-    				stoppedPartGroupsList->getMxsrPartGroupsStdList ();
-
-        for (S_mxsrPartGroup partGroup : stoppedPartGroupsStdList) {
-          int stopInputLineNumber =
-            partGroup->getStopInputLineNumber ();
-
-          S_msrPartGroup
-            theMsrPartGroup =
-              partGroup->getMsrPartGroup ();
-
-          // fetch the part group stack top
-					if (fPartGroupsStack.size () == 0) {
-            std::stringstream ss;
-
-            ss <<
-              "Cannot 'stop' part group " <<
-              partGroup->fetchMsrPartGroupCombinedName () <<
-              " at identity" << identity<<
-              ", since the stack is empty"<<
-							", line " << inputLineNumber;
-
-            musicxmlError (
-              gServiceRunData->getInputSourceName (),
-              stopInputLineNumber,
-              __FILE__, __LINE__,
-              ss.str ());
-          }
-
-          if (fPartGroupsStack.top () == partGroup) {
-            // pop partGroupToBeStopped from the stack
-
-#ifdef MF_TRACE_IS_ENABLED
-            if (gTraceOahGroup->getTracePartGroups ()) {
-              std::stringstream ss;
-
-              ss <<
-                "Popping part group " <<
-                partGroup->
-                  fetchMsrPartGroupCombinedName () <<
-                " from the stack" <<
-                ", line " << stopInputLineNumber;
-
-              gWaeHandler->waeTrace (
-                __FILE__, __LINE__,
-                ss.str ());
-            }
-#endif // MF_TRACE_IS_ENABLED
-
-            fPartGroupsStack.pop ();
-
-            // the implicit outer-most part group isn't contained in any other
-            if (partGroup != fImplicitOuterMostPartGroup) {
-              // fetch new current part group JMI v0.9.69
-							if (fPartGroupsStack.size () == 0) {
-#ifdef MF_TRACE_IS_ENABLED
-								if (gTraceOahGroup->getTracePartGroups ()) {
-									displayAllCollectedData (
-										inputLineNumber,
-									"the implicit outer-most part group isn't contained in any other");
-								}
-#endif // MF_TRACE_IS_ENABLED
-                std::stringstream ss;
-
-                ss <<
-                  "there is no part group in the stack to contain part group " <<
-                  partGroup->asString () <<
-                  fCurrentPartID << "\"" ;
-
-                mxsr2msrInternalError (
-                  gServiceRunData->getInputSourceName (),
-                  stopInputLineNumber,
-                  __FILE__, __LINE__,
-                  ss.str ());
-              }
-
-// 							S_mxsrPartGroup
-// 								newMxsrPartGroupStackTop =
-// 									fPartGroupsStack.front ();
-//
-//               // partGroup is nested in newMxsrPartGroupStackTop,
-//               // do the nesting
-//               handlePartGroupsNesting (
-//                 stopInputLineNumber,
-//                 partGroup,
-//                 newMxsrPartGroupStackTop);
-            }
-          }
-
-          else {
-#ifdef MF_TRACE_IS_ENABLED
-            if (gTraceOahGroup->getTracePartGroups ()) {
-              displayAllCollectedData (
-                stopInputLineNumber,
-                "UPON overlapping part groups");
-            }
-#endif // MF_TRACE_IS_ENABLED
-
-            std::stringstream ss;
-
-            ss <<
-              std::endl <<
-              "There are overlapping part groups, namely: " <<
-              std::endl <<
-              gTab << partGroup->asString () <<
-              std::endl <<
-              "and" <<
-              std::endl <<
-              gTab << fPartGroupsStack.top ()->asString () <<
-              std::endl;
-
-/* JMI
-            // fetch the identitys in the intersection
-            int
-              startOne =
-                partGroup->getPartGroupIdentity (),
-              startTwo =
-                fPartGroupsStack.front ()->getPartGroupIdentity (),
-              stopOne =
-                partGroup->getStopIdentity(),
-              stopTwo =
-                fPartGroupsStack.front ()->getStopIdentity();
-
-            int firstCommonPosision = startOne;
-            if (startTwo > startOne) {
-              firstCommonPosision = startTwo;
-            }
-
-            int lastCommonPosision = stopOne;
-            if (stopTwo < stopOne) {
-              lastCommonPosision = stopTwo;
-            }
-
-            ss <<
-              std::endl <<
-              "The parts they share are:" <<
-              std::endl;
-
-            ss <<
-              "(identitys range is " <<
-              firstCommonPosision << ".." << lastCommonPosision <<
-              ")" <<
-              std::endl;
-
-            for (int m = firstCommonPosision; m <= lastCommonPosision; ++m) {
-              S_msrPart
-                part =
-                  fPartsVector [m];
-
-              ss <<
-                gTab <<
-                part->fetchPartCombinedName () <<
-                ", line " << part->getInputStartLineNumber () <<
-                std::endl;
-            } // for
-*/
-
-            ss <<
-              std::endl <<
-              regex_replace (
-R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
-  either you found a bug in the EXECUTABLE translator,
-  or this MusicXML data is the first-ever real-world case
-  of a score exhibiting overlapping part groups)",
-              std::regex ("EXECUTABLE"),
-              gOahOahGroup->getOahOahGroupServiceName ()) <<
-							", line " << inputLineNumber;
-
-            musicxmlError (
-              gServiceRunData->getInputSourceName (),
-              stopInputLineNumber,
-              __FILE__, __LINE__,
-              ss.str ());
-          }
-        } // for
-
-        --gIndenter;
-      }
-    }
-
-    // handle the part groups started at identityidentity // JMI v0.9.69
-    if (fStartedPartGroupsListsVector.size ()) {
-      S_mxsrPartGroupsList
-        startedMxsrPartGroupsList =
-          fStartedPartGroupsListsVector [identity];
-
-      if (startedMxsrPartGroupsList->size ()) {
-        ++gIndenter;
-
-    		const std::list <S_mxsrPartGroup>&
-    			startedPartGroupsStdList =
-    				startedMxsrPartGroupsList->getMxsrPartGroupsStdList ();
-
-        for (S_mxsrPartGroup partGroup : startedPartGroupsStdList) {
-          S_msrPartGroup
-            theMsrPartGroup =
-              partGroup->getMsrPartGroup ();
-
-          // make it the new current part group
-#ifdef MF_TRACE_IS_ENABLED
-          if (gTraceOahGroup->getTracePartGroups ()) {
-            std::stringstream ss;
-
-            ss <<
-              "Pushing part group " <<
-              partGroup->asString () <<
-              " onto the part groups stack" <<
-              ", line " << inputLineNumber;
-
-            gWaeHandler->waeTrace (
-              __FILE__, __LINE__,
-              ss.str ());
-          }
-#endif // MF_TRACE_IS_ENABLED
-
-          fPartGroupsStack.push (
-            partGroup);
-        } // for
-
-        --gIndenter;
-      }
-    }
-
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTracePartGroups ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "AT identity" << identity;
-//
-//       displayAllCollectedData (
-//         inputLineNumber,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-  } // for
+    // handle the part groups groups stopped at identity
+    handleThePartGroupsStoppedAtIdentity (
+    	inputLineNumber,
+    	identity);
+	}
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {

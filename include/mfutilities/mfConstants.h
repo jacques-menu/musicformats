@@ -87,7 +87,7 @@ EXP extern std::string mfMeasureNumberAsString (std::string measureNumber);
 
 constexpr int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = 0;
 
-EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN____;
+EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_;
 
 EXP extern const std::string
   kWholeNotePrefix,
@@ -121,13 +121,6 @@ EXP extern std::string mfStanzaNumberAsString (std::string stanzaNumber);
 //______________________________________________________________________________
 
 constexpr int K_MF_NAMES_LIST_MAX_LENGTH = 50;
-
-// OAH layout settings
-//______________________________________________________________________________
-constexpr int K_OAH_ELEMENTS_INDENTER_OFFSET = 3;
-  // indent a bit more for readability
-
-constexpr int K_OAH_FIELD_WIDTH = 40;
 
 
 }

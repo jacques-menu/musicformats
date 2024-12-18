@@ -14,9 +14,9 @@
 
 #include <regex>
 
-#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "msdl2brailleManPageOah.h"

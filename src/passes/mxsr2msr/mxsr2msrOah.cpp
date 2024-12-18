@@ -17,14 +17,14 @@
 
 #include "oahWae.h"
 
-#include "mfPreprocessorSettings.h"
-
 #include "mfConstants.h"
+#include "mfPreprocessorSettings.h"
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
 #include "mxsr2msrOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "waeHandlers.h"
@@ -525,6 +525,10 @@ void mxsr2msrOahGroup::createTheMxsr2msrPrefixes (
 
 void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
 {
+  // display
+  // --------------------------------------
+  initializeMxsr2msrDisplayOptions ();
+
 #ifdef MF_TRACE_IS_ENABLED
   // trace
   // --------------------------------------
@@ -576,6 +580,35 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
   initializeMxsr2msrCombinedOptionsOptions ();
 }
 
+
+void mxsr2msrOahGroup::initializeMxsr2msrDisplayOptions ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "mxsr2msr Trace",
+        "help-mxsr-to-oah-trace", "hmxsr2ot",
+R"()",
+        oahElementVisibilityKind::kElementVisibilityWhole,
+        this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // display MusicXML tree
+
+  fDisplayMxsrAtom =
+    oahBooleanAtom::create (
+      "display-mxsr", "dmxsr",
+R"(Write the contents of the MXSR data to standard error.)",
+      "fDisplayMxsr",
+      fDisplayMxsr);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fDisplayMxsrAtom);
+}
+
+#ifdef MF_TRACE_IS_ENABLED
 void mxsr2msrOahGroup::initializeMxsr2msrTraceOptions ()
 {
   S_oahSubGroup
@@ -588,6 +621,21 @@ R"()",
         this);
 
   appendSubGroupToGroup (subGroup);
+
+  // display MusicXML tree with passes information
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahTwoBooleansAtom::create (
+        "display-mxsr-and-passes", "dmxsrap",
+R"(Write the contents of the MXSR data to standard error.
+This option implies '-display-mxsr, -dmxsr'
+and '-trace-passes, -tpasses'.')",
+        "fDisplayMxsr",
+        fDisplayMxsr,
+        gTraceOahGroup->getTracePassesBooleanAtom ()));
+
+//      fDisplayMxsrAtom);
 
   // the 'MusicXML' multiplex booleans atom
 
@@ -677,17 +725,6 @@ R"(Write a trace of the MusicXML tree activity to standard error.)",
         "fTraceMxsr",
         fTraceMxsr));
 
-  // display MusicXML tree
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-mxsr", "dmxsr",
-R"(Write the contents of the MXSR data to standard error.)",
-        "fDisplayMxsr",
-        fDisplayMxsr,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
-
   // MusicXML tree visiting
 
   subGroup->
@@ -698,6 +735,7 @@ R"(Write a trace of the MusicXML tree visiting activity to standard error.)",
         "fTraceMxsrVisitors",
         fTraceMxsrVisitors));
 }
+#endif // MF_TRACE_IS_ENABLED
 
 void mxsr2msrOahGroup::initializeMxsr2msrEventsOptions ()
 {

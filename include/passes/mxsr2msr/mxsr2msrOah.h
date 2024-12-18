@@ -317,7 +317,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
                           getBoldWordsAtom () const
                               { return fBoldWordsAtom; }
 
-    const std::set <std::string>&    getItalicWordsSet () const
+    const std::set <std::string>&
+                          getItalicWordsSet () const
                               { return fItalicWordsSet; }
     S_oahStringSetElementAtom
                           getItalicWordsAtom () const
@@ -402,7 +403,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
                           getWordsToDecrescAtom () const
                               { return fWordsToDecrescAtom; }
 
-// ties
+    // ties
     // --------------------------------------
 
     Bool                  getIgnoreTies () const
@@ -487,13 +488,19 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  getTraceForward () const
                               { return fTraceForward; }
 
-    // specific trace JMI move to traceOah
+    // display
     // --------------------------------------
 
     void                  setDisplayMxsr ()
                               { fDisplayMxsr = true; }
     Bool                  getDisplayMxsr () const
                               { return fDisplayMxsr; }
+
+    S_oahBooleanAtom      getDisplayMxsrAtom () const
+                            { return fDisplayMxsrAtom; }
+
+    // specific trace JMI move to traceOah
+    // --------------------------------------
 
     void                  setTraceMxsr ()
                               { fTraceMxsr = true; }
@@ -558,6 +565,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // private services
     // ------------------------------------------------------
 
+    void                  initializeMxsr2msrDisplayOptions ();
+
 #ifdef MF_TRACE_IS_ENABLED
     void                  initializeMxsr2msrTraceOptions ();
 #endif // MF_TRACE_IS_ENABLED
@@ -612,7 +621,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // private fields
     // ------------------------------------------------------
 
-    // use MXSR events (temporary from v0.9.72)
+    // use MXSR events
     // --------------------------------------
 
     Bool                  fUseMxsrEvents;
@@ -860,6 +869,11 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     Bool                  fCubase;
 
+    // display MXSR
+    // --------------------------------------
+
+    Bool                  fDisplayMxsr;
+    S_oahBooleanAtom      fDisplayMxsrAtom;
 
 #ifdef MF_TRACE_IS_ENABLED
     // specific trace
@@ -876,8 +890,6 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     // specific trace JMI move to traceOah JMI ??? v0.9.70
     // --------------------------------------
-
-    Bool                  fDisplayMxsr;
 
     Bool                  fTraceMxsr;
 

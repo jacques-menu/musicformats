@@ -448,7 +448,7 @@ typedef mfValueWithNeutralValue
 //______________________________________________________________________________
 // whole notes durations
 typedef mfValueWithNeutralValue
-  <msrWholeNotes, kWholeNotePrefix, K_WHOLE_NOTES_UNKNOWN____, kWholeNoteNeutralValueString>
+  <msrWholeNotes, kWholeNotePrefix, K_WHOLE_NOTES_UNKNOWN_, kWholeNoteNeutralValueString>
     mfWohleNotes;
 
 //______________________________________________________________________________

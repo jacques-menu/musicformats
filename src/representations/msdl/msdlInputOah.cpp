@@ -19,9 +19,8 @@
 
 #include "oahWae.h"
 
-#include "mfPreprocessorSettings.h"
-
 #include "mfConstants.h"
+#include "mfPreprocessorSettings.h"
 #include "mfStringsHandling.h"
 
 #include "msrPitchesNames.h"
@@ -31,6 +30,7 @@
 #include "msdlInputOah.h"
 #include "msdl2msrOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "msdlTokens.h"

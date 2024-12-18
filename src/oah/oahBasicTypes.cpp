@@ -27,6 +27,8 @@
 #include "mfTraceOah.h"
 
 #include "oahOah.h"
+
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "waeOah.h"

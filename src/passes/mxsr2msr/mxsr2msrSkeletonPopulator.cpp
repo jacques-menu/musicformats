@@ -19,6 +19,8 @@
 #include "msrRehearsalMarks.h"
 #include "msrVoiceStaffChanges.h"
 
+#include "oahOah.h"
+
 #include "waeOah.h"
 
 #include "mxsr2msrOah.h"
@@ -24244,6 +24246,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAnyBeforeNoteCrea
     }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
     int
       noteSequentialNumber =
         fCurrentNoteStaffChangeTakeOff->
@@ -24254,7 +24257,6 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAnyBeforeNoteCrea
         fCurrentNoteStaffChangeTakeOff->
           getEventInputStartLineNumber ();
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
     // sanity checks
     if (noteSequentialNumber != fCurrentNoteSequentialNumber) {
       std::stringstream ss;
@@ -24316,11 +24318,6 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 {
   if (staffChangeTakeOffEvent) {
     int
-      noteSequentialNumber =
-        staffChangeTakeOffEvent->
-          getNoteSequentialNumber ();
-
-    int
       eventInputStartLineNumber =
         staffChangeTakeOffEvent->
           getEventInputStartLineNumber ();
@@ -24343,6 +24340,11 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 
 
 #ifdef MF_TRACE_IS_ENABLED
+    int
+      noteSequentialNumber =
+        staffChangeTakeOffEvent->
+          getNoteSequentialNumber ();
+
     gLog <<
       "There is a staff change createStaffChange():" <<
       std::endl <<
@@ -24782,6 +24784,7 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEventsIfAnyAfterNoteCreation ()
 
   // handling the tuplet begin events
   for (S_mxsrTupletEvent tupletEvent : tupletBeginsList) {
+#ifdef MF_TRACE_IS_ENABLED
     mxsrTupletEventKind
       tupletEventKind =
         tupletEvent->getTupletEventKind ();
@@ -24790,7 +24793,6 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEventsIfAnyAfterNoteCreation ()
       tupletNumber =
         tupletEvent->getTupletNumber ();
 
-#ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTupletsBasics ()) {
       std::stringstream ss;
 

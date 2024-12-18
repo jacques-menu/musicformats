@@ -199,7 +199,7 @@ message (STATUS "-----> MF_CLI_SAMPLES_DIR: ${MF_CLI_SAMPLES_DIR}")
 # message (STATUS "-----> MF_CLI_SERVICES_DIR: ${MF_CLI_SERVICES_DIR}")
 
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mflibrary components languages oah wae manpage services)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} mfutilities components languages oah wae manpage services)
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} interpreters/stringmatcherinterpreter interpreters/mfslinterpreter interpreters/ischemeinterpreter)
 

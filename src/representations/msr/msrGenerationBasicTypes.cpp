@@ -18,6 +18,7 @@
 #include "mfConstants.h"
 #include "mfStringsHandling.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "msrGenerationBasicTypes.h"

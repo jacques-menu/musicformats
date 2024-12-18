@@ -215,9 +215,6 @@ EXP msrWholeNotes msrNotesDurationKindAsWholeNotes (
 EXP msrNotesDurationKind wholeNotesAsNotesDurationKind (msrWholeNotes wholeNotes);
 
 //______________________________________________________________________________
-EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_;
-
-//______________________________________________________________________________
 std::string wholeNotesAndDotsNumberPitchAndOctaveAsString ( // JMI v0.9.67
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes,

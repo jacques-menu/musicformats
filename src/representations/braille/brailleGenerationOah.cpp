@@ -19,7 +19,6 @@
 
 #include "mfPreprocessorSettings.h"
 
-#include "mfConstants.h"
 #include "mfOutputFileOah.h"
 #include "mfStringsHandling.h"
 
@@ -27,6 +26,7 @@
 
 #include "brailleGenerationOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "waeHandlers.h"

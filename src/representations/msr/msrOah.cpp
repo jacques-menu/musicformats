@@ -18,13 +18,13 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfPreprocessorSettings.h"
-
 #include "mfConstants.h"
+#include "mfPreprocessorSettings.h"
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "msrOah.h"
@@ -748,53 +748,6 @@ R"(These options control the way MSR data is handled.)",
 msrOahGroup::~msrOahGroup ()
 {}
 
-#ifdef MF_TRACE_IS_ENABLED
-void msrOahGroup::initializeMsrTraceOah ()
-{
-  S_oahSubGroup subGroup =
-    oahSubGroup::create (
-      "MSR Trace",
-      "help-msr-trace", "hmsrt",
-R"()",
-    oahElementVisibilityKind::kElementVisibilityWhole,
-    this);
-
-  appendSubGroupToGroup (subGroup);
-
-  // MSR
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "trace-msr", "tmsr",
-R"(Write a trace of the LPSR graphs visiting activity to standard error.)",
-        "fTraceMsr",
-        fTraceMsr,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
-
-  // MSR visitors
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "trace-msr-visitors", "tmsrvis",
-R"(Write a trace of the MSR graphs visiting activity to standard error.)",
-        "fTraceMsrVisitors",
-        fTraceMsrVisitors,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
-
-  // MSR durations
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "trace-msr-durations", "tmsrd",
-R"(Write a trace of the MSR durations handling activity to standard error.)",
-        "fTraceMsrNotesDurations",
-        fTraceMsrNotesDurations));
-}
-#endif // MF_TRACE_IS_ENABLED
-
 void msrOahGroup::initializeMsrDisplayOptions ()
 {
   S_oahSubGroup subGroup =
@@ -811,56 +764,51 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-part-groups", "dpartgroups",
 R"(Write the structure of the part groups to standard error.)",
         "fDisplayPartGroups",
-        fDisplayPartGroups,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplayPartGroups));
 
   // display MSR skeleton
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1-skeleton", "dmsr1skel",
 R"(Write the contents of the first MSR skeleton data to standard error.)",
         "fDisplayMsrSkeleton",
-        fDisplayMsrSkeleton,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplayMsrSkeleton));
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1-skeleton-full", "dmsr1skelfull",
 R"(Write the contents of the first MSR skeleton data, full version, to standard error.)",
         "fDisplayMsrSkeletonFull",
-        fDisplayMsrSkeletonFull,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplayMsrSkeletonFull));
 
   // display first MSR
 
-  S_oahTwoBooleansAtom
+  S_oahBooleanAtom
     displayFirstMsrBooleanAtom =
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1", "dmsr1",
 R"(Write the contents of the first MSR data to standard error.)",
         "fDisplayFirstMsr",
-        fDisplayFirstMsr,
-        gTraceOahGroup->getTracePassesBooleanAtom ());
+        fDisplayFirstMsr);
 
   subGroup->
     appendAtomToSubGroup (
       displayFirstMsrBooleanAtom);
 
-  S_oahTwoBooleansAtom
+  S_oahBooleanAtom
     displayFirstMsrFullBooleanAtom =
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1-full", "dmsr1full",
 R"(Write the contents of the first MSR data, full version, to standard error.)",
         "fDisplayFirstMsrFull",
-        fDisplayFirstMsrFull,
-        gTraceOahGroup->getTracePassesBooleanAtom ());
+        fDisplayFirstMsrFull);
 
   subGroup->
     appendAtomToSubGroup (
@@ -870,34 +818,31 @@ R"(Write the contents of the first MSR data, full version, to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1-measures-slices", "dmsr1measslices",
 R"(Write the contents of the first MSR data slices to standard error.)",
         "fDisplayFirstMsrMeasuresSlices",
-        fDisplayFirstMsrMeasuresSlices,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplayFirstMsrMeasuresSlices));
 
   // display first MSR slices details
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1-measures-slices-details", "dmsr1measslicesd",
 R"(Write the contents of the first MSR data slices to standard error.)",
         "fDisplayFirstMsrMeasuresSlicesDetails",
-        fDisplayFirstMsrMeasuresSlicesDetails,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplayFirstMsrMeasuresSlicesDetails));
 
   // display second MSR
 
-  S_oahTwoBooleansAtom
+  S_oahBooleanAtom
     displaySecondMsrBooleanAtom =
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr2", "dmsr2",
 R"(Write the contents of the second MSR data to standard error.)",
         "fDisplaySecondMsr",
-        fDisplaySecondMsr,
-        gTraceOahGroup->getTracePassesBooleanAtom ());
+        fDisplaySecondMsr);
 
   subGroup->
     appendAtomToSubGroup (
@@ -907,88 +852,81 @@ R"(Write the contents of the second MSR data to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr2-full", "dmsr2full",
 R"(Write the contents of the second MSR data, full version, to standard error.)",
         "fDisplaySecondMsrFull",
-        fDisplaySecondMsrFull,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplaySecondMsrFull));
 
   // display second MSR slices
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr2-measures-slices", "dmsr2measslices",
 R"(Write the contents of the second MSR data slices to standard error.)",
         "fDisplaySecondMsrMeasuresSlices",
-        fDisplaySecondMsrMeasuresSlices,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplaySecondMsrMeasuresSlices));
 
   // display second MSR slices details
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr2-measures-slices-details", "dmsr2measslicesd",
 R"(Write the contents of the second MSR data slices to standard error.)",
         "fDisplaySecondMsrMeasuresSlicesDetails",
-        fDisplaySecondMsrMeasuresSlicesDetails,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplaySecondMsrMeasuresSlicesDetails));
 
   // display first MSR names
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1-names", "dmsr1names",
 R"(Only write a view of the names in the first MSR to standard error.
 This implies that no LilyPond code is generated.)",
         "fDisplayFirstMsrNames",
-        fDisplayFirstMsrNames,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplayFirstMsrNames));
 
   // display second MSR names
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr2-names", "dmsr2names",
 R"(Only write a view of the names in the second MSR to standard error.
 This implies that no LilyPond code is generated.)",
         "fDisplaySecondMsrNames",
-        fDisplaySecondMsrNames,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplaySecondMsrNames));
 
   // display first MSR summary
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1-summary", "dmsr1sum",
 R"(Only write a summary of the first MSR to standard error.
 This implies that no LilyPond code is generated.)",
         "fDisplayFirstMsrSummary",
-        fDisplayFirstMsrSummary,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplayFirstMsrSummary));
 
   // display second MSR summary
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr2-summary", "dmsr2sum",
 R"(Only write a summary of the second MSR to standard error.
 This implies that no LilyPond code is generated.)",
         "fDisplaySecondMsrSummary",
-        fDisplaySecondMsrSummary,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplaySecondMsrSummary));
 
   // display first MSR flat view
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1-voices-flat-view", "dmsr1voicesflatview",
 R"(Only write a voices flat view of the first MSR to standard error.
 The output looks like:
@@ -996,14 +934,13 @@ The output looks like:
 where the number after ':' is the octave number.
 This option implies that no LilyPond code is generated.)",
         "fDisplayFirstMsrFlatView",
-        fDisplayFirstMsrFlatView,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplayFirstMsrFlatView));
 
   // display first MSR flat view details
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr1-voices-flat-view-details", "dmsr1voicesflatviewd",
 R"(Only write a voices flat view of the first MSR to standard error,
 with more details.
@@ -1016,14 +953,13 @@ where '@' indicates the position in the measure
 and the number after ':' is the octave number.
 This option implies that no LilyPond code is generated.)",
         "fDisplayFirstMsrFlatViewDetails",
-        fDisplayFirstMsrFlatViewDetails,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplayFirstMsrFlatViewDetails));
 
   // display second MSR flat view
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr2-voices-flat-view", "dmsr2voicesflatview",
 R"(Only write a voices flat view of the second MSR to standard error.
 The output looks like:
@@ -1031,14 +967,13 @@ The output looks like:
 where the number after ':' is the octave number.
 This option implies that no LilyPond code is generated.)",
         "fDisplaySecondMsrFlatView",
-        fDisplaySecondMsrFlatView,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplaySecondMsrFlatView));
 
   // display second MSR flat view details
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahBooleanAtom::create (
         "display-msr2-voices-flat-view-details", "dmsr2voicesflatviewd",
 R"(Only write a voices flat view of the second MSR to standard error,
 with more details.
@@ -1051,9 +986,251 @@ where '@' indicates the position in the measure
 and the number after ':' is the octave number.
 This option implies that no LilyPond code is generated.)",
         "fDisplaySecondMsrFlatViewDetails",
-        fDisplaySecondMsrFlatViewDetails,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
+        fDisplaySecondMsrFlatViewDetails));
 }
+
+#ifdef MF_TRACE_IS_ENABLED
+void msrOahGroup::initializeMsrTraceOah ()
+{
+  S_oahSubGroup subGroup =
+    oahSubGroup::create (
+      "Display",
+      "help-msr-trace-and-display", "hmsrtd",
+R"()",
+    oahElementVisibilityKind::kElementVisibilityWhole,
+    this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // display partgroups
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-part-groups", "dpartgroups",
+R"(Write the structure of the part groups to standard error.)",
+        "fDisplayPartGroups",
+        fDisplayPartGroups));
+
+  // display MSR skeleton
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr1-skeleton", "dmsr1skel",
+R"(Write the contents of the first MSR skeleton data to standard error.)",
+        "fDisplayMsrSkeleton",
+        fDisplayMsrSkeleton));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr1-skeleton-full", "dmsr1skelfull",
+R"(Write the contents of the first MSR skeleton data, full version, to standard error.)",
+        "fDisplayMsrSkeletonFull",
+        fDisplayMsrSkeletonFull));
+
+  // display first MSR
+
+  S_oahBooleanAtom
+    displayFirstMsrBooleanAtom =
+      oahBooleanAtom::create (
+        "display-msr1", "dmsr1",
+R"(Write the contents of the first MSR data to standard error.)",
+        "fDisplayFirstMsr",
+        fDisplayFirstMsr);
+
+  subGroup->
+    appendAtomToSubGroup (
+      displayFirstMsrBooleanAtom);
+
+  S_oahBooleanAtom
+    displayFirstMsrFullBooleanAtom =
+      oahBooleanAtom::create (
+        "display-msr1-full", "dmsr1full",
+R"(Write the contents of the first MSR data, full version, to standard error.)",
+        "fDisplayFirstMsrFull",
+        fDisplayFirstMsrFull);
+
+  subGroup->
+    appendAtomToSubGroup (
+      displayFirstMsrFullBooleanAtom);
+
+  // display first MSR slices
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr1-measures-slices", "dmsr1measslices",
+R"(Write the contents of the first MSR data slices to standard error.)",
+        "fDisplayFirstMsrMeasuresSlices",
+        fDisplayFirstMsrMeasuresSlices));
+
+  // display first MSR slices details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr1-measures-slices-details", "dmsr1measslicesd",
+R"(Write the contents of the first MSR data slices to standard error.)",
+        "fDisplayFirstMsrMeasuresSlicesDetails",
+        fDisplayFirstMsrMeasuresSlicesDetails));
+
+  // display second MSR
+
+  S_oahBooleanAtom
+    displaySecondMsrBooleanAtom =
+      oahBooleanAtom::create (
+        "display-msr2", "dmsr2",
+R"(Write the contents of the second MSR data to standard error.)",
+        "fDisplaySecondMsr",
+        fDisplaySecondMsr);
+
+  subGroup->
+    appendAtomToSubGroup (
+      displaySecondMsrBooleanAtom);
+
+  // display second MSR full
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr2-full", "dmsr2full",
+R"(Write the contents of the second MSR data, full version, to standard error.)",
+        "fDisplaySecondMsrFull",
+        fDisplaySecondMsrFull));
+
+  // display second MSR slices
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr2-measures-slices", "dmsr2measslices",
+R"(Write the contents of the second MSR data slices to standard error.)",
+        "fDisplaySecondMsrMeasuresSlices",
+        fDisplaySecondMsrMeasuresSlices));
+
+  // display second MSR slices details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr2-measures-slices-details", "dmsr2measslicesd",
+R"(Write the contents of the second MSR data slices to standard error.)",
+        "fDisplaySecondMsrMeasuresSlicesDetails",
+        fDisplaySecondMsrMeasuresSlicesDetails));
+
+  // display first MSR names
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr1-names", "dmsr1names",
+R"(Only write a view of the names in the first MSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayFirstMsrNames",
+        fDisplayFirstMsrNames));
+
+  // display second MSR names
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr2-names", "dmsr2names",
+R"(Only write a view of the names in the second MSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplaySecondMsrNames",
+        fDisplaySecondMsrNames));
+
+  // display first MSR summary
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr1-summary", "dmsr1sum",
+R"(Only write a summary of the first MSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayFirstMsrSummary",
+        fDisplayFirstMsrSummary));
+
+  // display second MSR summary
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr2-summary", "dmsr2sum",
+R"(Only write a summary of the second MSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplaySecondMsrSummary",
+        fDisplaySecondMsrSummary));
+
+  // display first MSR flat view
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr1-voices-flat-view", "dmsr1voicesflatview",
+R"(Only write a voices flat view of the first MSR to standard error.
+The output looks like:
+  s4-unpitched c4-o:5 d4-o:5 e4-o:5
+where the number after ':' is the octave number.
+This option implies that no LilyPond code is generated.)",
+        "fDisplayFirstMsrFlatView",
+        fDisplayFirstMsrFlatView));
+
+  // display first MSR flat view details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr1-voices-flat-view-details", "dmsr1voicesflatviewd",
+R"(Only write a voices flat view of the first MSR to standard error,
+with more details.
+The output looks like:
+  @0/1: s4-unpitched, line 52
+  @1/4: c4-o:5, line 62
+  @1/2: d4-o:5, line 72
+  @3/4: e4-o:5, line 82
+where '@' indicates the position in the measure
+and the number after ':' is the octave number.
+This option implies that no LilyPond code is generated.)",
+        "fDisplayFirstMsrFlatViewDetails",
+        fDisplayFirstMsrFlatViewDetails));
+
+  // display second MSR flat view
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr2-voices-flat-view", "dmsr2voicesflatview",
+R"(Only write a voices flat view of the second MSR to standard error.
+The output looks like:
+  s4-unpitched c4-o:5 d4-o:5 e4-o:5
+where the number after ':' is the octave number.
+This option implies that no LilyPond code is generated.)",
+        "fDisplaySecondMsrFlatView",
+        fDisplaySecondMsrFlatView));
+
+  // display second MSR flat view details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr2-voices-flat-view-details", "dmsr2voicesflatviewd",
+R"(Only write a voices flat view of the second MSR to standard error,
+with more details.
+The output looks like:
+  @0/1: s4-unpitched, line 52
+  @1/4: c4-o:5, line 62
+  @1/2: d4-o:5, line 72
+  @3/4: e4-o:5, line 82
+where '@' indicates the position in the measure
+and the number after ':' is the octave number.
+This option implies that no LilyPond code is generated.)",
+        "fDisplaySecondMsrFlatViewDetails",
+        fDisplaySecondMsrFlatViewDetails));
+}
+#endif // MF_TRACE_IS_ENABLED
 
 void msrOahGroup::initializeMsrLanguagesOptions ()
 {

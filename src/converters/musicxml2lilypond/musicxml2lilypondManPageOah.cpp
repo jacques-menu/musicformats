@@ -14,11 +14,11 @@
 
 #include <regex>
 
-#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "musicxml2lilypondManPageOah.h"

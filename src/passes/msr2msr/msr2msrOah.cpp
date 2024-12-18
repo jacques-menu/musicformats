@@ -16,7 +16,6 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
 #include "mfStringsHandling.h"
 
@@ -25,6 +24,7 @@
 #include "msrOah.h"
 #include "msr2msrOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "waeHandlers.h"

@@ -16,8 +16,6 @@
 
 #include "visitor.h"
 
-#include "mfConstants.h"
-
 #include "oahWae.h"
 
 #include "oahOah.h"
@@ -26,6 +24,7 @@
 
 #include "lpsrOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "waeHandlers.h"

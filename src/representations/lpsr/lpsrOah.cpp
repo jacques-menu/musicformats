@@ -19,9 +19,8 @@
 
 #include "oahWae.h"
 
-#include "mfPreprocessorSettings.h"
-
 #include "mfConstants.h"
+#include "mfPreprocessorSettings.h"
 #include "mfStringsHandling.h"
 
 #include "msrPitchesNames.h"
@@ -30,6 +29,7 @@
 
 #include "lpsrOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "waeHandlers.h"
@@ -1303,6 +1303,141 @@ R"(These options control the way LPSR data is handled.)",
 lpsrOahGroup::~lpsrOahGroup ()
 {}
 
+void lpsrOahGroup::initializeLpsrDisplayOptions ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Display",
+        "help-lpsr-display", "hlpsrd",
+R"()",
+      oahElementVisibilityKind::kElementVisibilityWhole,
+      this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // display LPSR
+
+  S_oahBooleanAtom
+    displayLpsrBooleanAtom =
+      oahBooleanAtom::create (
+        "display-lpsr", "dlpsr",
+R"(Write the contents of the LPSR data to standard error.)",
+        "fDisplayLpsr",
+        fDisplayLpsr);
+
+  subGroup->
+    appendAtomToSubGroup (
+      displayLpsrBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-lpsr-full", "dlpsrfull",
+R"(Write the contents of the LPSR data with its full MSR component to standard error.)",
+        "fDisplayLpsrFull",
+        fDisplayLpsrFull));
+
+  // display the MSR embeded in the LPSR
+
+  S_oahBooleanAtom
+    displayLpsrEmbeddedMsrBooleanAtom =
+      oahBooleanAtom::create (
+        "display-lpsr-embedded-msr", "dlpsrembedmsr",
+R"(Write the contents of the MSR embedded in the LPSR data to standard error.)",
+        "fDisplayLpsrEmbeddedMsr",
+        fDisplayLpsrEmbeddedMsr);
+
+  subGroup->
+    appendAtomToSubGroup (
+      displayLpsrEmbeddedMsrBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahValueLessAtomAlias::create (
+        "display-msr3", "dmsr3",
+R"(Write the MSR component of the LPSR data to standard error.
+This option is an alias for '-dlpsrembedmsr, -dlpsrembedmsr'.)",
+        displayLpsrEmbeddedMsrBooleanAtom));
+
+  // display LPSR names
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-lpsr-names", "dlpsrnames",
+R"(Only write a view of the names in the LPSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrNames",
+        fDisplayLpsrNames));
+
+  // display LPSR summary
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-lpsr-summary", "dlpsrsum",
+R"(Only write a summary of the LPSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrSummary",
+        fDisplayLpsrSummary));
+
+  // display LPSR flat view
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-lpsr-voices-flat-view", "dlpsrvoicesflatview",
+R"(Only write a voices flat view of the LPSR to standard error.
+The output looks like:
+  s4-unpitched c4-o:5 d4-o:5 e4-o:5
+where the number after ':' is the octave number.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrFlatView",
+        fDisplayLpsrFlatView));
+
+  // display LPSR flat view Details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-lpsr-voices-flat-view-details", "dlpsrvoicesflatviewd",
+R"(Only write a voices flat view of the LPSR to standard error
+with more details.
+The output looks like:
+  @0/1: s4-unpitched, line 52
+  @1/4: c4-o:5, line 62
+  @1/2: d4-o:5, line 72
+  @3/4: e4-o:5, line 82
+where the number after ':' is the octave number.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrFlatViewDetails",
+        fDisplayLpsrFlatViewDetails));
+
+  // display LPSR slices
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-lpsr-measures-slices", "dlpsrmeasslices",
+R"(Only write the measures slices of the LPSR to standard error.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrMeasuresSlices",
+        fDisplayLpsrMeasuresSlices));
+
+  // display LPSR slices details
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-lpsr-measures-slices-details", "dlpsrmeasslicesd",
+R"(Only write the measures slices of the LPSR to standard error
+with more details.
+This implies that no LilyPond code is generated.)",
+        "fDisplayLpsrMeasuresSlicesDetails",
+        fDisplayLpsrMeasuresSlicesDetails));
+}
+
 #ifdef MF_TRACE_IS_ENABLED
 void lpsrOahGroup::initializeLpsrTraceOah ()
 {
@@ -1368,147 +1503,6 @@ R"(Write a trace of the activity regarding Scheme functions to standard error.)"
         fTraceSchemeFunctions));
 }
 #endif // MF_TRACE_IS_ENABLED
-
-void lpsrOahGroup::initializeLpsrDisplayOptions ()
-{
-  S_oahSubGroup
-    subGroup =
-      oahSubGroup::create (
-        "Display",
-        "help-lpsr-display", "hlpsrd",
-R"()",
-      oahElementVisibilityKind::kElementVisibilityWhole,
-      this);
-
-  appendSubGroupToGroup (subGroup);
-
-  // display LPSR
-
-  S_oahBooleanAtom
-    displayLpsrBooleanAtom =
-      oahBooleanAtom::create (
-        "display-lpsr", "dlpsr",
-R"(Write the contents of the LPSR data to standard error.)",
-        "fDisplayLpsr",
-        fDisplayLpsr);
-
-  subGroup->
-    appendAtomToSubGroup (
-      displayLpsrBooleanAtom);
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "display-lpsr-full", "dlpsrfull",
-R"(Write the contents of the LPSR data with its full MSR component to standard error.)",
-        "fDisplayLpsrFull",
-        fDisplayLpsrFull));
-
-  // display the MSR embeded in the LPSR
-
-  S_oahBooleanAtom
-    displayLpsrEmbeddedMsrBooleanAtom =
-      oahBooleanAtom::create (
-        "display-lpsr-embedded-msr", "dlpsrembedmsr",
-R"(Write the contents of the MSR embedded in the LPSR data to standard error.)",
-        "fDisplayLpsrEmbeddedMsr",
-        fDisplayLpsrEmbeddedMsr);
-
-  subGroup->
-    appendAtomToSubGroup (
-      displayLpsrEmbeddedMsrBooleanAtom);
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahValueLessAtomAlias::create (
-        "display-msr3", "dmsr3",
-R"(Write the MSR component of the LPSR data to standard error.
-This option is an alias for '-dlpsrembedmsr, -dlpsrembedmsr'.)",
-        displayLpsrEmbeddedMsrBooleanAtom));
-
-  // display LPSR names
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-lpsr-names", "dlpsrnames",
-R"(Only write a view of the names in the LPSR to standard error.
-This implies that no LilyPond code is generated.)",
-        "fDisplayLpsrNames",
-        fDisplayLpsrNames,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
-
-  // display LPSR summary
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-lpsr-summary", "dlpsrsum",
-R"(Only write a summary of the LPSR to standard error.
-This implies that no LilyPond code is generated.)",
-        "fDisplayLpsrSummary",
-        fDisplayLpsrSummary,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
-
-  // display LPSR flat view
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-lpsr-voices-flat-view", "dlpsrvoicesflatview",
-R"(Only write a voices flat view of the LPSR to standard error.
-The output looks like:
-  s4-unpitched c4-o:5 d4-o:5 e4-o:5
-where the number after ':' is the octave number.
-This implies that no LilyPond code is generated.)",
-        "fDisplayLpsrFlatView",
-        fDisplayLpsrFlatView,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
-
-  // display LPSR flat view Details
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-lpsr-voices-flat-view-details", "dlpsrvoicesflatviewd",
-R"(Only write a voices flat view of the LPSR to standard error
-with more details.
-The output looks like:
-  @0/1: s4-unpitched, line 52
-  @1/4: c4-o:5, line 62
-  @1/2: d4-o:5, line 72
-  @3/4: e4-o:5, line 82
-where the number after ':' is the octave number.
-This implies that no LilyPond code is generated.)",
-        "fDisplayLpsrFlatViewDetails",
-        fDisplayLpsrFlatViewDetails,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
-
-  // display LPSR slices
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-lpsr-measures-slices", "dlpsrmeasslices",
-R"(Only write the measures slices of the LPSR to standard error.
-This implies that no LilyPond code is generated.)",
-        "fDisplayLpsrMeasuresSlices",
-        fDisplayLpsrMeasuresSlices,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
-
-  // display LPSR slices details
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-lpsr-measures-slices-details", "dlpsrmeasslicesd",
-R"(Only write the measures slices of the LPSR to standard error
-with more details.
-This implies that no LilyPond code is generated.)",
-        "fDisplayLpsrMeasuresSlicesDetails",
-        fDisplayLpsrMeasuresSlicesDetails,
-        gTraceOahGroup->getTracePassesBooleanAtom ()));
-}
 
 void lpsrOahGroup::initializeLpsrPaperOptions ()
 {
@@ -2186,15 +2180,15 @@ for instruments in 'a', 'f' and B flat respectively)",
 
 void lpsrOahGroup::initializeLpsrOahGroup ()
 {
+  // display
+  // --------------------------------------
+  initializeLpsrDisplayOptions ();
+
 #ifdef MF_TRACE_IS_ENABLED
   // trace and display
   // --------------------------------------
   initializeLpsrTraceOah ();
 #endif // MF_TRACE_IS_ENABLED
-
-  // display
-  // --------------------------------------
-  initializeLpsrDisplayOptions ();
 
   // paper
   // --------------------------------------

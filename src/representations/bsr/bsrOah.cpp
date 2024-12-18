@@ -18,15 +18,15 @@
 
 #include "oahWae.h"
 
-#include "mfPreprocessorSettings.h"
-
 #include "mfConstants.h"
+#include "mfPreprocessorSettings.h"
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
 
 #include "bsrOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "waeHandlers.h"

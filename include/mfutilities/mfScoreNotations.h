@@ -9,36 +9,30 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfOnOff___
-#define ___mfOnOff___
+#ifndef ___mfScoreNotations___
+#define ___mfScoreNotations___
 
 #include <string>
 #include <ostream>
 
-#include "exports.h"
-
-#include "mfBool.h"
-
-
 namespace MusicFormats
 {
 
+// score notation
 //______________________________________________________________________________
-enum class mfOnOffKind {
-  kMfOnOffUnknown,
-  kMfOnOffOn, kMfOnOffOff
+enum class msrScoreNotationKind {
+  kScoreNotationWestern,
+  kScoreNotationJianpu,
+  kScoreNotationDiatonicAccordion
 };
 
-Bool mfOnOffKindAsBool (
-  mfOnOffKind onOffKind);
+std::string msrScoreNotationKindAsString (
+  msrScoreNotationKind scoreNotationKind);
 
-std::string mfOnOffKindAsString (
-  mfOnOffKind onOffKind);
-
-std::ostream& operator << (std::ostream& os, const mfOnOffKind elt);
+std::ostream& operator << (std::ostream& os, const msrScoreNotationKind& elt);
 
 
 }
 
 
-#endif // ___mfOnOff___
+#endif // ___mfScoreNotations___

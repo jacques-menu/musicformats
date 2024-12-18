@@ -17,9 +17,8 @@
 #include "visitor.h"
 #include "oahWae.h"
 
-#include "mfPreprocessorSettings.h"
-
 #include "mfConstants.h"
+#include "mfPreprocessorSettings.h"
 #include "mfStringsHandling.h"
 
 #include "msrPitchesNames.h"
@@ -33,6 +32,7 @@
 #include "lpsrOah.h"
 #include "lpsr2lilypondOah.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "waeHandlers.h"

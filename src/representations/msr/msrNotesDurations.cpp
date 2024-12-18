@@ -1921,11 +1921,6 @@ std::string multiMeasureRestsWholeNotesPitchAndOctaveAsString (
 }
 
 //______________________________________________________________________________
-EXP const msrWholeNotes
-  K_WHOLE_NOTES_UNKNOWN_ (
-   K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
-
-//______________________________________________________________________________
 void testWholeNotes ()
 {
   msrWholeNotes wholeNotes1 ("33/55");

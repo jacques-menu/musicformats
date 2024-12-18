@@ -508,6 +508,20 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      handleBOFPartGroupsNestingBOFAndScorePartsAllocation (
                                 int inputLineNumber);
 
+    void                      sortfStartedPartGroupsListsVector (
+                                int inputLineNumber);
+
+    void                      sortStoppedPartGroupsListsVector (
+                                int inputLineNumber);
+
+    void                      handlePartGroupsStartAtIdentity (
+                                int inputLineNumber,
+                                int identity);
+
+    void                      handleThePartGroupsStoppedAtIdentity (
+                                int inputLineNumber,
+                                int identity);
+
     // parts handling
     // ------------------------------------------------------
 

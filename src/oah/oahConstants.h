@@ -9,18 +9,30 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfInitialization___
-#define ___mfInitialization___
+#ifndef ___oahConstants___
+#define ___oahConstants___
+
+#include <string>
+
+#include "exports.h"
+
+#include "msrMoments.h"
+#include "msrNotesDurations.h"
+
 
 namespace MusicFormats
 {
 
-// initialization
 //______________________________________________________________________________
-void initializeMusicFormats ();
+// OAH layout settings
+
+constexpr int K_OAH_ELEMENTS_INDENTER_OFFSET = 3;
+  // indent a bit more for readability
+
+constexpr int K_OAH_FIELD_WIDTH = 40;
 
 
 }
 
 
-#endif // ___mfInitialization___
+#endif // ___oahConstants___

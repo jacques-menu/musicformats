@@ -9,30 +9,30 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfLibraryComponent__
-#define ___mfLibraryComponent__
+#ifndef ___oahConstants___
+#define ___oahConstants___
+
+#include <string>
 
 #include "exports.h"
 
-#include "mfcBasicTypes.h"
+#include "msrMoments.h"
+#include "msrNotesDurations.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// OAH layout settings
 
-EXP extern std::string getGlobalMusicFormatsVersionNumber ();
-EXP extern std::string getGlobalMusicFormatsVersionDate ();
+constexpr int K_OAH_ELEMENTS_INDENTER_OFFSET = 3;
+  // indent a bit more for readability
 
-EXP extern std::string getGlobalMusicFormatsVersionNumberAndDate ();
-
-//______________________________________________________________________________
-S_mfcLibraryComponent EXP createLibraryComponent ();
+constexpr int K_OAH_FIELD_WIDTH = 40;
 
 
 }
 
 
-#endif // ___mfLibraryComponent__
-
+#endif // ___oahConstants___

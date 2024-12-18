@@ -25,6 +25,7 @@
 #include "oahOah.h"
 #include "oahWae.h"
 
+#include "oahConstants.h"
 #include "oahEarlyOptions.h"
 
 #include "oahAtomsCollection.h"
