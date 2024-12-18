@@ -1412,7 +1412,7 @@ void xml2brlRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void xml2brlRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "xml2brlRegularHandler '" << fHandlerHeader << "':" <<

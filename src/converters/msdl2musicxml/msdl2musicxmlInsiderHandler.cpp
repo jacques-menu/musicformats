@@ -420,7 +420,7 @@ void msdl2musicxmlInsiderOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msdl2musicxmlInsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "msdl2musicxmlInsiderHandler:" <<

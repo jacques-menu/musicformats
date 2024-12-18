@@ -3659,7 +3659,7 @@ void msrStaff::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 38;
+  constexpr int fieldWidth = 38;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -4052,7 +4052,7 @@ void msrStaff::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os << std::left <<
     std::setw (fieldWidth) <<

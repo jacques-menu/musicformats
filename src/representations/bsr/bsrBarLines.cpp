@@ -284,7 +284,7 @@ void bsrBarLine::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 17;
+  constexpr int fieldWidth = 17;
 
   os <<
     std::setw (fieldWidth) <<

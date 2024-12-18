@@ -16,8 +16,8 @@
 #include "visitor.h"
 #include "oahWae.h"
 
+#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
-
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
@@ -275,7 +275,7 @@ std::string msrIgnorePartAtom::asActualLongNamedOptionString () const
 
 void msrIgnorePartAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msrIgnorePartAtom:" <<
@@ -605,7 +605,7 @@ std::string msrKeepPartAtom::asActualLongNamedOptionString () const
 
 void msrKeepPartAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msrKeepPartAtom:" <<

@@ -12,6 +12,7 @@
 #include <sstream>
 #include <iomanip>      // setw()), set::precision(), ...
 
+#include "mfConstants.h"
 #include "mfIndentedTextOutput.h"
 #include "mfStringsHandling.h"
 
@@ -23,14 +24,7 @@
 namespace MusicFormats
 {
 
-// moments
 //______________________________________________________________________________
-// constants
-const msrMoment
-  msrMoment::K_MOMENT_UNKNOWN_ (
-    K_MEASURE_POSITION_UNKNOWN_,
-    K_MEASURE_POSITION_UNKNOWN_);
-
 msrMoment::msrMoment ()
 {
   fWrittenPositionInMeseasure = K_WHOLE_NOTES_UNKNOWN_;
@@ -126,7 +120,7 @@ void msrMoment::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os << std::left <<
     std::setw (fieldWidth) <<

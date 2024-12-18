@@ -14,6 +14,7 @@
 
 #include <regex>
 
+#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
@@ -169,7 +170,7 @@ void msr2brailleManPageGenerateAtom::browseData (basevisitor* v)
 
 void msr2brailleManPageGenerateAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msr2brailleManPageGenerateAtom:" <<

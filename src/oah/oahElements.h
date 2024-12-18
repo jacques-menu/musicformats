@@ -22,13 +22,6 @@
 namespace MusicFormats
 {
 
-// layout settings
-//______________________________________________________________________________
-EXP extern const int K_OAH_ELEMENTS_INDENTER_OFFSET;
-  // indent a bit more for readability
-
-EXP extern const int K_OAH_FIELD_WIDTH;
-
 // data types
 // ------------------------------------------------------
 

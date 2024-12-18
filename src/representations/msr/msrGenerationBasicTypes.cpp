@@ -339,7 +339,7 @@ std::string msrGenerationAPIKindAtom::asActualLongNamedOptionString () const
 
 void msrGenerationAPIKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "GenerationAPIKindAtom:" <<

@@ -1278,7 +1278,7 @@ void msdl2guidoRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void msdl2guidoRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "msdl2guidoRegularHandler '" << fHandlerHeader << "':" <<

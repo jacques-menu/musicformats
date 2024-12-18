@@ -526,7 +526,7 @@ void bsrTempo::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 23;
+  constexpr int fieldWidth = 23;
 
   os <<
     std::setw (fieldWidth) <<

@@ -1423,7 +1423,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
     // print the current measures repeat build phase
-    const int fieldWidth = 36;
+    constexpr int fieldWidth = 36;
 
     os <<
       std::setw (fieldWidth) <<

@@ -216,7 +216,7 @@ void msrFrameNote::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 23;
+  constexpr int fieldWidth = 23;
 
   os <<
     std::setw (fieldWidth) <<
@@ -495,7 +495,7 @@ void msrFrame::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 15;
+  constexpr int fieldWidth = 15;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -560,7 +560,7 @@ void msrFrame::print (std::ostream& os) const
 
       ++gIndenter;
 
-      const int fieldWidth = 21;
+      constexpr int fieldWidth = 21;
 
       os << std::left <<
         std::setw (fieldWidth) <<

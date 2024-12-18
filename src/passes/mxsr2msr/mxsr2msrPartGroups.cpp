@@ -145,7 +145,7 @@ std::string mxsrPartGroup::asString () const
 
 void mxsrPartGroup::print (std::ostream& os) const
 {
-  const int fieldWidth = 14;
+  constexpr int fieldWidth = 14;
 
 	os <<
 		"[mxsrPartGroup" <<

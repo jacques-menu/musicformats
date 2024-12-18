@@ -512,7 +512,7 @@ A typical sequence to produce indented output is:
 \begin{lstlisting}[language=CPlusPlus]
 void msrTransposition::print (std::ostream& os) const
 {
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os <<
     "Transposition" <<

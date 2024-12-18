@@ -596,7 +596,7 @@ void msrPageLayout::print (std::ostream& os) const
 {
   os << "[PageLayout" << std::endl;
 
-  const int fieldWidth = 17;
+  constexpr int fieldWidth = 17;
 
   ++gIndenter;
 
@@ -791,7 +791,7 @@ void msrSystemLayout::print (std::ostream& os) const
 {
   os << "[SystemLayout" << std::endl;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   ++gIndenter;
 
@@ -971,7 +971,7 @@ void msrSystemDividers::print (std::ostream& os) const
 {
   os << "[SystemDividers" << std::endl;
 
-  const int fieldWidth = 13;
+  constexpr int fieldWidth = 13;
 
   ++gIndenter;
 
@@ -1116,7 +1116,7 @@ void msrStaffLayout::print (std::ostream& os) const
 {
   os << "[StaffLayout" << std::endl;
 
-  const int fieldWidth = 14;
+  constexpr int fieldWidth = 14;
 
   ++gIndenter;
 
@@ -1263,7 +1263,7 @@ void msrMeasureLayout::print (std::ostream& os) const
 {
   os << "[MeasureLayout" << std::endl;
 
-  const int fieldWidth = 14;
+  constexpr int fieldWidth = 14;
 
   ++gIndenter;
 
@@ -1436,7 +1436,7 @@ void msrLineWidth::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1609,7 +1609,7 @@ void msrNoteSize::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1776,7 +1776,7 @@ void msrDistance::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1943,7 +1943,7 @@ void msrGlyph::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -2110,7 +2110,7 @@ void msrOtherAppearance::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -2303,7 +2303,7 @@ void msrAppearance::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   // line widths
   size_t

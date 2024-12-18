@@ -909,7 +909,7 @@ void msrRepeatEnding::printFull (std::ostream& os) const
     std::endl;
 */
 
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -982,7 +982,7 @@ void msrRepeatEnding::print (std::ostream& os) const
 /*
   ++gIndenter;
 
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1962,7 +1962,7 @@ void msrRepeat::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 28;
+  constexpr int fieldWidth = 28;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -2080,7 +2080,7 @@ void msrRepeat::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   // short print the repeat common part
   os <<

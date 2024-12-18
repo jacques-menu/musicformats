@@ -381,7 +381,7 @@ void bsrMeasure::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 21;
+  constexpr int fieldWidth = 21;
 
   // print the measure numbers
   os << std::left <<

@@ -13,8 +13,8 @@
 
 #include "visitor.h"
 
+#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
-
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
@@ -28,13 +28,6 @@
 
 namespace MusicFormats
 {
-
-// layout settings
-//______________________________________________________________________________
-const int K_OAH_ELEMENTS_INDENTER_OFFSET = 3;
-  // indent a bit more for readability
-
-const int K_OAH_FIELD_WIDTH = 40;
 
 //______________________________________________________________________________
 std::string oahElementValueKindAsString (
@@ -175,7 +168,7 @@ void oahFindStringMatch::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os << std::left <<
     std::setw (fieldWidth) <<

@@ -112,7 +112,7 @@ float msrScaling::fetchGlobalStaffSize () const
 
       ++gIndenter;
 
-      const int fieldWidth = 32;
+      constexpr int fieldWidth = 32;
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
@@ -263,7 +263,7 @@ void msrScaling::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 13;
+  constexpr int fieldWidth = 13;
 
   // relative to absolute lengths conversion
   os << std::left <<

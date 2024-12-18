@@ -22,6 +22,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
+#include "mfConstants.h"
 #include "mfServices.h"
 
 #include "msrNotesDurations.h"
@@ -723,7 +724,7 @@ std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt)
 //
 // void msrNotesDuration::print (std::ostream& os) const
 // {
-//   const int fieldWidth = 11;
+//   constexpr int fieldWidth = 11;
 //
 //   os << std::left <<
 //     std::setw (fieldWidth) <<
@@ -991,7 +992,7 @@ std::string msrDottedNotesDuration::asString () const
 
 void msrDottedNotesDuration::print (std::ostream& os) const
 {
-  const int fieldWidth = 11;
+  constexpr int fieldWidth = 11;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1010,9 +1011,6 @@ std::ostream& operator << (std::ostream& os, const msrDottedNotesDuration& elt)
 }
 
 //______________________________________________________________________________
-// constant
-const int msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = -33;
-
 msrWholeNotes::msrWholeNotes ()
 {
   fNumerator   = 0;
@@ -1393,7 +1391,7 @@ std::string msrWholeNotes::asShortString () const
 
   ss << "[msrWholeNotes ";
 
-  if (fNumerator == msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ ) {
+  if (fNumerator == K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ ) {
     ss << "UNKNOWN_WHOLE_NOTES";
   }
   else {
@@ -1480,7 +1478,7 @@ std::string wholeNotesAndDotsNumberPitchAndOctaveAsString (
     return "ZERO";
   }
 
-  else if (numerator == msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ ) {
+  else if (numerator == K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ ) {
     return "K_WHOLE_NOTES_NUMERATOR_UNKNOWN_";
   }
 
@@ -1925,7 +1923,7 @@ std::string multiMeasureRestsWholeNotesPitchAndOctaveAsString (
 //______________________________________________________________________________
 EXP const msrWholeNotes
   K_WHOLE_NOTES_UNKNOWN_ (
-    msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+   K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
 //______________________________________________________________________________
 void testWholeNotes ()

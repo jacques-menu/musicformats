@@ -183,7 +183,7 @@ void msrStringTuning::print (std::ostream& os) const
 {
   ++gIndenter;
 
-  const int fieldWidth = 30;
+  constexpr int fieldWidth = 30;
 
   os << std::left <<
     std::setw (fieldWidth) <<

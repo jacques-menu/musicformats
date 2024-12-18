@@ -232,7 +232,7 @@ void msrSyllableElement::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 32;
+  constexpr int fieldWidth = 32;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1042,7 +1042,7 @@ void msrSyllable::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 32;
+  constexpr int fieldWidth = 32;
 
   os << std::left <<
     std::setw (fieldWidth) <<

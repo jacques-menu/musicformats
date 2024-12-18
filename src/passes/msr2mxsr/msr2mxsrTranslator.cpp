@@ -4091,8 +4091,8 @@ void msr2mxsrTranslator::visitStart (S_msrKey& elt)
       case msrKeyKind::kKeyTraditional:
         {
           // compute the number of fifths
-          const int K_FIFTHS_NUMBER_UNKNOWN_ = -94;
-          int       fifthsNumber = K_FIFTHS_NUMBER_UNKNOWN_;
+          constexpr int K_FIFTHS_NUMBER_UNKNOWN_ = -94;
+          int           fifthsNumber = K_FIFTHS_NUMBER_UNKNOWN_;
 
           msrQuarterTonesPitchKind
             keyTonicQuarterTonesPitchKind =
@@ -11418,7 +11418,7 @@ void msr2mxsrTranslator::displayCurrentOnGoingValues ()
 
   ++gIndenter;
 
-  const int fieldWidth = 25;
+  constexpr int fieldWidth = 25;
 
   gLog <<
     std::setw (fieldWidth) <<

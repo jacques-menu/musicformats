@@ -64,11 +64,6 @@ class EXP msrWholeNotes
 {
   public:
 
-    // constants
-    // ------------------------------------------------------
-
-    static const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_;
-
     // constructors/destructor
     // ------------------------------------------------------
 

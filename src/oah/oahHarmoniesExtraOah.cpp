@@ -16,6 +16,8 @@
 
 #include "visitor.h"
 
+#include "mfConstants.h"
+
 #include "oahWae.h"
 
 #include "oahOah.h"
@@ -185,7 +187,7 @@ void extraDisplayAllHarmoniesStructuresAtom::browseData (basevisitor* v)
 
 void extraDisplayAllHarmoniesStructuresAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "extraDisplayAllHarmoniesStructuresAtom:" <<
@@ -463,7 +465,7 @@ void extraDisplayAllHarmoniesContentsAtom::browseData (basevisitor* v)
 
 void extraDisplayAllHarmoniesContentsAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "extraDisplayAllHarmoniesContentsAtom:" <<
@@ -826,7 +828,7 @@ void extraDisplayHarmonyDetailsAtom::browseData (basevisitor* v)
 
 void extraDisplayHarmonyDetailsAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "extraDisplayHarmonyDetailsAtom:" <<
@@ -1204,7 +1206,7 @@ void extraDisplayHarmonyAnalysisAtom::browseData (basevisitor* v)
 
 void extraDisplayHarmonyAnalysisAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "extraDisplayHarmonyAnalysisAtom:" <<

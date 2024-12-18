@@ -169,7 +169,7 @@ void msrMidiTempo::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << std::left <<
     std::setw (fieldWidth) <<

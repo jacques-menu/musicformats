@@ -131,7 +131,7 @@ void lpsrLayout::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 9;
+  constexpr int fieldWidth = 9;
 
   os << std::left <<
     std::setw (fieldWidth) <<

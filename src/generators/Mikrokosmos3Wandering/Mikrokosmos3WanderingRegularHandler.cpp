@@ -1477,7 +1477,7 @@ void Mikrokosmos3WanderingRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void Mikrokosmos3WanderingRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "Mikrokosmos3WanderingRegularHandler '" << fHandlerHeader << "':" <<

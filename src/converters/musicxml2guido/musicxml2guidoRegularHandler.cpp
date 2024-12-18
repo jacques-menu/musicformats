@@ -1339,7 +1339,7 @@ void xml2gmnRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void xml2gmnRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "xml2gmnRegularHandler '" << fHandlerHeader << "':" <<

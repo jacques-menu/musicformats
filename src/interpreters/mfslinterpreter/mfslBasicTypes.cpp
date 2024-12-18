@@ -114,7 +114,7 @@ void mfslOptionsBlock::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 34;
+  constexpr int fieldWidth = 34;
 
   os << left <<
     setw (fieldWidth) <<
@@ -639,7 +639,7 @@ void mfslInput::displayInputNamesToOptionsBlocksMap (std::ostream& os) const
     InputNamesToOptionsBlocksMapSize =
       fNamesSet.size ();
 
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   os <<
     setw (fieldWidth) <<
@@ -678,7 +678,7 @@ void mfslInput::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   os << left <<
     setw (fieldWidth) <<
@@ -1497,7 +1497,7 @@ void mfslChoice::displayChoiceLabelsToOptionsBlocksMap (std::ostream& os) const
     ChoiceLabelsToOptionsBlocksMapSize =
       fLabelsSet.size ();
 
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   os <<
     setw (fieldWidth) <<
@@ -1536,7 +1536,7 @@ void mfslChoice::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   os << left <<
     setw (fieldWidth) <<
@@ -1998,7 +1998,7 @@ void mfslCaseChoiceStatement::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << left <<
     setw (fieldWidth) <<
@@ -2201,7 +2201,7 @@ void mfslCaseInputStatement::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << left <<
     setw (fieldWidth) <<

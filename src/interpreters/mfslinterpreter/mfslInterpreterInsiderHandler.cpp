@@ -359,7 +359,7 @@ void mfslInterpreterInsiderOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void mfslInterpreterInsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "mfslInterpreterInsiderHandler:" <<

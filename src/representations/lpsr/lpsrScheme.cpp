@@ -212,7 +212,7 @@ void lpsrSchemeVariable::print (std::ostream& os) const
     mfStringQuoteEscaper (variableValue));
 
   // print resulting strings
-  const int fieldWidth = 15;
+  constexpr int fieldWidth = 15;
 
   os << std::left <<
     std::setw (fieldWidth) <<

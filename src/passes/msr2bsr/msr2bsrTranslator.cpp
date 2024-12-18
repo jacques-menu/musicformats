@@ -1866,7 +1866,7 @@ bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkIfNeeded (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesDetails ()) {
-    const int fieldWidth = 28;
+    constexpr int fieldWidth = 28;
 
     std::stringstream ss;
 

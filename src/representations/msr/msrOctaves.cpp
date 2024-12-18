@@ -726,7 +726,7 @@ void msrSemiTonesPitchAndOctave::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -809,7 +809,7 @@ std::string msrSemiTonesPitchAndAbsoluteOctave::asString () const
 {
   std::stringstream ss;
 
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   ss << std::left <<
     "SemiTonesPitchAndAbsoluteOctave" <<
@@ -829,7 +829,7 @@ void msrSemiTonesPitchAndAbsoluteOctave::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -910,7 +910,7 @@ std::string msrSemiTonesPitchAndRelativeOctave::asString () const
 {
   std::stringstream ss;
 
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   ss << std::left <<
     "SemiTonesPitchAndRelativeOctave" <<
@@ -931,7 +931,7 @@ void msrSemiTonesPitchAndRelativeOctave::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1230,7 +1230,7 @@ void msrQuarterTonesPitchAndOctave::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os << std::left <<
     std::setw (fieldWidth) <<

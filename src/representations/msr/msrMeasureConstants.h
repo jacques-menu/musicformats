@@ -21,9 +21,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-extern const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_;
-
-//______________________________________________________________________________
 // hidden global null measure variable
 extern S_msrMeasure pGlobalNullMeasure;
 

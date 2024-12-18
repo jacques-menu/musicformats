@@ -3690,7 +3690,7 @@ void msrPart::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 37;
+  constexpr int fieldWidth = 37;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -4123,7 +4123,7 @@ void msrPart::print (std::ostream& os) const
 
   ++gIndenter;
 //abort ();
-  const int fieldWidth = 39;
+  constexpr int fieldWidth = 39;
 
 /*
   os << std::left <<
@@ -4299,7 +4299,7 @@ void msrPart::printSummary (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 28;
+  constexpr int fieldWidth = 28;
 
   os << std::left <<
     std::setw (fieldWidth) <<

@@ -525,7 +525,7 @@ void lpsrPartBlock::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 28;
+  constexpr int fieldWidth = 28;
 
   os << std::left <<
     std::setw (fieldWidth) << std::string ("") + "partName" << ": \"" <<

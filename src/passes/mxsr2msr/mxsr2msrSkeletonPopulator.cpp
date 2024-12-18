@@ -403,16 +403,16 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
   // sounding whole notes
 
   fCurrentNoteSoundingWholeNotes =
-    msrWholeNotes (msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+    msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
   fCurrentNoteSoundingWholeNotesFromNotesDuration =
-    msrWholeNotes (msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+    msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
   // display whole notes
 
   fCurrentNoteDisplayWholeNotes =
-    msrWholeNotes (msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+    msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
   fCurrentNoteDisplayWholeNotesFromType =
-    msrWholeNotes (msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+    msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
   // display
 
@@ -7803,7 +7803,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
 
     ++gIndenter;
 
-    const int fieldWidth = 32;
+    constexpr int fieldWidth = 32;
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
@@ -9481,7 +9481,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
   if (gTraceOahGroup->getTraceLyrics ()) {
     ++gIndenter;
 
-    const int fieldWidth = 23;
+    constexpr int fieldWidth = 23;
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
@@ -9723,7 +9723,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     {
       ++gIndenter;
 
-      const int fieldWidth = 31;
+      constexpr int fieldWidth = 31;
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
@@ -9859,7 +9859,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
     {
       ++gIndenter;
 
-      const int fieldWidth = 31;
+      constexpr int fieldWidth = 31;
 
       gLog << std::left <<
         std::setw (fieldWidth) <<
@@ -10498,7 +10498,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
-//     const int fieldWidth = 37;
+//     constexpr int fieldWidth = 37;
 //
 //     gLog <<
 //       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
@@ -10544,7 +10544,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
-//     const int fieldWidth = 37;
+//     constexpr int fieldWidth = 37;
 //
 //     gLog <<
 //       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
@@ -23318,7 +23318,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 
     ++gIndenter;
 
-    const int fieldWidth = 48;
+    constexpr int fieldWidth = 48;
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
@@ -24527,7 +24527,7 @@ void mxsr2msrSkeletonPopulator::handleChordBeginIfAnyBeforeNoteCreation ()
 
     ++gIndenter;
 
-    const int fieldWidth = 48;
+    constexpr int fieldWidth = 48;
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
@@ -26277,7 +26277,7 @@ void mxsr2msrSkeletonPopulator::handleStandAloneNoteOrRest ()
       fCurrentNote->asString () <<
       std::endl;
 
-    const int fieldWidth = 25;
+    constexpr int fieldWidth = 25;
 
     gLog << std::left <<
       std::setw (fieldWidth) << "voice" << ": \"" <<
@@ -26671,7 +26671,7 @@ void mxsr2msrSkeletonPopulator::handleGraceNote ()
       fCurrentNote->asString () <<
       std::endl;
 
-    const int fieldWidth = 25;
+    constexpr int fieldWidth = 25;
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
@@ -26870,7 +26870,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
 
     ++gIndenter;
 
-    const int fieldWidth = 37;
+    constexpr int fieldWidth = 37;
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
@@ -29036,7 +29036,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
 
       ++gIndenter;
 
-      const int fieldWidth = 32;
+      constexpr int fieldWidth = 32;
 
       gLog << std::left <<
         std::setw (fieldWidth) << "fCurrentPart" << ": " <<
@@ -30080,7 +30080,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_pedal_tuning& elt)
 
     ++gIndenter;
 
-    const int fieldWidth = 31;
+    constexpr int fieldWidth = 31;
 
     gLog << std::left <<
       std::setw (fieldWidth) <<
@@ -30222,7 +30222,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_details& elt)
   if (gTraceOahGroup->getTraceStaves ()) {
     std::stringstream ss;
 
-    const int fieldWidth = 29;
+    constexpr int fieldWidth = 29;
 
     ss << std::left <<
       std::setw (fieldWidth) <<

@@ -16,10 +16,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_ (
-  msrWholeNotes::K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
-
-//______________________________________________________________________________
 // hidden global null measure variable
 S_msrMeasure pGlobalNullMeasure;
 

@@ -546,7 +546,7 @@ void bsrLine::print (std::ostream& os) const
   ++gIndenter;
 
   // print the line numbers
-  const int fieldWidth = 20;
+  constexpr int fieldWidth = 20;
 
   os << std::left <<
   /* JMI

@@ -14,6 +14,7 @@
 
 #include <regex>
 
+#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
 
 #include "oahEarlyOptions.h"
@@ -167,7 +168,7 @@ void msr2lilypondManPageGenerateAtom::browseData (basevisitor* v)
 
 void msr2lilypondManPageGenerateAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msr2lilypondManPageGenerateAtom:" <<

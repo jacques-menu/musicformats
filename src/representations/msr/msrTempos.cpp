@@ -180,7 +180,7 @@ void msrTempoNote::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 26;
+  constexpr int fieldWidth = 26;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -801,7 +801,7 @@ void msrTempoTuplet::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 30;
+  constexpr int fieldWidth = 30;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1057,7 +1057,7 @@ void msrTempoNotesRelationshipElements::print (std::ostream& os) const
       fTempoNotesRelationshipElementsKind) <<
     std::endl;
 
-  const int fieldWidth = 26;
+  constexpr int fieldWidth = 26;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1617,7 +1617,7 @@ void msrTempo::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os << std::left <<
     std::setw (fieldWidth) <<

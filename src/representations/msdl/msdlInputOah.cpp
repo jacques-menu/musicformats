@@ -262,7 +262,7 @@ std::string msdlKeywordsLanguageAtom::asActualLongNamedOptionString () const
 
 void msdlKeywordsLanguageAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msdlKeywordsLanguageAtom:" <<
@@ -531,7 +531,7 @@ std::string oahDisplayMsdlKeywordsInLanguageAtom::asActualLongNamedOptionString 
 
 void oahDisplayMsdlKeywordsInLanguageAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "oahDisplayMsdlKeywordsInLanguageAtom:" <<
@@ -764,7 +764,7 @@ std::string oahDisplayMsdlTokensInLanguageAtom::asActualLongNamedOptionString ()
 
 void oahDisplayMsdlTokensInLanguageAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "oahDisplayMsdlTokensInLanguageAtom:" <<
@@ -1011,7 +1011,7 @@ std::string msdlCommentsTypeAtom::asActualLongNamedOptionString () const
 
 void msdlCommentsTypeAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msdlCommentsTypeAtom:" <<
@@ -1299,7 +1299,7 @@ std::string msdlUserLanguageAtom::asActualLongNamedOptionString () const
 
 void msdlUserLanguageAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msdlUserLanguageAtom:" <<
@@ -1586,7 +1586,7 @@ std::string msdlPitchesLanguageAtom::asActualLongNamedOptionString () const
 
 void msdlPitchesLanguageAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msdlPitchesLanguageAtom:" <<

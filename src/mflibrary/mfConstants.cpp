@@ -20,27 +20,30 @@ namespace MusicFormats
 // input line numbers
 //______________________________________________________________________________
 
-const int K_MF_INPUT_LINE_UNKNOWN_ = 0;
-
 const std::string
   kInputLineNumberPrefix             ("L_"),
   kInputLineNumberNeutralValueString ("*Unknown*");
 
+// input locations
+//______________________________________________________________________________
+
+const std::string
+  kInputLocationRangePrefix (".."),
+  kInputLocationNeutralValueString ("*Unknown*");
+
 // staff numbers
 //______________________________________________________________________________
 
-const int K_STAFF_NUMBER_UNKNOWN_ = -99;
-
-const int K_PART_HARMONIES_STAFF_NUMBER = 10;
-
-const int K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
+const std::string
+  kStaffNumberPrefix ("ST_"),
+  kStaffNumberNeutralValueString ("*Unknown*");
 
 std::string mfStaffNumberAsString (int staffNumber)
 {
   std::string result;
 
   if (staffNumber == K_STAFF_NUMBER_UNKNOWN_) {
-    result = "*Unknown*";
+    result = "K_STAFF_NUMBER_UNKNOWN_";
   }
   else {
     result = std::to_string (staffNumber);
@@ -52,20 +55,16 @@ std::string mfStaffNumberAsString (int staffNumber)
 // voice numbers
 //______________________________________________________________________________
 
-const int K_VOICE_NUMBER_UNKNOWN_ = -96;
-
-const int K_PART_HARMONIES_VOICE_NUMBER = 11;
-const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
-
-const int K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
-const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER = 40;
+const std::string
+  kVoiceNumberPrefix ("V_"),
+  kVoiceNumberNeutralValueString ("*Unknown*");
 
 std::string mfVoiceNumberAsString (int voiceNumber)
 {
   std::string result;
 
   if (voiceNumber == K_VOICE_NUMBER_UNKNOWN_) {
-    result = "*Unknown*";
+    result = "K_VOICE_NUMBER_UNKNOWN_";
   }
   else {
     result = std::to_string (voiceNumber);
@@ -77,18 +76,75 @@ std::string mfVoiceNumberAsString (int voiceNumber)
 // measure numbers
 //______________________________________________________________________________
 
-const std::string K_MEASURE_NUMBER_UNKNOWN_ = "K_MEASURE_NUMBER_UNKNOWN_";
+const std::string K_MEASURE_NUMBER_UNKNOWN_ =
+  "K_MEASURE_NUMBER_UNKNOWN_";
+
+const std::string
+  kMeasureNumberPrefix ("ST_"),
+  kMeasureNumberNeutralValueString ("*Unknown*");
+
+std::string mfMeasureNumberAsString (std::string measureNumber)
+{
+  std::string result;
+
+  if (measureNumber == K_MEASURE_NUMBER_UNKNOWN_) {
+    result = "K_MEASURE_NUMBER_UNKNOWN_";
+  }
+  else {
+    result = measureNumber;
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
+// whole notes durations
+
+const msrWholeNotes K_WHOLE_NOTES_UNKNOWN____ =
+  msrWholeNotes (0, 1);
+
+const std::string
+  kWholeNotePrefix ("WN_"),
+  kWholeNoteNeutralValueString ("K_WHOLE_NOTES_UNKNOWN____");
+
+// moments
+//______________________________________________________________________________
+const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_ =
+  msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+
+const msrMoment K_MOMENT_UNKNOWN_ =
+  msrMoment (
+    K_MEASURE_POSITION_UNKNOWN_,
+    K_MEASURE_POSITION_UNKNOWN_);
+
+const std::string
+  kMomentPrefix ("WN_"),
+  kMomentNeutralValueString ("K_MOMENT_UNKNOWN_");
 
 // lyrics
 //______________________________________________________________________________
 
-const std::string K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_";
-const std::string K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
+const std::string
+  kStanzaNumberPrefix ("ST_"),
+  kStanzaNumberNeutralValueString ("*Unknown*");
 
-// names lists max length
-//______________________________________________________________________________
+EXP extern const std::string
+  K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_",
+  K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
 
-const int K_MF_NAMES_LIST_MAX_LENGTH = 50;
+std::string mfStanzaNumberAsString (std::string stanzaNumber)
+{
+  std::string result;
+
+  if (stanzaNumber == K_STANZA_NUMBER_UNKNOWN_) {
+    result = "K_STANZA_NAME_UNKNOWN_";
+  }
+  else {
+    result = stanzaNumber;
+  }
+
+  return result;
+}
 
 
 }

@@ -604,7 +604,7 @@ void msr2lilypondInsiderOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msr2lilypondInsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "msr2lilypondInsiderHandler '" << fHandlerHeader << "':" <<

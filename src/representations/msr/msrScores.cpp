@@ -614,7 +614,7 @@ void msrScore::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 38;
+  constexpr int fieldWidth = 38;
 
   size_t partGroupsListSize =
     fPartGroupsList.size ();
@@ -829,7 +829,7 @@ void msrScore::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 38;
+  constexpr int fieldWidth = 38;
 
   size_t partGroupsListSize =
     fPartGroupsList.size ();
@@ -975,7 +975,7 @@ void msrScore::printSummary (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 39;
+  constexpr int fieldWidth = 39;
 
   size_t partGroupsListSize =
     fPartGroupsList.size ();

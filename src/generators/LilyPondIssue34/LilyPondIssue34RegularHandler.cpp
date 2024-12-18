@@ -1479,7 +1479,7 @@ void LilyPondIssue34RegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void LilyPondIssue34RegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "LilyPondIssue34RegularHandler '" << fHandlerHeader << "':" <<

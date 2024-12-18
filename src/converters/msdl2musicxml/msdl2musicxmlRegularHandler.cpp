@@ -1280,7 +1280,7 @@ void msdl2musicxmlRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void msdl2musicxmlRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "msdl2musicxmlRegularHandler '" << fHandlerHeader << "':" <<

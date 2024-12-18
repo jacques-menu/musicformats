@@ -293,7 +293,7 @@ void bsrNumber::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 21;
+  constexpr int fieldWidth = 21;
 
   os <<
     std::setw (fieldWidth) <<

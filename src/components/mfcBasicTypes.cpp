@@ -1583,7 +1583,7 @@ void mfcMultiComponent::printOahVersion (std::ostream&  os) const
   ++gIndenter;
 
   if (fOahComponent) {
-    const int fieldWidth = 20;
+    constexpr int fieldWidth = 20;
 
     os << std::left <<
       std::setw (fieldWidth) <<
@@ -1613,7 +1613,7 @@ void mfcMultiComponent::printOahHistory (std::ostream&  os) const
   ++gIndenter;
 
   if (fOahComponent) {
-    const int fieldWidth = 20;
+    constexpr int fieldWidth = 20;
 
     os << std::left <<
       std::setw (fieldWidth) <<
@@ -1649,7 +1649,7 @@ void mfcMultiComponent::printRepresentationsVersions (std::ostream&  os) const
       S_mfcRepresentationComponent
         representationComponent = (*i);
 
-      const int fieldWidth = 20;
+      constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<
@@ -1691,7 +1691,7 @@ void mfcMultiComponent::printPassesVersions (std::ostream&  os) const
       S_mfcPassComponent
         passComponent = (*i);
 
-      const int fieldWidth = 20;
+      constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<
@@ -1733,7 +1733,7 @@ void mfcMultiComponent::printRepresentationsHistory (std::ostream&  os) const
       S_mfcRepresentationComponent
         representationComponent = (*i);
 
-      const int fieldWidth = 20;
+      constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<
@@ -1773,7 +1773,7 @@ void mfcMultiComponent::printPassesHistory (std::ostream&  os) const
       S_mfcPassComponent
         passComponent = (*i);
 
-      const int fieldWidth = 20;
+      constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<
@@ -1836,7 +1836,7 @@ void mfcMultiComponent::print (std::ostream& os) const
       S_mfcRepresentationComponent
         formatComponent = (*i);
 
-      const int fieldWidth = 20;
+      constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<
@@ -1868,7 +1868,7 @@ void mfcMultiComponent::print (std::ostream& os) const
       S_mfcPassComponent
         passComponent = (*i);
 
-      const int fieldWidth = 20;
+      constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<
@@ -2302,7 +2302,7 @@ void mfcLibraryComponent::printConvertersVersions (std::ostream&  os) const
       S_mfcConverterComponent
         converterComponent = (*i);
 
-      const int fieldWidth = 20;
+      constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<
@@ -2345,7 +2345,7 @@ void mfcLibraryComponent::printConvertersHistory (std::ostream&  os) const
       S_mfcConverterComponent
         converterComponent = (*i);
 
-      const int fieldWidth = 20;
+      constexpr int fieldWidth = 20;
 
       os << std::left <<
         std::setw (fieldWidth) <<

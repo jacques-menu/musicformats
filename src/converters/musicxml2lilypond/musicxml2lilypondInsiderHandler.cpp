@@ -637,7 +637,7 @@ void xml2lyInsiderOahGroup::browseData (basevisitor* v)
 
 void xml2lyInsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "musicxml2lilypondInsiderInsiderHandler '" << fHandlerHeader << "':" <<

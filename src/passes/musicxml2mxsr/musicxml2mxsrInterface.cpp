@@ -52,7 +52,7 @@ void displayXMLDeclaration (
   std::string xmlEncoding   = xmlDeclaration->getEncoding ();
   int    xmlStandalone = xmlDeclaration->getStandalone ();
 
-  const int fieldWidth = 14;
+  constexpr int fieldWidth = 14;
 
   gLog <<
     "XML Declaration:" <<
@@ -78,7 +78,7 @@ void displayXMLDeclaration (
 void displayMusicXMLDocumentType (
   TDocType* documentType)
 {
-  const int fieldWidth = 16;
+  constexpr int fieldWidth = 16;
 
   gLog <<
     "Document Type:" <<

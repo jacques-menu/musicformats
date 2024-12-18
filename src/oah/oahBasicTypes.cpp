@@ -480,7 +480,7 @@ void oahOptionOrArgument::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -709,7 +709,7 @@ void optionsNameAndValueVectorsPlusEquals (
 //
 //     ++gIndenter;
 //
-//     const int fieldWidth = 2;
+//     constexpr int fieldWidth = 2;
 //
 //     int counter = 0;
 //     for (S_oahOption option : fOptionsVector) {
@@ -878,7 +878,7 @@ void oahOptionsAndArguments::displayOptionsVector (std::ostream& os) const
 
     ++gIndenter;
 
-    const int fieldWidth = 2;
+    constexpr int fieldWidth = 2;
 
     int counter = 0;
     for (oahOption option : fOptionsVector) {
@@ -1216,7 +1216,7 @@ Bool oahPrefix::fetchElementsMatchingStringInPrefix (
 void oahPrefix::printPrefixEssentials (
   std::ostream& os) const
 {
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1563,7 +1563,7 @@ void oahAtom::browseData (basevisitor* v)
 
 void oahAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   os <<
     "Atom: ";
@@ -1574,7 +1574,7 @@ void oahAtom::print (std::ostream& os) const
 
 void oahAtom::printFull (std::ostream& os) const
 {
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   os <<
     "Atom ???:" <<
@@ -1786,7 +1786,7 @@ void oahValueLessAtom::browseData (basevisitor* v)
 
 void oahValueLessAtom::printFull (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "oahValueLessAtom:" <<
@@ -1802,7 +1802,7 @@ void oahValueLessAtom::printFull (std::ostream& os) const
 
 void oahValueLessAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "oahValueLessAtom: ";
@@ -1960,7 +1960,7 @@ void oahValueFittedAtom::browseData (basevisitor* v)
 
 void oahValueFittedAtom::printFull (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "oahValueFittedAtom:" <<
@@ -1976,7 +1976,7 @@ void oahValueFittedAtom::printFull (std::ostream& os) const
 
 void oahValueFittedAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "oahValueFittedAtom: ";
@@ -2174,7 +2174,7 @@ void oahAtomImplicitlySettingAVariable::printAtomWithVariableEssentialsFull (
 
 void oahAtomImplicitlySettingAVariable::print (std::ostream& os) const
 {
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   os <<
     "AtomWithVariable";
@@ -2397,7 +2397,7 @@ oahValueDefaultedAtom::~oahValueDefaultedAtom ()
 //
 // void oahValueDefaultedAtom::print (std::ostream& os) const
 // {
-//   const int fieldWidth = K_OAH_FIELD_WIDTH;
+//   constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 //
 //   os <<
 //     "StringWithDefaultValueAtom:" <<
@@ -2630,7 +2630,7 @@ void oahAtomStoringAValue::printAtomWithVariableEssentialsFull (
 
 void oahAtomStoringAValue::print (std::ostream& os) const
 {
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   os <<
     "AtomWithVariable";
@@ -2825,7 +2825,7 @@ void oahPureHelpValueLessAtom::browseData (basevisitor* v)
 
 void oahPureHelpValueLessAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "HelpOnlyAtom:" <<
@@ -2990,7 +2990,7 @@ void oahPureHelpValueFittedAtom::browseData (basevisitor* v)
 
 void oahPureHelpValueFittedAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "HelpOnlyAtom:" <<
@@ -3492,7 +3492,7 @@ void oahSubGroup::browseData (basevisitor* v)
 
 void oahSubGroup::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
    "SubGroup:" <<
@@ -4595,7 +4595,7 @@ void oahGroup::browseData (basevisitor* v)
 
 void oahGroup::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "Group:" <<
@@ -6339,7 +6339,7 @@ void oahHandler::displayNamesToElementsMapShort (std::ostream& os) const
       std::endl;
     ++gIndenter;
 
-    const int fieldWidth = 40;
+    constexpr int fieldWidth = 40;
 
     for (
       std::map <std::string, S_oahElement>::const_iterator i =
@@ -6599,7 +6599,7 @@ void oahHandler::printHandlerEssentials (
 
 void oahHandler::printFull (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "Handler:" <<
@@ -6703,7 +6703,7 @@ std::string oahHandler::asString () const
 
 void oahHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "Handler:" <<
@@ -6770,7 +6770,7 @@ if (false) { // JMI
 
 void oahHandler::printSummary (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "Handler:" <<

@@ -1502,7 +1502,7 @@ void msdlConverterRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void msdlConverterRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "msdlConverterRegularHandler '" << fHandlerHeader << "':" <<

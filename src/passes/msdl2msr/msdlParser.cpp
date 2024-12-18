@@ -1165,7 +1165,7 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesOctaveEntry ()) {
-    const int fieldWidth = 28;
+    constexpr int fieldWidth = 28;
 
     gLog << std::left <<
       "lilypondOctaveInRelativeEntryMode() 1" <<

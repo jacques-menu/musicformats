@@ -54,7 +54,7 @@ void testWrapperTypes ()
     // start the clock
     clock_t startClock = clock ();
 
-    const int iterationsNumber = 10000000;
+    constexpr int iterationsNumber = 10000000;
     int total = 0;
     for (int i = 1; i < iterationsNumber; ++i ) {
       total += i;
@@ -79,7 +79,7 @@ void testWrapperTypes ()
     // start the clock
     clock_t startClock = clock ();
 
-    const int iterationsNumber = 10000000;
+    constexpr int iterationsNumber = 10000000;
     int total = 0;
     for (int i = 1; i < iterationsNumber; ++i ) {
       mfInputLineNumber inputLineNumber (i);

@@ -196,7 +196,7 @@ void bsrScore::printFull (std::ostream& os) const
   os << std::endl;
 
   // print the transcription notes if any
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   if (fTranscriptionNotes || gBsrOahGroup->getDisplayBsrFull ()) {
     if (fTranscriptionNotes) {
@@ -270,7 +270,7 @@ void bsrScore::print (std::ostream& os) const
   os << std::endl;
 
   // print the transcription notes if any
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   if (fTranscriptionNotes || gBsrOahGroup->getDisplayBsrFull ()) {
     if (fTranscriptionNotes) {

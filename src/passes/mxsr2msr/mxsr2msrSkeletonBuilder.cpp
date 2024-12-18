@@ -1099,7 +1099,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
   // an implicit outer-most part group has to be created to contain everything,
   // since there can be parts out of any explicit part group in MusicXML
 
-	const int K_MXSR_IMPLICIT_PART_GROUP_NUMBER = -1;
+	constexpr int K_MXSR_IMPLICIT_PART_GROUP_NUMBER = -1;
 
   // create an implicit outer-most part group
   fCurrentPartGroupNumber = K_MXSR_IMPLICIT_PART_GROUP_NUMBER;

@@ -1743,7 +1743,7 @@ void msr2lilypondRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void msr2lilypondRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "msr2lilypondRegularHandler '" << fHandlerHeader << "':" <<

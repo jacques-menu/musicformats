@@ -721,7 +721,7 @@ void msrBarLine::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  constexpr int fieldWidth = 33;
 
   os << std::left <<
     "fMeasureElementUpLinkToMeasure" << ": ";
@@ -828,7 +828,7 @@ void msrBarLine::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 31;
+  constexpr int fieldWidth = 31;
   os <<
     std::setw (fieldWidth) <<
    "measureElementMeasureNumber: ";

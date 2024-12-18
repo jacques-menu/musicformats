@@ -369,7 +369,7 @@ std::string mfService::fetchServicePassDescriptionsAsString () const
 
   ++gIndenter;
 
-//   const int fieldWidth = 10;
+//   constexpr int fieldWidth = 10;
 
   for (S_mfPass pass : fServicePassesList) {
     iss << // JMI std::left <<
@@ -413,7 +413,7 @@ void mfService::printServiceForAboutOption (std::ostream& os) const
 
   ++gIndenter;
 
-//   const int fieldWidth = 21;
+//   constexpr int fieldWidth = 21;
 
   for (S_mfPass pass : fServicePassesList) {
     os << // std::left <<
@@ -538,7 +538,7 @@ void mfServiceRunData::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 21;
+  constexpr int fieldWidth = 21;
 
   // service name
   // --------------------------------------

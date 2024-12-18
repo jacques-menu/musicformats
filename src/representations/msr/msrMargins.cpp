@@ -396,7 +396,7 @@ void msrMarginsGroup::print (std::ostream& os) const
     fMarginsGroupTypeKind <<
     std::endl;
 
-  const int fieldWidth = 13;
+  constexpr int fieldWidth = 13;
 
   ++gIndenter;
 

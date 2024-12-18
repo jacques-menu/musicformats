@@ -1830,7 +1830,7 @@ void msrChord::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 44;
+  constexpr int fieldWidth = 44;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -2627,7 +2627,7 @@ void msrChord::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 44;
+  constexpr int fieldWidth = 44;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -3529,7 +3529,7 @@ void msrChordBeamLink::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  constexpr int fieldWidth = 33;
 
   os <<
     std::setw (fieldWidth) <<
@@ -3557,7 +3557,7 @@ void msrChordBeamLink::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  constexpr int fieldWidth = 33;
 
   os <<
     std::setw (fieldWidth) <<
@@ -3787,7 +3787,7 @@ void msrChordSlurLink::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  constexpr int fieldWidth = 33;
 
   os <<
     std::setw (fieldWidth) <<
@@ -4018,7 +4018,7 @@ void msrChordGraceNotesGroupLink::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  constexpr int fieldWidth = 33;
 
   os <<
     std::setw (fieldWidth) <<
@@ -4045,7 +4045,7 @@ void msrChordGraceNotesGroupLink::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  constexpr int fieldWidth = 33;
 
   os <<
     std::setw (fieldWidth) <<

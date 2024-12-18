@@ -237,7 +237,7 @@ std::string lilypondScoreOutputKindAtom::asActualLongNamedOptionString () const
 
 void lilypondScoreOutputKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondScoreOutputKindAtom:" <<
@@ -618,7 +618,7 @@ std::string lilypondTransposePartNameAtom::asActualLongNamedOptionString () cons
 
 void lilypondTransposePartNameAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondTransposePartNameAtom:" <<
@@ -1031,7 +1031,7 @@ std::string lilypondTransposePartIDAtom::asActualLongNamedOptionString () const
 
 void lilypondTransposePartIDAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondTransposePartIDAtom:" <<
@@ -1162,7 +1162,7 @@ void msrOctaveEntryVariable::setRelativeOctaveEntryVariableValue (
 
 void msrOctaveEntryVariable::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "OctaveEntryVariable :" <<
@@ -1375,7 +1375,7 @@ void lilypondAbsoluteOctaveEntryAtom::applyAtomWithValue (
 
 void lilypondAbsoluteOctaveEntryAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondAbsoluteOctaveEntryAtom:" <<
@@ -1641,7 +1641,7 @@ std::string lilypondRelativeOctaveEntryAtom::asActualLongNamedOptionString () co
 
 void lilypondRelativeOctaveEntryAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondRelativeOctaveEntryAtom:" <<
@@ -1890,7 +1890,7 @@ std::string lilypondFixedOctaveEntryAtom::asActualLongNamedOptionString () const
 
 void lilypondFixedOctaveEntryAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondFixedOctaveEntryAtom:" <<
@@ -2142,7 +2142,7 @@ std::string lilypondDurationsGenerationKindAtom::asActualLongNamedOptionString (
 
 void lilypondDurationsGenerationKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "LilypondDurationsGenerationKindAtom:" <<
@@ -2429,7 +2429,7 @@ std::string lilypondAccidentalStyleKindAtom::asActualLongNamedOptionString () co
 
 void lilypondAccidentalStyleKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondAccidentalStyleKindAtom:" <<
@@ -2812,7 +2812,7 @@ std::string lilypondChordsDisplayAtom::asActualLongNamedOptionString () const
 
 void lilypondChordsDisplayAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondChordsDisplayAtom:" <<
@@ -3137,7 +3137,7 @@ std::string lilypondLyricsNotesDurationsKindAtom::asActualLongNamedOptionString 
 
 void lilypondLyricsNotesDurationsKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondLyricsNotesDurationsKindAtom:" <<
@@ -3423,7 +3423,7 @@ std::string lilypondDynamicsTextSpannersStyleKindAtom::asActualLongNamedOptionSt
 
 void lilypondDynamicsTextSpannersStyleKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondDynamicsTextSpannersStyleKindAtom:" <<
@@ -7330,7 +7330,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 
 void lilypondBreakPageAfterMeasureNumberAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "lilypondBreakPageAfterMeasureNumberAtom:" <<

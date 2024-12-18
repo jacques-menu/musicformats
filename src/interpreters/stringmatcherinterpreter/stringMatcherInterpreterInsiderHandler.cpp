@@ -359,7 +359,7 @@ void stringMatcherInterpreterInsiderOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void stringMatcherInterpreterInsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "stringMatcherInterpreterInsiderHandler:" <<

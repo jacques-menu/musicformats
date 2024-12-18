@@ -185,7 +185,7 @@ void languageOahAtom::browseData (basevisitor* v)
 
 void languageOahAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "languageOahAtom:" <<
@@ -379,7 +379,7 @@ void insiderOahAtom::browseData (basevisitor* v)
 
 void insiderOahAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "insiderOahAtom:" <<
@@ -566,7 +566,7 @@ void regularOahAtom::browseData (basevisitor* v)
 
 void regularOahAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "regularOahAtom:" <<
@@ -770,7 +770,7 @@ void passIDOahAtom::browseData (basevisitor* v)
 
 void passIDOahAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "passIDOahAtom:" <<

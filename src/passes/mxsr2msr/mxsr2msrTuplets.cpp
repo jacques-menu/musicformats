@@ -55,7 +55,7 @@ mxsrTuplet::mxsrTuplet (
 
 			++gIndenter;
 
-			const int fieldWidth = 28;
+			constexpr int fieldWidth = 28;
 
 	    gLog << std::left <<
     		std::setw (fieldWidth) <<
@@ -98,7 +98,7 @@ void mxsrTuplet::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -201,7 +201,7 @@ void mxsr2msrPendingTupletStop::print (std::ostream& os) const
 
 	++gIndenter;
 
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os << std::left <<
     std::setw (fieldWidth) <<

@@ -858,7 +858,7 @@ void Mikrokosmos3WanderingInsiderOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void Mikrokosmos3WanderingInsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "Mikrokosmos3WanderingInsiderHandler:" <<

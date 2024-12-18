@@ -952,7 +952,7 @@ void msrDoubleTremolo::print (std::ostream& os) const
     ", line " << fInputStartLineNumber <<
     std::endl;
 
-  const int fieldWidth = 32;
+  constexpr int fieldWidth = 32;
 
   ++gIndenter;
 

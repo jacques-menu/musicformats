@@ -221,7 +221,7 @@ void msrSlide::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os << std::left <<
     std::setw (fieldWidth) <<

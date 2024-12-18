@@ -854,7 +854,7 @@ void msrWedge::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   os << std::left <<
     std::setw (fieldWidth) <<

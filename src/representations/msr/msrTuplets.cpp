@@ -16,6 +16,7 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
+#include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -1308,7 +1309,7 @@ void msrTuplet::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 36;
+  constexpr int fieldWidth = 36;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1437,7 +1438,7 @@ void msrTuplet::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 36;
+  constexpr int fieldWidth = 36;
 
   os << std::left <<
     std::setw (fieldWidth) <<

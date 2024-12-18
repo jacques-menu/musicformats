@@ -860,7 +860,7 @@ void LilyPondIssue34InsiderOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void LilyPondIssue34InsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "LilyPondIssue34InsiderHandler:" <<

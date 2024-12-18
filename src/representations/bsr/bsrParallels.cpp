@@ -178,7 +178,7 @@ void bsrParallel::print (std::ostream& os) const
   ++gIndenter;
 
   // print the parallel numbers
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << std::left <<
     std::setw (fieldWidth) <<

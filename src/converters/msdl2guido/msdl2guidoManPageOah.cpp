@@ -14,8 +14,8 @@
 
 #include <regex>
 
+#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
-
 
 #include "oahEarlyOptions.h"
 
@@ -168,7 +168,7 @@ void msdl2guidoManPageGenerateAtom::browseData (basevisitor* v)
 
 void msdl2guidoManPageGenerateAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msdl2guidoManPageGenerateAtom:" <<

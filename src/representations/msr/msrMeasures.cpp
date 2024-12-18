@@ -7961,7 +7961,7 @@ void msrMeasure::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 46;
+  constexpr int fieldWidth = 46;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -8242,7 +8242,7 @@ void msrMeasure::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 37;
+  constexpr int fieldWidth = 37;
 
   os << std::left <<
     std::setw (fieldWidth) <<

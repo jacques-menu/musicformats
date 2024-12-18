@@ -231,7 +231,7 @@ void bsrPage::print (std::ostream& os) const
   ++gIndenter;
 
   // print the page numbers
-  const int fieldWidth = 18;
+  constexpr int fieldWidth = 18;
 
   os << std::left <<
   /* JMI

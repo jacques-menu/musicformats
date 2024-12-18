@@ -98,7 +98,7 @@ std::string msrHiddenMeasureAndBarLineDescr::hiddenMeasureAndBarLineDescrAsStrin
 
 void msrHiddenMeasureAndBarLineDescr::print (std::ostream& os) const
 {
-  const int fieldWidth = 14;
+  constexpr int fieldWidth = 14;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -223,7 +223,7 @@ void msr2msrTranslator::displayCurrentOnGoingValues ()
 
   ++gIndenter;
 
-  const int fieldWidth = 25;
+  constexpr int fieldWidth = 25;
 
   gLog << std::left <<
     std::setw (fieldWidth) <<
@@ -324,7 +324,7 @@ void msr2msrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
   if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
     ++gIndenter;
 
-    const int fieldWidth = 19;
+    constexpr int fieldWidth = 19;
 
     std::list <S_msrHiddenMeasureAndBarLineDescr>::const_iterator
       iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),

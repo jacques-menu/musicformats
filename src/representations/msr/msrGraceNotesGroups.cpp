@@ -712,7 +712,7 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  constexpr int fieldWidth = 33;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -809,7 +809,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  constexpr int fieldWidth = 33;
 
   os << std::left <<
     std::setw (fieldWidth) <<

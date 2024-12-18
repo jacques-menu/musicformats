@@ -116,7 +116,7 @@ std::string availableHarmonyKinds (size_t namesListMaxLength);
 std::string availableHarmonyKindsNames (size_t namesListMaxLength);
 
 // constant
-EXP extern const int K_HARMONY_INVERSION_NONE;
+constexpr int K_HARMONY_INVERSION_NONE = -1;
 
 EXP extern std::map <std::string, msrHarmonyKind>
   gGlobalHarmonyKindsMap;

@@ -1811,7 +1811,7 @@ void xml2lyRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void xml2lyRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "musicxml2lilypondInsiderRegularHandler '" << fHandlerHeader << "':" <<

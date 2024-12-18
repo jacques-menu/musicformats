@@ -234,7 +234,7 @@ void msrWords::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 29;
+  constexpr int fieldWidth = 29;
 
   os << std::left <<
     std::setw (fieldWidth) <<

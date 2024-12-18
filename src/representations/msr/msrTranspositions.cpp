@@ -249,7 +249,7 @@ std::string msrTransposition::asString () const
 
 void msrTransposition::print (std::ostream& os) const
 {
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os <<
     "[Transpose" <<

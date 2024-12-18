@@ -217,7 +217,7 @@ void msrVoiceStaffChange::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 14;
+  constexpr int fieldWidth = 14;
   os << std::left <<
     std::setw (fieldWidth) <<
     "fTakeOffStaff" << " : " << fTakeOffStaff->getStaffName () <<

@@ -199,7 +199,7 @@ void lpsrHeader::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 16;
+  constexpr int fieldWidth = 16;
 
   // identification
 

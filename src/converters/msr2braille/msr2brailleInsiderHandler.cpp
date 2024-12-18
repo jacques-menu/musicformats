@@ -640,7 +640,7 @@ void msr2brailleInsiderOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msr2brailleInsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "msr2brailleInsiderHandler:" <<

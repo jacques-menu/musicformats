@@ -558,7 +558,7 @@ void msrBook::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 38;
+  constexpr int fieldWidth = 38;
 
   size_t bookElementsListSize =
     fBookElementsList.size ();
@@ -750,7 +750,7 @@ void msrBook::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 38;
+  constexpr int fieldWidth = 38;
 
   size_t bookElementsListSize =
     fBookElementsList.size ();
@@ -947,7 +947,7 @@ void msrBook::printSummary (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 38;
+  constexpr int fieldWidth = 38;
 
   size_t bookElementsListSize =
     fBookElementsList.size ();

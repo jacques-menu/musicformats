@@ -275,7 +275,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
-    const int fieldWidth = 16;
+    constexpr int fieldWidth = 16;
 
     std::stringstream ss;
 
@@ -332,7 +332,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
-        const int fieldWidth = 22;
+        constexpr int fieldWidth = 22;
 
         gLog <<
             gTab << std::setw (fieldWidth) <<
@@ -367,7 +367,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
-      const int fieldWidth = 22;
+      constexpr int fieldWidth = 22;
 
       gLog <<
         gTab << std::setw (fieldWidth) <<
@@ -394,7 +394,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
-        const int fieldWidth = 22;
+        constexpr int fieldWidth = 22;
 
         gLog <<
           gTab << std::setw (fieldWidth) <<
@@ -423,7 +423,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
 
 #ifdef MF_TRACE_IS_ENABLED
         if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
-          const int fieldWidth = 22;
+          constexpr int fieldWidth = 22;
 
           gLog <<
             gTab << std::setw (fieldWidth) <<
@@ -451,7 +451,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
-        const int fieldWidth = 24;
+        constexpr int fieldWidth = 24;
 
         gLog <<
           gTab << std::setw (fieldWidth) <<

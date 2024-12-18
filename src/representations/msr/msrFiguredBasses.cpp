@@ -989,7 +989,7 @@ void msrFiguredBass::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 36;
+  constexpr int fieldWidth = 36;
 
   os << std::left <<
     std::setw (fieldWidth) <<

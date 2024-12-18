@@ -16,6 +16,8 @@
 #include <cmath>
 #include <string>
 
+#include "mfConstants.h"
+
 #include "oahHarmoniesExtraOah2manPage.h"
 
 #include "oahOah.h"

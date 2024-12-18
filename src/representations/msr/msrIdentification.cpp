@@ -655,7 +655,7 @@ void msrIdentification::print (std::ostream& os) const
     "[Identification" <<
     std::endl;
 
-  const int fieldWidth = 20;
+  constexpr int fieldWidth = 20;
 
   Bool emptyIdentification (true);
 

@@ -3312,7 +3312,7 @@ void msrSegment::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 20;
+  constexpr int fieldWidth = 20;
 
   os <<
     std::setw (fieldWidth) <<
@@ -3404,7 +3404,7 @@ void msrSegment::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 20;
+  constexpr int fieldWidth = 20;
 
   if (! fSegmentElementsList.size ()) {
     os <<

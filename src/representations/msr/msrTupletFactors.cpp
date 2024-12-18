@@ -84,7 +84,7 @@ void msrTupletFactor::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 11;
+  constexpr int fieldWidth = 11;
 
   os << std::left <<
     std::setw (fieldWidth) <<

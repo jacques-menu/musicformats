@@ -500,7 +500,7 @@ void msrMultiMeasureRest::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 41;
+  constexpr int fieldWidth = 41;
 
   os <<
     "fMultiMeasureRestUpLinkToSegment" << ": ";

@@ -123,7 +123,7 @@ void displayLpsrNamesVisitor::visitEnd (S_msrScore& elt)
 
   ++gIndenter;
 
-  const int fieldWidth = 3;
+  constexpr int fieldWidth = 3;
 
   gLog <<
     std::setw (fieldWidth) <<
@@ -190,7 +190,7 @@ void displayLpsrNamesVisitor::visitStart (S_msrPartGroup& elt)
 
   ++gIndenter;
 
-  const int fieldWidth = 25;
+  constexpr int fieldWidth = 25;
 
   gLog << std::left <<
     std::setw (fieldWidth) <<
@@ -264,7 +264,7 @@ void displayLpsrNamesVisitor::visitStart (S_msrPart& elt)
 
   ++gIndenter;
 
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   gLog << std::left <<
     std::setw (fieldWidth) <<
@@ -344,7 +344,7 @@ void displayLpsrNamesVisitor::visitStart (S_msrStaff& elt)
   ++gIndenter;
 
 
-  const int fieldWidth = 28;
+  constexpr int fieldWidth = 28;
 
   gLog << std::left <<
     std::setw (fieldWidth) <<
@@ -417,7 +417,7 @@ void displayLpsrNamesVisitor::visitStart (S_msrVoice& elt)
 
   ++gIndenter;
 
-  const int fieldWidth = 28;
+  constexpr int fieldWidth = 28;
 
   gLog << std::left <<
     std::setw (fieldWidth) <<

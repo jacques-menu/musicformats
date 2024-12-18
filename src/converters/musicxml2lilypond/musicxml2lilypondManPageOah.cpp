@@ -14,6 +14,7 @@
 
 #include <regex>
 
+#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
 
 #include "oahOah.h"
@@ -169,7 +170,7 @@ void xml2lyManPageGenerateAtom::browseData (basevisitor* v)
 
 void xml2lyManPageGenerateAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "musicxml2lilypondInsiderManPageGenerateAtom:" <<

@@ -103,7 +103,7 @@ std::string msrHarmonyInterval::harmonyIntervalAsString () const
 {
   std::stringstream ss;
 
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   ss << std::left <<
     "HarmonyInterval" <<
@@ -2730,7 +2730,7 @@ void msrHarmonyInterval::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 22;
+  constexpr int fieldWidth = 22;
 
   os << std::left <<
   /* JMI
@@ -2860,9 +2860,6 @@ msrModeKind modeKindFromString (
 
 // harmonies
 //______________________________________________________________________________
-// constant
-const int K_HARMONY_INVERSION_NONE = -1;
-
 std::string msrHarmonyKindAsString (
   msrHarmonyKind harmonyKind)
 {
@@ -4115,7 +4112,7 @@ void msrHarmonyContents::printAllHarmoniesContents (
               noteSemiTonesPitchKind);
 
         // print it
-        const int fieldWidth2 = 8;
+        constexpr int fieldWidth2 = 8;
 
         os << std::left <<
           std::setw (fieldWidth2) <<
@@ -4217,7 +4214,7 @@ void msrHarmonyContents::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 17;
+  constexpr int fieldWidth = 17;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -5259,7 +5256,7 @@ void msrHarmony::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 44;
+  constexpr int fieldWidth = 44;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -5599,7 +5596,7 @@ void printHarmonyDetails (
             harmonyInterval->
               getHarmonyIntervalIntervalKind ();
 
-        const int fieldWidth1 = 17;
+        constexpr int fieldWidth1 = 17;
 
         os << std::left <<
           std::setw (fieldWidth1) <<
@@ -5621,7 +5618,7 @@ void printHarmonyDetails (
               noteSemiTonesPitchKind);
 
         // print it
-        const int fieldWidth2 = 8;
+        constexpr int fieldWidth2 = 8;
 
         os << std::left <<
           std::setw (fieldWidth2) <<
@@ -5790,7 +5787,7 @@ void printHarmonyAnalysis (
                 noteSemiTonesPitchKind);
 
           // print it
-          const int fieldWidth2 = 5;
+          constexpr int fieldWidth2 = 5;
 
           os << std::left <<
             std::setw (fieldWidth2) <<
@@ -5881,7 +5878,7 @@ void printHarmonyAnalysis (
                 harmonyInterval2->
                   getHarmonyIntervalIntervalKind ();
 
-            const int fieldWidth1 = 5;
+            constexpr int fieldWidth1 = 5;
 
             // fetch the semitones pitch kind
             msrSemiTonesPitchKind
@@ -5922,7 +5919,7 @@ void printHarmonyAnalysis (
             // print it
             ++gIndenter;
 
-            const int fieldWidth2 = 20;
+            constexpr int fieldWidth2 = 20;
 
             os << std::left <<
               std::setw (fieldWidth1) <<

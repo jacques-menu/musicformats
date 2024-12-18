@@ -19,6 +19,7 @@
 
 #include "mfPreprocessorSettings.h"
 
+#include "mfConstants.h"
 #include "mfOutputFileOah.h"
 #include "mfStringsHandling.h"
 
@@ -239,7 +240,7 @@ std::string brailleOutputKindAtom::asActualLongNamedOptionString () const
 
 void brailleOutputKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "brailleOutputKindAtom:" <<
@@ -505,7 +506,7 @@ std::string brailleUTFKindAtom::asActualLongNamedOptionString () const
 
 void brailleUTFKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "brailleUTFKindAtom:" <<
@@ -765,7 +766,7 @@ std::string brailleByteOrderingKindAtom::asActualLongNamedOptionString () const
 
 void brailleByteOrderingKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "brailleByteOrderingKindAtom:" <<

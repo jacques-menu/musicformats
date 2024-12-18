@@ -16,9 +16,11 @@
 #include "visitor.h"
 #include "oahWae.h"
 
+#include "mfConstants.h"
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
+#include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
@@ -435,7 +437,7 @@ std::string mfMultiGenerationOutputKindAtom::asActualLongNamedOptionString () co
 
 void mfMultiGenerationOutputKindAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "MultiGenerationOutputKindAtom:" <<

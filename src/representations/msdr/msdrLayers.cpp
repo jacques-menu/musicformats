@@ -313,7 +313,7 @@ void msdrLayer::printFull (std::ostream& os) const
     ")" <<
     std::endl;
 
-  const int fieldWidth = 41;
+  constexpr int fieldWidth = 41;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -397,7 +397,7 @@ void msdrLayer::print (std::ostream& os) const
     ")" <<
     std::endl;
 
-  const int fieldWidth = 41;
+  constexpr int fieldWidth = 41;
 
 #ifdef MF_TRACE_IS_ENABLED
   // print the voice measures flat list

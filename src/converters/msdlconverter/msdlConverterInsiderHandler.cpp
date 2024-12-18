@@ -1002,7 +1002,7 @@ void msdlConverterInsiderOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void msdlConverterInsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "msdlConverterInsiderHandler:" <<

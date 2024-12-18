@@ -1417,7 +1417,7 @@ void msrPartGroup::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 26;
+  constexpr int fieldWidth = 26;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1541,7 +1541,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 25;
+  constexpr int fieldWidth = 25;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1576,7 +1576,7 @@ void msrPartGroup::printSummary (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 26;
+  constexpr int fieldWidth = 26;
 
   os << std::left <<
     std::setw (fieldWidth) <<

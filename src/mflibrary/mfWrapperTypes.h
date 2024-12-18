@@ -417,103 +417,51 @@ EXP std::ostream& operator << (
 
 //______________________________________________________________________________
 // input line numbers
-// EXP extern const int K_MF_INPUT_LINE_UNKNOWN_ = 0;
-// EXP extern const std::string
-//   kInputLineNumberPrefix ("L_"),
-//   kInputLineNumberNeutralValueString ("*Unknown*");
-
 typedef mfValueWithNeutralValue
   <int, kInputLineNumberPrefix, K_MF_INPUT_LINE_UNKNOWN_, kInputLineNumberNeutralValueString>
     mfInputLineNumber;
 
 //______________________________________________________________________________
 // input locations
-EXP extern const std::string
-  kInputLocationRangePrefix (".."),
-  kInputLocationNeutralValueString ("*Unknown*");
-
 typedef mfRange
   <mfInputLineNumber, kInputLocationRangePrefix>
     mfInputLocationRange;
 
 //______________________________________________________________________________
 // staff numbers
-EXP extern const int K_STAFF_NUMBER_UNKNOWN_ = 0;
-EXP extern const std::string
-  kStaffNumberPrefix ("S_"),
-  kStaffNumberNeutralValueString ("*Unknown*");
-
 typedef mfValueWithNeutralValue
   <int, kStaffNumberPrefix, K_STAFF_NUMBER_UNKNOWN_, kInputLineNumberNeutralValueString>
    mfStaffNumber;
 
 //______________________________________________________________________________
 // voice numbers
-EXP extern const int K_VOICE_NUMBER_UNKNOWN_ = 0;
-EXP extern const std::string
-  kVoiceNumberPrefix ("V_"),
-  kVoiceNumberNeutralValueString ("*Unknown*");
-
 typedef mfValueWithNeutralValue
   <int, kVoiceNumberPrefix, K_VOICE_NUMBER_UNKNOWN_, kVoiceNumberNeutralValueString>
     mfVoiceNumber;
 
 //______________________________________________________________________________
-// stanzas numbers
-EXP extern const std::string K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_";
-// extern const std::string K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
-EXP extern const std::string
-  kStanzaNumberPrefix ("ST_"),
-  kStanzaNumberNeutralValueString ("*Unknown*");
-
-typedef mfValueWithNeutralValue
-  <std::string, kStanzaNumberPrefix, K_STANZA_NUMBER_UNKNOWN_, kStanzaNumberNeutralValueString>
-    mfStanzaNumber;
-
-// template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
-
-//______________________________________________________________________________
 // measure numbers
-EXP extern const std::string K_MEASURE_NUMBER_UNKNOWN_ = "K_MEASURE_NUMBER_UNKNOWN_";
-extern const std::string
-  kMeasureNumberPrefix ("ST_"),
-  kMeasureNumberNeutralValueString ("*Unknown*");
-
 typedef mfValueWithNeutralValue
   <std::string, kMeasureNumberPrefix, K_MEASURE_NUMBER_UNKNOWN_, kMeasureNumberNeutralValueString>
     mfMeasureNumber;
 
 //______________________________________________________________________________
 // whole notes durations
-EXP extern const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = 0;
-EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN____ = // JMI v0.9.72 duplicates K_WHOLE_NOTES_UNKNOWN_ to be fixed
-  msrWholeNotes (0, 1);
-
-EXP extern const std::string
-  kWholeNotePrefix ("WN_"),
-  kWholeNoteNeutralValueString ("*Unknown*");
-
 typedef mfValueWithNeutralValue
   <msrWholeNotes, kWholeNotePrefix, K_WHOLE_NOTES_UNKNOWN____, kWholeNoteNeutralValueString>
     mfWohleNotes;
 
 //______________________________________________________________________________
 // moments
-EXP extern const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_ =
-  msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
-
-EXP extern const msrMoment K_MOMENT_UNKNOWN_ =
-  msrMoment (
-    K_MEASURE_POSITION_UNKNOWN_,
-    K_MEASURE_POSITION_UNKNOWN_);
-
-EXP extern const std::string
-  kMomentPrefix ("WN_"),
-  kMomentNeutralValueString ("*Unknown*");
-
 typedef mfValueWithNeutralValue
   <msrMoment, kMomentPrefix, K_MOMENT_UNKNOWN_, kMomentNeutralValueString>
     mfMoment;
+
+//______________________________________________________________________________
+// lyrics
+typedef mfValueWithNeutralValue
+  <std::string, kStanzaNumberPrefix, K_STANZA_NUMBER_UNKNOWN_, kStanzaNumberNeutralValueString>
+    mfStanzaNumber;
 
 //______________________________________________________________________________
 void testWrapperTypes ();

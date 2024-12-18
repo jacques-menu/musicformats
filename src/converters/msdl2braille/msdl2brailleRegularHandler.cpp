@@ -1342,7 +1342,7 @@ void msdl2brailleRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void msdl2brailleRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "msdl2brailleRegularHandler '" << fHandlerHeader << "':" <<

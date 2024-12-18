@@ -566,7 +566,7 @@ void xml2xmlInsiderOahGroup::browseData (basevisitor* v)
 //______________________________________________________________________________
 void xml2xmlInsiderHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "xml2xmlInsiderHandler:" <<

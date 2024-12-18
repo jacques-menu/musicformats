@@ -248,7 +248,7 @@ void msrSpanner::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 24;
+  constexpr int fieldWidth = 24;
 
   os << std::left <<
     std::setw (fieldWidth) <<

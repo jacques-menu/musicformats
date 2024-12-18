@@ -401,7 +401,7 @@ void mfslInterpreterRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void mfslInterpreterRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "mfslInterpreterRegularHandler '" << fHandlerHeader << "':" <<

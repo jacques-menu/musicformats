@@ -364,7 +364,7 @@ std::string msrReplaceClefAtom::asActualLongNamedOptionString () const
 
 void msrReplaceClefAtom::print (std::ostream& os) const
 {
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
+  constexpr int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
     "msrReplaceClefAtom:" <<

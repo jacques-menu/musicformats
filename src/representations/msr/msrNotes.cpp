@@ -228,7 +228,7 @@ void msrNote::initializeNote ()
 
     ++gIndenter;
 
-    const int fieldWidth = 30;
+    constexpr int fieldWidth = 30;
 
     ss <<
       std::left <<
@@ -4945,7 +4945,7 @@ void msrNote::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 34;
+  constexpr int fieldWidth = 34;
 
   // print measure position and sounding whole notes
   os << std::left <<
@@ -5824,7 +5824,7 @@ void msrNote::printFull (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 44;
+  constexpr int fieldWidth = 44;
 
   // print measure position and sounding whole notes
   os << std::left <<

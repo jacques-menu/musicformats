@@ -651,7 +651,7 @@ void msr2lpsrTranslator::displayCurrentOnGoingValues ()
 
   ++gIndenter;
 
-  const int fieldWidth = 25;
+  constexpr int fieldWidth = 25;
 
   gLog << std::left <<
     std::setw (fieldWidth) <<
@@ -756,7 +756,7 @@ void msr2lpsrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
   if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
     ++gIndenter;
 
-    const int fieldWidth = 19;
+    constexpr int fieldWidth = 19;
 
     std::list <S_msrHiddenMeasureAndBarLineDescr>::const_iterator
       iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
@@ -1032,7 +1032,7 @@ void msr2lpsrTranslator::setPaperIndentsIfNeeded (
 */
     ++gIndenter;
 
-//     const int fieldWidth = 40;
+//     constexpr int fieldWidth = 40;
 
 //     iss << std::left <<
     iss <<

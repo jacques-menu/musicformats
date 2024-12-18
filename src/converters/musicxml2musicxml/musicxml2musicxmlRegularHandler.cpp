@@ -1344,7 +1344,7 @@ void xml2xmlRegularHandler::checkOptionsAndArguments () const
 //______________________________________________________________________________
 void xml2xmlRegularHandler::print (std::ostream& os) const
 {
-  const int fieldWidth = 27;
+  constexpr int fieldWidth = 27;
 
   os <<
     "xml2xmlRegularHandler '" << fHandlerHeader << "':" <<

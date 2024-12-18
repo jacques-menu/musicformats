@@ -377,7 +377,8 @@ void mxsrStaffChangeEvent::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 29;
+  constexpr int fieldWidth = 29;
+
   os << std::left <<
     std::setw (fieldWidth) <<
     "fEventInputStartLineNumber" << " : L" << fEventInputStartLineNumber <<
@@ -524,7 +525,8 @@ void mxsrGraceNoteEvent::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 26;
+  constexpr int fieldWidth = 26;
+
   os << std::left <<
     std::setw (fieldWidth) <<
     "fEventInputStartLineNumber" << " : " << fEventInputStartLineNumber <<
@@ -650,7 +652,8 @@ void mxsrChordEvent::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 26;
+  constexpr int fieldWidth = 26;
+
   os << std::left <<
     std::setw (fieldWidth) <<
     "fEventInputStartLineNumber" << " : " << fEventInputStartLineNumber <<
@@ -782,7 +785,8 @@ void mxsrTupletEvent::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 26;
+  constexpr int fieldWidth = 26;
+
   os << std::left <<
     std::setw (fieldWidth) <<
     "fEventInputStartLineNumber" << " : " << fEventInputStartLineNumber <<
@@ -1802,7 +1806,8 @@ void mxsrEventsCollection::print (std::ostream& os) const
 
   os << std::endl << "--------" << std::endl << std::endl;
 
-  const int fieldWidth = 26;
+  constexpr int fieldWidth = 26;
+
   os << std::left <<
     std::setw (fieldWidth) <<
     "fAllEventsList" << " : " <<

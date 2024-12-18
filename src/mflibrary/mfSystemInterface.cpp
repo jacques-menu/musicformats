@@ -34,8 +34,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 EXP char* mfStrErrorCString ()
 {
-  const int    kBufferSize = 1024;
-  static char  pBuffer [kBufferSize];
+  constexpr int kBufferSize = 1024;
+  static char   pBuffer [kBufferSize];
 
   // OS-specific call
 #ifdef __APPLE__

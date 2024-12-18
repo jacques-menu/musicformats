@@ -229,7 +229,7 @@ void msrCreditWords::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 35;
+  constexpr int fieldWidth = 35;
 
   os <<
     std::setw (fieldWidth) <<
@@ -461,7 +461,7 @@ void msrCredit::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  constexpr int fieldWidth = 33;
 
   os << std::left <<
     std::setw (fieldWidth) <<

@@ -11656,7 +11656,7 @@ void msrVoice::printFull (std::ostream& os) const
     ")" <<
     std::endl;
 
-  const int fieldWidth = 43;
+  constexpr int fieldWidth = 43;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -12001,7 +12001,7 @@ void msrVoice::print (std::ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 43;
+  constexpr int fieldWidth = 43;
 
   // print the regular voice harmonies voice name if any
   os << std::left <<

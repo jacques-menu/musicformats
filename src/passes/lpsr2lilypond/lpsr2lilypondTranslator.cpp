@@ -65,7 +65,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // for comments highlighting in the generated Lilypond code
-const int commentFieldWidth = 30;
+constexpr int commentFieldWidth = 30;
 
 //______________________________________________________________________________
 S_lpsrRepeat lpsrRepeat::create (
@@ -14526,7 +14526,7 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
     noteTheSyllableIsAttachedTo =
       syllable->getSyllableUpLinkToNote ();
 
-  const int fieldWidth = 29;
+  constexpr int fieldWidth = 29;
 
   fLilypondCodeStream << std::left <<
     std::endl <<
@@ -15856,7 +15856,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 
     gIndenter++;
 
-    const int fieldWidth = 28;
+    constexpr int fieldWidth = 28;
 
 //     syllable->printForTrace (
 //       fLilypondCodeStream,
@@ -16347,7 +16347,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 
     gIndenter++;
 
-    const int fieldWidth = 28;
+    constexpr int fieldWidth = 28;
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<
@@ -16816,7 +16816,7 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 
     gIndenter++;
 
-    const int fieldWidth = 28;
+    constexpr int fieldWidth = 28;
 
     fLilypondCodeStream << std::left <<
       std::setw (fieldWidth) <<

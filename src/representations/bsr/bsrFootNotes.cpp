@@ -147,7 +147,7 @@ void bsrFootNotes::print (std::ostream& os) const
   ++gIndenter;
 
   // print the notes if any
-  const int fieldWidth = 19;
+  constexpr int fieldWidth = 19;
 
   size_t footNotesElementsListSize = fFootNotesElementsList.size ();
 
