@@ -1266,6 +1266,71 @@ and '-trace-passes, -tpasses'.)",
       traceGraceNotesBooleanAtom);
 }
 
+void traceOahGroup::initializeCueNotesTraceOah ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Cue notes",
+        "help-trace-cue-notes", "htcn",
+R"()",
+      oahElementVisibilityKind::kElementVisibilityWhole,
+      this);
+
+  appendSubGroupToGroup (subGroup);
+
+//   // the chords multiplex booleans atom
+//
+//   S_oahCommonPrefixBooleansAtom
+//     chordsMultiplexBooleansAtom =
+//       oahCommonPrefixBooleansAtom::create (
+//         "trace-in-chords-and-tuplets", "ticat",
+//         "Trace SHORT_NAME/LONG_NAME in chords and tuplets.",
+//         "SHORT_NAME",
+//         "LONG_NAME",
+//         fShortTracePrefix,
+//         fLongTracePrefix);
+//
+//   subGroup->
+//     appendAtomToSubGroup (
+//       chordsMultiplexBooleansAtom);
+
+  // cue notes basics
+
+  S_oahThreeBooleansAtom
+    traceCueNotesBasicsBooleanAtom =
+      oahThreeBooleansAtom::create (
+        "trace-cue-notes-basics", "tcuesb",
+R"(Cue notes basics).
+This option implies -trace-mxsr-events, -tmxsre'
+and '-trace-passes, -tpasses'.)",
+        "fTraceCueNotesBasics",
+        fTraceCueNotesBasics,
+        fTraceMxsrEventsAtom,
+        fTracePassesBooleanAtom);
+  subGroup->
+    appendAtomToSubGroup (
+      traceCueNotesBasicsBooleanAtom);
+
+  // cue notes
+
+  S_oahTwoBooleansAtom
+    traceCueNotesBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-cue-notes", "tcues",
+R"(Cue notes basics.
+This option implies '-trace-cue-notes-basics, -tcuesb'
+-trace-mxsr-events, -tmxsre'
+and '-trace-passes, -tpasses'.)",
+        "fTraceCueNotes",
+        fTraceCueNotes,
+        traceCueNotesBasicsBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceCueNotesBooleanAtom);
+}
+
 void traceOahGroup::initializeChordsTraceOah ()
 {
   S_oahSubGroup
@@ -2994,6 +3059,9 @@ void traceOahGroup::initializeTraceOahGroup ()
   // grace notes
   initializeGraceNotesTraceOah ();
 
+  // cue notes
+  initializeCueNotesTraceOah ();
+
   // chords
   initializeChordsTraceOah ();
 
@@ -3473,6 +3541,14 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceGraceNotes <<
     std::endl <<
 
+    // cue notes
+    std::setw (fieldWidth) << "fTraceCueNotesBasics" << ": " <<
+    fTraceCueNotesBasics <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceCueNotes" << ": " <<
+    fTraceCueNotes <<
+    std::endl <<
+
     // tremolos
     std::setw (fieldWidth) << "fTraceTremolos" << ": " <<
     fTraceTremolos <<
@@ -3563,6 +3639,14 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
     std::setw (fieldWidth) << "fTraceGraceNotes" << ": " <<
     fTraceGraceNotes <<
+    std::endl <<
+
+    // cue notes
+    std::setw (fieldWidth) << "fTraceCueNotesBasics" << ": " <<
+    fTraceCueNotesBasics <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceCueNotes" << ": " <<
+    fTraceCueNotes <<
     std::endl <<
 
     // chords

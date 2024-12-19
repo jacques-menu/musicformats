@@ -55,15 +55,26 @@ std::string mxsrStaffChangeEventKindAsString (
 std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEventKind& elt);
 
 //________________________________________________________________________
-enum class mxsrGraceNoteEventKind {
-  kEventGraceNote_NONE,
-  kEventGraceNoteBegin, kEventGraceNoteEnd
+enum class mxsrGraceEventKind {
+  kEventGrace_NONE,
+  kEventGraceBegin, kEventGraceEnd
 };
 
-std::string mxsrGraceNoteEventKindAsString (
-  mxsrGraceNoteEventKind noteGraceNoteEventKind);
+std::string mxsrGraceEventKindAsString (
+  mxsrGraceEventKind noteGraceEventKind);
 
-std::ostream& operator << (std::ostream& os, const mxsrGraceNoteEventKind& elt);
+std::ostream& operator << (std::ostream& os, const mxsrGraceEventKind& elt);
+
+//________________________________________________________________________
+enum class mxsrCueEventKind {
+  kEventCue_NONE,
+  kEventCueBegin, kEventCueEnd
+};
+
+std::string mxsrCueEventKindAsString (
+  mxsrCueEventKind noteCueEventKind);
+
+std::ostream& operator << (std::ostream& os, const mxsrCueEventKind& elt);
 
 //________________________________________________________________________
 enum class mxsrChordEventKind {
@@ -380,46 +391,46 @@ bool compareStaffChangeEventsByIncreasingInputStartLineNumber (
   S_mxsrStaffChangeEvent& second);
 
 //------------------------------------------------------------------------
-class EXP mxsrGraceNoteEvent : public mxsrNoteEvent
+class EXP mxsrGraceEvent : public mxsrNoteEvent
 {
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrGraceNoteEvent> create (
-                            int                    eventSequentialNumber,
-                            int                    noteSequentialNumber,
-                            int                    noteEventStaffNumber,
-                            int                    noteEventVoiceNumber,
-                            mxsrGraceNoteEventKind graceNoteEventKind,
-                            int                    eventInputStartLineNumber,
-                            int                    eventInputEndLineNumber);
+    static SMARTP<mxsrGraceEvent> create (
+                            int                eventSequentialNumber,
+                            int                noteSequentialNumber,
+                            int                noteEventStaffNumber,
+                            int                noteEventVoiceNumber,
+                            mxsrGraceEventKind graceEventKind,
+                            int                eventInputStartLineNumber,
+                            int                eventInputEndLineNumber);
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mxsrGraceNoteEvent (
-                            int                    eventSequentialNumber,
-                            int                    noteSequentialNumber,
-                            int                    noteEventStaffNumber,
-                            int                    noteEventVoiceNumber,
-                            mxsrGraceNoteEventKind graceNoteEventKind,
-                            int                    eventInputStartLineNumber,
-                            int                    eventInputEndLineNumber);
+                          mxsrGraceEvent (
+                            int                eventSequentialNumber,
+                            int                noteSequentialNumber,
+                            int                noteEventStaffNumber,
+                            int                noteEventVoiceNumber,
+                            mxsrGraceEventKind graceEventKind,
+                            int                eventInputStartLineNumber,
+                            int                eventInputEndLineNumber);
 
-    virtual               ~mxsrGraceNoteEvent ();
+    virtual               ~mxsrGraceEvent ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    mxsrGraceNoteEventKind
-                          getGraceNoteEventKind () const
-                              { return fGraceNoteEventKind; }
+    mxsrGraceEventKind
+                          getGraceEventKind () const
+                              { return fGraceEventKind; }
 
   public:
 
@@ -448,11 +459,86 @@ class EXP mxsrGraceNoteEvent : public mxsrNoteEvent
     // private fields
     // ------------------------------------------------------
 
-    mxsrGraceNoteEventKind    fGraceNoteEventKind;
+    mxsrGraceEventKind    fGraceEventKind;
 };
-typedef SMARTP<mxsrGraceNoteEvent> S_mxsrGraceNoteEvent;
-EXP std::ostream& operator << (std::ostream& os, const S_mxsrGraceNoteEvent& elt);
-EXP std::ostream& operator << (std::ostream& os, const mxsrGraceNoteEvent& elt);
+typedef SMARTP<mxsrGraceEvent> S_mxsrGraceEvent;
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrGraceEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const mxsrGraceEvent& elt);
+
+//------------------------------------------------------------------------
+class EXP mxsrCueEvent : public mxsrNoteEvent
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static SMARTP<mxsrCueEvent> create (
+                            int              eventSequentialNumber,
+                            int              noteSequentialNumber,
+                            int              noteEventStaffNumber,
+                            int              noteEventVoiceNumber,
+                            mxsrCueEventKind cueEventKind,
+                            int              eventInputStartLineNumber,
+                            int              eventInputEndLineNumber);
+
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mxsrCueEvent (
+                            int              eventSequentialNumber,
+                            int              noteSequentialNumber,
+                            int              noteEventStaffNumber,
+                            int              noteEventVoiceNumber,
+                            mxsrCueEventKind cueEventKind,
+                            int              eventInputStartLineNumber,
+                            int              eventInputEndLineNumber);
+
+    virtual               ~mxsrCueEvent ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    mxsrCueEventKind
+                          getCueEventKind () const
+                              { return fCueEventKind; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+
+  private:
+
+    // private services
+    // ------------------------------------------------------
+
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    std::string           asString () const override;
+    std::string           asShortString () const override;
+
+    void                  print (std::ostream& os) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    mxsrCueEventKind  fCueEventKind;
+};
+typedef SMARTP<mxsrCueEvent> S_mxsrCueEvent;
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrCueEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const mxsrCueEvent& elt);
 
 //------------------------------------------------------------------------
 class EXP mxsrChordEvent : public mxsrNoteEvent
@@ -656,27 +742,45 @@ class EXP mxsrEventsCollection : public smartable
                           getStaffChangeEventsList () const
                               { return fStaffChangeEventsList; }
 
+    // grace events
+    const std::map <int, S_mxsrGraceEvent>&
+                          getGraceBeginsMap () const
+                              { return fGraceBeginsMap; }
+
+    const std::map <int, S_mxsrGraceEvent>&
+                          getGraceEndsMap () const
+                              { return fGraceEndsMap; }
+
+    // cue events
+    const std::map <int, S_mxsrCueEvent>&
+                          getCueBeginsMap () const
+                              { return fCueBeginsMap; }
+
+    const std::map <int, S_mxsrCueEvent>&
+                          getCueEndsMap () const
+                              { return fCueEndsMap; }
+
     // chord events
     const std::map <int, S_mxsrChordEvent>&
-                          getChordsBeginsMap () const
-                              { return fChordsBeginsMap; }
+                          getChordBeginsMap () const
+                              { return fChordBeginsMap; }
 
     const std::map <int, S_mxsrChordEvent>&
-                          getChordsEndsMap () const
-                              { return fChordsEndsMap; }
+                          getChordEndsMap () const
+                              { return fChordEndsMap; }
 
     // tuplet events
     const std::list <S_mxsrTupletEvent>&
-                          getTupletsBeginsList () const
-                              { return fTupletsBeginsList; }
+                          getTupletBeginsList () const
+                              { return fTupletBeginsList; }
 
     const std::list <S_mxsrTupletEvent>&
-                          getTupletsEndsList () const
-                              { return fTupletsEndsList; }
+                          getTupletEndsList () const
+                              { return fTupletEndsList; }
 
     const std::multimap <int, S_mxsrTupletEvent>&
-                          getTupletsEventMultiMap () const
-                              { return fTupletsEventsMultiMap; }
+                          getTupletEventMultiMap () const
+                              { return fTupletEventsMultiMap; }
 
     // all events
     const std::list <S_mxsrEvent>&
@@ -720,24 +824,45 @@ class EXP mxsrEventsCollection : public smartable
                             int noteSequentialNumber) const;
 
     // grace note events
-    void                  registerGraceNoteBegin (
+    void                  registerGraceBegin (
                             int noteSequentialNumber,
                             int noteEventStaffNumber,
                             int noteEventVoiceNumber,
                             int eventInputStartLineNumber,
                             int eventInputEndLineNumber);
 
-    void                  registerGraceNoteEnd (
+    void                  registerGraceEnd (
                             int noteSequentialNumber,
                             int noteEventStaffNumber,
                             int noteEventVoiceNumber,
                             int eventInputStartLineNumber,
                             int eventInputEndLineNumber);
 
-    S_mxsrGraceNoteEvent  fetchGraceNoteBeginAtNoteSequentialNumber (
+    S_mxsrGraceEvent      fetchGraceBeginAtNoteSequentialNumber (
                             int noteSequentialNumber) const;
 
-    S_mxsrGraceNoteEvent  fetchGraceNoteEndAtNoteSequentialNumber (
+    S_mxsrGraceEvent      fetchGraceEndAtNoteSequentialNumber (
+                            int noteSequentialNumber) const;
+
+    // cue note events
+    void                  registerCueBegin (
+                            int noteSequentialNumber,
+                            int noteEventStaffNumber,
+                            int noteEventVoiceNumber,
+                            int eventInputStartLineNumber,
+                            int eventInputEndLineNumber);
+
+    void                  registerCueEnd (
+                            int noteSequentialNumber,
+                            int noteEventStaffNumber,
+                            int noteEventVoiceNumber,
+                            int eventInputStartLineNumber,
+                            int eventInputEndLineNumber);
+
+    S_mxsrCueEvent    fetchCueBeginAtNoteSequentialNumber (
+                            int noteSequentialNumber) const;
+
+    S_mxsrCueEvent    fetchCueEndAtNoteSequentialNumber (
                             int noteSequentialNumber) const;
 
     // chord events
@@ -807,6 +932,8 @@ class EXP mxsrEventsCollection : public smartable
     void                  printAllEvents (std::ostream& os) const;
 
     void                  printStaffChangeEvents (std::ostream& os) const;
+    void                  printGraceEvents (std::ostream& os) const;
+    void                  printCueEvents (std::ostream& os) const;
     void                  printChordEvents (std::ostream& os) const;
     void                  printTupletEvents (std::ostream& os) const;
 
@@ -840,27 +967,34 @@ class EXP mxsrEventsCollection : public smartable
     // grace notes events
       // there can be only one grace note begin and one chord end per note,
       // hence two maps, indexed by note sequential number
-    std::map <int, S_mxsrGraceNoteEvent>
-                          fGraceNotesBeginsMap,
-                          fGraceNotesEndsMap;
+    std::map <int, S_mxsrGraceEvent>
+                          fGraceBeginsMap,
+                          fGraceEndsMap;
+
+    // cue notes events
+      // there can be only one cue note begin and one chord end per note,
+      // hence two maps, indexed by note sequential number
+    std::map <int, S_mxsrCueEvent>
+                          fCueBeginsMap,
+                          fCueEndsMap;
 
     // chords events
       // there can be only one chord begin and one chord end per note,
       // hence two maps, indexed by note sequential number
     std::map <int, S_mxsrChordEvent>
-                          fChordsBeginsMap,
-                          fChordsEndsMap;
+                          fChordBeginsMap,
+                          fChordEndsMap;
 
     // tuplet events
       // there can be several tuplets start and/or stop events per note,
       // hence two lists and a multimap, indexed by note sequential number,
 
     std::list <S_mxsrTupletEvent>
-                          fTupletsBeginsList,
-                          fTupletsEndsList;
+                          fTupletBeginsList,
+                          fTupletEndsList;
 
     std::multimap <int, S_mxsrTupletEvent>
-                          fTupletsEventsMultiMap;
+                          fTupletEventsMultiMap;
 
     // all events
     std::list <S_mxsrEvent>

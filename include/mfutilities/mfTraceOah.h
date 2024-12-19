@@ -82,6 +82,8 @@ class EXP traceOahGroup : public oahGroup
 
     void                  initializeGraceNotesTraceOah ();
 
+    void                  initializeCueNotesTraceOah ();
+
     void                  initializeChordsTraceOah ();
 
     void                  initializeTupletsTraceOah ();
@@ -526,6 +528,17 @@ class EXP traceOahGroup : public oahGroup
                               { fTraceGraceNotes = true; }
     Bool                  getTraceGraceNotes () const
                               { return fTraceGraceNotes; }
+
+    // cue notes
+    void                  setTraceCueNotesBasics ()
+                              { fTraceCueNotesBasics = true; }
+    Bool                  getTraceCueNotesBasics () const
+                              { return fTraceCueNotesBasics; }
+
+    void                  setTraceCueNotes ()
+                              { fTraceCueNotes = true; }
+    Bool                  getTraceCueNotes () const
+                              { return fTraceCueNotes; }
 
     // tremolos
     void                  setTraceTremolos ()
@@ -1159,6 +1172,13 @@ class EXP traceOahGroup : public oahGroup
 
     Bool                  fTraceGraceNotesBasics;
     Bool                  fTraceGraceNotes;
+
+
+    // cue notes
+    // --------------------------------------
+
+    Bool                  fTraceCueNotesBasics;
+    Bool                  fTraceCueNotes;
 
 
     // tremolos

@@ -50,29 +50,56 @@ std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEventKind& elt
 }
 
 //________________________________________________________________________
-std::string mxsrGraceNoteEventKindAsString (
-  mxsrGraceNoteEventKind noteGraceNoteEventKind)
+std::string mxsrGraceEventKindAsString (
+  mxsrGraceEventKind noteGraceEventKind)
 {
   std::string result;
 
-  switch (noteGraceNoteEventKind) {
-    case mxsrGraceNoteEventKind::kEventGraceNote_NONE:
-      result = "kEventGraceNote_NONE";
+  switch (noteGraceEventKind) {
+    case mxsrGraceEventKind::kEventGrace_NONE:
+      result = "kEventGrace_NONE";
       break;
-    case mxsrGraceNoteEventKind::kEventGraceNoteBegin:
-      result = "kEventGraceNoteBegin";
+    case mxsrGraceEventKind::kEventGraceBegin:
+      result = "kEventGraceBegin";
       break;
-    case mxsrGraceNoteEventKind::kEventGraceNoteEnd:
-      result = "kEventGraceNoteEnd";
+    case mxsrGraceEventKind::kEventGraceEnd:
+      result = "kEventGraceEnd";
       break;
   } // switch
 
   return result;
 }
 
-std::ostream& operator << (std::ostream& os, const mxsrGraceNoteEventKind& elt)
+std::ostream& operator << (std::ostream& os, const mxsrGraceEventKind& elt)
 {
-  os << mxsrGraceNoteEventKindAsString (elt);
+  os << mxsrGraceEventKindAsString (elt);
+  return os;
+}
+
+//________________________________________________________________________
+std::string mxsrCueEventKindAsString (
+  mxsrCueEventKind noteCueEventKind)
+{
+  std::string result;
+
+  switch (noteCueEventKind) {
+    case mxsrCueEventKind::kEventCue_NONE:
+      result = "kEventCue_NONE";
+      break;
+    case mxsrCueEventKind::kEventCueBegin:
+      result = "kEventCueBegin";
+      break;
+    case mxsrCueEventKind::kEventCueEnd:
+      result = "kEventCueEnd";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const mxsrCueEventKind& elt)
+{
+  os << mxsrCueEventKindAsString (elt);
   return os;
 }
 
@@ -450,36 +477,36 @@ std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEvent& elt)
 }
 
 //________________________________________________________________________
-S_mxsrGraceNoteEvent mxsrGraceNoteEvent::create (
-  int                    eventSequentialNumber,
-  int                    noteSequentialNumber,
-  int                    noteEventStaffNumber,
-  int                    noteEventVoiceNumber,
-  mxsrGraceNoteEventKind graceNoteEventKind,
-  int                    eventInputStartLineNumber,
-  int                    eventInputEndLineNumber)
+S_mxsrGraceEvent mxsrGraceEvent::create (
+  int                eventSequentialNumber,
+  int                noteSequentialNumber,
+  int                noteEventStaffNumber,
+  int                noteEventVoiceNumber,
+  mxsrGraceEventKind graceEventKind,
+  int                eventInputStartLineNumber,
+  int                eventInputEndLineNumber)
 {
-  mxsrGraceNoteEvent* obj =
-    new mxsrGraceNoteEvent (
+  mxsrGraceEvent* obj =
+    new mxsrGraceEvent (
       eventSequentialNumber,
       noteSequentialNumber,
       noteEventStaffNumber,
       noteEventVoiceNumber,
-      graceNoteEventKind,
+      graceEventKind,
       eventInputStartLineNumber,
       eventInputEndLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
-mxsrGraceNoteEvent::mxsrGraceNoteEvent (
-  int                    eventSequentialNumber,
-  int                    noteSequentialNumber,
-  int                    noteEventStaffNumber,
-  int                    noteEventVoiceNumber,
-  mxsrGraceNoteEventKind graceNoteEventKind,
-  int                    eventInputStartLineNumber,
-  int                    eventInputEndLineNumber)
+mxsrGraceEvent::mxsrGraceEvent (
+  int                eventSequentialNumber,
+  int                noteSequentialNumber,
+  int                noteEventStaffNumber,
+  int                noteEventVoiceNumber,
+  mxsrGraceEventKind graceEventKind,
+  int                eventInputStartLineNumber,
+  int                eventInputEndLineNumber)
   : mxsrNoteEvent (
       eventSequentialNumber,
       noteSequentialNumber,
@@ -488,39 +515,39 @@ mxsrGraceNoteEvent::mxsrGraceNoteEvent (
       eventInputStartLineNumber,
       eventInputEndLineNumber)
 {
-  fGraceNoteEventKind = graceNoteEventKind;
+  fGraceEventKind = graceEventKind;
 }
 
-mxsrGraceNoteEvent::~mxsrGraceNoteEvent ()
+mxsrGraceEvent::~mxsrGraceEvent ()
 {}
 
-std::string mxsrGraceNoteEvent::asShortString () const
+std::string mxsrGraceEvent::asShortString () const
 {
   std::stringstream ss;
 
   ss <<
-    "[GraceNoteEvent, " <<
+    "[GraceEvent, " <<
     ", fEventInputStartLineNumber: " << fEventInputStartLineNumber <<
 //     ", fEventInputEndLineNumber: " << fEventInputEndLineNumber <<
     ", fEventSequentialNumber: E" << fEventSequentialNumber <<
     ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
     ", fNoteEventStaffNumber: S" << fNoteEventStaffNumber <<
     ", fNoteEventVoiceNumber: V" << fNoteEventVoiceNumber <<
-    ", fGraceNoteEventKind: " << fGraceNoteEventKind <<
+    ", fGraceEventKind: " << fGraceEventKind <<
     ']';
 
   return ss.str ();
 }
 
-std::string mxsrGraceNoteEvent::asString () const
+std::string mxsrGraceEvent::asString () const
 {
   return asShortString ();
 }
 
-void mxsrGraceNoteEvent::print (std::ostream& os) const
+void mxsrGraceEvent::print (std::ostream& os) const
 {
   os <<
-    "[GraceNoteEvent" <<
+    "[GraceEvent" <<
     std::endl;
 
   ++gIndenter;
@@ -550,7 +577,7 @@ void mxsrGraceNoteEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceNoteEventKind" << " : " << fGraceNoteEventKind <<
+    "fGraceEventKind" << " : " << fGraceEventKind <<
     std::endl;
 
   --gIndenter;
@@ -558,7 +585,7 @@ void mxsrGraceNoteEvent::print (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const S_mxsrGraceNoteEvent& elt)
+std::ostream& operator << (std::ostream& os, const S_mxsrGraceEvent& elt)
 {
   if (elt) {
     elt->print (os);
@@ -570,7 +597,134 @@ std::ostream& operator << (std::ostream& os, const S_mxsrGraceNoteEvent& elt)
   return os;
 }
 
-std::ostream& operator << (std::ostream& os, const mxsrGraceNoteEvent& elt)
+std::ostream& operator << (std::ostream& os, const mxsrGraceEvent& elt)
+{
+  elt.print (os);
+  return os;
+}
+
+//________________________________________________________________________
+S_mxsrCueEvent mxsrCueEvent::create (
+  int              eventSequentialNumber,
+  int              noteSequentialNumber,
+  int              noteEventStaffNumber,
+  int              noteEventVoiceNumber,
+  mxsrCueEventKind cueEventKind,
+  int              eventInputStartLineNumber,
+  int              eventInputEndLineNumber)
+{
+  mxsrCueEvent* obj =
+    new mxsrCueEvent (
+      eventSequentialNumber,
+      noteSequentialNumber,
+      noteEventStaffNumber,
+      noteEventVoiceNumber,
+      cueEventKind,
+      eventInputStartLineNumber,
+      eventInputEndLineNumber);
+  assert (obj != nullptr);
+  return obj;
+}
+
+mxsrCueEvent::mxsrCueEvent (
+  int              eventSequentialNumber,
+  int              noteSequentialNumber,
+  int              noteEventStaffNumber,
+  int              noteEventVoiceNumber,
+  mxsrCueEventKind cueEventKind,
+  int              eventInputStartLineNumber,
+  int              eventInputEndLineNumber)
+  : mxsrNoteEvent (
+      eventSequentialNumber,
+      noteSequentialNumber,
+      noteEventStaffNumber,
+      noteEventVoiceNumber,
+      eventInputStartLineNumber,
+      eventInputEndLineNumber)
+{
+  fCueEventKind = cueEventKind;
+}
+
+mxsrCueEvent::~mxsrCueEvent ()
+{}
+
+std::string mxsrCueEvent::asShortString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[CueEvent, " <<
+    ", fEventInputStartLineNumber: " << fEventInputStartLineNumber <<
+//     ", fEventInputEndLineNumber: " << fEventInputEndLineNumber <<
+    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+    ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
+    ", fNoteEventStaffNumber: S" << fNoteEventStaffNumber <<
+    ", fNoteEventVoiceNumber: V" << fNoteEventVoiceNumber <<
+    ", fCueEventKind: " << fCueEventKind <<
+    ']';
+
+  return ss.str ();
+}
+
+std::string mxsrCueEvent::asString () const
+{
+  return asShortString ();
+}
+
+void mxsrCueEvent::print (std::ostream& os) const
+{
+  os <<
+    "[CueEvent" <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 26;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fEventInputStartLineNumber" << " : " << fEventInputStartLineNumber <<
+    std::endl <<
+//     std::setw (fieldWidth) <<
+//     "fEventInputEndLineNumber" << " :L" << fEventInputEndLineNumber <<
+//     std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fEventSequentialNumber" << " : E" << fEventSequentialNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteSequentialNumber" << " : N" << fNoteSequentialNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fNoteEventStaffNumber" << " : S" << fNoteEventStaffNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteEventVoiceNumber" << " : V" << fNoteEventVoiceNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCueEventKind" << " : " << fCueEventKind <<
+    std::endl;
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_mxsrCueEvent& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+std::ostream& operator << (std::ostream& os, const mxsrCueEvent& elt)
 {
   elt.print (os);
   return os;
@@ -953,21 +1107,21 @@ void mxsrEventsCollection::registerStaffChangeLanding (
 }
 
 //________________________________________________________________________
-void mxsrEventsCollection::registerGraceNoteBegin (
+void mxsrEventsCollection::registerGraceBegin (
   int noteSequentialNumber,
   int noteEventStaffNumber,
   int noteEventVoiceNumber,
   int eventInputStartLineNumber,
   int eventInputEndLineNumber)
 {
-  S_mxsrGraceNoteEvent
-    graceNoteEvent =
-      mxsrGraceNoteEvent::create (
+  S_mxsrGraceEvent
+    graceEvent =
+      mxsrGraceEvent::create (
         ++fCurrentEventSequentialNumber,
         noteSequentialNumber,
         noteEventStaffNumber,
         noteEventVoiceNumber,
-        mxsrGraceNoteEventKind::kEventGraceNoteBegin,
+        mxsrGraceEventKind::kEventGraceBegin,
         eventInputStartLineNumber,
         eventInputStartLineNumber);
 
@@ -977,7 +1131,7 @@ void mxsrEventsCollection::registerGraceNoteBegin (
 
     ss <<
       "--> Registering grace note event " <<
-      graceNoteEvent->asString () <<
+      graceEvent->asString () <<
       ", line " << eventInputStartLineNumber;
 
     gWaeHandler->waeTrace (
@@ -986,37 +1140,37 @@ void mxsrEventsCollection::registerGraceNoteBegin (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fGraceNotesBeginsMap.insert (
-    std::make_pair (noteSequentialNumber, graceNoteEvent));
+  fGraceBeginsMap.insert (
+    std::make_pair (noteSequentialNumber, graceEvent));
 
-  fAllEventsList.push_back (graceNoteEvent);
+  fAllEventsList.push_back (graceEvent);
 }
 
-void mxsrEventsCollection::registerGraceNoteEnd (
+void mxsrEventsCollection::registerGraceEnd (
   int noteSequentialNumber,
   int noteEventStaffNumber,
   int noteEventVoiceNumber,
   int eventInputStartLineNumber,
   int eventInputEndLineNumber)
 {
-  S_mxsrGraceNoteEvent
-    graceNoteEvent =
-      mxsrGraceNoteEvent::create (
+  S_mxsrGraceEvent
+    graceEvent =
+      mxsrGraceEvent::create (
         ++fCurrentEventSequentialNumber,
         noteSequentialNumber,
         noteEventStaffNumber,
         noteEventVoiceNumber,
-        mxsrGraceNoteEventKind::kEventGraceNoteEnd,
+        mxsrGraceEventKind::kEventGraceEnd,
         eventInputStartLineNumber,
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceGraceNotesBasics ()) {
+  if (gGlobalMxsr2msrOahGroup->getTraceGraceNoteBasics ()) {
     std::stringstream ss;
 
     ss <<
       "--> Registering grace note event " <<
-      graceNoteEvent->asString () <<
+      graceEvent->asString () <<
       ", line " << eventInputStartLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1025,10 +1179,89 @@ void mxsrEventsCollection::registerGraceNoteEnd (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fGraceNotesEndsMap.insert (
-    std::make_pair (noteSequentialNumber, graceNoteEvent));
+  fGraceEndsMap.insert (
+    std::make_pair (noteSequentialNumber, graceEvent));
 
-  fAllEventsList.push_back (graceNoteEvent);
+  fAllEventsList.push_back (graceEvent);
+}
+
+//________________________________________________________________________
+void mxsrEventsCollection::registerCueBegin (
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
+{
+  S_mxsrCueEvent
+    cueEvent =
+      mxsrCueEvent::create (
+        ++fCurrentEventSequentialNumber,
+        noteSequentialNumber,
+        noteEventStaffNumber,
+        noteEventVoiceNumber,
+        mxsrCueEventKind::kEventCueBegin,
+        eventInputStartLineNumber,
+        eventInputStartLineNumber);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceCuesBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering cue note event " <<
+      cueEvent->asString () <<
+      ", line " << eventInputStartLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fCueBeginsMap.insert (
+    std::make_pair (noteSequentialNumber, cueEvent));
+
+  fAllEventsList.push_back (cueEvent);
+}
+
+void mxsrEventsCollection::registerCueEnd (
+  int noteSequentialNumber,
+  int noteEventStaffNumber,
+  int noteEventVoiceNumber,
+  int eventInputStartLineNumber,
+  int eventInputEndLineNumber)
+{
+  S_mxsrCueEvent
+    cueEvent =
+      mxsrCueEvent::create (
+        ++fCurrentEventSequentialNumber,
+        noteSequentialNumber,
+        noteEventStaffNumber,
+        noteEventVoiceNumber,
+        mxsrCueEventKind::kEventCueEnd,
+        eventInputStartLineNumber,
+        eventInputStartLineNumber);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceCueBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering cue note event " <<
+      cueEvent->asString () <<
+      ", line " << eventInputStartLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fCueEndsMap.insert (
+    std::make_pair (noteSequentialNumber, cueEvent));
+
+  fAllEventsList.push_back (cueEvent);
 }
 
 //________________________________________________________________________
@@ -1065,7 +1298,7 @@ void mxsrEventsCollection::registerChordBegin (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fChordsBeginsMap.insert (
+  fChordBeginsMap.insert (
     std::make_pair (noteSequentialNumber, chordEvent));
 
   fAllEventsList.push_back (chordEvent);
@@ -1104,7 +1337,7 @@ void mxsrEventsCollection::registerChordEnd (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fChordsEndsMap.insert (
+  fChordEndsMap.insert (
     std::make_pair (noteSequentialNumber, chordEvent));
 
   fAllEventsList.push_back (chordEvent);
@@ -1146,9 +1379,9 @@ void mxsrEventsCollection::registerTupletBeginEvent (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fTupletsBeginsList.push_back (tupletEvent);
+  fTupletBeginsList.push_back (tupletEvent);
 
-  fTupletsEventsMultiMap.insert (
+  fTupletEventsMultiMap.insert (
     std::make_pair (noteSequentialNumber, tupletEvent));
 
   fAllEventsList.push_back (tupletEvent);
@@ -1189,9 +1422,9 @@ void mxsrEventsCollection::registerTupletEndEvent (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fTupletsEndsList.push_back (tupletEvent);
+  fTupletEndsList.push_back (tupletEvent);
 
-  fTupletsEventsMultiMap.insert (
+  fTupletEventsMultiMap.insert (
     std::make_pair (noteSequentialNumber, tupletEvent));
 
   fAllEventsList.push_back (tupletEvent);
@@ -1254,32 +1487,65 @@ S_mxsrStaffChangeEvent mxsrEventsCollection::fetchStaffChangeLandingAtNoteSequen
 }
 
 //________________________________________________________________________
-S_mxsrGraceNoteEvent mxsrEventsCollection::fetchGraceNoteBeginAtNoteSequentialNumber (
+S_mxsrGraceEvent mxsrEventsCollection::fetchGraceBeginAtNoteSequentialNumber (
   int noteSequentialNumber) const
 {
-  S_mxsrGraceNoteEvent result;
+  S_mxsrGraceEvent result;
 
-  std::map <int, S_mxsrGraceNoteEvent>::const_iterator it;
+  std::map <int, S_mxsrGraceEvent>::const_iterator it;
 
-  it = fGraceNotesBeginsMap.find (noteSequentialNumber);
+  it = fGraceBeginsMap.find (noteSequentialNumber);
 
-  if (it != fGraceNotesBeginsMap.end ()) {
+  if (it != fGraceBeginsMap.end ()) {
     result = (*it).second;
   }
 
   return result;
 }
 
-S_mxsrGraceNoteEvent mxsrEventsCollection::fetchGraceNoteEndAtNoteSequentialNumber (
+S_mxsrGraceEvent mxsrEventsCollection::fetchGraceEndAtNoteSequentialNumber (
   int noteSequentialNumber) const
 {
-  S_mxsrGraceNoteEvent result;
+  S_mxsrGraceEvent result;
 
-  std::map <int, S_mxsrGraceNoteEvent>::const_iterator it;
+  std::map <int, S_mxsrGraceEvent>::const_iterator it;
 
-  it = fGraceNotesEndsMap.find (noteSequentialNumber);
+  it = fGraceEndsMap.find (noteSequentialNumber);
 
-  if (it != fGraceNotesEndsMap.end ()) {
+  if (it != fGraceEndsMap.end ()) {
+    result = (*it).second;
+  }
+
+  return result;
+}
+
+//________________________________________________________________________
+S_mxsrCueEvent mxsrEventsCollection::fetchCueBeginAtNoteSequentialNumber (
+  int noteSequentialNumber) const
+{
+  S_mxsrCueEvent result;
+
+  std::map <int, S_mxsrCueEvent>::const_iterator it;
+
+  it = fCueBeginsMap.find (noteSequentialNumber);
+
+  if (it != fCueBeginsMap.end ()) {
+    result = (*it).second;
+  }
+
+  return result;
+}
+
+S_mxsrCueEvent mxsrEventsCollection::fetchCueEndAtNoteSequentialNumber (
+  int noteSequentialNumber) const
+{
+  S_mxsrCueEvent result;
+
+  std::map <int, S_mxsrCueEvent>::const_iterator it;
+
+  it = fCueEndsMap.find (noteSequentialNumber);
+
+  if (it != fCueEndsMap.end ()) {
     result = (*it).second;
   }
 
@@ -1294,9 +1560,9 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordBeginAtNoteSequentialNumber (
 
   std::map <int, S_mxsrChordEvent>::const_iterator it;
 
-  it = fChordsBeginsMap.find (noteSequentialNumber);
+  it = fChordBeginsMap.find (noteSequentialNumber);
 
-  if (it != fChordsBeginsMap.end ()) {
+  if (it != fChordBeginsMap.end ()) {
     result = (*it).second;
   }
 
@@ -1310,9 +1576,9 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordEndAtNoteSequentialNumber (
 
   std::map <int, S_mxsrChordEvent>::const_iterator it;
 
-  it = fChordsEndsMap.find (noteSequentialNumber);
+  it = fChordEndsMap.find (noteSequentialNumber);
 
-  if (it != fChordsEndsMap.end ()) {
+  if (it != fChordEndsMap.end ()) {
     result = (*it).second;
   }
 
@@ -1327,22 +1593,22 @@ void mxsrEventsCollection::fetchTupletBeginsList (
   // look for the first tuplet event matching noteSequentialNumber
   std::list <S_mxsrTupletEvent>::iterator startIt =
     std::find_if (
-      std::begin (fTupletsBeginsList),
-      std::end (fTupletsBeginsList),
+      std::begin (fTupletBeginsList),
+      std::end (fTupletBeginsList),
       [&] (const S_mxsrTupletEvent tupletEvent)
         {
           return
             tupletEvent->getNoteSequentialNumber () == noteSequentialNumber;
         });
 
-  if (startIt != fTupletsBeginsList.end ()) {
+  if (startIt != fTupletBeginsList.end ()) {
     gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
 
     // look for the first next tuplet event not matching noteSequentialNumber
     std::list <S_mxsrTupletEvent>::iterator endIt =
       std::find_if (
-        std::begin (fTupletsBeginsList),
-        std::end (fTupletsBeginsList),
+        std::begin (fTupletBeginsList),
+        std::end (fTupletBeginsList),
         [&] (const S_mxsrTupletEvent tupletEvent )
           {
             return
@@ -1350,8 +1616,8 @@ void mxsrEventsCollection::fetchTupletBeginsList (
           });
 
     gLog << "(*endIt): ";
-    if (endIt == fTupletsBeginsList.end ()) {
-      gLog << "fTupletsBeginsList.end ()";
+    if (endIt == fTupletBeginsList.end ()) {
+      gLog << "fTupletBeginsList.end ()";
     }
     else {
       gLog << (*endIt);
@@ -1360,7 +1626,7 @@ void mxsrEventsCollection::fetchTupletBeginsList (
 
     // move the found tuplets events to collectedBeginsList
     collectedBeginsList.splice (
-      collectedBeginsList.begin (), fTupletsBeginsList, startIt, endIt);
+      collectedBeginsList.begin (), fTupletBeginsList, startIt, endIt);
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1381,22 +1647,22 @@ void mxsrEventsCollection::fetchTupletEndsList (
   // look for the first tuplet event matching noteSequentialNumber
   std::list <S_mxsrTupletEvent>::iterator startIt =
     std::find_if (
-      std::begin (fTupletsEndsList),
-      std::end (fTupletsEndsList),
+      std::begin (fTupletEndsList),
+      std::end (fTupletEndsList),
       [&] (const S_mxsrTupletEvent tupletEvent)
         {
           return
             tupletEvent->getNoteSequentialNumber () == noteSequentialNumber;
         });
 
-  if (startIt != fTupletsEndsList.end ()) {
+  if (startIt != fTupletEndsList.end ()) {
     gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
 
     // look for the first next tuplet event not matching noteSequentialNumber
     std::list <S_mxsrTupletEvent>::iterator endIt =
       std::find_if (
-        std::begin (fTupletsEndsList),
-        std::end (fTupletsEndsList),
+        std::begin (fTupletEndsList),
+        std::end (fTupletEndsList),
         [&] (const S_mxsrTupletEvent tupletEvent )
           {
             return
@@ -1404,8 +1670,8 @@ void mxsrEventsCollection::fetchTupletEndsList (
           });
 
     gLog << "(*endIt): ";
-    if (endIt == fTupletsEndsList.end ()) {
-      gLog << "fTupletsEndsList.end ()";
+    if (endIt == fTupletEndsList.end ()) {
+      gLog << "fTupletEndsList.end ()";
     }
     else {
       gLog << (*endIt);
@@ -1414,7 +1680,7 @@ void mxsrEventsCollection::fetchTupletEndsList (
 
     // move the found tuplets events to collectedEndsList
     collectedEndsList.splice (
-      collectedEndsList.begin (), fTupletsEndsList, startIt, endIt);
+      collectedEndsList.begin (), fTupletEndsList, startIt, endIt);
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1438,12 +1704,18 @@ std::string mxsrEventsCollection::asShortString () const
     ", fStaffChangeTakeOffsMap.size (): " << fStaffChangeTakeOffsMap.size () <<
     ", fStaffChangeLandingsMap.size (): " << fStaffChangeLandingsMap.size () <<
 
-    ", fChordsBeginsMap.size (): " << fChordsBeginsMap.size () <<
-    ", fChordsEndsMap.size (): " << fChordsEndsMap.size () <<
+    ", fChordBeginsMap.size (): " << fChordBeginsMap.size () <<
+    ", fChordEndsMap.size (): " << fChordEndsMap.size () <<
 
-    ", fTupletsBeginsList.size (): " << fTupletsEventsMultiMap.size () <<
-    ", fTupletsEndsList.size (): " << fTupletsEventsMultiMap.size () <<
-    ", fTupletsEventsMultiMap.size (): " << fTupletsEventsMultiMap.size () <<
+    ", fGraceBeginsMap.size (): " << fGraceBeginsMap.size () <<
+    ", fGraceEndsMap.size (): " << fGraceEndsMap.size () <<
+
+    ", fCueBeginsMap.size (): " << fCueBeginsMap.size () <<
+    ", fCueEndsMap.size (): " << fCueEndsMap.size () <<
+
+    ", fTupletBeginsList.size (): " << fTupletBeginsList.size () <<
+    ", fTupletEndsList.size (): " << fTupletEndsList.size () <<
+    ", fTupletEventsMultiMap.size (): " << fTupletEventsMultiMap.size () <<
 
     ", fAllEventsList.size (): " << fAllEventsList.size () <<
     ']';
@@ -1583,12 +1855,12 @@ void mxsrEventsCollection::printStaffChangeEvents (std::ostream& os) const
   }
 
 //------------------------------------------------------------------------
-void mxsrEventsCollection::printChordEvents (std::ostream& os) const
+void mxsrEventsCollection::printGraceEvents (std::ostream& os) const
 {
   os <<
-    "fChordsBeginsMap: " <<
+    "fGraceBeginsMap: " <<
     mfSingularOrPlural (
-      fChordsBeginsMap.size (),
+      fGraceBeginsMap.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -1596,7 +1868,149 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrChordEvent> thePair : fChordsBeginsMap) {
+  for (std::pair <int, S_mxsrGraceEvent> thePair : fGraceBeginsMap) {
+    int
+      eventSequentialNumber = thePair.first;
+
+    S_mxsrGraceEvent
+      graceEvent = thePair.second;
+
+    os <<
+      "Note " << eventSequentialNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      graceEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+
+  os << std::endl << "--------" << std::endl << std::endl;
+
+  os <<
+    "fGraceEndsMap: " <<
+    mfSingularOrPlural (
+      fGraceEndsMap.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair <int, S_mxsrGraceEvent> thePair : fGraceEndsMap) {
+    int
+      eventSequentialNumber = thePair.first;
+
+    S_mxsrGraceEvent
+      graceEvent = thePair.second;
+
+    os <<
+      "Note " << eventSequentialNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      graceEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+
+}
+
+//------------------------------------------------------------------------
+void mxsrEventsCollection::printCueEvents (std::ostream& os) const
+{
+  os <<
+    "fCueBeginsMap: " <<
+    mfSingularOrPlural (
+      fCueBeginsMap.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair <int, S_mxsrCueEvent> thePair : fCueBeginsMap) {
+    int
+      eventSequentialNumber = thePair.first;
+
+    S_mxsrCueEvent
+      cueEvent = thePair.second;
+
+    os <<
+      "Note " << eventSequentialNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      cueEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+
+  os << std::endl << "--------" << std::endl << std::endl;
+
+  os <<
+    "fCueEndsMap: " <<
+    mfSingularOrPlural (
+      fCueEndsMap.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair <int, S_mxsrCueEvent> thePair : fCueEndsMap) {
+    int
+      eventSequentialNumber = thePair.first;
+
+    S_mxsrCueEvent
+      cueEvent = thePair.second;
+
+    os <<
+      "Note " << eventSequentialNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      cueEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+
+}
+
+//------------------------------------------------------------------------
+void mxsrEventsCollection::printChordEvents (std::ostream& os) const
+{
+  os <<
+    "fChordBeginsMap: " <<
+    mfSingularOrPlural (
+      fChordBeginsMap.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair <int, S_mxsrChordEvent> thePair : fChordBeginsMap) {
     int
       eventSequentialNumber = thePair.first;
 
@@ -1620,9 +2034,9 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
   os << std::endl << "--------" << std::endl << std::endl;
 
   os <<
-    "fChordsEndsMap: " <<
+    "fChordEndsMap: " <<
     mfSingularOrPlural (
-      fChordsEndsMap.size (),
+      fChordEndsMap.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -1630,7 +2044,7 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrChordEvent> thePair : fChordsEndsMap) {
+  for (std::pair <int, S_mxsrChordEvent> thePair : fChordEndsMap) {
     int
       eventSequentialNumber = thePair.first;
 
@@ -1657,9 +2071,9 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 {
   os <<
-    "fTupletsEventsMultiMap: " <<
+    "fTupletEventsMultiMap: " <<
     mfSingularOrPlural (
-      fTupletsEventsMultiMap.size (),
+      fTupletEventsMultiMap.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -1667,7 +2081,7 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletsEventsMultiMap) {
+  for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletEventsMultiMap) {
     int
       eventSequentialNumber = thePair.first;
     S_mxsrTupletEvent
@@ -1690,9 +2104,9 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
   os << std::endl << "--------" << std::endl << std::endl;
 
   os <<
-    "fTupletsBeginsList: " <<
+    "fTupletBeginsList: " <<
     mfSingularOrPlural (
-      fTupletsBeginsList.size (),
+      fTupletBeginsList.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -1700,7 +2114,7 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (S_mxsrTupletEvent tupletEvent : fTupletsBeginsList) {
+  for (S_mxsrTupletEvent tupletEvent : fTupletBeginsList) {
     int
       eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
 
@@ -1721,9 +2135,9 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
   os << std::endl << "--------" << std::endl << std::endl;
 
   os <<
-    "fTupletsEndsList: " <<
+    "fTupletEndsList: " <<
     mfSingularOrPlural (
-      fTupletsEndsList.size (),
+      fTupletEndsList.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -1731,7 +2145,7 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (S_mxsrTupletEvent tupletEvent : fTupletsEndsList) {
+  for (S_mxsrTupletEvent tupletEvent : fTupletEndsList) {
     int
       eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
 
@@ -1833,24 +2247,54 @@ void mxsrEventsCollection::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fChordsBeginsMap" << " : " <<
+    "fGraceBeginsMap" << " : " <<
     mfSingularOrPlural (
-      fChordsBeginsMap.size (),
+      fGraceBeginsMap.size (),
       "element",
       "elements") <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fChordsEndsMap" << " : " <<
+    "fGraceEndsMap" << " : " <<
     mfSingularOrPlural (
-      fChordsEndsMap.size (),
+      fGraceEndsMap.size (),
       "element",
       "elements") <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTupletsEventsMultiMap" << " : " <<
+    "fCueBeginsMap" << " : " <<
     mfSingularOrPlural (
-      fTupletsEventsMultiMap.size (),
+      fCueBeginsMap.size (),
+      "element",
+      "elements") <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fCueEndsMap" << " : " <<
+    mfSingularOrPlural (
+      fCueEndsMap.size (),
+      "element",
+      "elements") <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fChordBeginsMap" << " : " <<
+    mfSingularOrPlural (
+      fChordBeginsMap.size (),
+      "element",
+      "elements") <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fChordEndsMap" << " : " <<
+    mfSingularOrPlural (
+      fChordEndsMap.size (),
+      "element",
+      "elements") <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTupletEventsMultiMap" << " : " <<
+    mfSingularOrPlural (
+      fTupletEventsMultiMap.size (),
       "element",
       "elements") <<
     std::endl << std::endl;
@@ -1862,6 +2306,14 @@ void mxsrEventsCollection::print (std::ostream& os) const
   os << "--------" << std::endl << std::endl;
 
   printStaffChangeEvents (os);
+
+  os << "--------" << std::endl << std::endl;
+
+  printGraceEvents (os);
+
+  os << "--------" << std::endl << std::endl;
+
+  printCueEvents (os);
 
   os << "--------" << std::endl << std::endl;
 

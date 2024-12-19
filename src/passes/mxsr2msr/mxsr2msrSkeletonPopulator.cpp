@@ -275,6 +275,9 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
 
   fCurrentNotePrintObjectKind = msrPrintObjectKind::kPrintObjectYes; // default value
 
+  // only grace notes and cue notes are not standalone
+  fCurrentNoteIsStandalone = false;
+
   // note heads
   fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadNormal;
   fCurrentNoteHeadFilledKind = msrNoteHeadFilledKind::kNoteHeadFilledYes;
@@ -346,11 +349,19 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
 
   fCurrentNoteIsARest = false;
 
+  // only grace notes and cue notes are not standalone
+  // standalone notes are by far the most frequent ones,
+  // so let's optimize thru DENORMALISATION:
+  fCurrentNoteIsStandalone = true; // unless found otherwise later
+
   // unpitched notes
   fCurrentNoteIsUnpitched = false;
 
   // grace notes
   fCurrentNoteIsAGraceNote = false;
+
+  // cue notes
+  fCurrentNoteIsACueNote = false;
 
   // cross staff chords
 //   fCurrentNoteIsCrossStaves = false;
@@ -431,6 +442,8 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
     msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
 
   // cue notes
+
+  fCurrentNoteIsACueNote = false;
 
   fCurrentNoteIsACueNoteKind =
     msrNoteIsACueNoteKind::kNoteIsACueNoteNo;
@@ -17880,6 +17893,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_grace& elt)
     elt->getAttributeValue ("make-time");
 
   fCurrentNoteIsAGraceNote = true;
+  fCurrentNoteIsStandalone = false;
 }
 
 //______________________________________________________________________________
@@ -23870,6 +23884,9 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
       ", fCurrentNoteIsAGraceNote: " <<
       fCurrentNoteIsAGraceNote <<
 
+      ", fCurrentNoteIsStandalone: " <<
+      fCurrentNoteIsStandalone <<
+
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -23886,67 +23903,81 @@ void mxsr2msrSkeletonPopulator::handleCurrentNote (
   Bool currentNoteIsARegultarNoteOrRest (false);
 
   // handle the note itself
-  if (fCurrentNoteIsARest) {
+  // ======================
+
+  if (fCurrentNoteIsStandalone) {
+    // standalone notes are the most frequent ones
+
     currentNoteIsARegultarNoteOrRest = true;
 
     if (fCurrentNoteBelongsToAChord) {
+      // current note is a standalone chord member
+
       if (fCurrentNoteBelongsToATuplet) {
+        // chord member in a tuplet
         handleChordMemberNoteInATuplet (
           fCurrentNote);
       }
-
-      else if (fCurrentNoteIsAGraceNote) {
-        handleChordMemberNoteInAGraceNotesGroup (
-          fCurrentNote);
-      }
-
       else {
-        // regular chord member
-        handleRegularChordMemberNote (
+        // chord member
+        handleChordMemberNote (
           fCurrentNote);
       }
     }
 
     else if (fCurrentNoteBelongsToATuplet) {
-      // note/rest is the first, second, third, ..., member of a tuplet
+      // tuplet member
         handleTupletMemberNote (
           fCurrentNote);
     }
+  }
 
-    else if (fCurrentNoteIsAGraceNote) { // GRACE
+
+
+  else if (fCurrentNoteIsAGraceNote) {
+    // grace notes are less frequent
+
+    if (fCurrentNoteBelongsToAChord) {
+      handleChordMemberNoteInAGraceNotesGroup (
+        fCurrentNote);
+    }
+    else {
       handleGraceNote (); // JMI v0.9.72
     }
+
   }
+
+
+
+  else if (fCurrentNoteIsACueNote) {
+    // cue notes are event far less frequent
+
+//     handleCueNote (
+//       fCurrentNote);
+  }
+
+
 
   else {
-    if (fCurrentNoteBelongsToAChord) {
-      if (fCurrentNoteBelongsToATuplet) {
-        handleChordMemberNoteInATuplet (
-          fCurrentNote);
-      }
+    std::stringstream ss;
 
-      else if (fCurrentNoteIsAGraceNote) {
-        handleChordMemberNoteInAGraceNotesGroup (
-          fCurrentNote);
-      }
+    ss <<
+      "Current note is neither standalone nor a grace note nor a cue note" <<
+      ", fCurrentNoteStaffNumber: " <<
+      mfStaffNumberAsString (fCurrentNoteStaffNumber) <<
+      std::endl <<
+      ", fCurrentNoteVoiceNumber: " <<
+      mfVoiceNumberAsString (fCurrentNoteVoiceNumber) <<
+      ", line " << inputLineNumber;
 
-      else {
-        // regular chord member
-        handleRegularChordMemberNote (
-          fCurrentNote);
-      }
-    }
-
-    else if (fCurrentNoteBelongsToATuplet) {
-      // note/rest is the first, second, third, ..., member of a tuplet
-        handleTupletMemberNote (
-          fCurrentNote);
-    }
-
-    else if (fCurrentNoteIsAGraceNote) { // GRACE
-      handleGraceNote (); // JMI v0.9.72
-    }
+    mxsr2msrInternalError (
+      gServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      ss.str ());
   }
+
+
 
   if (currentNoteIsARegultarNoteOrRest) {
     // regular note or rest
@@ -27038,7 +27069,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
     fCurrentSyllableElementsList.size ();
 }
 
-void mxsr2msrSkeletonPopulator::handleRegularChordMemberNote (
+void mxsr2msrSkeletonPopulator::handleChordMemberNote (
   const S_msrNote& newChordNote)
 {
   int newChodeNoteInputLineNumber =
@@ -27129,7 +27160,7 @@ void mxsr2msrSkeletonPopulator::handleRegularChordMemberNote (
 //   if (gTraceOahGroup->getTraceChordsDetails ()) {
 //     gLog <<
 //       std::endl <<
-//       "======================= handleRegularChordMemberNote" <<
+//       "======================= handleChordMemberNote" <<
 //       ", line " << newChodeNoteInputLineNumber <<
 //       std::endl;
 //     fCurrentPart->print (gLog);
@@ -27161,7 +27192,7 @@ void mxsr2msrSkeletonPopulator::handleRegularChordMemberNote (
   if (gTraceOahGroup->getTraceChords ()) {
     printVoicesLastMetNoteMap (
       newChodeNoteInputLineNumber,
-      "handleRegularChordMemberNote()");
+      "handleChordMemberNote()");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -27207,7 +27238,7 @@ void mxsr2msrSkeletonPopulator::handleRegularChordMemberNote (
         chord->
           setMeasureElementSoundingWholeNotes ( // ??? JMI
             chordFirstNoteSoundingWholeNotes,
-            "mxsr2msrSkeletonPopulator::handleRegularChordMemberNote()");
+            "mxsr2msrSkeletonPopulator::handleChordMemberNote()");
             */
 
         if (newChordNote->getNoteIsFirstNoteInADoubleTremolo ()) {

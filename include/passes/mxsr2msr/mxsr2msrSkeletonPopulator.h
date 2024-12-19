@@ -1414,6 +1414,9 @@ class EXP mxsr2msrSkeletonPopulator :
 
     S_msrNote                 fCurrentNote;
 
+    // only grace notes and cue notes are not standalone
+    Bool                      fCurrentNoteIsStandalone;
+
     void                      handleCurrentNote (
                                 int inputLineNumber);
 
@@ -1428,7 +1431,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      handleGraceNote (); // JMI v0.9.72
 
-    void                      handleRegularChordMemberNote (
+    void                      handleChordMemberNote (
                                 const S_msrNote& newChordNote);
 
     void                      handleTupletMemberNote (
@@ -2041,6 +2044,8 @@ class EXP mxsr2msrSkeletonPopulator :
     Bool                      fCurrentNoteIsUnpitched;
 
     // cue notes
+    Bool                      fCurrentNoteIsACueNote;
+
     msrNoteIsACueNoteKind     fCurrentNoteIsACueNoteKind;
 
     // grace notes

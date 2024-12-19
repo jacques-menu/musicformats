@@ -151,7 +151,9 @@ class EXP mxsr2msrSkeletonBuilder :
 
   public                      visitor<S_note>,
   public                      visitor<S_rest>,
+
   public                      visitor<S_grace>,
+  public                      visitor<S_cue>,
 
   // chords
   // ------------------------------------------------------
@@ -352,6 +354,7 @@ class EXP mxsr2msrSkeletonBuilder :
     virtual void              visitStart (S_rest& elt);
 
     virtual void              visitStart (S_grace& elt);
+    virtual void              visitStart (S_cue& elt);
 
     // chords
     // ------------------------------------------------------
@@ -660,7 +663,15 @@ class EXP mxsr2msrSkeletonBuilder :
     Bool                      fCurrentNoteIsAGraceNote;
     Bool                      fPreviousNoteIsAGraceNote;
 
-    void                      registerGraceNoteEventIfAny ();
+    void                      registerGraceEventIfAny ();
+
+    // cue notes handling
+    // ------------------------------------------------------
+
+    Bool                      fCurrentNoteIsACueNote;
+    Bool                      fPreviousNoteIsACueNote;
+
+    void                      registerCueEventIfAny ();
 
     // staff changes handling
     // ------------------------------------------------------
