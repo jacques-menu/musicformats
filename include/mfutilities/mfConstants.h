@@ -26,7 +26,7 @@ namespace MusicFormats
 // input line numbers
 //______________________________________________________________________________
 
-constexpr int K_MF_INPUT_LINE_UNKNOWN_ = 0;
+constexpr int K_MF_INPUT_LINE_UNKNOWN_ = -1;
 
 EXP extern const std::string
   kInputLineNumberPrefix,
@@ -85,7 +85,7 @@ EXP extern std::string mfMeasureNumberAsString (std::string measureNumber);
 // whole notes durations
 //______________________________________________________________________________
 
-constexpr int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = 0;
+constexpr int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = -1;
 
 EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_;
 

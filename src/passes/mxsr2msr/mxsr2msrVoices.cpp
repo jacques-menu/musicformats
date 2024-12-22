@@ -141,6 +141,7 @@ void mxsrVoice::finalizeTupletStackTopAndPopItFromTupletsStack (
 
     ss <<
       "Finalizing tuplet stack top and popping it from tuplet stack" <<
+      ", context: " << context <<
       ", fTupletsStack.size (): " << fTupletsStack.size ();
 
     ss <<

@@ -2009,7 +2009,7 @@ void msrMeasure::appendClefKeyTimeSignatureGroupToMeasure (
   const S_msrClefKeyTimeSignatureGroup& clefKeyTimeSignatureGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<

@@ -512,7 +512,7 @@ void msrStaff::setStaffCurrentTimeSignature (
   const S_msrTimeSignature& timeSignature)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<
@@ -1795,7 +1795,7 @@ void msrStaff::registerVoiceInStaffClone (
 //   const S_msrClefKeyTimeSignatureGroup& ClefKeyTimeSignatureGroup)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+//   if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
 //     std::stringstream ss;
 //
 //     ss <<

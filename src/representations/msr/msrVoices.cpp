@@ -2084,7 +2084,7 @@ void msrVoice::setVoiceCurrentTimeSignature (
   const S_msrTimeSignature& timeSignature)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<
@@ -2132,7 +2132,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
     clefKeyTimeSignatureGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<

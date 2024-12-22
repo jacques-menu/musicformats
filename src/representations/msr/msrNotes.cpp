@@ -5069,6 +5069,20 @@ void msrNote::print (std::ostream& os) const
     os << "[NULL]" << std::endl;
   }
 
+	// is the note a grace note?
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fNoteIsAGraceNote" << ": " <<
+    fNoteIsAGraceNote <<
+    std::endl;
+
+	// is the note a cue note?
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fNoteIsACueNote" << ": " <<
+    fNoteIsACueNote <<
+    std::endl;
+
 	// does the note belong to a chord?
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -6229,6 +6243,20 @@ void msrNote::printFull (std::ostream& os) const
   }
   os << std::endl;
 
+	// grace note?
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fNoteIsAGraceNote" << ": " <<
+    fNoteIsAGraceNote <<
+    std::endl;
+
+	// cue note?
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fNoteIsACueNote" << ": " <<
+    fNoteIsACueNote <<
+    std::endl;
+
   // chord member?
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -6308,18 +6336,18 @@ void msrNote::printFull (std::ostream& os) const
     fNoteCautionaryAccidentalKind <<
     std::endl;
 
-  // cue note???
+  // grace note?
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "getNoteIsAGraceNote" << ": " <<
+    getNoteIsAGraceNote () <<
+    std::endl;
+
+  // cue note?
   os << std::left <<
     std::setw (fieldWidth) <<
     "fNoteIsACueNoteKind" << ": " <<
     fNoteIsACueNoteKind <<
-    std::endl;
-
-  // short cuts for efficiency
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "noteIsAGraceNote" << ": " <<
-    fetchNoteIsAGraceNote () <<
     std::endl;
 
   // note redundant information (for speed)

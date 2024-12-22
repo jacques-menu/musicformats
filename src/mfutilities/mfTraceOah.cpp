@@ -26,6 +26,8 @@
 #include "oahAtomsCollection.h"
 #include "oahEarlyOptions.h"
 
+#include "mfTraceOah.h"
+
 #include "mxsr2msrOah.h"
 
 #include "waeHandlers.h"
@@ -3094,6 +3096,17 @@ void traceOahGroup::initializeTraceOahGroup ()
 
   //transpositions
   initializeTranspositionsTraceOah ();
+}
+
+//______________________________________________________________________________
+Bool traceOahGroup::fetchTraceClefKeyTimeSignatureGroups () const
+{
+  return
+    getTraceClefs ()
+      ||
+    getTraceKeys ()
+      ||
+    getTraceTimeSignatures ();
 }
 
 //______________________________________________________________________________

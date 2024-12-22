@@ -14,10 +14,14 @@
 #include <iostream>
 #include <sstream>
 
+#include "mfAssert.h"
 #include "mfStringsHandling.h"
-#include "mfTraceOah.h"
+// #include "mfTraceOah.h"
 
 #include "mxsr2msrEvents.h"
+
+#include "waeHandlers.h"
+
 
 namespace MusicFormats
 {
@@ -1037,7 +1041,7 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceStaffChangesBasics ()) {
+  if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1085,7 +1089,7 @@ void mxsrEventsCollection::registerStaffChangeLanding (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceStaffChangesBasics ()) {
+  if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1126,7 +1130,7 @@ void mxsrEventsCollection::registerGraceBegin (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceGraceNotesBasics ()) {
+  if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1165,7 +1169,7 @@ void mxsrEventsCollection::registerGraceEnd (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceGraceNoteBasics ()) {
+  if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1205,7 +1209,7 @@ void mxsrEventsCollection::registerCueBegin (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceCuesBasics ()) {
+  if (gTraceOahGroup->getTraceCueNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1244,7 +1248,7 @@ void mxsrEventsCollection::registerCueEnd (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceCueBasics ()) {
+  if (gTraceOahGroup->getTraceCueNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1284,7 +1288,7 @@ void mxsrEventsCollection::registerChordBegin (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceChordsBasics ()) {
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1323,7 +1327,7 @@ void mxsrEventsCollection::registerChordEnd (
         eventInputStartLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceChordsBasics ()) {
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1365,7 +1369,7 @@ void mxsrEventsCollection::registerTupletBeginEvent (
         eventInputEndLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gGlobalMxsr2msrOahGroup->getTraceTupletsBasics ()) {
+  if (true || gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1408,7 +1412,7 @@ void mxsrEventsCollection::registerTupletEndEvent (
         eventInputEndLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gGlobalMxsr2msrOahGroup->getTraceTupletsBasics ()) {
+  if (true || gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1615,14 +1619,13 @@ void mxsrEventsCollection::fetchTupletBeginsList (
               tupletEvent->getNoteSequentialNumber () != noteSequentialNumber;
           });
 
-    gLog << "(*endIt): ";
-    if (endIt == fTupletBeginsList.end ()) {
-      gLog << "fTupletBeginsList.end ()";
-    }
-    else {
-      gLog << (*endIt);
-    }
-    gLog << std::endl << std::endl << std::flush;
+//     if (endIt == fTupletBeginsList.end ()) {
+//       gLog << "fTupletBeginsList.end ()";
+//     }
+//     else {
+//       gLog << (*endIt);
+//     }
+//     gLog << std::endl << std::endl << std::flush;
 
     // move the found tuplets events to collectedBeginsList
     collectedBeginsList.splice (
@@ -1630,10 +1633,9 @@ void mxsrEventsCollection::fetchTupletBeginsList (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceTupletsBasics ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     printTupletEventsList (
       gLog,
-      noteSequentialNumber,
       collectedBeginsList,
       "fetchTupletBeginsList(), collectedBeginsList:");
   }
@@ -1656,7 +1658,7 @@ void mxsrEventsCollection::fetchTupletEndsList (
         });
 
   if (startIt != fTupletEndsList.end ()) {
-    gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
+//     gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
 
     // look for the first next tuplet event not matching noteSequentialNumber
     std::list <S_mxsrTupletEvent>::iterator endIt =
@@ -1669,14 +1671,13 @@ void mxsrEventsCollection::fetchTupletEndsList (
               tupletEvent->getNoteSequentialNumber () != noteSequentialNumber;
           });
 
-    gLog << "(*endIt): ";
-    if (endIt == fTupletEndsList.end ()) {
-      gLog << "fTupletEndsList.end ()";
-    }
-    else {
-      gLog << (*endIt);
-    }
-    gLog << std::endl << std::endl << std::flush;
+//     if (endIt == fTupletEndsList.end ()) {
+//       gLog << "fTupletEndsList.end ()";
+//     }
+//     else {
+//       gLog << (*endIt);
+//     }
+//     gLog << std::endl << std::endl << std::flush;
 
     // move the found tuplets events to collectedEndsList
     collectedEndsList.splice (
@@ -1684,10 +1685,9 @@ void mxsrEventsCollection::fetchTupletEndsList (
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceTupletsBasics ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     printTupletEventsList (
       gLog,
-      noteSequentialNumber,
       collectedEndsList,
       "fetchTupletEndsList(), resultingEndsList:");
   }
@@ -1704,14 +1704,14 @@ std::string mxsrEventsCollection::asShortString () const
     ", fStaffChangeTakeOffsMap.size (): " << fStaffChangeTakeOffsMap.size () <<
     ", fStaffChangeLandingsMap.size (): " << fStaffChangeLandingsMap.size () <<
 
-    ", fChordBeginsMap.size (): " << fChordBeginsMap.size () <<
-    ", fChordEndsMap.size (): " << fChordEndsMap.size () <<
-
     ", fGraceBeginsMap.size (): " << fGraceBeginsMap.size () <<
     ", fGraceEndsMap.size (): " << fGraceEndsMap.size () <<
 
     ", fCueBeginsMap.size (): " << fCueBeginsMap.size () <<
     ", fCueEndsMap.size (): " << fCueEndsMap.size () <<
+
+    ", fChordBeginsMap.size (): " << fChordBeginsMap.size () <<
+    ", fChordEndsMap.size (): " << fChordEndsMap.size () <<
 
     ", fTupletBeginsList.size (): " << fTupletBeginsList.size () <<
     ", fTupletEndsList.size (): " << fTupletEndsList.size () <<
@@ -2167,24 +2167,22 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 //________________________________________________________________________
 void mxsrEventsCollection::printTupletEventsList (
   std::ostream&                        os,
-  const std::list <S_mxsrTupletEvent>& tupletsList,
-  const std::string&                   context,
-  int                                  inputLineNumber) const
+  const std::list <S_mxsrTupletEvent>& tupletEventsList,
+  const std::string&                   context) const
 {
   os <<
     "--> printTupletEventsList()" <<
     ", context " <<
     mfSingularOrPlural (
-      tupletsList.size (),
+      tupletEventsList.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
-    ", line " << inputLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  for (S_mxsrTupletEvent tupletEvent : tupletsList) {
+  for (S_mxsrTupletEvent tupletEvent : tupletEventsList) {
     int
       eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
 
@@ -2299,29 +2297,47 @@ void mxsrEventsCollection::print (std::ostream& os) const
       "elements") <<
     std::endl << std::endl;
 
-  os << "--------" << std::endl << std::endl;
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMxsrEvents ()) {
+    os << "--------" << std::endl << std::endl;
+    printAllEvents (os);
+  }
+#endif // MF_TRACE_IS_ENABLED
 
-  printAllEvents (os);
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
+    os << "--------" << std::endl << std::endl;
+    printStaffChangeEvents (os);
+  }
+#endif // MF_TRACE_IS_ENABLED
 
-  os << "--------" << std::endl << std::endl;
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
+    os << "--------" << std::endl << std::endl;
+    printGraceEvents (os);
+  }
+#endif // MF_TRACE_IS_ENABLED
 
-  printStaffChangeEvents (os);
+#ifdef MF_TRACE_IS_ENABLED
+  if (true || gTraceOahGroup->getTraceCueNotesBasics ()) {
+    os << "--------" << std::endl << std::endl;
+    printCueEvents (os);
+  }
+#endif // MF_TRACE_IS_ENABLED
 
-  os << "--------" << std::endl << std::endl;
+// #ifdef MF_TRACE_IS_ENABLED
+  if (true || gTraceOahGroup->getTraceChordsBasics ()) {
+    os << "--------" << std::endl << std::endl;
+    printChordEvents (os);
+  }
+// #endif // MF_TRACE_IS_ENABLED
 
-  printGraceEvents (os);
-
-  os << "--------" << std::endl << std::endl;
-
-  printCueEvents (os);
-
-  os << "--------" << std::endl << std::endl;
-
-  printChordEvents (os);
-
-  os << "--------" << std::endl << std::endl;
-
-  printTupletEvents (os);
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    os << "--------" << std::endl << std::endl;
+    printTupletEvents (os);
+  }
+#endif // MF_TRACE_IS_ENABLED
 
   --gIndenter;
 

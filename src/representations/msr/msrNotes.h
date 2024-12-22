@@ -402,21 +402,6 @@ class EXP msrNote : public msrTupletElement
                                     msrNoteKind::kNoteUnpitchedInTuplet;
                               }
 
-    // grace note?
-    void                  setNoteIsACueNoteKind ()
-                              { fNoteIsAGraceNote = true; }
-
-    Bool                  getNoteIsAGraceNote () const
-                              { return fNoteIsAGraceNote; }
-
-    // cue note?
-    void                  setNoteIsACueNoteKind (
-                            msrNoteIsACueNoteKind msrNoteIsACueNoteKind)
-                              { fNoteIsACueNoteKind = msrNoteIsACueNoteKind; }
-
-    msrNoteIsACueNoteKind getNoteIsACueNoteKind () const
-                              { return fNoteIsACueNoteKind; }
-
     // octave shifts
     void                  setNoteOctaveShift (
                             const S_msrOctaveShift& octaveShift)
@@ -425,37 +410,38 @@ class EXP msrNote : public msrTupletElement
     S_msrOctaveShift      getNoteOctaveShift () const
                               { return fNoteOctaveShift; }
 
-    // note context
-    // -------------------------------
+    // grace note?
+    void                  setNoteIsACueNoteKind ()
+                              { fNoteIsAGraceNote = true; }
 
-    // chord members
+    Bool                  getNoteIsAGraceNote () const
+                              { return fNoteIsAGraceNote; }
+
+    // cue note?
+    void                  setNoteIsACueNote ()
+                              { fNoteIsACueNote = true; }
+
+    Bool                  getNoteIsACueNote () const
+                              { return fNoteIsACueNote; }
+
+    void                  setNoteIsACueNoteKind (
+                            msrNoteIsACueNoteKind msrNoteIsACueNoteKind)
+                              { fNoteIsACueNoteKind = msrNoteIsACueNoteKind; }
+
+    msrNoteIsACueNoteKind getNoteIsACueNoteKind () const
+                              { return fNoteIsACueNoteKind; }
+
+    // chord member?
     void                  setNoteBelongsToAChord ();
 
     Bool                  getNoteBelongsToAChord () const
                               { return fNoteBelongsToAChord; }
 
-    // tuplet members
+    // tuplet member?
     void                  setNoteBelongsToATuplet ();
 
     Bool                  getNoteBelongsToATuplet () const
                               { return fNoteBelongsToATuplet; }
-
-    // grace notes
-    Bool                  fetchNoteIsAGraceNote () const
-                              {
-                                return
-                                  fNoteKind ==
-                                    msrNoteKind::kNoteRegularInGraceNotesGroup
-                                    ||
-                                  fNoteKind ==
-                                    msrNoteKind::kNoteSkipInGraceNotesGroup
-                                    ||
-                                  fNoteKind ==
-                                    msrNoteKind::kNoteInChordInGraceNotesGroup
-                                    ||
-                                  fNoteKind ==
-                                    msrNoteKind::kNoteInTupletInGraceNotesGroup;
-                              }
 
     // harmonies
     void                  appendHarmonyToNote (
@@ -1021,6 +1007,7 @@ class EXP msrNote : public msrTupletElement
     Bool                  fNoteIsAGraceNote;
 
     // cue note?
+    Bool                  fNoteIsACueNote;
     msrNoteIsACueNoteKind fNoteIsACueNoteKind;
 
     // note octave shift

@@ -2311,7 +2311,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
   }
 
   // generate note stem kind if needed
-  if (true || ! fOnGoingChord) { // JMI v0.9.70
+  if (true || ! fOnGoingChord) { // JMI v0.9.72 ???
     S_msrStem
       noteStem =
         note->getNoteStem ();
@@ -9861,7 +9861,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
               getLpsrStavesInstrumentsNamesMap ();
 
 if (true)
-        mfDisplayStringToStringMap ( // JMI
+        mfDisplayStringToStringMap ( // JMI v0.9.72 ???
           "--> lpsrStavesInstrumentsNamesMap",
           lpsrStavesInstrumentsNamesMap,
           gLog);
@@ -13801,49 +13801,49 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindOverFlowing:
-//       if (! fOnGoingVoiceCadenza) {
-//         msrWholeNotes
-//           measureCurrentAccumulatedWholeNotesDuration =
-//             elt->getMeasureCurrentAccumulatedWholeNotesDuration (); // JMI v0.9.70
-//
-//         fLilypondCodeStream <<
-//           std::endl <<
-//           "\\cadenzaOn" <<
-//           std::endl <<
-//           "% measureCurrentAccumulatedWholeNotesDuration: " <<
-//           measureCurrentAccumulatedWholeNotesDuration.asString () <<
-//           std::endl <<
-//           "\\omit Staff.TimeSignature";
-//
-//         if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
-//           fLilypondCodeStream << " % msrMeasureKind::kMeasureKindOverFlowing Start";
-//         }
-//
-//         fLilypondCodeStream << std::endl;
-//
-//         fOnGoingVoiceCadenza = true;
-//       }
+      if (! fOnGoingVoiceCadenza) {
+        msrWholeNotes
+          measureCurrentAccumulatedWholeNotesDuration =
+            elt->getMeasureCurrentAccumulatedWholeNotesDuration (); // JMI v0.9.72
+
+        fLilypondCodeStream <<
+          std::endl <<
+          "\\cadenzaOn" <<
+          std::endl <<
+          "% measureCurrentAccumulatedWholeNotesDuration: " <<
+          measureCurrentAccumulatedWholeNotesDuration.asString () <<
+          std::endl <<
+          "\\omit Staff.TimeSignature";
+
+        if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+          fLilypondCodeStream << " % msrMeasureKind::kMeasureKindOverFlowing Start";
+        }
+
+        fLilypondCodeStream << std::endl;
+
+        fOnGoingVoiceCadenza = true;
+      }
       break;
 
     case msrMeasureKind::kMeasureKindCadenza:
-//       if (! fOnGoingVoiceCadenza) {
-//         fLilypondCodeStream <<
-//           std::endl <<
-//           "\\cadenzaOn" <<
-//           std::endl;
-//
-//         if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
-//           fLilypondCodeStream << " % msrMeasureKind::kMeasureKindCadenza Start";
-//         }
-//
-//         fLilypondCodeStream << std::endl;
-//
-//         fLilypondCodeStream <<
-//           "\\once\\omit Staff.TimeSignature" <<
-//           std::endl;
-//
-//         fOnGoingVoiceCadenza = true;
-//       }
+      if (! fOnGoingVoiceCadenza) {
+        fLilypondCodeStream <<
+          std::endl <<
+          "\\cadenzaOn" <<
+          std::endl;
+
+        if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+          fLilypondCodeStream << " % msrMeasureKind::kMeasureKindCadenza Start";
+        }
+
+        fLilypondCodeStream << std::endl;
+
+        fLilypondCodeStream <<
+          "\\once\\omit Staff.TimeSignature" <<
+          std::endl;
+
+        fOnGoingVoiceCadenza = true;
+      }
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
@@ -14093,7 +14093,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       case msrMeasureKind::kMeasureKindOverFlowing:
         fLilypondCodeStream <<
           std::endl <<
-          "\\undo \\omit Staff.TimeSignature |" << // JMI v0.9.70
+          "\\undo \\omit Staff.TimeSignature |" << // JMI v0.9.72 ???
           std::endl <<
           "\\cadenzaOff" <<
           std::endl;

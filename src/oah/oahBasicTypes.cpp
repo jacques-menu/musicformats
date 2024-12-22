@@ -5324,20 +5324,18 @@ void oahHandler::registerElementNamesInHandler (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-    if (true) { // JMI
-      std::stringstream ss;
+    std::stringstream ss;
 
-      ss <<
-        "Registering the names of " <<
-        element->fetchNamesBetweenQuotes () <<
-        " in handler \"" <<
-        fHandlerHeader <<
-        "\"";
+    ss <<
+      "Registering the names of " <<
+      element->fetchNamesBetweenQuotes () <<
+      " in handler \"" <<
+      fHandlerHeader <<
+      "\"";
 
-      gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5569,22 +5567,20 @@ void oahHandler::appendElementToElementsList (
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gEarlyOptions.getTraceEarlyOptionsDetails ()) {
-    if (true) { // JMI
-      std::stringstream ss;
+    std::stringstream ss;
 
-      ss <<
-        "Registering element " <<
-        element->fetchNamesBetweenQuotes () <<
-        " in \"" <<
-        fHandlerServiceName <<
-        "\" handler \"" <<
-        fHandlerHeader <<
-        "\"";
+    ss <<
+      "Registering element " <<
+      element->fetchNamesBetweenQuotes () <<
+      " in \"" <<
+      fHandlerServiceName <<
+      "\" handler \"" <<
+      fHandlerHeader <<
+      "\"";
 
-      gWaeHandler->waeTraceWithoutInputLocation (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTraceWithoutInputLocation (
+      __FILE__, __LINE__,
+      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
 

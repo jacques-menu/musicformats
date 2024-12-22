@@ -270,7 +270,7 @@ class EXP traceOahGroup : public oahGroup
     S_oahStringAtom       getTraceOnlyMeasurerNumbeOahAtom () const
                               { return fTraceOnlyMeasurerNumbeOahAtom; }
 
-    std::set <int>         getTraceDetailedMeasureNumbersSet () const
+    std::set <int>        getTraceDetailedMeasureNumbersSet () const
                               { return fTraceDetailedMeasureNumbersSet; }
 
     // positions
@@ -314,19 +314,10 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceMeasuresSlicesDetails () const
                               { return fTraceMeasuresSlicesDetails; }
 
-
     // clef, key, time signature
     // --------------------------------------
 
-    Bool                  getTraceClefKeyTimeSignatureGroups () const
-                              {
-                                return
-                                  getTraceClefs ()
-                                    ||
-                                  getTraceKeys ()
-                                    ||
-                                  getTraceTimeSignatures ();
-                              }
+    Bool                  fetchTraceClefKeyTimeSignatureGroups () const;
 
     // clefs
     void                  setTraceClefs ()

@@ -189,18 +189,6 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (measurePosition == K_MEASURE_POSITION_UNKNOWN_) {
-    std::stringstream ss;
-
-    gLog <<
-      "measurePosition = " <<
-      measurePosition <<
-      "= K_MEASURE_POSITION_UNKNOWN_" <<
-      std::endl;
-  }
-
-//   mfAssertFalse (1007);
-
   mfAssert (
     __FILE__, __LINE__,
     measurePosition != K_MEASURE_POSITION_UNKNOWN_,

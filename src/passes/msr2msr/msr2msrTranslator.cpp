@@ -5049,7 +5049,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
       else {
 // #ifdef MF_TRACE_IS_ENABLED
-//     if (true) { // JMI
+//     if (true) { // JMI v0.9.72 ???
 //       gLog <<
 //         std::endl <<
 //         std::endl <<

@@ -76,9 +76,6 @@ std::string msrTupletTypeKindAsString (
     case msrTupletTypeKind::kTupletTypeStop:
       result = "kTupletTypeStop";
       break;
-    case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
-      result = "kTupletTypeStartAndStopInARow";
-      break;
   } // switch
 
   return result;
@@ -235,8 +232,6 @@ std::ostream& operator << (std::ostream& os, const msrTupletShowTypeKind& elt)
 //     case msrTupletTypeKind::kTupletTypeStop:
 //       result = "kTupletTypeStop";
 //       break;
-//     case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
-//       result = "kTupletTypeStartAndStopInARow";
 //       break;
 //   } // switch
 //

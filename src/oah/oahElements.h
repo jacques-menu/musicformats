@@ -318,9 +318,7 @@ class EXP oahElement : public oahFindableElement //  smartable
     Bool                  nameIsANameForElement (const std::string& name)
                               {
                                 return
-                                  name == fLongName
-                                    ||
-                                  name == fShortName;
+                                  name == fLongName || name == fShortName;
                               }
 
     virtual int           fetchVariableNameLength () const

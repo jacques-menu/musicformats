@@ -37,8 +37,7 @@ std::ostream& operator << (std::ostream& os, const msrTupletInKind& elt);
 
 enum class msrTupletTypeKind {
   kTupletTypeNone,
-  kTupletTypeStart, kTupletTypeContinue, kTupletTypeStop,
-  kTupletTypeStartAndStopInARow
+  kTupletTypeStart, kTupletTypeContinue, kTupletTypeStop
 };
 
 std::string msrTupletTypeKindAsString (

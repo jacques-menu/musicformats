@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mxsrEvents___
-#define ___mxsrEvents___
+#ifndef ___mxsr2msrEvents___
+#define ___mxsr2msrEvents___
 
 #include <iomanip>
 #include <string>
@@ -939,9 +939,8 @@ class EXP mxsrEventsCollection : public smartable
 
     void                  printTupletEventsList (
                             std::ostream&                        os,
-                            const std::list <S_mxsrTupletEvent>& tupletsList,
-                            const std::string&                   context,
-                            int                                  inputLineNumber) const;
+                            const std::list <S_mxsrTupletEvent>& tupletEventsList,
+                            const std::string&                   context) const;
 
   private:
 
@@ -1007,4 +1006,4 @@ EXP std::ostream& operator << (std::ostream& os, const mxsrEventsCollection& elt
 }
 
 
-#endif // ___mxsrEvents___
+#endif // ___mxsr2msrEvents___

@@ -234,7 +234,7 @@ msrClefKeyTimeSignatureGroup::msrClefKeyTimeSignatureGroup (
   fGroupItemsNumber = 0;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<
@@ -255,7 +255,7 @@ msrClefKeyTimeSignatureGroup::~msrClefKeyTimeSignatureGroup ()
 S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSignatureGroupNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<
@@ -331,7 +331,7 @@ void msrClefKeyTimeSignatureGroup::setClef (const S_msrClef& clef)
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<
@@ -371,7 +371,7 @@ void msrClefKeyTimeSignatureGroup::setKey (const S_msrKey& key)
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<
@@ -412,7 +412,7 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<
@@ -555,7 +555,7 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceClefKeyTimeSignatureGroups ()) {
+  if (gTraceOahGroup->fetchTraceClefKeyTimeSignatureGroups ()) {
     std::stringstream ss;
 
     ss <<
