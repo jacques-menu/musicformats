@@ -767,7 +767,7 @@ R"()",
   // quit after pass 2
 
   S_oahBooleanAtom
-    quit2aOahBooleanAtom =
+    quit2OahBooleanAtom =
       oahBooleanAtom::create (
         "quit-after-pass-2", "qap2",
 R"(Quit after pass 2, i.e. after conversion
@@ -777,12 +777,12 @@ of the MusicXML tree to an MSR skeleton.)",
 
   subGroup->
     appendAtomToSubGroup (
-      quit2aOahBooleanAtom);
+      quit2OahBooleanAtom);
 
   // quit after pass 3
 
   S_oahBooleanAtom
-    quit2bOahBooleanAtom =
+    quit3OahBooleanAtom =
       oahBooleanAtom::create (
         "quit-after-pass-3", "qap3",
 R"(Quit after pass 3, i.e. after conversion
@@ -792,12 +792,12 @@ of the MusicXML tree to MSR.)",
 
   subGroup->
     appendAtomToSubGroup (
-      quit2bOahBooleanAtom);
+      quit3OahBooleanAtom);
 
   // quit after pass 4
 
   S_oahBooleanAtom
-    quit3OahBooleanAtom =
+    quit4OahBooleanAtom =
       oahBooleanAtom::create (
         "quit-after-pass-4", "qap4",
 R"(Quit after pass 4, i.e. after conversion
@@ -807,7 +807,22 @@ of the first MSR to a second MSR.)",
 
   subGroup->
     appendAtomToSubGroup (
-      quit3OahBooleanAtom);
+      quit4OahBooleanAtom);
+
+  // quit after pass 5
+
+  S_oahBooleanAtom
+    quit5OahBooleanAtom =
+      oahBooleanAtom::create (
+        "quit-after-pass-5", "qap5",
+R"(Quit after pass 5, i.e. after conversion
+of the second MSR to LPSR.)",
+        "fQuitAfterPass5",
+        fQuitAfterPass5);
+
+  subGroup->
+    appendAtomToSubGroup (
+      quit5OahBooleanAtom);
 }
 
 //_______________________________________________________________________________
@@ -890,8 +905,11 @@ void xml2lyInsiderOahGroup::printXml2lyInsiderOahGroupValues (int fieldWidth)
     std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
     fQuitAfterPass3 <<
     std::endl <<
-    std::setw (fieldWidth) << "fQuitAfterPass3" << ": " <<
-    fQuitAfterPass3 <<
+    std::setw (fieldWidth) << "fQuitAfterPass4" << ": " <<
+    fQuitAfterPass4 <<
+    std::endl <<
+    std::setw (fieldWidth) << "fQuitAfterPass5" << ": " <<
+    fQuitAfterPass5 <<
     std::endl;
 
   --gIndenter;

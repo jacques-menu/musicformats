@@ -563,11 +563,10 @@ void msrChord::setChordDisplayWholeNotes (
     std::stringstream ss;
 
     ss <<
-      "Setting chord displayed whole notes to '" <<
+      "Setting chord displayed whole notes to " <<
       wholeNotes.asString () <<
-      "' for chord '" <<
-      asString () <<
-      "'";
+      " for chord " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -738,7 +737,7 @@ void msrChord::addNoteToChord (
   const S_msrVoice& voice)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
     std::stringstream ss;
 
     ss <<

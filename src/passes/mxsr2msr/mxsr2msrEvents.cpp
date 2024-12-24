@@ -377,7 +377,7 @@ std::string mxsrStaffChangeEvent::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[StaffChangeEvent, " <<
+    "[StaffChangeEvent" <<
     ", fEventInputStartLineNumber: L" << fEventInputStartLineNumber <<
     ", fTakeOffInputStartLineNumber: L" << fTakeOffInputStartLineNumber <<
     ", fLandingInputStartLineNumber: L" << fLandingInputStartLineNumber <<
@@ -530,7 +530,7 @@ std::string mxsrGraceEvent::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[GraceEvent, " <<
+    "[GraceEvent" <<
     ", fEventInputStartLineNumber: " << fEventInputStartLineNumber <<
 //     ", fEventInputEndLineNumber: " << fEventInputEndLineNumber <<
     ", fEventSequentialNumber: E" << fEventSequentialNumber <<
@@ -657,7 +657,7 @@ std::string mxsrCueEvent::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[CueEvent, " <<
+    "[CueEvent" <<
     ", fEventInputStartLineNumber: " << fEventInputStartLineNumber <<
 //     ", fEventInputEndLineNumber: " << fEventInputEndLineNumber <<
     ", fEventSequentialNumber: E" << fEventSequentialNumber <<
@@ -784,7 +784,7 @@ std::string mxsrChordEvent::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[ChordEvent, " <<
+    "[ChordEvent" <<
     ", fEventInputStartLineNumber: " << fEventInputStartLineNumber <<
 //     ", fEventInputEndLineNumber: " << fEventInputEndLineNumber <<
     ", fEventSequentialNumber: E" << fEventSequentialNumber <<
@@ -1369,7 +1369,7 @@ void mxsrEventsCollection::registerTupletBeginEvent (
         eventInputEndLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceTupletsBasics ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1412,7 +1412,7 @@ void mxsrEventsCollection::registerTupletEndEvent (
         eventInputEndLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceTupletsBasics ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1606,7 +1606,7 @@ void mxsrEventsCollection::fetchTupletBeginsList (
         });
 
   if (startIt != fTupletBeginsList.end ()) {
-    gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
+//     gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
 
     // look for the first next tuplet event not matching noteSequentialNumber
     std::list <S_mxsrTupletEvent>::iterator endIt =
@@ -2319,14 +2319,14 @@ void mxsrEventsCollection::print (std::ostream& os) const
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceCueNotesBasics ()) {
+  if (gTraceOahGroup->getTraceCueNotesBasics ()) {
     os << "--------" << std::endl << std::endl;
     printCueEvents (os);
   }
 #endif // MF_TRACE_IS_ENABLED
 
 // #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceChordsBasics ()) {
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
     os << "--------" << std::endl << std::endl;
     printChordEvents (os);
   }

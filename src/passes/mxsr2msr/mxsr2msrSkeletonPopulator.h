@@ -1389,15 +1389,6 @@ class EXP mxsr2msrSkeletonPopulator :
     // beats repeats
     int                       fCurrentBeatRepeatSlashes;
 
-    // multi-measure rests
-    int                       fCurrentMeasureRestsNumber;
-    int                       fRemainingMeasureRestsCounter;
-
-    Bool                      fMultiMeasureRestsUseSymbols;
-
-//     void                      handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
-//                                 int inputLineNumber);
-
     // measure repeats
     msrMeasureRepeatKind      fCurrentMeasureRepeatKind;
     int                       fCurrentMeasureRepeatMeasuresNumber;
@@ -1414,22 +1405,55 @@ class EXP mxsr2msrSkeletonPopulator :
 
     S_msrNote                 fCurrentNote;
 
-    // only grace notes and cue notes are not standalone
-    Bool                      fCurrentNoteIsStandalone;
+    // sounding notes
+    Bool                      fCurrentNoteIsSounding;
 
+    // rests
+    Bool                      fCurrentNoteIsARest;
+
+    // multi-measure rests
+    Bool                      fCurrentRestIsAMeasureRest;
+
+    int                       fCurrentMeasureRestsNumber;
+    int                       fRemainingMeasureRestsCounter;
+
+    Bool                      fMultiMeasureRestsUseSymbols;
+
+//     void                      handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
+//                                 int inputLineNumber);
+
+    // grace notes
+    Bool                      fCurrentNoteIsAGraceNote;
+
+    std::string               fCurrentStealTimeFollowing;
+    std::string               fCurrentStealTimePrevious;
+    std::string               fCurrentMakeTimeSignature;
+
+    // cue notes
+    Bool                      fCurrentNoteIsACueNote;
+    msrNoteIsACueNoteKind     fCurrentNoteIsACueNoteKind;
+
+    // current non-grace note
+    S_msrNote                 fCurrentNonGraceNote;
+
+    // detailed notes handling
     void                      handleCurrentNote (
                                 int inputLineNumber);
 
     S_msrNote                 createNote (
                                 int inputLineNumber);
 
-    // detailed notes handling
     void                      attachPendingGraceNotesGroupToNoteIfRelevant (
                                 int inputLineNumber);
 
-    void                      handleStandAloneNoteOrRest ();
+    void                      handleSoundingNote (
+																const S_msrNote& note);
 
-    void                      handleGraceNote (); // JMI v0.9.72
+    void                      handleRest (
+																const S_msrNote& note);
+
+    void                      handleGraceNote (
+																const S_msrNote& note); // JMI v0.9.72
 
     void                      handleChordMemberNote (
                                 const S_msrNote& newChordNote);
@@ -2036,26 +2060,8 @@ class EXP mxsr2msrSkeletonPopulator :
     // graphic duration
     msrNotesDurationKind      fCurrentNoteGraphicNotesDurationKind;
 
-    // rests
-    Bool                      fCurrentNoteIsARest;
-    Bool                      fCurrentRestIsAMeasureRest;
-
     // unpitched notes
     Bool                      fCurrentNoteIsUnpitched;
-
-    // cue notes
-    Bool                      fCurrentNoteIsACueNote;
-
-    msrNoteIsACueNoteKind     fCurrentNoteIsACueNoteKind;
-
-    // grace notes
-    Bool                      fCurrentNoteIsAGraceNote;
-
-    std::string               fCurrentStealTimeFollowing;
-    std::string               fCurrentStealTimePrevious;
-    std::string               fCurrentMakeTimeSignature;
-
-    S_msrNote                 fCurrentNonGraceNote;
 
     // elements attached to the note
     S_msrStem                 fCurrentStem;

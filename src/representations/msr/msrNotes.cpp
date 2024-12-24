@@ -4770,43 +4770,8 @@ std::string msrNote::asHeaderLessString () const
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
-      {
-        ss <<
-	      	noteCoreAsString ();
-
-        S_msrVoice
-          noteVoiceUpLink =
-            fetchNoteUpLinkToVoice ();
-
-        S_msrStaff
-          noteStaffUpLink;
-
-        if (noteVoiceUpLink) {
-          noteStaffUpLink =
-            noteVoiceUpLink->
-              getVoiceUpLinkToStaff ();
-        }
-
-        ss <<
-          ", noteStaffUpLink: ";
-        if (noteStaffUpLink) {
-          ss <<
-            noteStaffUpLink->getStaffName ();
-        }
-        else {
-          ss << "[NULL]";
-        }
-
-        ss <<
-          ", noteVoiceUpLink: ";
-        if (noteVoiceUpLink) {
-          ss <<
-            noteVoiceUpLink->getVoiceName ();
-        }
-        else {
-          ss << "[NULL]";
-        }
-      }
+			ss <<
+				noteCoreAsString ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
@@ -5096,6 +5061,44 @@ void msrNote::print (std::ostream& os) const
     "fNoteBelongsToATuplet" << ": " <<
     fNoteBelongsToATuplet <<
     std::endl;
+
+	// print the uplinks
+	S_msrVoice
+		noteVoiceUpLink =
+			fetchNoteUpLinkToVoice ();
+
+	S_msrStaff
+		noteStaffUpLink;
+
+	if (noteVoiceUpLink) {
+		noteStaffUpLink =
+			noteVoiceUpLink->
+				getVoiceUpLinkToStaff ();
+	}
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "noteStaffUpLink" << ": ";
+	if (noteStaffUpLink) {
+		os <<
+			noteStaffUpLink->getStaffName ();
+	}
+	else {
+		os << "[NULL]";
+	}
+	os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "noteVoiceUpLink" << ": ";
+	if (noteVoiceUpLink) {
+		os <<
+			noteVoiceUpLink->getVoiceName ();
+	}
+	else {
+		os << "[NULL]";
+	}
+	os << std::endl;
 
   // print the stem if any
   os << std::left <<
@@ -5973,20 +5976,56 @@ void msrNote::printFull (std::ostream& os) const
     fNoteIsSecondNoteInADoubleTremolo <<
     std::endl;
 
-  os <<
+  os << std::left <<
     std::setw (fieldWidth) <<
     "fNoteTrillOrnament" << ": ";
   if (fNoteTrillOrnament) {
     os << std::endl;
     ++gIndenter;
-
 		fNoteTrillOrnament->printFull (os);
-
     --gIndenter;
   }
   else {
     os << "[NULL]" << std::endl;
   }
+
+	// print the uplinks
+	S_msrVoice
+		noteVoiceUpLink =
+			fetchNoteUpLinkToVoice ();
+
+	S_msrStaff
+		noteStaffUpLink;
+
+	if (noteVoiceUpLink) {
+		noteStaffUpLink =
+			noteVoiceUpLink->
+				getVoiceUpLinkToStaff ();
+	}
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "noteStaffUpLink" << ": ";
+	if (noteStaffUpLink) {
+		os <<
+			noteStaffUpLink->getStaffName ();
+	}
+	else {
+		os << "[NULL]";
+	}
+	os << std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "noteVoiceUpLink" << ": ";
+	if (noteVoiceUpLink) {
+		os <<
+			noteVoiceUpLink->getVoiceName ();
+	}
+	else {
+		os << "[NULL]";
+	}
+	os << std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<

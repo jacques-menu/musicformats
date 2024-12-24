@@ -1867,7 +1867,7 @@ void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
  	// Q_MEASURE
 
 	// register the chord end event if any, before pending tuplets stops if any
-	if (fCurrentNoteBelongsToAChord) {
+	if (false && fCurrentNoteBelongsToAChord) {
 		// the note before the measure end is the last one of the chord
 		// it is still the current note
 
@@ -4442,7 +4442,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
  	// Q_MEASURE
 
 	if (fCurrentNoteIsAGraceNote) {
-		// the current note is the last one of a grace notes groupBarLine
+		// the current note is the last one of a grace notes group
 		fResultingEventsCollection.registerGraceEnd (
 			fCurrentNoteSequentialNumber,
 			fCurrentNoteStaffNumber,
@@ -4452,8 +4452,18 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 	}
 
 	if (fCurrentNoteIsACueNote) {
-		// the current note is the last one of a cue notes groupBarLine
+		// the current note is the last one of a cue notes group
 		fResultingEventsCollection.registerCueEnd (
+			fCurrentNoteSequentialNumber,
+			fCurrentNoteStaffNumber,
+			fCurrentNoteVoiceNumber,
+			fCurrentNoteStartInputLineNumber,
+			fCurrentNoteEndInputLineNumber);
+	}
+
+	if (fCurrentNoteBelongsToAChord) {
+		// the current note is the last one of a chord
+		fResultingEventsCollection.registerChordEnd (
 			fCurrentNoteSequentialNumber,
 			fCurrentNoteStaffNumber,
 			fCurrentNoteVoiceNumber,
@@ -4666,6 +4676,9 @@ void mxsr2msrSkeletonBuilder::visitStart (S_rest& elt)
 
 	// a rest cannot be a grace note
 	fCurrentNoteIsAGraceNote = false;
+
+	// a rest cannot be a cue note
+	fCurrentNoteIsACueNote = false;
 
 	// a rest cannot be part of a chord
 	fCurrentNoteBelongsToAChord = false;
@@ -5098,6 +5111,8 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 				fPreviousNoteVoiceNumber,
 				fPreviousNoteStartInputLineNumber,
 				fPreviousNoteEndInputLineNumber);
+
+// 			fPreviousNoteBelongsToAChord = false;
 		}
 		else {
 			// wait and see upon the next note or the measure end
@@ -5363,7 +5378,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 		}
 #endif // MF_TRACE_IS_ENABLED
 
-		if (fPreviousNoteBelongsToAChord) {
+		if (false && fPreviousNoteBelongsToAChord) {
 			// this is the note right after the last one of the chord
 			// we're one note late, hence the previous note is the chord end
 			fResultingEventsCollection.registerChordEnd (

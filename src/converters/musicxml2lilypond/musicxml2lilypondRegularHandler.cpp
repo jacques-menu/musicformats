@@ -308,6 +308,7 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("quit-after-pass-2", subGroup);
   registerAtomInRegularSubgroup ("quit-after-pass-3", subGroup);
   registerAtomInRegularSubgroup ("quit-after-pass-4", subGroup);
+  registerAtomInRegularSubgroup ("quit-after-pass-5", subGroup);
 
   registerAtomInRegularSubgroup ("debug", subGroup);
 

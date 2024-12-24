@@ -3541,16 +3541,18 @@ void msrVoice::appendDoubleTremoloToVoice (
 void msrVoice::appendChordToVoice (const S_msrChord& chord)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    std::stringstream ss;
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
+    gLog <<
+      "Appending chord:" <<
+      std::endl;
 
-    ss <<
-      "Appending chord '" << chord <<
-      "' to voice \"" << fVoiceName << "\"";
+    ++gIndenter;
+    chord->print (gLog);
+    --gIndenter;
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+    gLog <<
+      "to voice \"" << fVoiceName << "\"" <<
+      std::endl << std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 

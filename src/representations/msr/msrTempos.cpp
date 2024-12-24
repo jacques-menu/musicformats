@@ -1539,9 +1539,9 @@ std::string msrTempo::tempoWordsListAsString (const std::string& separator) cons
 std::string msrTempo::asString () const
 {
 //   std::stringstream ss;
-  mfIndentedStringStream iss;
+  std::stringstream ss;
 
-  iss <<
+  ss <<
     "[Tempo" <<
     ", fTempoKind: " << fTempoKind <<
     ", fTempoWordsList: ";
@@ -1552,61 +1552,146 @@ std::string msrTempo::asString () const
       iEnd   = fTempoWordsList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      iss << (*i);
+      ss << (*i);
       if (++i == iEnd) break;
-      iss << ", ";
+      ss << ", ";
     } // for
   }
   else {
-    iss << "\"\"";
+    ss << "\"\"";
   }
 
-  iss <<
+  ss <<
     ", fTempoBeatUnit: " << fTempoBeatUnit.asString () <<
     ", fTempoPerMinute: " << fTempoPerMinute <<
     ", fTempoParenthesizedKind: " << fTempoParenthesizedKind <<
     ", line " << fInputStartLineNumber <<
     ']';
 
-  return iss.str ();
+  return ss.str ();
 }
 
-// std::string msrTempo::asStringForMeasuresSlices () const
-// {
-//   std::stringstream ss;
+void msrTempo::print (std::ostream& os) const
+{
+  os <<
+    "[Tempo" <<
+    ", line " << fInputStartLineNumber <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 24;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+   "fTempoKind" << ": " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTempoWordsList";
+
+  if (fTempoWordsList.size ()) {
+    os << std::endl;
+
+    ++gIndenter;
+
+    std::list <S_msrWords>::const_iterator
+      iBegin = fTempoWordsList.begin (),
+      iEnd   = fTempoWordsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      os << std::endl;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os <<
+      ": " << "[EMPTY]" <<
+      std::endl;
+  }
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTempoBeatUnit" << ": " << fTempoBeatUnit <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTempoPerMinute" << ": \"" << fTempoPerMinute << "\"" <<
+    std::endl <<
+
+//     std::setw (fieldWidth) <<
+//     "fTempoEquivalentBeatUnit"  << ": " <<
+//     fTempoEquivalentBeatUnit <<
+//     std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fTempoParenthesizedKind"  << ": " <<
+    msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
+    std::endl;
+
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fTempoNotesRelationshipLeftElements";
+//   if (fTempoNotesRelationshipLeftElements) {
+//     os <<
+//       ": " <<
+//       std::endl;
 //
-//   ss <<
-//     '[';
-// //     ", tempoKind: " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
-// //     ", tempoWordsList: ";
-// //
-// //   if (fTempoWordsList.size ()) {
-// //     std::list <S_msrWords>::const_iterator
-// //       iBegin = fTempoWordsList.begin (),
-// //       iEnd   = fTempoWordsList.end (),
-// //       i      = iBegin;
-// //     for ( ; ; ) {
-// //       ss << (*i);
-// //       if (++i == iEnd) break;
-// //       ss << ", ";
-// //     } // for
-// //   }
-// //   else {
-// //     ss << "\"\"";
-// //   }
+//     ++gIndenter;
 //
-//   ss <<
-//     fTempoBeatUnit.asString () <<
-//     ": " <<
-//     fTempoPerMinute;
-// //     ", tempoParenthesizedKind: "  <<
-// //     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
-// //     ", line " << fInputStartLineNumber;
+//     os <<
+//       fTempoNotesRelationshipLeftElements;
 //
-//   ss << ']';
+//     --gIndenter;
+//   }
+//   else {
+//     os << ": " << "[NULL]" <<
+//     std::endl;
+//   }
+
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fTempoNotesRelationshipKind" << ": " <<
+//     msrTempoNotesRelationshipKindAsString (
+//       fTempoNotesRelationshipKind) <<
+//     std::endl;
 //
-//   return ss.str ();
-// }
+//   os << std::left <<
+//     std::setw (fieldWidth) <<
+//     "fTempoNotesRelationshipRightElements";
+//   if (fTempoNotesRelationshipRightElements) {
+//     os <<
+//       ":" <<
+//       std::endl;
+//
+//     ++gIndenter;
+//
+//     os <<
+//       fTempoNotesRelationshipRightElements;
+//
+//     --gIndenter;
+//   }
+//   else {
+//     os << ": " << "[NULL]" <<
+//     std::endl;
+//   }
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTempoPlacementKind" << ": " <<
+    msrPlacementKindAsString (
+      fTempoPlacementKind) <<
+    std::endl;
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
 
 void msrTempo::printFull (std::ostream& os) const
 {
@@ -1737,11 +1822,6 @@ void msrTempo::printFull (std::ostream& os) const
   os << ']' << std::endl;
 }
 
-void msrTempo::print (std::ostream& os) const
-{
-  os << asString () << std::endl;
-}
-
 std::ostream& operator << (std::ostream& os, const S_msrTempo& elt)
 {
   if (elt) {
@@ -1756,3 +1836,42 @@ std::ostream& operator << (std::ostream& os, const S_msrTempo& elt)
 
 
 }
+
+
+// std::string msrTempo::asStringForMeasuresSlices () const
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     '[';
+// //     ", tempoKind: " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
+// //     ", tempoWordsList: ";
+// //
+// //   if (fTempoWordsList.size ()) {
+// //     std::list <S_msrWords>::const_iterator
+// //       iBegin = fTempoWordsList.begin (),
+// //       iEnd   = fTempoWordsList.end (),
+// //       i      = iBegin;
+// //     for ( ; ; ) {
+// //       ss << (*i);
+// //       if (++i == iEnd) break;
+// //       ss << ", ";
+// //     } // for
+// //   }
+// //   else {
+// //     ss << "\"\"";
+// //   }
+//
+//   ss <<
+//     fTempoBeatUnit.asString () <<
+//     ": " <<
+//     fTempoPerMinute;
+// //     ", tempoParenthesizedKind: "  <<
+// //     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
+// //     ", line " << fInputStartLineNumber;
+//
+//   ss << ']';
+//
+//   return ss.str ();
+// }
+

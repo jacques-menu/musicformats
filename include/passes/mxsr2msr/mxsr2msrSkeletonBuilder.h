@@ -655,6 +655,9 @@ class EXP mxsr2msrSkeletonBuilder :
 
     Bool                      fOnGoingNote;
 
+    // rest handling
+    // ------------------------------------------------------
+
     Bool                      fCurrentNoteIsARest;
 
     // grace notes handling
