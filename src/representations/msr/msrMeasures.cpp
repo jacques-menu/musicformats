@@ -7955,19 +7955,27 @@ void msrMeasure::printFull (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
-    ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-    fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  constexpr int fieldWidth = 46;
+  constexpr int fieldWidth = 45;
 
   os << std::left <<
     std::setw (fieldWidth) <<
+    "fMeasureCurrentAccumulatedWholeNotesDuration" << ": " <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
     "getFullMeasureWholeNotesDuration ()" << ": " <<
     getFullMeasureWholeNotesDuration ().asString () <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fMeasureContainsSound" << ": " <<
+    fMeasureContainsSound <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -8236,16 +8244,19 @@ void msrMeasure::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
-    ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
-    fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  constexpr int fieldWidth = 37;
+  constexpr int fieldWidth = 45;
 
   os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMeasureCurrentAccumulatedWholeNotesDuration" << ": " <<
+    fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
+    std::endl <<
+
     std::setw (fieldWidth) <<
     "fMeasureContainsSound" << ": " <<
     fMeasureContainsSound <<

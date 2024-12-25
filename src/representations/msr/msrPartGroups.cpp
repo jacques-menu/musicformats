@@ -1442,6 +1442,11 @@ void msrPartGroup::printFull (std::ostream& os) const
   os << std::endl;
 
   os << std::left <<
+    std::setw (fieldWidth) <<
+    "fPartGroupPartsMap.size ()" << ": " <<
+    fPartGroupPartsMap.size () <<
+    std::endl <<
+
    std::setw (fieldWidth) <<
     "fPartGroupNameDisplayText" << ": \"" <<
     fPartGroupNameDisplayText <<
@@ -1534,8 +1539,6 @@ void msrPartGroup::print (std::ostream& os) const
 
   os <<
     "[PartGroup" " \"" << fetchPartGroupCombinedName () <<
-    "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
-    ")" <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
@@ -1553,6 +1556,11 @@ void msrPartGroup::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fPartGroupImplicitKind" << ": " <<
     fPartGroupImplicitKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fPartGroupPartsMap.size ()" << ": " <<
+    fPartGroupPartsMap.size () <<
     std::endl;
 
   // print the part group elements if any

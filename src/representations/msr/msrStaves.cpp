@@ -4043,11 +4043,8 @@ void msrStaff::print (std::ostream& os) const
 {
   os <<
     "[Staff \"" << fStaffName <<
-    "\", fStaffAlphabeticName: " << fStaffAlphabeticName <<
     "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
-    "\", fStaffNumber: " <<
-    fStaffNumber <<
     std::endl;
 
   ++gIndenter;
@@ -4056,8 +4053,17 @@ void msrStaff::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
+    "fStaffAlphabeticName \"" << ": \"" << fStaffAlphabeticName << "\"" <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fStaffNumber" << ": " << fStaffNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
     "fStaffAllVoicesList.size()" << ": " << fStaffAllVoicesList.size () <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fStaffRegularVoicesCounter" << ": " << fStaffRegularVoicesCounter <<
     std::endl;

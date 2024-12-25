@@ -194,8 +194,9 @@ std::string wholeNotesAsLilypondString (
     std::stringstream s1;
 
     s1 <<
-      "numerator is not positive in wholeNotesAsLilypondString()" <<
-      ", wholeNotes: " << wholeNotes.asFractionString ();
+      "wholeNotesAsLilypondString(): " <<
+      "numerator is not positive in " <<
+      wholeNotes.asFractionString ();
 
     std::string message = s1.str ();
 

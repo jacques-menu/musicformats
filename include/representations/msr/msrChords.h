@@ -387,7 +387,7 @@ class EXP msrChord : public msrTupletElement
     S_msrScore            fetchChordUpLinkToScore () const;
 
     // notes
-    void                  addNoteToChord (
+    void                  appendNoteToChord (
                             const S_msrNote&  note,
                             const S_msrVoice& voice);
 

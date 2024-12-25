@@ -24543,14 +24543,15 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::populateCurrentChordFromNote (
+void mxsr2msrSkeletonPopulator::copyNoteValuesToCurrentChord (
   S_msrNote note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
     gLog <<
-      "===> populateCurrentChordFromNote(), gathered note informations:" <<
-      std::endl;
+      "===> copyNoteValuesToCurrentChord(), note: " <<
+      note <<
+      std::endl << std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -24559,10 +24560,10 @@ void mxsr2msrSkeletonPopulator::populateCurrentChordFromNote (
     std::stringstream ss;
 
     ss <<
-      "Populating current chord " <<
-      fCurrentChord->asString () <<
-  		" from its first note " <<
+      "Copying values from note " <<
       note->asString () <<
+      " to current chord " <<
+      fCurrentChord->asString () <<
       ", line " << note->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -24580,7 +24581,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentChordFromNote (
     setMeasureElementSoundingWholeNotes (
       note->
         getMeasureElementSoundingWholeNotes (),
-      "populateCurrentChordFromNote()");
+      "copyNoteValuesToCurrentChord()");
 
   fCurrentChord->
     setChordDisplayWholeNotes (
@@ -25389,6 +25390,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   attachPendingPartLevelElementsIfAnyToPart (
     fCurrentPart);
 
+  // are all fCurrentNote uplinks set alright ??? JMI v0.9.67
+  populateCurrentNoteBeforeItIsHandled (
+    elt->getInputStartLineNumber ());
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -25398,18 +25402,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
   handleCurrentNote (
     elt->getInputStartLineNumber ());
-
-
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
-  // populate the current note and append it to the current recipient voice
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
-
-  // are all fCurrentNote uplinks set alright ??? JMI v0.9.67
-  populateCurrentNoteBeforeItIsHandled (
-    elt->getInputStartLineNumber ());
-
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -27533,14 +27525,14 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
 
   // add note to current chord
   fCurrentChord->
-    addNoteToChord (
+    appendNoteToChord (
       note,
       fCurrentPartStaffMsrVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]);
 
-    if (! fCurrentChordHasBeenPopulatedFromItsFirstNote) {
+    if (fCurrentChordHasBeenPopulatedFromItsFirstNote) {
       // populate current note from its first notes
-      populateCurrentChordFromNote (
+      copyNoteValuesToCurrentChord (
         note);
 
       // forget about current chord first note
@@ -27966,7 +27958,7 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInATuplet (
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentChord->
-    addNoteToChord (
+    appendNoteToChord (
       newChordNote,
       fCurrentPartStaffMsrVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]);
@@ -28040,7 +28032,7 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNoteInAGraceNotesGroup (
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentChord->
-    addNoteToChord (
+    appendNoteToChord (
       newChordNote,
       fCurrentPartStaffMsrVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]);

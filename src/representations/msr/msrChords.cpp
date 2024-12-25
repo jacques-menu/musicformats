@@ -732,7 +732,7 @@ void msrChord::setChordMembersMeasurePosition (
 //     } // for
 }
 
-void msrChord::addNoteToChord (
+void msrChord::appendNoteToChord (
   const S_msrNote&  note,
   const S_msrVoice& voice)
 {
@@ -741,7 +741,7 @@ void msrChord::addNoteToChord (
     std::stringstream ss;
 
     ss <<
-      "Adding note " <<
+      "Appending note " <<
       note->asShortString () <<
       " to chord " <<
       asString ();
@@ -1833,17 +1833,18 @@ void msrChord::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
- // JMI   "chordSoundingWholeNotes" << ": " << fChordSoundingWholeNotes << v0.9.72
-//     "fMeasureElementSoundingWholeNotes" << ": " <<
-//     fMeasureElementSoundingWholeNotes <<
     "fMeasureElementSoundingWholeNotes" << ": " <<
     fMeasureElementSoundingWholeNotes.asFractionString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << ": " <<
     fChordDisplayWholeNotes <<
-    std::endl;
+    std::endl <<
 
+    std::setw (fieldWidth) <<
+    "fMeasureElementMeasurePosition" << ": " <<
+    fMeasureElementMeasurePosition.asString () <<
+    std::endl;
 //   os << std::left <<
 //     std::setw (fieldWidth) <<
 //     "fChordFirstMemberNote" << ": " <<
@@ -1863,9 +1864,6 @@ void msrChord::print (std::ostream& os) const
   os << std::endl;
 
   os << std::left <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition.asString () <<
-    std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<
 //     std::endl <<
@@ -2633,19 +2631,23 @@ void msrChord::printFull (std::ostream& os) const
     "fMeasureElementMeasurePosition" << ": " <<
     fMeasureElementMeasurePosition.asString () <<
     std::setw (fieldWidth) <<
+
     "fMeasureElementSoundingWholeNotes" << ": " <<
     fMeasureElementSoundingWholeNotes <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << ": " << fChordDisplayWholeNotes <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fMeasureElementUpLinkToMeasure()" << ": " <<
     fMeasureElementUpLinkToMeasure->getMeasureNumber () <<
     std::endl <<
+
 //     std::setw (fieldWidth) <<
 //     "fMeasureElementVoicePosition" << ": " << fMeasureElementVoicePosition <<
 //     std::endl <<
+
     std::setw (fieldWidth) <<
     "chordMeasureFullLength" << ": " << chordMeasureFullLength <<
     std::endl;

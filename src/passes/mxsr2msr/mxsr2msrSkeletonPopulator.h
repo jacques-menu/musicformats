@@ -2408,7 +2408,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      createChord (int inputLineNumber);
 
-    void                      populateCurrentChordFromNote (
+    void                      copyNoteValuesToCurrentChord (
                                 S_msrNote note);
 
     void                      handleChordBeginIfAnyBeforeNoteCreation ();

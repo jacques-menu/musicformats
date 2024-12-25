@@ -6699,7 +6699,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       if (fOnGoingChord) {
         // append fCurrentNonGraceNoteClone to fCurrentChordClone
         fCurrentChordClone->
-          addNoteToChord (
+          appendNoteToChord (
             fCurrentNonGraceNoteClone,
             fCurrentVoiceClone);
 
@@ -6732,7 +6732,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       if (fOnGoingChord) {
         // append fCurrentGraceNoteClone to fCurrentVoiceClone
         fCurrentChordClone->
-          addNoteToChord (
+          appendNoteToChord (
             fCurrentGraceNoteClone,
             fCurrentVoiceClone);
       }

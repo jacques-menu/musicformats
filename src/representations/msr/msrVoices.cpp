@@ -11996,8 +11996,6 @@ void msrVoice::print (std::ostream& os) const
     fVoiceAlphabeticName <<
     "\", fVoiceNumber " <<
     fVoiceNumber <<
-    ", fRegularVoiceOrdinalNumberInPart " <<
-    fRegularVoiceOrdinalNumberInPart <<
     ", line " << fInputStartLineNumber <<
     std::endl;
 
@@ -12006,6 +12004,12 @@ void msrVoice::print (std::ostream& os) const
   constexpr int fieldWidth = 43;
 
   // print the regular voice harmonies voice name if any
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fRegularVoiceOrdinalNumberInPart " << ": " <<
+    fRegularVoiceOrdinalNumberInPart <<
+    std::endl;
+
   os << std::left <<
     std::setw (fieldWidth) <<
     "fRegularVoiceForwardLinkToHarmoniesVoice" << ": ";
