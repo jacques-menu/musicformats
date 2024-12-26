@@ -5501,7 +5501,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_chord& elt)
 		std::stringstream ss;
 
 		ss <<
-			"--> There is a chord event" <<
+			"--> visitStart (S_chord& elt): there is a chord event" <<
 			", fCurrentNoteSequentialNumber: " <<
 			fCurrentNoteSequentialNumber <<
 			", fPreviousNoteSequentialNumber: " <<

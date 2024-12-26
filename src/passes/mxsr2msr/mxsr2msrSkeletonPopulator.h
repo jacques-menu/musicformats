@@ -1487,7 +1487,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // populate current note
     // ------------------------------------------------------
 
-    void                      populateCurrentNoteBeforeItIsHandled (
+    void                      populateCurrentNoteWithCurrentInformations (
                                 int inputLineNumber);
 
     // harmonies and figured bass elements need

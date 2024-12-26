@@ -1562,9 +1562,9 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordBeginAtNoteSequentialNumber (
 {
   S_mxsrChordEvent result;
 
-  std::map <int, S_mxsrChordEvent>::const_iterator it;
-
-  it = fChordBeginsMap.find (noteSequentialNumber);
+  std::map <int, S_mxsrChordEvent>::const_iterator
+    it =
+      fChordBeginsMap.find (noteSequentialNumber);
 
   if (it != fChordBeginsMap.end ()) {
     result = (*it).second;
@@ -1578,9 +1578,9 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordEndAtNoteSequentialNumber (
 {
   S_mxsrChordEvent result;
 
-  std::map <int, S_mxsrChordEvent>::const_iterator it;
-
-  it = fChordEndsMap.find (noteSequentialNumber);
+  std::map <int, S_mxsrChordEvent>::const_iterator
+    it =
+      fChordEndsMap.find (noteSequentialNumber);
 
   if (it != fChordEndsMap.end ()) {
     result = (*it).second;

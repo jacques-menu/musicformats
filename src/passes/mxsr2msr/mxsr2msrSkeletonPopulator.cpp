@@ -23682,19 +23682,19 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::populateCurrentNoteBeforeItIsHandled (
+void mxsr2msrSkeletonPopulator::populateCurrentNoteWithCurrentInformations (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceNotes ()
-      ||
-    gTraceOahGroup->getTraceStaffChanges ()
+    gTraceOahGroup->getTraceNotesBasics ()
+//       ||
+//     gTraceOahGroup->getTraceStaffChangesBasics ()
   ) {
     std::stringstream ss;
 
     ss <<
-      "==> populateCurrentNoteBeforeItIsHandled() " <<
+      "==> populateCurrentNoteWithCurrentInformations() " <<
       fCurrentNote->asString () <<
        " into";
 
@@ -23704,7 +23704,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteBeforeItIsHandled (
 
     displayStaffAndVoiceInformation (
       fCurrentNote->getInputStartLineNumber (),
-      "populateCurrentNoteBeforeItIsHandled())");
+      "populateCurrentNoteWithCurrentInformations())");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -23777,7 +23777,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteBeforeItIsHandled (
         fCurrentNote->
           setMeasureElementSoundingWholeNotes (
             fCurrentNoteDisplayWholeNotesFromType,
-            "mxsr2msrSkeletonPopulator::populateCurrentNoteBeforeItIsHandled()");
+            "mxsr2msrSkeletonPopulator::populateCurrentNoteWithCurrentInformations()");
         break;
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
@@ -23847,7 +23847,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteBeforeItIsHandled (
   if (fCurrentSpannersList.size ()) {
     attachCurrentSpannersToNote (
       fCurrentNote,
-      "populateCurrentNoteBeforeItIsHandled()");
+      "populateCurrentNoteWithCurrentInformations()");
   }
 
   // attach the singleTremolo to the note
@@ -24668,7 +24668,30 @@ void mxsr2msrSkeletonPopulator::handleChordBeginIfAnyBeforeNoteCreation ()
         fCurrentNoteSequentialNumber);
 
   if (fCurrentNoteChordBegin) {
-    // there is a chord begin event
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceChordsBasics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "--> handleChordBeginIfAnyBeforeNoteCreation(): there is a " <<
+        fCurrentNoteChordBegin->getEventInputStartLineNumber () <<
+        " chord event" <<
+        ", fCurrentNoteSequentialNumber: " <<
+        fCurrentNoteSequentialNumber <<
+        ", fCurrentNoteStaffNumber: " <<
+        fCurrentNoteStaffNumber <<
+        ", fCurrentNoteVoiceNumber: " <<
+        fCurrentNoteVoiceNumber <<
+        ", fCurrentNoteChordEnd: " <<
+        fCurrentNoteChordBegin->asString () <<
+        ", line " << fCurrentNoteInputStartLineNumber;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
     switch (fCurrentNoteChordBegin->getChordEventKind ()) {
       case mxsrChordEventKind::kEventChord_NONE:
         // should not occur
@@ -24703,11 +24726,34 @@ void mxsr2msrSkeletonPopulator::handleChordEndIfAnyAfterNoteHandling ()
 {
   fCurrentNoteChordEnd =
     fKnownEventsCollection.
-      fetchChordBeginAtNoteSequentialNumber (
+      fetchChordEndAtNoteSequentialNumber (
         fCurrentNoteSequentialNumber);
 
   if (fCurrentNoteChordEnd) {
-    // there is a chord event
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceChordsBasics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "--> handleChordEndIfAnyAfterNoteHandling(): there is a " <<
+        fCurrentNoteChordEnd->getChordEventKind () <<
+        " chord event" <<
+        ", fCurrentNoteSequentialNumber: " <<
+        fCurrentNoteSequentialNumber <<
+        ", fCurrentNoteStaffNumber: " <<
+        fCurrentNoteStaffNumber <<
+        ", fCurrentNoteVoiceNumber: " <<
+        fCurrentNoteVoiceNumber <<
+        ", fCurrentNoteChordEnd: " <<
+        fCurrentNoteChordEnd->asString () <<
+        ", line " << fCurrentNoteInputStartLineNumber;
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
     switch (fCurrentNoteChordEnd->getChordEventKind ()) {
       case mxsrChordEventKind::kEventChord_NONE:
         // should not occur
@@ -24719,13 +24765,16 @@ void mxsr2msrSkeletonPopulator::handleChordEndIfAnyAfterNoteHandling ()
 
       case mxsrChordEventKind::kEventChordEnd:
         if (! fCurrentChordHasBeenPopulatedFromItsFirstNote) {
+          copyNoteValuesToCurrentChord (
+            fCurrentChordFirstNote);
+
           // forget about the current chord begin
           fCurrentChordFirstNote = nullptr;
 
           fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
         }
 
-        // append it to the current voice in the recipient staff
+        // append current chord to the current voice in the recipient staff
         // only now, so that the chord sounding duration is known
         // and accounted for in the measure
         fCurrentPartStaffMsrVoicesMap
@@ -24739,7 +24788,6 @@ void mxsr2msrSkeletonPopulator::handleChordEndIfAnyAfterNoteHandling ()
         fOnGoingChord = false;
         break;
     } // switch
-
 
     // forget about fCurrentNoteChordEnd
     fCurrentNoteChordEnd = nullptr;
@@ -24759,11 +24807,11 @@ void mxsr2msrSkeletonPopulator::createChord (int inputLineNumber)
   // remember the current note as the first one in the current chord
   fCurrentChordFirstNote = fCurrentNote;
 
-  // append current chord to the current voice in the recipient staff
-  fCurrentPartStaffMsrVoicesMap
-    [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
-      appendChordToVoice (
-        fCurrentChord);
+//   // append current chord to the current voice in the recipient staff
+//   fCurrentPartStaffMsrVoicesMap
+//     [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]->
+//       appendChordToVoice (
+//         fCurrentChord);
 }
 
 //________________________________________________________________________
@@ -25390,15 +25438,15 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   attachPendingPartLevelElementsIfAnyToPart (
     fCurrentPart);
 
-  // are all fCurrentNote uplinks set alright ??? JMI v0.9.67
-  populateCurrentNoteBeforeItIsHandled (
-    elt->getInputStartLineNumber ());
-
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
   // handle the current note and append it to the current recipient voice
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+
+  // are all fCurrentNote uplinks set alright ??? JMI v0.9.67
+  populateCurrentNoteWithCurrentInformations (
+    elt->getInputStartLineNumber ());
 
   handleCurrentNote (
     elt->getInputStartLineNumber ());
@@ -25416,7 +25464,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // so as to compute the harmonies positions in the measure.
 
 //   // are all fCurrentNote uplinks set alright ??? JMI v0.9.66
-//   populateCurrentNoteBeforeItIsHandled ();
+//   populateCurrentNoteWithCurrentInformations ();
 
 //   ////////////////////////////////////////////////////////////////////
 //   ////////////////////////////////////////////////////////////////////
@@ -27523,23 +27571,23 @@ void mxsr2msrSkeletonPopulator::handleChordMemberNote (
       break;
   } // switch
 
-  // add note to current chord
+  // append note to current chord
   fCurrentChord->
     appendNoteToChord (
       note,
       fCurrentPartStaffMsrVoicesMap
         [fCurrentRecipientStaffNumber][fCurrentNoteVoiceNumber]);
 
-    if (fCurrentChordHasBeenPopulatedFromItsFirstNote) {
-      // populate current note from its first notes
-      copyNoteValuesToCurrentChord (
-        note);
-
-      // forget about current chord first note
-      fCurrentChordFirstNote = nullptr;
-
-      fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
-    }
+//     if (fCurrentChordHasBeenPopulatedFromItsFirstNote) {
+//       // populate current note from its first notes
+//       copyNoteValuesToCurrentChord (
+//         note);
+//
+//       // forget about current chord first note
+//       fCurrentChordFirstNote = nullptr;
+//
+//       fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
+//     }
 
   // copy note's elements if any to the current chord
   copyNoteElementsIfAnyToChord (

@@ -1,1 +1,1 @@
-#define MUSICFORMATS_VERSION_NUMBER "v0.9.72-alpha1-step-7"
+#define MUSICFORMATS_VERSION_NUMBER "v0.9.72-alpha-8"
