@@ -1328,7 +1328,14 @@ class EXP mxsr2msrSkeletonPopulator :
     // we need a fast access to the voices and their handlers
     // indexes are staff number and voice number
     std::map <int, std::map <int, S_mxsrVoice>>
-                              fCurrentPartStaffMxsrVoicesMap;
+                              fCurrentPartStaffMxsrVoicesMapMap;
+
+    // denormalization for speed
+    S_mxsrVoice               fCurrentNoteMxsrVoice;
+    S_mxsrVoice               fCurrentRecipientMxsrVoice;
+
+    S_msrVoice                fCurrentNoteMsrVoice;
+    S_msrVoice                fCurrentRecipientMsrVoice;
 
     void                      populateCurrentPartStaffVoicesMapsFromPart (
                                   const S_msrPart& part);
@@ -1443,16 +1450,16 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrNote                 createNote (
                                 int inputLineNumber);
 
-    void                      attachPendingGraceNotesGroupToNoteIfRelevant (
-                                int inputLineNumber);
+//     void                      attachPendingGraceNotesGroupToNoteIfRelevant (
+//                                 int inputLineNumber);
 
-    void                      handleSoundingNote (
+    void                      handleStandAloneSoundingNote (
 																const S_msrNote& note);
 
-    void                      handleRest (
+    void                      handleStandAloneRest (
 																const S_msrNote& note);
 
-    void                      handleGraceNote (
+    void                      handleStandAloneGraceNote (
 																const S_msrNote& note); // JMI v0.9.72
 
     void                      handleChordMemberNote (
@@ -1461,11 +1468,62 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleTupletMemberNote (
 																const S_msrNote& note);
 
+    void                      handleTupletMemberRest (
+																const S_msrNote& note);
+
     void                      handleChordMemberNoteInATuplet (
                                 const S_msrNote& newChordNote);
 
     void                      handleChordMemberNoteInAGraceNotesGroup (
                                 const S_msrNote& newChordNote);
+
+    // staff changes handling
+    // ------------------------------------------------------
+
+    // MusicXMl contains sequences of elements on one and the same staff,
+    // until a <backup/> or <forward/> markup may change the latter
+    // or some note in not in the same staff
+
+    // such a staff change occurs when the staff number changes
+    // whilst the voice number remains the same
+    // hence the use of fCurrentRecipientStaffNumber,
+    // which doesnt change in case of a staff change
+
+    // fCurrentRecipientStaffNumber is that of the staff that contains the note,
+    // which may be different that tne current note's staff number
+    // in case of staff change
+    int                       fCurrentRecipientStaffNumber;
+
+    // fCurrentDisplayStaffNumber is that where the notes are displayed
+    // for the duration of the staff change
+    int                       fCurrentDisplayStaffNumber;
+//     S_msrVoice                fCurrentRecipientVoice;
+
+    // fCurrentNoteStaffChangeTakeOff contains the staff change event
+    // that occurs on a take off note, if any
+    S_mxsrStaffChangeEvent    fCurrentNoteStaffChangeTakeOff; // EVENTS
+
+//     int                       fCurrentTakeOffStaffNumber;
+//     int                       fCurrentLandingStaffNumber;
+
+    void                      handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation ();
+
+    void                      createStaffChange (
+                                int                    inputLineNumber,
+                                S_mxsrStaffChangeEvent staffChangeTakeOffEvent);
+
+//     // an ongoing staff change is indicated by ??? JMI v0.9.72
+//     //   fCurrentDisplayStaffNumber != fCurrentRecipientStaffNumber
+//     Bool                      fOnGoingStaffChange;
+
+//     msrStaffChangeKind        fCurrentStaffChangeKind;
+//     Bool                      fCurrentNoteIsCrossStaves;
+
+    // cross staff chords
+//     int                       fCurrentChordStaffNumber;
+
+//     Bool                      thereIsAStaffChange (
+//                                 int inputLineNumber);
 
     // print
     // ------------------------------------------------------
@@ -1491,8 +1549,8 @@ class EXP mxsr2msrSkeletonPopulator :
                                 int inputLineNumber);
 
     // harmonies and figured bass elements need
-    // the position of the note  in its measure
-    // to be known when they are inserted in their own measure
+    // the position of the note  in its measure to be known
+    // when they are inserted in their own measure
     void                      populateCurrentNoteAfterItHasBeenHandled (
                                 int inputLineNumber);
 
@@ -2127,6 +2185,9 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      attachPendingNoteLevelElementsIfAnyToCurrentNote ();
 
+    void                      attachPendingStaffLevelElementsIfAnyToCurrentNote (
+                                int inputLineNumber);
+
     void                      attachPendingDynamicsToCurrentNote ();
     void                      attachPendingOtherDynamicsToCurrentNote ();
     void                      attachPendingWordsToCurrentNote ();
@@ -2204,6 +2265,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
 //    void                      copyNoteGraceNotesGroupsToChord (
 //                                const S_msrNote& note, S_msrChord chord);
+
     void                      addNoteGraceNotesGroupsLinksToChord (
                                 const S_msrNote&  note,
                                 const S_msrChord& chord);
@@ -2339,52 +2401,6 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrChord& chord);
 
 
-    // staff changes handling
-    // ------------------------------------------------------
-
-    // MusicXMl contains sequences of elements on one and the same staff,
-    // until a <backup/> or <forward/> markup may change the latter
-    // or some note in not in the same staff
-
-    // such a staff change occurs when the staff number changes
-    // whilst the voice number remains the same
-    // hence the use of fCurrentRecipientStaffNumber,
-    // which doesnt change in case of a staff change
-
-    // fCurrentRecipientStaffNumber is that of the staff that contains the note
-    int                       fCurrentRecipientStaffNumber;
-
-    // fCurrentDisplayStaffNumber is that where the notes are displayed
-    // for the duration of the staff change
-    int                       fCurrentDisplayStaffNumber;
-//     S_msrVoice                fCurrentRecipientVoice;
-
-    // fCurrentNoteStaffChangeTakeOff contains the staff change event
-    // that occurs on a take off note, if any
-    S_mxsrStaffChangeEvent    fCurrentNoteStaffChangeTakeOff; // EVENTS
-
-//     int                       fCurrentTakeOffStaffNumber;
-//     int                       fCurrentLandingStaffNumber;
-
-    void                      handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation ();
-
-    void                      createStaffChange (
-                                int                    inputLineNumber,
-                                S_mxsrStaffChangeEvent staffChangeTakeOffEvent);
-
-    // an ongoing staff change is indicated by ??? JMI v0.9.72
-    //   fCurrentDisplayStaffNumber != fCurrentRecipientStaffNumber
-    Bool                      fOnGoingStaffChange;
-
-//     msrStaffChangeKind        fCurrentStaffChangeKind;
-//     Bool                      fCurrentNoteIsCrossStaves;
-
-    // cross staff chords
-//     int                       fCurrentChordStaffNumber;
-
-//     Bool                      thereIsAStaffChange (
-//                                 int inputLineNumber);
-
     // chords handling
     // ------------------------------------------------------
 
@@ -2404,9 +2420,8 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrChord                fCurrentChord;
 
     Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
-    S_msrNote                 fCurrentChordFirstNote;
 
-    void                      createChord (int inputLineNumber);
+//     void                      createChord (int inputLineNumber);
 
     void                      copyNoteValuesToCurrentChord (
                                 S_msrNote note);

@@ -1616,7 +1616,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
+S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
   int                    inputLineNumber,
   int                    previousMeasureEndInputLineNumber,
   const std::string&     measureNumber,
@@ -1657,7 +1657,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   ) { // POUSSE JMI
     gLog <<
       std::endl <<
-      "++++ createAMeasureAndAppendItToVoice() POUSSE, fCallsCounter: " << fCallsCounter << " ++++" <<
+      "++++ cascadeCreateAMeasureAndAppendItInVoice() POUSSE, fCallsCounter: " << fCallsCounter << " ++++" <<
       std::endl;
     this->print (gLog);
     gLog <<
@@ -1668,7 +1668,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
-      "createAMeasureAndAppendItToVoice() 1");
+      "cascadeCreateAMeasureAndAppendItInVoice() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1738,13 +1738,13 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
     if (! fVoiceLastSegment) {
       createNewLastSegmentForVoice (
         inputLineNumber,
-        "createAMeasureAndAppendItToVoice() 2");
+        "cascadeCreateAMeasureAndAppendItInVoice() 2");
     }
 
     // append a new measure with given number to voice last segment
     result =
       fVoiceLastSegment->
-        createAMeasureAndAppendItToSegment (
+        cascadeCreateAMeasureAndAppendItInSegment (
           inputLineNumber,
           previousMeasureEndInputLineNumber,
           measureNumber,
@@ -1759,7 +1759,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
-      "createAMeasureAndAppendItToVoice() 3");
+      "cascadeCreateAMeasureAndAppendItInVoice() 3");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -2685,9 +2685,9 @@ void msrVoice::appendHarmonyToVoice (
 }
 
 void msrVoice::appendHarmoniesListToVoice (
-  int                            inputLineNumber,
+  int                             inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
-  const msrWholeNotes&           measurePositionToAppendAt)
+  const msrWholeNotes&            measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -3700,7 +3700,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     fVoiceFirstSegment = fVoiceLastSegment;
 
     // then create the first measure
-    createAMeasureAndAppendItToVoice (
+    cascadeCreateAMeasureAndAppendItInVoice (
       graceNotesGroup->getInputStartLineNumber (),
       333, //         previousMeasureEndInputLineNumber, v0.9.62
       graceNotesGroup->
@@ -5188,7 +5188,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
 
           // create a new measure with the same number as the voice last measure
           // and append it to the voice,
-          createAMeasureAndAppendItToVoice (
+          cascadeCreateAMeasureAndAppendItInVoice (
             inputLineNumber,
             333, //         previousMeasureEndInputLineNumber, v0.9.62
             lastMeasureInLastSegment->getMeasureNumber (),
@@ -5990,7 +5990,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
 
     // create a new measure with the same number as the voice last measure
     // and append it to the voice,
-    createAMeasureAndAppendItToVoice (
+    cascadeCreateAMeasureAndAppendItInVoice (
       inputLineNumber,
       333, //         previousMeasureEndInputLineNumber, v0.9.62
       measureNumber,

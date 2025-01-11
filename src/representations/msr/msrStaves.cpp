@@ -565,7 +565,7 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 }
 */
 
-void msrStaff::createAMeasureAndAppendItToStaff (
+void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
   int                inputLineNumber,
   int                previousMeasureEndInputLineNumber,
   const std::string& measureNumber,
@@ -599,7 +599,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     voice->
-      createAMeasureAndAppendItToVoice (
+      cascadeCreateAMeasureAndAppendItInVoice (
         inputLineNumber,
         previousMeasureEndInputLineNumber,
         measureNumber,

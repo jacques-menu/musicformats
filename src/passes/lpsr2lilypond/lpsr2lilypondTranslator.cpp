@@ -2813,17 +2813,20 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
 
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
     if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
-      fLilypondCodeStream << " %{ r222 %}  ";
+      fLilypondCodeStream <<
+        " %{ r244 %}  ";
     }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
   }
   else {
     // generate a skip
-    fLilypondCodeStream << 's';
+    fLilypondCodeStream <<
+    's' << " %{ s222 %}  ";
 
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
     if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
-      fLilypondCodeStream << " %{ s222 %}  ";
+      fLilypondCodeStream <<
+      " %{ s447 %}  ";
     }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
   }
@@ -3218,7 +3221,8 @@ void lpsr2lilypondTranslator::generateCodeForRestInTuplet (
     char (
       note->getNoteOccupiesAFullMeasure ()
         ? 's' // JMI ??? 'R'
-        : 'r') << " %{ sr333 %}  ";
+        : 'r') <<
+      " %{ sr333 %}  ";
 
   // generate the note display duration if relevant
 //   fLilypondCodeStream <<
@@ -9450,6 +9454,24 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       "\\set PianoStaff.connectArpeggios = ##t" <<
       std::endl;
   }
+
+/*
+https://lilypond.org/doc/v2.25/Documentation/notation/arpeggio
+
+Arpège distribué sur plusieurs voix
+Affecter le graveur Span_arpeggio_engraver au contexte de la portée (Staff) permet de distribuer un arpège sur plusieurs voix.
+\new Staff \with {
+  \consists "Span_arpeggio_engraver"
+}
+\relative c' {
+  \set Staff.connectArpeggios = ##t
+  <<
+    { <e' g>4\arpeggio <d f> <d f>2 }
+    \\
+    { <d, f>2\arpeggio <g b>2 }
+  >>
+}
+*/
 
 //   fLilypondCodeStream << std::endl;
 
@@ -21138,7 +21160,7 @@ slash = \tweak Flag.stroke-style grace \etc
       iEnd   = graceNotesGroupElementsList.end (),
       i      = iBegin;
 
-//     size_t elementNumber = 0;
+    size_t elementNumber = 0;
 
     for ( ; ; ) {
       S_msrElement element = (*i);
@@ -21151,7 +21173,7 @@ slash = \tweak Flag.stroke-style grace \etc
         "element is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-//       elementNumber += 1;
+      elementNumber += 1;
 
       if (
         // note?
@@ -21184,18 +21206,18 @@ slash = \tweak Flag.stroke-style grace \etc
 //             generateNoteBeams (graceNotesGroupNote); // JMI fixes [ [ ... ] ] issue v0.9.70
           }
 
-//           if (graceNotesGroupIsBeamed) { // JMI fixed [ ] issue v0.9.70
-//             if (elementNumber == 1) {
-//               fLilypondCodeStream << "[ " << " %{ generateGraceNotesGroup() %}";
-//             }
-//             else if (elementNumber == graceNotesGroupElementsListSize) {
-//               fLilypondCodeStream << "] ";
-//             }
-//
-//             fLilypondCodeStream <<
-//               " %{ line " << graceNotesGroupNote->getInputStartLineNumber () <<
-//               ", elementNumber: " << elementNumber << " %}  "; // JMI v0.9.70
-//           }
+          if (graceNotesGroupIsBeamed) { // JMI fixed [ ] issue v0.9.70
+            if (elementNumber == 1) {
+              fLilypondCodeStream << "[ " << " %{ generateGraceNotesGroup() %}";
+            }
+            else if (elementNumber == graceNotesGroupElementsListSize) {
+              fLilypondCodeStream << "] ";
+            }
+
+            fLilypondCodeStream <<
+              " %{ line " << graceNotesGroupNote->getInputStartLineNumber () <<
+              ", elementNumber: " << elementNumber << " %}  "; // JMI v0.9.70
+          }
 
           // generate the graceNotesGroupNote slurs if any,
           // unless the graceNotesGroupNote is chord member
@@ -23337,7 +23359,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   }
 
   if (doGenerateBeams) {
-    generateNoteBeams (elt);
+//     generateNoteBeams (elt);
   }
 
   // generate the note ligatures if any
@@ -24271,7 +24293,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
         S_msrArpeggiato
           arpeggiato =
             dynamic_cast<msrArpeggiato*>(&(*articulation))
-        ) {
+      ) {
         msrDirectionKind
           directionKind =
             arpeggiato->getArpeggiatoDirectionKind ();
@@ -24304,7 +24326,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
         S_msrNonArpeggiato
           nonArpeggiato =
             dynamic_cast<msrNonArpeggiato*>(&(*articulation))
-        ) {
+      ) {
         fLilypondCodeStream <<
           std::endl <<
           "\\arpeggioBracket";

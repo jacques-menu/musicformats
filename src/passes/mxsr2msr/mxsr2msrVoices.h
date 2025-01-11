@@ -32,7 +32,7 @@ class mxsrVoice : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mxsrVoice> create (
-                            const S_msrVoice&  voice);
+                            const S_msrVoice& voice);
 
   protected:
 
@@ -40,7 +40,7 @@ class mxsrVoice : public smartable
     // ------------------------------------------------------
 
                           mxsrVoice (
-                            const S_msrVoice& fMsrVoice);
+                            const S_msrVoice& voice);
 
     virtual               ~mxsrVoice ();
 
@@ -72,6 +72,9 @@ class mxsrVoice : public smartable
 
     // public services
     // ------------------------------------------------------
+
+    std::string           fetchMsrVoiceName () const
+                              { return fMsrVoice->getVoiceName (); }
 
     void                  pushTupletOntoTupletsStack (const S_msrTuplet& tuplet)
                               { fTupletsStack.push_front (tuplet); }

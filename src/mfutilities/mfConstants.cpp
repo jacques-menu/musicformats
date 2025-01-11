@@ -101,7 +101,7 @@ std::string mfMeasureNumberAsString (std::string measureNumber)
 // whole notes durations
 
 const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_ =
-  msrWholeNotes (0, 1);
+  msrWholeNotes (-1, 1);
 
 const std::string
   kWholeNotePrefix ("WN_"),

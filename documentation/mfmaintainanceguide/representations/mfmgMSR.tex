@@ -1530,10 +1530,10 @@ In order to perform a time-wise analysis of the scores, MSR contains \class{msrm
 This is used when identifying rest notes that are not 'heard' simultaneously with other notes or rests: this way, the rest can ignore the current voice number and be placed in the vertical middle of the staff.
 
 Apart from the cloning methods, only one method creates measures, namely\\
-\method{msrSegment}{createAMeasureAndAppendItToSegment}, defined in\\
+\method{msrSegment}{cascadeCreateAMeasureAndAppendItInSegment}, defined in\\
 \msrBoth{msrSegments}:
 \begin{lstlisting}[language=CPlusPlus]
-S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
+S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
   int    inputLineNumber,
   std::string measureNumber,
   msrMeasureImplicitKind

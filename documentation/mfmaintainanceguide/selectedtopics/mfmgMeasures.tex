@@ -371,9 +371,9 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 
 Calls to \method{msrSegment}{appendMeasureToSegment} occur in:
 \begin{itemize}
-\item \method{msrSegment}{createAMeasureAndAppendItToSegment} called from:\bigskip\\
+\item \method{msrSegment}{cascadeCreateAMeasureAndAppendItInSegment} called from:\bigskip\\
 			\indentedBox[1.5cm]{
-				\method{msrVoice}{createAMeasureAndAppendItToVoice}
+				\method{msrVoice}{cascadeCreateAMeasureAndAppendItInVoice}
 			}
 
 \item \method{msrVoice}{appendMeasureCloneToVoiceClone} called from:\bigskip\\%%%JMI \visitorMethod{msr2lpsrTranslator}{visitStart (S_msrMeasure\& elt), commented
@@ -414,7 +414,7 @@ Calls to \method{msrSegment}{appendMeasureToSegment} occur in:
 
 
 \begin{lstlisting}[language=CPlusPlus]
-S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
+S_msrMeasure msrVoice::cascadeCreateAMeasureAndAppendItInVoice (
   int    inputLineNumber,
   std::string measureNumber,
   msrMeasureImplicitKind
@@ -453,7 +453,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   ) { // POUSSE JMI
     gLog <<
       std::endl <<
-      "++++ createAMeasureAndAppendItToVoice() POUSSE, fCallsCounter: " << fCallsCounter << " ++++" <<
+      "++++ cascadeCreateAMeasureAndAppendItInVoice() POUSSE, fCallsCounter: " << fCallsCounter << " ++++" <<
       std::endl;
     this->print (gLog);
     gLog <<
@@ -464,7 +464,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
-      "createAMeasureAndAppendItToVoice() 1");
+      "cascadeCreateAMeasureAndAppendItInVoice() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -474,14 +474,14 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   if (! fVoiceLastSegment) {
     createNewLastSegmentForVoice (
       inputLineNumber,
-      "createAMeasureAndAppendItToVoice() 2");
+      "cascadeCreateAMeasureAndAppendItInVoice() 2");
   }
 
   // append a new measure with given number to voice last segment
   S_msrMeasure
     result =
       fVoiceLastSegment->
-        createAMeasureAndAppendItToSegment (
+        cascadeCreateAMeasureAndAppendItInSegment (
           inputLineNumber,
           measureNumber,
           measureImplicitKind);
@@ -493,7 +493,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     displayVoice (
       inputLineNumber,
-      "createAMeasureAndAppendItToVoice() 3");
+      "cascadeCreateAMeasureAndAppendItInVoice() 3");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -568,7 +568,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
   // append a new measure to the current part
   fCurrentPart->
-    createAMeasureAndAppendItToPart (
+    cascadeCreateAMeasureAndAppendItInPart (
       inputLineNumber,
       fCurrentMeasureNumber,
       measureImplicitKind);
@@ -607,7 +607,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
   // append a new measure to the current part
   fCurrentPart->
-    createAMeasureAndAppendItToPart (
+    cascadeCreateAMeasureAndAppendItInPart (
       inputLineNumber,
       fCurrentMeasureNumber,
       measureImplicitKind);
@@ -618,9 +618,9 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
 This can lead to several \class{msrMeasure} instances being created, depending on the \mxml\ data. Hence there is no notion of a current measure in this translator.
 
-\Method{msrPart}{createAMeasureAndAppendItToPart} creates and appends a measure to the part harmonies and figured bass staves if relevant, and then \cascade\ s to the part staves:
+\Method{msrPart}{cascadeCreateAMeasureAndAppendItInPart} creates and appends a measure to the part harmonies and figured bass staves if relevant, and then \cascade\ s to the part staves:
 \begin{lstlisting}[language=CPlusPlus]
-void msrPart::createAMeasureAndAppendItToPart (
+void msrPart::cascadeCreateAMeasureAndAppendItInPart (
   int    inputLineNumber,
   std::string measureNumber,
   msrMeasureImplicitKind
@@ -634,7 +634,7 @@ void msrPart::createAMeasureAndAppendItToPart (
   // create and append measure in all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      createAMeasureAndAppendItToStaff (
+      cascadeCreateAMeasureAndAppendItInStaff (
         inputLineNumber,
         measureNumber,
         measureImplicitKind);

@@ -1788,6 +1788,8 @@ void msrMeasure::incrementMeasureCurrentAccumulatedWholeNotesDuration (
     gTraceOahGroup->getTraceNotesDurations ()
       ||
     gTraceOahGroup->getTraceMeasurePositions ()
+      ||
+    gTraceOahGroup->getTraceTimeSignatures ()
   ) {
     std::stringstream ss;
 
@@ -1805,6 +1807,7 @@ void msrMeasure::incrementMeasureCurrentAccumulatedWholeNotesDuration (
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
+      ", fFullMeasureWholeNotesDuration: " << fFullMeasureWholeNotesDuration <<
       ", context: \"" << context << "\"" <<
       "', line " << inputLineNumber;
 
@@ -1813,6 +1816,11 @@ void msrMeasure::incrementMeasureCurrentAccumulatedWholeNotesDuration (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  if (newMeasureCurrentAccumulatedWholeNotesDuration > fFullMeasureWholeNotesDuration) {
+    // this is an overflowing measure
+//     abort (); // JMI v0.9.72 setFullMeasureWholeNotesDuration() does not occurs or too late
+  }
 
   // set new measure whole notes duration
   setMeasureCurrentAccumulatedWholeNotesDuration (
@@ -2578,7 +2586,7 @@ void msrMeasure::appendNoteToMeasure (
       fMeasureCurrentAccumulatedWholeNotesDuration;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDetails ()) {
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
     gLog <<
       std::endl << std::endl <<
       "this->print (gLog):" <<
@@ -2640,8 +2648,7 @@ void msrMeasure::appendNoteToMeasure (
             */
 
     // append it to the measure
-    appendNoteOrPaddingToMeasure (
-      skipNote);
+    appendNoteOrPaddingToMeasure (skipNote);
   }
 
   else if (positionsDelta.getNumerator () < 0) {
@@ -2752,7 +2759,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
         getSegmentUpLinkToVoice ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes ()) {
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -3246,7 +3253,7 @@ void msrMeasure::appendHarmonyToMeasure (
   const msrWholeNotes& measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -3298,7 +3305,7 @@ void msrMeasure::appendHarmoniesListToMeasure (
   const msrWholeNotes&           measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -7768,10 +7775,10 @@ std::string msrMeasure::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Measure " <<
+    "[Measure '" <<
     fMeasureNumber <<
 // JMI    ", fMeasureKind: " <<
-    ", " <<
+    "', " <<
     fMeasureKind <<
 // JMI    ", voice: " <<
     ", " <<
@@ -8238,7 +8245,7 @@ void msrMeasure::printFull (std::ostream& os) const
 void msrMeasure::print (std::ostream& os) const
 {
   os <<
-    "[Measure " <<
+    "[Measure '" <<
     fMeasureNumber <<
     "', " << fMeasureKind <<
     ", " <<

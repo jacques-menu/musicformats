@@ -34,18 +34,25 @@
           <line>2</line>
         </clef>
       </attributes>
+
       <harmony>
         <root>
           <root-step>C</root-step>
         </root>
         <kind>major</kind>
       </harmony>
+
       <note>
-        <pitch><step>C</step><octave>4</octave></pitch>
+        <pitch>
+          <step>C</step>
+          <octave>4</octave>
+          </pitch>
         <duration>2</duration>
         <voice>1</voice>
         <type>quarter</type>
-        <lyric number="1"><text>major</text></lyric>
+        <lyric number="1">
+          <text>major</text>
+          </lyric>
       </note>
     </measure>
   </part>

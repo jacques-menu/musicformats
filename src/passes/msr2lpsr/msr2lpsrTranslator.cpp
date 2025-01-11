@@ -1114,18 +1114,16 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
     std::stringstream ss;
 
     ss <<
-      "+++++++++++++++++++++++++ visitStart (S_msrGraceNotesGroup&)" <<
-      std::endl <<
-      "fCurrentNonGraceNoteClone: ";
+      "+++ circumventLilyPond34IssueIfRelevant()" <<
+      ", fCurrentNonGraceNoteClone: ";
 
     if (fCurrentNonGraceNoteClone) {
-      fCurrentNonGraceNoteClone->print (gLog);
+      ss <<
+        fCurrentNonGraceNoteClone->asString ();
     }
     else {
-      gLog <<
-        "[NONE]";
+      ss << "[NULL]";
     }
-    gLog << std::endl;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1159,20 +1157,17 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
     std::stringstream ss;
 
     ss <<
-      "The noteTheGraceNotesGroupIsAttachedTo voice clone FIRST_ONE??? '" <<
+      "--> noteTheGraceNotesGroupIsAttachedTo in voice clone " <<
       fCurrentVoiceClone->getVoiceName () <<
-      "' is '";
+      " is '";
 
     if (noteTheGraceNotesGroupIsAttachedTo) {
       ss <<
         noteTheGraceNotesGroupIsAttachedTo->asShortString ();
     }
     else {
-      ss <<
-        "[NONE]";
+      ss << "[NULL]";
     }
-    ss <<
-       "'";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1185,20 +1180,17 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
     std::stringstream ss;
 
     ss <<
-      "The first note of voice clone KLJWLPOEF '" <<
+      "The first note of voice clone " <<
       fCurrentVoiceClone->getVoiceName () <<
-      "' is '";
+      " is ";
 
     if (fFirstNoteCloneInVoice) {
       ss <<
         fFirstNoteCloneInVoice->asShortString ();
     }
     else {
-      ss <<
-        "[NONE]";
+      ss << "[NULL]";
     }
-    ss <<
-       "'";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1206,21 +1198,40 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  gLog <<
+    "==> fCurrentVoiceClone:" <<
+    std::endl;
+  gIndenter++;
+  gLog <<
+    fCurrentVoiceClone <<
+    std::endl;
+  gIndenter--;
+
   // fetch the original voice first non grace note
   S_msrNote
     originalVoiceFirstNonGraceNote =
       fCurrentVoiceOriginal->
         fetchVoiceFirstNonGraceNote ();
 
-  if (originalVoiceFirstNonGraceNote) { // JMI
+  gLog <<
+    "==> originalVoiceFirstNonGraceNote:" <<
+    std::endl;
+  gIndenter++;
+  gLog <<
+    originalVoiceFirstNonGraceNote <<
+    std::endl;
+  gIndenter--;
+
+  if (originalVoiceFirstNonGraceNote) { // JMI v0.9.72
     if (
-      noteTheGraceNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote
+      true || noteTheGraceNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote
     ) {
       // don't createSkipGraceNotesGroupClone() is there's only a single voice
       // JMI ??? v0.9.70 maybe this criterion should be refined
       S_msrStaff
         currentVoiceOriginalStaff =
-          fCurrentVoiceOriginal->getVoiceUpLinkToStaff ();
+          fCurrentVoiceOriginal->
+            getVoiceUpLinkToStaff ();
 
       if (currentVoiceOriginalStaff->getStaffAllVoicesList ().size () > 1) {
         // LilyPond_Issue_34 should be worked around by creating
@@ -1248,9 +1259,12 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
       }
     }
   }
+  else {
+//     abort ();
+  }
 
-  // addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded() will
-  // append the same skip grace notes to the ofhter voices if needed
+  // addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded()
+  // will append the same skip grace notes to the ofhter voices if needed
   // in visitEnd (S_msrPart&)
 }
 
@@ -5877,26 +5891,26 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-//   Bool doCreateAGraceNoteClone (! fOnGoingChordGraceNotesGroupLink); // JMI
-//
-// //   if (doCreateAGraceNoteClone) JMI ???
-//   {
-//     // create a clone of this graceNotesGroup
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceGraceNotes ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "Creating a clone of grace notes group " <<
-//         elt->asShortString () <<
-//         " and attaching it to clone note " <<
-//         fCurrentNonGraceNoteClone->asShortString ();
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//       }
-// #endif // MF_TRACE_IS_ENABLED
+  Bool doCreateAGraceNoteClone (! fOnGoingChordGraceNotesGroupLink); // JMI
+
+//   if (doCreateAGraceNoteClone) JMI ???
+  {
+    // create a clone of this graceNotesGroup
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceGraceNotes ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Creating a clone of grace notes group " <<
+        elt->asShortString () <<
+        " and attaching it to clone note " <<
+        fCurrentNonGraceNoteClone->asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
 
     fCurrentGraceNotesGroupClone =
       elt->
@@ -5958,7 +5972,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
         __FILE__, __LINE__,
         ss.str ());
     }
-//   }
+  }
 
   // circumvent LilyPond #34 issue if relevant
   circumventLilyPond34IssueIfRelevant (elt);
@@ -5999,8 +6013,7 @@ void msr2lpsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       ss << fCurrentNonGraceNoteClone;
     }
     else {
-      ss <<
-        "[NONE]";
+      ss << "[NULL]";
     }
     ss << std::endl;
 
@@ -6215,8 +6228,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
               fFirstNoteCloneInVoice->asShortString ();
           }
           else {
-            ss <<
-              "[NONE]";
+            ss << "[NULL]";
           }
           gLog <<
              "'";
@@ -6384,12 +6396,10 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       std::endl;
     if (fCurrentNonGraceNoteClone) {
       ss <<
-        fCurrentNonGraceNoteClone;
+        fCurrentNonGraceNoteClone->asString ();
     }
     else {
-      ss <<
-        "[NONE]" <<
-        std::endl;
+      ss << "[NULL]";
     }
 
     ss <<
@@ -6397,12 +6407,10 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       std::endl;
     if (fCurrentGraceNoteClone) {
       ss <<
-        fCurrentGraceNoteClone;
+        fCurrentGraceNoteClone->asString ();
     }
     else {
-      ss <<
-        "[NONE]" <<
-        std::endl;
+      ss << "[NULL]";
     }
 
     gWaeHandler->waeTrace (

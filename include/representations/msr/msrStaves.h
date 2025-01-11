@@ -263,7 +263,7 @@ class EXP msrStaff : public msrElement
 
     // measures
 
-    void                  createAMeasureAndAppendItToStaff (
+    void                  cascadeCreateAMeasureAndAppendItInStaff (
                             int                inputLineNumber,
                             int                previousMeasureEndInputLineNumber,
                             const std::string& measureNumber,

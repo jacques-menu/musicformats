@@ -345,7 +345,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // measures
 
-    void                  createAMeasureAndAppendItToPart (
+    void                  cascadeCreateAMeasureAndAppendItInPart (
                             int                inputLineNumber,
                             int                previousMeasureEndInputLineNumber,
                             const std::string& measureNumber,
@@ -544,9 +544,9 @@ class EXP msrPart : public msrPartGroupElement
                             const msrWholeNotes& measurePositionToAppendAt);
 
     void                  appendHarmoniesListToPart (
-                            int                            inputLineNumber,
+                            int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const msrWholeNotes&           measurePositionToAppendAt);
+                            const msrWholeNotes&            measurePositionToAppendAt);
 
     // figured bass
 

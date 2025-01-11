@@ -4137,8 +4137,10 @@ std::string msrNote::notePitchAsString () const
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
+      ss << "kNoteUnpitchedInMeasure";
+      break;
     case msrNoteKind::kNoteUnpitchedInTuplet:
-      ss << "unpitched";
+      ss << "kNoteUnpitchedInTuplet";
       break;
   } // switch
 

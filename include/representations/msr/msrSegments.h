@@ -166,7 +166,7 @@ class EXP msrSegment : public msrVoiceElement
                             int                inputLineNumber,
                             const std::string& context);
 
-    S_msrMeasure          createAMeasureAndAppendItToSegment (
+    S_msrMeasure          cascadeCreateAMeasureAndAppendItInSegment (
                             int           inputLineNumber,
                             int           previousMeasureEndInputLineNumber,
                             const std::string& measureNumber,
@@ -268,9 +268,9 @@ class EXP msrSegment : public msrVoiceElement
                             const msrWholeNotes& measurePositionToAppendAt);
 
     void                  appendHarmoniesListToSegment (
-                            int                            inputLineNumber,
+                            int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const msrWholeNotes&           measurePositionToAppendAt);
+                            const msrWholeNotes&            measurePositionToAppendAt);
 
     void                  appendHarmonyToSegmentClone (
                             const S_msrHarmony& harmony);
@@ -291,9 +291,9 @@ class EXP msrSegment : public msrVoiceElement
                             const msrWholeNotes&    measurePositionToAppendAt);
 
     void                  appendFiguredBassesListToSegment (
-                            int                                inputLineNumber,
+                            int                                 inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const msrWholeNotes&               measurePositionToAppendAt);
+                            const msrWholeNotes&                measurePositionToAppendAt);
 
     void                  appendFiguredBassToSegmentClone (
                             const S_msrFiguredBass& figuredBass);

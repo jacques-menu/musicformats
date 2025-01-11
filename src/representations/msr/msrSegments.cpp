@@ -508,7 +508,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
   }
 }
 
-S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
+S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
   int           inputLineNumber,
   int           previousMeasureEndInputLineNumber,
   const std::string& measureNumber,
@@ -1215,7 +1215,7 @@ void msrSegment::appendHarmonyToSegment (
   const msrWholeNotes& measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1251,12 +1251,12 @@ void msrSegment::appendHarmonyToSegment (
 }
 
 void msrSegment::appendHarmoniesListToSegment (
-  int                            inputLineNumber,
+  int                             inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
-  const msrWholeNotes&           measurePositionToAppendAt)
+  const msrWholeNotes&            measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1317,7 +1317,7 @@ void msrSegment::appendFiguredBassToSegment (
   const msrWholeNotes&    measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBassesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1361,7 +1361,7 @@ void msrSegment::appendFiguredBassesListToSegment (
 {
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceFiguredBasses ()) {
+  if (gTraceOahGroup->getTraceFiguredBassesBasics ()) {
     std::stringstream ss;
 
     ss <<

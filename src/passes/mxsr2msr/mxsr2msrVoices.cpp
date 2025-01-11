@@ -22,7 +22,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_mxsrVoice mxsrVoice::create (
-  const S_msrVoice&  voice)
+  const S_msrVoice& voice)
 {
   mxsrVoice* obj = new
     mxsrVoice (
@@ -32,7 +32,7 @@ S_mxsrVoice mxsrVoice::create (
 }
 
 mxsrVoice::mxsrVoice (
-  const S_msrVoice&  voice)
+  const S_msrVoice& voice)
 {
   fMsrVoice = voice;
 }

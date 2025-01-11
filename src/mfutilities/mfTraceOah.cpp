@@ -983,6 +983,21 @@ R"()",
       harmoniesAndFiguredBassesMultiplexBooleansAtom);
 */
 
+  // harmonies basics
+
+  S_oahBooleanAtom
+    traceHarmoniesBasicsBooleanAtom =
+    oahTwoBooleansAtom::create (
+      "trace-harmonies-basics", "tharmsb",
+R"(<harmony/> in MusicXML, \chordmode in LilyPond)",
+      "fTraceHarmoniesBasics",
+      fTraceHarmoniesBasics,
+      fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceHarmoniesBasicsBooleanAtom);
+
   // harmonies
 
   fTraceHarmoniesBooleanAtom =
@@ -991,7 +1006,7 @@ R"()",
 R"(<harmony/> in MusicXML, \chordmode in LilyPond)",
       "fTraceHarmonies",
       fTraceHarmonies,
-      fTracePassesBooleanAtom);
+      traceHarmoniesBasicsBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
@@ -1042,6 +1057,21 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
+  // figured bass basics
+
+  S_oahBooleanAtom
+    traceFiguredBassesBasicsBooleanAtom =
+    oahTwoBooleansAtom::create (
+      "trace-figured-basses-basics", "tfigbassesb",
+R"(<figured-bass> in MusicXML, \figuremode in LilyPond)",
+      "fTraceFiguredBassesBasics",
+      fTraceFiguredBassesBasics,
+      fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceFiguredBassesBasicsBooleanAtom);
+
   // figured bass
 
   fTraceFiguredBassesBooleanAtom =
@@ -1050,7 +1080,7 @@ R"()",
 R"(<figured-bass> in MusicXML, \figuremode in LilyPond)",
       "fTraceFiguredBasses",
       fTraceFiguredBasses,
-      fTracePassesBooleanAtom);
+      traceFiguredBassesBasicsBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
@@ -1120,6 +1150,21 @@ R"(Credits)",
     addBooleanAtom (
       traceCreditsBooleanAtom);
 
+  // lyrics basics
+
+  S_oahTwoBooleansAtom
+    traceLyricsBasicxBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-lyrics-basics", "tlyricsb",
+R"(Lyrics)",
+        "fTraceLyricsBasics",
+        fTraceLyricsBasics,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceLyricsBasicxBooleanAtom);
+
   // lyrics
 
   S_oahTwoBooleansAtom
@@ -1129,7 +1174,7 @@ R"(Credits)",
 R"(Lyrics)",
         "fTraceLyrics",
         fTraceLyrics,
-        fTracePassesBooleanAtom);
+        traceLyricsBasicxBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
@@ -1245,6 +1290,7 @@ and '-trace-passes, -tpasses'.)",
         fTraceGraceNotesBasics,
         fTraceMxsrEventsAtom,
         fTracePassesBooleanAtom);
+
   subGroup->
     appendAtomToSubGroup (
       traceGraceNotesBasicsBooleanAtom);
@@ -3629,6 +3675,9 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // lyrics
+    std::setw (fieldWidth) << "fTraceLyricsBasics" << ": " <<
+    fTraceLyricsBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceLyrics" << ": " <<
     fTraceLyrics <<
     std::endl <<
@@ -3720,6 +3769,9 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
      // harmonies
+    std::setw (fieldWidth) << "fTraceHarmoniesBasics" << ": " <<
+    fTraceHarmoniesBasics <<
+    std::endl <<
     std::setw (fieldWidth) << "fTraceHarmonies" << ": " <<
     fTraceHarmonies <<
     std::endl <<

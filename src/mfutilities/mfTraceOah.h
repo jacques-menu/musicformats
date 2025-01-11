@@ -625,6 +625,9 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceCredits () const
                               { return fTraceCredits; }
     // lyrics
+    Bool                  getTraceLyricsBasics () const
+                              { return fTraceLyricsBasics; }
+
     void                  setTraceLyrics ()
                               { fTraceLyrics = true; }
     Bool                  getTraceLyrics () const
@@ -725,6 +728,9 @@ class EXP traceOahGroup : public oahGroup
     // harmonies
     // --------------------------------------
 
+    Bool                  getTraceHarmoniesBasics () const
+                              { return fTraceHarmoniesBasics; }
+
     void                  setTraceHarmonies ()
                               { fTraceHarmonies = true; }
 
@@ -742,8 +748,11 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceExtraHarmonies () const
                               { return fTraceExtraHarmonies; }
 
-    // figured bass elements
+    // figured basses
     // --------------------------------------
+
+    Bool                  getTraceFiguredBassesBasics () const
+                              { return fTraceFiguredBassesBasics; }
 
     void                  setTraceFiguredBasses ()
                               { fTraceFiguredBasses = true; }
@@ -1247,6 +1256,7 @@ class EXP traceOahGroup : public oahGroup
     // lyrics
     // --------------------------------------
 
+    Bool                  fTraceLyricsBasics;
     Bool                  fTraceLyrics;
     Bool                  fTraceLyricsDetails;
 
@@ -1317,6 +1327,7 @@ class EXP traceOahGroup : public oahGroup
     // harmonies
     // --------------------------------------
 
+    Bool                  fTraceHarmoniesBasics;
     Bool                  fTraceHarmonies;
     S_oahBooleanAtom      fTraceHarmoniesBooleanAtom;
 
@@ -1327,6 +1338,7 @@ class EXP traceOahGroup : public oahGroup
     // figured bass
     // --------------------------------------
 
+    Bool                  fTraceFiguredBassesBasics;
     Bool                  fTraceFiguredBasses;
     S_oahBooleanAtom      fTraceFiguredBassesBooleanAtom;
 

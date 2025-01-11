@@ -24,7 +24,7 @@ std::string msrDirectionKindAsString (
 
   switch (directionKind) {
     case msrDirectionKind::kDirectionNone:
-      result = "kDirectionNone***";
+      result = "kDirectionNone";
       break;
 
     case msrDirectionKind::kDirectionUp:

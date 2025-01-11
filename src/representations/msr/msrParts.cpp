@@ -443,7 +443,7 @@ void msrPart::incrementPartCurrentDrawingMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "Incrementing the drawing measure position in part " <<
+      "Incrementing the drawing measure position after incrementation in part " <<
       fetchPartCombinedName () <<
       " by " <<
       wholeNotesDelta <<
@@ -528,7 +528,7 @@ void msrPart::decrementPartCurrentDrawingMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "The new part drawing measure position is " <<
+      "The new part drawing measure position after decrementation is " <<
       "fPartCurrentDrawingMeasurePosition: " <<
       fPartCurrentDrawingMeasurePosition <<
       " in part " <<
@@ -722,7 +722,7 @@ std::string msrPart::fetchPartCombinedName () const
   return ss.str ();
 }
 
-void msrPart::createAMeasureAndAppendItToPart (
+void msrPart::cascadeCreateAMeasureAndAppendItInPart (
   int                inputLineNumber,
   int                previousMeasureEndInputLineNumber,
   const std::string& measureNumber,
@@ -754,7 +754,7 @@ void msrPart::createAMeasureAndAppendItToPart (
   // create and append measure in all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      createAMeasureAndAppendItToStaff (
+      cascadeCreateAMeasureAndAppendItInStaff (
         inputLineNumber,
         previousMeasureEndInputLineNumber,
         measureNumber,
@@ -2514,7 +2514,7 @@ void msrPart::appendHarmonyToPart (
   const msrWholeNotes& measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2541,10 +2541,10 @@ void msrPart::appendHarmonyToPart (
 void msrPart::appendHarmoniesListToPart (
   int                            inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
-  const msrWholeNotes&           measurePositionToAppendAt)
+  const msrWholeNotes&            measurePositionToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2573,7 +2573,7 @@ void msrPart::appendFiguredBassesListToPart (
 {
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceHarmonies ()) {
+  if (gTraceOahGroup->getTraceFiguredBassesBasics ()) {
     std::stringstream ss;
 
     ss <<
