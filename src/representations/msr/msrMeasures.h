@@ -454,14 +454,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     // notes
 
-    void                  appendNoteToMeasure (
+    void                  appendNoteToMeasureAtPosition (
                             const S_msrNote&     note,
-                            const msrWholeNotes& partCurrentDrawingMeasurePosition);
+                            const msrWholeNotes& measurePosition);
 
-    void                  appendNoteOrPaddingToMeasure (
-                            const S_msrNote& note);
-
-    void                  accountForTupletMemberNoteNotesDurationInMeasure (
+    void                  appendNoteToMeasure (
                             const S_msrNote& note);
 
     void                  appendPaddingNoteAtTheEndOfMeasure (
@@ -470,10 +467,8 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendNoteToMeasureClone (
                             const S_msrNote& note);
 
-    // tremolos
-
-    void                  appendDoubleTremoloToMeasure (
-                            const S_msrDoubleTremolo& doubleTremolo);
+    void                  accountForTupletMemberNoteNotesDurationInMeasure (
+                            const S_msrNote& note);
 
      // chords
 
@@ -484,6 +479,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendTupletToMeasure (
                             const S_msrTuplet& tuplet);
+
+    // double tremolos
+
+    void                  appendDoubleTremoloToMeasure (
+                            const S_msrDoubleTremolo& doubleTremolo);
 
     // harmonies
 

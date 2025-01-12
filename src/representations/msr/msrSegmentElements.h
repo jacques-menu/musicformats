@@ -49,25 +49,6 @@ class EXP msrSegmentElement : public msrElement
 //     mfWholeNotes            getSegmentElementSoundingWholeNotes () const
 //                               { return fSegmentElementSoundingWholeNotes; }
 
-//     void                  setSegmentElementMeasureNumber (
-//                             const std::string& measurePosition)
-//                               {
-//                                 fSegmentElementMeasureNumber = measurePosition;
-//                               }
-//
-//     std::string           getSegmentElementMeasureNumber () const
-//                               { return fSegmentElementMeasureNumber; }
-//
-//     msrWholeNotes              getSegmentElementMeasurePosition () const
-//                               { return fSegmentElementMeasurePosition; }
-//
-//     void                  setSegmentElementVoicePosition (
-//                             const msrWholeNotes& voicePosition,
-//                             const std::string&   context);
-//
-//     msrWholeNotes              getSegmentElementVoicePosition () const
-//                               { return fSegmentElementVoicePosition; }
-//
 //     void                  setSegmentElementMeasureMoment (
 //                             const msrMoment& measureMoment,
 //                             const std::string&         context);
@@ -93,10 +74,6 @@ class EXP msrSegmentElement : public msrElement
 //     static bool           compareSegmentElementsByIncreasingMeasurePosition (
 //                             const SMARTP<msrSegmentElement>& first,
 //                             const SMARTP<msrSegmentElement>& second);
-//
-//     virtual void          assignSegmentElementVoicePosition (
-//                             msrWholeNotes&     voicePosition,
-//                             const std::string& context);
 
   public:
 
@@ -133,11 +110,6 @@ class EXP msrSegmentElement : public msrElement
 
 //     mfWholeNotes              fSegmentElementSoundingWholeNotes;
 
-//     std::string           fSegmentElementMeasureNumber;
-//
-//     msrWholeNotes              fSegmentElementMeasurePosition;
-//     msrWholeNotes              fSegmentElementVoicePosition;
-//
 //     msrMoment             fSegmentElementMeasureMoment;
 //     msrMoment             fSegmentElementVoiceMoment;
 };

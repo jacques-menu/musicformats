@@ -1145,7 +1145,7 @@ void msr2msrTranslator::visitEnd (S_msrPart& elt)
 
   // JMI handlePartHiddenMeasureAndBarLineDescrList ();
 
-  // handle skip grace notes if needed
+  // handle skip grace notes if needed ISSUE34
   if (fCurrentSkipGraceNotesGroup) {
     // add it ahead of the other voices in the part if needed
     fCurrentPartClone->
@@ -4547,15 +4547,14 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
 //  displayCurrentOnGoingValues (); // JMI
 
   // create the note clone
-  S_msrNote
-    noteClone =
-      elt->
-        createNoteNewbornClone (
-          fCurrentPartClone);
+  fCurrentNoteClone =
+    elt->
+      createNoteNewbornClone (
+        fCurrentPartClone);
 
   // register clone in this tranlastors' voice notes map and ongoing notes stack
-  fVoiceNotesMap [elt] = noteClone; // JMI XXL
-  fOnGoingNotesStack.push_front (noteClone);
+  fVoiceNotesMap [elt] = fCurrentNoteClone; // JMI XXL
+  fOnGoingNotesStack.push_front (fCurrentNoteClone);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesDetails ()) { // JMI
@@ -4599,7 +4598,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-      fCurrentGraceNoteClone = noteClone;
+      fCurrentGraceNoteClone = fCurrentNoteClone;
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceNotes ()) {
@@ -4617,7 +4616,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
       break;
 
     default:
-      fCurrentNonGraceNoteClone = noteClone;
+      fCurrentNonGraceNoteClone = fCurrentNoteClone;
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceNotes ()) {
@@ -4693,6 +4692,65 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
       fCurrentNonGraceNoteClone;
   }
 //*/
+}
+
+void msr2msrTranslator::copyNoteValuesToCurrentChordClone (
+  S_msrNote note)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
+    gLog <<
+      "===> copyNoteValuesToCurrentChord(), note: " <<
+      note <<
+      std::endl << std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+// abort();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Copying values from note " <<
+      note->asString () <<
+      " to current chord " <<
+      fCurrentChordClone->asString () <<
+      ", line " << note->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // mark note as being the first one in the chord
+  note->
+    setNoteIsAChordsFirstMemberNote ();
+
+  // whole notes
+  fCurrentChordClone->
+    setMeasureElementSoundingWholeNotes (
+      note->
+        getMeasureElementSoundingWholeNotes (),
+      "copyNoteValuesToCurrentChord()");
+
+  fCurrentChordClone->
+    setChordDisplayWholeNotes (
+      note->
+        getNoteDisplayWholeNotes ());
+
+  // graphic duration
+  fCurrentChordClone->
+    setChordGraphicNotesDurationKind (
+      note->
+        getNoteGraphicNotesDurationKind ());
+
+  // copy newChordNote's elements if any to the current chord JMI v0.9.72
+//   copyNoteElementsIfAnyToChord (
+//     note,
+//     fCurrentChordClone);
 }
 
 void msr2msrTranslator::visitEnd (S_msrNote& elt)
@@ -5045,6 +5103,14 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           fCurrentNonGraceNoteClone != nullptr,
           "fCurrentNonGraceNoteClone is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+        if (! fCurrentChordHasBeenPopulatedFromItsFirstNote) {
+          // copy the current note's values to the current chord
+          copyNoteValuesToCurrentChordClone (
+            fCurrentNoteClone);
+
+          fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
+        }
      }
 
       else {
@@ -5543,6 +5609,8 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
   fCurrentChordClone =
     elt->createChordNewbornClone (
       fCurrentPartClone);
+
+  fCurrentChordHasBeenPopulatedFromItsFirstNote = false;
 
   // set fCurrentChordClone's measure position  // JMI ??? v0.9.66
 //   fCurrentMeasureClone->

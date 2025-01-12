@@ -2165,7 +2165,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
   }
 }
 
-void msrSegment::appendPaddingNoteToSegment (
+void msrSegment::cascadeAppendPaddingNoteToSegment (
   int                  inputLineNumber,
   const msrWholeNotes& forwardStepLength)
 {
@@ -2570,7 +2570,7 @@ void msrSegment::appendNoteToSegment (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fSegmentLastMeasure->
-    appendNoteToMeasure (
+    appendNoteToMeasureAtPosition (
       note,
       partCurrentDrawingMeasurePosition);
 }

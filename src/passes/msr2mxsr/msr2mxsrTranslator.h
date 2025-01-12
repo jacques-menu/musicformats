@@ -931,7 +931,7 @@ class EXP msr2mxsrTranslator :
     void                      appendMsrNoteToMesureIfRelevant (
                                 const S_msrNote& theMsrNote);
 
-    void                      appendNoteToMeasure (
+    void                      appendNoteToMeasureAtPosition (
                                 Sxmlelement      note,
                                 const S_msrNote& theMsrNote);
 

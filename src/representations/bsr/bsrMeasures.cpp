@@ -182,7 +182,7 @@ void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
   appendLineElementToMeasure (words);
 }
 
-void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
+void bsrMeasure::appendNoteToMeasureAtPosition (S_bsrNote note)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {

@@ -40,11 +40,6 @@ msrSegmentElement::msrSegmentElement (
 //         K_MEASURE_POSITION_UNKNOWN_, K_MEASURE_POSITION_UNKNOWN_)
 {
 //   fSegmentElementSoundingWholeNotes = mfRational (0, 1);
-
-//   fSegmentElementMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
-
-//   fSegmentElementMeasurePosition = K_MEASURE_POSITION_UNKNOWN_;
-//   fSegmentElementVoicePosition   = K_MEASURE_POSITION_UNKNOWN_;
 }
 
 msrSegmentElement::~msrSegmentElement ()

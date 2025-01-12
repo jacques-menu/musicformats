@@ -622,7 +622,7 @@ void msr2mxsrTranslator::appendToMeasureDirection (
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::appendNoteToMeasure (
+void msr2mxsrTranslator::appendNoteToMeasureAtPosition (
   Sxmlelement      note,
   const S_msrNote& theMsrNote)
 {
@@ -7757,7 +7757,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
       }
 
       // append theMsrNote to the current measure element
-      appendNoteToMeasure (
+      appendNoteToMeasureAtPosition (
         fCurrentNoteElement,
         theMsrNote);
     }
@@ -7845,7 +7845,7 @@ void msr2mxsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       theMsrNote->getGraceNotesGroupAfterNote ();
 */
   if (fCurrentNoteAwaitsGraceNotes) {
-    appendNoteToMeasure (
+    appendNoteToMeasureAtPosition (
       fPendingNoteElement,
       fPendingMsrNoteAwaitingGraceNotes);
 

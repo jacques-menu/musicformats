@@ -433,7 +433,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure1->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
 
     {
@@ -458,7 +458,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure1->
-        appendNoteOrPaddingToMeasure (note2);
+        appendNoteToMeasure (note2);
     }
 
     {
@@ -490,7 +490,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure1->
-        appendNoteOrPaddingToMeasure (note3);
+        appendNoteToMeasure (note3);
     }
 
     {
@@ -515,7 +515,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure1->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
   }
 
@@ -566,7 +566,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure2->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
 
     {
@@ -609,7 +609,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure2->
-        appendNoteOrPaddingToMeasure (note2);
+        appendNoteToMeasure (note2);
     }
 
     {
@@ -641,7 +641,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure2->
-        appendNoteOrPaddingToMeasure (note3);
+        appendNoteToMeasure (note3);
     }
 
     {
@@ -666,7 +666,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure2->
-        appendNoteOrPaddingToMeasure (note4);
+        appendNoteToMeasure (note4);
     }
 
     {
@@ -690,7 +690,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
             msrBeamKind::kBeamEnd));
 
       measure2->
-        appendNoteOrPaddingToMeasure (note5);
+        appendNoteToMeasure (note5);
     }
   }
 
@@ -790,7 +790,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure3->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
 
     {
@@ -823,7 +823,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure3->
-        appendNoteOrPaddingToMeasure (note2);
+        appendNoteToMeasure (note2);
     }
 
     {
@@ -856,7 +856,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure3->
-        appendNoteOrPaddingToMeasure (note3);
+        appendNoteToMeasure (note3);
     }
 
     {
@@ -881,7 +881,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure3->
-        appendNoteOrPaddingToMeasure (note4);
+        appendNoteToMeasure (note4);
     }
 
     {
@@ -918,7 +918,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure3->
-        appendNoteOrPaddingToMeasure (note5);
+        appendNoteToMeasure (note5);
     }
   }
 
@@ -974,7 +974,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure4->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
   }
 
@@ -1049,7 +1049,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure5->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
 
     // append the final barLine
@@ -1132,24 +1132,24 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
 
     // append the note to the measure
     measure1->
-      appendNoteOrPaddingToMeasure (note1);
+      appendNoteToMeasure (note1);
 
     measure1->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "g'8",
           measure1number));
 
     measure1->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "f'8",
           measure1number));
 
     measure1->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "e'8",
@@ -1183,35 +1183,35 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
     // append the notes
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "d'4",
           measure2number));
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "g'8",
           measure2number));
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "f'8",
           measure2number));
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "e'8",
           measure2number));
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "d'8",
@@ -1245,35 +1245,35 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
     // append the notes
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "c'8",
           measure3number));
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "d'16",
           measure3number));
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "e'16",
           measure3number));
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "f'8",
           measure3number));
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "e'8",
@@ -1300,7 +1300,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
 
     {
       measure4->
-        appendNoteOrPaddingToMeasure (
+        appendNoteToMeasure (
           msrNote::createNoteFromString (
             __LINE__,
             "d'2",
@@ -1328,7 +1328,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
 
     {
       measure5->
-        appendNoteOrPaddingToMeasure (
+        appendNoteToMeasure (
           msrNote::createNoteFromString (
             __LINE__,
             "d'2",
@@ -1399,7 +1399,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
     {
       measure1->
-        appendNoteOrPaddingToMeasure (
+        appendNoteToMeasure (
           msrNote::createRegularNote (
             __LINE__,
             measure1number,
@@ -1450,7 +1450,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure1->
-        appendNoteOrPaddingToMeasure (note2);
+        appendNoteToMeasure (note2);
     }
 
     {
@@ -1475,7 +1475,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure1->
-        appendNoteOrPaddingToMeasure (note3);
+        appendNoteToMeasure (note3);
     }
   }
 
@@ -1526,7 +1526,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure2->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
 
     {
@@ -1551,7 +1551,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure2->
-        appendNoteOrPaddingToMeasure (note2);
+        appendNoteToMeasure (note2);
     }
 
     {
@@ -1577,7 +1577,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure2->
-        appendNoteOrPaddingToMeasure (note3);
+        appendNoteToMeasure (note3);
     }
 
     {
@@ -1610,7 +1610,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure2->
-        appendNoteOrPaddingToMeasure (note4);
+        appendNoteToMeasure (note4);
     }
 
     {
@@ -1635,7 +1635,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure2->
-        appendNoteOrPaddingToMeasure (note5);
+        appendNoteToMeasure (note5);
     }
   }
 
@@ -1686,7 +1686,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure3->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
 
     {
@@ -1711,7 +1711,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure3->
-        appendNoteOrPaddingToMeasure (note2);
+        appendNoteToMeasure (note2);
     }
 
     {
@@ -1735,7 +1735,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
             msrBeamKind::kBeamBegin));
 
       measure3->
-        appendNoteOrPaddingToMeasure (note3);
+        appendNoteToMeasure (note3);
     }
 
     {
@@ -1768,7 +1768,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure3->
-        appendNoteOrPaddingToMeasure (note4);
+        appendNoteToMeasure (note4);
     }
 
     {
@@ -1801,7 +1801,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
 
       // append the note to the measure
       measure3->
-        appendNoteOrPaddingToMeasure (note5);
+        appendNoteToMeasure (note5);
     }
   }
 
@@ -1824,14 +1824,14 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
     // append the notes
 
     measure4->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "b4",
           measure4number));
 
     measure4->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "a4",
@@ -1856,7 +1856,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
     // append the notes
 
     measure5->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "g2",
@@ -1925,21 +1925,21 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
     // append the notes
 
     measure1->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "b4",
           measure1number));
 
     measure1->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "d'8",
           measure1number));
 
     measure1->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "c'8",
@@ -1973,35 +1973,35 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
     // append the notes
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "b8",
           measure2number));
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "a8",
           measure2number));
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "aes4",
           measure2number));
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "c'8",
           measure2number));
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "bes8",
@@ -2034,35 +2034,35 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
     // append the notes
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "a8",
           measure3number));
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "g8",
           measure3number));
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "fis8",
           measure3number));
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "g16",
           measure3number));
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "a16",
@@ -2087,7 +2087,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
     // append the notes
 
     measure4->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "b2",
@@ -2112,7 +2112,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
     // append the notes
 
     measure5->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "b2",
@@ -2181,7 +2181,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
     // append the notes
 
     measure1->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createSkipNote (
           __LINE__,
           measure1number,
@@ -2216,7 +2216,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
     // append the notes
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createSkipNote (
           __LINE__,
           measure2number,
@@ -2250,7 +2250,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
     // append the notes
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createSkipNote (
           __LINE__,
           measure3number,
@@ -2297,7 +2297,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
             msrPlacementKind::kPlacementAbove));
 
       measure4->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
   }
 
@@ -2340,7 +2340,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
 
       // append the note to the measure
       measure5->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
 
     // append the final barLine
@@ -2406,7 +2406,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
     // append the notes
 
     measure1->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createSkipFromString (
           __LINE__,
           "s2",
@@ -2439,7 +2439,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
     // append the notes
 
     measure2->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createSkipFromString (
           __LINE__,
           "s2.",
@@ -2472,7 +2472,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
     // append the notes
 
     measure3->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createSkipFromString (
           __LINE__,
           "s2",
@@ -2497,14 +2497,14 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
     // append the notes
 
     measure4->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "b4",
           measure4number));
 
     measure4->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "a4",
@@ -2529,7 +2529,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
     // append the notes
 
     measure5->
-      appendNoteOrPaddingToMeasure (
+      appendNoteToMeasure (
         msrNote::createNoteFromString (
           __LINE__,
           "g2",

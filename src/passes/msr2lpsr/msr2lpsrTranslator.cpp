@@ -1198,14 +1198,14 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  gLog <<
-    "==> fCurrentVoiceClone:" <<
-    std::endl;
-  gIndenter++;
-  gLog <<
-    fCurrentVoiceClone <<
-    std::endl;
-  gIndenter--;
+//   gLog <<
+//     "==> fCurrentVoiceClone:" <<
+//     std::endl;
+//   gIndenter++;
+//   gLog <<
+//     fCurrentVoiceClone <<
+//     std::endl;
+//   gIndenter--;
 
   // fetch the original voice first non grace note
   S_msrNote
@@ -1213,18 +1213,19 @@ void msr2lpsrTranslator::circumventLilyPond34IssueIfRelevant (
       fCurrentVoiceOriginal->
         fetchVoiceFirstNonGraceNote ();
 
-  gLog <<
-    "==> originalVoiceFirstNonGraceNote:" <<
-    std::endl;
-  gIndenter++;
-  gLog <<
-    originalVoiceFirstNonGraceNote <<
-    std::endl;
-  gIndenter--;
+//   gLog <<
+//     "==> originalVoiceFirstNonGraceNote:" <<
+//     std::endl;
+//   gIndenter++;
+//   gLog <<
+//     originalVoiceFirstNonGraceNote <<
+//     std::endl;
+//   gIndenter--;
 
   if (originalVoiceFirstNonGraceNote) { // JMI v0.9.72
     if (
-      true || noteTheGraceNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote
+//       true || noteTheGraceNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote // JMI ISSUE34
+      noteTheGraceNotesGroupIsAttachedTo == originalVoiceFirstNonGraceNote
     ) {
       // don't createSkipGraceNotesGroupClone() is there's only a single voice
       // JMI ??? v0.9.70 maybe this criterion should be refined
@@ -6195,15 +6196,14 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
 //  displayCurrentOnGoingValues (); // JMI
 
   // create the note clone
-  S_msrNote
-    noteClone =
-      elt->
-        createNoteNewbornClone (
-          fCurrentPartClone);
+  fCurrentNoteClone =
+    elt->
+      createNoteNewbornClone (
+        fCurrentPartClone);
 
   // register clone in this tranlastors' voice notes map and ongoing notes stack
-  fVoiceNotesMap [elt] = noteClone; // JMI XXL
-  fOnGoingNotesStack.push_front (noteClone);
+  fVoiceNotesMap [elt] = fCurrentNoteClone; // JMI XXL
+  fOnGoingNotesStack.push_front (fCurrentNoteClone);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesDetails ()) { // JMI
@@ -6245,7 +6245,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-      fCurrentGraceNoteClone = noteClone;
+      fCurrentGraceNoteClone = fCurrentNoteClone;
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceNotes ()) {
@@ -6263,7 +6263,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
       break;
 
     default:
-      fCurrentNonGraceNoteClone = noteClone;
+      fCurrentNonGraceNoteClone = fCurrentNoteClone;
 
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -6365,6 +6365,65 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
       fCurrentNonGraceNoteClone;
   }
 //*/
+}
+
+void msr2lpsrTranslator::copyNoteValuesToCurrentChordClone (
+  S_msrNote note)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
+    gLog <<
+      "===> copyNoteValuesToCurrentChord(), note: " <<
+      note <<
+      std::endl << std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+// abort();
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Copying values from note " <<
+      note->asString () <<
+      " to current chord " <<
+      fCurrentChordClone->asString () <<
+      ", line " << note->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // mark note as being the first one in the chord
+  note->
+    setNoteIsAChordsFirstMemberNote ();
+
+  // whole notes
+  fCurrentChordClone->
+    setMeasureElementSoundingWholeNotes (
+      note->
+        getMeasureElementSoundingWholeNotes (),
+      "copyNoteValuesToCurrentChord()");
+
+  fCurrentChordClone->
+    setChordDisplayWholeNotes (
+      note->
+        getNoteDisplayWholeNotes ());
+
+  // graphic duration
+  fCurrentChordClone->
+    setChordGraphicNotesDurationKind (
+      note->
+        getNoteGraphicNotesDurationKind ());
+
+  // copy newChordNote's elements if any to the current chord JMI v0.9.72
+//   copyNoteElementsIfAnyToChord (
+//     note,
+//     fCurrentChordClone);
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
@@ -6718,7 +6777,15 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
           fCurrentNonGraceNoteClone != nullptr,
           "fCurrentNonGraceNoteClone is null");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
-      }
+
+        if (! fCurrentChordHasBeenPopulatedFromItsFirstNote) {
+          // copy the current note's values to the current chord
+          copyNoteValuesToCurrentChordClone (
+            fCurrentNoteClone);
+
+          fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
+        }
+     }
 
       else {
         std::stringstream ss;
@@ -7224,6 +7291,8 @@ void msr2lpsrTranslator::visitStart (S_msrChord& elt)
   fCurrentChordClone =
     elt->createChordNewbornClone (
       fCurrentPartClone);
+
+  fCurrentChordHasBeenPopulatedFromItsFirstNote = false;
 
   if (fTupletClonesStack.size ()) {
     // a chord in a tuplet is handled as part of the tuplet JMI

@@ -882,7 +882,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentMeasure->
-    appendNoteToMeasure (elt);
+    appendNoteToMeasureAtPosition (elt);
 }
 
 void bsr2bsrFinalizer::visitEnd (S_bsrNote& elt)

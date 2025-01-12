@@ -8249,7 +8249,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 
   // append a padding note to the voice to be forwarded
   voiceToBeForwardedTo ->
-    appendPaddingNoteToVoice (
+    cascadeAppendPaddingNoteToVoice (
       elt->getInputStartLineNumber (),
       forwardStepLength);
 

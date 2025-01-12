@@ -126,7 +126,6 @@ S_msrChord msrChord::create (int inputLineNumber)
 S_msrChord msrChord::create (
   int                  inputLineNumber,
   const S_msrMeasure&  upLinkToMeasure,
-//   const msrWholeNotes& chordSoundingWholeNotes,
   const msrWholeNotes& chordDisplayWholeNotes,
   msrNotesDurationKind chordGraphicNotesDurationKind)
 {
@@ -136,8 +135,6 @@ S_msrChord msrChord::create (
 
     ss <<
       "Creating a chord" <<
-//       ", chordSoundingWholeNotes: " <<
-//       chordSoundingWholeNotes.asFractionString () <<
       ", chordDisplayWholeNotes: " <<
       chordDisplayWholeNotes.asFractionString () <<
       ", chordGraphicNotesDuration: " <<
@@ -153,7 +150,6 @@ S_msrChord msrChord::create (
     new msrChord (
       inputLineNumber,
       upLinkToMeasure,
-//       chordSoundingWholeNotes,
       chordDisplayWholeNotes,
       chordGraphicNotesDurationKind);
   assert (obj != nullptr);
@@ -162,7 +158,6 @@ S_msrChord msrChord::create (
 
 // S_msrChord msrChord::create (
 //   int                  inputLineNumber,
-//   const msrWholeNotes& chordSoundingWholeNotes,
 //   const msrWholeNotes& chordDisplayWholeNotes,
 //   msrNotesDurationKind chordGraphicNotesDurationKind)
 // {
@@ -172,7 +167,6 @@ S_msrChord msrChord::create (
 //
 //     ss <<
 //       "Creating a chord" <<
-//       ", chordSoundingWholeNotes: " << chordSoundingWholeNotes.asFractionString () <<
 //       ", chordDisplayWholeNotes: " << chordDisplayWholeNotes.asFractionString () <<
 //       ", chordGraphicNotesDuration: " <<
 //       msrNotesDurationKindAsString (chordGraphicNotesDurationKind);
@@ -187,7 +181,6 @@ S_msrChord msrChord::create (
 //     msrChord::create (
 //       inputLineNumber,
 //       gNullMeasure, // set later in setChordUpLinkToMeasure()
-//       chordSoundingWholeNotes,
 //       chordDisplayWholeNotes,
 //       chordGraphicNotesDurationKind);
 // }
@@ -241,7 +234,6 @@ msrChord::msrChord (int inputLineNumber)
 msrChord::msrChord (
   int                  inputLineNumber,
   const S_msrMeasure&  upLinkToMeasure,
-//   const msrWholeNotes& chordSoundingWholeNotes,
   const msrWholeNotes& chordDisplayWholeNotes,
   msrNotesDurationKind chordGraphicNotesDurationKind)
     : msrTupletElement (
@@ -251,10 +243,6 @@ msrChord::msrChord (
 
   // fChordUpLinkToMeasure = upLinkToMeasure;
   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
-
-//   setMeasureElementSoundingWholeNotes (
-//     chordSoundingWholeNotes,
-//     "msrChord::msrChord()");
 
   fChordDisplayWholeNotes = chordDisplayWholeNotes;
 
@@ -531,29 +519,6 @@ S_msrScore msrChord::fetchChordUpLinkToScore () const
 
   return result;
 }
-
-// void msrChord::setChordSoundingWholeNotes (
-//    const msrWholeNotes& wholeNotes)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceChords ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Setting chord sounding whole notes to '" <<
-//       wholeNotes.asString () <<
-//       "' for chord '" <<
-//       asString () <<
-//       "'";
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   fChordSoundingWholeNotes = wholeNotes;
-// }
 
 void msrChord::setChordDisplayWholeNotes (
    const msrWholeNotes& wholeNotes)

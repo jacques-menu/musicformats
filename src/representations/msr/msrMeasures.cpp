@@ -2574,14 +2574,14 @@ void msrMeasure::appendVoiceStaffChangeToMeasure (
     "appendVoiceStaffChangeToMeasure()");
 }
 
-void msrMeasure::appendNoteToMeasure (
+void msrMeasure::appendNoteToMeasureAtPosition (
   const S_msrNote&     note,
-  const msrWholeNotes& partCurrentDrawingMeasurePosition)
+  const msrWholeNotes& measurePosition)
 {
   // compute position delta
   msrWholeNotes
     positionsDelta =
-      partCurrentDrawingMeasurePosition
+      measurePosition
         -
       fMeasureCurrentAccumulatedWholeNotesDuration;
 
@@ -2605,8 +2605,8 @@ void msrMeasure::appendNoteToMeasure (
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
-      ", partCurrentDrawingMeasurePosition: " <<
-      partCurrentDrawingMeasurePosition.asString () <<
+      ", measurePosition: " <<
+      measurePosition.asString () <<
       ", getFullMeasureWholeNotesDuration (): " <<
       getFullMeasureWholeNotesDuration ().asString () <<
       ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
@@ -2648,7 +2648,7 @@ void msrMeasure::appendNoteToMeasure (
             */
 
     // append it to the measure
-    appendNoteOrPaddingToMeasure (skipNote);
+    appendNoteToMeasure (skipNote);
   }
 
   else if (positionsDelta.getNumerator () < 0) {
@@ -2663,8 +2663,8 @@ void msrMeasure::appendNoteToMeasure (
         std::stringstream ss;
 
         ss <<
-          "partCurrentDrawingMeasurePosition " <<
-          partCurrentDrawingMeasurePosition.asString () <<
+          "measurePosition " <<
+          measurePosition.asString () <<
           " is smaller than fMeasureCurrentAccumulatedWholeNotesDuration " <<
           fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
           " in measure " <<
@@ -2676,8 +2676,8 @@ void msrMeasure::appendNoteToMeasure (
           "\"" <<
           ", fMeasureCurrentAccumulatedWholeNotesDuration: " <<
           fMeasureCurrentAccumulatedWholeNotesDuration.asFractionString () <<
-          ", partCurrentDrawingMeasurePosition: " <<
-          partCurrentDrawingMeasurePosition.asString () <<
+          ", measurePosition: " <<
+          measurePosition.asString () <<
           ", positionsDelta: " << positionsDelta <<
           ", line " << note->getInputStartLineNumber ();
 
@@ -2699,7 +2699,7 @@ void msrMeasure::appendNoteToMeasure (
   }
 
   // append note to measure
-  appendNoteOrPaddingToMeasure (note);
+  appendNoteToMeasure (note);
 
   // determine whether the note occupies a full measure JMI v0.9.69
 //   if (note->getMeasureElementSoundingWholeNotes () == fMeasureCurrentAccumulatedWholeNotesDuration) {
@@ -2744,7 +2744,7 @@ void msrMeasure::appendNoteToMeasure (
   --gIndenter;
 }
 
-void msrMeasure::appendNoteOrPaddingToMeasure (
+void msrMeasure::appendNoteToMeasure (
   const S_msrNote& note)
 {
   // fetch note sounding whole notes
@@ -2763,7 +2763,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
     std::stringstream ss;
 
     ss <<
-      "Appending note or padding " << note->asShortString () <<
+      "Appending note " << note->asShortString () <<
       " to measure " <<
       this->asShortString () <<
       " in voice \"" <<
@@ -2784,7 +2784,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 
   appendMeasureElementToMeasure (
     note,
-    "appendNoteOrPaddingToMeasure()");
+    "appendNoteToMeasure()");
 
   // append it to the measure notes flat list if relevant
   Bool doAppendNoteToMeasureNotesFlatList (false);
@@ -2889,61 +2889,6 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
   }
 
   --gIndenter;
-}
-
-void msrMeasure::accountForTupletMemberNoteNotesDurationInMeasure ( // JMI v0.9.66 RENAME??? USELESS ACTUALLY
-  const S_msrNote& note)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (
-//     true ||
-    gTraceOahGroup->getTraceMeasures ()
-      ||
-    gTraceOahGroup->getTraceNotesDurations ()
-      ||
-    gTraceOahGroup->getTraceMeasurePositions ()
-  ) {
-    std::stringstream ss;
-
-    ss <<
-      "Accounting for the duration of tuplet member note " <<
-      note->asShortString () <<
-      " in measure " <<
-      this->asShortString () <<
-      " in voice \"" <<
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // set note's measure position JMI v0.9.66
-  note->
-    setMeasureElementMeasurePosition (
-      this,
-      fMeasureCurrentAccumulatedWholeNotesDuration,
-      "accountForTupletMemberNoteNotesDurationInMeasure()");
-
-  // fetch note sounding whole notes
-  msrWholeNotes
-    noteSoundingWholeNotes =
-      note->getMeasureElementSoundingWholeNotes ();
-
-  // append it to the measure notes flat list
-  appendNoteToMeasureNotesFlatList (note);
-
-  // account for note duration in measure whole notes
-  incrementMeasureCurrentAccumulatedWholeNotesDuration (
-    note->getInputStartLineNumber (),
-    noteSoundingWholeNotes,
-    "accountForTupletMemberNoteNotesDurationInMeasure(): "
-      +
-    note->asShortString ());
 }
 
 void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (const S_msrNote& note)
@@ -3076,17 +3021,24 @@ void msrMeasure::appendNoteToMeasureClone (const S_msrNote& note)
   --gIndenter;
 }
 
-void msrMeasure::appendDoubleTremoloToMeasure (
-  const S_msrDoubleTremolo& doubleTremolo)
+void msrMeasure::accountForTupletMemberNoteNotesDurationInMeasure ( // JMI v0.9.66 RENAME??? USELESS ACTUALLY
+  const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTremolos ()) {
+  if (
+//     true ||
+    gTraceOahGroup->getTraceMeasures ()
+      ||
+    gTraceOahGroup->getTraceNotesDurations ()
+      ||
+    gTraceOahGroup->getTraceMeasurePositions ()
+  ) {
     std::stringstream ss;
 
     ss <<
-      "Appending double tremolo '" <<
-      doubleTremolo->asShortString () <<
-      "' to measure " <<
+      "Accounting for the duration of tuplet member note " <<
+      note->asShortString () <<
+      " in measure " <<
       this->asShortString () <<
       " in voice \"" <<
       fMeasureUpLinkToSegment->
@@ -3100,13 +3052,28 @@ void msrMeasure::appendDoubleTremoloToMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  ++gIndenter;
+  // set note's measure position JMI v0.9.66
+  note->
+    setMeasureElementMeasurePosition (
+      this,
+      fMeasureCurrentAccumulatedWholeNotesDuration,
+      "accountForTupletMemberNoteNotesDurationInMeasure()");
 
-  appendMeasureElementToMeasure (
-    doubleTremolo,
-    "appendDoubleTremoloToMeasure()");
+  // fetch note sounding whole notes
+  msrWholeNotes
+    noteSoundingWholeNotes =
+      note->getMeasureElementSoundingWholeNotes ();
 
-  --gIndenter;
+  // append it to the measure notes flat list
+  appendNoteToMeasureNotesFlatList (note);
+
+  // account for note duration in measure whole notes
+  incrementMeasureCurrentAccumulatedWholeNotesDuration (
+    note->getInputStartLineNumber (),
+    noteSoundingWholeNotes,
+    "accountForTupletMemberNoteNotesDurationInMeasure(): "
+      +
+    note->asShortString ());
 }
 
 void msrMeasure::appendChordToMeasure (const S_msrChord& chord)
@@ -3205,6 +3172,39 @@ void msrMeasure::appendTupletToMeasure (const S_msrTuplet& tuplet)
 
   // the duration of the individual members of the tuplet
   // have already been accounted for in current measure's whole notes
+
+  --gIndenter;
+}
+
+void msrMeasure::appendDoubleTremoloToMeasure (
+  const S_msrDoubleTremolo& doubleTremolo)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTremolos ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending double tremolo '" <<
+      doubleTremolo->asShortString () <<
+      "' to measure " <<
+      this->asShortString () <<
+      " in voice \"" <<
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
+          getVoiceName () <<
+      "\"";
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  ++gIndenter;
+
+  appendMeasureElementToMeasure (
+    doubleTremolo,
+    "appendDoubleTremoloToMeasure()");
 
   --gIndenter;
 }
@@ -3668,7 +3668,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 // #endif // MF_TRACE_IS_ENABLED
 //
 //     // append the paddingNote to the measure
-//     appendNoteOrPaddingToMeasure (paddingNote);
+//     appendNoteToMeasure (paddingNote);
 //
 // /* JMI
 //     // set this measure as being padded // JMI
@@ -3842,7 +3842,7 @@ void msrMeasure::padUpToMeasurePosition (
 #endif // MF_TRACE_IS_ENABLED
 
     // append the paddingNote to the measure
-    appendNoteOrPaddingToMeasure (paddingNote);
+    appendNoteToMeasure (paddingNote);
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -4157,7 +4157,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
         measureVoice);
 
   // append paddingSkipNote to the measure
-  appendNoteOrPaddingToMeasure (paddingSkipNote);
+  appendNoteToMeasure (paddingSkipNote);
 
   --gIndenter;
 }

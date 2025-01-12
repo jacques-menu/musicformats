@@ -2628,7 +2628,7 @@ void msr2bsrTranslator::createBsrForNote (const S_msrNote& note)
 
   // append it to the current measure
   fCurrentMeasure->
-    appendNoteToMeasure (bNote);
+    appendNoteToMeasureAtPosition (bNote);
 
   // determine the note value size kind
   bsrNoteValueSizeKind

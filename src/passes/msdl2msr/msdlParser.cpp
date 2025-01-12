@@ -3584,7 +3584,7 @@ void msdlParser::Note (S_msdlTokenKindsSet stopperTokensSet)
 
   // append it to the current measure
   fCurrentMeasure->
-    appendNoteOrPaddingToMeasure (note);
+    appendNoteToMeasure (note);
 
   --gIndenter;
 

@@ -3015,7 +3015,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   --gIndenter;
 }
 
-void msrVoice::appendPaddingNoteToVoice (
+void msrVoice::cascadeAppendPaddingNoteToVoice (
   int                  inputLineNumber,
   const msrWholeNotes& forwardStepLength)
 {
@@ -3045,7 +3045,7 @@ void msrVoice::appendPaddingNoteToVoice (
 
   // pad up the voice's last segment
   fVoiceLastSegment->
-    appendPaddingNoteToSegment (
+    cascadeAppendPaddingNoteToSegment (
       inputLineNumber,
       forwardStepLength);
 
@@ -8156,7 +8156,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
   msrWholeNotes partCurrentDrawingMeasurePosition; // needs to be supplied ??? JMI v0.9.70
 
   emptyMeasure->
-    appendNoteToMeasure (
+    appendNoteToMeasureAtPosition (
       wholeMeasureRestNote,
       partCurrentDrawingMeasurePosition);
 

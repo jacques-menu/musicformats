@@ -625,7 +625,7 @@ S_msrMeasure createMeasureInVoice (
 
       // append the note to the measure
       measure1->
-        appendNoteOrPaddingToMeasure (note1);
+        appendNoteToMeasure (note1);
     }
 */
 

@@ -72,13 +72,11 @@ class EXP msrChord : public msrTupletElement
     static SMARTP<msrChord> create (
                             int                  inputLineNumber,
                             const S_msrMeasure&  upLinkToMeasure,
-//                             const msrWholeNotes& chordSoundingWholeNotes,
                             const msrWholeNotes& chordDisplayWholeNotes,
                             msrNotesDurationKind chordGraphicNotesDurationKind);
 
 //     static SMARTP<msrChord> create (
 //                             int                  inputLineNumber,
-//                             const msrWholeNotes& chordSoundingWholeNotes,
 //                             const msrWholeNotes& chordDisplayWholeNotes,
 //                             msrNotesDurationKind chordGraphicNotesDurationKind);
 
@@ -103,7 +101,6 @@ class EXP msrChord : public msrTupletElement
                           msrChord (
                             int                  inputLineNumber,
                             const S_msrMeasure&  upLinkToMeasure,
-//                             const msrWholeNotes& chordSoundingWholeNotes,
                             const msrWholeNotes& chordDisplayWholeNotes,
                             msrNotesDurationKind chordGraphicNotesDurationKind);
 
@@ -138,13 +135,6 @@ class EXP msrChord : public msrTupletElement
 
     msrChordInKind        getChordKind () const
                               { return fChordKind; }
-
-     // whole notes
-//     void                  setChordSoundingWholeNotes (
-//                             const msrWholeNotes& wholeNotes);
-//
-//     msrWholeNotes         getChordSoundingWholeNotes () const
-//                               { return fChordSoundingWholeNotes; }
 
     void                  setChordDisplayWholeNotes (
                             const msrWholeNotes& wholeNotes);
@@ -544,9 +534,6 @@ class EXP msrChord : public msrTupletElement
     S_msrGraceNotesGroup  fChordUpLinkToContainingGraceNotesGroup;
 
     msrChordInKind        fChordKind;
-
-    // sounding whole notes
-//     msrWholeNotes         fChordSoundingWholeNotes;
 
     // display whole notes
     msrWholeNotes         fChordDisplayWholeNotes;

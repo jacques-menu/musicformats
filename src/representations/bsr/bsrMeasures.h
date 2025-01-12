@@ -75,7 +75,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
 
     void                  appendWordsToMeasure (S_bsrWords str);
 
-    void                  appendNoteToMeasure (S_bsrNote note);
+    void                  appendNoteToMeasureAtPosition (S_bsrNote note);
 
     void                  appendPaddingSkipNoteToMeasure (S_bsrNote note);
 

@@ -144,6 +144,8 @@ msrNote::msrNote (
 
 //   fMeasureElementMeasureNumber = noteMeasureNumber; // JMI ??? v0.9.66
 
+// 	if (noteKind == msrNoteKind::kNoteSkipInMeasure) abort (); // JMI v0.9.72
+
   // basic note description
   fNoteKind = noteKind;
 

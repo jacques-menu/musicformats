@@ -747,12 +747,12 @@ class EXP msr2msrTranslator :
     // notes
     // ------------------------------------------------------
 
-//     S_msrNote                 fCurrentNoteClone; // JMI UNUSED v0.9.66
+    S_msrNote                 fCurrentNoteClone; // JMI v0.9.72
 
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    std::list <S_msrNote>      fOnGoingNotesStack;
+    std::list <S_msrNote>     fOnGoingNotesStack;
     void                      displayOnGoingNotesStack (const std::string& context);
 
     Bool                      fOnGoingNonGraceNote;
@@ -819,6 +819,11 @@ class EXP msr2msrTranslator :
     // ------------------------------------------------------
     Bool                      fOnGoingChord;
     S_msrChord                fCurrentChordClone;
+
+    Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
+
+    void                      copyNoteValuesToCurrentChordClone (
+                                S_msrNote note);
 
 
     // tuplets

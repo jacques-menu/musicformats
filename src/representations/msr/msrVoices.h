@@ -395,7 +395,7 @@ class EXP msrVoice : public msrElement
 
     // forward
 
-    void                  appendPaddingNoteToVoice (
+    void                  cascadeAppendPaddingNoteToVoice (
                             int                  inputLineNumber,
                             const msrWholeNotes& forwardStepLength);
 
