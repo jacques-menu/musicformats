@@ -3317,7 +3317,7 @@ void msrStaff::collectStaffMeasuresSlices (
         --gIndenter;
       }
       else {
-        gLog << " : [NONE]" << std::endl;
+        gLog << " : [NULL]" << std::endl;
       }
     }
 #endif // MF_TRACE_IS_ENABLED

@@ -2291,7 +2291,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   if (! fPartsIgnoreIDSet.size ()) {
     gLog <<
-      "[NONE]";
+      "[EMPTY]";
   }
   else {
     for (
@@ -2312,7 +2312,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   if (! fMusicXMLPartsKeepIDSet.size ()) {
     gLog <<
-      "[NONE]";
+      "[EMPTY]";
   }
   else {
     for (
@@ -2333,7 +2333,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   if (! fMusicXMLPartsIgnoreNameSet.size ()) {
     gLog <<
-      "[NONE]";
+      "[EMPTY]";
   }
   else {
     for (
@@ -2354,7 +2354,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   if (! fMusicXMLPartsKeepNameSet.size ()) {
     gLog <<
-      "[NONE]";
+      "[EMPTY]";
   }
   else {
     for (

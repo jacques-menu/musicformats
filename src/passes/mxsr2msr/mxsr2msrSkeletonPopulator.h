@@ -2156,10 +2156,6 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrChord& chord);
                                 */
 
-    void                      copyNoteArticulationsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
     // dynamics, words and wedges remain pending until the next note
     // (they precede the note in MusicXML but follow it in LilyPond)
     std::list <S_msrDynamic>  fPendingDynamicxList;
@@ -2205,74 +2201,8 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      attachPendingSlidesToCurrentNote ();
 
 
-    // appending links to notes' elements to chords
-    // ------------------------------------------------------
-
-    void                      copyNoteElementsIfAnyToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNoteDynamicsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-    void                      copyNoteOtherDynamicsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNoteWordsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNoteTiesToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-//    void                      copyNoteSlursListToChord (
-//                                const S_msrNote& note, S_msrChord chord);
-
-    void                      appendNoteSlursListLinksToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNoteLigaturesListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNotePedalsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNoteSlashesListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNoteWedgesListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNoteSegnosListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-    void                      copyNoteDalSegnosListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-    void                      copyNoteCodasListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNoteOctaveShiftToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
 //    void                      copyNoteGraceNotesGroupsToChord (
 //                                const S_msrNote& note, S_msrChord chord);
-
-    void                      addNoteGraceNotesGroupsLinksToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      copyNoteHarmoniesToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
 
 
     // technicals handling
@@ -2298,19 +2228,6 @@ class EXP mxsr2msrSkeletonPopulator :
 //    void                      attachCurrentTechnicalsToChord ( // JMI
  //                               const S_msrChord& chord);
 
-    void                      copyNoteTechnicalsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-    void                      copyNoteTechnicalWithIntegersListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-    void                      copyNoteTechnicalWithFloatsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-    void                      copyNoteTechnicalWithStringsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
 
     // ornaments handling
     // ------------------------------------------------------
@@ -2321,10 +2238,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
 //    void                      attachCurrentOrnamentsToChord ( // JMI
  //                               const S_msrChord& chord);
-
-    void                      copyNoteOrnamentsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
 
 
     // spanners handling
@@ -2338,19 +2251,11 @@ class EXP mxsr2msrSkeletonPopulator :
 																const S_msrNote&   note,
                                 const std::string& context);
 
-    void                      copyNoteSpannersListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
 
     // stems handling
     // ------------------------------------------------------
 
     std::vector <S_msrStem>   fPendingStemsVector; // std::list JMI ???
-
-    void                      copyNoteStemToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
 
 
     // beams handling
@@ -2359,14 +2264,6 @@ class EXP mxsr2msrSkeletonPopulator :
     std::list <S_msrBeam>     fPendingBeamsList;
 
     void                      attachPendingBeamsToCurrentNote ();
-
-    void                      copyNoteBeamsListToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
-    void                      appendNoteBeamsListLinksToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
 
 
     // glissandos handling
@@ -2396,10 +2293,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      attachCurrentSingleTremoloToCurrentNote ();
 
-    void                      copyNoteSingleTremoloToChord (
-                                const S_msrNote&  note,
-                                const S_msrChord& chord);
-
 
     // chords handling
     // ------------------------------------------------------
@@ -2422,9 +2315,6 @@ class EXP mxsr2msrSkeletonPopulator :
     Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
 
 //     void                      createChord (int inputLineNumber);
-
-    void                      copyNoteValuesToCurrentChord (
-                                S_msrNote note);
 
     void                      handleChordBeginIfAnyBeforeNoteCreation ();
 //     void                      handleChordBeginIfAnyAfterNoteCreation ();
@@ -2521,10 +2411,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     S_msrTuplet               createTuplet (
                                 int inputLineNumber);
-
-    void                      copyNoteElementsIfAnyToTuplet (
-                                const S_msrNote&  firstNote,
-                                const S_msrTuplet tuplet);
 
     void                      handleTupletBeginEventsIfAnyBeforeNoteCreation ();
 

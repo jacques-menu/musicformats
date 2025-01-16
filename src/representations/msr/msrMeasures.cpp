@@ -2451,7 +2451,7 @@ void msrMeasure::printMeasurePendingMeasureElementsList ()
   }
   else {
     gLog <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 

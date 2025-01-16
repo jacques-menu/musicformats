@@ -411,7 +411,7 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteOctaveShift; }
 
     // grace note?
-    void                  setNoteIsACueNoteKind ()
+    void                  setNoteIsAGraceNote ()
                               { fNoteIsAGraceNote = true; }
 
     Bool                  getNoteIsAGraceNote () const
@@ -1067,7 +1067,7 @@ class EXP msrNote : public msrTupletElement
     // beams
     // ------------------------------------------------------
 
-    std::list <S_msrBeam>  fNoteBeamsList;
+    std::list <S_msrBeam> fNoteBeamsList;
 
     // articulations
     // ------------------------------------------------------
@@ -1118,8 +1118,7 @@ class EXP msrNote : public msrTupletElement
 
     S_msrGraceNotesGroup  fGraceNotesGroupBeforeNote;
   // JMI  S_msrAfterGraceNotesGroup ??? v0.9.64
-    S_msrGraceNotesGroup
-                          fGraceNotesGroupAfterNote;
+    S_msrGraceNotesGroup  fGraceNotesGroupAfterNote;
 
     // single tremolo
     // ------------------------------------------------------
@@ -1129,7 +1128,7 @@ class EXP msrNote : public msrTupletElement
     // tie
     // ------------------------------------------------------
 
-    std::list <S_msrTie>   fNoteTiesList;
+    std::list <S_msrTie>  fNoteTiesList;
 
     // dynamics
     // ------------------------------------------------------

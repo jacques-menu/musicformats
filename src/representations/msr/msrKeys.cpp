@@ -925,7 +925,7 @@ void msrKey::print (std::ostream& os) const
       else
         {
           os <<
-            " [NONE]" <<
+            " [EMPTY]" <<
             std::endl;
         }
       break;

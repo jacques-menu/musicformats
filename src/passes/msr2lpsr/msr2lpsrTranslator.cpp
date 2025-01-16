@@ -6367,65 +6367,6 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
 //*/
 }
 
-void msr2lpsrTranslator::copyNoteValuesToCurrentChordClone (
-  S_msrNote note)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChordsBasics ()) {
-    gLog <<
-      "===> copyNoteValuesToCurrentChord(), note: " <<
-      note <<
-      std::endl << std::endl;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-// abort();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Copying values from note " <<
-      note->asString () <<
-      " to current chord " <<
-      fCurrentChordClone->asString () <<
-      ", line " << note->getInputStartLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // mark note as being the first one in the chord
-  note->
-    setNoteIsAChordsFirstMemberNote ();
-
-  // whole notes
-  fCurrentChordClone->
-    setMeasureElementSoundingWholeNotes (
-      note->
-        getMeasureElementSoundingWholeNotes (),
-      "copyNoteValuesToCurrentChord()");
-
-  fCurrentChordClone->
-    setChordDisplayWholeNotes (
-      note->
-        getNoteDisplayWholeNotes ());
-
-  // graphic duration
-  fCurrentChordClone->
-    setChordGraphicNotesDurationKind (
-      note->
-        getNoteGraphicNotesDurationKind ());
-
-  // copy newChordNote's elements if any to the current chord JMI v0.9.72
-//   copyNoteElementsIfAnyToChord (
-//     note,
-//     fCurrentChordClone);
-}
-
 void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 {
   msrNoteKind
@@ -6780,8 +6721,9 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 
         if (! fCurrentChordHasBeenPopulatedFromItsFirstNote) {
           // copy the current note's values to the current chord
-          copyNoteValuesToCurrentChordClone (
-            fCurrentNoteClone);
+          fCurrentChordClone->
+            copyNoteValuesToChord (
+              fCurrentNoteClone);
 
           fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
         }
@@ -6926,6 +6868,13 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     default:
       fOnGoingNonGraceNote = false;
   } // switch
+
+  // copy note's elements if any to the current chord if any
+  if (fCurrentChordClone) {
+    fCurrentChordClone->
+      copyNoteElementsIfAnyToChord (
+        fCurrentNoteClone);
+  }
 
   // forget about current note
   fOnGoingNotesStack.pop_front ();
@@ -7339,10 +7288,7 @@ void msr2lpsrTranslator::visitStart (S_msrChord& elt)
   }
 
   else {
-    // appending the chord to the voice clone at once
-    fCurrentVoiceClone->
-      appendChordToVoice (
-        fCurrentChordClone);
+    // NOT appending the chord to the voice clone at once
   }
 
   fOnGoingChord = true;
@@ -7363,6 +7309,11 @@ void msr2lpsrTranslator::visitEnd (S_msrChord& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+  // append current chord clont to the current voice
+  fCurrentVoiceClone->
+    appendChordToVoice (
+      fCurrentChordClone);
 
 //   // finalize the current chord clone
 //   fCurrentChordClone->

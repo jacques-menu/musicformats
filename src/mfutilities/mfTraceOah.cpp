@@ -3412,7 +3412,7 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
   }
   else {
     gLog <<
-      "[NONE]";
+      "[EMPTY]";
   }
   gLog << std::endl;
 

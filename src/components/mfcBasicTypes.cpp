@@ -1598,7 +1598,7 @@ void mfcMultiComponent::printOahVersion (std::ostream&  os) const
     --gIndenter;
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << "[NULL]" << std::endl;
   }
 
   --gIndenter;
@@ -1626,7 +1626,7 @@ void mfcMultiComponent::printOahHistory (std::ostream&  os) const
     --gIndenter;
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << " [NULL]" << std::endl;
   }
 
   --gIndenter;
@@ -1668,7 +1668,7 @@ void mfcMultiComponent::printRepresentationsVersions (std::ostream&  os) const
     } // for
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << "[EMPTY]" << std::endl;
   }
 
   --gIndenter;
@@ -1710,7 +1710,7 @@ void mfcMultiComponent::printPassesVersions (std::ostream&  os) const
     } // for
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << " [EMPTY]" << std::endl;
   }
 
   --gIndenter;
@@ -1750,7 +1750,7 @@ void mfcMultiComponent::printRepresentationsHistory (std::ostream&  os) const
     } // for
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << " [EMPTY]" << std::endl;
   }
 
   --gIndenter;
@@ -1790,7 +1790,7 @@ void mfcMultiComponent::printPassesHistory (std::ostream&  os) const
     } // for
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << " [EMPTY]" << std::endl;
   }
 
   --gIndenter;
@@ -1850,7 +1850,7 @@ void mfcMultiComponent::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << " [EMPTY]" << std::endl;
   }
 
   os <<
@@ -1882,7 +1882,7 @@ void mfcMultiComponent::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << " [EMPTY]" << std::endl;
   }
 }
 
@@ -2321,7 +2321,7 @@ void mfcLibraryComponent::printConvertersVersions (std::ostream&  os) const
     } // for
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << " [EMPTY]" << std::endl;
   }
 
   --gIndenter;
@@ -2362,7 +2362,7 @@ void mfcLibraryComponent::printConvertersHistory (std::ostream&  os) const
     } // for
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << " [EMPTY]" << std::endl;
   }
 
   --gIndenter;

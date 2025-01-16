@@ -846,7 +846,10 @@ class EXP lpsr2lilypondTranslator :
     std::string           pitchedRestAsLilypondString (
                             const S_msrNote& note);
 
-    void                  generateNoteBeams (
+    void                  generateCodeForNoteHeadAndStem (
+                            S_msrNote note);
+
+    void                  generateNoteBeamsAfterNote (
                             const S_msrNote& note);
 
     void                  generateNoteSlurDirection (
@@ -869,6 +872,8 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrCoda& coda);
 
     void                  generateCodeRightBeforeNote (
+                            const S_msrNote& note);
+    void                  generateCodeRightAfterNote (
                             const S_msrNote& note);
 
     void                  generateCodeForNote (
@@ -922,24 +927,30 @@ class EXP lpsr2lilypondTranslator :
     void                  generateNoteSlurLineTypes (
                             const S_msrNote& note);
 
+    // glissandos
     void                  generateNoteGlissandoStyles (
                             const S_msrNote& note);
+
     void                  generateNoteGlissandosListWithText (
                             const S_msrNote& note);
 
+    void                  generateCodeForGlissandos (
+                            const std::list <S_msrGlissando>&
+                              glissandosList);
+
+    // slides
     void                  generateNoteSlideLineStyles (
                             const S_msrNote& note);
     void                  generateNoteSlidesListWithText (
                             const S_msrNote& note);
 
-    void                  generateNoteTechnicalsListWithStrings (
-                            const S_msrNote& note);
+    void                  generateCodeForNoteSlides (
+                            const std::list <S_msrSlide>&
+                              slidesList);
 
+    // words
     void                  generateCodeForNoteWordsList (
                             const std::list <S_msrWords>& noteWordsList);
-
-    void                  generateCodeRightAfterNote (
-                            const S_msrNote& note);
 
     // stems
 
@@ -951,6 +962,9 @@ class EXP lpsr2lilypondTranslator :
 
     void                  generateStemIfNeededAndUpdateCurrentStemKind (
                             const S_msrStem& stem);
+
+    // beams
+    // JMI ???
 
     // slurs
 
@@ -967,6 +981,9 @@ class EXP lpsr2lilypondTranslator :
     void                  generateChordArticulation (
                             const S_msrArticulation& articulation);
 
+    void                  generateCodeForArticulations (
+                            const S_msrNote note);
+
     // technicals
 
     std::string           technicalAsLilypondString (
@@ -980,6 +997,26 @@ class EXP lpsr2lilypondTranslator :
 
     std::string           technicalWithStringAsLilypondString (
                             const S_msrTechnicalWithString& technicalWithString);
+
+
+    void                  generateCodeForTechnicals (
+                            const std::list <S_msrTechnical>&
+                              technicalsList);
+
+    void                  generateCodeForTechnicalsWithInteger (
+                            const std::list <S_msrTechnicalWithInteger>&
+                              technicalWithIntegersList);
+
+    void                  generateCodeForTechnicalsWithFloat (
+                            const std::list <S_msrTechnicalWithFloat>&
+                              technicalWithFloatsList);
+
+    void                  generateNoteTechnicalsListWithStrings (
+                            const S_msrNote& note);
+
+    void                  generateCodeForTechnicalsWithStringsList (
+                            const std::list <S_msrTechnicalWithString>&
+                              technicalWithStringsList);
 
     // ornaments
 
@@ -1034,6 +1071,14 @@ class EXP lpsr2lilypondTranslator :
 
     std::string           dynamicAsLilypondString (
                             const S_msrDynamic& dynamic);
+
+    void                  generateCodeForDynamics (
+                            const std::list <S_msrDynamic>&
+                              dynamicsList);
+
+    void                  generateCodeForOtherDynamics (
+                            const std::list <S_msrOtherDynamic>&
+                              otherDynamicsList);
 
     // std::string tuning
     std::string           stringTuningAsLilypondString (
@@ -1182,6 +1227,15 @@ class EXP lpsr2lilypondTranslator :
     // ligarures
     std::string           cLilypondLigatureOpener,
                           cLilypondLigatureCloser;
+
+    void                  generateCodeForLigatures (
+                            const std::list <S_msrLigature>&
+                              ligaruresList);
+
+    // wedges
+    void                  generateCodeForWedges (
+                            const std::list <S_msrWedge>&
+                              wedgesList);
 
     // hairpins
     std::string           cLilypondHairPinsCrescendo,

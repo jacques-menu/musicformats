@@ -214,7 +214,7 @@ void lpsrHeader::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << " [NONE]" << std::endl;
+    os << " [NULL]" << std::endl;
   }
 
   // LilyPond informations

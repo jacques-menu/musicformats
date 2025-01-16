@@ -1734,7 +1734,7 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth) // JMI SUPERFLOUS???
 
   if (! fMsrPartsRenamingMap.size ()) {
     gLog <<
-      "[NONE]";
+      "[EMPTY]";
   }
   else {
     for (

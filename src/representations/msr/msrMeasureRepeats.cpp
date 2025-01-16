@@ -377,7 +377,7 @@ void msrMeasureRepeatElement::printFull (std::ostream& os) const
       ")";
   }
   else {
-    os << "[NONE]";
+    os << "[EMPTY]";
   }
   os << std::endl;
 

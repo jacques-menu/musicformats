@@ -6751,7 +6751,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -6778,7 +6778,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -6805,7 +6805,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -6832,7 +6832,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -6859,7 +6859,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -6886,7 +6886,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -6913,7 +6913,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -6940,7 +6940,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -6967,7 +6967,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -6994,7 +6994,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7040,7 +7040,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7067,7 +7067,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7093,7 +7093,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7114,7 +7114,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7141,7 +7141,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7168,7 +7168,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7195,7 +7195,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7222,7 +7222,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7249,7 +7249,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7276,7 +7276,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7303,7 +7303,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7330,7 +7330,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7357,7 +7357,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7384,7 +7384,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7411,7 +7411,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7438,7 +7438,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7468,7 +7468,7 @@ void msrNote::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << ": " << "[NONE]" << std::endl;
+    os << ": " << "[EMPTY]" << std::endl;
   }
 
   // print the figured bass elements associated to this note if any
@@ -7497,7 +7497,7 @@ void msrNote::printFull (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << ": " << "[NONE]" << std::endl;
+    os << ": " << "[EMPTY]" << std::endl;
   }
 
   // print the syllables associated to this note if any
@@ -7549,7 +7549,7 @@ void msrNote::printFull (std::ostream& os) const
   }
   else {
     os << ": " <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 

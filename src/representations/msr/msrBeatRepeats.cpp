@@ -685,7 +685,7 @@ void msrBeatRepeatPattern::print (std::ostream& os) const
 
   if (! fBeatRepeatPatternSegment) {
     os <<
-      " [NONE]" <<
+      " [NULL]" <<
       std::endl;
   }
   else {
@@ -924,7 +924,7 @@ void msrBeatRepeatReplicas::print (std::ostream& os) const
 
   if (! fBeatRepeatReplicasSegment) {
     os <<
-      " [NONE]" <<
+      " [NULL]" <<
       std::endl;
   }
   else {
@@ -1460,7 +1460,7 @@ void msrBeatRepeat::print (std::ostream& os) const
   // print the beat repeat pattern
   if (! fBeatRepeatPattern) {
     os <<
-      "fBeatRepeatPattern: [NONE]" <<
+      "fBeatRepeatPattern: [NULL]" <<
       std::endl;
   }
 
@@ -1472,7 +1472,7 @@ void msrBeatRepeat::print (std::ostream& os) const
   // print the beat repeat replicas
   if (! fBeatRepeatReplicas) {
     os <<
-      "fBeatRepeatReplicas: [NONE]" <<
+      "fBeatRepeatReplicas: [NULL]" <<
       std::endl;
   }
 

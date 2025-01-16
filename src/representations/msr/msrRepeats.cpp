@@ -1024,7 +1024,7 @@ void msrRepeatEnding::print (std::ostream& os) const
       ")";
   }
   else {
-    os << "[NONE]";
+    os << "[EMPTY]";
   }
   os << std::endl;
 
@@ -2038,7 +2038,7 @@ void msrRepeat::printFull (std::ostream& os) const
     os << '(' << endingsNumber << ")";
   }
   else {
-    os << "[NONE]";
+    os << "[EMPTY]";
   }
   os << std::endl;
 
@@ -2107,7 +2107,7 @@ void msrRepeat::print (std::ostream& os) const
     os << '(' << repeatEndingsSize << ")";
   }
   else {
-    os << "[NONE]";
+    os << "[EMPTY]";
   }
   os << std::endl;
 

@@ -518,7 +518,7 @@ if (false) // JMI
         "'";
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
     gWaeHandler->waeTrace (
@@ -621,7 +621,7 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
         "'";
     }
     else {
-      ss << "[NONE]";
+      ss << "[NULL]";
     }
 
     gWaeHandler->waeTrace (
@@ -14614,7 +14614,7 @@ void lpsr2lilypondTranslator::generateSyllableDescripionAsComment (
         noteSlursList.size ();
     }
     else {
-      fLilypondCodeStream << "[NONE]";
+      fLilypondCodeStream << "[EMPTY]";
     }
   }
   else {
@@ -20605,7 +20605,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::generateNoteBeams (
+void lpsr2lilypondTranslator::generateNoteBeamsAfterNote (
   const S_msrNote& note)
 {
   const std::list <S_msrBeam>&
@@ -20613,13 +20613,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
       note->getNoteBeamsList ();
 
   if (noteBeamsList.size ()) {
-    for (
-      std::list <S_msrBeam>::const_iterator i = noteBeamsList.begin ();
-      i != noteBeamsList.end ();
-      ++i
-    ) {
-      S_msrBeam beam = (*i);
-
+    for (S_msrBeam beam : noteBeamsList) {
  #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceBeams ()) {
         std::stringstream ss;
@@ -20636,78 +20630,162 @@ void lpsr2lilypondTranslator::generateNoteBeams (
       }
 #endif // MF_TRACE_IS_ENABLED
 
+      // in MusicXML, the beam number is the number of simultaneous beams,
+      // from 1 to 8, i.e. from 8th to 1024th notes
+
+      // in LilyPond, the '[' follows the first beamed note
+      // and the ']' follows the last beamed one
+
       // LilyPond will take care of multiple beams automatically,
-      // so we need only generate code for the first number (level) JMI v0.9.70
-      switch (beam->getBeamKind ()) {
+      // so we need only generate code for the first number (level) JMI v0.9.72
 
-        case msrBeamKind::kBeamBegin:
-          if (beam->getBeamNumber () == 1) {
-            if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
- #ifdef MF_TRACE_IS_ENABLED
-              if (gTraceOahGroup->getTraceBeams ()) {
-                std::stringstream ss;
+/*
+      <!--
+        Beam types include begin, continue, end, forward hook, and
+        backward hook. Up to eight concurrent beams are available to
+        cover up to 1024th notes, using an enumerated type defined
+        in the common.mod file. Each beam in a note is represented
+        with a separate beam element, starting with the eighth note
+        beam using a number attribute of 1.
 
-                ss <<
-                  "Generating LilyPond code for beam " <<
-                  beam->asShortString () <<
-                  " in note " <<
-                  note->asShortString () <<
-                  std::endl;
+        Note that the beam number does not distinguish sets of
+        beams that overlap, as it does for slur and other elements.
+        Beaming groups are distinguished by being in different
+        voices and/or the presence or absence of grace and cue
+        elements.
 
-                gWaeHandler->waeTrace (
-                  __FILE__, __LINE__,
-                  ss.str ());
-              }
+        Beams that have a begin value can also have a fan attribute to
+        indicate accelerandos and ritardandos using fanned beams. The
+        fan attribute may also be used with a continue value if the
+        fanning direction changes on that note. The value is "none"
+        if not specified.
+
+        The repeater attribute has been deprecated in MusicXML 3.0.
+        Formerly used for tremolos, it needs to be specified with a
+        "yes" value for each beam using it.
+      -->
+      <!ELEMENT beam (#PCDATA)>
+      <!ATTLIST beam
+          number %beam-level; "1"
+          repeater %yes-no; #IMPLIED
+          fan (accel | rit | none) #IMPLIED
+          %color;
+      >
+*/
+
+      int inputStartLineNumber = beam->getInputStartLineNumber ();
+
+      int beamNumber = beam->getBeamNumber ();
+
+      msrBeamKind beamKind = beam->getBeamKind ();
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceBeams ()) {
+        std::stringstream ss;
+
+        ss <<
+          "% --> generateNoteBeamsAfterNote()" <<
+          ", beamNumber: " << beamNumber <<
+          ", beamKind: " << beamKind <<
+          ", line " << inputStartLineNumber ;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif // MF_TRACE_IS_ENABLED
 
-              fLilypondCodeStream << "[ " << " %{ generateNoteBeams() %} ";
+      switch (beamKind) {
+
+        case msrBeamKind::kBeamBegin:
+          // ------------------------------------------
+          // beam begin
+          // ------------------------------------------
+
+          if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
+            if (beamNumber == 1) {
+              fLilypondCodeStream <<
+                "[ " <<
+                " %{ beam " <<
+                beamNumber <<
+                ", line " <<
+                inputStartLineNumber <<
+                " %} " << std::endl;
+            }
+          }
 
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
-              if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
-                fLilypondCodeStream << "%{ kBeamBegin 1 %}  ";
-              }
+          if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+            fLilypondCodeStream << "%{ kBeamBegin 2 %}  ";
+          }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
-              if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
-                // generate the input line number as a comment
-                fLilypondCodeStream <<
-                  " %{ line " << beam->getInputStartLineNumber () << " %}  ";
-              }
-            }
+          if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+            // generate the input line number as a comment
+            fLilypondCodeStream <<
+              " %{ line " << inputStartLineNumber << " %}  ";
           }
           break;
 
         case msrBeamKind::kBeamContinue:
+          // ------------------------------------------
+          // beam continue
+          // ------------------------------------------
           break;
 
         case msrBeamKind::kBeamEnd:
-          if (beam->getBeamNumber () == 1) {
-            if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
-              fLilypondCodeStream << "] ";
+          // ------------------------------------------
+           // beam end
+          // ------------------------------------------
 
-#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
-              if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
-                fLilypondCodeStream << "%{ kBeamEnd 1 %}  ";
-              }
-#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
-
-              if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
-                // generate the input line number as a comment
-                fLilypondCodeStream <<
-                  " %{ line " << beam->getInputStartLineNumber () << " %}  ";
-              }
+          if (! gGlobalLpsr2lilypondOahGroup->getNoBeams ()) {
+            if (beamNumber == 1) {
+              fLilypondCodeStream <<
+                "] " <<
+                " %{ beam " <<
+                beamNumber <<
+                ", line " <<
+                inputStartLineNumber <<
+                " %} " << std::endl;
             }
+
+// #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+//             if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+//               fLilypondCodeStream << "%{ kBeamEnd 1 %}  ";
+//             }
+// #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
+
+//             if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+//               // generate the input line number as a comment
+//               fLilypondCodeStream <<
+//                 " %{ line " << beam->getInputStartLineNumber () << " %}  ";
+//             }
           }
+
+// #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+//           if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+//             fLilypondCodeStream << "%{ kBeamEnd 2 %}  ";
+//           }
+// #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
+
+//           if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
+//             // generate the input line number as a comment
+//             fLilypondCodeStream <<
+//               " %{ line " << inputStartLineNumber << " %}  ";
+//           }
           break;
 
         case msrBeamKind::kBeamForwardHook:
+          // JMI ???
           break;
 
         case msrBeamKind::kBeamBackwardHook:
+          // JMI ???
           break;
 
         case msrBeamKind::kBeam_UNKNOWN_:
-          break;
+           // JMI ???
+         break;
       } // switch
     } // for
   }
@@ -21166,7 +21244,7 @@ slash = \tweak Flag.stroke-style grace \etc
       S_msrElement element = (*i);
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
+      // sanity check
       mfAssert (
         __FILE__, __LINE__,
         element != nullptr,
@@ -21180,60 +21258,63 @@ slash = \tweak Flag.stroke-style grace \etc
         S_msrNote
           graceNotesGroupNote =
             dynamic_cast<msrNote*>(&(*element))
+      ) {
+        // generate things before the note
+        generateCodeRightBeforeNote (graceNotesGroupNote);
+
+        // generate the graceNotesGroupNote itself
+        generateCodeForNote (graceNotesGroupNote);
+
+        // generate the input line number as comment if relevant
+        if ( // JMI
+          gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()
+            ||
+          gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
         ) {
-          // generate things before the note
-          generateCodeRightBeforeNote (graceNotesGroupNote);
-
-          // generate the graceNotesGroupNote itself
-          generateCodeForNote (graceNotesGroupNote);
-
-          // generate the input line number as comment if relevant
-          if ( // JMI
-            gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()
-              ||
-            gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
-          ) {
-            generateInputLineNumberAndOrMeasurePositionAsAComment (
-              graceNotesGroupNote);
-          }
-
-          // generate things after the graceNotesGroupNote
-          generateCodeRightAfterNote (graceNotesGroupNote);
-
-          // generate the graceNotesGroupNote beams if any,
-          // unless the graceNotesGroupNote is chord member
-          if (! graceNotesGroupNote->getNoteBelongsToAChord ()) {
-//             generateNoteBeams (graceNotesGroupNote); // JMI fixes [ [ ... ] ] issue v0.9.70
-          }
-
-          if (graceNotesGroupIsBeamed) { // JMI fixed [ ] issue v0.9.70
-            if (elementNumber == 1) {
-              fLilypondCodeStream << "[ " << " %{ generateGraceNotesGroup() %}";
-            }
-            else if (elementNumber == graceNotesGroupElementsListSize) {
-              fLilypondCodeStream << "] ";
-            }
-
-            fLilypondCodeStream <<
-              " %{ line " << graceNotesGroupNote->getInputStartLineNumber () <<
-              ", elementNumber: " << elementNumber << " %}  "; // JMI v0.9.70
-          }
-
-          // generate the graceNotesGroupNote slurs if any,
-          // unless the graceNotesGroupNote is chord member
-          // or LilyPond will take care of that
-
-          // see gracenotes/SlurredNoteWithGraceNotes.xml for
-          // extraneous '( ' JMI
-//          if (false && // JMI
-          if (
-            ! graceNotesGroupNote->getNoteBelongsToAChord ()
-              &&
-            doGenerateASlurIfPresent
-          ) {
-            generateNoteSlursList (graceNotesGroupNote);
-          }
+          generateInputLineNumberAndOrMeasurePositionAsAComment (
+            graceNotesGroupNote);
         }
+
+        // generate things after the graceNotesGroupNote
+        generateCodeRightAfterNote (graceNotesGroupNote);
+
+        // generate the graceNotesGroupNote beams if any,
+        // unless the graceNotesGroupNote is chord member
+        if (! graceNotesGroupNote->getNoteBelongsToAChord ()) {
+//             generateNoteBeamsAfterNote (graceNotesGroupNote); // JMI fixes [ [ ... ] ] issue v0.9.70
+        }
+
+        if (graceNotesGroupIsBeamed) { // JMI fixed [ ] issue v0.9.70
+          if (elementNumber == 1) {
+            fLilypondCodeStream << "[ ";
+          }
+          else if (elementNumber == graceNotesGroupElementsListSize) {
+            fLilypondCodeStream << "] ";
+          }
+
+          fLilypondCodeStream <<
+            " %{ line " <<
+            graceNotesGroupNote->getInputStartLineNumber () <<
+            ", elementNumber: " <<
+            elementNumber <<
+            " %}  " << std::endl; // JMI v0.9.70
+        }
+
+        // generate the graceNotesGroupNote slurs if any,
+        // unless the graceNotesGroupNote is chord member
+        // or LilyPond will take care of that
+
+        // see gracenotes/SlurredNoteWithGraceNotes.xml for
+        // extraneous '( ' JMI
+//          if (false && // JMI
+        if (
+          ! graceNotesGroupNote->getNoteBelongsToAChord ()
+            &&
+          doGenerateASlurIfPresent
+        ) {
+          generateNoteSlursList (graceNotesGroupNote);
+        }
+      }
 
       else if (
         // chord?
@@ -21762,7 +21843,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
                 upLinkToGraceNotesGroup->asString ();
             }
             else {
-              ss << "[NONE]";
+              ss << "[NULL]";
             }
 
             gWaeHandler->waeTrace (
@@ -22011,106 +22092,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       elt->getNotePrintObjectKind ();
 
   if (notePrintObjectKind != fCurrentNotePrinObjectKind) {
-    switch (notePrintObjectKind) {
-      case msrPrintObjectKind::kPrintObjectYes:
-        break;
-      case msrPrintObjectKind::kPrintObjectNo:
-        {
-          // get the print notes head RGB color atom
-          S_oahColorRGBAtom
-            nonPrintNotesHeadColorRGBAtom =
-              gGlobalLpsr2lilypondOahGroup->
-                getNonPrintNotesHeadColorRGBAtom ();
-
-          // has the note color been set? // JMI v0.9.65
-          if (nonPrintNotesHeadColorRGBAtom->getSelected ()) {
-            // yes
-            const msrColorRGB&
-              theColorRGB =
-                gGlobalLpsr2lilypondOahGroup->
-                  getNonPrintNotesHeadColorRGB ();
-
-            fLilypondCodeStream <<
-              std::endl <<
-              "\\once\\override NoteHead.color = #(rgb-color " <<
-              theColorRGB.asSpaceSeparatedString (4) <<
-              ")" <<
-              std::endl;
-          }
-          else {
-            // no
-//             if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
-//               fLilypondCodeStream <<
-//                 "%{ " <<
-//                 gServiceRunData->getInputSourceName () <<
-//                 ":" <<
-//                 tempo->getInputStartLineNumber () <<
-//                 ": " <<
-//                 "ignoring 'msrPrintObjectKind::kPrintObjectNo'" <<
-//                 " %} " <<
-//                 std::endl;
-//             }
-
-            // should the noted and/or stem be hidden JMI v0.9.67
-            Bool hideNoteHeadAndOrStem (true);
-
-            switch (elt->getNoteKind ()) {
-              case msrNoteKind::kNote_UNKNOWN_:
-                break;
-
-              // in measures
-              case msrNoteKind::kNoteRegularInMeasure:
-                break;
-              case msrNoteKind::kNoteRestInMeasure:
-                hideNoteHeadAndOrStem = false;
-                break;
-              case msrNoteKind::kNoteSkipInMeasure:
-                break;
-              case msrNoteKind::kNoteUnpitchedInMeasure:
-                break;
-
-              // in chords
-              case msrNoteKind::kNoteRegularInChord:
-                break;
-
-              // in tuplets
-              case msrNoteKind::kNoteRegularInTuplet:
-                break;
-              case msrNoteKind::kNoteRestInTuplet:
-                hideNoteHeadAndOrStem = false;
-                break;
-              case msrNoteKind::kNoteUnpitchedInTuplet:
-                break;
-
-              // in grace notes groups
-              case msrNoteKind::kNoteRegularInGraceNotesGroup:
-              case msrNoteKind::kNoteSkipInGraceNotesGroup:
-                break;
-
-              // in tuplets in grace notes groups
-              case msrNoteKind::kNoteInChordInGraceNotesGroup:
-                break;
-
-             // in tuplets in grace notes groups
-             case msrNoteKind::kNoteInTupletInGraceNotesGroup:
-                break;
-
-              // in double-tremolos
-              case msrNoteKind::kNoteInDoubleTremolo:
-                break;
-
-            } // switch
-
-            if (hideNoteHeadAndOrStem) {
-              fLilypondCodeStream <<
-                "\\once\\hide NoteHead \\once\\hide Stem ";
-            }
-          }
-        }
-        break;
-    } // switch
-
-    fCurrentNotePrinObjectKind = notePrintObjectKind;
+    generateCodeForNoteHeadAndStem (elt);
   }
 
   // generate the note slashes if any
@@ -22271,6 +22253,115 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
     generateInputLineNumberAndOrMeasurePositionAsAComment (
       elt);
   }
+}
+
+void lpsr2lilypondTranslator::generateCodeForNoteHeadAndStem (
+  S_msrNote note)
+{
+  msrPrintObjectKind
+    notePrintObjectKind =
+      note->getNotePrintObjectKind ();
+
+  switch (notePrintObjectKind) {
+    case msrPrintObjectKind::kPrintObjectYes:
+      break;
+    case msrPrintObjectKind::kPrintObjectNo:
+      {
+        // get the print notes head RGB color atom
+        S_oahColorRGBAtom
+          nonPrintNotesHeadColorRGBAtom =
+            gGlobalLpsr2lilypondOahGroup->
+              getNonPrintNotesHeadColorRGBAtom ();
+
+        // has the note color been set? // JMI v0.9.65
+        if (nonPrintNotesHeadColorRGBAtom->getSelected ()) {
+          // yes
+          const msrColorRGB&
+            theColorRGB =
+              gGlobalLpsr2lilypondOahGroup->
+                getNonPrintNotesHeadColorRGB ();
+
+          fLilypondCodeStream <<
+            std::endl <<
+            "\\once\\override NoteHead.color = #(rgb-color " <<
+            theColorRGB.asSpaceSeparatedString (4) <<
+            ")" <<
+            std::endl;
+        }
+        else {
+          // no
+//             if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+//               fLilypondCodeStream <<
+//                 "%{ " <<
+//                 gServiceRunData->getInputSourceName () <<
+//                 ":" <<
+//                 tempo->getInputStartLineNumber () <<
+//                 ": " <<
+//                 "ignoring 'msrPrintObjectKind::kPrintObjectNo'" <<
+//                 " %} " <<
+//                 std::endl;
+//             }
+
+          // should the noted and/or stem be hidden JMI v0.9.67
+          Bool hideNoteHeadAndOrStem (true);
+
+          switch (note->getNoteKind ()) {
+            case msrNoteKind::kNote_UNKNOWN_:
+              break;
+
+            // in measures
+            case msrNoteKind::kNoteRegularInMeasure:
+              break;
+            case msrNoteKind::kNoteRestInMeasure:
+              hideNoteHeadAndOrStem = false;
+              break;
+            case msrNoteKind::kNoteSkipInMeasure:
+              break;
+            case msrNoteKind::kNoteUnpitchedInMeasure:
+              break;
+
+            // in chords
+            case msrNoteKind::kNoteRegularInChord:
+              break;
+
+            // in tuplets
+            case msrNoteKind::kNoteRegularInTuplet:
+              break;
+            case msrNoteKind::kNoteRestInTuplet:
+              hideNoteHeadAndOrStem = false;
+              break;
+            case msrNoteKind::kNoteUnpitchedInTuplet:
+              break;
+
+            // in grace notes groups
+            case msrNoteKind::kNoteRegularInGraceNotesGroup:
+            case msrNoteKind::kNoteSkipInGraceNotesGroup:
+              break;
+
+            // in tuplets in grace notes groups
+            case msrNoteKind::kNoteInChordInGraceNotesGroup:
+              break;
+
+           // in tuplets in grace notes groups
+           case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+              break;
+
+            // in double-tremolos
+            case msrNoteKind::kNoteInDoubleTremolo:
+              break;
+
+          } // switch
+
+          if (hideNoteHeadAndOrStem) {
+            fLilypondCodeStream <<
+              "\\once\\hide NoteHead \\once\\hide Stem ";
+          }
+        }
+      }
+      break;
+  } // switch
+
+  fCurrentNotePrinObjectKind = notePrintObjectKind;
 }
 
 void lpsr2lilypondTranslator::generateNoteScordaturasList (
@@ -22826,6 +22917,340 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsListWithStrings (
   }
 }
 
+void lpsr2lilypondTranslator::generateCodeForTechnicals (
+  const std::list <S_msrTechnical>& noteTechnicalsList)
+{
+  for (S_msrTechnical technical : noteTechnicalsList) {
+    fLilypondCodeStream <<
+      technicalAsLilypondString (technical);
+
+    switch (technical->getTechnicalPlacementKind ()) {
+      case msrPlacementKind::kPlacement_UNKNOWN_:
+        break;
+      case msrPlacementKind::kPlacementAbove:
+        fLilypondCodeStream << "^";
+        break;
+      case msrPlacementKind::kPlacementBelow:
+        fLilypondCodeStream << "_";
+        break;
+    } // switch
+
+    fLilypondCodeStream << ' ';
+  } // for
+}
+
+void lpsr2lilypondTranslator::generateCodeForTechnicalsWithInteger (
+  const std::list <S_msrTechnicalWithInteger>&
+    technicalWithIntegersList)
+{
+  std::list <S_msrTechnicalWithInteger>::const_iterator i;
+  for (S_msrTechnicalWithInteger technicalWithInteger : technicalWithIntegersList) {
+    fLilypondCodeStream <<
+      technicalWithIntegerAsLilypondString (
+        technicalWithInteger);
+
+    switch (technicalWithInteger->getTechnicalWithIntegerPlacementKind ()) {
+      case msrPlacementKind::kPlacement_UNKNOWN_:
+        break;
+      case msrPlacementKind::kPlacementAbove:
+        fLilypondCodeStream << "^";
+        break;
+      case msrPlacementKind::kPlacementBelow:
+        fLilypondCodeStream << "_";
+        break;
+    } // switch
+
+    fLilypondCodeStream << ' ';
+  } // for
+}
+
+void lpsr2lilypondTranslator::generateCodeForTechnicalsWithFloat (
+  const std::list <S_msrTechnicalWithFloat>&
+    technicalWithFloatsList)
+{
+  for (S_msrTechnicalWithFloat technicalWithFloat : technicalWithFloatsList) {
+    fLilypondCodeStream <<
+      technicalWithFloatAsLilypondString (
+        technicalWithFloat);
+
+    switch (technicalWithFloat->getTechnicalWithFloatPlacementKind ()) {
+      case msrPlacementKind::kPlacement_UNKNOWN_:
+        break;
+      case msrPlacementKind::kPlacementAbove:
+        fLilypondCodeStream << "^";
+        break;
+      case msrPlacementKind::kPlacementBelow:
+        fLilypondCodeStream << "_";
+        break;
+    } // switch
+
+    fLilypondCodeStream << ' ';
+  } // for
+}
+
+void lpsr2lilypondTranslator::generateCodeForTechnicalsWithStringsList (
+  const std::list <S_msrTechnicalWithString>&
+    technicalWithStringsList)
+{
+  for (S_msrTechnicalWithString technicalWithString : technicalWithStringsList) {
+    fLilypondCodeStream <<
+      technicalWithStringAsLilypondString (technicalWithString);
+
+    switch (technicalWithString->getTechnicalWithStringPlacementKind ()) {
+      case msrPlacementKind::kPlacement_UNKNOWN_:
+        break;
+      case msrPlacementKind::kPlacementAbove:
+        fLilypondCodeStream << "^";
+        break;
+      case msrPlacementKind::kPlacementBelow:
+        fLilypondCodeStream << "_";
+        break;
+    } // switch
+
+    fLilypondCodeStream << ' ';
+  } // for
+}
+
+void lpsr2lilypondTranslator::generateCodeForDynamics (
+  const std::list <S_msrDynamic>&
+    dynamicsList)
+{
+  for (S_msrDynamic dynamic : dynamicsList) {
+    switch (dynamic->getDynamicPlacementKind ()) {
+      case msrPlacementKind::kPlacement_UNKNOWN_:
+ // JMI       fLilypondCodeStream << "-3";
+        break;
+      case msrPlacementKind::kPlacementAbove:
+        fLilypondCodeStream << "^";
+        break;
+      case msrPlacementKind::kPlacementBelow:
+        // this is done by LilyPond by default
+        break;
+    } // switch
+
+    fLilypondCodeStream <<
+      dynamicAsLilypondString (dynamic) << ' ';
+  } // for
+}
+
+void lpsr2lilypondTranslator::generateCodeForOtherDynamics (
+  const std::list <S_msrOtherDynamic>&
+    otherDynamicsList)
+{
+  for (S_msrOtherDynamic otherDynamic : otherDynamicsList) {
+    switch (otherDynamic->getOtherDynamicPlacementKind ()) {
+      case msrPlacementKind::kPlacement_UNKNOWN_:
+        fLilypondCodeStream << "-";
+        break;
+      case msrPlacementKind::kPlacementAbove:
+        fLilypondCodeStream << "^";
+        break;
+      case msrPlacementKind::kPlacementBelow:
+        // this is done by LilyPond by default
+        break;
+    } // switch
+
+    fLilypondCodeStream <<
+      "\\otherDynamic \"" <<
+      otherDynamic->getOtherDynamicsString () <<
+      "\" ";
+  } // for
+}
+
+void lpsr2lilypondTranslator::generateCodeForLigatures (
+  const std::list <S_msrLigature>&
+    ligaruresList)
+{
+  for (S_msrLigature ligature : ligaruresList) {
+    switch (ligature->getLigatureKind ()) {
+      case msrLigatureKind::kLigatureNone:
+        break;
+      case msrLigatureKind::kLigatureStart:
+        fLilypondCodeStream << cLilypondLigatureOpener; // JMI v0.9.70
+        break;
+      case msrLigatureKind::kLigatureContinue:
+        break;
+      case msrLigatureKind::kLigatureStop:
+        fLilypondCodeStream << cLilypondLigatureCloser;
+        break;
+    } // switch
+  } // for
+}
+
+void lpsr2lilypondTranslator::generateCodeForWedges (
+  const std::list <S_msrWedge>&
+    wedgesList)
+{
+  for (S_msrWedge wedge : wedgesList) {
+    switch (wedge->getWedgeKind ()) {
+      case msrWedgeKind::kWedgeKindNone:
+        break;
+
+      case msrWedgeKind::kWedgeCrescendo:
+        switch (wedge->getWedgePlacementKind ()) {
+          case msrPlacementKind::kPlacement_UNKNOWN_:
+            break;
+          case msrPlacementKind::kPlacementAbove:
+            fLilypondCodeStream <<
+              "^";
+            break;
+          case msrPlacementKind::kPlacementBelow:
+            fLilypondCodeStream <<
+              "_";
+            break;
+          } // switch
+        fLilypondCodeStream <<
+          cLilypondHairPinsCrescendo;
+        break;
+
+      case msrWedgeKind::kWedgeDecrescendo:
+        switch (wedge->getWedgePlacementKind ()) {
+          case msrPlacementKind::kPlacement_UNKNOWN_:
+            break;
+          case msrPlacementKind::kPlacementAbove:
+            fLilypondCodeStream <<
+              "^";
+            break;
+          case msrPlacementKind::kPlacementBelow:
+            fLilypondCodeStream <<
+              "_";
+            break;
+          } // switch
+        fLilypondCodeStream <<
+          cLilypondHairPinsDecrescendo;
+        break;
+
+      case msrWedgeKind::kWedgeStop:
+        fLilypondCodeStream <<
+          cLilypondHairPinsStop;
+        break;
+    } // switch
+  } // for
+}
+
+void lpsr2lilypondTranslator:: generateCodeForArticulations (
+  const S_msrNote note)
+{
+  const std::list <S_msrArticulation>&
+    articulationsList =
+      note->getNoteArticulationsList ();
+
+  for (S_msrArticulation articulation : articulationsList ) {
+    switch (articulation->getArticulationKind ()) {
+      case msrArticulationKind::kArticulationFermata: // handle this better JMI
+        if (
+          // fermata?
+          S_msrFermata
+            fermata =
+              dynamic_cast<msrFermata*>(&(*articulation))
+          ) {
+          switch (fermata->getFermataTypeKind ()) {
+            case msrArticulationFermataType::kArticulationFermataTypeNone:
+              // no placement needed
+              break;
+            case msrArticulationFermataType::kArticulationFermataTypeUpright:
+              // no placement needed
+              break;
+            case msrArticulationFermataType::kArticulationFermataTypeInverted:
+              fLilypondCodeStream << "_";
+              break;
+          } // switch
+
+          switch (fermata->getFermataShapeKind ()) {
+            case msrFermataShapeKind::kArticulationFermataNormal:
+              if (
+                note->getNoteOccupiesAFullMeasure ()
+                  &&
+                note->fetchNoteIsARest ()
+              ) {
+//                     fLilypondCodeStream << "\\fermataMarkup ";
+                fLilypondCodeStream << "\\fermata "; // v0.9.63, since LilyPond 2.23
+              }
+              else {
+                fLilypondCodeStream << "\\fermata ";
+              }
+              break;
+            case msrFermataShapeKind::kArticulationFermataAngled:
+              fLilypondCodeStream << "\\shortfermata ";
+              break;
+            case msrFermataShapeKind::kArticulationFermataSquare:
+              fLilypondCodeStream << "\\longfermata ";
+              break;
+          } // switch
+        }
+        else {
+          std::stringstream ss;
+
+          ss <<
+            "note articulation '" <<
+            articulation->asString () <<
+            "' has 'fermata' kind, but is not of type S_msrFermata" <<
+            ", line " << articulation->getInputStartLineNumber ();
+
+          lpsr2lilypondInternalError (
+            gServiceRunData->getInputSourceName (),
+            articulation->getInputStartLineNumber (),
+            __FILE__, __LINE__,
+            ss.str ());
+        }
+        break;
+
+      default:
+        generateNoteArticulation (articulation);
+        fLilypondCodeStream <<
+          ' ';
+    } // switch
+  } // for
+}
+
+void lpsr2lilypondTranslator::generateCodeForGlissandos (
+  const std::list <S_msrGlissando>&
+    glissandosList)
+{
+  for (S_msrGlissando glissando : glissandosList) {
+    switch (glissando->getGlissandoTypeKind ()) {
+      case msrGlissandoTypeKind::kGlissandoTypeNone:
+        break;
+
+      case msrGlissandoTypeKind::kGlissandoTypeStart:
+        // generate the glissando itself
+        fLilypondCodeStream <<
+          "\\glissando ";
+
+        if (glissando->getGlissandoTextValue().size ()) {
+          fLilypondCodeStream <<
+          "\\glissandoTextOff ";
+        }
+        break;
+
+      case msrGlissandoTypeKind::kGlissandoTypeStop:
+        break;
+    } // switch
+  } // for
+}
+
+void lpsr2lilypondTranslator::generateCodeForNoteSlides (
+  const std::list <S_msrSlide>&
+    slidesList)
+{
+  for (S_msrSlide slide : slidesList) {
+    switch (slide->getSlideTypeKind ()) {
+      case msrSlideTypeKind::kSlideTypeNone:
+        break;
+
+      case msrSlideTypeKind::kSlideTypeStart:
+        // generate the glissando itself
+        fLilypondCodeStream <<
+          "\\glissando " <<
+          "\\glissandoTextOff ";
+        break;
+
+      case msrSlideTypeKind::kSlideTypeStop:
+        break;
+    } // switch
+  } // for
+}
+
 void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -23019,109 +23444,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     }
   }
 
-/* TOO EARLY FOR ALL OF THEM??? JMI
-  // generate the note articulations if any
-  if (! fOnGoingChord) {
-    const std::list <S_msrArticulation>&
-      noteArticulationsList =
-        elt->getNoteArticulationsList ();
-
-    if (noteArticulationsList.size ()) {
-      std::list <S_msrArticulation>::const_iterator i;
-      for (
-        i = noteArticulationsList.begin ();
-        i != noteArticulationsList.end ();
-        ++i
-      ) {
-        S_msrArticulation articulation = (*i);
-        switch (articulation->getArticulationKind ()) {
-          case msrArticulationKind::kArticulationFermata: // handle this better JMI
-            if (
-              // fermata?
-              S_msrFermata
-                fermata =
-                  dynamic_cast<msrFermata*>(&(*articulation))
-              ) {
-              switch (fermata->getFermataTypeKind ()) {
-                case msrArticulationFermataType::kArticulationFermataTypeNone:
-                  // no placement needed
-                  break;
-                case msrArticulationFermataType::kArticulationFermataTypeUpright:
-                  // no placement needed
-                  break;
-                case msrArticulationFermataType::kArticulationFermataTypeInverted:
-                  fLilypondCodeStream << "_";
-                  break;
-              } // switch
-
-              switch (fermata->getFermataShapeKind ()) {
-                case msrFermataShapeKind::kArticulationFermataNormal:
-                  fLilypondCodeStream << "\\fermata ";
-                  break;
-                case msrFermataShapeKind::kArticulationFermataAngled:
-                  fLilypondCodeStream << "\\shortfermata ";
-                  break;
-                case msrFermataShapeKind::kArticulationFermataSquare:
-                  fLilypondCodeStream << "\\longfermata ";
-                  break;
-              } // switch
-            }
-            else {
-              std::stringstream ss;
-
-              ss <<
-                "note articulation '" <<
-                articulation->asString () <<
-                "' has 'fermata' kind, but is not of type S_msrFermata" <<
-                ", line " << articulation->getInputStartLineNumber ();
-
-              lpsr2lilypondInternalError (
-                gServiceRunData->getInputSourceName (),
-                articulation->getInputStartLineNumber (),
-                __FILE__, __LINE__,
-                ss.str ());
-            }
-            break;
-
-          default:
-            generateNoteArticulation ((*i));
-            fLilypondCodeStream <<
-              ' ';
-        } // switch
-      } // for
-    }
-  }
-  */
-
   // generate the note technicals if any
   const std::list <S_msrTechnical>&
     noteTechnicalsList =
       elt->getNoteTechnicalsList ();
 
   if (noteTechnicalsList.size ()) {
-    std::list <S_msrTechnical>::const_iterator i;
-    for (
-      i = noteTechnicalsList.begin ();
-      i != noteTechnicalsList.end ();
-      ++i
-    ) {
-
-      fLilypondCodeStream <<
-        technicalAsLilypondString ((*i));
-
-      switch ((*i)->getTechnicalPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN_:
-          break;
-        case msrPlacementKind::kPlacementAbove:
-          fLilypondCodeStream << "^";
-          break;
-        case msrPlacementKind::kPlacementBelow:
-          fLilypondCodeStream << "_";
-          break;
-      } // switch
-
-      fLilypondCodeStream << ' ';
-    } // for
+    generateCodeForTechnicals (
+      noteTechnicalsList);
   }
 
   // generate the note technicals with integer if any,
@@ -23138,33 +23468,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
             elt->getNoteTechnicalWithIntegersList ();
 
         if (noteTechnicalWithIntegersList.size ()) {
-          std::list <S_msrTechnicalWithInteger>::const_iterator i;
-          for (
-            i = noteTechnicalWithIntegersList.begin ();
-            i != noteTechnicalWithIntegersList.end ();
-            ++i
-          ) {
-
-            S_msrTechnicalWithInteger
-                technicalWithInteger = (*i);
-
-            fLilypondCodeStream <<
-              technicalWithIntegerAsLilypondString (
-                technicalWithInteger);
-
-            switch (technicalWithInteger->getTechnicalWithIntegerPlacementKind ()) {
-              case msrPlacementKind::kPlacement_UNKNOWN_:
-                break;
-              case msrPlacementKind::kPlacementAbove:
-                fLilypondCodeStream << "^";
-                break;
-              case msrPlacementKind::kPlacementBelow:
-                fLilypondCodeStream << "_";
-                break;
-            } // switch
-
-            fLilypondCodeStream << ' ';
-          } // for
+          generateCodeForTechnicalsWithInteger (
+            noteTechnicalWithIntegersList);
         }
       }
   } // switch
@@ -23183,33 +23488,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
             elt->getNoteTechnicalWithFloatsList ();
 
         if (noteTechnicalWithFloatsList.size ()) {
-          std::list <S_msrTechnicalWithFloat>::const_iterator i;
-          for (
-            i = noteTechnicalWithFloatsList.begin ();
-            i != noteTechnicalWithFloatsList.end ();
-            ++i
-          ) {
-
-            S_msrTechnicalWithFloat
-                technicalWithFloat = (*i);
-
-            fLilypondCodeStream <<
-              technicalWithFloatAsLilypondString (
-                technicalWithFloat);
-
-            switch (technicalWithFloat->getTechnicalWithFloatPlacementKind ()) {
-              case msrPlacementKind::kPlacement_UNKNOWN_:
-                break;
-              case msrPlacementKind::kPlacementAbove:
-                fLilypondCodeStream << "^";
-                break;
-              case msrPlacementKind::kPlacementBelow:
-                fLilypondCodeStream << "_";
-                break;
-            } // switch
-
-            fLilypondCodeStream << ' ';
-          } // for
+          generateCodeForTechnicalsWithFloat (
+            noteTechnicalWithFloatsList);
         }
       }
   } // switch
@@ -23220,29 +23500,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       elt->getNoteTechnicalWithStringsList ();
 
   if (noteTechnicalWithStringsList.size ()) {
-    std::list <S_msrTechnicalWithString>::const_iterator i;
-    for (
-      i = noteTechnicalWithStringsList.begin ();
-      i != noteTechnicalWithStringsList.end ();
-      ++i
-    ) {
-
-      fLilypondCodeStream <<
-        technicalWithStringAsLilypondString ((*i));
-
-      switch ((*i)->getTechnicalWithStringPlacementKind ()) {
-        case msrPlacementKind::kPlacement_UNKNOWN_:
-          break;
-        case msrPlacementKind::kPlacementAbove:
-          fLilypondCodeStream << "^";
-          break;
-        case msrPlacementKind::kPlacementBelow:
-          fLilypondCodeStream << "_";
-          break;
-      } // switch
-
-      fLilypondCodeStream << ' ';
-    } // for
+    generateCodeForTechnicalsWithStringsList (
+      noteTechnicalWithStringsList);
   }
 
   // generate the note ornaments if any
@@ -23271,30 +23530,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         elt->getNoteDynamicsList ();
 
     if (noteDynamicsList.size ()) {
-      std::list <S_msrDynamic>::const_iterator i;
-      for (
-        i = noteDynamicsList.begin ();
-        i != noteDynamicsList.end ();
-        ++i
-      ) {
-        S_msrDynamic
-          dynamic = (*i);
-
-        switch (dynamic->getDynamicPlacementKind ()) {
-          case msrPlacementKind::kPlacement_UNKNOWN_:
-     // JMI       fLilypondCodeStream << "-3";
-            break;
-          case msrPlacementKind::kPlacementAbove:
-            fLilypondCodeStream << "^";
-            break;
-          case msrPlacementKind::kPlacementBelow:
-            // this is done by LilyPond by default
-            break;
-        } // switch
-
-        fLilypondCodeStream <<
-          dynamicAsLilypondString (dynamic) << ' ';
-      } // for
+      generateCodeForDynamics (
+        noteDynamicsList);
     }
   }
 
@@ -23305,40 +23542,19 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         elt->getNoteOtherDynamicsList ();
 
     if (noteOtherDynamicsList.size ()) {
-      std::list <S_msrOtherDynamic>::const_iterator i;
-      for (
-        i = noteOtherDynamicsList.begin ();
-        i != noteOtherDynamicsList.end ();
-        ++i
-      ) {
-        S_msrOtherDynamic
-          otherDynamic = (*i);
-
-        switch (otherDynamic->getOtherDynamicPlacementKind ()) {
-          case msrPlacementKind::kPlacement_UNKNOWN_:
-            fLilypondCodeStream << "-";
-            break;
-          case msrPlacementKind::kPlacementAbove:
-            fLilypondCodeStream << "^";
-            break;
-          case msrPlacementKind::kPlacementBelow:
-            // this is done by LilyPond by default
-            break;
-        } // switch
-
-        fLilypondCodeStream <<
-          "\\otherDynamic \"" <<
-          otherDynamic->getOtherDynamicsString () <<
-          "\" ";
-      } // for
+      generateCodeForOtherDynamics (
+        noteOtherDynamicsList);
     }
   }
 
   // generate the note beams if any,
-  // unless the note is chord member
+  // unless the note is a grace group or chord member
   Bool doGenerateBeams (true);
 
-  if (elt->getNoteBelongsToAChord ()) {
+  if (elt->getNoteBelongsToAChord ()) { // JMI v0.9.72
+    doGenerateBeams = false;
+  }
+  else if (elt->getNoteIsAGraceNote ()) { // JMI v0.9.72
     doGenerateBeams = false;
   }
   else {
@@ -23352,14 +23568,15 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 
     else {
       doGenerateBeams =
-        gGlobalLpsr2lilypondOahGroup->getGenerateNoteBeams ();
-          // JMI fixes superflous[ [ ... ] ] issue, asked by Lars Opfermann v0.9.71
+        gGlobalLpsr2lilypondOahGroup->getgenerateNoteBeamsAfterNote ();
+          // JMI fixes superflous[ [ ... ] ] issue,
+          // asked by Lars Opfermann upon v0.9.71
           // but then, when should they be generated ??? JMI
     }
   }
 
   if (doGenerateBeams) {
-//     generateNoteBeams (elt);
+    generateNoteBeamsAfterNote (elt);
   }
 
   // generate the note ligatures if any
@@ -23368,25 +23585,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       elt->getNoteLigaturesList ();
 
   if (noteLigaturesList.size ()) {
-    std::list <S_msrLigature>::const_iterator i;
-    for (
-      i = noteLigaturesList.begin ();
-      i != noteLigaturesList.end ();
-      ++i
-    ) {
-      switch ((*i)->getLigatureKind ()) {
-        case msrLigatureKind::kLigatureNone:
-          break;
-        case msrLigatureKind::kLigatureStart:
-          fLilypondCodeStream << cLilypondLigatureOpener; // JMI v0.9.70
-          break;
-        case msrLigatureKind::kLigatureContinue:
-          break;
-        case msrLigatureKind::kLigatureStop:
-          fLilypondCodeStream << cLilypondLigatureCloser;
-          break;
-      } // switch
-    } // for
+    generateCodeForLigatures (
+      noteLigaturesList);
   }
 
   // generate the note wedges if any
@@ -23395,58 +23595,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       elt->getNoteWedgesList ();
 
   if (noteWedgesList.size ()) {
-    std::list <S_msrWedge>::const_iterator i;
-    for (
-      i = noteWedgesList.begin ();
-      i != noteWedgesList.end ();
-      ++i
-    ) {
-      S_msrWedge wedge = (*i);
-
-      switch (wedge->getWedgeKind ()) {
-        case msrWedgeKind::kWedgeKindNone:
-          break;
-
-        case msrWedgeKind::kWedgeCrescendo:
-          switch (wedge->getWedgePlacementKind ()) {
-            case msrPlacementKind::kPlacement_UNKNOWN_:
-              break;
-            case msrPlacementKind::kPlacementAbove:
-              fLilypondCodeStream <<
-                "^";
-              break;
-            case msrPlacementKind::kPlacementBelow:
-              fLilypondCodeStream <<
-                "_";
-              break;
-            } // switch
-          fLilypondCodeStream <<
-            cLilypondHairPinsCrescendo;
-          break;
-
-        case msrWedgeKind::kWedgeDecrescendo:
-          switch (wedge->getWedgePlacementKind ()) {
-            case msrPlacementKind::kPlacement_UNKNOWN_:
-              break;
-            case msrPlacementKind::kPlacementAbove:
-              fLilypondCodeStream <<
-                "^";
-              break;
-            case msrPlacementKind::kPlacementBelow:
-              fLilypondCodeStream <<
-                "_";
-              break;
-            } // switch
-          fLilypondCodeStream <<
-            cLilypondHairPinsDecrescendo;
-          break;
-
-        case msrWedgeKind::kWedgeStop:
-          fLilypondCodeStream <<
-            cLilypondHairPinsStop;
-          break;
-      } // switch
-    } // for
+    generateCodeForWedges (
+      noteWedgesList);
   }
 
   // generate the note slurs if any,
@@ -23469,79 +23619,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         elt->getNoteArticulationsList ();
 
     if (noteArticulationsList.size ()) {
-      std::list <S_msrArticulation>::const_iterator i;
-      for (
-        i = noteArticulationsList.begin ();
-        i != noteArticulationsList.end ();
-        ++i
-      ) {
-        S_msrArticulation articulation = (*i);
-
-        switch (articulation->getArticulationKind ()) {
-          case msrArticulationKind::kArticulationFermata: // handle this better JMI
-            if (
-              // fermata?
-              S_msrFermata
-                fermata =
-                  dynamic_cast<msrFermata*>(&(*articulation))
-              ) {
-              switch (fermata->getFermataTypeKind ()) {
-                case msrArticulationFermataType::kArticulationFermataTypeNone:
-                  // no placement needed
-                  break;
-                case msrArticulationFermataType::kArticulationFermataTypeUpright:
-                  // no placement needed
-                  break;
-                case msrArticulationFermataType::kArticulationFermataTypeInverted:
-                  fLilypondCodeStream << "_";
-                  break;
-              } // switch
-
-              switch (fermata->getFermataShapeKind ()) {
-                case msrFermataShapeKind::kArticulationFermataNormal:
-                  if (
-                    elt->getNoteOccupiesAFullMeasure ()
-                      &&
-                    elt->fetchNoteIsARest ()
-                  ) {
-//                     fLilypondCodeStream << "\\fermataMarkup ";
-                    fLilypondCodeStream << "\\fermata "; // v0.9.63, since LilyPond 2.23
-                  }
-                  else {
-                    fLilypondCodeStream << "\\fermata ";
-                  }
-                  break;
-                case msrFermataShapeKind::kArticulationFermataAngled:
-                  fLilypondCodeStream << "\\shortfermata ";
-                  break;
-                case msrFermataShapeKind::kArticulationFermataSquare:
-                  fLilypondCodeStream << "\\longfermata ";
-                  break;
-              } // switch
-            }
-            else {
-              std::stringstream ss;
-
-              ss <<
-                "note articulation '" <<
-                articulation->asString () <<
-                "' has 'fermata' kind, but is not of type S_msrFermata" <<
-                ", line " << articulation->getInputStartLineNumber ();
-
-              lpsr2lilypondInternalError (
-                gServiceRunData->getInputSourceName (),
-                articulation->getInputStartLineNumber (),
-                __FILE__, __LINE__,
-                ss.str ());
-            }
-            break;
-
-          default:
-            generateNoteArticulation ((*i));
-            fLilypondCodeStream <<
-              ' ';
-        } // switch
-      } // for
+      generateCodeForArticulations (
+        elt);
     }
   }
 
@@ -23551,26 +23630,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       elt->getNoteGlissandosList ();
 
   if (noteGlissandosList.size ()) {
-    for (S_msrGlissando glissando : noteGlissandosList) {
-      switch (glissando->getGlissandoTypeKind ()) {
-        case msrGlissandoTypeKind::kGlissandoTypeNone:
-          break;
-
-        case msrGlissandoTypeKind::kGlissandoTypeStart:
-          // generate the glissando itself
-          fLilypondCodeStream <<
-            "\\glissando ";
-
-          if (glissando->getGlissandoTextValue().size ()) {
-            fLilypondCodeStream <<
-            "\\glissandoTextOff ";
-          }
-          break;
-
-        case msrGlissandoTypeKind::kGlissandoTypeStop:
-          break;
-      } // switch
-    } // for
+    generateCodeForGlissandos (
+      noteGlissandosList);
   }
 
   // generate the note slides if any, implemented as glissandos
@@ -23579,29 +23640,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       elt->getNoteSlidesList ();
 
   if (noteSlidesList.size ()) {
-    std::list <S_msrSlide>::const_iterator i;
-    for (
-      i = noteSlidesList.begin ();
-      i != noteSlidesList.end ();
-      ++i
-    ) {
-      S_msrSlide slide = (*i);
-
-      switch (slide->getSlideTypeKind ()) {
-        case msrSlideTypeKind::kSlideTypeNone:
-          break;
-
-        case msrSlideTypeKind::kSlideTypeStart:
-          // generate the glissando itself
-          fLilypondCodeStream <<
-            "\\glissando " <<
-            "\\glissandoTextOff ";
-          break;
-
-        case msrSlideTypeKind::kSlideTypeStop:
-          break;
-      } // switch
-    } // for
+    generateCodeForNoteSlides (
+      noteSlidesList);
   }
 
   // the note spanners if any are handled in visitStart (S_msrNote&)
@@ -23965,7 +24005,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBeam& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // don't generate '[ ... ] here, this will be done in generateNoteBeams()
+  // don't generate '[ ... ] here, this will be done in generateNoteBeamsAfterNote()
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
@@ -24001,7 +24041,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // don't generate '[ ... ] here, this will be done in generateNoteBeams()
+  // don't generate '[ ... ] here, this will be done in generateNoteBeamsAfterNote()
 }
 
 //________________________________________________________________________
@@ -24133,7 +24173,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
   }
   else {
     ss <<
-      "[NONE]";
+      "[NULL]";
   }
 
   gWaeHandler->waeTrace (
@@ -24506,7 +24546,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   }
   else {
     ss <<
-      "[NONE]";
+      "[NULL]";
   }
 
   gWaeHandler->waeTrace (
@@ -24841,40 +24881,31 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
     } // for
   }
 
-  // generate the chord beams links if any
-  const std::list <S_msrChordBeamLink>&
-    chordBeamLinksList =
-      chord->getChordBeamLinksList ();
+  // generate the chord beams if any
+  const std::list <S_msrBeam>&
+    chordBeamsList =
+      chord->getChordBeamsList ();
 
-  if (chordBeamLinksList.size ()) {
-    std::list <S_msrChordBeamLink>::const_iterator i;
-    for (
-      i = chordBeamLinksList.begin ();
-      i != chordBeamLinksList.end ();
-      ++i
-    ) {
-      S_msrChordBeamLink chordBeamLink = (*i);
-
-      S_msrBeam originalBeam = chordBeamLink->getOriginalBeam ();
-
-      // LilyPond will take care of multiple beams automatically,
-      // so we need only generate code for the first number (level)
-      switch (originalBeam->getBeamKind ()) {
+  if (chordBeamsList.size ()) {
+    // LilyPond will take care of multiple beams automatically,
+    // so we need only generate code for the first number (level)
+    for ( S_msrBeam chordBeam : chordBeamsList) {
+      switch (chordBeam->getBeamKind ()) {
 
         case msrBeamKind::kBeamBegin:
-          if (originalBeam->getBeamNumber () == 1)
+          if (chordBeam->getBeamNumber () == 1)
             fLilypondCodeStream << "[ " << " %{ generateCodeRightAfterChordContents() %}";
 
-#ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
-              if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
-                fLilypondCodeStream << "%{ kBeamBegin 2 %}  ";
-              }
-#endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
+// #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
+//               if (gWaeOahGroup->getMaintainanceRun ()) { // MAINTAINANCE_RUN
+//                 fLilypondCodeStream << "%{ kBeamBegin 2 %}  ";
+//               }
+// #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
             if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
               // generate the input line number as a comment
               fLilypondCodeStream <<
-                " %{ line " << originalBeam->getInputStartLineNumber () << " %}  ";
+              " %{ line " << chordBeam->getInputStartLineNumber () << " %}  ";
             }
           break;
 
@@ -24882,7 +24913,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
           break;
 
         case msrBeamKind::kBeamEnd:
-          if (originalBeam->getBeamNumber () == 1)
+          if (chordBeam->getBeamNumber () == 1)
             fLilypondCodeStream << "] ";
 
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
@@ -24894,17 +24925,20 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
             if (gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()) {
               // generate the input line number as a comment
               fLilypondCodeStream <<
-                " %{ line " << originalBeam->getInputStartLineNumber () << " %}  ";
+                " %{ line " << chordBeam->getInputStartLineNumber () << " %}  ";
             }
           break;
 
         case msrBeamKind::kBeamForwardHook:
+          // JMI ???
           break;
 
         case msrBeamKind::kBeamBackwardHook:
+          // JMI ???
           break;
 
         case msrBeamKind::kBeam_UNKNOWN_:
+          // JMI ???
           break;
       } // switch
     } // for
@@ -27985,3 +28019,78 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
 
 
 } // namespace
+
+
+/* TOO EARLY FOR ALL OF THEM??? JMI
+  // generate the note articulations if any
+  if (! fOnGoingChord) {
+    const std::list <S_msrArticulation>&
+      noteArticulationsList =
+        elt->getNoteArticulationsList ();
+
+    if (noteArticulationsList.size ()) {
+      std::list <S_msrArticulation>::const_iterator i;
+      for (
+        i = noteArticulationsList.begin ();
+        i != noteArticulationsList.end ();
+        ++i
+      ) {
+        S_msrArticulation articulation = (*i);
+        switch (articulation->getArticulationKind ()) {
+          case msrArticulationKind::kArticulationFermata: // handle this better JMI
+            if (
+              // fermata?
+              S_msrFermata
+                fermata =
+                  dynamic_cast<msrFermata*>(&(*articulation))
+              ) {
+              switch (fermata->getFermataTypeKind ()) {
+                case msrArticulationFermataType::kArticulationFermataTypeNone:
+                  // no placement needed
+                  break;
+                case msrArticulationFermataType::kArticulationFermataTypeUpright:
+                  // no placement needed
+                  break;
+                case msrArticulationFermataType::kArticulationFermataTypeInverted:
+                  fLilypondCodeStream << "_";
+                  break;
+              } // switch
+
+              switch (fermata->getFermataShapeKind ()) {
+                case msrFermataShapeKind::kArticulationFermataNormal:
+                  fLilypondCodeStream << "\\fermata ";
+                  break;
+                case msrFermataShapeKind::kArticulationFermataAngled:
+                  fLilypondCodeStream << "\\shortfermata ";
+                  break;
+                case msrFermataShapeKind::kArticulationFermataSquare:
+                  fLilypondCodeStream << "\\longfermata ";
+                  break;
+              } // switch
+            }
+            else {
+              std::stringstream ss;
+
+              ss <<
+                "note articulation '" <<
+                articulation->asString () <<
+                "' has 'fermata' kind, but is not of type S_msrFermata" <<
+                ", line " << articulation->getInputStartLineNumber ();
+
+              lpsr2lilypondInternalError (
+                gServiceRunData->getInputSourceName (),
+                articulation->getInputStartLineNumber (),
+                __FILE__, __LINE__,
+                ss.str ());
+            }
+            break;
+
+          default:
+            generateNoteArticulation ((*i));
+            fLilypondCodeStream <<
+              ' ';
+        } // switch
+      } // for
+    }
+  }
+  */

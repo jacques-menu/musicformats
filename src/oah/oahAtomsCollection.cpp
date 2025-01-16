@@ -689,7 +689,7 @@ void oahMacroAtom::printHelp (std::ostream& os) const
 
   if (! fMacroValueLessAtomsList.size ()) {
     os <<
-      "[NONE]" << // JMI
+      "[EMPTY]" << // JMI
       std::endl;
   }
 
@@ -5105,7 +5105,7 @@ void oahCombinedBooleansAtom::printHelp (std::ostream& os) const
 
   if (! fBooleanAtomsList.size ()) {
     os <<
-      "[NONE]" << // JMI
+      "[EMPTY]" << // JMI
       std::endl;
   }
 
@@ -5184,7 +5184,7 @@ void oahCombinedBooleansAtom::displayAtomWithVariableOptionsValues (
 
   if (! fBooleanAtomsList.size ()) {
     os <<
-      "[NONE]" << // JMI
+      "[EMPTY]" << // JMI
       std::endl;
   }
 
@@ -6760,7 +6760,7 @@ void oahFactorizedStringAtom::printHelp (std::ostream& os) const
 
   if (! fAtomNamesList.size ()) {
     os <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
   else {
@@ -7712,7 +7712,7 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -7778,7 +7778,7 @@ void oahCommonPrefixBooleansAtom::printHelp (std::ostream& os) const
     }
     else {
       os <<
-        "[NONE]" <<
+        "[EMPTY]" <<
         std::endl;
     }
   }

@@ -4706,7 +4706,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLog <<
-        "[NONE]";
+        "[NULL]";
     }
     gLog << std::endl;
 
@@ -4760,7 +4760,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       ss <<
-        "[NONE]";
+        "[NULL]";
     }
     gLog <<
        "'";
@@ -4792,7 +4792,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       ss <<
-        "[NONE]";
+        "[NULL]";
     }
     ss <<
        "'";
@@ -5019,7 +5019,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
     else {
       gLog <<
-        "[NONE]";
+        "[NULL]";
     }
     gLog << std::endl;
   }
@@ -5103,7 +5103,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
           }
           else {
             gLog <<
-              "[NONE]";
+              "[NULL]";
           }
           gLog <<
              "'";
@@ -5215,7 +5215,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLog <<
-        "[NONE]" <<
+        "[NULL]" <<
         std::endl;
     }
 
@@ -5228,7 +5228,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLog <<
-        "[NONE]" <<
+        "[NULL]" <<
         std::endl;
     }
   }

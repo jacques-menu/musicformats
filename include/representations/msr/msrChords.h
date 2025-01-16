@@ -166,9 +166,9 @@ class EXP msrChord : public msrTupletElement
                           getChordBeams () const
                               { return fChordBeams; }
                               */
-    const std::list <S_msrChordBeamLink>&
-                          getChordBeamLinksList () const
-                              { return fChordBeamLinksList; }
+    const std::list <S_msrBeam>&
+                          getChordBeamsList () const
+                              { return fChordBeamsList; }
 
     // articulations
     const std::list <S_msrArticulation>&
@@ -367,7 +367,7 @@ class EXP msrChord : public msrTupletElement
     // public services
     // ------------------------------------------------------
 
-//     // uplink to tuplet
+//     // uplink to tupletg
 //     const S_msrTuplet&    fetchChordUpLinkToTuplet () const;
 
 //     // uplink to  grace notes group
@@ -382,6 +382,89 @@ class EXP msrChord : public msrTupletElement
                             const S_msrVoice& voice);
 
     S_msrNote             fetchChordFirstNonGraceNote () const;
+
+    // some values have to be copied from one of the chord's notes
+    void                  copyNoteValuesToChord (
+                            const S_msrNote note);
+
+    // some attachments have to be copied from each chord member one to the chord
+    void                  copyNoteElementsIfAnyToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteArticulationsListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteDynamicsListToChord (
+                            const S_msrNote& note);
+    void                  copyNoteOtherDynamicsListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteWordsListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteTiesToChord (
+                            const S_msrNote& note);
+
+//    void                  copyNoteSlursListToChord (
+//                            const S_msrNote& note, S_msrChord chord);
+
+    void                  appendNoteSlursListLinksToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteLigaturesListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNotePedalsListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteSlashesListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteWedgesListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteSegnosListToChord (
+                            const S_msrNote& note);
+    void                  copyNoteDalSegnosListToChord (
+                            const S_msrNote& note);
+    void                  copyNoteCodasListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteTechnicalsListToChord (
+                            const S_msrNote& note);
+    void                  copyNoteTechnicalWithIntegersListToChord (
+                            const S_msrNote& note);
+    void                  copyNoteTechnicalWithFloatsListToChord (
+                            const S_msrNote& note);
+    void                  copyNoteTechnicalWithStringsListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteOrnamentsListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteStemToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteBeamsListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteHarmoniesToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteSpannersListToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteSingleTremoloToChord (
+                            const S_msrNote& note);
+
+    void                  copyNoteOctaveShiftToChord (
+                            const S_msrNote& note);
+
+    void                  addNoteGraceNotesGroupsLinksToChord (
+                            const S_msrNote& note);
+
+    void                  appendNoteBeamsListLinksToChord (
+                            const S_msrNote& note);
 
     // articulations
     void                  appendArticulationToChord (

@@ -780,7 +780,7 @@ void msrScore::printFull (std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": " << "[EMPTY]" <<
       std::endl;
   }
 

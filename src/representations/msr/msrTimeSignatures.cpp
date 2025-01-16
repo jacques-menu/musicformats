@@ -1403,7 +1403,7 @@ void msrTimeSignature::print (std::ostream& os) const
   }
   else {
     os <<
-      " [NONE]" <<
+      " [EMPTY]" <<
       std::endl;
   }
 

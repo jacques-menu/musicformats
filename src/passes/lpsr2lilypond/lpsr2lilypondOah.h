@@ -1688,10 +1688,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getWhiteNoteHeads () const
                               { return fWhiteNoteHeads; }
 
-    void                  setGenerateNoteBeams ()
-                              { fGenerateNoteBeams = true; }
-    Bool                  getGenerateNoteBeams () const
-                              { return fGenerateNoteBeams; }
+    void                  setgenerateNoteBeamsAfterNote ()
+                              { fgenerateNoteBeamsAfterNote = true; }
+    Bool                  getgenerateNoteBeamsAfterNote () const
+                              { return fgenerateNoteBeamsAfterNote; }
 
     void                  setGenerateCommentedOutVariables ()
                               { fGenerateCommentedOutVariables = true; }
@@ -2208,7 +2208,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fGenerateSlursDirections;
 
     Bool                  fWhiteNoteHeads;
-    Bool                  fGenerateNoteBeams;
+    Bool                  fgenerateNoteBeamsAfterNote;
 
     Bool                  fGenerateCommentedOutVariables;
                             // this is to avoid having to add them by hand

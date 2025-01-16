@@ -1100,7 +1100,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
         "'";
     }
     else {
-      gLog << "[NONE]";
+      gLog << "[NULL]";
     }
     gLog << std::endl;
   }
@@ -1465,7 +1465,7 @@ void msdlParser::parse ()
           std::endl;
       }
       else {
-        gLog << "[NONE]" << std::endl;
+        gLog << "[NULL]" << std::endl;
       }
 
       --gIndenter;

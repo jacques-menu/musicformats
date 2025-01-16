@@ -130,7 +130,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrScore& elt)
         printMeasuresSlicesVector (gLog);
     }
     else {
-      gLog << "[NONE]" << std::endl;
+      gLog << "[NULL]" << std::endl;
     }
   }
 #endif // MF_TRACE_IS_ENABLED

@@ -804,9 +804,6 @@ class EXP msr2lpsrTranslator :
 
     Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
 
-    void                      copyNoteValuesToCurrentChordClone (
-                                S_msrNote note);
-
     // tuplets
     // ------------------------------------------------------
     std::list <S_msrTuplet>   fTupletClonesStack;

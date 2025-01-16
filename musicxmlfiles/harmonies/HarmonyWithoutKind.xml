@@ -39,7 +39,7 @@
         <root>
           <root-step>C</root-step>
         </root>
-        <kind>major</kind>
+        <!--kind>major</kind-->
       </harmony>
 
       <note>

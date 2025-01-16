@@ -210,7 +210,7 @@ void lpsrContext::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << "[NONE]" <<
+    os << "[EMPTY]" <<
     std::endl;
   }
 
@@ -381,7 +381,7 @@ void lpsrChordNamesContext::print (std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": " << "[EMPTY]" <<
     std::endl;
   }
 

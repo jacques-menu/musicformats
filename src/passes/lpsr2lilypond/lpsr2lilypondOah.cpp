@@ -5375,8 +5375,8 @@ at the beginning of the LilyPond code.)",
       oahBooleanAtom::create (
         "generate-notes-beams", "gnb",
 R"(Generate notes beams.)",
-        "fGenerateNoteBeams",
-        fGenerateNoteBeams));
+        "fgenerateNoteBeamsAfterNote",
+        fgenerateNoteBeamsAfterNote));
 
   // generate commented out variables
   // --------------------------------------
@@ -5870,7 +5870,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       std::setw (valueFieldWidth) << "fPartNamesTranspositionMap" << ": ";
 
     if (! fPartNamesTranspositionMap.size ()) {
-      ss << "[NONE]";
+      ss << "[EMPTY]";
     }
     else {
       for (
@@ -6387,7 +6387,7 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   }
   else {
     os <<
-      "[NONE]";
+      "[EMPTY]";
   }
   os << std::endl;
 
@@ -6484,8 +6484,8 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       fWhiteNoteHeads <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fGenerateNoteBeams" << ": " <<
-      fGenerateNoteBeams <<
+    std::setw (valueFieldWidth) << "fgenerateNoteBeamsAfterNote" << ": " <<
+      fgenerateNoteBeamsAfterNote <<
       std::endl;
 
   --gIndenter;
@@ -7069,8 +7069,8 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
       fWhiteNoteHeads <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fGenerateNoteBeams" << ": " <<
-      fGenerateNoteBeams <<
+    std::setw (fieldWidth) << "fgenerateNoteBeamsAfterNote" << ": " <<
+      fgenerateNoteBeamsAfterNote <<
       std::endl <<
 
     std::setw (fieldWidth) << "fGenerateCommentedOutVariables" << ": " <<

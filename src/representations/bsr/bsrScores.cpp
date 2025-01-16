@@ -205,7 +205,7 @@ void bsrScore::printFull (std::ostream& os) const
     }
     else {
       os <<
-        "TranscriptionNotes: [NONE]" <<
+        "TranscriptionNotes: [EMPTY]" <<
         std::endl;
     }
   }
@@ -249,7 +249,7 @@ void bsrScore::printFull (std::ostream& os) const
     else {
       os <<
         ": " <<
-         "[NONE]" <<
+         "[EMPTY]" <<
       std::endl;
     }
   }
@@ -279,7 +279,7 @@ void bsrScore::print (std::ostream& os) const
     }
     else {
       os <<
-        "TranscriptionNotes: [NONE]" <<
+        "TranscriptionNotes: [NULL]" <<
         std::endl;
     }
   }

@@ -715,7 +715,7 @@ void msrBook::printFull (std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": " << "[EMPTY]" <<
       std::endl;
   }
 
@@ -911,7 +911,7 @@ void msrBook::print (std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": " << "[EMPTY]" <<
       std::endl;
   }
 */

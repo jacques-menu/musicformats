@@ -767,6 +767,1227 @@ S_msrNote msrChord::fetchChordFirstNonGraceNote () const
   return result;
 }
 
+void msrChord::copyNoteValuesToChord (
+  S_msrNote note)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
+    gLog <<
+      "===> copyNoteValuesToChord(), note: " <<
+      note <<
+      std::endl << std::endl;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Copying values from note " <<
+      note->asString () <<
+      " to current chord " <<
+      asString () <<
+      ", line " << note->getInputStartLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // mark note as being the first one in the chord
+  note->
+    setNoteIsAChordsFirstMemberNote ();
+
+  // whole notes
+	setMeasureElementSoundingWholeNotes (
+		note->
+			getMeasureElementSoundingWholeNotes (),
+		"copyNoteValuesToChord()");
+
+	setChordDisplayWholeNotes (
+		note->
+			getNoteDisplayWholeNotes ());
+
+  // graphic duration
+	setChordGraphicNotesDurationKind (
+		note->
+			getNoteGraphicNotesDurationKind ());
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteElementsIfAnyToChord (
+  const S_msrNote& note)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    note != nullptr, // JMI v0.9.70
+    "chord is null");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  // copy note's articulations if any to the chord
+  if (note->getNoteArticulationsList ().size ()) {
+    copyNoteArticulationsListToChord (note);
+  }
+
+  // copy note's technicals if any to the chord
+  if (note->getNoteTechnicalsList ().size ()) {
+      copyNoteTechnicalsListToChord (note);
+  }
+  if (note->getNoteTechnicalWithIntegersList ().size ()) {
+      copyNoteTechnicalWithIntegersListToChord (note);
+  }
+  if (note->getNoteTechnicalWithFloatsList ().size ()) {
+      copyNoteTechnicalWithFloatsListToChord (note);
+  }
+  if (note->getNoteTechnicalWithStringsList ().size ()) {
+      copyNoteTechnicalWithStringsListToChord (note);
+  }
+
+  // copy note's ornaments if any to the chord
+  if (note->getNoteOrnamentsList ().size ()) {
+    copyNoteOrnamentsListToChord (note);
+  }
+
+  // copy note's spanners if any to the chord
+  if (note->getNoteSpannersList ().size ()) {
+    copyNoteSpannersListToChord (note);
+  }
+
+  // copy note's single tremolo if any to the chord
+  if (note->getNoteSingleTremolo ()) {
+    copyNoteSingleTremoloToChord (note);
+  }
+
+  // copy note's dynamics if any to the chord
+  if (note->getNoteDynamicsList ().size ()) {
+    copyNoteDynamicsListToChord (note);
+  }
+
+  // copy note's other dynamics if any to the chord
+  if (note->getNoteOtherDynamicsList ().size ()) {
+    copyNoteOtherDynamicsListToChord (note);
+  }
+
+  // copy note's words if any to the chord
+  if (note->getNoteWordsList ().size ()) {
+    copyNoteWordsListToChord (note);
+  }
+
+  // copy note's stem if any to the chord
+  if (note->getNoteStem ()) {
+    copyNoteStemToChord (note);
+  }
+
+  // copy note's beams if any to the chord
+  if (note->getNoteBeamsList ().size ()) {
+    copyNoteBeamsListToChord (note);
+//     appendNoteBeamsListLinksToChord (note);
+  }
+
+  // copy note's ties if any to the chord // JMI v0.9.70
+  if (note->getNoteTiesList ().size ()) {
+    copyNoteTiesToChord (note);
+  }
+
+  // copy note's slurs if any to the chord
+// JMI  copyNoteSlursListToChord (note);
+  if (note->getNoteSlursList ().size ()) {
+    appendNoteSlursListLinksToChord (note);
+  }
+
+  // copy note's ligatures if any to the chord
+  if (note->getNoteLigaturesList ().size ()) {
+    copyNoteLigaturesListToChord (note);
+  }
+
+  // copy note's pedals if any to the chord
+  if (note->getNotePedalsList ().size ()) {
+    copyNotePedalsListToChord (note);
+  }
+
+  // copy note's slashes if any to the chord
+  if (note->getNoteSlashesList ().size ()) {
+    copyNoteSlashesListToChord (note);
+  }
+
+  // copy note's wedges if any to the chord
+  if (note->getNoteWedgesList ().size ()) {
+    copyNoteWedgesListToChord (note);
+  }
+
+  // copy note's segnos if any to the chord
+  if (note->getNoteSegnosList ().size ()) {
+    copyNoteSegnosListToChord (note);
+  }
+
+  // copy note's del segnos if any to the chord
+  if (note->getNoteDalSegnosList ().size ()) {
+    copyNoteDalSegnosListToChord (note);
+  }
+
+  // copy note's codas if any to the chord
+  if (note->getNoteCodasList ().size ()) {
+    copyNoteCodasListToChord (note);
+  }
+
+  // copy note's octave shift if any to the chord
+  if (note->getNoteOctaveShift ()) {
+    copyNoteOctaveShiftToChord (note);
+  }
+
+  // copy note's grace notes groups if any to the chord
+//  copyNoteGraceNotesGroupsToChord (note);
+  if (
+    note->getGraceNotesGroupBeforeNote ()
+      ||
+    note->getGraceNotesGroupAfterNote ()
+  ) {
+    addNoteGraceNotesGroupsLinksToChord (note);
+  }
+
+  // copy note's harmony if any to the chord
+  if (note->getNoteHarmoniesList ().size ()) {
+    copyNoteHarmoniesToChord (note);
+  }
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteHarmoniesToChord (
+  const S_msrNote& note)
+{
+  const std::list <S_msrHarmony>&
+    noteHarmoniesList =
+      note->getNoteHarmoniesList ();
+
+  if (noteHarmoniesList.size ()) {
+    for (S_msrHarmony harmony : noteHarmoniesList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceHarmonies ()) {
+        mfIndentedStringStream iss;
+
+        iss <<
+          "Copying harmony:" <<
+          '\n';
+
+        ++gIndenter;
+        iss <<
+          harmony->asString () <<
+          '\n';
+        --gIndenter;
+
+        iss <<
+          "from note:" <<
+          '\n';
+
+        ++gIndenter;
+        iss <<
+          note->asString () <<
+          '\n';
+        --gIndenter;
+
+        iss <<
+          "to chord:" <<
+          '\n';
+
+        ++gIndenter;
+        iss <<
+          asString () <<
+          '\n';
+        --gIndenter;
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          iss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+
+      appendHarmonyToChord (harmony);
+
+    } // for
+  }
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteArticulationsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrArticulation>
+    noteArticulationsList =
+      note->
+        getNoteArticulationsList ();
+
+  for (S_msrArticulation articulation : noteArticulationsList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceArticulations ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying articulation " <<
+        articulation->getArticulationKind () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendArticulationToChord (articulation);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteTechnicalsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrTechnical>
+    noteTechnicalsList =
+      note->
+        getNoteTechnicalsList ();
+
+  for (S_msrTechnical technical : noteTechnicalsList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTechnicals ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Copying technical " <<
+      technical->getTechnicalKind () <<
+      " from note " << note->asString () <<
+      " to chord" <<
+        asString () <<
+      std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendTechnicalToChord (technical);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteTechnicalWithIntegersListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrTechnicalWithInteger>
+    noteTechnicalWithIntegersList =
+      note->
+        getNoteTechnicalWithIntegersList ();
+
+  for (S_msrTechnicalWithInteger technicalWithInteger : noteTechnicalWithIntegersList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTechnicals ()) {
+      gLog <<
+        "Copying technical " <<
+        technicalWithInteger->getTechnicalWithIntegerKind () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asString () <<
+        std::endl;
+      }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendTechnicalWithIntegerToChord (technicalWithInteger);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteTechnicalWithFloatsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrTechnicalWithFloat>
+    noteTechnicalWithFloatsList =
+      note->
+        getNoteTechnicalWithFloatsList ();
+
+  for (S_msrTechnicalWithFloat technicalWithFloat : noteTechnicalWithFloatsList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTechnicals ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying technical " <<
+        technicalWithFloat->getTechnicalWithFloatKind () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendTechnicalWithFloatToChord (technicalWithFloat);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteTechnicalWithStringsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrTechnicalWithString>
+    noteTechnicalWithStringsList =
+      note->
+        getNoteTechnicalWithStringsList ();
+
+  for (S_msrTechnicalWithString technicalWithString : noteTechnicalWithStringsList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTechnicals ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying technical " <<
+        technicalWithString->getTechnicalWithStringKind () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendTechnicalWithStringToChord (technicalWithString);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteOrnamentsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrOrnament>
+    noteOrnamentsList =
+      note->
+        getNoteOrnamentsList ();
+
+  for (S_msrOrnament ornament : noteOrnamentsList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceOrnaments ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying ornament " <<
+        msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendOrnamentToChord (ornament);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteSpannersListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrSpanner>
+    noteSpannersList =
+      note->
+        getNoteSpannersList ();
+
+  for (S_msrSpanner spanner : noteSpannersList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceSpanners ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying spanner " <<
+        spanner->getSpannerKind () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendSpannerToChord (spanner);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteSingleTremoloToChord (
+  const S_msrNote& note)
+{
+  S_msrSingleTremolo
+    noteSingleTremolo =
+      note->
+        getNoteSingleTremolo ();
+
+  if (noteSingleTremolo) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTremolos ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying singleTremolo " <<
+        noteSingleTremolo->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    setChordSingleTremolo (noteSingleTremolo);
+  }
+}
+
+/*
+//______________________________________________________________________________
+void msrChord::copyNoteSlursListToChord (
+  const S_msrNote& note)
+{
+  // copy note's slurs if any from the first note to chord
+
+  std::list <S_msrSlur>
+    noteSlursList =
+      note->
+        getNoteSlursList ();
+
+  std::list <S_msrSlur>::const_iterator i;
+  for (S_msrOtherDynamic : S_msrOtherDynamic ) {
+     noteSlursList.begin ();
+    i != noteSlursList.end ();
+    ++i
+  ) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceSlurs ()) {
+      gLog <<
+        "Copying slur " <<
+        (*i)->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendSlurToChord ((*i));
+  } // for
+}
+*/
+
+//______________________________________________________________________________
+void msrChord::copyNoteDynamicsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrDynamic>
+    noteDynamicsList =
+      note->
+        getNoteDynamicsList ();
+
+  for (S_msrDynamic dynamic : noteDynamicsList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceDynamics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying dynamics " <<
+        msrDynamicKindAsString (dynamic->getDynamicKind ()) <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendDynamicToChord (dynamic);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteOtherDynamicsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrOtherDynamic>
+    noteOtherDynamicsList =
+      note->
+        getNoteOtherDynamicsList ();
+
+  for (S_msrOtherDynamic otherDynamic : noteOtherDynamicsList ) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceDynamics ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying other dynamics " <<
+        otherDynamic->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendOtherDynamicToChord (otherDynamic);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteWordsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrWords>
+    noteWordsList =
+      note->
+        getNoteWordsList ();
+
+  std::list <S_msrWords>::const_iterator i;
+
+  for (S_msrWords word : noteWordsList ) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceWords ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying words " <<
+        word->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendWordsToChord (word);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteStemToChord (
+  const S_msrNote& note)
+{
+  S_msrStem
+    noteStem =
+      note->
+        getNoteStem ();
+
+  if (noteStem) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceStems ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying stem " <<
+        noteStem->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendStemToChord (noteStem);
+  }
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteBeamsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrBeam>
+    noteBeamsList =
+      note->
+        getNoteBeamsList ();
+
+  for (S_msrBeam beam : noteBeamsList ) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceBeams ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying beam " <<
+        beam->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendBeamToChord (beam);
+  } // for
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceBeams ()) {
+    std::stringstream ss;
+
+    ss <<
+      "==> AFTER copying beams to chord:" <<
+      std::endl;
+
+    ++gIndenter;
+
+    gLog <<
+      this <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+void msrChord::appendNoteBeamsListLinksToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrBeam>
+    noteBeamsList =
+      note->
+        getNoteBeamsList ();
+
+  if (noteBeamsList.size ()) {
+    S_msrBeam beam = noteBeamsList.front ();
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceBeams ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Adding beam link of " <<
+        beam->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asString () <<
+        ", line " << note->getInputStartLineNumber ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // create the beam link
+    S_msrChordBeamLink
+      chordBeamLink =
+        msrChordBeamLink::create (
+          getInputStartLineNumber (),
+          beam,
+          this);
+
+    // append it in the chord
+    appendChordBeamLinkToChord (chordBeamLink);
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceBeams ()) {
+    std::stringstream ss;
+
+    ss <<
+      "==> AFTER appending note's beams links to chord:" <<
+      std::endl;
+
+    ++gIndenter;
+
+    gLog <<
+      this <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteTiesToChord (
+  const S_msrNote& note)
+{
+  const std::list <S_msrTie>& noteTiesList = note->getNoteTiesList ();
+
+  if (noteTiesList.size ()) {
+    for (S_msrTie noteTie : noteTiesList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceTies ()) {
+        std::stringstream ss;
+
+        ss <<
+          "Appending tie " <<
+          noteTie->asString () <<
+          " from note " << note->asString () <<
+          " to chord" <<
+        asString () << asString ();
+
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+#endif // MF_TRACE_IS_ENABLED
+
+        appendTieToChord (noteTie);
+    } // for
+  }
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTies ()) {
+    std::stringstream ss;
+
+    ss <<
+      "==> AFTER appending tie to chord:" <<
+      std::endl;
+
+    ++gIndenter;
+
+    ss <<
+      this <<
+      std::endl;
+
+    --gIndenter;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+//______________________________________________________________________________
+void msrChord::appendNoteSlursListLinksToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrSlur>
+    noteSlursList =
+      note->
+        getNoteSlursList ();
+
+  for (S_msrSlur slur : noteSlursList ) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceSlurs ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Adding slur link of " <<
+        slur->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // create the slur link
+    S_msrChordSlurLink
+      chordSlurLink =
+        msrChordSlurLink::create (
+          getInputStartLineNumber (),
+          slur,
+          this);
+
+    // append it in the chord
+    appendChordSlurLinkToChord (chordSlurLink);
+  } // for
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceSlurs ()) {
+    std::stringstream ss;
+
+    ss <<
+      "==> AFTER appending note's slurs links to chord:" <<
+      std::endl;
+
+    ++gIndenter;
+
+    gLog <<
+      this <<
+      std::endl;
+
+    --gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteLigaturesListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrLigature>
+    noteLigaturesList =
+      note->
+        getNoteLigaturesList ();
+
+  for (S_msrLigature ligature : noteLigaturesList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceLigatures ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying ligature " <<
+        ligature->getLigatureKind () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendLigatureToChord (ligature);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNotePedalsListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrPedal>
+    notePedalsList =
+      note->
+        getNotePedalsList ();
+
+  for (S_msrPedal pedal : notePedalsList) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTracePedals ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying pedal " <<
+        pedal->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asString () << asString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendPedalToChord (pedal);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteSlashesListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrSlash>
+    noteSlashesList =
+      note->
+        getNoteSlashesList ();
+
+  for (S_msrSlash slash : noteSlashesList ) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceSlashes ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying slash " <<
+        slash->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendSlashToChord (slash);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteWedgesListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrWedge>
+    noteWedgesList =
+      note->
+        getNoteWedgesList ();
+
+  std::list <S_msrWedge>::const_iterator i;
+  for (S_msrWedge wedge : noteWedgesList ) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceWedges ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying wedges " <<
+        msrWedgeKindAsString (wedge->getWedgeKind ()) <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendWedgeToChord (wedge);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteSegnosListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrSegno>
+    noteSegnosList =
+      note->
+        getNoteSegnosList ();
+
+  std::list <S_msrSegno>::const_iterator i;
+  for (S_msrSegno segno : noteSegnosList ) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceSegnos ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying segno " <<
+        segno->asShortString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendSegnoToChord (segno);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteDalSegnosListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrDalSegno>
+    noteDalSegnosList =
+      note->
+        getNoteDalSegnosList ();
+
+  std::list <S_msrDalSegno>::const_iterator i;
+  for (S_msrDalSegno dalSegno : noteDalSegnosList ) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceDalSegnos ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying dal degno " <<
+        dalSegno->asShortString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendDalSegnoToChord (dalSegno);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteCodasListToChord (
+  const S_msrNote& note)
+{
+  std::list <S_msrCoda>
+    noteCodasList =
+      note->
+        getNoteCodasList ();
+
+  std::list <S_msrCoda>::const_iterator i;
+  for (S_msrCoda coda : noteCodasList ) {
+
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceCodas ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying coda " <<
+        coda->asShortString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    appendCodaToChord (coda);
+  } // for
+}
+
+//______________________________________________________________________________
+void msrChord::addNoteGraceNotesGroupsLinksToChord (
+  const S_msrNote& note)
+{
+  // add link of note's grace notes groups if any to chord
+
+  S_msrGraceNotesGroup
+    graceNotesGroupBefore =
+      note->
+        getGraceNotesGroupBeforeNote ();
+
+  if (graceNotesGroupBefore) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceGraceNotes ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Adding grace notes group link before " <<
+        graceNotesGroupBefore->asShortString () <<
+        " from note " << note->asString () <<
+        " to chord " <<
+        asShortString () <<
+        "";
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // create the grace notes group link
+    const S_msrChordGraceNotesGroupLink&
+      chordChordGraceNotesGroupLink =
+        msrChordGraceNotesGroupLink::create (
+          getInputStartLineNumber (),
+          graceNotesGroupBefore,
+          this);
+
+    // register it in the chord
+    setChordGraceNotesGroupLinkBefore (
+      note->getInputStartLineNumber (), // JMI ???
+      chordChordGraceNotesGroupLink);
+  }
+
+  S_msrGraceNotesGroup
+    graceNotesGroupAfter =
+      note->
+        getGraceNotesGroupAfterNote ();
+
+  if (graceNotesGroupAfter) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceGraceNotes ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Adding grace notes group link after " <<
+        graceNotesGroupAfter->asShortString () <<
+        " from note " << note->asString () <<
+        " to chord " << asString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    // create the grace notes group link
+    const S_msrChordGraceNotesGroupLink&
+      chordChordGraceNotesGroupLink =
+        msrChordGraceNotesGroupLink::create (
+          getInputStartLineNumber (),
+          graceNotesGroupAfter,
+          this);
+
+    // register it in the chord
+    setChordGraceNotesGroupLinkAfter (
+      note->getInputStartLineNumber (), // JMI ???
+      chordChordGraceNotesGroupLink);
+  }
+}
+
+//______________________________________________________________________________
+void msrChord::copyNoteOctaveShiftToChord (
+  const S_msrNote& note)
+{
+  S_msrOctaveShift
+    noteOctaveShift =
+      note->
+        getNoteOctaveShift ();
+
+  if (noteOctaveShift) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceOctaveShifts ()) {
+      std::stringstream ss;
+
+      ss <<
+        "Copying octave shift " <<
+        noteOctaveShift->asString () <<
+        " from note " << note->asString () <<
+        " to chord" <<
+        asShortString ();
+
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    setChordOctaveShift (noteOctaveShift);
+  }
+}
+
+//______________________________________________________________________________
 void msrChord::appendDalSegnoToChord (
   const S_msrDalSegno& dalSegno)
 {
@@ -1872,7 +3093,7 @@ void msrChord::print (std::ostream& os) const
     gIndenter--;
   }
   else {
-    os << ": " << "[NONE]" << std::endl;
+    os << ": " << "[NULL]" << std::endl;
   }
 
 /*
@@ -2561,7 +3782,7 @@ void msrChord::print (std::ostream& os) const
     gIndenter--;
   }
   else {
-    os << ": " << "[NONE]" << std::endl;
+    os << ": " << "[NULL]" << std::endl;
   }
 
   --gIndenter;
@@ -3242,7 +4463,7 @@ void msrChord::printFull (std::ostream& os) const
 //       --gIndenter;
 //     }
 //     else {
-//       os << ": " << "[NONE]" << std::endl; // JMI TEST
+//       os << ": " << "[NULL]" << std::endl; // JMI TEST
 //     }
 // //    os << std::endl;
 //   }
@@ -3259,7 +4480,7 @@ void msrChord::printFull (std::ostream& os) const
 //       gIndenter--;
 //     }
 //     else {
-//       os << ": " << "[NONE]";
+//       os << ": " << "[NULL]";
 //     }
 //     os << std::endl;
 //   }

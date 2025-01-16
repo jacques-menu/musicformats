@@ -997,7 +997,7 @@ void msrDoubleTremolo::print (std::ostream& os) const
   }
   else {
     os <<
-      " [NONE]" <<
+      " [NULL]" <<
       std::endl;
   }
 
@@ -1013,7 +1013,7 @@ void msrDoubleTremolo::print (std::ostream& os) const
   }
   else {
     os <<
-      " [NONE]" <<
+      " [NULL]" <<
       std::endl;
   }
 

@@ -2622,7 +2622,7 @@ void lpsrOahGroup::displayLpsrOahValues (int fieldWidth)
     }
     else {
       gLog <<
-        "[NONE]";
+        "[NULL]";
     }
   gLog << std::endl;
 

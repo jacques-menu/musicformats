@@ -213,7 +213,7 @@ void msrTempoNote::print (std::ostream& os) const
     else {
       os <<
         ": " <<
-       "[NONE]" <<
+       "[EMPTY]" <<
         std::endl;
     }
 
@@ -1083,7 +1083,7 @@ void msrTempoNotesRelationshipElements::print (std::ostream& os) const
   }
   else {
     os <<
-      ": " << "[NONE]" <<
+      ": " << "[EMPTY]" <<
       std::endl;
   }
 

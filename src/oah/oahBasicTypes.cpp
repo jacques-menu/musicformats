@@ -6408,7 +6408,7 @@ void oahHandler::displayElementUsesList (std::ostream& os) const
       }
       else {
         gLog <<
-          "[NONE]" <<
+          "[NULL]" <<
           std::endl;
       }
 
@@ -7929,7 +7929,7 @@ void oahHandler::printKnownSingleCharacterOptions (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -8010,7 +8010,7 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 
@@ -8065,7 +8065,7 @@ void oahHandler::displayNamesToElementsMap (std::ostream& os) const
   }
   else {
     os <<
-      "[NONE]" <<
+      "[EMPTY]" <<
       std::endl;
   }
 

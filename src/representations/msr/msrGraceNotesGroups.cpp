@@ -320,6 +320,10 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
 
   fGraceNotesGroupElementsList.push_back (note);
 
+  // register note as a grace notes group
+  note->
+    setNoteIsAGraceNote ();
+
   // register note's grace notes groups upLink
   note->
     setNoteShortcutUpLinkToGraceNotesGroup (this);
@@ -809,11 +813,11 @@ void msrGraceNotesGroup::print (std::ostream& os) const
 
   ++gIndenter;
 
-  constexpr int fieldWidth = 33;
+  constexpr int fieldWidth = 34;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupUpLinkToNote";
+    "fGraceNotesGroupUpLinkToNote" << ": ";
   if (fGraceNotesGroupUpLinkToNote) {
     os << std::endl;
     ++gIndenter;
