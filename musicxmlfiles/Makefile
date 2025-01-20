@@ -202,19 +202,22 @@ pdflily:
 
 	@echo
 
-	@echo "Contents of current folder:"
+	@echo "Contents of ${PWD} folder:"
+	@ls -sal *.xml | wc -l ; echo " files"
 	@echo "--------------------------------------------"
-	@ls -sal *.xml *.musicxml
+	@ls -sal *.xml
 	@echo
 
 	@echo "Contents of lilypond sub-folder:"
+	@ls -sal lilypond/*.ly | wc -l ; echo " files"
 	@echo "--------------------------------------------"
-	@[[ -d lilypond ]] && ls -sal lilypond/*.ly
+	@ls -sal lilypond/*.ly
 	@echo
 
 	@echo "Contents of pdflily sub-folder:"
+	@ls -sal pdflily/*.pdf | wc -l ; echo " files"
 	@echo "--------------------------------------------"
-	@[[ -d pdflily ]] && ls -sal pdflily/*.pdf
+	@ls -sal pdflily/*.pdf
 
 dopdflily: $(pdflily)
 

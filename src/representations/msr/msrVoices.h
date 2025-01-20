@@ -22,6 +22,7 @@
 #include "msrMeasures.h"
 #include "msrMeasuresSlices.h"
 #include "msrRepeatsEnumTypes.h"
+#include "msrSegnos.h"
 #include "msrTupletFactors.h"
 
 

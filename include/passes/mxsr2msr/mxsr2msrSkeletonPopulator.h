@@ -1453,28 +1453,28 @@ class EXP mxsr2msrSkeletonPopulator :
 //     void                      attachPendingGraceNotesGroupToNoteIfRelevant (
 //                                 int inputLineNumber);
 
-    void                      handleStandAloneSoundingNote (
+    void                      handleARegularNoteInAMeasure (
 																const S_msrNote& note);
 
-    void                      handleStandAloneRest (
+    void                      handleARestInAMeasure (
 																const S_msrNote& note);
 
-    void                      handleStandAloneGraceNote (
+    void                      handleARegularNoteInAChord (
+                                const S_msrNote& note);
+
+    void                      handleARegularNoteInATuplet (
+																const S_msrNote& note);
+
+    void                      handleARestInATuplet (
+																const S_msrNote& note);
+
+    void                      handleAGraceNoteAttachedToANote (
 																const S_msrNote& note); // JMI v0.9.72
 
-    void                      handleChordMemberNote (
+    void                      handleARegularNoteInAChordInATuplet (
                                 const S_msrNote& newChordNote);
 
-    void                      handleTupletMemberNote (
-																const S_msrNote& note);
-
-    void                      handleTupletMemberRest (
-																const S_msrNote& note);
-
-    void                      handleChordMemberNoteInATuplet (
-                                const S_msrNote& newChordNote);
-
-    void                      handleChordMemberNoteInAGraceNotesGroup (
+    void                      handleAGraceNoteInAChord (
                                 const S_msrNote& newChordNote);
 
     // staff changes handling
@@ -1506,7 +1506,7 @@ class EXP mxsr2msrSkeletonPopulator :
 //     int                       fCurrentTakeOffStaffNumber;
 //     int                       fCurrentLandingStaffNumber;
 
-    void                      handleStaffChangeTakeOffEventIfAnyBeforeNoteCreation ();
+    void                      handleStaffChangeTakeOffEventIfAny ();
 
     void                      createStaffChange (
                                 int                    inputLineNumber,
@@ -1551,7 +1551,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // harmonies and figured bass elements need
     // the position of the note  in its measure to be known
     // when they are inserted in their own measure
-    void                      populateCurrentNoteAfterItHasBeenHandled (
+    void                      populateCurrentNoteWithPendingInformations (
                                 int inputLineNumber);
 
 
@@ -2314,14 +2314,9 @@ class EXP mxsr2msrSkeletonPopulator :
 
     Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
 
-//     void                      createChord (int inputLineNumber);
+    void                      handleChordBeginEventIfAny ();
 
-    void                      handleChordBeginIfAnyBeforeNoteCreation ();
-//     void                      handleChordBeginIfAnyAfterNoteCreation ();
-
-//     void                      handleChordEndBeforeNoteIfAny ();
-
-    void                      handleChordEndIfAnyAfterNoteHandling ();
+    void                      handleChordEndEventIfAny ();
 
 /* JMI
     void                      registerVoiceCurrentChordInMap (
@@ -2412,15 +2407,15 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrTuplet               createTuplet (
                                 int inputLineNumber);
 
-    void                      handleTupletBeginEventsIfAnyBeforeNoteCreation ();
+    void                      handleTupletBeginEventsIfAny (
+                                int inputLineNumber);
 
-    void                      handleTupletBeginEventsIfAnyAfterNoteCreation ();
+//     void                      handleTupletBeginEventsAfterNoteIfAny ();
 
-    void                      handleTupletBeginEventsAfterNoteIfAny ();
+//     void                      handleTupletEndEventsBeforeNoteIfAny ();
 
-    void                      handleTupletEndEventsBeforeNoteIfAny ();
-
-    void                      handleTupletEndEventsIfAnyAfterNoteHandling ();
+    void                      handleTupletEndEventsIfAny (
+                                int inputLineNumber);
 
     void                      handleTupletStart (
                                 const S_msrTuplet& tuplet,

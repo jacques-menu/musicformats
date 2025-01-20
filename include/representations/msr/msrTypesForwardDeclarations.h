@@ -96,6 +96,9 @@ typedef SMARTP<msrCreditWords> S_msrCreditWords;
 class   msrCrescDecresc;
 typedef SMARTP<msrCrescDecresc> S_msrCrescDecresc;
 
+class   msrSegno;
+typedef SMARTP<msrSegno> S_msrmsrSegno;
+
 class   msrDalSegno;
 typedef SMARTP<msrDalSegno> S_msrDalSegno;
 
@@ -275,12 +278,6 @@ typedef SMARTP<msrScore> S_msrScore;
 
 class   msrSegment;
 typedef SMARTP<msrSegment> S_msrSegment;
-
-class   msrSegno;
-typedef SMARTP<msrSegno> S_msrSegno;
-
-class   msrSegno;
-typedef SMARTP<msrSegno> S_msrSegno;
 
 class   msrSemiTonesPitchAndOctave;
 typedef SMARTP<msrSemiTonesPitchAndOctave> S_msrSemiTonesPitchAndOctave;
