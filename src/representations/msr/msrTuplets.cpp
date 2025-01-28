@@ -401,7 +401,7 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
     std::stringstream ss;
 
     ss <<
-      "Appending chord " <<
+      "appendChordToTuplet(): Appending chord " <<
       chord <<
       " to tuplet " <<
       asString ();
@@ -423,10 +423,10 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
     fTupletElementsList.size ());
 
   // account for the chord duration,
-  fMeasureElementSoundingWholeNotes += // JMI v0.9.71 FIRST_AFTER TENOR
+  fMeasureElementSoundingWholeNotes +=
     chord->getMeasureElementSoundingWholeNotes ();
 
-  fTupletDisplayWholeNotes += // JMI
+  fTupletDisplayWholeNotes += // JMI USELESS ??? v0.9.72
     chord->getChordDisplayWholeNotes ();
 
 /* too early JMI
@@ -692,118 +692,30 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
   return result;
 }
 
-S_msrNote msrTuplet::removeLastNoteFromTuplet (
-  int inputLineNumber)
-{
-  S_msrNote result;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing last note from tuplet " <<
-      asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (fTupletElementsList.size ()) {
-    S_msrTupletElement
-      lastTupletElement =
-        fTupletElementsList.back ();
-
-    if (
-      S_msrNote note = dynamic_cast<msrNote*>(&(*lastTupletElement))
-    ) {
-      // remove note from tuplet elements list
-      fTupletElementsList.pop_back ();
-
-/*
-      // decrement the tuplet sounding whole notes accordingly ??? JMI BAD???
-      fMeasureElementSoundingWholeNotes +=
-        note->getMeasureElementSoundingWholeNotes ();
-*/
-
-      result = note;
-    }
-
-    else {
-      if (true) { // JMI
-        this->print (gLog);
-      }
-
-      msrInternalError (
-        gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
-        __FILE__, __LINE__,
-        "removeLastNoteFromTuplet () expects a note as the last tuplet element");
-    }
-  }
-
-  else {
-    std::stringstream ss;
-
-    ss <<
-      "cannot remove the last note of an empty tuplet " <<
-      " in voice \"" <<
-      fMeasureElementUpLinkToMeasure->
-        fetchMeasureUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
-    std::stringstream ss;
-
-    ss <<
-      "This last note from tuplet " <<
-      asString () <<
-      " turns out to be " <<
-      result->asShortString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  return result;
-}
-
-S_msrTupletElement msrTuplet::removeLastElementFromTuplet (
-  int inputLineNumber)
-{
-  S_msrTupletElement result;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing last element from tuplet " <<
-      asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (fTupletElementsList.size ()) {
-    result =
-      fTupletElementsList.back ();
-
+// S_msrNote msrTuplet::removeLastNoteFromTuplet (
+//   int inputLineNumber)
+// {
+//   S_msrNote result;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTuplets ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing last note from tuplet " <<
+//       asString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (fTupletElementsList.size ()) {
+//     S_msrTupletElement
+//       lastTupletElement =
+//         fTupletElementsList.back ();
+//
 //     if (
 //       S_msrNote note = dynamic_cast<msrNote*>(&(*lastTupletElement))
 //     ) {
@@ -830,44 +742,132 @@ S_msrTupletElement msrTuplet::removeLastElementFromTuplet (
 //         __FILE__, __LINE__,
 //         "removeLastNoteFromTuplet () expects a note as the last tuplet element");
 //     }
-  }
+//   }
+//
+//   else {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "cannot remove the last note of an empty tuplet " <<
+//       " in voice \"" <<
+//       fMeasureElementUpLinkToMeasure->
+//         fetchMeasureUpLinkToVoice ()->
+//           getVoiceName () <<
+//       "\"";
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTuplets ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "This last note from tuplet " <<
+//       asString () <<
+//       " turns out to be " <<
+//       result->asShortString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   return result;
+// }
 
-  else {
-    std::stringstream ss;
-
-    ss <<
-      "cannot remove the last element of an empty tuplet " <<
-      " in voice \"" <<
-      fMeasureElementUpLinkToMeasure->
-        fetchMeasureUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
-    std::stringstream ss;
-
-    ss <<
-      "This last element from tuplet " <<
-      asString () <<
-      " turns out to be " <<
-      result->asShortString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  return result;
-}
+// S_msrTupletElement msrTuplet::removeLastElementFromTuplet (
+//   int inputLineNumber)
+// {
+//   S_msrTupletElement result;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTuplets ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing last element from tuplet " <<
+//       asString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (fTupletElementsList.size ()) {
+//     result =
+//       fTupletElementsList.back ();
+//
+// //     if (
+// //       S_msrNote note = dynamic_cast<msrNote*>(&(*lastTupletElement))
+// //     ) {
+// //       // remove note from tuplet elements list
+// //       fTupletElementsList.pop_back ();
+// //
+// // /*
+// //       // decrement the tuplet sounding whole notes accordingly ??? JMI BAD???
+// //       fMeasureElementSoundingWholeNotes +=
+// //         note->getMeasureElementSoundingWholeNotes ();
+// // */
+// //
+// //       result = note;
+// //     }
+// //
+// //     else {
+// //       if (true) { // JMI
+// //         this->print (gLog);
+// //       }
+// //
+// //       msrInternalError (
+// //         gServiceRunData->getInputSourceName (),
+// //         fInputStartLineNumber,
+// //         __FILE__, __LINE__,
+// //         "removeLastNoteFromTuplet () expects a note as the last tuplet element");
+// //     }
+//   }
+//
+//   else {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "cannot remove the last element of an empty tuplet " <<
+//       " in voice \"" <<
+//       fMeasureElementUpLinkToMeasure->
+//         fetchMeasureUpLinkToVoice ()->
+//           getVoiceName () <<
+//       "\"";
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTuplets ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "This last element from tuplet " <<
+//       asString () <<
+//       " turns out to be " <<
+//       result->asShortString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   return result;
+// }
 
 void msrTuplet::setMeasureElementMeasurePosition (
   const S_msrMeasure&  measure,
@@ -1207,7 +1207,7 @@ std::string msrTuplet::asString () const
       }
 
       if (++i == iEnd) break;
-      ss << ' ';
+      ss << ', ';
 
     } // for
   }
@@ -1429,7 +1429,6 @@ void msrTuplet::print (std::ostream& os) const
     "[Tuplet" <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
-    ", fTupletKind: " << fTupletKind <<
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
@@ -1441,6 +1440,11 @@ void msrTuplet::print (std::ostream& os) const
   constexpr int fieldWidth = 36;
 
   os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTupletKind" << ": " <<
+    fTupletKind <<
+    std::endl <<
+
     std::setw (fieldWidth) <<
     "fTupletBracketKind" << ": " <<
     fTupletBracketKind <<

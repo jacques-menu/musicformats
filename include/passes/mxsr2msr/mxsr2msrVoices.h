@@ -91,7 +91,7 @@ class mxsrVoice : public smartable
 //                             const S_msrNote&   note,
 //                             const S_msrVoice&  currentNoteVoice);
 
-    void                  finalizeTupletStackTopAndPopItFromTupletsStack (
+    void                  popTupletStackTopAndFinalizeIt (
                             int         inputLineNumber,
                             std::string context);
 

@@ -131,7 +131,7 @@ void mxsrVoice::displayTupletsStack (
 //   gLog << std::endl;
 // }
 
-void mxsrVoice::finalizeTupletStackTopAndPopItFromTupletsStack (
+void mxsrVoice::popTupletStackTopAndFinalizeIt (
   int         inputLineNumber,
   std::string context)
 {
@@ -140,7 +140,7 @@ void mxsrVoice::finalizeTupletStackTopAndPopItFromTupletsStack (
     std::stringstream ss;
 
     ss <<
-      "Finalizing tuplet stack top and popping it from tuplet stack" <<
+      "Popping tuplet stack top and finalizing it" <<
       ", context: " << context <<
       ", fTupletsStack.size (): " << fTupletsStack.size ();
 
@@ -167,11 +167,11 @@ void mxsrVoice::finalizeTupletStackTopAndPopItFromTupletsStack (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
-      "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 2");
+      "############## Before popTupletStackTopAndFinalizeIt() 2");
   }
 //   if (gTraceOahGroup->getTraceTuplets ()) {
 //     displayVoicesTupletsStacksMap (
-//       "############## Before finalizeTupletStackTopAndPopItFromTupletsStack() 3");
+//       "############## Before popTupletStackTopAndFinalizeIt() 3");
 //   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -207,11 +207,11 @@ void mxsrVoice::finalizeTupletStackTopAndPopItFromTupletsStack (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
-      "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 4");
+      "############## After popTupletStackTopAndFinalizeIt() 4");
   }
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayVoicesTupletsStacksMap (
-//       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 5");
+//       "############## After popTupletStackTopAndFinalizeIt() 5");
 //   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -228,11 +228,11 @@ void mxsrVoice::finalizeTupletStackTopAndPopItFromTupletsStack (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
-      "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 6");
+      "############## After popTupletStackTopAndFinalizeIt() 6");
   }
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayVoicesTupletsStacksMap (
-//       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 7");
+//       "############## After popTupletStackTopAndFinalizeIt() 7");
 //   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -280,11 +280,11 @@ void mxsrVoice::finalizeTupletStackTopAndPopItFromTupletsStack (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
-      "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 8");
+      "############## After popTupletStackTopAndFinalizeIt() 8");
   }
 //   if (gTraceOahGroup->getTraceTupletsDetails ()) {
 //     displayVoicesTupletsStacksMap (
-//       "############## After finalizeTupletStackTopAndPopItFromTupletsStack() 9");
+//       "############## After popTupletStackTopAndFinalizeIt() 9");
 //   }
 #endif // MF_TRACE_IS_ENABLED
 }

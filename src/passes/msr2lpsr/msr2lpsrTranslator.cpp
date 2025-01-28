@@ -7310,10 +7310,18 @@ void msr2lpsrTranslator::visitEnd (S_msrChord& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // append current chord clont to the current voice
-  fCurrentVoiceClone->
-    appendChordToVoice (
-      fCurrentChordClone);
+  if (fTupletClonesStack.size ()) {
+    // append current chord clone to the current, innermost tuplet
+    fTupletClonesStack.front ()->
+      appendChordToTuplet (
+        fCurrentChordClone);
+  }
+  else {
+    // append current chord clone to the current voice
+    fCurrentVoiceClone->
+      appendChordToVoice (
+        fCurrentChordClone);
+  }
 
 //   // finalize the current chord clone
 //   fCurrentChordClone->

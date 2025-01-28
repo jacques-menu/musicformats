@@ -304,7 +304,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
     std::stringstream ss;
 
     ss <<
-      "Appending note " <<
+      "Appending grace note " <<
       note->asString () <<
       " to grace notes group " <<
       asShortString ();

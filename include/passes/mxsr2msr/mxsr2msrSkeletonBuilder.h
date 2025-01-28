@@ -704,6 +704,7 @@ class EXP mxsr2msrSkeletonBuilder :
 //     int                       fPreviousTupletNumber;
 
     Bool                      fCurrentNoteBelongsToATuplet;
+    Bool                      fPreviousNoteBelongsToATuplet;
 
     // there can be multiple tuplets starts on a given note,
     // so they aref kept aside until they are handled
@@ -728,8 +729,20 @@ class EXP mxsr2msrSkeletonBuilder :
                                 const std::string& title,
                                 int                inputStartLineNumber) const;
 
-    void                      handePendingTupletsStopsIfAny (
+    void                      handlePendingTupletsStopsAfterANoteIfAny (
                                 int inputStartLineNumber);
+
+    void                      handlePendingTupletsStopsAtMeasureEndIfAny (
+                                int inputStartLineNumber);
+
+    void                      doHandlePendingTupletsStopsIfAny (
+                                int inputStartLineNumber);
+
+
+    // display note gathered informations
+    // ------------------------------------------------------
+    void                      displayGatheredNoteInformations (
+                                const std::string& context);
 
 
     // lyrics handling

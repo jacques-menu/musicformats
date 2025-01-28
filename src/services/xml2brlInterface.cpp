@@ -287,6 +287,7 @@ EXP int xml2brl (
     gLog <<
       "This is " << serviceName << ' ' <<
       getGlobalMusicFormatsVersionNumberAndDate () <<
+      ", a part of the MusicFormats library (https://github.com/jacques-menu/musicformats)" <<
       std::endl;
 
     gLog <<

@@ -103,6 +103,7 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
   // fPreviousTupletNumber = -1;
 
   fCurrentNoteBelongsToATuplet = false;
+  fPreviousNoteBelongsToATuplet = false;
 
   // lyrics handling
   fCurrentStanzaNumber = K_STANZA_NUMBER_UNKNOWN_; // JMI
@@ -1818,49 +1819,52 @@ void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
-		gLog <<
-			"===> visitEnd (S_measure& elt)" <<
-			", fCurrentNoteStartInputLineNumber: " <<
-			fCurrentNoteStartInputLineNumber <<
+  	displayGatheredNoteInformations (
+  		"handleChordMemberNoteIfRelevant()");
 
-			", currentEventSequentialNumber: " <<
-			fResultingEventsCollection.getCurrentEventSequentialNumber () <<
-
-			", fCurrentNoteSequentialNumber: " <<
-			fCurrentNoteSequentialNumber <<
-			", fPreviousNoteSequentialNumber: " <<
-			fPreviousNoteSequentialNumber <<
-
-			", fCurrentNoteIsAGraceNote: " <<
-			fCurrentNoteIsAGraceNote <<
-			", fPreviousNoteIsAGraceNote: " <<
-			fPreviousNoteIsAGraceNote <<
-
-			", fCurrentNoteIsACueNote: " <<
-			fCurrentNoteIsACueNote <<
-			", fPreviousNoteIsACueNote: " <<
-			fPreviousNoteIsACueNote <<
-
-			", fCurrentNoteBelongsToAChord: " <<
-			fCurrentNoteBelongsToAChord <<
-			", fPreviousNoteBelongsToAChord: " <<
-			fPreviousNoteBelongsToAChord <<
-
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
-      ", line " << inputStartLineNumber <<
-			std::endl;
-
-// 		if (gTraceOahGroup->getTraceTupletsBasics ()) {
-// 			gLog <<
-// 				", fCurrentTupletNumber: " <<
-// 				fCurrentTupletNumber <<
-// 				std::endl;
+// 		gLog <<
+// 			"===> visitEnd (S_measure& elt)" <<
+// 			", fCurrentNoteStartInputLineNumber: " <<
+// 			fCurrentNoteStartInputLineNumber <<
 //
-// 			displayPendingTupletsStopsMap (
-// 				"=====> visitEnd (S_measure& elt)",
-// 				fCurrentNoteStartInputLineNumber);
-// 		}
+// 			", currentEventSequentialNumber: " <<
+// 			fResultingEventsCollection.getCurrentEventSequentialNumber () <<
+//
+// 			", fCurrentNoteSequentialNumber: " <<
+// 			fCurrentNoteSequentialNumber <<
+// 			", fPreviousNoteSequentialNumber: " <<
+// 			fPreviousNoteSequentialNumber <<
+//
+// 			", fCurrentNoteIsAGraceNote: " <<
+// 			fCurrentNoteIsAGraceNote <<
+// 			", fPreviousNoteIsAGraceNote: " <<
+// 			fPreviousNoteIsAGraceNote <<
+//
+// 			", fCurrentNoteIsACueNote: " <<
+// 			fCurrentNoteIsACueNote <<
+// 			", fPreviousNoteIsACueNote: " <<
+// 			fPreviousNoteIsACueNote <<
+//
+// 			", fCurrentNoteBelongsToAChord: " <<
+// 			fCurrentNoteBelongsToAChord <<
+// 			", fPreviousNoteBelongsToAChord: " <<
+// 			fPreviousNoteBelongsToAChord <<
+//
+// 			", fPreviousNoteIsATakeOffCandidate: " <<
+// 			fPreviousNoteIsATakeOffCandidate <<
+//       ", line " << inputStartLineNumber <<
+// 			std::endl;
+//
+// // 		if (gTraceOahGroup->getTraceTupletsBasics ()) {
+// // 			gLog <<
+// // 				", fCurrentTupletNumber: " <<
+// // 				fCurrentTupletNumber <<
+// // 				std::endl;
+// //
+// // 			displayPendingTupletsStopsMap (
+// // 				"=====> visitEnd (S_measure& elt)",
+// // 				fCurrentNoteStartInputLineNumber);
+// // 		}
 	}
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1945,13 +1949,46 @@ void mxsr2msrSkeletonBuilder::displayPendingTupletsStopsMap (
 		std::endl << std::endl;
 }
 
-void mxsr2msrSkeletonBuilder::handePendingTupletsStopsIfAny (
+void mxsr2msrSkeletonBuilder::handlePendingTupletsStopsAfterANoteIfAny (
 	int inputStartLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
 		displayPendingTupletsStopsMap (
-			"handePendingTupletsStopsIfAny(): ",
+			"handlePendingTupletsStopsAfterANoteIfAny(): ",
+			inputStartLineNumber);
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+	if (fPreviousNoteBelongsToATuplet && ! fCurrentNoteBelongsToATuplet) {
+		// current note is the first one after a tuplet
+		doHandlePendingTupletsStopsIfAny (
+			inputStartLineNumber);
+	}
+}
+
+void mxsr2msrSkeletonBuilder::handlePendingTupletsStopsAtMeasureEndIfAny (
+	int inputStartLineNumber)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+		displayPendingTupletsStopsMap (
+			"handlePendingTupletsStopsAtMeasureEndIfAny(): ",
+			inputStartLineNumber);
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+	doHandlePendingTupletsStopsIfAny (
+		inputStartLineNumber);
+}
+
+void mxsr2msrSkeletonBuilder::doHandlePendingTupletsStopsIfAny (
+	int inputStartLineNumber)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+		displayPendingTupletsStopsMap (
+			"doHandlePendingTupletsStopsIfAny(): ",
 			inputStartLineNumber);
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1959,8 +1996,8 @@ void mxsr2msrSkeletonBuilder::handePendingTupletsStopsIfAny (
 	// register pending tuplet events if any
 	for (
 		std::multimap <int, S_mxsr2msrPendingTupletStop>::const_iterator
-			it = fPendingTupletsStopsMap.cbegin ();
-// 		auto it = fPendingTupletsStopsMap.cbegin ();
+			it =
+				fPendingTupletsStopsMap.cbegin ();
 		it != fPendingTupletsStopsMap.cend ();
 		// no increment
 	) {
@@ -4473,8 +4510,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 
 	// handle pending tuplet stops if any, after the chord end if any,
 	// which occurs on the current notes, i.e. the one at the end of the measure JMI v0.9.72
-	handePendingTupletsStopsIfAny (
-		fCurrentNoteStartInputLineNumber);
+	handlePendingTupletsStopsAtMeasureEndIfAny (
+		fPreviousNoteStartInputLineNumber);
 
   --gIndenter;
 }
@@ -4865,46 +4902,88 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 }
 
 //________________________________________________________________________
+void mxsr2msrSkeletonBuilder::displayGatheredNoteInformations (
+	const std::string& context)
+{
+	int constexpr fieldWidth = 30;
+
+	gLog <<
+		"--> " <<
+		context <<
+		std::endl <<
+
+		std::setw (fieldWidth) <<
+		"fCurrentNoteStartInputLineNumber " << " : " <<
+		fCurrentNoteStartInputLineNumber <<
+		std::endl <<
+
+		std::setw (fieldWidth) <<
+		"fPreviousNoteSequentialNumber " << " : " <<
+		fPreviousNoteSequentialNumber <<
+		std::endl <<
+		std::setw (fieldWidth) <<
+		"fCurrentNoteSequentialNumber " << " : " <<
+		fCurrentNoteSequentialNumber <<
+		std::endl <<
+
+		std::setw (fieldWidth) <<
+		"fCurrentNoteStaffNumber " << " : " <<
+		fCurrentNoteStaffNumber <<
+		std::endl <<
+		std::setw (fieldWidth) <<
+		"fCurrentNoteVoiceNumber " << " : " <<
+		fCurrentNoteVoiceNumber <<
+		std::endl <<
+
+		std::setw (fieldWidth) <<
+		"fPreviousNoteIsATakeOffCandidate " << " : " <<
+		fPreviousNoteIsATakeOffCandidate <<
+		std::endl <<
+
+		std::setw (fieldWidth) <<
+		"fPreviousNoteIsAGraceNote " << " : " <<
+		fPreviousNoteIsAGraceNote <<
+		std::endl <<
+		std::setw (fieldWidth) <<
+		"fCurrentNoteIsAGraceNote " << " : " <<
+		fCurrentNoteIsAGraceNote <<
+		std::endl <<
+
+		std::setw (fieldWidth) <<
+		"fPreviousNoteIsACueNote " << " : " <<
+		fPreviousNoteIsACueNote <<
+		std::endl <<
+		std::setw (fieldWidth) <<
+		"fCurrentNoteIsACueNote " << " : " <<
+		fCurrentNoteIsACueNote <<
+		std::endl <<
+
+		std::setw (fieldWidth) <<
+		"fPreviousNoteBelongsToAChord " << " : " <<
+		fPreviousNoteBelongsToAChord <<
+		std::endl <<
+		std::setw (fieldWidth) <<
+		"fCurrentNoteBelongsToAChord " << " : " <<
+		fCurrentNoteBelongsToAChord <<
+		std::endl <<
+
+		std::setw (fieldWidth) <<
+		"fPreviousNoteBelongsToATuplet " << " : " <<
+		fPreviousNoteBelongsToATuplet <<
+		std::endl <<
+		std::setw (fieldWidth) <<
+		"fCurrentNoteBelongsToATuplet " << " : " <<
+		fCurrentNoteBelongsToATuplet <<
+		std::endl;
+}
+
+//________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerGraceEventIfAny ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-    	"--> registerGraceEventIfAny()"
-      ", fCurrentNoteStartInputLineNumber: " <<
-      fCurrentNoteStartInputLineNumber <<
-
-      ", fPreviousNoteSequentialNumber: " <<
-      fPreviousNoteSequentialNumber <<
-      ", fCurrentNoteSequentialNumber: " <<
-      fCurrentNoteSequentialNumber <<
-
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
-
-      ", fPreviousNoteIsAGraceNote: " <<
-      fPreviousNoteIsAGraceNote <<
-      ", fCurrentNoteIsAGraceNote: " <<
-      fCurrentNoteIsAGraceNote <<
-
-      ", fPreviousNoteBelongsToAChord: " <<
-      fPreviousNoteBelongsToAChord <<
-      ", fCurrentNoteBelongsToAChord: " <<
-      fCurrentNoteBelongsToAChord <<
-
-      ", fCurrentNoteBelongsToATuplet: " <<
-      fCurrentNoteBelongsToATuplet <<
-      ", line " << fCurrentNoteStartInputLineNumber;
-
-		gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-
-//     displayPendingTupletsStopsMap (
-//     	"=====> registerGraceEventIfAny() 1",
-//     	fCurrentNoteStartInputLineNumber);
+  	displayGatheredNoteInformations (
+  		"registerGraceEventIfAny()");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -4950,47 +5029,8 @@ void mxsr2msrSkeletonBuilder::registerCueEventIfAny ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceCueNotesBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-    	"--> registerCueEventIfAny()"
-      ", fCurrentNoteStartInputLineNumber: " <<
-      fCurrentNoteStartInputLineNumber <<
-
-      ", fPreviousNoteSequentialNumber: " <<
-      fPreviousNoteSequentialNumber <<
-      ", fCurrentNoteSequentialNumber: " <<
-      fCurrentNoteSequentialNumber <<
-
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
-
-      ", fPreviousNoteIsAGraceNote: " <<
-      fPreviousNoteIsAGraceNote <<
-      ", fCurrentNoteIsAGraceNote: " <<
-      fCurrentNoteIsAGraceNote <<
-
-      ", fPreviousNoteIsACueNote: " <<
-      fPreviousNoteIsACueNote <<
-      ", fCurrentNoteIsACueNote: " <<
-      fCurrentNoteIsACueNote <<
-
-      ", fPreviousNoteBelongsToAChord: " <<
-      fPreviousNoteBelongsToAChord <<
-      ", fCurrentNoteBelongsToAChord: " <<
-      fCurrentNoteBelongsToAChord <<
-
-      ", fCurrentNoteBelongsToATuplet: " <<
-      fCurrentNoteBelongsToATuplet <<
-      ", line " << fCurrentNoteStartInputLineNumber;
-
-		gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-
-//     displayPendingTupletsStopsMap (
-//     	"=====> registerCueEventIfAny() 1",
-//     	fCurrentNoteStartInputLineNumber);
+  	displayGatheredNoteInformations (
+  		"registerCueEventIfAny()");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5036,47 +5076,8 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-    	"--> registerChordEventIfAny()"
-      ", fCurrentNoteStartInputLineNumber: " <<
-      fCurrentNoteStartInputLineNumber <<
-
-      ", fPreviousNoteSequentialNumber: " <<
-      fPreviousNoteSequentialNumber <<
-      ", fCurrentNoteSequentialNumber: " <<
-      fCurrentNoteSequentialNumber <<
-
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
-
-      ", fPreviousNoteIsAGraceNote: " <<
-      fPreviousNoteIsAGraceNote <<
-      ", fCurrentNoteIsAGraceNote: " <<
-      fCurrentNoteIsAGraceNote <<
-
-      ", fPreviousNoteIsACueNote: " <<
-      fPreviousNoteIsACueNote <<
-      ", fCurrentNoteIsACueNote: " <<
-      fCurrentNoteIsACueNote <<
-
-      ", fPreviousNoteBelongsToAChord: " <<
-      fPreviousNoteBelongsToAChord <<
-      ", fCurrentNoteBelongsToAChord: " <<
-      fCurrentNoteBelongsToAChord <<
-
-      ", fCurrentNoteBelongsToATuplet: " <<
-      fCurrentNoteBelongsToATuplet <<
-      ", line " << fCurrentNoteStartInputLineNumber;
-
-		gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-
-//     displayPendingTupletsStopsMap (
-//     	"=====> registerChordEventIfAny() 1",
-//     	fCurrentNoteStartInputLineNumber);
+  	displayGatheredNoteInformations (
+  		"registerChordEventIfAny()");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -5125,31 +5126,8 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-    	"--> handleTupletEventIfAny() 1"
-      ", fCurrentNoteStartInputLineNumber: " <<
-      fCurrentNoteStartInputLineNumber <<
-
-      ", fPreviousNoteSequentialNumber: " <<
-      fPreviousNoteSequentialNumber <<
-      ", fCurrentNoteSequentialNumber: " <<
-      fCurrentNoteSequentialNumber <<
-
-			", fPreviousNoteIsATakeOffCandidate: " <<
-			fPreviousNoteIsATakeOffCandidate <<
-
-      ", fCurrentNoteBelongsToAChord: " <<
-      fCurrentNoteBelongsToAChord <<
-
-      ", fCurrentNoteBelongsToATuplet: " <<
-      fCurrentNoteBelongsToATuplet <<
-      ", line " << fCurrentNoteStartInputLineNumber;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
+  	displayGatheredNoteInformations (
+  		"handleTupletEventIfAny()");
 
     displayPendingTupletsList (
     	"=====> handleTupletEventIfAny() 2",
@@ -5219,8 +5197,8 @@ void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
 			case msrTupletTypeKind::kTupletTypeStart:
 				// handle pending tuplet stops if any, to have then §
 				// occuring before tuplet start on the same note
-				handePendingTupletsStopsIfAny (
-					fCurrentNoteEndInputLineNumber);
+				handlePendingTupletsStopsAfterANoteIfAny (
+					fPreviousNoteStartInputLineNumber);
 
 				// register the new tuplet begin event upon the current note at once
 				fResultingEventsCollection.registerTupletBeginEvent (
@@ -5308,43 +5286,17 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 
 #ifdef MF_TRACE_IS_ENABLED
 		if (gTraceOahGroup->getTraceNotesBasics ()) {
+			displayGatheredNoteInformations (
+				"visitEnd (S_note& elt)");
+
 			std::stringstream ss;
 
 			ss <<
 				"--> visitEnd (S_note& elt) 1 (all):"
-				", fCurrentNoteSequentialNumber: " <<
-				fCurrentNoteSequentialNumber <<
-				", fPreviousNoteSequentialNumber: " <<
-				fPreviousNoteSequentialNumber <<
-
-				", fCurrentNoteStartInputLineNumber: " <<
-				fCurrentNoteStartInputLineNumber <<
-
-				", fCurrentNoteStaffNumber: " <<
-				fCurrentNoteStaffNumber <<
-				", fCurrentNoteVoiceNumber: " <<
-				fCurrentNoteVoiceNumber <<
-
-				", fPreviousNoteIsATakeOffCandidate: " <<
-				fPreviousNoteIsATakeOffCandidate <<
-
-				", fCurrentNoteIsAGraceNote: " <<
-				fCurrentNoteIsAGraceNote <<
-
-				", fCurrentNoteIsACueNote: " <<
-				fCurrentNoteIsACueNote <<
-
-				", fCurrentNoteBelongsToAChord: " <<
-				fCurrentNoteBelongsToAChord <<
-
-				", fCurrentNoteBelongsToATuplet: " <<
-				fCurrentNoteBelongsToATuplet <<
-
 				", getStaffName(): " <<
 				staff->getStaffName () <<
 				", getVoiceName(): " <<
 				noteVoice->getVoiceName () <<
-
 				", line " << fCurrentNoteStartInputLineNumber;
 
 			gWaeHandler->waeTrace (
@@ -5465,7 +5417,7 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
  	// Q_NOTE
 
 	// handle pending tuplet stops from the previous note if any
-	handePendingTupletsStopsIfAny (
+	handlePendingTupletsStopsAfterANoteIfAny (
 		fPreviousNoteEndInputLineNumber);
 
 	// register tuplets events if any
@@ -5638,6 +5590,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_time_modification& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+	fPreviousNoteBelongsToATuplet = fCurrentNoteBelongsToATuplet;
   fCurrentNoteBelongsToATuplet = true;
 }
 

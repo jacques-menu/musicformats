@@ -156,7 +156,7 @@ static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   }
 
 
-  // populate the MSR skeleton from MusicXML data (pass 3)
+  // populate the MSR skeleton from the MXSR (pass 3)
   // ------------------------------------------------------
 
   try {

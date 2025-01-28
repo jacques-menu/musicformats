@@ -4937,7 +4937,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           std::stringstream ss;
 
           ss <<
-            "Appending grace note " <<
+            "visitEnd (S_msrNote& elt): Appending grace note " <<
             fCurrentGraceNoteClone->asShortString () <<
             " to the grace notes group " <<
             fCurrentGraceNotesGroupClone->asShortString () <<
@@ -4954,6 +4954,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           appendNoteToGraceNotesGroup (
             fCurrentGraceNoteClone);
       }
+
       else {
         std::stringstream ss;
 
@@ -5639,10 +5640,18 @@ void msr2msrTranslator::visitEnd (S_msrChord& elt)
 //     finalizeChord (
 //       elt->getInputStartLineNumber ());
 
-  // append current chord clont to the current voice
-  fCurrentVoiceClone->
-    appendChordToVoice (
-      fCurrentChordClone);
+  if (fTupletClonesStack.size ()) {
+    // append current chord clone to the current, innermost tuplet
+    fTupletClonesStack.front ()->
+      appendChordToTuplet (
+        fCurrentChordClone);
+  }
+  else {
+    // append current chord clone to the current voice
+    fCurrentVoiceClone->
+      appendChordToVoice (
+        fCurrentChordClone);
+  }
 
   // forget about the current chord clone
   fCurrentChordClone = nullptr;

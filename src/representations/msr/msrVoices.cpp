@@ -3543,7 +3543,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
     gLog <<
-      "Appending chord:" <<
+      "appendChordToVoice(): Appending chord:" <<
       std::endl;
 
     ++gIndenter;

@@ -301,7 +301,7 @@ mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
 //     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
 //   }
 //
-//   // populate the MSR skeleton from MusicXML data (pass 2b)
+//   // populate the MSR skeleton from the MXSR (pass 2b)
 //   // ------------------------------------------------------
 //
 //   try {

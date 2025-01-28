@@ -1429,12 +1429,36 @@ class EXP mxsr2msrSkeletonPopulator :
 //     void                      handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
 //                                 int inputLineNumber);
 
-    // grace notes
+    // grace notes handling
+    // ------------------------------------------------------
+
     Bool                      fCurrentNoteIsAGraceNote;
 
     std::string               fCurrentStealTimeFollowing;
     std::string               fCurrentStealTimePrevious;
     std::string               fCurrentMakeTimeSignature;
+
+
+    // grace notes groups handling
+    // ------------------------------------------------------
+
+    // fCurrentNoteGraceEvent contains the grace event
+    // that occurs on a take off note, if any
+    S_mxsrGraceEvent          fCurrentNoteGraceBeginEvent; // EVENTS
+    S_mxsrGraceEvent          fCurrentNoteGraceEndEvent; // EVENTS
+
+    Bool                      fCurrentGraceNotesGroupIsSlashed;
+    Bool                      fCurrentGraceNotesGroupIsBeamed;
+
+    Bool                      fCurrentGraceNotesGroupIsTied;
+    Bool                      fCurrentGraceNotesGroupIsSlurred;
+
+    S_msrGraceNotesGroup      fPendingGraceNotesGroup;
+
+    void                      handleGraceBeginEventIfAny ();
+
+    void                      handleGraceEndEventIfAny ();
+
 
     // cue notes
     Bool                      fCurrentNoteIsACueNote;
@@ -1469,13 +1493,13 @@ class EXP mxsr2msrSkeletonPopulator :
 																const S_msrNote& note);
 
     void                      handleAGraceNoteAttachedToANote (
-																const S_msrNote& note); // JMI v0.9.72
+																const S_msrNote& graceNote); // JMI v0.9.72
 
     void                      handleARegularNoteInAChordInATuplet (
-                                const S_msrNote& newChordNote);
+                                const S_msrNote& graceNote);
 
     void                      handleAGraceNoteInAChord (
-                                const S_msrNote& newChordNote);
+                                const S_msrNote& graceNote);
 
     // staff changes handling
     // ------------------------------------------------------
@@ -1527,6 +1551,9 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // print
     // ------------------------------------------------------
+
+		void											displayGatheredNoteInformation (
+																const std::string& context);
 
 		void											displayStaffAndVoiceInformation (
                                 int                inputLineNumber,
@@ -2131,18 +2158,6 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      initializeNoteData ();
 
 
-    // grace notes groups handling
-    // ------------------------------------------------------
-
-    Bool                      fCurrentGraceNotesGroupIsSlashed;
-    Bool                      fCurrentGraceNotesGroupIsBeamed;
-
-    Bool                      fCurrentGraceNotesGroupIsTied;
-    Bool                      fCurrentGraceNotesGroupIsSlurred;
-
-    S_msrGraceNotesGroup      fPendingGraceNotesGroup;
-
-
     // articulations handling
     // ------------------------------------------------------
 
@@ -2407,15 +2422,11 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrTuplet               createTuplet (
                                 int inputLineNumber);
 
-    void                      handleTupletBeginEventsIfAny (
-                                int inputLineNumber);
-
-//     void                      handleTupletBeginEventsAfterNoteIfAny ();
+    void                      handleTupletBeginEventsIfAny ();
 
 //     void                      handleTupletEndEventsBeforeNoteIfAny ();
 
-    void                      handleTupletEndEventsIfAny (
-                                int inputLineNumber);
+    void                      handleTupletEndEventsIfAny ();
 
     void                      handleTupletStart (
                                 const S_msrTuplet& tuplet,
@@ -2429,7 +2440,7 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrNote&  note,
                                 const S_msrVoice& currentNoteVoice);
 
-    void                      finalizeTupletIfAny (
+    void                      finalizeTheCurrentTupletIfAny (
                                 int inputLineNumber);
 
 //     void                      reduceTupletStackTop (

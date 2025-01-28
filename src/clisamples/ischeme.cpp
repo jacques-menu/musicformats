@@ -310,6 +310,7 @@ int main (int argc, char* argv[])
     ss <<
       "This is " << serviceName << ' ' <<
       getGlobalMusicFormatsVersionNumberAndDate () <<
+      ", a part of the MusicFormats library (https://github.com/jacques-menu/musicformats)" <<
       std::endl;
 
     gLog <<

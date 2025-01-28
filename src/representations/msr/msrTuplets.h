@@ -171,11 +171,11 @@ class EXP msrTuplet : public msrTupletElement
     S_msrNote             removeFirstNoteFromTuplet ( // JMI
                             int inputLineNumber);
 
-    S_msrNote             removeLastNoteFromTuplet (
-                            int inputLineNumber);
-
-    S_msrTupletElement    removeLastElementFromTuplet (
-                            int inputLineNumber);
+//     S_msrNote             removeLastNoteFromTuplet (
+//                             int inputLineNumber);
+//
+//     S_msrTupletElement    removeLastElementFromTuplet (
+//                             int inputLineNumber);
 
  // JMI   void                  applyDisplayFactorToTupletMembers ();
 

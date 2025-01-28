@@ -263,9 +263,8 @@ S_msrChord msrChord::createChordNewbornClone (
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of chord '" <<
-      asString () <<
-      "'";
+      "Creating a newborn clone of chord " <<
+      asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -412,7 +411,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //       "Setting the uplink to measure of chord " <<
 //       asString () <<
 //       " to measure " << measure->asString () <<
-//       "' in measure '" <<
+//      " in measure " <<
 //       measure->asString () <<
 //       std::endl;
 //
@@ -612,9 +611,9 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
 //       asString () <<
 //       " to " <<
 //       measurePosition.asString () <<
-//       " (was '" <<
+//       " (was " <<
 //       fMeasureElementMeasurePosition.asString () <<
-//       "') in measure " <<
+//      ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
 //       upLinkToMeasure->getMeasureNumber () <<
@@ -2029,9 +2028,9 @@ void msrChord::appendArticulationToChord (
     std::stringstream ss;
 
     ss <<
-      "Appending articulation '" <<
+      "Appending articulation " <<
       art->getArticulationKind () <<
-      "' to chord";
+      " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2083,9 +2082,9 @@ void msrChord::setChordSingleTremolo (
     std::stringstream ss;
 
     ss <<
-      "Adding singleTremolo '" <<
+      "Adding singleTremolo " <<
       trem->asString () <<
-      "' to chord";
+      " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2120,9 +2119,9 @@ void msrChord::appendTechnicalToChord (
     std::stringstream ss;
 
     ss <<
-      "Appending technical '" <<
+      "Appending technical " <<
       tech->asString () <<
-      "' to chord";
+      " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2157,9 +2156,9 @@ void msrChord::appendTechnicalWithIntegerToChord (
     std::stringstream ss;
 
     ss <<
-      "Appending technical with integer '" <<
+      "Appending technical with integer " <<
       tech->asString () <<
-      "' to chord";
+     " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2194,9 +2193,9 @@ void msrChord::appendTechnicalWithFloatToChord (
     std::stringstream ss;
 
     ss <<
-      "Appending technical with integer '" <<
+      "Appending technical with integer " <<
       tech->asString () <<
-      "' to chord";
+     " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2231,9 +2230,9 @@ void msrChord::appendTechnicalWithStringToChord (
     std::stringstream ss;
 
     ss <<
-      "Appending technical with string '" <<
+      "Appending technical with string " <<
       tech->asString () <<
-      "' to chord";
+     " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2263,9 +2262,9 @@ void msrChord::appendOrnamentToChord (
     std::stringstream ss;
 
     ss <<
-      "Appending ornament '" <<
+      "Appending ornament " <<
       msrOrnamentKindAsString (orn->getOrnamentKind ()) <<
-      "' to chord";
+     " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2295,9 +2294,9 @@ void msrChord::appendGlissandoToChord (
     std::stringstream ss;
 
     ss <<
-      "Appending glissando '" <<
+      "Appending glissando " <<
       gliss->asString () <<
-      "' to chord";
+      " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2331,9 +2330,9 @@ void msrChord::appendSlideToChord (
     std::stringstream ss;
 
     ss <<
-      "Appending slide '" <<
+      "Appending slide " <<
       slide->asString () <<
-      "' to chord";
+      " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2352,8 +2351,8 @@ void msrChord::appendChordSlurLinkToChord (
     std::stringstream ss;
 
     ss <<
-      "Adding slur link '" << chordSlurLink->asString() <<
-      "' to chord '" << asString () << "'";
+      "Adding slur link " << chordSlurLink->asString() <<
+      " to chord " << asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2372,8 +2371,8 @@ void msrChord::appendStemToChord (
     std::stringstream ss;
 
     ss <<
-      "Adding stem '" << stem->asString() <<
-      "' to chord '" << asString () << "'";
+      "Adding stem " << stem->asString() <<
+      " to chord " << asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2417,9 +2416,9 @@ void msrChord::appendBeamToChord (const S_msrBeam& beam)
     std::stringstream ss;
 
     ss <<
-      "Appending beam '" <<
+      "Appending beam " <<
       beam->asString () <<
-      "' to chord";
+      " to chord";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2458,9 +2457,9 @@ void msrChord::appendChordBeamLinkToChord (
 //     std::stringstream ss;
 //
 //     ss <<
-//       "Finalizing chord '" <<
+//       "Finalizing chord " <<
 //       asString () <<
-//       "', line " << inputLineNumber <<
+//       ", line " << inputLineNumber <<
 //       std::endl <<
 //       "fMeasureElementMeasurePosition: " <<
 //       std::endl <<
@@ -2868,10 +2867,10 @@ void msrChord::applyTupletMemberDisplayFactorToChordMembers (
     std::stringstream ss;
 
     ss <<
-      "Applying tuplet member sounding factor '" <<
+      "Applying tuplet member sounding factor " <<
       actualNotes << '/' << normalNotes <<
-      "' to the members of chord '" << asStringwithRawDivisions () <<
-      "', line " << fInputStartLineNumber <<
+      " to the members of chord " << asStringwithRawDivisions () <<
+      ", line " << fInputStartLineNumber <<
       std::endl;
 
   for (
@@ -2925,10 +2924,10 @@ std::string msrChord::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Chord asString ()" << // JMI v0.9.71
+    "[Chord" << // JMI v0.9.71
     ", fChordKind: " << fChordKind <<
     ", line " << fInputStartLineNumber <<
-    " <";
+    ", fChordNotesVector: <";
 
   if (fChordNotesVector.size ()) {
     std::vector <S_msrNote>::const_iterator
@@ -2945,15 +2944,15 @@ std::string msrChord::asString () const
         ", display: " <<
         note->getNoteDisplayWholeNotes ().asFractionString () <<
         ", octave: " <<
-        note->getNoteOctaveKind () <<
-        ']';
+        note->getNoteOctaveKind ();
 
       if (++i == iEnd) break;
-      ss << ' ';
+      ss << ', ';
     } // for
   }
+  ss << '>';
 
-  ss << ">]";
+  ss << ']';
 
   return ss.str ();
 }
@@ -2966,7 +2965,7 @@ std::string msrChord::asShortString () const
     "[Chord asShortString ()" << // JMI v0.9.71
     ", " << fChordKind <<
     ", line " << fInputStartLineNumber <<
-    ", <";
+    ", fChordNotesVector: <";
 
   if (fChordNotesVector.size ()) {
     std::vector <S_msrNote>::const_iterator
@@ -2990,8 +2989,9 @@ std::string msrChord::asShortString () const
       ss << ", ";
     } // for
   }
+  ss << '>';
 
-  ss << "> ]";
+  ss << ']';
 
   return ss.str ();
 }
@@ -4566,9 +4566,8 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of grace notes group link '" <<
-      asShortString () <<
-      "'";
+      "Creating a newborn clone of grace notes group link " <<
+      asShortString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4824,9 +4823,8 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of grace notes group link '" <<
-      asShortString () <<
-      "'";
+      "Creating a newborn clone of grace notes group link " <<
+      asShortString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5053,9 +5051,8 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
     std::stringstream ss;
 
     ss <<
-      "Creating a newborn clone of grace notes group link '" <<
-      asShortString () <<
-      "'";
+      "Creating a newborn clone of grace notes group link " <<
+      asShortString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

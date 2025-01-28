@@ -161,7 +161,7 @@ static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
     return mfMusicformatsErrorKind::kMusicformatsError_NONE;
   }
 
-  // populate the MSR skeleton from MusicXML data (pass 3)
+  // populate the MSR skeleton from the MXSR (pass 3)
   // ------------------------------------------------------
 
   try {

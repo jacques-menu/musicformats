@@ -2855,7 +2855,7 @@ void msrNote::setGraceNotesGroupBeforeNote (
   const S_msrGraceNotesGroup& graceNotesGroupBefore)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2872,7 +2872,7 @@ void msrNote::setGraceNotesGroupBeforeNote (
 #endif // MF_TRACE_IS_ENABLED
 
   // register the before grace notes group in the note
-  fGraceNotesGroupBeforeNote= graceNotesGroupBefore;
+  fGraceNotesGroupBeforeNote = graceNotesGroupBefore;
 
   // setup the grace notes group's note upLink
   graceNotesGroupBefore->
@@ -2884,7 +2884,7 @@ void msrNote::setGraceNotesGroupAfterNote (
   const S_msrGraceNotesGroup& graceNotesGroupAfter)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceGraceNotes ()) {
+  if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
