@@ -3612,7 +3612,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
 void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<

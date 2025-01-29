@@ -433,7 +433,7 @@ void mxsrStaffChangeEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fStaffChangeEventKind" << " : " << fStaffChangeEventKind <<
+    "fStaffChangeEventKind" << ": " << fStaffChangeEventKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -451,7 +451,7 @@ void mxsrStaffChangeEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "staff change" << " : " <<
+    "staff change" << ": " <<
      "S" << fTakeOffStaffNumber << "/" << "V" << fNoteEventVoiceNumber <<
      " ->> " <<
      "S" << fLandingStaffNumber << "/" << "V" << fNoteEventVoiceNumber <<
@@ -560,7 +560,7 @@ void mxsrGraceEvent::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fEventInputStartLineNumber" << " : " << fEventInputStartLineNumber <<
+    "fEventInputStartLineNumber" << ": " << fEventInputStartLineNumber <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fEventInputEndLineNumber" << " :L" << fEventInputEndLineNumber <<
@@ -581,7 +581,7 @@ void mxsrGraceEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceEventKind" << " : " << fGraceEventKind <<
+    "fGraceEventKind" << ": " << fGraceEventKind <<
     std::endl;
 
   --gIndenter;
@@ -687,7 +687,7 @@ void mxsrCueEvent::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fEventInputStartLineNumber" << " : " << fEventInputStartLineNumber <<
+    "fEventInputStartLineNumber" << ": " << fEventInputStartLineNumber <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fEventInputEndLineNumber" << " :L" << fEventInputEndLineNumber <<
@@ -708,7 +708,7 @@ void mxsrCueEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCueEventKind" << " : " << fCueEventKind <<
+    "fCueEventKind" << ": " << fCueEventKind <<
     std::endl;
 
   --gIndenter;
@@ -814,7 +814,7 @@ void mxsrChordEvent::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fEventInputStartLineNumber" << " : " << fEventInputStartLineNumber <<
+    "fEventInputStartLineNumber" << ": " << fEventInputStartLineNumber <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "fEventInputEndLineNumber" << " :L" << fEventInputEndLineNumber <<
@@ -835,7 +835,7 @@ void mxsrChordEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fChordEventKind" << " : " << fChordEventKind <<
+    "fChordEventKind" << ": " << fChordEventKind <<
     std::endl;
 
   --gIndenter;
@@ -947,10 +947,10 @@ void mxsrTupletEvent::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fEventInputStartLineNumber" << " : " << fEventInputStartLineNumber <<
+    "fEventInputStartLineNumber" << ": " << fEventInputStartLineNumber <<
     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "fEventInputEndLineNumber" << " : " << fEventInputEndLineNumber <<
+//     "fEventInputEndLineNumber" << ": " << fEventInputEndLineNumber <<
 
     std::setw (fieldWidth) <<
     "fEventSequentialNumber" << " : E" << fEventSequentialNumber <<
@@ -967,7 +967,7 @@ void mxsrTupletEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTupletEventKind" << " : " << fTupletEventKind <<
+    "fTupletEventKind" << ": " << fTupletEventKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fTupletNumber" << " : T" << fTupletNumber <<
@@ -2222,7 +2222,7 @@ void mxsrEventsCollection::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fAllEventsList" << " : " <<
+    "fAllEventsList" << ": " <<
     mfSingularOrPlural (
       fAllEventsList.size (),
       "element",
@@ -2230,14 +2230,14 @@ void mxsrEventsCollection::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fStaffChangeTakeOffsMap" << " : " <<
+    "fStaffChangeTakeOffsMap" << ": " <<
     mfSingularOrPlural (
       fStaffChangeTakeOffsMap.size (),
       "element",
       "elements") <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fStaffChangeLandingsMap" << " : " <<
+    "fStaffChangeLandingsMap" << ": " <<
     mfSingularOrPlural (
       fStaffChangeLandingsMap.size (),
       "element",
@@ -2245,14 +2245,14 @@ void mxsrEventsCollection::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceBeginsMap" << " : " <<
+    "fGraceBeginsMap" << ": " <<
     mfSingularOrPlural (
       fGraceBeginsMap.size (),
       "element",
       "elements") <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fGraceEndsMap" << " : " <<
+    "fGraceEndsMap" << ": " <<
     mfSingularOrPlural (
       fGraceEndsMap.size (),
       "element",
@@ -2260,14 +2260,14 @@ void mxsrEventsCollection::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCueBeginsMap" << " : " <<
+    "fCueBeginsMap" << ": " <<
     mfSingularOrPlural (
       fCueBeginsMap.size (),
       "element",
       "elements") <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fCueEndsMap" << " : " <<
+    "fCueEndsMap" << ": " <<
     mfSingularOrPlural (
       fCueEndsMap.size (),
       "element",
@@ -2275,14 +2275,14 @@ void mxsrEventsCollection::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fChordBeginsMap" << " : " <<
+    "fChordBeginsMap" << ": " <<
     mfSingularOrPlural (
       fChordBeginsMap.size (),
       "element",
       "elements") <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fChordEndsMap" << " : " <<
+    "fChordEndsMap" << ": " <<
     mfSingularOrPlural (
       fChordEndsMap.size (),
       "element",
@@ -2290,7 +2290,7 @@ void mxsrEventsCollection::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTupletEventsMultiMap" << " : " <<
+    "fTupletEventsMultiMap" << ": " <<
     mfSingularOrPlural (
       fTupletEventsMultiMap.size (),
       "element",

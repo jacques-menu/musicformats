@@ -13641,19 +13641,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       &&
     measureKind != msrMeasureKind::kMeasureKindOverFlowing
   ) {
-  /* JMI
-    fLilypondCodeStream <<
-      std::endl <<
-      "\\cadenzaOff" <<
-      std::endl <<
- // JMI     "\\undo \\omit Staff.TimeSignature" <<
-      std::endl <<
-      "\\bar \"|\" "; // JMI ???
-      */
-
     if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
-        " % msrMeasureKind::kMeasureKindOverFlowing End";
+        " % msrMeasureKind::kMeasureKindOverFlowing End" <<
+        std::endl;
     }
 
     fLilypondCodeStream <<
@@ -13830,18 +13821,19 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
         fLilypondCodeStream <<
           std::endl <<
-          "\\cadenzaOn" <<
+          "%{ begin kMeasureKindOverFlowing, measure " <<
+          fCurrentMeasureNumber <<
+          " %}" <<
           std::endl <<
           "% measureCurrentAccumulatedWholeNotesDuration: " <<
-          measureCurrentAccumulatedWholeNotesDuration.asString () <<
-          std::endl <<
-          "\\omit Staff.TimeSignature";
+          measureCurrentAccumulatedWholeNotesDuration.asString ();
+//           std::endl; // JMI v0.9.72 too much otherwise
 
-        if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
-          fLilypondCodeStream << " % msrMeasureKind::kMeasureKindOverFlowing Start";
-        }
-
-        fLilypondCodeStream << std::endl;
+//         if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
+//           fLilypondCodeStream << " % msrMeasureKind::kMeasureKindOverFlowing Start";
+//         }
+//
+//         fLilypondCodeStream << std::endl;
 
         fOnGoingVoiceCadenza = true;
       }
@@ -14115,9 +14107,9 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       case msrMeasureKind::kMeasureKindOverFlowing:
         fLilypondCodeStream <<
           std::endl <<
-          "\\undo \\omit Staff.TimeSignature |" << // JMI v0.9.72 ???
-          std::endl <<
-          "\\cadenzaOff" <<
+          "%{ end kMeasureKindOverFlowing, measure " <<
+          fCurrentMeasureNumber <<
+          " %}" <<
           std::endl;
 
         fOnGoingVoiceCadenza = false;

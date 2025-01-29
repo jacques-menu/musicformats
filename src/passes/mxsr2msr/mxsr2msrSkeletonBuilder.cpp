@@ -2062,8 +2062,8 @@ void mxsr2msrSkeletonBuilder::doHandlePendingTupletsStopsIfAny (
 			pendingTupletStop->getStaffNumber (),
 			pendingTupletStop->getVoiceNumber (),
 			pendingTupletStop->getTupletNumber (),
-			inputStartLineNumber,
-			inputStartLineNumber); // should be inputEndLineNumber JMI v0.9.72
+			pendingTupletStop->getEventInputStartLineNumber (),
+			pendingTupletStop->getEventInputStartLineNumber ());
 
 		// forget about the pending tuplet stop
 		it = fPendingTupletsStopsMap.erase (it);
@@ -4905,74 +4905,74 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 void mxsr2msrSkeletonBuilder::displayGatheredNoteInformations (
 	const std::string& context)
 {
-	int constexpr fieldWidth = 30;
+	int constexpr fieldWidth = 33;
 
-	gLog <<
+	gLog << std::left <<
 		"--> " <<
 		context <<
 		std::endl <<
 
 		std::setw (fieldWidth) <<
-		"fCurrentNoteStartInputLineNumber " << " : " <<
+		"fCurrentNoteStartInputLineNumber " << ": " <<
 		fCurrentNoteStartInputLineNumber <<
 		std::endl <<
 
 		std::setw (fieldWidth) <<
-		"fPreviousNoteSequentialNumber " << " : " <<
+		"fPreviousNoteSequentialNumber" << ": " <<
 		fPreviousNoteSequentialNumber <<
 		std::endl <<
 		std::setw (fieldWidth) <<
-		"fCurrentNoteSequentialNumber " << " : " <<
+		"fCurrentNoteSequentialNumber" << ": " <<
 		fCurrentNoteSequentialNumber <<
 		std::endl <<
 
 		std::setw (fieldWidth) <<
-		"fCurrentNoteStaffNumber " << " : " <<
+		"fCurrentNoteStaffNumber" << ": " <<
 		fCurrentNoteStaffNumber <<
 		std::endl <<
 		std::setw (fieldWidth) <<
-		"fCurrentNoteVoiceNumber " << " : " <<
+		"fCurrentNoteVoiceNumber" << ": " <<
 		fCurrentNoteVoiceNumber <<
 		std::endl <<
 
 		std::setw (fieldWidth) <<
-		"fPreviousNoteIsATakeOffCandidate " << " : " <<
+		"fPreviousNoteIsATakeOffCandidate" << ": " <<
 		fPreviousNoteIsATakeOffCandidate <<
 		std::endl <<
 
 		std::setw (fieldWidth) <<
-		"fPreviousNoteIsAGraceNote " << " : " <<
+		"fPreviousNoteIsAGraceNote" << ": " <<
 		fPreviousNoteIsAGraceNote <<
 		std::endl <<
 		std::setw (fieldWidth) <<
-		"fCurrentNoteIsAGraceNote " << " : " <<
+		"fCurrentNoteIsAGraceNote" << ": " <<
 		fCurrentNoteIsAGraceNote <<
 		std::endl <<
 
 		std::setw (fieldWidth) <<
-		"fPreviousNoteIsACueNote " << " : " <<
+		"fPreviousNoteIsACueNote" << ": " <<
 		fPreviousNoteIsACueNote <<
 		std::endl <<
 		std::setw (fieldWidth) <<
-		"fCurrentNoteIsACueNote " << " : " <<
+		"fCurrentNoteIsACueNote" << ": " <<
 		fCurrentNoteIsACueNote <<
 		std::endl <<
 
 		std::setw (fieldWidth) <<
-		"fPreviousNoteBelongsToAChord " << " : " <<
+		"fPreviousNoteBelongsToAChord" << ": " <<
 		fPreviousNoteBelongsToAChord <<
 		std::endl <<
 		std::setw (fieldWidth) <<
-		"fCurrentNoteBelongsToAChord " << " : " <<
+		"fCurrentNoteBelongsToAChord" << ": " <<
 		fCurrentNoteBelongsToAChord <<
 		std::endl <<
 
 		std::setw (fieldWidth) <<
-		"fPreviousNoteBelongsToATuplet " << " : " <<
+		"fPreviousNoteBelongsToATuplet" << ": " <<
 		fPreviousNoteBelongsToATuplet <<
 		std::endl <<
 		std::setw (fieldWidth) <<
-		"fCurrentNoteBelongsToATuplet " << " : " <<
+		"fCurrentNoteBelongsToATuplet" << ": " <<
 		fCurrentNoteBelongsToATuplet <<
 		std::endl;
 }

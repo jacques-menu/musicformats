@@ -2386,7 +2386,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
 
     Bool                      fCurrentNoteBelongsToATuplet;
-    Bool                      fATupletIsEnding;
     int                       fEndingTupletNumber;
 
     // a tuplet stop may occur in a chord before the latter's last note, hence:
@@ -2440,7 +2439,7 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrNote&  note,
                                 const S_msrVoice& currentNoteVoice);
 
-    void                      finalizeTheCurrentTupletIfAny (
+    void                      handleTheTupletsStackTopIfAny (
                                 int inputLineNumber);
 
 //     void                      reduceTupletStackTop (

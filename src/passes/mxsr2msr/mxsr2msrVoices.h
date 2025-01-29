@@ -76,8 +76,9 @@ class mxsrVoice : public smartable
     std::string           fetchMsrVoiceName () const
                               { return fMsrVoice->getVoiceName (); }
 
-    void                  pushTupletOntoTupletsStack (const S_msrTuplet& tuplet)
-                              { fTupletsStack.push_front (tuplet); }
+    void                  pushTupletOntoTupletsStack (
+                            const S_msrTuplet& tuplet,
+                            std::string        context);
 
 //     void                  handleTupletStartByHandler (
 //                             const S_msrTuplet& tuplet,
@@ -91,7 +92,7 @@ class mxsrVoice : public smartable
 //                             const S_msrNote&   note,
 //                             const S_msrVoice&  currentNoteVoice);
 
-    void                  popTupletStackTopAndFinalizeIt (
+    void                  popTupletStackTopAndAppendItWhereItBelongs (
                             int         inputLineNumber,
                             std::string context);
 
