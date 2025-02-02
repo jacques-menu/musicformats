@@ -85,7 +85,7 @@ Sxmlelement msr2mxsrTranslator::translateMsrToMxsr ()
   mfAssert (
     __FILE__, __LINE__,
     fVisitedMsrScore != nullptr,
-    "fVisitedMsrScore is null");
+    "fVisitedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // create the current score part-wise element

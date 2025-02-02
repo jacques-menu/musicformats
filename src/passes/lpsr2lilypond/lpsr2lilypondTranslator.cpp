@@ -488,7 +488,7 @@ if (false) // JMI
         __FILE__, __LINE__,
         gGlobalLpsr2lilypondOahGroup->
         getFixedOctaveEntrySemiTonesPitchAndOctave () != nullptr,
-       "gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave () is null");
+       "gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       fCurrentOctaveEntryReference =
@@ -1305,7 +1305,7 @@ std::string lpsr2lilypondTranslator::notePitchAsLilypondString (
           std::stringstream ss;
 
           ss <<
-            "notePitchAsLilypondString() 2: fCurrentOctaveEntryReference is null" <<
+            "notePitchAsLilypondString() 2: fCurrentOctaveEntryReference is NULL" <<
             " upon note " << note->asString () <<
             ", line " << note->getInputStartLineNumber ();
 
@@ -5115,7 +5115,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
             mfAssert (
               __FILE__, __LINE__,
               spannerStartEnd != nullptr,
-              "spannerStartEnd is null");
+              "spannerStartEnd is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
             // has the start end a trill ornament?
@@ -9849,7 +9849,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
 // JMI    gLog << "--> partName: \"" << partName << "\"" << std::endl;
 
-    if (partName.size () == 0) {
+    if (partName.empty ()) {
       partName =
         staffUpLinkToPart->
           getPartAlphabeticName ();
@@ -9939,7 +9939,7 @@ if (true)
       staffUpLinkToPart->
         getPartAbbreviation ();
 
-    if (partAbbreviation.size () == 0) {
+    if (partAbbreviation.empty ()) {
       partAbbreviation =
         staffUpLinkToPart->
           getPartAbbreviation ();
@@ -13924,7 +13924,9 @@ void lpsr2lilypondTranslator::generateCodeForMusicallyEmptyMeasure (
       break;
   } // switch
 
-mfAssertFalse (999);
+  mfAssertFalse ( // JMI for debug
+    __FILE__, __LINE__,
+    "generateCodeForMusicallyEmptyMeasure()");
 
   // generate the duration of the skip from the full measure whole notes JMI v0.9.68
   fLilypondCodeStream <<
@@ -14058,7 +14060,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     mfAssert (
       __FILE__, __LINE__,
       spannerStartEnd != nullptr,
-      "spannerStartEnd is null");
+      "spannerStartEnd is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
@@ -21240,7 +21242,7 @@ slash = \tweak Flag.stroke-style grace \etc
       mfAssert (
         __FILE__, __LINE__,
         element != nullptr,
-        "element is null");
+        "element is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       elementNumber += 1;
@@ -24394,7 +24396,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
     mfAssert (
       __FILE__, __LINE__,
       firstChordStem != nullptr,
-      "firstChordStem is null");
+      "firstChordStem is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED

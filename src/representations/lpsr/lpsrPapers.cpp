@@ -59,11 +59,11 @@ lpsrPaper::lpsrPaper (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     scaling != nullptr,
-//     "scaling is null");
+//     "scaling is NULL");
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     pageLayout != nullptr,
-//     "pageLayout is null");
+//     "pageLayout is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fScaling = scaling;

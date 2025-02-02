@@ -139,7 +139,7 @@ msrDoubleTremolo::~msrDoubleTremolo ()
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -183,12 +183,12 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     doubleTremoloFirstElement != nullptr,
-    "doubleTremoloFirstElement is null");
+    "doubleTremoloFirstElement is NULL");
 
   mfAssert (
     __FILE__, __LINE__,
     doubleTremoloSecondElement != nullptr,
-    "doubleTremoloSecondElement is null");
+    "doubleTremoloSecondElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrDoubleTremolo

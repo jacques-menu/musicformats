@@ -304,7 +304,7 @@ void msdlParser::displayTokenKindsSetsStack (const std::string& context)
       mfAssert (
         __FILE__, __LINE__,
         tokenKindsSet != nullptr,
-        "tokenKindsSet is null");
+        "tokenKindsSet is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       gLog <<
@@ -1056,7 +1056,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
         __FILE__, __LINE__,
         gGlobalLpsr2lilypondOahGroup->
         getFixedOctaveEntrySemiTonesPitchAndOctave () != nullptr,
-       "gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave () is null");
+       "gGlobalLpsr2lilypondOahGroup->getFixedOctaveEntrySemiTonesPitchAndOctave () is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       fCurrentOctaveEntryReference =

@@ -48,7 +48,7 @@ EXP void translateMxsrToMusicXML (
   mfAssert (
     __FILE__, __LINE__,
     theMxsr != nullptr,
-    "translateMxsrToMusicXML(): theMxsr is null");
+    "translateMxsrToMusicXML(): theMxsr is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -185,7 +185,7 @@ EXP void translateMxsrToMusicXML (
     musicxmlFileOutputStream << std::endl;
   }
   else {
-    err << "TXMLFile::elements() is null" << std::endl;
+    err << "TXMLFile::elements() is NULL" << std::endl;
   }
 
     // close output file

@@ -277,7 +277,7 @@ S_msrChord msrChord::createChordNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
-    "containingPart is null");
+    "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrChord
@@ -398,7 +398,7 @@ S_msrChord msrChord::createChordNewbornClone (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -824,7 +824,7 @@ void msrChord::copyNoteElementsIfAnyToChord (
   mfAssert (
     __FILE__, __LINE__,
     note != nullptr, // JMI v0.9.70
-    "chord is null");
+    "chord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // copy note's articulations if any to the chord
@@ -2947,7 +2947,7 @@ std::string msrChord::asString () const
         note->getNoteOctaveKind ();
 
       if (++i == iEnd) break;
-      ss << ', ';
+      ss << ", ";
     } // for
   }
   ss << '>';
@@ -4543,12 +4543,12 @@ msrChordBeamLink::msrChordBeamLink (
   mfAssert (
     __FILE__, __LINE__,
     originalBeam != nullptr,
-    "originalBeam is null");
+    "originalBeam is NULL");
 
   mfAssert (
     __FILE__, __LINE__,
     upLinkToChord != nullptr,
-    "upLinkToChord is null");
+    "upLinkToChord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToChord = upLinkToChord;
@@ -4581,7 +4581,7 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
@@ -4800,12 +4800,12 @@ msrChordSlurLink::msrChordSlurLink (
   mfAssert (
     __FILE__, __LINE__,
     originalSlur != nullptr,
-    "originalSlur is null");
+    "originalSlur is NULL");
 
   mfAssert (
     __FILE__, __LINE__,
     upLinkToChord != nullptr,
-    "upLinkToChord is null");
+    "upLinkToChord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToChord = upLinkToChord;
@@ -4838,7 +4838,7 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
@@ -5028,12 +5028,12 @@ msrChordGraceNotesGroupLink::msrChordGraceNotesGroupLink (
   mfAssert (
     __FILE__, __LINE__,
     originalGraceNotesGroup != nullptr,
-    "originalGraceNotesGroup is null");
+    "originalGraceNotesGroup is NULL");
 
   mfAssert (
     __FILE__, __LINE__,
     upLinkToChord != nullptr,
-    "upLinkToChord is null");
+    "upLinkToChord is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToChord = upLinkToChord;
@@ -5066,7 +5066,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
@@ -5154,11 +5154,11 @@ void msrChordGraceNotesGroupLink::acceptOut (basevisitor* v)
 
 void msrChordGraceNotesGroupLink::browseData (basevisitor* v)
 {
-  std::list <S_msrMeasureElement>::const_iterator i;
-
-  // browse the original grace notes group
-  msrBrowser<msrGraceNotesGroup> browser (v);
-  browser.browse (*fOriginalGraceNotesGroup);
+//   std::list <S_msrMeasureElement>::const_iterator i; VITAL
+//
+//   // browse the original grace notes group
+//   msrBrowser<msrGraceNotesGroup> browser (v);
+//   browser.browse (*fOriginalGraceNotesGroup);
 }
 
 std::string msrChordGraceNotesGroupLink::asShortString () const
@@ -5211,7 +5211,7 @@ void msrChordGraceNotesGroupLink::print (std::ostream& os) const
 
   ++gIndenter;
   os <<
-    fOriginalGraceNotesGroup <<
+    "fOriginalGraceNotesGroup" <<
     std::endl;
   --gIndenter;
 

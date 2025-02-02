@@ -102,12 +102,12 @@ lpsrScore::lpsrScore (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 
   mfAssert (
     __FILE__, __LINE__,
     multiComponent != nullptr,
-    "multiComponent is null");
+    "multiComponent is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fEmbeddedMsrScore = theMsrScore;
@@ -3148,7 +3148,7 @@ void lpsrScore::printFull (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     fEmbeddedMsrScore != nullptr,
-    "fEmbeddedMsrScore is null");
+    "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -3366,7 +3366,7 @@ void lpsrScore::printSummary (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     fEmbeddedMsrScore != nullptr,
-    "fEmbeddedMsrScore is null");
+    "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -3584,7 +3584,7 @@ void lpsrScore::printNames (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     fEmbeddedMsrScore != nullptr,
-    "fEmbeddedMsrScore is null");
+    "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -3802,7 +3802,7 @@ void lpsrScore::printFlatView (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     fEmbeddedMsrScore != nullptr,
-    "fEmbeddedMsrScore is null");
+    "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -4020,7 +4020,7 @@ void lpsrScore::printSlices (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     fEmbeddedMsrScore != nullptr,
-    "fEmbeddedMsrScore is null");
+    "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -4236,7 +4236,7 @@ void lpsrScore::print (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     fEmbeddedMsrScore != nullptr,
-    "fEmbeddedMsrScore is null");
+    "fEmbeddedMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;

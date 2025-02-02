@@ -412,6 +412,14 @@ void msrTuplet::appendChordToTuplet (const S_msrChord& chord)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    chord != nullptr,
+    "chord is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   // set the chord kind
   chord->setChordKind (msrChordInKind::kChordInTuplet);
 

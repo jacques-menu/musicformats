@@ -248,7 +248,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         if (
           fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeStop
             &&
-          fCurrentBarLineEndingNumber.size () != 0
+          ! fCurrentBarLineEndingNumber.empty ()
         ) {
           // hooked ending end
           // ------------------------------------------------------
@@ -290,7 +290,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         else if (
           fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue
             &&
-          fCurrentBarLineEndingNumber.size () != 0
+          ! fCurrentBarLineEndingNumber.empty ()
         ) {
           // hookless ending end
           // ------------------------------------------------------

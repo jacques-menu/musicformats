@@ -139,7 +139,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
   mfAssert (
     __FILE__, __LINE__,
     group != nullptr,
-    "group is null");
+    "group is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -183,7 +183,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
   mfAssert (
     __FILE__, __LINE__,
     group != nullptr,
-    "group is null");
+    "group is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED

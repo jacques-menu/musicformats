@@ -79,7 +79,7 @@ msrStaff::msrStaff (
   mfAssert (
     __FILE__, __LINE__,
     staffUpLinkToPart != nullptr,
-    "staffUpLinkToPart is null");
+    "staffUpLinkToPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set staff part upLink
@@ -382,7 +382,7 @@ S_msrStaff msrStaff::createStaffNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
-    "containingPart is null");
+    "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrStaff
@@ -595,7 +595,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
     mfAssert (
       __FILE__, __LINE__,
       voice != nullptr,
-      "voice is null");
+      "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     voice->
@@ -636,7 +636,7 @@ void msrStaff::setNextMeasureNumberInStaff (
     mfAssert (
       __FILE__, __LINE__,
       voice != nullptr,
-      "voice is null");
+      "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1343,7 +1343,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
       mfAssert (
         __FILE__, __LINE__,
         voice != nullptr,
-        "voice is null");
+        "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       ++voiceSequentialCounter;
@@ -1470,7 +1470,7 @@ void msrStaff::registerVoiceInStaff (
   mfAssert (
     __FILE__, __LINE__,
     voice != nullptr,
-    "voice is null");
+    "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1582,7 +1582,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
   mfAssert (
     __FILE__, __LINE__,
     voice != nullptr,
-    "voice is null");
+    "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -1699,7 +1699,7 @@ void msrStaff::registerVoiceInStaffClone (
   mfAssert (
     __FILE__, __LINE__,
     voice != nullptr,
-    "voice is null");
+    "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -2965,7 +2965,7 @@ void msrStaff::appendStaffDetailsToStaff (
   mfAssert (
     __FILE__, __LINE__,
     staffDetails != nullptr,
-    "staffDetails is null");
+    "staffDetails is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register staff details in staff
@@ -3813,7 +3813,7 @@ void msrStaff::printFull (std::ostream& os) const
       mfAssert (
         __FILE__, __LINE__,
         voice != nullptr,
-        "voice is null");
+        "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       ++voiceNumber;
@@ -3863,7 +3863,7 @@ void msrStaff::printFull (std::ostream& os) const
       mfAssert (
         __FILE__, __LINE__,
         voice != nullptr,
-        "voice is null");
+        "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       os <<
@@ -3910,7 +3910,7 @@ void msrStaff::printFull (std::ostream& os) const
       mfAssert (
         __FILE__, __LINE__,
         voice != nullptr,
-        "voice is null");
+        "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       os <<

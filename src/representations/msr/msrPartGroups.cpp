@@ -118,7 +118,7 @@ msrPartGroup::msrPartGroup (
   mfAssert (
     __FILE__, __LINE__,
     fPartGroupUpLinkToScore != nullptr,
-    "fPartGroupUpLinkToScore is null");
+    "fPartGroupUpLinkToScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
@@ -193,7 +193,7 @@ msrPartGroup::msrPartGroup (
   mfAssert (
     __FILE__, __LINE__,
     fPartGroupUpLinkToScore != nullptr,
-    "fPartGroupUpLinkToScore is null");
+    "fPartGroupUpLinkToScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
@@ -279,7 +279,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingartGroupClone != nullptr,
-    "containingartGroupClone is null");
+    "containingartGroupClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
@@ -288,7 +288,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     scoreClone != nullptr,
-    "scoreClone is null");
+    "scoreClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrPartGroup

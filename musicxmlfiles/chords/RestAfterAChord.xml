@@ -3,7 +3,7 @@
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.0">
   <work>
-    <work-title>Single Chord</work-title>
+    <work-title>Rest After A Chord</work-title>
     </work>
   <!--identification>
     <encoding>

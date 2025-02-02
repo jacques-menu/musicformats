@@ -53,7 +53,7 @@ msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
   mfAssert (
     __FILE__, __LINE__,
     afterGraceNotesGroupContentsUpLinkToVoice != nullptr,
-    "afterGraceNotesGroupContentsUpLinkToVoice is null");
+    "afterGraceNotesGroupContentsUpLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set after notes contents's voice upLink
@@ -98,7 +98,7 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::createAfterGr
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrAfterGraceNotesGroupContents
@@ -307,7 +307,7 @@ msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
   mfAssert (
     __FILE__, __LINE__,
     afterGraceNotesGroupUpLinkToVoice != nullptr,
-    "afterGraceNotesGroupUpLinkToVoice is null");
+    "afterGraceNotesGroupUpLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set after gracenotes group voice upLink
@@ -368,12 +368,12 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::createAfterGraceNotesGroupNew
   mfAssert (
     __FILE__, __LINE__,
     noteClone != nullptr,
-    "noteClone is null");
+    "noteClone is NULL");
 
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrAfterGraceNotesGroup

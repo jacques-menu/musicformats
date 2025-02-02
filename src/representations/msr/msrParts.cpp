@@ -80,7 +80,7 @@ msrPart::msrPart (
   mfAssert (
     __FILE__, __LINE__,
     partUpLinkToPartGroup != nullptr,
-    "partUpLinkToPartGroup is null");
+    "partUpLinkToPartGroup is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
@@ -228,7 +228,7 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
   mfAssert (
     __FILE__, __LINE__,
     partGroupClone != nullptr,
-    "partGroupClone is null");
+    "partGroupClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrPart
@@ -3358,7 +3358,7 @@ void msrPart::collectPartMeasuresSlices (
         ss <<
         "The staffMeasuresSlicesSequence of staff \"" <<
         staff->getStaffName () <<
-        "\" is null";
+        "\" is NULL";
 
       msrWarning (
         gServiceRunData->getInputSourceName (),
@@ -4047,7 +4047,7 @@ void msrPart::printFull (std::ostream& os) const
       mfAssert (
         __FILE__, __LINE__,
         staff != nullptr,
-        "staff is null");
+        "staff is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       msrStaffKind
@@ -4240,7 +4240,7 @@ void msrPart::print (std::ostream& os) const
       mfAssert (
         __FILE__, __LINE__,
         staff != nullptr,
-        "staff is null");
+        "staff is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       msrStaffKind

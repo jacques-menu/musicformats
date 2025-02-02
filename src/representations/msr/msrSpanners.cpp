@@ -109,7 +109,7 @@ void msrSpanner::setSpannerSideLinkToOtherEnd (
   mfAssert (
     __FILE__, __LINE__,
     sideLinkToOtherEnd != nullptr,
-    "sideLinkToOtherEnd is null");
+    "sideLinkToOtherEnd is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set the two-way sideLink between both ends of the spanner

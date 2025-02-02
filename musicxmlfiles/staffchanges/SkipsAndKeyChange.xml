@@ -2,7 +2,7 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
   <work>
-    <work-title>Unbenanntes Projekt 1</work-title>
+    <work-title>SkipsAndKeyChange</work-title>
   </work>
   <movement-title>Partie 1</movement-title>
   <identification>
@@ -36,7 +36,7 @@
   </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words font-family="Academico" font-size="20" justify="center" valign="middle" default-x="593.75" default-y="1562.5" xml:space="preserve">Unbenanntes Projekt 1</credit-words>
+    <credit-words font-family="Academico" font-size="20" justify="center" valign="middle" default-x="593.75" default-y="1562.5" xml:space="preserve">SkipsAndKeyChange</credit-words>
   </credit>
   <part-list>
     <score-part id="P1">

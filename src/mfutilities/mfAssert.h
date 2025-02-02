@@ -29,7 +29,10 @@ EXP void mfAssert (
   Bool               condition,
   const std::string& messageIfFalse);
 
-EXP void mfAssertFalse (int identifier); // for debugging
+EXP void mfAssertFalse (
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& messageIfFalse);
 
 //______________________________________________________________________________
 // assert with input location

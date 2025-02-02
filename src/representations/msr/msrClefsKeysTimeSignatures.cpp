@@ -298,7 +298,7 @@ S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSi
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -327,7 +327,7 @@ void msrClefKeyTimeSignatureGroup::setClef (const S_msrClef& clef)
   mfAssert (
     __FILE__, __LINE__,
     clef != nullptr,
-    "clef is null");
+    "clef is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -367,7 +367,7 @@ void msrClefKeyTimeSignatureGroup::setKey (const S_msrKey& key)
   mfAssert (
     __FILE__, __LINE__,
     key != nullptr,
-    "key is null");
+    "key is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -408,7 +408,7 @@ void msrClefKeyTimeSignatureGroup::setTimeSignature (
   mfAssert (
     __FILE__, __LINE__,
     timeSignature != nullptr,
-    "timeSignature is null");
+    "timeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED

@@ -56,12 +56,6 @@ class mxsrVoice : public smartable
                           getTupletsStack () const
                               { return fTupletsStack; }
 
-    const std::size_t     getTupletsStackSize () const
-                              { return fTupletsStack.size (); }
-
-    const S_msrTuplet     getTupletsStackTop () const
-                              { return fTupletsStack.front (); }
-
     void                  setLastMetNoteInVoice (S_msrNote note)
                               { fLastMetNoteInVoice = note; }
 
@@ -92,9 +86,23 @@ class mxsrVoice : public smartable
 //                             const S_msrNote&   note,
 //                             const S_msrVoice&  currentNoteVoice);
 
-    void                  popTupletStackTopAndAppendItWhereItBelongs (
+    S_msrTuplet           popTupletStackTop (
                             int         inputLineNumber,
                             std::string context);
+
+    void                  appendTupletWhereItBelongs (
+                            int         inputLineNumber,
+                            S_msrTuplet tuplet,
+                            std::string context);
+
+    const std::size_t     fetchTupletsStackSize () const
+                              { return fTupletsStack.size (); }
+
+    Bool                  fetchTupletsStackIsEmpty () const
+                              { return fTupletsStack.size () == 0; }
+
+    const S_msrTuplet     fetchTupletsStackTop () const
+                              { return fTupletsStack.front (); }
 
   public:
 

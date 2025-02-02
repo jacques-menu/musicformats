@@ -381,9 +381,9 @@ void msrVoice::finalizeVoice (
 
   // is this voice totally empty? this should be rare...
   if (
-    fVoiceInitialElementsList.size () == 0
+    fVoiceInitialElementsList.empty ()
       &&
-    fVoiceLastSegment->getSegmentElementsList ().size () == 0
+    fVoiceLastSegment->getSegmentElementsList ().empty ()
   ) {
     std::stringstream ss;
 
@@ -544,7 +544,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
   mfAssert (
     __FILE__, __LINE__,
     regularPart != nullptr,
-    "regularPart is null");
+    "regularPart is NULL");
 
   if (false) { // JMI
     gLog <<
@@ -717,7 +717,7 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
   mfAssert (
     __FILE__, __LINE__,
     harmoniesPart != nullptr,
-    "harmoniesPart is null");
+    "harmoniesPart is NULL");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -831,7 +831,7 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
   mfAssert (
     __FILE__, __LINE__,
     figuredBassPart != nullptr,
-    "figuredBassPart is null");
+    "figuredBassPart is NULL");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {

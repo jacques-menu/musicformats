@@ -635,7 +635,7 @@ S_msrNote msrNote::createNoteNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
-    "containingPart is null");
+    "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrNote
@@ -842,7 +842,7 @@ S_msrNote msrNote::createNoteDeepClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
@@ -2199,7 +2199,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
   mfAssert (
     __FILE__, __LINE__,
     semiTonesPitchAndOctave != nullptr,
-    "semiTonesPitchAndOctave is null");
+    "semiTonesPitchAndOctave is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   msrNote * obj =
@@ -5126,12 +5126,14 @@ void msrNote::print (std::ostream& os) const
     os <<
     	std::endl <<
       std::setw (fieldWidth) <<
-      "fGraceNotesGroupBeforeNote";
-      os << std::endl;
+      "fGraceNotesGroupBeforeNote:" <<
+      std::endl;
 
     ++gIndenter;
 
-    fGraceNotesGroupBeforeNote->print (os);
+//     fGraceNotesGroupBeforeNote->print (os);
+    os <<
+    	fGraceNotesGroupBeforeNote->asString ();
 
     --gIndenter;
   }

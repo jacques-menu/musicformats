@@ -77,7 +77,7 @@ msrRepeatCommonPart::msrRepeatCommonPart (
   mfAssert (
     __FILE__, __LINE__,
     upLinkToRepeat != nullptr,
-    "upLinkToRepeat is null");
+    "upLinkToRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCommonPartUpLinkToRepeat = upLinkToRepeat;
@@ -113,7 +113,7 @@ void msrRepeatCommonPart::appendSegmentToRepeatCommonPart (
   mfAssert (
     __FILE__, __LINE__,
     segment != nullptr,
-    "segment is null");
+    "segment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCommonPartElementsList.push_back (segment);
@@ -147,7 +147,7 @@ void msrRepeatCommonPart::appendRepeatToRepeatCommonPart (
   mfAssert (
     __FILE__, __LINE__,
     repeat != nullptr,
-    "repeat is null");
+    "repeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCommonPartElementsList.push_back (repeat);
@@ -180,7 +180,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
   mfAssert (
     __FILE__, __LINE__,
     measureRepeat != nullptr,
-    "measureRepeat is null");
+    "measureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 // JMI v0.9.67  fRepeatCommonPartElementsList.push_back (measureRepeat); JMI v0.9.66
@@ -213,7 +213,7 @@ void msrRepeatCommonPart::appendMultiMeasureRestToRepeatCommonPart (
   mfAssert (
     __FILE__, __LINE__,
     multiMeasureRests != nullptr,
-    "multiMeasureRests is null");
+    "multiMeasureRests is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 //  JMI v0.9.67 fRepeatCommonPartElementsList.push_back (multiMeasureRests);
@@ -246,7 +246,7 @@ void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
   mfAssert (
     __FILE__, __LINE__,
     voiceElement != nullptr,
-    "voiceElement is null");
+    "voiceElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCommonPartElementsList.push_back (voiceElement);
@@ -634,7 +634,7 @@ void msrRepeatEnding::appendSegmentToRepeatEnding (
   mfAssert (
     __FILE__, __LINE__,
     segment != nullptr,
-    "segment is null");
+    "segment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatEndingElementsList.push_back (segment);
@@ -666,7 +666,7 @@ void msrRepeatEnding::appendRepeatToRepeatEnding (
   mfAssert (
     __FILE__, __LINE__,
     repeat != nullptr,
-    "repeat is null");
+    "repeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatEndingElementsList.push_back (repeat);
@@ -699,7 +699,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
   mfAssert (
     __FILE__, __LINE__,
     measureRepeat != nullptr,
-    "measureRepeat is null");
+    "measureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 // JMI v0.9.67  fRepeatEndingElementsList.push_back (measureRepeat);
@@ -732,7 +732,7 @@ void msrRepeatEnding::appendMultiMeasureRestToRepeatEnding (
   mfAssert (
     __FILE__, __LINE__,
     multiMeasureRests != nullptr,
-    "multiMeasureRests is null");
+    "multiMeasureRests is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 //  JMI v0.9.67 fRepeatEndingElementsList.push_back (multiMeasureRests);
@@ -764,7 +764,7 @@ void msrRepeatEnding::appendVoiceElementToRepeatEnding (
   mfAssert (
     __FILE__, __LINE__,
     voiceElement != nullptr,
-    "voiceElement is null");
+    "voiceElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatEndingElementsList.push_back (voiceElement);
@@ -1092,7 +1092,7 @@ msrRepeat::msrRepeat (
   mfAssert (
     __FILE__, __LINE__,
     upLinkToVoice != nullptr,
-    "upLinkToVoice is null");
+    "upLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatUpLinkToVoice = upLinkToVoice;
@@ -1130,7 +1130,7 @@ S_msrRepeat msrRepeat::createRepeatNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrRepeat
@@ -1154,7 +1154,7 @@ void msrRepeat::setRepeatCommonPart (
   mfAssert (
     __FILE__, __LINE__,
     repeatCommonPart != nullptr,
-    "repeatCommonPart is null");
+    "repeatCommonPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1191,7 +1191,7 @@ void msrRepeat::addRepeatEndingToRepeat (
   mfAssert (
     __FILE__, __LINE__,
     repeatEnding != nullptr,
-    "repeatEnding is null");
+    "repeatEnding is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED

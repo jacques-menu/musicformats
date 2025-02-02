@@ -91,7 +91,7 @@ S_bsrScore msr2bsrTranslator::translateMsrToBsr (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // the MSR score we're visiting
@@ -379,7 +379,7 @@ void msr2bsrTranslator::visitEnd (S_msrScore& elt)
             getVariableValue ();
 
     if (
-      workCreditTypeTitle.size () == 0
+      workCreditTypeTitle.empty ()
         &&
       movementTitle.size () > 0) {
       // use the movement title as the work title

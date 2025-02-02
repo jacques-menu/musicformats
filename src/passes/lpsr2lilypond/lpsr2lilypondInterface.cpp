@@ -48,7 +48,7 @@ void translateLpsrToLilypond (
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
-    "theLpsrScore is null");
+    "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock

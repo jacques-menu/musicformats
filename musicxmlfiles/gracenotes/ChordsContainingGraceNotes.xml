@@ -3,7 +3,7 @@
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.0">
  <work>
-  <work-title>Grace Chords</work-title>
+  <work-title>ChordsContainingGraceNotes</work-title>
  </work>
   <identification>
     <encoding>

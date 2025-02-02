@@ -3676,7 +3676,7 @@ void msrHarmonyDegree::setHarmonyDegreeUpLinkToHarmony (
   mfAssert (
     __FILE__, __LINE__,
     UpLinkToHarmony != nullptr,
-     "UpLinkToHarmony is null");
+     "UpLinkToHarmony is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fHarmonyDegreeUpLinkToHarmony =
@@ -4452,7 +4452,7 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrHarmony
@@ -4505,7 +4505,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrHarmony
@@ -4590,7 +4590,7 @@ void msrHarmony::setHarmonyDisplayWholeNotes (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -4658,7 +4658,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
   mfAssert (
     __FILE__, __LINE__,
     note != nullptr,
-    "note is null");
+    "note is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fHarmonyUpLinkToNote = note;
@@ -4676,7 +4676,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//      "setMeasureElementMeasurePosition(): measure is null");
+//      "setMeasureElementMeasurePosition(): measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // the offset can be negative, so we merely add it to measurePosition
@@ -4714,7 +4714,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     fHarmonyUpLinkToNote != nullptr,
-//     "fHarmonyUpLinkToNote is null");
+//     "fHarmonyUpLinkToNote is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // compute harmony's voice position

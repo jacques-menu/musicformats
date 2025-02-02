@@ -536,7 +536,7 @@ void mfslInput::enrichNameOptionsBlock (
   mfAssert (
     __FILE__, __LINE__,
     nameOptionsBlock != nullptr,
-    "nameOptionsBlock is null");
+    "nameOptionsBlock is NULL");
 
   if (gGlobalMfslInterpreterOahGroup->getTraceInputs ()) {
     gLog <<
@@ -1357,7 +1357,7 @@ void mfslChoice::enrichLabelOptionsBlock (
   mfAssert (
     __FILE__, __LINE__,
     labelOptionsBlock != nullptr,
-    "labelOptionsBlock is null");
+    "labelOptionsBlock is NULL");
 
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
     gLog <<
@@ -1856,7 +1856,7 @@ mfslCaseChoiceStatement::mfslCaseChoiceStatement (
   mfAssert (
     __FILE__, __LINE__,
     caseChoice != nullptr,
-    "caseChoice is null");
+    "caseChoice is NULL");
 
   fCaseChoice = caseChoice;
 
@@ -2059,7 +2059,7 @@ mfslCaseInputStatement::mfslCaseInputStatement (
   mfAssert (
     __FILE__, __LINE__,
     caseInput != nullptr,
-    "caseInput is null");
+    "caseInput is NULL");
 
   fCaseInputInput = caseInput;
 

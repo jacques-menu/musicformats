@@ -59,7 +59,7 @@ msrBeatRepeatElement::msrBeatRepeatElement (
   mfAssert (
     __FILE__, __LINE__,
     upLinkToBeatRepeat != nullptr,
-    "upLinkToBeatRepeat is null");
+    "upLinkToBeatRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatElementUpLinkToBeatRepeat = upLinkToBeatRepeat;
@@ -94,7 +94,7 @@ void msrBeatRepeatElement::appendSegmentToBeatRepeatElementsList ( // JMI ???
   mfAssert (
     __FILE__, __LINE__,
     segment != nullptr,
-    "segment is null");
+    "segment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatElementsList.push_back (segment);
@@ -126,7 +126,7 @@ void msrBeatRepeatElement::appendBeatRepeatToBeatRepeatElementsList (
   mfAssert (
     __FILE__, __LINE__,
     beatRepeat != nullptr,
-    "beatRepeat is null");
+    "beatRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatElementsList.push_back (beatRepeat);
@@ -158,7 +158,7 @@ void msrBeatRepeatElement::appendVoiceElementToBeatRepeatElementsList (
   mfAssert (
     __FILE__, __LINE__,
     voiceElement != nullptr,
-    "voiceElement is null");
+    "voiceElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatElementsList.push_back (voiceElement);
@@ -500,7 +500,7 @@ msrBeatRepeatPattern::msrBeatRepeatPattern (
   mfAssert (
     __FILE__, __LINE__,
     upLinkToBeatRepeat != nullptr,
-    "upLinkToBeatRepeat is null");
+    "upLinkToBeatRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToBeatRepeat = upLinkToBeatRepeat;
@@ -534,7 +534,7 @@ void msrBeatRepeatPattern::setBeatRepeatPatternSegment (
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatPatternSegment != nullptr,
-    "beatRepeatPatternSegment is null");
+    "beatRepeatPatternSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatPatternSegment =
@@ -739,7 +739,7 @@ msrBeatRepeatReplicas::msrBeatRepeatReplicas (
   mfAssert (
     __FILE__, __LINE__,
     upLinkToBeatRepeat != nullptr,
-    "upLinkToBeatRepeat is null");
+    "upLinkToBeatRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToBeatRepeat = upLinkToBeatRepeat;
@@ -773,7 +773,7 @@ void msrBeatRepeatReplicas::setBeatRepeatReplicasSegment (
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatReplicasSegment != nullptr,
-    "beatRepeatReplicasSegment is null");
+    "beatRepeatReplicasSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatReplicasSegment =
@@ -1032,7 +1032,7 @@ S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrBeatRepeat
@@ -1072,7 +1072,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatPattern != nullptr,
-    "beatRepeatPattern is null");
+    "beatRepeatPattern is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatPattern = beatRepeatPattern;
@@ -1108,7 +1108,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
   mfAssert (
     __FILE__, __LINE__,
     beatRepeatReplicas != nullptr,
-    "beatRepeatReplicas is null");
+    "beatRepeatReplicas is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBeatRepeatReplicas = beatRepeatReplicas;
@@ -1144,7 +1144,7 @@ int msrBeatRepeat::fetchBeatRepeatPatternMeasuresNumber () const
   mfAssert (
     __FILE__, __LINE__,
     fBeatRepeatPattern != nullptr,
-    "fBeatRepeatPattern is null");
+    "fBeatRepeatPattern is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return
@@ -1159,7 +1159,7 @@ int msrBeatRepeat::fetchBeatRepeatReplicasMeasuresNumber () const
   mfAssert (
     __FILE__, __LINE__,
     fBeatRepeatReplicas != nullptr,
-    "fBeatRepeatReplicas is null");
+    "fBeatRepeatReplicas is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return

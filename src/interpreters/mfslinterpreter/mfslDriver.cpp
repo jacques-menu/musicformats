@@ -210,7 +210,7 @@ void mfslDriver::optionsBlocksStackPush (
       endl;
   }
 
-  if (fOptionsBlocksStack.size () == 0) {
+  if (fOptionsBlocksStack.empty ()) {
     // first push on the stack
     fMainOptionsBlock = optionsBlock;
   }
@@ -242,7 +242,7 @@ void mfslDriver::optionsBlocksStackPop (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fOptionsBlocksStack.size () != 0,
+    ! fOptionsBlocksStack.empty (),
     "optionsBlocksStackPop(): fOptionsBlocksStack is empty");
 
   if (fTraceOptionsBlocks) {
@@ -301,7 +301,7 @@ void mfslDriver::registerOptionInCurrentOptionsBlock (
   mfAssert (
     __FILE__, __LINE__,
     currentOptionsBlock != nullptr,
-    "currentOptionsBlock is null");
+    "currentOptionsBlock is NULL");
 
   if (fDisplayOptions) { // JMI
     gLog <<
@@ -388,7 +388,7 @@ void mfslDriver::caseChoiceStatementsStackPop ()
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fCaseChoiceStatementsStack.size () != 0,
+    ! fCaseChoiceStatementsStack.empty (),
     "caseChoiceStatementsStackPop(): fCaseChoiceStatementsStack is empty");
 
   if (fTraceCaseChoiceStatements) {
@@ -468,7 +468,7 @@ void mfslDriver::caseInputStatementsStackPop ()
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fCaseInputStatementsStack.size () != 0,
+    ! fCaseInputStatementsStack.empty (),
     "caseInputStatementsStackPop(): fCaseInputStatementsStack is empty");
 
   if (fTraceCaseInputStatements) {
@@ -520,7 +520,7 @@ int mfslDriver::parseInput_Pass1 ()
   // begin scan
   scanBegin ();
 
-  if (fScriptName.size () == 0 || fScriptName == "-") {
+  if (fScriptName.empty () || fScriptName == "-") {
     fScriptName = "stdin"; // nicer for warning and error messages
   }
 
@@ -801,7 +801,7 @@ mfMusicformatsErrorKind mfslDriver::launchMfslService_Pass2 ()
   // sanity checks
   mfAssert (
     __FILE__, __LINE__,
-    fCaseChoiceStatementsStack.size () == 0,
+    fCaseChoiceStatementsStack.empty (),
     "fCaseChoiceStatementsStack should be empty after parsing");
 
   // populate the commands list with the options gathered in the script

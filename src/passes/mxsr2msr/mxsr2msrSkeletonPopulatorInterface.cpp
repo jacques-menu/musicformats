@@ -51,12 +51,12 @@ void populateMsrSkeletonFromMxsr (
   mfAssert (
     __FILE__, __LINE__,
     theMxsr != nullptr,
-    "populateMsrSkeletonFromMxsr(): theMxsr is null");
+    "populateMsrSkeletonFromMxsr(): theMxsr is NULL");
 
   mfAssert (
     __FILE__, __LINE__,
     scoreSkeletonToBePopulated != nullptr,
-    "scoreSkeletonToBePopulated is null");
+    "scoreSkeletonToBePopulated is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock

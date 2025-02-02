@@ -78,7 +78,7 @@ namespace MusicFormats
 //     }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//     if (currentOption.size () == 0) {  // wait for option
+//     if (currentOption.empty ()) {  // wait for option
 //       if (currString [0] == '-') {
 //         currentOption = currString;
 //       }
@@ -220,7 +220,7 @@ EXP void displayStringPairVector (
 //       }
 //   #endif // MF_TRACE_IS_ENABLED
 //
-//       if (curOption.size () == 0) {  // wait for option
+//       if (curOption.empty ()) {  // wait for option
 //         if (str [0] == '-') {
 //           curOption = str;
 //         }
@@ -361,7 +361,7 @@ EXP void displayStringPairVector (
 //       }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//       if (currentOption.size () == 0) {  // wait for option
+//       if (currentOption.empty ()) {  // wait for option
 //         if (currString [0] == '-') {
 //           currentOption = currString;
 //         }
@@ -1348,7 +1348,7 @@ void oahAtom::setUpLinkToSubGroup (
   mfAssert (
     __FILE__, __LINE__,
     subGroup != nullptr,
-    "subGroup is null");
+    "subGroup is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set the atom subgroup upLink
@@ -3227,7 +3227,7 @@ void oahSubGroup::appendAtomToSubGroup (
   mfAssert (
     __FILE__, __LINE__,
     atom != nullptr,
-    "atom is null");
+    "atom is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // is atom already present in this subgroup?
@@ -4252,7 +4252,7 @@ void oahGroup::appendGroupToElementsList (
   mfAssert (
     __FILE__, __LINE__,
     handler != nullptr,
-    "handler is null");
+    "handler is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append this group to the elements list
@@ -4307,7 +4307,7 @@ void oahGroup::registerNamesInGroupToTheNamesToElementsMap (
   mfAssert (
     __FILE__, __LINE__,
     handler != nullptr,
-    "handler is null");
+    "handler is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // register this group' names in handler
@@ -4341,7 +4341,7 @@ void  oahGroup::appendSubGroupToGroup (
   mfAssert (
     __FILE__, __LINE__,
     subGroup != nullptr,
-    "subGroup is null");
+    "subGroup is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // append options subgroup
@@ -6389,7 +6389,7 @@ void oahHandler::displayElementUsesList (std::ostream& os) const
       mfAssert (
         __FILE__, __LINE__,
         elementUse != nullptr,
-        "elementUse is null");
+        "elementUse is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       ++counter;
@@ -7674,7 +7674,7 @@ void oahHandler::registerPrefixInHandler (
   mfAssert (
     __FILE__, __LINE__,
     prefix != nullptr,
-    "prefix is null");
+    "prefix is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -7748,7 +7748,7 @@ void oahHandler::appendGroupToHandler (
   mfAssert (
     __FILE__, __LINE__,
     group != nullptr,
-    "group is null");
+    "group is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -7788,7 +7788,7 @@ void oahHandler::prependGroupToHandler (
   mfAssert (
     __FILE__, __LINE__,
     group != nullptr,
-    "group is null");
+    "group is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -8272,7 +8272,7 @@ void oahHandler::registerOahElementUse (
   mfAssert (
     __FILE__, __LINE__,
     elementUsed != nullptr,
-    "elementUsed is null");
+    "elementUsed is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -8369,7 +8369,7 @@ void oahHandler::registerOahElementUseInLaunchCommand (
   mfAssert (
     __FILE__, __LINE__,
     elementUsed != nullptr,
-    "elementUsed is null");
+    "elementUsed is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -8685,8 +8685,8 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    optionName.size () != 0,
-    "optionName.size () == 0");
+    ! optionName.empty (),
+    "optionName.empty ()");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;
@@ -10120,7 +10120,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
             mfAssert (
               __FILE__, __LINE__,
               valueLessAtom != nullptr,
-              "valueLessAtom is null");
+              "valueLessAtom is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -10165,7 +10165,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
         ss <<
           "Element from the from the atom uses list for \"" <<
           nameUsed <<
-          "\" is null";
+          "\" is NULL";
 
         oahInternalError (ss.str ());
       }

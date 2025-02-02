@@ -81,7 +81,7 @@ S_msrScore translateMsrToMsr (
   mfAssert (
     __FILE__, __LINE__,
     originalMsrScore != nullptr,
-    "originalMsrScore is null");
+    "originalMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // this test is done here instead of not calling translateMsrToMsr(),
@@ -248,7 +248,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   mfAssert (
     __FILE__, __LINE__,
     originalMsrScore != nullptr,
-    "originalMsrScore is null");
+    "originalMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (gGlobalMsr2msrOahGroup->getAvoidMsr2msr ()) { // for TESTS

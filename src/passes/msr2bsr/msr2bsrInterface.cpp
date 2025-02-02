@@ -57,7 +57,7 @@ S_bsrScore translateMsrToBsr (
   mfAssert (
     __FILE__, __LINE__,
     originalMsrScore != nullptr,
-    "originalMsrScore is null");
+    "originalMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock

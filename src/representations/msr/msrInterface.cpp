@@ -107,7 +107,7 @@ void displayMsrScore (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -170,7 +170,7 @@ void displayMsrScoreFull (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -236,7 +236,7 @@ void displayMsrScoreSummary (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -287,7 +287,7 @@ void displayMsrScoreNames (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -339,7 +339,7 @@ void displayMsrScoreVoicesFlatView (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -391,7 +391,7 @@ void displayMsrScoreMeasuresSlices (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock

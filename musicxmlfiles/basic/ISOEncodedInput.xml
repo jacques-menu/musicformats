@@ -3,6 +3,9 @@
     "-//Recordare//DTD MusicXML 1.1 Partwise//EN"
     "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="1.1">
+  <work>
+    <work-title>ISOEncodedInput</work-title>
+    </work>
   <identification>
     <encoding>
       <software>Cubase, Version 7.5.40, Build 315</software>

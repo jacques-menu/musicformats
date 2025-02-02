@@ -262,7 +262,7 @@ msrVoice::msrVoice (
   mfAssert (
     __FILE__, __LINE__,
     voiceUpLinkToStaff != nullptr,
-    "voiceUpLinkToStaff is null");
+    "voiceUpLinkToStaff is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set voice staff upLink
@@ -621,7 +621,7 @@ void msrVoice::initializeVoice (
       mfAssert (
         __FILE__, __LINE__,
         fVoiceLastSegment == nullptr,
-        "fVoiceLastSegment is null");
+        "fVoiceLastSegment is NULL");
 
       // create the last segment
       fVoiceLastSegment =
@@ -715,7 +715,7 @@ S_msrVoice msrVoice::createVoiceNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     staffClone != nullptr,
-    "staffClone is null");
+    "staffClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrVoice
@@ -771,7 +771,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   mfAssert (
     __FILE__, __LINE__,
     containingStaff != nullptr,
-    "containingStaff is null");
+    "containingStaff is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1162,7 +1162,7 @@ void msrVoice::setVoiceLastSegmentInVoiceClone (
   mfAssert (
     __FILE__, __LINE__,
     segment != nullptr,
-    "segment is null");
+    "segment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fVoiceLastSegment = segment;
@@ -2951,7 +2951,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     fVoiceLastSegment != nullptr,
-//     "fVoiceLastSegment is null");
+//     "fVoiceLastSegment is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // pad up the voice's last segment
@@ -3003,7 +3003,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   mfAssert (
     __FILE__, __LINE__,
     fVoiceLastSegment != nullptr,
-    "fVoiceLastSegment is null");
+    "fVoiceLastSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // pad up the voice's last segment
@@ -4034,7 +4034,7 @@ S_msrMeasure msrVoice::fetchVoiceLastMeasure (
   mfAssert (
     __FILE__, __LINE__,
     fVoiceLastSegment != nullptr,
-    "fVoiceLastSegment is null");
+    "fVoiceLastSegment is NULL");
 
   result =
     fVoiceLastSegment->
@@ -8492,7 +8492,7 @@ void msrVoice::appendMultiMeasureRestCloneToVoiceClone (
   mfAssert (
     __FILE__, __LINE__,
     multiMeasureRestClone != nullptr,
-    "multiMeasureRestClone is null");
+    "multiMeasureRestClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fVoiceKind) {
@@ -8606,7 +8606,7 @@ void msrVoice::appendRepeatCloneToVoiceClone (
   mfAssert (
     __FILE__, __LINE__,
     repeatCLone != nullptr,
-    "repeatCLone is null");
+    "repeatCLone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fVoiceKind) {
@@ -9129,7 +9129,7 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatClone != nullptr,
-    "measureRepeatClone is null");
+    "measureRepeatClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fVoiceKind) { // superflous JMI ???
@@ -10187,7 +10187,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
         mfAssert (
           __FILE__, __LINE__,
           fVoicePendingMeasureRepeat != nullptr,
-          "fVoicePendingMeasureRepeat is null");
+          "fVoicePendingMeasureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
         // create a measures repeat replicas
@@ -10249,7 +10249,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     multiMeasureRest != nullptr,
-//     "multiMeasureRest is null");
+//     "multiMeasureRest is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // // JMI v0.9.67  fVoiceInitialElementsList.push_back (multiMeasureRest);
@@ -10280,7 +10280,7 @@ void msrVoice::appendMeasureRepeatToVoiceElementsList (
   mfAssert (
     __FILE__, __LINE__,
     measureRepeat != nullptr,
-    "measureRepeat is null");
+    "measureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 // JMI v0.9.67  fVoiceInitialElementsList.push_back (measureRepeat);
@@ -10736,7 +10736,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
   mfAssert (
     __FILE__, __LINE__,
     fVoiceLastAppendedMeasure != nullptr,
-    "fVoiceLastAppendedMeasure is null");
+    "fVoiceLastAppendedMeasure is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // finalize fVoiceLastAppendedMeasure
@@ -10952,11 +10952,11 @@ void msrVoice::finalizeVoice (
 
   // is this voice totally empty? this should be rare...
   if (
-    fVoiceInitialElementsList.size () == 0
+    fVoiceInitialElementsList.empty ()
       &&
     fVoiceLastSegment != nullptr // JMI should not occur??? v0.9.63
       &&
-    fVoiceLastSegment->getSegmentElementsList ().size () == 0
+    fVoiceLastSegment->getSegmentElementsList ().empty ()
   ) {
     std::stringstream ss;
 
@@ -11117,9 +11117,9 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 
   // is this voice totally empty? this should be rare...
   if (
-    fVoiceInitialElementsList.size () == 0
+    fVoiceInitialElementsList.empty ()
       &&
-    fVoiceLastSegment->getSegmentElementsList ().size () == 0
+    fVoiceLastSegment->getSegmentElementsList ().empty ()
   ) {
     std::stringstream ss;
 

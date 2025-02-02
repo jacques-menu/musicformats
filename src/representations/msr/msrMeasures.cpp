@@ -77,7 +77,7 @@ msrMeasure::msrMeasure (
   mfAssert (
     __FILE__, __LINE__,
     measureUpLinkToSegment != nullptr,
-    "measureUpLinkToSegment is null");
+    "measureUpLinkToSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set measure's segment upLink
@@ -272,7 +272,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingSegment != nullptr,
-    "containingSegment is null");
+    "containingSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrVoice
@@ -305,7 +305,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingSegment != nullptr,
-    "containingSegment is null");
+    "containingSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // create newborn clone
@@ -395,7 +395,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   mfAssert (
     __FILE__, __LINE__,
     containingSegment != nullptr,
-    "containingSegment is null");
+    "containingSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // create deep clone
@@ -609,7 +609,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
   mfAssert (
     __FILE__, __LINE__,
     containingSegment != nullptr,
-    "containingSegment is null");
+    "containingSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // create copy
@@ -1012,7 +1012,7 @@ void msrMeasure::appendMeasureElementToMeasure (
   mfAssert (
     __FILE__, __LINE__,
     measureElement != nullptr,
-    "appendMeasureElementToMeasure(): measureElement is null");
+    "appendMeasureElementToMeasure(): measureElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1120,7 +1120,7 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     upLinkToMeasure != nullptr,
-//     "upLinkToMeasure is null");
+//     "upLinkToMeasure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   upLinkToMeasure->
@@ -1201,7 +1201,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fMeasureElementsList.size () == 0) {
+  if (fMeasureElementsList.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceMeasures ()) {
       std::stringstream ss;
@@ -2117,7 +2117,7 @@ void msrMeasure::appendTimeSignatureToMeasure (
   mfAssert (
     __FILE__, __LINE__,
     timeSignature != nullptr,
-    "timeSignature is null");
+    "timeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2165,7 +2165,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTimeSignature (
   mfAssert (
     __FILE__, __LINE__,
     timeSignature != nullptr,
-    "timeSignature is null");
+    "timeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2305,7 +2305,7 @@ void msrMeasure::appendTimeSignatureToMeasureClone (
   mfAssert (
     __FILE__, __LINE__,
     timeSignature != nullptr,
-    "timeSignature is null");
+    "timeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -4770,7 +4770,9 @@ void msrMeasure::handleEmptyMeasure (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-// mfAssertFalse (4444);
+//   mfAssertFalse ( // JMI for debug
+//     __FILE__, __LINE__,
+//     "handleEmptyMeasure()");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -5106,7 +5108,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
   mfAssert (
     __FILE__, __LINE__,
     regularPart != nullptr,
-    "regularPart is null");
+    "regularPart is NULL");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -5632,7 +5634,7 @@ void msrMeasure::handleTheLastHarmonyInAHarmoniesMeasure (
   mfAssert (
     __FILE__, __LINE__,
     harmoniesPart != nullptr,
-    "harmoniesPart is null");
+    "harmoniesPart is NULL");
 
   // fetch the measure whole notes from the part measures fector
   msrWholeNotes
@@ -6055,7 +6057,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
       mfAssert (
         __FILE__, __LINE__,
         regularPart != nullptr,
-        "regularPart is null");
+        "regularPart is NULL");
 
       if (false) { // JMI
         gLog <<
@@ -6883,7 +6885,7 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
   mfAssert (
     __FILE__, __LINE__,
     harmoniesPart != nullptr,
-    "harmoniesPart is null");
+    "harmoniesPart is NULL");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -6995,7 +6997,7 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
   mfAssert (
     __FILE__, __LINE__,
     figuredBassPart != nullptr,
-    "figuredBassPart is null");
+    "figuredBassPart is NULL");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {

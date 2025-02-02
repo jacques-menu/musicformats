@@ -82,7 +82,7 @@ msrStringTuning::~msrStringTuning ()
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -259,7 +259,7 @@ msrScordatura::~msrScordatura ()
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -465,7 +465,7 @@ msrAccordionRegistration::~msrAccordionRegistration ()
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -681,7 +681,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::createHarpPedalsTuningDeepClone ()
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -960,7 +960,7 @@ msrPedal::~msrPedal ()
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -1199,7 +1199,7 @@ msrDamp::~msrDamp ()
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -1356,7 +1356,7 @@ msrDampAll::~msrDampAll ()
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED

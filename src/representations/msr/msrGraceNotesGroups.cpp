@@ -329,12 +329,12 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (const S_msrNote& note)
     setNoteShortcutUpLinkToGraceNotesGroup (this);
 
   // is this grace note tied?
-  if (note->getNoteTiesList ().size ()) {
+  if (! note->getNoteTiesList ().empty ()) {
     fGraceNotesGroupIsTied = true;
   }
 
   // is this grace note slurred?
-  if (note->getNoteSlursList ().size () != 0) {
+  if (! note->getNoteSlursList ().empty ()) {
     fGraceNotesGroupIsSlurred = true;
   }
 
@@ -392,8 +392,8 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fGraceNotesGroupElementsList.size () != 0,
-    "fGraceNotesGroupElementsList.size () == 0");
+    ! fGraceNotesGroupElementsList.empty (),
+    "fGraceNotesGroupElementsList.empty ()");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -502,7 +502,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
 */
 
   // set the grace notes group's elements' measure position
-  if (fGraceNotesGroupElementsList.size ()) {
+  if (! fGraceNotesGroupElementsList.empty ()) {
   /* JMI
   if (false) { // JMI
     // compute chord's voice position
@@ -639,7 +639,7 @@ std::string msrGraceNotesGroup::asShortString () const
     fGraceNotesGroupMeasureNumber <<
     "\", ";
 
-  if (fGraceNotesGroupElementsList.size ()) {
+  if (! fGraceNotesGroupElementsList.empty ()) {
     std::list <S_msrMeasureElement>::const_iterator
       iBegin = fGraceNotesGroupElementsList.begin (),
       iEnd   = fGraceNotesGroupElementsList.end (),
@@ -663,7 +663,7 @@ std::string msrGraceNotesGroup::asString () const
   std::stringstream ss;
 
   ss <<
-    "[GraceNotesGroup asString ()" <<
+    "[GraceNotesGroup" <<
     ", fGraceNotesGroupKind: " <<
     fGraceNotesGroupKind <<
 
@@ -685,7 +685,7 @@ std::string msrGraceNotesGroup::asString () const
     "\", line " << fInputStartLineNumber <<
     ", ";
 
-  if (fGraceNotesGroupElementsList.size ()) {
+  if (! fGraceNotesGroupElementsList.empty ()) {
     std::list <S_msrMeasureElement>::const_iterator
       iBegin = fGraceNotesGroupElementsList.begin (),
       iEnd   = fGraceNotesGroupElementsList.end (),
@@ -695,6 +695,28 @@ std::string msrGraceNotesGroup::asString () const
       if (++i == iEnd) break;
       ss << ", ";
     } // for
+  }
+
+  ss <<
+    "fGraceNotesGroupElementsList: ";
+  if (! fGraceNotesGroupElementsList.empty ()) {
+    ss << '[';
+
+    std::list <S_msrMeasureElement>::const_iterator
+      iBegin = fGraceNotesGroupElementsList.begin (),
+      iEnd   = fGraceNotesGroupElementsList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      ss << (*i);
+      if (++i == iEnd) break;
+      ss << ", ";
+    } // for
+    ss << ']';
+
+  }
+  else {
+    ss << "[EMPTY]";
   }
 
   ss << ']';
@@ -769,7 +791,7 @@ void msrGraceNotesGroup::printFull (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fGraceNotesGroupElementsList:";
-  if (fGraceNotesGroupElementsList.size ()) {
+  if (! fGraceNotesGroupElementsList.empty ()) {
     os << std::endl;
 
     ++gIndenter;
@@ -866,7 +888,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
   os <<
     std::setw (fieldWidth) <<
     "fGraceNotesGroupElementsList";
-  if (fGraceNotesGroupElementsList.size ()) {
+  if (! fGraceNotesGroupElementsList.empty ()) {
     os << std::endl;
 
     ++gIndenter;

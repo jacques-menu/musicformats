@@ -51,7 +51,7 @@ void translateMxsrToGuido (
   mfAssert (
     __FILE__, __LINE__,
     theMxsr != nullptr,
-    "translateMxsrToGuido(): theMxsr is null");
+    "translateMxsrToGuido(): theMxsr is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock

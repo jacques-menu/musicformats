@@ -58,7 +58,7 @@ msrMeasureRepeatElement::msrMeasureRepeatElement (
   mfAssert (
     __FILE__, __LINE__,
     upLinkToMeasureRepeat != nullptr,
-    "upLinkToMeasureRepeat is null");
+    "upLinkToMeasureRepeat is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatElementUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
@@ -93,7 +93,7 @@ void msrMeasureRepeatElement::appendSegmentToMeasureRepeatElementsList ( // JMI 
   mfAssert (
     __FILE__, __LINE__,
     segment != nullptr,
-    "segment is null");
+    "segment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatElementsList.push_back (segment);
@@ -125,7 +125,7 @@ void msrMeasureRepeatElement::appendMeasureRepeatToMeasureRepeatElementsList (
   mfAssert (
     __FILE__, __LINE__,
     measureRepeat != nullptr,
-    "measureRepeat is null");
+    "measureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatElementsList.push_back (measureRepeat);
@@ -157,7 +157,7 @@ void msrMeasureRepeatElement::appendVoiceElementToMeasureRepeatElementsList (
   mfAssert (
     __FILE__, __LINE__,
     voiceElement != nullptr,
-    "voiceElement is null");
+    "voiceElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatElementsList.push_back (voiceElement);
@@ -499,7 +499,7 @@ msrMeasureRepeatPattern::msrMeasureRepeatPattern (
   mfAssert (
     __FILE__, __LINE__,
     upLinkToMeasureRepeat != nullptr,
-    "upLinkToMeasureRepeat is null");
+    "upLinkToMeasureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
@@ -533,7 +533,7 @@ void msrMeasureRepeatPattern::setMeasureRepeatPatternSegment (
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatPatternSegment != nullptr,
-    "measureRepeatPatternSegment is null");
+    "measureRepeatPatternSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatPatternSegment =
@@ -738,7 +738,7 @@ msrMeasureRepeatReplicas::msrMeasureRepeatReplicas (
   mfAssert (
     __FILE__, __LINE__,
     upLinkToMeasureRepeat != nullptr,
-    "upLinkToMeasureRepeat is null");
+    "upLinkToMeasureRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
@@ -772,7 +772,7 @@ void msrMeasureRepeatReplicas::setMeasureRepeatReplicasSegment (
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatReplicasSegment != nullptr,
-    "measureRepeatReplicasSegment is null");
+    "measureRepeatReplicasSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatReplicasSegment =
@@ -1031,7 +1031,7 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrMeasureRepeat
@@ -1071,7 +1071,7 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatPattern != nullptr,
-    "measureRepeatPattern is null");
+    "measureRepeatPattern is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatPattern = measureRepeatPattern;
@@ -1107,7 +1107,7 @@ void msrMeasureRepeat::setMeasureRepeatReplicas (
   mfAssert (
     __FILE__, __LINE__,
     measureRepeatReplicas != nullptr,
-    "measureRepeatReplicas is null");
+    "measureRepeatReplicas is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatReplicas = measureRepeatReplicas;
@@ -1143,7 +1143,7 @@ int msrMeasureRepeat::fetchMeasureRepeatPatternMeasuresNumber () const
   mfAssert (
     __FILE__, __LINE__,
     fMeasureRepeatPattern != nullptr,
-    "fMeasureRepeatPattern is null");
+    "fMeasureRepeatPattern is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return
@@ -1158,7 +1158,7 @@ int msrMeasureRepeat::fetchMeasureRepeatReplicasMeasuresNumber () const
   mfAssert (
     __FILE__, __LINE__,
     fMeasureRepeatReplicas != nullptr,
-    "fMeasureRepeatReplicas is null");
+    "fMeasureRepeatReplicas is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   return

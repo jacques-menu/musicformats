@@ -1,5 +1,0 @@
-# non-musical
-  -subsubtitle "Subsubtitle from HelloWorldOptionsAndArguments_2.txt"
-
-# cycle detection check
-#  -include basic/HelloWorldOptionsAndArguments_1.txt

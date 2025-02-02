@@ -378,15 +378,15 @@ std::string language::handleOptionsAndArgumentsFromArgcArgv () const
 
 std::string language::convertAMusicXMLStreamIntoAnMXSR () const
 {
-  return "Convert a MusicXML text stream into an MXSR (MusicXML tree)";
+  return "Convert a MusicXML text stream into an MXSR (MusicXML elements tree)";
 }
 std::string language::convertAMusicXMLDescriptorIntoAnMXSR () const
 {
-  return "Convert a MusicXML descriptor into an MXSR (MusicXML tree)";
+  return "Convert a MusicXML descriptor into an MXSR (MusicXML elements tree)";
 }
 std::string language::convertAMusicXMLBufferIntoAnMXSR () const
 {
-  return "Convert a MusicXML buffer into an MXSR (MusicXML tree)";
+  return "Convert a MusicXML buffer into an MXSR (MusicXML elements tree)";
 }
 
 std::string language::convertTheMXSRIntoAnMSRSkeleton () const

@@ -125,7 +125,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
   mfAssert (
     __FILE__, __LINE__,
     fBrailleGenerator != nullptr,
-    "fBrailleGenerator is null");
+    "fBrailleGenerator is NULL");
 }
 
 bsr2brailleTranslator::~bsr2brailleTranslator ()

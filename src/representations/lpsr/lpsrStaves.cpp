@@ -398,7 +398,7 @@ lpsrStaffBlock::lpsrStaffBlock (
   mfAssert (
     __FILE__, __LINE__,
     staff != nullptr,
-    "staff is null");
+    "staff is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fStaff = staff;

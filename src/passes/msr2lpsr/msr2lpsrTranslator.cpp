@@ -435,8 +435,8 @@ void msr2lpsrTranslator::computeLilypondScoreHeaderTitleAndSubTitle ()
             fCurrentIdentification->
               getIdentificationMovementTitle ();
 
-        fWorkCreditTypeTitleKnown = workCreditTypeTitle.size () != 0;
-        fMovementTitleKnown = movementTitle.size () != 0;
+        fWorkCreditTypeTitleKnown = ! workCreditTypeTitle.empty ();
+        fMovementTitleKnown = ! movementTitle.empty ();
 
         // have a work title or a movement title
         // been specified in the input?
@@ -491,7 +491,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // the MSR score we're visiting
@@ -772,7 +772,7 @@ void msr2lpsrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
       mfAssert (
         __FILE__, __LINE__,
         hiddenMeasureAndBarLineDescr != nullptr,
-        "hiddenMeasureAndBarLineDescr is null");
+        "hiddenMeasureAndBarLineDescr is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       S_msrDalSegno
@@ -871,7 +871,7 @@ void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
       mfAssert (
         __FILE__, __LINE__,
         hiddenMeasureAndBarLineDescr != nullptr,
-        "hiddenMeasureAndBarLineDescr is null");
+        "hiddenMeasureAndBarLineDescr is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       S_msrDalSegno
@@ -898,11 +898,11 @@ void msr2lpsrTranslator::populateHeaderFromIdentification (
   mfAssert (
     __FILE__, __LINE__,
     header != nullptr,
-    "header is null");
+    "header is NULL");
   mfAssert (
     __FILE__, __LINE__,
     identification != nullptr,
-    "identification is null");
+    "identification is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1509,7 +1509,7 @@ void msr2lpsrTranslator::visitStart (S_msrScaling& elt)
   mfAssert (
     __FILE__, __LINE__,
     paper != nullptr,
-    "paper is null");
+    "paper is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set the current book block's paper as a newborn clone of paper
@@ -2077,7 +2077,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
             mfAssert (
               __FILE__, __LINE__,
               fCurrentScoreBlock != nullptr,
-              "fCurrentScoreBlock is null");
+              "fCurrentScoreBlock is NULL");
   #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
             // append the current partgroup block to the current score block
@@ -2128,7 +2128,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
             mfAssert (
               __FILE__, __LINE__,
               fCurrentBookPartBlock != nullptr,
-              "fCurrentBookPartBlock is null");
+              "fCurrentBookPartBlock is NULL");
   #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
             // append the current partgroup block to the current bookpart block
@@ -2361,7 +2361,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
         getPartInstrumentAbbreviation ();
 
   // populate part instrument short name if empty and possible
-  if (partInstrumentAbbreviation.size () == 0) {
+  if (partInstrumentAbbreviation.empty ()) {
     std::string
       partAbbreviation =
         elt->getPartAbbreviation ();
@@ -3561,7 +3561,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         mfAssert (
           __FILE__, __LINE__,
           voiceCurrentTimeSignature != nullptr,
-          "voiceCurrentTimeSignature is null");
+          "voiceCurrentTimeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
         msrWholeNotes
@@ -3624,7 +3624,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         mfAssert (
           __FILE__, __LINE__,
           voiceCurrentTimeSignature != nullptr,
-          "voiceCurrentTimeSignature is null");
+          "voiceCurrentTimeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
         msrWholeNotes
@@ -5964,7 +5964,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       std::stringstream ss;
 
       ss <<
-        "graceNotesGroup is out of context, fOnGoingNotesStack.size () == 0, cannot be handled: " <<
+        "graceNotesGroup is out of context, fOnGoingNotesStack.empty (), cannot be handled: " <<
         elt->asShortString ();
 
       msr2lpsrInternalError (
@@ -6716,7 +6716,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         mfAssert (
           __FILE__, __LINE__,
           fCurrentNonGraceNoteClone != nullptr,
-          "fCurrentNonGraceNoteClone is null");
+          "fCurrentNonGraceNoteClone is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
         if (! fCurrentChordHasBeenPopulatedFromItsFirstNote) {

@@ -536,7 +536,7 @@ void ischemeInput::enrichNameOptionsBlock (
   mfAssert (
     __FILE__, __LINE__,
     nameOptionsBlock != nullptr,
-    "nameOptionsBlock is null");
+    "nameOptionsBlock is NULL");
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceInputs ()) {
     gLog <<
@@ -1357,7 +1357,7 @@ void ischemeChoice::enrichLabelOptionsBlock (
   mfAssert (
     __FILE__, __LINE__,
     labelOptionsBlock != nullptr,
-    "labelOptionsBlock is null");
+    "labelOptionsBlock is NULL");
 
   if (gGlobalIschemeInterpreterOahGroup->getTraceChoices ()) {
     gLog <<
@@ -1856,7 +1856,7 @@ ischemeCaseChoiceStatement::ischemeCaseChoiceStatement (
   mfAssert (
     __FILE__, __LINE__,
     caseChoice != nullptr,
-    "caseChoice is null");
+    "caseChoice is NULL");
 
   fCaseChoice = caseChoice;
 
@@ -2059,7 +2059,7 @@ ischemeCaseInputStatement::ischemeCaseInputStatement (
   mfAssert (
     __FILE__, __LINE__,
     caseInput != nullptr,
-    "caseInput is null");
+    "caseInput is NULL");
 
   fCaseInputInput = caseInput;
 

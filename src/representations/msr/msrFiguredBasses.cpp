@@ -174,7 +174,7 @@ msrBassFigure::msrBassFigure (
   mfAssert (
     __FILE__, __LINE__,
     figureUpLinkToPart != nullptr,
-    "figureUpLinkToPart is null");
+    "figureUpLinkToPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set figured's part upLink
@@ -225,7 +225,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
-    "containingPart is null");
+    "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrBassFigure
@@ -262,7 +262,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
-    "containingPart is null");
+    "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrBassFigure
@@ -496,7 +496,7 @@ msrFiguredBass::msrFiguredBass (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     upLinkToMeasure != nullptr,
-//     "upLinkToMeasure is null");
+//     "upLinkToMeasure is NULL");
 
   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
@@ -564,7 +564,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrFiguredBass
@@ -607,7 +607,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     containingPart != nullptr,
-//     "containingPart is null");
+//     "containingPart is NULL");
 // ?#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrFiguredBass
@@ -650,7 +650,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
   mfAssert (
     __FILE__, __LINE__,
     note != nullptr,
-    "note is null");
+    "note is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fFiguredBassUpLinkToNote = note;
@@ -664,7 +664,7 @@ void msrFiguredBass::setFiguredBassUpLinkToNote (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED

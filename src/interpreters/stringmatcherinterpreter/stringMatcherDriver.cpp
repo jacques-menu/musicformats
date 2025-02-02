@@ -80,7 +80,7 @@ stringMatcherDriver::~stringMatcherDriver ()
 //       endl;
 //   }
 //
-//   if (fExpressionsStack.size () == 0) {
+//   if (fExpressionsStack.empty ()) {
 //     // first push on the stack
 //     fMainExpression = expression;
 //   }
@@ -142,7 +142,7 @@ int stringMatcherDriver::parseInput_Pass1 ()
   // begin scan
   scanBegin ();
 
-  if (fScriptName.size () == 0 || fScriptName == "-") {
+  if (fScriptName.empty () || fScriptName == "-") {
     fScriptName = "stdin"; // nicer for warning and error messages
   }
 
@@ -203,7 +203,7 @@ int stringMatcherDriver::parseInput_Pass1 ()
 //       endl;
 //   }
 //
-//   if (fExpressionsStack.size () == 0) {
+//   if (fExpressionsStack.empty ()) {
 //     // first push on the stack
 //     fMainExpression = expression;
 //   }
@@ -235,7 +235,7 @@ int stringMatcherDriver::parseInput_Pass1 ()
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     fExpressionsStack.size () != 0,
+//     ! fExpressionsStack.empty (),
 //     "expressionsStackPop(): fExpressionsStack is empty");
 //
 //   if (fTraceExpressions) {
@@ -304,7 +304,7 @@ mfMusicformatsErrorKind stringMatcherDriver::launchstringMatcherService_Pass2 ()
 //   // sanity checks
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     fExpressionsStack.size () == 0,
+//     fExpressionsStack.empty (),
 //     "fExpressionsStack should be empty after parsing");
 //
 //   // populate the commands list with the options gathered in the script

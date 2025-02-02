@@ -276,6 +276,9 @@ class EXP mxsrPartGroupsStack : public smartable
     size_t                size () const
                               { return fMxsrPartGroupsStdList.size (); }
 
+    Bool                  empty () const
+                              { return fMxsrPartGroupsStdList.size () == 0; }
+
     void                  push (
                             const S_mxsrPartGroup& partGroup)
                               { fMxsrPartGroupsStdList.push_front (partGroup); }

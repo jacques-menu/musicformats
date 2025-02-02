@@ -302,7 +302,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "Appending measure '" << measureNumber <<
       "' to segment " << asString ();
 
-    if (fSegmentElementsList.size () == 0)
+    if (fSegmentElementsList.empty ())
       gLog <<
         ", as first measure";
     else

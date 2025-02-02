@@ -54,7 +54,7 @@ S_msrScore translateMxsrToMsrSkeleton (
   mfAssert (
     __FILE__, __LINE__,
     theMxsr != nullptr,
-    "translateMxsrToMsrSkeleton(): theMxsr is null");
+    "translateMxsrToMsrSkeleton(): theMxsr is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -168,7 +168,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     theMsrScore != nullptr,
-//     "theMsrScore is null");
+//     "theMsrScore is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // start the clock

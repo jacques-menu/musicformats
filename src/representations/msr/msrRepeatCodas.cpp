@@ -55,7 +55,7 @@ msrRepeatCoda::msrRepeatCoda (
   mfAssert (
     __FILE__, __LINE__,
     repeatCodaSegment != nullptr,
-    "repeatCodaSegment is null");
+    "repeatCodaSegment is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCodaSegment = repeatCodaSegment;
@@ -65,7 +65,7 @@ msrRepeatCoda::msrRepeatCoda (
   mfAssert (
     __FILE__, __LINE__,
     upLinkToRepeat != nullptr,
-    "upLinkToRepeat is null");
+    "upLinkToRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fRepeatCodaUpLinkToRepeat = upLinkToRepeat;
@@ -96,7 +96,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingRepeat != nullptr,
-    "containingRepeat is null");
+    "containingRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrRepeatCoda
@@ -139,7 +139,7 @@ S_msrRepeatCoda msrRepeatCoda::createRepeatCodaDeepClone (
   mfAssert (
     __FILE__, __LINE__,
     containingRepeat != nullptr,
-    "containingRepeat is null");
+    "containingRepeat is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrRepeatCoda

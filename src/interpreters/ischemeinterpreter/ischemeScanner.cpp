@@ -3010,7 +3010,7 @@ void ischemeDriver::scanBegin ()
 {
   yy_flex_debug = fTraceScanning;
 
-  if (fScriptName.size () == 0 || fScriptName == "-") {
+  if (fScriptName.empty () || fScriptName == "-") {
     yyin = stdin;
   }
 

@@ -47,7 +47,7 @@ void displayLpsrScore (
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
-    "theLpsrScore is null");
+    "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -95,7 +95,7 @@ void displayLpsrScoreFull (
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
-    "theLpsrScore is null");
+    "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -148,7 +148,7 @@ void displayLpsrScoreSummary (
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
-    "theLpsrScore is null");
+    "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -202,7 +202,7 @@ void displayLpsrScoreNames (
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
-    "theLpsrScore is null");
+    "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -255,7 +255,7 @@ void displayLpsrScoreFlatView (
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
-    "theLpsrScore is null");
+    "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -308,7 +308,7 @@ void displayLpsrScoreSlices (
   mfAssert (
     __FILE__, __LINE__,
     theLpsrScore != nullptr,
-    "theLpsrScore is null");
+    "theLpsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock

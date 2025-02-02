@@ -43,7 +43,7 @@ void displayBsrScore (
   mfAssert (
     __FILE__, __LINE__,
     bsrScore != nullptr,
-    "bsrScore is null");
+    "bsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock
@@ -90,7 +90,7 @@ void displayBsrScoreFull (
   mfAssert (
     __FILE__, __LINE__,
     bsrScore != nullptr,
-    "bsrScore is null");
+    "bsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock

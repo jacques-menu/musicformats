@@ -50,7 +50,7 @@ lpsrPartBlock::lpsrPartBlock (
   mfAssert (
     __FILE__, __LINE__,
     part != nullptr,
-    "part is null");
+    "part is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fPart = part;

@@ -177,7 +177,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsMap (
     	fPartGroupsMap.size (), "element", "elements") <<
     ':';
 
-  if (fPartGroupsMap.size ()) {
+  if (! fPartGroupsMap.empty ()) {
   	gLog << std::endl;
 
     ++gIndenter;
@@ -227,7 +227,7 @@ void mxsr2msrSkeletonBuilder::displayPartsMap (
     	fPartsMap.size (), "element", "elements") <<
     ':';
 
-  if (fPartsMap.size ()) {
+  if (! fPartsMap.empty ()) {
   	gLog << std::endl;
 
     ++gIndenter;
@@ -271,7 +271,7 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsMap (
     	fStartedPartGroupsMap.size (), "element", "elements") <<
     ':';
 
-  if (fStartedPartGroupsMap.size ()) {
+  if (! fStartedPartGroupsMap.empty ()) {
   	gLog << std::endl;
 
     ++gIndenter;
@@ -458,7 +458,7 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
     	fPartsVector.size (), "element", "elements") <<
     ':';
 
-  if (fPartsVector.size ()) {
+  if (! fPartsVector.empty ()) {
   	gLog << std::endl;
 
     ++gIndenter;
@@ -732,7 +732,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	if (fPartGroupsStack.size () == 0) {
+	if (fPartGroupsStack.empty ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -810,7 +810,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 #endif // MF_TRACE_IS_ENABLED
 	}
 
-// 	if (fPartGroupsStack.size () == 0) { // JMI v0.9.71
+// 	if (fPartGroupsStack.empty ()) { // JMI v0.9.71
 //     std::stringstream ss;
 //
 //     ss <<
@@ -1296,7 +1296,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsStartAtIdentity (
 	int inputLineNumber,
 	int identity)
 {
-	if (fStartedPartGroupsListsVector.size ()) {
+	if (! fStartedPartGroupsListsVector.empty ()) {
 		S_mxsrPartGroupsList
 			startedMxsrPartGroupsList =
 				fStartedPartGroupsListsVector [identity];
@@ -1343,7 +1343,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 	int inputLineNumber,
 	int identity)
 {
-	if (fStoppedPartGroupsListsVector.size ()) {
+	if (! fStoppedPartGroupsListsVector.empty ()) {
 		S_mxsrPartGroupsList
 			stoppedPartGroupsList =
 				fStoppedPartGroupsListsVector [identity];
@@ -1364,7 +1364,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 						partGroup->getMsrPartGroup ();
 
 				// fetch the part group stack top
-				if (fPartGroupsStack.size () == 0) {
+				if (fPartGroupsStack.empty ()) {
 					std::stringstream ss;
 
 					ss <<
@@ -1406,7 +1406,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 					// the implicit outer-most part group isn't contained in any other
 					if (partGroup != fImplicitOuterMostPartGroup) {
 						// fetch new current part group JMI v0.9.69
-						if (fPartGroupsStack.size () == 0) {
+						if (fPartGroupsStack.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
 							if (gTraceOahGroup->getTracePartGroups ()) {
 								displayAllCollectedData (
@@ -1612,7 +1612,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
           fPartsVector [identity];
 
       // fetch the part group stack top
-			if (fPartGroupsStack.size () == 0) {
+			if (fPartGroupsStack.empty ()) {
         std::stringstream ss;
 
         ss <<
@@ -3476,7 +3476,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
     fCurrentPartGroupSymbolKind = msrPartGroupSymbolKind::kPartGroupSymbolNone;
 
   else {
-    if (groupSymbol.size ()) {
+    if (! groupSymbol.empty ()) {
       // part group type may be absent
       std::stringstream ss;
 
@@ -3993,7 +3993,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fCurrentPartID.size () == 0) {
+  if (fCurrentPartID.empty ()) {
 		std::stringstream ss;
 
 		ss <<
@@ -4974,7 +4974,7 @@ void mxsr2msrSkeletonBuilder::displayGatheredNoteInformations (
 		std::setw (fieldWidth) <<
 		"fCurrentNoteBelongsToATuplet" << ": " <<
 		fCurrentNoteBelongsToATuplet <<
-		std::endl;
+		std::endl << std::endl;
 }
 
 //________________________________________________________________________
@@ -5510,6 +5510,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
   // the default value is implementation dependent, so:
   fCurrentTupletNumber = elt->getAttributeIntValue ("number", 1);
 
+  // there can be several tuplet starts upon a given note,
+  // so we should handle them in a list
+  // with the last (hence upper) tuplet number first
+//   fPendingTupletsStartsNumbers.push_front (
+//     fCurrentTupletNumber);
+
   // type
 
   {
@@ -5543,20 +5549,15 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
         ss.str ());
     }
 
-		// create a tuplet and push it onto fPendingTupletsList
-		fPendingTupletsList.push_back (
-			mxsrTuplet::create (
-				fCurrentNoteStartInputLineNumber,
-				fCurrentTupletNumber,
-				tupletTypeKind));
-
+		// create an MXSR tuplet
 #ifdef MF_TRACE_IS_ENABLED
 		if (gTraceOahGroup->getTraceTupletsBasics ()) {
 			std::stringstream ss;
 
 			ss <<
-				"--> There is a tuplet event " <<
+				"Creating a " <<
 				tupletTypeKind <<
+				" MXSR tuplet event, " <<
 				", fCurrentTupletNumber: " <<
 				fCurrentTupletNumber <<
 				", fCurrentNoteSequentialNumber: " <<
@@ -5570,6 +5571,34 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
 				ss.str ());
 		}
 #endif // MF_TRACE_IS_ENABLED
+
+		S_mxsrTuplet
+			theMxsrTuplet =
+				mxsrTuplet::create (
+					fCurrentNoteStartInputLineNumber,
+					fCurrentTupletNumber,
+					tupletTypeKind);
+
+		// push it ahead of fPendingTupletsList
+		// since there can be several tuplet starts upon a given note
+#ifdef MF_TRACE_IS_ENABLED
+		if (gTraceOahGroup->getTraceTupletsBasics ()) {
+			std::stringstream ss;
+
+			ss <<
+				"Appending MXSR tuplet " <<
+				theMxsrTuplet->asString () <<
+				" ahead of fPendingTupletsList" <<
+				", line " << elt->getInputStartLineNumber ();
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+		}
+#endif // MF_TRACE_IS_ENABLED
+
+		fPendingTupletsList.push_front (
+			theMxsrTuplet);
   }
 }
 
@@ -5617,7 +5646,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
     fCurrentStanzaNumber =
       elt->getAttributeValue ("number");
 
-    if (fCurrentStanzaNumber.size () == 0) {
+    if (fCurrentStanzaNumber.empty ()) {
       musicxmlWarning (
         gServiceRunData->getInputSourceName (),
         elt->getInputStartLineNumber (),
@@ -5660,7 +5689,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
     fCurrentStanzaName =
       elt->getAttributeValue ("name");
 
-    if (fCurrentStanzaName.size () == 0) {
+    if (fCurrentStanzaName.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceLyrics ()) {
         // lyrics names are not so frequent after all...

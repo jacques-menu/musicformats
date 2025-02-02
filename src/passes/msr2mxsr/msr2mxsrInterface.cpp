@@ -50,7 +50,7 @@ Sxmlelement translateMsrToMxsr (
   mfAssert (
     __FILE__, __LINE__,
     theMsrScore != nullptr,
-    "theMsrScore is null");
+    "theMsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // start the clock

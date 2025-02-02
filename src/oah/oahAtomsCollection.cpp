@@ -449,7 +449,7 @@ void oahMacroAtom::appendValueLessAtomToMacro (
   mfAssert (
     __FILE__, __LINE__,
     atomNotExpectingAValue != nullptr,
-    "atomNotExpectingAValue is null");
+    "atomNotExpectingAValue is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMacroValueLessAtomsList.push_back (atomNotExpectingAValue);
@@ -1964,7 +1964,7 @@ void oahVersionAtom::printVersionShort (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     handlerMultiComponent != nullptr,
-    "handlerMultiComponent is null");
+    "handlerMultiComponent is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   handlerMultiComponent->
@@ -1984,7 +1984,7 @@ void oahVersionAtom::printVersionFull (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     handlerMultiComponent != nullptr,
-    "handlerMultiComponent is null");
+    "handlerMultiComponent is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   handlerMultiComponent->
@@ -2178,7 +2178,7 @@ void oahLibraryVersionAtom::printVersion (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     handlerMultiComponent != nullptr,
-    "handlerMultiComponent is null");
+    "handlerMultiComponent is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   createLibraryComponent ()->
@@ -2372,7 +2372,7 @@ void oahHistoryAtom::printHistory (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     handlerMultiComponent != nullptr,
-    "handlerMultiComponent is null");
+    "handlerMultiComponent is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   handlerMultiComponent->
@@ -2566,7 +2566,7 @@ void oahLibraryHistoryAtom::printHistory (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     handlerMultiComponent != nullptr,
-    "handlerMultiComponent is null");
+    "handlerMultiComponent is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   createLibraryComponent ()->
@@ -4731,7 +4731,7 @@ void oahCombinedBooleansAtom::addBooleanAtom (
   mfAssert (
     __FILE__, __LINE__,
     booleanAtom != nullptr,
-    "booleanAtom is null");
+    "booleanAtom is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fBooleanAtomsList.push_back (
@@ -4751,7 +4751,7 @@ void oahCombinedBooleansAtom::addBooleanAtomByName (
   mfAssert (
     __FILE__, __LINE__,
     handler != nullptr,
-    "handler is null");
+    "handler is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // is name known in options map?
@@ -6449,14 +6449,14 @@ void oahFactorizedStringAtom::addStringAtom (
   mfAssert (
     __FILE__, __LINE__,
     stringAtom != nullptr,
-    "stringAtom is null");
+    "stringAtom is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // atom long name consistency check
   std::string stringAtomLongName =
     stringAtom->getLongName ();
 
-  if (stringAtomLongName.size () == 0) {
+  if (stringAtomLongName.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -6472,7 +6472,7 @@ void oahFactorizedStringAtom::addStringAtom (
   std::string stringAtomShortName =
     stringAtom->getShortName ();
 
-  if (stringAtomShortName.size () == 0) {
+  if (stringAtomShortName.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyOahVerboseMode ()) {
       std::stringstream ss;
@@ -6514,7 +6514,7 @@ void oahFactorizedStringAtom::addStringAtomByName (
   mfAssert (
     __FILE__, __LINE__,
     handler != nullptr,
-    "handler is null");
+    "handler is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // is name known in options map?
@@ -7152,11 +7152,11 @@ oahCommonPrefixBooleansAtom::oahCommonPrefixBooleansAtom (
   mfAssert (
     __FILE__, __LINE__,
     shortNamesPrefix != nullptr,
-    "shortNamesPrefix is null");
+    "shortNamesPrefix is NULL");
   mfAssert (
     __FILE__, __LINE__,
     longNamesPrefix != nullptr,
-    "fLongNamesPrefix is null");
+    "fLongNamesPrefix is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fShortSuffixDescriptor = shortSuffixDescriptor;
@@ -7183,7 +7183,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
   mfAssert (
     __FILE__, __LINE__,
     booleanAtom != nullptr,
-    "booleanAtom is null");
+    "booleanAtom is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // long name consistency check
@@ -7233,7 +7233,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
           booleanAtomLongName.substr (
             fLongNamesPrefixName.size ());
 
-        if (booleanAtomLongNameSuffix.size () == 0) {
+        if (booleanAtomLongNameSuffix.empty ()) {
           std::stringstream ss;
 
           ss <<
@@ -7315,7 +7315,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtom (
         booleanAtomShortName.substr (
           fShortNamesPrefixName.size ());
 
-      if (booleanAtomShortNameSuffix.size () == 0) {
+      if (booleanAtomShortNameSuffix.empty ()) {
         std::stringstream ss;
 
         ss <<
@@ -7359,7 +7359,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtomByName (
   mfAssert (
     __FILE__, __LINE__,
     handler != nullptr,
-    "handler is null");
+    "handler is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // is name known in options map?
@@ -13118,7 +13118,7 @@ void oahFindStringInHelpAtom::applyAtomWithValue (
       mfAssert (
         __FILE__, __LINE__,
         theFindStringMatch != nullptr,
-        "theFindStringMatch is null");
+        "theFindStringMatch is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       std::string
@@ -13420,7 +13420,7 @@ void oahMatchHelpWithPatternAtom::applyAtomWithValue (
       mfAssert (
         __FILE__, __LINE__,
         matchingElement != nullptr,
-        "matchingElement is null");
+        "matchingElement is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 //       std::string

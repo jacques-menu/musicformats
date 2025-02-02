@@ -905,11 +905,11 @@ class EXP mxsrEventsCollection : public smartable
 
     void                  fetchTupletBeginsList (
                             int                            noteSequentialNumber,
-                            std::list <S_mxsrTupletEvent>& collectedBeginsList);
+                            std::list <S_mxsrTupletEvent>& recipientTupletBeginsList);
 
     void                  fetchTupletEndsList (
                             int                            noteSequentialNumber,
-                            std::list <S_mxsrTupletEvent>& collectedEndsList);
+                            std::list <S_mxsrTupletEvent>& recipientTupletEndsList);
 
     // sort MXSR events list
     void                  sortTheMxsrEventsLists ();
@@ -929,7 +929,7 @@ class EXP mxsrEventsCollection : public smartable
 
     void                  print (std::ostream& os) const;
 
-    void                  printAllEvents (std::ostream& os) const;
+    void                  printAllEventsList (std::ostream& os) const;
 
     void                  printStaffChangeEvents (std::ostream& os) const;
     void                  printGraceEvents (std::ostream& os) const;

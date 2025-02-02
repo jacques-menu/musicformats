@@ -49,7 +49,7 @@ S_bsrScore translateBsrToFinalizedBsr (
       mfAssert (
         __FILE__, __LINE__,
       originalBsrScore != nullptr,
-      "originalBsrScore is null");
+      "originalBsrScore is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
     S_bsrScore result;

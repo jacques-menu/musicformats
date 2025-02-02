@@ -1305,6 +1305,9 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrVoice                fetchFirstVoiceFromCurrentPart (
                                 int inputLineNumber);
 
+		void											displayStaffAndVoiceInformation (
+                                int                inputLineNumber,
+																const std::string& context);
 
     /*
       the order in which a tuplet'members are present in a MusicXML file
@@ -1429,6 +1432,37 @@ class EXP mxsr2msrSkeletonPopulator :
 //     void                      handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
 //                                 int inputLineNumber);
 
+    // staff changes handling
+    // ------------------------------------------------------
+
+    // MusicXMl contains sequences of elements on one and the same staff,
+    // until a <backup/> or <forward/> markup may change the latter
+    // or some note in not in the same staff
+
+    // such a staff change occurs when the staff number changes
+    // whilst the voice number remains the same
+    // hence the use of fCurrentRecipientStaffNumber,
+    // which doesnt change in case of a staff change
+
+    // fCurrentRecipientStaffNumber is that of the staff that contains the note,
+    // which may be different that tne current note's staff number
+    // in case of staff change
+    int                       fCurrentRecipientStaffNumber;
+
+    // fCurrentDisplayStaffNumber is that where the notes are displayed
+    // for the duration of the staff change
+    int                       fCurrentDisplayStaffNumber;
+
+    // fCurrentNoteStaffChangeTakeOff contains the staff change event
+    // that occurs on a take off note, if any
+    S_mxsrStaffChangeEvent    fCurrentNoteStaffChangeTakeOff; // EVENTS
+
+    void                      handleStaffChangeTakeOffEventIfAny ();
+
+    void                      createStaffChange (
+                                int                    inputLineNumber,
+                                S_mxsrStaffChangeEvent staffChangeTakeOffEvent);
+
     // grace notes handling
     // ------------------------------------------------------
 
@@ -1460,104 +1494,155 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handleGraceEndEventIfAny ();
 
 
+    // chords handling
+    // ------------------------------------------------------
+
+    S_mxsrChordEvent          fCurrentNoteChordBegin;
+    S_mxsrChordEvent          fCurrentNoteChordEnd;
+
+    Bool                      fCurrentNoteBelongsToAChord;
+
+    Bool                      fOnGoingChord;
+    S_msrChord                fCurrentChord;
+
+    Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
+
+    void                      handleChordBeginEventIfAny ();
+
+    void                      handleChordEndEventIfAny ();
+
+    void                      handleChordBegin ();
+
+    void                      handleChordEnd ();
+
+//     void                      finalizeCurrentChord (
+//                                 int inputLineNumber);
+
+    void                      printCurrentChord ();
+
+
+    // tuplets handling
+    // ------------------------------------------------------
+
+    S_mxsrTupletEvent         fCurrentNoteTupletEvent; // EVENTS
+
+    Bool                      fCurrentNoteHasATimeModification;
+
+    int                       fCurrentNoteActualNotes;
+    int                       fCurrentNoteNormalNotes;
+    msrNotesDurationKind      fCurrentNoteNormalTypeNotesDuration;
+
+    // nested tuplets are numbered 1, 2, ...
+    int                       fCurrentTupletNumber;
+    int                       fPreviousTupletNumber;
+
+    Bool                      fOnGoingTupletActual;
+    int                       fCurrentTupletActualNumber;
+    std::string               fCurrentTupletActualType;
+    int                       fCurrentTupletActualDotsNumber;
+
+    Bool                      fOnGoingTupletNormal;
+    int                       fCurrentTupletNormalNumber;
+    std::string               fCurrentTupletNormalType;
+    int                       fCurrentTupletNormalDotsNumber;
+
+    msrTupletTypeKind         fCurrentTupletTypeKind;
+    int                       fCurrentTempoTupletNumber;
+    msrTupletBracketKind      fCurrentTupletBracketKind;
+    msrTupletShowNumberKind   fCurrentTupletShowNumberKind;
+    msrTupletShowTypeKind     fCurrentTupletShowTypeKind;
+    msrTupletLineShapeKind    fCurrentTupletLineShapeKind;
+    msrPlacementKind          fCurrentTupletPlacementKind;
+
+
+    Bool                      fCurrentNoteBelongsToATuplet;
+
+    // there is no fOnGoingTuplet, this is indicated
+    // by fCurrentTupletStackTop being null
+    S_msrTuplet               fCurrentTupletStackTop;
+
+    /*
+      the measure position of a harmony is that of the next note
+      after it in the MusicXML data,
+      which can be the first note of a outermost tuplet
+
+      we should memoize it because the latter note measure position
+      will be known when the tuplet is appended to the current part,
+      which occurs only after the whole tuplet contents has be analyzed
+
+      the elements in a tuplet, including the nested ones,
+      form a tree built along the way
+      each note therein however has an offset relative to
+      the first note of the outermost tuplet, computed linearly long the way
+    */
+    S_msrNote                 fCurrentOuterMostTupletFirstNote;
+    S_msrTuplet               fCurrentOuterMostTuplet;
+
+    msrWholeNotes             fCurrentOuterMostTupletRelativeOffset;
+
+		void											displayGatheredTupletInformations (
+																const std::string& context);
+
+    S_msrTuplet               createTuplet (
+                                int inputLineNumber);
+
+    void                      handleTupletBeginEventsIfAny ();
+
+    void                      handleTupletEndEventsIfAny ();
+
+    void                      handleTupletBegin (
+                                const S_msrVoice& currentNoteVoice);
+
+    void                      handleTupletContinue (
+                                const S_msrNote&  note,
+                                const S_msrVoice& currentNoteVoice);
+
+    void                      handleTupletEnd (
+                                const S_msrNote&  note,
+                                const S_msrVoice& currentNoteVoice);
+
+
     // cue notes
+    // ------------------------------------------------------
+
     Bool                      fCurrentNoteIsACueNote;
     msrNoteIsACueNoteKind     fCurrentNoteIsACueNoteKind;
 
-    // current non-grace note
-    S_msrNote                 fCurrentNonGraceNote;
-
     // detailed notes handling
+    // ------------------------------------------------------
+
+		void											displayGatheredNoteInformation (
+																const std::string& context);
+
     void                      handleCurrentNote (
                                 int inputLineNumber);
 
     S_msrNote                 createNote (
                                 int inputLineNumber);
 
-//     void                      attachPendingGraceNotesGroupToNoteIfRelevant (
-//                                 int inputLineNumber);
-
     void                      handleARegularNoteInAMeasure (
 																const S_msrNote& note);
 
     void                      handleARestInAMeasure (
-																const S_msrNote& note);
+																const S_msrNote& rest);
 
     void                      handleARegularNoteInAChord (
-                                const S_msrNote& note);
+                                const S_msrNote& regularNote);
 
     void                      handleARegularNoteInATuplet (
-																const S_msrNote& note);
+																const S_msrNote& regularNote);
 
     void                      handleARestInATuplet (
-																const S_msrNote& note);
+																const S_msrNote& rest);
 
     void                      handleAGraceNoteAttachedToANote (
-																const S_msrNote& graceNote); // JMI v0.9.72
+																const S_msrNote& graceNote);
 
     void                      handleARegularNoteInAChordInATuplet (
                                 const S_msrNote& graceNote);
 
     void                      handleAGraceNoteInAChord (
                                 const S_msrNote& graceNote);
-
-    // staff changes handling
-    // ------------------------------------------------------
-
-    // MusicXMl contains sequences of elements on one and the same staff,
-    // until a <backup/> or <forward/> markup may change the latter
-    // or some note in not in the same staff
-
-    // such a staff change occurs when the staff number changes
-    // whilst the voice number remains the same
-    // hence the use of fCurrentRecipientStaffNumber,
-    // which doesnt change in case of a staff change
-
-    // fCurrentRecipientStaffNumber is that of the staff that contains the note,
-    // which may be different that tne current note's staff number
-    // in case of staff change
-    int                       fCurrentRecipientStaffNumber;
-
-    // fCurrentDisplayStaffNumber is that where the notes are displayed
-    // for the duration of the staff change
-    int                       fCurrentDisplayStaffNumber;
-//     S_msrVoice                fCurrentRecipientVoice;
-
-    // fCurrentNoteStaffChangeTakeOff contains the staff change event
-    // that occurs on a take off note, if any
-    S_mxsrStaffChangeEvent    fCurrentNoteStaffChangeTakeOff; // EVENTS
-
-//     int                       fCurrentTakeOffStaffNumber;
-//     int                       fCurrentLandingStaffNumber;
-
-    void                      handleStaffChangeTakeOffEventIfAny ();
-
-    void                      createStaffChange (
-                                int                    inputLineNumber,
-                                S_mxsrStaffChangeEvent staffChangeTakeOffEvent);
-
-//     // an ongoing staff change is indicated by ??? JMI v0.9.72
-//     //   fCurrentDisplayStaffNumber != fCurrentRecipientStaffNumber
-//     Bool                      fOnGoingStaffChange;
-
-//     msrStaffChangeKind        fCurrentStaffChangeKind;
-//     Bool                      fCurrentNoteIsCrossStaves;
-
-    // cross staff chords
-//     int                       fCurrentChordStaffNumber;
-
-//     Bool                      thereIsAStaffChange (
-//                                 int inputLineNumber);
-
-    // print
-    // ------------------------------------------------------
-
-		void											displayGatheredNoteInformation (
-																const std::string& context);
-
-		void											displayStaffAndVoiceInformation (
-                                int                inputLineNumber,
-																const std::string& context);
 
 
     // harmonies and figured bass elements are pending
@@ -1607,9 +1692,6 @@ class EXP mxsr2msrSkeletonPopulator :
 
     Bool                      fOnGoingDirectionType;
 
-//     void                      attachPendingVoiceLevelElementsToVoice ( // JMI UNUSED??? v0.9.68
-//                                 const S_msrVoice& voice);
-
     void                      attachPendingPartLevelElementsIfAnyToPart (
                                 const S_msrPart& part);
 
@@ -1622,9 +1704,6 @@ class EXP mxsr2msrSkeletonPopulator :
     // may occur when no current voice exists
     std::list <S_msrRehearsalMark>
                               fPendingRehearsalMarksList;
-
-//     void                  attachPendingRehearsalMarksToVoice ( JMI UNUSED??? v0.9.68
-//                             const S_msrVoice& voice);
 
     void                      attachPendingRehearsalMarksToPart (
                                 const S_msrPart& part);
@@ -1788,6 +1867,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     msrWholeNotes             fCurrentMetronomeNoteWholeNotesFromMetronomeType;
 
+    int                       fCurrentMetronomeTupletNumber;
     S_msrTempoTuplet          fCurrentMetronomeTuplet;
     Bool                      fOnGoingMetronomeTuplet;
 
@@ -2307,144 +2387,6 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrDoubleTremolo        fCurrentDoubleTremolo;
 
     void                      attachCurrentSingleTremoloToCurrentNote ();
-
-
-    // chords handling
-    // ------------------------------------------------------
-
-    S_mxsrChordEvent          fCurrentNoteChordBegin;
-    S_mxsrChordEvent          fCurrentNoteChordEnd;
-
-    Bool                      fCurrentNoteBelongsToAChord;
-
-    Bool                      fOnGoingChord;
-
-/* JMI v0.9.70
-    // we use a pair containing the staff and voice numbers:
-    std::map <std::pair <int, int>, S_msrChord>
-                              fVoicesCurrentChordMap;
-*/
-
-    S_msrChord                fCurrentChord;
-
-    Bool                      fCurrentChordHasBeenPopulatedFromItsFirstNote;
-
-    void                      handleChordBeginEventIfAny ();
-
-    void                      handleChordEndEventIfAny ();
-
-/* JMI
-    void                      registerVoiceCurrentChordInMap (
-                                int        inputLineNumber,
-                                const S_msrVoice& voice,
-                                const S_msrChord& chord);
-
-    void                      printVoicesCurrentChordMap ();
- */
-
-//     void                      finalizeCurrentChord (
-//                                 int inputLineNumber);
-
-    void                      printCurrentChord ();
-
-
-    // tuplets handling
-    // ------------------------------------------------------
-
-    S_mxsrTupletEvent         fCurrentNoteTupletEvent; // EVENTS
-
-    Bool                      fCurrentNoteHasATimeModification;
-
-    // there is no fOnGoingTuplet, this is indicated
-    // by the current voice handlers's being empty
-
-    int                       fCurrentNoteActualNotes;
-    int                       fCurrentNoteNormalNotes;
-    msrNotesDurationKind      fCurrentNoteNormalTypeNotesDuration;
-
-    // nested tuplets are numbered 1, 2, ...
-    int                       fCurrentTupletNumber;
-    int                       fPreviousTupletNumber;
-
-    Bool                      fOnGoingTupletActual;
-    int                       fCurrentTupletActualNumber;
-    std::string               fCurrentTupletActualType;
-    int                       fCurrentTupletActualDotsNumber;
-
-    Bool                      fOnGoingTupletNormal;
-    int                       fCurrentTupletNormalNumber;
-    std::string               fCurrentTupletNormalType;
-    int                       fCurrentTupletNormalDotsNumber;
-
-    msrTupletTypeKind         fCurrentTupletTypeKind;
-    int                       fCurrentTempoTupletNumber;
-    msrTupletBracketKind      fCurrentTupletBracketKind;
-    msrTupletShowNumberKind   fCurrentTupletShowNumberKind;
-    msrTupletShowTypeKind     fCurrentTupletShowTypeKind;
-    msrTupletLineShapeKind    fCurrentTupletLineShapeKind;
-    msrPlacementKind          fCurrentTupletPlacementKind;
-
-
-    Bool                      fCurrentNoteBelongsToATuplet;
-    int                       fEndingTupletNumber;
-
-    // a tuplet stop may occur in a chord before the latter's last note, hence:
-    Bool                      fThereIsAPendingTupletStop; // CHORD_TUP
-    S_msrNote                 fNoteWithThePendingTupletStop;
-    S_msrVoice                fVoiceOfTheNoteWithThePendingTupletStop;
-
-    /*
-      the measure position of a harmony is that of the next note
-      after it in the MusicXML data,
-      which can be the first note of a outermost tuplet
-
-      we should memoize it because the latter note measure position
-      will be known when the tuplet is appended to the current part,
-      which occurs only after the whole tuplet contents has be analyzed
-
-      the elements in a tuplet, including the nested ones,
-      form a tree built along the way
-      each note therein however has an offset relative to
-      the first note of the outermost tuplet, computed linearly long the way
-    */
-    S_msrNote                 fCurrentOuterMostTupletFirstNote;
-    S_msrTuplet               fCurrentOuterMostTuplet;
-
-    msrWholeNotes             fCurrentOuterMostTupletRelativeOffset;
-
-    // the tuplets stops are not always in first-in/first-out order, so:
-//     std::set <int>             fExpectedTupletsStopNumbersSet;
-
-//     Bool                      tupletsStopNumberIsExpected ( // JMI v0.9.70
-//                                 int tupletNumber);
-
-    S_msrTuplet               createTuplet (
-                                int inputLineNumber);
-
-    void                      handleTupletBeginEventsIfAny ();
-
-//     void                      handleTupletEndEventsBeforeNoteIfAny ();
-
-    void                      handleTupletEndEventsIfAny ();
-
-    void                      handleTupletStart (
-                                const S_msrTuplet& tuplet,
-                                const S_msrVoice&  currentNoteVoice);
-
-    void                      handleTupletContinue (
-                                const S_msrNote&  note,
-                                const S_msrVoice& currentNoteVoice);
-
-    void                      handleTupletStop (
-                                const S_msrNote&  note,
-                                const S_msrVoice& currentNoteVoice);
-
-    void                      handleTheTupletsStackTopIfAny (
-                                int inputLineNumber);
-
-//     void                      reduceTupletStackTop (
-//                                 const S_msrNote&  note,
-//                                 const S_msrVoice& currentNoteVoice);
 
 
     // ties handling

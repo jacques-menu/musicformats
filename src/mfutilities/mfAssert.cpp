@@ -66,12 +66,16 @@ void mfAssert (
   }
 }
 
-void mfAssertFalse (int identifier)
+void mfAssertFalse (
+  const std::string& sourceCodeFileName,
+  int                sourceCodeLineNumber,
+  const std::string& messageIfFalse)
 {
   mfAssert (
-    "__FILE__", identifier,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
     false,
-    "*** mfAssertFalse ***");
+    messageIfFalse);
 }
 
 //______________________________________________________________________________

@@ -1348,7 +1348,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
         ss <<
           "Element from the from the atom uses list for \"" <<
           nameUsed <<
-          "\" is null";
+          "\" is NULL";
 
         oahInternalError (ss.str ());
 
@@ -1948,7 +1948,7 @@ void oahHistoryAtom::printHistory (std::ostream& os) const
   mfAssert (
     __FILE__, __LINE__,
     handlerMultiComponent != nullptr,
-    "handlerMultiComponent is null");
+    "handlerMultiComponent is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   handlerMultiComponent->

@@ -82,9 +82,9 @@ std::string mxsrTuplet::asString () const
 
   ss <<
 		"[mxsrTuplet" <<
-		", fTupletInputStartLineNumber: " << fTupletInputStartLineNumber <<
-		", fTupletNumber: " << fTupletNumber <<
 		", fTupletTypeKind:" << fTupletTypeKind <<
+		", fTupletNumber: " << fTupletNumber <<
+		", fTupletInputStartLineNumber: " << fTupletInputStartLineNumber <<
     ']';
 
   return ss.str ();
@@ -102,14 +102,14 @@ void mxsrTuplet::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTupletInputStartLineNumber" << ": " <<
-    fTupletInputStartLineNumber <<
+    "fTupletTypeKind" << ": " << fTupletTypeKind <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fTupletNumber" << ": " << fTupletNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletTypeKind" << ": " << fTupletTypeKind <<
+    "fTupletInputStartLineNumber" << ": " <<
+    fTupletInputStartLineNumber <<
     std::endl;
 
   --gIndenter;

@@ -69,7 +69,7 @@ msrSegment::msrSegment (
   mfAssert (
     __FILE__, __LINE__,
     segmentUpLinkToVoice != nullptr,
-    "segmentUpLinkToVoice is null");
+    "segmentUpLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set segment's voice upLink
@@ -261,7 +261,7 @@ S_msrSegment msrSegment::createSegmentNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSegment
@@ -301,7 +301,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSegment
@@ -540,7 +540,7 @@ S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
   msrMeasureFirstInSegmentKind
     measureFirstInSegmentKind;
 
-  if (fSegmentElementsList.size () == 0) {
+  if (fSegmentElementsList.empty ()) {
     // this is the first measure in the segment
     measureFirstInSegmentKind =
       msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindYes;
@@ -698,7 +698,7 @@ void msrSegment::appendMusicXMLPrintLayoutToSegment (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (fSegmentElementsList.size () == 0) {
+  if (fSegmentElementsList.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -760,7 +760,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (fSegmentElementsList.size () == 0) {
+  if (fSegmentElementsList.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -823,7 +823,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
-//   if (fSegmentElementsList.size () == 0) {
+//   if (fSegmentElementsList.empty ()) {
 //     std::stringstream ss;
 //
 //     ss <<
@@ -887,7 +887,7 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
-//   if (fSegmentElementsList.size () == 0) {
+//   if (fSegmentElementsList.empty ()) {
 //     std::stringstream ss;
 //
 //     ss <<
@@ -2079,7 +2079,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   if (false && fSegmentMeasuresFlatList.size () == 0) { // JMI
+//   if (false && fSegmentMeasuresFlatList.empty ()) { // JMI
 //     std::stringstream ss;
 //
 //     ss <<
@@ -2253,7 +2253,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "Appending measure '" << measureNumber <<
       "' to segment " << asString ();
 
-    if (fSegmentMeasuresFlatList.size () == 0)
+    if (fSegmentMeasuresFlatList.empty ())
       gLog <<
         ", as first measure";
     else

@@ -703,6 +703,9 @@ class EXP mxsr2msrSkeletonBuilder :
     int                       fCurrentTupletNumber;
 //     int                       fPreviousTupletNumber;
 
+//     std::list <int>           fPendingTupletsStartsNumbers;
+
+
     Bool                      fCurrentNoteBelongsToATuplet;
     Bool                      fPreviousNoteBelongsToATuplet;
 

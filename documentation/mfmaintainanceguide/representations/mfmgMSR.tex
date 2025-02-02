@@ -1547,7 +1547,7 @@ S_msrMeasure msrSegment::cascadeCreateAMeasureAndAppendItInSegment (
   msrMeasureFirstInSegmentKind
     measureFirstInSegmentKind;
 
-  if (fSegmentElementsList.size () == 0) {
+  if (fSegmentElementsList.empty ()) {
     // this is the first measure in the segment
     measureFirstInSegmentKind =
       msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindYes;

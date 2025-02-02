@@ -1461,7 +1461,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
   mfAssert (
     __FILE__, __LINE__,
     format != nullptr,
-    "format is null");
+    "format is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fComponentEntropicityKind) {
@@ -1529,7 +1529,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
   mfAssert (
     __FILE__, __LINE__,
     pass != nullptr,
-    "pass is null");
+    "pass is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fComponentEntropicityKind) {
@@ -2240,7 +2240,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
   mfAssert (
     __FILE__, __LINE__,
     converter != nullptr,
-    "converter is null");
+    "converter is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   switch (fComponentEntropicityKind) {

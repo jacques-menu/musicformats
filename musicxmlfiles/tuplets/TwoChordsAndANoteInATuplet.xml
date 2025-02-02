@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
-  <movement-title>Three Chords In A Tuplet</movement-title>
+  <movement-title>Two Chords And A Note In A Tuplet</movement-title>
   <identification>
     <encoding>
       <software>MuseScore 4.4.3</software>
@@ -64,7 +64,7 @@
     </defaults>
   <credit page="1">
     <credit-type>title</credit-type>
-    <credit-words default-x="595.275" default-y="1627.2613" justify="center" valign="top" font-size="22">Three Chords In Tuplet</credit-words>
+    <credit-words default-x="595.275" default-y="1627.2613" justify="center" valign="top" font-size="22">Two Chords And A Note In A Tuplet</credit-words>
     </credit>
   <part-list>
     <score-part id="P1">
@@ -184,36 +184,6 @@
         <notations>
           <tuplet type="stop"/>
           </notations>
-        </note>
-      <note default-x="127.53" default-y="-25">
-        <chord/>
-        <pitch>
-          <step>A</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
-        </note>
-      <note default-x="127.53" default-y="-5">
-        <chord/>
-        <pitch>
-          <step>E</step>
-          <octave>5</octave>
-          </pitch>
-        <duration>2</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <time-modification>
-          <actual-notes>3</actual-notes>
-          <normal-notes>2</normal-notes>
-          </time-modification>
-        <stem>down</stem>
         </note>
       </measure>
     </part>

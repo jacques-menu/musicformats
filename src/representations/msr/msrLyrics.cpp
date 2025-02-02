@@ -372,7 +372,7 @@ msrSyllable::msrSyllable (
   mfAssert (
     __FILE__, __LINE__,
     syllableUpLinkToStanza != nullptr,
-    "syllableUpLinkToStanza is null");
+    "syllableUpLinkToStanza is NULL");
 
   switch (syllableKind) {
     case msrSyllableKind::kSyllableNone:
@@ -466,7 +466,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
-    "containingPart is null");
+    "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSyllable
@@ -520,7 +520,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   mfAssert (
     __FILE__, __LINE__,
     containingPart != nullptr,
-    "containingPart is null");
+    "containingPart is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrSyllable
@@ -559,7 +559,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//     "measure is null");
+//     "measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -718,7 +718,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
   // sanity check JMI v0.9.70 BABASSE ???
   mfAssert (
     __FILE__, __LINE__,
-    fSyllableElementsList.size () != 0,
+    ! fSyllableElementsList.empty (),
     "fSyllableElementsList is empty");
     */
 }
@@ -1202,7 +1202,7 @@ msrStanza::msrStanza (
   mfAssert (
     __FILE__, __LINE__,
     stanzaUpLinkToVoice != nullptr,
-    "stanzaUpLinkToVoice is null");
+    "stanzaUpLinkToVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set stanza's voice upLink
@@ -1273,7 +1273,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrStanza
@@ -1329,7 +1329,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrStanza

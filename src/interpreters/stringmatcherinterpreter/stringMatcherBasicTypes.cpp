@@ -580,7 +580,7 @@ Bool stringMatcherString::stringMatches (const std::string& theString) const
       mfAssert (
         __FILE__, __LINE__,
         theFindMatch != nullptr,
-        "theFindMatch is null");
+        "theFindMatch is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
       std::string

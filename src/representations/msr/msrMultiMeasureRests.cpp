@@ -115,7 +115,7 @@ S_msrMultiMeasureRest msrMultiMeasureRest::createMultiMeasureRestNewbornClone (
   mfAssert (
     __FILE__, __LINE__,
     containingVoice != nullptr,
-    "containingVoice is null");
+    "containingVoice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   S_msrMultiMeasureRest
@@ -175,7 +175,7 @@ void msrMultiMeasureRest::setMultiMeasureRestLastMeasurePuristMeasureNumber (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     fMultiMeasureRestContents != nullptr,
-//     "fMultiMeasureRestContents is null");
+//     "fMultiMeasureRestContents is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   S_msrSegment
@@ -188,7 +188,7 @@ void msrMultiMeasureRest::setMultiMeasureRestLastMeasurePuristMeasureNumber (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     multiMeasureRestContentsSegment != nullptr,
-//     "multiMeasureRestContentsSegment is null");
+//     "multiMeasureRestContentsSegment is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // get multi-measure rests contents segment measure elements list

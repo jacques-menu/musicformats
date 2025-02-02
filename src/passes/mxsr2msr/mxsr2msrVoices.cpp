@@ -98,7 +98,7 @@ void mxsrVoice::displayTupletsStack (
 //     header <<
 //     ", fLastHandledTupletInVoiceMap contains:";
 //
-//   if (! fLastHandledTupletInVoiceMap.size ()) {
+//   if (LastHandledTupletInVoiceMap.empty ()) {
 //     gLog <<
 //       " none" <<
 //       std::endl;
@@ -147,7 +147,8 @@ void mxsrVoice::pushTupletOntoTupletsStack (
       " onto the tuplets stack in voice " <<
       fMsrVoice->getVoiceName () <<
       ", context: " << context <<
-      ", fTupletsStack.size (): " << fTupletsStack.size () <<
+      ", fTupletsStack.size (): " <<
+      fTupletsStack.size () <<
       ", line " << tuplet->getInputStartLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -156,10 +157,46 @@ void mxsrVoice::pushTupletOntoTupletsStack (
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  int
+    tupletNumber =
+      tuplet->getTupletNumber ();
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check JMI v0.9.72
+  if (fTupletsStack.empty ()) {
+    mfAssert (
+      __FILE__, __LINE__,
+      tupletNumber == 1,
+      "tupletNumber is not equal to 1");
+  }
+
+  else {
+    int
+      tupletsStackTopStackNumber =
+        fTupletsStack.back ()->
+          getTupletNumber ();
+
+    if (tupletNumber != tupletsStackTopStackNumber + 1) {
+      std::stringstream ss;
+
+      ss <<
+        "tuplet number " <<
+        tupletNumber <<
+        " is not equal to tupletsStackTopStackNumber " <<
+        tupletsStackTopStackNumber <<
+        " plus 1";
+
+      mfAssertFalse (
+        __FILE__, __LINE__,
+        ss.str ());
+    }
+  }
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   fTupletsStack.push_front (tuplet);
 }
 
-void mxsrVoice::popTupletStackTopAndAppendItWhereItBelongs (
+S_msrTuplet mxsrVoice::popTupletStackTop (
   int         inputLineNumber,
   std::string context)
 {
@@ -168,10 +205,11 @@ void mxsrVoice::popTupletStackTopAndAppendItWhereItBelongs (
     std::stringstream ss;
 
     ss <<
-      "Popping tuplet stack top and appending it where it belong in voice " <<
+      "Popping tuplet stack top " <<
       fMsrVoice->getVoiceName () <<
       ", context: " << context <<
-      ", fTupletsStack.size (): " << fTupletsStack.size () <<
+      ", fTupletsStack.size (): " <<
+      fTupletsStack.size () <<
       ", line " << inputLineNumber;
 
     ss <<
@@ -197,13 +235,13 @@ void mxsrVoice::popTupletStackTopAndAppendItWhereItBelongs (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
     displayTupletsStack (
-      "############## popTupletStackTopAndAppendItWhereItBelongs() 1");
+      "############## popTupletStackTop() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
   // get current tuplet from the top of the tuplet stack
   S_msrTuplet
-    currentTuplet =
+    currentTupletStackTop =
       fTupletsStack.front ();
 
   // pop from the tuplets stack
@@ -212,9 +250,9 @@ void mxsrVoice::popTupletStackTopAndAppendItWhereItBelongs (
     std::stringstream ss;
 
     ss <<
-      "Popping currentTuplet " <<
-      currentTuplet->asString () <<
-      " for voice " <<
+      "Popping currentTupletStackTop " <<
+      currentTupletStackTop->asString () <<
+      " in voice " <<
       fMsrVoice->getVoiceName () <<
       ", context: " << context <<
       ", line " << inputLineNumber;
@@ -229,7 +267,7 @@ void mxsrVoice::popTupletStackTopAndAppendItWhereItBelongs (
   // sanity check JMI v0.9.70
   mfAssert (
     __FILE__, __LINE__,
-    fTupletsStack.size () > 0,
+    ! fTupletsStack.empty (),
     "fTupletsStack is empty");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
@@ -238,52 +276,9 @@ void mxsrVoice::popTupletStackTopAndAppendItWhereItBelongs (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
     displayTupletsStack (
-      "############## popTupletStackTopAndAppendItWhereItBelongs() 2");
+      "############## popTupletStackTop() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
-
-//   abort ();
-
-  // analyze the new tuplets stack size, after currentTuplet has been popped from it
-  switch (fTupletsStack.size ()) {
-    case 0:
-      // no open tuplet left, currentTuplet is a top level tuplet
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceTupletsBasics ()) {
-        gLog <<
-          "Appending top level tuplet " <<
-        currentTuplet->asString () <<
-        " to voice \"" <<
-        fMsrVoice->getVoiceName () <<
-        "\"" <<
-        ", line " << inputLineNumber <<
-        std::endl;
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fMsrVoice->
-        appendTupletToVoice (
-          currentTuplet);
-    break;
-
-    default:
-      // currentTuplet is nested in the new tuplet stack top
-#ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceTupletsBasics ()) {
-        gLog <<
-          "Appending nested tuplet " <<
-        currentTuplet <<
-          " to current stack top tuplet " <<
-        fTupletsStack.front ()->asString () <<
-        ", line " << inputLineNumber <<
-        std::endl;
-      }
-#endif // MF_TRACE_IS_ENABLED
-
-      fTupletsStack.front ()->
-        appendTupletToTuplet (
-          currentTuplet);
-  } // switch
 
     // forget about the current outermost tuplet and its first note // JMI v0.9.68 HARMFUL
 //     fCurrentOuterMostTupletFirstNote = nullptr;
@@ -292,7 +287,106 @@ void mxsrVoice::popTupletStackTopAndAppendItWhereItBelongs (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
     displayTupletsStack (
-      "############## popTupletStackTopAndAppendItWhereItBelongs() 3");
+      "############## popTupletStackTop() 3");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return currentTupletStackTop;
+}
+
+void mxsrVoice::appendTupletWhereItBelongs (
+  int         inputLineNumber,
+  S_msrTuplet tuplet,
+  std::string context)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Appending tuplet " <<
+      tuplet->asString () <<
+      " where it belongs in voice " <<
+      fMsrVoice->getVoiceName () <<
+      ", context: " << context <<
+      ", fTupletsStack.size (): " <<
+      fTupletsStack.size () <<
+      ", line " << inputLineNumber;
+
+    ss <<
+      ", fCurrentOuterMostTuplet: ";
+    if (fCurrentOuterMostTuplet) {
+      ss <<
+        fCurrentOuterMostTuplet->asString ();
+    }
+    else {
+      ss << "[NULL]";
+    }
+
+    ss <<
+      ", context: " << context <<
+      ", line " << inputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    displayTupletsStack (
+      "############## appendTupletWhereItBelongs() 1");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // analyze the new tuplets stack size
+  if (fTupletsStack.empty ()) {
+    // no open tuplet left, tuplet is a top level tuplet
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceTupletsBasics ()) {
+      gLog <<
+        "Appending tuplet " <<
+      tuplet->asString () <<
+      " at the top level of voice \"" <<
+      fMsrVoice->getVoiceName () <<
+      "\"" <<
+      ", line " << inputLineNumber <<
+      std::endl;
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    fMsrVoice->
+      appendTupletToVoice (
+        tuplet);
+  }
+
+  else {
+      // tuplet is nested in the tuplet stack top
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceTupletsBasics ()) {
+        gLog <<
+          "Appending tuplet " <<
+        tuplet <<
+          " as nested in current stack top tuplet " <<
+        fTupletsStack.front ()->asString () <<
+        " in voice \"" <<
+        fMsrVoice->getVoiceName () <<
+        "\"" <<
+        ", line " << inputLineNumber <<
+        std::endl;
+      }
+#endif // MF_TRACE_IS_ENABLED
+
+      fTupletsStack.front ()->
+        appendTupletToTuplet (
+          tuplet);
+  } // switch
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    displayTupletsStack (
+      "############## appendTupletWhereItBelongs() 3");
   }
 #endif // MF_TRACE_IS_ENABLED
 }

@@ -402,7 +402,7 @@ void checkDesiredEncoding (
   const std::string& desiredEncoding)
 {
   if (encoding != desiredEncoding) {
-    if (encoding.size () == 0) {
+    if (encoding.empty ()) {
       std::stringstream ss;
 
       ss <<
