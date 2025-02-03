@@ -1294,7 +1294,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
 		void											displayCurrentPartStavesVector (
                                 int                inputLineNumber,
-																const std::string& context);
+																const std::string& context) const;
 
 
     // voices handling
@@ -1307,7 +1307,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
 		void											displayStaffAndVoiceInformation (
                                 int                inputLineNumber,
-																const std::string& context);
+																const std::string& context) const;
 
     /*
       the order in which a tuplet'members are present in a MusicXML file
@@ -1326,7 +1326,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
 		void											displayCurrentPartStaffMsrVoicesMap (
                                 int                inputLineNumber,
-																const std::string& context);
+																const std::string& context) const;
 
     // we need a fast access to the voices and their handlers
     // indexes are staff number and voice number
@@ -1343,7 +1343,7 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      populateCurrentPartStaffVoicesMapsFromPart (
                                   const S_msrPart& part);
 
-		void											displayCurrentPartStaffMxsrVoicesMap ();
+		void											displayCurrentPartStaffMxsrVoicesMap () const;
 
     // staff details handling
     // ------------------------------------------------------
@@ -1533,7 +1533,8 @@ class EXP mxsr2msrSkeletonPopulator :
     msrNotesDurationKind      fCurrentNoteNormalTypeNotesDuration;
 
     // nested tuplets are numbered 1, 2, ...
-    int                       fCurrentTupletNumber;
+    // there can be several <tuplet /> markups on a given note
+    std::list <int>           fCurrentTupletNumbersStack;
     int                       fPreviousTupletNumber;
 
     Bool                      fOnGoingTupletActual;
@@ -1581,17 +1582,19 @@ class EXP mxsr2msrSkeletonPopulator :
     msrWholeNotes             fCurrentOuterMostTupletRelativeOffset;
 
 		void											displayGatheredTupletInformations (
-																const std::string& context);
+																const std::string& context) const;
 
     S_msrTuplet               createTuplet (
-                                int inputLineNumber);
+                                int inputLineNumber,
+                                int tupletNumber);
 
     void                      handleTupletBeginEventsIfAny ();
 
     void                      handleTupletEndEventsIfAny ();
 
     void                      handleTupletBegin (
-                                const S_msrVoice& currentNoteVoice);
+                                const S_msrVoice& currentNoteVoice,
+                                int               tupletNumber);
 
     void                      handleTupletContinue (
                                 const S_msrNote&  note,
@@ -1612,7 +1615,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // ------------------------------------------------------
 
 		void											displayGatheredNoteInformation (
-																const std::string& context);
+																const std::string& context) const;
 
     void                      handleCurrentNote (
                                 int inputLineNumber);
@@ -1995,7 +1998,7 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handlePendingMultipleHarmonies ();
 
     void                      displayPendingHarmoniesList (
-                                std::string context);
+                                std::string context) const;
 
     int                       fCurrentHarmonyInputLineNumber;
 
@@ -2047,7 +2050,7 @@ class EXP mxsr2msrSkeletonPopulator :
     void                      handlePendingMultipleFiguredBasses ();
 
     void                      displayPendingFiguredBassesList (
-                                std::string context);
+                                std::string context) const;
 
     Bool                      fOnGoingFiguredBass;
 
@@ -2411,7 +2414,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     std::list <S_msrSlur>     fSlurStartsStack;
     void                      displaySlurStartsStack (
-                                const std::string& context);
+                                const std::string& context) const;
 
     // ligatures handling
     // ------------------------------------------------------
@@ -2472,7 +2475,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // current ongoing values display
     // ------------------------------------------------------
-    void                      displayCurrentOnGoingValues ();
+    void                      displayCurrentOnGoingValues () const;
 };
 
 

@@ -113,6 +113,9 @@ class mxsrVoice : public smartable
 
     virtual void          print (std::ostream& os) const;
 
+    void                  displayTupletsStack (
+                            const std::string& context) const;
+
   private:
 
     // private fields
@@ -148,15 +151,6 @@ class mxsrVoice : public smartable
 
     // private methods
     // ------------------------------------------------------
-
-    void                  displayTupletsStack (
-                            const std::string& context);
-
-    void                  handleTupletsPendingOnTupletsStack (
-                            int inputLineNumber);
-
-    void                  displayLastHandledTupletInVoiceMap (
-                            const std::string& header);
 };
 typedef SMARTP<mxsrVoice> S_mxsrVoice;
 

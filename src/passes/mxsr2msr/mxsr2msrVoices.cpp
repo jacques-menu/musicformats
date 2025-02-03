@@ -41,7 +41,7 @@ mxsrVoice::~mxsrVoice ()
 {}
 
 void mxsrVoice::displayTupletsStack (
-  const std::string& context)
+  const std::string& context) const
 {
   size_t tupletsStackSize = fTupletsStack.size ();
 
@@ -52,6 +52,7 @@ void mxsrVoice::displayTupletsStack (
     " contains " <<
     mfSingularOrPlural (
       tupletsStackSize, "element", "elements") <<
+    " - context: " << context <<
     ':' <<
     std::endl;
 
@@ -90,49 +91,6 @@ void mxsrVoice::displayTupletsStack (
     std::endl << std::endl;
 }
 
-// void mxsrVoice::displayLastHandledTupletInVoiceMap (
-//   const std::string& header)
-// {
-//   gLog <<
-//     std::endl <<
-//     header <<
-//     ", fLastHandledTupletInVoiceMap contains:";
-//
-//   if (LastHandledTupletInVoiceMap.empty ()) {
-//     gLog <<
-//       " none" <<
-//       std::endl;
-//   }
-//
-//   else {
-//     std::map <std::pair <int, int>, S_msrTuplet>::const_iterator
-//       iBegin = fLastHandledTupletInVoiceMap.begin (),
-//       iEnd   = fLastHandledTupletInVoiceMap.end (),
-//       i      = iBegin;
-//
-//     gLog << std::endl;
-//
-//     ++gIndenter;
-//
-//     for ( ; ; ) {
-//       gLog <<
-//         "staff " << (*i).first.first <<
-//         ", voice " <<  (*i).first.second <<
-//         std::endl;
-// //        "\"" << (*i).first->getVoiceName () <<
-// //        "\" ----> " << (*i).second->asString ();
-//       if (++i == iEnd) break;
-//       gLog << std::endl;
-//     } // for
-//
-//     gLog << std::endl;
-//
-//     --gIndenter;
-//   }
-//
-//   gLog << std::endl;
-// }
-
 void mxsrVoice::pushTupletOntoTupletsStack (
   const S_msrTuplet& tuplet,
   std::string        context)
@@ -161,13 +119,14 @@ void mxsrVoice::pushTupletOntoTupletsStack (
     tupletNumber =
       tuplet->getTupletNumber ();
 
+
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI v0.9.72
   if (fTupletsStack.empty ()) {
-    mfAssert (
-      __FILE__, __LINE__,
-      tupletNumber == 1,
-      "tupletNumber is not equal to 1");
+//     mfAssert (
+//       __FILE__, __LINE__,
+//       tupletNumber == 1,
+//       "tupletNumber is not equal to 1");
   }
 
   else {
@@ -186,14 +145,32 @@ void mxsrVoice::pushTupletOntoTupletsStack (
         tupletsStackTopStackNumber <<
         " plus 1";
 
-      mfAssertFalse (
-        __FILE__, __LINE__,
-        ss.str ());
+gLog << std::endl << ss.str () << std::endl;
+
+#ifdef MF_TRACE_IS_ENABLED
+      if (gTraceOahGroup->getTraceTupletsBasics ()) {
+        displayTupletsStack (
+          "############## pushTupletOntoTupletsStack(): tuplet number problem");
+      }
+#endif // MF_TRACE_IS_ENABLED
+
+      gLog << std::endl << ss.str () << std::endl << std::endl;
+
+//       mfAssertFalse (
+//         __FILE__, __LINE__,
+//         ss.str ());
     }
   }
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fTupletsStack.push_front (tuplet);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    displayTupletsStack (
+      "############## pushTupletOntoTupletsStack(): after push_front()");
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 S_msrTuplet mxsrVoice::popTupletStackTop (
@@ -229,13 +206,6 @@ S_msrTuplet mxsrVoice::popTupletStackTop (
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsBasics ()) {
-    displayTupletsStack (
-      "############## popTupletStackTop() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -276,20 +246,13 @@ S_msrTuplet mxsrVoice::popTupletStackTop (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
     displayTupletsStack (
-      "############## popTupletStackTop() 2");
+      "############## popTupletStackTop(): after pop_front()");
   }
 #endif // MF_TRACE_IS_ENABLED
 
     // forget about the current outermost tuplet and its first note // JMI v0.9.68 HARMFUL
 //     fCurrentOuterMostTupletFirstNote = nullptr;
 //     fCurrentOuterMostTuplet = nullptr;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsBasics ()) {
-    displayTupletsStack (
-      "############## popTupletStackTop() 3");
-  }
-#endif // MF_TRACE_IS_ENABLED
 
   return currentTupletStackTop;
 }

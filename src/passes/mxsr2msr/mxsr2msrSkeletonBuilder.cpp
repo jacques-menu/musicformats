@@ -135,7 +135,7 @@ void mxsr2msrSkeletonBuilder::browseMxsr (
     // browse the MXSR
     browser.browse (*theMxsr);
 
-		// sort the fResultingEventsCollection MXSR events list
+		// sort the fResultingEventsCollection MXSR events lists
 		fResultingEventsCollection.sortTheMxsrEventsLists ();
 
 #ifdef MF_TRACE_IS_ENABLED

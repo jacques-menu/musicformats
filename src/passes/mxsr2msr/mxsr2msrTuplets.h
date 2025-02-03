@@ -163,7 +163,7 @@ class mxsr2msrPendingTupletStop : public smartable
                             int eventSequentialNumber)
                               { fEventSequentialNumber = eventSequentialNumber; }
 
-    int                   getNoteSequentialNumber () const
+    int                   getEventNoteSequentialNumber () const
                               { return fNoteSequentialNumber; }
 
     int                   getStaffNumber () const
