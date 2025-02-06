@@ -228,7 +228,7 @@ std::string msrSlur::asString () const
     ", slurPlacementKind: " <<
     fSlurPlacementKind <<
 
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -239,7 +239,7 @@ void msrSlur::print (std::ostream& os) const
   os <<
     "[Slur" <<
     ", fSlurTypeKind: " << fSlurTypeKind <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

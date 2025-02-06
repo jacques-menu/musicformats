@@ -2925,7 +2925,7 @@ void lpsrScore::appendVoiceUseToStoreCommand (const S_msrVoice& voice)
   S_lpsrUseVoiceCommand
     useVoiceCommand =
       lpsrUseVoiceCommand::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         voice);
 
   fScoreBlock->
@@ -2937,7 +2937,7 @@ void lpsrScore::appendLyricsUseToStoreCommand (const S_msrStanza& stanza)
   S_lpsrNewLyricsBlock
     newLyricsCommand =
       lpsrNewLyricsBlock::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         stanza,
         stanza->getStanzaUpLinkToVoice ());
 

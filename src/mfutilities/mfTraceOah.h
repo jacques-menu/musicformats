@@ -259,6 +259,11 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceMeasuresBasics () const
                               { return fTraceMeasuresBasics; }
 
+    void                  setTraceMeasuresBasics ()
+                              { fTraceMeasuresBasics = true; }
+    Bool                  getTraceMeasureBasics () const
+                              { return fTraceMeasuresBasics; }
+
     void                  setTraceMeasures ()
                               { fTraceMeasures = true; }
     Bool                  getTraceMeasures () const

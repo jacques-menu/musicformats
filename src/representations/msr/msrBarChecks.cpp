@@ -258,7 +258,7 @@ std::string msrBarCheck::asString () const
     "[BarCheck" <<
     ", nextBarOriginalNumber = \"" << fNextBarOriginalNumber << "\"" <<
     ", nextBarPuristNumber = \"" << fNextBarPuristNumber << "\"" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();

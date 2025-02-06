@@ -168,7 +168,7 @@ S_msrStaffTuning msrStaffTuning::createStaffTuningNewbornClone ()
  S_msrStaffTuning
     newbornClone =
       msrStaffTuning::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fStaffTuningLineNumber,
         fStaffTuningQuarterTonesPitchKind,
         fStaffTuningOctaveKind);
@@ -274,7 +274,7 @@ void msrStaffTuning::print (std::ostream& os) const
 {
   os <<
     "[StaffTuning" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -501,7 +501,7 @@ std::string msrStaffDetails::asShortString () const
     "[StaffDetails" <<
     ", fStaffTypeKind: " <<
     fStaffTypeKind <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   // print the staff lines number
   ss << ", fStaffLinesNumber: " << fStaffLinesNumber;
@@ -523,7 +523,7 @@ void msrStaffDetails::print (std::ostream& os) const
 {
   os <<
     "[StaffDetails" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

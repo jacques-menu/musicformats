@@ -100,7 +100,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
   S_bsrCellsList
     result =
       bsrCellsList::create (
-        fInputStartLineNumber, kCellWordSign);
+        fInputLineNumber, kCellWordSign);
 
   if (! gGlobalMsr2bsrOahGroup->getNoTempos ()) {
     switch (fMsrTempo->getTempoKind ()) {
@@ -199,7 +199,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           S_bsrNote
             bNote =
               bsrNote::create (
-                fInputStartLineNumber,
+                fInputLineNumber,
                 noteValueKind,
                 dotsNumber,
                 bsrNoteOctaveKind::kNoteOctaveNone,
@@ -314,11 +314,11 @@ S_bsrCellsList bsrTempo::buildCellsList () const
                 "tempoPerMinuteString '" <<
                 tempoPerMinuteString <<
                 "' is ill-formed" <<
-                ", line " << fInputStartLineNumber;
+                ", line " << fInputLineNumber;
 
               bsrInternalError (
                 gServiceRunData->getInputSourceName (),
-                fInputStartLineNumber,
+                fInputLineNumber,
                 __FILE__, __LINE__,
                 ss.str ());
             }
@@ -337,7 +337,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           S_bsrNumber
             perMinuteNumber =
               bsrNumber::create (
-                fInputStartLineNumber,
+                fInputLineNumber,
                 perMinuteMin,
                 bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
@@ -356,7 +356,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             S_bsrNumber
               perMinuteNumber =
                 bsrNumber::create (
-                  fInputStartLineNumber,
+                  fInputLineNumber,
                   perMinuteMax,
                   bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
@@ -472,7 +472,7 @@ std::string bsrTempo::asString () const
     ", tempoCellsList: " <<
     fTempoCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -521,7 +521,7 @@ void bsrTempo::print (std::ostream& os) const
 {
   os <<
     "Tempo" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

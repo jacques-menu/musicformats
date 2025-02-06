@@ -586,7 +586,7 @@ std::string msrPageLayout::asString () const
 
   ss <<
     "[PageLayout" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -781,7 +781,7 @@ std::string msrSystemLayout::asString () const
 
   ss <<
     "[SystemLayout" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -961,7 +961,7 @@ std::string msrSystemDividers::asString () const
 
   ss <<
     "[SystemDividers" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1106,7 +1106,7 @@ std::string msrStaffLayout::asString () const
   ss <<
     "[StaffLayout" <<
     ", fStaffDistance: " << fStaffDistance <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1253,7 +1253,7 @@ std::string msrMeasureLayout::asString () const
   ss <<
     "[MeasureLayout" <<
     ", fMeasureDistance: " << fMeasureDistance <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1421,7 +1421,7 @@ std::string msrLineWidth::asString () const
       ss << "[NULL]";
     }
   ss <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1431,7 +1431,7 @@ void msrLineWidth::print (std::ostream& os) const
 {
   os <<
     "[LineWidth" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1594,7 +1594,7 @@ std::string msrNoteSize::asString () const
     "[NoteSize" <<
     ", fNoteSizeTypeKind: " << fNoteSizeTypeKind <<
     ", fNoteSizeValue: " << fNoteSizeValue <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1604,7 +1604,7 @@ void msrNoteSize::print (std::ostream& os) const
 {
   os <<
     "[NoteSize" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1761,7 +1761,7 @@ std::string msrDistance::asString () const
     "[Distance" <<
     ", fDistanceTypeKind: " << fDistanceTypeKind <<
     ", fDistanceValue: " << fDistanceValue <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1771,7 +1771,7 @@ void msrDistance::print (std::ostream& os) const
 {
   os <<
     "[Distance" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1928,7 +1928,7 @@ std::string msrGlyph::asString () const
     "[Glyph" <<
     ", fGlyphTypeKind: " << fGlyphTypeKind <<
      ", fGlyphValue: " << fGlyphValue <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1938,7 +1938,7 @@ void msrGlyph::print (std::ostream& os) const
 {
   os <<
     "[Glyph" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -2095,7 +2095,7 @@ std::string msrOtherAppearance::asString () const
     "[OtherAppearance" <<
     ", otherAppearanceTypeKind: " << fOtherAppearanceTypeKind <<
     ", fOtherAppearanceValue: " << fOtherAppearanceValue <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -2105,7 +2105,7 @@ void msrOtherAppearance::print (std::ostream& os) const
 {
   os <<
     "[OtherAppearance" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -2288,7 +2288,7 @@ std::string msrAppearance::asString () const
     msrOtherAppearanceTypeKindAsString (fOtherAppearanceTypeKind) <<
     ", otherAppearanceValue: " <<  fOtherAppearanceValue <<
     */
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -2298,7 +2298,7 @@ void msrAppearance::print (std::ostream& os) const
 {
   os <<
     "[Appearance" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

@@ -96,8 +96,8 @@ class EXP msrSyllableElement : public smartable
     // set and get
     // ------------------------------------------------------
 
-    int                   getInputStartLineNumber () const
-                              { return fInputStartLineNumber; }
+    int                   getInputLineNumber () const
+                              { return fInputLineNumber; }
 
     msrSyllableElementKind
                           getSyllableElementKind () const
@@ -136,7 +136,7 @@ class EXP msrSyllableElement : public smartable
     // private fields
     // ------------------------------------------------------
 
-    int                   fInputStartLineNumber;
+    int                   fInputLineNumber;
 
     // texts list
     msrSyllableElementKind

@@ -31,18 +31,9 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrElement::msrElement (
-  int inputStartLineNumber)
+  int inputLineNumber)
 {
-  fInputStartLineNumber = inputStartLineNumber;
-  fInputEndLineNumber = fInputStartLineNumber;
-}
-
-msrElement::msrElement (
-  int inputStartLineNumber,
-  int inputEndLineNumber)
-{
-  fInputStartLineNumber = inputStartLineNumber;
-  fInputEndLineNumber = inputEndLineNumber;
+  fInputLineNumber = inputLineNumber;
 }
 
 msrElement::~msrElement ()
@@ -62,19 +53,9 @@ SMARTP<msrElement> msrElement::createDeepClone ()
 // set and get
 // ------------------------------------------------------
 
-int msrElement:: getInputStartLineNumber () const
+int msrElement::getInputLineNumber () const
 {
-  return fInputStartLineNumber;
-}
-
-void msrElement::setInputEndLineNumber (int value)
-{
-  fInputEndLineNumber = value;
-}
-
-int msrElement::getInputEndLineNumber () const
-{
-  return fInputEndLineNumber;
+  return fInputLineNumber;
 }
 
 //______________________________________________________________________________

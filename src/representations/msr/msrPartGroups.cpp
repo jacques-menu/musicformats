@@ -294,7 +294,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
   S_msrPartGroup
     newbornClone =
       msrPartGroup::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fPartGroupNumber,
         fPartGroupAbsoluteNumber,
         fPartGroupName,
@@ -455,7 +455,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //
 //     msrInternalError(
 //       gServiceRunData->getInputSourceName (),
-//       fInputStartLineNumber, // inputLineNumber // TEMP JMI v0.9.63
+//       fInputLineNumber, // inputLineNumber // TEMP JMI v0.9.63
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -603,7 +603,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayPartGroupPartsMap (
-      part->getInputStartLineNumber ());
+      part->getInputLineNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -612,7 +612,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayPartGroupElementsList (
-      part->getInputStartLineNumber ());
+      part->getInputLineNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -729,7 +729,7 @@ void msrPartGroup::prependNestedGroupToPartGroup (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayPartGroupElementsList (
-      nestedPartGroup->getInputStartLineNumber ());
+      nestedPartGroup->getInputLineNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -745,7 +745,7 @@ void msrPartGroup::prependNestedGroupToPartGroup (
               nestedPartGroup->asString () <<
               " to outer-most part group " <<
               asString () <<
-              ", line " << nestedPartGroup->getInputStartLineNumber ();
+              ", line " << nestedPartGroup->getInputLineNumber ();
 
               mfAssert (
                 __FILE__, __LINE__,
@@ -802,7 +802,7 @@ void msrPartGroup::appendNestedPartGroupToPartGroup (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     displayPartGroupElementsList (
-      nestedPartGroup->getInputStartLineNumber ());
+      nestedPartGroup->getInputLineNumber ());
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -818,7 +818,7 @@ void msrPartGroup::appendNestedPartGroupToPartGroup (
               nestedPartGroup->asString () <<
               " to outer-most part group " <<
               asString () <<
-              ", line " << nestedPartGroup->getInputStartLineNumber ();
+              ", line " << nestedPartGroup->getInputLineNumber ();
 
               mfAssert (
                 __FILE__, __LINE__,
@@ -1400,7 +1400,7 @@ std::string msrPartGroup::asString () const
   ss <<
     "[PartGroup \"" <<
     fetchPartGroupCombinedName () <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1412,7 +1412,7 @@ void msrPartGroup::printFull (std::ostream& os) const
     "[PartGroup" " \"" << fetchPartGroupCombinedName () <<
     "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
     ")" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1522,7 +1522,7 @@ void msrPartGroup::printFull (std::ostream& os) const
   // print the part group elements if any
 
   displayPartGroupElementsListFull (
-    fInputStartLineNumber);
+    fInputLineNumber);
 
   --gIndenter;
 
@@ -1539,7 +1539,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   os <<
     "[PartGroup" " \"" << fetchPartGroupCombinedName () <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1565,7 +1565,7 @@ void msrPartGroup::print (std::ostream& os) const
 
   // print the part group elements if any
   displayPartGroupElementsList (
-    fInputStartLineNumber);
+    fInputLineNumber);
 
   --gIndenter;
 

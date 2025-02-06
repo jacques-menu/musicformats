@@ -112,7 +112,7 @@ S_msrSlide msrSlide::createSlideNewbornClone ()
   S_msrSlide
     newbornClone =
       msrSlide::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fSlideNumber,
         fSlideTypeKind,
         fSlideLineTypeKind,
@@ -206,7 +206,7 @@ std::string msrSlide::asString () const
     ", fSlideTypeKind: " << fSlideTypeKind <<
     ", fSlideLineTypeKind: " << fSlideLineTypeKind <<
     ", fSlideTextValue: \"" << fSlideTextValue << "\"" <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -215,7 +215,7 @@ void msrSlide::print (std::ostream& os) const
 {
   os <<
     "[Slide" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']' <<
     std::endl;
 

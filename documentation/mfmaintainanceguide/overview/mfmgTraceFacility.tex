@@ -91,7 +91,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInMeasure (
   const S_msrNote& note)
 {
   int inputLineNumber =
-    note->getInputStartLineNumber ();
+    note->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {

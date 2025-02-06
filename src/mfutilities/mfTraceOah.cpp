@@ -2062,16 +2062,15 @@ R"(Measures basic trace information)",
 
   // measures
 
-  S_oahThreeBooleansAtom
+  S_oahTwoBooleansAtom
     traceMeasuresBooleanAtom =
-      oahThreeBooleansAtom::create (
+      oahTwoBooleansAtom::create (
         "trace-measures", "tmeas",
 R"(Measures.
 This option implies '-trace-measures-basics, -tmeasb'.)",
         "fTraceMeasures",
         fTraceMeasures,
-        traceMeasuresBasicsBooleanAtom,
-        fTracePassesBooleanAtom);
+        traceMeasuresBasicsBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
@@ -2954,7 +2953,7 @@ R"(Measure repeats basic trace information)",
   S_oahTwoBooleansAtom
     traceMeasureRepeatsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-measures-repeats", "tmeasreps",
+        "trace-measure-repeats", "tmeareps",
 R"(Measure repeats.
 This option implies '-trace-measure-repeats-basics, -tmrepsb'.)",
         "fTraceMeasureRepeats",
@@ -2973,7 +2972,7 @@ This option implies '-trace-measure-repeats-basics, -tmrepsb'.)",
   S_oahTwoBooleansAtom
     traceMeasureRepeatsDetailsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-measures-repeats-details", "tmeasrepsd",
+        "trace-measure-repeats-details", "tmearepsd",
 R"(Measure repeats.
 This option implies '-trace-tuplets-basics, -ttupsb' and '-trace-tuplets, -ttups'.)",
         "fTraceMeasureRepeatsDetails",

@@ -116,12 +116,6 @@ class EXP msrMeasure : public msrSegmentElement
     Bool                  getMeasureIsFirstInVoice () const
                               { return fMeasureIsFirstInVoice; }
 
-    void                  setMeasureEndInputLineNumber (int value)
-                              { fMeasureEndInputLineNumber = value; }
-
-    int                   getMeasureEndInputLineNumber () const
-                              { return fMeasureEndInputLineNumber; }
-
     void                  setMeasureContainsSound ()
                               { fMeasureContainsSound = true; }
 
@@ -720,10 +714,6 @@ class EXP msrMeasure : public msrSegmentElement
 
     static int            sGlobalMeasureDebugNumber;
     int                   fMeasureDebugNumber;
-
-    // measure end line number
-
-    int                   fMeasureEndInputLineNumber;
 
     // measure lengthes, in whole notes
 

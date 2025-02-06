@@ -251,7 +251,7 @@ std::string msrSlash::asString () const
 
   ss <<
     "Slash" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ", slashTypeKind:" <<
     msrSlashTypeKindAsString (
       fSlashTypeKind) <<
@@ -269,7 +269,7 @@ void msrSlash::print (std::ostream& os) const
 {
   os <<
     "[Slash" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

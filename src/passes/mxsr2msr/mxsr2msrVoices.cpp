@@ -107,7 +107,7 @@ void mxsrVoice::pushTupletOntoTupletsStack (
       ", context: " << context <<
       ", fTupletsStack.size (): " <<
       fTupletsStack.size () <<
-      ", line " << tuplet->getInputStartLineNumber ();
+      ", line " << tuplet->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

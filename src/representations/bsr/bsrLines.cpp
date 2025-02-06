@@ -67,7 +67,7 @@ bsrLine::bsrLine (
       "Creating bsrLine '" <<
       asString () <<
       "', line " <<
-      fInputStartLineNumber;
+      fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -98,7 +98,7 @@ S_bsrLine bsrLine::createLineNewbornClone ()
   S_bsrLine
     newbornClone =
       bsrLine::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fPrintLineNumber,
         fCellsPerLine);
 
@@ -119,7 +119,7 @@ void bsrLine::appendLineElementToLine (
     // first insertion in this line: create the first, regular line contents
     lineContentsToAppendTo =
       bsrLineContents::create (
-        lineElement->getInputStartLineNumber (),
+        lineElement->getInputLineNumber (),
         bsrLineContentsKind::kLineContentsRegular);
 
     // set lineElement's spacesAfter value if needed
@@ -147,7 +147,7 @@ void bsrLine::appendLineElementToLine (
     lineContentsToAppendTo->
       appendLineElementToLineContents (
         bsrSpaces::create (
-          fInputStartLineNumber, 1));
+          fInputLineNumber, 1));
 
     fASpaceIsNeededInLine = false;
   }
@@ -166,7 +166,7 @@ void bsrLine::insertElementBeforeLastElementOfLine (
     // first insertion in this line: create the first, regular line contents
     lineContentsToAppendTo =
       bsrLineContents::create (
-        lineElement->getInputStartLineNumber (),
+        lineElement->getInputLineNumber (),
         bsrLineContentsKind::kLineContentsRegular);
 
     // append it to the line contents list
@@ -303,7 +303,7 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
     // first insertion in this line: create the first, regular line contents
     lineContentsToAppendTo =
       bsrLineContents::create (
-        lineElement->getInputStartLineNumber (),
+        lineElement->getInputLineNumber (),
         bsrLineContentsKind::kLineContentsRegular);
 
     // set lineElement's spacesAfter value if needed
@@ -331,7 +331,7 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
     lineContentsToAppendTo->
       appendLineElementToLineContents (
         bsrSpaces::create (
-          fInputStartLineNumber, 1));
+          fInputLineNumber, 1));
 
     fASpaceIsNeededInLine = false;
   }
@@ -363,14 +363,14 @@ S_bsrCellsList bsrLine::buildLineNumberCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputStartLineNumber);
+      bsrCellsList::create (fInputLineNumber);
 
   if (! gGlobalMsr2bsrOahGroup->getNoLineNumbers ()) {
     // create the print line number
     S_bsrNumber
       printLineNumber =
         bsrNumber::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           fPrintLineNumber,
           bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
@@ -385,7 +385,7 @@ S_bsrCellsList bsrLine::buildLineNumberCellsList () const
       S_bsrNumber
         brailleLineNumber =
           bsrNumber::create (
-            fInputStartLineNumber,
+            fInputLineNumber,
             fBrailleLineNumber,
             bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
@@ -511,7 +511,7 @@ std::string bsrLine::asString () const
     ", cellsPerLine" << ": " << fCellsPerLine <<
     ", lineContents: " << fLineContentsList.size () <<
     ", cellsNumber" << ": " << fetchCellsNumber () <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }

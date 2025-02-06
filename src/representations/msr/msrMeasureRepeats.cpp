@@ -232,7 +232,7 @@ S_msrNote msrMeasureRepeatElement::fetchMeasureRepeatElementFirstNonGraceNote ()
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputStartLineNumber,
+          fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -341,7 +341,7 @@ std::string msrMeasureRepeatElement::asString () const
     ", measureRepeat upLink: '" <<
     fMeasureRepeatElementUpLinkToMeasureRepeat->
       asShortString () <<
-    "', line " << fInputStartLineNumber <<
+    "', line " << fInputLineNumber <<
     std::endl;
 
   return ss.str ();
@@ -351,7 +351,7 @@ void msrMeasureRepeatElement::printFull (std::ostream& os) const
 {
   os <<
     "MeasureRepeatElement" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -408,7 +408,7 @@ void msrMeasureRepeatElement::print (std::ostream& os) const
 {
   os <<
     "MeasureRepeatElement" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -657,7 +657,7 @@ std::string msrMeasureRepeatPattern::asString () const
   ss <<
 
     "MeasureRepeatPattern" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasuresNumber (),
@@ -896,7 +896,7 @@ std::string msrMeasureRepeatReplicas::asString () const
   ss <<
 
     "MeasureRepeatReplicas" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasuresNumber (),
@@ -1037,7 +1037,7 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
   S_msrMeasureRepeat
     newbornClone =
       msrMeasureRepeat::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fMeasureRepeatMeasuresNumber,
         fMeasureRepeatSlashesNumber,
         containingVoice);
@@ -1309,9 +1309,35 @@ void msrMeasureRepeat::appendMeasureElementToSegmentElement (
 
   msrInternalError (
     gServiceRunData->getInputSourceName (),
-    fInputStartLineNumber,
+    fInputLineNumber,
     __FILE__, __LINE__,
     ss.str ());
+}
+
+std::string msrMeasureRepeatKindAsString (
+  msrMeasureRepeatKind measureRepeatKind)
+{
+  std::string result;
+
+  switch (measureRepeatKind) {
+    case msrMeasureRepeatKind::kMeasureRepeat_UNKNOWN_:
+      result = "kMeasureRepeat_UNKNOWN_";
+      break;
+    case msrMeasureRepeatKind::kMeasureRepeatStart:
+      result = "kMeasureRepeatStart";
+      break;
+    case msrMeasureRepeatKind::kMeasureRepeatStop:
+      result = "kMeasureRepeatStop";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const msrMeasureRepeatKind& elt)
+{
+  os << msrMeasureRepeatKindAsString (elt);
+  return os;
 }
 
 std::string measureRepeatBuildPhaseKindAsString (
@@ -1350,7 +1376,7 @@ std::string msrMeasureRepeat::asString () const
   ss <<
 
     "'MeasureRepeat" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
       fetchMeasureRepeatPatternMeasuresNumber (),
@@ -1415,7 +1441,7 @@ void msrMeasureRepeat::print (std::ostream& os) const
         : 0,
       "replica measure",
       "replicas measures") <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

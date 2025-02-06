@@ -180,7 +180,7 @@ std::string msrTie::asString () const
   ss <<
     "[Tie" << ' ' <<
     fTieKind <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();

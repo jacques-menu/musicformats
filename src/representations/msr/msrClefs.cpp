@@ -683,7 +683,7 @@ std::string msrClef::asString () const
     "[Clef" <<
     ", fClefKind: " << msrClefKindAsString (fClefKind) <<
     ", fClefStaffNumber: " << fClefStaffNumber <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();

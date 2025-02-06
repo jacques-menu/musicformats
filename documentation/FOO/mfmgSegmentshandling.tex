@@ -71,7 +71,7 @@ void msrVoice::initializeVoice (
       // create the last segment
       fVoiceLastSegment =
         msrSegment::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           this);
 
       if (! fVoiceFirstSegment) {
@@ -261,7 +261,7 @@ void msrSegment::appendKeyToSegment (
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   assertSegmentElementsListIsNotEmpty (
-    key->getInputStartLineNumber ());
+    key->getInputLineNumber ());
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   ++gIndenter;

@@ -231,7 +231,7 @@ std::string msrSpanner::asString () const
     ", fSpannerBeginText: " << fSpannerBeginText <<
     ", fSpannerMiddleText: " << fSpannerMiddleText <<
     ", fSpannerEndText: " << fSpannerEndText <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -243,7 +243,7 @@ void msrSpanner::print (std::ostream& os) const
     "[Spanner" <<
     ", fSpannerNumber: " << fSpannerNumber <<
     ", fSpannerKind: " << fSpannerKind <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

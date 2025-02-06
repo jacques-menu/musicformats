@@ -61,13 +61,13 @@ S_bsrCellsList bsrPagination::buildCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputStartLineNumber);
+      bsrCellsList::create (fInputLineNumber);
 
   // create the pagination sign
   S_bsrCellsList
     paginationSign =
       bsrCellsList::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         bsrCellKind::kDots5, bsrCellKind::kDots25 );
 
   // append it to result
@@ -78,7 +78,7 @@ S_bsrCellsList bsrPagination::buildCellsList () const
   S_bsrNumber
     printPageNumber =
       bsrNumber::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fPrintPageNumber,
         bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
@@ -90,7 +90,7 @@ S_bsrCellsList bsrPagination::buildCellsList () const
   S_bsrNumber
     braillePageNumber =
       bsrNumber::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fPrintPageNumber,
         bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
@@ -191,7 +191,7 @@ std::string bsrPagination::asString () const
     ", printPageNumber: " << fPrintPageNumber <<
     ", braillePageNumber: " << fBraillePageNumber <<
     ", spacesCellsList: " << fPaginationCellsList <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -212,7 +212,7 @@ void bsrPagination::print (std::ostream& os) const
 {
   os <<
     "Pagination" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

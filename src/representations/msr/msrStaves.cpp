@@ -215,7 +215,7 @@ void msrStaff::initializeStaff ()
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputStartLineNumber,
+          fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -388,7 +388,7 @@ S_msrStaff msrStaff::createStaffNewbornClone (
   S_msrStaff
     newbornClone =
       msrStaff::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fStaffKind,
         fStaffNumber,
         containingPart);
@@ -906,7 +906,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
     ss <<
       "Registering voice \"" << voice->getVoiceName () <<
       "\" in all voices list of staff " << fStaffName <<
-      " line " << fInputStartLineNumber;
+      " line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -941,7 +941,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          voice->getInputStartLineNumber (),
+          voice->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -967,7 +967,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          voice->getInputStartLineNumber (),
+          voice->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1001,7 +1001,7 @@ void msrStaff::registerVoiceByItsNumber (
       voice->asShortString () <<
       ", by its number '" << voiceNumber <<
       "\" in staff " << fStaffName <<
-      " line " << fInputStartLineNumber;
+      " line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1140,7 +1140,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          regularVoice->getInputStartLineNumber (),
+          regularVoice->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1166,7 +1166,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          regularVoice->getInputStartLineNumber (),
+          regularVoice->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1924,7 +1924,7 @@ void msrStaff::appendClefToStaff  (
       // create a new msrClefKeyTimeSignatureGroup
       fCurrentClefKeyTimeSignatureGroup =
         msrClefKeyTimeSignatureGroup::create (
-          clef->getInputStartLineNumber (),
+          clef->getInputLineNumber (),
           groupInputLineNumber);
     }
 
@@ -2032,7 +2032,7 @@ void msrStaff::appendKeyToStaff (
       // create a new msrClefKeyTimeSignatureGroup
       fCurrentClefKeyTimeSignatureGroup =
         msrClefKeyTimeSignatureGroup::create (
-          key->getInputStartLineNumber (),
+          key->getInputLineNumber (),
           groupInputLineNumber);
     }
 
@@ -2139,7 +2139,7 @@ void msrStaff::appendTimeSignatureToStaff (
       // create a new msrClefKeyTimeSignatureGroup
       fCurrentClefKeyTimeSignatureGroup =
         msrClefKeyTimeSignatureGroup::create (
-          timeSignature->getInputStartLineNumber (),
+          timeSignature->getInputLineNumber (),
           groupInputLineNumber);
     }
 
@@ -2829,7 +2829,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       fStaffName <<
       "\" in part " <<
       fStaffUpLinkToPart->fetchPartCombinedName () <<
-      ", line " << repeatEndingClone->getInputStartLineNumber ();
+      ", line " << repeatEndingClone->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3525,7 +3525,7 @@ void msrStaff::browseData (basevisitor* v)
 
         msrError (
           gServiceRunData->getInputSourceName (),
-          voice->getInputStartLineNumber (),
+          voice->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -3917,7 +3917,7 @@ void msrStaff::printFull (std::ostream& os) const
         voiceNumber <<
         ": " <<
         "Voice \"" << voice->getVoiceName () <<
-        "\", line " << voice->getInputStartLineNumber () <<
+        "\", line " << voice->getInputLineNumber () <<
         std::endl;
 
       gIndenter.increment (3);

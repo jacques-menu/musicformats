@@ -363,7 +363,7 @@ std::string msrTimeSignatureItem::asString () const
     /* JMI
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
+        fInputLineNumber,
         __FILE__, __LINE__,
         "time signature item beats numbers vector is empty");
         */
@@ -395,7 +395,7 @@ std::string msrTimeSignatureItem::asString () const
   } // switch
 
   ss <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -416,7 +416,7 @@ std::string msrTimeSignatureItem::asString () const
 //     /* JMI
 //       msrInternalError (
 //         gServiceRunData->getInputSourceName (),
-//         fInputStartLineNumber,
+//         fInputLineNumber,
 //         __FILE__, __LINE__,
 //         "time signature item beats numbers vector is empty");
 //         */
@@ -449,7 +449,7 @@ std::string msrTimeSignatureItem::asString () const
 //
 // /* JMI
 //   ss <<
-//     ", line " << fInputStartLineNumber;
+//     ", line " << fInputLineNumber;
 // */
 //
 //   return ss.str ();
@@ -1100,7 +1100,7 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
       gLog <<
         "--> timeSignatureWholeNotesPerMeasure() 1 for " <<
         asString () <<
-        ", line " << fInputStartLineNumber <<
+        ", line " << fInputLineNumber <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1147,7 +1147,7 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
   else {
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      fInputStartLineNumber,
+      fInputLineNumber,
       __FILE__, __LINE__,
       "time signature items vector is empty");
   }
@@ -1157,7 +1157,7 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
       gLog <<
         "--> timeSignatureWholeNotesPerMeasure() 2, result = " <<
         result <<
-        ", line " << fInputStartLineNumber <<
+        ", line " << fInputLineNumber <<
       std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -1256,7 +1256,7 @@ std::string msrTimeSignature::asString () const
       fTimeSignatureItemsVector.size (), "item", "items") <<
     mfSingularOrPlural (
       fTimeSignatureItemsVector.size (), "item", "items") <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   if (fTimeSignatureItemsVector.size ()) {
     ss <<
@@ -1277,7 +1277,7 @@ std::string msrTimeSignature::asString () const
     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
+        fInputLineNumber,
         __FILE__, __LINE__,
         "time  items vector is empty");
     }
@@ -1302,7 +1302,7 @@ std::string msrTimeSignature::asShortString () const
     ", " <<
     mfSingularOrPlural (
       fTimeSignatureItemsVector.size (), "item", "items") <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
   */
@@ -1327,7 +1327,7 @@ std::string msrTimeSignature::asShortString () const
 //       fTimeSignatureItemsVector.size (), "item", "items") <<
 //     mfSingularOrPlural (
 //       fTimeSignatureItemsVector.size (), "item", "items") <<
-//     ", line " << fInputStartLineNumber;
+//     ", line " << fInputLineNumber;
 // */
 //
 //   if (fTimeSignatureItemsVector.size ()) {
@@ -1351,7 +1351,7 @@ std::string msrTimeSignature::asShortString () const
 //     if (fTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
 //       msrInternalError (
 //         gServiceRunData->getInputSourceName (),
-//         fInputStartLineNumber,
+//         fInputLineNumber,
 //         __FILE__, __LINE__,
 //         "time  items vector is empty");
 //     }
@@ -1366,7 +1366,7 @@ void msrTimeSignature::print (std::ostream& os) const
 {
   os <<
     "[TimeSignature" <<
-    ", line "  << fInputStartLineNumber <<
+    ", line "  << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

@@ -54,7 +54,7 @@ S_bsrCellsList bsrMusicHeading::buildCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputStartLineNumber);
+      bsrCellsList::create (fInputLineNumber);
 
   // append the tempo to result
   if (fMusicHeadingTempo) {
@@ -66,7 +66,7 @@ S_bsrCellsList bsrMusicHeading::buildCellsList () const
   if (fMusicHeadingTempo) {
     result->appendCellsListToCellsList (
       bsrSpaces::create (
-        fInputStartLineNumber, 1)->
+        fInputLineNumber, 1)->
           fetchCellsList ());
   }
 
@@ -250,7 +250,7 @@ std::string bsrMusicHeading::asString () const
   }
 
   ss <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -281,7 +281,7 @@ void bsrMusicHeading::print (std::ostream& os) const
 {
   os <<
     "MusicHeading" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

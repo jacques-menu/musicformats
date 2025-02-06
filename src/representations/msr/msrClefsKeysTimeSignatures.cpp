@@ -271,7 +271,7 @@ S_msrClefKeyTimeSignatureGroup msrClefKeyTimeSignatureGroup::createClefKeyTimeSi
   S_msrClefKeyTimeSignatureGroup
     newbornClone =
       msrClefKeyTimeSignatureGroup::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fGroupInputLineNumber);
 
   // JMI ??? v0.9.67
@@ -577,11 +577,11 @@ void msrClefKeyTimeSignatureGroup::browseData (basevisitor* v)
           "clef, key and time signature browsing order is unknown in score, msrClefKeyTimeSignatureGroup: \"" <<
           pClefKeyTimeSignatureOrderKind <<
           ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
-          ", line " << fInputStartLineNumber;
+          ", line " << fInputLineNumber;
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          fInputStartLineNumber,
+          fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -659,7 +659,7 @@ std::string msrClefKeyTimeSignatureGroup::asString () const
   ss <<
     ", fGroupInputLineNumber: " << fGroupInputLineNumber <<
     ", fGroupItemsNumber: " << fGroupItemsNumber <<
-//     ", line " << fInputStartLineNumber << // JMI v0.9.70
+//     ", line " << fInputLineNumber << // JMI v0.9.70
     ']';
 
   return ss.str ();
@@ -699,7 +699,7 @@ void msrClefKeyTimeSignatureGroup::print (std::ostream& os) const
     "fGroupItemsNumber" << ": " << fGroupItemsNumber <<
 //     std::endl <<
 //     std::setw (fieldWidth) <<
-//     "line" << ": " << fInputStartLineNumber << // JMI v0.9.70
+//     "line" << ": " << fInputLineNumber << // JMI v0.9.70
     std::endl;
 
   os <<

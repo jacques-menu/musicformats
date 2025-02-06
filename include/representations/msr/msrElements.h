@@ -40,11 +40,7 @@ class EXP msrElement : public smartable
   protected:
 
                           msrElement (
-                            int inputStartLineNumber);
-
-                          msrElement (
-                            int inputStartLineNumber,
-                            int inputEndLineNumber);
+                            int inputLineNumber);
 
     virtual               ~msrElement ();
 
@@ -58,10 +54,7 @@ class EXP msrElement : public smartable
     // set and get
     // ------------------------------------------------------
 
-    int                   getInputStartLineNumber () const;
-
-    void                  setInputEndLineNumber (int value);
-    int                   getInputEndLineNumber () const;
+    int                   getInputLineNumber () const;
 
   public:
 
@@ -105,8 +98,7 @@ class EXP msrElement : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    int                   fInputStartLineNumber;
-    int                   fInputEndLineNumber;
+    int                   fInputLineNumber;
 };
 typedef SMARTP<msrElement> S_msrElement;
 EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt);

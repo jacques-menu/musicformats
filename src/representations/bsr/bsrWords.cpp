@@ -308,7 +308,7 @@ std::string bsrWords::asString () const
     ", wordContents: " << fWordContents <<
     ", wordCellsList: " << fWordCellsList <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -329,7 +329,7 @@ void bsrWords::print (std::ostream& os) const
 {
   os <<
     "Word" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

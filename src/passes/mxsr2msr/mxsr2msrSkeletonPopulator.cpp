@@ -134,7 +134,7 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fPartFirstMeasureNumber = "";
   fCurrentMeasureNumber = "MeasureNumber_???";
 
-  fPreviousMeasureEndInputLineNumber = -1;
+  fPreviousMeasureInputLineNumber = -1;
 
   // attributes
   fCurrentAttributesInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_; // JMI v0.9.68
@@ -897,7 +897,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart (
         part->getPartName () <<
         "\" registering staff " << staff <<
         "in fCurrentPartStavesVector under staffNumber " << staffNumber <<
-        ", line " << staff->getInputStartLineNumber ();
+        ", line " << staff->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -1257,7 +1257,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_millimeters& elt)
 
     ss <<
       "--> Start visiting S_millimeters" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1276,7 +1276,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tenths& elt)
 
     ss <<
       "--> Start visiting S_tenths" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1295,7 +1295,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_scaling& elt)
 
     ss <<
       "--> End visiting S_scaling" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1307,7 +1307,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_scaling& elt)
   S_msrScaling
     scaling =
       msrScaling::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentMillimeters,
         fCurrentTenths);
 
@@ -1339,7 +1339,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_layout& elt)
 
     ss <<
       "--> Start visiting S_system_layout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1350,7 +1350,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_layout& elt)
   // create the system layout
   fCurrentSystemLayout =
     msrSystemLayout::create (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 
   fOnGoingSystemLayout = true;
 }
@@ -1363,7 +1363,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_system_layout& elt)
 
     ss <<
       "--> End visiting S_system_layout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1399,7 +1399,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_margins& elt)
 
     ss <<
       "--> Start visiting S_system_margins" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1410,7 +1410,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_margins& elt)
   if (! fOnGoingSystemLayout) {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<system-margins /> is out of context");
   }
@@ -1426,7 +1426,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_distance& elt)
 
     ss <<
       "--> Start visiting S_system_distance" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1447,7 +1447,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_distance& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<system-distance /> is out of context");
   }
@@ -1461,7 +1461,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_system_distance& elt)
 
     ss <<
       "--> Start visiting S_top_system_distance" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1482,7 +1482,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_system_distance& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<top-system-distance /> is out of context");
   }
@@ -1496,7 +1496,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_system_margins& elt)
 
     ss <<
       "--> End visiting S_system_margins" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1507,7 +1507,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_system_margins& elt)
   if (! fOnGoingSystemLayout) {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<system-margins /> is out of context");
   }
@@ -1524,7 +1524,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_dividers& elt)
 
     ss <<
       "--> Start visiting S_system_dividers" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1541,7 +1541,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_system_dividers& elt)
 /* JMI
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
      */
 }
@@ -1554,7 +1554,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_divider& elt)
 
     ss <<
       "--> Start visiting S_left_divider" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1570,7 +1570,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_divider& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 }
 
@@ -1582,7 +1582,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_right_divider& elt)
 
     ss <<
       "--> Start visiting S_right_divider" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1598,7 +1598,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_right_divider& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 }
 
@@ -1611,7 +1611,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notations& elt)
 
     ss <<
       "--> Start visiting S_notations" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1630,7 +1630,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_notation& elt)
 
     ss <<
       "--> Start visiting S_other_notation" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1650,7 +1650,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_layout& elt)
 
     ss <<
       "--> Start visiting S_page_layout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1661,7 +1661,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_layout& elt)
   // create a page layout
   fCurrentPageLayout =
     msrPageLayout::create (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 
   fOnGoingPageLayout = true;
 }
@@ -1674,7 +1674,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_page_layout& elt)
 
     ss <<
       "--> End visiting S_page_layout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1702,7 +1702,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_height& elt)
 
     ss <<
       "--> Start visiting S_page_height" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1722,7 +1722,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_height& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<page-height /> is out of context");
   }
@@ -1736,7 +1736,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_width& elt)
 
     ss <<
       "--> Start visiting S_page_width" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1756,7 +1756,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_width& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<page-width /> is out of context");
   }
@@ -1770,7 +1770,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
 
     ss <<
       "--> Start visiting S_page_margins" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1800,7 +1800,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -1808,7 +1808,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<page-margins /> is out of context");
   }
@@ -1823,19 +1823,19 @@ void mxsr2msrSkeletonPopulator::visitStart (S_page_margins& elt)
     case msrMarginTypeKind::kMarginOdd:
       fCurrentPageLayout->
         setOddMarginsGroup (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentPageLayoutMarginsGroup);
       break;
     case msrMarginTypeKind::kMarginEven:
       fCurrentPageLayout->
         setEvenMarginsGroup (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentPageLayoutMarginsGroup);
       break;
     case msrMarginTypeKind::kMarginBoth: // default value
       fCurrentPageLayout->
         setBothMarginsGroup (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentPageLayoutMarginsGroup);
       break;
   } // switch
@@ -1851,7 +1851,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_page_margins& elt)
 
     ss <<
       "--> End visiting S_page_margins" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1876,7 +1876,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_margin& elt)
     ss <<
       "--> Start visiting S_left_margin" <<
       ", " << leftMargin << " tenths" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1892,7 +1892,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_margin& elt)
   if (fOnGoingPageMargins) {
     fCurrentPageLayoutMarginsGroup->
       setLeftMargin (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrMargin::create (
           fCurrentPageMarginsTypeKind,
           leftMarginLength));
@@ -1911,7 +1911,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_left_margin& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<left-margin /> is out of context");
   }
@@ -1928,7 +1928,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_right_margin& elt)
     ss <<
       "--> Start visiting S_right_margin" <<
       ", " << rightMargin << " tenths" <<
-       ", line " << elt->getInputStartLineNumber () <<
+       ", line " << elt->getInputLineNumber () <<
      std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -1941,7 +1941,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_right_margin& elt)
   if (fOnGoingPageMargins) {
     fCurrentPageLayoutMarginsGroup->
       setRightMargin (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrMargin::create (
           fCurrentPageMarginsTypeKind,
           rightMarginLength));
@@ -1960,7 +1960,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_right_margin& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<right-margin /> is out of context");
   }
@@ -1977,7 +1977,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_margin& elt)
     ss <<
       "--> Start visiting S_top_margin" <<
       ", " << topMargin << " tenths" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1988,7 +1988,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_margin& elt)
   if (fOnGoingPageMargins) {
     fCurrentPageLayoutMarginsGroup->
       setTopMargin (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrMargin::create (
           fCurrentPageMarginsTypeKind,
           msrLength (
@@ -1999,7 +1999,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_top_margin& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<top-margin /> is out of context");
   }
@@ -2016,7 +2016,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bottom_margin& elt)
     ss <<
       "--> Start visiting S_bottom_margin" <<
       ", " << bottomMargin << " tenths" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2027,7 +2027,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bottom_margin& elt)
   if (fOnGoingPageMargins) {
     fCurrentPageLayoutMarginsGroup->
       setBottomMargin (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrMargin::create (
           fCurrentPageMarginsTypeKind,
           msrLength (
@@ -2038,7 +2038,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bottom_margin& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<bottom-margin /> is out of context");
   }
@@ -2053,7 +2053,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_layout& elt)
 
     ss <<
       "--> Start visiting S_staff_layout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2075,7 +2075,7 @@ From DalSegno.xml: JMI there is no <staff-distance /> ...
   // create a staff layout
   fCurrentStaffLayout =
     msrStaffLayout::create (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       staffNumber);
 
   if (fOnGoingPrint) {
@@ -2102,7 +2102,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_layout& elt)
 
     ss <<
       "--> End visiting S_staff_layout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2124,7 +2124,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_distance& elt)
 
     ss <<
       "--> Start visiting S_staff_distance" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2145,7 +2145,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_distance& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<staff-distance /> is out of context");
   }
@@ -2162,7 +2162,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_layout& elt)
 
     ss <<
       "--> Start visiting S_measure_layout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2173,7 +2173,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_layout& elt)
   // create a measure layout
   fCurrentMeasureLayout =
     msrMeasureLayout::create (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 
   fOnGoingMeasureLayout = true;
 }
@@ -2186,7 +2186,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure_layout& elt)
 
     ss <<
       "--> End visiting S_measure_layout" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2208,7 +2208,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_distance& elt)
 
     ss <<
       "--> Start visiting S_measure_distance" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2229,7 +2229,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_distance& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<measure-distance /> is out of context");
   }
@@ -2244,7 +2244,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_appearance& elt)
 
     ss <<
       "--> Start visiting S_appearance" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2345,7 +2345,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_appearance& elt)
   // create an appearance
   fCurrentAppearance =
     msrAppearance::create (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 
   // set the MSR score appearance
   fMsrScore->
@@ -2363,7 +2363,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_appearance& elt)
 
     ss <<
       "--> End visiting S_appearance" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2385,7 +2385,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
 
     ss <<
       "--> Start visiting S_line_width" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2454,7 +2454,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2463,7 +2463,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
       S_msrLineWidth
         lineWidth =
           msrLineWidth::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             lineWidthTypeKind,
             msrLength::create (
               msrLengthUnitKind::kUnitMillimeter,
@@ -2483,7 +2483,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -2492,7 +2492,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line_width& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<line-width /> is out of context");
   }
@@ -2506,7 +2506,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
 
     ss <<
       "--> Start visiting S_note_size" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2547,7 +2547,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2556,7 +2556,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
       S_msrNoteSize
         noteSize =
           msrNoteSize::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             noteSizeTypeKind,
             noteSizePercentage);
 
@@ -2574,7 +2574,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -2583,7 +2583,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note_size& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<note-size /> is out of context");
   }
@@ -2597,7 +2597,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
 
     ss <<
       "--> Start visiting S_distance" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2632,7 +2632,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2641,7 +2641,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
       S_msrDistance
         distance =
           msrDistance::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             distanceTypeKind,
             msrLength::create (
               msrLengthUnitKind::kUnitMillimeter,
@@ -2661,7 +2661,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -2669,7 +2669,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_distance& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<distance /> is out of context");
   }
@@ -2683,7 +2683,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
 
     ss <<
       "--> Start visiting S_glyph" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2742,7 +2742,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2751,7 +2751,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
       S_msrGlyph
         glyph =
           msrGlyph::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             glyphTypeKind,
             glyphValue);
 
@@ -2769,7 +2769,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -2777,7 +2777,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glyph& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<glyph /> is out of context");
   }
@@ -2791,7 +2791,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_appearance& elt)
 
     ss <<
       "--> Start visiting S_other_appearance" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2805,7 +2805,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_appearance& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<other-appearance /> is out of context");
   }
@@ -2822,7 +2822,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
     ss <<
       "--> Start visiting S_part" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2844,7 +2844,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
       ss <<
         "<!--=== partID \"" << partID << "\"" <<
-        ", line " << elt->getInputStartLineNumber () << " ===-->";
+        ", line " << elt->getInputLineNumber () << " ===-->";
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -2858,7 +2858,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   fCurrentPart =
     fMsrScore->
       fetchPartFromScoreByItsPartID (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         partID);
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -2869,7 +2869,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
     fMsrScore->
       collectScorePartsList (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         partsList);
 
     if (partsList.empty ()) {
@@ -2887,11 +2887,11 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
       ss <<
         "part \"" << partID <<
         "\" not found in score skeleton" <<
-        ", line " << elt->getInputStartLineNumber ();
+        ", line " << elt->getInputLineNumber ();
 
       mxsr2msrInternalError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -2915,7 +2915,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         ss.str ());
     }
   }
@@ -2934,7 +2934,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
       "part " <<
       fCurrentPart-> fetchPartCombinedName () <<
       ", line " <<
-      elt->getInputStartLineNumber () <<
+      elt->getInputLineNumber () <<
       std::endl <<
       "   <<===" <<
       std::endl <<
@@ -2963,7 +2963,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
     // display the current part's voices map
     fCurrentPart->
       displayPartStaffVoicesMap (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
 #endif
@@ -2975,7 +2975,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   if (gTraceOahGroup->getTraceVoices ()) {
     // display the stave vectors
     displayCurrentPartStavesVector (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
 #endif
@@ -2987,7 +2987,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   if (gTraceOahGroup->getTraceVoices ()) {
     // display the voices vectors
     displayCurrentPartStaffMsrVoicesMap (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
 #endif
@@ -3000,7 +3000,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -3050,7 +3050,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   fPartFirstMeasureNumber = "";
   fCurrentMeasureNumber = "MeasureNumber_???";
 
-  fPreviousMeasureEndInputLineNumber = -1;
+  fPreviousMeasureInputLineNumber = -1;
 
   ++gIndenter; // will be decremented in visitEnd (S_part& elt)
 }
@@ -3063,7 +3063,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
 
     ss <<
       "--> End visiting S_part" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3107,7 +3107,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
   // finalize the current part
   fCurrentPart->
     finalizePart (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 
   // is this part name in the parts ignore IDs set?
   if (! gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().empty ()) {
@@ -3124,7 +3124,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
       fCurrentPart->
         getPartUpLinkToPartGroup ()->
           removePartFromPartGroup (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentPart);
     }
   }
@@ -3144,7 +3144,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
       fCurrentPart->
         getPartUpLinkToPartGroup ()->
           removePartFromPartGroup (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentPart);
     }
   }
@@ -3164,7 +3164,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
       fCurrentPart->
         getPartUpLinkToPartGroup ()->
           removePartFromPartGroup (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentPart);
     }
   }
@@ -3184,7 +3184,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
       fCurrentPart->
         getPartUpLinkToPartGroup ()->
           removePartFromPartGroup (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentPart);
     }
   }
@@ -3199,7 +3199,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_attributes& elt)
 
     ss <<
       "--> Start visiting S_attributes" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3209,7 +3209,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_attributes& elt)
 
   // the clef, key and time signagure inside one and the same <attribute /> markup
   // are recognized as such by the latter's input line number, which they share
-  fCurrentAttributesInputLineNumber = elt->getInputStartLineNumber ();
+  fCurrentAttributesInputLineNumber = elt->getInputLineNumber ();
 
 //   fOnGoingClefKeyTimeSignatureGroup = true;
 }
@@ -3222,7 +3222,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_attributes& elt)
 
     ss <<
       "--> End visiting S_attributes" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3234,7 +3234,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_attributes& elt)
   if (! fCurrentDivisions) {
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       "no <divisions/> markup found in MusicXML data, using 1 by default");
 
     fCurrentDivisionsPerQuarterNote = 1;
@@ -3242,7 +3242,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_attributes& elt)
     // create default current divisions
     fCurrentDivisions =
       msrDivisions::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentDivisionsPerQuarterNote);
   }
 
@@ -3258,7 +3258,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
 
     ss <<
       "--> Start visiting S_divisions" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3275,7 +3275,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
   ) {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "divisions per quarter note should be between 1 and 16383");
   }
@@ -3299,7 +3299,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
     ss <<
       " per quarter note in part " <<
       fCurrentPart->fetchPartCombinedName() <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3310,7 +3310,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
   // create current divisions
   fCurrentDivisions =
     msrDivisions::create (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       fCurrentDivisionsPerQuarterNote);
 }
 
@@ -3323,7 +3323,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_clef& elt)
 
     ss <<
       "--> Start visiting S_clef" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3347,7 +3347,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_clef& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 
   fCurrentClefLine = 0;
@@ -3363,7 +3363,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sign& elt)
 
     ss <<
       "--> Start visiting S_sign" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3382,7 +3382,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_line& elt)
 
     ss <<
       "--> Start visiting S_line" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3401,7 +3401,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_clef_octave_change& elt)
 
     ss <<
       "--> Start visiting S_clef_octave_change" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3420,7 +3420,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_clef_octave_change& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3434,7 +3434,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 
     ss <<
       "--> End visiting S_clef" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3486,7 +3486,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -3554,7 +3554,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -3588,7 +3588,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 
           mxsr2msrError (
             gServiceRunData->getInputSourceName (),
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3620,7 +3620,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 
           mxsr2msrError (
             gServiceRunData->getInputSourceName (),
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -3649,7 +3649,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3678,7 +3678,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
         msrClefKindAsString (clefKind) <<
         " by " <<
         msrClefKindAsString (newClefKind) <<
-        ", line " << elt->getInputStartLineNumber ();
+        ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -3693,7 +3693,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_clef& elt)
   S_msrClef
     clef =
       msrClef::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         clefKind,
         fCurrentClefStaffNumber);
 
@@ -3729,7 +3729,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key& elt)
 
     ss <<
       "--> Start visiting S_key" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3752,7 +3752,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 
   // traditional
@@ -3775,7 +3775,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_cancel& elt)
 
     ss <<
       "--> Start visiting S_cancel" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3794,7 +3794,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fifths& elt)
 
     ss <<
       "--> Start visiting S_fifths" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3815,7 +3815,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mode& elt)
 
     ss <<
       "--> Start visiting S_mode" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3863,7 +3863,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mode& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3877,7 +3877,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_step& elt)
 
     ss <<
       "--> Start visiting S_key_step" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3888,7 +3888,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_step& elt)
   if (fCurrentHumdrumScotKeyItem) {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "Humdrum/Scot key step found while another one is being handled");
   }
@@ -3899,7 +3899,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_step& elt)
 
   // check the step value
   checkStep (
-    elt->getInputStartLineNumber (),
+    elt->getInputLineNumber (),
     step,
     "<key-step/>");
 
@@ -3910,7 +3910,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_step& elt)
   // create the Humdrum/Scot item
   fCurrentHumdrumScotKeyItem =
     msrHumdrumScotKeyItem::create (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 
   // populate it with the diatonic pitch
   fCurrentHumdrumScotKeyItem->
@@ -3932,7 +3932,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
 
     ss <<
       "--> Start visiting S_key_alter" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3943,7 +3943,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
   if (! fCurrentHumdrumScotKeyItem) {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "Humdrum/Scot key alter found while no key step is being handled");
   }
@@ -3965,7 +3965,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_alter& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -3987,7 +3987,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_octave& elt)
 
     ss <<
       "--> Start visiting S_key_octave" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4000,7 +4000,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key_octave& elt)
   msrOctaveKind
     keyOctaveKind =
       msrOctaveKindFromNumber (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         keyOctaveNumber);
 
   int number = elt->getAttributeIntValue ("number", 0);
@@ -4030,7 +4030,7 @@ If the cancel attribute is
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4060,7 +4060,7 @@ If the cancel attribute is
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -4079,7 +4079,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_key& elt)
 
     ss <<
       "--> End visiting S_key" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4093,12 +4093,12 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_key& elt)
   switch (fCurrentKeyKind) {
     case msrKeyKind::kKeyTraditional:
       key =
-        handleTraditionalKey (elt->getInputStartLineNumber ());
+        handleTraditionalKey (elt->getInputLineNumber ());
       break;
 
     case msrKeyKind::kKeyHumdrumScot:
       key =
-        handleHumdrumScotKey (elt->getInputStartLineNumber ());
+        handleHumdrumScotKey (elt->getInputLineNumber ());
       break;
   } // switch
 
@@ -4288,7 +4288,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time& elt)
 
     ss <<
       "--> Start visiting S_time" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4330,7 +4330,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -4349,7 +4349,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beats& elt)
 
     ss <<
       "--> Start visiting S_beats" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4368,7 +4368,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
 
     ss <<
       "--> Start visiting S_beat_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4389,7 +4389,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
   S_msrTimeSignatureItem
     timeSignatureItem =
       msrTimeSignatureItem::create (
-        elt->getInputStartLineNumber ());
+        elt->getInputLineNumber ());
 
   // populate it
   if (! beatNumbers.empty ()) {
@@ -4411,7 +4411,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_type& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "beat type doesn't contain any beats numbers");
   }
@@ -4430,7 +4430,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_senza_misura& elt)
 
     ss <<
       "--> Start visiting S_senza_misura" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4449,7 +4449,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
 
     ss <<
       "--> Start visiting S_interchangeable" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4488,7 +4488,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -4525,7 +4525,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_interchangeable& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -4542,7 +4542,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time_relation& elt)
 
     ss <<
       "--> Start visiting S_time_relation" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4589,7 +4589,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time_relation& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -4604,7 +4604,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
 
     ss <<
       "--> End visiting S_time" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4615,7 +4615,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
   // create the time signature
   fCurrentTimeSignature =
     msrTimeSignature::create (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       fCurrentTimeSignatureSymbolKind);
 
   // populate the time signature with the time signature items
@@ -4634,7 +4634,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_time& elt)
     if (  fCurrentTimeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         "time is empty");
     }
@@ -4684,7 +4684,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_score_instrument& elt)
 
     ss <<
       "--> Start visiting S_score_instrument" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4749,7 +4749,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instrument_name& elt)
 
     ss <<
       "--> Start visiting S_instrument_name" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4772,7 +4772,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_solo& elt)
 
     ss <<
       "--> Start visiting S_solo" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4795,7 +4795,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instruments& elt)
 
     ss <<
       "--> Start visiting S_instruments" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4856,7 +4856,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_transpose& elt)
 
     ss <<
       "--> Start visiting S_transpose" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4880,7 +4880,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_diatonic& elt)
 
     ss <<
       "--> Start visiting S_diatonic" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4899,7 +4899,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_chromatic& elt)
 
     ss <<
       "--> Start visiting S_chromatic" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4918,7 +4918,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_change& elt)
 
     ss <<
       "--> Start visiting octave_change" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4937,7 +4937,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_double& elt)
 
     ss <<
       "--> Start visiting double" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4963,7 +4963,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
 
     ss <<
       "--> End visiting S_transpose" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -4995,7 +4995,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
 
     fCurrentTransposeChromatic    =  auxTransposeChromatic;
@@ -5023,7 +5023,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
 
     fCurrentTransposeChromatic    =  auxTransposeChromatic;
@@ -5034,7 +5034,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
   S_msrTransposition
     transposition =
       msrTransposition::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentTransposeDiatonic,
         fCurrentTransposeChromatic,
         fCurrentTransposeOctaveChange,
@@ -5063,7 +5063,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction& elt)
 
     ss <<
       "--> Start visiting S_direction" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5077,7 +5077,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction& elt)
 
   fCurrentDirectionPlacementKind =
     msrPlacementKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       placementString);
 
   fCurrentDirectionStaffNumber = 1; // it may be absent
@@ -5097,7 +5097,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_direction& elt)
 
     ss <<
       "--> End visiting S_direction" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5168,7 +5168,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction_type& elt)
 
     ss <<
       "--> Start visiting S_direction_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5179,7 +5179,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_direction_type& elt)
   if (! fOnGoingDirection) {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<direction-type /> is out of context");
   }
@@ -5195,7 +5195,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_direction_type& elt)
 
     ss <<
       "--> End visiting S_direction_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5371,7 +5371,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_offset& elt)
 
     ss <<
       "--> Start visiting S_offset" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5410,7 +5410,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_offset& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5454,7 +5454,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_direction& elt)
 
     ss <<
       "--> Start visiting S_direction" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5470,7 +5470,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_direction& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 }
 
@@ -5483,7 +5483,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sound& elt)
 
     ss <<
       "--> Start visiting S_sound" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5498,7 +5498,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sound& elt)
     if (! tempoString.empty ()) {
       fCurrentMetronomeTempo =
         msrTempo::createTempoPerMinute (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDottedNotesDuration (
             msrNotesDurationKind::kNotesDurationQuarter,
             0),       // JMI could be different??? v0.9.66
@@ -5528,7 +5528,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_sound& elt)
 
     ss <<
       "--> End visiting S_sound" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5546,7 +5546,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
 
     ss <<
       "--> Start visiting S_octave_shift" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5572,7 +5572,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
 //
 //     mxsr2msrWarning (
 //       gServiceRunData->getInputSourceName (),
-//       elt->getInputStartLineNumber (),
+//       elt->getInputLineNumber (),
 //       ss.str ());
 //   }
 //
@@ -5602,7 +5602,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
 //   // JMI    mxsr2msrError (
 //       mxsr2msrWarning (
 //         gServiceRunData->getInputSourceName (),
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //    //     __FILE__, __LINE__,
 //         ss.str ());
 //     }
@@ -5635,7 +5635,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -5644,7 +5644,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
   S_msrOctaveShift
     octaveShift =
       msrOctaveShift::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         octaveShiftKind,
         octaveShiftSize);
 
@@ -5655,7 +5655,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave_shift& elt)
       ss <<
         "Creating octave shift " <<
         octaveShift->asString () <<
-        ", line " << elt->getInputStartLineNumber ();
+        ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -5676,7 +5676,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 
     ss <<
       "--> Start visiting S_words" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -5691,7 +5691,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
     if (gTraceOahGroup->getTraceWords ()) {
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         "words contents is empty");
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -5703,7 +5703,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
   msrJustifyKind
     justifyKind =
       msrJustifyKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         wordsJustifyString);
 
   // halign
@@ -5712,7 +5712,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
   msrHorizontalAlignmentKind
     horizontalAlignmentKind =
       msrHorizontalAlignmentKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         wordsHorizontalAlignmentString);
 
   // valign
@@ -5721,7 +5721,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
   msrVerticalAlignmentKind
     verticalAlignmentKind =
       msrVerticalAlignmentKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         wordsVerticalAlignmentString);
 
   // font style
@@ -5743,7 +5743,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5772,7 +5772,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5848,7 +5848,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -5860,7 +5860,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
   msrXMLLangKind
     wordsXMLLangKind =
       msrXMLLangKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         wordsXMLLangString);
 
   // should the MusicXML words be ignored?
@@ -5872,14 +5872,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
     // is wordsValue to be converted to an MSR tempo?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToTempo (wordsValue)) {
 //       convertWordsToTempo (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
 
       // create an msrWords containing wordsValue
       S_msrWords
         words =
           msrWords::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentDirectionPlacementKind,
             wordsValue,
             justifyKind,
@@ -5895,7 +5895,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
       S_msrTempo
         tempo =
           msrTempo::createTempoWordsOnly (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             words,
             msrTempoParenthesizedKind::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
@@ -5914,7 +5914,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           "\" to an MSR tempo" <<
           ", fCurrentDirectionStaffNumber: " <<
           fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -5930,14 +5930,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
     // is wordsValue to be converted to a rehearsal mark?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToRehearsalMark (wordsValue)) {
 //       convertWordsToRehearsalMark (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
 
       // create an msrWords containing wordsValue
       S_msrRehearsalMark
         rehearsalMark =
           msrRehearsalMark::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             msrRehearsalMarkKind::kRehearsalMarkNone, // JMI allow for other values???
             wordsValue,
             fCurrentDirectionPlacementKind);
@@ -5955,7 +5955,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           wordsValue <<
           "\" to an MSR rehearsal mark" <<
           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -5972,13 +5972,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
     // is wordsValue to be converted to a segno?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToSegno (wordsValue)) {
 //       convertWordsToSegno (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
       // create the segno
       S_msrSegno
         segno =
           msrSegno::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentDirectionStaffNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -5995,7 +5995,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           "\" to an MSR segno" <<
           ", fCurrentDirectionStaffNumber: " <<
           fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6012,13 +6012,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
     // is wordsValue to be converted to a dal segno?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToDalSegno (wordsValue)) {
 //       convertWordsToDalSegno (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
       // create a dal segno element containing wordsValue
       S_msrDalSegno
         dalSegno =
           msrDalSegno::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -6034,7 +6034,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           dalSegno->asString () <<
           ", fCurrentDirectionStaffNumber: " <<
           fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6050,13 +6050,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
     // is wordsValue to be converted to a dal segno al fine?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToDalSegnoAlFine (wordsValue)) {
 //       convertWordsToDalSegnoAlFine (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
       // create a dal segno element containing wordsValue
       S_msrDalSegno
         dalSegno =
           msrDalSegno::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -6076,7 +6076,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           dalSegno->asString () <<
           ", fCurrentDirectionStaffNumber: " <<
           fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6092,13 +6092,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
     // is wordsValue to be converted to a dal segno al coda?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToDalSegnoAlCoda (wordsValue)) {
 //       convertWordsToDalSegnoAlCoda (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
       // create a dal segno element containing wordsValue
       S_msrDalSegno
         dalSegno =
           msrDalSegno::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -6114,7 +6114,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           dalSegno->asString () <<
           ", fCurrentDirectionStaffNumber: " <<
           fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6130,13 +6130,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
     // is wordsValue to be converted to a coda first?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToCodaFirst (wordsValue)) {
 //       convertWordsToCoda (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
       // create the coda
       S_msrCoda
         coda =
           msrCoda::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentDirectionStaffNumber,
             msrCodaKind::kCodaFirst);
 
@@ -6155,7 +6155,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           coda->asString () <<
           ", fCurrentDirectionStaffNumber: " <<
           fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6172,13 +6172,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
     // is wordsValue to be converted to a coda second?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToCodaSecond (wordsValue)) {
 //       convertWordsToCoda (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
       // create the coda
       S_msrCoda
         coda =
           msrCoda::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentDirectionStaffNumber,
             msrCodaKind::kCodaSecond);
 
@@ -6197,7 +6197,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           coda->asString () <<
           ", fCurrentDirectionStaffNumber: " <<
           fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6229,7 +6229,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           "\" to an MSR cresc" <<
           ", fCurrentDirectionStaffNumber: " <<
           fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6238,7 +6238,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 //       convertWordsToCresc (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
       // create an msrCrescDecresc
 #ifdef MF_TRACE_IS_ENABLED
@@ -6247,7 +6247,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 
         ss <<
           "Creating an msrCrescDecresc crescendo" <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6258,7 +6258,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
       S_msrCrescDecresc
         crescDecresc =
           msrCrescDecresc::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             msrCrescDecrescKind::kCrescDecrescCrescendo);
 
       // append the rehearsalMark to the pending tempos list
@@ -6285,7 +6285,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           "\" to an MSR decresc" <<
           ", fCurrentDirectionStaffNumber: " <<
           fCurrentDirectionStaffNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6294,7 +6294,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 //       convertWordsToDecresc (
-//         elt->getInputStartLineNumber (),
+//         elt->getInputLineNumber (),
 //         wordsValue);
       // create an msrCrescDecresc
 #ifdef MF_TRACE_IS_ENABLED
@@ -6303,7 +6303,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
 
         ss <<
           "Creating an msrCrescDecresc decrescendo" <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6314,7 +6314,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
       S_msrCrescDecresc
         crescDecresc =
           msrCrescDecresc::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             msrCrescDecrescKind::kCrescDecrescDecrescendo);
 
       // append the rehearsalMark to the pending tempos list
@@ -6336,7 +6336,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
           msrPlacementKindAsString (
             fCurrentDirectionPlacementKind) <<
           "\"" <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -6367,7 +6367,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_words& elt)
       S_msrWords
         words =
           msrWords::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentDirectionPlacementKind,
             wordsValue,
             justifyKind,
@@ -6392,7 +6392,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_registration& elt)
 
     ss <<
       "--> Start visiting S_accordion_registration" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6427,7 +6427,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_high& elt)
 
     ss <<
       "--> Start visiting S_accordion_high" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6448,7 +6448,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_middle& elt)
 
     ss <<
       "--> Start visiting S_accordion_middle" <<
-       ", line " << elt->getInputStartLineNumber () <<
+       ", line " << elt->getInputLineNumber () <<
      std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6465,7 +6465,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_middle& elt)
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
 
     fCurrentAccordionMiddle = 1;
@@ -6482,7 +6482,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_low& elt)
 
     ss <<
       "--> Start visiting S_accordion_low" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6503,7 +6503,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_accordion_registration& elt)
 
     ss <<
       "--> End visiting S_accordion_registration" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6517,7 +6517,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_accordion_registration& elt)
   if (fCurrentAccordionNumbersCounter == 0) {
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       "accordion-registration has 0 child element, ignoring it");
   }
 
@@ -6526,7 +6526,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_accordion_registration& elt)
     S_msrAccordionRegistration
       accordionRegistration =
         msrAccordionRegistration::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentAccordionHigh,
           fCurrentAccordionMiddle,
           fCurrentAccordionLow);
@@ -6547,7 +6547,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome& elt)
 
     ss <<
       "--> Start visiting S_metronome" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6575,7 +6575,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -6589,7 +6589,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 
 
@@ -6624,7 +6624,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
 
     ss <<
       "--> Start visiting S_beat_unit" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6638,7 +6638,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
   msrNotesDurationKind
     beatUnitNotesDurationKind =
       msrNotesDurationKindFromMusicXMLString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         beatUnitString);
 
   // there can be several <beat-unit/> in a <metronome/> markup,
@@ -6657,7 +6657,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6671,7 +6671,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit_dot& elt)
 
     ss <<
       "--> Start visiting S_beat_unit_dot" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6690,7 +6690,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit_dot& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6704,7 +6704,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_per_minute& elt)
 
     ss <<
       "--> Start visiting S_per_minute" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6723,7 +6723,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_note& elt)
 
     ss <<
       "--> Start visiting S_metronome_note" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6742,7 +6742,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_type& elt)
 
     ss <<
       "--> Start visiting S_metronome_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6755,7 +6755,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_type& elt)
   // the type contains a display duration,
   fCurrentMetronomeNotesDurationKind =
     msrNotesDurationKindFromMusicXMLString (
-     elt->getInputStartLineNumber (),
+     elt->getInputLineNumber (),
      noteType);
 }
 
@@ -6767,7 +6767,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_dot& elt)
 
     ss <<
       "--> Start visiting S_metronome_dot" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6786,7 +6786,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_beam& elt)
 
     ss <<
       "--> Start visiting S_metronome_beam" <<
-      ", line " << elt->getInputStartLineNumber () <<
+      ", line " << elt->getInputLineNumber () <<
      std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -6821,7 +6821,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_beam& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -6835,7 +6835,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_beam& elt)
   S_msrBeam
     beam =
       msrBeam::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentBeamNumber,
         beamKind);
 
@@ -6905,7 +6905,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_note& elt)
 
     ss <<
       "--> End visiting S_metronome_note" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6934,7 +6934,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_note& elt)
   S_msrTempoNote
     tempoNote =
       msrTempoNote::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentMetronomeNoteWholeNotesFromMetronomeType,
         false /* tempoNoteBelongsToATuplet JMI */);
 
@@ -6962,7 +6962,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_note& elt)
         // create the relation left elements
         fCurrentMetronomeRelationLeftElements =
           msrTempoNotesRelationshipElements::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsLeft);
       }
 
@@ -6977,7 +6977,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_note& elt)
         // create the relation right elements
         fCurrentMetronomeRelationRightElements =
           msrTempoNotesRelationshipElements::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsRight);
       }
 
@@ -6998,7 +6998,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_relation& elt)
 
     ss <<
       "--> Start visiting S_metronome_relation" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7022,7 +7022,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_relation& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7036,7 +7036,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
 
     ss <<
       "--> Start visiting S_metronome_tuplet" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7070,7 +7070,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -7082,12 +7082,12 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
           ss <<
             "tuplet bracket is empty: this is implementation dependent," <<
             " \"yes\" is assumed" <<
-            ", line " << elt->getInputStartLineNumber () <<
+            ", line " << elt->getInputLineNumber () <<
             std::endl; // option ??? JMI v0.9.68
 
           mxsr2msrWarning (
             gServiceRunData->getInputSourceName (),
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -7115,7 +7115,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -7142,7 +7142,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_tuplet& elt)
       if (! tupletShowNumber.empty ()) {
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           "metronome tuplet show-number \"" + tupletShowNumber + "\" is unknown");
       }
@@ -7178,7 +7178,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_dot& elt)
 
     ss <<
       "--> Start visiting S_normal_dot" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7197,7 +7197,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_tuplet& elt)
 
     ss <<
       "--> End visiting S_metronome_tuplet" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7214,7 +7214,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_tuplet& elt)
         // create metronome tuplet
         fCurrentMetronomeTuplet =
           msrTempoTuplet::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             fCurrentTempoTupletNumber,
             fCurrentTempoTupletBracketKind,
             fCurrentTempoTupletShowNumberKind,
@@ -7231,7 +7231,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_tuplet& elt)
             // create the relation left elements
             fCurrentMetronomeRelationLeftElements =
               msrTempoNotesRelationshipElements::create (
-                elt->getInputStartLineNumber (),
+                elt->getInputLineNumber (),
                 msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsLeft);
           }
 
@@ -7246,7 +7246,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_tuplet& elt)
             // create the relation right elements
             fCurrentMetronomeRelationRightElements =
               msrTempoNotesRelationshipElements::create (
-                elt->getInputStartLineNumber (),
+                elt->getInputLineNumber (),
                 msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsRight);
           }
 
@@ -7274,7 +7274,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 
     ss <<
       "--> End visiting S_metronome" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7312,7 +7312,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7333,7 +7333,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 
         fCurrentMetronomeTempo =
           msrTempo::createTempoPerMinute (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             beatUnits,
             fCurrentMetrenomePerMinute,
             fCurrentMetronomeParenthesedKind,
@@ -7349,7 +7349,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 
         fCurrentMetronomeTempo =
           msrTempo::createTempoBeatUnitEquivalent (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             beatUnits,
             fCurrentMetronomeBeatUnitsVector [1],
             fCurrentMetronomeParenthesedKind,
@@ -7360,7 +7360,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
     case msrTempoKBeatUnitsKind::kTempoNotesRelationship:
       fCurrentMetronomeTempo =
         msrTempo::createTempoNotesRelationship (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentMetronomeRelationLeftElements,
           fCurrentMetrenomeRelationKind, // msrTempoNotesRelationshipKind::kTempoNotesRelationshipEquals here
           fCurrentMetronomeRelationRightElements,
@@ -7434,7 +7434,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -7467,7 +7467,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staves& elt)
 
     ss <<
       "--> Start visiting S_direction" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7485,7 +7485,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
 
     ss <<
       "--> Start visiting S_staff" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7503,7 +7503,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
     ss <<
       "staff number " << fCurrentNoteStaffNumber <<
       " is not positive" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     mfAssert(
       __FILE__, __LINE__,
@@ -7568,7 +7568,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7583,7 +7583,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
 
     ss <<
       "--> Start visiting S_staff_details" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7624,7 +7624,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -7639,7 +7639,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 
   // print-spacing
@@ -7667,7 +7667,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -7704,7 +7704,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
   // create the staff details
   fCurrentStaffDetails =
     msrStaffDetails::create (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       fCurrentStaffTypeKind,
       fCurrentShowFretsKind,
       fCurrentPrintObjectKind,
@@ -7721,7 +7721,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_type& elt)
 
     ss <<
       "--> Start visiting S_staff_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7768,7 +7768,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_type& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7782,7 +7782,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_lines& elt)
 
     ss <<
       "--> Start visiting S_staff_lines" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7801,7 +7801,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_tuning& elt)
 
     ss <<
       "--> Start visiting S_staff_tuning" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7826,7 +7826,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_step& elt)
 
     ss <<
       "--> Start visiting S_tuning_step" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7837,7 +7837,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_step& elt)
   std::string tuningStep = elt->getValue();
 
   checkStep (
-    elt->getInputStartLineNumber (),
+    elt->getInputLineNumber (),
     tuningStep,
     "<tuning-step/>");
 
@@ -7862,7 +7862,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_step& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7876,7 +7876,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_octave& elt)
 
     ss <<
       "--> Start visiting S_tuning_octave" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7889,7 +7889,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_octave& elt)
   msrOctaveKind
     tuningOctaveKind =
       msrOctaveKindFromNumber (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         tuningOctaveNumber);
 
   if (fOnGoingStaffTuning) {
@@ -7908,7 +7908,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_octave& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7922,7 +7922,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
 
     ss <<
       "--> Start visiting S_tuning_alter" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -7946,7 +7946,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7967,7 +7967,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuning_alter& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -7981,7 +7981,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
 
     ss <<
       "--> End visiting S_staff_tuning" <<
-       ", line " << elt->getInputStartLineNumber () <<
+       ", line " << elt->getInputLineNumber () <<
      std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -7994,7 +7994,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
   msrQuarterTonesPitchKind
     quarterTonesPitchKind =
       quarterTonesPitchKindFromDiatonicPitchAndAlteration (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentStaffTuningDiatonicPitchKind,
         fCurrentStaffTuningAlterationKind);
 
@@ -8048,7 +8048,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_tuning& elt)
   S_msrStaffTuning
     staffTuning =
       msrStaffTuning::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentStaffTuningLine,
         quarterTonesPitchKind,
         fCurrentStaffTuningOctaveKind);
@@ -8070,7 +8070,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
 
     ss <<
       "--> Start visiting S_staff_details" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8084,7 +8084,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
 
     ss <<
       "<!--=== voiceName \"" << "elt->getVoiceName ()" << "\"" <<
-      ", line " << elt->getInputStartLineNumber () << " ===-->";
+      ", line " << elt->getInputLineNumber () << " ===-->";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8128,7 +8128,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_voice& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -8163,7 +8163,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_backup& elt)
 
     ss <<
       "--> Start visiting S_backup" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8182,7 +8182,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 
     ss <<
       "--> End visiting S_backup" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8200,7 +8200,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
         fCurrentBackupDivisions, "division", "divisions") <<
         ", fCurrentDivisionsPerQuarterNote: " <<
         fCurrentDivisionsPerQuarterNote <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8218,7 +8218,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
   // update current measure position
   fCurrentPart->
     decrementPartCurrentDrawingMeasurePosition (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       backupStepLength);
 
 //   // reset notes staff numbers // JMI v0.9.68
@@ -8227,7 +8227,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 
   // handle the backup right now:
 //   handleBackup (
-//     elt->getInputStartLineNumber ());
+//     elt->getInputLineNumber ());
 
   // staff changes handling
   fCurrentRecipientStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
@@ -8235,7 +8235,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
   // chords handling
   if (fOnGoingChord) {
 //     finalizeCurrentChord (
-//       elt->getInputStartLineNumber ());
+//       elt->getInputLineNumber ());
 
     fOnGoingChord = false;
   }
@@ -8261,7 +8261,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_forward& elt)
 
     ss <<
       "--> Start visiting S_forward" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8307,7 +8307,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 
     ss <<
       "--> End visiting S_forward" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8340,7 +8340,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       fCurrentForwardStaffNumber <<
       ", fCurrentForwardVoiceNumber: " <<
       mfVoiceNumberAsString (fCurrentForwardVoiceNumber) <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8351,7 +8351,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   // account for forwardStepLength wholeNotes in the part current measure position
   fCurrentPart->
     incrementPartCurrentDrawingMeasurePosition (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       forwardStepLength);
 
   // the staff number if any should be positive
@@ -8361,7 +8361,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
     ss <<
       "staff number " << fCurrentForwardStaffNumber <<
       " is not positive" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
       mfAssert (
         __FILE__, __LINE__,
@@ -8377,7 +8377,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
       "voice number " <<
       fCurrentForwardVoiceNumber <<
       " is not positive" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
       mfAssert (
         __FILE__, __LINE__,
@@ -8417,7 +8417,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   // append a padding note to the voice to be forwarded
   voiceToBeForwardedTo ->
     cascadeAppendPaddingNoteToVoice (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       forwardStepLength);
 
   // staff changes handling
@@ -8426,7 +8426,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   // chords handling
   if (fOnGoingChord) {
 //     finalizeCurrentChord (
-//       elt->getInputStartLineNumber ());
+//       elt->getInputLineNumber ());
 
     fOnGoingChord = false;
   }
@@ -8452,7 +8452,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
 
     ss <<
       "--> Start visiting S_tied" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8492,7 +8492,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -8508,7 +8508,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -8530,7 +8530,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
         S_msrTie
           tie =
             msrTie::create (
-              elt->getInputStartLineNumber (),
+              elt->getInputLineNumber (),
               fCurrentTieKind);
 
         fPendingTiesList.push_back (tie);
@@ -8633,7 +8633,7 @@ The values of start, stop, and continue refer to how an
 
     ss <<
       "--> Start visiting S_slur" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8662,7 +8662,7 @@ The values of start, stop, and continue refer to how an
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         ss.str ());
     }
 
@@ -8682,7 +8682,7 @@ The values of start, stop, and continue refer to how an
 
       fCurrentDirectionPlacementKind = // use it JMI ???
         msrPlacementKindFromString (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           placementString);
 
       // a phrasing slur is recognized as such
@@ -8713,7 +8713,7 @@ The values of start, stop, and continue refer to how an
 " <<
                   containingSlur->asString () <<
                   " contains a nested slur, it is thus a phrasing slur start" <<
-                  ", line " << elt->getInputStartLineNumber () <<
+                  ", line " << elt->getInputLineNumber () <<
                   std::endl;
               }
   #endif // MF_TRACE_IS_ENABLED
@@ -8735,7 +8735,7 @@ The values of start, stop, and continue refer to how an
 //         //      mxsr2msrError ( // JMI
 //               mxsr2msrWarning (
 //                 gServiceRunData->getInputSourceName (),
-//                 elt->getInputStartLineNumber (),
+//                 elt->getInputLineNumber (),
 //         //        __FILE__, __LINE__,
 //                 ss.str (),
 //             }
@@ -8773,7 +8773,7 @@ The values of start, stop, and continue refer to how an
 
               mxsr2msrWarning (
                 gServiceRunData->getInputSourceName (),
-                elt->getInputStartLineNumber (),
+                elt->getInputLineNumber (),
                 ss.str ());
             }
             break;
@@ -8800,7 +8800,7 @@ The values of start, stop, and continue refer to how an
                 if (gTraceOahGroup->getTraceSlurs ()) {
                   gLog <<
                     "A slur stop matches a phrasing slur start, it is thus a phrasing slur stop" <<
-                    ", line " << elt->getInputStartLineNumber () <<
+                    ", line " << elt->getInputLineNumber () <<
                     std::endl;
                 }
   #endif // MF_TRACE_IS_ENABLED
@@ -8836,7 +8836,7 @@ The values of start, stop, and continue refer to how an
 
             mxsr2msrError (
               gServiceRunData->getInputSourceName (),
-              elt->getInputStartLineNumber (),
+              elt->getInputLineNumber (),
               __FILE__, __LINE__,
               ss.str ());
           }
@@ -8867,7 +8867,7 @@ The values of start, stop, and continue refer to how an
         if (! slurLineType.empty ()) {
           mxsr2msrError (
             gServiceRunData->getInputSourceName (),
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             __FILE__, __LINE__,
             "slur line-type \"" + slurLineType + "\" is unknown");
         }
@@ -8899,7 +8899,7 @@ The values of start, stop, and continue refer to how an
       S_msrSlur
         slur =
           msrSlur::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             slurNumber,
             fCurrentSlurTypeKind,
             slurLineTypeKind,
@@ -8940,7 +8940,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
 
     ss <<
       "--> Start visiting S_bracket" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -8985,7 +8985,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -9024,7 +9024,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -9054,7 +9054,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
     if (! ligatureLineTypeValue.empty ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         "ligature line-type \"" + ligatureLineTypeValue + "\" is unknown");
     }
@@ -9066,7 +9066,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
   S_msrLigature
     ligature =
       msrLigature::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         ligatureNumber,
         fCurrentLigatureKind,
         ligatureLineEndKind,
@@ -9091,7 +9091,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
 
               mxsr2msrWarning (
                 gServiceRunData->getInputSourceName (),
-                elt->getInputStartLineNumber (),
+                elt->getInputLineNumber (),
                 ss.str ());
             }
 #endif // MF_TRACE_IS_ENABLED
@@ -9127,7 +9127,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
 
               mxsr2msrWarning (
                 gServiceRunData->getInputSourceName (),
-                elt->getInputStartLineNumber (),
+                elt->getInputLineNumber (),
                 ss.str ());
             }
 #endif // MF_TRACE_IS_ENABLED
@@ -9143,7 +9143,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
            // JMI   mxsr2msrError (
               mxsr2msrWarning (
                 gServiceRunData->getInputSourceName (),
-                elt->getInputStartLineNumber (),
+                elt->getInputLineNumber (),
            //     __FILE__, __LINE__,
                 ss.str ());
             }
@@ -9169,7 +9169,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
          // JMI   mxsr2msrError (
             mxsr2msrWarning (
               gServiceRunData->getInputSourceName (),
-              elt->getInputStartLineNumber (),
+              elt->getInputLineNumber (),
          //     __FILE__, __LINE__,
               ss.str ());
           }
@@ -9194,7 +9194,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bracket& elt)
          // JMI   mxsr2msrError (
             mxsr2msrWarning (
               gServiceRunData->getInputSourceName (),
-              elt->getInputStartLineNumber (),
+              elt->getInputLineNumber (),
          //     __FILE__, __LINE__,
               ss.str ());
           }
@@ -9230,7 +9230,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
 
     ss <<
       "--> Start visiting S_wedge" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9269,7 +9269,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -9298,7 +9298,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -9328,7 +9328,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
     if (! wedgeLineType.empty ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         "wedge line-type \"" + wedgeLineType + "\" is unknown");
     }
@@ -9353,7 +9353,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
       fCurrentDirectionPlacementKind <<
       ", fCurrentNoteVoiceNumber: " <<
       fCurrentNoteVoiceNumber <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9364,7 +9364,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wedge& elt)
     S_msrWedge
       wedge =
         msrWedge::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           wedgeNumber,
           wedgeKind,
           wedgeNienteKind,
@@ -9390,7 +9390,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
 
     ss <<
       "--> Start visiting S_lyric" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9407,7 +9407,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
     if (fCurrentStanzaNumber.empty ()) {
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         "lyric number is empty, using \"1\" by default");
 
       fCurrentStanzaNumber = "1";
@@ -9420,7 +9420,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
       ss <<
         "Setting fCurrentStanzaNumber to " <<
         fCurrentStanzaNumber <<
-        ", line " << elt->getInputStartLineNumber ();
+        ", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -9467,7 +9467,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
       ss <<
         "Setting fCurrentStanzaName to \"" <<
         fCurrentStanzaName <<
-        "\", line " << elt->getInputStartLineNumber ();
+        "\", line " << elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -9489,7 +9489,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_lyric& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 
   // color JMI
@@ -9511,7 +9511,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_syllabic& elt)
 
     ss <<
       "--> Start visiting S_syllabic" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9544,7 +9544,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_syllabic& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -9557,7 +9557,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   int inputStartLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputLineNumber ();
 
   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
     std::stringstream ss;
@@ -9581,7 +9581,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_text& elt)
   // there can be several <text/>'s and <elision/> in a row, hence the list
   fCurrentSyllableElementsList.push_back (
     msrSyllableElement (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       msrSyllableElementKind::kSyllableElementText,
       textValue));
 
@@ -9636,7 +9636,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_elision& elt)
 
     ss <<
       "--> Start visiting S_elision" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9658,7 +9658,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_elision& elt)
 
   fCurrentSyllableElementsList.push_back (
     msrSyllableElement (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       msrSyllableElementKind::kSyllableElementElision,
       elisionValue));
 
@@ -9668,7 +9668,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_elision& elt)
 
     ss <<
       "visitStart (S_elision& elt), elisionValue = \"" << elisionValue << "\"" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -9695,7 +9695,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
 */
 
   int inputStartLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
@@ -9760,7 +9760,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_extend& elt)
 void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 {
   int inputStartLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
@@ -10126,7 +10126,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 
     ss <<
       "--> Start visiting S_measure" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -10147,7 +10147,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       fPartMeasuresCounter <<
       ", fCurrentMeasureNumber: " <<
         fCurrentMeasureNumber <<
-      ", line " << elt->getInputStartLineNumber () <<
+      ", line " << elt->getInputLineNumber () <<
       ", in part \"" <<
       fCurrentPart->fetchPartCombinedName () << "\"";
 
@@ -10177,7 +10177,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       "      " <<
       "measure " << fCurrentMeasureNumber <<
       ", line " <<
-      elt->getInputStartLineNumber () <<
+      elt->getInputLineNumber () <<
       std::endl <<
       "   <<===" <<
       std::endl <<
@@ -10228,7 +10228,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -10256,7 +10256,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       ", measureImplicitKind: " << measureImplicitKind <<
       ", nonControllingString: \"" << nonControllingString << "\"" <<
       ", widthValue: " << widthValue <<
-      ", line " << elt->getInputStartLineNumber () <<
+      ", line " << elt->getInputLineNumber () <<
       " ===-->";
 
     gWaeHandler->waeTrace (
@@ -10280,7 +10280,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 //     if (fCurrentPart) {
       fCurrentPart->
         setNextMeasureNumberInPart (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentMeasureNumber);
 //     }
 //     else {
@@ -10310,7 +10310,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 
         mxsr2msrInternalError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -10320,7 +10320,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   // reset the part measure position
   fCurrentPart->
     setPartCurrentDrawingMeasurePosition (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       msrWholeNotes (0, 1));
 
   ////////////////////////////////////////////////////////////////////
@@ -10329,12 +10329,12 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   // create a new measure and append it to the current part
   fCurrentPart->
     cascadeCreateAMeasureAndAppendItInPart (
-      elt->getInputStartLineNumber (),
-      fPreviousMeasureEndInputLineNumber,
+      elt->getInputLineNumber (),
+      fPreviousMeasureInputLineNumber,
       fCurrentMeasureNumber,
       measureImplicitKind);
 
-  fPreviousMeasureEndInputLineNumber = elt->getInputStartLineNumber ();
+  fPreviousMeasureInputLineNumber = elt->getInputLineNumber ();
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -10362,7 +10362,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   // reset the drawing measure position in the current part
   fCurrentPart->
     resetPartCurrentDrawingMeasurePosition (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 }
 
 void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
@@ -10373,7 +10373,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 
     ss <<
       "--> End visiting S_measure" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -10441,11 +10441,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           std::endl <<
           ", fCurrentNoteVoiceNumber: " <<
           fCurrentNoteVoiceNumber <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         mxsr2msrInternalError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -10494,7 +10494,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 
           mxsr2msrWarning (
             gServiceRunData->getInputSourceName (),
-            fCurrentNote->getInputStartLineNumber (),
+            fCurrentNote->getInputLineNumber (),
             ss.str ());
         }
       }
@@ -10507,7 +10507,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
     // to add skips if necessary and set measure kind
     fCurrentPart->
       finalizeLastAppendedMeasureInPart (
-        elt->getInputStartLineNumber ());
+        elt->getInputLineNumber ());
 
     // should this measure be replicated?
     const std::map <std::string,int>&
@@ -10544,7 +10544,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 
         fCurrentPart->
           replicateLastAppendedMeasureInPart (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             measureReplicatesNumber);
       }
       else {
@@ -10596,7 +10596,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
 
       fCurrentPart->
         appendEmptyMeasuresToPart (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentMeasureNumber,
           measuresToBeAdded);
     }
@@ -10692,7 +10692,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_print& elt)
 
     ss <<
       "--> Start visiting S_print" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -10753,7 +10753,7 @@ Staff spacing between multiple staves is measured in
   // create a print layout
   fCurrentMusicXMLPrintLayout =
      msrMusicXMLPrintLayout::create (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 
   // handle 'staff-spacing' if present
 
@@ -10786,7 +10786,7 @@ Staff spacing between multiple staves is measured in
 
           ss <<
             "Creating a line break, " <<
-            "line: " << elt->getInputStartLineNumber ();
+            "line: " << elt->getInputLineNumber ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -10797,7 +10797,7 @@ Staff spacing between multiple staves is measured in
         S_msrLineBreak
           lineBreak =
             msrLineBreak::create (
-              elt->getInputStartLineNumber (),
+              elt->getInputLineNumber (),
               1333333, // JMI v0.9.70 next purist number???
               msrUserSelectedLineBreakKind::kUserSelectedLineBreakNo);
 
@@ -10817,7 +10817,7 @@ Staff spacing between multiple staves is measured in
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -10838,7 +10838,7 @@ Staff spacing between multiple staves is measured in
         if (gTraceOahGroup->getTracePageBreaks ()) {
           gLog <<
             "Creating a page break, " <<
-            "line: " << elt->getInputStartLineNumber () <<
+            "line: " << elt->getInputLineNumber () <<
             std::endl;
         }
   #endif // MF_TRACE_IS_ENABLED
@@ -10846,7 +10846,7 @@ Staff spacing between multiple staves is measured in
         S_msrPageBreak
           pageBreak =
             msrPageBreak::create (
-              elt->getInputStartLineNumber (),
+              elt->getInputLineNumber (),
               gNullMeasure, // JMI ??? v0.9.70
               14444444, // JMI v0.9.70 next purist number???
               msrUserSelectedPageBreakKind::kUserSelectedPageBreakNo);
@@ -10867,7 +10867,7 @@ Staff spacing between multiple staves is measured in
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -10903,7 +10903,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_print& elt)
 
     ss <<
       "--> End visiting S_print" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -10926,7 +10926,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_print& elt)
   S_msrVoice
     voiceOneInStaffOne =
       fetchFirstVoiceFromCurrentPart (
-        elt->getInputStartLineNumber ());
+        elt->getInputLineNumber ());
 
   voiceOneInStaffOne->
     appendMusicXMLPrintLayoutToVoice (
@@ -10947,7 +10947,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_numbering& elt)
 
     ss <<
       "--> Start visiting S_measure_numbering" <<
-       ", line " << elt->getInputStartLineNumber ();
+       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -10967,7 +10967,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barline& elt)
 
     ss <<
       "--> Start visiting S_barline" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11018,7 +11018,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barline& elt)
      // JMI   mxsr2msrError (
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
      //     __FILE__, __LINE__,
           ss.str ());
       }
@@ -11037,7 +11037,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bar_style& elt)
 
     ss <<
       "--> Start visiting S_bar_style" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11099,7 +11099,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bar_style& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "bar-style \"" + barStyle + "\" is unknown");
   }
@@ -11116,7 +11116,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_segno& elt)
 
     ss <<
       "--> Start visiting S_segno" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11129,7 +11129,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_segno& elt)
     S_msrSegno
       segno =
         msrSegno::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentDirectionStaffNumber);
 
     // append it to the pending segnos list
@@ -11148,7 +11148,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_segno& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11162,7 +11162,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
 
     ss <<
       "--> Start visiting S_coda" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11193,7 +11193,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
 
           mxsr2msrError (
             gServiceRunData->getInputSourceName (),
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             __FILE__, __LINE__,
             ss.str ());
         }
@@ -11203,7 +11203,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
     S_msrCoda
       coda =
         msrCoda::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentDirectionStaffNumber,
           codaKind);
 
@@ -11223,7 +11223,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_coda& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11237,7 +11237,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_eyeglasses& elt)
 
     ss <<
       "--> Start visiting S_eyeglasses" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11250,7 +11250,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_eyeglasses& elt)
     S_msrEyeGlasses
       eyeGlasses =
         msrEyeGlasses::create (
-          elt->getInputStartLineNumber ());
+          elt->getInputLineNumber ());
 
     // append it to the pending eyeglasses list
     fPendingEyeGlassesList.push_back (eyeGlasses);
@@ -11263,7 +11263,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_eyeglasses& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11277,7 +11277,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
 
     ss <<
       "--> Start visiting S_pedal" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11310,7 +11310,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11337,7 +11337,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -11367,7 +11367,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -11377,7 +11377,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
   S_msrPedal
     pedal =
       msrPedal::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         pedalTypeKind,
         pedalLineKind,
         pedalSignKind);
@@ -11393,7 +11393,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11408,7 +11408,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
 
     ss <<
       "--> Start visiting S_ending" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11425,7 +11425,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
     if (fCurrentBarLineEndingNumber.empty ()) {
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         "mandatory ending number is missing, assuming \"1\"");
 
       fCurrentBarLineEndingNumber = "1";
@@ -11462,7 +11462,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -11476,7 +11476,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ending& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 }
 
@@ -11489,7 +11489,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_repeat& elt)
 
     ss <<
       "--> Start visiting S_repeat" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11522,7 +11522,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_repeat& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -11566,7 +11566,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_repeat& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -11590,7 +11590,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 
     ss <<
       "--> End visiting S_barline" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11602,7 +11602,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
   S_msrBarLine
     barLine =
       msrBarLine::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentBarLineLocationKind,
         fCurrentBarLineStyleKind,
         fCurrentBarLineRepeatDirectionKind,
@@ -11655,7 +11655,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
         if (fCurrentBarLineEndingNumber.empty ()) {
           mxsr2msrWarning (
             gServiceRunData->getInputSourceName (),
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             "mandatory ending number is missing, assuming \"1\"");
 
           fCurrentBarLineEndingNumber = "1";
@@ -11704,7 +11704,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -11727,7 +11727,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -11841,7 +11841,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -11902,7 +11902,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
      //     __FILE__, __LINE__,
           ss.str ());
         break;
@@ -11920,7 +11920,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 //     mxsr2msrInternalWarning (
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -11937,11 +11937,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
           "barLine " <<
           barLine->asString () <<
           " has no barLine category" <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
       mxsr2msrInternalError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
       }
@@ -11970,7 +11970,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 
     ss <<
       "--> Start visiting S_note" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -11981,7 +11981,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 	++fCurrentNoteSequentialNumber;
 
   fCurrentNoteInputStartLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputLineNumber ();
 
   // initialize note data to a neutral state
   initializeNoteData ();
@@ -12028,7 +12028,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 
   fCurrentNotePrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 
   // note color, unofficial ??? JMI v0.9.70
@@ -12080,7 +12080,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12097,7 +12097,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_step& elt)
 
     ss <<
       "--> Start visiting S_step" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12108,7 +12108,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_step& elt)
   std::string step = elt->getValue();
 
   checkStep (
-    elt->getInputStartLineNumber (),
+    elt->getInputLineNumber (),
     step,
     "<step/>");
 
@@ -12124,7 +12124,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_alter& elt)
 
     ss <<
       "--> Start visiting S_alter" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12147,7 +12147,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_alter& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12161,7 +12161,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave& elt)
 
     ss <<
       "--> Start visiting S_octave" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12180,7 +12180,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave& elt)
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
 
     octaveNumber = 0;
@@ -12188,7 +12188,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_octave& elt)
 
   fCurrentNoteOctave =
     msrOctaveKindFromNumber (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       octaveNumber);
 }
 
@@ -12200,7 +12200,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
 
     ss <<
       "--> Start visiting S_duration" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12220,7 +12220,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
       ", fOnGoingForward: " << fOnGoingForward <<
       ", fOnGoingNote: " << fOnGoingNote <<
       ", fOnGoingFiguredBass: " << fOnGoingFiguredBass <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12322,7 +12322,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12338,7 +12338,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instrument& elt)
 
     ss <<
       "--> Start visiting S_instrument" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12385,7 +12385,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_dot& elt)
 
     ss <<
       "--> Start visiting S_dot" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12404,7 +12404,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
 
     ss <<
       "--> Start visiting S_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12422,7 +12422,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
     // the type contains a display duration,
     fCurrentNoteGraphicNotesDurationKind =
       msrNotesDurationKindFromMusicXMLString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         noteType);
   }
 
@@ -12441,7 +12441,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
       if (! noteTypeSize.empty ()) {
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
             "note type size \"" + noteTypeSize + "\" is unknown");
       }
@@ -12473,7 +12473,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
 
     ss <<
       "--> Start visiting S_notehead" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12545,7 +12545,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -12570,7 +12570,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -12596,7 +12596,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_notehead& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -12614,7 +12614,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
 
     ss <<
       "--> Start visiting S_accidental" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12708,7 +12708,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -12739,7 +12739,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -12770,7 +12770,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental& elt) // JMI
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -12786,7 +12786,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stem& elt)
 
     ss <<
       "--> Start visiting S_stem" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12838,7 +12838,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stem& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12847,7 +12847,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stem& elt)
 
   fCurrentStem =
     msrStem::create (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       stemKind);
 }
 
@@ -12859,7 +12859,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
 
     ss <<
       "--> Start visiting S_beam" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12897,7 +12897,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12916,7 +12916,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -12924,7 +12924,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beam& elt)
   S_msrBeam
     beam =
       msrBeam::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentBeamNumber,
         beamKind);
 
@@ -12947,7 +12947,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_style& elt)
 
     ss <<
       "--> Start visiting S_measure_style" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12966,7 +12966,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_repeat& elt)
 
     ss <<
       "--> Start visiting S_beat_repeat" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13003,7 +13003,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_repeat& elt)
 
   fCurrentUseDotsKind =
     msrUseDotsFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       useDotsString);
 }
 
@@ -13015,7 +13015,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
 
     ss <<
       "--> Start visiting S_measure_repeat" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13024,13 +13024,44 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 /*
+v < 4.0
   The multiple-rest and measure-repeat symbols indicate the
-  number of measures covered in the element content. The
-  beat-repeat and slash elements can cover partial measures.
-  All but the multiple-rest element use a type attribute to
-  indicate starting and stopping the use of the style. The
-  optional number attribute specifies the staff number from
+  number of measures covered in the element content.
+  The beat-repeat and slash elements can cover partial measures.
+  All but the multiple-rest element use a type attribute
+  to indicate starting and stopping the use of the style.
+  The optional number attribute specifies the staff number from
   top to bottom on the system, as with clef.
+
+v4.0
+The <measure-repeat> element is used for both single and multiple measure repeats.
+  The text of the element indicates the number of measures
+  to be repeated in a single pattern.
+  The text of the element is ignored when the type is stop.
+
+The stop type indicates the first measure where the repeats are *no longer* displayed.
+  Both the start and the stop of the measures being repeated should be specified
+  unless the repeats are displayed through the end of the part.
+
+The <measure-repeat> element specifies a notation style for repetitions.
+  The actual music being repeated needs to be
+  repeated *within each measure* of the MusicXML file.
+  This element specifies the notation that indicates the repeat.
+*/
+
+/*
+      <attributes>
+        <measure-style>
+          <measure-repeat slashes="1" type="start">1</measure-repeat>
+        </measure-style>
+      </attributes>
+*/
+/*
+      <attributes>
+        <measure-style>
+          <measure-repeat type="stop"/>
+        </measure-style>
+      </attributes>
 */
 
   fCurrentMeasureRepeatMeasuresNumber = (int)(*elt);
@@ -13064,7 +13095,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
       fCurrentMeasureRepeatMeasuresNumber <<
       ", fCurrentMeasureRepeatSlashesNumber: " <<
       fCurrentMeasureRepeatSlashesNumber <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13074,7 +13105,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
 
     fCurrentPart->
       createMeasureRepeatFromItsFirstMeasuresInPart (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentMeasureRepeatMeasuresNumber,
         fCurrentMeasureRepeatSlashesNumber);
   }
@@ -13091,7 +13122,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
       "Appending measures repeat " <<
       "to part " <<
       fCurrentPart->fetchPartCombinedName () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13101,7 +13132,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
 
     fCurrentPart->
       appendPendingMeasureRepeatToPart (
-        elt->getInputStartLineNumber ());
+        elt->getInputLineNumber ());
   }
 
   else {
@@ -13113,7 +13144,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -13185,6 +13216,15 @@ void mxsr2msrSkeletonPopulator::visitStart (S_multiple_rest& elt)
         <bar-style>light-light</bar-style>
       </barline-->
     </measure>
+
+
+The <multiple-rest> element indicates multiple rests that span several measures. The element text indicates the number of measures in the multiple rest.
+
+<attributes>
+   <measure-style>
+      <multiple-rest>4</multiple-rest>
+   </measure-style>
+</attributes>
 */
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -13193,7 +13233,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_multiple_rest& elt)
 
     ss <<
       "--> Start visiting S_multiple_rest" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13206,6 +13246,18 @@ void mxsr2msrSkeletonPopulator::visitStart (S_multiple_rest& elt)
   std::string useSymbols = elt->getAttributeValue ("use-symbols");
 
   // what do we do with fMultiMeasureRestsUseSymbols ??? JMI v0.9.63
+  /*
+    use-symbols":
+      Specifies whether the multiple rests uses the 1-bar / 2-bar / 4-bar rest symbols,
+      or a single shape. It is no if not specified.
+
+    <attributes>
+       <measure-style>
+          <multiple-rest>4</multiple-rest>
+       </measure-style>
+    </attributes>
+  */
+
   if      (useSymbols == "yes") {
     fMultiMeasureRestsUseSymbols = true;
   }
@@ -13217,13 +13269,13 @@ void mxsr2msrSkeletonPopulator::visitStart (S_multiple_rest& elt)
       std::stringstream ss;
 
       ss <<
-        "multiple rest use symbols " <<
+        "multiple rest use-symbols " <<
         useSymbols <<
         " is unknown";
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
       }
@@ -13232,7 +13284,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_multiple_rest& elt)
   // create a multi-measure rests
   fCurrentPart->
     appendMultiMeasureRestToPart (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       fCurrentMeasureRestsNumber);
 
   // set remaining multi-measure rests counter
@@ -13248,7 +13300,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_multiple_rest& elt)
 
     ss <<
       "--> End visiting S_multiple_rest" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13265,7 +13317,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
 
     ss <<
       "--> Start visiting S_slash" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13290,7 +13342,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -13301,7 +13353,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
 
   fCurrentUseDotsKind =
     msrUseDotsFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       useDotsString);
 
   // use-stems
@@ -13322,7 +13374,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -13339,7 +13391,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
 
     ss <<
       "--> Start visiting S_slash_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13352,7 +13404,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
   // the type contains a display duration,
   fCurrentSlashGraphicNotesDurationKind =
     msrNotesDurationKindFromMusicXMLString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       slashType);
 
   // size
@@ -13366,7 +13418,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
     if (! slashTypeSize.empty ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
           "slash type size \"" + slashTypeSize + "\" is unknown");
     }
@@ -13400,7 +13452,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_dot& elt)
 
     ss <<
       "--> Start visiting S_slash_dot" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13419,7 +13471,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_slash& elt)
 
     ss <<
       "--> End visiting S_slash" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13430,7 +13482,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_slash& elt)
   S_msrSlash
     slash =
       msrSlash::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentSlashTypeKind,
         fCurrentUseDotsKind,
         fCurrentSlashUseStemsKind);
@@ -13447,7 +13499,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_articulations& elt)
 
     ss <<
       "--> Start visiting S_articulations" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13464,7 +13516,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accent& elt)
 
     ss <<
       "--> Start visiting S_accent" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13479,14 +13531,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accent& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationAccent,
         placementKind);
 
@@ -13503,7 +13555,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_breath_mark& elt)
 
     ss <<
       "--> Start visiting S_breath_mark" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13518,14 +13570,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_breath_mark& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationBreathMark,
         placementKind);
 
@@ -13542,7 +13594,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_caesura& elt)
 
     ss <<
       "--> Start visiting S_caesura" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13557,14 +13609,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_caesura& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationCaesura,
         placementKind);
 
@@ -13581,7 +13633,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_spiccato& elt)
 
     ss <<
       "--> Start visiting S_spiccato" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13596,14 +13648,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_spiccato& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationSpiccato,
         placementKind);
 
@@ -13620,7 +13672,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staccato& elt)
 
     ss <<
       "--> Start visiting S_staccato" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13635,14 +13687,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staccato& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationStaccato,
         placementKind);
 
@@ -13659,7 +13711,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staccatissimo& elt)
 
     ss <<
       "--> Start visiting S_staccatissimo" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13674,14 +13726,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staccatissimo& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationStaccatissimo,
         placementKind);
 
@@ -13698,7 +13750,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stress& elt)
 
     ss <<
       "--> Start visiting S_stress" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13713,14 +13765,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stress& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationStress,
         placementKind);
 
@@ -13737,7 +13789,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_unstress& elt)
 
     ss <<
       "--> Start visiting S_unstress" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13752,14 +13804,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_unstress& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationUnstress,
         placementKind);
 
@@ -13776,7 +13828,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_detached_legato& elt)
 
     ss <<
       "--> Start visiting S_detached_legato" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13791,14 +13843,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_detached_legato& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationDetachedLegato,
         placementKind);
 
@@ -13815,7 +13867,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_strong_accent& elt)
 
     ss <<
       "--> Start visiting S_strong_accent" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13830,7 +13882,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_strong_accent& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
@@ -13838,7 +13890,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_strong_accent& elt)
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationStrongAccent,
         placementKind);
 
@@ -13855,7 +13907,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tenuto& elt)
 
     ss <<
       "--> Start visiting S_tenuto" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13872,14 +13924,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tenuto& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationTenuto,
         placementKind);
 
@@ -13896,7 +13948,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_doit& elt)
 
     ss <<
       "--> Start visiting S_doit" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13911,14 +13963,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_doit& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationDoit,
         placementKind);
 
@@ -13935,7 +13987,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_falloff& elt)
 
     ss <<
       "--> Start visiting S_falloff" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13950,14 +14002,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_falloff& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationFalloff,
         placementKind);
 
@@ -13974,7 +14026,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_plop& elt)
 
     ss <<
       "--> Start visiting S_plop" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -13989,14 +14041,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_plop& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationPlop,
         placementKind);
 
@@ -14013,7 +14065,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_scoop& elt)
 
     ss <<
       "--> Start visiting S_scoop" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14028,14 +14080,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_scoop& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the articulation
   S_msrArticulation
     articulation =
       msrArticulation::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrArticulationKind::kArticulationScoop,
         placementKind);
 
@@ -14052,7 +14104,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_articulations& elt)
 
     ss <<
       "--> End visiting S_articulations" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14072,7 +14124,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arpeggiate& elt)
 
     ss <<
       "--> Start visiting S_arpeggiate" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14087,7 +14139,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arpeggiate& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // number
@@ -14113,7 +14165,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arpeggiate& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -14125,7 +14177,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arpeggiate& elt)
   S_msrArpeggiato
     arpeggiato =
       msrArpeggiato::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementKind,
         directionKind,
         number);
@@ -14142,7 +14194,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_non_arpeggiate& elt)
 
     ss <<
       "--> Start visiting S_non_arpeggiate" << // JMI
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14157,7 +14209,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_non_arpeggiate& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // type
@@ -14185,7 +14237,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_non_arpeggiate& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -14201,7 +14253,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_non_arpeggiate& elt)
   S_msrNonArpeggiato
     nonArpeggiato =
       msrNonArpeggiato::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementKind,
         nonArpeggiatoTypeKind,
         number);
@@ -14218,7 +14270,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_technical& elt)
 
     ss <<
       "--> Start visiting S_technical" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14237,7 +14289,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_technical& elt)
 
     ss <<
       "--> Start visiting S_technical" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14256,7 +14308,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arrow& elt)
 
     ss <<
       "--> Start visiting S_arrow" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14271,14 +14323,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_arrow& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalArrow,
         placementKind);
 
@@ -14293,7 +14345,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bend_alter& elt)
 
     ss <<
       "--> Start visiting S_bend_alter" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14312,7 +14364,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bend& elt) // JMI
 
     ss <<
       "--> Start visiting S_bend" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14329,7 +14381,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_bend& elt)
 
     ss <<
       "--> Start visiting S_bend" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14344,14 +14396,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_bend& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical with float
   S_msrTechnicalWithFloat
     technicalWithFloat =
       msrTechnicalWithFloat::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalWithFloatKind::kTechnicalWithFloatBend,
         fBendAlterValue,
         placementKind);
@@ -14368,7 +14420,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_double_tongue& elt)
 
     ss <<
       "--> Start visiting S_double_tongue" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14383,14 +14435,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_double_tongue& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalDoubleTongue,
         placementKind);
 
@@ -14405,7 +14457,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_down_bow& elt)
 
     ss <<
       "--> Start visiting S_down_bow" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14420,14 +14472,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_down_bow& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalDownBow,
         placementKind);
 
@@ -14442,7 +14494,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingering& elt)
 
     ss <<
       "--> Start visiting S_fingering" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14460,14 +14512,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingering& elt)
     msrPlacementKind
       placementKind =
         msrPlacementKindFromString (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           placementString);
 
   // create the technical with integer
     S_msrTechnicalWithInteger
       technicalWithInteger =
         msrTechnicalWithInteger::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrTechnicalWithIntegerKind::kFingering,
           fingeringValue,
           placementKind);
@@ -14489,7 +14541,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingering& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -14503,7 +14555,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingernails& elt)
 
     ss <<
       "--> Start visiting S_fingernails" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14518,14 +14570,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fingernails& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalFingernails,
         placementKind);
 
@@ -14540,7 +14592,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fret& elt)
 
     ss <<
       "--> Start visiting S_fret" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14564,7 +14616,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fret& elt)
     S_msrTechnicalWithInteger
       technicalWithInteger =
         msrTechnicalWithInteger::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrTechnicalWithIntegerKind::kFret,
           fretValue,
           fretPlacementKind);
@@ -14586,7 +14638,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fret& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -14600,7 +14652,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hammer_on& elt)
 
     ss <<
       "--> Start visiting S_hammer_on" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14630,7 +14682,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hammer_on& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -14643,14 +14695,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hammer_on& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalWithStringKind::kHammerOn,
         hammerOnTechnicalTypeKind,
         hammerOnValue,
@@ -14667,7 +14719,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_handbell& elt)
 
     ss <<
       "--> Start visiting S_handbell" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14684,14 +14736,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_handbell& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalWithStringKind::kHandbell,
         msrTechnicalTypeKind::kTechnicalType_UNKNOWN_,
         handBellValue,
@@ -14708,7 +14760,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmonic& elt)
 
     ss <<
       "--> Start visiting S_harmonic" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14723,7 +14775,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmonic& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // print-object
@@ -14734,14 +14786,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmonic& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalHarmonic,
         placementKind);
 
@@ -14756,7 +14808,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_heel& elt)
 
     ss <<
       "--> Start visiting S_heel" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14771,14 +14823,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_heel& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalHeel,
         placementKind);
 
@@ -14793,7 +14845,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hole& elt)
 
     ss <<
       "--> Start visiting S_hole" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14808,14 +14860,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_hole& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalHole,
         placementKind);
 
@@ -14830,7 +14882,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_open_string& elt)
 
     ss <<
       "--> Start visiting S_open_string" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14845,14 +14897,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_open_string& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalOpenString,
         placementKind);
 
@@ -14867,7 +14919,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_technical& elt)
 
     ss <<
       "--> Start visiting S_other_technical" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14884,14 +14936,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_technical& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalWithStringKind::kOtherTechnical,
         msrTechnicalTypeKind::kTechnicalType_UNKNOWN_,
         otherTechnicalValue,
@@ -14908,7 +14960,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pluck& elt)
 
     ss <<
       "--> Start visiting S_pluck" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14925,14 +14977,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pluck& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalWithStringKind::kPluck,
         msrTechnicalTypeKind::kTechnicalType_UNKNOWN_,
         pluckValue,
@@ -14949,7 +15001,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pull_off& elt)
 
     ss <<
       "--> Start visiting S_pull_off" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -14979,7 +15031,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pull_off& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -14992,14 +15044,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pull_off& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical with std::string
   S_msrTechnicalWithString
     technicalWithString =
       msrTechnicalWithString::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalWithStringKind::kPullOff,
         pullOffTechnicalTypeKind,
         pullOffValue,
@@ -15016,7 +15068,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_snap_pizzicato& elt)
 
     ss <<
       "--> Start visiting S_snap_pizzicato" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15031,14 +15083,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_snap_pizzicato& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalSnapPizzicato,
         placementKind);
 
@@ -15053,7 +15105,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stopped& elt)
 
     ss <<
       "--> Start visiting S_stopped" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15068,14 +15120,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_stopped& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalStopped,
         placementKind);
 
@@ -15090,7 +15142,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_string& elt)
 
     ss <<
       "--> Start visiting S_string" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15126,7 +15178,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_string& elt)
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
   }
 
@@ -15138,14 +15190,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_string& elt)
     msrPlacementKind
       placementKind =
         msrPlacementKindFromString (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           placementString);
 
   // create the technical with integer
     S_msrTechnicalWithInteger
       technicalWithInteger =
         msrTechnicalWithInteger::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrTechnicalWithIntegerKind::kString,
           stringIntegerValue,
           placementKind);
@@ -15167,7 +15219,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_string& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -15181,7 +15233,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tap& elt)
 
     ss <<
       "--> Start visiting S_tap" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15196,14 +15248,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tap& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalTap,
         placementKind);
 
@@ -15218,7 +15270,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_thumb_position& elt)
 
     ss <<
       "--> Start visiting S_thumb_position" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15233,14 +15285,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_thumb_position& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalThumbPosition,
         placementKind);
 
@@ -15255,7 +15307,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_toe& elt)
 
     ss <<
       "--> Start visiting S_toe" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15270,14 +15322,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_toe& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalToe,
         placementKind);
 
@@ -15292,7 +15344,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_triple_tongue& elt)
 
     ss <<
       "--> Start visiting S_triple_tongue" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15307,14 +15359,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_triple_tongue& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalTripleTongue,
         placementKind);
 
@@ -15329,7 +15381,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_up_bow& elt)
 
     ss <<
       "--> Start visiting S_up_bow" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15344,14 +15396,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_up_bow& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the technical
   S_msrTechnical
     technical =
       msrTechnical::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrTechnicalKind::kTechnicalUpBow,
         placementKind);
 
@@ -15367,7 +15419,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
 
     ss <<
       "--> Start visiting S_fermata" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15402,7 +15454,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -15432,7 +15484,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -15442,7 +15494,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fermata& elt)
   S_msrFermata
     fermata =
       msrFermata::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fermataShapeKind,
         articulationFermataType);
 
@@ -15458,7 +15510,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ornaments& elt)
 
     ss <<
       "--> Start visiting S_ornaments" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15475,7 +15527,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
     ss <<
       "--> Start visiting tremolo" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15500,7 +15552,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
   }
 
@@ -15513,7 +15565,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -15542,7 +15594,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -15561,7 +15613,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 */
 
@@ -15609,7 +15661,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -15629,7 +15681,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
         ss <<
           "Creating a single tremolo" <<
-          ", line " << elt->getInputStartLineNumber () <<
+          ", line " << elt->getInputLineNumber () <<
           ", " <<
           mfSingularOrPlural (
             tremoloMarksNumber, "mark", "marks") <<
@@ -15645,7 +15697,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
       fCurrentSingleTremolo =
         msrSingleTremolo::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           tremoloMarksNumber,
           singleTremoloPlacementKind);
       break;
@@ -15666,7 +15718,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
           ss <<
             "Creating a double tremolo" <<
-            ", line " << elt->getInputStartLineNumber () <<
+            ", line " << elt->getInputLineNumber () <<
             ", " <<
             mfSingularOrPlural (
               tremoloMarksNumber, "mark", "marks") <<
@@ -15682,7 +15734,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
         fCurrentDoubleTremolo =
           msrDoubleTremolo::create (
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             msrDoubleTremoloKind::kDoubleTremoloNotes,
             msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart,
             tremoloMarksNumber,
@@ -15698,7 +15750,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -15713,7 +15765,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
           ss <<
             "Meeting a double tremolo stop" <<
-            ", line " << elt->getInputStartLineNumber ();
+            ", line " << elt->getInputLineNumber ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -15732,7 +15784,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tremolo& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -15748,7 +15800,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_trill_mark& elt)
 
     ss <<
       "--> Start visiting S_trill_mark" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15765,14 +15817,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_trill_mark& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentTrill,
         placementKind);
 
@@ -15789,7 +15841,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_dashes& elt)
 
     ss <<
       "--> Start visiting S_dashes" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15825,7 +15877,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_dashes& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -15838,7 +15890,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_dashes& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // color ??? JMI
@@ -15847,7 +15899,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_dashes& elt)
   S_msrSpanner
     spanner =
       msrSpanner::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         dashesNumber,
         msrSpannerKind::kSpannerDashes,
         fDashesSpannerTypeKind,
@@ -15895,7 +15947,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
 
     ss <<
       "--> Start visiting S_wavy_line" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -15929,7 +15981,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -15942,7 +15994,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // color JMI ???
@@ -15951,7 +16003,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
   S_msrSpanner
     spanner =
       msrSpanner::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         wavyLineNumber,
         msrSpannerKind::kSpannerWavyLine,
         fWavyLineSpannerTypeKind,
@@ -15977,7 +16029,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_wavy_line& elt)
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           ss.str ());
       }
       else {
@@ -16009,7 +16061,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_turn& elt)
 
     ss <<
       "--> Start visiting S_turn" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16024,14 +16076,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_turn& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentTurn,
         placementKind);
 
@@ -16048,7 +16100,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inverted_turn& elt)
 
     ss <<
       "--> Start visiting S_inverted_turn" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16063,14 +16115,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inverted_turn& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentInvertedTurn,
         placementKind);
 
@@ -16087,7 +16139,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_delayed_turn& elt)
 
     ss <<
       "--> Start visiting S_delayed_turn" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16102,14 +16154,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_delayed_turn& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentDelayedTurn,
         placementKind);
 
@@ -16126,7 +16178,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_delayed_inverted_turn& elt)
 
     ss <<
       "--> Start visiting S_delayed_inverted_turn" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16141,14 +16193,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_delayed_inverted_turn& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentDelayedInvertedTurn,
         placementKind);
 
@@ -16165,7 +16217,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_vertical_turn& elt)
 
     ss <<
       "--> Start visiting S_vertical_turn" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16180,14 +16232,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_vertical_turn& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentVerticalTurn,
         placementKind);
 
@@ -16204,7 +16256,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mordent& elt)
 
     ss <<
       "--> Start visiting S_mordent" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16219,14 +16271,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mordent& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentMordent,
         placementKind);
 
@@ -16243,7 +16295,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inverted_mordent& elt)
 
     ss <<
       "--> Start visiting S_inverted_mordent" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16258,14 +16310,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inverted_mordent& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentInvertedMordent,
         placementKind);
 
@@ -16282,7 +16334,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_schleifer& elt)
 
     ss <<
       "--> Start visiting S_schleifer" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16297,14 +16349,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_schleifer& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentSchleifer,
         placementKind);
 
@@ -16321,7 +16373,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_shake& elt)
 
     ss <<
       "--> Start visiting S_shake" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16336,14 +16388,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_shake& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentShake,
         placementKind);
 
@@ -16360,7 +16412,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental_mark& elt)
 
     ss <<
       "--> Start visiting S_accidental_mark" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16535,7 +16587,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental_mark& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -16547,14 +16599,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accidental_mark& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // create the ornament
   S_msrOrnament
     ornament =
       msrOrnament::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         msrOrnamentKind::kOrnamentAccidentalKind,
         placementKind);
 
@@ -16575,7 +16627,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_ornaments& elt)
 
     ss <<
       "--> End visiting S_ornaments" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16593,7 +16645,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_f& elt)
 
     ss <<
       "--> Start visiting S_f" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16608,7 +16660,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_f& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -16621,7 +16673,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_f& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicF,
           placementKind);
 
@@ -16636,7 +16688,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
 
     ss <<
       "--> Start visiting S_ff" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16651,7 +16703,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -16664,7 +16716,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ff& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicFF,
           placementKind);
 
@@ -16679,7 +16731,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
 
     ss <<
       "--> Start visiting S_fff" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16694,7 +16746,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -16707,7 +16759,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fff& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicFFF,
           placementKind);
 
@@ -16722,7 +16774,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
 
     ss <<
       "--> Start visiting S_ffff" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16737,7 +16789,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -16750,7 +16802,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffff& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicFFFF,
           placementKind);
 
@@ -16765,7 +16817,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
 
     ss <<
       "--> Start visiting S_fffff" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16780,7 +16832,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -16793,7 +16845,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fffff& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicFFFFF,
           placementKind);
 
@@ -16808,7 +16860,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
 
     ss <<
       "--> Start visiting S_ffffff" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16823,7 +16875,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -16836,7 +16888,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ffffff& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicFFFFFF,
           placementKind);
 
@@ -16852,7 +16904,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_p& elt)
 
     ss <<
       "--> Start visiting S_p" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16867,7 +16919,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_p& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -16880,7 +16932,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_p& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicP,
           placementKind);
 
@@ -16895,7 +16947,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
 
     ss <<
       "--> Start visiting S_pp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16910,7 +16962,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -16923,7 +16975,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicPP,
           placementKind);
 
@@ -16938,7 +16990,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
 
     ss <<
       "--> Start visiting S_ppp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16953,7 +17005,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -16966,7 +17018,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicPPP,
           placementKind);
 
@@ -16981,7 +17033,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
 
     ss <<
       "--> Start visiting S_pppp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -16996,7 +17048,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17009,7 +17061,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicPPPP,
           placementKind);
 
@@ -17024,7 +17076,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
 
     ss <<
       "--> Start visiting S_ppppp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17039,7 +17091,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17052,7 +17104,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_ppppp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicPPPPP,
           placementKind);
 
@@ -17067,7 +17119,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
 
     ss <<
       "--> Start visiting S_pppppp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17082,7 +17134,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17095,7 +17147,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pppppp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicPPPPPP,
           placementKind);
 
@@ -17111,7 +17163,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mf& elt)
 
     ss <<
       "--> Start visiting S_mf" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17126,7 +17178,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mf& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17139,7 +17191,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mf& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicMF,
           placementKind);
 
@@ -17154,7 +17206,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
 
     ss <<
       "--> Start visiting S_mp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17169,7 +17221,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17182,7 +17234,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_mp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicMP,
           placementKind);
 
@@ -17198,7 +17250,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fp& elt)
 
     ss <<
       "--> Start visiting S_fp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17213,7 +17265,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17226,7 +17278,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicFP,
           placementKind);
 
@@ -17242,7 +17294,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fz& elt)
 
     ss <<
       "--> Start visiting S_fz" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17257,7 +17309,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fz& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17270,7 +17322,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_fz& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicFZ,
           placementKind);
 
@@ -17286,7 +17338,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pf& elt)
 
     ss <<
       "--> Start visiting S_pf" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17301,7 +17353,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pf& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17314,7 +17366,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pf& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicPF,
           placementKind);
 
@@ -17330,7 +17382,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rf& elt)
 
     ss <<
       "--> Start visiting S_rf" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17345,7 +17397,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rf& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17358,7 +17410,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rf& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicRF,
           placementKind);
 
@@ -17374,7 +17426,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sf& elt)
 
     ss <<
       "--> Start visiting S_sf" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17389,7 +17441,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sf& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17402,7 +17454,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sf& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicSF,
           placementKind);
 
@@ -17418,7 +17470,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rfz& elt)
 
     ss <<
       "--> Start visiting S_rfz" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17433,7 +17485,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rfz& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17446,7 +17498,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rfz& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicRFZ,
           placementKind);
 
@@ -17462,7 +17514,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfz& elt)
 
     ss <<
       "--> Start visiting S_sfz" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17477,7 +17529,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfz& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17490,7 +17542,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfz& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicSFZ,
           placementKind);
 
@@ -17506,7 +17558,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfp& elt)
 
     ss <<
       "--> Start visiting S_sfp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17521,7 +17573,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17534,7 +17586,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicSFP,
           placementKind);
 
@@ -17550,7 +17602,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfpp& elt)
 
     ss <<
       "--> Start visiting S_sfpp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17565,7 +17617,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfpp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17578,7 +17630,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfpp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicSFPP,
           placementKind);
 
@@ -17594,7 +17646,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sffz& elt)
 
     ss <<
       "--> Start visiting S_sffz" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17609,7 +17661,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sffz& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17622,7 +17674,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sffz& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicSFFZ,
           placementKind);
 
@@ -17638,7 +17690,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfzp& elt)
 
     ss <<
       "--> Start visiting S_sfzp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17653,7 +17705,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfzp& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17666,7 +17718,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sfzp& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicSFZP,
           placementKind);
 
@@ -17682,7 +17734,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_n& elt)
 
     ss <<
       "--> Start visiting S_n" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17697,7 +17749,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_n& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17710,7 +17762,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_n& elt)
     S_msrDynamic
       dynamics =
         msrDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           msrDynamicKind::kDynamicN,
           placementKind);
 
@@ -17726,7 +17778,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
 
     ss <<
       "--> Start visiting S_other_dynamics" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17743,7 +17795,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17756,7 +17808,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_other_dynamics& elt)
     S_msrOtherDynamic
       otherDynamic =
         msrOtherDynamic::create (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           otherDynamicsValue,
           placementKind);
 
@@ -17789,7 +17841,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damper_pedal& elt)
 
     ss <<
       "--> Start visiting S_damper_pedal" <<
-      ", line " << elt->getInputStartLineNumber () <<
+      ", line " << elt->getInputLineNumber () <<
       std::endl;
 #endif // MF_TRACE_IS_ENABLED
 
@@ -17821,7 +17873,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damper_pedal& elt)
         "\" should be between 0 and 100";
 
       mxsr2msrError (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         ss.str ());
     }
 
@@ -17831,7 +17883,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damper_pedal& elt)
 / * JMI
     if (! damperPedalValue.empty ()) {
       mxsr2msrError (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         "unknown damper pedal \"" +
           damperPedalValue +
           "\", should be 'yes', 'no' or a number from 0 to 100");
@@ -17843,7 +17895,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damper_pedal& elt)
   S_msrDamperPedal
     damperPedal =
       msrDamperPedal::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         otherDynamicsValue);
 
 }
@@ -17856,7 +17908,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_soft_pedal& elt)
 
     ss <<
       "--> Start visiting S_soft_pedal" <<
-       ", line " << elt->getInputStartLineNumber () <<
+       ", line " << elt->getInputLineNumber () <<
      std::endl;
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -17866,7 +17918,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_soft_pedal& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17878,7 +17930,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_soft_pedal& elt)
   S_msrOtherDynamic
     otherDynamic =
       msrOtherDynamic::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         otherDynamicsValue);
 
   fPendingOtherDynamicxList.push_back(otherDynamic);
@@ -17892,7 +17944,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
 
     ss <<
       "--> Start visiting S_sostenuto_pedal" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17905,7 +17957,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
   msrPlacementKind
     placementKind =
       msrPlacementKindFromString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         placementString);
 
   // should the placement be forced to 'below'?
@@ -17917,7 +17969,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sostenuto_pedal& elt)
   S_msrOtherDynamic
     otherDynamic =
       msrOtherDynamic::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         otherDynamicsValue);
 
   fPendingOtherDynamicxList.push_back(otherDynamic);
@@ -17933,7 +17985,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_grace& elt)
 
     ss <<
       "--> Start visiting S_grace" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -17961,7 +18013,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_grace& elt)
     if (! slashString.empty ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         "grace slash \"" + slashString + "\" unknown, should be 'yes' or 'no'");
     }
@@ -18000,7 +18052,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_cue& elt)
 
     ss <<
       "--> Start visiting S_cue" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18023,7 +18075,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_chord& elt)
 
     ss <<
       "--> Start visiting S_chord" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18043,7 +18095,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_time_modification& elt)
 
     ss <<
       "--> Start visiting S_time_modification" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18065,7 +18117,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_actual_notes& elt)
 
     ss <<
       "--> Start visiting S_actual_notes" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18130,7 +18182,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_actual_notes& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -18144,7 +18196,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_notes& elt)
 
     ss <<
       "--> Start visiting S_normal_notes" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18211,7 +18263,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_notes& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -18225,7 +18277,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
 
     ss <<
       "--> Start visiting S_normal_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18253,7 +18305,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
     // the type contains a display duration
     fCurrentNoteNormalTypeNotesDuration =
       msrNotesDurationKindFromMusicXMLString (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         normalTypeString);
 
   /*
@@ -18294,7 +18346,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -18308,7 +18360,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 
     ss <<
       "--> Start visiting S_tuplet" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18343,7 +18395,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 //
 //         ss <<
 //           "--> There is a tuplet start" <<
-//           ", line " << elt->getInputStartLineNumber ();
+//           ", line " << elt->getInputLineNumber ();
 //
 //         gWaeHandler->waeTrace (
 //           __FILE__, __LINE__,
@@ -18361,7 +18413,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 //
 //         ss <<
 //           "--> There is a tuplet stop" <<
-//           ", line " << elt->getInputStartLineNumber ();
+//           ", line " << elt->getInputLineNumber ();
 //
 //         gWaeHandler->waeTrace (
 //           __FILE__, __LINE__,
@@ -18379,7 +18431,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 
         ss <<
           "--> There is a tuplet continue" <<
-          ", line " << elt->getInputStartLineNumber ();
+          ", line " << elt->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -18397,7 +18449,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -18426,7 +18478,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -18438,12 +18490,12 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
           ss <<
             "tuplet bracket is empty: this is implementation dependent," <<
             " \"yes\" is assumed" <<
-            ", line " << elt->getInputStartLineNumber () <<
+            ", line " << elt->getInputLineNumber () <<
             std::endl; // option ??? JMI v0.9.68
 
           mxsr2msrWarning (
             gServiceRunData->getInputSourceName (),
-            elt->getInputStartLineNumber (),
+            elt->getInputLineNumber (),
             ss.str ());
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -18472,7 +18524,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
       if (! tupletShowNumber.empty ()) {
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           "tuplet show-number \"" + tupletShowNumber + "\" is unknown");
       }
@@ -18499,7 +18551,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
       if (! tupletShowType.empty ()) {
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           "tuplet show-type \"" + tupletShowType + "\" is unknown");
       }
@@ -18528,7 +18580,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 
         mxsr2msrError (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -18541,7 +18593,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 
   fCurrentTupletPlacementKind =
     msrPlacementKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       placementString);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -18562,7 +18614,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet& elt)
 
     ss <<
       "--> End visiting S_tuplet" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18587,7 +18639,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_actual& elt)
 
     ss <<
       "--> Start visiting S_tuplet_actual" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18606,7 +18658,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_actual& elt)
 
     ss <<
       "--> End visiting S_tuplet_actual" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18625,7 +18677,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_normal& elt)
 
     ss <<
       "--> Start visiting S_tuplet_normal" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18644,7 +18696,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet_normal& elt)
 
     ss <<
       "--> End visiting S_tuplet_normal" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18663,7 +18715,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_number& elt)
 
     ss <<
       "--> Start visiting S_tuplet_number" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18683,7 +18735,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_number& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<tuplet-number /> out of context");
   }
@@ -18713,7 +18765,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_type& elt)
 
     ss <<
       "--> Start visiting S_tuplet_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18733,7 +18785,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_type& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<tuplet-type /> out of context");
   }
@@ -18763,7 +18815,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_dot& elt)
 
     ss <<
       "--> Start visiting S_tuplet_dot" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18780,7 +18832,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_dot& elt)
   else {
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       "<tuplet-dot /> out of context");
   }
@@ -18797,7 +18849,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
 
     ss <<
       "--> Start visiting S_glissando" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18832,7 +18884,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -18861,7 +18913,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
     if (! glissandoLineType.empty ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         "glissando line-type \"" + glissandoLineType + "\" is unknown");
     }
@@ -18887,7 +18939,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_glissando& elt)
   S_msrGlissando
     glissando =
       msrGlissando::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         glissandoNumber,
         glissandoTypeKind,
         glissandoLineTypeKind,
@@ -18921,7 +18973,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
 
     ss <<
       "--> Start visiting S_slide" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -18956,7 +19008,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -18985,7 +19037,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
     if (! slideLineType.empty ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         "slide line-type \"" + slideLineType + "\" is unknown");
     }
@@ -19013,7 +19065,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slide& elt)
   S_msrSlide
     slide =
       msrSlide::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         slideNumber,
         slideTypeKind,
         slideLineTypeKind,
@@ -19047,7 +19099,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rest& elt)
 
     ss <<
       "--> Start visiting S_rest" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -19109,7 +19161,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rest& elt)
     if (! restMeasure.empty ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         "rest measure \"" + restMeasure + "\" is unknown");
     }
@@ -19125,7 +19177,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_display_step& elt)
 
     ss <<
       "--> Start visiting S_display_step" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -19136,7 +19188,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_display_step& elt)
   std::string displayStep = elt->getValue();
 
   checkStep (
-    elt->getInputStartLineNumber (),
+    elt->getInputLineNumber (),
     displayStep,
     "<display-step/>");
 
@@ -19157,7 +19209,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_display_octave& elt)
 
     ss <<
       "--> Start visiting S_display_octave" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -19176,7 +19228,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_display_octave& elt)
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
 
     displayOctaveNumber = 0;
@@ -19184,7 +19236,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_display_octave& elt)
 
   fCurrentDisplayOctave =
     msrOctaveKindFromNumber (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       displayOctaveNumber);
 }
 
@@ -19196,7 +19248,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_unpitched& elt)
 
     ss <<
       "--> End visiting S_unpitched" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -19500,7 +19552,7 @@ void mxsr2msrSkeletonPopulator::handleTupletContinue (
         fCurrentTupletStackTop->asString () <<
         " in voice " <<
         currentNoteVoice->getVoiceName () <<
-        ", line " << note->getInputStartLineNumber () <<
+        ", line " << note->getInputLineNumber () <<
         std::endl;
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -19521,11 +19573,11 @@ void mxsr2msrSkeletonPopulator::handleTupletContinue (
       note->
         asShortString () <<
       " cannot be handled, tuplets stack is empty" <<
-      ", line " << note->getInputStartLineNumber ();
+      ", line " << note->getInputLineNumber ();
 
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
-      note->getInputStartLineNumber (),
+      note->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -19545,7 +19597,7 @@ void mxsr2msrSkeletonPopulator::handleTupletEnd (
 
       ss <<
         "An outermost tuplet ends at line " <<
-        note->getInputStartLineNumber () <<
+        note->getInputLineNumber () <<
         " in voice " <<
         currentNoteVoice->getVoiceName ();
 
@@ -19567,7 +19619,7 @@ void mxsr2msrSkeletonPopulator::handleTupletEnd (
 
       ss <<
         "A nested tuplet ends at line " <<
-        note->getInputStartLineNumber () <<
+        note->getInputLineNumber () <<
         " in voice " <<
         currentNoteVoice->getVoiceName ();
 
@@ -19629,7 +19681,7 @@ void mxsr2msrSkeletonPopulator::handleTupletEnd (
         fCurrentTupletStackTop->asString () <<
         " in voice " <<
         currentNoteVoice->getVoiceName () <<
-        ", line " << note->getInputStartLineNumber ();
+        ", line " << note->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -19641,7 +19693,7 @@ void mxsr2msrSkeletonPopulator::handleTupletEnd (
       endingTuplet =
         fCurrentRecipientMxsrVoice->
           popTupletStackTop (
-            note->getInputStartLineNumber (),
+            note->getInputLineNumber (),
             "handleTupletEnd()");
 
     // append endingTuplet where it belongs in fCurrentRecipientMxsrVoice->
@@ -19666,11 +19718,11 @@ void mxsr2msrSkeletonPopulator::handleTupletEnd (
       note->
         asShortString () <<
       " cannot be handled, tuplets stack is empty" <<
-      ", line " << note->getInputStartLineNumber ();
+      ", line " << note->getInputLineNumber ();
 
     mxsr2msrInternalError (
       gServiceRunData->getInputSourceName (),
-      note->getInputStartLineNumber (),
+      note->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -19970,7 +20022,7 @@ void mxsr2msrSkeletonPopulator::attachCurrentSpannersToNote (
         "Attaching current spanners to note " <<
         fCurrentNote->asString () <<
         ", context: " << context <<
-        ", line " << fCurrentNote->getInputStartLineNumber () <<
+        ", line " << fCurrentNote->getInputLineNumber () <<
         std::endl;
 
     gWaeHandler->waeTrace (
@@ -20796,7 +20848,7 @@ void mxsr2msrSkeletonPopulator::attachPendingDynamicsToCurrentNote ()
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          fCurrentNote->getInputStartLineNumber (),
+          fCurrentNote->getInputLineNumber (),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -20864,7 +20916,7 @@ void mxsr2msrSkeletonPopulator::attachPendingOtherDynamicsToCurrentNote ()
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          fCurrentNote->getInputStartLineNumber (),
+          fCurrentNote->getInputLineNumber (),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -20931,7 +20983,7 @@ void mxsr2msrSkeletonPopulator::attachPendingWordsToCurrentNote ()
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          fCurrentNote->getInputStartLineNumber (),
+          fCurrentNote->getInputLineNumber (),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21000,7 +21052,7 @@ void mxsr2msrSkeletonPopulator::attachPendingBeamsToCurrentNote ()
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          fCurrentNote->getInputStartLineNumber (),
+          fCurrentNote->getInputLineNumber (),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21066,7 +21118,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlursToCurrentNote ()
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        fCurrentNote->getInputStartLineNumber (),
+        fCurrentNote->getInputLineNumber (),
         ss.str ());
     }
   }
@@ -21136,7 +21188,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          fCurrentNote->getInputStartLineNumber (),
+          fCurrentNote->getInputLineNumber (),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21164,7 +21216,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          fCurrentNote->getInputStartLineNumber (),
+          fCurrentNote->getInputLineNumber (),
           ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -21259,7 +21311,7 @@ void mxsr2msrSkeletonPopulator::attachPendingLigaturesToCurrentNote ()
 //                 " in voice \"" <<
 //                 noteVoice->getVoiceName () <<
 //                 "\"" <<
-              ", line " << ligature->getInputStartLineNumber () <<
+              ", line " << ligature->getInputLineNumber () <<
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
@@ -21322,7 +21374,7 @@ void mxsr2msrSkeletonPopulator::attachPendingPedalsToCurrentNote ()
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        fCurrentNote->getInputStartLineNumber (),
+        fCurrentNote->getInputLineNumber (),
         ss.str ());
     }
   }
@@ -21386,7 +21438,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlashesToCurrentNote ()
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        fCurrentNote->getInputStartLineNumber (),
+        fCurrentNote->getInputLineNumber (),
         ss.str ());
     }
   }
@@ -21447,7 +21499,7 @@ void mxsr2msrSkeletonPopulator::attachPendingWedgesToCurrentNote ()
 
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          fCurrentNote->getInputStartLineNumber (),
+          fCurrentNote->getInputLineNumber (),
           ss.str ());
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -21516,7 +21568,7 @@ void mxsr2msrSkeletonPopulator::attachPendingGlissandosToCurrentNote ()
             "--> attachPendingGlissandosToNote ()"
             ", voiceStanzasMap.size (): " <<
             voiceStanzasMap.size () <<
-            ", line " << glissando->getInputStartLineNumber () <<
+            ", line " << glissando->getInputLineNumber () <<
             std::endl;
         }
 #endif // MF_TRACE_IS_ENABLED
@@ -21576,7 +21628,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
                 "--> attachPendingSlidesToNote ()"
                 ", voiceStanzasMap.size (): " <<
                 voiceStanzasMap.size () <<
-                ", line " << slide->getInputStartLineNumber () <<
+                ", line " << slide->getInputLineNumber () <<
                 std::endl;
             }
 #endif // MF_TRACE_IS_ENABLED
@@ -21592,7 +21644,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
                 "Attaching a skip syllable to note " <<
                 fCurrentNote->asString () <<
                 " that has a slide stop and no lyrics " <<
-                ", line " << slide->getInputStartLineNumber () <<
+                ", line " << slide->getInputLineNumber () <<
                 std::endl;
             }
 #endif // MF_TRACE_IS_ENABLED
@@ -21607,7 +21659,7 @@ void mxsr2msrSkeletonPopulator::attachPendingSlidesToCurrentNote ()
               S_msrSyllable
                 syllable =
                   msrSyllable::create (
-                    slide->getInputStartLineNumber (),
+                    slide->getInputLineNumber (),
                     msrSyllableKind::kSyllableSkipRest,
                     msrSyllableExtendKind::kSyllableExtend_NONE, // fCurrentSyllableExtendKind, // JMI v0.9.67
                     fCurrentStanzaNumber,
@@ -22153,7 +22205,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteWithCurrentInformations (
       ss.str ());
 
     displayStaffAndVoiceInformation (
-      fCurrentNote->getInputStartLineNumber (),
+      fCurrentNote->getInputLineNumber (),
       "populateCurrentNoteWithCurrentInformations())");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -22607,7 +22659,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
           fNoteSequentialNumber         : N1
           fNoteEventStaffNumber         : S2
           fNoteEventVoiceNumber         : V1
-          fStaffChangeEventKind         : kEventStaffChangeTakeOff
+          fStaffChangeEventKind         : kStaffChangeEventTakeOff
           fTakeOffInputStartLineNumber  : L120
           fLandingInputStartLineNumber  : L132
           fTakeOffStaffNumber           : S2
@@ -22660,12 +22712,12 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
     int
       noteSequentialNumber =
         fCurrentNoteStaffChangeTakeOff->
-          getEventNoteSequentialNumber ();
+          getNoteSequentialNumber ();
 
     int
       eventInputStartLineNumber =
         fCurrentNoteStaffChangeTakeOff->
-          getEventInputStartLineNumber ();
+          getEventInputLineNumber ();
 
     // sanity checks
     if (noteSequentialNumber != fCurrentNoteSequentialNumber) {
@@ -22728,10 +22780,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
     int
       eventInputStartLineNumber =
         staffChangeTakeOffEvent->
-          getEventInputStartLineNumber ();
-//       eventInputEndLineNumber =
-//         staffChangeTakeOffEvent->
-//           getEventInputEndLineNumber ();
+          getEventInputLineNumber ();
 
     int
       takeOffStaffNumber =
@@ -22750,7 +22799,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
     int
       noteSequentialNumber =
         staffChangeTakeOffEvent->
-          getEventNoteSequentialNumber ();
+          getNoteSequentialNumber ();
 
     gLog <<
       "There is a staff change createStaffChange():" <<
@@ -22770,8 +22819,6 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 // 				'\n' <<
 // 				"eventInputStartLineNumber: " <<
 // 				eventInputStartLineNumber <<
-// 				"eventInputEndLineNumber: " <<
-// 				eventInputEndLineNumber <<
 //
 // 				", noteSequentialNumber: " <<
 // 				noteSequentialNumber <<
@@ -22878,7 +22925,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
           fNoteSequentialNumber      : N1
           fNoteEventStaffNumber      : S1
           fNoteEventVoiceNumber      : V1
-          fGraceEventKind            : kEventGraceBegin
+          fGraceEventKind            : kGraceEventBegin
         ]
 */
 
@@ -22909,7 +22956,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
   int
     eventInputStartLineNumber =
       fCurrentNoteGraceBeginEvent->
-        getEventInputStartLineNumber ();
+        getEventInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
@@ -22933,7 +22980,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
     int
       noteSequentialNumber =
         fCurrentNoteGraceBeginEvent->
-          getEventNoteSequentialNumber ();
+          getNoteSequentialNumber ();
 
     // sanity checks
     if (noteSequentialNumber != fCurrentNoteSequentialNumber) {
@@ -23034,7 +23081,7 @@ void mxsr2msrSkeletonPopulator::handleGraceEndEventIfAny ()
           fNoteSequentialNumber      : N4
           fNoteEventStaffNumber      : S1
           fNoteEventVoiceNumber      : V1
-          fGraceEventKind            : kEventGraceEnd
+          fGraceEventKind            : kGraceEventEnd
         ]
 */
 
@@ -23065,7 +23112,7 @@ void mxsr2msrSkeletonPopulator::handleGraceEndEventIfAny ()
   int
     eventInputEndLineNumber =
       fCurrentNoteGraceEndEvent->
-        getEventInputStartLineNumber ();
+        getEventInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
@@ -23089,7 +23136,7 @@ void mxsr2msrSkeletonPopulator::handleGraceEndEventIfAny ()
     int
       noteSequentialNumber =
         fCurrentNoteGraceEndEvent->
-          getEventNoteSequentialNumber ();
+          getNoteSequentialNumber ();
 
     // sanity checks
     if (noteSequentialNumber != fCurrentNoteSequentialNumber) {
@@ -23164,15 +23211,15 @@ void mxsr2msrSkeletonPopulator::handleChordBeginEventIfAny ()
 
   if (fCurrentNoteChordBegin) {
     switch (fCurrentNoteChordBegin->getChordEventKind ()) {
-      case mxsrChordEventKind::kEventChord_NONE:
+      case mxsrChordEventKind::kChordEvent_NONE:
         // should not occur
         break;
 
-      case mxsrChordEventKind::kEventChordBegin:
+      case mxsrChordEventKind::kChordEventBegin:
         handleChordBegin ();
         break;
 
-      case mxsrChordEventKind::kEventChordEnd:
+      case mxsrChordEventKind::kChordEventEnd:
         // should not occur
         break;
     } // switch
@@ -23202,15 +23249,15 @@ void mxsr2msrSkeletonPopulator::handleChordEndEventIfAny ()
 #endif // MF_TRACE_IS_ENABLED
 
     switch (fCurrentNoteChordEnd->getChordEventKind ()) {
-      case mxsrChordEventKind::kEventChord_NONE:
+      case mxsrChordEventKind::kChordEvent_NONE:
         // should not occur
         break;
 
-      case mxsrChordEventKind::kEventChordBegin:
+      case mxsrChordEventKind::kChordEventBegin:
         // nothing here, already handled earlier in this method
         break;
 
-      case mxsrChordEventKind::kEventChordEnd:
+      case mxsrChordEventKind::kChordEventEnd:
         if (! fCurrentChordHasBeenPopulatedFromItsFirstNote) {
           // copy the current note's values to the current chord
           fCurrentChord->
@@ -23263,7 +23310,7 @@ void mxsr2msrSkeletonPopulator::handleChordBegin ()
   fCurrentChord =
     msrChord::create (
       fCurrentNoteChordBegin->
-        getEventInputStartLineNumber ());
+        getEventInputLineNumber ());
 
   // register it as not yet populated fron its first note
   fCurrentChordHasBeenPopulatedFromItsFirstNote = false;
@@ -23381,7 +23428,7 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEventsIfAny ()
         "--------> handleTupletBeginEventsIfAny()" <<
         ", tupletEventKind: " << tupletEventKind <<
         ", tupletNumber: " << tupletNumber <<
-        ", line " << tupletEvent->getEventInputStartLineNumber ();
+        ", line " << tupletEvent->getEventInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -23480,7 +23527,7 @@ void mxsr2msrSkeletonPopulator::handleTupletEndEventsIfAny ()
         "--------> handleTupletEndEventsIfAny()" <<
         ", tupletEventKind: " << tupletEventKind <<
         ", tupletNumber: " << tupletNumber <<
-        ", line " << tupletEvent->getEventInputStartLineNumber ();
+        ", line " << tupletEvent->getEventInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -23512,14 +23559,14 @@ void mxsr2msrSkeletonPopulator::handleTupletEndEventsIfAny ()
 #endif // MF_TRACE_IS_ENABLED
 
    switch (tupletEventKind) {
-      case mxsrTupletEventKind::kEventTuplet_NONE:
+      case mxsrTupletEventKind::kTupletEvent_NONE:
         // should not occur
         break;
 
-      case mxsrTupletEventKind::kEventTupletBegin:
+      case mxsrTupletEventKind::kTupletEventBegin:
         break;
 
-      case mxsrTupletEventKind::kEventTupletEnd:
+      case mxsrTupletEventKind::kTupletEventEnd:
 #ifdef MF_TRACE_IS_ENABLED
         if (gTraceOahGroup->getTraceTupletsBasics ()) {
           std::stringstream ss;
@@ -23528,7 +23575,7 @@ void mxsr2msrSkeletonPopulator::handleTupletEndEventsIfAny ()
             "---handleTupletEndEventsIfAnyfAny(): tuplet number " <<
             tupletNumber <<
             " is ending" <<
-            ", line " << tupletEvent->getEventInputStartLineNumber ();
+            ", line " << tupletEvent->getEventInputLineNumber ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -23552,7 +23599,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
     ss <<
       "--> End visiting S_note" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -23669,7 +23716,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // create the note
   fCurrentNote =
     createNote (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
@@ -23678,14 +23725,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
     ss <<
       "==> fCurrentRecipientMxsrVoice is now " <<
       fCurrentRecipientMsrVoice->asShortString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
 
     displayStaffAndVoiceInformation (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       "mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)");
   }
 #endif // MF_TRACE_IS_ENABLED
@@ -23702,11 +23749,11 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
   // populate fCurrentNote with current informations
   populateCurrentNoteWithCurrentInformations (
-    elt->getInputStartLineNumber ());
+    elt->getInputLineNumber ());
 
   // populate fCurrentNote with pending informations
   populateCurrentNoteWithPendingInformations (
-    elt->getInputStartLineNumber ());
+    elt->getInputLineNumber ());
 
 
   ////////////////////////////////////////////////////////////////////
@@ -23716,7 +23763,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   ////////////////////////////////////////////////////////////////////
 
   handleCurrentNote (
-    elt->getInputStartLineNumber ());
+    elt->getInputLineNumber ());
 
   // update current outermost tuplet relative offset if relevant
   if (! fCurrentNoteIsAGraceNote) {
@@ -23774,7 +23821,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
   // create a staff change if relevant
   if (fCurrentNoteStaffChangeTakeOff) {
     createStaffChange (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       fCurrentNoteStaffChangeTakeOff);
   }
 
@@ -23866,7 +23913,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
       ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
       ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asFractionString () <<
       ", currentNoteMeasurePosition: " << currentNoteMeasurePosition.asString () <<
-      ", line " << fCurrentNote->getInputStartLineNumber () <<
+      ", line " << fCurrentNote->getInputLineNumber () <<
       std::endl;
 
     ss <<
@@ -23956,7 +24003,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
         fCurrentNote->asShortString () <<
         " to part " <<
         fCurrentPart->fetchPartCombinedName () <<
-        ", line " << harmony->getInputStartLineNumber ()  <<
+        ", line " << harmony->getInputLineNumber ()  <<
         std::endl;
 
       ss <<
@@ -23991,7 +24038,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
 
     fCurrentPart->
       appendHarmonyToPart (
-        fCurrentOuterMostTuplet->getInputStartLineNumber (),
+        fCurrentOuterMostTuplet->getInputLineNumber (),
         harmony,
         harmonyMeasurePosition);
   }
@@ -24021,7 +24068,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
 
     fCurrentPart->
       appendHarmonyToPart (
-        fCurrentNote->getInputStartLineNumber (),
+        fCurrentNote->getInputLineNumber (),
         harmony,
         fCurrentNote->getMeasureElementMeasurePosition ());
   }
@@ -24054,7 +24101,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
       ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asFractionString () <<
       ", currentNoteMeasurePosition: " << currentNoteMeasurePosition.asString () <<
-      ", line " << fCurrentNote->getInputStartLineNumber () <<
+      ", line " << fCurrentNote->getInputLineNumber () <<
       std::endl;
 
     ss <<
@@ -24089,7 +24136,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       " harmonies for note " <<
       fCurrentNote->asShortString () <<
       " in offset relative order " <<
-      ", line " << fCurrentNote->getInputStartLineNumber ();
+      ", line " << fCurrentNote->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -24139,7 +24186,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       ss <<
         "--> handlePendingHarmony, " <<
         ", currentHarmony: " << currentHarmony->asString () <<
-        ", line " << currentHarmony->getInputStartLineNumber ();
+        ", line " << currentHarmony->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -24182,7 +24229,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
           ", offsetDelta: " << offsetDelta <<
           ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
           ", fraction: " << fraction <<
-          ", line " << currentHarmony->getInputStartLineNumber ();
+          ", line " << currentHarmony->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -24236,7 +24283,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
     ss <<
       "--> handlePendingHarmony, " <<
       ", lastHarmony: " << lastHarmony->asString () <<
-      ", line " << lastHarmony->getInputStartLineNumber ();
+      ", line " << lastHarmony->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -24278,7 +24325,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
       ", offsetDelta: " << offsetDelta <<
       ", fraction: " << fraction <<
-      ", line " << lastHarmony->getInputStartLineNumber ();
+      ", line " << lastHarmony->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -24307,14 +24354,14 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
   if (fCurrentOuterMostTuplet) {
     fCurrentPart->
       appendHarmoniesListToPart (
-        fCurrentOuterMostTuplet->getInputStartLineNumber (),
+        fCurrentOuterMostTuplet->getInputLineNumber (),
         fPendingHarmoniesList,
         fCurrentOuterMostTuplet->getMeasureElementMeasurePosition ());
   }
   else {
     fCurrentPart->
       appendHarmoniesListToPart (
-        fCurrentNote->getInputStartLineNumber (),
+        fCurrentNote->getInputLineNumber (),
         fPendingHarmoniesList,
         fCurrentNote->getMeasureElementMeasurePosition ());
   }
@@ -24403,7 +24450,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleFiguredBass (
   // append figuredBass to fCurrentPart
   fCurrentPart->
     appendFiguredBassToPart (
-      fCurrentNote->getInputStartLineNumber (),
+      fCurrentNote->getInputLineNumber (),
       figuredBass,
       fCurrentNote->getMeasureElementMeasurePosition ());
 }
@@ -24429,7 +24476,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
       fCurrentNote->asShortString () <<
       ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
       ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asFractionString () <<
-      ", line " << fCurrentNote->getInputStartLineNumber ();
+      ", line " << fCurrentNote->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -24460,7 +24507,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
         "handlePendingFiguredBass, " <<
         ", figuredBassSoundingWholeNotes: " << figuredBassSoundingWholeNotes.asFractionString () <<
         ", figuredBassWholeNotesDuration: " << figuredBassWholeNotesDuration <<
-        ", line " << currentFiguredBass->getInputStartLineNumber ();
+        ", line " << currentFiguredBass->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -24490,7 +24537,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
   // append the figured basses list to current part
   fCurrentPart->
     appendFiguredBassesListToPart (
-      fCurrentNote->getInputStartLineNumber (),
+      fCurrentNote->getInputLineNumber (),
       fPendingFiguredBassesList,
       fCurrentNote->getMeasureElementMeasurePosition ());
 
@@ -24586,7 +24633,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
       fCurrentNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
       ", fCurrentRecipientMxsrVoice: \"" <<
       fCurrentRecipientMsrVoice->getVoiceName () <<
-      "\", line " << fCurrentNote->getInputStartLineNumber () <<
+      "\", line " << fCurrentNote->getInputLineNumber () <<
       ":" <<
       std::endl;
 
@@ -24604,7 +24651,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
       "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<
-      fCurrentNote->getInputStartLineNumber () <<
+      fCurrentNote->getInputLineNumber () <<
       std::endl <<
       std::setw (fieldWidth) << "fCurrentNoteIsAGraceNote" << ": " <<
       fCurrentNoteIsAGraceNote <<
@@ -24617,7 +24664,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
         std::setw (fieldWidth) << "fPendingGraceNotesGroup" << ": " <<
         std::endl <<
         "======================= handleARegularNoteInAMeasure()" <<
-        ", line " << fCurrentNote->getInputStartLineNumber () <<
+        ", line " << fCurrentNote->getInputLineNumber () <<
         std::endl;
       fCurrentPart->print (gLog);
       gLog <<
@@ -24660,7 +24707,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
           ss <<
             "Appending single tremolo " <<
             fCurrentNote->asString () <<
-            ", line " << fCurrentNote->getInputStartLineNumber () <<
+            ", line " << fCurrentNote->getInputLineNumber () <<
             ", to voice \"" <<
             fCurrentRecipientMsrVoice->getVoiceName () <<
             "\"" <<
@@ -24688,7 +24735,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
           ss <<
             "Setting regular note " <<
             fCurrentNote->asString () <<
-            ", line " << fCurrentNote->getInputStartLineNumber () <<
+            ", line " << fCurrentNote->getInputLineNumber () <<
             ", as double tremolo first element" <<
             " in voice \"" <<
             fCurrentRecipientMsrVoice->getVoiceName () <<
@@ -24715,7 +24762,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
           ss <<
             "Setting regular note " <<
             fCurrentNote->asString () <<
-            ", line " << fCurrentNote->getInputStartLineNumber () <<
+            ", line " << fCurrentNote->getInputLineNumber () <<
             ", as double tremolo second element" <<
             " in voice \"" <<
             fCurrentRecipientMsrVoice->getVoiceName () <<
@@ -24754,7 +24801,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAMeasure (
       ss <<
         "Appending regular note " <<
         fCurrentNote->asString () <<
-        ", line " << fCurrentNote->getInputStartLineNumber () <<
+        ", line " << fCurrentNote->getInputLineNumber () <<
         ", to voice \"" <<
         fCurrentRecipientMsrVoice->getVoiceName () <<
         "\"";
@@ -24872,7 +24919,7 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
        rest->asShortString () << // NO, would lead to infinite recursion ??? JMI
       ", fCurrentRecipientMxsrVoice: \"" <<
       fCurrentRecipientMsrVoice->getVoiceName () <<
-      "\", line " << rest->getInputStartLineNumber () <<
+      "\", line " << rest->getInputLineNumber () <<
       ":" <<
       std::endl;
 
@@ -24890,7 +24937,7 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
       "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<
-      rest->getInputStartLineNumber () <<
+      rest->getInputLineNumber () <<
       std::endl;
 
     if (gTraceOahGroup->getTraceNotesDetails ()) {
@@ -24900,7 +24947,7 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
         std::setw (fieldWidth) << "fPendingGraceNotesGroup" << ": " <<
         std::endl <<
         "======================= handleARestInAMeasure()" <<
-        ", line " << rest->getInputStartLineNumber () <<
+        ", line " << rest->getInputLineNumber () <<
         std::endl;
       fCurrentPart->print (gLog);
       gLog <<
@@ -24922,7 +24969,7 @@ void mxsr2msrSkeletonPopulator::handleARestInAMeasure (
       ss <<
         "Appending rest " <<
         rest->asString () <<
-        ", line " << rest->getInputStartLineNumber () <<
+        ", line " << rest->getInputLineNumber () <<
         ", to voice \"" <<
         fCurrentRecipientMsrVoice->getVoiceName () <<
         "\"";
@@ -25026,7 +25073,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
        graceNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
       ", fCurrentRecipientMxsrVoice: \"" <<
       fCurrentRecipientMsrVoice->getVoiceName () <<
-      "\", line " << graceNote->getInputStartLineNumber () <<
+      "\", line " << graceNote->getInputLineNumber () <<
       ":" <<
       std::endl;
 
@@ -25045,7 +25092,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
       "\"" <<
       std::endl <<
       std::setw (fieldWidth) << "line:" << ": " <<
-      graceNote->getInputStartLineNumber () <<
+      graceNote->getInputLineNumber () <<
       std::endl <<
       std::setw (fieldWidth) << "fCurrentNoteIsAGraceNote" << ": " <<
       fCurrentNoteIsAGraceNote <<
@@ -25058,7 +25105,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
         std::setw (fieldWidth) << "fPendingGraceNotesGroup" << ": " <<
         std::endl <<
         "======================= handleAGraceNoteAttachedToANote()" <<
-        ", line " << graceNote->getInputStartLineNumber () <<
+        ", line " << graceNote->getInputLineNumber () <<
         std::endl;
       fCurrentPart->print (gLog);
       gLog <<
@@ -25103,7 +25150,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
     // create grace notes group
     fPendingGraceNotesGroup =
       msrGraceNotesGroup::create (
-        graceNote->getInputStartLineNumber (),
+        graceNote->getInputLineNumber (),
         msrGraceNotesGroupKind::kGraceNotesGroupBefore, // default value
         fCurrentGraceNotesGroupIsSlashed,
         fCurrentGraceNotesGroupIsBeamed,
@@ -25159,7 +25206,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
       graceNote->asString () <<
       " to grace notes group in voice \"" <<
       fCurrentRecipientMsrVoice->getVoiceName () <<
-      "\", line " << graceNote->getInputStartLineNumber ();
+      "\", line " << graceNote->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -25213,7 +25260,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
 void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled ()
 {
   int currentNoteInputLineNumber =
-    fCurrentNote->getInputStartLineNumber ();
+    fCurrentNote->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {
@@ -25394,7 +25441,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord(
   const S_msrNote& regularNote)
 {
   int newChodeNoteInputLineNumber =
-    regularNote->getInputStartLineNumber ();
+    regularNote->getInputLineNumber ();
 
   // set regularNote kind as a chord member
   regularNote->
@@ -25598,7 +25645,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInATuplet (
   const S_msrNote& regularNote)
 {
   int noteInputLineNumber =
-    regularNote->getInputStartLineNumber ();
+    regularNote->getInputLineNumber ();
 
  // register regularNote as a tuplet member
  if (fCurrentNoteIsUnpitched) {
@@ -25726,7 +25773,7 @@ void mxsr2msrSkeletonPopulator::handleARestInATuplet (
   const S_msrNote& rest)
 {
   int noteInputLineNumber =
-    rest->getInputStartLineNumber ();
+    rest->getInputLineNumber ();
 
  // register rest as a tuplet member
  if (fCurrentNoteIsUnpitched) {
@@ -25784,7 +25831,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChordInATuplet (
   const S_msrNote& newChordNote)
 {
   int newChordNoteInputLineNumber =
-    newChordNote->getInputStartLineNumber ();
+    newChordNote->getInputLineNumber ();
 
   // set new note kind as a chord or grace chord member JMI ???
   newChordNote->
@@ -25910,7 +25957,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteInAChord (
   const S_msrNote& graceNote)
 {
   int graceNoteInputLineNumber =
-    graceNote->getInputStartLineNumber ();
+    graceNote->getInputLineNumber ();
 
   // set new note kind as a grace chord member
   graceNote->
@@ -25997,7 +26044,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
       ", position " <<
       barLine->getBarLineMeasurePosition () <<
       */
-      ", line " << barLine->getInputStartLineNumber ();
+      ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26006,12 +26053,12 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
 #endif // MF_TRACE_IS_ENABLED
 
   // remember repeat start measure number
-  fCurrentRepeatStartMeasureNumber = barLine->getInputStartLineNumber ();
+  fCurrentRepeatStartMeasureNumber = barLine->getInputLineNumber ();
 
   // prepare for repeat in current part
   fCurrentPart->
     handleRepeatStartInPart (
-      barLine->getInputStartLineNumber ());
+      barLine->getInputLineNumber ());
 
   // append the bar line to the current part
   fCurrentPart->
@@ -26040,7 +26087,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
       "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
-      "\", line " << barLine->getInputStartLineNumber ();
+      "\", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26054,7 +26101,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
 
   fCurrentPart->
     handleRepeatEndInPart (
-      barLine->getInputStartLineNumber (),
+      barLine->getInputLineNumber (),
       repeatStartMeasureNumber,
       barLine->getBarLineTimes ());
 
@@ -26075,7 +26122,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
     ss <<
       "Handling a repeat ending start in part " <<
       fCurrentPart->fetchPartCombinedName () <<
-      ", line " << barLine->getInputStartLineNumber ();
+      ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26090,7 +26137,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
     ss <<
       std::endl << std::endl <<
       "****************** handleRepeatEndingStart()" <<
-      ", line " << barLine->getInputStartLineNumber () <<
+      ", line " << barLine->getInputLineNumber () <<
       std::endl <<
       fCurrentPart;
 
@@ -26108,7 +26155,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
     ss <<
       "Handling a repeat ending upon its start in part " <<
       fCurrentPart->fetchPartCombinedName () <<
-      ", line " << barLine->getInputStartLineNumber ();
+      ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26118,7 +26165,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
 
   fCurrentPart->
     handleRepeatEndingStartInPart (
-      barLine->getInputStartLineNumber ());
+      barLine->getInputLineNumber ());
 
   // append the bar line to the current part
   fCurrentPart->
@@ -26136,7 +26183,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
     ss <<
       "Handling a repeat hooked ending end in part " <<
       fCurrentPart->fetchPartCombinedName () <<
-      ", line " << barLine->getInputStartLineNumber ();
+      ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26151,7 +26198,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
     ss <<
       std::endl << std::endl <<
       "****************** handleRepeatHookedEndingEnd()" <<
-      ", line " << barLine->getInputStartLineNumber () <<
+      ", line " << barLine->getInputLineNumber () <<
       std::endl <<
       fCurrentPart;
 
@@ -26173,7 +26220,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
     ss <<
       "Handling a hooked repeat ending in part " <<
       fCurrentPart->fetchPartCombinedName () <<
-      ", line " << barLine->getInputStartLineNumber ();
+      ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26183,7 +26230,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
 
   fCurrentPart->
     handleRepeatEndingEndInPart (
-      barLine->getInputStartLineNumber (),
+      barLine->getInputLineNumber (),
       fCurrentBarLineEndingNumber,
       msrRepeatEndingKind::kRepeatEndingHooked);
 }
@@ -26208,7 +26255,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
     ss <<
       "Handling a repeat hookless ending end in part " <<
       fCurrentPart->fetchPartCombinedName () <<
-      ", line " << barLine->getInputStartLineNumber ();
+      ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26223,7 +26270,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
     ss <<
       std::endl << std::endl <<
       "****************** handleRepeatHooklessEndingEnd()" <<
-      ", line " << barLine->getInputStartLineNumber () <<
+      ", line " << barLine->getInputLineNumber () <<
       std::endl <<
       fCurrentPart;
 
@@ -26245,7 +26292,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
     ss <<
       "Handling a hookless repeat ending in part " <<
       fCurrentPart->fetchPartCombinedName () <<
-      ", line " << barLine->getInputStartLineNumber ();
+      ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26255,7 +26302,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
 
   fCurrentPart->
     handleRepeatEndingEndInPart (
-      barLine->getInputStartLineNumber (),
+      barLine->getInputLineNumber (),
       fCurrentBarLineEndingNumber,
       msrRepeatEndingKind::kRepeatEndingHookless);
 }
@@ -26269,7 +26316,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
 
     ss <<
       "--> Start visiting S_rehearsal" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26338,7 +26385,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
 
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         ss.str ());
     }
   }
@@ -26362,7 +26409,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
   S_msrRehearsalMark
     rehearsalMark =
       msrRehearsalMark::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         rehearsalKind,
         rehearsalValue,
         fCurrentDirectionPlacementKind);
@@ -26380,7 +26427,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmony& elt)
 
     ss <<
       "--> Start visiting S_harmony" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26396,12 +26443,12 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmony& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 
   ++fHarmoniesVoicesCounter;
 
-  fCurrentHarmonyInputLineNumber       = elt->getInputStartLineNumber ();
+  fCurrentHarmonyInputLineNumber       = elt->getInputLineNumber ();
 
   fCurrentHarmonyRootDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
   fCurrentHarmonyRootAlterationKind    = msrAlterationKind::kAlterationNatural;
@@ -26432,7 +26479,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root& elt)
 
     ss <<
       "--> Start visiting S_root" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26448,7 +26495,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 }
 
@@ -26460,7 +26507,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_step& elt)
 
     ss <<
       "--> Start visiting S_root_step" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26471,7 +26518,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_step& elt)
   std::string step = elt->getValue ();
 
   checkStep (
-    elt->getInputStartLineNumber (),
+    elt->getInputLineNumber (),
     step,
     "<root-step/>");
 
@@ -26488,7 +26535,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_alter& elt)
 
     ss <<
       "--> Start visiting S_root_alter" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26511,7 +26558,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_root_alter& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -26525,7 +26572,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_function& elt)
 
     ss <<
       "--> Start visiting S_function" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26544,7 +26591,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
 
     ss <<
       "--> Start visiting S_kind" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26643,14 +26690,14 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
     if (! kindValue.empty ()) {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         "harmony kind \"" + kindValue + "\" os unknown");
     }
     else {
       mxsr2msrWarning (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         "empty harmony kind, replaced by 'major'");
 
       fCurrentHarmonyKind = msrHarmonyKind::kHarmonyMajor;
@@ -26677,7 +26724,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
       }
@@ -26704,7 +26751,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
       }
@@ -26731,7 +26778,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
       }
@@ -26758,7 +26805,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
       }
@@ -26774,7 +26821,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_inversion& elt)
 
     ss <<
       "--> Start visiting S_inversion" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26798,7 +26845,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass& elt)
 
     ss <<
       "--> Start visiting S_bass" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26815,7 +26862,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_step& elt)
 
     ss <<
       "--> Start visiting S_bass_step" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26826,7 +26873,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_step& elt)
   std::string step = elt->getValue();
 
   checkStep (
-    elt->getInputStartLineNumber (),
+    elt->getInputLineNumber (),
     step,
     "<bass-step/>");
 
@@ -26843,7 +26890,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_alter& elt)
 
     ss <<
       "--> Start visiting S_bass_alter" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26866,7 +26913,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_bass_alter& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -26880,7 +26927,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree& elt)
 
     ss <<
       "--> Start visiting S_degree" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26896,7 +26943,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree& elt)
 
   fCurrentPrintObjectKind =
     msrPrintObjectKindFromString (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       printObjectString);
 }
 
@@ -26908,7 +26955,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_value& elt)
 
     ss <<
       "--> Start visiting S_degree_value" <<
-       ", line " << elt->getInputStartLineNumber ();
+       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26927,7 +26974,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_alter& elt)
 
     ss <<
       "--> Start visiting S_degree_alter" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26950,7 +26997,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_alter& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -26964,7 +27011,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_type& elt)
 
     ss <<
       "--> Start visiting S_degree_type" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -26990,7 +27037,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_degree_type& elt)
   else {
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         "harmony degree-type \"" + degreeType + "\" is unknown");
   }
@@ -27004,7 +27051,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_degree& elt)
 
     ss <<
       "--> End visiting S_degree" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27016,7 +27063,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_degree& elt)
   S_msrHarmonyDegree
     harmonyDegree =
       msrHarmonyDegree::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentHarmonyDegreeValue,
         fCurrentHarmonyDegreeAlterationKind,
         fCurrentHarmonyDegreeTypeKind);
@@ -27034,7 +27081,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
 
     ss <<
       "--> End visiting S_harmony" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27045,14 +27092,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
   // convert root diatonic pitch to a quarter tone pitch
   fCurrentHarmonyRootQuarterTonesPitchKind =
     quarterTonesPitchKindFromDiatonicPitchAndAlteration (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       fCurrentHarmonyRootDiatonicPitchKind,
       fCurrentHarmonyRootAlterationKind);
 
   // convert bass diatonic pitch to a quarter tone pitch
   fCurrentHarmonyBassQuarterTonesPitchKind =
     quarterTonesPitchKindFromDiatonicPitchAndAlteration (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       fCurrentHarmonyBassDiatonicPitchKind,
       fCurrentHarmonyBassAlterationKind);
 
@@ -27064,7 +27111,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
   ) {
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       "harmony kind is 'other' but there are no harmony degrees, this is strange...");
   }
 
@@ -27079,13 +27126,13 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
       msrDiatonicPitchKindAsStringInLanguage (
         gMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
         diatonicPitchKindFromQuarterTonesPitchKind (
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           fCurrentHarmonyRootQuarterTonesPitchKind)) <<
       ", ignoring the latter";
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
 
     fCurrentHarmonyBassQuarterTonesPitchKind =
@@ -27100,7 +27147,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
       ss <<
         "Ignoring harmony" <<
         ", line " <<
-        elt->getInputStartLineNumber ();
+        elt->getInputLineNumber ();
 
       gWaeHandler->waeTrace (
         __FILE__, __LINE__,
@@ -27117,7 +27164,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
 
       ss <<
         "Creating a harmony" <<
-        ", line " << elt->getInputStartLineNumber () << ":" <<
+        ", line " << elt->getInputLineNumber () << ":" <<
         std::endl;
 
       ++gIndenter;
@@ -27221,7 +27268,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
       if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
         mxsr2msrWarning (
           gServiceRunData->getInputSourceName (),
-          elt->getInputStartLineNumber (),
+          elt->getInputLineNumber (),
           "harmony has no degrees contents");
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -27337,7 +27384,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
 
     ss <<
       "--> Start visiting S_frame" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27352,7 +27399,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -27411,7 +27458,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -27429,7 +27476,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame_strings& elt)
 
     ss <<
       "--> Start visiting S_frame_strings" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27448,7 +27495,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame_frets& elt)
 
     ss <<
       "--> Start visiting S_frame_frets" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27467,7 +27514,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_first_fret& elt)
 
     ss <<
       "--> Start visiting S_first_fret" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27494,7 +27541,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_frame_note& elt)
 
     ss <<
       "--> Start visiting S_frame_note" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27518,7 +27565,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barre& elt)
 
     ss <<
       "--> Start visiting S_barre" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27545,7 +27592,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barre& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -27561,7 +27608,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_frame_note& elt)
 
     ss <<
       "--> Start visiting S_frame_note" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27573,7 +27620,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_frame_note& elt)
   S_msrFrameNote
     frameNote =
       msrFrameNote::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentFrameNoteStringNumber,
         fCurrentFrameNoteFretNumber,
         fCurrentFrameNoteFingering,
@@ -27593,7 +27640,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_frame& elt)
 
     ss <<
       "--> End visiting S_frame" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27604,7 +27651,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_frame& elt)
   // create the frame
   fCurrentFrame =
     msrFrame::create (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       fCurrentFrameStrings,
       fCurrentFrameFrets,
       fCurrentFrameFirstFret);
@@ -27638,7 +27685,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figured_bass& elt)
 
     ss <<
       "--> Start visiting S_figured_bass" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27671,7 +27718,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figured_bass& elt)
 
       mxsr2msrError (
         gServiceRunData->getInputSourceName (),
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -27698,7 +27745,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figure& elt)
 
     ss <<
       "--> Start visiting S_figure" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27715,7 +27762,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_prefix& elt)
 
     ss <<
       "--> Start visiting S_prefix" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27758,7 +27805,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_prefix& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -27773,7 +27820,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figure_number& elt)
 
     ss <<
       "--> Start visiting S_figure_number" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27792,7 +27839,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figure_number& elt)
 
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       ss.str ());
   }
 }
@@ -27805,7 +27852,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_suffix& elt)
 
     ss <<
       "--> Start visiting S_suffix" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27851,7 +27898,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_suffix& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -27865,7 +27912,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figure& elt)
 
     ss <<
       "--> End visiting S_figure" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27877,7 +27924,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figure& elt)
   S_msrBassFigure
     bassFigure =
       msrBassFigure::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentPart,
         fCurrentFigurePrefixKind,
         fCurrentFigureNumber,
@@ -27896,7 +27943,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
 
     ss <<
       "--> End visiting S_figured_bass" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27911,7 +27958,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
 
     ss <<
       "Creating a figured bass" <<
-      ", line " << elt->getInputStartLineNumber () << ":";
+      ", line " << elt->getInputLineNumber () << ":";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27926,7 +27973,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
   S_msrFiguredBass
     figuredBass =
       msrFiguredBass::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentFiguredBassSoundingWholeNotes,
         fCurrentFiguredBassDisplayWholeNotes,
         fCurrentFiguredBassParenthesesKind,
@@ -27936,7 +27983,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
   if (! fPendingFiguredBassFiguresList.empty ()) {
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       "figured-bass has no figures contents, ignoring it");
   }
   else {
@@ -27965,7 +28012,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harp_pedals& elt)
 
     ss <<
       "--> Start visiting S_harp_pedals" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28051,7 +28098,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harp_pedals& elt)
 
   fCurrentHarpPedalsTuning =
     msrHarpPedalsTuning::create (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 
   // add it to the current part
   fCurrentPart->
@@ -28067,7 +28114,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_tuning& elt)
 
     ss <<
       "--> Start visiting S_pedal_tuning" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28084,7 +28131,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_step& elt)
 
     ss <<
       "--> Start visiting S_pedal_step" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28095,7 +28142,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_step& elt)
   std::string tuningStep = elt->getValue();
 
   checkStep (
-    elt->getInputStartLineNumber (),
+    elt->getInputLineNumber (),
     tuningStep,
     "<pedal-step/>");
 
@@ -28112,7 +28159,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_alter& elt)
 
     ss <<
       "--> Start visiting S_pedal_alter" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28135,7 +28182,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_pedal_alter& elt)
 
     mxsr2msrError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -28149,7 +28196,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_pedal_tuning& elt)
 
     ss <<
       "--> End visiting S_pedal_tuning" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28187,7 +28234,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_pedal_tuning& elt)
 
   fCurrentHarpPedalsTuning->
     addPedalTuning (
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       fCurrentHarpPedalDiatonicPitchKind,
       fCurrentHarpPedalAlterationKind);
 }
@@ -28200,7 +28247,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damp& elt)
 
     ss <<
       "--> Start visiting S_damp" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28213,7 +28260,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damp& elt)
     S_msrDamp
       damp =
         msrDamp::create (
-          elt->getInputStartLineNumber ());
+          elt->getInputLineNumber ());
 
     // append it to the pending damps list
     fPendingDampsList.push_back (damp);
@@ -28228,7 +28275,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damp_all& elt)
 
     ss <<
       "--> Start visiting S_damp_all" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28241,7 +28288,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_damp_all& elt)
     S_msrDampAll
       dampAll =
         msrDampAll::create (
-          elt->getInputStartLineNumber ());
+          elt->getInputLineNumber ());
 
     // append it to the pending damp alls list
     fPendingDampAllsList.push_back (dampAll);
@@ -28257,7 +28304,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_capo& elt)
 
     ss <<
       "--> Start visiting S_capo" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28276,7 +28323,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_size& elt)
 
     ss <<
       "--> Start visiting S_staff_size" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28296,7 +28343,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_staff_details& elt)
 
     ss <<
       "--> End visiting S_staff_details" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28369,7 +28416,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_scordatura& elt)
 
     ss <<
       "--> Start visiting S_scordatura" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28400,7 +28447,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_scordatura& elt)
 
   fCurrentScordatura =
     msrScordatura::create (
-      elt->getInputStartLineNumber ());
+      elt->getInputLineNumber ());
 }
 
 void mxsr2msrSkeletonPopulator::visitStart (S_accord& elt)
@@ -28411,7 +28458,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accord& elt)
 
     ss <<
       "--> Start visiting S_accord" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28448,7 +28495,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_accord& elt)
 
     ss <<
       "--> End visiting S_accord" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28464,7 +28511,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_accord& elt)
   S_msrStringTuning
     stringTuning =
       msrStringTuning::create (
-        elt->getInputStartLineNumber (),
+        elt->getInputLineNumber (),
         fCurrentAccordNumber,
         fCurrentAccordDiatonicPitchKind,
         fCurrentAccordAlterationKind,
@@ -28483,7 +28530,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_scordatura& elt)
 
     ss <<
       "--> End visiting S_scordatura" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28507,7 +28554,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_instrument_sound& elt)
 
     ss <<
       "--> Start visiting S_instrument_sound" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28525,7 +28572,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_virtual_instrument& elt)
 
     ss <<
       "--> Start visiting S_virtual_instrument" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28543,7 +28590,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_device& elt)
 
     ss <<
       "--> Start visiting S_midi_device" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28565,7 +28612,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 
     ss <<
       "--> Start visiting S_midi_instrument" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28884,7 +28931,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //                     " in voice \"" <<
 //                     noteVoice->getVoiceName () <<
 //                     "\"" <<
-//                     ", line " << ligature->getInputStartLineNumber () <<
+//                     ", line " << ligature->getInputLineNumber () <<
 //                     std::endl;
 //                 }
 // #endif // MF_TRACE_IS_ENABLED
@@ -28906,7 +28953,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //                     " in voice \"" <<
 //                     noteVoice->getVoiceName () <<
 //                     "\"" <<
-//                     ", line " << ligature->getInputStartLineNumber () <<
+//                     ", line " << ligature->getInputLineNumber () <<
 //                     std::endl;
 //                 }
 // #endif // MF_TRACE_IS_ENABLED

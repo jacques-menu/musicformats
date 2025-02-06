@@ -65,14 +65,14 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_mxsrPartGroup mxsrPartGroup::create (
-	int                   startInputLineNumber,
+	int                   inputLineNumber,
 	int                   partGroupNumber,
 	const S_msrPartGroup& theMsrPartGroup,
 	int                   identity)
 {
   mxsrPartGroup* obj = new
     mxsrPartGroup (
-      startInputLineNumber,
+      inputLineNumber,
       partGroupNumber,
       theMsrPartGroup,
       identity);
@@ -81,7 +81,7 @@ S_mxsrPartGroup mxsrPartGroup::create (
 }
 
 mxsrPartGroup::mxsrPartGroup (
-	int                   startInputLineNumber,
+	int                   inputLineNumber,
 	int                   partGroupNumber,
 	const S_msrPartGroup& theMsrPartGroup,
 	int                   identity)
@@ -90,7 +90,7 @@ mxsrPartGroup::mxsrPartGroup (
 
   fPartGroupIdentity = identity;
 
-  fStartInputLineNumber = startInputLineNumber;
+  fInputLineNumber = inputLineNumber;
   fStopInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
 
   fMsrPartGroup = theMsrPartGroup;
@@ -138,7 +138,7 @@ std::string mxsrPartGroup::asString () const
 
   ss <<
     ", lines " <<
-    fStartInputLineNumber << ".." << fStopInputLineNumber;
+    fInputLineNumber << ".." << fStopInputLineNumber;
 
   return ss.str ();
 }
@@ -157,8 +157,8 @@ void mxsrPartGroup::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStartInputLineNumber" << ": " <<
-    fStartInputLineNumber <<
+    "fInputLineNumber" << ": " <<
+    fInputLineNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fStopInputLineNumber" << ": " <<

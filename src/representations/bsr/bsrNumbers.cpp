@@ -62,7 +62,7 @@ S_bsrCellsList bsrNumber::numberValueAsCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputStartLineNumber);
+      bsrCellsList::create (fInputLineNumber);
 
   int n = fNumberValue;
 
@@ -105,7 +105,7 @@ S_bsrCellsList bsrNumber::numberValueAsCellsList () const
 
     result->prependCellsListToCellsList (
       bsrCellsList::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         cellKind));
 
     n = div;
@@ -114,7 +114,7 @@ S_bsrCellsList bsrNumber::numberValueAsCellsList () const
   if (numberValueIsNegative) {
     result->prependCellsListToCellsList (
       bsrCellsList::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         kCell_ac_plus)); // JMI ??? other plus sign?
   }
 
@@ -125,14 +125,14 @@ S_bsrCellsList bsrNumber::buildCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputStartLineNumber);
+      bsrCellsList::create (fInputLineNumber);
 
   // append number sign if needed
   switch (fNumberSignIsNeededKind) {
     case bsrNumberSignIsNeededKind::kNumberSignIsNeededYes:
       result->appendCellsListToCellsList (
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           kCellNumberSign));
       break;
     case bsrNumberSignIsNeededKind::kNumberSignIsNeededNo:
@@ -264,7 +264,7 @@ std::string bsrNumber::asString () const
     ", numberCellsList: " <<
     fNumberCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -288,7 +288,7 @@ void bsrNumber::print (std::ostream& os) const
 {
   os <<
     "Number" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

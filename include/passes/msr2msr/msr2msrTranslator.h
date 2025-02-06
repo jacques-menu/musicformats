@@ -79,8 +79,8 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     // set and get
     // ------------------------------------------------------
 
-    int                   getInputStartLineNumber () const
-                              { return fInputStartLineNumber; }
+    int                   getInputLineNumber () const
+                              { return fInputLineNumber; }
 
     S_msrDalSegno         getDalSegno () const
                               { return fDalSegno; }
@@ -104,7 +104,7 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     // private fields
     // ------------------------------------------------------
 
-    int                   fInputStartLineNumber;
+    int                   fInputLineNumber;
     S_msrDalSegno         fDalSegno;
 };
 typedef SMARTP<msrHiddenMeasureAndBarLineDescr> S_msrHiddenMeasureAndBarLineDescr;

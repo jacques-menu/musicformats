@@ -420,7 +420,7 @@ void lpsrStaffBlock::appendVoiceUseToStaffBlock (const S_msrVoice& voice)
   S_lpsrUseVoiceCommand
     useVoiceCommand =
       lpsrUseVoiceCommand::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         voice);
 
   fStaffBlockElements.push_back (useVoiceCommand);
@@ -431,7 +431,7 @@ void lpsrStaffBlock::appendLyricsUseToStaffBlock (const S_msrStanza& stanza)
   S_lpsrNewLyricsBlock
     newLyricsCommand =
       lpsrNewLyricsBlock::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         stanza,
         stanza->getStanzaUpLinkToVoice ());
 

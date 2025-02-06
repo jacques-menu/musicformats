@@ -67,7 +67,7 @@ S_msrMidiTempo msrMidiTempo::createMsrMidiTempoNewbornClone ()
   S_msrMidiTempo
     newbornClone =
       msrMidiTempo::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fMidiTempoNotesDuration,
         fMidiTempoPerSecond);
 
@@ -157,7 +157,7 @@ std::string msrMidiTempo::asString () const
     "[MidiTempo" <<
     ", midiTempoNotesDuration = \"" << fMidiTempoNotesDuration << "\"" <<
     ", midiTempoPerSecond: " << fMidiTempoPerSecond <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();

@@ -116,7 +116,7 @@ Appending music elements to a measure is done by \method{msrMeasure}{appendEleme
 void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
 {
   int inputLineNumber =
-    elem->getInputStartLineNumber ();
+    elem->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -168,7 +168,7 @@ Here is how a harmony instance is appended to a measure:
 void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
 {
   int inputLineNumber =
-    harmony->getInputStartLineNumber ();
+    harmony->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -224,7 +224,7 @@ The task is simpler when appending a harmony to a measure clone, because the clo
 void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
 {
   int inputLineNumber =
-    harmony->getInputStartLineNumber ();
+    harmony->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -281,7 +281,7 @@ Measures are appended to a segment by \method{msrSegment}{appendMeasureToSegment
 void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
 {
   int inputLineNumber =
-    measure->getInputStartLineNumber ();
+    measure->getInputLineNumber ();
 
   std::string measureNumber =
     measure->getMeasureNumber ();
@@ -313,7 +313,7 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       "' in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
-      ", line " << measure->getInputStartLineNumber ();
+      ", line " << measure->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,

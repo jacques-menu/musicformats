@@ -164,7 +164,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   const S_msrTuplet&
     newbornClone =
       msrTuplet::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fBarLineUpLinkToMeasure->getMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
@@ -189,7 +189,7 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
 
     ss <<
       "--> Start visiting msrTuplet" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -411,7 +411,7 @@ void msr2msrTranslator::visitStart (S_msrIdentification& elt)
 
     ss <<
       "--> Start visiting msrIdentification" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -446,7 +446,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
 
     ss <<
       "--> End visiting msrIdentification" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,

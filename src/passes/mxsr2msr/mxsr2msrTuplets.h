@@ -16,6 +16,7 @@
 //
 #include "smartpointer.h"
 
+#include "mfInputLinesRange.h"
 #include "msrTupletsEnumTypes.h"
 
 
@@ -45,7 +46,7 @@ class mxsrTuplet : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mxsrTuplet> create (
-                            int               tupletInputStartLineNumber,
+                            int               tupletInputLineNumber,
                             int               tupletNumber,
                             msrTupletTypeKind tupletTypeKind);
 
@@ -55,7 +56,7 @@ class mxsrTuplet : public smartable
     // ------------------------------------------------------
 
                           mxsrTuplet (
-                            int               tupletInputStartLineNumber,
+                            int               tupletInputLineNumber,
                             int               tupletNumber,
                             msrTupletTypeKind tupletTypeKind);
 
@@ -66,12 +67,12 @@ class mxsrTuplet : public smartable
     // set and get
     // ------------------------------------------------------
 
-    void                  setTupletInputStartLineNumber (
-                            int tupletInputStartLineNumber)
-                              { fTupletInputStartLineNumber = tupletInputStartLineNumber; }
+    void                  setTupletInputLineNumber (
+                            int tupletInputLineNumber)
+                              { fTupletInputLineNumber = tupletInputLineNumber; }
 
-    int                   getTupletInputStartLineNumber () const
-                              { return fTupletInputStartLineNumber; }
+    int                   getTupletInputLineNumber () const
+                              { return fTupletInputLineNumber; }
 
     void                  setTupletNumber (
                             int tupletNumber)
@@ -106,7 +107,8 @@ class mxsrTuplet : public smartable
     // private fields
     // ------------------------------------------------------
 
-    int                   fTupletInputStartLineNumber;
+    int                   fTupletInputLineNumber;
+
     int                   fTupletNumber;
     msrTupletTypeKind     fTupletTypeKind;
 };
@@ -127,13 +129,12 @@ class mxsr2msrPendingTupletStop : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mxsr2msrPendingTupletStop> create (
-                            int eventSequentialNumber,
-                            int noteSequentialNumber,
-                            int staffNumber,
-                            int voiceNumber,
-                            int tupletNumber,
-                            int eventInputStartLineNumber,
-                            int eventInputEndLineNumber);
+                            int               eventSequentialNumber,
+                            int               noteSequentialNumber,
+                            int               staffNumber,
+                            int               voiceNumber,
+                            int               tupletNumber,
+                            mfInputLineNumber inputLineNumber);
 
   protected:
 
@@ -141,13 +142,12 @@ class mxsr2msrPendingTupletStop : public smartable
     // ------------------------------------------------------
 
                           mxsr2msrPendingTupletStop (
-                            int eventSequentialNumber,
-                            int noteSequentialNumber,
-                            int staffNumber,
-                            int voiceNumber,
-                            int tupletNumber,
-                            int eventInputStartLineNumber,
-                            int eventInputEndLineNumber);
+                            int               eventSequentialNumber,
+                            int               noteSequentialNumber,
+                            int               staffNumber,
+                            int               voiceNumber,
+                            int               tupletNumber,
+                            mfInputLineNumber inputLineNumber);
 
     virtual               ~mxsr2msrPendingTupletStop ();
 
@@ -175,19 +175,12 @@ class mxsr2msrPendingTupletStop : public smartable
     int                   getTupletNumber () const
                               { return fTupletNumber; }
 
-    void                  setEventInputStartLineNumber (
-                            int inputStartLineNumber)
-                              { fEventInputStartLineNumber = inputStartLineNumber; }
+    void                  setInputLineNumber (
+                            mfInputLineNumber inputLineNumber)
+                              { fInputLineNumber = inputLineNumber; }
 
-    int                   getEventInputStartLineNumber () const
-                              { return fEventInputStartLineNumber; }
-
-    void                  setEventInputEndLineNumber (
-                            int inputEndLineNumber)
-                              { fEventInputEndLineNumber = inputEndLineNumber; }
-
-    int                   getEventInputEndLineNumber () const
-                              { return fEventInputEndLineNumber; }
+    mfInputLineNumber     getInputLineNumber () const
+                              { return fInputLineNumber; }
 
   public:
 
@@ -216,8 +209,7 @@ class mxsr2msrPendingTupletStop : public smartable
 
     int                   fTupletNumber;
 
-    int                   fEventInputStartLineNumber;
-    int                   fEventInputEndLineNumber;
+    mfInputLineNumber     fInputLineNumber;
 
   private:
 

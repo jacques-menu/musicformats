@@ -121,7 +121,7 @@ S_msrMultiMeasureRest msrMultiMeasureRest::createMultiMeasureRestNewbornClone (
   S_msrMultiMeasureRest
     newbornClone =
       msrMultiMeasureRest::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fMeasureRestsNumber,
         containingVoice);
 
@@ -217,7 +217,7 @@ void msrMultiMeasureRest::setMultiMeasureRestLastMeasurePuristMeasureNumber (
 //
 //     msrInternalError (
 //       gServiceRunData->getInputSourceName (),
-//       fInputStartLineNumber,
+//       fInputLineNumber,
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -255,7 +255,7 @@ void msrMultiMeasureRest::appendMeasureElementToSegmentElement (
 
   msrInternalError (
     gServiceRunData->getInputSourceName (),
-    fInputStartLineNumber,
+    fInputLineNumber,
     __FILE__, __LINE__,
     ss.str ());
 }
@@ -276,7 +276,7 @@ void msrMultiMeasureRest::appendMeasureToMultiMeasureRest (
       measure->asShortString () <<
       " to multi-measure rests " <<
       asShortString () <<
-      "', line " << fInputStartLineNumber;
+      "', line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -463,7 +463,7 @@ std::string msrMultiMeasureRest::asString () const
     fetchMultiMeasureRestMeasureSoundingNotes () <<
     ", " <<
 
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -495,7 +495,7 @@ void msrMultiMeasureRest::print (std::ostream& os) const
 {
   os <<
     "[MultiMeasureRest" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

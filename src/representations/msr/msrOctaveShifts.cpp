@@ -224,7 +224,7 @@ std::string msrOctaveShift::asString () const
     "[OctaveShift" <<
     ", fOctaveShiftKind: " << fOctaveShiftKind <<
     ", fOctaveShiftSize: " << fOctaveShiftSize <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();

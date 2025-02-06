@@ -284,7 +284,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
 		ss <<
       "--> Start visiting S_harmony" <<
       ", harmoniesVoicesCounter = " << fHarmoniesVoicesCounter <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -378,7 +378,7 @@ The first visit of \smartPointerType{S_harmony} initializes the fields storing v
 void mxsr2msrTranslator::visitStart ( S_harmony& elt )
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
@@ -668,7 +668,7 @@ void msrNote::appendHarmonyToNote (const S_msrHarmony& harmony)
       harmony->asString () <<
       " to the harmonies list of " <<
       asString () <<
-      ", line " << fInputStartLineNumber;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -785,7 +785,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
-      "', line " << elt->getInputStartLineNumber ();
+      "', line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -828,7 +828,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
       S_msrNote
         skip =
           msrNote::createSkipNote (
-            elt->                getInputStartLineNumber (),
+            elt->                getInputLineNumber (),
             "666", // JMI elt->                getHarmoniesMeasureNumber (),
             elt->                getHarmonyDisplayWholeNotes (), // would be 0/1 otherwise JMI
             elt->                getHarmonyDisplayWholeNotes (),
@@ -858,7 +858,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -879,7 +879,7 @@ void msr2msrTranslator::visitEnd (S_msrHarmony& elt)
       "--> End visiting msrHarmony '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -915,7 +915,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
       ", onGoingChord: " << fOnGoingChord <<
       ", onGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", onGoingHarmony: " << fOnGoingHarmony <<
-      "', line " << elt->getInputStartLineNumber ();
+      "', line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -958,7 +958,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
       S_msrNote
         skip =
           msrNote::createSkipNote (
-            elt->                getInputStartLineNumber (),
+            elt->                getInputLineNumber (),
             "666", // JMI elt->                getHarmoniesMeasureNumber (),
             elt->                getHarmonyDisplayWholeNotes (), // would be 0/1 otherwise JMI
             elt->                getHarmonyDisplayWholeNotes (),
@@ -988,7 +988,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      elt->getInputStartLineNumber (),
+      elt->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -1011,7 +1011,7 @@ void msr2lpsrTranslator::visitEnd (S_msrHarmony& elt)
       "--> End visiting msrHarmony '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -1058,7 +1058,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         fOnGoingChord <<
         ", fOnGoingHarmoniesVoice: \"" <<
         fOnGoingHarmoniesVoice <<
-        ", line " << elt->getInputStartLineNumber () <<
+        ", line " << elt->getInputLineNumber () <<
       std::endl;
 
       if (traceMsrVisitors) {
@@ -1100,7 +1100,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 
     // generate the input line number as comment if relevant
     if (
-      gGlobalLpsr2lilypondOahGroup->getInputStartLineNumbers ()
+      gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
         ||
       gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
     ) {

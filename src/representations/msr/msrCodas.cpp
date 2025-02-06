@@ -216,7 +216,7 @@ std::string msrCoda::asString () const
     "Coda" <<
     ", staffNumber: " << fStaffNumber <<
     ", codaKind: " << msrCodaKindAsString (fCodaKind) <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }

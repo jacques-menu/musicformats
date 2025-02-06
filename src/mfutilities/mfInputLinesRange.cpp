@@ -22,14 +22,14 @@ mfInputLinesRange::mfInputLinesRange (
   int inputStartLineNumber,
   int inputEndLineNumber)
 {
-  fInputStartLineNumber = inputStartLineNumber;
+  fInputLineNumber = inputStartLineNumber;
   fInputEndLineNumber   = inputEndLineNumber;
 }
 
 mfInputLinesRange::mfInputLinesRange (
   int inputStartLineNumber)
 {
-  fInputStartLineNumber = inputStartLineNumber;
+  fInputLineNumber = inputStartLineNumber;
   fInputEndLineNumber   = inputStartLineNumber;
 }
 
@@ -40,16 +40,16 @@ std::string mfInputLinesRange::asString () const
 {
   std::stringstream ss;
 
-  if (fInputEndLineNumber != fInputStartLineNumber) {
+  if (fInputEndLineNumber != fInputLineNumber) {
     ss  <<
       "lines " <<
-      fInputStartLineNumber <<
+      fInputLineNumber <<
       " .. " <<
       fInputEndLineNumber;
   }
   else {
     ss <<
-      "line " << fInputStartLineNumber;
+      "line " << fInputLineNumber;
   }
 
   return ss.str ();
@@ -59,9 +59,9 @@ void mfInputLinesRange::print (std::ostream& os) const
 {
   os <<
     "[mfInputLinesRange " <<
-    fInputStartLineNumber;
+    fInputLineNumber;
 
-  if (fInputEndLineNumber != fInputStartLineNumber) {
+  if (fInputEndLineNumber != fInputLineNumber) {
     os <<
       ", " <<
       fInputEndLineNumber;

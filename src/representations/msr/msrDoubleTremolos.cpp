@@ -194,7 +194,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   S_msrDoubleTremolo
     newbornClone =
       msrDoubleTremolo::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fDoubleTremoloKind,
         fDoubleDoubleTremoloTypeKind,
@@ -308,7 +308,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       else {
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
-//           fInputStartLineNumber,
+//           fInputLineNumber,
 //           __FILE__, __LINE__,
 //           "notes double tremolo first element should be a note");
 //       }
@@ -328,7 +328,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //       else {
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
-//           fInputStartLineNumber,
+//           fInputLineNumber,
 //           __FILE__, __LINE__,
 //           "chords double tremolo first element should be a chord");
 //       }
@@ -421,11 +421,11 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       "fDoubleTremoloElementsWholeNotes: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
       std::endl <<
-      "line " << note->getInputStartLineNumber ();
+      "line " << note->getInputLineNumber ();
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      note->getInputStartLineNumber (),
+      note->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -446,7 +446,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
       fMeasureElementSoundingWholeNotes.asFractionString () << '\'' <<
       ", fDoubleTremoloElementsWholeNotes: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
-      "', line " << note->getInputStartLineNumber ();
+      "', line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -507,7 +507,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
       fMeasureElementSoundingWholeNotes.asFractionString () <<
       "', doubleTremoloElementsNotesDuration: '" <<
       fDoubleTremoloElementsWholeNotes.asFractionString () << '\'' <<
-      "', line " << note->getInputStartLineNumber ();
+      "', line " << note->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -541,7 +541,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      note->getInputStartLineNumber (),
+      note->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -619,7 +619,7 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
 
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        chord->getInputStartLineNumber (),
+        chord->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -686,7 +686,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
 
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        chord->getInputStartLineNumber (),
+        chord->getInputLineNumber (),
         __FILE__, __LINE__,
         ss.str ());
     }
@@ -833,7 +833,7 @@ std::string msrDoubleTremolo::asShortString () const
     mfSingularOrPlural (
       fDoubleTremoloMarksNumber, "mark", "marks") <<
     ", placement: " << doubleTremoloPlacementKindAsString () <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -855,7 +855,7 @@ std::string msrDoubleTremolo::asString () const
 //     fDoubleTremoloSoundingWholeNotes.asFractionString () <<
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes.asFractionString () <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   if (fDoubleTremoloFirstElement) { // it may not be set yet
     ss <<
@@ -873,7 +873,7 @@ std::string msrDoubleTremolo::asString () const
         else {
           msrInternalError (
             gServiceRunData->getInputSourceName (),
-            fInputStartLineNumber,
+            fInputLineNumber,
             __FILE__, __LINE__,
             "notes double tremolo first element should be a note");
         }
@@ -890,7 +890,7 @@ std::string msrDoubleTremolo::asString () const
         else {
           msrInternalError (
             gServiceRunData->getInputSourceName (),
-            fInputStartLineNumber,
+            fInputLineNumber,
             __FILE__, __LINE__,
             "chords double tremolo first element should be a chord");
         }
@@ -914,7 +914,7 @@ std::string msrDoubleTremolo::asString () const
         else {
           msrInternalError (
             gServiceRunData->getInputSourceName (),
-            fInputStartLineNumber,
+            fInputLineNumber,
             __FILE__, __LINE__,
             "notes double tremolo second element should be a note");
         }
@@ -931,7 +931,7 @@ std::string msrDoubleTremolo::asString () const
         else {
           msrInternalError (
             gServiceRunData->getInputSourceName (),
-            fInputStartLineNumber,
+            fInputLineNumber,
             __FILE__, __LINE__,
             "chords double tremolo second element should be a chord");
         }
@@ -950,7 +950,7 @@ void msrDoubleTremolo::print (std::ostream& os) const
     "[DoubleTremolo" <<
     ", " << msrDoubleTremoloTypeKindAsString (fDoubleDoubleTremoloTypeKind) <<
     ", on " << msrDoubleTremoloKindAsString (fDoubleTremoloKind) <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   constexpr int fieldWidth = 32;

@@ -148,7 +148,7 @@ S_msrScore msrScore::createScoreNewbornClone ()
   S_msrScore
     newbornClone =
       msrScore::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fScoreName);
 
   // number of measures
@@ -235,7 +235,7 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      partGroup->getInputStartLineNumber (),
+      partGroup->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -267,7 +267,7 @@ void msrScore::removePartGroupFromScore (const S_msrPartGroup& partGroup)
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      partGroup->getInputStartLineNumber (),
+      partGroup->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -609,7 +609,7 @@ void msrScore::printFull (std::ostream& os) const
 {
   os <<
     "[MSR Score printfull()" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1042,7 +1042,7 @@ void msrScore::printSummary (std::ostream& os) const
 
     fPartGroupsList.front () ->
       displayPartGroupElementsList (
-        fInputStartLineNumber);
+        fInputLineNumber);
 
     --gIndenter;
 

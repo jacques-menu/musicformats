@@ -67,7 +67,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrScore& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrScore" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -91,7 +91,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrScore& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrScore" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -110,7 +110,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrSpaces& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrSpaces" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -132,7 +132,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrSpaces& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrSpaces" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -151,7 +151,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrBarLine& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrBarLine" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -173,7 +173,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotes& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrTranscriptionNotes" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -191,7 +191,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotes& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrTranscriptionNotes" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -210,7 +210,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTranscriptionNotesElement& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrTranscriptionNotesElement" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -233,7 +233,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTranscriptionNotesElement& elt)
     ss <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrTranscriptionNotesElement" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -254,7 +254,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPage& elt)
       "% --> Start visiting bsrPage '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -279,7 +279,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPage& elt)
       "% --> End visiting bsrPage '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -300,7 +300,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrPageHeading& elt)
       "% --> Start visiting bsrPageHeading '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -327,7 +327,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrPageHeading& elt)
       "% --> End visiting bsrPageHeading '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -350,7 +350,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMusicHeading& elt)
       "% --> Start visiting bsrMusicHeading '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -377,7 +377,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMusicHeading& elt)
       "% --> End visiting bsrMusicHeading '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -400,7 +400,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrFootNotes& elt)
       "% --> Start visiting bsrFootNotes '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -427,7 +427,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrFootNotes& elt)
       "% --> End visiting bsrFootNotes '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -450,7 +450,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLine& elt)
       "% --> Start visiting bsrLine '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -475,7 +475,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLine& elt)
       "% --> End visiting bsrLine '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -496,7 +496,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrLineContents& elt)
       "% --> Start visiting bsrLineContents '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -523,7 +523,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrLineContents& elt)
       "% --> End visiting bsrLineContents '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -544,7 +544,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
       "% --> Start visiting bsrMeasure '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -553,7 +553,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrMeasure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentMeasureNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputLineNumber ();
 
   fCurrentMeasure =
     elt->createMeasureNewbornClone ();
@@ -573,7 +573,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrMeasure& elt)
       "% --> End visiting bsrMeasure '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -594,7 +594,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNumber& elt)
       "% --> Start visiting bsrNumber '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -617,7 +617,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNumber& elt)
       "% --> End visiting bsrNumber '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -638,7 +638,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrWords& elt)
       "% --> Start visiting bsrWords '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -661,7 +661,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrWords& elt)
       "% --> End visiting bsrWords '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -682,7 +682,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrClef& elt)
       "% --> Start visiting bsrClef '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -705,7 +705,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrClef& elt)
       "% --> End visiting bsrClef '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -726,7 +726,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrKey& elt)
       "% --> Start visiting bsrKey '" <<
       elt->asString () <<
       '\'' <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -755,7 +755,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrKey& elt)
       "% --> End visiting bsrKey '" <<
       elt->asString () <<
       "'"  <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -775,7 +775,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTimeSignature& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrTimeSignature " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -803,7 +803,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTimeSignature& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrTimeSignature " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -823,7 +823,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrTempo& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrTempo " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -853,7 +853,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrTempo& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrTempo " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -873,7 +873,7 @@ void bsr2bsrFinalizer::visitStart (S_bsrNote& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> Start visiting bsrNote " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -895,7 +895,7 @@ void bsr2bsrFinalizer::visitEnd (S_bsrNote& elt)
       "% --> End visiting bsrTranscriptionNotesElement" <<
       "% --> End visiting bsrNote " <<
       elt->asString () <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

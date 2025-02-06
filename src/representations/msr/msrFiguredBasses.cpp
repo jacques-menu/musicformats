@@ -231,7 +231,7 @@ S_msrBassFigure msrBassFigure::createFigureNewbornClone (
   S_msrBassFigure
     newbornClone =
       msrBassFigure::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         containingPart,
         fFigurePrefixKind,
         fFigureNumber,
@@ -268,7 +268,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   S_msrBassFigure
     deepClone =
       msrBassFigure::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         containingPart,
         fFigurePrefixKind,
         fFigureNumber,
@@ -375,7 +375,7 @@ std::string msrBassFigure::asString () const
     fFigurePrefixKind <<
     ", suffix: " <<
     fFigureSuffixKind <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -390,7 +390,7 @@ void msrBassFigure::print (std::ostream& os) const
     ss <<
       ":" <<
       wholeNotesPitchAndOctaveAsString (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fFigureSoundingWholeNotes);
   }
 */
@@ -551,7 +551,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
     ss <<
       "Creating a newborn clone of figured bass " <<
       asShortString () <<
-      ", line " << fInputStartLineNumber;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -570,7 +570,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
   S_msrFiguredBass
     newbornClone =
       msrFiguredBass::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fMeasureElementSoundingWholeNotes, // JMI v0.9.67
         fFiguredBassDisplayWholeNotes,
@@ -594,7 +594,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
     ss <<
       "Creating a deep clone of figuredBass " <<
       asString () <<
-      ", line " << fInputStartLineNumber;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -613,7 +613,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
   S_msrFiguredBass
     figuredBassDeepClone =
       msrFiguredBass::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fMeasureElementSoundingWholeNotes, // JMI v0.9.67
         fFiguredBassDisplayWholeNotes,
@@ -800,11 +800,11 @@ std::string msrFiguredBass::asString () const
     fMeasureElementMeasurePosition.asString () <<
     ", fMeasureElementSoundingWholeNotes: " <<
     wholeNotesPitchAndOctaveAsString (
-      fInputStartLineNumber,
+      fInputLineNumber,
       fMeasureElementSoundingWholeNotes) <<
     ", fFiguredBassDisplayWholeNotes: " <<
     wholeNotesPitchAndOctaveAsString (
-      fInputStartLineNumber,
+      fInputLineNumber,
       fFiguredBassDisplayWholeNotes);
 
   ss <<
@@ -869,7 +869,7 @@ std::string msrFiguredBass::asString () const
     ss <<
       ":" <<
       wholeNotesPitchAndOctaveAsString (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fFiguredBassSoundingWholeNotes);
   }
 */
@@ -879,7 +879,7 @@ std::string msrFiguredBass::asString () const
 //     ", voicePosition: " << fMeasureElementVoicePosition;
 
   ss <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -896,11 +896,11 @@ std::string msrFiguredBass::asString () const
 //     fMeasureElementMeasurePosition.asString () <<
 //     ", fMeasureElementSoundingWholeNotes: " <<
 //     wholeNotesPitchAndOctaveAsString (
-//       fInputStartLineNumber,
+//       fInputLineNumber,
 //       fMeasureElementSoundingWholeNotes) <<
 //     ", fFiguredBassDisplayWholeNotes: " <<
 //     wholeNotesPitchAndOctaveAsString (
-//       fInputStartLineNumber,
+//       fInputLineNumber,
 //       fFiguredBassDisplayWholeNotes);
 //
 //   ss <<
@@ -964,7 +964,7 @@ std::string msrFiguredBass::asString () const
 //     ss <<
 //       ":" <<
 //       wholeNotesPitchAndOctaveAsString (
-//         fInputStartLineNumber,
+//         fInputLineNumber,
 //         fFiguredBassSoundingWholeNotes);
 //   }
 // */
@@ -974,7 +974,7 @@ std::string msrFiguredBass::asString () const
 // //     ", voicePosition: " << fMeasureElementVoicePosition;
 //
 //   ss <<
-//     ", line " << fInputStartLineNumber <<
+//     ", line " << fInputLineNumber <<
 //     ']';
 //
 //   return ss.str ();
@@ -984,7 +984,7 @@ void msrFiguredBass::print (std::ostream& os) const
 {
   os <<
     "[FiguredBass" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

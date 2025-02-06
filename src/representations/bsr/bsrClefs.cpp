@@ -58,7 +58,7 @@ bsrClef::bsrClef (
       "Creating bsrClef '" <<
       asString () <<
       "', line " <<
-      fInputStartLineNumber;
+      fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -75,76 +75,76 @@ S_bsrCellsList bsrClef::buildCellsList () const
   S_bsrCellsList
     result =
       bsrCellsList::create (
-        fInputStartLineNumber);
+        fInputLineNumber);
 
   switch (fClefKind) {
     case bsrClefKind::kClefKindNone:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber);
+          fInputLineNumber);
       break;
 
     case bsrClefKind::kClefKindGTreble:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots34, bsrCellKind::kDots123);
       break;
     case bsrClefKind::kClefKindFBass:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots3456, bsrCellKind::kDots123);
       break;
     case bsrClefKind::kClefKindCAlto:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots346, bsrCellKind::kDots123);
       break;
 
     case bsrClefKind::kClefKindGSoprano:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots34, bsrCellKind::kDots4, bsrCellKind::kDots123);
       break;
     case bsrClefKind::kClefKindCBaritone:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots3456, bsrCellKind::kDots456, bsrCellKind::kDots123);
       break;
     case bsrClefKind::kClefKindCTenor:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots346, bsrCellKind::kDots5, bsrCellKind::kDots123);
       break;
 
     case bsrClefKind::kClefKindGOttavaAlta:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots34, bsrCellKind::kDots123, bsrCellKind::kDots3456, bsrCellKind::kDots125);
       break;
     case bsrClefKind::kClefKindGOttavaBassa:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots34, bsrCellKind::kDots123, bsrCellKind::kDots3456, bsrCellKind::kDots236);
       break;
 
     case bsrClefKind::kClefKindModifiedBassForRightHandPart:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots3456, bsrCellKind::kDots13);
       break;
     case bsrClefKind::kClefKindModifiedTrebleForLeftHandPart:
       result =
         bsrCellsList::create (
-          fInputStartLineNumber,
+          fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots34, bsrCellKind::kDots13);
       break;
   } // switch
@@ -338,7 +338,7 @@ std::string bsrClef::asString () const
     ", fClefKind: " << fClefKind <<
     "fClefCellsList: " << fClefCellsList <<
     ", fSpacesBefore: " << fSpacesBefore <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -360,7 +360,7 @@ void bsrClef::print (std::ostream& os) const
 {
   os <<
     "Clef" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

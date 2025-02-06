@@ -23,6 +23,7 @@
 #include "exports.h"
 
 #include "mfBool.h"
+#include "mfInputLinesRange.h"
 
 
 namespace MusicFormats
@@ -261,9 +262,8 @@ std::string mfIntToEnglishWord (int n);
 std::string mfStringNumbersToEnglishWords (std::string str);
 
 //______________________________________________________________________________
-std::string mfInputLineNumbersAsString (
-  int inputStartLineNumber,
-  int inputEndLineNumber);
+std::string mfInputLineNumberAsString (
+  mfInputLineNumber inputLineNumber);
 
 //______________________________________________________________________________
 std::set <int> mfDecipherNaturalNumbersSetSpecification (

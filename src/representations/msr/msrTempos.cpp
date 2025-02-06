@@ -175,7 +175,7 @@ void msrTempoNote::print (std::ostream& os) const
 {
   os <<
     "[TempoNote" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -701,7 +701,7 @@ std::string msrTempoTuplet::asString () const
       else {
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputStartLineNumber,
+          fInputLineNumber,
           __FILE__, __LINE__,
           "tempoTuplet member should be a note, a chord or another tempoTuplet");
       }
@@ -770,7 +770,7 @@ std::string msrTempoTuplet::asString () const
       else {
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputStartLineNumber,
+          fInputLineNumber,
           __FILE__, __LINE__,
           "tempoTuplet member should be a note, a chord or another tempoTuplet");
       }
@@ -796,7 +796,7 @@ void msrTempoTuplet::print (std::ostream& os) const
       fTempoTupletElementsList.size (), "element", "elements") <<
     ", display whole notes: " <<
     fTempoTupletDisplayWholeNotes <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1046,7 +1046,7 @@ void msrTempoNotesRelationshipElements::print (std::ostream& os) const
 {
   os <<
     "[TempoNotesRelationshipElements" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1565,7 +1565,7 @@ std::string msrTempo::asString () const
     ", fTempoBeatUnit: " << fTempoBeatUnit.asString () <<
     ", fTempoPerMinute: " << fTempoPerMinute <<
     ", fTempoParenthesizedKind: " << fTempoParenthesizedKind <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1575,7 +1575,7 @@ void msrTempo::print (std::ostream& os) const
 {
   os <<
     "[Tempo" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1697,7 +1697,7 @@ void msrTempo::printFull (std::ostream& os) const
 {
   os <<
     "[Tempo" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1868,7 +1868,7 @@ std::ostream& operator << (std::ostream& os, const S_msrTempo& elt)
 //     fTempoPerMinute;
 // //     ", tempoParenthesizedKind: "  <<
 // //     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
-// //     ", line " << fInputStartLineNumber;
+// //     ", line " << fInputLineNumber;
 //
 //   ss << ']';
 //

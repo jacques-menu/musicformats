@@ -1127,19 +1127,19 @@ std::string msdlParser::lilypondOctaveInRelativeEntryMode (
     noteDiatonicPitchKind =
       note->
         noteDiatonicPitchKind (
-          note->getInputStartLineNumber ());
+          note->getInputLineNumber ());
 
   msrDiatonicPitchKind
     referenceDiatonicPitchKind =
       fCurrentOctaveEntryReference->
         noteDiatonicPitchKind (
-          note->getInputStartLineNumber ());
+          note->getInputLineNumber ());
 
   std::string
     referenceDiatonicPitchKindAsString =
       fCurrentOctaveEntryReference->
         noteDiatonicPitchKindAsString (
-          note->getInputStartLineNumber ());
+          note->getInputLineNumber ());
 
   msrOctaveKind
     referenceAbsoluteOctave =

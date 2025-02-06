@@ -24,13 +24,13 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_mxsrTuplet mxsrTuplet::create (
-	int               tupletInputStartLineNumber,
+	int               tupletInputLineNumber,
 	int               tupletNumber,
 	msrTupletTypeKind tupletTypeKind)
 {
   mxsrTuplet* obj = new
     mxsrTuplet (
-    	tupletInputStartLineNumber,
+    	tupletInputLineNumber,
     	tupletNumber,
     	tupletTypeKind);
   assert (obj != nullptr);
@@ -38,11 +38,11 @@ S_mxsrTuplet mxsrTuplet::create (
 }
 
 mxsrTuplet::mxsrTuplet (
-	int               tupletInputStartLineNumber,
+	int               tupletInputLineNumber,
 	int               tupletNumber,
 	msrTupletTypeKind tupletTypeKind)
 {
-  fTupletInputStartLineNumber =tupletInputStartLineNumber;
+  fTupletInputLineNumber =tupletInputLineNumber;
   fTupletNumber = tupletNumber;
   fTupletTypeKind = tupletTypeKind;
 
@@ -59,7 +59,7 @@ mxsrTuplet::mxsrTuplet (
 
 	    gLog << std::left <<
     		std::setw (fieldWidth) <<
-	    	"fTupletInputStartLineNumber" << fTupletInputStartLineNumber <<
+	    	"fTupletInputLineNumber" << fTupletInputLineNumber <<
 	    	std::endl <<
     		std::setw (fieldWidth) <<
 	    	"fTupletNumber" << fTupletNumber <<
@@ -84,7 +84,7 @@ std::string mxsrTuplet::asString () const
 		"[mxsrTuplet" <<
 		", fTupletTypeKind:" << fTupletTypeKind <<
 		", fTupletNumber: " << fTupletNumber <<
-		", fTupletInputStartLineNumber: " << fTupletInputStartLineNumber <<
+		", fTupletInputLineNumber: " << fTupletInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -108,8 +108,8 @@ void mxsrTuplet::print (std::ostream& os) const
     "fTupletNumber" << ": " << fTupletNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletInputStartLineNumber" << ": " <<
-    fTupletInputStartLineNumber <<
+    "fTupletInputLineNumber" << ": " <<
+    fTupletInputLineNumber <<
     std::endl;
 
   --gIndenter;
@@ -129,13 +129,12 @@ std::ostream& operator << (std::ostream& os, const S_mxsrTuplet& elt) {
 
 //______________________________________________________________________________
 S_mxsr2msrPendingTupletStop mxsr2msrPendingTupletStop::create (
-	int eventSequentialNumber,
-	int noteSequentialNumber,
-	int staffNumber,
-	int voiceNumber,
-	int tupletNumber,
-	int eventInputStartLineNumber,
-	int eventInputEndLineNumber)
+  int               eventSequentialNumber,
+  int               noteSequentialNumber,
+  int               staffNumber,
+  int               voiceNumber,
+  int               tupletNumber,
+  mfInputLineNumber inputLineNumber)
 {
   mxsr2msrPendingTupletStop* obj = new
     mxsr2msrPendingTupletStop (
@@ -144,20 +143,18 @@ S_mxsr2msrPendingTupletStop mxsr2msrPendingTupletStop::create (
       staffNumber,
       voiceNumber,
       tupletNumber,
-      eventInputStartLineNumber,
-      eventInputEndLineNumber);
+      inputLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
 mxsr2msrPendingTupletStop::mxsr2msrPendingTupletStop (
-	int eventSequentialNumber,
-	int noteSequentialNumber,
-	int staffNumber,
-	int voiceNumber,
-	int tupletNumber,
-	int eventInputStartLineNumber,
-	int eventInputEndLineNumber)
+  int               eventSequentialNumber,
+  int               noteSequentialNumber,
+  int               staffNumber,
+  int               voiceNumber,
+  int               tupletNumber,
+  mfInputLineNumber inputLineNumber)
 {
   fEventSequentialNumber = eventSequentialNumber;
   fNoteSequentialNumber = noteSequentialNumber;
@@ -167,8 +164,7 @@ mxsr2msrPendingTupletStop::mxsr2msrPendingTupletStop (
 
   fTupletNumber = tupletNumber;
 
-  fEventInputStartLineNumber = eventInputStartLineNumber;
-  fEventInputEndLineNumber   = eventInputEndLineNumber;
+  fInputLineNumber = inputLineNumber;
 }
 
 mxsr2msrPendingTupletStop::~mxsr2msrPendingTupletStop ()
@@ -180,8 +176,7 @@ std::string mxsr2msrPendingTupletStop::asString () const
 
   ss <<
 		"[PendingTupletStop" <<
-		", fEventInputStartLineNumber: " << fEventInputStartLineNumber <<
-// 		", fEventInputEndLineNumber: " << fEventInputEndLineNumber <<
+		", fInputLineNumber: " << fInputLineNumber <<
 		", fEventSequentialNumber: E" << fEventSequentialNumber <<
 		", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
 		", fStaffNumber: S" << fStaffNumber <<
@@ -205,13 +200,9 @@ void mxsr2msrPendingTupletStop::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fEventInputStartLineNumber" << ": " <<
-    fEventInputStartLineNumber <<
+    "fInputLineNumber" << ": " <<
+    fInputLineNumber <<
     std::endl <<
-//     std::setw (fieldWidth) <<
-//     "fEventInputEndLineNumber" << ": " <<
-//     fEventInputEndLineNumber <<
-//     std::endl <<
 
     std::setw (fieldWidth) <<
     "fEventSequentialNumber" << ": E" <<

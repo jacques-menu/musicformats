@@ -270,7 +270,7 @@ std::string msrHumdrumScotKeyItem::asString () const
     fKeyAlterationKind <<
     ", fKeyOctaveKind" << ": " <<
     fKeyOctaveKind <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -288,7 +288,7 @@ std::string msrHumdrumScotKeyItem::asString () const
 //     fKeyAlterationKind <<
 //     ", fKeyOctaveKind" << ": " <<
 //     fKeyOctaveKind <<
-//     ", line " << fInputStartLineNumber;
+//     ", line " << fInputLineNumber;
 //
 //   return ss.str ();
 // }
@@ -834,7 +834,7 @@ std::string msrKey::asString () const
   } // switch
 
   ss <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -867,7 +867,7 @@ std::string msrKey::asString () const
 //   } // switch
 //
 //   ss <<
-// // JMI    ", line " << fInputStartLineNumber <<
+// // JMI    ", line " << fInputLineNumber <<
 //     ']';
 //
 //   return ss.str ();
@@ -890,7 +890,7 @@ void msrKey::print (std::ostream& os) const
             getMsrQuarterTonesPitchesLanguageKind ()) <<
         ' ' <<
         fModeKind <<
-        ", line " << fInputStartLineNumber;
+        ", line " << fInputLineNumber;
       break;
 
     case msrKeyKind::kKeyHumdrumScot:
@@ -900,7 +900,7 @@ void msrKey::print (std::ostream& os) const
         ", " <<
         fHumdrumScotKeyItemsVector.size () <<
         " items" <<
-        ", line " << fInputStartLineNumber <<
+        ", line " << fInputLineNumber <<
         std::endl;
 
       if (fHumdrumScotKeyItemsVector.size ()) {

@@ -358,9 +358,10 @@ std::string language::quittingAfterPass (mfPassIDKind passIDKind) const
   std::stringstream ss;
 
   ss <<
-    "Quitting after pass " <<
+    '\n' <<
+    "*** Quitting after pass " <<
     passIDKindAsString (passIDKind) <<
-    " as requested";
+    " as requested ***";
 
   return ss.str ();
 }

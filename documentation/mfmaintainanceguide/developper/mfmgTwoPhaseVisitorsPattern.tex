@@ -196,7 +196,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 
 		ss <<
       "--> Start visiting S_millimeters" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -215,7 +215,7 @@ void mxsr2msrTranslator::visitStart ( S_tenths& elt )
 
 		ss <<
       "--> Start visiting S_tenths" <<
-      ", line " << elt->getInputStartLineNumber ();
+      ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTraceWithoutInputLocation (
       __FILE__, __LINE__,
@@ -229,7 +229,7 @@ void mxsr2msrTranslator::visitStart ( S_tenths& elt )
 void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
 {
   int inputLineNumber =
-    elt->getInputStartLineNumber ();
+    elt->getInputLineNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {

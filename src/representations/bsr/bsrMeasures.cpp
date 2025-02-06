@@ -61,7 +61,7 @@ bsrMeasure::bsrMeasure (
       "Creating bsrMeasure '" <<
       asString () <<
       "', line " <<
-      fInputStartLineNumber;
+      fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -92,7 +92,7 @@ S_bsrMeasure bsrMeasure::createMeasureNewbornClone ()
   S_bsrMeasure
     newbornClone =
       bsrMeasure::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fPrintMeasureNumber);
 
   // braille measure number
@@ -224,7 +224,7 @@ S_bsrCellsList bsrMeasure::buildCellsList () const
 {
   S_bsrCellsList
     result =
-      bsrCellsList::create (fInputStartLineNumber);
+      bsrCellsList::create (fInputLineNumber);
 
   for (
     std::list <S_bsrLineContentsElement>::const_iterator i = fMeasureLineElementsList.begin ();
@@ -341,7 +341,7 @@ std::string bsrMeasure::asString () const
     ", brailleMeasureNumber: " << fBrailleMeasureNumber <<
     ", measureElementsList.size (): " << fMeasureLineElementsList.size () <<
     ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -376,7 +376,7 @@ void bsrMeasure::print (std::ostream& os) const
   os <<
     "Measure" <<
     ", printMeasureNumber " << fPrintMeasureNumber <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

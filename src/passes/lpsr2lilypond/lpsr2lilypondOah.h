@@ -1398,11 +1398,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     void                  setInputLineNumbers ()
                               { fInputStartLineNumbers = true; }
-    Bool                  getInputStartLineNumbers () const
+    Bool                  getInputLineNumbers () const
                               { return fInputStartLineNumbers; }
 
     const S_oahBooleanAtom&
-                          getInputStartLineNumbersAtom () const
+                          getInputLineNumbersAtom () const
                               { return fInputStartLineNumbersAtom; }
 
     void                  setNotesComments ()

@@ -174,7 +174,7 @@ msrSyllableElement::msrSyllableElement (
   msrSyllableElementKind syllableElementKind,
   const std::string&     syllableElementContents)
 {
-  fInputStartLineNumber = inputStartLineNumber;
+  fInputLineNumber = inputStartLineNumber;
 
   fSyllableElementKind = syllableElementKind;
 
@@ -203,7 +203,7 @@ std::string msrSyllableElement::asString () const
     "[SyllableElement" <<
     ", fSyllableElementKind: " << fSyllableElementKind <<
     ", fSyllableElementContents: \"" << fSyllableElementContents << "\"" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -218,7 +218,7 @@ std::string msrSyllableElement::asShortString () const
     "\"" << fSyllableElementContents << "\"" <<
     ", " <<
     fSyllableElementKind <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 //     ']';
 
   return ss.str ();
@@ -247,8 +247,8 @@ void msrSyllableElement::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fInputStartLineNumber" << ": " <<
-    fInputStartLineNumber <<
+    "fInputLineNumber" << ": " <<
+    fInputLineNumber <<
     std::endl;
 
   --gIndenter;
@@ -472,7 +472,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
   S_msrSyllable
     newbornClone =
       msrSyllable::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         gNullMeasure, // set later in setSyllableUpLinkToMeasure()
         fSyllableKind,
         fSyllableExtendKind,
@@ -526,7 +526,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   S_msrSyllable
     deepClone =
       msrSyllable::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         gNullMeasure, // set later in setSyllableUpLinkToMeasure()
         fSyllableKind,
         fSyllableExtendKind,
@@ -614,11 +614,11 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
 //           "syllable with measure number '" <<
 //           measureNumber <<
 //           "' is no line nor page break" <<
-//           ", line " << fInputStartLineNumber; // JMI v0.9.70
+//           ", line " << fInputLineNumber; // JMI v0.9.70
 //
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
-//           fInputStartLineNumber,
+//           fInputLineNumber,
 //           __FILE__, __LINE__,
 //           ss.str ());
 //       }
@@ -815,7 +815,7 @@ std::string msrSyllable::syllableWholeNotesPitchAndOctaveAsString () const // JM
       case msrNoteKind::kNoteRegularInChord:
         result =
           wholeNotesPitchAndOctaveAsString (
-            fInputStartLineNumber,
+            fInputLineNumber,
             fSyllableWholeNotes);
         break;
 
@@ -845,7 +845,7 @@ std::string msrSyllable::syllableWholeNotesPitchAndOctaveAsString () const // JM
   else {
     result =
       wholeNotesPitchAndOctaveAsString (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fSyllableWholeNotes);
   }
 
@@ -945,7 +945,7 @@ std::string msrSyllable::asString () const
     }
 
   ss <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   ss <<
     ", " <<
@@ -955,7 +955,7 @@ std::string msrSyllable::asString () const
     case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
+        fInputLineNumber,
         __FILE__, __LINE__,
         "syllable type has not been set");
       break;
@@ -1024,7 +1024,7 @@ std::string msrSyllable::asShortString () const
 //     }
 
   ss <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   ss << ']';
 
@@ -1037,7 +1037,7 @@ void msrSyllable::printFull (std::ostream& os) const
     "[Syllable" <<
     ", fSyllableKind: " <<
     fSyllableKind <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1102,7 +1102,7 @@ void msrSyllable::printFull (std::ostream& os) const
     case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
+        fInputLineNumber,
         __FILE__, __LINE__,
         "syllable type has not been set");
       break;
@@ -1279,7 +1279,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
   S_msrStanza
     newbornClone =
       msrStanza::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fStanzaNumber,
         containingVoice);
 
@@ -1335,7 +1335,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
   S_msrStanza
     stanzaDeepClone =
       msrStanza::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fStanzaNumber,
         containingVoice);
 
@@ -1398,7 +1398,7 @@ void msrStanza::appendSyllableToStanza (
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", positionsDelta: " <<
       positionsDelta.asString () <<
-      ", line " << syllable->getInputStartLineNumber ();
+      ", line " << syllable->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1412,7 +1412,7 @@ void msrStanza::appendSyllableToStanza (
 //     S_msrSyllable
 //       skipRestNoteSyllable =
 //         msrSyllable::create (
-//           syllable->getInputStartLineNumber (),
+//           syllable->getInputLineNumber (),
 //           msrSyllableKind::kSyllableSkipOnRestNote,
 //           msrSyllableExtendKind::kSyllableExtend_NONE,
 //           fStanzaNumber,
@@ -1466,7 +1466,7 @@ void msrStanza::appendSyllableToStanza (
     case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
+        fInputLineNumber,
         __FILE__, __LINE__,
         "syllable type has not been set");
       break;
@@ -1533,7 +1533,7 @@ void msrStanza::appendSyllableToStanzaClone (
     case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
+        fInputLineNumber,
         __FILE__, __LINE__,
         "syllable type has not been set");
       break;

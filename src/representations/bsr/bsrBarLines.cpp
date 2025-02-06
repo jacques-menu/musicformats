@@ -58,7 +58,7 @@ bsrBarLine::bsrBarLine (
       "Creating bsrBarLine '" <<
       asString () <<
       "', line " <<
-      fInputStartLineNumber;
+      fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -75,7 +75,7 @@ S_bsrCellsList bsrBarLine::buildCellsList () const
   S_bsrCellsList
     result =
       bsrCellsList::create (
-        fInputStartLineNumber);
+        fInputLineNumber);
 
   switch (fBarLineKind) {
     case bsrBarLineKind::kBarLineKindNone:
@@ -94,14 +94,14 @@ S_bsrCellsList bsrBarLine::buildCellsList () const
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputStartLineNumber,
+            fInputLineNumber,
             bsrCellKind::kDots126, bsrCellKind::kDots13));
       break;
     case bsrBarLineKind::kBarLineKindSectionalDouble:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
-            fInputStartLineNumber,
+            fInputLineNumber,
             bsrCellKind::kDots126, bsrCellKind::kDots13, bsrCellKind::kDots3));
       break;
   } // switch
@@ -252,7 +252,7 @@ std::string bsrBarLine::asString () const
     "BarLine" <<
     ", " << bsrBarLineKindAsString (fBarLineKind) <<
     ", barLineCellsList: " << fBarLineCellsList->asShortString () <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -279,7 +279,7 @@ void bsrBarLine::print (std::ostream& os) const
 {
   os <<
     "BarLine" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

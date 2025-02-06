@@ -22,6 +22,9 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+typedef int mfInputLineNumber;
+
+//______________________________________________________________________________
 class EXP mfInputLinesRange
 {
   public:
@@ -44,10 +47,10 @@ public:
     // ------------------------------------------------------
 
     int                   getInputStartLineNumber () const
-                              { return fInputStartLineNumber; }
+                              { return fInputLineNumber; }
 
     void                  setInputStartLineNumber (int value)
-                              { fInputStartLineNumber = value; }
+                              { fInputLineNumber = value; }
 
     int                   getInputEndLineNumber () const
                               { return fInputEndLineNumber; }
@@ -76,7 +79,7 @@ public:
     // private fields
     // ------------------------------------------------------
 
-    int                  fInputStartLineNumber;
+    int                  fInputLineNumber;
     int                  fInputEndLineNumber;
 };
 

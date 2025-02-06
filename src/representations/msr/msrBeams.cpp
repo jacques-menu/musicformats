@@ -188,7 +188,7 @@ std::string msrBeam::asString () const
     "[Beam " <<
     msrBeamKindAsString (fBeamKind) <<
     ", number: " << fBeamNumber <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();

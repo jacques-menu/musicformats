@@ -207,10 +207,10 @@ enum class msrMeasureRepeatKind {
   kMeasureRepeatStart, kMeasureRepeatStop
 };
 
-// std::string msrMeasureRepeatKindAsString ( // JMI v0.9.66
-//   msrMeasureRepeatKind measureRepeatKind);
-//
-// std::ostream& operator << (std::ostream& os, const msrMeasureRepeatKind& elt);
+std::string msrMeasureRepeatKindAsString ( // JMI v0.9.66
+  msrMeasureRepeatKind measureRepeatKind);
+
+std::ostream& operator << (std::ostream& os, const msrMeasureRepeatKind& elt);
 
 enum class msrMeasureRepeatBuildPhaseKind {
   kMeasureRepeatBuildPhaseJustCreated,

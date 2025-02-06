@@ -80,7 +80,7 @@ msrPartGroupElement::~msrPartGroupElement ()
 // {
 // //   os << // JMI
 // //     "PartGroupElement" <<
-// //     ", line " << fInputStartLineNumber <<
+// //     ", line " << fInputLineNumber <<
 // //     std::endl;
 //
 //   if (

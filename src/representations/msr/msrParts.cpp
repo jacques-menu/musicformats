@@ -131,7 +131,7 @@ void msrPart::initializePart ()
 
       msrWarning (
         gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
+        fInputLineNumber,
         ss.str ());
     }
 #endif // MF_TRACE_IS_ENABLED
@@ -234,7 +234,7 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
   S_msrPart
     newbornClone =
       msrPart::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fPartID,
         partGroupClone);
 
@@ -283,7 +283,7 @@ void msrPart::registerStaffInPart (
       staff->getStaffNumber () <<
       " in part " <<
       fetchPartCombinedName () <<
-      ", line " << fInputStartLineNumber;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -332,11 +332,11 @@ void msrPart::registerStaffInPart (
         ss <<
           "a harmonies staff already exists in part " <<
           fetchPartCombinedName () <<
-          ", line " << staff->getInputStartLineNumber ();
+          ", line " << staff->getInputLineNumber ();
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          staff->getInputStartLineNumber (),
+          staff->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -355,11 +355,11 @@ void msrPart::registerStaffInPart (
         ss <<
           "a figured bass staff already exists in part " <<
           fetchPartCombinedName () <<
-          ", line " << staff->getInputStartLineNumber ();
+          ", line " << staff->getInputLineNumber ();
 
         msrInternalError ( // JMI ???
           gServiceRunData->getInputSourceName (),
-          staff->getInputStartLineNumber (),
+          staff->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2177,7 +2177,7 @@ void msrPart::sortStavesByIncreasingNumber ()
       ", " <<
       fPartName <<
       " by increasing number";
-//       ", line " << voice->getInputStartLineNumber ();
+//       ", line " << voice->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2250,7 +2250,7 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
       fPartID <<
       ", " <<
       fPartName <<
-      ", line " << voice->getInputStartLineNumber ();
+      ", line " << voice->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2269,12 +2269,12 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
       voice->getVoiceName () <<
       "\", has already been registered in the voices map of part \"" << // JMI v0.9.70
       getPartName () <<
-      "\", line " << voice->getInputStartLineNumber ();
+      "\", line " << voice->getInputLineNumber ();
 
 //     msrError (
     msrWarning (
       gServiceRunData->getInputSourceName (),
-      voice->getInputStartLineNumber (),
+      voice->getInputLineNumber (),
 //       __FILE__, __LINE__,
       ss.str ());
   }
@@ -2293,7 +2293,7 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
     displayPartStaffVoicesMap (
-      voice->getInputStartLineNumber (),
+      voice->getInputLineNumber (),
       "msrPart::registerVoiceInPartVoicesList()");
   }
 #endif
@@ -2318,7 +2318,7 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
 //       ", \"" <<
 //       fPartName <<
 //       "\"" <<
-//       ", line " << voice->getInputStartLineNumber ();
+//       ", line " << voice->getInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
@@ -2337,11 +2337,11 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
 //       voice->getVoiceName () <<
 //       "\", has already been registered in the regular voices map of part \"" << // JMI v0.9.70
 //       getPartName () <<
-//       "\", line " << voice->getInputStartLineNumber ();
+//       "\", line " << voice->getInputLineNumber ();
 //
 //     msrError (
 //       gServiceRunData->getInputSourceName (),
-//       voice->getInputStartLineNumber (),
+//       voice->getInputLineNumber (),
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -2372,7 +2372,7 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
 //       ", \"" <<
 //       fPartName <<
 //       "\"" <<
-//       ", line " << voice->getInputStartLineNumber ();
+//       ", line " << voice->getInputLineNumber ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
@@ -2391,11 +2391,11 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
 //       voice->getVoiceName () <<
 //       "\", has already been registered in the regular voices map of part \"" << // JMI v0.9.70
 //       getPartName () <<
-//       "\", line " << voice->getInputStartLineNumber ();
+//       "\", line " << voice->getInputLineNumber ();
 //
 //     msrError (
 //       gServiceRunData->getInputSourceName (),
-//       voice->getInputStartLineNumber (),
+//       voice->getInputLineNumber (),
 //       __FILE__, __LINE__,
 //       ss.str ());
 //   }
@@ -2413,7 +2413,7 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
 //     displayPartRegularVoicesMap (
-//       voice->getInputStartLineNumber (),
+//       voice->getInputLineNumber (),
 //       "msrPart::registerVoiceInRegularVoicesMap()");
 //   }
 // #endif
@@ -2701,7 +2701,7 @@ void msrPart::appendFiguredBassToPart (
       "\" to part " <<
       fetchPartCombinedName () <<
       ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
-      ", line " << figuredBass->getInputStartLineNumber ();
+      ", line " << figuredBass->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2734,7 +2734,7 @@ void msrPart::appendFiguredBassToPart (
 //           figuredBass->asString () <<
 //           " to part " <<
 //           fetchPartCombinedName () <<
-//           ", line " << figuredBass->getInputStartLineNumber () <<
+//           ", line " << figuredBass->getInputLineNumber () <<
 //           std::endl;
 //
 //           gWaeHandler->waeTrace (
@@ -2745,7 +2745,7 @@ void msrPart::appendFiguredBassToPart (
 //
 //       fPartFiguredBassVoice->
 //         appendFiguredBassToVoice (
-//           figuredBass->getInputStartLineNumber (),
+//           figuredBass->getInputLineNumber (),
 //           figuredBass);
 //       break;
 //
@@ -2764,11 +2764,11 @@ void msrPart::appendFiguredBassToPart (
 //           " voice \" " <<
 //           figuredBassSupplierVoice->getVoiceName () <<
 //           "\"" <<
-//           ", line " << figuredBass->getInputStartLineNumber ();
+//           ", line " << figuredBass->getInputLineNumber ();
 //
 //         msrInternalError (
 //           gServiceRunData->getInputSourceName (),
-//           figuredBass->getInputStartLineNumber (),
+//           figuredBass->getInputLineNumber (),
 //           __FILE__, __LINE__,
 //           ss.str ());
 //       }
@@ -2796,7 +2796,7 @@ void msrPart::appendFiguredBassToPartClone (
           figuredBass->asString () <<
           " to part clone " <<
           fetchPartCombinedName () <<
-          ", line " << figuredBass->getInputStartLineNumber ();
+          ", line " << figuredBass->getInputLineNumber ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -2823,11 +2823,11 @@ void msrPart::appendFiguredBassToPartClone (
           " voice \" " <<
           figuredBassSupplierVoice->getVoiceName () <<
           "\"" <<
-          ", line " << figuredBass->getInputStartLineNumber ();
+          ", line " << figuredBass->getInputLineNumber ();
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          figuredBass->getInputStartLineNumber (),
+          figuredBass->getInputLineNumber (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -2934,7 +2934,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
     ss <<
       "addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded () in " <<
       fetchPartCombinedName () <<
-      ", line " << skipGraceNotesGroup->getInputStartLineNumber ();
+      ", line " << skipGraceNotesGroup->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3539,11 +3539,11 @@ void msrPart::browseData (basevisitor* v)
           "staves browsing order is unknown in score, part: \"" <<
           fetchPartCombinedName () <<
           "\"" <<
-          ", line " << fInputStartLineNumber;
+          ", line " << fInputLineNumber;
 
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputStartLineNumber,
+          fInputLineNumber,
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -3637,7 +3637,7 @@ std::string msrPart::asString () const
     "\", fPartMsrName: " << fPartMsrName <<
     fPartName <<
     "\", fPartAllStavesList.size (): " << fPartAllStavesList.size () <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -3685,7 +3685,7 @@ void msrPart::printFull (std::ostream& os) const
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
     ")" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -4118,7 +4118,7 @@ void msrPart::print (std::ostream& os) const
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
     ")" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

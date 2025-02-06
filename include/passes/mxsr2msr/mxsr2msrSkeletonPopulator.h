@@ -1370,7 +1370,7 @@ class EXP mxsr2msrSkeletonPopulator :
     Bool                      fOnGoingStaffTuning;
 
 
-    // measures
+    // measures handling
     // ------------------------------------------------------
 
     // we need to count the measures for option fSeparatorLineEveryNMeasures,
@@ -1383,7 +1383,27 @@ class EXP mxsr2msrSkeletonPopulator :
     std::string               fCurrentMeasureNumber;
 
     // measure end line number
-    int                       fPreviousMeasureEndInputLineNumber;
+    int                       fPreviousMeasureInputLineNumber;
+
+
+		void											displayGatheredMeasureRepeatInformations (
+																const std::string& context) const;
+
+    S_msrMeasureRepeat        createMeasureRepeat (
+                                int inputLineNumber,
+                                int tupletNumber);
+
+    void                      handleMeasureRepeatBeginEventsIfAny ();
+
+    void                      handleMeasureRepeatEndEventsIfAny ();
+
+    void                      handleMeasureRepeatBegin (
+                                const S_msrVoice& currentNoteVoice,
+                                int               tupletNumber);
+
+    void                      handleMeasureRepeatEnd (
+                                const S_msrNote&  note,
+                                const S_msrVoice& currentNoteVoice);
 
 
     // measure style handling

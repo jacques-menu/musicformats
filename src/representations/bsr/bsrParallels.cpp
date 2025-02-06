@@ -53,7 +53,7 @@ bsrParallel::~bsrParallel ()
       "Creating bsrParallel '" <<
       asString () <<
       "', line " <<
-      fInputStartLineNumber;
+      fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

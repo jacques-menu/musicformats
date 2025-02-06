@@ -132,6 +132,7 @@ class EXP mxsr2msrSkeletonBuilder :
   // ------------------------------------------------------
 
   public                      visitor<S_measure>,
+  public                      visitor<S_measure_repeat>,
 
   // print
   // ------------------------------------------------------
@@ -323,6 +324,9 @@ class EXP mxsr2msrSkeletonBuilder :
 
     virtual void              visitStart (S_measure& elt);
     virtual void              visitEnd   (S_measure& elt);
+
+    virtual void              visitStart (S_measure_repeat& elt);
+    virtual void              visitEnd   (S_measure_repeat& elt);
 
     // print
     // ------------------------------------------------------
@@ -618,7 +622,11 @@ class EXP mxsr2msrSkeletonBuilder :
     // measures
     // ------------------------------------------------------
 
+    mfInputLineNumber         fCurrentMeasureInputLineNumber;
+    mfInputLineNumber         fPreviousMeasureInputLineNumber;
+
     std::string               fCurrentMeasureNumber;
+    std::string               fPreviousMeasureNumber;
 
     std::string               fScoreFirstMeasureNumber;
     std::string               fScoreLastMeasureNumber;
@@ -641,10 +649,9 @@ class EXP mxsr2msrSkeletonBuilder :
 		int	                      fCurrentNoteSequentialNumber;
 		int	                      fPreviousNoteSequentialNumber;
 
-		int	                      fCurrentNoteStartInputLineNumber;
-		int	                      fCurrentNoteEndInputLineNumber;
+		int	                      fCurrentNoteInputLineNumber;
 
-		int	                      fPreviousNoteStartInputLineNumber;
+		int	                      fPreviousNoteInputLineNumber;
 		int	                      fPreviousNoteEndInputLineNumber;
 
     int                       fCurrentNoteStaffNumber; // used throughout

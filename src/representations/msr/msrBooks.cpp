@@ -103,7 +103,7 @@ S_msrBook msrBook::createBookNewbornClone ()
   S_msrBook
     newbornClone =
       msrBook::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fBookName);
 
   // number of measures
@@ -171,7 +171,7 @@ void msrBook::addBookElementToBook (
 
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      bookElement->getInputStartLineNumber (),
+      bookElement->getInputLineNumber (),
       __FILE__, __LINE__,
       ss.str ());
   }
@@ -553,7 +553,7 @@ void msrBook::printFull (std::ostream& os) const
 {
   os <<
     "[MSR book" <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

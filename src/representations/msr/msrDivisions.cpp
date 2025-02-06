@@ -67,7 +67,7 @@ S_msrDivisions msrDivisions::createDivisionsNewbornClone ()
   S_msrDivisions
     newbornClone =
       msrDivisions::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         fDivisionsPerQuarterNote);
 
   return newbornClone;
@@ -101,7 +101,7 @@ void msrDivisions::initializeDivisions ()
     ss <<
       "Initializing divisions" <<
       ", divisionsPerQuarterNote: " << fDivisionsPerQuarterNote <<
-      ", line " << fInputStartLineNumber;
+      ", line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

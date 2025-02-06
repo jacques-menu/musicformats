@@ -61,7 +61,7 @@ msdrLayer::msdrLayer (
 
   fLayerNumber = layerNumber;
 
-  fInputStartLineNumber = inputLineNumber;
+  fInputLineNumber = inputLineNumber;
 }
 
 void msdrLayer::initializeLayer ()
@@ -243,7 +243,7 @@ std::string msdrLayer::asShortString () const
 
   ss <<
     "MSDR layer '" << fLayerNumber << "', " <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -254,7 +254,7 @@ std::string msdrLayer::asString () const
 
   ss <<
     "MSDR layer '" << fLayerNumber << "', " <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   return ss.str ();
 }
@@ -285,7 +285,7 @@ void msdrLayer::printFull (std::ostream& os) const
 {
   os <<
     "MSDR measure '" << fLayerNumber <<
-    "', line " << fInputStartLineNumber <<
+    "', line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -369,7 +369,7 @@ void msdrLayer::print (std::ostream& os) const
   os <<
     "MSDR layer '" <<
     fLayerNumber <<
-    "', line " << fInputStartLineNumber <<
+    "', line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;

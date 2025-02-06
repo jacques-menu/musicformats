@@ -212,7 +212,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   const S_msrTuplet&
     newbornClone =
       msrTuplet::create (
-        fInputStartLineNumber,
+        fInputLineNumber,
         gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fTupletNumber,
         fTupletBracketKind,
@@ -581,7 +581,7 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
   else {
     msrInternalError (
       gServiceRunData->getInputSourceName (),
-      fInputStartLineNumber,
+      fInputLineNumber,
       __FILE__, __LINE__,
       "cannot access the first note of an empty tuplet");
   }
@@ -627,7 +627,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
+        fInputLineNumber,
         __FILE__, __LINE__,
         "removeFirstNoteFromTuplet () expects a note as the first tuplet element");
     }
@@ -746,7 +746,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 //
 //       msrInternalError (
 //         gServiceRunData->getInputSourceName (),
-//         fInputStartLineNumber,
+//         fInputLineNumber,
 //         __FILE__, __LINE__,
 //         "removeLastNoteFromTuplet () expects a note as the last tuplet element");
 //     }
@@ -834,7 +834,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 // //
 // //       msrInternalError (
 // //         gServiceRunData->getInputSourceName (),
-// //         fInputStartLineNumber,
+// //         fInputLineNumber,
 // //         __FILE__, __LINE__,
 // //         "removeLastNoteFromTuplet () expects a note as the last tuplet element");
 // //     }
@@ -1018,7 +1018,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
     else {
       msrInternalError (
         gServiceRunData->getInputSourceName (),
-        fInputStartLineNumber,
+        fInputLineNumber,
         __FILE__, __LINE__,
         "tuplet member should be a note, a chord or another tuplet");
     }
@@ -1160,7 +1160,7 @@ std::string msrTuplet::asString () const
     ", fTupletKind: " << fTupletKind <<
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes.asFractionString () <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   ss <<
     ", getMeasureNumber: ";
@@ -1209,13 +1209,13 @@ std::string msrTuplet::asString () const
       else {
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputStartLineNumber,
+          fInputLineNumber,
           __FILE__, __LINE__,
           "tuplet member should be a note, a chord or another tuplet");
       }
 
       if (++i == iEnd) break;
-      ss << ', ';
+      ss << ", ";
 
     } // for
   }
@@ -1238,7 +1238,7 @@ std::string msrTuplet::asShortString () const
     ", fTupletKind: " << fTupletKind <<
     ", fMeasureElementSoundingWholeNotes: " <<
     fMeasureElementSoundingWholeNotes.asFractionString () <<
-    ", line " << fInputStartLineNumber;
+    ", line " << fInputLineNumber;
 
   ss <<
     ", getMeasureNumber: ";
@@ -1287,7 +1287,7 @@ std::string msrTuplet::asShortString () const
       else {
         msrInternalError (
           gServiceRunData->getInputSourceName (),
-          fInputStartLineNumber,
+          fInputLineNumber,
           __FILE__, __LINE__,
           "tuplet member should be a note, a chord or another tuplet");
       }
@@ -1312,7 +1312,7 @@ void msrTuplet::printFull (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -1440,7 +1440,7 @@ void msrTuplet::print (std::ostream& os) const
     ", " <<
     mfSingularOrPlural (
       fTupletElementsList.size (), "element", "elements") <<
-    ", line " << fInputStartLineNumber <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
