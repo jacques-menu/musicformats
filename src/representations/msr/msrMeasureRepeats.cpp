@@ -956,9 +956,9 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatReplicas& e
 
 //______________________________________________________________________________
 S_msrMeasureRepeat msrMeasureRepeat::create (
-  int        inputLineNumber,
-  int        measureRepeatMeasuresNumber,
-  int        measureRepeatSlashesNumber,
+  int               inputLineNumber,
+  int               measureRepeatMeasuresNumber,
+  int               measureRepeatSlashesNumber,
   const S_msrVoice& upLinkToVoice)
 {
   msrMeasureRepeat* obj =
@@ -972,9 +972,9 @@ S_msrMeasureRepeat msrMeasureRepeat::create (
 }
 
 msrMeasureRepeat::msrMeasureRepeat (
-  int        inputLineNumber,
-  int        measureRepeatMeasuresNumber,
-  int        measureRepeatSlashesNumber,
+  int               inputLineNumber,
+  int               measureRepeatMeasuresNumber,
+  int               measureRepeatSlashesNumber,
   const S_msrVoice& upLinkToVoice)
     : msrSegmentElement (inputLineNumber)
 {

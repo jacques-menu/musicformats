@@ -828,7 +828,7 @@ class EXP lpsr2lilypondTranslator :
                             const msrWholeNotes& wholeNotes);
 
     std::string           notesDurationKindAsLilypondString (
-                            msrNotesDurationKind notesNotesDurationKind);
+                            msrNotesDurationKind notesDurationKind);
 
     // notes
 

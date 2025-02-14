@@ -70,30 +70,10 @@ class mxsrVoice : public smartable
     std::string           fetchMsrVoiceName () const
                               { return fMsrVoice->getVoiceName (); }
 
-    void                  pushTupletOntoTupletsStack (
+    void                  appendTupletToMsrVoice (
+                            int                inputLineNumber,
                             const S_msrTuplet& tuplet,
-                            std::string        context);
-
-//     void                  handleTupletStartByHandler (
-//                             const S_msrTuplet& tuplet,
-//                             const S_msrVoice&  currentNoteVoice);
-//
-//     void                  handleTupletContinueByHandler (
-//                             const S_msrNote&   note,
-//                             const S_msrVoice&  currentNoteVoice);
-//
-//     void                  handleTupletStopByHandler (
-//                             const S_msrNote&   note,
-//                             const S_msrVoice&  currentNoteVoice);
-
-    S_msrTuplet           popTupletStackTop (
-                            int         inputLineNumber,
-                            std::string context);
-
-    void                  appendTupletWhereItBelongs (
-                            int         inputLineNumber,
-                            S_msrTuplet tuplet,
-                            std::string context);
+                            const std::string& context);
 
     const std::size_t     fetchTupletsStackSize () const
                               { return fTupletsStack.size (); }
@@ -101,8 +81,38 @@ class mxsrVoice : public smartable
     Bool                  fetchTupletsStackIsEmpty () const
                               { return fTupletsStack.size () == 0; }
 
-    const S_msrTuplet     fetchTupletsStackTop () const
+    const S_msrTuplet     fetchInnerMostTuplet () const
                               { return fTupletsStack.front (); }
+
+    void                  pushTupletOntoTupletsStack (
+                            const S_msrTuplet& tuplet,
+                            const std::string& context);
+
+    S_msrTuplet           popInnerMostTuplet (
+                            int                inputLineNumber,
+                            const std::string& context);
+
+    void                  appendNoteToInnerMostTuplet (
+                            int                inputLineNumber,
+                            const S_msrNote&   note,
+                            const std::string& context);
+
+    void                  appendTupletWhereItBelongs (
+                            int                inputLineNumber,
+                            const S_msrTuplet& tuplet,
+                            const std::string& context);
+
+    void                  handleTupletBegin (
+                            const S_msrVoice& currentNoteVoice,
+                            S_msrTuplet       tuplet);
+
+    void                  handleTupletContinue (
+                            const S_msrNote&  note,
+                            const S_msrVoice& currentNoteVoice);
+
+    void                  handleTupletEnd (
+                            const S_msrNote&  note,
+                            const S_msrVoice& currentNoteVoice);
 
   public:
 

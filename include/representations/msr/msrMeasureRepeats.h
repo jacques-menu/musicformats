@@ -12,6 +12,9 @@
 #ifndef ___msrMeasureRepeats___
 #define ___msrMeasureRepeats___
 
+// // #include "mfInputLinesRange.h"
+#include "mfWrapperTypes.h"
+
 #include "msrElements.h"
 #include "msrSegmentElements.h"
 
@@ -233,9 +236,9 @@ class EXP msrMeasureRepeat : public msrSegmentElement
     // ------------------------------------------------------
 
     static SMARTP<msrMeasureRepeat> create (
-                            int        inputLineNumber,
-                            int        measureRepeatMeasuresNumber,
-                            int        measureRepeatSlashesNumber,
+                            int               inputLineNumber,
+                            int               measureRepeatMeasuresNumber,
+                            int               measureRepeatSlashesNumber,
                             const S_msrVoice& upLinkToVoice);
 
     SMARTP<msrMeasureRepeat> createMeasureRepeatNewbornClone (
@@ -250,9 +253,9 @@ class EXP msrMeasureRepeat : public msrSegmentElement
     // ------------------------------------------------------
 
                           msrMeasureRepeat (
-                            int        inputLineNumber,
-                            int        measureRepeatMeasuresNumber,
-                            int        measureRepeatSlashesNumber,
+                            int               inputLineNumber,
+                            int               measureRepeatMeasuresNumber,
+                            int               measureRepeatSlashesNumber,
                             const S_msrVoice& upLinkToVoice);
 
     virtual               ~msrMeasureRepeat ();

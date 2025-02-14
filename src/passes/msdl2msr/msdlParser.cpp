@@ -3856,7 +3856,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
   ++gIndenter;
 
   // there should be an integer or a name such as "maxima"
-  msrNotesDurationKind notesNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+  msrNotesDurationKind notesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
 
   if (
     checkOptionalTokenKindsSet (
@@ -3868,7 +3868,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
       // get the fraction
       int durationInteger = fCurrentToken.getTokenDescription ().getInteger ();
 
-      notesNotesDurationKind =
+      notesDurationKind =
         msrNotesDurationKindFromInteger (
           fCurrentToken.getTokenLineNumber (),
           durationInteger);
@@ -3880,7 +3880,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
         ss <<
           "=== NoteNotesDuration()" <<
           ", durationInteger: \"" << durationInteger << "\"" <<
-          ", notesNotesDurationKind: \"" << msrNotesDurationKindAsString (notesNotesDurationKind) << "\"" <<
+          ", notesDurationKind: \"" << msrNotesDurationKindAsString (notesDurationKind) << "\"" <<
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
@@ -3899,7 +3899,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
       std::string durationName =
         fCurrentToken.getTokenDescription ().getString ();
 
-      notesNotesDurationKind =
+      notesDurationKind =
         msrNotesDurationKindFromString (
           fCurrentToken.getTokenLineNumber (),
           durationName);
@@ -3911,7 +3911,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
         ss <<
           "=== NoteNotesDuration()" <<
           ", durationName: \"" << durationName << "\"" <<
-          ", notesNotesDurationKind: \"" << msrNotesDurationKindAsString (notesNotesDurationKind) << "\"" <<
+          ", notesDurationKind: \"" << msrNotesDurationKindAsString (notesDurationKind) << "\"" <<
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
@@ -3923,7 +3923,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-    switch (notesNotesDurationKind) {
+    switch (notesDurationKind) {
       case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
         fParserWaeHandler->
           malformedNoteNotesDuration ();
@@ -3954,12 +3954,12 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 
   fCurrentNoteSoundingWholeNotes =
     wholeNotesFromNotesDurationKindAndDotsNumber (
-      notesNotesDurationKind,
+      notesDurationKind,
       fCurrentNoteDotsNumber);
 
   fCurrentNoteDisplayWholeNotes =
     msrNotesDurationKindAsWholeNotes (
-      notesNotesDurationKind);
+      notesDurationKind);
 
   --gIndenter;
 

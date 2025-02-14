@@ -7,9 +7,9 @@
 xmlfiles          = $(shell find . -name "*.xml")
 xmllily           = $(shell find . -name "*.xml")
 
-lilyout           := $(xmllily:./%.xml=lilypond/%.ly)
+lilyout           := $(xmllily:./%.xml=%.ly)
 
-pdflily           := $(patsubst ./%.xml, pdflily/%.pdf, $(xmlfiles))
+pdffiles          := $(patsubst ./%.xml, %.pdf, $(xmlfiles))
 svglily           := $(patsubst ./%.xml, svglily/%.svg, $(xmlfiles))
 pnglily           := $(patsubst ./%.xml, pnglily/%.png, $(xmlfiles))
 pslily            := $(patsubst ./%.xml, pslily/%.ps, $(xmlfiles))
@@ -34,7 +34,7 @@ LILYPOND  ?= /opt/homebrew/bin/lilypond
 # LILYPOND  ?= /opt/local/bin/lilypond
 # LILYPOND  ?= /Applications/LilyPond/lilypond-2.23.6/bin/lilypond
 
-.PHONY: lilyignored lily
+.PHONY: lilyignored lilypondfiles
 .DELETE_ON_ERROR:
 
 #########################################################################
@@ -57,8 +57,8 @@ all:
 	@#echo "$(lilyout)"
 	@#echo
 
-	@#echo "pdflily:"
-	@#echo "$(pdflily)"
+	@#echo "pdffiles:"
+	@#echo "$(pdffiles)"
 	@#echo
 
 	@#echo "svglily:"
@@ -77,7 +77,7 @@ all:
 	@#echo "$(epslily)"
 	@#echo
 
-	@$(MAKE) pdflily
+	@$(MAKE) pdffiles
 
 #########################################################################
 help:
@@ -86,17 +86,17 @@ help:
 	@echo "Output files are written in sub-folders of the current folder."
 	@echo
 	@echo "Available targets are:"
-	@echo "  'all' (default) : call the 'lily' target."
+	@echo "  'all' (default) : call the 'lilypondfiles' target."
 	@echo
-	@echo "  'lily'          : converts the set of MusicXML files to LilyPond in folder lilypond"
+	@echo "  'lilypondfiles' : converts the set of MusicXML files to LilyPond in folder lilypond"
 	@echo
-	@echo "  'pdflily'       : converts the output of 'lily' target to pdf in folder pdflily"
-	@echo "  'svglily'       : converts the output of 'lily' target to svg in folder svglily"
-	@echo "  'pnglily'       : converts the output of 'lily' target to png in folder pnglily"
-	@echo "  'pslily'        : converts the output of 'lily' target to ps  in folder pslily"
-	@echo "  'epslily'       : converts the output of 'lily' target to eps in folder epslily"
+	@echo "  'pdffiles'      : converts the output of 'lilypondfiles' target to pdf"
+	@echo "  'svglily'       : converts the output of 'lilypondfiles' target to svg"
+	@echo "  'pnglily'       : converts the output of 'lilypondfiles' target to pngy"
+	@echo "  'pslily'        : converts the output of 'lilypondfiles' target to ps"
+	@echo "  'epslily'       : converts the output of 'lilypondfiles' target to eps"
 	@echo
-	@echo "  'check'         : displays which files failed to be translated into folder pdflily"
+	@echo "  'check'         : displays which files failed to be translated"
 	@echo
 	@echo "  'clean'         : removes the xml2ly-generated files in this folder and its sub-folders"
 	@echo
@@ -112,7 +112,7 @@ help:
 #########################################################################
 clean:
 	@[ ! -d lilypond ] || rm -r lilypond
-	@[ ! -d pdflily ]  || rm -r pdflily
+	@[ ! -d pdffiles ]  || rm -r pdffiles
 	@[ ! -d pnglilyv ] || rm -r pnglily
 	rm *.ly *.pdf *.midi
 
@@ -129,20 +129,20 @@ check:
 	@(ls -sal *.xml)
 	@echo
 	@printf "There are "
-	@(ls -sal lilypond/*.ly | wc -l)
+	@(ls -sal *.ly | wc -l)
 	@printf " LilyPond files"
-	@(ls -sal lilypond/*.ly)
+	@(ls -sal *.ly)
 	@echo
 	@printf "There are "
-	@(ls -sal pdflily/*.pdf | wc -l)
+	@(ls -sal *.pdf | wc -l)
 	@printf " PDF files"
-	@(ls -sal pdflily/*.pdf)
+	@(ls -sal *.pdf)
 	@echo
 	@echo "Files not translated:"
 	$(foreach FILE,$(MUSICXML_FILES),@echo $(FILE))
 
 #########################################################################
-lily:
+lilypondfiles:
 	@type $(XML2LY) > /dev/null || (echo "### $(XML2LY) must be available from your PATH."; false;)
 	@$(MAKE) dolily
 
@@ -154,7 +154,7 @@ lilyclean:
 	rm $(lilyout)
 
 #########################################################################
-pdflily:
+pdffiles:
 	@#type $(XML2LY) || (echo "### $(XML2LY) must be available from your PATH."; false;)
 	@echo "$(XML2LY) version is: "
 	@$(XML2LY) --version | head -1
@@ -177,8 +177,8 @@ pdflily:
 	@#echo "$(lilyout)"
 	@#echo
 
-	@#echo "pdflily:"
-	@#echo "$(pdflily)"
+	@#echo "pdffiles:"
+	@#echo "$(pdffiles)"
 	@#echo
 
 	@#echo "svglily:"
@@ -197,8 +197,8 @@ pdflily:
 	@#echo "$(epslily)"
 	@#echo
 
-	@$(MAKE) lily
-	@$(MAKE) dopdflily
+	@$(MAKE) lilypondfiles
+	@$(MAKE) dopdffiles
 
 	@echo
 
@@ -208,27 +208,27 @@ pdflily:
 	@ls -sal *.xml
 	@echo
 
-	@echo "Contents of lilypond sub-folder:"
-	@ls -sal lilypond/*.ly | wc -l ; echo " files"
+	@echo "LilyPond files:"
+	@ls -sal *.ly | wc -l ; echo " files"
 	@echo "--------------------------------------------"
-	@ls -sal lilypond/*.ly
+	@ls -sal *.ly
 	@echo
 
-	@echo "Contents of pdflily sub-folder:"
-	@ls -sal pdflily/*.pdf | wc -l ; echo " files"
+	@echo "PDF files:"
+	@ls -sal *.pdf | wc -l ; echo " files"
 	@echo "--------------------------------------------"
-	@ls -sal pdflily/*.pdf
+	@ls -sal *.pdf
 
-dopdflily: $(pdflily)
+dopdffiles: $(pdffiles)
 
-pdflilyclean:
-	@echo "pdflily = " $(pdflily) ", " $(shell wc < echo $(pdflily))
-	rm $(pdflily)
+pdffilesclean:
+	@echo "pdffiles = " $(pdffiles) ", " $(shell wc < echo $(pdffiles))
+	rm $(pdffiles)
 
 #########################################################################
 svglily:
 	@type $(LILYPOND) || (echo "### lilypond must be available from your PATH."; false;)
-	@$(MAKE) lily
+	@$(MAKE) lilypondfiles
 	@$(MAKE) dosvglily
 
 dosvglily: $(svglily)
@@ -240,7 +240,7 @@ svglilyclean:
 #########################################################################
 pnglily:
 	@type $(LILYPOND) || (echo "### lilypond must be available from your PATH."; false;)
-	@$(MAKE) lily
+	@$(MAKE) lilypondfiles
 	@$(MAKE) dopnglily
 
 dopnglily: $(pnglily)
@@ -252,7 +252,7 @@ pnglilyclean:
 #########################################################################
 pslily:
 	@type $(LILYPOND) || (echo "### lilypond must be available from your PATH."; false;)
-	@$(MAKE) lily
+	@$(MAKE) lilypondfiles
 	@$(MAKE) dopslily
 
 dopslily: $(pslily)
@@ -264,7 +264,7 @@ pslilyclean:
 #########################################################################
 epslily:
 	@type $(LILYPOND) || (echo "### lilypond must be available from your PATH."; false;)
-	@$(MAKE) lily
+	@$(MAKE) lilypondfiles
 	@$(MAKE) doepslily
 
 doepslily: $(epslily)
@@ -282,7 +282,7 @@ validlily: $(validlily)
 
 #########################################################################
 # rules for XML2LY
-lilypond/%.ly: ./%.xml
+%.ly: ./%.xml
 	@[ -d $(@D) ] || mkdir -p $(@D)
 	$(XML2LY) $(XML2LY_OPTIONS) -o "$@" "$<"
 
@@ -292,31 +292,31 @@ lilypond/%.ly: ./%.xml
 
 #########################################################################
 # rules for lilypond with pdf output
-pdflily/%.pdf: lilypond/%.ly
+%.pdf: %.ly
 	@[ -d $(@D) ] || mkdir -p $(@D)
 	$(LILYPOND) --pdf -l NONE -s -o "$(basename $@)" "$<"
 
 #########################################################################
 # rules for lilypond with svg output
-svglily/%.svg: lilypond/%.ly
+svglily/%.svg: %.ly
 	@[ -d $(@D) ] || mkdir -p $(@D)
 	$(LILYPOND) --svg -l NONE -s -o $(basename $@) $<
 
 #########################################################################
 # rules for lilypond with png output
-pnglily/%.png: lilypond/%.ly
+pnglily/%.png: %.ly
 	@[ -d $(@D) ] || mkdir -p $(@D)
 	$(LILYPOND) --png -l NONE -s -o $(basename $@) $<
 
 #########################################################################
 # rules for lilypond with ps output
-pslily/%.ps: lilypond/%.ly
+pslily/%.ps: %.ly
 	@[ -d $(@D) ] || mkdir -p $(@D)
 	$(LILYPOND) --ps -l NONE -s -o $(basename $@) $<
 
 #########################################################################
 # rules for lilypond with eps output
-epslily/%.eps: lilypond/%.ly
+epslily/%.eps: %.ly
 	@[ -d $(@D) ] || mkdir -p $(@D)
 	$(LILYPOND) --eps -l NONE -s -o $(basename $@) $<
 

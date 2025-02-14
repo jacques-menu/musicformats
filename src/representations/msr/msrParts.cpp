@@ -723,11 +723,10 @@ std::string msrPart::fetchPartCombinedName () const
 }
 
 void msrPart::cascadeCreateAMeasureAndAppendItInPart (
-  int                inputLineNumber,
-  int                previousMeasureEndInputLineNumber,
-  const std::string& measureNumber,
-  msrMeasureImplicitKind
-                     measureImplicitKind)
+  int                    inputLineNumber,
+  int                    previousMeasureEndInputLineNumber,
+  const std::string&     measureNumber,
+  msrMeasureImplicitKind measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1771,15 +1770,15 @@ void msrPart::appendRepeatEndingCloneToPart (
   } // for
 }
 
-void msrPart::createMeasureRepeatFromItsFirstMeasuresInPart (
+void msrPart::cascadeCreateAMeasureRepeatAndAppendItInPart (
   int inputLineNumber,
   int measureRepeatMeasuresNumber,
   int measureRepeatSlashes)
 {
-  // create measures repeat from its first measure in all staves
+  // create measures repeat in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      createMeasureRepeatFromItsFirstMeasuresInStaff (
+      cascadeCreateAMeasureRepeatAndAppendItInStaff (
         inputLineNumber,
         measureRepeatMeasuresNumber,
         measureRepeatSlashes);

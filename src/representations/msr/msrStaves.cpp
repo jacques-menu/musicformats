@@ -566,11 +566,10 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 */
 
 void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
-  int                inputLineNumber,
-  int                previousMeasureEndInputLineNumber,
-  const std::string& measureNumber,
-  msrMeasureImplicitKind
-                     measureImplicitKind)
+  int                    inputLineNumber,
+  int                    previousMeasureEndInputLineNumber,
+  const std::string&     measureNumber,
+  msrMeasureImplicitKind measureImplicitKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -2580,7 +2579,7 @@ void msrStaff::finalizeRepeatEndInStaff (
 }
 */
 
-void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
+void msrStaff::cascadeCreateAMeasureRepeatAndAppendItInStaff (
   int inputLineNumber,
   int measureRepeatMeasuresNumber,
   int measureRepeatSlashes)
@@ -2603,7 +2602,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      createMeasureRepeatFromItsFirstMeasures (
+      cascadeCreateAMeasureRepeatAndAppendItInVoice (
         inputLineNumber,
         measureRepeatMeasuresNumber,
         measureRepeatSlashes);

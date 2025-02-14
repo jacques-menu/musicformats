@@ -35,7 +35,7 @@ enum class msrNotesDurationKind {
   kNotesDuration128th, kNotesDuration256th, kNotesDuration512th, kNotesDuration1024th
 };
 
-std::string msrNotesDurationKindAsString (msrNotesDurationKind notesNotesDurationKind);
+std::string msrNotesDurationKindAsString (msrNotesDurationKind notesDurationKind);
 
 std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt);
 
@@ -51,7 +51,7 @@ EXP msrNotesDurationKind msrNotesDurationKindFromString (
   int                inputLineNumber,
   const std::string& durationString);
 
-std::string msrNotesDurationKindAsMusicXMLType (msrNotesDurationKind notesNotesDurationKind);
+std::string msrNotesDurationKindAsMusicXMLType (msrNotesDurationKind notesDurationKind);
 
 //______________________________________________________________________________
 class EXP msrWholeNotes
@@ -206,13 +206,19 @@ EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const msrWholeNotes& wholeNotes);
 
 EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
-  msrNotesDurationKind notesNotesDurationKind,
+  msrNotesDurationKind notesDurationKind,
   int                  dotsNumber);
 
 EXP msrWholeNotes msrNotesDurationKindAsWholeNotes (
-  msrNotesDurationKind notesNotesDurationKind);
+  msrNotesDurationKind notesDurationKind);
 
 EXP msrNotesDurationKind wholeNotesAsNotesDurationKind (msrWholeNotes wholeNotes);
+
+//______________________________________________________________________________
+EXP void checkNoteDurationKindAndWholeNotesDurationConsistency (
+  int                  inputLineNumber,
+  msrNotesDurationKind notesDurationKind,
+  msrWholeNotes        wholeNotesDuration);
 
 //______________________________________________________________________________
 std::string wholeNotesAndDotsNumberPitchAndOctaveAsString ( // JMI v0.9.67
@@ -242,7 +248,7 @@ EXP void testWholeNotes ();
 //                           msrNotesDuration ();
 //
 //                           msrNotesDuration (
-//                             msrNotesDurationKind notesNotesDurationKind,
+//                             msrNotesDurationKind notesDurationKind,
 //                             int                  dotsNumber);
 //
 //     virtual               ~msrNotesDuration ();
@@ -253,8 +259,8 @@ EXP void testWholeNotes ();
 //     // ------------------------------------------------------
 //
 //     void                  setNotesDurationKind (
-//                             msrNotesDurationKind notesNotesDurationKind)
-//                               { fNotesDurationKind = notesNotesDurationKind; }
+//                             msrNotesDurationKind notesDurationKind)
+//                               { fNotesDurationKind = notesDurationKind; }
 //
 //     msrNotesDurationKind  getNotesDurationKind () const
 //                               { return fNotesDurationKind; }
@@ -320,7 +326,7 @@ class EXP msrDottedNotesDuration
                           msrDottedNotesDuration ();
 
                           msrDottedNotesDuration (
-                            msrNotesDurationKind notesNotesDurationKind,
+                            msrNotesDurationKind notesDurationKind,
                             int                  dotsNumber);
 
     virtual               ~msrDottedNotesDuration ();
@@ -331,8 +337,8 @@ class EXP msrDottedNotesDuration
     // ------------------------------------------------------
 
     void                  setNotesDurationKind (
-                            msrNotesDurationKind notesNotesDurationKind)
-                              { fNotesDurationKind = notesNotesDurationKind; }
+                            msrNotesDurationKind notesDurationKind)
+                              { fNotesDurationKind = notesDurationKind; }
 
     msrNotesDurationKind  getNotesDurationKind () const
                               { return fNotesDurationKind; }

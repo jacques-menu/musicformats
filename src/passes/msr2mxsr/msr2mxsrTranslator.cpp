@@ -4507,7 +4507,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
 
           // append the beat unit element to the metronome elements
           msrNotesDurationKind
-            notesNotesDurationKind =
+            notesDurationKind =
               tempoBeatUnit.getNotesDurationKind ();
               /* JMI
           int
@@ -4518,7 +4518,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
           metronomeElement-> push (
             createMxmlelement (
               k_beat_unit,
-              msrNotesDurationKindAsMusicXMLType (notesNotesDurationKind)));
+              msrNotesDurationKindAsMusicXMLType (notesDurationKind)));
 
           // append the per minute element to the metronome elements
           metronomeElement-> push (createMxmlelement (k_per_minute, tempoPerMinute));
@@ -4558,7 +4558,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
 
           // append the beat unit element to the metronome elements
           msrNotesDurationKind
-            notesNotesDurationKind =
+            notesDurationKind =
               tempoBeatUnit.getNotesDurationKind ();
               /*
           int
@@ -4569,7 +4569,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
           metronomeElement-> push (
             createMxmlelement (
               k_beat_unit,
-              msrNotesDurationKindAsMusicXMLType (notesNotesDurationKind)));
+              msrNotesDurationKindAsMusicXMLType (notesDurationKind)));
 
           // append the per minute element to the metronome elements
           metronomeElement-> push (createMxmlelement (k_per_minute, tempoPerMinute));

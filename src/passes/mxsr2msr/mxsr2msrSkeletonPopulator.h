@@ -1406,6 +1406,33 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const S_msrVoice& currentNoteVoice);
 
 
+    // measure repeats handling
+    // ------------------------------------------------------
+
+    S_mxsrMeasureRepeatEvent  fCurrentMeasureRepeatBegin;
+    S_mxsrMeasureRepeatEvent  fCurrentMeasureRepeatEnd;
+
+    Bool                      fCurrentNoteBelongsToAMeasureRepeat;
+
+    Bool                      fOnGoingMeasureRepeat;
+    S_msrMeasureRepeat        fCurrentMeasureRepeat;
+
+    Bool                      fCurrentMeasureRepeatHasBeenPopulatedFromItsFirstMeasure;
+
+    void                      handleMeasureRepeatBeginEventIfAny ();
+
+    void                      handleMeasureRepeatEndEventIfAny ();
+
+    void                      handleMeasureRepeatBegin ();
+
+    void                      handleMeasureRepeatEnd ();
+
+//     void                      finalizeCurrentMeasureRepeat (
+//                                 int inputLineNumber);
+
+    void                      printCurrentMeasureRepeat ();
+
+
     // measure style handling
     // ------------------------------------------------------
 
@@ -1580,7 +1607,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // there is no fOnGoingTuplet, this is indicated
     // by fCurrentTupletStackTop being null
-    S_msrTuplet               fCurrentTupletStackTop;
+//     S_msrTuplet               fCurrentTupletStackTop;
 
     /*
       the measure position of a harmony is that of the next note
@@ -1612,18 +1639,18 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      handleTupletEndEventsIfAny ();
 
-    void                      handleTupletBegin (
-                                const S_msrVoice& currentNoteVoice,
-                                int               tupletNumber);
-
-    void                      handleTupletContinue (
-                                const S_msrNote&  note,
-                                const S_msrVoice& currentNoteVoice);
-
-    void                      handleTupletEnd (
-                                const S_msrNote&  note,
-                                const S_msrVoice& currentNoteVoice);
-
+//     void                      handleTupletBegin (
+//                                 const S_msrVoice& currentNoteVoice,
+//                                 int               tupletNumber);
+//
+//     void                      handleTupletContinue (
+//                                 const S_msrNote&  note,
+//                                 const S_msrVoice& currentNoteVoice);
+//
+//     void                      handleTupletEnd (
+//                                 const S_msrNote&  note,
+//                                 const S_msrVoice& currentNoteVoice);
+//
 
     // cue notes
     // ------------------------------------------------------
@@ -2196,14 +2223,38 @@ class EXP mxsr2msrSkeletonPopulator :
                                 const std::string& stepValue,
                                 const std::string& markup);
 
-    // notes
+    // note pitch
+    msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesPitchKind;
     msrDiatonicPitchKind      fCurrentNoteDiatonicPitchKind;
     msrAlterationKind         fCurrentNoteAlterationKind;
-
-    msrOctaveKind             fCurrentNoteOctave;
-
-    msrOctaveKind             fCurrentDisplayOctave;
     msrDiatonicPitchKind      fCurrentDisplayDiatonicPitchKind;
+
+    // note octave
+    msrOctaveKind             fCurrentNoteOctave;
+    msrOctaveKind             fCurrentDisplayOctave;
+
+    // note augmentation dots
+    int                       fCurrentNoteDotsNumber;
+
+    // note sounding duration
+    int                       fCurrentNoteDuration;
+    msrWholeNotes             fCurrentNoteSoundingWholeNotesFromNotesDuration;
+    msrWholeNotes             fCurrentNoteSoundingWholeNotes;
+    msrNotesDurationKind      fCurrentNoteSoundingDurationKind;
+
+    // note type
+    std::string               fCurrentNoteType;
+
+    // note display
+    msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesDisplayPitchKind;
+    msrWholeNotes             fCurrentNoteDisplayWholeNotesFromType;
+    msrWholeNotes             fCurrentNoteDisplayWholeNotes;
+
+    // note graphic duration
+    msrNotesDurationKind      fCurrentNoteGraphicNotesDurationKind;
+
+    // unpitched notes
+    Bool                      fCurrentNoteIsUnpitched;
 
     // note print object kind // JMI for others too v0.9.65
     msrPrintObjectKind        fCurrentNotePrintObjectKind;
@@ -2213,6 +2264,12 @@ class EXP mxsr2msrSkeletonPopulator :
     msrNoteHeadFilledKind     fCurrentNoteHeadFilledKind;
     msrNoteHeadParenthesesKind
                               fCurrentNoteHeadParenthesesKind;
+    // note color
+    std::string               fCurrentNoteRGB;
+    std::string               fCurrentNoteAlpha;
+
+    // ongoing note
+    Bool                      fOnGoingNote;
 
     // accidentals
     msrAccidentalKind         fCurrentAccidentalKind;
@@ -2221,35 +2278,9 @@ class EXP mxsr2msrSkeletonPopulator :
     msrCautionaryAccidentalKind
                               fCurrentCautionaryAccidentalKind;
 
-    // note color
-    std::string               fCurrentNoteRGB;
-    std::string               fCurrentNoteAlpha;
-
-    // ongoing note
-    Bool                      fOnGoingNote;
-
     // glissandos
 
     // slides
-
-    // note sound
-    msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesPitchKind;
-    msrWholeNotes             fCurrentNoteSoundingWholeNotesFromNotesDuration;
-    msrWholeNotes             fCurrentNoteSoundingWholeNotes;
-
-    // note display
-    msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesDisplayPitchKind;
-    msrWholeNotes             fCurrentNoteDisplayWholeNotesFromType;
-    msrWholeNotes             fCurrentNoteDisplayWholeNotes;
-
-    // augmentation dots
-    int                       fCurrentNoteDotsNumber;
-
-    // graphic duration
-    msrNotesDurationKind      fCurrentNoteGraphicNotesDurationKind;
-
-    // unpitched notes
-    Bool                      fCurrentNoteIsUnpitched;
 
     // elements attached to the note
     S_msrStem                 fCurrentStem;
@@ -2476,7 +2507,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // backup handling
     // ------------------------------------------------------
 
-    int                       fCurrentBackupDivisions;
+    int                       fCurrentBackupDuration;
     Bool                      fOnGoingBackup;
 
 //     void                      handleBackup (
@@ -2486,7 +2517,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // forward handling
     // ------------------------------------------------------
 
-    int                       fCurrentForwardDivisions;
+    int                       fCurrentForwardDuration;
     Bool                      fOnGoingForward;
 
     int                       fCurrentForwardStaffNumber;

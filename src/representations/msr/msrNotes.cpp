@@ -1797,7 +1797,7 @@ S_msrNote msrNote::createRestFromString (
 
   // compute the duration whole notes from restNotesDurationKind
   msrWholeNotes
-     notesNotesDurationKindFromMslpString =
+     notesDurationKindFromMslpString =
        msrNotesDurationKindAsWholeNotes (
          restNotesDurationKind);
 
@@ -1806,8 +1806,8 @@ S_msrNote msrNote::createRestFromString (
     std::stringstream ss;
 
     ss <<
-      "notesNotesDurationKindFromMslpString: " <<
-      notesNotesDurationKindFromMslpString;
+      "notesDurationKindFromMslpString: " <<
+      notesDurationKindFromMslpString;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1819,8 +1819,8 @@ S_msrNote msrNote::createRestFromString (
     msrNote::createRestNote (
       inputLineNumber,
       restMeasureNumber,
-      notesNotesDurationKindFromMslpString, // soundingWholeNotes
-      notesNotesDurationKindFromMslpString, // displayWholeNotes
+      notesDurationKindFromMslpString, // soundingWholeNotes
+      notesDurationKindFromMslpString, // displayWholeNotes
       dotsNumber);
 
   return result;
@@ -1958,7 +1958,7 @@ S_msrNote msrNote::createSkipFromString (
 
   // compute the duration whole notes from skipNotesDurationKind
   msrWholeNotes
-     notesNotesDurationKindFromMslpString =
+     notesDurationKindFromMslpString =
        msrNotesDurationKindAsWholeNotes (
          skipNotesDurationKind);
 
@@ -1967,8 +1967,8 @@ S_msrNote msrNote::createSkipFromString (
     std::stringstream ss;
 
     ss <<
-      "notesNotesDurationKindFromMslpString: " <<
-      notesNotesDurationKindFromMslpString;
+      "notesDurationKindFromMslpString: " <<
+      notesDurationKindFromMslpString;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1981,8 +1981,8 @@ S_msrNote msrNote::createSkipFromString (
     msrNote::createRestNote (
       inputLineNumber,
       skipMeasureNumber,
-      notesNotesDurationKindFromMslpString, // soundingWholeNotes
-      notesNotesDurationKindFromMslpString, // displayWholeNotes
+      notesDurationKindFromMslpString, // soundingWholeNotes
+      notesDurationKindFromMslpString, // displayWholeNotes
       dotsNumber);
 
   return result;
@@ -2152,7 +2152,7 @@ S_msrNote msrNote::createNoteFromString (
 
   // compute the duration whole notes from noteNotesDurationKind
   msrWholeNotes
-     notesNotesDurationKindFromMslpString =
+     notesDurationKindFromMslpString =
        msrNotesDurationKindAsWholeNotes (
          noteNotesDurationKind);
 
@@ -2167,8 +2167,8 @@ S_msrNote msrNote::createNoteFromString (
       "octaveKind: " <<
       octaveKind <<
       std::endl <<
-      "notesNotesDurationKindFromMslpString: " <<
-      notesNotesDurationKindFromMslpString;
+      "notesDurationKindFromMslpString: " <<
+      notesDurationKindFromMslpString;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2182,8 +2182,8 @@ S_msrNote msrNote::createNoteFromString (
       noteMeasureNumber,
       quarterTonesPitchKind, // msrQuarterTonesPitchKind::kQTP_D_Natural
       octaveKind, // msrOctaveKind::kOctave3
-      notesNotesDurationKindFromMslpString, // soundingWholeNotes
-      notesNotesDurationKindFromMslpString, // displayWholeNotes
+      notesDurationKindFromMslpString, // soundingWholeNotes
+      notesDurationKindFromMslpString, // displayWholeNotes
       dotsNumber);
 
   return result;

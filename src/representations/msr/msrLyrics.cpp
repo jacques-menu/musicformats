@@ -16,23 +16,20 @@
 #include "mfPreprocessorSettings.h"
 
 #include "mfAssert.h"
+#include "msrBrowsers.h"
+#include "mfConstants.h"
 #include "mfServices.h"
 #include "mfStringsHandling.h"
 
-#include "msrWae.h"
-
-#include "msrMeasureConstants.h"
-
 #include "msrLyrics.h"
+#include "msrMeasureConstants.h"
 
 #include "oahOah.h"
 
+#include "msrOah.h"
 #include "waeOah.h"
 
-#include "msrOah.h"
-
-#include "msrBrowsers.h"
-
+#include "msrWae.h"
 #include "waeHandlers.h"
 
 
@@ -1170,10 +1167,6 @@ std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt)
 }
 
 //______________________________________________________________________________
-// constants
-const std::string K_STANZA_NUMBER_UNKNOWN_ = "-1";
-const std::string K_STANZA_NAME_UNKNOWN_   = "Unknown stanza";
-
 S_msrStanza msrStanza::create (
   int                inputLineNumber,
   const std::string& stanzaNumber,

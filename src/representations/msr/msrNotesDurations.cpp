@@ -217,14 +217,14 @@ msrNotesDurationKind msrNotesDurationKindFromString (
 }
 
 EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
-  msrNotesDurationKind notesNotesDurationKind,
+  msrNotesDurationKind notesDurationKind,
   int                  dotsNumber)
 {
   // convert duration into whole notes
   msrWholeNotes
     result =
       msrNotesDurationKindAsWholeNotes (
-        notesNotesDurationKind);
+        notesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotesDurations ()) {
@@ -232,7 +232,7 @@ EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
 
     ss <<
       "=== wholeNotesFromNotesDurationKindAndDotsNumber()" <<
-      ", (int) notesNotesDurationKind: " << (int) notesNotesDurationKind <<
+      ", (int) notesDurationKind: " << (int) notesDurationKind <<
       ", result: " << result;
 
     gWaeHandler->waeTrace (
@@ -276,11 +276,11 @@ EXP msrWholeNotes wholeNotesFromNotesDurationKindAndDotsNumber (
   return result;
 }
 
-msrWholeNotes msrNotesDurationKindAsWholeNotes (msrNotesDurationKind notesNotesDurationKind)
+msrWholeNotes msrNotesDurationKindAsWholeNotes (msrNotesDurationKind notesDurationKind)
 {
   msrWholeNotes result;
 
-  switch (notesNotesDurationKind) {
+  switch (notesDurationKind) {
     case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       result = msrWholeNotes (0, 1);
       break;
@@ -395,11 +395,11 @@ msrNotesDurationKind wholeNotesAsNotesDurationKind (msrWholeNotes wholeNotes)
   return result;
 }
 
-std::string msrNotesDurationKindAsMusicXMLType (msrNotesDurationKind notesNotesDurationKind)
+std::string msrNotesDurationKindAsMusicXMLType (msrNotesDurationKind notesDurationKind)
 {
   std::string result;
 
-  switch (notesNotesDurationKind) {
+  switch (notesDurationKind) {
     case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       result = "noNotesDuration";
       break;
@@ -452,11 +452,11 @@ std::string msrNotesDurationKindAsMusicXMLType (msrNotesDurationKind notesNotesD
 }
 
 std::string msrNotesDurationKindAsString_INTERNAL (
-  msrNotesDurationKind notesNotesDurationKind) // JMI don't keep ??? v0.9.67
+  msrNotesDurationKind notesDurationKind) // JMI don't keep ??? v0.9.67
 {
   std::string result;
 
-  switch (notesNotesDurationKind) {
+  switch (notesDurationKind) {
     case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       result = "kNotesDuration_UNKNOWN_";
       break;
@@ -509,11 +509,11 @@ std::string msrNotesDurationKindAsString_INTERNAL (
 }
 
 std::string msrNotesDurationKindAsString (
-  msrNotesDurationKind notesNotesDurationKind)
+  msrNotesDurationKind notesDurationKind)
 {
   std::string result;
 
-  switch (notesNotesDurationKind) {
+  switch (notesDurationKind) {
     case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       result = "???NoNotesDuration???";
       break;
@@ -571,7 +571,83 @@ std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt)
   return os;
 }
 
-// //______________________________________________________________________________
+//______________________________________________________________________________
+EXP void checkNoteDurationKindAndWholeNotesDurationConsistency (
+  int                  inputLineNumber,
+  msrNotesDurationKind notesDurationKind,
+  msrWholeNotes        wholeNotesDuration)
+{
+  Bool consistency (false);
+
+  switch (notesDurationKind) {
+    case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
+      consistency = wholeNotesDuration == msrWholeNotes (0, 1024);
+      break;
+
+    case msrNotesDurationKind::kNotesDuration1024th:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 1024);
+      break;
+    case msrNotesDurationKind::kNotesDuration512th:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 512);
+      break;
+    case msrNotesDurationKind::kNotesDuration256th:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 256);
+      break;
+    case msrNotesDurationKind::kNotesDuration128th:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 128);
+      break;
+    case msrNotesDurationKind::kNotesDuration64th:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 64);
+      break;
+    case msrNotesDurationKind::kNotesDuration32nd:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 32);
+      break;
+    case msrNotesDurationKind::kNotesDuration16th:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 16);
+      break;
+    case msrNotesDurationKind::kNotesDurationEighth:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 8);
+      break;
+    case msrNotesDurationKind::kNotesDurationQuarter:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 4);
+      break;
+    case msrNotesDurationKind::kNotesDurationHalf:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 2);
+      break;
+    case msrNotesDurationKind::kNotesDurationWhole:
+      consistency = wholeNotesDuration == msrWholeNotes (1, 1);
+      break;
+    case msrNotesDurationKind::kNotesDurationBreve:
+      consistency = wholeNotesDuration == msrWholeNotes (2, 1);
+      break;
+    case msrNotesDurationKind::kNotesDurationLonga:
+      consistency = wholeNotesDuration == msrWholeNotes (4, 1);
+      break;
+    case msrNotesDurationKind::kNotesDurationMaxima:
+      consistency = wholeNotesDuration == msrWholeNotes (8, 1);
+      break;
+  } // switch
+
+  if (! consistency) {
+    std::stringstream ss;
+
+    ss <<
+      "notesDurationKind " <<
+      notesDurationKind <<
+      " and wholeNotesDuration " <<
+      wholeNotesDuration <<
+      " are insistent";
+
+//     msrError (
+    msrWarning (
+      gServiceRunData->getInputSourceName (),
+      inputLineNumber,
+//       __FILE__, __LINE__,
+      ss.str ());
+  }
+}
+
+// // ______________________________________________________________________________
 // msrNotesDuration::msrNotesDuration ()
 // {
 //   fNotesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
@@ -579,10 +655,10 @@ std::ostream& operator << (std::ostream& os, const msrNotesDurationKind& elt)
 // }
 //
 // msrNotesDuration::msrNotesDuration (
-//   msrNotesDurationKind notesNotesDurationKind,
+//   msrNotesDurationKind notesDurationKind,
 //   int                  dotsNumber)
 // {
-//   fNotesDurationKind = notesNotesDurationKind;
+//   fNotesDurationKind = notesDurationKind;
 //   fDotsNumber        = dotsNumber;
 // }
 //
@@ -847,10 +923,10 @@ msrDottedNotesDuration::msrDottedNotesDuration ()
 }
 
 msrDottedNotesDuration::msrDottedNotesDuration (
-  msrNotesDurationKind notesNotesDurationKind,
+  msrNotesDurationKind notesDurationKind,
   int                  dotsNumber)
 {
-  fNotesDurationKind = notesNotesDurationKind;
+  fNotesDurationKind = notesDurationKind;
   fDotsNumber        = dotsNumber;
 }
 

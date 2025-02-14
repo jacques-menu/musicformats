@@ -486,8 +486,19 @@ std::string mfStringNumbersToEnglishWords (std::string theString)
 };
 
 //______________________________________________________________________________
+// std::string mfInputLineNumberAsString (
+//   mfInputLineNumber inputLineNumber)
+// {
+//   std::stringstream ss;
+//
+//   ss <<
+//     "input line L" << inputLineNumber;
+//
+//   return ss.str ();
+// }
+
 std::string mfInputLineNumberAsString (
-  mfInputLineNumber inputLineNumber)
+  int inputLineNumber)
 {
   std::stringstream ss;
 

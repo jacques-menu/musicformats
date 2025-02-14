@@ -23,7 +23,8 @@
 #include "exports.h"
 
 #include "mfBool.h"
-#include "mfInputLinesRange.h"
+// #include "mfInputLinesRange.h"
+#include "mfWrapperTypes.h"
 
 
 namespace MusicFormats
@@ -262,8 +263,13 @@ std::string mfIntToEnglishWord (int n);
 std::string mfStringNumbersToEnglishWords (std::string str);
 
 //______________________________________________________________________________
+// std::string mfInputLineNumberAsString (
+//   mfInputLineNumber inputLineNumber);
+
+// JMI v0.9.72 kept until mfInputLineNumber is used everywhere
+// instead of int for input line numbers
 std::string mfInputLineNumberAsString (
-  mfInputLineNumber inputLineNumber);
+  int inputLineNumber);
 
 //______________________________________________________________________________
 std::set <int> mfDecipherNaturalNumbersSetSpecification (

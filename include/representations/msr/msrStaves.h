@@ -264,15 +264,26 @@ class EXP msrStaff : public msrElement
     // measures
 
     void                  cascadeCreateAMeasureAndAppendItInStaff (
-                            int                inputLineNumber,
-                            int                previousMeasureEndInputLineNumber,
-                            const std::string& measureNumber,
-                            msrMeasureImplicitKind
-                                               measureImplicitKind);
+                            int                    inputLineNumber,
+                            int                    previousMeasureEndInputLineNumber,
+                            const std::string&     measureNumber,
+                            msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInStaff (
                             int                inputLineNumber,
                             const std::string& nextMeasureNumber);
+
+    // measure repeats
+
+    void                  cascadeCreateAMeasureRepeatAndAppendItInStaff (
+                            int inputLineNumber,
+                            int beatRepeatMeasuresNumber,
+                            int beatRepeatSlashesNumber);
+
+    void                  appendPendingMeasureRepeatToStaff (
+                            int inputLineNumber);
+
+    // measure rests
 
     // repeats
 
@@ -300,13 +311,7 @@ class EXP msrStaff : public msrElement
                             int                repeatTimes);
     */
 
-    void                  createMeasureRepeatFromItsFirstMeasuresInStaff (
-                            int inputLineNumber,
-                            int measureRepeatMeasuresNumber,
-                            int measureRepeatSlashesNumber);
-
-    void                  appendPendingMeasureRepeatToStaff (
-                            int inputLineNumber);
+    // multi-measure rests
 
     void                  appendMultiMeasureRestToStaff ( // JMI UNUSED
                             int inputLineNumber,
@@ -314,6 +319,8 @@ class EXP msrStaff : public msrElement
 
     void                  appendPendingMultiMeasureRestsToStaff (
                             int inputLineNumber);
+
+    // other
 
     void                  replicateLastAppendedMeasureInStaff (
                             int inputLineNumber,
@@ -328,17 +335,18 @@ class EXP msrStaff : public msrElement
                             int                          inputLineNumber,
                             const S_msrMultiMeasureRest& multiMeasureRests);
 
-    void                  createBeatRepeatFromItsFirstMeasuresInStaff (
-                            int inputLineNumber,
-                            int beatRepeatMeasuresNumber,
-                            int beatRepeatSlashesNumber);
-
     void                  appendRepeatCloneToStaff (
                             int                inputLineNumber,
                             const S_msrRepeat& repeatCLone);
 
     void                  appendRepeatEndingCloneToStaff (
                             const S_msrRepeatEnding& repeatEndingClone);
+
+    // beat repeats
+    void                  createABeatRepeatFromItsFirstMeasuresInStaff ( // JMI v0.9.72
+                            int inputLineNumber,
+                            int beatRepeatMeasuresNumber,
+                            int beatRepeatSlashesNumber);
 
     // bar lines
 

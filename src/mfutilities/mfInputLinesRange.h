@@ -22,7 +22,37 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-typedef int mfInputLineNumber;
+// typedef int mfInputLineNumber;
+
+/*
+  We want to disambiguate the various uses of some basic type in parameters,
+  to help fix nasty bugs in which the wrong expression is supplied...
+*/
+
+template<typename T>
+class explicit_t
+{
+  private:
+    T value;
+
+//     template<typename V> explicit_t (V t);
+
+  public:
+
+    operator T& () { return value; }
+
+    explicit_t (const T& c) : value (c) {}
+};
+
+// typedef explicit_t <int> mfInputLineNumber;
+// typedef explicit_t <int> mfStaffNumber;
+
+template<typename T>
+std::ostream& operator << (std::ostream& os, const explicit_t <T> elt)
+{
+  os << elt;
+  return os;
+}
 
 //______________________________________________________________________________
 class EXP mfInputLinesRange

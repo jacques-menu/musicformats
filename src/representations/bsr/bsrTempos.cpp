@@ -141,7 +141,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
           // handle tempo duration and continuation dots number
           msrNotesDurationKind
-            notesNotesDurationKind =
+            notesDurationKind =
               tempoDottedNotesDuration.getNotesDurationKind ();
           int
             dotsNumber =
@@ -151,7 +151,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           bsrNoteValueKind
             noteValueKind = bsrNoteValueKind::kNoteValueNone;
 
-          switch (notesNotesDurationKind) {
+          switch (notesDurationKind) {
             case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
               break;
 

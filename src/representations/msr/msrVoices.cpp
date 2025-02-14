@@ -7077,7 +7077,7 @@ void msrVoice::finalizeRepeatEndInVoice (
 }
 */
 
-void msrVoice::createMeasureRepeatFromItsFirstMeasures (
+void msrVoice::cascadeCreateAMeasureRepeatAndAppendItInVoice (
   int inputLineNumber,
   int measureRepeatMeasuresNumber,
   int measureRepeatSlashesNumber)
@@ -7085,7 +7085,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     gLog <<
-      "Creating a measures repeat from its first measure in voice \"" <<
+      "Creating a measure repeat in voice \"" <<
       fVoiceName <<
       "\"" <<
       ", line " << inputLineNumber <<
@@ -7093,7 +7093,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
 
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
-      "createMeasureRepeatFromItsFirstMeasures() 1");
+      "cascadeCreateAMeasureRepeatAndAppendItInVoice() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -7101,30 +7101,30 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
   // hence the repeated measure/measures is/are the
   // measureRepeatMeasuresNumber measures preceding the last one
 
-  int
-    lastSegmentMeasuresNumber =
-      fVoiceLastSegment->
-        getSegmentElementsList ().size (),
-    availableMeasuresNumber =
-      lastSegmentMeasuresNumber - 1;
+//   int
+//     lastSegmentMeasuresNumber =
+//       fVoiceLastSegment->
+//         getSegmentElementsList ().size ();
+//     availableMeasuresNumber =
+//       lastSegmentMeasuresNumber - 1;
 
-  if (
-    availableMeasuresNumber < measureRepeatMeasuresNumber) {
-    std::stringstream ss;
-
-    ss <<
-      "attempt at creating a measures repeat with " <<
-      measureRepeatMeasuresNumber <<
-      " measures while current last segment only has " <<
-      availableMeasuresNumber <<
-      " available";
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  }
+//   if (
+//     availableMeasuresNumber < measureRepeatMeasuresNumber) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "attempt at creating a measures repeat with " <<
+//       measureRepeatMeasuresNumber <<
+//       " measures while current last segment only has " <<
+//       availableMeasuresNumber <<
+//       " available";
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
 
   // grab the just created last measure from the voice,
   // (i.e. the one containing:
@@ -7146,35 +7146,35 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
     fVoiceFirstSegment = fVoiceLastSegment;
   }
 
-  // remove the repeated measure(s) for the last segment
-  // and prepend them to the repeated segment
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeats ()) {
-    std::stringstream ss;
+//   // remove the repeated measure(s) for the last segment
+//   // and prepend them to the repeated segment
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing the last " <<
+//       mfSingularOrPlural (
+//         measureRepeatMeasuresNumber, "measure", "measures") <<
+//       " (to be repeated) from voice \"" <<
+//       fVoiceName;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
 
-    ss <<
-      "Removing the last " <<
-      mfSingularOrPlural (
-        measureRepeatMeasuresNumber, "measure", "measures") <<
-      " (to be repeated) from voice \"" <<
-      fVoiceName;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  for (int i = 0; i < measureRepeatMeasuresNumber; ++i) {
-    S_msrMeasure
-      lastMeasure =
-        removeLastMeasureFromVoice (
-          inputLineNumber);
-
-    repeatedSegment->
-      prependMeasureToSegment (
-        lastMeasure);
-  } // for
+//   for (int i = 0; i < measureRepeatMeasuresNumber; ++i) {
+//     S_msrMeasure
+//       lastMeasure =
+//         removeLastMeasureFromVoice (
+//           inputLineNumber);
+//
+//     repeatedSegment->
+//       prependMeasureToSegment (
+//         lastMeasure);
+//   } // for
 
   // create the measures repeat
   if (fVoicePendingMeasureRepeat) {
@@ -7246,10 +7246,10 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  createNewLastSegmentFromItsFirstMeasureForVoice (
-    inputLineNumber,
-    firstReplicaMeasure,
-    "createMeasureRepeatFromItsFirstMeasures() 2");
+//   createNewLastSegmentFromItsFirstMeasureForVoice (
+//     inputLineNumber,
+//     firstReplicaMeasure,
+//     "cascadeCreateAMeasureRepeatAndAppendItInVoice() 2");
 
   // keep the measures repeat pending
 
@@ -7258,7 +7258,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
   if (gTraceOahGroup->getTraceMeasureRepeatsDetails ()) {
     displayVoiceMeasureRepeatAndVoice (
       inputLineNumber,
-      "createMeasureRepeatFromItsFirstMeasures() 3");
+      "cascadeCreateAMeasureRepeatAndAppendItInVoice() 3");
   }
 #endif // MF_TRACE_IS_ENABLED
 }

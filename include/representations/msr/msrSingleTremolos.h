@@ -68,10 +68,10 @@ class EXP msrSingleTremolo : public msrElement
                               { return fSingleTremoloPlacementKind; }
 
     void                  setSingleTremoloGraphicNotesDurationKind (
-                            msrNotesDurationKind notesNotesDurationKind)
+                            msrNotesDurationKind notesDurationKind)
                               {
                                 fSingleTremoloGraphicNotesDurationKind =
-                                  notesNotesDurationKind;
+                                  notesDurationKind;
                               }
 
     msrNotesDurationKind  getSingleTremoloGraphicNotesDurationKind () const

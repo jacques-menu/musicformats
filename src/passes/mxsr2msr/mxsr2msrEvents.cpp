@@ -14,6 +14,8 @@
 #include <iostream>
 #include <sstream>
 
+#include <map>
+
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
 
@@ -42,10 +44,12 @@ S_mxsrEvent mxsrEvent::create (
 mxsrEvent::mxsrEvent (
   int               eventSequentialNumber,
   mfInputLineNumber eventInputLineNumber)
+    : fEventInputLineNumber (
+        eventInputLineNumber)
 {
   fEventSequentialNumber = eventSequentialNumber;
 
-  fEventInputLineNumber = eventInputLineNumber;
+//   fEventInputLineNumber = eventInputLineNumber;
 }
 
 mxsrEvent::~mxsrEvent ()
@@ -123,10 +127,10 @@ mxsrEvent::~mxsrEvent ()
 //________________________________________________________________________
 /* this class is purely virtual
 mxsr-Event mxsrPartEvent::create (
-  int                partEventSequentialNumber,
   const std::string& partName,
   const std::string& measureNumber,
-  int                eventInputLineNumber)
+  int                eventSequentialNumber,
+  mfInputLineNumber  eventInputLineNumber)
 {
   mxsrPartEvent* obj =
     new mxsrPartEvent (
@@ -140,10 +144,10 @@ mxsr-Event mxsrPartEvent::create (
 */
 
 mxsrPartEvent::mxsrPartEvent (
-  int                eventSequentialNumber,
   const std::string& partName,
   const std::string& measureNumber,
-  int                eventInputLineNumber)
+  int                eventSequentialNumber,
+  mfInputLineNumber  eventInputLineNumber)
   : mxsrEvent (
       eventSequentialNumber,
       eventInputLineNumber)
@@ -186,41 +190,41 @@ std::ostream& operator << (std::ostream& os, const mxsrMeasureRepeatEventKind& e
 
 //________________________________________________________________________
 S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
-  int                        eventSequentialNumber,
+  mxsrMeasureRepeatEventKind measureRepeatEventKind,
   const std::string&         partName,
   const std::string&         measureNumber,
-  mxsrMeasureRepeatEventKind measureRepeatEventKind,
-  int                        repeatNumber,
-  int                        eventInputLineNumber)
+  int                        measureRepeatNumber,
+  int                        eventSequentialNumber,
+  mfInputLineNumber          eventInputLineNumber)
 {
   mxsrMeasureRepeatEvent* obj =
     new mxsrMeasureRepeatEvent (
-      eventSequentialNumber,
+      measureRepeatEventKind,
       partName,
       measureNumber,
-      measureRepeatEventKind,
-      repeatNumber,
+      measureRepeatNumber,
+      eventSequentialNumber,
       eventInputLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
 mxsrMeasureRepeatEvent::mxsrMeasureRepeatEvent (
-  int                        eventSequentialNumber,
+  mxsrMeasureRepeatEventKind measureRepeatEventKind,
   const std::string&         partName,
   const std::string&         measureNumber,
-  mxsrMeasureRepeatEventKind measureRepeatEventKind,
-  int                        repeatNumber,
-  int                        eventInputLineNumber)
+  int                        measureRepeatNumber,
+  int                        eventSequentialNumber,
+  mfInputLineNumber          eventInputLineNumber)
   : mxsrPartEvent (
-      eventSequentialNumber,
       partName,
       measureNumber,
+      eventSequentialNumber,
       eventInputLineNumber)
 {
   fMeasureRepeatEventKind = measureRepeatEventKind;
 
-  fRepeatNumber = repeatNumber;
+  fMeasureRepeatNumber = measureRepeatNumber;
 }
 
 mxsrMeasureRepeatEvent::~mxsrMeasureRepeatEvent ()
@@ -233,14 +237,12 @@ std::string mxsrMeasureRepeatEvent::asShortString () const
   ss <<
     "[MeasureRepeatEvent" <<
     ", fMeasureRepeatEventKind: " << fMeasureRepeatEventKind <<
-    ", fEventInputLineNumber: L" << fEventInputLineNumber <<
+    ", fPartName: " << fPartName <<
+    ", fMeasureNumber: M" << fMeasureNumber <<
+    ", fMeasureRepeatNumber: " << fMeasureRepeatNumber <<
 
     ", fEventSequentialNumber: E" << fEventSequentialNumber <<
-
-    ", fPartName: " << fPartName <<
-    ", fMeasureNumber: " << fMeasureNumber <<
-
-    ", fRepeatNumber: " << fRepeatNumber <<
+    ", fEventInputLineNumber: L" << fEventInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -265,24 +267,21 @@ void mxsrMeasureRepeatEvent::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fMeasureRepeatEventKind" << ": " << fMeasureRepeatEventKind <<
     std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fEventInputLineNumber" << ": L" << fEventInputLineNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
-    std::endl <<
-
     std::setw (fieldWidth) <<
     "fPartName" << ": " << fPartName <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureNumber" << ": " << fMeasureNumber <<
     std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureRepeatNumber" << ": " << fMeasureRepeatNumber <<
+    std::endl <<
 
     std::setw (fieldWidth) <<
-    "fRepeatNumber" << ": " << fRepeatNumber <<
+    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fEventInputLineNumber" << ": L" << fEventInputLineNumber <<
     std::endl;
 
   --gIndenter;
@@ -311,19 +310,18 @@ std::ostream& operator << (std::ostream& os, const mxsrMeasureRepeatEvent& elt)
 //________________________________________________________________________
 /* this class is purely virtual
 mxsrNoteEvent mxsrNoteEvent::create (
-  int eventSequentialNumber,
   int noteSequentialNumber,
   int noteStaffNumber,
   int noteVoiceNumber,
+  int eventSequentialNumber,
   int eventInputLineNumber)
 {
   mxsrNoteEvent* obj =
     new mxsrNoteEvent (
-      eventSequentialNumber,
       noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
-      chordEventKind,
+      eventSequentialNumber,
       eventInputLineNumber);
   assert (obj != nullptr);
   return obj;
@@ -331,14 +329,14 @@ mxsrNoteEvent mxsrNoteEvent::create (
 */
 
 mxsrNoteEvent::mxsrNoteEvent (
-  int eventSequentialNumber,
   int noteSequentialNumber,
   int noteStaffNumber,
   int noteVoiceNumber,
-  int eventInputLineNumberr)
+  int eventSequentialNumber,
+  int eventInputLineNumber)
     : mxsrEvent (
-      eventSequentialNumber,
-      eventInputLineNumberr)
+        eventSequentialNumber,
+        eventInputLineNumber)
 {
   fNoteSequentialNumber = noteSequentialNumber;
 
@@ -377,44 +375,44 @@ std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEventKind& elt
 }
 
 //________________________________________________________________________
-  S_mxsrStaffChangeEvent mxsrStaffChangeEvent::create (
-  int                      eventSequentialNumber,
+S_mxsrStaffChangeEvent mxsrStaffChangeEvent::create (
+  mxsrStaffChangeEventKind staffChangeEventKind,
   int                      noteSequentialNumber,
   int                      noteStaffNumber,
   int                      noteVoiceNumber,
-  mxsrStaffChangeEventKind staffChangeEventKind,
   int                      takeOffStaffNumber,
+  int                      takeOffInputLineNumber, // superflous ???
   int                      landingStaffNumber,
-  int                      takeOffInputLineNumber,
-  int                      landingInputLineNumber,
+  int                      landingInputLineNumber, // superflous ???
+  int                      eventSequentialNumber,
   int                      eventInputLineNumber)
 {
   mxsrStaffChangeEvent* obj =
     new mxsrStaffChangeEvent (
-      eventSequentialNumber,
+      staffChangeEventKind,
       noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
-      staffChangeEventKind,
       takeOffStaffNumber,
-      landingStaffNumber,
       takeOffInputLineNumber,
+      landingStaffNumber,
       landingInputLineNumber,
+      eventSequentialNumber,
       eventInputLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
 mxsrStaffChangeEvent::mxsrStaffChangeEvent (
-  int                      eventSequentialNumber,
+  mxsrStaffChangeEventKind staffChangeEventKind,
   int                      noteSequentialNumber,
   int                      noteStaffNumber,
   int                      noteVoiceNumber,
-  mxsrStaffChangeEventKind staffChangeEventKind,
   int                      takeOffStaffNumber,
+  int                      takeOffInputLineNumber, // superflous ???
   int                      landingStaffNumber,
-  int                      takeOffInputLineNumber,
-  int                      landingInputLineNumber,
+  int                      landingInputLineNumber, // superflous ???
+  int                      eventSequentialNumber,
   int                      eventInputLineNumber)
   : mxsrNoteEvent (
       eventSequentialNumber,
@@ -592,37 +590,37 @@ std::ostream& operator << (std::ostream& os, const mxsrGraceEventKind& elt)
 
 //________________________________________________________________________
 S_mxsrGraceEvent mxsrGraceEvent::create (
-  int                eventSequentialNumber,
+  mxsrGraceEventKind graceEventKind,
   int                noteSequentialNumber,
   int                noteStaffNumber,
   int                noteVoiceNumber,
-  mxsrGraceEventKind graceEventKind,
+  int                eventSequentialNumber,
   int                eventInputLineNumber)
 {
   mxsrGraceEvent* obj =
     new mxsrGraceEvent (
-      eventSequentialNumber,
+      graceEventKind,
       noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
-      graceEventKind,
+      eventSequentialNumber,
       eventInputLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
 mxsrGraceEvent::mxsrGraceEvent (
-  int                eventSequentialNumber,
+  mxsrGraceEventKind graceEventKind,
   int                noteSequentialNumber,
   int                noteStaffNumber,
   int                noteVoiceNumber,
-  mxsrGraceEventKind graceEventKind,
+  int                eventSequentialNumber,
   int                eventInputLineNumber)
   : mxsrNoteEvent (
-      eventSequentialNumber,
       noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
+      eventSequentialNumber,
       eventInputLineNumber)
 {
   fGraceEventKind = graceEventKind;
@@ -637,12 +635,12 @@ std::string mxsrGraceEvent::asShortString () const
 
   ss <<
     "[GraceEvent" <<
-    ", fEventInputLineNumber: " << fEventInputLineNumber <<
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+    ", fGraceEventKind: " << fGraceEventKind <<
+    ", fEventInputLineNumber: L" << fEventInputLineNumber <<
     ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
     ", fNoteStaffNumber: S" << fNoteStaffNumber <<
     ", fNoteVoiceNumber: V" << fNoteVoiceNumber <<
-    ", fGraceEventKind: " << fGraceEventKind <<
+    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -665,13 +663,15 @@ void mxsrGraceEvent::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
+    "fGraceEventKind" << ": " << fGraceEventKind <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fGraceEventKind" << ": " << fGraceEventKind <<
+    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
     std::endl <<
-
     std::setw (fieldWidth) <<
     "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
     std::endl <<
@@ -681,9 +681,6 @@ void mxsrGraceEvent::print (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -738,37 +735,37 @@ std::ostream& operator << (std::ostream& os, const mxsrCueEventKind& elt)
 
 //________________________________________________________________________
 S_mxsrCueEvent mxsrCueEvent::create (
-  int              eventSequentialNumber,
+  mxsrCueEventKind cueEventKind,
   int              noteSequentialNumber,
   int              noteStaffNumber,
   int              noteVoiceNumber,
-  mxsrCueEventKind cueEventKind,
+  int              eventSequentialNumber,
   int              eventInputLineNumber)
 {
   mxsrCueEvent* obj =
     new mxsrCueEvent (
-      eventSequentialNumber,
+      cueEventKind,
       noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
-      cueEventKind,
+      eventSequentialNumber,
       eventInputLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
 mxsrCueEvent::mxsrCueEvent (
-  int              eventSequentialNumber,
+  mxsrCueEventKind cueEventKind,
   int              noteSequentialNumber,
   int              noteStaffNumber,
   int              noteVoiceNumber,
-  mxsrCueEventKind cueEventKind,
+  int              eventSequentialNumber,
   int              eventInputLineNumber)
   : mxsrNoteEvent (
-      eventSequentialNumber,
       noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
+      eventSequentialNumber,
       eventInputLineNumber)
 {
   fCueEventKind = cueEventKind;
@@ -783,12 +780,14 @@ std::string mxsrCueEvent::asShortString () const
 
   ss <<
     "[CueEvent" <<
+    ", fCueEventKind: " << fCueEventKind <<
     ", fEventInputLineNumber: " << fEventInputLineNumber <<
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+
     ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
     ", fNoteStaffNumber: S" << fNoteStaffNumber <<
     ", fNoteVoiceNumber: V" << fNoteVoiceNumber <<
-    ", fCueEventKind: " << fCueEventKind <<
+
+    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -811,25 +810,24 @@ void mxsrCueEvent::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
+    "fCueEventKind" << ": " << fCueEventKind <<
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fCueEventKind" << ": " << fCueEventKind <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
     "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
     std::endl <<
-
     std::setw (fieldWidth) <<
     "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fNoteVoiceNumber" << ": V" << fNoteVoiceNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -884,37 +882,37 @@ std::ostream& operator << (std::ostream& os, const mxsrChordEventKind& elt)
 
 //________________________________________________________________________
 S_mxsrChordEvent mxsrChordEvent::create (
-  int                eventSequentialNumber,
+  mxsrChordEventKind chordEventKind,
   int                noteSequentialNumber,
   int                noteStaffNumber,
   int                noteVoiceNumber,
-  mxsrChordEventKind chordEventKind,
+  int                eventSequentialNumber,
   int                eventInputLineNumber)
 {
   mxsrChordEvent* obj =
     new mxsrChordEvent (
-      eventSequentialNumber,
+      chordEventKind,
       noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
-      chordEventKind,
+      eventSequentialNumber,
       eventInputLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
 mxsrChordEvent::mxsrChordEvent (
-  int                eventSequentialNumber,
+  mxsrChordEventKind chordEventKind,
   int                noteSequentialNumber,
   int                noteStaffNumber,
   int                noteVoiceNumber,
-  mxsrChordEventKind chordEventKind,
+  int                eventSequentialNumber,
   int                eventInputLineNumber)
   : mxsrNoteEvent (
-      eventSequentialNumber,
       noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
+      eventSequentialNumber,
       eventInputLineNumber)
 {
   fChordEventKind = chordEventKind;
@@ -929,12 +927,13 @@ std::string mxsrChordEvent::asShortString () const
 
   ss <<
     "[ChordEvent" <<
-    ", fEventInputLineNumber: " << fEventInputLineNumber <<
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+    ", fChordEventKind: " << fChordEventKind <<
     ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
     ", fNoteStaffNumber: S" << fNoteStaffNumber <<
     ", fNoteVoiceNumber: V" << fNoteVoiceNumber <<
-    ", fChordEventKind: " << fChordEventKind <<
+
+    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+    ", fEventInputLineNumber: L" << fEventInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -957,25 +956,23 @@ void mxsrChordEvent::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
     "fChordEventKind" << ": " << fChordEventKind <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteVoiceNumber" << ": V" << fNoteVoiceNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNoteVoiceNumber" << ": V" << fNoteVoiceNumber <<
+    "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
     std::endl;
 
   --gIndenter;
@@ -1030,44 +1027,43 @@ std::ostream& operator << (std::ostream& os, const mxsrTupletEventKind& elt)
 
 //________________________________________________________________________
 S_mxsrTupletEvent mxsrTupletEvent::create (
-  int                 eventSequentialNumber,
-  int                 noteSequentialNumber,
-  int                 noteStaffNumber,
-  int                 noteVoiceNumber,
   mxsrTupletEventKind tupletEventKind,
   int                 tupletNumber,
+  int                 tupletNoteSequentialNumber,
+  int                 tupletNoteStaffNumber,
+  int                 tupletNoteVoiceNumber,
+  int                 eventSequentialNumber,
   int                 eventInputLineNumber)
 {
   mxsrTupletEvent* obj =
     new mxsrTupletEvent (
-      eventSequentialNumber,
-      noteSequentialNumber,
-      noteStaffNumber,
-      noteVoiceNumber,
       tupletEventKind,
       tupletNumber,
+      tupletNoteSequentialNumber,
+      tupletNoteStaffNumber,
+      tupletNoteVoiceNumber,
+      eventSequentialNumber,
       eventInputLineNumber);
   assert (obj != nullptr);
   return obj;
 }
 
 mxsrTupletEvent::mxsrTupletEvent (
-  int                 eventSequentialNumber,
-  int                 noteSequentialNumber,
-  int                 noteStaffNumber,
-  int                 noteVoiceNumber,
   mxsrTupletEventKind tupletEventKind,
   int                 tupletNumber,
+  int                 tupletNoteSequentialNumber,
+  int                 tupletNoteStaffNumber,
+  int                 tupletNoteVoiceNumber,
+  int                 eventSequentialNumber,
   int                 eventInputLineNumber)
   : mxsrNoteEvent (
+      tupletNoteSequentialNumber,
+      tupletNoteStaffNumber,
+      tupletNoteVoiceNumber,
       eventSequentialNumber,
-      noteSequentialNumber,
-      noteStaffNumber,
-      noteVoiceNumber,
       eventInputLineNumber)
 {
   fTupletEventKind = tupletEventKind;
-
   fTupletNumber = tupletNumber;
 }
 
@@ -1082,11 +1078,13 @@ std::string mxsrTupletEvent::asShortString () const
     "[TupletEvent" <<
     ", fTupletEventKind: " << fTupletEventKind <<
     ", fTupletNumber: T" << fTupletNumber <<
-    ", fEventInputLineNumber: L " << fEventInputLineNumber <<
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+
     ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
     ", fNoteStaffNumber: S" << fNoteStaffNumber <<
     ", fNoteVoiceNumber: V" << fNoteVoiceNumber <<
+
+    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+    ", fEventInputLineNumber: L " << fEventInputLineNumber <<
     ']';
 
   return ss.str ();
@@ -1116,21 +1114,20 @@ void mxsrTupletEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventInputLineNumber" << ": L" << fEventInputLineNumber <<
+    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteVoiceNumber" << ": V" << fNoteVoiceNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNoteVoiceNumber" << ": V" << fNoteVoiceNumber <<
+    "fEventInputLineNumber" << ": L" << fEventInputLineNumber <<
     std::endl;
 
   --gIndenter;
@@ -1175,19 +1172,19 @@ mxsrEventsCollection::~mxsrEventsCollection ()
 
 //________________________________________________________________________
 void mxsrEventsCollection::registerMeasureRepeatBegin (
-  const std::string&         partName,
-  const std::string&         measureNumber,
-  int                        repeatNumber,
-  int                        eventInputLineNumber)
+  const std::string& partName,
+  const std::string& measureNumber,
+  int                measureRepeatNumber,
+  mfInputLineNumber  eventInputLineNumber)
 {
   S_mxsrMeasureRepeatEvent
     measureRepeatEvent =
       mxsrMeasureRepeatEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrMeasureRepeatEventKind::kMeasureRepeatEventBegin,
         partName,
         measureNumber,
-        mxsrMeasureRepeatEventKind::kMeasureRepeatEventBegin,
-        repeatNumber,
+        measureRepeatNumber,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1213,19 +1210,19 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 }
 
 void mxsrEventsCollection::registerMeasureRepeatEnd (
-  const std::string&         partName,
-  const std::string&         measureNumber,
-  int                        repeatNumber,
-  int                        eventInputLineNumber)
+  const std::string& partName,
+  const std::string& measureNumber,
+  int                measureRepeatNumber,
+  mfInputLineNumber  eventInputLineNumber)
 {
   S_mxsrMeasureRepeatEvent
     measureRepeatEvent =
       mxsrMeasureRepeatEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrMeasureRepeatEventKind::kMeasureRepeatEventEnd,
         partName,
         measureNumber,
-        mxsrMeasureRepeatEventKind::kMeasureRepeatEventEnd,
-        repeatNumber,
+        measureRepeatNumber,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1264,15 +1261,15 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
   S_mxsrStaffChangeEvent
     staffChangeEvent =
       mxsrStaffChangeEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrStaffChangeEventKind::kStaffChangeEventTakeOff,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrStaffChangeEventKind::kStaffChangeEventTakeOff,
         takeOffStaffNumber,
-        landingStaffNumber,
         takeOffInputLineNumber,
+        landingStaffNumber,
         landingInputLineNumber,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1312,15 +1309,15 @@ void mxsrEventsCollection::registerStaffChangeLanding (
   S_mxsrStaffChangeEvent
     staffChangeEvent =
       mxsrStaffChangeEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrStaffChangeEventKind::kStaffChangeEventLanding,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrStaffChangeEventKind::kStaffChangeEventLanding,
         takeOffStaffNumber,
-        landingStaffNumber,
         takeOffInputLineNumber,
+        landingStaffNumber,
         landingInputLineNumber,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1357,11 +1354,11 @@ void mxsrEventsCollection::registerGraceBegin (
   S_mxsrGraceEvent
     graceEvent =
       mxsrGraceEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrGraceEventKind::kGraceEventBegin,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrGraceEventKind::kGraceEventBegin,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1395,11 +1392,11 @@ void mxsrEventsCollection::registerGraceEnd (
   S_mxsrGraceEvent
     graceEvent =
       mxsrGraceEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrGraceEventKind::kGraceEventEnd,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrGraceEventKind::kGraceEventEnd,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1434,11 +1431,11 @@ void mxsrEventsCollection::registerCueBegin (
   S_mxsrCueEvent
     cueEvent =
       mxsrCueEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrCueEventKind::kCueEventBegin,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrCueEventKind::kCueEventBegin,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1472,11 +1469,11 @@ void mxsrEventsCollection::registerCueEnd (
   S_mxsrCueEvent
     cueEvent =
       mxsrCueEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrCueEventKind::kCueEventEnd,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrCueEventKind::kCueEventEnd,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1511,11 +1508,11 @@ void mxsrEventsCollection::registerChordBegin (
   S_mxsrChordEvent
     chordEvent =
       mxsrChordEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrChordEventKind::kChordEventBegin,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrChordEventKind::kChordEventBegin,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1549,11 +1546,11 @@ void mxsrEventsCollection::registerChordEnd (
   S_mxsrChordEvent
     chordEvent =
       mxsrChordEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrChordEventKind::kChordEventEnd,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrChordEventKind::kChordEventEnd,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1579,32 +1576,53 @@ void mxsrEventsCollection::registerChordEnd (
 }
 
 //________________________________________________________________________
-void mxsrEventsCollection::registerTupletBeginEvent (
+S_mxsrTupletEvent mxsrEventsCollection::createATupletBeginEvent (
+  int tupletNumber,
   int noteSequentialNumber,
   int noteStaffNumber,
   int noteVoiceNumber,
-  int tupletNumber,
   int eventInputLineNumber)
 {
   S_mxsrTupletEvent
     tupletEvent =
       mxsrTupletEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrTupletEventKind::kTupletEventBegin,
+        tupletNumber,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrTupletEventKind::kTupletEventBegin,
-        tupletNumber,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Creating a tuplet begin event " <<
+      tupletEvent->asString () <<
+      ", line " << eventInputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return tupletEvent;
+}
+
+void mxsrEventsCollection::registerTupletBeginEvent (
+  S_mxsrTupletEvent tupletBeginEvent)
+{
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
     std::stringstream ss;
 
     ss <<
       "--> Registering tuplet begin event " <<
-      tupletEvent->asString () <<
-      ", line " << eventInputLineNumber;
+      tupletBeginEvent->asString () <<
+      ", line " << tupletBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1612,32 +1630,33 @@ void mxsrEventsCollection::registerTupletBeginEvent (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // push tupletEvent onto fTupletBeginsList VITAL
-  fTupletBeginsList.push_front (tupletEvent);
+//   // push tupletEvent onto fTupletBeginsMultiMap VITAL
+//   fTupletBeginsMultiMap.push_back (tupletBeginEvent);
 
-  fTupletEventsMultiMap.insert (
+  fTupletBeginsMultiMap.insert (
     std::make_pair (
-      noteSequentialNumber, tupletEvent));
+      tupletBeginEvent->getNoteSequentialNumber (),
+      tupletBeginEvent)); // FOOL
 
-  fAllEventsList.push_back (tupletEvent);
+  fAllEventsList.push_back (tupletBeginEvent);
 }
 
-void mxsrEventsCollection::registerTupletEndEvent (
+S_mxsrTupletEvent mxsrEventsCollection::createATupletEndEvent (
+  int tupletNumber,
   int noteSequentialNumber,
   int noteStaffNumber,
   int noteVoiceNumber,
-  int tupletNumber,
   int eventInputLineNumber)
 {
   S_mxsrTupletEvent
     tupletEvent =
       mxsrTupletEvent::create (
-        ++fCurrentEventSequentialNumber,
+        mxsrTupletEventKind::kTupletEventEnd,
+        tupletNumber,
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        mxsrTupletEventKind::kTupletEventEnd,
-        tupletNumber,
+        ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1645,7 +1664,7 @@ void mxsrEventsCollection::registerTupletEndEvent (
     std::stringstream ss;
 
     ss <<
-      "--> Registering tuplet end event " <<
+      "--> Creating tuplet end event " <<
       tupletEvent->asString () <<
       ", line " << eventInputLineNumber;
 
@@ -1655,13 +1674,33 @@ void mxsrEventsCollection::registerTupletEndEvent (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fTupletEndsList.push_back (tupletEvent);
+  return tupletEvent;
+}
 
-  fTupletEventsMultiMap.insert (
+void mxsrEventsCollection::registerTupletEndEvent (
+  S_mxsrTupletEvent tupletEndEvent)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering tuplet end event " <<
+      tupletEndEvent->asString () <<
+      ", line " << tupletEndEvent->getNoteSequentialNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fTupletEndsMultiMap.insert (
     std::make_pair (
-      noteSequentialNumber, tupletEvent));
+      tupletEndEvent->getNoteSequentialNumber (),
+      tupletEndEvent));
 
-  fAllEventsList.push_back (tupletEvent);
+  fAllEventsList.push_back (tupletEndEvent);
 }
 
 //________________________________________________________________________
@@ -1684,8 +1723,41 @@ void mxsrEventsCollection::sortTheMxsrEventsLists ()
 
   fStaffChangeEventsList.sort ();
 
-  fTupletBeginsList.sort ();
-  fTupletEndsList.sort ();
+//   fTupletBeginsMultiMap.sort ();
+//   fTupletEndsMultiMap.sort ();
+}
+
+//________________________________________________________________________
+S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatBeginAtMeasureNumber (
+  std::string measureNumber) const
+{
+  S_mxsrMeasureRepeatEvent result;
+
+  std::map <std::string, S_mxsrMeasureRepeatEvent>::const_iterator
+    it =
+      fMeasureRepeatBeginsMap.find (measureNumber);
+
+  if (it != fMeasureRepeatBeginsMap.end ()) {
+    result = (*it).second;
+  }
+
+  return result;
+}
+
+S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatEndAtMeasureNumber (
+  std::string measureNumber) const
+{
+  S_mxsrMeasureRepeatEvent result;
+
+  std::map <std::string, S_mxsrMeasureRepeatEvent>::const_iterator
+    it =
+      fMeasureRepeatEndsMap.find (measureNumber);
+
+  if (it != fMeasureRepeatEndsMap.end ()) {
+    result = (*it).second;
+  }
+
+  return result;
 }
 
 //________________________________________________________________________
@@ -1821,108 +1893,104 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordEndAtNoteSequentialNumber (
 }
 
 //________________________________________________________________________
-void mxsrEventsCollection::fetchTupletBeginsList (
+void mxsrEventsCollection::fetchTupletBeginsAtNoteSequentialNumber (
   int                            noteSequentialNumber,
   std::list <S_mxsrTupletEvent>& recipientTupletBeginsList)
 {
-  // look for the first tuplet event matching noteSequentialNumber
-  std::list <S_mxsrTupletEvent>::iterator startIt =
-    std::find_if (
-      std::begin (fTupletBeginsList),
-      std::end (fTupletBeginsList),
-      [&] (const S_mxsrTupletEvent tupletEvent)
-        {
-          return
-            tupletEvent->getNoteSequentialNumber () == noteSequentialNumber;
-        });
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMxsrEvents ()) {
+    std::stringstream ss;
 
-  if (startIt != fTupletBeginsList.end ()) {
-//     gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
+    ss <<
+      "--> fetchTupletBeginsAtNoteSequentialNumber()" <<
+      ", noteSequentialNumber: " << noteSequentialNumber;
 
-    // look for the first next tuplet event not matching noteSequentialNumber
-    std::list <S_mxsrTupletEvent>::iterator endIt =
-      std::find_if (
-        std::next (startIt),
-        std::end (fTupletBeginsList),
-        [&] (const S_mxsrTupletEvent tupletEvent )
-          {
-            return
-              tupletEvent->getNoteSequentialNumber () != noteSequentialNumber;
-          });
-
-//     if (endIt == fTupletBeginsList.end ()) {
-//       gLog << "fTupletBeginsList.end ()";
-//     }
-//     else {
-//       gLog << (*endIt);
-//     }
-//     gLog << std::endl << std::endl << std::flush;
-
-    // move the found tuplets events to recipientTupletBeginsList
-    recipientTupletBeginsList.splice (
-      recipientTupletBeginsList.begin (), fTupletBeginsList, startIt, endIt);
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif // MF_TRACE_IS_ENABLED
 
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//     printTupletEventsList (
-//       gLog,
-//       recipientTupletBeginsList,
-//       "fetchTupletBeginsList(), recipientTupletBeginsList:");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
+  // see https://cplusplus.com/reference/map/multimap/equal_range/
+
+  std::pair <
+    std::multimap <int, S_mxsrTupletEvent>::const_iterator,
+    std::multimap <int, S_mxsrTupletEvent>::const_iterator
+  > iteratorsPair;
+
+  iteratorsPair = fTupletBeginsMultiMap.equal_range(
+    noteSequentialNumber);
+
+  for (
+    std::multimap <int, S_mxsrTupletEvent>::const_iterator it =
+      iteratorsPair.first;
+    it != iteratorsPair.second;
+    ++it
+  ) {
+    S_mxsrTupletEvent tupletEvent = it->second;
+
+    std::cout << "tupletEvent: " << tupletEvent << std::endl;
+
+    recipientTupletBeginsList.push_back (tupletEvent);
+  } // for
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    printTupletEventsList (
+      gLog,
+      recipientTupletBeginsList,
+      "fetchTupletBeginsList(), recipientTupletBeginsList:");
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
-void mxsrEventsCollection::fetchTupletEndsList (
+void mxsrEventsCollection::fetchTupletEndsListAtNoteSequentialNumber (
   int                            noteSequentialNumber,
   std::list <S_mxsrTupletEvent>& recipientTupletEndsList)
 {
-  // look for the first tuplet event matching noteSequentialNumber
-  std::list <S_mxsrTupletEvent>::iterator startIt =
-    std::find_if (
-      std::begin (fTupletEndsList),
-      std::end (fTupletEndsList),
-      [&] (const S_mxsrTupletEvent tupletEvent)
-        {
-          return
-            tupletEvent->getNoteSequentialNumber () == noteSequentialNumber;
-        });
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMxsrEvents ()) {
+    std::stringstream ss;
 
-  if (startIt != fTupletEndsList.end ()) {
-//     gLog << "(*startIt): " << (*startIt) << std::endl << std::flush;
+    ss <<
+      "--> fetchTupletEndsListAtNoteSequentialNumber()" <<
+      ", noteSequentialNumber: " << noteSequentialNumber;
 
-    // look for the first next tuplet event not matching noteSequentialNumber
-    std::list <S_mxsrTupletEvent>::iterator endIt =
-      std::find_if (
-        std::next (startIt),
-        std::end (fTupletEndsList),
-        [&] (const S_mxsrTupletEvent tupletEvent )
-          {
-            return
-              tupletEvent->getNoteSequentialNumber () != noteSequentialNumber;
-          });
-
-//     if (endIt == fTupletEndsList.end ()) {
-//       gLog << "fTupletEndsList.end ()";
-//     }
-//     else {
-//       gLog << (*endIt);
-//     }
-//     gLog << std::endl << std::endl << std::flush;
-
-    // move the found tuplets events to recipientTupletEndsList
-    recipientTupletEndsList.splice (
-      recipientTupletEndsList.begin (), fTupletEndsList, startIt, endIt);
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
   }
+#endif // MF_TRACE_IS_ENABLED
 
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//     printTupletEventsList (
-//       gLog,
-//       recipientTupletEndsList,
-//       "fetchTupletEndsList(), resultingEndsList:");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
+  std::pair <
+    std::multimap <int, S_mxsrTupletEvent>::const_iterator,
+    std::multimap <int, S_mxsrTupletEvent>::const_iterator
+  > iteratorsPair;
+
+  iteratorsPair = fTupletEndsMultiMap.equal_range(
+    noteSequentialNumber);
+
+  for (
+    std::multimap <int, S_mxsrTupletEvent>::const_iterator it =
+      iteratorsPair.first;
+    it != iteratorsPair.second;
+    ++it
+  ) {
+    S_mxsrTupletEvent tupletEvent = it->second;
+
+    std::cout << "tupletEvent: " << tupletEvent << std::endl;
+
+    recipientTupletEndsList.push_back (tupletEvent);
+  } // for
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    printTupletEventsList (
+      gLog,
+      recipientTupletEndsList,
+      "fetchTupletEndsList(), resultingEndsList:");
+  }
+#endif // MF_TRACE_IS_ENABLED
 }
 
 //________________________________________________________________________
@@ -1944,9 +2012,9 @@ std::string mxsrEventsCollection::asShortString () const
     ", fChordBeginsMap.size (): " << fChordBeginsMap.size () <<
     ", fChordEndsMap.size (): " << fChordEndsMap.size () <<
 
-    ", fTupletBeginsList.size (): " << fTupletBeginsList.size () <<
-    ", fTupletEndsList.size (): " << fTupletEndsList.size () <<
-    ", fTupletEventsMultiMap.size (): " << fTupletEventsMultiMap.size () <<
+    ", fTupletBeginsMultiMap.size (): " << fTupletBeginsMultiMap.size () <<
+    ", fTupletEndsMultiMap.size (): " << fTupletEndsMultiMap.size () <<
+//     ", fTupletEventsMultiMap.size (): " << fTupletEventsMultiMap.size () <<
 
     ", fAllEventsList.size (): " << fAllEventsList.size () <<
     ']';
@@ -2372,10 +2440,43 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 //------------------------------------------------------------------------
 void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 {
+//   os <<
+//     "fTupletEventsMultiMap: " <<
+//     mfSingularOrPlural (
+//       fTupletEventsMultiMap.size (),
+//       "element",
+//       "elements") <<
+//     ", in note sequential number order" <<
+//     std::endl;
+//
+//   ++gIndenter;
+//
+//   for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletEventsMultiMap) {
+//     int
+//       eventSequentialNumber = thePair.first;
+//     S_mxsrTupletEvent
+//       tupletEvent = thePair.second;
+//
+//     os <<
+//       "Note " << eventSequentialNumber <<
+//       ':' <<
+//       std::endl;
+//
+//     ++gIndenter;
+//     os <<
+//       tupletEvent <<
+//       std::endl;
+//     --gIndenter;
+//   } // for
+//
+//   --gIndenter;
+//
+//   os << std::endl << "--------" << std::endl << std::endl;
+//
   os <<
-    "fTupletEventsMultiMap: " <<
+    "fTupletBeginsMultiMap: " <<
     mfSingularOrPlural (
-      fTupletEventsMultiMap.size (),
+      fTupletBeginsMultiMap.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -2383,40 +2484,10 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletEventsMultiMap) {
-    int
-      eventSequentialNumber = thePair.first;
+  for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletBeginsMultiMap) {
     S_mxsrTupletEvent
       tupletEvent = thePair.second;
 
-    os <<
-      "Note " << eventSequentialNumber <<
-      ':' <<
-      std::endl;
-
-    ++gIndenter;
-    os <<
-      tupletEvent <<
-      std::endl;
-    --gIndenter;
-  } // for
-
-  --gIndenter;
-
-  os << std::endl << "--------" << std::endl << std::endl;
-
-  os <<
-    "fTupletBeginsList: " <<
-    mfSingularOrPlural (
-      fTupletBeginsList.size (),
-      "element",
-      "elements") <<
-    ", in note sequential number order" <<
-    std::endl;
-
-  ++gIndenter;
-
-  for (S_mxsrTupletEvent tupletEvent : fTupletBeginsList) {
     int
       eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
 
@@ -2437,9 +2508,9 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
   os << std::endl << "--------" << std::endl << std::endl;
 
   os <<
-    "fTupletEndsList: " <<
+    "fTupletEndsMultiMap: " <<
     mfSingularOrPlural (
-      fTupletEndsList.size (),
+      fTupletEndsMultiMap.size (),
       "element",
       "elements") <<
     ", in note sequential number order" <<
@@ -2447,7 +2518,10 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (S_mxsrTupletEvent tupletEvent : fTupletEndsList) {
+  for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletEndsMultiMap) {
+    S_mxsrTupletEvent
+      tupletEvent = thePair.second;
+
     int
       eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
 
@@ -2592,14 +2666,14 @@ void mxsrEventsCollection::print (std::ostream& os) const
       fChordEndsMap.size (),
       "element",
       "elements") <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fTupletEventsMultiMap" << ": " <<
-    mfSingularOrPlural (
-      fTupletEventsMultiMap.size (),
-      "element",
-      "elements") <<
+//     std::endl <<
+//
+//     std::setw (fieldWidth) <<
+//     "fTupletEventsMultiMap" << ": " <<
+//     mfSingularOrPlural (
+//       fTupletEventsMultiMap.size (),
+//       "element",
+//       "elements") <<
     std::endl << std::endl;
 
 #ifdef MF_TRACE_IS_ENABLED

@@ -1009,7 +1009,7 @@ msrBeatRepeat::msrBeatRepeat (
 msrBeatRepeat::~msrBeatRepeat ()
 {}
 
-S_msrBeatRepeat msrBeatRepeat::createBeatRepeatNewbornClone (
+S_msrBeatRepeat msrBeatRepeat::createABeatRepeatNewbornClone (
   const S_msrVoice& containingVoice)
 {
 #ifdef MF_TRACE_IS_ENABLED

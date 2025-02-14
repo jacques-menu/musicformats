@@ -1490,11 +1490,11 @@ void lpsr2lilypondTranslator::generateWholeNotesDurationOnStream (
 }
 
 std::string lpsr2lilypondTranslator::notesDurationKindAsLilypondString (
-  msrNotesDurationKind notesNotesDurationKind)
+  msrNotesDurationKind notesDurationKind)
 {
   std::string result;
 
-  switch (notesNotesDurationKind) {
+  switch (notesDurationKind) {
     case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
       result = "noNotesDuration";
       break;

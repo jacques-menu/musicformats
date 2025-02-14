@@ -24,12 +24,14 @@
 #include "msrMoments.h"
 
 
-
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-template <typename T, const std::string& printPrefix>
+template <
+  typename T,
+  const std::string& printPrefix
+>
 class EXP mfValue
 {
   public:
@@ -83,43 +85,60 @@ class EXP mfValue
     std::string           fPrintPrefix;
 };
 
-template <typename T, const std::string& printPrefix>
-EXP std::ostream& operator << (
-  std::ostream& os,
-  const mfValue <T, printPrefix>&
-    elt);
-
-template <typename T, const std::string& printPrefix>
+// constructor
+template <
+  typename T,
+  const std::string& printPrefix
+>
 mfValue <T, printPrefix>::mfValue (T value)
   : fValue (value),
     fPrintPrefix (printPrefix)
 {}
 
-template <typename T, const std::string& printPrefix>
+// destructor
+template <
+  typename T,
+  const std::string& printPrefix
+>
 mfValue <T, printPrefix>::~mfValue ()
 {}
 
-template <typename T, const std::string& printPrefix>
+// operator T ()
+template <
+  typename T,
+  const std::string& printPrefix
+>
 mfValue <T, printPrefix>::operator T () const
 {
   return fValue;
 }
 
-template <typename T, const std::string& printPrefix>
+// comparison operators
+template <
+  typename T,
+  const std::string& printPrefix
+>
 Bool mfValue <T, printPrefix>::operator == (
   const mfValue& otherInputLineNumber) const
 {
   return fValue == otherInputLineNumber.fValue;
 }
 
-template <typename T, const std::string& printPrefix>
+template <
+  typename T,
+  const std::string& printPrefix
+>
 Bool mfValue <T, printPrefix>::operator != (
   const mfValue& otherInputLineNumber) const
 {
   return fValue != otherInputLineNumber.fValue;
 }
 
-template <typename T, const std::string& printPrefix>
+// print
+template <
+  typename T,
+  const std::string& printPrefix
+>
 std::string mfValue <T, printPrefix>::asString () const
 {
   std::stringstream ss;
@@ -130,13 +149,20 @@ std::string mfValue <T, printPrefix>::asString () const
   return ss.str ();
 }
 
-template <typename T, const std::string& printPrefix>
+template <
+  typename T,
+  const std::string& printPrefix
+>
 void mfValue <T, printPrefix>::print (std::ostream& os) const
 {
   os << asString ();
 }
 
-template <typename T, const std::string& printPrefix>
+// operator <<
+template <
+  typename T,
+  const std::string& printPrefix
+>
 EXP std::ostream& operator << (
   std::ostream&                   os,
   const mfValue <T, printPrefix>& elt)
@@ -178,7 +204,13 @@ int main() {
 }
 */
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+//______________________________________________________________________________
+template <
+  typename T,
+  const std::string& printPrefix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
 class mfValueWithNeutralValue
 {
   public:
@@ -237,20 +269,25 @@ class mfValueWithNeutralValue
     std::string           fNeutralValueString;
 };
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
-EXP std::ostream& operator << (
-  std::ostream&                                                                      os,
-  const mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>& elt);
-
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+// constructors
+template <
+  typename T,
+  const std::string& printPrefix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
 mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::mfValueWithNeutralValue ()
   : fValue (neutralValue),
-    fPrintPrefix (printPrefix),
-    fNeutralValue (neutralValue),
-    fNeutralValueString (neutralValueString)
+      fPrintPrefix (printPrefix),
+      fNeutralValue (neutralValue),
+      fNeutralValueString (neutralValueString)
 {}
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+template <
+  typename T, const std::string& printPrefix,
+  const T& neutralValue,
+  const std::string& neutralValueString
+>
 mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::mfValueWithNeutralValue (T value)
   : fValue (value),
     fPrintPrefix (printPrefix),
@@ -258,31 +295,60 @@ mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::mfV
     fNeutralValueString (neutralValueString)
 {}
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+// destructor
+template <
+  typename T,
+  const std::string& printPrefix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
 mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::~mfValueWithNeutralValue ()
 {}
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+// operator T ()
+template <
+  typename T,
+  const std::string& printPrefix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
 mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::operator T () const
 {
   return fValue;
 }
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+// comparison operators
+template <
+  typename T,
+  const std::string& printPrefix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
 Bool mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::operator == (
   const mfValueWithNeutralValue& otherInputLineNumber) const
 {
   return fValue == otherInputLineNumber.fValue;
 }
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+template <
+  typename T,
+  const std::string& printPrefix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
 Bool mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::operator != (
   const mfValueWithNeutralValue& otherInputLineNumber) const
 {
   return fValue != otherInputLineNumber.fValue;
 }
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+// print
+template <
+  typename T,
+  const std::string& printPrefix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
 std::string mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::asString () const
 {
   std::stringstream ss;
@@ -300,13 +366,23 @@ std::string mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValue
   return ss.str ();
 }
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+template <
+  typename T,
+  const std::string& printPrefix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
 void mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>::print (std::ostream& os) const
 {
   os << asString ();
 }
 
-template <typename T, const std::string& printPrefix, const T& neutralValue, const std::string& neutralValueString>
+// operator <<
+template <
+  typename T, const std::string& printPrefix,
+  const T& neutralValue,
+  const std::string& neutralValueString
+>
 EXP std::ostream& operator << (
   std::ostream&                                                                      os,
   const mfValueWithNeutralValue <T, printPrefix,  neutralValue, neutralValueString>& elt)
@@ -316,7 +392,10 @@ EXP std::ostream& operator << (
 }
 
 //______________________________________________________________________________
-template <typename T, const std::string& printSeparator>
+template <
+  typename T,
+  const std::string& printSeparator
+>
 class mfRange
 {
   public:
@@ -364,13 +443,11 @@ class mfRange
     std::string           fPprintSeparator;
 };
 
-template <typename T, const std::string& printSeparator>
-EXP std::ostream& operator << (
-  std::ostream&                            os,
-  const mfRange <T, printSeparator>& elt);
-
-
-template <typename T, const std::string& printSeparator>
+// constructor
+template <
+  typename T,
+  const std::string& printSeparator
+>
 mfRange <T, printSeparator>::mfRange (
   T rangeStart,
   T rangeEnd)
@@ -379,11 +456,19 @@ mfRange <T, printSeparator>::mfRange (
       fPprintSeparator (printSeparator)
 {}
 
-template <typename T, const std::string& printSeparator>
+// destructor
+template <
+  typename T,
+  const std::string& printSeparator
+>
 mfRange <T, printSeparator>::~mfRange ()
 {}
 
-template <typename T, const std::string& printSeparator>
+// print
+template <
+  typename T,
+  const std::string& printSeparator
+>
 std::string mfRange <T, printSeparator>::asString () const
 {
   std::stringstream ss;
@@ -400,13 +485,20 @@ std::string mfRange <T, printSeparator>::asString () const
   return ss.str ();
 }
 
-template <typename T, const std::string& printSeparator>
+template <
+  typename T,
+  const std::string& printSeparator
+>
 void mfRange <T, printSeparator>::print (std::ostream& os) const
 {
   os << asString ();
 }
 
-template <typename T, const std::string& printSeparator>
+// operator <<
+template <
+  typename T,
+  const std::string& printSeparator
+>
 EXP std::ostream& operator << (
   std::ostream&                      os,
   const mfRange <T, printSeparator>& elt)
@@ -467,5 +559,6 @@ typedef mfValueWithNeutralValue
 void testWrapperTypes ();
 
 }
+
 
 #endif // ___mfWrapperTypes___

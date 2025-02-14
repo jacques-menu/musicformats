@@ -34,10 +34,10 @@ class EXP msrBeatRepeatPattern : public msrElement
                             int              inputLineNumber,
                             const S_msrBeatRepeat& upLinkToBeatRepeat);
 
-    SMARTP<msrBeatRepeatPattern> createBeatRepeatPatternNewbornClone (
+    SMARTP<msrBeatRepeatPattern> createABeatRepeatPatternNewbornClone (
                             const S_msrVoice& containingVoice);
 
-    SMARTP<msrBeatRepeatPattern> createBeatRepeatPatternDeepClone (
+    SMARTP<msrBeatRepeatPattern> createABeatRepeatPatternDeepClone (
                             const S_msrVoice& containingVoice);
 
   protected:
@@ -122,10 +122,10 @@ class EXP msrBeatRepeatReplicas : public msrElement
                             int              inputLineNumber,
                             const S_msrBeatRepeat& upLinkToBeatRepeat);
 
-    SMARTP<msrBeatRepeatReplicas> createBeatRepeatReplicasNewbornClone (
+    SMARTP<msrBeatRepeatReplicas> createABeatRepeatReplicasNewbornClone (
                             const S_msrVoice& containingVoice);
 
-    SMARTP<msrBeatRepeatReplicas> createBeatRepeatReplicasDeepClone (
+    SMARTP<msrBeatRepeatReplicas> createABeatRepeatReplicasDeepClone (
                             const S_msrVoice& containingVoice);
 
   protected:
@@ -237,10 +237,10 @@ class EXP msrBeatRepeat : public msrSegmentElement
                             int        beatRepeatSlashesNumber,
                             const S_msrVoice& upLinkToVoice);
 
-    SMARTP<msrBeatRepeat> createBeatRepeatNewbornClone (
+    SMARTP<msrBeatRepeat> createABeatRepeatNewbornClone (
                             const S_msrVoice& containingVoice);
 
-    SMARTP<msrBeatRepeat> createBeatRepeatDeepClone (
+    SMARTP<msrBeatRepeat> createABeatRepeatDeepClone (
                             const S_msrVoice& containingVoice);
 
   protected:

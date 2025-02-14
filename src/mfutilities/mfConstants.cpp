@@ -128,7 +128,7 @@ const std::string
   kStanzaNumberPrefix ("ST_"),
   kStanzaNumberNeutralValueString ("*Unknown*");
 
-EXP extern const std::string
+const std::string
   K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_",
   K_STANZA_NAME_UNKNOWN_ = "K_STANZA_NAME_UNKNOWN_";
 

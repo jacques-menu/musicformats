@@ -346,15 +346,22 @@ class EXP msrPart : public msrPartGroupElement
     // measures
 
     void                  cascadeCreateAMeasureAndAppendItInPart (
-                            int                inputLineNumber,
-                            int                previousMeasureEndInputLineNumber,
-                            const std::string& measureNumber,
-                            msrMeasureImplicitKind
-                                               measureImplicitKind);
+                            int                    inputLineNumber,
+                            int                    previousMeasureEndInputLineNumber,
+                            const std::string&     measureNumber,
+                            msrMeasureImplicitKind measureImplicitKind);
 
     void                  setNextMeasureNumberInPart (
                             int                inputLineNumber,
                             const std::string& nextMeasureNumber);
+
+    // measure repeats
+
+    void                  cascadeCreateAMeasureRepeatAndAppendItInPart (
+                            int                    inputLineNumber,
+                            int                    previousMeasureEndInputLineNumber,
+                            const std::string&     measureNumber,
+                            msrMeasureImplicitKind measureImplicitKind);
 
     // clef, key, time signature
 
@@ -516,7 +523,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // measure repeats
 
-    void                  createMeasureRepeatFromItsFirstMeasuresInPart (
+    void                  cascadeCreateAMeasureRepeatAndAppendItInPart (
                             int inputLineNumber,
                             int measureRepeatMeasuresNumber,
                             int measureRepeatSlashesNumber);

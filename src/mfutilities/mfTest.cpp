@@ -17,12 +17,17 @@
   place any include you need here...
 */
 
+// #include "mfInputLinesRange.h"
+#include "mfWrapperTypes.h"
 
 #include "stringMatcherInterface.h"
 
 
 namespace MusicFormats
 {
+
+// typedef explicit_t <int> mfInputLineNumber;
+// typedef explicit_t <int> mfStaffNumber;
 
 //______________________________________________________________________________
 void mfTest (std::ostream& os)
@@ -36,6 +41,26 @@ void mfTest (std::ostream& os)
   gLog << "--------------" << std::endl;
 
   testWrapperTypes ();
+
+
+  mfInputLineNumber inputLineNumber = 33;
+  mfStaffNumber staffNumber = 17;
+
+  int i = 267;
+
+//   i = inputLineNumber;
+
+  inputLineNumber = i;
+
+//   inputLineNumber = staffNumber;
+
+//   staffNumber = inputLineNumber;
+
+  gLog <<
+    std::endl <<
+    "inputLineNumber: " << inputLineNumber << std::endl <<
+    "staffNumber: " << staffNumber << std::endl <<
+    std::endl;
 }
 
 

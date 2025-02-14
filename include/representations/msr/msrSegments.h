@@ -183,6 +183,14 @@ class EXP msrSegment : public msrVoiceElement
     void                  prependMeasureToSegment (
                             const S_msrMeasure& measure);
 
+    // measure repeats
+
+    void                  cascadeCreateAMeasureRepeatAndAppendItInSegment (
+                            int                    inputLineNumber,
+                            int                    previousMeasureEndInputLineNumber,
+                            const std::string&     measureNumber,
+                            msrMeasureImplicitKind measureImplicitKind);
+
     // multi-measure rests
 
     Bool                  fOnGoingMultiMeasureRest;

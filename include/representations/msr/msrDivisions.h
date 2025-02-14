@@ -74,9 +74,9 @@ class EXP msrDivisions : public msrElement
     // ------------------------------------------------------
 
     // durations
-    int                   notesNotesDurationKindAsDivisions (
+    int                   notesDurationKindAsDivisions (
                             int             inputLineNumber,
-                            msrNotesDurationKind notesNotesDurationKind);
+                            msrNotesDurationKind notesDurationKind);
 
     void                  printNotesDurationKindsDivisions (std::ostream& os);
 

@@ -718,24 +718,25 @@ class EXP mxsr2msrSkeletonBuilder :
 
     // there can be multiple tuplets starts on a given note,
     // so they aref kept aside until they are handled
-    std::list <S_mxsrTuplet>  fPendingTupletsList;
+    std::list <S_mxsrTupletEvent>
+                              fPendingTupletEventsList;
 
     void                      handleChordMemberNoteIfRelevant (
                                 int inputStartLineNumber);
 
-    void                      displayPendingTupletsList (
+    void                      displayPendingTupletEventsList (
                                 const std::string& title,
                                 int                inputStartLineNumber) const;
 
     // a tuplet stop may occur in a chord before the latter's last note,
     // and the can be several tuplets stop in a single note:
     // we store their description in a map indexed by a sequential number
-    std::multimap <int, S_mxsr2msrPendingTupletStop>
-                              fPendingTupletsStopsMap; // CHORD_TUP JMI v0.9.71
+    std::multimap <int, S_mxsrTupletEvent>
+                              fPendingTupletsEndEventsMap;
 
     void                      handleTupletEventIfAny ();
 
-    void                      displayPendingTupletsStopsMap (
+    void                      displayPendingTupletEndEventsMap (
                                 const std::string& title,
                                 int                inputStartLineNumber) const;
 
@@ -745,7 +746,7 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      handlePendingTupletsStopsAtMeasureEndIfAny (
                                 int inputStartLineNumber);
 
-    void                      doHandlePendingTupletsStopsIfAny (
+    void                      doHandlePendingTupletsEndsIfAny (
                                 int inputStartLineNumber);
 
 

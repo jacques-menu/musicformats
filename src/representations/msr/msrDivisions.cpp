@@ -171,9 +171,9 @@ void msrDivisions::initializeDivisions ()
   --gIndenter;
 }
 
-int msrDivisions::notesNotesDurationKindAsDivisions (
+int msrDivisions::notesDurationKindAsDivisions (
   int             inputLineNumber,
-  msrNotesDurationKind notesNotesDurationKind)
+  msrNotesDurationKind notesDurationKind)
 {
   for (
     std::list <std::pair <msrNotesDurationKind, int>>::const_iterator i =
@@ -181,7 +181,7 @@ int msrDivisions::notesNotesDurationKindAsDivisions (
     i != fNotesDurationKindsToDivisions.end ();
     ++i
   ) {
-    if ((*i).first == notesNotesDurationKind)
+    if ((*i).first == notesDurationKind)
       return
         (*i).second;
   } // for
@@ -189,7 +189,7 @@ int msrDivisions::notesNotesDurationKindAsDivisions (
   std::stringstream ss;
 
   ss <<
-    "duration " << msrNotesDurationKindAsString (notesNotesDurationKind) <<
+    "duration " << msrNotesDurationKindAsString (notesDurationKind) <<
     " cannot be converted to divisions with " <<
     fDivisionsPerQuarterNote << " divisions per quarter note" <<
     std::endl;

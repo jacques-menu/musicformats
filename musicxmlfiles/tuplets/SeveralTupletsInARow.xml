@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 4.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="4.0">
+  <work>
+    <work-title>Several Tuplets In A Row</work-title>
+  </work>
   <movement-title>Several Tuplets In A Row</movement-title>
   <identification>
     <creator type="composer">Lars P. Opfermann</creator>

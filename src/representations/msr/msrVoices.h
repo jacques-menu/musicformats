@@ -787,16 +787,16 @@ class EXP msrVoice : public msrElement
 
     // measure repeats
 
+    void                  cascadeCreateAMeasureRepeatAndAppendItInVoice (
+                            int inputLineNumber,
+                            int measureRepeatMeasuresNumber,
+                            int measureRepeatSlashesNumber);
+
     void                  appendMeasureRepeatToVoiceElementsList (
                             const S_msrMeasureRepeat& beatRepeat);
 
     void                  appendMeasureRepeatReplicaToVoice (
                             int inputLineNumber);
-
-    void                  createMeasureRepeatFromItsFirstMeasures (
-                            int inputLineNumber,
-                            int beatRepeatMeasuresNumber,
-                            int beatRepeatSlashesNumber);
 
     void                  appendMeasureRepeatToVoice (
                             int                       inputLineNumber,
