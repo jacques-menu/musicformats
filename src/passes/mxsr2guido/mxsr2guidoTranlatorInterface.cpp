@@ -82,11 +82,11 @@ void translateMxsrToGuido (
   // convert the MXSR intto Guido data
   xml2guidovisitor v (
     gGlobalGuidoGenerationOahGroup->
-      getGenerateGuidoComments ().getValue (),
+      getGenerateGuidoComments ().getBareValue (),
     gGlobalGuidoGenerationOahGroup->
-      getGenerateGuidoStem ().getValue (),
+      getGenerateGuidoStem ().getBareValue (),
     gGlobalGuidoGenerationOahGroup->
-      getGenerateGuidoBars ().getValue (),
+      getGenerateGuidoBars ().getBareValue (),
     0); // partNum, i.e. all parts
 
   Sguidoelement

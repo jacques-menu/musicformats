@@ -17,7 +17,7 @@
 #include "smartpointer.h"
 
 // #include "mfInputLinesRange.h"
-#include "mfWrapperTypes.h"
+#include "mfBasicTypes.h"
 #include "msrTupletsEnumTypes.h"
 
 

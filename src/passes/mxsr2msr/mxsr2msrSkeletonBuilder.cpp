@@ -169,7 +169,7 @@ S_mxsrPartGroup mxsr2msrSkeletonBuilder::fetchStartedPartGroupFromMap (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartGroupsMap (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   gLog <<
     "fPartGroupsMap, " <<
@@ -198,7 +198,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsMap (
 
         theMsrPartGroup->
           displayPartGroupElementsList (
-            inputLineNumber);
+            inputLineNumber.getBareValue ());
 
         --gIndenter;
     } // for
@@ -219,7 +219,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsMap (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartsMap (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   gLog <<
     "fPartsMap," <<
@@ -263,7 +263,7 @@ void mxsr2msrSkeletonBuilder::displayPartsMap (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayStartedPartGroupsMap (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   gLog <<
     "fStartedPartGroupsMap, " <<
@@ -292,7 +292,7 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsMap (
 
         theMsrPartGroup->
           displayPartGroupElementsList (
-            inputLineNumber);
+            inputLineNumber.getBareValue ());
 
         --gIndenter;
     } // for
@@ -313,7 +313,7 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsMap (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartGroupsStack (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   gLog <<
     "fPartGroupsStack, " <<
@@ -338,7 +338,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsStack (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartGroupsVector (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   gLog <<
     "fPartGroupsVector, " <<
@@ -373,7 +373,7 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsVector (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayStartedPartGroupsVector (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   gLog <<
     "fStartedPartGroupsListsVector, " <<
@@ -412,7 +412,7 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsVector (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayStoppedPartGroupsVector (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   gLog <<
     "fStoppedPartGroupsListsVector, " <<
@@ -450,7 +450,7 @@ void mxsr2msrSkeletonBuilder::displayStoppedPartGroupsVector (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPartsVector (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
   gLog <<
     "fPartsVector, " <<
@@ -508,8 +508,8 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayAllCollectedData (
-  int                inputLineNumber,
-  const std::string& context)
+	const mfInputLineNumber& inputLineNumber,
+	const std::string&       context)
 {
   gLog <<
     std::endl <<
@@ -565,8 +565,8 @@ void mxsr2msrSkeletonBuilder::displayAllCollectedData (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPart (
-  int              inputLineNumber,
-  const S_msrPart& theMsrPart)
+	const mfInputLineNumber& inputLineNumber,
+	const S_msrPart&         thePart)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
@@ -574,7 +574,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
 
     ss <<
       "Registering MSR part " <<
-      theMsrPart->fetchPartCombinedName () <<
+      thePart->fetchPartCombinedName () <<
       " in the parts data" <<
       ", line " << inputLineNumber;
 
@@ -584,11 +584,11 @@ void mxsr2msrSkeletonBuilder::registerPart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // register theMsrPart in the parts vector
-  fPartsVector.push_back (theMsrPart);
+  // register thePart in the parts vector
+  fPartsVector.push_back (thePart);
 
   // register it in the parts map
-  fPartsMap [theMsrPart->getPartID ()] = theMsrPart;
+  fPartsMap [thePart->getPartID ()] = thePart;
 
 	// append it to current part group
 	S_msrPartGroup
@@ -598,7 +598,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
 
 	currentMsrPartGroup->
 		appendPartToPartGroup (
-			theMsrPart);
+			thePart);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -606,7 +606,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
 
     ss <<
       "AFTER registering MSR part " <<
-      theMsrPart->fetchPartCombinedName () <<
+      thePart->fetchPartCombinedName () <<
       "\" in the parts data" <<
       ", line " << inputLineNumber;
 
@@ -619,8 +619,8 @@ void mxsr2msrSkeletonBuilder::registerPart (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupStart (
-  int                    inputLineNumber,
-  const S_mxsrPartGroup& partGroup)
+	const mfInputLineNumber& inputLineNumber,
+	const S_mxsrPartGroup&    partGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -714,8 +714,8 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::registerPartGroupStop (
-  int                    inputLineNumber,
-  const S_mxsrPartGroup& partGroup)
+	const mfInputLineNumber& inputLineNumber,
+	const S_mxsrPartGroup&    partGroup)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -743,7 +743,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 
 		musicxmlError (
 			gServiceRunData->getInputSourceName (),
-			inputLineNumber,
+			inputLineNumber.getBareValue (),
 			__FILE__, __LINE__,
 			ss.str ());
 	}
@@ -871,7 +871,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handlePartGroupStart (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -906,7 +906,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
   S_msrPartGroup
     startedPartGroup =
       msrPartGroup::create (
-        inputLineNumber,
+        inputLineNumber.getBareValue (),
         fCurrentPartGroupNumber,
         fCurrentPartGroupIdentity,
         fCurrentPartGroupName,
@@ -927,7 +927,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
   S_mxsrPartGroup
     partGroup =
       mxsrPartGroup::create (
-        inputLineNumber,
+        inputLineNumber.getBareValue (),
         fCurrentPartGroupNumber,
         startedPartGroup,
         fCurrentPartGroupIdentity) ;
@@ -948,7 +948,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handlePartGroupStop (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -992,7 +992,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
  // JMI   musicxmlError (
     musicxmlWarning (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber,
+      inputLineNumber.getBareValue (),
   //    __FILE__, __LINE__,
       ss.str ());
   }
@@ -1000,7 +1000,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
   else {
     // register partGroupToBeStopped as stopped
     registerPartGroupStop (
-      inputLineNumber,
+      inputLineNumber.getBareValue (),
       partGroupToBeStopped);
   }
 
@@ -1015,9 +1015,9 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
-  int                    inputLineNumber,
-  const S_mxsrPartGroup& partGroupToBeStopped,
-  const S_mxsrPartGroup& containingPartGroup)
+	const mfInputLineNumber& inputLineNumber,
+	const S_mxsrPartGroup&   partGroupToBeStopped,
+	const S_mxsrPartGroup&   containingPartGroup)
 {
   // get the MSR part groups involved
   S_msrPartGroup
@@ -1069,7 +1069,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
 
   theMsrPartGroupToBeStopped->
     setPartGroupUpLinkToContainingPartGroup (
-    	inputLineNumber,
+    	inputLineNumber.getBareValue (),
       theMsrContainingPartGroup);
 
   // append currentPartGroup to containingPartGroup
@@ -1099,7 +1099,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrScore (
-	int inputLineNumber)
+	const mfInputLineNumber& inputLineNumber)
 {
   // an implicit outer-most part group has to be created to contain everything,
   // since there can be parts out of any explicit part group in MusicXML
@@ -1137,7 +1137,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 	// create fImplicitOuterMostMsrPartGroup
   fImplicitOuterMostMsrPartGroup =
 		msrPartGroup::create (
-      inputLineNumber,
+      inputLineNumber.getBareValue (),
       fCurrentPartGroupNumber,
       fCurrentPartGroupIdentity,
       "***IMPLICIT OUTER-MOST PART GROUP***", 			// partGroupName
@@ -1177,7 +1177,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
   // create the MXSR part group for the implicit outer-most part group
   fImplicitOuterMostPartGroup =
     mxsrPartGroup::create (
-      inputLineNumber,
+      inputLineNumber.getBareValue (),
       fCurrentPartGroupNumber,
       fImplicitOuterMostMsrPartGroup,
       fCurrentPartGroupIdentity);
@@ -1230,7 +1230,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 
 //______________________________________________________________________________
 void mxsr2msrSkeletonBuilder::sortfStartedPartGroupsListsVector (
-	int inputLineNumber)
+	const mfInputLineNumber& inputLineNumber)
 {
 	for (
 		S_mxsrPartGroupsList thePartGroupList :
@@ -1262,7 +1262,7 @@ void mxsr2msrSkeletonBuilder::sortfStartedPartGroupsListsVector (
 }
 
 void mxsr2msrSkeletonBuilder::sortStoppedPartGroupsListsVector (
-	int inputLineNumber)
+	const mfInputLineNumber& inputLineNumber)
 {
 	for (S_mxsrPartGroupsList thePartGroupList : fStoppedPartGroupsListsVector) {
 		// sort thePartGroupList in decreasing identit yorder
@@ -1293,8 +1293,8 @@ void mxsr2msrSkeletonBuilder::sortStoppedPartGroupsListsVector (
 }
 
 void mxsr2msrSkeletonBuilder::handlePartGroupsStartAtIdentity (
-	int inputLineNumber,
-	int identity)
+	const mfInputLineNumber& inputLineNumber,
+	int                      identity)
 {
 	if (! fStartedPartGroupsListsVector.empty ()) {
 		S_mxsrPartGroupsList
@@ -1340,8 +1340,8 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsStartAtIdentity (
 }
 
 void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
-	int inputLineNumber,
-	int identity)
+	const mfInputLineNumber& inputLineNumber,
+	int                      identity)
 {
 	if (! fStoppedPartGroupsListsVector.empty ()) {
 		S_mxsrPartGroupsList
@@ -1557,7 +1557,7 @@ of a score exhibiting overlapping part groups)",
 
 //______________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocation (
-  int inputLineNumber)
+  const mfInputLineNumber& inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -1625,7 +1625,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
         musicxmlError (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber,
+          inputLineNumber.getBareValue (),
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1658,8 +1658,8 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
 //______________________________________________________________________________
 S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
-  int inputLineNumber,
-  int staffNumber)
+	const mfInputLineNumber& inputLineNumber,
+	const mfStaffNumber&     staffNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
@@ -1680,16 +1680,16 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
   S_msrStaff
     staff =
       fCurrentPart->
-        fetchStaffFromPart (staffNumber);
+        fetchStaffFromPart (staffNumber.getBareValue ());
 
   if (! staff) {
     // no, add it to fCurrentPart
     staff =
       fCurrentPart->
         addStaffToPartByItsNumber (
-          inputLineNumber,
+          inputLineNumber.getBareValue (),
           msrStaffKind::kStaffKindRegular,
-          staffNumber);
+          staffNumber.getBareValue ());
 
 		// register the current staff number in the service run data
 		S_mfServiceRunData
@@ -1698,7 +1698,7 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
 
 		serviceRunData->
 			setCurrentStaveNumber (
-				staffNumber);
+				staffNumber.getBareValue ());
 	}
 
   return staff;
@@ -1706,9 +1706,9 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
 
 //______________________________________________________________________________
 S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
-  int inputLineNumber,
-  int staffNumber,
-  int voiceNumber)
+	const mfInputLineNumber& inputLineNumber,
+	const mfStaffNumber&     staffNumber,
+	const mfVoiceNumber&     voiceNumber)
 {
   // the voice number is relative to a part
 
@@ -1740,16 +1740,16 @@ S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
     voice =
       staff->
         fetchRegularVoiceFromStaffByItsNumber (
-          inputLineNumber,
-          voiceNumber);
+          inputLineNumber.getBareValue (),
+          voiceNumber.getBareValue ());
 
   if (! voice) {
     // create the voice and append it to the staff
     voice =
       staff->
         createRegularVoiceInStaffByItsNumber (
-          inputLineNumber,
-          voiceNumber,
+          inputLineNumber.getBareValue (),
+          voiceNumber.getBareValue (),
           fCurrentMeasureNumber,
           fPartGroupsStack.top ()->getMsrPartGroup ());
 
@@ -1767,21 +1767,21 @@ S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
 }
 
 S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
-  int              inputLineNumber,
-  const S_msrPart& theMsrPart)
+	mfInputLineNumber inputLineNumber,
+	const S_msrPart&  thePart)
 {
-  // is the harmonies voice already present in theMsrPart?
+  // is the harmonies voice already present in thePart?
   S_msrVoice
     partHarmoniesVoice =
-      theMsrPart->
+      thePart->
         getPartHarmoniesVoice ();
 
   if (! partHarmoniesVoice) {
-    // create the harmonies voice and append it to theMsrPart
+    // create the harmonies voice and append it to thePart
     partHarmoniesVoice =
-      theMsrPart->
+      thePart->
         createPartHarmoniesVoice (
-          inputLineNumber,
+          inputLineNumber.getBareValue (),
           fCurrentMeasureNumber);
   }
 
@@ -1789,21 +1789,21 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
 }
 
 S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
-  int              inputLineNumber,
-  const S_msrPart& theMsrPart)
+	mfInputLineNumber inputLineNumber,
+	const S_msrPart&  thePart)
 {
-  // is the figured bass voice already present in theMsrPart?
+  // is the figured bass voice already present in thePart?
   S_msrVoice
     partFiguredBassVoice =
-      theMsrPart->
+      thePart->
         getPartFiguredBassVoice ();
 
   if (! partFiguredBassVoice) {
-    // create the figured bass voice and append it to theMsrPart
+    // create the figured bass voice and append it to thePart
     partFiguredBassVoice =
-      theMsrPart->
+      thePart->
         createPartFiguredBassVoice (
-          inputLineNumber,
+          inputLineNumber.getBareValue (),
           fCurrentMeasureNumber);
   }
 
@@ -1812,7 +1812,7 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
-	int inputStartLineNumber)
+	const mfInputLineNumber& inputStartLineNumber)
 {
 	// an end of measure enforces the end of a chord or tuplets  CHORD_TUP
 	// the current note is then the one preceding the end of measure
@@ -1875,17 +1875,24 @@ void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
 		// the note before the measure end is the last one of the chord
 		// it is still the current note
 
-		fResultingEventsCollection.registerChordEnd (
-			fCurrentNoteSequentialNumber,
-			fCurrentNoteStaffNumber,
-			fCurrentNoteVoiceNumber,
-			fCurrentNoteInputLineNumber);
+		// create a chord end event
+		S_mxsrChordEvent
+			chordEndEvent	=
+				fResultingEventsCollection.createAChordEndEvent (
+					fCurrentNoteSequentialNumber,
+					fCurrentNoteStaffNumber,
+					fCurrentNoteVoiceNumber,
+					fCurrentNoteInputLineNumber);
+
+		// register it
+		fResultingEventsCollection.registerChordEndEvent (
+			chordEndEvent);
 	}
 }
 
 void mxsr2msrSkeletonBuilder::displayPendingTupletEventsList (
-	const std::string& title,
-	int                inputStartLineNumber) const
+	const std::string&       title,
+	const mfInputLineNumber& inputStartLineNumber) const
 {
 	gLog <<
 		">>>>> fPendingTupletEventsList contents - " <<
@@ -1910,8 +1917,8 @@ void mxsr2msrSkeletonBuilder::displayPendingTupletEventsList (
 
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::displayPendingTupletEndEventsMap (
-	const std::string& title,
-	int                inputStartLineNumber) const
+	const std::string&       title,
+	const mfInputLineNumber& inputStartLineNumber) const
 {
 	gLog <<
 		">>>>> fPendingTupletsEndEventsMap contents - " <<
@@ -1949,7 +1956,7 @@ void mxsr2msrSkeletonBuilder::displayPendingTupletEndEventsMap (
 }
 
 void mxsr2msrSkeletonBuilder::handlePendingTupletsStopsAfterANoteIfAny (
-	int inputStartLineNumber)
+	const mfInputLineNumber& inputStartLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -1967,7 +1974,7 @@ void mxsr2msrSkeletonBuilder::handlePendingTupletsStopsAfterANoteIfAny (
 }
 
 void mxsr2msrSkeletonBuilder::handlePendingTupletsStopsAtMeasureEndIfAny (
-	int inputStartLineNumber)
+	const mfInputLineNumber& inputStartLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -1982,7 +1989,7 @@ void mxsr2msrSkeletonBuilder::handlePendingTupletsStopsAtMeasureEndIfAny (
 }
 
 void mxsr2msrSkeletonBuilder::doHandlePendingTupletsEndsIfAny (
-	int inputStartLineNumber)
+	const mfInputLineNumber& inputStartLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -3870,41 +3877,41 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   S_msrPart
-    theMsrPart =
+    thePart =
       msrPart::create (
         elt->getInputLineNumber (),
         scorePartID,
         0); // fPartUpLinkToPartGroup will be set later
 
-  // populate theMsrPart
-  theMsrPart->
+  // populate thePart
+  thePart->
     setPartName (
       fCurrentPartName);
-  theMsrPart->
+  thePart->
     setPartNameDisplayText (
       fCurrentPartNameDisplayText);
 
-  theMsrPart->
+  thePart->
     setPartAbbreviation (
       fCurrentPartAbbreviation);
-  theMsrPart->
+  thePart->
     setPartAbbreviationDisplayText (
       fCurrentPartAbbreviationDisplayText);
 
-  theMsrPart->
+  thePart->
     setPartInstrumentName (
       fCurrentPartInstrumentName);
-  theMsrPart->
+  thePart->
     setPartInstrumentAbbreviation (
       fCurrentPartInstrumentAbbreviation);
 
-  // register theMsrPart in the MSR parts data
+  // register thePart in the MSR parts data
   registerPart (
     elt->getInputLineNumber (),
-    theMsrPart);
+    thePart);
 
 	// set theMsrPart's part uplink to the part group it belongs to
-  theMsrPart->
+  thePart->
   	setPartUpLinkToPartGroup (
   		fPartGroupsStack.top ()->
   			getMsrPartGroup ()); // JMI HARD v0.9.69
@@ -4449,20 +4456,36 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 
 	if (fCurrentNoteIsACueNote) {
 		// the current note is the last one of a cue notes group
-		fResultingEventsCollection.registerCueEnd (
-			fCurrentNoteSequentialNumber,
-			fCurrentNoteStaffNumber,
-			fCurrentNoteVoiceNumber,
-			fCurrentNoteInputLineNumber);
+
+		// create a cue end event
+		S_mxsrCueEvent
+			cueEndEvent	=
+				fResultingEventsCollection.createACueEndEvent (
+				fCurrentNoteSequentialNumber,
+				fCurrentNoteStaffNumber,
+				fCurrentNoteVoiceNumber,
+				fCurrentNoteInputLineNumber);
+
+		// register it
+		fResultingEventsCollection.registerCueEndEvent (
+			cueEndEvent);
 	}
 
 	if (fCurrentNoteBelongsToAChord) {
 		// the current note is the last one of a chord
-		fResultingEventsCollection.registerChordEnd (
-			fCurrentNoteSequentialNumber,
-			fCurrentNoteStaffNumber,
-			fCurrentNoteVoiceNumber,
-			fCurrentNoteInputLineNumber);
+
+		// create a chord end event
+		S_mxsrChordEvent
+			chordEndEvent	=
+				fResultingEventsCollection.createAChordEndEvent (
+				fCurrentNoteSequentialNumber,
+				fCurrentNoteStaffNumber,
+				fCurrentNoteVoiceNumber,
+				fCurrentNoteInputLineNumber);
+
+		// register it
+		fResultingEventsCollection.registerChordEndEvent (
+			chordEndEvent);
 	}
 
 	// handle pending tuplet stops if any, after the chord end if any,
@@ -4891,7 +4914,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_cue& elt)
 
 //________________________________________________________________________
 Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
-	int inputStartLineNumber)
+	const mfInputLineNumber& inputStartLineNumber)
 {
 	Bool result;
 
@@ -4938,14 +4961,15 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 		}
 #endif // MF_TRACE_IS_ENABLE
 
-		int
+		mfStaffNumber
 			takeOffStaffNumber = fPreviousNoteStaffNumber,
-			landingStaffNumber = fCurrentNoteStaffNumber,
+			landingStaffNumber = fCurrentNoteStaffNumber;
 
+		mfVoiceNumber
 			changingVoiceNumber = fPreviousNoteVoiceNumber,
 			landingVoiceNumber = fCurrentNoteVoiceNumber;
 
-		int
+		mfInputLineNumber
 			takeOffNoteInputLineNumber = fPreviousNoteInputLineNumber,
 			landingNoteInputLineNumber = fCurrentNoteInputLineNumber;
 
@@ -4971,8 +4995,8 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 			fPreviousNoteStaffNumber,
 			changingVoiceNumber,							// the voice that changes staff
 			takeOffStaffNumber,
-			landingStaffNumber,
 			takeOffNoteInputLineNumber,
+			landingStaffNumber,
 			landingNoteInputLineNumber,
 			fPreviousNoteInputLineNumber);
 
@@ -4982,8 +5006,8 @@ Bool mxsr2msrSkeletonBuilder::handleStaffChangeIfAny (
 			fCurrentNoteStaffNumber,
 			changingVoiceNumber,							// the voice that changes staff
 			takeOffStaffNumber,
-			landingStaffNumber,
 			takeOffNoteInputLineNumber,
+			landingStaffNumber,
 			landingNoteInputLineNumber,
 			fCurrentNoteInputLineNumber);
   }
@@ -5132,11 +5156,19 @@ void mxsr2msrSkeletonBuilder::registerCueEventIfAny ()
 		}
 		else {
 			// the current note is the cue notes begin
-			fResultingEventsCollection.registerCueBegin (
-				fCurrentNoteSequentialNumber,
-				fCurrentNoteStaffNumber,
-				fCurrentNoteVoiceNumber,
-				fCurrentNoteInputLineNumber);
+
+			// create a cue begin event
+			S_mxsrCueEvent
+				cueBeginEvent	=
+					fResultingEventsCollection.createACueBeginEvent (
+					fCurrentNoteSequentialNumber,
+					fCurrentNoteStaffNumber,
+					fCurrentNoteVoiceNumber,
+					fCurrentNoteInputLineNumber);
+
+			// register it
+			fResultingEventsCollection.registerCueBeginEvent (
+				cueBeginEvent);
 		}
 	}
 
@@ -5145,11 +5177,19 @@ void mxsr2msrSkeletonBuilder::registerCueEventIfAny ()
 		if (fPreviousNoteIsACueNote) {
 			// this is the note right after the last one of the cue notes group
 			// we're one note late, hence the previous note is the cue notes group end
-			fResultingEventsCollection.registerCueEnd (
-				fPreviousNoteSequentialNumber,
-				fPreviousNoteStaffNumber,
-				fPreviousNoteVoiceNumber,
-				fPreviousNoteInputLineNumber);
+
+			// create a cue end event
+			S_mxsrCueEvent
+				cueEndEvent	=
+					fResultingEventsCollection.createACueEndEvent (
+						fPreviousNoteSequentialNumber,
+						fPreviousNoteStaffNumber,
+						fPreviousNoteVoiceNumber,
+						fPreviousNoteInputLineNumber);
+
+			// register it
+			fResultingEventsCollection.registerCueEndEvent (
+				cueEndEvent);
 		}
 		else {
 			// wait and see upon the next note or the measure end
@@ -5178,11 +5218,19 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 		else {
 			// this is the second note of the chord
 			// we're one note late, hence the previous note is the chord begin
-			fResultingEventsCollection.registerChordBegin (
-				fPreviousNoteSequentialNumber,
-				fPreviousNoteStaffNumber,
-				fPreviousNoteVoiceNumber,
-				fPreviousNoteInputLineNumber);
+
+			// create a chord begin event
+			S_mxsrChordEvent
+				chordBeginEvent	=
+					fResultingEventsCollection.createAChordBeginEvent (
+					fPreviousNoteSequentialNumber,
+					fPreviousNoteStaffNumber,
+					fPreviousNoteVoiceNumber,
+					fPreviousNoteInputLineNumber);
+
+			// register it
+			fResultingEventsCollection.registerChordBeginEvent (
+				chordBeginEvent);
 		}
 	}
 
@@ -5191,11 +5239,19 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 		if (fPreviousNoteBelongsToAChord) {
 			// this is the note right after the last one of the chord
 			// we're one note late, hence the previous note is the chord end
-			fResultingEventsCollection.registerChordEnd (
-				fPreviousNoteSequentialNumber,
-				fPreviousNoteStaffNumber,
-				fPreviousNoteVoiceNumber,
-				fPreviousNoteInputLineNumber);
+
+			// create a chord end event
+			S_mxsrChordEvent
+				chordEndEvent	=
+					fResultingEventsCollection.createAChordEndEvent (
+					fPreviousNoteSequentialNumber,
+					fPreviousNoteStaffNumber,
+					fPreviousNoteVoiceNumber,
+					fPreviousNoteInputLineNumber);
+
+			// register it
+			fResultingEventsCollection.registerChordEndEvent (
+				chordEndEvent);
 
 // 			fPreviousNoteBelongsToAChord = false;
 		}
@@ -5406,11 +5462,19 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 		if (false && fPreviousNoteBelongsToAChord) {
 			// this is the note right after the last one of the chord
 			// we're one note late, hence the previous note is the chord end
-			fResultingEventsCollection.registerChordEnd (
-				fPreviousNoteSequentialNumber,
-				fPreviousNoteStaffNumber,
-				fPreviousNoteVoiceNumber,
-				fPreviousNoteInputLineNumber);
+
+			// create a chord end event
+			S_mxsrChordEvent
+				chordEndEvent	=
+					fResultingEventsCollection.createAChordEndEvent (
+						fPreviousNoteSequentialNumber,
+						fPreviousNoteStaffNumber,
+						fPreviousNoteVoiceNumber,
+						fPreviousNoteInputLineNumber);
+
+			// register it
+			fResultingEventsCollection.registerChordEndEvent (
+				chordEndEvent);
 		}
 	}
 
@@ -5649,7 +5713,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
 // 				mxsrTuplet::create (
 // 					tupletTypeKind,
 // 					fCurrentTupletNumber,
-// 					fCurrentNoteInputLineNumber);
+// 					fCurrentNoteInputLineNumber.getBareValue ());
 //
 // 		// push it ahead of fPendingTupletEventsList
 // 		// since there can be several tuplet starts upon a given note

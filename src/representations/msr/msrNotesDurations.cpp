@@ -638,11 +638,11 @@ EXP void checkNoteDurationKindAndWholeNotesDurationConsistency (
       wholeNotesDuration <<
       " are insistent";
 
-//     msrError (
-    msrWarning (
+    msrError (
+//     msrWarning (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
-//       __FILE__, __LINE__,
+      __FILE__, __LINE__,
       ss.str ());
   }
 }

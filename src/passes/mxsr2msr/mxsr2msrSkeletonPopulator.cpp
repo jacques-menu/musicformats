@@ -1390,7 +1390,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBegin ()
 // fCurrentMeasureRepeatMeasuresNumber
   fCurrentMeasureRepeat =
     msrMeasureRepeat::create (
-      fCurrentMeasureRepeatBegin->getEventInputLineNumber ().getValue (),
+      fCurrentMeasureRepeatBegin->getEventInputLineNumber ().getBareValue (),
       fCurrentMeasureRepeatMeasuresNumber,
       fCurrentMeasureRepeatSlashesNumber,
       nullptr); // JMI BEGINEND fCurrentMsrVoice);
@@ -22710,7 +22710,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
         staffChangeTakeOffEvent->
           getEventInputLineNumber ();
 
-    int
+    mfStaffNumber
       takeOffStaffNumber =
         staffChangeTakeOffEvent->
           getTakeOffStaffNumber (),
@@ -22805,15 +22805,15 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
     // fetch the current note's staff
     S_msrStaff
       takeOffStaff =
-        fCurrentPartStavesVector [takeOffStaffNumber],
+        fCurrentPartStavesVector [takeOffStaffNumber.getBareValue ()],
       landingStaff =
-        fCurrentPartStavesVector [landingStaffNumber]; // JMI v0.9.72
+        fCurrentPartStavesVector [landingStaffNumber.getBareValue ()]; // JMI v0.9.72
 
     // create the voice staff change
     S_msrVoiceStaffChange
       voiceStaffChange =
         msrVoiceStaffChange::create (
-          eventInputStartLineNumber.getValue (),
+          eventInputStartLineNumber.getBareValue (),
           gNullMeasure,  // JMI v0.9.72 ???  // set later in setMeasureElementUpLinkToMeasure()
           takeOffStaff,
           landingStaff);
@@ -22991,7 +22991,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
     // till the note following it, to which it will be attached
     fPendingGraceNotesGroup =
       msrGraceNotesGroup::create (
-        eventInputStartLineNumber.getValue (),
+        eventInputStartLineNumber.getBareValue (),
         msrGraceNotesGroupKind::kGraceNotesGroupBefore, // default value
         fCurrentGraceNotesGroupIsSlashed,
         fCurrentGraceNotesGroupIsBeamed,
@@ -23240,7 +23240,7 @@ void mxsr2msrSkeletonPopulator::handleChordBegin ()
   fCurrentChord =
     msrChord::create (
       fCurrentNoteChordBegin->
-        getEventInputLineNumber ().getValue ());
+        getEventInputLineNumber ().getBareValue ());
 
   // register it as not yet populated fron its first note
   fCurrentChordHasBeenPopulatedFromItsFirstNote = false;
@@ -23396,7 +23396,7 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEventsIfAny ()
     S_msrTuplet
       tuplet =
         createTuplet (
-          tupletEvent->getEventInputLineNumber ().getValue (),
+          tupletEvent->getEventInputLineNumber ().getBareValue (),
           tupletNumber);
 
     // handle the tuplet start

@@ -23,51 +23,55 @@
 namespace MusicFormats
 {
 
+// the empty string
+//______________________________________________________________________________
+EXP extern const std::string K_MF_EMPTY_STRING;
+
 // input line numbers
 //______________________________________________________________________________
 
-constexpr int K_MF_INPUT_LINE_UNKNOWN_ = -1;
+EXP extern const int K_MF_INPUT_LINE_UNKNOWN_;
 
 EXP extern const std::string
   kInputLineNumberPrefix,
-  kInputLineNumberNeutralValueString;
+  kInputLineNumberDefaultValueString;
 
 // input locations
 //______________________________________________________________________________
 
 EXP extern const std::string
   kInputLocationRangePrefix,
-  kInputLocationNeutralValueString;
+  kInputLocationDefaultValueString;
 
 // staff numbers
 //______________________________________________________________________________
 
-constexpr int K_STAFF_NUMBER_UNKNOWN_ = -99;
+EXP extern const int K_STAFF_NUMBER_UNKNOWN_;
 
 EXP extern const std::string
   kStaffNumberPrefix,
-  kStaffNumberNeutralValueString;
+  kStaffNumberDefaultValueString;
 
-constexpr int K_PART_HARMONIES_STAFF_NUMBER = 10;
+EXP extern const int K_PART_HARMONIES_STAFF_NUMBER;
 
-constexpr int K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
+EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER;
 
 EXP extern std::string mfStaffNumberAsString (int staffNumber);
 
 // voice numbers
 //______________________________________________________________________________
 
-constexpr int K_VOICE_NUMBER_UNKNOWN_ = -96;
+EXP extern const int K_VOICE_NUMBER_UNKNOWN_;
 
 EXP extern const std::string
   kVoiceNumberPrefix,
-  kVoiceNumberNeutralValueString;
+  kVoiceNumberDefaultValueString;
 
-constexpr int K_PART_HARMONIES_VOICE_NUMBER = 11;
-constexpr int K_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
+EXP extern const int K_PART_HARMONIES_VOICE_NUMBER;
+EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER;
 
-constexpr int K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
-constexpr int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER = 40;
+EXP extern const int K_PART_FIGURED_BASS_VOICE_NUMBER;
+EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER;
 
 EXP extern std::string mfVoiceNumberAsString (int voiceNumber);
 
@@ -78,20 +82,20 @@ EXP extern const std::string K_MEASURE_NUMBER_UNKNOWN_;
 
 EXP extern const std::string
   kMeasureNumberPrefix,
-  kMeasureNumberNeutralValueString;
+  kMeasureNumberDefaultValueString;
 
 EXP extern std::string mfMeasureNumberAsString (std::string measureNumber);
 
 // whole notes durations
 //______________________________________________________________________________
 
-constexpr int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = -1;
+EXP extern const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_;
 
 EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_;
 
 EXP extern const std::string
   kWholeNotePrefix,
-  kWholeNoteNeutralValueString;
+  kWholeNoteDefaultValueString;
 
 // moments
 //______________________________________________________________________________
@@ -102,7 +106,7 @@ EXP extern const msrMoment K_MOMENT_UNKNOWN_;
 
 EXP extern const std::string
   kMomentPrefix,
-  kMomentNeutralValueString;
+  kMomentDefaultValueString;
 
 // lyrics
 //______________________________________________________________________________
@@ -113,14 +117,14 @@ EXP extern const std::string
 
 EXP extern const std::string
   kStanzaNumberPrefix,
-  kStanzaNumberNeutralValueString;
+  kStanzaNumberDefaultValueString;
 
 EXP extern std::string mfStanzaNumberAsString (std::string stanzaNumber);
 
 // names lists max length
 //______________________________________________________________________________
 
-constexpr int K_MF_NAMES_LIST_MAX_LENGTH = 50;
+EXP extern const int K_MF_NAMES_LIST_MAX_LENGTH;
 
 
 }

@@ -11,14 +11,14 @@
 
 #include "mfTest.h"
 #include "mfIndentedTextOutput.h"
-#include "mfWrapperTypes.h"
+#include "mfBasicTypes.h"
 
 /*
   place any include you need here...
 */
 
 // #include "mfInputLinesRange.h"
-#include "mfWrapperTypes.h"
+#include "mfBasicTypes.h"
 
 #include "stringMatcherInterface.h"
 
@@ -40,7 +40,7 @@ void mfTest (std::ostream& os)
 
   gLog << "--------------" << std::endl;
 
-  testWrapperTypes ();
+  testMfBasicTypes ();
 
 
   mfInputLineNumber inputLineNumber = 33;

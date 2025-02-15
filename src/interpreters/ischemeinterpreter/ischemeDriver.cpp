@@ -75,49 +75,49 @@ ischemeDriver::ischemeDriver ()
   // since Bool is unknown to Flex and Bison-generated code
   fTraceScanning =
       gGlobalIschemeInterpreterOahGroup->
-        getTraceScanning ().getValue ();
+        getTraceScanning ().getBareValue ();
 
   fDisplayTokens =
       gGlobalIschemeInterpreterOahGroup->
-        getDisplayTokens ().getValue ();
+        getDisplayTokens ().getBareValue ();
 
   fTraceParsing =
       gGlobalIschemeInterpreterOahGroup->
-        getTraceParsing ().getValue ();
+        getTraceParsing ().getBareValue ();
 
   fDisplayServiceAndInput =
       gGlobalIschemeInterpreterOahGroup->
-        getDisplayServiceAndInput ().getValue ();
+        getDisplayServiceAndInput ().getBareValue ();
 
   fDisplayOptions =
       gGlobalIschemeInterpreterOahGroup->
-        getDisplayOptions ().getValue ();
+        getDisplayOptions ().getBareValue ();
 
   fTraceChoices =
       gGlobalIschemeInterpreterOahGroup->
-        getTraceChoices ().getValue ();
+        getTraceChoices ().getBareValue ();
   fTraceCaseChoiceStatements =
       gGlobalIschemeInterpreterOahGroup->
-        getTraceCaseChoiceStatements ().getValue ();
+        getTraceCaseChoiceStatements ().getBareValue ();
 
   fTraceInputs =
       gGlobalIschemeInterpreterOahGroup->
-        getTraceInputs ().getValue ();
+        getTraceInputs ().getBareValue ();
   fTraceCaseInputStatements =
       gGlobalIschemeInterpreterOahGroup->
-        getTraceCaseInputStatements ().getValue ();
+        getTraceCaseInputStatements ().getBareValue ();
 
   fNoLaunch =
       gGlobalIschemeInterpreterOahGroup->
-        getNoLaunch ().getValue ();
+        getNoLaunch ().getBareValue ();
 
   fTraceOptionsBlocks =
       gGlobalIschemeInterpreterOahGroup->
-        getTraceOptionsBlocks ().getValue ();
+        getTraceOptionsBlocks ().getBareValue ();
 
   fNoLaunch =
       gGlobalIschemeInterpreterOahGroup->
-        getNoLaunch ().getValue ();
+        getNoLaunch ().getBareValue ();
 
   // register the known MusicFormats services
   fKnownNames.insert ("xml2ly");

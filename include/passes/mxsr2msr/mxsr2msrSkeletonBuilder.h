@@ -430,19 +430,19 @@ class EXP mxsr2msrSkeletonBuilder :
     S_mxsrPartGroup           fImplicitOuterMostPartGroup;
 
     void                      createTheImplicitOuterPartGroupAndAddItToTheMsrScore (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     std::vector <S_mxsrPartGroup>
                               fPartGroupsVector;
 
     void                      displayPartGroupsVector (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     std::map <int, S_mxsrPartGroup>
                               fPartGroupsMap;
 
     void                      displayPartGroupsMap (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     std::map <int, S_mxsrPartGroup>
                               fStartedPartGroupsMap;
@@ -456,14 +456,14 @@ class EXP mxsr2msrSkeletonBuilder :
     mxsrPartGroupsStack       fPartGroupsStack;
 
     void                      displayPartGroupsStack (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     // the part groups 'stop' may not be in strict first-in, first-out order,
     // for example in Finale MusicXML exports
     // we thus have to postpone the association of 'stop's with 'start's
     // until the whole <part-list /> markup has been analyzed
     void                      displayStartedPartGroupsMap (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     S_mxsrPartGroup           fetchStartedPartGroupFromMap (
                                 int partGroupNumber);
@@ -477,57 +477,57 @@ class EXP mxsr2msrSkeletonBuilder :
                               fStartedPartGroupsListsVector;
 
     void                      registerPartGroupStart (
-                                int                    inputLineNumber,
-                                const S_mxsrPartGroup& partGroup);
+                                const mfInputLineNumber& inputLineNumber,
+                                const S_mxsrPartGroup&    partGroup);
 
     void                      displayStartedPartGroupsVector (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     std::vector <S_mxsrPartGroupsList>
                               fStoppedPartGroupsListsVector;
 
     void                      registerPartGroupStop (
-                                int                    inputLineNumber,
-                                const S_mxsrPartGroup& partGroup);
+                                const mfInputLineNumber& inputLineNumber,
+                                const S_mxsrPartGroup&    partGroup);
 
     void                      displayStoppedPartGroupsVector (
-                              int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     void                      displayAllCollectedData (
-                                int                inputLineNumber,
-                                const std::string& context);
+                                const mfInputLineNumber& inputLineNumber,
+                                const std::string&       context);
 
     void                      handlePartGroupStart (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     void                      handlePartGroupStop (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     void                      registerPart (
-                                int              inputLineNumber,
-                                const S_msrPart& thePart);
+                                const mfInputLineNumber& inputLineNumber,
+                                const S_msrPart&         thePart);
 
     void                      handlePartGroupsNesting (
-                                int                    inputLineNumber,
-                                const S_mxsrPartGroup& partGroupToBeStopped,
-                                const S_mxsrPartGroup& containingPartGroup);
+                                const mfInputLineNumber& inputLineNumber,
+                                const S_mxsrPartGroup&   partGroupToBeStopped,
+                                const S_mxsrPartGroup&   containingPartGroup);
 
     void                      handleBOFPartGroupsNestingBOFAndScorePartsAllocation (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     void                      sortfStartedPartGroupsListsVector (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     void                      sortStoppedPartGroupsListsVector (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     void                      handlePartGroupsStartAtIdentity (
-                                int inputLineNumber,
-                                int identity);
+                                const mfInputLineNumber& inputLineNumber,
+                                int                      identity);
 
     void                      handleThePartGroupsStoppedAtIdentity (
-                                int inputLineNumber,
-                                int identity);
+                                const mfInputLineNumber& inputLineNumber,
+                                int                      identity);
 
     // parts handling
     // ------------------------------------------------------
@@ -551,7 +551,7 @@ class EXP mxsr2msrSkeletonBuilder :
                               fPartsMap;
 
     void                      displayPartsMap (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     // part groups numbers can be re-used, so they're no identifier,
     // so we identify them by an ordinal number, set upon the 'start'
@@ -561,7 +561,7 @@ class EXP mxsr2msrSkeletonBuilder :
     std::vector <S_msrPart>   fPartsVector;
 
     void                      displayPartsVector (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
     S_msrPart                 fCurrentPart; // used throughout
 
@@ -570,8 +570,8 @@ class EXP mxsr2msrSkeletonBuilder :
     // ------------------------------------------------------
 
     S_msrStaff                createStaffInCurrentPartIfNotYetDone (
-                                int inputLineNumber,
-                                int staffNumber);
+                                const mfInputLineNumber& inputLineNumber,
+                                const mfStaffNumber&     staffNumber);
 
 
     // voice handling
@@ -582,7 +582,7 @@ class EXP mxsr2msrSkeletonBuilder :
     S_msrMeasureElement       fPreviousMeasureElement;
 
     S_msrVoice                fetchFirstVoiceFromCurrentPart (
-                                int inputLineNumber);
+                                const mfInputLineNumber& inputLineNumber);
 
 
     /*
@@ -605,13 +605,13 @@ class EXP mxsr2msrSkeletonBuilder :
                                   const S_msrPart& part);
 
 		void											displayCurrentPartVoicesVector (
-                                int                inputLineNumber,
-																const std::string& context);
+                                const mfInputLineNumber& inputLineNumber,
+																const std::string&       context);
 
     S_msrVoice                createRegularVoiceInStaffIfNotYetDone (
-                                int inputLineNumber,
-                                int staffNumber,
-                                int voiceNumber);
+                                const mfInputLineNumber& inputLineNumber,
+                                const mfStaffNumber&     staffNumber,
+                                const mfVoiceNumber&     voiceNumber);
 
 
     // implicit initial repeat handling
@@ -649,16 +649,16 @@ class EXP mxsr2msrSkeletonBuilder :
 		int	                      fCurrentNoteSequentialNumber;
 		int	                      fPreviousNoteSequentialNumber;
 
-		int	                      fCurrentNoteInputLineNumber;
+		mfInputLineNumber	        fCurrentNoteInputLineNumber;
 
-		int	                      fPreviousNoteInputLineNumber;
-		int	                      fPreviousNoteEndInputLineNumber;
+		mfInputLineNumber	        fPreviousNoteInputLineNumber;
+		mfInputLineNumber	        fPreviousNoteEndInputLineNumber;
 
-    int                       fCurrentNoteStaffNumber; // used throughout
-    int                       fPreviousNoteStaffNumber;
+    mfStaffNumber             fCurrentNoteStaffNumber; // used throughout
+    mfStaffNumber             fPreviousNoteStaffNumber;
 
-    int                       fCurrentNoteVoiceNumber; // used throughout
-    int                       fPreviousNoteVoiceNumber;
+    mfVoiceNumber             fCurrentNoteVoiceNumber; // used throughout
+    mfVoiceNumber             fPreviousNoteVoiceNumber;
 
     Bool                      fOnGoingNote;
 
@@ -686,12 +686,12 @@ class EXP mxsr2msrSkeletonBuilder :
     // staff changes handling
     // ------------------------------------------------------
 
-    int                       fCurrentStaffNumber;
+    mfStaffNumber             fCurrentStaffNumber; // ??? JMI
 
 		Bool                      fPreviousNoteIsATakeOffCandidate;
 
     Bool                      handleStaffChangeIfAny (
-                                int inputStartLineNumber);
+                                const mfInputLineNumber& inputStartLineNumber);
 
     // chords handling
     // ------------------------------------------------------
@@ -722,11 +722,11 @@ class EXP mxsr2msrSkeletonBuilder :
                               fPendingTupletEventsList;
 
     void                      handleChordMemberNoteIfRelevant (
-                                int inputStartLineNumber);
+                                const mfInputLineNumber& inputStartLineNumber);
 
     void                      displayPendingTupletEventsList (
-                                const std::string& title,
-                                int                inputStartLineNumber) const;
+                                const std::string&       title,
+                                const mfInputLineNumber& inputStartLineNumber) const;
 
     // a tuplet stop may occur in a chord before the latter's last note,
     // and the can be several tuplets stop in a single note:
@@ -737,17 +737,17 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      handleTupletEventIfAny ();
 
     void                      displayPendingTupletEndEventsMap (
-                                const std::string& title,
-                                int                inputStartLineNumber) const;
+                                const std::string&       title,
+                                const mfInputLineNumber& inputStartLineNumber) const;
 
     void                      handlePendingTupletsStopsAfterANoteIfAny (
-                                int inputStartLineNumber);
+                                const mfInputLineNumber& inputStartLineNumber);
 
     void                      handlePendingTupletsStopsAtMeasureEndIfAny (
-                                int inputStartLineNumber);
+                                const mfInputLineNumber& inputStartLineNumber);
 
     void                      doHandlePendingTupletsEndsIfAny (
-                                int inputStartLineNumber);
+                                const mfInputLineNumber& inputStartLineNumber);
 
 
     // display note gathered informations
@@ -770,8 +770,8 @@ class EXP mxsr2msrSkeletonBuilder :
     int                       fHarmoniesVoicesCounter;
 
     S_msrVoice                createPartHarmoniesVoiceIfNotYetDone (
-                                int              inputLineNumber,
-                                const S_msrPart& thePart);
+                                mfInputLineNumber inputLineNumber,
+                                const S_msrPart&  thePart);
 
 
     // figured bass handling
@@ -781,8 +781,8 @@ class EXP mxsr2msrSkeletonBuilder :
     int                       fFiguredBassVoicesCounter;
 
     S_msrVoice                createPartFiguredBassVoiceIfNotYetDone (
-                                int              inputLineNumber,
-                                const S_msrPart& thePart);
+                                mfInputLineNumber inputLineNumber,
+                                const S_msrPart&  thePart);
 };
 
 

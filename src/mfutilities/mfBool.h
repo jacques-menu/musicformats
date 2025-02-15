@@ -51,12 +51,12 @@ public:
     // ------------------------------------------------------
 
     // set the value
-    void                  setValue (bool value)
-                              { fValue = value; }
+    void                  setBareValue (bool value)
+                              { fBareValue = value; }
 
     // get the value
-    bool                  getValue () const
-                              { return fValue; }
+    bool                  getBareValue () const
+                              { return fBareValue; }
 
   public:
 
@@ -64,7 +64,7 @@ public:
     // ------------------------------------------------------
 
     // explicit conversion
-    explicit              operator bool () const { return fValue; }
+    explicit              operator bool () const { return fBareValue; }
 
     // copy assignment operator
     // ------------------------------------------------------
@@ -87,9 +87,9 @@ public:
 
     // compare value JMI ???
     Bool                  operator == (const Bool &otherBool) const
-                              { return fValue == otherBool.fValue; }
+                              { return fBareValue == otherBool.fBareValue; }
     Bool                  operator != (const Bool &otherBool) const
-                              { return fValue != otherBool.fValue; }
+                              { return fBareValue != otherBool.fBareValue; }
 
   public:
 
@@ -105,7 +105,7 @@ public:
     // private fields
     // ------------------------------------------------------
 
-    bool                  fValue;
+    bool                  fBareValue;
 };
 
 //EXP Bool operator&& (const Bool& leftBool, const Bool& rightBool);

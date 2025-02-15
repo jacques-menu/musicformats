@@ -75,49 +75,49 @@ mfslDriver::mfslDriver ()
   // since Bool is unknown to Flex and Bison-generated code
   fTraceScanning =
       gGlobalMfslInterpreterOahGroup->
-        getTraceScanning ().getValue ();
+        getTraceScanning ().getBareValue ();
 
   fDisplayTokens =
       gGlobalMfslInterpreterOahGroup->
-        getDisplayTokens ().getValue ();
+        getDisplayTokens ().getBareValue ();
 
   fTraceParsing =
       gGlobalMfslInterpreterOahGroup->
-        getTraceParsing ().getValue ();
+        getTraceParsing ().getBareValue ();
 
   fDisplayServiceAndInput =
       gGlobalMfslInterpreterOahGroup->
-        getDisplayServiceAndInput ().getValue ();
+        getDisplayServiceAndInput ().getBareValue ();
 
   fDisplayOptions =
       gGlobalMfslInterpreterOahGroup->
-        getDisplayOptions ().getValue ();
+        getDisplayOptions ().getBareValue ();
 
   fTraceChoices =
       gGlobalMfslInterpreterOahGroup->
-        getTraceChoices ().getValue ();
+        getTraceChoices ().getBareValue ();
   fTraceCaseChoiceStatements =
       gGlobalMfslInterpreterOahGroup->
-        getTraceCaseChoiceStatements ().getValue ();
+        getTraceCaseChoiceStatements ().getBareValue ();
 
   fTraceInputs =
       gGlobalMfslInterpreterOahGroup->
-        getTraceInputs ().getValue ();
+        getTraceInputs ().getBareValue ();
   fTraceCaseInputStatements =
       gGlobalMfslInterpreterOahGroup->
-        getTraceCaseInputStatements ().getValue ();
+        getTraceCaseInputStatements ().getBareValue ();
 
   fNoLaunch =
       gGlobalMfslInterpreterOahGroup->
-        getNoLaunch ().getValue ();
+        getNoLaunch ().getBareValue ();
 
   fTraceOptionsBlocks =
       gGlobalMfslInterpreterOahGroup->
-        getTraceOptionsBlocks ().getValue ();
+        getTraceOptionsBlocks ().getBareValue ();
 
   fNoLaunch =
       gGlobalMfslInterpreterOahGroup->
-        getNoLaunch ().getValue ();
+        getNoLaunch ().getBareValue ();
 
   // register the known MusicFormats services
   fKnownNames.insert ("xml2ly");

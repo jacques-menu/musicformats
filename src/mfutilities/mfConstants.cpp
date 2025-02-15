@@ -17,26 +17,38 @@
 namespace MusicFormats
 {
 
+// the empty string
+//______________________________________________________________________________
+const std::string K_MF_EMPTY_STRING ("");
+
 // input line numbers
 //______________________________________________________________________________
 
+const int K_MF_INPUT_LINE_UNKNOWN_ = -1;
+
 const std::string
   kInputLineNumberPrefix             ("L_"),
-  kInputLineNumberNeutralValueString ("*Unknown*");
+  kInputLineNumberDefaultValueString ("*Unknown*");
 
 // input locations
 //______________________________________________________________________________
 
 const std::string
   kInputLocationRangePrefix (".."),
-  kInputLocationNeutralValueString ("*Unknown*");
+  kInputLocationDefaultValueString ("*Unknown*");
 
 // staff numbers
 //______________________________________________________________________________
 
+const int K_STAFF_NUMBER_UNKNOWN_ = -99;
+
 const std::string
   kStaffNumberPrefix ("ST_"),
-  kStaffNumberNeutralValueString ("*Unknown*");
+  kStaffNumberDefaultValueString ("*Unknown*");
+
+EXP extern const int K_PART_HARMONIES_STAFF_NUMBER = 10;
+
+EXP extern const int K_PART_FIGURED_BASS_STAFF_NUMBER = 20;
 
 std::string mfStaffNumberAsString (int staffNumber)
 {
@@ -55,9 +67,17 @@ std::string mfStaffNumberAsString (int staffNumber)
 // voice numbers
 //______________________________________________________________________________
 
+const int K_VOICE_NUMBER_UNKNOWN_ = -96;
+
 const std::string
   kVoiceNumberPrefix ("V_"),
-  kVoiceNumberNeutralValueString ("*Unknown*");
+  kVoiceNumberDefaultValueString ("*Unknown*");
+
+EXP extern const int K_PART_HARMONIES_VOICE_NUMBER = 11;
+EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
+
+EXP extern const int K_PART_FIGURED_BASS_VOICE_NUMBER = 21;
+EXP extern const int K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER = 40;
 
 std::string mfVoiceNumberAsString (int voiceNumber)
 {
@@ -81,7 +101,7 @@ const std::string K_MEASURE_NUMBER_UNKNOWN_ =
 
 const std::string
   kMeasureNumberPrefix ("ST_"),
-  kMeasureNumberNeutralValueString ("*Unknown*");
+  kMeasureNumberDefaultValueString ("*Unknown*");
 
 std::string mfMeasureNumberAsString (std::string measureNumber)
 {
@@ -100,12 +120,14 @@ std::string mfMeasureNumberAsString (std::string measureNumber)
 //______________________________________________________________________________
 // whole notes durations
 
+const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = -1;
+
 const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_ =
   msrWholeNotes (-1, 1);
 
 const std::string
   kWholeNotePrefix ("WN_"),
-  kWholeNoteNeutralValueString ("K_WHOLE_NOTES_UNKNOWN_");
+  kWholeNoteDefaultValueString ("K_WHOLE_NOTES_UNKNOWN_");
 
 // moments
 //______________________________________________________________________________
@@ -119,14 +141,14 @@ const msrMoment K_MOMENT_UNKNOWN_ =
 
 const std::string
   kMomentPrefix ("WN_"),
-  kMomentNeutralValueString ("K_MOMENT_UNKNOWN_");
+  kMomentDefaultValueString ("K_MOMENT_UNKNOWN_");
 
 // lyrics
 //______________________________________________________________________________
 
 const std::string
   kStanzaNumberPrefix ("ST_"),
-  kStanzaNumberNeutralValueString ("*Unknown*");
+  kStanzaNumberDefaultValueString ("*Unknown*");
 
 const std::string
   K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_",
@@ -145,6 +167,11 @@ std::string mfStanzaNumberAsString (std::string stanzaNumber)
 
   return result;
 }
+
+// names lists max length
+//______________________________________________________________________________
+
+EXP extern const int K_MF_NAMES_LIST_MAX_LENGTH = 50;
 
 
 }

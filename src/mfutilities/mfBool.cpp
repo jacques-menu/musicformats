@@ -20,12 +20,12 @@ namespace MusicFormats
 //______________________________________________________________________________
 Bool::Bool ()
 {
-  fValue = false;
+  fBareValue = false;
 }
 
 Bool::Bool (bool value)
 {
-  fValue = value;
+  fBareValue = value;
 }
 
 Bool::~Bool ()
@@ -35,7 +35,7 @@ Bool::Bool(const Bool& theBool) {
 //   std::cout << "Bool copy constructor " << std::endl; // JMI CLAR
 
    // copy the value
-   fValue = theBool.getValue ();
+   fBareValue = theBool.fBareValue;
 }
 
 /*
@@ -47,10 +47,10 @@ Bool::Bool(const Bool& theBool) {
 Bool::Bool (const std::string& theString)
 {
   if (theString == "false") {
-    fValue = false;
+    fBareValue = false;
   }
   else if (theString == "true") {
-    fValue = true;
+    fBareValue = true;
   }
   else {
   }
@@ -59,7 +59,7 @@ Bool::Bool (const std::string& theString)
 Bool& Bool::operator= (const Bool& theBool)
 {
   if (this != &theBool) { // JMI costly?
-    fValue = theBool.getValue ();
+    fBareValue = theBool.fBareValue;
   }
 
   return *this;
@@ -67,42 +67,42 @@ Bool& Bool::operator= (const Bool& theBool)
 
 Bool Bool::operator ! () const
 {
-  Bool result (! fValue);
+  Bool result (! fBareValue);
 
   return result;
 }
 
 Bool Bool::operator && (const Bool& otherBool) const
 {
-  Bool result (fValue && otherBool.fValue);
+  Bool result (fBareValue && otherBool.fBareValue);
 
   return result;
 }
 
 Bool Bool::operator || (const Bool& otherBool) const
 {
-  Bool result (fValue || otherBool.fValue);
+  Bool result (fBareValue || otherBool.fBareValue);
 
   return result;
 }
 
 Bool Bool::operator ^ (const Bool& otherBool) const
 {
-  Bool result (fValue ^ otherBool.fValue);
+  Bool result (fBareValue ^ otherBool.fBareValue);
 
   return result;
 }
 
 EXP Bool operator && (const Bool& leftBool, const bool& theBool)
 {
-  Bool result (leftBool.getValue () && theBool);
+  Bool result (leftBool.getBareValue () && theBool);
 
   return result;
 }
 
 EXP Bool operator && (const bool& theBool, const Bool& rightBool)
 {
-  Bool result (theBool && rightBool.getValue ());
+  Bool result (theBool && rightBool.getBareValue ());
 
   return result;
 }
@@ -110,14 +110,14 @@ EXP Bool operator && (const bool& theBool, const Bool& rightBool)
 EXP Bool operator || (const Bool& leftBool, const bool& theBool)
 {
 
-  Bool result (leftBool.getValue () || theBool);
+  Bool result (leftBool.getBareValue () || theBool);
 
   return result;
 }
 
 EXP Bool operator || (const bool& theBool, const Bool& rightBool)
 {
-  Bool result (theBool || rightBool.getValue ());
+  Bool result (theBool || rightBool.getBareValue ());
 
   return result;
 }
@@ -125,14 +125,14 @@ EXP Bool operator || (const bool& theBool, const Bool& rightBool)
 EXP Bool operator ^ (const Bool& leftBool, const bool& theBool)
 {
 
-  Bool result (leftBool.getValue () ^ theBool);
+  Bool result (leftBool.getBareValue () ^ theBool);
 
   return result;
 }
 
 EXP Bool operator ^ (const bool& theBool, const Bool& rightBool)
 {
-  Bool result (theBool ^ rightBool.getValue ());
+  Bool result (theBool ^ rightBool.getBareValue ());
 
   return result;
 }
@@ -140,7 +140,7 @@ EXP Bool operator ^ (const bool& theBool, const Bool& rightBool)
 std::string Bool::asString () const
 {
   return
-    fValue
+    fBareValue
       ? "true"
       : "false";
 }
