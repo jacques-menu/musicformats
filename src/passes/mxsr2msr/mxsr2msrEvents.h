@@ -972,12 +972,12 @@ class EXP mxsrEventsCollection : public smartable
                             const mfInputLineNumber& eventInputLineNumber);
 
     S_mxsrMeasureRepeatEvent
-                          fetchMeasureRepeatBeginAtMeasureNumber (
-                            const mfMeasureNumber& measureNumber) const;
+                          fetchMeasureRepeatBeginAtBareMeasureNumber (
+                            const std::string& bareMeasureNumber) const;
 
     S_mxsrMeasureRepeatEvent
-                          fetchMeasureRepeatEndAtMeasureNumber (
-                            const mfMeasureNumber& measureNumber) const;
+                          fetchMeasureRepeatEndAtBareMeasureNumber (
+                            const std::string& bareMeasureNumber) const;
 
     // staff change events
     void                  registerStaffChangeTakeOff (

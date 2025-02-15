@@ -1286,7 +1286,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBeginEventIfAny ()
 
   fCurrentMeasureRepeatBegin =
     fKnownEventsCollection.
-      fetchMeasureRepeatBeginAtMeasureNumber (
+      fetchMeasureRepeatBeginAtBareMeasureNumber (
         fCurrentMeasureNumber);
 
   if (fCurrentMeasureRepeatBegin) {
@@ -1317,7 +1317,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEndEventIfAny ()
 {
   fCurrentMeasureRepeatEnd =
     fKnownEventsCollection.
-      fetchMeasureRepeatEndAtMeasureNumber (
+      fetchMeasureRepeatEndAtBareMeasureNumber (
         fCurrentMeasureNumber);
 
   if (fCurrentMeasureRepeatEnd) {

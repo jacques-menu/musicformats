@@ -1816,14 +1816,14 @@ void mxsrEventsCollection::sortTheMxsrEventsLists ()
 }
 
 //________________________________________________________________________
-S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatBeginAtMeasureNumber (
-  const mfMeasureNumber& measureNumber) const
+S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatBeginAtBareMeasureNumber (
+  const std::string& bareMeasureNumber) const
 {
   S_mxsrMeasureRepeatEvent result;
 
   std::map <std::string, S_mxsrMeasureRepeatEvent>::const_iterator
     it =
-      fMeasureRepeatBeginsMap.find (measureNumber.getBareValue ());
+      fMeasureRepeatBeginsMap.find (bareMeasureNumber);
 
   if (it != fMeasureRepeatBeginsMap.end ()) {
     result = (*it).second;
@@ -1832,14 +1832,14 @@ S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatBeginAtMeasureN
   return result;
 }
 
-S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatEndAtMeasureNumber (
-  const mfMeasureNumber& measureNumber) const
+S_mxsrMeasureRepeatEvent mxsrEventsCollection::fetchMeasureRepeatEndAtBareMeasureNumber (
+  const std::string& bareMeasureNumber) const
 {
   S_mxsrMeasureRepeatEvent result;
 
   std::map <std::string, S_mxsrMeasureRepeatEvent>::const_iterator
     it =
-      fMeasureRepeatEndsMap.find (measureNumber.getBareValue ());
+      fMeasureRepeatEndsMap.find (bareMeasureNumber);
 
   if (it != fMeasureRepeatEndsMap.end ()) {
     result = (*it).second;
