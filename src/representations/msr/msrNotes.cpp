@@ -1265,8 +1265,8 @@ S_msrNote msrNote::createNoteDeepClone (
     fMeasureElementUpLinkToMeasure->getMeasureNumber () =
       fMeasureElementUpLinkToMeasure->getMeasureNumber ();
   deepClone->
-    fMeasureElementMeasurePosition =
-      fMeasureElementMeasurePosition;
+    fMeasureElementPositionInMeasure =
+      fMeasureElementPositionInMeasure;
   deepClone->
     fMeasureElementVoicePosition =
       fMeasureElementVoicePosition;
@@ -2257,13 +2257,13 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 }
 
 //________________________________________________________________________
-// void msrNote::setMeasureElementMeasurePosition (
+// void msrNote::setMeasureElementPositionInMeasure (
 //   const S_msrMeasure& measure,
-//   const msrWholeNotes&     measurePosition,
+//   const msrWholeNotes&     positionInMeasure,
 //   const std::string&  context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //     S_msrMeasure
 //       upLinkToMeasure =
 //         getMeasureElementUpLinkToMeasure ();
@@ -2274,9 +2274,9 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //       "Setting the measure position of " <<
 //       asString () <<
 //       " to " <<
-//       measurePosition.asString () <<
+//       positionInMeasure.asString () <<
 //       " (was '" <<
-//       fMeasureElementMeasurePosition.asString () <<
+//       fMeasureElementPositionInMeasure.asString () <<
 //       "') in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -2295,24 +2295,24 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != K_MEASURE_POSITION_UNKNOWN_,
-//     "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
+//     positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
+//     "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // handle the chord itself
-//   msrMeasureElement::setMeasureElementMeasurePosition (
+//   msrMeasureElement::setMeasureElementPositionInMeasure (
 //     measure,
-//     measurePosition,
+//     positionInMeasure,
 //     context);
 //
-//   setNoteAttachedElementsMeasurePosition (
+//   setNoteAttachedElementsPositionInMeasure (
 //     measure,
-//     measurePosition);
+//     positionInMeasure);
 // }
 
-void msrNote::setNoteAttachedElementsMeasurePosition (
+void msrNote::setNoteAttachedElementsPositionInMeasure (
   const S_msrMeasure& measure,
-  const msrWholeNotes&     measurePosition)
+  const msrWholeNotes&     positionInMeasure)
 {
 // // JMI v0.9.66
 #ifdef MF_TRACE_IS_ENABLED
@@ -2320,7 +2320,7 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
     std::stringstream ss;
 
     ss <<
-      "setNoteAttachedElementsMeasurePosition(), fNoteHarmoniesList.size (): " <<
+      "setNoteAttachedElementsPositionInMeasure(), fNoteHarmoniesList.size (): " <<
       fNoteHarmoniesList.size ();
 
     gWaeHandler->waeTrace (
@@ -2335,10 +2335,10 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 //     for (S_msrHarmony harmony : fNoteHarmoniesList) {
 //       // set the harmony measure position, taking it's offset into account
 //       harmony->
-//         setMeasureElementMeasurePosition (
+//         setMeasureElementPositionInMeasure (
 //           measure,
-//           measurePosition,
-//           "msrNote::setMeasureElementMeasurePosition()");
+//           positionInMeasure,
+//           "msrNote::setMeasureElementPositionInMeasure()");
 //     } // for
 //   }
 
@@ -2362,10 +2362,10 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 //     for (S_msrFiguredBass figuredBass : fNoteFiguredBassesList) {
 //       // set the figured bass element measure position
 //       figuredBass->
-//         setMeasureElementMeasurePosition (
+//         setMeasureElementPositionInMeasure (
 //           measure,
-//           measurePosition,
-//           "msrNote::setMeasureElementMeasurePosition()");
+//           positionInMeasure,
+//           "msrNote::setMeasureElementPositionInMeasure()");
 //     } // for
 //   }
 
@@ -2374,10 +2374,10 @@ void msrNote::setNoteAttachedElementsMeasurePosition (
 //     for (S_msrDalSegno dalSegno : fNoteDalSegnosList) {
 //       // set the dal segno measure position
 //       dalSegno->
-//         setDalSegnoMeasurePosition (
+//         setDalSegnoPositionInMeasure (
 //           measure,
-//           measurePosition,
-//           "msrNote::setMeasureElementMeasurePosition()");
+//           positionInMeasure,
+//           "msrNote::setMeasureElementPositionInMeasure()");
 //     } // for
 //   }
 }
@@ -3257,7 +3257,7 @@ void msrNote::appendScordaturaToNote (
 //   const std::string& context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //     std::stringstream ss;
 //
 //     ss <<
@@ -3283,7 +3283,7 @@ void msrNote::appendScordaturaToNote (
 //
 //   // set measure element voice position
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //     std::stringstream ss;
 //
 //     ss <<
@@ -3306,7 +3306,7 @@ void msrNote::appendScordaturaToNote (
 //     fMeasureElementSoundingWholeNotes;
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //      std::stringstream ss;
 //
 //     ss <<
@@ -3324,15 +3324,15 @@ void msrNote::appendScordaturaToNote (
 // #endif // MF_TRACE_IS_ENABLED
 // }
 
-bool msrNote::compareNotesByIncreasingMeasurePosition (
+bool msrNote::compareNotesByIncreasingPositionInMeasure (
   const SMARTP<msrNote>& first,
   const SMARTP<msrNote>& second)
 {
   return
     bool (
-      first->fMeasureElementMeasurePosition
+      first->fMeasureElementPositionInMeasure
         <
-      second->fMeasureElementMeasurePosition
+      second->fMeasureElementPositionInMeasure
     );
 }
 
@@ -4346,7 +4346,7 @@ std::string msrNote::noteCoreAndInputLineNumbersAsString () const
 //   std::stringstream ss;
 //
 //   ss <<
-//   	"[Note " <<
+//   	"[Note" <<
 //     ", " <<
 //     mfInputLineNumberAsString (
 //     	fInputLineNumber) <<
@@ -4531,7 +4531,7 @@ std::string msrNote::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Note " <<
+    "[Note, " <<
     fNoteKind <<
     ", ";
 
@@ -4657,16 +4657,16 @@ std::string msrNote::asShortString () const
 
 /* JMI
   ss << std::left <<
-    ", measurePosition: ";
+    ", positionInMeasure: ";
     / * JMI
-  if (fMeasureElementMeasurePosition == K_MEASURE_POSITION_UNKNOWN__MEASURE_NUMBER) {
-    ss << "unknown (" << fMeasureElementMeasurePosition.asString () << ")";
+  if (fMeasureElementPositionInMeasure == K_MEASURE_POSITION_UNKNOWN__MEASURE_NUMBER) {
+    ss << "unknown (" << fMeasureElementPositionInMeasure.asString () << ")";
   }
   else {
-    ss << fMeasureElementMeasurePosition;
+    ss << fMeasureElementPositionInMeasure;
   }
   * /
-  ss << fMeasureElementMeasurePosition;
+  ss << fMeasureElementPositionInMeasure;
 
   ss <<
     ", voicePosition: " <<
@@ -4886,7 +4886,7 @@ std::string msrNote::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Note " <<
+    "[Note, " <<
     asHeaderLessString () <<
     ']';
 
@@ -4898,7 +4898,7 @@ void msrNote::print (std::ostream& os) const
 // 	os << "======> msrNote::print ()" << std::endl;
 
   os <<
-    "[Note " <<
+    "[Note, " <<
 //     ", " <<
 //     mfInputLineNumberAsString (
 //     	fInputLineNumber) <<
@@ -4923,8 +4923,8 @@ void msrNote::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -5830,7 +5830,7 @@ void msrNote::print (std::ostream& os) const
 void msrNote::printFull (std::ostream& os) const
 {
   os <<
-    "[Note FULL " <<
+    "[Note, " <<
 //     ", " <<
 //     mfInputLineNumberAsString (
 //     	fInputLineNumber) <<
@@ -5855,8 +5855,8 @@ void msrNote::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -7574,7 +7574,7 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
   std::stringstream ss;
 
   ss <<
-    "[Note " <<
+    "[Note, " <<
     fNoteKind <<
     ' ' <<
     mfInputLineNumberAsString (
@@ -7702,7 +7702,7 @@ std::string msrNote::asStringForVoicesFlatView () const
 
   ss <<
     "@" <<
-    fMeasureElementMeasurePosition.asFractionString () <<
+    fMeasureElementPositionInMeasure.asFractionString () <<
     ": " <<
     noteCoreAndInputLineNumbersAsString ();
 
@@ -7715,7 +7715,7 @@ std::string msrNote::asStringForMeasuresSlices () const
 
   ss <<
     "@:" <<
-    fMeasureElementMeasurePosition.asFractionString () <<
+    fMeasureElementPositionInMeasure.asFractionString () <<
     ' ' <<
     noteCoreAndComplementAsString ();
 
@@ -7822,7 +7822,7 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //   std::stringstream ss;
 //
 //   ss <<
-//   	"[Note " <<
+//   	"[Note, " <<
 //     ", " <<
 //     mfInputLineNumberAsString (
 //     	fInputLineNumber) <<

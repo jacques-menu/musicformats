@@ -4344,7 +4344,7 @@ msrHarmony::msrHarmony (
 
   // a harmony is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeHarmonyInAHarmoniesMeasure()
-  fMeasureElementMeasurePosition = msrWholeNotes (0, 1);
+  fMeasureElementPositionInMeasure = msrWholeNotes (0, 1);
 
   fHarmoniesStaffNumber = harmoniesStaffNumber;
 
@@ -4664,9 +4664,9 @@ void msrHarmony::setHarmonyUpLinkToNote (
   fHarmonyUpLinkToNote = note;
 }
 
-// void msrHarmony::setMeasureElementMeasurePosition (
+// void msrHarmony::setMeasureElementPositionInMeasure (
 //   const S_msrMeasure measure,
-//   const msrWholeNotes&    measurePosition,
+//   const msrWholeNotes&    positionInMeasure,
 //   const std::string&      context)
 // {
 //   // set the harmony measure position, taking it's offset into account
@@ -4676,26 +4676,26 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //   mfAssert (
 //     __FILE__, __LINE__,
 //     measure != nullptr,
-//      "setMeasureElementMeasurePosition(): measure is NULL");
+//      "setMeasureElementPositionInMeasure(): measure is NULL");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
-//   // the offset can be negative, so we merely add it to measurePosition
-//   // to obtain the harmony's actual measurePosition
+//   // the offset can be negative, so we merely add it to positionInMeasure
+//   // to obtain the harmony's actual positionInMeasure
 //   // this overwrites it with the same value if fHarmonyWholeNotesOffset is null JMI ???
 //   msrWholeNotes
-//     actualMeasurePosition =
-//       measurePosition
+//     actualPositionInMeasure =
+//       positionInMeasure
 //         +
 //       fHarmonyWholeNotesOffset;
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //     gLog <<
 //       "Setting harmony's measure position of " << asString () <<
 //       " to " <<
-//       measurePosition.asString () <<
+//       positionInMeasure.asString () <<
 //       " (was " <<
-//       fMeasureElementMeasurePosition.asString () <<
+//       fMeasureElementPositionInMeasure.asString () <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -4723,18 +4723,18 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //       measure->
 //         getMeasureVoicePosition ()
 //         +
-//       actualMeasurePosition;
+//       actualPositionInMeasure;
 //
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != K_MEASURE_POSITION_UNKNOWN_,
-//     "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
+//     positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
+//     "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set harmony's measure position
-//   fMeasureElementMeasurePosition = measurePosition;
+//   fMeasureElementPositionInMeasure = positionInMeasure;
 //
 //   // update current voice position
 //   S_msrVoice
@@ -4949,8 +4949,8 @@ std::string msrHarmony::asShortString () const
     ", fHarmonyDisplayWholeNotes: " <<
     fHarmonyDisplayWholeNotes.asFractionString () <<
 
-    ", fMeasureElementMeasurePosition: " <<
-    fMeasureElementMeasurePosition.asString ();
+    ", fMeasureElementPositionInMeasure: " <<
+    fMeasureElementPositionInMeasure.asString ();
 
   ss <<
     ", fHarmonyInversion: ";
@@ -5059,8 +5059,8 @@ std::string msrHarmony::asString () const
     ", fHarmonyDisplayWholeNotes: " <<
     fHarmonyDisplayWholeNotes.asFractionString () <<
 
-    ", fMeasureElementMeasurePosition: " <<
-    fMeasureElementMeasurePosition.asString ();
+    ", fMeasureElementPositionInMeasure: " <<
+    fMeasureElementPositionInMeasure.asString ();
 
   // print the harmony uplink to note
   ss <<
@@ -5166,8 +5166,8 @@ std::string msrHarmony::asString () const
 //   ss <<
 //     "[Harmony" <<
 // //     ", " << std::hex << std::showbase << this << std::dec << // JMI HEX ADDRESS
-//     ", fMeasureElementMeasurePosition: " <<
-//     fMeasureElementMeasurePosition.asString () <<
+//     ", fMeasureElementPositionInMeasure: " <<
+//     fMeasureElementPositionInMeasure.asString () <<
 //     ", fHarmonyRootQuarterTonesPitchKind: " <<
 //     msrQuarterTonesPitchKindAsStringInLanguage (
 //       fHarmonyRootQuarterTonesPitchKind,
@@ -5215,8 +5215,8 @@ std::string msrHarmony::asString () const
 //     fHarmonyWholeNotesOffset;
 //
 //   ss <<
-//     ", fMeasureElementMeasurePosition: " <<
-//     fMeasureElementMeasurePosition;
+//     ", fMeasureElementPositionInMeasure: " <<
+//     fMeasureElementPositionInMeasure;
 //
 //   ss <<
 //     ", fHarmonyKindText: \"" <<
@@ -5300,8 +5300,8 @@ void msrHarmony::print (std::ostream& os) const
   // print the harmony measure position
   os <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::endl;
 
   os << std::left <<

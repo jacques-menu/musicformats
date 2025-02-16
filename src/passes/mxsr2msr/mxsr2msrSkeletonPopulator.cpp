@@ -8459,7 +8459,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 
   // update current measure position
   fCurrentPart->
-    decrementPartCurrentDrawingMeasurePosition (
+    decrementPartCurrentDrawingPositionInMeasure (
       elt->getInputLineNumber (),
       backupStepLength);
 
@@ -8592,7 +8592,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
 
   // account for forwardStepLength wholeNotes in the part current measure position
   fCurrentPart->
-    incrementPartCurrentDrawingMeasurePosition (
+    incrementPartCurrentDrawingPositionInMeasure (
       elt->getInputLineNumber (),
       forwardStepLength);
 
@@ -10340,16 +10340,16 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
 
     // fetch the part current measure position
     msrWholeNotes
-      partCurrentDrawingMeasurePosition =
+      partCurrentDrawingPositionInMeasure =
         part->
-          getPartCurrentDrawingMeasurePosition ();
+          getPartCurrentDrawingPositionInMeasure ();
 
     // append syllable to stanza
     stanza->
       appendSyllableToStanza (
         syllable,
         theMsrVoice->getVoiceLastAppendedMeasure (),
-        partCurrentDrawingMeasurePosition);
+        partCurrentDrawingPositionInMeasure);
   }
 
   // DON'T register current note as having lyrics,
@@ -10561,7 +10561,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 
   // reset the part measure position
   fCurrentPart->
-    setPartCurrentDrawingMeasurePosition (
+    setPartCurrentDrawingPositionInMeasure (
       elt->getInputLineNumber (),
       msrWholeNotes (0, 1));
 
@@ -10603,7 +10603,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 
   // reset the drawing measure position in the current part
   fCurrentPart->
-    resetPartCurrentDrawingMeasurePosition (
+    resetPartCurrentDrawingPositionInMeasure (
       elt->getInputLineNumber ());
 }
 
@@ -23831,9 +23831,9 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
         getNoteDisplayWholeNotes ();
 
   msrWholeNotes
-    currentNoteMeasurePosition =
+    currentNotePositionInMeasure =
       fCurrentNote->
-        getMeasureElementMeasurePosition ();
+        getMeasureElementPositionInMeasure ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
@@ -23846,7 +23846,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
       fCurrentNote->asShortString () <<
       ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
       ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asFractionString () <<
-      ", currentNoteMeasurePosition: " << currentNoteMeasurePosition.asString () <<
+      ", currentNotePositionInMeasure: " << currentNotePositionInMeasure.asString () <<
       ", line " << fCurrentNote->getInputLineNumber () <<
       std::endl;
 
@@ -23912,13 +23912,13 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
   // append harmony to fCurrentPart
   if (fCurrentOuterMostTuplet) {
     msrWholeNotes
-      currentTopLevelTupletMeasurePosition =
-        fCurrentOuterMostTuplet->getMeasureElementMeasurePosition ();
+      currentTopLevelTupletPositionInMeasure =
+        fCurrentOuterMostTuplet->getMeasureElementPositionInMeasure ();
 
     // compute harmony's measure position
     msrWholeNotes
-      harmonyMeasurePosition =
-        currentTopLevelTupletMeasurePosition
+      harmonyPositionInMeasure =
+        currentTopLevelTupletPositionInMeasure
           +
         fCurrentOuterMostTupletRelativeOffset;
 
@@ -23931,8 +23931,8 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
         harmony->asString () <<
         ", fCurrentOuterMostTupletRelativeOffset: " <<
         fCurrentOuterMostTupletRelativeOffset.asString () <<
-        ", harmonyMeasurePosition: " <<
-        harmonyMeasurePosition <<
+        ", harmonyPositionInMeasure: " <<
+        harmonyPositionInMeasure <<
         ", for note " <<
         fCurrentNote->asShortString () <<
         " to part " <<
@@ -23974,7 +23974,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
       appendHarmonyToPart (
         fCurrentOuterMostTuplet->getInputLineNumber (),
         harmony,
-        harmonyMeasurePosition);
+        harmonyPositionInMeasure);
   }
 
   else {
@@ -24004,7 +24004,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
       appendHarmonyToPart (
         fCurrentNote->getInputLineNumber (),
         harmony,
-        fCurrentNote->getMeasureElementMeasurePosition ());
+        fCurrentNote->getMeasureElementPositionInMeasure ());
   }
 }
 
@@ -24019,9 +24019,9 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
         getNoteDisplayWholeNotes ();
 
   msrWholeNotes
-    currentNoteMeasurePosition =
+    currentNotePositionInMeasure =
       fCurrentNote->
-        getMeasureElementMeasurePosition ();
+        getMeasureElementPositionInMeasure ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -24034,7 +24034,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       fCurrentNote->asShortString () <<
       ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
       ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asFractionString () <<
-      ", currentNoteMeasurePosition: " << currentNoteMeasurePosition.asString () <<
+      ", currentNotePositionInMeasure: " << currentNotePositionInMeasure.asString () <<
       ", line " << fCurrentNote->getInputLineNumber () <<
       std::endl;
 
@@ -24290,14 +24290,14 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       appendHarmoniesListToPart (
         fCurrentOuterMostTuplet->getInputLineNumber (),
         fPendingHarmoniesList,
-        fCurrentOuterMostTuplet->getMeasureElementMeasurePosition ());
+        fCurrentOuterMostTuplet->getMeasureElementPositionInMeasure ());
   }
   else {
     fCurrentPart->
       appendHarmoniesListToPart (
         fCurrentNote->getInputLineNumber (),
         fPendingHarmoniesList,
-        fCurrentNote->getMeasureElementMeasurePosition ());
+        fCurrentNote->getMeasureElementPositionInMeasure ());
   }
 }
 
@@ -24386,7 +24386,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleFiguredBass (
     appendFiguredBassToPart (
       fCurrentNote->getInputLineNumber (),
       figuredBass,
-      fCurrentNote->getMeasureElementMeasurePosition ());
+      fCurrentNote->getMeasureElementPositionInMeasure ());
 }
 
 void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
@@ -24473,7 +24473,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
     appendFiguredBassesListToPart (
       fCurrentNote->getInputLineNumber (),
       fPendingFiguredBassesList,
-      fCurrentNote->getMeasureElementMeasurePosition ());
+      fCurrentNote->getMeasureElementPositionInMeasure ());
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -25354,16 +25354,16 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
 
         // fetch the part current measure position
         msrWholeNotes
-          partCurrentDrawingMeasurePosition =
+          partCurrentDrawingPositionInMeasure =
             part->
-              getPartCurrentDrawingMeasurePosition ();
+              getPartCurrentDrawingPositionInMeasure ();
 
         // append syllable to stanza
         stanza->
           appendSyllableToStanza (
             skipSyllable,
             theMsrVoice->getVoiceLastAppendedMeasure (),
-            partCurrentDrawingMeasurePosition);
+            partCurrentDrawingPositionInMeasure);
       } // for
     }
   }
@@ -25989,7 +25989,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatStart (
       ", measure " <<
         barLine->getBarLineMeasureNumber () <<
       ", position " <<
-      barLine->getBarLineMeasurePosition () <<
+      barLine->getBarLinePositionInMeasure () <<
       */
       ", line " << barLine->getInputLineNumber ();
 

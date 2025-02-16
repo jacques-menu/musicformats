@@ -233,8 +233,8 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   newbornClone->fMeasureElementUpLinkToMeasure->getMeasureNumber () =
     fMeasureElementUpLinkToMeasure->getMeasureNumber ();
 
-  newbornClone->fMeasureElementMeasurePosition =
-    fMeasureElementMeasurePosition;
+  newbornClone->fMeasureElementPositionInMeasure =
+    fMeasureElementPositionInMeasure;
 */
 
   return newbornClone;
@@ -379,9 +379,9 @@ void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
   // mark note as belonging to a tuplet
   note->setNoteBelongsToATuplet ();
 
-  // account for note duration in tuplet sounding duration
-//   fMeasureElementSoundingWholeNotes +=
-//     note->getMeasureElementSoundingWholeNotes ();
+  // account for the note duration
+  fMeasureElementSoundingWholeNotes +=
+    note->getMeasureElementSoundingWholeNotes ();
 
   // account for note duration in tuplet displaly duration
   fTupletDisplayWholeNotes += // JMI v0.9.70
@@ -481,7 +481,7 @@ void msrTuplet::appendTupletToTuplet (const S_msrTuplet& tuplet)
   tuplet->setPositionInTuplet (
     fTupletElementsList.size ());
 
-  // account for tuplet duration JMI v0.9.70 ???
+  // account for the tuplet duration
   fMeasureElementSoundingWholeNotes +=
     tuplet->getMeasureElementSoundingWholeNotes ();
 
@@ -877,13 +877,13 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 //   return result;
 // }
 
-void msrTuplet::setMeasureElementMeasurePosition (
+void msrTuplet::setMeasureElementPositionInMeasure (
   const S_msrMeasure&  measure,
-  const msrWholeNotes& measurePosition,
+  const msrWholeNotes& positionInMeasure,
   const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     S_msrMeasure
       upLinkToMeasure =
         getMeasureElementUpLinkToMeasure ();
@@ -894,9 +894,9 @@ void msrTuplet::setMeasureElementMeasurePosition (
       "Setting the measure position of " <<
       asString () <<
       " to " <<
-      measurePosition.asString () <<
+      positionInMeasure.asString () <<
       " (was '" <<
-      fMeasureElementMeasurePosition.asString () <<
+      fMeasureElementPositionInMeasure.asString () <<
       "') in measure " <<
       measure->asShortString () <<
       " (measureElementMeasureNumber: " <<
@@ -912,29 +912,29 @@ void msrTuplet::setMeasureElementMeasurePosition (
 #endif // MF_TRACE_IS_ENABLED
 
   // handle the chord itself
-  msrMeasureElement::setMeasureElementMeasurePosition (
+  msrMeasureElement::setMeasureElementPositionInMeasure (
     measure,
-    measurePosition,
+    positionInMeasure,
     context);
 
   // handle its members
-  setTupletMembersMeasurePositions (
+  setTupletMembersPositionInMeasures (
     measure,
-    measurePosition);
+    positionInMeasure);
 }
 
-void msrTuplet::setTupletMembersMeasurePositions (
+void msrTuplet::setTupletMembersPositionInMeasures (
   const S_msrMeasure&  measure,
-  const msrWholeNotes& measurePosition)
+  const msrWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
       "Setting tuplet members measure position of " << asString () <<
       " to " <<
-      measurePosition.asString ();
+      positionInMeasure.asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -943,21 +943,21 @@ void msrTuplet::setTupletMembersMeasurePositions (
 #endif // MF_TRACE_IS_ENABLED
 
   std::string context = // JMI v0.9.66
-    "setTupletMembersMeasurePositions()";
+    "setTupletMembersPositionInMeasures()";
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measurePosition != K_MEASURE_POSITION_UNKNOWN_,
-    "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
+    positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
+    "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set tuplet's measure position
-  fMeasureElementMeasurePosition = measurePosition;
+  fMeasureElementPositionInMeasure = positionInMeasure;
 
   // current position
-  msrWholeNotes currentPosition = measurePosition;
+  msrWholeNotes currentPosition = positionInMeasure;
 
   // compute measure position for the tuplets elements
   for (
@@ -976,10 +976,10 @@ void msrTuplet::setTupletMembersMeasurePositions (
           measure);
 
       note->
-        setMeasureElementMeasurePosition (
+        setMeasureElementPositionInMeasure (
           measure,
           currentPosition,
-          "msrTuplet::setTupletMembersMeasurePositions()");
+          "msrTuplet::setTupletMembersPositionInMeasures()");
 
       currentPosition +=
         note->
@@ -991,7 +991,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
     ) {
       // chord
       chord->
-        setChordMembersMeasurePosition (
+        setChordMembersPositionInMeasure (
           measure,
           currentPosition);
 
@@ -1006,7 +1006,7 @@ void msrTuplet::setTupletMembersMeasurePositions (
       // nested tuplet
 //       currentPosition =
 //         tuplet->
-//           setTupletMeasurePosition ( // a function JMI ??? v0.9.66
+//           setTupletPositionInMeasure ( // a function JMI ??? v0.9.66
 //             measure,
 //             currentPosition);
 
@@ -1173,8 +1173,8 @@ std::string msrTuplet::asString () const
   }
 
   ss <<
-    ", fMeasureElementMeasurePosition: " <<
-    fMeasureElementMeasurePosition.asString ();
+    ", fMeasureElementPositionInMeasure: " <<
+    fMeasureElementPositionInMeasure.asString ();
 
   ss << ", fTupletElementsList: [";
 
@@ -1251,8 +1251,8 @@ std::string msrTuplet::asShortString () const
   }
 
   ss <<
-    ", fMeasureElementMeasurePosition: " <<
-    fMeasureElementMeasurePosition.asString ();
+    ", fMeasureElementPositionInMeasure: " <<
+    fMeasureElementPositionInMeasure.asString ();
 
   ss << '[';
 
@@ -1321,8 +1321,8 @@ void msrTuplet::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureElementSoundingWholeNotes" << ": " <<
@@ -1459,8 +1459,8 @@ void msrTuplet::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureElementSoundingWholeNotes" << ": " <<
@@ -1608,8 +1608,8 @@ void msrTuplet::finalizeTuplet (
 
 / * JMI v0.9.66
   // we can now set the measure position for all the tuplet members
-  setTupletMembersMeasurePositions (
-    fMeasureElementMeasurePosition);
+  setTupletMembersPositionInMeasures (
+    fMeasureElementPositionInMeasure);
   * /
 }
 */

@@ -65,12 +65,12 @@ class EXP msrMeasureElement : public msrElement
     // the overrides call a class-specific method that can be called directly,
     // such occurrence are more explicit when debugging
     // the computations of measure positions
-    virtual void          setMeasureElementMeasurePosition (
+    virtual void          setMeasureElementPositionInMeasure (
                             const S_msrMeasure&  measure,
-                            const msrWholeNotes& measurePosition,
+                            const msrWholeNotes& positionInMeasure,
                             const std::string&   context);
 
-    msrWholeNotes         getMeasureElementMeasurePosition () const;
+    msrWholeNotes         getMeasureElementPositionInMeasure () const;
 
     void                  setMeasureElementVoicePosition (
                             const msrWholeNotes& voicePosition,
@@ -97,7 +97,11 @@ class EXP msrMeasureElement : public msrElement
     // public services
     // ------------------------------------------------------
 
-    static bool           compareMeasureElementsByIncreasingMeasurePosition (
+    void                  incrementMeasureElementSoundingWholeNotesBy (
+                            const msrWholeNotes& wholeNotes,
+                            const std::string&   context);
+
+    static bool           compareMeasureElementsByIncreasingPositionInMeasure (
                             const SMARTP<msrMeasureElement>& first,
                             const SMARTP<msrMeasureElement>& second);
 
@@ -137,7 +141,7 @@ class EXP msrMeasureElement : public msrElement
 
     msrWholeNotes         fMeasureElementSoundingWholeNotes;
 
-    msrWholeNotes         fMeasureElementMeasurePosition;
+    msrWholeNotes         fMeasureElementPositionInMeasure;
     msrWholeNotes         fMeasureElementVoicePosition;
 
 //     msrMoment             fMeasureMoment;

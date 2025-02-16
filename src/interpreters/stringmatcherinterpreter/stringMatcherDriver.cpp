@@ -113,7 +113,7 @@ stringMatcherDriver::~stringMatcherDriver ()
 //   gLog <<
 //     "Expressions stack, context: " <<
 //     context <<
-//     ":" ;
+//     ":";
 //
 //   if (fExpressionsStack.size ()) {
 //     gLog << endl;
@@ -260,7 +260,7 @@ int stringMatcherDriver::parseInput_Pass1 ()
 //   gLog <<
 //     "Expressions stack, context: " <<
 //     context <<
-//     ":" ;
+//     ":";
 //
 //   if (fExpressionsStack.size ()) {
 //     gLog << endl;

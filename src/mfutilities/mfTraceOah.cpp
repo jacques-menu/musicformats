@@ -2115,34 +2115,34 @@ R"(Restrict the production of trace information to measure NUMBER)",
   // measure positions
 
   S_oahTwoBooleansAtom
-    traceMeasurePositionsBooleanAtom =
+    tracePositionInMeasuresBooleanAtom =
       oahTwoBooleansAtom::create (
         "trace-measure-positions", "tmeapos",
 R"(Measure positions)",
-        "fTraceMeasurePositions",
-        fTraceMeasurePositions,
+        "fTracePositionInMeasures",
+        fTracePositionInMeasures,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceMeasurePositionsBooleanAtom);
+      tracePositionInMeasuresBooleanAtom);
   measuresMultiplexBooleansAtom->
     addBooleanAtom (
-      traceMeasurePositionsBooleanAtom);
+      tracePositionInMeasuresBooleanAtom);
 
   S_oahThreeBooleansAtom
-    traceMeasurePositionsDetailsBooleanAtom =
+    tracePositionInMeasuresDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
         "trace-measure-positions-details", "tmeaposd",
 R"(Measure positions details)",
-        "fTraceMeasurePositionsDetails",
-        fTraceMeasurePositionsDetails,
-        traceMeasurePositionsBooleanAtom,
+        "fTracePositionInMeasuresDetails",
+        fTracePositionInMeasuresDetails,
+        tracePositionInMeasuresBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceMeasurePositionsDetailsBooleanAtom);
+      tracePositionInMeasuresDetailsBooleanAtom);
 
   // voice positions
 
@@ -3416,11 +3416,11 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
   gLog << std::endl;
 
   gLog << std::left <<
-    std::setw (fieldWidth) << "fTraceMeasurePositions" << ": " <<
-    fTraceMeasurePositions <<
+    std::setw (fieldWidth) << "fTracePositionInMeasures" << ": " <<
+    fTracePositionInMeasures <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceMeasurePositionsDetails" << ": " <<
-    fTraceMeasurePositionsDetails <<
+    std::setw (fieldWidth) << "fTracePositionInMeasuresDetails" << ": " <<
+    fTracePositionInMeasuresDetails <<
     std::endl <<
 
     std::setw (fieldWidth) << "fTraceVoicePositions" << ": " <<

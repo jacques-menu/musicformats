@@ -237,12 +237,13 @@ std::string mxsrMeasureRepeatEvent::asShortString () const
   ss <<
     "[MeasureRepeatEvent" <<
     ", fMeasureRepeatEventKind: " << fMeasureRepeatEventKind <<
+    ", fEventInputLineNumber: " << fEventInputLineNumber <<
+
     ", fPartName: " << fPartName <<
-    ", fMeasureNumber: M" << fMeasureNumber <<
+    ", fMeasureNumber: " << fMeasureNumber <<
     ", fMeasureRepeatNumber: " << fMeasureRepeatNumber <<
 
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
-    ", fEventInputLineNumber: L" << fEventInputLineNumber <<
+    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -268,6 +269,10 @@ void mxsrMeasureRepeatEvent::print (std::ostream& os) const
     "fMeasureRepeatEventKind" << ": " << fMeasureRepeatEventKind <<
     std::endl <<
     std::setw (fieldWidth) <<
+    "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
+
+    std::endl <<
+    std::setw (fieldWidth) <<
     "fPartName" << ": " << fPartName <<
     std::endl <<
     std::setw (fieldWidth) <<
@@ -278,10 +283,7 @@ void mxsrMeasureRepeatEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fEventInputLineNumber" << ": L" << fEventInputLineNumber <<
+    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -463,17 +465,19 @@ std::string mxsrStaffChangeEvent::asShortString () const
 
   ss <<
     "[StaffChangeEvent" <<
-    ", fEventInputLineNumber: L" << fEventInputLineNumber <<
-    ", fTakeOffInputLineNumber: L" << fTakeOffInputLineNumber <<
-    ", fLandingInputLineNumber: L" << fLandingInputLineNumber <<
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
-    ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
-    ", fNoteStaffNumber: S" << fNoteStaffNumber <<
-    ", fNoteVoiceNumber: V" << fNoteVoiceNumber <<
     ", fStaffChangeEventKind: " << fStaffChangeEventKind <<
-    ", staff number change" <<
-       ": S" << fTakeOffStaffNumber << " ->> S" << fLandingStaffNumber <<
-    ", fLandingInputLineNumber: L" << fLandingInputLineNumber <<
+    ", fEventInputLineNumber: " << fEventInputLineNumber <<
+
+    ", fTakeOffInputLineNumber: " << fTakeOffInputLineNumber <<
+    ", fLandingInputLineNumber: " << fLandingInputLineNumber <<
+    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteStaffNumber: " << fNoteStaffNumber <<
+    ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
+    ", staff number change: " <<
+    fTakeOffStaffNumber << " ->> " << fLandingStaffNumber <<
+    ", fLandingInputLineNumber: " << fLandingInputLineNumber <<
+
+    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -496,46 +500,46 @@ void mxsrStaffChangeEvent::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fEventInputLineNumber" << ": L" << fEventInputLineNumber <<
+    "fStaffChangeEventKind" << ": " << fStaffChangeEventKind <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
     "staff change" << ": " <<
-     "S" << fTakeOffStaffNumber << "/" << "V" << fNoteVoiceNumber <<
-     " ->> " <<
-     "S" << fLandingStaffNumber << "/" << "V" << fNoteVoiceNumber <<
+    fTakeOffStaffNumber << "/" << "" << fNoteVoiceNumber <<
+    " ->> " <<
+    fLandingStaffNumber << "/" << "" << fNoteVoiceNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
+    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
+    "fNoteStaffNumber" << ": " << fNoteStaffNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteVoiceNumber" << ": V" << fNoteVoiceNumber <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fStaffChangeEventKind" << ": " << fStaffChangeEventKind <<
+    "fNoteVoiceNumber" << ": " << fNoteVoiceNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTakeOffInputLineNumber" << ": L" << fTakeOffInputLineNumber <<
+    "fTakeOffStaffNumber" << ": " << fTakeOffStaffNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fLandingInputLineNumber" << ": L" << fLandingInputLineNumber <<
+    "fTakeOffInputLineNumber" << ": " << fTakeOffInputLineNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fTakeOffStaffNumber" << ": S" << fTakeOffStaffNumber <<
+    "fLandingStaffNumber" << ": " << fLandingStaffNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fLandingStaffNumber" << ": S" << fLandingStaffNumber <<
+    "fLandingInputLineNumber" << ": " << fLandingInputLineNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -636,11 +640,13 @@ std::string mxsrGraceEvent::asShortString () const
   ss <<
     "[GraceEvent" <<
     ", fGraceEventKind: " << fGraceEventKind <<
-    ", fEventInputLineNumber: L" << fEventInputLineNumber <<
-    ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
-    ", fNoteStaffNumber: S" << fNoteStaffNumber <<
-    ", fNoteVoiceNumber: V" << fNoteVoiceNumber <<
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+    ", fEventInputLineNumber: " << fEventInputLineNumber <<
+
+    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteStaffNumber: " << fNoteStaffNumber <<
+    ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
+
+    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -670,17 +676,17 @@ void mxsrGraceEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
+    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
+    "fNoteStaffNumber" << ": " << fNoteStaffNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteVoiceNumber" << ": V" << fNoteVoiceNumber <<
+    "fNoteVoiceNumber" << ": " << fNoteVoiceNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
+    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -783,11 +789,11 @@ std::string mxsrCueEvent::asShortString () const
     ", fCueEventKind: " << fCueEventKind <<
     ", fEventInputLineNumber: " << fEventInputLineNumber <<
 
-    ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
-    ", fNoteStaffNumber: S" << fNoteStaffNumber <<
-    ", fNoteVoiceNumber: V" << fNoteVoiceNumber <<
+    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteStaffNumber: " << fNoteStaffNumber <<
+    ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
 
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
+    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -817,7 +823,7 @@ void mxsrCueEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
+    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
@@ -827,7 +833,7 @@ void mxsrCueEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
+    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -928,12 +934,13 @@ std::string mxsrChordEvent::asShortString () const
   ss <<
     "[ChordEvent" <<
     ", fChordEventKind: " << fChordEventKind <<
-    ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
-    ", fNoteStaffNumber: S" << fNoteStaffNumber <<
-    ", fNoteVoiceNumber: V" << fNoteVoiceNumber <<
+    ", fEventInputLineNumber: " << fEventInputLineNumber <<
 
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
-    ", fEventInputLineNumber: L" << fEventInputLineNumber <<
+    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteStaffNumber: " << fNoteStaffNumber <<
+    ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
+
+    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -959,20 +966,21 @@ void mxsrChordEvent::print (std::ostream& os) const
     "fChordEventKind" << ": " << fChordEventKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNoteVoiceNumber" << ": V" << fNoteVoiceNumber <<
+    "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
+    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
+    "fNoteStaffNumber" << ": " << fNoteStaffNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteVoiceNumber" << ": " << fNoteVoiceNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -1077,14 +1085,15 @@ std::string mxsrTupletEvent::asShortString () const
   ss <<
     "[TupletEvent" <<
     ", fTupletEventKind: " << fTupletEventKind <<
-    ", fTupletNumber: T" << fTupletNumber <<
+    ", fEventInputLineNumber: " << fEventInputLineNumber <<
 
-    ", fNoteSequentialNumber: N" << fNoteSequentialNumber <<
-    ", fNoteStaffNumber: S" << fNoteStaffNumber <<
-    ", fNoteVoiceNumber: V" << fNoteVoiceNumber <<
+    ", fTupletNumber: tuplet_" << fTupletNumber <<
 
-    ", fEventSequentialNumber: E" << fEventSequentialNumber <<
-    ", fEventInputLineNumber: L " << fEventInputLineNumber <<
+    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteStaffNumber: " << fNoteStaffNumber <<
+    ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
+
+    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -1110,24 +1119,25 @@ void mxsrTupletEvent::print (std::ostream& os) const
     "fTupletEventKind" << ": " << fTupletEventKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletNumber" << ": T" << fTupletNumber <<
+    "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": N" << fNoteSequentialNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
-    std::endl <<
-    std::setw (fieldWidth) <<
-    "fNoteVoiceNumber" << ": V" << fNoteVoiceNumber <<
+    "fTupletNumber" << ": tuplet_" << fTupletNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": E" << fEventSequentialNumber <<
+    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fEventInputLineNumber" << ": L" << fEventInputLineNumber <<
+    "fNoteStaffNumber" << ": " << fNoteStaffNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fNoteVoiceNumber" << ": " << fNoteVoiceNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;

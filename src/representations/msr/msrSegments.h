@@ -147,14 +147,14 @@ class EXP msrSegment : public msrVoiceElement
 
     // backup and padding
 
-//     void                  padUpToMeasurePositionInSegment (
+//     void                  padUpToPositionInMeasureInSegment (
 //                             int             inputLineNumber,
 //                             const msrWholeNotes& wholeNotes);
 
     void                  backupByWholeNotesStepLengthInSegment (
                             int     inputLineNumber,
                             const msrWholeNotes&
-                                    backupTargetMeasureElementMeasurePosition);
+                                    backupTargetMeasureElementPositionInMeasure);
 
     void                  cascadeAppendPaddingNoteToSegment (
                             int                  inputLineNumber,
@@ -224,7 +224,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  insertHiddenMeasureAndBarLineInSegmentClone (
                             int                  inputLineNumber,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
     // transposition
 
@@ -273,12 +273,12 @@ class EXP msrSegment : public msrVoiceElement
     void                  appendHarmonyToSegment (
                             int                  inputLineNumber,
                             const S_msrHarmony&  harmony,
-                            const msrWholeNotes& measurePositionToAppendAt);
+                            const msrWholeNotes& positionInMeasureToAppendAt);
 
     void                  appendHarmoniesListToSegment (
                             int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const msrWholeNotes&            measurePositionToAppendAt);
+                            const msrWholeNotes&            positionInMeasureToAppendAt);
 
     void                  appendHarmonyToSegmentClone (
                             const S_msrHarmony& harmony);
@@ -296,12 +296,12 @@ class EXP msrSegment : public msrVoiceElement
     void                  appendFiguredBassToSegment (
                             int                     inputLineNumber,
                             const S_msrFiguredBass& figuredBass,
-                            const msrWholeNotes&    measurePositionToAppendAt);
+                            const msrWholeNotes&    positionInMeasureToAppendAt);
 
     void                  appendFiguredBassesListToSegment (
                             int                                 inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const msrWholeNotes&                measurePositionToAppendAt);
+                            const msrWholeNotes&                positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToSegmentClone (
                             const S_msrFiguredBass& figuredBass);
@@ -315,7 +315,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  appendNoteToSegment (
                             const S_msrNote&     note,
-                            const msrWholeNotes& partCurrentDrawingMeasurePosition);
+                            const msrWholeNotes& partCurrentDrawingPositionInMeasure);
 
     void                  appendNoteToSegmentClone (const S_msrNote& note);
 

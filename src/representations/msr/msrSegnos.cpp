@@ -403,7 +403,7 @@ std::string msrDalSegno::asString () const
     ", fDalSegnoKind: " << fDalSegnoKind <<
     ", fDalSegnoString: \"" << fDalSegnoString << "\"" <<
     ", fDalSegnoString: " << fStaffNumber <<
-    ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
+    ", fMeasureElementPositionInMeasure: " << fMeasureElementPositionInMeasure <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -431,7 +431,7 @@ void msrDalSegno::print (std::ostream& os) const
     "fDalSegnoString" << ": " << fStaffNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition <<
+    "fMeasureElementPositionInMeasure" << ": " << fMeasureElementPositionInMeasure <<
     std::endl <<
 //     std::setw (fieldWidth) <<
 //     "voicePosition" << ": " << fMeasureElementVoicePosition <<

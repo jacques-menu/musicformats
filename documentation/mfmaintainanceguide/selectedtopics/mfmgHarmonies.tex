@@ -1102,9 +1102,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
     if (
       gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
         ||
-      gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
+      gGlobalLpsr2lilypondOahGroup->getGeneratePositionInMeasures ()
     ) {
-      generateInputLineNumberAndOrMeasurePositionAsAComment (
+      generateInputLineNumberAndOrPositionInMeasureAsAComment (
         elt);
     }
   }

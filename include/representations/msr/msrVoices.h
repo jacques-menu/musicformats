@@ -402,13 +402,13 @@ class EXP msrVoice : public msrElement
 
     // backup and padding
 
-//     void                  padUpToMeasurePositionInVoice (
+//     void                  padUpToPositionInMeasureInVoice (
 //                             int             inputLineNumber,
-//                             const msrWholeNotes& wholeNotesMeasurePosition);
+//                             const msrWholeNotes& wholeNotesPositionInMeasure);
 
     void                  backupByWholeNotesStepLengthInVoice (
                             int                  inputLineNumber,
-                            const msrWholeNotes& backupTargetMeasureElementMeasurePosition);
+                            const msrWholeNotes& backupTargetMeasureElementPositionInMeasure);
 
     // clef, key, time signature
 
@@ -432,7 +432,7 @@ class EXP msrVoice : public msrElement
 
     void                  insertHiddenMeasureAndBarLineInVoiceClone (
                             int                  inputLineNumber,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
     // notes
 
@@ -533,12 +533,12 @@ class EXP msrVoice : public msrElement
     void                  appendHarmonyToVoice (
                             int                  inputLineNumber,
                             const S_msrHarmony&  harmony,
-                            const msrWholeNotes& measurePositionToAppendAt);
+                            const msrWholeNotes& positionInMeasureToAppendAt);
 
     void                  appendHarmoniesListToVoice (
                             int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const msrWholeNotes&            measurePositionToAppendAt);
+                            const msrWholeNotes&            positionInMeasureToAppendAt);
 
     void                  appendHarmonyToVoiceClone (
                             const S_msrHarmony& harmony);
@@ -548,12 +548,12 @@ class EXP msrVoice : public msrElement
     void                  appendFiguredBassToVoice (
                             int                     inputLineNumber,
                             const S_msrFiguredBass& figuredBass,
-                            const msrWholeNotes&    measurePositionToAppendAt);
+                            const msrWholeNotes&    positionInMeasureToAppendAt);
 
     void                  appendFiguredBassesListToVoice (
                             int                                 inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const msrWholeNotes&                measurePositionToAppendAt);
+                            const msrWholeNotes&                positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToVoiceClone (
                             const S_msrFiguredBass& figuredBass);

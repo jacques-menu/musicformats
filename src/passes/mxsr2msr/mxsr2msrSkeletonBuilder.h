@@ -710,43 +710,55 @@ class EXP mxsr2msrSkeletonBuilder :
     int                       fCurrentTupletNumber;
 //     int                       fPreviousTupletNumber;
 
-//     std::list <int>           fPendingTupletsStartsNumbers;
-
-
     Bool                      fCurrentNoteBelongsToATuplet;
     Bool                      fPreviousNoteBelongsToATuplet;
 
-    // there can be multiple tuplets starts on a given note,
-    // so they aref kept aside until they are handled
+    // there can be several tuplet begin or end events upon a given note,
+    // so we delay their handling to visitEnd (s_note& elt)
     std::list <S_mxsrTupletEvent>
-                              fPendingTupletEventsList;
+                              fPendingTupletBeginEventsList,
+                              fPendingTupletEndEventsList;
 
     void                      handleChordMemberNoteIfRelevant (
                                 const mfInputLineNumber& inputStartLineNumber);
 
-    void                      displayPendingTupletEventsList (
+    void                      displayPendingTupletBeginEventsList (
                                 const std::string&       title,
                                 const mfInputLineNumber& inputStartLineNumber) const;
 
-    // a tuplet stop may occur in a chord before the latter's last note,
-    // and the can be several tuplets stop in a single note:
-    // we store their description in a map indexed by a sequential number
-    std::multimap <int, S_mxsrTupletEvent>
-                              fPendingTupletsEndEventsMap;
+    void                      displayPendingTupletEndEventsList (
+                                const std::string&       title,
+                                const mfInputLineNumber& inputStartLineNumber) const;
 
-    void                      handleTupletEventIfAny ();
+//     // we need to retrieve tuplet events,
+//     // hence these maps indexed by note sequential number
+//     std::multimap <int, S_mxsrTupletEvent>
+//                               fPendingTupletsBeginEventsMap,
+//                               fPendingTupletsEndEventsMap;
+
+//     void                      handleTupletEventIfAny ();
+
+    void                      displayPendingTupletBeginEventsMap (
+                                const std::string&       title,
+                                const mfInputLineNumber& inputStartLineNumber) const;
 
     void                      displayPendingTupletEndEventsMap (
                                 const std::string&       title,
                                 const mfInputLineNumber& inputStartLineNumber) const;
 
-    void                      handlePendingTupletsStopsAfterANoteIfAny (
+    void                      handlePendingTupletBeginEventsAfterANoteIfAny (
                                 const mfInputLineNumber& inputStartLineNumber);
 
-    void                      handlePendingTupletsStopsAtMeasureEndIfAny (
+    void                      handlePendingTupletEndEventsAfterANoteIfAny (
                                 const mfInputLineNumber& inputStartLineNumber);
 
-    void                      doHandlePendingTupletsEndsIfAny (
+    void                      handlePendingTupletEndEventsAtMeasureEndIfAny (
+                                const mfInputLineNumber& inputStartLineNumber);
+
+    void                      doHandlePendingTupletBeginEventsIfAny (
+                                const mfInputLineNumber& inputStartLineNumber);
+
+    void                      doHandlePendingTupletEndEventsIfAny (
                                 const mfInputLineNumber& inputStartLineNumber);
 
 
@@ -783,6 +795,11 @@ class EXP mxsr2msrSkeletonBuilder :
     S_msrVoice                createPartFiguredBassVoiceIfNotYetDone (
                                 mfInputLineNumber inputLineNumber,
                                 const S_msrPart&  thePart);
+
+  private:
+
+    // work fields and methods
+
 };
 
 

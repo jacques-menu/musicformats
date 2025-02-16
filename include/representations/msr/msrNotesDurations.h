@@ -201,6 +201,7 @@ class EXP msrWholeNotes
     long int              fNumerator;
     long int              fDenominator;
 };
+
 EXP std::ostream& operator << (std::ostream& os, const msrWholeNotes& wholeNotes);
 EXP mfIndentedStringStream& operator << (
   mfIndentedStringStream& iss, const msrWholeNotes& wholeNotes);
@@ -395,6 +396,7 @@ class EXP msrDottedNotesDuration
     msrNotesDurationKind  fNotesDurationKind;
     int                   fDotsNumber;
 };
+
 EXP std::ostream& operator << (std::ostream& os, const msrDottedNotesDuration& elt);
 
 

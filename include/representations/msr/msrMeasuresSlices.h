@@ -40,7 +40,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrNoteEvent> create (
-                            const msrWholeNotes&  noteEventMeasurePosition,
+                            const msrWholeNotes&  noteEventPositionInMeasure,
                             const S_msrNote&        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -50,7 +50,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
                           msrNoteEvent (
-                            const msrWholeNotes&  noteEventMeasurePosition,
+                            const msrWholeNotes&  noteEventPositionInMeasure,
                             const S_msrNote&        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -61,8 +61,8 @@ class msrNoteEvent : public smartable
     // set and get
     // ------------------------------------------------------
 
-    msrWholeNotes         getNoteEventMeasurePosition () const
-                              { return fNoteEventMeasurePosition; }
+    msrWholeNotes         getNoteEventPositionInMeasure () const
+                              { return fNoteEventPositionInMeasure; }
 
     S_msrNote             getNoteEventNote () const
                               { return fNoteEventNote; }
@@ -75,7 +75,7 @@ class msrNoteEvent : public smartable
     // public services
     // ------------------------------------------------------
 
-    static bool           compareNoteEventsByIncreasingMeasurePosition (
+    static bool           compareNoteEventsByIncreasingPositionInMeasure (
                             const SMARTP<msrNoteEvent>& first,
                             const SMARTP<msrNoteEvent>& second);
 
@@ -93,7 +93,7 @@ class msrNoteEvent : public smartable
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes         fNoteEventMeasurePosition;
+    msrWholeNotes         fNoteEventPositionInMeasure;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 };
@@ -109,7 +109,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrSimultaneousNotesChunk> create (
-                            const msrWholeNotes& chunkMeasurePosition);
+                            const msrWholeNotes& chunkPositionInMeasure);
 
   protected:
 
@@ -117,7 +117,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
                           msrSimultaneousNotesChunk (
-                            const msrWholeNotes& chunkMeasurePosition);
+                            const msrWholeNotes& chunkPositionInMeasure);
 
     virtual               ~msrSimultaneousNotesChunk ();
 
@@ -126,8 +126,8 @@ class msrSimultaneousNotesChunk : public smartable
     // set and get
     // ------------------------------------------------------
 
-    msrWholeNotes         getChunkMeasurePosition () const
-                              { return fChunkMeasurePosition; }
+    msrWholeNotes         getChunkPositionInMeasure () const
+                              { return fChunkPositionInMeasure; }
 
     const std::list <S_msrNote>&
                           getChunkNotesList () const
@@ -146,7 +146,7 @@ class msrSimultaneousNotesChunk : public smartable
                             const S_msrNote& note)
                               { fChunkNotesList.push_back (note); }
 
-    static bool           compareSimultaneousNotesChunksByIncreasingMeasurePosition (
+    static bool           compareSimultaneousNotesChunksByIncreasingPositionInMeasure (
                             const SMARTP<msrNoteEvent>& first,
                             const SMARTP<msrNoteEvent>& second);
 
@@ -164,7 +164,7 @@ class msrSimultaneousNotesChunk : public smartable
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes         fChunkMeasurePosition;
+    msrWholeNotes         fChunkPositionInMeasure;
     std::list <S_msrNote>  fChunkNotesList;
     msrWholeNotes         fChunkNotesDurationWholeNotes;
 };

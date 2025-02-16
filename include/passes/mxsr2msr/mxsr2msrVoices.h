@@ -162,7 +162,8 @@ class mxsrVoice : public smartable
     // private methods
     // ------------------------------------------------------
 };
-typedef SMARTP<mxsrVoice> S_mxsrVoice;
+
+using S_mxsrVoice = SMARTP<mxsrVoice>;
 
 EXP std::ostream& operator << (std::ostream& os, const mxsrVoice& elt);
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrVoice& elt);

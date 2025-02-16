@@ -784,7 +784,7 @@ class EXP lpsr2lilypondTranslator :
     // JMI
 
     // comments
-    void                  generateInputLineNumberAndOrMeasurePositionAsAComment (
+    void                  generateInputLineNumberAndOrPositionInMeasureAsAComment (
                             const S_msrMeasureElement& measureElement);
 
     // markups

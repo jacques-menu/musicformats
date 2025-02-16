@@ -267,23 +267,23 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 }
 
 /*
-//   if (measurePositionsDelta.getNumerator () > 0) {
+//   if (positionInMeasuresDelta.getNumerator () > 0) {
 //     // there is at least one note between
 //   }
 
 //   // is a padding skip note needed?
-//   if (measurePositionsDelta.getNumerator () > 0) {
+//   if (positionInMeasuresDelta.getNumerator () > 0) {
 //     // create a padding skip note
 //     S_msrNote
 //       skipNote =
 //         createPaddingSkipNoteForVoice (
 //           inputLineNumber,
-//           measurePositionsDelta,
+//           positionInMeasuresDelta,
 //           voice);
 //
 //     // set its measure position
 //     skipNote->
-//       setMeasureElementMeasurePosition (
+//       setMeasureElementPositionInMeasure (
 //         this,
 //         fMeasureCurrentAccumulatedWholeNotesDuration,
 //         "handleASubsequentHarmonyInAHarmoniesMeasure() 2");
@@ -316,7 +316,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //       skipNote);
 //   }
 //
-//   else if (measurePositionsDelta.getNumerator () < 0) {
+//   else if (positionInMeasuresDelta.getNumerator () < 0) {
 //     // the two harmonies overlap in time
 //     std::stringstream ss;
 //
@@ -336,7 +336,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //       reducedSoundingWholeNotes =
 //         previousHarmonySoundingWholeNotes
 //           + // the delta is negative
-//         measurePositionsDelta;
+//         positionInMeasuresDelta;
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTraceHarmonies ()) {

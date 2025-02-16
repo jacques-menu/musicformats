@@ -135,7 +135,9 @@ namespace MusicFormats
 //
 //     int                   fTupletInputLineNumber;
 // };
-// typedef SMARTP<mxsrTuplet> S_mxsrTuplet;
+//
+// using S_mxsrTuplet = SMARTP<mxsrTuplet>;
+//
 // EXP std::ostream& operator << (std::ostream& os, const mxsrTuplet& elt);
 // EXP std::ostream& operator << (std::ostream& os, const S_mxsrTuplet& elt);
 
@@ -244,7 +246,9 @@ namespace MusicFormats
 //     // private methods
 //     // ------------------------------------------------------
 // };
-// typedef SMARTP<mxsr2msrPendingTupletStop> S_mxsr2msrPendingTupletStop;
+//
+// using S_mxsr2msrPendingTupletStop = SMARTP<mxsr2msrPendingTupletStop>;
+//
 // EXP std::ostream& operator << (std::ostream& os, const mxsr2msrPendingTupletStop& elt);
 // EXP std::ostream& operator << (std::ostream& os, const S_mxsr2msrPendingTupletStop& elt);
 

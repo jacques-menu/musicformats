@@ -449,18 +449,18 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
   return result;
 }
 
-void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
+void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasures (
   const S_msrMeasure&  measure,
-  const msrWholeNotes& measurePosition)
+  const msrWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
       "Setting grace notes group elements' measure positions of " << asString () <<
       " to " <<
-      measurePosition.asString ();
+      positionInMeasure.asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -470,10 +470,10 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
 
 /* JMI
   std::string context =
-    "setChordMembersMeasurePosition()";
+    "setChordMembersPositionInMeasure()";
 
-  setMeasureElementMeasurePosition (
-    measurePosition,
+  setMeasureElementPositionInMeasure (
+    positionInMeasure,
     context);
 
   if (false) { // JMI
@@ -482,7 +482,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
      voicePosition =
       fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
         +
-      measurePosition;
+      positionInMeasure;
 
   // set chord's voice position
   setMeasureElementVoicePosition (
@@ -512,19 +512,19 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
           getMeasureElementUpLinkToMeasure ()->
             getMeasureVoicePosition ()
           +
-        measurePosition;
+        positionInMeasure;
 }
 */
 
     std::string context =
-      "setGraceNotesGroupElementsMeasurePositions()";
+      "setGraceNotesGroupElementsPositionInMeasures()";
 
     for (S_msrMeasureElement measureElement : fGraceNotesGroupElementsList) {
       // set measure element's measure position
       measureElement->
-        setMeasureElementMeasurePosition (
+        setMeasureElementPositionInMeasure (
           measure,
-          measurePosition,
+          positionInMeasure,
           context);
 
 /* JMI
@@ -848,7 +848,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
     --gIndenter;
   }
   else {
-    os << ": [NULL]" ;
+    os << ": [NULL]";
   }
   os << std::endl;
 

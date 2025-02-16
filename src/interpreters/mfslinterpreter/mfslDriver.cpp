@@ -269,7 +269,7 @@ void mfslDriver::displayOptionsBlocksStack (
   gLog <<
     "OptionsBlocks stack, context: " <<
     context <<
-    ":" ;
+    ":";
 
   if (fOptionsBlocksStack.size ()) {
     gLog << endl;

@@ -228,7 +228,7 @@ class EXP msrStaff : public msrElement
 
     void                  insertHiddenMeasureAndBarLineInStaffClone (
                             int                  inputLineNumber,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
     // transposition
 

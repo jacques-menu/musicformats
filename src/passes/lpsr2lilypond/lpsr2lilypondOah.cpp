@@ -4389,8 +4389,8 @@ its position in the measure.
 This is useful when debugging EXECUTABLE.)",
           std::regex ("EXECUTABLE"),
           gOahOahGroup->getOahOahGroupServiceName ()),
-        "fGenerateMeasurePositions",
-        fGenerateMeasurePositions));
+        "fGeneratePositionInMeasures",
+        fGeneratePositionInMeasures));
 
   // generate measure moments
   // --------------------------------------
@@ -4857,12 +4857,12 @@ R"()",
   // ornaments
   // --------------------------------------
 
-  fDelayedOrnamentsFraction = mfRational (1, 2);
+  fDelayedOrnamentsRational = mfRational (1, 2);
 
-  std::string delayedOrnamentsFractionDefaultValue =
-    std::to_string (fDelayedOrnamentsFraction.getNumerator ()) +
+  std::string delayedOrnamentsRationalDefaultValue =
+    std::to_string (fDelayedOrnamentsRational.getNumerator ()) +
       '/' +
-    std::to_string (fDelayedOrnamentsFraction.getDenominator ());
+    std::to_string (fDelayedOrnamentsRational.getDenominator ());
 
   subGroup->
     appendAtomToSubGroup (
@@ -4873,10 +4873,10 @@ R"(Place the delayed turn/reverseturn at the given fraction
 between the ornemented note and the next one.
 The default is 'DEFAULT_VALUE'.)",
           std::regex ("DEFAULT_VALUE"),
-          delayedOrnamentsFractionDefaultValue),
+          delayedOrnamentsRationalDefaultValue),
         "NUM/DENOM",
-        "fDelayedOrnamentsFraction",
-        fDelayedOrnamentsFraction));
+        "fDelayedOrnamentsRational",
+        fDelayedOrnamentsRational));
 }
 
 void lpsr2lilypondOahGroup::initializeLpsr2LilypondChordsDisplayOptions ()
@@ -6125,8 +6125,8 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       fOriginalMeasureNumbers <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fGenerateMeasurePositions" << ": " <<
-      fGenerateMeasurePositions <<
+    std::setw (valueFieldWidth) << "fGeneratePositionInMeasures" << ": " <<
+      fGeneratePositionInMeasures <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fGenerateMeasureMoments" << ": " <<
@@ -6343,8 +6343,8 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << std::left <<
-    std::setw (valueFieldWidth) << "fDelayedOrnamentsFraction" << ": " <<
-    fDelayedOrnamentsFraction <<
+    std::setw (valueFieldWidth) << "fDelayedOrnamentsRational" << ": " <<
+    fDelayedOrnamentsRational <<
     std::endl;
 
   --gIndenter;
@@ -6768,8 +6768,8 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
       fOriginalMeasureNumbers <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fGenerateMeasurePositions" << ": " <<
-      fGenerateMeasurePositions <<
+    std::setw (fieldWidth) << "fGeneratePositionInMeasures" << ": " <<
+      fGeneratePositionInMeasures <<
       std::endl <<
 
     std::setw (fieldWidth) << "fGenerateMeasureMoments" << ": " <<
@@ -6964,8 +6964,8 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (fieldWidth) << "fDelayedOrnamentsFraction" << ": " <<
-    fDelayedOrnamentsFraction <<
+    std::setw (fieldWidth) << "fDelayedOrnamentsRational" << ": " <<
+    fDelayedOrnamentsRational <<
     std::endl;
 
   --gIndenter;

@@ -235,15 +235,15 @@ class EXP msrNote : public msrTupletElement
     S_msrTuplet           getNoteShortcutUpLinkToTuplet () const;
 
 //     // measure positions
-//     // this override calls setNoteAttachedElementsMeasurePosition()
-//     void                  setMeasureElementMeasurePosition (
+//     // this override calls setNoteAttachedElementsPositionInMeasure()
+//     void                  setMeasureElementPositionInMeasure (
 //                             const S_msrMeasure&  measure,
-//                             const msrWholeNotes& measurePosition,
+//                             const msrWholeNotes& positionInMeasure,
 //                             const std::string&   context) override;
 
-    void                  setNoteAttachedElementsMeasurePosition (
+    void                  setNoteAttachedElementsPositionInMeasure (
                             const S_msrMeasure&  measure,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
     // note kind
 
@@ -880,7 +880,7 @@ class EXP msrNote : public msrTupletElement
     void                  appendScordaturaToNote (
                             const S_msrScordatura& scordatura);
 
-    static bool           compareNotesByIncreasingMeasurePosition (
+    static bool           compareNotesByIncreasingPositionInMeasure (
                             const SMARTP<msrNote>& first,
                             const SMARTP<msrNote>& second);
 

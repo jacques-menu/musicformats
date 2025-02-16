@@ -67,7 +67,7 @@ msr2mxsrTranslator::msr2mxsrTranslator (
   fVisitedMsrScore = visitedMsrScore;
 
   // backup and forward handling
-  fCurrentMeasurePosition = msrWholeNotes (0, 1);
+  fCurrentPositionInMeasure = msrWholeNotes (0, 1);
 
   fCurrentCumulatedSkipsNotesDurations = msrWholeNotes (0, 1);
   fCurrentCumulatedSkipsStaffNumber = -1;
@@ -648,7 +648,7 @@ void msr2mxsrTranslator::appendNoteToMeasureAtPosition (
   fCurrentMeasureElement->push (note);
 
   // account for theMsrNote's whole notes duration in the measure
-  fCurrentMeasurePosition +=
+  fCurrentPositionInMeasure +=
     theMsrNote->
       getMeasureElementSoundingWholeNotes ();
 
@@ -3523,7 +3523,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
   fCurrentMeasureElement = nullptr;
 
   // reset the current position in the measure
-  fCurrentMeasurePosition = msrWholeNotes (0, 1);
+  fCurrentPositionInMeasure = msrWholeNotes (0, 1);
 
   // reset the cumulated skip durations informations
   fCurrentCumulatedSkipsNotesDurations = msrWholeNotes (0, 1);
@@ -4972,7 +4972,7 @@ void msr2mxsrTranslator::appendNoteWedgesList (
 
   const std::list <S_msrWedge>&
     noteWedgesList =
-      theMsrNote->getNoteWedgesList () ;
+      theMsrNote->getNoteWedgesList ();
 
   if (noteWedgesList.size ()) {
     std::list <S_msrWedge>::const_iterator i;
@@ -5033,7 +5033,7 @@ void msr2mxsrTranslator::appendNoteDynamicsList (
 
   const std::list <S_msrDynamic>&
     noteDynamicsList =
-      theMsrNote->getNoteDynamicsList () ;
+      theMsrNote->getNoteDynamicsList ();
 
   if (noteDynamicsList.size ()) {
     std::list <S_msrDynamic>::const_iterator i;
@@ -5154,23 +5154,23 @@ void msr2mxsrTranslator::appendABackupToMeasure (
 {
   // fetch the backup duration divisions
   msrWholeNotes
-    previousNoteMeasurePosition =
-      fPreviousMSRNote->getMeasureElementMeasurePosition (),
+    previousNotePositionInMeasure =
+      fPreviousMSRNote->getMeasureElementPositionInMeasure (),
     previousNoteSoundingWholeNotes =
       fPreviousMSRNote->getMeasureElementSoundingWholeNotes (),
 
-    theMsrNoteMeasurePosition =
-      fPreviousMSRNote->getMeasureElementMeasurePosition (),
+    theMsrNotePositionInMeasure =
+      fPreviousMSRNote->getMeasureElementPositionInMeasure (),
     theMsrNoteSoundingWholeNotes =
       theMsrNote->getMeasureElementSoundingWholeNotes ();
 
   msrWholeNotes
     backupNotesDuration =
-      previousNoteMeasurePosition
+      previousNotePositionInMeasure
         +
       previousNoteSoundingWholeNotes
         -
-      theMsrNoteMeasurePosition;
+      theMsrNotePositionInMeasure;
 
   int
     backupNotesDurationDivisions =
@@ -5186,13 +5186,13 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       "Creating a backup element, theMsrNote: " <<
       theMsrNote->asShortString () <<
 
-      ", previousNoteMeasurePosition: " <<
-      previousNoteMeasurePosition.asString () <<
+      ", previousNotePositionInMeasure: " <<
+      previousNotePositionInMeasure.asString () <<
       ", previousNoteSoundingWholeNotes: " <<
       previousNoteSoundingWholeNotes.asFractionString () <<
 
-      ", theMsrNoteMeasurePosition: " <<
-      theMsrNoteMeasurePosition.asString () <<
+      ", theMsrNotePositionInMeasure: " <<
+      theMsrNotePositionInMeasure.asString () <<
       ", theMsrNoteSoundingWholeNotes: " <<
       theMsrNoteSoundingWholeNotes.asFractionString () <<
 
@@ -5227,13 +5227,13 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       " ===== " <<
       "Backup" <<
 
-      ", previousNoteMeasurePosition: " <<
-      previousNoteMeasurePosition.asString () <<
+      ", previousNotePositionInMeasure: " <<
+      previousNotePositionInMeasure.asString () <<
       ", previousNoteSoundingWholeNotes: " <<
       previousNoteSoundingWholeNotes.asFractionString () <<
 
-      ", theMsrNoteMeasurePosition: " <<
-      theMsrNoteMeasurePosition.asString () <<
+      ", theMsrNotePositionInMeasure: " <<
+      theMsrNotePositionInMeasure.asString () <<
       ", theMsrNoteSoundingWholeNotes: " <<
       theMsrNoteSoundingWholeNotes.asFractionString () <<
 
@@ -5482,12 +5482,12 @@ fCurrentCumulatedSkipsVoiceNumber
           // a skip may have been created due to a <backup /> to a position
           // that is not at the beginning of the measure
           msrWholeNotes
-            noteMeasurePosition =
-              theMsrNote->getMeasureElementMeasurePosition ();
+            notePositionInMeasure =
+              theMsrNote->getMeasureElementPositionInMeasure ();
 
           msrWholeNotes
             positionAfterNoteInMeasure =
-              noteMeasurePosition +
+              notePositionInMeasure +
                 theMsrNote->getMeasureElementSoundingWholeNotes ();
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -5499,18 +5499,18 @@ fCurrentCumulatedSkipsVoiceNumber
             gLog <<
               "--> appendABackupOrForwardToMeasureIfNeeded(2), note: " <<
               theMsrNote->asShortString () <<
-              ", noteMeasurePosition: " << noteMeasurePosition.asString () <<
+              ", notePositionInMeasure: " << notePositionInMeasure.asString () <<
               ", positionAfterNoteInMeasure: " << positionAfterNoteInMeasure.asString () <<
-              ", fCurrentMeasurePosition: " << fCurrentMeasurePosition.asString () <<
+              ", fCurrentPositionInMeasure: " << fCurrentPositionInMeasure.asString () <<
               ", line " << theMsrNote->getInputLineNumber () <<
               std::endl;
           }
 #endif // MF_TRACE_IS_ENABLED
 
-          if (positionAfterNoteInMeasure < fCurrentMeasurePosition) { // JMI TEST
+          if (positionAfterNoteInMeasure < fCurrentPositionInMeasure) { // JMI TEST
             appendABackupToMeasure (theMsrNote);
           }
-          else if (positionAfterNoteInMeasure > fCurrentMeasurePosition) {
+          else if (positionAfterNoteInMeasure > fCurrentPositionInMeasure) {
             appendAForwardToMeasure (theMsrNote);
           }
         }
@@ -5613,7 +5613,7 @@ void msr2mxsrTranslator::appendNoteOrnamentsList (
   // append the ornament elements if any
   const std::list <S_msrOrnament>&
     noteOrnamentsList =
-      theMsrNote->getNoteOrnamentsList () ;
+      theMsrNote->getNoteOrnamentsList ();
 
   if (noteOrnamentsList.size ()) {
     for (S_msrOrnament ornament : noteOrnamentsList) {
@@ -5726,7 +5726,7 @@ void msr2mxsrTranslator::appendNoteTechnicalsList (
   // append the technical elements if any
   const std::list <S_msrTechnical>&
     noteTechnicalsList =
-      theMsrNote->getNoteTechnicalsList () ;
+      theMsrNote->getNoteTechnicalsList ();
 
   if (noteTechnicalsList.size ()) {
     std::list <S_msrTechnical>::const_iterator i;
@@ -5835,7 +5835,7 @@ void msr2mxsrTranslator::appendNoteTechnicalWithIntegersList (
   // append the technicalWithInteger elements if any
   const std::list <S_msrTechnicalWithInteger>&
     noteTechnicalWithIntegersList =
-      theMsrNote->getNoteTechnicalWithIntegersList () ;
+      theMsrNote->getNoteTechnicalWithIntegersList ();
 
   if (noteTechnicalWithIntegersList.size ()) {
     std::list <S_msrTechnicalWithInteger>::const_iterator i;
@@ -5917,7 +5917,7 @@ void msr2mxsrTranslator::appendNoteTechnicalWithFloatsList (
   // append the technicalWithFloat elements if any
   const std::list <S_msrTechnicalWithFloat>&
     noteTechnicalWithFloatsList =
-      theMsrNote->getNoteTechnicalWithFloatsList () ;
+      theMsrNote->getNoteTechnicalWithFloatsList ();
 
   if (noteTechnicalWithFloatsList.size ()) {
     std::list <S_msrTechnicalWithFloat>::const_iterator i;
@@ -5991,7 +5991,7 @@ void msr2mxsrTranslator::appendNoteTechnicalWithStringsList (
   // append the technicalWithString elements if any
   const std::list <S_msrTechnicalWithString>&
     noteTechnicalWithStringsList =
-      theMsrNote->getNoteTechnicalWithStringsList () ;
+      theMsrNote->getNoteTechnicalWithStringsList ();
 
   if (noteTechnicalWithStringsList.size ()) {
     std::list <S_msrTechnicalWithString>::const_iterator i;
@@ -6059,7 +6059,7 @@ void msr2mxsrTranslator::appendNoteArticulationsList (
   // append the articulation elements if any
   const std::list <S_msrArticulation>&
     noteArticulationsList =
-      theMsrNote->getNoteArticulationsList () ;
+      theMsrNote->getNoteArticulationsList ();
 
   if (noteArticulationsList.size ()) {
     std::list <S_msrArticulation>::const_iterator i;
@@ -6263,7 +6263,7 @@ void msr2mxsrTranslator::appendNoteSlursListIfAny (
   // append the slur elements if any
   const std::list <S_msrSlur>&
     noteSlursList =
-      theMsrNote->getNoteSlursList () ;
+      theMsrNote->getNoteSlursList ();
 
   if (noteSlursList.size ()) {
     std::list <S_msrSlur>::const_iterator i;
@@ -6448,7 +6448,7 @@ void msr2mxsrTranslator::appendNoteSpannersListBeforeNote (
   const std::list <S_msrSpanner>&
     noteSpannersList =
       theMsrNote->
-        getNoteSpannersList () ;
+        getNoteSpannersList ();
 
   if (noteSpannersList.size ()) {
     std::list <S_msrSpanner>::const_iterator i;
@@ -6559,7 +6559,7 @@ void msr2mxsrTranslator::appendNoteSpannersListAfterNote (
   // append the spanner elements if any
   const std::list <S_msrSpanner>&
     noteSpannersList =
-      theMsrNote->getNoteSpannersList () ;
+      theMsrNote->getNoteSpannersList ();
 
   if (noteSpannersList.size ()) {
     std::list <S_msrSpanner>::const_iterator i;
@@ -6720,7 +6720,7 @@ void msr2mxsrTranslator::appendBeamsToNote (
   // append the beam elements if any
   const std::list <S_msrBeam>&
     noteBeamsList =
-      theMsrNote->getNoteBeamsList () ;
+      theMsrNote->getNoteBeamsList ();
 
   if (noteBeamsList.size ()) {
     std::list <S_msrBeam>::const_iterator i;
@@ -6975,7 +6975,7 @@ void msr2mxsrTranslator::appendNoteLyricsToNote (
   // append the lyric elements if any
   const std::list <S_msrSyllable>&
     noteSyllablesList =
-      theMsrNote->getNoteSyllablesList () ;
+      theMsrNote->getNoteSyllablesList ();
 
   if (noteSyllablesList.size ()) {
     std::list <S_msrSyllable>::const_iterator i;
@@ -7744,8 +7744,8 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
             noteVoice->getVoiceUpLinkToStaff ()->getStaffNumber () <<
           ", voiceNumber: " <<
             noteVoice->getVoiceNumber () <<
-          ", measureElementMeasurePosition: " <<
-            theMsrNote->getMeasureElementMeasurePosition () <<
+          ", measureElementPositionInMeasure: " <<
+            theMsrNote->getMeasureElementPositionInMeasure () <<
           ", noteSoundingWholeNotes: " <<
             theMsrNote->getMeasureElementSoundingWholeNotes () <<
           ", line " << theMsrNote->getInputLineNumber () <<

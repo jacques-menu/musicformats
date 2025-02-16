@@ -111,15 +111,15 @@ class EXP msrTuplet : public msrTupletElement
     S_msrTuplet           getTupletUpLinkToContainingTuplet () const;
 
     // measure positions
-    // this override calls setTupletMembersMeasurePositions()
-    void                  setMeasureElementMeasurePosition (
+    // this override calls setTupletMembersPositionInMeasures()
+    void                  setMeasureElementPositionInMeasure (
                             const S_msrMeasure&  measure,
-                            const msrWholeNotes& measurePosition,
+                            const msrWholeNotes& positionInMeasure,
                             const std::string&   context) override;
 
-    void                  setTupletMembersMeasurePositions (
+    void                  setTupletMembersPositionInMeasures (
                             const S_msrMeasure&  measure,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
     // number
     int                   getTupletNumber () const;

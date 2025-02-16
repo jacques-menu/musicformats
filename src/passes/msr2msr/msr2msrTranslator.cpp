@@ -449,7 +449,7 @@ void msr2msrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
       fCurrentPartClone->
         insertHiddenMeasureAndBarLineInPartClone (
           hiddenMeasureAndBarLineDescr->getInputLineNumber (),
-          dalSegno->getMeasureElementMeasurePosition ());
+          dalSegno->getMeasureElementPositionInMeasure ());
 
       if (++i == iEnd) break;
     } // for
@@ -476,10 +476,10 @@ void msr2msrTranslator::visitStart (S_msrScore& elt)
   // populate the measure numbers
   fResultingNewMsrScore->
     setScoreFirstMeasureNumber (
-      elt->getScoreFirstMeasureNumber ()) ;
+      elt->getScoreFirstMeasureNumber ());
   fResultingNewMsrScore->
     setScoreLastMeasureNumber (
-      elt->getScoreLastMeasureNumber ()) ;
+      elt->getScoreLastMeasureNumber ());
 }
 
 void msr2msrTranslator::visitEnd (S_msrScore& elt)
@@ -5564,7 +5564,7 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
 
   // set fCurrentChordClone's measure position  // JMI ??? v0.9.66
 //   fCurrentMeasureClone->
-//     setChordMeasurePosition (
+//     setChordPositionInMeasure (
 //       mfRational (FOO, 1),
 //       "msr2msrTranslator::visitStart (S_msrChord& elt)");
 
@@ -5931,7 +5931,7 @@ void msr2msrTranslator::visitStart (S_msrDalSegno& elt)
     hiddenMeasureAndBarLineDescr =
       msrHiddenMeasureAndBarLineDescr::create (
         elt->getInputLineNumber (),
-        measurePosition);
+        positionInMeasure);
 */
 
   // register it in the hidden measure and barLine descr list
@@ -5944,7 +5944,7 @@ void msr2msrTranslator::visitStart (S_msrDalSegno& elt)
   fCurrentPartClone->
     insertHiddenMeasureAndBarLineInPartClone (
       elt->getInputLineNumber (),
-      elt->getMeasureElementMeasurePosition ());
+      elt->getMeasureElementPositionInMeasure ());
      // */
 }
 

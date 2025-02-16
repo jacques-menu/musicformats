@@ -441,8 +441,8 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
     fTempoTupletMeasureNumber);
 
   // populate tempoTuplet's measure position
-  tempoTuplet->setTempoTupletMeasurePosition (
-    fTempoTupletMeasurePosition);
+  tempoTuplet->setTempoTupletPositionInMeasure (
+    fTempoTupletPositionInMeasure);
     * /
 }
 
@@ -730,11 +730,11 @@ std::string msrTempoTuplet::asString () const
     fTempoTupletMeasureNumber <<
     "':";
 
-  if (fTempoTupletMeasurePosition.getNumerator () < 0) {
+  if (fTempoTupletPositionInMeasure.getNumerator () < 0) {
     ss << "?";
   }
   else {
-    ss << fTempoTupletMeasurePosition;
+    ss << fTempoTupletPositionInMeasure;
   }
 
   ss << '[';
@@ -822,11 +822,11 @@ void msrTempoTuplet::print (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "(measure position" << ": ";
-  if (fTempoTupletMeasurePosition.getNumerator () < 0) {
+  if (fTempoTupletPositionInMeasure.getNumerator () < 0) {
     os << "???)";
   }
   else {
-    os << fTempoTupletMeasurePosition.asString () << ")";
+    os << fTempoTupletPositionInMeasure.asString () << ")";
   }
   os << std::endl;
     */

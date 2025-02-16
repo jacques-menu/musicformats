@@ -221,22 +221,22 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   return newbornClone;
 }
 
-// void msrDoubleTremolo::setMeasureElementMeasurePosition (
+// void msrDoubleTremolo::setMeasureElementPositionInMeasure (
 //   const S_msrMeasure& measure,
-//   const msrWholeNotes&     measurePosition,
+//   const msrWholeNotes&     positionInMeasure,
 //   const std::string&  context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //     ++gIndenter;
 //
 //     gLog <<
 //       "Setting the double tremolo measure position of double tremolo " <<
 //       asString () <<
 //       " to " <<
-//       measurePosition.asString () <<
+//       positionInMeasure.asString () <<
 //       " (was " <<
-//       fMeasureElementMeasurePosition.asString () <<
+//       fMeasureElementPositionInMeasure.asString () <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -254,22 +254,22 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != K_MEASURE_POSITION_UNKNOWN_,
-//     "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
+//     positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
+//     "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set double tremolo's measure position
-//   fMeasureElementMeasurePosition = measurePosition;
+//   fMeasureElementPositionInMeasure = positionInMeasure;
 // }
 
-// void msrDoubleTremolo::setMeasureElementMeasurePosition ( ??? JMI v0.9.66
-//   const msrWholeNotes& measurePosition)
+// void msrDoubleTremolo::setMeasureElementPositionInMeasure ( ??? JMI v0.9.66
+//   const msrWholeNotes& positionInMeasure)
 // {
 //   std::string context =
-//     "setMeasureElementMeasurePosition()";
+//     "setMeasureElementPositionInMeasure()";
 //
-//   setMeasureElementMeasurePosition ( // JMI v0.9.66 CLEAN THAT!!!
-//     measurePosition,
+//   setMeasureElementPositionInMeasure ( // JMI v0.9.66 CLEAN THAT!!!
+//     positionInMeasure,
 //     context);
 //
 //   if (false) { // JMI
@@ -278,7 +278,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //      voicePosition =
 //       fDoubleTremoloUpLinkToMeasure->getMeasureVoicePosition ()
 //         +
-//       measurePosition;
+//       positionInMeasure;
 //
 //   // set double tremolo's voice position
 //   setMeasureElementVoicePosition (

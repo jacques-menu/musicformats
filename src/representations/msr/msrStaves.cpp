@@ -2344,7 +2344,7 @@ void msrStaff::appendPageBreakToStaff (
 
 void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
   int                  inputLineNumber,
-  const msrWholeNotes& measurePosition)
+  const msrWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -2352,7 +2352,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
-      measurePosition.asString () <<
+      positionInMeasure.asString () <<
       "' in staff clone \"" <<
       fStaffName <<
       "\" in part " <<
@@ -2372,7 +2372,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
     voice->
       insertHiddenMeasureAndBarLineInVoiceClone (
         inputLineNumber,
-        measurePosition);
+        positionInMeasure);
   } // for
 
   --gIndenter;

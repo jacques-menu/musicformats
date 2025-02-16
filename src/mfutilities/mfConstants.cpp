@@ -27,15 +27,15 @@ const std::string K_MF_EMPTY_STRING ("");
 const int K_MF_INPUT_LINE_UNKNOWN_ = -1;
 
 const std::string
-  kInputLineNumberPrefix             ("L_"),
-  kInputLineNumberDefaultValueString ("*Unknown*");
+  kInputLineNumberPrefix             ("line_"),
+  kInputLineNumberDefaultValueString ("*line_Unknown*");
 
 // input locations
 //______________________________________________________________________________
 
 const std::string
   kInputLocationRangePrefix (".."),
-  kInputLocationDefaultValueString ("*Unknown*");
+  kInputLocationDefaultValueString ("*location_Unknown*");
 
 // staff numbers
 //______________________________________________________________________________
@@ -43,8 +43,8 @@ const std::string
 const int K_STAFF_NUMBER_UNKNOWN_ = -99;
 
 const std::string
-  kStaffNumberPrefix ("ST_"),
-  kStaffNumberDefaultValueString ("*Unknown*");
+  kStaffNumberPrefix ("staff_"),
+  kStaffNumberDefaultValueString ("*staff_Unknown*");
 
 EXP extern const int K_PART_HARMONIES_STAFF_NUMBER = 10;
 
@@ -70,8 +70,8 @@ std::string mfStaffNumberAsString (int staffNumber)
 const int K_VOICE_NUMBER_UNKNOWN_ = -96;
 
 const std::string
-  kVoiceNumberPrefix ("V_"),
-  kVoiceNumberDefaultValueString ("*Unknown*");
+  kVoiceNumberPrefix ("voice_"),
+  kVoiceNumberDefaultValueString ("*voice_Unknown*");
 
 EXP extern const int K_PART_HARMONIES_VOICE_NUMBER = 11;
 EXP extern const int K_VOICE_HARMONIES_VOICE_BASE_NUMBER = 20;
@@ -100,8 +100,8 @@ const std::string K_MEASURE_NUMBER_UNKNOWN_ =
   "K_MEASURE_NUMBER_UNKNOWN_";
 
 const std::string
-  kMeasureNumberPrefix ("ST_"),
-  kMeasureNumberDefaultValueString ("*Unknown*");
+  kMeasureNumberPrefix ("measure_"),
+  kMeasureNumberDefaultValueString ("*measure_Unknown*");
 
 std::string mfMeasureNumberAsString (std::string measureNumber)
 {
@@ -126,7 +126,7 @@ const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_ =
   msrWholeNotes (-1, 1);
 
 const std::string
-  kWholeNotePrefix ("WN_"),
+  kWholeNotePrefix ("whole_notes_"),
   kWholeNoteDefaultValueString ("K_WHOLE_NOTES_UNKNOWN_");
 
 // moments
@@ -140,15 +140,15 @@ const msrMoment K_MOMENT_UNKNOWN_ =
     K_MEASURE_POSITION_UNKNOWN_);
 
 const std::string
-  kMomentPrefix ("WN_"),
+  kMomentPrefix ("moment_"),
   kMomentDefaultValueString ("K_MOMENT_UNKNOWN_");
 
 // lyrics
 //______________________________________________________________________________
 
 const std::string
-  kStanzaNumberPrefix ("ST_"),
-  kStanzaNumberDefaultValueString ("*Unknown*");
+  kStanzaNumberPrefix ("stanza_"),
+  kStanzaNumberDefaultValueString ("*stanza_Unknown*");
 
 const std::string
   K_STANZA_NUMBER_UNKNOWN_ = "K_STANZA_NUMBER_UNKNOWN_",

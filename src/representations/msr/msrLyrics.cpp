@@ -1365,7 +1365,7 @@ S_msrStanza msrStanza::createStanzaDeepClone (
 void msrStanza::appendSyllableToStanza (
   const S_msrSyllable& syllable,
   const S_msrMeasure&  upLinkToMeasure,
-  const msrWholeNotes& partCurrentDrawingMeasurePosition)
+  const msrWholeNotes& partCurrentDrawingPositionInMeasure)
 {
 /*
   upLinkToMeasure is needed here, to obtain the next measure's purist number
@@ -1374,7 +1374,7 @@ void msrStanza::appendSyllableToStanza (
   // compute position delta
   msrWholeNotes
     positionsDelta =
-      partCurrentDrawingMeasurePosition
+      partCurrentDrawingPositionInMeasure
         -
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration;
 
@@ -1385,8 +1385,8 @@ void msrStanza::appendSyllableToStanza (
     ss <<
       "Appending syllable " << syllable->asString () <<
       " to stanza " << getStanzaName () <<
-      ", partCurrentDrawingMeasurePosition: " <<
-      partCurrentDrawingMeasurePosition.asString () <<
+      ", partCurrentDrawingPositionInMeasure: " <<
+      partCurrentDrawingPositionInMeasure.asString () <<
       ", fStanzaMeasureCurrentAccumulatedWholeNotesDuration: " <<
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
       ", positionsDelta: " <<
@@ -1536,12 +1536,12 @@ void msrStanza::appendSyllableToStanzaClone (
 void msrStanza::appendMeasureEndSyllableToStanza (
   int                  inputLineNumber,
   const S_msrMeasure&  upLinkToMeasure,
-  const msrWholeNotes& partCurrentDrawingMeasurePosition)
+  const msrWholeNotes& partCurrentDrawingPositionInMeasure)
 {
   // compute position delta
   msrWholeNotes
     positionsDelta =
-      partCurrentDrawingMeasurePosition
+      partCurrentDrawingPositionInMeasure
         -
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration;
 
@@ -1564,8 +1564,8 @@ void msrStanza::appendMeasureEndSyllableToStanza (
     }
 
     ss <<
-      ", partCurrentDrawingMeasurePosition: " <<
-      partCurrentDrawingMeasurePosition <<
+      ", partCurrentDrawingPositionInMeasure: " <<
+      partCurrentDrawingPositionInMeasure <<
       ", fStanzaMeasureCurrentAccumulatedWholeNotesDuration: " <<
       fStanzaMeasureCurrentAccumulatedWholeNotesDuration <<
       ", positionsDelta: " <<

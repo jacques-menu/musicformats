@@ -881,7 +881,7 @@ void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
       fCurrentPartClone->
         insertHiddenMeasureAndBarLineInPartClone (
           hiddenMeasureAndBarLineDescr->getInputLineNumber (),
-          dalSegno->getMeasureElementMeasurePosition ());
+          dalSegno->getMeasureElementPositionInMeasure ());
 
       if (++i == iEnd) break;
     } // for
@@ -1290,10 +1290,10 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
   // populate the measure numbers
   fVisitedMsrScore->
     setScoreFirstMeasureNumber (
-      elt->getScoreFirstMeasureNumber ()) ;
+      elt->getScoreFirstMeasureNumber ());
   fVisitedMsrScore->
     setScoreLastMeasureNumber (
-      elt->getScoreLastMeasureNumber ()) ;
+      elt->getScoreLastMeasureNumber ());
 
   // fetch score header IDENTIFICATIONL JMI
   fCurrentLpsrScoreHeader =
@@ -7622,7 +7622,7 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
     hiddenMeasureAndBarLineDescr =
       msrHiddenMeasureAndBarLineDescr::create (
          elt->getInputLineNumber (),
-        measurePosition);
+        positionInMeasure);
 */
 
   // register it in the hidden measure and barLine descr list
@@ -7635,7 +7635,7 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
   fCurrentPartClone->
     insertHiddenMeasureAndBarLineInPartClone (
        elt->getInputLineNumber (),
-      elt->getMeasureElementMeasurePosition ());
+      elt->getMeasureElementPositionInMeasure ());
      // */
 }
 

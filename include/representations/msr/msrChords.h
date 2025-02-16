@@ -352,15 +352,15 @@ class EXP msrChord : public msrTupletElement
                               { return fChordOctaveShift; }
 
 //     // measure positions
-//     // this override calls setChordMembersMeasurePosition()
-//     void                  setMeasureElementMeasurePosition (
+//     // this override calls setChordMembersPositionInMeasure()
+//     void                  setMeasureElementPositionInMeasure (
 //                             const S_msrMeasure&  measure,
-//                             const msrWholeNotes& measurePosition,
+//                             const msrWholeNotes& positionInMeasure,
 //                             const std::string&   context) override;
 
-    void                  setChordMembersMeasurePosition (
+    void                  setChordMembersPositionInMeasure (
                             const S_msrMeasure&  measure,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
   public:
 

@@ -2539,7 +2539,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
         noteSoundingWholeNotes) <<
         //*/
       "*" <<
-      gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsFraction ();
+      gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsRational ();
   }
 
   // generate the ties if any
@@ -2807,7 +2807,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getGeneratePositionInMeasures ()) {
     // generate a rest to help pin-point bugs
     fLilypondCodeStream << 'r';
 
@@ -2928,7 +2928,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
         note->getInputLineNumber (),
         noteSoundingWholeNotes) <<
       "*" <<
-      gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsFraction ();
+      gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsRational ();
   }
 
 /* JMI
@@ -3458,7 +3458,7 @@ void lpsr2lilypondTranslator::generateCodeForSkipInGraceNotesGroup (
 #endif // MF_TRACE_IS_ENABLED
 
   // generate the note name
-  if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getGeneratePositionInMeasures ()) {
     // generate the rest name to help pin-point bugs
     fLilypondCodeStream << 'r';
   }
@@ -3743,7 +3743,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
     // c2*2/3 ( s2*1/3\turn JMI
     fLilypondCodeStream <<
       "*" <<
-      gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsFraction ();
+      gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsRational ();
   }
 
 /* JMI
@@ -4632,7 +4632,7 @@ void lpsr2lilypondTranslator::generateOrnament (
           remainingFraction =
             mfRational (1, 1)
               -
-            gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsFraction ();
+            gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsRational ();
 
         int
           numerator =
@@ -4666,7 +4666,7 @@ void lpsr2lilypondTranslator::generateOrnament (
         }
 
         // forget about the last found whole notes duration,
-        // since the latter has been multipled by fDelayedOrnamentsFraction
+        // since the latter has been multipled by fDelayedOrnamentsRational
         fLastMetWholeNotes = K_WHOLE_NOTES_UNKNOWN_;
       }
       break;
@@ -6100,7 +6100,7 @@ std::string lpsr2lilypondTranslator::frameAsLilypondString (
   return ss.str ();
 }
 
-void lpsr2lilypondTranslator::generateInputLineNumberAndOrMeasurePositionAsAComment (
+void lpsr2lilypondTranslator::generateInputLineNumberAndOrPositionInMeasureAsAComment (
   const S_msrMeasureElement& measureElement)
 {
   fLilypondCodeStream <<
@@ -6112,11 +6112,11 @@ void lpsr2lilypondTranslator::generateInputLineNumberAndOrMeasurePositionAsAComm
       "line " << measureElement->getInputLineNumber () << ' ';
   }
 
-  if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getGeneratePositionInMeasures ()) {
     // generate the measure position as a comment
     fLilypondCodeStream <<
       "memp: " <<
-      measureElement->getMeasureElementMeasurePosition () <<
+      measureElement->getMeasureElementPositionInMeasure () <<
       ' ';
   }
 
@@ -12811,9 +12811,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
   if (
     gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
       ||
-    gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
+    gGlobalLpsr2lilypondOahGroup->getGeneratePositionInMeasures ()
   ) {
-    generateInputLineNumberAndOrMeasurePositionAsAComment (
+    generateInputLineNumberAndOrPositionInMeasureAsAComment (
       elt);
   }
 
@@ -12894,9 +12894,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
     if (
       gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
         ||
-      gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
+      gGlobalLpsr2lilypondOahGroup->getGeneratePositionInMeasures ()
     ) {
-      generateInputLineNumberAndOrMeasurePositionAsAComment (
+      generateInputLineNumberAndOrPositionInMeasureAsAComment (
         elt);
     }
   }
@@ -13039,9 +13039,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
       if (
         gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
           ||
-        gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
+        gGlobalLpsr2lilypondOahGroup->getGeneratePositionInMeasures ()
       ) {
-        generateInputLineNumberAndOrMeasurePositionAsAComment (
+        generateInputLineNumberAndOrPositionInMeasureAsAComment (
           fCurrentFiguredBass);
       }
     }
@@ -21263,9 +21263,9 @@ slash = \tweak Flag.stroke-style grace \etc
         if ( // JMI
           gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
             ||
-          gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
+          gGlobalLpsr2lilypondOahGroup->getGeneratePositionInMeasures ()
         ) {
-          generateInputLineNumberAndOrMeasurePositionAsAComment (
+          generateInputLineNumberAndOrPositionInMeasureAsAComment (
             graceNotesGroupNote);
         }
 
@@ -22242,9 +22242,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
   if (
     gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
       ||
-    gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
+    gGlobalLpsr2lilypondOahGroup->getGeneratePositionInMeasures ()
   ) {
-    generateInputLineNumberAndOrMeasurePositionAsAComment (
+    generateInputLineNumberAndOrPositionInMeasureAsAComment (
       elt);
   }
 }

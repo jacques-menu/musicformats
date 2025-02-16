@@ -159,6 +159,7 @@ class EXP mfRational
     long int              fNumerator;
     long int              fDenominator;
 };
+
 EXP std::ostream& operator << (std::ostream& os, const mfRational& rat);
 
 

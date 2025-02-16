@@ -95,20 +95,20 @@ msrEyeGlasses::~msrEyeGlasses ()
 //   fEyeGlassesUpLinkToMeasure = measure;
 // }
 
-// void msrEyeGlasses::setEyeGlassesMeasurePosition (
+// void msrEyeGlasses::setEyeGlassesPositionInMeasure (
 //   const S_msrMeasure& measure,
-//   const mfRational&     measurePosition,
+//   const mfRational&     positionInMeasure,
 //   const std::string&  context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //
 //     gLog <<
 //       "Setting the eyeglasses measure position of " <<
 //       asString () <<
-//       " to " << measurePosition.asString () <<
+//       " to " << positionInMeasure.asString () <<
 //       " (was '" <<
-//       fEyeGlassesMeasurePosition.asString () <<
+//       fEyeGlassesPositionInMeasure.asString () <<
 //       "') in measure " <<
 //       measure->asShortString () <<
 //       " (EyeGlassesMeasureNumber: " <<
@@ -124,12 +124,12 @@ msrEyeGlasses::~msrEyeGlasses ()
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != K_MEASURE_POSITION_UNKNOWN_,
-//     "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
+//     positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
+//     "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set measure element's measure position
-//   fEyeGlassesMeasurePosition = measurePosition;
+//   fEyeGlassesPositionInMeasure = positionInMeasure;
 //
 //   // compute measure element's voice position
 // // if (false) { // JMI v0.9.67 v0.9.66
@@ -138,7 +138,7 @@ msrEyeGlasses::~msrEyeGlasses ()
 //       measure->
 //         getMeasureVoicePosition ()
 //         +
-//       measurePosition;
+//       positionInMeasure;
 //
 //   // set figured bass's voice position
 //   setEyeGlassesVoicePosition (

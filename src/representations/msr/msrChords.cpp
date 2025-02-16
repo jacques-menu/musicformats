@@ -291,8 +291,8 @@ S_msrChord msrChord::createChordNewbornClone (
 
 /*
   newbornClone->
-    fChordMeasurePosition =
-      fChordMeasurePosition;
+    fChordPositionInMeasure =
+      fChordPositionInMeasure;
 
   newbornClone->
     fChordIsFirstChordInADoubleTremolo =
@@ -306,22 +306,22 @@ S_msrChord msrChord::createChordNewbornClone (
   return newbornClone;
 }
 
-// void msrChord::setChordMeasurePosition (
+// void msrChord::setChordPositionInMeasure (
 //   const S_msrMeasure measure,
-//   const msrWholeNotes&    measurePosition,
+//   const msrWholeNotes&    positionInMeasure,
 //   const std::string&      context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //     std::stringstream ss;
 //
 //     ss <<
 //       "Setting chord's measure position of " <<
 //       asString () <<
 //       " to " <<
-//       measurePosition.asString () <<
+//       positionInMeasure.asString () <<
 //       " (was " <<
-//       fMeasureElementMeasurePosition.asString () <<
+//       fMeasureElementPositionInMeasure.asString () <<
 //       ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -337,12 +337,12 @@ S_msrChord msrChord::createChordNewbornClone (
 //   sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     measurePosition != K_MEASURE_POSITION_UNKNOWN_,
-//     "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
+//     positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
+//     "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set chord's measure position
-//   fMeasureElementMeasurePosition = measurePosition;
+//   fMeasureElementPositionInMeasure = positionInMeasure;
 // }
 
 // uplink to measure
@@ -593,13 +593,13 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
     chordChordGraceNotesGroupLinkAfter;
 }
 
-// void msrChord::setMeasureElementMeasurePosition (
+// void msrChord::setMeasureElementPositionInMeasure (
 //   const S_msrMeasure& measure,
-//   const msrWholeNotes&     measurePosition,
+//   const msrWholeNotes&     positionInMeasure,
 //   const std::string&  context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //     S_msrMeasure
 //       upLinkToMeasure =
 //         getMeasureElementUpLinkToMeasure ();
@@ -610,9 +610,9 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
 //       "Setting the measure position of " <<
 //       asString () <<
 //       " to " <<
-//       measurePosition.asString () <<
+//       positionInMeasure.asString () <<
 //       " (was " <<
-//       fMeasureElementMeasurePosition.asString () <<
+//       fMeasureElementPositionInMeasure.asString () <<
 //      ") in measure " <<
 //       measure->asShortString () <<
 //       " (measureElementMeasureNumber: " <<
@@ -628,29 +628,29 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
 // #endif // MF_TRACE_IS_ENABLED
 //
 //   // handle the chord itself
-//   msrMeasureElement::setMeasureElementMeasurePosition (
+//   msrMeasureElement::setMeasureElementPositionInMeasure (
 //     measure,
-//     measurePosition,
+//     positionInMeasure,
 //     context);
 //
 //   // handle its members
-//   setChordMembersMeasurePosition (
+//   setChordMembersPositionInMeasure (
 //     measure,
-//     measurePosition);
+//     positionInMeasure);
 // }
 
-void msrChord::setChordMembersMeasurePosition (
+void msrChord::setChordMembersPositionInMeasure (
   const S_msrMeasure&  measure,
-  const msrWholeNotes& measurePosition)
+  const msrWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
       "Setting chord members measure positions of " << asString () <<
       " to " <<
-      measurePosition.asString () <<
+      positionInMeasure.asString () <<
       ", fChordNotesVector.size(): " << fChordNotesVector.size ();
 
     gWaeHandler->waeTrace (
@@ -660,7 +660,7 @@ void msrChord::setChordMembersMeasurePosition (
 #endif // MF_TRACE_IS_ENABLED
 
   std::string context =
-    "setChordMembersMeasurePosition()";
+    "setChordMembersPositionInMeasure()";
 
   // set the chord's elements' measure position
   for (S_msrNote note : fChordNotesVector) {
@@ -672,10 +672,10 @@ void msrChord::setChordMembersMeasurePosition (
 
     // set note's measure position // JMI v0.9.66
     note->
-      setMeasureElementMeasurePosition (
+      setMeasureElementPositionInMeasure (
         measure,
-        measurePosition, // they all share the same one
-        "setChordMembersMeasurePosition()");
+        positionInMeasure, // they all share the same one
+        "setChordMembersPositionInMeasure()");
 
 //    // set note's voice position JMI v0.9.66
 //       note->
@@ -689,10 +689,10 @@ void msrChord::setChordMembersMeasurePosition (
 //     for (S_msrDalSegno dalSegno : fChordDalSegnosList) {
 //       // set the dal segno measure position
 // //       dalSegno->
-// //         setDalSegnoMeasurePosition (
+// //         setDalSegnoPositionInMeasure (
 // //           measure,
-// //           measurePosition,
-// //           "msrChord::setChordMembersMeasurePosition()"); // JMI v0.9.66
+// //           positionInMeasure,
+// //           "msrChord::setChordMembersPositionInMeasure()"); // JMI v0.9.66
 //     } // for
 }
 
@@ -2461,9 +2461,9 @@ void msrChord::appendChordBeamLinkToChord (
 //       asString () <<
 //       ", line " << inputLineNumber <<
 //       std::endl <<
-//       "fMeasureElementMeasurePosition: " <<
+//       "fMeasureElementPositionInMeasure: " <<
 //       std::endl <<
-//       fMeasureElementMeasurePosition.asString ();
+//       fMeasureElementPositionInMeasure.asString ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
@@ -2473,9 +2473,9 @@ void msrChord::appendChordBeamLinkToChord (
 //
 //   // we can now set the measure positions for all the chord members JMI v0.9.66
 //   if (false) // JMI v0.9.67 MERDUM
-//   setChordMembersMeasurePosition (
+//   setChordMembersPositionInMeasure (
 //     fMeasureElementUpLinkToMeasure,
-//     fMeasureElementMeasurePosition);
+//     fMeasureElementPositionInMeasure);
 // }
 
 void msrChord::acceptIn (basevisitor* v)
@@ -3028,8 +3028,8 @@ void msrChord::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::endl;
 //   os << std::left <<
 //     std::setw (fieldWidth) <<
@@ -3814,8 +3814,8 @@ void msrChord::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::setw (fieldWidth) <<
 
     "fMeasureElementSoundingWholeNotes" << ": " <<

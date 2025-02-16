@@ -44,11 +44,11 @@ class EXP msrMoment
                           msrMoment ();
 
                           msrMoment (
-                            const msrWholeNotes& writtenMeasurePosition,
+                            const msrWholeNotes& writtenPositionInMeasure,
                             const msrWholeNotes& soundingRelativeOffset);
 
                           msrMoment (
-                            const msrWholeNotes& writtenMeasurePosition);
+                            const msrWholeNotes& writtenPositionInMeasure);
 
     virtual               ~msrMoment ();
 

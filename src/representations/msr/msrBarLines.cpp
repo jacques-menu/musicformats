@@ -623,8 +623,8 @@ std::string msrBarLine::asShortString () const
   }
 
   ss <<
-    ", fMeasureElementMeasurePosition " <<
-    fMeasureElementMeasurePosition.asString () <<
+    ", fMeasureElementPositionInMeasure " <<
+    fMeasureElementPositionInMeasure.asString () <<
 
 /* JMI
     ", " <<
@@ -676,7 +676,7 @@ std::string msrBarLine::asString () const
     }
 
   ss <<
-    ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition.asString () <<
+    ", fMeasureElementPositionInMeasure: " << fMeasureElementPositionInMeasure.asString () <<
 
     ", " <<
     msrBarLineLocationKindAsString (fLocationKind) <<
@@ -738,8 +738,8 @@ void msrBarLine::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -844,8 +844,8 @@ void msrBarLine::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::endl;
 
   --gIndenter;

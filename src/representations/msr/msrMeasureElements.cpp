@@ -52,7 +52,7 @@ msrMeasureElement::msrMeasureElement (
 {
   fMeasureElementSoundingWholeNotes = msrWholeNotes (0, 1),
 
-  fMeasureElementMeasurePosition = K_MEASURE_POSITION_UNKNOWN_;
+  fMeasureElementPositionInMeasure = K_MEASURE_POSITION_UNKNOWN_;
   fMeasureElementVoicePosition   = K_MEASURE_POSITION_UNKNOWN_;
 }
 
@@ -128,14 +128,69 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
   fMeasureElementSoundingWholeNotes = wholeNotes;
 }
 
+void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
+  const msrWholeNotes& wholeNotes,
+  const std::string&   context)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
+    ++gIndenter;
+
+    S_msrMeasure
+      upLinkToMeasure =
+        getMeasureElementUpLinkToMeasure ();
+
+    std::stringstream ss;
+
+    ss <<
+      "Incrementing the measure element sounding whole notes of " <<
+      asString () <<
+      " by " << wholeNotes.asString () << // JMI v0.9.66
+//       " in measure '" << // JMI TOO EARLY v0.9.67
+//       upLinkToMeasure->getMeasureNumber () <<
+//       "', context: \"" <<
+      ", context: \"" <<
+      context <<
+      "\"" <<
+      std::endl;
+
+//     if (wholeNotes == msrWholeNotes (114, 1)) abort (); // JMI v0.9.67 HARMFUL
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+
+    --gIndenter;
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED // JMI v0.9.67
+//   // sanity check // NO JMI v0.9.67
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     wholeNotes != K_WHOLE_NOTES_UNKNOWN_,
+//     "wholeNotes == K_WHOLE_NOTES_UNKNOWN_");
+//
+//   msrWholeNotes
+//     infinitelyDottesLonga (8, 1);
+//
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     wholeNotes < infinitelyDottesLonga,
+//     "wholeNotes >= infinitelyDottesLonga");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  fMeasureElementSoundingWholeNotes += wholeNotes;
+}
+
 msrWholeNotes msrMeasureElement:: getMeasureElementSoundingWholeNotes () const
 {
   return fMeasureElementSoundingWholeNotes;
 }
 
-msrWholeNotes msrMeasureElement::getMeasureElementMeasurePosition () const
+msrWholeNotes msrMeasureElement::getMeasureElementPositionInMeasure () const
 {
-  return fMeasureElementMeasurePosition;
+  return fMeasureElementPositionInMeasure;
 }
 
 msrWholeNotes msrMeasureElement::getMeasureElementVoicePosition () const
@@ -143,13 +198,13 @@ msrWholeNotes msrMeasureElement::getMeasureElementVoicePosition () const
   return fMeasureElementVoicePosition;
 }
 
-void msrMeasureElement::setMeasureElementMeasurePosition (
+void msrMeasureElement::setMeasureElementPositionInMeasure (
   const S_msrMeasure&  measure,
-  const msrWholeNotes& measurePosition,
+  const msrWholeNotes& positionInMeasure,
   const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     S_msrMeasure
       upLinkToMeasure =
         getMeasureElementUpLinkToMeasure ();
@@ -160,9 +215,9 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
       "Setting the measure position of " <<
       asString () <<
       " to " <<
-      measurePosition.asString () <<
+      positionInMeasure.asString () <<
       " (was '" <<
-      fMeasureElementMeasurePosition.asString () <<
+      fMeasureElementPositionInMeasure.asString () <<
       "') in measure " <<
       measure->asShortString ();
 
@@ -191,12 +246,12 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measurePosition != K_MEASURE_POSITION_UNKNOWN_,
-    "measurePosition == K_MEASURE_POSITION_UNKNOWN_");
+    positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
+    "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set measure element's measure position
-  fMeasureElementMeasurePosition = measurePosition;
+  fMeasureElementPositionInMeasure = positionInMeasure;
 
 //   // compute measure element's voice position
 // // if (false) { // JMI v0.9.67
@@ -205,7 +260,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 //       measure->
 //         getMeasureVoicePosition ()
 //         +
-//       measurePosition;
+//       positionInMeasure;
 
   // set figured bass's voice position
 //   setMeasureElementVoicePosition ( // JMI v0.9.66
@@ -226,15 +281,15 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 }
 
 //______________________________________________________________________________
-bool msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition (
+bool msrMeasureElement::compareMeasureElementsByIncreasingPositionInMeasure (
   const SMARTP<msrMeasureElement>& first,
   const SMARTP<msrMeasureElement>& second)
 {
   return
     bool (
-      first->fMeasureElementMeasurePosition
+      first->fMeasureElementPositionInMeasure
         <
-      second->fMeasureElementMeasurePosition
+      second->fMeasureElementPositionInMeasure
     );
 }
 

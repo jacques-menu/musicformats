@@ -326,7 +326,7 @@ void msrPartGroup::setPartGroupUpLinkToContainingPartGroup (
       "Setting part group " <<
       asString () <<
       " part group uplink to " <<
-      containingPartGroup->asString () ;
+      containingPartGroup->asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

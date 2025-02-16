@@ -272,23 +272,23 @@ class EXP msrPart : public msrPartGroupElement
 
     // part drawing measure position
 
-    void                  setPartCurrentDrawingMeasurePosition (
+    void                  setPartCurrentDrawingPositionInMeasure (
                             int                  inputLineNumber,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
-    void                  resetPartCurrentDrawingMeasurePosition (
+    void                  resetPartCurrentDrawingPositionInMeasure (
                             int inputLineNumber);
 
-    void                  incrementPartCurrentDrawingMeasurePosition (
+    void                  incrementPartCurrentDrawingPositionInMeasure (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta);
 
-    void                  decrementPartCurrentDrawingMeasurePosition (
+    void                  decrementPartCurrentDrawingPositionInMeasure (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta);
 
-    msrWholeNotes         getPartCurrentDrawingMeasurePosition () const
-                              { return fPartCurrentDrawingMeasurePosition; }
+    msrWholeNotes         getPartCurrentDrawingPositionInMeasure () const
+                              { return fPartCurrentDrawingPositionInMeasure; }
 
     // part shortest note
 
@@ -458,7 +458,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  insertHiddenMeasureAndBarLineInPartClone (
                             int             inputLineNumber,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
     // breaks
 
@@ -548,12 +548,12 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendHarmonyToPart (
                             int                  inputLineNumber,
                             const S_msrHarmony&  harmony,
-                            const msrWholeNotes& measurePositionToAppendAt);
+                            const msrWholeNotes& positionInMeasureToAppendAt);
 
     void                  appendHarmoniesListToPart (
                             int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const msrWholeNotes&            measurePositionToAppendAt);
+                            const msrWholeNotes&            positionInMeasureToAppendAt);
 
     // figured bass
 
@@ -564,12 +564,12 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendFiguredBassToPart (
                             int                     inputLineNumber,
                             const S_msrFiguredBass& figuredBass,
-                            const msrWholeNotes&    measurePositionToAppendAt);
+                            const msrWholeNotes&    positionInMeasureToAppendAt);
 
     void                  appendFiguredBassesListToPart (
                             int                                inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const msrWholeNotes&               measurePositionToAppendAt);
+                            const msrWholeNotes&               positionInMeasureToAppendAt);
 
 //     void                  appendFiguredBassToPart ( // JMI v0.9.67 HARMFUL
 //                             const S_msrVoice&       figuredBassSupplierVoice,
@@ -795,7 +795,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // current drawing measure position, for mxsr2msr
 
-    msrWholeNotes         fPartCurrentDrawingMeasurePosition;
+    msrWholeNotes         fPartCurrentDrawingPositionInMeasure;
 };
 typedef SMARTP<msrPart> S_msrPart;
 EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);

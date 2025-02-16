@@ -47,7 +47,7 @@ class   msrNoteEvent : public smartable
     // private fields
     // ------------------------------------------------------
 
-    mfRational              fNoteEventMeasurePosition;
+    mfRational              fNoteEventPositionInMeasure;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 };
@@ -69,7 +69,7 @@ class   msrSimultaneousNotesChunk : public smartable
     // private fields
     // ------------------------------------------------------
 
-    mfRational              fChunkMeasurePosition;
+    mfRational              fChunkPositionInMeasure;
     std::list <S_msrNote>  fChunkNotesList;
     mfRational              fChunkNotesDurationWholeNotes;
 };

@@ -521,7 +521,7 @@ msrFiguredBass::msrFiguredBass (
 
   // a figured bass element is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure()
-  fMeasureElementMeasurePosition = msrWholeNotes (0, 1);
+  fMeasureElementPositionInMeasure = msrWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -796,8 +796,8 @@ std::string msrFiguredBass::asString () const
   ss <<
     "[FiguredBass" <<
     ", " << std::hex << std::showbase << this << std::dec <<
-    ", fMeasureElementMeasurePosition: " <<
-    fMeasureElementMeasurePosition.asString () <<
+    ", fMeasureElementPositionInMeasure: " <<
+    fMeasureElementPositionInMeasure.asString () <<
     ", fMeasureElementSoundingWholeNotes: " <<
     wholeNotesPitchAndOctaveAsString (
       fInputLineNumber,
@@ -862,7 +862,7 @@ std::string msrFiguredBass::asString () const
 
   // print the figured bass measure position
   ss <<
-    ", measurePosition: " << fMeasureElementMeasurePosition;
+    ", positionInMeasure: " << fMeasureElementPositionInMeasure;
 
 /* JMI
   if (fFiguredBassUpLinkToPart) { // JMI ???
@@ -892,8 +892,8 @@ std::string msrFiguredBass::asString () const
 //   ss <<
 //     "[FiguredBass" <<
 //     ", " << std::hex << std::showbase << this << std::dec <<
-//     ", fMeasureElementMeasurePosition: " <<
-//     fMeasureElementMeasurePosition.asString () <<
+//     ", fMeasureElementPositionInMeasure: " <<
+//     fMeasureElementPositionInMeasure.asString () <<
 //     ", fMeasureElementSoundingWholeNotes: " <<
 //     wholeNotesPitchAndOctaveAsString (
 //       fInputLineNumber,
@@ -957,7 +957,7 @@ std::string msrFiguredBass::asString () const
 //
 //   // print the figured bass measure position
 //   ss <<
-//     ", measurePosition: " << fMeasureElementMeasurePosition;
+//     ", positionInMeasure: " << fMeasureElementPositionInMeasure;
 //
 // /* JMI
 //   if (fFiguredBassUpLinkToPart) { // JMI ???
@@ -993,8 +993,8 @@ void msrFiguredBass::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " <<
-    fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " <<
+    fMeasureElementPositionInMeasure.asString () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1071,7 +1071,7 @@ void msrFiguredBass::print (std::ostream& os) const
   // print the figured bass measure position
   os <<
     std::setw (fieldWidth) <<
-    "fMeasureElementMeasurePosition" << ": " << fMeasureElementMeasurePosition.asString () <<
+    "fMeasureElementPositionInMeasure" << ": " << fMeasureElementPositionInMeasure.asString () <<
     std::endl;
 
 //   // print the figured bass voice position

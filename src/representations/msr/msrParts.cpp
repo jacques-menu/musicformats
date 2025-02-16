@@ -169,7 +169,7 @@ void msrPart::initializePart ()
   fPartContainsMultiMeasureRests = false;
 
   // drawing measure position
-  fPartCurrentDrawingMeasurePosition = msrWholeNotes (0, 1);
+  fPartCurrentDrawingPositionInMeasure = msrWholeNotes (0, 1);
 
   // part shortest note wholeNotes
   fPartShortestNoteWholeNotes = msrWholeNotes (INT_MAX, 1);
@@ -371,19 +371,19 @@ void msrPart::registerStaffInPart (
   } // switch
 }
 
-void msrPart::setPartCurrentDrawingMeasurePosition (
+void msrPart::setPartCurrentDrawingPositionInMeasure (
   int                  inputLineNumber,
-  const msrWholeNotes& measurePosition)
+  const msrWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
       "Setting the drawing measure position in part " <<
       fetchPartCombinedName () <<
       " to " <<
-      measurePosition <<
+      positionInMeasure <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -392,12 +392,12 @@ void msrPart::setPartCurrentDrawingMeasurePosition (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (measurePosition.getNumerator () < 0) {
+  if (positionInMeasure.getNumerator () < 0) {
     std::stringstream ss;
 
     ss <<
       "cannot set part current measure position to " <<
-      measurePosition <<
+      positionInMeasure <<
       " in part " <<
       fetchPartCombinedName () <<
       " since it is negative" <<
@@ -410,14 +410,14 @@ void msrPart::setPartCurrentDrawingMeasurePosition (
       ss.str ());
   }
 
-  fPartCurrentDrawingMeasurePosition = measurePosition;
+  fPartCurrentDrawingPositionInMeasure = positionInMeasure;
 }
 
-void msrPart::resetPartCurrentDrawingMeasurePosition (
+void msrPart::resetPartCurrentDrawingPositionInMeasure (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
@@ -431,15 +431,15 @@ void msrPart::resetPartCurrentDrawingMeasurePosition (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fPartCurrentDrawingMeasurePosition = msrWholeNotes (0, 1);
+  fPartCurrentDrawingPositionInMeasure = msrWholeNotes (0, 1);
 }
 
-void msrPart::incrementPartCurrentDrawingMeasurePosition (
+void msrPart::incrementPartCurrentDrawingPositionInMeasure (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotesDelta)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
@@ -447,8 +447,8 @@ void msrPart::incrementPartCurrentDrawingMeasurePosition (
       fetchPartCombinedName () <<
       " by " <<
       wholeNotesDelta <<
-      ", fPartCurrentDrawingMeasurePosition: " <<
-      fPartCurrentDrawingMeasurePosition <<
+      ", fPartCurrentDrawingPositionInMeasure: " <<
+      fPartCurrentDrawingPositionInMeasure <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -457,16 +457,16 @@ void msrPart::incrementPartCurrentDrawingMeasurePosition (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fPartCurrentDrawingMeasurePosition += wholeNotesDelta;
+  fPartCurrentDrawingPositionInMeasure += wholeNotesDelta;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
       "The new part drawing measure position is " <<
-      "fPartCurrentDrawingMeasurePosition: " <<
-      fPartCurrentDrawingMeasurePosition <<
+      "fPartCurrentDrawingPositionInMeasure: " <<
+      fPartCurrentDrawingPositionInMeasure <<
       " in part " <<
       fetchPartCombinedName ();
 
@@ -477,12 +477,12 @@ void msrPart::incrementPartCurrentDrawingMeasurePosition (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrPart::decrementPartCurrentDrawingMeasurePosition (
+void msrPart::decrementPartCurrentDrawingPositionInMeasure (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotesDelta)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
@@ -490,8 +490,8 @@ void msrPart::decrementPartCurrentDrawingMeasurePosition (
       fetchPartCombinedName () <<
       " by " <<
       wholeNotesDelta <<
-      ", fPartCurrentDrawingMeasurePosition: " <<
-      fPartCurrentDrawingMeasurePosition <<
+      ", fPartCurrentDrawingPositionInMeasure: " <<
+      fPartCurrentDrawingPositionInMeasure <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -500,7 +500,7 @@ void msrPart::decrementPartCurrentDrawingMeasurePosition (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fPartCurrentDrawingMeasurePosition.getNumerator () < 0) {
+  if (fPartCurrentDrawingPositionInMeasure.getNumerator () < 0) {
     std::stringstream ss;
 
     ss <<
@@ -509,7 +509,7 @@ void msrPart::decrementPartCurrentDrawingMeasurePosition (
       " in part " <<
       fetchPartCombinedName () <<
       " since that sets it to " <<
-      fPartCurrentDrawingMeasurePosition <<
+      fPartCurrentDrawingPositionInMeasure <<
       ", which is negative " <<
       ", line " << inputLineNumber;
 
@@ -521,16 +521,16 @@ void msrPart::decrementPartCurrentDrawingMeasurePosition (
       ss.str ());
   }
 
-  fPartCurrentDrawingMeasurePosition -= wholeNotesDelta;
+  fPartCurrentDrawingPositionInMeasure -= wholeNotesDelta;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasurePositions ()) {
+  if (gTraceOahGroup->getTracePositionInMeasures ()) {
     std::stringstream ss;
 
     ss <<
       "The new part drawing measure position after decrementation is " <<
-      "fPartCurrentDrawingMeasurePosition: " <<
-      fPartCurrentDrawingMeasurePosition <<
+      "fPartCurrentDrawingPositionInMeasure: " <<
+      fPartCurrentDrawingPositionInMeasure <<
       " in part " <<
       fetchPartCombinedName ();
 
@@ -811,7 +811,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
   if (
     gTraceOahGroup->getTraceWholeNoteDurations ()
       ||
-    gTraceOahGroup->getTraceMeasurePositionsDetails ()
+    gTraceOahGroup->getTracePositionInMeasuresDetails ()
   ) {
     std::stringstream ss;
 
@@ -867,7 +867,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
   if (
     gTraceOahGroup->getTraceWholeNoteDurations ()
       ||
-    gTraceOahGroup->getTraceMeasurePositionsDetails ()
+    gTraceOahGroup->getTracePositionInMeasuresDetails ()
   ) {
     std::stringstream ss;
 
@@ -1095,7 +1095,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
   if (
     gTraceOahGroup->getTraceWholeNoteDurations ()
       ||
-    gTraceOahGroup->getTraceMeasurePositionsDetails ()
+    gTraceOahGroup->getTracePositionInMeasuresDetails ()
   ) {
     printPartMeasuresWholeNotesVector (
       gLog,
@@ -1489,7 +1489,7 @@ void msrPart::appendPageBreakToPart (
 
 void msrPart::insertHiddenMeasureAndBarLineInPartClone (
   int             inputLineNumber,
-  const msrWholeNotes& measurePosition)
+  const msrWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1497,7 +1497,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
-      measurePosition.asString () <<
+      positionInMeasure.asString () <<
       "' in part clone " << fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
@@ -1514,7 +1514,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
     staff->
       insertHiddenMeasureAndBarLineInStaffClone (
         inputLineNumber,
-        measurePosition);
+        positionInMeasure);
   } // for
 
   --gIndenter;
@@ -2510,7 +2510,7 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 void msrPart::appendHarmonyToPart (
   int                  inputLineNumber,
   const S_msrHarmony&  harmony,
-  const msrWholeNotes& measurePositionToAppendAt)
+  const msrWholeNotes& positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
@@ -2521,7 +2521,7 @@ void msrPart::appendHarmonyToPart (
       harmony->asString () <<
       " to part " <<
       fetchPartCombinedName () <<
-      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2534,13 +2534,13 @@ void msrPart::appendHarmonyToPart (
     appendHarmonyToVoice (
       inputLineNumber,
       harmony,
-      measurePositionToAppendAt);
+      positionInMeasureToAppendAt);
 }
 
 void msrPart::appendHarmoniesListToPart (
   int                            inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
-  const msrWholeNotes&            measurePositionToAppendAt)
+  const msrWholeNotes&            positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
@@ -2549,7 +2549,7 @@ void msrPart::appendHarmoniesListToPart (
     ss <<
       "Appending harmonies list to part " << // JMI v0.9.67 HARMFUL
       fetchPartCombinedName () <<
-      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2562,13 +2562,13 @@ void msrPart::appendHarmoniesListToPart (
     appendHarmoniesListToVoice (
       inputLineNumber,
       harmoniesList,
-      measurePositionToAppendAt);
+      positionInMeasureToAppendAt);
 }
 
 void msrPart::appendFiguredBassesListToPart (
   int                                inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
-  const msrWholeNotes&               measurePositionToAppendAt)
+  const msrWholeNotes&               positionInMeasureToAppendAt)
 {
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2580,7 +2580,7 @@ void msrPart::appendFiguredBassesListToPart (
 //       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
       "\" to part " <<
       fetchPartCombinedName () <<
-      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2593,7 +2593,7 @@ void msrPart::appendFiguredBassesListToPart (
     appendFiguredBassesListToVoice (
       inputLineNumber,
       figuredBasssesList,
-      measurePositionToAppendAt);
+      positionInMeasureToAppendAt);
 }
 
 S_msrVoice msrPart::createPartFiguredBassVoice (
@@ -2688,7 +2688,7 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 void msrPart::appendFiguredBassToPart (
   int                     inputLineNumber,
   const S_msrFiguredBass& figuredBass,
-  const msrWholeNotes&    measurePositionToAppendAt)
+  const msrWholeNotes&    positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -2699,7 +2699,7 @@ void msrPart::appendFiguredBassToPart (
       figuredBass->asString () <<
       "\" to part " <<
       fetchPartCombinedName () <<
-      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << figuredBass->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2712,7 +2712,7 @@ void msrPart::appendFiguredBassToPart (
     appendFiguredBassToVoice (
       inputLineNumber,
       figuredBass,
-      measurePositionToAppendAt);
+      positionInMeasureToAppendAt);
 }
 
 // void msrPart::appendFiguredBassToPart (
@@ -2965,7 +2965,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 //   const msrWholeNotes& backupStepLength)
 // {
 //   // account for backup in part
-//   decrementPartCurrentDrawingMeasurePosition (
+//   decrementPartCurrentDrawingPositionInMeasure (
 //     inputLineNumber,
 //     backupStepLength);
 // }
@@ -3650,7 +3650,7 @@ void msrPart::printPartMeasuresWholeNotesVector (
   os <<
     "fPartMeasuresWholeNotesVector" <<
     ", context: " << context <<
-    ": " ;
+    ": ";
 
   if (fPartNumberOfMeasures == 0) {
     os << "[EMPTY]" << std::endl;
@@ -3763,8 +3763,8 @@ void msrPart::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartCurrentDrawingMeasurePosition" << ": " <<
-    fPartCurrentDrawingMeasurePosition <<
+    "fPartCurrentDrawingPositionInMeasure" << ": " <<
+    fPartCurrentDrawingPositionInMeasure <<
     std::endl;
 
   os << std::left <<
@@ -4360,8 +4360,8 @@ void msrPart::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartCurrentDrawingMeasurePosition" << ": " <<
-    fPartCurrentDrawingMeasurePosition <<
+    "fPartCurrentDrawingPositionInMeasure" << ": " <<
+    fPartCurrentDrawingPositionInMeasure <<
     std::endl;
 
   // print all the staves

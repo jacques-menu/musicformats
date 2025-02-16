@@ -1415,10 +1415,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getOriginalMeasureNumbers () const
                               { return fOriginalMeasureNumbers; }
 
-    void                  setGenerateMeasurePositions ()
-                              { fGenerateMeasurePositions = true; }
-    Bool                  getGenerateMeasurePositions () const
-                              { return fGenerateMeasurePositions; }
+    void                  setGeneratePositionInMeasures ()
+                              { fGeneratePositionInMeasures = true; }
+    Bool                  getGeneratePositionInMeasures () const
+                              { return fGeneratePositionInMeasures; }
 
     void                  setGenerateMeasureMoments ()
                               { fGenerateMeasureMoments = true; }
@@ -1590,8 +1590,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // ornaments
     // --------------------------------------
 
-    mfRational              getDelayedOrnamentsFraction () const
-                              { return fDelayedOrnamentsFraction; }
+    mfRational              getDelayedOrnamentsRational () const
+                              { return fDelayedOrnamentsRational; }
 
 
     // chords display
@@ -2126,7 +2126,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fOriginalMeasureNumbers;
 
-    Bool                  fGenerateMeasurePositions;
+    Bool                  fGeneratePositionInMeasures;
     Bool                  fGenerateMeasureMoments;
 
     // for MusicXML's <note print-object="no">
@@ -2156,7 +2156,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // ornaments
     // --------------------------------------
 
-    mfRational            fDelayedOrnamentsFraction;
+    mfRational            fDelayedOrnamentsRational;
 
 
     // chords display

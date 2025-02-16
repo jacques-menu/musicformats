@@ -51,13 +51,13 @@ std::string msrNoteEventKindAsString (
 
 //______________________________________________________________________________
 S_msrNoteEvent msrNoteEvent::create (
-  const msrWholeNotes&  noteEventMeasurePosition,
+  const msrWholeNotes&  noteEventPositionInMeasure,
   const S_msrNote& noteEventNote,
   msrNoteEventKind noteEventKind)
 {
   msrNoteEvent* obj = new
     msrNoteEvent (
-      noteEventMeasurePosition,
+      noteEventPositionInMeasure,
       noteEventNote,
       noteEventKind);
   assert (obj != nullptr);
@@ -65,11 +65,11 @@ S_msrNoteEvent msrNoteEvent::create (
 }
 
 msrNoteEvent::msrNoteEvent (
-  const msrWholeNotes& noteEventMeasurePosition,
+  const msrWholeNotes& noteEventPositionInMeasure,
   const S_msrNote& noteEventNote,
   msrNoteEventKind noteEventKind)
 {
-  fNoteEventMeasurePosition = noteEventMeasurePosition;
+  fNoteEventPositionInMeasure = noteEventPositionInMeasure;
   fNoteEventNote              = noteEventNote;
   fNoteEventKind              = noteEventKind;
 }
@@ -77,7 +77,7 @@ msrNoteEvent::msrNoteEvent (
 msrNoteEvent::~msrNoteEvent ()
 {}
 
-bool msrNoteEvent::compareNoteEventsByIncreasingMeasurePosition (
+bool msrNoteEvent::compareNoteEventsByIncreasingPositionInMeasure (
   const SMARTP<msrNoteEvent>& first,
   const SMARTP<msrNoteEvent>& second)
 {
@@ -86,12 +86,12 @@ bool msrNoteEvent::compareNoteEventsByIncreasingMeasurePosition (
   bool result = false;
 
   msrWholeNotes
-    firstMeasurePosition =
+    firstPositionInMeasure =
       first->
-        fNoteEventMeasurePosition,
-    secondMeasurePosition =
+        fNoteEventPositionInMeasure,
+    secondPositionInMeasure =
       second->
-        fNoteEventMeasurePosition;
+        fNoteEventPositionInMeasure;
 
   S_msrNote
     firstNote =
@@ -109,7 +109,7 @@ bool msrNoteEvent::compareNoteEventsByIncreasingMeasurePosition (
       second->
         getNoteEventKind ();
 
-  if (firstMeasurePosition == secondMeasurePosition) {
+  if (firstPositionInMeasure == secondPositionInMeasure) {
     switch (firstNoteEventKind) {
       case msrNoteEventKind::kNoteEventStart:
         switch (secondNoteEventKind) {
@@ -138,9 +138,9 @@ bool msrNoteEvent::compareNoteEventsByIncreasingMeasurePosition (
   else {
     result =
       bool (
-        firstMeasurePosition
+        firstPositionInMeasure
           <
-        secondMeasurePosition
+        secondPositionInMeasure
       );
   }
 
@@ -153,7 +153,7 @@ std::string msrNoteEvent::asString () const
 
   ss <<
     "[NoteEvent" <<
-    " @:" << fNoteEventMeasurePosition.asString () <<
+    " @:" << fNoteEventPositionInMeasure.asString () <<
     ' ' <<
     fNoteEventNote->asStringForMeasuresSlices () <<
     ' ';
@@ -203,33 +203,33 @@ std::ostream& operator << (std::ostream& os, const S_msrNoteEvent& elt)
 
 //______________________________________________________________________________
 S_msrSimultaneousNotesChunk msrSimultaneousNotesChunk::create (
-  const msrWholeNotes& chunkMeasurePosition)
+  const msrWholeNotes& chunkPositionInMeasure)
 {
   msrSimultaneousNotesChunk* obj = new
     msrSimultaneousNotesChunk (
-      chunkMeasurePosition);
+      chunkPositionInMeasure);
   assert (obj != nullptr);
   return obj;
 }
 
 msrSimultaneousNotesChunk::msrSimultaneousNotesChunk (
-  const msrWholeNotes& chunkMeasurePosition)
+  const msrWholeNotes& chunkPositionInMeasure)
 {
-  fChunkMeasurePosition = chunkMeasurePosition;
+  fChunkPositionInMeasure = chunkPositionInMeasure;
 }
 
 msrSimultaneousNotesChunk::~msrSimultaneousNotesChunk ()
 {}
 
-bool msrSimultaneousNotesChunk::compareSimultaneousNotesChunksByIncreasingMeasurePosition (
+bool msrSimultaneousNotesChunk::compareSimultaneousNotesChunksByIncreasingPositionInMeasure (
   const SMARTP<msrNoteEvent>& first,
   const SMARTP<msrNoteEvent>& second)
 {
   return
     bool (
-      first->getNoteEventMeasurePosition ()
+      first->getNoteEventPositionInMeasure ()
         <
-      second->getNoteEventMeasurePosition ()
+      second->getNoteEventPositionInMeasure ()
     );
 }
 
@@ -242,7 +242,7 @@ std::string msrSimultaneousNotesChunk::asString () const
 
   ss <<
     "[msrSimultaneousNotesChunk" <<
-    " @:" << fChunkMeasurePosition.asString () <<
+    " @:" << fChunkPositionInMeasure.asString () <<
     ", " <<
     mfSingularOrPlural (
       chunkNotesListSize, "note", "notes") <<
@@ -506,9 +506,9 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
       if (doKeepTheNote) {
         msrWholeNotes
-          noteMeasurePosition =
+          notePositionInMeasure =
             note->
-              getMeasureElementMeasurePosition ();
+              getMeasureElementPositionInMeasure ();
 
         // append note to the slice notes flat list
         fSliceNotesFlatList.push_back (note);
@@ -517,7 +517,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
         S_msrNoteEvent
           noteStartEvent =
             msrNoteEvent::create (
-              noteMeasurePosition,
+              notePositionInMeasure,
               note,
               msrNoteEventKind::kNoteEventStart);
 
@@ -525,8 +525,8 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
         // append a note stop event to the slice notes events list
         msrWholeNotes
-          noteEndMeasurePosition =
-            noteMeasurePosition
+          noteEndPositionInMeasure =
+            notePositionInMeasure
               +
             note->
               getMeasureElementSoundingWholeNotes ();
@@ -534,7 +534,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
         S_msrNoteEvent
           noteStopEvent =
             msrNoteEvent::create (
-              noteEndMeasurePosition,
+              noteEndPositionInMeasure,
               note,
               msrNoteEventKind::kNoteEventStop);
 
@@ -547,11 +547,11 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
 
   // sort the slice notes flat list by measure position
   fSliceNotesFlatList.sort (
-    msrNote::compareNotesByIncreasingMeasurePosition);
+    msrNote::compareNotesByIncreasingPositionInMeasure);
 
   // sort the slice notes events list by measure position
   fSliceNoteEventsList.sort (
-    msrNoteEvent::compareNoteEventsByIncreasingMeasurePosition);
+    msrNoteEvent::compareNoteEventsByIncreasingPositionInMeasure);
 
   // build the simultaneous notes chunks list
   buildTheSimutaneousNotesChunksList ();
@@ -580,7 +580,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
     currentSimultaneousNotesChunk;
 
   msrWholeNotes
-    currentChunkMeasurePosition (-1, 1);
+    currentChunkPositionInMeasure (-1, 1);
 
   for (
     std::list <S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
@@ -590,23 +590,23 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
     S_msrNoteEvent noteEvent = (*i);
 
     msrWholeNotes
-      noteEventMeasurePosition =
+      noteEventPositionInMeasure =
         noteEvent->
-          getNoteEventMeasurePosition ();
+          getNoteEventPositionInMeasure ();
 
-    if (noteEventMeasurePosition != currentChunkMeasurePosition) {
+    if (noteEventPositionInMeasure != currentChunkPositionInMeasure) {
       // a new chunk starts here, create it
       currentSimultaneousNotesChunk =
         msrSimultaneousNotesChunk::create (
-          noteEventMeasurePosition);
+          noteEventPositionInMeasure);
 
       // append it to the simultaneous notes chunks list
       fSliceSimultaneousNotesChunksList.push_back (
         currentSimultaneousNotesChunk);
 
-      // update currentChunkMeasurePosition
-      currentChunkMeasurePosition =
-        noteEventMeasurePosition;
+      // update currentChunkPositionInMeasure
+      currentChunkPositionInMeasure =
+        noteEventPositionInMeasure;
     }
 
     // handle the note event
@@ -661,9 +661,9 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
 
     // handle the note event
 //     msrWholeNotes JMI
-//       noteEventMeasurePosition =
+//       noteEventPositionInMeasure =
 //         noteEvent->
-//           getNoteEventMeasurePosition ();
+//           getNoteEventPositionInMeasure ();
 
     S_msrNote
       note =

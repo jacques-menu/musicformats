@@ -930,7 +930,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
         inputLineNumber.getBareValue (),
         fCurrentPartGroupNumber,
         startedPartGroup,
-        fCurrentPartGroupIdentity) ;
+        fCurrentPartGroupIdentity);
 
   // register it in the part groups data
   registerPartGroupStart (
@@ -1861,6 +1861,9 @@ void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
 // // 				fCurrentTupletNumber <<
 // // 				std::endl;
 // //
+// // 			displayPendingTupletBeginEventsMap (
+// // 				"=====> visitEnd (S_measure& elt)",
+// // 				fCurrentNoteInputLineNumber);
 // // 			displayPendingTupletEndEventsMap (
 // // 				"=====> visitEnd (S_measure& elt)",
 // // 				fCurrentNoteInputLineNumber);
@@ -1890,19 +1893,19 @@ void mxsr2msrSkeletonBuilder::handleChordMemberNoteIfRelevant (
 	}
 }
 
-void mxsr2msrSkeletonBuilder::displayPendingTupletEventsList (
+void mxsr2msrSkeletonBuilder::displayPendingTupletBeginEventsList (
 	const std::string&       title,
 	const mfInputLineNumber& inputStartLineNumber) const
 {
 	gLog <<
-		">>>>> fPendingTupletEventsList contents - " <<
+		">>>>> fPendingTupletBeginEventsList contents - " <<
 		title <<
 		", line " << inputStartLineNumber <<
 		std::endl;
 
 	++gIndenter;
 
-	for (S_mxsrTupletEvent tupletEvent : fPendingTupletEventsList) {
+	for (S_mxsrTupletEvent tupletEvent : fPendingTupletBeginEventsList) {
 		gLog <<
 			tupletEvent <<
 			std::endl;
@@ -1915,37 +1918,22 @@ void mxsr2msrSkeletonBuilder::displayPendingTupletEventsList (
 		std::endl << std::endl;
 }
 
-//________________________________________________________________________
-void mxsr2msrSkeletonBuilder::displayPendingTupletEndEventsMap (
+void mxsr2msrSkeletonBuilder::displayPendingTupletEndEventsList (
 	const std::string&       title,
 	const mfInputLineNumber& inputStartLineNumber) const
 {
 	gLog <<
-		">>>>> fPendingTupletsEndEventsMap contents - " <<
+		">>>>> displayPendingTupletEndEventsList contents - " <<
 		title <<
 		", line " << inputStartLineNumber <<
 		std::endl;
 
 	++gIndenter;
 
-	for (
-		std::pair <int, S_mxsrTupletEvent>
-			thePair : fPendingTupletsEndEventsMap
-	) {
-		int
-			eventSequentialNumber = thePair.first;
-		S_mxsrTupletEvent
-			tupletStopDescription = thePair.second;
-
+	for (S_mxsrTupletEvent tupletEvent : fPendingTupletEndEventsList) {
 		gLog <<
-			eventSequentialNumber << ":" <<
+			tupletEvent <<
 			std::endl;
-
-		++gIndenter;
-		gLog <<
-			tupletStopDescription <<
-			std::endl;
-		--gIndenter;
 	} // for
 
 	--gIndenter;
@@ -1955,83 +1943,232 @@ void mxsr2msrSkeletonBuilder::displayPendingTupletEndEventsMap (
 		std::endl << std::endl;
 }
 
-void mxsr2msrSkeletonBuilder::handlePendingTupletsStopsAfterANoteIfAny (
+// //________________________________________________________________________
+// void mxsr2msrSkeletonBuilder::displayPendingTupletBeginEventsMap (
+// 	const std::string&       title,
+// 	const mfInputLineNumber& inputStartLineNumber) const
+// {
+// 	gLog <<
+// 		">>>>> fPendingTupletsBeginEventsMap contents - " <<
+// 		title <<
+// 		", line " << inputStartLineNumber <<
+// 		std::endl;
+//
+// 	++gIndenter;
+//
+// 	for (
+// 		std::pair <int, S_mxsrTupletEvent>
+// 			thePair : fPendingTupletsBeginEventsMap
+// 	) {
+// 		int
+// 			eventSequentialNumber = thePair.first;
+// 		S_mxsrTupletEvent
+// 			tupletStopDescription = thePair.second;
+//
+// 		gLog <<
+// 			eventSequentialNumber << ":" <<
+// 			std::endl;
+//
+// 		++gIndenter;
+// 		gLog <<
+// 			tupletStopDescription <<
+// 			std::endl;
+// 		--gIndenter;
+// 	} // for
+//
+// 	--gIndenter;
+//
+// 	gLog <<
+// 		"<<<<<" <<
+// 		std::endl << std::endl;
+// }
+//
+// void mxsr2msrSkeletonBuilder::displayPendingTupletEndEventsMap (
+// 	const std::string&       title,
+// 	const mfInputLineNumber& inputStartLineNumber) const
+// {
+// 	gLog <<
+// 		">>>>> fPendingTupletsEndEventsMap contents - " <<
+// 		title <<
+// 		", line " << inputStartLineNumber <<
+// 		std::endl;
+//
+// 	++gIndenter;
+//
+// 	for (
+// 		std::pair <int, S_mxsrTupletEvent>
+// 			thePair : fPendingTupletsEndEventsMap
+// 	) {
+// 		int
+// 			eventSequentialNumber = thePair.first;
+// 		S_mxsrTupletEvent
+// 			tupletStopDescription = thePair.second;
+//
+// 		gLog <<
+// 			eventSequentialNumber << ":" <<
+// 			std::endl;
+//
+// 		++gIndenter;
+// 		gLog <<
+// 			tupletStopDescription <<
+// 			std::endl;
+// 		--gIndenter;
+// 	} // for
+//
+// 	--gIndenter;
+//
+// 	gLog <<
+// 		"<<<<<" <<
+// 		std::endl << std::endl;
+// }
+
+void mxsr2msrSkeletonBuilder::handlePendingTupletBeginEventsAfterANoteIfAny (
 	const mfInputLineNumber& inputStartLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
-		displayPendingTupletEndEventsMap (
-			"handlePendingTupletsStopsAfterANoteIfAny(): ",
+		displayPendingTupletBeginEventsList (
+			"handlePendingTupletBeginEventsAfterANoteIfAny(): ",
 			inputStartLineNumber);
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	if (fPreviousNoteBelongsToATuplet && ! fCurrentNoteBelongsToATuplet) {
+// 	if (fPreviousNoteBelongsToATuplet && ! fCurrentNoteBelongsToATuplet) {
 		// current note is the first one after a tuplet
-		doHandlePendingTupletsEndsIfAny (
+		doHandlePendingTupletBeginEventsIfAny (
 			inputStartLineNumber);
-	}
+// 	}
 }
 
-void mxsr2msrSkeletonBuilder::handlePendingTupletsStopsAtMeasureEndIfAny (
+void mxsr2msrSkeletonBuilder::handlePendingTupletEndEventsAfterANoteIfAny (
 	const mfInputLineNumber& inputStartLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
-		displayPendingTupletEndEventsMap (
-			"handlePendingTupletsStopsAtMeasureEndIfAny(): ",
+		displayPendingTupletEndEventsList (
+			"handlePendingTupletEndEventsAfterANoteIfAny(): ",
 			inputStartLineNumber);
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	doHandlePendingTupletsEndsIfAny (
+// 	if (fPreviousNoteBelongsToATuplet && ! fCurrentNoteBelongsToATuplet) {
+		// current note is the first one after a tuplet
+		doHandlePendingTupletEndEventsIfAny (
+			inputStartLineNumber);
+// 	}
+}
+
+void mxsr2msrSkeletonBuilder::handlePendingTupletEndEventsAtMeasureEndIfAny (
+	const mfInputLineNumber& inputStartLineNumber)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+		displayPendingTupletEndEventsList (
+			"handlePendingTupletEndEventsAtMeasureEndIfAny(): ",
+			inputStartLineNumber);
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+	doHandlePendingTupletEndEventsIfAny (
 		inputStartLineNumber);
 }
 
-void mxsr2msrSkeletonBuilder::doHandlePendingTupletsEndsIfAny (
+void mxsr2msrSkeletonBuilder::doHandlePendingTupletBeginEventsIfAny (
 	const mfInputLineNumber& inputStartLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
-		displayPendingTupletEndEventsMap (
-			"doHandlePendingTupletsEndsIfAny(): ",
+		displayPendingTupletBeginEventsList (
+			"doHandlePendingTupletBeginEventsIfAny(): ",
 			inputStartLineNumber);
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	// register pending tuplet events if any
-	for (
-		std::multimap <int, S_mxsrTupletEvent>::const_iterator
-			it =
-				fPendingTupletsEndEventsMap.begin ();
-		it != fPendingTupletsEndEventsMap.end ();
-		// no increment
-	) {
-		S_mxsrTupletEvent
-			pendingTupletEndEvent =
-				(*it).second;
+	// register pending tuplet begin events if any
+	if (! fPendingTupletBeginEventsList.empty ()) {
+		std::list <S_mxsrTupletEvent>::iterator
+			iBegin = fPendingTupletBeginEventsList.begin (),
+			iEnd   = fPendingTupletBeginEventsList.end (),
+			i      = iBegin;
 
+		for ( ; ; ) {
+			S_mxsrTupletEvent
+				tupletBeginEvent = (*i);
+
+	#ifdef MF_TRACE_IS_ENABLED
+		if (gTraceOahGroup->getTraceTupletsBasics ()) {
+				std::stringstream ss;
+
+				ss <<
+					"--> handling pending tuplet begin event: " <<
+					tupletBeginEvent->asString () <<
+					", line " << inputStartLineNumber;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
+			}
+	#endif // MF_TRACE_IS_ENABLED
+
+			// register pendingTupletBeginEvent
+			fResultingEventsCollection.registerTupletBeginEvent (
+				tupletBeginEvent);
+
+			// forget about it
+			i = fPendingTupletBeginEventsList.erase (i);
+
+			if (++i == iEnd) break;
+		} // for
+	}
+}
+
+void mxsr2msrSkeletonBuilder::doHandlePendingTupletEndEventsIfAny (
+	const mfInputLineNumber& inputStartLineNumber)
+{
 #ifdef MF_TRACE_IS_ENABLED
-		if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
-			std::stringstream ss;
-
-			ss <<
-				"--> handling pendingTupletEvent: " << pendingTupletEndEvent->asString () <<
-				", line " << inputStartLineNumber;
-
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
-		}
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+		displayPendingTupletEndEventsList (
+			"doHandlePendingTupletEndEventsIfAny(): ",
+			inputStartLineNumber);
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-		// register pendingTupletEndEvent
-		fResultingEventsCollection.registerTupletEndEvent (
-			pendingTupletEndEvent);
+	// register pending tuplet end events
+	if (! fPendingTupletEndEventsList.empty ()) {
+		std::list <S_mxsrTupletEvent>::iterator
+			iBegin = fPendingTupletEndEventsList.begin (),
+			iEnd   = fPendingTupletEndEventsList.end (),
+			i      = iBegin;
 
-		// forget about the pending tuplet stop
-		it = fPendingTupletsEndEventsMap.erase (it);
-	} // for
+		for ( ; ; ) {
+			S_mxsrTupletEvent
+				tupletEndEvent = (*i);
+
+	#ifdef MF_TRACE_IS_ENABLED
+		if (gTraceOahGroup->getTraceTupletsBasics ()) {
+				std::stringstream ss;
+
+				ss <<
+					"--> handling pending tuplet end event: " <<
+					tupletEndEvent->asString () <<
+					", line " << inputStartLineNumber;
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
+			}
+	#endif // MF_TRACE_IS_ENABLED
+
+			// register pendingTupletEndEvent
+			fResultingEventsCollection.registerTupletEndEvent (
+				tupletEndEvent);
+
+			// forget about it
+			i = fPendingTupletEndEventsList.erase (i);
+
+			if (++i == iEnd) break;
+		} // for
+	}
 }
 
 //________________________________________________________________________
@@ -4490,7 +4627,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 
 	// handle pending tuplet stops if any, after the chord end if any,
 	// which occurs on the current notes, i.e. the one at the end of the measure JMI v0.9.72
-	handlePendingTupletsStopsAtMeasureEndIfAny (
+	handlePendingTupletEndEventsAtMeasureEndIfAny (
 		fPreviousNoteInputLineNumber);
 
   --gIndenter;
@@ -5262,114 +5399,125 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 }
 
 //________________________________________________________________________
-void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsBasics ()) {
-  	displayGatheredNoteInformations (
-  		"handleTupletEventIfAny()");
-
-    displayPendingTupletEventsList (
-    	"=====> handleTupletEventIfAny()",
-    	fCurrentNoteInputLineNumber);
-
-    displayPendingTupletEndEventsMap (
-    	"=====> handleTupletEventIfAny()",
-    	fCurrentNoteInputLineNumber);
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-	for (
-		std::list <S_mxsrTupletEvent>::const_iterator it = fPendingTupletEventsList.begin ();
-		it != fPendingTupletEventsList.end ();
-		// no increment
-	) {
-		// extract the values from the tuplet
-		S_mxsrTupletEvent tupletEvent = (*it);
-
-#ifdef MF_TRACE_IS_ENABLED
-		if (gTraceOahGroup->getTraceTupletsBasics ()) {
-			std::stringstream ss;
-
-// 			ss <<
-// 	    	"--> handleTupletEventIfAny() 2"
-// 				", tupletInputLineNumber: " <<
-// 				tupletEvent->getTupletInputLineNumber () <<
-// 				", tupletNumber: " <<
-// 				tupletEvent->getTupletNumber () <<
-// 				", tupletEventKind: " <<
-// 				tupletEvent->getTupletTypeKind ();
-
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
-		}
-#endif // MF_TRACE_IS_ENABLED
-
-		// handle the values
-// 		switch (tupletEvent->getTupletTypeKind ()) {
-// 			case msrTupletTypeKind::kTupletTypeNone:
-// 				// nothing to do // JMI v0.9.72
+// void mxsr2msrSkeletonBuilder::handleTupletEventIfAny ()
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsBasics ()) {
+//   	displayGatheredNoteInformations (
+//   		"handleTupletEventIfAny()");
+//
+//     displayPendingTupletBeginEventsList (
+//     	"=====> handleTupletEventIfAny()",
+//     	fCurrentNoteInputLineNumber);
+//     displayPendingTupletEndEventsList (
+//     	"=====> handleTupletEventIfAny()",
+//     	fCurrentNoteInputLineNumber);
+//
+//     displayPendingTupletBeginEventsMap (
+//     	"=====> handleTupletEventIfAny()",
+//     	fCurrentNoteInputLineNumber);
+//     displayPendingTupletEndEventsMap (
+//     	"=====> handleTupletEventIfAny()",
+//     	fCurrentNoteInputLineNumber);
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// 	for (
+// 		std::list <S_mxsrTupletEvent>::const_iterator it = fPendingTupletEventsList.begin ();
+// 		it != fPendingTupletEventsList.end ();
+// 		// no increment
+// 	) {
+// 		// extract the values from the tuplet
+// 		S_mxsrTupletEvent tupletEvent = (*it);
+//
+// #ifdef MF_TRACE_IS_ENABLED
+// 		if (gTraceOahGroup->getTraceTupletsBasics ()) {
+// 			std::stringstream ss;
+//
+// // 			ss <<
+// // 	    	"--> handleTupletEventIfAny() 2"
+// // 				", tupletInputLineNumber: " <<
+// // 				tupletEvent->getTupletInputLineNumber () <<
+// // 				", tupletNumber: " <<
+// // 				tupletEvent->getTupletNumber () <<
+// // 				", tupletEventKind: " <<
+// // 				tupletEvent->getTupletTypeKind ();
+//
+// 			gWaeHandler->waeTrace (
+// 				__FILE__, __LINE__,
+// 				ss.str ());
+// 		}
+// #endif // MF_TRACE_IS_ENABLED
+//
+// 		// handle the values
+// 		switch (tupletEvent->getTupletEventKind ()) {
+// 			case mxsrTupletEventKind::kTupletEvent_NONE:
+// 				// should not occur // JMI v0.9.72
 // 				break;
 //
-// 			case msrTupletTypeKind::kTupletTypeStart:
-// 				// handle pending tuplet stops if any, to have then §
-// 				// occuring before tuplet start on the same note
-// 				handlePendingTupletsStopsAfterANoteIfAny (
-// 					fPreviousNoteInputLineNumber);
+// 			case mxsrTupletEventKind::kTupletEventBegin:
+// 				{
+// 					// handle pending tuplet stops if any, to have then §
+// 					// occuring before tuplet start on the same note
+// 					handlePendingTupletBeginEventsAfterANoteIfAny (
+// 						fPreviousNoteInputLineNumber);
 //
-// 				// create a tuplet end event
-// 				S_mxsrTupletEvent
-// 					tupletBeginEvent =
-// 						fResultingEventsCollection.createATupletEndEvent (
-// 							tupletEvent->getTupletTypeKind (),
-// 							tupletEvent->getNoteStaffNumber (),
-// 							tupletEvent->getNoteVoiceNumber (),
-// 							tupletEvent->getTupletNumber (),
-// 							tupletEvent->getTupletInputLineNumber ());
+// 					// create a tuplet end event
+// 					S_mxsrTupletEvent
+// 						tupletBeginEvent =
+// 							fResultingEventsCollection.createATupletBeginEvent (
+// 								tupletEvent->getTupletNumber (),
+// 								tupletEvent->getNoteSequentialNumber (),
+// 								tupletEvent->getNoteStaffNumber (),
+// 								tupletEvent->getNoteVoiceNumber (),
+// 								tupletEvent->getEventInputLineNumber ());
 //
-// 				// register it as pending
-// 				// register the new tuplet begin event upon the current note at once
-// 				fResultingEventsCollection.registerTupletBeginEvent (
-// 					tupletBeginEvent);
+// // 					// register it as pending
+// // 					// register the new tuplet begin event upon the current note at once
+// // 					fResultingEventsCollection.registerTupletBeginEvent (
+// // 						tupletBeginEvent);
+// 					// keep it as pending
+// 					fPendingTupletsBeginEventsMap.insert (
+// 						std::make_pair (
+// 							fCurrentNoteSequentialNumber,
+// 							tupletBeginEvent));
+// 				}
 // 				break;
 //
-// 			case msrTupletTypeKind::kTupletTypeContinue:
-// 				// nothing to do
-// 				break;
+// 			case mxsrTupletEventKind::kTupletEventEnd:
+// 				{
+// 					// store the tuplet stop description in fPendingTupletsEndEventsMap
+// 					// to be handled later,
+// 					/// since it may occur before the actual last note in the tuplet
+// 					// it event sequential number is temporary,
+// 					// it will be set when the tuplet stop event is created
 //
-// 			case msrTupletTypeKind::kTupletTypeStop:
-// 				// store the tuplet stop description in fPendingTupletsEndEventsMap
-// 				// to be handled later,
-// 				/// since it may occur before the actual last note in the tuplet
-// 				// it event sequential number is temporary,
-// 				// it will be set when the tuplet stop event is created
+// 					// the temporary values will be ignored when the actual ones become known later,
+// 					// when  the tuplet stop event is created by registerTupletEndEvent()
 //
-// 				// the temporary values will be ignored when the actual ones become known later,
-// 				// when  the tuplet stop event is created by registerTupletEndEvent()
+// 					// create a tuplet end event
+// 					S_mxsrTupletEvent
+// 						tupletEndEvent =
+// 							fResultingEventsCollection.createATupletEndEvent (
+// 								tupletEvent->getTupletNumber (),
+// 								tupletEvent->getNoteSequentialNumber (),
+// 								tupletEvent->getNoteStaffNumber (),
+// 								tupletEvent->getNoteVoiceNumber (),
+// 								tupletEvent->getEventInputLineNumber ());
 //
-// 				// create a tuplet end event
-// 				S_mxsrTupletEvent
-// 					tupletEndEvent =
-// 						fResultingEventsCollection.createATupletEndEvent (
-// 							tupletEvent->getTupletTypeKind (),
-// 							tupletEvent->getNoteStaffNumber (),
-// 							tupletEvent->getNoteVoiceNumber (),
-// 							tupletEvent->getTupletNumber (),
-// 							tupletEvent->getTupletInputLineNumber ());
-//
-// 				// register it as pending
-// 				fPendingTupletsEndEventsMap.insert (
-// 					std::make_pair (
-// 						fCurrentNoteSequentialNumber,
-// 						tupletEndEvent));
+// 					// keep it as pending
+// 					fPendingTupletsEndEventsMap.insert (
+// 						std::make_pair (
+// 							fCurrentNoteSequentialNumber,
+// 							tupletEndEvent));
+// 				}
 // 				break;
 // 		} // switch
-
-		// forget about the pending tuplet type kind
-		it = fPendingTupletEventsList.erase (it);
-	} // for
-}
+//
+// 		// forget about the pending tuplet type kind
+// 		it = fPendingTupletEventsList.erase (it);
+// 	} // for
+// }
 
 //________________________________________________________________________
 void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
@@ -5436,6 +5584,9 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 // 				"=====> visitEnd (S_note& elt)",
 // 				fCurrentNoteInputLineNumber);
 //
+// 			displayPendingTupletBeginEventsMap (
+// 				"=====> visitEnd (S_note& elt)",
+// 				fCurrentNoteInputLineNumber);
 // 			displayPendingTupletEndEventsMap (
 // 				"=====> visitEnd (S_note& elt)",
 // 				fCurrentNoteInputLineNumber);
@@ -5553,11 +5704,16 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
  	// Q_NOTE
 
 	// handle pending tuplet stops from the previous note if any
-	handlePendingTupletsStopsAfterANoteIfAny (
+	handlePendingTupletEndEventsAfterANoteIfAny (
 		fPreviousNoteInputLineNumber);
 
-	// register tuplets events if any
-	handleTupletEventIfAny ();
+	// handle tuplet begin events if any
+	handlePendingTupletBeginEventsAfterANoteIfAny (
+		fCurrentNoteInputLineNumber);
+
+	// handle tuplet end events if any
+	handlePendingTupletEndEventsAfterANoteIfAny (
+		fCurrentNoteInputLineNumber);
 
 	// the current note is the new take off candidate
 	fPreviousNoteIsATakeOffCandidate = true;
@@ -5685,15 +5841,13 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
         ss.str ());
     }
 
-		// create an MXSR tuplet
+		// create an tuplet event is relevant
 #ifdef MF_TRACE_IS_ENABLED
 		if (gTraceOahGroup->getTraceTupletsBasics ()) {
 			std::stringstream ss;
 
 			ss <<
-				"Creating a " <<
-				tupletTypeKind <<
-				" MXSR tuplet event, " <<
+				"Creating a tuplet event if relevant" <<
 				", fCurrentTupletNumber: " <<
 				fCurrentTupletNumber <<
 				", fCurrentNoteSequentialNumber: " <<
@@ -5708,33 +5862,95 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet& elt)
 		}
 #endif // MF_TRACE_IS_ENABLED
 
-// 		S_mxsrTuplet
-// 			theMxsrTuplet =
-// 				mxsrTuplet::create (
-// 					tupletTypeKind,
-// 					fCurrentTupletNumber,
-// 					fCurrentNoteInputLineNumber.getBareValue ());
-//
-// 		// push it ahead of fPendingTupletEventsList
-// 		// since there can be several tuplet starts upon a given note
-// #ifdef MF_TRACE_IS_ENABLED
-// 		if (gTraceOahGroup->getTraceTupletsBasics ()) {
-// 			std::stringstream ss;
-//
-// 			ss <<
-// 				"Appending MXSR tuplet " <<
-// 				theMxsrTuplet->asString () <<
-// 				" ahead of fPendingTupletEventsList" <<
-// 				", line " << elt->getInputLineNumber ();
-//
-// 			gWaeHandler->waeTrace (
-// 				__FILE__, __LINE__,
-// 				ss.str ());
-// 		}
-// #endif // MF_TRACE_IS_ENABLED
-//
-// 		fPendingTupletEventsList.push_front (
-// 			theMxsrTuplet);
+		switch (tupletTypeKind) {
+			case msrTupletTypeKind::kTupletTypeNone:
+				// ??? JMI
+				break;
+
+			case msrTupletTypeKind::kTupletTypeStart:
+				{
+					// create a tuplet begin event
+					S_mxsrTupletEvent
+						tupletBeginEvent =
+							fResultingEventsCollection.createATupletBeginEvent (
+								fCurrentTupletNumber,
+								fCurrentNoteSequentialNumber,
+								fCurrentNoteStaffNumber,
+								fCurrentNoteVoiceNumber,
+								fCurrentNoteInputLineNumber);
+
+					// register it in the pending tuplet begins list
+			// push it ahead of fPendingTupletEventsList
+			// since there can be several tuplet starts upon a given note
+	#ifdef MF_TRACE_IS_ENABLED
+					if (gTraceOahGroup->getTraceTupletsBasics ()) {
+						std::stringstream ss;
+
+						ss <<
+							"Appending tuplet end event " <<
+							tupletBeginEvent->asString () <<
+							" ahead of fPendingTupletBeginEventsList" <<
+							", line " << elt->getInputLineNumber ();
+
+						gWaeHandler->waeTrace (
+							__FILE__, __LINE__,
+							ss.str ());
+					}
+	#endif // MF_TRACE_IS_ENABLED
+
+					fPendingTupletBeginEventsList.push_front (
+						tupletBeginEvent);
+
+// 					fPendingTupletsBeginEventsMap.insert (
+// 						std::make_pair (
+// 							fCurrentNoteSequentialNumber,
+// 							tupletBeginEvent));
+				}
+				break;
+
+			case msrTupletTypeKind::kTupletTypeContinue:
+				// no event there
+				break;
+
+			case msrTupletTypeKind::kTupletTypeStop:
+				{
+					// create a tuplet end event
+					S_mxsrTupletEvent
+						tupletEndEvent =
+							fResultingEventsCollection.createATupletEndEvent (
+								fCurrentTupletNumber,
+								fCurrentNoteSequentialNumber,
+								fCurrentNoteStaffNumber,
+								fCurrentNoteVoiceNumber,
+								fCurrentNoteInputLineNumber);
+
+					// register it in the pending tuplet ends list
+	#ifdef MF_TRACE_IS_ENABLED
+					if (gTraceOahGroup->getTraceTupletsBasics ()) {
+						std::stringstream ss;
+
+						ss <<
+							"Appending tuplet end event " <<
+							tupletEndEvent->asString () <<
+							" ahead of fPendingTupletEndEventsList" <<
+							", line " << elt->getInputLineNumber ();
+
+						gWaeHandler->waeTrace (
+							__FILE__, __LINE__,
+							ss.str ());
+					}
+	#endif // MF_TRACE_IS_ENABLED
+
+					fPendingTupletEndEventsList.push_front (
+						tupletEndEvent);
+
+// 					fPendingTupletsEndEventsMap.insert (
+// 						std::make_pair (
+// 							fCurrentNoteSequentialNumber,
+// 							tupletEndEvent));
+				}
+				break;
+		} // switch
   }
 }
 
@@ -5982,3 +6198,105 @@ void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
 
 
 } // namespace
+
+
+
+
+
+
+
+
+// void mxsr2msrSkeletonBuilder::doHandlePendingTupletBeginEventsIfAny (
+// 	const mfInputLineNumber& inputStartLineNumber)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsBasics ()) {
+// 		displayPendingTupletBeginEventsMap (
+// 			"doHandlePendingTupletBeginEventsIfAny(): ",
+// 			inputStartLineNumber);
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// 	// register pending tuplet begin events if any
+// 	for (
+// 		std::multimap <int, S_mxsrTupletEvent>::const_iterator
+// 			it =
+// 				fPendingTupletsBeginEventsMap.begin ();
+// 		it != fPendingTupletsBeginEventsMap.end ();
+// 		// no increment
+// 	) {
+// 		S_mxsrTupletEvent
+// 			pendingTupletBeginEvent =
+// 				(*it).second;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+// 		if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
+// 			std::stringstream ss;
+//
+// 			ss <<
+// 				"--> handling pending tuplet begin event: " <<
+// 				pendingTupletBeginEvent->asString () <<
+// 				", line " << inputStartLineNumber;
+//
+// 			gWaeHandler->waeTrace (
+// 				__FILE__, __LINE__,
+// 				ss.str ());
+// 		}
+// #endif // MF_TRACE_IS_ENABLED
+//
+// 		// register pendingTupletBeginEvent
+// 		fResultingEventsCollection.registerTupletBeginEvent (
+// 			pendingTupletBeginEvent);
+//
+// 		// forget about it
+// 		it = fPendingTupletsBeginEventsMap.erase (it);
+// 	} // for
+// }
+//
+// void mxsr2msrSkeletonBuilder::doHandlePendingTupletEndEventsIfAny (
+// 	const mfInputLineNumber& inputStartLineNumber)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTupletsBasics ()) {
+// 		displayPendingTupletEndEventsMap (
+// 			"doHandlePendingTupletEndEventsIfAny(): ",
+// 			inputStartLineNumber);
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// 	// register pending tuplet end events if any
+// 	for (
+// 		std::multimap <int, S_mxsrTupletEvent>::const_iterator
+// 			it =
+// 				fPendingTupletsEndEventsMap.begin ();
+// 		it != fPendingTupletsEndEventsMap.end ();
+// 		// no increment
+// 	) {
+// 		S_mxsrTupletEvent
+// 			pendingTupletEndEvent =
+// 				(*it).second;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+// 		if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
+// 			std::stringstream ss;
+//
+// 			ss <<
+// 				"--> handling pending tuplet end event: " <<
+// 				pendingTupletEndEvent->asString () <<
+// 				", line " << inputStartLineNumber;
+//
+// 			gWaeHandler->waeTrace (
+// 				__FILE__, __LINE__,
+// 				ss.str ());
+// 		}
+// #endif // MF_TRACE_IS_ENABLED
+//
+// 		// register pendingTupletEndEvent
+// 		fResultingEventsCollection.registerTupletEndEvent (
+// 			pendingTupletEndEvent);
+//
+// 		// forget about it
+// 		it = fPendingTupletsEndEventsMap.erase (it);
+// 	} // for
+// }
+//

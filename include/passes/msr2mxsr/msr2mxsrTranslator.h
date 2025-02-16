@@ -864,7 +864,7 @@ class EXP msr2mxsrTranslator :
     // backup and forward
     // ------------------------------------------------------
 
-    msrWholeNotes         fCurrentMeasurePosition;
+    msrWholeNotes         fCurrentPositionInMeasure;
 
     msrWholeNotes         fCurrentCumulatedSkipsNotesDurations;
     int                       fCurrentCumulatedSkipsStaffNumber;

@@ -111,7 +111,9 @@ class EXP mxsrEvent : public smartable
 
     mfInputLineNumber     fEventInputLineNumber;
 };
-typedef SMARTP<mxsrEvent> S_mxsrEvent;
+
+using S_mxsrEvent = SMARTP<mxsrEvent>;
+
 // EXP std::ostream& operator << (std::ostream& os, const S_mxsrEvent& elt);
 // EXP std::ostream& operator << (std::ostream& os, const mxsrEvent& elt);
 
@@ -216,7 +218,9 @@ class EXP mxsrPartEvent : public mxsrEvent
     std::string           fPartName;
     mfMeasureNumber       fMeasureNumber;
 };
-typedef SMARTP<mxsrPartEvent> S_mxsrPartEvent;
+
+using S_mxsrPartEvent = SMARTP<mxsrPartEvent>;
+
 // EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartEvent& elt);
 // EXP std::ostream& operator << (std::ostream& os, const mxsrPartEvent& elt);
 
@@ -305,7 +309,9 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
     int                   fMeasureRepeatNumber;
 
 };
-typedef SMARTP<mxsrMeasureRepeatEvent> S_mxsrMeasureRepeatEvent;
+
+using S_mxsrMeasureRepeatEvent = SMARTP<mxsrMeasureRepeatEvent>;
+
 // EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartEvent& elt);
 // EXP std::ostream& operator << (std::ostream& os, const mxsrPartEvent& elt);
 
@@ -385,7 +391,9 @@ class EXP mxsrNoteEvent : public mxsrEvent
     mfStaffNumber         fNoteStaffNumber;
     mfVoiceNumber         fNoteVoiceNumber;
 };
-typedef SMARTP<mxsrNoteEvent> S_mxsrNoteEvent;
+
+using S_mxsrNoteEvent = SMARTP<mxsrNoteEvent>;
+
 // EXP std::ostream& operator << (std::ostream& os, const S_mxsrNoteEvent& elt);
 // EXP std::ostream& operator << (std::ostream& os, const mxsrNoteEvent& elt);
 
@@ -512,7 +520,9 @@ class EXP mxsrStaffChangeEvent : public mxsrNoteEvent
     mfStaffNumber         fLandingStaffNumber;
     mfInputLineNumber     fLandingInputLineNumber;
 };
-typedef SMARTP<mxsrStaffChangeEvent> S_mxsrStaffChangeEvent;
+
+using S_mxsrStaffChangeEvent = SMARTP<mxsrStaffChangeEvent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrStaffChangeEvent& elt);
 EXP std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEvent& elt);
 
@@ -600,7 +610,9 @@ class EXP mxsrGraceEvent : public mxsrNoteEvent
 
     mxsrGraceEventKind    fGraceEventKind;
 };
-typedef SMARTP<mxsrGraceEvent> S_mxsrGraceEvent;
+
+using S_mxsrGraceEvent = SMARTP<mxsrGraceEvent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrGraceEvent& elt);
 EXP std::ostream& operator << (std::ostream& os, const mxsrGraceEvent& elt);
 
@@ -684,7 +696,9 @@ class EXP mxsrCueEvent : public mxsrNoteEvent
 
     mxsrCueEventKind      fCueEventKind;
 };
-typedef SMARTP<mxsrCueEvent> S_mxsrCueEvent;
+
+using S_mxsrCueEvent = SMARTP<mxsrCueEvent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrCueEvent& elt);
 EXP std::ostream& operator << (std::ostream& os, const mxsrCueEvent& elt);
 
@@ -767,7 +781,9 @@ class EXP mxsrChordEvent : public mxsrNoteEvent
 
     mxsrChordEventKind    fChordEventKind;
 };
-typedef SMARTP<mxsrChordEvent> S_mxsrChordEvent;
+
+using S_mxsrChordEvent = SMARTP<mxsrChordEvent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrChordEvent& elt);
 EXP std::ostream& operator << (std::ostream& os, const mxsrChordEvent& elt);
 
@@ -857,7 +873,9 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
 
     int                   fTupletNumber;
 };
-typedef SMARTP<mxsrTupletEvent> S_mxsrTupletEvent;
+
+using S_mxsrTupletEvent = SMARTP<mxsrTupletEvent>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrTupletEvent& elt);
 EXP std::ostream& operator << (std::ostream& os, const mxsrTupletEvent& elt);
 
@@ -1212,7 +1230,9 @@ class EXP mxsrEventsCollection : public smartable
 //     std::multimap <int, S_mxsrTupletEvent>
 //                           fTupletEventsMultiMap;
 };
-typedef SMARTP<mxsrEventsCollection> S_mxsrEventsCollection;
+
+using S_mxsrEventsCollection = SMARTP<mxsrEventsCollection>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrEventsCollection& elt);
 EXP std::ostream& operator << (std::ostream& os, const mxsrEventsCollection& elt);
 

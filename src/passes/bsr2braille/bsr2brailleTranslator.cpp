@@ -91,7 +91,7 @@ bsr2brailleTranslator::bsr2brailleTranslator (
           {
             std::stringstream ss;
 
-            ss << "bsr2brailleTranslator: " ;
+            ss << "bsr2brailleTranslator: ";
 
             std::string message = ss.str ();
 

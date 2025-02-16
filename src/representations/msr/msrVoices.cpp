@@ -2333,7 +2333,7 @@ void msrVoice::appendTimeSignatureToVoiceClone (
 
 void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
   int                  inputLineNumber,
-  const msrWholeNotes& measurePosition)
+  const msrWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -2341,7 +2341,7 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
 
     ss <<
       "Inserting hidden measure and barLine at position " <<
-      measurePosition.asString () <<
+      positionInMeasure.asString () <<
       "' to voice clone \"" << fVoiceName << "\"" <<
       ", line " << inputLineNumber;
 
@@ -2357,7 +2357,7 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
   fVoiceLastSegment->
     insertHiddenMeasureAndBarLineInSegmentClone (
       inputLineNumber,
-      measurePosition);
+      positionInMeasure);
 
   --gIndenter;
 }
@@ -2621,7 +2621,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
 void msrVoice::appendHarmonyToVoice (
   int                  inputLineNumber,
   const S_msrHarmony&  harmony,
-  const msrWholeNotes& measurePositionToAppendAt)
+  const msrWholeNotes& positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -2630,7 +2630,7 @@ void msrVoice::appendHarmonyToVoice (
     ss <<
       "Appending harmony " << harmony->asString () <<
       " to voice \"" << fVoiceName << "\"" <<
-      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2675,7 +2675,7 @@ void msrVoice::appendHarmonyToVoice (
     appendHarmonyToSegment (
       inputLineNumber,
       harmony,
-      measurePositionToAppendAt);
+      positionInMeasureToAppendAt);
 
   --gIndenter;
 
@@ -2687,7 +2687,7 @@ void msrVoice::appendHarmonyToVoice (
 void msrVoice::appendHarmoniesListToVoice (
   int                             inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
-  const msrWholeNotes&            measurePositionToAppendAt)
+  const msrWholeNotes&            positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -2697,7 +2697,7 @@ void msrVoice::appendHarmoniesListToVoice (
       "Appending harmonies list to voice \"" << // JMI v0.9.67 HARMFUL
       fVoiceName <<
       "\"" <<
-      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2711,7 +2711,7 @@ void msrVoice::appendHarmoniesListToVoice (
     appendHarmoniesListToSegment (
       inputLineNumber,
       harmoniesList,
-      measurePositionToAppendAt);
+      positionInMeasureToAppendAt);
 }
 
 void msrVoice::appendHarmonyToVoiceClone (
@@ -2772,7 +2772,7 @@ void msrVoice::appendHarmonyToVoiceClone (
 void msrVoice::appendFiguredBassToVoice (
   int                     inputLineNumber,
   const S_msrFiguredBass& figuredBass,
-  const msrWholeNotes&    measurePositionToAppendAt)
+  const msrWholeNotes&    positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -2827,7 +2827,7 @@ void msrVoice::appendFiguredBassToVoice (
     appendFiguredBassToSegment (
       inputLineNumber,
       figuredBass,
-      measurePositionToAppendAt);
+      positionInMeasureToAppendAt);
 
   --gIndenter;
 
@@ -2839,7 +2839,7 @@ void msrVoice::appendFiguredBassToVoice (
 void msrVoice::appendFiguredBassesListToVoice (
   int                                inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
-  const msrWholeNotes&               measurePositionToAppendAt)
+  const msrWholeNotes&               positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -2850,7 +2850,7 @@ void msrVoice::appendFiguredBassesListToVoice (
 //       figuredBasssesList->asString () << // JMI v0.9.67 HARMFUL
       " to voice \"" << fVoiceName << "\"" <<
       "\"" <<
-      ", measurePositionToAppendAt: " << measurePositionToAppendAt <<
+      ", positionInMeasureToAppendAt: " << positionInMeasureToAppendAt <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2864,7 +2864,7 @@ void msrVoice::appendFiguredBassesListToVoice (
     appendFiguredBassesListToSegment (
       inputLineNumber,
       figuredBasssesList,
-      measurePositionToAppendAt);
+      positionInMeasureToAppendAt);
 }
 
 void msrVoice::appendFiguredBassToVoiceClone (
@@ -2922,17 +2922,17 @@ void msrVoice::appendFiguredBassToVoiceClone (
   --gIndenter;
 }
 
-// void msrVoice::padUpToMeasurePositionInVoice (
+// void msrVoice::padUpToPositionInMeasureInVoice (
 //   int                  inputLineNumber,
-//   const msrWholeNotes& wholeNotesMeasurePosition)
+//   const msrWholeNotes& wholeNotesPositionInMeasure)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasurePositions ()) {
+//   if (gTraceOahGroup->getTracePositionInMeasures ()) {
 //     std::stringstream ss;
 //
 //     ss <<
 //       "Padding up to measure position '" <<
-//       wholeNotesMeasurePosition.asString () <<
+//       wholeNotesPositionInMeasure.asString () <<
 //       "' whole notes in voice \"" <<
 //       fVoiceName <<
 //       "\", line " << inputLineNumber <<
@@ -2956,9 +2956,9 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //
 //   // pad up the voice's last segment
 //   fVoiceLastSegment->
-//     padUpToMeasurePositionInSegment (
+//     padUpToPositionInMeasureInSegment (
 //       inputLineNumber,
-//       wholeNotesMeasurePosition);
+//       wholeNotesPositionInMeasure);
 //
 //   // pad up the voice's stanzas // JMI ???
 //   if (fVoiceStanzasMap.size ()) {
@@ -2968,7 +2968,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //       stanza->
 //         padUpToMeasureCurrentAccumulatedWholeNotesDurationInStanza (
 //           inputLineNumber,
-//           wholeNotesMeasurePosition);
+//           wholeNotesPositionInMeasure);
 //     } // for
 //   }
 //
@@ -2977,7 +2977,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
 void msrVoice::backupByWholeNotesStepLengthInVoice (
   int                  inputLineNumber,
-  const msrWholeNotes& backupTargetMeasureElementMeasurePosition)
+  const msrWholeNotes& backupTargetMeasureElementPositionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
@@ -2985,7 +2985,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
 
     ss <<
       "Backup by a '" <<
-      backupTargetMeasureElementMeasurePosition.asString () <<
+      backupTargetMeasureElementPositionInMeasure.asString () <<
       "' whole notes step length in voice \"" <<
       fVoiceName <<
       "\", line " << inputLineNumber;
@@ -3010,7 +3010,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   fVoiceLastSegment->
     backupByWholeNotesStepLengthInSegment (
       inputLineNumber,
-      backupTargetMeasureElementMeasurePosition);
+      backupTargetMeasureElementPositionInMeasure);
 
   --gIndenter;
 }
@@ -3052,7 +3052,7 @@ void msrVoice::cascadeAppendPaddingNoteToVoice (
   // account for padding note's wholeNotes in the part drawing measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartCurrentDrawingMeasurePosition (
+      incrementPartCurrentDrawingPositionInMeasure (
         inputLineNumber,
         forwardStepLength);
 
@@ -3317,9 +3317,9 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 
   // fetch the part current measure position
   msrWholeNotes
-    partCurrentDrawingMeasurePosition =
+    partCurrentDrawingPositionInMeasure =
       part->
-        getPartCurrentDrawingMeasurePosition ();
+        getPartCurrentDrawingPositionInMeasure ();
 
   if (! fVoiceLastSegment) {
     std::stringstream ss;
@@ -3346,7 +3346,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
   fVoiceLastSegment->
     appendNoteToSegment (
       note,
-      partCurrentDrawingMeasurePosition);
+      partCurrentDrawingPositionInMeasure);
 
   // is this note the shortest one in this voice?
   this->
@@ -3358,7 +3358,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
 
   // account for note's wholeNotes in the part drawing measure position
   part->
-    incrementPartCurrentDrawingMeasurePosition (
+    incrementPartCurrentDrawingPositionInMeasure (
       note->getInputLineNumber (),
       note->getMeasureElementSoundingWholeNotes ());
 
@@ -3563,7 +3563,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
   // account for chord's wholeNotes in the part drawing measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartCurrentDrawingMeasurePosition (
+      incrementPartCurrentDrawingPositionInMeasure (
         chord->getInputLineNumber (),
         chord->getMeasureElementSoundingWholeNotes ());
 
@@ -3634,7 +3634,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
   // account for tuplet's wholeNotes in the part's drawing measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartCurrentDrawingMeasurePosition (
+      incrementPartCurrentDrawingPositionInMeasure (
         tuplet->getInputLineNumber (),
         tuplet->getMeasureElementSoundingWholeNotes ());
 
@@ -8153,12 +8153,12 @@ void msrVoice::appendEmptyMeasuresToVoice (
     setNoteOccupiesAFullMeasure ();
 
   // append it to emptyMeasure
-  msrWholeNotes partCurrentDrawingMeasurePosition; // needs to be supplied ??? JMI v0.9.70
+  msrWholeNotes partCurrentDrawingPositionInMeasure; // needs to be supplied ??? JMI v0.9.70
 
   emptyMeasure->
     appendNoteToMeasureAtPosition (
       wholeMeasureRestNote,
-      partCurrentDrawingMeasurePosition);
+      partCurrentDrawingPositionInMeasure);
 
   // append emptyMeasure to the voice last segment
 #ifdef MF_TRACE_IS_ENABLED
@@ -10636,7 +10636,7 @@ void msrVoice::removeNoteFromVoice (
   // update the part current measure position
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      decrementPartCurrentDrawingMeasurePosition (
+      decrementPartCurrentDrawingPositionInMeasure (
         inputLineNumber,
         note->
           getMeasureElementSoundingWholeNotes ());
@@ -10770,15 +10770,15 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
 
            // fetch the part current measure position
           msrWholeNotes
-            partCurrentDrawingMeasurePosition =
+            partCurrentDrawingPositionInMeasure =
               part->
-                getPartCurrentDrawingMeasurePosition ();
+                getPartCurrentDrawingPositionInMeasure ();
 
          stanza->
             appendMeasureEndSyllableToStanza (
               inputLineNumber,
               fVoiceLastAppendedMeasure,
-              partCurrentDrawingMeasurePosition);
+              partCurrentDrawingPositionInMeasure);
         } // for
       }
 

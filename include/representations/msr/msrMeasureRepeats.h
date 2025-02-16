@@ -110,7 +110,9 @@ class EXP msrMeasureRepeatPattern : public msrElement
     // segment
     S_msrSegment          fMeasureRepeatPatternSegment;
 };
-typedef SMARTP<msrMeasureRepeatPattern> S_msrMeasureRepeatPattern;
+
+using S_msrMeasureRepeatPattern = SMARTP<msrMeasureRepeatPattern>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatPattern& elt);
 
 //______________________________________________________________________________
@@ -199,7 +201,9 @@ class EXP msrMeasureRepeatReplicas : public msrElement
     // segment
     S_msrSegment          fMeasureRepeatReplicasSegment;
 };
-typedef SMARTP<msrMeasureRepeatReplicas> S_msrMeasureRepeatReplicas;
+
+using S_msrMeasureRepeatReplicas = SMARTP<msrMeasureRepeatReplicas>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatReplicas& elt);
 
 //______________________________________________________________________________
@@ -370,7 +374,9 @@ class EXP msrMeasureRepeat : public msrSegmentElement
     msrMeasureRepeatBuildPhaseKind
                           fCurrentMeasureRepeatBuildPhaseKind;
 };
-typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
+
+using S_msrMeasureRepeat = SMARTP<msrMeasureRepeat>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeat& elt);
 
 
@@ -485,7 +491,9 @@ class EXP msrMeasureRepeatElement : public msrElement
     std::list <S_msrVoiceElement>
                           fMeasureRepeatElementsList;
 };
-typedef SMARTP<msrMeasureRepeatElement> S_msrMeasureRepeatElement;
+
+using S_msrMeasureRepeatElement = SMARTP<msrMeasureRepeatElement>;
+
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatElement& elt);
 */
 

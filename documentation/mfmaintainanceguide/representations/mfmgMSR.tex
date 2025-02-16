@@ -266,7 +266,7 @@ enum class msrNotesDurationKind {
 
 Measure positions are represented by \code{mfRational} numbers such as {\tt 3/8}, {\tt 1/1} being a whole note.
 
-Measure positions are stored in \field{msrMeasureElement}{fMeasureElementMeasurePosition} in \class{msrMeasureElement}, defined in \msrBoth{msrMeasureElement}:
+Measure positions are stored in \field{msrMeasureElement}{fMeasureElementPositionInMeasure} in \class{msrMeasureElement}, defined in \msrBoth{msrMeasureElement}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP msrMeasureElement : public msrElement
 {
@@ -286,7 +286,7 @@ class EXP msrMeasureElement : public msrElement
 
     std::string           fBarLineUpLinkToMeasure->getMeasureNumber ();
 
-    mfRational              fMeasureElementMeasurePosition;
+    mfRational              fMeasureElementPositionInMeasure;
     mfRational              fMeasureElementVoicePosition;
 };
 \end{lstlisting}
@@ -368,7 +368,7 @@ enum class msrNoteEventKind {
 
 \Class{msrNoteEvent} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    mfRational              fNoteEventMeasurePosition;
+    mfRational              fNoteEventPositionInMeasure;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 

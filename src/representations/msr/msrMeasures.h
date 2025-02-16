@@ -313,22 +313,22 @@ class EXP msrMeasure : public msrSegmentElement
                             const msrWholeNotes& duration,
                             const S_msrVoice&    voice);
 
-//     void                  padUpToMeasurePositionInMeasure (
+//     void                  padUpToPositionInMeasureInMeasure (
 //                             int                  inputLineNumber,
-//                             const msrWholeNotes& measurePositionToPadUpTo);
+//                             const msrWholeNotes& positionInMeasureToPadUpTo);
 
-    void                  padUpToMeasurePosition (
+    void                  padUpToPositionInMeasure (
                             int                  inputLineNumber,
-                            const msrWholeNotes& measurePositionToPadUpTo);
+                            const msrWholeNotes& positionInMeasureToPadUpTo);
 
     void                  padUpToPositionAtTheEndOfTheMeasure (
                             int                  inputLineNumber,
-                            const msrWholeNotes& measurePositionToPadUpTo,
+                            const msrWholeNotes& positionInMeasureToPadUpTo,
                             const std::string&   context);
 
     void                  backupByWholeNotesStepLengthInMeasure (
                             int                  inputLineNumber,
-                            const msrWholeNotes& backupTargetMeasureElementMeasurePosition);
+                            const msrWholeNotes& backupTargetMeasureElementPositionInMeasure);
 
     void                  appendPaddingSkipNoteToMeasure (
                             int                  inputLineNumber,
@@ -373,7 +373,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  insertHiddenMeasureAndBarLineInMeasureClone (
                             int                  inputLineNumber,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
     // transposition
 
@@ -450,7 +450,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendNoteToMeasureAtPosition (
                             const S_msrNote&     note,
-                            const msrWholeNotes& measurePosition);
+                            const msrWholeNotes& positionInMeasure);
 
     void                  appendNoteToMeasure (
                             const S_msrNote& note);
@@ -484,7 +484,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendHarmonyToMeasure (
                             int                  inputLineNumber,
                             const S_msrHarmony&  harmony,
-                            const msrWholeNotes& measurePositionToAppendAt);
+                            const msrWholeNotes& positionInMeasureToAppendAt);
 
     void                  appendHarmonyToMeasureWithoutPadUp (
                             int                  inputLineNumber,
@@ -493,7 +493,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendHarmoniesListToMeasure (
                             int                            inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const msrWholeNotes&           measurePositionToAppendAt);
+                            const msrWholeNotes&           positionInMeasureToAppendAt);
 
     void                  appendHarmonyToMeasureClone (
                             const S_msrHarmony& harmony);
@@ -511,7 +511,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendFiguredBassToMeasure (
                             int                     inputLineNumber,
                             const S_msrFiguredBass& figuredBass,
-                            const msrWholeNotes&    measurePositionToAppendAt);
+                            const msrWholeNotes&    positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToMeasureWithoutPadUp (
                             int                     inputLineNumber,
@@ -520,7 +520,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendFiguredBassesListToMeasure (
                             int                                inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const msrWholeNotes&               measurePositionToAppendAt);
+                            const msrWholeNotes&               positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToMeasureClone (
                             const S_msrFiguredBass& figuredBass);
@@ -827,7 +827,7 @@ class EXP msrMeasure : public msrSegmentElement
                                                     i,
                             const S_msrFiguredBass& previousFiguredBass,
                             const S_msrFiguredBass& currentFiguredBass,
-                            const msrWholeNotes&    currentFiguredBassMeasurePosition);
+                            const msrWholeNotes&    currentFiguredBassPositionInMeasure);
 
     void                  handleSubsequentFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
@@ -836,7 +836,7 @@ class EXP msrMeasure : public msrSegmentElement
                                                     i,
                             const S_msrFiguredBass& previousFiguredBass,
                             const S_msrFiguredBass& currentFiguredBass,
-                            const msrWholeNotes&    currentFiguredBassMeasurePosition);
+                            const msrWholeNotes&    currentFiguredBassPositionInMeasure);
 
     void                  handleTheLastFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
@@ -862,9 +862,9 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendElementAtTheEndOfMeasure (
                             const S_msrMeasureElement& elem);
 
-    void                  insertElementAtMeasurePosition (
+    void                  insertElementAtPositionInMeasure (
                             int                        inputLineNumber,
-                            const msrWholeNotes&       measurePosition,
+                            const msrWholeNotes&       positionInMeasure,
                             const S_msrMeasureElement& elem);
 
     void                  handleEmptyMeasure (
