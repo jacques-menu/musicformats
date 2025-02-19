@@ -5229,12 +5229,12 @@ void msrVoice::handleVoiceLevelRepeatStart (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        S_msrMeasure
-          dummyMeasure =
-            fVoiceLastSegment->
-              removeLastMeasureFromSegment (
-                inputLineNumber,
-                "handleVoiceLevelRepeatStart() 55");
+//         S_msrMeasure
+//           dummyMeasure = // JMI ??? v0.9.72
+//             fVoiceLastSegment->
+//               removeLastMeasureFromSegment (
+//                 inputLineNumber,
+//                 "handleVoiceLevelRepeatStart() 55");
 
         // append the voice last segment to the initial voice elements list
         appendVoiceLastSegmentToInitialVoiceElements (
@@ -5257,10 +5257,10 @@ void msrVoice::handleVoiceLevelRepeatStart (
         }
 #endif // MF_TRACE_IS_ENABLED
 
-        createNewLastSegmentFromItsFirstMeasureForVoice (
-          inputLineNumber,
-          dummyMeasure,
-          "handleVoiceLevelRepeatStart() 5555");
+//         createNewLastSegmentFromItsFirstMeasureForVoice (
+//           inputLineNumber,
+//           dummyMeasure,
+//           "handleVoiceLevelRepeatStart() 5555");
       }
     }
   }
@@ -6252,12 +6252,12 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    S_msrMeasure
-      dummyMeasure =
-        fVoiceLastSegment->
-          removeLastMeasureFromSegment (
-            inputLineNumber,
-            "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 2");
+//     S_msrMeasure
+//       dummyMeasure =
+//         fVoiceLastSegment->
+//           removeLastMeasureFromSegment (
+//             inputLineNumber,
+//             "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 2");
 
     // move voice last segment into the repeat common part
     std::stringstream s2;
@@ -6436,12 +6436,12 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    S_msrMeasure
-      dummyMeasure =
-        fVoiceLastSegment->
-          removeLastMeasureFromSegment (
-            inputLineNumber,
-            "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 3");
+//     S_msrMeasure
+//       dummyMeasure =
+//         fVoiceLastSegment->
+//           removeLastMeasureFromSegment (
+//             inputLineNumber,
+//             "handleVoiceLevelRepeatEndingStartWithoutExplicitStart() 3");
 
     // move voice last segment into the repeat common part
     std::stringstream s2;
@@ -7130,10 +7130,10 @@ void msrVoice::cascadeCreateAMeasureRepeatAndAppendItInVoice (
   // (i.e. the one containing:
   //   <measure-repeat ... type="start">2</measure-repeat>)
   // which is the first replica measure
-  S_msrMeasure
-    firstReplicaMeasure =
-      removeLastMeasureFromVoice (
-        inputLineNumber);
+//   S_msrMeasure
+//     firstReplicaMeasure =
+//       removeLastMeasureFromVoice (
+//         inputLineNumber);
 
   // create the measures repeat repeated segment
   S_msrSegment
@@ -10606,106 +10606,106 @@ S_msrElement msrVoice::removeLastElementFromVoice (  // JMI
 }
 */
 
-void msrVoice::removeNoteFromVoice (
-  int              inputLineNumber,
-  const S_msrNote& note)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChords ()) {
-    std::stringstream ss;
+// void msrVoice::removeNoteFromVoice (
+//   int              inputLineNumber,
+//   const S_msrNote& note)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceChords ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing note '" <<
+//       note->asShortString () <<
+//       "' from voice \"" << fVoiceName << "\"";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   // remove note from voice last segment
+//   fVoiceLastSegment->
+//     removeNoteFromSegment (
+//       inputLineNumber,
+//       note);
+//
+//   // update the part current measure position
+//   fVoiceUpLinkToStaff->
+//     getStaffUpLinkToPart ()->
+//       decrementPartCurrentDrawingPositionInMeasure (
+//         inputLineNumber,
+//         note->
+//           getMeasureElementSoundingWholeNotes ());
+//
+//   --gIndenter;
+// }
 
-    ss <<
-      "Removing note '" <<
-      note->asShortString () <<
-      "' from voice \"" << fVoiceName << "\"";
+// void msrVoice::removeElementFromVoice (
+//   int                 inputLineNumber,
+//   const S_msrElement& element)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceVoices ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing element '" <<
+//       element->asShortString () <<
+//       "' from voice \"" << fVoiceName << "\"";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   fVoiceLastSegment->
+//     removeElementFromSegment (
+//       inputLineNumber,
+//       element);
+//
+//   --gIndenter;
+// }
 
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ++gIndenter;
-
-  // remove note from voice last segment
-  fVoiceLastSegment->
-    removeNoteFromSegment (
-      inputLineNumber,
-      note);
-
-  // update the part current measure position
-  fVoiceUpLinkToStaff->
-    getStaffUpLinkToPart ()->
-      decrementPartCurrentDrawingPositionInMeasure (
-        inputLineNumber,
-        note->
-          getMeasureElementSoundingWholeNotes ());
-
-  --gIndenter;
-}
-
-void msrVoice::removeElementFromVoice (
-  int                 inputLineNumber,
-  const S_msrElement& element)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceVoices ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing element '" <<
-      element->asShortString () <<
-      "' from voice \"" << fVoiceName << "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ++gIndenter;
-
-  fVoiceLastSegment->
-    removeElementFromSegment (
-      inputLineNumber,
-      element);
-
-  --gIndenter;
-}
-
-S_msrMeasure msrVoice::removeLastMeasureFromVoice (
-  int inputLineNumber)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing last measure from voice \"" <<
-      fVoiceName <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  ++gIndenter;
-
-  // remove last measure
-  S_msrMeasure
-    result =
-      fVoiceLastSegment->
-        removeLastMeasureFromSegment (
-          inputLineNumber,
-          "removeLastMeasureFromVoice()");
-
-  --gIndenter;
-
-  // return it
-  return result;
-}
+// S_msrMeasure msrVoice::removeLastMeasureFromVoice (
+//   int inputLineNumber)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasures ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing last measure from voice \"" <<
+//       fVoiceName <<
+//       "\"";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   ++gIndenter;
+//
+//   // remove last measure
+//   S_msrMeasure
+//     result =
+//       fVoiceLastSegment->
+//         removeLastMeasureFromSegment (
+//           inputLineNumber,
+//           "removeLastMeasureFromVoice()");
+//
+//   --gIndenter;
+//
+//   // return it
+//   return result;
+// }
 
 void msrVoice::finalizeLastAppendedMeasureInVoice (
   int inputLineNumber)

@@ -2027,7 +2027,7 @@ void mxsrEventsCollection::fetchTupletBeginsAtNoteSequentialNumber (
   ) {
     S_mxsrTupletEvent tupletEvent = it->second;
 
-    std::cout << "tupletEvent: " << tupletEvent << std::endl;
+//     std::cout << "tupletEvent: " << tupletEvent << std::endl; JMI
 
     recipientTupletBeginsList.push_back (tupletEvent);
   } // for
@@ -2076,7 +2076,7 @@ void mxsrEventsCollection::fetchTupletEndsListAtNoteSequentialNumber (
   ) {
     S_mxsrTupletEvent tupletEvent = it->second;
 
-    std::cout << "tupletEvent: " << tupletEvent << std::endl;
+//     std::cout << "tupletEvent: " << tupletEvent << std::endl; JMI
 
     recipientTupletEndsList.push_back (tupletEvent);
   } // for
@@ -2774,13 +2774,15 @@ void mxsrEventsCollection::print (std::ostream& os) const
 //       "elements") <<
     std::endl << std::endl;
 
+  // all events
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMxsrEvents ()) {
+  if (! fAllEventsList.empty ()) {
     os << "--------" << std::endl << std::endl;
     printAllEventsList (os);
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // measure repeat events
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
     os << "--------" << std::endl << std::endl;
@@ -2788,36 +2790,41 @@ void mxsrEventsCollection::print (std::ostream& os) const
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // staff change events
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaffChangesBasics ()) {
+  if (! (fStaffChangeTakeOffsMap.empty () && fStaffChangeLandingsMap.empty ())) {
     os << "--------" << std::endl << std::endl;
     printStaffChangeEvents (os);
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // grace events
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceGraceNotesBasics ()) {
+  if (! (fGraceBeginsMap.empty () && fGraceEndsMap.empty ())) {
     os << "--------" << std::endl << std::endl;
     printGraceEvents (os);
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // cue events
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceCueNotesBasics ()) {
+  if (! (fCueBeginsMap.empty () && fCueEndsMap.empty ())) {
     os << "--------" << std::endl << std::endl;
     printCueEvents (os);
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // chord events
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChordsBasics ()) {
+  if (! (fChordBeginsMap.empty () && fChordEndsMap.empty ())) {
     os << "--------" << std::endl << std::endl;
     printChordEvents (os);
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // tuplet events
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+  if (! (fTupletBeginsMultiMap.empty () && fTupletEndsMultiMap.empty ())) {
     os << "--------" << std::endl << std::endl;
     printTupletEvents (os);
   }

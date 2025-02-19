@@ -1580,8 +1580,6 @@ class EXP mxsr2msrSkeletonPopulator :
     msrNotesDurationKind      fCurrentNoteNormalTypeNotesDuration;
 
     // nested tuplets are numbered 1, 2, ...
-    // there can be several <tuplet /> markups on a given note
-    std::list <int>           fCurrentTupletNumbersStack;
     int                       fPreviousTupletNumber;
 
     Bool                      fOnGoingTupletActual;
@@ -1661,7 +1659,7 @@ class EXP mxsr2msrSkeletonPopulator :
     // detailed notes handling
     // ------------------------------------------------------
 
-		void											displayGatheredNoteInformation (
+		void											displayGatheredNoteInformations (
 																const std::string& context) const;
 
     void                      handleCurrentNote (

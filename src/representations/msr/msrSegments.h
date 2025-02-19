@@ -406,17 +406,17 @@ class EXP msrSegment : public msrVoiceElement
 
     // removing elements
 
-    void                  removeNoteFromSegment (
-                            int              inputLineNumber,
-                            const S_msrNote& note);
+//     void                  removeNoteFromSegment (
+//                             int              inputLineNumber,
+//                             const S_msrNote& note);
 
-    void                  removeElementFromSegment (
-                            int                 inputLineNumber,
-                            const S_msrElement& element);
+//     void                  removeElementFromSegment (
+//                             int                 inputLineNumber,
+//                             const S_msrElement& element);
 
-    S_msrMeasure          removeLastMeasureFromSegment (
-                            int                inputLineNumber,
-                            const std::string& context);
+//     S_msrMeasure          removeLastMeasureFromSegment (
+//                             int                inputLineNumber,
+//                             const std::string& context);
 
     void                  finalizeAllTheMeasuresOfSegment (
                             int inputLineNumber);

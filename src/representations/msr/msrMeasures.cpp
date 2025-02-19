@@ -4284,213 +4284,216 @@ void msrMeasure::appendBarNumberCheckToMeasure (
 //   fMeasureContainsSound = true;
 // }
 
-void msrMeasure::removeNoteFromMeasure (
-  int              inputLineNumber,
-  const S_msrNote& note)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceNotes ()
-      ||
-    gTraceOahGroup->getTraceNotesDurations ()
-      ||
-    gTraceOahGroup->getTracePositionInMeasures ()
-  ) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing note '" <<
-      note->asShortString () <<
-      "' from measure " <<
-      this->asShortString () <<
-      " in voice \"" <<
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"," <<
-      "fMeasureLastHandledNote:" <<
-      std::endl <<
-      fMeasureLastHandledNote->asShortString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  for (
-    std::list <S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
-    i != fMeasureElementsList.end ();
-    ++i
-  ) {
-    if ((*i) == note) {
-      // found note, erase it
-      i = fMeasureElementsList.erase (i);
-
-      // update measure whole notes
-      setMeasureCurrentAccumulatedWholeNotesDuration (
-        inputLineNumber,
-        fMeasureCurrentAccumulatedWholeNotesDuration
-          -
-        fMeasureLastHandledNote->getMeasureElementSoundingWholeNotes (),
-        "removeNoteFromMeasure(): "
-          +
-        note->asShortString ());
-
-      // return from function
-      return;
-    }
-  } // for
-
-  S_msrVoice
-    segmentUpLinkToVoice =
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ();
-
-  S_msrPart
-    segmentVoicePart =
-      fetchMeasureUpLinkToPart ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotes ()) {
-    std::stringstream ss;
-
-    ss <<
-      std::endl << std::endl <<
-      "@@@@@@@@@@@@@@@@@ segmentVoicePart" <<
-      std::endl <<
-      segmentVoicePart <<
-      std::endl <<
-      "@@@@@@@@@@@@@@@@@" <<
-      std::endl << std::endl;
-
-    ss <<
-      std::endl << std::endl <<
-      "@@@@@@@@@@@@@@@@@ segmentUpLinkToVoice" <<
-      std::endl <<
-      segmentUpLinkToVoice <<
-      std::endl <<
-      "@@@@@@@@@@@@@@@@@" <<
-      std::endl << std::endl;
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  std::stringstream ss;
-
-  ss <<
-    "cannot remove note " <<
-    note <<
-    " from measure " <<
-    this->asShortString () <<
-    " in voice \"" <<
-    segmentUpLinkToVoice->getVoiceName () <<
-    "\"," <<
-    " since this note has not been found in fMeasureElementsList";
-
-  msrInternalError (
-    gServiceRunData->getInputSourceName (),
-    inputLineNumber,
-    __FILE__, __LINE__,
-    ss.str ());
-}
-
-void msrMeasure::removeElementFromMeasure (
-  int                 inputLineNumber,
-  const S_msrElement& element)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (
-    gTraceOahGroup->getTraceMeasures ()
-      ||
-    gTraceOahGroup->getTraceNotesDurations ()
-      ||
-    gTraceOahGroup->getTracePositionInMeasures ()
-  ) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing element:" <<
-      std::endl;
-
-    ++gIndenter;
-    ss <<
-      " JMI ??? element->elementAsString ()" << std::endl;
-    --gIndenter;
-
-    ss <<
-      std::endl <<
-      " from measure " <<
-      this->asShortString () <<
-      " in voice \"" <<
-      fMeasureUpLinkToSegment->
-        getSegmentUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"," <<
-      std::endl;
-
-    ++gIndenter;
-    ss <<
-      "fMeasureLastHandledNote:" <<
-      std::endl <<
-      fMeasureLastHandledNote->asString () <<
-      std::endl;
-    --gIndenter;
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  for (
-    std::list <S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
-    i != fMeasureElementsList.end ();
-    ++i
-  ) {
-    if ((*i) == element) {
-      // found element, erase it
-      i = fMeasureElementsList.erase (i);
-
-      // update measure whole notes
-      setMeasureCurrentAccumulatedWholeNotesDuration (
-        inputLineNumber,
-        fMeasureCurrentAccumulatedWholeNotesDuration
-          -
-        fMeasureLastHandledNote->getMeasureElementSoundingWholeNotes (),
-        "removeElementFromMeasure(): "
-          +
-        element->asShortString ());
-
-      // return from function
-      return;
-    }
-  } // for
-
-  std::stringstream ss;
-
-  ss <<
-    "cannot remove element " <<
-    element->asString () <<
-    " from measure " <<
-    this->asShortString () <<
-    " in voice \"" <<
-    fMeasureUpLinkToSegment->
-      getSegmentUpLinkToVoice ()->
-        getVoiceName () <<
-    "\"," <<
-    " since this element has not been found in fMeasureElementsList";
-
+// void msrMeasure::removeNoteFromMeasure (
+//   int              inputLineNumber,
+//   const S_msrNote& note)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (
+//     gTraceOahGroup->getTraceNotes ()
+//       ||
+//     gTraceOahGroup->getTraceNotesDurations ()
+//       ||
+//     gTraceOahGroup->getTracePositionInMeasures ()
+//   ) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing note '" <<
+//       note->asShortString () <<
+//       "' from measure " <<
+//       this->asShortString () <<
+//       " in voice \"" <<
+//       fMeasureUpLinkToSegment->
+//         getSegmentUpLinkToVoice ()->
+//           getVoiceName () <<
+//       "\"," <<
+//       "fMeasureLastHandledNote:" <<
+//       std::endl <<
+//       fMeasureLastHandledNote->asShortString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   for (
+//     std::list <S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
+//     i != fMeasureElementsList.end ();
+//     ++i
+//   ) {
+//     if ((*i) == note) {
+//       // found note, erase it
+//       i = fMeasureElementsList.erase (i);
+//
+//       // update measure whole notes
+//       setMeasureCurrentAccumulatedWholeNotesDuration (
+//         inputLineNumber,
+//         fMeasureCurrentAccumulatedWholeNotesDuration
+//           -
+//         fMeasureLastHandledNote->getMeasureElementSoundingWholeNotes (),
+//         "removeNoteFromMeasure(): "
+//           +
+//         note->asShortString ());
+//
+//       // return from function
+//       return;
+//     }
+//   } // for
+//
+//   S_msrVoice
+//     segmentUpLinkToVoice =
+//       fMeasureUpLinkToSegment->
+//         getSegmentUpLinkToVoice ();
+//
+//   S_msrPart
+//     segmentVoicePart =
+//       fetchMeasureUpLinkToPart ();
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceNotes ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       std::endl << std::endl <<
+//       "@@@@@@@@@@@@@@@@@ segmentVoicePart" <<
+//       std::endl <<
+//       segmentVoicePart <<
+//       std::endl <<
+//       "@@@@@@@@@@@@@@@@@" <<
+//       std::endl << std::endl;
+//
+//     ss <<
+//       std::endl << std::endl <<
+//       "@@@@@@@@@@@@@@@@@ segmentUpLinkToVoice" <<
+//       std::endl <<
+//       segmentUpLinkToVoice <<
+//       std::endl <<
+//       "@@@@@@@@@@@@@@@@@" <<
+//       std::endl << std::endl;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   std::stringstream ss;
+//
+//   ss <<
+//     "cannot remove note " <<
+//     note <<
+//     " from measure " <<
+//     this->asShortString () <<
+//     " in voice \"" <<
+//     segmentUpLinkToVoice->getVoiceName () <<
+//     "\"," <<
+//     " since this note has not been found in fMeasureElementsList";
+//
 //   msrInternalError (
 //     gServiceRunData->getInputSourceName (),
 //     inputLineNumber,
 //     __FILE__, __LINE__,
 //     ss.str ());
-  mxsr2msrInternalError (
-    gServiceRunData->getInputSourceName (),
-    inputLineNumber,
-    __FILE__, __LINE__,
-    ss.str ());
-}
+// }
+
+// void msrMeasure::removeElementFromMeasure (
+//   int                 inputLineNumber,
+//   const S_msrElement& element)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (
+//     gTraceOahGroup->getTraceMeasures ()
+//       ||
+//     gTraceOahGroup->getTraceNotesDurations ()
+//       ||
+//     gTraceOahGroup->getTracePositionInMeasures ()
+//   ) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing element:" <<
+//       std::endl;
+//
+//     ++gIndenter;
+//     ss <<
+//       " JMI ??? element->elementAsString ()" << std::endl;
+//     --gIndenter;
+//
+//     ss <<
+//       std::endl <<
+//       " from measure " <<
+//       this->asShortString () <<
+//       " in voice \"" <<
+//       fMeasureUpLinkToSegment->
+//         getSegmentUpLinkToVoice ()->
+//           getVoiceName () <<
+//       "\"," <<
+//       std::endl;
+//
+//     ++gIndenter;
+//     ss <<
+//       "fMeasureLastHandledNote:" <<
+//       std::endl <<
+//       fMeasureLastHandledNote->asString () <<
+//       std::endl;
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   for (
+//     std::list <S_msrMeasureElement>::iterator i = fMeasureElementsList.begin ();
+//     i != fMeasureElementsList.end ();
+//     ++i
+//   ) {
+//     if ((*i) == element) {
+//       // found element, erase it
+//       i = fMeasureElementsList.erase (i);
+//
+//       // update measure whole notes
+//       setMeasureCurrentAccumulatedWholeNotesDuration (
+//         inputLineNumber,
+//         fMeasureCurrentAccumulatedWholeNotesDuration
+//           -
+//         fMeasureLastHandledNote->getMeasureElementSoundingWholeNotes (),
+//         "removeElementFromMeasure(): "
+//           +
+//         element->asShortString ());
+//
+//       // return from function
+//       return;
+//     }
+//   } // for
+//
+//   std::stringstream ss;
+//
+//   ss <<
+//     "cannot remove element " <<
+//     element->asString () <<
+//     " from measure " <<
+//     this->asShortString () <<
+//     " in voice \"" <<
+//     fMeasureUpLinkToSegment->
+//       getSegmentUpLinkToVoice ()->
+//         getVoiceName () <<
+//     "\"," <<
+//     " since this element has not been found in fMeasureElementsList";
+//
+//   gLog << ss.str () << std::endl;
+//
+//   abort();
+// //   msrInternalError (
+// //     gServiceRunData->getInputSourceName (),
+// //     inputLineNumber,
+// //     __FILE__, __LINE__,
+// //     ss.str ());
+//   mxsr2msrInternalError (
+//     gServiceRunData->getInputSourceName (),
+//     inputLineNumber,
+//     __FILE__, __LINE__,
+//     ss.str ());
+// }
 
 void msrMeasure::appendNoteToMeasureNotesFlatList (
   const S_msrNote& note)

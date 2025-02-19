@@ -103,7 +103,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 }
 
 // increase the indentation by 1, postfix operator
-mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
+mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int n)
 {
 #ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
   std::stringstream ss;
@@ -112,7 +112,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
     "% >>>>> Incrementing INDENTER from " << fIndentation;
 #endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
 
-  ++fIndentation;
+  fIndentation += n;
 
 #ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
   ss <<
@@ -128,7 +128,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
 }
 
 // decrease the indentation by 1, postfix operator
-mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
+mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int n)
 {
 #ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
   std::stringstream ss;
@@ -137,7 +137,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
     "% >>>>> Decrementing INDENTER from " << fIndentation;
 #endif // MF_INDENTATION_DEBUGGING_IS_ENABLED
 
-  --fIndentation;
+  fIndentation -= n;
 
 #ifdef MF_INDENTATION_DEBUGGING_IS_ENABLED
   ss <<

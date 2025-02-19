@@ -725,13 +725,13 @@ R"(Write a trace of the MusicXML tree activity to standard error.)",
         "fTraceMxsr",
         fTraceMxsr));
 
-  // MusicXML tree visiting
+  // MXSR visiting
 
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
          "trace-mxsr-visitors", "tmxsrvis",
-R"(Write a trace of the MusicXML tree visiting activity to standard error.)",
+R"(Write a trace of the MXSR visiting activity to standard error.)",
         "fTraceMxsrVisitors",
         fTraceMxsrVisitors));
 }

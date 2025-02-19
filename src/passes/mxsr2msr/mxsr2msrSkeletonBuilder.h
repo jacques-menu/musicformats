@@ -20,7 +20,6 @@
 
 #include "mxsr2msrEvents.h"
 #include "mxsr2msrPartGroups.h"
-#include "mxsr2msrTuplets.h"
 #include "mxsr2msrVoices.h"
 
 #include "msrPartGroups.h"
@@ -752,14 +751,8 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      handlePendingTupletEndEventsAfterANoteIfAny (
                                 const mfInputLineNumber& inputStartLineNumber);
 
-    void                      handlePendingTupletEndEventsAtMeasureEndIfAny (
-                                const mfInputLineNumber& inputStartLineNumber);
-
-    void                      doHandlePendingTupletBeginEventsIfAny (
-                                const mfInputLineNumber& inputStartLineNumber);
-
-    void                      doHandlePendingTupletEndEventsIfAny (
-                                const mfInputLineNumber& inputStartLineNumber);
+//     void                      handlePendingTupletEndEventsAtMeasureEndIfAny (
+//                                 const mfInputLineNumber& inputStartLineNumber);
 
 
     // display note gathered informations

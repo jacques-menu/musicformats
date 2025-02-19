@@ -1234,7 +1234,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // trace MusicXML tree events
+  // trace MXSR events
 
   fTraceMxsrEventsAtom =
     oahBooleanAtom::create (
@@ -1246,6 +1246,19 @@ R"(Write a trace of the MXSR events to standard error.)",
   subGroup->
     appendAtomToSubGroup (
       fTraceMxsrEventsAtom);
+
+  // display MXSR events
+
+  fDisplayMxsrEventsAtom =
+    oahBooleanAtom::create (
+      "display-mxsr-events", "dmxsre",
+R"(Write the MXSR events found to standard error.)",
+      "fDisplayMxsrEvents",
+      fDisplayMxsrEvents);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fDisplayMxsrEventsAtom);
 }
 
 void traceOahGroup::initializeGraceNotesTraceOah ()
@@ -2435,7 +2448,7 @@ R"(Parts)",
   S_oahTwoBooleansAtom
     traceStavesBasicsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-stave-basics", "tstavesb",
+        "trace-staves-basics", "tstavesb",
 R"(Staves basics)",
         "fTraceStavesBasics",
         fTraceStavesBasics,
@@ -2991,7 +3004,7 @@ This option implies '-trace-tuplets-basics, -ttupsb' and '-trace-tuplets, -ttups
   S_oahTwoBooleansAtom
     traceMultiMeasureRestsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-multi-measure-rests", "tmultmearest",
+        "trace-multi-measure-rests", "tmmrests",
 R"(Multi-measure rests)",
         "fTraceMultiMeasureRests",
         fTraceMultiMeasureRests,
@@ -3684,9 +3697,12 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceLyricsDetails <<
     std::endl <<
 
-    // MXML events
+    // MXSR events
     std::setw (fieldWidth) << "fTraceMxsrEvents" << ": " <<
     fTraceMxsrEvents <<
+    std::endl <<
+    std::setw (fieldWidth) << "fDisplayMxsrEvents" << ": " <<
+    fDisplayMxsrEvents <<
     std::endl <<
 
     // words

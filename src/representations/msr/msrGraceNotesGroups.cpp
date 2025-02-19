@@ -368,86 +368,86 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
   fGraceNotesGroupElementsList.push_back (chord);
 }
 
-S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
-  int inputLineNumber)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceGraceNotes ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing last note from grace notes group " <<
-      asShortString ();
-//      " in voice \"" <<
-//      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
-//      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    ! fGraceNotesGroupElementsList.empty (),
-    "fGraceNotesGroupElementsList.empty ()");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceGraceNotes ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing last note from grace notes '" <<
-      asString () <<
-      "'";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  S_msrNote result;
-
-  if (
-    S_msrNote note = dynamic_cast<msrNote*>(&(*fGraceNotesGroupElementsList.back ()))
-    ) {
-    result = note;
-  }
-
-  else {
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      fInputLineNumber,
-      __FILE__, __LINE__,
-      "removeLastNoteFromGraceNotesGroup (): grace notes group element should be a note");
-  }
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceGraceNotes ()) {
-    std::stringstream ss;
-
-    ss <<
-      "This last note from grace notes '" <<
-      asString () <<
-      "' turns out to be '" <<
-      result->asShortString () <<
-      "'";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fGraceNotesGroupElementsList.pop_back ();
-
-  return result;
-}
+// S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
+//   int inputLineNumber)
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceGraceNotes ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing last note from grace notes group " <<
+//       asShortString ();
+// //      " in voice \"" <<
+// //      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
+// //      "\"";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     ! fGraceNotesGroupElementsList.empty (),
+//     "fGraceNotesGroupElementsList.empty ()");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceGraceNotes ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing last note from grace notes '" <<
+//       asString () <<
+//       "'";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   S_msrNote result;
+//
+//   if (
+//     S_msrNote note = dynamic_cast<msrNote*>(&(*fGraceNotesGroupElementsList.back ()))
+//     ) {
+//     result = note;
+//   }
+//
+//   else {
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       fInputLineNumber,
+//       __FILE__, __LINE__,
+//       "removeLastNoteFromGraceNotesGroup (): grace notes group element should be a note");
+//   }
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceGraceNotes ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "This last note from grace notes '" <<
+//       asString () <<
+//       "' turns out to be '" <<
+//       result->asShortString () <<
+//       "'";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fGraceNotesGroupElementsList.pop_back ();
+//
+//   return result;
+// }
 
 void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasures (
   const S_msrMeasure&  measure,
@@ -632,7 +632,7 @@ std::string msrGraceNotesGroup::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[GraceNotesGroup asShortString ()" <<
+    "[GraceNotesGroup" <<
     ", fGraceNotesGroupKind: " <<
     fGraceNotesGroupKind <<
     ", fGraceNotesGroupMeasureNumber: \"" <<
@@ -827,10 +827,10 @@ void msrGraceNotesGroup::print (std::ostream& os) const
     "[GraceNotesGroup" <<
     ", fGraceNotesGroupKind: " <<
     fGraceNotesGroupKind <<
-    ", line " << fInputLineNumber <<
     ", " <<
     mfSingularOrPlural (
       fGraceNotesGroupElementsList.size (), "element", "elements") <<
+    ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
@@ -844,7 +844,8 @@ void msrGraceNotesGroup::print (std::ostream& os) const
     os << std::endl;
     ++gIndenter;
     os <<
-      fGraceNotesGroupUpLinkToNote;
+      fGraceNotesGroupUpLinkToNote <<
+      std::endl;
     --gIndenter;
   }
   else {
@@ -887,7 +888,7 @@ void msrGraceNotesGroup::print (std::ostream& os) const
 
   os <<
     std::setw (fieldWidth) <<
-    "fGraceNotesGroupElementsList";
+    "fGraceNotesGroupElementsList" <<  ": ";
   if (! fGraceNotesGroupElementsList.empty ()) {
     os << std::endl;
 

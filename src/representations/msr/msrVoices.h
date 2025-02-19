@@ -662,16 +662,16 @@ class EXP msrVoice : public msrElement
 
     // removing elements from voice
 
-    void                  removeNoteFromVoice (
-                            int              inputLineNumber,
-                            const S_msrNote& note);
+//     void                  removeNoteFromVoice (
+//                             int              inputLineNumber,
+//                             const S_msrNote& note);
 
-    void                  removeElementFromVoice (
-                            int                 inputLineNumber,
-                            const S_msrElement& element);
+//     void                  removeElementFromVoice (
+//                             int                 inputLineNumber,
+//                             const S_msrElement& element);
 
-    S_msrMeasure          removeLastMeasureFromVoice (
-                            int inputLineNumber);
+//     S_msrMeasure          removeLastMeasureFromVoice (
+//                             int inputLineNumber);
 
     // segments
 

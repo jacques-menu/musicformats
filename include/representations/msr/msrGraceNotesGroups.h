@@ -149,8 +149,8 @@ class EXP msrGraceNotesGroup : public msrElement
     void                  appendNoteToGraceNotesGroup (const S_msrNote& note);
     void                  appendChordToGraceNotesGroup (const S_msrChord& chord);
 
-    S_msrNote             removeLastNoteFromGraceNotesGroup (
-                            int inputLineNumber);
+//     S_msrNote             removeLastNoteFromGraceNotesGroup (
+//                             int inputLineNumber);
 
 
   public:

@@ -168,8 +168,8 @@ class EXP msrTuplet : public msrTupletElement
 
     S_msrNote             fetchTupletFirstNonGraceNote () const;
 
-    S_msrNote             removeFirstNoteFromTuplet ( // JMI
-                            int inputLineNumber);
+//     S_msrNote             removeFirstNoteFromTuplet ( // JMI
+//                             int inputLineNumber);
 
 //     S_msrNote             removeLastNoteFromTuplet (
 //                             int inputLineNumber);

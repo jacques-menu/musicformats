@@ -224,11 +224,7 @@ class EXP msrOahGroup : public oahGroup
     // set and get
     // ------------------------------------------------------
 
-    // trace
-    void                  setTraceMsr ()
-                              { fTraceMsr = true; }
-    Bool                  getTraceMsr () const
-                              { return fTraceMsr; }
+    // MSR visiting
 
     void                  setTraceMsrVisitors ()
                               { fTraceMsrVisitors = true; }
@@ -466,9 +462,7 @@ class EXP msrOahGroup : public oahGroup
     // private fields
     // ------------------------------------------------------
 
-    // trace
-    Bool                  fTraceMsr;
-
+    // MSR visiting
     Bool                  fTraceMsrVisitors;
 
     // header

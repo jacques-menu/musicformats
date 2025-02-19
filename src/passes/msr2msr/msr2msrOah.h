@@ -341,25 +341,30 @@ class EXP msr2msrOahGroup : public oahGroup
     Bool                  fExpandToHarmonyBandBook;
 
     // staves
-    std::set <std::string> fIgnoreMsrStavesSet;
+    std::set <std::string>
+                          fIgnoreMsrStavesSet;
     S_oahStringSetElementAtom
                           fIgnoreMsrStavesSetAtom;
 
-    std::set <std::string> fKeepMsrStavesSet;
+    std::set <std::string>
+                          fKeepMsrStavesSet;
     S_oahStringSetElementAtom
                           fKeepMsrStavesSetAtom;
 
     // voices
-    std::set <std::string> fIgnoreMsrVoicesSet;
+    std::set <std::string>
+                          fIgnoreMsrVoicesSet;
     S_oahStringSetElementAtom
                           fIgnoreMsrVoicesSetAtom;
 
-    std::set <std::string> fKeepMsrVoicesSet;
+    std::set <std::string>
+                          fKeepMsrVoicesSet;
     S_oahStringSetElementAtom
                           fKeepMsrVoicesSetAtom;
 
     // breaks
-    std::set <std::string> fInserPageBreakAfterMeasureSet;
+    std::set <std::string>
+                          fInserPageBreakAfterMeasureSet;
     S_oahStringSetElementAtom
                           fInserPageBreakAfterMeasureAtom;
 

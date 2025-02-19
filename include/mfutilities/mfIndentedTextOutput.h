@@ -71,10 +71,10 @@ class EXP mfOutputIndenter
     // decrease the indentation by 1, prefix operator
     mfOutputIndenter&     operator-- ();
 
-    // increase the indentation by 1, postfix operator
-    mfOutputIndenter      operator++ (int);
-    // decrease the indentation by 1, postfix operator
-    mfOutputIndenter      operator-- (int);
+    // increase the indentation by 'n', postfix operator
+    mfOutputIndenter      operator++ (int n);
+    // decrease the indentation by 'n', postfix operator
+    mfOutputIndenter      operator-- (int n);
 
     mfOutputIndenter&     increment (int value = 1);
     mfOutputIndenter&     decrement (int value = 1);

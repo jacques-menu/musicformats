@@ -6046,10 +6046,10 @@ void msr2lpsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fCurrentVoiceClone->
-      removeElementFromVoice (
-        elt->getInputLineNumber (),
-        fCurrentAfterGraceNotesGroupElement);
+//     fCurrentVoiceClone->
+//       removeElementFromVoice (
+//         elt->getInputLineNumber (),
+//         fCurrentAfterGraceNotesGroupElement);
 
     // forget about the current after grace notes element
     fCurrentAfterGraceNotesGroupElement = nullptr;
@@ -7288,7 +7288,10 @@ void msr2lpsrTranslator::visitStart (S_msrChord& elt)
   }
 
   else {
-    // NOT appending the chord to the voice clone at once
+    // append current chord clone to the current voice
+    fCurrentVoiceClone->
+      appendChordToVoice (
+        fCurrentChordClone);
   }
 
   fOnGoingChord = true;
@@ -7311,16 +7314,16 @@ void msr2lpsrTranslator::visitEnd (S_msrChord& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   if (fTupletClonesStack.size ()) {
-    // append current chord clone to the current, innermost tuplet
-    fTupletClonesStack.front ()->
-      appendChordToTuplet (
-        fCurrentChordClone);
+//     // append current chord clone to the current, innermost tuplet
+//     fTupletClonesStack.front ()->
+//       appendChordToTuplet (
+//         fCurrentChordClone);
   }
   else {
-    // append current chord clone to the current voice
-    fCurrentVoiceClone->
-      appendChordToVoice (
-        fCurrentChordClone);
+//     // append current chord clone to the current voice
+//     fCurrentVoiceClone->
+//       appendChordToVoice (
+//         fCurrentChordClone);
   }
 
 //   // finalize the current chord clone

@@ -3394,66 +3394,66 @@ int msrNote::fetchNoteSlurStopsNumber () const
 	return result;
 }
 
-S_msrDynamic msrNote::removeFirstDynamics () // JMI
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceDynamics ()) {
-    std::stringstream ss;
+// S_msrDynamic msrNote::removeFirstDynamics () // JMI
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceDynamics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing first dynamic from note '" <<
+//       asShortString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     fNoteDynamicsList.size () > 0,
+//     "fNoteDynamicsList is empty");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   S_msrDynamic dyn = fNoteDynamicsList.front ();
+//   fNoteDynamicsList.pop_front ();
+//
+//   return dyn;
+// }
 
-    ss <<
-      "Removing first dynamic from note '" <<
-      asShortString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fNoteDynamicsList.size () > 0,
-    "fNoteDynamicsList is empty");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  S_msrDynamic dyn = fNoteDynamicsList.front ();
-  fNoteDynamicsList.pop_front ();
-
-  return dyn;
-}
-
-S_msrWedge msrNote::removeFirstWedge () // JMI
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWedges ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing first wedge from note '" <<
-      asShortString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fNoteDynamicsList.size () > 0,
-    "fNoteDynamicsList is empty");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  S_msrWedge wedge = fNoteWedgesList.front ();
-
-  fNoteWedgesList.pop_front ();
-
-  return wedge;
-}
+// S_msrWedge msrNote::removeFirstWedge () // JMI
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceWedges ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing first wedge from note '" <<
+//       asShortString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     fNoteDynamicsList.size () > 0,
+//     "fNoteDynamicsList is empty");
+// #endif // MF_SANITY_CHECKS_ARE_ENABLED
+//
+//   S_msrWedge wedge = fNoteWedgesList.front ();
+//
+//   fNoteWedgesList.pop_front ();
+//
+//   return wedge;
+// }
 
 void msrNote::appendSyllableToNote (
   const S_msrSyllable& syllable)
@@ -5126,9 +5126,8 @@ void msrNote::print (std::ostream& os) const
 
     ++gIndenter;
 
-//     fGraceNotesGroupBeforeNote->print (os);
     os <<
-    	fGraceNotesGroupBeforeNote->asString ();
+    	fGraceNotesGroupBeforeNote;
 
     --gIndenter;
   }
@@ -5307,7 +5306,7 @@ void msrNote::print (std::ostream& os) const
   if (fNoteOrnamentsList.size ()) {
     os <<
       std::setw (fieldWidth) <<
-      "fNoteOrnamentsList";
+      "fNoteOrnamentsList:";
       os << std::endl;
 
     ++gIndenter;

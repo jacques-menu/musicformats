@@ -38,41 +38,51 @@
 ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////
 
-//______________________________________________________________________________
-// comment the following definition if abort on internal errors is desired
-// CAUTION: DON'T USE THIS IN PRODUCTION CODE,
-// since that could kill a session on a web server, for example
-#define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
-
-//______________________________________________________________________________
-// uncomment the following definition if maintaince runs are desired
-#define MF_MAINTAINANCE_RUNS_ARE_ENABLED
+// uncomment the following definition if regular, non-debug mode
+// is desired for efficiency
+#define MF_DEBUG_MODE
 
 
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-//                            SPEED
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
+#ifdef MF_DEBUG_MODE
 
-//______________________________________________________________________________
-// uncomment the following definition if abort on internal errors is desired
-#define MF_SANITY_CHECKS_ARE_ENABLED
+  //______________________________________________________________________________
+  // comment the following definition if abort on internal errors is desired
+  // CAUTION: DON'T USE THIS IN PRODUCTION CODE,
+  // since that could kill a session on a web server, for example
+  #define MF_ABORT_TO_DEBUG_ERRORS_IS_ENABLED
+
+  //______________________________________________________________________________
+  // uncomment the following definition if maintaince runs are desired
+  #define MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
 
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
-//                            TRACE
-////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  //                            SPEED
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
 
-//______________________________________________________________________________
-// uncomment the following definition if trace is desired
-#define MF_TRACE_IS_ENABLED
+  //______________________________________________________________________________
+  // uncomment the following definition if abort on internal errors is desired
+  #define MF_SANITY_CHECKS_ARE_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
-  #include "mfTraceOah.h"
-#endif // MF_TRACE_IS_ENABLED
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  //                            TRACE
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  //______________________________________________________________________________
+  // uncomment the following definition if trace is desired
+  #define MF_TRACE_IS_ENABLED
+
+  #ifdef MF_TRACE_IS_ENABLED
+    #include "mfTraceOah.h"
+  #endif // MF_TRACE_IS_ENABLED
+
+
+#endif // MF_DEBUG_MODE
 
 
 #endif // ___mfPreprocessorSettings___

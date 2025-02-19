@@ -587,13 +587,13 @@ class EXP msrMeasure : public msrSegmentElement
 
     // removing elements from measure
 
-    void                  removeNoteFromMeasure (
-                            int              inputLineNumber,
-                            const S_msrNote& note);
-
-    void                  removeElementFromMeasure (
-                            int                 inputLineNumber,
-                            const S_msrElement& elem);
+//     void                  removeNoteFromMeasure (
+//                             int              inputLineNumber,
+//                             const S_msrNote& note);
+//
+//     void                  removeElementFromMeasure (
+//                             int                 inputLineNumber,
+//                             const S_msrElement& elem);
 
     // notes flat list
 

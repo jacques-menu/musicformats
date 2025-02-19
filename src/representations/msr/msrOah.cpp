@@ -1002,6 +1002,16 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
+  // MSR visiting
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "trace-msr-visitors", "tmsrvis",
+R"(Write a trace of the MSR visiting activity to standard error.)",
+        "fTraceMsrVisitors",
+        fTraceMsrVisitors));
+
   // display partgroups
 
   subGroup->
@@ -1645,10 +1655,6 @@ void msrOahGroup::displayMsrOahValues (int valueFieldWidth) // JMI SUPERFLOUS???
   ++gIndenter;
 
   gLog << std::left <<
-    std::setw (valueFieldWidth) << "fTraceMsr" << ": " <<
-    fTraceMsr <<
-    std::endl <<
-
     std::setw (valueFieldWidth) << "fTraceMsrVisitors" << ": " <<
     fTraceMsrVisitors <<
     std::endl <<

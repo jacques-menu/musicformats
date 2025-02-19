@@ -2396,12 +2396,12 @@ void msrChord::appendStemToChord (
         " and " << (*i)->asString () <<
         " don't have the same kind, but are in one and the same chord";
 
-//      msrInternalError ( // not internal actually JMI ???
-      msrInternalWarning ( // not internal actually JMI ???
-        gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
-  //      __FILE__, __LINE__,
-        ss.str ());
+// //      msrInternalError ( // not internal actually JMI ??? VITAL
+//       msrInternalWarning ( // not internal actually JMI ???
+//         gServiceRunData->getInputSourceName (),
+//         fInputLineNumber,
+//   //      __FILE__, __LINE__,
+//         ss.str ());
     }
   } // for
 #endif // MF_SANITY_CHECKS_ARE_ENABLED

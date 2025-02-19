@@ -820,7 +820,7 @@ class EXP msrNote : public msrTupletElement
     void                  appendOtherDynamicToNote (
                             const S_msrOtherDynamic& otherDynamic);
 
-    S_msrDynamic          removeFirstDynamics (); // ??? JMI v0.9.66
+//     S_msrDynamic          removeFirstDynamics (); // ??? JMI v0.9.66
 
     // words
     void                  appendWordsToNote (
@@ -850,7 +850,7 @@ class EXP msrNote : public msrTupletElement
     void                  appendWedgeToNote (
                             const S_msrWedge& wedge);
 
-    S_msrWedge            removeFirstWedge (); // JMI v0.9.66
+//     S_msrWedge            removeFirstWedge (); // JMI v0.9.66
 
     // segnos
     void                  appendSegnoToNote (

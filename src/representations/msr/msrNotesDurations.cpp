@@ -638,12 +638,12 @@ EXP void checkNoteDurationKindAndWholeNotesDurationConsistency (
       wholeNotesDuration <<
       " are inconsistent";
 
-//     msrError (
-    msrWarning (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-//       __FILE__, __LINE__,
-      ss.str ());
+// //     msrError ( // JMI VITAL
+//     msrWarning (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+// //       __FILE__, __LINE__,
+//       ss.str ());
   }
 }
 

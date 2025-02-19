@@ -213,7 +213,13 @@ class EXP traceOahGroup : public oahGroup
     S_oahBooleanAtom      getTraceMxsrEventsAtom () const
                               { return fTraceMxsrEventsAtom; }
 
-    // staff changes
+    Bool                  getDisplayMxsrEvents () const
+                              { return fDisplayMxsrEvents; }
+
+    S_oahBooleanAtom      getDisplayMxsrEventsAtom () const
+                              { return fDisplayMxsrEventsAtom; }
+
+    // staff changes handling
     void                  setTraceTraceStaffChangesBasics ()
                               { fTraceStaffChangesBasics = true; }
     void                  setTraceStaffChanges ()
@@ -973,6 +979,9 @@ class EXP traceOahGroup : public oahGroup
 
     Bool                  fTraceMxsrEvents;
     S_oahBooleanAtom      fTraceMxsrEventsAtom;
+
+    Bool                  fDisplayMxsrEvents;
+    S_oahBooleanAtom      fDisplayMxsrEventsAtom;
 
     // staff changes
     // --------------------------------------

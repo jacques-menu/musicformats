@@ -321,7 +321,7 @@ void msr2msrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
     "fPartHiddenMeasureAndBarLineDescrList:" <<
     std::endl;
 
-  if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
+  if (! fPartHiddenMeasureAndBarLineDescrList.empty ()) {
     ++gIndenter;
 
     constexpr int fieldWidth = 19;
@@ -424,7 +424,7 @@ void msr2msrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
     "fPartHiddenMeasureAndBarLineDescrList:" <<
     std::endl;
 
-  if (fPartHiddenMeasureAndBarLineDescrList.size ()) {
+  if (! fPartHiddenMeasureAndBarLineDescrList.empty ()) {
     std::list <S_msrHiddenMeasureAndBarLineDescr>::const_iterator
       iBegin = fPartHiddenMeasureAndBarLineDescrList.begin (),
       iEnd   = fPartHiddenMeasureAndBarLineDescrList.end (),
@@ -867,7 +867,7 @@ void msr2msrTranslator::visitStart (S_msrPartGroup& elt)
   S_msrPartGroup
     partGroupClone =
       elt->createPartGroupNewbornClone (
-        fPartGroupsStack.size ()
+        ! fPartGroupsStack.empty ()
           ? fPartGroupsStack.front ()
           : nullptr,
         fResultingNewMsrScore);
@@ -946,7 +946,7 @@ void msr2msrTranslator::visitEnd (S_msrPartGroup& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fPartGroupsStack.size () > 0) {
+  if (! fPartGroupsStack.empty ()) {
     // pop current partGroup from this visitors's stack
     // since it is elt itself
 #ifdef MF_TRACE_IS_ENABLED
@@ -2234,7 +2234,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
   }
 
   // is fCurrentMeasureNumber in the parts ignore IDs set?
-  if (gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().size ()) {
+  if (! gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().empty ()) {
     std::set <std::string>::iterator
       it =
         gGlobalMsr2msrOahGroup->getInserPageBreakAfterMeasureSet ().find (
@@ -2373,7 +2373,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //         syllableElementsList =
 //           elt->getSyllableElementsList ();
 //
-//       if (syllableElementsList.size ()) {
+//       if (! syllableElementsList.empty ()) {
 //         // build a single words value from the texts list
 //         // JMI create an msrWords instance for each???
 //         std::string wordsValue =
@@ -3868,7 +3868,7 @@ void msr2msrTranslator::visitStart (S_msrSlur& elt)
     these should be ignored
   */
 
-  if (fOnGoingNotesStack.size () > 0) {
+  if (! fOnGoingNotesStack.empty ()) {
 //    if (fOnGoingNonGraceNote) {
       fOnGoingNotesStack.front ()->
         appendSlurToNote (elt);
@@ -4270,7 +4270,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       elt->
         createGraceNotesGroupNewbornClone ();
 
-    // attach it to the current note clone
+    // attach fCurrentGraceNotesGroupClone to the current chord clone ??? JMI v0.9.72
     // if (fOnGoingNonGraceNote) { JMI
    // { // JMI
 
@@ -4292,7 +4292,8 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     else {
     */
 
-    if (fOnGoingNotesStack.size ()) {
+    // attach fCurrentGraceNotesGroupClone to the current note clone
+    if (! fOnGoingNotesStack.empty ()) {
       switch (elt->getGraceNotesGroupKind ()) {
         case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
       //    fCurrentNonGraceNoteClone-> JMI v0.9.67
@@ -4342,7 +4343,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       ", fOnGoingNotesStack.size (): " << fOnGoingNotesStack.size () <<
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingChordGraceNotesGroupLink: " <<
-        fOnGoingChordGraceNotesGroupLink <<
+      fOnGoingChordGraceNotesGroupLink <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -4364,8 +4365,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       gLog << fCurrentNonGraceNoteClone;
     }
     else {
-      gLog <<
-        "[NULL]";
+      gLog << "[NULL]";
     }
     gLog << std::endl;
 
@@ -4374,11 +4374,6 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-  // forget about these grace notes
-  fCurrentGraceNotesGroupClone = nullptr;
-
-  fOnGoingGraceNotesGroup = false;
 
 //* JMI
   if (fPendingAfterGraceNotesGroup) {
@@ -4397,10 +4392,10 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    fCurrentVoiceClone->
-      removeElementFromVoice (
-        elt->getInputLineNumber (),
-        fCurrentAfterGraceNotesGroupElement);
+//     fCurrentVoiceClone->
+//       removeElementFromVoice (
+//         elt->getInputLineNumber (),
+//         fCurrentAfterGraceNotesGroupElement);
 
     // forget about the current after grace notes element
     fCurrentAfterGraceNotesGroupElement = nullptr;
@@ -4408,7 +4403,11 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     // forget about these after the pending grace notes
     fPendingAfterGraceNotesGroup = nullptr;
   }
-//  */
+
+  // forget about these grace notes
+  fCurrentGraceNotesGroupClone = nullptr;
+
+  fOnGoingGraceNotesGroup = false;
 }
 
 //________________________________________________________________________
@@ -5568,7 +5567,7 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
 //       mfRational (FOO, 1),
 //       "msr2msrTranslator::visitStart (S_msrChord& elt)");
 
-  if (fTupletClonesStack.size ()) {
+  if (! fTupletClonesStack.empty ()) {
     // a chord in a tuplet is handled as part of the tuplet JMI
     fTupletClonesStack.front ()->
       appendChordToTuplet (
@@ -5613,7 +5612,10 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
   }
 
   else {
-    // NOT appending the chord to the voice clone at once
+    // append current chord clone to the current voice
+    fCurrentVoiceClone->
+      appendChordToVoice (
+        fCurrentChordClone);
   }
 
   fOnGoingChord = true;
@@ -5640,17 +5642,25 @@ void msr2msrTranslator::visitEnd (S_msrChord& elt)
 //     finalizeChord (
 //       elt->getInputLineNumber ());
 
-  if (fTupletClonesStack.size ()) {
-    // append current chord clone to the current, innermost tuplet
-    fTupletClonesStack.front ()->
-      appendChordToTuplet (
-        fCurrentChordClone);
+  if (! fTupletClonesStack.empty ()) {
+//     // append current chord clone to the current, innermost tuplet
+//     fTupletClonesStack.front ()->
+//       appendChordToTuplet (
+//         fCurrentChordClone);
   }
+
+  else if (fCurrentGraceNotesGroupClone) {
+//     // append the chord to the grace notes
+//     fCurrentGraceNotesGroupClone->
+//       appendChordToGraceNotesGroup (
+//         fCurrentChordClone);
+  }
+
   else {
-    // append current chord clone to the current voice
-    fCurrentVoiceClone->
-      appendChordToVoice (
-        fCurrentChordClone);
+//     // append current chord clone to the current voice
+//     fCurrentVoiceClone->
+//       appendChordToVoice (
+//         fCurrentChordClone);
   }
 
   // forget about the current chord clone
@@ -5733,7 +5743,7 @@ void msr2msrTranslator::visitEnd (S_msrTuplet& elt)
 
   fTupletClonesStack.pop_front ();
 
-  if (fTupletClonesStack.size ()) {
+  if (! fTupletClonesStack.empty ()) {
     // tuplet is a nested tuplet
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTupletsBasics ()) {

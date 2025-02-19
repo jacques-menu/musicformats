@@ -121,7 +121,7 @@ void msrOrnament::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -190,11 +190,14 @@ std::string msrOrnament::asString () const
 
   ss <<
     "[Ornament" <<
-    ", fOrnamentPlacementKind: " << msrPlacementKindAsString (fOrnamentPlacementKind)  <<
+    ", fOrnamentKind: " <<
+    fOrnamentKind <<
     ", fOrnamentPlacementKind: " <<
-    msrPlacementKindAsString (fOrnamentPlacementKind) <<
+    fOrnamentPlacementKind <<
+    ", fOrnamentPlacementKind: " <<
+    fOrnamentPlacementKind <<
     ", fOrnamentAccidentalKind: " <<
-    msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
+    fOrnamentAccidentalKind <<
     ']';
 
   return ss.str ();
@@ -205,27 +208,37 @@ void msrOrnament::print (std::ostream& os) const
 {
   os <<
     "[Ornament" <<
-    ", " << msrPlacementKindAsString (fOrnamentPlacementKind)  <<
+    ", fOrnamentKind: " <<
+    fOrnamentKind <<
     ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  constexpr int fieldWidth = 16;
+  constexpr int fieldWidth = 24;
 
   os <<
     std::setw (fieldWidth) <<
     "fOrnamentPlacementKind" << ": " <<
-    msrPlacementKindAsString (fOrnamentPlacementKind) <<
+    fOrnamentPlacementKind <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fOrnamentAccidentalKind" << ": " <<
-    msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
-    std::endl <<
+    fOrnamentAccidentalKind <<
+    std::endl;
+
+  os <<
     std::setw (fieldWidth) <<
     "fOrnamentUpLinkToNote" << ": " <<
+    std::endl;
+
+  ++gIndenter;
+  os <<
+//     gTab <<
     fOrnamentUpLinkToNote->asShortString () <<
     std::endl;
+  --gIndenter;
 
   --gIndenter;
 

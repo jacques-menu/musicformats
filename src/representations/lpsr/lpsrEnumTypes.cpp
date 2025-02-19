@@ -633,7 +633,7 @@ std::string wholeNotesAsLilypondString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes)
 {
-  int dotsNumber; // not used
+  int dotsNumber; // set by wholeNotesAsLilypondString() below, not used
 
   return
     wholeNotesAsLilypondString (

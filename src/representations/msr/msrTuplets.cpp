@@ -589,116 +589,116 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
   return result;
 }
 
-S_msrNote msrTuplet::removeFirstNoteFromTuplet (
-  int inputLineNumber)
-{
-  S_msrNote result;
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTuplets ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Removing first note from tuplet " <<
-      asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  if (fTupletElementsList.size ()) {
-    S_msrTupletElement
-      firstTupletElement =
-        fTupletElementsList.front ();
-
-    if (
-      S_msrNote note = dynamic_cast<msrNote*>(&(*firstTupletElement))
-    ) {
-      fTupletElementsList.pop_front ();
-      result = note;
-    }
-
-    else {
-      if (true) { // JMI ???
-        this->print (gLog);
-      }
-
-      msrInternalError (
-        gServiceRunData->getInputSourceName (),
-        fInputLineNumber,
-        __FILE__, __LINE__,
-        "removeFirstNoteFromTuplet () expects a note as the first tuplet element");
-    }
-
-/* JMI
-    for (
-      std::list <S_msrElement>::iterator i = fTupletElementsList.begin ();
-      i != fTupletElementsList.end ();
-      ++i
-    ) {
-      if ((*i) == note) {
-        // found note, erase it
-        i = fTupletElementsList.erase (i);
-
-        // account for note duration
-        fMeasureElementSoundingWholeNotes -=
-          note->getMeasureElementSoundingWholeNotes ();
-        fMeasureElementSoundingWholeNotes.rationalis ();
-
-        fTupletDisplayWholeNotes -= // JMI
-          note->getNoteDisplayWholeNotes ();
-
-        // don't update measure number nor measure position: // JMI
-        // they have not been set yet
-
-        // return from function
-        return;
-      }
-    } // for
-
-    std::stringstream ss;
-
-    ss <<
-      "cannot remove note " <<
-      note <<
-      " from tuplet " << asString () <<
-      " in voice \"" <<
-      fMeasureElementUpLinkToMeasure->
-        fetchMeasureUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"," <<
-      " since this note has not been found in fTupletElementsList";
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  */
-  }
-
-  else {
-    std::stringstream ss;
-
-    ss <<
-      "cannot remove the first note of an empty tuplet " <<
-      " in voice \"" <<
-      fMeasureElementUpLinkToMeasure->
-        fetchMeasureUpLinkToVoice ()->
-          getVoiceName () <<
-      "\"";
-
-    msrInternalError (
-      gServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-
-  return result;
-}
+// S_msrNote msrTuplet::removeFirstNoteFromTuplet (
+//   int inputLineNumber)
+// {
+//   S_msrNote result;
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceTuplets ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Removing first note from tuplet " <<
+//       asString ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   if (fTupletElementsList.size ()) {
+//     S_msrTupletElement
+//       firstTupletElement =
+//         fTupletElementsList.front ();
+//
+//     if (
+//       S_msrNote note = dynamic_cast<msrNote*>(&(*firstTupletElement))
+//     ) {
+//       fTupletElementsList.pop_front ();
+//       result = note;
+//     }
+//
+//     else {
+//       if (true) { // JMI ???
+//         this->print (gLog);
+//       }
+//
+//       msrInternalError (
+//         gServiceRunData->getInputSourceName (),
+//         fInputLineNumber,
+//         __FILE__, __LINE__,
+//         "removeFirstNoteFromTuplet () expects a note as the first tuplet element");
+//     }
+//
+// /* JMI
+//     for (
+//       std::list <S_msrElement>::iterator i = fTupletElementsList.begin ();
+//       i != fTupletElementsList.end ();
+//       ++i
+//     ) {
+//       if ((*i) == note) {
+//         // found note, erase it
+//         i = fTupletElementsList.erase (i);
+//
+//         // account for note duration
+//         fMeasureElementSoundingWholeNotes -=
+//           note->getMeasureElementSoundingWholeNotes ();
+//         fMeasureElementSoundingWholeNotes.rationalis ();
+//
+//         fTupletDisplayWholeNotes -= // JMI
+//           note->getNoteDisplayWholeNotes ();
+//
+//         // don't update measure number nor measure position: // JMI
+//         // they have not been set yet
+//
+//         // return from function
+//         return;
+//       }
+//     } // for
+//
+//     std::stringstream ss;
+//
+//     ss <<
+//       "cannot remove note " <<
+//       note <<
+//       " from tuplet " << asString () <<
+//       " in voice \"" <<
+//       fMeasureElementUpLinkToMeasure->
+//         fetchMeasureUpLinkToVoice ()->
+//           getVoiceName () <<
+//       "\"," <<
+//       " since this note has not been found in fTupletElementsList";
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   */
+//   }
+//
+//   else {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "cannot remove the first note of an empty tuplet " <<
+//       " in voice \"" <<
+//       fMeasureElementUpLinkToMeasure->
+//         fetchMeasureUpLinkToVoice ()->
+//           getVoiceName () <<
+//       "\"";
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+//
+//   return result;
+// }
 
 // S_msrNote msrTuplet::removeLastNoteFromTuplet (
 //   int inputLineNumber)

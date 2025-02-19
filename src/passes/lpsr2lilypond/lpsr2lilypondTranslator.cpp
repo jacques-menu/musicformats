@@ -23679,8 +23679,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     if (graceNotesGroupAfterNote) {
       fLilypondCodeStream <<
         "} ";
-      generateGraceNotesGroup (
-        graceNotesGroupAfterNote);
+//       generateGraceNotesGroup (
+//         graceNotesGroupAfterNote);
     }
   }
 }
