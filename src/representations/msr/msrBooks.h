@@ -169,7 +169,7 @@ class EXP msrBook : public msrElement
     int                   getBookElementNamesMaxLength () const
                               { return fBookElementNamesMaxLength; }
 
-    // instrument names max lengthes
+    // instrument names max lengths
     void                  setBookInstrumentNamesMaxLength (int value)
                               { fBookInstrumentNamesMaxLength = value; }
 
@@ -349,7 +349,7 @@ class EXP msrBook : public msrElement
 
     int                   fBookElementNamesMaxLength;
 
-    // instrument names max lengthes
+    // instrument names max lengths
 
     int                   fBookInstrumentNamesMaxLength;
     int                   fBookInstrumentAbbreviationsMaxLength;

@@ -560,7 +560,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
   }
 
   mfRational
-    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
+    measureAccumulatedWholeNotesDurationFromPartMeasuresVector =
       regularPart->
         getPartMeasuresWholeNotesVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
@@ -577,8 +577,8 @@ void msrMeasure::finalizeMeasureInRegularVoice (
       "' in regular voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
-      ", measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector: " <<
-      measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector <<
+      ", measureAccumulatedWholeNotesDurationFromPartMeasuresVector: " <<
+      measureAccumulatedWholeNotesDurationFromPartMeasuresVector <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -599,7 +599,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
 
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector);
+    measureAccumulatedWholeNotesDurationFromPartMeasuresVector);
 
   // register this measures's length in the part
   S_msrPart
@@ -610,7 +610,7 @@ void msrMeasure::finalizeMeasureInRegularVoice (
     registerOrdinalMeasureNumberWholeNotes (
       inputLineNumber,
       fMeasureOrdinalNumberInVoice,
-      fCurrentMeasureCurrentAccumulatedWholeNotesDuration);
+      fCurrentMeasureAccumulatedWholeNotesDuration);
 
   // determine the measure kind
   determineMeasureKindAndPuristNumber (
@@ -771,9 +771,9 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // the measureCurrentAccumulatedWholeNotesDuration has to be computed
+  // the measureAccumulatedWholeNotesDuration has to be computed
   mfRational
-    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector =
+    measureAccumulatedWholeNotesDurationFromPartMeasuresVector =
       harmoniesPart->
         getPartMeasuresWholeNotesVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
@@ -783,10 +783,10 @@ void msrMeasure::finalizeMeasureInHarmonyVoice (
     inputLineNumber,
     context);
 
-  // pad the measure up to measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector
+  // pad the measure up to measureAccumulatedWholeNotesDurationFromPartMeasuresVector
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureCurrentAccumulatedWholeNotesDurationFromPartMeasuresVector);
+    measureAccumulatedWholeNotesDurationFromPartMeasuresVector);
 
   // determine the measure kind
   determineMeasureKindAndPuristNumber (
@@ -885,9 +885,9 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // the measureCurrentAccumulatedWholeNotesDuration has to be computed
+  // the measureAccumulatedWholeNotesDuration has to be computed
   mfRational
-    measureCurrentAccumulatedWholeNotesDuration =
+    measureAccumulatedWholeNotesDuration =
       figuredBassPart->
         getPartMeasuresWholeNotesVector () [
            fMeasureOrdinalNumberInVoice - 1 ];
@@ -900,7 +900,7 @@ void msrMeasure::finalizeMeasureInFiguredBassVoice (
   // pad the measure up to fFullMeasureWholeNotesDuration
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
-    measureCurrentAccumulatedWholeNotesDuration);
+    measureAccumulatedWholeNotesDuration);
 
   // determine the measure kind
   determineMeasureKindAndPuristNumber (

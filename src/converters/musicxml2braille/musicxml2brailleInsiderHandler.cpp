@@ -137,7 +137,7 @@ R"(What xml2brl does:
                 containing one Braille page per MusicXML page;
         Pass 6: converts the first BSR into a second BSR
                 with as many Braille pages as needed
-                to fit the line and page lengthes;
+                to fit the line and page lengths;
         Pass 7: converts the BSR to Braille text
                 and writes it to standard output.
 

@@ -67,7 +67,7 @@ msrBook::msrBook (
   // part names max length
   fBookElementNamesMaxLength = 0;
 
-  // set instrument names max lengthes
+  // set instrument names max lengths
   fBookInstrumentNamesMaxLength         = 0;
   fBookInstrumentAbbreviationsMaxLength = 0;
 
@@ -120,7 +120,7 @@ S_msrBook msrBook::createBookNewbornClone ()
   newbornClone->fBookElementNamesMaxLength =
     fBookElementNamesMaxLength;
 
-  // instrument names max lengthes
+  // instrument names max lengths
 
   newbornClone->fBookInstrumentNamesMaxLength =
     fBookInstrumentNamesMaxLength;

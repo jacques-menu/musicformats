@@ -116,12 +116,6 @@ class EXP msrMeasure : public msrSegmentElement
     Bool                  getMeasureIsFirstInVoice () const
                               { return fMeasureIsFirstInVoice; }
 
-    void                  setMeasureContainsSound ()
-                              { fMeasureContainsSound = true; }
-
-    Bool                  getMeasureContainsSound () const
-                              { return fMeasureContainsSound; }
-
     // measure whole notes durations, in whole notes
 
     void                  setFullMeasureWholeNotesDuration (
@@ -130,18 +124,24 @@ class EXP msrMeasure : public msrSegmentElement
     const msrWholeNotes&  getFullMeasureWholeNotesDuration () const
                               { return fFullMeasureWholeNotesDuration; }
 
-    void                  setMeasureCurrentAccumulatedWholeNotesDuration (
+    void                  setMeasureAccumulatedWholeNotesDuration (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotes,
                             std::string          context);
 
-    void                  incrementMeasureCurrentAccumulatedWholeNotesDuration (
+    void                  incrementMeasureAccumulatedWholeNotesDuration (
                             int                  inputLineNumber,
                             const msrWholeNotes& wholeNotesDelta,
                             std::string          context);
 
-    msrWholeNotes         getMeasureCurrentAccumulatedWholeNotesDuration () const
-                              { return fMeasureCurrentAccumulatedWholeNotesDuration; }
+    msrWholeNotes         getMeasureAccumulatedWholeNotesDuration () const
+                              { return fMeasureAccumulatedWholeNotesDuration; }
+
+    msrWholeNotes         getfMeasureWholeNotesDuration () const
+                              { return fMeasureWholeNotesDuration; }
+
+    Bool                  getMeasureIsMusicallyEmpty () const
+                              { return fMeasureIsMusicallyEmpty; }
 
     // measure kind
 
@@ -281,7 +281,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     S_msrScore            fetchMeasureUpLinkToScore () const;
 
-//     // measure lengthes, in whole notes
+//     // measure lengths, in whole notes
 //
 //     msrWholeNotes         fetchFullMeasureWholeNotesDuration_KEEP (
 //                             int         inputLineNumber = 7327, // JMI v0.9.70 BABASSE
@@ -302,7 +302,7 @@ class EXP msrMeasure : public msrSegmentElement
                                   "appendMeasureElementToSegmentElement()");
                               } // JMI v0.9.66 ???
 
-    // lengthes
+    // lengths
 
     std::string           fullMeasureWholeNotesDurationpitchAndOctaveAsString ();
 
@@ -689,7 +689,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     Bool                  fMeasureContainsMusic;
 
-    // measure lengthes, in whole notes
+    // measure lengths, in whole notes
 
     msrWholeNotes         fFullMeasureWholeNotesDuration;
                             // denormalization from msrStaff, for efficiency // JMI v0.9.70 BABASSE
@@ -715,15 +715,18 @@ class EXP msrMeasure : public msrSegmentElement
     static int            sGlobalMeasureDebugNumber;
     int                   fMeasureDebugNumber;
 
-    // measure lengthes, in whole notes
+    // measure lengths, in whole notes
 
-    Bool                  fMeasureContainsSound;
-
-    msrWholeNotes         fMeasureCurrentAccumulatedWholeNotesDuration;
+    msrWholeNotes         fMeasureAccumulatedWholeNotesDuration;
                             // this increases when musical elements
                             // are appended to the measure
 
-    std::string           measureCurrentAccumulatedWholeNotesDurationpitchAndOctaveAsString ();
+    msrWholeNotes         fMeasureWholeNotesDuration;
+                            // this is set from the above when the measure is finalized
+
+    std::string           measureAccumulatedWholeNotesDurationpitchAndOctaveAsString ();
+
+    Bool                  fMeasureIsMusicallyEmpty;
 
     // first measure in voice?
 

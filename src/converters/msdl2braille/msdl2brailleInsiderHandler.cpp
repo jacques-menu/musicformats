@@ -130,7 +130,7 @@ R"(What msdl2braille does:
                  containing one Braille page per MusicXML page;
         Pass 4:  converts the first BSR into a second BSR
                  with as many Braille pages as needed
-                 to fit the line and page lengthes;
+                 to fit the line and page lengths;
         Pass 5:  converts the second BSR to Braille text
                  and writes it to standard output.
 

@@ -575,7 +575,7 @@ void msrVoice::initializeVoice (
                                         // supposing there's no anacrusis
 
   // music has not been inserted in voice yet
-  fMeasureIsMusicallyEmpty = false;
+  fVoiceIsMusicallyEmpty = true;
 
   // counters
   fVoiceActualNotesCounter         = 0;
@@ -852,8 +852,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
     fVoiceCurrentMeasurePuristNumber;
 
   // musically empty voices
-  deepClone->fMeasureIsMusicallyEmpty =
-    fMeasureIsMusicallyEmpty;
+  deepClone->fVoiceIsMusicallyEmpty =
+    fVoiceIsMusicallyEmpty;
 
   // regular measure ends detection
   deepClone->fWholeNotesSinceLastRegularMeasureEnd =
@@ -2172,7 +2172,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
     this->setVoiceCurrentTimeSignature (timeSignatureToBeAdded);
   }
 
-//   if (fMeasureIsMusicallyEmpty) {
+//   if (fVoiceIsMusicallyEmpty) {
 //     // append clefKeyTimeSignatureGroup to last segment
 //     fVoiceLastSegment->
 //       appendClefKeyTimeSignatureGroupToSegment (
@@ -2218,7 +2218,7 @@ void msrVoice::appendClefKeyTimeSignatureGroupToVoice  (
 //   // set voice current clef
 //   this->setVoiceCurrentClef (clef);
 //
-//   if (fMeasureIsMusicallyEmpty) {
+//   if (fVoiceIsMusicallyEmpty) {
 //     // append clef to last segment
 //     fVoiceLastSegment->
 //       appendClefToSegment (clef);
@@ -2681,7 +2681,9 @@ void msrVoice::appendHarmonyToVoice (
 
   // register harmony
   ++fVoiceActualHarmoniesCounter;
-  fMeasureIsMusicallyEmpty = false;
+
+
+  fVoiceIsMusicallyEmpty = false;
 }
 
 void msrVoice::appendHarmoniesListToVoice (
@@ -2741,7 +2743,7 @@ void msrVoice::appendHarmonyToVoiceClone (
 
       // register harmony
       ++fVoiceActualHarmoniesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
@@ -2833,7 +2835,7 @@ void msrVoice::appendFiguredBassToVoice (
 
   // register figuredBass
   ++fVoiceActualFiguredBassesCounter;
-  fMeasureIsMusicallyEmpty = false;
+  fVoiceIsMusicallyEmpty = false;
 }
 
 void msrVoice::appendFiguredBassesListToVoice (
@@ -2894,7 +2896,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
       // register figured bass
       ++fVoiceActualFiguredBassesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
@@ -2966,7 +2968,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //       S_msrStanza stanza = thePair.second;
 //
 //       stanza->
-//         padUpToMeasureCurrentAccumulatedWholeNotesDurationInStanza (
+//         padUpToMeasureAccumulatedWholeNotesDurationInStanza (
 //           inputLineNumber,
 //           wholeNotesPositionInMeasure);
 //     } // for
@@ -3371,7 +3373,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
     case msrNoteKind::kNoteRestInMeasure:
       // register rest
       ++fVoiceRestsCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
@@ -3382,19 +3384,19 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
     case msrNoteKind::kNoteUnpitchedInMeasure:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
@@ -3402,13 +3404,13 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
@@ -3417,7 +3419,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
     case msrNoteKind::kNoteUnpitchedInTuplet:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
   } // switch
 
@@ -3462,7 +3464,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
     case msrNoteKind::kNoteRestInMeasure:
       // register rest
       ++fVoiceRestsCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
@@ -3473,19 +3475,19 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
     case msrNoteKind::kNoteUnpitchedInMeasure:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
@@ -3493,13 +3495,13 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
@@ -3508,7 +3510,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
     case msrNoteKind::kNoteUnpitchedInTuplet:
       // register actual note
       ++fVoiceActualNotesCounter;
-      fMeasureIsMusicallyEmpty = false;
+      fVoiceIsMusicallyEmpty = false;
       break;
   } // switch
 }
@@ -3535,7 +3537,7 @@ void msrVoice::appendDoubleTremoloToVoice (
   fVoiceLastSegment->
     appendDoubleTremoloToSegment (doubleTremolo);
 
-  fMeasureIsMusicallyEmpty = false;
+  fVoiceIsMusicallyEmpty = false;
 }
 
 void msrVoice::appendChordToVoice (const S_msrChord& chord)
@@ -3606,7 +3608,7 @@ void msrVoice::appendChordToVoice (const S_msrChord& chord)
     }
   }
 
-  fMeasureIsMusicallyEmpty = false;
+  fVoiceIsMusicallyEmpty = false;
 }
 
 void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
@@ -3640,7 +3642,7 @@ void msrVoice::appendTupletToVoice (const S_msrTuplet& tuplet)
 
   --gIndenter;
 
-  fMeasureIsMusicallyEmpty = false;
+  fVoiceIsMusicallyEmpty = false;
 }
 
 void msrVoice::registerTupletNoteInVoice (
@@ -3786,7 +3788,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         graceNotesGroup);
   }
 
-  fMeasureIsMusicallyEmpty = false;
+  fVoiceIsMusicallyEmpty = false;
 }
 
 /* JMI
@@ -3810,7 +3812,7 @@ void msrVoice::appendAfterGraceNotesToVoice (
   fVoiceLastSegment->
     appendAfterGraceNotesToSegment (afterGraceNotes);
 
-  fMeasureIsMusicallyEmpty = false;
+  fVoiceIsMusicallyEmpty = false;
 }
 
 void msrVoice::prependAfterGraceNotesToVoice (
@@ -3833,7 +3835,7 @@ void msrVoice::prependAfterGraceNotesToVoice (
   fVoiceFirstSegment->
     prependAfterGraceNotesToSegment (afterGraceNotes);
 
-  fMeasureIsMusicallyEmpty = false;
+  fVoiceIsMusicallyEmpty = false;
 }
 */
 
@@ -5123,9 +5125,9 @@ void msrVoice::handleVoiceLevelRepeatStart (
         // the last measure is not empty
 
         msrWholeNotes
-          measureCurrentAccumulatedWholeNotesDuration =
+          measureAccumulatedWholeNotesDuration =
             lastMeasureInLastSegment->
-              getMeasureCurrentAccumulatedWholeNotesDuration ();
+              getMeasureAccumulatedWholeNotesDuration ();
 
         msrWholeNotes
           fullMeasureWholeNotesDuration =
@@ -5134,9 +5136,9 @@ void msrVoice::handleVoiceLevelRepeatStart (
 
         // is there a measure splitting?
         if ( // JMI better criterion???
-          measureCurrentAccumulatedWholeNotesDuration.getNumerator () > 0
+          measureAccumulatedWholeNotesDuration.getNumerator () > 0
             &&
-          measureCurrentAccumulatedWholeNotesDuration
+          measureAccumulatedWholeNotesDuration
             <
           fullMeasureWholeNotesDuration
         ) {
@@ -5149,8 +5151,8 @@ void msrVoice::handleVoiceLevelRepeatStart (
               "' upon a repeat start in voice \"" <<
               fVoiceName <<
               "\"" <<
-              ", measureCurrentAccumulatedWholeNotesDuration: " <<
-              measureCurrentAccumulatedWholeNotesDuration.asString () <<
+              ", measureAccumulatedWholeNotesDuration: " <<
+              measureAccumulatedWholeNotesDuration.asString () <<
               ", fullMeasureWholeNotesDuration: " <<
               fullMeasureWholeNotesDuration.asString () <<
               ", line " << inputLineNumber <<
@@ -5965,7 +5967,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
 
   // is there a measure splitting?
   if (
-    voiceLastMeasure->getMeasureCurrentAccumulatedWholeNotesDuration ()
+    voiceLastMeasure->getMeasureAccumulatedWholeNotesDuration ()
       ==
     voiceLastMeasure->getFullMeasureWholeNotesDuration ()
   ) {
@@ -8095,7 +8097,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
   // get the empty measure whole notes wholeNotes
   // JMI maybe not OK if first measure such as after a repeat segment???
   msrWholeNotes
-    emptyMeasureCurrentAccumulatedWholeNotesDuration =
+    emptyMeasureAccumulatedWholeNotesDuration =
       fVoiceLastAppendedMeasure->
         getFullMeasureWholeNotesDuration ();
 
@@ -8137,7 +8139,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
   // set its whole notes wholeNotes JMI v0.9.70
 //   emptyMeasure->
 //     setFullMeasureWholeNotesDuration (
-//       emptyMeasureCurrentAccumulatedWholeNotesDuration);
+//       emptyMeasureAccumulatedWholeNotesDuration);
 
   // create a rest the whole empty measure long
   S_msrNote
@@ -8145,8 +8147,8 @@ void msrVoice::appendEmptyMeasuresToVoice (
       msrNote::createRestNote (
         inputLineNumber,
         measureNumber,
-        emptyMeasureCurrentAccumulatedWholeNotesDuration, // soundingWholeNotes
-        emptyMeasureCurrentAccumulatedWholeNotesDuration, // displayWholeNotes
+        emptyMeasureAccumulatedWholeNotesDuration, // soundingWholeNotes
+        emptyMeasureAccumulatedWholeNotesDuration, // displayWholeNotes
         0); // dotsNumber
 
    wholeMeasureRestNote->
@@ -11803,12 +11805,14 @@ void msrVoice::printFull (std::ostream& os) const
     fCurrentVoiceMoment;
 
   os << std::left <<
-    std::setw (fieldWidth) << "fMeasureIsMusicallyEmpty" << ": " <<
-    fMeasureIsMusicallyEmpty <<
+    std::setw (fieldWidth) << "fVoiceIsMusicallyEmpty" << ": " <<
+    fVoiceIsMusicallyEmpty <<
     std::endl <<
+
     std::setw (fieldWidth) << "fVoiceContainsMultiMeasureRests" << ": " <<
     fVoiceContainsMultiMeasureRests <<
     std::endl <<
+
     std::setw (fieldWidth) << "fVoiceContainsMeasureRepeats" << ": " <<
     fVoiceContainsMeasureRepeats <<
     std::endl;

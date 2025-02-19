@@ -287,11 +287,11 @@ class EXP msrVoice : public msrElement
 
     // has music been inserted in the voice?
 
-    void                  setMeasureIsMusicallyEmpty ()
-                              { fMeasureIsMusicallyEmpty = false; }
+//     void                  setVoiceIsMusicallyEmpty ()
+//                               { fVoiceIsMusicallyEmpty = false; }
 
-    Bool                  getMeasureIsMusicallyEmpty () const
-                              { return fMeasureIsMusicallyEmpty; }
+    Bool                  getVoiceIsMusicallyEmpty () const
+                              { return fVoiceIsMusicallyEmpty; }
 
     // regular measure ends detection
 
@@ -1093,7 +1093,7 @@ class EXP msrVoice : public msrElement
 
     // musically empty voices
 
-    Bool                  fMeasureIsMusicallyEmpty;
+    Bool                  fVoiceIsMusicallyEmpty;
 
     // regular measure ends detection
 

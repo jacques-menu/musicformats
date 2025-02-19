@@ -3276,9 +3276,9 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
 
   // get the measure whole notes
   mfRational
-    measureCurrentAccumulatedWholeNotesDuration =
+    measureAccumulatedWholeNotesDuration =
       fCurrentMeasureClone->
-        getMeasureCurrentAccumulatedWholeNotesDuration ();
+        getMeasureAccumulatedWholeNotesDuration ();
 
   // get the full measure whole notes
   mfRational
@@ -3295,7 +3295,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       "' in voice \"" << voice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl <<
-      "measureCurrentAccumulatedWholeNotesDuration: " << measureCurrentAccumulatedWholeNotesDuration.asString ();
+      "measureAccumulatedWholeNotesDuration: " << measureAccumulatedWholeNotesDuration.asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3308,13 +3308,13 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       msrMeasure::kUnknownMeasure; // JMI
  // JMI     fMeasureKind = kFullMeasure; // may be changed afterwards
 
-  if (measureCurrentAccumulatedWholeNotesDuration == measureFullLength ) {
+  if (measureAccumulatedWholeNotesDuration == measureFullLength ) {
     // this measure is full
     measureKind =
       msrMeasure::kFullMeasure;
   }
 
-  else if (measureCurrentAccumulatedWholeNotesDuration < measureFullLength) {
+  else if (measureAccumulatedWholeNotesDuration < measureFullLength) {
     / *
     if (fSegmentElementsList.size () == 1) { // JMI
       // this is the first measure in the segment
@@ -3334,7 +3334,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       msrMeasure::kUpbeatMeasure; // JMI
   }
 
-  else if (measureCurrentAccumulatedWholeNotesDuration > measureFullLength) {
+  else if (measureAccumulatedWholeNotesDuration > measureFullLength) {
     // this measure is overflowing
     measureKind =
       msrMeasure::kOverflowingMeasure;

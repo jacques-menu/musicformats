@@ -108,7 +108,7 @@ msrScore::msrScore (
   // part names max length
   fScorePartNamesMaxLength = 0;
 
-  // set instrument names max lengthes
+  // set instrument names max lengths
   fScoreInstrumentNamesMaxLength         = 0;
   fScoreInstrumentAbbreviationsMaxLength = 0;
 
@@ -170,7 +170,7 @@ S_msrScore msrScore::createScoreNewbornClone ()
   newbornClone->fScorePartNamesMaxLength =
     fScorePartNamesMaxLength;
 
-  // instrument names max lengthes
+  // instrument names max lengths
 
   newbornClone->fScoreInstrumentNamesMaxLength =
     fScoreInstrumentNamesMaxLength;

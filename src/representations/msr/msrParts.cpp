@@ -3198,7 +3198,7 @@ void msrPart::finalizePart (
       } // for
   }
 
-  // set score instrument names max lengthes if relevant
+  // set score instrument names max lengths if relevant
   setPartInstrumentNamesMaxLengthes ();
 
   // collect the part measures slices from the staves
@@ -3239,7 +3239,7 @@ void msrPart::finalizePartClone (
         inputLineNumber);
     } // for
 
-  // set score instrument names max lengthes if relevant
+  // set score instrument names max lengths if relevant
   setPartInstrumentNamesMaxLengthes ();
 
   // collect the part measures slices from the staves

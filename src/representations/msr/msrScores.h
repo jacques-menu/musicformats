@@ -220,7 +220,7 @@ class EXP msrScore : public msrBookElement
     size_t                getScorePartNamesMaxLength () const
                               { return fScorePartNamesMaxLength; }
 
-    // instrument names max lengthes
+    // instrument names max lengths
     void                  setIdentificationScoreInstrumentNamesMaxLength (
                             size_t value)
                               { fScoreInstrumentNamesMaxLength = value; }
@@ -437,7 +437,7 @@ class EXP msrScore : public msrBookElement
 
     size_t                fScorePartNamesMaxLength;
 
-    // instrument names max lengthes
+    // instrument names max lengths
 
     size_t                fScoreInstrumentNamesMaxLength;
     size_t                fScoreInstrumentAbbreviationsMaxLength;

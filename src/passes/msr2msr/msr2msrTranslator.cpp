@@ -1454,7 +1454,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          fCurrentVoiceOriginal->getMeasureIsMusicallyEmpty () // superfluous test ??? JMI v0.9.70
+          fCurrentVoiceOriginal->getVoiceIsMusicallyEmpty () // superfluous test ??? JMI v0.9.70
         ) {
 //           // create a ChordNames context
 //           std::string partCombinedName =
@@ -1491,7 +1491,7 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          fCurrentVoiceOriginal->getMeasureIsMusicallyEmpty () // superfluous test ??? JMI v0.9.70
+          fCurrentVoiceOriginal->getVoiceIsMusicallyEmpty () // superfluous test ??? JMI v0.9.70
         ) {
 //           // create a FiguredBass context
 //           std::string partCombinedName =

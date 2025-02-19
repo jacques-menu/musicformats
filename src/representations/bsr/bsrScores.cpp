@@ -211,7 +211,7 @@ void bsrScore::printFull (std::ostream& os) const
   }
 
 /*
-  // print the lines and pages maximum lengthes JMI
+  // print the lines and pages maximum lengths JMI
   os <<
     std::setw (fieldWidth) <<
     "BrailleLineLength" << ": " << fBrailleLineLength <<
@@ -285,7 +285,7 @@ void bsrScore::print (std::ostream& os) const
   }
 
 /*
-  // print the lines and pages maximum lengthes JMI
+  // print the lines and pages maximum lengths JMI
   os <<
     std::setw (fieldWidth) <<
     "BrailleLineLength" << ": " << fBrailleLineLength <<

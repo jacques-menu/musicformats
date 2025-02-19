@@ -2777,7 +2777,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          true || fCurrentVoiceOriginal->getMeasureIsMusicallyEmpty () // superfluous test JMI ??? JMI v0.9.72
+          true || fCurrentVoiceOriginal->getVoiceIsMusicallyEmpty () // superfluous test JMI ??? JMI v0.9.72
         ) {
           // append the voice clone to the LPSR score elements list
           fResultingLpsr ->
@@ -2854,7 +2854,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             fCurrentVoiceClone);
 
         if (
-          fCurrentVoiceOriginal->getMeasureIsMusicallyEmpty () // superfluous test ??? JMI
+          fCurrentVoiceOriginal->getVoiceIsMusicallyEmpty () // superfluous test ??? JMI
           ) {
           // append the voice clone to the LPSR score elements list
           fResultingLpsr ->

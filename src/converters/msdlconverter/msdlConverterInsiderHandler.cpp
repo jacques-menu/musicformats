@@ -305,7 +305,7 @@ R"(
                  containing one Braille page per MusicXML page;
         Pass 4:  converts the BSRinto another BSR
                  with as many Braille pages as needed
-                 to fit the line and page lengthes;
+                 to fit the line and page lengths;
         Pass 5:  converts the BSR to Braille text
                  and writes it to standard output.)
 

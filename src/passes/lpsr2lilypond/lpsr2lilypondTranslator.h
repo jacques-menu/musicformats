@@ -763,6 +763,22 @@ class EXP lpsr2lilypondTranslator :
     // private fields and methods
     // ------------------------------------------------------
 
+    // spaces
+    // ------------------------------------------------------
+
+    static char constexpr cLilyPondSpace = ' ';
+
+    std::string           cLilyPondCommaAndSpace;
+
+    // comments
+    // ------------------------------------------------------
+
+    void                  generateComment (
+                            const std::string& comment);
+
+    void                  generateInputLineNumberAndOrPositionInMeasureAsAComment (
+                            const S_msrMeasureElement& measureElement);
+
     // LilyPond fragments
     // ------------------------------------------------------
 
@@ -789,12 +805,6 @@ class EXP lpsr2lilypondTranslator :
     // whole notes
     // ------------------------------------------------------
     // JMI
-
-    // comments
-    // ------------------------------------------------------
-
-    void                  generateInputLineNumberAndOrPositionInMeasureAsAComment (
-                            const S_msrMeasureElement& measureElement);
 
     // markups
     // ------------------------------------------------------
@@ -990,8 +1000,11 @@ class EXP lpsr2lilypondTranslator :
     // staves
     // ------------------------------------------------------
 
-    std::string           cLilypondStaffOpener,
-                          cLilypondStaffCloser;
+    std::string           cLilypondStaffBlockOpener,
+                          cLilypondStaffClockCloser;
+
+    // staves
+    // ------------------------------------------------------
 
     std::string           cLilypondNewStaff,
                           cLilypondNewGrandStaff,
@@ -1023,6 +1036,11 @@ class EXP lpsr2lilypondTranslator :
     // notes
     // ------------------------------------------------------
 
+/*
+  regular notes occur are those not in a grace notes group,
+  and the 'regular' adjective is not used ??? JMI
+*/
+
     msrPrintObjectKind    fCurrentNotePrinObjectKind;
 
     std::string           lilypondOctaveInRelativeEntryMode (
@@ -1037,48 +1055,105 @@ class EXP lpsr2lilypondTranslator :
     std::string           pitchedRestAsLilypondString (
                             const S_msrNote& note);
 
-    void                  generateCodeRightBeforeNote (
-                            const S_msrNote& note);
-    void                  generateCodeRightAfterNote (
-                            const S_msrNote& note);
-
-    void                  generateNote (
-                            const S_msrNote& note);
-
-    // regular notes
-    // ------------------------------------------------------
+    // regular notes in measures
+    void                  handleRegularNoteInMeasure (
+                            const S_msrNote& regularNote);
 
     void                  generateRegularNoteInMeasure (
+                            const S_msrNote& regularNote);
+
+    // rests in measures
+    void                  handleRestInMeasure (
+                            const S_msrNote& rest);
+
+    void                  generateRestInMeasure (
+                            const S_msrNote& rest);
+
+    // pitched rests in measures
+    void                  generatePitchedRestInMeasure (
+                            const S_msrNote& pitchedRest);
+
+    // unpitched rests in measures
+    void                  generateUnpitchedRestInMeasure (
+                            const S_msrNote& unpitchedRest);
+
+    // skips in measures
+    void                  handleSkipInMeasure (
+                            const S_msrNote& skip);
+
+    // unpitched notes in measures
+    void                  handleUnpitchedNoteInMeasure (
+                            const S_msrNote& unpitchedNote);
+
+    void                  generateUnpitchedNoteInMeasure (
+                            const S_msrNote& note);
+
+    // notes in grace notes groups
+    void                  handleNoteInGraceNotesGroup (
+                            const S_msrNote& note);
+
+    // skips in grace notes groups
+    void                  handleSkipInGraceNotesGroup (
+                            const S_msrNote& note);
+
+    // notes in chords
+    void                  handleRegularNoteInChord (
+                            const S_msrNote& regularNote);
+
+    void                  generateCodeRightBeforeNote (
                             const S_msrNote& note);
 
     void                  generateRegularNoteInChord (
                             const S_msrNote& note);
 
+    void                  generateCodeRightAfterNote (
+                            const S_msrNote& note);
+
+    // regular notes in tuplets
+    void                  handleRegularNoteInTuplet (
+                            const S_msrNote& regularNote);
+
     void                  generateRegularNoteInTuplet (
                             const S_msrNote& note);
+
+    // rests in tuplets
+    void                  handleRestInTuplet (
+                            const S_msrNote& rest);
+
+    // unpitched notes in tuplets
+    void                  handleUnpitchedNoteInTuplet (
+                            const S_msrNote& unpitchedNote);
+
+    // notes in chords in grace notes groups
+    void                  handleNoteInChordInGraceNotesGroup (
+                            const S_msrNote& regularNote);
+
+    // notes in tuplets in grace notes groups
+    void                  handleNoteInTupletInGraceNotesGroup (
+                            const S_msrNote& regularNote);
+
+    // double tremolos
+    void                  handleNoteInDoubleTremolo (
+                            const S_msrNote& regularNote);
+
+
+    void                  generateStuffBeforeTheNoteIself (
+                            const S_msrNote& note);
+
+    void                  generateTheNoteItself (
+                            const S_msrNote& note);
+
     // rests
     // ------------------------------------------------------
-
-    void                  generateRestInMeasure (
-                            const S_msrNote& rest);
 
     // pitched notes
     // ------------------------------------------------------
 
-    void                  generatePitchedRestInMeasure (
-                            const S_msrNote& pitchedRest);
-
     // unpitched notes
     // ------------------------------------------------------
 
-    void                  generateUnpitchedNoteInMeasure (
-                            const S_msrNote& note);
-
     // unpitched rests
     // ------------------------------------------------------
-
-    void                  generateUnpitchedRestInMeasure (
-                            const S_msrNote& unpitchedRest);
 
     // skips
     // ------------------------------------------------------
@@ -1129,9 +1204,6 @@ class EXP lpsr2lilypondTranslator :
 
     std::list <int>       fCurrentChordPendingSlurs;
 
-    void                  generateChordBegin (
-                            const S_msrChord& chord);
-
     void                  generateChordGlissandos (
                             const std::list <S_msrGlissando>& chordGlissandosList);
 
@@ -1146,14 +1218,13 @@ class EXP lpsr2lilypondTranslator :
                             const std::list <S_msrStem>& chordStemsList);
 
 
-    void                  generateCodeRightBeforeChordContents (
+    void                  generateCodeBeforeChordBegin (
+                            const S_msrChord& chord);
+
+    void                  generateCodeAfterChordEnd (
                             const S_msrChord& chord);
 
     void                  generateChordInGraceNotesGroupContents (
-                            const S_msrChord& chord);
-
-
-    void                  generateCodeRightAfterChordContents (
                             const S_msrChord& chord);
 
     void                  generateChordInGraceNotesGroup (
@@ -1162,6 +1233,10 @@ class EXP lpsr2lilypondTranslator :
 
     // tuplets
     // ------------------------------------------------------
+
+    std::string           cLilypondTupletOpener1,
+                          cLilypondTupletOpener2,
+                          cLilypondTupletCloser;
 
     std::string           tupletFactorAsLilypondString (
                             const msrTupletFactor& tupletFactor);

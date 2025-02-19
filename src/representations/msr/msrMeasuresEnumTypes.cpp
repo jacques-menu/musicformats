@@ -285,7 +285,7 @@ std::ostream& operator << (std::ostream& os, const msrMeasureEndRegularKind& elt
 //     skipNote->
 //       setMeasureElementPositionInMeasure (
 //         this,
-//         fMeasureCurrentAccumulatedWholeNotesDuration,
+//         fMeasureAccumulatedWholeNotesDuration,
 //         "handleASubsequentHarmonyInAHarmoniesMeasure() 2");
 //
 //     // insert skipNote before currentHarmony in the measure's elements list

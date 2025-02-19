@@ -130,8 +130,8 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
       " in voice \"" <<
       fetchMeasureUpLinkToVoice ()->
         getVoiceName () <<
-      "\", currentMeasureCurrentAccumulatedWholeNotesDuration: \"" <<
-      fCurrentMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", currentMeasureAccumulatedWholeNotesDuration: \"" <<
+      fCurrentMeasureAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -149,14 +149,14 @@ void msrMeasure::appendElementToMeasure (const S_msrMeasureElement& elem)
   elem->
     setMeasureElementPositionInMeasure (
       this,
-      fCurrentMeasureCurrentAccumulatedWholeNotesDuration,
+      fCurrentMeasureAccumulatedWholeNotesDuration,
       "appendElementToMeasure()");
 
   fMeasureElementsList.push_back (elem);
 
   // take elem's sounding whole notes into account JMI ???
 if (false) // JMI v0.9.67
-  incrementCurrentMeasureCurrentAccumulatedWholeNotesDuration (
+  incrementCurrentMeasureAccumulatedWholeNotesDuration (
     inputLineNumber,
     elem->
       getMeasureElementSoundingWholeNotes ());
@@ -182,8 +182,8 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", currentMeasureCurrentAccumulatedWholeNotesDuration: \"" <<
-      fCurrentMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", currentMeasureAccumulatedWholeNotesDuration: \"" <<
+      fCurrentMeasureAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -210,7 +210,7 @@ void msrMeasure::appendHarmonyToMeasure (const S_msrHarmony& harmony)
         getMeasureElementSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
-  incrementCurrentMeasureCurrentAccumulatedWholeNotesDuration (
+  incrementCurrentMeasureAccumulatedWholeNotesDuration (
     inputLineNumber,
     harmonySoundingWholeNotes);
 
@@ -238,8 +238,8 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
       fMeasureUpLinkToSegment->
         getSegmentUpLinkToVoice ()->
           getVoiceName () <<
-      "\", currentMeasureCurrentAccumulatedWholeNotesDuration: \"" <<
-      fCurrentMeasureCurrentAccumulatedWholeNotesDuration.asString () <<
+      "\", currentMeasureAccumulatedWholeNotesDuration: \"" <<
+      fCurrentMeasureAccumulatedWholeNotesDuration.asString () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -260,7 +260,7 @@ void msrMeasure::appendHarmonyToMeasureClone (const S_msrHarmony& harmony)
         getMeasureElementSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
-  incrementCurrentMeasureCurrentAccumulatedWholeNotesDuration (
+  incrementCurrentMeasureAccumulatedWholeNotesDuration (
     inputLineNumber,
     harmonySoundingWholeNotes);
 

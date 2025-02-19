@@ -425,8 +425,8 @@ void displayLpsrNamesVisitor::visitStart (S_msrVoice& elt)
     elt->getVoiceNumber () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "measureIsMusicallyEmpty" << ": " <<
-    elt->getMeasureIsMusicallyEmpty () <<
+    "voiceIsMusicallyEmpty" << ": " <<
+    elt->getVoiceIsMusicallyEmpty () <<
     std::endl;
 
   gLog << std::endl;
