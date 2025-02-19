@@ -764,30 +764,40 @@ class EXP lpsr2lilypondTranslator :
     // ------------------------------------------------------
 
     // LilyPond fragments
+    // ------------------------------------------------------
+
     void                  initializeLilypondUsefulFragments ();
 
-    // musically empty measures
-    void                  generateCodeForMusicallyEmptyMeasure (
-                            S_msrMeasure& measure);
+    // contexts
+    // ------------------------------------------------------
+
+    std::string           lpsrContextTypeKindAsLilypondString (
+                            lpsrContextTypeKind contextTypeKind);
 
     // names
+    // ------------------------------------------------------
 
     std::string           nameAsLilypondString (
                             const std::string& name);
 
     // lengths
+    // ------------------------------------------------------
 
     std::string           lengthUnitAsLilypondString (
                             msrLengthUnitKind lengthUnitKind);
 
     // whole notes
+    // ------------------------------------------------------
     // JMI
 
     // comments
+    // ------------------------------------------------------
+
     void                  generateInputLineNumberAndOrPositionInMeasureAsAComment (
                             const S_msrMeasureElement& measureElement);
 
     // markups
+    // ------------------------------------------------------
 
     std::string           generateAColumnForMarkup (
                             const std::string&       theString,
@@ -797,17 +807,20 @@ class EXP lpsr2lilypondTranslator :
                             lilypondMarkupColumnKind columnKind);
 
     // octaves
+    // ------------------------------------------------------
 
     std::string           absoluteOctaveAsLilypondString (
                             int           inputLineNumber,
                             msrOctaveKind absoluteOctaveKind);
 
     // alterations
+    // ------------------------------------------------------
 
     std::string           alterationKindAsLilypondString (
                             msrAlterationKind alterationKind);
 
     // durations
+    // ------------------------------------------------------
 
     msrWholeNotes         fLastMetWholeNotes;
 
@@ -830,430 +843,25 @@ class EXP lpsr2lilypondTranslator :
     std::string           notesDurationKindAsLilypondString (
                             msrNotesDurationKind notesDurationKind);
 
-    // notes
-
-    msrPrintObjectKind    fCurrentNotePrinObjectKind;
-
-    std::string           lilypondOctaveInRelativeEntryMode (
-                            const S_msrNote& note);
-
-    std::string           lilypondOctaveInFixedEntryMode (
-                            const S_msrNote& note);
-
-    std::string           notePitchAsLilypondString (
-                            const S_msrNote& note);
-
-    std::string           pitchedRestAsLilypondString (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNoteHeadAndStem (
-                            S_msrNote note);
-
-    void                  generateNoteBeamsAfterNote (
-                            const S_msrNote& note);
-
-    void                  generateNoteSlurDirection (
-                            const S_msrNote& note);
-    void                  generateNoteSlursList (
-                            const S_msrNote& note);
-
-    void                  generateNoteHeadColor (
-                            const S_msrNote& note);
-    void                  generateNoteLigaturesList (
-                            const S_msrNote& note);
-    void                  generateNoteHeadSettingsBeforeNote (
-                            const S_msrNote& note);
-    void                  generateNoteHeadSettingsAfterNote (
-                            const S_msrNote& note);
-
-    void                  generateSegno (
-                            const S_msrSegno& segno);
-    void                  generateCoda (
-                            const S_msrCoda& coda);
-
-    void                  generateCodeRightBeforeNote (
-                            const S_msrNote& note);
-    void                  generateCodeRightAfterNote (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNote (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNoteRegularInMeasure (
-                            const S_msrNote& note);
-
-    void                  generateCodeForRestInMeasure (
-                            const S_msrNote& note);
-    void                  generateCodeForSkipInMeasure (
-                            const S_msrNote& note);
-    void                  generateCodeForNoteUnpitchedInMeasure (
-                            const S_msrNote& note);
-    void                  generateCodeForNoteCuedInMeasure (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNoteRegularInChord (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNoteRegularInTuplet (
-                            const S_msrNote& note);
-    void                  generateCodeForRestInTuplet (
-                            const S_msrNote& note);
-    void                  generateCodeForNoteUnpitchedInTuplet (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNoteRegularInGraceNotesGroup (
-                            const S_msrNote& note);
-    void                  generateCodeForSkipInGraceNotesGroup (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNoteInChordInGraceNotesGroup (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNoteInTupletInGraceNotesGroup (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNoteInDoubleTremolo (
-                            const S_msrNote& note);
-
-    void                  generateNoteScordaturasList (
-                            const S_msrNote& note);
-
-    void                  generateNoteSlashesList (
-                            const S_msrNote& note);
-
-    void                  generateNoteWedgesList (
-                            const S_msrNote& note);
-
-    void                  generateNoteSlurLineTypes (
-                            const S_msrNote& note);
-
-    // glissandos
-    void                  generateNoteGlissandoStyles (
-                            const S_msrNote& note);
-
-    void                  generateNoteGlissandosListWithText (
-                            const S_msrNote& note);
-
-    void                  generateCodeForGlissandos (
-                            const std::list <S_msrGlissando>&
-                              glissandosList);
-
-    // slides
-    void                  generateNoteSlideLineStyles (
-                            const S_msrNote& note);
-    void                  generateNoteSlidesListWithText (
-                            const S_msrNote& note);
-
-    void                  generateCodeForNoteSlides (
-                            const std::list <S_msrSlide>&
-                              slidesList);
-
-    // words
-    void                  generateCodeForNoteWordsList (
-                            const std::list <S_msrWords>& noteWordsList);
-
-    // stems
-
-    // the LilyPond \stem* commands have a persistent effect, hence:
-    msrStemKind           fCurrentStemKind;
-
-    std::string           stemAsLilypondString (
-                            msrStemKind stemKind);
-
-    void                  generateStemIfNeededAndUpdateCurrentStemKind (
-                            const S_msrStem& stem);
-
-    // beams
-    // JMI ???
-
-    // slurs
-
-    // the LilyPond \slur* commands have a persistent effect, hence:
-    msrPlacementKind      fCurrentSlurPlacementKind;
-
-    // articulations
-
-    msrDirectionKind      fCurrentArpeggioDirectionKind;
-
-    void                  generateNoteArticulation (
-                            const S_msrArticulation& articulation);
-
-    void                  generateChordArticulation (
-                            const S_msrArticulation& articulation);
-
-    void                  generateCodeForArticulations (
-                            const S_msrNote note);
-
-    // technicals
-
-    std::string           technicalAsLilypondString (
-                            const S_msrTechnical& technical);
-
-    std::string           technicalWithIntegerAsLilypondString (
-                            const S_msrTechnicalWithInteger& technicalWithInteger);
-
-    std::string           technicalWithFloatAsLilypondString (
-                            const S_msrTechnicalWithFloat& technicalWithFloat);
-
-    std::string           technicalWithStringAsLilypondString (
-                            const S_msrTechnicalWithString& technicalWithString);
-
-
-    void                  generateCodeForTechnicals (
-                            const std::list <S_msrTechnical>&
-                              technicalsList);
-
-    void                  generateCodeForTechnicalsWithInteger (
-                            const std::list <S_msrTechnicalWithInteger>&
-                              technicalWithIntegersList);
-
-    void                  generateCodeForTechnicalsWithFloat (
-                            const std::list <S_msrTechnicalWithFloat>&
-                              technicalWithFloatsList);
-
-    void                  generateNoteTechnicalsListWithStrings (
-                            const S_msrNote& note);
-
-    void                  generateCodeForTechnicalsWithStringsList (
-                            const std::list <S_msrTechnicalWithString>&
-                              technicalWithStringsList);
-
-    // ornaments
-
-    // in LilyPond, \stopTrillSpan should apply to the note following
-    // the one that holds it in MusicXML and in the MSR
-    S_msrSpanner          fPendingTrillSpannerForStop;
-
-    void                  generateOrnament (
-                            const S_msrOrnament& ornament);
-
-    // trills
-
-    Bool                  fOnGoingTrillSpanner;
-
-    // spanners
-
-    msrPlacementKind      fCurrentSpannerPlacementKind;
-
-    void                  generateBeforeNoteSpannersListIfAny (
-                            const S_msrNote& note);
-
-    void                  generateAfterNoteSpannersListIfAny (
-                            const S_msrNote& note);
-
-    void                  generateCodeForSpannerBeforeNote (
-                            const S_msrSpanner& spanner,
-                            const S_msrNote&    note);
-
-    void                  generateCodeForSpannerAfterNote (
-                            const S_msrSpanner& spanner,
-                            const S_msrNote&    note);
-
-    // tuplets
-
-    std::string           tupletFactorAsLilypondString (
-                            const msrTupletFactor& tupletFactor);
-
-    // grace notes
-
-    Bool                  fOnGoingGraceNotesGroup;
-    Bool                  fOnGoingChordGraceNotesGroupLink;
-
-    void                  generateGraceNotesGroup (
-                            const S_msrGraceNotesGroup& graceNotesGroup);
-
-    // tremolos
-
-    std::string           singleTremoloNotesDurationAsLilypondString (
-                            const S_msrSingleTremolo& singleTremolo);
-
-    // dynamics
-
-    std::string           dynamicAsLilypondString (
-                            const S_msrDynamic& dynamic);
-
-    void                  generateCodeForDynamics (
-                            const std::list <S_msrDynamic>&
-                              dynamicsList);
-
-    void                  generateCodeForOtherDynamics (
-                            const std::list <S_msrOtherDynamic>&
-                              otherDynamicsList);
-
-    // std::string tuning
-    std::string           stringTuningAsLilypondString (
-                            int                      inputLineNumber,
-                            const S_msrStringTuning& stringTuning);
-
-    // harp pedals tuning
-
-    std::string           harpPedalTuningAsLilypondString (
-                            msrAlterationKind alterationKind);
-
-    // transposition
-
-    void                  transposeDiatonicError (
-                            int inputLineNumber,
-                            int transposeDiatonic,
-                            int transposeChromatic);
-
-    // harmonies
-
-    Bool                  fPowerChordHaveAlreadyBeenGenerated;
-                            // to generate it only once
-
-    std::string           harmonyAsLilypondString (
-                            const S_msrHarmony& harmony);
-
-    std::string           harmonyDegreeAlterationKindAsLilypondString (
-                            msrAlterationKind harmonyDegreeAlterationKind);
-
-    // frames
-
-    std::string           frameAsLilypondString (
-                            const S_msrFrame& frame);
-
-    // figured bass
-
-    std::string           figureAsLilypondString (
-                            const S_msrBassFigure& bassFigure);
-    std::string           figuredBassAsLilypondString (
-                            const S_msrFiguredBass& figuredBass);
-
-    S_msrFiguredBass
-                          fCurrentFiguredBass;
-    size_t                fCurrentFiguredBassFiguresCounter;
-
-    // contexts
-
-    std::string           lpsrContextTypeKindAsLilypondString (
-                            lpsrContextTypeKind contextTypeKind);
-
-  private:
-
-    // options
+    // musically empty measures
     // ------------------------------------------------------
 
-    S_msrOahGroup         fMsrOahGroup;
-    S_lpsrOahGroup        fLpsrOahGroup;
-
-    // the LPSR score we're visiting
-    // ------------------------------------------------------
-    S_lpsrScore           fVisitedLpsrScore;
-
-    // the output stream
-    // ------------------------------------------------------
-
-    std::ostream&         fLilypondCodeStream;
-
-    // LilyPond version
-    // ------------------------------------------------------
-    void                  generateLilypondVersion ();
-
-    // identification
-    // ------------------------------------------------------
-    /* JMI
-    std::string           fScoreTitle;
-    std::string           fScoreSubTitle;
-    std::string           fScoreSubSubTitle;
-
-    void                  computeHeaderFields ();
-*/
-
-    // LilyPond useful fragments
-
-    // partgroups
-    std::string           cLilypondPartGroupOpener,
-                          cLilypondPartGroupCloser;
-
-    // parts
-    std::string           cLilypondPartOpener,
-                          cLilypondPartCloser;
-
-    // staff groups
-    std::string           cLilypondNewStaffGroup,
-                          cLilypondStaffGroupOpener,
-                          cLilypondStaffGroupCloser;
-
-    // barlines
-
-
-    // staves
-    std::string           cLilypondStaffOpener,
-                          cLilypondStaffCloser;
-
-    std::string           cLilypondNewStaff,
-                          cLilypondNewGrandStaff,
-                          cLilypondNewPianoStaff,
-                          cLilypondNewChoirStaff;
-
-    std::string           cLilypondNewTabStaff,
-                          cLilypondNewHarmoniesStaff,
-                          cLilypondNewFiguredBassStaff,
-                          cLilypondNewDrumStaff,
-                          cLilypondNewRythmicStaff,
-                          cLilypondNewJianpuStaff;
-
-    // voices
-    std::string           cLilypondUseVoiceOpener,
-                          cLilypondUseVoiceCloser;
+    void                  generateMusicallyEmptyMeasure (
+                            S_msrMeasure& measure);
 
     // with
-    std::string           cLilypondWithOpener,
-                          cLilypondWithCloser;
+    // ------------------------------------------------------
 
-    // parallel music
-    std::string           cLilypondParallelMusicOpener,
-                          cLilypondParallelMusicCloser;
-
-    // scordaturas
-    std::string           cLilypondScordaturaOpener,
-                          cLilypondScordaturaCloser;
-
-    // layout contexts
-    std::string           cLilypondLayoutContextScoreOpener,
-                          cLilypondLayoutContextScoreCloser;
-
-    std::string           cLilypondLayoutContextStaffOpener,
-                          cLilypondLayoutContextStaffCloser;
-
-    std::string           cLilypondLayoutContextVoiceOpener,
-                          cLilypondLayoutContextVoiceCloser;
-
-    // chords
-    std::string           cLilypondChordOpener,
-                          cLilypondChordCloser;
-
-    // ligarures
-    std::string           cLilypondLigatureOpener,
-                          cLilypondLigatureCloser;
-
-    void                  generateCodeForLigatures (
-                            const std::list <S_msrLigature>&
-                              ligaruresList);
-
-    // wedges
-    void                  generateCodeForWedges (
-                            const std::list <S_msrWedge>&
-                              wedgesList);
-
-    // hairpins
-    std::string           cLilypondHairPinsCrescendo,
-                          cLilypondHairPinsDecrescendo,
-                          cLilypondHairPinsStop;
-
-    // lyrics
-    std::string           cLilypondNewLyrics;
-
-    // with
     std::string           cLilypondHide;
 
     // global staff size
     // ------------------------------------------------------
+
     void                  generateGlobalStaffSize ();
 
     // header handling
     // ------------------------------------------------------
+
     Bool                  fOnGoingHeader;
 
     void                  generateHeader (S_lpsrHeader header);
@@ -1328,42 +936,52 @@ class EXP lpsr2lilypondTranslator :
 
     // score
     // ------------------------------------------------------
+
     S_msrScore            fCurrentVisitedMsrScore;
 
     // part groups
     // ------------------------------------------------------
+
  // JMI   S_msrPartGroup        fCurrentMsrPartGroupClone; // JMI v0.9.69
 
     // parts
     // ------------------------------------------------------
+
+    std::string           cLilypondPartOpener,
+                          cLilypondPartCloser;
+
     S_msrPart             fCurrentPart; // JMI jamais visitee
 
     // tempos
     // ------------------------------------------------------
-    void                  generateCodeForTempoBeatUnitsWordsOnly (
+
+    void                  generateTempoBeatUnitsWordsOnly (
                             const S_msrTempo& tempo);
 
-    void                  generateCodeForTempoBeatUnitsPerMinute (
+    void                  generateTempoBeatUnitsPerMinute (
                             const S_msrTempo& tempo);
 
-    void                  generateCodeForTempoBeatUnitsEquivalence (
+    void                  generateTempoBeatUnitsEquivalence (
                             const S_msrTempo& tempo);
 
-    void                  generateCodeForTempoNotesRelationship (
+    void                  generateTempoNotesRelationship (
                             const S_msrTempo& tempo);
 
     // clefs
     // ------------------------------------------------------
+
     S_msrClef             fCurrentVoiceClef;
 
     // keys
     // ------------------------------------------------------
+
     S_msrClef             fCurrentVoiceKey;
 
     std::string           msrModeKindAsLilypondString (
                             msrModeKind modeKind);
-    // time
+    // time signatures
     // ------------------------------------------------------
+
     S_msrTimeSignature    fCurrentVoiceTimeSignature;
 
     Bool                  fVoiceIsCurrentlySenzaMisura; // JMI
@@ -1371,19 +989,613 @@ class EXP lpsr2lilypondTranslator :
 
     // staves
     // ------------------------------------------------------
+
+    std::string           cLilypondStaffOpener,
+                          cLilypondStaffCloser;
+
+    std::string           cLilypondNewStaff,
+                          cLilypondNewGrandStaff,
+                          cLilypondNewPianoStaff,
+                          cLilypondNewChoirStaff;
+
+    std::string           cLilypondNewTabStaff,
+                          cLilypondNewHarmoniesStaff,
+                          cLilypondNewFiguredBassStaff,
+                          cLilypondNewDrumStaff,
+                          cLilypondNewRythmicStaff,
+                          cLilypondNewJianpuStaff;
+
     // prevent clef, key and time signature from being handled twice
     Bool                  fOnGoingStaff;
 
     // voices
     // ------------------------------------------------------
+
+    std::string           cLilypondUseVoiceOpener,
+                          cLilypondUseVoiceCloser;
+
     Bool                  fOnGoingVoice;
     S_msrVoice            fCurrentVoice;
 
     Bool                  fOnGoingHarmoniesVoice;
     Bool                  fOnGoingFiguredBassVoice;
 
+    // notes
+    // ------------------------------------------------------
+
+    msrPrintObjectKind    fCurrentNotePrinObjectKind;
+
+    std::string           lilypondOctaveInRelativeEntryMode (
+                            const S_msrNote& note);
+
+    std::string           lilypondOctaveInFixedEntryMode (
+                            const S_msrNote& note);
+
+    std::string           notePitchAsLilypondString (
+                            const S_msrNote& note);
+
+    std::string           pitchedRestAsLilypondString (
+                            const S_msrNote& note);
+
+    void                  generateCodeRightBeforeNote (
+                            const S_msrNote& note);
+    void                  generateCodeRightAfterNote (
+                            const S_msrNote& note);
+
+    void                  generateNote (
+                            const S_msrNote& note);
+
+    // regular notes
+    // ------------------------------------------------------
+
+    void                  generateRegularNoteInMeasure (
+                            const S_msrNote& note);
+
+    void                  generateRegularNoteInChord (
+                            const S_msrNote& note);
+
+    void                  generateRegularNoteInTuplet (
+                            const S_msrNote& note);
+    // rests
+    // ------------------------------------------------------
+
+    void                  generateRestInMeasure (
+                            const S_msrNote& rest);
+
+    // pitched notes
+    // ------------------------------------------------------
+
+    void                  generatePitchedRestInMeasure (
+                            const S_msrNote& pitchedRest);
+
+    // unpitched notes
+    // ------------------------------------------------------
+
+    void                  generateUnpitchedNoteInMeasure (
+                            const S_msrNote& note);
+
+    // unpitched rests
+    // ------------------------------------------------------
+
+    void                  generateUnpitchedRestInMeasure (
+                            const S_msrNote& unpitchedRest);
+
+    // skips
+    // ------------------------------------------------------
+
+    void                  generateSkipInMeasure (
+                            const S_msrNote& note);
+
+    // cue notes
+    // ------------------------------------------------------
+
+    void                  generateCuedNoteInMeasure (
+                            const S_msrNote& note);
+
+    // grace notes groups
+    // ------------------------------------------------------
+
+    void                  generateGraceNotesGroup (
+                            const S_msrGraceNotesGroup& graceNotesGroup);
+
+    void                  generateRegularNoteInGraceNotesGroup (
+                            const S_msrNote& note);
+
+    void                  generateSkipInGraceNotesGroup (
+                            const S_msrNote& note);
+
+    void                  generateNoteInChordInGraceNotesGroup (
+                            const S_msrNote& note);
+
+    void                  generateNoteInTupletInGraceNotesGroup (
+                            const S_msrNote& note);
+
+    Bool                  fOnGoingGraceNotesGroup;
+    S_msrGraceNotesGroup  fCurrentGraceNotesGroup;
+
+    Bool                  fOnGoingChordGraceNotesGroupLink;
+
+
+    // chords
+    // ------------------------------------------------------
+
+    std::string           cLilypondChordOpener,
+                          cLilypondChordCloser;
+
+    std::list <int>       fPendingChordMemberNotesStringNumbers;
+
+    Bool                  fOnGoingChord;
+    S_msrChord            fCurrentChord;
+
+    std::list <int>       fCurrentChordPendingSlurs;
+
+    void                  generateChordBegin (
+                            const S_msrChord& chord);
+
+    void                  generateChordGlissandos (
+                            const std::list <S_msrGlissando>& chordGlissandosList);
+
+    void                  generateChordSlides (
+                            const std::list <S_msrSlide>& chordSlidesList);
+
+    void                  generateChordLigatures (
+                            const std::list <S_msrLigature>& chordLigaturesList);
+
+    void                  generateChordStems (
+                            const S_msrChord&            chord,
+                            const std::list <S_msrStem>& chordStemsList);
+
+
+    void                  generateCodeRightBeforeChordContents (
+                            const S_msrChord& chord);
+
+    void                  generateChordInGraceNotesGroupContents (
+                            const S_msrChord& chord);
+
+
+    void                  generateCodeRightAfterChordContents (
+                            const S_msrChord& chord);
+
+    void                  generateChordInGraceNotesGroup (
+                            const S_msrChord& chord);
+
+
+    // tuplets
+    // ------------------------------------------------------
+
+    std::string           tupletFactorAsLilypondString (
+                            const msrTupletFactor& tupletFactor);
+
+    void                  generateRestInTuplet (
+                            const S_msrNote& note);
+
+    void                  generateNoteUnpitchedInTuplet (
+                            const S_msrNote& note);
+
+    std::list <S_msrTuplet>
+                          fOnGoingTupletsStack;
+
+    // tremolos
+    // ------------------------------------------------------
+
+    std::string           singleTremoloNotesDurationAsLilypondString (
+                            const S_msrSingleTremolo& singleTremolo);
+
+    void                  generateNoteInDoubleTremolo (
+                            const S_msrNote& note);
+
+    // scordaturas
+    // ------------------------------------------------------
+
+    std::string           cLilypondScordaturaOpener,
+                          cLilypondScordaturaCloser;
+
+    void                  generateNoteScordaturasList (
+                            const S_msrNote& note);
+
+    // slashed
+    // ------------------------------------------------------
+
+    void                  generateNoteSlashesList (
+                            const S_msrNote& note);
+
+    // slurs
+    // ------------------------------------------------------
+
+    void                  generateNoteSlurLineTypes (
+                            const S_msrNote& note);
+
+    // note heads
+    // ------------------------------------------------------
+
+    void                  generateNoteHeadAndStem (
+                            S_msrNote note);
+
+    void                  generateNoteHeadColor (
+                            const S_msrNote& note);
+
+    void                  generateNoteHeadSettingsBeforeNote (
+                            const S_msrNote& note);
+    void                  generateNoteHeadSettingsAfterNote (
+                            const S_msrNote& note);
+
+    // beams
+    // ------------------------------------------------------
+
+    void                  generateNoteBeamsAfterNote (
+                            const S_msrNote& note);
+
+    // slurs
+    // ------------------------------------------------------
+
+    void                  generateNoteSlurDirection (
+                            const S_msrNote& note);
+    void                  generateNoteSlursList (
+                            const S_msrNote& note);
+
+    void                  generateNoteLigaturesList (
+                            const S_msrNote& note);
+
+    // segnos
+    // ------------------------------------------------------
+
+    void                  generateSegno (
+                            const S_msrSegno& segno);
+
+    // codas
+    // ------------------------------------------------------
+
+    void                  generateCoda (
+                            const S_msrCoda& coda);
+
+    // glissandos
+    // ------------------------------------------------------
+
+    void                  generateNoteGlissandoStyles (
+                            const S_msrNote& note);
+
+    void                  generateNoteGlissandosListWithText (
+                            const S_msrNote& note);
+
+    void                  generateGlissandos (
+                            const std::list <S_msrGlissando>&
+                              glissandosList);
+
+    // slides
+    // ------------------------------------------------------
+
+    void                  generateNoteSlideLineStyles (
+                            const S_msrNote& note);
+    void                  generateNoteSlidesListWithText (
+                            const S_msrNote& note);
+
+    void                  generateNoteSlides (
+                            const std::list <S_msrSlide>&
+                              slidesList);
+
+    // words
+    // ------------------------------------------------------
+
+    void                  generateNoteWordsList (
+                            const std::list <S_msrWords>& noteWordsList);
+
+    // stems
+    // ------------------------------------------------------
+
+    // the LilyPond \stem* commands have a persistent effect, hence:
+    msrStemKind           fCurrentStemKind;
+
+    std::string           stemAsLilypondString (
+                            msrStemKind stemKind);
+
+    void                  generateStemIfNeededAndUpdateCurrentStemKind (
+                            const S_msrStem& stem);
+
+    // beams
+    // ------------------------------------------------------
+
+    // JMI ???
+
+    // slurs
+    // ------------------------------------------------------
+
+    // the LilyPond \slur* commands have a persistent effect, hence:
+    msrPlacementKind      fCurrentSlurPlacementKind;
+
+    // articulations
+
+    msrDirectionKind      fCurrentArpeggioDirectionKind;
+
+    void                  generateNoteArticulation (
+                            const S_msrArticulation& articulation);
+
+    void                  generateChordArticulation (
+                            const S_msrArticulation& articulation);
+
+    void                  generateArticulations (
+                            const S_msrNote note);
+
+    // technicals
+    // ------------------------------------------------------
+
+    std::string           technicalAsLilypondString (
+                            const S_msrTechnical& technical);
+
+    std::string           technicalWithIntegerAsLilypondString (
+                            const S_msrTechnicalWithInteger& technicalWithInteger);
+
+    std::string           technicalWithFloatAsLilypondString (
+                            const S_msrTechnicalWithFloat& technicalWithFloat);
+
+    std::string           technicalWithStringAsLilypondString (
+                            const S_msrTechnicalWithString& technicalWithString);
+
+
+    void                  generateTechnicals (
+                            const std::list <S_msrTechnical>&
+                              technicalsList);
+
+    void                  generateTechnicalsWithInteger (
+                            const std::list <S_msrTechnicalWithInteger>&
+                              technicalWithIntegersList);
+
+    void                  generateTechnicalsWithFloat (
+                            const std::list <S_msrTechnicalWithFloat>&
+                              technicalWithFloatsList);
+
+    void                  generateNoteTechnicalsListWithStrings (
+                            const S_msrNote& note);
+
+    void                  generateTechnicalsWithStringsList (
+                            const std::list <S_msrTechnicalWithString>&
+                              technicalWithStringsList);
+
+    // ornaments
+    // ------------------------------------------------------
+
+    // in LilyPond, \stopTrillSpan should apply to the note following
+    // the one that holds it in MusicXML and in the MSR
+    S_msrSpanner          fPendingTrillSpannerForStop;
+
+    void                  generateOrnament (
+                            const S_msrOrnament& ornament);
+
+    // trills
+    // ------------------------------------------------------
+
+    Bool                  fOnGoingTrillSpanner;
+
+    // spanners
+    // ------------------------------------------------------
+
+    msrPlacementKind      fCurrentSpannerPlacementKind;
+
+    void                  generateBeforeNoteSpannersListIfAny (
+                            const S_msrNote& note);
+
+    void                  generateAfterNoteSpannersListIfAny (
+                            const S_msrNote& note);
+
+    void                  generateSpannerBeforeNote (
+                            const S_msrSpanner& spanner,
+                            const S_msrNote&    note);
+
+    void                  generateSpannerAfterNote (
+                            const S_msrSpanner& spanner,
+                            const S_msrNote&    note);
+
+    // dynamics
+    // ------------------------------------------------------
+
+    std::string           dynamicAsLilypondString (
+                            const S_msrDynamic& dynamic);
+
+    void                  generateDynamics (
+                            const std::list <S_msrDynamic>&
+                              dynamicsList);
+
+    void                  generateOtherDynamics (
+                            const std::list <S_msrOtherDynamic>&
+                              otherDynamicsList);
+
+    // string tuning
+    // ------------------------------------------------------
+
+    std::string           stringTuningAsLilypondString (
+                            int                      inputLineNumber,
+                            const S_msrStringTuning& stringTuning);
+
+    // harp pedals tuning
+    // ------------------------------------------------------
+
+    std::string           harpPedalTuningAsLilypondString (
+                            msrAlterationKind alterationKind);
+
+    // transposition
+    // ------------------------------------------------------
+
+    void                  transposeDiatonicError (
+                            int inputLineNumber,
+                            int transposeDiatonic,
+                            int transposeChromatic);
+
+    // harmonies
+    // ------------------------------------------------------
+
+    Bool                  fPowerChordHaveAlreadyBeenGenerated;
+                            // to generate it only once
+
+    std::string           harmonyAsLilypondString (
+                            const S_msrHarmony& harmony);
+
+    std::string           harmonyDegreeAlterationKindAsLilypondString (
+                            msrAlterationKind harmonyDegreeAlterationKind);
+
+    // frames
+    // ------------------------------------------------------
+
+    std::string           frameAsLilypondString (
+                            const S_msrFrame& frame);
+
+    // figured bass
+    // ------------------------------------------------------
+
+    std::string           figureAsLilypondString (
+                            const S_msrBassFigure& bassFigure);
+    std::string           figuredBassAsLilypondString (
+                            const S_msrFiguredBass& figuredBass);
+
+    S_msrFiguredBass
+                          fCurrentFiguredBass;
+    size_t                fCurrentFiguredBassFiguresCounter;
+
+  private:
+
+    // options
+    // ------------------------------------------------------
+
+    S_msrOahGroup         fMsrOahGroup;
+    S_lpsrOahGroup        fLpsrOahGroup;
+
+    // the LPSR score we're visiting
+    // ------------------------------------------------------
+
+    S_lpsrScore           fVisitedLpsrScore;
+
+    // the output stream
+    // ------------------------------------------------------
+
+    std::ostream&         fLilypondCodeStream;
+
+    // LilyPond version
+    // ------------------------------------------------------
+
+    void                  generateLilypondVersion ();
+
+    // identification
+    // ------------------------------------------------------
+
+    /* JMI
+    std::string           fScoreTitle;
+    std::string           fScoreSubTitle;
+    std::string           fScoreSubSubTitle;
+
+    void                  computeHeaderFields ();
+*/
+
+    // book blocks
+    // ------------------------------------------------------
+
+    Bool                  fOnGoingBookBlock; // JMI
+
+    // book part blocks
+    // ------------------------------------------------------
+
+    Bool                  fOnGoingBookPartBlock;
+
+
+    // score blocks
+    // ------------------------------------------------------
+
+    Bool                  fOnGoingScoreBlock; // JMI
+
+    // layout contexts
+    // ------------------------------------------------------
+
+    std::string           cLilypondLayoutContextScoreOpener,
+                          cLilypondLayoutContextScoreCloser;
+
+    std::string           cLilypondLayoutContextStaffOpener,
+                          cLilypondLayoutContextStaffCloser;
+
+    std::string           cLilypondLayoutContextVoiceOpener,
+                          cLilypondLayoutContextVoiceCloser;
+
+    // parallel music
+    // ------------------------------------------------------
+
+    S_lpsrParallelMusicBLock
+                          fCurrentParallelMusicBLock;
+
+    // part group blocks
+    // ------------------------------------------------------
+
+    int                   fNumberOfPartGroupBlocks;
+    int                   fPartGroupBlocksCounter;
+
+    // part blocks
+    // ------------------------------------------------------
+
+    int                   fNumberOfPartGroupBlockElements;
+    int                   fPartGroupBlockElementsCounter;
+
+    // staff blocks
+    // ------------------------------------------------------
+
+    int                   fNumberOfStaffBlocksElements;
+    int                   fStaffBlocksCounter;
+
+    // partgroups
+    // ------------------------------------------------------
+
+    std::string           cLilypondPartGroupOpener,
+                          cLilypondPartGroupCloser;
+
+    // staff groups
+    // ------------------------------------------------------
+
+    std::string           cLilypondNewStaffGroup,
+                          cLilypondStaffGroupOpener,
+                          cLilypondStaffGroupCloser;
+
+    // barlines
+    // ------------------------------------------------------
+
+
+    // with
+    // ------------------------------------------------------
+
+    std::string           cLilypondWithOpener,
+                          cLilypondWithCloser;
+
+    // parallel music
+    // ------------------------------------------------------
+
+    std::string           cLilypondParallelMusicOpener,
+                          cLilypondParallelMusicCloser;
+
+    // ligatures
+    // ------------------------------------------------------
+
+    std::string           cLilypondLigatureOpener,
+                          cLilypondLigatureCloser;
+
+    void                  generateLigatures (
+                            const std::list <S_msrLigature>&
+                              ligaturesList);
+
+    // wedges
+    // ------------------------------------------------------
+
+    void                  generateNoteWedgesList (
+                            const S_msrNote& note);
+
+    void                  generateWedges (
+                            const std::list <S_msrWedge>&
+                              wedgesList);
+
+    // hairpins
+    // ------------------------------------------------------
+
+    std::string           cLilypondHairPinsCrescendo,
+                          cLilypondHairPinsDecrescendo,
+                          cLilypondHairPinsStop;
+
     // lyrics
     // ------------------------------------------------------
+
+    std::string           cLilypondNewLyrics;
+
     Bool                  fOnGoingStanza;
     S_msrStanza           fCurrentStanza;
 
@@ -1392,7 +1604,7 @@ class EXP lpsr2lilypondTranslator :
     void                  generateSyllableDescripionAsComment (
                             const S_msrSyllable& syllable);
 
-    void                  generateLilypondCodeForSyllable (
+    void                  generateLilypondSyllable (
                             const S_msrSyllable& syllable);
 
     void                  generateCodeBeforeSyllableIfRelevant (
@@ -1412,26 +1624,31 @@ class EXP lpsr2lilypondTranslator :
 
     // octaves entry
     // ------------------------------------------------------
+
     /* this reference is:
           mobile in relative mode
           unused in absolute mode
           fixed  in fixed mode
     */
+
     S_msrNote             fCurrentOctaveEntryReference;
     void                  setCurrentOctaveEntryReferenceFromTheLilypondOah ();
 
     // notes
+    // ------------------------------------------------------
 
     std::string           msrQuarterTonesPitchesLanguageKindAsLilypondString (
                             msrQuarterTonesPitchesLanguageKind languageKind);
 
     // repeats
     // ------------------------------------------------------
+
     std::list <S_lpsrRepeat>
                           fRepeatDescrsStack;
 
     // multi-measure rests
     // ------------------------------------------------------
+
     int                   fRemainingMeasureRestsNumber;
     Bool                  fOnGoingMultiMeasureRests;
 
@@ -1440,6 +1657,7 @@ class EXP lpsr2lilypondTranslator :
 
     // measures
     // ------------------------------------------------------
+
     // we need to count the measures
     // for option fSeparatorLineEveryNMeasures and bar number checks,
     // since measure numbers can actually be any strings
@@ -1448,10 +1666,11 @@ class EXP lpsr2lilypondTranslator :
 
     // notes
     // ------------------------------------------------------
+
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    std::list <S_msrNote>  fOnGoingNotesStack; // USELESS??? JMI CLAR
+    std::list <S_msrNote> fOnGoingNotesStack; // USELESS??? JMI CLAR
 
 
     // double tremolos
@@ -1459,93 +1678,28 @@ class EXP lpsr2lilypondTranslator :
 
     // octave shifts
     // ------------------------------------------------------
-    void                  generateCodeForOctaveShiftBeforeNote (
+
+    void                  generateOctaveShiftBeforeNote (
                             const S_msrOctaveShift& octaveShift);
-    void                  generateCodeForOctaveShiftAfterNote (
+    void                  generateOctaveShiftAfterNote (
                             const S_msrOctaveShift& octaveShift);
-
-    // chords
-    // ------------------------------------------------------
-    std::list <int>        fPendingChordMemberNotesStringNumbers;
-
-    Bool                  fOnGoingChord;
-    S_msrChord            fCurrentChord;
-
-    std::list <int>        fCurrentChordPendingSlurs;
-
-    void                  generateCodeAheadOfChordContents (
-                            const S_msrChord& chord);
-
-    void                  generateCodeRightBeforeChordContents (
-                            const S_msrChord& chord);
-
-    void                  generateCodeForChordInGraceNotesGroupContents (
-                            const S_msrChord& chord);
-
-    void                  generateCodeRightAfterChordContents (
-                            const S_msrChord& chord);
-
-    void                  generateChordInGraceNotesGroup (
-                            const S_msrChord& chord);
-
-
-    // tuplets
-    // ------------------------------------------------------
-// JMI     const S_msrTuplet&          fCurrentMsrTupletClone; JMI v0.9.79
-    std::list <S_msrTuplet>
-                          fOnGoingTupletsStack;
 
     // stanzas
     // ------------------------------------------------------
-    S_msrStanza           fCurrentStanzaClone;
-    Bool                  fGenerateCodeForOngoingNonEmptyStanza;
+
+//     S_msrStanza           fCurrentStanzaClone;
+    Bool                  fGenerateOngoingNonEmptyStanza;
 
 
     // syllables
     // ------------------------------------------------------
+
     S_msrSyllable         fCurrentMsrSyllableClone;
-
-
-    // book blocks
-    // ------------------------------------------------------
-    Bool                  fOnGoingBookBlock; // JMI
-
-    // book part blocks
-    // ------------------------------------------------------
-    Bool                  fOnGoingBookPartBlock;
-
-
-    // score blocks
-    // ------------------------------------------------------
-    Bool                  fOnGoingScoreBlock; // JMI
-
-
-    // parallel music
-    // ------------------------------------------------------
-    S_lpsrParallelMusicBLock
-                          fCurrentParallelMusicBLock;
-
-
-    // part group blocks
-    // ------------------------------------------------------
-    int                   fNumberOfPartGroupBlocks;
-    int                   fPartGroupBlocksCounter;
-
-
-    // part blocks
-    // ------------------------------------------------------
-    int                   fNumberOfPartGroupBlockElements;
-    int                   fPartGroupBlockElementsCounter;
-
-
-    // staff blocks
-    // ------------------------------------------------------
-    int                   fNumberOfStaffBlocksElements;
-    int                   fStaffBlocksCounter;
 
 
     // current ongoing values display
     // ------------------------------------------------------
+
     void                  displayCurrentOnGoingValues ();
 };
 
