@@ -311,13 +311,13 @@ class EXP msrStaff : public msrElement
                             int                repeatTimes);
     */
 
-    // multi-measure rests
+    // multiple measure rests
 
-    void                  appendMultiMeasureRestToStaff ( // JMI UNUSED
+    void                  appendMultipleMeasureRestToStaff ( // JMI UNUSED
                             int inputLineNumber,
-                            int multiMeasureRestsMeasuresNumber);
+                            int multipleMeasureRestsMeasuresNumber);
 
-    void                  appendPendingMultiMeasureRestsToStaff (
+    void                  appendPendingMultipleMeasureRestsToStaff (
                             int inputLineNumber);
 
     // other
@@ -331,9 +331,9 @@ class EXP msrStaff : public msrElement
                             const std::string& previousMeasureNumber,
                             int                emptyMeasuresNumber);
 
-    void                  appendMultiMeasureRestCloneToStaff (
+    void                  appendMultipleMeasureRestCloneToStaff (
                             int                          inputLineNumber,
-                            const S_msrMultiMeasureRest& multiMeasureRests);
+                            const S_msrMultipleMeasureRest& multipleMeasureRests);
 
     void                  appendRepeatCloneToStaff (
                             int                inputLineNumber,
@@ -466,9 +466,9 @@ class EXP msrStaff : public msrElement
     std::vector <std::list <S_msrMeasure>>
                           fStaffMeasuresFlatListsVector;
 
-    // multi-measure rests
+    // multiple measure rests
 
-    Bool                  fStaffContainsMultiMeasureRests;
+    Bool                  fStaffContainsMultipleMeasureRests;
 
     // measures slices sequence
 

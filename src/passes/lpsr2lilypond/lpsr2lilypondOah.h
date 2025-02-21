@@ -1539,16 +1539,16 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahColorRGBAtom     getLedgerLinesColorRGBAtom () const
                               { return fLedgerLinesColorRGBAtom; }
 
-    // multi-measure rests
+    // multiple measure rests
     // --------------------------------------
 
-    void                  setMultiMeasureRestsExpandLimit ()
-                              { fMultiMeasureRestsExpandLimit = true; }
+    void                  setMultipleMeasureRestsExpandLimit ()
+                              { fMultipleMeasureRestsExpandLimit = true; }
 
-    Bool                  getMultiMeasureRestsExpandLimit () const
-                              { return fMultiMeasureRestsExpandLimit; }
-    S_oahIntegerAtom      getMultiMeasureRestsExpandLimitAtom () const
-                              { return fMultiMeasureRestsExpandLimitAtom; }
+    Bool                  getMultipleMeasureRestsExpandLimit () const
+                              { return fMultipleMeasureRestsExpandLimit; }
+    S_oahIntegerAtom      getMultipleMeasureRestsExpandLimitAtom () const
+                              { return fMultipleMeasureRestsExpandLimitAtom; }
 
     // chords
     // --------------------------------------
@@ -2080,11 +2080,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahColorRGBAtom     fLedgerLinesColorRGBAtom;
 
 
-    // multi-measure rests
+    // multiple measure rests
     // --------------------------------------
 
-    int                   fMultiMeasureRestsExpandLimit;
-    S_oahIntegerAtom      fMultiMeasureRestsExpandLimitAtom;
+    int                   fMultipleMeasureRestsExpandLimit;
+    S_oahIntegerAtom      fMultipleMeasureRestsExpandLimitAtom;
 
     // notes
     // --------------------------------------

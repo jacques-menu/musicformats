@@ -19,7 +19,7 @@
 #include "msrLyrics.h"
 #include "msrMeasures.h"
 #include "msrMoments.h"
-#include "msrMultiMeasureRests.h"
+#include "msrMultipleMeasureRests.h"
 
 
 namespace MusicFormats
@@ -191,14 +191,14 @@ class EXP msrSegment : public msrVoiceElement
                             const std::string&     measureNumber,
                             msrMeasureImplicitKind measureImplicitKind);
 
-    // multi-measure rests
+    // multiple measure rests
 
-    Bool                  fOnGoingMultiMeasureRest;
-    S_msrMultiMeasureRest
-                          fCurrentMultiMeasureRest;
+    Bool                  fOnGoingMultipleMeasureRest;
+    S_msrMultipleMeasureRest
+                          fCurrentMultipleMeasureRest;
 
-    void                  appendMultiMeasureRestToSegment (
-                            const S_msrMultiMeasureRest& multiMeasureRest);
+    void                  appendMultipleMeasureRestToSegment (
+                            const S_msrMultipleMeasureRest& multipleMeasureRest);
 
     // clef, key, time signature
 

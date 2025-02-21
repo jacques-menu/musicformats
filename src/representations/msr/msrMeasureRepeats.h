@@ -440,7 +440,7 @@ class EXP msrMeasureRepeatElement : public msrElement
                             const std::string&          context);
 
 
-    void                  appendMultiMeasureRestToMeasureRepeatElementsList (
+    void                  appendMultipleMeasureRestToMeasureRepeatElementsList (
                             int                         inputLineNumber,
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&       context);

@@ -499,13 +499,13 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendRepeatEndingCloneToPart (
                             const S_msrRepeatEnding& repeatEndingClone);
 
-    // multi-measure rests
+    // multiple measure rests
 
-    void                  appendMultiMeasureRestToPart (
+    void                  appendMultipleMeasureRestToPart (
                             int inputLineNumber,
                             int measureRestsNumber);
 
-    void                  appendPendingMultiMeasureRestsToPart (
+    void                  appendPendingMultipleMeasureRestsToPart (
                             int inputLineNumber);
 
     void                  replicateLastAppendedMeasureInPart (
@@ -517,9 +517,9 @@ class EXP msrPart : public msrPartGroupElement
                             const std::string& previousMeasureNumber,
                             int                measureRestsNumber);
 
-    void                  appendMultiMeasureRestCloneToPart (
+    void                  appendMultipleMeasureRestCloneToPart (
                             int                          inputLineNumber,
-                            const S_msrMultiMeasureRest& multiMeasureRests);
+                            const S_msrMultipleMeasureRest& multipleMeasureRests);
 
     // measure repeats
 
@@ -533,7 +533,7 @@ class EXP msrPart : public msrPartGroupElement
 
 //     void                  appendMeasureRepeatCloneToPart ( JMI UNUSED v0.9.66
 //                             int                              inputLineNumber,
-//                             const S_msrMultiMeasureRest& multiMeasureRests);
+//                             const S_msrMultipleMeasureRest& multipleMeasureRests);
 
     // frames
 
@@ -743,9 +743,9 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrTransposition    fPartCurrentTransposition;
 
-    // multi-measure rests
+    // multiple measure rests
 
-    Bool                  fPartContainsMultiMeasureRests;
+    Bool                  fPartContainsMultipleMeasureRests;
 
     // measures slices sequence
 

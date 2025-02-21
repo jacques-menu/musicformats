@@ -5,7 +5,9 @@
   https://www.w3.org/2021/06/musicxml40/musicxml-reference/examples/measure-repeat-element/
   https://www.w3.org/2021/06/musicxml40/musicxml-reference/elements/measure-repeat/
   -->
-  <movement-title>Simple Measure Repeat</movement-title>
+  <work>
+    <work-title>Simple Measure Repeat</work-title>
+    </work>
   <identification>
     <rights>©</rights>
     <encoding>
@@ -45,6 +47,7 @@
 <part id="P1">
    <measure number="2">
       <attributes>
+        <divisions>2</divisions>
          <measure-style>
             <measure-repeat type="start">1</measure-repeat>
          </measure-style>
@@ -88,7 +91,10 @@
          </measure-style>
       </attributes>
       <note>
-         <rest measure="yes"/>
+         <pitch>
+            <step>E</step>
+            <octave>4</octave>
+         </pitch>
          <duration>8</duration>
          <voice>1</voice>
       </note>

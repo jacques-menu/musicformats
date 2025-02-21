@@ -2999,40 +2999,57 @@ This option implies '-trace-tuplets-basics, -ttupsb' and '-trace-tuplets, -ttups
     addBooleanAtom (
       traceMeasureRepeatsDetailsBooleanAtom);
 
-  // multi-measure rests
+  // multiple measure rests basics
 
   S_oahTwoBooleansAtom
-    traceMultiMeasureRestsBooleanAtom =
+    traceMultipleMeasureRestsBasicsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-multi-measure-rests", "tmmrests",
-R"(Multi-measure rests)",
-        "fTraceMultiMeasureRests",
-        fTraceMultiMeasureRests,
+        "trace-multiple-measure-rests-basics", "tmmrestsb",
+R"(Multiple measure rests basics)",
+        "fTraceMultipleMeasureRestsBasics",
+        fTraceMultipleMeasureRestsBasics,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceMultiMeasureRestsBooleanAtom);
+      traceMultipleMeasureRestsBasicsBooleanAtom);
+
+  // multiple measure rests
+
+  S_oahTwoBooleansAtom
+    traceMultipleMeasureRestsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-multiple-measure-rests", "tmmrests",
+R"(Multiple measure rests)",
+        "fTraceMultipleMeasureRests",
+        fTraceMultipleMeasureRests,
+        fTracePassesBooleanAtom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      traceMultipleMeasureRestsBooleanAtom);
   repeatsToSlashesMultiplexBooleansAtom->
     addBooleanAtom (
-      traceMultiMeasureRestsBooleanAtom);
+      traceMultipleMeasureRestsBooleanAtom);
+
+  // multiple measure rests
 
   S_oahThreeBooleansAtom
-    traceMultiMeasureRestsDetailsBooleanAtom =
+    traceMultipleMeasureRestsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-multi-measure-rests-details", "tmfbrd",
-R"(Multi-measure rests details)",
-        "fTraceMultiMeasureRestsDetails",
-        fTraceMultiMeasureRestsDetails,
-        traceMultiMeasureRestsBooleanAtom,
+        "trace-multiple-measure-rests-details", "mmrestsd",
+R"(Multiple measure rests details)",
+        "fTraceMultipleMeasureRestsDetails",
+        fTraceMultipleMeasureRestsDetails,
+        traceMultipleMeasureRestsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceMultiMeasureRestsDetailsBooleanAtom);
+      traceMultipleMeasureRestsDetailsBooleanAtom);
   repeatsToSlashesMultiplexBooleansAtom->
     addBooleanAtom (
-      traceMultiMeasureRestsDetailsBooleanAtom);
+      traceMultipleMeasureRestsDetailsBooleanAtom);
 
   // beats repeats
 
@@ -3544,12 +3561,12 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     fTraceMeasureRepeatsDetails <<
     std::endl <<
 
-    // multi-measure rests
-    std::setw (fieldWidth) << "fTraceMultiMeasureRests" << ": " <<
-    fTraceMultiMeasureRests <<
+    // multiple measure rests
+    std::setw (fieldWidth) << "fTraceMultipleMeasureRests" << ": " <<
+    fTraceMultipleMeasureRests <<
     std::endl <<
-    std::setw (fieldWidth) << "fTraceMultiMeasureRestsDetails" << ": " <<
-    fTraceMultiMeasureRestsDetails <<
+    std::setw (fieldWidth) << "fTraceMultipleMeasureRestsDetails" << ": " <<
+    fTraceMultipleMeasureRestsDetails <<
     std::endl <<
 
     // beats repeats

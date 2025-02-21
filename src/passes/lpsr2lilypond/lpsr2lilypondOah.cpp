@@ -4286,7 +4286,7 @@ The default is 'DEFAULT_VALUE'.)",
         "fAccidentalStyleKind",
         fAccidentalStyleKind));
 
-  // multi-measure rests
+  // multiple measure rests
   // --------------------------------------
 
   subGroup->
@@ -4307,26 +4307,26 @@ This causes a \compressMeasureRests command to be generated.)",
         "merge-staff-common-rests-in-lilypond", "mscril",
 R"(Merge common rests in LilyPond staves to obtain better looking scores.
 Limitations: this only handles two voices
-and does not handle multi-measure rests.)",
+and does not handle multiple measure rests.)",
         "fMergeStaffCommonRests",
         fMergeStaffCommonRests));
 
-  // multi-measure rests
+  // multiple measure rests
   // --------------------------------------
 
-  fMultiMeasureRestsExpandLimitAtom =
+  fMultipleMeasureRestsExpandLimitAtom =
       oahIntegerAtom::create (
-        "multi-measure-rests-expand-limit", "fbrel",
+        "multiple-measure-rests-expand-limit", "fbrel",
 R"(Set the maximum number of measures expanded in church rests to N,
 where N is a positive integer.
 The default value is 10.)",
         "N",
-        "fMultiMeasureRestsExpandLimit",
-        fMultiMeasureRestsExpandLimit);
+        "fMultipleMeasureRestsExpandLimit",
+        fMultipleMeasureRestsExpandLimit);
 
   subGroup->
     appendAtomToSubGroup (
-      fMultiMeasureRestsExpandLimitAtom);
+      fMultipleMeasureRestsExpandLimitAtom);
 
   // input line numbers
   // --------------------------------------
@@ -6110,8 +6110,8 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
       fMergeStaffCommonRests <<
       std::endl <<
 
-    std::setw (valueFieldWidth) << "fMultiMeasureRestsExpandLimit" << ": " <<
-      fMultiMeasureRestsExpandLimit <<
+    std::setw (valueFieldWidth) << "fMultipleMeasureRestsExpandLimit" << ": " <<
+      fMultipleMeasureRestsExpandLimit <<
       std::endl <<
 
     std::setw (valueFieldWidth) << "fInputStartLineNumbers" << ": " <<
@@ -6753,8 +6753,8 @@ void lpsr2lilypondOahGroup::displayLpsr2LilypondOahValues (int fieldWidth)
       fMergeStaffCommonRests <<
       std::endl <<
 
-    std::setw (fieldWidth) << "fMultiMeasureRestsExpandLimit" << ": " <<
-      fMultiMeasureRestsExpandLimit <<
+    std::setw (fieldWidth) << "fMultipleMeasureRestsExpandLimit" << ": " <<
+      fMultipleMeasureRestsExpandLimit <<
       std::endl <<
 
     std::setw (fieldWidth) << "fInputStartLineNumbers" << ": " <<

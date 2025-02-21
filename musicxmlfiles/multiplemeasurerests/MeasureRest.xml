@@ -2,7 +2,9 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 1.1 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="1.1">
-  <movement-title>SingleMeasureRest</movement-title>
+  <work>
+    <work-title>Single Measure Restt</work-title>
+    </work>
   <identification>
     <creator type="composer">Gentil compositeur</creator>
     <creator type="arranger">Gentil arrangeur</creator>

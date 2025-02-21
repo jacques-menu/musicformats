@@ -2427,11 +2427,11 @@ Here is how \xmlToLy\ handlles the second inversion of the chord in \gitmxmlfile
 \subsection{Elements handled in different ways}
 % -------------------------------------------------------------------------
 
-Multi-measure rests are specified in \mxml\ with the '{\tt <multiple-rest>}' element. All measures in the sequence have to be explicitly present in the \mxml\ data.
+Multiple measure rests are specified in \mxml\ with the '{\tt <multiple-rest>}' element. All measures in the sequence have to be explicitly present in the \mxml\ data.
 
 \sep
 
-For example, the first two measures of \gitmxmlfile{rests/MultiMeasureRests.xml} are a multi-measure rest, described by:
+For example, the first two measures of \gitmxmlfile{rests/MultipleMeasureRests.xml} are a multiple measure rest, described by:
 \begin{lstlisting}[language=MusicXML]
   <part id="P1">
     <measure number="1">
@@ -2477,27 +2477,27 @@ This file is handled differently by various applications, as can be seen below.
 \page
 
 \muse\ displays it this way:\\
-\includegraphics[scale=0.55]{MultiMeasureRestsMuseScore.png}
+\includegraphics[scale=0.55]{MultipleMeasureRestsMuseScore.png}
 
 \sep \sep
 
 \mxmlToLy\ produces:\\
-\includegraphics{MultiMeasureRestsMusicxml2ly.png}
+\includegraphics{MultipleMeasureRestsMusicxml2ly.png}
 
 \sep \sep
 
 \sib\ produces:\\
-\includegraphics[scale=0.525]{MultiMeasureRestsSibelius.png}
+\includegraphics[scale=0.525]{MultipleMeasureRestsSibelius.png}
 
 \sep \sep
 
 \fin\ produces:\\
-\includegraphics[scale=0.8]{MultiMeasureRestsFinale.png}
+\includegraphics[scale=0.8]{MultipleMeasureRestsFinale.png}
 
 \sep \sep
 
 \xmlToLy\ is still experimental, and currently produces:\\
-\includegraphics{MultiMeasureRestsXml2ly.png}
+\includegraphics{MultipleMeasureRestsXml2ly.png}
 
 \page
 

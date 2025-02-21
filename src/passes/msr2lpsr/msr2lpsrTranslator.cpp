@@ -3423,10 +3423,10 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
       createMeasureNewbornClone (
         fCurrentSegmentClone);
 
-  if (fOnGoingMultiMeasureRests) {
-    // append current measure clone to the current multi-measure rests clone
-    fCurrentMultiMeasureRestsClone->
-      appendMeasureToMultiMeasureRest (
+  if (fOnGoingMultipleMeasureRests) {
+    // append current measure clone to the current multiple measure rests clone
+    fCurrentMultipleMeasureRestsClone->
+      appendMeasureToMultipleMeasureRest (
         fCurrentMeasureClone);
   }
   else {
@@ -8144,14 +8144,14 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 }
 
 //________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrMultiMeasureRest& elt)
+void msr2lpsrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrMultiMeasureRest" <<
+      "--> Start visiting msrMultipleMeasureRest" <<
       ", line " <<  elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -8163,7 +8163,7 @@ void msr2lpsrTranslator::visitStart (S_msrMultiMeasureRest& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -8177,29 +8177,29 @@ void msr2lpsrTranslator::visitStart (S_msrMultiMeasureRest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // create a multi-measure rests clone
-  fCurrentMultiMeasureRestsClone =
+  // create a multiple measure rests clone
+  fCurrentMultipleMeasureRestsClone =
     elt->
-      createMultiMeasureRestNewbornClone (
+      createMultipleMeasureRestNewbornClone (
         fCurrentSegmentClone);
 
   // append it to the current voice clone
   fCurrentVoiceClone->
-    appendMultiMeasureRestToVoice (
+    appendMultipleMeasureRestToVoice (
        elt->getInputLineNumber (),
-      fCurrentMultiMeasureRestsClone);
+      fCurrentMultipleMeasureRestsClone);
 
-  fOnGoingMultiMeasureRests = true;
+  fOnGoingMultipleMeasureRests = true;
 }
 
-void msr2lpsrTranslator::visitEnd (S_msrMultiMeasureRest& elt)
+void msr2lpsrTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrMultiMeasureRest" <<
+      "--> End visiting msrMultipleMeasureRest" <<
       ", line " <<  elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -8211,7 +8211,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMultiMeasureRest& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -8225,14 +8225,14 @@ void msr2lpsrTranslator::visitEnd (S_msrMultiMeasureRest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // forget about the current multi-measure rests
-  fCurrentMultiMeasureRestsClone = nullptr;
+  // forget about the current multiple measure rests
+  fCurrentMultipleMeasureRestsClone = nullptr;
 
   fResultingLpsr->
-    // this score needs the 'merge multi-measure rests' Scheme function
-    setMergeMultiMeasureRestsIsNeeded ();
+    // this score needs the 'merge multiple measure rests' Scheme function
+    setMergeMultipleMeasureRestsIsNeeded ();
 
-  fOnGoingMultiMeasureRests = false;
+  fOnGoingMultipleMeasureRests = false;
 }
 
 //________________________________________________________________________

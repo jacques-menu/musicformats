@@ -93,8 +93,8 @@
   %
   \RepeatOrd       	       = \VoiceElementOrd - 0.75 mm;
   %
-  \MultiMeasureRestsOrd  = \SegmentElementOrd - 0.75 mm;
-  \MeasureRepeatOrd         = \MultiMeasureRestsOrd - 0.75 mm;
+  \MultipleMeasureRestsOrd  = \SegmentElementOrd - 0.75 mm;
+  \MeasureRepeatOrd         = \MultipleMeasureRestsOrd - 0.75 mm;
   \BeatRepeatOrd            = \MeasureRepeatOrd - 0.75 mm;
   %
   \otherMeasureElementsOrd  = \MeasureElementOrd - 1.5 mm;
@@ -183,7 +183,7 @@
 \coordinate (Syllable)         at (\leftColumnAbs,\SyllableOrd);
 
 \coordinate (Repeat)           at (\rightColumnAbs,\RepeatOrd);
-\coordinate (MultiMeasureRests)     at (\rightColumnAbs,\MultiMeasureRestsOrd);
+\coordinate (MultipleMeasureRests)     at (\rightColumnAbs,\MultipleMeasureRestsOrd);
 \coordinate (MeasureRepeat)   at (\rightColumnAbs,\MeasureRepeatOrd);
 \coordinate (BeatRepeat)      at (\rightColumnAbs,\BeatRepeatOrd);
 
@@ -424,13 +424,13 @@
 
 
 
-% MultiMeasureRests
+% MultipleMeasureRests
 % ------------------------------------------------
 \node [fill=\RepeatRectanglesBackgroundColor]
-  (MultiMeasureRests) at (MultiMeasureRests) {\texttt {\textbf {MultiMeasureRests}}};
+  (MultipleMeasureRests) at (MultipleMeasureRests) {\texttt {\textbf {MultipleMeasureRests}}};
 
 \draw [->, thick, \baseClassArcsColor]
-	(MultiMeasureRests)
+	(MultipleMeasureRests)
 	.. controls +(170:5 cm) and +(330:3 cm) ..
   (SegmentElement);
 

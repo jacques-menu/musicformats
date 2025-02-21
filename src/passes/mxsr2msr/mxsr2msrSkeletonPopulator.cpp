@@ -78,8 +78,8 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentMeasureRepeatMeasuresNumber = -1;
   fCurrentMeasureRepeatSlashesNumber = -1;
 
-  fCurrentMeasureRestsNumber = 0;
-  fRemainingMeasureRestsCounter = 0;
+  fCurrentMultipleMeasureRestNumber = 0;
+  fRemainingMultipleMeasureRestNumber = 0;
 
   fCurrentSlashDotsNumber = -1;
 
@@ -10759,7 +10759,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       if (it != measuresToBeReplicatedStringToIntMap.end ()) {
         // fCurrentMeasureNumber is to be replicated,
   #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+        if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
           std::stringstream ss;
 
           ss <<
@@ -10783,7 +10783,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
             measureReplicatesNumber);
       }
       else {
-        // fRemainingMeasureRestsCounter JMI ???
+        // fRemainingMultipleMeasureRestNumber JMI ???
       }
     }
   }
@@ -10812,7 +10812,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       ss >> measuresToBeAdded;
 
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+      if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
         std::stringstream ss;
 
         ss <<
@@ -10836,7 +10836,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           measuresToBeAdded);
     }
     else {
-      // fRemainingMeasureRestsCounter JMI ???
+      // fRemainingMultipleMeasureRestNumber JMI ???
     }
   }
 
@@ -13190,7 +13190,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure_repeat& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 /*
-v < 4.0
+v<4.0
   The multiple-rest and measure-repeat symbols indicate the
   number of measures covered in the element content.
   The beat-repeat and slash elements can cover partial measures.
@@ -13391,7 +13391,31 @@ The <multiple-rest> element indicates multiple rests that span several measures.
       <multiple-rest>4</multiple-rest>
    </measure-style>
 </attributes>
-*/
+
+
+  // what do we do with fMultipleMeasureRestsUseSymbols ??? JMI v0.9.63
+    use-symbols":
+      Specifies whether the multiple rests uses the 1-bar / 2-bar / 4-bar rest symbols,
+      or a single shape. It is no if not specified.
+
+    <attributes>
+       <measure-style>
+          <multiple-rest>4</multiple-rest>
+       </measure-style>
+    </attributes>
+
+<!--
+	The text of the multiple-rest element indicates the number
+	of measures in the multiple rest. Multiple rests may use
+	the 1-bar / 2-bar / 4-bar rest symbols, or a single shape.
+	The use-symbols attribute indicates which to use; it is no
+	if not specified.
+-->
+<!ELEMENT multiple-rest (#PCDATA)>
+<!ATTLIST multiple-rest
+    use-symbols %yes-no; #IMPLIED
+>
+  */
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
@@ -13407,55 +13431,19 @@ The <multiple-rest> element indicates multiple rests that span several measures.
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentMeasureRestsNumber = (int)(*elt);
+  // measures number
 
-  std::string useSymbols = elt->getAttributeValue ("use-symbols");
+  fCurrentMultipleMeasureRestNumber = (int)(*elt);
 
-  // what do we do with fMultiMeasureRestsUseSymbols ??? JMI v0.9.63
-  /*
-    use-symbols":
-      Specifies whether the multiple rests uses the 1-bar / 2-bar / 4-bar rest symbols,
-      or a single shape. It is no if not specified.
-
-    <attributes>
-       <measure-style>
-          <multiple-rest>4</multiple-rest>
-       </measure-style>
-    </attributes>
-  */
-
-  if      (useSymbols == "yes") {
-    fMultiMeasureRestsUseSymbols = true;
-  }
-  else if (useSymbols == "no") {
-    fMultiMeasureRestsUseSymbols = false;
-  }
-  else {
-    if (! useSymbols.empty ()) {
-      std::stringstream ss;
-
-      ss <<
-        "multiple rest use-symbols " <<
-        useSymbols <<
-        " is unknown";
-
-      mxsr2msrError (
-        gServiceRunData->getInputSourceName (),
-        elt->getInputLineNumber (),
-        __FILE__, __LINE__,
-        ss.str ());
-      }
-  }
-
-  // create a multi-measure rests
+  // create a multiple measure rests
   fCurrentPart->
-    appendMultiMeasureRestToPart (
+    appendMultipleMeasureRestToPart (
       elt->getInputLineNumber (),
-      fCurrentMeasureRestsNumber);
+      fCurrentMultipleMeasureRestNumber);
 
-  // set remaining multi-measure rests counter
-  fRemainingMeasureRestsCounter =
-    fCurrentMeasureRestsNumber;
+  // set remaining multiple measure rests counter
+  fRemainingMultipleMeasureRestNumber =
+    fCurrentMultipleMeasureRestNumber;
 }
 
 void mxsr2msrSkeletonPopulator::visitEnd (S_multiple_rest& elt)
@@ -28922,364 +28910,50 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 
 
 
-// void mxsr2msrSkeletonPopulator::handleTupletBegin (
-//   const S_msrVoice& currentNoteVoice,
-//   int               tupletNumber)
-// {
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "Handling a tuplet begin with number " <<
-//       tupletNumber <<
-//       " in voice" <<
-//       currentNoteVoice->getVoiceName () <<
-//       ", line " << fCurrentNoteInputStartLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   // create the current tuplet
-//   S_msrTuplet
-//     tuplet =
-//       createTuplet (
-//         fCurrentNoteInputStartLineNumber,
-//         tupletNumber);
-//
-//   // handle it
-//   if (fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
-//     // tuplet is an outermost tuplet
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "An outermost tuplet begins at line " <<
-//         fCurrentNoteInputStartLineNumber <<
-//         " in voice " <<
-//         currentNoteVoice->getVoiceName ();
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     fCurrentOuterMostTuplet = tuplet;
-//   }
-//
-//   else {
-//     // tuplet is a nested tuplet
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "A nested tuplet begins at line " <<
-//         fCurrentNoteInputStartLineNumber <<
-//         " in voice " <<
-//         currentNoteVoice->getVoiceName ();
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     // register tuplet by pushing it onto the tuplet stack
-// //     fCurrentRecipientMxsrVoice->
-// //       pushTupletOntoTupletsStack (
-// //         tuplet,
-// //         "handleTupletBegin()");
-//
-// //   fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () = tuplet;
-//   }
-//
-//   // append endingTuplet where it belongs in fCurrentRecipientMxsrVoice->
-//   fCurrentRecipientMxsrVoice->
-//     appendTupletWhereItBelongs (
-//       currentNoteVoice->getVoiceNumber (),
-//       tuplet,
-//       "handleTupletBegin()");
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//     fCurrentRecipientMxsrVoice->
-//       displayTupletsStack (
-//         "############## handleTupletBegin()");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-//
-// void mxsr2msrSkeletonPopulator::handleTupletContinue (
-//   const S_msrNote&  note,
-//   const S_msrVoice& currentNoteVoice)
-// {
-//   if (fetchInnerMostTuplet ()) {
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "Handling a tuplet continue of tuplet stack top:" <<
-//         std::endl;
-//       ++gIndenter;
-//       ss <<
-//         fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->asString ();
-//       --gIndenter;
-//       ss <<
-//         " in voice " <<
-//         currentNoteVoice->getVoiceName ();
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     // populate fetchInnerMostTuplet ()
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//       gLog <<
-//         "--> handleTupletContinue(): appending tuplet member note " <<
-//         note->asShortString () <<
-//         " to stack top tuplet " <<
-//         fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->asString () <<
-//         " in voice " <<
-//         currentNoteVoice->getVoiceName () <<
-//         ", line " << note->getInputLineNumber () <<
-//         std::endl;
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     // append note to fetchInnerMostTuplet ()
-//     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
-//       appendNoteToTuplet (
-//         note);
-//   }
-//
-//   else {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "handleTupletContinue():" <<
-//       std::endl <<
-//       "tuplet member note " <<
-//       note->
-//         asShortString () <<
-//       " cannot be handled, tuplets stack is empty" <<
-//       ", line " << note->getInputLineNumber ();
-//
-//     mxsr2msrInternalError (
-//       gServiceRunData->getInputSourceName (),
-//       note->getInputLineNumber (),
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// }
-//
-// void mxsr2msrSkeletonPopulator::handleTupletEnd (
-//   const S_msrNote&  note,
-//   const S_msrVoice& currentNoteVoice)
-// {
-//   // handle tuplet
-//   if (fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
-//     // tuplet is an outermost tuplet
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "An outermost tuplet ends at line " <<
-//         note->getInputLineNumber () <<
-//         " in voice " <<
-//         currentNoteVoice->getVoiceName ();
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     fCurrentOuterMostTuplet = nullptr;
-//   }
-//
-//   else {
-//     // tuplet is a nested tuplet
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "A nested tuplet ends at line " <<
-//         note->getInputLineNumber () <<
-//         " in voice " <<
-//         currentNoteVoice->getVoiceName ();
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//   } // switch
-//
-//   // handle the tuplet stop
-//   if (! fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()) {
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//       mfIndentedStringStream iss;
-//
-//       iss <<
-//         "Handling tuplet end" << '\n';
-//       ++gIndenter;
-//
-//         iss <<
-//           "note: " << '\n';
-//         ++gIndenter;
-//           iss <<
-//             note->asShortString () << '\n';
-//         --gIndenter;
-//
-//         iss <<
-//           "tuplet stack top:" << '\n';
-//         ++gIndenter;
-//           iss <<
-//             fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->asString () << '\n';
-//         --gIndenter;
-//
-//         iss <<
-//           "in voice:" << '\n';
-//         ++gIndenter;
-//           iss <<
-//             currentNoteVoice->asShortString () << '\n';
-//         --gIndenter;
-//
-//       --gIndenter;
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         iss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//     // pop tuplets stack top
-// #ifdef MF_TRACE_IS_ENABLED
-//     if (gTraceOahGroup->getTraceTupletsBasics ()) {
-//     std::stringstream ss;
-//
-//       ss <<
-//         "--> handleTupletEnd(): popping tuplets stack top " <<
-//         note->asShortString () <<
-//         " to stack top tuplet " <<
-//         fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->asString () <<
-//         " in voice " <<
-//         currentNoteVoice->getVoiceName () <<
-//         ", line " << note->getInputLineNumber ();
-//
-//       gWaeHandler->waeTrace (
-//         __FILE__, __LINE__,
-//         ss.str ());
-//     }
-// #endif // MF_TRACE_IS_ENABLED
-//
-// //     S_msrTuplet
-// //       endingTuplet =
-// //         fCurrentRecipientMxsrVoice->
-// //           popTupletStackTop (
-// //             note->getInputLineNumber (),
-// //             "handleTupletEnd()");
-// //
-// //     // append endingTuplet where it belongs in fCurrentRecipientMxsrVoice->
-// //     fCurrentRecipientMxsrVoice->
-// //       appendTupletWhereItBelongs (
-// //         currentNoteVoice->getVoiceNumber (),
-// //         endingTuplet,
-// //         "handleTupletEnd()");
-//
-//     fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () =
-//       fCurrentRecipientMxsrVoice->fetchTupletsStackIsEmpty ()
-//         ? nullptr
-//         : fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ();
-//   }
-//
-//   else {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "handleTupletEnd():" <<
-//       " tuplet member note " <<
-//       note->
-//         asShortString () <<
-//       " cannot be handled, tuplets stack is empty" <<
-//       ", line " << note->getInputLineNumber ();
-//
-//     mxsr2msrInternalError (
-//       gServiceRunData->getInputSourceName (),
-//       note->getInputLineNumber (),
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceTupletsDetails ()) {
-//     fCurrentRecipientMxsrVoice->
-//       displayTupletsStack (
-//         "############## handleTupletEnd()");
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-// }
-//
 
 
-
-// void mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
+// void mxsr2msrSkeletonPopulator::handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure (
 //   int inputLineNumber)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+//   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
 //     constexpr int fieldWidth = 37;
 //
 //     gLog <<
-//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
+//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure()" <<
 //       std::endl;
 //
 //     ++gIndenter;
 //
 //     gLog <<
 //       std::setw (fieldWidth) <<
-//       "fRemainingMeasureRestsCounter" << ": " <<
-//       fRemainingMeasureRestsCounter <<
+//       "fRemainingMultipleMeasureRestNumber" << ": " <<
+//       fRemainingMultipleMeasureRestNumber <<
 //       std::endl << std::endl;
 //
 //     --gIndenter;
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   if (fRemainingMeasureRestsCounter <= 0) {
+//   if (fRemainingMultipleMeasureRestNumber <= 0) {
 //     mxsr2msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //       __FILE__, __LINE__,
-//       "fRemainingMeasureRestsCounter problem");
+//       "fRemainingMultipleMeasureRestNumber problem");
 //   }
 //
-//   // account for one more measure rest in the multi-measure rests
-//   --fRemainingMeasureRestsCounter;
+//   // account for one more measure rest in the multiple measure rests
+//   --fRemainingMultipleMeasureRestNumber;
 //
-//   if (fRemainingMeasureRestsCounter == 0) {
-//     // all multi-measure rests have been handled,
-//     // the current one is the first after the  multi-measure rests
+//   if (fRemainingMultipleMeasureRestNumber == 0) {
+//     // all multiple measure rests have been handled,
+//     // the current one is the first after the  multiple measure rests
 //     fCurrentPart->
-//       appendPendingMultiMeasureRestsToPart (
+//       appendPendingMultipleMeasureRestsToPart (
 //         inputLineNumber);
 //
-//     if (fRemainingMeasureRestsCounter == 1) {
+//     if (fRemainingMultipleMeasureRestNumber == 1) {
 //       fCurrentPart-> // JMI ??? BOF
 //         setNextMeasureNumberInPart (
 //           inputLineNumber,
@@ -29288,20 +28962,20 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //   }
 //
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+//   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
 //     constexpr int fieldWidth = 37;
 //
 //     gLog <<
-//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultiMeasureRestsAtTheEndOfMeasure()" <<
-//       ", onGoingMultiMeasureRests:" <<
+//       "--> mxsr2msrSkeletonPopulator::handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure()" <<
+//       ", onGoingMultipleMeasureRests:" <<
 //       std::endl;
 //
 //     ++gIndenter;
 //
 //     gLog <<
 //       std::setw (fieldWidth) <<
-//       "fRemainingMeasureRestsCounter" << ": " <<
-//       fRemainingMeasureRestsCounter <<
+//       "fRemainingMultipleMeasureRestNumber" << ": " <<
+//       fRemainingMultipleRestMeasuresNumber <<
 //       std::endl <<
 //       std::endl;
 //

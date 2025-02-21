@@ -1412,7 +1412,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep 'public msrVo
 msrBeatRepeats.h:class EXP msrBeatRepeat : public msrVoiceElement
 msrMeasureRepeats.h:class EXP msrMeasureRepeat : public msrVoiceElement
 msrRepeats.h:class EXP msrRepeat : public msrVoiceElement
-msrMultiMeasureRests.h:class EXP msrMultiMeasureRest : public msrVoiceElement
+msrMultipleMeasureRests.h:class EXP msrMultipleMeasureRest : public msrVoiceElement
 msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \end{lstlisting}
 
@@ -1430,7 +1430,7 @@ A voice is conceptually a sequence of {\tt S_msrVoiceElement}, that may be:
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r 'public msrVoiceElement' *
 formats/msr/msrMeasureRepeats.h:class EXP msrMeasureRepeat : public msrVoiceElement
 formats/msr/msrRepeats.h:class EXP msrRepeat : public msrVoiceElement
-formats/msr/msrMultiMeasureRests.h:class EXP msrMultiMeasureRest : public msrVoiceElement
+formats/msr/msrMultipleMeasureRests.h:class EXP msrMultipleMeasureRest : public msrVoiceElement
 formats/msr/msrBeatRepeats.h:class EXP msrBeatRepeat : public msrVoiceElement
 formats/msr/msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \end{lstlisting}
@@ -1762,14 +1762,14 @@ class EXP msrMeasureRepeatReplicas : public msrElement
 
 
 % -------------------------------------------------------------------------
-\section{Multi-measure rests}\label{Multi-measure rests}
+\section{Multiple measure rests}\label{Multiple measure rests}
 % -------------------------------------------------------------------------
 
-Multi-measure rests handling is presented at \sectionRef{Multi-measure rests handling}.
+Multiple measure rests handling is presented at \sectionRef{Multiple measure rests handling}.
 
-\Class{msrMultiMeasureRest}, defined in \msrBoth{msrMultiMeasureRest}, essentially contains a liste of \class{_msrMeasure} instances and a multi-measure rests number:
+\Class{msrMultipleMeasureRest}, defined in \msrBoth{msrMultipleMeasureRest}, essentially contains a liste of \class{_msrMeasure} instances and a multiple measure rests number:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrMultiMeasureRest : public msrSegmentElement
+class EXP msrMultipleMeasureRest : public msrSegmentElement
 {
 	// ... ... ...
 
@@ -1778,7 +1778,7 @@ class EXP msrMultiMeasureRest : public msrSegmentElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrSegment          fMultiMeasureRestUpLinkToSegment;
+    S_msrSegment          fMultipleMeasureRestUpLinkToSegment;
 
     int                   fMeasureRestsNumber; // supplied by MusicXML
     std::list <S_msrMeasure>
@@ -1808,7 +1808,7 @@ The following classes are defined in \msrBoth{msrRepeats}, contains:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep class   msrRepeats.h
 class   msrRepeat;
-class   msrMultiMeasureRest;
+class   msrMultipleMeasureRest;
 class   msrMeasureRepeat;
 class   msrNote;
 class EXP msrRepeatCommonPart : public msrElement

@@ -11065,14 +11065,14 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrMultiMeasureRest& elt)
+void msr2mxsrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrMultiMeasureRest" <<
+      "--> Start visiting msrMultipleMeasureRest" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -11084,7 +11084,7 @@ void msr2mxsrTranslator::visitStart (S_msrMultiMeasureRest& elt)
   ++gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -11099,19 +11099,19 @@ void msr2mxsrTranslator::visitStart (S_msrMultiMeasureRest& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
-    handleMultiMeasureRestsStartInVoiceClone (
+    handleMultipleMeasureRestsStartInVoiceClone (
       elt->getInputLineNumber (),
       elt);
 }
 
-void msr2mxsrTranslator::visitEnd (S_msrMultiMeasureRest& elt)
+void msr2mxsrTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
     std::stringstream ss;
 
     ss <<
-      "--> End visiting msrMultiMeasureRest" <<
+      "--> End visiting msrMultipleMeasureRest" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -11123,7 +11123,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMultiMeasureRest& elt)
   --gIndenter;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -11138,7 +11138,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMultiMeasureRest& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   fCurrentVoiceClone->
-    handleMultiMeasureRestsEndInVoiceClone (
+    handleMultipleMeasureRestsEndInVoiceClone (
       elt->getInputLineNumber ());
 }
 

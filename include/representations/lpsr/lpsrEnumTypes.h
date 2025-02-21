@@ -141,7 +141,7 @@ std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
 
 // rests measures
 //______________________________________________________________________________
-std::string multiMeasureRestsWholeNoteAsLilypondString (
+std::string multipleMeasureRestsWholeNoteAsLilypondString (
   int                  inputLineNumber,
   const msrWholeNotes& wholeNotes);
 

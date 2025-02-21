@@ -447,16 +447,21 @@ class EXP traceOahGroup : public oahGroup
     Bool                  getTraceMeasureRepeatsDetails () const
                               { return fTraceMeasureRepeatsDetails; }
 
-    // multi-measure rests
-    void                  setTraceMultiMeasureRests ()
-                              { fTraceMultiMeasureRests = true; }
-    Bool                  getTraceMultiMeasureRests () const
-                              { return fTraceMultiMeasureRests; }
+    // multiple measure rests
+    void                  setTraceMultipleMeasureRestsBasics ()
+                              { fTraceMultipleMeasureRestsBasics = true; }
+    Bool                  getTraceMultipleMeasureRestsBasics () const
+                              { return fTraceMultipleMeasureRestsBasics; }
 
-    void                  setTraceMultiMeasureRestsDetails ()
-                              { fTraceMultiMeasureRestsDetails = true; }
-    Bool                  getTraceMultiMeasureRestsDetails () const
-                              { return fTraceMultiMeasureRestsDetails; }
+    void                  setTraceMultipleMeasureRests ()
+                              { fTraceMultipleMeasureRests = true; }
+    Bool                  getTraceMultipleMeasureRests () const
+                              { return fTraceMultipleMeasureRests; }
+
+    void                  setTraceMultipleMeasureRestsDetails ()
+                              { fTraceMultipleMeasureRestsDetails = true; }
+    Bool                  getTraceMultipleMeasureRestsDetails () const
+                              { return fTraceMultipleMeasureRestsDetails; }
     // beats repeats
     void                  setTraceBeatRepeats ()
                               { fTraceBeatRepeats = true; }
@@ -1125,11 +1130,12 @@ class EXP traceOahGroup : public oahGroup
     Bool                  fTraceMeasureRepeatsDetails;
 
 
-    // multi-measure rests
+    // multiple measure rests
     // --------------------------------------
 
-    Bool                  fTraceMultiMeasureRests;
-    Bool                  fTraceMultiMeasureRestsDetails;
+    Bool                  fTraceMultipleMeasureRestsBasics;
+    Bool                  fTraceMultipleMeasureRests;
+    Bool                  fTraceMultipleMeasureRestsDetails;
 
 
     // beats repeats

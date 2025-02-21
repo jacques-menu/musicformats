@@ -952,7 +952,7 @@ void xml2lyRegularHandler::createNotesRegularGroup ()
 
   registerAtomInRegularSubgroup ("merge-rests-in-msr", subGroup);
   registerAtomInRegularSubgroup ("merge-staff-common-rests-in-lilypond", subGroup);
-  registerAtomInRegularSubgroup ("multi-measure-rests-expand-limit", subGroup);
+  registerAtomInRegularSubgroup ("multiple-measure-rests-expand-limit", subGroup);
 }
 
 void xml2lyRegularHandler::creatBeamsRegularGroup ()

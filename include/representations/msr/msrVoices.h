@@ -316,11 +316,11 @@ class EXP msrVoice : public msrElement
 
     // rests measures
 
-    void                  setVoiceContainsMultiMeasureRests (
+    void                  setVoiceContainsMultipleMeasureRests (
                             int inputLineNumber);
 
-    Bool                  getVoiceContainsMultiMeasureRests () const
-                              { return fVoiceContainsMultiMeasureRests; }
+    Bool                  getVoiceContainsMultipleMeasureRests () const
+                              { return fVoiceContainsMultipleMeasureRests; }
 
     // measure repeats
 
@@ -743,18 +743,18 @@ class EXP msrVoice : public msrElement
     void                  appendRepeatEndingCloneToVoice (
                             const S_msrRepeatEnding& repeatEndingClone);
 
-    // multi-measure rests
+    // multiple measure rests
 
-//     void                  appendMultiMeasureRestToVoiceElementsList (
-//                             const S_msrMultiMeasureRest& multiMeasureRest);
+//     void                  appendMultipleMeasureRestToVoiceElementsList (
+//                             const S_msrMultipleMeasureRest& multipleMeasureRest);
 
-    void                  appendMultiMeasureRestToVoice (
+    void                  appendMultipleMeasureRestToVoice (
                             int inputLineNumber,
-                            int multiMeasureRestMeasuresNumber); // JMI USELESS??? JMI v0.9.67
+                            int multipleMeasureRestMeasuresNumber); // JMI USELESS??? JMI v0.9.67
 
-    void                  appendMultiMeasureRestToVoice (
+    void                  appendMultipleMeasureRestToVoice (
                             int                          inputLineNumber,
-                            const S_msrMultiMeasureRest& multiMeasureRest);
+                            const S_msrMultipleMeasureRest& multipleMeasureRest);
 
     void                  replicateLastAppendedMeasureInVoice (
                             int inputLineNumber,
@@ -765,25 +765,25 @@ class EXP msrVoice : public msrElement
                             const std::string& previousMeasureNumber,
                             int                emptyMeasuresNumber);
 
-    void                  appendPendingMultiMeasureRestsToVoice (
+    void                  appendPendingMultipleMeasureRestsToVoice (
                             int inputLineNumber);
 
-    void                  handleMultiMeasureRestsStartInVoiceClone (
+    void                  handleMultipleMeasureRestsStartInVoiceClone (
                             int                          inputLineNumber,
-                            const S_msrMultiMeasureRest& multiMeasureRest);
+                            const S_msrMultipleMeasureRest& multipleMeasureRest);
 
-    void                  handleMultiMeasureRestsEndInVoiceClone (
+    void                  handleMultipleMeasureRestsEndInVoiceClone (
                             int inputLineNumber);
 
-//     void                  handleMultiMeasureRestsContentsStartInVoiceClone (
+//     void                  handleMultipleMeasureRestsContentsStartInVoiceClone (
 //                             int inputLineNumber);
 //
-//     void                  handleMultiMeasureRestsContentsEndInVoiceClone (
+//     void                  handleMultipleMeasureRestsContentsEndInVoiceClone (
 //                             int inputLineNumber);
 
-    void                  appendMultiMeasureRestCloneToVoiceClone ( // JMI ???
+    void                  appendMultipleMeasureRestCloneToVoiceClone ( // JMI ???
                             int                          inputLineNumber,
-                            const S_msrMultiMeasureRest& multiMeasureRestClone);
+                            const S_msrMultipleMeasureRest& multipleMeasureRestClone);
 
     // measure repeats
 
@@ -1015,11 +1015,11 @@ class EXP msrVoice : public msrElement
                             int                inputLineNumber,
                             const std::string& repeatEndingNumber); // may be "1, 2"
 
-    // multi-measure rests
+    // multiple measure rests
 
-//     void                  appendMultiMeasureRestToInitialVoiceElements (
+//     void                  appendMultipleMeasureRestToInitialVoiceElements (
 //                             int                              inputLineNumber,
-//                             const S_msrMultiMeasureRest& multiMeasureRest,
+//                             const S_msrMultipleMeasureRest& multipleMeasureRest,
 //                             const std::string&               context);
 
     // measure repeats
@@ -1062,7 +1062,7 @@ class EXP msrVoice : public msrElement
                             int                inputLineNumber,
                             const std::string& context) const;
 
-    void                  displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
+    void                  displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
                             int                inputLineNumber,
                             const std::string& context);
 
@@ -1273,11 +1273,11 @@ class EXP msrVoice : public msrElement
                             int                inputLineNumber,
                             const std::string& context);
 
-    void                  displayVoiceMultiMeasureRests (
+    void                  displayVoiceMultipleMeasureRests (
                             int                inputLineNumber,
                             const std::string& context);
 
-    void                  displayVoiceMultiMeasureRestsAndVoice (
+    void                  displayVoiceMultipleMeasureRestsAndVoice (
                             int                inputLineNumber,
                             const std::string& context);
 
@@ -1357,22 +1357,22 @@ class EXP msrVoice : public msrElement
     std::list <S_msrRepeat>
                           fVoicePendingRepeatsStack;
 
-    // multi-measure rests
+    // multiple measure rests
 
-    Bool                  fOnGoingMultiMeasureRest;
+    Bool                  fOnGoingMultipleMeasureRest;
 
-    // fVoicePendingMultiMeasureRests is either null
-    // or the last msrMultiMeasureRest created
-    S_msrMultiMeasureRest fVoiceCurrentMultiMeasureRest;
+    // fVoicePendingMultipleMeasureRests is either null
+    // or the last msrMultipleMeasureRest created
+    S_msrMultipleMeasureRest fVoiceCurrentMultipleMeasureRest;
 
-    // fVoiceMultiMeasureRestsWaitingForItsNextMeasureNumber is either null
-    // or the last msrMultiMeasureRest created and appended to the voice,
+    // fVoiceMultipleMeasureRestsWaitingForItsNextMeasureNumber is either null
+    // or the last msrMultipleMeasureRest created and appended to the voice,
     // but with its next measure number not yet set
-    S_msrMultiMeasureRest
-                          fVoiceMultiMeasureRestsWaitingForItsNextMeasureNumber;
-    int                   fVoiceRemainingMultiMeasureRests;
+    S_msrMultipleMeasureRest
+                          fVoiceMultipleMeasureRestsWaitingForItsNextMeasureNumber;
+    int                   fVoiceRemainingMultipleMeasureRests;
 
-    Bool                  fVoiceContainsMultiMeasureRests;
+    Bool                  fVoiceContainsMultipleMeasureRests;
 
     // measure repeats
 

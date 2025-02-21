@@ -165,8 +165,8 @@ void msrPart::initializePart ()
   // initialize part's number of measures
   fPartNumberOfMeasures = 0;
 
-  // multi-measure rests
-  fPartContainsMultiMeasureRests = false;
+  // multiple measure rests
+  fPartContainsMultipleMeasureRests = false;
 
   // drawing measure position
   fPartCurrentDrawingPositionInMeasure = msrWholeNotes (0, 1);
@@ -1796,18 +1796,18 @@ void msrPart::appendPendingMeasureRepeatToPart (
   } // for
 }
 
-void msrPart::appendMultiMeasureRestToPart (
+void msrPart::appendMultipleMeasureRestToPart (
   int inputLineNumber,
-  int multiMeasureRestsMeasuresNumber)
+  int multipleMeasureRestsMeasuresNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending a multi-measure rest for " <<
+      "Appending a multiple measure rest for " <<
       mfSingularOrPlural (
-        multiMeasureRestsMeasuresNumber, "measure", "measures") <<
+        multipleMeasureRestsMeasuresNumber, "measure", "measures") <<
       " to part " <<
       fetchPartCombinedName () <<
       ", line " << inputLineNumber;
@@ -1818,14 +1818,14 @@ void msrPart::appendMultiMeasureRestToPart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fPartContainsMultiMeasureRests = true;
+  fPartContainsMultipleMeasureRests = true;
 
   // create multiple rest in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendMultiMeasureRestToStaff (
+      appendMultipleMeasureRestToStaff (
         inputLineNumber,
-        multiMeasureRestsMeasuresNumber);
+        multipleMeasureRestsMeasuresNumber);
   } // for
 }
 
@@ -1834,7 +1834,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
   int replicatasNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -1862,13 +1862,13 @@ void msrPart::appendEmptyMeasuresToPart (
   int                measureRestsNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
       "Adding " <<
       mfSingularOrPlural (
-        measureRestsNumber, "multi-measure rest", "multi-measure rests") <<
+        measureRestsNumber, "multiple measure rest", "multiple measure rests") <<
       " to part " <<
       fetchPartCombinedName () <<
       ", ";
@@ -1879,7 +1879,7 @@ void msrPart::appendEmptyMeasuresToPart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fPartContainsMultiMeasureRests = true;
+  fPartContainsMultipleMeasureRests = true;
 
   // add multiple rest to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1891,11 +1891,11 @@ void msrPart::appendEmptyMeasuresToPart (
   } // for
 }
 
-void msrPart::appendPendingMultiMeasureRestsToPart (
+void msrPart::appendPendingMultipleMeasureRestsToPart (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -1911,22 +1911,22 @@ void msrPart::appendPendingMultiMeasureRestsToPart (
   // append pending multiple rest to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendPendingMultiMeasureRestsToStaff (
+      appendPendingMultipleMeasureRestsToStaff (
         inputLineNumber);
   } // for
 }
 
-void msrPart::appendMultiMeasureRestCloneToPart (
+void msrPart::appendMultipleMeasureRestCloneToPart (
   int                          inputLineNumber,
-  const S_msrMultiMeasureRest& multiMeasureRests)
+  const S_msrMultipleMeasureRest& multipleMeasureRests)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
       "Appending multiple rest '" <<
-      multiMeasureRests->asString () <<
+      multipleMeasureRests->asString () <<
       "' to part clone " <<
       fetchPartCombinedName ();
 
@@ -1938,9 +1938,9 @@ void msrPart::appendMultiMeasureRestCloneToPart (
 
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendMultiMeasureRestCloneToStaff (
+      appendMultipleMeasureRestCloneToStaff (
         inputLineNumber,
-        multiMeasureRests);
+        multipleMeasureRests);
   } // for
 }
 
@@ -3758,8 +3758,8 @@ void msrPart::printFull (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartContainsMultiMeasureRests" << ": " <<
-    fPartContainsMultiMeasureRests <<
+    "fPartContainsMultipleMeasureRests" << ": " <<
+    fPartContainsMultipleMeasureRests <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -4355,8 +4355,8 @@ void msrPart::printSummary (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartContainsMultiMeasureRests" << ": " <<
-    fPartContainsMultiMeasureRests <<
+    "fPartContainsMultipleMeasureRests" << ": " <<
+    fPartContainsMultipleMeasureRests <<
     std::endl <<
 
     std::setw (fieldWidth) <<

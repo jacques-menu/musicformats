@@ -447,7 +447,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   deepClone->fMeasureFirstInSegmentKind =
     fMeasureFirstInSegmentKind;
 
-    // multi-measure rest?
+    // multiple measure rest?
 
   deepClone->fMeasureIsAMeasureRest =
     fMeasureIsAMeasureRest;
@@ -2731,7 +2731,7 @@ void msrMeasure::appendNoteToMeasureAtPosition (
       setNoteOccupiesAFullMeasure ();
   }
 
-  // is note a multi-measure rest? JMI v0.9.69
+  // is note a multiple measure rest? JMI v0.9.69
   if (note->fetchNoteIsAFullNoteRest ()) {
     setMeasureIsAMeasureRest ();
   }
@@ -4804,7 +4804,7 @@ void msrMeasure::handleEmptyMeasure (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
     voice->
-      displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "handleEmptyMeasure() 1 measure has 0 measure whole notes???"); // JMI v0.9.72
 

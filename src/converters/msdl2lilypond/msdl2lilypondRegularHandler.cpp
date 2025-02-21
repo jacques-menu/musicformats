@@ -883,7 +883,7 @@ void msdl2lilypondRegularHandler::createNotesRegularGroup ()
 
   registerAtomInRegularSubgroup ("merge-rests-in-msr", subGroup);
   registerAtomInRegularSubgroup ("merge-staff-common-rests-in-lilypond", subGroup);
-  registerAtomInRegularSubgroup ("multi-measure-rests-expand-limit", subGroup);
+  registerAtomInRegularSubgroup ("multiple-measure-rests-expand-limit", subGroup);
 }
 
 void msdl2lilypondRegularHandler::creatBeamsRegularGroup ()

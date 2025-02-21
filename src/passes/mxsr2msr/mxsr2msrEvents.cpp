@@ -162,6 +162,154 @@ mxsrPartEvent::~mxsrPartEvent ()
 {}
 
 //________________________________________________________________________
+std::string mxsrMultipleMeasureRestEventKindAsString (
+  mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind)
+{
+  std::string result;
+
+  switch (multipleMeasureRestEventKind) {
+    case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEvent_NONE:
+      result = "kMultipleMeasureRestEvent_NONE";
+      break;
+    case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventBegin:
+      result = "kMultipleMeasureRestEventBegin";
+      break;
+    case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd:
+      result = "kMultipleMeasureRestEventEnd";
+      break;
+  } // switch
+
+  return result;
+}
+
+std::ostream& operator << (std::ostream& os, const mxsrMultipleMeasureRestEventKind& elt)
+{
+  os << mxsrMultipleMeasureRestEventKindAsString (elt);
+  return os;
+}
+
+//________________________________________________________________________
+S_mxsrMultipleMeasureRestEvent mxsrMultipleMeasureRestEvent::create (
+  mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind,
+  const std::string&               partName,
+  const mfMeasureNumber&           measureNumber,
+  int                              multipleMeasureRestNumber,
+  int                              eventSequentialNumber,
+  mfInputLineNumber                eventInputLineNumber)
+{
+  mxsrMultipleMeasureRestEvent* obj =
+    new mxsrMultipleMeasureRestEvent (
+      multipleMeasureRestEventKind,
+      partName,
+      measureNumber,
+      multipleMeasureRestNumber,
+      eventSequentialNumber,
+      eventInputLineNumber);
+  assert (obj != nullptr);
+  return obj;
+}
+
+mxsrMultipleMeasureRestEvent::mxsrMultipleMeasureRestEvent (
+  mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind,
+  const std::string&               partName,
+  const mfMeasureNumber&           measureNumber,
+  int                              multipleMeasureRestNumber,
+  int                              eventSequentialNumber,
+  mfInputLineNumber                eventInputLineNumber)
+  : mxsrPartEvent (
+      partName,
+      measureNumber,
+      eventSequentialNumber,
+      eventInputLineNumber)
+{
+  fMultipleMeasureRestEventKind = multipleMeasureRestEventKind;
+
+  fMultipleMeasureRestNumber = multipleMeasureRestNumber;
+}
+
+mxsrMultipleMeasureRestEvent::~mxsrMultipleMeasureRestEvent ()
+{}
+
+std::string mxsrMultipleMeasureRestEvent::asShortString () const
+{
+  std::stringstream ss;
+
+  ss <<
+    "[MultipleMeasureRestEvent" <<
+    ", fMultipleMeasureRestEventKind: " << fMultipleMeasureRestEventKind <<
+    ", fEventInputLineNumber: " << fEventInputLineNumber <<
+
+    ", fPartName: " << fPartName <<
+    ", fMeasureNumber: " << fMeasureNumber <<
+    ", fMultipleMeasureRestNumber: " << fMultipleMeasureRestNumber <<
+
+    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
+    ']';
+
+  return ss.str ();
+}
+
+std::string mxsrMultipleMeasureRestEvent::asString () const
+{
+  return asShortString ();
+}
+
+void mxsrMultipleMeasureRestEvent::print (std::ostream& os) const
+{
+  os <<
+    "[MultipleMeasureRestEvent" <<
+    std::endl;
+
+  ++gIndenter;
+
+  constexpr int fieldWidth = 29;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMultipleMeasureRestEventKind" << ": " << fMultipleMeasureRestEventKind <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fEventInputLineNumber" << ": " << fEventInputLineNumber <<
+
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fPartName" << ": " << fPartName <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureNumber" << ": " << fMeasureNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMultipleMeasureRestNumber" << ": " << fMultipleMeasureRestNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
+    std::endl;
+
+  --gIndenter;
+
+  os << ']' << std::endl;
+}
+
+std::ostream& operator << (std::ostream& os, const S_mxsrMultipleMeasureRestEvent& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NULL]" << std::endl;
+  }
+
+  return os;
+}
+
+std::ostream& operator << (std::ostream& os, const mxsrMultipleMeasureRestEvent& elt)
+{
+  elt.print (os);
+  return os;
+}
+
+//________________________________________________________________________
 std::string mxsrMeasureRepeatEventKindAsString (
   mxsrMeasureRepeatEventKind measureRepeatEventKind)
 {
@@ -194,6 +342,7 @@ S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
   const std::string&         partName,
   const mfMeasureNumber&     measureNumber,
   int                        measureRepeatNumber,
+  int                        measureRepeatSlashes,
   int                        eventSequentialNumber,
   mfInputLineNumber          eventInputLineNumber)
 {
@@ -203,6 +352,7 @@ S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
       partName,
       measureNumber,
       measureRepeatNumber,
+      measureRepeatSlashes,
       eventSequentialNumber,
       eventInputLineNumber);
   assert (obj != nullptr);
@@ -214,6 +364,7 @@ mxsrMeasureRepeatEvent::mxsrMeasureRepeatEvent (
   const std::string&         partName,
   const mfMeasureNumber&     measureNumber,
   int                        measureRepeatNumber,
+  int                        measureRepeatSlashes,
   int                        eventSequentialNumber,
   mfInputLineNumber          eventInputLineNumber)
   : mxsrPartEvent (
@@ -225,6 +376,7 @@ mxsrMeasureRepeatEvent::mxsrMeasureRepeatEvent (
   fMeasureRepeatEventKind = measureRepeatEventKind;
 
   fMeasureRepeatNumber = measureRepeatNumber;
+  fMeasureRepeatSlashes = measureRepeatSlashes;
 }
 
 mxsrMeasureRepeatEvent::~mxsrMeasureRepeatEvent ()
@@ -242,6 +394,7 @@ std::string mxsrMeasureRepeatEvent::asShortString () const
     ", fPartName: " << fPartName <<
     ", fMeasureNumber: " << fMeasureNumber <<
     ", fMeasureRepeatNumber: " << fMeasureRepeatNumber <<
+    ", fMeasureRepeatSlashes: " << fMeasureRepeatSlashes <<
 
     ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
     ']';
@@ -280,6 +433,9 @@ void mxsrMeasureRepeatEvent::print (std::ostream& os) const
     std::endl <<
     std::setw (fieldWidth) <<
     "fMeasureRepeatNumber" << ": " << fMeasureRepeatNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureRepeatSlashes" << ": " << fMeasureRepeatSlashes <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -1181,19 +1337,142 @@ mxsrEventsCollection::~mxsrEventsCollection ()
 {}
 
 //________________________________________________________________________
-void mxsrEventsCollection::registerMeasureRepeatBegin (
+S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::createAMultipleMeasureRestBegin (
+  const std::string&       partName,
+  const mfMeasureNumber&   measureNumber,
+  int                      multipleMeasureRestNumber,
+  const mfInputLineNumber& eventInputLineNumber)
+{
+  S_mxsrMultipleMeasureRestEvent
+    multipleMeasureRestBeginEvent =
+      mxsrMultipleMeasureRestEvent::create (
+        mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventBegin,
+        partName,
+        measureNumber,
+        multipleMeasureRestNumber,
+        ++fCurrentEventSequentialNumber,
+        eventInputLineNumber);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering multiple measure rest begin event " <<
+      multipleMeasureRestBeginEvent->asString () <<
+      ", line " << eventInputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return multipleMeasureRestBeginEvent;
+}
+
+void mxsrEventsCollection::registerMultipleMeasureRestBegin (
+  S_mxsrMultipleMeasureRestEvent multipleMeasureRestBeginEvent)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering multiple measure rest begin event " <<
+      multipleMeasureRestBeginEvent->asString () <<
+      ", line " << multipleMeasureRestBeginEvent->getEventInputLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fMultipleMeasureRestBeginsMap.insert (
+    std::make_pair (
+      multipleMeasureRestBeginEvent->getMeasureNumber (),
+      multipleMeasureRestBeginEvent));
+
+  fAllEventsList.push_back (multipleMeasureRestBeginEvent);
+}
+
+S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::createAMultipleMeasureRestEnd (
+  const std::string&       partName,
+  const mfMeasureNumber&   measureNumber,
+  int                      multipleMeasureRestNumber,
+  const mfInputLineNumber& eventInputLineNumber)
+{
+  S_mxsrMultipleMeasureRestEvent
+    multipleMeasureRestEndEvent =
+      mxsrMultipleMeasureRestEvent::create (
+        mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd,
+        partName,
+        measureNumber,
+        multipleMeasureRestNumber,
+        ++fCurrentEventSequentialNumber,
+        eventInputLineNumber);
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering multiple measure rest end event " <<
+      multipleMeasureRestEndEvent->asString () <<
+      ", line " << eventInputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return multipleMeasureRestEndEvent;
+}
+
+void mxsrEventsCollection::registerMultipleMeasureRestEnd (
+  S_mxsrMultipleMeasureRestEvent multipleMeasureRestEndEvent)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering multiple measure rest end event " <<
+      multipleMeasureRestEndEvent->asString () <<
+      ", line " << multipleMeasureRestEndEvent->getEventInputLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fMultipleMeasureRestEndsMap.insert (
+    std::make_pair (
+      multipleMeasureRestEndEvent->getMeasureNumber (),
+      multipleMeasureRestEndEvent));
+
+  fAllEventsList.push_back (multipleMeasureRestEndEvent);
+}
+
+//________________________________________________________________________
+S_mxsrMeasureRepeatEvent mxsrEventsCollection::createAMeasureRepeatBegin (
   const std::string&       partName,
   const mfMeasureNumber&   measureNumber,
   int                      measureRepeatNumber,
+  int                      measureRepeatSlashes,
   const mfInputLineNumber& eventInputLineNumber)
 {
   S_mxsrMeasureRepeatEvent
-    measureRepeatEvent =
+    measureRepeatBeginEvent =
       mxsrMeasureRepeatEvent::create (
         mxsrMeasureRepeatEventKind::kMeasureRepeatEventBegin,
         partName,
         measureNumber,
         measureRepeatNumber,
+        measureRepeatSlashes,
         ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
@@ -1202,9 +1481,30 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
     std::stringstream ss;
 
     ss <<
-      "--> Registering measure repeat event " <<
-      measureRepeatEvent->asString () <<
+      "--> Creating a measure repeat begin event " <<
+      measureRepeatBeginEvent->asString () <<
       ", line " << eventInputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return measureRepeatBeginEvent;
+}
+
+void mxsrEventsCollection::registerMeasureRepeatBegin (
+  S_mxsrMeasureRepeatEvent measureRepeatBeginEvent)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering measure repeat begin event " <<
+      measureRepeatBeginEvent->asString () <<
+      ", line " << measureRepeatBeginEvent->getEventInputLineNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1214,24 +1514,27 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 
   fMeasureRepeatBeginsMap.insert (
     std::make_pair (
-      measureNumber.getBareValue (), measureRepeatEvent));
+      measureRepeatBeginEvent->getMeasureNumber (),
+      measureRepeatBeginEvent));
 
-  fAllEventsList.push_back (measureRepeatEvent);
+  fAllEventsList.push_back (measureRepeatBeginEvent);
 }
 
-void mxsrEventsCollection::registerMeasureRepeatEnd (
+S_mxsrMeasureRepeatEvent mxsrEventsCollection::createAMeasureRepeatEnd (
   const std::string&       partName,
   const mfMeasureNumber&   measureNumber,
   int                      measureRepeatNumber,
+  int                      measureRepeatSlashes,
   const mfInputLineNumber& eventInputLineNumber)
 {
   S_mxsrMeasureRepeatEvent
-    measureRepeatEvent =
+    measureRepeatEndEvent =
       mxsrMeasureRepeatEvent::create (
         mxsrMeasureRepeatEventKind::kMeasureRepeatEventEnd,
         partName,
         measureNumber,
         measureRepeatNumber,
+        measureRepeatSlashes,
         ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
@@ -1240,9 +1543,30 @@ void mxsrEventsCollection::registerMeasureRepeatEnd (
     std::stringstream ss;
 
     ss <<
-      "--> Registering measure repeat event " <<
-      measureRepeatEvent->asString () <<
+      "--> Creating a measure repeat end event " <<
+      measureRepeatEndEvent->asString () <<
       ", line " << eventInputLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  return measureRepeatEndEvent;
+}
+
+void mxsrEventsCollection::registerMeasureRepeatEnd (
+  S_mxsrMeasureRepeatEvent measureRepeatEndEvent)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Registering measure repeat end event " <<
+      measureRepeatEndEvent->asString () <<
+      ", line " << measureRepeatEndEvent->getMeasureNumber ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1252,9 +1576,10 @@ void mxsrEventsCollection::registerMeasureRepeatEnd (
 
   fMeasureRepeatEndsMap.insert (
     std::make_pair (
-      measureNumber, measureRepeatEvent));
+      measureRepeatEndEvent->getMeasureNumber (),
+      measureRepeatEndEvent));
 
-  fAllEventsList.push_back (measureRepeatEvent);
+  fAllEventsList.push_back (measureRepeatEndEvent);
 }
 
 //________________________________________________________________________
@@ -1299,7 +1624,8 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
 
   fStaffChangeTakeOffsMap.insert (
     std::make_pair (
-      noteSequentialNumber, staffChangeEvent));
+      noteSequentialNumber,
+      staffChangeEvent));
 
   fStaffChangeEventsList.push_back (staffChangeEvent);
 
@@ -1347,7 +1673,8 @@ void mxsrEventsCollection::registerStaffChangeLanding (
 
   fStaffChangeLandingsMap.insert (
     std::make_pair (
-      noteSequentialNumber, staffChangeEvent));
+      noteSequentialNumber,
+      staffChangeEvent));
 
   fStaffChangeEventsList.push_back (staffChangeEvent);
 
@@ -1388,7 +1715,8 @@ void mxsrEventsCollection::registerGraceBegin (
 
   fGraceBeginsMap.insert (
     std::make_pair (
-      noteSequentialNumber, graceEvent));
+      noteSequentialNumber,
+      graceEvent));
 
   fAllEventsList.push_back (graceEvent);
 }
@@ -1426,7 +1754,8 @@ void mxsrEventsCollection::registerGraceEnd (
 
   fGraceEndsMap.insert (
     std::make_pair (
-      noteSequentialNumber, graceEvent));
+      noteSequentialNumber,
+      graceEvent));
 
   fAllEventsList.push_back (graceEvent);
 }
@@ -1734,7 +2063,7 @@ void mxsrEventsCollection::registerTupletBeginEvent (
   fTupletBeginsMultiMap.insert (
     std::make_pair (
       tupletBeginEvent->getNoteSequentialNumber (),
-      tupletBeginEvent)); // FOOL
+      tupletBeginEvent));
 
   fAllEventsList.push_back (tupletBeginEvent);
 }
@@ -1817,8 +2146,10 @@ void mxsrEventsCollection::sortTheMxsrEventsLists ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // sort the all events list by ??? JMI
   fAllEventsList.sort ();
 
+  // sort the staff change events list by ??? JMI
   fStaffChangeEventsList.sort ();
 
 //   fTupletBeginsMultiMap.sort ();
@@ -2156,6 +2487,76 @@ void mxsrEventsCollection::printAllEventsList (std::ostream& os) const
 }
 
 //------------------------------------------------------------------------
+void mxsrEventsCollection::printMultipleMeasureRestEvents (std::ostream& os) const
+{
+  os <<
+    "fMultipleMeasureRestBeginsMap: " <<
+    mfSingularOrPlural (
+      fMultipleMeasureRestBeginsMap.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair <std::string, S_mxsrMultipleMeasureRestEvent> thePair : fMultipleMeasureRestBeginsMap) {
+    std::string
+      bareMeasureNumber = thePair.first;
+
+    S_mxsrMultipleMeasureRestEvent
+      multipleMeasureRestEvent = thePair.second;
+
+    os <<
+      "Measure " << bareMeasureNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      multipleMeasureRestEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+
+  os << std::endl << "--------" << std::endl << std::endl;
+
+  os <<
+    "fMultipleMeasureRestEndsMap: " <<
+    mfSingularOrPlural (
+      fMultipleMeasureRestEndsMap.size (),
+      "element",
+      "elements") <<
+    ", in note sequential number order" <<
+    std::endl;
+
+  ++gIndenter;
+
+  for (std::pair <std::string, S_mxsrMultipleMeasureRestEvent> thePair : fMultipleMeasureRestEndsMap) {
+    std::string
+      bareMeasureNumber = thePair.first;
+
+    S_mxsrMultipleMeasureRestEvent
+      multipleMeasureRestEvent = thePair.second;
+
+    os <<
+      "Note " << bareMeasureNumber <<
+      ':' <<
+      std::endl;
+
+    ++gIndenter;
+    os <<
+      multipleMeasureRestEvent <<
+      std::endl;
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+}
+
+//------------------------------------------------------------------------
 void mxsrEventsCollection::prinMeasureRepeatEvents (std::ostream& os) const
 {
   os <<
@@ -2223,7 +2624,6 @@ void mxsrEventsCollection::prinMeasureRepeatEvents (std::ostream& os) const
   } // for
 
   --gIndenter;
-
 }
 
 //------------------------------------------------------------------------
@@ -2695,7 +3095,9 @@ void mxsrEventsCollection::print (std::ostream& os) const
 
   os << std::endl << "--------" << std::endl << std::endl;
 
-  constexpr int fieldWidth = 26;
+  constexpr int fieldWidth = 30;
+
+  // all events
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -2704,8 +3106,47 @@ void mxsrEventsCollection::print (std::ostream& os) const
       fAllEventsList.size (),
       "element",
       "elements") <<
-    std::endl <<
+    std::endl;
 
+  // multiple measure rest events
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMultipleMeasureRestBeginsMap" << ": " <<
+    mfSingularOrPlural (
+      fMultipleMeasureRestBeginsMap.size (),
+      "element",
+      "elements") <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMultipleMeasureRestEndsMap" << ": " <<
+    mfSingularOrPlural (
+      fMultipleMeasureRestEndsMap.size (),
+      "element",
+      "elements") <<
+    std::endl;
+
+  // measure repeat events
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fMeasureRepeatBeginsMap" << ": " <<
+    mfSingularOrPlural (
+      fMeasureRepeatBeginsMap.size (),
+      "element",
+      "elements") <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fMeasureRepeatEndsMap" << ": " <<
+    mfSingularOrPlural (
+      fMeasureRepeatEndsMap.size (),
+      "element",
+      "elements") <<
+    std::endl;
+
+  // staff change events
+
+  os << std::left <<
     std::setw (fieldWidth) <<
     "fStaffChangeTakeOffsMap" << ": " <<
     mfSingularOrPlural (
@@ -2719,8 +3160,11 @@ void mxsrEventsCollection::print (std::ostream& os) const
       fStaffChangeLandingsMap.size (),
       "element",
       "elements") <<
-    std::endl <<
+    std::endl;
 
+  // grace events
+
+  os << std::left <<
     std::setw (fieldWidth) <<
     "fGraceBeginsMap" << ": " <<
     mfSingularOrPlural (
@@ -2734,8 +3178,11 @@ void mxsrEventsCollection::print (std::ostream& os) const
       fGraceEndsMap.size (),
       "element",
       "elements") <<
-    std::endl <<
+    std::endl;
 
+  // cue events
+
+  os << std::left <<
     std::setw (fieldWidth) <<
     "fCueBeginsMap" << ": " <<
     mfSingularOrPlural (
@@ -2749,8 +3196,11 @@ void mxsrEventsCollection::print (std::ostream& os) const
       fCueEndsMap.size (),
       "element",
       "elements") <<
-    std::endl <<
+    std::endl;
 
+  // chord events
+
+  os << std::left <<
     std::setw (fieldWidth) <<
     "fChordBeginsMap" << ": " <<
     mfSingularOrPlural (
@@ -2764,15 +3214,29 @@ void mxsrEventsCollection::print (std::ostream& os) const
       fChordEndsMap.size (),
       "element",
       "elements") <<
-//     std::endl <<
-//
-//     std::setw (fieldWidth) <<
-//     "fTupletEventsMultiMap" << ": " <<
-//     mfSingularOrPlural (
-//       fTupletEventsMultiMap.size (),
-//       "element",
-//       "elements") <<
-    std::endl << std::endl;
+    std::endl;
+
+  // tuplet events
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fTupletBeginsMultiMap" << ": " <<
+    mfSingularOrPlural (
+      fTupletBeginsMultiMap.size (),
+      "element",
+      "elements") <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fTupletEndsMultiMap" << ": " <<
+    mfSingularOrPlural (
+      fTupletEndsMultiMap.size (),
+      "element",
+      "elements") <<
+    std::endl;
+
+
+  os << std::endl;
+
 
   // all events
 #ifdef MF_TRACE_IS_ENABLED
@@ -2782,9 +3246,17 @@ void mxsrEventsCollection::print (std::ostream& os) const
   }
 #endif // MF_TRACE_IS_ENABLED
 
+  // multiple measure rest events
+#ifdef MF_TRACE_IS_ENABLED
+  if (! (fMultipleMeasureRestBeginsMap.empty () && fMultipleMeasureRestEndsMap.empty ())) {
+    os << "--------" << std::endl << std::endl;
+    printMultipleMeasureRestEvents (os);
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   // measure repeat events
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
+  if (! (fMeasureRepeatBeginsMap.empty () && fMeasureRepeatEndsMap.empty ())) {
     os << "--------" << std::endl << std::endl;
     prinMeasureRepeatEvents (os);
   }

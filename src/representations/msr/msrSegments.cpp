@@ -439,7 +439,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
     gTraceOahGroup->getTraceRepeatsDetails ()
   ) {
     fSegmentUpLinkToVoice->
-      displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "assertSegmentLastMeasureIsNotNull()");
   }
@@ -477,7 +477,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
     gTraceOahGroup->getTraceRepeatsDetails ()
   ) {
     fSegmentUpLinkToVoice->
-      displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "assertSegmentElementsListIsNotEmpty()");
   }
@@ -938,13 +938,13 @@ void msrSegment::appendClefKeyTimeSignatureGroupToSegment  (
 //   else if (
 //     // measure rest?
 //
-//     S_msrMultiMeasureRest
-//       multiMeasureRest =
-//         dynamic_cast<msrMultiMeasureRest*>(&(*segmentElementsListFirstElement))
+//     S_msrMultipleMeasureRest
+//       multipleMeasureRest =
+//         dynamic_cast<msrMultipleMeasureRest*>(&(*segmentElementsListFirstElement))
 //   ) {
 //     const std::list <S_msrMeasure>&
 //       measureRestsList =
-//         multiMeasureRest->
+//         multipleMeasureRest->
 //           getMeasureRestsList ();
 //
 //     if (measureRestsList.size ()) {
@@ -2204,15 +2204,15 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendMultiMeasureRestToSegment (
-  const S_msrMultiMeasureRest& multiMeasureRest)
+void msrSegment::appendMultipleMeasureRestToSegment (
+  const S_msrMultipleMeasureRest& multipleMeasureRest)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBarLines ()) {
     std::stringstream ss;
 
     ss <<
-      "Appending multi-measure rest " << multiMeasureRest->asString () <<
+      "Appending multiple measure rest " << multipleMeasureRest->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -2224,12 +2224,12 @@ void msrSegment::appendMultiMeasureRestToSegment (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // append multiMeasureRest to the segment
-  fSegmentElementsList.push_back (multiMeasureRest);
+  // append multipleMeasureRest to the segment
+  fSegmentElementsList.push_back (multipleMeasureRest);
 
-  fCurrentMultiMeasureRest = multiMeasureRest;
+  fCurrentMultipleMeasureRest = multipleMeasureRest;
 
-  fOnGoingMultiMeasureRest = true;
+  fOnGoingMultipleMeasureRest = true;
 }
 
 void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
@@ -2317,10 +2317,10 @@ void msrSegment::appendMeasureToSegment (const S_msrMeasure& measure)
       setMeasureIsFirstInVoice ();
   }
 
-  if (fOnGoingMultiMeasureRest) {
-    // append measure to the current multi-measure rests
-    fCurrentMultiMeasureRest->
-      appendMeasureToMultiMeasureRest (
+  if (fOnGoingMultipleMeasureRest) {
+    // append measure to the current multiple measure rests
+    fCurrentMultipleMeasureRest->
+      appendMeasureToMultipleMeasureRest (
         measure);
   }
   else {
@@ -2918,7 +2918,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
 //     fSegmentUpLinkToVoice->
-//       displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
+//       displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
 //         inputLineNumber,
 //         "removeLastMeasureFromSegment() 1");
 //   }
@@ -2975,7 +2975,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTraceMeasuresDetails ()) {
 //     fSegmentUpLinkToVoice->
-//       displayVoiceRepeatsStackMultiMeasureRestsMeasureRepeatAndVoice (
+//       displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice (
 //         inputLineNumber,
 //         "removeLastMeasureFromSegment() 2");
 //   }

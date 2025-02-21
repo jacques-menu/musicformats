@@ -765,7 +765,7 @@ class EXP msrMeasure : public msrSegmentElement
     msrMeasureFirstInSegmentKind
                           fMeasureFirstInSegmentKind;
 
-    // multi-measure rest?
+    // multiple measure rest?
 
     Bool                  fMeasureIsAMeasureRest;
 

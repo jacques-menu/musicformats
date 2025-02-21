@@ -208,7 +208,7 @@ void msrNote::initializeNote ()
   // note context
   // ------------------------------------------------------
 
-  fNoteMultiMeasureRestsSequenceNumber = -1;
+  fNoteMultipleMeasureRestsSequenceNumber = -1;
 
 //   fNoteColorAlphaRGBHasBenSet = false; JMI v0.9.64
 
@@ -712,12 +712,12 @@ S_msrNote msrNote::createNoteNewbornClone (
   // ------------------------------------------------------
 
   newbornClone->
-    fNoteBelongsToAMultiMeasureRests =
-      fNoteBelongsToAMultiMeasureRests;
+    fNoteBelongsToAMultipleMeasureRests =
+      fNoteBelongsToAMultipleMeasureRests;
 
   newbornClone->
-    fNoteMultiMeasureRestsSequenceNumber =
-      fNoteMultiMeasureRestsSequenceNumber;
+    fNoteMultipleMeasureRestsSequenceNumber =
+      fNoteMultipleMeasureRestsSequenceNumber;
 
   // note lyrics
   // ------------------------------------------------------
@@ -920,12 +920,12 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   deepClone->
-    fNoteBelongsToAMultiMeasureRests =
-      fNoteBelongsToAMultiMeasureRests;
+    fNoteBelongsToAMultipleMeasureRests =
+      fNoteBelongsToAMultipleMeasureRests;
 
   deepClone->
-    fNoteMultiMeasureRestsSequenceNumber =
-      fNoteMultiMeasureRestsSequenceNumber;
+    fNoteMultipleMeasureRestsSequenceNumber =
+      fNoteMultipleMeasureRestsSequenceNumber;
 
   // note lyrics
   // ------------------------------------------------------
@@ -4549,7 +4549,7 @@ std::string msrNote::asShortString () const
         ss <<
           'R' <<
           /* JMI
-          multiMeasureRestsWholeNotesPitchAndOctaveAsString (
+          multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes);
             */
@@ -5941,14 +5941,14 @@ void msrNote::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToAMultiMeasureRests" << ": " <<
-    fNoteBelongsToAMultiMeasureRests <<
+    "fNoteBelongsToAMultipleMeasureRests" << ": " <<
+    fNoteBelongsToAMultipleMeasureRests <<
     std::endl;
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteMultiMeasureRestsSequenceNumber" << ": " <<
-    fNoteMultiMeasureRestsSequenceNumber <<
+    "fNoteMultipleMeasureRestsSequenceNumber" << ": " <<
+    fNoteMultipleMeasureRestsSequenceNumber <<
     std::endl;
 
   os << std::left <<
@@ -6312,12 +6312,12 @@ void msrNote::printFull (std::ostream& os) const
   // multiple rest member?
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fNoteBelongsToAMultiMeasureRests" << ": " <<
-    fNoteBelongsToAMultiMeasureRests <<
+    "fNoteBelongsToAMultipleMeasureRests" << ": " <<
+    fNoteBelongsToAMultipleMeasureRests <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fNoteMultiMeasureRestsSequenceNumber" << ": " <<
-    fNoteMultiMeasureRestsSequenceNumber <<
+    "fNoteMultipleMeasureRestsSequenceNumber" << ": " <<
+    fNoteMultipleMeasureRestsSequenceNumber <<
     std::endl;
 
   // print the grace notes group before note if any
@@ -7842,7 +7842,7 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //         ss <<
 //           'R' <<
 //           / * JMI
-//           multiMeasureRestsWholeNotesPitchAndOctaveAsString (
+//           multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
 //             fInputLineNumber,
 //             fMeasureElementSoundingWholeNotes);
 //             */

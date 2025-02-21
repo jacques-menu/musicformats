@@ -481,7 +481,7 @@ if (false) // JMI
 // if (false) // JMI v0.9.67
 //   fVisitedLpsrScore->
 //     getEmbeddedMsrScore ()->
-//       setInhibitMultiMeasureRestsBrowsing ();
+//       setInhibitMultipleMeasureRestsBrowsing ();
 
   // octaves entry
   // ------------------------------------------------------
@@ -551,7 +551,7 @@ if (false) // JMI
   // figured bass
   fCurrentFiguredBassFiguresCounter = 0;
 
-  // multi-measure rests
+  // multiple measure rests
   fRemainingMeasureRestsNumber = 0;
 
   // measures
@@ -12141,7 +12141,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
       elt->getPartIDAndName ());
 
   fRemainingMeasureRestsNumber = 0; // JMI
-  fOnGoingMultiMeasureRests = false; // JMI
+  fOnGoingMultipleMeasureRests = false; // JMI
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
@@ -12614,7 +12614,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       std::endl << std::endl;
   }
 
-  // compress multi-measure rests?
+  // compress multiple measure rests?
   if (gGlobalLpsr2lilypondOahGroup->getCompressMeasureRestsInLilypond ()) { // JMI v0.9.64
     fLilypondCodeStream <<
       "\\compressMMRests" << " %{ JMI v0.9.64 ??? %} " <<
@@ -12721,7 +12721,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 
   /* JMI
   if (
-    fCurrentVoice->getVoiceContainsMultiMeasureRests ()
+    fCurrentVoice->getVoiceContainsMultipleMeasureRests ()
       ||
     gGlobalLpsr2lilypondOahGroup->getCompressMeasureRestsInLilypond ()
   ) {
@@ -13433,7 +13433,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         ", measureEndRegularKind: " <<
         elt-> getMeasureEndRegularKind () <<
         ", measurePuristNumber: '" << measurePuristNumber << '\'' <<
-        ", fOnGoingMultiMeasureRests: " << fOnGoingMultiMeasureRests <<
+        ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
         ", line " << elt->getInputLineNumber () <<
         std::endl;
 
@@ -13601,7 +13601,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       ", measureEndRegularKind: " <<
       elt-> getMeasureEndRegularKind () <<
       ", measurePuristNumber: " << measurePuristNumber <<
-      ", fOnGoingMultiMeasureRests: " << fOnGoingMultiMeasureRests <<
+      ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
 
@@ -14021,7 +14021,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         elt-> getMeasureEndRegularKind () <<
         '\'' <<
         ", measurePuristNumber: '" << measurePuristNumber << '\'' <<
-        ", fOnGoingMultiMeasureRests: " << fOnGoingMultiMeasureRests <<
+        ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
         ", line " << elt->getInputLineNumber () <<
         std::endl;
 
@@ -14061,7 +14061,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       ", measureEndRegularKind: '" <<
       elt-> getMeasureEndRegularKind () <<
       ", measurePuristNumber: " << measurePuristNumber << '\'' <<
-      ", fOnGoingMultiMeasureRests: " << fOnGoingMultiMeasureRests <<
+      ", fOnGoingMultipleMeasureRests: " << fOnGoingMultipleMeasureRests <<
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
 
@@ -14116,7 +14116,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
     fPendingTrillSpannerForStop = nullptr;
   }
 
-  if (! fOnGoingMultiMeasureRests) {
+  if (! fOnGoingMultipleMeasureRests) {
     // handle the measure
     switch (measureKind) {
       case msrMeasureKind::kMeasureKindUnknown: // should not occur
@@ -19156,7 +19156,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFermata& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 /*
-Articulations can be attached to rests as well as notes but they cannot be attached to multi-measure rests. A special predefined command, \fermataMarkup, is available for at- taching a fermata to a multi-measure rest (and only a multi-measure rest). This creates a MultiMeasureRestText object.
+Articulations can be attached to rests as well as notes but they cannot be attached to multiple measure rests. A special predefined command, \fermataMarkup, is available for at- taching a fermata to a multiple measure rest (and only a multiple measure rest). This creates a MultipleMeasureRestText object.
 */
 
 /* JMI
@@ -21983,8 +21983,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         fOnGoingGraceNotesGroup <<
         ", fOnGoingChordGraceNotesGroupLink: " <<
         fOnGoingChordGraceNotesGroupLink <<
-        ", fOnGoingMultiMeasureRests: " <<
-        fOnGoingMultiMeasureRests <<
+        ", fOnGoingMultipleMeasureRests: " <<
+        fOnGoingMultipleMeasureRests <<
         ", line " << elt->getInputLineNumber () <<
         std::endl;
 
@@ -22223,27 +22223,27 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
     }
   }
 
-  if (false && fOnGoingMultiMeasureRests) {
+  if (false && fOnGoingMultipleMeasureRests) {
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
-        // don't handle multi-measure rests, that's done in visitEnd (S_msrMultiMeasureRest&)
+        // don't handle multiple measure rests, that's done in visitEnd (S_msrMultipleMeasureRest&)
           /*
           if (elt->getNoteOccupiesAFullMeasure ()) {
-            Bool inhibitMultiMeasureRestsBrowsing =
+            Bool inhibitMultipleMeasureRestsBrowsing =
               fVisitedLpsrScore->
                 getEmbeddedMsrScore ()->
-                  getInhibitMultiMeasureRestsBrowsing ();
+                  getInhibitMultipleMeasureRestsBrowsing ();
 
-            if (inhibitMultiMeasureRestsBrowsing) {
+            if (inhibitMultipleMeasureRestsBrowsing) {
               if (
                 gLpsrOahGroup->getTraceLpsrVisitors ()
                   ||
-                gTraceOahGroup->getTraceMultiMeasureRests ()
+                gTraceOahGroup->getTraceMultipleMeasureRests ()
               ) {
                 std::stringstream ss;
 
                 ss <<
-                  "% ==> visiting multi-measure rests is ignored" <<
+                  "% ==> visiting multiple measure rests is ignored" <<
                   std::endl;
 
                 gWaeHandler->waeTrace (
@@ -22270,7 +22270,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
           if (
             gLpsrOahGroup->getTraceLpsrVisitors ()
               ||
-            gTraceOahGroup->getTraceMultiMeasureRests ()
+            gTraceOahGroup->getTraceMultipleMeasureRests ()
           ) {
             std::stringstream ss;
 
@@ -22395,8 +22395,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       fOnGoingGraceNotesGroup <<
       ", fOnGoingChordGraceNotesGroupLink: " <<
       fOnGoingChordGraceNotesGroupLink <<
-      ", fOnGoingMultiMeasureRests: " <<
-      fOnGoingMultiMeasureRests <<
+      ", fOnGoingMultipleMeasureRests: " <<
+      fOnGoingMultipleMeasureRests <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -23527,28 +23527,28 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     noteIsToBeIgnored = true;
   }
 
-  if (fOnGoingMultiMeasureRests) {
+  if (fOnGoingMultipleMeasureRests) {
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
-        // don't handle multi-measure restss, that's done in visitEnd (S_msrMultiMeasureRest&)
+        // don't handle multiple measure restss, that's done in visitEnd (S_msrMultipleMeasureRest&)
         if (elt->getNoteOccupiesAFullMeasure ()) {
           Bool
-            inhibitMultiMeasureRestsBrowsing =
+            inhibitMultipleMeasureRestsBrowsing =
               fVisitedLpsrScore->
                 getEmbeddedMsrScore ()->
-                  getInhibitMultiMeasureRestsBrowsing ();
+                  getInhibitMultipleMeasureRestsBrowsing ();
 
-          if (inhibitMultiMeasureRestsBrowsing) {
+          if (inhibitMultipleMeasureRestsBrowsing) {
 #ifdef MF_TRACE_IS_ENABLED
             if (
               gTraceOahGroup->getTraceNotes ()
                 ||
-              gTraceOahGroup->getTraceMultiMeasureRests ()
+              gTraceOahGroup->getTraceMultipleMeasureRests ()
             ) {
               std::stringstream ss;
 
               ss <<
-                "% ==> end visiting multi-measure rests is ignored";
+                "% ==> end visiting multiple measure rests is ignored";
 
             gWaeHandler->waeTrace (
               __FILE__, __LINE__,
@@ -26610,12 +26610,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
     elt->getNextBarPuristNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     fLilypondCodeStream <<
       "% nextBarPuristNumber: " <<
       nextBarPuristNumber <<
-      ", fOnGoingMultiMeasureRests: " <<
-      fOnGoingMultiMeasureRests <<
+      ", fOnGoingMultipleMeasureRests: " <<
+      fOnGoingMultipleMeasureRests <<
       "fOnGoingVoiceCadenza: " <<
       fOnGoingVoiceCadenza <<
       ", nextBarPuristNumber: " <<
@@ -26632,7 +26632,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
             // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
             // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
           ||
-        fOnGoingMultiMeasureRests
+        fOnGoingMultipleMeasureRests
       )
   ) {
     // don't generate a bar check before the end of measure 1 // JMI ??? v0.9.70
@@ -26730,10 +26730,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     fLilypondCodeStream <<
-      "%, fOnGoingMultiMeasureRests: " <<
-      fOnGoingMultiMeasureRests <<
+      "%, fOnGoingMultipleMeasureRests: " <<
+      fOnGoingMultipleMeasureRests <<
       "% fOnGoingVoiceCadenza: " <<
       fOnGoingVoiceCadenza <<
       ", line " << elt->getInputLineNumber () <<
@@ -26748,7 +26748,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
           // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
           // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
           ||
-        fOnGoingMultiMeasureRests
+        fOnGoingMultipleMeasureRests
       )
   ) {
     std::string nextBarOriginalNumber =
@@ -27915,7 +27915,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::visitStart (S_msrMultiMeasureRest& elt)
+void lpsr2lilypondTranslator::visitStart (S_msrMultipleMeasureRest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -27931,7 +27931,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultiMeasureRest& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrMultiMeasureRest" <<
+        "% --> Start visiting msrMultipleMeasureRest" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -27953,7 +27953,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultiMeasureRest& elt)
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
-      "% start of multi-measure rests" <<
+      "% start of multiple measure rests" <<
       mfSingularOrPlural (
         measureRestsNumber,
         "measure",
@@ -27961,16 +27961,16 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultiMeasureRest& elt)
       ", line " << elt->getInputLineNumber () <<
       std::endl << std::endl;
 
-    ++gIndenter; // decremented in visitEnd (S_msrMultiMeasureRest&)
+    ++gIndenter; // decremented in visitEnd (S_msrMultipleMeasureRest&)
   }
 
   if (
     gGlobalLpsr2lilypondOahGroup->
-      getMultiMeasureRestsExpandLimitAtom ()->getSelected ()
+      getMultipleMeasureRestsExpandLimitAtom ()->getSelected ()
   ) {
     fLilypondCodeStream <<
-      "\\override MultiMeasureRest.expand-limit = " <<
-      gGlobalLpsr2lilypondOahGroup->getMultiMeasureRestsExpandLimit () <<
+      "\\override MultipleMeasureRest.expand-limit = " <<
+      gGlobalLpsr2lilypondOahGroup->getMultipleMeasureRestsExpandLimit () <<
       std::endl;
   }
 
@@ -27979,10 +27979,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultiMeasureRest& elt)
     std::endl;
   ++gIndenter;
 
-  fOnGoingMultiMeasureRests = true;
+  fOnGoingMultipleMeasureRests = true;
 }
 
-void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
+void lpsr2lilypondTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -27998,7 +27998,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> End visiting msrMultiMeasureRest" <<
+        "% --> End visiting msrMultipleMeasureRest" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -28023,7 +28023,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
     elt->getMeasureRestsNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -28037,19 +28037,19 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // get multi-measure rests sounding notes JMI USELESS v0.9.63
+  // get multiple measure rests sounding notes JMI USELESS v0.9.63
   msrWholeNotes
-    multiMeasureRestsMeasureSoundingNotes =
-      elt->fetchMultiMeasureRestMeasureSoundingNotes ();
+    multipleMeasureRestsMeasureSoundingNotes =
+      elt->fetchMultipleMeasureRestMeasureSoundingNotes ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
       std::endl <<
-      "--> multiMeasureRestsMeasureSoundingNotes: " <<
-      multiMeasureRestsMeasureSoundingNotes;
+      "--> multipleMeasureRestsMeasureSoundingNotes: " <<
+      multipleMeasureRestsMeasureSoundingNotes;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -28057,16 +28057,16 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // generate multi-measure rests only now, in case there are
+  // generate multiple measure rests only now, in case there are
   // clef, keys or times before them in the first measure
   std::string
     measureRestsWholeNoteAsLilypondString =
-      multiMeasureRestsWholeNoteAsLilypondString (
+      multipleMeasureRestsWholeNoteAsLilypondString (
         elt->getInputLineNumber (),
-        multiMeasureRestsMeasureSoundingNotes);
+        multipleMeasureRestsMeasureSoundingNotes);
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMultiMeasureRests ()) {
+  if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
 
     ss <<
@@ -28095,7 +28095,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
   if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
     // generate information and line number as a comment
     fLilypondCodeStream <<
-      "%{ multi-measure rest %} ";
+      "%{ multiple measure rest %} ";
   }
 
   // wait until all measures have be visited
@@ -28105,7 +28105,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
   fLilypondCodeStream <<
     " | % ";
 //     " | % " <<
-//     elt->getMultiMeasureRestLastMeasurePuristMeasureNumber () + 1;
+//     elt->getMultipleMeasureRestLastMeasurePuristMeasureNumber () + 1;
 
 /* TO BE FINALIZED JMI
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
@@ -28119,10 +28119,10 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
     std::endl;
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
-    --gIndenter; // incremented in visitStart (S_msrMultiMeasureRest&)
+    --gIndenter; // incremented in visitStart (S_msrMultipleMeasureRest&)
 
     fLilypondCodeStream <<
-      "% end of multi-measure rests" <<
+      "% end of multiple measure rests" <<
       mfSingularOrPlural (
         measureRestsNumber,
         "measure",
@@ -28137,7 +28137,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultiMeasureRest& elt)
     "} %{ compressMMRests %} " <<
     std::endl;
 
-  fOnGoingMultiMeasureRests = false;
+  fOnGoingMultipleMeasureRests = false;
 }
 
 //________________________________________________________________________

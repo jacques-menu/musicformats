@@ -131,7 +131,10 @@ class EXP mxsr2msrSkeletonBuilder :
   // ------------------------------------------------------
 
   public                      visitor<S_measure>,
+
   public                      visitor<S_measure_repeat>,
+
+  public                      visitor<S_multiple_rest>,
 
   // print
   // ------------------------------------------------------
@@ -326,6 +329,9 @@ class EXP mxsr2msrSkeletonBuilder :
 
     virtual void              visitStart (S_measure_repeat& elt);
     virtual void              visitEnd   (S_measure_repeat& elt);
+
+    virtual void              visitStart (S_multiple_rest& elt);
+    virtual void              visitEnd   (S_multiple_rest& elt);
 
     // print
     // ------------------------------------------------------
@@ -618,6 +624,25 @@ class EXP mxsr2msrSkeletonBuilder :
 
 		Bool                      fAFirstForwardRepeatHasBeenMet;
 
+    // multiple multiple measure rests
+    // ------------------------------------------------------
+
+    Bool                      fOnGoingMultipleMeasureRest;
+
+    // multiple measure repeats
+    // ------------------------------------------------------
+
+  	msrMeasureRepeatKind      fCurrentMeasureRepeatKind;
+
+    int                       fCurrentMeasureRepeatNumber;
+
+    int                       fCurrentMultipleMeasureRestNumber;
+    int                       fRemainingMultipleMeasureRestNumber;
+
+    int                       fCurrentMeasureRepeatSlashes;
+
+    Bool                      fOnGoingMeasureRepeat;
+
     // measures
     // ------------------------------------------------------
 
@@ -666,6 +691,15 @@ class EXP mxsr2msrSkeletonBuilder :
 
     Bool                      fCurrentNoteIsARest;
 
+    // multiple measure rests handling
+    // ------------------------------------------------------
+
+//     mxsrMultipleMeasureRestEvent
+//                               fPendingMultipleMeasureRestEvent;
+
+    // measure repeats handling
+    // ------------------------------------------------------
+
     // grace notes handling
     // ------------------------------------------------------
 
@@ -685,8 +719,6 @@ class EXP mxsr2msrSkeletonBuilder :
     // staff changes handling
     // ------------------------------------------------------
 
-    mfStaffNumber             fCurrentStaffNumber; // ??? JMI
-
 		Bool                      fPreviousNoteIsATakeOffCandidate;
 
     Bool                      handleStaffChangeIfAny (
@@ -697,8 +729,6 @@ class EXP mxsr2msrSkeletonBuilder :
 
     Bool                      fCurrentNoteBelongsToAChord;
     Bool                      fPreviousNoteBelongsToAChord;
-
-//     Bool                      fOnGoingChord;
 
     void                      registerChordEventIfAny ();
 

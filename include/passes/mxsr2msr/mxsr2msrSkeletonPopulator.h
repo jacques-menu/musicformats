@@ -337,9 +337,13 @@ class EXP mxsr2msrSkeletonPopulator :
   // ------------------------------------------------------
 
   public                      visitor<S_measure_style>,
+
   public                      visitor<S_beat_repeat>,
+
   public                      visitor<S_measure_repeat>,
+
   public                      visitor<S_multiple_rest>,
+
   public                      visitor<S_slash>,
   public                      visitor<S_slash_type>,
   public                      visitor<S_slash_dot>,
@@ -1468,15 +1472,15 @@ class EXP mxsr2msrSkeletonPopulator :
     // rests
     Bool                      fCurrentNoteIsARest;
 
-    // multi-measure rests
+    // multiple measure rests
     Bool                      fCurrentRestIsAMeasureRest;
 
-    int                       fCurrentMeasureRestsNumber;
-    int                       fRemainingMeasureRestsCounter;
+    int                       fCurrentMultipleMeasureRestNumber;
+    int                       fRemainingMultipleMeasureRestNumber;
 
-    Bool                      fMultiMeasureRestsUseSymbols;
+    Bool                      fMultipleMeasureRestsUseSymbols;
 
-//     void                      handleOnGoingMultiMeasureRestsAtTheEndOfMeasure (
+//     void                      handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure (
 //                                 int inputLineNumber);
 
     // staff changes handling
@@ -1523,10 +1527,8 @@ class EXP mxsr2msrSkeletonPopulator :
     // grace notes groups handling
     // ------------------------------------------------------
 
-    // fCurrentNoteGraceEvent contains the grace event
-    // that occurs on a take off note, if any
-    S_mxsrGraceEvent          fCurrentNoteGraceBeginEvent; // EVENTS
-    S_mxsrGraceEvent          fCurrentNoteGraceEndEvent; // EVENTS
+    S_mxsrGraceEvent          fCurrentNoteGraceBeginEvent;
+    S_mxsrGraceEvent          fCurrentNoteGraceEndEvent;
 
     Bool                      fCurrentGraceNotesGroupIsSlashed;
     Bool                      fCurrentGraceNotesGroupIsBeamed;

@@ -89,7 +89,6 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
 	fPreviousNoteIsACueNote = false;
 
 	// staff changes handling
-	fCurrentStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 	fPreviousNoteIsATakeOffCandidate = false;
 
   // chords handling
@@ -142,7 +141,7 @@ void mxsr2msrSkeletonBuilder::browseMxsr (
   if (gTraceOahGroup->getDisplayMxsrEvents ()) {
     gLog <<
       std::endl <<
-      "The MSR skeleton builder collected the following events:" <<
+      "The MSR skeleton builder collected the following MXSR events:" <<
       std::endl;
 
 			++gIndenter;
@@ -4372,11 +4371,6 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
 
 	fCurrentNoteStaffNumber = staffNumber;
 
-  if (fCurrentStaffNumber == K_STAFF_NUMBER_UNKNOWN_) {
-  	// this is the first <staff /> in the current part // JMI v0.9.72 ???
-  	fCurrentStaffNumber = fCurrentNoteStaffNumber;
-	}
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceStaves ()) {
     std::stringstream ss;
@@ -4386,7 +4380,6 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
       "<!--=== "
       "visitStart (S_staff& elt)" <<
       ", staffNumber: " << staffNumber <<
-      ", fCurrentStaffNumber: " << fCurrentStaffNumber <<
       ", fCurrentNoteStaffNumber: " << fPreviousNoteStaffNumber <<
       ", fPreviousNoteStaffNumber: " << fPreviousNoteStaffNumber <<
       ", line " << elt->getInputLineNumber () <<
@@ -4513,6 +4506,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
   measures are grouped via the number).
 */
 
+	// handler various numbers
 	fPreviousMeasureInputLineNumber = fCurrentMeasureInputLineNumber;
   fCurrentMeasureInputLineNumber = elt->getInputLineNumber ();
 
@@ -4530,6 +4524,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
       " (fCurrentPartID \"" << fCurrentPartID << "\")" <<
       ", fPreviousMeasureNumber \"" << fPreviousMeasureNumber << "\"" <<
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
+      ", fCurrentMultipleMeasureRestNumber \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
+      ", fRemainingMultipleMeasureRestNumber \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
       ", line " << fCurrentMeasureInputLineNumber <<
       " ===-->";
 
@@ -4575,11 +4571,159 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-	handleChordMemberNoteIfRelevant (
-		elt->getInputLineNumber () );
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+    std::stringstream ss;
 
- 	// Q_MEASURE
+    ss <<
+      "<!--=== visitEnd (S_measure& elt) 1" <<
+      ", fCurrentPartName \"" << fCurrentPartName << "\"" <<
+      " (fCurrentPartID \"" << fCurrentPartID << "\")" <<
+      ", fPreviousMeasureNumber \"" << fPreviousMeasureNumber << "\"" <<
+      ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
+      ", fOnGoingMultipleMeasureRest: " << fOnGoingMultipleMeasureRest <<
+      ", fOnGoingMeasureRepeat: " << fOnGoingMeasureRepeat <<
+      ", fCurrentMultipleMeasureRestNumber \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
+      ", fRemainingMultipleMeasureRestNumber \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+      ", line " << fCurrentMeasureInputLineNumber <<
+      " ===-->";
 
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+	// if there is an ongoing multiple measure rest?
+	// this done only now in visitEnd (S_measure& elt),
+	// because it was not known in visitStart (S_measure& elt) for this measure
+	// that is was the first one of a multiple measure rest
+	if (fOnGoingMultipleMeasureRest) {
+		// yes
+
+		// account for this measure in the multiple measure rests countdown
+		--fRemainingMultipleMeasureRestNumber;
+
+#ifdef MF_TRACE_IS_ENABLED
+		if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+			std::stringstream ss;
+
+			ss <<
+				"<!--=== visitEnd (S_measure& elt) 2" <<
+				", fCurrentPartName \"" << fCurrentPartName << "\"" <<
+				" (fCurrentPartID \"" << fCurrentPartID << "\")" <<
+				", fPreviousMeasureNumber \"" << fPreviousMeasureNumber << "\"" <<
+				", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
+				", fOnGoingMultipleMeasureRest: " << fOnGoingMultipleMeasureRest <<
+				", fCurrentMultipleMeasureRestNumber \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
+				", fRemainingMultipleMeasureRestNumber \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+				", line " << fCurrentMeasureInputLineNumber <<
+				" ===-->";
+
+			gWaeHandler->waeTrace (
+				__FILE__, __LINE__,
+				ss.str ());
+		}
+#endif // MF_TRACE_IS_ENABLED
+
+		if (fRemainingMultipleMeasureRestNumber == 0) {
+			// this measure in the last one in the multiple measure rests group
+#ifdef MF_TRACE_IS_ENABLED
+			if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+				std::stringstream ss;
+
+				ss <<
+					"--> There is a multiple measure rest end event" <<
+					", fCurrentMeasureNumber: " <<
+					fCurrentMeasureNumber <<
+					", fCurrentMultipleMeasureRestNumber: " <<
+					fCurrentMultipleMeasureRestNumber <<
+					", line " << elt->getInputLineNumber ();
+
+				gWaeHandler->waeTrace (
+					__FILE__, __LINE__,
+					ss.str ());
+			}
+#endif // MF_TRACE_IS_ENABLED
+
+			// create a multiple measure rest end event
+			S_mxsrMultipleMeasureRestEvent
+				multipleMeasureRestEndEvent =
+					fResultingEventsCollection.createAMultipleMeasureRestEnd (
+						fCurrentPart->getPartName (),
+						fCurrentMeasureNumber,
+						fCurrentMultipleMeasureRestNumber,
+						elt->getInputLineNumber ());
+
+			// register it
+			fResultingEventsCollection.registerMultipleMeasureRestEnd (
+				multipleMeasureRestEndEvent);
+
+			fOnGoingMultipleMeasureRest = false;
+		}
+	}
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "<!--=== visitEnd (S_measure& elt) 3" <<
+      ", fCurrentPartName \"" << fCurrentPartName << "\"" <<
+      " (fCurrentPartID \"" << fCurrentPartID << "\")" <<
+      ", fPreviousMeasureNumber \"" << fPreviousMeasureNumber << "\"" <<
+      ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
+      ", fOnGoingMultipleMeasureRest: " << fOnGoingMultipleMeasureRest <<
+      ", fCurrentMultipleMeasureRestNumber \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
+      ", fRemainingMultipleMeasureRestNumber \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+      ", line " << fCurrentMeasureInputLineNumber <<
+      " ===-->";
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+// 	handleChordMemberNoteIfRelevant (
+// 		elt->getInputLineNumber () );
+
+ 	// create the MXSR events that can be detected only upon the next measure or note
+ 	// because such emd are detected one measure or note too late
+
+	if (fOnGoingMeasureRepeat) {
+		switch (fCurrentMeasureRepeatKind) {
+			case msrMeasureRepeatKind::kMeasureRepeat_UNKNOWN_:
+				// should not occur
+				break;
+
+			case msrMeasureRepeatKind::kMeasureRepeatStart:
+				break;
+
+			case msrMeasureRepeatKind::kMeasureRepeatStop:
+				{
+					// create a multiple measure rest end event upon the previous measure,
+					// since we're one measure too late
+					S_mxsrMeasureRepeatEvent
+						multipleMeasureResEndEvent =
+							fResultingEventsCollection.createAMeasureRepeatEnd (
+								fCurrentPart->getPartName (),
+								fPreviousMeasureNumber,
+								fCurrentMeasureRepeatNumber,
+								fCurrentMeasureRepeatSlashes,
+								fPreviousMeasureInputLineNumber);
+
+					// register it
+					fResultingEventsCollection.registerMeasureRepeatEnd (
+						multipleMeasureResEndEvent);
+				}
+				break;
+		} // switch
+
+		fOnGoingMeasureRepeat = false;
+	}
+
+	// grace notes
 	if (fCurrentNoteIsAGraceNote) {
 		// the current note is the last one of a grace notes group
 		fResultingEventsCollection.registerGraceEnd (
@@ -4589,6 +4733,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 			fCurrentNoteInputLineNumber);
 	}
 
+	// cue notes ???
 	if (fCurrentNoteIsACueNote) {
 		// the current note is the last one of a cue notes group
 
@@ -4606,6 +4751,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 			cueEndEvent);
 	}
 
+	// chords
 	if (fCurrentNoteBelongsToAChord) {
 		// the current note is the last one of a chord
 
@@ -4632,6 +4778,148 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 }
 
 //________________________________________________________________________
+void mxsr2msrSkeletonBuilder::visitStart (S_multiple_rest& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> Start visiting S_multiple_rest" <<
+      ", line " << elt->getInputLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+/*
+<!--
+	The text of the multiple-rest element indicates the number
+	of measures in the multiple rest. Multiple rests may use
+	the 1-bar / 2-bar / 4-bar rest symbols, or a single shape.
+	The use-symbols attribute indicates which to use; it is no
+	if not specified.
+-->
+<!ELEMENT multiple-rest (#PCDATA)>
+<!ATTLIST multiple-rest
+    use-symbols %yes-no; #IMPLIED
+>
+
+v4.0
+The stop type indicates the first measure where the repeats are *no longer* displayed.
+  Both the start and the stop of the measures being repeated should be specified
+  unless the repeats are displayed through the end of the part.
+
+      <attributes>
+        <measure-style>
+          <multiple-rest>2</multiple-rest>
+        </measure-style>
+      </attributes>
+      <note>
+        <rest measure="yes"/>
+        <duration>96</duration>
+        <voice>1</voice>
+      </note>
+    </measure>
+    <!--=======================================================-->
+    <measure number="2" width="0">
+      <note>
+        <rest measure="yes"/>
+        <duration>96</duration>
+        <voice>1</voice>
+      </note>
+      <barline location="right">
+        <bar-style>light-light</bar-style>
+      </barline>
+    </measure>
+*/
+
+  // multiple measure rest number
+
+  fCurrentMultipleMeasureRestNumber = (int)(*elt);
+
+  // start counting down the measures in the group:
+  // the one containing the <S_multiple_rest /> is the first one in the group,
+  // it will be accounted for in visitEnd (S_measure& elt):
+  fRemainingMultipleMeasureRestNumber =
+  	fCurrentMultipleMeasureRestNumber;
+
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+			"--> There is a multiple measure rest begin event" <<
+      ", fCurrentPartName: \"" << fCurrentPartName << "\"" <<
+      " (fCurrentPartID: \"" << fCurrentPartID << "\")" <<
+      ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber << "\"" <<
+      ", fCurrentMultipleMeasureRestNumber: \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
+      ", fRemainingMultipleMeasureRestNumber: \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+      ", line " << elt->getInputLineNumber () <<
+      " ===-->";
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+	// create a multiple measure rest begin event
+	S_mxsrMultipleMeasureRestEvent
+		multipleMeasureResBegintEvent =
+			fResultingEventsCollection.createAMultipleMeasureRestBegin (
+				fCurrentPart->getPartName (),
+				fCurrentMeasureNumber,
+				fCurrentMultipleMeasureRestNumber,
+				fCurrentMeasureInputLineNumber);
+
+	// register it
+	fResultingEventsCollection.registerMultipleMeasureRestBegin (
+		multipleMeasureResBegintEvent);
+
+  fOnGoingMultipleMeasureRest = true;
+}
+
+void mxsr2msrSkeletonBuilder::visitEnd (S_multiple_rest& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting S_multiple_rest" <<
+      ", line " << elt->getInputLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "<!--=== visitEnd (S_multiple_rest& elt)" <<
+//       ", fCurrentPartName: \"" << fCurrentPartName << "\"" <<
+//       " (fCurrentPartID: \"" << fCurrentPartID << "\")" <<
+//       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber << "\"" <<
+//       ", fCurrentMultipleMeasureRestNumber: \"" << fCurrentMultipleMeasureRestNumber << "\"" <<
+//       ", fRemainingMultipleMeasureRestNumber: \"" << fRemainingMultipleMeasureRestNumber << "\"" <<
+//       ", line " << elt->getInputLineNumber () <<
+//       " ===-->";
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+}
+
+//________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4655,30 +4943,40 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
         </measure-style>
       </attributes>
 */
+
 /*
-      <attributes>
-        <measure-style>
-          <measure-repeat type="stop"/>
-        </measure-style>
-      </attributes>
+<!--
+	The measure-repeat element is used for both single and
+	multiple measure repeats. The text of the element indicates
+	the number of measures to be repeated in a single pattern.
+	The slashes attribute specifies the number of slashes to
+	use in the repeat sign. It is 1 if not specified. Both the
+	start and the stop of the measure-repeat must be specified.
+-->
+<!ELEMENT measure-repeat (#PCDATA)>
+<!ATTLIST measure-repeat
+    type %start-stop; #REQUIRED
+    slashes NMTOKEN #IMPLIED
+>
 */
 
-  int repeatNumber = (int)(*elt);
+	// repeat number
+
+  int CurrentMeasureRepeatNumber = (int)(*elt);
 
   // type
 
 	std::string measureRepeatType = elt->getAttributeValue ("type");
 
-	msrMeasureRepeatKind
-		 measureRepeatKind =
-			 msrMeasureRepeatKind::kMeasureRepeat_UNKNOWN_;
+	fCurrentMeasureRepeatKind =
+  	msrMeasureRepeatKind::kMeasureRepeat_UNKNOWN_;
 
 	if      (measureRepeatType == "start") {
-		measureRepeatKind = msrMeasureRepeatKind::kMeasureRepeatStart;
+		fCurrentMeasureRepeatKind = msrMeasureRepeatKind::kMeasureRepeatStart;
 	}
 
 	else if (measureRepeatType == "stop") {
-		measureRepeatKind = msrMeasureRepeatKind::kMeasureRepeatStop;
+		fCurrentMeasureRepeatKind = msrMeasureRepeatKind::kMeasureRepeatStop;
 	}
 
 	else {
@@ -4695,6 +4993,10 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
 			ss.str ());
 	}
 
+  // slashes
+
+	int fCurrentMeasureRepeatSlashes = elt->getAttributeIntValue ("slashes", 1);
+
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureBasics ()) {
     std::stringstream ss;
@@ -4705,8 +5007,9 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
       ", fCurrentPartName \"" << fCurrentPartName << "\"" <<
       " (fCurrentPartID \"" << fCurrentPartID << "\")" <<
       ", fCurrentMeasureNumber \"" << fCurrentMeasureNumber << "\"" <<
-      ", measureRepeatKind \"" << measureRepeatKind << "\"" <<
-      ", repeatNumber \"" << repeatNumber << "\"" <<
+      ", fCurrentMeasureRepeatKind \"" << fCurrentMeasureRepeatKind << "\"" <<
+      ", fCurrentMeasureRepeatNumber \"" << fCurrentMeasureRepeatNumber << "\"" <<
+      ", fCurrentMeasureRepeatSlashes \"" << fCurrentMeasureRepeatSlashes << "\"" <<
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
 
@@ -4716,29 +5019,34 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure_repeat& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  switch (measureRepeatKind) {
+  switch (fCurrentMeasureRepeatKind) {
     case msrMeasureRepeatKind::kMeasureRepeat_UNKNOWN_:
       // should not occur
       break;
 
     case msrMeasureRepeatKind::kMeasureRepeatStart:
-    	// the measure repeat begins upon this measure
-// 			fResultingEventsCollection.registerMeasureRepeatBegin (
-// 				fCurrentPartName,
-// 				fCurrentMeasureNumber,
-// 				repeatNumber,
-// 				fCurrentMeasureInputLineNumber);
+    	{
+				// the measure repeat end upon the previous measure
+				S_mxsrMeasureRepeatEvent
+					multipleMeasureResBeginEvent =
+						fResultingEventsCollection.createAMeasureRepeatBegin (
+							fCurrentPart->getPartName (),
+							fPreviousMeasureNumber,
+							CurrentMeasureRepeatNumber,
+							fCurrentMeasureRepeatSlashes,
+							fCurrentMeasureInputLineNumber);
+
+				// register it
+				fResultingEventsCollection.registerMeasureRepeatBegin (
+					multipleMeasureResBeginEvent);
+			}
       break;
 
     case msrMeasureRepeatKind::kMeasureRepeatStop:
-    	// the measure repeat end upon the previous measure
-// 			fResultingEventsCollection.registerMeasureRepeatEnd (
-// 				fCurrentPartName,
-// 				fPreviousMeasureNumber,
-// 				repeatNumber,
-// 				fPreviousMeasureInputLineNumber);
       break;
   } // switch
+
+  fOnGoingMeasureRepeat = true;
 }
 
 void mxsr2msrSkeletonBuilder::visitEnd (S_measure_repeat& elt)
@@ -4756,19 +5064,6 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure_repeat& elt)
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
-
-// 	handleChordMemberNoteIfRelevant (
-// 		elt->getInputLineNumber () );
-//
-//  	// Q_MEASURE
-//
-//
-// 	// handle pending measureRepeat stops if any, after the chord end if any,
-// 	// which occurs on the current notes, i.e. the one at the end of the measure JMI v0.9.72
-// 	handlePendingMeasureRepeatsStopsAtMeasureEndIfAny (
-// 		fPreviousNoteInputLineNumber);
-//
-//   --gIndenter;
 }
 
 //______________________________________________________________________________

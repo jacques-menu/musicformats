@@ -1968,7 +1968,7 @@ std::string wholeNotesPitchAndOctaveAsString (
       dotsNumber);
 }
 
-std::string multiMeasureRestsWholeNotesPitchAndOctaveAsString (
+std::string multipleMeasureRestsWholeNotesPitchAndOctaveAsString (
   int                  inputLineNumber, // JMI
   const msrWholeNotes& wholeNotes)
 {
