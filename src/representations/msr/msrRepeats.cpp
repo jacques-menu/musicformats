@@ -186,7 +186,7 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
 // JMI v0.9.67  fRepeatCommonPartElementsList.push_back (measureRepeat); JMI v0.9.66
 }
 
-void msrRepeatCommonPart::appendMultipleMeasureRestToRepeatCommonPart (
+void msrRepeatCommonPart::cascadeAppendMultipleMeasureRestToRepeatCommonPart (
   int                   inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests,
   const std::string&    context)
@@ -705,7 +705,7 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
 // JMI v0.9.67  fRepeatEndingElementsList.push_back (measureRepeat);
 }
 
-void msrRepeatEnding::appendMultipleMeasureRestToRepeatEnding (
+void msrRepeatEnding::cascadeAppendMultipleMeasureRestToRepeatEnding (
   int                   inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests,
   const std::string&    context)
@@ -1615,7 +1615,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-void msrRepeat::appendMultipleMeasureRestToRepeat (
+void msrRepeat::cascadeAppendMultipleMeasureRestToRepeat (
   int                   inputLineNumber,
   const S_msrMultipleMeasureRest& multipleMeasureRests,
   const std::string&    context)
@@ -1637,7 +1637,7 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
-      "appendMultipleMeasureRestToRepeat() 1");
+      "cascadeAppendMultipleMeasureRestToRepeat() 1");
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -1662,7 +1662,7 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
       fRepeatCommonPart->
-        appendMultipleMeasureRestToRepeatCommonPart (
+        cascadeAppendMultipleMeasureRestToRepeatCommonPart (
           inputLineNumber,
           multipleMeasureRests,
           context);
@@ -1670,7 +1670,7 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
 
     case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
       fRepeatEndings.back ()->
-        appendMultipleMeasureRestToRepeatEnding (
+        cascadeAppendMultipleMeasureRestToRepeatEnding (
           inputLineNumber,
           multipleMeasureRests,
           context);
@@ -1699,7 +1699,7 @@ void msrRepeat::appendMultipleMeasureRestToRepeat (
   if (gTraceOahGroup->getTraceRepeatsDetails ()) {
     displayRepeat (
       inputLineNumber,
-      "appendMultipleMeasureRestToRepeat() 2");
+      "cascadeAppendMultipleMeasureRestToRepeat() 2");
   }
 #endif // MF_TRACE_IS_ENABLED
 }

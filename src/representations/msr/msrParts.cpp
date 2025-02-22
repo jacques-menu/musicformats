@@ -1770,18 +1770,18 @@ void msrPart::appendRepeatEndingCloneToPart (
   } // for
 }
 
-void msrPart::cascadeCreateAMeasureRepeatAndAppendItInPart (
+void msrPart::cascadeCreateAMeasureRepeatAndAppendItToPart (
   int inputLineNumber,
   int measureRepeatMeasuresNumber,
-  int measureRepeatSlashes)
+  int measureRepeatSlashesNumber)
 {
   // create measures repeat in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      cascadeCreateAMeasureRepeatAndAppendItInStaff (
+      cascadeCreateAMeasureRepeatAndAppendItToStaff (
         inputLineNumber,
         measureRepeatMeasuresNumber,
-        measureRepeatSlashes);
+        measureRepeatSlashesNumber);
   } // for
 }
 
@@ -1796,9 +1796,11 @@ void msrPart::appendPendingMeasureRepeatToPart (
   } // for
 }
 
-void msrPart::appendMultipleMeasureRestToPart (
-  int inputLineNumber,
-  int multipleMeasureRestsMeasuresNumber)
+void msrPart::cascadeAppendMultipleMeasureRestToPart (
+  int               inputLineNumber,
+  int               multipleMeasureRestMeasuresNumber,
+  int               multipleMeasureRestSlashesNumber,
+  msrUseSymbolsKind multipleMeasureRestUseSymbolsKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -1807,7 +1809,7 @@ void msrPart::appendMultipleMeasureRestToPart (
     ss <<
       "Appending a multiple measure rest for " <<
       mfSingularOrPlural (
-        multipleMeasureRestsMeasuresNumber, "measure", "measures") <<
+        multipleMeasureRestMeasuresNumber, "measure", "measures") <<
       " to part " <<
       fetchPartCombinedName () <<
       ", line " << inputLineNumber;
@@ -1823,9 +1825,11 @@ void msrPart::appendMultipleMeasureRestToPart (
   // create multiple rest in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendMultipleMeasureRestToStaff (
+      cascadeAppendMultipleMeasureRestToStaff (
         inputLineNumber,
-        multipleMeasureRestsMeasuresNumber);
+        multipleMeasureRestSlashesNumber,
+        multipleMeasureRestMeasuresNumber,
+        multipleMeasureRestUseSymbolsKind);
   } // for
 }
 

@@ -341,7 +341,6 @@ S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
   mxsrMeasureRepeatEventKind measureRepeatEventKind,
   const std::string&         partName,
   const mfMeasureNumber&     measureNumber,
-  int                        measureRepeatNumber,
   int                        measureRepeatSlashes,
   int                        eventSequentialNumber,
   mfInputLineNumber          eventInputLineNumber)
@@ -351,7 +350,6 @@ S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
       measureRepeatEventKind,
       partName,
       measureNumber,
-      measureRepeatNumber,
       measureRepeatSlashes,
       eventSequentialNumber,
       eventInputLineNumber);
@@ -363,7 +361,6 @@ mxsrMeasureRepeatEvent::mxsrMeasureRepeatEvent (
   mxsrMeasureRepeatEventKind measureRepeatEventKind,
   const std::string&         partName,
   const mfMeasureNumber&     measureNumber,
-  int                        measureRepeatNumber,
   int                        measureRepeatSlashes,
   int                        eventSequentialNumber,
   mfInputLineNumber          eventInputLineNumber)
@@ -375,7 +372,6 @@ mxsrMeasureRepeatEvent::mxsrMeasureRepeatEvent (
 {
   fMeasureRepeatEventKind = measureRepeatEventKind;
 
-  fMeasureRepeatNumber = measureRepeatNumber;
   fMeasureRepeatSlashes = measureRepeatSlashes;
 }
 
@@ -393,7 +389,6 @@ std::string mxsrMeasureRepeatEvent::asShortString () const
 
     ", fPartName: " << fPartName <<
     ", fMeasureNumber: " << fMeasureNumber <<
-    ", fMeasureRepeatNumber: " << fMeasureRepeatNumber <<
     ", fMeasureRepeatSlashes: " << fMeasureRepeatSlashes <<
 
     ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
@@ -428,12 +423,11 @@ void mxsrMeasureRepeatEvent::print (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fPartName" << ": " << fPartName <<
     std::endl <<
+
     std::setw (fieldWidth) <<
     "fMeasureNumber" << ": " << fMeasureNumber <<
     std::endl <<
-    std::setw (fieldWidth) <<
-    "fMeasureRepeatNumber" << ": " << fMeasureRepeatNumber <<
-    std::endl <<
+
     std::setw (fieldWidth) <<
     "fMeasureRepeatSlashes" << ": " << fMeasureRepeatSlashes <<
     std::endl <<
@@ -1471,7 +1465,6 @@ S_mxsrMeasureRepeatEvent mxsrEventsCollection::createAMeasureRepeatBegin (
         mxsrMeasureRepeatEventKind::kMeasureRepeatEventBegin,
         partName,
         measureNumber,
-        measureRepeatNumber,
         measureRepeatSlashes,
         ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
@@ -1533,7 +1526,6 @@ S_mxsrMeasureRepeatEvent mxsrEventsCollection::createAMeasureRepeatEnd (
         mxsrMeasureRepeatEventKind::kMeasureRepeatEventEnd,
         partName,
         measureNumber,
-        measureRepeatNumber,
         measureRepeatSlashes,
         ++fCurrentEventSequentialNumber,
         eventInputLineNumber);
@@ -2154,6 +2146,39 @@ void mxsrEventsCollection::sortTheMxsrEventsLists ()
 
 //   fTupletBeginsMultiMap.sort ();
 //   fTupletEndsMultiMap.sort ();
+}
+
+//________________________________________________________________________
+S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestBeginAtBareMeasureNumber (
+  const std::string& bareMeasureNumber) const
+{
+  S_mxsrMultipleMeasureRestEvent result;
+
+  std::map <std::string, S_mxsrMultipleMeasureRestEvent>::const_iterator
+    it =
+      fMultipleMeasureRestBeginsMap.find (bareMeasureNumber);
+
+  if (it != fMultipleMeasureRestBeginsMap.end ()) {
+    result = (*it).second;
+  }
+
+  return result;
+}
+
+S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::fetchMultipleMeasureRestEndAtBareMeasureNumber (
+  const std::string& bareMeasureNumber) const
+{
+  S_mxsrMultipleMeasureRestEvent result;
+
+  std::map <std::string, S_mxsrMultipleMeasureRestEvent>::const_iterator
+    it =
+      fMultipleMeasureRestEndsMap.find (bareMeasureNumber);
+
+  if (it != fMultipleMeasureRestEndsMap.end ()) {
+    result = (*it).second;
+  }
+
+  return result;
 }
 
 //________________________________________________________________________

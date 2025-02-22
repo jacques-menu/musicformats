@@ -3037,7 +3037,7 @@ R"(Multiple measure rests)",
   S_oahThreeBooleansAtom
     traceMultipleMeasureRestsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-multiple-measure-rests-details", "mmrestsd",
+        "trace-multiple-measure-rests-details", "tmmrestsd",
 R"(Multiple measure rests details)",
         "fTraceMultipleMeasureRestsDetails",
         fTraceMultipleMeasureRestsDetails,

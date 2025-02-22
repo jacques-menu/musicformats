@@ -312,8 +312,8 @@ class EXP mxsrMultipleMeasureRestEvent : public mxsrPartEvent
 
 using S_mxsrMultipleMeasureRestEvent = SMARTP<mxsrMultipleMeasureRestEvent>;
 
-// EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartEvent& elt);
-// EXP std::ostream& operator << (std::ostream& os, const mxsrPartEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const mxsrMultipleMeasureRestEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const mxsrMultipleMeasureRestEvent& elt);
 
 //________________________________________________________________________
 enum class mxsrMeasureRepeatEventKind {
@@ -339,7 +339,6 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
                             const std::string&         partName,
                             const mfMeasureNumber&     measureNumber,
                             int                        measureRepeatNumber,
-                            int                        measureRepeatSlashes,
                             int                        eventSequentialNumber,
                             mfInputLineNumber          eventInputLineNumber);
 
@@ -353,7 +352,6 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
                             const std::string&         partName,
                             const mfMeasureNumber&     measureNumber,
                             int                        measureRepeatNumber,
-                            int                        measureRepeatSlashes,
                             int                        eventSequentialNumber,
                             mfInputLineNumber          eventInputLineNumber);
 
@@ -367,9 +365,6 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
     mxsrMeasureRepeatEventKind
                           getMeasureRepeatEventKind () const
                               { return fMeasureRepeatEventKind; }
-
-    int                   getMeasureRepeatNumber () const
-                              { return fMeasureRepeatNumber; }
 
     int                   getMeasureRepeatSlashes () const
                               { return fMeasureRepeatSlashes; }
@@ -402,15 +397,13 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
     mxsrMeasureRepeatEventKind
                           fMeasureRepeatEventKind;
 
-    int                   fMeasureRepeatNumber;
     int                   fMeasureRepeatSlashes;
-
 };
 
 using S_mxsrMeasureRepeatEvent = SMARTP<mxsrMeasureRepeatEvent>;
 
-// EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartEvent& elt);
-// EXP std::ostream& operator << (std::ostream& os, const mxsrPartEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrPartEvent& elt);
+EXP std::ostream& operator << (std::ostream& os, const mxsrPartEvent& elt);
 
 //------------------------------------------------------------------------
 class EXP mxsrNoteEvent : public mxsrEvent

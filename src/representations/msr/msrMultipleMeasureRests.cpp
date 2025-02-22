@@ -35,59 +35,34 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrMultipleMeasureRest msrMultipleMeasureRest::create (
-  int                 inputLineNumber,
-  int                 measureRestsNumber,
-  const S_msrSegment& upLinkToSegment)
+  int               inputLineNumber,
+  int               measuresNumber,
+  int               slashesNumber,
+  msrUseSymbolsKind useSymbolsKind)
 {
   msrMultipleMeasureRest* obj =
     new msrMultipleMeasureRest (
       inputLineNumber,
-      measureRestsNumber,
-      upLinkToSegment);
+      measuresNumber,
+      slashesNumber,
+      useSymbolsKind);
   assert (obj != nullptr);
   return obj;
 }
 
-// S_msrMultipleMeasureRest msrMultipleMeasureRest::create (
-//   int                 inputLineNumber,
-//   const S_msrMeasure& measureRestClone,
-//   const S_msrSegment& upLinkToSegment)
-// {
-//   msrMultipleMeasureRest* obj =
-//     new msrMultipleMeasureRest (
-//       inputLineNumber,
-//       measureRestClone,
-//       upLinkToSegment);
-//   assert (obj != nullptr);
-//   return obj;
-// }
-
 msrMultipleMeasureRest::msrMultipleMeasureRest (
-  int                 inputLineNumber,
-  int                 measureRestsNumber,
-  const S_msrSegment& upLinkToSegment)
+  int               inputLineNumber,
+  int               measuresNumber,
+  int               slashesNumber,
+  msrUseSymbolsKind useSymbolsKind)
     : msrSegmentElement (inputLineNumber)
 {
-  fMultipleMeasureRestUpLinkToSegment = upLinkToSegment;
+  fMeasuresNumber = measuresNumber;
+  fSlashesNumber = slashesNumber;
+  fUseSymbolsKind = useSymbolsKind;
 
-  fMeasureRestsNumber = measureRestsNumber;
-
-  fLastMeasureRestPuristNumber = -1;
+  fLastMeasurePuristNumber = -1;
 }
-
-// msrMultipleMeasureRest::msrMultipleMeasureRest (
-//   int                 inputLineNumber,
-//   const S_msrMeasure& measureRestClone,
-//   const S_msrSegment& upLinkToSegment)
-//     : msrSegmentElement (inputLineNumber)
-// {
-//   fMultipleMeasureRestUpLinkToSegment = upLinkToSegment;
-//
-//   fMeasureRestsList.push_back (measureRestClone);
-//   fMeasureRestsNumber = 1; // will evolve JMI v0.9.64
-//
-//   fLastMeasureRestPuristNumber = -1;
-// }
 
 msrMultipleMeasureRest::~msrMultipleMeasureRest ()
 {}
@@ -120,10 +95,15 @@ S_msrMultipleMeasureRest msrMultipleMeasureRest::createMultipleMeasureRestNewbor
 
   S_msrMultipleMeasureRest
     newbornClone =
+//       msrMultipleMeasureRest::create (
+//         fInputLineNumber,
+//         fMeasuresNumber,
+//         containingVoice);
       msrMultipleMeasureRest::create (
         fInputLineNumber,
-        fMeasureRestsNumber,
-        containingVoice);
+        fMeasuresNumber,
+        fSlashesNumber,
+        fUseSymbolsKind);
 
 /* JMI v0.9.63
   newbornClone->fNextMeasureNumber =
@@ -137,7 +117,7 @@ msrWholeNotes msrMultipleMeasureRest::fetchMultipleMeasureRestMeasureSoundingNot
 {
   msrWholeNotes result;
 
-  for (S_msrMeasure measure : fMeasureRestsList) {
+  for (S_msrMeasure measure : fMeasuresList) {
     result +=
       measure->getFullMeasureWholeNotesDuration ();
   } // for
@@ -167,61 +147,10 @@ void msrMultipleMeasureRest::setNextMeasureNumber (
     nextMeasureNumber;
 }
 
-void msrMultipleMeasureRest::setMultipleMeasureRestLastMeasurePuristMeasureNumber (
-  int inputLineNumber)
+void msrMultipleMeasureRest::setLastMeasurePuristMeasureNumber (
+  int inputLineNumber,
+  int puristMeasureNumber)
 {
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     fMultipleMeasureRestContents != nullptr,
-//     "fMultipleMeasureRestContents is NULL");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-//   S_msrSegment
-//     multipleMeasureRestContentsSegment =
-//       fMultipleMeasureRestContents->
-//         getMultipleMeasureRestContentsSegment ();
-//
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     multipleMeasureRestContentsSegment != nullptr,
-//     "multipleMeasureRestContentsSegment is NULL");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  // get multiple measure rests contents segment measure elements list
-//   const std::list <S_msrMeasure>&
-//     contentsSegmentElementsList =
-//       multipleMeasureRestContentsSegment->
-//         getSegmentElementsList ();
-
-  // get multiple measure rests contents last measure's purist number
-  int lastMeasuresPuristNumber = -1;
-
-//   if (contentsSegmentElementsList.size ()) {
-//     lastMeasuresPuristNumber =
-//       contentsSegmentElementsList.back ()->
-//         getMeasurePuristNumber ();
-//   }
-//   else {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "cannot get multiple measure rests contents last measure purist number" <<
-//       " because its measure elements list is empty" <<
-//       " in voice clone '" <<
-//       asShortString () <<
-//       "' ";
-//
-//     msrInternalError (
-//       gServiceRunData->getInputSourceName (),
-//       fInputLineNumber,
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
     std::stringstream ss;
@@ -229,7 +158,7 @@ void msrMultipleMeasureRest::setMultipleMeasureRestLastMeasurePuristMeasureNumbe
     ss <<
       "Setting multiple measure rests last measure purist number to '" <<
       "' " <<
-      lastMeasuresPuristNumber <<
+      puristMeasureNumber <<
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -238,8 +167,8 @@ void msrMultipleMeasureRest::setMultipleMeasureRestLastMeasurePuristMeasureNumbe
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fLastMeasureRestPuristNumber =
-    lastMeasuresPuristNumber;
+  fLastMeasurePuristNumber =
+    puristMeasureNumber;
 }
 
 void msrMultipleMeasureRest::appendMeasureElementToSegmentElement (
@@ -284,7 +213,7 @@ void msrMultipleMeasureRest::appendMeasureToMultipleMeasureRest (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fMeasureRestsList.push_back (measure);
+  fMeasuresList.push_back (measure);
 
   // it measure the first one in the segment?
   if (! fMultipleMeasureRestUpLinkToSegment->getSegmentFirstMeasure ()) {
@@ -404,7 +333,7 @@ void msrMultipleMeasureRest::browseData (basevisitor* v)
 
  // JMI   if (! inhibitMultipleMeasureRestsBrowsing) { // JMI v0.9.67
   // browse the multiple measure rests measures
-  for (S_msrMeasure measure : fMeasureRestsList) {
+  for (S_msrMeasure measure : fMeasuresList) {
     // browse the measure
     msrBrowser<msrMeasure> browser (v);
     browser.browse (*(measure));
@@ -432,9 +361,15 @@ std::string msrMultipleMeasureRest::asString () const
     "[MultipleMeasureRest" <<
     ", for " <<
     mfSingularOrPlural (
-      fMeasureRestsNumber,
+      fMeasuresNumber,
         "measure rest",
         "measure rests");
+
+  ss <<
+    ", fSlashesNumber: " <<
+    fSlashesNumber <<
+    ", fUseSymbolsKind: " <<
+    fUseSymbolsKind;
 
   ss <<
     ", fMultipleMeasureRestUpLinkToSegment" << ": ";
@@ -448,11 +383,11 @@ std::string msrMultipleMeasureRest::asString () const
   }
 
   ss <<
-    ", fMeasureRestsList.size(): " <<
-    fMeasureRestsList.size () <<
+    ", fMeasuresList.size(): " <<
+    fMeasuresList.size () <<
 
-    ", fLastMeasureRestPuristNumber: '" <<
-    fLastMeasureRestPuristNumber <<
+    ", fLastMeasurePuristNumber: '" <<
+    fLastMeasurePuristNumber <<
     '\'' <<
 
     ", fNextMeasureNumber: '" <<
@@ -502,29 +437,23 @@ void msrMultipleMeasureRest::print (std::ostream& os) const
 
   constexpr int fieldWidth = 41;
 
-  os <<
-    "fMultipleMeasureRestUpLinkToSegment" << ": ";
-
-  if (fMultipleMeasureRestUpLinkToSegment) {
-    os <<
-      "\"" <<
-      fMultipleMeasureRestUpLinkToSegment->asString () <<
-      "\"";
-  }
-  else {
-    os << "[NULL]";
-  }
-  os << std::endl;
-
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureRestsNumber" << ": " <<
-    fMeasureRestsNumber <<
+    "fMeasuresNumber" << ": " <<
+    fMeasuresNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fSlashesNumber" << ": " <<
+    fSlashesNumber <<
+    std::endl <<
+    std::setw (fieldWidth) <<
+    "fUseSymbolsKind" << ": " <<
+    fUseSymbolsKind <<
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fLastMeasureRestPuristNumber" << ": " <<
-    fLastMeasureRestPuristNumber <<
+    "fLastMeasurePuristNumber" << ": " <<
+    fLastMeasurePuristNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -540,32 +469,29 @@ void msrMultipleMeasureRest::print (std::ostream& os) const
 
   // print the segment upLink
   os << std::left <<
-    std::setw (fieldWidth) <<
     "fMultipleMeasureRestUpLinkToSegment" << ": ";
+
   if (fMultipleMeasureRestUpLinkToSegment) {
-    os << std::endl;
-    ++gIndenter;
-
-    os << "fMultipleMeasureRestUpLinkToSegment" << std::endl; // JMI v0.9.67 v0.9.66
-
-    --gIndenter;
+    os <<
+      "\"" <<
+      fMultipleMeasureRestUpLinkToSegment->asString () <<
+      "\"";
   }
   else {
-    os << "[NULL]" << std::endl;
+    os << "[NULL]";
   }
-
   os << std::endl;
 
   // print the measure rests measures list
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureRestsList" << ": ";
+    "fMeasuresList" << ": ";
 
-  if (fMeasureRestsList.size ()) {
+  if (fMeasuresList.size ()) {
     os << std::endl;
     ++gIndenter;
 
-    for (S_msrMeasure measure : fMeasureRestsList) {
+    for (S_msrMeasure measure : fMeasuresList) {
       // print the measure
       os << measure;
     } // for

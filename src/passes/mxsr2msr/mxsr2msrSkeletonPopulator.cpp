@@ -75,11 +75,11 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentMeasureRepeatKind =
     msrMeasureRepeatKind::kMeasureRepeat_UNKNOWN_;
 
-  fCurrentMeasureRepeatMeasuresNumber = -1;
+  fCurrentMultipleMeasureRestMeasuresNumber = -1;
   fCurrentMeasureRepeatSlashesNumber = -1;
 
-  fCurrentMultipleMeasureRestNumber = 0;
-  fRemainingMultipleMeasureRestNumber = 0;
+  fCurrentMultipleMeasureRestMeasuresNumber = 0;
+  fRemainingMultipleMeasureRestMeasuresNumber = 0;
 
   fCurrentSlashDotsNumber = -1;
 
@@ -1262,6 +1262,198 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
   return theMsrVoice;
 }
 
+
+
+
+//______________________________________________________________________________
+void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBeginEventIfAny ()
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+    displayGatheredNoteInformations (
+      "handleMultipleMeasureRestBeginEventIfAny()");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fCurrentMultipleMeasureRestBegin =
+    fKnownEventsCollection.
+      fetchMultipleMeasureRestBeginAtBareMeasureNumber (
+        fCurrentMeasureNumber);
+
+  if (fCurrentMultipleMeasureRestBegin) {
+    switch (fCurrentMultipleMeasureRestBegin->getMultipleMeasureRestEventKind ()) {
+      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEvent_NONE:
+        // should not occur
+        break;
+
+      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventBegin:
+        handleMultipleMeasureRestBegin ();
+        break;
+
+      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd:
+        // should not occur
+        break;
+    } // switch
+  }
+
+  else {
+    // is this a MultipleMeasureRest member note without any MultipleMeasureRest event?
+    if (fOnGoingMultipleMeasureRest) {
+      fCurrentMeasureBelongsToAMultipleMeasureRest = true;
+    }
+  }
+}
+
+void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBegin ()
+{
+  // create the current MultipleMeasureRest
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a MultipleMeasureRest" <<
+      ", fCurrentMeasureNumber: " <<
+      fCurrentMeasureNumber <<
+      ", fCurrentMultipleMeasureRestMeasuresNumber: " <<
+      fCurrentMultipleMeasureRestMeasuresNumber <<
+      ", fCurrentMeasureRepeatSlashesNumber: " <<
+      fCurrentMeasureRepeatSlashesNumber <<
+      ", fCurrentMultipleMeasureRestBegin: " <<
+      fCurrentMultipleMeasureRestBegin->asString () <<
+      ", line " << fCurrentNoteInputStartLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+/*
+<!--
+	The text of the multiple-rest element indicates the number
+	of measures in the multiple rest. Multiple rests may use
+	the 1-bar / 2-bar / 4-bar rest symbols, or a single shape.
+	The use-symbols attribute indicates which to use; it is no
+	if not specified.
+-->
+<!ELEMENT multiple-rest (#PCDATA)>
+<!ATTLIST multiple-rest
+    use-symbols %yes-no; #IMPLIED
+>
+*/
+
+  fCurrentMultipleMeasureRest =
+    msrMultipleMeasureRest::create (
+      fCurrentMultipleMeasureRestBegin->
+        getEventInputLineNumber ().getBareValue (),
+      fCurrentMultipleMeasureRestBegin->
+        getMultipleMeasureRestNumber (),
+      fCurrentMultipleMeasureRestBegin->
+        getMultipleMeasureRestNumber (),
+      fCurrentUseSymbolsKind);
+
+  fCurrentMeasureBelongsToAMultipleMeasureRest = true;
+
+//         fOnGoingMultipleMeasureRest = true;
+}
+
+void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEndEventIfAny ()
+{
+  fCurrentMultipleMeasureRestEnd =
+    fKnownEventsCollection.
+      fetchMultipleMeasureRestEndAtBareMeasureNumber (
+        fCurrentMeasureNumber);
+
+  if (fCurrentMultipleMeasureRestEnd) {
+#ifdef MF_TRACE_IS_ENABLED
+    if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+      displayGatheredNoteInformations (
+        "--> handleMultipleMeasureRestEndEventIfAny()");
+    }
+#endif // MF_TRACE_IS_ENABLED
+
+    switch (fCurrentMultipleMeasureRestEnd->getMultipleMeasureRestEventKind ()) {
+      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEvent_NONE:
+        // should not occur
+        break;
+
+      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventBegin:
+        // nothing here, already handled earlier in this method
+        break;
+
+      case mxsrMultipleMeasureRestEventKind::kMultipleMeasureRestEventEnd:
+        handleMultipleMeasureRestEnd ();
+
+    // forget about the current MultipleMeasureRest
+//         fCurrentMultipleMeasureRest = nullptr; JMI v9.9.72 NOT YET it may have to be appended to a tuplet...
+
+      fOnGoingMultipleMeasureRest = false;
+      break;
+    } // switch
+
+    // forget about fCurrentMultipleMeasureRestEnd
+    fCurrentMultipleMeasureRestEnd = nullptr;
+  }
+}
+
+void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestEnd ()
+{
+  // append MultipleMeasureRest to the current tuplets stack top
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceMultipleMeasureRestsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Handling MultipleMeasureRest end" <<
+      ", line " << fCurrentNoteInputStartLineNumber;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+
+    displayGatheredNoteInformations (
+      "handleMultipleMeasureRestEnd()");
+
+    displayGatheredTupletInformations (
+      "handleMultipleMeasureRestEnd()");
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check JMI v0.9.70
+//       mfAssert (
+//         __FILE__, __LINE__,
+//         fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () != nullptr,
+//         "fetchInnerMostTuplet () is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  if (fOnGoingMultipleMeasureRest) {
+    // append current MultipleMeasureRest to the current grace notes group
+    // only now, so that the MultipleMeasureRest sounding duration is known
+    // and accounted for in the measure
+//     fPendingGraceNotesGroup->
+//       cascadeAppendMultipleMeasureRestToGraceNotesGroup ( // VITAL
+//         fCurrentMultipleMeasureRest);
+  }
+
+  else {
+    // append current MultipleMeasureRest to the current recipient voice
+    // only now, so that the MultipleMeasureRest sounding duration is known
+    // and accounted for in the measure
+//     abort();
+
+//     fCurrentRecipientMsrVoice->
+//       cascadeAppendMultipleMeasureRestToVoice ( // VITAL
+//         fCurrentMultipleMeasureRest);
+  }
+}
+
+
+
+
+
+
 //______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::handleMeasureRepeatBeginEventIfAny ()
 {
@@ -1294,7 +1486,7 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBeginEventIfAny ()
   }
 
   else {
-    // is this a chord member note without any chord event?
+    // is this a MeasureRepeat member note without any MeasureRepeat event?
     if (fOnGoingMeasureRepeat) {
       fCurrentNoteBelongsToAMeasureRepeat = true;
     }
@@ -1326,19 +1518,9 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEndEventIfAny ()
         break;
 
       case mxsrMeasureRepeatEventKind::kMeasureRepeatEventEnd:
-        if (! fCurrentMeasureRepeatHasBeenPopulatedFromItsFirstMeasure) {
-//           // copy the current note's values to the current chord
-//           fCurrentMeasureRepeat->
-//             copyNoteValuesToMeasureRepeat (
-//               fCurrentNote);
+        handleMeasureRepeatEnd ();
 
-          fCurrentMeasureRepeatHasBeenPopulatedFromItsFirstMeasure = true;
-        }
-
-        handleMeasureRepeatEnd (
-          );
-
-    // forget about the current chord
+    // forget about the current MeasureRepeat
 //         fCurrentMeasureRepeat = nullptr; JMI v9.9.72 NOT YET it may have to be appended to a tuplet...
 
       fOnGoingMeasureRepeat = false;
@@ -1352,20 +1534,20 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatEndEventIfAny ()
 
 void mxsr2msrSkeletonPopulator::handleMeasureRepeatBegin ()
 {
-  // create the current chord
+  // create the current MeasureRepeat
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Creating a measure repeat" <<
-      ", fCurrentMeasureRepeatMeasuresNumber: " <<
-      fCurrentMeasureRepeatMeasuresNumber <<
-      ", fCurrentMeasureRepeatSlashesNumber: " <<
-      fCurrentMeasureRepeatSlashesNumber <<
-      ", fCurrentMeasureRepeatSlashesNumber: " <<
-      fCurrentMeasureRepeatSlashesNumber <<
-      ", fCurrentMeasureRepeatEnd: " <<
+      "Creating a MeasureRepeat" <<
+      ", fCurrentMeasureNumber: " <<
+      fCurrentMeasureNumber <<
+      ", fCurrentNoteStaffNumber: " <<
+      fCurrentNoteStaffNumber <<
+      ", fCurrentNoteVoiceNumber: " <<
+      fCurrentNoteVoiceNumber <<
+      ", fCurrentMeasureRepeatBegin: " <<
       fCurrentMeasureRepeatBegin->asString () <<
       ", line " << fCurrentNoteInputStartLineNumber;
 
@@ -1375,96 +1557,287 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBegin ()
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// fCurrentMeasureRepeatMeasuresNumber
   fCurrentMeasureRepeat =
     msrMeasureRepeat::create (
-      fCurrentMeasureRepeatBegin->getEventInputLineNumber ().getBareValue (),
+      fCurrentMeasureRepeatBegin->
+        getEventInputLineNumber ().getBareValue (),
       fCurrentMeasureRepeatMeasuresNumber,
-      fCurrentMeasureRepeatSlashesNumber,
-      nullptr); // JMI BEGINEND fCurrentMsrVoice);
+      fCurrentMeasureRepeatSlashesNumber);
 
-  // register it as not yet populated fron its first note
-  fCurrentMeasureRepeatHasBeenPopulatedFromItsFirstMeasure = false;
-
-  fCurrentNoteBelongsToAMeasureRepeat = true;
+//   fCurrentNoteBelongsToAMeasureRepeat = true;
 
 //         fOnGoingMeasureRepeat = true;
 }
 
 void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
 {
-  // append chord to the current tuplets stack top
+  // append MeasureRepeat to the current tuplets stack top
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Handling chord end" <<
+      "Handling MeasureRepeat end" <<
       ", line " << fCurrentNoteInputStartLineNumber;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
+
+    displayGatheredNoteInformations (
+      "handleMeasureRepeatEnd()");
+
+    displayGatheredTupletInformations (
+      "handleMeasureRepeatEnd()");
   }
 #endif // MF_TRACE_IS_ENABLED
 
-// #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-//       // sanity check JMI v0.9.70
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+      // sanity check JMI v0.9.70
 //       mfAssert (
 //         __FILE__, __LINE__,
-//        fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () != nullptr,
+//         fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () != nullptr,
 //         "fetchInnerMostTuplet () is NULL");
-// #endif // MF_SANITY_CHECKS_ARE_ENABLED
-//
-//   if (fetchInnerMostTuplet ()) {
-//     // append current chord to the
-//      fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
-//       appendMeasureRepeatToTuplet (
-//         fCurrentMeasureRepeat);
-//   }
-//
-//   else if (fPendingGraceNotesGroup) {
-//     // append current chord to the current grace notes group
-//     // only now, so that the chord sounding duration is known
-//     // and accounted for in the measure
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  if (fOnGoingMultipleMeasureRest) {
+    // append current MeasureRepeat to the current grace notes group
+    // only now, so that the MeasureRepeat sounding duration is known
+    // and accounted for in the measure
 //     fPendingGraceNotesGroup->
 //       appendMeasureRepeatToGraceNotesGroup ( // VITAL
-//         fCurrentMeasureRepeat);
+//         fCurrentMeasureRepeatBegin);
+  }
+
+  else {
+    // append current MeasureRepeat to the current recipient voice
+    // only now, so that the MeasureRepeat sounding duration is known
+    // and accounted for in the measure
+//     abort();
+
+//     fCurrentRecipientMsrVoice->
+//       appendMeasureRepeatToVoice ( // VITAL
+//         fCurrentMeasureRepeatBegin);
+  }
+}
+
+
+
+
+
+
+
+// //______________________________________________________________________________
+// void mxsr2msrSkeletonPopulator::handleMeasureRepeatBeginEventIfAny ()
+// {
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
+//     displayGatheredNoteInformations (
+//       "handleMeasureRepeatBeginEventIfAny()");
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   fCurrentMeasureRepeatBegin =
+//     fKnownEventsCollection.
+//       fetchMeasureRepeatBeginAtBareMeasureNumber (
+//         fCurrentMeasureNumber);
+//
+//   if (fCurrentMeasureRepeatBegin) {
+//     switch (fCurrentMeasureRepeatBegin->getMeasureRepeatEventKind ()) {
+//       case mxsrMeasureRepeatEventKind::kMeasureRepeatEvent_NONE:
+//         // should not occur
+//         break;
+//
+//       case mxsrMeasureRepeatEventKind::kMeasureRepeatEventBegin:
+//         handleMeasureRepeatBegin ();
+//         break;
+//
+//       case mxsrMeasureRepeatEventKind::kMeasureRepeatEventEnd:
+//         // should not occur
+//         break;
+//     } // switch
 //   }
 //
 //   else {
-//     // append current chord to the current recipient voice
-//     // only now, so that the chord sounding duration is known
-//     // and accounted for in the measure
-//     fCurrentRecipientMsrVoice->
-//       appendMeasureRepeatToVoice ( // VITAL
-//         fCurrentChord);
+//     // is this a chord member note without any chord event?
+//     if (fOnGoingMeasureRepeat) {
+//       fCurrentNoteBelongsToAMeasureRepeat = true;
+//     }
 //   }
-}
+// }
+//
+// void mxsr2msrSkeletonPopulator::handleMeasureRepeatEndEventIfAny ()
+// {
+//   fCurrentMeasureRepeatEnd =
+//     fKnownEventsCollection.
+//       fetchMeasureRepeatEndAtBareMeasureNumber (
+//         fCurrentMeasureNumber);
+//
+//   if (fCurrentMeasureRepeatEnd) {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
+//       displayGatheredNoteInformations (
+//         "--> handleMeasureRepeatEndEventIfAny()");
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//     switch (fCurrentMeasureRepeatEnd->getMeasureRepeatEventKind ()) {
+//       case mxsrMeasureRepeatEventKind::kMeasureRepeatEvent_NONE:
+//         // should not occur
+//         break;
+//
+//       case mxsrMeasureRepeatEventKind::kMeasureRepeatEventBegin:
+//         // nothing here, already handled earlier in this method
+//         break;
+//
+//       case mxsrMeasureRepeatEventKind::kMeasureRepeatEventEnd:
+//         handleMeasureRepeatEnd (
+//           );
+//
+//     // forget about the current chord
+// //         fCurrentMeasureRepeat = nullptr; JMI v9.9.72 NOT YET it may have to be appended to a tuplet...
+//
+//       fOnGoingMeasureRepeat = false;
+//       break;
+//     } // switch
+//
+//     // forget about fCurrentMeasureRepeatEnd
+//     fCurrentMeasureRepeatEnd = nullptr;
+//   }
+// }
+//
+// void mxsr2msrSkeletonPopulator::handleMeasureRepeatBegin ()
+// {
+//   // create the current chord
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Creating a measure repeat" <<
+//       ", fCurrentMeasureRepeatMeasuresNumber: " <<
+//       fCurrentMeasureRepeatMeasuresNumber <<
+//       ", fCurrentMeasureRepeatSlashesNumber: " <<
+//       fCurrentMeasureRepeatSlashesNumber <<
+//       ", fCurrentMeasureRepeatSlashesNumber: " <<
+//       fCurrentMeasureRepeatSlashesNumber <<
+//       ", fCurrentMeasureRepeatEnd: " <<
+//       fCurrentMeasureRepeatBegin->asString () <<
+//       ", line " << fCurrentNoteInputStartLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// // fCurrentMeasureRepeatMeasuresNumber
+//   fCurrentMeasureRepeat =
+//     msrMeasureRepeat::create (
+//       fCurrentMeasureRepeatBegin->getEventInputLineNumber ().getBareValue (),
+//       fCurrentMeasureRepeatMeasuresNumber,
+//       fCurrentMeasureRepeatSlashesNumber); // JMI BEGINEND fCurrentMsrVoice);
+//
+//   fCurrentNoteBelongsToAMeasureRepeat = true;
+//
+// //         fOnGoingMeasureRepeat = true;
+// }
+//
+// void mxsr2msrSkeletonPopulator::handleMeasureRepeatEnd ()
+// {
+//   // append chord to the current tuplets stack top
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Handling chord end" <<
+//       ", line " << fCurrentNoteInputStartLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+// // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
+// //       // sanity check JMI v0.9.70
+// //       mfAssert (
+// //         __FILE__, __LINE__,
+// //        fCurrentRecipientMxsrVoice->fetchInnerMostTuplet () != nullptr,
+// //         "fetchInnerMostTuplet () is NULL");
+// // #endif // MF_SANITY_CHECKS_ARE_ENABLED
+// //
+// //   if (fetchInnerMostTuplet ()) {
+// //     // append current chord to the
+// //      fCurrentRecipientMxsrVoice->fetchInnerMostTuplet ()->
+// //       appendMeasureRepeatToTuplet (
+// //         fCurrentMeasureRepeat);
+// //   }
+// //
+// //   else if (fPendingGraceNotesGroup) {
+// //     // append current chord to the current grace notes group
+// //     // only now, so that the chord sounding duration is known
+// //     // and accounted for in the measure
+// //     fPendingGraceNotesGroup->
+// //       appendMeasureRepeatToGraceNotesGroup ( // VITAL
+// //         fCurrentMeasureRepeat);
+// //   }
+// //
+// //   else {
+// //     // append current chord to the current recipient voice
+// //     // only now, so that the chord sounding duration is known
+// //     // and accounted for in the measure
+// //     fCurrentRecipientMsrVoice->
+// //       appendMeasureRepeatToVoice ( // VITAL
+// //         fCurrentChord);
+// //   }
+// }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonPopulator::printCurrentMeasureRepeat ()
+void mxsr2msrSkeletonPopulator::printCurrentMeasureRepeats ()
 {
   gLog <<
     "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" <<
     std::endl;
 
-  if (fCurrentMeasureRepeat) {
+  if (fCurrentMeasureRepeatBegin) {
     gLog <<
-      "fCurrentMeasureRepeat contains:" <<
+      "fCurrentMeasureRepeatBegin contains:" <<
       std::endl;
 
     ++gIndenter;
 
-    gLog <<
-      fCurrentMeasureRepeat;
+//     gLog <<
+//       fCurrentMeasureRepeatBegin;
+    fCurrentMeasureRepeatBegin->print (gLog);
 
     --gIndenter;
   }
 
   else {
     gLog <<
-     "fCurrentMeasureRepeat is NULL" <<
+     "fCurrentMeasureRepeatBegin is NULL" <<
+     std::endl;
+  }
+
+  if (fCurrentMeasureRepeatEnd) {
+    gLog <<
+      "fCurrentMeasureRepeatEnd contains:" <<
+      std::endl;
+
+    ++gIndenter;
+
+//     gLog <<
+//       fCurrentMeasureRepeatEnd;
+    fCurrentMeasureRepeatEnd->print (gLog);
+
+    --gIndenter;
+  }
+
+  else {
+    gLog <<
+     "fCurrentMeasureRepeatEnd is NULL" <<
      std::endl;
   }
 
@@ -10426,6 +10799,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // implicit
+
 /*
   Measures with an implicit attribute set to "yes"
   never display a measure number,
@@ -10470,6 +10844,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   }
 
   // non-controlling
+
   std::string
     nonControllingString =
       elt->getAttributeValue ("non-controlling");
@@ -10616,7 +10991,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // take finalization action if relevant v0.9.70
+  // take finalization actions if relevant v0.9.70
   if (
     fCurrentNoteStaffNumber != K_STAFF_NUMBER_UNKNOWN_
       &&
@@ -10744,12 +11119,14 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       finalizeLastAppendedMeasureInPart (
         elt->getInputLineNumber ());
 
+// BOFFF...
+
     // should this measure be replicated?
     const std::map <std::string,int>&
       measuresToBeReplicatedStringToIntMap =
         gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedStringToIntMap ();
 
-    if (! measuresToBeReplicatedStringToIntMap.empty ()) { // JMI v0.9.70
+    if (false && ! measuresToBeReplicatedStringToIntMap.empty ()) { // JMI v0.9.72 ???
       // should we add empty measures after current measures?
       std::map <std::string,int>::const_iterator
         it =
@@ -10783,10 +11160,12 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
             measureReplicatesNumber);
       }
       else {
-        // fRemainingMultipleMeasureRestNumber JMI ???
+        // fRemainingMultipleMeasureRestMeasuresNumber JMI ???
       }
     }
   }
+
+// BOFFF...
 
   // should empty measures be added after this one?
   const std::map <std::string,int>&
@@ -10794,7 +11173,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
       gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ();
 
   // should we add empty measures after current measures?
-  if (! addEmptyMeasuresStringToIntMap.empty ()) {
+  if (false && ! addEmptyMeasuresStringToIntMap.empty ()) {
     std::map <std::string,int>::const_iterator
       it =
         addEmptyMeasuresStringToIntMap.find (
@@ -10836,7 +11215,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           measuresToBeAdded);
     }
     else {
-      // fRemainingMultipleMeasureRestNumber JMI ???
+      // fRemainingMultipleMeasureRestMeasuresNumber JMI ???
     }
   }
 
@@ -13221,16 +13600,22 @@ The <measure-repeat> element specifies a notation style for repetitions.
           <measure-repeat slashes="1" type="start">1</measure-repeat>
         </measure-style>
       </attributes>
-*/
-/*
-      <attributes>
-        <measure-style>
-          <measure-repeat type="stop"/>
-        </measure-style>
-      </attributes>
+
+<!--
+	The measure-repeat element is used for both single and
+	multiple measure repeats. The text of the element indicates
+	the number of measures to be repeated in a single pattern.
+	The slashes attribute specifies the number of slashes to
+	use in the repeat sign. It is 1 if not specified. Both the
+	start and the stop of the measure-repeat must be specified.
+-->
+<!ELEMENT measure-repeat (#PCDATA)>
+<!ATTLIST measure-repeat
+    type %start-stop; #REQUIRED
+    slashes NMTOKEN #IMPLIED
 */
 
-  fCurrentMeasureRepeatMeasuresNumber = (int)(*elt);
+  fCurrentMultipleMeasureRestMeasuresNumber = (int)(*elt);
 
   // slashes
 
@@ -13257,8 +13642,8 @@ The <measure-repeat> element specifies a notation style for repetitions.
       "Creating measures repeat from its first measures" <<
       "in part " <<
       fCurrentPart->fetchPartCombinedName () <<
-      ", fCurrentMeasureRepeatMeasuresNumber: " <<
-      fCurrentMeasureRepeatMeasuresNumber <<
+      ", fCurrentMultipleMeasureRestMeasuresNumber: " <<
+      fCurrentMultipleMeasureRestMeasuresNumber <<
       ", fCurrentMeasureRepeatSlashesNumber: " <<
       fCurrentMeasureRepeatSlashesNumber <<
       ", line " << elt->getInputLineNumber ();
@@ -13270,7 +13655,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
 #endif // MF_TRACE_IS_ENABLED
 
     fCurrentPart->
-      cascadeCreateAMeasureRepeatAndAppendItInPart (
+      cascadeCreateAMeasureRepeatAndAppendItToPart (
         elt->getInputLineNumber (),
         fCurrentMeasureRepeatMeasuresNumber,
         fCurrentMeasureRepeatSlashesNumber);
@@ -13320,91 +13705,6 @@ void mxsr2msrSkeletonPopulator::visitStart (S_multiple_rest& elt)
 {
 /*
 <!--
-  A measure-style indicates a special way to print partial
-  to multi-measures within a part. This includes multiple
-  rests over several measures, repeats of beats, single, or
-  multi-measures, and use of slash notation.
-
-  The multiple-rest and measure-repeat elements indicate the
-  number of measures covered in the element content. The
-  beat-repeat and slash elements can cover partial measures.
-  All but the multiple-rest element use a type attribute to
-  indicate starting and stopping the use of the style. The
-  optional number attribute specifies the staff number from
-  top to bottom on the system, as with clef.
--->
-<!ELEMENT measure-style (multiple-rest |
-  measure-repeat | beat-repeat | slash)>
-<!ATTLIST measure-style
-    number CDATA #IMPLIED
-    %font;
-    %color;
-    %optional-unique-id;
->
-
-<!--
-  The text of the multiple-rest element indicates the number
-  of measures in the multiple rest. Multiple rests may use
-  the 1-bar / 2-bar / 4-bar rest symbols, or a single shape.
-  The use-symbols attribute indicates which to use; it is no
-  if not specified.
--->
-<!ELEMENT multiple-rest (#PCDATA)>
-<!ATTLIST multiple-rest
-    use-symbols %yes-no; #IMPLIED
->
-
-    <measure number="1" width="298">
-      <direction placement="above">
-        <direction-type>
-          <words default-y="28" font-size="10.8" font-weight="bold" relative-x="-31">Adagio non troppo</words>
-        </direction-type>
-      </direction>
-      <attributes>
-        <measure-style>
-          <multiple-rest>2</multiple-rest>
-        </measure-style>
-      </attributes>
-      <note>
-        <rest measure="yes"/>
-        <duration>96</duration>
-        <voice>1</voice>
-      </note>
-    </measure>
-    <!--=======================================================-->
-    <measure number="2" width="0">
-      <note>
-        <rest measure="yes"/>
-        <duration>96</duration>
-        <voice>1</voice>
-      </note>
-      <!--barline location="right">
-        <bar-style>light-light</bar-style>
-      </barline-->
-    </measure>
-
-
-The <multiple-rest> element indicates multiple rests that span several measures. The element text indicates the number of measures in the multiple rest.
-
-<attributes>
-   <measure-style>
-      <multiple-rest>4</multiple-rest>
-   </measure-style>
-</attributes>
-
-
-  // what do we do with fMultipleMeasureRestsUseSymbols ??? JMI v0.9.63
-    use-symbols":
-      Specifies whether the multiple rests uses the 1-bar / 2-bar / 4-bar rest symbols,
-      or a single shape. It is no if not specified.
-
-    <attributes>
-       <measure-style>
-          <multiple-rest>4</multiple-rest>
-       </measure-style>
-    </attributes>
-
-<!--
 	The text of the multiple-rest element indicates the number
 	of measures in the multiple rest. Multiple rests may use
 	the 1-bar / 2-bar / 4-bar rest symbols, or a single shape.
@@ -13415,7 +13715,15 @@ The <multiple-rest> element indicates multiple rests that span several measures.
 <!ATTLIST multiple-rest
     use-symbols %yes-no; #IMPLIED
 >
-  */
+
+The <multiple-rest> element indicates multiple rests that span several measures. The element text indicates the number of measures in the multiple rest.
+
+<attributes>
+   <measure-style>
+      <multiple-rest>4</multiple-rest>
+   </measure-style>
+</attributes>
+*/
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
@@ -13433,17 +13741,28 @@ The <multiple-rest> element indicates multiple rests that span several measures.
 
   // measures number
 
-  fCurrentMultipleMeasureRestNumber = (int)(*elt);
+  fCurrentMultipleMeasureRestMeasuresNumber = (int)(*elt);
+
+  // use symbols
+
+  std::string useSymbolsString = elt->getAttributeValue ("use-symbols");
+
+  fCurrentUseSymbolsKind =
+    msrUseSymbolsKindFromString (
+      elt->getInputLineNumber (),
+      useSymbolsString);
 
   // create a multiple measure rests
   fCurrentPart->
-    appendMultipleMeasureRestToPart (
+    cascadeAppendMultipleMeasureRestToPart (
       elt->getInputLineNumber (),
-      fCurrentMultipleMeasureRestNumber);
+      fCurrentMultipleMeasureRestMeasuresNumber,
+      fCurrentMultipleMeasureRestSlashesNumber,
+      fCurrentUseSymbolsKind);
 
   // set remaining multiple measure rests counter
-  fRemainingMultipleMeasureRestNumber =
-    fCurrentMultipleMeasureRestNumber;
+  fRemainingMultipleMeasureRestMeasuresNumber =
+    fCurrentMultipleMeasureRestMeasuresNumber;
 }
 
 void mxsr2msrSkeletonPopulator::visitEnd (S_multiple_rest& elt)
@@ -22758,7 +23077,6 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 #endif // MF_TRACE_IS_ENABLED
 }
 
-//______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
 {
 /*
@@ -26563,29 +26881,17 @@ void mxsr2msrSkeletonPopulator::visitStart (S_kind& elt)
   // harmony use symbols
   // ----------------------------------
 
-  std::string kindUseSymbols = elt->getAttributeValue ("use-symbols");
+  std::string useSymbolsString = elt->getAttributeValue ("use-symbols");
 
-/* JMI v0.9.67
-  if      (kindUseSymbols == "yes")
-    fCurrentTupletTypeKind = msrTuplet::kStartTuplet; // JMI
-  else if (kindUseSymbols == "no")
-    fCurrentTupletTypeKind = msrTuplet::kStopTuplet;
-  else {
-    if (! kindUseSymbols.empty ()) {
-      std::stringstream ss;
-
-      ss <<
-        "kind use-symbols \"" << kindUseSymbols <<
-        "\" is unknown";
-
-      mxsr2msrError (
-        gServiceRunData->getInputSourceName (),
+  msrUseSymbolsKind
+    useSymbolsKind = // not yet used JMI 0.9.72
+      msrUseSymbolsKindFromString (
         elt->getInputLineNumber (),
-        __FILE__, __LINE__,
-        ss.str ());
-      }
+        useSymbolsString);
+
+  if (false) {
+    gLog << useSymbolsKind << std::endl;
   }
-*/
 
   // harmony use stack degrees
   // ----------------------------------
@@ -28927,33 +29233,33 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //
 //     gLog <<
 //       std::setw (fieldWidth) <<
-//       "fRemainingMultipleMeasureRestNumber" << ": " <<
-//       fRemainingMultipleMeasureRestNumber <<
+//       "fRemainingMultipleMeasureRestMeasuresNumber" << ": " <<
+//       fRemainingMultipleMeasureRestMeasuresNumber <<
 //       std::endl << std::endl;
 //
 //     --gIndenter;
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 //
-//   if (fRemainingMultipleMeasureRestNumber <= 0) {
+//   if (fRemainingMultipleMeasureRestMeasuresNumber <= 0) {
 //     mxsr2msrInternalError (
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //       __FILE__, __LINE__,
-//       "fRemainingMultipleMeasureRestNumber problem");
+//       "fRemainingMultipleMeasureRestMeasuresNumber problem");
 //   }
 //
 //   // account for one more measure rest in the multiple measure rests
-//   --fRemainingMultipleMeasureRestNumber;
+//   --fRemainingMultipleMeasureRestMeasuresNumber;
 //
-//   if (fRemainingMultipleMeasureRestNumber == 0) {
+//   if (fRemainingMultipleMeasureRestMeasuresNumber == 0) {
 //     // all multiple measure rests have been handled,
 //     // the current one is the first after the  multiple measure rests
 //     fCurrentPart->
 //       appendPendingMultipleMeasureRestsToPart (
 //         inputLineNumber);
 //
-//     if (fRemainingMultipleMeasureRestNumber == 1) {
+//     if (fRemainingMultipleMeasureRestMeasuresNumber == 1) {
 //       fCurrentPart-> // JMI ??? BOF
 //         setNextMeasureNumberInPart (
 //           inputLineNumber,
@@ -28974,7 +29280,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_midi_instrument& elt)
 //
 //     gLog <<
 //       std::setw (fieldWidth) <<
-//       "fRemainingMultipleMeasureRestNumber" << ": " <<
+//       "fRemainingMultipleMeasureRestMeasuresNumber" << ": " <<
 //       fRemainingMultipleRestMeasuresNumber <<
 //       std::endl <<
 //       std::endl;

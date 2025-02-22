@@ -24,6 +24,7 @@
 #include "msrStavesEnumTypes.h"
 #include "msrStaves.h"
 #include "msrTupletFactors.h"
+#include "msrUseSymbols.h"
 
 
 namespace MusicFormats
@@ -355,14 +356,6 @@ class EXP msrPart : public msrPartGroupElement
                             int                inputLineNumber,
                             const std::string& nextMeasureNumber);
 
-    // measure repeats
-
-    void                  cascadeCreateAMeasureRepeatAndAppendItInPart (
-                            int                    inputLineNumber,
-                            int                    previousMeasureEndInputLineNumber,
-                            const std::string&     measureNumber,
-                            msrMeasureImplicitKind measureImplicitKind);
-
     // clef, key, time signature
 
 //     void                  appendClefKeyTimeSignatureGroupToPart (
@@ -501,9 +494,11 @@ class EXP msrPart : public msrPartGroupElement
 
     // multiple measure rests
 
-    void                  appendMultipleMeasureRestToPart (
-                            int inputLineNumber,
-                            int measureRestsNumber);
+    void                  cascadeAppendMultipleMeasureRestToPart (
+                            int               inputLineNumber,
+                            int               multipleMeasureRestMeasuresNumber,
+                            int               multipleMeasureRestSlashesNumber,
+                            msrUseSymbolsKind multipleMeasureRestUseSymbolsKind);
 
     void                  appendPendingMultipleMeasureRestsToPart (
                             int inputLineNumber);
@@ -523,10 +518,16 @@ class EXP msrPart : public msrPartGroupElement
 
     // measure repeats
 
-    void                  cascadeCreateAMeasureRepeatAndAppendItInPart (
+    void                  cascadeCreateAMeasureRepeatAndAppendItToPart (
                             int inputLineNumber,
                             int measureRepeatMeasuresNumber,
                             int measureRepeatSlashesNumber);
+
+    void                  cascadeCreateAMeasureRepeatAndAppendItToPart (
+                            int                    inputLineNumber,
+                            int                    previousMeasureEndInputLineNumber,
+                            const std::string&     measureNumber,
+                            msrMeasureImplicitKind measureImplicitKind);
 
     void                  appendPendingMeasureRepeatToPart (
                             int inputLineNumber);

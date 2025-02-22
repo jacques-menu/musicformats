@@ -23,6 +23,7 @@
 #include "msrDoubleTremolos.h"
 #include "msrTempos.h"
 #include "msrTuplets.h"
+#include "msrUseSymbols.h"
 
 
 namespace MusicFormats
@@ -1390,38 +1391,68 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fPreviousMeasureInputLineNumber;
 
 
-		void											displayGatheredMeasureRepeatInformations (
-																const std::string& context) const;
+    // multiple measure rests handling
+    // ------------------------------------------------------
 
-    S_msrMeasureRepeat        createMeasureRepeat (
+    int                       fCurrentMultipleMeasureRestMeasuresNumber;
+    int                       fRemainingMultipleMeasureRestMeasuresNumber;
+
+    int                       fCurrentMultipleMeasureRestSlashesNumber;
+
+    msrUseSymbolsKind         fCurrentUseSymbolsKind;
+
+    Bool                      fCurrentRestIsAMeasureRest;
+
+//     void                      handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure (
+//                                 int inputLineNumber);
+
+   S_mxsrMultipleMeasureRestEvent
+                              fCurrentMultipleMeasureRestBegin;
+    S_mxsrMultipleMeasureRestEvent
+                              fCurrentMultipleMeasureRestEnd;
+
+    S_msrMultipleMeasureRest  fCurrentMultipleMeasureRest;
+    Bool                      fOnGoingMultipleMeasureRest;
+
+    Bool                      fCurrentMeasureBelongsToAMultipleMeasureRest;
+
+    S_msrMultipleMeasureRest  createMultipleMeasureRest (
                                 int inputLineNumber,
                                 int tupletNumber);
 
-    void                      handleMeasureRepeatBeginEventsIfAny ();
+    void                      handleMultipleMeasureRestBeginEventIfAny ();
 
-    void                      handleMeasureRepeatEndEventsIfAny ();
+    void                      handleMultipleMeasureRestEndEventIfAny ();
 
-    void                      handleMeasureRepeatBegin (
-                                const S_msrVoice& currentNoteVoice,
-                                int               tupletNumber);
+    void                      handleMultipleMeasureRestBegin ();
 
-    void                      handleMeasureRepeatEnd (
-                                const S_msrNote&  note,
-                                const S_msrVoice& currentNoteVoice);
+    void                      handleMultipleMeasureRestEnd ();
+
+		void											displayGatheredMultipleMeasureRestInformations (
+																const std::string& context) const;
+
+    void                      printCurrentMultipleMeasureRest ();
 
 
     // measure repeats handling
     // ------------------------------------------------------
 
+    msrMeasureRepeatKind      fCurrentMeasureRepeatKind;
+    int                       fCurrentMeasureRepeatMeasuresNumber;
+    int                       fCurrentMeasureRepeatSlashesNumber;
+
     S_mxsrMeasureRepeatEvent  fCurrentMeasureRepeatBegin;
     S_mxsrMeasureRepeatEvent  fCurrentMeasureRepeatEnd;
 
-    Bool                      fCurrentNoteBelongsToAMeasureRepeat;
-
-    Bool                      fOnGoingMeasureRepeat;
     S_msrMeasureRepeat        fCurrentMeasureRepeat;
 
-    Bool                      fCurrentMeasureRepeatHasBeenPopulatedFromItsFirstMeasure;
+    Bool                      fCurrentNoteBelongsToAMeasureRepeat;
+
+
+
+//     S_msrMeasureRepeat        fCurrentNoteMeasureRepeatBegin;
+//     S_msrMeasureRepeat        fCurrentNoteMeasureRepeatEnd;
+    Bool                      fOnGoingMeasureRepeat;
 
     void                      handleMeasureRepeatBeginEventIfAny ();
 
@@ -1431,10 +1462,17 @@ class EXP mxsr2msrSkeletonPopulator :
 
     void                      handleMeasureRepeatEnd ();
 
+    S_msrMeasureRepeat        createMeasureRepeat (
+                                int inputLineNumber,
+                                int tupletNumber);
+
 //     void                      finalizeCurrentMeasureRepeat (
 //                                 int inputLineNumber);
 
-    void                      printCurrentMeasureRepeat ();
+		void											displayGatheredMeasureRepeatInformations (
+																const std::string& context) const;
+
+    void                      printCurrentMeasureRepeats ();
 
 
     // measure style handling
@@ -1447,13 +1485,11 @@ class EXP mxsr2msrSkeletonPopulator :
     msrNotesDurationKind      fCurrentSlashGraphicNotesDurationKind;
     int                       fCurrentSlashDotsNumber;
 
-    // beats repeats
-    int                       fCurrentBeatRepeatSlashes;
 
-    // measure repeats
-    msrMeasureRepeatKind      fCurrentMeasureRepeatKind;
-    int                       fCurrentMeasureRepeatMeasuresNumber;
-    int                       fCurrentMeasureRepeatSlashesNumber;
+    // beats repeats
+    // ------------------------------------------------------
+
+    int                       fCurrentBeatRepeatSlashes;
 
 
     // notes handling
@@ -1467,21 +1503,14 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrNote                 fCurrentNote;
 
     // sounding notes
+    // ------------------------------------------------------
+
     Bool                      fCurrentNoteIsSounding;
 
     // rests
+    // ------------------------------------------------------
+
     Bool                      fCurrentNoteIsARest;
-
-    // multiple measure rests
-    Bool                      fCurrentRestIsAMeasureRest;
-
-    int                       fCurrentMultipleMeasureRestNumber;
-    int                       fRemainingMultipleMeasureRestNumber;
-
-    Bool                      fMultipleMeasureRestsUseSymbols;
-
-//     void                      handleOnGoingMultipleMeasureRestsAtTheEndOfMeasure (
-//                                 int inputLineNumber);
 
     // staff changes handling
     // ------------------------------------------------------

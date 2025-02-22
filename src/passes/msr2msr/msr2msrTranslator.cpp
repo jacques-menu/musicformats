@@ -2201,7 +2201,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //       if (fCurrentMultipleMeasureRests) {
 //         // append the current multiple measure rests to the current voice clone
 //         fCurrentVoiceClone->
-//           appendMultipleMeasureRestToVoice (
+//           cascadeAppendMultipleMeasureRestToVoice (
 //             elt->getInputLineNumber (),
 //             fCurrentMultipleMeasureRests);
 //
@@ -6493,7 +6493,7 @@ void msr2msrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
 
   // append it to the current voice clone
   fCurrentVoiceClone->
-    appendMultipleMeasureRestToVoice (
+    cascadeAppendMultipleMeasureRestToVoice (
       elt->getInputLineNumber (),
       fCurrentMultipleMeasureRestsClone);
 
@@ -7030,7 +7030,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 // /* JMI
 //         // append the current multiple measure rests to the current voice clone
 //         fCurrentVoiceClone->
-//           appendMultipleMeasureRestToVoice (
+//           cascadeAppendMultipleMeasureRestToVoice (
 //             elt->getInputLineNumber (),
 //             fCurrentMultipleMeasureRests);
 //             */

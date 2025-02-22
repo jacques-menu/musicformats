@@ -8185,8 +8185,8 @@ void msr2lpsrTranslator::visitStart (S_msrMultipleMeasureRest& elt)
 
   // append it to the current voice clone
   fCurrentVoiceClone->
-    appendMultipleMeasureRestToVoice (
-       elt->getInputLineNumber (),
+    cascadeAppendMultipleMeasureRestToVoice (
+      elt->getInputLineNumber (),
       fCurrentMultipleMeasureRestsClone);
 
   fOnGoingMultipleMeasureRests = true;

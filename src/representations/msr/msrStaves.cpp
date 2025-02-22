@@ -2579,10 +2579,10 @@ void msrStaff::finalizeRepeatEndInStaff (
 }
 */
 
-void msrStaff::cascadeCreateAMeasureRepeatAndAppendItInStaff (
+void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
   int inputLineNumber,
   int measureRepeatMeasuresNumber,
-  int measureRepeatSlashes)
+  int measureRepeatSlashesNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceRepeats ()) {
@@ -2602,10 +2602,10 @@ void msrStaff::cascadeCreateAMeasureRepeatAndAppendItInStaff (
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      cascadeCreateAMeasureRepeatAndAppendItInVoice (
+      cascadeCreateAMeasureRepeatAndAppendItToVoice (
         inputLineNumber,
         measureRepeatMeasuresNumber,
-        measureRepeatSlashes);
+        measureRepeatSlashesNumber);
   } // for
 }
 
@@ -2635,9 +2635,11 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
   } // for
 }
 
-void msrStaff::appendMultipleMeasureRestToStaff (
-  int inputLineNumber,
-  int multipleMeasureRestsMeasuresNumber)
+void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
+  int               inputLineNumber,
+  int               multipleMeasureRestMeasuresNumber,
+  int               multipleMeasureRestSlashesNumber,
+  msrUseSymbolsKind multipleMeasureRestUseSymbolsKind)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -2646,7 +2648,7 @@ void msrStaff::appendMultipleMeasureRestToStaff (
     ss <<
       "Appending a multiple measure rest for " <<
       mfSingularOrPlural (
-        multipleMeasureRestsMeasuresNumber, "measure", "measures") <<
+        multipleMeasureRestMeasuresNumber, "measure", "measures") <<
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
@@ -2663,9 +2665,11 @@ void msrStaff::appendMultipleMeasureRestToStaff (
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      appendMultipleMeasureRestToVoice (
+      createAMultipleMeasureRestAndAppendItToVoice (
         inputLineNumber,
-        multipleMeasureRestsMeasuresNumber);
+        multipleMeasureRestMeasuresNumber,
+        multipleMeasureRestSlashesNumber,
+        multipleMeasureRestUseSymbolsKind);
   } // for
 }
 

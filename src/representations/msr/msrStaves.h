@@ -21,6 +21,7 @@
 #include "msrStavesEnumTypes.h"
 #include "msrTranspositions.h"
 #include "msrTupletFactors.h"
+#include "msrUseSymbols.h"
 
 
 namespace MusicFormats
@@ -275,10 +276,10 @@ class EXP msrStaff : public msrElement
 
     // measure repeats
 
-    void                  cascadeCreateAMeasureRepeatAndAppendItInStaff (
+    void                  cascadeCreateAMeasureRepeatAndAppendItToStaff (
                             int inputLineNumber,
-                            int beatRepeatMeasuresNumber,
-                            int beatRepeatSlashesNumber);
+                            int measureRepeatMeasuresNumber,
+                            int measureRepeatSlashesNumber);
 
     void                  appendPendingMeasureRepeatToStaff (
                             int inputLineNumber);
@@ -313,9 +314,11 @@ class EXP msrStaff : public msrElement
 
     // multiple measure rests
 
-    void                  appendMultipleMeasureRestToStaff ( // JMI UNUSED
-                            int inputLineNumber,
-                            int multipleMeasureRestsMeasuresNumber);
+    void                  cascadeAppendMultipleMeasureRestToStaff (
+                            int               inputLineNumber,
+                            int               multipleMeasureRestMeasuresNumber,
+                            int               multipleMeasureRestSlashesNumber,
+                            msrUseSymbolsKind multipleMeasureRestUseSymbolsKind);
 
     void                  appendPendingMultipleMeasureRestsToStaff (
                             int inputLineNumber);

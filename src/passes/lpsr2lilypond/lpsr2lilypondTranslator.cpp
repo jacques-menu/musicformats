@@ -27948,14 +27948,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleMeasureRest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int measureRestsNumber =
-    elt->getMeasureRestsNumber ();
+  int measuresNumber =
+    elt->getMeasuresNumber ();
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
       "% start of multiple measure rests" <<
       mfSingularOrPlural (
-        measureRestsNumber,
+        measuresNumber,
         "measure",
         "measures") <<
       ", line " << elt->getInputLineNumber () <<
@@ -28015,12 +28015,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int measureRestsNumber =
-    elt->getMeasureRestsNumber ();
+  int measuresNumber =
+    elt->getMeasuresNumber ();
 
   // start counting measures
   fRemainingMeasureRestsNumber =
-    elt->getMeasureRestsNumber ();
+    elt->getMeasuresNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMultipleMeasureRests ()) {
@@ -28124,7 +28124,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleMeasureRest& elt)
     fLilypondCodeStream <<
       "% end of multiple measure rests" <<
       mfSingularOrPlural (
-        measureRestsNumber,
+        measuresNumber,
         "measure",
         "measures") <<
       ", line " << elt->getInputLineNumber () <<

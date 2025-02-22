@@ -16,6 +16,7 @@
 
 #include "msrNotesDurations.h"
 #include "msrSegmentElements.h"
+#include "msrUseSymbols.h"
 
 
 namespace MusicFormats
@@ -30,14 +31,10 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     // ------------------------------------------------------
 
     static SMARTP<msrMultipleMeasureRest> create (
-                            int                 inputLineNumber,
-                            int                 measureRestsNumber,
-                            const S_msrSegment& upLinkToSegment);
-
-//     static SMARTP<msrMultipleMeasureRest> create (
-//                             int                 inputLineNumber,
-//                             const S_msrMeasure& restMeasureClone,
-//                             const S_msrSegment& upLinkToSegment);
+                            int               inputLineNumber,
+                            int               measuresNumber,
+                            int               slashesNumber,
+                            msrUseSymbolsKind fUseSymbolsKind);
 
     SMARTP<msrMultipleMeasureRest> createMultipleMeasureRestNewbornClone (
                               const S_msrSegment& containingVoice);
@@ -48,14 +45,10 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     // ------------------------------------------------------
 
                           msrMultipleMeasureRest (
-                            int                 inputLineNumber,
-                            int                 measureRestsNumber,
-                            const S_msrSegment& upLinkToSegment);
-
-//                           msrMultipleMeasureRest (
-//                             int                 inputLineNumber,
-//                             const S_msrMeasure& restMeasureClone,
-//                             const S_msrSegment& upLinkToSegment);
+                            int               inputLineNumber,
+                            int               measuresNumber,
+                            int               slashesNumber,
+                            msrUseSymbolsKind fUseSymbolsKind);
 
     virtual               ~msrMultipleMeasureRest ();
 
@@ -67,12 +60,18 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     S_msrSegment          getMultipleMeasureRestUpLinkToSegment () const
                               { return fMultipleMeasureRestUpLinkToSegment; }
 
-    int                   getMeasureRestsNumber () const
-                              { return fMeasureRestsNumber; }
+    int                   getMeasuresNumber () const
+                              { return fMeasuresNumber; }
+
+    int                   getSlashesNumber () const
+                              { return fSlashesNumber; }
+
+    msrUseSymbolsKind     getUseSymbolsKind () const
+                              { return fUseSymbolsKind; }
 
     const std::list <S_msrMeasure>&
-                          getMeasureRestsList () const
-                              { return fMeasureRestsList; }
+                          getMeasuresList () const
+                              { return fMeasuresList; }
 
     void                  setNextMeasureNumber (
                             const std::string& nextMeasureNumber);
@@ -80,11 +79,12 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     std::string           getNextMeasureNumber () const
                               { return fNextMeasureNumber; }
 
-    void                  setMultipleMeasureRestLastMeasurePuristMeasureNumber (
-                            int inputLineNumber);
+    void                  setLastMeasurePuristMeasureNumber (
+                            int inputLineNumber,
+                            int puristMeasureNumber);
 
-    int                   getMultipleMeasureRestLastMeasurePuristMeasureNumber () const
-                              { return fLastMeasureRestPuristNumber; }
+    int                   getLastMeasurePuristMeasureNumber () const
+                              { return fLastMeasurePuristNumber; }
 
     msrWholeNotes         fetchMultipleMeasureRestMeasureSoundingNotes () const;
                             // don't simply multiply duration by number,
@@ -133,11 +133,14 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
 
     S_msrSegment          fMultipleMeasureRestUpLinkToSegment;
 
-    int                   fMeasureRestsNumber; // supplied by MusicXML
-    std::list <S_msrMeasure>
-                          fMeasureRestsList;
+    int                   fMeasuresNumber;
+    int                   fSlashesNumber;
+    msrUseSymbolsKind     fUseSymbolsKind;
 
-    int                   fLastMeasureRestPuristNumber;
+    std::list <S_msrMeasure>
+                          fMeasuresList;
+
+    int                   fLastMeasurePuristNumber;
 
     std::string           fNextMeasureNumber;
 };

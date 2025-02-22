@@ -694,6 +694,8 @@ class EXP mxsr2msrSkeletonBuilder :
     // multiple measure rests handling
     // ------------------------------------------------------
 
+    Bool                      fCurrentMeasureBelongsToAMultipleMeasureRest;
+
 //     mxsrMultipleMeasureRestEvent
 //                               fPendingMultipleMeasureRestEvent;
 

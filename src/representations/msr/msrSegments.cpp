@@ -2204,7 +2204,7 @@ void msrSegment::cascadeAppendPaddingNoteToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendMultipleMeasureRestToSegment (
+void msrSegment::cascadeAppendMultipleMeasureRestToSegment (
   const S_msrMultipleMeasureRest& multipleMeasureRest)
 {
 #ifdef MF_TRACE_IS_ENABLED

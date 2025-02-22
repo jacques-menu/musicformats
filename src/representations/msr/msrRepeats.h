@@ -86,7 +86,7 @@ class EXP msrRepeatCommonPart : public msrElement
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&           context);
 
-    void                  appendMultipleMeasureRestToRepeatCommonPart (
+    void                  cascadeAppendMultipleMeasureRestToRepeatCommonPart (
                             int                   inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRests,
                             const std::string&         context);
@@ -218,7 +218,7 @@ class EXP msrRepeatEnding : public msrElement
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&           context);
 
-    void                  appendMultipleMeasureRestToRepeatEnding (
+    void                  cascadeAppendMultipleMeasureRestToRepeatEnding (
                             int                   inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRests,
                             const std::string&         context);
@@ -374,7 +374,7 @@ class EXP msrRepeat : public msrVoiceElement
                             const S_msrMeasureRepeat& measureRepeat,
                             const std::string&           context);
 
-    void                  appendMultipleMeasureRestToRepeat (
+    void                  cascadeAppendMultipleMeasureRestToRepeat (
                             int                   inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRests,
                             const std::string&         context);

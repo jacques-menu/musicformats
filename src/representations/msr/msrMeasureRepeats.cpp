@@ -956,26 +956,23 @@ std::ostream& operator << (std::ostream& os, const S_msrMeasureRepeatReplicas& e
 
 //______________________________________________________________________________
 S_msrMeasureRepeat msrMeasureRepeat::create (
-  int               inputLineNumber,
-  int               measureRepeatMeasuresNumber,
-  int               measureRepeatSlashesNumber,
-  const S_msrVoice& upLinkToVoice)
+  int inputLineNumber,
+  int measureRepeatMeasuresNumber,
+  int measureRepeatSlashesNumber)
 {
   msrMeasureRepeat* obj =
     new msrMeasureRepeat (
       inputLineNumber,
       measureRepeatMeasuresNumber,
-      measureRepeatSlashesNumber,
-      upLinkToVoice);
+      measureRepeatSlashesNumber);
   assert (obj != nullptr);
   return obj;
 }
 
 msrMeasureRepeat::msrMeasureRepeat (
-  int               inputLineNumber,
-  int               measureRepeatMeasuresNumber,
-  int               measureRepeatSlashesNumber,
-  const S_msrVoice& upLinkToVoice)
+  int inputLineNumber,
+  int  measureRepeatMeasuresNumber,
+  int  measureRepeatSlashesNumber)
     : msrSegmentElement (inputLineNumber)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -986,8 +983,6 @@ msrMeasureRepeat::msrMeasureRepeat (
     "measureRepeatMeasuresNumber is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fMeasureRepeatMeasuresNumber = measureRepeatMeasuresNumber;
-
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
   mfAssert (
@@ -996,9 +991,8 @@ msrMeasureRepeat::msrMeasureRepeat (
     "measureRepeatSlashesNumber is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
+  fMeasureRepeatMeasuresNumber = measureRepeatMeasuresNumber;
   fMeasureRepeatSlashesNumber  = measureRepeatSlashesNumber;
-
-  fUpLinkToMeasureRepeatToVoice = upLinkToVoice;
 
   // measures repeat build phase
   fCurrentMeasureRepeatBuildPhaseKind =
@@ -1008,8 +1002,7 @@ msrMeasureRepeat::msrMeasureRepeat (
 msrMeasureRepeat::~msrMeasureRepeat ()
 {}
 
-S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
-  const S_msrVoice& containingVoice)
+S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone ()
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasureRepeats ()) {
@@ -1026,21 +1019,12 @@ S_msrMeasureRepeat msrMeasureRepeat::createMeasureRepeatNewbornClone (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    containingVoice != nullptr,
-    "containingVoice is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
   S_msrMeasureRepeat
     newbornClone =
       msrMeasureRepeat::create (
         fInputLineNumber,
         fMeasureRepeatMeasuresNumber,
-        fMeasureRepeatSlashesNumber,
-        containingVoice);
+        fMeasureRepeatSlashesNumber);
 
   return newbornClone;
 }
@@ -1402,9 +1386,9 @@ void msrMeasureRepeat::displayMeasureRepeat (
   gLog <<
     std::endl <<
     "*********>> MeasureRepeat " <<
-    ", measureRepeatMeasuresNumber: '" <<
+    ", fMeasureRepeatMeasuresNumber: '" <<
     fMeasureRepeatMeasuresNumber <<
-    ", measureRepeatSlashesNumber: '" <<
+    ", fMeasureRepeatSlashesNumber: '" <<
     fMeasureRepeatSlashesNumber <<
     "', voice:" <<
     std::endl <<
@@ -1427,6 +1411,10 @@ void msrMeasureRepeat::print (std::ostream& os) const
 {
   os <<
     "[MeasureRepeat" <<
+    ", fMeasureRepeatMeasuresNumber" << ": " <<
+    fMeasureRepeatMeasuresNumber <<
+    ", fMeasureRepeatSlashesNumber" << ": " <<
+    fMeasureRepeatSlashesNumber <<
     " (" <<
     mfSingularOrPlural (
       fMeasureRepeatPattern

@@ -185,7 +185,7 @@ class EXP msrSegment : public msrVoiceElement
 
     // measure repeats
 
-    void                  cascadeCreateAMeasureRepeatAndAppendItInSegment (
+    void                  cascadeCreateAMeasureRepeatAndAppendItToSegment (
                             int                    inputLineNumber,
                             int                    previousMeasureEndInputLineNumber,
                             const std::string&     measureNumber,
@@ -197,7 +197,7 @@ class EXP msrSegment : public msrVoiceElement
     S_msrMultipleMeasureRest
                           fCurrentMultipleMeasureRest;
 
-    void                  appendMultipleMeasureRestToSegment (
+    void                  cascadeAppendMultipleMeasureRestToSegment (
                             const S_msrMultipleMeasureRest& multipleMeasureRest);
 
     // clef, key, time signature

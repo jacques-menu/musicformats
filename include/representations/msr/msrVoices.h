@@ -24,6 +24,7 @@
 #include "msrRepeatsEnumTypes.h"
 #include "msrSegnos.h"
 #include "msrTupletFactors.h"
+#include "msrUseSymbols.h"
 
 
 namespace MusicFormats
@@ -745,15 +746,17 @@ class EXP msrVoice : public msrElement
 
     // multiple measure rests
 
-//     void                  appendMultipleMeasureRestToVoiceElementsList (
+//     void                  cascadeAppendMultipleMeasureRestToVoiceElementsList (
 //                             const S_msrMultipleMeasureRest& multipleMeasureRest);
 
-    void                  appendMultipleMeasureRestToVoice (
-                            int inputLineNumber,
-                            int multipleMeasureRestMeasuresNumber); // JMI USELESS??? JMI v0.9.67
+    void                  createAMultipleMeasureRestAndAppendItToVoice (
+                            int               inputLineNumber,
+                            int               multipleMeasureRestMeasuresNumber,
+                            int               multipleMeasureRestSlashesNumber,
+                            msrUseSymbolsKind multipleMeasureRestUseSymbolsKind);
 
-    void                  appendMultipleMeasureRestToVoice (
-                            int                          inputLineNumber,
+    void                  cascadeAppendMultipleMeasureRestToVoice (
+                            int                             inputLineNumber,
                             const S_msrMultipleMeasureRest& multipleMeasureRest);
 
     void                  replicateLastAppendedMeasureInVoice (
@@ -787,7 +790,7 @@ class EXP msrVoice : public msrElement
 
     // measure repeats
 
-    void                  cascadeCreateAMeasureRepeatAndAppendItInVoice (
+    void                  cascadeCreateAMeasureRepeatAndAppendItToVoice (
                             int inputLineNumber,
                             int measureRepeatMeasuresNumber,
                             int measureRepeatSlashesNumber);
@@ -807,8 +810,8 @@ class EXP msrVoice : public msrElement
 
     void                  createMeasureRepeatAndAppendItToVoiceClone (
                             int inputLineNumber,
-                            int beatRepeatMeasuresNumber,
-                            int beatRepeatSlashesNumber);
+                            int measureRepeatMeasuresNumber,
+                            int measureRepeatSlashesNumber);
 
     void                  handleMeasureRepeatStartInVoiceClone (
                             int                       inputLineNumber,
@@ -1017,7 +1020,7 @@ class EXP msrVoice : public msrElement
 
     // multiple measure rests
 
-//     void                  appendMultipleMeasureRestToInitialVoiceElements (
+//     void                  cascadeAppendMultipleMeasureRestToInitialVoiceElements (
 //                             int                              inputLineNumber,
 //                             const S_msrMultipleMeasureRest& multipleMeasureRest,
 //                             const std::string&               context);
