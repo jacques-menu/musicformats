@@ -4647,17 +4647,23 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 #endif // MF_TRACE_IS_ENABLED
 
 			// create a multiple measure rest end event
-			S_mxsrMultipleMeasureRestEvent
-				multipleMeasureRestEndEvent =
-					fResultingEventsCollection.createAMultipleMeasureRestEnd (
-						fCurrentPart->getPartName (),
-						fCurrentMeasureNumber,
-						fCurrentMultipleMeasureRestNumber,
-						elt->getInputLineNumber ());
+// 			S_mxsrMultipleMeasureRestEvent
+// 				multipleMeasureRestEndEvent =
+// 					fResultingEventsCollection.createAMultipleMeasureRestEnd (
+// 						fCurrentPart->getPartName (),
+// 						fCurrentMeasureNumber,
+// 						fCurrentMultipleMeasureRestNumber,
+// 						elt->getInputLineNumber ());
+//
+// 			// register it
+// 			fResultingEventsCollection.registerMultipleMeasureRestEnd (
+// 				multipleMeasureRestEndEvent);
 
-			// register it
-			fResultingEventsCollection.registerMultipleMeasureRestEnd (
-				multipleMeasureRestEndEvent);
+			fResultingEventsCollection.createAMultipleMeasureRestEndAndRegisterIt (
+				fCurrentPart->getPartName (),
+				fCurrentMeasureNumber,
+				fCurrentMultipleMeasureRestNumber,
+				elt->getInputLineNumber ());
 
 			fOnGoingMultipleMeasureRest = false;
 		}
@@ -4704,18 +4710,25 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 				{
 					// create a multiple measure rest end event upon the previous measure,
 					// since we're one measure too late
-					S_mxsrMeasureRepeatEvent
-						multipleMeasureResEndEvent =
-							fResultingEventsCollection.createAMeasureRepeatEnd (
-								fCurrentPart->getPartName (),
-								fPreviousMeasureNumber,
-								fCurrentMeasureRepeatNumber,
-								fCurrentMeasureRepeatSlashes,
-								fPreviousMeasureInputLineNumber);
+// 					S_mxsrMeasureRepeatEvent
+// 						multipleMeasureResEndEvent =
+// 							fResultingEventsCollection.createAMeasureRepeatEnd (
+// 								fCurrentPart->getPartName (),
+// 								fPreviousMeasureNumber,
+// 								fCurrentMeasureRepeatNumber,
+// 								fCurrentMeasureRepeatSlashes,
+// 								fPreviousMeasureInputLineNumber);
+//
+// 					// register it
+// 					fResultingEventsCollection.registerMeasureRepeatEnd (
+// 						multipleMeasureResEndEvent);
 
-					// register it
-					fResultingEventsCollection.registerMeasureRepeatEnd (
-						multipleMeasureResEndEvent);
+					fResultingEventsCollection.createAMeasureRepeatEndAndRegisterIt (
+						fCurrentPart->getPartName (),
+						fPreviousMeasureNumber,
+						fCurrentMeasureRepeatNumber,
+						fCurrentMeasureRepeatSlashes,
+						fPreviousMeasureInputLineNumber);
 				}
 				break;
 		} // switch

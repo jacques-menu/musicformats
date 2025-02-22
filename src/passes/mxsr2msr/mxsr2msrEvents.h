@@ -245,13 +245,21 @@ class EXP mxsrMultipleMeasureRestEvent : public mxsrPartEvent
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrMultipleMeasureRestEvent> create (
+    static SMARTP<mxsrMultipleMeasureRestEvent>
+                          create (
                             mxsrMultipleMeasureRestEventKind multipleMeasureRestEventKind,
                             const std::string&               partName,
                             const mfMeasureNumber&           measureNumber,
                             int                              multipleMeasureRestNumber,
                             int                              eventSequentialNumber,
                             mfInputLineNumber                eventInputLineNumber);
+
+//     static SMARTP<mxsrMultipleMeasureRestEvent>
+//                           createAMultipleMeasureRestEnd (
+//                             const std::string&       partName,
+//                             const mfMeasureNumber&   measureNumber,
+//                             int                      multipleMeasureRestNumber,
+//                             const mfInputLineNumber& eventInputLineNumber);
 
   public:
 
@@ -341,8 +349,17 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
                             const std::string&         partName,
                             const mfMeasureNumber&     measureNumber,
                             int                        measureRepeatNumber,
+                            int                        measureRepeatSlashes,
                             int                        eventSequentialNumber,
                             mfInputLineNumber          eventInputLineNumber);
+
+//     static SMARTP<mxsrMeasureRepeatEvent>
+//                           createAMeasureRepeatEnd (
+//                             const std::string&       partName,
+//                             const mfMeasureNumber&   measureNumber,
+//                             int                      measureRepeatNumber,
+//                             int                      measureRepeatSlashes,
+//                             const mfInputLineNumber& eventInputLineNumber);
 
   public:
 
@@ -354,6 +371,7 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
                             const std::string&         partName,
                             const mfMeasureNumber&     measureNumber,
                             int                        measureRepeatNumber,
+                            int                        measureRepeatSlashes,
                             int                        eventSequentialNumber,
                             mfInputLineNumber          eventInputLineNumber);
 
@@ -1087,15 +1105,21 @@ class EXP mxsrEventsCollection : public smartable
     void                  registerMultipleMeasureRestBegin (
                             S_mxsrMultipleMeasureRestEvent multipleMeasureRestBeginEvent);
 
-    S_mxsrMultipleMeasureRestEvent
-                          createAMultipleMeasureRestEnd (
+//     S_mxsrMultipleMeasureRestEvent
+//                           createAMultipleMeasureRestEnd (
+//                             const std::string&       partName,
+//                             const mfMeasureNumber&   measureNumber,
+//                             int                      multipleMeasureRestNumber,
+//                             const mfInputLineNumber& eventInputLineNumber);
+//
+//     void                  registerMultipleMeasureRestEnd (
+//                             S_mxsrMultipleMeasureRestEvent multipleMeasureRestEndEvent);
+
+    void                  createAMultipleMeasureRestEndAndRegisterIt (
                             const std::string&       partName,
                             const mfMeasureNumber&   measureNumber,
                             int                      multipleMeasureRestNumber,
                             const mfInputLineNumber& eventInputLineNumber);
-
-    void                  registerMultipleMeasureRestEnd (
-                            S_mxsrMultipleMeasureRestEvent multipleMeasureRestEndEvent);
 
     S_mxsrMultipleMeasureRestEvent
                           fetchMultipleMeasureRestBeginAtBareMeasureNumber (
@@ -1113,22 +1137,30 @@ class EXP mxsrEventsCollection : public smartable
                             const std::string&       partName,
                             const mfMeasureNumber&   measureNumber,
                             int                      measureRepeatNumber,
+                            int                      measureRepeatNumber,
                             int                      measureRepeatSlashes,
                             const mfInputLineNumber& eventInputLineNumber);
 
     void                  registerMeasureRepeatBegin (
                             S_mxsrMeasureRepeatEvent measureRepeatBeginEvent);
 
-    S_mxsrMeasureRepeatEvent
-                          createAMeasureRepeatEnd (
+//     S_mxsrMeasureRepeatEvent
+//                           createAMeasureRepeatEnd (
+//                             const std::string&       partName,
+//                             const mfMeasureNumber&   measureNumber,
+//                             int                      measureRepeatNumber,
+//                             int                      measureRepeatSlashes,
+//                             const mfInputLineNumber& eventInputLineNumber);
+//
+//     void                  registerMeasureRepeatEnd (
+//                             S_mxsrMeasureRepeatEvent measureRepeatEvent);
+
+    void                  createAMeasureRepeatEndAndRegisterIt (
                             const std::string&       partName,
                             const mfMeasureNumber&   measureNumber,
                             int                      measureRepeatNumber,
                             int                      measureRepeatSlashes,
                             const mfInputLineNumber& eventInputLineNumber);
-
-    void                  registerMeasureRepeatEnd (
-                            S_mxsrMeasureRepeatEvent measureRepeatEvent);
 
     S_mxsrMeasureRepeatEvent
                           fetchMeasureRepeatBeginAtBareMeasureNumber (
