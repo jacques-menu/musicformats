@@ -1137,7 +1137,6 @@ class EXP mxsrEventsCollection : public smartable
                             const std::string&       partName,
                             const mfMeasureNumber&   measureNumber,
                             int                      measureRepeatNumber,
-                            int                      measureRepeatNumber,
                             int                      measureRepeatSlashes,
                             const mfInputLineNumber& eventInputLineNumber);
 
