@@ -23,6 +23,8 @@
 #include "mfBool.h"
 #include "mfIndentedTextOutput.h"
 
+#include "msrTupletFactors.h"
+
 
 using namespace MusicXML2;
 
@@ -899,6 +901,7 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     static SMARTP<mxsrTupletEvent> create (
                             mxsrTupletEventKind      tupletEventKind,
                             int                      tupletNumber,
+                            const msrTupletFactor&   tupletFactor,
                             int                      tupletNoteSequentialNumber,
                             const mfStaffNumber&     noteStaffNumber,
                             const mfVoiceNumber&     noteVoiceNumber,
@@ -913,6 +916,7 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
                           mxsrTupletEvent (
                             mxsrTupletEventKind      tupletEventKind,
                             int                      tupletNumber,
+                            const msrTupletFactor&   tupletFactor,
                             int                      tupletNoteSequentialNumber,
                             const mfStaffNumber&     noteStaffNumber,
                             const mfVoiceNumber&     noteVoiceNumber,
@@ -932,10 +936,17 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     int                   getTupletNumber () const
                               { return fTupletNumber; }
 
+    const msrTupletFactor&
+                          getTupletFactor () const
+                              { return fTupletFactor; }
+
   public:
 
     // public services
     // ------------------------------------------------------
+
+    Bool                  tupletEventIsForTupletNumber (int tupletNumber)
+                              { return fTupletNumber == tupletNumber; }
 
 
   private:
@@ -962,6 +973,7 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     mxsrTupletEventKind   fTupletEventKind;
 
     int                   fTupletNumber;
+    msrTupletFactor       fTupletFactor;
 };
 
 using S_mxsrTupletEvent = SMARTP<mxsrTupletEvent>;
@@ -1052,10 +1064,6 @@ class EXP mxsrEventsCollection : public smartable
                           getTupletEndsMultiMap () const
                               { return fTupletEndsMultiMap; }
 
-//     const std::multimap <int, S_mxsrTupletEvent>&
-//                           getTupletEventMultiMap () const
-//                               { return fTupletEventsMultiMap; }
-
     // all events
     const std::list <S_mxsrEvent>&
                           getAllEventsList () const
@@ -1067,6 +1075,8 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // measure measure rest events
+    // ------------------------------------------------------
+
     S_mxsrMultipleMeasureRestEvent
                           createAMultipleMeasureRestBegin (
                             const std::string&       partName,
@@ -1096,6 +1106,8 @@ class EXP mxsrEventsCollection : public smartable
                             const std::string& bareMeasureNumber) const;
 
     // measure repeat events
+    // ------------------------------------------------------
+
     S_mxsrMeasureRepeatEvent
                           createAMeasureRepeatBegin (
                             const std::string&       partName,
@@ -1127,6 +1139,8 @@ class EXP mxsrEventsCollection : public smartable
                             const std::string& bareMeasureNumber) const;
 
     // staff change events
+    // ------------------------------------------------------
+
     void                  registerStaffChangeTakeOff (
                             int                      noteSequentialNumber,
                             const mfStaffNumber&     noteStaffNumber,
@@ -1156,6 +1170,8 @@ class EXP mxsrEventsCollection : public smartable
                             int noteSequentialNumber) const;
 
     // grace note events
+    // ------------------------------------------------------
+
     void                  registerGraceBegin (
                             int                      noteSequentialNumber,
                             const mfStaffNumber&     noteStaffNumber,
@@ -1175,6 +1191,8 @@ class EXP mxsrEventsCollection : public smartable
                             int noteSequentialNumber) const;
 
     // cue note events
+    // ------------------------------------------------------
+
     S_mxsrCueEvent        createACueBeginEvent (
                             int                      noteSequentialNumber,
                             const mfStaffNumber&     noteStaffNumber,
@@ -1200,6 +1218,8 @@ class EXP mxsrEventsCollection : public smartable
                             int noteSequentialNumber) const;
 
     // chord events
+    // ------------------------------------------------------
+
     S_mxsrChordEvent      createAChordBeginEvent (
                             int                      noteSequentialNumber,
                             const mfStaffNumber&     noteStaffNumber,
@@ -1226,8 +1246,11 @@ class EXP mxsrEventsCollection : public smartable
                             int noteSequentialNumber) const;
 
     // tuplet events
+    // ------------------------------------------------------
+
     S_mxsrTupletEvent     createATupletBeginEvent (
                             int                      tupletNumber,
+                            const msrTupletFactor&   tupletFactor,
                             int                      noteSequentialNumber,
                             const mfStaffNumber&     noteStaffNumber,
                             const mfVoiceNumber&     noteVoiceNumber,
@@ -1238,6 +1261,7 @@ class EXP mxsrEventsCollection : public smartable
 
     S_mxsrTupletEvent     createATupletEndEvent (
                             int                      tupletNumber,
+                            const msrTupletFactor&   tupletFactor,
                             int                      noteSequentialNumber,
                             const mfStaffNumber&     noteStaffNumber,
                             const mfVoiceNumber&     noteVoiceNumber,
@@ -1245,6 +1269,9 @@ class EXP mxsrEventsCollection : public smartable
 
     void                  registerTupletEndEvent (
                             S_mxsrTupletEvent tupletEndEvent);
+
+    S_mxsrTupletEvent     fetchTupletBeginForTupletNumber (
+                            int tupletNumber);
 
     void                  fetchTupletBeginsAtNoteSequentialNumber (
                             int                            noteSequentialNumber,
@@ -1255,6 +1282,8 @@ class EXP mxsrEventsCollection : public smartable
                             std::list <S_mxsrTupletEvent>& recipientTupletEndsList);
 
     // sort the MXSR events lists
+    // ------------------------------------------------------
+
     void                  sortTheMxsrEventsLists ();
 
   private:
@@ -1299,38 +1328,50 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // events sequential numbering
+    // ------------------------------------------------------
+
     int                   fCurrentEventSequentialNumber;
 
     // initial repeat bar
+    // ------------------------------------------------------
+
     Bool                  fThereIsAnImplicitInitialForwardRepeat;
 
     // all events
+    // ------------------------------------------------------
+
     std::list <S_mxsrEvent>
                           fAllEventsList;
 
     // measure repeat events
-      // there can be only one measure repeat begin and one measure repeat end
-      // per measure, hence two maps,
-      // indexed by bare measure number, i.e. an std::string,
-      // since using mfMeasureNumber as indexed would imply useless copies
-      // into the map indexes
+    // ------------------------------------------------------
+
+    // there can be only one measure repeat begin and one measure repeat end
+    // per measure, hence two maps,
+    // indexed by bare measure number, i.e. an std::string,
+    // since using mfMeasureNumber as indexed would imply useless copies
+    // into the map indexes
     std::map <std::string, S_mxsrMultipleMeasureRestEvent>
                           fMultipleMeasureRestBeginsMap,
                           fMultipleMeasureRestEndsMap;
 
     // measure repeat events
-      // there can be only one measure repeat begin and one measure repeat end
-      // per measure, hence two maps,
-      // indexed by bare measure number, i.e. an std::string,
-      // since using mfMeasureNumber as indexed would imply useless copies
-      // into the map indexes
+    // ------------------------------------------------------
+
+    // there can be only one measure repeat begin and one measure repeat end
+    // per measure, hence two maps,
+    // indexed by bare measure number, i.e. an std::string,
+    // since using mfMeasureNumber as indexed would imply useless copies
+    // into the map indexes
     std::map <std::string, S_mxsrMeasureRepeatEvent>
                           fMeasureRepeatBeginsMap,
                           fMeasureRepeatEndsMap;
 
     // staff change events
-      // there can be two staff changes per note,
-      // hence these two maps, indexed by note sequential number
+    // ------------------------------------------------------
+
+    // there can be two staff changes per note,
+    // hence these two maps, indexed by note sequential number
     std::map <int, S_mxsrStaffChangeEvent>
                           fStaffChangeTakeOffsMap,
                           fStaffChangeLandingsMap;
@@ -1339,35 +1380,46 @@ class EXP mxsrEventsCollection : public smartable
                           fStaffChangeEventsList;
 
     // grace notes events
-      // there can be only one grace note begin and one chord end per note,
-      // hence these two maps, indexed by note sequential number
+    // ------------------------------------------------------
+
+    // there can be only one grace note begin and one chord end per note,
+    // hence these two maps, indexed by note sequential number
     std::map <int, S_mxsrGraceEvent>
                           fGraceBeginsMap,
                           fGraceEndsMap;
 
     // cue notes events
-      // there can be only one cue note begin and one chord end per note,
-      // hence these two maps, indexed by note sequential number
+    // ------------------------------------------------------
+
+    // there can be only one cue note begin and one chord end per note,
+    // hence these two maps, indexed by note sequential number
     std::map <int, S_mxsrCueEvent>
                           fCueBeginsMap,
                           fCueEndsMap;
 
     // chord events
-      // there can be only one chord begin and one chord end per note,
-      // hence these two maps, indexed by note sequential number
+    // ------------------------------------------------------
+
+    // there can be only one chord begin and one chord end per note,
+    // hence these two maps, indexed by note sequential number
     std::map <int, S_mxsrChordEvent>
                           fChordBeginsMap,
                           fChordEndsMap;
 
     // tuplet events
-      // there can be several tuplet start and/or stop events per note,
-      // hence these two multimaps, indexed by note sequential number
+    // ------------------------------------------------------
+
+    // there can be several tuplet start and/or stop events per note,
+    // hence these two multimaps, indexed by note sequential number
     std::multimap <int, S_mxsrTupletEvent>
                           fTupletBeginsMultiMap,
                           fTupletEndsMultiMap;
 
-//     std::multimap <int, S_mxsrTupletEvent>
-//                           fTupletEventsMultiMap;
+    // we need to fetch a tuplet event by its tuplet number,
+    // hence the two maps, indexed by tuplet number
+    std::map <int, S_mxsrTupletEvent>
+                          fTupletBeginNumbersMap,
+                          fTupletEndNumbersMap;
 };
 
 using S_mxsrEventsCollection = SMARTP<mxsrEventsCollection>;

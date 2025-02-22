@@ -36,24 +36,12 @@ class EXP msrTuplet : public msrTupletElement
     static S_msrTuplet    create (
                             int                     inputLineNumber,
                             int                     tupletNumber,
+                            const msrTupletFactor&  tupletFactor,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletTypeKind       tupletTypeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            const msrTupletFactor&  tupletFactor,
-                            msrPlacementKind        tupletPlacementKind);
-
-    static S_msrTuplet    create (
-                            int                     inputLineNumber,
-                            const S_msrMeasure&     upLinkToMeasure,
-                            int                     tupletNumber,
-                            msrTupletBracketKind    tupletBracketKind,
-                            msrTupletLineShapeKind  tupletLineShapeKind,
-                            msrTupletTypeKind       tupletTypeKind,
-                            msrTupletShowNumberKind tupletShowNumberKind,
-                            msrTupletShowTypeKind   tupletShowTypeKind,
-                            const msrTupletFactor&  tupletFactor,
                             msrPlacementKind        tupletPlacementKind);
 
     // cloning
@@ -71,24 +59,12 @@ class EXP msrTuplet : public msrTupletElement
                           msrTuplet (
                             int                     inputLineNumber,
                             int                     tupletNumber,
+                            const msrTupletFactor&  tupletFactor,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
                             msrTupletTypeKind       tupletTypeKind,
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
-                            const msrTupletFactor&  tupletFactor,
-                            msrPlacementKind        tupletPlacementKind);
-
-                          msrTuplet (
-                            int                     inputLineNumber,
-                            const S_msrMeasure&     upLinkToMeasure,
-                            int                     tupletNumber,
-                            msrTupletBracketKind    tupletBracketKind,
-                            msrTupletLineShapeKind  tupletLineShapeKind,
-                            msrTupletTypeKind       tupletTypeKind,
-                            msrTupletShowNumberKind tupletShowNumberKind,
-                            msrTupletShowTypeKind   tupletShowTypeKind,
-                            const msrTupletFactor&  tupletFactor,
                             msrPlacementKind        tupletPlacementKind);
 
     virtual               ~msrTuplet ();

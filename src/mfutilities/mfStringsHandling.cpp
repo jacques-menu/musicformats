@@ -856,7 +856,7 @@ std::list <int> mfExtractNumbersFromString (
 std::string& mfLeftTrim (std::string& s)
 {
   std::function <int (int)>
-    checkSpace =
+    checkSpace = // lambda expression
       [] (int x) { return isspace (x); };
 
   s.erase (
@@ -874,7 +874,7 @@ std::string& mfLeftTrim (std::string& s)
 std::string& mfRightTrim (std::string& s)
 {
   std::function <int (int)>
-    checkSpace =
+    checkSpace = // lambda expression
       [] (int x) { return isspace (x); };
 
   s.erase (

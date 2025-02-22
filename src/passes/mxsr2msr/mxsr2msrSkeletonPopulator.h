@@ -479,7 +479,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
   public                      visitor<S_chord>,
 
-  // time signatures
+  // time modification in notes
   // ------------------------------------------------------
 
   public                      visitor<S_time_modification>,
@@ -491,6 +491,7 @@ class EXP mxsr2msrSkeletonPopulator :
   // ------------------------------------------------------
 
   public                      visitor<S_tuplet>,
+
   public                      visitor<S_tuplet_actual>,
   public                      visitor<S_tuplet_normal>,
   public                      visitor<S_tuplet_number>,
@@ -1079,7 +1080,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     virtual void              visitStart (S_chord& elt);
 
-    // time
+    // time modifications in notes
     // ------------------------------------------------------
 
     virtual void              visitStart (S_time_modification& elt);
@@ -1092,10 +1093,13 @@ class EXP mxsr2msrSkeletonPopulator :
 
     virtual void              visitStart (S_tuplet& elt);
     virtual void              visitEnd   (S_tuplet& elt);
+
     virtual void              visitStart (S_tuplet_actual& elt);
     virtual void              visitEnd   (S_tuplet_actual& elt);
+
     virtual void              visitStart (S_tuplet_normal& elt);
     virtual void              visitEnd   (S_tuplet_normal& elt);
+
     virtual void              visitStart (S_tuplet_number& elt);
     virtual void              visitStart (S_tuplet_type& elt);
     virtual void              visitStart (S_tuplet_dot& elt);
@@ -1660,13 +1664,20 @@ class EXP mxsr2msrSkeletonPopulator :
 		void											displayGatheredTupletInformations (
 																const std::string& context) const;
 
-    S_msrTuplet               createTuplet (
-                                int inputLineNumber,
-                                int tupletNumber);
+    S_msrTuplet               createATuplet (
+                                int                    inputLineNumber,
+                                int                    tupletNumber,
+                                const msrTupletFactor& tupletFactor);
 
     void                      handleTupletBeginEventsIfAny ();
 
     void                      handleTupletEndEventsIfAny ();
+
+    void                      handleTupletBegin (
+                                S_mxsrTupletEvent tupletBeginEvent);
+
+    void                      handleTupletEnd (
+                                S_mxsrTupletEvent tupletEndEvent);
 
 //     void                      handleTupletBegin (
 //                                 const S_msrVoice& currentNoteVoice,

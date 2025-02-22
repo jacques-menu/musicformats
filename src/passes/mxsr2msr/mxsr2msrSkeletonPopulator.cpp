@@ -18825,6 +18825,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
   }
 }
 
+//________________________________________________________________________
 void mxsr2msrSkeletonPopulator::visitStart (S_tuplet& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -19101,7 +19102,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_tuplet& elt)
 // #endif // MF_TRACE_IS_ENABLED
 }
 
-//______________________________________________________________________________
 void mxsr2msrSkeletonPopulator::visitStart (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -19871,9 +19871,10 @@ void mxsr2msrSkeletonPopulator::copyNoteGraceNotesGroupsToChord (
 */
 
 //______________________________________________________________________________
-S_msrTuplet mxsr2msrSkeletonPopulator::createTuplet (
-  int inputLineNumber,
-  int tupletNumber)
+S_msrTuplet mxsr2msrSkeletonPopulator::createATuplet (
+  int                    inputLineNumber,
+  int                    tupletNumber,
+  const msrTupletFactor& tupletFactor)
 {
   // create the tuplet
 #ifdef MF_TRACE_IS_ENABLED
@@ -19888,14 +19889,12 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createTuplet (
       msrTuplet::create (
         inputLineNumber,
         tupletNumber,
+        tupletFactor,
         fCurrentTupletBracketKind,
         fCurrentTupletLineShapeKind,
         fCurrentTupletTypeKind,
         fCurrentTupletShowNumberKind,
         fCurrentTupletShowTypeKind,
-        msrTupletFactor (
-          fCurrentNoteActualNotes,
-          fCurrentNoteNormalNotes),
         fCurrentTupletPlacementKind);
 
   return tuplet;
@@ -22222,9 +22221,9 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
         std::stringstream ss;
 
         ss <<
-          ", fCurrentDivisionsPerQuarterNote * fCurrentNoteNormalNotes = " <<
+          ", fCurrentDivisionsPerQuarterNote * fCurrentNoteNormalNotes: " <<
           fCurrentDivisionsPerQuarterNote * fCurrentNoteNormalNotes <<
-          ", fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes = " <<
+          ", fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes: " <<
           fCurrentNoteSoundingWholeNotes.getNumerator () * fCurrentNoteActualNotes;
 
   //       mfAssert (
@@ -23590,43 +23589,51 @@ void mxsr2msrSkeletonPopulator::handleTupletBeginEventsIfAny ()
 #endif
 
   // handling the tuplet begin events
-  for (S_mxsrTupletEvent tupletEvent : tupletBeginsList) {
+  for (S_mxsrTupletEvent tupletBeginEvent : tupletBeginsList) {
+    handleTupletBegin (tupletBeginEvent);
+  } // for
+}
+
+void mxsr2msrSkeletonPopulator:: handleTupletBegin (
+  S_mxsrTupletEvent tupletBeginEvent)
+{
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTupletsBasics ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
 
-      ss <<
-        "--> handleTupletBeginEventsIfAny(): there is a tuplet begin event" <<
-        ", line " << fCurrentNoteInputStartLineNumber <<
-        ", tupletNumber: " << tupletEvent->getTupletNumber () <<
-        ", tupletEvent: " <<
-        ", fCurrentNoteInputStartLineNumber " <<
-        fCurrentNoteInputStartLineNumber <<
-        ", fCurrentNoteSequentialNumber: " <<
-        fCurrentNoteSequentialNumber <<
-        ", fCurrentNoteStaffNumber: " <<
-        fCurrentNoteStaffNumber <<
-        ", fCurrentNoteVoiceNumber: " <<
-        fCurrentNoteVoiceNumber;
+    ss <<
+      "--> handleTupletBeginEventsIfAny(): there is a tuplet begin event" <<
+      ", line " << fCurrentNoteInputStartLineNumber <<
+      ", tupletNumber: " << tupletBeginEvent->getTupletNumber () <<
+      ", tupletBeginEvent: " <<
+      tupletBeginEvent <<
+      ", fCurrentNoteInputStartLineNumber " <<
+      fCurrentNoteInputStartLineNumber <<
+      ", fCurrentNoteSequentialNumber: " <<
+      fCurrentNoteSequentialNumber <<
+      ", fCurrentNoteStaffNumber: " <<
+      fCurrentNoteStaffNumber <<
+      ", fCurrentNoteVoiceNumber: " <<
+      fCurrentNoteVoiceNumber;
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
     // create the current tuplet
     S_msrTuplet
       tuplet =
-        createTuplet (
-          tupletEvent->getEventInputLineNumber ().getBareValue (),
-          tupletEvent->getTupletNumber ());
+        createATuplet (
+          tupletBeginEvent->getEventInputLineNumber ().getBareValue (),
+          tupletBeginEvent->getTupletNumber (),
+          tupletBeginEvent->getTupletFactor ());
 
     // handle the tuplet start
     fCurrentRecipientMxsrVoice->handleTupletBegin (
       fCurrentNoteMsrVoice,
       tuplet);
-  } // for
 }
 
 void mxsr2msrSkeletonPopulator::handleTupletEndEventsIfAny ()
@@ -23666,64 +23673,76 @@ void mxsr2msrSkeletonPopulator::handleTupletEndEventsIfAny ()
 #endif
 
   // handling the tuplet end events
-  for (S_mxsrTupletEvent tupletEvent : tupletEndsList) {
+  for (S_mxsrTupletEvent tupletEndEvent : tupletEndsList) {
+    handleTupletEnd (tupletEndEvent);
+  } // for
+}
+
+void mxsr2msrSkeletonPopulator:: handleTupletEnd (
+  S_mxsrTupletEvent tupletEndEvent)
+{
 #ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceTupletsBasics ()) {
-      std::stringstream ss;
+  if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
 
-      ss <<
-        "--> handleTupletEndEventsIfAny(): there is a tuplet end event" <<
-        ", line " << fCurrentNoteInputStartLineNumber <<
-        ", tupletNumber: " << tupletEvent->getTupletNumber () <<
-        ", tupletEvent: " <<
-        ", fCurrentNoteInputStartLineNumber " <<
-        fCurrentNoteInputStartLineNumber <<
-        ", fCurrentNoteSequentialNumber: " <<
-        fCurrentNoteSequentialNumber <<
-        ", fCurrentNoteStaffNumber: " <<
-        fCurrentNoteStaffNumber <<
-        ", fCurrentNoteVoiceNumber: " <<
-        fCurrentNoteVoiceNumber <<
-        ", tupletEvent: " <<
-        tupletEvent->asString () <<
-        ", fCurrentNote: " << fCurrentNote->asString ();
+    ss <<
+      "--> handleTupletEndEventsIfAny(): there is a tuplet end event" <<
+      ", line " << fCurrentNoteInputStartLineNumber <<
+      ", tupletNumber: " << tupletEndEvent->getTupletNumber () <<
+      ", tupletEndEvent: " <<
+      tupletEndEvent->asString () <<
+      ", fCurrentNoteInputStartLineNumber " <<
+      fCurrentNoteInputStartLineNumber <<
+      ", fCurrentNoteSequentialNumber: " <<
+      fCurrentNoteSequentialNumber <<
+      ", fCurrentNoteStaffNumber: " <<
+      fCurrentNoteStaffNumber <<
+      ", fCurrentNoteVoiceNumber: " <<
+      fCurrentNoteVoiceNumber <<
+      ", fCurrentNote: " << fCurrentNote->asString ();
 
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
 #endif // MF_TRACE_IS_ENABLED
 
-   switch (tupletEvent->getTupletEventKind ()) {
-      case mxsrTupletEventKind::kTupletEvent_NONE:
-        // should not occur
-        break;
+ switch (tupletEndEvent->getTupletEventKind ()) {
+    case mxsrTupletEventKind::kTupletEvent_NONE:
+      // should not occur
+      break;
 
-      case mxsrTupletEventKind::kTupletEventBegin:
-        break;
+    case mxsrTupletEventKind::kTupletEventBegin:
+      break;
 
-      case mxsrTupletEventKind::kTupletEventEnd:
+    case mxsrTupletEventKind::kTupletEventEnd:
+      {
 #ifdef MF_TRACE_IS_ENABLED
-        if (gTraceOahGroup->getTraceTupletsBasics ()) {
-          std::stringstream ss;
+      if (gTraceOahGroup->getTraceTupletsBasics ()) {
+        std::stringstream ss;
 
-          ss <<
-            "---handleTupletEndEventsIfAnyfAny(): tuplet number " <<
-            tupletEvent->getTupletNumber () <<
-            " is ending" <<
-            ", line " << tupletEvent->getEventInputLineNumber ();
+        ss <<
+          "---handleTupletEndEventsIfAnyfAny(): tuplet number " <<
+          tupletEndEvent->getTupletNumber () <<
+          " is ending" <<
+          ", line " << tupletEndEvent->getEventInputLineNumber ();
 
-          gWaeHandler->waeTrace (
-            __FILE__, __LINE__,
-            ss.str ());
-        }
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
 #endif
 
-        fCurrentRecipientMxsrVoice->handleTupletEnd (
-          fCurrentNote,
-          fCurrentRecipientMsrVoice);
-    } // switch
-  } // for
+      S_mxsrTupletEvent
+        correspondingTupleBegintEvent =
+          fKnownEventsCollection.fetchTupletBeginForTupletNumber (
+            tupletEndEvent->getTupletNumber ());
+
+      fCurrentRecipientMxsrVoice->handleTupletEnd (
+        fCurrentNote,
+        fCurrentRecipientMsrVoice);
+      }
+  } // switch
 }
 
 //______________________________________________________________________________

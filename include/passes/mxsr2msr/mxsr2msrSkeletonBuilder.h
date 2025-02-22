@@ -40,6 +40,7 @@ namespace MusicFormats
 class EXP mxsr2msrSkeletonBuilder :
 
   // score partwise
+  // ------------------------------------------------------
 
   public                      visitor<S_score_partwise>,
 
@@ -163,11 +164,29 @@ class EXP mxsr2msrSkeletonBuilder :
 
   public                      visitor<S_chord>,
 
-  // tuplets
+  // time modification in notes
   // ------------------------------------------------------
 
   public                      visitor<S_time_modification>,
+  public                      visitor<S_actual_notes>,
+  public                      visitor<S_normal_notes>,
+  public                      visitor<S_normal_type>,
+
+  // tempo
+  // ------------------------------------------------------
+
+  public                      visitor<S_metronome_note>,
+
+  // tuplets
+  // ------------------------------------------------------
+
   public                      visitor<S_tuplet>,
+
+  public                      visitor<S_tuplet_actual>,
+  public                      visitor<S_tuplet_normal>,
+  public                      visitor<S_tuplet_number>,
+  public                      visitor<S_tuplet_type>,
+  public                      visitor<S_tuplet_dot>,
 
   // lyrics
   // ------------------------------------------------------
@@ -371,11 +390,35 @@ class EXP mxsr2msrSkeletonBuilder :
     virtual void              visitStart (S_chord& elt);
     virtual void              visitEnd   (S_chord& elt);
 
-    // tuplets
+    // time modifications in notes
     // ------------------------------------------------------
 
     virtual void              visitStart (S_time_modification& elt);
+    virtual void              visitStart (S_actual_notes& elt);
+    virtual void              visitStart (S_normal_notes& elt);
+    virtual void              visitStart (S_normal_type& elt);
+
+  // tempo
+  // ------------------------------------------------------
+
+    virtual void              visitStart (S_metronome_note& elt);
+    virtual void              visitEnd   (S_metronome_note& elt);
+
+    // tuplets
+    // ------------------------------------------------------
+
     virtual void              visitStart (S_tuplet& elt);
+    virtual void              visitEnd   (S_tuplet& elt);
+
+    virtual void              visitStart (S_tuplet_actual& elt);
+    virtual void              visitEnd   (S_tuplet_actual& elt);
+
+    virtual void              visitStart (S_tuplet_normal& elt);
+    virtual void              visitEnd   (S_tuplet_normal& elt);
+
+    virtual void              visitStart (S_tuplet_number& elt);
+    virtual void              visitStart (S_tuplet_type& elt);
+    virtual void              visitStart (S_tuplet_dot& elt);
 
     // lyrics
     // ------------------------------------------------------
@@ -734,15 +777,42 @@ class EXP mxsr2msrSkeletonBuilder :
 
     void                      registerChordEventIfAny ();
 
+  // tempo
+  // ------------------------------------------------------
+
+    // metronome handling
+    // ------------------------------------------------------
+
+//     std::string               fCurrentMetronomeNoteNormalType; // JMI ???
+
+    Bool                      fOnGoingMetronomeNote;
+
     // tuplets handling
     // ------------------------------------------------------
+
+    int                       fCurrentNoteActualNotes;
+    int                       fCurrentNoteNormalNotes;
 
     // nested tuplets are numbered 1, 2, ...
     int                       fCurrentTupletNumber;
 //     int                       fPreviousTupletNumber;
 
+    msrTupletTypeKind         fTupletTypeKind;
+
+    int                       fCurrentTupletActualNumber;
+    std::string               fCurrentTupletActualType;
+    int                       fCurrentTupletActualDotsNumber;
+
+    Bool                      fOnGoingTupletActual;
+
+    int                       fCurrentTupletNormalNumber;
+    std::string               fCurrentTupletNormalType;
+    int                       fCurrentTupletNormalDotsNumber;
+
     Bool                      fCurrentNoteBelongsToATuplet;
     Bool                      fPreviousNoteBelongsToATuplet;
+
+    Bool                      fOnGoingTupletNormal;
 
     // there can be several tuplet begin or end events upon a given note,
     // so we delay their handling to visitEnd (s_note& elt)

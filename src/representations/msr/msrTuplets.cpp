@@ -39,51 +39,24 @@ namespace MusicFormats
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
   int                     tupletNumber,
+  const msrTupletFactor&  tupletFactor,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
   msrTupletTypeKind       tupletTypeKind,
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
-  const msrTupletFactor&  tupletFactor,
-  msrPlacementKind        tupletPlacementKind)
-{
-  return
-    msrTuplet::create (
-      inputLineNumber,
-      gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
-      tupletNumber,
-      tupletBracketKind,
-      tupletLineShapeKind,
-      tupletTypeKind,
-      tupletShowNumberKind,
-      tupletShowTypeKind,
-      tupletFactor,
-      tupletPlacementKind);
-}
-
-S_msrTuplet msrTuplet::create (
-  int                     inputLineNumber,
-  const S_msrMeasure&     upLinkToMeasure,
-  int                     tupletNumber,
-  msrTupletBracketKind    tupletBracketKind,
-  msrTupletLineShapeKind  tupletLineShapeKind,
-  msrTupletTypeKind       tupletTypeKind,
-  msrTupletShowNumberKind tupletShowNumberKind,
-  msrTupletShowTypeKind   tupletShowTypeKind,
-  const msrTupletFactor&  tupletFactor,
   msrPlacementKind        tupletPlacementKind)
 {
   msrTuplet* obj =
     new msrTuplet (
       inputLineNumber,
-      upLinkToMeasure,
       tupletNumber,
+      tupletFactor,
       tupletBracketKind,
       tupletLineShapeKind,
       tupletTypeKind,
       tupletShowNumberKind,
       tupletShowTypeKind,
-      tupletFactor,
       tupletPlacementKind);
   assert (obj != nullptr);
   return obj;
@@ -92,80 +65,26 @@ S_msrTuplet msrTuplet::create (
 msrTuplet::msrTuplet (
   int                     inputLineNumber,
   int                     tupletNumber,
+  const msrTupletFactor&  tupletFactor,
   msrTupletBracketKind    tupletBracketKind,
   msrTupletLineShapeKind  tupletLineShapeKind,
   msrTupletTypeKind       tupletTypeKind,
   msrTupletShowNumberKind tupletShowNumberKind,
   msrTupletShowTypeKind   tupletShowTypeKind,
-  const msrTupletFactor&  tupletFactor,
   msrPlacementKind        tupletPlacementKind)
     : msrTupletElement (
         inputLineNumber)
 {
-  fMeasureElementUpLinkToMeasure = gNullMeasure;
-
   fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN_;
 
   fTupletNumber = tupletNumber;
+  fTupletFactor = tupletFactor;
 
   fTupletBracketKind    = tupletBracketKind;
   fTupletLineShapeKind  = tupletLineShapeKind;
   fTupletTypeKind       = tupletTypeKind;
   fTupletShowNumberKind = tupletShowNumberKind;
   fTupletShowTypeKind   = tupletShowTypeKind;
-
-  fTupletFactor = tupletFactor;
-
-  fTupletPlacementKind = tupletPlacementKind;
-
-  setMeasureElementSoundingWholeNotes (
-    msrWholeNotes (0, 1),
-    "msrTuplet::msrTuplet()");
-
-  fTupletDisplayWholeNotes = msrWholeNotes (0, 1);
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceTupletsBasics ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating tuplet " <<
-      asString ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-}
-
-msrTuplet::msrTuplet (
-  int                     inputLineNumber,
-  const S_msrMeasure&     upLinkToMeasure,
-  int                     tupletNumber,
-  msrTupletBracketKind    tupletBracketKind,
-  msrTupletLineShapeKind  tupletLineShapeKind,
-  msrTupletTypeKind       tupletTypeKind,
-  msrTupletShowNumberKind tupletShowNumberKind,
-  msrTupletShowTypeKind   tupletShowTypeKind,
-  const msrTupletFactor&  tupletFactor,
-  msrPlacementKind        tupletPlacementKind)
-    : msrTupletElement (
-        inputLineNumber)
-{
-  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
-
-  fTupletKind = msrTupletInKind::kTupletIn_UNKNOWN_;
-
-  fTupletNumber = tupletNumber;
-
-  fTupletBracketKind    = tupletBracketKind;
-  fTupletLineShapeKind  = tupletLineShapeKind;
-  fTupletTypeKind       = tupletTypeKind;
-  fTupletShowNumberKind = tupletShowNumberKind;
-  fTupletShowTypeKind   = tupletShowTypeKind;
-
-  fTupletFactor = tupletFactor;
 
   fTupletPlacementKind = tupletPlacementKind;
 
@@ -213,14 +132,13 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
     newbornClone =
       msrTuplet::create (
         fInputLineNumber,
-        gNullMeasure, // set later in setMeasureElementUpLinkToMeasure()
         fTupletNumber,
+        fTupletFactor,
         fTupletBracketKind,
         fTupletLineShapeKind,
         fTupletTypeKind,
         fTupletShowNumberKind,
         fTupletShowTypeKind,
-        fTupletFactor,
         fTupletPlacementKind);
 
 /* JMI ???
