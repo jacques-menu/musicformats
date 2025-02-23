@@ -19872,9 +19872,9 @@ void mxsr2msrSkeletonPopulator::copyNoteGraceNotesGroupsToChord (
 
 //______________________________________________________________________________
 S_msrTuplet mxsr2msrSkeletonPopulator::createATuplet (
-  int                    inputLineNumber,
-  int                    tupletNumber,
-  const msrTupletFactor& tupletFactor)
+  const mfInputLineNumber& inputLineNumber,
+  const mxsrTupletNumber&  tupletNumber,
+  const msrTupletFactor&   tupletFactor)
 {
   // create the tuplet
 #ifdef MF_TRACE_IS_ENABLED
@@ -19887,8 +19887,8 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createATuplet (
   const S_msrTuplet&
     tuplet =
       msrTuplet::create (
-        inputLineNumber,
-        tupletNumber,
+        inputLineNumber.getBareValue (),
+        tupletNumber.getBareValue (),
         tupletFactor,
         fCurrentTupletBracketKind,
         fCurrentTupletLineShapeKind,
@@ -22865,7 +22865,7 @@ void mxsr2msrSkeletonPopulator::handleStaffChangeTakeOffEventIfAny ()
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-    int
+    mxsrNoteSequentialNumber
       noteSequentialNumber =
         fCurrentNoteStaffChangeTakeOff->
           getNoteSequentialNumber ();
@@ -22955,7 +22955,7 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
 //           getNoteEventVoiceNumber ();
 
 #ifdef MF_TRACE_IS_ENABLED
-    int
+    mxsrNoteSequentialNumber
       noteSequentialNumber =
         staffChangeTakeOffEvent->
           getNoteSequentialNumber ();
@@ -23141,7 +23141,7 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-    int
+    mxsrNoteSequentialNumber
       noteSequentialNumber =
         fCurrentNoteGraceBeginEvent->
           getNoteSequentialNumber ();
@@ -23302,7 +23302,7 @@ void mxsr2msrSkeletonPopulator::handleGraceEndEventIfAny ()
 #endif // MF_TRACE_IS_ENABLED
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-    int
+    mxsrNoteSequentialNumber
       noteSequentialNumber =
         fCurrentNoteGraceEndEvent->
           getNoteSequentialNumber ();
@@ -23736,7 +23736,7 @@ void mxsr2msrSkeletonPopulator:: handleTupletEnd (
       S_mxsrTupletEvent
         correspondingTupleBegintEvent =
           fKnownEventsCollection.fetchTupletBeginForTupletNumber (
-            tupletEndEvent->getTupletNumber ());
+            tupletEndEvent->getTupletNumber ().getBareValue ());
 
       fCurrentRecipientMxsrVoice->handleTupletEnd (
         fCurrentNote,

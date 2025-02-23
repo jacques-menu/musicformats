@@ -15,17 +15,20 @@
 #include "exports.h"
 
 #include "mfConstants.h"
-#include "mfTypeWrappers.h"
+#include "mfWrappedRange.h"
+#include "mfWrappedValueForArithmetic.h"
+#include "mfWrappedValueWithDefault.h"
 
-#include "msrNotesDurations.h"
-#include "msrMoments.h"
+// #include "msrNotesDurations.h"
+// #include "msrMoments.h"
 
 
 namespace MusicFormats
 {
 
-//______________________________________________________________________________
 // input line numbers
+//______________________________________________________________________________
+
 using mfInputLineNumber =
   mfWrappedValueWithDefault <
     int,
@@ -35,16 +38,18 @@ using mfInputLineNumber =
     kInputLineNumberDefaultValueString
   >;
 
-//______________________________________________________________________________
 // input location ranges
+//______________________________________________________________________________
+
 using mfInputLocationRange =
-  mfRange <
+  mfWrappedRange <
     mfInputLineNumber,
     kInputLocationRangePrefix
   >;
 
-//______________________________________________________________________________
 // staff numbers
+//______________________________________________________________________________
+
 using mfStaffNumber =
   mfWrappedValueWithDefault <
     int,
@@ -54,8 +59,9 @@ using mfStaffNumber =
     kInputLineNumberDefaultValueString
   >;
 
-//______________________________________________________________________________
 // voice numbers
+//______________________________________________________________________________
+
 using mfVoiceNumber =
   mfWrappedValueWithDefault <
     int,
@@ -65,8 +71,9 @@ using mfVoiceNumber =
     kVoiceNumberDefaultValueString
   >;
 
-//______________________________________________________________________________
 // measure numbers
+//______________________________________________________________________________
+
 using mfMeasureNumber =
   mfWrappedValueWithDefault <
     std::string,
@@ -98,8 +105,9 @@ using mfMoment =
     kMomentDefaultValueString
   >;
 
-//______________________________________________________________________________
 // lyrics
+//______________________________________________________________________________
+
 using mfStanzaNumber =
   mfWrappedValueWithDefault <
     std::string,

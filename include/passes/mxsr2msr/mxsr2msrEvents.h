@@ -23,6 +23,8 @@
 #include "mfBool.h"
 #include "mfIndentedTextOutput.h"
 
+#include "mxsrBasicTypes.h"
+
 #include "msrTupletFactors.h"
 
 
@@ -54,8 +56,8 @@ class EXP mxsrEvent : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mxsrEvent> create (
-                            int               eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 */
 
   public:
@@ -64,8 +66,8 @@ class EXP mxsrEvent : public smartable
     // ------------------------------------------------------
 
                           mxsrEvent (
-                            int               eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrEvent ();
 
@@ -74,7 +76,8 @@ class EXP mxsrEvent : public smartable
     // set and get
     // ------------------------------------------------------
 
-    int                   getEventSequentialNumber () const
+    const mxsrEventSequentialNumber&
+                          getEventSequentialNumber () const
                               { return fEventSequentialNumber; }
 
     const mfInputLineNumber&
@@ -109,7 +112,8 @@ class EXP mxsrEvent : public smartable
 
     // the input line numbers alone cannot be used as unique identifier,
     // since the end of lines are not mandatory in MusicXML data, hence:
-    int                   fEventSequentialNumber;
+    mxsrEventSequentialNumber
+                          fEventSequentialNumber;
 
     mfInputLineNumber     fEventInputLineNumber;
 };
@@ -163,7 +167,7 @@ class EXP mxsrPartEvent : public mxsrEvent
     static SMARTP<mxsrPartEvent> create (
                             const std::string&       partName,
                             const mfMeasureNumber&   measureNumber,
-                            int                      eventSequentialNumber,
+                            const mxsrNoteSequentialNumber& eventSequentialNumber,
                             const mfInputLineNumber& eventInputLineNumber);
 */
 
@@ -175,7 +179,7 @@ class EXP mxsrPartEvent : public mxsrEvent
                           mxsrPartEvent (
                             const std::string&       partName,
                             const mfMeasureNumber&   measureNumber,
-                            int                      eventSequentialNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
                             const mfInputLineNumber& eventInputLineNumber);
 
     virtual               ~mxsrPartEvent ();
@@ -251,8 +255,8 @@ class EXP mxsrMultipleMeasureRestEvent : public mxsrPartEvent
                             const std::string&               partName,
                             const mfMeasureNumber&           measureNumber,
                             int                              multipleMeasureRestNumber,
-                            int                              eventSequentialNumber,
-                            mfInputLineNumber                eventInputLineNumber);
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
 //     static SMARTP<mxsrMultipleMeasureRestEvent>
 //                           createAMultipleMeasureRestEnd (
@@ -271,8 +275,8 @@ class EXP mxsrMultipleMeasureRestEvent : public mxsrPartEvent
                             const std::string&               partName,
                             const mfMeasureNumber&           measureNumber,
                             int                              multipleMeasureRestNumber,
-                            int                              eventSequentialNumber,
-                            mfInputLineNumber                eventInputLineNumber);
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrMultipleMeasureRestEvent ();
 
@@ -350,8 +354,8 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
                             const mfMeasureNumber&     measureNumber,
                             int                        measureRepeatNumber,
                             int                        measureRepeatSlashes,
-                            int                        eventSequentialNumber,
-                            mfInputLineNumber          eventInputLineNumber);
+                            const mxsrEventSequentialNumber&                        eventSequentialNumber,
+                            const mfInputLineNumber&          eventInputLineNumber);
 
 //     static SMARTP<mxsrMeasureRepeatEvent>
 //                           createAMeasureRepeatEnd (
@@ -372,8 +376,8 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
                             const mfMeasureNumber&     measureNumber,
                             int                        measureRepeatNumber,
                             int                        measureRepeatSlashes,
-                            int                        eventSequentialNumber,
-                            mfInputLineNumber          eventInputLineNumber);
+                            const mxsrEventSequentialNumber&                        eventSequentialNumber,
+                            const mfInputLineNumber&          eventInputLineNumber);
 
     virtual               ~mxsrMeasureRepeatEvent ();
 
@@ -435,11 +439,11 @@ class EXP mxsrNoteEvent : public mxsrEvent
     // ------------------------------------------------------
 
     static SMARTP<mxsrNoteEvent> create (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 */
 
   public:
@@ -448,11 +452,11 @@ class EXP mxsrNoteEvent : public mxsrEvent
     // ------------------------------------------------------
 
                           mxsrNoteEvent (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrNoteEvent ();
 
@@ -461,7 +465,8 @@ class EXP mxsrNoteEvent : public mxsrEvent
     // set and get
     // ------------------------------------------------------
 
-    int                   getNoteSequentialNumber () const
+    const mxsrNoteSequentialNumber&
+                         getNoteSequentialNumber () const
                               { return fNoteSequentialNumber; }
 
     const mfStaffNumber&  getNoteStaffNumber () const
@@ -495,7 +500,8 @@ class EXP mxsrNoteEvent : public mxsrEvent
     // protected fields
     // ------------------------------------------------------
 
-    int                   fNoteSequentialNumber;
+    mxsrNoteSequentialNumber
+                          fNoteSequentialNumber;
 
     // the staff and voice numbers of the note upon which the event occurs
     mfStaffNumber         fNoteStaffNumber;
@@ -527,16 +533,16 @@ class EXP mxsrStaffChangeEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
     static SMARTP<mxsrStaffChangeEvent> create (
-                            mxsrStaffChangeEventKind staffChangeEventKind,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfStaffNumber&     takeOffStaffNumber,
-                            const mfInputLineNumber& takeOffInputLineNumber, // superflous ???
-                            const mfStaffNumber&     landingStaffNumber,
-                            const mfInputLineNumber& landingInputLineNumber, // superflous ???
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrStaffChangeEventKind         staffChangeEventKind,
+                            const mxsrNoteSequentialNumber & noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mfStaffNumber&             takeOffStaffNumber,
+                            const mfInputLineNumber&         takeOffInputLineNumber, // superflous ???
+                            const mfStaffNumber&             landingStaffNumber,
+                            const mfInputLineNumber&         landingInputLineNumber, // superflous ???
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
   public:
 
@@ -544,16 +550,16 @@ class EXP mxsrStaffChangeEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
                           mxsrStaffChangeEvent (
-                            mxsrStaffChangeEventKind staffChangeEventKind,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfStaffNumber&     takeOffStaffNumber,
-                            const mfInputLineNumber& takeOffInputLineNumber, // superflous ???
-                            const mfStaffNumber&     landingStaffNumber,
-                            const mfInputLineNumber& landingInputLineNumber, // superflous ???
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrStaffChangeEventKind         staffChangeEventKind,
+                            const mxsrNoteSequentialNumber & noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mfStaffNumber&             takeOffStaffNumber,
+                            const mfInputLineNumber&         takeOffInputLineNumber, // superflous ???
+                            const mfStaffNumber&             landingStaffNumber,
+                            const mfInputLineNumber&         landingInputLineNumber, // superflous ???
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrStaffChangeEvent ();
 
@@ -574,13 +580,15 @@ class EXP mxsrStaffChangeEvent : public mxsrNoteEvent
     const mfStaffNumber&  getTakeOffStaffNumber () const
                               { return fTakeOffStaffNumber; }
 
-    mfInputLineNumber     getTakeOffInputLineNumber () const
+    const mfInputLineNumber&
+                          getTakeOffInputLineNumber () const
                               { return fTakeOffInputLineNumber; }
 
     const mfStaffNumber&  getLandingStaffNumber () const
                               { return fLandingStaffNumber; }
 
-    mfInputLineNumber     getLandingInputLineNumber () const
+    const mfInputLineNumber&
+                          getLandingInputLineNumber () const
                               { return fLandingInputLineNumber; }
 
   public:
@@ -660,12 +668,12 @@ class EXP mxsrGraceEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
     static SMARTP<mxsrGraceEvent> create (
-                            mxsrGraceEventKind       graceEventKind,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrGraceEventKind               graceEventKind,
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
   public:
 
@@ -673,12 +681,12 @@ class EXP mxsrGraceEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
                           mxsrGraceEvent (
-                            mxsrGraceEventKind       graceEventKind,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrGraceEventKind               graceEventKind,
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrGraceEvent ();
 
@@ -746,12 +754,12 @@ class EXP mxsrCueEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
     static SMARTP<mxsrCueEvent> create (
-                            mxsrCueEventKind         cueEventKind,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrCueEventKind                 cueEventKind,
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
   public:
 
@@ -759,12 +767,12 @@ class EXP mxsrCueEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
                           mxsrCueEvent (
-                            mxsrCueEventKind         cueEventKind,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrCueEventKind                 cueEventKind,
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrCueEvent ();
 
@@ -832,12 +840,12 @@ class EXP mxsrChordEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
     static SMARTP<mxsrChordEvent> create (
-                            mxsrChordEventKind       chordEventKind,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrChordEventKind               chordEventKind,
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
   public:
 
@@ -845,12 +853,12 @@ class EXP mxsrChordEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
                           mxsrChordEvent (
-                            mxsrChordEventKind       chordEventKind,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrChordEventKind               chordEventKind,
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrChordEvent ();
 
@@ -917,14 +925,14 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
     static SMARTP<mxsrTupletEvent> create (
-                            mxsrTupletEventKind      tupletEventKind,
-                            int                      tupletNumber,
-                            const msrTupletFactor&   tupletFactor,
-                            int                      tupletNoteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrTupletEventKind              tupletEventKind,
+                            const mxsrTupletNumber&          tupletNumber,
+                            const msrTupletFactor&           tupletFactor,
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
   public:
 
@@ -932,14 +940,14 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     // ------------------------------------------------------
 
                           mxsrTupletEvent (
-                            mxsrTupletEventKind      tupletEventKind,
-                            int                      tupletNumber,
-                            const msrTupletFactor&   tupletFactor,
-                            int                      tupletNoteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            int                      eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            mxsrTupletEventKind              tupletEventKind,
+                            const mxsrTupletNumber&          tupletNumber,
+                            const msrTupletFactor&           tupletFactor,
+                            const mxsrNoteSequentialNumber&  noteSequentialNumber,
+                            const mfStaffNumber&             noteStaffNumber,
+                            const mfVoiceNumber&             noteVoiceNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrTupletEvent ();
 
@@ -951,7 +959,8 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     mxsrTupletEventKind   getTupletEventKind () const
                               { return fTupletEventKind; }
 
-    int                   getTupletNumber () const
+    const mxsrTupletNumber&
+                          getTupletNumber () const
                               { return fTupletNumber; }
 
     const msrTupletFactor&
@@ -990,7 +999,8 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
 
     mxsrTupletEventKind   fTupletEventKind;
 
-    int                   fTupletNumber;
+    const mxsrTupletNumber&
+                          fTupletNumber;
     msrTupletFactor       fTupletFactor;
 };
 
@@ -1023,7 +1033,8 @@ class EXP mxsrEventsCollection : public smartable
     // set and get
     // ------------------------------------------------------
 
-    int                   getCurrentEventSequentialNumber () const
+    const mxsrEventSequentialNumber&
+                          getCurrentEventSequentialNumber () const
                               { return fCurrentEventSequentialNumber; }
 
     // implicit initial forward repeat
@@ -1047,11 +1058,11 @@ class EXP mxsrEventsCollection : public smartable
                               { return fStaffChangeEventsList; }
 
     // grace events
-    const std::map <int, S_mxsrGraceEvent>&
+    const std::map <mxsrNoteSequentialNumber, S_mxsrGraceEvent>&
                           getGraceBeginsMap () const
                               { return fGraceBeginsMap; }
 
-    const std::map <int, S_mxsrGraceEvent>&
+    const std::map <mxsrNoteSequentialNumber, S_mxsrGraceEvent>&
                           getGraceEndsMap () const
                               { return fGraceEndsMap; }
 
@@ -1173,24 +1184,24 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     void                  registerStaffChangeTakeOff (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfStaffNumber&     takeOffStaffNumber,
-                            const mfInputLineNumber& takeOffInputLineNumber,
-                            const mfStaffNumber&     landingStaffNumber,
-                            const mfInputLineNumber& landingInputLineNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfStaffNumber&            takeOffStaffNumber,
+                            const mfInputLineNumber&        takeOffInputLineNumber,
+                            const mfStaffNumber&            landingStaffNumber,
+                            const mfInputLineNumber&        landingInputLineNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     void                  registerStaffChangeLanding (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfStaffNumber&     takeOffStaffNumber,
-                            const mfInputLineNumber& takeOffInputLineNumber,
-                            const mfStaffNumber&     landingStaffNumber,
-                            const mfInputLineNumber& landingInputLineNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfStaffNumber&            takeOffStaffNumber,
+                            const mfInputLineNumber&        takeOffInputLineNumber,
+                            const mfStaffNumber&            landingStaffNumber,
+                            const mfInputLineNumber&        landingInputLineNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     S_mxsrStaffChangeEvent
                           fetchStaffChangeLandingAtNoteSequentialNumber (
@@ -1204,16 +1215,16 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     void                  registerGraceBegin (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     void                  registerGraceEnd (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     S_mxsrGraceEvent      fetchGraceBeginAtNoteSequentialNumber (
                             int noteSequentialNumber) const;
@@ -1225,19 +1236,19 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     S_mxsrCueEvent        createACueBeginEvent (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     void                  registerCueBeginEvent (
                             S_mxsrCueEvent cueBeginEvent);
 
     S_mxsrCueEvent        createACueEndEvent (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     void                  registerCueEndEvent (
                             S_mxsrCueEvent cueEndEvent);
@@ -1252,22 +1263,22 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     S_mxsrChordEvent      createAChordBeginEvent (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     void                  registerChordBeginEvent (
-                            S_mxsrChordEvent chordBeginEvent);
+                            const S_mxsrChordEvent& chordBeginEvent);
 
     S_mxsrChordEvent      createAChordEndEvent (
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     void                  registerChordEndEvent (
-                            S_mxsrChordEvent chordEndEvent);
+                            const S_mxsrChordEvent& chordEndEvent);
 
 
     S_mxsrChordEvent      fetchChordBeginAtNoteSequentialNumber (
@@ -1280,29 +1291,29 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     S_mxsrTupletEvent     createATupletBeginEvent (
-                            int                      tupletNumber,
-                            const msrTupletFactor&   tupletFactor,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrTupletNumber&         tupletNumber,
+                            const msrTupletFactor&          tupletFactor,
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     void                  registerTupletBeginEvent (
                             S_mxsrTupletEvent tupletBeginEvent);
 
     S_mxsrTupletEvent     createATupletEndEvent (
-                            int                      tupletNumber,
-                            const msrTupletFactor&   tupletFactor,
-                            int                      noteSequentialNumber,
-                            const mfStaffNumber&     noteStaffNumber,
-                            const mfVoiceNumber&     noteVoiceNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mxsrTupletNumber&         tupletNumber,
+                            const msrTupletFactor&          tupletFactor,
+                            const mxsrNoteSequentialNumber& noteSequentialNumber,
+                            const mfStaffNumber&            noteStaffNumber,
+                            const mfVoiceNumber&            noteVoiceNumber,
+                            const mfInputLineNumber&        eventInputLineNumber);
 
     void                  registerTupletEndEvent (
                             S_mxsrTupletEvent tupletEndEvent);
 
     S_mxsrTupletEvent     fetchTupletBeginForTupletNumber (
-                            int tupletNumber);
+                            int tupletBareNumber);
 
     void                  fetchTupletBeginsAtNoteSequentialNumber (
                             int                            noteSequentialNumber,
@@ -1361,7 +1372,8 @@ class EXP mxsrEventsCollection : public smartable
     // events sequential numbering
     // ------------------------------------------------------
 
-    int                   fCurrentEventSequentialNumber;
+    mxsrEventSequentialNumber
+                          fCurrentEventSequentialNumber;
 
     // initial repeat bar
     // ------------------------------------------------------
@@ -1402,7 +1414,7 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be two staff changes per note,
-    // hence these two maps, indexed by note sequential number
+    // hence these two maps, indexed by note bare sequential number
     std::map <int, S_mxsrStaffChangeEvent>
                           fStaffChangeTakeOffsMap,
                           fStaffChangeLandingsMap;
@@ -1414,8 +1426,8 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one grace note begin and one chord end per note,
-    // hence these two maps, indexed by note sequential number
-    std::map <int, S_mxsrGraceEvent>
+    // hence these two maps, indexed by note bare sequential number
+    std::map <mxsrNoteSequentialNumber, S_mxsrGraceEvent>
                           fGraceBeginsMap,
                           fGraceEndsMap;
 
@@ -1423,7 +1435,7 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one cue note begin and one chord end per note,
-    // hence these two maps, indexed by note sequential number
+    // hence these two maps, indexed by note bare sequential number
     std::map <int, S_mxsrCueEvent>
                           fCueBeginsMap,
                           fCueEndsMap;
@@ -1432,7 +1444,7 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be only one chord begin and one chord end per note,
-    // hence these two maps, indexed by note sequential number
+    // hence these two maps, indexed by note bare sequential number
     std::map <int, S_mxsrChordEvent>
                           fChordBeginsMap,
                           fChordEndsMap;
@@ -1441,7 +1453,7 @@ class EXP mxsrEventsCollection : public smartable
     // ------------------------------------------------------
 
     // there can be several tuplet start and/or stop events per note,
-    // hence these two multimaps, indexed by note sequential number
+    // hence these two multimaps, indexed by note bare sequential number
     std::multimap <int, S_mxsrTupletEvent>
                           fTupletBeginsMultiMap,
                           fTupletEndsMultiMap;

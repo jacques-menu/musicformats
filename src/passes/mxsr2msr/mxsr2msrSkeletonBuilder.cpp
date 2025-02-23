@@ -46,7 +46,9 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
 	: fResultingEventsCollection (
 			theResultingEventsCollection),
 		fCurrentMeasureInputLineNumber (0),
-		fPreviousMeasureInputLineNumber (0)
+		fPreviousMeasureInputLineNumber (0),
+		fCurrentNoteSequentialNumber (0),
+		fPreviousNoteSequentialNumber (0)
 {
   // the MSR score we're building
   fMsrScore =
@@ -71,10 +73,6 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
 
   fScoreMeasuresNumber = 0;
   fPartNumberOfMeasures = 0;
-
-	// notes handling
-	fCurrentNoteSequentialNumber = 0;
-	fPreviousNoteSequentialNumber = 0;
 
 	fCurrentNoteInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
 
@@ -4772,10 +4770,10 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 		S_mxsrChordEvent
 			chordEndEvent	=
 				fResultingEventsCollection.createAChordEndEvent (
-				fCurrentNoteSequentialNumber,
-				fCurrentNoteStaffNumber,
-				fCurrentNoteVoiceNumber,
-				fCurrentNoteInputLineNumber);
+					fCurrentNoteSequentialNumber,
+					fCurrentNoteStaffNumber,
+					fCurrentNoteVoiceNumber,
+					fCurrentNoteInputLineNumber);
 
 		// register it
 		fResultingEventsCollection.registerChordEndEvent (
@@ -5687,10 +5685,10 @@ void mxsr2msrSkeletonBuilder::registerChordEventIfAny ()
 			S_mxsrChordEvent
 				chordEndEvent	=
 					fResultingEventsCollection.createAChordEndEvent (
-					fPreviousNoteSequentialNumber,
-					fPreviousNoteStaffNumber,
-					fPreviousNoteVoiceNumber,
-					fPreviousNoteInputLineNumber);
+						fPreviousNoteSequentialNumber,
+						fPreviousNoteStaffNumber,
+						fPreviousNoteVoiceNumber,
+						fPreviousNoteInputLineNumber);
 
 			// register it
 			fResultingEventsCollection.registerChordEndEvent (

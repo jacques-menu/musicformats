@@ -1665,9 +1665,9 @@ class EXP mxsr2msrSkeletonPopulator :
 																const std::string& context) const;
 
     S_msrTuplet               createATuplet (
-                                int                    inputLineNumber,
-                                int                    tupletNumber,
-                                const msrTupletFactor& tupletFactor);
+                                const mfInputLineNumber& inputLineNumber,
+                                const mxsrTupletNumber&  tupletNumber,
+                                const msrTupletFactor&   tupletFactor);
 
     void                      handleTupletBeginEventsIfAny ();
 

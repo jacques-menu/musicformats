@@ -117,8 +117,8 @@ std::string mfMeasureNumberAsString (std::string measureNumber)
   return result;
 }
 
-//______________________________________________________________________________
 // whole notes durations
+//______________________________________________________________________________
 
 const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = -1;
 
@@ -131,6 +131,7 @@ const std::string
 
 // moments
 //______________________________________________________________________________
+
 const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_ =
   msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 

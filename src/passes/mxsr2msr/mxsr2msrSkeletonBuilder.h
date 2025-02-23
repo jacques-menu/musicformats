@@ -713,8 +713,8 @@ class EXP mxsr2msrSkeletonBuilder :
     // notes handling
     // ------------------------------------------------------
 
-		int	                      fCurrentNoteSequentialNumber;
-		int	                      fPreviousNoteSequentialNumber;
+		mxsrNoteSequentialNumber	fCurrentNoteSequentialNumber;
+		mxsrNoteSequentialNumber	fPreviousNoteSequentialNumber;
 
 		mfInputLineNumber	        fCurrentNoteInputLineNumber;
 

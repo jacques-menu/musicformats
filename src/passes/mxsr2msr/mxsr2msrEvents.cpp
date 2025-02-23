@@ -30,8 +30,8 @@ namespace MusicFormats
 //________________________________________________________________________
 /* this class is purely virtual
 S_mxsrEvent mxsrEvent::create (
-  int               eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrEvent* obj =
     new mxsrEvent (
@@ -42,15 +42,13 @@ S_mxsrEvent mxsrEvent::create (
 */
 
 mxsrEvent::mxsrEvent (
-  int               eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
-    : fEventInputLineNumber (
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
+    : fEventSequentialNumber (
+        eventSequentialNumber),
+      fEventInputLineNumber (
         eventInputLineNumber)
-{
-  fEventSequentialNumber = eventSequentialNumber;
-
-//   fEventInputLineNumber = eventInputLineNumber;
-}
+{}
 
 mxsrEvent::~mxsrEvent ()
 {}
@@ -146,7 +144,7 @@ mxsr-Event mxsrPartEvent::create (
 mxsrPartEvent::mxsrPartEvent (
   const std::string&       partName,
   const mfMeasureNumber&   measureNumber,
-  int                      eventSequentialNumber,
+  const mxsrEventSequentialNumber&                      eventSequentialNumber,
   const mfInputLineNumber& eventInputLineNumber)
   : mxsrEvent (
       eventSequentialNumber,
@@ -194,8 +192,8 @@ S_mxsrMultipleMeasureRestEvent mxsrMultipleMeasureRestEvent::create (
   const std::string&               partName,
   const mfMeasureNumber&           measureNumber,
   int                              multipleMeasureRestNumber,
-  int                              eventSequentialNumber,
-  mfInputLineNumber                eventInputLineNumber)
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrMultipleMeasureRestEvent* obj =
     new mxsrMultipleMeasureRestEvent (
@@ -215,6 +213,11 @@ S_mxsrMultipleMeasureRestEvent mxsrMultipleMeasureRestEvent::create (
 //   int                      multipleMeasureRestNumber,
 //   const mfInputLineNumber& eventInputLineNumber)
 // {
+//   ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+//
 //   S_mxsrMultipleMeasureRestEvent
 //     multipleMeasureRestEndEvent =
 //       mxsrMultipleMeasureRestEvent::create (
@@ -222,7 +225,7 @@ S_mxsrMultipleMeasureRestEvent mxsrMultipleMeasureRestEvent::create (
 //         partName,
 //         measureNumber,
 //         multipleMeasureRestNumber,
-//         ++fCurrentEventSequentialNumber,
+//         fCurrentEventSequentialNumber,
 //         eventInputLineNumber);
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -248,8 +251,8 @@ mxsrMultipleMeasureRestEvent::mxsrMultipleMeasureRestEvent (
   const std::string&               partName,
   const mfMeasureNumber&           measureNumber,
   int                              multipleMeasureRestNumber,
-  int                              eventSequentialNumber,
-  mfInputLineNumber                eventInputLineNumber)
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
   : mxsrPartEvent (
       partName,
       measureNumber,
@@ -377,8 +380,8 @@ S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
   const mfMeasureNumber&     measureNumber,
   int                        measureRepeatNumber,
   int                        measureRepeatSlashes,
-  int                        eventSequentialNumber,
-  mfInputLineNumber          eventInputLineNumber)
+  const mxsrEventSequentialNumber&                        eventSequentialNumber,
+  const mfInputLineNumber&          eventInputLineNumber)
 {
   mxsrMeasureRepeatEvent* obj =
     new mxsrMeasureRepeatEvent (
@@ -398,8 +401,13 @@ S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
 //   const mfMeasureNumber&   measureNumber,
 //   int                      measureRepeatNumber,
 //   int                      measureRepeatSlashes,
-//   const mfInputLineNumber& eventInputLineNumber)
+//   const const mfInputLineNumber&& eventInputLineNumber)
 // {
+//   ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+//
 //   S_mxsrMeasureRepeatEvent
 //     measureRepeatEndEvent =
 //       mxsrMeasureRepeatEvent::create (
@@ -407,7 +415,7 @@ S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
 //         partName,
 //         measureNumber,
 //         measureRepeatSlashes,
-//         ++fCurrentEventSequentialNumber,
+//         fCurrentEventSequentialNumber,
 //         eventInputLineNumber);
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -434,8 +442,8 @@ mxsrMeasureRepeatEvent::mxsrMeasureRepeatEvent (
   const mfMeasureNumber&     measureNumber,
   int                        measureRepeatNumber,
   int                        measureRepeatSlashes,
-  int                        eventSequentialNumber,
-  mfInputLineNumber          eventInputLineNumber)
+  const mxsrEventSequentialNumber&                        eventSequentialNumber,
+  const mfInputLineNumber&          eventInputLineNumber)
   : mxsrPartEvent (
       partName,
       measureNumber,
@@ -534,11 +542,11 @@ std::ostream& operator << (std::ostream& os, const mxsrMeasureRepeatEvent& elt)
 //________________________________________________________________________
 /* this class is purely virtual
 mxsrNoteEvent mxsrNoteEvent::create (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrNoteEvent* obj =
     new mxsrNoteEvent (
@@ -552,18 +560,20 @@ mxsrNoteEvent mxsrNoteEvent::create (
 }
 */
 
+
+
 mxsrNoteEvent::mxsrNoteEvent (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
     : mxsrEvent (
         eventSequentialNumber,
-        eventInputLineNumber)
+        eventInputLineNumber),
+      fNoteSequentialNumber (
+        noteSequentialNumber)
 {
-  fNoteSequentialNumber = noteSequentialNumber;
-
   fNoteStaffNumber = noteStaffNumber;
   fNoteVoiceNumber = noteVoiceNumber;
 }
@@ -600,16 +610,16 @@ std::ostream& operator << (std::ostream& os, const mxsrStaffChangeEventKind& elt
 
 //________________________________________________________________________
 S_mxsrStaffChangeEvent mxsrStaffChangeEvent::create (
-  mxsrStaffChangeEventKind staffChangeEventKind,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfStaffNumber&     takeOffStaffNumber,
-  const mfInputLineNumber& takeOffInputLineNumber, // superflous ???
-  const mfStaffNumber&     landingStaffNumber,
-  const mfInputLineNumber& landingInputLineNumber, // superflous ???
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrStaffChangeEventKind         staffChangeEventKind,
+  const mxsrNoteSequentialNumber & noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mfStaffNumber&             takeOffStaffNumber,
+  const mfInputLineNumber&         takeOffInputLineNumber, // superflous ???
+  const mfStaffNumber&             landingStaffNumber,
+  const mfInputLineNumber&         landingInputLineNumber, // superflous ???
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrStaffChangeEvent* obj =
     new mxsrStaffChangeEvent (
@@ -628,16 +638,16 @@ S_mxsrStaffChangeEvent mxsrStaffChangeEvent::create (
 }
 
 mxsrStaffChangeEvent::mxsrStaffChangeEvent (
-  mxsrStaffChangeEventKind staffChangeEventKind,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfStaffNumber&     takeOffStaffNumber,
-  const mfInputLineNumber& takeOffInputLineNumber, // superflous ???
-  const mfStaffNumber&     landingStaffNumber,
-  const mfInputLineNumber& landingInputLineNumber, // superflous ???
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrStaffChangeEventKind         staffChangeEventKind,
+  const mxsrNoteSequentialNumber & noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mfStaffNumber&             takeOffStaffNumber,
+  const mfInputLineNumber&         takeOffInputLineNumber, // superflous ???
+  const mfStaffNumber&             landingStaffNumber,
+  const mfInputLineNumber&         landingInputLineNumber, // superflous ???
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
   : mxsrNoteEvent (
       noteSequentialNumber,
       noteStaffNumber,
@@ -816,12 +826,12 @@ std::ostream& operator << (std::ostream& os, const mxsrGraceEventKind& elt)
 
 //________________________________________________________________________
 S_mxsrGraceEvent mxsrGraceEvent::create (
-  mxsrGraceEventKind       graceEventKind,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrGraceEventKind               graceEventKind,
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrGraceEvent* obj =
     new mxsrGraceEvent (
@@ -836,12 +846,12 @@ S_mxsrGraceEvent mxsrGraceEvent::create (
 }
 
 mxsrGraceEvent::mxsrGraceEvent (
-  mxsrGraceEventKind       graceEventKind,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrGraceEventKind               graceEventKind,
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
   : mxsrNoteEvent (
       noteSequentialNumber,
       noteStaffNumber,
@@ -963,12 +973,12 @@ std::ostream& operator << (std::ostream& os, const mxsrCueEventKind& elt)
 
 //________________________________________________________________________
 S_mxsrCueEvent mxsrCueEvent::create (
-  mxsrCueEventKind         cueEventKind,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrCueEventKind                 cueEventKind,
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrCueEvent* obj =
     new mxsrCueEvent (
@@ -983,12 +993,12 @@ S_mxsrCueEvent mxsrCueEvent::create (
 }
 
 mxsrCueEvent::mxsrCueEvent (
-  mxsrCueEventKind         cueEventKind,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrCueEventKind                 cueEventKind,
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
   : mxsrNoteEvent (
       noteSequentialNumber,
       noteStaffNumber,
@@ -1110,12 +1120,12 @@ std::ostream& operator << (std::ostream& os, const mxsrChordEventKind& elt)
 
 //________________________________________________________________________
 S_mxsrChordEvent mxsrChordEvent::create (
-  mxsrChordEventKind       chordEventKind,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrChordEventKind               chordEventKind,
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrChordEvent* obj =
     new mxsrChordEvent (
@@ -1130,12 +1140,12 @@ S_mxsrChordEvent mxsrChordEvent::create (
 }
 
 mxsrChordEvent::mxsrChordEvent (
-  mxsrChordEventKind       chordEventKind,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrChordEventKind               chordEventKind,
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
   : mxsrNoteEvent (
       noteSequentialNumber,
       noteStaffNumber,
@@ -1257,21 +1267,21 @@ std::ostream& operator << (std::ostream& os, const mxsrTupletEventKind& elt)
 
 //________________________________________________________________________
 S_mxsrTupletEvent mxsrTupletEvent::create (
-  mxsrTupletEventKind      tupletEventKind,
-  int                      tupletNumber,
-  const msrTupletFactor&   tupletFactor,
-  int                      tupletNoteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrTupletEventKind              tupletEventKind,
+  const mxsrTupletNumber&          tupletNumber,
+  const msrTupletFactor&           tupletFactor,
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrTupletEvent* obj =
     new mxsrTupletEvent (
       tupletEventKind,
       tupletNumber,
       tupletFactor,
-      tupletNoteSequentialNumber,
+      noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
       eventSequentialNumber,
@@ -1281,25 +1291,26 @@ S_mxsrTupletEvent mxsrTupletEvent::create (
 }
 
 mxsrTupletEvent::mxsrTupletEvent (
-  mxsrTupletEventKind      tupletEventKind,
-  int                      tupletNumber,
-  const msrTupletFactor&   tupletFactor,
-  int                      tupletNoteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  mxsrTupletEventKind              tupletEventKind,
+  const mxsrTupletNumber&          tupletNumber,
+  const msrTupletFactor&           tupletFactor,
+  const mxsrNoteSequentialNumber&  noteSequentialNumber,
+  const mfStaffNumber&             noteStaffNumber,
+  const mfVoiceNumber&             noteVoiceNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
   : mxsrNoteEvent (
-      tupletNoteSequentialNumber,
+      noteSequentialNumber,
       noteStaffNumber,
       noteVoiceNumber,
       eventSequentialNumber,
-      eventInputLineNumber)
+      eventInputLineNumber),
+    fTupletNumber (
+      tupletNumber),
+    fTupletFactor (
+      tupletFactor)
 {
   fTupletEventKind = tupletEventKind;
-
-  fTupletNumber = tupletNumber;
-  fTupletFactor = tupletFactor;
 }
 
 mxsrTupletEvent::~mxsrTupletEvent ()
@@ -1312,15 +1323,15 @@ std::string mxsrTupletEvent::asShortString () const
   ss <<
     "[TupletEvent" <<
     ", fTupletEventKind: " << fTupletEventKind <<
-    ", fTupletNumber: tuplet_" << fTupletNumber <<
+    ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor:" << fTupletFactor <<
     ", fEventInputLineNumber: " << fEventInputLineNumber <<
 
-    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteSequentialNumber: " << fNoteSequentialNumber <<
     ", fNoteStaffNumber: " << fNoteStaffNumber <<
     ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
 
-    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
+    ", fEventSequentialNumber: " << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -1346,7 +1357,7 @@ void mxsrTupletEvent::print (std::ostream& os) const
     "fTupletEventKind" << ": " << fTupletEventKind <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fTupletNumber" << ": tuplet_" << fTupletNumber <<
+    "fTupletNumber" << ": " << fTupletNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fTupletFactor" << ": " << fTupletFactor <<
@@ -1356,7 +1367,7 @@ void mxsrTupletEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
+    "fNoteSequentialNumber" << ": " << fNoteSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fNoteStaffNumber" << ": " << fNoteStaffNumber <<
@@ -1366,7 +1377,7 @@ void mxsrTupletEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
+    "fEventSequentialNumber" << ": " << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -1402,9 +1413,8 @@ S_mxsrEventsCollection mxsrEventsCollection::create ()
 }
 
 mxsrEventsCollection::mxsrEventsCollection ()
-{
-  fCurrentEventSequentialNumber = 0;
-}
+  : fCurrentEventSequentialNumber (0)
+{}
 
 mxsrEventsCollection::~mxsrEventsCollection ()
 {}
@@ -1416,6 +1426,11 @@ S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::createAMultipleMeasureRestB
   int                      multipleMeasureRestNumber,
   const mfInputLineNumber& eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrMultipleMeasureRestEvent
     multipleMeasureRestBeginEvent =
       mxsrMultipleMeasureRestEvent::create (
@@ -1423,7 +1438,7 @@ S_mxsrMultipleMeasureRestEvent mxsrEventsCollection::createAMultipleMeasureRestB
         partName,
         measureNumber,
         multipleMeasureRestNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1464,7 +1479,7 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
 
   fMultipleMeasureRestBeginsMap.insert (
     std::make_pair (
-      multipleMeasureRestBeginEvent->getMeasureNumber (),
+      multipleMeasureRestBeginEvent->getMeasureNumber ().getBareValue (),
       multipleMeasureRestBeginEvent));
 
   fAllEventsList.push_back (multipleMeasureRestBeginEvent);
@@ -1477,6 +1492,11 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
 //   int                      multipleMeasureRestNumber,
 //   const mfInputLineNumber& eventInputLineNumber)
 // {
+//   ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+//
 //   S_mxsrMultipleMeasureRestEvent
 //     multipleMeasureRestEndEvent =
 //       mxsrMultipleMeasureRestEvent::create (
@@ -1484,7 +1504,7 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
 //         partName,
 //         measureNumber,
 //         multipleMeasureRestNumber,
-//         ++fCurrentEventSequentialNumber,
+//         fCurrentEventSequentialNumber,
 //         eventInputLineNumber);
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -1525,7 +1545,7 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
 //
 //   fMultipleMeasureRestEndsMap.insert (
 //     std::make_pair (
-//       multipleMeasureRestEndEvent->getMeasureNumber (),
+//       multipleMeasureRestEndEvent->getMeasureNumber ().getBareValue (),
 //       multipleMeasureRestEndEvent));
 //
 //   fAllEventsList.push_back (multipleMeasureRestEndEvent);
@@ -1537,6 +1557,11 @@ void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
   int                      multipleMeasureRestNumber,
   const mfInputLineNumber& eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrMultipleMeasureRestEvent
     multipleMeasureRestEndEvent =
       mxsrMultipleMeasureRestEvent::create (
@@ -1544,7 +1569,7 @@ void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
         partName,
         measureNumber,
         multipleMeasureRestNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1579,7 +1604,7 @@ void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
 
   fMultipleMeasureRestEndsMap.insert (
     std::make_pair (
-      multipleMeasureRestEndEvent->getMeasureNumber (),
+      multipleMeasureRestEndEvent->getMeasureNumber ().getBareValue (),
       multipleMeasureRestEndEvent));
 
   fAllEventsList.push_back (multipleMeasureRestEndEvent);
@@ -1593,6 +1618,11 @@ S_mxsrMeasureRepeatEvent mxsrEventsCollection::createAMeasureRepeatBegin (
   int                      measureRepeatSlashes,
   const mfInputLineNumber& eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrMeasureRepeatEvent
     measureRepeatBeginEvent =
       mxsrMeasureRepeatEvent::create (
@@ -1601,7 +1631,7 @@ S_mxsrMeasureRepeatEvent mxsrEventsCollection::createAMeasureRepeatBegin (
         measureNumber,
         measureRepeatNumber,
         measureRepeatSlashes,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1642,7 +1672,7 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 
   fMeasureRepeatBeginsMap.insert (
     std::make_pair (
-      measureRepeatBeginEvent->getMeasureNumber (),
+      measureRepeatBeginEvent->getMeasureNumber ().getBareValue (),
       measureRepeatBeginEvent));
 
   fAllEventsList.push_back (measureRepeatBeginEvent);
@@ -1655,6 +1685,11 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 //   int                      measureRepeatSlashes,
 //   const mfInputLineNumber& eventInputLineNumber)
 // {
+//   ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+//
 //   S_mxsrMeasureRepeatEvent
 //     measureRepeatEndEvent =
 //       mxsrMeasureRepeatEvent::create (
@@ -1662,7 +1697,7 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 //         partName,
 //         measureNumber,
 //         measureRepeatSlashes,
-//         ++fCurrentEventSequentialNumber,
+//         fCurrentEventSequentialNumber,
 //         eventInputLineNumber);
 //
 // #ifdef MF_TRACE_IS_ENABLED
@@ -1703,7 +1738,7 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 //
 //   fMeasureRepeatEndsMap.insert (
 //     std::make_pair (
-//       measureRepeatEndEvent->getMeasureNumber (),
+//       measureRepeatEndEvent->getMeasureNumber ().getBareValue (),
 //       measureRepeatEndEvent));
 //
 //   fAllEventsList.push_back (measureRepeatEndEvent);
@@ -1716,6 +1751,11 @@ void mxsrEventsCollection::createAMeasureRepeatEndAndRegisterIt (
   int                      measureRepeatSlashes,
   const mfInputLineNumber& eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrMeasureRepeatEvent
     measureRepeatEndEvent =
       mxsrMeasureRepeatEvent::create (
@@ -1724,7 +1764,7 @@ void mxsrEventsCollection::createAMeasureRepeatEndAndRegisterIt (
         measureNumber,
         measureRepeatNumber,
         measureRepeatSlashes,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1759,7 +1799,7 @@ void mxsrEventsCollection::createAMeasureRepeatEndAndRegisterIt (
 
   fMeasureRepeatEndsMap.insert (
     std::make_pair (
-      measureRepeatEndEvent->getMeasureNumber (),
+      measureRepeatEndEvent->getMeasureNumber ().getBareValue (),
       measureRepeatEndEvent));
 
   fAllEventsList.push_back (measureRepeatEndEvent);
@@ -1767,15 +1807,20 @@ void mxsrEventsCollection::createAMeasureRepeatEndAndRegisterIt (
 
 //________________________________________________________________________
 void mxsrEventsCollection::registerStaffChangeTakeOff (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfStaffNumber&     takeOffStaffNumber,
-  const mfInputLineNumber& takeOffInputLineNumber,
-  const mfStaffNumber&     landingStaffNumber,
-  const mfInputLineNumber& landingInputLineNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfStaffNumber&            takeOffStaffNumber,
+  const mfInputLineNumber&        takeOffInputLineNumber,
+  const mfStaffNumber&            landingStaffNumber,
+  const mfInputLineNumber&        landingInputLineNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrStaffChangeEvent
     staffChangeEvent =
       mxsrStaffChangeEvent::create (
@@ -1787,7 +1832,7 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
         takeOffInputLineNumber,
         landingStaffNumber,
         landingInputLineNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1807,7 +1852,7 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
 
   fStaffChangeTakeOffsMap.insert (
     std::make_pair (
-      noteSequentialNumber,
+      noteSequentialNumber.getBareValue (),
       staffChangeEvent));
 
   fStaffChangeEventsList.push_back (staffChangeEvent);
@@ -1816,15 +1861,20 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
 }
 
 void mxsrEventsCollection::registerStaffChangeLanding (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfStaffNumber&     takeOffStaffNumber,
-  const mfInputLineNumber& takeOffInputLineNumber,
-  const mfStaffNumber&     landingStaffNumber,
-  const mfInputLineNumber& landingInputLineNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfStaffNumber&            takeOffStaffNumber,
+  const mfInputLineNumber&        takeOffInputLineNumber,
+  const mfStaffNumber&            landingStaffNumber,
+  const mfInputLineNumber&        landingInputLineNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrStaffChangeEvent
     staffChangeEvent =
       mxsrStaffChangeEvent::create (
@@ -1836,7 +1886,7 @@ void mxsrEventsCollection::registerStaffChangeLanding (
         takeOffInputLineNumber,
         landingStaffNumber,
         landingInputLineNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1856,7 +1906,7 @@ void mxsrEventsCollection::registerStaffChangeLanding (
 
   fStaffChangeLandingsMap.insert (
     std::make_pair (
-      noteSequentialNumber,
+      noteSequentialNumber.getBareValue (),
       staffChangeEvent));
 
   fStaffChangeEventsList.push_back (staffChangeEvent);
@@ -1866,11 +1916,16 @@ void mxsrEventsCollection::registerStaffChangeLanding (
 
 //________________________________________________________________________
 void mxsrEventsCollection::registerGraceBegin (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrGraceEvent
     graceEvent =
       mxsrGraceEvent::create (
@@ -1878,7 +1933,7 @@ void mxsrEventsCollection::registerGraceBegin (
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1905,11 +1960,16 @@ void mxsrEventsCollection::registerGraceBegin (
 }
 
 void mxsrEventsCollection::registerGraceEnd (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrGraceEvent
     graceEvent =
       mxsrGraceEvent::create (
@@ -1917,7 +1977,7 @@ void mxsrEventsCollection::registerGraceEnd (
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1945,11 +2005,16 @@ void mxsrEventsCollection::registerGraceEnd (
 
 //________________________________________________________________________
 S_mxsrCueEvent mxsrEventsCollection::createACueBeginEvent (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrCueEvent
     cueEvent =
       mxsrCueEvent::create (
@@ -1957,7 +2022,7 @@ S_mxsrCueEvent mxsrEventsCollection::createACueBeginEvent (
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1998,18 +2063,23 @@ void mxsrEventsCollection::registerCueBeginEvent (
 
   fCueBeginsMap.insert (
     std::make_pair (
-      cueBeginEvent->getNoteSequentialNumber (),
+      cueBeginEvent->getNoteSequentialNumber ().getBareValue (),
       cueBeginEvent));
 
   fAllEventsList.push_back (cueBeginEvent);
 }
 
 S_mxsrCueEvent mxsrEventsCollection::createACueEndEvent (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrCueEvent
     cueEvent =
       mxsrCueEvent::create (
@@ -2017,7 +2087,7 @@ S_mxsrCueEvent mxsrEventsCollection::createACueEndEvent (
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2058,7 +2128,7 @@ void mxsrEventsCollection::registerCueEndEvent (
 
   fCueEndsMap.insert (
     std::make_pair (
-      cueEndEvent->getNoteSequentialNumber (),
+      cueEndEvent->getNoteSequentialNumber ().getBareValue (),
       cueEndEvent));
 
   fAllEventsList.push_back (cueEndEvent);
@@ -2066,11 +2136,16 @@ void mxsrEventsCollection::registerCueEndEvent (
 
 //________________________________________________________________________
 S_mxsrChordEvent mxsrEventsCollection::createAChordBeginEvent (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrChordEvent
     chordEvent =
       mxsrChordEvent::create (
@@ -2078,7 +2153,7 @@ S_mxsrChordEvent mxsrEventsCollection::createAChordBeginEvent (
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2100,7 +2175,7 @@ S_mxsrChordEvent mxsrEventsCollection::createAChordBeginEvent (
 }
 
 void mxsrEventsCollection::registerChordBeginEvent (
-  S_mxsrChordEvent chordBeginEvent)
+  const S_mxsrChordEvent& chordBeginEvent)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
@@ -2119,18 +2194,23 @@ void mxsrEventsCollection::registerChordBeginEvent (
 
   fChordBeginsMap.insert (
     std::make_pair (
-      chordBeginEvent->getNoteSequentialNumber (),
+      chordBeginEvent->getNoteSequentialNumber ().getBareValue (),
       chordBeginEvent));
 
   fAllEventsList.push_back (chordBeginEvent);
 }
 
 S_mxsrChordEvent mxsrEventsCollection::createAChordEndEvent (
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrChordEvent
     chordEvent =
       mxsrChordEvent::create (
@@ -2138,7 +2218,7 @@ S_mxsrChordEvent mxsrEventsCollection::createAChordEndEvent (
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2160,7 +2240,7 @@ S_mxsrChordEvent mxsrEventsCollection::createAChordEndEvent (
 }
 
 void mxsrEventsCollection::registerChordEndEvent (
-  S_mxsrChordEvent chordEndEvent)
+  const S_mxsrChordEvent& chordEndEvent)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceChordsBasics ()) {
@@ -2179,7 +2259,7 @@ void mxsrEventsCollection::registerChordEndEvent (
 
   fChordEndsMap.insert (
     std::make_pair (
-      chordEndEvent->getNoteSequentialNumber (),
+      chordEndEvent->getNoteSequentialNumber ().getBareValue (),
       chordEndEvent));
 
   fAllEventsList.push_back (chordEndEvent);
@@ -2187,13 +2267,18 @@ void mxsrEventsCollection::registerChordEndEvent (
 
 //________________________________________________________________________
 S_mxsrTupletEvent mxsrEventsCollection::createATupletBeginEvent (
-  int                      tupletNumber,
-  const msrTupletFactor&   tupletFactor,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrTupletNumber&         tupletNumber,
+  const msrTupletFactor&          tupletFactor,
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrTupletEvent
     tupletEvent =
       mxsrTupletEvent::create (
@@ -2203,7 +2288,7 @@ S_mxsrTupletEvent mxsrEventsCollection::createATupletBeginEvent (
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2225,13 +2310,18 @@ S_mxsrTupletEvent mxsrEventsCollection::createATupletBeginEvent (
 }
 
 S_mxsrTupletEvent mxsrEventsCollection::createATupletEndEvent (
-  int                      tupletNumber,
-  const msrTupletFactor&   tupletFactor,
-  int                      noteSequentialNumber,
-  const mfStaffNumber&     noteStaffNumber,
-  const mfVoiceNumber&     noteVoiceNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const mxsrTupletNumber&         tupletNumber,
+  const msrTupletFactor&          tupletFactor,
+  const mxsrNoteSequentialNumber& noteSequentialNumber,
+  const mfStaffNumber&            noteStaffNumber,
+  const mfVoiceNumber&            noteVoiceNumber,
+  const mfInputLineNumber&        eventInputLineNumber)
 {
+  ++fCurrentEventSequentialNumber;
+    // cannot pass this as an argument to craate,
+    // since it is an instance of a template type
+    // do we do it beforehand
+
   S_mxsrTupletEvent
     tupletEvent =
       mxsrTupletEvent::create (
@@ -2241,7 +2331,7 @@ S_mxsrTupletEvent mxsrEventsCollection::createATupletEndEvent (
         noteSequentialNumber,
         noteStaffNumber,
         noteVoiceNumber,
-        ++fCurrentEventSequentialNumber,
+        fCurrentEventSequentialNumber,
         eventInputLineNumber);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2282,12 +2372,12 @@ void mxsrEventsCollection::registerTupletBeginEvent (
 
   fTupletBeginsMultiMap.insert (
     std::make_pair (
-      tupletBeginEvent->getNoteSequentialNumber (),
+      tupletBeginEvent->getNoteSequentialNumber ().getBareValue (),
       tupletBeginEvent));
 
   fTupletBeginNumbersMap.insert (
     std::make_pair (
-      tupletBeginEvent->getTupletNumber (),
+      tupletBeginEvent->getTupletNumber ().getBareValue (),
       tupletBeginEvent));
 
   fAllEventsList.push_back (tupletBeginEvent);
@@ -2313,12 +2403,12 @@ void mxsrEventsCollection::registerTupletEndEvent (
 
   fTupletEndsMultiMap.insert (
     std::make_pair (
-      tupletEndEvent->getNoteSequentialNumber (),
+      tupletEndEvent->getNoteSequentialNumber ().getBareValue (),
       tupletEndEvent));
 
   fTupletEndNumbersMap.insert (
     std::make_pair (
-      tupletEndEvent->getTupletNumber (),
+      tupletEndEvent->getTupletNumber ().getBareValue (),
       tupletEndEvent));
 
   fAllEventsList.push_back (tupletEndEvent);
@@ -2455,7 +2545,7 @@ S_mxsrGraceEvent mxsrEventsCollection::fetchGraceBeginAtNoteSequentialNumber (
 {
   S_mxsrGraceEvent result;
 
-  std::map <int, S_mxsrGraceEvent>::const_iterator it;
+  std::map <mxsrNoteSequentialNumber, S_mxsrGraceEvent>::const_iterator it;
 
   it = fGraceBeginsMap.find (noteSequentialNumber);
 
@@ -2471,7 +2561,7 @@ S_mxsrGraceEvent mxsrEventsCollection::fetchGraceEndAtNoteSequentialNumber (
 {
   S_mxsrGraceEvent result;
 
-  std::map <int, S_mxsrGraceEvent>::const_iterator it;
+  std::map <mxsrNoteSequentialNumber, S_mxsrGraceEvent>::const_iterator it;
 
   it = fGraceEndsMap.find (noteSequentialNumber);
 
@@ -2550,17 +2640,17 @@ S_mxsrChordEvent mxsrEventsCollection::fetchChordEndAtNoteSequentialNumber (
 
 //________________________________________________________________________
 S_mxsrTupletEvent mxsrEventsCollection::fetchTupletBeginForTupletNumber (
-  int tupletNumber)
+  int tupletBareNumber)
 {
   S_mxsrTupletEvent result;
 
-  result = fTupletBeginNumbersMap [tupletNumber];
+  result = fTupletBeginNumbersMap [tupletBareNumber];
 
 //   for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletBeginsMultiMap) {
 //     S_mxsrTupletEvent
 //       tupletBeginEvent = thePair.second;
 //
-//     if (tupletBeginEvent->tupletEventIsForTupletNumber (tupletNumber)) {
+//     if (tupletBeginEvent->tupletEventIsFortupletBareNumber (tupletBareNumber)) {
 //       result = tupletBeginEvent;
 //       break;
 //     }
@@ -2916,12 +3006,13 @@ void mxsrEventsCollection::printStaffChangeEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrStaffChangeEvent> thePair : fStaffChangeTakeOffsMap) {
     int
-      eventSequentialNumber = thePair.first;
+      eventBareSequentialNumber = thePair.first;
+
     S_mxsrStaffChangeEvent
       staffChangeEvent = thePair.second;
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -2949,12 +3040,13 @@ void mxsrEventsCollection::printStaffChangeEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrStaffChangeEvent> thePair : fStaffChangeLandingsMap) {
     int
-      eventSequentialNumber = thePair.first;
+      eventBareSequentialNumber = thePair.first;
+
     S_mxsrStaffChangeEvent
       staffChangeEvent = thePair.second;
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -2982,15 +3074,15 @@ void mxsrEventsCollection::printGraceEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrGraceEvent> thePair : fGraceBeginsMap) {
-    int
-      eventSequentialNumber = thePair.first;
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrGraceEvent> thePair : fGraceBeginsMap) {
+    mxsrNoteSequentialNumber
+      eventBareSequentialNumber = thePair.first;
 
     S_mxsrGraceEvent
       graceEvent = thePair.second;
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -3016,15 +3108,15 @@ void mxsrEventsCollection::printGraceEvents (std::ostream& os) const
 
   ++gIndenter;
 
-  for (std::pair <int, S_mxsrGraceEvent> thePair : fGraceEndsMap) {
-    int
-      eventSequentialNumber = thePair.first;
+  for (std::pair <mxsrNoteSequentialNumber, S_mxsrGraceEvent> thePair : fGraceEndsMap) {
+    mxsrNoteSequentialNumber
+      eventBareSequentialNumber = thePair.first;
 
     S_mxsrGraceEvent
       graceEvent = thePair.second;
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -3036,7 +3128,6 @@ void mxsrEventsCollection::printGraceEvents (std::ostream& os) const
   } // for
 
   --gIndenter;
-
 }
 
 //------------------------------------------------------------------------
@@ -3055,13 +3146,13 @@ void mxsrEventsCollection::printCueEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrCueEvent> thePair : fCueBeginsMap) {
     int
-      eventSequentialNumber = thePair.first;
+      eventBareSequentialNumber = thePair.first;
 
     S_mxsrCueEvent
       cueEvent = thePair.second;
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -3089,13 +3180,13 @@ void mxsrEventsCollection::printCueEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrCueEvent> thePair : fCueEndsMap) {
     int
-      eventSequentialNumber = thePair.first;
+      eventBareSequentialNumber = thePair.first;
 
     S_mxsrCueEvent
       cueEvent = thePair.second;
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -3126,13 +3217,13 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrChordEvent> thePair : fChordBeginsMap) {
     int
-      eventSequentialNumber = thePair.first;
+      eventBareSequentialNumber = thePair.first;
 
     S_mxsrChordEvent
       chordEvent = thePair.second;
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -3160,13 +3251,13 @@ void mxsrEventsCollection::printChordEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrChordEvent> thePair : fChordEndsMap) {
     int
-      eventSequentialNumber = thePair.first;
+      eventBareSequentialNumber = thePair.first;
 
     S_mxsrChordEvent
       chordEvent = thePair.second;
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -3200,10 +3291,11 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
       tupletEvent = thePair.second;
 
     int
-      eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
+      eventBareSequentialNumber =
+        tupletEvent->getEventSequentialNumber ().getBareValue ();
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -3234,10 +3326,11 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
       tupletEvent = thePair.second;
 
     int
-      eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
+      eventBareSequentialNumber =
+        tupletEvent->getEventSequentialNumber ().getBareValue ();
 
     os <<
-      "Note " << eventSequentialNumber <<
+      "Note " << eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
@@ -3263,13 +3356,13 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
   for (std::pair <int, S_mxsrTupletEvent> thePair : fTupletBeginNumbersMap) {
     int
-      tupletNumber = thePair.first;
+      tupletBareNumber = thePair.first;
 
     S_mxsrTupletEvent
       tupletEvent = thePair.second;
 
     os <<
-      "Tuplet begin event " << tupletNumber <<
+      "Tuplet begin event " << tupletBareNumber <<
       ':' <<
       std::endl;
 
@@ -3305,10 +3398,10 @@ void mxsrEventsCollection::printTupletEventsList (
 
   for (S_mxsrTupletEvent tupletEvent : tupletEventsList) {
     int
-      eventSequentialNumber = tupletEvent->getEventSequentialNumber ();
+      eventBareSequentialNumber = tupletEvent->getEventSequentialNumber ().getBareValue ();
 
     os <<
-      "Note " <<  eventSequentialNumber <<
+      "Note " <<  eventBareSequentialNumber <<
       ':' <<
       std::endl;
 
