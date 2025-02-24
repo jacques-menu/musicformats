@@ -24,7 +24,7 @@ const int
   K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE = 0;
 
 const std::string K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING =
-  "note 0 (default_value)";
+  "note_seq_num_0 (default_value)";
 
 const std::string
   K_MXSR_NOTE_SEQUENTIAL_NUMBER_PREFIX (
@@ -52,7 +52,7 @@ const int
 
 const std::string
   K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING (
-    "event 0 (default_value)");
+    "event_seq_num_0 (default_value)");
 
 const std::string
   K_MXSR_EVENT_SEQUENTIAL_NUMBER_PREFIX (
@@ -80,11 +80,11 @@ const int
 
 const std::string
   K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING (
-  "tuplet 0 (default_value)");
+  "tuplet_num_0 (default_value)");
 
 const std::string
   K_MXSR_TUPLET_NUMBER_PREFIX (
-    "tuplet__seq_num_");
+    "tuplet_num_");
 
 std::string mfTupletSequentialNumberAsString (int tupletSequentialNumber)
 {

@@ -280,7 +280,7 @@ std::string mxsrMultipleMeasureRestEvent::asShortString () const
     ", fMeasureNumber: " << fMeasureNumber <<
     ", fMultipleMeasureRestNumber: " << fMultipleMeasureRestNumber <<
 
-    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
+    ", fEventSequentialNumber: " << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -320,7 +320,7 @@ void mxsrMultipleMeasureRestEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
+    "fEventSequentialNumber" << ": " << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -513,7 +513,7 @@ void mxsrMeasureRepeatEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
+    "fEventSequentialNumber" << ": " << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -702,14 +702,14 @@ std::string mxsrStaffChangeEvent::asShortString () const
 
     ", fTakeOffInputLineNumber: " << fTakeOffInputLineNumber <<
     ", fLandingInputLineNumber: " << fLandingInputLineNumber <<
-    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteSequentialNumber: " << fNoteSequentialNumber <<
     ", fNoteStaffNumber: " << fNoteStaffNumber <<
     ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
     ", staff number change: " <<
     fTakeOffStaffNumber << " ->> " << fLandingStaffNumber <<
     ", fLandingInputLineNumber: " << fLandingInputLineNumber <<
 
-    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
+    ", fEventSequentialNumber: " << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -746,7 +746,7 @@ void mxsrStaffChangeEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
+    "fNoteSequentialNumber" << ": " << fNoteSequentialNumber <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -771,7 +771,7 @@ void mxsrStaffChangeEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
+    "fEventSequentialNumber" << ": " << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -874,11 +874,11 @@ std::string mxsrGraceEvent::asShortString () const
     ", fGraceEventKind: " << fGraceEventKind <<
     ", fEventInputLineNumber: " << fEventInputLineNumber <<
 
-    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteSequentialNumber: " << fNoteSequentialNumber <<
     ", fNoteStaffNumber: " << fNoteStaffNumber <<
     ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
 
-    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
+    ", fEventSequentialNumber: " << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -908,7 +908,7 @@ void mxsrGraceEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
+    "fNoteSequentialNumber" << ": " << fNoteSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fNoteStaffNumber" << ": " << fNoteStaffNumber <<
@@ -918,7 +918,7 @@ void mxsrGraceEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
+    "fEventSequentialNumber" << ": " << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -1021,11 +1021,11 @@ std::string mxsrCueEvent::asShortString () const
     ", fCueEventKind: " << fCueEventKind <<
     ", fEventInputLineNumber: " << fEventInputLineNumber <<
 
-    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteSequentialNumber: " << fNoteSequentialNumber <<
     ", fNoteStaffNumber: " << fNoteStaffNumber <<
     ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
 
-    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
+    ", fEventSequentialNumber: " << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -1055,7 +1055,7 @@ void mxsrCueEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
+    "fNoteSequentialNumber" << ": " << fNoteSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fNoteStaffNumber" << ": S" << fNoteStaffNumber <<
@@ -1065,7 +1065,7 @@ void mxsrCueEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
+    "fEventSequentialNumber" << ": " << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -1168,11 +1168,11 @@ std::string mxsrChordEvent::asShortString () const
     ", fChordEventKind: " << fChordEventKind <<
     ", fEventInputLineNumber: " << fEventInputLineNumber <<
 
-    ", fNoteSequentialNumber: note_" << fNoteSequentialNumber <<
+    ", fNoteSequentialNumber: " << fNoteSequentialNumber <<
     ", fNoteStaffNumber: " << fNoteStaffNumber <<
     ", fNoteVoiceNumber: " << fNoteVoiceNumber <<
 
-    ", fEventSequentialNumber: event_" << fEventSequentialNumber <<
+    ", fEventSequentialNumber: " << fEventSequentialNumber <<
     ']';
 
   return ss.str ();
@@ -1202,7 +1202,7 @@ void mxsrChordEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fNoteSequentialNumber" << ": note_" << fNoteSequentialNumber <<
+    "fNoteSequentialNumber" << ": " << fNoteSequentialNumber <<
     std::endl <<
     std::setw (fieldWidth) <<
     "fNoteStaffNumber" << ": " << fNoteStaffNumber <<
@@ -1212,7 +1212,7 @@ void mxsrChordEvent::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fEventSequentialNumber" << ": event_" << fEventSequentialNumber <<
+    "fEventSequentialNumber" << ": " << fEventSequentialNumber <<
     std::endl;
 
   --gIndenter;
@@ -1413,8 +1413,6 @@ S_mxsrEventsCollection mxsrEventsCollection::create ()
 }
 
 mxsrEventsCollection::mxsrEventsCollection ()
-//   : fCurrentEventSequentialNumber (
-//       K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE)
 {}
 
 mxsrEventsCollection::~mxsrEventsCollection ()

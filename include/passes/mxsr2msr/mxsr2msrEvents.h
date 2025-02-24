@@ -1010,8 +1010,7 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
 
     mxsrTupletEventKind   fTupletEventKind;
 
-    const mxsrTupletNumber&
-                          fTupletNumber;
+    mxsrTupletNumber      fTupletNumber;
     msrTupletFactor       fTupletFactor;
 };
 
