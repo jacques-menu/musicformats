@@ -20,12 +20,15 @@ namespace MusicFormats
 // note sequential numbers
 //______________________________________________________________________________
 
+const int
+  K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE = 0;
+
 const std::string K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING =
   "note 0 (default_value)";
 
 const std::string
-  kNoteSequentialNumberPrefix             ("note_seq_num_"),
-  kNoteSequentialNumberDefaultValueString ("note 0 *default_value*");
+  K_MXSR_NOTE_SEQUENTIAL_NUMBER_PREFIX (
+    "note_seq_num_");
 
 std::string mfNoteSequentialNumberAsString (int noteSequentialNumber)
 {
@@ -44,12 +47,16 @@ std::string mfNoteSequentialNumberAsString (int noteSequentialNumber)
 // events sequential numbers
 //______________________________________________________________________________
 
-const std::string K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING =
-  "event 0 (default_value)";
+const int
+  K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE = 0;
 
 const std::string
-  kEventSequentialNumberPrefix             ("event_seq_num_"),
-  kEventSequentialNumberDefaultValueString ("event 0 *default_value*");
+  K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING (
+    "event 0 (default_value)");
+
+const std::string
+  K_MXSR_EVENT_SEQUENTIAL_NUMBER_PREFIX (
+    "event_seq_num_");
 
 std::string mfEventSequentialNumberAsString (int eventSequentialNumber)
 {
@@ -68,12 +75,16 @@ std::string mfEventSequentialNumberAsString (int eventSequentialNumber)
 // tuplets numbers
 //______________________________________________________________________________
 
-const std::string K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING =
-  "tuplet 0 (default_value)";
+const int
+  K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE = 0;
 
 const std::string
-  kTupletNumberPrefix             ("tuplet__seq_num_"),
-  kTupletNumberDefaultValueString ("tuplet 0 *default_value*");
+  K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING (
+  "tuplet 0 (default_value)");
+
+const std::string
+  K_MXSR_TUPLET_NUMBER_PREFIX (
+    "tuplet__seq_num_");
 
 std::string mfTupletSequentialNumberAsString (int tupletSequentialNumber)
 {
