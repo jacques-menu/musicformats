@@ -4657,11 +4657,19 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 // 			fResultingEventsCollection.registerMultipleMeasureRestEnd (
 // 				multipleMeasureRestEndEvent);
 
+			std::string
+				partName =
+					fCurrentPart->getPartName ();
+
+			mfInputLineNumber
+				inputLineNumber =
+					elt->getInputLineNumber ();
+
 			fResultingEventsCollection.createAMultipleMeasureRestEndAndRegisterIt (
-				fCurrentPart->getPartName (),
+				partName,
 				fCurrentMeasureNumber,
 				fCurrentMultipleMeasureRestNumber,
-				elt->getInputLineNumber ());
+				inputLineNumber);
 
 			fOnGoingMultipleMeasureRest = false;
 		}
@@ -4721,8 +4729,16 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 // 					fResultingEventsCollection.registerMeasureRepeatEnd (
 // 						multipleMeasureResEndEvent);
 
+			std::string
+				partName =
+					fCurrentPart->getPartName ();
+
+			mfInputLineNumber
+				inputLineNumber =
+					elt->getInputLineNumber ();
+
 					fResultingEventsCollection.createAMeasureRepeatEndAndRegisterIt (
-						fCurrentPart->getPartName (),
+						partName,
 						fPreviousMeasureNumber,
 						fCurrentMeasureRepeatNumber,
 						fCurrentMeasureRepeatSlashes,
