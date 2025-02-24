@@ -27,41 +27,41 @@ namespace MusicFormats
 // notes sequential numbers
 //______________________________________________________________________________
 
-// using mxsrNoteSequentialNumber = int;
-using mxsrNoteSequentialNumber =
-  mfWrappedValueForArithmetic <
-    int,
-    K_MXSR_NOTE_SEQUENTIAL_NUMBER_PREFIX,
-    K_MF_EMPTY_STRING,
-    K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE,
-    K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING
-  >;
+using mxsrNoteSequentialNumber = int;
+// using mxsrNoteSequentialNumber =
+//   mfWrappedValueForArithmetic <
+//     int,
+//     K_MXSR_NOTE_SEQUENTIAL_NUMBER_PREFIX,
+//     K_MF_EMPTY_STRING,
+//     K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE,
+//     K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING
+//   >;
 
 // events sequential numbers
 //______________________________________________________________________________
 
-// using mxsrEventSequentialNumber = int;
-using mxsrEventSequentialNumber =
-  mfWrappedValueForArithmetic <
-    int,
-    K_MXSR_EVENT_SEQUENTIAL_NUMBER_PREFIX,
-    K_MF_EMPTY_STRING,
-    K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE,
-    K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING
-  >;
+using mxsrEventSequentialNumber = int;
+// using mxsrEventSequentialNumber =
+//   mfWrappedValueForArithmetic <
+//     int,
+//     K_MXSR_EVENT_SEQUENTIAL_NUMBER_PREFIX,
+//     K_MF_EMPTY_STRING,
+//     K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE,
+//     K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING
+//   >;
 
 // tuplets numbers
 //______________________________________________________________________________
 
-// using mxsrTupletNumber = int;
-using mxsrTupletNumber =
-  mfWrappedValueForArithmetic <
-    int,
-    K_MXSR_TUPLET_NUMBER_PREFIX,
-    K_MF_EMPTY_STRING,
-    K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE,
-    K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING
-  >;
+using mxsrTupletNumber = int;
+// using mxsrTupletNumber =
+//   mfWrappedValueForArithmetic <
+//     int,
+//     K_MXSR_TUPLET_NUMBER_PREFIX,
+//     K_MF_EMPTY_STRING,
+//     K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE,
+//     K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING
+//   >;
 
 
 }
