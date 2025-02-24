@@ -17,11 +17,13 @@
 #include <list>
 #include <map>
 
+#include "exports.h"
 #include "smartpointer.h"
 
 #include "mfBasicTypes.h"
 #include "mfBool.h"
 #include "mfIndentedTextOutput.h"
+#include "mfWrappedValueForArithmetic.h"
 
 #include "mxsrBasicTypes.h"
 
@@ -55,7 +57,8 @@ class EXP mxsrEvent : public smartable
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrEvent> create (
+    static SMARTP<mxsrEvent>
+                          create (
                             const mxsrEventSequentialNumber& eventSequentialNumber,
                             const mfInputLineNumber&         eventInputLineNumber);
 */
@@ -164,7 +167,8 @@ class EXP mxsrPartEvent : public mxsrEvent
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrPartEvent> create (
+    static SMARTP<mxsrPartEvent>
+                          create (
                             const std::string&       partName,
                             const mfMeasureNumber&   measureNumber,
                             const mxsrNoteSequentialNumber& eventSequentialNumber,
@@ -348,7 +352,8 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrMeasureRepeatEvent> create (
+    static SMARTP<mxsrMeasureRepeatEvent>
+                          create (
                             mxsrMeasureRepeatEventKind measureRepeatEventKind,
                             const std::string&         partName,
                             const mfMeasureNumber&     measureNumber,
@@ -438,7 +443,8 @@ class EXP mxsrNoteEvent : public mxsrEvent
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrNoteEvent> create (
+    static SMARTP<mxsrNoteEvent>
+                          create (
                             const mxsrNoteSequentialNumber&  noteSequentialNumber,
                             const mfStaffNumber&             noteStaffNumber,
                             const mfVoiceNumber&             noteVoiceNumber,
@@ -532,7 +538,8 @@ class EXP mxsrStaffChangeEvent : public mxsrNoteEvent
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrStaffChangeEvent> create (
+    static SMARTP<mxsrStaffChangeEvent>
+                          create (
                             mxsrStaffChangeEventKind         staffChangeEventKind,
                             const mxsrNoteSequentialNumber & noteSequentialNumber,
                             const mfStaffNumber&             noteStaffNumber,
@@ -667,7 +674,8 @@ class EXP mxsrGraceEvent : public mxsrNoteEvent
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrGraceEvent> create (
+    static SMARTP<mxsrGraceEvent>
+                          create (
                             mxsrGraceEventKind               graceEventKind,
                             const mxsrNoteSequentialNumber&  noteSequentialNumber,
                             const mfStaffNumber&             noteStaffNumber,
@@ -753,7 +761,8 @@ class EXP mxsrCueEvent : public mxsrNoteEvent
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrCueEvent> create (
+    static SMARTP<mxsrCueEvent>
+                          create (
                             mxsrCueEventKind                 cueEventKind,
                             const mxsrNoteSequentialNumber&  noteSequentialNumber,
                             const mfStaffNumber&             noteStaffNumber,
@@ -839,7 +848,8 @@ class EXP mxsrChordEvent : public mxsrNoteEvent
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrChordEvent> create (
+    static SMARTP<mxsrChordEvent>
+                          create (
                             mxsrChordEventKind               chordEventKind,
                             const mxsrNoteSequentialNumber&  noteSequentialNumber,
                             const mfStaffNumber&             noteStaffNumber,
@@ -924,7 +934,8 @@ class EXP mxsrTupletEvent : public mxsrNoteEvent
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrTupletEvent> create (
+    static SMARTP<mxsrTupletEvent>
+                          create (
                             mxsrTupletEventKind              tupletEventKind,
                             const mxsrTupletNumber&          tupletNumber,
                             const msrTupletFactor&           tupletFactor,
@@ -1011,13 +1022,15 @@ EXP std::ostream& operator << (std::ostream& os, const mxsrTupletEvent& elt);
 
 //------------------------------------------------------------------------
 class EXP mxsrEventsCollection : public smartable
+// class mxsrEventsCollection : public smartable
 {
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<mxsrEventsCollection> create ();
+    static SMARTP<mxsrEventsCollection>
+                          create ();
 
   public:
 
@@ -1469,6 +1482,7 @@ using S_mxsrEventsCollection = SMARTP<mxsrEventsCollection>;
 
 EXP std::ostream& operator << (std::ostream& os, const S_mxsrEventsCollection& elt);
 EXP std::ostream& operator << (std::ostream& os, const mxsrEventsCollection& elt);
+
 
 }
 

@@ -1413,7 +1413,8 @@ S_mxsrEventsCollection mxsrEventsCollection::create ()
 }
 
 mxsrEventsCollection::mxsrEventsCollection ()
-  : fCurrentEventSequentialNumber (0)
+//   : fCurrentEventSequentialNumber (
+//       K_MXSR_EVENT_SEQUENTIAL_NUMBER_DEFAULT_VALUE)
 {}
 
 mxsrEventsCollection::~mxsrEventsCollection ()
@@ -1852,7 +1853,8 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
 
   fStaffChangeTakeOffsMap.insert (
     std::make_pair (
-      noteSequentialNumber.getBareValue (),
+//       noteSequentialNumber.getBareValue (),
+      noteSequentialNumber,
       staffChangeEvent));
 
   fStaffChangeEventsList.push_back (staffChangeEvent);
@@ -1906,7 +1908,8 @@ void mxsrEventsCollection::registerStaffChangeLanding (
 
   fStaffChangeLandingsMap.insert (
     std::make_pair (
-      noteSequentialNumber.getBareValue (),
+//       noteSequentialNumber.getBareValue (),
+      noteSequentialNumber,
       staffChangeEvent));
 
   fStaffChangeEventsList.push_back (staffChangeEvent);
@@ -2063,7 +2066,8 @@ void mxsrEventsCollection::registerCueBeginEvent (
 
   fCueBeginsMap.insert (
     std::make_pair (
-      cueBeginEvent->getNoteSequentialNumber ().getBareValue (),
+//       cueBeginEvent->getNoteSequentialNumber ().getBareValue (),
+      cueBeginEvent->getNoteSequentialNumber (),
       cueBeginEvent));
 
   fAllEventsList.push_back (cueBeginEvent);
@@ -2128,7 +2132,8 @@ void mxsrEventsCollection::registerCueEndEvent (
 
   fCueEndsMap.insert (
     std::make_pair (
-      cueEndEvent->getNoteSequentialNumber ().getBareValue (),
+//       cueEndEvent->getNoteSequentialNumber ().getBareValue (),
+      cueEndEvent->getNoteSequentialNumber (),
       cueEndEvent));
 
   fAllEventsList.push_back (cueEndEvent);
@@ -2194,13 +2199,14 @@ void mxsrEventsCollection::registerChordBeginEvent (
 
   fChordBeginsMap.insert (
     std::make_pair (
-      chordBeginEvent->getNoteSequentialNumber ().getBareValue (),
+//       cueEndEchordBeginEventvent->getNoteSequentialNumber ().getBareValue (),
+      chordBeginEvent->getNoteSequentialNumber (),
       chordBeginEvent));
 
   fAllEventsList.push_back (chordBeginEvent);
 }
 
-S_mxsrChordEvent mxsrEventsCollection::createAChordEndEvent (
+EXP S_mxsrChordEvent mxsrEventsCollection::createAChordEndEvent (
   const mxsrNoteSequentialNumber& noteSequentialNumber,
   const mfStaffNumber&            noteStaffNumber,
   const mfVoiceNumber&            noteVoiceNumber,
@@ -2259,7 +2265,8 @@ void mxsrEventsCollection::registerChordEndEvent (
 
   fChordEndsMap.insert (
     std::make_pair (
-      chordEndEvent->getNoteSequentialNumber ().getBareValue (),
+//       chordEndEvent->getNoteSequentialNumber ().getBareValue (),
+      chordEndEvent->getNoteSequentialNumber (),
       chordEndEvent));
 
   fAllEventsList.push_back (chordEndEvent);
@@ -2372,12 +2379,14 @@ void mxsrEventsCollection::registerTupletBeginEvent (
 
   fTupletBeginsMultiMap.insert (
     std::make_pair (
-      tupletBeginEvent->getNoteSequentialNumber ().getBareValue (),
+//       tupletBeginEvent->getNoteSequentialNumber ().getBareValue (),
+      tupletBeginEvent->getNoteSequentialNumber (),
       tupletBeginEvent));
 
   fTupletBeginNumbersMap.insert (
     std::make_pair (
-      tupletBeginEvent->getTupletNumber ().getBareValue (),
+//       tupletBeginEvent->getTupletNumber ().getBareValue (),
+      tupletBeginEvent->getTupletNumber (),
       tupletBeginEvent));
 
   fAllEventsList.push_back (tupletBeginEvent);
@@ -2403,12 +2412,14 @@ void mxsrEventsCollection::registerTupletEndEvent (
 
   fTupletEndsMultiMap.insert (
     std::make_pair (
-      tupletEndEvent->getNoteSequentialNumber ().getBareValue (),
+//       tupletEndEvent->getNoteSequentialNumber ().getBareValue (),
+      tupletEndEvent->getNoteSequentialNumber (),
       tupletEndEvent));
 
   fTupletEndNumbersMap.insert (
     std::make_pair (
-      tupletEndEvent->getTupletNumber ().getBareValue (),
+//       tupletEndEvent->getTupletNumber ().getBareValue (),
+      tupletEndEvent->getTupletNumber (),
       tupletEndEvent));
 
   fAllEventsList.push_back (tupletEndEvent);
@@ -3290,9 +3301,10 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
     S_mxsrTupletEvent
       tupletEvent = thePair.second;
 
-    int
+    mxsrEventSequentialNumber
       eventBareSequentialNumber =
-        tupletEvent->getEventSequentialNumber ().getBareValue ();
+//         tupletEvent->getEventSequentialNumber ().getBareValue ();
+        tupletEvent->getEventSequentialNumber ();
 
     os <<
       "Note " << eventBareSequentialNumber <<
@@ -3325,9 +3337,10 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
     S_mxsrTupletEvent
       tupletEvent = thePair.second;
 
-    int
+    mxsrEventSequentialNumber
       eventBareSequentialNumber =
-        tupletEvent->getEventSequentialNumber ().getBareValue ();
+//         tupletEvent->getEventSequentialNumber ().getBareValue ();
+        tupletEvent->getEventSequentialNumber ();
 
     os <<
       "Note " << eventBareSequentialNumber <<
@@ -3397,8 +3410,10 @@ void mxsrEventsCollection::printTupletEventsList (
   ++gIndenter;
 
   for (S_mxsrTupletEvent tupletEvent : tupletEventsList) {
-    int
-      eventBareSequentialNumber = tupletEvent->getEventSequentialNumber ().getBareValue ();
+    mxsrEventSequentialNumber
+      eventBareSequentialNumber =
+//         tupletEvent->getEventSequentialNumber ().getBareValue ();
+        tupletEvent->getEventSequentialNumber ();
 
     os <<
       "Note " <<  eventBareSequentialNumber <<

@@ -34,14 +34,19 @@ template <
   const T&           neutralValue,
   const std::string& neutralValueString
 >
-class EXP mfWrappedValueForArithmetic
+class mfWrappedValueForArithmetic
 {
   public:
 
-    // constructors/destructor
+    // constructors
     // ------------------------------------------------------
 
                           mfWrappedValueForArithmetic (T bareValue);
+
+                          mfWrappedValueForArithmetic ();
+
+    // destructor
+    // ------------------------------------------------------
 
     virtual               ~mfWrappedValueForArithmetic ();
 
@@ -206,7 +211,7 @@ class EXP mfWrappedValueForArithmetic
     std::string           fPrintPostfix;
 };
 
-// constructor
+// constructors
 // ------------------------------------------------------
 
 template <
@@ -224,6 +229,24 @@ mfWrappedValueForArithmetic <
   neutralValueString
 >::mfWrappedValueForArithmetic (T bareValue)
   : fBareValue (bareValue),
+    fPrintPrefix (printPrefix)
+{}
+
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
+>::mfWrappedValueForArithmetic ()
+  : fBareValue (neutralValue),
     fPrintPrefix (printPrefix)
 {}
 

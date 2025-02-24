@@ -38,12 +38,15 @@ class EXP mfWrappedValueWithDefault
 {
   public:
 
-    // constructors/destructor
+    // constructors
     // ------------------------------------------------------
+
+                          mfWrappedValueWithDefault (T bareValue);
 
                           mfWrappedValueWithDefault ();
 
-                          mfWrappedValueWithDefault (T bareValue);
+    // destructor
+    // ------------------------------------------------------
 
     virtual               ~mfWrappedValueWithDefault ();
 
@@ -171,11 +174,11 @@ mfWrappedValueWithDefault <
   printPostfix,
   neutralValue,
   neutralValueString
->::mfWrappedValueWithDefault ()
-  : fBareValue (neutralValue),
-      fPrintPrefix (printPrefix),
-      fDefaultValue (neutralValue),
-      fDefaultValueString (neutralValueString)
+>::mfWrappedValueWithDefault (T bareValue)
+  : fBareValue (bareValue),
+    fPrintPrefix (printPrefix),
+    fDefaultValue (neutralValue),
+    fDefaultValueString (neutralValueString)
 {}
 
 template <
@@ -191,11 +194,11 @@ mfWrappedValueWithDefault <
   printPostfix,
   neutralValue,
   neutralValueString
->::mfWrappedValueWithDefault (T bareValue)
-  : fBareValue (bareValue),
-    fPrintPrefix (printPrefix),
-    fDefaultValue (neutralValue),
-    fDefaultValueString (neutralValueString)
+>::mfWrappedValueWithDefault ()
+  : fBareValue (neutralValue),
+      fPrintPrefix (printPrefix),
+      fDefaultValue (neutralValue),
+      fDefaultValueString (neutralValueString)
 {}
 
 // destructor

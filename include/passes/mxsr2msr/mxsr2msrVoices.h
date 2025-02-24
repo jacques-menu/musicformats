@@ -31,7 +31,8 @@ class mxsrVoice : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mxsrVoice> create (
+    static SMARTP<mxsrVoice>
+                          create (
                             const S_msrVoice& voice);
 
   protected:

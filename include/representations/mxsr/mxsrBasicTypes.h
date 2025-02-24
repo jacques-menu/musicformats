@@ -14,6 +14,7 @@
 
 #include "exports.h"
 
+// #include "mfBasicTypes.h"
 #include "mfConstants.h"
 #include "mfWrappedValueForArithmetic.h"
 
@@ -26,18 +27,20 @@ namespace MusicFormats
 // notes sequential numbers
 //______________________________________________________________________________
 
-using mxsrNoteSequentialNumber =
-  mfWrappedValueForArithmetic <
-    int,
-    kNoteSequentialNumberPrefix,
-    K_MF_EMPTY_STRING,
-    K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE,
-    K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING
-  >;
+using mxsrNoteSequentialNumber = int;
+// using mxsrNoteSequentialNumber = // has internal linkage but is not defined [-Wundefined-internal]
+//   mfWrappedValueForArithmetic <
+//     int,
+//     kNoteSequentialNumberPrefix,
+//     K_MF_EMPTY_STRING,
+//     K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE,
+//     K_MXSR_NOTE_SEQUENTIAL_NUMBER_DEFAULT_VALUE_STRING
+//   >;
 
 // events sequential numbers
 //______________________________________________________________________________
 
+// using mxsrEventSequentialNumber = int;
 using mxsrEventSequentialNumber =
   mfWrappedValueForArithmetic <
     int,
@@ -50,14 +53,15 @@ using mxsrEventSequentialNumber =
 // tuplets numbers
 //______________________________________________________________________________
 
-using mxsrTupletNumber =
-  mfWrappedValueForArithmetic <
-    int,
-    kTupletNumberPrefix,
-    K_MF_EMPTY_STRING,
-    K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE,
-    K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING
-  >;
+using mxsrTupletNumber = int;
+// using mxsrTupletNumber = // has internal linkage but is not defined
+//   mfWrappedValueForArithmetic <
+//     int,
+//     kTupletNumberPrefix,
+//     K_MF_EMPTY_STRING,
+//     K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE,
+//     K_MXSR_TUPLET_NUMBER_DEFAULT_VALUE_STRING
+//   >;
 
 
 }

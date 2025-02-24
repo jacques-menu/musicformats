@@ -36,10 +36,13 @@ class EXP mfWrappedValue
 {
   public:
 
-    // constructors/destructor
+    // constructor
     // ------------------------------------------------------
 
                           mfWrappedValue (T bareValue);
+
+    // destructor
+    // ------------------------------------------------------
 
     virtual               ~mfWrappedValue ();
 
@@ -58,9 +61,6 @@ class EXP mfWrappedValue
                               { return fPrintPostfix; }
 
   public:
-
-    // operators
-    // ------------------------------------------------------
 
     // conversion  operators T ()
     // ------------------------------------------------------

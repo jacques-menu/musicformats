@@ -19888,7 +19888,9 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createATuplet (
     tuplet =
       msrTuplet::create (
         inputLineNumber.getBareValue (),
-        tupletNumber.getBareValue (),
+//         inputLineNumber,
+//         tupletNumber.getBareValue (),
+        tupletNumber,
         tupletFactor,
         fCurrentTupletBracketKind,
         fCurrentTupletLineShapeKind,
@@ -23736,7 +23738,8 @@ void mxsr2msrSkeletonPopulator:: handleTupletEnd (
       S_mxsrTupletEvent
         correspondingTupleBegintEvent =
           fKnownEventsCollection.fetchTupletBeginForTupletNumber (
-            tupletEndEvent->getTupletNumber ().getBareValue ());
+//             tupletEndEvent->getTupletNumber ().getBareValue ());
+            tupletEndEvent->getTupletNumber ());
 
       fCurrentRecipientMxsrVoice->handleTupletEnd (
         fCurrentNote,
