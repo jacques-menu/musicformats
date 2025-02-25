@@ -38,7 +38,7 @@ LIBMUSICFORMATS_GIT=${HOME}/musicformats-git-dev
 VERSION_DATE=$1
 
 if [[ ${VERSION_DATE} == "today" ]]; then
-  VERSION_DATE=$(date +"%B %d, %Y")
+  VERSION_DATE=$(date +"%B %d, %Y - %H:%M:%S")
 fi
 
 echo "==> VERSION_DATE : ${VERSION_DATE}"
