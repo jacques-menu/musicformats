@@ -42,12 +42,12 @@ jobs:
       - name: Compile user guide
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: MusicFormatsUserGuide.tex
           working_directory: ./documentation/mfuserguide
+          root_file: MusicformatsUserGuide.tex
 
       - name: Upload user guide
         uses: actions/upload-artifact@v4
         with:
           name: musicformats-documentation-artifact
-          path: ./documentation/fmfuserguide/MusicFormatsUserGuide.pdf
+          path: ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
           retention-days: 1
