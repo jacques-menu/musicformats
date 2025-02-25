@@ -46,7 +46,7 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
   to switch the use of these types on and off easily
 */
 
-#define MF_USE_WRAPPED_TYPES
+// #define MF_USE_WRAPPED_TYPES
 
 
 // input line numbers
@@ -118,7 +118,7 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
 //______________________________________________________________________________
 
 #ifndef MF_USE_WRAPPED_TYPES
-  using mfMeasureNumber = int;
+  using mfMeasureNumber = std::string;
 #else
   using mfMeasureNumber =
     mfWrappedValueWithDefault <
@@ -135,7 +135,7 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
 // whole notes durations
 
 #ifndef MF_USE_WRAPPED_TYPES
-  using mfWholeNotes = int;
+  using mfWholeNotes = msrWholeNotes;
 #else
   using mfWholeNotes =
     mfWrappedValueWithDefault <
@@ -152,7 +152,7 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
 //______________________________________________________________________________
 
 #ifndef MF_USE_WRAPPED_TYPES
-  using mfMoment = int;
+  using mfMoment = msrMoment;
 #else
   using mfMoment =
     mfWrappedValueWithDefault <
@@ -169,7 +169,7 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
 //______________________________________________________________________________
 
 #ifndef MF_USE_WRAPPED_TYPES
-  using mfStanzaNumber = int;
+  using mfStanzaNumber = std::string;
 #else
   using mfStanzaNumber =
     mfWrappedValueWithDefault <
