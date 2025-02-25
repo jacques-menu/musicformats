@@ -21,7 +21,7 @@ on:
 jobs:
   compile-user-guide:
     name: Compile user guide
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -33,13 +33,14 @@ jobs:
       - name: Compile user guide
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: documentation/mfuserguide/MusicFormatsUserGuide.tex
+          work_in_root_file_dir: documentation/mfuserguide
+          root_file: MusicFormatsUserGuide.tex
 
       - name: Upload user guide
         uses: actions/upload-artifact@v4
         with:
           name: musicformats-documentation-artifact
-          path: documentation/mfuserguide/MusicFormatsUserGuide.pdf
+          path: MusicFormatsUserGuide.pdf
           retention-days: 1
 
 
