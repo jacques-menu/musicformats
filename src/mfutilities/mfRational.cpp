@@ -57,7 +57,7 @@ mfRational::mfRational(const mfRational& rat)
   fDenominator = rat.fDenominator;
 }
 
-mfRational::mfRational (const std::string &theString)
+mfRational::mfRational (const std::string& theString)
 {
   // decipher theString
   std::string regularExpression (

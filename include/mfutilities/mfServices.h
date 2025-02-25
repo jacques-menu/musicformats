@@ -209,7 +209,7 @@ class EXP mfServiceRunData : public smartable
                               { return fRunDateYYYYMMDD; }
 
     // parts
-    void                  setCurrentPartIDAndName (const std::string partIDAndName)
+    void                  setCurrentPartIDAndName (const std::string& partIDAndName)
                               { fCurrentPartIDAndName = partIDAndName; }
 
     const std::string     getCurrentPartIDAndName () const
@@ -230,7 +230,7 @@ class EXP mfServiceRunData : public smartable
                               { return fCurrentVoiceNumber; }
 
     // measures
-    void                  setCurrentMeasureNumber (const std::string measureNumber)
+    void                  setCurrentMeasureNumber (const std::string& measureNumber)
                               { fCurrentMeasureNumber = measureNumber; }
 
     const std::string     getCurrentMeasureNumber () const

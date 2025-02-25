@@ -268,7 +268,7 @@ void msr2msrTranslator::displayCurrentOnGoingValues ()
 
 //______________________________________________________________________________
 void msr2msrTranslator::displayPartGroupsStack (
-  const std::string context)
+  const std::string& context)
 {
   size_t partGroupsStackSize = fPartGroupsStack.size ();
 

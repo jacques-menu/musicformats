@@ -125,10 +125,10 @@ mxsrEvent::~mxsrEvent ()
 //________________________________________________________________________
 /* this class is purely virtual
 mxsr-Event mxsrPartEvent::create (
-  const std::string&       partName,
-  const mfMeasureNumber&   measureNumber,
-  int                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const std::string&               partName,
+  const mfMeasureNumber&           measureNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrPartEvent* obj =
     new mxsrPartEvent (
@@ -142,10 +142,10 @@ mxsr-Event mxsrPartEvent::create (
 */
 
 mxsrPartEvent::mxsrPartEvent (
-  const std::string&       partName,
-  const mfMeasureNumber&   measureNumber,
-  const mxsrEventSequentialNumber&                      eventSequentialNumber,
-  const mfInputLineNumber& eventInputLineNumber)
+  const std::string&               partName,
+  const mfMeasureNumber&           measureNumber,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
   : mxsrEvent (
       eventSequentialNumber,
       eventInputLineNumber)
@@ -375,13 +375,13 @@ std::ostream& operator << (std::ostream& os, const mxsrMeasureRepeatEventKind& e
 
 //________________________________________________________________________
 S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
-  mxsrMeasureRepeatEventKind measureRepeatEventKind,
-  const std::string&         partName,
-  const mfMeasureNumber&     measureNumber,
-  int                        measureRepeatNumber,
-  int                        measureRepeatSlashes,
-  const mxsrEventSequentialNumber&                        eventSequentialNumber,
-  const mfInputLineNumber&          eventInputLineNumber)
+  mxsrMeasureRepeatEventKind       measureRepeatEventKind,
+  const std::string&               partName,
+  const mfMeasureNumber&           measureNumber,
+  int                              measureRepeatNumber,
+  int                              measureRepeatSlashes,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
 {
   mxsrMeasureRepeatEvent* obj =
     new mxsrMeasureRepeatEvent (
@@ -396,54 +396,14 @@ S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::create (
   return obj;
 }
 
-// S_mxsrMeasureRepeatEvent mxsrMeasureRepeatEvent::createAMeasureRepeatEnd (
-//   const std::string&       partName,
-//   const mfMeasureNumber&   measureNumber,
-//   int                      measureRepeatNumber,
-//   int                      measureRepeatSlashes,
-//   const const mfInputLineNumber&& eventInputLineNumber)
-// {
-//   ++fCurrentEventSequentialNumber;
-    // cannot pass this as an argument to craate,
-    // since it is an instance of a template type
-    // do we do it beforehand
-//
-//   S_mxsrMeasureRepeatEvent
-//     measureRepeatEndEvent =
-//       mxsrMeasureRepeatEvent::create (
-//         mxsrMeasureRepeatEventKind::kMeasureRepeatEventEnd,
-//         partName,
-//         measureNumber,
-//         measureRepeatSlashes,
-//         fCurrentEventSequentialNumber,
-//         eventInputLineNumber);
-//
-// #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceMeasureRepeatsBasics ()) {
-//     std::stringstream ss;
-//
-//     ss <<
-//       "--> Creating a measure repeat end event " <<
-//       measureRepeatEndEvent->asString () <<
-//       ", line " << eventInputLineNumber;
-//
-//     gWaeHandler->waeTrace (
-//       __FILE__, __LINE__,
-//       ss.str ());
-//   }
-// #endif // MF_TRACE_IS_ENABLED
-//
-//   return measureRepeatEndEvent;
-// }
-
 mxsrMeasureRepeatEvent::mxsrMeasureRepeatEvent (
-  mxsrMeasureRepeatEventKind measureRepeatEventKind,
-  const std::string&         partName,
-  const mfMeasureNumber&     measureNumber,
-  int                        measureRepeatNumber,
-  int                        measureRepeatSlashes,
-  const mxsrEventSequentialNumber&                        eventSequentialNumber,
-  const mfInputLineNumber&          eventInputLineNumber)
+  mxsrMeasureRepeatEventKind       measureRepeatEventKind,
+  const std::string&               partName,
+  const mfMeasureNumber&           measureNumber,
+  int                              measureRepeatNumber,
+  int                              measureRepeatSlashes,
+  const mxsrEventSequentialNumber& eventSequentialNumber,
+  const mfInputLineNumber&         eventInputLineNumber)
   : mxsrPartEvent (
       partName,
       measureNumber,
@@ -1478,7 +1438,13 @@ void mxsrEventsCollection::registerMultipleMeasureRestBegin (
 
   fMultipleMeasureRestBeginsMap.insert (
     std::make_pair (
+
+#ifdef MF_USE_WRAPPED_TYPES
       multipleMeasureRestBeginEvent->getMeasureNumber ().getBareValue (),
+#else
+      multipleMeasureRestBeginEvent->getMeasureNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       multipleMeasureRestBeginEvent));
 
   fAllEventsList.push_back (multipleMeasureRestBeginEvent);
@@ -1603,7 +1569,13 @@ void mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt (
 
   fMultipleMeasureRestEndsMap.insert (
     std::make_pair (
+
+#ifdef MF_USE_WRAPPED_TYPES
       multipleMeasureRestEndEvent->getMeasureNumber ().getBareValue (),
+#else
+      multipleMeasureRestEndEvent->getMeasureNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       multipleMeasureRestEndEvent));
 
   fAllEventsList.push_back (multipleMeasureRestEndEvent);
@@ -1671,7 +1643,13 @@ void mxsrEventsCollection::registerMeasureRepeatBegin (
 
   fMeasureRepeatBeginsMap.insert (
     std::make_pair (
+
+#ifdef MF_USE_WRAPPED_TYPES
       measureRepeatBeginEvent->getMeasureNumber ().getBareValue (),
+#else
+      measureRepeatBeginEvent->getMeasureNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       measureRepeatBeginEvent));
 
   fAllEventsList.push_back (measureRepeatBeginEvent);
@@ -1798,7 +1776,13 @@ void mxsrEventsCollection::createAMeasureRepeatEndAndRegisterIt (
 
   fMeasureRepeatEndsMap.insert (
     std::make_pair (
+
+#ifdef MF_USE_WRAPPED_TYPES
       measureRepeatEndEvent->getMeasureNumber ().getBareValue (),
+#else
+      measureRepeatEndEvent->getMeasureNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       measureRepeatEndEvent));
 
   fAllEventsList.push_back (measureRepeatEndEvent);
@@ -1851,8 +1835,13 @@ void mxsrEventsCollection::registerStaffChangeTakeOff (
 
   fStaffChangeTakeOffsMap.insert (
     std::make_pair (
-//       noteSequentialNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+      noteSequentialNumber.getBareValue (),
+#else
       noteSequentialNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
       staffChangeEvent));
 
   fStaffChangeEventsList.push_back (staffChangeEvent);
@@ -1906,8 +1895,13 @@ void mxsrEventsCollection::registerStaffChangeLanding (
 
   fStaffChangeLandingsMap.insert (
     std::make_pair (
-//       noteSequentialNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+      noteSequentialNumber.getBareValue (),
+#else
       noteSequentialNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
       staffChangeEvent));
 
   fStaffChangeEventsList.push_back (staffChangeEvent);
@@ -2263,8 +2257,13 @@ void mxsrEventsCollection::registerChordEndEvent (
 
   fChordEndsMap.insert (
     std::make_pair (
-//       chordEndEvent->getNoteSequentialNumber ().getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+      chordEndEvent->getNoteSequentialNumber ().getBareValue (),
+#else
       chordEndEvent->getNoteSequentialNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       chordEndEvent));
 
   fAllEventsList.push_back (chordEndEvent);
@@ -2377,14 +2376,24 @@ void mxsrEventsCollection::registerTupletBeginEvent (
 
   fTupletBeginsMultiMap.insert (
     std::make_pair (
-//       tupletBeginEvent->getNoteSequentialNumber ().getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+      tupletBeginEvent->getNoteSequentialNumber ().getBareValue (),
+#else
       tupletBeginEvent->getNoteSequentialNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       tupletBeginEvent));
 
   fTupletBeginNumbersMap.insert (
     std::make_pair (
-//       tupletBeginEvent->getTupletNumber ().getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+      tupletBeginEvent->getTupletNumber ().getBareValue (),
+#else
       tupletBeginEvent->getTupletNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       tupletBeginEvent));
 
   fAllEventsList.push_back (tupletBeginEvent);
@@ -2410,14 +2419,24 @@ void mxsrEventsCollection::registerTupletEndEvent (
 
   fTupletEndsMultiMap.insert (
     std::make_pair (
-//       tupletEndEvent->getNoteSequentialNumber ().getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+      tupletEndEvent->getNoteSequentialNumber ().getBareValue (),
+#else
       tupletEndEvent->getNoteSequentialNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       tupletEndEvent));
 
   fTupletEndNumbersMap.insert (
     std::make_pair (
-//       tupletEndEvent->getTupletNumber ().getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+      tupletEndEvent->getTupletNumber ().getBareValue (),
+#else
       tupletEndEvent->getTupletNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       tupletEndEvent));
 
   fAllEventsList.push_back (tupletEndEvent);
@@ -3301,8 +3320,12 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
     mxsrEventSequentialNumber
       eventBareSequentialNumber =
-//         tupletEvent->getEventSequentialNumber ().getBareValue ();
+
+#ifdef MF_USE_WRAPPED_TYPES
+        tupletEvent->getEventSequentialNumber ().getBareValue ();
+#else
         tupletEvent->getEventSequentialNumber ();
+#endif // MF_USE_WRAPPED_TYPES
 
     os <<
       "Note " << eventBareSequentialNumber <<
@@ -3337,8 +3360,12 @@ void mxsrEventsCollection::printTupletEvents (std::ostream& os) const
 
     mxsrEventSequentialNumber
       eventBareSequentialNumber =
-//         tupletEvent->getEventSequentialNumber ().getBareValue ();
+
+#ifdef MF_USE_WRAPPED_TYPES
+        tupletEvent->getEventSequentialNumber ().getBareValue ();
+#else
         tupletEvent->getEventSequentialNumber ();
+#endif // MF_USE_WRAPPED_TYPES
 
     os <<
       "Note " << eventBareSequentialNumber <<
@@ -3410,8 +3437,12 @@ void mxsrEventsCollection::printTupletEventsList (
   for (S_mxsrTupletEvent tupletEvent : tupletEventsList) {
     mxsrEventSequentialNumber
       eventBareSequentialNumber =
-//         tupletEvent->getEventSequentialNumber ().getBareValue ();
+
+#ifdef MF_USE_WRAPPED_TYPES
+        tupletEvent->getEventSequentialNumber ().getBareValue ();
+#else
         tupletEvent->getEventSequentialNumber ();
+#endif // MF_USE_WRAPPED_TYPES
 
     os <<
       "Note " <<  eventBareSequentialNumber <<

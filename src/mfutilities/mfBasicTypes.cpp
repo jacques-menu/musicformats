@@ -25,8 +25,8 @@ void testMfBasicTypes ()
     mfInputLineNumber inputLineNumber1 (157);
     mfInputLineNumber inputLineNumber2 (200);
 
-    mfInputLocationRange inputLocationRange1 (333, 333);
-    mfInputLocationRange inputLocationRange2 (110, 132);
+//     mfInputLocationRange inputLocationRange1 (333, 333);
+//     mfInputLocationRange inputLocationRange2 (110, 132);
 
     mfVoiceNumber voiceNumber (5);
 
@@ -35,16 +35,18 @@ void testMfBasicTypes ()
 
     inputLineNumber2 = inputLineNumber1;
 
-  gLog <<
+    gLog <<
       "inputLineNumber1: " << inputLineNumber1 <<
       std::endl <<
-      "inputLocationRange1: " << inputLocationRange1 <<
+      "inputLineNumber2: " << inputLineNumber2 <<
       std::endl <<
-      "inputLocationRange2: " << inputLocationRange2 <<
-      std::endl <<
+//       "inputLocationRange1: " << inputLocationRange1 <<
+//       std::endl <<
+//       "inputLocationRange2: " << inputLocationRange2 <<
+//       std::endl <<
       "voiceNumber: " << voiceNumber <<
-      std::endl <<
-      "inputLocationRange2.asString (): " << inputLocationRange2.asString () <<
+//       std::endl <<
+//       "inputLocationRange2.asString (): " << inputLocationRange2.asString () <<
       std::endl;
   }
 
@@ -84,7 +86,12 @@ void testMfBasicTypes ()
     for (int i = 1; i < iterationsNumber; ++i ) {
       mfInputLineNumber inputLineNumber (i);
 
+#ifdef MF_USE_WRAPPED_TYPES
       total += inputLineNumber.getBareValue ();
+#else
+      total += inputLineNumber;
+#endif // MF_USE_WRAPPED_TYPES
+
     } // for
 
     clock_t endClock = clock ();

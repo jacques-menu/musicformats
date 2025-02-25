@@ -169,10 +169,10 @@ class EXP mxsrPartEvent : public mxsrEvent
 
     static SMARTP<mxsrPartEvent>
                           create (
-                            const std::string&       partName,
-                            const mfMeasureNumber&   measureNumber,
-                            const mxsrNoteSequentialNumber& eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const std::string&               partName,
+                            const mfMeasureNumber&           measureNumber,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 */
 
   public:
@@ -181,10 +181,10 @@ class EXP mxsrPartEvent : public mxsrEvent
     // ------------------------------------------------------
 
                           mxsrPartEvent (
-                            const std::string&       partName,
-                            const mfMeasureNumber&   measureNumber,
+                            const std::string&               partName,
+                            const mfMeasureNumber&           measureNumber,
                             const mxsrEventSequentialNumber& eventSequentialNumber,
-                            const mfInputLineNumber& eventInputLineNumber);
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrPartEvent ();
 
@@ -354,21 +354,13 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
 
     static SMARTP<mxsrMeasureRepeatEvent>
                           create (
-                            mxsrMeasureRepeatEventKind measureRepeatEventKind,
-                            const std::string&         partName,
-                            const mfMeasureNumber&     measureNumber,
-                            int                        measureRepeatNumber,
-                            int                        measureRepeatSlashes,
-                            const mxsrEventSequentialNumber&                        eventSequentialNumber,
-                            const mfInputLineNumber&          eventInputLineNumber);
-
-//     static SMARTP<mxsrMeasureRepeatEvent>
-//                           createAMeasureRepeatEnd (
-//                             const std::string&       partName,
-//                             const mfMeasureNumber&   measureNumber,
-//                             int                      measureRepeatNumber,
-//                             int                      measureRepeatSlashes,
-//                             const mfInputLineNumber& eventInputLineNumber);
+                            mxsrMeasureRepeatEventKind       measureRepeatEventKind,
+                            const std::string&               partName,
+                            const mfMeasureNumber&           measureNumber,
+                            int                              measureRepeatNumber,
+                            int                              measureRepeatSlashes,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
   public:
 
@@ -376,13 +368,13 @@ class EXP mxsrMeasureRepeatEvent : public mxsrPartEvent
     // ------------------------------------------------------
 
                           mxsrMeasureRepeatEvent (
-                            mxsrMeasureRepeatEventKind measureRepeatEventKind,
-                            const std::string&         partName,
-                            const mfMeasureNumber&     measureNumber,
-                            int                        measureRepeatNumber,
-                            int                        measureRepeatSlashes,
-                            const mxsrEventSequentialNumber&                        eventSequentialNumber,
-                            const mfInputLineNumber&          eventInputLineNumber);
+                            mxsrMeasureRepeatEventKind       measureRepeatEventKind,
+                            const std::string&               partName,
+                            const mfMeasureNumber&           measureNumber,
+                            int                              measureRepeatNumber,
+                            int                              measureRepeatSlashes,
+                            const mxsrEventSequentialNumber& eventSequentialNumber,
+                            const mfInputLineNumber&         eventInputLineNumber);
 
     virtual               ~mxsrMeasureRepeatEvent ();
 
@@ -1166,16 +1158,16 @@ class EXP mxsrEventsCollection : public smartable
     void                  registerMeasureRepeatBegin (
                             S_mxsrMeasureRepeatEvent measureRepeatBeginEvent);
 
-//     S_mxsrMeasureRepeatEvent
-//                           createAMeasureRepeatEnd (
-//                             const std::string&       partName,
-//                             const mfMeasureNumber&   measureNumber,
-//                             int                      measureRepeatNumber,
-//                             int                      measureRepeatSlashes,
-//                             const mfInputLineNumber& eventInputLineNumber);
-//
-//     void                  registerMeasureRepeatEnd (
-//                             S_mxsrMeasureRepeatEvent measureRepeatEvent);
+    S_mxsrMeasureRepeatEvent
+                          createAMeasureRepeatEnd (
+                            const std::string&       partName,
+                            const mfMeasureNumber&   measureNumber,
+                            int                      measureRepeatNumber,
+                            int                      measureRepeatSlashes,
+                            const mfInputLineNumber& eventInputLineNumber);
+
+    void                  registerMeasureRepeatEnd (
+                            S_mxsrMeasureRepeatEvent measureRepeatEvent);
 
     void                  createAMeasureRepeatEndAndRegisterIt (
                             const std::string&       partName,

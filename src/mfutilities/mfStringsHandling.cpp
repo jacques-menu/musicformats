@@ -2160,7 +2160,7 @@ void mfDisplayStringToStringMultiMap (
 }
 
 //______________________________________________________________________________
-int countTwoBytesWideCharactersInString (const std::string theString)
+int countTwoBytesWideCharactersInString (const std::string& theString)
 {
 /*
   If theString contains non-diacritic characters (UTF-8),

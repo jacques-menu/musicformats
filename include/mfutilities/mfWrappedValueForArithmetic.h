@@ -55,6 +55,9 @@ class mfWrappedValueForArithmetic
     // set and get
     // ------------------------------------------------------
 
+    void                  setBareValue (T bareValue)
+                              { fBareValue = bareValue; }
+
     T                     getBareValue () const
                               { return fBareValue; }
 

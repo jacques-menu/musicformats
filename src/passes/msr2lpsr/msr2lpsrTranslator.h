@@ -631,7 +631,7 @@ class EXP msr2lpsrTranslator :
                               fPartGroupsStack;
 
     void                      displayPartGroupsStack (
-                                const std::string context);
+                                const std::string& context);
 
     // part groups block are nested as the partGroup's are
     // the current partGroup block is the top of the stack

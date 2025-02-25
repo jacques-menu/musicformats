@@ -429,7 +429,7 @@ void mfDisplayStringToStringMultiMap (
   std::ostream&                                  os);
 
 //______________________________________________________________________________
-int countTwoBytesWideCharactersInString (const std::string theString);
+int countTwoBytesWideCharactersInString (const std::string& theString);
 
 
 }

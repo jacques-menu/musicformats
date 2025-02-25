@@ -42,7 +42,7 @@ class EXP mfRational
 
                           mfRational (const mfRational& rat);
 
-                          mfRational (const std::string &theString);
+                          mfRational (const std::string& theString);
 
     virtual               ~mfRational ();
 

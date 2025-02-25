@@ -562,7 +562,7 @@ void msrScore::browseData (basevisitor* v)
 }
 
 void msrScore::displayPartGroupsList (
-  const std::string context)
+  const std::string& context)
 {
   size_t partGroupsListSize = fPartGroupsList.size ();
 

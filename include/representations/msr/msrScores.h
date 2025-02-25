@@ -366,7 +366,7 @@ class EXP msrScore : public msrBookElement
     // ------------------------------------------------------
 
     void                  displayPartGroupsList (
-                            const std::string context);
+                            const std::string& context);
 
     void                  print (std::ostream& os) const override;
     void                  printFull (std::ostream& os) const override;

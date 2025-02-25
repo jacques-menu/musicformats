@@ -68,8 +68,8 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
   fPreviousNoteVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;
 
   // measures handling
-  fScoreFirstMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
-  fScoreLastMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
+  fScoreFirstMeasureBareNumber = K_MEASURE_NUMBER_UNKNOWN_;
+  fScoreLastMeasureBareNumber = K_MEASURE_NUMBER_UNKNOWN_;
 
   fScoreMeasuresNumber = 0;
   fPartNumberOfMeasures = 0;
@@ -195,7 +195,12 @@ void mxsr2msrSkeletonBuilder::displayPartGroupsMap (
 
         theMsrPartGroup->
           displayPartGroupElementsList (
-            inputLineNumber.getBareValue ());
+
+#ifdef MF_USE_WRAPPED_TYPES
+	          inputLineNumber.getBareValue ());
+#else
+	          inputLineNumber);
+#endif // MF_USE_WRAPPED_TYPES
 
         --gIndenter;
     } // for
@@ -289,7 +294,12 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsMap (
 
         theMsrPartGroup->
           displayPartGroupElementsList (
-            inputLineNumber.getBareValue ());
+
+#ifdef MF_USE_WRAPPED_TYPES
+	          inputLineNumber.getBareValue ());
+#else
+	          inputLineNumber);
+#endif // MF_USE_WRAPPED_TYPES
 
         --gIndenter;
     } // for
@@ -740,7 +750,13 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 
 		musicxmlError (
 			gServiceRunData->getInputSourceName (),
+
+#ifdef MF_USE_WRAPPED_TYPES
 			inputLineNumber.getBareValue (),
+#else
+			inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
 			__FILE__, __LINE__,
 			ss.str ());
 	}
@@ -903,7 +919,13 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
   S_msrPartGroup
     startedPartGroup =
       msrPartGroup::create (
-        inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+				inputLineNumber.getBareValue (),
+#else
+				inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
         fCurrentPartGroupNumber,
         fCurrentPartGroupIdentity,
         fCurrentPartGroupName,
@@ -924,7 +946,13 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
   S_mxsrPartGroup
     partGroup =
       mxsrPartGroup::create (
-        inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+				inputLineNumber.getBareValue (),
+#else
+				inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
         fCurrentPartGroupNumber,
         startedPartGroup,
         fCurrentPartGroupIdentity);
@@ -989,7 +1017,13 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
  // JMI   musicxmlError (
     musicxmlWarning (
       gServiceRunData->getInputSourceName (),
-      inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+			inputLineNumber.getBareValue (),
+#else
+			inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
   //    __FILE__, __LINE__,
       ss.str ());
   }
@@ -997,7 +1031,13 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStop (
   else {
     // register partGroupToBeStopped as stopped
     registerPartGroupStop (
-      inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+			inputLineNumber.getBareValue (),
+#else
+			inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
       partGroupToBeStopped);
   }
 
@@ -1066,7 +1106,13 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
 
   theMsrPartGroupToBeStopped->
     setPartGroupUpLinkToContainingPartGroup (
-    	inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+			inputLineNumber.getBareValue (),
+#else
+			inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
       theMsrContainingPartGroup);
 
   // append currentPartGroup to containingPartGroup
@@ -1134,7 +1180,13 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 	// create fImplicitOuterMostMsrPartGroup
   fImplicitOuterMostMsrPartGroup =
 		msrPartGroup::create (
-      inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+			inputLineNumber.getBareValue (),
+#else
+			inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
       fCurrentPartGroupNumber,
       fCurrentPartGroupIdentity,
       "***IMPLICIT OUTER-MOST PART GROUP***", 			// partGroupName
@@ -1174,7 +1226,13 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
   // create the MXSR part group for the implicit outer-most part group
   fImplicitOuterMostPartGroup =
     mxsrPartGroup::create (
-      inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+			inputLineNumber.getBareValue (),
+#else
+			inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
       fCurrentPartGroupNumber,
       fImplicitOuterMostMsrPartGroup,
       fCurrentPartGroupIdentity);
@@ -1622,7 +1680,13 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
         musicxmlError (
           gServiceRunData->getInputSourceName (),
-          inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+						inputLineNumber.getBareValue (),
+#else
+						inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
           __FILE__, __LINE__,
           ss.str ());
       }
@@ -1677,16 +1741,32 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
   S_msrStaff
     staff =
       fCurrentPart->
+
+#ifdef MF_USE_WRAPPED_TYPES
         fetchStaffFromPart (staffNumber.getBareValue ());
+#else
+        fetchStaffFromPart (staffNumber);
+#endif // MF_USE_WRAPPED_TYPES
 
   if (! staff) {
     // no, add it to fCurrentPart
     staff =
       fCurrentPart->
         addStaffToPartByItsNumber (
-          inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+					inputLineNumber.getBareValue (),
+#else
+					inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
           msrStaffKind::kStaffKindRegular,
+
+#ifdef MF_USE_WRAPPED_TYPES
           staffNumber.getBareValue ());
+#else
+          staffNumber);
+#endif // MF_USE_WRAPPED_TYPES
 
 		// register the current staff number in the service run data
 		S_mfServiceRunData
@@ -1695,7 +1775,13 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
 
 		serviceRunData->
 			setCurrentStaveNumber (
-				staffNumber.getBareValue ());
+
+#ifdef MF_USE_WRAPPED_TYPES
+          staffNumber.getBareValue ());
+#else
+          staffNumber);
+#endif // MF_USE_WRAPPED_TYPES
+
 	}
 
   return staff;
@@ -1737,17 +1823,45 @@ S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceInStaffIfNotYetDone (
     voice =
       staff->
         fetchRegularVoiceFromStaffByItsNumber (
-          inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+					inputLineNumber.getBareValue (),
+#else
+					inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
+#ifdef MF_USE_WRAPPED_TYPES
           voiceNumber.getBareValue ());
+#else
+          voiceNumber);
+#endif // MF_USE_WRAPPED_TYPES
 
   if (! voice) {
     // create the voice and append it to the staff
     voice =
       staff->
         createRegularVoiceInStaffByItsNumber (
-          inputLineNumber.getBareValue (),
+
+#ifdef MF_USE_WRAPPED_TYPES
+					inputLineNumber.getBareValue (),
+#else
+					inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
+
+#ifdef MF_USE_WRAPPED_TYPES
           voiceNumber.getBareValue (),
+#else
+          voiceNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
+
+#ifdef MF_USE_WRAPPED_TYPES
+          fCurrentMeasureNumber.getBareValue (),
+#else
           fCurrentMeasureNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
           fPartGroupsStack.top ()->getMsrPartGroup ());
 
 		// register the current staff number in the service run data
@@ -1778,8 +1892,19 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
     partHarmoniesVoice =
       thePart->
         createPartHarmoniesVoice (
+
+#ifdef MF_USE_WRAPPED_TYPES
           inputLineNumber.getBareValue (),
+#else
+          inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
+
+#ifdef MF_USE_WRAPPED_TYPES
+          fCurrentMeasureNumber.getBareValue ());
+#else
           fCurrentMeasureNumber);
+#endif // MF_USE_WRAPPED_TYPES
   }
 
   return partHarmoniesVoice;
@@ -1800,8 +1925,20 @@ S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
     partFiguredBassVoice =
       thePart->
         createPartFiguredBassVoice (
+
+#ifdef MF_USE_WRAPPED_TYPES
           inputLineNumber.getBareValue (),
+#else
+          inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
+
+#ifdef MF_USE_WRAPPED_TYPES
+          fCurrentMeasureNumber.getBareValue ());
+#else
           fCurrentMeasureNumber);
+#endif // MF_USE_WRAPPED_TYPES
+
   }
 
   return partFiguredBassVoice;
@@ -2218,10 +2355,10 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
   // register the first and last measure numbers and measures number in the score JMI v0.9.68
   fMsrScore->
     setScoreFirstMeasureNumber (
-      fScoreFirstMeasureNumber);
+      fScoreFirstMeasureBareNumber);
   fMsrScore->
     setScoreLastMeasureNumber (
-      fScoreLastMeasureNumber);
+      fScoreLastMeasureBareNumber);
 
   fMsrScore->
     setScoreMeasuresNumber (
@@ -2234,10 +2371,10 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
 
   serviceRunData->
     setScoreFirstMeasureNumber (
-      fScoreFirstMeasureNumber);
+      fScoreFirstMeasureBareNumber);
   serviceRunData->
     setScoreLastMeasureNumber (
-      fScoreLastMeasureNumber);
+      fScoreLastMeasureBareNumber);
 
   serviceRunData->
     setScoreMeasuresNumber (
@@ -4509,7 +4646,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
   fCurrentMeasureInputLineNumber = elt->getInputLineNumber ();
 
 	fPreviousMeasureNumber = fCurrentMeasureNumber;
+
+#ifdef MF_USE_WRAPPED_TYPES
+  fCurrentMeasureNumber.setBareValue (elt->getAttributeValue ("number"));
+#else
   fCurrentMeasureNumber = elt->getAttributeValue ("number");
+#endif // MF_USE_WRAPPED_TYPES
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -4536,10 +4678,16 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
   // take this measure into account
   ++fPartNumberOfMeasures;
 
-  if (fScoreFirstMeasureNumber == K_MEASURE_NUMBER_UNKNOWN_) { // JMI v0.9.68
-  	fScoreFirstMeasureNumber = fCurrentMeasureNumber;
+  if (fScoreFirstMeasureBareNumber == K_MEASURE_NUMBER_UNKNOWN_) { // JMI v0.9.68
+#ifdef MF_USE_WRAPPED_TYPES
+  	fScoreFirstMeasureBareNumber = fCurrentMeasureNumber.getBareValue ();
+		fScoreLastMeasureBareNumber = fCurrentMeasureNumber.getBareValue ();
   }
-	fScoreLastMeasureNumber = fCurrentMeasureNumber;
+#else
+  	fScoreFirstMeasureBareNumber = fCurrentMeasureNumber;
+		fScoreLastMeasureBareNumber = fCurrentMeasureNumber;
+  }
+#endif // MF_USE_WRAPPED_TYPES
 
   // register the current measure number in the service run data for use by OAH
   S_mfServiceRunData
@@ -4548,7 +4696,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
 
   serviceRunData->
     setCurrentMeasureNumber (
-      fCurrentMeasureNumber);
+
+#ifdef MF_USE_WRAPPED_TYPES
+          fCurrentMeasureNumber.getBareValue ());
+#else
+          fCurrentMeasureNumber);
+#endif // MF_USE_WRAPPED_TYPES
 
   ++gIndenter;
 }
@@ -4733,9 +4886,9 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_measure& elt)
 				partName =
 					fCurrentPart->getPartName ();
 
-			mfInputLineNumber
-				inputLineNumber =
-					elt->getInputLineNumber ();
+// 			mfInputLineNumber
+// 				inputLineNumber =
+// 					elt->getInputLineNumber ();
 
 					fResultingEventsCollection.createAMeasureRepeatEndAndRegisterIt (
 						partName,

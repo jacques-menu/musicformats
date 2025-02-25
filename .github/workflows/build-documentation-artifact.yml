@@ -1,0 +1,80 @@
+# This is a workflow to build the MusicFormats documentation and create an artifact of it
+
+name: Build the MusicFormats documentation
+
+# runs:
+#   using: 'node20'
+#   main: 'main.js'
+
+# Controls when the action will run.
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  compile-user-guide:
+    name: Compile user guide
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Compile use guide
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: documentation/mfuserguide/MusicFormatsUserGuide.tex
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: drive-pdf
+        path: documentation/mfuserguide/MusicFormatsUserGuide.pdf
+        retention-days: 1
+
+  upload-user-guide:
+    name: Upload user guide
+    runs-on: macos-latest
+    needs: compile-user-guide
+
+  steps:
+#     - name: Download Artifact
+#       uses: actions/download-artifact@v2
+#       with:
+#         name: drive-pdf
+#
+#     - name: Upload to Google Drive
+#       uses: satackey/action-google-drive@v1
+#       with:
+#         skicka-tokencache-json: ${{ secrets.SKICKA_TOKENCACHE_JSON }}
+#         upload-from: ./<TEX-FILENAME>.pdf
+#         upload-to: /<GOOGLE DRIVE FOLDER PATH>
+#
+#         google-client-id: ${{ secrets.GOOGLE_CLIENT_ID }}
+#         google-client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+
+    - name: Upload libraries and executables for MacOS
+      uses: actions/upload-artifact@v4
+      with:
+        name: musicformats-macos-latest-artifact
+        path: |
+          MusicFormatsVersionNumber.txt
+          MusicFormatsVersionDate.txt
+#             build/bin
+#             build/lib
+#             build/Makefile
+#           documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
+          documentation/mfuserguide/MusicFormatsUserGuide.pdf
+#           documentation/mfmaintainanceguide/MusicFormatsFigures.pdf
+#           documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+#           documentation/mfapiguide/MusicFormatsAPIGuide.pdf
+
+          # uncomment to have the full libdir in the .zip archive
+          build/libdir

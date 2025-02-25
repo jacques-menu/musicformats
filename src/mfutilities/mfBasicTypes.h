@@ -15,7 +15,7 @@
 #include "exports.h"
 
 #include "mfConstants.h"
-#include "mfWrappedRange.h"
+// #include "mfWrappedRange.h"
 #include "mfWrappedValueForArithmetic.h"
 #include "mfWrappedValueWithDefault.h"
 
@@ -26,96 +26,161 @@
 namespace MusicFormats
 {
 
+/*
+  There are still error messages on Linux and Windows at link time
+  regarding some methods being undefined due to the instantiations below,
+  such as:
+
+Linux:
+
+/usr/bin/ld: lib/liblibmusicformats.so: undefined reference to `MusicFormats::mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, MusicFormats::mfWrappedValueWithDefault<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, MusicFormats::kMeasureNumberPrefix[abi:cxx11], MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MEASURE_NUMBER_UNKNOWN_, MusicFormats::kMeasureNumberDefaultValueString[abi:cxx11]> const&, int, MusicFormats::mfWrappedValueWithDefault<int, MusicFormats::kInputLineNumberPrefix, MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MF_INPUT_LINE_UNKNOWN_, MusicFormats::kInputLineNumberDefaultValueString> const&)'
+
+
+Windows:
+
+C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe: CMakeFiles/musicformats.dir/objects.a(mxsr2msrSkeletonBuilder.cpp.obj):mxsr2msrSkeletonBuilder.cpp:(.text+0x21cc1): undefined reference to `MusicFormats::mxsrEventsCollection::createAMultipleMeasureRestEndAndRegisterIt(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, MusicFormats::mfWrappedValueWithDefault<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, MusicFormats::kMeasureNumberPrefix[abi:cxx11], MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MEASURE_NUMBER_UNKNOWN_, MusicFormats::kMeasureNumberDefaultValueString[abi:cxx11]> const&, int, MusicFormats::mfWrappedValueWithDefault<int, MusicFormats::kInputLineNumberPrefix, MusicFormats::K_MF_EMPTY_STRING, MusicFormats::K_MF_INPUT_LINE_UNKNOWN_, MusicFormats::kInputLineNumberDefaultValueString> const&)'
+2025-02-23T16:44:36.0862400Z       |           ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+  MF_USE_WRAPPED_TYPES is used temporarily
+  to switch the use of these types on and off easily
+*/
+
+#define MF_USE_WRAPPED_TYPES
+
+
 // input line numbers
 //______________________________________________________________________________
 
-using mfInputLineNumber =
-  mfWrappedValueWithDefault <
-    int,
-    kInputLineNumberPrefix,
-    K_MF_EMPTY_STRING,
-    K_MF_INPUT_LINE_UNKNOWN_,
-    kInputLineNumberDefaultValueString
-  >;
+#ifndef MF_USE_WRAPPED_TYPES
+  using mfInputLineNumber = int;
+#else
+  using mfInputLineNumber =
+    mfWrappedValueWithDefault <
+      int,
+      kInputLineNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_MF_INPUT_LINE_UNKNOWN_,
+      kInputLineNumberDefaultValueString
+    >;
+#endif // MF_USE_WRAPPED_TYPES
+
 
 // input location ranges
 //______________________________________________________________________________
 
-using mfInputLocationRange =
-  mfWrappedRange <
-    mfInputLineNumber,
-    kInputLocationRangePrefix
-  >;
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfInputLocationRange = int;
+// #else
+//   using mfInputLocationRange =
+//     mfWrappedRange <
+//       mfInputLineNumber,
+//       kInputLocationRangePrefix
+//     >;
+// #endif // MF_USE_WRAPPED_TYPES
+
 
 // staff numbers
 //______________________________________________________________________________
 
-using mfStaffNumber =
-  mfWrappedValueWithDefault <
-    int,
-    kStaffNumberPrefix,
-    K_MF_EMPTY_STRING,
-    K_STAFF_NUMBER_UNKNOWN_,
-    kInputLineNumberDefaultValueString
-  >;
+#ifndef MF_USE_WRAPPED_TYPES
+  using mfStaffNumber = int;
+#else
+  using mfStaffNumber =
+    mfWrappedValueWithDefault <
+      int,
+      kStaffNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_STAFF_NUMBER_UNKNOWN_,
+      kInputLineNumberDefaultValueString
+    >;
+#endif // MF_USE_WRAPPED_TYPES
+
 
 // voice numbers
 //______________________________________________________________________________
 
-using mfVoiceNumber =
-  mfWrappedValueWithDefault <
-    int,
-    kVoiceNumberPrefix,
-    K_MF_EMPTY_STRING,
-    K_VOICE_NUMBER_UNKNOWN_,
-    kVoiceNumberDefaultValueString
-  >;
+#ifndef MF_USE_WRAPPED_TYPES
+  using mfVoiceNumber = int;
+#else
+  using mfVoiceNumber =
+    mfWrappedValueWithDefault <
+      int,
+      kVoiceNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_VOICE_NUMBER_UNKNOWN_,
+      kVoiceNumberDefaultValueString
+    >;
+#endif // MF_USE_WRAPPED_TYPES
+
 
 // measure numbers
 //______________________________________________________________________________
 
-using mfMeasureNumber =
-  mfWrappedValueWithDefault <
-    std::string,
-    kMeasureNumberPrefix,
-    K_MF_EMPTY_STRING,
-    K_MEASURE_NUMBER_UNKNOWN_,
-    kMeasureNumberDefaultValueString
-  >;
+#ifndef MF_USE_WRAPPED_TYPES
+  using mfMeasureNumber = int;
+#else
+  using mfMeasureNumber =
+    mfWrappedValueWithDefault <
+      std::string,
+      kMeasureNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_MEASURE_NUMBER_UNKNOWN_,
+      kMeasureNumberDefaultValueString
+    >;
+#endif // MF_USE_WRAPPED_TYPES
+
 
 //______________________________________________________________________________
 // whole notes durations
-using mfWholeNotes =
-  mfWrappedValueWithDefault <
-    msrWholeNotes,
-    kWholeNotePrefix,
-    K_MF_EMPTY_STRING,
-    K_WHOLE_NOTES_UNKNOWN_,
-    kWholeNoteDefaultValueString
-  >;
 
-//______________________________________________________________________________
+#ifndef MF_USE_WRAPPED_TYPES
+  using mfWholeNotes = int;
+#else
+  using mfWholeNotes =
+    mfWrappedValueWithDefault <
+      msrWholeNotes,
+      kWholeNotePrefix,
+      K_MF_EMPTY_STRING,
+      K_WHOLE_NOTES_UNKNOWN_,
+      kWholeNoteDefaultValueString
+    >;
+#endif // MF_USE_WRAPPED_TYPES
+
+
 // moments
-using mfMoment =
-  mfWrappedValueWithDefault <
-    msrMoment,
-    kMomentPrefix,
-    K_MF_EMPTY_STRING,
-    K_MOMENT_UNKNOWN_,
-    kMomentDefaultValueString
-  >;
+//______________________________________________________________________________
+
+#ifndef MF_USE_WRAPPED_TYPES
+  using mfMoment = int;
+#else
+  using mfMoment =
+    mfWrappedValueWithDefault <
+      msrMoment,
+      kMomentPrefix,
+      K_MF_EMPTY_STRING,
+      K_MOMENT_UNKNOWN_,
+      kMomentDefaultValueString
+    >;
+#endif // MF_USE_WRAPPED_TYPES
+
 
 // lyrics
 //______________________________________________________________________________
 
-using mfStanzaNumber =
-  mfWrappedValueWithDefault <
-    std::string,
-    kStanzaNumberPrefix,
-    K_MF_EMPTY_STRING,
-    K_STANZA_NUMBER_UNKNOWN_,
-    kStanzaNumberDefaultValueString
-  >;
+#ifndef MF_USE_WRAPPED_TYPES
+  using mfStanzaNumber = int;
+#else
+  using mfStanzaNumber =
+    mfWrappedValueWithDefault <
+      std::string,
+      kStanzaNumberPrefix,
+      K_MF_EMPTY_STRING,
+      K_STANZA_NUMBER_UNKNOWN_,
+      kStanzaNumberDefaultValueString
+    >;
+#endif // MF_USE_WRAPPED_TYPES
+
 
 //______________________________________________________________________________
 void testMfBasicTypes ();

@@ -692,11 +692,11 @@ class EXP mxsr2msrSkeletonBuilder :
     mfInputLineNumber         fCurrentMeasureInputLineNumber;
     mfInputLineNumber         fPreviousMeasureInputLineNumber;
 
-    std::string               fCurrentMeasureNumber;
-    std::string               fPreviousMeasureNumber;
+    mfMeasureNumber           fCurrentMeasureNumber;
+    mfMeasureNumber           fPreviousMeasureNumber;
 
-    std::string               fScoreFirstMeasureNumber;
-    std::string               fScoreLastMeasureNumber;
+    std::string               fScoreFirstMeasureBareNumber;
+    std::string               fScoreLastMeasureBareNumber;
 
     int                       fScoreMeasuresNumber;
     int                       fPartNumberOfMeasures;

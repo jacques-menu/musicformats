@@ -1346,7 +1346,13 @@ void mxsr2msrSkeletonPopulator::handleMultipleMeasureRestBegin ()
   fCurrentMultipleMeasureRest =
     msrMultipleMeasureRest::create (
       fCurrentMultipleMeasureRestBegin->
+
+#ifdef MF_USE_WRAPPED_TYPES
         getEventInputLineNumber ().getBareValue (),
+#else
+        getEventInputLineNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       fCurrentMultipleMeasureRestBegin->
         getMultipleMeasureRestNumber (),
       fCurrentMultipleMeasureRestBegin->
@@ -1560,7 +1566,13 @@ void mxsr2msrSkeletonPopulator::handleMeasureRepeatBegin ()
   fCurrentMeasureRepeat =
     msrMeasureRepeat::create (
       fCurrentMeasureRepeatBegin->
+
+#ifdef MF_USE_WRAPPED_TYPES
         getEventInputLineNumber ().getBareValue (),
+#else
+        getEventInputLineNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
       fCurrentMeasureRepeatMeasuresNumber,
       fCurrentMeasureRepeatSlashesNumber);
 
@@ -19887,11 +19899,18 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createATuplet (
   const S_msrTuplet&
     tuplet =
       msrTuplet::create (
-        inputLineNumber.getBareValue (),
-//         inputLineNumber,
 
-//         tupletNumber.getBareValue (),
+#ifdef MF_USE_WRAPPED_TYPES
+        inputLineNumber.getBareValue (),
+#else
+        inputLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
+#ifdef MF_USE_WRAPPED_TYPES
+        tupletNumber.getBareValue (),
+#else
         tupletNumber,
+#endif // MF_USE_WRAPPED_TYPES
 
         tupletFactor,
         fCurrentTupletBracketKind,
@@ -23041,15 +23060,32 @@ void mxsr2msrSkeletonPopulator::createStaffChange (
     // fetch the current note's staff
     S_msrStaff
       takeOffStaff =
+
+#ifdef MF_USE_WRAPPED_TYPES
         fCurrentPartStavesVector [takeOffStaffNumber.getBareValue ()],
+#else
+        fCurrentPartStavesVector [takeOffStaffNumber],
+#endif // MF_USE_WRAPPED_TYPES
+
       landingStaff =
+
+#ifdef MF_USE_WRAPPED_TYPES
         fCurrentPartStavesVector [landingStaffNumber.getBareValue ()]; // JMI v0.9.72
+#else
+        fCurrentPartStavesVector [landingStaffNumber]; // JMI v0.9.72
+#endif // MF_USE_WRAPPED_TYPES
 
     // create the voice staff change
     S_msrVoiceStaffChange
       voiceStaffChange =
         msrVoiceStaffChange::create (
+
+#ifdef MF_USE_WRAPPED_TYPES
           eventInputStartLineNumber.getBareValue (),
+#else
+          eventInputStartLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
           gNullMeasure,  // JMI v0.9.72 ???  // set later in setMeasureElementUpLinkToMeasure()
           takeOffStaff,
           landingStaff);
@@ -23231,7 +23267,13 @@ void mxsr2msrSkeletonPopulator::handleGraceBeginEventIfAny ()
     // till the note following it, to which it will be attached
     fPendingGraceNotesGroup =
       msrGraceNotesGroup::create (
+
+#ifdef MF_USE_WRAPPED_TYPES
         eventInputStartLineNumber.getBareValue (),
+#else
+        eventInputStartLineNumber,
+#endif // MF_USE_WRAPPED_TYPES
+
         msrGraceNotesGroupKind::kGraceNotesGroupBefore, // default value
         fCurrentGraceNotesGroupIsSlashed,
         fCurrentGraceNotesGroupIsBeamed,
@@ -23484,7 +23526,12 @@ void mxsr2msrSkeletonPopulator::handleChordBegin ()
   fCurrentChord =
     msrChord::create (
       fCurrentNoteChordBegin->
+
+#ifdef MF_USE_WRAPPED_TYPES
         getEventInputLineNumber ().getBareValue ());
+#else
+        getEventInputLineNumber ());
+#endif // MF_USE_WRAPPED_TYPES
 
   // register it as not yet populated fron its first note
   fCurrentChordHasBeenPopulatedFromItsFirstNote = false;
@@ -23630,7 +23677,13 @@ void mxsr2msrSkeletonPopulator:: handleTupletBegin (
     S_msrTuplet
       tuplet =
         createATuplet (
+
+#ifdef MF_USE_WRAPPED_TYPES
           tupletBeginEvent->getEventInputLineNumber ().getBareValue (),
+#else
+          tupletBeginEvent->getEventInputLineNumber (),
+#endif // MF_USE_WRAPPED_TYPES
+
           tupletBeginEvent->getTupletNumber (),
           tupletBeginEvent->getTupletFactor ());
 
@@ -23740,8 +23793,12 @@ void mxsr2msrSkeletonPopulator:: handleTupletEnd (
       S_mxsrTupletEvent
         correspondingTupleBegintEvent =
           fKnownEventsCollection.fetchTupletBeginForTupletNumber (
-//             tupletEndEvent->getTupletNumber ().getBareValue ());
+
+#ifdef MF_USE_WRAPPED_TYPES
+            tupletEndEvent->getTupletNumber ().getBareValue ());
+#else
             tupletEndEvent->getTupletNumber ());
+#endif // MF_USE_WRAPPED_TYPES
 
       fCurrentRecipientMxsrVoice->handleTupletEnd (
         fCurrentNote,

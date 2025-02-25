@@ -74,6 +74,6 @@ jobs:
 #             documentation/mfmaintainanceguide/MusicFormatsFigures.pdf
 #             documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
 #             documentation/mfapiguide/MusicFormatsAPIGuide.pdf
-#
-#             uncomment to have the full libdir in the .zip archive
-#             build/libdir
+
+            # uncomment to have the full libdir in the .zip archive
+            build/libdir

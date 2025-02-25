@@ -1117,7 +1117,7 @@ msrWholeNotes::msrWholeNotes (const msrWholeNotes& wholeNotes)
   fDenominator = wholeNotes.fDenominator;
 }
 
-msrWholeNotes::msrWholeNotes (const std::string &theString)
+msrWholeNotes::msrWholeNotes (const std::string& theString)
 {
   // decipher theString
   std::string regularExpression (

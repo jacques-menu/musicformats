@@ -654,7 +654,7 @@ class EXP msr2msrTranslator :
                               fPartGroupsStack;
 
     void                      displayPartGroupsStack (
-                                const std::string context);
+                                const std::string& context);
 
 
     // parts

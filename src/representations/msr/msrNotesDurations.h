@@ -80,7 +80,7 @@ class EXP msrWholeNotes
 
                           msrWholeNotes (const msrWholeNotes& wholeNotes);
 
-                          msrWholeNotes (const std::string &theString);
+                          msrWholeNotes (const std::string& theString);
 
     virtual               ~msrWholeNotes ();
 
