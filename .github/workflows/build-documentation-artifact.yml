@@ -36,12 +36,6 @@ jobs:
       - name: Compile user guide
         uses: xu-cheng/latex-action@v3
         with:
-          working_directory: ./documentation
-          root_file: foo.tex
-
-      - name: Compile user guide
-        uses: xu-cheng/latex-action@v3
-        with:
           working_directory: ./documentation/mfuserguide
           root_file: MusicFormatsUserGuide.tex
 
