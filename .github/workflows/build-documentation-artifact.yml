@@ -43,7 +43,7 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: ./documentation/mfuserguide
-          root_file: MusicformatsUserGuide.tex
+          root_file: MusicFormatsUserGuide.tex
 
       - name: Upload user guide
         uses: actions/upload-artifact@v4
