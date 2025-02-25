@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: musicformats-documentation-artifact
-          working_directory: ./documentation
-          path: foo.pdf
+#           working_directory: ./documentation
+          path: ./documentation/foo.pdf
 #           path: MusicFormatsUserGuide.pdf
           retention-days: 1
