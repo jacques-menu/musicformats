@@ -39,26 +39,6 @@ jobs:
 #           cd build; cmake --build .
           cd build ; uname -a ; cmake -S . -B . . ; ls -salR . ; make ; ls -salR .
 
-#       - name: Setup TeX Live
-#         uses: teatimeguest/setup-texlive-action@v4
-#         with:
-#           packages: >-
-#             scheme-basic
-#             hyperref
-#
-#       - name: Check `tlmgr` version
-#         run: tlmgr --version
-#
-#       - name: Compile LaTeX documentation
-#         uses: repaction/texlive@main
-#         with:
-#           tex_files: |
-#             documentation/IntroductionToMusicXML/IntroductionToMusicXML.tex
-#             documentation/mfuserguide/MusicFormatsUserGuide.tex
-#             documentation/mfmaintainanceguide/MusicFormatsFigures.tex
-#             documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.tex
-#             documentation/mfapiguide/MusicFormatsAPIGuide.tex
-
       - name: Upload libraries and executables for MacOS
         uses: actions/upload-artifact@v4
         with:

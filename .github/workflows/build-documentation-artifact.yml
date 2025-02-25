@@ -23,21 +23,46 @@ jobs:
     name: Compile user guide
     runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-    - name: Compile user guide
-      uses: xu-cheng/latex-action@v2
-      with:
-        root_file: documentation/mfuserguide/MusicFormatsUserGuide.tex
+      - name: Compile user guide
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: documentation/mfuserguide/MusicFormatsUserGuide.tex
 
-    - name: Upload user guide
-      uses: actions/upload-artifact@v2
-      with:
-        name: drive-pdf
-        path: documentation/mfuserguide/MusicFormatsUserGuide.pdf
-        retention-days: 1
+      - name: Upload user guide
+        uses: actions/upload-artifact@v4
+        with:
+          name: musicformats-documentation-artifact
+          path: documentation/mfuserguide/MusicFormatsUserGuide.pdf
+          retention-days: 1
+
+
+#       - name: Setup TeX Live
+#         uses: teatimeguest/setup-texlive-action@v4
+#         with:
+#           packages: >-
+#             scheme-basic
+#             hyperref
+#
+#       - name: Check `tlmgr` version
+#         run: tlmgr --version
+#
+#       - name: Compile LaTeX documentation
+#         uses: repaction/texlive@main
+#         with:
+#           tex_files: |
+#             documentation/IntroductionToMusicXML/IntroductionToMusicXML.tex
+#             documentation/mfuserguide/MusicFormatsUserGuide.tex
+#             documentation/mfmaintainanceguide/MusicFormatsFigures.tex
+#             documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.tex
+#             documentation/mfapiguide/MusicFormatsAPIGuide.tex
+
 
 #   upload-user-guide:
 #     name: Upload user guide
