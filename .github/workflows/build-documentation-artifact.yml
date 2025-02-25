@@ -26,12 +26,13 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
+        working_directory: ./documentation
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name:              Compile user guide
-        working_directory: ./documentation
         uses:              xu-cheng/latex-action@v3
         with:
           root_file: foo.tex
