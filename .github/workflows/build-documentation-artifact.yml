@@ -21,6 +21,7 @@ on:
 jobs:
   compile-user-guide:
     name:    Compile user guide
+    working_directory: ./documentation
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +29,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
-        working_directory: ./documentation
         with:
           node-version: '20'
 
