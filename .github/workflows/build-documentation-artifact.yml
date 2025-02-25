@@ -44,27 +44,6 @@ jobs:
           retention-days: 1
 
 
-#       - name: Setup TeX Live
-#         uses: teatimeguest/setup-texlive-action@v4
-#         with:
-#           packages: >-
-#             scheme-basic
-#             hyperref
-#
-#       - name: Check `tlmgr` version
-#         run: tlmgr --version
-#
-#       - name: Compile LaTeX documentation
-#         uses: repaction/texlive@main
-#         with:
-#           tex_files: |
-#             documentation/IntroductionToMusicXML/IntroductionToMusicXML.tex
-#             documentation/mfuserguide/MusicFormatsUserGuide.tex
-#             documentation/mfmaintainanceguide/MusicFormatsFigures.tex
-#             documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.tex
-#             documentation/mfapiguide/MusicFormatsAPIGuide.tex
-
-
 #   upload-user-guide:
 #     name: Upload user guide
 #     runs-on: macos-latest
