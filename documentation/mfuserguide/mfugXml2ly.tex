@@ -1,0 +1,92 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2024
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfuserguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{\xmlToLy\ }
+% -------------------------------------------------------------------------
+
+The initial name of \xmlToLy, when it started as a clone of \xmlToGuido, was {\tt xml2lilypond}. Both \fober\ and Werner Lemberg, an early tester active in the \lily\ community, found it too long, and they chose \xmlToLy\ among other names this author proposed to them.
+
+\subimport{./}{mfugXml2lyArchitecturePicture}
+
+
+% -------------------------------------------------------------------------
+\section{Why \xmlToLy?}
+% -------------------------------------------------------------------------
+
+\lily\ comes with \mxmlToLy, a \converter\ of \mxml\ files to LilyPond\ syntax, which has some limitations. Also, being written in Python, it is not in the main stream of the \lily\ development and maintainance group. The latter has much to do with C++ and Scheme code already.
+
+After looking at the \mxmlToLy\ source code, and not being a Python developper, this author decided to go for a new \converter\ written in C++.
+
+The design goals for \xmlToLy\ were:
+\begin{itemize}
+\item to perform at least as well as \mxmlToLy;
+\item to provide as many options as needed to adapt the \lcg\ to the user's needs.
+\end{itemize}
+
+Speed was not an explicit goal, but as it turns out, \xmlToLy\ is not bad in this respect.
+
+
+% -------------------------------------------------------------------------
+\section{What \xmlToLy\ does}
+% -------------------------------------------------------------------------
+
+\xmlToLy\ performs the 5 steps from \mxml\ to LilyPond\ to translate the former into the latter, as shown in \figureRef{xmlToLyArchitecture}. Converting from MXSR to MSR\ is done in two sub-phases for implementation reasons.
+
+The '{\tt -about}' option to \xmlToLy\ details that somewhat:
+\begin{lstlisting}[language=MusicXML]
+jacquesmenu@macmini > xml2ly -about
+What xml2ly does:
+
+    This multi-pass converter basically performs 5 passes:
+        Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
+                 and converts it to a MusicXML tree;
+        Pass 2a: converts that MusicXML tree into
+                 a first Music Score Representation (MSR) skeleton;
+        Pass 2b: populates the first MSR skeleton from the MusicXML tree
+                 to get a full MSR;
+        Pass 3:  converts the first MSR into a second MSR to apply options
+        Pass 4:  converts the second MSR into a
+                 LilyPond Score Representation (LPSR);
+        Pass 5:  converts the LPSR to LilyPond code
+                 and writes it to standard output.
+
+    Other passes are performed according to the options, such as
+    displaying views of the internal data or printing a summary of the score.
+
+    The activity log and warning/error messages go to standard error.
+\end{lstlisting}
+
+Step 5' is merely step 5 plus the generation of a numbered score, which happens when the {\tt -jianpu} option is used:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly -query jianpu
+--- Help for atom "jianpu" in subgroup "Output"
+    -jianpu
+          Generate the score using the Jianpu (numbered) notation
+          instead of the default western notation.
+          This option needs lilypond-Jianpu to be accessible to LilyPond
+          (https://github.com/nybbs2003/lilypond-Jianpu/jianpu10a.ly).
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Useful options to \xmlToLy\ }
+% -------------------------------------------------------------------------
+
+\OptionBoth{avoid-msr2msr}{am2m} can be used to avoid running the \msrToMsr\ pass:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~ > xml2ly -query avoid-msr2msr
+--- Help for atom "avoid-msr2msr" in subgroup "Rests"
+    -avoid-msr2msr, -am2m
+          Avoid the msr2msr pass, for TESTS.
+\end{lstlisting}

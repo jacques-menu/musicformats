@@ -1,0 +1,179 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2024
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfuserguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Multiple files conversion}
+% -------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------
+\section{Using the {\tt find} shell command}
+% -------------------------------------------------------------------------
+
+On \MacOS\ and \Linux, converting all the \mxml\ files in a given folder can be achieved with the \code{find} command.
+
+The \mfFiles{musicxmlfiles/clefs} sub-folder initial contents is:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/clefs > ls -sal
+total 64
+ 0 drwxr-xr-x    5 jacquesmenu  staff    160 Feb 26 00:18 .
+ 0 drwxr-xr-x  108 jacquesmenu  staff   3456 Feb 25 07:46 ..
+16 -rw-r--r--@   1 jacquesmenu  staff   6148 Feb 26 00:18 .DS_Store
+24 -rw-r--r--@   1 jacquesmenu  staff  12286 Jan  2 17:01 ClefChange.xml
+24 -rw-r--r--@   1 jacquesmenu  staff   9120 Jan  2 17:02 Clefs.xml
+\end{lstlisting}
+
+\xmlToLy\ can be applied to all the \mxml\ files in this folder with:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/clefs > find . -name "*.xml" -exec xml2ly {} -auto-output-file-name \;
+\end{lstlisting}
+
+The contents of the sub-folder now contains the following:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/clefs > ls -sal
+total 80
+ 0 drwxr-xr-x    7 jacquesmenu  staff    224 Feb 26 00:19 .
+ 0 drwxr-xr-x  108 jacquesmenu  staff   3456 Feb 25 07:46 ..
+16 -rw-r--r--@   1 jacquesmenu  staff   6148 Feb 26 00:18 .DS_Store
+ 8 -rw-r--r--    1 jacquesmenu  staff   3168 Feb 26 00:19 ClefChange.ly
+24 -rw-r--r--@   1 jacquesmenu  staff  12286 Jan  2 17:01 ClefChange.xml
+ 8 -rw-r--r--    1 jacquesmenu  staff   3045 Feb 26 00:19 Clefs.ly
+24 -rw-r--r--@   1 jacquesmenu  staff   9120 Jan  2 17:02 Clefs.xml
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Using a {\tt Makefile}}
+% -------------------------------------------------------------------------
+
+\mf\ supplies a \Makefile\ in \mfFiles{musicxmlfiles}, which can be copied to any folder at will to convert all the \starFileName{*.xml} files in it.
+
+Let's show how to proceed with the \mxml\ files provided with \mf.
+To convert all the \mxml\ files in a sub-folder of \mfFiles{musicxmlfiles}, one can:
+\begin{itemize}
+\item \code{cd} to this sub-folder;
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cd keys/
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys >
+\end{lstlisting}
+
+\item create a {\it \symbolicLink} to this \Makefile\ in the given sub-folder -- this is to be done only once:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > ln -s ../Makefile
+
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > ls -sal
+total 24
+ 0 drwxr-xr-x    5 jacquesmenu  staff   160 Feb 25 14:12 .
+ 0 drwxr-xr-x  108 jacquesmenu  staff  3456 Feb 25 07:46 ..
+16 -rw-r--r--@   1 jacquesmenu  staff  6148 Feb 25 12:51 .DS_Store
+ 8 -rw-r--r--    1 jacquesmenu  staff  2634 Apr 22  2021 HumdrumScotKeys.xml
+ 0 lrwxr-xr-x    1 jacquesmenu  staff    11 Feb 25 14:12 Makefile -> ../Makefile
+\end{lstlisting}
+
+Using a \symbolicLink\ avoids copying the \Makefile\ into multiple sub-folders. \\
+That also ensures that any change to the \Makefile\ in \libFiles{musicxmlfiles} is taken into account in the sub-folders.
+
+\item use this \Makefile\ with the \make\ command as shown below.
+\end{itemize}
+
+%\filbreak
+This \Makefile\ can provide help about its use:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > make help
+Makefile for converting MusicXML files to LilyPond scores.
+Supplied as part of the MusicFormats library, thanks to Dom Fober for providing it.
+Output files are written in sub-folders of the current folder.
+
+Available targets are:
+  'all' (default) : call the 'lily' target.
+
+  'lily'          : converts the set of MusicXML files to LilyPond in folder lilypond
+
+  'pdflily'       : converts the output of 'lily' target to pdf in folder pdflily
+  'svglily'       : converts the output of 'lily' target to svg in folder svglily
+  'pnglily'       : converts the output of 'lily' target to png in folder pnglily
+  'pslily'        : converts the output of 'lily' target to ps  in folder pslily
+  'epslily'       : converts the output of 'lily' target to eps in folder epslily
+
+  'clean'         : removes the sub-folders containing the results
+
+Make variables:
+  XML2LY=/path/to/xml2ly
+  LILYPOND=/path/to/lilypond
+  When XML2LY and/or LILYPOND are not set,
+  these tool and service are looked up in the PATH variable,
+
+  OPTIONS=...
+  By default, OPTIONS contains '-q' (quiet mode), for use by xml2ly.
+\end{lstlisting}
+
+The conversion using the 'lily' default target can be achieved by:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > make
+XML2LY   = xml2ly
+OPTIONS  = -q
+LILYPOND = /Applications/LilyPond/lilypond-2.23.6/bin/lilypond
+
+xml2ly version is:
+Command line version of musicxml2lilypond converter v0.9.53 (February 21, 2022)
+
+lilypond version is:
+GNU LilyPond 2.23.6 (running Guile 2.2)
+
+xml2ly -q -obj "lilypond/HumdrumScotKeys.ly" "HumdrumScotKeys.xml"
+/Applications/LilyPond/lilypond-2.23.6/bin/lilypond --pdf -l NONE -s -obj "pdflily/HumdrumScotKeys" "lilypond/HumdrumScotKeys.ly"
+
+Contents of lilypond sub-folder:
+8 -rw-r--r--  1 jacquesmenu  staff  1852 Feb 25 15:42 lilypond/HumdrumScotKeys.ly
+
+Contents of pdflily sub-folder:
+88 -rw-r--r--  1 jacquesmenu  staff  42795 Feb 25 15:42 pdflily/HumdrumScotKeys.pdf
+\end{lstlisting}
+
+The resulting sub-folder contents is:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > ls -salR
+total 24
+ 0 drwxr-xr-x    7 jacquesmenu  staff   224 Feb 25 15:42 .
+ 0 drwxr-xr-x  108 jacquesmenu  staff  3456 Feb 25 07:46 ..
+16 -rw-r--r--@   1 jacquesmenu  staff  6148 Feb 25 12:51 .DS_Store
+ 8 -rw-r--r--    1 jacquesmenu  staff  2634 Apr 22  2021 HumdrumScotKeys.xml
+ 0 lrwxr-xr-x    1 jacquesmenu  staff    11 Feb 25 14:12 Makefile -> ../Makefile
+ 0 drwxr-xr-x    3 jacquesmenu  staff    96 Feb 25 15:42 lilypond
+ 0 drwxr-xr-x    4 jacquesmenu  staff   128 Feb 25 15:42 pdflily
+
+./lilypond:
+total 8
+0 drwxr-xr-x  3 jacquesmenu  staff    96 Feb 25 15:42 .
+0 drwxr-xr-x  7 jacquesmenu  staff   224 Feb 25 15:42 ..
+8 -rw-r--r--  1 jacquesmenu  staff  1852 Feb 25 15:42 HumdrumScotKeys.ly
+
+./pdflily:
+total 96
+ 0 drwxr-xr-x  4 jacquesmenu  staff    128 Feb 25 15:42 .
+ 0 drwxr-xr-x  7 jacquesmenu  staff    224 Feb 25 15:42 ..
+ 8 -rw-r--r--  1 jacquesmenu  staff    202 Feb 25 15:42 HumdrumScotKeys.midi
+88 -rw-r--r--  1 jacquesmenu  staff  42795 Feb 25 15:42 HumdrumScotKeys.pdf
+\end{lstlisting}
+
+The sub-folder can be cleaned-up with:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > make clean
+
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > ls -sal
+total 24
+ 0 drwxr-xr-x    5 jacquesmenu  staff   160 Feb 25 15:45 .
+ 0 drwxr-xr-x  108 jacquesmenu  staff  3456 Feb 25 07:46 ..
+16 -rw-r--r--@   1 jacquesmenu  staff  6148 Feb 25 12:51 .DS_Store
+ 8 -rw-r--r--    1 jacquesmenu  staff  2634 Apr 22  2021 HumdrumScotKeys.xml
+ 0 lrwxr-xr-x    1 jacquesmenu  staff    11 Feb 25 14:12 Makefile -> ../Makefile
+\end{lstlisting}

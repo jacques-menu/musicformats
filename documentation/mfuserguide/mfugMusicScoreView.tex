@@ -1,0 +1,39 @@
+% -------------------------------------------------------------------------
+%  MusicFormats Library
+%  Copyright (C) Jacques Menu 2016-2024
+
+%  This Source Code Form is subject to the terms of the Mozilla Public
+%  License, v. 2.0. If a copy of the MPL was not distributed with this
+%  file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+%  https://github.com/jacques-menu/musicformats
+% -------------------------------------------------------------------------
+
+% !TEX root = mfuserguide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Music score representation}\label{Music score representation}
+% -------------------------------------------------------------------------
+
+It may be useful for \mf\ users to have an insight of what is behind the scenes.
+The picture at \figureRef{The MSR music score representation}, shows how a music score is represented in \msrRepr.
+
+\subimport{../mflatexlib}{mflatexlibMSRScoreRepresentation}
+
+The background colors are used as follows:
+\begin{itemize}
+\item \colorbox{black}{\textcolor{green}{green}}: an element that is expected to be found in a score representation, such as \Main{Staff} and \Main{Chord};
+
+\item \colorbox{black}{\textcolor{pink}{pink}}: a element needed internally in MSR to structure the representation, such as \Main{Segment} and \Main{Syllable}. Those are specific to \mf;
+
+\item \colorbox{black}{\textcolor{yellow}{yellow}}: elements that can be used in other ones, such as a \Main{Voice} containing \Main{VoiceElement}s. Those are specific to \mf\ too.
+\end{itemize}
+
+The arrows colors have the following meaning:
+\begin{itemize}
+\item \textcolor{blue}{blue}: {\it can be contained in}. For example, an \Main{Tuplet} can be contained in a \Main{GraceNotesGroup}, which can be contained in (attached to) a \Main{Note}.
+
+\item \textcolor{red}{red}: {\it is a particular case of}. For example, \Main{Part} is a particular case of \Main{PartGroupElement}, and a \Main{PartGroup} is also a particular case of \Main{PartGroupElement}, meaning that part groups can be \MainIt{nested}.
+\end{itemize}
+
+This representation is inspired by both \mxml\ and \lily. The specific \mf\ aspects are there due to implementation considerations, in particular \Main{Segment} and \Main{MultipleMeasureRests}.
