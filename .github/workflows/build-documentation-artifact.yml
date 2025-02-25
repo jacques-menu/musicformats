@@ -20,15 +20,15 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   compile-user-guide:
-    name:     dCompile user guide
+    name:    Compile user guide
     runs-on: ubuntu-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
-        working_directory: ./documentation
 
       - uses: actions/setup-node@v4
+        working_directory: ./documentation
         with:
           node-version: '20'
 
