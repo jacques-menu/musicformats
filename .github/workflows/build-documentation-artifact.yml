@@ -21,7 +21,6 @@ on:
 jobs:
   compile-user-guide:
     name:    Compile user guide
-    working-directory: ./documentation
     runs-on: ubuntu-latest
 
     steps:
@@ -33,6 +32,7 @@ jobs:
           node-version: '20'
 
       - name:              Compile user guide
+        working-directory: ./documentation
         uses:              xu-cheng/latex-action@v3
         with:
           root_file: foo.tex
