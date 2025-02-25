@@ -22,24 +22,22 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
+    name:    Build library
     runs-on: macos-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Setup node
-      - uses: actions/setup-node@v4
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Build MusicFormats for MacOS
         run:
-#           shell: bash FOO
-#           working-directory: build
-#           cd build; cmake --build .
           cd build ; uname -a ; cmake -S . -B . . ; ls -salR . ; make ; ls -salR .
 
       - name: Upload libraries and executables for MacOS
@@ -52,11 +50,5 @@ jobs:
             build/bin
             build/lib
             build/Makefile
-#             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
-#             documentation/mfuserguide/MusicFormatsUserGuide.pdf
-#             documentation/mfmaintainanceguide/MusicFormatsFigures.pdf
-#             documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
-#             documentation/mfapiguide/MusicFormatsAPIGuide.pdf
-#
 #             uncomment to have the full libdir in the .zip archive
 #             build/libdir
