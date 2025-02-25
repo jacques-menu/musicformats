@@ -33,7 +33,7 @@ jobs:
 
       - name:              Compile user guide
         uses:              xu-cheng/latex-action@v3
-        working-directory: ./documentation
+        working_directory: ./documentation
         with:
           root_file: foo.tex
 #           root_file: MusicFormatsUserGuide.tex
