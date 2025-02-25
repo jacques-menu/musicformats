@@ -32,8 +32,8 @@ jobs:
           node-version: '20'
 
       - name:              Compile user guide
-        uses:              xu-cheng/latex-action@v3
         working_directory: ./documentation
+        uses:              xu-cheng/latex-action@v3
         with:
           root_file: foo.tex
 #           root_file: MusicFormatsUserGuide.tex
