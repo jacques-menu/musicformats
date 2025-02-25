@@ -21,7 +21,7 @@ on:
 jobs:
   compile-user-guide:
     name:    Compile user guide
-    working_directory: ./documentation
+    working-directory: ./documentation
     runs-on: ubuntu-latest
 
     steps:
