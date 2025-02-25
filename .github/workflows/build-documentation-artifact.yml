@@ -25,17 +25,19 @@ jobs:
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repo
       - uses: actions/checkout@v4
 
+      - name: Setup node
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name:              Compile user guide
-        uses:              xu-cheng/latex-action@v3
+      - name: Compile user guide
+        uses: xu-cheng/latex-action@v3
         with:
           root_file: foo.tex
-        working_directory: ./documentation
+          working_directory: ./documentation
 #           root_file: MusicFormatsUserGuide.tex
 
       - name: Upload user guide
