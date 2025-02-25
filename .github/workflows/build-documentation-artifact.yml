@@ -21,7 +21,7 @@ on:
 jobs:
   compile-user-guide:
     name: Compile user guide
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
