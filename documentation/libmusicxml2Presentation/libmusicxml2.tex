@@ -1,26 +1,26 @@
 
-\documentclass{beamer}
+\documentclass{paper}
 
-\mode<article>
-{
-  \usepackage{fullpage}
-  \usepackage{pgf}
-  \usepackage{hyperref}
-  \setjobnamebeamerversion{vemus-smc07}
-}
+%\mode<article>
+%{
+%  \usepackage{fullpage}
+%  \usepackage{pgf}
+%  \usepackage{hyperref}
+%  \setjobnamebeamerversion{vemus-smc07}
+%}
 
-\mode<presentation>
-{
-  \usetheme{Frankfurt}
-  \setbeamercovered{transparent}
+%\mode<presentation>
+%{
+%  \usetheme{Frankfurt}
+%  \setbeamercovered{transparent}
   % or whatever (possibly just delete it)
-}
+%}
 
-\usepackage[english]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{times}
-\usepackage[T1]{fontenc}
-\usepackage{listings}
+%\usepackage[english]{babel}
+%\usepackage[utf8]{inputenc}
+%\usepackage{times}
+%\usepackage[T1]{fontenc}
+%\usepackage{listings}
 % Or whatever. Note that the encoding and the font should match. If T1
 % does not look nice, try deleting the line with the fontenc.
 
@@ -34,31 +34,31 @@
 \subtitle
 {A toolbox to support the MusicXML format.}
 
-\author[D.Fober] % (optional, use only with lots of authors)
-{D.Fober, S.Letz, Y.Orlarey\\
-{\scriptsize \{fober, letz, orlarey\}@grame.fr}}
+%\author[D.Fober] % (optional, use only with lots of authors)
+%{D.Fober, S.Letz, Y.Orlarey\\
+%{\scriptsize \{fober, letz, orlarey\}@grame.fr}}
 
-\institute[Grame] % (optional, but mostly needed)
-{
-Grame - Research Lab.\\
-Centre national de création musicale\\
-FR - Lyon
-}
+%\institute[Grame] % (optional, but mostly needed)
+%{
+%Grame - Research Lab.\\
+%Centre national de création musicale\\
+%FR - Lyon
+%}
 
-\date[May 2008] 
-{May 2008}
+%\date[May 2008]
+%{May 2008}
 
 
 \begin{document}
 
-\begin{frame}
-  \titlepage
-\end{frame}
+%\begin{frame}
+%  \titlepage
+%\end{frame}
 
 
-\begin{frame}{Summary}
-  \tableofcontents
-\end{frame}
+%\begin{frame}{Summary}
+%  \tableofcontents
+%\end{frame}
 
 
 %________________________________________________________________________
@@ -67,26 +67,26 @@ FR - Lyon
 \subsection{The MusicXML format}
 \begin{frame}
 	\frametitle{The MusicXML format}
-	The MusicXML format represents common Western musical notation from the 17th century onwards. 
-	It is an xml format that organizes the music into a header followed by the core 
+	The MusicXML format represents common Western musical notation from the 17th century onwards.
+	It is an xml format that organizes the music into a header followed by the core
 	music data.  The core music data may be organized as \emph{partwise} or \emph{timewise} data:
 	\begin{itemize}
 		\item \emph{partwise} data are organized into parts containing measures,
 		\item \emph{timewise} data are organized into measures containing parts.
 	\end{itemize}
-	The music notation complexity is reflected by the significant number of MusicXML elements: 
+	The music notation complexity is reflected by the significant number of MusicXML elements:
 	\alert{343} elements are defined by the version 2.0 of the format.
 	\begin{block}{}
 		{\small More details and DTDs on} \texttt{http://www.recordare.com/}
 	\end{block}
 \end{frame}
- 
+
 
 %________________________________________________________________________
 \subsection{Issues in the library design}
-\begin{frame}	
+\begin{frame}
 	\frametitle{Issues in the library design}
-	The main issues in designing a C++ library to support the format are related to the significant 
+	The main issues in designing a C++ library to support the format are related to the significant
 	the number of MusicXML elements.
 	\begin{enumerate}
 		\item cost of describing all the MusicXML elements,
@@ -96,7 +96,7 @@ FR - Lyon
 	\end{enumerate}
 
 	\begin{block}{}
-	The first version of the MusicXML library was quite good on points 2 and 3, but rather weak 
+	The first version of the MusicXML library was quite good on points 2 and 3, but rather weak
 	on points 1 and 4.
 	\end{block}
 \end{frame}
@@ -112,14 +112,14 @@ FR - Lyon
 		\item supports the MusicXML format version 2,
 		\item easy to upgrade to new versions of the MusicXML format from the DTDs,
 		\item adheres strictly to the MusicXML DTDs: each element has a corresponding C++ class,
-		\item designed using a single homogeneous \texttt{xmlelement} class and automatic 
+		\item designed using a single homogeneous \texttt{xmlelement} class and automatic
 		typing using templates,
 		\item provides STL iterators to browse the memory representation,
 		\item is \alert{not compatible} with libmusicxml version 1.xx.
 	\end{itemize}
 	\begin{block}{}
-	The main point is the simplified design: 4 classes instead of 150 to build a MusicXML 
-	memory representation. 
+	The main point is the simplified design: 4 classes instead of 150 to build a MusicXML
+	memory representation.
 	\end{block}
 \end{frame}
 
@@ -131,7 +131,7 @@ FR - Lyon
 		\item automatic memory management using smart pointers,
 		\item support of the \texttt{visitor} mechanism,
 		\item provides rolled and unrolled browsing,
-		\item provides previous visitors (musicxml2guido, midivisitor, transposition...) 
+		\item provides previous visitors (musicxml2guido, midivisitor, transposition...)
 	\end{itemize}
 \end{frame}
 
@@ -148,30 +148,30 @@ FR - Lyon
 		{\small
  			  \begin{itemize}
 			  \item<1-> a single \texttt{xmlelement} class
-			  \item<3-> simple methods to query an element 
+			  \item<3-> simple methods to query an element
 			  \item<5-> derived into as many types as MusicXML elements using templates
 			  \item<7-> organized into a tree
 			  \end{itemize}}
 		\end{column}
 
 		\begin{column}[c]{5cm}
-		\begin{overlayarea}{\textwidth}{50mm} 
+		\begin{overlayarea}{\textwidth}{50mm}
 		{\small
 			\only<1>{\vspace{8mm} \includegraphics[width=50mm]{imgs/xmlelement.pdf}}
-		  \only<2>{\vspace{8mm} \begin{block}{} 
+		  \only<2>{\vspace{8mm} \begin{block}{}
 		 	homogeneous design leads to simplicity.
 				\end{block}}
 			\only<3> {\vspace{9mm} \includegraphics[width=50mm]{imgs/methods.pdf}}
-		 \only<4> {\vspace{9mm} \begin{block}{} 
+		 \only<4> {\vspace{9mm} \begin{block}{}
 		 		Makes the DTDs usable as the library documentation:\\
 				e.g. {\tiny \texttt{measure->getAttributeValue("number")}}
 				\end{block}}
 		   \only<5> {\vspace{12mm}\includegraphics[width=25mm]{imgs/musicxml.pdf}}
-		 \only<6> {\vspace{22mm} \begin{block}{} 
+		 \only<6> {\vspace{22mm} \begin{block}{}
 		 		Allows the visitor mechanism to operate
 				\end{block}}
 			\only<7> {\vspace{12mm} \includegraphics[width=50mm]{imgs/ctree.pdf}}
-		 	\only<8> {\vspace{32mm} \begin{block}{} 
+		 	\only<8> {\vspace{32mm} \begin{block}{}
 		 		support STL iterators
 				\end{block}}
 		}
@@ -194,13 +194,13 @@ FR - Lyon
 		\end{column}
 		\begin{column}[c]{60mm}
 		  \onslide<1->{
-		  \begin{block}{} 
+		  \begin{block}{}
 			{\scriptsize <!ELEMENT \alert{part-name}> \\
 				\hspace{2mm} => class: \hspace{3mm} \alert{S\_part\_name} \\
 				\hspace{2mm} => constant: \alert{k\_part\_name} }
 			\end{block}}
 		  \onslide<2->{
-		  \begin{block}{} 
+		  \begin{block}{}
 			{\scriptsize <!ATTLIST \alert{measure} \\
 			\hspace{13mm} \alert{number} CDATA \#REQUIRED \\
 			\hspace{13mm} ...} \\
@@ -208,8 +208,8 @@ FR - Lyon
 			measure->\alert{getAttributeIntValue("number",default)}}}
 			\end{block}}
 		  \onslide<3->{
-		  \begin{block}{} 
-			{\scriptsize 
+		  \begin{block}{}
+			{\scriptsize
 			\begin{itemize}
 				\item Elements and attributes names and values are available as strings
 					but also support automatic conversion to numeric types.
@@ -237,7 +237,7 @@ FR - Lyon
 		\end{column}
 
 		\begin{column}[c]{65mm}
-		\begin{block}<1->{Count using a visitor} 
+		\begin{block}<1->{Count using a visitor}
 \begin{lstlisting}
 class countnotes : public visitor<S_note>
 {
@@ -251,7 +251,7 @@ class countnotes : public visitor<S_note>
 \end{lstlisting}
 		\end{block}
 
-		\begin{block}<2->{Count using iterators and STL} 
+		\begin{block}<2->{Count using iterators and STL}
 \begin{lstlisting}
 struct countnotes {
     bool operator () (const Sxmlelement elt) const
@@ -271,13 +271,13 @@ int count = count_if(elt->begin(), elt->end(), p);
 \begin{frame}
 	\frametitle{Main files}
 
-	{\small 
+	{\small
 	\begin{center}
 	\begin{tabular}{|r|l|}
 	\hline
-	\textbf{Files, folders} & \textbf{Purpose} \\ 
+	\textbf{Files, folders} & \textbf{Purpose} \\
 	\hline
-	\texttt{xml.h, types.h, ctree.h} & MusicXML memory representation \\ 
+	\texttt{xml.h, types.h, ctree.h} & MusicXML memory representation \\
 	\hline
 	\texttt{factory.h} & to generate MusicXML elements \\
 	\hline
@@ -303,20 +303,20 @@ The following files are automatically generated by the DTDs analyser and should 
 	\frametitle{DTDs Analysis}
 	\framesubtitle{A fast way to update to new version of the MusicXML format.}
 
-	The MusicXML DTDs are automatically analyzed to generate source code, types and constants. 
+	The MusicXML DTDs are automatically analyzed to generate source code, types and constants.
 \begin{block}{}
-'-' are replaced with '\_' in MusicXML elements or attribute names to comply to the C/C++ 
+'-' are replaced with '\_' in MusicXML elements or attribute names to comply to the C/C++
 identifiers lexical definition.
 \end{block}
 
 	\begin{itemize}
 	\item a makefile and a shell script are used for analysis and generation
 	\item templates are provided in the \texttt{template} folder
-	\item generates types (\texttt{typedefs.h}), constants  (\texttt{elements.h}) 
+	\item generates types (\texttt{typedefs.h}), constants  (\texttt{elements.h})
 	and source code (\texttt{factory.cpp})
 	\end{itemize}
 
- 
+
 
 \end{frame}
 
@@ -329,7 +329,7 @@ identifiers lexical definition.
 
 \begin{thebibliography}{Alexandrescu, 2001}
 
-{\scriptsize 
+{\scriptsize
 
 \bibitem[MusicXML]{MusicXML}
 MusicXML
