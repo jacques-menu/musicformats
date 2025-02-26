@@ -50,8 +50,18 @@ jobs:
             MusicFormatsUserGuide.tex
 
 
-#       - name: Compile the maintenance guide - 3 pdflatex runs are needed
+      - name: Compile the maintenance guide - 3 pdflatex runs are needed
 #         # --------------------------------------------------------------------------
+      - uses: xu-cheng/texlive-action@v2
+        with:
+          working_directory:
+            ./documentation/mfmaintainanceguide
+          scheme: full
+          run: |
+            apk add make |
+#             make
+            pdflatex MusicFormatsMaintainanceGuide.tex
+
 #         uses: xu-cheng/latex-action@v3
 #         with:
 #           working_directory:
@@ -71,7 +81,7 @@ jobs:
           name:
             musicformats-documentation-artifact
           path:
-            ./documentation/mfuserguide/MusicFormatsUserGuide.pdf |
-            ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+            ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
+#             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
           retention-days:
             10
