@@ -51,12 +51,9 @@ jobs:
           working_directory: ./documentation/mfmaintainanceguide
           root_file: MusicFormatsMaintainanceGuide.tex
         # --------------------------------------------------------------------------
-        with:
           working_directory: ./documentation/mfmaintainanceguide
           root_file: MusicFormatsMaintainanceGuide.tex
-        uses: xu-cheng/latex-action@v3
         # --------------------------------------------------------------------------
-        with:
           working_directory: ./documentation/mfmaintainanceguide
           root_file: MusicFormatsMaintainanceGuide.tex
         uses: xu-cheng/latex-action@v3
