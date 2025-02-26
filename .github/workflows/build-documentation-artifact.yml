@@ -49,9 +49,10 @@ jobs:
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: ./documentation/mfmaintainanceguide
-          root_file: MusicFormatsMaintainanceGuide.tex |
-          root_file: MusicFormatsMaintainanceGuide.tex |
-          root_file: MusicFormatsMaintainanceGuide.tex |
+          root_file:
+            MusicFormatsMaintainanceGuide.tex |
+            MusicFormatsMaintainanceGuide.tex |
+            MusicFormatsMaintainanceGuide.tex
 
 
       - name: Upload the documentation PDF guides
