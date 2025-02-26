@@ -52,16 +52,17 @@ jobs:
 
       - name: Compile the maintenance guide - 3 pdflatex runs are needed
 #         # --------------------------------------------------------------------------
-      - uses: xu-cheng/texlive-action@v2
+        uses: repaction/texlive@main
         with:
-          working_directory:
-            ./documentation/mfmaintainanceguide
-          scheme: full
-          run: |
-            apk add make |
-#             make
-            pdflatex MusicFormatsMaintainanceGuide.tex
+          tex_files: |
+            ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.tex
 
+#       - uses: xu-cheng/texlive-action@v2
+#         with:
+#           working_directory:
+#             ./documentation/mfmaintainanceguide
+#             pdflatex MusicFormatsMaintainanceGuide.tex
+#
 #         uses: xu-cheng/latex-action@v3
 #         with:
 #           working_directory:
