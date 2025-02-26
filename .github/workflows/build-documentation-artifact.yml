@@ -18,50 +18,61 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-and-upload-the-MusicFormats-docummenntation-PDF-files:
-    name:    Compile and upload the user and maintenance guides
+    name:
+      Compile and upload the user and maintenance guides
     # --------------------------------------------------------------------------
     runs-on: ubuntu-latest
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout repo
+      - name:
+        Checkout repo
         # --------------------------------------------------------------------------
-        uses: actions/checkout@v4
+        uses:
+          actions/checkout@v4
 
 
       - name: Setup node
         # --------------------------------------------------------------------------
-        uses: actions/setup-node@v4
+        uses:
+          actions/setup-node@v4
         with:
           node-version: '20'
 
 
       - name: Compile the user guide - 1 pdflatex run is enough
         # --------------------------------------------------------------------------
-        uses: xu-cheng/latex-action@v3
+        uses:
+          xu-cheng/latex-action@v3
         with:
-          working_directory: ./documentation/mfuserguide
-          root_file: MusicFormatsUserGuide.tex
-
-
-      - name: Compile the maintenance guide - 3 pdflatex runs are needed
-        # --------------------------------------------------------------------------
-        uses: xu-cheng/latex-action@v3
-        with:
-          working_directory: ./documentation/mfmaintainanceguide
+          working_directory:
+            ./documentation/mfuserguide
           root_file:
-            MusicFormatsMaintainanceGuide.tex |
-            MusicFormatsMaintainanceGuide.tex |
-            MusicFormatsMaintainanceGuide.tex
+            MusicFormatsUserGuide.tex
+
+
+#       - name: Compile the maintenance guide - 3 pdflatex runs are needed
+#         # --------------------------------------------------------------------------
+#         uses: xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfmaintainanceguide
+#           root_file:
+#             MusicFormatsMaintainanceGuide.tex |
+#             MusicFormatsMaintainanceGuide.tex |
+#             MusicFormatsMaintainanceGuide.tex
 
 
       - name: Upload the documentation PDF guides
         # --------------------------------------------------------------------------
-        uses: actions/upload-artifact@v4
+        uses:
+          actions/upload-artifact@v4
         with:
           # user guide
-          name: musicformats-documentation-artifact
+          name:
+            musicformats-documentation-artifact
           path:
             ./documentation/mfuserguide/MusicFormatsUserGuide.pdf |
             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
-          retention-days: 10
+          retention-days:
+            10
