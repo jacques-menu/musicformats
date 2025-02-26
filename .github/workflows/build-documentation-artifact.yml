@@ -61,10 +61,7 @@ jobs:
         with:
           # user guide
           name: musicformats-documentation-artifact
-          path: ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
-          retention-days: 10
-
-          # maintenance guide
-          name: musicformats-documentation-artifact
-          path: ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+          path:
+            ./documentation/mfuserguide/MusicFormatsUserGuide.pdf |
+            ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
           retention-days: 10
