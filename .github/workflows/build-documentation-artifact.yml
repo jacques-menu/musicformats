@@ -44,20 +44,29 @@ jobs:
           root_file: MusicFormatsUserGuide.tex
 
 
+      - name: Compile the maintenance guide - 1 pdflatex runs are needed
+        # --------------------------------------------------------------------------
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: ./documentation/mfmaintainanceguide
+          root_file: MusicFormatsMaintainanceGuide.tex
+        uses: xu-cheng/latex-action@v3
+
+      - name: Compile the maintenance guide - 2 pdflatex runs are needed
+        # --------------------------------------------------------------------------
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: ./documentation/mfmaintainanceguide
+          root_file: MusicFormatsMaintainanceGuide.tex
+        uses: xu-cheng/latex-action@v3
+
       - name: Compile the maintenance guide - 3 pdflatex runs are needed
         # --------------------------------------------------------------------------
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: ./documentation/mfmaintainanceguide
           root_file: MusicFormatsMaintainanceGuide.tex
-#         uses: xu-cheng/latex-action@v3
-        with:
-          working_directory: ./documentation/mfmaintainanceguide
-          root_file: MusicFormatsMaintainanceGuide.tex
-#         uses: xu-cheng/latex-action@v3
-        with:
-          working_directory: ./documentation/mfmaintainanceguide
-          root_file: MusicFormatsMaintainanceGuide.tex
+        uses: xu-cheng/latex-action@v3
 
 
       - name: Upload the documentation PDF guides
