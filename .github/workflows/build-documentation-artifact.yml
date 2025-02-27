@@ -39,17 +39,6 @@ jobs:
           node-version: '20'
 
 
-      - name: Compile the libmusicxml2 presentation - 1 pdflatex run is enough
-        # --------------------------------------------------------------------------
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/libmusicxml2Presentation
-          root_file:
-            libmusicxml2.tex
-
-
       - name: Compile the user guide - 1 pdflatex run is enough
         # --------------------------------------------------------------------------
         uses:
@@ -61,18 +50,30 @@ jobs:
             MusicFormatsUserGuide.tex
 
 
-#       - name: Compile the maintenance guide - 3 pdflatex runs are needed
-# #         # --------------------------------------------------------------------------
-#         uses: repaction/texlive@main
-#         with:
-#           tex_files: |
-#             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.tex
+      - name: Compile the maintenance guide - 3 pdflatex runs are needed
+        # --------------------------------------------------------------------------
+        uses:
+          xu-cheng/latex-action@v3
+        with:
+          working_directory:
+            ./documentation/mfuserguide
+          compiler:
+            pdflatex --file-line-error --synctex=1
+          root_file:
+            MusicFormatsUserGuide.tex
 
 #       - uses: xu-cheng/texlive-action@v2
 #         with:
 #           working_directory:
 #             ./documentation/mfmaintainanceguide
-#             pdflatex MusicFormatsMaintainanceGuide.tex
+#             pdflatex --file-line-error --synctex=1 MusicFormatsMaintainanceGuide.tex
+
+#         uses: repaction/texlive@main
+#         with:
+#           tex_files: |
+#             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.tex
+
+
 #
 #         uses: xu-cheng/latex-action@v3
 #         with:
@@ -97,3 +98,16 @@ jobs:
 #             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
           retention-days:
             10
+
+
+#       - name: Compile the libmusicxml2 presentation - 1 pdflatex run is enough
+#         # --------------------------------------------------------------------------
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/libmusicxml2Presentation
+#           root_file:
+#             libmusicxml2.tex
+
+
