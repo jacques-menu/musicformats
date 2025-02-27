@@ -50,17 +50,17 @@ jobs:
             MusicFormatsUserGuide.tex
 
 
-      - name: Compile the maintenance guide - 3 pdflatex runs are needed
+      - name: Compile the maintenance guide - pdflatex run 1
         # --------------------------------------------------------------------------
         uses:
           xu-cheng/latex-action@v3
         with:
           working_directory:
-            ./documentation/mfuserguide
+            ./documentation/mfmaintainanceguide
           compiler:
-            pdflatex --file-line-error --synctex=1
+            pdflatex
           root_file:
-            MusicFormatsUserGuide.tex
+            MusicFormatsMaintainanceGuide.tex
 
 #       - uses: xu-cheng/texlive-action@v2
 #         with:
