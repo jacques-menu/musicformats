@@ -1332,7 +1332,7 @@ class EXP lpsr2lilypondTranslator :
     void                  generateNoteGlissandosListWithText (
                             const S_msrNote& note);
 
-    void                  generateGlissandos (
+    void                  generateNoteGlissandos (
                             const std::list <S_msrGlissando>&
                               glissandosList);
 

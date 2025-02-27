@@ -2286,6 +2286,30 @@ void lpsr2lilypondTranslator::generateSegno (const S_msrSegno& segno)
 void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
   const S_msrNote& note)
 {
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceNotesBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      std::endl <<
+      "% --> generateCodeRightBeforeNote()" <<
+      ", note: " <<
+      note->asString () <<
+      ", line " << note->getInputLineNumber () <<
+      std::endl;
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+
+    if (
+      gGlobalLpsr2lilypondOahGroup->getGenerateLpsrVisitingInformation ()
+    ) {
+      fLilypondCodeStream << ss.str ();
+    }
+  }
+#endif // MF_TRACE_IS_ENABLED
+
   if (! fOnGoingChord) { // JMI v0.9.66
     // generate the note codas if any
     const std::list <S_msrCoda>&
@@ -2332,6 +2356,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
     generateNoteLigaturesList (note);
   }
 
+
   // generate note stem kind if needed
   if (true || ! fOnGoingChord) { // JMI v0.9.72 ???
     S_msrStem
@@ -2342,6 +2367,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
       generateStemIfNeededAndUpdateCurrentStemKind (noteStem);
     }
   }
+
 
   // generate the note slur direction if any,
   // unless the note is chord member
@@ -2368,7 +2394,7 @@ void lpsr2lilypondTranslator::generateTheNoteItself (
   {
     Bool
       traceNotes =
-        gTraceOahGroup->getTraceNotes (),
+        gTraceOahGroup->getTraceNotesBasics (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
@@ -21809,11 +21835,19 @@ void lpsr2lilypondTranslator::generateStuffBeforeTheNoteIself (
     }
   }
 
-  // generate the note glissandos styles if any
+
+  // get the note glissandos list
   const std::list <S_msrGlissando>&
     noteGlissandosList =
       note->getNoteGlissandosList ();
 
+  // generate the note glissandos if any, BEFORE the note glissando styles
+  if (! noteGlissandosList.empty ()) {
+    generateNoteGlissandos (
+      noteGlissandosList);
+  }
+
+  // generate the note glissandos styles if any, AFTER the note glissandos
   if (! noteGlissandosList.empty ()) {
     generateNoteGlissandoStyles (note);
   }
@@ -21823,6 +21857,7 @@ void lpsr2lilypondTranslator::generateStuffBeforeTheNoteIself (
   if (! noteGlissandosList.empty ()) {
     generateNoteGlissandosListWithText (note);
   }
+
 
   // generate the note slides line styles if any, implemented as glissandos
   const std::list <S_msrSlide>&
@@ -23438,7 +23473,7 @@ void lpsr2lilypondTranslator:: generateArticulations (
   } // for
 }
 
-void lpsr2lilypondTranslator::generateGlissandos (
+void lpsr2lilypondTranslator::generateNoteGlissandos (
   const std::list <S_msrGlissando>&
     glissandosList)
 {
@@ -23859,16 +23894,16 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     }
   }
 
-  // generate the note glissandos if any
-  const std::list <S_msrGlissando>&
-    noteGlissandosList =
-      elt->getNoteGlissandosList ();
-
-  if (! noteGlissandosList.empty ()) {
-    generateGlissandos (
-      noteGlissandosList);
-  }
-
+//   // generate the note glissandos if any
+//   const std::list <S_msrGlissando>&
+//     noteGlissandosList =
+//       elt->getNoteGlissandosList ();
+//
+//   if (! noteGlissandosList.empty ()) {
+//     generateNoteGlissandos (
+//       noteGlissandosList);
+//   }
+//
   // generate the note slides if any, implemented as glissandos
   const std::list <S_msrSlide>&
     noteSlidesList =
