@@ -684,6 +684,16 @@ void mxsr2msrSkeletonPopulator::displayGatheredTupletInformations (
     std::setw (fieldWidth) <<
     "fCurrentTupletTypeKind" << ": " <<
     fCurrentTupletTypeKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentTupletActualNumber" << ": " <<
+    fCurrentTupletActualNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentTupletNormalNumber" << ": " <<
+    fCurrentTupletNormalNumber <<
     std::endl;
 
   gLog << std::left <<
@@ -710,6 +720,26 @@ void mxsr2msrSkeletonPopulator::displayGatheredTupletInformations (
     std::setw (fieldWidth) <<
     "fCurrentTupletPlacementKind" << ": " <<
     fCurrentTupletPlacementKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentNoteInputStartLineNumber" << ": " <<
+    fCurrentNoteInputStartLineNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentNoteSequentialNumber" << ": " <<
+    fCurrentNoteSequentialNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentNoteStaffNumber" << ": " <<
+    fCurrentNoteStaffNumber <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fCurrentNoteVoiceNumber" << ": " <<
+    fCurrentNoteVoiceNumber <<
     std::endl << std::endl;
 
   --gIndenter;
@@ -19891,10 +19921,26 @@ S_msrTuplet mxsr2msrSkeletonPopulator::createATuplet (
   // create the tuplet
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
+    std::stringstream ss;
+
+    ss <<
+      "createTuplet()" <<
+      ", tupletNumber: " << tupletNumber <<
+      ", tupletFactor: " << tupletFactor <<
+      ", inputLineNumber: " << inputLineNumber;
+
     displayGatheredTupletInformations (
-      "createTuplet()");
+      ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check JMI v0.9.70
+  mfAssert (
+    __FILE__, __LINE__,
+    tupletNumber > 0,
+    "tupletNumber is not positive");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   const S_msrTuplet&
     tuplet =
@@ -23653,23 +23699,18 @@ void mxsr2msrSkeletonPopulator:: handleTupletBegin (
     std::stringstream ss;
 
     ss <<
-      "--> handleTupletBeginEventsIfAny(): there is a tuplet begin event" <<
+      "--> handleTupletBegin(): there is a tuplet begin event" <<
       ", line " << fCurrentNoteInputStartLineNumber <<
       ", tupletNumber: " << tupletBeginEvent->getTupletNumber () <<
       ", tupletBeginEvent: " <<
-      tupletBeginEvent <<
-      ", fCurrentNoteInputStartLineNumber " <<
-      fCurrentNoteInputStartLineNumber <<
-      ", fCurrentNoteSequentialNumber: " <<
-      fCurrentNoteSequentialNumber <<
-      ", fCurrentNoteStaffNumber: " <<
-      fCurrentNoteStaffNumber <<
-      ", fCurrentNoteVoiceNumber: " <<
-      fCurrentNoteVoiceNumber;
+      tupletBeginEvent;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
       ss.str ());
+
+    displayGatheredTupletInformations (
+      "handleTupletBegin()");
   }
 #endif // MF_TRACE_IS_ENABLED
 

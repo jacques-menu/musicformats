@@ -1270,6 +1270,14 @@ mxsrTupletEvent::mxsrTupletEvent (
     fTupletFactor (
       tupletFactor)
 {
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check JMI v0.9.70
+  mfAssert (
+    __FILE__, __LINE__,
+    tupletNumber > 0,
+    "tupletNumber is not positive");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
   fTupletEventKind = tupletEventKind;
 }
 

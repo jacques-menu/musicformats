@@ -6235,6 +6235,18 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 		}
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check JMI v0.9.70
+  mfAssert (
+    __FILE__, __LINE__,
+    fCurrentTupletActualNumber > 0,
+    "fCurrentTupletActualNumber is not positive");
+  mfAssert (
+    __FILE__, __LINE__,
+    fCurrentTupletNormalNumber > 0,
+    "fCurrentTupletNormalNumber is not positive");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 	// create an tuplet event is relevant
 #ifdef MF_TRACE_IS_ENABLED
 	if (gTraceOahGroup->getTraceTupletsBasics ()) {
