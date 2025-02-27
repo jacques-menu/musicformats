@@ -47,7 +47,6 @@ jobs:
           working_directory:
             ./documentation/mfuserguide
           root_file:
-            MusicFormatsUserGuide.tex |
             MusicFormatsUserGuide.tex
 
 #       - name: Compile the user guide - pdflatex run 2/2
