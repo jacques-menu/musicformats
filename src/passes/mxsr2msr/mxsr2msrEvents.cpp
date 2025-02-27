@@ -1270,11 +1270,46 @@ mxsrTupletEvent::mxsrTupletEvent (
     fTupletFactor (
       tupletFactor)
 {
+#ifdef MF_TRACE_IS_ENABLED
+	if (gTraceOahGroup->getTraceTupletsBasics ()) {
+		std::stringstream ss;
+
+		ss <<
+			"--> mxsrTupletEvent::mxsrTupletEvent()" <<
+			", tupletEventKind: " <<
+			tupletEventKind <<
+			", tupletNumber: " <<
+			tupletNumber <<
+
+			", tupletFactor: " <<
+			tupletFactor <<
+
+			", noteSequentialNumber: " <<
+			noteSequentialNumber <<
+			", noteStaffNumber: " <<
+			noteStaffNumber <<
+			", noteVoiceNumber: " <<
+			noteVoiceNumber <<
+
+			", eventSequentialNumber: " <<
+			eventSequentialNumber <<
+			", line " << eventInputLineNumber;
+
+		gWaeHandler->waeTrace (
+			__FILE__, __LINE__,
+			ss.str ());
+	}
+#endif // MF_TRACE_IS_ENABLED
+
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check JMI v0.9.70
   mfAssert (
     __FILE__, __LINE__,
+#ifdef MF_USE_WRAPPED_TYPES
+    tupletNumber.getBareValue () > 0,
+#else
     tupletNumber > 0,
+#endif // MF_USE_WRAPPED_TYPES
     "tupletNumber is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 

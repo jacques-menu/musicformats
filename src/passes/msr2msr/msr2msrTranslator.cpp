@@ -5051,6 +5051,16 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             copyNoteValuesToChord (
               fCurrentNoteClone);
 
+          // increment the current measure's accumulated duration
+          // by the current chord's duration
+          fCurrentMeasureClone->
+            incrementMeasureAccumulatedWholeNotesDuration (
+              elt->getInputLineNumber (),
+              fCurrentNoteClone->getMeasureElementSoundingWholeNotes (),
+              "msr2msrTranslator::visitEnd (S_msrNote& elt) 2: "
+                +
+              fCurrentChordClone->asShortString ());
+
           fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
         }
      }
@@ -5559,6 +5569,7 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
     elt->createChordNewbornClone (
       fCurrentPartClone);
 
+  // register it as not yet populated fron its first note
   fCurrentChordHasBeenPopulatedFromItsFirstNote = false;
 
   // set fCurrentChordClone's measure position  // JMI ??? v0.9.66

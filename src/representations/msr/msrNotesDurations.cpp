@@ -1472,8 +1472,6 @@ std::string msrWholeNotes::asShortString () const
     ss << fNumerator << '/' << fDenominator << " whn";
   }
 
-  ss << ']';
-
   return ss.str ();
 }
 

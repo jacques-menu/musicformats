@@ -222,12 +222,12 @@ msrChord::msrChord (int inputLineNumber)
 //     msrWholeNotes (0, 1),
 //     "msrChord::msrChord()");
 //
-//   fChordDisplayWholeNotes  = msrWholeNotes (0, 1);
+//   fChordDisplayWholeNotes = msrWholeNotes (0, 1);
 //
 //   fChordGraphicNotesDurationKind =
 //     msrNotesDurationKind::kNotesDuration_UNKNOWN_;
 //
-//   fChordIsFirstChordInADoubleTremolo  = false;
+//   fChordIsFirstChordInADoubleTremolo = false;
 //   fChordIsSecondChordInADoubleTremolo = false;
 // }
 
@@ -770,7 +770,7 @@ void msrChord::copyNoteValuesToChord (
   S_msrNote note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceChordsBasics ()) {
+  if (true || gTraceOahGroup->getTraceChordsBasics ()) {
     gLog <<
       "===> copyNoteValuesToChord(), note: " <<
       note <<

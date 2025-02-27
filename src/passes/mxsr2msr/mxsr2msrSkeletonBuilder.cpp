@@ -6218,38 +6218,69 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 //   }
 // #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
-		if (gTraceOahGroup->getTraceTupletsBasics ()) {
-			std::stringstream ss;
+/*
+<!--
+	A tuplet element is present when a tuplet is to be displayed
+	graphically, in addition to the sound data provided by the
+	time-modification elements. The number attribute is used to
+	distinguish nested tuplets. The bracket attribute is used
+	to indicate the presence of a bracket. If unspecified, the
+	results are implementation-dependent. The line-shape
+	attribute is used to specify whether the bracket is straight
+	or in the older curved or slurred style. It is straight by
+	default.
 
-			ss <<
-				"---> visitEnd (S_tuplet& elt)" <<
-				", fCurrentTupletNumber: " <<
-				fCurrentTupletNumber <<
-				", fTupletTypeKind: " <<
-				fTupletTypeKind <<
-				", fCurrentTupletActualNumber: " <<
-				fCurrentTupletActualNumber <<
-				", fCurrentTupletNormalNumber: " <<
-				fCurrentTupletNormalNumber;
+	Whereas a time-modification element shows how the cumulative,
+	sounding effect of tuplets and double-note tremolos compare to
+	the written note type, the tuplet element describes how this
+	is displayed. The tuplet element also provides more detailed
+	representation information than the time-modification element,
+	and is needed to represent nested tuplets and other complex
+	tuplets accurately. The tuplet-actual and tuplet-normal
+	elements provide optional full control over tuplet
+	specifications. Each allows the number and note type
+	(including dots) describing a single tuplet. If any of
+	these elements are absent, their values are based on the
+	time-modification element.
 
-			gWaeHandler->waeTrace (
-				__FILE__, __LINE__,
-				ss.str ());
-		}
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check JMI v0.9.70
-  mfAssert (
-    __FILE__, __LINE__,
-    fCurrentNoteActualNotes > 0,
-    "fCurrentNoteActualNotes is not positive");
-  mfAssert (
-    __FILE__, __LINE__,
-    fCurrentTupletNormalNumber > 0,
-    "fCurrentTupletNormalNumber is not positive");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
+	The show-number attribute is used to display either the
+	number of actual notes, the number of both actual and
+	normal notes, or neither. It is actual by default. The
+	show-type attribute is used to display either the actual
+	type, both the actual and normal types, or neither. It is
+	none by default.
+-->
+<!ELEMENT tuplet (tuplet-actual?, tuplet-normal?)>
+<!ATTLIST tuplet
+    type %start-stop; #REQUIRED
+    number %number-level; #IMPLIED
+    bracket %yes-no; #IMPLIED
+    show-number (actual | both | none) #IMPLIED
+    show-type (actual | both | none) #IMPLIED
+    %line-shape;
+    %position;
+    %placement;
+>
+<!ELEMENT tuplet-actual (tuplet-number?,
+	tuplet-type?, tuplet-dot*)>
+<!ELEMENT tuplet-normal (tuplet-number?,
+	tuplet-type?, tuplet-dot*)>
+<!ELEMENT tuplet-number (#PCDATA)>
+<!ATTLIST tuplet-number
+    %font;
+    %color;
+>
+<!ELEMENT tuplet-type (#PCDATA)>
+<!ATTLIST tuplet-type
+    %font;
+    %color;
+>
+<!ELEMENT tuplet-dot EMPTY>
+<!ATTLIST tuplet-dot
+    %font;
+    %color;
+>
+*/
 
 	// create an tuplet event is relevant
 #ifdef MF_TRACE_IS_ENABLED
@@ -6262,18 +6293,21 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 			fCurrentTupletNumber <<
 			", fTupletTypeKind: " <<
 			fTupletTypeKind <<
-			", fCurrentNoteActualNumber: " <<
-			fCurrentoteActualNumber <<
-			", fCurrentoteNormalNumber: " <<
-			fCurrentoteNormalNumber <<
+
+			", fTupletActualNotesToBeUsed: " <<
+			fTupletActualNotesToBeUsed <<
+			", fTupletNormalNotesToBeUsed: " <<
+			fTupletNormalNotesToBeUsed <<
+
 			", fCurrentNoteSequentialNumber: " <<
 			fCurrentNoteSequentialNumber <<
 			", fPreviousNoteSequentialNumber: " <<
 			fPreviousNoteSequentialNumber <<
-			", fCurrentTupletActualNumber: " <<
-			fCurrentTupletActualNumber <<
-			", fCurrentTupletNormalNumber: " <<
-			fCurrentTupletNormalNumber <<
+
+			", fCurrentNoteActualNotes: " <<
+			fCurrentNoteActualNotes <<
+			", fCurrentNoteNormalNotes: " <<
+			fCurrentNoteNormalNotes <<
 			", line " << elt->getInputLineNumber ();
 
 		gWaeHandler->waeTrace (
@@ -6282,6 +6316,18 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 	}
 #endif // MF_TRACE_IS_ENABLED
 
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check JMI v0.9.70
+  mfAssert (
+    __FILE__, __LINE__,
+    fTupletActualNotesToBeUsed > 0,
+    "fTupletActualNotesToBeUsed is not positive");
+  mfAssert (
+    __FILE__, __LINE__,
+    fTupletNormalNotesToBeUsed > 0,
+    "fCurrentTupletNormalNotes is not positive");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
 	switch (fTupletTypeKind) {
 		case msrTupletTypeKind::kTupletTypeNone:
 			// ??? JMI
@@ -6289,23 +6335,14 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 
 		case msrTupletTypeKind::kTupletTypeStart:
 			{
-
-//   gLog <<
-//     "===> msrTupletFactor::msrTupletFactor(): " <<
-//     ", fCurrentTupletNormalNumber: " << fCurrentTupletNormalNumber <<
-//     ", fCurrentTupletNormalNumber: " << fCurrentTupletNormalNumber <<
-//     std::endl;
-//
-//   if (fCurrentTupletNormalNumber == fCurrentTupletNormalNumber) abort ();
-
 				// create a tuplet begin event
 				S_mxsrTupletEvent
 					tupletBeginEvent =
 						fResultingEventsCollection.createATupletBeginEvent (
 							fCurrentTupletNumber,
 							msrTupletFactor (
-								fCurrentoteActualNumber,
-								fCurrentoteNormalNumber),
+								fTupletActualNotesToBeUsed,
+								fTupletNormalNotesToBeUsed),
 							fCurrentNoteSequentialNumber,
 							fCurrentNoteStaffNumber,
 							fCurrentNoteVoiceNumber,
@@ -6352,8 +6389,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 						fResultingEventsCollection.createATupletEndEvent (
 							fCurrentTupletNumber,
 							msrTupletFactor (
-								fCurrentNoteActualNotes,
-								fCurrentNoteNormalNotes),
+								fTupletActualNotesToBeUsed,
+								fTupletNormalNotesToBeUsed),
 							fCurrentNoteSequentialNumber,
 							fCurrentNoteStaffNumber,
 							fCurrentNoteVoiceNumber,
@@ -6484,24 +6521,59 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_number& elt)
   int tupletNumberValue = (int)(*elt);
 
   if (fOnGoingTupletActual) {
-    fCurrentTupletActualNumber = tupletNumberValue;
+    fCurrentTupletActualNotes = tupletNumberValue;
+    fTupletActualNotesToBeUsed = fCurrentTupletActualNotes;
 
     gLog <<
-    	"===> visitStart (S_tuplet_number& elt), fCurrentTupletActualNumber: " <<
-    	fCurrentTupletActualNumber <<
+    	"===> visitStart (S_tuplet_number& elt)" <<
+    	", fCurrentTupletActualNotes: " <<
+    	fCurrentTupletActualNotes <<
+
+    	", fTupletActualNotesToBeUsed: " <<
+    	fTupletActualNotesToBeUsed <<
     	", line " << elt->getInputLineNumber () <<
     	std::endl;
   }
 
   else if (fOnGoingTupletNormal) {
-    fCurrentTupletNormalNumber = tupletNumberValue;
+    fCurrentTupletNormalNotes = tupletNumberValue;
+    fTupletNormalNotesToBeUsed = fCurrentTupletNormalNotes;
 
     gLog <<
-    	"===> visitStart (S_tuplet_number& elt), fCurrentTupletNormalNumber: " <<
-    	fCurrentTupletNormalNumber <<
+    	"===> visitStart (S_tuplet_number& elt)" <<
+    	", fCurrentTupletNormalNotes: " <<
+    	fCurrentTupletNormalNotes <<
+
+    	", fTupletNormalNotesToBeUsed: " <<
+    	fTupletNormalNotesToBeUsed <<
     	", line " << elt->getInputLineNumber () <<
     	std::endl;
   }
+
+//   else if (fOnGoingNote) {
+//     fCurrentNoteActualNotes = tupletNumberValue;
+//     fTupletActualNotesToBeUsed = fCurrentNoteActualNotes;
+//
+//     fCurrentNoteNormalNotes = tupletNumberValue;
+//     fTupletNormalNotesToBeUsed = fCurrentNoteNormalNotes;
+//
+//     gLog <<
+//     	"===> visitStart (S_tuplet_number& elt)" <<
+//     	", fCurrentNoteActualNotes: " <<
+//     	fCurrentNoteActualNotes <<
+//     	", fCurrentNoteActualNotes: " <<
+//     	fCurrentNoteActualNotes <<
+//
+//     	", fTupletActualNotesToBeUsed: " <<
+//     	fTupletActualNotesToBeUsed <<
+//
+//     	", fCurrentNoteActualNotes: " <<
+//     	fCurrentNoteActualNotes <<
+//     	", fTupletActualNotesToBeUsed: " <<
+//     	fTupletActualNotesToBeUsed <<
+//     	", line " << elt->getInputLineNumber () <<
+//     	std::endl;
+//   }
 
   else {
     mxsr2msrError (
@@ -6637,6 +6709,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_actual_notes& elt)
 
   if (fOnGoingNote) {
     fCurrentNoteActualNotes = actualNotes;
+    fTupletActualNotesToBeUsed = fCurrentNoteActualNotes;
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
@@ -6716,6 +6789,8 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_notes& elt)
 
   if (fOnGoingNote) {
     fCurrentNoteNormalNotes = normalNotes;
+		fTupletNormalNotesToBeUsed = fCurrentNoteNormalNotes;
+
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
