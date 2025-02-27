@@ -6243,8 +6243,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
   // sanity check JMI v0.9.70
   mfAssert (
     __FILE__, __LINE__,
-    fCurrentTupletActualNumber > 0,
-    "fCurrentTupletActualNumber is not positive");
+    fCurrentNoteActualNotes > 0,
+    "fCurrentNoteActualNotes is not positive");
   mfAssert (
     __FILE__, __LINE__,
     fCurrentTupletNormalNumber > 0,
@@ -6262,14 +6262,18 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 			fCurrentTupletNumber <<
 			", fTupletTypeKind: " <<
 			fTupletTypeKind <<
-			", fCurrentTupletActualNumber: " <<
-			fCurrentTupletActualNumber <<
-			", fCurrentTupletNormalNumber: " <<
-			fCurrentTupletNormalNumber <<
+			", fCurrentNoteActualNumber: " <<
+			fCurrentoteActualNumber <<
+			", fCurrentoteNormalNumber: " <<
+			fCurrentoteNormalNumber <<
 			", fCurrentNoteSequentialNumber: " <<
 			fCurrentNoteSequentialNumber <<
 			", fPreviousNoteSequentialNumber: " <<
 			fPreviousNoteSequentialNumber <<
+			", fCurrentTupletActualNumber: " <<
+			fCurrentTupletActualNumber <<
+			", fCurrentTupletNormalNumber: " <<
+			fCurrentTupletNormalNumber <<
 			", line " << elt->getInputLineNumber ();
 
 		gWaeHandler->waeTrace (
@@ -6300,8 +6304,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 						fResultingEventsCollection.createATupletBeginEvent (
 							fCurrentTupletNumber,
 							msrTupletFactor (
-								fCurrentTupletActualNumber,
-								fCurrentTupletNormalNumber),
+								fCurrentoteActualNumber,
+								fCurrentoteNormalNumber),
 							fCurrentNoteSequentialNumber,
 							fCurrentNoteStaffNumber,
 							fCurrentNoteVoiceNumber,
@@ -6403,6 +6407,25 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_normal& elt)
   fOnGoingTupletNormal = true;
 }
 
+void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet_normal& elt)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
+    std::stringstream ss;
+
+    ss <<
+      "--> End visiting S_tuplet_normal" <<
+      ", line " << elt->getInputLineNumber ();
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  fOnGoingTupletNormal = false;
+}
+
 void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_actual& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6441,25 +6464,6 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet_actual& elt)
   fOnGoingTupletActual = false;
 }
 
-void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet_normal& elt)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gGlobalMxsr2msrOahGroup->getTraceMxsrVisitors ()) {
-    std::stringstream ss;
-
-    ss <<
-      "--> End visiting S_tuplet_normal" <<
-      ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  fOnGoingTupletNormal = false;
-}
-
 void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_number& elt)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6483,7 +6487,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_number& elt)
     fCurrentTupletActualNumber = tupletNumberValue;
 
     gLog <<
-    	"===> fCurrentTupletActualNumber: " <<
+    	"===> visitStart (S_tuplet_number& elt), fCurrentTupletActualNumber: " <<
     	fCurrentTupletActualNumber <<
     	", line " << elt->getInputLineNumber () <<
     	std::endl;
@@ -6493,7 +6497,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_number& elt)
     fCurrentTupletNormalNumber = tupletNumberValue;
 
     gLog <<
-    	"===> fCurrentTupletNormalNumber: " <<
+    	"===> visitStart (S_tuplet_number& elt), fCurrentTupletNormalNumber: " <<
     	fCurrentTupletNormalNumber <<
     	", line " << elt->getInputLineNumber () <<
     	std::endl;
@@ -6639,7 +6643,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_actual_notes& elt)
       std::stringstream ss;
 
       ss <<
-        "fCurrentNoteActualNotes: " <<
+        "visitStart (S_actual_notes& elt)(), fCurrentNoteActualNotes: " <<
         fCurrentNoteActualNotes;
 
       gWaeHandler->waeTrace (
@@ -6718,7 +6722,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_notes& elt)
       std::stringstream ss;
 
       ss <<
-        "fCurrentNoteNormalNotes: " <<
+        "visitStart (S_normal_notes& elt), fCurrentNoteNormalNotes: " <<
         fCurrentNoteNormalNotes;
 
       gWaeHandler->waeTrace (
