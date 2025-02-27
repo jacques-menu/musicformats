@@ -75,8 +75,8 @@ class EXP msrWholeNotes
                           msrWholeNotes ();
 
                           msrWholeNotes (
-                            long int num,
-                            long int denom);
+                            int num,
+                            int denom);
 
                           msrWholeNotes (const msrWholeNotes& wholeNotes);
 
@@ -89,17 +89,17 @@ class EXP msrWholeNotes
     // set and get
     // ------------------------------------------------------
 
-    void                  setNumerator (long int num)
+    void                  setNumerator (int num)
                               { fNumerator = num; }
-    long int              getNumerator ()  const
+    int                   getNumerator ()  const
                               { return fNumerator; }
 
-    void                  setDenominator (long int denom)
+    void                  setDenominator (int denom)
                               { fDenominator = denom; }
-    long int              getDenominator () const
+    int                   getDenominator () const
                               { return fDenominator; }
 
-    void                  set (long int num, long int denom)
+    void                  set (int num, int denom)
                               { fNumerator = num; fDenominator = denom; }
 
   public:
@@ -133,9 +133,9 @@ class EXP msrWholeNotes
     msrWholeNotes&        operator /= (const mfRational &rat);
     // (i.e. wholeNotes * 3/2 or wholeNotes * 7/4)
 
-    msrWholeNotes&        operator *= (long int num)
+    msrWholeNotes&        operator *= (int num)
                               { fNumerator *= num; return *this; }
-    msrWholeNotes&        operator /= (long int num)
+    msrWholeNotes&        operator /= (int num)
                               { fDenominator *= num; return *this; }
 
     // assignment
@@ -198,8 +198,8 @@ class EXP msrWholeNotes
     // private fields
     // ------------------------------------------------------
 
-    long int              fNumerator;
-    long int              fDenominator;
+    int                   fNumerator;
+    int                   fDenominator;
 };
 
 EXP std::ostream& operator << (std::ostream& os, const msrWholeNotes& wholeNotes);

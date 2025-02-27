@@ -8113,7 +8113,7 @@ S_oahRationalAtom oahRationalAtom::create (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfRational&          rationalVariable)
+  mfRational&        rationalVariable)
 {
   oahRationalAtom* obj = new
     oahRationalAtom (
@@ -8133,7 +8133,7 @@ oahRationalAtom::oahRationalAtom (
   const std::string& description,
   const std::string& valueSpecification,
   const std::string& variableName,
-  mfRational&          rationalVariable)
+  mfRational&        rationalVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -8360,7 +8360,7 @@ void oahRationalAtom::print (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "rationalVariable" << ": " <<
+    "fRationalVariable" << ": " <<
     fRationalVariable <<
     std::endl;
 

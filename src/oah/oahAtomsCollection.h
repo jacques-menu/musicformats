@@ -2318,7 +2318,7 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfRational&          rationalVariable);
+                            mfRational&        rationalVariable);
 
   protected:
 
@@ -2331,7 +2331,7 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
                             const std::string& description,
                             const std::string& valueSpecification,
                             const std::string& variableName,
-                            mfRational&          rationalVariable);
+                            mfRational&        rationalVariable);
 
     virtual               ~oahRationalAtom ();
 

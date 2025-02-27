@@ -1972,7 +1972,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
   const S_msrStem& stem)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStems ()) {
+  if (true || gTraceOahGroup->getTraceStems ()) {
     std::stringstream ss;
 
     ss <<
@@ -2027,7 +2027,7 @@ void lpsr2lilypondTranslator::generateStemIfNeededAndUpdateCurrentStemKind (
     if (doGenerateAStemDirection) {
       // JMI msrStemKind::kStemKindNeutral ??? JMI v0.9.72
 #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceStems ()) {
+      if (true || gTraceOahGroup->getTraceStems ()) {
         std::stringstream ss;
 
         ss <<
@@ -2287,7 +2287,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
   const S_msrNote& note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesBasics ()) {
+  if (true || gTraceOahGroup->getTraceNotesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2393,25 +2393,26 @@ void lpsr2lilypondTranslator::generateTheNoteItself (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes = true ||
         gTraceOahGroup->getTraceNotesBasics (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes) {
+    if (true || doTraceNotes) {
       std::stringstream ss;
 
       ss <<
         std::endl <<
-        "% --> generating code for note " <<
+        "% --> generateTheNoteItself()" <<
+        ", note: " <<
         note->asString () <<
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-        if (traceNotes) {
-          ss << ss.str ();
-        }
+      gWaeHandler->waeTrace (
+        __FILE__, __LINE__,
+        ss.str ());
 
       if (generateMsrVisitingInformation) {
         fLilypondCodeStream << ss.str ();
@@ -2531,13 +2532,13 @@ void lpsr2lilypondTranslator::generateRegularNoteInMeasure (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -2547,7 +2548,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInMeasure (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -2787,13 +2788,13 @@ void lpsr2lilypondTranslator::generateRestInMeasure (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -2803,7 +2804,7 @@ void lpsr2lilypondTranslator::generateRestInMeasure (
         ", line " << rest->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -2838,13 +2839,13 @@ void lpsr2lilypondTranslator::generateSkipInMeasure (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -2854,7 +2855,7 @@ void lpsr2lilypondTranslator::generateSkipInMeasure (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -2930,13 +2931,13 @@ void lpsr2lilypondTranslator::generateUnpitchedNoteInMeasure (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
     std::stringstream ss;
 
     ss <<
@@ -2946,7 +2947,7 @@ void lpsr2lilypondTranslator::generateUnpitchedNoteInMeasure (
       ", line " << note->getInputLineNumber () <<
       std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -3013,13 +3014,13 @@ void lpsr2lilypondTranslator::generateCuedNoteInMeasure (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
     std::stringstream ss;
 
     ss <<
@@ -3029,7 +3030,7 @@ void lpsr2lilypondTranslator::generateCuedNoteInMeasure (
       ", line " << note->getInputLineNumber () <<
       std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -3084,13 +3085,13 @@ void lpsr2lilypondTranslator::generateRegularNoteInChord (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -3100,7 +3101,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInChord (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -3162,13 +3163,13 @@ void lpsr2lilypondTranslator::generateRegularNoteInTuplet (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -3178,7 +3179,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInTuplet (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-        if (traceNotes) {
+        if (doTraceNotes) {
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
             ss.str ());
@@ -3243,13 +3244,13 @@ void lpsr2lilypondTranslator::generateRestInTuplet (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
     std::stringstream ss;
 
     ss <<
@@ -3259,7 +3260,7 @@ void lpsr2lilypondTranslator::generateRestInTuplet (
       ", line " << note->getInputLineNumber () <<
       std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -3337,13 +3338,13 @@ void lpsr2lilypondTranslator::generateNoteUnpitchedInTuplet (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -3353,7 +3354,7 @@ void lpsr2lilypondTranslator::generateNoteUnpitchedInTuplet (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -3411,13 +3412,13 @@ void lpsr2lilypondTranslator::generateRegularNoteInGraceNotesGroup (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -3427,7 +3428,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInGraceNotesGroup (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -3488,13 +3489,13 @@ void lpsr2lilypondTranslator::generateSkipInGraceNotesGroup (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -3504,7 +3505,7 @@ void lpsr2lilypondTranslator::generateSkipInGraceNotesGroup (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -3571,13 +3572,13 @@ void lpsr2lilypondTranslator::generateNoteInChordInGraceNotesGroup (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -3587,7 +3588,7 @@ void lpsr2lilypondTranslator::generateNoteInChordInGraceNotesGroup (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -3644,13 +3645,13 @@ void lpsr2lilypondTranslator::generateNoteInTupletInGraceNotesGroup (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -3660,7 +3661,7 @@ void lpsr2lilypondTranslator::generateNoteInTupletInGraceNotesGroup (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());
@@ -3750,13 +3751,13 @@ void lpsr2lilypondTranslator::generateNoteInDoubleTremolo (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceNotes =
+      doTraceNotes =
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    if (traceNotes || generateMsrVisitingInformation) {
+    if (doTraceNotes || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
@@ -3766,7 +3767,7 @@ void lpsr2lilypondTranslator::generateNoteInDoubleTremolo (
         ", line " << note->getInputLineNumber () <<
         std::endl;
 
-      if (traceNotes) {
+      if (doTraceNotes) {
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
           ss.str ());

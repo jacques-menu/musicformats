@@ -1094,8 +1094,8 @@ msrWholeNotes::msrWholeNotes ()
 }
 
 msrWholeNotes::msrWholeNotes (
-  long int num,
-  long int denom)
+  int num,
+  int denom)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -1407,7 +1407,7 @@ Bool msrWholeNotes::operator == (double num) const
 
 void msrWholeNotes::rationalise ()
 {
-  long int g = std::gcd (fNumerator, fDenominator);
+  int g = std::gcd (fNumerator, fDenominator);
 
   fNumerator   /= g;
   fDenominator /= g;
@@ -1465,13 +1465,11 @@ std::string msrWholeNotes::asShortString () const
 {
   std::stringstream ss;
 
-  ss << "[msrWholeNotes ";
-
   if (fNumerator == K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ ) {
-    ss << "UNKNOWN_WHOLE_NOTES";
+    ss << "UNKNOWN_WHOLE_NOTES_";
   }
   else {
-    ss << fNumerator << '/' << fDenominator;
+    ss << fNumerator << '/' << fDenominator << " whn";
   }
 
   ss << ']';
@@ -1483,7 +1481,7 @@ std::string msrWholeNotes::asFractionString () const
 {
   std::stringstream ss;
 
-  ss << fNumerator << '/' << fDenominator;
+  ss << fNumerator << '/' << fDenominator << " whn";
 
   return ss.str ();
 }

@@ -33,8 +33,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 mfRational::mfRational (
-  long int num,
-  long int denom)
+  int num,
+  int denom)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -332,7 +332,7 @@ Bool mfRational::operator == (double num) const
 
 void mfRational::rationalise ()
 {
-  long int g = std::gcd (fNumerator, fDenominator);
+  int g = std::gcd (fNumerator, fDenominator);
 
   fNumerator   /= g;
   fDenominator /= g;
