@@ -47,17 +47,18 @@ jobs:
           working_directory:
             ./documentation/mfuserguide
           root_file:
+            MusicFormatsUserGuide.tex |
             MusicFormatsUserGuide.tex
 
-      - name: Compile the user guide - pdflatex run 2/2
-        # --------------------------------------------------------------------------
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          working_directory:
-            ./documentation/mfuserguide
-          root_file:
-            MusicFormatsUserGuide.tex
+#       - name: Compile the user guide - pdflatex run 2/2
+#         # --------------------------------------------------------------------------
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           working_directory:
+#             ./documentation/mfuserguide
+#           root_file:
+#             MusicFormatsUserGuide.tex
 
 
       - name: Upload the documentation PDF guides

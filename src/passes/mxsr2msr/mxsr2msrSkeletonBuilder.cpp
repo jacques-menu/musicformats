@@ -6224,6 +6224,10 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 
 			ss <<
 				"---> visitEnd (S_tuplet& elt)" <<
+				", fCurrentTupletNumber: " <<
+				fCurrentTupletNumber <<
+				", fTupletTypeKind: " <<
+				fTupletTypeKind <<
 				", fCurrentTupletActualNumber: " <<
 				fCurrentTupletActualNumber <<
 				", fCurrentTupletNormalNumber: " <<
@@ -6256,6 +6260,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 			"Creating a tuplet event if relevant" <<
 			", fCurrentTupletNumber: " <<
 			fCurrentTupletNumber <<
+			", fTupletTypeKind: " <<
+			fTupletTypeKind <<
 			", fCurrentTupletActualNumber: " <<
 			fCurrentTupletActualNumber <<
 			", fCurrentTupletNormalNumber: " <<
