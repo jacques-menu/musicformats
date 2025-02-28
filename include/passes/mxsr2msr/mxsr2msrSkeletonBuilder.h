@@ -799,20 +799,24 @@ class EXP mxsr2msrSkeletonBuilder :
 
     msrTupletTypeKind         fTupletTypeKind;
 
-    int                       fCurrentTupletActualNumber;
+    // <tuplet-actual/> and <tuplet-normal/> markups are optional
+    // so we use:
+//     int                       fTupletActualNotesToBeUsed;
+//     int                       fTupletNormalNotesToBeUsed;
+
+    int                       fCurrentTupletActualNotes;
     std::string               fCurrentTupletActualType;
     int                       fCurrentTupletActualDotsNumber;
-
     Bool                      fOnGoingTupletActual;
 
-    int                       fCurrentTupletNormalNumber;
+    int                       fCurrentTupletNormalNotes;
     std::string               fCurrentTupletNormalType;
     int                       fCurrentTupletNormalDotsNumber;
+    Bool                      fOnGoingTupletNormal;
 
     Bool                      fCurrentNoteBelongsToATuplet;
     Bool                      fPreviousNoteBelongsToATuplet;
 
-    Bool                      fOnGoingTupletNormal;
 
     // there can be several tuplet begin or end events upon a given note,
     // so we delay their handling to visitEnd (s_note& elt)

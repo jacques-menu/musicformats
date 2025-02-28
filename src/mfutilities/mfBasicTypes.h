@@ -46,7 +46,7 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
   to switch the use of these types on and off easily
 */
 
-#define MF_USE_WRAPPED_TYPES
+// #define MF_USE_WRAPPED_TYPES
 
 
 // input line numbers

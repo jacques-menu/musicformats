@@ -5492,7 +5492,7 @@ std::string lpsr2lilypondTranslator::harmonyAsLilypondString (
         getMsrQuarterTonesPitchesLanguageKind ());
 
   // generate harmony duration
-  msrTupletFactor
+  const msrTupletFactor&
     harmonyTupletFactor =
       harmony->getHarmonyTupletFactor ();
 
@@ -5950,7 +5950,7 @@ std::string lpsr2lilypondTranslator::figuredBassAsLilypondString (
   ss << ">";
 
   // generate figured bass element duration
-  msrTupletFactor
+  const msrTupletFactor&
     figuredBassTupletFactor =
       figuredBass->getFiguredBassTupletFactor ();
 
@@ -12921,8 +12921,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         "% --> Start visiting msrHarmony '" <<
         elt->asString () <<
         '\'' <<
-        ", fOnGoingNotesStack.size (): " <<
-        fOnGoingNotesStack.size () <<
+        ", fCurrentTupletsStack.size (): " <<
+        fCurrentTupletsStack.size () <<
         ", fOnGoingChord: " <<
         fOnGoingChord <<
         ", fOnGoingHarmoniesVoice: " <<
@@ -12943,14 +12943,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (! fOnGoingNotesStack.empty ()) {
+  if (! fCurrentTupletsStack.empty ()) {
   /* JMI v0.9.66
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmonies ()) {
       std::stringstream ss;
 
       ss <<
-        "%{ fOnGoingNotesStack.size () S_msrHarmony JMI " <<
+        "%{ fCurrentTupletsStack.size () S_msrHarmony JMI " <<
         elt->asString () <<
         " %} ";
 
@@ -13018,7 +13018,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (! fOnGoingNotesStack.empty ()) {
+  if (! fCurrentTupletsStack.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceFrames ()) {
       generateComment (elt->asString ());
@@ -13058,8 +13058,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
         "% --> Start visiting msrFiguredBass '" <<
         elt->asString () <<
         '\'' <<
-        ", fOnGoingNotesStack.size (): " <<
-        fOnGoingNotesStack.size () <<
+        ", fCurrentTupletsStack.size (): " <<
+        fCurrentTupletsStack.size () <<
         ", fOnGoingChord: " <<
         fOnGoingChord <<
         ", fOnGoingFiguredBassVoice: " <<
@@ -13101,11 +13101,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
   if (doHandleFiguredBass) {
     fCurrentFiguredBass = elt;
 
-    if (! fOnGoingNotesStack.empty ()) {
+    if (! fCurrentTupletsStack.empty ()) {
   #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceFiguredBasses ()) {
         fLilypondCodeStream <<
-          "%{ fOnGoingNotesStack.size () S_msrFiguredBass JMI " <<
+          "%{ fCurrentTupletsStack.size () S_msrFiguredBass JMI " <<
           fCurrentFiguredBass->asString () <<
           " %}" <<
           std::endl;
@@ -13311,7 +13311,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
       ">";
 
     // generate figured bass duration
-    msrTupletFactor
+    const msrTupletFactor&
       figuredBassTupletFactor =
         elt->getFiguredBassTupletFactor ();
 
@@ -19025,9 +19025,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoTuplet& elt)
 
   fLilypondCodeStream <<
     cLilypondTupletOpener1 <<
-    tempoTupletFactor.getTupletActualNotes () <<
-    '/' <<
-    tempoTupletFactor.getTupletNormalNotes () <<
+    tupletFactorAsLilypondString (tempoTupletFactor) <<
     cLilypondTupletOpener2;
 }
 
@@ -19226,7 +19224,7 @@ Articulations can be attached to rests as well as notes but they cannot be attac
   } // switch
 
   // don't generate fermatas for chord member notes
-  if (false && ! fOnGoingNotesStack.empty ()) { // JMI
+  if (false && ! fCurrentTupletsStack.empty ()) { // JMI
     switch (elt->getFermataTypeKind ()) {
       case msrArticulationFermataType::kArticulationFermataTypeNone:
         // no placement needed
@@ -22081,7 +22079,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // register the note as on-going note
-  fOnGoingNotesStack.push_front (elt); // will be popped in visitEnd (S_msrNote&)
+//   fCurrentNotesTupletsStack.push_front (elt); // JMI will be popped in visitEnd (S_msrNote&)
 
 //   switch (elt->getNoteKind ()) {
 //     case msrNoteKind::kNote_UNKNOWN_:
@@ -23725,7 +23723,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
   }
 
   // unregister the note as on-going note
-  fOnGoingNotesStack.pop_front (); // was pushed in visitStart (S_msrNote&)
+//   fCurrentNotesTupletsStack.pop_front (); // JMI was pushed in visitStart (S_msrNote&)
 
   S_msrSingleTremolo
     noteSingleTremolo =
@@ -25674,19 +25672,29 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceLpsrVisitors =
+      traceLpsrVisitors = true ||
         gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
+    gLog <<
+      "++++++++++++ visitStart (S_msrTuplet& elt)" <<
+      ", elt: " <<
+      std::endl;
+    ++gIndenter;
+    elt->print (gLog);
+    --gIndenter;
+
     if (traceLpsrVisitors || generateMsrVisitingInformation) {
       std::stringstream ss;
 
       ss <<
-        "% --> Start visiting msrTuplet" <<
+        "% --> Start visiting msrTuplet " <<
         elt->asShortString () <<
+        ", fOnGoingChord: " <<
+        fOnGoingChord <<
         ", fOnGoingChord: " <<
         fOnGoingChord <<
         ", fOnGoingGraceNotesGroup: " <<
@@ -25702,6 +25710,16 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
           ss.str ());
       }
 
+      gLog <<
+        "------>>>>> tuplet is:" <<
+        std::endl;
+      ++gIndenter;
+      elt->print (gLog);
+      --gIndenter;
+      gLog <<
+        "<<<<<<------" <<
+        std::endl;
+
       if (generateMsrVisitingInformation) {
         fLilypondCodeStream << ss.str ();
       }
@@ -25709,20 +25727,20 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (! fOnGoingTupletsStack.empty ()) {
-    // elt is a nested tuplet
-
-    S_msrTuplet
-      containingTuplet =
-        fOnGoingTupletsStack.front ();
-
-    // unapply containing tuplet factor,
-    // i.e 3/2 inside 5/4 becomes 15/8 in MusicXML...
-    elt->
-      unapplySoundingFactorToTupletMembers (
-        containingTuplet->
-          getTupletFactor ());
-  }
+//   if (! fCurrentTupletsStack.empty ()) { // JMI v0.9.72 CHENIT INTEGRAL!!!
+//     // elt is a nested tuplet
+//
+//     S_msrTuplet
+//       containingTuplet =
+//         fCurrentTupletsStack.front ();
+//
+//     // unapply containing tuplet factor,
+//     // i.e 3/2 inside 5/4 becomes 15/8 in MusicXML...
+//     elt->
+//       unapplySoundingFactorToTupletMembers (
+//         containingTuplet->
+//           getTupletFactor ());
+//   }
 
 //   if (gGlobalLpsr2lilypondOahGroup->getIndentTuplets ()) { // JMI ??? v0.9.67
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
@@ -25844,11 +25862,22 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 //       elt->getTupletFactor ()->
 //         getSingleTremoloUpLinkToNote ();
 
-  // generated the \tuplet command
+  // generate the \tuplet command
   fLilypondCodeStream <<
     cLilypondTupletOpener1 <<
-    tupletFactorAsLilypondString (elt->getTupletFactor ()) <<
+//     tupletFactorAsLilypondString (elt->getTupletFactor ()) <<
+    elt->getTupletFactor ().getTupletActualNotes () <<
+    '/' <<
+    elt->getTupletFactor ().getTupletNormalNotes () <<
     cLilypondTupletOpener2;
+
+  if (true) { // JMI
+    fLilypondCodeStream <<
+      " %{ tupletNumber: " << elt->getTupletNumber () <<
+      ", tupleFactor: " << elt->getTupletFactor ().asFractionString () <<
+      ", line " << elt->getInputLineNumber () <<
+      " %} ";
+  }
 
   if (gGlobalLpsr2lilypondOahGroup->getIndentTuplets ()) {
     fLilypondCodeStream << std::endl;
@@ -25859,7 +25888,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   }
 
   // push the tuplet onto the ongoing tuplets stack
-  fOnGoingTupletsStack.push_front (elt);
+  fCurrentTupletsStack.push_front (elt);
 
   // force durations to be displayed explicitly
   // at the beginning of the tuplet
@@ -25871,7 +25900,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceLpsrVisitors =
+      traceLpsrVisitors = true ||
         gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
@@ -25882,7 +25911,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
       std::stringstream ss;
 
       ss <<
-        "% --> End visiting msrTuplet" <<
+        "% --> End visiting msrTuplet " <<
+        elt->asShortString () <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -25891,6 +25921,16 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
           __FILE__, __LINE__,
           ss.str ());
       }
+
+      gLog <<
+        "------>>>>> tuplet is:" <<
+        std::endl;
+      ++gIndenter;
+      elt->print (gLog);
+      --gIndenter;
+      gLog <<
+        "<<<<<<------" <<
+        std::endl;
 
       if (generateMsrVisitingInformation) {
         fLilypondCodeStream << ss.str ();
@@ -25924,7 +25964,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
   } // switch
 
   // pop the tuplet from the ongoing tuplets stack
-  fOnGoingTupletsStack.pop_front ();
+  fCurrentTupletsStack.pop_front ();
 
 /* JMI
   // forget about the current octave entry reference
@@ -25971,9 +26011,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
     case msrTieKind::kTieNone:
       break;
     case msrTieKind::kTieStart:
-      if (! fOnGoingNotesStack.empty ()) {
+      if (! fCurrentTupletsStack.empty ()) {
         // this precludes generating for the chords' ties,
-        // since the last of its notes sets fOnGoingNotesStack.size > 0 to false
+        // since the last of its notes sets fCurrentTupletsStack.size > 0 to false
         // after code has been generated for it
         fLilypondCodeStream <<
   // JMI        "%{line " << elt->getInputLineNumber () << "%} " <<

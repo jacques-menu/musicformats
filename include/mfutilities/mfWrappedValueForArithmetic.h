@@ -131,6 +131,9 @@ class mfWrappedValueForArithmetic
                               otherWrappedValueForArithmetic) const;
 
     bool                  operator > (
+                            T otherBareValue) const;
+
+    bool                  operator > (
                             const mfWrappedValueForArithmetic <
                               T,
                               printPrefix,
@@ -296,6 +299,7 @@ mfWrappedValueForArithmetic <
 // comparison operators
 // ------------------------------------------------------
 
+// operator ==
 template <
   typename           T,
   const std::string& printPrefix,
@@ -315,6 +319,7 @@ bool mfWrappedValueForArithmetic <
   return fBareValue == otherWrappedValue.fBareValue;
 }
 
+// operator !=
 template <
   typename           T,
   const std::string& printPrefix,
@@ -334,6 +339,7 @@ bool mfWrappedValueForArithmetic <
   return fBareValue != otherWrappedValue.fBareValue;
 }
 
+// operator <
 template <
   typename           T,
   const std::string& printPrefix,
@@ -353,6 +359,7 @@ bool mfWrappedValueForArithmetic <
   return fBareValue < otherWrappedValue.fBareValue;
 }
 
+// operator <=
 template <
   typename           T,
   const std::string& printPrefix,
@@ -372,6 +379,7 @@ bool mfWrappedValueForArithmetic <
   return fBareValue <= otherWrappedValue.fBareValue;
 }
 
+// operator >=
 template <
   typename           T,
   const std::string& printPrefix,
@@ -391,6 +399,7 @@ bool mfWrappedValueForArithmetic <
   return fBareValue >= otherWrappedValue.fBareValue;
 }
 
+// operator >
 template <
   typename           T,
   const std::string& printPrefix,
@@ -407,12 +416,33 @@ bool mfWrappedValueForArithmetic <
 >::operator > (
   const mfWrappedValueForArithmetic& otherWrappedValue) const
 {
-  return fBareValue < otherWrappedValue.fBareValue;
+  return fBareValue > otherWrappedValue.fBareValue;
 }
+
+template <
+  typename           T,
+  const std::string& printPrefix,
+  const std::string& printPostfix,
+  const T&           neutralValue,
+  const std::string& neutralValueString
+>
+bool mfWrappedValueForArithmetic <
+  T,
+  printPrefix,
+   printPostfix,
+  neutralValue,
+  neutralValueString
+>::operator > (
+  T otherBareValue) const
+{
+  return fBareValue > otherBareValue;
+}
+
 
 // arithmetic operators
 // ------------------------------------------------------
 
+// operator +
 template <
   typename           T,
   const std::string& printPrefix,
@@ -439,6 +469,7 @@ mfWrappedValueForArithmetic <
   return mfWrappedValueForArithmetic (fBareValue + otherWrappedValue.fBareValue);
 }
 
+// operator -
 template <
   typename           T,
   const std::string& printPrefix,
@@ -468,6 +499,7 @@ mfWrappedValueForArithmetic <
 // increment/decrement operators
 // ------------------------------------------------------
 
+// operator +=
 template <
   typename           T,
   const std::string& printPrefix,
@@ -494,6 +526,7 @@ mfWrappedValueForArithmetic <
   return mfWrappedValueForArithmetic (fBareValue += otherWrappedValue.fBareValue);
 }
 
+// operator -=
 template <
   typename           T,
   const std::string& printPrefix,

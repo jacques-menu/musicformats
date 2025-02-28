@@ -168,89 +168,6 @@ void msrTuplet::setTupletKind (
   fTupletKind = tupletKind;
 }
 
-msrTupletInKind msrTuplet::getTupletKind () const
-{
-  return fTupletKind;
-}
-
-// number
-int msrTuplet::getTupletNumber () const
-{
-  return fTupletNumber;
-}
-
-// appearance
-msrTupletBracketKind msrTuplet::getTupletBracketKind () const
-{
-  return fTupletBracketKind;
-}
-
-msrTupletLineShapeKind
-  msrTuplet::getTupletLineShapeKind () const
-{
-  return fTupletLineShapeKind;
-}
-
-msrTupletTypeKind msrTuplet::getTupletTypeKind () const
-{
-  return fTupletTypeKind;
-}
-
-msrTupletShowNumberKind
-  msrTuplet::getTupletShowNumberKind () const
-{
-  return fTupletShowNumberKind;
-}
-
-msrTupletShowTypeKind msrTuplet::getTupletShowTypeKind () const
-{
-  return fTupletShowTypeKind;
-}
-
-// tuplet factor
-const msrTupletFactor&
-  msrTuplet::getTupletFactor () const
-{
-  return fTupletFactor;
-}
-
-// tuplets elements list
-const std::list <S_msrTupletElement>&
-  msrTuplet::getTupletElementsList () const
-{
-  return fTupletElementsList;
-}
-
-// tuplet durations
-msrWholeNotes msrTuplet::getTupletDisplayWholeNotes () const
-{
-  return fTupletDisplayWholeNotes;
-}
-
-// tuplet placement
-void msrTuplet::setTupletPlacementKind (msrPlacementKind placementKind)
-{
-  fTupletPlacementKind = placementKind;
-}
-
-msrPlacementKind msrTuplet::getTupletPlacementKind () const
-{
-  return fTupletPlacementKind;
-}
-
-// containing tuplet
-
-void msrTuplet::setTupletUpLinkToContainingTuplet (
-  const S_msrTuplet& tuplet)
-{
-  fTupletUpLinkToContainingTuplet = tuplet;
-}
-
-S_msrTuplet msrTuplet::getTupletUpLinkToContainingTuplet () const
-{
-  return fTupletUpLinkToContainingTuplet;
-}
-
 //______________________________________________________________________________
 void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
 {
@@ -1150,7 +1067,7 @@ std::string msrTuplet::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Tuplet asShortString ()" <<
+    "[Tuplet" <<
     ", fTupletNumber: " << fTupletNumber <<
     ", fTupletFactor: " << fTupletFactor.asFractionString () <<
     ", fTupletKind: " << fTupletKind <<

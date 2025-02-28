@@ -34,6 +34,19 @@ msrTupletFactor::msrTupletFactor (
 {
   fTupletActualNotes = tupletActualNotes;
   fTupletNormalNotes = tupletNormalNotes;
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check JMI v0.9.70
+  mfAssert (
+    __FILE__, __LINE__,
+    fTupletActualNotes > 0,
+    "fTupletActualNotes is not positive");
+
+  mfAssert (
+    __FILE__, __LINE__,
+    fTupletNormalNotes > 0,
+    "fTupletNormalNotes is not positive");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 }
 
 msrTupletFactor::msrTupletFactor (
@@ -41,6 +54,19 @@ msrTupletFactor::msrTupletFactor (
 {
   fTupletActualNotes = rationalTupletFactor.getNumerator ();
   fTupletNormalNotes = rationalTupletFactor.getDenominator ();
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check JMI v0.9.70
+  mfAssert (
+    __FILE__, __LINE__,
+    fTupletActualNotes > 0,
+    "fTupletActualNotes is not positive");
+
+  mfAssert (
+    __FILE__, __LINE__,
+    fTupletNormalNotes > 0,
+    "fTupletNormalNotes is not positive");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 }
 
 msrTupletFactor::~msrTupletFactor ()
@@ -48,8 +74,9 @@ msrTupletFactor::~msrTupletFactor ()
 
 msrTupletFactor msrTupletFactor::inverse () const
 {
-  msrTupletFactor result (
-    fTupletNormalNotes, fTupletActualNotes);
+  msrTupletFactor
+    result (
+      fTupletNormalNotes, fTupletActualNotes);
 
   return result;
 }

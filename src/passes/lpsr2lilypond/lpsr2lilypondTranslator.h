@@ -1247,7 +1247,7 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& note);
 
     std::list <S_msrTuplet>
-                          fOnGoingTupletsStack;
+                          fCurrentTupletsStack;
 
     // tremolos
     // ------------------------------------------------------
@@ -1744,7 +1744,7 @@ class EXP lpsr2lilypondTranslator :
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    std::list <S_msrNote> fOnGoingNotesStack; // USELESS??? JMI CLAR
+//     std::list <S_msrNote> fCurrentNotesTupletsStack; // USELESS??? JMI CLAR
 
 
     // double tremolos

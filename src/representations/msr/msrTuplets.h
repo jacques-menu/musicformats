@@ -74,17 +74,63 @@ class EXP msrTuplet : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
+    // number
+    int                   getTupletNumber () const
+                              { return fTupletNumber; };
+
+    // tuplet factor
+    const msrTupletFactor&
+                          getTupletFactor () const
+                              { return fTupletFactor; };
+
     // tuplet kind
     void                  setTupletKind (
                             msrTupletInKind tupletKind);
 
-    msrTupletInKind       getTupletKind () const;
+    msrTupletInKind       getTupletKind () const
+                              { return fTupletKind; };
+
+    // appearance
+    msrTupletBracketKind  getTupletBracketKind () const
+                              { return fTupletBracketKind; };
+
+    msrTupletLineShapeKind
+                          getTupletLineShapeKind () const
+                              { return fTupletLineShapeKind; };
+
+    msrTupletTypeKind     getTupletTypeKind () const
+                              { return fTupletTypeKind; };
+
+    msrTupletShowNumberKind
+                          getTupletShowNumberKind () const
+                              { return fTupletShowNumberKind; };
+
+    msrTupletShowTypeKind getTupletShowTypeKind () const
+                              { return fTupletShowTypeKind; };
+
+    // tuplets elements list
+    const std::list <S_msrTupletElement>&
+                          getTupletElementsList () const
+                              { return fTupletElementsList; };
+
+    // tuplet display whole notes
+    msrWholeNotes         getTupletDisplayWholeNotes () const
+                              { return fTupletDisplayWholeNotes; };
+
+    // tuplet placement
+    void                  setTupletPlacementKind (msrPlacementKind placementKind)
+                              { fTupletPlacementKind = placementKind; };
+
+    msrPlacementKind      getTupletPlacementKind () const
+                              { return fTupletPlacementKind; };
 
     // uplink to tuplet
     void                  setTupletUpLinkToContainingTuplet (
-                            const S_msrTuplet& tuplet);
+                            const S_msrTuplet& tuplet)
+                              { fTupletUpLinkToContainingTuplet = tuplet; };
 
-    S_msrTuplet           getTupletUpLinkToContainingTuplet () const;
+    S_msrTuplet           getTupletUpLinkToContainingTuplet () const
+                              { return fTupletUpLinkToContainingTuplet; };
 
     // measure positions
     // this override calls setTupletMembersPositionInMeasures()
@@ -96,38 +142,6 @@ class EXP msrTuplet : public msrTupletElement
     void                  setTupletMembersPositionInMeasures (
                             const S_msrMeasure&  measure,
                             const msrWholeNotes& positionInMeasure);
-
-    // number
-    int                   getTupletNumber () const;
-
-    // appearance
-    msrTupletBracketKind  getTupletBracketKind () const;
-
-    msrTupletLineShapeKind
-                          getTupletLineShapeKind () const;
-
-    msrTupletTypeKind     getTupletTypeKind () const;
-
-    msrTupletShowNumberKind
-                          getTupletShowNumberKind () const;
-
-    msrTupletShowTypeKind getTupletShowTypeKind () const;
-
-    // tuplet factor
-    const msrTupletFactor&
-                          getTupletFactor () const;
-
-    // tuplets elements list
-    const std::list <S_msrTupletElement>&
-                          getTupletElementsList () const;
-
-    // tuplet durations
-    msrWholeNotes         getTupletDisplayWholeNotes () const;
-
-    void                  setTupletPlacementKind (msrPlacementKind placementKind);
-
-    // tuplet placement
-    msrPlacementKind      getTupletPlacementKind () const;
 
   public:
 

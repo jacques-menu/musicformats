@@ -1056,15 +1056,15 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& note);
 
     // regular notes in measures
-    void                  handleRegularNoteInMeasure (
-                            const S_msrNote& regularNote);
+//     void                  handleRegularNoteInMeasure (
+//                             const S_msrNote& regularNote);
 
     void                  generateRegularNoteInMeasure (
                             const S_msrNote& regularNote);
 
     // rests in measures
-    void                  handleRestInMeasure (
-                            const S_msrNote& rest);
+//     void                  handleRestInMeasure (
+//                             const S_msrNote& rest);
 
     void                  generateRestInMeasure (
                             const S_msrNote& rest);
@@ -1078,28 +1078,28 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& unpitchedRest);
 
     // skips in measures
-    void                  handleSkipInMeasure (
-                            const S_msrNote& skip);
+//     void                  handleSkipInMeasure (
+//                             const S_msrNote& skip);
 
     // unpitched notes in measures
-    void                  handleUnpitchedNoteInMeasure (
-                            const S_msrNote& unpitchedNote);
+//     void                  handleUnpitchedNoteInMeasure (
+//                             const S_msrNote& unpitchedNote);
 
     void                  generateUnpitchedNoteInMeasure (
                             const S_msrNote& note);
 
     // notes in grace notes groups
-    void                  handleNoteInGraceNotesGroup (
-                            const S_msrNote& note);
+//     void                  handleNoteInGraceNotesGroup (
+//                             const S_msrNote& note);
 
     // skips in grace notes groups
-    void                  handleSkipInGraceNotesGroup (
-                            const S_msrNote& note);
+//     void                  handleSkipInGraceNotesGroup (
+//                             const S_msrNote& note);
 
-    // notes in chords
-    void                  handleRegularNoteInChord (
-                            const S_msrNote& regularNote);
-
+//     // notes in chords
+//     void                  handleRegularNoteInChord (
+//                             const S_msrNote& regularNote);
+//
     void                  generateCodeRightBeforeNote (
                             const S_msrNote& note);
 
@@ -1110,32 +1110,31 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& note);
 
     // regular notes in tuplets
-    void                  handleRegularNoteInTuplet (
-                            const S_msrNote& regularNote);
-
+//     void                  handleRegularNoteInTuplet (
+//                             const S_msrNote& regularNote);
+//
     void                  generateRegularNoteInTuplet (
                             const S_msrNote& note);
 
     // rests in tuplets
-    void                  handleRestInTuplet (
-                            const S_msrNote& rest);
-
-    // unpitched notes in tuplets
-    void                  handleUnpitchedNoteInTuplet (
-                            const S_msrNote& unpitchedNote);
-
-    // notes in chords in grace notes groups
-    void                  handleNoteInChordInGraceNotesGroup (
-                            const S_msrNote& regularNote);
-
-    // notes in tuplets in grace notes groups
-    void                  handleNoteInTupletInGraceNotesGroup (
-                            const S_msrNote& regularNote);
-
-    // double tremolos
-    void                  handleNoteInDoubleTremolo (
-                            const S_msrNote& regularNote);
-
+//     void                  handleRestInTuplet (
+//                             const S_msrNote& rest);
+//
+//     // unpitched notes in tuplets
+//     void                  handleUnpitchedNoteInTuplet (
+//                             const S_msrNote& unpitchedNote);
+//
+//     // notes in chords in grace notes groups
+//     void                  handleNoteInChordInGraceNotesGroup (
+//                             const S_msrNote& regularNote);
+//
+//     // notes in tuplets in grace notes groups
+//     void                  handleNoteInTupletInGraceNotesGroup (
+//                             const S_msrNote& regularNote);
+//
+//     // double tremolos
+//     void                  handleNoteInDoubleTremolo (
+//                             const S_msrNote& regularNote);
 
     void                  generateStuffBeforeTheNoteIself (
                             const S_msrNote& note);
@@ -1248,7 +1247,7 @@ class EXP lpsr2lilypondTranslator :
                             const S_msrNote& note);
 
     std::list <S_msrTuplet>
-                          fOnGoingTupletsStack;
+                          fCurrentTupletsStack;
 
     // tremolos
     // ------------------------------------------------------
@@ -1745,7 +1744,7 @@ class EXP lpsr2lilypondTranslator :
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    std::list <S_msrNote> fOnGoingNotesStack; // USELESS??? JMI CLAR
+//     std::list <S_msrNote> fCurrentNotesTupletsStack; // USELESS??? JMI CLAR
 
 
     // double tremolos

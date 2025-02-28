@@ -37,8 +37,8 @@ class EXP mfRational
     // ------------------------------------------------------
 
                           mfRational (
-                            long int num   = 0,
-                            long int denom = 1);
+                            int num   = 0,
+                            int denom = 1);
 
                           mfRational (const mfRational& rat);
 
@@ -52,17 +52,17 @@ class EXP mfRational
     // set and get
     // ------------------------------------------------------
 
-    void                  setNumerator (long int num)
+    void                  setNumerator (int num)
                               { fNumerator = num; }
-    long int              getNumerator ()  const
+    int                   getNumerator ()  const
                               { return fNumerator; }
 
-    void                  setDenominator (long int denom)
+    void                  setDenominator (int denom)
                               { fDenominator = denom; }
-    long int              getDenominator () const
+    int                   getDenominator () const
                               { return fDenominator; }
 
-    void                  set (long int num, long int denom)
+    void                  set (int num, int denom)
                               { fNumerator = num; fDenominator = denom; }
 
   public:
@@ -72,34 +72,34 @@ class EXP mfRational
 
     // arithmetic
 
-    mfRational              inverse () const;
-    mfRational              opposite () const;
+    mfRational            inverse () const;
+    mfRational            opposite () const;
 
-    mfRational              operator + (const mfRational &rat) const;
-    mfRational              operator - (const mfRational &rat) const;
+    mfRational            operator + (const mfRational &rat) const;
+    mfRational            operator - (const mfRational &rat) const;
     //! Useful for notes with dots.
-    mfRational              operator * (const mfRational &rat) const;
-    mfRational              operator / (const mfRational &rat) const;
+    mfRational            operator * (const mfRational &rat) const;
+    mfRational            operator / (const mfRational &rat) const;
     // (i.e. rat * 3/2 or rat * 7/4)
 
-    mfRational              operator * (int num) const;
-    mfRational              operator / (int num) const;
+    mfRational            operator * (int num) const;
+    mfRational            operator / (int num) const;
 
-    mfRational&             operator += (const mfRational &rat);
+    mfRational&           operator += (const mfRational &rat);
     mfRational&             operator -= (const mfRational &rat);
     //! Useful for notes with dots.
-    mfRational&             operator *= (const mfRational &rat);
-    mfRational&             operator /= (const mfRational &rat);
+    mfRational&           operator *= (const mfRational &rat);
+    mfRational&           operator /= (const mfRational &rat);
     // (i.e. rat * 3/2 or rat * 7/4)
 
-    mfRational&             operator *= (long int num)
+    mfRational&           operator *= (int num)
                               { fNumerator *= num; return *this; }
-    mfRational&             operator /= (long int num)
+    mfRational&           operator /= (int num)
                               { fDenominator *= num; return *this; }
 
     // assignment
 
-    mfRational&             operator = (const mfRational& rat);
+    mfRational&           operator = (const mfRational& rat);
 
     // comparisons
 
@@ -156,8 +156,8 @@ class EXP mfRational
     // private fields
     // ------------------------------------------------------
 
-    long int              fNumerator;
-    long int              fDenominator;
+    int                   fNumerator;
+    int                   fDenominator;
 };
 
 EXP std::ostream& operator << (std::ostream& os, const mfRational& rat);
