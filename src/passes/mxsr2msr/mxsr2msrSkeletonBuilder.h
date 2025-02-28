@@ -801,8 +801,8 @@ class EXP mxsr2msrSkeletonBuilder :
 
     // <tuplet-actual/> and <tuplet-normal/> markups are optional
     // so we use:
-    int                       fTupletActualNotesToBeUsed;
-    int                       fTupletNormalNotesToBeUsed;
+//     int                       fTupletActualNotesToBeUsed;
+//     int                       fTupletNormalNotesToBeUsed;
 
     int                       fCurrentTupletActualNotes;
     std::string               fCurrentTupletActualType;

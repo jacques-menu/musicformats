@@ -2755,7 +2755,7 @@ void mxsrEventsCollection::fetchTupletBeginsAtNoteSequentialNumber (
     std::multimap <int, S_mxsrTupletEvent>::const_iterator
   > iteratorsPair;
 
-  iteratorsPair = fTupletBeginsMultiMap.equal_range(
+  iteratorsPair = fTupletBeginsMultiMap.equal_range (
     noteSequentialNumber);
 
   for (
@@ -2769,6 +2769,7 @@ void mxsrEventsCollection::fetchTupletBeginsAtNoteSequentialNumber (
 //     std::cout << "tupletEvent: " << tupletEvent << std::endl; JMI
 
     recipientTupletBeginsList.push_back (tupletEvent);
+//     recipientTupletBeginsList.push_front (tupletEvent);
   } // for
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2804,7 +2805,7 @@ void mxsrEventsCollection::fetchTupletEndsListAtNoteSequentialNumber (
     std::multimap <int, S_mxsrTupletEvent>::const_iterator
   > iteratorsPair;
 
-  iteratorsPair = fTupletEndsMultiMap.equal_range(
+  iteratorsPair = fTupletEndsMultiMap.equal_range (
     noteSequentialNumber);
 
   for (
@@ -2818,6 +2819,7 @@ void mxsrEventsCollection::fetchTupletEndsListAtNoteSequentialNumber (
 //     std::cout << "tupletEvent: " << tupletEvent << std::endl; JMI
 
     recipientTupletEndsList.push_back (tupletEvent);
+//     recipientTupletEndsList.push_front (tupletEvent);
   } // for
 
 #ifdef MF_TRACE_IS_ENABLED

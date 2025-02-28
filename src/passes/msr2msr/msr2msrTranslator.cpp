@@ -5051,15 +5051,21 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             copyNoteValuesToChord (
               fCurrentNoteClone);
 
-          // increment the current measure's accumulated duration
-          // by the current chord's duration
-          fCurrentMeasureClone->
-            incrementMeasureAccumulatedWholeNotesDuration (
-              elt->getInputLineNumber (),
-              fCurrentNoteClone->getMeasureElementSoundingWholeNotes (),
-              "msr2msrTranslator::visitEnd (S_msrNote& elt) 2: "
-                +
-              fCurrentChordClone->asShortString ());
+          // append current chord clone to the current voice,
+          // only now that its duration is known
+          fCurrentVoiceClone->
+            appendChordToVoice (
+              fCurrentChordClone);
+
+//           // increment the current measure's accumulated duration
+//           // by the current chord's duration
+//           fCurrentMeasureClone->
+//             incrementMeasureAccumulatedWholeNotesDuration (
+//               elt->getInputLineNumber (),
+//               fCurrentNoteClone->getMeasureElementSoundingWholeNotes (),
+//               "msr2msrTranslator::visitEnd (S_msrNote& elt) 2: "
+//                 +
+//               fCurrentChordClone->asShortString ());
 
           fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
         }
@@ -5623,10 +5629,13 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
   }
 
   else {
-    // append current chord clone to the current voice
-    fCurrentVoiceClone->
-      appendChordToVoice (
-        fCurrentChordClone);
+    // DON'T append current chord chone to the current voice clone yet,
+    // wait until its first note is appended to it,
+    // i.e. its duration is known
+//     // append current chord clone to the current voice
+//     fCurrentVoiceClone->
+//       appendChordToVoice (
+//         fCurrentChordClone);
   }
 
   fOnGoingChord = true;

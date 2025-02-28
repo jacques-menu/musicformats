@@ -6725,6 +6725,12 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
             copyNoteValuesToChord (
               fCurrentNoteClone);
 
+          // append current chord clone to the current voice,
+          // only now that its duration is known
+          fCurrentVoiceClone->
+            appendChordToVoice (
+              fCurrentChordClone);
+
           fCurrentChordHasBeenPopulatedFromItsFirstNote = true;
         }
      }
@@ -7288,10 +7294,13 @@ void msr2lpsrTranslator::visitStart (S_msrChord& elt)
   }
 
   else {
+    // DON'T append current chord chone to the current voice clone yet,
+    // wait until its first note is appended to it,
+    // i.e. its duration is known
     // append current chord clone to the current voice
-    fCurrentVoiceClone->
-      appendChordToVoice (
-        fCurrentChordClone);
+//     fCurrentVoiceClone->
+//       appendChordToVoice (
+//         fCurrentChordClone);
   }
 
   fOnGoingChord = true;

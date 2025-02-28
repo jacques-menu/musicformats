@@ -770,7 +770,7 @@ void msrChord::copyNoteValuesToChord (
   S_msrNote note)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (true || gTraceOahGroup->getTraceChordsBasics ()) {
+  if (gTraceOahGroup->getTraceChordsBasics ()) {
     gLog <<
       "===> copyNoteValuesToChord(), note: " <<
       note <<

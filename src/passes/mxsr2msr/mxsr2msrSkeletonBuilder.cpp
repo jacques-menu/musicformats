@@ -6294,10 +6294,10 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 			", fTupletTypeKind: " <<
 			fTupletTypeKind <<
 
-			", fTupletActualNotesToBeUsed: " <<
-			fTupletActualNotesToBeUsed <<
-			", fTupletNormalNotesToBeUsed: " <<
-			fTupletNormalNotesToBeUsed <<
+// 			", fTupletActualNotesToBeUsed: " <<
+// 			fTupletActualNotesToBeUsed <<
+// 			", fTupletNormalNotesToBeUsed: " <<
+// 			fTupletNormalNotesToBeUsed <<
 
 			", fCurrentNoteSequentialNumber: " <<
 			fCurrentNoteSequentialNumber <<
@@ -6320,11 +6320,11 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
   // sanity check JMI v0.9.70
   mfAssert (
     __FILE__, __LINE__,
-    fTupletActualNotesToBeUsed > 0,
-    "fTupletActualNotesToBeUsed is not positive");
+    fCurrentTupletActualNotes > 0,
+    "fCurrentTupletActualNotes is not positive");
   mfAssert (
     __FILE__, __LINE__,
-    fTupletNormalNotesToBeUsed > 0,
+    fCurrentTupletNormalNotes > 0,
     "fCurrentTupletNormalNotes is not positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
@@ -6341,16 +6341,16 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 						fResultingEventsCollection.createATupletBeginEvent (
 							fCurrentTupletNumber,
 							msrTupletFactor (
-								fTupletActualNotesToBeUsed,
-								fTupletNormalNotesToBeUsed),
+								fCurrentTupletActualNotes,
+								fCurrentTupletNormalNotes),
 							fCurrentNoteSequentialNumber,
 							fCurrentNoteStaffNumber,
 							fCurrentNoteVoiceNumber,
 							fCurrentNoteInputLineNumber);
 
-				// register it in the pending tuplet begins list
-		// push it ahead of fPendingTupletEventsList
-		// since there can be several tuplet starts upon a given note
+			// register it in the pending tuplet begins list
+			//	push it ahead of fPendingTupletEventsList
+			// 	since there can be several tuplet starts upon a given note
 #ifdef MF_TRACE_IS_ENABLED
 				if (gTraceOahGroup->getTraceTupletsBasics ()) {
 					std::stringstream ss;
@@ -6358,7 +6358,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 					ss <<
 						"Appending tuplet end event " <<
 						tupletBeginEvent->asString () <<
-						" ahead of fPendingTupletBeginEventsList" <<
+						" to fPendingTupletBeginEventsList" <<
 						", line " << elt->getInputLineNumber ();
 
 					gWaeHandler->waeTrace (
@@ -6367,7 +6367,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 				}
 #endif // MF_TRACE_IS_ENABLED
 
-				fPendingTupletBeginEventsList.push_front (
+				fPendingTupletBeginEventsList.push_back (
 					tupletBeginEvent);
 
 // 					fPendingTupletsBeginEventsMap.insert (
@@ -6389,8 +6389,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 						fResultingEventsCollection.createATupletEndEvent (
 							fCurrentTupletNumber,
 							msrTupletFactor (
-								fTupletActualNotesToBeUsed,
-								fTupletNormalNotesToBeUsed),
+								fCurrentTupletActualNotes,
+								fCurrentTupletNormalNotes),
 							fCurrentNoteSequentialNumber,
 							fCurrentNoteStaffNumber,
 							fCurrentNoteVoiceNumber,
@@ -6404,7 +6404,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 					ss <<
 						"Appending tuplet end event " <<
 						tupletEndEvent->asString () <<
-						" ahead of fPendingTupletEndEventsList" <<
+						" to fPendingTupletEndEventsList" <<
 						", line " << elt->getInputLineNumber ();
 
 					gWaeHandler->waeTrace (
@@ -6413,7 +6413,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_tuplet& elt)
 				}
 #endif // MF_TRACE_IS_ENABLED
 
-				fPendingTupletEndEventsList.push_front (
+				fPendingTupletEndEventsList.push_back (
 					tupletEndEvent);
 
 // 					fPendingTupletsEndEventsMap.insert (
@@ -6522,30 +6522,28 @@ void mxsr2msrSkeletonBuilder::visitStart (S_tuplet_number& elt)
 
   if (fOnGoingTupletActual) {
     fCurrentTupletActualNotes = tupletNumberValue;
-    fTupletActualNotesToBeUsed = fCurrentTupletActualNotes;
 
     gLog <<
     	"===> visitStart (S_tuplet_number& elt)" <<
     	", fCurrentTupletActualNotes: " <<
     	fCurrentTupletActualNotes <<
 
-    	", fTupletActualNotesToBeUsed: " <<
-    	fTupletActualNotesToBeUsed <<
+    	", fCurrentTupletActualNotes: " <<
+    	fCurrentTupletActualNotes <<
     	", line " << elt->getInputLineNumber () <<
     	std::endl;
   }
 
   else if (fOnGoingTupletNormal) {
     fCurrentTupletNormalNotes = tupletNumberValue;
-    fTupletNormalNotesToBeUsed = fCurrentTupletNormalNotes;
 
     gLog <<
     	"===> visitStart (S_tuplet_number& elt)" <<
     	", fCurrentTupletNormalNotes: " <<
     	fCurrentTupletNormalNotes <<
 
-    	", fTupletNormalNotesToBeUsed: " <<
-    	fTupletNormalNotesToBeUsed <<
+//     	", fTupletNormalNotesToBeUsed: " <<
+//     	fTupletNormalNotesToBeUsed <<
     	", line " << elt->getInputLineNumber () <<
     	std::endl;
   }
@@ -6709,7 +6707,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_actual_notes& elt)
 
   if (fOnGoingNote) {
     fCurrentNoteActualNotes = actualNotes;
-    fTupletActualNotesToBeUsed = fCurrentNoteActualNotes;
+    fCurrentTupletActualNotes = fCurrentNoteActualNotes;
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceTuplets ()) {
@@ -6789,7 +6787,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_notes& elt)
 
   if (fOnGoingNote) {
     fCurrentNoteNormalNotes = normalNotes;
-		fTupletNormalNotesToBeUsed = fCurrentNoteNormalNotes;
+		fCurrentTupletNormalNotes = fCurrentNoteNormalNotes;
 
 
 #ifdef MF_TRACE_IS_ENABLED

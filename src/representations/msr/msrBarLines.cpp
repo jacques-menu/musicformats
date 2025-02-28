@@ -663,7 +663,8 @@ std::string msrBarLine::asString () const
   std::stringstream ss;
 
   ss <<
-    "[BarLine, " <<
+    "[BarLine" <<
+    ", fBarLineCategoryKind: " <<
     fBarLineCategoryKind <<
     ", measureElementMeasureNumber: ";
 
@@ -681,7 +682,7 @@ std::string msrBarLine::asString () const
     ", " <<
     msrBarLineLocationKindAsString (fLocationKind) <<
     ", " <<
-    msrBarLineStyleKindAsString (fStyleKind) <<
+    fStyleKind <<
 
     ", " <<
     msrBarLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
@@ -821,17 +822,23 @@ void msrBarLine::print (std::ostream& os) const
 {
   os <<
     "[BarLine" <<
-    ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
-    ", fStyleKind: " << fStyleKind <<
+    ", " << fStyleKind <<
     ", line " << fInputLineNumber <<
     std::endl;
 
   ++gIndenter;
 
-  constexpr int fieldWidth = 31;
-  os <<
+  constexpr int fieldWidth = 36;
+
+  os << std::left <<
     std::setw (fieldWidth) <<
-   "measureElementMeasureNumber: ";
+    "fBarLineCategoryKind" << ": " <<
+    fBarLineCategoryKind <<
+    std::endl;
+
+  os << std::left <<
+    std::setw (fieldWidth) <<
+   "measureElementMeasureNumber" << ": ";
 
   if (fMeasureElementUpLinkToMeasure) {
     os <<
@@ -842,9 +849,9 @@ void msrBarLine::print (std::ostream& os) const
   }
   os << std::endl;
 
-  os <<
+  os << std::left <<
     std::setw (fieldWidth) <<
-    "fMeasureElementPositionInMeasure" <<
+    "fMeasureElementPositionInMeasure" << ": " <<
     fMeasureElementPositionInMeasure.asString () <<
     std::endl;
 

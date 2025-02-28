@@ -1020,7 +1020,7 @@ void msrMeasure::appendMeasureElementToMeasure (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceMeasures ()) {
+  if (gTraceOahGroup->getTraceMeasuresBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -1083,6 +1083,20 @@ void msrMeasure::appendMeasureElementToMeasure (
         +
       measureElement->asShortString ());
   }
+
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceMeasuresBasics ()) { // JMI
+//     gLog <<
+//       std::endl <<
+//       "======>>> Resulting measure: " <<
+//       std::endl;
+//     ++gIndenter;
+//     print (gLog);
+//     gLog <<
+//       std::endl << std::endl;
+//     --gIndenter;
+//   }
+// #endif // MF_TRACE_IS_ENABLED
 }
 
 void msrMeasure::insertElementInMeasureBeforeIterator (
