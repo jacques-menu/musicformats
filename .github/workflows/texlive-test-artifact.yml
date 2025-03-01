@@ -12,6 +12,7 @@
 name: Test GitHub TexLive actions
 # --------------------------------------------------------------------------
 
+
 # Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
@@ -23,6 +24,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build-and-upload-the-MusicFormats-docummenntation-PDF-files:
@@ -32,7 +34,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repo
         # --------------------------------------------------------------------------
         uses:
@@ -58,7 +59,8 @@ jobs:
 #             MusicFormatsUserGuide.tex
 
 
-      -name: Setup TeXLive
+      - name: Setup TeXLive
+        # --------------------------------------------------------------------------
       - uses: teatimeguest/setup-texlive-action@v3
         with:
           packages: |
@@ -71,26 +73,26 @@ jobs:
 
 
 
-      - name: Compile the maintenance guide - pdflatex run 1/n
-        # --------------------------------------------------------------------------
-      - uses: xu-cheng/texlive-action@v2
-        with:
-          scheme: full
-          run: |
-            apk add make
-            make
+#       - name: Compile the maintenance guide - pdflatex run 1/n
+#       # --------------------------------------------------------------------------
+#       - uses: xu-cheng/texlive-action@v2
+#       with:
+#         scheme: full
+#         run: |
+#           apk add make
+#           make
 
 
-        uses:
-          xu-cheng/latex-action@v3
-        with:
-          work_in_root_file_dir:
-          working_directory:
-            ./documentation/mfmaintainanceguide
-          compiler:
-            pdflatex
-          root_file:
-            MusicFormatsMaintainanceGuide.tex
+#         uses:
+#           xu-cheng/latex-action@v3
+#         with:
+#           work_in_root_file_dir:
+#           working_directory:
+#             ./documentation/mfmaintainanceguide
+#           compiler:
+#             pdflatex
+#           root_file:
+#             MusicFormatsMaintainanceGuide.tex
 
 
 #       - uses: xu-cheng/texlive-action@v2

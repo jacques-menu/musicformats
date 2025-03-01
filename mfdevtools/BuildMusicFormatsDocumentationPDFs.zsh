@@ -40,11 +40,13 @@ FIGURES_NAME="MusicFormatsFigures"
 API_GUIDE_DIR="${DOCUMENTATION_DIR}/mfapiguide"
 API_GUIDE_NAME="MusicFormatsAPIGuide"
 
-PDFLATEX=/Library/TeX/texbin/pdflatex
+PDFLATEX=/Library/TeX/texbin/pdflatex --file-line-error --synctex=1
 
 echo "PDFLATEX: ${PDFLATEX}"
 echo
 
+
+# user guide, 2 pdflatex runs
 
 cd ${USER_GUIDE_DIR}
 echo -n "--> current directory: "; pwd
@@ -52,9 +54,13 @@ echo
 ls -sal ${USER_GUIDE_DIR}/${USER_GUIDE_NAME}.tex
 echo
 echo
-${PDFLATEX} --file-line-error --synctex=1 \
+${PDFLATEX} \
+  ${USER_GUIDE_NAME}.tex
+${PDFLATEX} \
   ${USER_GUIDE_NAME}.tex
 
+
+# maintainance guide, 3 pdflatex runs
 
 cd ${MAINTAINANCE_GUIDE_DIR}
 echo -n "--> current directory: "; pwd
@@ -62,9 +68,15 @@ echo
 ls -sal ${MAINTAINANCE_GUIDE_DIR}/${MAINTAINANCE_GUIDE_NAME}.tex
 echo
 echo
-${PDFLATEX} --file-line-error --synctex=1 \
+${PDFLATEX} \
+  ${MAINTAINANCE_GUIDE_NAME}.tex
+${PDFLATEX} \
+  ${MAINTAINANCE_GUIDE_NAME}.tex
+${PDFLATEX} \
   ${MAINTAINANCE_GUIDE_NAME}.tex
 
+
+# figures, 1 pdflatex run
 
 cd ${FIGURES_DIR}
 echo -n "--> current directory: "; pwd
@@ -72,9 +84,11 @@ echo
 ls -sal ${FIGURES_DIR}/${FIGURES_NAME}.tex
 echo
 echo
-${PDFLATEX} --file-line-error --synctex=1 \
+${PDFLATEX} \
   ${FIGURES_NAME}.tex
 
+
+# API guide, 1 pdflatex run
 
 cd ${API_GUIDE_DIR}
 echo -n "--> current directory: "; pwd
@@ -82,7 +96,7 @@ echo
 ls -sal ${API_GUIDE_DIR}/${API_GUIDE_NAME}.tex
 echo
 echo
-${PDFLATEX} --file-line-error --synctex=1 \
+${PDFLATEX} \
   ${API_GUIDE_NAME}.tex
 
 
