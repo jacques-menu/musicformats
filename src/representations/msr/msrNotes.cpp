@@ -4277,7 +4277,7 @@ std::string msrNote::noteCoreAsString () const
   } // switch
 
 	ss <<
-		"fNoteKind: " << fNoteKind << ' ';
+		"fNoteKind: " << fNoteKind << ", ";
 
 	if (doIncludeSoundingWholeNotes) {
 		ss <<

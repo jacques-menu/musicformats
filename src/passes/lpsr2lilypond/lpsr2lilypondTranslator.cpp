@@ -3421,7 +3421,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInGraceNotesGroup (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      doTraceNotes =
+      doTraceNotes = true ||
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -22501,7 +22501,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
     doGenerateGraceNotesGroupBeforeNote = false;
   }
 
-  if (false && doGenerateGraceNotesGroupBeforeNote) {
+  if (doGenerateGraceNotesGroupBeforeNote) {
     S_msrGraceNotesGroup
       graceNotesGroupBeforeNote =
         elt->getGraceNotesGroupBeforeNote ();
@@ -22525,8 +22525,41 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
-  generateTheNoteItself (elt);
+  switch (elt->getNoteKind ()) {
+    case msrNoteKind::kNote_UNKNOWN_:
+    case msrNoteKind::kNoteRestInMeasure:
+    case msrNoteKind::kNoteSkipInMeasure:
+    case msrNoteKind::kNoteRegularInMeasure:
+    case msrNoteKind::kNoteInDoubleTremolo:
+      generateTheNoteItself (elt);
+      break;
 
+    case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteSkipInGraceNotesGroup:
+      // don't generate the grace notes here,
+      // that is done in generateRegularNoteInGraceNotesGroup()
+      break;
+
+    case msrNoteKind::kNoteInChordInGraceNotesGroup:
+    case msrNoteKind::kNoteRegularInChord:
+    case msrNoteKind::kNoteRegularInTuplet:
+    case msrNoteKind::kNoteRestInTuplet:
+      generateTheNoteItself (elt);
+      break;
+
+    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+      // don't generate the grace notes here,
+      // that is done in generateRegularNoteInGraceNotesGroup()
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInMeasure:
+      generateTheNoteItself (elt);
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInTuplet:
+      generateTheNoteItself (elt);
+      break;
+  } // switch
 
   // generate things after the note
   generateAfterNoteSpannersListIfAny (elt);
