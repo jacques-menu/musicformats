@@ -1,6 +1,9 @@
 # This is a workflow to build the MusicFormats documentation PDF files
 # and create an artifact for them
 
+# https://github.com/xu-cheng/latex-action
+
+
 name: Build and upload the MusicFormats documentation PDF files
 # --------------------------------------------------------------------------
 
