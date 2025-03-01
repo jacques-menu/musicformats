@@ -48,29 +48,30 @@ jobs:
           node-version: '20'
 
 
-#       - name: Compile the user guide - pdflatex run 1/2
-#         # --------------------------------------------------------------------------
-#         uses:
-#           xu-cheng/latex-action@v3
-#         with:
-#           working_directory:
-#             ./documentation/mfuserguide
-#           root_file:
-#             MusicFormatsUserGuide.tex
-
-
-      - name: Setup TeXLive
+      - name: Compile the user guide - pdflatex run 1/2
         # --------------------------------------------------------------------------
-      - uses: teatimeguest/setup-texlive-action@v3
+        uses:
+          xu-cheng/latex-action@v3
         with:
-#           packages: |
-#             scheme-basic
-#             hyperref
-#             microtype
-          scheme: full
-          run: |
-            cd ./documentation/mfmaintainanceguide
-            pdflatex --file-line-error --synctex=1 MusicFormatsMaintainanceGuide.tex
+          working_directory:
+            ./documentation/mfuserguide
+          root_file:
+            MusicFormatsUserGuide.tex |
+            MusicFormatsUserGuide.tex
+
+
+#       - name: Setup TeXLive
+#         # --------------------------------------------------------------------------
+#       - uses: teatimeguest/setup-texlive-action@v3
+#         with:
+# #           packages: |
+# #             scheme-basic
+# #             hyperref
+# #             microtype
+#           scheme: full
+#           run: |
+#             cd ./documentation/mfmaintainanceguide
+#             pdflatex --file-line-error --synctex=1 MusicFormatsMaintainanceGuide.tex
 
 
 
