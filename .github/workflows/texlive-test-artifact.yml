@@ -63,10 +63,11 @@ jobs:
         # --------------------------------------------------------------------------
       - uses: teatimeguest/setup-texlive-action@v3
         with:
-          packages: |
-            scheme-basic
-            hyperref
-            microtype
+#           packages: |
+#             scheme-basic
+#             hyperref
+#             microtype
+          scheme: full
           run: |
             cd ./documentation/mfmaintainanceguide
             pdflatex --file-line-error --synctex=1 MusicFormatsMaintainanceGuide.tex
@@ -151,16 +152,16 @@ jobs:
 #             MusicFormatsUserGuide.tex
 
 
-      - name: Upload the documentation PDF guides
-        # --------------------------------------------------------------------------
-        uses:
-          actions/upload-artifact@v4
-        with:
-          # user guide
-          name:
-            musicformats-documentation-artifact
-          path:
-            ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
-#             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
-          retention-days:
-            10
+#       - name: Upload the documentation PDF guides
+#         # --------------------------------------------------------------------------
+#         uses:
+#           actions/upload-artifact@v4
+#         with:
+#           # user guide
+#           name:
+#             musicformats-documentation-artifact
+#           path:
+#             ./documentation/mfuserguide/MusicFormatsUserGuide.pdf
+# #             ./documentation/mfmaintainanceguide/MusicFormatsMaintainanceGuide.pdf
+#           retention-days:
+#             10
