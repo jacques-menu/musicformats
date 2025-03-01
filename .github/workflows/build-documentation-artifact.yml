@@ -4,7 +4,7 @@
 # https://github.com/xu-cheng/latex-action
 
 
-name: Build and upload the MusicFormats documentation PDF files
+name: Build the MusicFormats documentation PDF files
 # --------------------------------------------------------------------------
 
 # Controls when the action will run.

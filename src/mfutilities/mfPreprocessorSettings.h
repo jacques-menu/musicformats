@@ -40,7 +40,7 @@
 
 // uncomment the following definition if regular, non-debug mode
 // is desired for efficiency
-// #define MF_DEBUG_MODE
+#define MF_DEBUG_MODE
 
 
 #ifdef MF_DEBUG_MODE
