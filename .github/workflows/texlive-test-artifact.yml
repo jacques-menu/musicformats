@@ -8,6 +8,7 @@
 
 # https://github.com/teatimeguest/setup-texlive-action?tab=readme-ov-file#basic-usage
 
+# 03-03-2025
 
 name: Test GitHub TexLive actions
 # --------------------------------------------------------------------------

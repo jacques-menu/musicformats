@@ -64,7 +64,7 @@ namespace MusicFormats
 // uncomment the following line for short-term tests
 // with only tuplet numbers being wrapped (they're not too frequent in the code)
 
-// #undef MF_USE_WRAPPED_TYPES
+#undef MF_USE_WRAPPED_TYPES
 
 #ifndef MF_USE_WRAPPED_TYPES
   using mxsrTupletNumber = int;
