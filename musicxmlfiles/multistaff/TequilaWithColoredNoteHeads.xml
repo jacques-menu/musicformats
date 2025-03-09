@@ -1,0 +1,3465 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="3.0">
+	<movement-title>Tequila</movement-title>
+	<identification>
+		<creator type="composer"/>
+		<creator type="arranger"/>
+		<creator type="artist"/>
+		<rights/>
+		<encoding>
+			<software>soundnotation</software>
+			<software>Dolet 6.6</software>
+			<encoding-date>2018-10-22</encoding-date>
+			<supports element="accidental" type="yes"/>
+			<supports element="transpose" type="no"/>
+			<supports attribute="new-page" element="print" type="yes" value="yes"/>
+			<supports attribute="new-system" element="print" type="yes" value="yes"/>
+		</encoding>
+	</identification>
+	<defaults>
+		<scaling>
+			<millimeters>7.3</millimeters>
+			<tenths>40</tenths>
+		</scaling>
+		<page-layout>
+			<page-height>1534</page-height>
+			<page-width>1151</page-width>
+			<page-margins type="both">
+				<left-margin>54.7945</left-margin>
+				<right-margin>54.7945</right-margin>
+				<top-margin>27.3973</top-margin>
+				<bottom-margin>27.3973</bottom-margin>
+			</page-margins>
+		</page-layout>
+		<system-layout>
+			<system-margins>
+				<left-margin>15</left-margin>
+				<right-margin>0</right-margin>
+			</system-margins>
+			<system-distance>92.5</system-distance>
+			<top-system-distance>27.5</top-system-distance>
+		</system-layout>
+		<staff-layout>
+			<staff-distance>55</staff-distance>
+		</staff-layout>
+		<?DoletSibelius StaffJustificationPercentage=100?>
+		<appearance>
+			<line-width type="beam">5</line-width>
+			<line-width type="heavy barline">5</line-width>
+			<line-width type="leger">1.5625</line-width>
+			<line-width type="light barline">1.5625</line-width>
+			<line-width type="slur middle">2.1875</line-width>
+			<line-width type="slur tip">0.625</line-width>
+			<line-width type="staff">0.9375</line-width>
+			<line-width type="stem">0.9375</line-width>
+			<line-width type="tie middle">2.1875</line-width>
+			<line-width type="tie tip">0.625</line-width>
+			<note-size type="grace">60</note-size>
+			<note-size type="cue">75</note-size>
+		</appearance>
+		<music-font font-family="Helsinki Std,music"/>
+		<word-font font-family="Times New Roman"/>
+	</defaults>
+	<part-list>
+		<part-group number="1" type="start">
+			<group-symbol>bracket</group-symbol>
+			<group-barline>yes</group-barline>
+		</part-group>
+		<score-part id="P1">
+			<part-name>Instrument 1</part-name>
+			<part-abbreviation print-object="no">Sblfl.</part-abbreviation>
+			<score-instrument id="P1-I1">
+				<instrument-name>Treble Recorder</instrument-name>
+				<instrument-abbreviation>Tr. Rec.</instrument-abbreviation>
+				<?DoletSibelius Unknown sound id wind.flutes.recorder.treble?>
+			</score-instrument>
+			<midi-instrument id="P1-I1">
+				<volume>75</volume>
+				<pan>0</pan>
+			</midi-instrument>
+		</score-part>
+		<score-part id="P2">
+			<part-name>Instrument 2</part-name>
+			<part-abbreviation print-object="no">Sblfl.</part-abbreviation>
+			<score-instrument id="P2-I1">
+				<instrument-name>Treble Recorder</instrument-name>
+				<instrument-abbreviation>Tr. Rec.</instrument-abbreviation>
+				<?DoletSibelius Unknown sound id wind.flutes.recorder.treble?>
+			</score-instrument>
+			<midi-instrument id="P2-I1">
+				<volume>75</volume>
+				<pan>0</pan>
+			</midi-instrument>
+		</score-part>
+		<part-group number="1" type="stop"/>
+	</part-list>
+<!--=========================================================-->
+	<part id="P1">
+		<measure number="1">
+			<print>
+				<system-layout>
+					<system-margins>
+						<left-margin>148.125</left-margin>
+						<right-margin>0</right-margin>
+					</system-margins>
+					<top-system-distance>410.9375</top-system-distance>
+				</system-layout>
+				<staff-layout>
+					<?DoletSibelius ExtraSpacesAbove=3?>
+				</staff-layout>
+			</print>
+			<attributes>
+				<divisions>768</divisions>
+				<key>
+					<fifths>0</fifths>
+					<mode>major</mode>
+				</key>
+				<time symbol="common">
+					<beats>4</beats>
+					<beat-type>4</beat-type>
+				</time>
+				<clef>
+					<sign>G</sign>
+					<line>2</line>
+				</clef>
+			</attributes>
+			<direction placement="above" directive="yes">
+				<direction-type>
+					<metronome>
+						<beat-unit>quarter</beat-unit>
+						<per-minute>173</per-minute>
+					</metronome>
+				</direction-type>
+				<sound tempo="173"/>
+			</direction>
+			<direction>
+				<direction-type>
+					<dynamics default-y="-70" relative-x="-6">
+						<p/>
+					</dynamics>
+				</direction-type>
+			</direction>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<slur type="start" number="1"/>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<tie type="start"/>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<tied type="start"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="2">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<tie type="stop"/>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<tied type="stop"/>
+					<slur type="stop" number="1"/>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="3">
+			<note>
+				<rest measure="yes"/>
+				<duration>3072</duration>
+				<voice>1</voice>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="4">
+			<print new-system="yes"/>
+			<direction>
+				<direction-type>
+					<dynamics default-y="-68">
+						<mf/>
+					</dynamics>
+				</direction-type>
+				<offset>252</offset>
+			</direction>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>1024</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>down</stem>
+				<notations>
+					<tuplet number="1" type="start"/>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+			<note color="#FF00C632">
+				<pitch>
+					<step>D</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>1024</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>down</stem>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>1024</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>down</stem>
+				<notations>
+					<tuplet number="1" type="stop"/>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="5">
+			<direction>
+				<direction-type>
+					<words default-y="24" relative-x="-3">A Tempo</words>
+				</direction-type>
+			</direction>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<tie type="start"/>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<tied type="start"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="6">
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<tie type="stop"/>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<tied type="stop"/>
+				</notations>
+			</note>
+			<note>
+				<rest/>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+			</note>
+			<note>
+				<rest/>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+			</note>
+			<barline location="right">
+				<bar-style>light-light</bar-style>
+			</barline>
+		</measure>
+<!--=========================================================-->
+		<measure number="7">
+			<print new-system="yes"/>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<tie type="start"/>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<tied type="start"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="8">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<tie type="stop"/>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<tied type="stop"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="9">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<tie type="start"/>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<tied type="start"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="10">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<tie type="stop"/>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<tied type="stop"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="11">
+			<print new-system="yes"/>
+			<direction>
+				<direction-type>
+					<wedge type="crescendo" number="1" default-y="-63"/>
+				</direction-type>
+			</direction>
+			<note>
+				<rest/>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="stop" number="1" relative-x="-8"/>
+				</direction-type>
+				<offset>-3</offset>
+			</direction>
+		</measure>
+<!--=========================================================-->
+		<measure number="12">
+			<direction>
+				<direction-type>
+					<wedge type="diminuendo" number="1" default-y="-63" relative-x="12"/>
+				</direction-type>
+			</direction>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>6</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>6</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="stop" number="1" relative-x="-8"/>
+				</direction-type>
+				<offset>-3</offset>
+			</direction>
+		</measure>
+<!--=========================================================-->
+		<measure number="13">
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="14">
+			<print new-system="yes"/>
+			<note>
+				<rest/>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="15">
+			<note>
+				<rest/>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="crescendo" number="1" default-y="-62" relative-x="-12"/>
+				</direction-type>
+			</direction>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="stop" number="1" relative-x="-8"/>
+				</direction-type>
+				<offset>-3</offset>
+			</direction>
+		</measure>
+<!--=========================================================-->
+		<measure number="16">
+			<direction>
+				<direction-type>
+					<wedge type="diminuendo" number="1" default-y="-62" relative-x="12"/>
+				</direction-type>
+			</direction>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>6</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>6</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="stop" number="1"/>
+				</direction-type>
+				<offset>-291</offset>
+			</direction>
+		</measure>
+<!--=========================================================-->
+		<measure number="17">
+			<print new-page="yes"/>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="18">
+			<note>
+				<rest/>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+			</note>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF00C632">
+				<pitch>
+					<step>D</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="19">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="20">
+			<note>
+				<rest measure="yes"/>
+				<duration>3072</duration>
+				<voice>1</voice>
+			</note>
+			<barline location="right">
+				<bar-style>light-light</bar-style>
+			</barline>
+		</measure>
+<!--=========================================================-->
+		<measure number="21">
+			<print new-system="yes"/>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<tie type="start"/>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<tied type="start"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="22">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<tie type="stop"/>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<tied type="stop"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="23">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<tie type="start"/>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<tied type="start"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="24">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<tie type="stop"/>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<tied type="stop"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="25">
+			<print new-system="yes"/>
+			<direction>
+				<direction-type>
+					<wedge type="crescendo" number="1" default-y="-63"/>
+				</direction-type>
+			</direction>
+			<note>
+				<rest/>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="stop" number="1" relative-x="-8"/>
+				</direction-type>
+				<offset>-3</offset>
+			</direction>
+		</measure>
+<!--=========================================================-->
+		<measure number="26">
+			<direction>
+				<direction-type>
+					<wedge type="diminuendo" number="1" default-y="-62" relative-x="12"/>
+				</direction-type>
+			</direction>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>6</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>6</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="stop" number="1" relative-x="-8"/>
+				</direction-type>
+				<offset>-3</offset>
+			</direction>
+		</measure>
+<!--=========================================================-->
+		<measure number="27">
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="28">
+			<print new-system="yes"/>
+			<note>
+				<rest/>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="29">
+			<note>
+				<rest/>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="crescendo" number="1" default-y="-63" relative-x="-12"/>
+				</direction-type>
+			</direction>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="stop" number="1" relative-x="-8"/>
+				</direction-type>
+				<offset>-3</offset>
+			</direction>
+		</measure>
+<!--=========================================================-->
+		<measure number="30">
+			<direction>
+				<direction-type>
+					<wedge type="diminuendo" number="1" default-y="-63" relative-x="12"/>
+				</direction-type>
+			</direction>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>6</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>6</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<direction>
+				<direction-type>
+					<wedge type="stop" number="1"/>
+				</direction-type>
+				<offset>-291</offset>
+			</direction>
+		</measure>
+<!--=========================================================-->
+		<measure number="31">
+			<print new-system="yes"/>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="32">
+			<note>
+				<rest/>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+			</note>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF00C632">
+				<pitch>
+					<step>D</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="33">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<tie type="start"/>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<tied type="start"/>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="34">
+			<print new-system="yes"/>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<tie type="stop"/>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<tied type="stop"/>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="35">
+			<note>
+				<rest/>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+			</note>
+			<direction>
+				<direction-type>
+					<dynamics default-y="-72">
+						<f/>
+					</dynamics>
+				</direction-type>
+				<offset>-375</offset>
+			</direction>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>down</stem>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="36">
+			<note color="#FF00C632">
+				<pitch>
+					<step>D</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>down</stem>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>down</stem>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="37">
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+			<barline location="right">
+				<bar-style>light-heavy</bar-style>
+			</barline>
+		</measure>
+	</part>
+<!--=========================================================-->
+	<part id="P2">
+		<measure number="1">
+			<print>
+				<system-layout>
+					<system-margins>
+						<left-margin>148.125</left-margin>
+						<right-margin>0</right-margin>
+					</system-margins>
+					<top-system-distance>410.9375</top-system-distance>
+				</system-layout>
+				<staff-layout>
+					<?DoletSibelius ExtraSpacesBelow=3?>
+				</staff-layout>
+			</print>
+			<attributes>
+				<divisions>768</divisions>
+				<key>
+					<fifths>0</fifths>
+					<mode>major</mode>
+				</key>
+				<time symbol="common">
+					<beats>4</beats>
+					<beat-type>4</beat-type>
+				</time>
+				<clef>
+					<sign>G</sign>
+					<line>2</line>
+				</clef>
+			</attributes>
+			<note>
+				<rest measure="yes"/>
+				<duration>3072</duration>
+				<voice>1</voice>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="2">
+			<note>
+				<rest/>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<slur type="start" number="1"/>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="3">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<slur type="stop" number="1"/>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="4">
+			<print new-system="yes"/>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>1024</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>up</stem>
+				<notations>
+					<tuplet number="1" type="start"/>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>1024</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>up</stem>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>1024</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<time-modification>
+					<actual-notes>3</actual-notes>
+					<normal-notes>2</normal-notes>
+				</time-modification>
+				<stem>up</stem>
+				<notations>
+					<tuplet number="1" type="stop"/>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="5">
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="6">
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<barline location="right">
+				<bar-style>light-light</bar-style>
+			</barline>
+		</measure>
+<!--=========================================================-->
+		<measure number="7">
+			<print new-system="yes"/>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="8">
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="9">
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="10">
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="11">
+			<print new-system="yes"/>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="12">
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="13">
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="14">
+			<print new-system="yes"/>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="15">
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="16">
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="17">
+			<print new-page="yes"/>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="18">
+			<note color="#FF1A28CD">
+				<pitch>
+					<step>F</step>
+					<alter>1</alter>
+					<octave>4</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<accidental>sharp</accidental>
+				<stem>up</stem>
+			</note>
+			<note color="#FF1A28CD">
+				<pitch>
+					<step>F</step>
+					<alter>1</alter>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF1A28CD">
+				<pitch>
+					<step>F</step>
+					<alter>1</alter>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="19">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="20">
+			<note color="#FF00C632">
+				<pitch>
+					<step>D</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<barline location="right">
+				<bar-style>light-light</bar-style>
+			</barline>
+		</measure>
+<!--=========================================================-->
+		<measure number="21">
+			<print new-system="yes"/>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="22">
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="23">
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="24">
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="25">
+			<print new-system="yes"/>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="26">
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="27">
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="28">
+			<print new-system="yes"/>
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="29">
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="30">
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<tenuto/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="31">
+			<print new-system="yes"/>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="32">
+			<note color="#FF1A28CD">
+				<pitch>
+					<step>F</step>
+					<alter>1</alter>
+					<octave>4</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<accidental>sharp</accidental>
+				<stem>up</stem>
+			</note>
+			<note color="#FF1A28CD">
+				<pitch>
+					<step>F</step>
+					<alter>1</alter>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FF1A28CD">
+				<pitch>
+					<step>F</step>
+					<alter>1</alter>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="33">
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>up</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+			<note color="#FFFFC922">
+				<pitch>
+					<step>C</step>
+					<octave>5</octave>
+				</pitch>
+				<duration>768</duration>
+				<voice>1</voice>
+				<type>quarter</type>
+				<stem>down</stem>
+				<notations>
+					<articulations>
+						<staccato/>
+					</articulations>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="34">
+			<print new-system="yes"/>
+			<note color="#FFC28132">
+				<pitch>
+					<step>B</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="35">
+			<note>
+				<rest/>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+			</note>
+			<note color="#FFE2254E">
+				<pitch>
+					<step>A</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>up</stem>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="36">
+			<note color="#FF5185FF">
+				<pitch>
+					<step>F</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>up</stem>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+			<note color="#FFAC01E3">
+				<pitch>
+					<step>G</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>1536</duration>
+				<voice>1</voice>
+				<type>half</type>
+				<stem>up</stem>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+		</measure>
+<!--=========================================================-->
+		<measure number="37">
+			<note color="#FF24BBFF">
+				<pitch>
+					<step>E</step>
+					<octave>4</octave>
+				</pitch>
+				<duration>3072</duration>
+				<voice>1</voice>
+				<type>whole</type>
+				<notations>
+					<fermata>normal</fermata>
+				</notations>
+			</note>
+			<barline location="right">
+				<bar-style>light-heavy</bar-style>
+			</barline>
+		</measure>
+	</part>
+<!--=========================================================-->
+</score-partwise>

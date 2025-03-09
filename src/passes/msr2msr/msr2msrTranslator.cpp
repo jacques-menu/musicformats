@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -4532,9 +4532,8 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
     std::stringstream ss;
 
     ss <<
-      "--> Start visiting msrNote '" <<
+      "--> Start visiting msrNote " <<
       elt->asString () <<
-      '\'' <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (

@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -1246,8 +1246,8 @@ class EXP lpsr2lilypondTranslator :
     void                  generateNoteUnpitchedInTuplet (
                             const S_msrNote& note);
 
-    std::list <S_msrTuplet>
-                          fCurrentTupletsStack;
+//     std::list <S_msrTuplet>
+//                           fCurrentTupletsStack;
 
     // tremolos
     // ------------------------------------------------------

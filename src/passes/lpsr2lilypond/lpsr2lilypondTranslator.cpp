@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -2599,9 +2599,20 @@ void lpsr2lilypondTranslator::generateRegularNoteInMeasure (
 
   if (! noteTiesList.empty ()) {
     for (S_msrTie noteTie : noteTiesList) {
-      if (noteTie->getTieKind () == msrTieKind::kTieStart) {
-//        fLilypondCodeStream << " ~ %{ msrNoteKind::kNoteRegularInMeasure %}  "; // JMI v0.9.70
-      }
+      switch (noteTie->getTieKind ()) {
+        case msrTieKind::kTieNone:
+          break;
+        case msrTieKind::kTieStart:
+         fLilypondCodeStream << " ~ "; // JMI v0.9.72
+          break;
+        case msrTieKind::kTieContinue:
+          break;
+        case msrTieKind::kTieStop:
+          break;
+        case msrTieKind::kTieLetRing: // MusicXML 4.0
+          fLilypondCodeStream << " \\laissezVibrer "; // JMI v0.9.72
+          break;
+      } // switch
     } // for
   }
 
@@ -3088,7 +3099,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInChord (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      doTraceNotes =
+      doTraceNotes = // true ||
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -3123,6 +3134,28 @@ void lpsr2lilypondTranslator::generateRegularNoteInChord (
 
   // don't print the note duration,
   // it will be printed for the chord itself
+
+  // generate the ties if relevant // JMI only 1 tie at most? v0.9.72
+  const std::list <S_msrTie>& noteTiesList = note->getNoteTiesList ();
+
+  if (! noteTiesList.empty ()) {
+    for (S_msrTie noteTie : noteTiesList) {
+      switch (noteTie->getTieKind ()) {
+        case msrTieKind::kTieNone:
+          break;
+        case msrTieKind::kTieStart:
+         fLilypondCodeStream << " ~ "; // JMI v0.9.72
+          break;
+        case msrTieKind::kTieContinue:
+          break;
+        case msrTieKind::kTieStop:
+          break;
+        case msrTieKind::kTieLetRing: // MusicXML 4.0
+          fLilypondCodeStream << " \\laissezVibrer "; // JMI v0.9.72
+          break;
+      } // switch
+    } // for
+  }
 
   // don't print the string number if any,
   // it should appear after the chord itself
@@ -3421,7 +3454,7 @@ void lpsr2lilypondTranslator::generateRegularNoteInGraceNotesGroup (
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      doTraceNotes = true ||
+      doTraceNotes = // true ||
         gTraceOahGroup->getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
@@ -12921,8 +12954,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         "% --> Start visiting msrHarmony '" <<
         elt->asString () <<
         '\'' <<
-        ", fCurrentTupletsStack.size (): " <<
-        fCurrentTupletsStack.size () <<
+//         ", fCurrentTupletsStack.size (): " <<
+//         fCurrentTupletsStack.size () <<
         ", fOnGoingChord: " <<
         fOnGoingChord <<
         ", fOnGoingHarmoniesVoice: " <<
@@ -12943,26 +12976,26 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (! fCurrentTupletsStack.empty ()) {
-  /* JMI v0.9.66
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceHarmonies ()) {
-      std::stringstream ss;
+//   if (! fCurrentTupletsStack.empty ()) {
+//   /* JMI v0.9.66
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceHarmonies ()) {
+//       std::stringstream ss;
+//
+//       ss <<
+//         "%{ fCurrentTupletsStack.size () S_msrHarmony JMI " <<
+//         elt->asString () <<
+//         " %} ";
+//
+//       gWaeHandler->waeTrace (
+//         __FILE__, __LINE__,
+//         ss.str ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+// */
+//   }
 
-      ss <<
-        "%{ fCurrentTupletsStack.size () S_msrHarmony JMI " <<
-        elt->asString () <<
-        " %} ";
-
-      gWaeHandler->waeTrace (
-        __FILE__, __LINE__,
-        ss.str ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-*/
-  }
-
-  else if (fOnGoingChord) { // JMI
+  if (fOnGoingChord) { // JMI
   }
 
   else if (fOnGoingHarmoniesVoice) {
@@ -13018,17 +13051,17 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (! fCurrentTupletsStack.empty ()) {
-#ifdef MF_TRACE_IS_ENABLED
-    if (gTraceOahGroup->getTraceFrames ()) {
-      generateComment (elt->asString ());
-    }
-#endif // MF_TRACE_IS_ENABLED
-
-    fLilypondCodeStream <<
-      frameAsLilypondString (elt) <<
-      std::endl;
-  }
+//   if (! fCurrentTupletsStack.empty ()) {
+// #ifdef MF_TRACE_IS_ENABLED
+//     if (gTraceOahGroup->getTraceFrames ()) {
+//       generateComment (elt->asString ());
+//     }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//     fLilypondCodeStream <<
+//       frameAsLilypondString (elt) <<
+//       std::endl;
+//   }
 }
 
 void lpsr2lilypondTranslator::generateComment (
@@ -13058,8 +13091,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
         "% --> Start visiting msrFiguredBass '" <<
         elt->asString () <<
         '\'' <<
-        ", fCurrentTupletsStack.size (): " <<
-        fCurrentTupletsStack.size () <<
+//         ", fCurrentTupletsStack.size (): " <<
+//         fCurrentTupletsStack.size () <<
         ", fOnGoingChord: " <<
         fOnGoingChord <<
         ", fOnGoingFiguredBassVoice: " <<
@@ -13101,19 +13134,19 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
   if (doHandleFiguredBass) {
     fCurrentFiguredBass = elt;
 
-    if (! fCurrentTupletsStack.empty ()) {
-  #ifdef MF_TRACE_IS_ENABLED
-      if (gTraceOahGroup->getTraceFiguredBasses ()) {
-        fLilypondCodeStream <<
-          "%{ fCurrentTupletsStack.size () S_msrFiguredBass JMI " <<
-          fCurrentFiguredBass->asString () <<
-          " %}" <<
-          std::endl;
-      }
-  #endif // MF_TRACE_IS_ENABLED
-    }
+//     if (! fCurrentTupletsStack.empty ()) {
+//   #ifdef MF_TRACE_IS_ENABLED
+//       if (gTraceOahGroup->getTraceFiguredBasses ()) {
+//         fLilypondCodeStream <<
+//           "%{ fCurrentTupletsStack.size () S_msrFiguredBass JMI " <<
+//           fCurrentFiguredBass->asString () <<
+//           " %}" <<
+//           std::endl;
+//       }
+//   #endif // MF_TRACE_IS_ENABLED
+//     }
 
-    else if (fOnGoingChord) { // JMI
+    if (fOnGoingChord) { // JMI
     }
 
     else if (fOnGoingFiguredBassVoice) {
@@ -15765,6 +15798,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                 break;
               case msrTieKind::kTieStop:
                 break;
+              case msrTieKind::kTieLetRing:
+                break;
             } // switch
           } // for
         }
@@ -15804,6 +15839,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                 doGenerateASingleHyphen = true;
                 break;
               case msrTieKind::kTieStop:
+                break;
+              case msrTieKind::kTieLetRing:
                 break;
             } // switch
           } // for
@@ -15845,6 +15882,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                 break;
               case msrTieKind::kTieStop:
                 break;
+              case msrTieKind::kTieLetRing:
+                break;
             } // switch
           } // for
         }
@@ -15882,6 +15921,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                 doGenerateASingleHyphen = true;
                 break;
               case msrTieKind::kTieStop:
+                break;
+              case msrTieKind::kTieLetRing:
                 break;
             } // switch
           } // for
@@ -16035,7 +16076,6 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
       "_ ";
   }
 
-
   // should a \skip be generated?
   // ----------------------------------------------------
   if (doGenerateASkip) {
@@ -16141,6 +16181,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                 break;
               case msrTieKind::kTieStop:
                 break;
+              case msrTieKind::kTieLetRing:
+                break;
             } // switch
           } // for
         }
@@ -16213,6 +16255,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                 doGenerateASingleHyphen = true;
                   break;
                 case msrTieKind::kTieStop:
+                  break;
+                case msrTieKind::kTieLetRing:
                   break;
               } // switch
             } // for
@@ -16300,6 +16344,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
 //             case msrTieKind::kTieContinue:
 //               break;
 //             case msrTieKind::kTieStop:
+//               break;
+//             case msrTieKind::kTieLetRing:
 //               break;
 //           } // switch
 //         }
@@ -16617,6 +16663,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                 break;
               case msrTieKind::kTieStop:
                 break;
+              case msrTieKind::kTieLetRing:
+                break;
             } // switch
           } // for
         }
@@ -16680,6 +16728,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                     doGenerateASingleHyphen = true;
                     break;
                   case msrTieKind::kTieStop:
+                    break;
+                  case msrTieKind::kTieLetRing:
                     break;
                 } // switch
               } // for
@@ -16755,6 +16805,8 @@ Alternatively, when a melisma occurs on the *** last or only syllable in a word 
                 doGenerateASingleHyphen = true;
                 break;
               case msrTieKind::kTieStop:
+                break;
+              case msrTieKind::kTieLetRing:
                 break;
              } // switch
           } // for
@@ -22300,6 +22352,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
     }
   }
 
+  // is there an ongoing multiple measure rest?
   if (false && fOnGoingMultipleMeasureRests) {
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
@@ -25705,20 +25758,20 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceLpsrVisitors = true ||
+      traceLpsrVisitors = // true ||
         gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
           getGenerateLpsrVisitingInformation ();
 
-    gLog <<
-      "++++++++++++ visitStart (S_msrTuplet& elt)" <<
-      ", elt: " <<
-      std::endl;
-    ++gIndenter;
-    elt->print (gLog);
-    --gIndenter;
+//     gLog << // JMI
+//       "++++++++++++ visitStart (S_msrTuplet& elt)" <<
+//       ", elt: " <<
+//       std::endl;
+//     ++gIndenter;
+//     elt->print (gLog);
+//     --gIndenter;
 
     if (traceLpsrVisitors || generateMsrVisitingInformation) {
       std::stringstream ss;
@@ -25921,7 +25974,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   }
 
   // push the tuplet onto the ongoing tuplets stack
-  fCurrentTupletsStack.push_front (elt);
+//   fCurrentTupletsStack.push_front (elt);
 
   // force durations to be displayed explicitly
   // at the beginning of the tuplet
@@ -25933,7 +25986,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 #ifdef MF_TRACE_IS_ENABLED
   {
     Bool
-      traceLpsrVisitors = true ||
+      traceLpsrVisitors = // true ||
         gLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
@@ -25997,7 +26050,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
   } // switch
 
   // pop the tuplet from the ongoing tuplets stack
-  fCurrentTupletsStack.pop_front ();
+//   fCurrentTupletsStack.pop_front ();
 
 /* JMI
   // forget about the current octave entry reference
@@ -26040,24 +26093,20 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-   switch (elt->getTieKind ()) {
-    case msrTieKind::kTieNone:
-      break;
-    case msrTieKind::kTieStart:
-      if (! fCurrentTupletsStack.empty ()) {
-        // this precludes generating for the chords' ties,
-        // since the last of its notes sets fCurrentTupletsStack.size > 0 to false
-        // after code has been generated for it
-        fLilypondCodeStream <<
-  // JMI        "%{line " << elt->getInputLineNumber () << "%} " <<
-          " ~ ";
-      }
-      break;
-    case msrTieKind::kTieContinue:
-      break;
-    case msrTieKind::kTieStop:
-      break;
-   } // switch
+//   switch (elt->getTieKind ()) {
+//     case msrTieKind::kTieNone:
+//       break;
+//     case msrTieKind::kTieStart:
+//      fLilypondCodeStream << " ~ "; // JMI v0.9.72
+//       break;
+//     case msrTieKind::kTieContinue:
+//       break;
+//     case msrTieKind::kTieStop:
+//       break;
+//     case msrTieKind::kTieLetRing: // MusicXML 4.0
+//       fLilypondCodeStream << " \\laissezVibrer "; // JMI v0.9.72
+//       break;
+//   } // switch
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTie& elt)

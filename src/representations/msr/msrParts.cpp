@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -670,7 +670,7 @@ std::string msrPart::getPartIDAndName () const
 
   ss << '[';
 
-  if (! fPartMsrName.size ()) {
+  if (fPartMsrName.empty ()) {
     ss <<
       "empty name";
   }
@@ -682,7 +682,7 @@ std::string msrPart::getPartIDAndName () const
   ss <<
     " \"" << fPartID << "\"";
 
-  if (fPartName.size ()) {
+  if (! fPartName.empty ()) {
     ss <<
       ", \"" << fPartName << "\"";
   }
@@ -699,7 +699,7 @@ std::string msrPart::fetchPartCombinedName () const
 
   ss << '[';
 
-  if (! fPartMsrName.size ()) {
+  if (fPartMsrName.empty ()) {
     ss <<
       "empty part name";
   }
@@ -711,7 +711,7 @@ std::string msrPart::fetchPartCombinedName () const
   ss <<
     ", partID: \"" << fPartID << "\"";
 
-  if (fPartName.size ()) {
+  if (! fPartName.empty ()) {
     ss <<
       ", partName: \"" << fPartName << "\"";
   }
@@ -751,14 +751,16 @@ void msrPart::cascadeCreateAMeasureAndAppendItInPart (
   fPartCurrentMeasureNumber = measureNumber;
 
   // create and append measure in all the staves
-  for (S_msrStaff staff : fPartAllStavesList) {
-    staff->
-      cascadeCreateAMeasureAndAppendItInStaff (
-        inputLineNumber,
-        previousMeasureEndInputLineNumber,
-        measureNumber,
-        measureImplicitKind);
-  } // for
+  if (! fPartAllStavesList.empty ()) {
+    for (S_msrStaff staff : fPartAllStavesList) {
+      staff->
+        cascadeCreateAMeasureAndAppendItInStaff (
+          inputLineNumber,
+          previousMeasureEndInputLineNumber,
+          measureNumber,
+          measureImplicitKind);
+    } // for
+  }
 
   --gIndenter;
 }
@@ -2535,7 +2537,7 @@ void msrPart::appendHarmonyToPart (
 #endif // MF_TRACE_IS_ENABLED
 
   fPartHarmoniesVoice->
-    appendHarmonyToVoice (
+     appendHarmonyToVoice (
       inputLineNumber,
       harmony,
       positionInMeasureToAppendAt);
@@ -3173,7 +3175,7 @@ void msrPart::finalizePart (
 
   ++gIndenter;
 
-  if (! fPartAllStavesList.size ()) {
+  if (fPartAllStavesList.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -3493,7 +3495,7 @@ void msrPart::browseData (basevisitor* v)
       fPartAllStavesList.size () <<
       std::endl;
 
-    if (fPartAllStavesList.size ()) {
+    if (! fPartAllStavesList.empty ()) {
       for (S_msrStaff staff : fPartAllStavesList) {
         std::stringstream ss;
 
@@ -3510,7 +3512,7 @@ void msrPart::browseData (basevisitor* v)
       fPartNonHarmoniesNorFiguredBassStavesList.size () <<
       std::endl;
 
-    if (fPartNonHarmoniesNorFiguredBassStavesList.size ()) {
+    if (! fPartNonHarmoniesNorFiguredBassStavesList.empty ()) {
       for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
         std::stringstream ss;
 
@@ -4036,7 +4038,7 @@ void msrPart::printFull (std::ostream& os) const
   os << std::endl;
 
   // print all the staves
-  if (fPartAllStavesList.size ()) {
+  if (! fPartAllStavesList.empty ()) {
     std::list <S_msrStaff>::const_iterator
       iBegin = fPartAllStavesList.begin (),
       iEnd   = fPartAllStavesList.end (),
@@ -4227,7 +4229,7 @@ void msrPart::print (std::ostream& os) const
 #endif // MF_TRACE_IS_ENABLED
 
   // print all the staves
-  if (fPartAllStavesList.size ()) {
+  if (! fPartAllStavesList.empty ()) {
     os << std::endl;
 
     std::list <S_msrStaff>::const_iterator
@@ -4369,7 +4371,7 @@ void msrPart::printSummary (std::ostream& os) const
     std::endl;
 
   // print all the staves
-  if (fPartAllStavesList.size ()) {
+  if (! fPartAllStavesList.empty ()) {
     os <<
       std::setw (fieldWidth) <<
       "fPartAllStavesList" << ": " <<
@@ -4425,7 +4427,7 @@ void msrPart::printSlices (std::ostream& os) const
 
   ++gIndenter;
 
-  if (fPartAllStavesList.size ()) {
+  if (! fPartAllStavesList.empty ()) {
     std::list <S_msrStaff>::const_iterator
       iBegin = fPartAllStavesList.begin (),
       iEnd   = fPartAllStavesList.end (),

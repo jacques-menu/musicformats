@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -807,6 +807,28 @@ std::string msrFiguredBass::asString () const
       fInputLineNumber,
       fFiguredBassDisplayWholeNotes);
 
+  // print the figured bass figures list
+  if (fFiguredBassFiguresList.size ()) {
+    ss << ", fFiguredBassFiguresList: [";
+
+    std::list <S_msrBassFigure>::const_iterator
+      iBegin = fFiguredBassFiguresList.begin (),
+      iEnd   = fFiguredBassFiguresList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      ss << (*i)->asString ();
+      if (++i == iEnd) break;
+      ss << ' ';
+    } // for
+  ss << ']';
+  }
+
+  // print the figured bass measure position
+  ss <<
+    ", positionInMeasure: " << fMeasureElementPositionInMeasure;
+
+  // print the figures bass uplinks
   ss <<
     ", fFiguredBassUpLinkToNote: ";
     if (fFiguredBassUpLinkToNote) {
@@ -843,26 +865,6 @@ std::string msrFiguredBass::asString () const
 
     ", fFiguredBassTupletFactor: " <<
     fFiguredBassTupletFactor;
-
-  if (fFiguredBassFiguresList.size ()) {
-    ss << ", fFiguredBassFiguresList: [";
-
-    std::list <S_msrBassFigure>::const_iterator
-      iBegin = fFiguredBassFiguresList.begin (),
-      iEnd   = fFiguredBassFiguresList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      ss << (*i)->asString ();
-      if (++i == iEnd) break;
-      ss << ' ';
-    } // for
-  ss << ']';
-  }
-
-  // print the figured bass measure position
-  ss <<
-    ", positionInMeasure: " << fMeasureElementPositionInMeasure;
 
 /* JMI
   if (fFiguredBassUpLinkToPart) { // JMI ???
@@ -1007,6 +1009,42 @@ void msrFiguredBass::print (std::ostream& os) const
     fFiguredBassDisplayWholeNotes <<
     std::endl;
 
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fFiguredBassParenthesesKind" << ": " <<
+    fFiguredBassParenthesesKind <<
+    std::endl <<
+
+    std::setw (fieldWidth) <<
+    "fFiguredBassTupletFactor" << ": " <<
+    fFiguredBassTupletFactor <<
+    std::endl;
+
+  // print the figured bass figures list
+  os << std::left <<
+    std::setw (fieldWidth) <<
+    "fFiguredBassFiguresList" << ": ";
+  if (fFiguredBassFiguresList.size ()) {
+    os << std::endl;
+    ++gIndenter;
+
+    for (S_msrBassFigure bassFigure : fFiguredBassFiguresList) {
+      os << bassFigure;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << "[EMPTY]" << std::endl;
+  }
+
+  // print the figured bass measure position
+  os <<
+    std::setw (fieldWidth) <<
+    "fMeasureElementPositionInMeasure" << ": " << fMeasureElementPositionInMeasure.asString () <<
+    std::endl;
+
+  // print the figured bass uplinks
   os <<
     std::setw (fieldWidth) <<
     "fFiguredBassUpLinkToNote" << ": ";
@@ -1039,40 +1077,6 @@ void msrFiguredBass::print (std::ostream& os) const
     os << "[NULL]";
   }
   os << std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fFiguredBassParenthesesKind" << ": " <<
-    fFiguredBassParenthesesKind <<
-    std::endl <<
-
-    std::setw (fieldWidth) <<
-    "fFiguredBassTupletFactor" << ": " <<
-    fFiguredBassTupletFactor <<
-    std::endl;
-
-  os << std::left <<
-    std::setw (fieldWidth) <<
-    "fFiguredBassFiguresList" << ": ";
-  if (fFiguredBassFiguresList.size ()) {
-    os << std::endl;
-    ++gIndenter;
-
-    for (S_msrBassFigure bassFigure : fFiguredBassFiguresList) {
-      os << bassFigure;
-    } // for
-
-    --gIndenter;
-  }
-  else {
-    os << "[EMPTY]" << std::endl;
-  }
-
-  // print the figured bass measure position
-  os <<
-    std::setw (fieldWidth) <<
-    "fMeasureElementPositionInMeasure" << ": " << fMeasureElementPositionInMeasure.asString () <<
-    std::endl;
 
 //   // print the figured bass voice position
 //   os <<

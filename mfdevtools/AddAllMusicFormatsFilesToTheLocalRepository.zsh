@@ -2,7 +2,7 @@
 
 #
 #   MusicFormats Library
-#   Copyright (C) Jacques Menu 2016-2024
+#   Copyright (C) Jacques Menu 2016-2025
 #
 #   This Source Code Form is subject to the terms of the Mozilla Public
 #   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -19,25 +19,30 @@ set -x
 
 function addAllToMusicFormatsLocalRepository ()
 {
+  # MusicFormats version dataa
   git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
   git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt
 
   git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionNumber.h
   git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionDate.h
 
-  addSrc
+  # src
+  add_src
 
-  addBuild
-  addDevtools
-  addInclude
+  # build and other stuff
+  add_build
+  add_mfdevtools
+  add_include
 
-  addDoc
+  # documentation
+  add_documentation
 
-  addFxml
-  addFmfsl
+  add_musicxmlfiles
+  add_mfslfiles
 }
 
-function addSrc ()
+
+function add_src ()
 {
   git add ${SRC_DIR}/*.h
 
@@ -60,21 +65,24 @@ function addSrc ()
   git add ${SRC_DIR}/*.ts ${SRC_DIR}/*.js ${SRC_DIR}/*.json
 }
 
-function addBuild ()
+
+function add_build ()
 {
   git add    ${BUILD_DIR}/Building.md
   git add -f ${BUILD_DIR}/CMakeLists.txt
   git add    ${BUILD_DIR}/MakePkg.bat
 }
 
-function addDevtools ()
+
+function add_mfdevtools ()
 {
   cp -p ${HOME}/JMI_ShellSettings/ZshDefinitionsForMusicFormats.zsh ${DEVTOOLS_DIR}
 
   git add ${DEVTOOLS_DIR}
 }
 
-function addInclude ()
+
+function add_include ()
 {
 # 	set -x
 	echo "--> INCLUDE_DIR: ${INCLUDE_DIR}"
@@ -92,7 +100,8 @@ function addInclude ()
 #   set +x
 }
 
-function addDoc ()
+
+function add_documentation ()
 {
   git add ${DOC_DIR}/libmusicxml2Presentation/*.pdf  # libmusicxml2
 
@@ -107,21 +116,28 @@ function addDoc ()
   cp -p ${DOC_DIR}/*/*.pdf ../musicformats-documentation-git
 }
 
-function addFxml ()
+function add_musicxmlfiles ()
 {
+  # the MusicXML files in the subdirectories
   git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/*.xml
-  git add -f ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/*.txt
+  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*/*.musicxml
+
+  # the MusicXML files in the validated_* subdirectories
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/validated_*/*.xml
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/validated_*/*.ly
 
   git add -f ${MUSIC_FORMATS_DEV}/musicxmlfiles/Makefile
 
+  # the scripts
   git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.bash
   git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.mfsl
 
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.mscz
-  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.dorico
+  # *.txt files
+  git add -f ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/*.txt
 }
 
-function addFmfsl ()
+
+function add_mfslfiles ()
 {
   git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.mfsl
   git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.xml

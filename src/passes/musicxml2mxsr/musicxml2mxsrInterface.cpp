@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -50,7 +50,7 @@ void displayXMLDeclaration (
 {
   std::string xmlVersion    = xmlDeclaration->getVersion ();
   std::string xmlEncoding   = xmlDeclaration->getEncoding ();
-  int    xmlStandalone = xmlDeclaration->getStandalone ();
+  int         xmlStandalone = xmlDeclaration->getStandalone ();
 
   constexpr int fieldWidth = 14;
 
@@ -410,33 +410,38 @@ void checkDesiredEncoding (
         " doesn't contain any encoding specification; assuming it is " <<
         desiredEncoding;
 
-      musicxml2mxsrWarning (
+//       musicxml2mxsrWarning (
+      musicxml2mxsrError (
         gServiceRunData->getInputSourceName (),
         1, // inputLineNumber,
+        __FILE__, __LINE__,
         ss.str ());
     }
 
     else {
-//       std::stringstream ss;
-//
-//       ss <<
-//         "this file is encoded in " <<
-//         encoding <<
-//         ", you may wich to convert it to " <<
-//         desiredEncoding <<
-//         " encoding prior to running xml2ly" <<
-//         ", for example with iconv or using a text editor" <<
-//         ", in which case " <<
-//         encoding <<
-//         " should be replaced by " <<
-//         desiredEncoding <<
-//         " manually" <<
-//         " - handling it as is";
-//
-//       musicxml2mxsrWarning ( // JMI v0.9.67 NOT OK for Windows users
-//         gServiceRunData->getInputSourceName (),
-//         1, // inputLineNumber,
-//         ss.str ());
+      std::stringstream ss;
+
+      ss <<
+        "This MusicXML data is encoded in " <<
+        encoding <<
+        ", which LilyPond cannot handle, so this is rejected by this version. " <<
+        "You may wich to convert it to " <<
+        desiredEncoding <<
+        " encoding prior to running xml2ly" <<
+        ", for example with iconv or using a text editor" <<
+        ", in which case " <<
+        encoding <<
+        " should be replaced by " <<
+        desiredEncoding <<
+        " manually" <<
+        " - handling it as is";
+
+//       musicxml2mxsrWarning ( // JMI v0.9.72 NOT OK for Windows users???
+      musicxml2mxsrError ( // JMI v0.9.67 NOT OK for Windows users ???
+        gServiceRunData->getInputSourceName (),
+        1, // inputLineNumber,
+        __FILE__, __LINE__,
+        ss.str ());
     }
   }
 }

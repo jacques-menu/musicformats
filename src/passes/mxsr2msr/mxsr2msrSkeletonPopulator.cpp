@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -1140,8 +1140,8 @@ void mxsr2msrSkeletonPopulator::displayCurrentPartStaffMsrVoicesMap (
           theMsrVoice = secondaryPair.second;
 
         gLog <<
-          "staffNumber " << staffNumber <<
-          ", voiceNumber " <<  voiceNumber <<
+          "staffNumber: " << staffNumber <<
+          ", voiceNumber: " <<  voiceNumber <<
           ":" <<
           std::endl;
 
@@ -9131,6 +9131,9 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
   else if (tiedType == "stop") {
     fCurrentTieKind = msrTieKind::kTieStop;
   }
+  else if (tiedType == "let-ring") { // MusicXML 4.0 JMI v0.9.72
+    fCurrentTieKind = msrTieKind::kTieLetRing;
+  }
   else {
     // inner tied notes may miss the "continue" type:
     // let' complain on slur notes outside of slurs
@@ -9163,8 +9166,9 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
           ss.str ());
       }
     }
-
   }
+
+//   gLog << "----- fCurrentTieKind: " << fCurrentTieKind << std::endl; // JMI
 
   // color JMI ??? v0.9.70
 
@@ -9176,6 +9180,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_tied& elt)
     case msrTieKind::kTieStart:
     case msrTieKind::kTieContinue:
     case msrTieKind::kTieStop:
+    case msrTieKind::kTieLetRing:
       if (! gGlobalMxsr2msrOahGroup->getIgnoreTies ()) {
         S_msrTie
           tie =
@@ -10546,7 +10551,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
       gLog << std::left <<
         std::setw (fieldWidth) <<
         "fCurrentTieKind" << ": \"" <<
-        msrTieKindAsString (fCurrentTieKind) <<
+        fCurrentTieKind <<
         "\"" <<
         std::endl;
 
@@ -24015,29 +24020,6 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
-  // attach informations to the current note
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
-
-  // attach the pending dal segnos, if any,
-  // to the ** previous ** note or chord
-  // fetch current note's voice
-  attachThePendingDalSegnosIfAny (); // VITAL
-
- attachPendingPartLevelElementsIfAnyToPart (
-    fCurrentPart);
-
-  // populate fCurrentNote with current informations
-  populateCurrentNoteWithCurrentInformations (
-    elt->getInputLineNumber ());
-
-  // populate fCurrentNote with pending informations
-  populateCurrentNoteWithPendingInformations (
-    elt->getInputLineNumber ());
-
-
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
   // handle fCurrentNote itself
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -24075,6 +24057,32 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_note& elt)
 #endif // MF_TRACE_IS_ENABLED
     }
   }
+
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  // attach informations to the current note
+  // only now because the current note's position in the measure
+  // is needed to place the harmonies and figured bass
+  // at their position in their respective voice
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  // attach the pending dal segnos, if any,
+  // to the ** previous ** note or chord
+  // fetch current note's voice
+  attachThePendingDalSegnosIfAny (); // VITAL
+
+ attachPendingPartLevelElementsIfAnyToPart (
+    fCurrentPart);
+
+  // populate fCurrentNote with current informations
+  populateCurrentNoteWithCurrentInformations (
+    elt->getInputLineNumber ());
+
+  // populate fCurrentNote with pending informations
+  populateCurrentNoteWithPendingInformations (
+    elt->getInputLineNumber ());
 
 
   ////////////////////////////////////////////////////////////////////
@@ -28263,8 +28271,8 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_figured_bass& elt)
         fCurrentFiguredBassParenthesesKind,
         msrTupletFactor (1, 1)); // will be set upon next note handling
 
-  // attach pending figures to the figured bass
-  if (! fPendingFiguredBassFiguresList.empty ()) {
+  // attach pending figures if any to the figured bass
+  if (fPendingFiguredBassFiguresList.empty ()) {
     mxsr2msrWarning (
       gServiceRunData->getInputSourceName (),
       elt->getInputLineNumber (),

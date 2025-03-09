@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -1193,7 +1193,7 @@ void msrVoice::appendSegmentToVoiceClone ( //JMI unused ???
 #endif // MF_TRACE_IS_ENABLED
 
   // does segment belong to a repeat?
-  if (fVoicePendingRepeatsStack.size ()) {
+  if (! fVoicePendingRepeatsStack.empty ()) {
     // yes
 
  // JMI   if (fVoiceLastSegment) {
@@ -2385,7 +2385,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
       // i.e. one not in a grace notes group itself,
       // possibly inside a chord or tuplet
 
-      if (firstMeasureElementsList.size ()) {
+      if (! firstMeasureElementsList.empty ()) {
         for (S_msrMeasureElement measureElement : firstMeasureElementsList) {
           if (
             S_msrNote note = dynamic_cast<msrNote*>(&(*measureElement))
@@ -2963,7 +2963,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 //       wholeNotesPositionInMeasure);
 //
 //   // pad up the voice's stanzas // JMI ???
-//   if (fVoiceStanzasMap.size ()) {
+//   if (! fVoiceStanzasMap.empty ()) {
 //     for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
 //       S_msrStanza stanza = thePair.second;
 //
@@ -3059,7 +3059,7 @@ void msrVoice::cascadeAppendPaddingNoteToVoice (
         forwardStepLength);
 
   // pad up the voice's stanzas JMI USELESS??? v0.9.70
-  if (fVoiceStanzasMap.size ()) {
+  if (! fVoiceStanzasMap.empty ()) {
     for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
@@ -3943,7 +3943,7 @@ void msrVoice::appendLineBreakToVoice  (
     appendLineBreakToSegment (lineBreak);
 
   // cascade this lineBreak to the voice stanzas if any
-  if (fVoiceStanzasMap.size ()) {
+  if (! fVoiceStanzasMap.empty ()) {
     for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
@@ -3976,7 +3976,7 @@ void msrVoice::appendPageBreakToVoice (
     appendPageBreakToSegment (pageBreak);
 
   // cascade this pageBreak to the voice stanzas if any
-  if (fVoiceStanzasMap.size ()) {
+  if (! fVoiceStanzasMap.empty ()) {
     for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
@@ -4834,7 +4834,7 @@ void msrVoice::appendRepeatToInitialVoiceElements (
   // is the previous element in the voice elements list a repeat?
   S_msrVoiceElement previousElement;
 
-  if (fVoiceInitialElementsList.size ()) {
+  if (! fVoiceInitialElementsList.empty ()) {
     previousElement =
       fVoiceInitialElementsList.back ();
   }
@@ -4946,7 +4946,7 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
         fVoiceLastSegment->
           getSegmentElementsList ();
 
-    if (segmentElementsList.size ()) {
+    if (! segmentElementsList.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
       if (gTraceOahGroup->getTraceSegments ()) {
         std::stringstream ss;
@@ -5095,7 +5095,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
           getSegmentElementsList ();
 
     // are there measures in the voice last segment?
-    if (voiceLastSegmentElementsList.size ()) {
+    if (! voiceLastSegmentElementsList.empty ()) {
       // yes
 
       // fetch last measure in the last segment
@@ -5121,7 +5121,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
           lastMeasureInLastSegment->
             getMeasureElementsList ();
 
-      if (lastMeasureElementsList.size ()) {
+      if (! lastMeasureElementsList.empty ()) {
         // the last measure is not empty
 
         msrWholeNotes
@@ -6233,7 +6233,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
         getMeasureElementsList ();
 
   // let's look at lastMeasure in detail
-  if (true || ! lastMeasureElementsList.size ()) { // JMIJMIJMIJMIJMIJMI  // JMI v0.9.66
+  if (true || lastMeasureElementsList.empty ()) { // JMIJMIJMIJMIJMIJMI  // JMI v0.9.66
     // it is empty, keep it for a new voice last segment
 
     // remove last measure
@@ -6417,7 +6417,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
         getMeasureElementsList ();
 
   // let's look at lastMeasure in detail
-  if (true || ! lastMeasureElementsList.size ()) { // JMIJMIJMIJMIJMIJMI  // JMI v0.9.66
+  if (true || lastMeasureElementsList.empty ()) { // JMIJMIJMIJMIJMIJMI  // JMI v0.9.66
     // it is empty, keep it for a new voice last segment
 
     // remove last measure
@@ -6538,7 +6538,7 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
       if (fVoiceLastSegment) {
 
         // are there measures in the voice last segment?
-        if (fVoiceLastSegment->getSegmentElementsList ().size ()) {
+        if (! fVoiceLastSegment->getSegmentElementsList ().empty ()) {
           // finalize current measure in voice
           finalizeLastAppendedMeasureInVoice (
             inputLineNumber);
@@ -6955,7 +6955,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
     } // switch
   }
 
-  else if (fVoicePendingRepeatsStack.size ()) {
+  else if (! fVoicePendingRepeatsStack.empty ()) {
     // segmentClone belongs to a repeat
 
     // append segment to whichever part of the repeat is adequate
@@ -7015,7 +7015,7 @@ void msrVoice::finalizeRepeatEndInVoice (
           inputLineNumber);
 
         // fetch the repeat
-        if (! fVoicePendingRepeatsStack.size ()) {
+        if (fVoicePendingRepeatsStack.empty ()) {
           std::stringstream ss;
 
           ss <<
@@ -7041,7 +7041,7 @@ void msrVoice::finalizeRepeatEndInVoice (
               getRepeatCommonPart ();
 
         // is there another repeat to nest into this repeat?
-        if (! fVoicePendingRepeatsStack.size ()) {
+        if (fVoicePendingRepeatsStack.empty ()) {
           // yes, this repeat contains a nested repeat
 
 / * JMI
@@ -7444,7 +7444,7 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
   // (i.e. the one containing:
   //   <measure-repeat type="stop"/>)
   // which is the next measure after the measures repeat
-  if (! voiceLastSegmentMeasureList.size ()) {
+  if (voiceLastSegmentMeasureList.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -8353,7 +8353,7 @@ void msrVoice::handleMultipleMeasureRestsStartInVoiceClone (
 //       if (fVoiceLastSegment) {
 //
 //         // are there measures in the voice last segment?
-//         if (fVoiceLastSegment->getSegmentElementsList ().size ()) {
+//         if (! fVoiceLastSegment->getSegmentElementsList ().empty ()) {
 //
 //           // finalize current measure in voice
 //           finalizeLastAppendedMeasureInVoice (
@@ -8533,7 +8533,7 @@ void msrVoice::appendMultipleMeasureRestCloneToVoiceClone (
 #endif // MF_TRACE_IS_ENABLED
 
         // is multiple measure rests nested in a repeat?
-        if (fVoicePendingRepeatsStack.size ()) {
+        if (! fVoicePendingRepeatsStack.empty ()) {
           // yes
 
           S_msrRepeat
@@ -9169,7 +9169,7 @@ void msrVoice::appendMeasureRepeatCloneToVoiceClone (
 #endif // MF_TRACE_IS_ENABLED
 
         // is measures repeat nested in a repeat?
-        if (fVoicePendingRepeatsStack.size ()) {
+        if (! fVoicePendingRepeatsStack.empty ()) {
           // yes
 
           S_msrRepeat
@@ -9252,7 +9252,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
           fVoicePendingRepeatsStack.size ();
 */
 
-  if (! fVoicePendingRepeatsStack.size ()) {
+  if (fVoicePendingRepeatsStack.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -9362,7 +9362,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoice (
 
   ++gIndenter;
 
-  if (! fVoicePendingRepeatsStack.size ()) {
+  if (fVoicePendingRepeatsStack.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -9538,7 +9538,7 @@ void msrVoice::handleRepeatCommonPartStartInVoiceClone (
 
   ++gIndenter;
 
-  if (! fVoicePendingRepeatsStack.size ()) {
+  if (fVoicePendingRepeatsStack.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -9626,7 +9626,7 @@ void msrVoice::handleRepeatCommonPartEndInVoiceClone (
 
   ++gIndenter;
 
-  if (! fVoicePendingRepeatsStack.size ()) {
+  if (fVoicePendingRepeatsStack.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -9709,7 +9709,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoiceClone (
 
   ++gIndenter;
 
-  if (! fVoicePendingRepeatsStack.size ()) {
+  if (fVoicePendingRepeatsStack.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -9803,7 +9803,7 @@ void msrVoice::handleHooklessRepeatEndingEndInVoiceClone (
 
   ++gIndenter;
 
-  if (! fVoicePendingRepeatsStack.size ()) {
+  if (fVoicePendingRepeatsStack.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -9952,7 +9952,7 @@ void msrVoice::handleRepeatStartInVoiceClone (
               getSegmentElementsList ();
 
         // are there measures in the voice last segment?
-        if (voiceLastSegmentElementsList.size ()) {
+        if (! voiceLastSegmentElementsList.empty ()) {
           // finalize current measure in voice
           finalizeLastAppendedMeasureInVoice (
             inputLineNumber);
@@ -10329,7 +10329,7 @@ void msrVoice::appendRepeatEndingCloneToVoice ( // JMI
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
         // sanity check
-        if (! fVoicePendingRepeatsStack.size ()) {
+        if (fVoicePendingRepeatsStack.empty ()) {
           std::stringstream ss;
 
           ss <<
@@ -10769,7 +10769,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
       // append a measure end syllable to the voice stanzas if any
-      if (fVoiceStanzasMap.size ()) {
+      if (! fVoiceStanzasMap.empty ()) {
         for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
           S_msrStanza stanza = thePair.second;
 
@@ -10830,7 +10830,7 @@ void msrVoice::collectVoiceMeasuresIntoFlatList (
   int inputLineNumber)
 {
   // collect measures from the initial elements if any
-  if (fVoiceInitialElementsList.size ()) {
+  if (! fVoiceInitialElementsList.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceVoices ()) {
       std::stringstream ss;
@@ -10871,7 +10871,7 @@ void msrVoice::collectVoiceMeasuresIntoFlatList (
         fVoiceLastSegment->
           getSegmentMeasuresFlatList ();
 
-    if (lastSegmentMeasuresFlatList.size ()) {
+    if (! lastSegmentMeasuresFlatList.empty ()) {
       for (S_msrMeasure measure : lastSegmentMeasuresFlatList) {
         fVoiceMeasuresFlatList.push_back (measure);
       } // for
@@ -11481,7 +11481,7 @@ void msrVoice::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
   // browse the voice initial elements
-  if (fVoiceInitialElementsList.size ()) {
+  if (! fVoiceInitialElementsList.empty ()) {
     for (
       std::list <S_msrVoiceElement>::const_iterator i = fVoiceInitialElementsList.begin ();
       i != fVoiceInitialElementsList.end ();
@@ -11500,7 +11500,7 @@ void msrVoice::browseData (basevisitor* v)
   }
 
   // browse the voice stanzas
-  if (fVoiceStanzasMap.size ()) {
+  if (! fVoiceStanzasMap.empty ()) {
     for (std::pair <std::string, S_msrStanza> thePair : fVoiceStanzasMap) {
       S_msrStanza stanza = thePair.second;
 
@@ -11975,7 +11975,7 @@ void msrVoice::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fVoiceStanzasMap" << ": ";
 
-  if (fVoiceStanzasMap.size ()) {
+  if (! fVoiceStanzasMap.empty ()) {
     os << std::endl;
 
     ++gIndenter;
@@ -12130,7 +12130,7 @@ void msrVoice::print (std::ostream& os) const
   }
 
   // print the stanzas if any
-  if (fVoiceStanzasMap.size ()) {
+  if (! fVoiceStanzasMap.empty ()) {
     os <<
       std::endl <<
       "Stanzas:" <<
@@ -12160,7 +12160,7 @@ void msrVoice::print (std::ostream& os) const
 //
 //   ++gIndenter;
 //
-//   if (fPartAllStavesList.size ()) {
+//   if (! fPartAllStavesList.empty ()) {
 //     std::list <S_msrStaff>::const_iterator
 //       iBegin = fPartAllStavesList.begin (),
 //       iEnd   = fPartAllStavesList.end (),

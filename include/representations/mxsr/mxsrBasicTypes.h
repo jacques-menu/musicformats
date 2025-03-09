@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -64,7 +64,7 @@ namespace MusicFormats
 // uncomment the following line for short-term tests
 // with only tuplet numbers being wrapped (they're not too frequent in the code)
 
-// #undef MF_USE_WRAPPED_TYPES
+#undef MF_USE_WRAPPED_TYPES
 
 #ifndef MF_USE_WRAPPED_TYPES
   using mxsrTupletNumber = int;

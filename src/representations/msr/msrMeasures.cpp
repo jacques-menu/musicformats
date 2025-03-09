@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -2475,7 +2475,7 @@ void msrMeasure::printMeasurePendingMeasureElementsList ()
 
   ++gIndenter;
 
-  if (fMeasurePendingMeasureElementsList.size ()) {
+  if (! fMeasurePendingMeasureElementsList.empty ()) {
     std::list <S_msrMeasureElement>::const_iterator
       iBegin = fMeasurePendingMeasureElementsList.begin (),
       iEnd   = fMeasurePendingMeasureElementsList.end (),
@@ -5914,6 +5914,8 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
       voice->getVoiceName () <<
+      ", fMeasureOrdinalNumberInVoice: " <<
+      fMeasureOrdinalNumberInVoice <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
 
@@ -5923,7 +5925,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fMeasureElementsList.size ()) {
+  if (! fMeasureElementsList.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
       displayMeasure (
@@ -5971,7 +5973,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
     // updating their duration and adding skips if needed
     S_msrHarmony
       previousHarmony = nullptr,
-      currentHarmony  = nullptr;
+      currentHarmony = nullptr;
 
     for (S_msrMeasureElement measureElement : fMeasureElementsList) {
 #ifdef MF_TRACE_IS_ENABLED
@@ -6717,7 +6719,7 @@ void msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fMeasureElementsList.size ()) {
+  if (! fMeasureElementsList.empty ()) {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceHarmonies ()) {
       displayMeasure (

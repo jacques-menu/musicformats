@@ -2,7 +2,7 @@
 
 #
 #   MusicFormats Library
-#   Copyright (C) Jacques Menu 2016-2024
+#   Copyright (C) Jacques Menu 2016-2025
 #
 #   This Source Code Form is subject to the terms of the Mozilla Public
 #   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -38,7 +38,8 @@ LIBMUSICFORMATS_GIT=${HOME}/musicformats-git-dev
 VERSION_DATE=$1
 
 if [[ ${VERSION_DATE} == "today" ]]; then
-  VERSION_DATE=$(date +"%B %d, %Y - %H:%M:%S")
+#   VERSION_DATE=$(date +"%B %d, %Y - %H:%M:%S")
+  VERSION_DATE=$(date +"%B %d, %Y - %H:%M")
 fi
 
 echo "==> VERSION_DATE : ${VERSION_DATE}"

@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -31,17 +31,17 @@ msrUseSymbolsKind msrUseSymbolsKindFromString (
     result =
       msrUseSymbolsKind::kUseSymbols_UNKNOWN_; // default value
 
-  if      (useSymbolsString == "above")
+  if      (useSymbolsString == "no")
     result = msrUseSymbolsKind::kUseSymbolsNo;
-  else if (useSymbolsString == "below")
+  else if (useSymbolsString == "yes")
     result = msrUseSymbolsKind::kUseSymbolsYes;
   else {
     if (useSymbolsString.size ()) {
       std::stringstream ss;
 
       ss <<
-        "placement \"" << useSymbolsString <<
-        "\" should be 'above' or 'below'";
+        "harmony use-symbols \"" << useSymbolsString <<
+        "\" should be 'no' or 'yes'";
 
       msrError (
         gServiceRunData->getInputSourceName (),

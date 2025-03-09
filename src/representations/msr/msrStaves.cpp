@@ -1,6 +1,6 @@
 /*
   MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2024
+  Copyright (C) Jacques Menu 2016-2025
 
   This Source Code Form is subject to the terms of the Mozilla Public
   License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -588,22 +588,24 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
 #endif // MF_TRACE_IS_ENABLED
 
   // cascade it to all voices
-  for (S_msrVoice voice : fStaffAllVoicesList) {
+  if (! fStaffAllVoicesList.empty ()) {
+    for (S_msrVoice voice : fStaffAllVoicesList) {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-    mfAssert (
-      __FILE__, __LINE__,
-      voice != nullptr,
-      "voice is NULL");
+    // sanity check
+      mfAssert (
+        __FILE__, __LINE__,
+        voice != nullptr,
+        "voice is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-    voice->
-      cascadeCreateAMeasureAndAppendItInVoice (
-        inputLineNumber,
-        previousMeasureEndInputLineNumber,
-        measureNumber,
-        measureImplicitKind);
-  } // for
+      voice->
+        cascadeCreateAMeasureAndAppendItInVoice (
+          inputLineNumber,
+          previousMeasureEndInputLineNumber,
+          measureNumber,
+          measureImplicitKind);
+    } // for
+  }
 }
 
 void msrStaff::setNextMeasureNumberInStaff (
@@ -917,7 +919,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (fStaffAllVoicesList.size ()) {
+  if (! fStaffAllVoicesList.empty ()) {
     for (S_msrVoice knownVoice : fStaffAllVoicesList) {
       if (voice == knownVoice) {
         std::stringstream ss;
@@ -1052,7 +1054,7 @@ void msrStaff::registerVoiceByItsNumber (
 
       // sort fStaffAllVoicesList, to have harmonies just before
       // the corresponding voice
-      if (fStaffAllVoicesList.size ()) {
+      if (! fStaffAllVoicesList.empty ()) {
         fStaffAllVoicesList.sort (
           msrVoice::compareVoicesToHaveHarmoniesAboveCorrespondingVoice);
       }
@@ -1076,7 +1078,7 @@ void msrStaff::registerVoiceByItsNumber (
 
       // sort fStaffAllVoicesList, to have figured bass elements just after
       // the corresponding voice
-      if (fStaffAllVoicesList.size ()) {
+      if (! fStaffAllVoicesList.empty ()) {
         fStaffAllVoicesList.sort (
           msrVoice::compareVoicesToHaveFiguredBassesBelowCorrespondingVoice);
       }
@@ -1116,7 +1118,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
-  if (fStaffAllVoicesList.size ()) {
+  if (! fStaffAllVoicesList.empty ()) {
     for (S_msrVoice knownVoice : fStaffAllVoicesList) {
       if (regularVoice == knownVoice) {
         std::stringstream ss;
@@ -1324,7 +1326,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
   fStaffRegularVoicesList.sort (
     msrVoice::compareVoicesByIncreasingNumber);
 
-  if (fStaffRegularVoicesList.size ()) {
+  if (! fStaffRegularVoicesList.empty ()) {
     int voiceSequentialCounter = 0;
 
     std::list <S_msrVoice>::const_iterator
@@ -1397,7 +1399,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (! fStaffRegularVoicesList.size ()) {
+  if (fStaffRegularVoicesList.empty ()) {
     std::stringstream ss;
 
     ss <<
@@ -3448,7 +3450,7 @@ void msrStaff::browseData (basevisitor* v)
 #endif // MF_TRACE_IS_ENABLED
 
 /*
-  if (fStaffTuningsList.size ()) {
+  if ! (fStaffTuningsList.empty ()) {
     for (
       std::list <S_msrStaffTuning>::const_iterator i = fStaffTuningsList.begin ();
       i != fStaffTuningsList.end ();
@@ -3463,7 +3465,7 @@ void msrStaff::browseData (basevisitor* v)
 */
 
 /* JMI may be useful???
-  if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
+  if (f! StaffVoiceNumbersToAllVoicesMap.empty ()) {
     for (S_msrVoice voice : fStaffAllVoicesList) {
         msrBrowser<msrVoice> browser (v);
         browser.browse (*((*i).second));
@@ -3478,7 +3480,7 @@ void msrStaff::browseData (basevisitor* v)
       fStaffAllVoicesList.size () <<
       std::endl;
 
-    if (fStaffAllVoicesList.size ()) {
+    if (! fStaffAllVoicesList.empty ()) {
       for (S_msrVoice voice : fStaffAllVoicesList) {
         gLog <<
           std::endl <<
@@ -3490,7 +3492,7 @@ void msrStaff::browseData (basevisitor* v)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (fStaffAllVoicesList.size ()) {
+  if (! fStaffAllVoicesList.empty ()) {
     for (S_msrVoice voice : fStaffAllVoicesList) {
       // get the  set of voices to ignore
       S_oahStringSetElementAtom
@@ -3783,7 +3785,7 @@ void msrStaff::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "Voice names in fStaffAllVoicesList" << ": ";
 
-  if (fStaffAllVoicesList.size ()) {
+  if (! fStaffAllVoicesList.empty ()) {
     os << std::endl;
     ++gIndenter;
 
@@ -3803,7 +3805,7 @@ void msrStaff::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "Voice names in fStaffRegularVoicesList" << ": ";
 
-  if (fStaffRegularVoicesList.size ()) {
+  if (! fStaffRegularVoicesList.empty ()) {
     os << std::endl;
 
     ++gIndenter;
@@ -3852,7 +3854,7 @@ void msrStaff::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fStaffVoiceNumbersToAllVoicesMap" << ": ";
 
-  if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
+  if (! fStaffVoiceNumbersToAllVoicesMap.empty ()) {
     os << std::endl;
 
     ++gIndenter;
@@ -3899,7 +3901,7 @@ void msrStaff::printFull (std::ostream& os) const
     std::setw (fieldWidth) <<
     "fStaffVoiceNumbersToRegularVoicesMap" << ": ";
 
-  if (fStaffVoiceNumbersToRegularVoicesMap.size ()) {
+  if (! fStaffVoiceNumbersToRegularVoicesMap.empty ()) {
     os << std::endl;
 
     ++gIndenter;
@@ -4020,7 +4022,7 @@ void msrStaff::printFull (std::ostream& os) const
   os << std::endl;
 
   // print the  voices
-  if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
+  if (! fStaffVoiceNumbersToAllVoicesMap.empty ()) {
     std::map <int, S_msrVoice>::const_iterator
       iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
       iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
@@ -4072,7 +4074,7 @@ void msrStaff::print (std::ostream& os) const
     std::endl;
 
   // print the  voices
-  if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
+  if (! fStaffVoiceNumbersToAllVoicesMap.empty ()) {
     os << std::endl;
 
     std::map <int, S_msrVoice>::const_iterator
@@ -4116,7 +4118,7 @@ void msrStaff::printSummary (std::ostream& os) const
     std::endl;
 
 /* JMI
-  if (fStaffTuningsList.size ()) {
+  if (! fStaffTuningsList.empty ()) {
     os <<
       "fStaff tunings list:" <<
       std::endl;
@@ -4137,7 +4139,7 @@ void msrStaff::printSummary (std::ostream& os) const
   }
 
   // print the voices names
-  if (fStaffAllVoicesList.size ()) {
+  if (! fStaffAllVoicesList.empty ()) {
     os <<
       "Voices:" <<
       std::endl;
@@ -4190,7 +4192,7 @@ void msrStaff::printSlices (std::ostream& os) const
 
   ++gIndenter;
 
-//   if (fStaffVoiceNumbersToAllVoicesMap.size ()) {
+//   if (! fStaffVoiceNumbersToAllVoicesMap.empty ()) {
 //     std::map <int, S_msrVoice>::const_iterator
 //       iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
 //       iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
