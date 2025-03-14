@@ -451,7 +451,7 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 
 void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasures (
   const S_msrMeasure&  measure,
-  const msrWholeNotes& positionInMeasure)
+  const mfWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -478,7 +478,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasures (
 
   if (false) { // JMI
   // compute chord's voice position
-  msrWholeNotes
+  mfWholeNotes
      voicePosition =
       fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
         +
@@ -506,7 +506,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasures (
   /* JMI
   if (false) { // JMI
     // compute chord's voice position
-    msrWholeNotes
+    mfWholeNotes
        voicePosition =
         fGraceNotesGroupUpLinkToNote->
           getMeasureElementUpLinkToMeasure ()->

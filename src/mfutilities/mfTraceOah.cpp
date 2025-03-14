@@ -2162,7 +2162,7 @@ R"(Measure positions details)",
   S_oahTwoBooleansAtom
     traceVoicePositionsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-voice-positions", "tvoicespos",
+        "trace-voice-positions", "tvoicepos",
 R"(Voice positions)",
         "fTraceVoicePositions",
         fTraceVoicePositions,

@@ -16,8 +16,8 @@
 
 #include "exports.h"
 
-#include "msrMoments.h"
-#include "msrNotesDurations.h"
+#include "mfMoments.h"
+#include "mfDurations.h"
 
 
 namespace MusicFormats
@@ -91,7 +91,7 @@ EXP extern std::string mfMeasureNumberAsString (std::string measureNumber);
 
 EXP extern const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_;
 
-EXP extern const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_;
+EXP extern const mfWholeNotes K_WHOLE_NOTES_UNKNOWN_;
 
 EXP extern const std::string
   kWholeNotePrefix,
@@ -100,9 +100,9 @@ EXP extern const std::string
 // moments
 //______________________________________________________________________________
 
-EXP extern const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_;
+EXP extern const mfWholeNotes K_POSITION_IN_MEASURE_UNKNOWN_;
 
-EXP extern const msrMoment K_MOMENT_UNKNOWN_;
+EXP extern const mfMoment K_MOMENT_UNKNOWN_;
 
 EXP extern const std::string
   kMomentPrefix,

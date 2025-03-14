@@ -1366,9 +1366,9 @@ Rationals are not used, however, for tuplets factors, see .
 \section{Don't mix pure and typed scalar types}
 % -------------------------------------------------------------------------
 
-A whole notes value is described by \class{msrWholeNotes}, defined in \msrBoth{msrNotesDurations}. It contains a numerator and denominator, as \class{msrRational} does, but those types are distinct, since an \className{msrWholeNotes} instance is a fraction of a whole note, note a mere typeless fraction.
+A whole notes value is described by \class{mfWholeNotes}, defined in \msrBoth{msrNotesDurations}. It contains a numerator and denominator, as \class{msrRational} does, but those types are distinct, since an \className{mfWholeNotes} instance is a fraction of a whole note, note a mere typeless fraction.
 
-\mf\ uses \className{msrWholeNotes} instances for notes sounding and display whole notes values;
+\mf\ uses \className{mfWholeNotes} instances for notes sounding and display whole notes values;
 
 For the same reason, \class{msrTupletFactor}, defined in \msrBoth{msrTupletFactors}, is used with specifically named fields:
 \begin{lstlisting}[language=CPlusPlus]
@@ -1433,7 +1433,7 @@ One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to th
 
     static SMARTP<msrTempo> createTempoPerMinute (
       int               inputLineNumber,
-      msrDottedNotesDuration tempoBeatUnit,
+      mfDottedNotesDuration tempoBeatUnit,
       std::string       tempoPerMinute,
       msrTempoParenthesizedKind
                         tempoParenthesizedKind,
@@ -1441,8 +1441,8 @@ One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to th
 
     static SMARTP<msrTempo> createTempoBeatUnitEquivalent (
       int               inputLineNumber,
-      msrDottedNotesDuration tempoBeatUnit,
-      msrDottedNotesDuration tempoEquivalentBeatUnit,
+      mfDottedNotesDuration tempoBeatUnit,
+      mfDottedNotesDuration tempoEquivalentBeatUnit,
       msrTempoParenthesizedKind
                         tempoParenthesizedKind,
       msrPlacementKind  tempoPlacementKind);

@@ -16,7 +16,7 @@
 
 #include "msrTypesForwardDeclarations.h"
 
-#include "msrNotesDurations.h"
+#include "mfDurations.h"
 #include "msrPlacements.h"
 
 
@@ -68,13 +68,13 @@ class EXP msrSingleTremolo : public msrElement
                               { return fSingleTremoloPlacementKind; }
 
     void                  setSingleTremoloGraphicNotesDurationKind (
-                            msrNotesDurationKind notesDurationKind)
+                            mfDurationKind notesDurationKind)
                               {
                                 fSingleTremoloGraphicNotesDurationKind =
                                   notesDurationKind;
                               }
 
-    msrNotesDurationKind  getSingleTremoloGraphicNotesDurationKind () const
+    mfDurationKind  getSingleTremoloGraphicNotesDurationKind () const
                               {
                                 return fSingleTremoloGraphicNotesDurationKind;
                               }
@@ -114,7 +114,7 @@ class EXP msrSingleTremolo : public msrElement
 
     msrPlacementKind      fSingleTremoloPlacementKind;
 
-    msrNotesDurationKind  fSingleTremoloGraphicNotesDurationKind;
+    mfDurationKind  fSingleTremoloGraphicNotesDurationKind;
 };
 typedef SMARTP<msrSingleTremolo> S_msrSingleTremolo;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSingleTremolo& elt);

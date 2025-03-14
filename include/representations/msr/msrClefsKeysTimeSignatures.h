@@ -674,7 +674,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     void                  appendTimeSignatureItem (
                             const S_msrTimeSignatureItem& timeSignatureItem);
 
-    msrWholeNotes         timeSignatureWholeNotesPerMeasure () const;
+    mfWholeNotes         timeSignatureWholeNotesPerMeasure () const;
 
   public:
 

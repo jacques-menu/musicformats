@@ -169,10 +169,10 @@ void msrPart::initializePart ()
   fPartContainsMultipleMeasureRests = false;
 
   // drawing measure position
-  fPartCurrentDrawingPositionInMeasure = msrWholeNotes (0, 1);
+  fPartCurrentDrawingPositionInMeasure = mfPositionInMeasure (0, 1);
 
   // part shortest note wholeNotes
-  fPartShortestNoteWholeNotes = msrWholeNotes (INT_MAX, 1);
+  fPartShortestNoteWholeNotes = mfWholeNotes (INT_MAX, 1);
 
   // part shortest note tuplet factor
   fPartShortestNoteTupletFactor = mfRational (1, 1);
@@ -373,7 +373,7 @@ void msrPart::registerStaffInPart (
 
 void msrPart::setPartCurrentDrawingPositionInMeasure (
   int                  inputLineNumber,
-  const msrWholeNotes& positionInMeasure)
+  const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -391,6 +391,14 @@ void msrPart::setPartCurrentDrawingPositionInMeasure (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+    "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (positionInMeasure.getNumerator () < 0) {
     std::stringstream ss;
@@ -431,12 +439,12 @@ void msrPart::resetPartCurrentDrawingPositionInMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fPartCurrentDrawingPositionInMeasure = msrWholeNotes (0, 1);
+  fPartCurrentDrawingPositionInMeasure = mfPositionInMeasure (0, 1);
 }
 
 void msrPart::incrementPartCurrentDrawingPositionInMeasure (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotesDelta)
+  const mfPositionInMeasure& wholeNotesDelta)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -456,6 +464,14 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fPartCurrentDrawingPositionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+    "fPartCurrentDrawingPositionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fPartCurrentDrawingPositionInMeasure += wholeNotesDelta;
 
@@ -479,7 +495,7 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
 
 void msrPart::decrementPartCurrentDrawingPositionInMeasure (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotesDelta)
+  const mfPositionInMeasure& wholeNotesDelta)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -499,6 +515,14 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
       ss.str ());
   }
 #endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fPartCurrentDrawingPositionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+    "fPartCurrentDrawingPositionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   if (fPartCurrentDrawingPositionInMeasure.getNumerator () < 0) {
     std::stringstream ss;
@@ -542,7 +566,7 @@ void msrPart::decrementPartCurrentDrawingPositionInMeasure (
 }
 
 void msrPart::setPartShortestNoteWholeNotes (
-  const msrWholeNotes& wholeNotes)
+  const mfWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -799,11 +823,11 @@ void msrPart::setNextMeasureNumberInPart (
   --gIndenter;
 }
 
-msrWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
+mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
   int inputLineNumber,
   int indexValue) const
 {
-  msrWholeNotes result;
+  mfWholeNotes result;
 
   size_t
     partMeasuresWholeNotesVectorSize =
@@ -833,7 +857,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
 
   // has this measureOrdinalNumber been registered already?
   try {
-    msrWholeNotes
+    mfWholeNotes
       currentWholeNotesValue =
         fPartMeasuresWholeNotesVector.at (indexValue);
 
@@ -862,7 +886,7 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
       __FILE__, __LINE__,
       ss.str ());
 
-      result = msrWholeNotes (15, 8); // TEMP JMI v0.9.61
+      result = mfWholeNotes (15, 8); // TEMP JMI v0.9.61
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -890,13 +914,13 @@ msrWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
 void msrPart::registerShortestNoteInPartIfRelevant (const S_msrNote& note)
 {
   // is note the shortest one in this part?
-  msrWholeNotes
+  mfWholeNotes
     noteSoundingWholeNotes =
       note->
         getMeasureElementSoundingWholeNotes ();
 
 /* JMI
-  msrWholeNotes
+  mfWholeNotes
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
@@ -985,14 +1009,14 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
     fPartMeasuresWholeNotesVector.clear ();
     fPartMeasuresWholeNotesVector.resize (
       fPartNumberOfMeasures,
-      msrWholeNotes (0, 1));
+      mfWholeNotes (0, 1));
   }
 }
 
 void msrPart::registerOrdinalMeasureNumberWholeNotes (
   int                  inputLineNumber,
   int                  measureOrdinalNumber,
-  const msrWholeNotes& wholeNotes)
+  const mfWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1041,7 +1065,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 
   // has this measureOrdinalNumber been registered already?
   try {
-    msrWholeNotes
+    mfWholeNotes
       currentWholeNotesValue =
         fPartMeasuresWholeNotesVector.at (index);
 
@@ -1490,8 +1514,8 @@ void msrPart::appendPageBreakToPart (
 }
 
 void msrPart::insertHiddenMeasureAndBarLineInPartClone (
-  int             inputLineNumber,
-  const msrWholeNotes& positionInMeasure)
+  int                        inputLineNumber,
+  const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -2263,8 +2287,17 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  // register voice in the all voices map
-  if (fPartStaffVoicesMap.count (voiceNumber)) {
+  // fetch the voices map for staff staffNumber
+  std::map <int, std::map <int, S_msrVoice>>::iterator
+    partStaffIterator =
+      fPartStaffVoicesMap.find (staffNumber);
+
+  // fetch the voice for voiceNumber in the staff
+  std::map <int, S_msrVoice>::iterator
+    partStaffVoiceIterator =
+      (*partStaffIterator).second.find (voiceNumber);
+
+  if (partStaffVoiceIterator != (*partStaffIterator).second.end ()) {
     std::stringstream ss;
 
     ss <<
@@ -2272,20 +2305,22 @@ void msrPart::registerVoiceInPartStaffVoicesMap (
       voiceNumber <<
       ", " <<
       voice->getVoiceName () <<
-      "\", has already been registered in the voices map of part \"" << // JMI v0.9.70
+      "\", has already been registered in staff " <<
+      staffNumber <<
+      " in part \"" <<
       getPartName () <<
       "\", line " << voice->getInputLineNumber ();
 
-//     msrError (
-    msrWarning (
+    msrError (
       gServiceRunData->getInputSourceName (),
       voice->getInputLineNumber (),
-//       __FILE__, __LINE__,
+      __FILE__, __LINE__,
       ss.str ());
   }
 
+  // register voice in fPartStaffVoicesMap map
   fPartStaffVoicesMap
-    [staffNumber][voiceNumber] = voice;
+    [staffNumber] [voiceNumber] = voice;
 
   // register part minimum and maximum voice numbers
   if (voiceNumber < fPartMinimumVoiceNumber) {
@@ -2514,9 +2549,9 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 }
 
 void msrPart::appendHarmonyToPart (
-  int                  inputLineNumber,
-  const S_msrHarmony&  harmony,
-  const msrWholeNotes& positionInMeasureToAppendAt)
+  int                        inputLineNumber,
+  const S_msrHarmony&        harmony,
+  const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
@@ -2544,9 +2579,9 @@ void msrPart::appendHarmonyToPart (
 }
 
 void msrPart::appendHarmoniesListToPart (
-  int                            inputLineNumber,
+  int                             inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
-  const msrWholeNotes&            positionInMeasureToAppendAt)
+  const mfPositionInMeasure&      positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
@@ -2572,9 +2607,9 @@ void msrPart::appendHarmoniesListToPart (
 }
 
 void msrPart::appendFiguredBassesListToPart (
-  int                                inputLineNumber,
+  int                                 inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
-  const msrWholeNotes&               positionInMeasureToAppendAt)
+  const mfPositionInMeasure&          positionInMeasureToAppendAt)
 {
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2692,9 +2727,9 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
 }
 
 void msrPart::appendFiguredBassToPart (
-  int                     inputLineNumber,
-  const S_msrFiguredBass& figuredBass,
-  const msrWholeNotes&    positionInMeasureToAppendAt)
+  int                        inputLineNumber,
+  const S_msrFiguredBass&    figuredBass,
+  const mfPositionInMeasure& positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -2968,7 +3003,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 
 // void msrPart::handleBackupInPart (
 //   int                  inputLineNumber,
-//   const msrWholeNotes& backupStepLength)
+//   const mfWholeNotes& backupStepLength)
 // {
 //   // account for backup in part
 //   decrementPartCurrentDrawingPositionInMeasure (

@@ -3545,7 +3545,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         // if it is not full time-signature wise
 
         // fetch the measure whole notes duration from the current measure clone
-        msrWholeNotes
+        mfWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
               getFullMeasureWholeNotesDuration ();
@@ -3564,7 +3564,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
           "voiceCurrentTimeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-        msrWholeNotes
+        mfWholeNotes
           wholeNotesPerMeasure =
             voiceCurrentTimeSignature->
               timeSignatureWholeNotesPerMeasure ();
@@ -3608,7 +3608,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindAnacrusis:
       {
         // fetch the measure whole notes duration from the current measure clone
-        msrWholeNotes
+        mfWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
               getFullMeasureWholeNotesDuration ();
@@ -3627,7 +3627,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
           "voiceCurrentTimeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-        msrWholeNotes
+        mfWholeNotes
           wholeNotesPerMeasure =
             voiceCurrentTimeSignature->
               timeSignatureWholeNotesPerMeasure ();

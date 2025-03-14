@@ -122,8 +122,8 @@ std::string mfMeasureNumberAsString (std::string measureNumber)
 
 const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = -1;
 
-const msrWholeNotes K_WHOLE_NOTES_UNKNOWN_ =
-  msrWholeNotes (-1, 1);
+const mfWholeNotes K_WHOLE_NOTES_UNKNOWN_ =
+  mfWholeNotes (-1, 1);
 
 const std::string
   kWholeNotePrefix ("whole_notes_"),
@@ -132,13 +132,13 @@ const std::string
 // moments
 //______________________________________________________________________________
 
-const msrWholeNotes K_MEASURE_POSITION_UNKNOWN_ =
-  msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+const mfWholeNotes K_POSITION_IN_MEASURE_UNKNOWN_ =
+  mfWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
-const msrMoment K_MOMENT_UNKNOWN_ =
-  msrMoment (
-    K_MEASURE_POSITION_UNKNOWN_,
-    K_MEASURE_POSITION_UNKNOWN_);
+const mfMoment K_MOMENT_UNKNOWN_ =
+  mfMoment (
+    K_POSITION_IN_MEASURE_UNKNOWN_,
+    K_POSITION_IN_MEASURE_UNKNOWN_);
 
 const std::string
   kMomentPrefix ("moment_"),

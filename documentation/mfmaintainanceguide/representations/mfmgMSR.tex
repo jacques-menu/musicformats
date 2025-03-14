@@ -235,7 +235,7 @@ In a tuplet, the sounding durations are different than the written durations, so
 
     int                   fNoteDotsNumber;
 
-    msrNotesDurationKind  fNoteGraphicNotesDurationKind;
+    mfDurationKind  fNoteGraphicNotesDurationKind;
 
     msrTupletFactor       fNoteTupletFactor;
 
@@ -246,17 +246,17 @@ In a tuplet, the sounding durations are different than the written durations, so
                                 // and pitched rests
 \end{lstlisting}
 
-\EnumType{msrNotesDurationKind} is declared in \msr{msrNotesDurations.h}:
+\EnumType{mfDurationKind} is declared in \msr{mfDurations.h}:
 \begin{lstlisting}[language=CPlusPlus]
-enum class msrNotesDurationKind {
-  kNotesDuration_UNKNOWN_,
+enum class mfDurationKind {
+  kDuration_UNKNOWN_,
 
   // from longest to shortest for the algorithms
-  kNotesDurationMaxima, kNotesDurationLonga, kNotesDurationBreve,
-  kNotesDurationWhole, kNotesDurationHalf,
-  kNotesDurationQuarter,
-  kNotesDurationEighth, kNotesDuration16th, kNotesDuration32nd, kNotesDuration64th,
-  kNotesDuration128th, kNotesDuration256th, kNotesDuration512th, kNotesDuration1024th
+  kDurationMaxima, kDurationLonga, kDurationBreve,
+  kDurationWhole, kDurationHalf,
+  kDurationQuarter,
+  kDurationEighth, kDuration16th, kDuration32nd, kDuration64th,
+  kDuration128th, kDuration256th, kDuration512th, kDuration1024th
 };
 \end{lstlisting}
 
@@ -293,7 +293,7 @@ class EXP msrMeasureElement : public msrElement
 
 \lily\ represents grace notes positions with a so-called {\it moment}, that complement the measure position with a relative offset. Grace notes durations are not accounted for in the whole notes duration of measures.
 
-\Class{msrMoment} stores a position in a measure, with a relative offset since harmonies can be placed on a note during its sounding time:
+\Class{mfMoment} stores a position in a measure, with a relative offset since harmonies can be placed on a note during its sounding time:
 \begin{lstlisting}[language=CPlusPlus]
     mfRational              fWrittenPositionInMeseasure;
     mfRational              fSoundingRelativeOffset;
@@ -703,23 +703,23 @@ enum class msrOctaveEntryKind {
 \section{NotesDurations}\label{NotesDurations}
 % -------------------------------------------------------------------------
 
-They are represented in MSR with the \enumType{msrNotesDurationKind} enumeration type, defined in \msr{msrBasicTypes.h}:
+They are represented in MSR with the \enumType{mfDurationKind} enumeration type, defined in \msr{msrBasicTypes.h}:
 \begin{lstlisting}[language=CPlusPlus]
 // durations
 //______________________________________________________________________________
-enum class msrNotesDurationKind {
-  kNotesDuration_UNKNOWN_,
+enum class mfDurationKind {
+  kDuration_UNKNOWN_,
 
   // from longest to shortest for the algorithms
-  kNotesDurationMaxima, kNotesDurationLonga, kNotesDurationBreve, kNotesDurationWhole, kNotesDurationHalf,
-  kNotesDurationQuarter,
-  kNotesDurationEighth, kNotesDuration16th, kNotesDuration32nd, kNotesDuration64th, kNotesDuration128th, kNotesDuration256th, kNotesDuration512th, kNotesDuration1024th
+  kDurationMaxima, kDurationLonga, kDurationBreve, kDurationWhole, kDurationHalf,
+  kDurationQuarter,
+  kDurationEighth, kDuration16th, kDuration32nd, kDuration64th, kDuration128th, kDuration256th, kDuration512th, kDuration1024th
 };
 \end{lstlisting}
 
-\Class{msrDottedNotesDuration} contains:
+\Class{mfDottedNotesDuration} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    msrNotesDurationKind  fNotesDurationKind;
+    mfDurationKind  fNotesDurationKind;
     int                   fDotsNumber;
 \end{lstlisting}
 
@@ -902,7 +902,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      msrWholeNotes            memberNotesDisplayWholeNotes);
+      mfWholeNotes            memberNotesDisplayWholeNotes);
 
   protected:
 
@@ -915,7 +915,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      msrWholeNotes            memberNotesDisplayWholeNotes);
+      mfWholeNotes            memberNotesDisplayWholeNotes);
 
 		// ... ... ...
 
@@ -964,10 +964,10 @@ class EXP msrTempo : public msrMeasureElement
 
     std::list <S_msrWords> fTempoWordsList;
 
-    msrDottedNotesDuration     fTempoBeatUnit;
+    mfDottedNotesDuration     fTempoBeatUnit;
 
     std::string           fTempoPerMinute; // '90' or '132-156' for example
-    msrDottedNotesDuration     fTempoEquivalentBeatUnit;
+    mfDottedNotesDuration     fTempoEquivalentBeatUnit;
 
     S_msrTempoNotesRelationshipElements
                           fTempoNotesRelationshipLeftElements;

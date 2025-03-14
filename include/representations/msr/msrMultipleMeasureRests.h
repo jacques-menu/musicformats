@@ -14,7 +14,7 @@
 
 #include <list>
 
-#include "msrNotesDurations.h"
+#include "mfDurations.h"
 #include "msrSegmentElements.h"
 #include "msrUseSymbols.h"
 
@@ -86,7 +86,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     int                   getLastMeasurePuristMeasureNumber () const
                               { return fLastMeasurePuristNumber; }
 
-    msrWholeNotes         fetchMultipleMeasureRestMeasureSoundingNotes () const;
+    mfWholeNotes         fetchMultipleMeasureRestMeasureSoundingNotes () const;
                             // don't simply multiply duration by number,
                             // may help pin-point errors in representation
   public:

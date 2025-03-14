@@ -477,7 +477,7 @@ S_msrPart createPartInScore (
 if (false) { // JMI TEMP
   part->
     setPartShortestNoteWholeNotes (
-      msrWholeNotes (1, 16));
+      mfWholeNotes (1, 16));
 }
 
   return part;
@@ -593,8 +593,8 @@ S_msrMeasure createMeasureInVoice (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave4,
-            msrWholeNotes (1, 8), // soundingWholeNotes
-            msrWholeNotes (1, 8), // displayWholeNotes
+            mfWholeNotes (1, 8), // soundingWholeNotes
+            mfWholeNotes (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the dynamic to the note

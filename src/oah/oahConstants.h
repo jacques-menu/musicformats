@@ -16,8 +16,8 @@
 
 #include "exports.h"
 
-#include "msrMoments.h"
-#include "msrNotesDurations.h"
+#include "mfMoments.h"
+#include "mfDurations.h"
 
 
 namespace MusicFormats

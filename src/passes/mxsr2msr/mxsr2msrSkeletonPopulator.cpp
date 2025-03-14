@@ -84,9 +84,9 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
   fCurrentSlashDotsNumber = -1;
 
   fCurrentNoteSoundingDurationKind =
-    msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+    mfDurationKind::kDuration_UNKNOWN_;
   fCurrentSlashGraphicNotesDurationKind =
-    msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+    mfDurationKind::kDuration_UNKNOWN_;
 
   // staff handling
   fPreviousNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
@@ -205,7 +205,7 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
     msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone;
 
   fCurrentMetronomeNotesDurationKind =
-    msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+    mfDurationKind::kDuration_UNKNOWN_;
 
   fCurrentMetronomeBeamValue = "";
 
@@ -257,15 +257,15 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
 
   fCurrentHarmoniesStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 
-  fCurrentHarmonyWholeNotesOffset = msrWholeNotes (0, 1);
+  fCurrentHarmonyWholeNotesOffset = mfWholeNotes (0, 1);
 
   // figured bass handling
   fFiguredBassVoicesCounter = 0;
 
   fCurrentFiguredBassSoundingWholeNotes =
-    msrWholeNotes (0, 1);
+    mfWholeNotes (0, 1);
   fCurrentFiguredBassDisplayWholeNotes =
-    msrWholeNotes (0, 1);
+    mfWholeNotes (0, 1);
   fCurrentFiguredBassParenthesesKind =
     msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo; // default value
   fCurrentFigureNumber = -1;
@@ -424,9 +424,9 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
   fCurrentDisplayOctave =
     msrOctaveKind::kOctave_UNKNOWN_;
   fCurrentNoteDisplayWholeNotes =
-    msrWholeNotes (0, 1);
+    mfWholeNotes (0, 1);
   fCurrentNoteDisplayWholeNotesFromType =
-    msrWholeNotes (0, 1);
+    mfWholeNotes (0, 1);
 
   // note head
 
@@ -453,24 +453,24 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
   // sounding whole notes
 
   fCurrentNoteSoundingWholeNotes =
-    msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+    mfWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
   fCurrentNoteSoundingWholeNotesFromNotesDuration =
-    msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+    mfWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
   fCurrentNoteSoundingDurationKind =
-    msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+    mfDurationKind::kDuration_UNKNOWN_;
 
   // display whole notes
 
   fCurrentNoteDisplayWholeNotes =
-    msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+    mfWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
   fCurrentNoteDisplayWholeNotesFromType =
-    msrWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+    mfWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
 
   // display
 
   fCurrentNoteGraphicNotesDurationKind =
-    msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+    mfDurationKind::kDuration_UNKNOWN_;
 
   fCurrentDisplayOctave =
     msrOctaveKind::kOctave_UNKNOWN_;
@@ -6025,9 +6025,9 @@ void mxsr2msrSkeletonPopulator::visitStart (S_offset& elt)
   int offsetValue = (int)(*elt);
 
   // set offset whole notes
-  msrWholeNotes
+  mfWholeNotes
     offsetWholeNotesFromNotesDuration =
-      msrWholeNotes (
+      mfWholeNotes (
         offsetValue,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
@@ -6142,8 +6142,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_sound& elt)
       fCurrentMetronomeTempo =
         msrTempo::createTempoPerMinute (
           elt->getInputLineNumber (),
-          msrDottedNotesDuration (
-            msrNotesDurationKind::kNotesDurationQuarter,
+          mfDottedNotesDuration (
+            mfDurationKind::kDurationQuarter,
             0),       // JMI could be different??? v0.9.66
           tempoString,
           msrTempoParenthesizedKind::kTempoParenthesizedNo,
@@ -7246,7 +7246,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome& elt)
     msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone;
 
   fCurrentMetronomeNotesDurationKind =
-    msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+    mfDurationKind::kDuration_UNKNOWN_;
 
   fCurrentMetronomeBeamValue = "";
 
@@ -7283,9 +7283,9 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
   std::string beatUnitString = elt->getValue();
 
   // the type contains a display duration
-  msrNotesDurationKind
+  mfDurationKind
     beatUnitNotesDurationKind =
-      msrNotesDurationKindFromMusicXMLString (
+      mfDurationKindFromMusicXMLString (
         elt->getInputLineNumber (),
         beatUnitString);
 
@@ -7293,7 +7293,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_beat_unit& elt)
   if (fCurrentMetronomeBeatUnitsVector.size () < 2) {
     // register beat unit in in dotted durations list
     fCurrentMetronomeBeatUnitsVector.push_back (
-      msrDottedNotesDuration (
+      mfDottedNotesDuration (
         beatUnitNotesDurationKind,
         0)); // dots number
   }
@@ -7402,7 +7402,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_metronome_type& elt)
 
   // the type contains a display duration,
   fCurrentMetronomeNotesDurationKind =
-    msrNotesDurationKindFromMusicXMLString (
+    mfDurationKindFromMusicXMLString (
      elt->getInputLineNumber (),
      metronomeType);
 }
@@ -7563,7 +7563,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome_note& elt)
 
   // convert metronome note duration into whole notes
   fCurrentMetronomeNoteWholeNotesFromMetronomeType =
-    msrNotesDurationKindAsWholeNotes (
+    mfDurationKindAsWholeNotes (
       fCurrentMetronomeNotesDurationKind);
 
   // take metronome dots into account if any
@@ -7975,7 +7975,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
       {
-        msrDottedNotesDuration
+        mfDottedNotesDuration
           beatUnits =
             fCurrentMetronomeBeatUnitsVector [0];
 
@@ -7991,7 +7991,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsEquivalence:
       {
-        msrDottedNotesDuration
+        mfDottedNotesDuration
           beatUnits =
             fCurrentMetronomeBeatUnitsVector [0];
 
@@ -8857,9 +8857,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_backup& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // compute the backup step length
-  msrWholeNotes
+  mfWholeNotes
     backupStepLength =
-      msrWholeNotes (
+      mfWholeNotes (
         fCurrentBackupDuration,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
@@ -8967,9 +8967,9 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_forward& elt)
   // the <staff /> element is present only in case of a staff change ??? JNI v0.9.67
 
   // compute the backup step length
-  msrWholeNotes
+  mfWholeNotes
     forwardStepLength =
-      msrWholeNotes (
+      mfWholeNotes (
         fCurrentForwardDuration,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
@@ -10752,7 +10752,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_lyric& elt)
           fetchVoiceUpLinkToPart ();
 
     // fetch the part current measure position
-    msrWholeNotes
+    mfPositionInMeasure
       partCurrentDrawingPositionInMeasure =
         part->
           getPartCurrentDrawingPositionInMeasure ();
@@ -10978,7 +10978,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   fCurrentPart->
     setPartCurrentDrawingPositionInMeasure (
       elt->getInputLineNumber (),
-      msrWholeNotes (0, 1));
+      mfWholeNotes (0, 1));
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -12578,7 +12578,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 
   // harmonies
 
-  fCurrentHarmonyWholeNotesOffset = msrWholeNotes (0, 1);
+  fCurrentHarmonyWholeNotesOffset = mfWholeNotes (0, 1);
 
   // lyrics
 
@@ -12845,7 +12845,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
 
     // set current grace note whole notes
     fCurrentNoteSoundingWholeNotesFromNotesDuration =
-      msrWholeNotes (
+      mfWholeNotes (
         fCurrentNoteDuration,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
@@ -12888,7 +12888,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
 
     // set current figured bass whole notes duration
     fCurrentFiguredBassSoundingWholeNotes =
-      msrWholeNotes (
+      mfWholeNotes (
         duration,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
 
@@ -13013,7 +13013,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_type& elt)
 
     // the type contains a display duration,
     fCurrentNoteGraphicNotesDurationKind =
-      msrNotesDurationKindFromMusicXMLString (
+      mfDurationKindFromMusicXMLString (
         elt->getInputLineNumber (),
         fCurrentNoteType);
   }
@@ -13923,7 +13923,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_slash_type& elt)
 
   // the type contains a display duration,
   fCurrentSlashGraphicNotesDurationKind =
-    msrNotesDurationKindFromMusicXMLString (
+    mfDurationKindFromMusicXMLString (
       elt->getInputLineNumber (),
       slashType);
 
@@ -18824,7 +18824,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
 
     // the type contains a display duration
     fCurrentNoteNormalTypeNotesDuration =
-      msrNotesDurationKindFromMusicXMLString (
+      mfDurationKindFromMusicXMLString (
         elt->getInputLineNumber (),
         normalTypeString);
 
@@ -18832,7 +18832,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_normal_type& elt)
     // there can be several <beat-unit/> in a <metronome/> markup,
     // register beat unit in in dotted durations list
     fCurrentMetronomeBeatUnitsVector.push_back (
-      msrDottedNotesDuration (
+      mfDottedNotesDuration (
         fCurrentNoteNormalTypeNotesDuration,
         0));
         */
@@ -22128,7 +22128,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
   // has the current note graphic duration been specified
   // in a '<type>' markup?
   switch (fCurrentNoteGraphicNotesDurationKind) {
-    case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
+    case mfDurationKind::kDuration_UNKNOWN_:
       // use the same duration as the one from the duration
       // internally ??? JMI v0.9.72
       fCurrentNoteDisplayWholeNotesFromType =
@@ -22138,12 +22138,12 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
     default:
       // convert note graphic duration into whole notes
       fCurrentNoteDisplayWholeNotesFromType =
-        msrNotesDurationKindAsWholeNotes (
+        mfDurationKindAsWholeNotes (
           fCurrentNoteGraphicNotesDurationKind);
 
       // take dots into account if any
       if (fCurrentNoteDotsNumber > 0) {
-        msrWholeNotes
+        mfWholeNotes
           wholeNotesIncrement =
             fCurrentNoteDisplayWholeNotesFromType * mfRational (1, 2);
         int
@@ -22196,7 +22196,7 @@ S_msrNote mxsr2msrSkeletonPopulator::createNote (
     ) {
       // double tremolo note
       if (
-        fCurrentNoteGraphicNotesDurationKind == msrNotesDurationKind::kNotesDuration_UNKNOWN_
+        fCurrentNoteGraphicNotesDurationKind == mfDurationKind::kDuration_UNKNOWN_
       ) {
         std::stringstream ss;
 
@@ -24175,7 +24175,7 @@ void mxsr2msrSkeletonPopulator::handlePendingHarmonies ()
 void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
   const S_msrHarmony& harmony)
 {
-  msrWholeNotes
+  mfWholeNotes
     currentNoteSoundingWholeNotes =
       fCurrentNote->
         getMeasureElementSoundingWholeNotes (),
@@ -24183,7 +24183,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
       fCurrentNote->
         getNoteDisplayWholeNotes ();
 
-  msrWholeNotes
+  mfPositionInMeasure
     currentNotePositionInMeasure =
       fCurrentNote->
         getMeasureElementPositionInMeasure ();
@@ -24257,19 +24257,19 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
         fCurrentNoteNormalNotes));
 
   // get harmony's whole notes offset
-  msrWholeNotes
+  mfWholeNotes
     harmonyWholeNotesOffset =
       harmony->
         getHarmonyWholeNotesOffset ();
 
   // append harmony to fCurrentPart
   if (fCurrentOuterMostTuplet) {
-    msrWholeNotes
+    mfPositionInMeasure
       currentTopLevelTupletPositionInMeasure =
         fCurrentOuterMostTuplet->getMeasureElementPositionInMeasure ();
 
     // compute harmony's measure position
-    msrWholeNotes
+    mfPositionInMeasure
       harmonyPositionInMeasure =
         currentTopLevelTupletPositionInMeasure
           +
@@ -24363,7 +24363,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
 
 void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
 {
-  msrWholeNotes
+  mfWholeNotes
     currentNoteSoundingWholeNotes =
       fCurrentNote->
         getMeasureElementSoundingWholeNotes (),
@@ -24371,7 +24371,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       fCurrentNote->
         getNoteDisplayWholeNotes ();
 
-  msrWholeNotes
+  mfWholeNotes
     currentNotePositionInMeasure =
       fCurrentNote->
         getMeasureElementPositionInMeasure ();
@@ -24450,17 +24450,17 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
   S_msrHarmony
     previousHarmony;
 
-  msrWholeNotes
+  mfWholeNotes
     previousWholeNotesOffsetInTheLoop =
-      msrWholeNotes (0, 1);
+      mfWholeNotes (0, 1);
 
-  msrWholeNotes
+  mfWholeNotes
     currentHarmonySoundingWholeNotes =
-      msrWholeNotes (0, 1);
+      mfWholeNotes (0, 1);
 
-  msrWholeNotes
+  mfWholeNotes
     currentNoteRelativePosition =
-      msrWholeNotes (0, 1);
+      mfWholeNotes (0, 1);
 
   // let's go for the first to the next to last harmonies in the list
   // ----------------------------------------------
@@ -24482,14 +24482,14 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
 #endif // MF_TRACE_IS_ENABLED
 
     // get currentHarmony's whole notes offset
-    msrWholeNotes
+    mfWholeNotes
       currentHarmonyWholeNotesOffset =
         currentHarmony->
           getHarmonyWholeNotesOffset ();
 
     if (previousHarmony) {
       // compute the offset delta
-      msrWholeNotes
+      mfWholeNotes
         offsetDelta =
           currentHarmonyWholeNotesOffset - previousWholeNotesOffsetInTheLoop;
 
@@ -24500,7 +24500,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
           offsetDelta / currentNoteSoundingWholeNotes);
 
       // set the previous harmony's sounding whole notes
-      msrWholeNotes
+      mfWholeNotes
         currentHarmonySoundingWholeNotes =
           currentNoteSoundingWholeNotes * fraction;
 
@@ -24579,13 +24579,13 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
 #endif // MF_TRACE_IS_ENABLED
 
   // get lastHarmony's whole notes offset
-  msrWholeNotes
+  mfWholeNotes
     lastHarmonyWholeNotesOffset =
       lastHarmony->
         getHarmonyWholeNotesOffset ();
 
   // compute the offset delta
-  msrWholeNotes
+  mfWholeNotes
     offsetDelta =
       currentNoteSoundingWholeNotes - previousWholeNotesOffsetInTheLoop;
 
@@ -24596,7 +24596,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       offsetDelta / currentNoteSoundingWholeNotes);
 
   // set the sounding whole notes of the last harmony in the list
-  msrWholeNotes
+  mfWholeNotes
     lastHarmonySoundingWholeNotes =
       currentNoteSoundingWholeNotes * fraction;
 
@@ -24744,7 +24744,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleFiguredBass (
 
 void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
 {
-  msrWholeNotes
+  mfWholeNotes
     currentNoteSoundingWholeNotes =
       fCurrentNote->
         getMeasureElementSoundingWholeNotes (),
@@ -24775,7 +24775,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
 
   for (S_msrFiguredBass currentFiguredBass : fPendingFiguredBassesList) {
     // get currentFiguredBass's whole notes duration
-    msrWholeNotes
+    mfWholeNotes
       figuredBassWholeNotesDuration =
         currentFiguredBass->
 //           getFiguredBassWholeNotesDuration ();
@@ -24783,7 +24783,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
 
     // compute the currentFiguredBass's sounding whole notes
     // as a fraction of currentNoteSoundingWholeNotes
-    msrWholeNotes
+    mfWholeNotes
       figuredBassSoundingWholeNotes;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -25710,7 +25710,7 @@ void mxsr2msrSkeletonPopulator::handleLyricsForCurrentNoteAfterItHasBeenHandled 
               fetchVoiceUpLinkToPart ();
 
         // fetch the part current measure position
-        msrWholeNotes
+        mfPositionInMeasure
           partCurrentDrawingPositionInMeasure =
             part->
               getPartCurrentDrawingPositionInMeasure ();
@@ -26770,7 +26770,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmony& elt)
   fCurrentHarmonyDegreeValue           = -1;
   fCurrentHarmonyDegreeAlterationKind  = msrAlterationKind::kAlterationNatural;
 
-  fCurrentHarmonyWholeNotesOffset = msrWholeNotes (0, 1);
+  fCurrentHarmonyWholeNotesOffset = mfWholeNotes (0, 1);
 
   fOnGoingHarmony = true;
 }
@@ -28023,8 +28023,8 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figured_bass& elt)
   fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN_;
   fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN_;
 
-  fCurrentFiguredBassSoundingWholeNotes = msrWholeNotes (0, 1);
-  fCurrentFiguredBassDisplayWholeNotes  = msrWholeNotes (0, 1);
+  fCurrentFiguredBassSoundingWholeNotes = mfWholeNotes (0, 1);
+  fCurrentFiguredBassDisplayWholeNotes  = mfWholeNotes (0, 1);
 
   fOnGoingFiguredBass = true;
 }

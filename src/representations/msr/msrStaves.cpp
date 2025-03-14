@@ -231,7 +231,7 @@ void msrStaff::initializeStaff ()
 
   // staff shortest note
   fStaffShortestNoteWholeNotes =
-    msrWholeNotes (INT_MAX, 1);
+    mfWholeNotes (INT_MAX, 1);
   fStaffShortestNoteTupletFactor =
     mfRational (1, 1);
 
@@ -439,13 +439,13 @@ S_msrScore msrStaff::fetchStaffUpLinkToScore () const
 void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
 {
   // is note the shortest one in this staff?
-  msrWholeNotes
+  mfWholeNotes
     noteSoundingWholeNotes =
       note->
         getMeasureElementSoundingWholeNotes ();
 
       /* JMI
-  msrWholeNotes
+  mfWholeNotes
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
@@ -854,7 +854,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
 */
 
 void msrStaff::setStaffShortestNoteWholeNotes (
-  const msrWholeNotes& wholeNotes)
+  const mfWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotes ()) {
@@ -2346,7 +2346,7 @@ void msrStaff::appendPageBreakToStaff (
 
 void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
   int                  inputLineNumber,
-  const msrWholeNotes& positionInMeasure)
+  const mfWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {

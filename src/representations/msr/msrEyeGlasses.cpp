@@ -124,8 +124,8 @@ msrEyeGlasses::~msrEyeGlasses ()
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
-//     "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
+//     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+//     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set measure element's measure position

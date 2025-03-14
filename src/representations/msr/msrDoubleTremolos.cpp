@@ -223,7 +223,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 
 // void msrDoubleTremolo::setMeasureElementPositionInMeasure (
 //   const S_msrMeasure& measure,
-//   const msrWholeNotes&     positionInMeasure,
+//   const mfWholeNotes&     positionInMeasure,
 //   const std::string&  context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -254,8 +254,8 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
-//     "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
+//     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+//     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set double tremolo's measure position
@@ -263,7 +263,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 // }
 
 // void msrDoubleTremolo::setMeasureElementPositionInMeasure ( ??? JMI v0.9.66
-//   const msrWholeNotes& positionInMeasure)
+//   const mfWholeNotes& positionInMeasure)
 // {
 //   std::string context =
 //     "setMeasureElementPositionInMeasure()";
@@ -274,7 +274,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 //
 //   if (false) { // JMI
 //   // compute double tremolo's voice position
-//   msrWholeNotes
+//   mfWholeNotes
 //      voicePosition =
 //       fDoubleTremoloUpLinkToMeasure->getMeasureVoicePosition ()
 //         +
@@ -361,7 +361,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
     setNoteIsFirstNoteInADoubleTremolo ();
 
   // fetch note display whole notes
-  msrWholeNotes
+  mfWholeNotes
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
@@ -377,7 +377,7 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (const S_msrNote& note)
   // the marks number determines the duration of the two elements:
   // '8' for 1, '16' for 2, etc
   fDoubleTremoloElementsWholeNotes =
-    msrWholeNotes (
+    mfWholeNotes (
       1,
       /* JMI
       int (
@@ -481,13 +481,13 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
     setNoteIsSecondNoteInADoubleTremolo ();
 
   // fetch note display whole notes
-  msrWholeNotes
+  mfWholeNotes
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
 
   // compute expected double tremolo sounding whole notes
-  msrWholeNotes
+  mfWholeNotes
     expectedDoubleTremoloSoundingWholeNotes = // JMI v0.9.72
       noteDisplayWholeNotes;
 
@@ -579,13 +579,13 @@ void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
     setChordIsFirstChordInADoubleTremolo ();
 
   // fetch chord displayed whole notes
-  msrWholeNotes
+  mfWholeNotes
     chordDisplayWholeNotes =
       chord->
         getChordDisplayWholeNotes ();
 
   // compute expected double tremolo sounding whole notes
-  msrWholeNotes
+  mfWholeNotes
     expectedDoubleTremoloSoundingWholeNotes = // JMI v0.9.72
       chordDisplayWholeNotes * 2;
 
@@ -655,7 +655,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (const S_msrChord& cho
     setChordIsSecondChordInADoubleTremolo ();
 
   // fetch chord displayed whole notes
-  msrWholeNotes
+  mfWholeNotes
     chordDisplayWholeNotes =
       chord->
         getChordDisplayWholeNotes ();

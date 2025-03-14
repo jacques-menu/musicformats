@@ -117,7 +117,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             tempoWordsList =
               fMsrTempo->getTempoWordsList ();
 
-          msrDottedNotesDuration
+          mfDottedNotesDuration
             tempoDottedNotesDuration =
               fMsrTempo->getTempoBeatUnit ();
 
@@ -140,7 +140,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           }
 
           // handle tempo duration and continuation dots number
-          msrNotesDurationKind
+          mfDurationKind
             notesDurationKind =
               tempoDottedNotesDuration.getNotesDurationKind ();
           int
@@ -152,46 +152,46 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             noteValueKind = bsrNoteValueKind::kNoteValueNone;
 
           switch (notesDurationKind) {
-            case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
+            case mfDurationKind::kDuration_UNKNOWN_:
               break;
 
-            case msrNotesDurationKind::kNotesDuration1024th: // JMI
+            case mfDurationKind::kDuration1024th: // JMI
               break;
-            case msrNotesDurationKind::kNotesDuration512th: // JMI
+            case mfDurationKind::kDuration512th: // JMI
               break;
-            case msrNotesDurationKind::kNotesDuration256th:
+            case mfDurationKind::kDuration256th:
               noteValueKind = bsrNoteValueKind::kNoteValueC256th;
               break;
-            case msrNotesDurationKind::kNotesDuration128th:
+            case mfDurationKind::kDuration128th:
               noteValueKind = bsrNoteValueKind::kNoteValueC128th;
               break;
-            case msrNotesDurationKind::kNotesDuration64th:
+            case mfDurationKind::kDuration64th:
               noteValueKind = bsrNoteValueKind::kNoteValueC64th;
               break;
-            case msrNotesDurationKind::kNotesDuration32nd:
+            case mfDurationKind::kDuration32nd:
               noteValueKind = bsrNoteValueKind::kNoteValueC32nd;
               break;
-            case msrNotesDurationKind::kNotesDuration16th:
+            case mfDurationKind::kDuration16th:
               noteValueKind = bsrNoteValueKind::kNoteValueC16th;
               break;
-            case msrNotesDurationKind::kNotesDurationEighth:
+            case mfDurationKind::kDurationEighth:
               noteValueKind = bsrNoteValueKind::kNoteValueC8th;
               break;
-            case msrNotesDurationKind::kNotesDurationQuarter:
+            case mfDurationKind::kDurationQuarter:
               noteValueKind = bsrNoteValueKind::kNoteValueCQuarter;
               break;
-            case msrNotesDurationKind::kNotesDurationHalf:
+            case mfDurationKind::kDurationHalf:
               noteValueKind = bsrNoteValueKind::kNoteValueCHalf;
               break;
-            case msrNotesDurationKind::kNotesDurationWhole:
+            case mfDurationKind::kDurationWhole:
               noteValueKind = bsrNoteValueKind::kNoteValueCWhole;
               break;
-            case msrNotesDurationKind::kNotesDurationBreve:
+            case mfDurationKind::kDurationBreve:
               noteValueKind = bsrNoteValueKind::kNoteValueCBreve;
               break;
-            case msrNotesDurationKind::kNotesDurationLonga:
+            case mfDurationKind::kDurationLonga:
               break;
-            case msrNotesDurationKind::kNotesDurationMaxima:
+            case mfDurationKind::kDurationMaxima:
               break;
           } // switch
 
@@ -493,7 +493,7 @@ std::string bsrTempo::asDebugString () const
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
       {
-        msrDottedNotesDuration
+        mfDottedNotesDuration
           tempoBeatUnit =
             fMsrTempo->getTempoBeatUnit ();
 

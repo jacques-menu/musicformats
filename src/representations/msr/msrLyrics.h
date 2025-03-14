@@ -168,7 +168,7 @@ class EXP msrSyllable : public msrElement
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
                             const std::string&     syllableStanzaNumber,
-                            const msrWholeNotes&   syllableWholeNotes,
+                            const mfWholeNotes&   syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             const S_msrStanza&     syllableUpLinkToStanza);
 
@@ -177,7 +177,7 @@ class EXP msrSyllable : public msrElement
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
                             const std::string&     syllableStanzaNumber,
-                            const msrWholeNotes&   syllableWholeNotes,
+                            const mfWholeNotes&   syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             const S_msrStanza&     syllableUpLinkToStanza);
 
@@ -199,7 +199,7 @@ class EXP msrSyllable : public msrElement
                             msrSyllableKind        syllableKind,
                             msrSyllableExtendKind  syllableExtendKind,
                             const std::string&     syllableStanzaNumber,
-                            const msrWholeNotes&   syllableWholeNotes,
+                            const mfWholeNotes&   syllableWholeNotes,
                             const msrTupletFactor& syllableTupletFactor,
                             const S_msrStanza&     syllableUpLinkToStanza);
 
@@ -254,10 +254,10 @@ class EXP msrSyllable : public msrElement
 
     // syllable whole notes
     void                  setSyllableWholeNotes (
-                            msrWholeNotes wholeNotes)
+                            mfWholeNotes wholeNotes)
                               { fSyllableWholeNotes = wholeNotes; }
 
-    msrWholeNotes         getSyllableWholeNotes () const
+    mfWholeNotes         getSyllableWholeNotes () const
                               { return fSyllableWholeNotes; }
 
     // syllable tuplet factor
@@ -341,7 +341,7 @@ class EXP msrSyllable : public msrElement
     std::string           fSyllableStanzaNumber;
 
     // syllable whole notes
-    msrWholeNotes         fSyllableWholeNotes;
+    mfWholeNotes         fSyllableWholeNotes;
 
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;
@@ -426,9 +426,9 @@ class EXP msrStanza : public msrElement
     // ------------------------------------------------------
 
     void                  appendSyllableToStanza (
-                            const S_msrSyllable& syllable,
-                            const S_msrMeasure&  upLinkToMeasure,
-                            const msrWholeNotes& partCurrentDrawingPositionInMeasure);
+                            const S_msrSyllable&       syllable,
+                            const S_msrMeasure&        upLinkToMeasure,
+                            const mfPositionInMeasure& partCurrentDrawingPositionInMeasure);
 
     void                  appendSyllableToStanzaClone (
                             const S_msrSyllable& syllable,
@@ -436,42 +436,42 @@ class EXP msrStanza : public msrElement
 
 //     S_msrSyllable         appendRestSyllableToStanza (
 //                             int             inputLineNumber,
-//                             const msrWholeNotes& wholeNotes);
+//                             const mfWholeNotes& wholeNotes);
 //
 //     S_msrSyllable         appendSkipSyllableToStanza (
 //                             int             inputLineNumber,
-//                             const msrWholeNotes& wholeNotes);
+//                             const mfWholeNotes& wholeNotes);
 
     void                  appendMeasureEndSyllableToStanza (
                             int                  inputLineNumber,
                             const S_msrMeasure&  upLinkToMeasure,
-                            const msrWholeNotes& partCurrentDrawingPositionInMeasure);
+                            const mfWholeNotes& partCurrentDrawingPositionInMeasure);
 
 //     S_msrSyllable         appendMelismaSyllableToStanza (
 //                             int             inputLineNumber,
 //                             msrSyllableKind syllableKind,
-//                             const msrWholeNotes& wholeNote);
+//                             const mfWholeNotes& wholeNote);
 
 /* JMI
     S_msrSyllable         appendTiedSyllableToStanza (
                             int      inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
     S_msrSyllable         appendSlurSyllableToStanza (
                             int      inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
     S_msrSyllable         appendSlurBeyondEndSyllableToStanza (
                             int      inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
     S_msrSyllable         appendLigatureSyllableToStanza (
                             int      inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
     S_msrSyllable         appendLigatureBeyondEndSyllableToStanza (
                             int      inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
     S_msrSyllable         appendBarNumberCheckSyllableToStanza (
                             int           inputLineNumber,
@@ -492,11 +492,11 @@ class EXP msrStanza : public msrElement
 
 //     void                  padUpToMeasureAccumulatedWholeNotesDurationInStanza ( // JMI v0.9.68
 //                             int                  inputLineNumber,
-//                             const msrWholeNotes& wholeNotes);
+//                             const mfWholeNotes& wholeNotes);
 
     void                  appendPaddingNoteToStanza (
                             int                  inputLineNumber,
-                            const msrWholeNotes& forwardStepLength);
+                            const mfWholeNotes& forwardStepLength);
 
   public:
 
@@ -540,7 +540,7 @@ class EXP msrStanza : public msrElement
     Bool                  fStanzaTextPresent;
 
     // measure whole notes
-    msrWholeNotes         fStanzaMeasureAccumulatedWholeNotesDuration;
+    mfWholeNotes         fStanzaMeasureAccumulatedWholeNotesDuration;
 };
 typedef SMARTP<msrStanza> S_msrStanza;
 EXP std::ostream& operator << (std::ostream& os, const S_msrStanza& elt);

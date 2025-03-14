@@ -43,24 +43,24 @@ class EXP msrSegmentElement : public msrElement
     // ------------------------------------------------------
 
 //     void                  setSegmentElementSoundingWholeNotes (
-//                             const msrWholeNotes& wholeNotes,
+//                             const mfWholeNotes& wholeNotes,
 //                             const std::string&   context);
 
 //     mfWholeNotes            getSegmentElementSoundingWholeNotes () const
 //                               { return fSegmentElementSoundingWholeNotes; }
 
 //     void                  setSegmentElementMeasureMoment (
-//                             const msrMoment& measureMoment,
+//                             const mfMoment& measureMoment,
 //                             const std::string&         context);
 //
-//     const msrMoment&      getSegmentElementMeasureMoment () const
+//     const mfMoment&      getSegmentElementMeasureMoment () const
 //                               { return fSegmentElementMeasureMoment; }
 //
 //     void                  setSegmentElementVoiceMoment (
-//                             const msrMoment& voiceMoment,
+//                             const mfMoment& voiceMoment,
 //                             const std::string&         context);
 //
-//     const msrMoment&      getSegmentElementVoiceMoment () const
+//     const mfMoment&      getSegmentElementVoiceMoment () const
 //                               { return fSegmentElementVoiceMoment; }
 
   public:
@@ -110,8 +110,8 @@ class EXP msrSegmentElement : public msrElement
 
 //     mfWholeNotes              fSegmentElementSoundingWholeNotes;
 
-//     msrMoment             fSegmentElementMeasureMoment;
-//     msrMoment             fSegmentElementVoiceMoment;
+//     mfMoment             fSegmentElementMeasureMoment;
+//     mfMoment             fSegmentElementVoiceMoment;
 };
 typedef SMARTP<msrSegmentElement> S_msrSegmentElement;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSegmentElement& elt);

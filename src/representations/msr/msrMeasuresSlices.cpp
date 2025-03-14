@@ -51,7 +51,7 @@ std::string msrNoteEventKindAsString (
 
 //______________________________________________________________________________
 S_msrNoteEvent msrNoteEvent::create (
-  const msrWholeNotes&  noteEventPositionInMeasure,
+  const mfPositionInMeasure&  noteEventPositionInMeasure,
   const S_msrNote& noteEventNote,
   msrNoteEventKind noteEventKind)
 {
@@ -65,12 +65,12 @@ S_msrNoteEvent msrNoteEvent::create (
 }
 
 msrNoteEvent::msrNoteEvent (
-  const msrWholeNotes& noteEventPositionInMeasure,
+  const mfPositionInMeasure& noteEventPositionInMeasure,
   const S_msrNote& noteEventNote,
   msrNoteEventKind noteEventKind)
 {
   fNoteEventPositionInMeasure = noteEventPositionInMeasure;
-  fNoteEventNote              = noteEventNote;
+  fNoteEventNote = noteEventNote;
   fNoteEventKind              = noteEventKind;
 }
 
@@ -85,7 +85,7 @@ bool msrNoteEvent::compareNoteEventsByIncreasingPositionInMeasure (
   // start events with the same measure position
   bool result = false;
 
-  msrWholeNotes
+  mfPositionInMeasure
     firstPositionInMeasure =
       first->
         fNoteEventPositionInMeasure,
@@ -203,7 +203,7 @@ std::ostream& operator << (std::ostream& os, const S_msrNoteEvent& elt)
 
 //______________________________________________________________________________
 S_msrSimultaneousNotesChunk msrSimultaneousNotesChunk::create (
-  const msrWholeNotes& chunkPositionInMeasure)
+  const mfWholeNotes& chunkPositionInMeasure)
 {
   msrSimultaneousNotesChunk* obj = new
     msrSimultaneousNotesChunk (
@@ -213,7 +213,7 @@ S_msrSimultaneousNotesChunk msrSimultaneousNotesChunk::create (
 }
 
 msrSimultaneousNotesChunk::msrSimultaneousNotesChunk (
-  const msrWholeNotes& chunkPositionInMeasure)
+  const mfWholeNotes& chunkPositionInMeasure)
 {
   fChunkPositionInMeasure = chunkPositionInMeasure;
 }
@@ -505,7 +505,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
       } // switch
 
       if (doKeepTheNote) {
-        msrWholeNotes
+        mfWholeNotes
           notePositionInMeasure =
             note->
               getMeasureElementPositionInMeasure ();
@@ -524,7 +524,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
         fSliceNoteEventsList.push_back (noteStartEvent);
 
         // append a note stop event to the slice notes events list
-        msrWholeNotes
+        mfWholeNotes
           noteEndPositionInMeasure =
             notePositionInMeasure
               +
@@ -579,7 +579,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
   S_msrSimultaneousNotesChunk
     currentSimultaneousNotesChunk;
 
-  msrWholeNotes
+  mfWholeNotes
     currentChunkPositionInMeasure (-1, 1);
 
   for (
@@ -589,7 +589,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
   ) {
     S_msrNoteEvent noteEvent = (*i);
 
-    msrWholeNotes
+    mfPositionInMeasure
       noteEventPositionInMeasure =
         noteEvent->
           getNoteEventPositionInMeasure ();
@@ -660,7 +660,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
     S_msrNoteEvent noteEvent = (*i);
 
     // handle the note event
-//     msrWholeNotes JMI
+//     mfWholeNotes JMI
 //       noteEventPositionInMeasure =
 //         noteEvent->
 //           getNoteEventPositionInMeasure ();

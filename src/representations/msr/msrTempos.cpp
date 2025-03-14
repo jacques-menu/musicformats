@@ -43,7 +43,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrTempoNote msrTempoNote::create (
   int             inputLineNumber,
-  const msrWholeNotes& tempoNoteWholeNotes,
+  const mfWholeNotes& tempoNoteWholeNotes,
   Bool            tempoNoteBelongsToATuplet)
 {
   msrTempoNote * obj =
@@ -57,7 +57,7 @@ S_msrTempoNote msrTempoNote::create (
 
 msrTempoNote::msrTempoNote (
   int             inputLineNumber,
-  const msrWholeNotes& tempoNoteWholeNotes,
+  const mfWholeNotes& tempoNoteWholeNotes,
   Bool            tempoNoteBelongsToATuplet)
     : msrElement (inputLineNumber)
 {
@@ -241,7 +241,7 @@ S_msrTempoTuplet msrTempoTuplet::create (
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   const msrTupletFactor&       tempoTupletFactor,
-  const msrWholeNotes&         memberNotesDisplayWholeNotes)
+  const mfWholeNotes&         memberNotesDisplayWholeNotes)
 {
   msrTempoTuplet* obj =
     new msrTempoTuplet (
@@ -261,7 +261,7 @@ msrTempoTuplet::msrTempoTuplet (
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   const msrTupletFactor&       tempoTupletFactor,
-  const msrWholeNotes&         memberNotesDisplayWholeNotes)
+  const mfWholeNotes&         memberNotesDisplayWholeNotes)
     : msrElement (inputLineNumber)
 {
   fTempoTupletNumber = tempoTupletNumber;
@@ -273,7 +273,7 @@ msrTempoTuplet::msrTempoTuplet (
 
   fMemberNotesDisplayWholeNotes  = memberNotesDisplayWholeNotes;
 
-  fTempoTupletDisplayWholeNotes  = msrWholeNotes (0, 1);
+  fTempoTupletDisplayWholeNotes  = mfWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()){
@@ -1143,7 +1143,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
 S_msrTempo msrTempo::createTempoPerMinute (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrDottedNotesDuration tempoBeatUnit,
+  mfDottedNotesDuration tempoBeatUnit,
   std::string       tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1163,7 +1163,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
 
 S_msrTempo msrTempo::createTempoPerMinute (
   int               inputLineNumber,
-  msrDottedNotesDuration tempoBeatUnit,
+  mfDottedNotesDuration tempoBeatUnit,
   std::string       tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1182,8 +1182,8 @@ S_msrTempo msrTempo::createTempoPerMinute (
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrDottedNotesDuration tempoBeatUnit,
-  msrDottedNotesDuration tempoEquivalentBeatUnit,
+  mfDottedNotesDuration tempoBeatUnit,
+  mfDottedNotesDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1202,8 +1202,8 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
 
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   int               inputLineNumber,
-  msrDottedNotesDuration tempoBeatUnit,
-  msrDottedNotesDuration tempoEquivalentBeatUnit,
+  mfDottedNotesDuration tempoBeatUnit,
+  mfDottedNotesDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
@@ -1304,7 +1304,7 @@ msrTempo::msrTempo (
 msrTempo::msrTempo (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrDottedNotesDuration tempoBeatUnit,
+  mfDottedNotesDuration tempoBeatUnit,
   std::string       tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1329,8 +1329,8 @@ msrTempo::msrTempo (
 msrTempo::msrTempo (
   int               inputLineNumber,
   const S_msrMeasure& upLinkToMeasure,
-  msrDottedNotesDuration tempoBeatUnit,
-  msrDottedNotesDuration tempoEquivalentBeatUnit,
+  mfDottedNotesDuration tempoBeatUnit,
+  mfDottedNotesDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)

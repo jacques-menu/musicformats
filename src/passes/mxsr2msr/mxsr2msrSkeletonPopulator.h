@@ -1486,7 +1486,7 @@ class EXP mxsr2msrSkeletonPopulator :
     msrUseDotsKind            fCurrentUseDotsKind;
     msrSlashUseStemsKind      fCurrentSlashUseStemsKind;
 
-    msrNotesDurationKind      fCurrentSlashGraphicNotesDurationKind;
+    mfDurationKind      fCurrentSlashGraphicNotesDurationKind;
     int                       fCurrentSlashDotsNumber;
 
 
@@ -1612,7 +1612,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     int                       fCurrentNoteActualNotes;
     int                       fCurrentNoteNormalNotes;
-    msrNotesDurationKind      fCurrentNoteNormalTypeNotesDuration;
+    mfDurationKind      fCurrentNoteNormalTypeNotesDuration;
 
     // nested tuplets are numbered 1, 2, ...
     int                       fPreviousTupletNumber;
@@ -1659,7 +1659,7 @@ class EXP mxsr2msrSkeletonPopulator :
     S_msrNote                 fCurrentOuterMostTupletFirstNote;
     S_msrTuplet               fCurrentOuterMostTuplet;
 
-    msrWholeNotes             fCurrentOuterMostTupletRelativeOffset;
+    mfWholeNotes             fCurrentOuterMostTupletRelativeOffset;
 
 		void											displayGatheredTupletInformations (
 																const std::string& context) const;
@@ -1926,9 +1926,9 @@ class EXP mxsr2msrSkeletonPopulator :
     // metronome handling
     // ------------------------------------------------------
 
-    msrNotesDurationKind      fCurrentMetronomeBeatUnitNotesDurationKind;
+    mfDurationKind      fCurrentMetronomeBeatUnitNotesDurationKind;
 
-    std::vector <msrDottedNotesDuration>
+    std::vector <mfDottedNotesDuration>
                               fCurrentMetronomeBeatUnitsVector;
     std::string               fCurrentMetrenomePerMinute;
     msrTempoParenthesizedKind fCurrentMetronomeParenthesedKind;
@@ -1936,7 +1936,7 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentMetrenomeDotsNumber;
     msrTempoNotesRelationshipKind
                               fCurrentMetrenomeRelationKind;
-    msrNotesDurationKind      fCurrentMetronomeNotesDurationKind;
+    mfDurationKind      fCurrentMetronomeNotesDurationKind;
     std::string               fCurrentMetronomeBeamValue;
 
     Bool                      fOnGoingMetronomeNote;
@@ -1955,7 +1955,7 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentMetronomeNoteNormalNotes;
     std::string               fCurrentMetronomeNoteNormalType; // JMI ???
 
-    msrWholeNotes             fCurrentMetronomeNoteWholeNotesFromMetronomeType;
+    mfWholeNotes             fCurrentMetronomeNoteWholeNotesFromMetronomeType;
 
     int                       fCurrentMetronomeTupletNumber;
     S_msrTempoTuplet          fCurrentMetronomeTuplet;
@@ -2116,7 +2116,7 @@ class EXP mxsr2msrSkeletonPopulator :
 
     int                       fCurrentHarmoniesStaffNumber;
 
-    msrWholeNotes             fCurrentHarmonyWholeNotesOffset;
+    mfWholeNotes             fCurrentHarmonyWholeNotesOffset;
 
     Bool                      fOnGoingHarmony;
 
@@ -2147,8 +2147,8 @@ class EXP mxsr2msrSkeletonPopulator :
     int                       fCurrentFigureNumber;
     msrBassFigureSuffixKind   fCurrentFigureSuffixKind;
 
-    msrWholeNotes             fCurrentFiguredBassSoundingWholeNotes;
-    msrWholeNotes             fCurrentFiguredBassDisplayWholeNotes;
+    mfWholeNotes             fCurrentFiguredBassSoundingWholeNotes;
+    mfWholeNotes             fCurrentFiguredBassDisplayWholeNotes;
 
     msrFiguredBassParenthesesKind
                               fCurrentFiguredBassParenthesesKind;
@@ -2278,20 +2278,20 @@ class EXP mxsr2msrSkeletonPopulator :
 
     // note sounding duration
     int                       fCurrentNoteDuration;
-    msrWholeNotes             fCurrentNoteSoundingWholeNotesFromNotesDuration;
-    msrWholeNotes             fCurrentNoteSoundingWholeNotes;
-    msrNotesDurationKind      fCurrentNoteSoundingDurationKind;
+    mfWholeNotes             fCurrentNoteSoundingWholeNotesFromNotesDuration;
+    mfWholeNotes             fCurrentNoteSoundingWholeNotes;
+    mfDurationKind      fCurrentNoteSoundingDurationKind;
 
     // note type
     std::string               fCurrentNoteType;
 
     // note display
     msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesDisplayPitchKind;
-    msrWholeNotes             fCurrentNoteDisplayWholeNotesFromType;
-    msrWholeNotes             fCurrentNoteDisplayWholeNotes;
+    mfWholeNotes             fCurrentNoteDisplayWholeNotesFromType;
+    mfWholeNotes             fCurrentNoteDisplayWholeNotes;
 
     // note graphic duration
-    msrNotesDurationKind      fCurrentNoteGraphicNotesDurationKind;
+    mfDurationKind      fCurrentNoteGraphicNotesDurationKind;
 
     // unpitched notes
     Bool                      fCurrentNoteIsUnpitched;

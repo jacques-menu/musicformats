@@ -22,7 +22,7 @@
 
 #include "msrMeasures.h"
 
-#include "msrNotesDurations.h"
+#include "mfDurations.h"
 #include "msrIntervals.h"
 #include "msrTablatures.h"
 #include "msrTupletFactors.h"
@@ -291,11 +291,11 @@ class EXP msrHarmony : public msrMeasureElement
                             const std::string&       harmonyFunctionText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const msrWholeNotes&     harmonySoundingWholeNotes,
-                            const msrWholeNotes&     harmonyDisplayWholeNotes,
+                            const mfWholeNotes&     harmonySoundingWholeNotes,
+                            const mfWholeNotes&     harmonyDisplayWholeNotes,
                             int                      harmoniesStaffNumber,
                             const msrTupletFactor&   harmonyTupletFactor,
-                            const msrWholeNotes&     harmonyWholeNotesOffset);
+                            const mfWholeNotes&     harmonyWholeNotesOffset);
 
     SMARTP<msrHarmony> createHarmonyNewbornClone (
                             const S_msrVoice& containingVoice);
@@ -317,11 +317,11 @@ class EXP msrHarmony : public msrMeasureElement
                             const std::string&       harmonyFunctionText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const msrWholeNotes&     harmonySoundingWholeNotes,
-                            const msrWholeNotes&     harmonyDisplayWholeNotes,
+                            const mfWholeNotes&     harmonySoundingWholeNotes,
+                            const mfWholeNotes&     harmonyDisplayWholeNotes,
                             int                      harmoniesStaffNumber,
                             const msrTupletFactor&   harmonyTupletFactor,
-                            const msrWholeNotes&     harmonyWholeNotesOffset);
+                            const mfWholeNotes&     harmonyWholeNotesOffset);
 
     virtual               ~msrHarmony ();
 
@@ -346,21 +346,21 @@ class EXP msrHarmony : public msrMeasureElement
 
     // whole notes
     void                  setHarmonySoundingWholeNotes (
-                            const msrWholeNotes& wholeNotes,
+                            const mfWholeNotes& wholeNotes,
                             const std::string&   context);
 
     void                  setHarmonyDisplayWholeNotes ( // JMI useless??? v0.9.67
-                            const msrWholeNotes& wholeNotes,
+                            const mfWholeNotes& wholeNotes,
                             const std::string&   context);
 
-    msrWholeNotes         getHarmonyDisplayWholeNotes () const
+    mfWholeNotes         getHarmonyDisplayWholeNotes () const
                               { return fHarmonyDisplayWholeNotes; }
 
     // offset
-    void                  setHarmonyWholeNotesOffset (msrWholeNotes offset)
+    void                  setHarmonyWholeNotesOffset (mfWholeNotes offset)
                               { fHarmonyWholeNotesOffset = offset; }
 
-    msrWholeNotes         getHarmonyWholeNotesOffset () const
+    mfWholeNotes         getHarmonyWholeNotesOffset () const
                               { return fHarmonyWholeNotesOffset; }
 
     // root
@@ -434,7 +434,7 @@ class EXP msrHarmony : public msrMeasureElement
 
 //     void                  incrementHarmonySoundingWholeNotes (
 //                             int                  inputLineNumber,
-//                             const msrWholeNotes& wholeNotesDelta);
+//                             const mfWholeNotes& wholeNotesDelta);
 
   public:
 
@@ -468,10 +468,10 @@ class EXP msrHarmony : public msrMeasureElement
     S_msrVoice            fHarmoniesUpLinkToVoice; // for use in harmonies voices JMI
 
     // whole notes
-    msrWholeNotes         fHarmonyDisplayWholeNotes;
+    mfWholeNotes         fHarmonyDisplayWholeNotes;
 
     // offset
-    msrWholeNotes         fHarmonyWholeNotesOffset;
+    mfWholeNotes         fHarmonyWholeNotesOffset;
 
     // root
     msrQuarterTonesPitchKind

@@ -257,9 +257,9 @@ class EXP msrVoice : public msrElement
     // voice shortest note
 
     void                  setVoiceShortestNoteWholeNotes (
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
-    msrWholeNotes         getVoiceShortestNoteWholeNotes () const
+    mfWholeNotes         getVoiceShortestNoteWholeNotes () const
                               { return fVoiceShortestNoteWholeNotes; }
 
     void                  setVoiceShortestNoteTupletFactor (
@@ -298,9 +298,9 @@ class EXP msrVoice : public msrElement
 
     void                  setWholeNotesSinceLastRegularMeasureEnd (
                             int                  inputLineNumber,
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
-    msrWholeNotes         getWholeNotesSinceLastRegularMeasureEnd () const
+    mfWholeNotes         getWholeNotesSinceLastRegularMeasureEnd () const
                               { return fWholeNotesSinceLastRegularMeasureEnd; }
 
     // incomplete measures after repeats detection
@@ -399,17 +399,17 @@ class EXP msrVoice : public msrElement
 
     void                  cascadeAppendPaddingNoteToVoice (
                             int                  inputLineNumber,
-                            const msrWholeNotes& forwardStepLength);
+                            const mfWholeNotes& forwardStepLength);
 
     // backup and padding
 
 //     void                  padUpToPositionInMeasureInVoice (
 //                             int             inputLineNumber,
-//                             const msrWholeNotes& wholeNotesPositionInMeasure);
+//                             const mfWholeNotes& wholeNotesPositionInMeasure);
 
     void                  backupByWholeNotesStepLengthInVoice (
                             int                  inputLineNumber,
-                            const msrWholeNotes& backupTargetMeasureElementPositionInMeasure);
+                            const mfWholeNotes& backupTargetMeasureElementPositionInMeasure);
 
     // clef, key, time signature
 
@@ -433,7 +433,7 @@ class EXP msrVoice : public msrElement
 
     void                  insertHiddenMeasureAndBarLineInVoiceClone (
                             int                  inputLineNumber,
-                            const msrWholeNotes& positionInMeasure);
+                            const mfWholeNotes& positionInMeasure);
 
     // notes
 
@@ -534,12 +534,12 @@ class EXP msrVoice : public msrElement
     void                  appendHarmonyToVoice (
                             int                  inputLineNumber,
                             const S_msrHarmony&  harmony,
-                            const msrWholeNotes& positionInMeasureToAppendAt);
+                            const mfWholeNotes& positionInMeasureToAppendAt);
 
     void                  appendHarmoniesListToVoice (
                             int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const msrWholeNotes&            positionInMeasureToAppendAt);
+                            const mfWholeNotes&            positionInMeasureToAppendAt);
 
     void                  appendHarmonyToVoiceClone (
                             const S_msrHarmony& harmony);
@@ -549,12 +549,12 @@ class EXP msrVoice : public msrElement
     void                  appendFiguredBassToVoice (
                             int                     inputLineNumber,
                             const S_msrFiguredBass& figuredBass,
-                            const msrWholeNotes&    positionInMeasureToAppendAt);
+                            const mfWholeNotes&    positionInMeasureToAppendAt);
 
     void                  appendFiguredBassesListToVoice (
                             int                                 inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const msrWholeNotes&                positionInMeasureToAppendAt);
+                            const mfWholeNotes&                positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToVoiceClone (
                             const S_msrFiguredBass& figuredBass);
@@ -863,15 +863,15 @@ class EXP msrVoice : public msrElement
     // voice position
 
     void                  incrementCurrentVoicePosition (
-                            const msrWholeNotes& delta)
+                            const mfWholeNotes& delta)
                               {
                                 fCurrentVoicePosition += delta;
                               }
 
-    msrWholeNotes         getCurrentVoicePosition () const
+    mfWholeNotes         getCurrentVoicePosition () const
                               { return fCurrentVoicePosition; }
 
-    const msrMoment&      getCurrentVoiceMoment () const
+    const mfMoment&      getCurrentVoiceMoment () const
                               { return fCurrentVoiceMoment; }
 
     // beams begin, continue and end check
@@ -1100,7 +1100,7 @@ class EXP msrVoice : public msrElement
 
     // regular measure ends detection
 
-    msrWholeNotes         fWholeNotesSinceLastRegularMeasureEnd;
+    mfWholeNotes         fWholeNotesSinceLastRegularMeasureEnd;
 
      // stanzas
 
@@ -1135,7 +1135,7 @@ class EXP msrVoice : public msrElement
     // fVoiceShortestNoteWholeNotes and fVoiceShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    msrWholeNotes         fVoiceShortestNoteWholeNotes;
+    mfWholeNotes         fVoiceShortestNoteWholeNotes;
     msrTupletFactor       fVoiceShortestNoteTupletFactor;
 
     // repeats
@@ -1388,8 +1388,8 @@ class EXP msrVoice : public msrElement
 
     // current voice position
 
-    msrWholeNotes         fCurrentVoicePosition;
-    msrMoment             fCurrentVoiceMoment;
+    mfWholeNotes         fCurrentVoicePosition;
+    mfMoment             fCurrentVoiceMoment;
 
     // voice finalization
 

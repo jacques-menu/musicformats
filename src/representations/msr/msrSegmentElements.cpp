@@ -17,7 +17,7 @@
 #include "mfPreprocessorSettings.h"
 
 
-#include "msrNotesDurations.h"
+#include "mfDurations.h"
 #include "msrSegmentElements.h"
 
 #include "oahOah.h"
@@ -35,9 +35,9 @@ msrSegmentElement::msrSegmentElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 //       fSegmentElementMeasureMoment (
-//         K_MEASURE_POSITION_UNKNOWN_, K_MEASURE_POSITION_UNKNOWN_),
+//         K_POSITION_IN_MEASURE_UNKNOWN_, K_POSITION_IN_MEASURE_UNKNOWN_),
 //       fSegmentElementVoiceMoment (
-//         K_MEASURE_POSITION_UNKNOWN_, K_MEASURE_POSITION_UNKNOWN_)
+//         K_POSITION_IN_MEASURE_UNKNOWN_, K_POSITION_IN_MEASURE_UNKNOWN_)
 {
 //   fSegmentElementSoundingWholeNotes = mfRational (0, 1);
 }

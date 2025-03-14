@@ -12,10 +12,12 @@
 #ifndef ___msrMeasureElements___
 #define ___msrMeasureElements___
 
+#include "mfDurations.h"
+#include "mfPositionInMeasure.h"
+
 #include "msrTypesForwardDeclarations.h"
 
 #include "msrElements.h"
-#include "msrNotesDurations.h"
 
 
 namespace MusicFormats
@@ -53,10 +55,10 @@ class EXP msrMeasureElement : public msrElement
     virtual S_msrMeasure  getMeasureElementUpLinkToMeasure () const;
 
     void                  setMeasureElementSoundingWholeNotes (
-                            const msrWholeNotes& wholeNotes,
+                            const mfWholeNotes& wholeNotes,
                             const std::string&   context);
 
-    msrWholeNotes         getMeasureElementSoundingWholeNotes () const;
+    mfWholeNotes          getMeasureElementSoundingWholeNotes () const;
 
     // this method is overridden in sub-classes such as those for
     // time signatures, harmonies and figured bass elements,
@@ -66,30 +68,30 @@ class EXP msrMeasureElement : public msrElement
     // such occurrence are more explicit when debugging
     // the computations of measure positions
     virtual void          setMeasureElementPositionInMeasure (
-                            const S_msrMeasure&  measure,
-                            const msrWholeNotes& positionInMeasure,
-                            const std::string&   context);
+                            const S_msrMeasure&        measure,
+                            const mfPositionInMeasure& positionInMeasure,
+                            const std::string&         context);
 
-    msrWholeNotes         getMeasureElementPositionInMeasure () const;
+    mfPositionInMeasure   getMeasureElementPositionInMeasure () const;
 
     void                  setMeasureElementVoicePosition (
-                            const msrWholeNotes& voicePosition,
-                            const std::string&   context);
+                            const mfPositionInMeasure& voicePosition,
+                            const std::string&         context);
 
-    msrWholeNotes         getMeasureElementVoicePosition () const;
+    mfWholeNotes          getMeasureElementVoicePosition () const;
 
 //     void                  setMeasureMoment (
-//                             const msrMoment&   measureMoment,
+//                             const mfMoment&   measureMoment,
 //                             const std::string& context);
 //
-//     const msrMoment&      getMeasureMoment () const
+//     const mfMoment&      getMeasureMoment () const
 //                               { return fMeasureMoment; }
 //
 //     void                  setVoiceMoment (
-//                             const msrMoment&   voiceMoment,
+//                             const mfMoment&   voiceMoment,
 //                             const std::string& context);
 //
-//     const msrMoment&      getVoiceMoment () const
+//     const mfMoment&      getVoiceMoment () const
 //                               { return fVoiceMoment; }
 
   public:
@@ -98,7 +100,7 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
     void                  incrementMeasureElementSoundingWholeNotesBy (
-                            const msrWholeNotes& wholeNotes,
+                            const mfWholeNotes& wholeNotes,
                             const std::string&   context);
 
     static bool           compareMeasureElementsByIncreasingPositionInMeasure (
@@ -139,13 +141,13 @@ class EXP msrMeasureElement : public msrElement
 
     S_msrMeasure          fMeasureElementUpLinkToMeasure;
 
-    msrWholeNotes         fMeasureElementSoundingWholeNotes;
+    mfWholeNotes          fMeasureElementSoundingWholeNotes;
 
-    msrWholeNotes         fMeasureElementPositionInMeasure;
-    msrWholeNotes         fMeasureElementVoicePosition;
+    mfPositionInMeasure   fMeasureElementPositionInMeasure;
+    mfPositionInMeasure   fMeasureElementVoicePosition;
 
-//     msrMoment             fMeasureMoment;
-//     msrMoment             fVoiceMoment;
+//     mfMoment             fMeasureMoment;
+//     mfMoment             fVoiceMoment;
 };
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 EXP std::ostream& operator << (std::ostream& os, const S_msrMeasureElement& elt);

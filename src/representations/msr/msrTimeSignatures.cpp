@@ -1089,9 +1089,9 @@ void msrTimeSignature::appendTimeSignatureItem (
     fTimeSignatureItemsVector.end (), timeSignatureItem);
 }
 
-msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
+mfWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
 {
-  msrWholeNotes result (0, 1); // addition neutral element
+  mfWholeNotes result (0, 1); // addition neutral element
 
   size_t vectorSize = fTimeSignatureItemsVector.size ();
 
@@ -1109,7 +1109,7 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
     /* JMI
     // start with first item
     result =
-      msrWholeNotes (
+      mfWholeNotes (
         fTimeSignatureItemsVector [0]->getTimeSignatureBeatsNumber (),
         fTimeSignatureItemsVector [0]->getTimeSignatureBeatValue ());
 */
@@ -1127,7 +1127,7 @@ msrWholeNotes msrTimeSignature::timeSignatureWholeNotesPerMeasure () const
     // iterate over the others
     for (size_t i = 0; i < vectorSize; ++i) {
       result +=
-        msrWholeNotes (
+        mfWholeNotes (
           fTimeSignatureItemsVector [i]->getTimeSignatureBeatsNumber (),
           fTimeSignatureItemsVector [i]->getTimeSignatureBeatValue ());
 

@@ -229,7 +229,7 @@ class EXP msrPart : public msrPartGroupElement
     const size_t          getPartNumberOfMeasures () const
                               { return fPartNumberOfMeasures; }
 
-    const std::vector <msrWholeNotes>&
+    const std::vector <mfWholeNotes>&
                           getPartMeasuresWholeNotesVector () const
                               { return fPartMeasuresWholeNotesVector; }
 
@@ -275,28 +275,28 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  setPartCurrentDrawingPositionInMeasure (
                             int                  inputLineNumber,
-                            const msrWholeNotes& positionInMeasure);
+                            const mfWholeNotes& positionInMeasure);
 
     void                  resetPartCurrentDrawingPositionInMeasure (
                             int inputLineNumber);
 
     void                  incrementPartCurrentDrawingPositionInMeasure (
                             int                  inputLineNumber,
-                            const msrWholeNotes& wholeNotesDelta);
+                            const mfWholeNotes& wholeNotesDelta);
 
     void                  decrementPartCurrentDrawingPositionInMeasure (
                             int                  inputLineNumber,
-                            const msrWholeNotes& wholeNotesDelta);
+                            const mfWholeNotes& wholeNotesDelta);
 
-    msrWholeNotes         getPartCurrentDrawingPositionInMeasure () const
+    mfPositionInMeasure   getPartCurrentDrawingPositionInMeasure () const
                               { return fPartCurrentDrawingPositionInMeasure; }
 
     // part shortest note
 
     void                  setPartShortestNoteWholeNotes (
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
-    msrWholeNotes         getPartShortestNoteWholeNotes () const
+    mfWholeNotes          getPartShortestNoteWholeNotes () const
                               { return fPartShortestNoteWholeNotes; }
 
     void                  setPartShortestNoteTupletFactor (
@@ -330,14 +330,14 @@ class EXP msrPart : public msrPartGroupElement
 
     // whole notes durations
 
-    msrWholeNotes         fetchPartMeasuresWholeNotesVectorAt (
+    mfWholeNotes         fetchPartMeasuresWholeNotesVectorAt (
                             int inputLineNumber,
                             int indexValue) const;
 
     void                  registerOrdinalMeasureNumberWholeNotes (
                             int                  inputLineNumber,
                             int                  measureOrdinalNumber,
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
     // path shortest note
 
@@ -450,8 +450,8 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrBarLine& barLine);
 
     void                  insertHiddenMeasureAndBarLineInPartClone (
-                            int             inputLineNumber,
-                            const msrWholeNotes& positionInMeasure);
+                            int                        inputLineNumber,
+                            const mfPositionInMeasure& positionInMeasure);
 
     // breaks
 
@@ -547,14 +547,14 @@ class EXP msrPart : public msrPartGroupElement
                             const std::string& currentMeasureNumber);
 
     void                  appendHarmonyToPart (
-                            int                  inputLineNumber,
-                            const S_msrHarmony&  harmony,
-                            const msrWholeNotes& positionInMeasureToAppendAt);
+                            int                        inputLineNumber,
+                            const S_msrHarmony&        harmony,
+                            const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendHarmoniesListToPart (
                             int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const msrWholeNotes&            positionInMeasureToAppendAt);
+                            const mfPositionInMeasure&      positionInMeasureToAppendAt);
 
     // figured bass
 
@@ -563,14 +563,14 @@ class EXP msrPart : public msrPartGroupElement
                             const std::string& currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
-                            int                     inputLineNumber,
-                            const S_msrFiguredBass& figuredBass,
-                            const msrWholeNotes&    positionInMeasureToAppendAt);
+                            int                        inputLineNumber,
+                            const S_msrFiguredBass&    figuredBass,
+                            const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendFiguredBassesListToPart (
-                            int                                inputLineNumber,
+                            int                                 inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const msrWholeNotes&               positionInMeasureToAppendAt);
+                            const mfPositionInMeasure&          positionInMeasureToAppendAt);
 
 //     void                  appendFiguredBassToPart ( // JMI v0.9.67 HARMFUL
 //                             const S_msrVoice&       figuredBassSupplierVoice,
@@ -607,7 +607,7 @@ class EXP msrPart : public msrPartGroupElement
 //
 //     void                  handleBackupInPart (
 //                             int             inputLineNumber,
-//                             const msrWholeNotes& backupStepLength);
+//                             const mfWholeNotes& backupStepLength);
 //
   public:
 
@@ -719,7 +719,7 @@ class EXP msrPart : public msrPartGroupElement
 
     size_t                fPartNumberOfMeasures;
 
-    std::vector <msrWholeNotes>
+    std::vector <mfWholeNotes>
                           fPartMeasuresWholeNotesVector;
 
     // harmonies
@@ -737,7 +737,7 @@ class EXP msrPart : public msrPartGroupElement
     // fPartShortestNoteWholeNotes and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    msrWholeNotes         fPartShortestNoteWholeNotes;
+    mfWholeNotes         fPartShortestNoteWholeNotes;
     msrTupletFactor       fPartShortestNoteTupletFactor;
 
     // transposition
@@ -796,7 +796,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // current drawing measure position, for mxsr2msr
 
-    msrWholeNotes         fPartCurrentDrawingPositionInMeasure;
+    mfPositionInMeasure   fPartCurrentDrawingPositionInMeasure;
 };
 typedef SMARTP<msrPart> S_msrPart;
 EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);

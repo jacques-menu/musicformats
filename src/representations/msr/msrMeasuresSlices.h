@@ -40,7 +40,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrNoteEvent> create (
-                            const msrWholeNotes&  noteEventPositionInMeasure,
+                            const mfPositionInMeasure&  noteEventPositionInMeasure,
                             const S_msrNote&        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -50,7 +50,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
                           msrNoteEvent (
-                            const msrWholeNotes&  noteEventPositionInMeasure,
+                            const mfPositionInMeasure&  noteEventPositionInMeasure,
                             const S_msrNote&        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -61,7 +61,7 @@ class msrNoteEvent : public smartable
     // set and get
     // ------------------------------------------------------
 
-    msrWholeNotes         getNoteEventPositionInMeasure () const
+    mfPositionInMeasure   getNoteEventPositionInMeasure () const
                               { return fNoteEventPositionInMeasure; }
 
     S_msrNote             getNoteEventNote () const
@@ -93,7 +93,8 @@ class msrNoteEvent : public smartable
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes         fNoteEventPositionInMeasure;
+    mfPositionInMeasure   fNoteEventPositionInMeasure;
+
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 };
@@ -109,7 +110,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrSimultaneousNotesChunk> create (
-                            const msrWholeNotes& chunkPositionInMeasure);
+                            const mfWholeNotes& chunkPositionInMeasure);
 
   protected:
 
@@ -117,7 +118,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
                           msrSimultaneousNotesChunk (
-                            const msrWholeNotes& chunkPositionInMeasure);
+                            const mfWholeNotes& chunkPositionInMeasure);
 
     virtual               ~msrSimultaneousNotesChunk ();
 
@@ -126,7 +127,7 @@ class msrSimultaneousNotesChunk : public smartable
     // set and get
     // ------------------------------------------------------
 
-    msrWholeNotes         getChunkPositionInMeasure () const
+    mfWholeNotes         getChunkPositionInMeasure () const
                               { return fChunkPositionInMeasure; }
 
     const std::list <S_msrNote>&
@@ -134,8 +135,8 @@ class msrSimultaneousNotesChunk : public smartable
                               { return fChunkNotesList; }
 
 
-    msrWholeNotes         getChunkNotesDurationWholeNotes () const
-                              { return fChunkNotesDurationWholeNotes; }
+    mfWholeNotes         getChunkDurationWholeNotes () const
+                              { return fChunkDurationWholeNotes; }
 
   public:
 
@@ -164,9 +165,9 @@ class msrSimultaneousNotesChunk : public smartable
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes         fChunkPositionInMeasure;
+    mfWholeNotes         fChunkPositionInMeasure;
     std::list <S_msrNote>  fChunkNotesList;
-    msrWholeNotes         fChunkNotesDurationWholeNotes;
+    mfWholeNotes         fChunkDurationWholeNotes;
 };
 typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSimultaneousNotesChunk& elt);

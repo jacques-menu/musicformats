@@ -113,9 +113,9 @@ S_msrMultipleMeasureRest msrMultipleMeasureRest::createMultipleMeasureRestNewbor
   return newbornClone;
 }
 
-msrWholeNotes msrMultipleMeasureRest::fetchMultipleMeasureRestMeasureSoundingNotes () const
+mfWholeNotes msrMultipleMeasureRest::fetchMultipleMeasureRestMeasureSoundingNotes () const
 {
-  msrWholeNotes result;
+  mfWholeNotes result;
 
   for (S_msrMeasure measure : fMeasuresList) {
     result +=

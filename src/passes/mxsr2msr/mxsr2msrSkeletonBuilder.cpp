@@ -6885,7 +6885,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_type& elt)
 
 //     // the type contains a display duration
 //     fCurrentNoteNormalTypeNotesDuration =
-//       msrNotesDurationKindFromMusicXMLString (
+//       mfDurationKindFromMusicXMLString (
 //         elt->getInputLineNumber (),
 //         normalTypeString);
 
@@ -6893,7 +6893,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_normal_type& elt)
     // there can be several <beat-unit/> in a <metronome/> markup,
     // register beat unit in in dotted durations list
     fCurrentMetronomeBeatUnitsVector.push_back (
-      msrDottedNotesDuration (
+      mfDottedNotesDuration (
         fCurrentNoteNormalTypeNotesDuration,
         0));
         */

@@ -718,7 +718,7 @@ class EXP msr2mxsrTranslator :
 
     // divisions
     // ------------------------------------------------------
-    msrWholeNotes             fPartShortestNoteWholeNotes;
+    mfWholeNotes             fPartShortestNoteWholeNotes;
     msrTupletFactor           fPartShortestNoteTupletFactor;
 
     int                       fDivisionsPerQuarterNote;
@@ -726,7 +726,7 @@ class EXP msr2mxsrTranslator :
 
     int                       wholeNotesAsDivisions (
                                 int                  inputLineNumber,
-                                const msrWholeNotes& wholeNotes);
+                                const mfWholeNotes& wholeNotes);
 
     Bool                      fPartDivisionsElementHasToBeAppended;
 
@@ -864,9 +864,10 @@ class EXP msr2mxsrTranslator :
     // backup and forward
     // ------------------------------------------------------
 
-    msrWholeNotes         fCurrentPositionInMeasure;
+    mfPositionInMeasure       fCurrentPositionInMeasure;
 
-    msrWholeNotes         fCurrentCumulatedSkipsNotesDurations;
+    mfWholeNotes              fCurrentCumulatedSkipsWholeNotesDurations;
+
     int                       fCurrentCumulatedSkipsStaffNumber;
     int                       fCurrentCumulatedSkipsVoiceNumber;
 

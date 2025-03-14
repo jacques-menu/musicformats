@@ -20,7 +20,7 @@
 #include "msrElements.h"
 #include "msrMeasures.h"
 #include "msrMeasureElements.h"
-#include "msrNotesDurations.h"
+#include "mfDurations.h"
 #include "msrPlacements.h"
 #include "msrTupletFactors.h"
 #include "msrWords.h"
@@ -39,7 +39,7 @@ class EXP msrTempoNote : public msrElement
 
     static SMARTP<msrTempoNote> create (
                             int             inputLineNumber,
-                            const msrWholeNotes& tempoNoteWholeNotes,
+                            const mfWholeNotes& tempoNoteWholeNotes,
                             Bool            tempoNoteBelongsToATuplet);
 
   protected:
@@ -49,7 +49,7 @@ class EXP msrTempoNote : public msrElement
 
                           msrTempoNote (
                             int             inputLineNumber,
-                            const msrWholeNotes& tempoNoteWholeNotes,
+                            const mfWholeNotes& tempoNoteWholeNotes,
                             Bool            tempoNoteBelongsToATuplet);
 
     virtual               ~msrTempoNote ();
@@ -59,7 +59,7 @@ class EXP msrTempoNote : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    msrWholeNotes         getTempoNoteWholeNotes () const
+    mfWholeNotes         getTempoNoteWholeNotes () const
                               { return fTempoNoteWholeNotes; }
 
     const std::list <S_msrBeam>&
@@ -97,7 +97,7 @@ class EXP msrTempoNote : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes         fTempoNoteWholeNotes;
+    mfWholeNotes         fTempoNoteWholeNotes;
 
     std::list <S_msrBeam>  fTempoNoteBeamsList;
 
@@ -120,7 +120,7 @@ class EXP msrTempoTuplet : public msrElement
                             msrTempoTupletBracketKind    tempoTupletBracketKind,
                             msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
                             const msrTupletFactor&       tempoTupletFactor,
-                            const msrWholeNotes&     memberNotesDisplayWholeNotes);
+                            const mfWholeNotes&     memberNotesDisplayWholeNotes);
 
   protected:
 
@@ -133,7 +133,7 @@ class EXP msrTempoTuplet : public msrElement
                             msrTempoTupletBracketKind    tempoTupletBracketKind,
                             msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
                             const msrTupletFactor&       tempoTupletFactor,
-                            const msrWholeNotes&     memberNotesDisplayWholeNotes);
+                            const mfWholeNotes&     memberNotesDisplayWholeNotes);
 
     virtual               ~msrTempoTuplet ();
 
@@ -157,14 +157,14 @@ class EXP msrTempoTuplet : public msrElement
                           getTempoTupletFactor () const
                               { return fTempoTupletFactor; }
 
-    msrWholeNotes         getMemberNotesDisplayWholeNotes () const
+    mfWholeNotes         getMemberNotesDisplayWholeNotes () const
                               { return fMemberNotesDisplayWholeNotes; }
 
     const std::list <S_msrElement>&
                           getTempoTupletElementsList () const
                               { return fTempoTupletElementsList; }
 
-    msrWholeNotes         getTempoTupletDisplayWholeNotes () const
+    mfWholeNotes         getTempoTupletDisplayWholeNotes () const
                               { return fTempoTupletDisplayWholeNotes; }
 
   public:
@@ -225,9 +225,9 @@ class EXP msrTempoTuplet : public msrElement
 
     msrTupletFactor       fTempoTupletFactor;
 
-    msrWholeNotes         fMemberNotesDisplayWholeNotes;
+    mfWholeNotes         fMemberNotesDisplayWholeNotes;
 
-    msrWholeNotes         fTempoTupletDisplayWholeNotes;
+    mfWholeNotes         fTempoTupletDisplayWholeNotes;
 
     std::list <S_msrElement>
                           fTempoTupletElementsList;
@@ -339,7 +339,7 @@ class EXP msrTempo : public msrMeasureElement
     static SMARTP<msrTempo> createTempoPerMinute (
                             int               inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
-                            msrDottedNotesDuration tempoBeatUnit,
+                            mfDottedNotesDuration tempoBeatUnit,
                             std::string       tempoPerMinute,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
@@ -347,7 +347,7 @@ class EXP msrTempo : public msrMeasureElement
 
     static SMARTP<msrTempo> createTempoPerMinute (
                             int               inputLineNumber,
-                            msrDottedNotesDuration tempoBeatUnit,
+                            mfDottedNotesDuration tempoBeatUnit,
                             std::string       tempoPerMinute,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
@@ -356,16 +356,16 @@ class EXP msrTempo : public msrMeasureElement
     static SMARTP<msrTempo> createTempoBeatUnitEquivalent (
                             int               inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
-                            msrDottedNotesDuration tempoBeatUnit,
-                            msrDottedNotesDuration tempoEquivalentBeatUnit,
+                            mfDottedNotesDuration tempoBeatUnit,
+                            mfDottedNotesDuration tempoEquivalentBeatUnit,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
                             msrPlacementKind  tempoPlacementKind);
 
     static SMARTP<msrTempo> createTempoBeatUnitEquivalent (
                             int               inputLineNumber,
-                            msrDottedNotesDuration tempoBeatUnit,
-                            msrDottedNotesDuration tempoEquivalentBeatUnit,
+                            mfDottedNotesDuration tempoBeatUnit,
+                            mfDottedNotesDuration tempoEquivalentBeatUnit,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
                             msrPlacementKind  tempoPlacementKind);
@@ -411,7 +411,7 @@ class EXP msrTempo : public msrMeasureElement
                           msrTempo (
                             int               inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
-                            msrDottedNotesDuration tempoBeatUnit,
+                            mfDottedNotesDuration tempoBeatUnit,
                             std::string       tempoPerMinute,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
@@ -420,8 +420,8 @@ class EXP msrTempo : public msrMeasureElement
                           msrTempo (
                             int               inputLineNumber,
                             const S_msrMeasure&      upLinkToMeasure,
-                            msrDottedNotesDuration tempoBeatUnit,
-                            msrDottedNotesDuration tempoEquivalentBeatUnit,
+                            mfDottedNotesDuration tempoBeatUnit,
+                            mfDottedNotesDuration tempoEquivalentBeatUnit,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
                             msrPlacementKind  tempoPlacementKind);
@@ -454,14 +454,14 @@ class EXP msrTempo : public msrMeasureElement
                           getTempoWordsList () const
                               { return fTempoWordsList; }
 
-    const msrDottedNotesDuration&
+    const mfDottedNotesDuration&
                           getTempoBeatUnit () const
                               { return fTempoBeatUnit; }
 
     std::string           getTempoPerMinute () const
                               { return fTempoPerMinute; }
 
-    const msrDottedNotesDuration&
+    const mfDottedNotesDuration&
                           getTempoEquivalentBeatUnit () const
                               { return fTempoEquivalentBeatUnit; }
 
@@ -535,7 +535,7 @@ class EXP msrTempo : public msrMeasureElement
 
     std::list <S_msrWords> fTempoWordsList;
 
-    msrDottedNotesDuration
+    mfDottedNotesDuration
                           fTempoBeatUnit;
 
     msrTempoParenthesizedKind
@@ -551,7 +551,7 @@ class EXP msrTempo : public msrMeasureElement
 
     // kTempoBeatUnitsEquivalence
 
-    msrDottedNotesDuration
+    mfDottedNotesDuration
                           fTempoEquivalentBeatUnit; // unused ??? JMI
 
     // kTempoNotesRelationship

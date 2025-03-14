@@ -13,7 +13,7 @@
 #define ___msrGraceNotesGroups___
 
 #include "msrElements.h"
-#include "msrNotesDurations.h"
+#include "mfDurations.h"
 #include "msrTypesForwardDeclarations.h"
 
 
@@ -133,7 +133,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // measure positions
     void                  setGraceNotesGroupElementsPositionInMeasures (
                             const S_msrMeasure&  measure,
-                            const msrWholeNotes& positionInMeasure);
+                            const mfWholeNotes& positionInMeasure);
 
   public:
 

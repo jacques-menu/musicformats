@@ -18,7 +18,7 @@
 #include "smartpointer.h"
 
 #include "msrLyrics.h"
-#include "msrNotesDurations.h"
+#include "mfDurations.h"
 #include "msrOctaves.h"
 #include "msrPitchesNames.h"
 
@@ -115,35 +115,35 @@ void initializeLpsrChordsLanguageKindsMap ();
 //______________________________________________________________________________
 // std::string wholeNotesAsLilypondMakeDurationArguments (
 //   int                  inputLineNumber,
-//   const msrWholeNotes& wholeNotes);
+//   const mfWholeNotes& wholeNotes);
 
 // whole notes as LilyPond strings
 //______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotes,
+  const mfWholeNotes& wholeNotes,
   int&                 dotsNumber);
 
 std::string wholeNotesAsLilypondString (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotes);
+  const mfWholeNotes& wholeNotes);
 
 // dotted durations
 //______________________________________________________________________________
 
 std::string dottedNotesDurationAsLilypondString (
   int                    inputLineNumber,
-  msrDottedNotesDuration dottedNotesDuration);
+  mfDottedNotesDuration dottedNotesDuration);
 
 std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
   int                    inputLineNumber,
-  msrDottedNotesDuration dottedNotesDuration);
+  mfDottedNotesDuration dottedNotesDuration);
 
 // rests measures
 //______________________________________________________________________________
 std::string multipleMeasureRestsWholeNoteAsLilypondString (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotes);
+  const mfWholeNotes& wholeNotes);
 
 // syllable elements lists
 //______________________________________________________________________________

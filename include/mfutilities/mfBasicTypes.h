@@ -15,12 +15,13 @@
 #include "exports.h"
 
 #include "mfConstants.h"
+#include "mfDurations.h"
 // #include "mfWrappedRange.h"
 #include "mfWrappedValueForArithmetic.h"
 #include "mfWrappedValueWithDefault.h"
 
-// #include "msrNotesDurations.h"
-// #include "msrMoments.h"
+// #include "mfDurations.h"
+// #include "mfMoments.h"
 
 
 namespace MusicFormats
@@ -135,11 +136,11 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
 // whole notes durations
 
 #ifndef MF_USE_WRAPPED_TYPES
-  using mfWholeNotes = msrWholeNotes;
+  using mfWholeNotes = mfWholeNotes;
 #else
   using mfWholeNotes =
     mfWrappedValueWithDefault <
-      msrWholeNotes,
+      mfWholeNotes,
       kWholeNotePrefix,
       K_MF_EMPTY_STRING,
       K_WHOLE_NOTES_UNKNOWN_,
@@ -152,11 +153,11 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
 //______________________________________________________________________________
 
 #ifndef MF_USE_WRAPPED_TYPES
-  using mfMoment = msrMoment;
+  using mfMoment = mfMoment;
 #else
   using mfMoment =
     mfWrappedValueWithDefault <
-      msrMoment,
+      mfMoment,
       kMomentPrefix,
       K_MF_EMPTY_STRING,
       K_MOMENT_UNKNOWN_,

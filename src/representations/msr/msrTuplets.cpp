@@ -89,10 +89,10 @@ msrTuplet::msrTuplet (
   fTupletPlacementKind = tupletPlacementKind;
 
   setMeasureElementSoundingWholeNotes (
-    msrWholeNotes (0, 1),
+    mfWholeNotes (0, 1),
     "msrTuplet::msrTuplet()");
 
-  fTupletDisplayWholeNotes = msrWholeNotes (0, 1);
+  fTupletDisplayWholeNotes = mfWholeNotes (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -191,7 +191,7 @@ void msrTuplet::appendNoteToTuplet (const S_msrNote& note)
   ++gIndenter;
 
   // set or check member notes sounding whole notes
-  msrWholeNotes
+  mfWholeNotes
     noteSoundingWholeNotes =
       note->getMeasureElementSoundingWholeNotes ();
 
@@ -713,9 +713,9 @@ S_msrNote msrTuplet::fetchTupletFirstNonGraceNote () const
 // }
 
 void msrTuplet::setMeasureElementPositionInMeasure (
-  const S_msrMeasure&  measure,
-  const msrWholeNotes& positionInMeasure,
-  const std::string&   context)
+  const S_msrMeasure&        measure,
+  const mfPositionInMeasure& positionInMeasure,
+  const std::string&         context)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -760,7 +760,7 @@ void msrTuplet::setMeasureElementPositionInMeasure (
 
 void msrTuplet::setTupletMembersPositionInMeasures (
   const S_msrMeasure&  measure,
-  const msrWholeNotes& positionInMeasure)
+  const mfWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -784,15 +784,15 @@ void msrTuplet::setTupletMembersPositionInMeasures (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
-    "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
+    positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+    "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   // set tuplet's measure position
   fMeasureElementPositionInMeasure = positionInMeasure;
 
   // current position
-  msrWholeNotes currentPosition = positionInMeasure;
+  mfWholeNotes currentPosition = positionInMeasure;
 
   // compute measure position for the tuplets elements
   for (

@@ -12,31 +12,31 @@
 #
 
 
-# clean the current directory from spurious files
+# clean the current directory from previously generaterated files if any
 # ---------------------------------------------------------
 
-rm *.ly *.pdf *.midi
+rm -f *.ly *.pdf *.midi
 
 
 # select which files to translate
 # ---------------------------------------------------------
 
-echo '$#:                       ' $# " argument(s)"
-
-i=0
-while [ $i -ne $# ]; do
-  echo "$i: argv [$i]"
-  FILES+=argv[$i]
-  i=$(($i+1))
-done
-
-for FILE_NAME in $FILES ; do
-  echo
-  echo "----------------------------"
-  echo "==> FILE_NAME: $FILE_NAME:"
-  echo
-done
-
+# echo '$#:                       ' $# " argument(s)"
+#
+# i=0
+# while [ $i -ne $# ]; do
+#   echo "$i: argv [$i]"
+#   FILES+=argv[$i]
+#   i=$(($i+1))
+# done
+#
+# for FILE_NAME in $FILES ; do
+#   echo
+#   echo "----------------------------"
+#   echo "==> FILE_NAME: $FILE_NAME:"
+#   echo
+# done
+#
 
 # argn=$#
 # i=0
@@ -62,9 +62,6 @@ done
 #   echo "----------------------------"
 #   echo "==> FILE_NAME: $FILE_NAME:"
 # done
-
-
-exit
 
 
 # The parameters *, @ and argv are arrays containing all the positional parameters;
@@ -94,28 +91,15 @@ exit
 # Volumes JMI_Volume JMI_Developpement musicformats-git-dev musicxmlfiles gracenotesandchords
 
 
-if [ $# -eq 0 ]; then
-  # no arguments, all *.xml files will be translated
-  FILE_NAMES=(*.xml)
-else
-  # only the files in the arguments will be translated
-  FILE_NAMES=$*
-fi
-echo "FILE_NAMES:                $FILE_NAMES"
 
-FILES_NBR=$(ls $FILE_NAMES | wc -l | sed 's/ //g')
-# FILES_NBR=${#FILE_NAMES[@]}
-echo "There are $FILES_NBR files to be translated"
-echo
-
-
-# translate all selected MusicXML files
+# run xml2ly on a file
 # ---------------------------------------------------------
 
-# for FILE_NAME in $FILE_NAMES ; do
-for FILE_NAME in $FILES ; do
+function RunXml2lyOnFile ()
+{
+  FILE_NAME=$1
   echo
-echo "----------------------------"
+  echo "----------------------------"
   echo "==> FILE_NAME: $FILE_NAME:"
 
 
@@ -173,96 +157,165 @@ echo "----------------------------"
     PDF_FILE_NAMES+=($PDF_FILE_NAME)
     echo "PDF_FILE_NAMES:        $PDF_FILE_NAMES"
   fi
+}
 
 
+# HandleAllMusicXMLFilesInCurrentDirectory()
+# ---------------------------------------------------------
+
+function HandleAllMusicXMLFilesInCurrentDirectory ()
+{
+  echo "HandleAllMusicXMLFilesInCurrentDirectory()"
+  echo "The MusicXML files to be handled are:"
+  ls -salGTF *.xml
   echo
 
+  FILES_NBR=$(ls *.xml | wc -l)
 
-#   break
+  echo "There are $FILES_NBR files to be translated"
+  echo
 
-done
+  for FILE_NAME in $(ls *.xml) ; do
+    echo
+    echo "----------------------------"
+    echo "==> FILE_NAME: $FILE_NAME:"
+
+    RunXml2lyOnFile $FILE_NAME
+  done
+}
 
 
-echo
+# HandletheMusicXMLFilesPassedAsArguments()
+# ---------------------------------------------------------
+
+function HandletheMusicXMLFilesPassedAsArguments ()
+{
+  echo "HandletheMusicXMLFilesPassedAsArguments()"
+  echo "There are ${#[@]} arguments"
+  echo '$@:                       ' $@
+
+  FILES_NBR=${#[@]}
+  echo "There are $FILES_NBR files to be translated"
+  echo
+
+  for FILE_NAME in $@ ; do
+    echo
+    echo "----------------------------"
+    echo "==> FILE_NAME: $FILE_NAME:"
+
+    RunXml2lyOnFile $FILE_NAME
+  done
+}
 
 
 # show the resulting files
 # ---------------------------------------------------------
 
-echo
-echo "----------------------------"
-FILES_NBR=${#MUSICXML_FILE_NAMES[@]}
-echo "There are $FILES_NBR handled *.xml files:"
-echo
-for FILE_NAME in $MUSICXML_FILE_NAMES ; do
-  if [ -f $FILE_NAME ]; then
-    ls -salGTF $FILE_NAME
-  fi
-done
-echo
+function DisplayTheResultingFiles ()
+{
+  echo
+  echo "----------------------------"
+  FILES_NBR=${#MUSICXML_FILE_NAMES[@]}
+  echo "There are $FILES_NBR handled *.xml files:"
+  echo
+  for FILE_NAME in $MUSICXML_FILE_NAMES ; do
+    if [ -f $FILE_NAME ]; then
+      ls -salGTF $FILE_NAME
+    fi
+  done
+  echo
 
-echo
-echo "----------------------------"
-FILES_NBR=${#LILYPOND_FILE_NAMES[@]}
-echo "There are $FILES_NBR resulting *.ly files:"
-echo
-for FILE_NAME in $LILYPOND_FILE_NAMES ; do
-  if [ -f $FILE_NAME ]; then
-    ls -salGTF $FILE_NAME
-  fi
-done
-echo
+  echo
+  echo "----------------------------"
+  FILES_NBR=${#LILYPOND_FILE_NAMES[@]}
+  echo "There are $FILES_NBR resulting *.ly files:"
+  echo
+  for FILE_NAME in $LILYPOND_FILE_NAMES ; do
+    if [ -f $FILE_NAME ]; then
+      ls -salGTF $FILE_NAME
+    fi
+  done
+  echo
 
-echo
-FILES_NBR=${#PDF_FILE_NAMES[@]}
-echo "----------------------------"
-echo "There are $FILES_NBR resulting *.pdf files:"
-echo
-for FILE_NAME in $PDF_FILE_NAMES ; do
-  if [ -f $FILE_NAME ]; then
-    ls -salGTF $FILE_NAME
-  fi
-done
-echo
-
-
-echo
+  echo
+  FILES_NBR=${#PDF_FILE_NAMES[@]}
+  echo "----------------------------"
+  echo "There are $FILES_NBR resulting *.pdf files:"
+  echo
+  for FILE_NAME in $PDF_FILE_NAMES ; do
+    if [ -f $FILE_NAME ]; then
+      ls -salGTF $FILE_NAME
+    fi
+  done
+}
 
 
 # display the *.xml files not translated to LilyPond
 # ---------------------------------------------------------
 
-echo "----------------------------"
-echo "Checking translation to LilyPond"
-echo
+function DisplayTheNotTranslatedFiles ()
+{
+  # display the *.xml files not translated to LilyPond
 
-for FILE_NAME in $SUFFIXLESS_FILE_NAMES; do
-#   echo "==> $FILE_NAME:"
-  if [ -f $FILE_NAME.xml ]; then
-    if [ ! -f $FILE_NAME.ly ]; then
-      echo "--> $FILE_NAME.xml has not been translated to LilyPond"
-      echo
+  echo "----------------------------"
+  echo "Checking translation to LilyPond"
+  echo
+
+  for FILE_NAME in $SUFFIXLESS_FILE_NAMES; do
+  #   echo "==> $FILE_NAME:"
+    if [ -f $FILE_NAME.xml ]; then
+      if [ ! -f $FILE_NAME.ly ]; then
+        echo "--> $FILE_NAME.xml has not been translated to LilyPond"
+        echo
+      fi
     fi
-  fi
-done
+  done
 
 
-echo; echo
+  echo; echo
 
 
-# display the *.ly filesnot translated to PDF
+  # display the *.ly filesnot translated to PDF
+
+  echo "----------------------------"
+  echo "Checking translation to PDF"
+  echo
+
+  for FILE_NAME in $SUFFIXLESS_FILE_NAMES; do
+  #   echo "==> $FILE_NAME:"
+    if [ -f $FILE_NAME.ly ]; then
+      if [ ! -f $FILE_NAME.pdf ]; then
+        echo "--> $FILE_NAME.ly has not been translated to PDF"
+        echo
+      fi
+    fi
+  done
+}
+
+
+# Display the results
 # ---------------------------------------------------------
 
-echo "----------------------------"
-echo "Checking translation to PDF"
-echo
+function DisplayTheResults ()
+{
+  DisplayTheResultingFiles
 
-for FILE_NAME in $SUFFIXLESS_FILE_NAMES; do
-#   echo "==> $FILE_NAME:"
-  if [ -f $FILE_NAME.ly ]; then
-    if [ ! -f $FILE_NAME.pdf ]; then
-      echo "--> $FILE_NAME.ly has not been translated to PDF"
-      echo
-    fi
-  fi
-done
+  DisplayTheNotTranslatedFiles
+}
+
+# select which files to translate
+# ---------------------------------------------------------
+
+if (($# == 0 )); then
+  # no arguments, all *.xml files in the current directory will be translated
+  HandleAllMusicXMLFilesInCurrentDirectory
+else
+  # only the files in the arguments will be translated
+  HandletheMusicXMLFilesPassedAsArguments $@
+fi
+
+
+# Display the results
+# ---------------------------------------------------------
+
+DisplayTheResults

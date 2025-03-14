@@ -121,7 +121,7 @@ int lpsrNumberOfDots (int n)
 //_______________________________________________________________________________
 // std::string wholeNotesAsLilypondMakeDurationArguments (
 //   int                  inputLineNumber,
-//   const msrWholeNotes& wholeNotes)
+//   const mfWholeNotes& wholeNotes)
 // {
 //   return
 //     wholeNotes.asString () +
@@ -132,7 +132,7 @@ int lpsrNumberOfDots (int n)
 //_______________________________________________________________________________
 std::string wholeNotesAsLilypondString (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotes,
+  const mfWholeNotes& wholeNotes,
   int&                 dotsNumber)
 {
   // this algorithm is inspired by musicxml2ly
@@ -631,7 +631,7 @@ std::string wholeNotesAsLilypondString (
 
 std::string wholeNotesAsLilypondString (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotes)
+  const mfWholeNotes& wholeNotes)
 {
   int dotsNumber; // set by wholeNotesAsLilypondString() below, not used
 
@@ -645,7 +645,7 @@ std::string wholeNotesAsLilypondString (
 //_______________________________________________________________________________
 std::string dottedNotesDurationAsLilypondString (
   int                    inputLineNumber,
-  msrDottedNotesDuration dottedNotesDuration)
+  mfDottedNotesDuration dottedNotesDuration)
 {
   return
     wholeNotesAsLilypondString (
@@ -656,7 +656,7 @@ std::string dottedNotesDurationAsLilypondString (
 
 std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
   int                    inputLineNumber,
-  msrDottedNotesDuration dottedNotesDuration)
+  mfDottedNotesDuration dottedNotesDuration)
 {
   std::string result =
     wholeNotesAsLilypondString (
@@ -674,13 +674,13 @@ std::string dottedNotesDurationAsLilypondStringWithoutBackSlash (
 //_______________________________________________________________________________
 std::string multipleMeasureRestsWholeNoteAsLilypondString (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotes)
+  const mfWholeNotes& wholeNotes)
 {
   std::stringstream ss;
 
-  msrWholeNotes
+  mfWholeNotes
     wholeNotesUnit = // JMI v0.9.67
-      msrWholeNotes (
+      mfWholeNotes (
         1,
         wholeNotes.getDenominator ());
 

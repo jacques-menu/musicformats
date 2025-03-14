@@ -4278,11 +4278,11 @@ S_msrHarmony msrHarmony::create (
   const std::string&       harmonyFunctionText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const msrWholeNotes&     harmonySoundingWholeNotes,
-  const msrWholeNotes&     harmonyDisplayWholeNotes,
+  const mfWholeNotes&     harmonySoundingWholeNotes,
+  const mfWholeNotes&     harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
   const msrTupletFactor&   harmonyTupletFactor,
-  const msrWholeNotes&     harmonyWholeNotesOffset)
+  const mfWholeNotes&     harmonyWholeNotesOffset)
 {
   msrHarmony* o =
     new msrHarmony (
@@ -4312,11 +4312,11 @@ msrHarmony::msrHarmony (
   const std::string&       harmonyFunctionText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const msrWholeNotes&     harmonySoundingWholeNotes,
-  const msrWholeNotes&     harmonyDisplayWholeNotes,
+  const mfWholeNotes&     harmonySoundingWholeNotes,
+  const mfWholeNotes&     harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
   const msrTupletFactor&   harmonyTupletFactor,
-  const msrWholeNotes&     harmonyWholeNotesOffset)
+  const mfWholeNotes&     harmonyWholeNotesOffset)
     : msrMeasureElement (
         inputLineNumber),
       fHarmonyTupletFactor (
@@ -4344,7 +4344,7 @@ msrHarmony::msrHarmony (
 
   // a harmony is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeHarmonyInAHarmoniesMeasure()
-  fMeasureElementPositionInMeasure = msrWholeNotes (0, 1);
+  fMeasureElementPositionInMeasure = mfPositionInMeasure (0, 1);
 
   fHarmoniesStaffNumber = harmoniesStaffNumber;
 
@@ -4535,7 +4535,7 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
 }
 
 void msrHarmony::setHarmonySoundingWholeNotes (
-  const msrWholeNotes& wholeNotes,
+  const mfWholeNotes& wholeNotes,
   const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4559,7 +4559,7 @@ void msrHarmony::setHarmonySoundingWholeNotes (
 }
 
 void msrHarmony::setHarmonyDisplayWholeNotes (
-  const msrWholeNotes& wholeNotes,
+  const mfWholeNotes& wholeNotes,
   const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -4666,7 +4666,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 
 // void msrHarmony::setMeasureElementPositionInMeasure (
 //   const S_msrMeasure measure,
-//   const msrWholeNotes&    positionInMeasure,
+//   const mfWholeNotes&    positionInMeasure,
 //   const std::string&      context)
 // {
 //   // set the harmony measure position, taking it's offset into account
@@ -4682,7 +4682,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 //   // the offset can be negative, so we merely add it to positionInMeasure
 //   // to obtain the harmony's actual positionInMeasure
 //   // this overwrites it with the same value if fHarmonyWholeNotesOffset is null JMI ???
-//   msrWholeNotes
+//   mfWholeNotes
 //     actualPositionInMeasure =
 //       positionInMeasure
 //         +
@@ -4718,7 +4718,7 @@ void msrHarmony::setHarmonyUpLinkToNote (
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // compute harmony's voice position
-//   msrWholeNotes
+//   mfWholeNotes
 //     voicePosition =
 //       measure->
 //         getMeasureVoicePosition ()
@@ -4729,8 +4729,8 @@ void msrHarmony::setHarmonyUpLinkToNote (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
-//     "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
+//     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+//     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set harmony's measure position
@@ -4769,10 +4769,10 @@ void msrHarmony::setHarmonyFrame (const S_msrFrame& frame)
 
 // void msrHarmony::incrementHarmonySoundingWholeNotes (
 //   int                  inputLineNumber,
-//   const msrWholeNotes& wholeNotesDelta)
+//   const mfWholeNotes& wholeNotesDelta)
 // {
 //   // compute currentHarmony's future sounding whole notes
-//   msrWholeNotes
+//   mfWholeNotes
 //     augmentedSoundingWholeNotes =
 //       fMeasureElementSoundingWholeNotes
 //         +

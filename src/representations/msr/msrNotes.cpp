@@ -57,12 +57,12 @@ S_msrNote msrNote::create (
   msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
   msrOctaveKind              noteOctaveKind,
 
-  const msrWholeNotes&       noteSoundingWholeNotes,
-  const msrWholeNotes&       noteDisplayWholeNotes,
+  const mfWholeNotes&       noteSoundingWholeNotes,
+  const mfWholeNotes&       noteDisplayWholeNotes,
 
   int                        noteDotsNumber,
 
-  msrNotesDurationKind       noteGraphicNotesDurationKind,
+  mfDurationKind       noteGraphicNotesDurationKind,
 
   msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
   msrOctaveKind              noteDisplayOctaveKind,
@@ -119,12 +119,12 @@ msrNote::msrNote (
   msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
   msrOctaveKind              noteOctaveKind,
 
-  const msrWholeNotes&       noteSoundingWholeNotes,
-  const msrWholeNotes&       noteDisplayWholeNotes,
+  const mfWholeNotes&       noteSoundingWholeNotes,
+  const mfWholeNotes&       noteDisplayWholeNotes,
 
   int                        noteDotsNumber,
 
-  msrNotesDurationKind       noteGraphicNotesDurationKind,
+  mfDurationKind       noteGraphicNotesDurationKind,
 
   msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
   msrOctaveKind              noteDisplayOctaveKind,
@@ -1325,8 +1325,8 @@ S_msrNote msrNote::createNoteDeepClone (
 S_msrNote msrNote::createRestNote (
   int                  inputLineNumber,
   const std::string&   noteMeasureNumber,
-  const msrWholeNotes& soundingWholeNotes,
-  const msrWholeNotes& displayWholeNotes,
+  const mfWholeNotes& soundingWholeNotes,
+  const mfWholeNotes& displayWholeNotes,
   int                  dotsNumber)
 {
   msrNote * obj =
@@ -1346,7 +1346,7 @@ S_msrNote msrNote::createRestNote (
 
       dotsNumber,
 
-      msrNotesDurationKind::kNotesDuration_UNKNOWN_, // noteGraphicNotesDuration
+      mfDurationKind::kDuration_UNKNOWN_, // noteGraphicNotesDuration
 
       msrQuarterTonesPitchKind::kQTP_UNKNOWN_, // noteDisplayQuarterTonesPitch
       msrOctaveKind::kOctave_UNKNOWN_, // noteDisplayOctave,
@@ -1381,8 +1381,8 @@ S_msrNote msrNote::createRestNote (
 S_msrNote msrNote::createSkipNote (
   int                  inputLineNumber,
   const std::string&   noteMeasureNumber,
-  const msrWholeNotes& soundingWholeNotes,
-  const msrWholeNotes& displayWholeNotes,
+  const mfWholeNotes& soundingWholeNotes,
+  const mfWholeNotes& displayWholeNotes,
   int                  dotsNumber)
 {
   msrNote * obj =
@@ -1402,7 +1402,7 @@ S_msrNote msrNote::createSkipNote (
 
       dotsNumber,
 
-      msrNotesDurationKind::kNotesDuration_UNKNOWN_, // noteGraphicNotesDuration
+      mfDurationKind::kDuration_UNKNOWN_, // noteGraphicNotesDuration
 
       msrQuarterTonesPitchKind::kQTP_UNKNOWN_, // noteDisplayQuarterTonesPitch
       msrOctaveKind::kOctave_UNKNOWN_, // noteDisplayOctave,
@@ -1437,8 +1437,8 @@ S_msrNote msrNote::createSkipNote (
 S_msrNote msrNote::createGraceSkipNote (
   int                  inputLineNumber,
   const std::string&   noteMeasureNumber,
-  const msrWholeNotes& soundingWholeNotes,
-  const msrWholeNotes& displayWholeNotes,
+  const mfWholeNotes& soundingWholeNotes,
+  const mfWholeNotes& displayWholeNotes,
   int                  dotsNumber)
 {
   msrNote * obj =
@@ -1458,7 +1458,7 @@ S_msrNote msrNote::createGraceSkipNote (
 
       dotsNumber,
 
-      msrNotesDurationKind::kNotesDuration_UNKNOWN_, // noteGraphicNotesDuration
+      mfDurationKind::kDuration_UNKNOWN_, // noteGraphicNotesDuration
 
       msrQuarterTonesPitchKind::kQTP_UNKNOWN_, // noteDisplayQuarterTonesPitch
       msrOctaveKind::kOctave_UNKNOWN_, // noteDisplayOctave,
@@ -1495,8 +1495,8 @@ S_msrNote msrNote::createRestNoteWithOctave (
   int                  inputLineNumber,
   const std::string&   noteMeasureNumber,
   msrOctaveKind        noteOctave,
-  const msrWholeNotes& soundingWholeNotes,
-  const msrWholeNotes& displayWholeNotes,
+  const mfWholeNotes& soundingWholeNotes,
+  const mfWholeNotes& displayWholeNotes,
   int                  dotsNumber)
 {
   msrNote * obj =
@@ -1516,7 +1516,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
       dotsNumber,
 
-      msrNotesDurationKind::kNotesDuration_UNKNOWN_, // noteGraphicNotesDuration
+      mfDurationKind::kDuration_UNKNOWN_, // noteGraphicNotesDuration
 
       msrQuarterTonesPitchKind::kQTP_Rest,  // noteQuarterTonesDisplayPitchKind
       msrOctaveKind::kOctave_UNKNOWN_,  // noteDisplayOctaveKind
@@ -1553,8 +1553,8 @@ S_msrNote msrNote::createSkipNoteWithOctave (
   int                  inputLineNumber,
   const std::string&   noteMeasureNumber,
   msrOctaveKind        noteOctave,
-  const msrWholeNotes& soundingWholeNotes,
-  const msrWholeNotes& displayWholeNotes,
+  const mfWholeNotes& soundingWholeNotes,
+  const mfWholeNotes& displayWholeNotes,
   int                  dotsNumber)
 {
   msrNote * obj =
@@ -1574,7 +1574,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 
       dotsNumber,
 
-      msrNotesDurationKind::kNotesDuration_UNKNOWN_, // noteGraphicNotesDuration JMI ???
+      mfDurationKind::kDuration_UNKNOWN_, // noteGraphicNotesDuration JMI ???
 
       msrQuarterTonesPitchKind::kQTP_Skip,  // noteQuarterTonesDisplayPitchKind
       noteOctave,
@@ -1612,8 +1612,8 @@ S_msrNote msrNote::createRegularNote (
   const std::string&       noteMeasureNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind,
   msrOctaveKind            noteOctaveKind,
-  const msrWholeNotes&     soundingWholeNotes,
-  const msrWholeNotes&     displayWholeNotes,
+  const mfWholeNotes&     soundingWholeNotes,
+  const mfWholeNotes&     displayWholeNotes,
   int                      dotsNumber)
 {
   msrNote * obj =
@@ -1789,16 +1789,16 @@ S_msrNote msrNote::createRestFromString (
 #endif // MF_TRACE_IS_ENABLED
 
   // compute the restNotesDurationKind from restNotesDuration
-  msrNotesDurationKind
+  mfDurationKind
     restNotesDurationKind =
-      msrNotesDurationKindFromString (
+      mfDurationKindFromString (
         inputLineNumber,
         restNotesDuration);
 
   // compute the duration whole notes from restNotesDurationKind
-  msrWholeNotes
+  mfWholeNotes
      notesDurationKindFromMslpString =
-       msrNotesDurationKindAsWholeNotes (
+       mfDurationKindAsWholeNotes (
          restNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1950,16 +1950,16 @@ S_msrNote msrNote::createSkipFromString (
 #endif // MF_TRACE_IS_ENABLED
 
   // compute the skipNotesDurationKind from skipNotesDuration
-  msrNotesDurationKind
+  mfDurationKind
     skipNotesDurationKind =
-      msrNotesDurationKindFromString (
+      mfDurationKindFromString (
         inputLineNumber,
         skipNotesDuration);
 
   // compute the duration whole notes from skipNotesDurationKind
-  msrWholeNotes
+  mfWholeNotes
      notesDurationKindFromMslpString =
-       msrNotesDurationKindAsWholeNotes (
+       mfDurationKindAsWholeNotes (
          skipNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2144,16 +2144,16 @@ S_msrNote msrNote::createNoteFromString (
         noteOctaveIndication);
 
   // compute the noteNotesDurationKind from noteNotesDuration
-  msrNotesDurationKind
+  mfDurationKind
     noteNotesDurationKind =
-      msrNotesDurationKindFromString (
+      mfDurationKindFromString (
         inputLineNumber,
         noteNotesDuration);
 
   // compute the duration whole notes from noteNotesDurationKind
-  msrWholeNotes
+  mfWholeNotes
      notesDurationKindFromMslpString =
-       msrNotesDurationKindAsWholeNotes (
+       mfDurationKindAsWholeNotes (
          noteNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2217,12 +2217,12 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       semiTonesPitchAndOctave->
         getOctaveKind (),
 
-      msrWholeNotes (0, 1), // soundingWholeNotes,
-      msrWholeNotes (0, 1), // displayWholeNotes,
+      mfWholeNotes (0, 1), // soundingWholeNotes,
+      mfWholeNotes (0, 1), // displayWholeNotes,
 
       0, // dotsNumber,
 
-      msrNotesDurationKind::kNotesDuration_UNKNOWN_, // noteGraphicNotesDuration
+      mfDurationKind::kDuration_UNKNOWN_, // noteGraphicNotesDuration
 
       msrQuarterTonesPitchKind::kQTP_UNKNOWN_, // noteDisplayQuarterTonesPitch
       msrOctaveKind::kOctave_UNKNOWN_, // noteDisplayOctave,
@@ -2259,7 +2259,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //________________________________________________________________________
 // void msrNote::setMeasureElementPositionInMeasure (
 //   const S_msrMeasure& measure,
-//   const msrWholeNotes&     positionInMeasure,
+//   const mfWholeNotes&     positionInMeasure,
 //   const std::string&  context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -2295,8 +2295,8 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     positionInMeasure != K_MEASURE_POSITION_UNKNOWN_,
-//     "positionInMeasure == K_MEASURE_POSITION_UNKNOWN_");
+//     positionInMeasure != K_POSITION_IN_MEASURE_UNKNOWN_,
+//     "positionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // handle the chord itself
@@ -2312,7 +2312,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 
 void msrNote::setNoteAttachedElementsPositionInMeasure (
   const S_msrMeasure& measure,
-  const msrWholeNotes&     positionInMeasure)
+  const mfWholeNotes&     positionInMeasure)
 {
 // // JMI v0.9.66
 #ifdef MF_TRACE_IS_ENABLED
@@ -3253,7 +3253,7 @@ void msrNote::appendScordaturaToNote (
 
 // this 'override' NOT NEEXDED??? JMI v0.9.66
 // void msrNote::setMeasureElementVoicePosition (
-//   msrWholeNotes&     voicePosition,
+//   mfWholeNotes&     voicePosition,
 //   const std::string& context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
@@ -3277,8 +3277,8 @@ void msrNote::appendScordaturaToNote (
   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     voicePosition != K_MEASURE_POSITION_UNKNOWN_,
-//     "voicePosition == K_MEASURE_POSITION_UNKNOWN_");
+//     voicePosition != K_POSITION_IN_MEASURE_UNKNOWN_,
+//     "voicePosition == K_POSITION_IN_MEASURE_UNKNOWN_");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
 //   // set measure element voice position
@@ -4200,7 +4200,7 @@ std::string msrNote::noteGraphicNotesDurationAsMusicXMLString () const
 {
   std::string
     result =
-      msrNotesDurationKindAsMusicXMLType (
+      mfDurationKindAsMusicXMLType (
         fNoteGraphicNotesDurationKind);
 
   return result;
@@ -4659,7 +4659,7 @@ std::string msrNote::asShortString () const
   ss << std::left <<
     ", positionInMeasure: ";
     / * JMI
-  if (fMeasureElementPositionInMeasure == K_MEASURE_POSITION_UNKNOWN__MEASURE_NUMBER) {
+  if (fMeasureElementPositionInMeasure == K_POSITION_IN_MEASURE_UNKNOWN__MEASURE_NUMBER) {
     ss << "unknown (" << fMeasureElementPositionInMeasure.asString () << ")";
   }
   else {
@@ -6260,13 +6260,13 @@ void msrNote::printFull (std::ostream& os) const
 
   // print note full measure length
   // may be unknown if there is no time signature
-  msrWholeNotes
+  mfWholeNotes
     measureFullLength =
       fMeasureElementUpLinkToMeasure
         ?
           fMeasureElementUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
-        : msrWholeNotes (0, 1); // JMI v0.9.67
+        : mfWholeNotes (0, 1); // JMI v0.9.67
 
   os << std::left <<
     std::setw (fieldWidth) <<

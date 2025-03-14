@@ -15,7 +15,7 @@
 #include <list>
 
 #include "msrElements.h"
-#include "msrNotesDurations.h"
+#include "mfDurations.h"
 
 
 namespace MusicFormats
@@ -76,7 +76,7 @@ class EXP msrDivisions : public msrElement
     // durations
     int                   notesDurationKindAsDivisions (
                             int             inputLineNumber,
-                            msrNotesDurationKind notesDurationKind);
+                            mfDurationKind notesDurationKind);
 
     void                  printNotesDurationKindsDivisions (std::ostream& os);
 
@@ -98,7 +98,7 @@ class EXP msrDivisions : public msrElement
 
     std::string           tupletWholeNotesPitchAndOctaveAsString (
                             int             inputLineNumber,
-                            const msrWholeNotes& wholeNotes,
+                            const mfWholeNotes& wholeNotes,
                             int             actualNotes,
                             int             normalNotes);
 
@@ -133,7 +133,7 @@ class EXP msrDivisions : public msrElement
 
     int                   fDivisionsPerQuarterNote;
 
-    std::list <std::pair <msrNotesDurationKind, int>>
+    std::list <std::pair <mfDurationKind, int>>
                           fNotesDurationKindsToDivisions;
 };
 typedef SMARTP<msrDivisions> S_msrDivisions;

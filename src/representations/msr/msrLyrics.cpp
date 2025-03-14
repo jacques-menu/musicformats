@@ -311,7 +311,7 @@ S_msrSyllable msrSyllable::create (
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const msrWholeNotes&   syllableWholeNotes,
+  const mfWholeNotes&   syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
 {
@@ -335,7 +335,7 @@ S_msrSyllable msrSyllable::create (
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const msrWholeNotes&   syllableWholeNotes,
+  const mfWholeNotes&   syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
 {
@@ -358,7 +358,7 @@ msrSyllable::msrSyllable (
   msrSyllableKind        syllableKind,
   msrSyllableExtendKind  syllableExtendKind,
   const std::string&     syllableStanzaNumber,
-  const msrWholeNotes&   syllableWholeNotes,
+  const mfWholeNotes&   syllableWholeNotes,
   const msrTupletFactor& syllableTupletFactor,
   const S_msrStanza&     syllableUpLinkToStanza)
     : msrElement (
@@ -1235,7 +1235,7 @@ void msrStanza::initializeStanza ()
 
   fStanzaTextPresent = false;
 
-  fStanzaMeasureAccumulatedWholeNotesDuration = msrWholeNotes (0, 1);
+  fStanzaMeasureAccumulatedWholeNotesDuration = mfWholeNotes (0, 1);
 }
 
 msrStanza::~msrStanza ()
@@ -1363,16 +1363,16 @@ S_msrStanza msrStanza::createStanzaDeepClone (
 }
 
 void msrStanza::appendSyllableToStanza (
-  const S_msrSyllable& syllable,
-  const S_msrMeasure&  upLinkToMeasure,
-  const msrWholeNotes& partCurrentDrawingPositionInMeasure)
+  const S_msrSyllable&       syllable,
+  const S_msrMeasure&        upLinkToMeasure,
+  const mfPositionInMeasure& partCurrentDrawingPositionInMeasure)
 {
 /*
   upLinkToMeasure is needed here, to obtain the next measure's purist number
 */
 
   // compute position delta
-  msrWholeNotes
+  mfPositionInMeasure
     positionsDelta =
       partCurrentDrawingPositionInMeasure
         -
@@ -1536,10 +1536,10 @@ void msrStanza::appendSyllableToStanzaClone (
 void msrStanza::appendMeasureEndSyllableToStanza (
   int                  inputLineNumber,
   const S_msrMeasure&  upLinkToMeasure,
-  const msrWholeNotes& partCurrentDrawingPositionInMeasure)
+  const mfWholeNotes& partCurrentDrawingPositionInMeasure)
 {
   // compute position delta
-  msrWholeNotes
+  mfWholeNotes
     positionsDelta =
       partCurrentDrawingPositionInMeasure
         -
@@ -1611,7 +1611,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
         msrSyllableKind::kSyllableMeasureEnd,
         msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
-        msrWholeNotes (0, 1),
+        mfWholeNotes (0, 1),
         msrTupletFactor (1, 1),
         this);
 
@@ -1626,7 +1626,7 @@ void msrStanza::appendMeasureEndSyllableToStanza (
     upLinkToMeasure);
 
   // reset measure whole notes
-  fStanzaMeasureAccumulatedWholeNotesDuration = msrWholeNotes (0, 1);
+  fStanzaMeasureAccumulatedWholeNotesDuration = mfWholeNotes (0, 1);
 
   --gIndenter;
 }
@@ -1662,7 +1662,7 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
         msrSyllableKind::kSyllableLineBreak,
         msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
-        msrWholeNotes (0, 1),
+        mfWholeNotes (0, 1),
         msrTupletFactor (),
         this);
 
@@ -1708,7 +1708,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
         msrSyllableKind::kSyllablePageBreak,
         msrSyllableExtendKind::kSyllableExtend_NONE,
         fStanzaNumber,
-        msrWholeNotes (0, 1),
+        mfWholeNotes (0, 1),
         msrTupletFactor (),
         this);
 
@@ -1725,7 +1725,7 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
 
 void msrStanza::appendPaddingNoteToStanza ( // JMI USELESS??? v0.9.70
   int                  inputLineNumber,
-  const msrWholeNotes& forwardStepLength)
+  const mfWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceLyrics ()) {

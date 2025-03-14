@@ -98,7 +98,7 @@ EXP int msdl (
 
   createTheGlobalIndentedOstreams (std::cout, std::cerr);
 
-// JMI  msrMoment::testMsrMomentComparisons (std::cerr); // BLARK CLAR
+// JMI  mfMoment::testMsrMomentComparisons (std::cerr); // BLARK CLAR
 
 // JMI testBool ();
 

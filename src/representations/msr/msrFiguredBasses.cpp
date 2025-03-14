@@ -417,9 +417,9 @@ S_msrFiguredBass msrFiguredBass::create (
     new msrFiguredBass (
       inputLineNumber,
       upLinkToMeasure,
-      msrWholeNotes (0, 1),           // figuredBassSoundingWholeNotes
-      msrWholeNotes (0, 1),           // figuredBassDisplayWholeNotes
-//       msrWholeNotes (0, 1),           // fFiguredBassWholeNotesDuration
+      mfWholeNotes (0, 1),           // figuredBassSoundingWholeNotes
+      mfWholeNotes (0, 1),           // figuredBassDisplayWholeNotes
+//       mfWholeNotes (0, 1),           // fFiguredBassWholeNotesDuration
       msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo,
       msrTupletFactor (1, 1));
   assert (obj != nullptr);
@@ -438,9 +438,9 @@ S_msrFiguredBass msrFiguredBass::create (
 S_msrFiguredBass msrFiguredBass::create (
   int                    inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
-  const msrWholeNotes&   figuredBassSoundingWholeNotes,
-  const msrWholeNotes&   figuredBassDisplayWholeNotes,
-//   const msrWholeNotes&   figuredBassWholeNotesDuration,
+  const mfWholeNotes&   figuredBassSoundingWholeNotes,
+  const mfWholeNotes&   figuredBassDisplayWholeNotes,
+//   const mfWholeNotes&   figuredBassWholeNotesDuration,
   msrFiguredBassParenthesesKind
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
@@ -460,9 +460,9 @@ S_msrFiguredBass msrFiguredBass::create (
 
 S_msrFiguredBass msrFiguredBass::create (
   int                    inputLineNumber,
-  const msrWholeNotes&   figuredBassSoundingWholeNotes,
-  const msrWholeNotes&   figuredBassDisplayWholeNotes,
-//   const msrWholeNotes&   figuredBassWholeNotesDuration,
+  const mfWholeNotes&   figuredBassSoundingWholeNotes,
+  const mfWholeNotes&   figuredBassDisplayWholeNotes,
+//   const mfWholeNotes&   figuredBassWholeNotesDuration,
   msrFiguredBassParenthesesKind
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
@@ -481,9 +481,9 @@ S_msrFiguredBass msrFiguredBass::create (
 msrFiguredBass::msrFiguredBass (
   int                    inputLineNumber,
   const S_msrMeasure&    upLinkToMeasure,
-  const msrWholeNotes&   figuredBassSoundingWholeNotes,
-  const msrWholeNotes&   figuredBassDisplayWholeNotes,
-//   const msrWholeNotes&   figuredBassWholeNotesDuration,
+  const mfWholeNotes&   figuredBassSoundingWholeNotes,
+  const mfWholeNotes&   figuredBassDisplayWholeNotes,
+//   const mfWholeNotes&   figuredBassWholeNotesDuration,
   msrFiguredBassParenthesesKind
                          figuredBassParenthesesKind,
   const msrTupletFactor& figuredBassTupletFactor)
@@ -521,7 +521,7 @@ msrFiguredBass::msrFiguredBass (
 
   // a figured bass element is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure()
-  fMeasureElementPositionInMeasure = msrWholeNotes (0, 1);
+  fMeasureElementPositionInMeasure = mfPositionInMeasure (0, 1);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {

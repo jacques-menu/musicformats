@@ -72,13 +72,13 @@ class EXP msrChord : public msrTupletElement
     static SMARTP<msrChord> create (
                             int                  inputLineNumber,
                             const S_msrMeasure&  upLinkToMeasure,
-                            const msrWholeNotes& chordDisplayWholeNotes,
-                            msrNotesDurationKind chordGraphicNotesDurationKind);
+                            const mfWholeNotes& chordDisplayWholeNotes,
+                            mfDurationKind chordGraphicNotesDurationKind);
 
 //     static SMARTP<msrChord> create (
 //                             int                  inputLineNumber,
-//                             const msrWholeNotes& chordDisplayWholeNotes,
-//                             msrNotesDurationKind chordGraphicNotesDurationKind);
+//                             const mfWholeNotes& chordDisplayWholeNotes,
+//                             mfDurationKind chordGraphicNotesDurationKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -101,8 +101,8 @@ class EXP msrChord : public msrTupletElement
                           msrChord (
                             int                  inputLineNumber,
                             const S_msrMeasure&  upLinkToMeasure,
-                            const msrWholeNotes& chordDisplayWholeNotes,
-                            msrNotesDurationKind chordGraphicNotesDurationKind);
+                            const mfWholeNotes& chordDisplayWholeNotes,
+                            mfDurationKind chordGraphicNotesDurationKind);
 
     virtual               ~msrChord ();
 
@@ -137,17 +137,17 @@ class EXP msrChord : public msrTupletElement
                               { return fChordKind; }
 
     void                  setChordDisplayWholeNotes (
-                            const msrWholeNotes& wholeNotes);
+                            const mfWholeNotes& wholeNotes);
 
-    msrWholeNotes         getChordDisplayWholeNotes () const
+    mfWholeNotes         getChordDisplayWholeNotes () const
                               { return fChordDisplayWholeNotes; }
 
     // graphic duration
     void                  setChordGraphicNotesDurationKind (
-                            msrNotesDurationKind notesDurationKind)
+                            mfDurationKind notesDurationKind)
                               { fChordGraphicNotesDurationKind = notesDurationKind; }
 
-    msrNotesDurationKind  getChordGraphicNotesDurationKind () const
+    mfDurationKind  getChordGraphicNotesDurationKind () const
                               { return fChordGraphicNotesDurationKind; }
 
     // chord notes
@@ -355,12 +355,12 @@ class EXP msrChord : public msrTupletElement
 //     // this override calls setChordMembersPositionInMeasure()
 //     void                  setMeasureElementPositionInMeasure (
 //                             const S_msrMeasure&  measure,
-//                             const msrWholeNotes& positionInMeasure,
+//                             const mfWholeNotes& positionInMeasure,
 //                             const std::string&   context) override;
 
     void                  setChordMembersPositionInMeasure (
                             const S_msrMeasure&  measure,
-                            const msrWholeNotes& positionInMeasure);
+                            const mfWholeNotes& positionInMeasure);
 
   public:
 
@@ -619,11 +619,11 @@ class EXP msrChord : public msrTupletElement
     msrChordInKind        fChordKind;
 
     // display whole notes
-    msrWholeNotes         fChordDisplayWholeNotes;
+    mfWholeNotes         fChordDisplayWholeNotes;
 
     // graphic duration is needed for grace notes,
     // since they don't have any note (sounding) duration
-    msrNotesDurationKind  fChordGraphicNotesDurationKind;
+    mfDurationKind  fChordGraphicNotesDurationKind;
 
     std::vector <S_msrNote>
                           fChordNotesVector;

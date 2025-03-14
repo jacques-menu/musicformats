@@ -67,9 +67,10 @@ msr2mxsrTranslator::msr2mxsrTranslator (
   fVisitedMsrScore = visitedMsrScore;
 
   // backup and forward handling
-  fCurrentPositionInMeasure = msrWholeNotes (0, 1);
+  fCurrentPositionInMeasure = mfPositionInMeasure (0, 1);
 
-  fCurrentCumulatedSkipsNotesDurations = msrWholeNotes (0, 1);
+  fCurrentCumulatedSkipsWholeNotesDurations = mfWholeNotes (0, 1);
+
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
 };
@@ -109,7 +110,7 @@ Sxmlelement msr2mxsrTranslator::translateMsrToMxsr ()
 //________________________________________________________________________
 int msr2mxsrTranslator::wholeNotesAsDivisions (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotes)
+  const mfWholeNotes& wholeNotes)
 {
   mfRational
     durationAsRational =
@@ -2858,9 +2859,9 @@ if (false) // JMI
     elt->getPartShortestNoteTupletFactor ();
 
   // compute the divisions per quarter note
-  if (fPartShortestNoteWholeNotes > msrWholeNotes (1, 4)) {
+  if (fPartShortestNoteWholeNotes > mfWholeNotes (1, 4)) {
     // the shortest duration should be a quarter note at most
-    fPartShortestNoteWholeNotes = msrWholeNotes (1, 4);
+    fPartShortestNoteWholeNotes = mfWholeNotes (1, 4);
   }
 */
 
@@ -3523,10 +3524,11 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
   fCurrentMeasureElement = nullptr;
 
   // reset the current position in the measure
-  fCurrentPositionInMeasure = msrWholeNotes (0, 1);
+  fCurrentPositionInMeasure = mfPositionInMeasure (0, 1);
 
   // reset the cumulated skip durations informations
-  fCurrentCumulatedSkipsNotesDurations = msrWholeNotes (0, 1);
+  fCurrentCumulatedSkipsWholeNotesDurations = mfWholeNotes (0, 1);
+
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
 }
@@ -4449,7 +4451,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
  size_t tempoWordsListSize = tempoWordsList.size ();
 */
 
-  msrDottedNotesDuration tempoBeatUnit  = elt->getTempoBeatUnit ();
+  mfDottedNotesDuration tempoBeatUnit  = elt->getTempoBeatUnit ();
   std::string       tempoPerMinute = elt->getTempoPerMinute ();
 
   msrTempoParenthesizedKind
@@ -4506,7 +4508,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
           metronomeElement->add (createMxmlAttribute ("parentheses", "yes"));
 
           // append the beat unit element to the metronome elements
-          msrNotesDurationKind
+          mfDurationKind
             notesDurationKind =
               tempoBeatUnit.getNotesDurationKind ();
               /* JMI
@@ -4518,7 +4520,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
           metronomeElement-> push (
             createMxmlelement (
               k_beat_unit,
-              msrNotesDurationKindAsMusicXMLType (notesDurationKind)));
+              mfDurationKindAsMusicXMLType (notesDurationKind)));
 
           // append the per minute element to the metronome elements
           metronomeElement-> push (createMxmlelement (k_per_minute, tempoPerMinute));
@@ -4557,7 +4559,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
           Sxmlelement metronomeElement = createMxmlelement (k_metronome, "");
 
           // append the beat unit element to the metronome elements
-          msrNotesDurationKind
+          mfDurationKind
             notesDurationKind =
               tempoBeatUnit.getNotesDurationKind ();
               /*
@@ -4569,7 +4571,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
           metronomeElement-> push (
             createMxmlelement (
               k_beat_unit,
-              msrNotesDurationKindAsMusicXMLType (notesDurationKind)));
+              mfDurationKindAsMusicXMLType (notesDurationKind)));
 
           // append the per minute element to the metronome elements
           metronomeElement-> push (createMxmlelement (k_per_minute, tempoPerMinute));
@@ -5153,18 +5155,23 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   const S_msrNote& theMsrNote)
 {
   // fetch the backup duration divisions
-  msrWholeNotes
+  mfPositionInMeasure
     previousNotePositionInMeasure =
-      fPreviousMSRNote->getMeasureElementPositionInMeasure (),
-    previousNoteSoundingWholeNotes =
-      fPreviousMSRNote->getMeasureElementSoundingWholeNotes (),
+      fPreviousMSRNote->getMeasureElementPositionInMeasure ();
 
+  mfWholeNotes
+    previousNoteSoundingWholeNotes =
+      fPreviousMSRNote->getMeasureElementSoundingWholeNotes ();
+
+  mfPositionInMeasure
     theMsrNotePositionInMeasure =
-      fPreviousMSRNote->getMeasureElementPositionInMeasure (),
+      fPreviousMSRNote->getMeasureElementPositionInMeasure ();
+
+  mfWholeNotes
     theMsrNoteSoundingWholeNotes =
       theMsrNote->getMeasureElementSoundingWholeNotes ();
 
-  msrWholeNotes
+  mfWholeNotes
     backupNotesDuration =
       previousNotePositionInMeasure
         +
@@ -5261,7 +5268,8 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   appendOtherMusicXMLElementToMeasure (backupElement);
 
   // reset the cumulated skip durations informations
-  fCurrentCumulatedSkipsNotesDurations = msrWholeNotes (0, 1);
+  fCurrentCumulatedSkipsWholeNotesDurations = mfWholeNotes (0, 1);
+
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
 }
@@ -5283,7 +5291,7 @@ void msr2mxsrTranslator::appendAForwardToMeasure (
     forwardNotesDurationDivisions =
       wholeNotesAsDivisions (
         theMsrNote->getInputLineNumber (),
-        fCurrentCumulatedSkipsNotesDurations);
+        fCurrentCumulatedSkipsWholeNotesDurations);
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gGlobalMxsr2msrOahGroup->getTraceForward ()) {
@@ -5359,7 +5367,8 @@ void msr2mxsrTranslator::appendAForwardToMeasure (
   appendOtherMusicXMLElementToMeasure (forwardElement);
 
   // reset the cumulated skip durations informations
-  fCurrentCumulatedSkipsNotesDurations = msrWholeNotes (0, 1);
+  fCurrentCumulatedSkipsWholeNotesDurations = mfWholeNotes (0, 1);
+
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
 }
@@ -5379,7 +5388,8 @@ void msr2mxsrTranslator::appendABackupOrForwardToMeasureIfNeeded (
     ss <<
       "Appending a backup or forward to measure if needed, theMsrNote: " <<
       theMsrNote->asShortString () <<
-      ", fCurrentCumulatedSkipsNotesDurations: " << fCurrentCumulatedSkipsNotesDurations <<
+      ", fCurrentCumulatedSkipsWholeNotesDurations: " <<
+      fCurrentCumulatedSkipsWholeNotesDurations <<
       ", previousMSRNote: ";
     if (fPreviousMSRNote) {
       ss <<
@@ -5427,7 +5437,8 @@ void msr2mxsrTranslator::appendABackupOrForwardToMeasureIfNeeded (
     ss <<
       "--> appendABackupOrForwardToMeasureIfNeeded(1), theMsrNote: " <<
       theMsrNote->asShortString () <<
-      ", fCurrentCumulatedSkipsNotesDurations: " << fCurrentCumulatedSkipsNotesDurations <<
+      ", fCurrentCumulatedSkipsWholeNotesDurations: " <<
+      fCurrentCumulatedSkipsWholeNotesDurations <<
       ", noteStaffNumber: " << noteStaffNumber <<
       ", noteVoiceNumber: " << noteVoiceNumber <<
       ", previousMSRNote: ";
@@ -5478,14 +5489,14 @@ fCurrentCumulatedSkipsVoiceNumber
         // same staff, same voice
 
         // is a <forward /> or <backup /> element needed?
-        if (fCurrentCumulatedSkipsNotesDurations.getNumerator () != 0) {
+        if (fCurrentCumulatedSkipsWholeNotesDurations.getNumerator () != 0) {
           // a skip may have been created due to a <backup /> to a position
           // that is not at the beginning of the measure
-          msrWholeNotes
+          mfWholeNotes
             notePositionInMeasure =
               theMsrNote->getMeasureElementPositionInMeasure ();
 
-          msrWholeNotes
+          mfWholeNotes
             positionAfterNoteInMeasure =
               notePositionInMeasure +
                 theMsrNote->getMeasureElementSoundingWholeNotes ();
@@ -7320,12 +7331,12 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
     noteKind =
       theMsrNote->getNoteKind ();
 
-  msrWholeNotes
+  mfWholeNotes
     noteSoundingWholeNotes =
       theMsrNote->getMeasureElementSoundingWholeNotes ();
 
 #ifdef MF_TRACE_IS_ENABLED
-  msrWholeNotes
+  mfWholeNotes
     noteDisplayWholeNotes =
       theMsrNote->getNoteDisplayWholeNotes ();
 
@@ -7559,7 +7570,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
     case msrNoteKind::kNoteSkipInMeasure:
       doGenerateNote = false;
       // cumulating the skip notes durations for <forward /> elements generation
-      fCurrentCumulatedSkipsNotesDurations +=
+      fCurrentCumulatedSkipsWholeNotesDurations +=
         theMsrNote->getMeasureElementSoundingWholeNotes ();
       break;
     case msrNoteKind::kNoteUnpitchedInMeasure:
@@ -7931,7 +7942,7 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
 #endif // MF_TRACE_IS_ENABLED
 
   // remember this note and its voice and staff if relevant
-  // skips are just taken into account in fCurrentCumulatedSkipsNotesDurations,
+  // skips are just taken into account in fCurrentCumulatedSkipsWholeNotesDurations,
   // and a <backup /> or <forward /> is generated upon the next non-skip note
 
   Bool doRememberThisNote (false);
@@ -8290,7 +8301,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingHarmoniesVoice) {
   / * JMI
     // get the harmony whole notes offset
-    msrWholeNotes
+    mfWholeNotes
       harmonyWholeNotesOffset =
         elt->getHarmonyWholeNotesOffset ();
 

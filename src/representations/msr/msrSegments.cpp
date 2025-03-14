@@ -109,10 +109,10 @@ void msrSegment::initializeSegment ()
 
 // JMI v0.9.63
 //  // segment shortest note wholeNotes
-//  fSegmentShortestNoteWholeNotes = msrWholeNotes (INT_MAX, 1);
+//  fSegmentShortestNoteWholeNotes = mfWholeNotes (INT_MAX, 1);
 
 // segment shortest note tuplet factor
-//  fSegmentShortestNoteTupletFactor = msrWholeNotes (1, 1);
+//  fSegmentShortestNoteTupletFactor = mfWholeNotes (1, 1);
 }
 
 void msrSegment::setSegmentFirstMeasure (
@@ -374,7 +374,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
 
 /* JMI
 void msrSegment::setSegmentShortestNoteWholeNotes (
-  const msrWholeNotes& wholeNotes)
+  const mfWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -1171,7 +1171,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (
 
 void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
   int                  inputLineNumber,
-  const msrWholeNotes& positionInMeasure)
+  const mfWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -1212,7 +1212,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
 void msrSegment::appendHarmonyToSegment (
   int                  inputLineNumber,
   const S_msrHarmony&  harmony,
-  const msrWholeNotes& positionInMeasureToAppendAt)
+  const mfWholeNotes& positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
@@ -1253,7 +1253,7 @@ void msrSegment::appendHarmonyToSegment (
 void msrSegment::appendHarmoniesListToSegment (
   int                             inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
-  const msrWholeNotes&            positionInMeasureToAppendAt)
+  const mfWholeNotes&            positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesBasics ()) {
@@ -1314,7 +1314,7 @@ void msrSegment::appendHarmonyToSegmentClone (const S_msrHarmony& harmony)
 void msrSegment::appendFiguredBassToSegment (
   int                     inputLineNumber,
   const S_msrFiguredBass& figuredBass,
-  const msrWholeNotes&    positionInMeasureToAppendAt)
+  const mfWholeNotes&    positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBassesBasics ()) {
@@ -1357,7 +1357,7 @@ void msrSegment::appendFiguredBassToSegment (
 void msrSegment::appendFiguredBassesListToSegment (
   int                                inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
-  const msrWholeNotes&               positionInMeasureToAppendAt)
+  const mfWholeNotes&               positionInMeasureToAppendAt)
 {
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -2056,7 +2056,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 
 // void msrSegment::padUpToPositionInMeasureInSegment (
 //   int                  inputLineNumber,
-//   const msrWholeNotes& wholeNotes)
+//   const mfWholeNotes& wholeNotes)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -2128,7 +2128,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 
 void msrSegment::backupByWholeNotesStepLengthInSegment (
   int     inputLineNumber,
-  const msrWholeNotes&
+  const mfWholeNotes&
           backupTargetMeasureElementPositionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -2167,7 +2167,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
 
 void msrSegment::cascadeAppendPaddingNoteToSegment (
   int                  inputLineNumber,
-  const msrWholeNotes& forwardStepLength)
+  const mfWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {
@@ -2551,7 +2551,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 
 void msrSegment::appendNoteToSegment (
   const S_msrNote&     note,
-  const msrWholeNotes& partCurrentDrawingPositionInMeasure)
+  const mfWholeNotes& partCurrentDrawingPositionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceNotes ()) {

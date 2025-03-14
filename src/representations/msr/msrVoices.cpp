@@ -558,7 +558,7 @@ void msrVoice::initializeVoice (
 
   // voice shortest note
   fVoiceShortestNoteWholeNotes =
-    msrWholeNotes (INT_MAX, 1);
+    mfWholeNotes (INT_MAX, 1);
   fVoiceShortestNoteTupletFactor =
     mfRational (1, 1);
 
@@ -590,7 +590,7 @@ void msrVoice::initializeVoice (
       0)); // inputLineNumber
 
   // regular measure ends detection
-  fWholeNotesSinceLastRegularMeasureEnd = msrWholeNotes (0, 1);
+  fWholeNotesSinceLastRegularMeasureEnd = mfWholeNotes (0, 1);
 
   // set voice current after repeat component phase kind
   setCurrentVoiceRepeatPhaseKind (
@@ -605,8 +605,12 @@ void msrVoice::initializeVoice (
   fVoiceContainsMeasureRepeats = false;
 
     // voice position
-  fCurrentVoicePosition = msrWholeNotes (0, 1);
-  fCurrentVoiceMoment = msrMoment (msrWholeNotes (0,1), msrWholeNotes (0,1));
+  fCurrentVoicePosition =
+    mfWholeNotes (0, 1);
+
+    // voice moment
+  fCurrentVoiceMoment =
+    mfMoment (mfWholeNotes (0,1), mfWholeNotes (0,1));
 
   // voice finalization
   fVoiceHasBeenFinalized = false;
@@ -1455,7 +1459,7 @@ void msrVoice::appendMeasureCloneToVoiceClone (
 
 void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
   int                  inputLineNumber,
-  const msrWholeNotes& wholeNotes)
+  const mfWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -2333,7 +2337,7 @@ void msrVoice::appendTimeSignatureToVoiceClone (
 
 void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
   int                  inputLineNumber,
-  const msrWholeNotes& positionInMeasure)
+  const mfWholeNotes& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -2490,7 +2494,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 }
 
 void msrVoice::setVoiceShortestNoteWholeNotes (
-  const msrWholeNotes& wholeNotes)
+  const mfWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
     if (gTraceOahGroup->getTraceNotes ()) {
@@ -2536,13 +2540,13 @@ void msrVoice::setVoiceShortestNoteTupletFactor (
 void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
 {
   // is note the shortest one in this voice?
-  msrWholeNotes
+  mfWholeNotes
     noteSoundingWholeNotes =
       note->
         getMeasureElementSoundingWholeNotes ();
 
       /* JMI
-  msrWholeNotes
+  mfWholeNotes
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
@@ -2602,7 +2606,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
 //   fVoiceLastAppendedNote = note;
 //
 //   // is note the shortest one in this voice?
-//   msrWholeNotes
+//   mfWholeNotes
 //     noteSoundingWholeNotes =
 //       note->
 //         getMeasureElementSoundingWholeNotes (),
@@ -2621,7 +2625,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (const S_msrNote& note)
 void msrVoice::appendHarmonyToVoice (
   int                  inputLineNumber,
   const S_msrHarmony&  harmony,
-  const msrWholeNotes& positionInMeasureToAppendAt)
+  const mfWholeNotes& positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -2689,7 +2693,7 @@ void msrVoice::appendHarmonyToVoice (
 void msrVoice::appendHarmoniesListToVoice (
   int                             inputLineNumber,
   const std::list <S_msrHarmony>& harmoniesList,
-  const msrWholeNotes&            positionInMeasureToAppendAt)
+  const mfWholeNotes&            positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -2774,7 +2778,7 @@ void msrVoice::appendHarmonyToVoiceClone (
 void msrVoice::appendFiguredBassToVoice (
   int                     inputLineNumber,
   const S_msrFiguredBass& figuredBass,
-  const msrWholeNotes&    positionInMeasureToAppendAt)
+  const mfWholeNotes&    positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -2841,7 +2845,7 @@ void msrVoice::appendFiguredBassToVoice (
 void msrVoice::appendFiguredBassesListToVoice (
   int                                inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
-  const msrWholeNotes&               positionInMeasureToAppendAt)
+  const mfWholeNotes&               positionInMeasureToAppendAt)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {
@@ -2926,7 +2930,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
 // void msrVoice::padUpToPositionInMeasureInVoice (
 //   int                  inputLineNumber,
-//   const msrWholeNotes& wholeNotesPositionInMeasure)
+//   const mfWholeNotes& wholeNotesPositionInMeasure)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
 //   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -2979,7 +2983,7 @@ void msrVoice::appendFiguredBassToVoiceClone (
 
 void msrVoice::backupByWholeNotesStepLengthInVoice (
   int                  inputLineNumber,
-  const msrWholeNotes& backupTargetMeasureElementPositionInMeasure)
+  const mfWholeNotes& backupTargetMeasureElementPositionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
@@ -3019,7 +3023,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
 
 void msrVoice::cascadeAppendPaddingNoteToVoice (
   int                  inputLineNumber,
-  const msrWholeNotes& forwardStepLength)
+  const mfWholeNotes& forwardStepLength)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (
@@ -3318,7 +3322,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
       fetchVoiceUpLinkToPart ();
 
   // fetch the part current measure position
-  msrWholeNotes
+  mfWholeNotes
     partCurrentDrawingPositionInMeasure =
       part->
         getPartCurrentDrawingPositionInMeasure ();
@@ -5124,12 +5128,12 @@ void msrVoice::handleVoiceLevelRepeatStart (
       if (! lastMeasureElementsList.empty ()) {
         // the last measure is not empty
 
-        msrWholeNotes
+        mfWholeNotes
           measureAccumulatedWholeNotesDuration =
             lastMeasureInLastSegment->
               getMeasureAccumulatedWholeNotesDuration ();
 
-        msrWholeNotes
+        mfWholeNotes
           fullMeasureWholeNotesDuration =
             lastMeasureInLastSegment->
               getFullMeasureWholeNotesDuration ();
@@ -8103,7 +8107,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
 
   // get the empty measure whole notes wholeNotes
   // JMI maybe not OK if first measure such as after a repeat segment???
-  msrWholeNotes
+  mfWholeNotes
     emptyMeasureAccumulatedWholeNotesDuration =
       fVoiceLastAppendedMeasure->
         getFullMeasureWholeNotesDuration ();
@@ -8162,7 +8166,7 @@ void msrVoice::appendEmptyMeasuresToVoice (
     setNoteOccupiesAFullMeasure ();
 
   // append it to emptyMeasure
-  msrWholeNotes partCurrentDrawingPositionInMeasure; // needs to be supplied ??? JMI v0.9.70
+  mfWholeNotes partCurrentDrawingPositionInMeasure; // needs to be supplied ??? JMI v0.9.70
 
   emptyMeasure->
     appendNoteToMeasureAtPosition (
@@ -10779,7 +10783,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
               fetchVoiceUpLinkToPart ();
 
            // fetch the part current measure position
-          msrWholeNotes
+          mfWholeNotes
             partCurrentDrawingPositionInMeasure =
               part->
                 getPartCurrentDrawingPositionInMeasure ();
@@ -10926,7 +10930,7 @@ void msrVoice::finalizeVoice (
     voicePart =
       fetchVoiceUpLinkToPart ();
 
-  msrWholeNotes
+  mfWholeNotes
     partShortestNoteWholeNotes =
       voicePart->
         getPartShortestNoteWholeNotes ();
@@ -11091,7 +11095,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
     voicePart =
       fetchVoiceUpLinkToPart ();
 
-  msrWholeNotes
+  mfWholeNotes
     partShortestNoteWholeNotes =
       voicePart->
         getPartShortestNoteWholeNotes ();

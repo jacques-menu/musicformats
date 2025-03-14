@@ -3856,7 +3856,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
   ++gIndenter;
 
   // there should be an integer or a name such as "maxima"
-  msrNotesDurationKind notesDurationKind = msrNotesDurationKind::kNotesDuration_UNKNOWN_;
+  mfDurationKind notesDurationKind = mfDurationKind::kDuration_UNKNOWN_;
 
   if (
     checkOptionalTokenKindsSet (
@@ -3869,7 +3869,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
       int durationInteger = fCurrentToken.getTokenDescription ().getInteger ();
 
       notesDurationKind =
-        msrNotesDurationKindFromInteger (
+        mfDurationKindFromInteger (
           fCurrentToken.getTokenLineNumber (),
           durationInteger);
 
@@ -3880,7 +3880,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
         ss <<
           "=== NoteNotesDuration()" <<
           ", durationInteger: \"" << durationInteger << "\"" <<
-          ", notesDurationKind: \"" << msrNotesDurationKindAsString (notesDurationKind) << "\"" <<
+          ", notesDurationKind: \"" << mfDurationKindAsString (notesDurationKind) << "\"" <<
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
@@ -3900,7 +3900,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
         fCurrentToken.getTokenDescription ().getString ();
 
       notesDurationKind =
-        msrNotesDurationKindFromString (
+        mfDurationKindFromString (
           fCurrentToken.getTokenLineNumber (),
           durationName);
 
@@ -3911,7 +3911,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
         ss <<
           "=== NoteNotesDuration()" <<
           ", durationName: \"" << durationName << "\"" <<
-          ", notesDurationKind: \"" << msrNotesDurationKindAsString (notesDurationKind) << "\"" <<
+          ", notesDurationKind: \"" << mfDurationKindAsString (notesDurationKind) << "\"" <<
           std::endl;
 
         gWaeHandler->waeTraceWithoutInputLocation (
@@ -3924,7 +3924,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
     switch (notesDurationKind) {
-      case msrNotesDurationKind::kNotesDuration_UNKNOWN_:
+      case mfDurationKind::kDuration_UNKNOWN_:
         fParserWaeHandler->
           malformedNoteNotesDuration ();
         break;
@@ -3958,7 +3958,7 @@ void msdlParser::NoteNotesDuration (S_msdlTokenKindsSet stopperTokensSet)
       fCurrentNoteDotsNumber);
 
   fCurrentNoteDisplayWholeNotes =
-    msrNotesDurationKindAsWholeNotes (
+    mfDurationKindAsWholeNotes (
       notesDurationKind);
 
   --gIndenter;

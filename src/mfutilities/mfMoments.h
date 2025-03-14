@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrMoments___
-#define ___msrMoments___
+#ifndef ___mfMoments___
+#define ___mfMoments___
 
 #include <string>
 #include <ostream>
@@ -19,7 +19,7 @@
 
 #include "mfBool.h"
 
-#include "msrNotesDurations.h"
+#include "mfDurations.h"
 
 
 namespace MusicFormats
@@ -27,46 +27,46 @@ namespace MusicFormats
 
 // moments
 //______________________________________________________________________________
-class EXP msrMoment
+class EXP mfMoment
 {
   public:
 
     // constants
     // ------------------------------------------------------
 
-    static const msrMoment K_MOMENT_UNKNOWN_;
+    static const mfMoment K_MOMENT_UNKNOWN_;
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrMoment ();
+                          mfMoment ();
 
-                          msrMoment (
-                            const msrWholeNotes& writtenPositionInMeasure,
-                            const msrWholeNotes& soundingRelativeOffset);
+                          mfMoment (
+                            const mfWholeNotes& writtenPositionInMeasure,
+                            const mfWholeNotes& soundingRelativeOffset);
 
-                          msrMoment (
-                            const msrWholeNotes& writtenPositionInMeasure);
+                          mfMoment (
+                            const mfWholeNotes& writtenPositionInMeasure);
 
-    virtual               ~msrMoment ();
+    virtual               ~mfMoment ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    void                  setWrittenPositionInMeseasure (msrWholeNotes position)
+    void                  setWrittenPositionInMeseasure (mfWholeNotes position)
                               { fWrittenPositionInMeseasure = position; }
 
-    msrWholeNotes         getWrittenPositionInMeseasure () const
+    mfWholeNotes         getWrittenPositionInMeseasure () const
                               { return fWrittenPositionInMeseasure; }
 
-    void                  setSoundingRelativeOffset (msrWholeNotes offset)
+    void                  setSoundingRelativeOffset (mfWholeNotes offset)
                               { fSoundingRelativeOffset = offset; }
 
-    msrWholeNotes         getSoundingRelativeOffset () const
+    mfWholeNotes         getSoundingRelativeOffset () const
                               { return fSoundingRelativeOffset; }
 
   public:
@@ -74,19 +74,19 @@ class EXP msrMoment
     // public services
     // ------------------------------------------------------
 
-    Bool                  operator== (const msrMoment& other) const;
+    Bool                  operator== (const mfMoment& other) const;
 
-    Bool                  operator!= (const msrMoment& other) const
+    Bool                  operator!= (const mfMoment& other) const
                               { return ! ((*this) == other); }
 
-    Bool                  operator< (const msrMoment& other) const;
+    Bool                  operator< (const mfMoment& other) const;
 
-    Bool                  operator>= (const msrMoment& other) const
+    Bool                  operator>= (const mfMoment& other) const
                               { return ! ((*this) < other); }
 
-    Bool                  operator> (const msrMoment& other) const;
+    Bool                  operator> (const mfMoment& other) const;
 
-    Bool                  operator<= (const msrMoment& other) const
+    Bool                  operator<= (const mfMoment& other) const
                               { return ! ((*this) > other); }
 
   public:
@@ -114,10 +114,10 @@ class EXP msrMoment
     // private fields
     // ------------------------------------------------------
 
-    msrWholeNotes         fWrittenPositionInMeseasure;
-    msrWholeNotes         fSoundingRelativeOffset;
+    mfWholeNotes         fWrittenPositionInMeseasure;
+    mfWholeNotes         fSoundingRelativeOffset;
 };
-EXP std::ostream& operator << (std::ostream& os, const msrMoment& elt);
+EXP std::ostream& operator << (std::ostream& os, const mfMoment& elt);
 
 //______________________________________________________________________________
 void testMsrMomentComparisons (std::ostream& os);
@@ -125,4 +125,4 @@ void testMsrMomentComparisons (std::ostream& os);
 
 }
 
-#endif // ___msrMoments___
+#endif // ___mfMoments___

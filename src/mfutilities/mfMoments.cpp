@@ -18,38 +18,38 @@
 
 #include "msrMeasureConstants.h"
 
-#include "msrMoments.h"
+#include "mfMoments.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-msrMoment::msrMoment ()
+mfMoment::mfMoment ()
 {
   fWrittenPositionInMeseasure = K_WHOLE_NOTES_UNKNOWN_;
   fSoundingRelativeOffset     = K_WHOLE_NOTES_UNKNOWN_;
 }
 
-msrMoment::msrMoment (
-  const msrWholeNotes& writtenPositionInMeseasure,
-  const msrWholeNotes& soundingRelativeOffset)
+mfMoment::mfMoment (
+  const mfWholeNotes& writtenPositionInMeseasure,
+  const mfWholeNotes& soundingRelativeOffset)
 {
   fWrittenPositionInMeseasure = writtenPositionInMeseasure;
   fSoundingRelativeOffset     = soundingRelativeOffset;
 }
 
-msrMoment::msrMoment (
-  const msrWholeNotes& writtenPositionInMeseasure)
+mfMoment::mfMoment (
+  const mfWholeNotes& writtenPositionInMeseasure)
 {
   fWrittenPositionInMeseasure = writtenPositionInMeseasure;
-  fSoundingRelativeOffset     = msrWholeNotes (0, 1);
+  fSoundingRelativeOffset     = mfWholeNotes (0, 1);
 }
 
-msrMoment::~msrMoment ()
+mfMoment::~mfMoment ()
 {}
 
-Bool msrMoment::operator== (const msrMoment& other) const
+Bool mfMoment::operator== (const mfMoment& other) const
 {
   Bool result;
 
@@ -63,7 +63,7 @@ Bool msrMoment::operator== (const msrMoment& other) const
   return result;
 }
 
-Bool msrMoment::operator< (const msrMoment& other) const
+Bool mfMoment::operator< (const mfMoment& other) const
 {
   Bool result;
 
@@ -80,7 +80,7 @@ Bool msrMoment::operator< (const msrMoment& other) const
   return result;
 }
 
-Bool msrMoment::operator> (const msrMoment& other) const
+Bool mfMoment::operator> (const mfMoment& other) const
 {
   Bool result;
 
@@ -97,7 +97,7 @@ Bool msrMoment::operator> (const msrMoment& other) const
   return result;
 }
 
-std::string msrMoment::asString () const
+std::string mfMoment::asString () const
 {
   std::stringstream ss;
 
@@ -112,7 +112,7 @@ std::string msrMoment::asString () const
   return ss.str ();
 }
 
-void msrMoment::print (std::ostream& os) const
+void mfMoment::print (std::ostream& os) const
 {
   os <<
     "[Moment" <<
@@ -135,7 +135,7 @@ void msrMoment::print (std::ostream& os) const
   os << ']' << std::endl;
 };
 
-std::ostream& operator << (std::ostream& os, const msrMoment& elt)
+std::ostream& operator << (std::ostream& os, const mfMoment& elt)
 {
   elt.print (os);
   return os;
@@ -144,9 +144,9 @@ std::ostream& operator << (std::ostream& os, const msrMoment& elt)
 //______________________________________________________________________________
 void testMsrMomentComparisons (std::ostream& os)
 {
-  msrMoment m0 (msrWholeNotes (3, 4));
-  msrMoment m1 (msrWholeNotes (3, 4), msrWholeNotes (-1, 16));
-  msrMoment m2 (msrWholeNotes (3, 4), msrWholeNotes (2, 16));
+  mfMoment m0 (mfWholeNotes (3, 4));
+  mfMoment m1 (mfWholeNotes (3, 4), mfWholeNotes (-1, 16));
+  mfMoment m2 (mfWholeNotes (3, 4), mfWholeNotes (2, 16));
 
   os <<
     "m1: " << m1 << std::endl <<
@@ -221,18 +221,18 @@ void testMsrMomentComparisons (std::ostream& os)
 /* output: JMI
 
 m1: [Moment
-fWrittenPositionInMeseasure : [msrWholeNotes 3/4]
-fSoundingRelativeOffset     : [msrWholeNotes -1/16]
+fWrittenPositionInMeseasure : [mfWholeNotes 3/4]
+fSoundingRelativeOffset     : [mfWholeNotes -1/16]
 ]
 
 m0: [Moment
-fWrittenPositionInMeseasure : [msrWholeNotes 3/4]
-fSoundingRelativeOffset     : [msrWholeNotes 0/1]
+fWrittenPositionInMeseasure : [mfWholeNotes 3/4]
+fSoundingRelativeOffset     : [mfWholeNotes 0/1]
 ]
 
 m2: [Moment
-fWrittenPositionInMeseasure : [msrWholeNotes 3/4]
-fSoundingRelativeOffset     : [msrWholeNotes 1/8]
+fWrittenPositionInMeseasure : [mfWholeNotes 3/4]
+fSoundingRelativeOffset     : [mfWholeNotes 1/8]
 ]
 
 

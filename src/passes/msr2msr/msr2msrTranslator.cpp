@@ -2100,7 +2100,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindRegular:
       {
         // fetch the measure whole notes duration from the current measure clone
-        msrWholeNotes
+        mfWholeNotes
           fullMeasureWholeNotesDuration =
             fCurrentMeasureClone->
               getFullMeasureWholeNotesDuration ();
@@ -2119,7 +2119,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
           "voiceCurrentTimeSignature is NULL");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-        msrWholeNotes
+        mfWholeNotes
           wholeNotesPerMeasure =
             voiceCurrentTimeSignature->
               timeSignatureWholeNotesPerMeasure ();

@@ -117,7 +117,7 @@ void msrDivisions::initializeDivisions ()
   // positive powers of 2 of a quarter note
   int bigDivisions = fDivisionsPerQuarterNote;
 
-  for (int i = (int) msrNotesDurationKind::kNotesDurationQuarter; i >= (int) msrNotesDurationKind::kNotesDurationMaxima; --i) {
+  for (int i = (int) mfDurationKind::kDurationQuarter; i >= (int) mfDurationKind::kDurationMaxima; --i) {
     /*
     gLog <<
       msrNotesDurationAsString (msrNotesDuration (i)) <<
@@ -128,7 +128,7 @@ void msrDivisions::initializeDivisions ()
 
     fNotesDurationKindsToDivisions.push_front (
       std::make_pair (
-        msrNotesDurationKind (i), bigDivisions));
+        mfDurationKind (i), bigDivisions));
 
     bigDivisions *= 2;
   } // for
@@ -138,9 +138,9 @@ void msrDivisions::initializeDivisions ()
     int
       smallDivisions =
         fDivisionsPerQuarterNote / 2;
-    msrNotesDurationKind
+    mfDurationKind
       currentNotesDurationKind =
-        msrNotesDurationKind::kNotesDurationEighth;
+        mfDurationKind::kDurationEighth;
 
     while (smallDivisions >= 1) {
       /*
@@ -155,7 +155,7 @@ void msrDivisions::initializeDivisions ()
         std::make_pair (currentNotesDurationKind, smallDivisions));
 
       currentNotesDurationKind =
-        msrNotesDurationKind (
+        mfDurationKind (
           (int) currentNotesDurationKind + 1);
       smallDivisions /= 2;
     } // while
@@ -173,10 +173,10 @@ void msrDivisions::initializeDivisions ()
 
 int msrDivisions::notesDurationKindAsDivisions (
   int             inputLineNumber,
-  msrNotesDurationKind notesDurationKind)
+  mfDurationKind notesDurationKind)
 {
   for (
-    std::list <std::pair <msrNotesDurationKind, int>>::const_iterator i =
+    std::list <std::pair <mfDurationKind, int>>::const_iterator i =
       fNotesDurationKindsToDivisions.begin ();
     i != fNotesDurationKindsToDivisions.end ();
     ++i
@@ -189,7 +189,7 @@ int msrDivisions::notesDurationKindAsDivisions (
   std::stringstream ss;
 
   ss <<
-    "duration " << msrNotesDurationKindAsString (notesDurationKind) <<
+    "duration " << mfDurationKindAsString (notesDurationKind) <<
     " cannot be converted to divisions with " <<
     fDivisionsPerQuarterNote << " divisions per quarter note" <<
     std::endl;
@@ -216,7 +216,7 @@ void msrDivisions::printNotesDurationKindsDivisions (std::ostream& os)
   ++gIndenter;
 
   if (fNotesDurationKindsToDivisions.size ()) {
-    std::list <std::pair <msrNotesDurationKind, int>>::const_iterator
+    std::list <std::pair <mfDurationKind, int>>::const_iterator
       iBegin = fNotesDurationKindsToDivisions.begin (),
       iEnd   = fNotesDurationKindsToDivisions.end (),
       i      = iBegin;
@@ -224,8 +224,8 @@ void msrDivisions::printNotesDurationKindsDivisions (std::ostream& os)
     for ( ; ; ) {
       os <<
         std::setw (6) << std::left <<
-        msrNotesDurationKindAsString (
-          msrNotesDurationKind ((*i).first)) <<
+        mfDurationKindAsString (
+          mfDurationKind ((*i).first)) <<
         ": " <<
         std::setw (5) << std::right <<
         (*i).second;
@@ -294,11 +294,11 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  msrNotesDurationKind baseNotesDurationKind          = msrNotesDurationKind::kNotesDuration1024th;
+  mfDurationKind baseNotesDurationKind          = mfDurationKind::kDuration1024th;
   int             baseNotesDurationDivisions = -1;
 
   // search fNotesDurationsToDivisions in longer to shortest order
-  std::list <std::pair <msrNotesDurationKind, int>>::const_iterator
+  std::list <std::pair <mfDurationKind, int>>::const_iterator
     iBegin = fNotesDurationKindsToDivisions.begin (),
     iEnd   = fNotesDurationKindsToDivisions.end (),
     i      = iBegin;
@@ -328,7 +328,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
       baseNotesDurationDivisions = (*i).second;
 
       result =
-        msrNotesDurationKindAsString (baseNotesDurationKind);
+        mfDurationKindAsString (baseNotesDurationKind);
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gGlobalMxsr2msrOahGroup->getTraceDivisions ()) {
@@ -526,7 +526,7 @@ std::string msrDivisions::tupletDivisionspitchAndOctaveAsString (
 
 std::string tupletWholeNotesPitchAndOctaveAsString (
   int             inputLineNumber,
-  const msrWholeNotes& wholeNotes,
+  const mfWholeNotes& wholeNotes,
   int             actualNotes,
   int             normalNotes)
 {
