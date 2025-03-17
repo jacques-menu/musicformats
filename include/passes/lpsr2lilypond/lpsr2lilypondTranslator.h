@@ -832,7 +832,7 @@ class EXP lpsr2lilypondTranslator :
     // durations
     // ------------------------------------------------------
 
-    mfWholeNotes         fLastMetWholeNotes;
+    mfWholeNotes          fLastMetWholeNotes;
 
     Bool                  wholeNotesDurationShouldBeGenerated (
                             const mfWholeNotes& wholeNotes);

@@ -76,7 +76,7 @@ msrStem::msrStem (
   msrStemKind stemKind)
     : msrElement (inputLineNumber)
 {
-  fStemKind   = stemKind;
+  fStemKind = stemKind;
 }
 
 msrStem::~msrStem ()

@@ -83,7 +83,7 @@ msrSlide::msrSlide (
 {
   fSlideNumber = slideNumber;
 
-  fSlideTypeKind     = slideTypeKind;
+  fSlideTypeKind = slideTypeKind;
   fSlideLineTypeKind = slideLineTypeKind;
 
   fSlideTextValue = slideTextValue;
@@ -188,7 +188,7 @@ void msrSlide::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }

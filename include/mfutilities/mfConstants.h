@@ -93,14 +93,23 @@ EXP extern const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_;
 
 EXP extern const mfWholeNotes K_WHOLE_NOTES_UNKNOWN_;
 
+EXP extern const mfWholeNotes K_WHOLE_NOTES_ZERO;
+
 EXP extern const std::string
   kWholeNotePrefix,
   kWholeNoteDefaultValueString;
 
-// moments
+// position in measure
 //______________________________________________________________________________
 
-EXP extern const mfWholeNotes K_POSITION_IN_MEASURE_UNKNOWN_;
+EXP extern const int K_POSITION_IN_MEASURE_NUMERATOR_UNKNOWN_;
+
+EXP extern const mfPositionInMeasure K_POSITION_IN_MEASURE_UNKNOWN_;
+
+EXP extern const mfPositionInMeasure K_POSITION_IN_MEASURE_ZERO;
+
+// moments
+//______________________________________________________________________________
 
 EXP extern const mfMoment K_MOMENT_UNKNOWN_;
 

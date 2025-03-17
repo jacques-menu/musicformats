@@ -78,7 +78,7 @@ class EXP msrMeasureElement : public msrElement
                             const mfPositionInMeasure& voicePosition,
                             const std::string&         context);
 
-    mfWholeNotes          getMeasureElementVoicePosition () const;
+    mfPositionInMeasure   getMeasureElementVoicePosition () const;
 
 //     void                  setMeasureMoment (
 //                             const mfMoment&   measureMoment,

@@ -67,9 +67,9 @@ msr2mxsrTranslator::msr2mxsrTranslator (
   fVisitedMsrScore = visitedMsrScore;
 
   // backup and forward handling
-  fCurrentPositionInMeasure = mfPositionInMeasure (0, 1);
+  fCurrentPositionInMeasure = K_POSITION_IN_MEASURE_ZERO;
 
-  fCurrentCumulatedSkipsWholeNotesDurations = mfWholeNotes (0, 1);
+  fCurrentCumulatedSkipsWholeNotesDurations = K_WHOLE_NOTES_ZERO;
 
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
@@ -1479,7 +1479,7 @@ void msr2mxsrTranslator::visitStart (S_msrScaling& elt)
 
   // get the values
   fMillimeters = elt->getMillimeters ();
-  fTenths      = elt->getTenths ();
+  fTenths = elt->getTenths ();
 
   if (fMillimeters > 0) {
     // create a scaling element
@@ -3524,10 +3524,10 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
   fCurrentMeasureElement = nullptr;
 
   // reset the current position in the measure
-  fCurrentPositionInMeasure = mfPositionInMeasure (0, 1);
+  fCurrentPositionInMeasure = K_POSITION_IN_MEASURE_ZERO;
 
   // reset the cumulated skip durations informations
-  fCurrentCumulatedSkipsWholeNotesDurations = mfWholeNotes (0, 1);
+  fCurrentCumulatedSkipsWholeNotesDurations = K_WHOLE_NOTES_ZERO;
 
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
@@ -4451,8 +4451,8 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
  size_t tempoWordsListSize = tempoWordsList.size ();
 */
 
-  mfDottedNotesDuration tempoBeatUnit  = elt->getTempoBeatUnit ();
-  std::string       tempoPerMinute = elt->getTempoPerMinute ();
+  mfDottedNotesDuration tempoBeatUnit = elt->getTempoBeatUnit ();
+  std::string           tempoPerMinute = elt->getTempoPerMinute ();
 
   msrTempoParenthesizedKind
     tempoParenthesizedKind =
@@ -5174,10 +5174,10 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   mfWholeNotes
     backupNotesDuration =
       previousNotePositionInMeasure
-        +
-      previousNoteSoundingWholeNotes
         -
-      theMsrNotePositionInMeasure;
+      theMsrNotePositionInMeasure
+        +
+      previousNoteSoundingWholeNotes;
 
   int
     backupNotesDurationDivisions =
@@ -5268,7 +5268,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   appendOtherMusicXMLElementToMeasure (backupElement);
 
   // reset the cumulated skip durations informations
-  fCurrentCumulatedSkipsWholeNotesDurations = mfWholeNotes (0, 1);
+  fCurrentCumulatedSkipsWholeNotesDurations = K_WHOLE_NOTES_ZERO;
 
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
@@ -5367,7 +5367,7 @@ void msr2mxsrTranslator::appendAForwardToMeasure (
   appendOtherMusicXMLElementToMeasure (forwardElement);
 
   // reset the cumulated skip durations informations
-  fCurrentCumulatedSkipsWholeNotesDurations = mfWholeNotes (0, 1);
+  fCurrentCumulatedSkipsWholeNotesDurations = K_WHOLE_NOTES_ZERO;
 
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
@@ -5492,11 +5492,11 @@ fCurrentCumulatedSkipsVoiceNumber
         if (fCurrentCumulatedSkipsWholeNotesDurations.getNumerator () != 0) {
           // a skip may have been created due to a <backup /> to a position
           // that is not at the beginning of the measure
-          mfWholeNotes
+          mfPositionInMeasure
             notePositionInMeasure =
               theMsrNote->getMeasureElementPositionInMeasure ();
 
-          mfWholeNotes
+          mfPositionInMeasure
             positionAfterNoteInMeasure =
               notePositionInMeasure +
                 theMsrNote->getMeasureElementSoundingWholeNotes ();
@@ -8018,10 +8018,10 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
   fCurrentNoteElement = nullptr;
 
   // forget about the note notations element
-  fCurrentNoteNotationsElement              = nullptr;
-  fCurrentNoteNotationsOrnamentsElement     = nullptr;
+  fCurrentNoteNotationsElement = nullptr;
+  fCurrentNoteNotationsOrnamentsElement = nullptr;
   fCurrentNoteNotationsArticulationsElement = nullptr;
-  fCurrentNoteNotationsTechnicalsElement    = nullptr;
+  fCurrentNoteNotationsTechnicalsElement = nullptr;
 }
 
 //________________________________________________________________________
@@ -8328,7 +8328,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
 
     // append the harmony to the current voice clone
     fCurrentVoiceClone->
-      appendHarmonyToVoiceClone (
+      cascadeAppendHarmonyToVoiceClone (
         fCurrentHarmonyClone);
   }
 

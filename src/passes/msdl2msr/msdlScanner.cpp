@@ -88,7 +88,7 @@ msdlScanner::msdlScanner (std::istream& inputStream)
 {
   // trace
 #ifdef MF_TRACE_IS_ENABLED
-  fTraceTokens        = gGlobalMsdl2msrOahGroup->getTraceTokens ();
+  fTraceTokens = gGlobalMsdl2msrOahGroup->getTraceTokens ();
   fTraceTokensDetails = gGlobalMsdl2msrOahGroup->getTraceTokensDetails ();
 #endif // MF_TRACE_IS_ENABLED
 
@@ -120,7 +120,7 @@ msdlScanner::msdlScanner (std::istream& inputStream)
   fCurrentTokenPositionInInput = -1;
 
   fCurrentTokenLineNumber = 1;
-  fCurrentTokenPositionInLine  = 0;
+  fCurrentTokenPositionInLine = 0;
 
   fTokensCounter = 0;
 
@@ -404,7 +404,7 @@ msdlTokenKind msdlScanner::fetchNextToken (
     // put the token position aside
     fCurrentTokenPositionInInput = fCurrentPositionInInput;
 
-    fCurrentTokenLineNumber     = fCurrentLineNumber;
+    fCurrentTokenLineNumber = fCurrentLineNumber;
     fCurrentTokenPositionInLine = fCurrentPositionInLine;
 
     switch (fCurrentCharacter) {

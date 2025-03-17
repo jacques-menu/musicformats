@@ -96,7 +96,7 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
 //   fOnGoingChord = false;
 
   // tuplets handling
-  fCurrentTupletNumber  = -1;
+  fCurrentTupletNumber = -1;
   // fPreviousTupletNumber = -1;
 
   fCurrentNoteBelongsToATuplet = false;
@@ -4290,7 +4290,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   fPartNumberOfMeasures = 0;
 
   // staves and voices
-  fCurrentNoteStaffNumber  = K_STAFF_NUMBER_UNKNOWN_;
+  fCurrentNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
   fPreviousNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 
   fCurrentNoteVoiceNumber = K_VOICE_NUMBER_UNKNOWN_;

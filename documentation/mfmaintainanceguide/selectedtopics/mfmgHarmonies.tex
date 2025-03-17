@@ -640,7 +640,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 /* JMI v0.9.67
     // append the harmony to the part harmonies voice
     partHarmoniesVoice->
-      appendHarmonyToVoice (
+      cascadeAppendHarmonyToVoice (
         harmony);
 */
     // don't append the harmony to the part harmonies voice // BLARK
@@ -754,7 +754,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
     for (S_msrHarmony harmony : noteHarmoniesList) {
       // append the harmony to the part harmonies voice
       partHarmoniesVoice->
-        appendHarmonyToVoice (
+        cascadeAppendHarmonyToVoice (
           harmony);
     } // for
   }
@@ -845,7 +845,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
 
     // append the harmony to the current voice clone
     fCurrentVoiceClone->
-      appendHarmonyToVoiceClone (
+      cascadeAppendHarmonyToVoiceClone (
         fCurrentHarmonyClone);
   }
 
@@ -975,7 +975,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
 
     // append the harmony to the current voice clone
     fCurrentVoiceClone->
-      appendHarmonyToVoiceClone (
+      cascadeAppendHarmonyToVoiceClone (
         fCurrentHarmonyClone);
   }
 

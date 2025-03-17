@@ -266,7 +266,7 @@ mfPass::mfPass (
   mfPassIDKind passIDKind,
   std::string  passDescription)
 {
-  fPassIDKind      = passIDKind;
+  fPassIDKind = passIDKind;
   fPassDescription = passDescription;
 }
 

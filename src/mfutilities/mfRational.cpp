@@ -53,7 +53,7 @@ if (false) // JMI v0.9.70
 
 mfRational::mfRational(const mfRational& rat)
 {
-  fNumerator   = rat.fNumerator;
+  fNumerator = rat.fNumerator;
   fDenominator = rat.fDenominator;
 }
 
@@ -77,7 +77,7 @@ mfRational::mfRational (const std::string& theString)
     // found a well-formed specification,
     // need to check its contents
     std::string
-      numerator   = sm [1],
+      numerator = sm [1],
       denominator = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -283,7 +283,7 @@ mfRational& mfRational::operator /= (const mfRational &rat)
 }
 
 mfRational& mfRational::operator = (const mfRational& rat) {
-  fNumerator   = rat.fNumerator;
+  fNumerator = rat.fNumerator;
   fDenominator = rat.fDenominator;
 
   return (*this);
@@ -341,7 +341,7 @@ void mfRational::rationalise ()
     fDenominator = 1;
   }
   else if (fDenominator < 0) {
-    fNumerator   = -fNumerator;
+    fNumerator = -fNumerator;
     fDenominator = -fDenominator;
   }
 }

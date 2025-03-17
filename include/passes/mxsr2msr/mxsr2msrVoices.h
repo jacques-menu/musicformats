@@ -143,7 +143,7 @@ class mxsrVoice : public smartable
     S_msrNote             fCurrentOuterMostTupletFirstNote;
     S_msrTuplet           fCurrentOuterMostTuplet;
 
-    mfWholeNotes         fCurrentOuterMostTupletRelativeOffset;
+    mfWholeNotes          fCurrentOuterMostTupletRelativeOffset;
 
   private:
 

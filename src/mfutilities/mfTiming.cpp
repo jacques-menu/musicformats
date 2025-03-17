@@ -69,11 +69,11 @@ mfTimingItem::mfTimingItem (
   clock_t            startClock,
   clock_t            endClock)
 {
-  fActivity       = activity;
-  fDescription    = description;
+  fActivity = activity;
+  fDescription = description;
   fTimingItemKind = timingItemKind;
-  fStartClock     = startClock;
-  fEndClock       = endClock;
+  fStartClock = startClock;
+  fEndClock = endClock;
 }
 
 //______________________________________________________________________________
@@ -107,9 +107,9 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
   // printing the details
 
   int
-    activityWidth    = 0,
-    kindWidth        = 0,
-    secondsWidth     = 0,
+    activityWidth = 0,
+    kindWidth = 0,
+    secondsWidth = 0,
     descriptionWidth = 0;
 
   // compute the timing items columns widths
@@ -227,9 +227,9 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
   // print the timing items
   // -------------------------------------------
   clock_t
-    totalClock          = 0,
+    totalClock = 0,
     totalMandatoryClock = 0,
-    totalOptionalClock  = 0;
+    totalOptionalClock = 0;
 
   for (S_mfTimingItem theTimingItem : fTimingItemsList) {
     // print the activity
@@ -339,43 +339,43 @@ void mfTimingItemsList::doPrint (std::ostream& os) const
 
   // set the total spent times columns widths
   int
-    totalClockWidth          = 1,
+    totalClockWidth = 1,
     totalMandatoryClockWidth = 1,
-    totalOptionalClockWidth  = 1,
-    totalsPrecision          = secondsPrecision;
+    totalOptionalClockWidth = 1,
+    totalsPrecision = secondsPrecision;
 
   switch (gEarlyOptions.getEarlyLanguageKind ()) {
     case mfLanguageKind::kMusicFormatsLanguage_UNKNOWN_:
       break;
     case mfLanguageKind::kMusicFormatsLanguageEnglish:
-      totalClockWidth          = 11;
+      totalClockWidth = 11;
       totalMandatoryClockWidth = 9;
-      totalOptionalClockWidth  = 8;
+      totalOptionalClockWidth = 8;
       break;
     case mfLanguageKind::kMusicFormatsLanguageFrench:
-      totalClockWidth          = 11;
+      totalClockWidth = 11;
       totalMandatoryClockWidth = 11;
-      totalOptionalClockWidth  = 8;
+      totalOptionalClockWidth = 8;
       break;
     case mfLanguageKind::kMusicFormatsLanguageItalian:
-      totalClockWidth          = 11;
+      totalClockWidth = 11;
       totalMandatoryClockWidth = 11;
-      totalOptionalClockWidth  = 8;
+      totalOptionalClockWidth = 8;
       break;
     case mfLanguageKind::kMusicFormatsLanguageGerman:
-      totalClockWidth          = 11;
+      totalClockWidth = 11;
       totalMandatoryClockWidth = 11;
-      totalOptionalClockWidth  = 8;
+      totalOptionalClockWidth = 8;
       break;
     case mfLanguageKind::kMusicFormatsLanguageSpanish:
-      totalClockWidth          = 11;
+      totalClockWidth = 11;
       totalMandatoryClockWidth = 11;
-      totalOptionalClockWidth  = 8;
+      totalOptionalClockWidth = 8;
       break;
     case mfLanguageKind::kMusicFormatsLanguageDutch:
-      totalClockWidth          = 11;
+      totalClockWidth = 11;
       totalMandatoryClockWidth = 11;
-      totalOptionalClockWidth  = 11;
+      totalOptionalClockWidth = 11;
       break;
   } // switch
 

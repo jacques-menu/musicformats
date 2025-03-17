@@ -43,7 +43,7 @@ lpsrComment::lpsrComment (
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
     : lpsrElement (inputLineNumber)
 {
-  fContents       = contents;
+  fContents = contents;
   fCommentGapKind = commentGapAfterwardsKind;
 }
 

@@ -48,7 +48,7 @@ bsrPagination::bsrPagination (
   int braillePageNumber)
     : bsrLineContentsElement (inputLineNumber)
 {
-  fPrintPageNumber   = printPageNumber;
+  fPrintPageNumber = printPageNumber;
   fBraillePageNumber = braillePageNumber;
 
   fPaginationCellsList = buildCellsList ();

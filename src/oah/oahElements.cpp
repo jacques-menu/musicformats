@@ -275,8 +275,8 @@ oahElement::oahElement (
   oahElementValueKind      elementValueKind,
   oahElementVisibilityKind elementVisibilityKind)
 {
-  fLongName    = longName;
-  fShortName   = shortName;
+  fLongName = longName;
+  fShortName = shortName;
   fDescription = description;
 
   fElementValueKind = elementValueKind;
@@ -289,8 +289,8 @@ oahElement::oahElement (
 
 oahElement::oahElement ()
 {
-  fLongName    = "";
-  fShortName   = "";
+  fLongName = "";
+  fShortName = "";
   fDescription = "";
 
   fElementValueKind =
@@ -814,8 +814,8 @@ oahElementUse::oahElementUse (
   const std::string& valueUsed)
 {
   fElementUsed = elementUsed;
-  fNameUsed    = nameUsed;
-  fValueUsed   = valueUsed;
+  fNameUsed = nameUsed;
+  fValueUsed = valueUsed;
 }
 
 oahElementUse::~oahElementUse ()

@@ -114,7 +114,7 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletElementsList; };
 
     // tuplet display whole notes
-    mfWholeNotes         getTupletDisplayWholeNotes () const
+    mfWholeNotes          getTupletDisplayWholeNotes () const
                               { return fTupletDisplayWholeNotes; };
 
     // tuplet placement
@@ -141,8 +141,8 @@ class EXP msrTuplet : public msrTupletElement
                             const std::string&         context) override;
 
     void                  setTupletMembersPositionInMeasures (
-                            const S_msrMeasure& measure,
-                            const mfWholeNotes& positionInMeasure);
+                            const S_msrMeasure&        measure,
+                            const mfPositionInMeasure& positionInMeasure);
 
   public:
 
@@ -229,7 +229,7 @@ class EXP msrTuplet : public msrTupletElement
     msrTupletFactor       fTupletFactor;
 
     // display whole notes
-    mfWholeNotes         fTupletDisplayWholeNotes;
+    mfWholeNotes          fTupletDisplayWholeNotes;
 
     // placement
     msrPlacementKind      fTupletPlacementKind;

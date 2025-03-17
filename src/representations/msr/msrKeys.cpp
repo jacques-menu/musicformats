@@ -98,8 +98,8 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
 #endif // MF_TRACE_IS_ENABLED
 
   fKeyDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
-  fKeyAlterationKind    = msrAlterationKind::kAlteration_UNKNOWN_;
-  fKeyOctaveKind        = msrOctaveKind::kOctave_UNKNOWN_;
+  fKeyAlterationKind = msrAlterationKind::kAlteration_UNKNOWN_;
+  fKeyOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
 }
 
 msrHumdrumScotKeyItem::~msrHumdrumScotKeyItem ()
@@ -674,7 +674,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
   std::string
     keyTonic = sm [1],
-    keyMode  = sm [2];
+    keyMode = sm [2];
 
   // compute the keyTonicPitchKind from the keyTonic
   msrQuarterTonesPitchKind

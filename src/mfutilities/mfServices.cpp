@@ -494,7 +494,7 @@ mfServiceRunData::mfServiceRunData (
 
   // measure numbers
   fCurrentMeasureNumber = K_MEASURE_NUMBER_UNKNOWN_;
-  fScoreMeasuresNumber  = 0;
+  fScoreMeasuresNumber = 0;
 }
 
 // mfServiceRunData::mfServiceRunData (

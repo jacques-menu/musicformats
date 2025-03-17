@@ -87,7 +87,7 @@ bsrTempo::bsrTempo (
   const S_msrTempo& mTempo)
     : bsrLineContentsElement (inputLineNumber)
 {
-  fMsrTempo  = mTempo;
+  fMsrTempo = mTempo;
 
   fTempoCellsList = buildCellsList ();
 }

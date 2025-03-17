@@ -61,7 +61,7 @@ static void catchSignals ()
   sigemptyset (&sa.sa_mask);
 
   sa.sa_sigaction = _sigaction;
-  sa.sa_flags     = SA_SIGINFO;
+  sa.sa_flags = SA_SIGINFO;
 
   sigaction (SIGSEGV, &sa, NULL);
   sigaction (SIGILL, &sa, NULL);

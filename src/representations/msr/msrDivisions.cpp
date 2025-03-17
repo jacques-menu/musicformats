@@ -294,8 +294,8 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  mfDurationKind baseNotesDurationKind          = mfDurationKind::kDuration1024th;
-  int             baseNotesDurationDivisions = -1;
+  mfDurationKind baseNotesDurationKind = mfDurationKind::kDuration1024th;
+  int            baseNotesDurationDivisions = -1;
 
   // search fNotesDurationsToDivisions in longer to shortest order
   std::list <std::pair <mfDurationKind, int>>::const_iterator
@@ -324,7 +324,7 @@ std::string msrDivisions::divisionspitchAndOctaveAsString (
 
     if ((*i).second <= divisions) {
       // found base duration in list
-      baseNotesDurationKind      = (*i).first;
+      baseNotesDurationKind = (*i).first;
       baseNotesDurationDivisions = (*i).second;
 
       result =

@@ -274,18 +274,18 @@ class EXP msrPart : public msrPartGroupElement
     // part drawing measure position
 
     void                  setPartCurrentDrawingPositionInMeasure (
-                            int                  inputLineNumber,
-                            const mfWholeNotes& positionInMeasure);
+                            int                        inputLineNumber,
+                            const mfPositionInMeasure& positionInMeasure);
 
     void                  resetPartCurrentDrawingPositionInMeasure (
                             int inputLineNumber);
 
     void                  incrementPartCurrentDrawingPositionInMeasure (
-                            int                  inputLineNumber,
+                            int                 inputLineNumber,
                             const mfWholeNotes& wholeNotesDelta);
 
     void                  decrementPartCurrentDrawingPositionInMeasure (
-                            int                  inputLineNumber,
+                            int                 inputLineNumber,
                             const mfWholeNotes& wholeNotesDelta);
 
     mfPositionInMeasure   getPartCurrentDrawingPositionInMeasure () const
@@ -330,13 +330,13 @@ class EXP msrPart : public msrPartGroupElement
 
     // whole notes durations
 
-    mfWholeNotes         fetchPartMeasuresWholeNotesVectorAt (
+    mfWholeNotes          fetchPartMeasuresWholeNotesVectorAt (
                             int inputLineNumber,
                             int indexValue) const;
 
     void                  registerOrdinalMeasureNumberWholeNotes (
-                            int                  inputLineNumber,
-                            int                  measureOrdinalNumber,
+                            int                 inputLineNumber,
+                            int                 measureOrdinalNumber,
                             const mfWholeNotes& wholeNotes);
 
     // path shortest note
@@ -567,7 +567,7 @@ class EXP msrPart : public msrPartGroupElement
                             const S_msrFiguredBass&    figuredBass,
                             const mfPositionInMeasure& positionInMeasureToAppendAt);
 
-    void                  appendFiguredBassesListToPart (
+    void                  cascadeAppendFiguredBassesListToPart (
                             int                                 inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
                             const mfPositionInMeasure&          positionInMeasureToAppendAt);
@@ -737,7 +737,7 @@ class EXP msrPart : public msrPartGroupElement
     // fPartShortestNoteWholeNotes and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    mfWholeNotes         fPartShortestNoteWholeNotes;
+    mfWholeNotes          fPartShortestNoteWholeNotes;
     msrTupletFactor       fPartShortestNoteTupletFactor;
 
     // transposition

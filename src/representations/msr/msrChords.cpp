@@ -195,15 +195,15 @@ msrChord::msrChord (int inputLineNumber)
 //   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
   setMeasureElementSoundingWholeNotes (
-    mfWholeNotes (0, 1),
+    K_WHOLE_NOTES_ZERO,
     "msrChord::msrChord()");
 
-  fChordDisplayWholeNotes = mfWholeNotes (0, 1);
+  fChordDisplayWholeNotes = K_WHOLE_NOTES_ZERO;
 
   fChordGraphicNotesDurationKind =
     mfDurationKind::kDuration_UNKNOWN_;
 
-  fChordIsFirstChordInADoubleTremolo  = false;
+  fChordIsFirstChordInADoubleTremolo = false;
   fChordIsSecondChordInADoubleTremolo = false;
 }
 
@@ -219,10 +219,10 @@ msrChord::msrChord (int inputLineNumber)
 //   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 //
 //   setMeasureElementSoundingWholeNotes (
-//     mfWholeNotes (0, 1),
+//     K_WHOLE_NOTES_ZERO,
 //     "msrChord::msrChord()");
 //
-//   fChordDisplayWholeNotes = mfWholeNotes (0, 1);
+//   fChordDisplayWholeNotes = K_WHOLE_NOTES_ZERO;
 //
 //   fChordGraphicNotesDurationKind =
 //     mfDurationKind::kDuration_UNKNOWN_;
@@ -248,7 +248,7 @@ msrChord::msrChord (
 
   fChordGraphicNotesDurationKind = chordGraphicNotesDurationKind;
 
-  fChordIsFirstChordInADoubleTremolo  = false;
+  fChordIsFirstChordInADoubleTremolo = false;
   fChordIsSecondChordInADoubleTremolo = false;
 }
 
@@ -640,8 +640,8 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
 // }
 
 void msrChord::setChordMembersPositionInMeasure (
-  const S_msrMeasure&  measure,
-  const mfWholeNotes& positionInMeasure)
+  const S_msrMeasure&        measure,
+  const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -3003,7 +3003,7 @@ void msrChord::print (std::ostream& os) const
       fMeasureElementUpLinkToMeasure
         ? fMeasureElementUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
-        : mfWholeNotes (0, 1); // JMI
+        : K_WHOLE_NOTES_ZERO; // JMI
 
   os <<
     "[Chord" <<
@@ -3797,7 +3797,7 @@ void msrChord::printFull (std::ostream& os) const
       fMeasureElementUpLinkToMeasure
         ? fMeasureElementUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
-        : mfWholeNotes (0, 1); // JMI
+        : K_WHOLE_NOTES_ZERO; // JMI
 
   os <<
     "[Chord FULL" <<

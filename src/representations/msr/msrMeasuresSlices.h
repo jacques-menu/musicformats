@@ -109,8 +109,8 @@ class msrSimultaneousNotesChunk : public smartable
     // creation
     // ------------------------------------------------------
 
-      static SMARTP<msrSimultaneousNotesChunk> create (
-                            const mfWholeNotes& chunkPositionInMeasure);
+    static SMARTP<msrSimultaneousNotesChunk> create (
+                            const mfPositionInMeasure& chunkPositionInMeasure);
 
   protected:
 
@@ -118,7 +118,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
                           msrSimultaneousNotesChunk (
-                            const mfWholeNotes& chunkPositionInMeasure);
+                            const mfPositionInMeasure& chunkPositionInMeasure);
 
     virtual               ~msrSimultaneousNotesChunk ();
 
@@ -127,7 +127,7 @@ class msrSimultaneousNotesChunk : public smartable
     // set and get
     // ------------------------------------------------------
 
-    mfWholeNotes         getChunkPositionInMeasure () const
+    mfPositionInMeasure   getChunkPositionInMeasure () const
                               { return fChunkPositionInMeasure; }
 
     const std::list <S_msrNote>&
@@ -135,7 +135,7 @@ class msrSimultaneousNotesChunk : public smartable
                               { return fChunkNotesList; }
 
 
-    mfWholeNotes         getChunkDurationWholeNotes () const
+    mfWholeNotes          getChunkDurationWholeNotes () const
                               { return fChunkDurationWholeNotes; }
 
   public:
@@ -165,9 +165,10 @@ class msrSimultaneousNotesChunk : public smartable
     // private fields
     // ------------------------------------------------------
 
-    mfWholeNotes         fChunkPositionInMeasure;
-    std::list <S_msrNote>  fChunkNotesList;
-    mfWholeNotes         fChunkDurationWholeNotes;
+    mfPositionInMeasure   fChunkPositionInMeasure;
+
+    std::list <S_msrNote> fChunkNotesList;
+    mfWholeNotes          fChunkDurationWholeNotes;
 };
 typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
 EXP std::ostream& operator << (std::ostream& os, const S_msrSimultaneousNotesChunk& elt);

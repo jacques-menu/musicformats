@@ -37,7 +37,7 @@ class EXP mfRational
     // ------------------------------------------------------
 
                           mfRational (
-                            int num   = 0,
+                            int num = 0,
                             int denom = 1);
 
                           mfRational (const mfRational& rat);

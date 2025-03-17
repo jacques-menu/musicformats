@@ -45,15 +45,15 @@ namespace MusicFormats
 msrMeasureElement::msrMeasureElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
-//       fMeasureMoment (
+//       fMeasureMoment ( JMI 0.9.72 ???
 //         K_POSITION_IN_MEASURE_UNKNOWN_, K_POSITION_IN_MEASURE_UNKNOWN_),
 //       fVoiceMoment (
 //         K_POSITION_IN_MEASURE_UNKNOWN_, K_POSITION_IN_MEASURE_UNKNOWN_)
 {
-  fMeasureElementSoundingWholeNotes = mfPositionInMeasure (0, 1),
+  fMeasureElementSoundingWholeNotes = K_WHOLE_NOTES_ZERO;
 
   fMeasureElementPositionInMeasure = K_POSITION_IN_MEASURE_UNKNOWN_;
-  fMeasureElementVoicePosition   = K_POSITION_IN_MEASURE_UNKNOWN_;
+  fMeasureElementVoicePosition = K_POSITION_IN_MEASURE_UNKNOWN_;
 }
 
 msrMeasureElement::~msrMeasureElement ()
@@ -78,7 +78,7 @@ void msrMeasureElement::setMeasureElementSoundingWholeNotes (
   const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
+  if (gTraceOahGroup->getTraceDurations ()) {
     ++gIndenter;
 
     S_msrMeasure
@@ -133,7 +133,7 @@ void msrMeasureElement::incrementMeasureElementSoundingWholeNotesBy (
   const std::string&   context)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
+  if (gTraceOahGroup->getTraceDurations ()) {
     ++gIndenter;
 
     S_msrMeasure
@@ -212,7 +212,7 @@ void msrMeasureElement::setMeasureElementPositionInMeasure (
     std::stringstream ss;
 
     ss <<
-      "Setting the measure position of " <<
+      "Setting the measure position of measure element " <<
       asString () <<
       " to " <<
       positionInMeasure.asString () <<

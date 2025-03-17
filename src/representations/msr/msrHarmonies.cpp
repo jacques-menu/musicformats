@@ -175,7 +175,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_UNKNOWN_;
+  msrIntervalKind resultIntervalKind = msrIntervalKind::kInterval_UNKNOWN_;
 
   S_msrHarmonyInterval
     operand1 =
@@ -1497,7 +1497,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 S_msrHarmonyInterval msrHarmonyInterval::intervalSum (
   const S_msrHarmonyInterval& otherHarmonyInterval)
 {
-  msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_UNKNOWN_;
+  msrIntervalKind resultIntervalKind = msrIntervalKind::kInterval_UNKNOWN_;
   int             resultRelativeOctave = 0;
 
   msrIntervalKind
@@ -3645,9 +3645,9 @@ msrHarmonyDegree::msrHarmonyDegree (
   msrHarmonyDegreeTypeKind harmonyDegreeTypeKind)
     : msrElement (inputLineNumber)
 {
-  fHarmonyDegreeValue          = harmonyDegreeValue;
+  fHarmonyDegreeValue = harmonyDegreeValue;
   fHarmonyDegreeAlterationKind = harmonyDegreeAlterationKind;
-  fHarmonyDegreeTypeKind       = harmonyDegreeTypeKind;
+  fHarmonyDegreeTypeKind = harmonyDegreeTypeKind;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmonies ()) {
@@ -3913,7 +3913,7 @@ msrHarmonyContents::msrHarmonyContents (
   msrSemiTonesPitchKind harmonyContentsRootNote,
   msrHarmonyKind        harmonyContentsHarmonyKind)
 {
-  fHarmonyContentsRootNote    = harmonyContentsRootNote;
+  fHarmonyContentsRootNote = harmonyContentsRootNote;
   fHarmonyContentsHarmonyKind = harmonyContentsHarmonyKind;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -4344,7 +4344,7 @@ msrHarmony::msrHarmony (
 
   // a harmony is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeHarmonyInAHarmoniesMeasure()
-  fMeasureElementPositionInMeasure = mfPositionInMeasure (0, 1);
+  fMeasureElementPositionInMeasure = K_POSITION_IN_MEASURE_ZERO;
 
   fHarmoniesStaffNumber = harmoniesStaffNumber;
 

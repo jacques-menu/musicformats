@@ -27,12 +27,22 @@ namespace MusicFormats
 //______________________________________________________________________________
 class EXP mfPositionInMeasure
 /*
-  an mfPositionInMeasure is a fraction of a whole notes duration
+  an mfPositionInMeasure is a fraction
   whose denominator is strictly positive
   and which is in rationalised form at all times,
   directly derived from libmusicxml2's rational class
+
+  It is sometimes necessary to create a position in measure
+  from a whole notes value, or converserly,
+  when handling measures contents
 */
 {
+  public:
+
+    static mfPositionInMeasure
+                          createFromWholeNotes (
+                            const mfWholeNotes& wholeNotes);
+
   public:
 
     // constructors/destructor
@@ -46,10 +56,11 @@ class EXP mfPositionInMeasure
                           mfPositionInMeasure ();
 
                           mfPositionInMeasure (
-                            int num,
-                            int denom);
+                            int numerator,
+                            int denominator);
 
-                          mfPositionInMeasure (const mfPositionInMeasure& wholeNotes);
+                          mfPositionInMeasure (
+                            const mfPositionInMeasure& positionInMeasure);
 
                           mfPositionInMeasure (const std::string& theString);
 
@@ -78,6 +89,10 @@ class EXP mfPositionInMeasure
     // public services
     // ------------------------------------------------------
 
+    // 'rationalise' mfPositionInMeasure values
+
+    void                  rationalise ();
+
     // arithmetic
 
     mfPositionInMeasure   inverse () const;
@@ -89,11 +104,16 @@ class EXP mfPositionInMeasure
     mfPositionInMeasure&  operator += (const mfWholeNotes &wholeNotes);
     mfPositionInMeasure&  operator -= (const mfWholeNotes &wholeNotes);
 
+    mfWholeNotes          operator - (
+                            const mfPositionInMeasure &positionInMeasure) const;
+
     // assignment
 
-    mfPositionInMeasure&  operator = (const mfPositionInMeasure& positionInMeasure);
+    mfPositionInMeasure&  operator = (
+                            const mfPositionInMeasure& positionInMeasure);
 
     // comparisons
+
     Bool                  operator >  (
                             const mfPositionInMeasure& positionInMeasure) const;
     Bool                  operator >= (
@@ -130,6 +150,8 @@ class EXP mfPositionInMeasure
     float                 toFloat () const;
     int                   toInt () const;
 
+    mfWholeNotes          asWholeNotes () const;
+
   public:
 
     // print
@@ -148,9 +170,6 @@ class EXP mfPositionInMeasure
     // private methods
     // ------------------------------------------------------
 
-    // 'rationalise' mfPositionInMeasure values
-    void                  rationalise ();
-
   private:
 
     // private fields
@@ -160,9 +179,13 @@ class EXP mfPositionInMeasure
     int                   fDenominator;
 };
 
-EXP std::ostream& operator << (std::ostream& os, const mfPositionInMeasure& wholeNotes);
+EXP std::ostream& operator << (
+  std::ostream&              os,
+  const mfPositionInMeasure& positionInMeasure);
+
 EXP mfIndentedStringStream& operator << (
-  mfIndentedStringStream& iss, const mfPositionInMeasure& wholeNotes);
+  mfIndentedStringStream&    iss,
+  const mfPositionInMeasure& positionInMeasure);
 
 
 }

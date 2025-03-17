@@ -61,10 +61,10 @@ msrLigature::msrLigature (
   msrPlacementKind       ligaturePlacementKind)
     : msrElement (inputLineNumber)
 {
-  fLigatureNumber        = ligatureNumber;
-  fLigatureKind          = ligatureKind;
-  fLigatureLineEndKind   = ligatureLineEndKind;
-  fLigatureLineTypeKind  = ligatureLineTypeKind;
+  fLigatureNumber = ligatureNumber;
+  fLigatureKind = ligatureKind;
+  fLigatureLineEndKind = ligatureLineEndKind;
+  fLigatureLineTypeKind = ligatureLineTypeKind;
   fLigaturePlacementKind = ligaturePlacementKind;
 }
 

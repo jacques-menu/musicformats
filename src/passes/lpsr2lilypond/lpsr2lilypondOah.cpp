@@ -430,7 +430,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
   }
 
   std::string
-    partName             = sm [1],
+    partName = sm [1],
     destinationPitchName = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -843,7 +843,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   }
 
   std::string
-    partID               = sm [1],
+    partID = sm [1],
     destinationPitchName = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -1147,7 +1147,7 @@ msrOctaveEntryVariable::msrOctaveEntryVariable (
   const std::string& variableName,
   msrOctaveEntryKind octaveEntryKind)
 {
-  fVariableName    = variableName;
+  fVariableName = variableName;
   fOctaveEntryKind = octaveEntryKind;
 }
 
@@ -2650,7 +2650,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
     oahError (ss.str ());
   }
 
-  std::string chordContents     = sm [1];
+  std::string chordContents = sm [1];
   std::string chordsDisplaycode = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -5429,8 +5429,8 @@ R"()",
   // midiTempo
   // --------------------------------------
 
-  std::string midiTempoNotesDuration  = "8";
-  int    midiTempoPerSecond = 180;
+  std::string midiTempoNotesDuration = "8";
+  int         midiTempoPerSecond = 180;
 
   fMidiTempo.setMidiTempoNotesDuration (midiTempoNotesDuration);
   fMidiTempo.setMidiTempoPerSecond (midiTempoPerSecond);

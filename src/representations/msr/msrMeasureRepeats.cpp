@@ -992,7 +992,7 @@ msrMeasureRepeat::msrMeasureRepeat (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fMeasureRepeatMeasuresNumber = measureRepeatMeasuresNumber;
-  fMeasureRepeatSlashesNumber  = measureRepeatSlashesNumber;
+  fMeasureRepeatSlashesNumber = measureRepeatSlashesNumber;
 
   // measures repeat build phase
   fCurrentMeasureRepeatBuildPhaseKind =

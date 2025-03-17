@@ -153,7 +153,7 @@ bsrNote::bsrNote (
   bsrAccidentalKind accidentalKind)
     : bsrLineContentsElement (inputLineNumber)
 {
-  fNoteValueKind  = noteValueKind;
+  fNoteValueKind = noteValueKind;
   fNoteDotsNumber = noteDotsNumber;
 
   fNoteValueSizeIsNeeded = false;

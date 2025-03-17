@@ -132,13 +132,13 @@ msrLength::msrLength (
   float             lengthValue)
 {
   fLengthUnitKind = lengthUnitKind;
-  fLengthValue    = lengthValue;
+  fLengthValue = lengthValue;
 }
 
 msrLength::msrLength ()
 {
   fLengthUnitKind = msrLengthUnitKind::kUnitMillimeter;
-  fLengthValue    = 0.0;
+  fLengthValue = 0.0;
 }
 
 msrLength::~msrLength ()

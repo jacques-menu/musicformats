@@ -65,7 +65,7 @@ msrFrameNote::msrFrameNote (
     : msrElement (inputLineNumber)
 {
   fFrameNoteStringNumber = frameNoteStringNumber;
-  fFrameNoteFretNumber   = frameNoteFretNumber;
+  fFrameNoteFretNumber = frameNoteFretNumber;
 
   fFrameNoteFingering = frameNoteFingering;
 
@@ -273,8 +273,8 @@ msrFrame::msrFrame (
   int frameFirstFretNumber)
     : msrElement (inputLineNumber)
 {
-  fFrameStringsNumber   = frameStringsNumber;
-  fFrameFretsNumber     = frameFretsNumber;
+  fFrameStringsNumber = frameStringsNumber;
+  fFrameFretsNumber = frameFretsNumber;
   fFrameFirstFretNumber = frameFirstFretNumber;
 
   fFrameContainsFingerings = false;

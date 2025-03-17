@@ -44,7 +44,7 @@ lpsrNewLyricsBlock::lpsrNewLyricsBlock (
     : lpsrElement (inputLineNumber)
 {
   fStanza = stanza;
-  fVoice  = voice;
+  fVoice = voice;
 }
 
 lpsrNewLyricsBlock::~lpsrNewLyricsBlock ()

@@ -27,23 +27,23 @@ namespace MusicFormats
 //______________________________________________________________________________
 mfMoment::mfMoment ()
 {
-  fWrittenPositionInMeseasure = K_WHOLE_NOTES_UNKNOWN_;
-  fSoundingRelativeOffset     = K_WHOLE_NOTES_UNKNOWN_;
+  fWrittenPositionInMeseasure = K_POSITION_IN_MEASURE_UNKNOWN_;
+  fSoundingRelativeOffset = K_WHOLE_NOTES_UNKNOWN_;
 }
 
 mfMoment::mfMoment (
-  const mfWholeNotes& writtenPositionInMeseasure,
-  const mfWholeNotes& soundingRelativeOffset)
+  const mfPositionInMeasure& writtenPositionInMeasure,
+  const mfWholeNotes&        soundingRelativeOffset)
 {
-  fWrittenPositionInMeseasure = writtenPositionInMeseasure;
-  fSoundingRelativeOffset     = soundingRelativeOffset;
+  fWrittenPositionInMeseasure = writtenPositionInMeasure;
+  fSoundingRelativeOffset = soundingRelativeOffset;
 }
 
 mfMoment::mfMoment (
-  const mfWholeNotes& writtenPositionInMeseasure)
+  const mfPositionInMeasure& writtenPositionInMeseasure)
 {
   fWrittenPositionInMeseasure = writtenPositionInMeseasure;
-  fSoundingRelativeOffset     = mfWholeNotes (0, 1);
+  fSoundingRelativeOffset = K_WHOLE_NOTES_ZERO;
 }
 
 mfMoment::~mfMoment ()
@@ -144,9 +144,9 @@ std::ostream& operator << (std::ostream& os, const mfMoment& elt)
 //______________________________________________________________________________
 void testMsrMomentComparisons (std::ostream& os)
 {
-  mfMoment m0 (mfWholeNotes (3, 4));
-  mfMoment m1 (mfWholeNotes (3, 4), mfWholeNotes (-1, 16));
-  mfMoment m2 (mfWholeNotes (3, 4), mfWholeNotes (2, 16));
+  mfMoment m0 (mfPositionInMeasure (3, 4));
+  mfMoment m1 (mfPositionInMeasure (3, 4), mfWholeNotes (-1, 16));
+  mfMoment m2 (mfPositionInMeasure (3, 4), mfWholeNotes (2, 16));
 
   os <<
     "m1: " << m1 << std::endl <<

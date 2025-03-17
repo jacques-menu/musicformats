@@ -102,7 +102,7 @@ S_bsrScore msr2bsrTranslator::translateMsrToBsr (
   fCurrentPrintLineNumber = 1;
 
   // notes
-  fCurrentNoteOctaveKind    = bsrNoteOctaveKind::kNoteOctaveNone;
+  fCurrentNoteOctaveKind = bsrNoteOctaveKind::kNoteOctaveNone;
   fCurrentNoteValueSizeKind = bsrNoteValueSizeKind::kNoteValueSizeLarger;
 
   // measures
@@ -3004,7 +3004,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
 
   else if (fOnGoingHarmoniesVoice) {
     fCurrentVoiceClone->
-      appendHarmonyToVoiceClone (
+      cascadeAppendHarmonyToVoiceClone (
         fCurrentHarmonyClone);
   }
 }
@@ -3276,9 +3276,9 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
 
   // get the measure whole notes
   mfRational
-    measureAccumulatedWholeNotesDuration =
+    measureCurrentPositionInMeasure =
       fCurrentMeasureClone->
-        getMeasureAccumulatedWholeNotesDuration ();
+        getMeasureCurrentPositionInMeasure ();
 
   // get the full measure whole notes
   mfRational
@@ -3295,7 +3295,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       "' in voice \"" << voice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       std::endl <<
-      "measureAccumulatedWholeNotesDuration: " << measureAccumulatedWholeNotesDuration.asString ();
+      "measureCurrentPositionInMeasure: " << measureCurrentPositionInMeasure.asString ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3308,13 +3308,13 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       msrMeasure::kUnknownMeasure; // JMI
  // JMI     fMeasureKind = kFullMeasure; // may be changed afterwards
 
-  if (measureAccumulatedWholeNotesDuration == measureFullLength ) {
+  if (measureCurrentPositionInMeasure == measureFullLength ) {
     // this measure is full
     measureKind =
       msrMeasure::kFullMeasure;
   }
 
-  else if (measureAccumulatedWholeNotesDuration < measureFullLength) {
+  else if (measureCurrentPositionInMeasure < measureFullLength) {
     / *
     if (fSegmentElementsList.size () == 1) { // JMI
       // this is the first measure in the segment
@@ -3334,7 +3334,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
       msrMeasure::kUpbeatMeasure; // JMI
   }
 
-  else if (measureAccumulatedWholeNotesDuration > measureFullLength) {
+  else if (measureCurrentPositionInMeasure > measureFullLength) {
     // this measure is overflowing
     measureKind =
       msrMeasure::kOverflowingMeasure;

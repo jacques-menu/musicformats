@@ -586,7 +586,7 @@ std::string mfslInput::namesSetAsString () const
     size_t count = 0;
 
     size_t namesListMaxLength = 60;
-    size_t cumulatedLength    = 0;
+    size_t cumulatedLength = 0;
 
     for (
       std::set <std::string>::const_iterator i =
@@ -1444,7 +1444,7 @@ std::string mfslChoice::labelsSetAsString () const
     size_t count = 0;
 
     size_t namesListMaxLength = 60;
-    size_t cumulatedLength    = 0;
+    size_t cumulatedLength = 0;
 
     for (
       std::set <std::string>::const_iterator i =

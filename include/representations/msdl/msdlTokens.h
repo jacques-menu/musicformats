@@ -132,19 +132,19 @@ enum class msdlTokenKind {
   // ------------------------------------
 
   AllFirst = k_TokenEOF,
-  AllLast  = kTokenTime,
+  AllLast = kTokenTime,
 
   NonSeparatorsFirst = kTokenEqualSign,
-  NonSeparatorsLast  = kTokenTime,
+  NonSeparatorsLast = kTokenTime,
 
   TranslatableFirst = kTokenInteger,
-  TranslatableLast  = kTokenName,
+  TranslatableLast = kTokenName,
 
   LanguageIndependentFirst = kTokenEqualSign,
-  LanguageIndependentLast  = kTokenIdentifier,
+  LanguageIndependentLast = kTokenIdentifier,
 
   LanguageDependentFirst = kTokenTitle,
-  LanguageDependentLast  = kTokenTime
+  LanguageDependentLast = kTokenTime
 };
 
 std::string msdlTokenKindAsString (
@@ -484,7 +484,7 @@ class EXP msdlTokenDescription : public smartable
                               {
                                 fTokenDescriptionKind =
                                   msdlTokenDescriptionKind::kTokenKeyword;
-                                fKeywordKind          = value;
+                                fKeywordKind = value;
                               }
 
     msdlKeywordKind       getKeywordKind () const;
@@ -493,7 +493,7 @@ class EXP msdlTokenDescription : public smartable
                               {
                                 fTokenDescriptionKind =
                                   msdlTokenDescriptionKind::kTokenInteger;
-                                fInteger              = value;
+                                fInteger = value;
                               }
 
     int                   getInteger () const;
@@ -502,7 +502,7 @@ class EXP msdlTokenDescription : public smartable
                               {
                                 fTokenDescriptionKind =
                                   msdlTokenDescriptionKind::kTokenDouble;
-                                fDouble               = value;
+                                fDouble = value;
                               }
 
     double                getDouble () const;
@@ -511,7 +511,7 @@ class EXP msdlTokenDescription : public smartable
                               {
                                 fTokenDescriptionKind =
                                   msdlTokenDescriptionKind::kTokenCharacter;
-                                fCharacter            = value;
+                                fCharacter = value;
                               }
 
     char                  getCharacter () const;
@@ -520,7 +520,7 @@ class EXP msdlTokenDescription : public smartable
                               {
                                 fTokenDescriptionKind =
                                   msdlTokenDescriptionKind::kTokenString;
-                                fString               = value;
+                                fString = value;
                               }
 
     std::string           getString () const;

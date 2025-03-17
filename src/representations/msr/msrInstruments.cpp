@@ -67,8 +67,8 @@ msrStringTuning::msrStringTuning (
   fStringTuningNumber = stringTuningNumber;
 
   fStringTuningDiatonicPitchKind = stringTuningDiatonicPitchKind;
-  fStringTuningAlterationKind    = stringTuningAlterationKind;
-  fStringTuningOctaveKind        = stringTuningOctaveKind;
+  fStringTuningAlterationKind = stringTuningAlterationKind;
+  fStringTuningOctaveKind = stringTuningOctaveKind;
 }
 
 msrStringTuning::~msrStringTuning ()
@@ -449,9 +449,9 @@ msrAccordionRegistration::msrAccordionRegistration (
     : msrMeasureElement (
         inputLineNumber)
 {
-  fHighDotsNumber   = highDotsNumber;
+  fHighDotsNumber = highDotsNumber;
   fMiddleDotsNumber = middleDotsNumber;
-  fLowDotsNumber    = lowDotsNumber;
+  fLowDotsNumber = lowDotsNumber;
 }
 
 msrAccordionRegistration::~msrAccordionRegistration ()

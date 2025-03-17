@@ -13,9 +13,9 @@
 ///<reference path="lib/libmusicxml.ts"/>
 ///<reference path="download.ts"/>
 
-const kGuidoMode   = "1";
-const kLilyMode   = "2";
-const kBrailleMode   = "3";
+const kGuidoMode = "1";
+const kLilyMode = "2";
+const kBrailleMode = "3";
 
 declare var forge: any;
 interface UrlOption  { option: std::string; value: std::string; }

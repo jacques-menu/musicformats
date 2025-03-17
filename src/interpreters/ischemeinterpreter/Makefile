@@ -21,7 +21,7 @@
 
 MAKEFILE = Makefile
 
-GENERATED_FILES  = ischemeParser.h ischemeScanner.cpp ischemeParser.cpp
+GENERATED_FILES = ischemeParser.h ischemeScanner.cpp ischemeParser.cpp
 
 BISON = bison
 FLEX  = flex

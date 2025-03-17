@@ -228,8 +228,8 @@ class msdlParser : public smartable
                             const S_msrNote& note);
 
     // note
-    mfWholeNotes         fCurrentNoteSoundingWholeNotes;
-    mfWholeNotes         fCurrentNoteDisplayWholeNotes;
+    mfWholeNotes          fCurrentNoteSoundingWholeNotes;
+    mfWholeNotes          fCurrentNoteDisplayWholeNotes;
     int                   fCurrentNoteDotsNumber;
 
     // private score building methods

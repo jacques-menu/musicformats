@@ -125,7 +125,7 @@ msrPartGroup::msrPartGroup (
   fPartGroupUpLinkToScore = partGroupUpLinkToScore;
 
   // other fields
-  fPartGroupNumber         = partGroupNumber;
+  fPartGroupNumber = partGroupNumber;
   fPartGroupAbsoluteNumber = partGroupAbsoluteNumber;
 
   fPartGroupName = partGroupName;
@@ -145,16 +145,16 @@ msrPartGroup::msrPartGroup (
 
   fPartGroupNameDisplayText = partGroupNameDisplayText;
 
-  fPartGroupAccidentalText  = partGroupAccidentalText;
+  fPartGroupAccidentalText = partGroupAccidentalText;
 
-  fPartGroupAbbreviation    = partGroupAbbreviation;
+  fPartGroupAbbreviation = partGroupAbbreviation;
 
-  fPartGroupSymbolKind      = partGroupSymbolKind;
-  fPartGroupSymbolDefaultX  = partGroupSymbolDefaultX;
+  fPartGroupSymbolKind = partGroupSymbolKind;
+  fPartGroupSymbolDefaultX = partGroupSymbolDefaultX;
 
-  fPartGroupImplicitKind    = partGroupImplicitKind;
+  fPartGroupImplicitKind = partGroupImplicitKind;
 
-  fPartGroupBarLineKind     = partGroupBarLineKind;
+  fPartGroupBarLineKind = partGroupBarLineKind;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -197,13 +197,13 @@ msrPartGroup::msrPartGroup (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
-  fPartGroupUpLinkToScore     = partGroupUpLinkToScore;
+  fPartGroupUpLinkToScore = partGroupUpLinkToScore;
 
   // other fields
-  fPartGroupNumber          = partGroupNumber;
-  fPartGroupAbsoluteNumber  = partGroupAbsoluteNumber;
+  fPartGroupNumber = partGroupNumber;
+  fPartGroupAbsoluteNumber = partGroupAbsoluteNumber;
 
-  fPartGroupName            = partGroupName;
+  fPartGroupName = partGroupName;
 
   size_t partGroupNameLength =
     fPartGroupName.size ();

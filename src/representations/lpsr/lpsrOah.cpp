@@ -730,7 +730,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   }
 
   std::string
-    partName           = sm [1],
+    partName = sm [1],
     partInstrumentName = sm [2];
 
   mfTrimFromBothEnds (partName);

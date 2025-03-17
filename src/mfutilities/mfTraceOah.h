@@ -60,7 +60,7 @@ class EXP traceOahGroup : public oahGroup
 
     void                  initializeRepeatsToSlashesTraceOah ();
 
-    void                  initializeNotesDurationsTraceOah ();
+    void                  initializeDurationsTraceOah ();
 
     void                  initializeNotesTraceOah ();
 
@@ -477,10 +477,15 @@ class EXP traceOahGroup : public oahGroup
     // durations
     // --------------------------------------
 
-    void                  setTraceNotesDurations ()
-                              { fTraceNotesDurations = true; }
-    Bool                  getTraceNotesDurations () const
-                              { return fTraceNotesDurations; }
+    void                  setTraceDurations ()
+                              { fTraceDurations = true; }
+    Bool                  getTraceDurations () const
+                              { return fTraceDurations; }
+
+    void                  setTraceDurationsDetails ()
+                              { fTraceDurationsDetails = true; }
+    Bool                  getTraceDurationsDetails () const
+                              { return fTraceDurationsDetails; }
 
     // notes
     // --------------------------------------
@@ -496,12 +501,6 @@ class EXP traceOahGroup : public oahGroup
 
     Bool                  getTraceNotesDetails () const
                               { return fTraceNotesDetails; }
-
-    // whole notes
-    Bool                  getTraceWholeNoteDurations () const
-                              { return fTraceWholeNoteDurations; }
-    Bool                  getTraceWholeNoteDurationsDetails () const
-                              { return fTraceWholeNoteDurationsDetails; }
 
     // measures whole notes vectors
     Bool                  getTraceMeasuresWholeNotesVectors () const
@@ -1151,7 +1150,8 @@ class EXP traceOahGroup : public oahGroup
     // notes durations
     // --------------------------------------
 
-    Bool                  fTraceNotesDurations;
+    Bool                  fTraceDurations;
+    Bool                  fTraceDurationsDetails;
 
 
     // notes
@@ -1160,13 +1160,6 @@ class EXP traceOahGroup : public oahGroup
     Bool                  fTraceNotesBasics;
     Bool                  fTraceNotes;
     Bool                  fTraceNotesDetails;
-
-
-    // whole notes durations
-    // --------------------------------------
-
-    Bool                  fTraceWholeNoteDurations;
-    Bool                  fTraceWholeNoteDurationsDetails;
 
 
     // measures whole notes vectors

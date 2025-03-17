@@ -21,7 +21,7 @@
 
 MAKEFILE = Makefile
 
-GENERATED_FILES  = mfslParser.h mfslScanner.cpp mfslParser.cpp
+GENERATED_FILES = mfslParser.h mfslScanner.cpp mfslParser.cpp
 
 BISON = bison
 FLEX  = flex

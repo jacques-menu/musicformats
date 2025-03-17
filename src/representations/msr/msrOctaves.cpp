@@ -476,7 +476,7 @@ msrSemiTonesPitchAndOctave::msrSemiTonesPitchAndOctave (
   msrOctaveKind         octaveKind)
 {
   fSemiTonesPitchKind = semiTonesPitchKind;
-  fOctaveKind         = octaveKind;
+  fOctaveKind = octaveKind;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
@@ -552,7 +552,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
     // found a well-formed specification,
     // need to check its ',' and '\'' contents
     std::string
-      pitch            = sm [1],
+      pitch = sm [1],
       octaveIndication = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -978,7 +978,7 @@ msrQuarterTonesPitchAndOctave::msrQuarterTonesPitchAndOctave (
   msrOctaveKind            octaveKind)
 {
   fQuarterTonesPitchKind = quarterTonesPitchKind;
-  fOctaveKind            = octaveKind;
+  fOctaveKind = octaveKind;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceHarmoniesDetails ()) {
@@ -1054,7 +1054,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
     // found a well-formed specification,
     // need to check its ',' and '\'' contents
     std::string
-      pitch            = sm [1],
+      pitch = sm [1],
       octaveIndication = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED

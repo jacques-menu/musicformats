@@ -56,7 +56,7 @@ bsrPageHeading::bsrPageHeading (
   fPageHeadingTitle = pageHeadingTitle;
 
   fPageHeadingPagination = pageHeadingPagination;
-  fPageHeadingNumber     = pageHeadingNumber;
+  fPageHeadingNumber = pageHeadingNumber;
 }
 
 bsrPageHeading::~bsrPageHeading ()

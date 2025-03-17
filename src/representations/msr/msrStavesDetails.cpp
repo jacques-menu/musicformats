@@ -140,9 +140,9 @@ msrStaffTuning::msrStaffTuning (
   msrOctaveKind            staffTuningOctaveKind)
     : msrElement (inputLineNumber)
 {
-  fStaffTuningLineNumber            = staffTuningLineNumber;
+  fStaffTuningLineNumber = staffTuningLineNumber;
   fStaffTuningQuarterTonesPitchKind = staffTuningQuarterTonesPitchKind;
-  fStaffTuningOctaveKind            = staffTuningOctaveKind;
+  fStaffTuningOctaveKind = staffTuningOctaveKind;
 }
 
 msrStaffTuning::~ msrStaffTuning ()
@@ -363,13 +363,13 @@ msrStaffDetails::msrStaffDetails (
     : msrMeasureElement (
         inputLineNumber)
 {
-  fStaffTypeKind    = staffTypeKind;
+  fStaffTypeKind = staffTypeKind;
 
   fStaffLinesNumber = 5; // default value JMI ???
 
-  fShowFretsKind    = showFretsKind;
+  fShowFretsKind = showFretsKind;
 
-  fPrintObjectKind  = printObjectKind;
+  fPrintObjectKind = printObjectKind;
   fPrintSpacingKind = printSpacingKind;
 }
 

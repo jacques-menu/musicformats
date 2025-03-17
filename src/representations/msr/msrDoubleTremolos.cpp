@@ -116,10 +116,10 @@ msrDoubleTremolo::msrDoubleTremolo (
     : msrMeasureElement (
         inputLineNumber)
 {
-  fDoubleTremoloKind           = doubleTremoloKind;
+  fDoubleTremoloKind = doubleTremoloKind;
   fDoubleDoubleTremoloTypeKind = doubleDoubleTremoloTypeKind;
-  fDoubleTremoloMarksNumber    = doubleTremoloMarksNumber;
-  fDoubleTremoloPlacementKind  = doubleTremoloPlacementKind;
+  fDoubleTremoloMarksNumber = doubleTremoloMarksNumber;
+  fDoubleTremoloPlacementKind = doubleTremoloPlacementKind;
 
 //   fDoubleTremoloSoundingWholeNotes =
   fMeasureElementSoundingWholeNotes =

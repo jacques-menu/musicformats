@@ -212,7 +212,7 @@ msrFontSize::msrFontSize (
 msrFontSize::msrFontSize (
   float fontNumericSize)
 {
-  fFontSizeKind    = msrFontSizeKind::kFontSizeNumeric;
+  fFontSizeKind = msrFontSizeKind::kFontSizeNumeric;
   fFontNumericSize = fontNumericSize;
 }
 

@@ -73,7 +73,7 @@ msrMusicXMLPrintLayout::msrMusicXMLPrintLayout (
   fStaffSpacing = -1;
 
   fNewSystem = false;
-  fNewPage   = false;
+  fNewPage = false;
 
   fBlankPage = -1;
 

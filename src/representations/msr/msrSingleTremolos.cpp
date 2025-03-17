@@ -46,7 +46,7 @@ msrSingleTremolo::msrSingleTremolo (
   msrPlacementKind singleTremoloPlacementKind)
     : msrElement (inputLineNumber)
 {
-  fSingleTremoloMarksNumber   = singleTremoloMarksNumber;
+  fSingleTremoloMarksNumber = singleTremoloMarksNumber;
   fSingleTremoloPlacementKind = singleTremoloPlacementKind;
 }
 
@@ -127,7 +127,7 @@ void msrSingleTremolo::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }

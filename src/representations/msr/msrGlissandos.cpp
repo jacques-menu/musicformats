@@ -83,7 +83,7 @@ msrGlissando::msrGlissando (
 {
   fGlissandoNumber = glissandoNumber;
 
-  fGlissandoTypeKind     = glissandoTypeKind;
+  fGlissandoTypeKind = glissandoTypeKind;
   fGlissandoLineTypeKind = glissandoLineTypeKind;
 
   fGlissandoTextValue = glissandoTextValue;
@@ -188,7 +188,7 @@ void msrGlissando::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }

@@ -247,11 +247,11 @@ class EXP msrFiguredBass : public msrMeasureElement
                                 fFiguredBassDisplayWholeNotes = wholeNotes;
                               }
 
-    mfWholeNotes         getFiguredBassDisplayWholeNotes () const
+    mfWholeNotes          getFiguredBassDisplayWholeNotes () const
                               { return fFiguredBassDisplayWholeNotes; }
 
 //     // duration
-//     mfWholeNotes         getFiguredBassWholeNotesDuration () const
+//     mfWholeNotes          getFiguredBassWholeNotesDuration () const
 //                               { return fFiguredBassWholeNotesDuration; }
 
     // parentheses
@@ -315,10 +315,10 @@ class EXP msrFiguredBass : public msrMeasureElement
     S_msrVoice            fFiguredBassUpLinkToVoice; // for use in figured bass voices JMI v0.9.66
 
     // whole notes
-    mfWholeNotes         fFiguredBassDisplayWholeNotes;
+    mfWholeNotes          fFiguredBassDisplayWholeNotes;
 
 //     // duration
-//     mfWholeNotes         fFiguredBassWholeNotesDuration;
+//     mfWholeNotes          fFiguredBassWholeNotesDuration;
 
     msrFiguredBassParenthesesKind
                           fFiguredBassParenthesesKind;

@@ -50,7 +50,7 @@ bsrLine::bsrLine (
   int cellsPerLine)
     : bsrPageElement (inputLineNumber)
 {
-  fPrintLineNumber   = printLineNumber;
+  fPrintLineNumber = printLineNumber;
   fBrailleLineNumber = fPrintLineNumber; // will be set by BSR finalizer
 
   fCellsPerLine = cellsPerLine;

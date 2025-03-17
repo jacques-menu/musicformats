@@ -215,15 +215,15 @@ lpsrScoreBlock::lpsrScoreBlock (
       gGlobalLpsr2lilypondOahGroup ->
         getMidiTempoAtom ();
 
-  std::string midiTempoNotesDuration  = "16";
-  int    midiTempoPerSecond = 360;
+  std::string midiTempoNotesDuration = "16";
+  int         midiTempoPerSecond = 360;
 
   if (midiTempoAtom->getSelected ()) {
     const msrMidiTempo&
       midiTempo =
        gGlobalLpsr2lilypondOahGroup->getMidiTempo ();
 
-    midiTempoNotesDuration  = midiTempo.getMidiTempoNotesDuration ();
+    midiTempoNotesDuration = midiTempo.getMidiTempoNotesDuration ();
     midiTempoPerSecond = midiTempo.getMidiTempoPerSecond ();
   }
   else {

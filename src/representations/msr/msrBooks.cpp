@@ -68,12 +68,12 @@ msrBook::msrBook (
   fBookElementNamesMaxLength = 0;
 
   // set instrument names max lengths
-  fBookInstrumentNamesMaxLength         = 0;
+  fBookInstrumentNamesMaxLength = 0;
   fBookInstrumentAbbreviationsMaxLength = 0;
 
   // grace notes groups before should be browsed by default
   fInhibitGraceNotesGroupsBeforeBrowsing = false;
-  fInhibitGraceNotesGroupsAfterBrowsing  = false;
+  fInhibitGraceNotesGroupsAfterBrowsing = false;
 
   // measure repeats replicas should be browsed by default
   fInhibitMeasureRepeatReplicasBrowsing = false;
@@ -254,7 +254,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ??? v0.9.6
       iEnd   = fCreditsList.end (),
       i      = iBegin;
 
-    int topCreditsCounter    = 0;
+    int topCreditsCounter = 0;
     int bottomCreditsCounter = 0;
 
     for ( ; ; ) {

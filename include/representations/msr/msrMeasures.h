@@ -116,28 +116,28 @@ class EXP msrMeasure : public msrSegmentElement
     Bool                  getMeasureIsFirstInVoice () const
                               { return fMeasureIsFirstInVoice; }
 
-    // measure whole notes durations, in whole notes
+    // measure whole notes
 
     void                  setFullMeasureWholeNotesDuration (
                             const mfWholeNotes& wholeNotes);
 
-    const mfWholeNotes&  getFullMeasureWholeNotesDuration () const
+    const mfWholeNotes&   getFullMeasureWholeNotesDuration () const
                               { return fFullMeasureWholeNotesDuration; }
 
-    void                  setMeasureAccumulatedWholeNotesDuration (
-                            int                  inputLineNumber,
-                            const mfWholeNotes& wholeNotes,
-                            std::string          context);
+    void                  setMeasureCurrentPositionInMeasure (
+                            int                        inputLineNumber,
+                            const mfPositionInMeasure& positionInMeasure,
+                            std::string                context);
 
-    void                  incrementMeasureAccumulatedWholeNotesDuration (
-                            int                  inputLineNumber,
+    void                  incrementMeasureCurrentPositionInMeasure (
+                            int                 inputLineNumber,
                             const mfWholeNotes& wholeNotesDelta,
-                            std::string          context);
+                            std::string         context);
 
-    mfWholeNotes         getMeasureAccumulatedWholeNotesDuration () const
-                              { return fMeasureAccumulatedWholeNotesDuration; }
+    mfPositionInMeasure   getMeasureCurrentPositionInMeasure () const
+                              { return fMeasureCurrentPositionInMeasure; }
 
-    mfWholeNotes         getfMeasureWholeNotesDuration () const
+    mfWholeNotes          getMeasureWholeNotesDuration () const
                               { return fMeasureWholeNotesDuration; }
 
     Bool                  getMeasureIsMusicallyEmpty () const
@@ -191,7 +191,7 @@ class EXP msrMeasure : public msrSegmentElement
     void                  setMeasureShortestNoteWholeNotes (
                             const mfWholeNotes& duration);
 
-    mfWholeNotes         getMeasureShortestNoteWholeNotes () const
+    mfWholeNotes          getMeasureShortestNoteWholeNotes () const
                               { return fMeasureShortestNoteWholeNotes; }
 
     void                  setMeasureShortestNoteTupletFactor (
@@ -242,21 +242,21 @@ class EXP msrMeasure : public msrSegmentElement
 
     // voice position
 
-    void                  setMeasureVoicePosition (
+    void                  setMeasurePositionInVoice (
                             const mfWholeNotes& position)
-                              { fMeasureVoicePosition = position; }
-//     void                  incrementMeasureVoicePosition (
+                              { fMeasurePositionInVoice = position; }
+//     void                  incrementMeasurePositionInVoice (
 //                             const mfWholeNotes& wholeNotesDelta);
 
-    mfWholeNotes         getMeasureVoicePosition () const
-                              { return fMeasureVoicePosition; }
+    mfWholeNotes          getMeasurePositionInVoice () const
+                              { return fMeasurePositionInVoice; }
 
-    void                  setMeasureVoiceMoment (
-                            mfMoment value)
-                              { fMeasureVoiceMoment = value; }
-
-    const mfMoment&      getMeasureVoiceMoment () const
-                              { return fMeasureVoiceMoment; }
+//     void                  setMeasureVoiceMoment (
+//                             mfMoment value)
+//                               { fMeasureVoiceMoment = value; }
+//
+//     const mfMoment&       getMeasureVoiceMoment () const
+//                               { return fMeasureVoiceMoment; }
 
     // notes flat list
 
@@ -283,7 +283,7 @@ class EXP msrMeasure : public msrSegmentElement
 
 //     // measure lengths, in whole notes
 //
-//     mfWholeNotes         fetchFullMeasureWholeNotesDuration_KEEP (
+//     mfWholeNotes          fetchFullMeasureWholeNotesDuration_KEEP (
 //                             int         inputLineNumber = 7327, // JMI v0.9.70 BABASSE
 //                             std::string context = "-- CONTEXT --") const;
 
@@ -304,7 +304,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // lengths
 
-    std::string           fullMeasureWholeNotesDurationpitchAndOctaveAsString ();
+//     std::string           fullMeasureWholeNotesDurationAndPitchAndOctaveAsString ();
 
     // backup and padding
 
@@ -318,20 +318,20 @@ class EXP msrMeasure : public msrSegmentElement
 //                             const mfWholeNotes& positionInMeasureToPadUpTo);
 
     void                  padUpToPositionInMeasure (
-                            int                  inputLineNumber,
-                            const mfWholeNotes& positionInMeasureToPadUpTo);
+                            int                        inputLineNumber,
+                            const mfPositionInMeasure& positionInMeasureToPadUpTo);
 
     void                  padUpToPositionAtTheEndOfTheMeasure (
-                            int                  inputLineNumber,
-                            const mfWholeNotes& positionInMeasureToPadUpTo,
-                            const std::string&   context);
+                            int                        inputLineNumber,
+                            const mfPositionInMeasure& positionInMeasureToPadUpTo,
+                            const std::string&         context);
 
-    void                  backupByWholeNotesStepLengthInMeasure (
-                            int                  inputLineNumber,
-                            const mfWholeNotes& backupTargetMeasureElementPositionInMeasure);
+//     void                  casadeBackupByWholeNotesStepLengthInMeasure (
+//                             int                 inputLineNumber,
+//                             const mfWholeNotes& backupStepLength);
 
     void                  appendPaddingSkipNoteToMeasure (
-                            int                  inputLineNumber,
+                            int                 inputLineNumber,
                             const mfWholeNotes& forwardStepLength);
 
     // print layout
@@ -372,8 +372,8 @@ class EXP msrMeasure : public msrSegmentElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInMeasureClone (
-                            int                  inputLineNumber,
-                            const mfWholeNotes& positionInMeasure);
+                            int                        inputLineNumber,
+                            const mfPositionInMeasure& positionInMeasure);
 
     // transposition
 
@@ -449,8 +449,8 @@ class EXP msrMeasure : public msrSegmentElement
     // notes
 
     void                  appendNoteToMeasureAtPosition (
-                            const S_msrNote&     note,
-                            const mfWholeNotes& positionInMeasure);
+                            const S_msrNote&           note,
+                            const mfPositionInMeasure& positionInMeasure);
 
     void                  appendNoteToMeasure (
                             const S_msrNote& note);
@@ -482,18 +482,18 @@ class EXP msrMeasure : public msrSegmentElement
     // harmonies
 
     void                  appendHarmonyToMeasure (
-                            int                  inputLineNumber,
-                            const S_msrHarmony&  harmony,
-                            const mfWholeNotes& positionInMeasureToAppendAt);
+                            int                        inputLineNumber,
+                            const S_msrHarmony&        harmony,
+                            const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendHarmonyToMeasureWithoutPadUp (
                             int                  inputLineNumber,
                             const S_msrHarmony&  harmony);
 
     void                  appendHarmoniesListToMeasure (
-                            int                            inputLineNumber,
+                            int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const mfWholeNotes&           positionInMeasureToAppendAt);
+                            const mfPositionInMeasure&      positionInMeasureToAppendAt);
 
     void                  appendHarmonyToMeasureClone (
                             const S_msrHarmony& harmony);
@@ -509,18 +509,18 @@ class EXP msrMeasure : public msrSegmentElement
     // figured bass
 
     void                  appendFiguredBassToMeasure (
-                            int                     inputLineNumber,
-                            const S_msrFiguredBass& figuredBass,
-                            const mfWholeNotes&    positionInMeasureToAppendAt);
+                            int                        inputLineNumber,
+                            const S_msrFiguredBass&    figuredBass,
+                            const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToMeasureWithoutPadUp (
                             int                     inputLineNumber,
                             const S_msrFiguredBass& figuredBass);
 
-    void                  appendFiguredBassesListToMeasure (
-                            int                                inputLineNumber,
+    void                  cascadeAppendFiguredBassesListToMeasure (
+                            int                                 inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const mfWholeNotes&               positionInMeasureToAppendAt);
+                            const mfPositionInMeasure&          positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToMeasureClone (
                             const S_msrFiguredBass& figuredBass);
@@ -691,7 +691,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengths, in whole notes
 
-    mfWholeNotes         fFullMeasureWholeNotesDuration;
+    mfWholeNotes          fFullMeasureWholeNotesDuration;
                             // denormalization from msrStaff, for efficiency // JMI v0.9.70 BABASSE
                             // meaningfull only when there is a time signature,
                             // but not for cadenzas
@@ -717,14 +717,14 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengths, in whole notes
 
-    mfWholeNotes         fMeasureAccumulatedWholeNotesDuration;
+    mfPositionInMeasure   fMeasureCurrentPositionInMeasure;
                             // this increases when musical elements
                             // are appended to the measure
 
-    mfWholeNotes         fMeasureWholeNotesDuration;
+    mfWholeNotes          fMeasureWholeNotesDuration;
                             // this is set from the above when the measure is finalized
 
-    std::string           measureAccumulatedWholeNotesDurationpitchAndOctaveAsString ();
+    std::string           measureCurrentPositionInMeasurAndPitchAndOctaveAsString ();
 
     Bool                  fMeasureIsMusicallyEmpty;
 
@@ -743,7 +743,7 @@ class EXP msrMeasure : public msrSegmentElement
     // fPartShortestNoteWholeNotes and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    mfWholeNotes         fMeasureShortestNoteWholeNotes;
+    mfWholeNotes          fMeasureShortestNoteWholeNotes;
     msrTupletFactor       fMeasureShortestNoteTupletFactor;
 */
 
@@ -782,8 +782,10 @@ class EXP msrMeasure : public msrSegmentElement
                           fMeasureRepeatContextKind;
 
     // voice position
-    mfWholeNotes         fMeasureVoicePosition;
-    mfMoment             fMeasureVoiceMoment;
+    mfWholeNotes          fMeasurePositionInVoice;
+
+//     // voice moment
+//     mfMoment             fMeasureVoiceMoment;
 
     // notes flat list
     // this is used to identify solo notes and rests in measures slices
@@ -824,22 +826,22 @@ class EXP msrMeasure : public msrSegmentElement
 
     // figurd bass
     void                  handleFirstFiguredBassInFiguredBassMeasure (
-                            int                     inputLineNumber,
-                            const S_msrVoice&       voice,
+                            int                        inputLineNumber,
+                            const S_msrVoice&          voice,
                             std::list <S_msrMeasureElement>::iterator&
-                                                    i,
-                            const S_msrFiguredBass& previousFiguredBass,
-                            const S_msrFiguredBass& currentFiguredBass,
-                            const mfWholeNotes&    currentFiguredBassPositionInMeasure);
+                                                       i,
+                            const S_msrFiguredBass&    previousFiguredBass,
+                            const S_msrFiguredBass&    currentFiguredBass,
+                            const mfPositionInMeasure& currentFiguredBassPositionInMeasure);
 
     void                  handleSubsequentFiguredBassInFiguredBassMeasure (
-                            int                     inputLineNumber,
-                            const S_msrVoice&       voice,
+                            int                        inputLineNumber,
+                            const S_msrVoice&          voice,
                             std::list <S_msrMeasureElement>::iterator&
-                                                    i,
-                            const S_msrFiguredBass& previousFiguredBass,
-                            const S_msrFiguredBass& currentFiguredBass,
-                            const mfWholeNotes&    currentFiguredBassPositionInMeasure);
+                                                       i,
+                            const S_msrFiguredBass&    previousFiguredBass,
+                            const S_msrFiguredBass&    currentFiguredBass,
+                            const mfPositionInMeasure& currentFiguredBassPositionInMeasure);
 
     void                  handleTheLastFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
@@ -867,7 +869,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  insertElementAtPositionInMeasure (
                             int                        inputLineNumber,
-                            const mfWholeNotes&       positionInMeasure,
+                            const mfPositionInMeasure& positionInMeasure,
                             const S_msrMeasureElement& elem);
 
     void                  handleEmptyMeasure (

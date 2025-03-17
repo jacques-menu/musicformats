@@ -87,7 +87,7 @@ msrStaff::msrStaff (
     staffUpLinkToPart;
 
   // set staff kind and number
-  fStaffKind   = staffKind;
+  fStaffKind = staffKind;
   fStaffNumber = staffNumber;
 
   // do other initializations
@@ -2345,8 +2345,8 @@ void msrStaff::appendPageBreakToStaff (
 }
 
 void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
-  int                  inputLineNumber,
-  const mfWholeNotes& positionInMeasure)
+  int                        inputLineNumber,
+  const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasures ()) {
@@ -3861,7 +3861,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     for (std::pair <int, S_msrVoice> thePair : fStaffVoiceNumbersToAllVoicesMap) {
       int        voiceNumber = thePair.first;
-      S_msrVoice voice       = thePair.second;
+      S_msrVoice voice = thePair.second;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check
@@ -3908,7 +3908,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     for (std::pair <int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
       int        voiceNumber = thePair.first;
-      S_msrVoice voice       = thePair.second;
+      S_msrVoice voice = thePair.second;
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
       // sanity check

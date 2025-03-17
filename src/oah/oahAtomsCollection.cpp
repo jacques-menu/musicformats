@@ -7160,10 +7160,10 @@ oahCommonPrefixBooleansAtom::oahCommonPrefixBooleansAtom (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
   fShortSuffixDescriptor = shortSuffixDescriptor;
-  fLongSuffixDescriptor  = longSuffixDescriptor;
+  fLongSuffixDescriptor = longSuffixDescriptor;
 
   fShortNamesPrefix = shortNamesPrefix;
-  fLongNamesPrefix  = longNamesPrefix;
+  fLongNamesPrefix = longNamesPrefix;
 
   // get prefixes names
   fShortNamesPrefixName =
@@ -10524,7 +10524,7 @@ void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
   }
 
   std::string
-    key   = sm [1],
+    key = sm [1],
     value = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -12955,7 +12955,7 @@ oahFindStringResult::oahFindStringResult (
   const std::string&  theString,
   const S_oahElement& theElement)
 {
-  fTheString  = theString;
+  fTheString = theString;
   fTheElement = theElement;
 }
 

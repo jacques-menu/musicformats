@@ -92,10 +92,10 @@ enum class msrHarmonyKind {
   // ------------------------------------
 
   AllFirst = kHarmony_UNKNOWN_,
-  AllLast  = kHarmonyNone,
+  AllLast = kHarmonyNone,
 
   TrueHarmoniesFirst = kHarmonyMajor,
-  TrueHarmoniesLast  = kHarmonyMajorSeventhAugmentedEleventh
+  TrueHarmoniesLast = kHarmonyMajorSeventhAugmentedEleventh
 };
 
 std::string msrHarmonyKindAsString (
@@ -353,14 +353,14 @@ class EXP msrHarmony : public msrMeasureElement
                             const mfWholeNotes& wholeNotes,
                             const std::string&   context);
 
-    mfWholeNotes         getHarmonyDisplayWholeNotes () const
+    mfWholeNotes          getHarmonyDisplayWholeNotes () const
                               { return fHarmonyDisplayWholeNotes; }
 
     // offset
     void                  setHarmonyWholeNotesOffset (mfWholeNotes offset)
                               { fHarmonyWholeNotesOffset = offset; }
 
-    mfWholeNotes         getHarmonyWholeNotesOffset () const
+    mfWholeNotes          getHarmonyWholeNotesOffset () const
                               { return fHarmonyWholeNotesOffset; }
 
     // root
@@ -468,10 +468,10 @@ class EXP msrHarmony : public msrMeasureElement
     S_msrVoice            fHarmoniesUpLinkToVoice; // for use in harmonies voices JMI
 
     // whole notes
-    mfWholeNotes         fHarmonyDisplayWholeNotes;
+    mfWholeNotes          fHarmonyDisplayWholeNotes;
 
     // offset
-    mfWholeNotes         fHarmonyWholeNotesOffset;
+    mfWholeNotes          fHarmonyWholeNotesOffset;
 
     // root
     msrQuarterTonesPitchKind

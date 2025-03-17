@@ -86,7 +86,7 @@ lpsrRepeat::lpsrRepeat (
 {
   fRepeat = repeat;
 
-  fRepeatEndingsNumber  = repeatEndingsNumber;
+  fRepeatEndingsNumber = repeatEndingsNumber;
   fRepeatEndingsCounter = 0;
 
   fEndOfRepeatHasBeenGenerated = false; // superflous
@@ -151,7 +151,7 @@ lpsr2lilypondTranslator::lpsr2lilypondTranslator (
   : fLilypondCodeStream (
       lilypondCodeStream)
 {
-  fMsrOahGroup  = msrOpts;
+  fMsrOahGroup = msrOpts;
   fLpsrOahGroup = lpsrOpts;
 
   initializeLilypondUsefulFragments ();
@@ -1470,7 +1470,7 @@ Bool lpsr2lilypondTranslator::wholeNotesDurationShouldBeGenerated (
     wholeNotes != fLastMetWholeNotes;
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDurations ()) {
+  if (gTraceOahGroup->getTraceDurations ()) {
     fLilypondCodeStream <<
       std::endl <<
       "%{ " <<
@@ -6894,7 +6894,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
 
   // generate the name-value pairs
   for (std::pair <std::string, std::string> thePair : nameStringValuePairsList) {
-    std::string name  = thePair.first;
+    std::string name = thePair.first;
     std::string value = thePair.second;
 
     fLilypondCodeStream <<
@@ -7221,7 +7221,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       i != nameStringValuePairsList.end ();
       ++i
     ) {
-      std::string name  = (*i).first;
+      std::string name = (*i).first;
       std::string value = (*i).second;
 
       fLilypondCodeStream <<
@@ -7646,7 +7646,7 @@ void lpsr2lilypondTranslator::generatePaper (
       std::endl;
 
     for (std::pair <std::string, Bool> thePair : nameBooleanPairsList) {
-      std::string name  = thePair.first;
+      std::string name = thePair.first;
 
       Bool value = thePair.second;
 
@@ -13808,7 +13808,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //           upbeatNotesDuration =
 //             wholeNotesAsLilypondString (
 //               elt->getInputLineNumber (),
-//               elt->getMeasureAccumulatedWholeNotesDuration ());
+//               elt->getMeasureCurrentPositionInMeasure ());
 //
 //         fLilypondCodeStream <<
 //           "\\partial " << upbeatNotesDuration <<
@@ -13827,7 +13827,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //           upbeatNotesDuration =
 //             wholeNotesAsLilypondString (
 //               elt->getInputLineNumber (),
-//               elt->getMeasureAccumulatedWholeNotesDuration ());
+//               elt->getMeasureCurrentPositionInMeasure ());
 //
 //         fLilypondCodeStream <<
 //           "\\partial " << upbeatNotesDuration <<
@@ -13846,7 +13846,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //           upbeatNotesDuration =
 //             wholeNotesAsLilypondString (
 //               elt->getInputLineNumber (),
-//               elt->getMeasureAccumulatedWholeNotesDuration ());
+//               elt->getMeasureCurrentPositionInMeasure ());
 //
 //         fLilypondCodeStream <<
 //           "\\partial " << upbeatNotesDuration <<
@@ -13861,9 +13861,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHookedEnding:
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
 //       {
-//         mfWholeNotes
-//           measureAccumulatedWholeNotesDuration =
-//             elt->getMeasureAccumulatedWholeNotesDuration ();
+//         mfPositionInMeasure
+//           measureCurrentPositionInMeasure =
+//             elt->getMeasureCurrentPositionInMeasure ();
 //
 //         mfWholeNotes
 //           fullMeasureWholeNotesDuration =
@@ -13872,7 +13872,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //         // we should set the score measure whole notes in this case
 //         mfRational
 //           ratioToFullMeasureWholeNotesDuration =
-//             measureAccumulatedWholeNotesDuration / fullMeasureWholeNotesDuration;
+//             measureCurrentPositionInMeasure / fullMeasureWholeNotesDuration;
 //
 // #ifdef MF_TRACE_IS_ENABLED
 //         if (gTraceOahGroup->getTraceMeasuresDetails ()) {
@@ -13886,8 +13886,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //             ", line: " << elt->getInputLineNumber () <<
 //             std::endl <<
 //             std::setw (fieldWidth) <<
-//             "% measureAccumulatedWholeNotesDuration: " <<
-//             measureAccumulatedWholeNotesDuration.asString () <<
+//             "% measureCurrentPositionInMeasure: " <<
+//             measureCurrentPositionInMeasure.asString () <<
 //             std::endl <<
 //             std::setw (fieldWidth) <<
 //             "% fullMeasureWholeNotesDuration: " <<
@@ -13919,7 +13919,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 //           /* JMI
 //           fLilypondCodeStream <<
 //             "\\set Score.measureLength = #(ly:make-moment " <<
-//             measureAccumulatedWholeNotesDuration.toString () <<
+//             measureCurrentPositionInMeasure.toString () <<
 //             ")" <<
 //             std::endl;
 //     */
@@ -13936,16 +13936,16 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
     case msrMeasureKind::kMeasureKindOverFlowing:
       if (! fOnGoingVoiceCadenza) {
-        mfWholeNotes
-          measureAccumulatedWholeNotesDuration =
-            elt->getMeasureAccumulatedWholeNotesDuration (); // JMI v0.9.72
+        mfPositionInMeasure
+          measureCurrentPositionInMeasure =
+            elt->getMeasureCurrentPositionInMeasure (); // JMI v0.9.72
 
         fLilypondCodeStream <<
           std::endl <<
           "%{ begin kMeasureKindOverFlowing, measure " <<
           fCurrentMeasureNumber <<
-          ", % measureAccumulatedWholeNotesDuration: " <<
-          measureAccumulatedWholeNotesDuration.asString () <<
+          ", % measureCurrentPositionInMeasure: " <<
+          measureCurrentPositionInMeasure <<
           " %}" <<
           std::endl ;
 //           std::endl; // JMI v0.9.72 too much otherwise
@@ -14021,7 +14021,7 @@ void lpsr2lilypondTranslator::generateMusicallyEmptyMeasure (
           getStaffUpLinkToPart ();
 
   mfWholeNotes
-    measureAccumulatedWholeNotesDuration =
+    partMeasureWholeNotes =
       measurePart->
         fetchPartMeasuresWholeNotesVectorAt (
           measure->getInputLineNumber (),
@@ -14276,7 +14276,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 //                   getStaffUpLinkToPart ();
 //
 //           mfWholeNotes
-//             measureAccumulatedWholeNotesDuration =
+//             partMeasureWholeNotes =
 //               measurePart->
 //                 fetchPartMeasuresWholeNotesVectorAt (
 //                   elt->getInputLineNumber (),
@@ -17465,7 +17465,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
                     getLpsrQuarterTonesPitchesLanguageKind ());
 
                 msrModeKind
-                  modeKind         = elt->getModeKind (),
+                  modeKind = elt->getModeKind (),
                   modeKindToBeUsed = msrModeKind::kMode_UNKNOWN_;
 
                 switch (modeKind) {
@@ -17901,10 +17901,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrTransposition& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  int  transposeDiatonic     = elt->getTranspositionDiatonic ();
-  int  transposeChromatic    = elt->getTranspositionChromatic ();
+  int  transposeDiatonic = elt->getTranspositionDiatonic ();
+  int  transposeChromatic = elt->getTranspositionChromatic ();
   int  transposeOctaveChange = elt->getTranspositionOctaveChange ();
-  Bool transposeDouble       = elt->getTranspositionDouble ();
+  Bool transposeDouble = elt->getTranspositionDouble ();
 
 /*
   // transposition in LilyPond is relative to c',
@@ -18527,8 +18527,8 @@ void lpsr2lilypondTranslator::generateTempoBeatUnitsPerMinute (
 
   size_t tempoWordsListSize = tempoWordsList.size ();
 
-  mfDottedNotesDuration tempoBeatUnit  = tempo->getTempoBeatUnit ();
-  std::string       tempoPerMinute = tempo->getTempoPerMinute ();
+  mfDottedNotesDuration tempoBeatUnit = tempo->getTempoBeatUnit ();
+  std::string           tempoPerMinute = tempo->getTempoPerMinute ();
 
   switch (tempoParenthesizedKind) {
     case msrTempoParenthesizedKind::kTempoParenthesizedYes:
@@ -18718,8 +18718,8 @@ void lpsr2lilypondTranslator::generateTempoBeatUnitsEquivalence (
 
   size_t tempoWordsListSize = tempoWordsList.size ();
 
-  mfDottedNotesDuration tempoBeatUnit  = tempo->getTempoBeatUnit ();
-  std::string       tempoPerMinute = tempo->getTempoPerMinute ();
+  mfDottedNotesDuration tempoBeatUnit = tempo->getTempoBeatUnit ();
+  std::string           tempoPerMinute = tempo->getTempoPerMinute ();
 
   fLilypondCodeStream <<
     "\\tempo ";

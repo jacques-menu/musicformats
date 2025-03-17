@@ -27,6 +27,12 @@
 namespace MusicFormats
 {
 
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+//                         WRAPPED TYPES USE
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+
 /*
   There are still error messages on Linux and Windows at link time
   regarding some methods being undefined due to the instantiations below,
@@ -45,6 +51,9 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
 
   MF_USE_WRAPPED_TYPES is used temporarily
   to switch the use of these types on and off easily
+
+  This is placed here because only a few source files use this feature,
+  which minimizes re-compilations should the setting change
 */
 
 // #define MF_USE_WRAPPED_TYPES
@@ -135,35 +144,35 @@ C:/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/12.2.0/../../../../x86_64-w64-mingw
 //______________________________________________________________________________
 // whole notes durations
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mfWholeNotes = mfWholeNotes;
-#else
-  using mfWholeNotes =
-    mfWrappedValueWithDefault <
-      mfWholeNotes,
-      kWholeNotePrefix,
-      K_MF_EMPTY_STRING,
-      K_WHOLE_NOTES_UNKNOWN_,
-      kWholeNoteDefaultValueString
-    >;
-#endif // MF_USE_WRAPPED_TYPES
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfWholeNotes = mfWholeNotes;
+// #else
+//   using mfWholeNotes =
+//     mfWrappedValueWithDefault <
+//       mfWholeNotes,
+//       kWholeNotePrefix,
+//       K_MF_EMPTY_STRING,
+//       K_WHOLE_NOTES_UNKNOWN_,
+//       kWholeNoteDefaultValueString
+//     >;
+// #endif // MF_USE_WRAPPED_TYPES
 
 
 // moments
 //______________________________________________________________________________
 
-#ifndef MF_USE_WRAPPED_TYPES
-  using mfMoment = mfMoment;
-#else
-  using mfMoment =
-    mfWrappedValueWithDefault <
-      mfMoment,
-      kMomentPrefix,
-      K_MF_EMPTY_STRING,
-      K_MOMENT_UNKNOWN_,
-      kMomentDefaultValueString
-    >;
-#endif // MF_USE_WRAPPED_TYPES
+// #ifndef MF_USE_WRAPPED_TYPES
+//   using mfMoment = mfMoment;
+// #else
+//   using mfMoment =
+//     mfWrappedValueWithDefault <
+//       mfMoment,
+//       kMomentPrefix,
+//       K_MF_EMPTY_STRING,
+//       K_MOMENT_UNKNOWN_,
+//       kMomentDefaultValueString
+//     >;
+// #endif // MF_USE_WRAPPED_TYPES
 
 
 // lyrics

@@ -259,7 +259,7 @@ class EXP msrVoice : public msrElement
     void                  setVoiceShortestNoteWholeNotes (
                             const mfWholeNotes& wholeNotes);
 
-    mfWholeNotes         getVoiceShortestNoteWholeNotes () const
+    mfWholeNotes          getVoiceShortestNoteWholeNotes () const
                               { return fVoiceShortestNoteWholeNotes; }
 
     void                  setVoiceShortestNoteTupletFactor (
@@ -297,10 +297,10 @@ class EXP msrVoice : public msrElement
     // regular measure ends detection
 
     void                  setWholeNotesSinceLastRegularMeasureEnd (
-                            int                  inputLineNumber,
+                            int                 inputLineNumber,
                             const mfWholeNotes& wholeNotes);
 
-    mfWholeNotes         getWholeNotesSinceLastRegularMeasureEnd () const
+    mfWholeNotes          getWholeNotesSinceLastRegularMeasureEnd () const
                               { return fWholeNotesSinceLastRegularMeasureEnd; }
 
     // incomplete measures after repeats detection
@@ -407,9 +407,9 @@ class EXP msrVoice : public msrElement
 //                             int             inputLineNumber,
 //                             const mfWholeNotes& wholeNotesPositionInMeasure);
 
-    void                  backupByWholeNotesStepLengthInVoice (
-                            int                  inputLineNumber,
-                            const mfWholeNotes& backupTargetMeasureElementPositionInMeasure);
+//     void                  casadeBackupByWholeNotesStepLengthInVoice (
+//                             int                  inputLineNumber,
+//                             const mfWholeNotes& backupTargetMeasureElementPositionInMeasure);
 
     // clef, key, time signature
 
@@ -432,8 +432,8 @@ class EXP msrVoice : public msrElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInVoiceClone (
-                            int                  inputLineNumber,
-                            const mfWholeNotes& positionInMeasure);
+                            int                        inputLineNumber,
+                            const mfPositionInMeasure& positionInMeasure);
 
     // notes
 
@@ -531,30 +531,30 @@ class EXP msrVoice : public msrElement
 
     // harmonies
 
-    void                  appendHarmonyToVoice (
-                            int                  inputLineNumber,
-                            const S_msrHarmony&  harmony,
-                            const mfWholeNotes& positionInMeasureToAppendAt);
+    void                  cascadeAppendHarmonyToVoice (
+                            int                        inputLineNumber,
+                            const S_msrHarmony&        harmony,
+                            const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendHarmoniesListToVoice (
                             int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const mfWholeNotes&            positionInMeasureToAppendAt);
+                            const mfPositionInMeasure&      positionInMeasureToAppendAt);
 
-    void                  appendHarmonyToVoiceClone (
+    void                  cascadeAppendHarmonyToVoiceClone (
                             const S_msrHarmony& harmony);
 
     // figured bass
 
     void                  appendFiguredBassToVoice (
-                            int                     inputLineNumber,
-                            const S_msrFiguredBass& figuredBass,
-                            const mfWholeNotes&    positionInMeasureToAppendAt);
+                            int                       inputLineNumber,
+                            const S_msrFiguredBass&   figuredBass,
+                            const mfPositionInMeasure& positionInMeasureToAppendAt);
 
-    void                  appendFiguredBassesListToVoice (
+    void                  cascadeAppendFiguredBassesListToVoice (
                             int                                 inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const mfWholeNotes&                positionInMeasureToAppendAt);
+                            const mfPositionInMeasure&          positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToVoiceClone (
                             const S_msrFiguredBass& figuredBass);
@@ -868,7 +868,7 @@ class EXP msrVoice : public msrElement
                                 fCurrentVoicePosition += delta;
                               }
 
-    mfWholeNotes         getCurrentVoicePosition () const
+    mfWholeNotes          getCurrentVoicePosition () const
                               { return fCurrentVoicePosition; }
 
     const mfMoment&      getCurrentVoiceMoment () const
@@ -1100,7 +1100,7 @@ class EXP msrVoice : public msrElement
 
     // regular measure ends detection
 
-    mfWholeNotes         fWholeNotesSinceLastRegularMeasureEnd;
+    mfWholeNotes          fWholeNotesSinceLastRegularMeasureEnd;
 
      // stanzas
 
@@ -1135,7 +1135,7 @@ class EXP msrVoice : public msrElement
     // fVoiceShortestNoteWholeNotes and fVoiceShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    mfWholeNotes         fVoiceShortestNoteWholeNotes;
+    mfWholeNotes          fVoiceShortestNoteWholeNotes;
     msrTupletFactor       fVoiceShortestNoteTupletFactor;
 
     // repeats
@@ -1388,7 +1388,7 @@ class EXP msrVoice : public msrElement
 
     // current voice position
 
-    mfWholeNotes         fCurrentVoicePosition;
+    mfWholeNotes          fCurrentVoicePosition;
     mfMoment             fCurrentVoiceMoment;
 
     // voice finalization

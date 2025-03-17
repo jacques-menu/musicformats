@@ -134,7 +134,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // double tremolo elements duration
 
-    mfWholeNotes         getDoubleTremoloElementsNotesDuration () const
+    mfWholeNotes          getDoubleTremoloElementsNotesDuration () const
                               { return fDoubleTremoloElementsWholeNotes; }
 
     // double tremolo number of repeats
@@ -222,7 +222,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // sounding whole notes JMI
     // the same as the displayed divisions of both members
 // JMI    mfWholeNotes           fDoubleTremoloSoundingWholeNotes;
-//     mfWholeNotes         fDoubleTremoloSoundingWholeNotes;
+//     mfWholeNotes          fDoubleTremoloSoundingWholeNotes;
 
     msrDoubleTremoloKind  fDoubleTremoloKind;
 
@@ -231,7 +231,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     int                   fDoubleTremoloMarksNumber;
 
-    mfWholeNotes         fDoubleTremoloElementsWholeNotes;
+    mfWholeNotes          fDoubleTremoloElementsWholeNotes;
 
     int                   fDoubleTremoloNumberOfRepeats;
 

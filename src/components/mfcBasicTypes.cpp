@@ -87,8 +87,8 @@ void crackVersionNumber ( // JMI ??? v0.9.66
     // found an n.x.y specification
     std::string
       generationNumberValue = sm [1],
-      majorNumberValue      = sm [2],
-      minorNumberValue      = sm [3];
+      majorNumberValue = sm [2],
+      minorNumberValue = sm [3];
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
@@ -106,8 +106,8 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 #endif // MF_TRACE_IS_ENABLED
 
     generationNumber = stoi (generationNumberValue);
-    majorNumber      = stoi (majorNumberValue);
-    minorNumber      = stoi (minorNumberValue);
+    majorNumber = stoi (majorNumberValue);
+    minorNumber = stoi (minorNumberValue);
   }
 
   else {
@@ -155,7 +155,7 @@ void crackVersionNumber ( // JMI ??? v0.9.66
       // assume implicit 0 minor number
       std::string
         generationNumberValue = sm [1],
-        majorNumberValue      = sm [2];
+        majorNumberValue = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
       if (gEarlyOptions.getEarlyTraceComponents ()) {
@@ -173,8 +173,8 @@ void crackVersionNumber ( // JMI ??? v0.9.66
 #endif // MF_TRACE_IS_ENABLED
 
       generationNumber = stoi (generationNumberValue);
-      majorNumber      = stoi (majorNumberValue);
-      minorNumber      = 0;
+      majorNumber = stoi (majorNumberValue);
+      minorNumber = 0;
     }
 
     else {
@@ -377,7 +377,7 @@ mfcVersionNumber::mfcVersionNumber (
   fMajorNumber = majorNumber;
   fMinorNumber = minorNumber;
   fPatchNumber = patchNumber;
-  fPreRelease  = preRelease;
+  fPreRelease = preRelease;
 }
 
 mfcVersionNumber::~mfcVersionNumber ()
@@ -447,11 +447,11 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
   if (smSize == 5) {
     // found an n.x.y specification
     std::string
-      majorNumberValue      = sm [1],
-      minorNumberValue      = sm [2],
-      patchNumberValue      = sm [3];
+      majorNumberValue = sm [1],
+      minorNumberValue = sm [2],
+      patchNumberValue = sm [3];
 
-    preReleaseValue         = sm [4];
+    preReleaseValue = sm [4];
 
 #ifdef MF_TRACE_IS_ENABLED
     if (gEarlyOptions.getEarlyTraceComponents ()) {
@@ -469,9 +469,9 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
     }
 #endif // MF_TRACE_IS_ENABLED
 
-    majorNumber      = stoi (majorNumberValue);
-    minorNumber      = stoi (minorNumberValue);
-    patchNumber      = stoi (patchNumberValue);
+    majorNumber = stoi (majorNumberValue);
+    minorNumber = stoi (minorNumberValue);
+    patchNumber = stoi (patchNumberValue);
   }
 
   else {
@@ -776,8 +776,8 @@ mfcVersion::mfcVersion (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fVersionNumber       = versionNumber;
-  fVersionDate         = versionDate;
+  fVersionNumber = versionNumber;
+  fVersionDate = versionDate;
 
   fVersionDescriptionItems = versionDescriptionItems;
 }

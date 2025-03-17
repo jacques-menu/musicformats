@@ -39,6 +39,15 @@
 namespace MusicFormats
 {
 //______________________________________________________________________________
+mfPositionInMeasure mfPositionInMeasure::createFromWholeNotes (
+  const mfWholeNotes& wholeNotes)
+{
+  return
+    mfPositionInMeasure (
+      wholeNotes.getNumerator (),
+      wholeNotes.getDenominator ());
+}
+
 mfPositionInMeasure::mfPositionInMeasure ()
 {
   fNumerator = 0;
@@ -46,27 +55,33 @@ mfPositionInMeasure::mfPositionInMeasure ()
 }
 
 mfPositionInMeasure::mfPositionInMeasure (
-  int num,
-  int denom)
+  int numerator,
+  int denominator)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     numerator >= 0,
+//     "mfPositionInMeasure numerator '" + std::to_string (numerator) + "' should be positive or null");
+
   mfAssert (
     __FILE__, __LINE__,
-    denom > 0,
-    "mfPositionInMeasure denominator '" + std::to_string (denom) + "' shoule be positive");
+    denominator > 0,
+    "mfPositionInMeasure denominator '" + std::to_string (denominator) + "' should be positive");
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 
-  fNumerator = num;
-  fDenominator = denom;
+  fNumerator = numerator;
+  fDenominator = denominator;
 
   rationalise ();
 }
 
-mfPositionInMeasure::mfPositionInMeasure (const mfPositionInMeasure& wholeNotes)
+mfPositionInMeasure::mfPositionInMeasure (
+  const mfPositionInMeasure& positionInMeasure)
 {
-  fNumerator   = wholeNotes.getNumerator ();
-  fDenominator = wholeNotes.getDenominator ();
+  fNumerator = positionInMeasure.getNumerator ();
+  fDenominator = positionInMeasure.getDenominator ();
 }
 
 mfPositionInMeasure::mfPositionInMeasure (const std::string& theString)
@@ -89,11 +104,11 @@ mfPositionInMeasure::mfPositionInMeasure (const std::string& theString)
     // found a well-formed specification,
     // need to check its contents
     std::string
-      numewholeNotesor   = sm [1],
+      numewholeNotesor = sm [1],
       denominator = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDurations ()) {
+  if (gTraceOahGroup->getTraceDurations ()) {
       std::stringstream ss;
 
       ss <<
@@ -220,10 +235,25 @@ mfPositionInMeasure& mfPositionInMeasure::operator -= (
   return (*this);
 }
 
+mfWholeNotes mfPositionInMeasure::operator - (
+  const mfPositionInMeasure &positionInMeasure) const
+{
+  mfWholeNotes
+    result (
+      fNumerator * positionInMeasure.getDenominator ()
+        -
+      positionInMeasure.getNumerator () * fDenominator,
+      fDenominator * positionInMeasure.getDenominator ());
+
+  result.rationalise ();
+
+  return result;
+}
+
 mfPositionInMeasure& mfPositionInMeasure::operator = (
   const mfPositionInMeasure& positionInMeasure)
 {
-  fNumerator   = positionInMeasure.fNumerator;
+  fNumerator = positionInMeasure.fNumerator;
   fDenominator = positionInMeasure.fDenominator;
 
   return (*this);
@@ -296,7 +326,7 @@ void mfPositionInMeasure::rationalise ()
     fDenominator = 1;
   }
   else if (fDenominator < 0) {
-    fNumerator   = -fNumerator;
+    fNumerator = -fNumerator;
     fDenominator = -fDenominator;
   }
 }
@@ -341,15 +371,21 @@ mfPositionInMeasure::operator int () const
   return ((int) floor (x + 0.5f));
 }
 
+mfWholeNotes mfPositionInMeasure::asWholeNotes () const
+{
+  return
+    mfWholeNotes (fNumerator, fDenominator);
+}
+
 std::string mfPositionInMeasure::asShortString () const
 {
   std::stringstream ss;
 
-  if (fNumerator == K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ ) {
-    ss << "UNKNOWN_WHOLE_NOTES_";
+  if (fNumerator == K_POSITION_IN_MEASURE_NUMERATOR_UNKNOWN_ ) {
+    ss << "K_POSITION_IN_MEASURE_UNKNOWN_";
   }
   else {
-    ss << fNumerator << '/' << fDenominator << " whn";
+    ss << "pim " << fNumerator << '/' << fDenominator;
   }
 
   return ss.str ();
@@ -359,7 +395,7 @@ std::string mfPositionInMeasure::asFractionString () const
 {
   std::stringstream ss;
 
-  ss << fNumerator << '/' << fDenominator << " whn";
+  ss << "pim " << fNumerator << '/' << fDenominator;
 
   return ss.str ();
 }
@@ -369,17 +405,20 @@ void mfPositionInMeasure::print (std::ostream& os) const
   os << asString () << std::endl;
 }
 
-std::ostream& operator << (std::ostream& os, const mfPositionInMeasure& wholeNotes)
+std::ostream& operator << (
+  std::ostream&              os,
+  const mfPositionInMeasure& positionInMeasure)
 {
-  os << wholeNotes.asShortString ();
+  os << positionInMeasure.asShortString ();
   return os;
 }
 
 EXP mfIndentedStringStream& operator << (
-  mfIndentedStringStream& iss, const mfPositionInMeasure& wholeNotes)
+  mfIndentedStringStream&    iss,
+  const mfPositionInMeasure& positionInMeasure)
 {
   iss.getStringstream () <<
-    wholeNotes.asString ();
+    positionInMeasure.asString ();
 
   return iss;
 }

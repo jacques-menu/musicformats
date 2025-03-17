@@ -24,14 +24,14 @@ mfInputLinesRange::mfInputLinesRange (
   int inputEndLineNumber)
 {
   fInputLineNumber = inputStartLineNumber;
-  fInputEndLineNumber   = inputEndLineNumber;
+  fInputEndLineNumber = inputEndLineNumber;
 }
 
 mfInputLinesRange::mfInputLinesRange (
   int inputStartLineNumber)
 {
   fInputLineNumber = inputStartLineNumber;
-  fInputEndLineNumber   = inputStartLineNumber;
+  fInputEndLineNumber = inputStartLineNumber;
 }
 
 mfInputLinesRange::~mfInputLinesRange ()

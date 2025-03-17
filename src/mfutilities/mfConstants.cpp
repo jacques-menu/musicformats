@@ -125,20 +125,31 @@ const int K_WHOLE_NOTES_NUMERATOR_UNKNOWN_ = -1;
 const mfWholeNotes K_WHOLE_NOTES_UNKNOWN_ =
   mfWholeNotes (-1, 1);
 
+const mfWholeNotes K_WHOLE_NOTES_ZERO =
+  mfWholeNotes (0, 1);
+
 const std::string
   kWholeNotePrefix ("whole_notes_"),
   kWholeNoteDefaultValueString ("K_WHOLE_NOTES_UNKNOWN_");
 
-// moments
+// position in measure
 //______________________________________________________________________________
 
-const mfWholeNotes K_POSITION_IN_MEASURE_UNKNOWN_ =
-  mfWholeNotes (K_WHOLE_NOTES_NUMERATOR_UNKNOWN_, 1);
+const int K_POSITION_IN_MEASURE_NUMERATOR_UNKNOWN_ = -2;
+
+const mfPositionInMeasure K_POSITION_IN_MEASURE_UNKNOWN_ =
+  mfPositionInMeasure (K_POSITION_IN_MEASURE_NUMERATOR_UNKNOWN_, 1);
+
+const mfPositionInMeasure K_POSITION_IN_MEASURE_ZERO =
+  mfPositionInMeasure (0, 1);
+
+// moments
+//______________________________________________________________________________
 
 const mfMoment K_MOMENT_UNKNOWN_ =
   mfMoment (
     K_POSITION_IN_MEASURE_UNKNOWN_,
-    K_POSITION_IN_MEASURE_UNKNOWN_);
+    K_WHOLE_NOTES_UNKNOWN_);
 
 const std::string
   kMomentPrefix ("moment_"),

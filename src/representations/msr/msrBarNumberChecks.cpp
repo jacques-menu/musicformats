@@ -72,7 +72,7 @@ msrBarNumberCheck::msrBarNumberCheck (
         inputLineNumber)
 {
   fNextBarOriginalNumber = nextBarOriginalNumber;
-  fNextBarPuristNumber   = nextBarPuristNumber;
+  fNextBarPuristNumber = nextBarPuristNumber;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresNumbers ()) {

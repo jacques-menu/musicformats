@@ -397,7 +397,7 @@ msrClef::msrClef (
     : msrMeasureElement (
         inputLineNumber)
 {
-  fClefKind        = clefKind;
+  fClefKind = clefKind;
   fClefStaffNumber = clefStaffNumber;
 }
 

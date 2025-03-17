@@ -20,6 +20,7 @@
 #include "mfBool.h"
 
 #include "mfDurations.h"
+#include "mfPositionInMeasure.h"
 
 
 namespace MusicFormats
@@ -44,11 +45,11 @@ class EXP mfMoment
                           mfMoment ();
 
                           mfMoment (
-                            const mfWholeNotes& writtenPositionInMeasure,
-                            const mfWholeNotes& soundingRelativeOffset);
+                            const mfPositionInMeasure& writtenPositionInMeasure,
+                            const mfWholeNotes&        soundingRelativeOffset);
 
                           mfMoment (
-                            const mfWholeNotes& writtenPositionInMeasure);
+                            const mfPositionInMeasure& writtenPositionInMeasure);
 
     virtual               ~mfMoment ();
 
@@ -57,16 +58,16 @@ class EXP mfMoment
     // set and get
     // ------------------------------------------------------
 
-    void                  setWrittenPositionInMeseasure (mfWholeNotes position)
+    void                  setWrittenPositionInMeseasure (mfPositionInMeasure position)
                               { fWrittenPositionInMeseasure = position; }
 
-    mfWholeNotes         getWrittenPositionInMeseasure () const
+    mfPositionInMeasure   getWrittenPositionInMeseasure () const
                               { return fWrittenPositionInMeseasure; }
 
     void                  setSoundingRelativeOffset (mfWholeNotes offset)
                               { fSoundingRelativeOffset = offset; }
 
-    mfWholeNotes         getSoundingRelativeOffset () const
+    mfWholeNotes          getSoundingRelativeOffset () const
                               { return fSoundingRelativeOffset; }
 
   public:
@@ -114,8 +115,8 @@ class EXP mfMoment
     // private fields
     // ------------------------------------------------------
 
-    mfWholeNotes         fWrittenPositionInMeseasure;
-    mfWholeNotes         fSoundingRelativeOffset;
+    mfPositionInMeasure  fWrittenPositionInMeseasure;
+    mfWholeNotes          fSoundingRelativeOffset;
 };
 EXP std::ostream& operator << (std::ostream& os, const mfMoment& elt);
 

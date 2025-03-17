@@ -873,7 +873,7 @@ msrSystemDividers::msrSystemDividers (
   int inputLineNumber)
     : msrElement (inputLineNumber)
 {
-  fLeftDivider  = false;
+  fLeftDivider = false;
   fRightDivider = false;
 }
 
@@ -1325,7 +1325,7 @@ msrLineWidth::msrLineWidth (
 #endif // MF_TRACE_IS_ENABLED
 
   fLineWidthTypeKind = lineWidthTypeKind;
-  fLineWidthValue    = lineWidthValue;
+  fLineWidthValue = lineWidthValue;
 }
 
 msrLineWidth::~msrLineWidth ()
@@ -1505,7 +1505,7 @@ msrNoteSize::msrNoteSize (
 #endif // MF_TRACE_IS_ENABLED
 
   fNoteSizeTypeKind = noteSizeTypeKind;
-  fNoteSizeValue    = noteSizeValue;
+  fNoteSizeValue = noteSizeValue;
 }
 
 msrNoteSize::~msrNoteSize ()
@@ -1672,7 +1672,7 @@ msrDistance::msrDistance (
 #endif // MF_TRACE_IS_ENABLED
 
   fDistanceTypeKind = distanceTypeKind;
-  fDistanceValue    = distanceValue;
+  fDistanceValue = distanceValue;
 }
 
 msrDistance::~msrDistance ()
@@ -1839,7 +1839,7 @@ msrGlyph::msrGlyph (
 #endif // MF_TRACE_IS_ENABLED
 
   fGlyphTypeKind = glyphTypeKind;
-  fGlyphValue    = glyphValue;
+  fGlyphValue = glyphValue;
 }
 
 msrGlyph::~msrGlyph ()
@@ -2006,7 +2006,7 @@ msrOtherAppearance::msrOtherAppearance (
 #endif // MF_TRACE_IS_ENABLED
 
   fOtherAppearanceTypeKind = otherAppearanceTypeKind;
-  fOtherAppearanceValue    = otherAppearanceValue;
+  fOtherAppearanceValue = otherAppearanceValue;
 }
 
 msrOtherAppearance::~msrOtherAppearance ()

@@ -149,7 +149,7 @@ msrNote::msrNote (
   // basic note description
   fNoteKind = noteKind;
 
-  fNoteQuarterTonesPitchKind  = noteQuarterTonesPitchKind;
+  fNoteQuarterTonesPitchKind = noteQuarterTonesPitchKind;
   fNoteOctaveKind = noteOctaveKind;
 
   fNoteDotsNumber = noteDotsNumber;
@@ -159,17 +159,17 @@ msrNote::msrNote (
   fNoteTupletFactor = mfRational (1, 1);
 
   fNoteQuarterTonesDisplayPitchKind = noteQuarterTonesDisplayPitchKind;
-  fNoteDisplayOctaveKind            = noteDisplayOctaveKind;
+  fNoteDisplayOctaveKind = noteDisplayOctaveKind;
 
   fNoteIsACueNoteKind = noteIsACueNoteKind;
 
   fNotePrintObjectKind = notePrintObjectKind;
 
-  fNoteHeadKind            = noteHeadKind;
-  fNoteHeadFilledKind      = msrNoteHeadFilledKind;
+  fNoteHeadKind = noteHeadKind;
+  fNoteHeadFilledKind = msrNoteHeadFilledKind;
   fNoteHeadParenthesesKind = msrNoteHeadParenthesesKind;
 
-  fNoteDisplayWholeNotes  = noteDisplayWholeNotes;
+  fNoteDisplayWholeNotes = noteDisplayWholeNotes;
 
   // only now, to be able to display the note as a string
   setMeasureElementSoundingWholeNotes (
@@ -606,7 +606,7 @@ void msrNote::setNoteKind (msrNoteKind noteKind)
 void msrNote::setNoteColorAlphaRGB (
   msrColorAlphaRGB& noteColorAlphaRGB)
 {
-  fNoteColorAlphaRGB          = noteColorAlphaRGB;
+  fNoteColorAlphaRGB = noteColorAlphaRGB;
   fNoteColorAlphaRGBHasBenSet = true;
 }
 
@@ -1761,7 +1761,7 @@ S_msrNote msrNote::createRestFromString (
 
   std::string
     restNotesDuration = sm [1],
-    restDots     = sm [2];
+    restDots = sm [2];
 
   size_t dotsNumber = restDots.size ();
 
@@ -1922,7 +1922,7 @@ S_msrNote msrNote::createSkipFromString (
 
   std::string
     skipNotesDuration = sm [1],
-    skipDots     = sm [2];
+    skipDots = sm [2];
 
   size_t dotsNumber = skipDots.size ();
 
@@ -2088,10 +2088,10 @@ S_msrNote msrNote::createNoteFromString (
   }
 
   std::string
-    notePitch            = sm [1],
+    notePitch = sm [1],
     noteOctaveIndication = sm [2],
-    noteNotesDuration         = sm [3],
-    noteDots             = sm [4];
+    noteNotesDuration = sm [3],
+    noteDots = sm [4];
 
   size_t dotsNumber = noteDots.size ();
 
@@ -2217,8 +2217,8 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       semiTonesPitchAndOctave->
         getOctaveKind (),
 
-      mfWholeNotes (0, 1), // soundingWholeNotes,
-      mfWholeNotes (0, 1), // displayWholeNotes,
+      K_WHOLE_NOTES_ZERO, // soundingWholeNotes,
+      K_WHOLE_NOTES_ZERO, // displayWholeNotes,
 
       0, // dotsNumber,
 
@@ -6266,7 +6266,7 @@ void msrNote::printFull (std::ostream& os) const
         ?
           fMeasureElementUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
-        : mfWholeNotes (0, 1); // JMI v0.9.67
+        : K_WHOLE_NOTES_ZERO; // JMI v0.9.67
 
   os << std::left <<
     std::setw (fieldWidth) <<

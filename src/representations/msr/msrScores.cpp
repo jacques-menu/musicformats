@@ -109,12 +109,12 @@ msrScore::msrScore (
   fScorePartNamesMaxLength = 0;
 
   // set instrument names max lengths
-  fScoreInstrumentNamesMaxLength         = 0;
+  fScoreInstrumentNamesMaxLength = 0;
   fScoreInstrumentAbbreviationsMaxLength = 0;
 
   // grace notes groups before should be browsed by default
   fInhibitGraceNotesGroupsBeforeBrowsing = false;
-  fInhibitGraceNotesGroupsAfterBrowsing  = false;
+  fInhibitGraceNotesGroupsAfterBrowsing = false;
 
   // measure repeats replicas should be browsed by default
   fInhibitMeasureRepeatReplicasBrowsing = false;

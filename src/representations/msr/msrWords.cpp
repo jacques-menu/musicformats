@@ -72,17 +72,17 @@ msrWords::msrWords (
   int                        wordsStaffNumber)
     : msrElement (inputLineNumber)
 {
-  fWordsPlacementKind  = wordsPlacementKind;
+  fWordsPlacementKind = wordsPlacementKind;
 
   fWordsContents = wordsContents;
 
   fWordsJustifyKind = wordsJustifyKind;
 
   fWordsHorizontalAlignmentKind = wordsHorizontalAlignmentKind;
-  fWordsVerticalAlignmentKind   = wordsVerticalAlignmentKind;
+  fWordsVerticalAlignmentKind = wordsVerticalAlignmentKind;
 
-  fWordsFontStyleKind  = wordsFontStyleKind;
-  fWordsFontSize       = wordsFontSize;
+  fWordsFontStyleKind = wordsFontStyleKind;
+  fWordsFontSize = wordsFontSize;
   fWordsFontWeightKind = wordsFontWeightKind;
 
   fWordsXMLLangKind = wordsXMLLangKind;

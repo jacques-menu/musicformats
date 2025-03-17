@@ -113,9 +113,9 @@ msrSlur::msrSlur (
   msrPlacementKind slurPlacementKind)
     : msrElement (inputLineNumber)
 {
-  fSlurNumber        = slurNumber;
-  fSlurTypeKind      = slurTypeKind;
-  fSlurLineTypeKind  = slurLineTypeKind;
+  fSlurNumber = slurNumber;
+  fSlurTypeKind = slurTypeKind;
+  fSlurLineTypeKind = slurLineTypeKind;
   fSlurPlacementKind = slurPlacementKind;
 }
 

@@ -182,7 +182,7 @@ msrBassFigure::msrBassFigure (
     figureUpLinkToPart;
 
   fFigurePrefixKind = figurePrefixKind;
-  fFigureNumber     = figureNumber;
+  fFigureNumber = figureNumber;
   fFigureSuffixKind = figureSuffixKind;
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -417,9 +417,9 @@ S_msrFiguredBass msrFiguredBass::create (
     new msrFiguredBass (
       inputLineNumber,
       upLinkToMeasure,
-      mfWholeNotes (0, 1),           // figuredBassSoundingWholeNotes
-      mfWholeNotes (0, 1),           // figuredBassDisplayWholeNotes
-//       mfWholeNotes (0, 1),           // fFiguredBassWholeNotesDuration
+      K_WHOLE_NOTES_ZERO,           // figuredBassSoundingWholeNotes
+      K_WHOLE_NOTES_ZERO,           // figuredBassDisplayWholeNotes
+//       K_WHOLE_NOTES_ZERO,           // fFiguredBassWholeNotesDuration
       msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo,
       msrTupletFactor (1, 1));
   assert (obj != nullptr);
@@ -521,7 +521,7 @@ msrFiguredBass::msrFiguredBass (
 
   // a figured bass element is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeTheFiguredBassesInAFiguredBassMeasure()
-  fMeasureElementPositionInMeasure = mfPositionInMeasure (0, 1);
+  fMeasureElementPositionInMeasure = K_POSITION_IN_MEASURE_ZERO;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceFiguredBasses ()) {

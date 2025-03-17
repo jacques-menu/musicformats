@@ -1707,7 +1707,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingHarmoniesVoice) {
     // append the harmony clone to the current voice clone
     fCurrentVoiceClone->
-      appendHarmonyToVoiceClone (
+      cascadeAppendHarmonyToVoiceClone (
         fCurrentHarmonyClone);
   }
 
@@ -5059,7 +5059,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 //           // increment the current measure's accumulated duration
 //           // by the current chord's duration
 //           fCurrentMeasureClone->
-//             incrementMeasureAccumulatedWholeNotesDuration (
+//             incrementMeasureCurrentPositionInMeasure (
 //               elt->getInputLineNumber (),
 //               fCurrentNoteClone->getMeasureElementSoundingWholeNotes (),
 //               "msr2msrTranslator::visitEnd (S_msrNote& elt) 2: "

@@ -134,7 +134,7 @@ msrMargin::msrMargin (
   msrLength         marginLength)
 {
   fMarginTypeKind = marginTypeKind;
-  fMarginLength   = marginLength;
+  fMarginLength = marginLength;
 }
 
 msrMargin::~msrMargin ()

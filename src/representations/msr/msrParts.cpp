@@ -169,7 +169,7 @@ void msrPart::initializePart ()
   fPartContainsMultipleMeasureRests = false;
 
   // drawing measure position
-  fPartCurrentDrawingPositionInMeasure = mfPositionInMeasure (0, 1);
+  fPartCurrentDrawingPositionInMeasure = K_POSITION_IN_MEASURE_ZERO;
 
   // part shortest note wholeNotes
   fPartShortestNoteWholeNotes = mfWholeNotes (INT_MAX, 1);
@@ -372,7 +372,7 @@ void msrPart::registerStaffInPart (
 }
 
 void msrPart::setPartCurrentDrawingPositionInMeasure (
-  int                  inputLineNumber,
+  int                        inputLineNumber,
   const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -439,12 +439,12 @@ void msrPart::resetPartCurrentDrawingPositionInMeasure (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fPartCurrentDrawingPositionInMeasure = mfPositionInMeasure (0, 1);
+  fPartCurrentDrawingPositionInMeasure = K_POSITION_IN_MEASURE_ZERO;
 }
 
 void msrPart::incrementPartCurrentDrawingPositionInMeasure (
-  int                  inputLineNumber,
-  const mfPositionInMeasure& wholeNotesDelta)
+  int                 inputLineNumber,
+  const mfWholeNotes& wholeNotesDelta)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -494,8 +494,8 @@ void msrPart::incrementPartCurrentDrawingPositionInMeasure (
 }
 
 void msrPart::decrementPartCurrentDrawingPositionInMeasure (
-  int                  inputLineNumber,
-  const mfPositionInMeasure& wholeNotesDelta)
+  int                 inputLineNumber,
+  const mfWholeNotes& wholeNotesDelta)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -835,7 +835,7 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceWholeNoteDurations ()
+    gTraceOahGroup->getTraceDurations ()
       ||
     gTraceOahGroup->getTracePositionInMeasuresDetails ()
   ) {
@@ -891,7 +891,7 @@ mfWholeNotes msrPart::fetchPartMeasuresWholeNotesVectorAt (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceWholeNoteDurations ()
+    gTraceOahGroup->getTraceDurations ()
       ||
     gTraceOahGroup->getTracePositionInMeasuresDetails ()
   ) {
@@ -1009,13 +1009,13 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
     fPartMeasuresWholeNotesVector.clear ();
     fPartMeasuresWholeNotesVector.resize (
       fPartNumberOfMeasures,
-      mfWholeNotes (0, 1));
+      K_WHOLE_NOTES_ZERO);
   }
 }
 
 void msrPart::registerOrdinalMeasureNumberWholeNotes (
-  int                  inputLineNumber,
-  int                  measureOrdinalNumber,
+  int                 inputLineNumber,
+  int                 measureOrdinalNumber,
   const mfWholeNotes& wholeNotes)
 {
 #ifdef MF_TRACE_IS_ENABLED
@@ -1119,7 +1119,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotes (
 
 #ifdef MF_TRACE_IS_ENABLED
   if (
-    gTraceOahGroup->getTraceWholeNoteDurations ()
+    gTraceOahGroup->getTraceDurations ()
       ||
     gTraceOahGroup->getTracePositionInMeasuresDetails ()
   ) {
@@ -2572,7 +2572,7 @@ void msrPart::appendHarmonyToPart (
 #endif // MF_TRACE_IS_ENABLED
 
   fPartHarmoniesVoice->
-     appendHarmonyToVoice (
+     cascadeAppendHarmonyToVoice (
       inputLineNumber,
       harmony,
       positionInMeasureToAppendAt);
@@ -2606,7 +2606,7 @@ void msrPart::appendHarmoniesListToPart (
       positionInMeasureToAppendAt);
 }
 
-void msrPart::appendFiguredBassesListToPart (
+void msrPart::cascadeAppendFiguredBassesListToPart (
   int                                 inputLineNumber,
   const std::list <S_msrFiguredBass>& figuredBasssesList,
   const mfPositionInMeasure&          positionInMeasureToAppendAt)
@@ -2631,7 +2631,7 @@ void msrPart::appendFiguredBassesListToPart (
 #endif // MF_TRACE_IS_ENABLED
 
   fPartHarmoniesVoice->
-    appendFiguredBassesListToVoice (
+    cascadeAppendFiguredBassesListToVoice (
       inputLineNumber,
       figuredBasssesList,
       positionInMeasureToAppendAt);

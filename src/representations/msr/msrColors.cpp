@@ -216,14 +216,14 @@ msrColorAlphaRGB::msrColorAlphaRGB (
   const std::string& colorRGB,
   const std::string& colorAlpha)
 {
-  fColorRGB   = colorRGB;
+  fColorRGB = colorRGB;
   fColorAlpha = colorAlpha;
 }
 
 msrColorAlphaRGB::msrColorAlphaRGB (
   const std::string& colorRGB)
 {
-  fColorRGB   = colorRGB;
+  fColorRGB = colorRGB;
   fColorAlpha = "FF";
 }
 

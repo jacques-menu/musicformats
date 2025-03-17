@@ -85,7 +85,7 @@ msrBeam::msrBeam (
     : msrElement (inputLineNumber)
 {
   fBeamNumber = number;
-  fBeamKind   = beamKind;
+  fBeamKind = beamKind;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceBeams ()) {

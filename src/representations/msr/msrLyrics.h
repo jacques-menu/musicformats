@@ -257,7 +257,7 @@ class EXP msrSyllable : public msrElement
                             mfWholeNotes wholeNotes)
                               { fSyllableWholeNotes = wholeNotes; }
 
-    mfWholeNotes         getSyllableWholeNotes () const
+    mfWholeNotes          getSyllableWholeNotes () const
                               { return fSyllableWholeNotes; }
 
     // syllable tuplet factor
@@ -341,7 +341,7 @@ class EXP msrSyllable : public msrElement
     std::string           fSyllableStanzaNumber;
 
     // syllable whole notes
-    mfWholeNotes         fSyllableWholeNotes;
+    mfWholeNotes          fSyllableWholeNotes;
 
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;
@@ -443,9 +443,9 @@ class EXP msrStanza : public msrElement
 //                             const mfWholeNotes& wholeNotes);
 
     void                  appendMeasureEndSyllableToStanza (
-                            int                  inputLineNumber,
-                            const S_msrMeasure&  upLinkToMeasure,
-                            const mfWholeNotes& partCurrentDrawingPositionInMeasure);
+                            int                        inputLineNumber,
+                            const S_msrMeasure&        upLinkToMeasure,
+                            const mfPositionInMeasure& partCurrentDrawingPositionInMeasure);
 
 //     S_msrSyllable         appendMelismaSyllableToStanza (
 //                             int             inputLineNumber,
@@ -490,7 +490,7 @@ class EXP msrStanza : public msrElement
                             int                 inputLineNumber,
                             const S_msrMeasure& upLinkToMeasure);
 
-//     void                  padUpToMeasureAccumulatedWholeNotesDurationInStanza ( // JMI v0.9.68
+//     void                  padUpToMeasureCurrentPositionInMeasureInStanza ( // JMI v0.9.68
 //                             int                  inputLineNumber,
 //                             const mfWholeNotes& wholeNotes);
 
@@ -539,8 +539,8 @@ class EXP msrStanza : public msrElement
 
     Bool                  fStanzaTextPresent;
 
-    // measure whole notes
-    mfWholeNotes         fStanzaMeasureAccumulatedWholeNotesDuration;
+    // position in measure
+    mfPositionInMeasure   fStanzaMeasureCurrentPositionInMeasure;
 };
 typedef SMARTP<msrStanza> S_msrStanza;
 EXP std::ostream& operator << (std::ostream& os, const S_msrStanza& elt);

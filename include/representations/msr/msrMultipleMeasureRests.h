@@ -86,7 +86,7 @@ class EXP msrMultipleMeasureRest : public msrSegmentElement
     int                   getLastMeasurePuristMeasureNumber () const
                               { return fLastMeasurePuristNumber; }
 
-    mfWholeNotes         fetchMultipleMeasureRestMeasureSoundingNotes () const;
+    mfWholeNotes          fetchMultipleMeasureRestMeasureSoundingNotes () const;
                             // don't simply multiply duration by number,
                             // may help pin-point errors in representation
   public:

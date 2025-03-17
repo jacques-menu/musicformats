@@ -140,8 +140,8 @@ class EXP msrBarre
                             int barreFretNumber)
                               {
                                 fBarreStartString = barreStartString;
-                                fBarreStopString  = barreStopString;
-                                fBarreFretNumber  = barreFretNumber;
+                                fBarreStopString = barreStopString;
+                                fBarreFretNumber = barreFretNumber;
                               }
 
    public:

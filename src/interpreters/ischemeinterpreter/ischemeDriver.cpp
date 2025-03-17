@@ -41,7 +41,7 @@ using namespace std;
 
 //_______________________________________________________________________________
 // constants
-const std::string ischemeDriver::K_ALL_PSEUDO_LABEL_NAME  = "all";
+const std::string ischemeDriver::K_ALL_PSEUDO_LABEL_NAME = "all";
 
 //______________________________________________________________________________
 ischemeDriver::ischemeDriver ()

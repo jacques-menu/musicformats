@@ -130,15 +130,15 @@ msrCreditWords::msrCreditWords (
   fCreditWordsDefaultX = creditWordsDefaultX;
   fCreditWordsDefaultY = creditWordsDefaultY;
 
-  fCreditWordsFontFamily     = creditWordsFontFamily;
-  fCreditWordsFontSize       = creditWordsFontSize;
+  fCreditWordsFontFamily = creditWordsFontFamily;
+  fCreditWordsFontSize = creditWordsFontSize;
   fCreditWordsFontWeightKind = creditWordsFontWeightKind;
-  fCreditWordsFontStyleKind  = creditWordsFontStyleKind;
+  fCreditWordsFontStyleKind = creditWordsFontStyleKind;
 
   fCreditWordsJustifyKind = creditWordsJustifyKind;
 
   fCreditWordsHorizontalAlignmentKind = creditWordsHorizontalAlignmentKind;
-  fCreditWordsVerticalAlignmentKind   = creditWordsVerticalAlignmentKind;
+  fCreditWordsVerticalAlignmentKind = creditWordsVerticalAlignmentKind;
 
   fCreditWordsXMLLang = creditWordsXMLLang;
 }
@@ -213,7 +213,7 @@ void msrCreditWords::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }
@@ -403,7 +403,7 @@ void msrCredit::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }

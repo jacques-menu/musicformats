@@ -642,7 +642,7 @@ void extraDisplayHarmonyDetailsAtom::applyAtomWithValue (
   }
 
   std::string
-    rootName    = sm [1],
+    rootName = sm [1],
     harmonyName = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -993,8 +993,8 @@ void extraDisplayHarmonyAnalysisAtom::applyAtomWithValue (
   }
 
   std::string
-    rootName          = sm [1],
-    harmonyName       = sm [2],
+    rootName = sm [1],
+    harmonyName = sm [2],
     inversionAsString = sm [3];
 
   int inversion;

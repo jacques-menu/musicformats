@@ -139,7 +139,7 @@ class EXP msrChord : public msrTupletElement
     void                  setChordDisplayWholeNotes (
                             const mfWholeNotes& wholeNotes);
 
-    mfWholeNotes         getChordDisplayWholeNotes () const
+    mfWholeNotes          getChordDisplayWholeNotes () const
                               { return fChordDisplayWholeNotes; }
 
     // graphic duration
@@ -359,8 +359,8 @@ class EXP msrChord : public msrTupletElement
 //                             const std::string&   context) override;
 
     void                  setChordMembersPositionInMeasure (
-                            const S_msrMeasure&  measure,
-                            const mfWholeNotes& positionInMeasure);
+                            const S_msrMeasure&        measure,
+                            const mfPositionInMeasure& positionInMeasure);
 
   public:
 
@@ -619,7 +619,7 @@ class EXP msrChord : public msrTupletElement
     msrChordInKind        fChordKind;
 
     // display whole notes
-    mfWholeNotes         fChordDisplayWholeNotes;
+    mfWholeNotes          fChordDisplayWholeNotes;
 
     // graphic duration is needed for grace notes,
     // since they don't have any note (sounding) duration

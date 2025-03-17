@@ -142,7 +142,7 @@ EXP void displayStringPairVector (
 
     int counter = 0;
     for (auto stringPair : stringPairVector) {
-      std::string first  = stringPair.first;
+      std::string first = stringPair.first;
       std::string second = stringPair.second;
 
       os <<
@@ -268,7 +268,7 @@ EXP void displayStringPairVector (
 //     const size_t fieldWidth = 2;
 //
 //     for (size_t i = 0; i < theOptionsVector.size (); ++i) {
-//       std::string optionName  = theOptionsVector [i].first;
+//       std::string optionName = theOptionsVector [i].first;
 //       std::string optionValue = theOptionsVector [i].second;
 //
 //       os <<
@@ -441,7 +441,7 @@ oahOptionOrArgument::oahOptionOrArgument (
 {
   fOptionOrArgumentKind = optionOrArgumentKind;
 
-  fFirst  = first;
+  fFirst = first;
   fSecond = second;
 }
 
@@ -536,7 +536,7 @@ oahOption::oahOption (
   const std::string& optionName,
   const std::string& optionValue)
 {
-  fOptionName  = optionName;
+  fOptionName = optionName;
   fOptionValue = optionValue;
 }
 
@@ -1039,8 +1039,8 @@ oahPrefix::oahPrefix (
   const std::string& prefixErsatz,
   const std::string& prefixDescription)
 {
-  fPrefixName        = prefixName;
-  fPrefixErsatz      = prefixErsatz;
+  fPrefixName = prefixName;
+  fPrefixErsatz = prefixErsatz;
   fPrefixDescription = prefixDescription;
 }
 
@@ -4737,7 +4737,7 @@ void oahGroup::printHelp (std::ostream& os) const
       i != fGroupSubGroupsList.end ();
       ++i
     ) {
-      std::string subGroupHeader  = (*i)->getSubGroupHeader ();
+      std::string subGroupHeader = (*i)->getSubGroupHeader ();
       size_t subGroupHeaderSize = subGroupHeader.size ();
 
       if (subGroupHeaderSize > maximumSubGroupHeaderLength) {
@@ -5270,12 +5270,12 @@ void oahHandler::initializeHandler ()
   // sizes and widths
   fMaximumSubGroupsHeadersSize = 1;
 
-  fMaximumShortNameWidth   = 1;
-  fMaximumLongNameWidth    = 1;
+  fMaximumShortNameWidth = 1;
+  fMaximumLongNameWidth = 1;
 
   fMaximumVariableNameWidth = 0;
 
-  fIncludeFilesCurrentLevel =  0;
+  fIncludeFilesCurrentLevel = 0;
 }
 
 oahHandler::~oahHandler ()
@@ -5406,7 +5406,7 @@ void oahHandler::registerElementNamesInHandler (
   }
 
   for (std::pair <std::string, S_oahElement> thePair : fHandlerNamesToElementsMap) {
-    std::string       name    = thePair.first;
+    std::string  name = thePair.first;
     S_oahElement element = thePair.second;
 
 //     gLog << // JMI v0.9.65
@@ -6299,7 +6299,7 @@ void oahHandler::displayNamesToElementsMap ()
       i != fHandlerNamesToElementsMap.end ();
       ++i
     ) {
-      std::string name          = (*i).first;
+      std::string name = (*i).first;
       S_oahElement element = (*i).second;
 
       gLog <<
@@ -6345,7 +6345,7 @@ void oahHandler::displayNamesToElementsMapShort (std::ostream& os) const
       i != fHandlerNamesToElementsMap.end ();
       ++i
     ) {
-      std::string       name    = (*i).first;
+      std::string name = (*i).first;
       S_oahElement element = (*i).second;
 
       gLog << std::left <<

@@ -50,7 +50,7 @@ msrSegmentElement::~msrSegmentElement ()
 //   const std::string&   context)
 // {
 // #ifdef MF_TRACE_IS_ENABLED
-//   if (gTraceOahGroup->getTraceWholeNoteDurations ()) {
+//   if (gTraceOahGroup->getTraceDurations ()) {
 //     std::stringstream ss;
 //
 //     ss <<

@@ -938,7 +938,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   }
 
   std::string
-    beatsNumber   = sm [1],
+    beatsNumber = sm [1],
     beatsNotesDuration = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED

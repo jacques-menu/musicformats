@@ -301,7 +301,7 @@ std::string mfIntToEnglishWord (int n)
   }
 
   if (n >= 1000) {
-    int nDiv1000    = n / 1000;
+    int nDiv1000 = n / 1000;
     int nModulo1000 = n % 1000;
 
     return
@@ -312,7 +312,7 @@ std::string mfIntToEnglishWord (int n)
 
   else if (n >= 100) {
   //return "LargerThanNinetyNine";
-    int nDiv100    = n / 100;
+    int nDiv100 = n / 100;
     int nModulo100 = n % 100;
 
     return
@@ -386,7 +386,7 @@ std::string mfIntToEnglishWord (int n)
 
       default: {
         // n >= 20
-        int nDiv10    = n / 10;
+        int nDiv10 = n / 10;
         int nModulo10 = n % 10;
 
         switch (nDiv10) {
@@ -1223,7 +1223,7 @@ std::string trimSpaces (const std::string& line) // KEEP ??? JMI
   const char* WhiteSpace = " \t\v\r\n";
 
   size_t start = line.find_first_not_of(WhiteSpace);
-  size_t end   = line.find_last_not_of(WhiteSpace);
+  size_t end = line.find_last_not_of(WhiteSpace);
 
   return
     start == end ? std::string() : line.substr(start, end - start + 1);
@@ -1295,7 +1295,7 @@ std::string mfEscapeDoubleQuotes (std::string s)
   // in case there were already double quotes in std::string
   std::string
     lookedFor = "\\\\\"",
-    ersatz    = "\\\"";
+    ersatz = "\\\"";
 
   for ( ; ; ) {
     size_t found = result.find (lookedFor);
@@ -1325,7 +1325,7 @@ void mfConvertHTMLEntitiesToPlainCharacters (std::string& s)
   for (i = conversionMap.begin (); i != conversionMap.end (); ++i) {
     std::string
       lookedFor = i->second,
-      ersatz    = i->first;
+      ersatz = i->first;
 
     // replace all occurrences of lookedFor by ersatz
     for ( ; ; ) {
@@ -1471,7 +1471,7 @@ void mfSplitRegularStringAtEndOfLines (
   std::string remainder = theString;
 #endif // DEBUG_SPLITTING
 
-  std::string lookedFor     = "\n";
+  std::string lookedFor = "\n";
   size_t    lookedForSize = lookedFor.size ();
 
   std::map <std::string, std::string>::const_iterator i;
@@ -1586,8 +1586,8 @@ void mfSplitHTMLStringContainingEndOfLines (
   std::string remainder = theString;
 #endif // DEBUG_SPLITTING
 
-// JMI  std::string lookedFor     = "&#xd;";
-  std::string       lookedFor     = "\n";
+// JMI  std::string lookedFor = "&#xd;";
+  std::string       lookedFor = "\n";
   size_t            lookedForSize = lookedFor.size ();
 
   std::map <std::string, std::string>::const_iterator i;
@@ -1596,7 +1596,7 @@ void mfSplitHTMLStringContainingEndOfLines (
   for (i = conversionMap.begin (); i != conversionMap.end (); ++i) {
     std::string
       lookedFor = i->second,
-      ersatz    = i->first;
+      ersatz = i->first;
     // replace all occurrences of lookedFor by ersatz
   } // for
 */
@@ -1844,7 +1844,7 @@ void mfDisplayStringSet (
 
     for (
       std::set <std::string>::const_iterator
-        i    = stringSet.begin (),
+        i = stringSet.begin (),
         iEnd = stringSet.end ();
       i != iEnd;
       ++i
@@ -1915,7 +1915,7 @@ std::string mfStringToStringMapAsString (
 
     for (
      std::map <std::string, std::string>::const_iterator
-        i    = stringToStringMap.begin (),
+        i = stringToStringMap.begin (),
         iEnd = stringToStringMap.end ();
       i != iEnd;
       ++i
@@ -1923,7 +1923,7 @@ std::string mfStringToStringMapAsString (
       std::pair thePair = (*i);
 
       std::string
-        key   = thePair.first,
+        key = thePair.first,
         value = thePair.second;
 
       ++count;
@@ -1970,7 +1970,7 @@ void mfDisplayStringToStringMap (
 
     for (
      std::map <std::string, std::string>::const_iterator
-        i    = stringToStringMap.begin (),
+        i = stringToStringMap.begin (),
         iEnd = stringToStringMap.end ();
       i != iEnd;
       ++i
@@ -1978,7 +1978,7 @@ void mfDisplayStringToStringMap (
       std::pair thePair = (*i);
 
       std::string
-        key   = thePair.first,
+        key = thePair.first,
         value = thePair.second;
 
       ++count;
@@ -2070,7 +2070,7 @@ std::string mfStringToStringMultiMapAsString (
 
     for (
      std::multimap <std::string, std::string>::const_iterator
-        i    = stringToStringMultiMap.begin (),
+        i = stringToStringMultiMap.begin (),
         iEnd = stringToStringMultiMap.end ();
       i != iEnd;
       ++i
@@ -2078,7 +2078,7 @@ std::string mfStringToStringMultiMapAsString (
       std::pair thePair = (*i);
 
       std::string
-        key   = thePair.first,
+        key = thePair.first,
         value = thePair.second;
 
       ++count;
@@ -2125,7 +2125,7 @@ void mfDisplayStringToStringMultiMap (
 
     for (
      std::multimap <std::string, std::string>::const_iterator
-        i    = stringToStringMultiMap.begin (),
+        i = stringToStringMultiMap.begin (),
         iEnd = stringToStringMultiMap.end ();
       i != iEnd;
       ++i
@@ -2133,7 +2133,7 @@ void mfDisplayStringToStringMultiMap (
       std::pair thePair = (*i);
 
       std::string
-        key   = thePair.first,
+        key = thePair.first,
         value = thePair.second;
 
       ++count;

@@ -743,15 +743,15 @@ msrWedge::msrWedge (
   int                wedgeVoiceNumber)
     : msrElement (inputLineNumber)
 {
-  fWedgeNumber        = wedgeNumber;
+  fWedgeNumber = wedgeNumber;
 
-  fWedgeKind          = wedgeKind;
+  fWedgeKind = wedgeKind;
 
-  fWedgeNienteKind    = wedgeNienteKind;
-  fWedgeLineTypeKind  = wedgeLineTypeKind;
+  fWedgeNienteKind = wedgeNienteKind;
+  fWedgeLineTypeKind = wedgeLineTypeKind;
   fWedgePlacementKind = wedgePlacementKind;
 
-  fWedgeVoiceNumber   = wedgeVoiceNumber;
+  fWedgeVoiceNumber = wedgeVoiceNumber;
 }
 
 msrWedge::~msrWedge ()

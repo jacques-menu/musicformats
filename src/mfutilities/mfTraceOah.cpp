@@ -2587,13 +2587,13 @@ This option implies '-trace-voices-basics, -tvoicesb' and '-trace-voices, -tvoic
       traceVoicesDetailsBooleanAtom);
 }
 
-void traceOahGroup::initializeNotesDurationsTraceOah ()
+void traceOahGroup::initializeDurationsTraceOah ()
 {
   S_oahSubGroup
     subGroup =
       oahSubGroup::create (
-        "NotesDurations",
-        "help-trace-notes-durations", "htnd",
+        "Durations",
+        "help-trace-durations", "htracedurs",
 R"()",
       oahElementVisibilityKind::kElementVisibilityWhole,
       this);
@@ -2603,17 +2603,17 @@ R"()",
   // durations
 
   S_oahTwoBooleansAtom
-    traceNotesDurationsBooleanAtom =
+    traceDurationsBooleanAtom =
       oahTwoBooleansAtom::create ( // JMI trace too??? v0.9.67
-        "trace-notes-durations", "tndurs",
+        "trace-durations", "tdurs",
 R"(Notes durations)",
-        "fTraceNotesDurations",
-        fTraceNotesDurations,
+        "fTraceDurations",
+        fTraceDurations,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceNotesDurationsBooleanAtom);
+      traceDurationsBooleanAtom);
 }
 
 void traceOahGroup::initializeNotesTraceOah ()
@@ -2702,39 +2702,39 @@ This option implies '-trace-notes-basics, -tnotesb' and '-trace-notes, -tnotes'.
   // whole notes
 
   S_oahTwoBooleansAtom
-    traceWholeNoteDurationsBooleanAtom =
+    traceDurationsBooleanAtom =
       oahTwoBooleansAtom::create (
         "trace-whole-notes-durations", "twhndurs", // JMI v0.9.67 SUPERFLOUS with trace-notes-durations ???
 R"(Whole notes computations (quite verbose)...)",
-        "fTraceWholeNoteDurations",
-        fTraceWholeNoteDurations,
+        "fTraceDurations",
+        fTraceDurations,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceWholeNoteDurationsBooleanAtom);
+      traceDurationsBooleanAtom);
   notesMultiplexBooleansAtom->
     addBooleanAtom (
-      traceWholeNoteDurationsBooleanAtom);
+      traceDurationsBooleanAtom);
 
   // whole notes details
 
   S_oahThreeBooleansAtom
-    traceWholeNoteDurationsDetailsBooleanAtom =
+    traceDurationsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
         "trace-whole-notes-details", "twhndursd",
 R"(Whole notes computations details (event more verbose)...)",
-        "fTraceWholeNoteDurationsDetails",
-        fTraceWholeNoteDurationsDetails,
-        traceWholeNoteDurationsBooleanAtom,
+        "fTraceDurationsDetails",
+        fTraceDurationsDetails,
+        traceDurationsBooleanAtom,
         fTracePassesBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      traceWholeNoteDurationsDetailsBooleanAtom);
+      traceDurationsDetailsBooleanAtom);
   notesMultiplexBooleansAtom->
     addBooleanAtom (
-      traceWholeNoteDurationsDetailsBooleanAtom);
+      traceDurationsDetailsBooleanAtom);
 
   // measures whole notes vectors
 
@@ -3119,7 +3119,7 @@ void traceOahGroup::initializeTraceOahGroup ()
   initializeVoicesFlatViewTraceOah ();
 
   // durations
-  initializeNotesDurationsTraceOah ();
+  initializeDurationsTraceOah ();
 
   // notes
   initializeNotesTraceOah ();
@@ -3580,8 +3580,11 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
 
     // notes durations
-    std::setw (fieldWidth) << "fTraceNotesDurations" << ": " <<
-    fTraceNotesDurations <<
+    std::setw (fieldWidth) << "fTraceDurations" << ": " <<
+    fTraceDurations <<
+    std::endl <<
+    std::setw (fieldWidth) << "fTraceDurationsDetails" << ": " <<
+    fTraceDurationsDetails <<
     std::endl <<
 
     // notes
@@ -3593,14 +3596,6 @@ void traceOahGroup::displayTraceOahValues (int fieldWidth)
     std::endl <<
     std::setw (fieldWidth) << "fTraceNotesDetails" << ": " <<
     fTraceNotesDetails <<
-    std::endl <<
-
-    // whole notes durations
-    std::setw (fieldWidth) << "fTraceWholeNoteDurations" << ": " <<
-    fTraceWholeNoteDurations <<
-    std::endl <<
-    std::setw (fieldWidth) << "fTraceWholeNoteDurationsDetails" << ": " <<
-    fTraceWholeNoteDurationsDetails <<
     std::endl <<
 
     // measures whole notes vectors

@@ -81,10 +81,10 @@ msrTransposition::msrTransposition (
     : msrMeasureElement (
         inputLineNumber)
 {
-  fTranspositionDiatonic     = transposeDiatonic;
-  fTranspositionChromatic    = transposeChromatic;
+  fTranspositionDiatonic = transposeDiatonic;
+  fTranspositionChromatic = transposeChromatic;
   fTranspositionOctaveChange = transposeOctaveChange;
-  fTranspositionDouble       = transposeDouble;
+  fTranspositionDouble = transposeDouble;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTranspositions ()) {

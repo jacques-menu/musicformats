@@ -104,12 +104,12 @@ lpsrSchemeVariable::lpsrSchemeVariable (
 {
   fCommentedKind = commentedKind;
 
-  fVariableName  = variableName;
+  fVariableName = variableName;
   fVariableValue = value;
 
-  fComment       = comment;
+  fComment = comment;
 
-  fEndOfLineKind      = endOfLineKind;
+  fEndOfLineKind = endOfLineKind;
 }
 
 lpsrSchemeVariable::~lpsrSchemeVariable ()
@@ -270,9 +270,9 @@ lpsrSchemeFunction::lpsrSchemeFunction (
   const std::string& functionCode)
     : lpsrElement (inputLineNumber)
 {
-  fFunctionName        = functionName;
+  fFunctionName = functionName;
   fFunctionDescription = functionDescription;
-  fFunctionCode        = functionCode;
+  fFunctionCode = functionCode;
   }
 
 lpsrSchemeFunction::~lpsrSchemeFunction ()

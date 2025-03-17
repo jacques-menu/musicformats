@@ -48,7 +48,7 @@ bsrPage::bsrPage (
   int linesPerPage)
     : bsrElement (inputLineNumber)
 {
-  fPrintPageNumber   = printPageNumber;
+  fPrintPageNumber = printPageNumber;
   fBraillePageNumber = fPrintPageNumber; // this will be set by BSR finalizer
 
   fLinesPerPage = linesPerPage;

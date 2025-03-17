@@ -114,7 +114,7 @@ class EXP msrSegment : public msrVoiceElement
     void                  setSegmentShortestNoteWholeNotes (
                             const mfWholeNotes& wholeNotes);
 
-    mfWholeNotes         getSegmentShortestNoteWholeNotes () const
+    mfWholeNotes          getSegmentShortestNoteWholeNotes () const
                               { return fSegmentShortestNoteWholeNotes; }
 
     void                  setSegmentShortestNoteTupletFactor (
@@ -151,10 +151,10 @@ class EXP msrSegment : public msrVoiceElement
 //                             int             inputLineNumber,
 //                             const mfWholeNotes& wholeNotes);
 
-    void                  backupByWholeNotesStepLengthInSegment (
-                            int     inputLineNumber,
-                            const mfWholeNotes&
-                                    backupTargetMeasureElementPositionInMeasure);
+//     void                  casadeBackupByWholeNotesStepLengthInSegment (
+//                             int     inputLineNumber,
+//                             const mfWholeNotes&
+//                                     backupTargetMeasureElementPositionInMeasure);
 
     void                  cascadeAppendPaddingNoteToSegment (
                             int                  inputLineNumber,
@@ -223,8 +223,8 @@ class EXP msrSegment : public msrVoiceElement
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInSegmentClone (
-                            int                  inputLineNumber,
-                            const mfWholeNotes& positionInMeasure);
+                            int                        inputLineNumber,
+                            const mfPositionInMeasure& positionInMeasure);
 
     // transposition
 
@@ -271,14 +271,14 @@ class EXP msrSegment : public msrVoiceElement
     // harmonies
 
     void                  appendHarmonyToSegment (
-                            int                  inputLineNumber,
-                            const S_msrHarmony&  harmony,
-                            const mfWholeNotes& positionInMeasureToAppendAt);
+                            int                        inputLineNumber,
+                            const S_msrHarmony&        harmony,
+                            const mfPositionInMeasure& positionInMeasureToAppendAt);
 
     void                  appendHarmoniesListToSegment (
                             int                             inputLineNumber,
                             const std::list <S_msrHarmony>& harmoniesList,
-                            const mfWholeNotes&            positionInMeasureToAppendAt);
+                            const mfPositionInMeasure&      positionInMeasureToAppendAt);
 
     void                  appendHarmonyToSegmentClone (
                             const S_msrHarmony& harmony);
@@ -294,14 +294,14 @@ class EXP msrSegment : public msrVoiceElement
     // figured bass
 
     void                  appendFiguredBassToSegment (
-                            int                     inputLineNumber,
-                            const S_msrFiguredBass& figuredBass,
-                            const mfWholeNotes&    positionInMeasureToAppendAt);
+                            int                        inputLineNumber,
+                            const S_msrFiguredBass&    figuredBass,
+                            const mfPositionInMeasure& positionInMeasureToAppendAt);
 
-    void                  appendFiguredBassesListToSegment (
+    void                  cascadeAppendFiguredBassesListToSegment (
                             int                                 inputLineNumber,
                             const std::list <S_msrFiguredBass>& figuredBasssesList,
-                            const mfWholeNotes&                positionInMeasureToAppendAt);
+                            const mfPositionInMeasure&          positionInMeasureToAppendAt);
 
     void                  appendFiguredBassToSegmentClone (
                             const S_msrFiguredBass& figuredBass);
@@ -314,8 +314,8 @@ class EXP msrSegment : public msrVoiceElement
     // notes
 
     void                  appendNoteToSegment (
-                            const S_msrNote&     note,
-                            const mfWholeNotes& partCurrentDrawingPositionInMeasure);
+                            const S_msrNote&           note,
+                            const mfPositionInMeasure& partCurrentDrawingPositionInMeasure);
 
     void                  appendNoteToSegmentClone (const S_msrNote& note);
 
@@ -489,7 +489,7 @@ class EXP msrSegment : public msrVoiceElement
     // fPartShortestNoteWholeNotes and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    mfWholeNotes         fSegmentShortestNoteWholeNotes;
+    mfWholeNotes          fSegmentShortestNoteWholeNotes;
     msrTupletFactor       fSegmentShortestNoteTupletFactor;
     */
 

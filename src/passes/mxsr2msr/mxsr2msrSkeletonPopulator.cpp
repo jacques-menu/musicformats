@@ -257,15 +257,15 @@ mxsr2msrSkeletonPopulator::mxsr2msrSkeletonPopulator (
 
   fCurrentHarmoniesStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
 
-  fCurrentHarmonyWholeNotesOffset = mfWholeNotes (0, 1);
+  fCurrentHarmonyWholeNotesOffset = K_WHOLE_NOTES_ZERO;
 
   // figured bass handling
   fFiguredBassVoicesCounter = 0;
 
   fCurrentFiguredBassSoundingWholeNotes =
-    mfWholeNotes (0, 1);
+    K_WHOLE_NOTES_ZERO;
   fCurrentFiguredBassDisplayWholeNotes =
-    mfWholeNotes (0, 1);
+    K_WHOLE_NOTES_ZERO;
   fCurrentFiguredBassParenthesesKind =
     msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo; // default value
   fCurrentFigureNumber = -1;
@@ -424,9 +424,9 @@ void mxsr2msrSkeletonPopulator::initializeNoteData ()
   fCurrentDisplayOctave =
     msrOctaveKind::kOctave_UNKNOWN_;
   fCurrentNoteDisplayWholeNotes =
-    mfWholeNotes (0, 1);
+    K_WHOLE_NOTES_ZERO;
   fCurrentNoteDisplayWholeNotesFromType =
-    mfWholeNotes (0, 1);
+    K_WHOLE_NOTES_ZERO;
 
   // note head
 
@@ -928,7 +928,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart (
   for (
     std::pair <int, S_msrStaff> thePair : fCurrentPart->getPartStavesMap ()
   ) {
-    int staffNumber  = thePair.first;
+    int        staffNumber = thePair.first;
     S_msrStaff staff = thePair.second;
 
     // register the staff
@@ -4400,7 +4400,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_key& elt)
 
   // traditional
 
-  fCurrentKeyFifths       = 0;
+  fCurrentKeyFifths = 0;
   fCurrentKeyCancelFifths = 0;
 
   fCurrentModeKind = msrModeKind::kMode_UNKNOWN_;
@@ -5509,10 +5509,10 @@ void mxsr2msrSkeletonPopulator::visitStart (S_transpose& elt)
 
   fCurrentTransposeStaffNumber = elt->getAttributeIntValue ("number", 0);
 
-  fCurrentTransposeDiatonic     = 0;
-  fCurrentTransposeChromatic    = 0;
+  fCurrentTransposeDiatonic = 0;
+  fCurrentTransposeChromatic = 0;
   fCurrentTransposeOctaveChange = 0;
-  fCurrentTransposeDouble       = false;
+  fCurrentTransposeDouble = false;
 }
 
 void mxsr2msrSkeletonPopulator::visitStart (S_diatonic& elt)
@@ -5641,7 +5641,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
       elt->getInputLineNumber (),
       ss.str ());
 
-    fCurrentTransposeChromatic    =  auxTransposeChromatic;
+    fCurrentTransposeChromatic =  auxTransposeChromatic;
     fCurrentTransposeOctaveChange -= octaveOffset;
   }
 
@@ -5669,7 +5669,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_transpose& elt)
       elt->getInputLineNumber (),
       ss.str ());
 
-    fCurrentTransposeChromatic    =  auxTransposeChromatic;
+    fCurrentTransposeChromatic =  auxTransposeChromatic;
     fCurrentTransposeOctaveChange += octaveOffset;
   }
 
@@ -7055,9 +7055,9 @@ void mxsr2msrSkeletonPopulator::visitStart (S_accordion_registration& elt)
       </direction>
 */
 
-  fCurrentAccordionHigh   = 0;
+  fCurrentAccordionHigh = 0;
   fCurrentAccordionMiddle = 0;
-  fCurrentAccordionLow    = 0;
+  fCurrentAccordionLow = 0;
 
   fCurrentAccordionNumbersCounter = 0;
 }
@@ -7935,7 +7935,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_metronome& elt)
   // determine tempo kind
   msrTempoKBeatUnitsKind tempoKind = msrTempoKBeatUnitsKind::kTempoBeatUnits_UNKNOWN_;
 
-  int  beatUnitsSize    = fCurrentMetronomeBeatUnitsVector.size ();
+  int  beatUnitsSize = fCurrentMetronomeBeatUnitsVector.size ();
   Bool perMinutePresent = ! fCurrentMetrenomePerMinute.empty ();
 
   if (beatUnitsSize == 1 && perMinutePresent) {
@@ -8341,7 +8341,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_details& elt)
     msrStaffTypeKind::kStaffTypeRegular;
 
   fCurrentStaffTuningAlterationKind = msrAlterationKind::kAlteration_UNKNOWN_;
-  fCurrentStaffTuningOctaveKind     = msrOctaveKind::kOctave_UNKNOWN_;
+  fCurrentStaffTuningOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
 
   fCurrentStaffDetailsStaffSize = 0;
 
@@ -8461,7 +8461,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff_tuning& elt)
     elt->getAttributeIntValue ("line", 0);
 
   fCurrentStaffTuningAlterationKind = msrAlterationKind::kAlterationNatural; // may be absent
-  fCurrentStaffTuningOctaveKind     = msrOctaveKind::kOctave_UNKNOWN_;
+  fCurrentStaffTuningOctaveKind = msrOctaveKind::kOctave_UNKNOWN_;
 
   fOnGoingStaffTuning = true;
 }
@@ -10978,7 +10978,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
   fCurrentPart->
     setPartCurrentDrawingPositionInMeasure (
       elt->getInputLineNumber (),
-      mfWholeNotes (0, 1));
+      K_POSITION_IN_MEASURE_ZERO);
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -11565,16 +11565,16 @@ void mxsr2msrSkeletonPopulator::visitStart (S_barline& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentBarLineEndingNumber    = ""; // may be "1, 2"
+  fCurrentBarLineEndingNumber = ""; // may be "1, 2"
 
   fCurrentBarLineHasSegnoKind = msrBarLineHasSegnoKind::kBarLineHasSegnoNo;
-  fCurrentBarLineHasCodaKind  = msrBarLineHasCodaKind::kBarLineHasCodaNo;
+  fCurrentBarLineHasCodaKind = msrBarLineHasCodaKind::kBarLineHasCodaNo;
 
-  fCurrentBarLineLocationKind        = msrBarLineLocationKind::kBarLineLocationNone;
-  fCurrentBarLineStyleKind           = msrBarLineStyleKind::kBarLineStyleNone;
-  fCurrentBarLineEndingTypeKind      = msrBarLineEndingTypeKind::kBarLineEndingTypeNone;
+  fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationNone;
+  fCurrentBarLineStyleKind = msrBarLineStyleKind::kBarLineStyleNone;
+  fCurrentBarLineEndingTypeKind = msrBarLineEndingTypeKind::kBarLineEndingTypeNone;
   fCurrentBarLineRepeatDirectionKind = msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionNone;
-  fCurrentBarLineRepeatWingedKind    = msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone;
+  fCurrentBarLineRepeatWingedKind = msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone;
 
   fCurrentBarLineTimes = 2; // default value JMI ??? v0.9.64
 
@@ -12578,7 +12578,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_note& elt)
 
   // harmonies
 
-  fCurrentHarmonyWholeNotesOffset = mfWholeNotes (0, 1);
+  fCurrentHarmonyWholeNotesOffset = K_WHOLE_NOTES_ZERO;
 
   // lyrics
 
@@ -12801,7 +12801,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_duration& elt)
   int duration = (int)(*elt); // divisions
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceNotesDurations ()) {
+  if (gTraceOahGroup->getTraceDurations ()) {
     std::stringstream ss;
 
     ss <<
@@ -22759,7 +22759,13 @@ On a given note, there can be the following events:
     // rests
     // -----------------------------------------------
 
-    if (fCurrentNoteBelongsToATuplet) {
+    // Sibelius may generate 'grace rests' to synchronise multiple voices in a staff,
+    // akin to what we need to do to avoid LilyPond issue #34
+    if (fCurrentNoteIsARest) {
+      // IGNORE THIS GRACE REST JMI v0.9.72
+    }
+
+    else if (fCurrentNoteBelongsToATuplet) {
       // tuplet member
       handleARestInATuplet (
         fCurrentNote);
@@ -24371,7 +24377,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       fCurrentNote->
         getNoteDisplayWholeNotes ();
 
-  mfWholeNotes
+  mfPositionInMeasure
     currentNotePositionInMeasure =
       fCurrentNote->
         getMeasureElementPositionInMeasure ();
@@ -24385,9 +24391,12 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
       fPendingHarmoniesList.size () <<
       " pending harmonies for note " <<
       fCurrentNote->asShortString () <<
-      ", currentNoteSoundingWholeNotes: " << currentNoteSoundingWholeNotes.asFractionString () <<
-      ", currentNoteDisplayWholeNotes: " << currentNoteDisplayWholeNotes.asFractionString () <<
-      ", currentNotePositionInMeasure: " << currentNotePositionInMeasure.asString () <<
+      ", currentNoteSoundingWholeNotes: " <<
+      currentNoteSoundingWholeNotes.asFractionString () <<
+      ", currentNoteDisplayWholeNotes: " <<
+      currentNoteDisplayWholeNotes.asFractionString () <<
+      ", currentNotePositionInMeasure: " <<
+      currentNotePositionInMeasure.asString () <<
       ", line " << fCurrentNote->getInputLineNumber () <<
       std::endl;
 
@@ -24452,15 +24461,15 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleHarmonies ()
 
   mfWholeNotes
     previousWholeNotesOffsetInTheLoop =
-      mfWholeNotes (0, 1);
+      K_WHOLE_NOTES_ZERO;
 
   mfWholeNotes
     currentHarmonySoundingWholeNotes =
-      mfWholeNotes (0, 1);
+      K_WHOLE_NOTES_ZERO;
 
   mfWholeNotes
     currentNoteRelativePosition =
-      mfWholeNotes (0, 1);
+      K_WHOLE_NOTES_ZERO;
 
   // let's go for the first to the next to last harmonies in the list
   // ----------------------------------------------
@@ -24823,7 +24832,7 @@ void mxsr2msrSkeletonPopulator::handlePendingMultipleFiguredBasses ()
 
   // append the figured basses list to current part
   fCurrentPart->
-    appendFiguredBassesListToPart (
+    cascadeAppendFiguredBassesListToPart (
       fCurrentNote->getInputLineNumber (),
       fPendingFiguredBassesList,
       fCurrentNote->getMeasureElementPositionInMeasure ());
@@ -26752,25 +26761,25 @@ void mxsr2msrSkeletonPopulator::visitStart (S_harmony& elt)
 
   ++fHarmoniesVoicesCounter;
 
-  fCurrentHarmonyInputLineNumber       = elt->getInputLineNumber ();
+  fCurrentHarmonyInputLineNumber = elt->getInputLineNumber ();
 
   fCurrentHarmonyRootDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
-  fCurrentHarmonyRootAlterationKind    = msrAlterationKind::kAlterationNatural;
+  fCurrentHarmonyRootAlterationKind = msrAlterationKind::kAlterationNatural;
 
-  fCurrentHarmonyFunctionText          = "";
+  fCurrentHarmonyFunctionText = "";
 
-  fCurrentHarmonyKind                  = msrHarmonyKind::kHarmony_UNKNOWN_;
-  fCurrentHarmonyKindText              = "";
+  fCurrentHarmonyKind = msrHarmonyKind::kHarmony_UNKNOWN_;
+  fCurrentHarmonyKindText = "";
 
-  fCurrentHarmonyInversion             = K_HARMONY_INVERSION_NONE;
+  fCurrentHarmonyInversion = K_HARMONY_INVERSION_NONE;
 
   fCurrentHarmonyBassDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_UNKNOWN_;
-  fCurrentHarmonyBassAlterationKind    = msrAlterationKind::kAlterationNatural;
+  fCurrentHarmonyBassAlterationKind = msrAlterationKind::kAlterationNatural;
 
-  fCurrentHarmonyDegreeValue           = -1;
-  fCurrentHarmonyDegreeAlterationKind  = msrAlterationKind::kAlterationNatural;
+  fCurrentHarmonyDegreeValue = -1;
+  fCurrentHarmonyDegreeAlterationKind = msrAlterationKind::kAlterationNatural;
 
-  fCurrentHarmonyWholeNotesOffset = mfWholeNotes (0, 1);
+  fCurrentHarmonyWholeNotesOffset = K_WHOLE_NOTES_ZERO;
 
   fOnGoingHarmony = true;
 }
@@ -28016,15 +28025,15 @@ void mxsr2msrSkeletonPopulator::visitStart (S_figured_bass& elt)
     }
   }
 
-  fCurrentFiguredBassInputLineNumber   = -1;
+  fCurrentFiguredBassInputLineNumber = -1;
 
   fCurrentFigureNumber = -1;
 
   fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kBassFigurePrefix_UNKNOWN_;
   fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kBassFigureSuffix_UNKNOWN_;
 
-  fCurrentFiguredBassSoundingWholeNotes = mfWholeNotes (0, 1);
-  fCurrentFiguredBassDisplayWholeNotes  = mfWholeNotes (0, 1);
+  fCurrentFiguredBassSoundingWholeNotes = K_WHOLE_NOTES_ZERO;
+  fCurrentFiguredBassDisplayWholeNotes = K_WHOLE_NOTES_ZERO;
 
   fOnGoingFiguredBass = true;
 }

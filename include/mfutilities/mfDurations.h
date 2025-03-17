@@ -97,8 +97,8 @@ class EXP mfWholeNotes
                           mfWholeNotes ();
 
                           mfWholeNotes (
-                            int num,
-                            int denom);
+                            int numerator,
+                            int denominator);
 
                           mfWholeNotes (const mfWholeNotes& wholeNotes);
 
@@ -129,6 +129,10 @@ class EXP mfWholeNotes
     // public services
     // ------------------------------------------------------
 
+    // 'rationalise' mfWholeNotes values
+
+    void                  rationalise ();
+
     // arithmetic
 
     mfWholeNotes         inverse () const;
@@ -147,22 +151,22 @@ class EXP mfWholeNotes
 
     mfRational            operator / (const mfWholeNotes &wholeNotes) const;
 
-    mfWholeNotes&        operator += (const mfWholeNotes &wholeNotes);
-    mfWholeNotes&        operator -= (const mfWholeNotes &wholeNotes);
+    mfWholeNotes&         operator += (const mfWholeNotes &wholeNotes);
+    mfWholeNotes&         operator -= (const mfWholeNotes &wholeNotes);
 
     //! Useful for notes with dots.
-    mfWholeNotes&        operator *= (const mfRational &rat);
-    mfWholeNotes&        operator /= (const mfRational &rat);
+    mfWholeNotes&         operator *= (const mfRational &rat);
+    mfWholeNotes&         operator /= (const mfRational &rat);
     // (i.e. wholeNotes * 3/2 or wholeNotes * 7/4)
 
-    mfWholeNotes&        operator *= (int num)
+    mfWholeNotes&         operator *= (int num)
                               { fNumerator *= num; return *this; }
-    mfWholeNotes&        operator /= (int num)
+    mfWholeNotes&         operator /= (int num)
                               { fDenominator *= num; return *this; }
 
     // assignment
 
-    mfWholeNotes&        operator = (const mfWholeNotes& wholeNotes);
+    mfWholeNotes&         operator = (const mfWholeNotes& wholeNotes);
 
     // comparisons
     Bool                  operator >  (const mfWholeNotes &wholeNotes) const;
@@ -211,9 +215,6 @@ class EXP mfWholeNotes
 
     // private methods
     // ------------------------------------------------------
-
-    // 'rationalise' mfWholeNotes values
-    void                  rationalise ();
 
   private:
 

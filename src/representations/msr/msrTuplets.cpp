@@ -80,19 +80,19 @@ msrTuplet::msrTuplet (
   fTupletNumber = tupletNumber;
   fTupletFactor = tupletFactor;
 
-  fTupletBracketKind    = tupletBracketKind;
-  fTupletLineShapeKind  = tupletLineShapeKind;
-  fTupletTypeKind       = tupletTypeKind;
+  fTupletBracketKind = tupletBracketKind;
+  fTupletLineShapeKind = tupletLineShapeKind;
+  fTupletTypeKind = tupletTypeKind;
   fTupletShowNumberKind = tupletShowNumberKind;
-  fTupletShowTypeKind   = tupletShowTypeKind;
+  fTupletShowTypeKind = tupletShowTypeKind;
 
   fTupletPlacementKind = tupletPlacementKind;
 
   setMeasureElementSoundingWholeNotes (
-    mfWholeNotes (0, 1),
+    K_WHOLE_NOTES_ZERO,
     "msrTuplet::msrTuplet()");
 
-  fTupletDisplayWholeNotes = mfWholeNotes (0, 1);
+  fTupletDisplayWholeNotes = K_WHOLE_NOTES_ZERO;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTupletsBasics ()) {
@@ -759,8 +759,8 @@ void msrTuplet::setMeasureElementPositionInMeasure (
 }
 
 void msrTuplet::setTupletMembersPositionInMeasures (
-  const S_msrMeasure&  measure,
-  const mfWholeNotes& positionInMeasure)
+  const S_msrMeasure&        measure,
+  const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {
@@ -792,7 +792,7 @@ void msrTuplet::setTupletMembersPositionInMeasures (
   fMeasureElementPositionInMeasure = positionInMeasure;
 
   // current position
-  mfWholeNotes currentPosition = positionInMeasure;
+  mfPositionInMeasure currentPosition = positionInMeasure;
 
   // compute measure position for the tuplets elements
   for (

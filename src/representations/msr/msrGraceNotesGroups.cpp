@@ -450,8 +450,8 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (const S_msrChord& chord)
 // }
 
 void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasures (
-  const S_msrMeasure&  measure,
-  const mfWholeNotes& positionInMeasure)
+  const S_msrMeasure&        measure,
+  const mfPositionInMeasure& positionInMeasure)
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePositionInMeasures ()) {

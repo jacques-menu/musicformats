@@ -111,23 +111,23 @@ msrBarLine::msrBarLine (
     : msrMeasureElement (
         inputLineNumber)
 {
-  fLocationKind        = barLineLocationKind;
+  fLocationKind = barLineLocationKind;
 
-  fStyleKind           = barLineStyleKind;
+  fStyleKind = barLineStyleKind;
 
   fRepeatDirectionKind = barLineRepeatDirectionKind;
 
-  fEndingTypeKind      = barLineEndingTypeKind;
-  fEndingNumber        = endingNumber;
+  fEndingTypeKind = barLineEndingTypeKind;
+  fEndingNumber = endingNumber;
 
-  fBarLineTimes        = barLineTimes;
+  fBarLineTimes = barLineTimes;
 
   fBarLineCategoryKind = barLineCategoryKind;
 
   fBarLineHasSegnoKind = barLineHasSegnoKind;
-  fBarLineHasCodaKind  = barLineHasCodaKind;
+  fBarLineHasCodaKind = barLineHasCodaKind;
 
-  fRepeatWingedKind    = barLineRepeatWingedKind;
+  fRepeatWingedKind = barLineRepeatWingedKind;
 
   // extract individual numbers from fEndingNumber
   // that may contain "1, 2"

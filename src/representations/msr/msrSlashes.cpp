@@ -162,8 +162,8 @@ msrSlash::msrSlash (
   msrSlashUseStemsKind slashUseStemsKind)
     : msrElement (inputLineNumber)
 {
-  fSlashTypeKind     = slashTypeKind;
-  fUseDotsKind  = useDotsKind;
+  fSlashTypeKind = slashTypeKind;
+  fUseDotsKind = useDotsKind;
   fSlashUseStemsKind = slashUseStemsKind;
 }
 
@@ -237,7 +237,7 @@ void msrSlash::acceptOut (basevisitor* v)
             __FILE__, __LINE__,
             ss.str ());
         }
-#endif        
+#endif
         p->visitEnd (elem);
   }
 }

@@ -43,7 +43,7 @@ lpsrUseVoiceCommand::lpsrUseVoiceCommand (
   const S_msrVoice& voice)
     : lpsrElement (inputLineNumber)
 {
-  fVoice  = voice;
+  fVoice = voice;
 }
 
 lpsrUseVoiceCommand::~lpsrUseVoiceCommand ()

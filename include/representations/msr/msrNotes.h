@@ -306,7 +306,7 @@ class EXP msrNote : public msrTupletElement
                             const mfWholeNotes& wholeNotes)
                               { fNoteDisplayWholeNotes = wholeNotes; }
 
-    mfWholeNotes         getNoteDisplayWholeNotes () const
+    mfWholeNotes          getNoteDisplayWholeNotes () const
                               { return fNoteDisplayWholeNotes; }
 
     // accidentals
@@ -989,7 +989,7 @@ class EXP msrNote : public msrTupletElement
     msrOctaveKind         fNoteOctaveKind;
 
     // whole notes
-    mfWholeNotes         fNoteDisplayWholeNotes;
+    mfWholeNotes          fNoteDisplayWholeNotes;
 
     int                   fNoteDotsNumber;
 

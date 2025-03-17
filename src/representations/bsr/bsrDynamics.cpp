@@ -44,7 +44,7 @@ bsrDynamic::bsrDynamic (
   msrDynamicKind dynamicKind)
     : bsrLineContentsElement (inputLineNumber)
 {
-  fDynamicKind  = dynamicKind;
+  fDynamicKind = dynamicKind;
 
   fDynamicsCellsList = buildCellsList ();
 }

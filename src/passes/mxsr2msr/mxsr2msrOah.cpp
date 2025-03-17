@@ -163,7 +163,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   }
 
   std::string
-    originalClefName    = sm [1],
+    originalClefName = sm [1],
     destinationClefName = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED

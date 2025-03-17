@@ -53,20 +53,20 @@ displayLpsrSummaryVisitor::displayLpsrSummaryVisitor (
   fStanzasCounter = 0;
 
   // notes
-  fScoreUnpitchedNotesCounter     = 0;
-  fScoreRegularNotesCounter    = 0;
-  fScoreRestNotesCounter          = 0;
-  fScoreSkipNotesCounter          = 0;
+  fScoreUnpitchedNotesCounter = 0;
+  fScoreRegularNotesCounter = 0;
+  fScoreRestNotesCounter = 0;
+  fScoreSkipNotesCounter = 0;
   fScoreDoubleTremoloNotesCounter = 0;
-  fScoreGraceNotesGroupCounter    = 0;
+  fScoreGraceNotesGroupCounter = 0;
 
   // chords
-  fScoreChordNotesCounter         = 0;
-  fScoreChordsCounter             = 0;
+  fScoreChordNotesCounter = 0;
+  fScoreChordsCounter = 0;
 
   // tuplets
-  fScoreTupletNotesCounter        = 0;
-  fScoreTupletsCounter            = 0;
+  fScoreTupletNotesCounter = 0;
+  fScoreTupletsCounter = 0;
 };
 
 displayLpsrSummaryVisitor::~displayLpsrSummaryVisitor ()

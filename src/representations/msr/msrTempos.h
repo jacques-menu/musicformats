@@ -59,7 +59,7 @@ class EXP msrTempoNote : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    mfWholeNotes         getTempoNoteWholeNotes () const
+    mfWholeNotes          getTempoNoteWholeNotes () const
                               { return fTempoNoteWholeNotes; }
 
     const std::list <S_msrBeam>&
@@ -97,7 +97,7 @@ class EXP msrTempoNote : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    mfWholeNotes         fTempoNoteWholeNotes;
+    mfWholeNotes          fTempoNoteWholeNotes;
 
     std::list <S_msrBeam>  fTempoNoteBeamsList;
 
@@ -157,14 +157,14 @@ class EXP msrTempoTuplet : public msrElement
                           getTempoTupletFactor () const
                               { return fTempoTupletFactor; }
 
-    mfWholeNotes         getMemberNotesDisplayWholeNotes () const
+    mfWholeNotes          getMemberNotesDisplayWholeNotes () const
                               { return fMemberNotesDisplayWholeNotes; }
 
     const std::list <S_msrElement>&
                           getTempoTupletElementsList () const
                               { return fTempoTupletElementsList; }
 
-    mfWholeNotes         getTempoTupletDisplayWholeNotes () const
+    mfWholeNotes          getTempoTupletDisplayWholeNotes () const
                               { return fTempoTupletDisplayWholeNotes; }
 
   public:
@@ -225,9 +225,9 @@ class EXP msrTempoTuplet : public msrElement
 
     msrTupletFactor       fTempoTupletFactor;
 
-    mfWholeNotes         fMemberNotesDisplayWholeNotes;
+    mfWholeNotes          fMemberNotesDisplayWholeNotes;
 
-    mfWholeNotes         fTempoTupletDisplayWholeNotes;
+    mfWholeNotes          fTempoTupletDisplayWholeNotes;
 
     std::list <S_msrElement>
                           fTempoTupletElementsList;

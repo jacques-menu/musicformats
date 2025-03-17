@@ -48,8 +48,8 @@ namespace MusicFormats
 void displayXMLDeclaration (
   TXMLDecl* xmlDeclaration)
 {
-  std::string xmlVersion    = xmlDeclaration->getVersion ();
-  std::string xmlEncoding   = xmlDeclaration->getEncoding ();
+  std::string xmlVersion = xmlDeclaration->getVersion ();
+  std::string xmlEncoding = xmlDeclaration->getEncoding ();
   int         xmlStandalone = xmlDeclaration->getStandalone ();
 
   constexpr int fieldWidth = 14;
@@ -87,9 +87,9 @@ void displayMusicXMLDocumentType (
   ++gIndenter;
 
   std::string xmlStartElement = documentType->getStartElement ();
-  Bool        xmlPublic       = documentType->getPublic ();
-  std::string xmlPubLitteral  = documentType->getPubLitteral ();
-  std::string xmlSysLitteral  = documentType->getSysLitteral ();
+  Bool        xmlPublic = documentType->getPublic ();
+  std::string xmlPubLitteral = documentType->getPubLitteral ();
+  std::string xmlSysLitteral = documentType->getSysLitteral ();
 
   gLog << std::left <<
     std::setw (fieldWidth) <<

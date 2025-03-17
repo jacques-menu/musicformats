@@ -266,14 +266,14 @@ msrTempoTuplet::msrTempoTuplet (
 {
   fTempoTupletNumber = tempoTupletNumber;
 
-  fTempoTupletBracketKind    = tempoTupletBracketKind;
+  fTempoTupletBracketKind = tempoTupletBracketKind;
   fTempoTupletShowNumberKind = tempoTupletShowNumberKind;
 
   fTempoTupletFactor = tempoTupletFactor;
 
-  fMemberNotesDisplayWholeNotes  = memberNotesDisplayWholeNotes;
+  fMemberNotesDisplayWholeNotes = memberNotesDisplayWholeNotes;
 
-  fTempoTupletDisplayWholeNotes  = mfWholeNotes (0, 1);
+  fTempoTupletDisplayWholeNotes = K_WHOLE_NOTES_ZERO;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceTempos ()){
@@ -1372,8 +1372,8 @@ msrTempo::msrTempo (
 
   fTempoPerMinute = "";
 
-  fTempoNotesRelationshipLeftElements  = tempoNotesRelationshipLeftElements;
-  fTempoNotesRelationshipKind          = tempoNotesRelationshipKind;
+  fTempoNotesRelationshipLeftElements = tempoNotesRelationshipLeftElements;
+  fTempoNotesRelationshipKind = tempoNotesRelationshipKind;
   fTempoNotesRelationshipRightElements = tempoNotesRelationshipRightElements;
 
   fTempoParenthesizedKind = tempoParenthesizedKind;

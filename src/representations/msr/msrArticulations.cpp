@@ -261,7 +261,7 @@ msrFermata::msrFermata (
       msrPlacementKind::kPlacement_UNKNOWN_) // temporary, JMI TEMP
 {
   fFermataShapeKind = fermataShapeKind;
-  fFermataTypeKind  = fermataTypeKind;
+  fFermataTypeKind = fermataTypeKind;
 }
 
 msrFermata::~msrFermata ()
