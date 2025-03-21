@@ -6242,6 +6242,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
 
   switch (elt->getNoteKind ()) {
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
@@ -6594,6 +6595,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMI
       gLog <<
@@ -6866,6 +6868,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 
   switch (noteKind) {
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:

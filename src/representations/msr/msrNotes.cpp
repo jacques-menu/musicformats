@@ -419,6 +419,7 @@ S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMi
       if (fNoteShortcutUpLinkToGraceNotesGroup) {
@@ -503,6 +504,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMi
       if (fNoteShortcutUpLinkToGraceNotesGroup) {
@@ -4125,6 +4127,7 @@ std::string msrNote::notePitchAsString () const
     case msrNoteKind::kNoteRegularInMeasure:
     case msrNoteKind::kNoteInDoubleTremolo:
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
     case msrNoteKind::kNoteRegularInChord:
@@ -4248,6 +4251,7 @@ std::string msrNote::noteCoreAsString () const
 			break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
     	doIncludeSoundingWholeNotes = false;
@@ -4384,6 +4388,11 @@ std::string msrNote::noteCoreAndInputLineNumbersAsString () const
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+//       ss <<
+//       	noteCoreAsString ();
+//       break;
+//
+//     case msrNoteKind::kNoteRestInGraceNotesGroup:
 //       ss <<
 //       	noteCoreAsString ();
 //       break;
@@ -4592,6 +4601,11 @@ std::string msrNote::asShortString () const
         noteCoreAndComplementAsString ();
       break;
 
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
+      ss <<
+        noteCoreAndComplementAsString ();
+      break;
+
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
         noteCoreAndComplementAsString ();
@@ -4785,6 +4799,11 @@ std::string msrNote::asHeaderLessString () const
       	noteCoreAsString ();
       break;
 
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
+      ss <<
+      	noteCoreAsString ();
+      break;
+
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
       	noteCoreAsString ();
@@ -4961,6 +4980,7 @@ void msrNote::print (std::ostream& os) const
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       os <<
         std::setw (fieldWidth) <<
@@ -6209,6 +6229,7 @@ void msrNote::printFull (std::ostream& os) const
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       os <<
         std::setw (fieldWidth) <<
@@ -6580,6 +6601,7 @@ void msrNote::printFull (std::ostream& os) const
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       os << std::left <<
         std::setw (fieldWidth) <<
@@ -7628,6 +7650,13 @@ std::string msrNote::asShortStringWithRawWholeNotes () const
         fNoteGraphicNotesDurationKind;
       break;
 
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
+      ss <<
+      	noteCoreAsString () <<
+        ", fNoteGraphicNotesDurationKind: " <<
+        fNoteGraphicNotesDurationKind;
+      break;
+
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       ss <<
       	noteCoreAsString () <<
@@ -7774,6 +7803,8 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
+    case msrNoteKind::kNoteRegularInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     / * JMi
       if (fNoteShortcutUpLinkToGraceNotesGroup) {
@@ -7880,6 +7911,11 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+//       ss <<
+//         noteCoreAsString ();
+//       break;
+//
+//     case msrNoteKind::kNoteRestInGraceNotesGroup:
 //       ss <<
 //         noteCoreAsString ();
 //       break;
@@ -8011,6 +8047,11 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 //       break;
 //
 //     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+//       ss <<
+//         noteCoreAndComplementAsString ();
+//       break;
+//
+//     case msrNoteKind::kNoteRestInGraceNotesGroup:
 //       ss <<
 //         noteCoreAndComplementAsString ();
 //       break;

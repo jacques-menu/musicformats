@@ -2506,8 +2506,12 @@ void lpsr2lilypondTranslator::generateTheNoteItself (
       generateRegularNoteInGraceNotesGroup (note);
       break;
 
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
+      generateRestInGraceNotesGroup (note);
+      break;
+
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
-      generateSkipInGraceNotesGroup (note);
+      generateRestInGraceNotesGroup (note);
       break;
 
     // in chords in grace notes groups
@@ -3466,6 +3470,85 @@ void lpsr2lilypondTranslator::generateRegularNoteInGraceNotesGroup (
       ss <<
         std::endl <<
         "% --> generating code for noteRegularInGraceNotesGroup " <<
+        note->asString () <<
+        ", line " << note->getInputLineNumber () <<
+        std::endl;
+
+      if (doTraceNotes) {
+        gWaeHandler->waeTrace (
+          __FILE__, __LINE__,
+          ss.str ());
+      }
+
+      if (generateMsrVisitingInformation) {
+        fLilypondCodeStream << ss.str ();
+      }
+    }
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+  // generate the note name
+  fLilypondCodeStream <<
+    notePitchAsLilypondString (note);
+
+  // generate the grace note's graphic duration
+  fLilypondCodeStream <<
+    notesDurationKindAsLilypondString (
+      note->
+        getNoteGraphicNotesDurationKind ());
+
+  // generate the dots if any JMI ???
+  for (int i = 0; i < note->getNoteDotsNumber (); ++i) {
+    fLilypondCodeStream << ".";
+  } // for
+
+  // don't print the tie if any, 'acciacattura takes care of it
+  /*
+  {
+    const std::list <S_msrTie>& noteTiesList = note->getNoteTiesList ();
+
+    if (! noteTiesList.empty ()) {
+      if (noteTie->getTieKind () == msrTieKind::kTieStart) {
+        fLilypondCodeStream <<
+          " %{ line " <<
+          note->getInputLineNumber () <<
+          " %} " <<
+          "~  %{ kGraceNote %}  ";
+      }
+    }
+  }
+  */
+
+  // this note is the new relative octave reference
+  switch (gGlobalLpsr2lilypondOahGroup->fetchOctaveEntryVariableValue ()) {
+    case msrOctaveEntryKind::kOctaveEntryRelative:
+      fCurrentOctaveEntryReference = note;
+      break;
+    case msrOctaveEntryKind::kOctaveEntryAbsolute:
+      break;
+    case msrOctaveEntryKind::kOctaveEntryFixed:
+      break;
+  } // switch
+}
+
+void lpsr2lilypondTranslator::generateRestInGraceNotesGroup (
+  const S_msrNote& note)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  {
+    Bool
+      doTraceNotes = // true ||
+        gTraceOahGroup->getTraceNotes (),
+      generateMsrVisitingInformation =
+        gGlobalLpsr2lilypondOahGroup->
+          getGenerateLpsrVisitingInformation ();
+
+    if (doTraceNotes || generateMsrVisitingInformation) {
+      std::stringstream ss;
+
+      ss <<
+        std::endl <<
+        "% --> generating code for noteRestInGraceNotesGroup " <<
         note->asString () <<
         ", line " << note->getInputLineNumber () <<
         std::endl;
@@ -22061,6 +22144,13 @@ void lpsr2lilypondTranslator::generateStuffBeforeTheNoteIself (
 //   generateRegularNoteInGraceNotesGroup (note);
 // }
 //
+// // rests in grace notes groups
+// void lpsr2lilypondTranslator::handleNoteInGraceNotesGroup (
+//   const S_msrNote& note)
+// {
+//   generateRestNoteInGraceNotesGroup (note);
+// }
+//
 // // skips in grace notes groups
 // void lpsr2lilypondTranslator::handleSkipInGraceNotesGroup (
 //   const S_msrNote& note)
@@ -22177,6 +22267,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 //       handleNoteInGraceNotesGroup (elt);
 //       break;
 //
+//     // in grace notes groups
+//     case msrNoteKind::kNoteRestInGraceNotesGroup:
+//       handleNoteInGraceNotesGroup (elt);
+//       break;
+//
 //     case msrNoteKind::kNoteSkipInGraceNotesGroup:
 //       handleSkipInGraceNotesGroup (elt);
 //       {
@@ -22285,6 +22380,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
         // in grace notes groups
         case msrNoteKind::kNoteRegularInGraceNotesGroup:
+        case msrNoteKind::kNoteRestInGraceNotesGroup:
         case msrNoteKind::kNoteSkipInGraceNotesGroup:
           {
           // don't generate the grace notes here, that's done thru
@@ -22443,6 +22539,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         break;
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      case msrNoteKind::kNoteRestInGraceNotesGroup:
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
 #ifdef MF_TRACE_IS_ENABLED
           if (
@@ -22588,6 +22685,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       // don't generate the grace notes here,
       // that is done in generateRegularNoteInGraceNotesGroup()
@@ -22737,6 +22835,7 @@ void lpsr2lilypondTranslator::generateNoteHeadAndStem (
 
             // in grace notes groups
             case msrNoteKind::kNoteRegularInGraceNotesGroup:
+            case msrNoteKind::kNoteRestInGraceNotesGroup:
             case msrNoteKind::kNoteSkipInGraceNotesGroup:
               break;
 
@@ -23763,6 +23862,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         break;
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      case msrNoteKind::kNoteRestInGraceNotesGroup:
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
 #ifdef MF_TRACE_IS_ENABLED
           if (

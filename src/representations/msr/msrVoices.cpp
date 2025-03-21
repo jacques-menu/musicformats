@@ -3423,6 +3423,7 @@ void msrVoice::appendNoteToVoice (const S_msrNote& note)
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       // register actual note
@@ -3514,6 +3515,7 @@ void msrVoice::appendNoteToVoiceClone (const S_msrNote& note) {
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       // register actual note

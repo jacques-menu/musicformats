@@ -38,6 +38,11 @@ class EXP msrStaff : public msrElement
     static SMARTP<msrStaff> create (
                             int              inputLineNumber,
                             msrStaffKind     staffKind,
+                            int              staffNumber);
+
+    static SMARTP<msrStaff> create (
+                            int              inputLineNumber,
+                            msrStaffKind     staffKind,
                             int              staffNumber,
                             const S_msrPart& staffUpLinkToPart);
 
@@ -52,8 +57,7 @@ class EXP msrStaff : public msrElement
                           msrStaff (
                             int              inputLineNumber,
                             msrStaffKind     staffKind,
-                            int              staffNumber,
-                            const S_msrPart& staffUpLinkToPart);
+                            int              staffNumber);
 
     virtual               ~msrStaff ();
 
@@ -64,12 +68,16 @@ class EXP msrStaff : public msrElement
 
     void                  initializeStaff ();
 
+    void                  copyStuffFromUpLinkToPartToStaff ();
+
   public:
 
     // set and get
     // ------------------------------------------------------
 
     // upLink
+
+    void                  setStaffUpLinkToPart (const S_msrPart& part);
 
     S_msrPart             getStaffUpLinkToPart () const
                               { return fStaffUpLinkToPart; }
@@ -78,6 +86,13 @@ class EXP msrStaff : public msrElement
 
     msrStaffKind          getStaffKind () const
                               { return fStaffKind; }
+
+    // part name
+    void                  setStaffPartName (const std::string& partName)
+                              { fStaffPartName = partName; }
+
+    std::string           getStaffPartName () const
+                              { return fStaffPartName; }
 
     // staff number and names
 
@@ -109,12 +124,12 @@ class EXP msrStaff : public msrElement
     // staff voices
 
     const std::map <int, S_msrVoice>&
-                          getStaffVoiceNumbersToAllVoicesMap () const
-                              { return fStaffVoiceNumbersToAllVoicesMap; }
+                          getStaffAllVoicesMap () const
+                              { return fStaffAllVoicesMap; }
 
     const std::map <int, S_msrVoice>&
-                          getStaffVoiceNumbersToRegularVoicesMap () const
-                              { return fStaffVoiceNumbersToRegularVoicesMap; }
+                          getStaffRegularVoicesMap () const
+                              { return fStaffRegularVoicesMap; }
 
     const std::list <S_msrVoice>&
                           getStaffRegularVoicesList () const
@@ -416,6 +431,10 @@ class EXP msrStaff : public msrElement
 
     S_msrPart             fStaffUpLinkToPart;
 
+    // part names, needed when fStaffUpLinkToPart is not yet set
+    std::string           fStaffPartName;
+    std::string           fStaffPartAlphabeticName;
+
     // staff names
     std::string           fStaffName;
     std::string           fStaffAlphabeticName;
@@ -449,11 +468,11 @@ class EXP msrStaff : public msrElement
     // the mapping of all the voices in the staff,
     // including harmonies and figured bass voices
     std::map <int, S_msrVoice>
-                          fStaffVoiceNumbersToAllVoicesMap;
+                          fStaffAllVoicesMap;
 
     // the mapping of voice numbers to regular voices
     std::map <int, S_msrVoice>
-                          fStaffVoiceNumbersToRegularVoicesMap;
+                          fStaffRegularVoicesMap;
 
     // part shortest note
 
@@ -529,6 +548,7 @@ class EXP msrStaff : public msrElement
 
     void                  registerVoiceByItsNumber (
                             int               inputLineNumber,
+                            int               staffNumber,
                             const S_msrVoice& voice);
 
     void                  registerRegularVoiceByItsNumber (

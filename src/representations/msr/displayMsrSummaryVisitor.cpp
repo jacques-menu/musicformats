@@ -1084,6 +1084,7 @@ void displayMsrSummaryVisitor::visitStart (S_msrNote& elt)
       ++fScoreRegularNotesCounter;
       break;
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       ++fScoreGraceNotesGroupCounter;
@@ -1132,6 +1133,7 @@ void displayMsrSummaryVisitor::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteInDoubleTremolo:
       break;
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       break;

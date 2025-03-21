@@ -920,11 +920,19 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStavesVectorFromPart (
   // forget any previous contents if any
   fCurrentPartStavesVector.clear ();
 
+
+// // indexes are voice numbers
+// using msrVoicesMap = std::map <int, S_msrVoice>;
+//
+// // indexes are staff numbers
+// using msrStavesVoicesMapMap = std::map <int, msrVoicesMap>;
+
+
   // reserve room for enough elements // index 0 is not used
   fCurrentPartStavesVector.reserve (
     fCurrentPart->getPartStavesMap ().size () + 1);
 
-  // populate the vector
+  // populate the part staves vector
   for (
     std::pair <int, S_msrStaff> thePair : fCurrentPart->getPartStavesMap ()
   ) {
@@ -1014,8 +1022,8 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 
   // populate the voices vector
   size_t
-    currentPartStaffVoicesMapSize =
-      part->getPartStaffVoicesMap ().size ();
+    partStavesMapSize =
+      part->getPartStavesMap ().size ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoicesBasics ()) {
@@ -1023,11 +1031,11 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
 
     ss <<
       ">>> populateCurrentPartStaffVoicesMapsFromPart(): "
-      "part->getPartStaffVoicesMap () " <<
+      "part->getPartStavesMap () " <<
       part->getPartName () <<
       " contains " <<
       mfSingularOrPlural (
-        currentPartStaffVoicesMapSize, "stave", "staves");
+        partStavesMapSize, "stave", "staves");
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1035,22 +1043,24 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  if (currentPartStaffVoicesMapSize) {
+  if (partStavesMapSize) {
     ++gIndenter;
 
     for (
-      std::pair <int, std::map <int, S_msrVoice>> primaryPair :
-        part->getPartStaffVoicesMap ()
+      std::pair <int, S_msrStaff> primaryPair : part->getPartStavesMap ()
     ) {
       int
         staffNumber = primaryPair.first;
 
+      S_msrStaff
+        staff = primaryPair.second;
+
       for (
-        std::pair <int, S_msrVoice> secondaryPair :
-          primaryPair.second
+        std::pair <int, S_msrVoice> secondaryPair : staff->getStaffAllVoicesMap ()
       ) {
         int
           voiceNumber = secondaryPair.first;
+
         S_msrVoice
           theMsrVoice = secondaryPair.second;
 
@@ -1060,7 +1070,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
           std::stringstream ss;
 
           ss <<
-            "Creating the voice handler for voice " <<
+            "Creating the MXSR voice handler for voice " <<
             theMsrVoice <<
             " in staff " <<
             staffNumber <<
@@ -1077,7 +1087,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentPartStaffVoicesMapsFromPart (
         fCurrentPartStaffMsrVoicesMap [staffNumber] [voiceNumber] =
           theMsrVoice;
 
-        // create the voice voice handler for it
+        // create the MXSR voice handler for voice
         fCurrentPartStaffMxsrVoicesMapMap [staffNumber] [voiceNumber] =
           mxsrVoice::create (theMsrVoice);
       } // for
@@ -3602,7 +3612,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   if (gTraceOahGroup->getTraceVoicesBasics ()) {
     // display the current part's voices map
     fCurrentPart->
-      displayPartStaffVoicesMap (
+      displayPartStavesMap (
         elt->getInputLineNumber (),
         "mxsr2msrSkeletonPopulator::visitStart (S_part& elt)");
   }
@@ -3677,11 +3687,11 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
 //   fCurrentNoteVoiceNumber = K_STAFF_NUMBER_UNKNOWN_;
   fCurrentNoteVoiceNumber = 1; // JMI v0.9.71 default voice number
 
-  // get this part's staves map
-  std::map <int, S_msrStaff>
-    partStavesMap =
-      fCurrentPart->
-        getPartStavesMap ();
+//   // get this part's staves map
+//   std::map <int, S_msrStaff>
+//     partStavesMap =
+//       fCurrentPart->
+//         getPartStavesMap ();
 
   // repeats
   fCurrentRepeatStartMeasureNumber = "";
@@ -22510,6 +22520,7 @@ void mxsr2msrSkeletonPopulator::populateCurrentNoteWithCurrentInformations (
         break;
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      case msrNoteKind::kNoteRestInGraceNotesGroup:
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
       case msrNoteKind::kNoteInChordInGraceNotesGroup:
       case msrNoteKind::kNoteInDoubleTremolo:
@@ -22696,61 +22707,44 @@ On a given note, there can be the following events:
     // grace note or regular note
     // -----------------------------------------------
 
-    if (fCurrentNoteIsAGraceNote) {
-      // -----------------------------------------------
-      // grace note
-      // -----------------------------------
+    // -----------------------------------------------
+    // regular note
+    // -----------------------------------------------
 
-      if (fCurrentNoteBelongsToAChord) {
-        handleAGraceNoteInAChord (
+    if (fCurrentNoteBelongsToAChord) {
+      // -----------------------------------------------
+      // regular note in a chord
+      // -----------------------------------------------
+
+      if (fCurrentNoteBelongsToATuplet) {
+        // regular note in a chord in a tuplet
+        handleARegularNoteInAChordInATuplet (
           fCurrentNote);
       }
+
       else {
-        handleAGraceNoteAttachedToANote (
+        // regular note in chord
+        handleARegularNoteInAChord (
           fCurrentNote);
       }
     }
 
+    else if (fCurrentNoteBelongsToATuplet) {
+      // -----------------------------------------------
+      // regular note in a tuplet
+      // -----------------------------------------------
+
+      handleARegularNoteInATuplet (
+        fCurrentNote);
+    }
+
     else {
       // -----------------------------------------------
-      // regular note
+      // standalone sounding note
       // -----------------------------------------------
 
-      if (fCurrentNoteBelongsToAChord) {
-        // -----------------------------------------------
-        // regular note in a chord
-        // -----------------------------------------------
-
-        if (fCurrentNoteBelongsToATuplet) {
-          // regular note in a chord in a tuplet
-          handleARegularNoteInAChordInATuplet (
-            fCurrentNote);
-        }
-
-        else {
-          // regular note in chord
-          handleARegularNoteInAChord (
-            fCurrentNote);
-        }
-      }
-
-      else if (fCurrentNoteBelongsToATuplet) {
-        // -----------------------------------------------
-        // regular note in a tuplet
-        // -----------------------------------------------
-
-        handleARegularNoteInATuplet (
-          fCurrentNote);
-      }
-
-      else {
-        // -----------------------------------------------
-        // standalone sounding note
-        // -----------------------------------------------
-
-        handleARegularNoteInAMeasure (
-          fCurrentNote);
-      }
+      handleARegularNoteInAMeasure (
+        fCurrentNote);
     }
   }
 
@@ -22761,8 +22755,19 @@ On a given note, there can be the following events:
 
     // Sibelius may generate 'grace rests' to synchronise multiple voices in a staff,
     // akin to what we need to do to avoid LilyPond issue #34
-    if (fCurrentNoteIsARest) {
-      // IGNORE THIS GRACE REST JMI v0.9.72
+//     if (fCurrentNoteIsARest) {
+//       // IGNORE THIS GRACE REST JMI v0.9.72
+//     }
+
+    if (fCurrentNoteIsAGraceNote) {
+      if (fCurrentNoteBelongsToAChord) {
+        handleAGraceNoteInAChord (
+          fCurrentNote);
+      }
+      else {
+        handleAGraceNoteAttachedToANote (
+          fCurrentNote);
+      }
     }
 
     else if (fCurrentNoteBelongsToATuplet) {
@@ -22770,6 +22775,7 @@ On a given note, there can be the following events:
       handleARestInATuplet (
         fCurrentNote);
     }
+
     else {
       handleARestInAMeasure (
         fCurrentNote);
@@ -25498,7 +25504,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
       setNoteIsFollowedByGraceNotesGroup ();
   }
 
-  // append graceNote to the current grace notes
+  // append graceNote to the current grace notes group
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceGraceNotes ()) {
     std::stringstream ss;
@@ -25541,7 +25547,7 @@ void mxsr2msrSkeletonPopulator::handleAGraceNoteAttachedToANote (
       ;
   } // switch
 
-  // take care of ligatures JMI ???
+  // take care of ligatures JMI ??? v0.9.72
   switch (fCurrentLigatureKind) {
     case msrLigatureKind::kLigatureStart:
       fFirstSyllableInLigatureKind = fCurrentSyllableKind;
@@ -25912,6 +25918,7 @@ void mxsr2msrSkeletonPopulator::handleARegularNoteInAChord(
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       break;

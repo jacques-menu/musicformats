@@ -54,6 +54,20 @@ int msrStaff::sStaffMaxRegularVoices = 4; // JMI TEMP MOD v0.9.70
 S_msrStaff msrStaff::create (
   int              inputLineNumber,
   msrStaffKind     staffKind,
+  int              staffNumber)
+{
+  msrStaff* obj =
+    new msrStaff (
+      inputLineNumber,
+      staffKind,
+      staffNumber);
+  assert (obj != nullptr);
+  return obj;
+}
+
+S_msrStaff msrStaff::create (
+  int              inputLineNumber,
+  msrStaffKind     staffKind,
   int              staffNumber,
   const S_msrPart& staffUpLinkToPart)
 {
@@ -61,31 +75,21 @@ S_msrStaff msrStaff::create (
     new msrStaff (
       inputLineNumber,
       staffKind,
-      staffNumber,
-      staffUpLinkToPart);
+      staffNumber);
   assert (obj != nullptr);
+
+  // set staff uplink to part
+  obj->setStaffUpLinkToPart (staffUpLinkToPart);
+
   return obj;
 }
 
 msrStaff::msrStaff (
   int              inputLineNumber,
   msrStaffKind     staffKind,
-  int              staffNumber,
-  const S_msrPart& staffUpLinkToPart)
+  int              staffNumber)
     : msrElement (inputLineNumber)
 {
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    staffUpLinkToPart != nullptr,
-    "staffUpLinkToPart is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  // set staff part upLink
-  fStaffUpLinkToPart =
-    staffUpLinkToPart;
-
   // set staff kind and number
   fStaffKind = staffKind;
   fStaffNumber = staffNumber;
@@ -117,63 +121,63 @@ void msrStaff::initializeStaff ()
   switch (fStaffKind) {
     case msrStaffKind::kStaffKindRegular:
       fStaffName =
-        fStaffUpLinkToPart->getPartMsrName () +
+        fStaffPartName +
         "_Staff_" +
         std::to_string (fStaffNumber);
 
       fStaffAlphabeticName =
-        fStaffUpLinkToPart->getPartAlphabeticName () +
+        fStaffPartAlphabeticName +
         "_Staff_" +
         mfIntToEnglishWord (fStaffNumber);
       break;
 
     case msrStaffKind::kStaffKindTablature:
       fStaffName =
-        fStaffUpLinkToPart->getPartMsrName () +
+        fStaffPartName +
         "_TABLATURE_Staff";
 
       fStaffAlphabeticName =
-        fStaffUpLinkToPart->getPartAlphabeticName () +
+        fStaffPartAlphabeticName +
         "_TABLATURE_Staff";
       break;
 
     case msrStaffKind::kStaffKindHarmonies:
       fStaffName =
-        fStaffUpLinkToPart->getPartMsrName () +
+        fStaffPartName +
         "_HARMONIES_Staff";
 
       fStaffAlphabeticName =
-        fStaffUpLinkToPart->getPartAlphabeticName () +
+        fStaffPartAlphabeticName +
         "_HARMONIES_Staff";
       break;
 
     case msrStaffKind::kStaffKindFiguredBass:
       fStaffName =
-        fStaffUpLinkToPart->getPartMsrName () +
+        fStaffPartName +
         "_FIGURED_BASS_Staff";
 
       fStaffAlphabeticName =
-        fStaffUpLinkToPart->getPartAlphabeticName () +
+        fStaffPartAlphabeticName +
         "_FIGURED_BASS_Staff";
       break;
 
     case msrStaffKind::kStaffKindDrum:
       fStaffName =
-        fStaffUpLinkToPart->getPartMsrName () +
+        fStaffPartName +
         "_DRUM_Staff";
 
       fStaffAlphabeticName =
-        fStaffUpLinkToPart->getPartAlphabeticName () +
+        fStaffPartAlphabeticName +
         "_DRUM_Staff";
       break;
 
     case msrStaffKind::kStaffKindRythmic:
       fStaffName =
-        fStaffUpLinkToPart->getPartMsrName () +
+        fStaffPartName +
         "_RYTHMIC_Staff";
 
       fStaffAlphabeticName =
-        fStaffUpLinkToPart->getPartAlphabeticName () +
+        fStaffPartAlphabeticName +
         "_RYTHMIC_Staff";
       break;
   } // switch
@@ -235,6 +239,81 @@ void msrStaff::initializeStaff ()
   fStaffShortestNoteTupletFactor =
     mfRational (1, 1);
 
+  --gIndenter;
+}
+
+msrStaff::~msrStaff ()
+{}
+
+S_msrStaff msrStaff::createStaffNewbornClone (
+  const S_msrPart& containingPart)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceStaves ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a newborn clone of staff \"" <<
+      fStaffName <<
+      "\"";
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    containingPart != nullptr,
+    "containingPart is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  S_msrStaff
+    newbornClone =
+      msrStaff::create (
+        fInputLineNumber,
+        fStaffKind,
+        fStaffNumber,
+        containingPart);
+
+  newbornClone->fStaffName =
+    fStaffName;
+  newbornClone->fStaffAlphabeticName =
+    fStaffAlphabeticName;
+
+  newbornClone->fStaffNumber =
+    fStaffNumber;
+
+  newbornClone->fStaffInstrumentName =
+    fStaffInstrumentName;
+
+  newbornClone->fStaffInstrumentAbbreviation =
+    fStaffInstrumentAbbreviation;
+
+  return newbornClone;
+}
+
+void msrStaff::setStaffUpLinkToPart (const S_msrPart& part)
+{
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    part != nullptr,
+    "part is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  fStaffUpLinkToPart = part;
+
+  // copy stuff
+  copyStuffFromUpLinkToPartToStaff ();
+}
+
+void msrStaff::copyStuffFromUpLinkToPartToStaff ()
+{
   // get the initial staff details from the part if any
   S_msrStaffDetails
     partStaffDetails =
@@ -352,62 +431,6 @@ void msrStaff::initializeStaff ()
 
   // multiple measure rests
   fStaffContainsMultipleMeasureRests = false;
-
-  --gIndenter;
-}
-
-msrStaff::~msrStaff ()
-{}
-
-S_msrStaff msrStaff::createStaffNewbornClone (
-  const S_msrPart& containingPart)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a newborn clone of staff \"" <<
-      fStaffName <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    containingPart != nullptr,
-    "containingPart is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  S_msrStaff
-    newbornClone =
-      msrStaff::create (
-        fInputLineNumber,
-        fStaffKind,
-        fStaffNumber,
-        containingPart);
-
-  newbornClone->fStaffName =
-    fStaffName;
-  newbornClone->fStaffAlphabeticName =
-    fStaffAlphabeticName;
-
-  newbornClone->fStaffNumber =
-    fStaffNumber;
-
-  newbornClone->fStaffInstrumentName =
-    fStaffInstrumentName;
-
-  newbornClone->fStaffInstrumentAbbreviation =
-    fStaffInstrumentAbbreviation;
-
-  return newbornClone;
 }
 
 S_msrPartGroup msrStaff::fetchStaffUpLinkToPartGroup () const
@@ -726,9 +749,9 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
   // is this voice number already in the regular voices map?
   std::map <int, S_msrVoice>::const_iterator
     it =
-      fStaffVoiceNumbersToRegularVoicesMap.find (voiceNumber);
+      fStaffRegularVoicesMap.find (voiceNumber);
 
-  if (it != fStaffVoiceNumbersToRegularVoicesMap.end ()) {
+  if (it != fStaffRegularVoicesMap.end ()) {
     // yes
     S_msrVoice
       olderVoice = (*it).second;
@@ -988,6 +1011,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
 void msrStaff::registerVoiceByItsNumber (
   int               inputLineNumber,
+  int               staffNumber,
   const S_msrVoice& voice)
 {
   int voiceNumber = voice->getVoiceNumber ();
@@ -1002,6 +1026,7 @@ void msrStaff::registerVoiceByItsNumber (
       voice->asShortString () <<
       ", by its number '" << voiceNumber <<
       "\" in staff " << fStaffName <<
+      " with number " << staffNumber <<
       " line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1016,7 +1041,7 @@ void msrStaff::registerVoiceByItsNumber (
   registerVoiceInStaffAllVoicesList (voice); // JMI v0.9.63 NASTY bug???
 
   // register voice in the 'numbers to all voices' map
-  fStaffVoiceNumbersToAllVoicesMap [voiceNumber] = voice;
+  fStaffAllVoicesMap [voiceNumber] = voice;
 
   // sort the all voices list if necessary
   switch (voice->getVoiceKind ()) {
@@ -1030,7 +1055,7 @@ void msrStaff::registerVoiceByItsNumber (
       fStaffRegularVoicesList.push_back (voice);
 
       // register voice in the 'numbers to regular voices' map
-      fStaffVoiceNumbersToRegularVoicesMap [voiceNumber] = voice;
+      fStaffRegularVoicesMap [voiceNumber] = voice;
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
@@ -1068,6 +1093,7 @@ void msrStaff::registerVoiceByItsNumber (
         ss <<
           "Sorting the voices in staff \"" <<
           fStaffName << "\"" <<
+          " with number " << staffNumber <<
           ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
@@ -1087,7 +1113,9 @@ void msrStaff::registerVoiceByItsNumber (
 
   // register voice in its staff at the part level
   fStaffUpLinkToPart->
-    registerVoiceInPartStaffVoicesMap (voice);
+    registerVoiceInPartVoicesList (
+//       inputLineNumber, // JMI 0.9.72
+      voice);
 
   --gIndenter;
 }
@@ -1180,6 +1208,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
   // register voice by its number
   registerVoiceByItsNumber (
     inputLineNumber,
+    fStaffNumber,
     regularVoice);
 
   --gIndenter;
@@ -1210,6 +1239,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
   // register the harmonies voice by its number
   registerVoiceByItsNumber (
     inputLineNumber,
+    fStaffNumber,
     voice);
 }
 
@@ -1238,6 +1268,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
   // register the figured bass voice by its number
   registerVoiceByItsNumber (
     inputLineNumber,
+    fStaffNumber,
     voice);
 }
 
@@ -1266,7 +1297,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
 #endif // MF_TRACE_IS_ENABLED
 
   // search list ??? JMI
-  for (std::pair <int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
+  for (std::pair <int, S_msrVoice> thePair : fStaffRegularVoicesMap) {
 #ifdef MF_TRACE_IS_ENABLED
     int        number = thePair.first;
 #endif // MF_TRACE_IS_ENABLED
@@ -1656,6 +1687,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
   // register it in staff by its number
   registerVoiceByItsNumber (
     inputLineNumber,
+    fStaffNumber,
     voice);
 
   // register the voice in staff by it's number
@@ -3238,8 +3270,8 @@ void msrStaff::collectStaffMeasuresSlices (
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceMeasuresSlices ()) {
     size_t
-      staffVoiceNumbersToAllVoicesMapSize =
-        fStaffVoiceNumbersToAllVoicesMap.size ();
+      StaffAllVoicesMapSize =
+        fStaffAllVoicesMap.size ();
 
     std::stringstream ss;
 
@@ -3248,10 +3280,10 @@ void msrStaff::collectStaffMeasuresSlices (
       fStaffName <<
       "\", " <<
       mfSingularOrPluralWithoutNumber (
-        staffVoiceNumbersToAllVoicesMapSize, "there is", "there are") <<
+        StaffAllVoicesMapSize, "there is", "there are") <<
       ' ' <<
       mfSingularOrPlural (
-        staffVoiceNumbersToAllVoicesMapSize, "voice", "voices") <<
+        StaffAllVoicesMapSize, "voice", "voices") <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -3465,7 +3497,7 @@ void msrStaff::browseData (basevisitor* v)
 */
 
 /* JMI may be useful???
-  if (f! StaffVoiceNumbersToAllVoicesMap.empty ()) {
+  if (f! StaffAllVoicesMap.empty ()) {
     for (S_msrVoice voice : fStaffAllVoicesList) {
         msrBrowser<msrVoice> browser (v);
         browser.browse (*((*i).second));
@@ -3852,14 +3884,14 @@ void msrStaff::printFull (std::ostream& os) const
   // print the staff 'voice numbers to all voices' map
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffVoiceNumbersToAllVoicesMap" << ": ";
+    "fStaffAllVoicesMap" << ": ";
 
-  if (! fStaffVoiceNumbersToAllVoicesMap.empty ()) {
+  if (! fStaffAllVoicesMap.empty ()) {
     os << std::endl;
 
     ++gIndenter;
 
-    for (std::pair <int, S_msrVoice> thePair : fStaffVoiceNumbersToAllVoicesMap) {
+    for (std::pair <int, S_msrVoice> thePair : fStaffAllVoicesMap) {
       int        voiceNumber = thePair.first;
       S_msrVoice voice = thePair.second;
 
@@ -3899,14 +3931,14 @@ void msrStaff::printFull (std::ostream& os) const
   // print the staff 'voice numbers to regular voices' map
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fStaffVoiceNumbersToRegularVoicesMap" << ": ";
+    "fStaffRegularVoicesMap" << ": ";
 
-  if (! fStaffVoiceNumbersToRegularVoicesMap.empty ()) {
+  if (! fStaffRegularVoicesMap.empty ()) {
     os << std::endl;
 
     ++gIndenter;
 
-    for (std::pair <int, S_msrVoice> thePair : fStaffVoiceNumbersToRegularVoicesMap) {
+    for (std::pair <int, S_msrVoice> thePair : fStaffRegularVoicesMap) {
       int        voiceNumber = thePair.first;
       S_msrVoice voice = thePair.second;
 
@@ -4022,10 +4054,10 @@ void msrStaff::printFull (std::ostream& os) const
   os << std::endl;
 
   // print the  voices
-  if (! fStaffVoiceNumbersToAllVoicesMap.empty ()) {
+  if (! fStaffAllVoicesMap.empty ()) {
     std::map <int, S_msrVoice>::const_iterator
-      iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
-      iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
+      iBegin = fStaffAllVoicesMap.begin (),
+      iEnd   = fStaffAllVoicesMap.end (),
       i      = iBegin;
 
     for ( ; ; ) {
@@ -4074,12 +4106,12 @@ void msrStaff::print (std::ostream& os) const
     std::endl;
 
   // print the  voices
-  if (! fStaffVoiceNumbersToAllVoicesMap.empty ()) {
+  if (! fStaffAllVoicesMap.empty ()) {
     os << std::endl;
 
     std::map <int, S_msrVoice>::const_iterator
-      iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
-      iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
+      iBegin = fStaffAllVoicesMap.begin (),
+      iEnd   = fStaffAllVoicesMap.end (),
       i      = iBegin;
 
     for ( ; ; ) {
@@ -4192,10 +4224,10 @@ void msrStaff::printSlices (std::ostream& os) const
 
   ++gIndenter;
 
-//   if (! fStaffVoiceNumbersToAllVoicesMap.empty ()) {
+//   if (! fStaffAllVoicesMap.empty ()) {
 //     std::map <int, S_msrVoice>::const_iterator
-//       iBegin = fStaffVoiceNumbersToAllVoicesMap.begin (),
-//       iEnd   = fStaffVoiceNumbersToAllVoicesMap.end (),
+//       iBegin = fStaffAllVoicesMap.begin (),
+//       iEnd   = fStaffAllVoicesMap.end (),
 //       i      = iBegin;
 //     for ( ; ; ) {
 //       (*i)->

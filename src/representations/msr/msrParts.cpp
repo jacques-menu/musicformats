@@ -50,22 +50,40 @@ int msrPart::sPartsCounter = 0;
 
 S_msrPart msrPart::create (
   int                   inputLineNumber,
+  const std::string&    partID)
+{
+  msrPart* obj =
+    new msrPart (
+      inputLineNumber,
+      partID);
+  assert (obj != nullptr);
+  return obj;
+}
+
+S_msrPart msrPart::create (
+  int                   inputLineNumber,
   const std::string&    partID,
   const S_msrPartGroup& partUpLinkToPartGroup)
 {
   msrPart* obj =
     new msrPart (
       inputLineNumber,
-      partID,
-      partUpLinkToPartGroup);
+      partID);
   assert (obj != nullptr);
+
+  // set part's part group upLink
+  obj->fPartUpLinkToPartGroup = partUpLinkToPartGroup;
+
+//   obj->
+//     setPartUpLinkToPartGroup (
+//     partUpLinkToPartGroup);
+
   return obj;
 }
 
 msrPart::msrPart (
   int                   inputLineNumber,
-  const std::string&    partID,
-  const S_msrPartGroup& partUpLinkToPartGroup)
+  const std::string&    partID)
     : msrPartGroupElement (inputLineNumber)
 {
   // replace spaces in partID to set fPartID
@@ -84,11 +102,8 @@ msrPart::msrPart (
 #endif // MF_SANITY_CHECKS_ARE_ENABLED
 */
 
-  // set part number
+  // set part absolute number
   fPartAbsoluteNumber = ++sPartsCounter;
-
-  // set part's part group upLink
-  fPartUpLinkToPartGroup = partUpLinkToPartGroup;
 
   // do other initializations
   initializePart ();
@@ -194,7 +209,7 @@ void msrPart::initializePart ()
 msrPart::~msrPart ()
 {}
 
-S_msrScore  msrPart::fetchPartUpLinkToScore () const
+S_msrScore msrPart::fetchPartUpLinkToScore () const
 {
   S_msrScore result;
 
@@ -270,8 +285,11 @@ S_msrPart msrPart::createPartNewbornClone (const S_msrPartGroup& partGroupClone)
 void msrPart::registerStaffInPart (
   const S_msrStaff& staff)
 {
+  int staffNumber =
+    staff->getStaffNumber ();
+
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
+  if (gTraceOahGroup->getTraceStavesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -280,7 +298,7 @@ void msrPart::registerStaffInPart (
       ", \"" <<
       staff->getStaffKind () <<
       "\" under number " <<
-      staff->getStaffNumber () <<
+      staffNumber <<
       " in part " <<
       fetchPartCombinedName () <<
       ", line " << fInputLineNumber;
@@ -296,13 +314,13 @@ void msrPart::registerStaffInPart (
 
   // the staves may be regitered in disorder, for example in mxml2msr,
   // so we have to sort them
-//   sortStavesByIncreasingNumber (); // JMI v0.9.72
+//   sortStavesByIncreasingNumber (); // JMI v0.9.72 ???
 
-  // register staff number in the staves numbers to staves map
-  fPartStavesMap [staff->getStaffNumber ()] = staff;
+  // register staff number in the staves map
+  fPartStavesMap [staffNumber] = staff;
 
   // register staff in the staves and voices bidimensional vector
-//   fPartStavesAndVoicesVector [staff->getStaffNumber ()] = staff;
+//   fPartStavesAndVoicesVector [staffNumber] = staff;
 
   // register staff in adhoc staves lists
   switch (staff->getStaffKind ()) {
@@ -1999,7 +2017,7 @@ void msrPart::appendBarLineToPart (
   } // for
 }
 
-S_msrStaff msrPart::addStaffToPartByItsNumber (
+S_msrStaff msrPart::addRegularStaffToPartByItsNumber (
   int          inputLineNumber,
   msrStaffKind staffKind,
   int          staffNumber)
@@ -2008,27 +2026,25 @@ S_msrStaff msrPart::addStaffToPartByItsNumber (
     std::stringstream ss;
 
     ss <<
-      "staffNumber " << staffNumber <<
+      "Regular staff number " << staffNumber <<
       " already exists in part " << fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
-    msrInternalError ( // JMI ???
+    msrInternalError (
       gServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
       ss.str ());
-
-    return fPartStavesMap [staffNumber];
   }
 
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
+  if (gTraceOahGroup->getTraceStavesBasics ()) {
     std::stringstream ss;
 
     ss <<
-      "Adding " <<
-      msrStaffKindAsString (staffKind) <<
-      " staff " << staffNumber <<
+      "Adding regular staff number " <<
+      staffNumber <<
+      " (" << staffKind << ")" <<
       " to part " << fetchPartCombinedName () <<
       ", line " << inputLineNumber;
 
@@ -2071,7 +2087,7 @@ S_msrStaff msrPart::addHarmoniesStaffToPart (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
+  if (gTraceOahGroup->getTraceStavesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2123,7 +2139,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
   int inputLineNumber)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
+  if (gTraceOahGroup->getTraceStavesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2174,7 +2190,7 @@ S_msrStaff msrPart::addHFiguredBassStaffToPart (
 void msrPart::addStaffToPartCloneByItsNumber (const S_msrStaff& staff)
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
+  if (gTraceOahGroup->getTraceStavesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2195,7 +2211,7 @@ void msrPart::addStaffToPartCloneByItsNumber (const S_msrStaff& staff)
 void msrPart::sortStavesByIncreasingNumber ()
 {
 #ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceStaves ()) {
+  if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceStavesBasics ()) {
     std::stringstream ss;
 
     ss <<
@@ -2254,90 +2270,106 @@ void msrPart::registerVoiceInPartVoicesList (
       fPartRegularVoicesCounter);
 }
 
-void msrPart::registerVoiceInPartStaffVoicesMap (
-  const S_msrVoice& voice)
-{
-  int
-    staffNumber =
-      voice->getVoiceUpLinkToStaff ()->getStaffNumber (),
-    voiceNumber =
-      voice->getVoiceNumber ();
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Registering voice " <<
-      voiceNumber <<
-      ", " <<
-      voice->getVoiceName () <<
-      "\" in staff " <<
-      staffNumber <<
-      ", " <<
-      "\" in part " <<
-      fPartID <<
-      ", " <<
-      fPartName <<
-      ", line " << voice->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-  // fetch the voices map for staff staffNumber
-  std::map <int, std::map <int, S_msrVoice>>::iterator
-    partStaffIterator =
-      fPartStaffVoicesMap.find (staffNumber);
-
-  // fetch the voice for voiceNumber in the staff
-  std::map <int, S_msrVoice>::iterator
-    partStaffVoiceIterator =
-      (*partStaffIterator).second.find (voiceNumber);
-
-  if (partStaffVoiceIterator != (*partStaffIterator).second.end ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Voice " <<
-      voiceNumber <<
-      ", " <<
-      voice->getVoiceName () <<
-      "\", has already been registered in staff " <<
-      staffNumber <<
-      " in part \"" <<
-      getPartName () <<
-      "\", line " << voice->getInputLineNumber ();
-
-    msrError (
-      gServiceRunData->getInputSourceName (),
-      voice->getInputLineNumber (),
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-
-  // register voice in fPartStaffVoicesMap map
-  fPartStaffVoicesMap
-    [staffNumber] [voiceNumber] = voice;
-
-  // register part minimum and maximum voice numbers
-  if (voiceNumber < fPartMinimumVoiceNumber) {
-    fPartMinimumVoiceNumber = voiceNumber;
-  }
-  if (voiceNumber > fPartMaximumVoiceNumber) {
-    fPartMaximumVoiceNumber = voiceNumber;
-  }
-
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
-    displayPartStaffVoicesMap (
-      voice->getInputLineNumber (),
-      "msrPart::registerVoiceInPartVoicesList()");
-  }
-#endif
-}
+// void msrPart::registerVoiceInPartStavesVoicesMapMap (
+//   int               inputLineNumber,
+//   const S_msrVoice& voice)
+// {
+//   int
+//     staffNumber =
+//       voice->getVoiceUpLinkToStaff ()->getStaffNumber (),
+//     voiceNumber =
+//       voice->getVoiceNumber ();
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Registering voice " <<
+//       voiceNumber <<
+//       ", " <<
+//       voice->getVoiceName () <<
+//       "\" in staff " <<
+//       staffNumber <<
+//       ", " <<
+//       "\" in part " <<
+//       fPartID <<
+//       ", " <<
+//       fPartName <<
+//       ", line " << inputLineNumber;
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
+//
+//   // fetch the voices map for staff staffNumber
+//   std::map <int, std::map <int, S_msrVoice>>::iterator
+//     partStaffIterator =
+//       fPartStavesVoicesMapMap.find (staffNumber);
+//
+//   if (partStaffIterator == fPartStavesVoicesMapMap.end ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Staff number " <<
+//       staffNumber <<
+//       " cannot be found in fPartStavesVoicesMapMap";
+//
+//     msrInternalError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+//
+//   // fetch the voice for voiceNumber in the staff
+//   std::map <int, S_msrVoice>::iterator
+//     partStaffVoiceIterator =
+//       (*partStaffIterator).second.find (voiceNumber);
+//
+//   if (partStaffVoiceIterator != (*partStaffIterator).second.end ()) {
+//     std::stringstream ss;
+//
+//     ss <<
+//       "Voice " <<
+//       voiceNumber <<
+//       ", " <<
+//       voice->getVoiceName () <<
+//       "\", has already been registered in staff " <<
+//       staffNumber <<
+//       " in part \"" <<
+//       getPartName () <<
+//       "\", line " << inputLineNumber;
+//
+//     msrError (
+//       gServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+//
+//   // register voice in fPartStavesVoicesMapMap map
+//   fPartStavesVoicesMapMap
+//     [staffNumber] [voiceNumber] = voice;
+//
+//   // register part minimum and maximum voice numbers
+//   if (voiceNumber < fPartMinimumVoiceNumber) {
+//     fPartMinimumVoiceNumber = voiceNumber;
+//   }
+//   if (voiceNumber > fPartMaximumVoiceNumber) {
+//     fPartMaximumVoiceNumber = voiceNumber;
+//   }
+//
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTraceParts () || gTraceOahGroup->getTraceVoices ()) {
+//     displayPartStavesVoicesMapMap (
+//       inputLineNumber,
+//       "msrPart::registerVoiceInPartVoicesList()");
+//   }
+// #endif
+// }
 
 // void msrPart::registerVoiceInRegularVoicesMap (
 //   const S_msrVoice& voice)
@@ -2986,7 +3018,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
     std::map <int, S_msrVoice>
       staffAllVoicesMap =
         staff->
-          getStaffVoiceNumbersToAllVoicesMap ();
+          getStaffAllVoicesMap ();
 
     for (std::pair <int, S_msrVoice> thePair : staffAllVoicesMap) {
       S_msrVoice voice = thePair.second;
@@ -3075,14 +3107,14 @@ void msrPart::setPartInstrumentNamesMaxLengthes ()
   }
 }
 
-void msrPart::displayPartStaffVoicesMap (
+void msrPart::displayPartStavesMap (
   int                inputLineNumber,
   const std::string& context) const
 {
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceVoices ()) {
     gLog <<
-      ">>> The fPartStaffVoicesMap of part \"" <<
+      ">>> The fPartStavesMap of part \"" <<
       getPartName () <<
       "\" , context: " << context <<
       ", contains:" <<
@@ -3094,11 +3126,11 @@ void msrPart::displayPartStaffVoicesMap (
 
   size_t
     partStaffVoicesMapSize =
-      fPartStaffVoicesMap.size ();
+      fPartStavesMap.size ();
 
   gLog <<
     std::endl <<
-    "fPartStaffVoicesMap contains " <<
+    "fPartStavesMap contains " <<
     mfSingularOrPlural (
       partStaffVoicesMapSize, "stave", "staves") <<
     ", context: " << context <<
@@ -3110,18 +3142,20 @@ void msrPart::displayPartStaffVoicesMap (
     ++gIndenter;
 
     for (
-      std::pair <int, std::map <int, S_msrVoice>> primaryPair :
-        fPartStaffVoicesMap
+      std::pair <int, S_msrStaff> primaryPair : fPartStavesMap
     ) {
       int
         staffNumber = primaryPair.first;
 
+      S_msrStaff
+        staff = primaryPair.second;
+
       for (
-        std::pair <int, S_msrVoice> secondaryPair :
-          primaryPair.second
+        std::pair <int, S_msrVoice> secondaryPair : staff->getStaffAllVoicesMap ()
       ) {
         int
           voiceNumber = secondaryPair.first;
+
         S_msrVoice
           voice = secondaryPair.second;
 

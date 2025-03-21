@@ -1752,7 +1752,7 @@ S_msrStaff mxsr2msrSkeletonBuilder::createStaffInCurrentPartIfNotYetDone (
     // no, add it to fCurrentPart
     staff =
       fCurrentPart->
-        addStaffToPartByItsNumber (
+        addRegularStaffToPartByItsNumber (
 
 #ifdef MF_USE_WRAPPED_TYPES
 					inputLineNumber.getBareValue (),
@@ -4149,8 +4149,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
     thePart =
       msrPart::create (
         elt->getInputLineNumber (),
-        scorePartID,
-        0); // fPartUpLinkToPartGroup will be set later
+        scorePartID); // fPartUpLinkToPartGroup will be set later
 
   // populate thePart
   thePart->
@@ -4387,7 +4386,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 
     ++gIndenter;
 
-		fCurrentPart->displayPartStaffVoicesMap (
+		fCurrentPart->displayPartStavesMap (
 			elt->getInputLineNumber (),
 			"mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)");
 
@@ -4454,7 +4453,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 // //     while (n <= stavesNumber) {
 // //     /* JMI v0.9.69
 // //       fCurrentPart->
-// //         addStaffToPartByItsNumber (
+// //         addRegularStaffToPartByItsNumber (
 // //           elt->getInputLineNumber (),
 // //           msrStaffKind::kStaffKindRegular,
 // //           n);

@@ -37,8 +37,12 @@ class EXP msrPart : public msrPartGroupElement
 
   public:
 
-    // creation from MusicXML
+    // creation
     // ------------------------------------------------------
+
+    static SMARTP<msrPart> create (
+                            int                   inputLineNumber,
+                            const std::string&    partID);
 
     static SMARTP<msrPart> create (
                             int                   inputLineNumber,
@@ -55,8 +59,7 @@ class EXP msrPart : public msrPartGroupElement
 
                           msrPart (
                             int                   inputLineNumber,
-                            const std::string&    partID,
-                            const S_msrPartGroup& partUpLinkToPartGroup);
+                            const std::string&    partID);
 
     virtual               ~msrPart ();
 
@@ -140,11 +143,14 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  setPartInstrumentNamesMaxLengthes ();
 
-    // voices
+    // staves
 
-    const std::map <int, std::map <int, S_msrVoice>>&
-                          getPartStaffVoicesMap () const
-                              { return fPartStaffVoicesMap; }
+    const std::map <int, S_msrStaff>&
+                          getPartStavesMap () const
+                              { return fPartStavesMap; }
+
+
+    // voices
 
 //     const std::map <int, S_msrVoice>&
 //                           getfPartRegularVoicesMap () const
@@ -265,12 +271,6 @@ class EXP msrPart : public msrPartGroupElement
     S_msrVoice            getPartFiguredBassVoice () const
                               { return fPartFiguredBassVoice; }
 
-    // staves map
-
-    const std::map <int, S_msrStaff>&
-                          getPartStavesMap () const
-                              { return fPartStavesMap; }
-
     // part drawing measure position
 
     void                  setPartCurrentDrawingPositionInMeasure (
@@ -386,7 +386,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // staves
 
-    S_msrStaff            addStaffToPartByItsNumber (
+    S_msrStaff            addRegularStaffToPartByItsNumber (
                             int          inputLineNumber,
                             msrStaffKind staffKind,
                             int          staffNumber);
@@ -409,13 +409,10 @@ class EXP msrPart : public msrPartGroupElement
     void                  registerVoiceInPartVoicesList (
                             const S_msrVoice& voice);
 
-    void                  registerVoiceInPartStaffVoicesMap (
-                            const S_msrVoice& voice);
-
 //     void                  registerVoiceInRegularVoicesMap (
 //                             const S_msrVoice& voice);
 
-    void                  displayPartStaffVoicesMap (
+    void                  displayPartStavesMap (
                             int                inputLineNumber,
                             const std::string& context) const;
 
@@ -686,14 +683,17 @@ class EXP msrPart : public msrPartGroupElement
 
     // staves
 
-    std::list <S_msrStaff> fPartAllStavesList;
+    std::list <S_msrStaff>
+                          fPartAllStavesList;
 
-    std::list <S_msrStaff> fPartRegularStavesList;
-
-    std::list <S_msrStaff> fPartNonHarmoniesNorFiguredBassStavesList;
+    std::list <S_msrStaff>
+                          fPartRegularStavesList;
 
     std::map <int, S_msrStaff>
                           fPartStavesMap;
+
+    std::list <S_msrStaff>
+                          fPartNonHarmoniesNorFiguredBassStavesList;
 
     // voices
 
@@ -705,9 +705,6 @@ class EXP msrPart : public msrPartGroupElement
     int                   fPartMinimumVoiceNumber;
     int                   fPartMaximumVoiceNumber;
 
-    // indexes are staff number and voice number
-    std::map <int, std::map <int, S_msrVoice>>
-                          fPartStaffVoicesMap;
 //     std::map <int, S_msrVoice>
 //                           fPartRegularVoicesMap;
 

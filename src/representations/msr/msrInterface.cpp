@@ -467,7 +467,9 @@ S_msrPart createPartInScore (
   S_msrPart
     part =
       msrPart::create (
-        __LINE__, "OnlyPart", partGroup);
+        __LINE__,
+        "OnlyPart",
+        partGroup);
 
   // append it to the part group
   partGroup->
@@ -492,7 +494,10 @@ S_msrStaff createStaffInPart (
   S_msrStaff
     staff =
       msrStaff::create (
-        __LINE__, msrStaffKind::kStaffKindRegular, staffNumber, part);
+        __LINE__,
+        msrStaffKind::kStaffKindRegular,
+        staffNumber,
+        part);
 
   // append it to the part
   part ->

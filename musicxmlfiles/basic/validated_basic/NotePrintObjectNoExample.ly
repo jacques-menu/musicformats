@@ -35,7 +35,7 @@
   }
 }
 
-Part_POne_Staff_One_Voice_One = \absolute {
+_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
   \clef "treble"
@@ -45,7 +45,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
   g'' g'' f'' ]  %{ beam 1, line 179 %}
 }
 
-Part_POne_Staff_Two_Voice_Five = \absolute {
+_Staff_Two_Voice_Five = \absolute {
   \language "nederlands"
   
   \clef "treble"
@@ -55,7 +55,7 @@ Part_POne_Staff_Two_Voice_Five = \absolute {
    < a d' f' >  d  < a d' f' >  ] g [  %{ beam 1, line 324 %}
  < bes d' >  g  < bes d' >  ] }
 
-Part_POne_Staff_Two_Voice_Six = \absolute {
+_Staff_Two_Voice_Six = \absolute {
   \language "nederlands"
   
   \clef "treble"
@@ -81,26 +81,26 @@ Part_POne_Staff_Two_Voice_Six = \absolute {
         
         <<
         
-          \new Staff  = "Part_POne_Staff_One"
+          \new Staff  = "_Staff_One"
           \with {
           }
           <<
-            \context Voice = "Part_POne_Staff_One_Voice_One" <<
-              \Part_POne_Staff_One_Voice_One
+            \context Voice = "_Staff_One_Voice_One" <<
+              \_Staff_One_Voice_One
             >>
           >>
           
-          \new Staff  = "Part_POne_Staff_Two"
+          \new Staff  = "_Staff_Two"
           \with {
           }
           <<
-            \context Voice = "Part_POne_Staff_Two_Voice_Five" <<
+            \context Voice = "_Staff_Two_Voice_Five" <<
               \voiceOne % out of 2 regular voices
-              \Part_POne_Staff_Two_Voice_Five
+              \_Staff_Two_Voice_Five
             >>
-            \context Voice = "Part_POne_Staff_Two_Voice_Six" <<
+            \context Voice = "_Staff_Two_Voice_Six" <<
               \voiceTwo % out of 2 regular voices
-              \Part_POne_Staff_Two_Voice_Six
+              \_Staff_Two_Voice_Six
             >>
           >>
         >>

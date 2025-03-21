@@ -33,20 +33,20 @@
   }
 }
 
-Part_POne_Staff_One_Voice_One = \absolute {
+_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
   \clef "treble_8"
   \key e \major
   \time 4/4
-  \tempo \markup {
+  cis'!2 \p _\< \! \tempo \markup {
     \concat {
        \smaller \general-align #Y #DOWN \note {4} #UP
       " = "
       90
     } % concat
   }
-  cis'!2 \p _\< \! bes!4 \! r ees'!2.. f'16 g,
+  bes!4 \! r ees'!2.. f'16 g,
   \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
    | % 3
   \barNumberCheck #3
@@ -62,13 +62,13 @@ Part_POne_Staff_One_Voice_One = \absolute {
       
       <<
       
-        \new Staff  = "Part_POne_Staff_One"
+        \new Staff  = "_Staff_One"
         \with {
           instrumentName = "Part_POne"
         }
         <<
-          \context Voice = "Part_POne_Staff_One_Voice_One" <<
-            \Part_POne_Staff_One_Voice_One
+          \context Voice = "_Staff_One_Voice_One" <<
+            \_Staff_One_Voice_One
           >>
         >>
       

@@ -2950,7 +2950,7 @@ if (false) // JMI
   int partStavesNumber =
     fCurrentMSRPart->getPartStavesMap ().size ();
   if (partStavesNumber > 1) {
-    // create a staves element
+    // there is more than one staves, create a staves element
     fStavesElement =
       createMxmlIntegerElement (
         k_staves,
@@ -6426,6 +6426,7 @@ void msr2mxsrTranslator::appendNoteTupletIfRelevant (
 
     case msrNoteKind::kNoteInDoubleTremolo:
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       break;
 
@@ -7201,6 +7202,7 @@ void msr2mxsrTranslator::appendBasicsToNote (
   // append the grace sub element if relevant
   switch (noteKind) {
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       fCurrentNoteElement->push (createMxmlelement (k_grace, ""));
       break;
@@ -7264,6 +7266,7 @@ void msr2mxsrTranslator::appendBasicsToNote (
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       {
         // create the pitch element
@@ -7388,6 +7391,7 @@ void msr2mxsrTranslator::appendNotesDurationToNoteIfRelevant (
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       break;
 
@@ -7505,6 +7509,7 @@ void msr2mxsrTranslator::appendTimeModificationToNoteIfRelevant (
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       break;
 
@@ -7593,6 +7598,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
 
     case msrNoteKind::kNoteInDoubleTremolo:
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       break;
 
@@ -7650,6 +7656,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
         break;
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      case msrNoteKind::kNoteRestInGraceNotesGroup:
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
         break;
 
@@ -7974,6 +7981,7 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       break;
 

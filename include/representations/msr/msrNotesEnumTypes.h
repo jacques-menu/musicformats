@@ -73,6 +73,7 @@ enum class msrNoteKind {
 
   // in grace notes groups
   kNoteRegularInGraceNotesGroup,
+  kNoteRestInGraceNotesGroup, // such as exported by Sibelius to synchronise voices
   kNoteSkipInGraceNotesGroup, // used to circumvent LilyPond_Issue_34
 
   // in chords in grace notes groups

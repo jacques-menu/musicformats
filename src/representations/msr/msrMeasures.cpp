@@ -2904,6 +2904,7 @@ void msrMeasure::appendNoteToMeasure (
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMI
       if (fNoteShortcutUpLinkToGraceNotesGroup) {
@@ -6128,6 +6129,7 @@ void msrMeasure::finalizeTheHarmoniesInAHarmoniesMeasure (
           case msrNoteKind::kNoteRestInTuplet:
           case msrNoteKind::kNoteUnpitchedInTuplet:
           case msrNoteKind::kNoteRegularInGraceNotesGroup:
+          case msrNoteKind::kNoteRestInGraceNotesGroup:
           case msrNoteKind::kNoteSkipInGraceNotesGroup:
           case msrNoteKind::kNoteInChordInGraceNotesGroup:
           case msrNoteKind::kNoteInTupletInGraceNotesGroup:

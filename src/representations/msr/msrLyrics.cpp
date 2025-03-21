@@ -807,6 +807,7 @@ std::string msrSyllable::syllableWholeNotesPitchAndOctaveAsString () const // JM
       case msrNoteKind::kNoteRegularInMeasure:
       case msrNoteKind::kNoteInDoubleTremolo:
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      case msrNoteKind::kNoteRestInGraceNotesGroup:
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
       case msrNoteKind::kNoteInChordInGraceNotesGroup:
       case msrNoteKind::kNoteRegularInChord:

@@ -90,6 +90,9 @@ std::string msrNoteKindAsString (
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       result = "kNoteRegularInGraceNotesGroup";
       break;
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
+      result = "kNoteRestInGraceNotesGroup";
+      break;
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       result = "kNoteSkipInGraceNotesGroup";
       break;

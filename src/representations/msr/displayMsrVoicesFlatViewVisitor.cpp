@@ -907,6 +907,7 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrNote& elt)
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       break;
@@ -976,6 +977,7 @@ void displayMsrVoicesFlatViewVisitor::visitEnd (S_msrNote& elt)
     case msrNoteKind::kNoteInDoubleTremolo:
       break;
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
+    case msrNoteKind::kNoteRestInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       break;

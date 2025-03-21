@@ -285,7 +285,9 @@ S_msrPart LilyPondIssue34Generator::createPartInScore (
   S_msrPart
     part =
       msrPart::create (
-        __LINE__, "OnlyPart", partGroup);
+        __LINE__,
+        "OnlyPart",
+        partGroup);
 
   // append it to the part group
   partGroup->

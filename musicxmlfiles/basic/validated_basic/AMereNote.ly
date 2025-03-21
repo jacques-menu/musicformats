@@ -31,7 +31,7 @@
   }
 }
 
-Part_POne_Staff_One_Voice_One = \absolute {
+_Staff_One_Voice_One = \absolute {
   \language "nederlands"
 c'1 }
 
@@ -45,13 +45,13 @@ c'1 }
       
       <<
       
-        \new Staff  = "Part_POne_Staff_One"
+        \new Staff  = "_Staff_One"
         \with {
           instrumentName = "Music"
         }
         <<
-          \context Voice = "Part_POne_Staff_One_Voice_One" <<
-            \Part_POne_Staff_One_Voice_One
+          \context Voice = "_Staff_One_Voice_One" <<
+            \_Staff_One_Voice_One
           >>
         >>
       

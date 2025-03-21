@@ -1175,6 +1175,9 @@ class EXP lpsr2lilypondTranslator :
     void                  generateRegularNoteInGraceNotesGroup (
                             const S_msrNote& note);
 
+    void                  generateRestInGraceNotesGroup (
+                            const S_msrNote& note);
+
     void                  generateSkipInGraceNotesGroup (
                             const S_msrNote& note);
 
