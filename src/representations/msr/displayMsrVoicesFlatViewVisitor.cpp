@@ -313,7 +313,7 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrPartGroup& elt)
   size_t partGroupElementsSize = elt->getPartGroupElementsList ().size ();
 
   gLog <<
-    "PartGroup" << ' ' << elt->fetchPartGroupCombinedName () <<
+    "PartGroup" << ' ' << elt->fetchPartGroupNameForTrace () <<
     " contains " <<
     mfSingularOrPlural (
       partGroupElementsSize,
@@ -327,8 +327,8 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrPartGroup& elt)
 //
 //   gLog << std::left <<
 //     std::setw (fieldWidth) <<
-//     "partGroupAbsoluteNumber" << ": \"" <<
-//     elt->getPartGroupAbsoluteNumber  () << "\"" <<
+//     "partGroupSequentialNumber" << ": \"" <<
+//     elt->getPartGroupSequentialNumber  () << "\"" <<
 //     std::endl <<
 //
 //     std::setw (fieldWidth) <<
@@ -414,7 +414,7 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrPart& elt)
   size_t partStavesMapSize = elt->getPartStavesMap ().size ();
 
   gLog <<
-    "Part " << elt->fetchPartCombinedName () <<
+    "Part " << elt->fetchPartNameForTrace () <<
     " contains " <<
     mfSingularOrPlural (
       partStavesMapSize,
@@ -428,13 +428,13 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrPart& elt)
 //
 //   gLog << std::left <<
 //     std::setw (fieldWidth) <<
-//     "partID" << ": \"" <<
-//     elt->getPartID () << "\"" <<
+//     "partMusicXMLID" << ": \"" <<
+//     elt->getPartMusicXMLID () << "\"" <<
 //     std::endl <<
 //
 //     std::setw (fieldWidth) <<
-//     "partMsrName" << ": \"" <<
-//     elt->getPartMsrName () << "\"" <<
+//     "partPathLikeName" << ": \"" <<
+//     elt->getPartPathLikeName () << "\"" <<
 //     std::endl <<
 //
 //     std::setw (fieldWidth) <<
@@ -503,7 +503,7 @@ void displayMsrVoicesFlatViewVisitor::visitStart (S_msrStaff& elt)
     elt->getStaffAllVoicesList ().size ();
 
   gLog <<
-    "Staff" << ' ' << elt->getStaffName () <<
+    "Staff" << ' ' << elt->getStaffPathLikeName () <<
     " contains " <<
     mfSingularOrPlural (
       staffVoicesVectorSize,

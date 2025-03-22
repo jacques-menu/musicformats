@@ -553,7 +553,7 @@ void lpsrStaffBlock::print (std::ostream& os) const
 {
   os <<
     "StaffBlock for staff \"" <<
-    fStaff->getStaffName () <<
+    fStaff->getStaffPathLikeName () <<
     "\" (" << msrStaffKindAsString (fStaff->getStaffKind ()) <<
     "), " <<
     mfSingularOrPlural (

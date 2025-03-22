@@ -313,7 +313,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPartGroup& elt)
       elt->getPartGroupElementsList ().size ();
 
     gLog <<
-      "PartGroup" << ' ' << elt->fetchPartGroupCombinedName () <<
+      "PartGroup" << ' ' << elt->fetchPartGroupNameForTrace () <<
       " contains " <<
       mfSingularOrPlural (
         partGroupElementsSize,
@@ -332,8 +332,8 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPartGroup& elt)
 //
 //   gLog << std::left <<
 //     std::setw (fieldWidth) <<
-//     "partGroupAbsoluteNumber" << ": \"" <<
-//     elt->getPartGroupAbsoluteNumber  () << "\"" <<
+//     "partGroupSequentialNumber" << ": \"" <<
+//     elt->getPartGroupSequentialNumber  () << "\"" <<
 //     std::endl <<
 //
 //     std::setw (fieldWidth) <<
@@ -424,7 +424,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPart& elt)
       elt->getPartStavesMap ().size ();
 
     gLog <<
-      "Part " << elt->fetchPartCombinedName () <<
+      "Part " << elt->fetchPartNameForTrace () <<
       " contains " <<
       mfSingularOrPlural (
         partStavesMapSize,
@@ -441,13 +441,13 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrPart& elt)
 //
 //   gLog << std::left <<
 //     std::setw (fieldWidth) <<
-//     "partID" << ": \"" <<
-//     elt->getPartID () << "\"" <<
+//     "partMusicXMLID" << ": \"" <<
+//     elt->getPartMusicXMLID () << "\"" <<
 //     std::endl <<
 //
 //     std::setw (fieldWidth) <<
-//     "partMsrName" << ": \"" <<
-//     elt->getPartMsrName () << "\"" <<
+//     "partPathLikeName" << ": \"" <<
+//     elt->getPartPathLikeName () << "\"" <<
 //     std::endl <<
 //
 //     std::setw (fieldWidth) <<
@@ -520,7 +520,7 @@ void displayMsrMeasuresSlicesVisitor::visitStart (S_msrStaff& elt)
       elt->getStaffAllVoicesList ().size ();
 
     gLog <<
-      "Staff" << ' ' << elt->getStaffName () <<
+      "Staff" << ' ' << elt->getStaffPathLikeName () <<
       " contains " <<
       mfSingularOrPlural (
         staffVoicesVectorSize,

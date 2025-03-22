@@ -40,7 +40,7 @@ namespace MusicFormats
 S_msrPartGroup msrPartGroup::create (
   int                      inputLineNumber,
   int                      partGroupNumber,
-  int                      partGroupAbsoluteNumber,
+  int                      partGroupSequentialNumber,
   const std::string&       partGroupName,
   const std::string&       partGroupNameDisplayText,
   const std::string&       partGroupAccidentalText,
@@ -56,7 +56,7 @@ S_msrPartGroup msrPartGroup::create (
     new msrPartGroup (
       inputLineNumber,
       partGroupNumber,
-      partGroupAbsoluteNumber,
+      partGroupSequentialNumber,
       partGroupName,
       partGroupNameDisplayText,
       partGroupAccidentalText,
@@ -74,7 +74,7 @@ S_msrPartGroup msrPartGroup::create (
 S_msrPartGroup msrPartGroup::create (
   int                   inputLineNumber,
   int                   partGroupNumber,
-  int                   partGroupAbsoluteNumber,
+  int                   partGroupSequentialNumber,
   const std::string&    partGroupName,
   const S_msrPartGroup& partGroupUpLinkToContainingPartGroup,
   const S_msrScore&     partGroupUpLinkToScore)
@@ -83,7 +83,7 @@ S_msrPartGroup msrPartGroup::create (
     new msrPartGroup (
       inputLineNumber,
       partGroupNumber,
-      partGroupAbsoluteNumber,
+      partGroupSequentialNumber,
       partGroupName,
       partGroupUpLinkToContainingPartGroup,
       partGroupUpLinkToScore);
@@ -94,7 +94,7 @@ S_msrPartGroup msrPartGroup::create (
 msrPartGroup::msrPartGroup (
   int                      inputLineNumber,
   int                      partGroupNumber,
-  int                      partGroupAbsoluteNumber,
+  int                      partGroupSequentialNumber,
   const std::string&       partGroupName,
   const std::string&       partGroupNameDisplayText,
   const std::string&       partGroupAccidentalText,
@@ -126,7 +126,7 @@ msrPartGroup::msrPartGroup (
 
   // other fields
   fPartGroupNumber = partGroupNumber;
-  fPartGroupAbsoluteNumber = partGroupAbsoluteNumber;
+  fPartGroupSequentialNumber = partGroupSequentialNumber;
 
   fPartGroupName = partGroupName;
 
@@ -162,7 +162,7 @@ msrPartGroup::msrPartGroup (
 
     ss <<
       "Creating part group '" << fPartGroupNumber << '\'' <<
-      ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
+      ", partGroupSequentialNumber: " << fPartGroupSequentialNumber <<
       ", nested in part group '" << fPartGroupUpLinkToContainingPartGroup << '\'' <<
       ", line " << inputLineNumber;
 
@@ -176,7 +176,7 @@ msrPartGroup::msrPartGroup (
 msrPartGroup::msrPartGroup (
   int                   inputLineNumber,
   int                   partGroupNumber,
-  int                   partGroupAbsoluteNumber,
+  int                   partGroupSequentialNumber,
   const std::string&    partGroupName,
   const S_msrPartGroup& partGroupUpLinkToContainingPartGroup,
   const S_msrScore&     partGroupUpLinkToScore)
@@ -201,7 +201,7 @@ msrPartGroup::msrPartGroup (
 
   // other fields
   fPartGroupNumber = partGroupNumber;
-  fPartGroupAbsoluteNumber = partGroupAbsoluteNumber;
+  fPartGroupSequentialNumber = partGroupSequentialNumber;
 
   fPartGroupName = partGroupName;
 
@@ -239,7 +239,7 @@ msrPartGroup::msrPartGroup (
 
     ss <<
       "Creating part group '" << fPartGroupNumber << '\'' <<
-      ", partGroupAbsoluteNumber: " << fPartGroupAbsoluteNumber <<
+      ", partGroupSequentialNumber: " << fPartGroupSequentialNumber <<
       ", nested in part group '" << fPartGroupUpLinkToContainingPartGroup << '\'' <<
       ", line " << inputLineNumber;
 
@@ -263,7 +263,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
 
     ss <<
       "Creating a part group newborn clone of " <<
-      fetchPartGroupCombinedName ();
+      fetchPartGroupNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -296,7 +296,7 @@ S_msrPartGroup msrPartGroup::createPartGroupNewbornClone (
       msrPartGroup::create (
         fInputLineNumber,
         fPartGroupNumber,
-        fPartGroupAbsoluteNumber,
+        fPartGroupSequentialNumber,
         fPartGroupName,
         fPartGroupNameDisplayText,
         fPartGroupAccidentalText,
@@ -362,19 +362,20 @@ void msrPartGroup::setPartGroupUpLinkToContainingPartGroup (
     containingPartGroup;
 }
 
-std::string msrPartGroup::fetchPartGroupCombinedName () const
+std::string msrPartGroup::fetchPartGroupNameForTrace () const
 {
   std::stringstream ss;
 
   ss <<
-    "PartGroup_" << fPartGroupAbsoluteNumber <<
-    " ('" << fPartGroupNumber <<
-    "', fPartGroupName \"" << fPartGroupName << "\")";
+    "[fPartGroupSequentialNumber: " << fPartGroupSequentialNumber <<
+    ", fPartGroupName \"" << fPartGroupName <<
+    "\", fPartGroupNumber: " << fPartGroupNumber <<
+    ']';
 
   return ss.str ();
 }
 
-std::string msrPartGroup::fetchPartGroupCombinedNameWithoutEndOfLines () const
+std::string msrPartGroup::fetchPartGroupNameForTraceWithoutEndOfLines () const
 {
   std::list <std::string> chunksList;
 
@@ -385,7 +386,7 @@ std::string msrPartGroup::fetchPartGroupCombinedNameWithoutEndOfLines () const
   std::stringstream ss;
 
   ss <<
-    "PartGroup_" << fPartGroupAbsoluteNumber <<
+    "PartGroup_" << fPartGroupSequentialNumber <<
     " ('" << fPartGroupNumber <<
     "', partGroupName \"";
 
@@ -464,31 +465,31 @@ void msrPartGroup::setPartGroupInstrumentName (
 
 // S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
 //   int                inputLineNumber,
-//   const std::string& partID)
+//   const std::string& partMusicXMLID)
 // {
 // #ifdef MF_SANITY_CHECKS_ARE_ENABLED
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     partID.size () > 0,
-//     "partID is empty");
+//     partMusicXMLID.size () > 0,
+//     "partMusicXMLID is empty");
 // #endif // MF_SANITY_CHECKS_ARE_ENABLED
 //
-//   // has this partID already been added to this part?
-//   if (fPartGroupPartsMap.count (partID)) {
+//   // has this partMusicXMLID already been added to this part?
+//   if (fPartGroupPartsMap.count (partMusicXMLID)) {
 //     std::stringstream ss;
 //
 //     ss <<
-//       "partID \"" << partID <<
+//       "partMusicXMLID \"" << partMusicXMLID <<
 //       "\" already exists in part group " <<
-//       fetchPartGroupCombinedName ();
+//       fetchPartGroupNameForTrace ();
 //
 //     msrWarning ( // JMI
 //       gServiceRunData->getInputSourceName (),
 //       inputLineNumber,
 //       ss.str ());
 //
-//     return fPartGroupPartsMap [partID];
+//     return fPartGroupPartsMap [partMusicXMLID];
 //   }
 //
 //   // create the part
@@ -496,7 +497,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //     part =
 //       msrPart::create (
 //         inputLineNumber,
-//         partID,
+//         partMusicXMLID,
 //         this);
 //
 //   // register it in this part group
@@ -506,7 +507,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //
 //     ss <<
 //       "Appending part " <<
-//       part->fetchPartCombinedName () <<
+//       part->fetchPartNameForTrace () <<
 //       " to part group " <<
 //       asString ();
 //
@@ -517,7 +518,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 // #endif // MF_TRACE_IS_ENABLED
 //
 //   // register part in part group
-//   fPartGroupPartsMap [partID] = part;
+//   fPartGroupPartsMap [partMusicXMLID] = part;
 //
 //   fPartGroupElementsList.push_back (part);
 //
@@ -542,7 +543,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 //       ss <<
 //         "\"" << (*i).first << "\" --% --> " <<
 //         (*i).second->
-//           fetchPartCombinedName () <<
+//           fetchPartNameForTrace () <<
 //         std::endl;
 //     } // for
 //
@@ -588,7 +589,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 
     ss <<
       "Adding part " <<
-      part->fetchPartCombinedName () <<
+      part->fetchPartNameForTrace () <<
       " to part group " << asString ();
 
     gWaeHandler->waeTrace (
@@ -598,7 +599,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
 #endif // MF_TRACE_IS_ENABLED
 
   // register part into this part group's data
-  fPartGroupPartsMap [part->getPartID ()] = part;
+  fPartGroupPartsMap [part->getPartMusicXMLID ()] = part;
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
@@ -631,7 +632,7 @@ void msrPartGroup::removePartFromPartGroup (
 
     ss <<
       "Removing part " <<
-      partToBeRemoved->fetchPartCombinedName () <<
+      partToBeRemoved->fetchPartNameForTrace () <<
       " from part group " << asString ();
 
     gWaeHandler->waeTrace (
@@ -675,7 +676,7 @@ void msrPartGroup::removePartFromPartGroup (
 
       ss <<
         "an element of partgroup " <<
-        fetchPartGroupCombinedName () <<
+        fetchPartGroupNameForTrace () <<
         " is not a part group nor a part";
 
       msrInternalError (
@@ -849,7 +850,7 @@ void msrPartGroup::displayPartGroupPartsMap (
   for (std::pair <std::string, S_msrPart> thePair : fPartGroupPartsMap) {
     gLog <<
       "\"" << thePair.first << "\" --% --> " <<
-      thePair.second->fetchPartCombinedName () <<
+      thePair.second->fetchPartNameForTrace () <<
       std::endl;
   } // for
 
@@ -889,7 +890,7 @@ void msrPartGroup::displayPartGroupElementsListFull (
         // this is a part group
 //         gLog << // JMI v0.9.67
 //           nestedPartGroup->
-//             fetchPartGroupCombinedNameWithoutEndOfLines () <<
+//             fetchPartGroupNameForTraceWithoutEndOfLines () <<
 //           std::endl;
 
         ++gIndenter;
@@ -923,7 +924,7 @@ void msrPartGroup::displayPartGroupElementsListFull (
 
         ss <<
           "an element of partgroup " <<
-          fetchPartGroupCombinedName () <<
+          fetchPartGroupNameForTrace () <<
           " is not a part group nor a part";
 
         msrInternalError (
@@ -978,7 +979,7 @@ void msrPartGroup::displayPartGroupElementsList (
         // this is a part group
 //         gLog << // JMI v0.9.67
 //           nestedPartGroup->
-//             fetchPartGroupCombinedNameWithoutEndOfLines () <<
+//             fetchPartGroupNameForTraceWithoutEndOfLines () <<
 //           std::endl;
 
         ++gIndenter;
@@ -1006,7 +1007,7 @@ void msrPartGroup::displayPartGroupElementsList (
 
         ss <<
           "an element of partgroup " <<
-          fetchPartGroupCombinedName () <<
+          fetchPartGroupNameForTrace () <<
           " is not a part group nor a part";
 
         msrInternalError (
@@ -1031,7 +1032,7 @@ void msrPartGroup::displayPartGroupElementsList (
 
 S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
   int                inputLineNumber,
-  const std::string& partID)
+  const std::string& partMusicXMLID)
 {
   S_msrPart result;
 
@@ -1040,7 +1041,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
     std::stringstream ss;
 
     ss <<
-      "fetchPartFromPartGroupByItsPartID(" << partID <<
+      "fetchPartFromPartGroupByItsPartID(" << partMusicXMLID <<
       "), fPartGroupElementsList contains:" <<
       std::endl;
 
@@ -1052,7 +1053,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
     --gIndenter;
 
     ss <<
-      "<=- fetchPartFromPartGroupByItsPartID(" << partID << ")";
+      "<=- fetchPartFromPartGroupByItsPartID(" << partMusicXMLID << ")";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1080,7 +1081,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
           partGroup->
             fetchPartFromPartGroupByItsPartID (
               inputLineNumber,
-              partID);
+              partMusicXMLID);
 
       if (inter) {
         result = inter;
@@ -1094,7 +1095,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
           dynamic_cast<msrPart*>(&(*element))
       ) {
       // this is a part
-      if (part->getPartID () == partID) {
+      if (part->getPartMusicXMLID () == partMusicXMLID) {
         result = part;
         break;
       }
@@ -1105,7 +1106,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 
       ss <<
         "an element of partgroup " <<
-        fetchPartGroupCombinedName () <<
+        fetchPartGroupNameForTrace () <<
         " is not a part group nor a part";
 
       msrInternalError (
@@ -1159,7 +1160,7 @@ void msrPartGroup::collectPartGroupPartsList (
 
       ss <<
         "an element of partgroup " <<
-        fetchPartGroupCombinedName () <<
+        fetchPartGroupNameForTrace () <<
         " is not a part group nor a part";
 
       msrInternalError (
@@ -1398,9 +1399,9 @@ std::string msrPartGroup::asString () const
   std::stringstream ss;
 
   ss <<
-    "[PartGroup \"" <<
-    fetchPartGroupCombinedName () <<
-    ", line " << fInputLineNumber <<
+    "[PartGroup " <<
+    fetchPartGroupNameForTrace () <<
+    ", line " << fInputLineNumber << // JMI non significant
     ']';
 
   return ss.str ();
@@ -1409,10 +1410,10 @@ std::string msrPartGroup::asString () const
 void msrPartGroup::printFull (std::ostream& os) const
 {
   os <<
-    "[PartGroup" " \"" << fetchPartGroupCombinedName () <<
-    "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
-    ")" <<
-    ", line " << fInputLineNumber <<
+    "[PartGroup " <<
+    fetchPartGroupNameForTrace () <<
+//     ", fPartGroupPartsMap.size(): " << fPartGroupPartsMap.size () <<
+    ", line " << fInputLineNumber << // JMI non significant
     std::endl;
 
   ++gIndenter;
@@ -1431,10 +1432,8 @@ void msrPartGroup::printFull (std::ostream& os) const
     "fPartGroupUpLinkToContainingPartGroup" << ": ";
   if (fPartGroupUpLinkToContainingPartGroup) {
     os <<
-      "\"" <<
       fPartGroupUpLinkToContainingPartGroup->
-        fetchPartGroupCombinedName () <<
-      "\"";
+        fetchPartGroupNameForTrace ();
   }
   else {
     os << "[NULL]";
@@ -1443,7 +1442,7 @@ void msrPartGroup::printFull (std::ostream& os) const
 
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fPartGroupPartsMap.size ()" << ": " <<
+    "fPartGroupPartsMap.size():" << ": " <<
     fPartGroupPartsMap.size () <<
     std::endl <<
 
@@ -1538,13 +1537,14 @@ void msrPartGroup::print (std::ostream& os) const
 //   if (simultaneousCalls == 100) abort (); // JMI v0.9.69 for the implicit outer-most part group...
 
   os <<
-    "[PartGroup" " \"" << fetchPartGroupCombinedName () <<
-    ", line " << fInputLineNumber <<
+    "[PartGroup " <<
+    fetchPartGroupNameForTrace () <<
+    ", line " << fInputLineNumber << // JMI non significant
     std::endl;
 
   ++gIndenter;
 
-  constexpr int fieldWidth = 25;
+  constexpr int fieldWidth = 29;
 
   os << std::left <<
     std::setw (fieldWidth) <<
@@ -1559,7 +1559,7 @@ void msrPartGroup::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartGroupPartsMap.size ()" << ": " <<
+    "fPartGroupPartsMap.size():" << ": " <<
     fPartGroupPartsMap.size () <<
     std::endl;
 
@@ -1577,9 +1577,9 @@ void msrPartGroup::print (std::ostream& os) const
 void msrPartGroup::printSummary (std::ostream& os) const
 {
   os <<
-    "[PartGroup" " \"" << fetchPartGroupCombinedName () <<
-    "\" (fPartGroupPartsMap.size (): " << fPartGroupPartsMap.size () <<
-    ")" <<
+    "[PartGroup " <<
+    fetchPartGroupNameForTrace () <<
+    ", fPartGroupPartsMap.size():: " << fPartGroupPartsMap.size () <<
     std::endl;
 
   ++gIndenter;

@@ -1287,8 +1287,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
                           getPartNamesTranspositionMap () const
                               { return fPartNamesTranspositionMap; }
     const std::map <std::string, S_msrSemiTonesPitchAndOctave>&
-                          getPartIDsTranspositionMap () const
-                              { return fPartIDsTranspositionMap; }
+                          getPartMusicXMLIDsTranspositionMap () const
+                              { return fPartMusicXMLIDsTranspositionMap; }
 
 
     // voices
@@ -1972,7 +1972,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     std::map <std::string, S_msrSemiTonesPitchAndOctave>
                           fPartNamesTranspositionMap;
     std::map <std::string, S_msrSemiTonesPitchAndOctave>
-                          fPartIDsTranspositionMap;
+                          fPartMusicXMLIDsTranspositionMap;
 
     // voices
     // --------------------------------------

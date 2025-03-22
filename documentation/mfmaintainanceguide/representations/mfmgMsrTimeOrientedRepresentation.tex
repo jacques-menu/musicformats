@@ -173,7 +173,7 @@ void msrPart::collectPartMeasuresSlices (
 
       ss <<
         "The staffMeasuresSlicesSequence of staff \"" <<
-        staff->getStaffName () <<
+        staff->getStaffPathLikeName () <<
         "\" is NULL";
 
       musicxmlWarning (
@@ -185,7 +185,7 @@ void msrPart::collectPartMeasuresSlices (
       fPartMeasuresSlicesSequence->
         mergeWithMeasuresSlicesSequence (
           inputLineNumber,
-          fetchPartCombinedName (),
+          fetchPartNameForTrace (),
           staffMeasuresSlicesSequence);
     }
 

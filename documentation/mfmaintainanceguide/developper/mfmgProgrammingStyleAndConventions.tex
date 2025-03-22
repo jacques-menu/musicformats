@@ -1556,15 +1556,15 @@ When a description contains many fields, the ones initialized by the values of t
 \begin{lstlisting}[language=CPlusPlus]
 msrPart::msrPart (
   int            inputLineNumber,
-  std::string         partID,
+  std::string         partMusicXMLID,
   S_msrPartGroup partUpLinkToPartGroup)
     : msrPartGroupElement (inputLineNumber)
 {
-  // replace spaces in partID to set fPartID
+  // replace spaces in partMusicXMLID to set fPartMusicXMLID
   for_each (
-    partID.begin (),
-    partID.end (),
-    mfStringSpaceReplacer (fPartID, '_'));
+    partMusicXMLID.begin (),
+    partMusicXMLID.end (),
+    mfStringSpaceReplacer (fPartMusicXMLID, '_'));
 
 /* JMI
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED

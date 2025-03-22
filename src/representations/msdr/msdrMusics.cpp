@@ -296,7 +296,7 @@ void msdrMusic::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fVoiceUpLinkToStaff" << ": " <<
-    fVoiceUpLinkToStaff->getStaffName () <<
+    fVoiceUpLinkToStaff->getStaffPathLikeName () <<
     std::endl <<
 
     std::setw (fieldWidth) <<

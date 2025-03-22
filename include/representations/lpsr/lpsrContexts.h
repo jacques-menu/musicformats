@@ -61,7 +61,7 @@ class EXP lpsrContext : public lpsrElement
                             int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
                             lpsrContextTypeKind        contextTypeKind,
-                            const std::string&         contextAlphabeticName);
+                            const std::string&         contextPathLikeName);
 
   protected:
 
@@ -72,7 +72,7 @@ class EXP lpsrContext : public lpsrElement
                             int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
                             lpsrContextTypeKind        contextTypeKind,
-                            const std::string&         contextAlphabeticName);
+                            const std::string&         contextPathLikeName);
 
     virtual               ~lpsrContext ();
 
@@ -88,8 +88,8 @@ class EXP lpsrContext : public lpsrElement
     lpsrContextTypeKind   getContextTypeKind () const
                               { return fContextTypeKind; }
 
-    std::string           getContextAlphabeticName () const
-                              { return fContextAlphabeticName; }
+    std::string           getContextPathLikeName () const
+                              { return fContextPathLikeName; }
 
   public:
 
@@ -136,7 +136,7 @@ class EXP lpsrContext : public lpsrElement
                           fContextUseExistingKind;
     lpsrContextTypeKind   fContextTypeKind;
 
-    std::string           fContextAlphabeticName;
+    std::string           fContextPathLikeName;
 
     std::list <S_msrElement>
                           fContextElementsList;
@@ -155,7 +155,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
     static SMARTP<lpsrChordNamesContext> create (
                             int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            const std::string&         contextAlphabeticName,
+                            const std::string&         contextPathLikeName,
                             const S_msrVoice&          contextVoice);
 
   protected:
@@ -166,7 +166,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
                           lpsrChordNamesContext (
                             int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            const std::string&         contextAlphabeticName,
+                            const std::string&         contextPathLikeName,
                             const S_msrVoice&          contextVoice);
 
     virtual               ~lpsrChordNamesContext ();
@@ -222,7 +222,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
     static SMARTP<lpsrFiguredBassContext> create (
                             int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            const std::string&        contextAlphabeticName,
+                            const std::string&        contextPathLikeName,
                             const S_msrStaff&         contextStaff);
 
   protected:
@@ -233,7 +233,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
                           lpsrFiguredBassContext (
                             int                        inputLineNumber,
                             lpsrContextUseExistingKind contextUseExistingKind,
-                            const std::string&         contextAlphabeticName,
+                            const std::string&         contextPathLikeName,
                             const S_msrStaff&          contextStaff);
 
     virtual               ~lpsrFiguredBassContext ();

@@ -176,7 +176,7 @@ void displayMsrNamesVisitor::visitStart (S_msrPartGroup& elt)
       getPartGroupElementsList ().size ();
 
   gLog <<
-    "PartGroup" << ' ' << elt->fetchPartGroupCombinedName () <<
+    "PartGroup" << ' ' << elt->fetchPartGroupNameForTrace () <<
     " contains " <<
     mfSingularOrPlural (
       partGroupElementsSize,
@@ -251,7 +251,7 @@ void displayMsrNamesVisitor::visitStart (S_msrPart& elt)
       getPartStavesMap ().size ();
 
   gLog <<
-    "Part " << elt->fetchPartCombinedName () <<
+    "Part " << elt->fetchPartNameForTrace () <<
     " contains " <<
     mfSingularOrPlural (
       partStavesMapSize,
@@ -264,12 +264,12 @@ void displayMsrNamesVisitor::visitStart (S_msrPart& elt)
 
   gLog << std::left <<
     std::setw (fieldWidth) <<
-    "partID" << ": \"" <<
-    elt->getPartID () << "\"" <<
+    "partMusicXMLID" << ": \"" <<
+    elt->getPartMusicXMLID () << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "partMsrName" << ": \"" <<
-    elt->getPartMsrName () << "\"" <<
+    "partPathLikeName" << ": \"" <<
+    elt->getPartPathLikeName () << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
     "partName" << ": \"" <<
@@ -330,7 +330,7 @@ void displayMsrNamesVisitor::visitStart (S_msrStaff& elt)
       getStaffAllVoicesList ().size ();
 
   gLog <<
-    "Staff" << ' ' << elt->getStaffName () <<
+    "Staff" << ' ' << elt->getStaffPathLikeName () <<
     " contains " <<
     mfSingularOrPlural (
       staffVoicesVectorSize,

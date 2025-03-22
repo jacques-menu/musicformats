@@ -57,7 +57,7 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder (
       "msrScore::create()");
 
   // parts handling
-  fCurrentPartGroupIdentity= -1; // the score part 'start' will set this identity
+  fCurrentPartGroupSequentialNumber = 0;
 
   // staff handling
   fCurrentNoteStaffNumber = K_STAFF_NUMBER_UNKNOWN_;
@@ -392,16 +392,16 @@ void mxsr2msrSkeletonBuilder::displayStartedPartGroupsVector (
 	++gIndenter;
 
 	for (
-		size_t identity= 0;
-		identity< fStartedPartGroupsListsVector.size ();
-		++identity
+		size_t partGroupSequentialNumber = 0;
+		partGroupSequentialNumber< fStartedPartGroupsListsVector.size ();
+		++partGroupSequentialNumber
 	) {
 		S_mxsrPartGroupsList
 			startedMxsrPartGroupsList =
-				fStartedPartGroupsListsVector [identity];
+				fStartedPartGroupsListsVector [partGroupSequentialNumber];
 
 		gLog <<
-			identity<< ':' <<
+			partGroupSequentialNumber<< ':' <<
 			std::endl;
 
 		++gIndenter;
@@ -430,16 +430,16 @@ void mxsr2msrSkeletonBuilder::displayStoppedPartGroupsVector (
 	++gIndenter;
 
 	for (
-		size_t identity= 0;
-		identity< fStoppedPartGroupsListsVector.size ();
-		++identity
+		size_t partGroupSequentialNumber = 0;
+		partGroupSequentialNumber< fStoppedPartGroupsListsVector.size ();
+		++partGroupSequentialNumber
 	) {
 		S_mxsrPartGroupsList
 			StoppedPartGroupssList =
-				fStoppedPartGroupsListsVector [identity];
+				fStoppedPartGroupsListsVector [partGroupSequentialNumber];
 
 		gLog <<
-			identity<< ':' <<
+			partGroupSequentialNumber<< ':' <<
 			std::endl;
 
 		++gIndenter;
@@ -476,7 +476,7 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
 
       gLog <<
         i << ": " <<
-        part->fetchPartCombinedName () <<
+        part->fetchPartNameForTrace () <<
         ", upLink to: ";
 
       S_msrPartGroup
@@ -487,7 +487,7 @@ void mxsr2msrSkeletonBuilder::displayPartsVector (
       if (partUpLinkToPartGroup) {
         gLog <<
           partUpLinkToPartGroup->
-            fetchPartGroupCombinedName ();
+            fetchPartGroupNameForTrace ();
       }
       else {
         gLog <<
@@ -522,7 +522,8 @@ void mxsr2msrSkeletonBuilder::displayAllCollectedData (
     std::endl <<
     "=======> displayAllCollectedData(), " <<
     context <<
-    ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity<<
+    ", fCurrentPartGroupSequentialNumber: " <<
+    fCurrentPartGroupSequentialNumber<<
     ", line " << inputLineNumber <<
     ":" <<
     std::endl <<
@@ -581,7 +582,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
 
     ss <<
       "Registering MSR part " <<
-      thePart->fetchPartCombinedName () <<
+      thePart->fetchPartNameForTrace () <<
       " in the parts data" <<
       ", line " << inputLineNumber;
 
@@ -595,7 +596,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
   fPartsVector.push_back (thePart);
 
   // register it in the parts map
-  fPartsMap [thePart->getPartID ()] = thePart;
+  fPartsMap [thePart->getPartMusicXMLID ()] = thePart;
 
 	// append it to current part group
 	S_msrPartGroup
@@ -613,7 +614,7 @@ void mxsr2msrSkeletonBuilder::registerPart (
 
     ss <<
       "AFTER registering MSR part " <<
-      thePart->fetchPartCombinedName () <<
+      thePart->fetchPartNameForTrace () <<
       "\" in the parts data" <<
       ", line " << inputLineNumber;
 
@@ -635,7 +636,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 
     ss <<
       "Registering part group start for " <<
-      partGroup->fetchMsrPartGroupCombinedName () <<
+      partGroup->fetchMsrPartGroupNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -679,7 +680,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 
   // register it in fPartGroupsMap under its order as part group,
   // since its part group number may reused later by other part groups
-  fPartGroupsMap [fCurrentPartGroupIdentity] =
+  fPartGroupsMap [fCurrentPartGroupSequentialNumber] =
     partGroup;
 
   // register in fStartedPartGroupsMap // JMI v0.9.69 BUG ???
@@ -699,7 +700,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStart (
 
   	ss <<
       "Appending an empty mxsrPartGroupsList to fStartedPartGroupsListsVector" <<
-      ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity;
+      ", fCurrentPartGroupSequentialNumber: " << fCurrentPartGroupSequentialNumber;
 
     displayAllCollectedData (
       inputLineNumber,
@@ -730,7 +731,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 
     ss <<
       "Registering part group stop for " <<
-      partGroup->fetchMsrPartGroupCombinedName () <<
+      partGroup->fetchMsrPartGroupNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -777,7 +778,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 			ss <<
 				"Popping part group " <<
 				partGroupStackTop->
-					fetchMsrPartGroupCombinedName () <<
+					fetchMsrPartGroupNameForTrace () <<
 				" from the stack" <<
 				", line " << inputLineNumber;
 
@@ -813,7 +814,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 				partGroup->asString () <<
 				" is out of order, it does not match the part group stack top " <<
 				partGroupStackTop->
-					fetchMsrPartGroupCombinedName () <<
+					fetchMsrPartGroupNameForTrace () <<
 				", line " << inputLineNumber;
 
 			gWaeHandler->waeTrace (
@@ -842,7 +843,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 //   S_mxsrPartGroupsList
 //     stoppedPartGroupsList =
 //       fStoppedPartGroupsListsVector [
-//         fCurrentPartGroupIdentity];
+//         fCurrentPartGroupSequentialNumber];
 //
 // 	// append partGroup to the stoppedPartGroupsList
 // 	stoppedPartGroupsList->appendPartGroup (
@@ -862,7 +863,7 @@ void mxsr2msrSkeletonBuilder::registerPartGroupStop (
 //
 //   	ss <<
 //       "Appending an empty mxsrPartGroupsList to fStoppedPartGroupsListsVector" <<
-//       ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity;
+//       ", fCurrentPartGroupSequentialNumber: " << fCurrentPartGroupSequentialNumber;
 //
 //     displayAllCollectedData (
 //       inputLineNumber,
@@ -909,10 +910,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  ++fCurrentPartGroupIdentity;
-
-	// allocated a new part group identify
-  ++fCurrentPartGroupIdentity;
+  ++fCurrentPartGroupSequentialNumber;
 
   // create the part group,
   // with the current part group as part group upLink
@@ -927,7 +925,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
 #endif // MF_USE_WRAPPED_TYPES
 
         fCurrentPartGroupNumber,
-        fCurrentPartGroupIdentity,
+        fCurrentPartGroupSequentialNumber,
         fCurrentPartGroupName,
         fCurrentPartGroupNameDisplayText,
         fCurrentPartGroupAccidentalText,
@@ -955,7 +953,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
 
         fCurrentPartGroupNumber,
         startedPartGroup,
-        fCurrentPartGroupIdentity);
+        fCurrentPartGroupSequentialNumber);
 
   // register it in the part groups data
   registerPartGroupStart (
@@ -1072,10 +1070,10 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
     ss <<
       "Handling the nesting of part group " <<
       theMsrContainingPartGroup->
-        fetchPartGroupCombinedName () <<
+        fetchPartGroupNameForTrace () <<
       "' into " <<
       theMsrContainingPartGroup->
-        fetchPartGroupCombinedName () <<
+        fetchPartGroupNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1092,10 +1090,10 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
     ss <<
       "Setting the upLink of part group " <<
       theMsrPartGroupToBeStopped->
-        fetchPartGroupCombinedName () <<
+        fetchPartGroupNameForTrace () <<
       "' to " <<
       theMsrContainingPartGroup->
-        fetchPartGroupCombinedName () <<
+        fetchPartGroupNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1123,10 +1121,10 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsNesting (
     ss <<
       "Appending sub part group " <<
       theMsrPartGroupToBeStopped->
-        fetchPartGroupCombinedName () <<
+        fetchPartGroupNameForTrace () <<
       "' to " <<
       theMsrContainingPartGroup->
-        fetchPartGroupCombinedName () <<
+        fetchPartGroupNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1175,7 +1173,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  ++fCurrentPartGroupIdentity;
+  ++fCurrentPartGroupSequentialNumber;
 
 	// create fImplicitOuterMostMsrPartGroup
   fImplicitOuterMostMsrPartGroup =
@@ -1188,7 +1186,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 #endif // MF_USE_WRAPPED_TYPES
 
       fCurrentPartGroupNumber,
-      fCurrentPartGroupIdentity,
+      fCurrentPartGroupSequentialNumber,
       "***IMPLICIT OUTER-MOST PART GROUP***", 			// partGroupName
       "",                   								 	 			// PartGroupNameDisplayText
       "",                   								   			// partGroupAccidentalText
@@ -1209,7 +1207,8 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
       "Appending implicit outer-most part group '" <<
       fImplicitOuterMostMsrPartGroup->getPartGroupNumber () <<
       "' to MSR score" <<
-      ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity<<
+      ", fCurrentPartGroupSequentialNumber: " <<
+      fCurrentPartGroupSequentialNumber<<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1235,7 +1234,7 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
 
       fCurrentPartGroupNumber,
       fImplicitOuterMostMsrPartGroup,
-      fCurrentPartGroupIdentity);
+      fCurrentPartGroupSequentialNumber);
 
   // register it in the part groups data
 #ifdef MF_TRACE_IS_ENABLED
@@ -1246,7 +1245,8 @@ void mxsr2msrSkeletonBuilder::createTheImplicitOuterPartGroupAndAddItToTheMsrSco
       "Adding implicit MXSR outer-most part group for '" <<
       fImplicitOuterMostPartGroup->asString () <<
       "' to the part groups data" <<
-      ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity<<
+      ", fCurrentPartGroupSequentialNumber: " <<
+      fCurrentPartGroupSequentialNumber<<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1349,12 +1349,12 @@ void mxsr2msrSkeletonBuilder::sortStoppedPartGroupsListsVector (
 
 void mxsr2msrSkeletonBuilder::handlePartGroupsStartAtIdentity (
 	const mfInputLineNumber& inputLineNumber,
-	int                      identity)
+	int                      partGroupSequentialNumber)
 {
 	if (! fStartedPartGroupsListsVector.empty ()) {
 		S_mxsrPartGroupsList
 			startedMxsrPartGroupsList =
-				fStartedPartGroupsListsVector [identity];
+				fStartedPartGroupsListsVector [partGroupSequentialNumber];
 
 		if (startedMxsrPartGroupsList->size ()) {
 			++gIndenter;
@@ -1396,12 +1396,12 @@ void mxsr2msrSkeletonBuilder::handlePartGroupsStartAtIdentity (
 
 void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 	const mfInputLineNumber& inputLineNumber,
-	int                      identity)
+	int                      partGroupSequentialNumber)
 {
 	if (! fStoppedPartGroupsListsVector.empty ()) {
 		S_mxsrPartGroupsList
 			stoppedPartGroupsList =
-				fStoppedPartGroupsListsVector [identity];
+				fStoppedPartGroupsListsVector [partGroupSequentialNumber];
 
 		if (stoppedPartGroupsList->size ()) {
 			++gIndenter;
@@ -1424,8 +1424,8 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 
 					ss <<
 						"Cannot 'stop' part group " <<
-						partGroup->fetchMsrPartGroupCombinedName () <<
-						" at identity" << identity<<
+						partGroup->fetchMsrPartGroupNameForTrace () <<
+						" at partGroupSequentialNumber" << partGroupSequentialNumber<<
 						", since the stack is empty"<<
 						", line " << inputLineNumber;
 
@@ -1446,7 +1446,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 						ss <<
 							"Popping part group " <<
 							partGroup->
-								fetchMsrPartGroupCombinedName () <<
+								fetchMsrPartGroupNameForTrace () <<
 							" from the stack" <<
 							", line " << stopInputLineNumber;
 
@@ -1522,9 +1522,9 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 					// fetch the identitys in the intersection
 					int
 						startOne =
-							partGroup->getPartGroupIdentity (),
+							partGroup->getPartGroupSequentialNumber (),
 						startTwo =
-							fPartGroupsStack.front ()->getPartGroupIdentity (),
+							fPartGroupsStack.front ()->getPartGroupSequentialNumber (),
 						stopOne =
 							partGroup->getStopIdentity(),
 						stopTwo =
@@ -1558,7 +1558,7 @@ void mxsr2msrSkeletonBuilder::handleThePartGroupsStoppedAtIdentity (
 
 						ss <<
 							gTab <<
-							part->fetchPartCombinedName () <<
+							part->fetchPartNameForTrace () <<
 							", line " << part->getInputLineNumber () <<
 							std::endl;
 					} // for
@@ -1591,17 +1591,17 @@ of a score exhibiting overlapping part groups)",
 		}
 	}
 
-	// handle the part groups started at identity // JMI v0.9.69
+	// handle the part groups started at partGroupSequentialNumber // JMI v0.9.69
 	handlePartGroupsStartAtIdentity (
 		inputLineNumber,
-		identity);
+		partGroupSequentialNumber);
 
 // #ifdef MF_TRACE_IS_ENABLED
 //     if (gTraceOahGroup->getTracePartGroups ()) {
 //       std::stringstream ss;
 //
 //       ss <<
-//         "AT identity" << identity;
+//         "AT partGroupSequentialNumber" << partGroupSequentialNumber;
 //
 //       displayAllCollectedData (
 //         inputLineNumber,
@@ -1645,7 +1645,7 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 		inputLineNumber);
 
 	// sort the contents of fStoppedPartGroupsListsVector
-	// in decreasing identity order
+	// in decreasing partGroupSequentialNumber order
 	sortStoppedPartGroupsListsVector (
 		inputLineNumber);
 
@@ -1657,14 +1657,14 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 	}
 #endif // MF_TRACE_IS_ENABLED
 
-  // handle each identity in turn in increasing order
-  for (int identity= 0; identity<= fCurrentPartGroupIdentity; ++identity) {
-//     if (identity> 0) { JMI v0.9.72
+  // handle each partGroupSequentialNumber in turn in increasing order
+  for (int partGroupSequentialNumber = 0; partGroupSequentialNumber<= fCurrentPartGroupSequentialNumber; ++partGroupSequentialNumber) {
+//     if (partGroupSequentialNumber> 0) { JMI v0.9.72
 //       // parts actual identitys start at 1
       // append part to current part group, i.e. to the top of the stack
       S_msrPart
         part =
-          fPartsVector [identity];
+          fPartsVector [partGroupSequentialNumber];
 
       // fetch the part group stack top
 			if (fPartGroupsStack.empty ()) {
@@ -1672,9 +1672,9 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
 
         ss <<
           "Cannot append part " <<
-          part->fetchPartCombinedName () <<
+          part->fetchPartNameForTrace () <<
           " to any part group " <<
-          " at identity" << identity<<
+          " at partGroupSequentialNumber" << partGroupSequentialNumber<<
           ", since the part groups groups stack is empty"<<
 					", line " << inputLineNumber;
 
@@ -1702,10 +1702,10 @@ void mxsr2msrSkeletonBuilder::handleBOFPartGroupsNestingBOFAndScorePartsAllocati
           part);
 //     }
 
-    // handle the part groups groups stopped at identity
+    // handle the part groups groups stopped at partGroupSequentialNumber
     handleThePartGroupsStoppedAtIdentity (
     	inputLineNumber,
-    	identity);
+    	partGroupSequentialNumber);
 	}
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -3112,7 +3112,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
     type CDATA #REQUIRED
     height %tenths; #IMPLIED
     width %tenths; #IMPLIED
-    %identity;
+    %partGroupSequentialNumber;
     %halign;
     %valign-image;
     %optional-unique-id;
@@ -3264,7 +3264,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
   std::string creditWordsContents =
     elt->getValue ();
 
-  // identity
+  // partGroupSequentialNumber
   float creditWordsDefaultX=
     elt->getAttributeFloatValue ("default-x", 0.0);
   float creditWordsDefaultY=
@@ -3793,7 +3793,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
       "', type: \"" <<
       msrPartGroupTypeKindAsString (
         fCurrentPartGroupTypeKind) << "\""  <<
-      ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity<<
+      ", fCurrentPartGroupSequentialNumber: " <<
+      fCurrentPartGroupSequentialNumber<<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3844,14 +3845,14 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  fCurrentScorePartID = elt->getAttributeValue ("id");
+  std::string scorePartID = elt->getAttributeValue ("id");
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTraceParts ()) {
     std::stringstream ss;
 
     ss <<
-      "Found <score-part /> \"" << fCurrentScorePartID << "\"" <<
+      "Found <score-part /> \"" << scorePartID << "\"" <<
       " in part list" <<
       ", line " << elt->getInputLineNumber ();
 
@@ -3871,13 +3872,13 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
   std::regex  e (regularExpression);
   std::smatch sm;
 
-  regex_match (fCurrentScorePartID, sm, e);
+  regex_match (scorePartID, sm, e);
 
   if (sm.size () == 1) {
     std::stringstream ss;
 
     ss <<
-      "PartID \"" << fCurrentScorePartID << "\"" <<
+      "scorePartID \"" << scorePartID << "\"" <<
       " is a pure number" <<
       ", line " << elt->getInputLineNumber ();
 
@@ -3915,10 +3916,14 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
+	// part name
+
   fCurrentPartName = elt->getValue ();
 
+	// print style
+
   std::string printStyle = elt->getAttributeValue ("print-style"); // JMI
-  if (printStyle == "JMI") {
+  if (printStyle == "JMI") { // JMI ???
   }
 
   // print-object
@@ -3932,7 +3937,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
       elt->getInputLineNumber (),
       printObjectString);
 
-  if (printObjectString == "JMI") {
+  if (printObjectString == "JMI") { // JMI ???
   }
 }
 
@@ -4096,20 +4101,20 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTracePartGroups ()) {
-  std::stringstream ss;
-
-  ss <<
-    "Incrementing fCurrentPartGroupIdentity to " <<
-    fCurrentPartGroupIdentity<<
-    ", line " << elt->getInputLineNumber ();
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
+// #ifdef MF_TRACE_IS_ENABLED
+//   if (gTraceOahGroup->getTracePartGroups ()) {
+//   std::stringstream ss;
+//
+//   ss <<
+//     "Incrementing fCurrentPartGroupSequentialNumber to " <<
+//     fCurrentPartGroupSequentialNumber<<
+//     ", line " << elt->getInputLineNumber ();
+//
+//     gWaeHandler->waeTrace (
+//       __FILE__, __LINE__,
+//       ss.str ());
+//   }
+// #endif // MF_TRACE_IS_ENABLED
 
   std::string scorePartID = elt->getAttributeValue ("id");
 
@@ -4119,7 +4124,8 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
 
   ss <<
     "Handling score part with ID \"" << scorePartID << "\"" <<
-    ", fCurrentPartGroupIdentity: " << fCurrentPartGroupIdentity<<
+    ", fCurrentPartGroupSequentialNumber: " <<
+    fCurrentPartGroupSequentialNumber<<
     ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -4213,7 +4219,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
     ss <<
 //       std::endl <<
       "<!--=== "
-      " partID \"" << fCurrentPartID << "\"" <<
+      " partMusicXMLID \"" << fCurrentPartID << "\"" <<
 //       "partName \"" << fCurrentPartName << "\"" << JMI from fPartGroupElementsList ??? v0.9.67
       ", line " << elt->getInputLineNumber () <<
       " ===-->";
@@ -4282,7 +4288,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   if (fCurrentPart) {
     serviceRunData->
       setCurrentPartIDAndName (
-        fCurrentPart->getPartIDAndName ());
+        fCurrentPart->fetchPartIDAndName ());
   }
 
   // measures
@@ -4339,7 +4345,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
       std::stringstream ss;
 
       ss <<
-        "part " << fCurrentPart->fetchPartCombinedName () <<
+        "part " << fCurrentPart->fetchPartNameForTrace () <<
         " has " << fPartNumberOfMeasures <<
         " measures while the other ones have " << fScoreMeasuresNumber<<
 				", line " << elt->getInputLineNumber ();
@@ -4438,7 +4444,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part& elt)
 // //     } // switch
 // //
 // //     ss <<
-// //       " in part " << fCurrentPart->fetchPartCombinedName();
+// //       " in part " << fCurrentPart->fetchPartNameForTrace();
 // //
 // //     gWaeHandler->waeTrace (
 // //       __FILE__, __LINE__,
@@ -5921,8 +5927,8 @@ void  mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 
 			ss <<
 				"--> visitEnd (S_note& elt) 1 (all):"
-				", getStaffName(): " <<
-				staff->getStaffName () <<
+				", getStaffPathLikeName(): " <<
+				staff->getStaffPathLikeName () <<
 				", getVoiceName(): " <<
 				noteVoice->getVoiceName () <<
 				", line " << fCurrentNoteInputLineNumber;

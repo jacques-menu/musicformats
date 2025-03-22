@@ -344,7 +344,7 @@ class EXP msrScore : public msrBookElement
 
     S_msrPart             fetchPartFromScoreByItsPartID (
                             int                inputLineNumber,
-                            const std::string& partID);
+                            const std::string& partMusicXMLID);
 
     void                  collectScorePartsList (
                             int         inputLineNumber,

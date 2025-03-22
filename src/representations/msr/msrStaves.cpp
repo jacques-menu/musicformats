@@ -104,7 +104,7 @@ msrStaff::msrStaff (
     ss <<
       "Creating staff \"" << asString () <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -113,74 +113,61 @@ msrStaff::msrStaff (
 #endif // MF_TRACE_IS_ENABLED
 }
 
+S_msrStaff msrStaff::createStaffNewbornClone (
+  const S_msrPart& containingPart)
+{
+#ifdef MF_TRACE_IS_ENABLED
+  if (gTraceOahGroup->getTraceStaves ()) {
+    std::stringstream ss;
+
+    ss <<
+      "Creating a newborn clone of staff \"" <<
+      fStaffPathLikeName <<
+      "\"";
+
+    gWaeHandler->waeTrace (
+      __FILE__, __LINE__,
+      ss.str ());
+  }
+#endif // MF_TRACE_IS_ENABLED
+
+#ifdef MF_SANITY_CHECKS_ARE_ENABLED
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    containingPart != nullptr,
+    "containingPart is NULL");
+#endif // MF_SANITY_CHECKS_ARE_ENABLED
+
+  S_msrStaff
+    newbornClone =
+      msrStaff::create (
+        fInputLineNumber,
+        fStaffKind,
+        fStaffNumber,
+        containingPart);
+
+  newbornClone->fStaffPathLikeName =
+    fStaffPathLikeName;
+
+  newbornClone->fStaffNumber =
+    fStaffNumber;
+
+  newbornClone->fStaffInstrumentName =
+    fStaffInstrumentName;
+
+  newbornClone->fStaffInstrumentAbbreviation =
+    fStaffInstrumentAbbreviation;
+
+  return newbornClone;
+}
+
+msrStaff::~msrStaff ()
+{}
+
 void msrStaff::initializeStaff ()
 {
   fStaffRegularVoicesCounter = 0;
-
-  // set staff names
-  switch (fStaffKind) {
-    case msrStaffKind::kStaffKindRegular:
-      fStaffName =
-        fStaffPartName +
-        "_Staff_" +
-        std::to_string (fStaffNumber);
-
-      fStaffAlphabeticName =
-        fStaffPartAlphabeticName +
-        "_Staff_" +
-        mfIntToEnglishWord (fStaffNumber);
-      break;
-
-    case msrStaffKind::kStaffKindTablature:
-      fStaffName =
-        fStaffPartName +
-        "_TABLATURE_Staff";
-
-      fStaffAlphabeticName =
-        fStaffPartAlphabeticName +
-        "_TABLATURE_Staff";
-      break;
-
-    case msrStaffKind::kStaffKindHarmonies:
-      fStaffName =
-        fStaffPartName +
-        "_HARMONIES_Staff";
-
-      fStaffAlphabeticName =
-        fStaffPartAlphabeticName +
-        "_HARMONIES_Staff";
-      break;
-
-    case msrStaffKind::kStaffKindFiguredBass:
-      fStaffName =
-        fStaffPartName +
-        "_FIGURED_BASS_Staff";
-
-      fStaffAlphabeticName =
-        fStaffPartAlphabeticName +
-        "_FIGURED_BASS_Staff";
-      break;
-
-    case msrStaffKind::kStaffKindDrum:
-      fStaffName =
-        fStaffPartName +
-        "_DRUM_Staff";
-
-      fStaffAlphabeticName =
-        fStaffPartAlphabeticName +
-        "_DRUM_Staff";
-      break;
-
-    case msrStaffKind::kStaffKindRythmic:
-      fStaffName =
-        fStaffPartName +
-        "_RYTHMIC_Staff";
-
-      fStaffAlphabeticName =
-        fStaffPartAlphabeticName +
-        "_RYTHMIC_Staff";
-      break;
-  } // switch
 
   ++gIndenter;
 
@@ -242,60 +229,6 @@ void msrStaff::initializeStaff ()
   --gIndenter;
 }
 
-msrStaff::~msrStaff ()
-{}
-
-S_msrStaff msrStaff::createStaffNewbornClone (
-  const S_msrPart& containingPart)
-{
-#ifdef MF_TRACE_IS_ENABLED
-  if (gTraceOahGroup->getTraceStaves ()) {
-    std::stringstream ss;
-
-    ss <<
-      "Creating a newborn clone of staff \"" <<
-      fStaffName <<
-      "\"";
-
-    gWaeHandler->waeTrace (
-      __FILE__, __LINE__,
-      ss.str ());
-  }
-#endif // MF_TRACE_IS_ENABLED
-
-#ifdef MF_SANITY_CHECKS_ARE_ENABLED
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    containingPart != nullptr,
-    "containingPart is NULL");
-#endif // MF_SANITY_CHECKS_ARE_ENABLED
-
-  S_msrStaff
-    newbornClone =
-      msrStaff::create (
-        fInputLineNumber,
-        fStaffKind,
-        fStaffNumber,
-        containingPart);
-
-  newbornClone->fStaffName =
-    fStaffName;
-  newbornClone->fStaffAlphabeticName =
-    fStaffAlphabeticName;
-
-  newbornClone->fStaffNumber =
-    fStaffNumber;
-
-  newbornClone->fStaffInstrumentName =
-    fStaffInstrumentName;
-
-  newbornClone->fStaffInstrumentAbbreviation =
-    fStaffInstrumentAbbreviation;
-
-  return newbornClone;
-}
-
 void msrStaff::setStaffUpLinkToPart (const S_msrPart& part)
 {
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
@@ -314,6 +247,46 @@ void msrStaff::setStaffUpLinkToPart (const S_msrPart& part)
 
 void msrStaff::copyStuffFromUpLinkToPartToStaff ()
 {
+  // set staff names
+  switch (fStaffKind) {
+    case msrStaffKind::kStaffKindRegular:
+      fStaffPathLikeName =
+        fStaffUpLinkToPart->getPartPathLikeName () +
+        "_Staff_" +
+        mfIntToEnglishWord (fStaffNumber);
+      break;
+
+    case msrStaffKind::kStaffKindTablature:
+      fStaffPathLikeName =
+        fStaffUpLinkToPart->getPartPathLikeName () +
+        "_TABLATURE_Staff";
+      break;
+
+    case msrStaffKind::kStaffKindHarmonies:
+      fStaffPathLikeName =
+        fStaffUpLinkToPart->getPartPathLikeName () +
+        "_HARMONIES_Staff";
+      break;
+
+    case msrStaffKind::kStaffKindFiguredBass:
+      fStaffPathLikeName =
+        fStaffUpLinkToPart->getPartPathLikeName () +
+        "_FIGURED_BASS_Staff";
+      break;
+
+    case msrStaffKind::kStaffKindDrum:
+      fStaffPathLikeName =
+        fStaffUpLinkToPart->getPartPathLikeName () +
+        "_DRUM_Staff";
+      break;
+
+    case msrStaffKind::kStaffKindRythmic:
+      fStaffPathLikeName =
+        fStaffUpLinkToPart->getPartPathLikeName () +
+        "_RYTHMIC_Staff";
+      break;
+  } // switch
+
   // get the initial staff details from the part if any
   S_msrStaffDetails
     partStaffDetails =
@@ -341,9 +314,9 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
           "Appending part clef " <<
           clef->asString () <<
           " as initial clef to staff \"" <<
-          fStaffName <<
+          fStaffPathLikeName <<
           "\" in part " <<
-          fStaffUpLinkToPart->fetchPartCombinedName ();
+          fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -374,9 +347,9 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
           "Appending part key '" <<
           key->asString () <<
           "' as initial key to staff \"" <<
-          fStaffName <<
+          fStaffPathLikeName <<
           "\" in part " <<
-          fStaffUpLinkToPart->fetchPartCombinedName ();
+          fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -405,9 +378,9 @@ void msrStaff::copyStuffFromUpLinkToPartToStaff ()
         ss <<
           "Appending part transposition '" << transposition->asString () <<
           "' as initial transposition to staff \"" <<
-          fStaffName <<
+          fStaffPathLikeName <<
           "\" in part " <<
-          fStaffUpLinkToPart->fetchPartCombinedName ();
+          fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -502,7 +475,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (const S_msrNote& note)
       std::stringstream ss;
 
       ss <<
-        "The new shortest note in staff \"" << fStaffName << "\"" <<
+        "The new shortest note in staff \"" << fStaffPathLikeName << "\"" <<
         " becomes " << note->asString ();
 
       gWaeHandler->waeTrace (
@@ -601,7 +574,7 @@ void msrStaff::cascadeCreateAMeasureAndAppendItInStaff (
     ss <<
       "Creating measure '" <<
       measureNumber <<
-      "' and appending it to staff \"" << fStaffName << "\"" <<
+      "' and appending it to staff \"" << fStaffPathLikeName << "\"" <<
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -642,7 +615,7 @@ void msrStaff::setNextMeasureNumberInStaff (
     ss <<
       "Setting next measure number to '" <<
       nextMeasureNumber <<
-      ", in staff \"" << fStaffName << "\"" <<
+      ", in staff \"" << fStaffPathLikeName << "\"" <<
       "', line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -705,11 +678,11 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       voiceNumber <<
       "' as regular voice number '" <<
       fStaffRegularVoicesCounter <<
-      "' of staff \"" << fStaffName <<
+      "' of staff \"" << fStaffPathLikeName <<
       "\", line " << inputLineNumber <<
       "\", current measure number: " <<
       currentMeasureNumber;
- // JMI     " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
+ // JMI     " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -722,7 +695,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
     std::stringstream ss;
 
     ss <<
-      "staff \"" << fStaffName <<
+      "staff \"" << fStaffPathLikeName <<
       "\" is already filled up with " <<
       msrStaff::sStaffMaxRegularVoices << " regular voices" <<
       std::endl <<
@@ -763,7 +736,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       ", voiceNumber: " << voiceNumber <<
       ", currentMeasureNumber: " << currentMeasureNumber <<
       " ' in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\", " <<
       olderVoice->asShortString () <<
       " already exists with this same voiceNumber" <<
@@ -806,11 +779,11 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           voiceNumber <<
           "', voiceKind '" <<
           msrVoiceKindAsString (voiceKind) <<
-          "' in staff \"" << fStaffName <<
+          "' in staff \"" << fStaffPathLikeName <<
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
-     // JMI     " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
+     // JMI     " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -829,11 +802,11 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           voiceNumber <<
           "', voiceKind '" <<
           msrVoiceKindAsString (voiceKind) <<
-          "' in staff \"" << fStaffName <<
+          "' in staff \"" << fStaffPathLikeName <<
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
-     // JMI     " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
+     // JMI     " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -885,7 +858,7 @@ void msrStaff::setStaffShortestNoteWholeNotes (
 
       ss <<
         "The new shortest note wholeNotes in staff \"" <<
-        fStaffName <<
+        fStaffPathLikeName <<
         "\" becomes " <<
         wholeNotes.asString ();
 
@@ -907,7 +880,7 @@ void msrStaff::setStaffShortestNoteTupletFactor (
 
       ss <<
         "The new shortest note tuplet factor in part \"" <<
-        fStaffName <<
+        fStaffPathLikeName <<
         "\" becomes " <<
         noteTupletFactor;
 
@@ -929,7 +902,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
 
     ss <<
       "Registering voice \"" << voice->getVoiceName () <<
-      "\" in all voices list of staff " << fStaffName <<
+      "\" in all voices list of staff " << fStaffPathLikeName <<
       " line " << fInputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1025,7 +998,7 @@ void msrStaff::registerVoiceByItsNumber (
       "\", " <<
       voice->asShortString () <<
       ", by its number '" << voiceNumber <<
-      "\" in staff " << fStaffName <<
+      "\" in staff " << fStaffPathLikeName <<
       " with number " << staffNumber <<
       " line " << fInputLineNumber;
 
@@ -1068,7 +1041,7 @@ void msrStaff::registerVoiceByItsNumber (
 
         ss <<
           "Sorting the voices in staff \"" <<
-          fStaffName << "\"" <<
+          fStaffPathLikeName << "\"" <<
           ", line " << inputLineNumber;
 
         gWaeHandler->waeTrace (
@@ -1092,7 +1065,7 @@ void msrStaff::registerVoiceByItsNumber (
 
         ss <<
           "Sorting the voices in staff \"" <<
-          fStaffName << "\"" <<
+          fStaffPathLikeName << "\"" <<
           " with number " << staffNumber <<
           ", line " << inputLineNumber;
 
@@ -1133,7 +1106,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
       "Registering regular voice " <<
       regularVoice->asShortString () <<
       " by it's number '" << voiceNumber <<
-      "\" in staff " << fStaffName <<
+      "\" in staff " << fStaffPathLikeName <<
       "'s regular voices list with sequential number '" <<
       fStaffRegularVoicesCounter <<
       "'";
@@ -1225,9 +1198,9 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
     ss <<
       "Registering harmonies voice " <<
       voice->asString () <<
-     " by its number in staff \"" << fStaffName <<
+     " by its number in staff \"" << fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1254,9 +1227,9 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
     ss <<
       "Registering figured bass voice " <<
       voice->asString () <<
-     " by its number in staff \"" << fStaffName <<
+     " by its number in staff \"" << fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1285,9 +1258,9 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
     ss <<
       "Fetching voice by its number " <<
       voiceNumber <<
-     " in staff \"" << fStaffName <<
+     " in staff \"" << fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1315,7 +1288,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
         ss <<
           "Fetching voice by its number " <<
           voiceNumber <<
-          "' in staff \"" << fStaffName << "\"" <<
+          "' in staff \"" << fStaffPathLikeName << "\"" <<
           " has staff relative number '" << number <<
           '\'';
 
@@ -1342,7 +1315,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
 
     ss <<
       "Assigning sequential numbers to the regular voices in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\"" <<
       ", line " << inputLineNumber;
 
@@ -1390,7 +1363,7 @@ void msrStaff::assignSequentialNumbersToRegularVoicesInStaff (
           "\" gets sequential number " <<
           voiceSequentialCounter <<
           " in staff \"" <<
-          fStaffName <<
+          fStaffPathLikeName <<
           "\"";
 
         gWaeHandler->waeTrace (
@@ -1419,9 +1392,9 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 
     ss <<
       "Fetching first regular voice in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -1436,7 +1409,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
     ss <<
       "staff " << fStaffNumber <<
       " in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       " doesn't contain any regular voices, cannot fetch the first one" <<
       ", line " << inputLineNumber;
 
@@ -1464,7 +1437,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
 
       ss <<
         "The first regular voice in staff \"" <<
-        fStaffName <<
+        fStaffPathLikeName <<
         "\" is " <<
         result->asShortString ();
 
@@ -1513,9 +1486,9 @@ void msrStaff::registerVoiceInStaff (
       "Registering voice \"" << voice->getVoiceName () <<
       "\" as relative voice " <<
       fStaffRegularVoicesCounter <<
-      " of staff \"" << fStaffName <<
+      " of staff \"" << fStaffPathLikeName <<
       "\", line " << inputLineNumber;
-// JMI       " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
+// JMI       " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1540,7 +1513,7 @@ void msrStaff::registerVoiceInStaff (
         std::stringstream ss;
 
         ss <<
-          "staff \"" << fStaffName <<
+          "staff \"" << fStaffPathLikeName <<
           "\" is already filled up with " <<
           msrStaff::sStaffMaxRegularVoices << " regular voices," <<
           std::endl <<
@@ -1641,7 +1614,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
         std::stringstream ss;
 
         ss <<
-          "staff \"" << fStaffName <<
+          "staff \"" << fStaffPathLikeName <<
           "\" is already filled up with " <<
           msrStaff::sStaffMaxRegularVoices << " regular voices," <<
           std::endl <<
@@ -1674,9 +1647,9 @@ void msrStaff::registerPartLevelVoiceInStaff (
       "Registering voice \"" << voice->getVoiceName () <<
       "\" as part level voice " <<
       fStaffRegularVoicesCounter <<
-      " in staff \"" << fStaffName <<
+      " in staff \"" << fStaffPathLikeName <<
       "\", line " << inputLineNumber;
-// JMI       " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
+// JMI       " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1751,9 +1724,9 @@ void msrStaff::registerVoiceInStaffClone (
       "Registering voice \"" << voice->getVoiceName () <<
       "\" as relative voice " <<
       fStaffRegularVoicesCounter <<
-      " of staff clone \"" << fStaffName <<
+      " of staff clone \"" << fStaffPathLikeName <<
       "\", line " << inputLineNumber;
-// JMI       " in part " << fStaffUpLinkToPart->fetchPartCombinedName ();
+// JMI       " in part " << fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1774,7 +1747,7 @@ void msrStaff::registerVoiceInStaffClone (
         std::stringstream ss;
 
         ss <<
-          "staff clone \"" << fStaffName <<
+          "staff clone \"" << fStaffPathLikeName <<
           "\" is already filled up with " <<
           msrStaff::sStaffMaxRegularVoices << " regular voices," <<
           std::endl <<
@@ -1834,9 +1807,9 @@ void msrStaff::registerVoiceInStaffClone (
 //     ss <<
 //       "Appending ClefKeyTimeSignatureGroup " << ClefKeyTimeSignatureGroup->asString () <<
 //       " to staff \"" <<
-//       fStaffName <<
+//       fStaffPathLikeName <<
 //       "\" in part " <<
-//       fStaffUpLinkToPart->fetchPartCombinedName ();
+//       fStaffUpLinkToPart->fetchPartNameForTrace ();
 //
 //     gWaeHandler->waeTrace (
 //       __FILE__, __LINE__,
@@ -1881,9 +1854,9 @@ void msrStaff::registerVoiceInStaffClone (
 //         "Clef " <<
 //         clef
 //         " ignored because it is already present in staff " <<
-//         fStaffName <<
+//         fStaffPathLikeName <<
 //         "\" in part " <<
-//         fStaffUpLinkToPart->fetchPartCombinedName ();
+//         fStaffUpLinkToPart->fetchPartNameForTrace ();
 //
 //       gWaeHandler->waeTrace (
 //         __FILE__, __LINE__,
@@ -1908,9 +1881,9 @@ void msrStaff::appendClefToStaff  (
       "Appending clef " <<
       clef->asString () <<
       " to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -1994,9 +1967,9 @@ void msrStaff::appendKeyToStaff (
       "Appending key " <<
       key->asString () <<
       " to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2028,9 +2001,9 @@ void msrStaff::appendKeyToStaff (
             "Key '" <<
             key->asString () <<
             "' ignored because it is already present in staff " <<
-            fStaffName <<
+            fStaffPathLikeName <<
             "\" in part " <<
-            fStaffUpLinkToPart->fetchPartCombinedName ();
+            fStaffUpLinkToPart->fetchPartNameForTrace ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -2102,7 +2075,7 @@ void msrStaff::appendTimeSignatureToStaff (
       "Appending time signature " <<
       timeSignature->asString () <<
       " to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\"";
 
     gWaeHandler->waeTrace (
@@ -2135,9 +2108,9 @@ void msrStaff::appendTimeSignatureToStaff (
             "Time '" <<
             timeSignature->asString () <<
             "' ignored because it is already present in staff " <<
-            fStaffName <<
+            fStaffPathLikeName <<
             "\" in part " <<
-            fStaffUpLinkToPart->fetchPartCombinedName ();
+            fStaffUpLinkToPart->fetchPartNameForTrace ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -2214,9 +2187,9 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
       "Appending clefKeyTimeSignatureGroup '" <<
       clefKeyTimeSignatureGroup->asString () <<
       "' to staff clone \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2248,9 +2221,9 @@ void msrStaff::appendClefKeyTimeSignatureGroupToStaffClone (
 //     ss <<
 //       "Appending time signature " << timeSignature
 //       " to staff clone \"" <<
-//       fStaffName <<
+//       fStaffPathLikeName <<
 //       "\" in part " <<
-//       fStaffUpLinkToPart->fetchPartCombinedName () <<
+//       fStaffUpLinkToPart->fetchPartNameForTrace () <<
 //       std::endl;
 //
 //     gWaeHandler->waeTrace (
@@ -2286,7 +2259,7 @@ void msrStaff::appendTempoToStaff (
     ss <<
       "Appending tempo " << tempo->asString () <<
       " to staff " <<
-      fStaffName;
+      fStaffPathLikeName;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2311,7 +2284,7 @@ void msrStaff::appendRehearsalMarkToStaff (
     ss <<
       "Appending rehearsal mark " << rehearsalMark->asString () <<
       " to staff " <<
-      fStaffName;
+      fStaffPathLikeName;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2336,7 +2309,7 @@ void msrStaff::appendLineBreakToStaff  (
     ss <<
       "Appending line break " << lineBreak->asString () <<
       " to staff " <<
-      fStaffName;
+      fStaffPathLikeName;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2361,7 +2334,7 @@ void msrStaff::appendPageBreakToStaff (
     ss <<
       "Appending page break " << pageBreak->asString () <<
       " to staff " <<
-      fStaffName;
+      fStaffPathLikeName;
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2388,9 +2361,9 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       "Inserting hidden measure and barLine at position " <<
       positionInMeasure.asString () <<
       "' in staff clone \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2422,9 +2395,9 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
 
     ss <<
       "Nesting contents into new repeat in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2449,9 +2422,9 @@ void msrStaff::handleRepeatStartInStaff (
 
     ss <<
       "Handling repeat start in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2482,9 +2455,9 @@ void msrStaff::handleRepeatEndInStaff (
 
     ss <<
       "Handling a repeat end in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2515,9 +2488,9 @@ void msrStaff::handleRepeatEndingStartInStaff (
 
     ss <<
       "Handling a repeat ending start in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2552,9 +2525,9 @@ void msrStaff::handleRepeatEndingEndInStaff (
       msrRepeatEndingKindAsString (
         repeatEndingKind) <<
       " repeat ending end in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2588,9 +2561,9 @@ void msrStaff::finalizeRepeatEndInStaff (
 
     ss <<
       "Finalizing a repeat upon its end in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2624,9 +2597,9 @@ void msrStaff::cascadeCreateAMeasureRepeatAndAppendItToStaff (
 
     ss <<
       "Creating a measures repeat from it's first measure in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2652,9 +2625,9 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
 
     ss <<
       "Appending the pending measures repeat to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2684,9 +2657,9 @@ void msrStaff::cascadeAppendMultipleMeasureRestToStaff (
       mfSingularOrPlural (
         multipleMeasureRestMeasuresNumber, "measure", "measures") <<
       " to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2717,7 +2690,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
 
     ss <<
       "Replicating last appended measure in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\"";
 
     gWaeHandler->waeTrace (
@@ -2750,9 +2723,9 @@ void msrStaff::appendEmptyMeasuresToStaff (
         emptyMeasuresNumber,
         "empty measure", "empty measures") <<
       " to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -2781,9 +2754,9 @@ void msrStaff::appendPendingMultipleMeasureRestsToStaff (
 
     ss <<
       "Appending the pending multiple rest to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2810,7 +2783,7 @@ void msrStaff::appendMultipleMeasureRestCloneToStaff (
       "Appending multiple rest '" <<
       multipleMeasureRests->asString () <<
       "' to staff clone \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\"";
 
     gWaeHandler->waeTrace (
@@ -2837,9 +2810,9 @@ void msrStaff::appendRepeatCloneToStaff (
 
     ss <<
       "Appending repeat clone to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2863,9 +2836,9 @@ void msrStaff::appendRepeatEndingCloneToStaff (
 
     ss <<
       "Appending a repeat ending clone to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       ", line " << repeatEndingClone->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2895,9 +2868,9 @@ void msrStaff::appendBarLineToStaff (
     ss <<
       "Appending barLine " << barLine->asString () <<
       " to staff " <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2926,9 +2899,9 @@ void msrStaff::appendTranspositionToStaff (
       "Setting transposition '" <<
       transposition->asString () <<
       "' in staff " <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -2953,9 +2926,9 @@ void msrStaff::appendTranspositionToStaff (
           "Transpose '" <<
           transposition->asString () <<
           "' ignored because it is already present in staff " <<
-          fStaffName <<
+          fStaffPathLikeName <<
           "\" in part " <<
-          fStaffUpLinkToPart->fetchPartCombinedName ();
+          fStaffUpLinkToPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -2987,9 +2960,9 @@ void msrStaff::appendStaffDetailsToStaff (
       "Appending staff details '" <<
       staffDetails->asShortString () <<
       "' to staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3030,9 +3003,9 @@ void msrStaff::appendStaffDetailsToStaff (
       "Setting staff kind to '" <<
       msrStaffKindAsString (fStaffKind) <<
       "' in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName ();
+      fStaffUpLinkToPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -3095,7 +3068,7 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
 
     ss <<
       "Finalizing last appended measure in staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -3199,7 +3172,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 
     ss <<
       "Finalizing staff \"" <<
-      fStaffName << "\"" <<
+      fStaffPathLikeName << "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -3217,7 +3190,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 
     ss <<
       "Finalizing the voices in staff \"" <<
-      fStaffName << "\"" <<
+      fStaffPathLikeName << "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -3249,7 +3222,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
 
     ss <<
       "Collecting measures from the staff voices into staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "'s measures flat list vector" <<
       ", line " << inputLineNumber;
 
@@ -3277,7 +3250,7 @@ void msrStaff::collectStaffMeasuresSlices (
 
     ss <<
       "Collecting the measures slices of staff \"" <<
-      fStaffName <<
+      fStaffPathLikeName <<
       "\", " <<
       mfSingularOrPluralWithoutNumber (
         StaffAllVoicesMapSize, "there is", "there are") <<
@@ -3311,7 +3284,7 @@ void msrStaff::collectStaffMeasuresSlices (
   // create the staff measures slices sequence
   fStaffMeasuresSlicesSequence =
     msrMeasuresSlicesSequence::create (
-      fStaffName); // origin
+      fStaffPathLikeName); // origin
 
   // populate it
   for (S_msrVoice voice : fStaffAllVoicesList) {
@@ -3365,7 +3338,7 @@ void msrStaff::collectStaffMeasuresSlices (
         fStaffMeasuresSlicesSequence->
           mergeWithMeasuresSlicesSequence (
             inputLineNumber,
-            fStaffName,
+            fStaffPathLikeName,
             voiceMeasuresSlicesSequence);
     }
 
@@ -3670,7 +3643,7 @@ std::string msrStaff::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Staff \"" << fStaffName <<
+    "[Staff \"" << fStaffPathLikeName <<
     "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
     "\", fStaffNumber: " <<
@@ -3686,9 +3659,8 @@ std::string msrStaff::asString () const
 void msrStaff::printFull (std::ostream& os) const
 {
   os <<
-    "[Staff printfull()\"" << fStaffName <<
-    "\", fStaffAlphabeticName: " << fStaffAlphabeticName <<
-    "\", fStaffKind: " <<
+    "[Staff " << fStaffPathLikeName <<
+    ", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
     "\", fStaffNumber: " <<
     fStaffNumber <<
@@ -3708,7 +3680,7 @@ void msrStaff::printFull (std::ostream& os) const
 
     std::setw (fieldWidth) <<
     "fStaffUpLinkToPart" << ": " <<
-    fStaffUpLinkToPart->fetchPartCombinedName () <<
+    fStaffUpLinkToPart->fetchPartNameForTrace () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -4079,7 +4051,7 @@ void msrStaff::printFull (std::ostream& os) const
 void msrStaff::print (std::ostream& os) const
 {
   os <<
-    "[Staff \"" << fStaffName <<
+    "[Staff \"" << fStaffPathLikeName <<
     "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
     std::endl;
@@ -4089,10 +4061,6 @@ void msrStaff::print (std::ostream& os) const
   constexpr int fieldWidth = 27;
 
   os << std::left <<
-    std::setw (fieldWidth) <<
-    "fStaffAlphabeticName \"" << ": \"" << fStaffAlphabeticName << "\"" <<
-    std::endl <<
-
     std::setw (fieldWidth) <<
     "fStaffNumber" << ": " << fStaffNumber <<
     std::endl <<
@@ -4133,7 +4101,7 @@ void msrStaff::print (std::ostream& os) const
 void msrStaff::printSummary (std::ostream& os) const
 {
   os <<
-    "[Staff \"" << fStaffName <<
+    "[Staff \"" << fStaffPathLikeName <<
     "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
     "\", fStaffNumber: " <<

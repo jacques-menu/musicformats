@@ -149,7 +149,7 @@ void msrPart::finalizePartAndAllItsMeasures (
 
     ss <<
       "Finalizing part clone " <<
-      fetchPartCombinedName () <<
+      fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -164,7 +164,7 @@ void msrPart::finalizePartAndAllItsMeasures (
 
     ss <<
       "Finalizing all the measures of part \"" <<
-      fetchPartCombinedName () <<
+      fetchPartNameForTrace () <<
       "\", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -207,7 +207,7 @@ void msrPart::finalizePart (
 
     ss <<
       "Finalizing part " <<
-      fetchPartCombinedName () <<
+      fetchPartNameForTrace () <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -223,7 +223,7 @@ void msrPart::finalizePart (
 
     ss <<
       "Part " <<
-      fetchPartCombinedName () <<
+      fetchPartNameForTrace () <<
       " appears in the part list, but doesn't contain any staff";
 
     musicxmlWarning (
@@ -279,7 +279,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 
     ss <<
       "Finalizing staff \"" <<
-      getStaffName () << "\"" <<
+      getStaffPathLikeName () << "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -297,7 +297,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
 
     ss <<
       "Finalizing the voices in staff \"" <<
-      getStaffName () << "\"" <<
+      getStaffPathLikeName () << "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTraceWithoutInputLocation (

@@ -443,7 +443,7 @@ void msr2bsrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "--> Start visiting msrPartGroup " <<
-      elt->fetchPartGroupCombinedName () <<
+      elt->fetchPartGroupNameForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -463,7 +463,7 @@ void msr2bsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     ss <<
       "--> End visiting msrPartGroup " <<
-      elt->fetchPartGroupCombinedName () <<
+      elt->fetchPartGroupNameForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -477,8 +477,8 @@ void msr2bsrTranslator::visitEnd (S_msrPartGroup& elt)
 void msr2bsrTranslator::visitStart (S_msrPart& elt)
 {
   std::string
-    partCombinedName =
-      elt->fetchPartCombinedName ();
+    partdNameForTrace =
+      elt->fetchPartNameForTrace ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -486,7 +486,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
 
     ss <<
       "--> Start visiting msrPart " <<
-      partCombinedName <<
+      partdNameForTrace <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -507,7 +507,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
 
       ss <<
         std::endl <<
-        "<!--=== part \"" << partCombinedName << "\"" <<
+        "<!--=== part \"" << partdNameForTrace << "\"" <<
         ", line " << elt->getInputLineNumber () << " ===-->";
 
       gWaeHandler->waeTrace (
@@ -528,7 +528,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
 
   serviceRunData->
     setCurrentPartIDAndName (
-      elt->getPartIDAndName ());
+      elt->fetchPartIDAndName ());
 
   ++gIndenter;
 }
@@ -541,7 +541,7 @@ void msr2bsrTranslator::visitEnd (S_msrPart& elt)
 
     ss <<
       "--> End visiting msrPart " <<
-      elt->fetchPartCombinedName () <<
+      elt->fetchPartNameForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -620,7 +620,7 @@ void msr2bsrTranslator::visitStart (S_msrStaff& elt)
 
     ss <<
       "--> Start visiting msrStaff \"" <<
-      elt->getStaffName () << "\"" <<
+      elt->getStaffPathLikeName () << "\"" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -653,7 +653,7 @@ void msr2bsrTranslator::visitEnd (S_msrStaff& elt)
 
     ss <<
       "--> End visiting S_msrStaff \"" <<
-      elt->getStaffName () << "\"" <<
+      elt->getStaffPathLikeName () << "\"" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3213,7 +3213,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
       std::endl <<
       "<!--=== " <<
       "part \"" << fCurrentPartName << "\"" <<
-      " (partID \"" << fCurrentPart->getPartID () << "\")" <<
+      " (partMusicXMLID \"" << fCurrentPart->getPartMusicXMLID () << "\")" <<
       ", measure \"" << fCurrentMeasureNumber << "\"" <<
       "', voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
@@ -6328,7 +6328,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
 
     ss <<
       "Handling repeat start in part clone" <<
-      fCurrentPartClone->fetchPartCombinedName ();
+      fCurrentPartClone->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -6398,7 +6398,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeat& elt)
 
     ss <<
       "Appending a repeat to part clone " <<
-      fCurrentPartClone->fetchPartCombinedName () << "\"";
+      fCurrentPartClone->fetchPartNameForTrace () << "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,

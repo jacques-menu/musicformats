@@ -87,23 +87,15 @@ class EXP msrStaff : public msrElement
     msrStaffKind          getStaffKind () const
                               { return fStaffKind; }
 
-    // part name
-    void                  setStaffPartName (const std::string& partName)
-                              { fStaffPartName = partName; }
+    // staff path-like name
 
-    std::string           getStaffPartName () const
-                              { return fStaffPartName; }
+    std::string           getStaffPathLikeName () const
+                              { return fStaffPathLikeName; }
 
     // staff number and names
 
     int                   getStaffNumber () const
                               { return fStaffNumber; }
-
-    std::string           getStaffName () const
-                              { return fStaffName; }
-
-    std::string           getStaffAlphabeticName () const
-                              { return fStaffAlphabeticName; }
 
     std::string           getStaffInstrumentName () const
                               { return fStaffInstrumentName; }
@@ -431,13 +423,8 @@ class EXP msrStaff : public msrElement
 
     S_msrPart             fStaffUpLinkToPart;
 
-    // part names, needed when fStaffUpLinkToPart is not yet set
-    std::string           fStaffPartName;
-    std::string           fStaffPartAlphabeticName;
-
-    // staff names
-    std::string           fStaffName;
-    std::string           fStaffAlphabeticName;
+    // staff path-like name
+    std::string           fStaffPathLikeName;
 
     // staff kind
     msrStaffKind          fStaffKind;

@@ -1214,8 +1214,8 @@ void msrStanza::initializeStanza ()
     "_Stanza_" +
     fStanzaNumber;
 
-  fStanzaAlphabeticName =
-    fStanzaUpLinkToVoice->getVoiceAlphabeticName () +
+  fStanzaPathLikeName =
+    fStanzaUpLinkToVoice->getVoicePathLikeName () +
     "_Stanza_" +
       mfStringNumbersToEnglishWords (
         mfMakeSingleWordFromString (
@@ -1284,8 +1284,8 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
   // names
   newbornClone->fStanzaName =
     fStanzaName;
-  newbornClone->fStanzaAlphabeticName =
-    fStanzaAlphabeticName;
+  newbornClone->fStanzaPathLikeName =
+    fStanzaPathLikeName;
 
   // contents
   newbornClone->fStanzaTextPresent =
@@ -1340,8 +1340,8 @@ S_msrStanza msrStanza::createStanzaDeepClone (
   // name
   stanzaDeepClone->fStanzaName =
     fStanzaName;
-  stanzaDeepClone->fStanzaAlphabeticName =
-    fStanzaAlphabeticName;
+  stanzaDeepClone->fStanzaPathLikeName =
+    fStanzaPathLikeName;
 
   // contents
   int n = fSyllables.size ();

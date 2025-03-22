@@ -51,6 +51,14 @@ for FILE_NAME in $@ ; do
     echo "MUSICXML_FILE_NAME ${MUSICXML_FILE_NAME} does not exist"
   fi
 
+  MUSICXML_FILE_NAME="${FILENAME_WITHOUT_SUFFIX}.musicxml"
+  if [ -f ${MUSICXML_FILE_NAME} ]; then
+    echo "--> moving ${MUSICXML_FILE_NAME} to ${VALIDATED_DIR_NAME}"
+    mv "${MUSICXML_FILE_NAME}" "${VALIDATED_DIR_NAME}"
+  else
+    echo "MUSICXML_FILE_NAME ${MUSICXML_FILE_NAME} does not exist"
+  fi
+
   LILYPOND_FILE_NAME="${FILENAME_WITHOUT_SUFFIX}.ly"
   if [ -f ${LILYPOND_FILE_NAME} ]; then
     echo "--> moving ${LILYPOND_FILE_NAME} to ${VALIDATED_DIR_NAME}"

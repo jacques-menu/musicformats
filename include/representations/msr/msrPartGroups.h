@@ -97,7 +97,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     static SMARTP<msrPartGroup> create (
                             int                      inputLineNumber,
                             int                      partGroupNumber,
-                            int                      partGroupAbsoluteNumber,
+                            int                      partGroupSequentialNumber,
                             const std::string&       partGroupName,
                             const std::string&       partGroupNameDisplayText,
                             const std::string&       partGroupAccidentalText,
@@ -120,7 +120,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     static SMARTP<msrPartGroup> create (
                             int                   inputLineNumber,
                             int                   partGroupNumber,
-                            int                   partGroupAbsoluteNumber,
+                            int                   partGroupSequentialNumber,
                             const std::string&    partGroupName,
                             const S_msrPartGroup& partGroupUpLinkToContainingPartGroup,
                             const S_msrScore&     partGroupUpLinkToScore);
@@ -133,7 +133,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                           msrPartGroup (
                             int                      inputLineNumber,
                             int                      partGroupNumber,
-                            int                      partGroupAbsoluteNumber,
+                            int                      partGroupSequentialNumber,
                             const std::string&       partGroupName,
                             const std::string&       partGroupNameDisplayText,
                             const std::string&       partGroupAccidentalText,
@@ -148,7 +148,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                           msrPartGroup (
                             int                   inputLineNumber,
                             int                   partGroupNumber,
-                            int                   partGroupAbsoluteNumber,
+                            int                   partGroupSequentialNumber,
                             const std::string&    partGroupName,
                             const S_msrPartGroup& partGroupUpLinkToContainingPartGroup,
                             const S_msrScore&     partGroupUpLinkToScore);
@@ -172,17 +172,17 @@ class EXP msrPartGroup : public msrPartGroupElement
                               { return fPartGroupUpLinkToScore; }
 
     // numbers
-    int                   getPartGroupAbsoluteNumber () const
-                              { return fPartGroupAbsoluteNumber; }
+    int                   getPartGroupSequentialNumber () const
+                              { return fPartGroupSequentialNumber; }
 
     int                   getPartGroupNumber () const
                               { return fPartGroupNumber; }
 
     // names
 
-    std::string           fetchPartGroupCombinedName () const;
+    std::string           fetchPartGroupNameForTrace () const;
 
-    std::string           fetchPartGroupCombinedNameWithoutEndOfLines () const;
+    std::string           fetchPartGroupNameForTraceWithoutEndOfLines () const;
                             // for comments in LilyPond code
 
     // miscellaneous
@@ -250,7 +250,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
 //     S_msrPart             appendPartToPartGroupByItsPartID ( // JMI superflous v0.9.69
 //                             int                inputLineNumber,
-//                             const std::string& partID);
+//                             const std::string& partMusicXMLID);
 
     void                  appendPartToPartGroup (S_msrPart part);
 
@@ -266,7 +266,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     S_msrPart             fetchPartFromPartGroupByItsPartID (
                             int                inputLineNumber,
-                            const std::string& partID);
+                            const std::string& partMusicXMLID);
 
     void                  collectPartGroupPartsList (
                             int                   inputLineNumber,
@@ -333,7 +333,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     // numbers
 
     int                   fPartGroupNumber;
-    int                   fPartGroupAbsoluteNumber;
+    int                   fPartGroupSequentialNumber;
 
     // name
 

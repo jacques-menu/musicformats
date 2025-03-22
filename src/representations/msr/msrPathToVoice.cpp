@@ -246,7 +246,7 @@ std::string msrPathToVoice::asString() const
   ss <<
     fPart->getPartName () <<
     " => " <<
-    fStaff->getStaffName () <<
+    fStaff->getStaffPathLikeName () <<
     " => " <<
     fVoice->getVoiceName ();
 
@@ -283,7 +283,7 @@ void msrPathToVoice::print (std::ostream& os) const
       ++gIndenter;
 
         os <<
-          "Staff: " << fStaff->getStaffName () <<
+          "Staff: " << fStaff->getStaffPathLikeName () <<
         std::endl;
 
         ++gIndenter;

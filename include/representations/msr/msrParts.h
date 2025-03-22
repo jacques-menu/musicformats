@@ -41,12 +41,12 @@ class EXP msrPart : public msrPartGroupElement
     // ------------------------------------------------------
 
     static SMARTP<msrPart> create (
-                            int                   inputLineNumber,
-                            const std::string&    partID);
+                            int                inputLineNumber,
+                            const std::string& partMusicXMLID);
 
     static SMARTP<msrPart> create (
                             int                   inputLineNumber,
-                            const std::string&    partID,
+                            const std::string&    partMusicXMLID,
                             const S_msrPartGroup& partUpLinkToPartGroup);
 
     SMARTP<msrPart> createPartNewbornClone (
@@ -58,8 +58,8 @@ class EXP msrPart : public msrPartGroupElement
     // ------------------------------------------------------
 
                           msrPart (
-                            int                   inputLineNumber,
-                            const std::string&    partID);
+                            int                inputLineNumber,
+                            const std::string& partMusicXMLID);
 
     virtual               ~msrPart ();
 
@@ -84,34 +84,33 @@ class EXP msrPart : public msrPartGroupElement
     S_msrPartGroup        getPartUpLinkToPartGroup () const
                               { return fPartUpLinkToPartGroup; }
 
-    // part absolute number
+    // part sequential number
 
-    int                   getPartAbsoluteNumber () const
-                              { return fPartAbsoluteNumber; }
+    int                   getPartSequentialNumber () const
+                              { return fPartSequentialNumber; }
 
-    // part ID
+    // part MusicXML ID
 
-    void                  setPartID (const std::string& partID)
-                              { fPartID = partID; }
+    void                  setPartMusicXMLID (const std::string& partMusicXMLID)
+                              { fPartMusicXMLID = partMusicXMLID; }
 
-    std::string           getPartID () const
-                              { return fPartID; }
+    std::string           getPartMusicXMLID () const
+                              { return fPartMusicXMLID; }
+
+    // part path-like name
+
+    void                  setPartPathLikeName (const std::string& partPathLikeName);
+
+    std::string           getPartPathLikeName () const
+                              { return fPartPathLikeName; }
 
     // part names
-
-    void                  setPartMsrName (const std::string& partMsrName);
-
-    std::string           getPartMsrName () const
-                              { return fPartMsrName; }
 
     void                  setPartName (const std::string& partName)
                               { fPartName = partName; }
 
     std::string           getPartName () const
                               { return fPartName; }
-
-    std::string           getPartAlphabeticName () const
-                              { return fPartAlphabeticName; }
 
     void                  setPartNameDisplayText (
                             const std::string& partNameDisplayText)
@@ -137,9 +136,9 @@ class EXP msrPart : public msrPartGroupElement
     std::string           getPartAbbreviationDisplayText () const
                               { return fPartAbbreviationDisplayText; }
 
-    std::string           getPartIDAndName () const;
+    std::string           fetchPartIDAndName () const;
 
-    std::string           fetchPartCombinedName () const;
+    std::string           fetchPartNameForTrace () const;
 
     void                  setPartInstrumentNamesMaxLengthes ();
 
@@ -646,14 +645,15 @@ class EXP msrPart : public msrPartGroupElement
 
     // part ID and names
 
-    std::string           fPartID; // native
+    std::string           fPartMusicXMLID; // native
 
-    std::string           fPartMsrName;
-                            // may be different than fPartID if renamed,
-                            // coined in constructor
+    std::string           fPartPathLikeName;
+                            // we use a pathname analogy so identify
+                            // parts, staves and voices,
+                            // for example in the generated LilyPont code
+                            // this name is coined in the constructor
 
     std::string           fPartName;           // from '<part-name/>'
-    std::string           fPartAlphabeticName; // from '<part-name/>'
 
     std::string           fPartNameDisplayText;
 
@@ -662,7 +662,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // part absolute number
 
-    int                   fPartAbsoluteNumber;
+    int                   fPartSequentialNumber;
 
     // part instrument names
 

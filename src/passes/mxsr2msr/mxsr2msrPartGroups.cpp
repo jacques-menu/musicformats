@@ -68,14 +68,14 @@ S_mxsrPartGroup mxsrPartGroup::create (
 	int                   inputLineNumber,
 	int                   partGroupNumber,
 	const S_msrPartGroup& theMsrPartGroup,
-	int                   identity)
+	int                   partGroupSequentialNumber)
 {
   mxsrPartGroup* obj = new
     mxsrPartGroup (
       inputLineNumber,
       partGroupNumber,
       theMsrPartGroup,
-      identity);
+      partGroupSequentialNumber);
   assert (obj != nullptr);
   return obj;
 }
@@ -84,11 +84,11 @@ mxsrPartGroup::mxsrPartGroup (
 	int                   inputLineNumber,
 	int                   partGroupNumber,
 	const S_msrPartGroup& theMsrPartGroup,
-	int                   identity)
+	int                   partGroupSequentialNumber)
 {
   fPartGroupNumber = partGroupNumber;
 
-  fPartGroupIdentity = identity;
+  fPartGroupSequentialNumber = partGroupSequentialNumber;
 
   fInputLineNumber = inputLineNumber;
   fStopInputLineNumber = K_MF_INPUT_LINE_UNKNOWN_;
@@ -104,9 +104,9 @@ bool mxsrPartGroup::comparePartGroupsByIncreasingIdentity (
 	const S_mxsrPartGroup& second)
 {
   return
-    first->fPartGroupIdentity
+    first->fPartGroupSequentialNumber
       <
-    second->fPartGroupIdentity;
+    second->fPartGroupSequentialNumber;
 }
 
 bool mxsrPartGroup::comparePartGroupsByDecreasingIdentity (
@@ -114,9 +114,9 @@ bool mxsrPartGroup::comparePartGroupsByDecreasingIdentity (
 	const S_mxsrPartGroup& second)
 {
   return
-    first->fPartGroupIdentity
+    first->fPartGroupSequentialNumber
       >=
-    second->fPartGroupIdentity;
+    second->fPartGroupSequentialNumber;
 }
 
 std::string mxsrPartGroup::asString () const
@@ -127,12 +127,12 @@ std::string mxsrPartGroup::asString () const
     '\'' <<
     fPartGroupNumber <<
     "' -=> " <<
-    fMsrPartGroup->fetchPartGroupCombinedName ();
+    fMsrPartGroup->fetchPartGroupNameForTrace ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gTraceOahGroup->getTracePartGroups ()) {
     ss <<
-      ", fPartGroupIdentity " << fPartGroupIdentity;
+      ", fPartGroupSequentialNumber " << fPartGroupSequentialNumber;
   }
 #endif // MF_TRACE_IS_ENABLED
 
@@ -166,8 +166,8 @@ void mxsrPartGroup::print (std::ostream& os) const
     std::endl <<
 
     std::setw (fieldWidth) <<
-    "fPartGroupIdentity" << ": " <<
-    fPartGroupIdentity <<
+    "fPartGroupSequentialNumber" << ": " <<
+    fPartGroupSequentialNumber <<
     std::endl;
 
   os << std::left <<

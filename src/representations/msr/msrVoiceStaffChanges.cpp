@@ -200,8 +200,8 @@ std::string msrVoiceStaffChange::asString () const
 
   ss <<
     "[VoiceStaffChange" <<
-    ", fTakeOffStaff: " << fTakeOffStaff->getStaffName () <<
-    ", fLandingStaff: " << fLandingStaff->getStaffName () <<
+    ", fTakeOffStaff: " << fTakeOffStaff->getStaffPathLikeName () <<
+    ", fLandingStaff: " << fLandingStaff->getStaffPathLikeName () <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -220,10 +220,10 @@ void msrVoiceStaffChange::print (std::ostream& os) const
   constexpr int fieldWidth = 14;
   os << std::left <<
     std::setw (fieldWidth) <<
-    "fTakeOffStaff" << ": " << fTakeOffStaff->getStaffName () <<
+    "fTakeOffStaff" << ": " << fTakeOffStaff->getStaffPathLikeName () <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fLandingStaff" << ": " << fLandingStaff->getStaffName () <<
+    "fLandingStaff" << ": " << fLandingStaff->getStaffPathLikeName () <<
     std::endl;
 
   --gIndenter;

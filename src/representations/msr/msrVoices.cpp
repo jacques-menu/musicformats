@@ -415,12 +415,12 @@ void msrVoice::setVoiceNamesFromNumber (
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
       fVoiceName =
-        fVoiceUpLinkToStaff->getStaffName () +
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_Voice_" +
         std::to_string (voiceNumber);
 
-      fVoiceAlphabeticName =
-        fVoiceUpLinkToStaff->getStaffAlphabeticName () +
+      fVoicePathLikeName =
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_Voice_" +
         mfIntToEnglishWord (voiceNumber);
       break;
@@ -430,22 +430,22 @@ void msrVoice::setVoiceNamesFromNumber (
 
     case msrVoiceKind::kVoiceKindHarmonies:
       fVoiceName =
-        fVoiceUpLinkToStaff->getStaffName () +
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_HARMONIES_Voice";
 
-      fVoiceAlphabeticName =
-        fVoiceUpLinkToStaff->getStaffAlphabeticName () +
+      fVoicePathLikeName =
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_HARMONIES_Voice" +
         mfIntToEnglishWord (voiceNumber);
       break;
 
     case msrVoiceKind::kVoiceKindFiguredBass:
       fVoiceName =
-        fVoiceUpLinkToStaff->getStaffName () +
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_FIGURED_BASS_Voice";
 
-      fVoiceAlphabeticName =
-        fVoiceUpLinkToStaff->getStaffAlphabeticName () +
+      fVoicePathLikeName =
+        fVoiceUpLinkToStaff->getStaffPathLikeName () +
         "_FIGURED_BASS_Voice" +
         mfIntToEnglishWord (voiceNumber);
       break;
@@ -459,7 +459,7 @@ void msrVoice::setVoiceNamesFromNumber (
       "The resulting voice names are \"" <<
       fVoiceName <<
       "\" and " <<
-      fVoiceAlphabeticName <<
+      fVoicePathLikeName <<
       "\"";
 
     gWaeHandler->waeTrace (
@@ -500,7 +500,7 @@ void msrVoice::initializeVoice (
       "\"" <<
       ", voiceNumber: " << voiceNumber <<
       ", in staff \"" <<
-      fVoiceUpLinkToStaff->getStaffName () <<
+      fVoiceUpLinkToStaff->getStaffPathLikeName () <<
       " line " << fInputLineNumber <<
       "\"";
 
@@ -650,7 +650,7 @@ void msrVoice::initializeVoice (
     ss <<
       "Initial contents of voice \"" << fVoiceName <<
       "\" in staff \"" <<
-      fVoiceUpLinkToStaff->getStaffName () <<
+      fVoiceUpLinkToStaff->getStaffPathLikeName () <<
       "\":" <<
       std::endl;
 
@@ -673,7 +673,7 @@ void msrVoice::changeVoiceIdentity ( // after a deep clone is created
     std::stringstream ss;
 
     ss <<
-      "Changing the identity of voice \"" <<
+      "Changing the partGroupSequentialNumber of voice \"" <<
       fVoiceName <<
       "\"" <<
       ", number: " << voiceNumber;
@@ -763,7 +763,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
       fVoiceName <<
       "\"" <<
       ", to be placed in containing staff \"" <<
-      containingStaff->getStaffName () << "\"" <<
+      containingStaff->getStaffPathLikeName () << "\"" <<
       ", line " << inputLineNumber;
 
     gWaeHandler->waeTrace (
@@ -11577,11 +11577,12 @@ std::string msrVoice::asShortString () const
   std::stringstream ss;
 
   ss <<
-    "[Voice \"" << fVoiceName << "\", " <<
+    "[Voice " << fVoicePathLikeName <<
+    ", " <<
     fVoiceKind <<
 //     msrVoiceKindAsStringForPrint (fVoiceKind) << // JMI
-    " voice \"" << fVoiceName <<
-    "\", fVoiceNumber '" <<
+    " voice " << fVoiceName <<
+    ", fVoiceNumber '" <<
     fVoiceNumber <<
     ", fRegularVoiceOrdinalNumberInPart " <<
     fRegularVoiceOrdinalNumberInPart <<
@@ -11596,10 +11597,10 @@ std::string msrVoice::asString () const
   std::stringstream ss;
 
   ss <<
-    "[Voice \"" << fVoiceName <<
+    "[Voice " << fVoicePathLikeName <<
 //     msrVoiceKindAsStringForPrint (fVoiceKind) <<
-    "\", \"" <<
-    fVoiceAlphabeticName <<
+    ", " <<
+    fVoicePathLikeName <<
     ", " <<
     fVoiceKind <<
      ", " <<
@@ -11660,11 +11661,11 @@ void msrVoice::displayVoiceRepeatsStackMultipleMeasureRestsMeasureRepeatAndVoice
 void msrVoice::printFull (std::ostream& os) const
 {
   os <<
-    "[Voice printfull()\"" << fVoiceName <<
+    "[Voice " << fVoiceName <<
 //     msrVoiceKindAsStringForPrint (fVoiceKind) <<
-    "\", \"" <<
-    fVoiceAlphabeticName <<
-    "\", fVoiceNumber " <<
+    ", " <<
+    fVoicePathLikeName <<
+    ", fVoiceNumber " <<
     fVoiceNumber <<
     ", fRegularVoiceOrdinalNumberInPart " <<
     fRegularVoiceOrdinalNumberInPart <<
@@ -11700,7 +11701,7 @@ void msrVoice::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "fVoiceUpLinkToStaff" << ": " <<
-    fVoiceUpLinkToStaff->getStaffName () <<
+    fVoiceUpLinkToStaff->getStaffPathLikeName () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
@@ -12029,11 +12030,11 @@ void msrVoice::printFull (std::ostream& os) const
 void msrVoice::print (std::ostream& os) const
 {
   os <<
-    "[Voice \"" << fVoiceName <<
+    "[Voice " << fVoicePathLikeName <<
 //     msrVoiceKindAsStringForPrint (fVoiceKind) <<
-    "\", \"" <<
-    fVoiceAlphabeticName <<
-    "\", fVoiceNumber " <<
+    ", " <<
+    fVoicePathLikeName <<
+    ", fVoiceNumber " <<
     fVoiceNumber <<
     ", line " << fInputLineNumber <<
     std::endl;

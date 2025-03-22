@@ -1,10 +1,13 @@
 \version "2.24.4"
 
 \header {
-  workCreditTypeTitle = "Note Head Slash - Beat Repeat"
-  encodingDate        = "2019-07-17"
-  software            = "MuseScore 3.2.3"
-  title               = "Note Head Slash - Beat Repeat"
+  workCreditTypeTitle = "Several Tuplets In A Row"
+  movementTitle       = "Several Tuplets In A Row"
+  encodingDate        = "2025-02-10"
+  composer            = "Lars P. Opfermann"
+  software            = "Dorico 5.1.81.2225"
+  right               = "©"
+  title               = "Several Tuplets In A Row"
 }
 
 \paper {
@@ -36,11 +39,22 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  \clef "bass"
+  %{ begin kMeasureKindOverFlowing, measure 1, % measureCurrentPositionInMeasure: pim 5/4 %}
+  
+  \clef "treble"
   \key c \major
-  \numericTimeSignature \time 4/4
-  \stemDown f4 \tweak style #'slash f \tweak style #'slash f \tweak style #'slash f
+  \numericTimeSignature \time 3/4
+  
+  \once\override TupletBracket.bracket-visibility = ##t
+  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 94 %}  r %{ sr333 %}  8 \stemUp g'8. \f [  %{ beam 1, line 142 %}
+  _- a'16 ]  %{ beam 1, line 165 %}
+  _- } \once \omit TupletBracket
+  \tuplet 3/2 {  %{ tupletNumber: 1, tupleFactor: 3/2, line 179 %}  a'8 [  %{ beam 1, line 195 %}
+  bis'!16 _. b'! _. cis''! _. d'' ]  %{ beam 1, line 301 %}
+  _. } r4
   \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
+  
+  %{ end kMeasureKindOverFlowing, measure  %}
 }
 
 \book {
@@ -55,8 +69,8 @@ Part_POne_Staff_One_Voice_One = \absolute {
       
         \new Staff  = "Part_POne_Staff_One"
         \with {
-          instrumentName = "Piano"
-          shortInstrumentName = "Pno."
+          instrumentName = "Flöte"
+          shortInstrumentName = "Fl."
         }
         <<
           \context Voice = "Part_POne_Staff_One_Voice_One" <<

@@ -48,7 +48,7 @@ class mxsrPartGroup : public smartable
                             int                   inputLineNumber,
                             int                   partGroupNumber,
                             const S_msrPartGroup& theMsrPartGroup,
-                            int                   identity);
+                            int                   partGroupSequentialNumber);
 
   protected:
 
@@ -59,7 +59,7 @@ class mxsrPartGroup : public smartable
                             int                   inputLineNumber,
                             int                   partGroupNumber,
                             const S_msrPartGroup& theMsrPartGroup,
-                            int                   identity);
+                            int                   partGroupSequentialNumber);
 
     virtual               ~mxsrPartGroup ();
 
@@ -71,11 +71,11 @@ class mxsrPartGroup : public smartable
     int                   getPartGroupNumber () const
                               { return fPartGroupNumber; }
 
-    void                  setPartGroupIdentity (int identity)
-                              { fPartGroupIdentity= identity; }
+    void                  setPartGroupSequentialNumber (int partGroupSequentialNumber)
+                              { fPartGroupSequentialNumber = partGroupSequentialNumber; }
 
-    int                   getPartGroupIdentity () const
-                              { return fPartGroupIdentity; }
+    int                   getPartGroupSequentialNumber () const
+                              { return fPartGroupSequentialNumber; }
 
     int                   getInputLineNumber () const
                               { return fInputLineNumber; }
@@ -91,10 +91,10 @@ class mxsrPartGroup : public smartable
     // public services
     // ------------------------------------------------------
 
-    std::string           fetchMsrPartGroupCombinedName () const
+    std::string           fetchMsrPartGroupNameForTrace () const
                               {
                                 return
-                                  fMsrPartGroup->fetchPartGroupCombinedName ();
+                                  fMsrPartGroup->fetchPartGroupNameForTrace ();
                               }
 
     static bool           comparePartGroupsByIncreasingIdentity (
@@ -121,7 +121,7 @@ class mxsrPartGroup : public smartable
 
     int                   fPartGroupNumber; // may be reused later
 
-    int                   fPartGroupIdentity; // set upon part group start
+    int                   fPartGroupSequentialNumber; // set upon part group start
 
     int                   fInputLineNumber;
     int                   fStopInputLineNumber;

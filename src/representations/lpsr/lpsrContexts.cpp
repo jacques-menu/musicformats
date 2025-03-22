@@ -73,14 +73,14 @@ S_lpsrContext lpsrContext::create (
   int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   lpsrContextTypeKind        contextTypeKind,
-  const std::string&         contextAlphabeticName)
+  const std::string&         contextPathLikeName)
 {
   lpsrContext* obj =
     new lpsrContext (
       inputLineNumber,
       contextUseExistingKind,
       contextTypeKind,
-      contextAlphabeticName);
+      contextPathLikeName);
   assert (obj != nullptr);
   return obj;
 }
@@ -89,12 +89,12 @@ lpsrContext::lpsrContext (
   int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
   lpsrContextTypeKind        contextTypeKind,
-  const std::string&         contextAlphabeticName)
+  const std::string&         contextPathLikeName)
     : lpsrElement (inputLineNumber)
 {
   fContextUseExistingKind = contextUseExistingKind;
   fContextTypeKind = contextTypeKind;
-  fContextAlphabeticName = contextAlphabeticName;
+  fContextPathLikeName = contextPathLikeName;
 }
 
 lpsrContext::~lpsrContext ()
@@ -182,8 +182,8 @@ void lpsrContext::print (std::ostream& os) const
     ", fContextTypeKind: " << fContextTypeKind <<
     ", fContextUseExistingKind: " << fContextUseExistingKind;
 
-  if (fContextAlphabeticName.size ()) {
-    os << ' ' << fContextAlphabeticName;
+  if (fContextPathLikeName.size ()) {
+    os << ' ' << fContextPathLikeName;
   }
   os << std::endl;
 
@@ -221,14 +221,14 @@ void lpsrContext::print (std::ostream& os) const
 S_lpsrChordNamesContext lpsrChordNamesContext::create (
   int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  const std::string&         contextAlphabeticName,
+  const std::string&         contextPathLikeName,
   const S_msrVoice&          contextVoice)
 {
   lpsrChordNamesContext* obj =
     new lpsrChordNamesContext (
       inputLineNumber,
       contextUseExistingKind,
-      contextAlphabeticName,
+      contextPathLikeName,
       contextVoice);
   assert (obj != nullptr);
   return obj;
@@ -237,17 +237,17 @@ S_lpsrChordNamesContext lpsrChordNamesContext::create (
 lpsrChordNamesContext::lpsrChordNamesContext (
   int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  const std::string&         contextAlphabeticName,
+  const std::string&         contextPathLikeName,
   const S_msrVoice&          contextVoice)
     : lpsrContext (
       inputLineNumber,
       contextUseExistingKind,
       lpsrContextTypeKind::kContextChordNames,
-      contextAlphabeticName)
+      contextPathLikeName)
 {
   fContextUseExistingKind = contextUseExistingKind;
 
-  fContextAlphabeticName = contextAlphabeticName;
+  fContextPathLikeName = contextPathLikeName;
 
   fContextVoice = contextVoice;
 }
@@ -352,7 +352,7 @@ void lpsrChordNamesContext::print (std::ostream& os) const
       fContextUseExistingKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "contextAlphabeticName" << ": \"" << fContextAlphabeticName << "\"" <<
+    "contextPathLikeName" << ": \"" << fContextPathLikeName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
     "contextVoice" << ": \"" << fContextVoice->getVoiceName () << "\"" <<
@@ -404,14 +404,14 @@ std::ostream& operator << (std::ostream& os, const S_lpsrChordNamesContext& elt)
 S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
   int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  const std::string&         contextAlphabeticName,
+  const std::string&         contextPathLikeName,
   const S_msrStaff&          contextStaff)
 {
   lpsrFiguredBassContext* obj =
     new lpsrFiguredBassContext (
       inputLineNumber,
       contextUseExistingKind,
-      contextAlphabeticName,
+      contextPathLikeName,
       contextStaff);
   assert (obj != nullptr);
   return obj;
@@ -420,17 +420,17 @@ S_lpsrFiguredBassContext lpsrFiguredBassContext::create (
 lpsrFiguredBassContext::lpsrFiguredBassContext (
   int                        inputLineNumber,
   lpsrContextUseExistingKind contextUseExistingKind,
-  const std::string&         contextAlphabeticName,
+  const std::string&         contextPathLikeName,
   const S_msrStaff&          contextStaff)
     : lpsrContext (
       inputLineNumber,
       contextUseExistingKind,
       lpsrContextTypeKind::kContextFiguredBass,
-      contextAlphabeticName)
+      contextPathLikeName)
 {
   fContextUseExistingKind = contextUseExistingKind;
 
-  fContextAlphabeticName = contextAlphabeticName;
+  fContextPathLikeName = contextPathLikeName;
 
   fContextStaff = contextStaff;
 }
@@ -535,10 +535,10 @@ void lpsrFiguredBassContext::print (std::ostream& os) const
       fContextUseExistingKind) <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "fContextAlphabeticName" << ": \"" << fContextAlphabeticName << "\"" <<
+    "fContextPathLikeName" << ": \"" << fContextPathLikeName << "\"" <<
     std::endl <<
     std::setw (fieldWidth) <<
-    "contextStaff" << ": \"" << fContextStaff->getStaffName () << "\"" <<
+    "contextStaff" << ": \"" << fContextStaff->getStaffPathLikeName () << "\"" <<
     std::endl;
 
   os <<

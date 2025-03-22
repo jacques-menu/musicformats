@@ -17,13 +17,17 @@
 
 VERSION_NUMBER="v0.9.72-beta-1"
 echo "VERSION_NUMBER: ${VERSION_NUMBER}"
+
 TIME_STAMP=$(date +"%Y_%m_%d__%H_%M")
 echo "TIME_STAMP: ${TIME_STAMP}"
-jmid
+
+cd /Users/jacquesmenu/JMI_Developpement
+
 DEST_DIR="musicformats-git-dev_${VERSION_NUMBER}_${TIME_STAMP}"
+
 # set -x
 cp -prf musicformats-git-dev ${DEST_DIR}
 # set +x
-echo "Current directory is ${PWD}"
-ltt
 
+echo "Current directory is ${PWD}"
+ls -ltGTF $* | head -15

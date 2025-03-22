@@ -118,15 +118,22 @@ function add_documentation ()
 
 function add_musicxmlfiles ()
 {
+  # the MusicXML files Makefile
+  git add -f ${MUSIC_FORMATS_DEV}/musicxmlfiles/Makefile
+
   # the MusicXML files in the subdirectories
   git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/*.xml
   git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*/*.musicxml
 
   # the MusicXML files in the validated_* subdirectories
   git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/validated_*/*.xml
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/validated_*/*.musicxml
   git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/validated_*/*.ly
 
-  git add -f ${MUSIC_FORMATS_DEV}/musicxmlfiles/Makefile
+  # the MusicXML files in the problematic_* subdirectories
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/problematic_*/*.xml
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/problematic_*/*.musicxml
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/problematic_*/*.ly
 
   # the scripts
   git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.bash

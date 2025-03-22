@@ -1,10 +1,14 @@
 \version "2.24.4"
 
 \header {
-  workCreditTypeTitle = "Note Head Slash - Beat Repeat"
-  encodingDate        = "2019-07-17"
-  software            = "MuseScore 3.2.3"
-  title               = "Note Head Slash - Beat Repeat"
+  workCreditTypeTitle = "Hello World With Lyricist"
+  encodingDate        = "2011-08-08"
+  composer            = "Ludwig van Beethoven"
+  lyricist            = "Aloys Jeitteles"
+  software            = "Finale 2011 for Windows"
+  software            = "Dolet 6.0 for Finale"
+  right               = "Copyright © 2002 Recordare LLC"
+  title               = "Hello World With Lyricist"
 }
 
 \paper {
@@ -36,12 +40,10 @@
 Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
-  \clef "bass"
+  \clef "treble"
   \key c \major
   \numericTimeSignature \time 4/4
-  \stemDown f4 \tweak style #'slash f \tweak style #'slash f \tweak style #'slash f
-  \bar "|."  %{ b333 visitStart (S_msrBarLine& elt) %}
-}
+c'1 }
 
 \book {
 
@@ -55,8 +57,7 @@ Part_POne_Staff_One_Voice_One = \absolute {
       
         \new Staff  = "Part_POne_Staff_One"
         \with {
-          instrumentName = "Piano"
-          shortInstrumentName = "Pno."
+          instrumentName = "Music"
         }
         <<
           \context Voice = "Part_POne_Staff_One_Voice_One" <<

@@ -624,7 +624,7 @@ S_msrNote msrNote::createNoteNewbornClone (
       asString () <<
       " in part " <<
       containingPart->
-        fetchPartCombinedName ();
+        fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -828,7 +828,7 @@ S_msrNote msrNote::createNoteDeepClone (
       /* JMI
       " in part " <<
       containingPart->
-        fetchPartCombinedName () <<
+        fetchPartNameForTrace () <<
         */
       std::endl;
 
@@ -4485,7 +4485,7 @@ std::string msrNote::noteComplementsAsString () const
 //     "noteStaffUpLink: ";
 //   if (noteStaffUpLink) {
 //     ss <<
-//       noteStaffUpLink->getStaffName ();
+//       noteStaffUpLink->getStaffPathLikeName ();
 //   }
 //   else {
 //     ss << "[NULL]";
@@ -5100,7 +5100,7 @@ void msrNote::print (std::ostream& os) const
     "noteStaffUpLink" << ": ";
 	if (noteStaffUpLink) {
 		os <<
-			noteStaffUpLink->getStaffName ();
+			noteStaffUpLink->getStaffPathLikeName ();
 	}
 	else {
 		os << "[NULL]";
@@ -6027,7 +6027,7 @@ void msrNote::printFull (std::ostream& os) const
     "noteStaffUpLink" << ": ";
 	if (noteStaffUpLink) {
 		os <<
-			noteStaffUpLink->getStaffName ();
+			noteStaffUpLink->getStaffPathLikeName ();
 	}
 	else {
 		os << "[NULL]";

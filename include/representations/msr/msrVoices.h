@@ -204,15 +204,17 @@ class EXP msrVoice : public msrElement
 
     // voice names
 
+    std::string           getVoicePathLikeName () const
+                              { return fVoicePathLikeName; }
+
+    // voice names
+
     void                  setVoiceNamesFromNumber (
                             int inputLineNumber,
                             int voiceNumber);
 
     std::string           getVoiceName () const
                               { return fVoiceName; }
-
-    std::string           getVoiceAlphabeticName () const
-                              { return fVoiceAlphabeticName; }
 
     // harmonies
 
@@ -374,7 +376,7 @@ class EXP msrVoice : public msrElement
 
     S_msrScore            fetchVoiceUpLinkToScore () const;
 
-    // identity
+    // partGroupSequentialNumber
 
     void                  changeVoiceIdentity ( // after a deep clone
                             int voiceNumber);
@@ -1164,10 +1166,13 @@ class EXP msrVoice : public msrElement
     // for use by regular voices only (i.e. not harmonies nor figures basses voices)
     int                   fRegularVoiceStaffSequentialNumber;
 
+    // voice path-like name
+
+    std::string           fVoicePathLikeName;
+
     // voice name
 
     std::string           fVoiceName;
-    std::string           fVoiceAlphabeticName;
 
   public:
 

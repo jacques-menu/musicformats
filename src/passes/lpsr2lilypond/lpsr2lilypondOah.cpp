@@ -792,7 +792,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   // decipher it to extract the old and new part names
 
   std::string regularExpression (
-    "(.*)" // partID
+    "(.*)" // partMusicXMLID
     "="
     "(.*)" // destination pitch name
     );
@@ -843,7 +843,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   }
 
   std::string
-    partID = sm [1],
+    partMusicXMLID = sm [1],
     destinationPitchName = sm [2];
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -851,7 +851,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
     std::stringstream ss;
 
     ss <<
-      "--> partID = \"" << partID << "\", " <<
+      "--> partMusicXMLID = \"" << partMusicXMLID << "\", " <<
       "--> destinationPitchName = \"" << destinationPitchName << "\"";
 
     gWaeHandler->waeTraceWithoutInputLocation (
@@ -863,14 +863,14 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   // is this part name in the part renaming map?
   std::map <std::string, S_msrSemiTonesPitchAndOctave>::iterator
     it =
-      fStringToMsrSemiTonesPitchAndOctaveMapVariable.find (partID);
+      fStringToMsrSemiTonesPitchAndOctaveMapVariable.find (partMusicXMLID);
 
   if (it != fStringToMsrSemiTonesPitchAndOctaveMapVariable.end ()) {
     // yes, issue error message
     std::stringstream ss;
 
     ss <<
-      "Part ID \"" << partID << "\" occurs more that once in the " <<
+      "Part ID \"" << partMusicXMLID << "\" occurs more that once in the " <<
       fetchNamesBetweenQuotes () <<
       " option";
 
@@ -878,7 +878,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   }
 
   else {
-    fStringToMsrSemiTonesPitchAndOctaveMapVariable [partID] =
+    fStringToMsrSemiTonesPitchAndOctaveMapVariable [partMusicXMLID] =
       msrSemiTonesPitchAndOctave::createFromString (
         K_MF_INPUT_LINE_UNKNOWN_,
         destinationPitchName);
@@ -3986,8 +3986,8 @@ This is handly when a part doesn't have a part name.
 See option '-lilypond-transpose-part-name' for the details.
 There can be several occurrences of this option.)",
         "PART_TRANSPOSITION_SPEC",
-        "fPartIDsTranspositionMap",
-        fPartIDsTranspositionMap);
+        "fPartMusicXMLIDsTranspositionMap",
+        fPartMusicXMLIDsTranspositionMap);
 
   transposePartIDAtom->
       setMultipleOccurrencesAllowed ();
@@ -5898,16 +5898,16 @@ void lpsr2lilypondOahGroup::displayAtomWithVariableOptionsValues (
     std::stringstream ss;
 
     ss << std::left <<
-      std::setw (valueFieldWidth) << "fPartIDsTranspositionMap" << ": ";
+      std::setw (valueFieldWidth) << "fPartMusicXMLIDsTranspositionMap" << ": ";
 
-    if (! fPartIDsTranspositionMap.size ()) {
+    if (! fPartMusicXMLIDsTranspositionMap.size ()) {
       ss << "[EMPTY]";
     }
     else {
       for (
         std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator i =
-          fPartIDsTranspositionMap.begin ();
-        i != fPartIDsTranspositionMap.end ();
+          fPartMusicXMLIDsTranspositionMap.begin ();
+        i != fPartMusicXMLIDsTranspositionMap.end ();
         ++i
       ) {
         ss <<

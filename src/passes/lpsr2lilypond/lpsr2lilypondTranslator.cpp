@@ -1796,7 +1796,7 @@ void lpsr2lilypondTranslator::generateNoteLigaturesList (
                 "Ligature vertical flipping factore for note '" <<
                 note->asString () <<
                 "' in voice \"" <<
-                noteVoice->getVoiceAlphabeticName () <<
+                noteVoice->getVoicePathLikeName () <<
                 "\" is " <<
                 ligatureVerticalFlippingFactor <<
                 ", line " << ligature->getInputLineNumber () <<
@@ -9503,9 +9503,9 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       if (gTraceOahGroup->getTracePartGroups ()) {
          fLilypondCodeStream <<
           " %{ " <<
-          partGroup->fetchPartGroupCombinedName () <<
+          partGroup->fetchPartGroupNameForTrace () <<
           ", abs number: " <<
-          partGroup->getPartGroupAbsoluteNumber () <<
+          partGroup->getPartGroupSequentialNumber () <<
           " %} ";
       }
 #endif // MF_TRACE_IS_ENABLED
@@ -9629,7 +9629,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " % start of part group block " <<
-          partGroup->fetchPartGroupCombinedNameWithoutEndOfLines ();
+          partGroup->fetchPartGroupNameForTraceWithoutEndOfLines ();
       }
 
       fLilypondCodeStream << std::endl;
@@ -9737,7 +9737,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
       if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " % end of implicit part group block " <<
-          partGroup->fetchPartGroupCombinedNameWithoutEndOfLines ();
+          partGroup->fetchPartGroupNameForTraceWithoutEndOfLines ();
       }
 
     case msrPartGroupImplicitKind::kPartGroupImplicitOuterMostNo:
@@ -9746,7 +9746,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
       if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
         fLilypondCodeStream <<
           " % end of explicit part group block " <<
-          partGroup->fetchPartGroupCombinedNameWithoutEndOfLines ();
+          partGroup->fetchPartGroupNameForTraceWithoutEndOfLines ();
       }
 
       fLilypondCodeStream << std::endl;
@@ -9811,7 +9811,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
 
     std::string
       partName =
-        part->getPartAlphabeticName (),
+        part->getPartPathLikeName (),
       partAbbreviation =
         part->getPartAbbreviation ();
 
@@ -9830,7 +9830,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
         std::left <<
         std::setw (commentFieldWidth) <<
         cLilypondNewPianoStaff <<
-        " % part " << part->fetchPartCombinedName ();
+        " % part " << part->fetchPartNameForTrace ();
     }
     else {
       fLilypondCodeStream <<
@@ -9926,7 +9926,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartBlock& elt)
     if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
       fLilypondCodeStream <<
         "% end of part blockpart " <<
-        part->fetchPartCombinedName ();
+        part->fetchPartNameForTrace ();
     }
     else {
       fLilypondCodeStream <<
@@ -10016,7 +10016,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
   fLilypondCodeStream <<
     " = \"" <<
-    staff->getStaffAlphabeticName () <<
+    staff->getStaffPathLikeName () <<
     "\"";
 
   fLilypondCodeStream << std::endl;
@@ -10047,7 +10047,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
     if (partName.empty ()) {
       partName =
         staffUpLinkToPart->
-          getPartAlphabeticName ();
+          getPartPathLikeName ();
     }
 
 // JMI    gLog << "--> partName: \"" << partName << "\"" << std::endl;
@@ -10258,7 +10258,7 @@ R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondCommentsBasics ()) {
     fLilypondCodeStream <<
-      " % start of staff block for \"" << staff->getStaffAlphabeticName () << "\"";
+      " % start of staff block for \"" << staff->getStaffPathLikeName () << "\"";
   }
 
   fLilypondCodeStream << std::endl;
@@ -10316,7 +10316,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrStaffBlock& elt)
         elt->getStaff ();
 
     fLilypondCodeStream <<
-      " % end of staff block for \"" << staff->getStaffAlphabeticName () << "\"";
+      " % end of staff block for \"" << staff->getStaffPathLikeName () << "\"";
 
     fLilypondCodeStream <<
       ", fStaffBlocksCounter: " << fStaffBlocksCounter <<
@@ -10570,7 +10570,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
   fLilypondCodeStream <<
     cLilypondUseVoiceOpener <<
     voiceContextName << " = \"" <<
-    voice->getVoiceAlphabeticName () << "\" <<" <<
+    voice->getVoicePathLikeName () << "\" <<" <<
     std::endl;
 
   ++gIndenter;
@@ -10636,7 +10636,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
   std::string
     partName =
-      part->getPartAlphabeticName ();
+      part->getPartPathLikeName ();
 
   // should a transposition be generated?
 #ifdef MF_TRACE_IS_ENABLED
@@ -10684,23 +10684,23 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
     }
   }
 
-  // check by partID
-  std::string partID =
-    part->getPartID ();
+  // check by partMusicXMLID
+  std::string partMusicXMLID =
+    part->getPartMusicXMLID ();
 
-  if (! gGlobalLpsr2lilypondOahGroup->getPartIDsTranspositionMap ().empty ()) {
+  if (! gGlobalLpsr2lilypondOahGroup->getPartMusicXMLIDsTranspositionMap ().empty ()) {
     std::map <std::string, S_msrSemiTonesPitchAndOctave>::const_iterator
       it =
-        gGlobalLpsr2lilypondOahGroup->getPartIDsTranspositionMap ().find (
-          partID);
+        gGlobalLpsr2lilypondOahGroup->getPartMusicXMLIDsTranspositionMap ().find (
+          partMusicXMLID);
 
-    if (it != gGlobalLpsr2lilypondOahGroup->getPartIDsTranspositionMap ().end ()) {
-      // partID is present in the map,
+    if (it != gGlobalLpsr2lilypondOahGroup->getPartMusicXMLIDsTranspositionMap ().end ()) {
+      // partMusicXMLID is present in the map,
       // fetch the semitones pitch and octave
       semiTonesPitchAndOctave =
         (*it).second;
 
-      partIDFoundInTranspositionMap = partID;
+      partIDFoundInTranspositionMap = partMusicXMLID;
       doTransposeCurrentPart = true;
     }
   }
@@ -10719,7 +10719,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
         partName <<
         "\"" <<
         ", part ID \"" <<
-        partID <<
+        partMusicXMLID <<
         "\"";
 
       gWaeHandler->waeTrace (
@@ -10774,7 +10774,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
   // generate voice name
   fLilypondCodeStream <<
-    "\\" << voice->getVoiceAlphabeticName () << std::endl;
+    "\\" << voice->getVoicePathLikeName () << std::endl;
 
   --gIndenter;
 
@@ -10892,8 +10892,8 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsAutomatic:
         // no \lyricsto in that case
         fLilypondCodeStream <<
-          "\\lyricsto \"" << elt->getVoice ()->getVoiceAlphabeticName () << "\" { " <<
-          "\\" << stanza->getStanzaAlphabeticName () <<
+          "\\lyricsto \"" << elt->getVoice ()->getVoicePathLikeName () << "\" { " <<
+          "\\" << stanza->getStanzaPathLikeName () <<
           " }" <<
           std::endl;
           break;
@@ -10901,8 +10901,8 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsImplicit:
         // maybe we could use addlyrics optionally? JMI v0.9.70 BABASSE LPNR page 64
         fLilypondCodeStream <<
-          "\\lyricsto \"" << elt->getVoice ()->getVoiceAlphabeticName () << "\" { " <<
-          "\\" << stanza->getStanzaAlphabeticName () <<
+          "\\lyricsto \"" << elt->getVoice ()->getVoicePathLikeName () << "\" { " <<
+          "\\" << stanza->getStanzaPathLikeName () <<
           " }" <<
           std::endl;
         break;
@@ -10910,7 +10910,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
       case lpsrLyricsNotesDurationsKind::kLyricsNotesDurationsExplicit:
         // no \lyricsto in that case
         fLilypondCodeStream <<
-          "\\" << stanza->getStanzaAlphabeticName () <<
+          "\\" << stanza->getStanzaPathLikeName () <<
           std::endl;
         break;
     } // switch
@@ -11077,14 +11077,14 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
   } // switch
 
   std::string
-    contextAlphabeticName =
-      elt->getContextAlphabeticName ();
+    contextPathLikeName =
+      elt->getContextPathLikeName ();
 
   fLilypondCodeStream <<
 //     "\\context " << // JMI ??? v0.9.66
     lpsrContextTypeKindAsLilypondString (
       elt->getContextTypeKind ()) <<
-    " = \"" << contextAlphabeticName << "\"" <<
+    " = \"" << contextPathLikeName << "\"" <<
     std::endl;
 
 /* JMI
@@ -11110,7 +11110,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
       */
 
   fLilypondCodeStream <<
-    "\\" << contextAlphabeticName <<
+    "\\" << contextPathLikeName <<
     std::endl << std::endl;
 }
 
@@ -11205,13 +11205,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
   } // switch
 
   std::string
-    contextAlphabeticName =
-      elt->getContextAlphabeticName ();
+    contextPathLikeName =
+      elt->getContextPathLikeName ();
 
   fLilypondCodeStream <<
     lpsrContextTypeKindAsLilypondString (
       elt->getContextTypeKind ()) <<
-    " = \"" << contextAlphabeticName << "\"" <<
+    " = \"" << contextPathLikeName << "\"" <<
     std::endl;
 
 /* JMI
@@ -11237,7 +11237,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
   */
 
   fLilypondCodeStream <<
-    "\\" << contextAlphabeticName <<
+    "\\" << contextPathLikeName <<
     std::endl << std::endl;
 }
 
@@ -12175,7 +12175,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
         std::endl;
 
       ss << // JMI v0.9.67
-        elt->fetchPartGroupCombinedName () <<
+        elt->fetchPartGroupNameForTrace () <<
         std::endl;
 
       if (traceLpsrVisitors) {
@@ -12209,7 +12209,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
 
       ss <<
         "% --> End visiting msrPartGroup" <<
-        elt->fetchPartGroupCombinedName () <<
+        elt->fetchPartGroupNameForTrace () <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -12231,8 +12231,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
 void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 {
   std::string
-    partCombinedName =
-      elt->fetchPartCombinedName ();
+    partdNameForTrace =
+      elt->fetchPartNameForTrace ();
 
 #ifdef MF_TRACE_IS_ENABLED
   {
@@ -12249,7 +12249,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 
       ss <<
         "% --> Start visiting msrPart" <<
-        partCombinedName <<
+        partdNameForTrace <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -12278,7 +12278,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 
       ss <<
   //       std::endl <<
-        "<!--=== part \"" << partCombinedName << "\"" <<
+        "<!--=== part \"" << partdNameForTrace << "\"" <<
         ", line " << elt->getInputLineNumber () << " ===-->";
 
       gWaeHandler->waeTrace (
@@ -12299,7 +12299,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 
   serviceRunData->
     setCurrentPartIDAndName (
-      elt->getPartIDAndName ());
+      elt->fetchPartIDAndName ());
 
   fRemainingMeasureRestsNumber = 0; // JMI
   fOnGoingMultipleMeasureRests = false; // JMI
@@ -12322,7 +12322,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
 
       ss <<
         "% --> End visiting msrPart" <<
-        elt->fetchPartCombinedName () <<
+        elt->fetchPartNameForTrace () <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -12361,7 +12361,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
 
       ss <<
         "% --> Start visiting msrStaff \"" <<
-        elt->getStaffAlphabeticName () <<
+        elt->getStaffPathLikeName () <<
         "\"" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -12408,7 +12408,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
 
       ss <<
         "% --> End visiting msrStaff \"" <<
-        elt->getStaffAlphabeticName () <<
+        elt->getStaffPathLikeName () <<
         "\"" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -12564,7 +12564,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
       ss <<
         "% --> Start visiting msrVoice \"" <<
-        elt->getVoiceAlphabeticName () <<
+        elt->getVoicePathLikeName () <<
         "\"" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -12588,7 +12588,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
     ss <<
 //       std::endl <<
-      "<!--=== voice \"" << elt->getVoiceAlphabeticName () << "\"" <<
+      "<!--=== voice \"" << elt->getVoicePathLikeName () << "\"" <<
       ", line " << elt->getInputLineNumber () << " ===-->";
 
     gWaeHandler->waeTrace (
@@ -12610,7 +12610,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       fCurrentVoice->getVoiceNumber ());
 
   fLilypondCodeStream <<
-    fCurrentVoice->getVoiceAlphabeticName () <<
+    fCurrentVoice->getVoicePathLikeName () <<
     " = ";
 
   // generate the beginning of the voice definition
@@ -12862,7 +12862,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 
       ss <<
         "% --> End visiting msrVoice \"" <<
-        elt->getVoiceAlphabeticName () <<
+        elt->getVoicePathLikeName () <<
         "\"" <<
         ", line " << elt->getInputLineNumber () <<
       std::endl;
@@ -12984,11 +12984,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
       "*** There is staff change" << // for chord member note '" <<
 //       fCurrentNote->asShortString () <<
 //       "' in voice \"" <<
-//       voiceToInsertInto->getPartAlphabeticName () <<
+//       voiceToInsertInto->getPartPathLikeName () <<
 //       "\"" <<
 //       " from staff " << fPreviousNoteMusicXMLStaffNumber <<
 //       " to staff " << landingStaff->asShortString () <<
-      ", to staff \"" << landingStaff->getStaffAlphabeticName () << "\"" <<
+      ", to staff \"" << landingStaff->getStaffPathLikeName () << "\"" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -13001,7 +13001,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
   fLilypondCodeStream << // DISABLED TEMP // JMI v0.9.71
     std::endl <<
     "\\change Staff = \"" <<
-    landingStaff->getStaffAlphabeticName () <<
+    landingStaff->getStaffPathLikeName () <<
     "\"";
 
   // generate the input line number as comment if relevant
@@ -13752,8 +13752,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
     if (fCurrentPart) {
       ss <<
-        "\"" << fCurrentPart->getPartAlphabeticName () << "\"" <<
-        " (partID \"" << fCurrentPart->getPartID () << "\")";
+        "\"" << fCurrentPart->getPartPathLikeName () << "\"" <<
+        " (partMusicXMLID \"" << fCurrentPart->getPartMusicXMLID () << "\")";
     }
     else {
       ss << "fCurrentPart is [NULL]";
@@ -14212,8 +14212,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
     if (fCurrentPart) {
       ss <<
-        "\"" << fCurrentPart->getPartAlphabeticName () << "\"" <<
-        " (partID \"" << fCurrentPart->getPartID () << "\")";
+        "\"" << fCurrentPart->getPartPathLikeName () << "\"" <<
+        " (partMusicXMLID \"" << fCurrentPart->getPartMusicXMLID () << "\")";
     }
     else {
       ss << "fCurrentPart is [NULL]";
@@ -14591,7 +14591,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 
     if (fGenerateOngoingNonEmptyStanza) {
       fLilypondCodeStream <<
-        elt->getStanzaAlphabeticName () << " = " << "\\lyricmode {" <<
+        elt->getStanzaPathLikeName () << " = " << "\\lyricmode {" <<
         std::endl;
 
       ++gIndenter; // decremented in visitEnd (S_msrStanza& elt)
@@ -14601,7 +14601,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 //           fLilypondCodeStream <<
 //             "\\lyricsto \"" <<
 //             elt->
-//               getStanzaUpLinkToVoice ()->getVoiceAlphabeticName () <<
+//               getStanzaUpLinkToVoice ()->getVoicePathLikeName () <<
 //             "\"" <<
 //             std::endl;
           fLilypondCodeStream <<
@@ -14616,7 +14616,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
             // to draw hyphenated lines and extenders under melismata correctly
             "\\set associatedVoice = #\"" <<
             elt->
-              getStanzaUpLinkToVoice ()->getVoiceAlphabeticName () <<
+              getStanzaUpLinkToVoice ()->getVoicePathLikeName () <<
             "\"" <<
             std::endl <<
             "\\set ignoreMelismata = ##t" <<
@@ -14630,7 +14630,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
             // to draw hyphenated lines and extenders under melismata correctly
             "\\set associatedVoice = #\"" <<
             elt->
-              getStanzaUpLinkToVoice ()->getVoiceAlphabeticName () <<
+              getStanzaUpLinkToVoice ()->getVoicePathLikeName () <<
             "\"" <<
             std::endl <<
             "\\set ignoreMelismata = ##t" <<
@@ -17901,7 +17901,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
 
       else {
         // there are no time signature items
-        if (timeSignatureSymbolKind != msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura) {
+        if (
+          timeSignatureSymbolKind
+            !=
+          msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura
+        ) {
           lpsr2lilypondInternalError (
             gServiceRunData->getInputSourceName (),
             elt->getInputLineNumber (),
@@ -18432,12 +18436,12 @@ If the double element is present, it indicates that the music is doubled one oct
       "Handlling transpose '" <<
       elt->transposeAsString () <<
       "' ignored because it is already present in voice \"" <<
-      fCurrentVoice->getVoiceAlphabeticName () <<
+      fCurrentVoice->getVoicePathLikeName () <<
       "\"" <<
       / * JMI
-      getStaffAlphabeticName () <<
+      getStaffPathLikeName () <<
       "\" in part " <<
-      fStaffUpLinkToPart->fetchPartCombinedName () <<
+      fStaffUpLinkToPart->fetchPartNameForTrace () <<
       * /
       std::endl <<
       ", transpositionPitch: " <<
@@ -22899,7 +22903,7 @@ void lpsr2lilypondTranslator::generateNoteScordaturasList (
         " \\with { alignAboveContext = \"" <<
         note->
           fetchUpLinkToNoteToStaff ()->
-            getStaffAlphabeticName () <<
+            getStaffPathLikeName () <<
         "\" } {" <<
         std::endl;
 

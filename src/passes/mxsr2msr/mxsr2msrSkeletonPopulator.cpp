@@ -1273,7 +1273,7 @@ S_msrVoice mxsr2msrSkeletonPopulator::fetchFirstVoiceFromCurrentPart (
 
     ss <<
       "first voice not found in score skeleton's staff \"" <<
-      staff->getStaffName () <<
+      staff->getStaffPathLikeName () <<
       "\"" <<
       ", line " << inputLineNumber;
 
@@ -3480,7 +3480,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   }
 #endif // MF_TRACE_IS_ENABLED
 
-  std::string partID = elt->getAttributeValue ("id");
+  std::string partMusicXMLID = elt->getAttributeValue ("id");
 
 #ifdef MF_MAINTAINANCE_RUNS_ARE_ENABLED
   if (
@@ -3493,7 +3493,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
       std::stringstream ss;
 
       ss <<
-        "<!--=== partID \"" << partID << "\"" <<
+        "<!--=== partMusicXMLID \"" << partMusicXMLID << "\"" <<
         ", line " << elt->getInputLineNumber () << " ===-->";
 
       gWaeHandler->waeTrace (
@@ -3504,12 +3504,12 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   }
 #endif // MF_MAINTAINANCE_RUNS_ARE_ENABLED
 
-  // fetch current part from its partID
+  // fetch current part from its partMusicXMLID
   fCurrentPart =
     fMsrScore->
       fetchPartFromScoreByItsPartID (
         elt->getInputLineNumber (),
-        partID);
+        partMusicXMLID);
 
 #ifdef MF_SANITY_CHECKS_ARE_ENABLED
   // sanity check
@@ -3535,7 +3535,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
         displayPartGroupsList ("visitStart (S_part& elt)");
 
       ss <<
-        "part \"" << partID <<
+        "part \"" << partMusicXMLID <<
         "\" not found in score skeleton" <<
         ", line " << elt->getInputLineNumber ();
 
@@ -3552,15 +3552,15 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
       fCurrentPart =
         partsList.front ();
 
-      partID =
+      partMusicXMLID =
         fCurrentPart->
-          getPartID ();
+          getPartMusicXMLID ();
 
       std::stringstream ss;
 
       ss <<
         "part 'id' is empty, using " <<
-        partID <<
+        partMusicXMLID <<
         " since it is the only part in the <part-list />";
 
       mxsr2msrWarning (
@@ -3582,7 +3582,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
       std::endl <<
       "      " <<
       "part " <<
-      fCurrentPart-> fetchPartCombinedName () <<
+      fCurrentPart-> fetchPartNameForTrace () <<
       ", line " <<
       elt->getInputLineNumber () <<
       std::endl <<
@@ -3605,7 +3605,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
   if (fCurrentPart) {
     serviceRunData->
       setCurrentPartIDAndName (
-        fCurrentPart->getPartIDAndName ());
+        fCurrentPart->fetchPartIDAndName ());
   }
 
 #ifdef MF_TRACE_IS_ENABLED
@@ -3662,7 +3662,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_part& elt)
       std::endl <<
       "Analyzing part " <<
       fCurrentPart->
-        fetchPartCombinedName () <<
+        fetchPartNameForTrace () <<
         " -- start";
 
     gWaeHandler->waeTrace (
@@ -3734,7 +3734,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
     ss <<
       "Analyzing part " <<
       fCurrentPart->
-        fetchPartCombinedName () <<
+        fetchPartNameForTrace () <<
         " -- end" <<
       std::endl <<
       "--------------------------------------------";
@@ -3768,7 +3768,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
       it =
         gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().find (
           fCurrentPart->
-            getPartID ());
+            getPartMusicXMLID ());
 
     if (it != gGlobalMxsr2msrOahGroup->getPartsIgnoreIDSet ().end ()) {
       // the simplest way to ignore this part
@@ -3788,7 +3788,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_part& elt)
       it =
         gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().find (
           fCurrentPart->
-            getPartID ());
+            getPartMusicXMLID ());
 
     if (it == gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().end ()) {
       // the simplest way not to keep this part
@@ -3951,7 +3951,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_divisions& elt)
 
     ss <<
       " per quarter note in part " <<
-      fCurrentPart->fetchPartCombinedName() <<
+      fCurrentPart->fetchPartNameForTrace() <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -8182,7 +8182,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_staff& elt)
       fCurrentNoteStaffNumber <<
       std::endl <<
       "--> S_staff, current staff name: " <<
-      staff->getStaffName();
+      staff->getStaffPathLikeName();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -10814,7 +10814,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
         fCurrentMeasureNumber <<
       ", line " << elt->getInputLineNumber () <<
       ", in part \"" <<
-      fCurrentPart->fetchPartCombinedName () << "\"";
+      fCurrentPart->fetchPartNameForTrace () << "\"";
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -10837,7 +10837,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
       std::endl <<
       "      " <<
       "part " <<
-      fCurrentPart-> fetchPartCombinedName () <<
+      fCurrentPart-> fetchPartNameForTrace () <<
       std::endl <<
       "      " <<
       "measure " << fCurrentMeasureNumber <<
@@ -10918,7 +10918,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_measure& elt)
     ss <<
       "<!--=== " <<
       "partName \"" << fCurrentPart->getPartName () << "\"" <<
-      ", partID: \"" << fCurrentPart->getPartID () << "\"" <<
+      ", partMusicXMLID: \"" << fCurrentPart->getPartMusicXMLID () << "\"" <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber << "\"" <<
       ", measureImplicitKind: " << measureImplicitKind <<
       ", nonControllingString: \"" << nonControllingString << "\"" <<
@@ -11201,7 +11201,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
             "Replicating meaure " <<
             fCurrentMeasureNumber <<
             " in part " <<
-            fCurrentPart->fetchPartCombinedName ();
+            fCurrentPart->fetchPartNameForTrace ();
 
           gWaeHandler->waeTrace (
             __FILE__, __LINE__,
@@ -11257,7 +11257,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_measure& elt)
           mfSingularOrPlural (
             measuresToBeAdded, "empty measure", "empty measures") <<
           " to part " <<
-          fCurrentPart->fetchPartCombinedName ();
+          fCurrentPart->fetchPartNameForTrace ();
 
         gWaeHandler->waeTrace (
           __FILE__, __LINE__,
@@ -12222,7 +12222,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
       "Creating barLine " <<
       barLine->asString () <<
       " in part " <<
-      fCurrentPart->fetchPartCombinedName ();
+      fCurrentPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -12476,7 +12476,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_barline& elt)
 
           ss <<
             "Appending a standalone barLine to part " <<
-            fCurrentPart->fetchPartCombinedName () << ":" <<
+            fCurrentPart->fetchPartNameForTrace () << ":" <<
             std::endl;
 
           ++gIndenter;
@@ -13698,7 +13698,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
     ss <<
       "Creating measures repeat from its first measures" <<
       "in part " <<
-      fCurrentPart->fetchPartCombinedName () <<
+      fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMultipleMeasureRestMeasuresNumber: " <<
       fCurrentMultipleMeasureRestMeasuresNumber <<
       ", fCurrentMeasureRepeatSlashesNumber: " <<
@@ -13729,7 +13729,7 @@ The <measure-repeat> element specifies a notation style for repetitions.
     ss <<
       "Appending measures repeat " <<
       "to part " <<
-      fCurrentPart->fetchPartCombinedName () <<
+      fCurrentPart->fetchPartNameForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -22849,7 +22849,7 @@ On a given note, there can be the following events:
       std::endl <<
       / * JMI
       "--> staff name : " <<
-      staff->getStaffName () <<
+      staff->getStaffPathLikeName () <<
       std::endl <<
       * /
       "--> voice name : " <<
@@ -24301,7 +24301,7 @@ void mxsr2msrSkeletonPopulator::handlePendingSingleHarmony (
         ", for note " <<
         fCurrentNote->asShortString () <<
         " to part " <<
-        fCurrentPart->fetchPartCombinedName () <<
+        fCurrentPart->fetchPartNameForTrace () <<
         ", line " << harmony->getInputLineNumber ()  <<
         std::endl;
 
@@ -26403,7 +26403,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEnd (
 
     ss <<
       "Handling a repeat end in part " <<
-      fCurrentPart->fetchPartCombinedName () <<
+      fCurrentPart->fetchPartNameForTrace () <<
       ", fCurrentMeasureNumber: \"" << fCurrentMeasureNumber <<
       "\", fCurrentRepeatStartMeasureNumber: \"" << fCurrentRepeatStartMeasureNumber <<
       "\", repeatStartMeasureNumber: \"" << repeatStartMeasureNumber <<
@@ -26441,7 +26441,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
 
     ss <<
       "Handling a repeat ending start in part " <<
-      fCurrentPart->fetchPartCombinedName () <<
+      fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -26474,7 +26474,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatEndingStart (
 
     ss <<
       "Handling a repeat ending upon its start in part " <<
-      fCurrentPart->fetchPartCombinedName () <<
+      fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -26502,7 +26502,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
 
     ss <<
       "Handling a repeat hooked ending end in part " <<
-      fCurrentPart->fetchPartCombinedName () <<
+      fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -26539,7 +26539,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHookedEndingEnd (
 
     ss <<
       "Handling a hooked repeat ending in part " <<
-      fCurrentPart->fetchPartCombinedName () <<
+      fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -26574,7 +26574,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
 
     ss <<
       "Handling a repeat hookless ending end in part " <<
-      fCurrentPart->fetchPartCombinedName () <<
+      fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -26611,7 +26611,7 @@ void mxsr2msrSkeletonPopulator::handleRepeatHooklessEndingEnd (
 
     ss <<
       "Handling a hookless repeat ending in part " <<
-      fCurrentPart->fetchPartCombinedName () <<
+      fCurrentPart->fetchPartNameForTrace () <<
       ", line " << barLine->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -26718,7 +26718,7 @@ void mxsr2msrSkeletonPopulator::visitStart (S_rehearsal& elt)
     ss <<
       "Creating rehearsalMark \"" << rehearsalValue << "\"" <<
       " in part " <<
-      fCurrentPart->fetchPartCombinedName ();
+      fCurrentPart->fetchPartNameForTrace ();
 
     gWaeHandler->waeTrace (
       __FILE__, __LINE__,
@@ -27481,7 +27481,7 @@ void mxsr2msrSkeletonPopulator::visitEnd (S_harmony& elt)
 
       gLog << std::left <<
         std::setw (fieldWidth) << "fCurrentPart" << ": " <<
-        fCurrentPart->fetchPartCombinedName () <<
+        fCurrentPart->fetchPartNameForTrace () <<
         std::endl <<
         /* JMI
         std::setw (fieldWidth) << "harmoniesVoice" << ": " <<

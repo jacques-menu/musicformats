@@ -398,12 +398,12 @@ class EXP msrStanza : public msrElement
     std::string           getStanzaNumber () const
                               { return fStanzaNumber; }
 
+    // path-like name
+    std::string           getStanzaPathLikeName () const
+                              { return fStanzaPathLikeName; }
     // names
     std::string           getStanzaName () const
                               { return fStanzaName; }
-
-    std::string           getStanzaAlphabeticName () const
-                              { return fStanzaAlphabeticName; }
 
     // contents
     const std::vector <S_msrSyllable>&
@@ -529,9 +529,11 @@ class EXP msrStanza : public msrElement
     // though a name can be used as well (as in Finale's verse/chorus/section specification)
     std::string           fStanzaNumber;
 
-    // names
+   // path-like name
+    std::string           fStanzaPathLikeName;
+
+   // names
     std::string           fStanzaName;
-    std::string           fStanzaAlphabeticName;
 
     // contents
     std::vector <S_msrSyllable>

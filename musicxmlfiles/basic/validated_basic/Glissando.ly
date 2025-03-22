@@ -34,7 +34,7 @@
   }
 }
 
-_Staff_One_Voice_One = \absolute {
+Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
   \clef "treble"
@@ -56,13 +56,13 @@ _Staff_One_Voice_One = \absolute {
       
       <<
       
-        \new Staff  = "_Staff_One"
+        \new Staff  = "Part_POne_Staff_One"
         \with {
           instrumentName = "Part_POne"
         }
         <<
-          \context Voice = "_Staff_One_Voice_One" <<
-            \_Staff_One_Voice_One
+          \context Voice = "Part_POne_Staff_One_Voice_One" <<
+            \Part_POne_Staff_One_Voice_One
           >>
         >>
       

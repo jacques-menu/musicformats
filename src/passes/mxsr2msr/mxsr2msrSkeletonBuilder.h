@@ -571,16 +571,15 @@ class EXP mxsr2msrSkeletonBuilder :
 
     void                      handlePartGroupsStartAtIdentity (
                                 const mfInputLineNumber& inputLineNumber,
-                                int                      identity);
+                                int                      partGroupSequentialNumber);
 
     void                      handleThePartGroupsStoppedAtIdentity (
                                 const mfInputLineNumber& inputLineNumber,
-                                int                      identity);
+                                int                      partGroupSequentialNumber);
 
     // parts handling
     // ------------------------------------------------------
 
-    std::string               fCurrentScorePartID; // from <score-part />
     std::string               fCurrentPartID;      // used throughout, computed
 
     std::string               fCurrentPartName;
@@ -602,9 +601,9 @@ class EXP mxsr2msrSkeletonBuilder :
                                 const mfInputLineNumber& inputLineNumber);
 
     // part groups numbers can be re-used, so they're no identifier,
-    // so we identify them by an ordinal number, set upon the 'start'
-    // this is used for handling nesting/overlapping
-    int                       fCurrentPartGroupIdentity;
+    // so we identify them by a sequential number, set upon the 'start'
+    // this is used for handling part groups nesting/overlapping
+    int                       fCurrentPartGroupSequentialNumber;
 
     std::vector <S_msrPart>   fPartsVector;
 

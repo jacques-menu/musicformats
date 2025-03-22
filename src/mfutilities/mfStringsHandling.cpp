@@ -427,7 +427,7 @@ std::string mfIntToEnglishWord (int n)
 std::string mfStringNumbersToEnglishWords (std::string theString)
 {
   if (! theString.size ()) {
-    return "NONE";
+    return "ZERO";
   }
 
   enum workState {
@@ -461,7 +461,7 @@ std::string mfStringNumbersToEnglishWords (std::string theString)
     }
   } // for
 
-  std::string result = "";
+  std::string result;
 
   for (size_t i = 0; i < chunks.size (); ++i) {
     if (states[i] == kWorkingOnDigits) {

@@ -1223,7 +1223,7 @@ I don't know if any distributed software is currently supporting the opus. Howev
     createMxmlelement (
       k_score_instrument,
       "");
-  // set it's "id" attribute later, when the partID is known!
+  // set it's "id" attribute later, when the partMusicXMLID is known!
   // create an instrument name element
   Sxmlelement
     scoreInstrumentNameElement =
@@ -2533,7 +2533,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
 
     ss <<
       "--> Start visiting msrPartGroup " <<
-      elt->fetchPartGroupCombinedName () <<
+      elt->fetchPartGroupNameForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -2554,7 +2554,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
           std::stringstream ss;
           ss <<
             " ========== " <<
-            elt->fetchPartGroupCombinedName () <<
+            elt->fetchPartGroupNameForTrace () <<
             " START" <<
               ", line " << elt->getInputLineNumber () <<
             " ========== ";
@@ -2663,7 +2663,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     ss <<
       "--> End visiting msrPartGroup " <<
-      elt->fetchPartGroupCombinedName () <<
+      elt->fetchPartGroupNameForTrace () <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -2690,7 +2690,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
           std::stringstream ss;
           ss <<
             " ========== " <<
-            elt->fetchPartGroupCombinedName () <<
+            elt->fetchPartGroupNameForTrace () <<
             " END" <<
               ", line " << elt->getInputLineNumber () <<
             " ========== ";
@@ -2752,14 +2752,14 @@ if (false) // JMI
   gLog << elt << std::endl;
 
   std::string
-    partID =
-      elt->getPartID (),
+    partMusicXMLID =
+      elt->getPartMusicXMLID (),
     partName =
       elt->getPartName (),
     partAbbreviation =
       elt->getPartAbbreviation (),
-    partCombinedName =
-      elt->fetchPartCombinedName ();
+    partdNameForTrace =
+      elt->fetchPartNameForTrace ();
 
 #ifdef MF_TRACE_IS_ENABLED
   if (gMsrOahGroup->getTraceMsrVisitors ()) {
@@ -2767,7 +2767,7 @@ if (false) // JMI
 
     ss <<
       "--> Start visiting msrPart " <<
-      partCombinedName <<
+      partdNameForTrace <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
 
@@ -2794,7 +2794,7 @@ if (false) // JMI
 
       ss <<
         std::endl <<
-        "<!--=== part \"" << partCombinedName << "\"" <<
+        "<!--=== part \"" << partdNameForTrace << "\"" <<
         ", line " << elt->getInputLineNumber () << " ===-->";
 
       gWaeHandler->waeTrace (
@@ -2812,7 +2812,7 @@ if (false) // JMI
   // create a score part element
   fScorePartElement = createMxmlelement (k_score_part, "");
   // set it's "id" attribute
-  fScorePartElement->add (createMxmlAttribute ("id", partID));
+  fScorePartElement->add (createMxmlAttribute ("id", partMusicXMLID));
 
   // append it to the part list element
   fScorePartListElement->push (fScorePartElement);
@@ -2835,8 +2835,8 @@ if (false) // JMI
   if (fScoreInstrumentElement) {
     // set its id
     std::string
-      partID = fCurrentMSRPart->getPartID ();
-    fScoreInstrumentElement->add (createMxmlAttribute ("id", partID + "I1"));
+      partMusicXMLID = fCurrentMSRPart->getPartMusicXMLID ();
+    fScoreInstrumentElement->add (createMxmlAttribute ("id", partMusicXMLID + "I1"));
 
     // append it to the score instrument element
     fScorePartElement->push (
@@ -2846,7 +2846,7 @@ if (false) // JMI
   // create a part element
   fCurrentPartElement = createMxmlelement (k_part, "");
   // set its "id" attribute
-  fCurrentPartElement->add (createMxmlAttribute ("id", partID));
+  fCurrentPartElement->add (createMxmlAttribute ("id", partMusicXMLID));
 
   // append it to the pending part elements list
   fPendingPartElementsList.push_back (fCurrentPartElement);
@@ -2966,7 +2966,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPart& elt)
 
     ss <<
       "--> End visiting msrPart " <<
-      elt->fetchPartCombinedName () <<
+      elt->fetchPartNameForTrace () <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -3002,7 +3002,7 @@ void msr2mxsrTranslator::visitStart (S_msrStaff& elt)
 
     ss <<
       "--> Start visiting msrStaff \"" <<
-      elt->getStaffName () << "\"" <<
+      elt->getStaffPathLikeName () << "\"" <<
       ", line " << elt->getInputLineNumber () <<
       std::endl;
   }
@@ -3126,7 +3126,7 @@ void msr2mxsrTranslator::visitEnd (S_msrStaff& elt)
 
     ss <<
       "--> End visiting S_msrStaff \"" <<
-      elt->getStaffName () << "\"" <<
+      elt->getStaffPathLikeName () << "\"" <<
       ", line " << elt->getInputLineNumber ();
 
     gWaeHandler->waeTrace (
@@ -10950,7 +10950,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeat& elt)
       "Handling repeat end in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
 //      "\" in part \"" <<
-//      fCurrentPartClone->fetchPartCombinedName () <<
+//      fCurrentPartClone->fetchPartNameForTrace () <<
       "\"";
 
     gWaeHandler->waeTrace (

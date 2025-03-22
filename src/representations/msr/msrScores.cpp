@@ -230,7 +230,7 @@ void msrScore::addPartGroupToScore (const S_msrPartGroup& partGroup)
 
     ss <<
       "part group '" <<
-      partGroup->fetchPartGroupCombinedName () <<
+      partGroup->fetchPartGroupNameForTrace () <<
       "' already exists in this score";
 
     msrInternalError (
@@ -262,7 +262,7 @@ void msrScore::removePartGroupFromScore (const S_msrPartGroup& partGroup)
 
     ss <<
       "part group '" <<
-      partGroup->fetchPartGroupCombinedName () <<
+      partGroup->fetchPartGroupNameForTrace () <<
       "' is not present in this score";
 
     msrInternalError (
@@ -317,7 +317,7 @@ void msrScore::appendCreditToScore (
 
 S_msrPart msrScore::fetchPartFromScoreByItsPartID (
   int                inputLineNumber,
-  const std::string& partID)
+  const std::string& partMusicXMLID)
 {
   S_msrPart result;
 
@@ -326,7 +326,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
     std::stringstream ss;
 
     ss <<
-      "fetchPartFromScoreByItsPartID(" << partID << "), fPartGroupsList contains:" <<
+      "fetchPartFromScoreByItsPartID(" << partMusicXMLID << "), fPartGroupsList contains:" <<
       std::endl;
 
     ++gIndenter;
@@ -339,7 +339,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
       std::stringstream ss;
 
       ss <<
-        (*i)->fetchPartGroupCombinedName () <<
+        (*i)->fetchPartGroupNameForTrace () <<
         ", " <<
         (*i)->getPartGroupName () <<
         std::endl;
@@ -348,7 +348,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
     --gIndenter;
 
     ss <<
-      "<=- fetchPartFromScoreByItsPartID(" << partID << ")" <<
+      "<=- fetchPartFromScoreByItsPartID(" << partMusicXMLID << ")" <<
       std::endl << std::endl;
 
     gWaeHandler->waeTrace (
@@ -367,7 +367,7 @@ S_msrPart msrScore::fetchPartFromScoreByItsPartID (
         (*i)->
           fetchPartFromPartGroupByItsPartID (
             inputLineNumber,
-            partID);
+            partMusicXMLID);
 
     if (part) {
       result = part;

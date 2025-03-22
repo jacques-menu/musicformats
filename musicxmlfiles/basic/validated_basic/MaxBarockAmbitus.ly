@@ -35,7 +35,7 @@
   }
 }
 
-_Staff_One_Voice_One = \absolute {
+Part_POne_Staff_One_Voice_One = \absolute {
   \language "nederlands"
   
   \clef "treble"
@@ -85,7 +85,7 @@ _Staff_One_Voice_One = \absolute {
   \barNumberCheck #5
 }
 
-_Staff_Two_Voice_Five = \absolute {
+Part_POne_Staff_Two_Voice_Five = \absolute {
   \language "nederlands"
   
   \clef "bass"
@@ -153,21 +153,21 @@ _Staff_Two_Voice_Five = \absolute {
         
         <<
         
-          \new Staff  = "_Staff_One"
+          \new Staff  = "Part_POne_Staff_One"
           \with {
           }
           <<
-            \context Voice = "_Staff_One_Voice_One" <<
-              \_Staff_One_Voice_One
+            \context Voice = "Part_POne_Staff_One_Voice_One" <<
+              \Part_POne_Staff_One_Voice_One
             >>
           >>
           
-          \new Staff  = "_Staff_Two"
+          \new Staff  = "Part_POne_Staff_Two"
           \with {
           }
           <<
-            \context Voice = "_Staff_Two_Voice_Five" <<
-              \_Staff_Two_Voice_Five
+            \context Voice = "Part_POne_Staff_Two_Voice_Five" <<
+              \Part_POne_Staff_Two_Voice_Five
             >>
           >>
         >>

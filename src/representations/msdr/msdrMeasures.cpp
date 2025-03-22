@@ -297,7 +297,7 @@ void msdrMeasure::printFull (std::ostream& os) const
   os << std::left <<
     std::setw (fieldWidth) <<
     "upLinkToStaff" << ": " <<
-    fVoiceUpLinkToStaff->getStaffName () <<
+    fVoiceUpLinkToStaff->getStaffPathLikeName () <<
     std::endl <<
 
     std::setw (fieldWidth) <<
